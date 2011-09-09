@@ -1,0 +1,19 @@
+{% extends 'SyliusAddressingBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+<h2>address details.</h2>
+
+id: {{ address.id }} <br />
+name: {{ address.name }} <br />
+surname: {{ address.surname }} <br />
+city: {{ address.city }} <br />
+postcode: {{ address.postcode }} <br />
+street: {{ address.street }} <br />
+
+<ul>
+    <li><a href="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}">edit</a></li>
+    <li><a href="{{ path('sylius_addressing_backend_address_delete', {'id': address.id}) }}">delete</a></li>
+</ul>
+
+{% endblock %}

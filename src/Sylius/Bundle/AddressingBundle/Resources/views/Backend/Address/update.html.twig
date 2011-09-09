@@ -1,0 +1,15 @@
+{% extends 'SyliusAddressingBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+<h2>updating address...</h2>
+
+<form action="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}" method="post">
+
+{{ form_widget(form) }}      
+
+<input type="submit" value="update address" />
+
+</form>
+
+{% endblock content %}

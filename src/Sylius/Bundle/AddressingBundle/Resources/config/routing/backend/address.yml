@@ -1,0 +1,19 @@
+sylius_addressing_backend_address_create:
+    pattern: /address/create
+    defaults: { _controller: sylius_addressing.controller.backend.address:createAction }
+
+sylius_addressing_backend_address_update:
+    pattern: /address/{id}/update
+    defaults: { _controller: sylius_addressing.controller.backend.address:updateAction }
+
+sylius_addressing_backend_address_delete:
+    pattern: /address/{id}/delete
+    defaults: { _controller: sylius_addressing.controller.backend.address:deleteAction }
+
+sylius_addressing_backend_address_show:
+    pattern: /address/{id}
+    defaults: { _controller: sylius_addressing.controller.backend.address:showAction }
+
+sylius_addressing_backend_address_list:
+    pattern: /addresses
+    defaults: { _controller: sylius_addressing.controller.backend.address:listAction }

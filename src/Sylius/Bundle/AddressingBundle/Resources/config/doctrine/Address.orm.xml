@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+ 
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Sylius\Bundle\AddressingBundle\Entity\Address" table="sylius_addressing_address">
+    
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+         
+        <field name="company" column="company" type="string" length="255" nullable="true" />
+        <field name="name" column="name" type="string" length="255" />     
+        <field name="surname" column="surname" type="string" length="255" />      
+        <field name="street" column="street" type="string" length="255" />      
+        <field name="postcode" column="postcode" type="string" length="255" />      
+        <field name="city" column="city" type="string" length="255" />      
+        <field name="createdAt" column="created_at" type="datetime" />
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
+        
+    </entity>
+
+</doctrine-mapping>

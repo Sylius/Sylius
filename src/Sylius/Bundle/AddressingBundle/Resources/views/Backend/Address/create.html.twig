@@ -1,0 +1,15 @@
+{% extends 'SyliusAddressingBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+<h2>creating new address...</h2>
+
+<form action="{{ path('sylius_addressing_backend_address_create') }}" method="post">
+
+{{ form_widget(form) }}
+        
+<input type="submit" value="create address" />
+
+</form>
+
+{% endblock content %}
