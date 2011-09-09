@@ -19,7 +19,7 @@ I just want to share my work with others and also learn something new.
 Documentation.
 --------------
 
-Docs are available [here](https://github.com/Sylius/AddressingBundle/blob/master/Resources/doc/index.md).
+Docs are available [here](https://github.com/Sylius/SyliusAddressingBundle/blob/master/Resources/doc/index.md).
 
 Dependencies.
 -------------
@@ -36,4 +36,4 @@ Licence can be found here...
 Authors.
 --------
 
-See the list of [contributors](https://github.com/Sylius/AddressingBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/SyliusAddressingBundle/contributors).
