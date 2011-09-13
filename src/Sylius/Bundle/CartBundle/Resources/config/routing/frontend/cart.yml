@@ -1,0 +1,24 @@
+sylius_cart_show:
+    pattern: /cart
+    defaults: { _controller: sylius_cart.controller.frontend.cart:showAction }
+    
+sylius_cart_update:
+    pattern: /cart/update
+    defaults: { _controller: sylius_cart.controller.frontend.cart:updateAction }
+    requirements:
+        _method: POST
+  
+sylius_cart_clear:
+    pattern: /cart/clear
+    defaults: { _controller: sylius_cart.controller.frontend.cart:clearAction }
+    
+sylius_cart_item_add:
+    pattern: /cart/item/add
+    defaults: { _controller: sylius_cart.controller.frontend.cart:addItemAction }
+    requirements:
+       _method: POST
+    
+sylius_cart_item_remove:
+    pattern: /cart/item/{id}/remove
+    defaults: { _controller: sylius_cart.controller.frontend.cart:removeItemAction }
+ 

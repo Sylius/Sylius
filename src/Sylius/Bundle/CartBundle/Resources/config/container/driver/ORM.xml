@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+	
+	<parameters>
+		<parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\CartBundle\Entity\CartManager</parameter>
+		<parameter key="sylius_cart.manager.item.class">Sylius\Bundle\CartBundle\Entity\ItemManager</parameter>
+	</parameters>
+	
+	<services>
+	    <service id="sylius_cart.manager.cart" class="%sylius_cart.manager.cart.class%">
+	    	<argument type="service" id="doctrine.orm.default_entity_manager" />
+	    	<argument>%sylius_cart.model.cart.class%</argument>
+	    </service>
+	    <service id="sylius_cart.manager.item" class="%sylius_cart.manager.item.class%">
+	    	<argument type="service" id="doctrine.orm.default_entity_manager" />
+	    	<argument>%sylius_cart.model.item.class%</argument>
+	    </service>  
+	</services>
+
+</container>
