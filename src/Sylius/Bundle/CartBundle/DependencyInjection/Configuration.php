@@ -96,7 +96,6 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('request')->defaultValue('Sylius\Bundle\\CartBundle\\EventDispatcher\\Listener\\RequestListener')->end()
-                                ->scalarNode('response')->defaultValue('Sylius\Bundle\\CartBundle\\EventDispatcher\\Listener\\ResponseListener')->end()
                             ->end()
                         ->end()
                     ->end()

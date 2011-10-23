@@ -26,13 +26,6 @@ interface ItemManagerInterface
     function getClass();
     
     /**
-     * Sets FQCN of cart item model.
-     * 
-     * @param $class
-     */
-    function setClass($class);
-    
-    /**
      * Creates item model object.
      */
     function createItem();

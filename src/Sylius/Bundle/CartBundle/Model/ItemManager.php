@@ -42,12 +42,4 @@ abstract class ItemManager implements ItemManagerInterface
     {
         return $this->class;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setClass($class)
-    {
-        $this->class = $class;
-    }
 }

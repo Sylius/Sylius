@@ -27,29 +27,24 @@ class RequestListener extends ContainerAware
     public function onCoreRequest(GetResponseEvent $event)
     {
         if(HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
-            if(!$event->getRequest()->isXmlHttpRequest()) {
-                $cartManager = $this->container->get('sylius_cart.manager.cart');
-
-                $cookie = $this->container->get('request')->cookies->get('SYLIUS_CART_HASH');
-                
-                if (null === $cookie) {
-                    $cart = $cartManager->createCart();
-                    $this->container->get('sylius_cart.provider')->setCart($cart);
-                    $cartManager->persistCart($cart);
-                    return;
-                }
-                
-                $cart = $cartManager->findCartBy(array('hash' => $cookie));
-                
+            $cartManager = $this->container->get('sylius_cart.manager.cart');
+            $session = $this->container->get('request')->getSession();
+            
+            $cartId = $session->get('sylius_cart.id', false);
+            
+            if ($cartId) {
+                $cart = $cartManager->findCart($cartId);
+            
                 if ($cart) {
                     $this->container->get('sylius_cart.provider')->setCart($cart);
                     return;
                 }
-                
-                $cart = $cartManager->createCart();
-                $this->container->get('sylius_cart.provider')->setCart($cart);
-                $cartManager->persistCart($cart);
             }
+            
+            $cart = $cartManager->createCart();
+            $this->container->get('sylius_cart.provider')->setCart($cart);
+            $cartManager->persistCart($cart);
+            $session->set('sylius_cart.id', $cart->getId());
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CartBundle\Provider;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
 /**
- * Container for carts.
+ * Container for cart.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

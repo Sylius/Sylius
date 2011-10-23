@@ -12,12 +12,16 @@
 namespace Sylius\Bundle\CartBundle\EventDispatcher\Event;
 
 use Sylius\Bundle\CartBundle\Model\ItemInterface;
-
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
+/**
+ * Cart operation event.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 final class CartOperationEvent extends FilterCartEvent
 {
-    protected $item;
+    private $item;
     
     public function __construct(ItemInterface $item, CartInterface $cart)
     {

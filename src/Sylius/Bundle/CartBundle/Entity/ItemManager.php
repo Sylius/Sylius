@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\CartBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
@@ -13,7 +22,7 @@ class ItemManager extends BaseItemManager
      * 
      * @var EntityManager
      */
-    protected $em;
+    protected $entityManager;
     
     /**
      * Items repository.
@@ -23,14 +32,14 @@ class ItemManager extends BaseItemManager
     /**
      * Constructor.
      * 
-     * @param EntityManager $em
+     * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(EntityManager $entityManager, $class)
     {
         parent::__construct($class);
         
-        $this->em = $em; 
-        $this->repository = $this->em->getRepository($class);
+        $this->entityManager = $entityManager; 
+        $this->repository = $this->entityManager->getRepository($class);
     }
     
     /**
@@ -47,8 +56,8 @@ class ItemManager extends BaseItemManager
      */
     public function persistItem(ItemInterface $cart)
     {
-        $this->em->persist($cart);
-        $this->em->flush();
+        $this->entityManager->persist($cart);
+        $this->entityManager->flush();
     }
     
     /**
@@ -56,8 +65,8 @@ class ItemManager extends BaseItemManager
      */
     public function removeItem(ItemInterface $cart)
     {
-        $this->em->remove($cart);
-        $this->em->flush();
+        $this->entityManager->remove($cart);
+        $this->entityManager->flush();
     }
     
     /**

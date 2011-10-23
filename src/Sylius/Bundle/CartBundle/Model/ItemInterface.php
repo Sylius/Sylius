@@ -20,7 +20,7 @@ interface ItemInterface
 {
     function getId();
     function getCart();
-    function setCart(CartInterface $cart);
+    function setCart(CartInterface $cart = null);
     function getQuantity();
     function setQuantity($quantity);
 }

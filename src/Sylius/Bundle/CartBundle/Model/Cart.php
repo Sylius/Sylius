@@ -33,18 +33,18 @@ abstract class Cart implements CartInterface
     protected $items;
     
     /**
-     * Hash.
-     * 
-     * @var string
-     */
-    protected $hash;
-    
-    /**
      * Total items count.
      * 
      * @var integer
      */
     protected $totalItems;
+    
+    /**
+     * Locked.
+     * 
+     * @var Boolean
+     */
+    protected $locked;
     
     /**
      * Expiration time.
@@ -59,7 +59,7 @@ abstract class Cart implements CartInterface
     public function __construct()
     {   
         $this->totalItems = 0;
-        $this->generateHash();
+        $this->locked = false;
         $this->incrementExpiresAt();
     }
     
@@ -71,43 +71,14 @@ abstract class Cart implements CartInterface
         return $this->id;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function getHash()
+    public function isLocked()
     {
-        return $this->hash;
+        return $this->locked;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setHash($hash)
+    public function setLocked($locked)
     {
-        $this->hash = $hash;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function generateHash()
-    {
-        if (null === $this->hash) {
-            $bytes = false;
-            if (function_exists('openssl_random_pseudo_bytes') && 0 !== stripos(PHP_OS, 'win')) {
-                $bytes = openssl_random_pseudo_bytes(32, $strong);
-
-                if (true !== $strong) {
-                    $bytes = false;
-                }
-            }
-
-            if (false === $bytes) {
-                $bytes = hash('sha256', uniqid(mt_rand(), true), true);
-            }
-
-            $this->hash = base_convert(bin2hex($bytes), 16, 36);
-        }
+        $this->locked = $locked;
     }
     
     /**
@@ -141,6 +112,11 @@ abstract class Cart implements CartInterface
     {
         return $this->items;
     }
+    
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
 
     /**
      * {@inheritdoc}
@@ -169,6 +145,9 @@ abstract class Cart implements CartInterface
     public function removeItem(ItemInterface $item)
     {
         if ($this->hasItem($item)) {
+            $key = array_search($item, $this->items);
+            unset($this->items[$key]);
+            $item->setCart(null);
         }
     }
     
@@ -177,11 +156,7 @@ abstract class Cart implements CartInterface
      */
     public function hasItem(ItemInterface $item)
     {
-        foreach ($this->items as $i) {
-            if ($item === $i) return true;
-        }
-        
-        return false;
+        return $this === $item->getCart();
     }
     
     /**
@@ -203,7 +178,7 @@ abstract class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt)
+    public function setExpiresAt(\DateTime $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
     }

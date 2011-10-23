@@ -38,7 +38,7 @@ class SyliusCartExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_cart_getCart'         => new Twig_Function_Method($this, 'getCart', array('is_safe' => array('html'))),
+            'sylius_cart_get'         => new Twig_Function_Method($this, 'getCart', array('is_safe' => array('html'))),
         );
     }
     

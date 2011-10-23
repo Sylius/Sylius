@@ -28,10 +28,7 @@ abstract class Item implements ItemInterface
     protected $cart;
     
     protected $quantity;
-    
-    /**
-     * Constructor.
-     */
+
     public function __construct()
     {
         $this->quantity = 0;
@@ -62,7 +59,7 @@ abstract class Item implements ItemInterface
      * 
      * @param CartInterface $cart
      */
-    public function setCart(CartInterface $cart)
+    public function setCart(CartInterface $cart = null)
     {
         $this->cart = $cart;
     }

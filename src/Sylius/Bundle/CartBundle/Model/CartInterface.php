@@ -24,27 +24,6 @@ interface CartInterface
      * @return integer
      */
     function getId();
-    
-    /**
-     * Get cart hash id.
-     * 
-     * @return string
-     */
-    function getHash();
-    
-    /**
-     * Sets cart hash id.
-     * 
-     * @param string $hash
-     */
-    function setHash($hash);
-    
-    /**
-     * Generates hash.
-     * 
-     * @return null
-     */
-    function generateHash();
 
     /**
      * Returns total item count.
@@ -60,10 +39,15 @@ interface CartInterface
      */
     function setTotalItems($totalItems);
     
+    function isLocked();
+    function setLocked($locked);
+    
     /**
      * Checks whether the cart is empty.
      */
     function isEmpty();
+    
+    function setItems($items);
     
     /**
      * Returns all items from cart.

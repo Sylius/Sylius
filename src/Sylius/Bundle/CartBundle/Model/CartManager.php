@@ -42,12 +42,4 @@ abstract class CartManager implements CartManagerInterface
     {
         return $this->class;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setClass($class)
-    {
-        $this->class = $class;
-    }
 }

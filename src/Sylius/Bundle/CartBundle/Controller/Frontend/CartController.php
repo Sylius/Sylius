@@ -92,8 +92,9 @@ class CartController extends ContainerAware
         $cartOperator->removeItem($cart, $item);
         $cartOperator->refreshCart($cart);
         
-        $this->container->get('sylius_cart.manager.cart')->persistCart($cart);
         $itemManager->removeItem($item);
+        
+        $this->container->get('sylius_cart.manager.cart')->persistCart($cart);
         
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
@@ -104,6 +105,7 @@ class CartController extends ContainerAware
     public function updateAction()
     {  
         $cart = $this->container->get('sylius_cart.provider')->getCart();
+        
     	$form = $this->container->get('form.factory')->create($this->container->get('sylius_cart.form.type.cart'));
     	$form->setData($cart);
     	$form->bindRequest($this->container->get('request'));
@@ -111,15 +113,21 @@ class CartController extends ContainerAware
     	if ($form->isValid()) {
     	    $cartOperator = $this->container->get('sylius_cart.operator');
     	    
-    	    $items = $cart->getItems();
+        	$existingItems = array();
+            
+            foreach ($cart->getItems() as $item) {
+                $existingItems[] = $item;
+            }
+    	    
     	    $cart->clearItems();
     	    
-    	    foreach($items as $item) {
+    	    foreach($existingItems as $item) {
     	        $cartOperator->addItem($cart, $item);
     	    }
     	    
     	    $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_UPDATE, new FilterCartEvent($cart));
     	    $cartOperator->refreshCart($cart);
+    	    
     	    $this->container->get('sylius_cart.manager.cart')->persistCart($cart);
     	}
     	

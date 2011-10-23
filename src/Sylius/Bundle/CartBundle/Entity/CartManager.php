@@ -28,7 +28,7 @@ class CartManager extends BaseCartManager
      * 
      * @var EntityManager
      */
-    protected $em;
+    protected $entityManager;
     
     /**
      * Carts repository.
@@ -38,14 +38,14 @@ class CartManager extends BaseCartManager
     /**
      * Constructor.
      * 
-     * @param EntityManager $em
+     * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(EntityManager $entityManager, $class)
     {
         parent::__construct($class);
         
-        $this->em = $em; 
-        $this->repository = $this->em->getRepository($class);
+        $this->entityManager = $entityManager; 
+        $this->repository = $this->entityManager->getRepository($class);
     }
     
     /**
@@ -62,8 +62,8 @@ class CartManager extends BaseCartManager
      */
     public function persistCart(CartInterface $cart)
     {
-        $this->em->persist($cart);
-        $this->em->flush();
+        $this->entityManager->persist($cart);
+        $this->entityManager->flush();
     }
     
     /**
@@ -71,8 +71,8 @@ class CartManager extends BaseCartManager
      */
     public function removeCart(CartInterface $cart)
     {
-        $this->em->remove($cart);
-        $this->em->flush();
+        $this->entityManager->remove($cart);
+        $this->entityManager->flush();
     }
     
     /**

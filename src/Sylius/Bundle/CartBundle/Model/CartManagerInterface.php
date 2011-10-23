@@ -70,13 +70,6 @@ interface CartManagerInterface
     function findCartsBy(array $criteria);
     
     /**
-     * Sets FQCN of cart model.
-     * 
-     * @param string $class
-     */
-    function setClass($class);
-    
-    /**
      * Returns FQCN of cart model.
      * 
      * @return string

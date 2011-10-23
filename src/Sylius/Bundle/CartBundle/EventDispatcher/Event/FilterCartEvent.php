@@ -14,6 +14,11 @@ namespace Sylius\Bundle\CartBundle\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
+/**
+ * Filter cart event.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class FilterCartEvent extends Event
 {
     protected $cart;
