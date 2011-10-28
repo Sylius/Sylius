@@ -21,6 +21,11 @@ use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
  */
 class ConfirmationListener
 {
+    /**
+     * Options.
+     * 
+     * @var array
+     */
     private $options;
     
     /**
