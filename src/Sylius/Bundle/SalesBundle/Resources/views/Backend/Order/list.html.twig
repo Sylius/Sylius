@@ -1,0 +1,107 @@
+{% extends 'SyliusBackendBundle::layout.html.twig' %}
+
+{% block content %}
+
+<h1>Zarządzanie zamówieniami...</h1>
+
+    <p>Panel operacji na bieżących zamówieniach.</p>
+    
+<table cellspacing="1">
+
+    <col class="col1" /><col class="col2" /><col class="col1" /><col class="col2" /><col class="col2" /><col class="col2" /><col class="col1" /><col class="col1" />
+        
+    <thead>
+    
+        <tr>
+        
+            <th style="width: 3%;">ID</th>
+            
+            <th>klient</th>
+            
+            <th>wartość</th>
+            
+            <th>typ płatności</th>
+            
+            <th>typ przesyłki</th>
+            
+            <th>status</th>
+            
+            <th style="text-align: center;">+ / -</th>
+            
+            <th>opcje</th>
+
+        </tr>
+    
+    </thead>
+    
+    <tbody>
+    
+    {% for order in orders %}
+    
+        <tr{% if order.status == 5 %} class="row0"{% endif %}>
+
+            <td style="text-align: center;"> <strong> <?php echo $O['order_Id']; ?> </strong> </td>
+            
+            <?php if($O['user_Id'] > 0): ?>
+            
+            <td style="text-align: center;"> <a href="<?php dfUrl::_('ACP/klient/' . $O['user_Id'] . '.html'); ?>" class="button2"> Dane zamawiającego </a> </td>
+            
+            <?php else: ?>
+            
+            <td style="text-align: center;"> <?php echo $O['Name']; ?> <?php echo $O['Surname']; ?> </td>
+            
+            <?php endif; ?>
+            
+            <td> <strong> <?php echo Price($O['Value']); ?></strong> PLN. </td>
+            
+            <td> <?php echo Order::Payment($O['Payment']); ?> </td>
+            
+            <td> <?php echo Order::Delivery($O['Delivery']); ?> </td>
+            
+            <td> <?php echo Order::Status($O['Status']); ?> </td>
+            
+            <td style="text-align: center;">
+            
+            <?php if($O['Status'] < 5): ?>
+            
+            <a href="<?php dfUrl::_('ACP/zamowienia/uaktualnij/plus/' . $O['order_Id'] . '.html'); ?>" class="button2">+</a>&nbsp;
+            
+            <?php endif; ?>
+            
+            <?php if($O['Status'] > 0): ?>
+            
+            <a href="<?php dfUrl::_('ACP/zamowienia/uaktualnij/minus/' . $O['order_Id'] . '.html'); ?>" class="button2">-</a>
+            
+            <?php endif; ?>
+            
+            </td>
+            
+            <td style="text-align: center;">
+            
+            <a href="<?php dfUrl::_('ACP/zamowienia/wyswietl/' . $O['order_Id'] . '.html'); ?>" class="button2">szczegóły</a> 
+        
+            <a href="<?php dfUrl::_('ACP/zamowienia/skasuj/' . $O['order_Id'] . '.html'); ?>" class="button2">usuń</a> 
+            
+            </td>
+            
+        </tr>
+    
+    {% else %}
+    
+        <tr class="row0">
+        
+            <td colspan="8">
+            
+            Brak zamówień...
+            
+            </td>
+        
+        </tr>
+    
+    {% endfor %}
+    
+    </tbody>
+        
+</table>
+
+{% endblock %}

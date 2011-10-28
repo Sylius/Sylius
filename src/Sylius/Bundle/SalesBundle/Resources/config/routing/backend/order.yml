@@ -1,0 +1,27 @@
+sylius_sales_backend_order_list:
+    pattern: /list
+    defaults: { _controller: sylius_sales.controller.backend.order:listAction }
+
+sylius_sales_backend_order_status:
+    pattern: /{id}/status
+    defaults: { _controller: sylius_sales.controller.backend.order:statusAction }
+
+sylius_sales_backend_order_confirm:
+    pattern: /{id}/confirm
+    defaults: { _controller: sylius_sales.controller.backend.order:confirmAction }
+
+sylius_sales_backend_order_delete:
+    pattern: /{id}/delete
+    defaults: { _controller: sylius_sales.controller.backend.order:deleteAction }
+    
+sylius_sales_backend_order_close:
+    pattern: /{id}/close
+    defaults: { _controller: sylius_sales.controller.backend.order:closeAction }
+    
+sylius_sales_backend_order_open:
+    pattern: /{id}/open
+    defaults: { _controller: sylius_sales.controller.backend.order:openAction }
+    
+sylius_sales_backend_order_show:
+    pattern: /{id}
+    defaults: { _controller: sylius_sales.controller.backend.order:showAction }
