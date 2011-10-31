@@ -24,6 +24,7 @@ final class SyliusSalesEvents
     const ORDER_CLOSE  = 'sylius_sales.event.order.close';
     const ORDER_OPEN  = 'sylius_sales.event.order.close';
     const ORDER_CONFIRM  = 'sylius_sales.event.order.confirm';
+    const ORDER_PROCESS  = 'sylius_sales.event.order.process';
     const ORDER_PLACE  = 'sylius_sales.event.order.place';
     const ORDER_STATUS  = 'sylius_sales.event.order.status';
 }

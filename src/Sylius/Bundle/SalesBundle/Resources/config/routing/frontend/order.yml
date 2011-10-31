@@ -1,3 +1,7 @@
+sylius_sales_order_place:
+    pattern: /place
+    defaults: { _controller: sylius_sales.controller.frontend.order:placeAction }
+
 sylius_sales_order_confirm:
     pattern: /confirm/{token}
     defaults: { _controller: sylius_sales.controller.frontend.order:confirmAction }
