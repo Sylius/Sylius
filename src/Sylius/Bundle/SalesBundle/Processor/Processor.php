@@ -49,7 +49,7 @@ class Processor
      */
     public function registerOperation(OperationInterface $operation)
     {
-        $this->operations = $operation;
+        $this->operations[] = $operation;
     }
     
     /**
