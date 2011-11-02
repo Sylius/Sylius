@@ -34,7 +34,7 @@ class Processor
      *
      * @param OrderInterface $order
      */
-    public function process(OrderInterface $order)
+    public function prepare(OrderInterface $order)
     {
         foreach ($this->operations as $operation) {
             $operation->prepare($order);
