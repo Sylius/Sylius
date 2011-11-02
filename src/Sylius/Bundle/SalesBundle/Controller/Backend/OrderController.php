@@ -29,8 +29,10 @@ class OrderController extends ContainerAware
     public function listAction()
     {       
     	$orderManager = $this->container->get('sylius_sales.manager.order');
-    	$paginator = $orderManager->createPaginator();
     	
+    	$orderSorter = $this->container->get('sylius_sales.sorter.order');
+    	
+    	$paginator = $orderManager->createPaginator($orderSorter);
     	$paginator->setCurrentPage($this->container->get('request')->query->get('page', 1));
     	
     	$orders = $paginator->getCurrentPageResults();
