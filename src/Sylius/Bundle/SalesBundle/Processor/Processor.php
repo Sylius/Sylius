@@ -29,6 +29,19 @@ class Processor
     private $operations = array();
     
     /**
+     * Prepares order for processing.
+     * Calls all operations.
+     *
+     * @param OrderInterface $order
+     */
+    public function process(OrderInterface $order)
+    {
+        foreach ($this->operations as $operation) {
+            $operation->prepare($order);
+        }
+    }
+    
+    /**
      * Processes order. Calls all operations.
      * 
      * @param OrderInterface $order
@@ -38,8 +51,6 @@ class Processor
         foreach ($this->operations as $operation) {
             $operation->process($order);
         }
-        
-        return $order;
     }
     
     /**

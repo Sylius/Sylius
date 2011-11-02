@@ -21,6 +21,13 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 interface OperationInterface
 {
     /**
+     * Prepares order for processing.
+     *
+     * @param OrderInterface $order
+     */
+    function prepare(OrderInterface $order);
+    
+    /**
      * Processes order.
      * 
      * @param OrderInterface $order

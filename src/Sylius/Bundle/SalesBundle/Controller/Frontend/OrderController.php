@@ -35,6 +35,9 @@ class OrderController extends ContainerAware
         $form = $this->container->get('form.factory')->create($this->container->get('sylius_sales.form.type.order'));
         $form->setData($order);
         
+        $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PREPARE, new FilterOrderEvent($order));
+        $this->container->get('sylius_sales.processor')->prepare($order);
+        
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             
