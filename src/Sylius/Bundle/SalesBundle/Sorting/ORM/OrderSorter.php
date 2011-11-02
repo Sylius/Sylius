@@ -13,7 +13,7 @@ namespace Sylius\Bundle\SalesBundle\Sorting\ORM;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\AssortmentBundle\Sorting\SorterInterface;
+use Sylius\Bundle\SalesBundle\Sorting\SorterInterface;
 
 /**
  * Default ORM sorter.
