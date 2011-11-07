@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\SalesBundle\Model;
 
+use Sylius\Bundle\SalesBundle\Filtering\FilterInterface;
+use Sylius\Bundle\SalesBundle\Sorting\SorterInterface;
+
 /**
  * Order manager interface.
  * 
@@ -24,6 +27,11 @@ interface OrderManagerInterface
      * @return OrderInterface
      */
     function createOrder();
+    
+    /**
+     * Creates paginator.
+     */
+    function createPaginator(SorterInterface $sorter = null, FilterInterface $filter = null);
 
     /**
      * Persist order.

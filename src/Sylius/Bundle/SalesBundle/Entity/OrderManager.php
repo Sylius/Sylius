@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\SalesBundle\Entity;
 
+use Sylius\Bundle\SalesBundle\Filtering\FilterInterface;
+
 use Sylius\Bundle\SalesBundle\Sorting\SorterInterface;
 
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
@@ -62,12 +64,16 @@ class OrderManager extends BaseOrderManager
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(SorterInterface $sorter = null)
+    public function createPaginator(SorterInterface $sorter = null, FilterInterface $filter = null)
     {
         $queryBuilder = $this->entityManager->createQueryBuilder()
             ->select('o')
             ->from($this->class, 'o')
             ->orderBy('o.createdAt', 'DESC');
+        
+        if (null != $filter) {
+            $filter->filter($queryBuilder);
+        }
         
         if (null != $sorter) {
             $sorter->sort($queryBuilder);

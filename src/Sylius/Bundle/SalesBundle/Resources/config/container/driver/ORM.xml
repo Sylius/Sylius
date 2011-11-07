@@ -9,9 +9,11 @@
 	    <parameter key="sylius_sales.manager.item.class">Sylius\Bundle\SalesBundle\Entity\ItemManager</parameter>
 	    <parameter key="sylius_sales.manager.status.class">Sylius\Bundle\SalesBundle\Model\StatusManager</parameter>
 	    <parameter key="sylius_sales.sorter.order.class">Sylius\Bundle\SalesBundle\Sorting\ORM\OrderSorter</parameter>
+	    <parameter key="sylius_sales.filter.order.class">Sylius\Bundle\SalesBundle\Filtering\ORM\OrderFilter</parameter>
 	</parameters>
 	
 	<services>
+		<!-- managers... -->
 	    <service id="sylius_sales.manager.order" class="%sylius_sales.manager.order.class%">
 	        <argument type="service" id="doctrine.orm.default_entity_manager" />
 	        <argument>%sylius_sales.model.order.class%</argument>
@@ -27,6 +29,13 @@
 	    
 	    <!-- sorters... -->
 	    <service id="sylius_sales.sorter.order" class="%sylius_sales.sorter.order.class%">
+	    	<call method="setContainer">
+	    		<argument type="service" id="service_container" />
+	    	</call>
+	    </service>
+	    
+	    <!-- filters... -->
+	    <service id="sylius_sales.filter.order" class="%sylius_sales.filter.order.class%">
 	    	<call method="setContainer">
 	    		<argument type="service" id="service_container" />
 	    	</call>
