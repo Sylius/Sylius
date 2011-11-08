@@ -1,20 +1,18 @@
 About SyliusAddressingBundle...
 =================================
 
-This bundle is part of **Sylius e-commerce system**.
-Addressing mechanisms for Symfony2 applications.
+Provides simple models, forms, and more for addressing in applications.
 
-About project "Sylius".
------------------------
+Sylius.
+-------
 
-Sylius is meant to be a e-commerce system build on Symfony2 and by its community.
-The goal is to create a end-user application that will be developer friendly.
-Most of parts are fully functional and are powering 2 online shops that run in production.
-The work is focused on the bundles like PluginsBundle and ThemingBundle.
-More bundles are one their way to github. Stay tuned.
+**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. Visit [sylius.org](http://sylius.org).
 
-**Please note!** I know that many of this bundles are far from being perfect.
-I just want to share my work with others and also learn something new.
+Examples.
+---------
+
+If you want to see this and other bundles in action, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+It's open sourced github project.
 
 Documentation.
 --------------
@@ -26,14 +24,48 @@ Dependencies.
 
 This bundle uses the awesome [Pagerfanta library](https://github.com/whiteoctober/Pagerfanta) and [Pagerfanta bundle](https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle).
 
+Mailing lists.
+--------------
+
+If you are using this bundle and have any questions, feel free to ask on users mailing list.
+[Mail](mailto:sylius@googlegroups.com) or [view it](http://groups.google.com/group/sylius).
+
+If you want to contribute, and develop this bundle, use the developers mailing list.
+[Mail](mailto:sylius-dev@googlegroups.com) or [view it](http://groups.google.com/group/sylius-dev).
+
+Sylius twitter account.
+-----------------------
+
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius) 
+or [follow me](http://twitter.com/pjedrzejewski).
+
+Bug tracking.
+-------------
+
+This bundle uses [GitHub issues](https://github.com/Sylius/SyliusAddressingBundle/issues).
+If you have found bug, please create an issue.
+
+Versioning.
+-----------
+
+Releases will be numbered with the format `<major>.<minor>.<patch>`.
+
+And constructed with the following guidelines.
+
+* Breaking backwards compatibility bumps the major.
+* New additions without breaking backwards compatibility bumps the minor.
+* Bug fixes and misc changes bump the patch.
+
+For more information on SemVer, please visit [semver.org website](http://semver.org/).
+This versioning method is same for all **Sylius** bundles and applications.
+
 License.
 --------
 
-Licence can be found here...
-
-    Resources/meta/LICENSE
+License can be found [here](https://github.com/Sylius/SyliusAddressingBundle/blob/master/Resources/meta/LICENSE).
 
 Authors.
 --------
 
+The bundle was originally created by [Paweł Jędrzejewski](http://diweb.pl).
 See the list of [contributors](https://github.com/Sylius/SyliusAddressingBundle/contributors).
