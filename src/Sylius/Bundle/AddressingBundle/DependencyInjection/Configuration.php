@@ -85,7 +85,7 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('type')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('address')->defaultValue('Sylius\Bundle\\AddressingBundle\\Form\\Type\\AddressFormType')->end()
+                                        ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

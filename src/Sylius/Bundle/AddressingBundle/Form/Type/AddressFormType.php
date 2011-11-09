@@ -19,7 +19,7 @@ use Symfony\Component\Form\AbstractType;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class AddressFormType extends AbstractType
+abstract class AddressFormType extends AbstractType
 {
     /**
      * Data class.
@@ -36,21 +36,6 @@ class AddressFormType extends AbstractType
     public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilder $builder, array $options)
-    {
-        $builder
-            ->add('company', 'text', array('required' => false))
-            ->add('name', 'text')
-            ->add('surname', 'text')
-            ->add('street', 'text')
-            ->add('postcode', 'text')
-            ->add('city', 'text')
-        ;
     }
     
     /**
