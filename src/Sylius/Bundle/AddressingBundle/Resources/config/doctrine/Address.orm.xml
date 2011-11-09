@@ -16,21 +16,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Entity\Address" table="sylius_addressing_address">
-    
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
-         
-        <field name="company" column="company" type="string" length="255" nullable="true" />
-        <field name="name" column="name" type="string" length="255" />     
-        <field name="surname" column="surname" type="string" length="255" />      
-        <field name="street" column="street" type="string" length="255" />      
-        <field name="postcode" column="postcode" type="string" length="255" />      
-        <field name="city" column="city" type="string" length="255" />      
+    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Entity\Address">    
         <field name="createdAt" column="created_at" type="datetime" />
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
-        
-    </entity>
+    </mapped-superclass>>
 
 </doctrine-mapping>
+
