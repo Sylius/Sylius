@@ -53,4 +53,9 @@ class OrderFilter extends ContainerAware implements FilterInterface
             }
         }
     }
+    
+    public function getCurrent()
+    {
+        return $this->container->get('request')->query->get('filters');
+    }
 }

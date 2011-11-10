@@ -19,4 +19,5 @@ namespace Sylius\Bundle\SalesBundle\Sorting;
 interface SorterInterface
 {
     function sort($sortable);
+    function getOrder();
 }

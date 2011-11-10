@@ -39,8 +39,10 @@ class OrderController extends ContainerAware
     	$orders = $paginator->getCurrentPageResults();
     	
         return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:list.html.' . $this->getEngine(), array(
-        	'orders' => $orders,
-         	'paginator' => $paginator
+        	'orders'    => $orders,
+         	'paginator' => $paginator,
+         	'sorter'    => $orderSorter,
+         	'filter'    => $orderFilter
         ));
     }
     

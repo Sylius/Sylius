@@ -54,4 +54,16 @@ class OrderSorter extends ContainerAware implements SorterInterface
         /** @var QueryBuilder */
         $sortable->orderBy('o.' . $sortProperty, $sortOrder);
     }
+    
+    public function getOrder()
+    {
+        $sortOrder = $this->container->get('request')->query->get('order', 'ASC');
+        
+        if (!in_array($sortOrder, array('ASC', 'DESC'))) {
+        
+            return;
+        }
+        
+        return ($sortOrder == 'ASC') ? 'DESC' : 'ASC';
+    }
 }

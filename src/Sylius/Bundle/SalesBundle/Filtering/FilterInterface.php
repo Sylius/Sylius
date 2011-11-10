@@ -19,4 +19,5 @@ namespace Sylius\Bundle\SalesBundle\Filtering;
 interface FilterInterface
 {
     function filter($filterable);
+    function getCurrent();
 }
