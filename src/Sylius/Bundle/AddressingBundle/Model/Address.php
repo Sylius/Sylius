@@ -22,6 +22,11 @@ abstract class Address implements AddressInterface
     protected $createdAt;
     protected $updatedAt;
     
+    public function __construct()
+    {
+        $this->incrementCreatedAt();
+    }
+    
     public function getId()
     {
         return $this->id;

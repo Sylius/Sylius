@@ -17,12 +17,21 @@
 
 	<parameters>
 	    <parameter key="sylius_addressing.manager.address.class">Sylius\Bundle\AddressingBundle\Entity\AddressManager</parameter>
+	    <parameter key="sylius_addressing.sorter.address.class">Sylius\Bundle\AddressingBundle\Sorting\ORM\AddressSorter</parameter>
 	</parameters>
 	
 	<services>
+		<!-- managers... -->
 	    <service id="sylius_addressing.manager.address" class="%sylius_addressing.manager.address.class%">
 	        <argument type="service" id="doctrine.orm.default_entity_manager" />
 	        <argument>%sylius_addressing.model.address.class%</argument>
+	    </service>
+	    
+	    <!-- sorters... -->
+	    <service id="sylius_addressing.sorter.address" class="%sylius_addressing.sorter.address.class%">
+	    	<call method="setContainer">
+	    		<argument type="service" id="service_container" />
+	    	</call>
 	    </service>
 	</services>
 

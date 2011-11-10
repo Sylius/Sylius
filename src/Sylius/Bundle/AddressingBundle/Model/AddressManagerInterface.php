@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\AddressingBundle\Model;
 
+use Sylius\Bundle\AddressingBundle\Sorting\SorterInterface;
+
 /**
  * Address manager interface.
  * 
@@ -24,6 +26,13 @@ interface AddressManagerInterface
      * @return AddressInterface
      */
     function createAddress();
+    
+    /**
+     * Creates paginator.
+     * 
+     * @param SorterInterface $sorter
+     */
+    function createPaginator(SorterInterface $sorter = null);
 
     /**
      * Persists address model.
@@ -73,11 +82,4 @@ interface AddressManagerInterface
      * @return string The address model class
      */
     function getClass();
-    
-    /**
-     * Sets the address model class.
-     * 
-     * @param string $class The address model class
-     */
-    function setClass($class);
 }

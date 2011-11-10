@@ -32,8 +32,10 @@ class AddressController extends ContainerAware
     public function listAction()
     {
         $addressManager = $this->container->get('sylius_addressing.manager.address');
-        $paginator = $addressManager->createPaginator();
         
+        $addressSorter = $this->container->get('sylius_addressing.sorter.address');
+        
+        $paginator = $addressManager->createPaginator($addressSorter);
         $paginator->setCurrentPage($this->container->get('request')->query->get('page', 1), true, true);
         
         $addresses = $paginator->getCurrentPageResults();

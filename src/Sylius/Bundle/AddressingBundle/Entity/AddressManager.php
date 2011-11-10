@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressManager as BaseAddressManager;
+use Sylius\Bundle\AddressingBundle\Sorting\SorterInterface;
 
 /**
  * Address entity manager.
@@ -115,11 +116,17 @@ class AddressManager extends BaseAddressManager
     /**
      * {@inheritdoc}
      */
-    public function createPaginator()
+    public function createPaginator(SorterInterface $sorter = null)
     {
         $queryBuilder = $this->entityManager->createQueryBuilder()
             ->select('a')
-            ->from($this->class, 'a');
+            ->from($this->class, 'a')
+            ->orderBy('a.createdAt', 'DESC')
+        ;
+        
+        if (null !== $sorter) {
+            $sorter->sort($queryBuilder);
+        }
             
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
     }
