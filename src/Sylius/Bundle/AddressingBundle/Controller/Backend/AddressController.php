@@ -42,7 +42,8 @@ class AddressController extends ContainerAware
 
         return $this->container->get('templating')->renderResponse('SyliusAddressingBundle:Backend/Address:list.html.twig', array(
         	'addresses' => $addresses,
-            'paginator' => $paginator
+            'paginator' => $paginator,
+            'sorter'	=> $addressSorter
         ));
     }
 
