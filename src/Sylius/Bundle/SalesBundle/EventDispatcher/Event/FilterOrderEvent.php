@@ -25,7 +25,7 @@ class FilterOrderEvent extends Event
     
     public function __construct(OrderInterface $order)
     {
-        $this->order;
+        $this->order = $order;
     }
     
     public function getOrder()
