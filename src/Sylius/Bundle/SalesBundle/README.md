@@ -1,12 +1,32 @@
 About SyliusSalesBundle...
 =================================
 
-Sales management, orders and this kind of stuff.
+Sales management, orders, statuses, sorting, filtering and more.
+
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusSalesBundle.png)](http://travis-ci.org/Sylius/SyliusSalesBundle)
 
 Sylius.
 -------
 
 **Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. Visit [sylius.org](http://sylius.org).
+
+Testing and build status.
+-------------------------
+
+This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusSalesBundle) for CI.
+
+Before running tests, load the dependencies using [Composer](http://packagist.org).
+
+``` bash
+$ wget http://getcomposer.org/composer.phar
+$ php composer.phar install
+```
+
+Now you can test by simply using this command.
+
+``` bash
+$ phpunit
+```
 
 Examples.
 ---------

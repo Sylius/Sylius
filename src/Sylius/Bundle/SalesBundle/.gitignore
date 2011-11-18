@@ -1,0 +1,10 @@
+.buildpath
+.project
+.settings/
+phpunit.xml
+Tests/autoload.php
+nbproject
+vendor/
+composer.phar
+composer.lock
+
