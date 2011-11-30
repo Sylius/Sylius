@@ -54,7 +54,8 @@ class OrderController extends ContainerAware
         }
         
         return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:place.html.' . $this->getEngine(), array(
-        	'form' => $form->createView()
+        	'form'  => $form->createView(),
+        	'order' => $order
         ));
     }
     
