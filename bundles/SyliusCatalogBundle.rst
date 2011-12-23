@@ -23,14 +23,12 @@ Downloading the bundle
 
 The good practice is to download it to `vendor/bundles/Sylius/Bundle/CatalogBundle`.
 
-
 This can be done in several ways, depending on your preference.
 
 The first method is the standard Symfony2 method.
 
-
-**Using the vendors script**
-
+Using the vendors script
+************************
 
 Add the following lines in your `deps` file. ::
 
@@ -44,8 +42,8 @@ Now, run the vendors script to download the bundle.
 
     $ php bin/vendors install
 
-**Using submodules**
-
+Using submodules
+****************
 
 If you prefer instead to use git submodules, then run the following lines.
 
@@ -128,6 +126,7 @@ Working examples
 ----------------
 
 If you want to see this and other bundles in action, try out the `Sylius sandbox application <http://github.com/Sylius/Sylius-Sandbox>`_.
+
 It's open sourced github project.
 
 Dependencies

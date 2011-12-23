@@ -10,5 +10,6 @@ Bundles reference
    :maxdepth: 2
    :numbered:
 
+   bundles/SyliusAssortmentBundle
    bundles/SyliusCatalogBundle
 
