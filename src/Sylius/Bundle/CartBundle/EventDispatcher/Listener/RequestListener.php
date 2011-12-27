@@ -26,7 +26,7 @@ class RequestListener extends ContainerAware
 {
     public function onCoreRequest(GetResponseEvent $event)
     {
-        if(HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
+        if(HttpKernelInterface::MASTER_REQUEST === $event->getRequestType() && !$this->container->getParameter('sylius_cart.freeze')) {
             $cartManager = $this->container->get('sylius_cart.manager.cart');
             $session = $this->container->get('request')->getSession();
             
