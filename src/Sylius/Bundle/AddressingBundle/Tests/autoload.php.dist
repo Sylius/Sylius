@@ -1,0 +1,35 @@
+<?php
+
+/*
+ * Autoloader for tests.
+ */
+
+if (!file_exists($file = __DIR__.'/../vendor/.composer/autoload.php')) {
+
+$vendorDir = __DIR__.'/../vendor';
+require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+$loader = new \Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader->registerNamespaces(array(
+    'Symfony'                => array($vendorDir.'/symfony/src', $vendorDir.'/bundles'),
+    'Doctrine\\Common'       => $vendorDir.'/doctrine-common/lib',
+    'Doctrine\\DBAL'         => $vendorDir.'/doctrine-dbal/lib',
+    'Doctrine'               => $vendorDir.'/doctrine/lib',
+));
+
+$loader->register();
+
+} else {
+	require_once $file;
+}
+
+spl_autoload_register(function($class) {
+    if (0 === strpos($class, 'Sylius\\Bundle\\AddressingBundle\\')) {
+        $path = __DIR__.'/../'.implode('/', array_slice(explode('\\', $class), 3)).'.php';
+        if (!stream_resolve_include_path($path)) {
+            return false;
+        }
+        require_once $path;
+        return true;
+    }
+});
