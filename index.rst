@@ -10,6 +10,14 @@ Bundles reference
    :maxdepth: 2
    :numbered:
 
-   bundles/SyliusAssortmentBundle
    bundles/SyliusCatalogBundle
+   bundles/SyliusAssortmentBundle
+   bundles/SyliusCartBundle
+   bundles/SyliusInstallerBundle
+   bundles/SyliusSalesBundle
+   bundles/SyliusThemingBundle
+   bundles/SyliusGuardBundle
+   bundles/SyliusNewsletterBundle
+   bundles/SyliusBloggerBundle
+   bundles/SyliusAddressingBundle
 
