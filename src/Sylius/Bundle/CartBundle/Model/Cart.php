@@ -167,6 +167,11 @@ abstract class Cart implements CartInterface
         $this->items = array();
     }
     
+    public function isExpired()
+    {
+        return $this->getExpiresAt() < new \DateTime;
+    }
+    
     /**
      * {@inheritdoc}
      */

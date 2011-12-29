@@ -18,97 +18,21 @@ namespace Sylius\Bundle\CartBundle\Model;
  */
 interface CartInterface
 {
-    /**
-     * Returns id.
-     * 
-     * @return integer
-     */
-    function getId();
-
-    /**
-     * Returns total item count.
-     * 
-     * @return integer
-     */
     function getTotalItems();
-    
-    /**
-     * Sets total item count.
-     * 
-     * @param integer $totalItems
-     */
     function setTotalItems($totalItems);
-    
+    function incrementTotalItems($amount = null);
     function isLocked();
     function setLocked($locked);
-    
-    /**
-     * Checks whether the cart is empty.
-     */
     function isEmpty();
-    
-    function setItems($items);
-    
-    /**
-     * Returns all items from cart.
-     * 
-     * @return array
-     */
-    function getItems();
-
-    /**
-     * Returns number of items in cart.
-     * 
-     * @return integer
-     */
     function countItems();
-
-    /**
-     * Adds item to cart.
-     * 
-     * @param ItemInterface $item
-     */
-    function addItem(ItemInterface $item);
-
-    /**
-     * Remove item from cart.
-     * 
-     * @param ItemInterface $item
-     */
-    function removeItem(ItemInterface $item);
-    
-    /**
-     * Has item in cart?
-     * 
-     * @param Item
-     */
-    function hasItem(ItemInterface $item);
-    
-    /**
-     * Removes all items from cart.
-     * 
-     * @return null
-     */
     function clearItems();
-    
-    /**
-     * Returns expiration time.
-     * 
-     * @return \DateTime
-     */
+    function setItems($items);
+    function getItems();
+    function addItem(ItemInterface $item);
+    function removeItem(ItemInterface $item);
+    function hasItem(ItemInterface $item);
     function getExpiresAt();
-    
-    /**
-     * Sets expiration time.
-     * 
-     * @param \DateTime $expiresAt
-     */
+    function isExpired();
     function setExpiresAt(\DateTime $expiresAt);
-    
-    /**
-     * Increments expiration time.
-     * 
-     * @return null
-     */
     function incrementExpiresAt();
 }
