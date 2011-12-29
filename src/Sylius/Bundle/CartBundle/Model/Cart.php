@@ -81,6 +81,11 @@ abstract class Cart implements CartInterface
         $this->locked = $locked;
     }
     
+    public function incrementTotalItems($amount = 1)
+    {
+        $this->totalItems += $amount;
+    }
+    
     /**
      * {@inheritdoc}
      */

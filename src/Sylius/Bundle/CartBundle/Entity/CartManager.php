@@ -75,6 +75,22 @@ class CartManager extends BaseCartManager
         $this->entityManager->flush();
     }
     
+    public function flushCarts()
+    {
+        $expiredCarts = $this->entityManager->createQueryBuilder()
+            ->select('c')
+            ->from($this->getClass(), 'c')
+            ->where('c.locked = false AND c.expiresAt < ?1')
+            ->setParameter(1, new \DateTime)
+            ->getQuery()
+            ->getResult()
+        ;
+        
+        foreach ($expiredCarts as $cart) {
+            $this->removeCart($cart);
+        }
+    }
+    
     /**
      * {@inheritdoc}
      */

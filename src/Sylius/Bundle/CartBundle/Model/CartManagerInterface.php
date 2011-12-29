@@ -39,6 +39,8 @@ interface CartManagerInterface
      */
     function removeCart(CartInterface $cart);
     
+    function flushCarts();
+    
     /**
      * Finds cart by id.
      * 

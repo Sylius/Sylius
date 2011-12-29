@@ -20,7 +20,7 @@ interface CartInterface
 {
     function getTotalItems();
     function setTotalItems($totalItems);
-    function incrementTotalItems($amount = null);
+    function incrementTotalItems($amount = 1);
     function isLocked();
     function setLocked($locked);
     function isEmpty();

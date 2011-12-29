@@ -62,7 +62,10 @@ class CartController extends ContainerAware
             $cartOperator->addItem($cart, $item);        
             $cartOperator->refreshCart($cart);
             
-            $this->container->get('sylius_cart.manager.cart')->persistCart($cart);
+            $cartManager = $this->container->get('sylius_cart.manager.cart');
+            
+            $cartManager->persistCart($cart);
+            $cartManager->flushCarts();
         }
         
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));

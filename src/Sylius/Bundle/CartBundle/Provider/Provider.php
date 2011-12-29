@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Provider;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
 /**
@@ -18,17 +19,34 @@ use Sylius\Bundle\CartBundle\Model\CartInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class Provider
+class Provider extends ContainerAware
 {
-    private $cart;
+    protected $cart;
     
     public function getCart()
     {
+        if (null == $this->cart) {
+            $cartManager = $this->container->get('sylius_cart.manager.cart');
+            $session = $this->container->get('request')->getSession();
+            
+            $cartId = $session->get('sylius_cart.id', false);
+            
+            if ($cartId) {
+                $cart = $cartManager->findCart($cartId);
+            
+                if ($cart) {
+                    $this->cart = $cart;
+                    return $cart;
+                }
+            }
+            
+            $cart = $cartManager->createCart();
+            $cartManager->persistCart($cart);
+            $session->set('sylius_cart.id', $cart->getId());
+            
+            $this->cart = $cart;
+        }
+        
         return $this->cart;
-    }
-    
-    public function setCart(CartInterface $cart)
-    {
-        $this->cart = $cart;
     }
 }
