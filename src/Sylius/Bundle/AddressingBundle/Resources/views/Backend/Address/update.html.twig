@@ -1,15 +1,17 @@
-{% extends 'SyliusAddressingBundle:Backend:layout.html.twig' %}
+{% extends 'SandboxCoreBundle:Backend:layout.html.twig' %}
 
 {% block content %}
 
-<h2>updating address...</h2>
+<div class="page-header">
+    <h1>{{ "header.update" | trans({}, 'SyliusAddressingBundle') }}</h1>
+</div>
 
 <form action="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}" method="post">
 
-{{ form_widget(form) }}      
-
-<input type="submit" value="update address" />
+<div class="actions">
+<input type="submit" value="{{ "save" | trans({}, 'SyliusAddressingBundle') }}" class="btn primary large" />
+</div>
 
 </form>
 
-{% endblock content %}
+{% endblock %}

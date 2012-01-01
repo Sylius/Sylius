@@ -1,27 +1,51 @@
-{% extends 'SyliusAddressingBundle:Backend:layout.html.twig' %}
+{% extends 'SyliusAddressingBundle::layout.html.twig' %}
 
 {% block content %}
 
-<h2>addresses list.</h2>
+<div class="page-header">
+    <h1>{{ "header.list" | trans({}, 'SyliusAddressingBundle') | raw }}</h1>
+</div>
 
-{% for address in addresses %}
+<div class="well">
+<a href="{{ path('sylius_addressing_backend_address_create') }}" class="btn primary large">{{ "address.create" | trans({}, 'SyliusAddressingBundle') }}</a>
+</div>
 
-    id: {{ address.id }} <br />
-    name: {{ address.name }} <br />
-    surname: {{ address.surname }} <br />
-    city: {{ address.city }} <br />
-    postcode: {{ address.postcode }} <br />
-    street: {{ address.street }} <br />
-    
-    <ul>
-        <li><a href="{{ path('sylius_addressing_backend_address_show', {'id': address.id}) }}">details</a></li>
-        <li><a href="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}">edit</a></li>
-        <li><a href="{{ path('sylius_addressing_backend_address_delete', {'id': address.id}) }}">delete</a></li>
-    </ul>
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
 
-{% endfor %}
+{% if addresses %}
+<table class="zebra-stripped">
+    <thead>
+        <tr>
+            <th><a href="{{ path('sylius_addressing_backend_address_list', {'sort': 'id', 'order': sorter.order}) }}">#id</a></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for address in addresses %}
+        <tr>
+            <td>{{ address.id }}</td>
+            <td><a href="mailto:{{ address.email }}">{{ address.email }}</a></td>
+            <td>
+                <div class="pull-right">
+                <a href="{{ path('sylius_addressing_backend_address_show', {'id': address.id}) }}" class="btn">{{ "show" | trans({}, 'SyliusAddressingBundle') }}</a>
+                <a href="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}" class="btn">{{ "update" | trans({}, 'SyliusAddressingBundle') }}</a>
+                <a href="{{ path('sylius_addressing_backend_address_delete', {'id': address.id}) }}" class="btn danger">{{ "delete" | trans({}, 'SyliusAddressingBundle') }}</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert-message info">
+  <p>{{ "list.empty" | trans({}, 'SyliusAddressingBundle') }}</p>
+</div>
+{% endif %}
 
-    <br /> <br />
-    {{ pagerfanta(paginator, 'default') }}
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
 
 {% endblock %}

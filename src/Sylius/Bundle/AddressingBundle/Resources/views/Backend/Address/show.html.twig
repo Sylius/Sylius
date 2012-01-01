@@ -1,19 +1,27 @@
-{% extends 'SyliusAddressingBundle:Backend:layout.html.twig' %}
+{% extends 'SyliusAddressingBundle::layout.html.twig' %}
 
 {% block content %}
 
-<h2>address details.</h2>
+<div class="page-header">
+    <h1>{{ "header.show" | trans({}, 'SyliusAddressingBundle') | raw }}</h1>
+</div>
 
-id: {{ address.id }} <br />
-name: {{ address.name }} <br />
-surname: {{ address.surname }} <br />
-city: {{ address.city }} <br />
-postcode: {{ address.postcode }} <br />
-street: {{ address.street }} <br />
+<div class="well">
+<a href="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}" class="btn">{{ "update" | trans({}, 'SyliusAddressingBundle') }}</a>
+<a href="{{ path('sylius_addressing_backend_address_delete', {'id': address.id}) }}" class="btn danger">{{ "delete" | trans({}, 'SyliusAddressingBundle') }}</a>
+</div>
 
-<ul>
-    <li><a href="{{ path('sylius_addressing_backend_address_update', {'id': address.id}) }}">edit</a></li>
-    <li><a href="{{ path('sylius_addressing_backend_address_delete', {'id': address.id}) }}">delete</a></li>
-</ul>
+<table class="bordered-table">
+    <thead>
+        <tr>
+            <th>#id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ address.id }}</td>
+        </tr>
+    </tbody>
+</table>
 
 {% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+
+<html> 
+    <head> 
+        <title>{% block title %} Sylius administration. {% endblock %}</title>   
+        <meta charset="UTF-8"> 
+        
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements --> 
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]--> 
+        
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+        
+        <style type="text/css">
+            html, body {
+                background-color: #eee;
+            }
+            
+            body {
+                padding-top: 40px;
+            }
+            
+            .content {
+                background-color: #fff;
+                padding: 20px;
+                margin: 0 -20px;
+                -webkit-border-radius: 0 0 0 6px;
+                   -moz-border-radius: 0 0 0 6px;
+                        border-radius: 0 0 0 6px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                        box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            }
+            
+            .page-header {
+                background-color: #f5f5f5;
+                padding: 20px 20px 10px;
+                margin: -20px -20px 20px;
+            }
+            
+            th {
+                background-color: #f5f5f5;
+            }
+            
+            fieldset div {
+                margin-bottom: 10px;
+            }
+            
+            label {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="topbar"> 
+            <div class="topbar-inner"> 
+                <div class="container-fluid"> 
+                    <a class="brand" href="http://sylius.org">Sylius.org</a> 
+                    <ul class="nav"> 
+                        <li><a href="{{ path('sylius_addressing_backend_address_list') }}">{{ "address.list" | trans({}, 'SyliusAddressingBundle') }}</a></li>
+                        <li><a href="{{ path('sylius_addressing_backend_address_create') }}">{{ "address.create" | trans({}, 'SyliusAddressingBundle') }}</a></li>
+                        <li><a href="http://github.com/Sylius">find us at <strong>@github</strong></a></li>
+                        <li><a href="http://twitter.com/_Sylius">or at <strong>@twitter</strong></a></li> 
+                    </ul> 
+                </div> 
+            </div> 
+        </div> 
+        <div class="container-fluid">
+            <div class="content"> 
+            {% block content %}   {% endblock %}
+        <footer> 
+            <p>&copy; <a href="http://sylius.org">Sylius</a>, 2011.</p> 
+        </footer> 
+            </div> 
+        </div> 
+    </body>
+</html>

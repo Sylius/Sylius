@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+show: details
+create: create
+update: update
+delete: delete
+list: list
+save: save changes
+
+address:
+    show: Address details
+    create: Create address
+    update: Update address
+    delete: Delete address
+    list: List adresses
+    
+header:
+    show: Address details
+    create: Create new address
+    update: Update existing address
+    list: List addresses <small>All registered addresses in database</small>
+
+list.empty: There are no addresses to display
