@@ -21,39 +21,39 @@ use Sylius\Bundle\AddressingBundle\Sorting\SorterInterface;
 
 /**
  * Address entity manager.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class AddressManager extends BaseAddressManager
 {
     /**
      * Entity manager.
-     * 
+     *
      * @var EntityManager
      */
     protected $entityManager;
-    
+
     /**
      * Address repository.
-     * 
+     *
      * @var EntityRepository
      */
     protected $repository;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param EntityManager $entityManager
      * @param string		$class
      */
     public function __construct(EntityManager $entityManager, $class)
     {
         parent::__construct($class);
-        
+
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository($class);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -62,7 +62,7 @@ class AddressManager extends BaseAddressManager
         $class = $this->getClass();
         return new $class;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -71,7 +71,7 @@ class AddressManager extends BaseAddressManager
         $this->entityManager->persist($address);
         $this->entityManager->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -80,7 +80,7 @@ class AddressManager extends BaseAddressManager
         $this->entityManager->remove($address);
         $this->entityManager->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -88,7 +88,7 @@ class AddressManager extends BaseAddressManager
     {
         return $this->repository->find($id);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -96,7 +96,7 @@ class AddressManager extends BaseAddressManager
     {
         return $this->repository->findOneBy($criteria);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -104,7 +104,7 @@ class AddressManager extends BaseAddressManager
     {
         return $this->repository->findAll();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -112,7 +112,7 @@ class AddressManager extends BaseAddressManager
     {
         return $this->repository->findBy($criteria);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -123,11 +123,11 @@ class AddressManager extends BaseAddressManager
             ->from($this->class, 'a')
             ->orderBy('a.createdAt', 'DESC')
         ;
-        
+
         if (null !== $sorter) {
             $sorter->sort($queryBuilder);
         }
-            
+
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
     }
 }

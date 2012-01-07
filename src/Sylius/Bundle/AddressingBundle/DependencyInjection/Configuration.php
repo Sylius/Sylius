@@ -32,19 +32,19 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_addressing');
-        
+
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
             ->end();
-        
+
         $this->addClassesSection($rootNode);
-        
+
         return $treeBuilder;
     }
-    
+
     /**
      * Adds `classes` section.
      */

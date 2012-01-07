@@ -14,11 +14,11 @@ address:
     update: Update address
     delete: Delete address
     list: List adresses
-    
+
 header:
     show: Address details
     create: Create new address
     update: Update existing address
     list: List addresses <small>All registered addresses in database</small>
 
-list.empty: There are no addresses to display
+list.address.empty: There are no addresses to display

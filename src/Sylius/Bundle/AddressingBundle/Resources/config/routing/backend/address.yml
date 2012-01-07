@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_addressing_backend_address_create:
     pattern: /create
     defaults: { _controller: sylius_addressing.controller.backend.address:createAction }

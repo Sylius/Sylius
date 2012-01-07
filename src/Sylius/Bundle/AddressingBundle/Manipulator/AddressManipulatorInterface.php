@@ -15,28 +15,28 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 
 /**
  * Address manipulator interface.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 interface AddressManipulatorInterface
 {
     /**
      * Creates a address.
-     * 
+     *
      * @param AddressInterface $address
      */
     function create(AddressInterface $address);
 
     /**
      * Updates a address.
-     * 
+     *
      * @param AddressInterface $address
      */
     function update(AddressInterface $address);
-    
+
     /**
      * Deletes a address.
-     * 
+     *
      * @param AddressInterface $address
      */
     function delete(AddressInterface $address);

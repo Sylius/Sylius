@@ -27,7 +27,7 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
         unset($config['driver']);
         $loader->load(array($config), new ContainerBuilder());
     }
-    
+
     /**
     * @expectedException \InvalidArgumentException
     */
@@ -38,7 +38,7 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
         $config['driver'] = 'foo';
         $loader->load(array($config), new ContainerBuilder());
     }
-    
+
     /**
     * @expectedException \InvalidArgumentException
     */
@@ -49,7 +49,7 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
         $config['engine'] = 'foo';
         $loader->load(array($config), new ContainerBuilder());
     }
-    
+
     /**
     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
     */
@@ -72,7 +72,7 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
 driver: ORM
 classes:
     model:
-        address: Sylius\Bundle\AddressingBundle\Entity\DefaultAddress
+        address: Sylius\Bundle\AddressingBundle\Entity\Address
 EOF;
         $parser = new Parser();
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
+<!--
 
  This file is part of the Sylius package.
 
  (c) Paweł Jędrzejewski
- 
+
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
 
@@ -16,10 +16,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
         <service id="sylius_addressing.form.type.address" class="%sylius_addressing.form.type.address.class%">
-        	<argument>%sylius_addressing.model.address.class%</argument>
-        	<tag name="form.type" alias="sylius_addressing_address" />
+            <argument>%sylius_addressing.model.address.class%</argument>
+            <tag name="form.type" alias="sylius_addressing_address" />
         </service>
+
     </services>
 
 </container>

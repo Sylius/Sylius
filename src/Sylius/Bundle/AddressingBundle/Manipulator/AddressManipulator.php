@@ -16,28 +16,28 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 
 /**
  * Address manipulator.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class AddressManipulator implements AddressManipulatorInterface
 {
     /**
      * Address manager.
-     * 
+     *
      * @var AddressManagerInterface
      */
     protected $addressManager;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param $addressManager AddressManagerInterface
      */
     public function __construct(AddressManagerInterface $addressManager)
     {
         $this->addressManager = $addressManager;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -46,8 +46,8 @@ class AddressManipulator implements AddressManipulatorInterface
         $address->incrementCreatedAt();
         $this->addressManager->persistAddress($address);
     }
-    
-	/**
+
+  /**
      * {@inheritdoc}
      */
     public function update(AddressInterface $address)
@@ -55,8 +55,8 @@ class AddressManipulator implements AddressManipulatorInterface
         $address->incrementUpdatedAt();
         $this->addressManager->persistAddress($address);
     }
-    
-	/**
+
+  /**
      * {@inheritdoc}
      */
     public function delete(AddressInterface $address)

@@ -28,42 +28,42 @@ class AddressSorter extends ContainerAware implements SorterInterface
         if (!$sortable instanceof QueryBuilder) {
             throw new InvalidArgumentException('Default sorter supports only "Doctrine\\ORM\\QueryBuilder" as sortable argument.');
         }
-        
+
         $request = $this->container->get('request');
-        
+
         if (null === $sortProperty = $request->query->get('sort', null)) {
-            
+
             return;
         }
-        
+
         $sortOrder = $request->query->get('order', 'ASC');
-        
+
         if (!in_array($sortOrder, array('ASC', 'DESC'))) {
-            
+
             return;
         }
-        
+
         $addressClass = $this->container->getParameter('sylius_addressing.model.address.class');
         $reflectionClass = new \ReflectionClass($addressClass);
-        
+
         if (!in_array($sortProperty, array_keys($reflectionClass->getDefaultProperties()))) {
-            
+
             return;
         }
-        
+
         /** @var QueryBuilder */
         $sortable->orderBy('a.' . $sortProperty, $sortOrder);
     }
-    
+
     public function getOrder()
     {
         $sortOrder = $this->container->get('request')->query->get('order', 'ASC');
-    
+
         if (!in_array($sortOrder, array('ASC', 'DESC'))) {
-    
+
             return;
         }
-    
+
         return ($sortOrder == 'ASC') ? 'DESC' : 'ASC';
     }
 }

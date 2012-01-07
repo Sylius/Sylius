@@ -18,12 +18,12 @@ use Symfony\Component\EventDispatcher\Event;
 class FilterAddressEvent extends Event
 {
     private $address;
-    
+
     public function __construct(AddressInterface $address)
     {
         $this->address = $address;
     }
-    
+
     public function getAddress()
     {
         return $this->address;

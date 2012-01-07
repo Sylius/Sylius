@@ -19,7 +19,7 @@ use Symfony\Component\Config\Definition\Processor;
 
 /**
  * Addressing system extension.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class SyliusAddressingExtension extends Extension
@@ -30,49 +30,49 @@ class SyliusAddressingExtension extends Extension
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $config);
-        
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
-         
+
         if (!in_array($config['driver'], array('ORM'))) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
-        
+
         if (!in_array($config['engine'], array('php', 'twig'))) {
             throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
         }
-        
+
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load(sprintf('engine/%s.xml', $config['engine']));
-        
+
         $container->setParameter('sylius_addressing.driver', $config['driver']);
         $container->setParameter('sylius_addressing.engine', $config['engine']);
-         
+
         $configurations = array(
             'controllers',
             'manipulators',
             'forms',
         );
-         
+
         foreach($configurations as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
-         
+
         $this->remapParametersNamespaces($config['classes'], $container, array(
-            'model'      => 'sylius_addressing.model.%s.class',
+            'model'       => 'sylius_addressing.model.%s.class',
             'manipulator' => 'sylius_addressing.manipulator.%s.class'
         ));
-        
+
         $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type'      => 'sylius_addressing.form.type.%s.class',
+            'type' => 'sylius_addressing.form.type.%s.class',
         ));
-        
+
         $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
-            'backend'      => 'sylius_addressing.controller.backend.%s.class',
-            'frontend'	   => 'sylius_addressing.controller.frontend.%s.class'
+            'backend'  => 'sylius_addressing.controller.backend.%s.class',
+            'frontend' => 'sylius_addressing.controller.frontend.%s.class'
         ));
     }
-    
-	/**
+
+  	/**
      * Remap parameters.
      */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

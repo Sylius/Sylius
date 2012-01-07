@@ -23,21 +23,21 @@ abstract class AddressFormType extends AbstractType
 {
     /**
      * Data class.
-     * 
+     *
      * @var string
      */
     protected $dataClass;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $dataClass
      */
     public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -47,7 +47,7 @@ abstract class AddressFormType extends AbstractType
             'data_class' => $this->dataClass
         );
     }
-    
+
     /**
      * {@inheritdoc}
      */

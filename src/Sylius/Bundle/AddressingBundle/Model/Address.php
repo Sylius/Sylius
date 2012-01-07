@@ -21,17 +21,17 @@ abstract class Address implements AddressInterface
     protected $id;
     protected $createdAt;
     protected $updatedAt;
-    
+
     public function __construct()
     {
         $this->incrementCreatedAt();
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -39,7 +39,7 @@ abstract class Address implements AddressInterface
     {
         return $this->createdAt;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -48,14 +48,14 @@ abstract class Address implements AddressInterface
         $this->createdAt = new \DateTime();
     }
 
-	/**
+  /**
      * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
-    
+
     /**
      * {@inheritdoc}
      */

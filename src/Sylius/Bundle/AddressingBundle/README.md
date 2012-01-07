@@ -3,21 +3,42 @@ About SyliusAddressingBundle...
 
 Provides simple models, forms, and more for addressing in applications.
 
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+
 Sylius.
 -------
 
 **Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. Visit [sylius.org](http://sylius.org).
 
+Testing and build status.
+-------------------------
+
+This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusAddressingBundle) for CI.
+
+Before running tests, load the dependencies using [Composer](http://packagist.org).
+
+``` bash
+$ wget http://getcomposer.org/composer.phar
+$ php composer.phar install
+```
+
+Now you can test by simply using this command.
+
+``` bash
+$ phpunit
+```
+
 Examples.
 ---------
 
 If you want to see this and other bundles in action, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
-It's open sourced github project.
+
+It's open sourced github project and there is a [live demo on Sylius.org](http://sylius.org/sandbox).
 
 Documentation.
 --------------
 
-Docs are available [here](https://github.com/Sylius/SyliusAddressingBundle/blob/master/Resources/doc/index.md).
+Docs are available [on Sylius.org](http://sylius.org/docs/bundles/SyliusAddressingBundle.html).
 
 Dependencies.
 -------------
@@ -36,7 +57,7 @@ If you want to contribute, and develop this bundle, use the developers mailing l
 Sylius twitter account.
 -----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius) 
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius)
 or [follow me](http://twitter.com/pjedrzejewski).
 
 Bug tracking.

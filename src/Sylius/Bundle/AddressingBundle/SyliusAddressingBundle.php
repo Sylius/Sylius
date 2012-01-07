@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Bundle of addressing.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class SyliusAddressingBundle extends Bundle

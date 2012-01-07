@@ -15,7 +15,7 @@ use Sylius\Bundle\AddressingBundle\Model\Address as BaseAddress;
 
 /**
  * Address entity.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class Address extends BaseAddress

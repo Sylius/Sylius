@@ -13,28 +13,28 @@ namespace Sylius\Bundle\AddressingBundle\Model;
 
 /**
  * Address manager model.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 abstract class AddressManager implements AddressManagerInterface
 {
     /**
      * Address model class.
-     * 
+     *
      * @var string
      */
     protected $class;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $class The address model class
      */
     public function __construct($class)
     {
         $this->class = $class;
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -14,11 +14,11 @@ address:
     update: Edytuj adres
     delete: Usuń adres
     list: Lista adressów
-    
+
 header:
     show: Szczegóły adresu
     create: Stwórz nowy adres
     update: Edytuj istniejący adres
     list: Lista adresów <small>Wszystkie adresy w bazie danych</small>
 
-list.empty: Brak adresów do wyświetlenia
+list.address.empty: Brak adresów do wyświetlenia
