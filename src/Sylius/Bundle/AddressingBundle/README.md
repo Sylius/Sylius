@@ -8,7 +8,12 @@ Provides simple models, forms, and more for addressing in applications.
 Sylius.
 -------
 
-**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. Visit [sylius.org](http://sylius.org).
+**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. [Sylius.org](http://sylius.org).
+
+Demo.
+-----
+
+There is a live demo of this bundle [on Sylius.org](http://sylius.org/sandbox).
 
 Testing and build status.
 -------------------------
@@ -78,6 +83,7 @@ And constructed with the following guidelines.
 * Bug fixes and misc changes bump the patch.
 
 For more information on SemVer, please visit [semver.org website](http://semver.org/).
+
 This versioning method is same for all **Sylius** bundles and applications.
 
 License.
