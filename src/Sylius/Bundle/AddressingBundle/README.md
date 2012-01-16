@@ -1,19 +1,23 @@
-About SyliusAddressingBundle...
-=================================
+SyliusAddressingBundle.
+=======================
 
-Provides simple models, forms, and more for addressing in applications.
+There is no default address model or even interface, the key purpose of this bundle is to provide 
+architecture, manipulators, forms and much more for addressing in any Symfony2 application.
+Just organising things to keep them consistent with other parts of Sylius engine.
 
 [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
 
 Sylius.
 -------
 
-**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. [Sylius.org](http://sylius.org).
+**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. 
+
+Please visit [Sylius.org](http://sylius.org) for more details.
 
 Demo.
 -----
 
-There is a live demo of this bundle [on Sylius.org](http://sylius.org/sandbox).
+There is a live demo of this bundle [on our official website](http://sylius.org/sandbox).
 
 Testing and build status.
 -------------------------
@@ -27,23 +31,27 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
 ```
 
-Now you can test by simply using this command.
+Now you can run the tests by simply using this command.
 
 ``` bash
 $ phpunit
 ```
 
-Examples.
----------
+Code examples.
+--------------
 
-If you want to see this and other bundles in action, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
-
-It's open sourced github project and there is a [live demo on Sylius.org](http://sylius.org/sandbox).
+If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+It's open sourced github project.
 
 Documentation.
 --------------
 
-Docs are available [on Sylius.org](http://sylius.org/docs/bundles/SyliusAddressingBundle.html).
+Documentation is available on [Sylius.org](http://sylius.org/docs/bundles/SyliusAddressingBundle.html).
+
+Contributing.
+-------------
+
+All informations about contributing to Sylius can be found on [this page](http://sylius.org/docs/contributing/index.html).
 
 Dependencies.
 -------------
@@ -53,8 +61,12 @@ This bundle uses the awesome [Pagerfanta library](https://github.com/whiteoctobe
 Mailing lists.
 --------------
 
+### Users.
+
 If you are using this bundle and have any questions, feel free to ask on users mailing list.
 [Mail](mailto:sylius@googlegroups.com) or [view it](http://groups.google.com/group/sylius).
+
+### Developers.
 
 If you want to contribute, and develop this bundle, use the developers mailing list.
 [Mail](mailto:sylius-dev@googlegroups.com) or [view it](http://groups.google.com/group/sylius-dev).
@@ -74,7 +86,7 @@ If you have found bug, please create an issue.
 Versioning.
 -----------
 
-Releases will be numbered with the format `<major>.<minor>.<patch>`.
+Releases will be numbered with the format `major.minor.patch`.
 
 And constructed with the following guidelines.
 
