@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="sylius_sales.form.type.status.class">Sylius\Bundle\SalesBundle\Form\Type\StatusFormType</parameter>
+        <parameter key="sylius_sales.form.type.status_list.class">Sylius\Bundle\SalesBundle\Form\Type\StatusListFormType</parameter>
         <parameter key="sylius_sales.form.choice_list.status.class">Sylius\Bundle\SalesBundle\Form\ChoiceList\StatusChoiceList</parameter>
     </parameters>
 
@@ -22,7 +23,7 @@
             <argument type="service" id="sylius_sales.form.choice_list.status" />
             <tag name="form.type" alias="sylius_sales_status" />
         </service>
-        <service id="sylius_sales.form.type.status_list" class="%sylius_sales.form.type.status.class%">
+        <service id="sylius_sales.form.type.status_list" class="%sylius_sales.form.type.status_list.class%">
             <argument>%sylius_sales.model.order.class%</argument>
             <argument type="service" id="sylius_sales.form.choice_list.status" />
             <tag name="form.type" alias="sylius_sales_status" />

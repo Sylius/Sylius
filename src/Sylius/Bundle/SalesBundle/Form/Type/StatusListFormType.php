@@ -6,7 +6,7 @@ use Sylius\Bundle\SalesBundle\Form\ChoiceList\StatusChoiceList;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\AbstractType;
 
-class StatusFormType extends AbstractType
+class StatusListFormType extends AbstractType
 {
     /**
      * Data class.
