@@ -26,7 +26,7 @@
         <service id="sylius_sales.form.type.status_list" class="%sylius_sales.form.type.status_list.class%">
             <argument>%sylius_sales.model.order.class%</argument>
             <argument type="service" id="sylius_sales.form.choice_list.status" />
-            <tag name="form.type" alias="sylius_sales_status" />
+            <tag name="form.type" alias="sylius_sales_status_list" />
         </service>
         <service id="sylius_sales.form.type.item" class="%sylius_sales.form.type.item.class%">
             <argument>%sylius_sales.model.item.class%</argument>

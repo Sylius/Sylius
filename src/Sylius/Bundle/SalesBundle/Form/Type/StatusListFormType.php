@@ -9,9 +9,9 @@ use Symfony\Component\Form\AbstractType;
 class StatusListFormType extends AbstractType
 {
     /**
-     * Data class.
+     * The class that holds the data.
      *
-     * @var string
+     * @var dataClass
      */
     protected $dataClass;
 
@@ -27,9 +27,9 @@ class StatusListFormType extends AbstractType
      *
      * @param string $dataClass
      */
-    public function __construct($dataClass, StatusChoiceList $statusChoiceList)
+    public function __construct($class, StatusChoiceList $statusChoiceList)
     {
-        $this->dataClass = $dataClass;
+        $this->dataClass = $class;
         $this->statusChoiceList = $statusChoiceList;
     }
 
@@ -39,8 +39,9 @@ class StatusListFormType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('status', 'choice', array(
-                'choice_list' => $this->statusChoiceList,
+            ->add('status', 'entity', array(
+                'property' => 'name',
+                'class' => 'SyliusSalesBundle:Status',
             ));
     }
 

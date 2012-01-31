@@ -73,11 +73,10 @@ class OrderController extends ContainerAware
             throw new NotFoundHttpException('Requested order does not exist.');
         }
 
-        $request = $this->container->get('request');
-
         $form = $this->container->get('form.factory')->create($this->container->get('sylius_sales.form.type.status_list'));
         $form->setData($order);
 
+        $request = $this->container->get('request');
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             

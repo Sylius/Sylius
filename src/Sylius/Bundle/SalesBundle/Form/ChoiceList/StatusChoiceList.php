@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
 class StatusChoiceList extends ChoiceList
 {
+    protected $choices;
+
     /**
      * @var StatusManager
      */
@@ -27,10 +29,7 @@ class StatusChoiceList extends ChoiceList
      */
     public function getChoices()
     {
-        $choices = array();
-
         $this->choices = $this->statusManager->findStatuses();
-
         return parent::getChoices();
     }
 }
