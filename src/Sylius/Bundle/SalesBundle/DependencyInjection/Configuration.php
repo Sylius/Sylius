@@ -97,6 +97,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderFormType')->end()
                                         ->scalarNode('item')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\ItemType')->end()
                                         ->scalarNode('status')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusFormType')->end()
+                                        ->scalarNode('status_list')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusListFormType')->end()
                                     ->end()
                                 ->end()
                             ->end()
