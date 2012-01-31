@@ -1,0 +1,41 @@
+{% extends 'SyliusBackendBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Statuses<small></h1>
+</div>
+
+<div class="well">
+    <a href="{{ path('sylius_sales_backend_status_create') }}" class="btn primary large">Create Status</a>
+</div>
+
+{% if statuses %}
+    <table class="zebra-stripped">
+    <thead>
+        <tr>
+            <th>#id</th>
+            <th>name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for status in statuses %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert-message info">
+    <p>No statuses to display.</p>
+</div>
+{% endif %}
+
+{% if paginator.haveToPaginate() %}
+    {{ pagerfanta(paginator, 'twitter_bootstrap', {'prev_message': "previous page...", 'next_message': "next page..."}) }}
+{% endif %}
+
+{% endblock %}

@@ -53,9 +53,7 @@ class StatusFormType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('status', 'choice', array(
-                'choice_list' => $this->statusChoiceList,
-            ));
+            ->add('name');
     }
     
     /**
