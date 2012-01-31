@@ -37,12 +37,12 @@ class StatusSorter extends ContainerAware implements SorterInterface
         }
 
         /** @var QueryBuilder */
-        $sortable->orderBy('o.' . $sortProperty, $sortOrder);
+        $sortable->orderBy('s.' . $sortProperty, $sortOrder);
     }
 
     public function getOrder()
     {
-        $sortOrder = $this->container->get('request')->query->get('statuss', 'ASC');
+        $sortOrder = $this->container->get('request')->query->get('status', 'ASC');
         
         if (!in_array($sortOrder, array('ASC', 'DESC'))) {
         
