@@ -5,8 +5,6 @@ namespace Sylius\Bundle\SalesBundle\Form\ChoiceList;
 use Sylius\Bundle\SalesBundle\Model\StatusManager;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
-
 /**
  * Order status choice list.
  *
