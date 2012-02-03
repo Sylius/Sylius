@@ -1,0 +1,28 @@
+{% extends 'SyliusBackendBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Updating Status</h1>
+</div>
+
+<form action="{{ path('sylius_sales_backend_status_update', {'id': status.id}) }}" method="post">
+<fieldset>
+    {{ form_errors(form.name) }}
+    <div class="clearfix">
+    <label for="form[name]">Name</label>
+    <div class="input">
+        {{ form_widget(form.name, {'attr': {'class': 'span7'}}) }}
+    </div>
+    </div>
+</fieldset>
+
+{{ form_rest(form) }}
+
+<div class="actions">
+    <input type="submit" value="Save Changes" class="btn primary medium" />
+</div>
+
+</form>
+
+{% endblock content %}

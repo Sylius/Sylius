@@ -31,61 +31,59 @@ class SyliusSalesExtension extends Extension
     {
         $processor = new Processor();
         $configuration = new Configuration();
-        
+
         $config = $processor->processConfiguration($configuration, $config);
-        
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
-         
+
         if (!in_array($config['driver'], array('ORM'))) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
-        
+
         if (!in_array($config['engine'], array('php', 'twig'))) {
             throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
         }
-        
+
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load(sprintf('engine/%s.xml', $config['engine']));
         
         $container->setParameter('sylius_sales.driver', $config['driver']);
         $container->setParameter('sylius_sales.engine', $config['engine']);
-        
-        $container->setParameter('sylius_sales.statuses', $config['statuses']);
-        
+
         $configurations = array(
             'controllers',
             'processor',
             'manipulators',
             'forms',
         );
-        
+
         if (!empty($config['extensions'])) {
             if (!empty($config['extensions']['confirmation']) && $config['extensions']['confirmation']['enabled']) {
                 $container->setParameter('sylius_sales.extension.confirmation.options', $config['extensions']['confirmation']['options']);
                 $configurations[] = 'extension/confirmation';
             }
         }
-         
+
         foreach($configurations as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
-         
+
         $this->remapParametersNamespaces($config['classes'], $container, array(
-            'model'          => 'sylius_sales.model.%s.class',
-            'manipulator'    => 'sylius_sales.manipulator.%s.class',
+            'model'        => 'sylius_sales.model.%s.class',
+            'manipulator'  => 'sylius_sales.manipulator.%s.class',
         ));
-        
+
         $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
             'backend'      => 'sylius_sales.controller.backend.%s.class',
-            'frontend'	   => 'sylius_sales.controller.frontend.%s.class'
+            'frontend'     => 'sylius_sales.controller.frontend.%s.class'
         ));
-        
+
         $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type'     			     => 'sylius_sales.form.type.%s.class',
+            'type'         => 'sylius_sales.form.type.%s.class',
         ));
     }
 
-	/**
+    /**
      * Remap parameters.
      * 
      * @param $config
@@ -119,6 +117,7 @@ class SyliusSalesExtension extends Extension
             } else {
                 $namespaceConfig = $config;
             }
+
             if (is_array($map)) {
                 $this->remapParameters($namespaceConfig, $container, $map);
             } else {

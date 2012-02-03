@@ -40,9 +40,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
-                ->arrayNode('statuses')
-                    ->requiresAtLeastOneElement()
-                    ->prototype('scalar')
                 ->end()
             ->end();
 
@@ -70,6 +67,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('order')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('item')->defaultValue('')->end()
+                                ->scalarNode('status')->isRequired()->cannotBeEmpty()->end()
                             ->end()
                         ->end()
                         ->arrayNode('controller')
@@ -85,6 +83,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Controller\\Backend\\OrderController')->end()
+                                        ->scalarNode('status')->defaultValue('Sylius\\Bundle\\SalesBundle\\Controller\\Backend\\StatusController')->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -97,6 +96,8 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderFormType')->end()
                                         ->scalarNode('item')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\ItemType')->end()
+                                        ->scalarNode('status')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusFormType')->end()
+                                        ->scalarNode('status_list')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusListFormType')->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -112,7 +113,7 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
     
-	/**
+    /**
      * Adds `extensions` section.
      * 
      * @param ArrayNodeDefinition $node

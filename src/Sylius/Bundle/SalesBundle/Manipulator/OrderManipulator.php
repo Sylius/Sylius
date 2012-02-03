@@ -29,7 +29,7 @@ class OrderManipulator implements OrderManipulatorInterface
         $this->orderManager = $orderManager;
     }
     
-	/**
+    /**
      * {@inheritdoc}
      */
     public function place(OrderInterface $order)
@@ -64,15 +64,15 @@ class OrderManipulator implements OrderManipulatorInterface
         $this->orderManager->removeOrder($order);
     }
     
-	/**
+    /**
      * {@inheritdoc}
      */
     public function status(OrderInterface $order)
     {
         $this->update($order);
     }
-    
-	/**
+
+    /**
      * {@inheritdoc}
      */
     public function confirm(OrderInterface $order)
@@ -80,8 +80,8 @@ class OrderManipulator implements OrderManipulatorInterface
         $order->setConfirmed(true);
         $this->update($order);
     }
-    
-	/**
+
+    /**
      * {@inheritdoc}
      */
     public function close(OrderInterface $order)
@@ -89,8 +89,8 @@ class OrderManipulator implements OrderManipulatorInterface
         $order->setClosed(true);
         $this->update($order);
     }
-    
-	/**
+
+    /**
      * {@inheritdoc}
      */
     public function open(OrderInterface $order)

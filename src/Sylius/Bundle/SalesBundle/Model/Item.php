@@ -47,7 +47,7 @@ abstract class Item implements ItemInterface
         $this->quantity = 0;
     }
     
-	/**
+    /**
      * Returns item id.
      * 
      * @return integer

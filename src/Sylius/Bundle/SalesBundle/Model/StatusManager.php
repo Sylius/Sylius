@@ -1,49 +1,21 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sylius\Bundle\SalesBundle\Model;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
-class StatusManager
+abstract class StatusManager implements StatusManagerInterface
 {
-    protected $statuses;
-    protected $translator;
-    
-    public function __construct(array $statuses, TranslatorInterface $translator = null)
+    protected $class;
+
+    public function __construct($class)
     {
-        $this->statuses = $statuses;
-        $this->translator = $translator;
+        $this->class = $class;
     }
-    
-    public function resolveStatus(OrderInterface $order)
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClass()
     {
-        $this->translateStatus($order->getStatus());
-    }
-    
-    public function translateStatus($status)
-    {
-        if (isset($this->statuses[$status])) {
-            if (null != $this->translator) {
-                return $this->translator->trans($this->statuses[$status], array(), 'Statuses');
-            }
-            
-            return $this->statuses[$status];
-        }
-        
-        throw new \InvalidArgumentException('Wrong status alias supplied.');
-    }
-    
-    public function getStatuses()
-    {
-        return $this->statuses;
+        return $this->class;
     }
 }

@@ -1,18 +1,8 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sylius\Bundle\SalesBundle\Form\ChoiceList;
 
 use Sylius\Bundle\SalesBundle\Model\StatusManager;
-
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
 /**
@@ -22,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
  */
 class StatusChoiceList extends ChoiceList
 {
+    protected $choices;
+
     /**
      * @var StatusManager
      */
@@ -42,6 +34,9 @@ class StatusChoiceList extends ChoiceList
      */
     public function getChoices()
     {
+        $this->choices = $this->statusManager->findStatuses();
+
+/* -- commenting out for now incase translation wants to happen again
         $choices = array();
 
         foreach($this->statusManager->getStatuses() as $id => $status) {
@@ -50,6 +45,7 @@ class StatusChoiceList extends ChoiceList
 
         $this->choices = $choices;
 
+*/
         return parent::getChoices();
     }
 }

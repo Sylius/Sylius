@@ -1,25 +1,10 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sylius\Bundle\SalesBundle\Form\Type;
 
-use Sylius\Bundle\SalesBundle\Form\ChoiceList\StatusChoiceList;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\AbstractType;
 
-/**
- * Order status type.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
 class StatusFormType extends AbstractType
 {
     /**
@@ -30,21 +15,13 @@ class StatusFormType extends AbstractType
     protected $dataClass;
     
     /**
-     * Status choice list.
-     * 
-     * @var StatusChoiceList
-     */
-    protected $statusChoiceList;
-    
-    /**
      * Constructor.
      * 
      * @param string $dataClass
      */
-    public function __construct($dataClass, StatusChoiceList $statusChoiceList)
+    public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
-        $this->statusChoiceList = $statusChoiceList;
     }
     
     /**
@@ -52,10 +29,7 @@ class StatusFormType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder
-            ->add('status', 'choice', array(
-                'choice_list' => $this->statusChoiceList,
-            ));
+        $builder->add('name');
     }
     
     /**

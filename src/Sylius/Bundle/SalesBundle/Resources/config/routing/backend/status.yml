@@ -1,0 +1,19 @@
+sylius_sales_backend_status_list:
+    pattern: /list
+    defaults: { _controller: sylius_sales.controller.backend.status:listAction }
+
+sylius_sales_backend_status_create:
+    pattern: /create
+    defaults: { _controller: sylius_sales.controller.backend.status:createAction }
+
+sylius_sales_backend_status_update:
+    pattern: /{id}/update
+    defaults: { _controller: sylius_sales.controller.backend.status:updateAction }
+
+sylius_sales_backend_status_delete:
+    pattern: /{id}/delete
+    defaults: { _controller: sylius_sales.controller.backend.status:deleteAction }
+
+sylius_sales_backend_status_show:
+    pattern: /{id}
+    defaults: { _controller: sylius_sales.controller.backend.status:showAction }

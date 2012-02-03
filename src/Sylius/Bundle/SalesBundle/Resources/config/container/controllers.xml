@@ -5,16 +5,20 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-    	<service id="sylius_sales.controller.frontend.order" class="%sylius_sales.controller.frontend.order.class%">
+        <service id="sylius_sales.controller.frontend.order" class="%sylius_sales.controller.frontend.order.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service> 
+        </service>
         <service id="sylius_sales.controller.backend.order" class="%sylius_sales.controller.backend.order.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service> 
+        </service>
+        <service id="sylius_sales.controller.backend.status" class="%sylius_sales.controller.backend.status.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
     </services>
-    
 </container>
