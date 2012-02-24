@@ -13,12 +13,12 @@ namespace Sylius\Bundle\SalesBundle\Entity;
 
 use Sylius\Bundle\SalesBundle\Model\ItemInterface;
 
-use Sylius\Bundle\SalesBundle\Model\ItemManager;
+use Sylius\Bundle\SalesBundle\Model\ItemManager as BaseItemManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-class ItemManager extends ItemManager
+class ItemManager extends BaseItemManager
 {
     /**
      * Entity manager.
