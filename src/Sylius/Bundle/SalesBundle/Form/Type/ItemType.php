@@ -56,4 +56,14 @@ class ItemType extends AbstractType
             'data_class' => $this->dataClass
         );
     }
+
+    /**
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
+     */
+    function getName()
+    {
+        return 'sylius_sales_item';
+    }
 }
