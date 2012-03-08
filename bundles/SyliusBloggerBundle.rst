@@ -22,20 +22,21 @@ This can be done in several ways, depending on your preference.
 
 The first method is the standard Symfony2 method.
 
-Using the vendors script
+Using the Composer
 ************************
 
-Add the following lines in your `deps` file. ::
+Add the following lines in your `composer.json` file. ::
 
-    [SyliusBloggerBundle]
-        git=git://github.com/Sylius/SyliusBloggerBundle.git
-        target=bundles/Sylius/Bundle/BloggerBundle
+    "require": {
+        ...
+        "sylius/blogger-bundle": "dev-master"
+    }
 
 Now, run the vendors script to download the bundle.
 
 .. code-block:: bash
 
-    $ php bin/vendors install
+    $ php composer.phar update
 
 Using submodules
 ****************
@@ -46,21 +47,6 @@ If you prefer instead to use git submodules, then run the following lines.
 
     $ git submodule add git://github.com/Sylius/SyliusBloggerBundle.git vendor/bundles/Sylius/Bundle/BloggerBundle
     $ git submodule update --init
-
-Autoloader configuration
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Add the `Sylius\\Bundle` namespace to your autoloader.
-
-.. code-block:: php
-
-    <?php
-
-    // app/autoload.php
-
-    $loader->registerNamespaces(array(
-        'Sylius\\Bundle' => __DIR__.'/../vendor/bundles'
-    ));
 
 Adding bundle to kernel
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,9 +70,22 @@ Finally, enable the bundle in the kernel...
 Importing routing configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. code-block:: yaml
 
-    This part is not written yet.
+    sylius_blogger_category:
+        resource: @SyliusBloggerBundle/Resources/config/routing/frontend/post.yml
+        prefix: /administration/posts
+
+    sylius_blogger_backend:
+        resource: @SyliusBloggerBundle/Resources/config/routing/backend/post.yml
+        prefix: /administration/blog/posts
+
+Or in XML format: 
+
+.. code-block:: xml
+    
+    <import resource="@SyliusBloggerBundle/Resources/config/routing/frontend/post.yml" prefix="/blog/posts"/>
+    <import resource="@SyliusBloggerBundle/Resources/config/routing/backend/post.yml" prefix="/administration/blog/posts" />
 
 Container configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,16 +108,39 @@ For "**ORM**" driver run the following command.
 Usage guide
 -----------
 
-.. note::
+Create PostType class:
 
-    This part is not written yet.
+.. code-block:: php
+
+    <?php
+    namespace MyApp\Sylius\BloggerBundle\Form\Type;
+
+    use Sylius\Bundle\BloggerBundle\Form\Type\PostType as BasePostType;
+    use Symfony\Component\Form\FormBuilder;
+
+    class PostType extends BasePostType
+    {
+        public function buildForm(FormBuilder $builder, array $options) 
+        {
+            parent::buildForm($builder, $options);
+            // ...
+        }
+    }
 
 Configuration reference
 -----------------------
 
-.. note::
+.. code-block:: yaml
 
-    This part is not written yet.
+    sylius_blogger:
+        driver: doctrine/orm
+        engine: twig # or php
+        classes:
+            model:
+                post: MyApp\Sylius\BloggerBundle\Entity\Post
+            form:
+                type:
+                    post: MyApp\Sylius\BloggerBundle\Form\Type\PostType 
                 
 Testing and continous integration
 ----------------------------------
