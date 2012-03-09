@@ -108,6 +108,27 @@ For "**ORM**" driver run the following command.
 Usage guide
 -----------
 
+Set your blogger bundle as a child of SyliusBloggerBundle. Add following lines to `MyAppSyliusBloggerBundel.php`:
+
+.. code-block:: php
+    public function getParent()
+    {
+        return 'SyliusBloggerBundle';
+    }
+
+
+Create Post class:
+
+.. code-block:: php
+    <?php
+    namespace MyApp\Sylius\BloggerBundle\Entity\Post;
+
+    use Sylius\Bundle\BloggerBundle\Entity\Post as BasePost;
+
+    class Post extends BasePost
+    {
+    }
+
 Create PostType class:
 
 .. code-block:: php
