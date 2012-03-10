@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Addressing system extension.
@@ -33,7 +33,7 @@ class SyliusAddressingExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
 
-        if (!in_array($config['driver'], array('ORM'))) {
+        if (!in_array($config['driver'], array('doctrine/orm'))) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
@@ -49,8 +49,8 @@ class SyliusAddressingExtension extends Extension
 
         $configurations = array(
             'controllers',
-            'manipulators',
             'forms',
+            'manipulators'
         );
 
         foreach($configurations as $basename) {
@@ -58,8 +58,8 @@ class SyliusAddressingExtension extends Extension
         }
 
         $this->remapParametersNamespaces($config['classes'], $container, array(
-            'model'       => 'sylius_addressing.model.%s.class',
-            'manipulator' => 'sylius_addressing.manipulator.%s.class'
+            'manipulator' => 'sylius_addressing.manipulator.%s.class',
+            'model'       => 'sylius_addressing.model.%s.class'
         ));
 
         $this->remapParametersNamespaces($config['classes']['form'], $container, array(
@@ -72,7 +72,7 @@ class SyliusAddressingExtension extends Extension
         ));
     }
 
-  	/**
+    /**
      * Remap parameters.
      */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

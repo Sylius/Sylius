@@ -19,7 +19,7 @@ use Symfony\Component\Form\AbstractType;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-abstract class AddressFormType extends AbstractType
+abstract class AddressType extends AbstractType
 {
     /**
      * Data class.
