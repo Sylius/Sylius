@@ -48,6 +48,21 @@ If you prefer instead to use git submodules, then run the following lines.
     $ git submodule add git://github.com/Sylius/SyliusBloggerBundle.git vendor/bundles/Sylius/Bundle/BloggerBundle
     $ git submodule update --init
 
+Autoloader configuration
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add the `Sylius\\Bundle` namespace to your autoloader.
+
+.. code-block:: php
+
+    <?php
+
+    // app/autoload.php
+
+    $loader->registerNamespaces(array(
+        'Sylius\\Bundle' => __DIR__.'/../vendor/bundles'
+    ));
+
 Adding bundle to kernel
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -72,20 +87,20 @@ Importing routing configuration
 
 .. code-block:: yaml
 
-    sylius_blogger_category:
+    sylius_blogger_post:
         resource: @SyliusBloggerBundle/Resources/config/routing/frontend/post.yml
-        prefix: /administration/posts
+        prefix: /posts
 
-    sylius_blogger_backend:
+    sylius_blogger_backend_post:
         resource: @SyliusBloggerBundle/Resources/config/routing/backend/post.yml
-        prefix: /administration/blog/posts
+        prefix: /administration/posts
 
 Or in XML format: 
 
 .. code-block:: xml
     
-    <import resource="@SyliusBloggerBundle/Resources/config/routing/frontend/post.yml" prefix="/blog/posts"/>
-    <import resource="@SyliusBloggerBundle/Resources/config/routing/backend/post.yml" prefix="/administration/blog/posts" />
+    <import resource="@SyliusBloggerBundle/Resources/config/routing/frontend/post.yml" prefix="/posts" />
+    <import resource="@SyliusBloggerBundle/Resources/config/routing/backend/post.yml" prefix="/administration/posts" />
 
 Container configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,7 +123,7 @@ For "**ORM**" driver run the following command.
 Usage guide
 -----------
 
-Set your blogger bundle as a child of SyliusBloggerBundle. Add following lines to `MyAppSyliusBloggerBundel.php`:
+Set your blogger bundle as a child of SyliusBloggerBundle. Add following lines to `ApplicationSyliusBloggerBundel.php`:
 
 .. code-block:: php
     public function getParent()
@@ -121,7 +136,7 @@ Create Post class:
 
 .. code-block:: php
     <?php
-    namespace MyApp\Sylius\BloggerBundle\Entity\Post;
+    namespace Application\Sylius\BloggerBundle\Entity\Post;
 
     use Sylius\Bundle\BloggerBundle\Entity\Post as BasePost;
 
@@ -134,7 +149,7 @@ Create PostType class:
 .. code-block:: php
 
     <?php
-    namespace MyApp\Sylius\BloggerBundle\Form\Type;
+    namespace Application\Sylius\BloggerBundle\Form\Type;
 
     use Sylius\Bundle\BloggerBundle\Form\Type\PostType as BasePostType;
     use Symfony\Component\Form\FormBuilder;
@@ -158,10 +173,10 @@ Configuration reference
         engine: twig # or php
         classes:
             model:
-                post: MyApp\Sylius\BloggerBundle\Entity\Post
+                post: Application\Sylius\BloggerBundle\Entity\Post
             form:
                 type:
-                    post: MyApp\Sylius\BloggerBundle\Form\Type\PostType 
+                    post: Application\Sylius\BloggerBundle\Form\Type\PostType 
                 
 Testing and continous integration
 ----------------------------------
