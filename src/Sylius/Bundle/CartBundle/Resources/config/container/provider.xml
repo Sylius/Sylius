@@ -4,16 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="sylius_cart.provider.class">Sylius\Bundle\CartBundle\Provider\Provider</parameter>
-    </parameters>
-
     <services>
-    	<service id="sylius_cart.provider" class="%sylius_cart.provider.class%">
-    	   <call method="setContainer">
+        <service id="sylius_cart.provider" class="%sylius_cart.provider.class%">
+           <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-    	</service>
+        </service>
     </services>
-    
+
 </container>
