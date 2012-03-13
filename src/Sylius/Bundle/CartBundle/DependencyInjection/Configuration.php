@@ -42,7 +42,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
                 ->scalarNode('operator')->cannotBeOverwritten()->cannotBeEmpty()->end()
-                ->scalarNode('provider')->defaultValue('Sylius\\Bundle\\CartBundle\\Provider\\Provider')->cannotBeEmpty()->end()
+                ->arrayNode('provider')
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Sylius\\Bundle\\CartBundle\\Provider\\Provider')->cannotBeEmpty()->end()
+                    ->end()
             ->end();
         
         $this->addClassesSection($rootNode);
