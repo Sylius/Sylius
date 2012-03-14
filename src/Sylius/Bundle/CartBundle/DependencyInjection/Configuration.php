@@ -42,20 +42,16 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
                 ->scalarNode('operator')->cannotBeOverwritten()->cannotBeEmpty()->end()
-                ->arrayNode('provider')
-                    ->children()
-                        ->scalarNode('class')->defaultValue('Sylius\\Bundle\\CartBundle\\Provider\\Provider')->cannotBeEmpty()->end()
-                    ->end()
             ->end();
-        
+
         $this->addClassesSection($rootNode);
 
         return $treeBuilder;
     }
-    
+
     /**
      * Adds `classes` section.
-     * 
+     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)
@@ -66,6 +62,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('provider')->defaultValue('Sylius\\Bundle\\CartBundle\\Provider\\Provider')->end()
                         ->arrayNode('model')
                             ->isRequired()
                             ->children()
