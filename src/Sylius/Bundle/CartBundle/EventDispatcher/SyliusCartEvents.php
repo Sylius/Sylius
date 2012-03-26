@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CartBundle\EventDispatcher;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class SyliusCartsEvents
+final class SyliusCartEvents
 {
     const ITEM_ADD    = 'sylius_cart.event.item.add';
     const ITEM_REMOVE = 'sylius_cart.event.item.remove';
