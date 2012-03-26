@@ -9,54 +9,57 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Entity;
+namespace Sylius\Bundle\CartsBundle\Entity;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Model\CartManager as BaseCartManager;
-use Symfony\Component\HttpFoundation\Session;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\CartsBundle\Model\CartInterface;
+use Sylius\Bundle\CartsBundle\Model\CartManager as BaseCartManager;
 
 /**
- * Cart manager.
- * 
+ * Cart manager for doctrine/orm driver.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CartManager extends BaseCartManager
 {
     /**
      * Entity Manager.
-     * 
+     *
      * @var EntityManager
      */
     protected $entityManager;
-    
+
     /**
      * Carts repository.
+     *
+     * @var EntityRepository
      */
     protected $repository;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager, $class)
     {
         parent::__construct($class);
-        
-        $this->entityManager = $entityManager; 
+
+        $this->entityManager = $entityManager;
         $this->repository = $this->entityManager->getRepository($class);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function createCart()
     {
         $class = $this->getClass();
+
         return new $class;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -65,7 +68,7 @@ class CartManager extends BaseCartManager
         $this->entityManager->persist($cart);
         $this->entityManager->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -74,23 +77,26 @@ class CartManager extends BaseCartManager
         $this->entityManager->remove($cart);
         $this->entityManager->flush();
     }
-    
-    public function flushCarts()
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearCarts()
     {
         $expiredCarts = $this->entityManager->createQueryBuilder()
             ->select('c')
             ->from($this->getClass(), 'c')
             ->where('c.locked = false AND c.expiresAt < ?1')
-            ->setParameter(1, new \DateTime)
+            ->setParameter(1, new \DateTime("now"))
             ->getQuery()
             ->getResult()
         ;
-        
+
         foreach ($expiredCarts as $cart) {
             $this->removeCart($cart);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -98,7 +104,7 @@ class CartManager extends BaseCartManager
     {
         return $this->repository->find($id);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -106,7 +112,7 @@ class CartManager extends BaseCartManager
     {
         return $this->repository->findOneBy($criteria);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -114,7 +120,7 @@ class CartManager extends BaseCartManager
     {
         return $this->repository->findAll();
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
+namespace Sylius\Bundle\CartsBundle\Model;
 
 /**
  * Base class for cart model manager.
@@ -20,21 +20,21 @@ abstract class CartManager implements CartManagerInterface
 {
     /**
      * FQCN of cart model.
-     * 
+     *
      * @var string
      */
     protected $class;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $class FQCN of cart model
      */
     public function __construct($class)
     {
         $this->class = $class;
     }
-    
+
     /**
      * {@inheritdoc}
      */

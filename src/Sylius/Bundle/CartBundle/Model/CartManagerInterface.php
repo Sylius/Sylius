@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
+namespace Sylius\Bundle\CartsBundle\Model;
 
 /**
  * Interface for cart manager.
@@ -18,62 +18,66 @@ namespace Sylius\Bundle\CartBundle\Model;
  */
 interface CartManagerInterface
 {
+/* }}} */
     /**
      * Creates a new cart instance.
-     * 
+     *
      * @return CartInterface
      */
     function createCart();
-    
+
     /**
      * Persists cart object.
-     * 
+     *
      * @param CartInterface $cart
      */
     function persistCart(CartInterface $cart);
-    
+
     /**
      * Removes cart object.
-     * 
+     *
      * @param CartInterface $cart
      */
     function removeCart(CartInterface $cart);
-    
-    function flushCarts();
-    
+
+    /**
+     * Removes all saved carts that are expired.
+     */
+    function clearCarts();
+
     /**
      * Finds cart by id.
-     * 
+     *
      * @param $id
-     * 
+     *
      * @return CartInterface|null
      */
     function findCart($id);
-    
+
     /**
      * Finds cart by given criteria.
-     * 
+     *
      * @param array $criteria
      */
     function findCartBy(array $criteria);
-    
+
     /**
      * Finds all carts.
-     * 
+     *
      * @return array
      */
     function findCarts();
-    
+
     /**
      * Finds carts by criteria.
-     * 
+     *
      * @param array $criteria
      */
     function findCartsBy(array $criteria);
-    
+
     /**
      * Returns FQCN of cart model.
-     * 
+     *
      * @return string
      */
     function getClass();

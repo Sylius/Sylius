@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\EventDispatcher;
+namespace Sylius\Bundle\CartsBundle\EventDispatcher;
 
 /**
  * Events.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class SyliusCartEvents
+final class SyliusCartsEvents
 {
-    const ITEM_ADD = 'sylius_cart.event.item.add';
+    const ITEM_ADD    = 'sylius_cart.event.item.add';
     const ITEM_REMOVE = 'sylius_cart.event.item.remove';
     const CART_UPDATE = 'sylius_cart.event.cart.update';
-    const CART_CLEAR = 'sylius_cart.event.cart.clear';
-    const CART_FLUSH = 'sylius_cart.event.cart.flush';
+    const CART_CLEAR  = 'sylius_cart.event.cart.clear';
+    const CART_FLUSH  = 'sylius_cart.event.cart.flush';
 }

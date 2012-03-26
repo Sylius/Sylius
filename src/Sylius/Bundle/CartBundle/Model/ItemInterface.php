@@ -13,14 +13,43 @@ namespace Sylius\Bundle\CartBundle\Model;
 
 /**
  * Interface for cart item model.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ItemInterface
 {
+    /**
+     * Returns cart id.
+     *
+     * @return mixed
+     */
     function getId();
+
+    /**
+     * Returns associated cart.
+     *
+     * @return CartInterface
+     */
     function getCart();
+
+    /**
+     * Sets cart.
+     *
+     * @param CartInterface
+     */
     function setCart(CartInterface $cart = null);
+
+    /**
+     * Returns quantity.
+     *
+     * @return integer
+     */
     function getQuantity();
+
+    /**
+     * Sets quantity.
+     *
+     * @param $quantity
+     */
     function setQuantity($quantity);
 }

@@ -9,55 +9,78 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
+namespace Sylius\Bundle\CartsBundle\Model;
 
 /**
  * Model for cart items.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 abstract class Item implements ItemInterface
 {
+    /**
+     * Id.
+     *
+     * @var mixed
+     */
     protected $id;
-    
+
     /**
      * Cart.
-     * 
+     *
      * @var CartInterface
      */
     protected $cart;
-    
+
+    /**
+     * Quantity.
+     *
+     * @var integer
+     */
     protected $quantity;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->quantity = 0;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function getQuantity()
     {
         return $this->quantity;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCart()
     {
         return $this->cart;
     }
-    
+
     /**
-     * Sets cart.
-     * 
-     * @param CartInterface $cart
+     * {@inheritdoc}
      */
     public function setCart(CartInterface $cart = null)
     {

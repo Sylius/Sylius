@@ -9,60 +9,62 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
+namespace Sylius\Bundle\CartsBundle\Model;
 
 /**
  * Model for carts.
- * 
+ * All driver entities and documents should extend this class or implement
+ * proper interface.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 abstract class Cart implements CartInterface
-{   
+{
     /**
- 	 * Id.
- 	 * 
- 	 * @var integer
+     * Id.
+     *
+     * @var integer
      */
     protected $id;
-    
+
     /**
      * Items in cart.
-     * 
+     *
      * @var array
      */
     protected $items;
-    
+
     /**
      * Total items count.
-     * 
+     *
      * @var integer
      */
     protected $totalItems;
-    
+
     /**
      * Locked.
-     * 
+     *
      * @var Boolean
      */
     protected $locked;
-    
+
     /**
      * Expiration time.
-     * 
+     *
      * @var \DateTime
      */
     protected $expiresAt;
-    
+
     /**
      * Constructor.
      */
     public function __construct()
-    {   
+    {
         $this->totalItems = 0;
         $this->locked = false;
         $this->incrementExpiresAt();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -70,22 +72,31 @@ abstract class Cart implements CartInterface
     {
         return $this->id;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function isLocked()
     {
         return $this->locked;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function setLocked($locked)
     {
         $this->locked = $locked;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function incrementTotalItems($amount = 1)
     {
         $this->totalItems += $amount;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -93,7 +104,7 @@ abstract class Cart implements CartInterface
     {
         $this->totalItems = $totalItems;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -101,7 +112,7 @@ abstract class Cart implements CartInterface
     {
         return $this->totalItems;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -109,7 +120,7 @@ abstract class Cart implements CartInterface
     {
         return 0 === $this->countItems();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -117,7 +128,10 @@ abstract class Cart implements CartInterface
     {
         return $this->items;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function setItems($items)
     {
         $this->items = $items;
@@ -144,7 +158,7 @@ abstract class Cart implements CartInterface
         return $this;
     }
 
-   /**
+    /**
      * {@inheritdoc}
      */
     public function removeItem(ItemInterface $item)
@@ -155,7 +169,7 @@ abstract class Cart implements CartInterface
             $item->setCart(null);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -163,7 +177,7 @@ abstract class Cart implements CartInterface
     {
         return $this === $item->getCart();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -171,12 +185,15 @@ abstract class Cart implements CartInterface
     {
         $this->items = array();
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function isExpired()
     {
         return $this->getExpiresAt() < new \DateTime;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -184,7 +201,7 @@ abstract class Cart implements CartInterface
     {
         return $this->expiresAt;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -192,7 +209,7 @@ abstract class Cart implements CartInterface
     {
         $this->expiresAt = $expiresAt;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -200,7 +217,7 @@ abstract class Cart implements CartInterface
     {
         $expiresAt = new \DateTime();
         $expiresAt->add(new \DateInterval('PT3H'));
-        
+
         $this->expiresAt = $expiresAt;
     }
 }

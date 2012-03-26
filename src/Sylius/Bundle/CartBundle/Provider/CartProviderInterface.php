@@ -9,15 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle;
+namespace Sylius\Bundle\CartBundle\Provider;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 
-/**
- * Bundle of cart system.
- * 
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
-class SyliusCartBundle extends Bundle
+interface CartProviderInterface
 {
+    function getCart();
+    function setCart(CartInterface $cart);
 }

@@ -9,39 +9,61 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Operator;
+namespace Sylius\Bundle\CartsBundle\Operator;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Model\ItemInterface;
+use Sylius\Bundle\CartsBundle\Model\CartInterface;
+use Sylius\Bundle\CartsBundle\Model\ItemInterface;
 
 /**
  * Interface for cart operator.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OperatorInterface
+interface CartOperatorInterface
 {
-	/**
-     * Builds proper item and adds it to cart.
-     * If item exists just increases the quantity.
-     * 
+    /**
+     * Adds item to cart.
+     *
      * @param CartInterface $cart
      * @param ItemInterface	$item
      */
     function addItem(CartInterface $cart, ItemInterface $item);
-    
+
     /**
      * Removes item from cart.
-     * 
+     *
      * @param CartInterface $cart
      * @param ItemInterface $item
      */
     function removeItem(CartInterface $cart, ItemInterface $item);
-    
+
     /**
      * Refreshes cart data.
-     * 
+     *
      * @param CartInterface $cart
      */
-    function refreshCart(CartInterface $cart);
+    function refresh(CartInterface $cart);
+
+    /**
+     * Validates cart.
+     *
+     * @param CartInterface $cart
+     *
+     * @return Boolean
+     */
+    function validate(CartInterface $cart);
+
+    /**
+     * Saves cart at current state.
+     *
+     * @param CartInterface $cart
+     */
+    function save(CartInterface $cart);
+
+    /**
+     * Clears current cart.
+     *
+     * @param CartInterface $cart
+     */
+    function clear(CartInterface $cart);
 }

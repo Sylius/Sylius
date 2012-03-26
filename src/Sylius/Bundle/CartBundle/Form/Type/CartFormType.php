@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * Cart form form.
@@ -23,21 +23,21 @@ class CartFormType extends AbstractType
 {
     /**
      * Data class.
-     * 
+     *
      * @var string
      */
     protected $dataClass;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $dataClass
      */
     public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -47,7 +47,7 @@ class CartFormType extends AbstractType
             'type' => 'sylius_cart_item',
         ));
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -57,12 +57,12 @@ class CartFormType extends AbstractType
             'data_class' => $this->dataClass
         );
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'sylius_cart';
+        return 'sylius_carts_cart';
     }
 }

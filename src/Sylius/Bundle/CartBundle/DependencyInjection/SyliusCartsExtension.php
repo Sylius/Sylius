@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\DependencyInjection;
+namespace Sylius\Bundle\CartsBundle\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Cart extension.
+ * Carts extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartExtension extends Extension
+class SyliusCartsExtension extends Extension
 {
     /**
-     * @see Extension/Symfony\Component\DependencyInjection\Extension.ExtensionInterface::load()
+     * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
@@ -36,7 +36,7 @@ class SyliusCartExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
 
-        if (!in_array($config['driver'], array('ORM'))) {
+        if (!in_array($config['driver'], array('doctrine/orm'))) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
@@ -47,17 +47,19 @@ class SyliusCartExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load(sprintf('engine/%s.xml', $config['engine']));
 
-        $container->setParameter('sylius_cart.driver', $config['driver']);
-        $container->setParameter('sylius_cart.engine', $config['engine']);
+        $container->setParameter('sylius_carts.driver', $config['driver']);
+        $container->setParameter('sylius_carts.engine', $config['engine']);
 
-        $container->setAlias('sylius_cart.operator', $config['operator']);
+        $container->setAlias('sylius_carts.operator', $config['operator']);
+        $container->setAlias('sylius_carts.resolver', $config['resolver']);
+        $container->setAlias('sylius_carts.storage', $config['storage']);
 
-        $container->setParameter('sylius_cart.provider.class', $config['classes']['provider']);
+        $container->setParameter('sylius_carts.provider.class', $config['classes']['provider']);
 
         $configurations = array(
             'controllers',
             'forms',
-            'provider',
+            'provider'
         );
 
         foreach($configurations as $basename) {
@@ -65,27 +67,20 @@ class SyliusCartExtension extends Extension
         }
 
         $this->remapParametersNamespaces($config['classes'], $container, array(
-            'model'      => 'sylius_cart.model.%s.class',
-            'listener'    => 'sylius_cart.listener.%s.class',
+            'listener' => 'sylius_carts.listener.%s.class',
+            'model'    => 'sylius_carts.model.%s.class',
         ));
 
         $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
-            'backend'      => 'sylius_cart.controller.backend.%s.class',
-            'frontend'	   => 'sylius_cart.controller.frontend.%s.class'
+            'backend'  => 'sylius_carts.controller.backend.%s.class',
+            'frontend' => 'sylius_carts.controller.frontend.%s.class'
         ));
 
         $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type'      => 'sylius_cart.form.type.%s.class',
+            'type' => 'sylius_carts.form.type.%s.class',
         ));
     }
 
-    /**
-     * Remap parameters.
-     *
-     * @param $config
-     * @param ContainerBuilder $container
-     * @param $map
-     */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
@@ -95,13 +90,6 @@ class SyliusCartExtension extends Extension
         }
     }
 
-    /**
-     * Remap parameter namespaces.
-     *
-     * @param $config
-     * @param ContainerBuilder $container
-     * @param $map
-     */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {

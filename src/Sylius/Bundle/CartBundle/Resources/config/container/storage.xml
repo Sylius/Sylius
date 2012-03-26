@@ -6,10 +6,13 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
 
+    <parameters>
+        <parameter key="sylius_carts.storage.session.class">Sylius\Bundle\CartsBundle\Storage\SessionCartStorage</parameter>
+    </parameters>
+
     <services>
-        <service id="sylius_carts.provider" class="%sylius_carts.provider.class%">
-            <argument type="service" id="sylius_carts.storage" />
-            <argument type="service" id="sylius_carts.manager.cart" />
+        <service id="sylius_carts.storage.session" class="%sylius_carts.storage.session.class%">
+            <argument type="service" id="session" />
         </service>
     </services>
 

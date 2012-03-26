@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\DependencyInjection;
+namespace Sylius\Bundle\CartsBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -27,14 +26,12 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * Generates the configuration tree.
-     *
-     * @return \Symfony\Component\DependencyInjection\Configuration\NodeInterface
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_cart');
+        $rootNode = $treeBuilder->root('sylius_carts');
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -42,6 +39,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
                 ->scalarNode('operator')->cannotBeOverwritten()->cannotBeEmpty()->end()
+                ->scalarNode('storage')->defaultValue('sylius_carts.storage.session')->end()
             ->end();
 
         $this->addClassesSection($rootNode);

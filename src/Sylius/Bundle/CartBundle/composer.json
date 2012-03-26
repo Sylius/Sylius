@@ -1,29 +1,31 @@
 {
-    "name": "sylius/cart-bundle",
+    "name": "sylius/carts-bundle",
     "type": "symfony-bundle",
-    "description": "Cart feature for your Symfony2 applications.",
-    "keywords": ["shop", "ecommerce", "cart"],
+    "description": "Carts feature for your next Symfony2 application. Clean architecture and simple usage.",
+    "keywords": ["shop", "ecommerce", "cart", "carts"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl"
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
+            "homepage": "https://github.com/Sylius/SyliusCartsBundle/contributors"
         }
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/symfony": "2.*"
+
+        "symfony/symfony": "2.1.*"
     },
     "suggest": {
-        "symfony/doctrine-bundle": "*"
+        "doctrine/doctrine-bundle": "*"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CartBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\CartsBundle": "" }
     },
-    "target-dir": "Sylius/Bundle/CartBundle"
+    "target-dir": "Sylius/Bundle/CartsBundle"
 }

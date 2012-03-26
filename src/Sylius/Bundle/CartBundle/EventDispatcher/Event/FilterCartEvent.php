@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\EventDispatcher\Event;
 
-use Symfony\Component\EventDispatcher\Event;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Filter cart event.
@@ -21,13 +21,28 @@ use Sylius\Bundle\CartBundle\Model\CartInterface;
  */
 class FilterCartEvent extends Event
 {
+    /**
+     * Cart.
+     *
+     * @var CartInterface
+     */
     protected $cart;
-    
+
+    /**
+     * Constructor.
+     *
+     * @param CartInterface $cart
+     */
     public function __construct(CartInterface $cart)
     {
         $this->cart = $cart;
     }
-    
+
+    /**
+     * Returns cart.
+     *
+     * @return CartInterface
+     */
     public function getCart()
     {
         return $this->cart;
