@@ -7,7 +7,7 @@
 >
 
     <services>
-        <service id="sylius_carts.controller.frontend.cart" class="%sylius_carts.controller.frontend.cart.class%">
+        <service id="sylius_cart.controller.frontend.cart" class="%sylius_cart.controller.frontend.cart.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

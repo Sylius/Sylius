@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Twig;
+namespace Sylius\Bundle\CartBundle\Twig;
 
-use Sylius\Bundle\CartsBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Twig_Extension;
 use Twig_Function_Method;
 
@@ -45,7 +45,7 @@ class SyliusCartsExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_carts_get'         => new Twig_Function_Method($this, 'getCurrentCart'),
+            'sylius_cart_get'         => new Twig_Function_Method($this, 'getCurrentCart'),
         );
     }
 
@@ -64,6 +64,6 @@ class SyliusCartsExtension extends Twig_Extension
      */
     public function getName()
     {
-        return 'sylius_carts';
+        return 'sylius_cart';
     }
 }

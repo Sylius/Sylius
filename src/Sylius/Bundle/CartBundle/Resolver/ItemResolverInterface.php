@@ -9,6 +9,6 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Resolver;
+namespace Sylius\Bundle\CartBundle\Resolver;
 
 c

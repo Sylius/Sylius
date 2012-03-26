@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Operator;
+namespace Sylius\Bundle\CartBundle\Operator;
 
-use Sylius\Bundle\CartsBundle\Model\CartInterface;
-use Sylius\Bundle\CartsBundle\Model\CartManagerInterface;
-use Sylius\Bundle\CartsBundle\Model\ItemInterface;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\CartBundle\Model\CartManagerInterface;
+use Sylius\Bundle\CartBundle\Model\ItemInterface;
 
 /**
  * Base class for cart operator.

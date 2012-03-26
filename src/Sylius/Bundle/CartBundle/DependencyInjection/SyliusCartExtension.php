@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\DependencyInjection;
+namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -47,14 +47,14 @@ class SyliusCartsExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load(sprintf('engine/%s.xml', $config['engine']));
 
-        $container->setParameter('sylius_carts.driver', $config['driver']);
-        $container->setParameter('sylius_carts.engine', $config['engine']);
+        $container->setParameter('sylius_cart.driver', $config['driver']);
+        $container->setParameter('sylius_cart.engine', $config['engine']);
 
-        $container->setAlias('sylius_carts.operator', $config['operator']);
-        $container->setAlias('sylius_carts.resolver', $config['resolver']);
-        $container->setAlias('sylius_carts.storage', $config['storage']);
+        $container->setAlias('sylius_cart.operator', $config['operator']);
+        $container->setAlias('sylius_cart.resolver', $config['resolver']);
+        $container->setAlias('sylius_cart.storage', $config['storage']);
 
-        $container->setParameter('sylius_carts.provider.class', $config['classes']['provider']);
+        $container->setParameter('sylius_cart.provider.class', $config['classes']['provider']);
 
         $configurations = array(
             'controllers',
@@ -67,17 +67,17 @@ class SyliusCartsExtension extends Extension
         }
 
         $this->remapParametersNamespaces($config['classes'], $container, array(
-            'listener' => 'sylius_carts.listener.%s.class',
-            'model'    => 'sylius_carts.model.%s.class',
+            'listener' => 'sylius_cart.listener.%s.class',
+            'model'    => 'sylius_cart.model.%s.class',
         ));
 
         $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
-            'backend'  => 'sylius_carts.controller.backend.%s.class',
-            'frontend' => 'sylius_carts.controller.frontend.%s.class'
+            'backend'  => 'sylius_cart.controller.backend.%s.class',
+            'frontend' => 'sylius_cart.controller.frontend.%s.class'
         ));
 
         $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type' => 'sylius_carts.form.type.%s.class',
+            'type' => 'sylius_cart.form.type.%s.class',
         ));
     }
 

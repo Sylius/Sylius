@@ -7,9 +7,9 @@
 >
 
     <services>
-        <service id="sylius_carts.provider" class="%sylius_carts.provider.class%">
-            <argument type="service" id="sylius_carts.storage" />
-            <argument type="service" id="sylius_carts.manager.cart" />
+        <service id="sylius_cart.provider" class="%sylius_cart.provider.class%">
+            <argument type="service" id="sylius_cart.storage" />
+            <argument type="service" id="sylius_cart.manager.cart" />
         </service>
     </services>
 

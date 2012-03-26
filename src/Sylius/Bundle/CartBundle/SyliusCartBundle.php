@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle;
+namespace Sylius\Bundle\CartBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -19,6 +19,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartsBundle extends Bundle
+class SyliusCartBundle extends Bundle
 {
 }

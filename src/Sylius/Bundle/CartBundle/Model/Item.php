@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Model;
+namespace Sylius\Bundle\CartBundle\Model;
 
 /**
  * Model for cart items.

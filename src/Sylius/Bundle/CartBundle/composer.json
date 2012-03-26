@@ -13,7 +13,7 @@
         },
         {
             "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusCartsBundle/contributors"
+            "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
         }
     ],
     "require": {
@@ -25,7 +25,7 @@
         "doctrine/doctrine-bundle": "*"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CartsBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\CartBundle": "" }
     },
-    "target-dir": "Sylius/Bundle/CartsBundle"
+    "target-dir": "Sylius/Bundle/CartBundle"
 }

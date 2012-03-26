@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Entity;
+namespace Sylius\Bundle\CartBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\CartsBundle\Model\CartInterface;
-use Sylius\Bundle\CartsBundle\Model\CartManager as BaseCartManager;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\CartBundle\Model\CartManager as BaseCartManager;
 
 /**
  * Cart manager for doctrine/orm driver.

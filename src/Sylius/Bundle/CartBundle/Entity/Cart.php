@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Entity;
+namespace Sylius\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\CartsBundle\Model\Cart as BaseCart;
-use Sylius\Bundle\CartsBundle\Model\ItemInterface;
+use Sylius\Bundle\CartBundle\Model\Cart as BaseCart;
+use Sylius\Bundle\CartBundle\Model\ItemInterface;
 
 /**
  * Cart entity.

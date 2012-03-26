@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Command;
+namespace Sylius\Bundle\CartBundle\Command;
 
 use Sylius\Bundle\CartBundle\EventDispatcher\SyliusCartEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

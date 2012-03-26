@@ -34,7 +34,7 @@ class CartController extends ContainerAware
      */
     public function showAction()
     {
-        $cart = $this->container->get('sylius_carts.provider')->getCart();
+        $cart = $this->container->get('sylius_cart.provider')->getCart();
 
         $form = $this->container->get('form.factory')->create('sylius_cart_show');
         $form->setData($cart);
@@ -54,8 +54,8 @@ class CartController extends ContainerAware
      */
     public function addItemAction(Request $request)
     {
-        $cart = $this->container->get('sylius_carts.provider')->getCart();
-        $item = $this->container->get('sylius_carts.resolver')->resolveItemToAdd($request);
+        $cart = $this->container->get('sylius_cart.provider')->getCart();
+        $item = $this->container->get('sylius_cart.resolver')->resolveItemToAdd($request);
 
         if (!$item) {
             throw new NotFoundHttpException('Requested item could not be added to cart');
@@ -63,7 +63,7 @@ class CartController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::ITEM_ADD, new CartOperationEvent($cart, $item));
 
-        $cartOperator = $this->container->get('sylius_carts.operator');
+        $cartOperator = $this->container->get('sylius_cart.operator');
         $cartOperator->addItem($cart, $item);
         $cartOperator->refresh($cart);
         $cartOperator->save($cart);
@@ -80,8 +80,8 @@ class CartController extends ContainerAware
      */
     public function removeItemAction(Request $request)
     {
-        $cart = $this->container->get('sylius_carts.provider')->getCart();
-        $item = $this->container->get('sylius_carts.resolver')->resolveItemToRemove($request);
+        $cart = $this->container->get('sylius_cart.provider')->getCart();
+        $item = $this->container->get('sylius_cart.resolver')->resolveItemToRemove($request);
 
         if (!$item) {
             throw new NotFoundHttpException('Requested item could not be removed from cart');
@@ -89,7 +89,7 @@ class CartController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::ITEM_REMOVE, new CartOperationEvent($cart, $item));
 
-        $cartOperator = $this->container->get('sylius_carts.operator');
+        $cartOperator = $this->container->get('sylius_cart.operator');
         $cartOperator->removeItem($cart, $item);
         $cartOperator->refresh($cart);
         $cartOperator->save($cart);
@@ -106,14 +106,14 @@ class CartController extends ContainerAware
      */
     public function saveAction(Request $request)
     {
-        $cart = $this->container->get('sylius_carts.provider')->getCart();
+        $cart = $this->container->get('sylius_cart.provider')->getCart();
 
-        $form = $this->container->get('form.factory')->create('sylius_cartss_cart');
+        $form = $this->container->get('form.factory')->create('sylius_carts_cart');
         $form->setData($cart);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $cartOperator = $this->container->get('sylius_carts.operator');
+            $cartOperator = $this->container->get('sylius_cart.operator');
 
             if ($cartOperator->validate($cart)) {
                 $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_SAVE, new FilterCartEvent($cart));
@@ -132,7 +132,7 @@ class CartController extends ContainerAware
      */
     public function clearAction()
     {
-        $this->container->get('sylius_carts.operator')->clear($this->container->get('sylius_cart.provider')->getCart());
+        $this->container->get('sylius_cart.operator')->clear($this->container->get('sylius_cart.provider')->getCart());
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
@@ -144,6 +144,6 @@ class CartController extends ContainerAware
      */
     protected function getEngine()
     {
-        return $this->container->getParameter('sylius_carts.engine');
+        return $this->container->getParameter('sylius_cart.engine');
     }
 }

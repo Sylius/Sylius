@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Storage;
+namespace Sylius\Bundle\CartBundle\Storage;
 
 /**
  * Interface for service that stores current cart id.

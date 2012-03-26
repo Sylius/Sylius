@@ -1,10 +1,10 @@
-SyliusCartsBundle
+SyliusCartBundle
 =================
 
 Flexible cart engine for Symfony2. Allows you to add any object to cart, customize the structure of it and much more.  
 Considered as base for building solution that fits your exact needs.
 
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartsBundle.png)](http://travis-ci.org/Sylius/SyliusCategorizerBundle)
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCategorizerBundle)
 
 Sylius
 ------
@@ -16,8 +16,8 @@ Please visit [Sylius.org](http://sylius.org) for more details.
 Testing and build status
 ------------------------
 
-This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusCartsBundle) for CI.
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartsBundle.png)](http://travis-ci.org/Sylius/SyliusCategorizerBundle)
+This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusCartBundle) for CI.
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCategorizerBundle)
 
 Before running tests, load the dependencies using [Composer](http://packagist.org).
 
@@ -41,7 +41,7 @@ It's open sourced github project.
 Documentation
 -------------
 
-Documentation is available on [Sylius.org](http://sylius.org/docs/bundles/SyliusCartsBundle.html).
+Documentation is available on [Sylius.org](http://sylius.org/docs/bundles/SyliusCartBundle.html).
 
 Contributing
 ------------
@@ -70,7 +70,7 @@ or [follow me](http://twitter.com/pjedrzejewski).
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/SyliusCartsBundle/issues).
+This bundle uses [GitHub issues](https://github.com/Sylius/SyliusCartBundle/issues).
 If you have found bug, please create an issue.
 
 Versioning
@@ -90,10 +90,10 @@ This versioning method is same for all **Sylius** bundles and applications.
 License
 -------
 
-License can be found [here](https://github.com/Sylius/SyliusCartsBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusCartBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------
 
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/SyliusCartsBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/SyliusCartBundle/contributors).

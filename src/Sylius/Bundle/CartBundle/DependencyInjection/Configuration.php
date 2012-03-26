@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\DependencyInjection;
+namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -31,7 +31,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_carts');
+        $rootNode = $treeBuilder->root('sylius_cart');
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
                 ->scalarNode('operator')->cannotBeOverwritten()->cannotBeEmpty()->end()
-                ->scalarNode('storage')->defaultValue('sylius_carts.storage.session')->end()
+                ->scalarNode('storage')->defaultValue('sylius_cart.storage.session')->end()
             ->end();
 
         $this->addClassesSection($rootNode);
