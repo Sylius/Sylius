@@ -83,7 +83,7 @@ class CartController extends ContainerAware
         $cart = $this->container->get('sylius_cart.provider')->getCart();
         $item = $this->container->get('sylius_cart.resolver')->resolveItemToRemove($request);
 
-        if (!$item) {
+        if (!$item || false === $cart->hasItem($item)) {
             throw new NotFoundHttpException('Requested item could not be removed from cart');
         }
 
@@ -117,7 +117,7 @@ class CartController extends ContainerAware
 
             if ($cartOperator->validate($cart)) {
                 $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_SAVE, new FilterCartEvent($cart));
-                $cartOperator->refreshCart($cart);
+                $cartOperator->refresh($cart);
                 $cartOperator->save($cart);
             }
         }

@@ -20,7 +20,7 @@ final class SyliusCartEvents
 {
     const ITEM_ADD    = 'sylius_cart.event.item.add';
     const ITEM_REMOVE = 'sylius_cart.event.item.remove';
-    const CART_UPDATE = 'sylius_cart.event.cart.update';
+    const CART_SAVE   = 'sylius_cart.event.cart.save';
     const CART_CLEAR  = 'sylius_cart.event.cart.clear';
     const CART_FLUSH  = 'sylius_cart.event.cart.flush';
 }
