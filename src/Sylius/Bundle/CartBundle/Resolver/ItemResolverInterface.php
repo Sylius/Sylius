@@ -11,4 +11,10 @@
 
 namespace Sylius\Bundle\CartBundle\Resolver;
 
-c
+use Symfony\Component\HttpFoundation\Request;
+
+interface ItemResolverInterface
+{
+    function resolveItemToAdd(Request $request);
+    function resolveItemToRemove(Request $request);
+}
