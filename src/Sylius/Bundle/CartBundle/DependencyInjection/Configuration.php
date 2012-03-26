@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
                 ->scalarNode('operator')->cannotBeOverwritten()->cannotBeEmpty()->end()
+                ->scalarNode('resolver')->cannotBeOverwritten()->cannotBeEmpty()->end()
                 ->scalarNode('storage')->defaultValue('sylius_cart.storage.session')->end()
             ->end();
 

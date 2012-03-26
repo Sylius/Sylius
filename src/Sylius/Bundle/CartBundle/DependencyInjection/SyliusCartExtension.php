@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartsExtension extends Extension
+class SyliusCartExtension extends Extension
 {
     /**
      * {@inheritdoc}

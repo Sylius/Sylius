@@ -108,7 +108,7 @@ class CartController extends ContainerAware
     {
         $cart = $this->container->get('sylius_cart.provider')->getCart();
 
-        $form = $this->container->get('form.factory')->create('sylius_carts_cart');
+        $form = $this->container->get('form.factory')->create('sylius_cart');
         $form->setData($cart);
         $form->bindRequest($request);
 
