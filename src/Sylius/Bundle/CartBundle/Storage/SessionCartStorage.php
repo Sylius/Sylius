@@ -41,7 +41,7 @@ class SessionCartStorage implements CartStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCartId()
+    public function getCurrentCartIdentifier()
     {
         return $this->session->get('_sylius.cart-id');
     }
@@ -49,7 +49,7 @@ class SessionCartStorage implements CartStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentCartId($identifier)
+    public function setCurrentCartIdentifier($identifier)
     {
         $this->session->set('_sylius.cart-id', $identifier);
     }

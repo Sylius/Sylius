@@ -61,7 +61,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('provider')->defaultValue('Sylius\\Bundle\\CartBundle\\Provider\\Provider')->end()
+                        ->scalarNode('provider')->defaultValue('Sylius\\Bundle\\CartBundle\\Provider\\CartProvider')->end()
                         ->arrayNode('model')
                             ->isRequired()
                             ->children()

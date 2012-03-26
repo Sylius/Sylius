@@ -63,13 +63,10 @@ class CartProvider implements CartProviderInterface
     public function getCart()
     {
         if (null == $this->cart) {
-            $cartManager = $this->container->get('sylius_cart.manager.cart');
-            $session = $this->container->get('request')->getSession();
+            $cartIdentifier = $this->storage->getCurrentCartIdentifier();
 
-            $cartId = $this->storage->getCurrentCartId();
-
-            if ($cartId) {
-                $cart = $cartManager->findCart($cartId);
+            if ($cartIdentifier) {
+                $cart = $this->cartManager->findCart($cartIdentifier);
 
                 if ($cart) {
                     $this->cart = $cart;
@@ -77,9 +74,9 @@ class CartProvider implements CartProviderInterface
                 }
             }
 
-            $cart = $cartManager->createCart();
-            $cartManager->persistCart($cart);
-            $this->storage->setCurrentCartId($cart->getId());
+            $cart = $this->cartManager->createCart();
+            $this->cartManager->persistCart($cart);
+            $this->storage->setCurrentCartIdentifier($cart->getId());
 
             $this->cart = $cart;
         }

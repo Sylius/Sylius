@@ -59,7 +59,8 @@ class SyliusCartExtension extends Extension
         $configurations = array(
             'controllers',
             'forms',
-            'provider'
+            'provider',
+            'storage'
         );
 
         foreach($configurations as $basename) {

@@ -7,7 +7,7 @@
 >
 
     <parameters>
-        <parameter key="sylius_cart.storage.session.class">Sylius\Bundle\CartsBundle\Storage\SessionCartStorage</parameter>
+        <parameter key="sylius_cart.storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
     </parameters>
 
     <services>

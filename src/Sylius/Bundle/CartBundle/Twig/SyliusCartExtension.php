@@ -20,7 +20,7 @@ use Twig_Function_Method;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartsExtension extends Twig_Extension
+class SyliusCartExtension extends Twig_Extension
 {
     /**
      * Cart provider.
