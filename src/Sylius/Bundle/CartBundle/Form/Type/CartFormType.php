@@ -63,6 +63,6 @@ class CartFormType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_cart_cart';
+        return 'sylius_cart';
     }
 }

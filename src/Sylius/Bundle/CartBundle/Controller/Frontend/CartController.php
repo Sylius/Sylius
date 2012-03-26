@@ -36,7 +36,7 @@ class CartController extends ContainerAware
     {
         $cart = $this->container->get('sylius_cart.provider')->getCart();
 
-        $form = $this->container->get('form.factory')->create('sylius_cart_show');
+        $form = $this->container->get('form.factory')->create('sylius_cart');
         $form->setData($cart);
 
         return $this->container->get('templating')->renderResponse('SyliusCartBundle:Frontend/Cart:show.html.'.$this->getEngine(), array(

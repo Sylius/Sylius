@@ -9,7 +9,7 @@
     <services>
         <service id="sylius_cart.form.type.cart" class="%sylius_cart.form.type.cart.class%">
             <argument>%sylius_cart.model.cart.class%</argument>
-            <tag name="form.type" alias="sylius_cart_cart" />
+            <tag name="form.type" alias="sylius_cart" />
         </service>
         <service id="sylius_cart.form.type.item" class="%sylius_cart.form.type.item.class%">
             <argument>%sylius_cart.model.item.class%</argument>
