@@ -19,11 +19,18 @@ namespace Sylius\Bundle\CartBundle\Model;
 interface ItemInterface
 {
     /**
-     * Returns cart id.
+     * Returns item id.
      *
      * @return mixed
      */
     function getId();
+
+    /**
+     * Sets item id.
+     *
+     * @param mixed $id
+     */
+    function setId($id);
 
     /**
      * Returns associated cart.
@@ -52,4 +59,12 @@ interface ItemInterface
      * @param $quantity
      */
     function setQuantity($quantity);
+
+    /**
+     * Checks whether the item given as argument corresponds to
+     * the same cart item. Can be overriden to sum up quantity.
+     *
+     * @return Boolean
+     */
+    function equals(ItemInterface $item);
 }

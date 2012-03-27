@@ -58,17 +58,9 @@ abstract class Item implements ItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getQuantity()
+    public function setId($id)
     {
-        return $this->quantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
+        $this->id = $id;
     }
 
     /**
@@ -85,5 +77,29 @@ abstract class Item implements ItemInterface
     public function setCart(CartInterface $cart = null)
     {
         $this->cart = $cart;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(ItemInterface $item)
+    {
+        return $item === $this;
     }
 }
