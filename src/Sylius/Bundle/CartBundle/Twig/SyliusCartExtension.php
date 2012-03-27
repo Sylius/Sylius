@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\Twig;
 
+use Sylius\Bundle\CartBundle\Model\ItemManagerInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Symfony\Component\Form\FormFactory;
 use Twig_Extension;
 use Twig_Function_Method;
 
@@ -30,13 +32,31 @@ class SyliusCartExtension extends Twig_Extension
     private $cartProvider;
 
     /**
+     * Item manager.
+     *
+     * @var ItemManagerInterface
+     */
+    private $itemManager;
+
+    /**
+     * Form factory.
+     *
+     * @var FormFactory
+     */
+    private $formFactory;
+
+    /**
      * Constructor.
      *
      * @param CartProviderInterface $cartProvider
+     * @param ItemManagerInterface  $itemManager
+     * @param FormFactory           $formFactory
      */
-    public function __construct(CartProviderInterface $cartProvider)
+    public function __construct(CartProviderInterface $cartProvider, ItemManagerInterface $itemManager, FormFactory $formFactory)
     {
         $this->cartProvider = $cartProvider;
+        $this->itemManager = $itemManager;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -45,7 +65,8 @@ class SyliusCartExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_cart_get'         => new Twig_Function_Method($this, 'getCurrentCart'),
+            'sylius_cart_get' => new Twig_Function_Method($this, 'getCurrentCart'),
+            'sylius_cart_form' => new Twig_Function_Method($this, 'getItemFormView'),
         );
     }
 
@@ -57,6 +78,21 @@ class SyliusCartExtension extends Twig_Extension
     public function getCurrentCart()
     {
         return $this->cartProvider->getCart();
+    }
+
+    /**
+     * Returns cart item form view.
+     *
+     * @return FormView
+     */
+    public function getItemFormView()
+    {
+        $item = $this->itemManager->createItem();
+
+        $form = $this->formFactory->create('sylius_cart_item');
+        $form->setData($item);
+
+        return $form->createView();
     }
 
     /**
