@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Tests\EventDispatcher\Event;
+namespace Sylius\Bundle\CartBundle\Tests\EventDispatcher\Event;
 
-use Sylius\Bundle\CartsBundle\EventDispatcher\Event\FilterCartEvent;
+use Sylius\Bundle\CartBundle\EventDispatcher\Event\FilterCartEvent;
 
 /**
  * Cart filtering event test.
@@ -22,7 +22,7 @@ class FilterCartEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $category = $this->getMock('Sylius\Bundle\CartsBundle\Model\CartInterface');
+        $category = $this->getMock('Sylius\Bundle\CartBundle\Model\CartInterface');
 
         $event = new FilterCartEvent($category);
 

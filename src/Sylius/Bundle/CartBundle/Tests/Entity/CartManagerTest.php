@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartsBundle\Tests\Entity;
+namespace Sylius\Bundle\CartBundle\Tests\Entity;
 
-use Sylius\Bundle\CartsBundle\Entity\CartManager;
+use Sylius\Bundle\CartBundle\Entity\CartManager;
 
 /**
  * Cart manager test for doctrine/orm driver.
@@ -56,15 +56,20 @@ class CartManagerTest extends \PHPUnit_Framework_TestCase
 
     private function getMockCart()
     {
-        return $this->getMock('Sylius\Bundle\CartsBundle\Model\CartInterface');
+        return $this->getMock('Sylius\Bundle\CartBundle\Model\CartInterface');
     }
 
     private function getMockEntityManager()
     {
-        return $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $entityManager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
             ->getMock()
         ;
-    }
+        $entityManager->expects($this->once())
+            ->method('getRepository')
+            ->will($this->returnValue(null))
+        ;
 
+        return $entityManager;
+    }
 }

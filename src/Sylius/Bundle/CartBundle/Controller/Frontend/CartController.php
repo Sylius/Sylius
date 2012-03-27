@@ -122,7 +122,10 @@ class CartController extends ContainerAware
             }
         }
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
+        return $this->container->get('templating')->renderResponse('SyliusCartBundle:Frontend/Cart:show.html.'.$this->getEngine(), array(
+            'cart' => $cart,
+            'form' => $form->createView()
+        ));
     }
 
     /**
