@@ -1,10 +1,10 @@
 SyliusCartBundle
-=================
+================
 
 Flexible cart engine for Symfony2. Allows you to add any object to cart, customize the structure of it and much more.  
 Considered as base for building solution that fits your exact needs.
 
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCategorizerBundle)
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCartBundle)
 
 Sylius
 ------
@@ -17,7 +17,7 @@ Testing and build status
 ------------------------
 
 This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusCartBundle) for CI.
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCategorizerBundle)
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCartBundle)
 
 Before running tests, load the dependencies using [Composer](http://packagist.org).
 
