@@ -43,7 +43,7 @@ class ItemType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('quantity', 'number');
+        $builder->add('quantity', 'integer');
     }
 
     /**
@@ -52,8 +52,7 @@ class ItemType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class'      => $this->dataClass,
-            'csrf_protection' => false
+            'data_class' => $this->dataClass
         );
     }
 
