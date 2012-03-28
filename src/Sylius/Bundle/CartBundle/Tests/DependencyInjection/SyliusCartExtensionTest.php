@@ -106,15 +106,17 @@ class SyliusCartExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getEmptyConfig()
     {
-        $yaml = <<<EOF
+        $yaml =
+<<<EOF
 driver: doctrine/orm
-operator: acme_carts.operator
-resolver: acme_carts.resolver
+operator: test_cart.operator
+resolver: test_cart.resolver
 classes:
     model:
         cart: Acme\\Bundle\\CartBundle\\Entity\\Cart
         item: Acme\\Bundle\\CartBundle\\Entity\\Item
 EOF;
+
         $parser = new Parser();
 
         return $parser->parse($yaml);
