@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Storage;
 
+use Sylius\Bundle\CartBundle\Model\CartInterface;
+
 /**
  * Interface for service that stores current cart id.
  *
@@ -28,7 +30,7 @@ interface CartStorageInterface
     /**
      * Sets current cart id and persists it.
      *
-     * @param mixed $identifier
+     * @param CartInterface $cart
      */
-    function setCurrentCartIdentifier($identifier);
+    function setCurrentCartIdentifier(CartInterface $cart);
 }

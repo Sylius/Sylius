@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Storage;
 
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -49,8 +50,8 @@ class SessionCartStorage implements CartStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentCartIdentifier($identifier)
+    public function setCurrentCartIdentifier(CartInterface $cart)
     {
-        $this->session->set('_sylius.cart-id', $identifier);
+        $this->session->set('_sylius.cart-id', $cart->getId());
     }
 }

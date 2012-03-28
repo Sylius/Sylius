@@ -76,7 +76,7 @@ class CartProvider implements CartProviderInterface
 
             $cart = $this->cartManager->createCart();
             $this->cartManager->persistCart($cart);
-            $this->storage->setCurrentCartIdentifier($cart->getId());
+            $this->storage->setCurrentCartIdentifier($cart);
 
             $this->cart = $cart;
         }
@@ -92,5 +92,6 @@ class CartProvider implements CartProviderInterface
     public function setCart(CartInterface $cart)
     {
         $this->cart = $cart;
+        $this->storage->setCurrentCartIdentifier($cart);
     }
 }
