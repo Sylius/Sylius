@@ -22,20 +22,21 @@ This can be done in several ways, depending on your preference.
 
 The first method is the standard Symfony2 method.
 
-Using the vendors script
+Using the Composer
 ************************
 
-Add the following lines in your `deps` file. ::
+Add the following lines in your `composer.json` file. ::
 
-    [SyliusBloggerBundle]
-        git=git://github.com/Sylius/SyliusBloggerBundle.git
-        target=bundles/Sylius/Bundle/BloggerBundle
+    "require": {
+        ...
+        "sylius/blogger-bundle": "dev-master"
+    }
 
 Now, run the vendors script to download the bundle.
 
 .. code-block:: bash
 
-    $ php bin/vendors install
+    $ php composer.phar update
 
 Using submodules
 ****************
@@ -84,9 +85,22 @@ Finally, enable the bundle in the kernel...
 Importing routing configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
+.. code-block:: yaml
 
-    This part is not written yet.
+    sylius_blogger_post:
+        resource: @SyliusBloggerBundle/Resources/config/routing/frontend/post.yml
+        prefix: /posts
+
+    sylius_blogger_backend_post:
+        resource: @SyliusBloggerBundle/Resources/config/routing/backend/post.yml
+        prefix: /administration/posts
+
+Or in XML format: 
+
+.. code-block:: xml
+    
+    <import resource="@SyliusBloggerBundle/Resources/config/routing/frontend/post.yml" prefix="/posts" />
+    <import resource="@SyliusBloggerBundle/Resources/config/routing/backend/post.yml" prefix="/administration/posts" />
 
 Container configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,16 +123,60 @@ For "**ORM**" driver run the following command.
 Usage guide
 -----------
 
-.. note::
+Set your blogger bundle as a child of SyliusBloggerBundle. Add following lines to `ApplicationSyliusBloggerBundel.php`:
 
-    This part is not written yet.
+.. code-block:: php
+    public function getParent()
+    {
+        return 'SyliusBloggerBundle';
+    }
+
+
+Create Post class:
+
+.. code-block:: php
+    <?php
+    namespace Application\Sylius\BloggerBundle\Entity\Post;
+
+    use Sylius\Bundle\BloggerBundle\Entity\Post as BasePost;
+
+    class Post extends BasePost
+    {
+    }
+
+Create PostType class:
+
+.. code-block:: php
+
+    <?php
+    namespace Application\Sylius\BloggerBundle\Form\Type;
+
+    use Sylius\Bundle\BloggerBundle\Form\Type\PostType as BasePostType;
+    use Symfony\Component\Form\FormBuilder;
+
+    class PostType extends BasePostType
+    {
+        public function buildForm(FormBuilder $builder, array $options) 
+        {
+            parent::buildForm($builder, $options);
+            // ...
+        }
+    }
 
 Configuration reference
 -----------------------
 
-.. note::
+.. code-block:: yaml
 
-    This part is not written yet.
+    sylius_blogger:
+        driver: doctrine/orm
+        engine: twig # or php
+        classes:
+            model:
+                post: Application\Sylius\BloggerBundle\Entity\Post
+            form:
+                type:
+                    post: Application\Sylius\BloggerBundle\Form\Type\PostType 
                 
 Testing and continous integration
 ----------------------------------
