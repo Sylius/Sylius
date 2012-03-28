@@ -1,5 +1,5 @@
 {
-    "name": "sylius/carts-bundle",
+    "name": "sylius/cart-bundle",
     "type": "symfony-bundle",
     "description": "Carts feature for your next Symfony2 application. Clean architecture and simple usage.",
     "keywords": ["shop", "ecommerce", "cart", "carts"],
@@ -22,6 +22,7 @@
         "symfony/symfony": "2.1.*"
     },
     "suggest": {
+        "doctrine/orm": "*",
         "doctrine/doctrine-bundle": "*"
     },
     "autoload": {
