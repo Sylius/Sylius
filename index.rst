@@ -18,7 +18,7 @@ Bundles reference
    :maxdepth: 2
    :numbered:
 
-   bundles/SyliusCatalogBundle
+   bundles/SyliusCategorizerBundle
    bundles/SyliusAssortmentBundle
    bundles/SyliusCartBundle
    bundles/SyliusInstallerBundle
