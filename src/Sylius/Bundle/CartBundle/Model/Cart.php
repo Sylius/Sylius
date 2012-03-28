@@ -60,6 +60,7 @@ abstract class Cart implements CartInterface
      */
     public function __construct()
     {
+        $this->items = array();
         $this->totalItems = 0;
         $this->locked = false;
         $this->incrementExpiresAt();
