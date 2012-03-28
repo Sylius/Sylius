@@ -32,6 +32,21 @@ class CartOperatorTest extends \PHPUnit_Framework_TestCase
         $cartOperator->addItem($cart, $item);
     }
 
+    public function testAddItemIncreasesQuantityIfThereAreItemsThatAreEqual()
+    {
+        $item = $this->getItem();
+        $item->setQuantity(3);
+
+        $cart = $this->getCart();
+
+        $cartOperator = $this->getCartOperator();
+        $cartOperator->addItem($cart, $item);
+        $cartOperator->addItem($cart, $item);
+
+        $this->assertEquals(1, $cart->countItems());
+        $this->assertEquals(6, $item->getQuantity());
+    }
+
     public function testRefreshSetsTotalItems()
     {
         $cart = $this->getMockCart();

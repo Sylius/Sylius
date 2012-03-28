@@ -46,7 +46,7 @@ abstract class CartOperator implements CartOperatorInterface
      */
     public function addItem(CartInterface $cart, ItemInterface $item)
     {
-        if (0 > $cart->countItems()) {
+        if (false === $cart->isEmpty()) {
             foreach ($cart->getItems() as $existingItem) {
                 if ($existingItem->equals($item)) {
                     $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
