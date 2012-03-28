@@ -7,7 +7,6 @@ copyright = u'2011-2012, Paweł Jędrzejewski'
 version = ''
 release = ''
 exclude_patterns = []
-pygments_style = 'monokai'
 html_theme = 'default'
 htmlhelp_basename = 'Syliusdoc'
 man_pages = [
