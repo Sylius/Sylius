@@ -65,10 +65,6 @@ class ItemManagerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
-        $entityManager->expects($this->once())
-            ->method('getRepository')
-            ->will($this->returnValue(null))
-        ;
 
         return $entityManager;
     }
