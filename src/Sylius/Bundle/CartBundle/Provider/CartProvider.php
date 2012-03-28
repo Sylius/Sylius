@@ -16,7 +16,7 @@ use Sylius\Bundle\CartBundle\Model\CartManagerInterface;
 use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
 
 /**
- * Container for cart.
+ * Default provider cart.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -56,9 +56,7 @@ class CartProvider implements CartProviderInterface
     }
 
     /**
-     * Returns current cart or creates a new one.
-     *
-     * @return CartInterface
+     * {@inheritdoc}
      */
     public function getCart()
     {
@@ -85,9 +83,7 @@ class CartProvider implements CartProviderInterface
     }
 
     /**
-     * Sets current cart.
-     *
-     * @param CartInterface $cart
+     * {@inheritdoc}
      */
     public function setCart(CartInterface $cart)
     {
