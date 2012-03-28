@@ -76,6 +76,14 @@ abstract class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isLocked()
     {
         return $this->locked;

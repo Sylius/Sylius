@@ -20,6 +20,20 @@ namespace Sylius\Bundle\CartBundle\Model;
 interface CartInterface
 {
     /**
+     * Returns cart id.
+     *
+     * @return mixed
+     */
+    function getId();
+
+    /**
+     * Sets cart id.
+     *
+     * @param mixed $id
+     */
+    function setId($id);
+
+    /**
      * Returns number of items in cart.
      *
      * @return integer
