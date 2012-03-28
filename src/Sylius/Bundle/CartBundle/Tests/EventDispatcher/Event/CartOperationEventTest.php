@@ -11,19 +11,23 @@
 
 namespace Sylius\Bundle\CartBundle\Tests\EventDispatcher\Event;
 
-use Sylius\Bundle\CartBundle\EventDispatcher\Event\FilterCartEvent;
+use Sylius\Bundle\CartBundle\EventDispatcher\Event\CartOperationEvent;
 
 /**
- * Cart filtering event test.
+ * Cart operation event test.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FilterCartEventTest extends \PHPUnit_Framework_TestCase
+class CartOperationEventTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
         $cart = $this->getMock('Sylius\Bundle\CartBundle\Model\CartInterface');
-        $event = new FilterCartEvent($cart);
+        $item = $this->getMock('Sylius\Bundle\CartBundle\Model\ItemInterface');
+
+        $event = new CartOperationEvent($cart, $item);
+
         $this->assertEquals($cart, $event->getCart());
+        $this->assertEquals($item, $event->getItem());
     }
 }
