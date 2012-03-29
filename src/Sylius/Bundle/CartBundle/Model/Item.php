@@ -98,6 +98,14 @@ abstract class Item implements ItemInterface
     /**
      * {@inheritdoc}
      */
+    public function incrementQuantity($amount = 1)
+    {
+        $this->quantity += $amount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function equals(ItemInterface $item)
     {
         return $item === $this;

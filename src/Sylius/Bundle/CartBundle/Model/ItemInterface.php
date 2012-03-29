@@ -61,6 +61,14 @@ interface ItemInterface
     function setQuantity($quantity);
 
     /**
+     * Increment quantity by given amount.
+     * By 1 as default.
+     *
+     * @param integer $quantity
+     */
+    function incrementQuantity($amount = 1);
+
+    /**
      * Checks whether the item given as argument corresponds to
      * the same cart item. Can be overriden to sum up quantity.
      *
