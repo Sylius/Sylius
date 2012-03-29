@@ -21,11 +21,5 @@ Bundles reference
    bundles/SyliusCategorizerBundle
    bundles/SyliusAssortmentBundle
    bundles/SyliusCartBundle
-   bundles/SyliusInstallerBundle
-   bundles/SyliusSalesBundle
-   bundles/SyliusThemingBundle
-   bundles/SyliusGuardBundle
-   bundles/SyliusNewsletterBundle
    bundles/SyliusBloggerBundle
-   bundles/SyliusAddressingBundle
 

@@ -1,9 +1,21 @@
 SyliusCategorizerBundle
 =======================
 
-Categorizing whatever you want just got easier. You can use this bundle to create multiple categorized catalogs of any object.
-It provides all controllers, routing, base mapping and services that boost you development.
-No need to reimplement this feature every time you need it. Few lines of configuration, one almost empty class and we're ready to go!
+Categorizing whatever you want just got easier. Grouping products, posts or any other model is common feature in most of modern web applications.
+So why implement it every time you need it? You can use this bundle to create multiple categorized catalogs of any object.
+It provides all controllers, routing, base mapping and services that will boost you development.
+
+Features
+--------
+
+* Base support for different many different persistence layers. Currently only Doctrine ORM driver is implemented.
+* Allows you to create custom ordered flat list of categories, default controllers and forms will handle CRUD and moving up/down the categories.
+* Thanks to `Doctrine Extensions library <http://github.com/l3pp4rd/DoctrineExtensions>`_ you can have nested set of categories, just extend proper class, modify form, add little mapping and it works.
+* Handles both many-to-one and many-to-many relations between objects and the categories. Bundle will check it for you.
+* You can create as many catalogs as you want, by `catalog` we understand set of categories and the items, for example products or blog posts.
+* It uses `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ to paginate over the category items, but you can easily disable the pagination for specific catalog.
+* Thanks to awesome `Symfony2 <http://symfony.com>`_ everything is configurable and extensible.
+* Unit tested.
 
 Installation
 ------------
