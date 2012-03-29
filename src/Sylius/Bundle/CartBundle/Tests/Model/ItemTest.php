@@ -22,7 +22,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         $item = $this->getItem();
 
-        $this->assertEquals(0, $item->getQuantity());
+        $this->assertEquals(1, $item->getQuantity());
     }
 
     public function testGetSetId()
