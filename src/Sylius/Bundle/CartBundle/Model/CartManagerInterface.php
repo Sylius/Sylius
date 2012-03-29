@@ -43,7 +43,7 @@ interface CartManagerInterface
     /**
      * Removes all saved carts that are expired.
      */
-    function clearCarts();
+    function flushCarts();
 
     /**
      * Finds cart by id.

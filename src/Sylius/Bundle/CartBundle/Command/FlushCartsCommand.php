@@ -13,9 +13,7 @@ namespace Sylius\Bundle\CartBundle\Command;
 
 use Sylius\Bundle\CartBundle\EventDispatcher\SyliusCartEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -32,13 +30,13 @@ class FlushCartsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:carts:flush')
+            ->setName('sylius:cart:flush')
             ->setDescription('Deletes expried carts.')
             ->setHelp(
 <<<EOT
-The <info>sylius:carts:flush</info> command deletes expired carts:
+The <info>sylius:cart:flush</info> command deletes expired carts:
 
-  <info>php sylius/console sylius:carts:flush</info>
+  <info>php sylius/console sylius:cart:flush</info>
 EOT
             )
         ;
@@ -52,6 +50,6 @@ EOT
         $this->getContainer()->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_FLUSH);
         $this->getContainer()->get('sylius_cart.manager.cart')->flushCarts();
 
-        $output->writeln('<info>[Sylius:Carts]</info> Deleted expired carts.');
+        $output->writeln('<info>[Sylius:Cart]</info> Deleted expired carts.');
     }
 }
