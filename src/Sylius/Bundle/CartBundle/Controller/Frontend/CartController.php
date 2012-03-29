@@ -113,13 +113,11 @@ class CartController extends ContainerAware
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $cartOperator = $this->container->get('sylius_cart.operator');
+            $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_SAVE, new FilterCartEvent($cart));
 
-            if ($cartOperator->validate($cart)) {
-                $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_SAVE, new FilterCartEvent($cart));
-                $cartOperator->refresh($cart);
-                $cartOperator->save($cart);
-            }
+            $cartOperator = $this->container->get('sylius_cart.operator');
+            $cartOperator->refresh($cart);
+            $cartOperator->save($cart);
         }
 
         return $this->container->get('templating')->renderResponse('SyliusCartBundle:Frontend/Cart:show.html.'.$this->getEngine(), array(

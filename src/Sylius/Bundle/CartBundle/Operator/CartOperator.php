@@ -78,14 +78,6 @@ abstract class CartOperator implements CartOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(CartInterface $cart)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clear(CartInterface $cart)
     {
         $this->cartManager->removeCart($cart);

@@ -45,15 +45,6 @@ interface CartOperatorInterface
     function refresh(CartInterface $cart);
 
     /**
-     * Validates cart.
-     *
-     * @param CartInterface $cart
-     *
-     * @return Boolean
-     */
-    function validate(CartInterface $cart);
-
-    /**
      * Saves cart at current state.
      *
      * @param CartInterface $cart
