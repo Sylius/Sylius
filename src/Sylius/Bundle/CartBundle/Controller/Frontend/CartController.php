@@ -66,7 +66,11 @@ class CartController extends ContainerAware
         $cartOperator = $this->container->get('sylius_cart.operator');
         $cartOperator->addItem($cart, $item);
         $cartOperator->refresh($cart);
-        $cartOperator->save($cart);
+
+        $errors = $this->container->get('validator')->validate($cart);
+        if (0 === count($errors)) {
+            $cartOperator->save($cart);
+        }
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
@@ -133,7 +137,10 @@ class CartController extends ContainerAware
      */
     public function clearAction()
     {
-        $this->container->get('sylius_cart.operator')->clear($this->container->get('sylius_cart.provider')->getCart());
+        $cart = $this->container->get('sylius_cart.provider')->getCart();
+
+        $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_CLEAR, new FilterCartEvent($cart));
+        $this->container->get('sylius_cart.operator')->clear($cart);
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
