@@ -8,7 +8,7 @@ It provides all controllers, routing, base mapping and services that will boost 
 Features
 --------
 
-* Base support for different many different persistence layers. Currently only Doctrine ORM driver is implemented.
+* Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
 * Allows you to create custom ordered flat list of categories, default controllers and forms will handle CRUD and moving up/down the categories.
 * Thanks to `Doctrine Extensions library <http://github.com/l3pp4rd/DoctrineExtensions>`_ you can have nested set of categories, just extend proper class, modify form, add little mapping and it works.
 * Handles both many-to-one and many-to-many relations between objects and the categories. Bundle will check it for you.
