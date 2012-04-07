@@ -11,22 +11,28 @@
 
 namespace Sylius\Bundle\SalesBundle\Controller\Backend;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Sylius\Bundle\SalesBundle\EventDispatcher\SyliusSalesEvents;
 use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
+use Sylius\Bundle\SalesBundle\EventDispatcher\SyliusSalesEvents;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Backend orders controller.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderController extends ContainerAware
 {
     /**
      * Displays all orders.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
         $orderManager = $this->container->get('sylius_sales.manager.order');
 
@@ -34,11 +40,11 @@ class OrderController extends ContainerAware
         $orderFilter = $this->container->get('sylius_sales.filter.order');
 
         $paginator = $orderManager->createPaginator($orderSorter, $orderFilter);
-        $paginator->setCurrentPage($this->container->get('request')->query->get('page', 1));
+        $paginator->setCurrentPage($request->query->get('page', 1));
 
         $orders = $paginator->getCurrentPageResults();
 
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:list.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:list.html.'.$this->getEngine(), array(
             'orders'    => $orders,
             'paginator' => $paginator,
             'sorter'    => $orderSorter,
@@ -48,47 +54,49 @@ class OrderController extends ContainerAware
 
     /**
      * Shows an order.
+     *
+     * @param mixed $id
+     *
+     * @return Response
      */
     public function showAction($id)
     {
-        $order = $this->container->get('sylius_sales.manager.order')->findOrder($id);
+        $order = $this->findOrderOr404($id);
 
-        if (!$order) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
-
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:show.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:show.html.'.$this->getEngine(), array(
             'order' => $order
         ));
     }
-    
+
     /**
      * Order status management.
+     *
+     * @param Request $request
+     * @param mixed   $id
+     *
+     * @return Response
      */
-    public function statusAction($id)
+    public function changeStatusAction(Request $request, $id)
     {
-        $order = $this->container->get('sylius_sales.manager.order')->findOrder($id);
+        $order = $this->findOrderOr404($id);
 
-        if (!$order) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
+        $form = $this->container->get('form.factory')->create('sylius_sales_status_choice');
 
-        $form = $this->container->get('form.factory')->create($this->container->get('sylius_sales.form.type.status_list'));
-        $form->setData($order);
-
-        $request = $this->container->get('request');
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
-            
+
             if ($form->isValid()) {
-                $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_STATUS, new FilterOrderEvent($order));
-                $this->container->get('sylius_sales.manipulator.order')->status($order);
-               
+                $status = $form->getData();
+                $order->setStatus($status);
+
+                $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CHANGE_STATUS, new FilterOrderEvent($order));
+                $this->container->get('sylius_sales.manipulator.order')->update($order);
+
                 return new RedirectResponse($request->headers->get('referer'));
             }
         }
 
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:status.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:changeStatus.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
             'order' => $order
         ));
@@ -96,75 +104,104 @@ class OrderController extends ContainerAware
 
     /**
      * Confirms order.
+     *
+     * @param mixed $id
+     *
+     * @return Response
      */
     public function confirmAction($id)
     {
-        $order = $this->container->get('sylius_sales.manager.order')->findOrder($id);
-
-        if (!$order) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
+        $order = $this->findOrderOr404($id);
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CONFIRM, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->confirm($order);
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_list'));
+        return $this->redirectToOrderList();
     }
 
     /**
      * Closes order.
+     *
+     * @param mixed $id
+     *
+     * @return Response
      */
     public function closeAction($id)
     {
-        $order = $this->container->get('sylius_sales.manager.order')->findOrder($id);
-
-        if (!$order) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
+        $order = $this->findOrderOr404($id);
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CLOSE, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->close($order);
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_list'));
+        return $this->redirectToOrderList();
     }
 
     /**
      * Opens order.
+     *
+     * @param mixed $id
+     *
+     * @return Response
      */
     public function openAction($id)
     {
-        $order = $this->container->get('sylius_sales.manager.order')->findOrder($id);
-
-        if (!$order) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
+        $order = $this->findOrderOr404($id);
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_OPEN, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->open($order);
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_list'));
+        return $this->redirectToOrderList();
     }
 
     /**
      * Deletes order.
+     *
+     * @param mixed $id
+     *
+     * @return Response
      */
     public function deleteAction($id)
     {
-        $order = $this->container->get('sylius_sales.manager.order')->findOrder($id);
-
-        if (!$order) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
+        $order = $this->findOrderOr404($id);
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_DELETE, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->delete($order);
 
+        return $this->redirectToOrderList();
+    }
+
+    /**
+     * Looks for an order with given id, throws not found exception when
+     * unsuccesful.
+     *
+     * @param mixed $id
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return OrderInterface
+     */
+    protected function findOrderOr404($id)
+    {
+        if (!$order = $this->container->get('sylius_sales.manager.order')->findOrder($id)) {
+            throw new NotFoundHttpException(sprintf('Order with id "%s" does not exist', $id));
+        }
+
+        return $order;
+    }
+
+    /**
+     * Returns redirect response pointing to order list.
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectToOrderList()
+    {
         return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_list'));
     }
 
     /**
      * Returns templating engine name.
-     * 
+     *
      * @return string
      */
     protected function getEngine()

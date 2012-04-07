@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\SalesBundle\Filtering\ORM;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\SalesBundle\Filtering\FilterInterface;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * Default ORM filter.
@@ -23,19 +23,22 @@ use Sylius\Bundle\SalesBundle\Filtering\FilterInterface;
  */
 class OrderFilter extends ContainerAware implements FilterInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function filter($filterable)
     {
         if (!$filterable instanceof QueryBuilder) {
             throw new InvalidArgumentException('Default filter supports only "Doctrine\\ORM\\QueryBuilder" as argument.');
         }
-        
+
         $request = $this->container->get('request');
         $filters = $filters = $request->query->get('filters');
         if (null == $filters || !is_array($filters)) {
-            
+
             return;
         }
-        
+
         $orderClass = $this->container->getParameter('sylius_sales.model.order.class');
         $reflectionClass = new \ReflectionClass($orderClass);
         $properties = array_keys($reflectionClass->getDefaultProperties());
@@ -48,12 +51,15 @@ class OrderFilter extends ContainerAware implements FilterInterface
                     ->andWhere('o.'.$property . ' ' . $filter[1] . ' :PARAM' . $i)
                     ->setParameter('PARAM' . $i, $filter[0])
                 ;
-                
+
                 $i++;
             }
         }
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrent()
     {
         return $this->container->get('request')->query->get('filters');

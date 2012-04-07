@@ -13,6 +13,11 @@ namespace Sylius\Bundle\SalesBundle\Entity;
 
 use Sylius\Bundle\SalesBundle\Model\Item as BaseItem;
 
+/**
+ * Base item entity.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class Item extends BaseItem
 {
 }

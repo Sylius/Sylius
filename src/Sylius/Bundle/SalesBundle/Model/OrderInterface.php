@@ -13,7 +13,7 @@ namespace Sylius\Bundle\SalesBundle\Model;
 
 /**
  * Order interface.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface OrderInterface
@@ -27,32 +27,32 @@ interface OrderInterface
     function isClosed();
     function setClosed($closed);
     function getStatus();
-    function setStatus($status);
-    
+    function setStatus(StatusInterface $status);
+
     /**
      * Get creation time.
-     * 
+     *
      * @return \DateTime
      */
     function getCreatedAt();
-    
+
     /**
      * Increments creation time.
-     * 
+     *
      * @return null
      */
     function incrementCreatedAt();
 
-	/**
+    /**
      * Get modification time.
-     * 
+     *
      * @return \DateTime
      */
     function getUpdatedAt();
-    
+
     /**
      * Increments modification time.
-     * 
+     *
      * @return null
      */
     function incrementUpdatedAt();

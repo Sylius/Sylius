@@ -2,13 +2,14 @@
     "name": "sylius/sales-bundle",
     "type": "symfony-bundle",
     "description": "Sylius sales bundle. Order management and more.",
-    "keywords": ["shop", "ecommerce", "sales", "orders"],
-    "homepage": "http://sylius.org",
+    "keywords": ["shop", "ecommerce", "sales", "orders", "shop"],
+    "homepage": "http://Sylius.org",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl"
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
         },
         {
             "name": "Community contributions",

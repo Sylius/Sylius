@@ -1,10 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_sales_backend_order_list:
     pattern: /list
     defaults: { _controller: sylius_sales.controller.backend.order:listAction }
 
 sylius_sales_backend_order_status:
-    pattern: /{id}/status
-    defaults: { _controller: sylius_sales.controller.backend.order:statusAction }
+    pattern: /{id}/change-status
+    defaults: { _controller: sylius_sales.controller.backend.order:changeStatusAction }
 
 sylius_sales_backend_order_confirm:
     pattern: /{id}/confirm
@@ -13,15 +16,15 @@ sylius_sales_backend_order_confirm:
 sylius_sales_backend_order_delete:
     pattern: /{id}/delete
     defaults: { _controller: sylius_sales.controller.backend.order:deleteAction }
-    
+
 sylius_sales_backend_order_close:
     pattern: /{id}/close
     defaults: { _controller: sylius_sales.controller.backend.order:closeAction }
-    
+
 sylius_sales_backend_order_open:
     pattern: /{id}/open
     defaults: { _controller: sylius_sales.controller.backend.order:openAction }
-    
+
 sylius_sales_backend_order_show:
     pattern: /{id}
     defaults: { _controller: sylius_sales.controller.backend.order:showAction }

@@ -13,6 +13,11 @@ namespace Sylius\Bundle\SalesBundle\Tests\Model;
 
 use Sylius\Bundle\SalesBundle\Model\Order;
 
+/**
+ * Order model test.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class OrderTest extends \PHPUnit_Framework_TestCase
 {
     public function testClosed()
@@ -25,15 +30,15 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $order->setClosed(false);
         $this->assertFalse($order->isClosed());
     }
-    
+
     public function testDefaultStatus()
     {
         $order = $this->getOrder();
         $this->assertEquals(0, $order->getStatus());
-        
+
         return $order;
     }
-    
+
     /**
      * @depends testDefaultStatus
      */
@@ -41,12 +46,12 @@ class OrderTest extends \PHPUnit_Framework_TestCase
     {
         $order->setStatus(1);
         $this->assertEquals(1, $order->getStatus());
-        
+
         $order->setStatus(99);
         $this->assertEquals(99, $order->getStatus());
     }
-    
-    protected function getOrder()
+
+    private function getOrder()
     {
         return $this->getMockForAbstractClass('Sylius\Bundle\SalesBundle\Model\Order');
     }

@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\SalesBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sylius\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterOperationsPass;
 use Sylius\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterSortersPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Bundle of sales system.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusSalesBundle extends Bundle

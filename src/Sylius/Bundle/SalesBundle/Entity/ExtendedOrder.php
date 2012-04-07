@@ -12,15 +12,21 @@
 namespace Sylius\Bundle\SalesBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Sylius\Bundle\SalesBundle\Model\ExtendedOrder as BaseExtendedOrder;
 
-class ExtendedOrder extends BaseExtendedOrder
+/**
+ * Default extended order entity.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+abstract class ExtendedOrder extends BaseExtendedOrder
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         parent::__construct();
-        
         $this->items = new ArrayCollection;
-    }   
+    }
 }

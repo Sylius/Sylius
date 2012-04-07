@@ -13,6 +13,11 @@ namespace Sylius\Bundle\SalesBundle\Entity;
 
 use Sylius\Bundle\SalesBundle\Model\Order as BaseOrder;
 
-class Order extends BaseOrder
+/**
+ * Base order entity.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+abstract class Order extends BaseOrder
 {
 }

@@ -11,40 +11,33 @@
 
 namespace Sylius\Bundle\SalesBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * Order form type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderFormType extends AbstractType
+abstract class OrderType extends AbstractType
 {
     /**
      * Data class.
-     * 
+     *
      * @var string
      */
     protected $dataClass;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $dataClass
      */
     public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilder $builder, array $options)
-    {
-    }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -54,7 +47,7 @@ class OrderFormType extends AbstractType
             'data_class' => $this->dataClass
         );
     }
-    
+
     public function getName()
     {
         return 'sylius_sales_order';

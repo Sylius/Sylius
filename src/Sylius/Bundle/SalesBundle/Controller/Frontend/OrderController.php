@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\SalesBundle\Controller\Frontend;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Sylius\Bundle\SalesBundle\EventDispatcher\SyliusSalesEvents;
 use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
+use Sylius\Bundle\SalesBundle\EventDispatcher\SyliusSalesEvents;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Frontend order controller.
@@ -24,36 +26,38 @@ use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
 class OrderController extends ContainerAware
 {
     /**
-    * Places order.
-    */
-    public function placeAction()
+     * Places order.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function placeAction(Request $request)
     {
-        $request = $this->container->get('request');
-
         $order = $this->container->get('sylius_sales.manager.order')->createOrder();
 
-        $form = $this->container->get('form.factory')->create($this->container->get('sylius_sales.form.type.order'));
+        $form = $this->container->get('form.factory')->create('sylius_sales_order');
         $form->setData($order);
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PREPARE, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.processor')->prepare($order);
 
-        if ('POST' == $request->getMethod()) {
+        if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
                 $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PROCESS, new FilterOrderEvent($order));
                 $this->container->get('sylius_sales.processor')->process($order);
                 $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PLACE, new FilterOrderEvent($order));
-                $this->container->get('sylius_sales.manipulator.order')->create($order);
+                $this->container->get('sylius_sales.manipulator.order')->place($order);
 
-                return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:placed.html.' . $this->getEngine(), array(
+                return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:placed.html.'.$this->getEngine(), array(
                     'order' => $order
                 ));
             }
         }
 
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:place.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:place.html.'.$this->getEngine(), array(
             'form'  => $form->createView(),
             'order' => $order
         ));
@@ -61,6 +65,10 @@ class OrderController extends ContainerAware
 
     /**
      * Confirms order.
+     *
+     * @param string $token
+     *
+     * @return Response
      */
     public function confirmAction($token)
     {
@@ -73,7 +81,7 @@ class OrderController extends ContainerAware
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CONFIRM, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->confirm($order);
 
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:confirmed.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:confirmed.html.'.$this->getEngine(), array(
             'order' => $order
         ));
     }

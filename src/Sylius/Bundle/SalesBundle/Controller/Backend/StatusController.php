@@ -1,58 +1,55 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\SalesBundle\Controller\Backend;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Status backend controller.
+ * Provides basic CRUD for order statuses management.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class StatusController extends ContainerAware
 {
     /**
-     * Shows a status.
-     */
-    public function showAction($id)
-    {
-        $status = $this->container->get('sylius_sales.manager.status')->findStatus($id);
-
-        if (!$status) {
-            throw new NotFoundHttpException('Requested status does not exist.');
-        }
-
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Status:show.html.' . $this->getEngine(), array(
-            'status' => $status
-        ));
-    }
-
-    /**
      * Lists statuses.
+     *
+     * @return Response
      */
     public function listAction()
     {
-        $statusManager = $this->container->get('sylius_sales.manager.status');
-        $statusSorter = $this->container->get('sylius_sales.sorter.status');
+        $statuses = $this->container->get('sylius_sales.manager.status')->findStatuses();
 
-        $paginator = $statusManager->createPaginator($statusSorter);
-        $paginator->setCurrentPage($this->container->get('request')->query->get('page', 1), true, true);
-
-        $statuses = $paginator->getCurrentPageResults();
-
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Status:list.html.' . $this->getEngine(), array(
-            'statuses'  => $statuses,
-            'paginator' => $paginator,
-            'sorter'    => $statusSorter
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Status:list.html.'.$this->getEngine(), array(
+            'statuses'  => $statuses
         ));
     }
 
     /**
      * Creates a new status.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        $request = $this->container->get('request');
-
         $status = $this->container->get('sylius_sales.manager.status')->createStatus();
 
-        $form = $this->container->get('form.factory')->create($this->container->get('sylius_sales.form.type.status'));
+        $form = $this->container->get('form.factory')->create('sylius_sales_status');
         $form->setData($status);
 
         if ('POST' == $request->getMethod()) {
@@ -61,34 +58,31 @@ class StatusController extends ContainerAware
             if ($form->isValid()) {
                 $this->container->get('sylius_sales.manager.status')->persistStatus($status);
 
-                return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_status_update', array(
-                    'id' => $status->getId()
-                )));
+                return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_status_list'));
             }
         }
 
-        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Status:create.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Status:create.html.'.$this->getEngine(), array(
             'form' => $form->createView()
         ));
     }
 
     /**
      * Updates a status.
+     *
+     * @param Request $request
+     * @param mixed   $id
+     *
+     * @return Response
      */
-    public function updateAction($id)
+    public function updateAction(Request $request, $id)
     {
-        $status = $this->container->get('sylius_sales.manager.status')->findStatus($id);
+        $status = $this->findStatusOr404($id);
 
-        if (!$status) {
-            throw new NotFoundHttpException('Requested status does not exist.');
-        }
-
-        $request = $this->container->get('request');
-
-        $form = $this->container->get('form.factory')->create($this->container->get('sylius_sales.form.type.status'));
+        $form = $this->container->get('form.factory')->create('sylius_sales_status');
         $form->setData($status);
 
-        if ('POST' == $request->getMethod()) {
+        if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
@@ -101,25 +95,34 @@ class StatusController extends ContainerAware
         }
 
         return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Status:update.html.' . $this->getEngine(), array(
-            'form'    => $form->createView(),
+            'form'   => $form->createView(),
             'status' => $status
         ));
     }
 
     /**
      * Deletes statuses.
+     *
+     * @param mixed $id
+     *
+     * @return Response
      */
     public function deleteAction($id)
     {
-        $status = $this->container->get('sylius_sales.manager.status')->findStatus($id);
-
-        if (!$status) {
-            throw new NotFoundHttpException('Requested status does not exist.');
-        }
+        $status = $this->findStatusOr404($id);
 
         $this->container->get('sylius_sales.manager.status')->removeStatus($status);
 
         return new RedirectResponse($this->container->get('request')->headers->get('referer'));
+    }
+
+    protected function findStatusOr404($id)
+    {
+        if (!$status = $this->container->get('sylius_sales.manager.status')->findStatus($id)) {
+            throw new NotFoundHttpException(sprintf('Order status with id "%s" does not exist', $id));
+        }
+
+        return $status;
     }
 
     /**

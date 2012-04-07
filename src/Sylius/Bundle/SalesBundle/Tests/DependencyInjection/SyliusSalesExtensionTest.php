@@ -11,10 +11,15 @@
 
 namespace Sylius\Bundle\SalesBundle\Tests\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sylius\Bundle\SalesBundle\DependencyInjection\SyliusSalesExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 
+/**
+ * Sales bundle dependency injection extenstion test.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class SyliusSalesExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -27,10 +32,10 @@ class SyliusSalesExtensionTest extends \PHPUnit_Framework_TestCase
         unset($config['driver']);
         $loader->load(array($config), new ContainerBuilder());
     }
-    
+
     /**
-    * @expectedException \InvalidArgumentException
-    */
+     * @expectedException \InvalidArgumentException
+     */
     public function testUserLoadThrowsExceptionUnlessDriverIsValid()
     {
         $loader = new SyliusSalesExtension();
@@ -38,10 +43,10 @@ class SyliusSalesExtensionTest extends \PHPUnit_Framework_TestCase
         $config['driver'] = 'foo';
         $loader->load(array($config), new ContainerBuilder());
     }
-    
+
     /**
-    * @expectedException \InvalidArgumentException
-    */
+     * @expectedException \InvalidArgumentException
+     */
     public function testUserLoadThrowsExceptionUnlessEngineIsValid()
     {
         $loader = new SyliusSalesExtension();
@@ -49,10 +54,10 @@ class SyliusSalesExtensionTest extends \PHPUnit_Framework_TestCase
         $config['engine'] = 'foo';
         $loader->load(array($config), new ContainerBuilder());
     }
-    
+
     /**
-    * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-    */
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
     public function testUserLoadThrowsExceptionUnlessOrderModelClassSet()
     {
         $loader = new SyliusSalesExtension();
@@ -62,7 +67,7 @@ class SyliusSalesExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * getEmptyConfig
+     * Get empty testing config.
      *
      * @return array
      */
@@ -73,6 +78,7 @@ driver: ORM
 classes:
     model:
         order: Sylius\Bundle\SalesBundle\Entity\DefaultOrder
+        status: Sylius\Bundle\SalesBundle\Entity\DefaultStatus
 EOF;
         $parser = new Parser();
 

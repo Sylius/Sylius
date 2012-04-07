@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\SalesBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Compiler pass that registers all processor operations.
@@ -22,12 +22,14 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  */
 class RegisterOperationsPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('sylius_sales.processor')) {
             return;
         }
-
         $processor = $container->getDefinition('sylius_sales.processor');
         foreach ($container->findTaggedServiceIds('sylius_sales.operation') as $id => $attributes) {
             $processor->addMethodCall('registerOperation', array(new Reference($id)));

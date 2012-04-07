@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\SalesBundle\EventDispatcher\Event;
 
-use Symfony\Component\EventDispatcher\Event;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Filter order event.
@@ -21,13 +21,26 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  */
 class FilterOrderEvent extends Event
 {
-    protected $order;
-    
+    /**
+     * @var OrderInterface
+     */
+    private $order;
+
+    /**
+     * Constructor.
+     *
+     * @param OrderInterface $order
+     */
     public function __construct(OrderInterface $order)
     {
         $this->order = $order;
     }
-    
+
+    /**
+     * Get order.
+     *
+     * @return OrderInterface
+     */
     public function getOrder()
     {
         return $this->order;

@@ -1,14 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
-
-use Sylius\Bundle\SalesBundle\Filtering\FilterInterface;
-use Sylius\Bundle\SalesBundle\Sorting\SorterInterface;
 use Sylius\Bundle\SalesBundle\Model\StatusInterface;
 use Sylius\Bundle\SalesBundle\Model\StatusManager as BaseStatusManager;
 
@@ -40,23 +44,6 @@ class StatusManager extends BaseStatusManager
 
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository($this->getClass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createPaginator(SorterInterface $sorter = null)
-    {
-        $queryBuilder = $this->entityManager->createQueryBuilder()
-            ->select('s')
-            ->from($this->class, 's')
-        ;
-
-        if (null !== $sorter) {
-            $sorter->sort($queryBuilder);
-        }
-
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
     }
 
     /**

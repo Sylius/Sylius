@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_sales_order_place:
     pattern: /place
     defaults: { _controller: sylius_sales.controller.frontend.order:placeAction }

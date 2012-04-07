@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\SalesBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
 
 /**
- * Cart item type.
+ * Order item type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -23,30 +23,31 @@ class ItemType extends AbstractType
 {
     /**
      * Data class.
-     * 
+     *
      * @var string
      */
     protected $dataClass;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $dataClass
      */
     public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('quantity', 'number');
+            ->add('quantity', 'number')
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

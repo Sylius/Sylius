@@ -1,31 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\SalesBundle\Entity;
 
-use Sylius\Bundle\SalesBundle\Model\StatusInterface;
+use Sylius\Bundle\SalesBundle\Model\Status as BaseStatus;
 
-class Status implements StatusInterface
+/**
+ * Base status entity.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+class Status extends BaseStatus
 {
-    private $id;
-    private $name;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 }

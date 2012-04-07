@@ -2,50 +2,30 @@
 
 namespace Sylius\Bundle\SalesBundle\Form\ChoiceList;
 
-use Sylius\Bundle\SalesBundle\Model\StatusManager;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
+use Sylius\Bundle\SalesBundle\Model\StatusManagerInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
 /**
  * Order status choice list.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class StatusChoiceList extends ChoiceList
+class StatusChoiceList extends ObjectChoiceList
 {
-    protected $choices;
-
     /**
-     * @var StatusManager
+     * @var StatusManagerInterface
      */
     protected $statusManager;
 
     /**
      * Constructor.
      *
-     * @param $pointManager
+     * @param StatusManagerInterface $statusManager
      */
-    public function __construct(StatusManager $statusManager)
+    public function __construct(StatusManagerInterface $statusManager)
     {
         $this->statusManager = $statusManager;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getChoices()
-    {
-        $this->choices = $this->statusManager->findStatuses();
-
-/* -- commenting out for now incase translation wants to happen again
-        $choices = array();
-
-        foreach($this->statusManager->getStatuses() as $id => $status) {
-            $choices[] = $this->statusManager->translateStatus($id);
-        }
-
-        $this->choices = $choices;
-
-*/
-        return parent::getChoices();
+        parent::__construct($statusManager->findStatuses(), 'name', array(), null, null, 'id');
     }
 }

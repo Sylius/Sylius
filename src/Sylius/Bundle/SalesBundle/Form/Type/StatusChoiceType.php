@@ -1,12 +1,26 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\SalesBundle\Form\Type;
 
 use Sylius\Bundle\SalesBundle\Form\ChoiceList\StatusChoiceList;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
 
-class StatusListFormType extends AbstractType
+/**
+ * Status choice form type.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+class StatusChoiceType extends AbstractType
 {
     /**
      * The class that holds the data.
@@ -36,27 +50,27 @@ class StatusListFormType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function getDefaultOptions(array $options)
     {
-        $builder
-            ->add('status', 'entity', array(
-                'property' => 'name',
-                'class' => 'SyliusSalesBundle:Status',
-            ));
+        return array(
+            'data_class'  => $this->dataClass,
+            'choice_list' => $this->statusChoiceList
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function getParent(array $options)
     {
-        return array(
-            'data_class' => $this->dataClass
-        );
+        return 'choice';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_sales_status_list';
+        return 'sylius_sales_status_choice';
     }
 }

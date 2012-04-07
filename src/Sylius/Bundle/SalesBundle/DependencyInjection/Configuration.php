@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\SalesBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -26,9 +26,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * Generates the configuration tree.
-     *
-     * @return \Symfony\Bundle\DependencyInjection\Configuration\NodeInterface
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
@@ -50,7 +48,7 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Adds `classes` section.
-     * 
+     *
      * @param ArrayNodeDefinition $node
      */
     private function addClassesSection(ArrayNodeDefinition $node)
@@ -94,10 +92,10 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('type')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderFormType')->end()
+                                        ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderType')->end()
                                         ->scalarNode('item')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\ItemType')->end()
-                                        ->scalarNode('status')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusFormType')->end()
-                                        ->scalarNode('status_list')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusListFormType')->end()
+                                        ->scalarNode('status')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusType')->end()
+                                        ->scalarNode('status_choice')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\StatusChoiceType')->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -112,10 +110,10 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Adds `extensions` section.
-     * 
+     *
      * @param ArrayNodeDefinition $node
      */
     private function addExtensionsSection(ArrayNodeDefinition $node)

@@ -11,21 +11,21 @@
 
 namespace Sylius\Bundle\SalesBundle\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Sales extension.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusSalesExtension extends Extension
 {
     /**
-     * @see Extension/Symfony\Component\DependencyInjection\Extension.ExtensionInterface::load()
+     * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
@@ -36,7 +36,7 @@ class SyliusSalesExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
 
-        if (!in_array($config['driver'], array('ORM'))) {
+        if (!in_array($config['driver'], array('doctrine/orm'))) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
@@ -46,49 +46,42 @@ class SyliusSalesExtension extends Extension
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load(sprintf('engine/%s.xml', $config['engine']));
-        
+
         $container->setParameter('sylius_sales.driver', $config['driver']);
         $container->setParameter('sylius_sales.engine', $config['engine']);
 
         $configurations = array(
             'controllers',
-            'processor',
-            'manipulators',
             'forms',
+            'manipulators',
+            'processor',
         );
-
-        if (!empty($config['extensions'])) {
-            if (!empty($config['extensions']['confirmation']) && $config['extensions']['confirmation']['enabled']) {
-                $container->setParameter('sylius_sales.extension.confirmation.options', $config['extensions']['confirmation']['options']);
-                $configurations[] = 'extension/confirmation';
-            }
-        }
 
         foreach($configurations as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
         $this->remapParametersNamespaces($config['classes'], $container, array(
-            'model'        => 'sylius_sales.model.%s.class',
-            'manipulator'  => 'sylius_sales.manipulator.%s.class',
+            'manipulator' => 'sylius_sales.manipulator.%s.class',
+            'model'       => 'sylius_sales.model.%s.class',
         ));
 
         $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
-            'backend'      => 'sylius_sales.controller.backend.%s.class',
-            'frontend'     => 'sylius_sales.controller.frontend.%s.class'
+            'backend'  => 'sylius_sales.controller.backend.%s.class',
+            'frontend' => 'sylius_sales.controller.frontend.%s.class'
         ));
 
         $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type'         => 'sylius_sales.form.type.%s.class',
+            'type' => 'sylius_sales.form.type.%s.class',
         ));
     }
 
     /**
      * Remap parameters.
-     * 
-     * @param $config
+     *
+     * @param array            $config
      * @param ContainerBuilder $container
-     * @param $map
+     * @param array            $map
      */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
@@ -101,10 +94,10 @@ class SyliusSalesExtension extends Extension
 
     /**
      * Remap parameter namespaces.
-     * 
-     * @param $config
+     *
+     * @param array            $config
      * @param ContainerBuilder $container
-     * @param $map
+     * @param array            $namespaces
      */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {

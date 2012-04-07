@@ -26,10 +26,10 @@ interface OperationInterface
      * @param OrderInterface $order
      */
     function prepare(OrderInterface $order);
-    
+
     /**
      * Processes order.
-     * 
+     *
      * @param OrderInterface $order
      */
     function process(OrderInterface $order);

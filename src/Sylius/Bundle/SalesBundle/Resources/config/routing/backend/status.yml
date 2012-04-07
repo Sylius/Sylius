@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_sales_backend_status_list:
     pattern: /list
     defaults: { _controller: sylius_sales.controller.backend.status:listAction }

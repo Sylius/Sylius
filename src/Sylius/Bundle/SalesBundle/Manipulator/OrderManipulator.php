@@ -11,24 +11,33 @@
 
 namespace Sylius\Bundle\SalesBundle\Manipulator;
 
-use Sylius\Bundle\SalesBundle\Model\OrderManagerInterface;
-
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\SalesBundle\Model\OrderManagerInterface;
 
 /**
  * Order manipulator.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderManipulator implements OrderManipulatorInterface
 {
+    /**
+     * Order manager.
+     *
+     * @var OrderManagerInterface
+     */
     protected $orderManager;
-    
+
+    /**
+     * Constructor.
+     *
+     * @param OrderManagerInterface $orderManager
+     */
     public function __construct(OrderManagerInterface $orderManager)
     {
         $this->orderManager = $orderManager;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +46,7 @@ class OrderManipulator implements OrderManipulatorInterface
         $order->incrementCreatedAt();
         $this->orderManager->persistOrder($order);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +55,7 @@ class OrderManipulator implements OrderManipulatorInterface
         $order->incrementCreatedAt();
         $this->orderManager->persistOrder($order);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -55,7 +64,7 @@ class OrderManipulator implements OrderManipulatorInterface
         $order->incrementUpdatedAt();
         $this->orderManager->persistOrder($order);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -63,11 +72,11 @@ class OrderManipulator implements OrderManipulatorInterface
     {
         $this->orderManager->removeOrder($order);
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function status(OrderInterface $order)
+    public function changeStatus(OrderInterface $order)
     {
         $this->update($order);
     }

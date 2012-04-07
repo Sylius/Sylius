@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\SalesBundle\Processor;
 
-use Sylius\Bundle\SalesBundle\Processor\Operation\OperationInterface;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\SalesBundle\Processor\Operation\OperationInterface;
 
 /**
  * Order processor.
@@ -23,11 +23,11 @@ class Processor
 {
     /**
      * Processor operation.
-     * 
+     *
      * @var array
      */
     private $operations = array();
-    
+
     /**
      * Prepares order for processing.
      * Calls all operations.
@@ -40,10 +40,10 @@ class Processor
             $operation->prepare($order);
         }
     }
-    
+
     /**
      * Processes order. Calls all operations.
-     * 
+     *
      * @param OrderInterface $order
      */
     public function process(OrderInterface $order)
@@ -52,20 +52,20 @@ class Processor
             $operation->process($order);
         }
     }
-    
+
     /**
      * Registers processor.
-     * 
+     *
      * @var OperationInterface $operation
      */
     public function registerOperation(OperationInterface $operation)
     {
         $this->operations[] = $operation;
     }
-    
+
     /**
      * Unergisters operation.
-     * 
+     *
      * @param OperationInterface $operation
      */
     public function unregisterOperation(OperationInterface $operation)
