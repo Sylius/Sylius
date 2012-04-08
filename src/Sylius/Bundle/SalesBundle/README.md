@@ -1,13 +1,13 @@
-SyliusSalesBundle.
-==================
+SyliusSalesBundle
+=================
 
 Sales management for ecommerce Symfony2 applications.
 Managing orders, their statuses and much more.
 
 [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSalesBundle.png)](http://travis-ci.org/Sylius/SyliusSalesBundle)
 
-Sylius.
--------
+Sylius
+------
 
 **Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. 
 

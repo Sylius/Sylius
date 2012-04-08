@@ -152,7 +152,7 @@ abstract class Order implements OrderInterface
      */
     public function incrementCreatedAt()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTime("now");
     }
 
     /**
@@ -168,6 +168,6 @@ abstract class Order implements OrderInterface
      */
     public function incrementUpdatedAt()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \DateTime("now");
     }
 }

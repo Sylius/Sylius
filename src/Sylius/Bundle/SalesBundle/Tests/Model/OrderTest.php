@@ -20,35 +20,15 @@ use Sylius\Bundle\SalesBundle\Model\Order;
  */
 class OrderTest extends \PHPUnit_Framework_TestCase
 {
-    public function testClosed()
-    {
-        $order = $this->getOrder();
-        $this->assertFalse($order->isClosed());
-
-        $order->setClosed(true);
-        $this->assertTrue($order->isClosed());
-        $order->setClosed(false);
-        $this->assertFalse($order->isClosed());
-    }
-
-    public function testDefaultStatus()
-    {
-        $order = $this->getOrder();
-        $this->assertEquals(0, $order->getStatus());
-
-        return $order;
-    }
-
     /**
-     * @depends testDefaultStatus
+     * @test
      */
-    public function testStatus($order)
+    public function shouldHaveCorrectDefaultValues()
     {
-        $order->setStatus(1);
-        $this->assertEquals(1, $order->getStatus());
+        $order = $this->getOrder();
 
-        $order->setStatus(99);
-        $this->assertEquals(99, $order->getStatus());
+        $this->assertFalse($order->isClosed());
+        $this->assertTrue($order->isConfirmed());
     }
 
     private function getOrder()
