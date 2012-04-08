@@ -109,9 +109,5 @@ License can be found [here](https://github.com/Sylius/SyliusSalesBundle/blob/mas
 Authors
 -------
 
-<<<<<<< HEAD
-The bundle was originally created by [Paweł Jędrzejewski](http://diweb.pl).
-=======
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
->>>>>>> 9f73c0b5520661f0820b2f5b8676bb2124b1a442
 See the list of [contributors](https://github.com/Sylius/SyliusSalesBundle/contributors).
