@@ -33,6 +33,21 @@ class Status implements StatusInterface
     protected $name;
 
     /**
+     * Position in the status list.
+     *
+     * @var integer
+     */
+    protected $position;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->position = 0;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -63,4 +78,37 @@ class Status implements StatusInterface
     {
         $this->name = $name;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function incrementPosition()
+    {
+        $this->position++;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function decrementPosition()
+    {
+        $this->position--;
+    }
+
 }

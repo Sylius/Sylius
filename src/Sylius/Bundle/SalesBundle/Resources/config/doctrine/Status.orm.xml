@@ -11,6 +11,7 @@
             <generator strategy="AUTO" />
         </id>
         <field name="name" column="name" type="string" />
+        <field name="position" column="position" type="integer" />
     </entity>
 
 </doctrine-mapping>

@@ -17,6 +17,10 @@ sylius_sales_backend_status_delete:
     pattern: /{id}/delete
     defaults: { _controller: sylius_sales.controller.backend.status:deleteAction }
 
-sylius_sales_backend_status_show:
-    pattern: /{id}
-    defaults: { _controller: sylius_sales.controller.backend.status:showAction }
+sylius_sales_backend_status_move_up:
+    pattern: /{id}/move-up
+    defaults: { _controller: sylius_sales.controller.backend.status:moveUpAction }
+
+sylius_sales_backend_status_move_down:
+    pattern: /{id}/move-down
+    defaults: { _controller: sylius_sales.controller.backend.status:moveDownAction }

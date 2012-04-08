@@ -88,9 +88,7 @@ class StatusController extends ContainerAware
             if ($form->isValid()) {
                 $this->container->get('sylius_sales.manager.status')->persistStatus($status);
 
-                return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_status_show', array(
-                    'id' => $status->getId()
-                )));
+                return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_status_list'));
             }
         }
 
@@ -116,6 +114,48 @@ class StatusController extends ContainerAware
         return new RedirectResponse($this->container->get('request')->headers->get('referer'));
     }
 
+    /**
+     * Moves status up.
+     *
+     * @param mixed $id
+     *
+     * @return Response
+     */
+    public function moveUpAction($id)
+    {
+        $status = $this->findStatusOr404($id);
+
+        $this->container->get('sylius_sales.manager.status')->moveStatusUp($status);
+
+        return new RedirectResponse($this->container->get('request')->headers->get('referer'));
+    }
+
+    /**
+     * Moves status down.
+     *
+     * @param mixed $id
+     *
+     * @return Response
+     */
+    public function moveDownAction($id)
+    {
+        $status = $this->findStatusOr404($id);
+
+        $this->container->get('sylius_sales.manager.status')->moveStatusDown($status);
+
+        return new RedirectResponse($this->container->get('request')->headers->get('referer'));
+    }
+
+    /**
+     * Looks for a status and throws not found exception when
+     * unsuccessful.
+     *
+     * @param mixed $id
+     *
+     * @throw NotFoundHttpException
+     *
+     * @return StatusInterface
+     */
     protected function findStatusOr404($id)
     {
         if (!$status = $this->container->get('sylius_sales.manager.status')->findStatus($id)) {

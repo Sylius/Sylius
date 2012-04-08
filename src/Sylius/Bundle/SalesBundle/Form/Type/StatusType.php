@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class StatusFormType extends AbstractType
+class StatusType extends AbstractType
 {
     /**
      * Data class.

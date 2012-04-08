@@ -81,6 +81,7 @@ class OrderController extends ContainerAware
         $order = $this->findOrderOr404($id);
 
         $form = $this->container->get('form.factory')->create('sylius_sales_status_choice');
+        $form->setData($order->getStatus());
 
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
