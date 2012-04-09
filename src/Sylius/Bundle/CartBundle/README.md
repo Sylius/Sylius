@@ -4,7 +4,30 @@ SyliusCartBundle
 Flexible cart engine for Symfony2. Allows you to add any object to cart, customize the structure of it and much more.  
 Considered as base for building solution that fits your exact needs.
 
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCartBundle)
+Features
+--------
+
+### Implemented
+
+* Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
+* Cart item is simple model and you can make it look whatever you like.
+* Sensible default model for cart.
+* Flexible item resolver that allows you to build and add items the way you prefer.
+* Default cart operator implementation handles most basic cart scenario and can be easily extended.
+* Common actions like adding/removing items, updating, clearing and viewing the cart are implemented in controllers shipped with the bundle.
+* Flushing expired cards
+* Thanks to awesome [Symfony2](http://symfony.com) everything is configurable and extensible.
+* Unit tested. [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCartBundle)
+
+### Planned or in progress
+
+* Easy "hybriding", via cartable item loaders, so if you store products and carts in two different persistence layer, you can easily map them to cart.
+* Optional "persistent cart" feature, which assigns cart to Symfony Security user and keeps it even when user is not on the website.
+* Doctrine MongoDB ODM driver.
+* Doctrine CouchDB ODM driver. `*`
+* Propel driver. `*`
+* 
+`*` - wishlist, would love to see a contribution.
 
 Sylius
 ------
