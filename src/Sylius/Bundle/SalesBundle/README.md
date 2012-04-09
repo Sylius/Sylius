@@ -4,20 +4,32 @@ SyliusSalesBundle
 Sales management for Symfony2 e-commerce applications.
 Provides sensible default models, forms, controllers and generally architecture for handling orders.
 Allows using simple orders, orders with items, create and manage their statuses via web interface.
-Whole system is easy extensible thanks to events, clean interfaces and many other extension ports.
+Whole system is easy extensible thanks to events, clean interfaces and many other extension points.
 
 **This bundle is compatible only with 2.1.x branch of Symfony2**.
 
 Features
 --------
 
+### Implemented
+
 * Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
 * Provides two kinds of order models, simple single object, and extended order with multiple items handling.
 * Includes order status management, both CRUD and setting status of specific order.
-* Supports order confirmation out of the box, via mail.
 * It uses [Pagerfanta](http://github.com/whiteoctober/Pagerfanta) to paginate over the orders.
 * Thanks to awesome [Symfony2](http://symfony.com) everything is configurable and extensible.
 * Unit tested. [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSalesBundle.png)](http://travis-ci.org/Sylius/SyliusSalesBundle)
+
+### Planned or in progress
+
+* Optional e-mail confirmation out of the box.
+* Doctrine MongoDB ODM driver.
+* Doctrine CouchDB ODM driver. `*`
+* Propel driver. `*`
+* Order history.
+* Easy integration with shipping, pricing and stocking system.
+
+`*` - wishlist, would love to see a contribution.
 
 Sylius
 ------
