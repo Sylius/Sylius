@@ -1,34 +1,50 @@
-SyliusAddressingBundle.
-=======================
+SyliusAddressingBundle
+======================
 
 There is no default address model or even interface, the key purpose of this bundle is to provide 
 architecture, manipulators, forms and much more for addressing in any Symfony2 application.
-Just organising things to keep them consistent with other parts of Sylius engine.
+Default address model needs to be designed after decent discussion.
 
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+**This bundle is compatible only with 2.1.x branch of Symfony2**.
 
-Sylius.
--------
+Features
+--------
 
-**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2. 
+### Implemented
+
+* Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
+* Basic CRUD for address book.
+* It uses [Pagerfanta](http://github.com/whiteoctober/Pagerfanta) to paginate over the addresses.
+* Thanks to awesome [Symfony2](http://symfony.com) everything is configurable and extensible.
+
+### Planned or in progress
+
+* Unit tested. [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+* Working out most sensible default address model.
+* Doctrine MongoDB ODM driver.
+* Doctrine CouchDB ODM driver. `*`
+* Propel driver. `*`
+
+`*` - wishlist, would love to see a contribution.
+
+Sylius
+------
+
+**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2.
 
 Please visit [Sylius.org](http://sylius.org) for more details.
 
-Demo.
------
-
-There is a live demo of this bundle [on our official website](http://sylius.org/sandbox).
-
-Testing and build status.
--------------------------
+Testing and build status
+------------------------
 
 This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusAddressingBundle) for CI.
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
 
 Before running tests, load the dependencies using [Composer](http://packagist.org).
 
 ``` bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar install
+$ php composer.phar install --install-suggests
 ```
 
 Now you can run the tests by simply using this command.
@@ -37,54 +53,49 @@ Now you can run the tests by simply using this command.
 $ phpunit
 ```
 
-Code examples.
---------------
+Code examples
+-------------
 
 If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
 It's open sourced github project.
 
-Documentation.
---------------
-
-Documentation is available on [Sylius.org](http://sylius.org/docs/bundles/SyliusAddressingBundle.html).
-
-Contributing.
+Documentation
 -------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.org/docs/contributing/index.html).
+Documentation is available on [readthedocs.org](http://sylius.readthedocs.org/en/latest/bundles/SyliusSalesBundle.html).
 
-Dependencies.
+Contributing
+------------
+
+All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+
+Mailing lists
 -------------
 
-This bundle uses the awesome [Pagerfanta library](https://github.com/whiteoctober/Pagerfanta) and [Pagerfanta bundle](https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle).
-
-Mailing lists.
---------------
-
-### Users.
+### Users
 
 If you are using this bundle and have any questions, feel free to ask on users mailing list.
 [Mail](mailto:sylius@googlegroups.com) or [view it](http://groups.google.com/group/sylius).
 
-### Developers.
+### Developers
 
 If you want to contribute, and develop this bundle, use the developers mailing list.
 [Mail](mailto:sylius-dev@googlegroups.com) or [view it](http://groups.google.com/group/sylius-dev).
 
-Sylius twitter account.
------------------------
+Sylius twitter account
+----------------------
 
 If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius)
 or [follow me](http://twitter.com/pjedrzejewski).
 
-Bug tracking.
--------------
+Bug tracking
+------------
 
 This bundle uses [GitHub issues](https://github.com/Sylius/SyliusAddressingBundle/issues).
 If you have found bug, please create an issue.
 
-Versioning.
------------
+Versioning
+----------
 
 Releases will be numbered with the format `major.minor.patch`.
 
@@ -98,13 +109,13 @@ For more information on SemVer, please visit [semver.org website](http://semver.
 
 This versioning method is same for all **Sylius** bundles and applications.
 
-License.
---------
+License
+-------
 
 License can be found [here](https://github.com/Sylius/SyliusAddressingBundle/blob/master/Resources/meta/LICENSE).
 
-Authors.
---------
+Authors
+-------
 
-The bundle was originally created by [Paweł Jędrzejewski](http://diweb.pl).
+The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
 See the list of [contributors](https://github.com/Sylius/SyliusAddressingBundle/contributors).
