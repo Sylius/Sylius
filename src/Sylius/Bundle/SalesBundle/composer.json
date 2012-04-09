@@ -2,7 +2,7 @@
     "name": "sylius/sales-bundle",
     "type": "symfony-bundle",
     "description": "Sylius sales bundle. Order management and more.",
-    "keywords": ["shop", "ecommerce", "sales", "orders", "shop"],
+    "keywords": ["shop", "ecommerce", "sales", "orders"],
     "homepage": "http://Sylius.org",
     "license": "MIT",
     "authors": [
