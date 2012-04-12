@@ -43,13 +43,15 @@ class StatusType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('name');
+        $builder
+            ->add('name')
+        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'data_class' => $this->dataClass

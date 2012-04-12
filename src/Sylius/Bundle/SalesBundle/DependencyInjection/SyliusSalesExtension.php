@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SalesBundle\DependencyInjection;
 
+use Sylius\Bundle\SalesBundle\SyliusSalesBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -36,7 +37,7 @@ class SyliusSalesExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
 
-        if (!in_array($config['driver'], array('doctrine/orm'))) {
+        if (!in_array($config['driver'], SyliusSalesBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
