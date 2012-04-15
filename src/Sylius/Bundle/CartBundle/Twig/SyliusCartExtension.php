@@ -83,14 +83,15 @@ class SyliusCartExtension extends Twig_Extension
     /**
      * Returns cart item form view.
      *
+     * @param array $options
+     *
      * @return FormView
      */
-    public function getItemFormView()
+    public function getItemFormView(array $options = array())
     {
         $item = $this->itemManager->createItem();
 
-        $form = $this->formFactory->create('sylius_cart_item');
-        $form->setData($item);
+        $form = $this->formFactory->create('sylius_cart_item', $item, $options);
 
         return $form->createView();
     }
