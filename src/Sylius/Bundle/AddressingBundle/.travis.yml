@@ -6,9 +6,8 @@ php:
 
 before_script:
   - wget http://getcomposer.org/composer.phar
-  - php composer.phar install
+  - php composer.phar install --dev
 
 notifications:
   email:
     - travis-ci@sylius.org
-

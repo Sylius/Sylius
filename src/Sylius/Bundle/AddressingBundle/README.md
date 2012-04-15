@@ -1,9 +1,8 @@
 SyliusAddressingBundle
 ======================
 
-There is no default address model or even interface, the key purpose of this bundle is to provide 
-architecture, manipulators, forms and much more for addressing in any Symfony2 application.
-Default address model needs to be designed after decent discussion.
+This bundle provides basic architecture, manipulators, forms and interfaces for addressing in any Symfony2 application.  
+There is a default address storage agnostic model and interface, although you can customize it to fit your needs.
 
 **This bundle is compatible only with 2.1.x branch of Symfony2**.
 
@@ -19,8 +18,8 @@ Features
 
 ### Planned or in progress
 
-* Unit tested. [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
-* Working out most sensible default address model.
+* Unit testing. [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+* Zones management, countries, states and zone definition support.
 * Doctrine MongoDB ODM driver.
 * Doctrine CouchDB ODM driver. `*`
 * Propel driver. `*`

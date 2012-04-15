@@ -14,7 +14,9 @@ namespace Sylius\Bundle\AddressingBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Bundle of addressing.
+ * This bundle provides simple architecture for addresses management.
+ * Future plans include zone management, useful for e-commerce applications,
+ * for example for setting specific tax/shipping rates for concrete zone.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
