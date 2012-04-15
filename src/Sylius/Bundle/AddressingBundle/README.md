@@ -43,7 +43,7 @@ Before running tests, load the dependencies using [Composer](http://packagist.or
 
 ``` bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar install --install-suggests
+$ php composer.phar install --dev
 ```
 
 Now you can run the tests by simply using this command.
