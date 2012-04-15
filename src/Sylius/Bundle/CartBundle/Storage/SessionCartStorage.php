@@ -54,4 +54,12 @@ class SessionCartStorage implements CartStorageInterface
     {
         $this->session->set('_sylius.cart-id', $cart->getId());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resetCurrentCartIdentifier()
+    {
+        $this->session->remove('_sylius.cart-id');
+    }
 }

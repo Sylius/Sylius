@@ -24,6 +24,19 @@ class SessionCartStorageTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetCurrentCartIdentifier()
     {
+        $session = $this->getMockSession();
+        $session->expects($this->once())
+            ->method('get')
+            ->will($this->returnValue(123))
+        ;
+
+        $storage = new SessionCartStorage($session);
+
+        $this->assertEquals(123, $storage->getCurrentCartIdentifier());
+    }
+
+    public function testSetCurrentCartIdentifier()
+    {
         $cart = $this->getMockCart();
         $cart->expects($this->once())
             ->method('getId')
@@ -34,11 +47,28 @@ class SessionCartStorageTest extends \PHPUnit_Framework_TestCase
         $storage->setCurrentCartIdentifier($cart);
 
         $this->assertEquals(123, $storage->getCurrentCartIdentifier());
+
+        return $storage;
+    }
+
+    /**
+     * @depends testSetCurrentCartIdentifier
+     */
+    public function testResetCurrentCartIdentifier(SessionCartStorage $storage)
+    {
+        $storage->resetCurrentCartIdentifier();
+
+        $this->assertNull($storage->getCurrentCartIdentifier());
     }
 
     private function getSession()
     {
         return new Session(new MockArraySessionStorage());
+    }
+
+    private function getMockSession()
+    {
+        return $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
     }
 
     private function getMockCart()

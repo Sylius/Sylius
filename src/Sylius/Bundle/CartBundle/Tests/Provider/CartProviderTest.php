@@ -81,6 +81,18 @@ class CartOperatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($cart, $cartProvider->getCart());
     }
 
+    public function testAbandonCart()
+    {
+        $storage = $this->getMockCartStorage();
+        $storage->expects($this->once())
+            ->method('resetCurrentCartIdentifier')
+            ;
+
+        $cartProvider = new CartProvider($storage, $this->getMockCartManager());
+
+        $cartProvider->abandonCart();
+    }
+
     private function getMockCartStorage()
     {
         return $this->getMock('Sylius\Bundle\CartBundle\Storage\CartStorageInterface');

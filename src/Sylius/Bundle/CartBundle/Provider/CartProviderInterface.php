@@ -36,4 +36,9 @@ interface CartProviderInterface
      * @param CartInterface $cart
      */
     function setCart(CartInterface $cart);
+
+    /**
+     * Abandon current cart.
+     */
+    function abandonCart();
 }

@@ -90,4 +90,13 @@ class CartProvider implements CartProviderInterface
         $this->cart = $cart;
         $this->storage->setCurrentCartIdentifier($cart);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function abandonCart()
+    {
+        $this->cart = null;
+        $this->storage->resetCurrentCartIdentifier();
+    }
 }

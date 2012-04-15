@@ -33,4 +33,10 @@ interface CartStorageInterface
      * @param CartInterface $cart
      */
     function setCurrentCartIdentifier(CartInterface $cart);
+
+    /**
+     * Resets current cart identifier.
+     * Basically, it means abandoning current cart.
+     */
+    function resetCurrentCartIdentifier();
 }
