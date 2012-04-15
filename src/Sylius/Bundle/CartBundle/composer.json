@@ -21,9 +21,8 @@
 
         "symfony/symfony": "2.1.*"
     },
-    "suggest": {
-        "doctrine/orm": "*",
-        "doctrine/doctrine-bundle": "*"
+    "require-dev": {
+        "doctrine/orm": "*"
     },
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\CartBundle": "" }
