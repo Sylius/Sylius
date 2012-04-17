@@ -43,7 +43,9 @@ class ItemType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('quantity', 'integer');
+        $builder
+            ->add('quantity', 'integer')
+        ;
     }
 
     /**
