@@ -34,13 +34,11 @@ class SyliusAddressingExtension extends Extension
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $config);
-
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
 
-        if (!in_array($config['driver'], array('doctrine/orm'))) {
+        if (!in_array($config['driver'], SyliusAddressingBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
-
         if (!in_array($config['engine'], array('php', 'twig'))) {
             throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
         }
@@ -78,6 +76,10 @@ class SyliusAddressingExtension extends Extension
 
     /**
      * Remap parameters.
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $map
      */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
@@ -90,6 +92,10 @@ class SyliusAddressingExtension extends Extension
 
     /**
      * Remap parameter namespaces.
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $namespaceConfig
      */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
