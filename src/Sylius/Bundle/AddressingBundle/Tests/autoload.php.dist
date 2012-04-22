@@ -10,22 +10,9 @@
  */
 
 if (!file_exists($file = __DIR__.'/../vendor/.composer/autoload.php')) {
-
-$vendorDir = __DIR__.'/../vendor';
-require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-
-$loader = new \Symfony\Component\ClassLoader\UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Symfony'                => array($vendorDir.'/symfony/src', $vendorDir.'/bundles'),
-    'Doctrine\\Common'       => $vendorDir.'/doctrine-common/lib',
-    'Doctrine\\DBAL'         => $vendorDir.'/doctrine-dbal/lib',
-    'Doctrine'               => $vendorDir.'/doctrine/lib',
-));
-
-$loader->register();
-
+    die("Please install dev dependencies using Composer to run the test suite. \n");
 } else {
-	require_once $file;
+    require_once $file;
 }
 
 spl_autoload_register(function($class) {

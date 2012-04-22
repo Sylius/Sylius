@@ -11,16 +11,21 @@
 
 namespace Sylius\Bundle\AddressingBundle\Tests\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sylius\Bundle\AddressingBundle\DependencyInjection\SyliusAddressingExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 
+/**
+ * Dependency injection extension test.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testUserLoadThrowsExceptionUnlessDriverSet()
+    public function testLoadThrowsExceptionUnlessDriverSet()
     {
         $loader = new SyliusAddressingExtension();
         $config = $this->getEmptyConfig();
@@ -29,9 +34,9 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @expectedException \InvalidArgumentException
-    */
-    public function testUserLoadThrowsExceptionUnlessDriverIsValid()
+     * @expectedException \InvalidArgumentException
+     */
+    public function testLoadThrowsExceptionUnlessDriverIsValid()
     {
         $loader = new SyliusAddressingExtension();
         $config = $this->getEmptyConfig();
@@ -40,9 +45,9 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @expectedException \InvalidArgumentException
-    */
-    public function testUserLoadThrowsExceptionUnlessEngineIsValid()
+     * @expectedException \InvalidArgumentException
+     */
+    public function testLoadThrowsExceptionUnlessEngineIsValid()
     {
         $loader = new SyliusAddressingExtension();
         $config = $this->getEmptyConfig();
@@ -51,9 +56,9 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-    */
-    public function testUserLoadThrowsExceptionUnlessaddressModelClassSet()
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testLoadThrowsExceptionUnlessaddressModelClassSet()
     {
         $loader = new SyliusAddressingExtension();
         $config = $this->getEmptyConfig();
@@ -62,7 +67,7 @@ class SyliusAddressingExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * getEmptyConfig
+     * Get empty config for tests.
      *
      * @return array
      */
