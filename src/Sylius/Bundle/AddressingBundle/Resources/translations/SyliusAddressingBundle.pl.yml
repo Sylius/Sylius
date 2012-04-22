@@ -1,24 +1,2 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-
-show: szczegóły
-create: stwórz
-update: edytuj
-delete: usuń
-list: lista
-save: zapisz zmiany
-
-address:
-    show: Szczegóły adresu
-    create: Stwórz adres
-    update: Edytuj adres
-    delete: Usuń adres
-    list: Lista adressów
-
-header:
-    show: Szczegóły adresu
-    create: Stwórz nowy adres
-    update: Edytuj istniejący adres
-    list: Lista adresów <small>Wszystkie adresy w bazie danych</small>
-
-list.address.empty: Brak adresów do wyświetlenia
