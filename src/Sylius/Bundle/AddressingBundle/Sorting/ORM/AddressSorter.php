@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle\Sorting\ORM;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\AddressingBundle\Sorting\SorterInterface;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * Default ORM sorter.
