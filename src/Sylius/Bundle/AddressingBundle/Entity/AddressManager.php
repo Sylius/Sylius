@@ -11,16 +11,17 @@
 
 namespace Sylius\Bundle\AddressingBundle\Entity;
 
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressManager as BaseAddressManager;
 use Sylius\Bundle\AddressingBundle\Sorting\SorterInterface;
 
 /**
  * Address entity manager.
+ * Doctrine ORM driver implementation.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
@@ -44,7 +45,7 @@ class AddressManager extends BaseAddressManager
      * Constructor.
      *
      * @param EntityManager $entityManager
-     * @param string		$class
+     * @param string        $class
      */
     public function __construct(EntityManager $entityManager, $class)
     {
@@ -60,9 +61,25 @@ class AddressManager extends BaseAddressManager
     public function createAddress()
     {
         $class = $this->getClass();
+
         return new $class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function createPaginator(SorterInterface $sorter = null)
+    {
+        $queryBuilder = $this->repository->createQueryBuilder('a')
+            ->orderBy('a.createdAt', 'DESC')
+        ;
+
+        if (null !== $sorter) {
+            $sorter->sort($queryBuilder);
+        }
+
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
+    }
     /**
      * {@inheritdoc}
      */
@@ -111,23 +128,5 @@ class AddressManager extends BaseAddressManager
     public function findAddressesBy(array $criteria)
     {
         return $this->repository->findBy($criteria);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createPaginator(SorterInterface $sorter = null)
-    {
-        $queryBuilder = $this->entityManager->createQueryBuilder()
-            ->select('a')
-            ->from($this->class, 'a')
-            ->orderBy('a.createdAt', 'DESC')
-        ;
-
-        if (null !== $sorter) {
-            $sorter->sort($queryBuilder);
-        }
-
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
     }
 }

@@ -11,6 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\EventDispatcher;
 
+/**
+ * Events.
+ *
+ * @author Paweł Jędrzejwski <pjedrzejewski@diweb.pl>
+ */
 final class SyliusAddressingEvents
 {
     const ADDRESS_CREATE = 'sylius_addressing.event.address.create';
