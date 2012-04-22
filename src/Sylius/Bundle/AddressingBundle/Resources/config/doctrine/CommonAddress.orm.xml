@@ -15,14 +15,19 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Entity\Address">
+    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Entity\CommonAddress">
+        <field name="firstname" column="firstname" type="string" />
+        <field name="lastname" column="lastname" type="string" />
+        <field name="street" column="street" type="string" />
+        <field name="city" column="city" type="string" />
+        <field name="zipCode" column="zip_code" type="string" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-    </mapped-superclass>>
+    </mapped-superclass>
 
 </doctrine-mapping>
 
