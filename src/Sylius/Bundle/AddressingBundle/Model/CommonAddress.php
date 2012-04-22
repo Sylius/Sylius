@@ -47,11 +47,11 @@ class CommonAddress extends Address implements CommonAddressInterface
     protected $city;
 
     /**
-     * Zip code.
+     * Postcode.
      *
      * @var string
      */
-    protected $zipCode;
+    protected $postcode;
 
     /**
      * {@inheritdoc}
@@ -120,16 +120,16 @@ class CommonAddress extends Address implements CommonAddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getZipCode()
+    public function getPostcode()
     {
-        return $this->zipCode;
+        return $this->postcode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setZipCode($zipCode)
+    public function setPostcode($postcode)
     {
-        $this->zipCode = $zipCode;
+        $this->postcode = $postcode;
     }
 }

@@ -75,16 +75,16 @@ interface CommonAddressInterface
     function setCity($city);
 
     /**
-     * Get zip code.
+     * Get postcode.
      *
      * @return string
      */
-    function getZipCode();
+    function getPostcode();
 
     /**
-     * Set zip code.
+     * Set postcode.
      *
-     * @param string $zipCode
+     * @param string $postcode
      */
-    function setZipCode($zipCode);
+    function setPostcode($postcode);
 }

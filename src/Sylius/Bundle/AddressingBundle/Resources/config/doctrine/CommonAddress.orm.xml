@@ -20,7 +20,7 @@
         <field name="lastname" column="lastname" type="string" />
         <field name="street" column="street" type="string" />
         <field name="city" column="city" type="string" />
-        <field name="zipCode" column="zip_code" type="string" />
+        <field name="postcode" column="postcode" type="string" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

@@ -31,7 +31,7 @@ class CommonAddressType extends AddressType
             ->add('lastname')
             ->add('street')
             ->add('city')
-            ->add('zipCode')
+            ->add('postcode')
         ;
     }
 }
