@@ -12,6 +12,7 @@ Features
 ### Implemented
 
 * Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
+* Sensible default address implementation.
 * Basic CRUD for address book.
 * It uses [Pagerfanta](http://github.com/whiteoctober/Pagerfanta) to paginate over the addresses.
 * Thanks to awesome [Symfony2](http://symfony.com) everything is configurable and extensible.
