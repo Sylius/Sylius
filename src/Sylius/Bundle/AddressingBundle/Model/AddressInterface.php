@@ -26,11 +26,25 @@ interface AddressInterface
     function getId();
 
     /**
+     * Set id.
+     *
+     * @param mixed $id
+     */
+    function setId($id);
+
+    /**
      * Get creation time.
      *
-     * @return \DateTime
+     * @return DateTime
      */
     function getCreatedAt();
+
+    /**
+     * Set creation time.
+     *
+     * @param DateTime $createdAt
+     */
+    function setCreatedAt(\DateTime $createdAt);
 
     /**
      * Increments creation time.
@@ -39,12 +53,19 @@ interface AddressInterface
      */
     function incrementCreatedAt();
 
-  /**
+    /**
      * Get modification time.
      *
      * @return \DateTime
      */
     function getUpdatedAt();
+
+    /**
+     * Set modification time.
+     *
+     * @param DateTime $updatedAt
+     */
+    function setUpdatedAt(\DateTime $updatedAt);
 
     /**
      * Increments modification time.

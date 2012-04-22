@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\AddressingBundle\Manipulator;
 
-use Sylius\Bundle\AddressingBundle\Model\AddressManagerInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\AddressingBundle\Model\AddressManagerInterface;
 
 /**
  * Address manipulator.
@@ -43,20 +43,18 @@ class AddressManipulator implements AddressManipulatorInterface
      */
     public function create(AddressInterface $address)
     {
-        $address->incrementCreatedAt();
         $this->addressManager->persistAddress($address);
     }
 
-  /**
+    /**
      * {@inheritdoc}
      */
     public function update(AddressInterface $address)
     {
-        $address->incrementUpdatedAt();
         $this->addressManager->persistAddress($address);
     }
 
-  /**
+    /**
      * {@inheritdoc}
      */
     public function delete(AddressInterface $address)

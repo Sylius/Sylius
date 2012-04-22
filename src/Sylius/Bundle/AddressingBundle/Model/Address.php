@@ -18,18 +18,41 @@ namespace Sylius\Bundle\AddressingBundle\Model;
  */
 abstract class Address implements AddressInterface
 {
+    /**
+     * Addres id.
+     *
+     * @var mixed
+     */
     protected $id;
+
+    /**
+     * Creation time.
+     *
+     * @var DateTime
+     */
     protected $createdAt;
+
+    /**
+     * Update time.
+     *
+     * @var DateTime
+     */
     protected $updatedAt;
 
-    public function __construct()
-    {
-        $this->incrementCreatedAt();
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -43,12 +66,20 @@ abstract class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function incrementCreatedAt()
+    public function setCreatedAt(\DateTime $createdAt)
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = $createdAt;
     }
 
-  /**
+    /**
+     * {@inheritdoc}
+     */
+    public function incrementCreatedAt()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getUpdatedAt()
@@ -59,8 +90,16 @@ abstract class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function incrementUpdatedAt()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \DateTime("now");
     }
 }
