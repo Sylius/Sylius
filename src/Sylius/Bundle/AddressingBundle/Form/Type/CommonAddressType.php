@@ -27,11 +27,21 @@ class CommonAddressType extends AddressType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('street')
-            ->add('city')
-            ->add('postcode')
+            ->add('firstname', 'text', array(
+                'label' => 'sylius_addressing.label.address.firstname'
+            ))
+            ->add('lastname', 'text', array(
+                'label' => 'sylius_addressing.label.address.lastname'
+            ))
+            ->add('street', 'text', array(
+                'label' => 'sylius_addressing.label.address.street'
+            ))
+            ->add('city', 'text', array(
+                'label' => 'sylius_addressing.label.address.city'
+            ))
+            ->add('postcode', 'text', array(
+                'label' => 'sylius_addressing.label.address.postcode'
+            ))
         ;
     }
 }

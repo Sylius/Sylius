@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_addressing:
+    label:
+        address:
+            firstname: "First name"
+            lastname: "Last name"
+            street: "Address"
+            city: "City"
+            postcode: "Postcode"
