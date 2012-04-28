@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                                        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd"
+>
+
+    <class name="Sylius\Bundle\AddressingBundle\Model\CommonAddress">
+        <property name="firstname">
+            <constraint name="NotBlank">
+                <option name="message">sylius_addressing.address.firstname.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_addressing.address.firstname.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_addressing.address.firstname.max_length</option>
+            </constraint>
+        </property>
+        <property name="lastname">
+            <constraint name="NotBlank">
+                <option name="message">sylius_addressing.address.lastname.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_addressing.address.lastname.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_addressing.address.lastname.max_length</option>
+            </constraint>
+        </property>
+        <property name="street">
+            <constraint name="NotBlank">
+                <option name="message">sylius_addressing.address.street.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_addressing.address.street.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_addressing.address.street.max_length</option>
+            </constraint>
+        </property>
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="message">sylius_addressing.address.city.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_addressing.address.city.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_addressing.address.city.max_length</option>
+            </constraint>
+        </property>
+        <property name="postcode">
+            <constraint name="NotBlank">
+                <option name="message">sylius_addressing.address.postcode.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_addressing.address.postcode.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_addressing.address.postcode.max_length</option>
+            </constraint>
+        </property>
+    </class>
+
+</constraint-mapping>

@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_addressing:
+    address:
+        firstname:
+            not_blank: "Please enter first name"
+            min_length: "First name must be at least 2 characters long"
+            max_length: "First name must not be longer than 255 characters"
+        lastname:
+            not_blank: "Please enter last name"
+            min_length: "Last name must be at least 2 characters long"
+            max_length: "Last name must not be longer than 255 characters"
+        street:
+            not_blank: "Please enter street"
+            min_length: "Street must be at least 2 characters long"
+            max_length: "Street must not be longer than 255 characters"
+        city:
+            not_blank: "Please enter city"
+            min_length: "City must be at least 2 characters long"
+            max_length: "City must not be longer than 255 characters"
+        postcode:
+            not_blank: "Please enter postcode"
+            min_length: "Postcode must be at least 2 characters long"
+            max_length: "Postcode must not be longer than 255 characters"
