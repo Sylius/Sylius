@@ -1,0 +1,8 @@
+sylius_addressing:
+    label:
+        address:
+            firstname: "Prénom"
+            lastname: "Nom"
+            street: "Adresse"
+            city: "Ville"
+            postcode: "Code postal"
