@@ -20,17 +20,6 @@ use Sylius\Bundle\SalesBundle\Manipulator\OrderManipulator;
  */
 class OrderManipulatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCreateIncrementsOrderCreatedAt()
-    {
-        $order = $this->getMockOrder();
-        $order->expects($this->once())
-            ->method('incrementCreatedAt')
-        ;
-
-        $manipulator = new OrderManipulator($this->getMockOrderManager(), $this->getMockSlugizer());
-        $manipulator->create($order);
-    }
-
     public function testCreatePersistsOrder()
     {
         $order = $this->getMockOrder();
@@ -43,17 +32,6 @@ class OrderManipulatorTest extends \PHPUnit_Framework_TestCase
 
         $manipulator = new OrderManipulator($orderManager, $this->getMockSlugizer());
         $manipulator->create($order);
-    }
-
-    public function testUpdateIncrementsOrderUpdatedAt()
-    {
-        $order = $this->getMockOrder();
-        $order->expects($this->once())
-            ->method('incrementUpdatedAt')
-        ;
-
-        $manipulator = new OrderManipulator($this->getMockOrderManager(), $this->getMockSlugizer());
-        $manipulator->update($order);
     }
 
     public function testUpdatePersistsOrder()
