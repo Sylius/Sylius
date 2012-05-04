@@ -44,7 +44,7 @@ class Item implements ItemInterface
      */
     public function __construct()
     {
-        $this->quantity = 0;
+        $this->quantity = 1;
     }
 
     /**

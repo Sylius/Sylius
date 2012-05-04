@@ -58,7 +58,8 @@ class OrderType extends AbstractType
                     'type'         => 'sylius_sales_item',
                     'allow_add'    => true,
                     'allow_delete' => true,
-                    'by_reference' => false
+                    'by_reference' => false,
+                    'label'        => 'sylius_sales.label.order.items'
                 ));
             break;
 

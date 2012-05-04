@@ -57,6 +57,7 @@ class StatusController extends ContainerAware
 
             if ($form->isValid()) {
                 $this->container->get('sylius_sales.manager.status')->persistStatus($status);
+                $this->container->get('session')->setFlash('success', 'sylius_sales.flash.status.created');
 
                 return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_status_list'));
             }
@@ -87,6 +88,7 @@ class StatusController extends ContainerAware
 
             if ($form->isValid()) {
                 $this->container->get('sylius_sales.manager.status')->persistStatus($status);
+                $this->container->get('session')->setFlash('success', 'sylius_sales.flash.status.updated');
 
                 return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_status_list'));
             }
@@ -110,6 +112,7 @@ class StatusController extends ContainerAware
         $status = $this->findStatusOr404($id);
 
         $this->container->get('sylius_sales.manager.status')->removeStatus($status);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.status.deleted');
 
         return new RedirectResponse($this->container->get('request')->headers->get('referer'));
     }
@@ -126,6 +129,7 @@ class StatusController extends ContainerAware
         $status = $this->findStatusOr404($id);
 
         $this->container->get('sylius_sales.manager.status')->moveStatusUp($status);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.status.moved');
 
         return new RedirectResponse($this->container->get('request')->headers->get('referer'));
     }
@@ -142,6 +146,7 @@ class StatusController extends ContainerAware
         $status = $this->findStatusOr404($id);
 
         $this->container->get('sylius_sales.manager.status')->moveStatusDown($status);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.status.moved');
 
         return new RedirectResponse($this->container->get('request')->headers->get('referer'));
     }

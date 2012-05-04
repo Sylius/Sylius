@@ -44,7 +44,9 @@ class StatusType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', 'text', array(
+                'label' => 'sylius_sales.label.status.name'
+            ))
         ;
     }
 

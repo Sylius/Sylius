@@ -90,6 +90,7 @@ class OrderController extends ContainerAware
             if ($form->isValid()) {
                 $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CREATE, new FilterOrderEvent($order));
                 $this->container->get('sylius_sales.manipulator.order')->create($order);
+                $this->container->get('session')->setFlash('success', 'sylius_sales.flash.order.created');
 
                 return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_show', array(
                     'id' => $order->getId()
@@ -124,6 +125,7 @@ class OrderController extends ContainerAware
             if ($form->isValid()) {
                 $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_UPDATE, new FilterOrderEvent($order));
                 $this->container->get('sylius_sales.manipulator.order')->update($order);
+                $this->container->get('session')->setFlash('success', 'sylius_sales.flash.order.updated');
 
                 return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_show', array(
                     'id' => $order->getId()
@@ -159,9 +161,12 @@ class OrderController extends ContainerAware
             if ($form->isValid()) {
                 $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CHANGE_STATUS, new FilterOrderEvent($order));
                 $this->container->get('sylius_sales.manipulator.order')->changeStatus($order);
-
-                return new RedirectResponse($request->headers->get('referer'));
+                $this->container->get('session')->setFlash('success', 'sylius_sales.flash.status.changed');
+            } else {
+                $this->container->get('session')->setFlash('error', 'sylius_sales.flash.status.invalid');
             }
+
+            return $this->redirectToReferer();
         }
 
         return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:changeStatus.html.'.$this->getEngine(), array(
@@ -183,8 +188,9 @@ class OrderController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CONFIRM, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->confirm($order);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.order.confirmed');
 
-        return $this->redirectToOrderList();
+        return $this->redirectToReferer();
     }
 
     /**
@@ -200,8 +206,9 @@ class OrderController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CLOSE, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->close($order);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.order.closed');
 
-        return $this->redirectToOrderList();
+        return $this->redirectToReferer();
     }
 
     /**
@@ -217,8 +224,9 @@ class OrderController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_OPEN, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->open($order);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.order.opened');
 
-        return $this->redirectToOrderList();
+        return $this->redirectToReferer();
     }
 
     /**
@@ -234,8 +242,33 @@ class OrderController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_DELETE, new FilterOrderEvent($order));
         $this->container->get('sylius_sales.manipulator.order')->delete($order);
+        $this->container->get('session')->setFlash('success', 'sylius_sales.flash.order.deleted');
 
         return $this->redirectToOrderList();
+    }
+
+    /**
+     * Redirects to referer if any, points to order list otherwise.
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectToReferer()
+    {
+        if (null !== $url = $this->container->get('request')->headers->get('referer')) {
+            return new RedirectResponse($url);
+        }
+
+        return $this->redirectToOrderList();
+    }
+
+    /**
+     * Returns redirect response pointing to order list.
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectToOrderList()
+    {
+        return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_list'));
     }
 
     /**
@@ -255,16 +288,6 @@ class OrderController extends ContainerAware
         }
 
         return $order;
-    }
-
-    /**
-     * Returns redirect response pointing to order list.
-     *
-     * @return RedirectResponse
-     */
-    protected function redirectToOrderList()
-    {
-        return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_list'));
     }
 
     /**
