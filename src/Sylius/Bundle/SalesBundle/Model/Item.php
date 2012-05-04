@@ -12,33 +12,33 @@
 namespace Sylius\Bundle\SalesBundle\Model;
 
 /**
- * Model for order items.
- * 
+ * Model for order line items.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Item implements ItemInterface
+class Item implements ItemInterface
 {
     /**
      * Item id.
-     * 
-     * @var integer
+     *
+     * @var mixed
      */
     protected $id;
-    
+
     /**
      * Order.
-     * 
+     *
      * @var OrderInterface
      */
     protected $order;
-    
+
     /**
      * Quantity.
-     * 
+     *
      * @var integer
      */
     protected $quantity;
-    
+
     /**
      * Constructor.
      */
@@ -46,53 +46,51 @@ abstract class Item implements ItemInterface
     {
         $this->quantity = 0;
     }
-    
+
     /**
-     * Returns item id.
-     * 
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
         return $this->id;
     }
-    
+
     /**
-     * Get item quantity.
-     * 
-     * @return integer
+     * {@inheritdoc}
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getQuantity()
     {
         return $this->quantity;
     }
-    
+
     /**
-     * Sets quantity.
-     * 
-     * @param integer $quantity
+     * {@inheritdoc}
      */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
     }
-    
+
     /**
-     * Returns order.
-     * 
-     * @return OrderInterface
+     * {@inheritdoc}
      */
     public function getOrder()
     {
         return $this->order;
     }
-    
+
     /**
-     * Sets order.
-     * 
-     * @param OrderInterface $order
+     * {@inheritdoc}
      */
-    public function setOrder(OrderInterface $order)
+    public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
     }

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SalesBundle\Model;
 
 /**
- * Base class for order item model manager.
+ * Base class for order line item model manager.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -20,21 +20,21 @@ abstract class ItemManager implements ItemManagerInterface
 {
     /**
      * FQCN for order item model.
-     * 
+     *
      * @var string
      */
     protected $class;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $class The FQCN for order item model
      */
     public function __construct($class)
     {
         $this->class = $class;
     }
-    
+
     /**
      * {@inheritdoc}
      */

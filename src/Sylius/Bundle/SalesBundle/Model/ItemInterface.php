@@ -12,43 +12,50 @@
 namespace Sylius\Bundle\SalesBundle\Model;
 
 /**
- * Interface for order item model.
- * 
+ * Interface for order line item model.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ItemInterface
 {
-	/**
-     * Returns item id.
-     * 
-     * @return integer
+    /**
+     * Return item id.
+     *
+     * @return mixed
      */
     function getId();
 
     /**
-     * Returns order.
-     * 
+     * Set item id.
+     *
+     * @param mixed $id
+     */
+    function setId($id);
+
+    /**
+     * Return order.
+     *
      * @return OrderInterface
      */
     function getOrder();
-    
+
     /**
-     * Sets order.
-     * 
+     * Set order.
+     *
      * @param OrderInterface $order
      */
-    function setOrder(OrderInterface $order);
-    
+    function setOrder(OrderInterface $order = null);
+
     /**
      * Get item quantity.
-     * 
+     *
      * @return integer
      */
     function getQuantity();
-    
+
     /**
-     * Sets quantity.
-     * 
+     * Set quantity.
+     *
      * @param integer $quantity
      */
     function setQuantity($quantity);

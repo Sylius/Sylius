@@ -21,12 +21,36 @@ abstract class Order implements OrderInterface
     /**
      * Id.
      *
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
+    /**
+     * Items in order.
+     *
+     * @var array
+     */
+    protected $items;
+
+    /**
+     * Order status.
+     *
+     * @var StatusInterface
+     */
+    protected $status;
+
+    /**
+     * Whether order was confirmed.
+     *
+     * @var Boolean
+     */
     protected $confirmed;
 
+    /**
+     * Confirmation token.
+     *
+     * @var string
+     */
     protected $confirmationToken;
 
     /**
@@ -35,8 +59,6 @@ abstract class Order implements OrderInterface
      * @var Boolean
      */
     protected $closed;
-
-    protected $status;
 
     /**
      * Creation time.
@@ -57,6 +79,7 @@ abstract class Order implements OrderInterface
      */
     public function __construct()
     {
+        $this->items = array();
         $this->closed = false;
         $this->confirmed = true;
         $this->generateConfirmationToken();
@@ -73,6 +96,14 @@ abstract class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isClosed()
     {
         return $this->closed;
@@ -83,24 +114,36 @@ abstract class Order implements OrderInterface
      */
     public function setClosed($closed)
     {
-        $this->closed = $closed;
+        $this->closed = (Boolean) $closed;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isConfirmed()
     {
         return $this->confirmed;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setConfirmed($confirmed)
     {
-        $this->confirmed = $confirmed;
+        $this->confirmed = (Boolean) $confirmed;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getConfirmationToken()
     {
         return $this->confirmationToken;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
@@ -120,7 +163,6 @@ abstract class Order implements OrderInterface
                     $bytes = false;
                 }
             }
-
             if (false === $bytes) {
                 $bytes = hash('sha256', uniqid(mt_rand(), true), true);
             }
@@ -129,6 +171,9 @@ abstract class Order implements OrderInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStatus()
     {
         return $this->status;
@@ -142,9 +187,70 @@ abstract class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countItems()
+    {
+        return count($this->items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addItem(ItemInterface $item)
+    {
+        if (!$this->hasItem($item)) {
+            $this->items[] = $item;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeItem(ItemInterface $item)
+    {
+        if ($this->hasItem($item)) {
+            $key = array_search($item, $this->items);
+            unset($this->items[$key]);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasItem(ItemInterface $item)
+    {
+        return in_array($item, $this->items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -161,6 +267,14 @@ abstract class Order implements OrderInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\SalesBundle\Controller\Backend;
 
 use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
 use Sylius\Bundle\SalesBundle\EventDispatcher\SyliusSalesEvents;
+use Sylius\Bundle\SalesBundle\Form\Type\OrderType;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,6 +70,74 @@ class OrderController extends ContainerAware
     }
 
     /**
+     * Creates a new order.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function createAction(Request $request)
+    {
+        $order = $this->container->get('sylius_sales.manager.order')->createorder();
+
+        $form = $this->container->get('form.factory')->create('sylius_sales_order', $order, array(
+            'mode' => OrderType::MODE_CREATE
+        ));
+
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CREATE, new FilterOrderEvent($order));
+                $this->container->get('sylius_sales.manipulator.order')->create($order);
+
+                return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_show', array(
+                    'id' => $order->getId()
+                )));
+            }
+        }
+
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:create.html.'.$this->getEngine(), array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Updates a order.
+     *
+     * @param Request $request
+     * @param mixed   $id
+     *
+     * @return Response
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $order = $this->findOrderOr404($id);
+
+        $form = $this->container->get('form.factory')->create('sylius_sales_order', $order, array(
+            'mode' => OrderType::MODE_UPDATE
+        ));
+
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_UPDATE, new FilterOrderEvent($order));
+                $this->container->get('sylius_sales.manipulator.order')->update($order);
+
+                return new RedirectResponse($this->container->get('router')->generate('sylius_sales_backend_order_show', array(
+                    'id' => $order->getId()
+                )));
+            }
+        }
+
+        return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:update.html.' . $this->getEngine(), array(
+            'form'  => $form->createView(),
+            'order' => $order
+        ));
+    }
+
+    /**
      * Order status management.
      *
      * @param Request $request
@@ -80,25 +149,23 @@ class OrderController extends ContainerAware
     {
         $order = $this->findOrderOr404($id);
 
-        $form = $this->container->get('form.factory')->create('sylius_sales_status_choice');
-        $form->setData($order->getStatus());
+        $form = $this->container->get('form.factory')->create('sylius_sales_order', $order, array(
+            'mode' => OrderType::MODE_CHANGE_STATUS
+        ));
 
-        if ('POST' == $request->getMethod()) {
+        if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                $status = $form->getData();
-                $order->setStatus($status);
-
                 $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_CHANGE_STATUS, new FilterOrderEvent($order));
-                $this->container->get('sylius_sales.manipulator.order')->update($order);
+                $this->container->get('sylius_sales.manipulator.order')->changeStatus($order);
 
                 return new RedirectResponse($request->headers->get('referer'));
             }
         }
 
         return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Backend/Order:changeStatus.html.'.$this->getEngine(), array(
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
             'order' => $order
         ));
     }

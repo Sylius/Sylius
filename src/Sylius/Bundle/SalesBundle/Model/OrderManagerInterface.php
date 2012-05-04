@@ -16,18 +16,18 @@ use Sylius\Bundle\SalesBundle\Sorting\SorterInterface;
 
 /**
  * Order manager interface.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface OrderManagerInterface
-{  
+{
     /**
      * Creates new order object.
-     * 
+     *
      * @return OrderInterface
      */
     function createOrder();
-    
+
     /**
      * Creates paginator.
      */
@@ -35,52 +35,55 @@ interface OrderManagerInterface
 
     /**
      * Persist order.
-     * 
+     *
      * @param OrderInterface
      */
     function persistOrder(OrderInterface $order);
-    
+
     /**
      * Removes order.
-     * 
+     *
      * @param OrderInterface $order
      */
     function removeOrder(OrderInterface $order);
-    
+
     /**
      * Finds order by id.
-     * 
+     *
      * @param integer $id
+     *
      * @return OrderInterface
      */
     function findOrder($id);
-    
+
     /**
      * Finds order by criteria.
-     * 
+     *
      * @param array $criteria
+     *
      * @return OrderInterface
      */
     function findOrderBy(array $criteria);
-    
+
     /**
      * Finds all orders.
-     * 
+     *
      * @return array
      */
     function findOrders();
-    
+
     /**
      * Finds orders by criteria.
-     * 
+     *
      * @param array $criteria
+     *
      * @return array
      */
     function findOrdersBy(array $criteria);
-    
+
     /**
      * Returns FQCN of order.
-     * 
+     *
      * @return string
      */
     function getClass();

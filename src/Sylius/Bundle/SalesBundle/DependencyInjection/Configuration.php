@@ -64,7 +64,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->children()
                                 ->scalarNode('order')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('item')->defaultValue('')->end()
+                                ->scalarNode('item')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('status')->isRequired()->cannotBeEmpty()->end()
                             ->end()
                         ->end()
