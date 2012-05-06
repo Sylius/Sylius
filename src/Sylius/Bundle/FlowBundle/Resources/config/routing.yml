@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_flow_start:
+    pattern: /{setupAlias}/start
+    defaults: { _controller: sylius_flow.controller.setup:startAction }
+
+sylius_flow_step:
+    pattern: /{setupAlias}/step/{stepIndex}
+    defaults: { _controller: sylius_flow.controller.setup:stepAction }
+
+sylius_flow_complete:
+    pattern: /{setupAlias}/complete
+    defaults: { _controller: sylius_flow.controller.setup:completeAction }
