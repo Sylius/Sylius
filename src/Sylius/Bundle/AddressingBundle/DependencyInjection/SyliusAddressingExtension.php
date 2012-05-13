@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\AddressingBundle\SyliusAddressingBundle;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -38,9 +38,6 @@ class SyliusAddressingExtension extends Extension
 
         if (!in_array($config['driver'], SyliusAddressingBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
-        }
-        if (!in_array($config['engine'], array('php', 'twig'))) {
-            throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
         }
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
