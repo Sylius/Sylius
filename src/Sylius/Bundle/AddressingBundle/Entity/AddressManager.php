@@ -80,6 +80,7 @@ class AddressManager extends BaseAddressManager
 
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
     }
+
     /**
      * {@inheritdoc}
      */
