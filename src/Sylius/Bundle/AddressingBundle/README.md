@@ -1,7 +1,7 @@
-SyliusAddressingBundle
+SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
 ======================
 
-This bundle provides basic architecture, manipulators, forms and interfaces for addressing in any Symfony2 application.  
+This bundle provides basic architecture, manipulators, forms and interfaces for managing addresses in any Symfony2 application.  
 There is a default address storage agnostic model and interface, although you can customize it to fit your needs.
 
 **This bundle is compatible only with 2.1.x branch of Symfony2**.
@@ -9,23 +9,11 @@ There is a default address storage agnostic model and interface, although you ca
 Features
 --------
 
-### Implemented
-
 * Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
 * Sensible default address implementation.
 * Basic CRUD for address book.
 * It uses [Pagerfanta](http://github.com/whiteoctober/Pagerfanta) to paginate over the addresses.
 * Thanks to awesome [Symfony2](http://symfony.com) everything is configurable and extensible.
-
-### Planned or in progress
-
-* Unit testing. [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
-* Zones management, countries, states and zone definition support.
-* Doctrine MongoDB ODM driver.
-* Doctrine CouchDB ODM driver. `*`
-* Propel driver. `*`
-
-`*` - wishlist, would love to see a contribution.
 
 Sylius
 ------
