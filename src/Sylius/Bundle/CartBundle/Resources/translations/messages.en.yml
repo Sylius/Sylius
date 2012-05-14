@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_cart:
+    flashes:
+        saved: "Your cart has been saved"
+        cleared: "Your cart has been cleared"
+        add:
+            success: "Successfully added item to cart"
+            error: "Error occurred while trying to add the item to cart"
+        remove:
+            success: "Successfully removed item from cart"
+            error: "Error occurred while trying to remove the item from cart"

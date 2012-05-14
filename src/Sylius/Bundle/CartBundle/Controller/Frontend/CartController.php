@@ -58,7 +58,9 @@ class CartController extends ContainerAware
         $item = $this->container->get('sylius_cart.resolver')->resolveItemToAdd($request);
 
         if (!$item) {
-            throw new NotFoundHttpException('Requested item could not be added to cart');
+            $this->container->get('session')->setFlash('error', 'sylius_cart.flashes.add.error');
+
+            return new RedirectResponse($request->headers->get('referer'));
         }
 
         $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::ITEM_ADD, new CartOperationEvent($cart, $item));
@@ -69,8 +71,10 @@ class CartController extends ContainerAware
 
         $errors = $this->container->get('validator')->validate($cart);
         if (0 === count($errors)) {
+            $this->container->get('session')->setFlash('success', 'sylius_cart.flashes.add.success');
             $cartOperator->save($cart);
         }
+
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
@@ -88,7 +92,9 @@ class CartController extends ContainerAware
         $item = $this->container->get('sylius_cart.resolver')->resolveItemToRemove($request);
 
         if (!$item || false === $cart->hasItem($item)) {
-            throw new NotFoundHttpException('Requested item could not be removed from cart');
+            $this->container->get('session')->setFlash('error', 'sylius_cart.flashes.remove.error');
+
+            return new RedirectResponse($request->headers->get('referer'));
         }
 
         $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::ITEM_REMOVE, new CartOperationEvent($cart, $item));
@@ -97,6 +103,8 @@ class CartController extends ContainerAware
         $cartOperator->removeItem($cart, $item);
         $cartOperator->refresh($cart);
         $cartOperator->save($cart);
+
+        $this->container->get('session')->setFlash('success', 'sylius_cart.flashes.remove.success');
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
@@ -122,6 +130,8 @@ class CartController extends ContainerAware
             $cartOperator = $this->container->get('sylius_cart.operator');
             $cartOperator->refresh($cart);
             $cartOperator->save($cart);
+
+            $this->container->get('session')->setFlash('success', 'sylius_cart.flashes.saved');
         }
 
         return $this->container->get('templating')->renderResponse('SyliusCartBundle:Frontend/Cart:show.html.'.$this->getEngine(), array(
@@ -141,6 +151,7 @@ class CartController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_CLEAR, new FilterCartEvent($cart));
         $this->container->get('sylius_cart.operator')->clear($cart);
+        $this->container->get('session')->setFlash('success', 'sylius_cart.flashes.cleared');
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
