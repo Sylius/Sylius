@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * This bundle provides simple architecture for addresses management.
  * Future plans include zone management, useful for e-commerce applications,
- * for example for setting specific tax/shipping rates for concrete zone.
+ * where you need set specific tax/shipping rates for concrete zone.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
@@ -27,6 +27,7 @@ class SyliusAddressingBundle extends Bundle
     const DRIVER_DOCTRINE_MONGODB_ODM = 'doctrine/mongodb-odm';
     const DRIVER_DOCTRINE_COUCHDB_ODM = 'doctrine/couchdb-odm';
     const DRIVER_PROPEL               = 'propel';
+    const DRIVER_PROPEL2              = 'propel2';
 
     /**
      * Return array of currently supported drivers.
