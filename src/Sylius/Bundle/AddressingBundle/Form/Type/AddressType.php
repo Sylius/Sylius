@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Address form type.
@@ -40,11 +41,13 @@ abstract class AddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'data_class' => $this->dataClass
-        );
+        $resolver
+            ->setDefaults(array(
+                'data_class' => $this->dataClass
+            ))
+        ;
     }
 
     /**
