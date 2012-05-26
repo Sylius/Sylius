@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\InventoryBundle\Model\InventoryUnitManagerInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
@@ -29,13 +30,22 @@ class InventoryOperator implements InventoryOperatorInterface
     protected $inventoryUnitManager;
 
     /**
+     * Backorders enabled?
+     *
+     * @var Boolean
+     */
+    protected $backorders;
+
+    /**
      * Constructor.
      *
      * @param InventoryUnitManagerInterface $inventoryUnitManager
+     * @param Boolean                       $backorders
      */
-    public function __construct(InventoryUnitManagerInterface $inventoryUnitManager)
+    public function __construct(InventoryUnitManagerInterface $inventoryUnitManager, $backorders = true)
     {
         $this->inventoryUnitManager = $inventoryUnitManager;
+        $backorders = (Boolean) $backorders;
     }
 
     /**
@@ -43,17 +53,16 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function refresh(StockableInterface $stockable)
     {
-        $onHand = $stockable->getOnHand();
-        $currentStock = $this->inventoryUnitManager->countInventoryUnitsBy($stockable, array(
-            'state' => InventoryUnitInterface::STATE_AVAILABLE
-        ));
+        // If we allow backorders.
+        if ($this->backorders) {
+            $onHand = $stockable->getOnHand();
+            $backorderedUnits = $this->inventoryUnitManager->countInventoryUnitsBy(array(
+                'stockableId' => $stockable->getStockableId(),
+                'state'       => InventoryUnitInterface::STATE_BACKORDERED
+            ));
 
-        if ($onHand === $currentStock) {
-            return;
-        } elseif ($onHand > $currentStock) {
-            $this->restock($stockable, $onHand - $currentStock);
-        } elseif ($onHand < $currentStock) {
-            $this->unstock($stockable, $currentStock - $onHand);
+            if (0 < $onHand && 0 < $backorderedUnits) {
+            }
         }
     }
 
@@ -67,6 +76,7 @@ class InventoryOperator implements InventoryOperatorInterface
         }
 
         for ($i = 0; $i < $quantity; $i++) {
+            echo "restocking ". $stockable->getStockableId() . " \n";
             $inventoryUnit = $this->inventoryUnitManager->createInventoryUnit($stockable);
             $inventoryUnit->setState($state);
 

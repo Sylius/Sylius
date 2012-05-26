@@ -38,6 +38,9 @@ class SyliusInventoryExtension extends Extension
 
         $this->loadDriver($config['driver'], $config, $container, $loader);
 
+        $loader->load('resolvers.xml');
+        $loader->load('operators.xml');
+
         $container->setParameter('sylius_inventory.driver', $config['driver']);
         $container->setParameter('sylius_inventory.engine', $config['engine']);
 
@@ -62,8 +65,6 @@ class SyliusInventoryExtension extends Extension
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
-        $loader->load('resolvers.xml');
-        $loader->load('operators.xml');
     }
 
 }

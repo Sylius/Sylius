@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 
 /**
- * Dependency injection test.
+ * Dependency injection extension test.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -25,7 +25,7 @@ class SyliusInventoryExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testUserLoadThrowsExceptionUnlessDriverSet()
+    public function testLoadThrowsExceptionUnlessDriverSet()
     {
         $extension = new SyliusInventoryExtension();
         $config = $this->getEmptyConfig();

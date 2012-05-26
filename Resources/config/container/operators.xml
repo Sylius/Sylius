@@ -18,7 +18,7 @@
 >
 
     <parameters>
-        <parameter key="sylius_inventory.operator.class">Sylius\Bundle\InventoryBundle\operator\StockOperator</parameter>
+        <parameter key="sylius_inventory.operator.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
     </parameters>
 
     <services>

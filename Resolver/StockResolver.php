@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\InventoryBundle\Resolver;
 
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
@@ -22,13 +21,6 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 class StockResolver implements StockResolverInterface
 {
     /**
-     * Inventory unit manager.
-     *
-     * @var InventoryUnitManagerInterface
-     */
-    protected $inventoryUnitManager;
-
-    /**
      * Full inventory tracking enabled?
      *
      * @var Boolean
@@ -38,35 +30,23 @@ class StockResolver implements StockResolverInterface
     /**
      * Constructor.
      *
-     * @param InventoryUnitManagerInterface $inventoryUnitManager
-     * @param Boolean                       $tracking
+     * @param Boolean $tracking
      */
-    public function __construct(InventoryUnitManagerInterface $inventoryUnitManager, $tracking = true)
+    public function __construct($tracking = true)
     {
-        $this->inventoryUnitManager = $inventoryUnitManager;
         $this->tracking = (Boolean) $tracking;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isAvailable(StockableInterface $stockable, $strict = true)
+    public function isInStock(StockableInterface $stockable)
     {
-        if ($strict && $this->tracking) {
+        if ($this->tracking) {
 
-            return 0 !== $this->inventoryUnitManager->getAvailableUnits($stockable);
+            return 0 > $stockable->getOnHand();
         }
 
-        return $stockable->isAvailable();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStock(StockableInterface $stockable)
-    {
-        return $this->inventoryUnitManager->countInventoryUnitsBy($stockable, array(
-            'state' => InventoryUnitInterface::STATE_AVAILABLE
-        ));
+        return true;
     }
 }

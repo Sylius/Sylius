@@ -40,12 +40,11 @@ class InventoryUnit implements InventoryUnitInterface
     protected $state;
 
     /**
-     * Constructor.
+     * Creation time.
+     *
+     * @var \DateTime
      */
-    public function __construct()
-    {
-        $this->state = InventoryUnitInterface::STATE_AVAILABLE;
-    }
+    protected $createdAt;
 
     /**
      * {@inheritdoc}
@@ -93,5 +92,22 @@ class InventoryUnit implements InventoryUnitInterface
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }

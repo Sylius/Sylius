@@ -55,12 +55,13 @@ class InventoryUnitManager extends BaseInventoryUnitManager
     /**
      * {@inheritdoc}
      */
-    public function createInventoryUnit(StockableInterface $stockable)
+    public function createInventoryUnit(StockableInterface $stockable, $state)
     {
         $class = $this->getClass();
 
         $inventoryUnit = new $class;
         $inventoryUnit->setStockableId($stockable->getStockableId());
+        $inventoryUnit->setState($state);
 
         return $inventoryUnit;
     }
@@ -118,18 +119,16 @@ class InventoryUnitManager extends BaseInventoryUnitManager
     /**
      * {@inheritdoc}
      */
-    public function countInventoryUnitsBy(StockableInterface $stockable, array $criteria)
+    public function countInventoryUnitsBy(array $criteria)
     {
         $queryBuilder = $this->repository
             ->createQueryBuilder('c')
             ->select('COUNT(c.id)')
-            ->where('c.stockableId = :stockableId')
-            ->setParameter('stockableId', $stockable->getStockableId())
         ;
 
         foreach ($criteria as $parameter => $value) {
             $queryBuilder
-                ->andWhere(sprintf('c.%s = :%s', $parameter))
+                ->andWhere(sprintf('c.%s = :%s', $parameter, $parameter))
                 ->setParameter($parameter, $value)
             ;
         }

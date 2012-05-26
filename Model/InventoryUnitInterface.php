@@ -21,8 +21,8 @@ interface InventoryUnitInterface
     /**
      * Default states.
      */
-    const STATE_UNAVAILABLE = 0;
-    const STATE_AVAILABLE   = 1;
+    const STATE_BACKORDERED = 0;
+    const STATE_RETURNED    = 1;
 
     /**
      * Get inventory unit id.
@@ -65,4 +65,18 @@ interface InventoryUnitInterface
      * @param integer $state
      */
     function setState($state);
+
+    /**
+     * Get creation time.
+     *
+     * @return \DateTime
+     */
+    function getCreatedAt();
+
+    /**
+     * Set creation time.
+     *
+     * @param \DateTime $createdAt
+     */
+    function setCreatedAt(\DateTime $createdAt);
 }
