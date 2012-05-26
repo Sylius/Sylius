@@ -28,14 +28,5 @@ interface StockResolverInterface
      *
      * @return Boolean
      */
-    function isAvailable(StockableInterface $stockable, $strict =  true);
-
-    /**
-     * Get total available inventory units for given stockable object.
-     *
-     * @param StockableInterface $stockable
-     *
-     * @return integer
-     */
-    function getStock(StockableInterface $stockable);
+    function isInStock(StockableInterface $stockable, $strict =  true);
 }

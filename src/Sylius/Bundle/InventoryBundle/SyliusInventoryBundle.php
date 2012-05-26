@@ -22,8 +22,6 @@ class SyliusInventoryBundle extends Bundle
 {
     // Bundle driver list.
     const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
-    const DRIVER_PROPEL       = 'propel';
-    const DRIVER_PROPEL2      = 'propel2';
 
     /**
      * Return array with currently supported drivers.

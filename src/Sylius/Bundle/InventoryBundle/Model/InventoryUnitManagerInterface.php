@@ -22,10 +22,11 @@ interface InventoryUnitManagerInterface
      * Creates new inventory unit object.
      *
      * @param StockableInterface $stockable
+     * @param integer            $state
      *
      * @return InventoryUnitInterface
      */
-    function createInventoryUnit(StockableInterface $stockable);
+    function createInventoryUnit(StockableInterface $stockable, $state);
 
     /**
      * Persists inventory unit.
@@ -78,12 +79,11 @@ interface InventoryUnitManagerInterface
     /**
      * Get total unavailable units for given stockable.
      *
-     * @param StockableInterface $stockable
-     * @param array              $criteria
+     * @param array $criteria
      *
      * @return integer
      */
-    function countInventoryUnitsBy(StockableInterface $stockable, array $criteria);
+    function countInventoryUnitsBy(array $criteria);
 
     /**
      * Returns FQCN of inventory unit.
