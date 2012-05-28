@@ -12,7 +12,8 @@
 namespace Sylius\Bundle\SalesBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Status form.
@@ -41,7 +42,7 @@ class StatusType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', 'text', array(
@@ -53,11 +54,13 @@ class StatusType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'data_class' => $this->dataClass
-        );
+        $resolver
+            ->setDefaults(array(
+                'data_class' => $this->dataClass
+            ))
+        ;
     }
 
     /**

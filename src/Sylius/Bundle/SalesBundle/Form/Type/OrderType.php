@@ -12,7 +12,8 @@
 namespace Sylius\Bundle\SalesBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Order form type.
@@ -49,24 +50,28 @@ class OrderType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         switch ($options['mode']) {
             case self::MODE_CREATE:
             case self::MODE_UPDATE:
-                $builder->add('items', 'collection', array(
-                    'type'         => 'sylius_sales_item',
-                    'allow_add'    => true,
-                    'allow_delete' => true,
-                    'by_reference' => false,
-                    'label'        => 'sylius_sales.label.order.items'
-                ));
+                $builder
+                    ->add('items', 'collection', array(
+                        'type'         => 'sylius_sales_item',
+                        'allow_add'    => true,
+                        'allow_delete' => true,
+                        'by_reference' => false,
+                        'label'        => 'sylius_sales.label.order.items'
+                    ))
+                ;
             break;
 
             case self::MODE_CHANGE_STATUS:
-                $builder->add('status', 'sylius_sales_status_choice', array(
-                    'label' => 'sylius_sales.label.order.status'
-                ));
+                $builder
+                    ->add('status', 'sylius_sales_status_choice', array(
+                        'label' => 'sylius_sales.label.order.status'
+                    ))
+                ;
             break;
         }
     }
@@ -74,14 +79,19 @@ class OrderType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'data_class' => $this->dataClass,
-            'mode'       => self::MODE_PLACE
-        );
+        $resolver
+            ->setDefaults(array(
+                'data_class' => $this->dataClass,
+                'mode'       => self::MODE_PLACE,
+            ))
+        ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_sales_order';

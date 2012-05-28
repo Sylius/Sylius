@@ -13,7 +13,8 @@ namespace Sylius\Bundle\SalesBundle\Form\Type;
 
 use Sylius\Bundle\SalesBundle\Form\ChoiceList\StatusChoiceList;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Status choice form type.
@@ -50,18 +51,20 @@ class StatusChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'data_class'  => $this->dataClass,
-            'choice_list' => $this->statusChoiceList
-        );
+        $resolver
+            ->setDefaults(array(
+                'data_class'  => $this->dataClass,
+                'choice_list' => $this->statusChoiceList
+            ))
+        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParent(array $options)
+    public function getParent()
     {
         return 'choice';
     }
