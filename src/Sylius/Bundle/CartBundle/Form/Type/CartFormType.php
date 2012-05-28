@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Cart form form.
@@ -41,7 +41,7 @@ class CartFormType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('items', 'collection', array(
             'type' => 'sylius_cart_item',
