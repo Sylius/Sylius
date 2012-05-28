@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CartBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Cart item type.
@@ -51,11 +52,13 @@ class ItemType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'data_class' => $this->dataClass
-        );
+        $resolver
+            ->setDefaults(array(
+                'data_class' => $this->dataClass
+            ))
+        ;
     }
 
     /**
