@@ -24,13 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class StatusChoiceType extends AbstractType
 {
     /**
-     * The class that holds the data.
-     *
-     * @var dataClass
-     */
-    protected $dataClass;
-
-    /**
      * Status choice list.
      *
      * @var StatusChoiceList
@@ -40,11 +33,10 @@ class StatusChoiceType extends AbstractType
     /**
      * Constructor.
      *
-     * @param string $dataClass
+     * @param StatusChoiceList $statusChoiceList
      */
-    public function __construct($class, StatusChoiceList $statusChoiceList)
+    public function __construct(StatusChoiceList $statusChoiceList)
     {
-        $this->dataClass = $class;
         $this->statusChoiceList = $statusChoiceList;
     }
 
@@ -55,7 +47,6 @@ class StatusChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class'  => $this->dataClass,
                 'choice_list' => $this->statusChoiceList
             ))
         ;
