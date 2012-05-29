@@ -64,7 +64,7 @@ class CartProvider implements CartProviderInterface
             $cartIdentifier = $this->storage->getCurrentCartIdentifier();
 
             if ($cartIdentifier) {
-                $cart = $this->cartManager->findCart($cartIdentifier);
+                $cart = $this->getCartByIdentifier($cartIdentifier);
 
                 if ($cart) {
                     $this->cart = $cart;
@@ -98,5 +98,16 @@ class CartProvider implements CartProviderInterface
     {
         $this->cart = null;
         $this->storage->resetCurrentCartIdentifier();
+    }
+
+    /**
+     * Gets cart by cart identifier.
+     *
+     * @param mixed $identifier
+     * @return CartInterface|null
+     */
+    protected function getCartByIdentifier($identifier)
+    {
+        return $this->cartManager->findCart($identifier);
     }
 }
