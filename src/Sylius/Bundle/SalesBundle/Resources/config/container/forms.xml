@@ -22,7 +22,6 @@
             <tag name="form.type" alias="sylius_sales_status" />
         </service>
         <service id="sylius_sales.form.type.status_choice" class="%sylius_sales.form.type.status_choice.class%">
-            <argument>%sylius_sales.model.order.class%</argument>
             <argument type="service" id="sylius_sales.form.choice_list.status" />
             <tag name="form.type" alias="sylius_sales_status_choice" />
         </service>
