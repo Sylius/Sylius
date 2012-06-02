@@ -29,32 +29,39 @@ interface InventoryOperatorInterface
     function refresh(StockableInterface $stockable);
 
     /**
-     * Restock inventory units for given stockable, quantity and apply the specified state.
+     * Increase stock on hand for given stockable by quantity.
+     *
+     * @param StockableInterface $stockable
+     * @param integer            $quantity
+     */
+    function increase(StockableInterface $stockable, $quantity);
+
+    /**
+     * Decrease stock on hand for given stockable by quantity, return units in state if any is passed as third argument.
+     *
+     * @param StockableInterface $stockable
+     * @param integer            $quantity
+     * @param integer            $returnUnitsInState
+     *
+     * @return null|array
+     */
+    function decrease(StockableInterface $stockable, $quantity, $returnUnitsInState = false);
+
+    /**
+     * Create inventory units for given stockable, quantity and apply the specified state.
      *
      * @param StockableInterface $stockable
      * @param integer            $quantity
      * @param integer            $state
+     *
+     * @return array An array of InventoryUnitInterface objects
      */
-    function restock(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_AVAILABLE);
+    function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_SOLD);
 
     /**
-     * Unstock inventory units for given stockable, quantity and apply the specified state.
+     * Destroy inventory unit.
      *
-     * @param StockableInterface $stockable
-     * @param integer            $quantity
-     * @param integer            $state
+     * @param InventoryUnitInterface $inventoryUnit
      */
-    function unstock(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_AVAILABLE);
-
-    /**
-     * Transfer units.
-     *
-     * @param StockableInterface $stockable
-     * @param integer            $quantity
-     * @param integer            $from
-     * @param integer            $to
-     *
-     * @return array An array or collection of InventoryUnitInterface
-     */
-    function transfer(StockableInterface $stockable, $quantity, $from = InventoryUnitInterface::STATE_AVAILABLE, $to = InventoryUnitInterface::STATE_UNAVAILABLE);
+    function destroy(InventoryUnitInterface $inventoryUnit);
 }

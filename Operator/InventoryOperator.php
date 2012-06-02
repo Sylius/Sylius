@@ -62,6 +62,7 @@ class InventoryOperator implements InventoryOperatorInterface
             ));
 
             if (0 < $onHand && 0 < $backorderedUnits) {
+                $this->fillBackorders($stockable, $onHand, $backorderedUnits);
             }
         }
     }
@@ -69,57 +70,76 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function restock(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_AVAILABLE)
+    public function increase(StockableInterface $stockable, $quantity)
     {
         if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units to restock must be greater than 1');
+            throw new \InvalidArgumentException('Quantity of units must be greater than 1');
         }
 
+        $stockable->setOnHand($stockable->getOnHand() + $quantity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function decrease(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD)
+    {
+        if ($quantity < 1) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 1');
+        }
+
+        $onHand = $stockable->getOnHand();
+
+        if ($quantity > $onHand) {
+
+            return false;
+        }
+
+        $stockable->setOnHand($onHand - $quantity);
+
+        return $this->create($stockable, $quantity, $state);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_AVAILABLE)
+    {
+        if ($quantity < 1) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 1');
+        }
+
+        $units = array();
+
         for ($i = 0; $i < $quantity; $i++) {
-            echo "restocking ". $stockable->getStockableId() . " \n";
             $inventoryUnit = $this->inventoryUnitManager->createInventoryUnit($stockable);
             $inventoryUnit->setState($state);
 
             $this->inventoryUnitManager->persistInventoryUnit($inventoryUnit);
+
+            $units[] = $inventoryUnit;
         }
+
+        return $units;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function unstock(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_AVAILABLE)
+    public function destroy(InventoryUnitInterface $inventoryUnit)
     {
-        $inventoryUnits = $this->inventoryUnitManager->findInventoryUnitsBy(array(
-            'stockableId' => $stockable->getStockableId(),
-            'state'       => $state
-        ));
-
-
-        for ($i = 0; $i < $quantity; $i++) {
-            $this->inventoryUnitManager->removeInventoryUnit($inventoryUnits[$i]);
-        }
+        $this->inventoryUnitManager->removeInventoryUnit($inventoryUnit);
     }
 
     /**
-     * {@inheritdoc}
+     * Fill backordered units.
+     *
+     * @param StockableInterface $stockable
+     * @param integer            $onHand;
+     * @param integer            $backorderedUnits
      */
-    public function transfer(StockableInterface $stockable, $quantity = 1, $from = InventoryUnitInterface::STATE_AVAILABLE, $to = InventoryUnitInterface::STATE_UNAVAILABLE)
+    protected function fillBackorders(StockableInterface $stockable, $onHand, $backorderedUnits)
     {
-        $inventoryUnits = $this->inventoryUnitManager->findInventoryUnitsBy(array(
-            'stockableId' => $stockable->getStockableId(),
-            'state'       => $state
-        ));
-
-        $transfered = array();
-
-        for ($i = 0; $i < $quantity; $i++) {
-            $inventoryUnit = $inventoryUnits[$i];
-            $inventoryUnit->setState($to);
-
-            $this->inventoryUnitManager->persistInventoryUnit($inventoryUnit);
-            $transfered[] = $inventoryUnit;
-        }
-
-        return $transfered;
+        // pufff.
     }
 }
