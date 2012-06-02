@@ -21,8 +21,10 @@ interface InventoryUnitInterface
     /**
      * Default states.
      */
-    const STATE_BACKORDERED = 0;
-    const STATE_RETURNED    = 1;
+    const STATE_SOLD        = 0;
+    const STATE_BACKORDERED = 1;
+    const STATE_RETURNED    = 2;
+    const STATE_SHIPPED     = 3;
 
     /**
      * Get inventory unit id.

@@ -43,8 +43,7 @@ class StockResolver implements StockResolverInterface
     public function isInStock(StockableInterface $stockable)
     {
         if ($this->tracking) {
-
-            return 0 > $stockable->getOnHand();
+            return 0 < $stockable->getOnHand();
         }
 
         return true;

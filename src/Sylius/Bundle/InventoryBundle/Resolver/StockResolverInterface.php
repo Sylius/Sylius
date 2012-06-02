@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\StockingBundle\Resolver;
+namespace Sylius\Bundle\InventoryBundle\Resolver;
 
-use Sylius\Bundle\StockingBundle\Model\StockableInterface;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
  * Stock resolver interface.
@@ -24,9 +24,8 @@ interface StockResolverInterface
      * Checks whether stockable object is available in stock.
      *
      * @param StockableInterface $stockable
-     * @param Boolean            $strict
      *
      * @return Boolean
      */
-    function isInStock(StockableInterface $stockable, $strict =  true);
+    function isInStock(StockableInterface $stockable);
 }

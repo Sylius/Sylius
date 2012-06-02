@@ -30,7 +30,7 @@ interface StockableInterface
      *
      * @return Boolean
      */
-    function inStock();
+    function isInStock();
 
     /**
      * Get stock on hand.
