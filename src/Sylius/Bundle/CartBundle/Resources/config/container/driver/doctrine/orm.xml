@@ -17,11 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
 
-    <parameters>
-        <parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\CartBundle\Entity\CartManager</parameter>
-        <parameter key="sylius_cart.manager.item.class">Sylius\Bundle\CartBundle\Entity\ItemManager</parameter>
-    </parameters>
-
     <services>
         <service id="sylius_cart.manager.cart" class="%sylius_cart.manager.cart.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />

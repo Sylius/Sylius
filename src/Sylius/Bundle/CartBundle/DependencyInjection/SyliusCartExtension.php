@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * Carts extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class SyliusCartExtension extends Extension
 {
@@ -71,6 +72,7 @@ class SyliusCartExtension extends Extension
         $this->remapParametersNamespaces($config['classes'], $container, array(
             'listener' => 'sylius_cart.listener.%s.class',
             'model'    => 'sylius_cart.model.%s.class',
+            'manager'  => 'sylius_cart.manager.%s.class',
         ));
 
         $this->remapParametersNamespaces($config['classes']['controller'], $container, array(

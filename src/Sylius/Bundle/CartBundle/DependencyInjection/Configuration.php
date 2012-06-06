@@ -22,6 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -67,6 +68,13 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('cart')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('item')->isRequired()->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('manager')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('cart')->defaultValue('Sylius\\Bundle\\CartBundle\\Entity\\CartManager')->end()
+                                ->scalarNode('item')->defaultValue('Sylius\\Bundle\\CartBundle\\Entity\\ItemManager')->end()
                             ->end()
                         ->end()
                         ->arrayNode('controller')
