@@ -47,6 +47,14 @@ class InventoryUnit implements InventoryUnitInterface
     protected $createdAt;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime('now');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()

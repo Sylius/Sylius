@@ -91,7 +91,6 @@ class InventoryOperator implements InventoryOperatorInterface
         $onHand = $stockable->getOnHand();
 
         if ($quantity > $onHand) {
-
             return false;
         }
 
@@ -112,7 +111,7 @@ class InventoryOperator implements InventoryOperatorInterface
         $units = array();
 
         for ($i = 0; $i < $quantity; $i++) {
-            $inventoryUnit = $this->inventoryUnitManager->createInventoryUnit($stockable);
+            $inventoryUnit = $this->inventoryUnitManager->createInventoryUnit($stockable, $state);
             $inventoryUnit->setState($state);
 
             $this->inventoryUnitManager->persistInventoryUnit($inventoryUnit);
