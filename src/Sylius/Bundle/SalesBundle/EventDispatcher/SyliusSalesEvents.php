@@ -26,6 +26,7 @@ final class SyliusSalesEvents
     const ORDER_PLACE          = 'sylius_sales.event.order.place';
     const ORDER_PREPARE        = 'sylius_sales.event.order.prepare';
     const ORDER_PROCESS        = 'sylius_sales.event.order.process';
+    const ORDER_FINALIZE       = 'sylius_sales.event.order.finalize';
     const ORDER_CHANGE_STATUS  = 'sylius_sales.event.order.change_status';
     const ORDER_UPDATE         = 'sylius_sales.event.order.update';
 
