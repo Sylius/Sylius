@@ -30,9 +30,17 @@ class RegisterOperationsPass implements CompilerPassInterface
         if (!$container->hasDefinition('sylius_sales.processor')) {
             return;
         }
+
         $processor = $container->getDefinition('sylius_sales.processor');
+
         foreach ($container->findTaggedServiceIds('sylius_sales.operation') as $id => $attributes) {
-            $processor->addMethodCall('registerOperation', array(new Reference($id)));
+            if (!isset($attributes[0]['alias'])) {
+                throw new \InvalidArgumentException('Every order operation registered in container needs an alias');
+            }
+
+            $alias = $attributes[0]['alias'];
+
+            $processor->addMethodCall('registerOperation', array($alias, new Reference($id)));
         }
     }
 }

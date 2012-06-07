@@ -19,7 +19,7 @@ use Sylius\Bundle\SalesBundle\Processor\Operation\OperationInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Processor
+class Processor implements ProcessorInterface
 {
     /**
      * Processor operation.
@@ -54,21 +54,34 @@ class Processor
     }
 
     /**
-     * Registers processor.
+     * Finalizes order.
      *
-     * @var OperationInterface $operation
+     * @param OrderInterface $order
      */
-    public function registerOperation(OperationInterface $operation)
+    public function finalize(OrderInterface $order)
     {
-        $this->operations[] = $operation;
+        foreach ($this->operations as $operation) {
+            $operation->finalize($order);
+        }
     }
 
     /**
-     * Unergisters operation.
-     *
-     * @param OperationInterface $operation
+     * {@inheritdoc}
      */
-    public function unregisterOperation(OperationInterface $operation)
+    public function registerOperation($alias, OperationInterface $operation)
     {
+        $this->operations[$alias] = $operation;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unregisterOperation($alias)
+    {
+        if (!isset($this->operations[$alias])) {
+            throw new \InvalidArgumentException(sprintf('Operation with alias "%s" is not registered', $alias));
+        }
+
+        unset($this->operations[$alias]);
     }
 }

@@ -35,21 +35,26 @@ class OrderController extends ContainerAware
     public function placeAction(Request $request)
     {
         $order = $this->container->get('sylius_sales.manager.order')->createOrder();
+        $form = $this->container->get('form.factory')->create('sylius_sales_order', $order);
 
-        $form = $this->container->get('form.factory')->create('sylius_sales_order');
-        $form->setData($order);
+        $eventDispatcher = $this->container->get('event_dispatcher');
+        $processor = $this->container->get('sylius_sales.processor');
 
-        $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PREPARE, new FilterOrderEvent($order));
-        $this->container->get('sylius_sales.processor')->prepare($order);
+        $eventDispatcher->dispatch(SyliusSalesEvents::ORDER_PREPARE, new FilterOrderEvent($order));
+        $processor->prepare($order);
 
         if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PROCESS, new FilterOrderEvent($order));
-                $this->container->get('sylius_sales.processor')->process($order);
-                $this->container->get('event_dispatcher')->dispatch(SyliusSalesEvents::ORDER_PLACE, new FilterOrderEvent($order));
+                $eventDispatcher->dispatch(SyliusSalesEvents::ORDER_PROCESS, new FilterOrderEvent($order));
+                $processor->process($order);
+
+                $eventDispatcher->dispatch(SyliusSalesEvents::ORDER_PLACE, new FilterOrderEvent($order));
                 $this->container->get('sylius_sales.manipulator.order')->place($order);
+
+                $eventDispatcher->dispatch(SyliusSalesEvents::ORDER_FINALIZE, new FilterOrderEvent($order));
+                $processor->finalize($order);
 
                 return $this->container->get('templating')->renderResponse('SyliusSalesBundle:Frontend/Order:placed.html.'.$this->getEngine(), array(
                     'order' => $order

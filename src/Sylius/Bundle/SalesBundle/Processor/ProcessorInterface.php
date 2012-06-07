@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SalesBundle\Processor\Operation;
+namespace Sylius\Bundle\SalesBundle\Processor;
 
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\SalesBundle\Processor\Operation\OperationInterface;
 
 /**
- * Interface for order processor operations.
+ * Interface for order processor.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OperationInterface
+interface ProcessorInterface
 {
     /**
      * Prepares order for processing.
@@ -29,6 +30,7 @@ interface OperationInterface
 
     /**
      * Processes order.
+     * This action is fired just before saving the order.
      *
      * @param OrderInterface $order
      */
@@ -36,8 +38,24 @@ interface OperationInterface
 
     /**
      * Finalizes order.
+     * This action is fired after placing the order.
      *
      * @param OrderInterface $order
      */
     function finalize(OrderInterface $order);
+
+    /**
+     * Registers processor.
+     *
+     * @param string             $alias
+     * @param OperationInterface $operation
+     */
+    function registerOperation($alias, OperationInterface $operation);
+
+    /**
+     * Unergisters operation.
+     *
+     * @param string $alias
+     */
+    function unregisterOperation($alias);
 }

@@ -14,30 +14,30 @@ namespace Sylius\Bundle\SalesBundle\Processor\Operation;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 
 /**
- * Interface for order processor operations.
+ * Base operation.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OperationInterface
+abstract class Operation implements OperationInterface
 {
     /**
-     * Prepares order for processing.
-     *
-     * @param OrderInterface $order
+     * {@inheritdoc}
      */
-    function prepare(OrderInterface $order);
+    public function prepare(OrderInterface $order)
+    {
+    }
 
     /**
-     * Processes order.
-     *
-     * @param OrderInterface $order
+     * {@inheritdoc}
      */
-    function process(OrderInterface $order);
+    public function process(OrderInterface $order)
+    {
+    }
 
     /**
-     * Finalizes order.
-     *
-     * @param OrderInterface $order
+     * {@inheritdoc}
      */
-    function finalize(OrderInterface $order);
+    public function finalize(OrderInterface $order)
+    {
+    }
 }
