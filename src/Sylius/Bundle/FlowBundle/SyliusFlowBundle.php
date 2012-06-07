@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle;
 
-use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterSetupsPass;
+use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterProcessesPass;
 use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterStepsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -28,7 +28,7 @@ class SyliusFlowBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new RegisterSetupsPass());
+        $container->addCompilerPass(new RegisterProcessesPass());
         $container->addCompilerPass(new RegisterStepsPass());
     }
 }

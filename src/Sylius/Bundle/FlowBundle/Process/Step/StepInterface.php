@@ -9,13 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FlowBundle\Tests\Setup;
+namespace Sylius\Bundle\FlowBundle\Process\Step;
 
-use Sylius\Bundle\FlowBundle\Setup\Step\Step as BaseStep;
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 
-class TestStep extends BaseStep
+interface StepInterface
 {
-    public function execute()
-    {
-    }
+    function execute();
 }

@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FlowBundle\EventDispatcher;
+namespace Sylius\Bundle\FlowBundle\Process\Step;
 
 /**
- * Events.
+ * Base step class.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class SyliusFlowEvents
+abstract class Step implements StepInterface
 {
-    const PROCESS_START = 'sylius_flow.event.process.build';
-    const STEP_EXECUTE  = 'sylius_flow.event.step.execute';
 }

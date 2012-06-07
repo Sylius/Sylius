@@ -18,7 +18,7 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.builder.class">Sylius\Bundle\InstallerBundle\Setup\Builder\SetupBuilder</parameter>
+        <parameter key="sylius_flow.builder.class">Sylius\Bundle\InstallerBundle\Process\Builder\ProcessBuilder</parameter>
     </parameters>
 
     <services>

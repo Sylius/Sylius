@@ -39,8 +39,8 @@ class SyliusFlowExtension extends Extension
         $container->setAlias('sylius_flow.storage', $config['storage']);
 
         $configurations = array(
-            'controllers',
             'builders',
+            'controllers',
             'storages',
         );
 

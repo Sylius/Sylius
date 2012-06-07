@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\EventDispatcher\Event;
 
-use Sylius\Bundle\FlowBundle\Setup\Step\StepInterface;
+use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

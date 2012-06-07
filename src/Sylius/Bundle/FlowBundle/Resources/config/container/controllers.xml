@@ -18,11 +18,11 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.controller.setup.class">Sylius\Bundle\InstallerBundle\Controller\SetupController</parameter>
+        <parameter key="sylius_flow.controller.process.class">Sylius\Bundle\InstallerBundle\Controller\ProcessController</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_flow.controller.setup" class="%sylius_flow.controller.setup.class%">
+        <service id="sylius_flow.controller.process" class="%sylius_flow.controller.process.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

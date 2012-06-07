@@ -11,40 +11,40 @@
 
 namespace Sylius\Bundle\FlowBundle\EventDispatcher\Event;
 
-use Sylius\Bundle\FlowBundle\Setup\SetupInterface;
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Setup filter event.
+ * Process filter event.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FilterSetupEvent extends Event
+class FilterProcessEvent extends Event
 {
     /**
-     * Setup.
+     * Process.
      *
-     * @var SetupInterface
+     * @var ProcessInterface
      */
-    protected $setup;
+    protected $process;
 
     /**
      * Constructor.
      *
-     * @param SetupInterface $setup
+     * @param ProcessInterface $process
      */
-    public function __construct(SetupInterface $setup)
+    public function __construct(ProcessInterface $process)
     {
-        $this->setup = $setup;
+        $this->process = $process;
     }
 
     /**
-     * Get setup.
+     * Get process.
      *
-     * @return SetupInterface
+     * @return ProcessInterface
      */
-    public function getSetup()
+    public function getProcess()
     {
-        return $this->setup;
+        return $this->process;
     }
 }

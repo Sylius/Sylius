@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class RegisterSetupsPass implements CompilerPassInterface
+class RegisterProcessesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -29,9 +29,8 @@ class RegisterSetupsPass implements CompilerPassInterface
     {
         $setupBuilder = $container->getDefinition('sylius_flow.builder');
 
-        foreach ($container->findTaggedServiceIds('sylius_flow.setup') as $id => $attributes) {
-            $setupBuilder->addMethodCall('registerSetup', array($attributes[0]['alias'], new Reference($id)));
-            $container->getDefinition($id)->addMethodCall('setAlias', array($attributes[0]['alias']));
+        foreach ($container->findTaggedServiceIds('sylius_flow.process') as $id => $attributes) {
+            $setupBuilder->addMethodCall('registerProcess', array($attributes[0]['alias'], new Reference($id)));
         }
     }
 }
