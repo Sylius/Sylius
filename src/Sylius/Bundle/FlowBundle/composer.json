@@ -21,9 +21,6 @@
 
         "symfony/symfony": "2.*"
     },
-    "require-dev": {
-        "doctrine/orm": "*"
-    },
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\FlowBundle": "" }
     },
