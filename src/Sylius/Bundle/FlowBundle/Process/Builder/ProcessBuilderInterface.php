@@ -52,23 +52,6 @@ interface ProcessBuilderInterface
     function has($name);
 
     /**
-     * Register new process.
-     *
-     * @param string           $alias
-     * @param ProcessInterface $process
-     */
-    function registerProcess($alias, ProcessInterface $process);
-
-    /**
-     * Load process with given alias.
-     *
-     * @param string $alias
-     *
-     * @return ProcessInterface
-     */
-    function loadProcess($alias);
-
-    /**
      * Register new step.
      *
      * @param string        $alias

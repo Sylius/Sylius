@@ -36,17 +36,38 @@ class ProcessController extends ContainerAware
      */
     public function startAction($processAlias)
     {
+        $coordinator = $this->container->get('sylius_flow.coordinator');
+
+        return $coordinator->start($processAlias);
     }
 
     /**
-     * Start flow with given alias.
+     * Execute display action of given step.
      *
-     * @param string  $processAlias
-     * @param integer $stepIndex
+     * @param string $processAlias
+     * @param string $stepAlias
      *
      * @return Response
      */
-    public function stepAction($processAlias, $stepIndex)
+    public function displayAction($processAlias, $stepAlias)
     {
+        $coordinator = $this->container->get('sylius_flow.coordinator');
+
+        return $coordinator->display($processAlias, $stepAlias);
+    }
+
+    /**
+     * Execute continue action of given step.
+     *
+     * @param string $processAlias
+     * @param string $stepAlias
+     *
+     * @return Response
+     */
+    public function forwardAction($processAlias, $stepAlias)
+    {
+        $coordinator = $this->container->get('sylius_flow.coordinator');
+
+        return $coordinator->forward($processAlias, $stepAlias);
     }
 }

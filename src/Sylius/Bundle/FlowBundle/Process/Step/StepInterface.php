@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Step;
 
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 
 interface StepInterface
 {
-    function execute();
+    function display(ProcessContextInterface $context);
+    function forward(ProcessContextInterface $context);
 }

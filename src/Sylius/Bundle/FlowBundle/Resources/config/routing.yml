@@ -2,9 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius_flow_start:
-    pattern: /{processAlias}/start
+    pattern: /{processAlias}
     defaults: { _controller: sylius_flow.controller.process:startAction }
 
 sylius_flow_step:
-    pattern: /{processAlias}/step/{stepIndex}
+    pattern: /{processAlias}/{stepIndex}
+    defaults: { _controller: sylius_flow.controller.process:stepAction }
+
+sylius_flow_continue:
+    pattern: /{processAlias}/{stepIndex}/continue
     defaults: { _controller: sylius_flow.controller.process:stepAction }

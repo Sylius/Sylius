@@ -9,19 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FlowBundle\Process\Step;
+namespace Sylius\Bundle\FlowBundle\Process\Context;
 
 /**
- * Base step class.
+ * Interface for process context.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Step implements StepInterface
+interface ProcessInterface
 {
-    protected $context;
-
-    public function forward()
-    {
-        $this->context->complete();
-    }
+    function skip();
+    function complete();
+    function getStorage();
+    function setStorage(StorageInterface $storage);
 }
