@@ -67,6 +67,17 @@ class SyliusSalesExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testUserLoadThrowsExceptionUnlessItemModelClassSet()
+    {
+        $loader = new SyliusSalesExtension();
+        $config = $this->getEmptyConfig();
+        unset($config['classes']['model']['item']);
+        $loader->load(array($config), new ContainerBuilder());
+    }
+
+    /**
      * Get empty testing config.
      *
      * @return array
@@ -78,6 +89,7 @@ driver: ORM
 classes:
     model:
         order: Sylius\Bundle\SalesBundle\Entity\DefaultOrder
+        item: Sylius\Bundle\SalesBundle\Entity\DefaultItem
         status: Sylius\Bundle\SalesBundle\Entity\DefaultStatus
 EOF;
         $parser = new Parser();
