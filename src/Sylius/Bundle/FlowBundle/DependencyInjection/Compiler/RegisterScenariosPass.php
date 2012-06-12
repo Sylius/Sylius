@@ -20,17 +20,17 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class RegisterProcessesPass implements CompilerPassInterface
+class RegisterScenariosPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        $setupBuilder = $container->getDefinition('sylius_flow.builder');
+        $coordinator = $container->getDefinition('sylius_flow.coordinator');
 
-        foreach ($container->findTaggedServiceIds('sylius_flow.process') as $id => $attributes) {
-            $setupBuilder->addMethodCall('registerProcess', array($attributes[0]['alias'], new Reference($id)));
+        foreach ($container->findTaggedServiceIds('sylius_flow.scenario') as $id => $attributes) {
+            $coordinator->addMethodCall('registerScenario', array($attributes[0]['alias'], new Reference($id)));
         }
     }
 }

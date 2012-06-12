@@ -27,10 +27,10 @@ class RegisterStepsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $setupBuilder = $container->getDefinition('sylius_flow.builder');
+        $processBuilder = $container->getDefinition('sylius_flow.builder');
 
         foreach ($container->findTaggedServiceIds('sylius_flow.step') as $id => $attributes) {
-            $setupBuilder->addMethodCall('registerStep', array($attributes[0]['alias'], new Reference($id)));
+            $processBuilder->addMethodCall('registerStep', array($attributes[0]['alias'], new Reference($id)));
         }
     }
 }

@@ -42,6 +42,8 @@ class SyliusFlowExtension extends Extension
             'builders',
             'controllers',
             'storages',
+            'coordinators',
+            'contexts',
         );
 
         foreach ($configurations as $basename) {

@@ -11,14 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Controller;
 
-use Sylius\Bundle\FlowBundle\EventDispatcher\Event\FilterProcessEvent;
-use Sylius\Bundle\FlowBundle\EventDispatcher\Event\FilterStepEvent;
-use Sylius\Bundle\FlowBundle\EventDispatcher\SyliusFlowEvents;
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Process controller.
@@ -28,46 +23,46 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProcessController extends ContainerAware
 {
     /**
-     * Start flow with given alias.
+     * Build and start process for given scenario.
      *
-     * @param string $processAlias
+     * @param string $scenarioAlias
      *
      * @return Response
      */
-    public function startAction($processAlias)
+    public function startAction($scenarioAlias)
     {
         $coordinator = $this->container->get('sylius_flow.coordinator');
 
-        return $coordinator->start($processAlias);
+        return $coordinator->start($scenarioAlias);
     }
 
     /**
      * Execute display action of given step.
      *
-     * @param string $processAlias
-     * @param string $stepAlias
+     * @param string $scenarioAlias
+     * @param string $stepName
      *
      * @return Response
      */
-    public function displayAction($processAlias, $stepAlias)
+    public function displayAction($scenarioAlias, $stepName)
     {
         $coordinator = $this->container->get('sylius_flow.coordinator');
 
-        return $coordinator->display($processAlias, $stepAlias);
+        return $coordinator->display($scenarioAlias, $stepName);
     }
 
     /**
      * Execute continue action of given step.
      *
-     * @param string $processAlias
-     * @param string $stepAlias
+     * @param string $scenarioAlias
+     * @param string $stepName
      *
      * @return Response
      */
-    public function forwardAction($processAlias, $stepAlias)
+    public function forwardAction($scenarioAlias, $stepName)
     {
         $coordinator = $this->container->get('sylius_flow.coordinator');
 
-        return $coordinator->forward($processAlias, $stepAlias);
+        return $coordinator->forward($scenarioAlias, $stepName);
     }
 }

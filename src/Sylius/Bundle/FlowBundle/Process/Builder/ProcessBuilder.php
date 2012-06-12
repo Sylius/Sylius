@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Builder;
 
-use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
+use Sylius\Bundle\FlowBundle\Process\Process;
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
@@ -20,73 +21,62 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProcessBuilder implements ProcessBuilderInterface
 {
-    protected $processs;
     protected $steps;
     protected $container;
-    protected $buildedProcess;
 
-    public function __construct(ContainerInterface $container, StorageInterface $storage)
+    protected $process;
+
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->storage = $storage;
     }
 
-    public function build(ProcessInterface $process, array $options = array())
+    public function build(ProcessScenarioInterface $scenario)
     {
-        $this->buildedProcess = $process;
+        $this->process = new Process();
 
-        $process->build($this, $options);
+        $scenario->build($this);
 
-        return $process;
+        return $this->process;
     }
 
     public function add($name, $step)
     {
-        if ($step instanceof StepInterface) {
-            if ($step instanceof ContainerAwareStep) {
-                $step->setContainer($this->container);
-            }
-        } else {
-            if (is_string($step)) {
-                $step = $this->loadStep($step);
-            }
+        if (is_string($step)) {
+            $step = $this->loadStep($step);
         }
 
-        $step->setStorage($this->storage);
-        $index = $this->buildedProcess->countSteps();
-        $step->setIndex($index);
-        $step->setProcess($this->buildedProcess);
-
-        $this->buildedProcess->setStep($index, $step);
-
-        if ($this->buildedProcess->hasStep($index - 1)) {
-            $step->setPrevious($this->buildedProcess->getStep($index - 1));
-            $this->buildedProcess->getStep($index - 1)->setNext($step);
+        if (!$step instanceof StepInterface) {
+            throw new \InvalidArgumentException('Step added via builder must implement "Sylius\Bundle\FlowBundle\Process\Step\StepInterface"');
         }
+
+        if ($step instanceof ContainerAwareStep) {
+            $step->setContainer($this->container);
+        }
+
+        $this->process->addStep($name, $step);
 
         return $this;
     }
 
-    public function removeStep($step)
+    public function remove($name)
     {
+        $this->process->removeStep($name);
     }
 
-    public function registerProcess($alias, ProcessInterface $process)
+    public function has($name)
     {
-        if (isset($this->processs[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Flow process with alias "%s" is already registered', $alias));
-        }
-
-        $this->processs[$alias] = $process;
+        return $this->process->hasStep($name);
     }
 
-    public function loadProcess($alias)
+    public function setDisplayRoute($route)
     {
-        if (!isset($this->processs[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Flow process with alias "%s" is not registered', $alias));
-        }
+        $this->process->setDisplayRoute($route);
+    }
 
-        return $this->processs[$alias];
+    public function setForwardRoute($route)
+    {
+        $this->process->setForwardRoute($route);
     }
 
     public function registerStep($alias, StepInterface $step)

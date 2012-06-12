@@ -21,11 +21,11 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
  */
 interface ProcessInterface
 {
-    /**
-     * Builds the whole process.
-     * Assigns proper steps.
-     *
-     * @param ProcessBuilderInterface $builder
-     */
-    function build(ProcessBuilderInterface $builder, array $options);
+    function getSteps();
+    function setSteps(array $steps);
+    function getOrderedSteps();
+    function setOrderedSteps(array $steps);
+    function addStep($name, StepInterface $step);
+    function removeStep($name);
+    function hasStep($name);
 }

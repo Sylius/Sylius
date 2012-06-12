@@ -11,56 +11,130 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 
 class Coordinator implements CoordinatorInterface
 {
-    protected $processes;
-    protected $container;
+    /**
+     * Router.
+     *
+     * @var RouterInterface
+     */
+    protected $router;
 
-    public function __construct(ContainerInterface $container, StorageInterface $storage)
+    /**
+     * Process builder.
+     *
+     * @var ProcessBuilderInterface
+     */
+    protected $builder;
+
+    /**
+     * Process context.
+     *
+     * @var ProcessContextInterface
+     */
+    protected $context;
+
+    /**
+     * Registered scenarios.
+     *
+     * @var array
+     */
+    protected $scenarios;
+
+    /**
+     * Constructor.
+     *
+     * @param RouterInterface         $builder
+     * @param ProcessContextInterface $context
+     * @param ProcessContextInterface $context
+     */
+    public function __construct(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
     {
-        $this->container = $container;
-        $this->storage = $storage;
+        $this->router = $router;
+        $this->builder = $builder;
+        $this->context = $context;
 
-        $this->processes = array();
+        $this->scenarios = array();
     }
 
-    public function start($processAlias)
+    /**
+     * {@inheritdoc}
+     */
+    public function start($scenarioAlias)
     {
-        $process = $this->loadProcess($processAlias);
+        $process = $this->buildProcess($scenarioAlias);
     }
 
-    public function display($processAlias, $stepAlias)
+    /**
+     * {@inheritdoc}
+     */
+    public function display($scenarioAlias, $stepName)
     {
-        $process = $this->loadProcess($processAlias);
+        $process = $this->buildProcess($scenarioAlias);
+
+        $step = $process->getStepByName($stepName);
+
+        return $step->display($this->context);
     }
 
-    public function forward($processAlias, $stepAlias)
+    /**
+     * {@inheritdoc}
+     */
+    public function forward($scenarioAlias, $stepName)
     {
-        $process = $this->loadProcess($processAlias);
+        $process = $this->buildProcess($scenarioAlias);
+
+        $step = $process->getStepByName($stepName);
+
+        return $step->forward($this->context);
     }
 
-    public function registerProcess($alias, ProcessInterface $process)
+    /**
+     * {@inheritdoc}
+     */
+    public function registerScenario($alias, ProcessScenarioInterface $scenario)
     {
-        if (isset($this->processs[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Flow process with alias "%s" is already registered', $alias));
+        if (isset($this->scenarios[$alias])) {
+            throw new \InvalidArgumentException(sprintf('Process scenario with alias "%s" is already registered', $alias));
         }
 
-        $this->processs[$alias] = $process;
+        $this->scenarios[$alias] = $scenario;
     }
 
-    public function loadProcess($alias)
+    /**
+     * {@inheritdoc}
+     */
+    public function loadScenario($alias)
     {
-        if (!isset($this->processs[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Flow process with alias "%s" is not registered', $alias));
+        if (!isset($this->scenarios[$alias])) {
+            throw new \InvalidArgumentException(sprintf('Process scenario with alias "%s" is not registered', $alias));
         }
 
-        return $this->processs[$alias];
+        return $this->scenarios[$alias];
     }
+
+    /**
+     * Builds process for given scenario alias.
+     *
+     * @param string $scenarioAlias
+     *
+     * @return ProcessInterface
+     */
+    private function buildProcess($scenarioAlias)
+    {
+        $processScenario = $this->loadScenario($scenarioAlias);
+
+        return $this->builder->build($processScenario);
+    }
+
 }

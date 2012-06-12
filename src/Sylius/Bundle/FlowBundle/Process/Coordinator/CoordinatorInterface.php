@@ -9,34 +9,36 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FlowBundle\Process\CoordinatorInterface;
+namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
+
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 
 /**
  * This service coordinates the whole flow of process.
- * Executes steps and starts/completes flows.
+ * Executes steps and start flows.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface CoordinatorInterface
 {
-    /**
-     * Register new process.
-     *
-     * @param string           $alias
-     * @param ProcessInterface $process
-     */
-    function registerProcess($alias, ProcessInterface $process);
+    function start($scenario);
+    function display($scenario, $step);
+    function forward($scenario, $step);
 
     /**
-     * Load process with given alias.
+     * Register new process scenario.
+     *
+     * @param string                   $alias
+     * @param ProcessScenarioInterface $process
+     */
+    function registerScenario($alias, ProcessScenarioInterface $scenario);
+
+    /**
+     * Load process scenario with given alias.
      *
      * @param string $alias
      *
-     * @return ProcessInterface
+     * @return ProcessScenarioInterface
      */
-    function loadProcess($alias);
-
-    function start($processAlias);
-    function display($processAlias, $stepAlias);
-    function forward($processAlias, $stepAlias);
+    function loadScenario($scenario);
 }

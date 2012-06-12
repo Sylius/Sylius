@@ -18,12 +18,14 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.storage.session.class">Sylius\Bundle\FlowBundle\Storage\SessionStorage</parameter>
+        <parameter key="sylius_flow.coordinator.class">Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_flow.storage.session" class="%sylius_flow.storage.session.class%">
-            <argument type="service" id="session" />
+        <service id="sylius_flow.coordinator" class="%sylius_flow.coordinator.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius_flow.builder" />
+            <argument type="service" id="sylius_flow.context" />
         </service>
     </services>
 

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Process\Builder;
 
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
@@ -22,18 +23,19 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 interface ProcessBuilderInterface
 {
     /**
-     * Build process by adding defined steps.
+     * Build process by adding steps defined in scenario.
      *
-     * @param ProcessInterface $process
-     * @param array            $options
+     * @param ProcessScenarioInterface $scenario
+     *
+     * @return ProcessInterface
      */
-    function build(ProcessInterface $process, array $options = array());
+    function build(ProcessScenarioInterface $scenario);
 
     /**
      * Add a step with given name.
      *
      * @param string               $name
-     * @param string|StepInterface $step
+     * @param string|StepInterface $step Step alias or instance
      */
     function add($name, $step);
 
@@ -50,6 +52,9 @@ interface ProcessBuilderInterface
      * @param string $name
      */
     function has($name);
+
+    function setDisplayRoute($route);
+    function setForwardRoute($route);
 
     /**
      * Register new step.

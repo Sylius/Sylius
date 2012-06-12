@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Context;
 
+use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Process context.
@@ -20,11 +22,28 @@ use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
  */
 class ProcessContext implements ProcessContextInterface
 {
+    protected $current;
     protected $storage;
+    protected $request;
 
     public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
+    }
+
+    public function setCurrent(StepInterface $current)
+    {
+        $this->current = $current;
+    }
+
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
     }
 
     public function getStorage()
@@ -32,8 +51,9 @@ class ProcessContext implements ProcessContextInterface
         return $this->storage;
     }
 
-    public function skip()
+    public function setStorage(StorageInterface $storage)
     {
+        $this->storage = $storage;
     }
 
     public function complete()

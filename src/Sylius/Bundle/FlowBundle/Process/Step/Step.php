@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Step;
 
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+
 /**
  * Base step class.
  *
@@ -18,10 +20,28 @@ namespace Sylius\Bundle\FlowBundle\Process\Step;
  */
 abstract class Step implements StepInterface
 {
-    protected $context;
+    protected $id;
 
-    public function forward()
+    public function getId()
     {
-        $this->context->complete();
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function forward(ProcessContextInterface $context)
+    {
+        $context->complete();
+    }
+
+    public function isActive()
+    {
+        return true;
     }
 }
