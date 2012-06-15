@@ -20,26 +20,40 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
  */
 abstract class Step implements StepInterface
 {
-    protected $id;
+    /**
+     * Step name in current scenario.
+     *
+     * @var string
+     */
+    protected $name;
 
-    public function getId()
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
     {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
+        return $this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function forward(ProcessContextInterface $context)
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function forwardAction(ProcessContextInterface $context)
     {
         $context->complete();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isActive()
     {
         return true;

@@ -21,9 +21,35 @@ use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
  */
 interface CoordinatorInterface
 {
-    function start($scenario);
-    function display($scenario, $step);
-    function forward($scenario, $step);
+    /**
+     * Start scenario, should redirect to first step.
+     *
+     * @param string $scenarioAlias
+     *
+     * @return RedirectResponse
+     */
+    function start($scenarioAlias);
+
+    /**
+     * Display step.
+     *
+     * @param string $scenarioAlias
+     * @param string $stepName
+     *
+     * @return Response
+     */
+    function display($scenarioAlias, $stepName);
+
+    /**
+     * Move forward.
+     * If step was completed, redirect to next step, otherwise return response.
+     *
+     * @param string $scenarioAlias
+     * @param string $stepName
+     *
+     * @return Response
+     */
+    function forward($scenarioAlias, $stepName);
 
     /**
      * Register new process scenario.

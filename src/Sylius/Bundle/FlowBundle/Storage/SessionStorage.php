@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SessionStorage implements StorageInterface
+class SessionStorage extends Storage
 {
     /**
      * Session.
@@ -42,7 +42,7 @@ class SessionStorage implements StorageInterface
      */
     public function get($key, $default = null)
     {
-        return $this->session->get($key, $default);
+        return $this->session->getBag(SessionFlowsBag::NAME)->get($this->resolveKey($key), $default);
     }
 
     /**
@@ -50,7 +50,7 @@ class SessionStorage implements StorageInterface
      */
     public function set($key, $value)
     {
-        $this->session->set($key, $value);
+        $this->session->getBag(SessionFlowsBag::NAME)->set($this->resolveKey($key), $value);
     }
 
     /**
@@ -58,7 +58,7 @@ class SessionStorage implements StorageInterface
      */
     public function has($key)
     {
-        return $this->session->has($key);
+        return $this->session->getBag(SessionFlowsBag::NAME)->has($this->resolveKey($key));
     }
 
     /**
@@ -66,6 +66,26 @@ class SessionStorage implements StorageInterface
      */
     public function remove($key)
     {
-        $this->session->remove($key);
+        $this->session->getBag(SessionFlowsBag::NAME)->remove($this->resolveKey($key));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
+    {
+        $this->session->getBag(SessionFlowsBag::NAME)->remove($this->domain);
+    }
+
+    /**
+     * Resolve key for current domain.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    private function resolveKey($key)
+    {
+        return $this->domain.'/'.$key;
     }
 }

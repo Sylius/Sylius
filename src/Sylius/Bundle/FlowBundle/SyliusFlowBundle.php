@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle;
 
 use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterScenariosPass;
+use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterSessionBagsPass;
 use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterStepsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -30,5 +31,6 @@ class SyliusFlowBundle extends Bundle
     {
         $container->addCompilerPass(new RegisterScenariosPass());
         $container->addCompilerPass(new RegisterStepsPass());
+        $container->addCompilerPass(new RegisterSessionBagsPass());
     }
 }

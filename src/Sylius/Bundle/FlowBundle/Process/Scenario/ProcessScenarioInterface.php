@@ -17,7 +17,7 @@ use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
  * Interface for process scenario.
  *
  * This interface should be implemented by all scenario you define.
- * For example checkout or installation process scenarios.
+ * For example, that can be a checkout or installation process scenario.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -25,10 +25,8 @@ interface ProcessScenarioInterface
 {
     /**
      * Builds the whole process.
-     * Assigns proper steps.
      *
      * @param ProcessBuilderInterface $builder
      */
     function build(ProcessBuilderInterface $builder);
 }
-

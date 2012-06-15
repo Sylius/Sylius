@@ -15,11 +15,42 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 
 interface StepInterface
 {
-    function getId();
-    function setId($id);
+    /**
+     * Get step name in current scenario.
+     *
+     * @return string
+     */
+    function getName();
 
-    function display(ProcessContextInterface $context);
-    function forward(ProcessContextInterface $context);
+    /**
+     * Set step name.
+     *
+     * @param strgin $step
+     */
+    function setName($name);
 
+    /**
+     * Display action.
+     *
+     * @param ProcessContextInterface $context
+     *
+     * @return Response
+     */
+    function displayAction(ProcessContextInterface $context);
+
+    /**
+     * Forward action.
+     *
+     * @param ProcessContextInterface $context
+     *
+     * @return null|Response
+     */
+    function forwardAction(ProcessContextInterface $context);
+
+    /**
+     * Is step active in process?
+     *
+     * @return Boolean
+     */
     function isActive();
 }

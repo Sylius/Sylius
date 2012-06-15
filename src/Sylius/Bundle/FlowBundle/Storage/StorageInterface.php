@@ -19,6 +19,13 @@ namespace Sylius\Bundle\FlowBundle\Storage;
 interface StorageInterface
 {
     /**
+     * Initializes storage for given domain.
+     *
+     * @param strgin $domain
+     */
+    function initialize($domain);
+
+    /**
      * Checks if the storage has a value for a key.
      *
      * @param string $key A unique key
@@ -51,4 +58,9 @@ interface StorageInterface
      * @param string $key A unique key
      */
     function remove($key);
+
+    /**
+     * Clears all values from current domain.
+     */
+    function clear();
 }

@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius_flow_start:
-    pattern: /{scenarioAlias}
+    pattern: /flow/{scenarioAlias}
     defaults: { _controller: sylius_flow.controller.process:startAction }
 
 sylius_flow_display:
-    pattern: /{scenarioAlias}/{stepAlias}
+    pattern: /flow/{scenarioAlias}/{stepName}
     defaults: { _controller: sylius_flow.controller.process:displayAction }
 
 sylius_flow_forward:
-    pattern: /{scenarioAlias}/{stepAlias}/forward
+    pattern: /flow/{scenarioAlias}/{stepName}/forward
     defaults: { _controller: sylius_flow.controller.process:forwardAction }

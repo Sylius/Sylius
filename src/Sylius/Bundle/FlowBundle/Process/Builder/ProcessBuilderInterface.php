@@ -53,8 +53,33 @@ interface ProcessBuilderInterface
      */
     function has($name);
 
+    /**
+     * Set display route.
+     *
+     * @param string $route
+     */
     function setDisplayRoute($route);
+
+    /**
+     * Set forward route.
+     *
+     * @param string $route
+     */
     function setForwardRoute($route);
+
+    /**
+     * Set redirection route after completion.
+     *
+     * @param string $redirect
+     */
+    function setRedirect($redirect);
+
+    /**
+     * Validation of process, if returns false, breaks.
+     *
+     * @param \Closure $validator
+     */
+    function validate(\Closure $validator);
 
     /**
      * Register new step.

@@ -19,8 +19,14 @@ use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Default coordinator implementation.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
 class Coordinator implements CoordinatorInterface
 {
     /**
@@ -54,8 +60,8 @@ class Coordinator implements CoordinatorInterface
     /**
      * Constructor.
      *
-     * @param RouterInterface         $builder
-     * @param ProcessContextInterface $context
+     * @param RouterInterface         $router
+     * @param ProcessBuilderInterface $builder
      * @param ProcessContextInterface $context
      */
     public function __construct(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
@@ -73,6 +79,15 @@ class Coordinator implements CoordinatorInterface
     public function start($scenarioAlias)
     {
         $process = $this->buildProcess($scenarioAlias);
+        $step = $process->getFirstStep();
+
+        $this->context->initialize($process, $step);
+
+        if (!$this->context->isValid()) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->redirectToStepDisplayAction($process, $step);
     }
 
     /**
@@ -81,10 +96,15 @@ class Coordinator implements CoordinatorInterface
     public function display($scenarioAlias, $stepName)
     {
         $process = $this->buildProcess($scenarioAlias);
-
         $step = $process->getStepByName($stepName);
 
-        return $step->display($this->context);
+        $this->context->initialize($process, $step);
+
+        if (!$this->context->isValid()) {
+            throw new NotFoundHttpException();
+        }
+
+        return $step->displayAction($this->context);
     }
 
     /**
@@ -93,10 +113,29 @@ class Coordinator implements CoordinatorInterface
     public function forward($scenarioAlias, $stepName)
     {
         $process = $this->buildProcess($scenarioAlias);
-
         $step = $process->getStepByName($stepName);
 
-        return $step->forward($this->context);
+        $this->context->initialize($process, $step);
+
+        if (!$this->context->isValid()) {
+            throw new NotFoundHttpException();
+        }
+
+        $response = $step->forwardAction($this->context);
+
+        if (!$this->context->isCompleted()) {
+            return $response;
+        }
+
+        if ($this->context->isLastStep()) {
+            $this->context->close();
+
+            $url = $this->router->generate($process->getRedirect());
+
+            return new RedirectResponse($url);
+        }
+
+        return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
     }
 
     /**
@@ -124,6 +163,30 @@ class Coordinator implements CoordinatorInterface
     }
 
     /**
+     * Redirect to step display action.
+     *
+     * @param ProcessInterface $process
+     * @param StepInterface    $step
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step)
+    {
+        $url = $this->router->generate('sylius_flow_display', array(
+            'scenarioAlias' => $process->getScenarioAlias(),
+            'stepName'      => $step->getName()
+        ));
+
+        if (null !== $route = $process->getDisplayRoute()) {
+            $url = $this->router->generate($route, array(
+                'stepName' => $step->getName()
+            ));
+        }
+
+        return new RedirectResponse($url);
+    }
+
+    /**
      * Builds process for given scenario alias.
      *
      * @param string $scenarioAlias
@@ -134,7 +197,9 @@ class Coordinator implements CoordinatorInterface
     {
         $processScenario = $this->loadScenario($scenarioAlias);
 
-        return $this->builder->build($processScenario);
-    }
+        $process = $this->builder->build($processScenario, $scenarioAlias);
+        $process->setScenarioAlias($scenarioAlias);
 
+        return $process;
+    }
 }
