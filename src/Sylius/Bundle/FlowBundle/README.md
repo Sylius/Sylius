@@ -1,8 +1,10 @@
-SyliusFlowBundle
+SyliusFlowBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusFlowBundle.png)](http://travis-ci.org/Sylius/SyliusFlowBundle)
 ================
 
 Multiple action setups with reusable steps for any Symfony2 application.
 Suitable for building checkouts or installations.
+
+This bundle is unstable, but working **prototype**.
 
 Sylius
 ------
