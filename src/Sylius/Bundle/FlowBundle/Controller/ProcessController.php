@@ -24,6 +24,7 @@ class ProcessController extends ContainerAware
 {
     /**
      * Build and start process for given scenario.
+     * This action usually redirects to first step.
      *
      * @param string $scenarioAlias
      *

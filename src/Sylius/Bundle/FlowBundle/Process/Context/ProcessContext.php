@@ -37,7 +37,18 @@ class ProcessContext implements ProcessContextInterface
      */
     protected $currentStep;
 
+    /**
+     * Previous step.
+     *
+     * @var StepInterface
+     */
     protected $previousStep;
+
+    /**
+     * Next step.
+     *
+     * @var StepInterface
+     */
     protected $nextStep;
 
     /**
@@ -61,7 +72,19 @@ class ProcessContext implements ProcessContextInterface
      */
     protected $request;
 
+    /**
+     * Progress in percents.
+     *
+     * @var integer
+     */
     protected $progress;
+
+    /**
+     * Was the context initialized?
+     *
+     * @var Boolean
+     */
+    protected $intitialized;
 
     /**
      * Constructor.
@@ -72,6 +95,7 @@ class ProcessContext implements ProcessContextInterface
     {
         $this->storage = $storage;
 
+        $this->initialized = false;
         $this->completed = false;
         $this->progress = 0;
     }
@@ -94,14 +118,14 @@ class ProcessContext implements ProcessContextInterface
                 $this->nextStep = isset($steps[$index+1]) ? $steps[$index+1] : null;
 
                 $this->calculateProgress($index);
+            }
 
-                if (null === $this->getState($step)) {
-                    $this->setState($step, ProcessContextInterface::STEP_STATE_PENDING);
-                }
-
-                break;
+            if (null === $this->getState($step)) {
+                $this->setState($step, ProcessContextInterface::STEP_STATE_PENDING);
             }
         }
+
+        $this->initialized = true;
 
         return $this;
     }
@@ -111,6 +135,8 @@ class ProcessContext implements ProcessContextInterface
      */
     public function isValid()
     {
+        $this->assertInitialized();
+
         $validator = $this->process->getValidator();
 
         if (null !== $validator && !$validator()) {
@@ -135,6 +161,8 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getProcess()
     {
+        $this->assertInitialized();
+
         return $this->process;
     }
 
@@ -143,6 +171,8 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getCurrentStep()
     {
+        $this->assertInitialized();
+
         return $this->currentStep;
     }
 
@@ -151,6 +181,8 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getPreviousStep()
     {
+        $this->assertInitialized();
+
         return $this->previousStep;
     }
 
@@ -159,16 +191,28 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getNextStep()
     {
+        $this->assertInitialized();
+
         return $this->nextStep;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isFirstStep()
     {
+        $this->assertInitialized();
+
         return null === $this->previousStep;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isLastStep()
     {
+        $this->assertInitialized();
+
         return null === $this->nextStep;
     }
 
@@ -177,6 +221,8 @@ class ProcessContext implements ProcessContextInterface
      */
     public function complete()
     {
+        $this->assertInitialized();
+
         $this->setState($this->currentStep, ProcessContextInterface::STEP_STATE_COMPLETED);
     }
 
@@ -185,11 +231,18 @@ class ProcessContext implements ProcessContextInterface
      */
     public function isCompleted()
     {
+        $this->assertInitialized();
+
         return ProcessContextInterface::STEP_STATE_COMPLETED === $this->getState($this->currentStep);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function close()
     {
+        $this->assertInitialized();
+
         $this->storage->clear();
     }
 
@@ -230,19 +283,51 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getProgress()
     {
+        $this->assertInitialized();
+
         return $this->progress;
     }
 
-    private function getState(StepInterface $step)
+    /**
+     * Get step state.
+     *
+     * @param StepInterface $step
+     *
+     * @return integer
+     */
+    protected function getState(StepInterface $step)
     {
         return $this->storage->get(sprintf('_state.%s', $step->getName()));
     }
 
-    private function setState(StepInterface $step, $state)
+    /**
+     * Set step state.
+     *
+     * @param StepInterface $step
+     * @param integer       $state
+     */
+    protected function setState(StepInterface $step, $state)
     {
         $this->storage->set(sprintf('_state.%s', $step->getName()), $state);
     }
 
+    /**
+     * If context was not initialized, throw exception.
+     *
+     * @throws \RuntimeException
+     */
+    protected function assertInitialized()
+    {
+        if (!$this->initialized) {
+            throw new \RuntimeException('Process context was not initialized');
+        }
+    }
+
+    /**
+     * Calculates progress based on current step index.
+     *
+     * @param integer $currentStepIndex
+     */
     protected function calculateProgress($currentStepIndex)
     {
         $totalSteps = $this->process->countSteps();

@@ -65,6 +65,20 @@ interface ProcessInterface
     function setOrderedSteps(array $steps);
 
     /**
+     * Get first process step.
+     *
+     * @return StepInterface
+     */
+    function getFirstStep();
+
+    /**
+     * Get last step.
+     *
+     * @return StepInterface
+     */
+    function getLastStep();
+
+    /**
      * Add step and name it.
      *
      * @param string        $name
@@ -87,4 +101,67 @@ interface ProcessInterface
      * @return Boolean
      */
     function hasStep($name);
+
+    /**
+     * Count all steps.
+     *
+     * @return integer
+     */
+    function countSteps();
+
+    /**
+     * Get validator.
+     *
+     * @return \Closure
+     */
+    function getValidator();
+
+    /**
+     * Set validator.
+     *
+     * @param \Closure $validator
+     */
+    function setValidator(\Closure $validator);
+
+    /**
+     * Get redirection after complete.
+     *
+     * @return string
+     */
+    function getRedirect();
+
+    /**
+     * Set redirection after compelte.
+     *
+     * @param string $redirect
+     */
+    function setRedirect($redirect);
+
+    /**
+     * Get display route.
+     *
+     * @return string
+     */
+    function getDisplayRoute();
+
+    /**
+     * Set display route.
+     *
+     * @param string $route
+     */
+    function setDisplayRoute($route);
+
+    /**
+     * Get forward route.
+     *
+     * @param string $route
+     */
+    function getForwardRoute();
+
+    /**
+     * Set forward route.
+     *
+     * @param string $route
+     */
+    function setForwardRoute($route);
 }

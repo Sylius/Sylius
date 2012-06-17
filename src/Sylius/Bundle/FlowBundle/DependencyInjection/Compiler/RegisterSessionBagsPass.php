@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 /**
- * Registers a attributes bag for each of flow.
+ * Registers a namespaced attribute bag for all processes.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

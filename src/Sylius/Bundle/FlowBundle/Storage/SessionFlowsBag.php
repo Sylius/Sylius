@@ -23,11 +23,17 @@ class SessionFlowsBag extends NamespacedAttributeBag
     const STORAGE_KEY = 'sylius_flow.bag';
     const NAME        = 'sylius_flow.bag';
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         parent::__construct(self::STORAGE_KEY);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return self::NAME;

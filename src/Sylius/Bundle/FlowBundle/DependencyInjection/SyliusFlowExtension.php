@@ -40,10 +40,10 @@ class SyliusFlowExtension extends Extension
 
         $configurations = array(
             'builders',
-            'controllers',
-            'storages',
-            'coordinators',
             'contexts',
+            'controllers',
+            'coordinators',
+            'storages',
         );
 
         foreach ($configurations as $basename) {

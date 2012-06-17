@@ -28,7 +28,7 @@ interface ProcessContextInterface
     const STEP_STATE_COMPLETED = 1;
 
     /**
-     * Initialize context with process and context.
+     * Initialize context with process and current step.
      *
      * @param ProcessInterface $process
      * @param StepInterface    $currentStep
@@ -63,8 +63,18 @@ interface ProcessContextInterface
      */
     function getNextStep();
 
+    /**
+     * Is current step the first step?
+     *
+     * @return Boolean
+     */
     function isFirstStep();
 
+    /**
+     * Is current step the last step?
+     *
+     * @return Boolean
+     */
     function isLastStep();
 
     /**
@@ -79,6 +89,9 @@ interface ProcessContextInterface
      */
     function isCompleted();
 
+    /**
+     * Close context and clear all the data.
+     */
     function close();
 
     /**
@@ -117,7 +130,7 @@ interface ProcessContextInterface
     function setRequest(Request $request);
 
     /**
-     * Get percent progress.
+     * Get progress in percents.
      *
      * @return integer
      */

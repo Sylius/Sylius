@@ -232,21 +232,33 @@ class Process implements ProcessInterface
         $this->forwardRoute = $route;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRedirect()
     {
         return $this->redirect;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setRedirect($redirect)
     {
         $this->redirect = $redirect;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValidator()
     {
         return $this->validator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValidator(\Closure $validator)
     {
         $this->validator = $validator;

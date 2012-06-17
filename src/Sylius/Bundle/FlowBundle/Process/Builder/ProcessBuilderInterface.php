@@ -16,7 +16,7 @@ use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
- * Process build interface.
+ * Process builder interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -50,6 +50,8 @@ interface ProcessBuilderInterface
      * Check wether or not process has given step.
      *
      * @param string $name
+     *
+     * @return Boolean
      */
     function has($name);
 
@@ -75,7 +77,7 @@ interface ProcessBuilderInterface
     function setRedirect($redirect);
 
     /**
-     * Validation of process, if returns false, breaks.
+     * Validation of process, if returns false, process is suspended.
      *
      * @param \Closure $validator
      */

@@ -134,6 +134,9 @@ class ProcessBuilder implements ProcessBuilderInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate(\Closure $validator)
     {
         $this->process->setValidator($validator);

@@ -42,7 +42,7 @@ class SessionStorage extends Storage
      */
     public function get($key, $default = null)
     {
-        return $this->session->getBag(SessionFlowsBag::NAME)->get($this->resolveKey($key), $default);
+        return $this->getBag()->get($this->resolveKey($key), $default);
     }
 
     /**
@@ -50,7 +50,7 @@ class SessionStorage extends Storage
      */
     public function set($key, $value)
     {
-        $this->session->getBag(SessionFlowsBag::NAME)->set($this->resolveKey($key), $value);
+        $this->getBag()->set($this->resolveKey($key), $value);
     }
 
     /**
@@ -58,7 +58,7 @@ class SessionStorage extends Storage
      */
     public function has($key)
     {
-        return $this->session->getBag(SessionFlowsBag::NAME)->has($this->resolveKey($key));
+        return $this->getBag()->has($this->resolveKey($key));
     }
 
     /**
@@ -66,7 +66,7 @@ class SessionStorage extends Storage
      */
     public function remove($key)
     {
-        $this->session->getBag(SessionFlowsBag::NAME)->remove($this->resolveKey($key));
+        $this->getBag()->remove($this->resolveKey($key));
     }
 
     /**
@@ -74,7 +74,17 @@ class SessionStorage extends Storage
      */
     public function clear()
     {
-        $this->session->getBag(SessionFlowsBag::NAME)->remove($this->domain);
+        $this->getBag()->remove($this->domain);
+    }
+
+    /**
+     * Get session flows bag.
+     *
+     * @return SessionFlowsBag
+     */
+    private function getBag()
+    {
+        return $this->session->getBag(SessionFlowsBag::NAME);
     }
 
     /**

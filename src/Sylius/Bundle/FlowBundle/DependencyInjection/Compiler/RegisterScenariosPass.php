@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Compiler pass that registers all setups.
+ * Compiler pass that registers all scenarios.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
