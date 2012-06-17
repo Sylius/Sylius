@@ -174,6 +174,10 @@ class Process implements ProcessInterface
             throw new \InvalidArgumentException(sprintf('Step with name "%s" already exists', $name));
         }
 
+        if (null === $step->getName()) {
+            $step->setName($name);
+        }
+
         $this->steps[$name] = $this->orderedSteps[] = $step;
     }
 

@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('storage')->defaultValue('sylius_flow.storage.session')->end()
+                ->scalarNode('storage')->defaultValue('sylius_flow.storage.session')->cannotBeEmpty()->end()
             ->end()
         ;
 
