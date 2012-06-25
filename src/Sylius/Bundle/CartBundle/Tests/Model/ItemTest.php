@@ -43,14 +43,57 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $item->setCart($cart);
         $this->assertEquals($cart, $item->getCart());
-
     }
 
+    public function testEquals()
+    {
+        $item = $this->getItem();
+        $item->setId(1);
+
+        $duplicatedItem = clone $item;
+        $this->assertTrue($item->equals($duplicatedItem));
+
+        $duplicatedItem->setQuantity(2);
+        $this->assertTrue($item->equals($duplicatedItem));
+        $this->assertNotEquals($duplicatedItem->getQuantity(), $item->getQuantity());
+
+        $duplicatedItem->setId(2);
+        $this->assertFalse($item->equals($duplicatedItem));
+    }
+
+    public function testQuantityManagement()
+    {
+        $item = $this->getItem();
+        $item->setQuantity(5);
+        $this->assertEquals(5, $item->getQuantity());
+
+        $item->incrementQuantity(5);
+        $this->assertEquals(10, $item->getQuantity());
+
+        $item->incrementQuantity(-10);
+        $this->assertEquals(1, $item->getQuantity());
+    }
+
+    /**
+     * @expectedException \OutOfRangeException
+     */
+    public function testQuantityMustBeBiggerThanZero()
+    {
+        $item = $this->getItem();
+        $item->setQuantity(0);
+    }
+
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\Item
+     */
     private function getItem()
     {
         return $this->getMockForAbstractClass('Sylius\Bundle\CartBundle\Model\Item');
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\CartInterface
+     */
     private function getMockCart()
     {
         return $this->getMock('Sylius\Bundle\CartBundle\Model\CartInterface');

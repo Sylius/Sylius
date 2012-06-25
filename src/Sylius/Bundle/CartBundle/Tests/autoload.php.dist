@@ -9,23 +9,10 @@
  * file that was distributed with this source code.
  */
 
-if (!file_exists($file = __DIR__.'/../vendor/.composer/autoload.php')) {
-
-$vendorDir = __DIR__.'/../vendor';
-require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-
-$loader = new \Symfony\Component\ClassLoader\UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Symfony'                => array($vendorDir.'/symfony/src', $vendorDir.'/bundles'),
-    'Doctrine\\Common'       => $vendorDir.'/doctrine-common/lib',
-    'Doctrine\\DBAL'         => $vendorDir.'/doctrine-dbal/lib',
-    'Doctrine'               => $vendorDir.'/doctrine/lib',
-));
-
-$loader->register();
-
+if (file_exists($file = __DIR__.'/../vendor/autoload.php')) {
+   $autoload = require_once $file;
 } else {
-    require_once $file;
+   throw new RuntimeException('Install dependencies to run test suite.');
 }
 
 spl_autoload_register(function($class) {
