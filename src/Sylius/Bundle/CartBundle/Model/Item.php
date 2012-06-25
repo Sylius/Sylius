@@ -92,6 +92,10 @@ abstract class Item implements ItemInterface
      */
     public function setQuantity($quantity)
     {
+        if (1 > $quantity) {
+            throw new \OutOfRangeException('Quantity value must be bigger than zero.');
+        }
+
         $this->quantity = $quantity;
     }
 
@@ -101,6 +105,11 @@ abstract class Item implements ItemInterface
     public function incrementQuantity($amount = 1)
     {
         $this->quantity += $amount;
+
+        // Quantity must be bigger than zero
+        if (1 > $this->quantity) {
+            $this->quantity = 1;
+        }
     }
 
     /**
@@ -108,6 +117,10 @@ abstract class Item implements ItemInterface
      */
     public function equals(ItemInterface $item)
     {
-        return $item === $this;
+        if ($item->getId() !== $this->getId()) {
+            return false;
+        }
+
+        return true;
     }
 }

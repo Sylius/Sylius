@@ -22,8 +22,8 @@ class CartTest extends \PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $this->assertEquals(0, $cart->getTotalItems());
-        $this->assertEquals(false, $cart->isLocked());
+        $this->assertTrue($cart->isEmpty());
+        $this->assertFalse($cart->isLocked());
         $this->assertInstanceOf('DateTime', $cart->getExpiresAt());
     }
 
@@ -73,6 +73,9 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan($expiresAt, $cart->getExpiresAt());
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\Cart
+     */
     private function getCart()
     {
         return $this->getMockForAbstractClass('Sylius\Bundle\CartBundle\Model\Cart');

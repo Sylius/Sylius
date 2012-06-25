@@ -136,7 +136,7 @@ interface CartInterface
      *
      * @param \DateTime $expiresAt
      */
-    function setExpiresAt(\DateTime $expiresAt);
+    function setExpiresAt(\DateTime $expiresAt = null);
 
     /**
      * Bumps the expiration time.

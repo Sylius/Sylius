@@ -35,17 +35,6 @@ class Cart extends BaseCart
     /**
      * {@inheritdoc}
      */
-    public function addItem(ItemInterface $item)
-    {
-        if (!$this->hasItem($item)) {
-            $this->items->add($item);
-            $item->setCart($this);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function removeItem(ItemInterface $item)
     {
         if ($this->hasItem($item)) {
@@ -60,6 +49,22 @@ class Cart extends BaseCart
     public function hasItem(ItemInterface $item)
     {
         return $this->items->contains($item);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function searchItem(ItemInterface $item)
+    {
+        return $this->items->indexOf($item);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        return $this->items->isEmpty();
     }
 
     /**

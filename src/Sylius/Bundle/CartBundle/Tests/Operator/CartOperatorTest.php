@@ -35,16 +35,21 @@ class CartOperatorTest extends \PHPUnit_Framework_TestCase
     public function testAddItemIncreasesQuantityIfThereAreItemsThatAreEqual()
     {
         $item = $this->getItem();
+        $item->setId(1);
         $item->setQuantity(3);
 
         $cart = $this->getCart();
 
         $cartOperator = $this->getCartOperator();
         $cartOperator->addItem($cart, $item);
-        $cartOperator->addItem($cart, $item);
+
+        $duplicatedItem = clone $item;
+        $duplicatedItem->setQuantity(2);
+
+        $cartOperator->addItem($cart, $duplicatedItem);
 
         $this->assertEquals(1, $cart->countItems());
-        $this->assertEquals(6, $item->getQuantity());
+        $this->assertEquals(5, $item->getQuantity());
     }
 
     public function testRefreshSetsTotalItems()
@@ -105,6 +110,11 @@ class CartOperatorTest extends \PHPUnit_Framework_TestCase
         $cartOperator->removeItem($cart, $item);
     }
 
+    /**
+     * @param object|null $cartManager
+     *
+     * @return \Sylius\Bundle\CartBundle\Operator\CartOperator
+     */
     private function getCartOperator($cartManager = null)
     {
         if (null === $cartManager) {
@@ -117,26 +127,41 @@ class CartOperatorTest extends \PHPUnit_Framework_TestCase
         ;
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\Cart
+     */
     private function getCart()
     {
         return $this->getMockForAbstractClass('Sylius\Bundle\CartBundle\Model\Cart');
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\Item
+     */
     private function getItem()
     {
         return $this->getMockForAbstractClass('Sylius\Bundle\CartBundle\Model\Item');
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\CartManagerInterface
+     */
     private function getMockCartManager()
     {
         return $this->getMock('Sylius\Bundle\CartBundle\Model\CartManagerInterface');
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\CartInterface
+     */
     private function getMockCart()
     {
         return $this->getMock('Sylius\Bundle\CartBundle\Model\CartInterface');
     }
 
+    /**
+     * @return \Sylius\Bundle\CartBundle\Model\ItemInterface
+     */
     private function getMockItem()
     {
         return $this->getMock('Sylius\Bundle\CartBundle\Model\ItemInterface');

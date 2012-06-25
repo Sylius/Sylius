@@ -159,12 +159,20 @@ abstract class Cart implements CartInterface
      */
     public function addItem(ItemInterface $item)
     {
-        if (!$this->hasItem($item)) {
+        $exists = false;
+        foreach ($this->items as $existingItem) {
+            /** @var $existingItem ItemInterface */
+            if ($existingItem->equals($item)) {
+                $existingItem->incrementQuantity($item->getQuantity());
+                $exists = true;
+                break;
+            }
+        }
+
+        if (!$exists) {
             $item->setCart($this);
             $this->items[] = $item;
         }
-
-        return $this;
     }
 
     /**
@@ -172,8 +180,8 @@ abstract class Cart implements CartInterface
      */
     public function removeItem(ItemInterface $item)
     {
-        if ($this->hasItem($item)) {
-            $key = array_search($item, $this->items);
+        $key = $this->searchItem($item);
+        if (false !== $key) {
             unset($this->items[$key]);
             $item->setCart(null);
         }
@@ -184,7 +192,17 @@ abstract class Cart implements CartInterface
      */
     public function hasItem(ItemInterface $item)
     {
-        return $this === $item->getCart();
+        return false !== $this->searchItem($item);
+    }
+
+    /**
+     * @param ItemInterface $item
+     *
+     * @return boolean|integer
+     */
+    public function searchItem(ItemInterface $item)
+    {
+        return array_search($item, $this->items, true);
     }
 
     /**
