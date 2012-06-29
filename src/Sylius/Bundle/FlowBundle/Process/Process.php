@@ -98,7 +98,9 @@ class Process implements ProcessInterface
      */
     public function setSteps(array $steps)
     {
-        $this->steps = $steps;
+        foreach ($steps as $name => $step) {
+            $this->addStep($name, $step);
+        }
     }
 
     /**
@@ -112,18 +114,10 @@ class Process implements ProcessInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrderedSteps(array $orderedSteps)
-    {
-        $this->orderedSteps = $orderedSteps;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getStepByIndex($index)
     {
         if (!isset($this->orderedSteps[$index])) {
-            throw new \InvalidArgumentException(spritnf('Step with index %d. does not exist', $index));
+            throw new \InvalidArgumentException(sprintf('Step with index %d. does not exist', $index));
         }
 
         return $this->orderedSteps[$index];

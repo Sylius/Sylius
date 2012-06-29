@@ -172,16 +172,19 @@ class Coordinator implements CoordinatorInterface
      */
     protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step)
     {
-        $url = $this->router->generate('sylius_flow_display', array(
-            'scenarioAlias' => $process->getScenarioAlias(),
-            'stepName'      => $step->getName()
-        ));
 
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array(
                 'stepName' => $step->getName()
             ));
+
+            return new RedirectResponse($url);
         }
+
+        $url = $this->router->generate('sylius_flow_display', array(
+            'scenarioAlias' => $process->getScenarioAlias(),
+            'stepName'      => $step->getName()
+        ));
 
         return new RedirectResponse($url);
     }
@@ -197,7 +200,7 @@ class Coordinator implements CoordinatorInterface
     {
         $processScenario = $this->loadScenario($scenarioAlias);
 
-        $process = $this->builder->build($processScenario, $scenarioAlias);
+        $process = $this->builder->build($processScenario);
         $process->setScenarioAlias($scenarioAlias);
 
         return $process;

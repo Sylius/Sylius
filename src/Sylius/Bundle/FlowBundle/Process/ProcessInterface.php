@@ -58,13 +58,6 @@ interface ProcessInterface
     function getOrderedSteps();
 
     /**
-     * Set ordered steps.
-     *
-     * @param array $steps
-     */
-    function setOrderedSteps(array $steps);
-
-    /**
      * Get first process step.
      *
      * @return StepInterface
@@ -164,4 +157,18 @@ interface ProcessInterface
      * @param string $route
      */
     function setForwardRoute($route);
+
+    /**
+     * Get step by index/order
+     *
+     * @return StepInterface
+     */
+    function getStepByIndex($index);
+
+    /**
+     * Get step by name
+     *
+     * @return StepInterface
+     */
+    function getStepByName($index);
 }
