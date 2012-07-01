@@ -69,6 +69,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function add($name, $step)
     {
+        $this->assertHasProcess();
+
         if (is_string($step)) {
             $step = $this->loadStep($step);
         }
@@ -93,6 +95,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function remove($name)
     {
+        $this->assertHasProcess();
+
         $this->process->removeStep($name);
     }
 
@@ -101,6 +105,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function has($name)
     {
+        $this->assertHasProcess();
+
         return $this->process->hasStep($name);
     }
 
@@ -109,6 +115,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function setDisplayRoute($route)
     {
+        $this->assertHasProcess();
+
         $this->process->setDisplayRoute($route);
 
         return $this;
@@ -119,6 +127,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function setForwardRoute($route)
     {
+        $this->assertHasProcess();
+
         $this->process->setForwardRoute($route);
 
         return $this;
@@ -129,6 +139,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function setRedirect($redirect)
     {
+        $this->assertHasProcess();
+
         $this->process->setRedirect($redirect);
 
         return $this;
@@ -139,6 +151,8 @@ class ProcessBuilder implements ProcessBuilderInterface
      */
     public function validate(\Closure $validator)
     {
+        $this->assertHasProcess();
+
         $this->process->setValidator($validator);
 
         return $this;
@@ -166,5 +180,17 @@ class ProcessBuilder implements ProcessBuilderInterface
         }
 
         return $this->steps[$alias];
+    }
+
+    /**
+     * If process do not exists, throw exception.
+     *
+     * @throws \RuntimeException
+     */
+    protected function assertHasProcess()
+    {
+        if (!$this->process) {
+            throw new \RuntimeException('Process is not set');
+        }
     }
 }
