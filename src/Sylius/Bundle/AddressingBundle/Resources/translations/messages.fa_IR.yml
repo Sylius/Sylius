@@ -1,0 +1,8 @@
+sylius_addressing:
+    label:
+        address:
+            firstname: "نام"
+            lastname: "نام خانوادگی"
+            street: "آدرس"
+            city: "شهر"
+            postcode: "کد پستی"
