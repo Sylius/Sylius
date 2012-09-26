@@ -147,19 +147,19 @@ Open up your `config.yml` file and add this...
 .. code-block:: yaml
 
     sylius_assortment:
-        driver: ORM
+        driver: doctrine/orm
         classes:
             model:
                 product: Application\Bundle\AssortmentBundle\Entity\Product
 
-Please note, that the "**ORM**" is currently the only supported driver.
+Please note, that the "**doctrine/orm**" is currently the only supported driver.
 
 Updating database schema
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The last thing you need to do is updating the database schema.
 
-For "**ORM**" driver run the following command.
+For "**doctrine/orm**" driver run the following command.
 
 .. code-block:: bash
 
@@ -209,7 +209,7 @@ Then put the class name in configuration.
 .. code-block:: yaml
 
     sylius_assortment:
-            driver: ORM
+            driver: doctrine/orm
             classes:
                 model:
                     product: # your product class.
@@ -246,7 +246,7 @@ This is full bundle configuration.
 .. code-block:: yaml
 
     sylius_assortment:
-            driver: ORM
+            driver: doctrine/orm
             engine: twig # templating engine name.
             classes:
                 model:
