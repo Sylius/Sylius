@@ -19,8 +19,8 @@
     "require": {
         "php": ">=5.3.2",
 
-        "symfony/framework":               ">=2.1.*",
-        "stof/doctrine-extensions-bundle": "*",
+        "symfony/framework-bundle":        ">=2.1.*",
+        "doctrine/common":                 ">=2.1.*",
         "white-october/pagerfanta-bundle": "*"
     },
     "require-dev": {
