@@ -1,0 +1,33 @@
+{
+    "name": "sylius/resource-bundle",
+    "type": "symfony-bundle",
+    "description": "Resource component for Sylius.",
+    "keywords": ["resource", "storage", "persistence"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+
+        "symfony/framework":               ">=2.1.*",
+        "stof/doctrine-extensions-bundle": "*",
+        "white-october/pagerfanta-bundle": "*"
+    },
+    "require-dev": {
+        "doctrine/orm": "*"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\ResourceBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/ResourceBundle"
+}
