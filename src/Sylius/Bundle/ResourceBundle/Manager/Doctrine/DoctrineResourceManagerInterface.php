@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Manager\Doctrine;
+namespace Sylius\Bundle\ResourceBundle\Manager\Doctrine;
 
-use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
 
 /**
  * Doctrine resource manager interface.

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource;
+namespace Sylius\Bundle\ResourceBundle\Model;
 
 /**
  * Resource interface.

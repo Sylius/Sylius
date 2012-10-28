@@ -13,14 +13,14 @@ namespace Sylius\Bundle\ResourceBundle\Manager\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Manager\ResourceManager;
-use Sylius\Bundle\ResourceBundle\ResourceInterface;
+use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
 
 /**
  * Doctrine resource manager class.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DoctrineResourceManager extends ResourceManager implements DoctrineResourceManagerInterface
+abstract class DoctrineResourceManager extends ResourceManager implements DoctrineResourceManagerInterface
 {
     protected $objectManager;
     protected $objectRepository;

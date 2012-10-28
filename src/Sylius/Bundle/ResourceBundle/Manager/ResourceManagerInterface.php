@@ -38,17 +38,17 @@ interface ResourceManagerInterface
      * Persist.
      *
      * @param ResourceInterface $resource
-     * @param Boolean           $flush
+     * @param Boolean           $commit
      */
-    function persist(ResourceInterface $resource, $flush =  true);
+    function persist(ResourceInterface $resource, $commit =  true);
 
     /**
      * Removes resource.
      *
      * @param ResourceInterface $resource
-     * @param Boolean           $flush
+     * @param Boolean           $commit
      */
-    function remove(ResourceInterface $resource, $flush = true);
+    function remove(ResourceInterface $resource, $commit = true);
 
     /**
      * Finds resource by id.

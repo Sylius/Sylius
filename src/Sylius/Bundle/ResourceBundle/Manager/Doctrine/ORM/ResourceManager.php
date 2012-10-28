@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Manager\Doctrine;
+namespace Sylius\Bundle\ResourceBundle\Manager\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
