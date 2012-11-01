@@ -4,6 +4,7 @@ CHANGELOG
 ### 01-11-2012
 
 * Bundle now uses [SyliusResourceBundle](http://github.com/Sylius/SyliusResourceBundle) for model persistence.
+* Models now depend on Doctrine collections.
 * New controller.
 * Renamed **Item** to **CartItem**.
 * Renamed **ItemType** to **CartItemType**.
