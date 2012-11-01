@@ -197,7 +197,11 @@ abstract class ResourceController extends Controller implements ResourceControll
     public function setFlash($name, $value)
     {
         if ($this->isHtmlRequest()) {
-            parent::setFlash($name, $value);
+            $this
+                ->get('session')
+                ->getFlashBag()
+                ->set($name, $value)
+            ;
         }
     }
 
