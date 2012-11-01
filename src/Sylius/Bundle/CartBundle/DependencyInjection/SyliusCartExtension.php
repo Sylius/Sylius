@@ -35,14 +35,13 @@ class SyliusCartExtension extends Extension
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $config);
-
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
 
         if (!in_array($config['driver'], SyliusCartBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
-        if (!in_array($config['engine'], array('php', 'twig'))) {
+        if ('twig' !== $config['engine']) {
             throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
         }
 
@@ -58,62 +57,14 @@ class SyliusCartExtension extends Extension
 
         $container->setParameter('sylius_cart.provider.class', $config['classes']['provider']);
 
-        $configurations = array(
-            'controllers',
-            'forms',
-            'provider',
-            'storage'
-        );
+        $loader->load('services.xml');
 
-        foreach($configurations as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
+        $container->setParameter('sylius_cart.model.cart.class', $config['classes']['model']['cart']);
+        $container->setParameter('sylius_cart.model.item.class', $config['classes']['model']['item']);
 
-        $this->remapParametersNamespaces($config['classes'], $container, array(
-            'listener' => 'sylius_cart.listener.%s.class',
-            'model'    => 'sylius_cart.model.%s.class',
-            'manager'  => 'sylius_cart.manager.%s.class',
-        ));
+        $container->setParameter('sylius_cart.controller.cart.class', $config['classes']['controller']['cart']);
 
-        $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
-            'backend'  => 'sylius_cart.controller.backend.%s.class',
-            'frontend' => 'sylius_cart.controller.frontend.%s.class'
-        ));
-
-        $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type' => 'sylius_cart.form.type.%s.class',
-        ));
-    }
-
-    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
-    {
-        foreach ($map as $name => $paramName) {
-            if (isset($config[$name])) {
-                $container->setParameter($paramName, $config[$name]);
-            }
-        }
-    }
-
-    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
-    {
-        foreach ($namespaces as $ns => $map) {
-            if ($ns) {
-                if (!isset($config[$ns])) {
-                    continue;
-                }
-                $namespaceConfig = $config[$ns];
-            } else {
-                $namespaceConfig = $config;
-            }
-            if (is_array($map)) {
-                $this->remapParameters($namespaceConfig, $container, $map);
-            } else {
-                foreach ($namespaceConfig as $name => $value) {
-                    if (null !== $value) {
-                        $container->setParameter(sprintf($map, $name), $value);
-                    }
-                }
-            }
-        }
+        $container->setParameter('sylius_cart.form.type.cart.class', $config['classes']['form']['type']['cart']);
+        $container->setParameter('sylius_cart.form.type.item.class', $config['classes']['form']['type']['item']);
     }
 }

@@ -16,12 +16,10 @@ namespace Sylius\Bundle\CartBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Item implements ItemInterface
+class CartItem implements CartItemInterface
 {
     /**
-     * Id.
-     *
-     * @var mixed
+     * Cart item id.
      */
     protected $id;
 
@@ -40,11 +38,23 @@ abstract class Item implements ItemInterface
     protected $quantity;
 
     /**
+     * Unit price.
+     */
+    protected $unitPrice;
+
+    /**
+     * Total value.
+     */
+    protected $total;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->quantity = 1;
+        $this->unitPrice = 0;
+        $this->total = 0;
     }
 
     /**
@@ -53,14 +63,6 @@ abstract class Item implements ItemInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -93,34 +95,39 @@ abstract class Item implements ItemInterface
     public function setQuantity($quantity)
     {
         if (1 > $quantity) {
-            throw new \OutOfRangeException('Quantity value must be bigger than zero.');
+            throw new \OutOfRangeException('Quantity must be greater than 0');
         }
 
         $this->quantity = $quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function incrementQuantity($amount = 1)
+    public function getUnitPrice()
     {
-        $this->quantity += $amount;
-
-        // Quantity must be bigger than zero
-        if (1 > $this->quantity) {
-            $this->quantity = 1;
-        }
+        return $this->unitPrice;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function equals(ItemInterface $item)
+    public function setUnitPrice($unitPrice)
     {
-        if ($item->getId() !== $this->getId()) {
-            return false;
-        }
+        $this->unitPrice = $unitPrice;
+    }
 
-        return true;
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    }
+
+    public function calculateTotal()
+    {
+        $this->total = $this->quantity * $this->unitPrice;
+    }
+
+    public function equals(CartItemInterface $cartItem)
+    {
+        return $this->getId() === $cartItem->getId();
     }
 }

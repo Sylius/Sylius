@@ -11,68 +11,75 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
+
 /**
  * Interface for cart item model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ItemInterface
+interface CartItemInterface extends ResourceInterface
 {
-    /**
-     * Returns item id.
-     *
-     * @return mixed
-     */
-    function getId();
-
-    /**
-     * Sets item id.
-     *
-     * @param mixed $id
-     */
-    function setId($id);
-
     /**
      * Returns associated cart.
      *
      * @return CartInterface
      */
-    function getCart();
+    public function getCart();
 
     /**
      * Sets cart.
      *
      * @param CartInterface
      */
-    function setCart(CartInterface $cart = null);
+    public function setCart(CartInterface $cart = null);
 
     /**
      * Returns quantity.
      *
      * @return integer
      */
-    function getQuantity();
+    public function getQuantity();
 
     /**
      * Sets quantity.
      *
      * @param $quantity
      */
-    function setQuantity($quantity);
+    public function setQuantity($quantity);
 
     /**
-     * Increment quantity by given amount.
-     * By 1 as default.
-     *
-     * @param integer $quantity
+     * Get item price.
      */
-    function incrementQuantity($amount = 1);
+    public function getUnitPrice();
+
+    /**
+     * Set item price.
+     */
+    public function setUnitPrice($price);
+
+    /**
+     * Set total.
+     */
+    public function getTotal();
+
+    /**
+     * Set total.
+     */
+    public function setTotal($total);
+
+    /**
+     * Calulcate line total.
+     */
+    public function calculateTotal();
 
     /**
      * Checks whether the item given as argument corresponds to
      * the same cart item. Can be overriden to sum up quantity.
      *
+     * @param CartItemInterface $cartItem
+     *
      * @return Boolean
      */
-    function equals(ItemInterface $item);
+    public function equals(CartItemInterface $cartItem);
 }

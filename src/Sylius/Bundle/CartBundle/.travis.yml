@@ -4,10 +4,9 @@ php:
   - 5.3
   - 5.4
 
-before_script:
-  - wget http://getcomposer.org/composer.phar
-  - php composer.phar install --dev
+before_script: composer install --dev
+
+script: php bin/phpspec run
 
 notifications:
-  email:
-    - travis-ci@sylius.org
+  email: travis-ci@sylius.org

@@ -1,8 +1,8 @@
 {
     "name": "sylius/cart-bundle",
     "type": "symfony-bundle",
-    "description": "Carts feature for your next Symfony2 application. Clean architecture and simple usage.",
-    "keywords": ["shop", "ecommerce", "cart", "carts"],
+    "description": "Cart feature for your next Symfony2 application.",
+    "keywords": ["shop", "ecommerce", "cart", "carts", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -16,13 +16,19 @@
             "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
 
-        "symfony/symfony": "2.1.*"
+        "doctrine/common":          "*",
+        "sylius/resource-bundle":   "*",
+        "symfony/framework-bundle": ">=2.1.0,<2.2.0"
     },
     "require-dev": {
-        "doctrine/orm": "*"
+        "phpspec/phpspec2": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\CartBundle": "" }

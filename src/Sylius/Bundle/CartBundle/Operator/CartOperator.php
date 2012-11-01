@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CartBundle\Operator;
 
 use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Model\CartManagerInterface;
-use Sylius\Bundle\CartBundle\Model\ItemInterface;
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
 
 /**
  * Base class for cart operator.
@@ -22,21 +22,21 @@ use Sylius\Bundle\CartBundle\Model\ItemInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class CartOperator implements CartOperatorInterface
+class CartOperator implements CartOperatorInterface
 {
     /**
      * Cart manager.
      *
-     * @var CartManagerInterface
+     * @var ResourceManagerInterface
      */
     protected $cartManager;
 
     /**
      * Constructor.
      *
-     * @param CartManagerInterface $cartManager;
+     * @param ResourceManagerInterface $cartManager;
      */
-    public function __construct(CartManagerInterface $cartManager)
+    public function __construct(ResourceManagerInterface $cartManager)
     {
         $this->cartManager = $cartManager;
     }
@@ -44,17 +44,21 @@ abstract class CartOperator implements CartOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function addItem(CartInterface $cart, ItemInterface $item)
+    public function addItem(CartInterface $cart, CartItemInterface $item)
     {
         $cart->addItem($item);
+
+        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeItem(CartInterface $cart, ItemInterface $item)
+    public function removeItem(CartInterface $cart, CartItemInterface $item)
     {
         $cart->removeItem($item);
+
+        return $this;
     }
 
     /**
@@ -62,7 +66,10 @@ abstract class CartOperator implements CartOperatorInterface
      */
     public function refresh(CartInterface $cart)
     {
+        $cart->calculateTotal();
         $cart->setTotalItems($cart->countItems());
+
+        return $this;
     }
 
     /**
@@ -70,7 +77,9 @@ abstract class CartOperator implements CartOperatorInterface
      */
     public function clear(CartInterface $cart)
     {
-        $this->cartManager->removeCart($cart);
+        $this->cartManager->remove($cart);
+
+        return $this;
     }
 
     /**
@@ -78,6 +87,8 @@ abstract class CartOperator implements CartOperatorInterface
      */
     public function save(CartInterface $cart)
     {
-        $this->cartManager->persistCart($cart);
+        $this->cartManager->persist($cart);
+
+        return $this;
     }
 }

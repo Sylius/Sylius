@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Operator;
 
 use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Model\ItemInterface;
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 
 /**
  * Interface for cart operator.
@@ -24,37 +24,37 @@ interface CartOperatorInterface
     /**
      * Adds item to cart.
      *
-     * @param CartInterface $cart
-     * @param ItemInterface	$item
+     * @param CartInterface     $cart
+     * @param CartItemInterface $item
      */
-    function addItem(CartInterface $cart, ItemInterface $item);
+    public function addItem(CartInterface $cart, CartItemInterface $item);
 
     /**
      * Removes item from cart.
      *
-     * @param CartInterface $cart
-     * @param ItemInterface $item
+     * @param CartInterface     $cart
+     * @param CartItemInterface $item
      */
-    function removeItem(CartInterface $cart, ItemInterface $item);
+    public function removeItem(CartInterface $cart, CartItemInterface $item);
 
     /**
      * Refreshes cart data.
      *
      * @param CartInterface $cart
      */
-    function refresh(CartInterface $cart);
+    public function refresh(CartInterface $cart);
 
     /**
      * Saves cart at current state.
      *
      * @param CartInterface $cart
      */
-    function save(CartInterface $cart);
+    public function save(CartInterface $cart);
 
     /**
      * Clears current cart.
      *
      * @param CartInterface $cart
      */
-    function clear(CartInterface $cart);
+    public function clear(CartInterface $cart);
 }

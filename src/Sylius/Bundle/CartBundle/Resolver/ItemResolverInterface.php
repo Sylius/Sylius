@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Resolver;
 
-use Sylius\Bundle\CartBundle\Model\ItemInterface;
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,16 +27,16 @@ interface ItemResolverInterface
      *
      * @param Request $request
      *
-     * @return ItemInterface
+     * @return CartItemInterface
      */
-    function resolveItemToAdd(Request $request);
+    public function resolveItemToAdd(Request $request);
 
     /**
      * Returns item to remove.
      *
      * @param Request $request
      *
-     * @return ItemInterface
+     * @return CartItemInterface
      */
-    function resolveItemToRemove(Request $request);
+    public function resolveItemToRemove(Request $request);
 }

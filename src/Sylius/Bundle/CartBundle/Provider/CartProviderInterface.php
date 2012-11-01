@@ -27,7 +27,7 @@ interface CartProviderInterface
      *
      * @return CartInterface
      */
-    function getCart();
+    public function getCart();
 
     /**
      * Sets given cart as current one.
@@ -35,10 +35,10 @@ interface CartProviderInterface
      *
      * @param CartInterface $cart
      */
-    function setCart(CartInterface $cart);
+    public function setCart(CartInterface $cart);
 
     /**
      * Abandon current cart.
      */
-    function abandonCart();
+    public function abandonCart();
 }

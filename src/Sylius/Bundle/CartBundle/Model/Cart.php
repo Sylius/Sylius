@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Model for carts.
  * All driver entities and documents should extend this class or implement
@@ -18,7 +21,7 @@ namespace Sylius\Bundle\CartBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Cart implements CartInterface
+class Cart implements CartInterface
 {
     /**
      * Id.
@@ -30,7 +33,7 @@ abstract class Cart implements CartInterface
     /**
      * Items in cart.
      *
-     * @var array
+     * @var Collection
      */
     protected $items;
 
@@ -40,6 +43,11 @@ abstract class Cart implements CartInterface
      * @var integer
      */
     protected $totalItems;
+
+    /**
+     * Total value.
+     */
+    protected $total;
 
     /**
      * Locked.
@@ -60,8 +68,9 @@ abstract class Cart implements CartInterface
      */
     public function __construct()
     {
-        $this->items = array();
+        $this->items = new ArrayCollection();
         $this->totalItems = 0;
+        $this->total = 0;
         $this->locked = false;
         $this->incrementExpiresAt();
     }
@@ -72,14 +81,6 @@ abstract class Cart implements CartInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -101,9 +102,9 @@ abstract class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function incrementTotalItems($amount = 1)
+    public function getTotalItems()
     {
-        $this->totalItems += $amount;
+        return $this->totalItems;
     }
 
     /**
@@ -111,15 +112,23 @@ abstract class Cart implements CartInterface
      */
     public function setTotalItems($totalItems)
     {
+        if (0 > $totalItems) {
+            throw new \OutOfRangeException('Total items must not be less than 0');
+        }
+
         $this->totalItems = $totalItems;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTotalItems()
+    public function changeTotalItems($amount)
     {
-        return $this->totalItems;
+        $this->totalItems += $amount;
+
+        if (0 > $this->totalItems) {
+            $this->totalItems = 0;
+        }
     }
 
     /**
@@ -141,9 +150,19 @@ abstract class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setItems($items)
+    public function setItems(Collection $items)
     {
         $this->items = $items;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearItems()
+    {
+        $this->items->clear();
+
+        return $this;
     }
 
     /**
@@ -157,60 +176,65 @@ abstract class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function addItem(ItemInterface $item)
+    public function addItem(CartItemInterface $item)
     {
-        $exists = false;
+        if ($this->items->contains($item)) {
+            return $this;
+        }
+
         foreach ($this->items as $existingItem) {
-            /** @var $existingItem ItemInterface */
             if ($existingItem->equals($item)) {
-                $existingItem->incrementQuantity($item->getQuantity());
-                $exists = true;
-                break;
+                $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
+
+                return $this;
             }
         }
 
-        if (!$exists) {
-            $item->setCart($this);
-            $this->items[] = $item;
-        }
+        $this->items->add($item);
+        $item->setCart($this);
+
+        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeItem(ItemInterface $item)
+    public function removeItem(CartItemInterface $item)
     {
-        $key = $this->searchItem($item);
-        if (false !== $key) {
-            unset($this->items[$key]);
+        if ($this->items->contains($item)) {
+            $this->items->removeElement($item);
+
             $item->setCart(null);
         }
+
+        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItem(ItemInterface $item)
+    public function hasItem(CartItemInterface $item)
     {
-        return false !== $this->searchItem($item);
+        return $this->items->contains($item);
     }
 
-    /**
-     * @param ItemInterface $item
-     *
-     * @return boolean|integer
-     */
-    public function searchItem(ItemInterface $item)
+    public function getTotal()
     {
-        return array_search($item, $this->items, true);
+        return $this->total;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function clearItems()
+    public function setTotal($total)
     {
-        $this->items = array();
+        $this->total = $total;
+    }
+
+    public function calculateTotal()
+    {
+        // Reset total.
+        $this->total = 0;
+
+        foreach ($this->items as $item) {
+            $item->calculateTotal();
+
+            $this->total += $item->getTotal();
+        }
     }
 
     /**
@@ -218,7 +242,7 @@ abstract class Cart implements CartInterface
      */
     public function isExpired()
     {
-        return $this->getExpiresAt() < new \DateTime;
+        return $this->getExpiresAt() < new \DateTime('now');
     }
 
     /**

@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\CartBundle\Model\Cart as BaseCart;
-use Sylius\Bundle\CartBundle\Model\ItemInterface;
 
 /**
  * Cart entity.
@@ -22,56 +20,4 @@ use Sylius\Bundle\CartBundle\Model\ItemInterface;
  */
 class Cart extends BaseCart
 {
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->items = new ArrayCollection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeItem(ItemInterface $item)
-    {
-        if ($this->hasItem($item)) {
-            $this->items->removeElement($item);
-            $item->setCart(null);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItem(ItemInterface $item)
-    {
-        return $this->items->contains($item);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function searchItem(ItemInterface $item)
-    {
-        return $this->items->indexOf($item);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEmpty()
-    {
-        return $this->items->isEmpty();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clearItems()
-    {
-        $this->items->clear();
-    }
 }

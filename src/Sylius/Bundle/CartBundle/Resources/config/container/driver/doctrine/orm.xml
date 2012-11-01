@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
 
@@ -14,8 +14,12 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd"
->
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\ORM\ResourceManager</parameter>
+        <parameter key="sylius_cart.manager.item.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\ORM\ResourceManager</parameter>
+    </parameters>
 
     <services>
         <service id="sylius_cart.manager.cart" class="%sylius_cart.manager.cart.class%">

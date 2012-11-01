@@ -11,49 +11,52 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
+
 /**
  * Cart model interface.
  * All driver cart entities or documents should implement this interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface CartInterface
+interface CartInterface extends ResourceInterface
 {
-    /**
-     * Returns cart id.
-     *
-     * @return mixed
-     */
-    function getId();
-
-    /**
-     * Sets cart id.
-     *
-     * @param mixed $id
-     */
-    function setId($id);
-
     /**
      * Returns number of items in cart.
      *
      * @return integer
      */
-    function getTotalItems();
+    public function getTotalItems();
 
     /**
      * Sets number of items in cart.
      *
      * @param integer $totalItems;
      */
-    function setTotalItems($totalItems);
+    public function setTotalItems($totalItems);
 
     /**
-     * Increments total items number by given amount.
-     * Default is 1.
+     * Change total items number by given amount.
      *
      * @param integer $amount
      */
-    function incrementTotalItems($amount = 1);
+    public function changeTotalItems($amount);
+
+    /**
+     * Get total cart value.
+     */
+    public function getTotal();
+
+    /**
+     * Set total value.
+     */
+    public function setTotal($total);
+
+    /**
+     * Calculate total.
+     */
+    public function calculateTotal();
 
     /**
      * Checks whether the cart is locked or not.
@@ -61,93 +64,93 @@ interface CartInterface
      *
      * @return Boolean
      */
-    function isLocked();
+    public function isLocked();
 
     /**
      * Sets whether the cart is locked or not.
      *
      * @param Boolean $locked
      */
-    function setLocked($locked);
+    public function setLocked($locked);
 
     /**
      * Checks whether the cart is empty or not.
      *
      * @return Boolean
      */
-    function isEmpty();
+    public function isEmpty();
 
     /**
      * Counts manually all items in cart.
      *
      * @return integer
      */
-    function countItems();
+    public function countItems();
 
     /**
      * Clears all items in cart.
      */
-    function clearItems();
+    public function clearItems();
 
     /**
      * Sets collection of items
      *
-     * @param mixed $items
+     * @param Collection $items
      */
-    function setItems($items);
+    public function setItems(Collection $items);
 
     /**
      * Returns collection of items in cart.
      *
      * @return mixed
      */
-    function getItems();
+    public function getItems();
 
     /**
      * Adds item to cart.
      *
-     * @param ItemInterface $item
+     * @param CartItemInterface $item
      */
-    function addItem(ItemInterface $item);
+    public function addItem(CartItemInterface $item);
 
     /**
      * Removes item from cart.
      *
-     * @param ItemInterface $item
+     * @param CartItemInterface $item
      */
-    function removeItem(ItemInterface $item);
+    public function removeItem(CartItemInterface $item);
 
     /**
      * Checks whether given item is inside cart or not.
      *
      * @return Boolean
      */
-    function hasItem(ItemInterface $item);
+    public function hasItem(CartItemInterface $item);
 
     /**
      * Gets expiration time.
      *
      * @return \DateTime
      */
-    function getExpiresAt();
+    public function getExpiresAt();
 
     /**
      * Sets expiration time.
      *
      * @param \DateTime $expiresAt
      */
-    function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(\DateTime $expiresAt = null);
 
     /**
      * Bumps the expiration time.
      * Default is +3 hours.
      */
-    function incrementExpiresAt();
+    public function incrementExpiresAt();
 
     /**
      * Checks whether the cart is expired or not.
      *
      * @return Boolean
      */
-    function isExpired();
+    public function isExpired();
 }

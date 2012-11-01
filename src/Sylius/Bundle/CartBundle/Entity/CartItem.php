@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\CartBundle\Entity;
 
-use Sylius\Bundle\CartBundle\Model\Item as BaseItem;
+use Sylius\Bundle\CartBundle\Model\CartItem as BaseCartItem;
 
 /**
  * Entity for cart items.
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Item extends BaseItem
+abstract class CartItem extends BaseCartItem
 {
 }

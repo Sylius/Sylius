@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CartBundle\Provider;
 
 use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Model\CartManagerInterface;
 use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
+use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
 
 /**
  * Default provider cart.
@@ -32,7 +32,7 @@ class CartProvider implements CartProviderInterface
     /**
      * Cart manager.
      *
-     * @var CartManagerInterface
+     * @var ResourceManagerInterface
      */
     protected $cartManager;
 
@@ -46,10 +46,10 @@ class CartProvider implements CartProviderInterface
     /**
      * Constructor.
      *
-     * @param CartStorageInterface $storage
-     * @param CartManagerInterface $cartManager
+     * @param CartStorageInterface     $storage
+     * @param ResourceManagerInterface $cartManager
      */
-    public function __construct(CartStorageInterface $storage, CartManagerInterface $cartManager)
+    public function __construct(CartStorageInterface $storage, ResourceManagerInterface $cartManager)
     {
         $this->storage = $storage;
         $this->cartManager = $cartManager;
@@ -68,12 +68,13 @@ class CartProvider implements CartProviderInterface
 
                 if ($cart) {
                     $this->cart = $cart;
+
                     return $cart;
                 }
             }
 
-            $cart = $this->cartManager->createCart();
-            $this->cartManager->persistCart($cart);
+            $cart = $this->cartManager->create();
+            $this->cartManager->persist($cart);
             $this->storage->setCurrentCartIdentifier($cart);
 
             $this->cart = $cart;
@@ -103,11 +104,11 @@ class CartProvider implements CartProviderInterface
     /**
      * Gets cart by cart identifier.
      *
-     * @param mixed $identifier
+     * @param  mixed              $identifier
      * @return CartInterface|null
      */
     protected function getCartByIdentifier($identifier)
     {
-        return $this->cartManager->findCart($identifier);
+        return $this->cartManager->find($identifier);
     }
 }

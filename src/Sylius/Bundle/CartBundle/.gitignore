@@ -1,7 +1,5 @@
-phpunit.xml
-Tests/autoload.php
-
 vendor/
+bin/
 
 composer.phar
 composer.lock

@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_cart_show:
+    pattern: /
+    defaults: { _controller: sylius_cart.controller.cart:showAction }
+
+sylius_cart_save:
+    pattern: /save
+    defaults: { _controller: sylius_cart.controller.cart:saveAction }
+
+sylius_cart_clear:
+    pattern: /clear
+    defaults: { _controller: sylius_cart.controller.cart:clearAction }
+
+sylius_cart_item_add:
+    pattern: /item/add
+    defaults: { _controller: sylius_cart.controller.cart:addItemAction }
+
+sylius_cart_item_remove:
+    pattern: /item/remove
+    defaults: { _controller: sylius_cart.controller.cart:removeItemAction }
