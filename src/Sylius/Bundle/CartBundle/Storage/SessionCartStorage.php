@@ -22,6 +22,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SessionCartStorage implements CartStorageInterface
 {
+    const KEY = '_sylius.cart-id';
+
     /**
      * Session.
      *
@@ -30,13 +32,22 @@ class SessionCartStorage implements CartStorageInterface
     protected $session;
 
     /**
+     * Key to store the cart id in session.
+     *
+     * @var string
+     */
+    protected $key;
+
+    /**
      * Constructor.
      *
      * @param SessionInterface $session
+     * @param string           $key
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(SessionInterface $session, $key = self::KEY)
     {
         $this->session = $session;
+        $this->key = $key;
     }
 
     /**
@@ -44,7 +55,7 @@ class SessionCartStorage implements CartStorageInterface
      */
     public function getCurrentCartIdentifier()
     {
-        return $this->session->get('_sylius.cart-id');
+        return $this->session->get($this->key);
     }
 
     /**
@@ -52,7 +63,7 @@ class SessionCartStorage implements CartStorageInterface
      */
     public function setCurrentCartIdentifier(CartInterface $cart)
     {
-        $this->session->set('_sylius.cart-id', $cart->getId());
+        $this->session->set($this->key, $cart->getId());
     }
 
     /**
@@ -60,6 +71,6 @@ class SessionCartStorage implements CartStorageInterface
      */
     public function resetCurrentCartIdentifier()
     {
-        $this->session->remove('_sylius.cart-id');
+        $this->session->remove($this->key);
     }
 }
