@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Resolver returns cart item that needs to be added based on request.
- * Should be called only when adding/removing items.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -24,19 +23,12 @@ interface ItemResolverInterface
 {
     /**
      * Returns item to add.
+     * It takes empty and clean item object as first argument.
      *
-     * @param Request $request
-     *
-     * @return CartItemInterface
-     */
-    public function resolveItemToAdd(Request $request);
-
-    /**
-     * Returns item to remove.
-     *
-     * @param Request $request
+     * @param CartItemInterface $item
+     * @param Request           $request
      *
      * @return CartItemInterface
      */
-    public function resolveItemToRemove(Request $request);
+    public function resolve(CartItemInterface $item, Request $request);
 }

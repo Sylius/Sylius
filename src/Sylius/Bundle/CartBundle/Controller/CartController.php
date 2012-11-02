@@ -50,7 +50,9 @@ class CartController extends ResourceController
     public function addItemAction(Request $request)
     {
         $cart = $this->getCurrentCart();
-        $item = $this->getResolver()->resolveItemToAdd($request);
+        $emptyItem = $this->getCartItemManager()->create();
+
+        $item = $this->getResolver()->resolve($emptyItem, $request);
 
         if (!$item) {
             $this->setFlash('error', 'sylius_cart.flashes.add.error');
@@ -79,13 +81,14 @@ class CartController extends ResourceController
      * Removes item from cart.
      *
      * @param Request $request
+     * @param mixed   $id
      *
      * @return Response
      */
-    public function removeItemAction(Request $request)
+    public function removeItemAction(Request $request, $id)
     {
         $cart = $this->getCurrentCart();
-        $item = $this->getResolver()->resolveItemToRemove($request);
+        $item = $this->getCartItemManager()->find($id);
 
         if (!$item || false === $cart->hasItem($item)) {
             $this->setFlash('error', 'sylius_cart.flashes.remove.error');
@@ -185,6 +188,16 @@ class CartController extends ResourceController
             ->getProvider()
             ->getCart()
         ;
+    }
+
+    /**
+     * Get cart item manager.
+     *
+     * @return ResourceManagerInterface
+     */
+    protected function getCartItemManager()
+    {
+        return $this->get('sylius_cart.manager.item');
     }
 
     /**
