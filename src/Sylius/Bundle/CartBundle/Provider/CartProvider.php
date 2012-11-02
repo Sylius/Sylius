@@ -60,27 +60,22 @@ class CartProvider implements CartProviderInterface
      */
     public function getCart()
     {
-        if (null == $this->cart) {
-            $cartIdentifier = $this->storage->getCurrentCartIdentifier();
-
-            if ($cartIdentifier) {
-                $cart = $this->getCartByIdentifier($cartIdentifier);
-
-                if ($cart) {
-                    $this->cart = $cart;
-
-                    return $cart;
-                }
-            }
-
-            $cart = $this->cartManager->create();
-            $this->cartManager->persist($cart);
-            $this->storage->setCurrentCartIdentifier($cart);
-
-            $this->cart = $cart;
+        if (null !== $this->cart) {
+            return $this->cart;
         }
 
-        return $this->cart;
+        $cartIdentifier = $this->storage->getCurrentCartIdentifier();
+
+        if ($cartIdentifier && $cart = $this->getCartByIdentifier($cartIdentifier)) {
+            return $this->cart = $cart;
+        }
+
+        $cart = $this->cartManager->create();
+        $this->cartManager->persist($cart);
+
+        $this->setCart($cart);
+
+        return $cart;
     }
 
     /**
