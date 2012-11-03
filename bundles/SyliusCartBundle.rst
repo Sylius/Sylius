@@ -1,5 +1,7 @@
-SyliusCartBundle .. image:: http://travis-ci.org/Sylius/SyliusCartBundle.png
+SyliusCartBundle
 ================
+
+.. image:: http://travis-ci.org/Sylius/SyliusCartBundle.png
 
 A generic solution for building carts inside Symfony2 applications, it does not matter if you are
 starting new project or you need to implement this feature for existing system - this bundle should be helpful.
