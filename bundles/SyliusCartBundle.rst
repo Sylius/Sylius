@@ -1,64 +1,37 @@
-SyliusCartBundle
-======================
+SyliusCartBundle .. image:: http://travis-ci.org/Sylius/SyliusCartBundle.png
+================
 
-Highly flexible cart engine.
+A generic solution for building carts inside Symfony2 applications, it does not matter if you are
+starting new project or you need to implement this feature for existing system - this bundle should be helpful.
+Currently only the Doctrine ORM driver is implemented, so we'll use it here as example.
+There are two main models inside the bundle, `Cart` and `CartItem`.
+The second one will be the most interesting for us, as the cart is created as a quite sensible default.
+Currently the bundle requires a bit of coding from you, but we're working on simplifying the adaption process.
 
 Installation
 ------------
 
-Downloading the bundle
-~~~~~~~~~~~~~~~~~~~~~~
+We assume you're familiar with `Composer <http://packagist.org>`_.
+Add this to yours `composer.json`.
 
-The good practice is to download it to `vendor/bundles/Sylius/Bundle/CartBundle`.
+.. code-block:: json
 
-This can be done in several ways, depending on your preference.
+    "require": {
+        "sylius/cart-bundle": "*"
+    },
 
-The first method is the standard Symfony2 method.
-
-Using the vendors script
-************************
-
-Add the following lines in your `deps` file. ::
-
-    [SyliusCartBundle]
-        git=git://github.com/Sylius/SyliusCartBundle.git
-        target=bundles/Sylius/Bundle/CartBundle
-
-Now, run the vendors script to download the bundle.
+And install it by typing following command.
 
 .. code-block:: bash
 
-    $ php bin/vendors install
+    $ php composer.phar update sylius/cart-bundle
 
-Using submodules
-****************
+Adding required bundles to kernel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you prefer instead to use git submodules, then run the following lines.
-
-.. code-block:: bash
-
-    $ git submodule add git://github.com/Sylius/SyliusCartBundle.git vendor/bundles/Sylius/Bundle/CartBundle
-    $ git submodule update --init
-
-Autoloader configuration
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Add the `Sylius\\Bundle` namespace to your autoloader.
-
-.. code-block:: php
-
-    <?php
-
-    // app/autoload.php
-
-    $loader->registerNamespaces(array(
-        'Sylius\\Bundle' => __DIR__.'/../vendor/bundles'
-    ));
-
-Adding bundle to kernel
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Finally, enable the bundle in the kernel...
+Now you need to enable the bundle inside kernel.
+If you're not using any other Sylius bundles, you also need to add `SyliusResourceBundle` to kernel.
+Do not worry, it was automatically installed for you by Composer.
 
 .. code-block:: php
 
@@ -70,16 +43,10 @@ Finally, enable the bundle in the kernel...
     {
         $bundles = array(
             // ...
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),
         );
     }
-
-Importing routing configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. note::
-
-    This part is not written yet.
 
 Container configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,16 +55,25 @@ Container configuration
 
     This part is not written yet.
 
+Importing routing configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+    This part is not written yet.
+
 Updating database schema
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The last thing you need to do is updating the database schema.
+The last thing you need to do is to update the database schema.
 
-For "**ORM**" driver run the following command.
+For "**doctrine/orm**" driver run the following command.
 
 .. code-block:: bash
 
     $ php app/console doctrine:schema:update --force
+
+This should be done only in dev environment, we recommend using Doctrine migrations, to safely update your schema.
 
 Usage guide
 -----------
@@ -112,33 +88,20 @@ Configuration reference
 .. note::
 
     This part is not written yet.
-                
-Testing and continous integration
-----------------------------------
 
-.. image:: http://travis-ci.org/Sylius/SyliusCartBundle.png
+`phpspec2 <http://phpspec.net>`_ Specifications
+-----------------------------------------------
 
-This bundle uses `travis-ci.org <http://travis-ci.org/Sylius/SyliusCartBundle>`_ for CI.
+.. code-block:: bash
 
-Before running tests, load the dependencies using `Composer <http://packagist.org>`_.
-
-    .. code-block:: bash
-
-        $ wget http://getcomposer.org/composer.phar
-        $ php composer.phar install
-
-Now you can test by simply using this command.
-
-    .. code-block:: bash
-
-        $ phpunit
+    $ wget http://getcomposer.org/composer.phar
+    $ php composer.phar install --dev
+    $ php bin/phpspec run
 
 Working examples
 ----------------
 
-If you want to see this and other bundles in action, try out the `Sylius sandbox application <http://github.com/Sylius/Sylius-Sandbox>`_.
-
-It's open sourced github project.
+If you want to see working implementation, try out the `Sylius sandbox application <http://github.com/Sylius/Sylius-Sandbox>`_.
 
 Bug tracking
 ------------
