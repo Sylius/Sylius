@@ -85,7 +85,7 @@ abstract class ResourceController extends Controller implements ResourceControll
         $resource = $this->createResource();
         $form = $this->createResourceForm($resource);
 
-        if ($request->isMethod('POST') && $form->bind()->isValid()) {
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->getManipulator()->create($resource);
             $this->setFlash('success', sprintf("%s has been created", ucfirst($this->getResourceName())));
 
