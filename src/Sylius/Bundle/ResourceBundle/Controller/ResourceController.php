@@ -74,38 +74,18 @@ abstract class ResourceController extends Controller implements ResourceControll
     }
 
     /**
-     * Display form for creating new resource.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function newAction(Request $request)
-    {
-        $resource = $this->createResource();
-        $form = $this->createResourceForm($resource);
-
-        return $this->renderResponse('create', array(
-            $this->getResourceName() => $resource,
-            'form'                   => $form->createView()
-        ));
-    }
-
-    /**
      * Create resource.
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function postAction(Request $request)
+    public function createAction(Request $request)
     {
         $resource = $this->createResource();
         $form = $this->createResourceForm($resource);
 
-        $form->bind($request);
-
-        if ($form->isValid()) {
+        if ($request->isMethod('POST') && $form->bind()->isValid()) {
             $this->getManipulator()->create($resource);
             $this->setFlash('success', sprintf("%s has been created", ucfirst($this->getResourceName())));
 
@@ -126,38 +106,18 @@ abstract class ResourceController extends Controller implements ResourceControll
     }
 
     /**
-     * Display form for editing resource.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function editAction(Request $request)
-    {
-        $resource = $this->findResourceOr404($request->get('id'));
-        $form = $this->createResourceForm($resource);
-
-        return $this->renderResponse('update', array(
-            $this->getResourceName() => $resource,
-            'form'                   => $form->createView()
-        ));
-    }
-
-    /**
      * Update resource.
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function putAction(Request $request)
+    public function updateAction(Request $request)
     {
         $resource = $this->findResourceOr404($request->get('id'));
         $form = $this->createResourceForm($resource);
 
-        $form->bind($request);
-
-        if ($form->isValid()) {
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->getManager()->persist($resource);
             $this->setFlash('success', sprintf("%s has been updated", ucfirst($this->getResourceName())));
 
@@ -222,9 +182,7 @@ abstract class ResourceController extends Controller implements ResourceControll
      */
     protected function createResourceForm(ResourceInterface $resource = null)
     {
-        return $this->createNamedForm('', $this->getResourceFormType(), $resource, array(
-            'csrf_protection' => false
-        ));
+        return $this->createForm($this->getResourceFormType(), $resource);
     }
 
     /**
@@ -308,7 +266,7 @@ abstract class ResourceController extends Controller implements ResourceControll
 
     protected function getIdentifierValue()
     {
-        if (!$identifier = $this->getRequest()->attributes->get($this->getIdentifierName())) {
+        if (!$identifier = $this->getRequest()->get($this->getIdentifierName())) {
             throw new NotFoundHttpException('No resource identifier supplied');
         }
 

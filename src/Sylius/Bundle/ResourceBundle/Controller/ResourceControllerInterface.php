@@ -22,9 +22,7 @@ interface ResourceControllerInterface
 {
     function getAction(Request $request);
     function getCollectionAction(Request $request);
-    function newAction(Request $request);
-    function postAction(Request $request);
-    function editAction(Request $request);
-    function putAction(Request $request);
+    function createAction(Request $request);
+    function updateAction(Request $request);
     function deleteAction(Request $request);
 }
