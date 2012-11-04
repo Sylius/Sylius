@@ -197,7 +197,7 @@ abstract class ResourceController extends Controller implements ResourceControll
         $redirect = $this->getRequest()->attributes->get('_sylius.redirect');
         $route = $redirect ? $redirect : $this->getResourceRoute();
 
-        return RouteRedirectView::create($route, array('id' => $resource->getId()));
+        return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
     }
 
     /**
@@ -210,7 +210,7 @@ abstract class ResourceController extends Controller implements ResourceControll
         $redirect = $this->getRequest()->attributes->get('_sylius.redirect');
         $route = $redirect ? $redirect : $this->getResourceCollectionRoute();
 
-        return RouteRedirectView::create($route);
+        return $this->handleView(RouteRedirectView::create($route));
     }
 
     protected function getResourceRoute()
@@ -230,7 +230,7 @@ abstract class ResourceController extends Controller implements ResourceControll
      */
     protected function getManager()
     {
-        return $this->container->get($this->getServiceName('manager'));
+        return $this->get($this->getServiceName('manager'));
     }
 
     protected function getServiceName($name)
