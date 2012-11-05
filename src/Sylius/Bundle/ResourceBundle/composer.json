@@ -20,6 +20,7 @@
         "php": ">=5.3.2",
 
         "symfony/framework-bundle":        "~2.1",
+        "friendsofsymfony/rest-bundle":    "*",
         "doctrine/common":                 "~2.1",
         "white-october/pagerfanta-bundle": "*"
     },
