@@ -12,12 +12,13 @@ use PHPSpec2\ObjectBehavior;
 class CartProvider extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface         $cartStorage
-     * @param Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface $cartManager
+     * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface               $storage
+     * @param Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface       $manager
+     * @param Sylius\Bundle\ResourceBundle\Repository\ResourceRepositoryInterface $repository
      */
-    function let($cartStorage, $cartManager)
+    function let($storage, $manager, $repository)
     {
-        $this->beConstructedWith($cartStorage, $cartManager);
+        $this->beConstructedWith($storage, $manager, $repository);
     }
 
     function it_should_be_initializable()
@@ -25,9 +26,9 @@ class CartProvider extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Provider\CartProvider');
     }
 
-    function it_should_reset_current_cart_identifier_when_abandoning_cart($cartStorage)
+    function it_should_reset_current_cart_identifier_when_abandoning_cart($storage)
     {
-        $cartStorage->resetCurrentCartIdentifier()->shouldBeCalled();
+        $storage->resetCurrentCartIdentifier()->shouldBeCalled();
 
         $this->abandonCart();
     }
@@ -35,9 +36,9 @@ class CartProvider extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      */
-    function it_should_set_current_cart_identifier_when_setting_cart($cartStorage, $cart)
+    function it_should_set_current_cart_identifier_when_setting_cart($storage, $cart)
     {
-        $cartStorage->setCurrentCartIdentifier($cart)->shouldBeCalled();
+        $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $this->setCart($cart);
     }
@@ -45,10 +46,10 @@ class CartProvider extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      */
-    function it_should_look_for_cart_by_identifier_if_any($cartStorage, $cartManager, $cart)
+    function it_should_look_for_cart_by_identifier_if_any($storage, $repository, $cart)
     {
-        $cartStorage->getCurrentCartIdentifier()->willReturn(3);
-        $cartManager->find(3)->shouldBeCalled()->willReturn($cart);
+        $storage->getCurrentCartIdentifier()->willReturn(3);
+        $repository->find(array('id' => 3))->shouldBeCalled()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -56,10 +57,10 @@ class CartProvider extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      */
-    function it_should_create_new_cart_if_there_is_no_identifier_in_storage($cartStorage, $cartManager, $cart)
+    function it_should_create_new_cart_if_there_is_no_identifier_in_storage($storage, $manager, $cart)
     {
-        $cartStorage->getCurrentCartIdentifier()->willReturn(null);
-        $cartManager->create()->willReturn($cart);
+        $storage->getCurrentCartIdentifier()->willReturn(null);
+        $manager->create()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -67,11 +68,11 @@ class CartProvider extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      */
-    function it_should_create_new_cart_if_identifier_is_wrong($cartStorage, $cartManager, $cart)
+    function it_should_create_new_cart_if_identifier_is_wrong($storage, $repository, $cart)
     {
-        $cartStorage->getCurrentCartIdentifier()->willReturn(7);
-        $cartManager->find(7)->shouldBeCalled()->willReturn(null);
-        $cartManager->create()->willReturn($cart);
+        $storage->getCurrentCartIdentifier()->willReturn(7);
+        $repository->get(array('id' => 7))->shouldBeCalled()->willReturn(null);
+        $manager->create()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
