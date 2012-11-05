@@ -26,22 +26,31 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-abstract class ResourceController extends Controller implements ResourceControllerInterface
+class ResourceController extends Controller implements ResourceControllerInterface
 {
-    /**
-     * Get one resource.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function getAction(Request $request)
+    protected $bundlePrefix;
+    protected $resourceName;
+    protected $templateNamespace;
+
+    public function __construct($bundlePrefix, $resourceName, $templateNamespace)
     {
-        $identifier = $this->getIdentifierValue($request);
-        $resource = $this->findResourceOr404($identifier);
+        $this->bundlePrefix = $bundlePrefix;
+        $this->resourceName = $resourceName;
+        $this->templateNamespace = $templateNamespace;
+    }
+
+    /**
+     * Get single resource.
+     */
+    public function getAction()
+    {
+        $criteria = $this->getCriteria();
+        $criteria[$this->getIdentifierName()] = $this->getIdentifierValue();
+
+        $resource = $this->findResourceOr404($criteria);
 
         $view = View::create()
-            ->setTemplate($this->getFullTemplateName('show'))
+            ->setTemplate($this->getFullTemplateName('show.html'))
             ->setTemplateVar($this->getResourceName())
             ->setData($resource)
         ;
@@ -50,23 +59,37 @@ abstract class ResourceController extends Controller implements ResourceControll
     }
 
     /**
-     * Get all paginated resourcees.
-     *
-     * @param Request $request
-     *
-     * @return Response
+     * Get collection (paginated by default) of resources.
      */
     public function getCollectionAction(Request $request)
     {
-        $paginator = $this->getManager()->createPaginator();
-        $paginator->setCurrentPage($request->query->get('page', 1), true, true);
+        $criteria = $this->getCriteria();
+        $sorting = $this->getSorting();
 
-        $resources = $paginator->getCurrentPageResults();
+        if ($this->isPaginated()) {
+            $paginator = $this
+                ->getRepository()
+                ->paginate($criteria, $sorting)
+            ;
 
-        $data = $this->isHtmlRequest() ? array(Pluralization::pluralize($this->getResourceName()) => $resources, 'paginator' => $paginator) : $resourcees;
+            $paginator->setCurrentPage($request->query->get('page', 1), true, true);
+            $resources = $paginator->getCurrentPageResults();
+
+            $pluralName = Pluralization::pluralize($this->getResourceName());
+
+            $data = $this->isHtmlRequest() ? array(
+                $pluralName => $resources,
+                'paginator' => $paginator
+            ) : $resources;
+        } else {
+            $data = $this
+                ->getRepository()
+                ->getCollection($criteria, $sorting)
+            ;
+        }
 
         $view = View::create()
-            ->setTemplate($this->getFullTemplateName('list'))
+            ->setTemplate($this->getFullTemplateName('list.html'))
             ->setData($data)
         ;
 
@@ -86,21 +109,22 @@ abstract class ResourceController extends Controller implements ResourceControll
         $form = $this->createResourceForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManipulator()->create($resource);
-            $this->setFlash('success', sprintf("%s has been created", ucfirst($this->getResourceName())));
+            $this->getManager()->persist($resource);
 
             return $this->redirectToResource($resource);
         }
 
-        $htmlView = View::create()
+        if (!$this->isHtmlRequest()) {
+            return $this->handleView(View::create($form));
+        }
+
+        $view = View::create()
             ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
                 $this->getResourceName() => $resource,
-                'form' => $form->createView()
+                'form'                   => $form->createView()
             ))
         ;
-
-        $view = $this->isHtmlRequest() ? $htmlView : View::create($form);
 
         return $this->handleView($view);
     }
@@ -124,15 +148,17 @@ abstract class ResourceController extends Controller implements ResourceControll
             return $this->redirectToResource($resource);
         }
 
-        $htmlView = View::create()
-            ->setTemplate($this->getFullTemplateName('update.html'))
+        if (!$this->isHtmlRequest()) {
+            return $this->handleView(View::create($form));
+        }
+
+        $view = View::create()
+            ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
                 $this->getResourceName() => $resource,
-                'form' => $form->createView()
+                'form'                   => $form->createView()
             ))
         ;
-
-        $view = $this->isHtmlRequest() ? $htmlView : View::create($form);
 
         return $this->handleView($view);
     }
@@ -226,11 +252,21 @@ abstract class ResourceController extends Controller implements ResourceControll
     /**
      * Get resource manager.
      *
-     * @return ManagerInterface
+     * @return ResourceManagerInterface
      */
     protected function getManager()
     {
         return $this->get($this->getServiceName('manager'));
+    }
+
+    /**
+     * Get resource repository.
+     *
+     * @return ResourceRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return $this->get($this->getServiceName('repository'));
     }
 
     protected function getServiceName($name)
@@ -242,17 +278,15 @@ abstract class ResourceController extends Controller implements ResourceControll
      * Tries to find resource with given id.
      * Throws special 404 exception when unsuccessful.
      *
-     * @param mixed $id The resource identifier
+     * @param array $criteria Criteria
      *
      * @return ResourceInterface
      *
      * @throws NotFoundHttpException
      */
-    protected function findResourceOr404($identifier)
+    protected function findResourceOr404(array $criteria)
     {
-        $criteria = array($this->getIdentifierName() => $this->getIdentifierValue());
-
-        if (!$resource = $this->getManager()->findOneBy($criteria)) {
+        if (!$resource = $this->getRepository()->get($criteria)) {
             throw new NotFoundHttpException('Requested resource does not exist');
         }
 
@@ -266,11 +300,26 @@ abstract class ResourceController extends Controller implements ResourceControll
 
     protected function getIdentifierValue()
     {
-        if (!$identifier = $this->getRequest()->get($this->getIdentifierName())) {
+        if (null === $identifier = $this->getRequest()->get($this->getIdentifierName())) {
             throw new NotFoundHttpException('No resource identifier supplied');
         }
 
         return $identifier;
+    }
+
+    protected function isPaginated()
+    {
+        return (Boolean) $this->getRequest()->attributes->get('_sylius.paginate', true);
+    }
+
+    protected function getCriteria()
+    {
+        return $this->getRequest()->get('_sylius.criteria', array());
+    }
+
+    protected function getSorting()
+    {
+        return $this->getRequest()->get('_sylius.sorting', array());
     }
 
     protected function renderResponse($templateName, array $parameters = array())
@@ -278,13 +327,6 @@ abstract class ResourceController extends Controller implements ResourceControll
         return $this->render($this->getFullTemplateName($templateName), $parameters);
     }
 
-    /**
-     * Get full template name.
-     *
-     * @param string
-     *
-     * @return string
-     */
     protected function getFullTemplateName($name)
     {
         $template = $this->getRequest()->attributes->get('_sylius.template');
@@ -300,53 +342,38 @@ abstract class ResourceController extends Controller implements ResourceControll
         );
     }
 
-    /**
-     * Get engine.
-     *
-     * @return string
-     */
     protected function getEngine()
     {
         return $this->container->getParameter(sprintf('%s.engine', $this->getBundlePrefix()));
     }
 
-    /**
-     * Check if request accepts html format.
-     *
-     * @return Boolean
-     */
     protected function isHtmlRequest()
     {
         return 'html' === $this->getRequest()->getRequestFormat();
     }
 
-    /**
-     * Convert view to a response object.
-     *
-     * @param View $view
-     *
-     * @return Response
-     */
     protected function handleView(View $view)
     {
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 
-    /**
-     * Get name of the form type to use.
-     *
-     * @return string
-     */
     protected function getResourceFormType()
     {
         return sprintf('%s_%s', $this->getBundlePrefix(), $this->getResourceName());
     }
 
-    /**
-     * Get templates namespace.
-     *
-     * @return string
-     */
-    abstract protected function getTemplateNamespace();
-    abstract protected function getBundlePrefix();
+    protected function getTemplateNamespace()
+    {
+        return $this->templateNamespace;
+    }
+
+    protected function getBundlePrefix()
+    {
+        return $this->bundlePrefix;
+    }
+
+    protected function getResourceName()
+    {
+        return $this->resourceName;
+    }
 }

@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Manager\Doctrine;
+namespace Sylius\Bundle\ResourceBundle\Repository\Doctrine;
 
-use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
+use Sylius\Bundle\ResourceBundle\Repository\ResourceRepositoryInterface;
 
 /**
  * Doctrine resource manager interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface DoctrineResourceManagerInterface extends ResourceManagerInterface
+interface DoctrineResourceRepositoryInterface extends ResourceRepositoryInterface
 {
-    function getObjectManager();
+    function getObjectRepository();
 }

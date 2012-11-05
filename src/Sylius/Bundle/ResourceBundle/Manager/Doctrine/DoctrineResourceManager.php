@@ -20,15 +20,13 @@ use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class DoctrineResourceManager extends ResourceManager implements DoctrineResourceManagerInterface
+class DoctrineResourceManager extends ResourceManager implements DoctrineResourceManagerInterface
 {
     protected $objectManager;
-    protected $objectRepository;
 
     public function __construct(ObjectManager $objectManager, $class)
     {
         $this->objectManager = $objectManager;
-        $this->objectRepository = $objectManager->getRepository($class);
 
         parent::__construct($class);
     }
@@ -57,33 +55,8 @@ abstract class DoctrineResourceManager extends ResourceManager implements Doctri
         }
     }
 
-    public function find($id)
-    {
-        return $this->objectRepository->find($id);
-    }
-
-    public function findOneBy(array $criteria)
-    {
-        return $this->objectRepository->findOneBy($criteria);
-    }
-
-    public function findAll()
-    {
-        return $this->objectRepository->findAll();
-    }
-
-    public function findBy(array $criteria)
-    {
-        return $this->objectRepository->findBy($criteria);
-    }
-
     public function getObjectManager()
     {
         return $this->objectManager;
-    }
-
-    public function getObjectRepository()
-    {
-        return $this->objectRepository;
     }
 }

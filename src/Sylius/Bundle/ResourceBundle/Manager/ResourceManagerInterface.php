@@ -28,13 +28,6 @@ interface ResourceManagerInterface
     function create();
 
     /**
-     * Creates a new Pagerfanta instance to paginate the resources.
-     *
-     * @return PagerfantaInterface
-     */
-    function createPaginator();
-
-    /**
      * Persist.
      *
      * @param ResourceInterface $resource
@@ -49,40 +42,6 @@ interface ResourceManagerInterface
      * @param Boolean           $commit
      */
     function remove(ResourceInterface $resource, $commit = true);
-
-    /**
-     * Finds resource by id.
-     *
-     * @param mixed Identifier
-     *
-     * @return ResourceInterface
-     */
-    function find($id);
-
-    /**
-     * Finds resource by criteria.
-     *
-     * @param array $criteria
-     *
-     * @return ResourceInterface
-     */
-    function findOneBy(array $criteria);
-
-    /**
-     * Find all.
-     *
-     * @return Collection
-     */
-    function findAll();
-
-    /**
-     * Finds resources by criteria.
-     *
-     * @param array $criteria
-     *
-     * @return array
-     */
-    function findBy(array $criteria);
 
     /**
      * Get resource class name.
