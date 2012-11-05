@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\Provider;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
 use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
+use Sylius\Bundle\ResourceBundle\Repository\ResourceRepositoryInterface;
 
 /**
  * Default provider cart.
@@ -34,7 +35,14 @@ class CartProvider implements CartProviderInterface
      *
      * @var ResourceManagerInterface
      */
-    protected $cartManager;
+    protected $manager;
+
+    /**
+     * Cart repository.
+     *
+     * @var ResourceRepositoryInterface
+     */
+    protected $repository;
 
     /**
      * Cart.
@@ -46,13 +54,15 @@ class CartProvider implements CartProviderInterface
     /**
      * Constructor.
      *
-     * @param CartStorageInterface     $storage
-     * @param ResourceManagerInterface $cartManager
+     * @param CartStorageInterface        $storage
+     * @param ResourceManagerInterface    $manager
+     * @param ResourceRepositoryInterface $repository
      */
-    public function __construct(CartStorageInterface $storage, ResourceManagerInterface $cartManager)
+    public function __construct(CartStorageInterface $storage, ResourceManagerInterface $manager, ResourceRepositoryInterface $repository)
     {
         $this->storage = $storage;
-        $this->cartManager = $cartManager;
+        $this->manager = $manager;
+        $this->repository = $repository;
     }
 
     /**
@@ -70,8 +80,8 @@ class CartProvider implements CartProviderInterface
             return $this->cart = $cart;
         }
 
-        $cart = $this->cartManager->create();
-        $this->cartManager->persist($cart);
+        $cart = $this->manager->create();
+        $this->manager->persist($cart);
 
         $this->setCart($cart);
 
@@ -104,6 +114,6 @@ class CartProvider implements CartProviderInterface
      */
     protected function getCartByIdentifier($identifier)
     {
-        return $this->cartManager->find($identifier);
+        return $this->repository->get(array('id' => $identifier));
     }
 }
