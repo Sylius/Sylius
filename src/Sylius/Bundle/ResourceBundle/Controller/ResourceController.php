@@ -138,7 +138,7 @@ class ResourceController extends Controller implements ResourceControllerInterfa
      */
     public function updateAction(Request $request)
     {
-        $resource = $this->findResourceOr404($request->get('id'));
+        $resource = $this->findResourceOr404(array($this->getIdentifierName() => $this->getIdentifierValue()));
         $form = $this->createResourceForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
