@@ -42,7 +42,7 @@ class ResourceController extends Controller implements ResourceControllerInterfa
     /**
      * Get single resource.
      */
-    public function getAction()
+    public function getAction(Request $request)
     {
         $criteria = $this->getCriteria();
         $criteria[$this->getIdentifierName()] = $this->getIdentifierValue();
