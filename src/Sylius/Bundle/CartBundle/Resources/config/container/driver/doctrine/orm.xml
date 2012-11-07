@@ -17,13 +17,40 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\ORM\ResourceManager</parameter>
-        <parameter key="sylius_cart.manager.item.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\ORM\ResourceManager</parameter>
+        <parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\DoctrineResourceManager</parameter>
+        <parameter key="sylius_cart.repository.cart.class">Sylius\Bundle\ResourceBundle\Repository\Doctrine\ORM\ResourceRepository</parameter>
+        <parameter key="sylius_cart.manager.item.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\DoctrineResourceManager</parameter>
+        <parameter key="sylius_cart.repository.item.class">Sylius\Bundle\ResourceBundle\Repository\Doctrine\ORM\ResourceRepository</parameter>
     </parameters>
 
     <services>
+        <service id="sylius_cart.doctrine.repository.cart"
+                factory-service="doctrine.orm.default_entity_manager"
+                factory-method="getRepository"
+                class="Doctrine\ORM\EntityRepository"
+                public="false"
+        >
+            <argument>%sylius_cart.model.cart.class%</argument>
+        </service>
+        <service id="sylius_cart.repository.cart" class="%sylius_cart.repository.cart.class%">
+            <argument type="service" id="sylius_cart.doctrine.repository.cart" />
+            <argument>%sylius_cart.model.cart.class%</argument>
+        </service>
         <service id="sylius_cart.manager.cart" class="%sylius_cart.manager.cart.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument>%sylius_cart.model.cart.class%</argument>
+        </service>
+
+        <service id="sylius_cart.doctrine.repository.item"
+                factory-service="doctrine.orm.default_entity_manager"
+                factory-method="getRepository"
+                class="Doctrine\ORM\EntityRepository"
+                public="false"
+        >
+            <argument>%sylius_cart.model.item.class%</argument>
+        </service>
+        <service id="sylius_cart.repository.item" class="%sylius_cart.repository.item.class%">
+            <argument type="service" id="sylius_cart.doctrine.repository.item" />
             <argument>%sylius_cart.model.cart.class%</argument>
         </service>
         <service id="sylius_cart.manager.item" class="%sylius_cart.manager.item.class%">
