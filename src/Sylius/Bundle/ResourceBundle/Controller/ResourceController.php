@@ -172,7 +172,7 @@ class ResourceController extends Controller implements ResourceControllerInterfa
      */
     public function deleteAction(Request $request)
     {
-        $resource = $this->findResourceOr404($request->get('id'));
+        $resource = $this->findResourceOr404(array($this->getIdentifierName() => $this->getIdentifierValue()));
 
         $this->getManager()->remove($resource);
         $this->setFlash('success', sprintf("%s has been deleted", ucfirst($this->getResourceName())));
