@@ -23,6 +23,9 @@
 
     <services>
         <service id="sylius_cart.controller.cart" class="%sylius_cart.controller.cart.class%">
+            <argument>sylius_cart</argument>
+            <argument>cart</argument>
+            <argument>SyliusCartBundle:Cart</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

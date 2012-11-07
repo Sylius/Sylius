@@ -238,27 +238,4 @@ class CartController extends ResourceController
         return 'sylius_cart';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_cart';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getResourceName()
-    {
-        return 'cart';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTemplateNamespace()
-    {
-        return 'SyliusCartBundle:Cart';
-    }
 }
