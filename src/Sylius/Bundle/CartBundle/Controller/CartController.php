@@ -88,7 +88,7 @@ class CartController extends ResourceController
     public function removeItemAction(Request $request, $id)
     {
         $cart = $this->getCurrentCart();
-        $item = $this->getCartItemManager()->find($id);
+        $item = $this->getCartItemRepository()->get(array('id' => $id));
 
         if (!$item || false === $cart->hasItem($item)) {
             $this->setFlash('error', 'sylius_cart.flashes.remove.error');
@@ -198,6 +198,16 @@ class CartController extends ResourceController
     protected function getCartItemManager()
     {
         return $this->get('sylius_cart.manager.item');
+    }
+
+    /**
+     * Get cart item repository.
+     *
+     * @return ResourceRepositoryInterface
+     */
+    protected function getCartItemRepository()
+    {
+        return $this->get('sylius_cart.repository.item');
     }
 
     /**
