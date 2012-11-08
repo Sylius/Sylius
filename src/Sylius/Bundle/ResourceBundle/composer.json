@@ -16,6 +16,7 @@
             "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
 
