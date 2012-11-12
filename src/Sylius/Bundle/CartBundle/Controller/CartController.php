@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Cart frontend controller.
+ * Cart controller.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -32,80 +32,12 @@ class CartController extends ResourceController
     public function showAction(Request $request)
     {
         $cart = $this->getCurrentCart();
-        $form = $this->createForm($this->getResourceFormType(), $cart);
+        $form = $this->createForm('sylius_cart', $cart);
 
         return $this->renderResponse('show.html', array(
             'cart' => $cart,
             'form' => $form->createView()
         ));
-    }
-
-    /**
-     * Adds item to cart.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function addItemAction(Request $request)
-    {
-        $cart = $this->getCurrentCart();
-        $emptyItem = $this->getCartItemManager()->create();
-
-        $item = $this->getResolver()->resolve($emptyItem, $request);
-
-        if (!$item) {
-            $this->setFlash('error', 'sylius_cart.flashes.add.error');
-
-            return $this->redirectToCart();
-        }
-
-        $cartOperator = $this->getOperator();
-
-        $cartOperator
-            ->addItem($cart, $item)
-            ->refresh($cart)
-        ;
-
-        $errors = $this->get('validator')->validate($cart);
-
-        if (0 === count($errors)) {
-            $this->setFlash('success', 'sylius_cart.flashes.add.success');
-            $cartOperator->save($cart);
-        }
-
-        return $this->redirectToCart();
-    }
-
-    /**
-     * Removes item from cart.
-     *
-     * @param Request $request
-     * @param mixed   $id
-     *
-     * @return Response
-     */
-    public function removeItemAction(Request $request, $id)
-    {
-        $cart = $this->getCurrentCart();
-        $item = $this->getCartItemRepository()->get(array('id' => $id));
-
-        if (!$item || false === $cart->hasItem($item)) {
-            $this->setFlash('error', 'sylius_cart.flashes.remove.error');
-
-            return $this->redirectToCart();
-        }
-
-        $this
-            ->getOperator()
-            ->removeItem($cart, $item)
-            ->refresh($cart)
-            ->save($cart)
-        ;
-
-        $this->setFlash('success', 'sylius_cart.flashes.remove.success');
-
-        return $this->redirectToCart();
     }
 
     /**
@@ -120,7 +52,7 @@ class CartController extends ResourceController
         $cart = $this->getCurrentCart();
 
         $form = $this
-            ->createForm($this->getResourceFormType(), $cart)
+            ->createForm('sylius_cart', $cart)
             ->bind($request)
         ;
 
@@ -191,26 +123,6 @@ class CartController extends ResourceController
     }
 
     /**
-     * Get cart item manager.
-     *
-     * @return ResourceManagerInterface
-     */
-    protected function getCartItemManager()
-    {
-        return $this->get('sylius_cart.manager.item');
-    }
-
-    /**
-     * Get cart item repository.
-     *
-     * @return ResourceRepositoryInterface
-     */
-    protected function getCartItemRepository()
-    {
-        return $this->get('sylius_cart.repository.item');
-    }
-
-    /**
      * Get cart provider.
      *
      * @return CartProviderInterface
@@ -229,23 +141,4 @@ class CartController extends ResourceController
     {
         return $this->get('sylius_cart.operator');
     }
-
-    /**
-     * Get cart item resolver.
-     *
-     * @return CartResolverInterface
-     */
-    protected function getResolver()
-    {
-        return $this->get('sylius_cart.resolver');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getResourceFormType()
-    {
-        return 'sylius_cart';
-    }
-
 }

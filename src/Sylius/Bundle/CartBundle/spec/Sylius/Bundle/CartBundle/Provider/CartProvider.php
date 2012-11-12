@@ -49,7 +49,7 @@ class CartProvider extends ObjectBehavior
     function it_should_look_for_cart_by_identifier_if_any($storage, $repository, $cart)
     {
         $storage->getCurrentCartIdentifier()->willReturn(3);
-        $repository->get(array('id' => 3))->shouldBeCalled()->willReturn($cart);
+        $repository->find(3)->shouldBeCalled()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -71,7 +71,7 @@ class CartProvider extends ObjectBehavior
     function it_should_create_new_cart_if_identifier_is_wrong($storage, $manager, $repository, $cart)
     {
         $storage->getCurrentCartIdentifier()->willReturn(7);
-        $repository->get(array('id' => 7))->shouldBeCalled()->willReturn(null);
+        $repository->find(7)->shouldBeCalled()->willReturn(null);
         $manager->create()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);

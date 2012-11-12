@@ -63,6 +63,7 @@ class SyliusCartExtension extends Extension
         $container->setParameter('sylius_cart.model.item.class', $config['classes']['model']['item']);
 
         $container->setParameter('sylius_cart.controller.cart.class', $config['classes']['controller']['cart']);
+        $container->setParameter('sylius_cart.controller.item.class', $config['classes']['controller']['item']);
 
         $container->setParameter('sylius_cart.form.type.cart.class', $config['classes']['form']['type']['cart']);
         $container->setParameter('sylius_cart.form.type.item.class', $config['classes']['form']['type']['item']);

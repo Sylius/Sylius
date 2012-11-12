@@ -17,10 +17,10 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\DoctrineResourceManager</parameter>
-        <parameter key="sylius_cart.repository.cart.class">Sylius\Bundle\ResourceBundle\Repository\Doctrine\ORM\ResourceRepository</parameter>
-        <parameter key="sylius_cart.manager.item.class">Sylius\Bundle\ResourceBundle\Manager\Doctrine\DoctrineResourceManager</parameter>
-        <parameter key="sylius_cart.repository.item.class">Sylius\Bundle\ResourceBundle\Repository\Doctrine\ORM\ResourceRepository</parameter>
+        <parameter key="sylius_cart.manager.cart.class">Sylius\Bundle\ResourceBundle\Doctrine\ResourceManager</parameter>
+        <parameter key="sylius_cart.repository.cart.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository</parameter>
+        <parameter key="sylius_cart.manager.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ResourceManager</parameter>
+        <parameter key="sylius_cart.repository.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository</parameter>
     </parameters>
 
     <services>

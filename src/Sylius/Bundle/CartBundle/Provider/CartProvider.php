@@ -114,6 +114,6 @@ class CartProvider implements CartProviderInterface
      */
     protected function getCartByIdentifier($identifier)
     {
-        return $this->repository->get(array('id' => $identifier));
+        return $this->repository->find($identifier);
     }
 }

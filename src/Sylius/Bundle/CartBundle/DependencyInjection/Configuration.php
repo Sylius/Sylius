@@ -74,6 +74,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('cart')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartController')->end()
+                                ->scalarNode('item')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartItemController')->end()
                             ->end()
                         ->end()
                         ->arrayNode('form')

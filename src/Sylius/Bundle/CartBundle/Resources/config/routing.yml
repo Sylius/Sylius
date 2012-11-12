@@ -15,8 +15,8 @@ sylius_cart_clear:
 
 sylius_cart_item_add:
     pattern: /item/add
-    defaults: { _controller: sylius_cart.controller.cart:addItemAction }
+    defaults: { _controller: sylius_cart.controller.item:addAction }
 
 sylius_cart_item_remove:
     pattern: /item/{id}/remove
-    defaults: { _controller: sylius_cart.controller.cart:removeItemAction }
+    defaults: { _controller: sylius_cart.controller.item:removeAction }
