@@ -9,4 +9,5 @@ before_script: composer install --dev
 script: php bin/phpspec run
 
 notifications:
-  email: travis-ci@sylius.org
+    irc: "irc.freenode.org#sylius-dev"
+    email: travis-ci@sylius.org

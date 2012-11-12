@@ -26,7 +26,10 @@
         "white-october/pagerfanta-bundle": "*"
     },
     "require-dev": {
-        "doctrine/orm": "*"
+        "phpspec/phpspec2": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\ResourceBundle": "" }
