@@ -12,21 +12,21 @@
 namespace Sylius\Bundle\ResourceBundle\Repository;
 
 /**
- * Base resource repository class.
+ * Base Doctrine resource manager class.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 abstract class ResourceRepository implements ResourceRepositoryInterface
 {
-    protected $class;
+    protected $className;
 
-    public function __construct($class)
+    public function __construct($className)
     {
-        $this->class = $class;
+        $this->className = $className;
     }
 
-    public function getClass()
+    public function getClassName()
     {
-        return $this->class;
+        return $this->className;
     }
 }

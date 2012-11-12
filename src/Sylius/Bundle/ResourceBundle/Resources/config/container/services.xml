@@ -14,12 +14,15 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd"
->
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius_resource.fetcher.class">Sylius\Bundle\ResourceBundle\Controller\RequestFetcher</parameter>
+    </parameters>
 
     <services>
-        <service id="sylius_addressing.manipulator.address" class="%sylius_addressing.manipulator.address.class%">
-            <argument type="service" id="sylius_addressing.manager.address" />
+        <service id="sylius_resource.fetcher" class="%sylius_resource.fetcher.class%">
+            <argument type="service" id="request" strict="false" />
         </service>
     </services>
 

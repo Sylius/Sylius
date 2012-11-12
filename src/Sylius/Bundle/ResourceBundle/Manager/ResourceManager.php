@@ -18,22 +18,22 @@ namespace Sylius\Bundle\ResourceBundle\Manager;
  */
 abstract class ResourceManager implements ResourceManagerInterface
 {
-    protected $class;
+    protected $className;
 
-    public function __construct($class)
+    public function __construct($className)
     {
-        $this->class = $class;
+        $this->className = $className;
     }
 
     public function create()
     {
-        $class = $this->getClass();
+        $class = $this->getClassName();
 
         return new $class;
     }
 
-    public function getClass()
+    public function getClassName()
     {
-        return $this->class;
+        return $this->className;
     }
 }

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Manager\Doctrine;
+namespace Sylius\Bundle\ResourceBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Manager\ResourceManager;
+use Sylius\Bundle\ResourceBundle\Manager\ResourceManager as BaseResourceManager;
 use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
 
 /**
@@ -20,25 +20,25 @@ use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DoctrineResourceManager extends ResourceManager implements DoctrineResourceManagerInterface
+class ResourceManager extends BaseResourceManager
 {
     protected $objectManager;
 
-    public function __construct(ObjectManager $objectManager, $class)
+    public function __construct(ObjectManager $objectManager, $className)
     {
         $this->objectManager = $objectManager;
 
-        parent::__construct($class);
+        parent::__construct($className);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function persist(ResourceInterface $resource, $commit = true)
+    public function persist(ResourceInterface $resource, $flush = true)
     {
         $this->objectManager->persist($resource);
 
-        if ($commit) {
+        if ($flush) {
             $this->objectManager->flush();
         }
     }
@@ -46,17 +46,12 @@ class DoctrineResourceManager extends ResourceManager implements DoctrineResourc
     /**
      * {@inheritdoc}
      */
-    public function remove(ResourceInterface $resource, $commit = true)
+    public function remove(ResourceInterface $resource, $flush = true)
     {
         $this->objectManager->remove($resource);
 
-        if ($commit) {
+        if ($flush) {
             $this->objectManager->flush();
         }
-    }
-
-    public function getObjectManager()
-    {
-        return $this->objectManager;
     }
 }

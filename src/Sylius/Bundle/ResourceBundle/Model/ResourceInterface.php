@@ -23,5 +23,5 @@ interface ResourceInterface
      *
      * @return mixed
      */
-    function getId();
+    public function getId();
 }

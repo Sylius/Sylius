@@ -11,44 +11,19 @@
 
 namespace Sylius\Bundle\ResourceBundle\Repository;
 
-use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * Resource repository interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ResourceRepositoryInterface
+interface ResourceRepositoryInterface extends ObjectRepository
 {
-    /**
-     * Finds resource by identifier.
-     *
-     * @param array $criteria
-     *
-     * @return ResourceInterface
-     */
-    function get(array $criteria);
-
-    /**
-     * Finds resource by criteria.
-     *
-     * @param array $criteria
-     *
-     * @return ResourceInterface
-     */
-    function getCollection(array $criteria = array(), array $sorting = array(), $limit = null);
-
     /**
      * Creates a new Pagerfanta instance to paginate the resources.
      *
      * @return PagerfantaInterface
      */
-    function paginate(array $criteria = array(), array $sorting = array());
-
-    /**
-     * Get resource class name.
-     *
-     * @return string
-     */
-    function getClass();
+    public function createPaginator(array $criteria = array(), array $sortBy = null);
 }

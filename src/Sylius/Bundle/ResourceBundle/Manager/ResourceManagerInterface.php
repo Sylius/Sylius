@@ -25,28 +25,28 @@ interface ResourceManagerInterface
      *
      * @return ResourceInterface
      */
-    function create();
+    public function create();
 
     /**
      * Persist.
      *
      * @param ResourceInterface $resource
-     * @param Boolean           $commit
+     * @param Boolean           $flush
      */
-    function persist(ResourceInterface $resource, $commit =  true);
+    public function persist(ResourceInterface $resource, $flush =  true);
 
     /**
      * Removes resource.
      *
      * @param ResourceInterface $resource
-     * @param Boolean           $commit
+     * @param Boolean           $flush
      */
-    function remove(ResourceInterface $resource, $commit = true);
+    public function remove(ResourceInterface $resource, $flush = true);
 
     /**
      * Get resource class name.
      *
      * @return string
      */
-    function getClass();
+    public function getClassName();
 }
