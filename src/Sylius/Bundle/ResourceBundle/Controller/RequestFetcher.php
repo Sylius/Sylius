@@ -36,12 +36,28 @@ class RequestFetcher
 
     public function getCriteria()
     {
-        return $this->get('criteria', array());
+        $defaultCriteria = $this->get('criteria', array());
+
+        if ($this->isCollectionFilterable()) {
+            $criteria = $this->request->get('criteria');
+
+            return $criteria;
+        }
+
+        return $defaultCriteria;
     }
 
     public function getSorting()
     {
-        return $this->get('sorting', array());
+        $defaultSorting = $this->get('sorting', array());
+
+        if ($this->isCollectionSortable()) {
+            $sorting = $this->request->get('sorting');
+
+            return $sorting;
+        }
+
+        return $defaultSorting;
     }
 
     public function getRedirect()
@@ -74,6 +90,16 @@ class RequestFetcher
     public function isCollectionPaginated()
     {
         return (Boolean) $this->get('paginate', true);
+    }
+
+    public function isCollectionFilterable()
+    {
+        return (Boolean) $this->get('filterable', false);
+    }
+
+    public function isCollectionSortable()
+    {
+        return (Boolean) $this->get('sortable', false);
     }
 
     public function getPaginationMaxPerPage()

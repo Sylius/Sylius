@@ -18,11 +18,18 @@
 
     <parameters>
         <parameter key="sylius_resource.fetcher.class">Sylius\Bundle\ResourceBundle\Controller\RequestFetcher</parameter>
+        <parameter key="sylius_resource.twig.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
     </parameters>
 
     <services>
         <service id="sylius_resource.fetcher" class="%sylius_resource.fetcher.class%">
             <argument type="service" id="request" strict="false" />
+        </service>
+
+        <service id="sylius_resource.twig" class="%sylius_resource.twig.class%">
+            <argument type="service" id="request" strict="false" />
+            <argument type="service" id="router" />
+            <tag name="twig.extension" />
         </service>
     </services>
 
