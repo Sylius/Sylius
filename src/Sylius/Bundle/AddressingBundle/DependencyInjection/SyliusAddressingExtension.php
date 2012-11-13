@@ -45,74 +45,10 @@ class SyliusAddressingExtension extends Extension
         $container->setParameter('sylius_addressing.driver', $config['driver']);
         $container->setParameter('sylius_addressing.engine', $config['engine']);
 
-        $configurations = array(
-            'controllers',
-            'forms',
-            'manipulators'
-        );
+        $container->setParameter('sylius_addressing.model.address.class', $config['classes']['model']['address']);
+        $container->setParameter('sylius_addressing.controller.address.class', $config['classes']['controller']['address']);
+        $container->setParameter('sylius_addressing.form.type.address.class', $config['classes']['form']['type']['address']);
 
-        foreach($configurations as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces($config['classes'], $container, array(
-            'manipulator' => 'sylius_addressing.manipulator.%s.class',
-            'model'       => 'sylius_addressing.model.%s.class'
-        ));
-
-        $this->remapParametersNamespaces($config['classes']['form'], $container, array(
-            'type' => 'sylius_addressing.form.type.%s.class',
-        ));
-
-        $this->remapParametersNamespaces($config['classes']['controller'], $container, array(
-            'backend'  => 'sylius_addressing.controller.backend.%s.class',
-            'frontend' => 'sylius_addressing.controller.frontend.%s.class'
-        ));
-    }
-
-    /**
-     * Remap parameters.
-     *
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param array            $map
-     */
-    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
-    {
-        foreach ($map as $name => $paramName) {
-            if (isset($config[$name])) {
-                $container->setParameter($paramName, $config[$name]);
-            }
-        }
-    }
-
-    /**
-     * Remap parameter namespaces.
-     *
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param array            $namespaceConfig
-     */
-    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
-    {
-        foreach ($namespaces as $ns => $map) {
-            if ($ns) {
-                if (!isset($config[$ns])) {
-                    continue;
-                }
-                $namespaceConfig = $config[$ns];
-            } else {
-                $namespaceConfig = $config;
-            }
-            if (is_array($map)) {
-                $this->remapParameters($namespaceConfig, $container, $map);
-            } else {
-                foreach ($namespaceConfig as $name => $value) {
-                    if (null !== $value) {
-                        $container->setParameter(sprintf($map, $name), $value);
-                    }
-                }
-            }
-        }
+        $loader->load('services.xml');
     }
 }

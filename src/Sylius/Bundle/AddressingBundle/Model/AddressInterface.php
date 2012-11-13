@@ -11,27 +11,15 @@
 
 namespace Sylius\Bundle\AddressingBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
+
 /**
  * Address model interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface AddressInterface
+interface AddressInterface extends ResourceInterface
 {
-    /**
-     * Returns address id.
-     *
-     * @return integer
-     */
-    function getId();
-
-    /**
-     * Set id.
-     *
-     * @param mixed $id
-     */
-    function setId($id);
-
     /**
      * Get creation time.
      *

@@ -18,10 +18,18 @@
 >
 
     <services>
-        <service id="sylius_addressing.controller.backend.address" class="%sylius_addressing.controller.backend.address.class%">
+        <service id="sylius_addressing.controller.address" class="%sylius_addressing.controller.address.class%">
+            <argument>sylius_addressing</argument>
+            <argument>address</argument>
+            <argument>SyliusAddressingBundle:Address</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="sylius_addressing.form.type.address" class="%sylius_addressing.form.type.address.class%">
+            <argument>%sylius_addressing.model.address.class%</argument>
+            <tag name="form.type" alias="sylius_addressing_address" />
         </service>
     </services>
 

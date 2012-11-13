@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -22,13 +23,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SyliusAddressingBundle extends Bundle
 {
-    // Bundle driver list.
-    const DRIVER_DOCTRINE_ORM         = 'doctrine/orm';
-    const DRIVER_DOCTRINE_MONGODB_ODM = 'doctrine/mongodb-odm';
-    const DRIVER_DOCTRINE_COUCHDB_ODM = 'doctrine/couchdb-odm';
-    const DRIVER_PROPEL               = 'propel';
-    const DRIVER_PROPEL2              = 'propel2';
-
     /**
      * Return array of currently supported drivers.
      *
@@ -37,7 +31,7 @@ class SyliusAddressingBundle extends Bundle
     static public function getSupportedDrivers()
     {
         return array(
-            self::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
     }
 }

@@ -50,14 +50,6 @@ abstract class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
