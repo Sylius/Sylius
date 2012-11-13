@@ -115,7 +115,7 @@ class ResourceController extends Controller
             return $this->redirectToResource($resource);
         }
 
-        if (!$this->isHtmlRequest()) {
+        if (!$this->getRequestFetcher()->isHtmlRequest()) {
             return $this->handleView(View::create($form));
         }
 
@@ -149,15 +149,15 @@ class ResourceController extends Controller
             return $this->redirectToResource($resource);
         }
 
-        if (!$this->isHtmlRequest()) {
+        if (!$this->getRequestFetcher()->isHtmlRequest()) {
             return $this->handleView(View::create($form));
         }
 
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
-                $this->getResourceName() => $resource,
-                'form'                   => $form->createView()
+                $this->resourceName => $resource,
+                'form'              => $form->createView()
             ))
         ;
 
@@ -197,7 +197,7 @@ class ResourceController extends Controller
 
     protected function getResourceFormType()
     {
-        if (null !== $type = $this->requestFetcher->getFormType()) {
+        if (null !== $type = $this->getRequestFetcher()->getFormType()) {
             return $type;
         }
 
@@ -206,7 +206,7 @@ class ResourceController extends Controller
 
     protected function redirectToResource(ResourceInterface $resource)
     {
-        $this->requestFetcher->getRedirect();
+        $redirect = $this->getRequestFetcher()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceRoute();
 
         return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
@@ -214,7 +214,7 @@ class ResourceController extends Controller
 
     protected function redirectToResourceCollection()
     {
-        $this->requestFetcher->getRedirect();
+        $redirect = $this->getRequestFetcher()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceCollectionRoute();
 
         return $this->handleView(RouteRedirectView::create($route));

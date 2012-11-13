@@ -68,7 +68,7 @@ class RequestFetcher
 
     public function getIdentifierValue()
     {
-        return $this->get($this->getIdentifierName(), 'id');
+        return $this->request->get($this->getIdentifierName());
     }
 
     public function isCollectionPaginated()

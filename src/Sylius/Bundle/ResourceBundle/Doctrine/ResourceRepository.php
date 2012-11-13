@@ -47,7 +47,7 @@ abstract class ResourceRepository extends BaseResourceRepository
 
     public function findOneBy(array $criteria)
     {
-        return $this->objectRepository->findBy($criteria);
+        return $this->objectRepository->findOneBy($criteria);
     }
 
 }

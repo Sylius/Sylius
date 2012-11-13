@@ -33,7 +33,7 @@ class ResourceRepository extends BaseResourceRepository
 
         if (null !== $sortBy) {
             foreach ($sortBy as $property => $order) {
-                $queryBuilder->orderBy($alias.$property, $order);
+                $queryBuilder->orderBy($alias.'.'.$property, $order);
             }
         }
 
