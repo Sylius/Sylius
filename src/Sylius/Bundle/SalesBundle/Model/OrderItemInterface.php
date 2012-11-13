@@ -11,27 +11,15 @@
 
 namespace Sylius\Bundle\SalesBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
+
 /**
  * Interface for order line item model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ItemInterface
+interface OrderItemInterface extends ResourceInterface
 {
-    /**
-     * Return item id.
-     *
-     * @return mixed
-     */
-    function getId();
-
-    /**
-     * Set item id.
-     *
-     * @param mixed $id
-     */
-    function setId($id);
-
     /**
      * Return order.
      *
@@ -59,4 +47,12 @@ interface ItemInterface
      * @param integer $quantity
      */
     function setQuantity($quantity);
+
+    function getUnitPrice();
+    function setUnitPrice($unitPrice);
+
+    function getTotal();
+    function setTotal($total);
+
+    function calculateTotal();
 }

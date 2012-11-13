@@ -16,7 +16,7 @@ namespace Sylius\Bundle\SalesBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Item implements ItemInterface
+class OrderItem implements ItemInterface
 {
     /**
      * Item id.
@@ -38,6 +38,8 @@ class Item implements ItemInterface
      * @var integer
      */
     protected $quantity;
+    protected $unitPrice;
+    protected $total;
 
     /**
      * Constructor.
@@ -53,14 +55,6 @@ class Item implements ItemInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -93,5 +87,30 @@ class Item implements ItemInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
+    }
+
+    public function getUnitPrice()
+    {
+        return $this->unitPrice;
+    }
+
+    public function setUnitPrice($unitPrice)
+    {
+        $this->unitPrice = $unitPrice;
+    }
+
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    }
+
+    public function calculateTotal()
+    {
+        $this->total = $this->unitPrice * $this->quantity;
     }
 }

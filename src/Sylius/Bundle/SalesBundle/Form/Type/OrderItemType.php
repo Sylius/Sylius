@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ItemType extends AbstractType
+class OrderItemType extends AbstractType
 {
     /**
      * Data class.

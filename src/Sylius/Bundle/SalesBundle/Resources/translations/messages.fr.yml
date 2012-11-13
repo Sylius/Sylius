@@ -8,14 +8,3 @@ sylius_sales:
             confirmed: "La commande a été confirmée"
             opened: "La commande a été ouverte"
             closed: "La commande a été fermée"
-        status:
-            created: "Le statut a été créé"
-            updated: "Le statut a été mis à jour"
-            deleted: "Le statut a été supprimé"
-            moved: "Le statut a été changé"
-
-            changed: "Le statut de la commande a été changé"
-            invalid: "Statut de commande invalide"
-    label:
-        status:
-            name: "Nom du statut"

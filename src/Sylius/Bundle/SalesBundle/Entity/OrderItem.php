@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\SalesBundle\Entity;
 
-use Sylius\Bundle\SalesBundle\Model\Status as BaseStatus;
+use Sylius\Bundle\SalesBundle\Model\OrderItem as BaseOrderItem;
 
 /**
- * Base status entity.
+ * Base item entity.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Status extends BaseStatus
+class OrderItem extends BaseOrderItem
 {
 }

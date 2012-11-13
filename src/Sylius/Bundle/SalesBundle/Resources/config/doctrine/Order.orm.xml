@@ -9,6 +9,7 @@
     <mapped-superclass name="Sylius\Bundle\SalesBundle\Entity\Order" table="sylius_sales_order">
         <field name="confirmed" column="confirmed" type="boolean" />
         <field name="closed" column="closed" type="boolean" />
+        <field name="total" column="total" type="decimal" precision="10" scale="2" />
         <field name="createdAt" column="created_at" type="datetime" />
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
     </mapped-superclass>

@@ -10,14 +10,3 @@ sylius_sales:
             confirmed: "Order has been confirmed"
             opened: "Order has been opened"
             closed: "Order has been closed"
-        status:
-            created: "Status has been created"
-            updated: "Status has been updated"
-            deleted: "Status has been deleted"
-            moved: "Status has been moved"
-
-            changed: "Order status has been updated"
-            invalid: "Invalid order status"
-    label:
-        status:
-            name: "Status name"

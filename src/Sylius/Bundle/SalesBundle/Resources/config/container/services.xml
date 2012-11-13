@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sylius_sales.controller.order" class="%sylius_sales.controller.order.class%">
+            <argument>sylius_sales</argument>
+            <argument>order</argument>
+            <argument>SyliusSalesBundle:Order</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius_sales.controller.item" class="%sylius_sales.controller.item.class%">
+            <argument>sylius_sales</argument>
+            <argument>item</argument>
+            <argument>SyliusSalesBundle:Item</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius_sales.form.type.order" class="%sylius_sales.form.type.order.class%">
+            <argument>%sylius_sales.model.order.class%</argument>
+            <tag name="form.type" alias="sylius_sales_order" />
+        </service>
+        <service id="sylius_sales.form.type.item" class="%sylius_sales.form.type.item.class%">
+            <argument>%sylius_sales.model.item.class%</argument>
+            <tag name="form.type" alias="sylius_sales_item" />
+        </service>
+    </services>
+</container>

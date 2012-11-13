@@ -11,12 +11,15 @@
 
 namespace Sylius\Bundle\SalesBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
+
 /**
  * Order interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface
+interface OrderInterface extends ResourceInterface
 {
     /**
      * Get order id.
@@ -24,13 +27,6 @@ interface OrderInterface
      * @return mixed
      */
     function getId();
-
-    /**
-     * Set order id.
-     *
-     * @param mixed $id
-     */
-    function setId($id);
 
     /**
      * Is confirmed?
@@ -80,32 +76,18 @@ interface OrderInterface
     function setClosed($closed);
 
     /**
-     * Get order status.
-     *
-     * @return StatusInterface
-     */
-    function getStatus();
-
-    /**
-     * Set order status.
-     *
-     * @param StatusInterface $status
-     */
-    function setStatus(StatusInterface $status);
-
-    /**
      * Get order items.
      *
-     * @return array An array or collection of ItemInterface
+     * @return array An array or collection of OrderItemInterface
      */
     function getItems();
 
     /**
      * Set items.
      *
-     * @param array $items
+     * @param Collection $items
      */
-    function setItems($items);
+    function setItems(Collection $items);
 
     /**
      * Returns number of order items.
@@ -117,23 +99,27 @@ interface OrderInterface
     /**
      * Adds item to order.
      *
-     * @param ItemInterface $item
+     * @param OrderItemInterface $item
      */
-    function addItem(ItemInterface $item);
+    function addItem(OrderItemInterface $item);
 
     /**
      * Remove item from order.
      *
-     * @param ItemInterface $item
+     * @param OrderItemInterface $item
      */
-    function removeItem(ItemInterface $item);
+    function removeItem(OrderItemInterface $item);
 
     /**
      * Has item in order?
      *
      * @param Item
      */
-    function hasItem(ItemInterface $item);
+    function hasItem(OrderItemInterface $item);
+
+    function getTotal();
+    function setTotal($total);
+    function calculateTotal();
 
     /**
      * Get creation time.

@@ -23,14 +23,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class OrderType extends AbstractType
 {
     /**
-     * Modes.
-     */
-    const MODE_PLACE         = 0;
-    const MODE_CREATE        = 1;
-    const MODE_UPDATE        = 2;
-    const MODE_CHANGE_STATUS = 3;
-
-    /**
      * Data class.
      *
      * @var string
@@ -52,28 +44,15 @@ class OrderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        switch ($options['mode']) {
-            case self::MODE_CREATE:
-            case self::MODE_UPDATE:
-                $builder
-                    ->add('items', 'collection', array(
-                        'type'         => 'sylius_sales_item',
-                        'allow_add'    => true,
-                        'allow_delete' => true,
-                        'by_reference' => false,
-                        'label'        => 'sylius_sales.label.order.items'
-                    ))
-                ;
-            break;
-
-            case self::MODE_CHANGE_STATUS:
-                $builder
-                    ->add('status', 'sylius_sales_status_choice', array(
-                        'label' => 'sylius_sales.label.order.status'
-                    ))
-                ;
-            break;
-        }
+        $builder
+            ->add('items', 'collection', array(
+                'type'         => 'sylius_sales_item',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label'        => 'sylius_sales.label.order.items'
+            ))
+        ;
     }
 
     /**
@@ -83,8 +62,7 @@ class OrderType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass,
-                'mode'       => self::MODE_PLACE,
+                'data_class' => $this->dataClass
             ))
         ;
     }

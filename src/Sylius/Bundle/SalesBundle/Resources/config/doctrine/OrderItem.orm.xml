@@ -6,12 +6,10 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
 
-    <entity name="Sylius\Bundle\SalesBundle\Entity\Status" table="sylius_sales_status">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
-        <field name="name" column="name" type="string" />
-        <field name="position" column="position" type="integer" />
-    </entity>
+    <mapped-superclass name="Sylius\Bundle\SalesBundle\Entity\Item" table="sylius_sales_order_item">
+        <field name="quantity" column="quantity" type="integer" />
+        <field name="unitPrice" column="unit_price" type="decimal" precision="10" scale="2" />
+        <field name="total" column="total" type="decimal" precision="10" scale="2" />
+    </mapped-superclass>
 
 </doctrine-mapping>

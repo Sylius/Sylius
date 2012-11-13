@@ -11,12 +11,15 @@
 
 namespace Sylius\Bundle\SalesBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Model for orders.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Order implements OrderInterface
+class Order implements OrderInterface
 {
     /**
      * Id.
@@ -60,6 +63,8 @@ abstract class Order implements OrderInterface
      */
     protected $closed;
 
+    protected $total;
+
     /**
      * Creation time.
      *
@@ -79,7 +84,7 @@ abstract class Order implements OrderInterface
      */
     public function __construct()
     {
-        $this->items = array();
+        $this->items = new ArrayCollection();
         $this->closed = false;
         $this->confirmed = true;
         $this->generateConfirmationToken();
@@ -91,14 +96,6 @@ abstract class Order implements OrderInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -174,19 +171,6 @@ abstract class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setStatus(StatusInterface $status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getItems()
     {
         return $this->items;
@@ -195,7 +179,7 @@ abstract class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setItems($items)
+    public function setItems(Collection $items)
     {
         $this->items = $items;
     }
@@ -211,30 +195,52 @@ abstract class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addItem(ItemInterface $item)
+    public function addItem(OrderItemInterface $item)
     {
         if (!$this->hasItem($item)) {
-            $this->items[] = $item;
+            $this->items->add($item);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeItem(ItemInterface $item)
+    public function removeItem(OrderItemInterface $item)
     {
         if ($this->hasItem($item)) {
-            $key = array_search($item, $this->items);
-            unset($this->items[$key]);
+            $this->items->removeElement($item);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasItem(ItemInterface $item)
+    public function hasItem(OrderItemInterface $item)
     {
-        return in_array($item, $this->items);
+        return $this->items->contains($item);
+    }
+
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    }
+
+    public function calculateTotal()
+    {
+        $total = 0;
+
+        foreach ($this->items as $item) {
+            $item->calculateTotal();
+
+            $total = $item->getTotal();
+        }
+
+        $this->total = $total;
     }
 
     /**

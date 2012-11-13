@@ -4,46 +4,45 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_sales.manager.order.class">Sylius\Bundle\SalesBundle\Entity\OrderManager</parameter>
-        <parameter key="sylius_sales.manager.item.class">Sylius\Bundle\SalesBundle\Entity\ItemManager</parameter>
-        <parameter key="sylius_sales.manager.status.class">Sylius\Bundle\SalesBundle\Entity\StatusManager</parameter>
-        <parameter key="sylius_sales.sorter.order.class">Sylius\Bundle\SalesBundle\Sorting\ORM\OrderSorter</parameter>
-        <parameter key="sylius_sales.sorter.status.class">Sylius\Bundle\SalesBundle\Sorting\ORM\StatusSorter</parameter>
-        <parameter key="sylius_sales.filter.order.class">Sylius\Bundle\SalesBundle\Filtering\ORM\OrderFilter</parameter>
+        <parameter key="sylius_sales.manager.order.class">Sylius\Bundle\ResourceBundle\Doctrine\ResourceManager</parameter>
+        <parameter key="sylius_sales.repository.order.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository</parameter>
+        <parameter key="sylius_sales.manager.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ResourceManager</parameter>
+        <parameter key="sylius_sales.repository.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository</parameter>
     </parameters>
 
     <services>
-        <!-- managers... -->
+        <service id="sylius_sales.doctrine.repository.order"
+                 factory-service="doctrine.orm.default_entity_manager"
+                 factory-method="getRepository"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false"
+        >
+            <argument>%sylius_sales.model.order.class%</argument>
+        </service>
+        <service id="sylius_sales.repository.order" class="%sylius_sales.repository.order.class%">
+            <argument type="service" id="sylius_sales.doctrine.repository.order" />
+            <argument>%sylius_sales.model.order.class%</argument>
+        </service>
         <service id="sylius_sales.manager.order" class="%sylius_sales.manager.order.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument>%sylius_sales.model.order.class%</argument>
         </service>
+
+        <service id="sylius_sales.doctrine.repository.item"
+                 factory-service="doctrine.orm.default_entity_manager"
+                 factory-method="getRepository"
+                 class="Doctrine\ORM\EntityRepository"
+                 public="false"
+        >
+            <argument>%sylius_sales.model.item.class%</argument>
+        </service>
+        <service id="sylius_sales.repository.item" class="%sylius_sales.repository.item.class%">
+            <argument type="service" id="sylius_sales.doctrine.repository.item" />
+            <argument>%sylius_sales.model.item.class%</argument>
+        </service>
         <service id="sylius_sales.manager.item" class="%sylius_sales.manager.item.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument>%sylius_sales.model.item.class%</argument>
-        </service>
-        <service id="sylius_sales.manager.status" class="%sylius_sales.manager.status.class%">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument>%sylius_sales.model.status.class%</argument>
-        </service>
-        
-        <!-- sorters... -->
-        <service id="sylius_sales.sorter.order" class="%sylius_sales.sorter.order.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius_sales.sorter.status" class="%sylius_sales.sorter.status.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        
-        <!-- filters... -->
-        <service id="sylius_sales.filter.order" class="%sylius_sales.filter.order.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
     </services>
 
