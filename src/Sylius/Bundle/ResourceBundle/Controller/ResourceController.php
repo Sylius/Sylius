@@ -47,7 +47,7 @@ class ResourceController extends Controller
             ->getIdentifierCriteria()
         ;
 
-        $resource = $this->findResourceOr404($criteria);
+        $resource = $this->findOr404($criteria);
 
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('show.html'))
@@ -107,12 +107,12 @@ class ResourceController extends Controller
     public function createAction(Request $request)
     {
         $resource = $this->create();
-        $form = $this->createResourceForm($resource);
+        $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->getManager()->persist($resource);
 
-            return $this->redirectToResource($resource);
+            return $this->redirectTo($resource);
         }
 
         if (!$this->getRequestFetcher()->isHtmlRequest()) {
@@ -140,13 +140,13 @@ class ResourceController extends Controller
             ->getIdentifierCriteria()
         ;
 
-        $resource = $this->findResourceOr404($criteria);
-        $form = $this->createResourceForm($resource);
+        $resource = $this->findOr404($criteria);
+        $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->getManager()->persist($resource);
 
-            return $this->redirectToResource($resource);
+            return $this->redirectTo($resource);
         }
 
         if (!$this->getRequestFetcher()->isHtmlRequest()) {
@@ -174,10 +174,10 @@ class ResourceController extends Controller
             ->getIdentifierCriteria()
         ;
 
-        $resource = $this->findResourceOr404($criteria);
+        $resource = $this->findOr404($criteria);
         $this->getManager()->remove($resource);
 
-        return $this->redirectToResourceCollection();
+        return $this->redirectToCollection();
     }
 
     protected function getRequestFetcher()
@@ -190,12 +190,12 @@ class ResourceController extends Controller
         return $this->getManager()->create();
     }
 
-    protected function createResourceForm(ResourceInterface $resource = null)
+    protected function getForm(ResourceInterface $resource = null)
     {
-        return $this->createForm($this->getResourceFormType(), $resource);
+        return $this->createForm($this->getFormType(), $resource);
     }
 
-    protected function getResourceFormType()
+    protected function getFormType()
     {
         if (null !== $type = $this->getRequestFetcher()->getFormType()) {
             return $type;
@@ -204,7 +204,7 @@ class ResourceController extends Controller
         return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
     }
 
-    protected function redirectToResource(ResourceInterface $resource)
+    protected function redirectTo(ResourceInterface $resource)
     {
         $redirect = $this->getRequestFetcher()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceRoute();
@@ -212,7 +212,7 @@ class ResourceController extends Controller
         return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
     }
 
-    protected function redirectToResourceCollection()
+    protected function redirectToCollection()
     {
         $redirect = $this->getRequestFetcher()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceCollectionRoute();
@@ -220,32 +220,37 @@ class ResourceController extends Controller
         return $this->handleView(RouteRedirectView::create($route));
     }
 
-    protected function getResourceRoute()
+    protected function getRoute()
     {
         return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
     }
 
-    protected function getResourceCollectionRoute()
+    protected function getCollectionRoute()
     {
         return sprintf('%s_%s', $this->bundlePrefix, Pluralization::pluralize($this->resourceName));
     }
 
     protected function getManager()
     {
-        return $this->get($this->getServiceName('manager'));
+        return $this->getService('manager');
     }
 
     protected function getRepository()
     {
-        return $this->get($this->getServiceName('repository'));
+        return $this->getService('repository');
     }
 
-    protected function getServiceName($name)
+    protected function getService($name)
+    {
+        return $this->get($this->getFullServiceName($name));
+    }
+
+    protected function getFullServiceName($name)
     {
         return sprintf('%s.%s.%s', $this->bundlePrefix, $name, $this->resourceName);
     }
 
-    protected function findResourceOr404(array $criteria)
+    protected function findOr404(array $criteria)
     {
         if (!$resource = $this->getRepository()->findOneBy($criteria)) {
             throw new NotFoundHttpException('Requested resource does not exist');
