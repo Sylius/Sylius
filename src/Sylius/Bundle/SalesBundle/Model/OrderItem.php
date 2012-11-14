@@ -16,7 +16,7 @@ namespace Sylius\Bundle\SalesBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderItem implements ItemInterface
+class OrderItem implements OrderItemInterface
 {
     /**
      * Item id.

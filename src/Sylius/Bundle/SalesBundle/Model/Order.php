@@ -198,6 +198,7 @@ class Order implements OrderInterface
     public function addItem(OrderItemInterface $item)
     {
         if (!$this->hasItem($item)) {
+            $item->setOrder($this);
             $this->items->add($item);
         }
     }
@@ -208,6 +209,7 @@ class Order implements OrderInterface
     public function removeItem(OrderItemInterface $item)
     {
         if ($this->hasItem($item)) {
+            $item->setOrder(null);
             $this->items->removeElement($item);
         }
     }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SalesBundle\Controller\Backend;
+namespace Sylius\Bundle\SalesBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
@@ -79,7 +79,7 @@ class OrderController extends ResourceController
         $order->setClosed(true);
         $this->getManager()->persist($order);
 
-        return $this->redirectToReferer();
+        return $this->redirectTo($order);
     }
 
     /**
@@ -97,6 +97,6 @@ class OrderController extends ResourceController
         $order->setClosed(false);
         $this->getManager()->persist($order);
 
-        return $this->redirectToReferer();
+        return $this->redirectTo($order);
     }
 }
