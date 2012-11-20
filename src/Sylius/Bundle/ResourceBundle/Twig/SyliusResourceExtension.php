@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Extension;
 use Twig_Function_Method;
@@ -26,9 +27,9 @@ class SyliusResourceExtension extends Twig_Extension
     private $request;
     private $router;
 
-    public function __construct(Request $request, RouterInterface $router)
+    public function __construct(ContainerInterface $container, RouterInterface $router)
     {
-        $this->request = $request;
+        $this->request = $container->get('request');
         $this->router = $router;
     }
 
@@ -72,4 +73,3 @@ class SyliusResourceExtension extends Twig_Extension
         return 'sylius_resource';
     }
 }
-

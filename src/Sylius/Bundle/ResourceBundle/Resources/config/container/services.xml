@@ -22,12 +22,10 @@
     </parameters>
 
     <services>
-        <service id="sylius_resource.fetcher" class="%sylius_resource.fetcher.class%">
-            <argument type="service" id="request" strict="false" />
-        </service>
+        <service id="sylius_resource.fetcher" class="%sylius_resource.fetcher.class%" />
 
         <service id="sylius_resource.twig" class="%sylius_resource.twig.class%">
-            <argument type="service" id="request" strict="false" />
+            <argument type="service" id="service_container" />
             <argument type="service" id="router" />
             <tag name="twig.extension" />
         </service>

@@ -182,7 +182,10 @@ class ResourceController extends Controller
 
     protected function getRequestFetcher()
     {
-        return $this->get('sylius_resource.fetcher');
+        $fetcher = $this->get('sylius_resource.fetcher');
+        $fetcher->fetch($this->getRequest());
+
+        return $fetcher;
     }
 
     protected function create()

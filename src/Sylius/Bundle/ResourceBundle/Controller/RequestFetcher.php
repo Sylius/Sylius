@@ -28,7 +28,7 @@ class RequestFetcher
     protected $request;
     protected $configuration;
 
-    public function __construct(Request $request)
+    public function fetch(Request $request)
     {
         $this->request = $request;
         $this->configuration = $request->attributes->get('_sylius.resource', $this->getDefaultConfiguration());
@@ -39,7 +39,7 @@ class RequestFetcher
         $defaultCriteria = $this->get('criteria', array());
 
         if ($this->isCollectionFilterable()) {
-            $criteria = $this->request->get('criteria');
+            $criteria = $this->request->get('criteria', $defaultCriteria);
 
             return $criteria;
         }
@@ -52,7 +52,7 @@ class RequestFetcher
         $defaultSorting = $this->get('sorting', array());
 
         if ($this->isCollectionSortable()) {
-            $sorting = $this->request->get('sorting');
+            $sorting = $this->request->get('sorting', $defaultSorting);
 
             return $sorting;
         }
