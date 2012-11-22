@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Extension;
 use Twig_Function_Method;

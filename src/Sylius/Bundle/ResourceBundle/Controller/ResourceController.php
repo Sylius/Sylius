@@ -40,7 +40,7 @@ class ResourceController extends Controller
     /**
      * Get single resource by its identifier.
      */
-    public function getAction(Request $request)
+    public function getAction()
     {
         $criteria = $this
             ->getRequestFetcher()
@@ -167,7 +167,7 @@ class ResourceController extends Controller
     /**
      * Delete resource.
      */
-    public function deleteAction(Request $request)
+    public function deleteAction()
     {
         $criteria = $this
             ->getRequestFetcher()
