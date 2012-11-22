@@ -27,9 +27,8 @@ class SyliusResourceExtension extends Twig_Extension
     private $request;
     private $router;
 
-    public function __construct(ContainerInterface $container, RouterInterface $router)
+    public function __construct(RouterInterface $router)
     {
-        $this->request = $container->get('request');
         $this->router = $router;
     }
 
@@ -39,8 +38,14 @@ class SyliusResourceExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
+            'sylius_resource_fetch_request' => new Twig_Function_Method($this, 'fetchRequest'),
             'sylius_resource_sort' => new Twig_Function_Method($this, 'renderSortingLink', array('is_safe' => array('html'))),
         );
+    }
+
+    public function fetchRequest(Request $request)
+    {
+        $this->request = $request;
     }
 
     public function renderSortingLink($property, $label = null, $order = null, $route = null)
