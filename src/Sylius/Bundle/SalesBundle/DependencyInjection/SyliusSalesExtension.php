@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SalesBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\ServiceGenerator;
 use Sylius\Bundle\SalesBundle\SyliusSalesBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -35,16 +36,20 @@ class SyliusSalesExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $config);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         if (!in_array($config['driver'], SyliusSalesBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+        $generator = new ServiceGenerator($container);
+        $generator->generate('sylius_sales', 'order', $config['driver'], 'SyliusSalesBundle:Order');
+        $generator->generate('sylius_sales', 'item', $config['driver'], 'SyliusSalesBundle:OrderItem');
 
         $container->setParameter('sylius_sales.driver', $config['driver']);
         $container->setParameter('sylius_sales.engine', $config['engine']);
+
+        $container->setAlias('sylius_sales.builder', $config['builder']);
 
         $container->setParameter('sylius_sales.model.order.class', $config['classes']['model']['order']);
         $container->setParameter('sylius_sales.model.item.class', $config['classes']['model']['item']);

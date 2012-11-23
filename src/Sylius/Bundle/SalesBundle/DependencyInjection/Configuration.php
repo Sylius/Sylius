@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
+                ->scalarNode('builder')->isRequired()->cannotBeEmpty()->end()
                 ->end()
             ->end();
 
@@ -71,7 +72,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Controller\\OrderController')->end()
-                                ->scalarNode('item')->defaultValue('Sylius\\Bundle\\SalesBundle\\Controller\\OrderItemController')->end()
+                                ->scalarNode('item')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                             ->end()
                         ->end()
                         ->arrayNode('form')
@@ -81,7 +82,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('order')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderType')->end()
-                                        ->scalarNode('item')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\ItemType')->end()
+                                        ->scalarNode('item')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderItemType')->end()
                                     ->end()
                                 ->end()
                             ->end()

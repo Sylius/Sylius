@@ -26,12 +26,17 @@ class OrderController extends ResourceController
     public function placeAction(Request $request)
     {
         $fetcher = $this->getRequestFetcher();
+        $builder = $this->getBuilder();
 
         $order = $this->create();
-        $form = $this->createForm($fetcher->getFormType('sylius_sales_place_order'));
+        $builder->prepare($order);
+
+        $form = $this->createForm('sylius_sales_place_order', $order);
 
         if ($form->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->getManager()->persist($order);
+
+            $builder->finalize($order);
 
             return $this->renderResponse('placed.html', array(
                 'order' => $order
@@ -98,5 +103,10 @@ class OrderController extends ResourceController
         $this->getManager()->persist($order);
 
         return $this->redirectTo($order);
+    }
+
+    protected function getBuilder()
+    {
+        return $this->get('sylius_sales.builder');
     }
 }
