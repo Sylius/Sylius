@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
-use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ResourceRepository as BaseResourceRepository;

@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use FOS\RestBundle\View\View;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
