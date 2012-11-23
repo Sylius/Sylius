@@ -72,12 +72,11 @@ class CartItemController extends ResourceController
     /**
      * Removes item from cart.
      *
-     * @param Request $request
      * @param mixed   $id
      *
      * @return Response
      */
-    public function removeAction(Request $request, $id)
+    public function removeAction($id)
     {
         $cart = $this->getCurrentCart();
         $item = $this->getRepository()->find($id);

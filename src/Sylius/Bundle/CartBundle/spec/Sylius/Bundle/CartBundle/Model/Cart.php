@@ -21,6 +21,8 @@ class Cart extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
         $this->getTotalItems()->shouldReturn(0);
         $this->getTotal()->shouldReturn(0);
+        $this->countItems()->shouldReturn(0);
+        $this->isEmpty()->shouldReturn(true);
         $this->shouldNotBeLocked();
         $this->getExpiresAt()->shouldHaveType('DateTime');
     }
