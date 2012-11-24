@@ -22,7 +22,7 @@ class Cart extends ObjectBehavior
         $this->getTotalItems()->shouldReturn(0);
         $this->getTotal()->shouldReturn(0);
         $this->countItems()->shouldReturn(0);
-        $this->isEmpty()->shouldReturn(true);
+        $this->shouldBeEmpty();
         $this->shouldNotBeLocked();
         $this->getExpiresAt()->shouldHaveType('DateTime');
     }
