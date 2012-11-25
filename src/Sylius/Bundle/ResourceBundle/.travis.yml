@@ -6,7 +6,7 @@ php:
 
 before_script: composer install --dev --prefer-dist
 
-script: php bin/phpspec run
+script: php bin/phpspec run -f pretty
 
 notifications:
     irc: "irc.freenode.org#sylius-dev"
