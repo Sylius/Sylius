@@ -1,5 +1,5 @@
 SyliusResourceBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusResourceBundle.png)](http://travis-ci.org/Sylius/SyliusResourceBundle)
-======================
+====================
 
 While the main Sylius application will probably stick to ORM implementation, we do not want to tie any of the components to a specific
 content storage. This bundle allows us to avoid a lot of duplicated logic for each bundle - controllers, managers and repositories.
