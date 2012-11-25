@@ -19,13 +19,18 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class OrderBuilder implements OrderBuilderInterface
+class OrderBuilder implements OrderBuilderInterface
 {
     protected $itemManager;
 
     public function __construct(ResourceManagerInterface $itemManager)
     {
         $this->itemManager = $itemManager;
+    }
+
+    public function build(OrderInterface $order)
+    {
+        $order->calculateTotal();
     }
 
     public function finalize(OrderInterface $order)
