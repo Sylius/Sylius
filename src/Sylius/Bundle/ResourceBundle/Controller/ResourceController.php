@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use FOS\RestBundle\Util\Pluralization;
 use FOS\RestBundle\View\RouteRedirectView;
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Configuration\ResourceConfiguration;
 use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,32 +27,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ResourceController extends Controller
 {
-    protected $bundlePrefix;
-    protected $resourceName;
-    protected $templateNamespace;
+    protected $configuration;
 
     public function __construct($bundlePrefix, $resourceName, $templateNamespace)
     {
-        $this->bundlePrefix = $bundlePrefix;
-        $this->resourceName = $resourceName;
-        $this->templateNamespace = $templateNamespace;
+        $this->configuration = new ResourceConfiguration($bundlePrefix, $resourceName, $templateNamespace);
     }
 
     /**
      * Get single resource by its identifier.
      */
-    public function getAction()
+    public function getAction(array $parameters = null)
     {
-        $criteria = $this
-            ->getRequestFetcher()
-            ->getIdentifierCriteria()
-        ;
-
-        $resource = $this->findOr404($criteria);
+        $config = $this->getConfiguration($parameters);
+        $resource = $this->findOr404($config->getIdentifierCriteria());
 
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('show.html'))
-            ->setTemplateVar($this->resourceName)
+            ->setTemplateVar($config->getResourceName())
             ->setData($resource)
         ;
 
@@ -61,29 +54,30 @@ class ResourceController extends Controller
     /**
      * Get collection (paginated by default) of resources.
      */
-    public function getCollectionAction(Request $request)
+    public function getCollectionAction(Request $request, array $parameters = null)
     {
-        $fetcher = $this->getRequestFetcher();
-        $pluralName = Pluralization::pluralize($this->resourceName);
-        $criteria = $fetcher->getCriteria();
-        $sorting = $fetcher->getSorting();
+        $config = $this->getConfiguration($parameters);
+
+        $pluralName = Pluralization::pluralize($config->getResourceName());
+        $criteria = $config->getCriteria();
+        $sorting = $config->getSorting();
 
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('list.html'))
         ;
 
-        if ($fetcher->isCollectionPaginated()) {
+        if ($config->isCollectionPaginated()) {
             $paginator = $this
                 ->getRepository()
                 ->createPaginator($criteria, $sorting)
             ;
 
             $paginator->setCurrentPage($request->get('page', 1), true, true);
-            $paginator->setMaxPerPage($fetcher->getPaginationMaxPerPage());
+            $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
 
             $resources = $paginator->getCurrentPageResults();
 
-            $data = $fetcher->isHtmlRequest() ? array(
+            $data = $config->isHtmlRequest() ? array(
                 $pluralName => $resources,
                 'paginator' => $paginator
             ) : $resources;
@@ -92,7 +86,7 @@ class ResourceController extends Controller
 
             $data = $this
                 ->getRepository()
-                ->findBy($criteria, $sorting, $fetcher->getLimit())
+                ->findBy($criteria, $sorting, $config->getCollectionLimit())
             ;
         }
 
@@ -106,6 +100,8 @@ class ResourceController extends Controller
      */
     public function createAction(Request $request)
     {
+        $config = $this->getConfiguration();
+
         $resource = $this->create();
         $form = $this->getForm($resource);
 
@@ -115,15 +111,15 @@ class ResourceController extends Controller
             return $this->redirectTo($resource);
         }
 
-        if (!$this->getRequestFetcher()->isHtmlRequest()) {
+        if (!$config->isHtmlRequest()) {
             return $this->handleView(View::create($form));
         }
 
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
-                $this->resourceName => $resource,
-                'form'              => $form->createView()
+                $config->getResourceName() => $resource,
+                'form'                     => $form->createView()
             ))
         ;
 
@@ -135,12 +131,9 @@ class ResourceController extends Controller
      */
     public function updateAction(Request $request)
     {
-        $criteria = $this
-            ->getRequestFetcher()
-            ->getIdentifierCriteria()
-        ;
+        $config = $this->getConfiguration();
 
-        $resource = $this->findOr404($criteria);
+        $resource = $this->findOr404($config->getIdentifierCriteria());
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
@@ -149,15 +142,15 @@ class ResourceController extends Controller
             return $this->redirectTo($resource);
         }
 
-        if (!$this->getRequestFetcher()->isHtmlRequest()) {
+        if (!$config->isHtmlRequest()) {
             return $this->handleView(View::create($form));
         }
 
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
-                $this->resourceName => $resource,
-                'form'              => $form->createView()
+                $config->getResourceName() => $resource,
+                'form'                     => $form->createView()
             ))
         ;
 
@@ -170,7 +163,7 @@ class ResourceController extends Controller
     public function deleteAction()
     {
         $criteria = $this
-            ->getRequestFetcher()
+            ->getConfiguration()
             ->getIdentifierCriteria()
         ;
 
@@ -180,12 +173,13 @@ class ResourceController extends Controller
         return $this->redirectToCollection();
     }
 
-    protected function getRequestFetcher()
+    public function getConfiguration(array $parameters = null)
     {
-        $fetcher = $this->get('sylius_resource.fetcher');
-        $fetcher->fetch($this->getRequest());
+        $source = $parameters ?: $this->getRequest();
 
-        return $fetcher;
+        $this->configuration->load($source);
+
+        return $this->configuration;
     }
 
     protected function create()
@@ -200,16 +194,18 @@ class ResourceController extends Controller
 
     protected function getFormType()
     {
-        if (null !== $type = $this->getRequestFetcher()->getFormType()) {
+        $config = $this->getConfiguration();
+
+        if (null !== $type = $config->getFormType()) {
             return $type;
         }
 
-        return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
+        return sprintf('%s_%s', $config->getBundlePrefix(), $config->getResourceName());
     }
 
     protected function redirectTo(ResourceInterface $resource)
     {
-        $redirect = $this->getRequestFetcher()->getRedirect();
+        $redirect = $this->getConfiguration()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceRoute();
 
         return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
@@ -217,20 +213,10 @@ class ResourceController extends Controller
 
     protected function redirectToCollection()
     {
-        $redirect = $this->getRequestFetcher()->getRedirect();
+        $redirect = $this->getConfiguration()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceCollectionRoute();
 
         return $this->handleView(RouteRedirectView::create($route));
-    }
-
-    protected function getRoute()
-    {
-        return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
-    }
-
-    protected function getCollectionRoute()
-    {
-        return sprintf('%s_%s', $this->bundlePrefix, Pluralization::pluralize($this->resourceName));
     }
 
     protected function getManager()
@@ -245,12 +231,7 @@ class ResourceController extends Controller
 
     protected function getService($name)
     {
-        return $this->get($this->getFullServiceName($name));
-    }
-
-    protected function getFullServiceName($name)
-    {
-        return sprintf('%s.%s.%s', $this->bundlePrefix, $name, $this->resourceName);
+        return $this->get($this->getConfiguration()->getServiceName($name));
     }
 
     protected function findOr404(array $criteria)
@@ -269,12 +250,14 @@ class ResourceController extends Controller
 
     protected function getFullTemplateName($name)
     {
-        if (null !== $template = $this->getRequestFetcher()->getTemplate()) {
+        $config = $this->getConfiguration();
+
+        if (null !== $template = $config->getTemplate()) {
             return $template;
         }
 
         return sprintf('%s:%s.%s',
-            $this->templateNamespace,
+            $config->getTemplateNamespace(),
             $name,
             $this->getEngine()
         );
@@ -282,7 +265,7 @@ class ResourceController extends Controller
 
     protected function getEngine()
     {
-        return $this->container->getParameter(sprintf('%s.engine', $this->bundlePrefix));
+        return $this->container->getParameter(sprintf('%s.engine', $this->getConfiguration()->getBundlePrefix()));
     }
 
     protected function handleView(View $view)
@@ -295,7 +278,7 @@ class ResourceController extends Controller
         return $this
             ->get('session')
             ->getFlashBag()
-            ->set($type, $message)
+            ->add($type, $message)
         ;
     }
 }
