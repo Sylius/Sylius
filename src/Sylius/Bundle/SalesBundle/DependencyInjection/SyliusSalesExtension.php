@@ -43,8 +43,8 @@ class SyliusSalesExtension extends Extension
         }
 
         $generator = new ServiceGenerator($container);
-        $generator->generate('sylius_sales', 'order', $config['driver'], 'SyliusSalesBundle:Order');
-        $generator->generate('sylius_sales', 'item', $config['driver'], 'SyliusSalesBundle:OrderItem');
+        $generator->generate('sylius_sales', 'order', $config['driver'], $config['classes']['model']['order']);
+        $generator->generate('sylius_sales', 'item', $config['driver'], $config['classes']['model']['item']);
 
         $container->setParameter('sylius_sales.driver', $config['driver']);
         $container->setParameter('sylius_sales.engine', $config['engine']);
