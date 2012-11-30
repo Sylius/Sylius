@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->end()
-                ->scalarNode('builder')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('builder')->end()
                 ->end()
             ->end();
 

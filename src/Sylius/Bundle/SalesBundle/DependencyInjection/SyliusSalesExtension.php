@@ -49,7 +49,9 @@ class SyliusSalesExtension extends Extension
         $container->setParameter('sylius_sales.driver', $config['driver']);
         $container->setParameter('sylius_sales.engine', $config['engine']);
 
-        $container->setAlias('sylius_sales.builder', $config['builder']);
+        if (isset($config['builder'])) {
+            $container->setAlias('sylius_sales.builder', $config['builder']);
+        }
 
         $container->setParameter('sylius_sales.model.order.class', $config['classes']['model']['order']);
         $container->setParameter('sylius_sales.model.item.class', $config['classes']['model']['item']);
