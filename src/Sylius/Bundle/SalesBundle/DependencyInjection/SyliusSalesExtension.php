@@ -35,16 +35,15 @@ class SyliusSalesExtension extends Extension
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $config);
-
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if (!in_array($config['driver'], SyliusSalesBundle::getSupportedDrivers())) {
+        $driver = $config['driver'];
+
+        if (!in_array($driver, SyliusSalesBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
         }
 
-        $generator = new ServiceGenerator($container);
-        $generator->generate('sylius_sales', 'order', $config['driver'], $config['classes']['model']['order']);
-        $generator->generate('sylius_sales', 'item', $config['driver'], $config['classes']['model']['item']);
+        $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_sales.driver', $config['driver']);
         $container->setParameter('sylius_sales.engine', $config['engine']);

@@ -28,7 +28,7 @@ class OrderController extends ResourceController
         $fetcher = $this->getRequestFetcher();
         $builder = $this->getBuilder();
 
-        $order = $this->create();
+        $order = $this->createNew();
         $builder->prepare($order);
 
         $form = $this->createForm('sylius_sales_place_order', $order);

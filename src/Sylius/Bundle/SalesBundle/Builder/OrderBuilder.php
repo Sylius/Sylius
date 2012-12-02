@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SalesBundle\Builder;
 
-use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 
 /**
@@ -21,11 +21,11 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  */
 class OrderBuilder implements OrderBuilderInterface
 {
-    protected $itemManager;
+    protected $itemRepository;
 
-    public function __construct(ResourceManagerInterface $itemManager)
+    public function __construct(ObjectRepository $itemRepository)
     {
-        $this->itemManager = $itemManager;
+        $this->itemRepository = $itemRepository;
     }
 
     public function build(OrderInterface $order)
@@ -35,5 +35,10 @@ class OrderBuilder implements OrderBuilderInterface
 
     public function finalize(OrderInterface $order)
     {
+    }
+
+    protected function createNewItem()
+    {
+        return $this->itemRepository->createNew();
     }
 }

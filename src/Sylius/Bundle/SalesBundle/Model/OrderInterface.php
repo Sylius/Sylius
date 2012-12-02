@@ -12,14 +12,13 @@
 namespace Sylius\Bundle\SalesBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
 
 /**
  * Order interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends ResourceInterface
+interface OrderInterface
 {
     /**
      * Get order id.

@@ -20,10 +20,6 @@ use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
  */
 class ConfirmationListener
 {
-    public function __construct()
-    {
-    }
-
     /**
      * Catches placed order.
      * Sets confirmed to false and sends confirmation email to buyer.

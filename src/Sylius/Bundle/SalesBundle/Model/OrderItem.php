@@ -47,6 +47,8 @@ class OrderItem implements OrderItemInterface
     public function __construct()
     {
         $this->quantity = 1;
+        $this->unitPrice = 0;
+        $this->total = 0;
     }
 
     /**
