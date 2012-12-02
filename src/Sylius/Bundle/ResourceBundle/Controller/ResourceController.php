@@ -207,12 +207,12 @@ class ResourceController extends Controller
     protected function redirectTo($resource)
     {
         $route = $this->getRedirectRoute('show');
-        
+
         return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
     }
 
     protected function redirectToCollection()
-    {        
+    {
         $route = $this->getRedirectRoute('list');
 
         return $this->handleView(RouteRedirectView::create($route));
@@ -221,18 +221,18 @@ class ResourceController extends Controller
     protected function getRedirectRoute($name)
     {
         $config = $this->getConfiguration();
-    
+
         if (null !== $route = $config->getRedirect()) {
             return $route;
         }
-    
+
         return sprintf('%s_%s_%s',
                 $config->getBundlePrefix(),
                 $config->getResourceName(),
                 $name
-        );        
+        );
     }
-    
+
     protected function getManager()
     {
         return $this->getService('manager');
