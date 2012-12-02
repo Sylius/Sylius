@@ -12,11 +12,11 @@ use PHPSpec2\ObjectBehavior;
 class OrderBuilder extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface $itemManager
+     * @param Doctrine\Common\Persistence\ObjectRepository $itemRepository
      */
-    function let($itemManager)
+    function let($itemRepository)
     {
-        $this->beConstructedWith($itemManager);
+        $this->beConstructedWith($itemRepository);
     }
 
     function it_should_be_initializable()
