@@ -19,4 +19,3 @@ Authors
 -------
 
 See the list of [documentation contributors](http://github.com/Sylius/Documentation/contributors).
-

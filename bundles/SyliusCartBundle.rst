@@ -7,32 +7,25 @@ A generic solution for building carts inside Symfony2 applications, it does not 
 starting new project or you need to implement this feature for existing system - this bundle should be helpful.
 Currently only the Doctrine ORM driver is implemented, so we'll use it here as example.
 There are two main models inside the bundle, `Cart` and `CartItem`.
-The second one will be the most interesting for us, as the cart is created as a quite sensible default.
-Currently the bundle requires a bit of coding from you, but we're working on simplifying the adaption process.
+The second one will be the most interesting for us, as the Cart is pretty sensible default.
+Currently the bundle requires a bit of coding from you, but we're working on simplifying the integration process.
 
 Installation
 ------------
 
 We assume you're familiar with `Composer <http://packagist.org>`_.
-Add this to yours `composer.json`.
 
-.. code-block:: json
-
-    "require": {
-        "sylius/cart-bundle": "*"
-    },
-
-And install it by typing following command.
+Use this command to add it to your `composer.json` and download package.
 
 .. code-block:: bash
 
-    $ php composer.phar update sylius/cart-bundle
+    $ composer require sylius/cart-bundle:*
 
 Adding required bundles to kernel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now you need to enable the bundle inside kernel.
-If you're not using any other Sylius bundles, you also need to add `SyliusResourceBundle` to kernel.
+If you're not using any other Sylius bundles, you also need to add `SyliusResourceBundle` and its dependencies to kernel.
 Do not worry, it was automatically installed for you by Composer.
 
 .. code-block:: php
@@ -45,6 +38,8 @@ Do not worry, it was automatically installed for you by Composer.
     {
         $bundles = array(
             // ...
+            new FOS\RestBundle\FOSRestBundle();
+            new JMS\SerializerBundle\JMSSerializerBundle($this);
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),
         );
@@ -91,14 +86,13 @@ Configuration reference
 
     This part is not written yet.
 
-`phpspec2 <http://phpspec.net>`_ Specifications
------------------------------------------------
+`phpspec2 <http://phpspec.net>`_ examples
+-----------------------------------------
 
 .. code-block:: bash
 
-    $ wget http://getcomposer.org/composer.phar
-    $ php composer.phar install --dev
-    $ php bin/phpspec run
+    $ composer install --dev --prefer-dist
+    $ bin/phpspec run
 
 Working examples
 ----------------
