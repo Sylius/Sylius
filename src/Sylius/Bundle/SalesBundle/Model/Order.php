@@ -239,7 +239,7 @@ class Order implements OrderInterface
         foreach ($this->items as $item) {
             $item->calculateTotal();
 
-            $total = $item->getTotal();
+            $total += $item->getTotal();
         }
 
         $this->total = $total;
