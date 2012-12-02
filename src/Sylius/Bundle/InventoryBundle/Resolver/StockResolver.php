@@ -42,7 +42,7 @@ class StockResolver implements StockResolverInterface
      */
     public function isInStock(StockableInterface $stockable)
     {
-        if (!$this->backorders) {
+        if (false === $this->backorders) {
             return 0 < $stockable->getOnHand();
         }
 

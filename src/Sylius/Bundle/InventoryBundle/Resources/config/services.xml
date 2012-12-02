@@ -29,7 +29,6 @@
             <argument>%sylius_inventory.backorders%</argument>
         </service>
         <service id="sylius_inventory.resolver" class="%sylius_inventory.resolver.class%">
-            <argument type="service" id="sylius_inventory.manager.iu" />
             <argument>%sylius_inventory.backorders%</argument>
         </service>
     </services>
