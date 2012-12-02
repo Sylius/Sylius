@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
-
 /**
  * Interface for cart item model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface CartItemInterface extends ResourceInterface
+interface CartItemInterface
 {
     /**
      * Returns associated cart.

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Twig;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
 use Symfony\Component\Form\FormFactory;
 use Twig_Extension;
 use Twig_Function_Method;
@@ -34,9 +34,9 @@ class SyliusCartExtension extends Twig_Extension
     /**
      * Cart item manager.
      *
-     * @var ResourceManagerInterface
+     * @var ObjectRepository
      */
-    private $cartItemManager;
+    private $cartItemRepository;
 
     /**
      * Form factory.
@@ -48,14 +48,14 @@ class SyliusCartExtension extends Twig_Extension
     /**
      * Constructor.
      *
-     * @param CartProviderInterface    $cartProvider
-     * @param ResourceManagerInterface $cartItemManager
-     * @param FormFactory              $formFactory
+     * @param CartProviderInterface $cartProvider
+     * @param ObjectRepository         $cartItemRepository
+     * @param FormFactory           $formFactory
      */
-    public function __construct(CartProviderInterface $cartProvider, ResourceManagerInterface $cartItemManager, FormFactory $formFactory)
+    public function __construct(CartProviderInterface $cartProvider, ObjectRepository $cartItemRepository, FormFactory $formFactory)
     {
         $this->cartProvider = $cartProvider;
-        $this->cartItemManager = $cartItemManager;
+        $this->cartItemRepository = $cartItemRepository;
         $this->formFactory = $formFactory;
     }
 
@@ -89,7 +89,7 @@ class SyliusCartExtension extends Twig_Extension
      */
     public function getItemFormView(array $options = array())
     {
-        $item = $this->cartItemManager->create();
+        $item = $this->cartItemRepository->createNew();
         $form = $this->formFactory->create('sylius_cart_item', $item, $options);
 
         return $form->createView();

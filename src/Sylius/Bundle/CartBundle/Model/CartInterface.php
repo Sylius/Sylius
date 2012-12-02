@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CartBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
 
 /**
  * Cart model interface.
@@ -20,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface CartInterface extends ResourceInterface
+interface CartInterface
 {
     /**
      * Returns number of items in cart.

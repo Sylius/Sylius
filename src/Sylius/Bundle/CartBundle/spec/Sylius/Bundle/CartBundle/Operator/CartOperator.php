@@ -12,7 +12,7 @@ use PHPSpec2\ObjectBehavior;
 class CartOperator extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface $cartManager
+     * @param Doctrine\Common\Persistence\ObjectManager $cartManager
      */
     function let($cartManager)
     {

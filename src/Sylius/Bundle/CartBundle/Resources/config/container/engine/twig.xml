@@ -23,7 +23,7 @@
     <services>
         <service id="sylius_cart.twig" class="%sylius_cart.twig.class%">
             <argument type="service" id="sylius_cart.provider" />
-            <argument type="service" id="sylius_cart.manager.item" />
+            <argument type="service" id="sylius_cart.repository.item" />
             <argument type="service" id="form.factory" />
             <tag name="twig.extension" />
         </service>

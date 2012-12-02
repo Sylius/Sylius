@@ -42,7 +42,7 @@ class CartItemController extends ResourceController
     public function addAction(Request $request)
     {
         $cart = $this->getCurrentCart();
-        $emptyItem = $this->create();
+        $emptyItem = $this->createNew();
 
         $item = $this->getResolver()->resolve($emptyItem, $request);
 
