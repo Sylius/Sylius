@@ -18,6 +18,6 @@ use Sylius\Bundle\CartBundle\Model\CartItem as BaseCartItem;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class CartItem extends BaseCartItem
+class CartItem extends BaseCartItem
 {
 }

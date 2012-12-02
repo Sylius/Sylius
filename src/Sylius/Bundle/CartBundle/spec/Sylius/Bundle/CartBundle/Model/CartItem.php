@@ -16,10 +16,23 @@ class CartItem extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Model\CartItem');
     }
 
-    function it_should_have_proper_default_values()
+    function it_should_be_sylius_cart_item()
+    {
+        $this->shouldImplement('Sylius\Bundle\CartBundle\Model\CartItemInterface');
+    }
+
+    function it_should_have_quantity_equal_to_1_by_default()
     {
         $this->getQuantity()->shouldReturn(1);
+    }
+
+    function it_should_have_unit_price_equal_to_0_by_default()
+    {
         $this->getUnitPrice()->shouldReturn(0);
+    }
+
+    function it_should_have_total_equal_to_0_by_default()
+    {
         $this->getTotal()->shouldReturn(0);
     }
 

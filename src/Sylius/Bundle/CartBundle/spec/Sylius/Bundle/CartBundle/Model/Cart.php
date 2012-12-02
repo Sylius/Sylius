@@ -16,21 +16,46 @@ class Cart extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Model\Cart');
     }
 
-    function it_should_have_proper_default_values()
+    function it_should_be_sylius_cart()
+    {
+        $this->shouldImplement('Sylius\Bundle\CartBundle\Model\CartInterface');
+    }
+
+    function it_should_intitialize_items_collection_by_default()
     {
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
+    }
+
+    function it_should_have_0_total_items_by_default()
+    {
         $this->getTotalItems()->shouldReturn(0);
+    }
+
+    function it_should_have_total_equal_to_0_by_default()
+    {
         $this->getTotal()->shouldReturn(0);
+    }
+
+    function it_should_be_empty_by_default()
+    {
         $this->countItems()->shouldReturn(0);
         $this->shouldBeEmpty();
+    }
+
+    function it_should_not_be_locked_by_default()
+    {
         $this->shouldNotBeLocked();
-        $this->getExpiresAt()->shouldHaveType('DateTime');
+    }
+
+    function it_should_be_not_expired_by_default()
+    {
+        $this->shouldNotBeExpired();
     }
 
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
      */
-    function it_should_have_fluid_interface($item)
+    function it_should_have_fluid_interface_for_items_management($item)
     {
         $this->addItem($item)->shouldReturn($this);
         $this->removeItem($item)->shouldReturn($this);
@@ -49,7 +74,6 @@ class Cart extends ObjectBehavior
     function it_should_reset_total_items_to_0_if_change_is_bigger_than_current_amount()
     {
         $this->setTotalItems(5);
-
         $this->changeTotalItems(-10);
 
         $this->getTotalItems()->shouldReturn(0);
@@ -66,9 +90,9 @@ class Cart extends ObjectBehavior
         $item2->getTotal()->willReturn(450);
         $item3->getTotal()->willReturn(2.50);
 
-        $item1->equals($item2)->willReturn(false);
-        $item1->equals($item3)->willReturn(false);
-        $item2->equals($item3)->willReturn(false);
+        $item1->equals(ANY_ARGUMENT)->willReturn(false);
+        $item2->equals(ANY_ARGUMENT)->willReturn(false);
+        $item3->equals(ANY_ARGUMENT)->willReturn(false);
 
         $this
             ->addItem($item1)
@@ -79,27 +103,6 @@ class Cart extends ObjectBehavior
         $this->calculateTotal();
 
         $this->getTotal()->shouldReturn(752.49);
-    }
-
-    function it_should_be_empty_if_no_items_inside()
-    {
-        $this->shouldBeEmpty();
-    }
-
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
-     */
-    function it_should_add_and_remove_items_properly($item)
-    {
-        $this->hasItem($item)->shouldReturn(false);
-
-        $this->addItem($item);
-        $this->hasItem($item)->shouldReturn(true);
-
-        $this->removeItem($item);
-        $this->hasItem($item)->shouldReturn(false);
-
-        $this->shouldBeEmpty();
     }
 
     /**
@@ -121,9 +124,20 @@ class Cart extends ObjectBehavior
         $this->countItems()->shouldReturn(1);
     }
 
-    function it_should_be_not_expired_by_default()
+    /**
+     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
+     */
+    function it_should_add_and_remove_items_properly($item)
     {
-        $this->shouldNotBeExpired();
+        $this->hasItem($item)->shouldReturn(false);
+
+        $this->addItem($item);
+        $this->hasItem($item)->shouldReturn(true);
+
+        $this->removeItem($item);
+        $this->hasItem($item)->shouldReturn(false);
+
+        $this->shouldBeEmpty();
     }
 
     function it_should_be_expired_if_the_expiration_time_is_in_past()

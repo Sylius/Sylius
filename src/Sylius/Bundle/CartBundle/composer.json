@@ -22,10 +22,11 @@
 
         "doctrine/common":          "*",
         "sylius/resource-bundle":   "*",
-        "symfony/framework-bundle": ">=2.1.0,<2.2.0"
+        "symfony/framework-bundle": "~2.1"
     },
     "require-dev": {
-        "phpspec/phpspec2": "*"
+        "phpspec/phpspec2": "dev-develop",
+        "symfony/form":     "~2.1"
     },
     "config": {
         "bin-dir": "bin"

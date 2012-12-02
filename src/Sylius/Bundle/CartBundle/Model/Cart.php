@@ -183,7 +183,7 @@ class Cart implements CartInterface
         }
 
         foreach ($this->items as $existingItem) {
-            if ($existingItem->equals($item)) {
+            if ($item->equals($existingItem)) {
                 $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
 
                 return $this;
