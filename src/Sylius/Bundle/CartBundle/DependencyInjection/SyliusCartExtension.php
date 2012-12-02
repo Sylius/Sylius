@@ -35,37 +35,51 @@ class SyliusCartExtension extends Extension
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if (!in_array($config['driver'], SyliusCartBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
+        $driver = $config['driver'];
+        $engine = $config['engine'];
+
+        if (!in_array($driver, SyliusCartBundle::getSupportedDrivers())) {
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusCartBundle.', $config['driver']));
         }
 
-        if ('twig' !== $config['engine']) {
-            throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
+        if ('twig' !== $engine) {
+            throw new \InvalidArgumentException(sprintf('Templating engine "%s" is unsupported for by SyliusCartBundle.', $config['engine']));
         }
 
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
-        $loader->load(sprintf('engine/%s.xml', $config['engine']));
+        $loader->load(sprintf('driver/%s.xml', $driver));
+        $loader->load(sprintf('engine/%s.xml', $engine));
 
-        $container->setParameter('sylius_cart.driver', $config['driver']);
-        $container->setParameter('sylius_cart.engine', $config['engine']);
+        $container->setParameter('sylius_cart.driver', $driver);
+        $container->setParameter('sylius_cart.engine', $engine);
 
         $container->setAlias('sylius_cart.operator', $config['operator']);
+        $container->setAlias('sylius_cart.provider', $config['provider']);
         $container->setAlias('sylius_cart.resolver', $config['resolver']);
         $container->setAlias('sylius_cart.storage', $config['storage']);
 
-        $container->setParameter('sylius_cart.provider.class', $config['classes']['provider']);
+        $classes = $config['classes'];
+
+        $cartClasses = $classes['cart'];
+        $cartItemClasses = $classes['item'];
 
         $loader->load('services.xml');
 
-        $container->setParameter('sylius_cart.model.cart.class', $config['classes']['model']['cart']);
-        $container->setParameter('sylius_cart.model.item.class', $config['classes']['model']['item']);
+        $container->setParameter('sylius_cart.model.cart.class', $cartClasses['model']);
+        $container->setParameter('sylius_cart.controller.cart.class', $cartClasses['controller']);
+        $container->setParameter('sylius_cart.form.type.cart.class', $cartClasses['form']);
 
-        $container->setParameter('sylius_cart.controller.cart.class', $config['classes']['controller']['cart']);
-        $container->setParameter('sylius_cart.controller.item.class', $config['classes']['controller']['item']);
+        if (isset($cartClasses['repository'])) {
+            $container->setParameter('sylius_cart.repository.cart.class', $cartClasses['repository']);
+        }
 
-        $container->setParameter('sylius_cart.form.type.cart.class', $config['classes']['form']['type']['cart']);
-        $container->setParameter('sylius_cart.form.type.item.class', $config['classes']['form']['type']['item']);
+        $container->setParameter('sylius_cart.model.item.class', $cartItemClasses['model']);
+        $container->setParameter('sylius_cart.controller.item.class', $cartItemClasses['controller']);
+        $container->setParameter('sylius_cart.form.type.item.class', $cartItemClasses['form']);
+
+        if (isset($cartItemClasses['repository'])) {
+            $container->setParameter('sylius_cart.repository.item.class', $cartItemClasses['repository']);
+        }
     }
 }
