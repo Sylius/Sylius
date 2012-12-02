@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -20,9 +21,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SyliusInventoryBundle extends Bundle
 {
-    // Bundle driver list.
-    const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
-
     /**
      * Return array with currently supported drivers.
      *
@@ -31,7 +29,7 @@ class SyliusInventoryBundle extends Bundle
     static public function getSupportedDrivers()
     {
         return array(
-            self::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
     }
 }

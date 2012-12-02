@@ -70,4 +70,3 @@ class SyliusInventoryExtension extends Twig_Extension
         return 'sylius_inventory';
     }
 }
-

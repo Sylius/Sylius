@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitManagerInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
@@ -25,9 +27,16 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Inventory unit manager.
      *
-     * @var InventoryUnitManagerInterface
+     * @var ObjectManager
      */
-    protected $inventoryUnitManager;
+    protected $manager;
+
+    /**
+     * Inventory unit repository.
+     *
+     * @var ObjectRepository
+     */
+    protected $repository;
 
     /**
      * Backorders enabled?
@@ -39,13 +48,15 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Constructor.
      *
-     * @param InventoryUnitManagerInterface $inventoryUnitManager
-     * @param Boolean                       $backorders
+     * @param ObjectManager    $repository
+     * @param ObjectRepository $manager
+     * @param Boolean          $backorders
      */
-    public function __construct(InventoryUnitManagerInterface $inventoryUnitManager, $backorders = true)
+    public function __construct(ObjectManager $manager, ObjectRepository $repository, $backorders)
     {
-        $this->inventoryUnitManager = $inventoryUnitManager;
-        $backorders = (Boolean) $backorders;
+        $this->manager = $manager;
+        $this->repository = $repository;
+        $this->backorders = (Boolean) $backorders;
     }
 
     /**
@@ -53,18 +64,6 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function refresh(StockableInterface $stockable)
     {
-        // If we allow backorders.
-        if ($this->backorders) {
-            $onHand = $stockable->getOnHand();
-            $backorderedUnits = $this->inventoryUnitManager->countInventoryUnitsBy(array(
-                'stockableId' => $stockable->getStockableId(),
-                'state'       => InventoryUnitInterface::STATE_BACKORDERED
-            ));
-
-            if (0 < $onHand && 0 < $backorderedUnits) {
-                $this->fillBackorders($stockable, $onHand, $backorderedUnits);
-            }
-        }
     }
 
     /**
@@ -90,7 +89,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $onHand = $stockable->getOnHand();
 
-        if ($quantity > $onHand) {
+        if (false === $this->backorders && $quantity > $onHand) {
             return false;
         }
 
@@ -108,15 +107,14 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 1');
         }
 
-        $units = array();
+        $units = new ArrayCollection();
 
         for ($i = 0; $i < $quantity; $i++) {
-            $inventoryUnit = $this->inventoryUnitManager->createInventoryUnit($stockable, $state);
+            $inventoryUnit = $this->repository->createNew();
+            $inventoryUnit->setStockableId($stockable->getId());
             $inventoryUnit->setState($state);
 
-            $this->inventoryUnitManager->persistInventoryUnit($inventoryUnit);
-
-            $units[] = $inventoryUnit;
+            $units->add($inventoryUnit);
         }
 
         return $units;
@@ -127,7 +125,8 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function destroy(InventoryUnitInterface $inventoryUnit)
     {
-        $this->inventoryUnitManager->removeInventoryUnit($inventoryUnit);
+        $this->manager->remove($inventoryUnit);
+        $this->manager->flush($inventoryUnit);
     }
 
     /**

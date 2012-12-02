@@ -34,13 +34,6 @@ interface InventoryUnitInterface
     function getId();
 
     /**
-     * Set inventory unit id.
-     *
-     * @param mixed $id
-     */
-    function setId($id);
-
-    /**
      * Get related stockable object id.
      *
      * @return mixed

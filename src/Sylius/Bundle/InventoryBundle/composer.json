@@ -16,16 +16,18 @@
             "homepage": "https://github.com/Sylius/SyliusInventoryBundle/contributors"
         }
     ],
+    "minimum-stability:": "dev",
     "require": {
         "php": ">=5.3.2",
 
-        "symfony/symfony": ">=2.1"
+        "symfony/symfony":        "~2.1",
+        "sylius/resource-bundle": "*"
     },
     "require-dev": {
-        "doctrine/orm": "*"
+        "phpspec/phpspec2": "dev-develop"
     },
-    "suggest": {
-        "friendsofsymfony/rest-bundle": "*"
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\InventoryBundle": "" }

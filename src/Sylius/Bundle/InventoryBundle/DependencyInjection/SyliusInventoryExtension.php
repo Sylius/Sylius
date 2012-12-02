@@ -34,7 +34,7 @@ class SyliusInventoryExtension extends Extension
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         if (!in_array($config['engine'], array('twig'))) {
             throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
@@ -44,13 +44,12 @@ class SyliusInventoryExtension extends Extension
 
         $this->loadDriver($config['driver'], $config, $container, $loader);
 
-        $loader->load('resolvers.xml');
-        $loader->load('operators.xml');
+        $loader->load('services.xml');
 
         $container->setParameter('sylius_inventory.driver', $config['driver']);
         $container->setParameter('sylius_inventory.engine', $config['engine']);
 
-        $container->setParameter('sylius_inventory.tracking', $config['tracking']);
+        $container->setParameter('sylius_inventory.backorders', $config['backorders']);
         $container->setParameter('sylius_inventory.model.iu.class', $config['classes']['model']['iu']);
     }
 

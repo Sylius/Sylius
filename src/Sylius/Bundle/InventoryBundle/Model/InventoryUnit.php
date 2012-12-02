@@ -65,14 +65,6 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getStockableId()
     {
         return $this->stockableId;

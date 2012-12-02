@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
-                ->booleanNode('tracking')->defaultValue(true)->end()
+                ->booleanNode('backorders')->defaultTrue()->end()
             ->end();
 
         $this->addClassesSection($rootNode);

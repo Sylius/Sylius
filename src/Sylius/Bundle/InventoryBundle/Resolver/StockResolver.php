@@ -21,20 +21,20 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 class StockResolver implements StockResolverInterface
 {
     /**
-     * Full inventory tracking enabled?
+     * Backorders enabled?
      *
      * @var Boolean
      */
-    protected $tracking;
+    protected $backorders;
 
     /**
      * Constructor.
      *
-     * @param Boolean $tracking
+     * @param Boolean $backorders
      */
-    public function __construct($tracking = true)
+    public function __construct($backorders)
     {
-        $this->tracking = (Boolean) $tracking;
+        $this->backorders = (Boolean) $backorders;
     }
 
     /**
@@ -42,7 +42,7 @@ class StockResolver implements StockResolverInterface
      */
     public function isInStock(StockableInterface $stockable)
     {
-        if ($this->tracking) {
+        if (!$this->backorders) {
             return 0 < $stockable->getOnHand();
         }
 
