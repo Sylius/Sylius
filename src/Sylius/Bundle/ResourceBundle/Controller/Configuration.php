@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Configuration;
+namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Util\Pluralization;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Resource configuration.
+ * Resource controller configuration.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class ResourceConfiguration
+class Configuration
 {
     protected $bundlePrefix;
     protected $resourceName;

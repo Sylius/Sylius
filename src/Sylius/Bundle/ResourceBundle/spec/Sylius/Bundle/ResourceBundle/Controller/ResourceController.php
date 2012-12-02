@@ -38,6 +38,6 @@ class ResourceController extends ObjectBehavior
 
     function it_should_initialize_a_configuration()
     {
-        $this->getConfiguration()->shouldHaveType('Sylius\Bundle\ResourceBundle\Configuration\ResourceConfiguration');
+        $this->getConfiguration()->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
     }
 }

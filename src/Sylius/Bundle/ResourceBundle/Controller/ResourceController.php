@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use FOS\RestBundle\Util\Pluralization;
 use FOS\RestBundle\View\RouteRedirectView;
 use FOS\RestBundle\View\View;
-use Sylius\Bundle\ResourceBundle\Configuration\ResourceConfiguration;
-use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -31,7 +29,7 @@ class ResourceController extends Controller
 
     public function __construct($bundlePrefix, $resourceName, $templateNamespace)
     {
-        $this->configuration = new ResourceConfiguration($bundlePrefix, $resourceName, $templateNamespace);
+        $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace);
     }
 
     /**
@@ -102,11 +100,11 @@ class ResourceController extends Controller
     {
         $config = $this->getConfiguration();
 
-        $resource = $this->create();
+        $resource = $this->createNew();
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($resource);
+            $this->persistAndFlush($resource);
 
             return $this->redirectTo($resource);
         }
@@ -137,7 +135,7 @@ class ResourceController extends Controller
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($resource);
+            $this->persistAndFlush($resource);
 
             return $this->redirectTo($resource);
         }
@@ -168,7 +166,7 @@ class ResourceController extends Controller
         ;
 
         $resource = $this->findOr404($criteria);
-        $this->getManager()->remove($resource);
+        $this->removeAndFlush($resource);
 
         return $this->redirectToCollection();
     }
@@ -182,12 +180,15 @@ class ResourceController extends Controller
         return $this->configuration;
     }
 
-    protected function create()
+    protected function createNew()
     {
-        return $this->getManager()->create();
+        return $this
+            ->getRepository()
+            ->createNew()
+        ;
     }
 
-    protected function getForm(ResourceInterface $resource = null)
+    protected function getForm($resource = null)
     {
         return $this->createForm($this->getFormType(), $resource);
     }
@@ -203,7 +204,7 @@ class ResourceController extends Controller
         return sprintf('%s_%s', $config->getBundlePrefix(), $config->getResourceName());
     }
 
-    protected function redirectTo(ResourceInterface $resource)
+    protected function redirectTo($resource)
     {
         $redirect = $this->getConfiguration()->getRedirect();
         $route = $redirect ? $redirect : $this->getResourceRoute();
@@ -222,6 +223,22 @@ class ResourceController extends Controller
     protected function getManager()
     {
         return $this->getService('manager');
+    }
+
+    protected function persistAndFlush($resource)
+    {
+        $manager = $this->getManager();
+
+        $manager->persist($resource);
+        $manager->flush();
+    }
+
+    protected function removeAndFlush($resource)
+    {
+        $manager = $this->getManager();
+
+        $manager->remove($resource);
+        $manager->flush();
     }
 
     protected function getRepository()

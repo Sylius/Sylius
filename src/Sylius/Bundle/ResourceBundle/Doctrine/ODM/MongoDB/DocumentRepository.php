@@ -11,29 +11,33 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
+use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
 use Pagerfanta\Adapter\DoctrineODMMongoDBAdapter;
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Doctrine\ResourceRepository as BaseResourceRepository;
 
 /**
  * Doctrine ORM driver resource manager.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ResourceRepository extends BaseResourceRepository
+class DocumentRepository extends BaseDocumentRepository
 {
-    /**
-     * {@inheritdoc}
-     */
+    public function createNew()
+    {
+        $className = $this->getClassName();
+
+        return new $className;
+    }
+
     public function createPaginator(array $criteria = array(), array $sortBy = null)
     {
-        $queryBuilder = $this->objectRepository->createQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder();
         if (null !== $sortBy) {
             foreach ($sortBy as $property => $order) {
                 $queryBuilder->sort($property, $order);
             }
         }
-    
+
         return new Pagerfanta(new DoctrineODMMongoDBAdapter($queryBuilder));
     }
 }

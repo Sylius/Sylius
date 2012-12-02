@@ -11,24 +11,28 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
+use Doctrine\ORM\EntityRepository as BaseEntityRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Doctrine\ResourceRepository as BaseResourceRepository;
 
 /**
- * Doctrine ORM driver resource manager.
+ * Doctrine ORM driver entity manager.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ResourceRepository extends BaseResourceRepository
+class EntityRepository extends BaseEntityRepository
 {
-    /**
-     * {@inheritdoc}
-     */
+    public function createNew()
+    {
+        $className = $this->getClassName();
+
+        return new $className;
+    }
+
     public function createPaginator(array $criteria = array(), array $sortBy = null)
     {
         $alias = $this->getAlias();
-        $queryBuilder = $this->objectRepository->createQueryBuilder($alias);
+        $queryBuilder = $this->createQueryBuilder($alias);
 
         if (null !== $sortBy) {
             foreach ($sortBy as $property => $order) {
@@ -41,6 +45,6 @@ class ResourceRepository extends BaseResourceRepository
 
     protected function getAlias()
     {
-        return 'r';
+        return 'o';
     }
 }

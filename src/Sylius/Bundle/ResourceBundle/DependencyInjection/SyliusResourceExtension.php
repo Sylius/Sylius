@@ -34,22 +34,7 @@ class SyliusResourceExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $config);
 
-        if (0 < count($config['resources'])) {
-            $this->generateServices($config['resources'], $container);
-        }
-
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
         $loader->load('services.xml');
-    }
-
-    private function generateServices(array $resources, ContainerBuilder $container)
-    {
-        $generator = new ServiceGenerator($container);
-
-        foreach ($resources as $name => $resource) {
-            list($prefix, $resourceName) = explode('.', $name);
-
-            $generator->generate($prefix, $resourceName, $resource['driver'], $resource['class']);
-        }
     }
 }

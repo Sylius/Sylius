@@ -1,15 +1,15 @@
 <?php
 
-namespace spec\Sylius\Bundle\ResourceBundle\Configuration;
+namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Resource configuration.
+ * Resource controller configuration.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ResourceConfiguration extends ObjectBehavior
+class Configuration extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\HttpFoundation\Request $request
@@ -24,7 +24,7 @@ class ResourceConfiguration extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Configuration\ResourceConfiguration');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
     }
 
     function it_should_return_assigned_bundle_prefix()
