@@ -20,4 +20,16 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class CartRepository extends EntityRepository
 {
+    protected function getQueryBuilder()
+    {
+        return parent::getQueryBuilder()
+            ->select('c, i')
+            ->join($this->getAlias().'.items', 'i')
+        ;
+    }
+
+    protected function getAlias()
+    {
+        return 'c';
+    }
 }
