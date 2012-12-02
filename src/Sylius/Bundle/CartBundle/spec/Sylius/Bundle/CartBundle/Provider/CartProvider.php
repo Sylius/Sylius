@@ -12,9 +12,9 @@ use PHPSpec2\ObjectBehavior;
 class CartProvider extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface               $storage
-     * @param Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface       $manager
-     * @param Sylius\Bundle\ResourceBundle\Repository\ResourceRepositoryInterface $repository
+     * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface $storage
+     * @param Doctrine\Common\Persistence\ObjectManager             $manager
+     * @param Doctrine\Common\Persistence\ObjectRepository          $repository
      */
     function let($storage, $manager, $repository)
     {
@@ -57,10 +57,10 @@ class CartProvider extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      */
-    function it_should_create_new_cart_if_there_is_no_identifier_in_storage($storage, $manager, $cart)
+    function it_should_create_new_cart_if_there_is_no_identifier_in_storage($storage, $repository, $cart)
     {
         $storage->getCurrentCartIdentifier()->willReturn(null);
-        $manager->create()->willReturn($cart);
+        $repository->createNew()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -68,11 +68,11 @@ class CartProvider extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      */
-    function it_should_create_new_cart_if_identifier_is_wrong($storage, $manager, $repository, $cart)
+    function it_should_create_new_cart_if_identifier_is_wrong($storage, $repository, $cart)
     {
         $storage->getCurrentCartIdentifier()->willReturn(7);
         $repository->find(7)->shouldBeCalled()->willReturn(null);
-        $manager->create()->willReturn($cart);
+        $repository->createNew()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }

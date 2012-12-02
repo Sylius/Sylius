@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\Operator;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
-use Sylius\Bundle\ResourceBundle\Manager\ResourceManagerInterface;
 
 /**
  * Base class for cart operator.
@@ -27,16 +27,16 @@ class CartOperator implements CartOperatorInterface
     /**
      * Cart manager.
      *
-     * @var ResourceManagerInterface
+     * @var ObjectManager
      */
     protected $cartManager;
 
     /**
      * Constructor.
      *
-     * @param ResourceManagerInterface $cartManager;
+     * @param ObjectManager $cartManager;
      */
-    public function __construct(ResourceManagerInterface $cartManager)
+    public function __construct(ObjectManager $cartManager)
     {
         $this->cartManager = $cartManager;
     }
@@ -78,6 +78,7 @@ class CartOperator implements CartOperatorInterface
     public function clear(CartInterface $cart)
     {
         $this->cartManager->remove($cart);
+        $this->cartManager->flush();
 
         return $this;
     }
@@ -88,6 +89,7 @@ class CartOperator implements CartOperatorInterface
     public function save(CartInterface $cart)
     {
         $this->cartManager->persist($cart);
+        $this->cartManager->flush();
 
         return $this;
     }
