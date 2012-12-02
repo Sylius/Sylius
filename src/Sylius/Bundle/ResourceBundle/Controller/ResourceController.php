@@ -205,20 +205,33 @@ class ResourceController extends Controller
 
     protected function redirectTo(ResourceInterface $resource)
     {
-        $redirect = $this->getConfiguration()->getRedirect();
-        $route = $redirect ? $redirect : $this->getResourceRoute();
-
+        $route = $this->getRedirectRoute('show');
+        
         return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
     }
 
     protected function redirectToCollection()
-    {
-        $redirect = $this->getConfiguration()->getRedirect();
-        $route = $redirect ? $redirect : $this->getResourceCollectionRoute();
+    {        
+        $route = $this->getRedirectRoute('list');
 
         return $this->handleView(RouteRedirectView::create($route));
     }
 
+    protected function getRedirectRoute($name)
+    {
+        $config = $this->getConfiguration();
+    
+        if (null !== $route = $config->getRedirect()) {
+            return $route;
+        }
+    
+        return sprintf('%s_%s_%s',
+                $config->getBundlePrefix(),
+                $config->getResourceName(),
+                $name
+        );        
+    }
+    
     protected function getManager()
     {
         return $this->getService('manager');
@@ -237,7 +250,7 @@ class ResourceController extends Controller
     protected function findOr404(array $criteria)
     {
         if (!$resource = $this->getRepository()->findOneBy($criteria)) {
-            throw new NotFoundHttpException('Requested resource does not exist');
+            throw new NotFoundHttpException(sprintf('Requested %s does not exist', $this->getConfiguration()->getResourceName()));
         }
 
         return $resource;
