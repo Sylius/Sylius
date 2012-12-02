@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### 02-12-2012
+
+* Changed configuration schema.
+
 ### 01-11-2012
 
 * Bundle now uses [SyliusResourceBundle](http://github.com/Sylius/SyliusResourceBundle) for model persistence.
