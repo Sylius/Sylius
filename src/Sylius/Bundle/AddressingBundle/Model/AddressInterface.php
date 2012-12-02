@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\AddressingBundle\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\ResourceInterface;
-
 /**
  * Address model interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface AddressInterface extends ResourceInterface
+interface AddressInterface
 {
     /**
      * Get creation time.
