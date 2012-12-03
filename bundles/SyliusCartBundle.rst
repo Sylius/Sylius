@@ -375,35 +375,56 @@ Easiest way to override the view is placing it here ``app/Resources/SyliusCartBu
 
     You can use `the templates from our Sandbox app as inspiration <https://github.com/Sylius/Sylius-Sandbox/blob/master/sandbox/Resources/SyliusCartBundle/views/Cart/show.html.twig>`_.
 
-Usage guide
------------
+Routing and default actions
+---------------------------
 
-If the bundle is installed and configured, we're ready to go!
+Bundle provides quite simple default routing with several handy and common actions.
+You can see usage guide below.
+
+Cart summary page
+~~~~~~~~~~~~~~~~~
+
 To point user to the cart summary page, you can use the ``sylius_cart_show`` route.
-But your cart is empty yeah? Let's put some product there.
-In our simple example, we would only need to put following link on the product page, list or anywhere you want.
+It will render the page with the `cart` and `form` variables by default.
+
+The `cart` is the current cart and `form` is the view of cart form.
+
+Adding cart item
+~~~~~~~~~~~~~~~~
+
+In our simple example, we only need to add following link in the places where we need the "add to cart button".
 
 .. code-block:: html
 
     <a href="{{ path('sylius_cart_item_add', {'productId': product.id})}}">Add product to cart</a>
 
-Clicking this link will add the selected product to cart, simple!
-But what if you do not like the product and want to remove it?
-On cart summary page you have access to all cart items, so another simple link will do the job.
+Clicking this link will add the selected product to cart.
+
+Removing item
+~~~~~~~~~~~~~
+
+On cart summary page you have access to all cart items, so another simple link will allow user to remove items from cart.
 
 .. code-block:: html
 
     <a href="{{ path('sylius_cart_item_remove', {'id': item.id})}}">Remove from cart</a>
 
 Where `item` variable represents one of `cart.items` collection item.
-Clearing the cart is even simpler.
+
+Clearing the whole cart
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Clearing the cart is simple as clicking the following link.
 
 .. code-block:: html
 
     <a href="{{ path('sylius_cart_clear')}}">Clear cart</a>
 
-On cart summary page, you have also access to the cart form, if you want to save it, simply submit the form
-with following address.
+Basic cart update
+~~~~~~~~~~~~~~~~~
+
+On cart summary page, you have access to the cart form, if you want to save it, simply submit the form
+with following action.
 
 .. code-block:: html
 
@@ -411,7 +432,11 @@ with following address.
 
 You cart will be validated and saved if everything is alright.
 
+Using the services
+------------------
+
 When using the bundle, you have access to several handy services.
+You can use them to manipulate and manage the cart.
 
 .. note::
 
