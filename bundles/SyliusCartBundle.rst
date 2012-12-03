@@ -56,7 +56,7 @@ Now you have to create two basic classes, *Cart* and *CartItem* entities.
 
 .. code-block:: php
 
-<?php
+    <?php
 
     // src/App/AppBundle/Entity/Cart.php
     namespace App/AppBundle/Entity;
@@ -73,7 +73,7 @@ Next step is creating the item entity, let's do it now.
 
 .. code-block:: php
 
-<?php
+    <?php
 
     // src/App/AppBundle/Entity/CartItem.php
     namespace App/AppBundle/Entity;
@@ -90,7 +90,7 @@ You should create two mapping files in your *AppBundle*.
 
 .. code-block:: xml
 
-<?xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8"?>
 
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -139,7 +139,7 @@ We need to modify the *CartItem* entity and its mapping a bit.
 
 .. code-block:: php
 
-<?php
+    <?php
 
     // src/App/AppBundle/Entity/CartItem.php
     namespace App/AppBundle/Entity;
@@ -193,6 +193,8 @@ It's only requirement is to implement ``Sylius\Bundle\CartBundle\Resolver\ItemRe
 
 .. code-block:: php
 
+    <?php
+
     // src/App/AppBundle/Cart/ItemResolver.php
     namespace App\AppBundle\Cart;
 
@@ -212,6 +214,8 @@ Then we can register it in container. In our example we want to put *Product* in
 inject the entity manager to our resolver service.
 
 .. code-block:: php
+
+    <?php
 
     // src/App/AppBundle/Cart/ItemResolver.php
     namespace App\AppBundle\Cart;
@@ -244,6 +248,8 @@ Now, last thing to do is using this repository to find a product with id passed 
 This can be done in very different ways, but to keep it simple we'll use query parameter.
 
 .. code-block:: php
+
+    <?php
 
     // src/App/AppBundle/Cart/ItemResolver.php
     namespace App\AppBundle\Cart;
