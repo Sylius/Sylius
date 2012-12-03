@@ -110,7 +110,8 @@ class CartProvider implements CartProviderInterface
     /**
      * Gets cart by cart identifier.
      *
-     * @param  mixed              $identifier
+     * @param mixed $identifier
+     *
      * @return CartInterface|null
      */
     protected function getCartByIdentifier($identifier)

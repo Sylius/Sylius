@@ -39,11 +39,15 @@ class CartItem implements CartItemInterface
 
     /**
      * Unit price.
+     *
+     * @var float
      */
     protected $unitPrice;
 
     /**
      * Total value.
+     *
+     * @var float
      */
     protected $total;
 
@@ -101,31 +105,49 @@ class CartItem implements CartItemInterface
         $this->quantity = $quantity;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUnitPrice()
     {
         return $this->unitPrice;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUnitPrice($unitPrice)
     {
         $this->unitPrice = $unitPrice;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTotal()
     {
         return $this->total;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setTotal($total)
     {
         $this->total = $total;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateTotal()
     {
         $this->total = $this->quantity * $this->unitPrice;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function equals(CartItemInterface $cartItem)
     {
         return $this->getId() === $cartItem->getId();

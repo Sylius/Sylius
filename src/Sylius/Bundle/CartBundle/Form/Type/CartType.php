@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Cart form form.
+ * It is built from collection of cart items forms.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

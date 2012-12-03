@@ -16,14 +16,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Cart controller.
+ * Default cart controller.
+ * It extends the format agnostic resource controller.
+ * Resource controller class provides several actions and methods for creating
+ * pages and api for your cart system.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CartController extends ResourceController
 {
     /**
-     * Displays cart.
+     * Displays current cart summary page.
+     * The parameters includes the form created from `sylius_cart` type.
      *
      * @param Request
      *
@@ -41,7 +45,11 @@ class CartController extends ResourceController
     }
 
     /**
-     * Saves cart.
+     * This action is used to submit the cart summary form.
+     * If the form and updated cart are valid, it refreshes
+     * the cart data and saves it using the operator.
+     *
+     * If there are any errors, it displays the cart summary page.
      *
      * @param Request $request
      *
@@ -73,7 +81,8 @@ class CartController extends ResourceController
     }
 
     /**
-     * Clears cart.
+     * Clears the current cart using the operator.
+     * By default it redirects to cart summary page.
      *
      * @return Response
      */
@@ -90,7 +99,7 @@ class CartController extends ResourceController
     }
 
     /**
-     * Redirect to show cart action.
+     * Redirect to show summary page.
      *
      * @return RedirectResponse
      */
@@ -100,7 +109,7 @@ class CartController extends ResourceController
     }
 
     /**
-     * Cart show action route.
+     * Cart summary page route.
      *
      * @return string
      */
@@ -110,7 +119,7 @@ class CartController extends ResourceController
     }
 
     /**
-     * Get current cart.
+     * Get current cart instance.
      *
      * @return CartInterface
      */
@@ -123,7 +132,7 @@ class CartController extends ResourceController
     }
 
     /**
-     * Get cart provider.
+     * Get cart provider service.
      *
      * @return CartProviderInterface
      */
@@ -133,7 +142,7 @@ class CartController extends ResourceController
     }
 
     /**
-     * Get cart operator.
+     * Get cart operator service.
      *
      * @return CartOperatorInterface
      */

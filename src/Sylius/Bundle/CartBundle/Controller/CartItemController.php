@@ -34,6 +34,10 @@ class CartItemController extends ResourceController
 {
     /**
      * Adds item to cart.
+     * It uses the resolver service so you can populate the new item instance
+     * with proper values based on current request.
+     *
+     * It redirect to cart summary page by default.
      *
      * @param Request $request
      *
@@ -71,8 +75,12 @@ class CartItemController extends ResourceController
 
     /**
      * Removes item from cart.
+     * It takes an item id as an argument.
      *
-     * @param mixed   $id
+     * If the item is found and the current user cart contains that item,
+     * it will be removed and the cart - refreshed and saved.
+     *
+     * @param mixed $id
      *
      * @return Response
      */
@@ -100,7 +108,7 @@ class CartItemController extends ResourceController
     }
 
     /**
-     * Redirect to show cart action.
+     * Redirect to cart summary page.
      *
      * @return RedirectResponse
      */
@@ -110,7 +118,7 @@ class CartItemController extends ResourceController
     }
 
     /**
-     * Cart show action route.
+     * Cart summary page route.
      *
      * @return string
      */
@@ -120,7 +128,7 @@ class CartItemController extends ResourceController
     }
 
     /**
-     * Get current cart.
+     * Get current cart using the provider service.
      *
      * @return CartInterface
      */
@@ -154,6 +162,7 @@ class CartItemController extends ResourceController
 
     /**
      * Get cart item resolver.
+     * This service is used to build the new cart item instance.
      *
      * @return CartResolverInterface
      */

@@ -46,11 +46,15 @@ class Cart implements CartInterface
 
     /**
      * Total value.
+     *
+     * @var float
      */
     protected $total;
 
     /**
-     * Locked.
+     * Is cart locked?
+     * Locked carts should not be removed
+     * even if expired.
      *
      * @var Boolean
      */

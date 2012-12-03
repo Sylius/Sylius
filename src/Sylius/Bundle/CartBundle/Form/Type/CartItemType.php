@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Cart item type.
+ * It includes only quantity form field by default.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

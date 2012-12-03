@@ -20,16 +20,22 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class CartRepository extends EntityRepository
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()
-            ->select('c, i')
-            ->leftJoin($this->getAlias().'.items', 'i')
+            ->select('cart, item')
+            ->leftJoin($this->getAlias().'.items', 'item')
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getAlias()
     {
-        return 'c';
+        return 'cart';
     }
 }
