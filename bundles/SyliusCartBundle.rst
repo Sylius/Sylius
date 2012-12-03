@@ -12,20 +12,20 @@ Currently the bundle requires a bit of coding from you, but we're working on sim
 Installation
 ------------
 
-We assume you're familiar with `Composer <http://packagist.org>`_.
+We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use this command to add it to your `composer.json` and download package.
+Use following command to add the bundle to your `composer.json` and download package.
 
 .. code-block:: bash
 
     $ composer require sylius/cart-bundle:*
 
-Adding required bundles to kernel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adding required bundles to the kernel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now you need to enable the bundle inside kernel.
-If you're not using any other Sylius bundles, you also need to add `SyliusResourceBundle` and its dependencies to kernel.
-Do not worry, it was automatically installed for you by Composer.
+First, you need to enable the bundle inside the kernel.
+If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
 
@@ -44,15 +44,18 @@ Do not worry, it was automatically installed for you by Composer.
         );
     }
 
-Creating your own entities
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creating your entities
+~~~~~~~~~~~~~~~~~~~~~~
 
-Now is the part we're trying to eliminate, but for now - you need to do this manually.
-You need to create two entities in your application namespace, it doesn't matter where you'll put it.
-We think that keeping the app-specific bundle structure as simple as its possible is a good practice, so
-let's assume you have your *AppBundle* registered under ``App\Bundle\AppBundle`` namespace.
+.. note::
 
-Now you have to create two basic classes, *Cart* and *CartItem* entities.
+    We're trying to eliminate or simplify this part of setup, until that happens - you need to do this manually.
+
+You have to create two entities, living inside your application code.
+We think that **keeping the app-specific bundle structure simple** is a good practice, so
+let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle`` namespace.
+
+We need two classes, *Cart* and *CartItem*.
 
 .. code-block:: php
 
@@ -68,8 +71,9 @@ Now you have to create two basic classes, *Cart* and *CartItem* entities.
     }
 
 Notice that we're using a base cart entity from the Sylius bundle.
-And that would be it for *Cart* model, at least for simple usage.
-Next step is creating the item entity, let's do it now.
+
+That would be all for *Cart* model, at least for simple use cases.
+Next step requires creating the item entity, let's do this now.
 
 .. code-block:: php
 
@@ -84,9 +88,8 @@ Next step is creating the item entity, let's do it now.
     {
     }
 
-That's good start!
-Now we need to define simple mapping for those entities, because they extend only Doctrine mapped superclasses.
-You should create two mapping files in your *AppBundle*.
+Now we need to define simple mapping for those entities, because they only extend the Doctrine mapped super classes.
+You should create two mapping files in your ``AppBundle``, put them inside the doctrine mapping directory ``src/App/AppBundle/Resource/config/doctrine/*.orm.xml``.
 
 .. code-block:: xml
 
@@ -110,8 +113,8 @@ You should create two mapping files in your *AppBundle*.
 
     </doctrine-mapping>
 
-This makes our recently created *Cart* class an entity, and adds a relation to items. Now we need to
-take care of the opposite side of this relationship.
+This makes our recently created *Cart* class an entity, and adds a relation to items.
+We need to take care of the opposite side of this relationship.
 
 .. code-block:: xml
 
@@ -133,9 +136,8 @@ take care of the opposite side of this relationship.
 
     </doctrine-mapping>
 
-Great! But whats an cart item without some kind of "product" or any other thing you could put in cart?!
-Let's assume you have another *Product* entity, which represents your main merchandise in webshop.
-We need to modify the *CartItem* entity and its mapping a bit.
+Let's assume you have *Product* entity, which represents your main merchandise in webshop.
+We need to modify the *CartItem* entity and its mapping a bit, so it allows us to put product inside cart item.
 
 .. code-block:: php
 
@@ -162,7 +164,7 @@ We need to modify the *CartItem* entity and its mapping a bit.
     }
 
 We added a "product" property, simple getter and setter.
-Last to do in entities, is to map the *Product* to *CartItem*.
+We have to also map the *Product* to *CartItem*, let's create this relation in mapping files.
 
 .. code-block:: xml
 
@@ -187,9 +189,11 @@ Last to do in entities, is to map the *Product* to *CartItem*.
 
     </doctrine-mapping>
 
-And that would be all about entities. Now we need to create really simple service.
-The **ItemResolver**, which will be used in controller to resolve the new cart item based on user request.
-It's only requirement is to implement ``Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface``.
+And that would be all about entities. 
+
+Now we need to create really simple service.
+The **ItemResolver**, which will be used by controller to resolve the new cart item - based on user request information.
+Its only requirement is to implement ``Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface``.
 
 .. code-block:: php
 
@@ -209,8 +213,10 @@ It's only requirement is to implement ``Sylius\Bundle\CartBundle\Resolver\ItemRe
         }
     }
 
-The class is in place, well done. Now we need to do some more coding, so the service is actually doing something.
-Then we can register it in container. In our example we want to put *Product* in our cart, so let's
+The class is in place, well done. 
+
+We need to do some more coding, so the service is actually doing its job.
+In our example we want to put *Product* in our cart, so we should
 inject the entity manager to our resolver service.
 
 .. code-block:: php
@@ -244,8 +250,9 @@ inject the entity manager to our resolver service.
     }
 
 We also added a simple method ``getProductRepository()`` to keep the resolving code cleaner.
-Now, last thing to do is using this repository to find a product with id passed by user via request.
-This can be done in very different ways, but to keep it simple we'll use query parameter.
+
+We must use this repository to find a product with id, given by the user via request.
+This can be done in various ways, but to keep the example simple - we'll use query parameter.
 
 .. code-block:: php
 
@@ -270,7 +277,7 @@ This can be done in very different ways, but to keep it simple we'll use query p
         public function resolve(CartItemInterface $item, Request $request)
         {
             $productId = $request->query->get('productId');
-            
+
             // If no product id given, or product not found, we return false to display an error.
             if (!$productId || !$product = $this->getProductRepository()->find($productId)) {
                 return false;
@@ -290,7 +297,7 @@ This can be done in very different ways, but to keep it simple we'll use query p
         }
     }
 
-Let's register our brand new service in container. We'll use XML as example but you could use any other format.
+Register our brand new service in container. We'll use XML as example, but you are free to pick any other format.
 
 .. code-block:: xml
 
@@ -308,10 +315,12 @@ Let's register our brand new service in container. We'll use XML as example but 
         </services>
     </container>
 
-This would be it for coding, now some configuration...
+Bundle requires also simple configuration...
 
 Container configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+Put this configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
@@ -320,12 +329,14 @@ Container configuration
         resolver: app.cart_item_resolver # The id of our newly created service.
         classes:
             cart:
-                model: App\AppBundle\Entity\Cart
+                model: App\AppBundle\Entity\Cart # Our cart entity.
             item:
-                model: App\AppBundle\Entity\CartItem
+                model: App\AppBundle\Entity\CartItem # The item entity.
 
 Importing routing configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Import default routing from your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
@@ -336,7 +347,7 @@ Importing routing configuration
 Updating database schema
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Remember to update your database schema!
+Remember to update your database schema.
 
 For "**doctrine/orm**" driver run the following command.
 
@@ -344,22 +355,22 @@ For "**doctrine/orm**" driver run the following command.
 
     $ php app/console doctrine:schema:update --force
 
-This should be done only in dev environment, we recommend using Doctrine migrations, to safely update your schema.
+.. note::
+
+    This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
 
 Templates
 ~~~~~~~~~
 
 We think that providing a sensible default template is really difficult, especially that cart summary is not the simplest page.
-This is the reason why we do not currently provide them, but if you have an idea for a good starter template, let us know!
-Or even better, open a Pull Request on GitHub, all contributions are welcome!
+This is the reason why we do not currently include any, but if you have an idea for a good starter template, let us know!
 
 The bundle requires only the ``show.html`` template for cart summary page.
-Easiest way to override is to put it here *app/Resources/SyliusCartBundle/views/Cart/show.html.twig*.
+Easiest way to override the view is placing it here ``app/Resources/SyliusCartBundle/views/Cart/show.html.twig``.
 
-.. info::
+.. note::
 
     You can use `the templates from our Sandbox app as inspiration <https://github.com/Sylius/Sylius-Sandbox/blob/master/sandbox/Resources/SyliusCartBundle/views/Cart/show.html.twig>`_.
-
 
 Usage guide
 -----------
@@ -399,7 +410,7 @@ You cart will be validated and saved if everything is alright.
 
 When using the bundle, you have access to several handy services.
 
-.. node::
+.. note::
 
     This part is not written yet.
 
