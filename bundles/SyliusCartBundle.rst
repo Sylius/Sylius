@@ -438,9 +438,193 @@ Using the services
 When using the bundle, you have access to several handy services.
 You can use them to manipulate and manage the cart.
 
+Managers and Repositories
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. note::
 
-    This part is not written yet.
+    Sylius uses ``Doctrine\Common\Persistence`` interfaces.
+
+You have access to following services which are used to manage and retrieve resources.
+
+.. code-block:: php
+
+    <?php
+
+    // ...
+    public function saveAction(Request $request)
+    {
+        // ObjectManager which is capable of managing the Cart resource.
+        // For *doctrine/orm* driver it will be EntityManager.
+        $this->get('sylius_cart.manager.cart'); 
+
+        // ObjectRepository for the Cart resource, it extends the base EntityRepository.
+        // You can use it like usual entity repository in project.
+        $this->get('sylius_cart.repository.cart'); 
+
+        // Same pair for CartItem resource.
+        $this->get('sylius_cart.manager.item');
+        $this->get('sylius_cart.repository.item');
+
+        // Those repositories have some handy default methods, for example...
+        $item = $itemRepository->createNew();
+    }
+
+This set of default services is shared across almost all Sylius bundles, but this is just a convention.
+You're interacting with them like you usualy do in your project - with your own entities.
+
+Provider, Operator and Resolver
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are also other 2 important services for you.
+
+.. code-block:: php
+
+    <?php
+
+    // ...
+    public function saveAction(Request $request)
+    {
+        $provider = $this->get('sylius_cart.provider'); // Implements the CartProviderInterface.
+
+        $currentCart = $provider->getCart();
+        $provider->setCart($customCart);
+        $provider->abandonCart();
+    }
+
+You use provider to obtain the current user cart, if there is none, a new one is created and saved.
+The ``->setCart()`` method also allows you to replace the current cart.
+Abandoning the cart with ``->abandonCart()`` is resetting the current cart, a new one will be created on next ``->getCart()`` call.
+This is useful for example when after completing an order, you want to start with a brand new and clean cart.
+
+.. code-block:: php
+
+    <?php
+
+    // ...
+    public function addItemAction(Request $request)
+    {
+        // ...
+
+        $provider = $this->get('sylius_cart.provider');
+        $operator = $this->get('sylius_cart.operator'); // Implements the CartOperatorInterface.
+
+        $cart = $provider->getCart();
+
+        $operator
+            ->addItem($cart, $newItem)
+            ->removeItem($cart, $existingItem)
+            ->refresh($cart) // Forces cart to refresh all its data, recalculate totals...
+            ->save($cart) // Save and flush the cart.
+        ;
+
+        $operator->clear($cart); // Clears the cart.
+    }
+
+Operator is used to perform basic actions on the given cart.
+It is available as service, you can override its class or even whole service to modify the default logic.
+
+.. code-block:: php
+
+    <?php
+
+    // ...
+    public function addItemAction(Request $request)
+    {
+        $resolver = $this->get('sylius_cart.resolver');
+        $item = $this->resolve($this->createNew(), $request);
+    }
+
+The resolver is used to create a new item based on user request.
+
+.. note::
+
+    A more advanced example of resolver is available `in Sylius Sandbox application on GitHub <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Resolver/ItemResolver.php>`_.
+
+Usage in templates
+------------------
+
+When using Twig as your template engine, you have access to 2 handy functions.
+
+The ``sylius_cart_get`` function uses provider to get the current cart.
+
+.. code-block:: jinja
+
+    {% set cart = sylius_cart_get() %}
+
+    Current cart totals: {{ cart.total }} for {{ cart.totalItems }} items!
+
+The ``sylius_cart_form`` returns the form view for the CartItem form. It allows you to easily build more complex actions for
+adding items to cart. In this simple example we allow to provide the quantity of item. You'll need to process this form in your resolver.
+
+.. code-block:: jinja
+
+    {% set form = sylius_cart_form({'product': product}) %} {# You can pass options as an argument. #}
+
+    <form action="{{ path('sylius_cart_item_add', {'productId': product.id}) }}" method="post">
+        {{ form_row(form.quantity)}}
+        <input type="submit" value="Add to cart">
+    </form>
+
+.. note::
+
+     An example with multiple variants of this form `can be found in Sylius Sandbox app <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Form/Type/CartItemType.php>`_.
+     It allows for selecting a variation/options/quantity of product. It also adapts to the product type.
+
+The Cart and CartItem
+---------------------
+
+Here is a quick reference of what the default models can do for you.
+
+Cart
+~~~~
+
+You can access the cart total value using the ``->getTotal()`` method. The denormalized number of cart items is available via ``->getTotalItems()`` method.
+Recalculation of totals can happen by calling ``->calculateTotal()`` method, using the simplest possible math. It will also update the item totals.
+The carts have their expiration time - ``->getExpiresAt()`` returns that time and ``->incrementExpiresAt()`` sets it to +3 hours from now by default.
+The collection of items (Implementing the ``Doctrine\Common\Collections`` interface) can be obtained using the ``->getItems()``.
+
+CartItem
+~~~~~~~~
+
+Just like for cart, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()`` 
+Each item also can calculate its total, using the quantity (``->getQuantity()``) and the unit price.
+It also has a very important method called ``->equals(CartItemInterface $item)``, which decides whether the items are "same" or not.
+If they are, it should return *true*, *false* otherwise. This is taken into account when adding item to cart.
+**If the added item is equal to existing one, their quantities are summed, but no new item is added to cart**.
+By default, it compares the ids, but for our example we would prefer to check the products. We can easily modify our *CartItem* entity to do that correctly.
+
+.. code-block:: php
+
+    <?php
+
+    // src/App/AppBundle/Entity/CartItem.php
+    namespace App/AppBundle/Entity;
+
+    use Sylius\Bundle\CartBundle\Entity\CartItem as BaseCartItem;
+    use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+
+    class CartItem extends BaseCartItem
+    {
+        private $product;
+
+        public function getProduct()
+        {
+            return $this->product;
+        }
+
+        public function setProduct(Product $product)
+        {
+            $this->product = $product;
+        }
+
+        public function equals(CartItemInterface $item)
+        {
+            return $this->product === $item->getProduct();
+        }
+    }
+
+Now if user tries to add same product twice or more, it will just sum the quantities, instead of adding duplicates to cart.
 
 Configuration reference
 -----------------------
