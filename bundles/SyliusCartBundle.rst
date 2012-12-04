@@ -447,6 +447,9 @@ Managers and Repositories
 
 You have access to following services which are used to manage and retrieve resources.
 
+This set of default services is shared across almost all Sylius bundles, but this is just a convention.
+You're interacting with them like you usually do with own entities in your project.
+
 .. code-block:: php
 
     <?php
@@ -470,13 +473,15 @@ You have access to following services which are used to manage and retrieve reso
         $item = $itemRepository->createNew();
     }
 
-This set of default services is shared across almost all Sylius bundles, but this is just a convention.
-You're interacting with them like you usualy do in your project - with your own entities.
-
 Provider, Operator and Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There are also other 2 important services for you.
+There are also 3 more services for you.
+
+You use provider to obtain the current user cart, if there is none, a new one is created and saved.
+The ``->setCart()`` method also allows you to replace the current cart.
+``->abandonCart()`` is resetting the current cart, a new one will be created on next ``->getCart()`` call.
+This is useful, for example, when after completing an order you want to start with a brand new and clean cart.
 
 .. code-block:: php
 
@@ -492,10 +497,8 @@ There are also other 2 important services for you.
         $provider->abandonCart();
     }
 
-You use provider to obtain the current user cart, if there is none, a new one is created and saved.
-The ``->setCart()`` method also allows you to replace the current cart.
-Abandoning the cart with ``->abandonCart()`` is resetting the current cart, a new one will be created on next ``->getCart()`` call.
-This is useful for example when after completing an order, you want to start with a brand new and clean cart.
+Operator is used to perform basic actions on the given cart.
+It is available as service, you can override its class or even whole service to modify the default logic.
 
 .. code-block:: php
 
@@ -521,8 +524,7 @@ This is useful for example when after completing an order, you want to start wit
         $operator->clear($cart); // Clears the cart.
     }
 
-Operator is used to perform basic actions on the given cart.
-It is available as service, you can override its class or even whole service to modify the default logic.
+The resolver is used to create a new item based on user request.
 
 .. code-block:: php
 
@@ -535,14 +537,12 @@ It is available as service, you can override its class or even whole service to 
         $item = $this->resolve($this->createNew(), $request);
     }
 
-The resolver is used to create a new item based on user request.
-
 .. note::
 
-    A more advanced example of resolver is available `in Sylius Sandbox application on GitHub <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Resolver/ItemResolver.php>`_.
+    A more advanced example of resolver implementation is available `in Sylius Sandbox application on GitHub <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Resolver/ItemResolver.php>`_.
 
-Usage in templates
-------------------
+In templates
+------------
 
 When using Twig as your template engine, you have access to 2 handy functions.
 
@@ -624,7 +624,7 @@ By default, it compares the ids, but for our example we would prefer to check th
         }
     }
 
-Now if user tries to add same product twice or more, it will just sum the quantities, instead of adding duplicates to cart.
+If user tries to add same product twice or more, it will just sum the quantities, instead of adding duplicates to cart.
 
 Configuration reference
 -----------------------
