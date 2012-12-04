@@ -78,7 +78,7 @@ class CartOperator implements CartOperatorInterface
     public function clear(CartInterface $cart)
     {
         $this->cartManager->remove($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
 
         return $this;
     }
@@ -89,7 +89,7 @@ class CartOperator implements CartOperatorInterface
     public function save(CartInterface $cart)
     {
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
 
         return $this;
     }

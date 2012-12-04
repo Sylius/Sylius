@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,10 +49,12 @@ class CartItemController extends ResourceController
         $cart = $this->getCurrentCart();
         $emptyItem = $this->createNew();
 
-        $item = $this->getResolver()->resolve($emptyItem, $request);
+        try {
+            $item = $this->getResolver()->resolve($emptyItem, $request);
 
-        if (!$item) {
-            $this->setFlash('error', 'sylius_cart.flashes.add.error');
+        } catch (ItemResolvingException $exception) {
+            $errorMessage = $exception->getMessage() ?: 'sylius_cart.flashes.add.error';
+            $this->setFlash('error', $errorMessage);
 
             return $this->redirectToCart();
         }
