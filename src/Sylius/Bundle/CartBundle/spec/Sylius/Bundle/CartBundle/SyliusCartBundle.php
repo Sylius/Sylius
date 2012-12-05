@@ -16,7 +16,7 @@ class SyliusCartBundle extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\SyliusCartBundle');
     }
 
-    function it_should_be_symfony_bundle()
+    function it_should_be_a_bundle()
     {
         $this->shouldHaveType('Symfony\Component\HttpKernel\Bundle\Bundle');
     }

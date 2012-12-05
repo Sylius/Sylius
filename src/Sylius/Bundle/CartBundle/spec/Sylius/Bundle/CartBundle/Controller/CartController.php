@@ -21,7 +21,7 @@ class CartController extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Controller\CartController');
     }
 
-    function it_should_be_symfony_controller()
+    function it_should_be_a_controller()
     {
         $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\Controller');
     }
