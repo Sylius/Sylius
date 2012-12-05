@@ -6,7 +6,7 @@ If you have found a bug, please create an issue for correct repository.
 
 Before submitting a bug:
 
- * Double-check the official `documentation <http://sylius.org/docs/index.html>`_ to see if you're not misusing the
+ * Double-check the official `documentation <http://sylius.readthedocs.org/en/latest/index.html>`_ to see if you're not misusing the
    bundle or Sylius;
 
  * Ask for assistance on the `users mailing list <http://groups.google.com/group/sylius>`_, or on the
