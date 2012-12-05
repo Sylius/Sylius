@@ -1,8 +1,5 @@
-SyliusCartBundle
-================
-
 Installation
-------------
+============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
@@ -13,7 +10,7 @@ Use following command to add the bundle to your `composer.json` and download pac
     $ composer require sylius/cart-bundle:*
 
 Adding required bundles to the kernel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 First, you need to enable the bundle inside the kernel.
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
@@ -37,7 +34,7 @@ Don't worry, everything was automatically installed via Composer.
     }
 
 Creating your entities
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 .. note::
 
@@ -311,7 +308,7 @@ Register our brand new service in container. We'll use XML as example, but you a
 Bundle requires also simple configuration...
 
 Container configuration
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 Put this configuration inside your ``app/config/config.yml``.
 
@@ -327,7 +324,7 @@ Put this configuration inside your ``app/config/config.yml``.
                 model: App\AppBundle\Entity\CartItem # The item entity.
 
 Importing routing configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 Import default routing from your ``app/config/routing.yml``.
 
@@ -338,7 +335,7 @@ Import default routing from your ``app/config/routing.yml``.
         prefix: /cart
 
 Updating database schema
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 Remember to update your database schema.
 
@@ -353,7 +350,7 @@ For "**doctrine/orm**" driver run the following command.
     This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
 
 Templates
-~~~~~~~~~
+---------
 
 We think that providing a sensible default template is really difficult, especially that cart summary is not the simplest page.
 This is the reason why we do not currently include any, but if you have an idea for a good starter template, let us know!

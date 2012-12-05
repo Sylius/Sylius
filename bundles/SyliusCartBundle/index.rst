@@ -13,11 +13,12 @@ There are also 3 main services, **Operator**, **Provider** and **ItemResolver**.
 You'll get familiar with them in further parts of this documentation.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
+   :numbered:
 
-    bundles/SyliusCartBundle/installation
-    bundles/SyliusCartBundle/models
-    bundles/SyliusCartBundle/actions
-    bundles/SyliusCartBundle/services
-    bundles/SyliusCartBundle/templating
-    bundles/SyliusCartBundle/summary
+   installation
+   models
+   actions
+   services
+   templating
+   summary

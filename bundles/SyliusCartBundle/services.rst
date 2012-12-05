@@ -1,14 +1,11 @@
-SyliusCartBundle
-================
-
 Using the services
-------------------
+==================
 
 When using the bundle, you have access to several handy services.
 You can use them to manipulate and manage the cart.
 
 Managers and Repositories
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 .. note::
 
@@ -43,7 +40,7 @@ You're interacting with them like you usually do with own entities in your proje
     }
 
 Provider, Operator and Resolver
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 There are also 3 more services for you.
 

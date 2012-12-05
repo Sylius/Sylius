@@ -1,8 +1,5 @@
-SyliusCartBundle
-================
-
 In templates
-------------
+============
 
 When using Twig as your template engine, you have access to 2 handy functions.
 

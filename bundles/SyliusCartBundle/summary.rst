@@ -1,5 +1,5 @@
-SyliusCartBundle
-================
+Summary
+=======
 
 Configuration reference
 -----------------------
