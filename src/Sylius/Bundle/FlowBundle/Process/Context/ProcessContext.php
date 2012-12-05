@@ -126,7 +126,7 @@ class ProcessContext implements ProcessContextInterface
         }
 
         $this->initialized = true;
-
+        
         return $this;
     }
 
@@ -143,15 +143,15 @@ class ProcessContext implements ProcessContextInterface
             return false;
         }
 
-        foreach ($this->process->getOrderedSteps() as $step) {
-            if ($this->currentStep === $step) {
-                return true;
-            }
-
-            if (ProcessContextInterface::STEP_STATE_COMPLETED !== $this->getState($step)) {
-                return false;
-            }
-        }
+//        foreach ($this->process->getOrderedSteps() as $step) {
+//            if ($this->currentStep === $step) {
+//                return true;
+//            }
+//
+//            if (ProcessContextInterface::STEP_STATE_COMPLETED !== $this->getState($step)) {
+//                return false;
+//            }
+//        }
 
         return true;
     }
@@ -219,11 +219,15 @@ class ProcessContext implements ProcessContextInterface
     /**
      * {@inheritdoc}
      */
-    public function complete()
+    public function complete($stepName = null)
     {
         $this->assertInitialized();
 
         $this->setState($this->currentStep, ProcessContextInterface::STEP_STATE_COMPLETED);
+
+        if (null != $stepName) {
+            $this->nextStep = $this->process->getStepByName($stepName);
+        }
     }
 
     /**

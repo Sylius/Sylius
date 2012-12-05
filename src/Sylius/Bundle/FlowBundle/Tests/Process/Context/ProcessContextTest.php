@@ -292,6 +292,35 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function shouldCompleteProcessWithStep()
+    {
+        $storage = new TestArrayStorage();
+
+        $steps = array(
+            $this->getStep('step1'),
+            $this->getStep('step2'),
+            $this->getStep('step3')
+        );
+        $process = $this->getProcess($steps);
+        $process->expects($this->once())
+            ->method('getStepByName')
+            ->with('step3')
+            ->will($this->returnValue($steps[2]));
+
+        $context = new ProcessContext($storage);
+        $context->initialize($process, $steps[0]);
+        $this->assertFalse($context->isCompleted());
+        $context->complete('step3');
+
+        $this->assertEquals(ProcessContextInterface::STEP_STATE_COMPLETED, $storage->get('_state.step1'));
+        $this->assertEquals(ProcessContextInterface::STEP_STATE_PENDING, $storage->get('_state.step2'));
+        $this->assertTrue($context->isCompleted());
+        $this->assertSame($steps[2], $context->getNextStep());
+    }
+
+    /**
+     * @test
      * @dataProvider getProgressData
      */
     public function shouldCalculateProgress($steps, $index, $expectedProgress)

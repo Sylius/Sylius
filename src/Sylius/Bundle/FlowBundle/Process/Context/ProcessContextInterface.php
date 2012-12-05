@@ -80,7 +80,7 @@ interface ProcessContextInterface
     /**
      * Complete current step.
      */
-    function complete();
+    function complete($stepAlias = null);
 
     /**
      * Is current step completed.
