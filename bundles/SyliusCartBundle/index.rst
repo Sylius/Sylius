@@ -12,11 +12,12 @@ Currently the bundle requires a bit of coding from you, but we're working on sim
 There are also 3 main services, **Operator**, **Provider** and **ItemResolver**.
 You'll get familiar with them in further parts of this documentation.
 
-* **Chapters**:
+.. toctree::
+   :maxdepth: 2
 
-  * :doc:`Installation </bundles/SyliusCartBundle/installation>`
-  * :doc:`Models </bundles/SyliusCartBundle/models>`
-  * :doc:`Actions </bundles/SyliusCartBundle/actions>`
-  * :doc:`Services </bundles/SyliusCartBundle/services>`
-  * :doc:`In templates </bundles/SyliusCartBundle/templating>`
-  * :doc:`Summary </bundles/SyliusCartBundle/summary>`
+    bundles/SyliusCartBundle/installation
+    bundles/SyliusCartBundle/models
+    bundles/SyliusCartBundle/actions
+    bundles/SyliusCartBundle/services
+    bundles/SyliusCartBundle/templating
+    bundles/SyliusCartBundle/summary
