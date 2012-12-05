@@ -266,6 +266,7 @@ This can be done in various ways, but to keep the example simple - we'll use que
 
     use Sylius\Bundle\CartBundle\Model\CartItemRequest;
     use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
+    use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
     use Symfony\Component\HttpFoundation\Request;
 
     class ItemResolver implements ItemResolverInterface
@@ -281,9 +282,9 @@ This can be done in various ways, but to keep the example simple - we'll use que
         {
             $productId = $request->query->get('productId');
 
-            // If no product id given, or product not found, we return false to display an error.
+            // If no product id given, or product not found, we throw exception with nice message.
             if (!$productId || !$product = $this->getProductRepository()->find($productId)) {
-                return false;
+                throw new ItemResolvingException('Requested product was not found');
             }
 
             // Assign the product to the item and define the unit price.
