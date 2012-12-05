@@ -20,5 +20,4 @@ Bundles reference
 
    bundles/SyliusCartBundle
    bundles/SyliusCategorizerBundle
-   bundles/SyliusAssortmentBundle
    bundles/SyliusBloggerBundle
