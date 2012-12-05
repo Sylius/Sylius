@@ -11,13 +11,13 @@ Project
 
    contributing/index
 
-Bundles reference
------------------
+Bundles
+-------
 
 .. toctree::
    :maxdepth: 2
    :numbered:
 
-   bundles/SyliusCartBundle
+   bundles/SyliusCartBundle/index
    bundles/SyliusCategorizerBundle
    bundles/SyliusBloggerBundle
