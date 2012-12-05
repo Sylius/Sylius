@@ -3,7 +3,7 @@
 namespace spec\Sylius\Bundle\CartBundle\Storage;
 
 use PHPSpec2\ObjectBehavior;
-use Sylius\Bundle\CartBundle\Storage\SessionCartStorage as SessionCartStorageObject;
+use Sylius\Bundle\CartBundle\Storage\SessionCartStorage as SessionCartStorageClass;
 
 /**
  * Session cart storage spec.
@@ -25,9 +25,14 @@ class SessionCartStorage extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Storage\SessionCartStorage');
     }
 
+    function it_should_be_Sylius_cart_storage()
+    {
+        $this->shouldImplement('Sylius\Bundle\CartBundle\Storage\CartStorageInterface');
+    }
+
     function it_should_retrieve_cart_id_via_session($session)
     {
-        $session->get(SessionCartStorageObject::KEY)->willReturn(7);
+        $session->get(SessionCartStorageClass::KEY)->willReturn(7);
 
         $this->getCurrentCartIdentifier()->shouldReturn(7);
     }
@@ -38,14 +43,14 @@ class SessionCartStorage extends ObjectBehavior
     function it_should_set_cart_id_via_session($session, $cart)
     {
         $cart->getId()->willReturn(3);
-        $session->set(SessionCartStorageObject::KEY, 3)->shouldBeCalled();
+        $session->set(SessionCartStorageClass::KEY, 3)->shouldBeCalled();
 
         $this->setCurrentCartIdentifier($cart);
     }
 
     function it_should_remove_the_saved_id_from_session_on_reset($session)
     {
-        $session->remove(SessionCartStorageObject::KEY)->shouldBeCalled();
+        $session->remove(SessionCartStorageClass::KEY)->shouldBeCalled();
 
         $this->resetCurrentCartIdentifier();
     }

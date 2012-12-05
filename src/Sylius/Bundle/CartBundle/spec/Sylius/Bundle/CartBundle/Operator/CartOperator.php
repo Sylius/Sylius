@@ -24,6 +24,11 @@ class CartOperator extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Operator\CartOperator');
     }
 
+    function it_should_be_Sylius_cart_operator()
+    {
+        $this->shouldImplement('Sylius\Bundle\CartBundle\Operator\CartOperatorInterface');
+    }
+
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
@@ -66,5 +71,37 @@ class CartOperator extends ObjectBehavior
         $cartManager->persist($cart)->shouldBeCalled();
 
         $this->save($cart);
+    }
+
+    /**
+     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
+     */
+    function it_should_flush_after_persisting_cart_on_save($cartManager, $cart)
+    {
+        $cartManager->persist($cart)->shouldBeCalled();
+        $cartManager->flush()->shouldBeCalled();
+
+        $this->save($cart);
+    }
+
+    /**
+     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
+     */
+    function it_should_remove_cart_on_clear($cartManager, $cart)
+    {
+        $cartManager->remove($cart)->shouldBeCalled();
+
+        $this->clear($cart);
+    }
+
+    /**
+     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
+     */
+    function it_should_flush_after_removing_cart_on_clear($cartManager, $cart)
+    {
+        $cartManager->remove($cart)->shouldBeCalled();
+        $cartManager->flush()->shouldBeCalled();
+
+        $this->clear($cart);
     }
 }

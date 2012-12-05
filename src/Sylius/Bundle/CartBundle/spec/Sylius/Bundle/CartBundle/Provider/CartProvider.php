@@ -26,21 +26,9 @@ class CartProvider extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Provider\CartProvider');
     }
 
-    function it_should_reset_current_cart_identifier_when_abandoning_cart($storage)
+    function it_should_be_Sylius_cart_provider()
     {
-        $storage->resetCurrentCartIdentifier()->shouldBeCalled();
-
-        $this->abandonCart();
-    }
-
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
-     */
-    function it_should_set_current_cart_identifier_when_setting_cart($storage, $cart)
-    {
-        $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
-
-        $this->setCart($cart);
+        $this->shouldImplement('Sylius\Bundle\CartBundle\Provider\CartProviderInterface');
     }
 
     /**
@@ -75,5 +63,22 @@ class CartProvider extends ObjectBehavior
         $repository->createNew()->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
+    }
+
+    function it_should_reset_current_cart_identifier_when_abandoning_cart($storage)
+    {
+        $storage->resetCurrentCartIdentifier()->shouldBeCalled();
+
+        $this->abandonCart();
+    }
+
+    /**
+     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
+     */
+    function it_should_set_current_cart_identifier_when_setting_cart($storage, $cart)
+    {
+        $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
+
+        $this->setCart($cart);
     }
 }

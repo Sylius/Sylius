@@ -16,8 +16,13 @@ class CartItem extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Entity\CartItem');
     }
 
-    function it_should_be_sylius_cart_item()
+    function it_should_be_Sylius_cart_item()
     {
         $this->shouldImplement('Sylius\Bundle\CartBundle\Model\CartItemInterface');
+    }
+
+    function it_should_extend_Sylius_cart_item_model()
+    {
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\Model\CartItem');
     }
 }
