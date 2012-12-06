@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SalesBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\ServiceGenerator;
 use Sylius\Bundle\SalesBundle\SyliusSalesBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -45,21 +44,32 @@ class SyliusSalesExtension extends Extension
 
         $loader->load(sprintf('driver/%s.xml', $driver));
 
-        $container->setParameter('sylius_sales.driver', $config['driver']);
+        $container->setParameter('sylius_sales.driver', $driver);
         $container->setParameter('sylius_sales.engine', $config['engine']);
 
         if (isset($config['builder'])) {
             $container->setAlias('sylius_sales.builder', $config['builder']);
         }
 
-        $container->setParameter('sylius_sales.model.order.class', $config['classes']['model']['order']);
-        $container->setParameter('sylius_sales.model.item.class', $config['classes']['model']['item']);
+        $orderClasses = $config['classes']['order'];
 
-        $container->setParameter('sylius_sales.controller.order.class', $config['classes']['controller']['order']);
-        $container->setParameter('sylius_sales.controller.item.class', $config['classes']['controller']['item']);
+        $container->setParameter('sylius_sales.model.order.class', $orderClasses['model']);
+        $container->setParameter('sylius_sales.controller.order.class', $orderClasses['controller']);
+        $container->setParameter('sylius_sales.form.type.order.class', $orderClasses['form']);
 
-        $container->setParameter('sylius_sales.form.type.order.class', $config['classes']['form']['type']['order']);
-        $container->setParameter('sylius_sales.form.type.item.class', $config['classes']['form']['type']['item']);
+        if (isset($orderClasses['repository'])) {
+            $container->setParameter('sylius_sales.repository.order.class', $orderClasses['repository']);
+        }
+
+        $itemClasses = $config['classes']['item'];
+
+        $container->setParameter('sylius_sales.model.item.class', $itemClasses['model']);
+        $container->setParameter('sylius_sales.controller.item.class', $itemClasses['controller']);
+        $container->setParameter('sylius_sales.form.type.item.class', $itemClasses['form']);
+
+        if (isset($itemClasses['repository'])) {
+            $container->setParameter('sylius_sales.repository.item.class', $itemClasses['repository']);
+        }
 
         $loader->load('services.xml');
     }
