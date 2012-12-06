@@ -26,7 +26,13 @@
         "white-october/pagerfanta-bundle": "*"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop"
+        "doctrine/orm":         "~2.3",
+        "doctrine/mongodb-odm": "*",
+        "phpspec/phpspec2":     "dev-develop"
+    },
+    "suggest": {
+        "doctrine/orm":         "~2.3",
+        "doctrine/mongodb-odm": "*"
     },
     "config": {
         "bin-dir": "bin"
