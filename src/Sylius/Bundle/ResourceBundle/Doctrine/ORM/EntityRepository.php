@@ -133,6 +133,6 @@ class EntityRepository extends BaseEntityRepository
 
     protected function getAlias()
     {
-        return lcfirst(substr(strrchr($this->getClassName(), '\\'), 1));
+        return 'o';
     }
 }
