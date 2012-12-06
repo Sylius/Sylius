@@ -22,7 +22,7 @@
 
         "symfony/framework-bundle":        "~2.1",
         "friendsofsymfony/rest-bundle":    "*",
-        "doctrine/common":                 "~2.1",
+        "doctrine/common":                 "*",
         "white-october/pagerfanta-bundle": "*"
     },
     "require-dev": {
