@@ -17,7 +17,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
 /**
- * Doctrine ORM driver entity manager.
+ * Doctrine ORM driver entity repository.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -45,7 +45,7 @@ class EntityRepository extends BaseEntityRepository
         return $this
             ->getCollectionQueryBuilder()
             ->getQuery()
-            ->execute()
+            ->getResult()
         ;
     }
 
@@ -78,7 +78,7 @@ class EntityRepository extends BaseEntityRepository
 
         return $queryBuilder
             ->getQuery()
-            ->execute()
+            ->getResult()
         ;
     }
 
@@ -133,6 +133,6 @@ class EntityRepository extends BaseEntityRepository
 
     protected function getAlias()
     {
-        return 'o';
+        return lcfirst(substr(strrchr($this->getClassName(), '\\'), 1));
     }
 }

@@ -12,7 +12,7 @@ use PHPSpec2\ObjectBehavior;
 class Configuration extends ObjectBehavior
 {
     /**
-     * @param Symfony\Component\HttpFoundation\Request $request
+     * @param Symfony\Component\HttpFoundation\Request      $request
      * @param Symfony\Component\HttpFoundation\ParameterBag $attributes
      */
     function let($request, $attributes)
