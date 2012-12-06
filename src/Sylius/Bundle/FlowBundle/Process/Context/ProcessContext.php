@@ -14,6 +14,8 @@ namespace Sylius\Bundle\FlowBundle\Process\Context;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
+
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -119,14 +121,10 @@ class ProcessContext implements ProcessContextInterface
 
                 $this->calculateProgress($index);
             }
-
-            if (null === $this->getState($step)) {
-                $this->setState($step, ProcessContextInterface::STEP_STATE_PENDING);
-            }
         }
 
         $this->initialized = true;
-        
+
         return $this;
     }
 
@@ -143,17 +141,8 @@ class ProcessContext implements ProcessContextInterface
             return false;
         }
 
-//        foreach ($this->process->getOrderedSteps() as $step) {
-//            if ($this->currentStep === $step) {
-//                return true;
-//            }
-//
-//            if (ProcessContextInterface::STEP_STATE_COMPLETED !== $this->getState($step)) {
-//                return false;
-//            }
-//        }
-
-        return true;
+        $history = $this->getStepHistory();
+        return count($history)==0 || in_array($this->currentStep->getName(), $history);
     }
 
     /**
@@ -223,7 +212,7 @@ class ProcessContext implements ProcessContextInterface
     {
         $this->assertInitialized();
 
-        $this->setState($this->currentStep, ProcessContextInterface::STEP_STATE_COMPLETED);
+        $this->completed = true;
 
         if (null != $stepName) {
             $this->nextStep = $this->process->getStepByName($stepName);
@@ -237,7 +226,7 @@ class ProcessContext implements ProcessContextInterface
     {
         $this->assertInitialized();
 
-        return ProcessContextInterface::STEP_STATE_COMPLETED === $this->getState($this->currentStep);
+        return $this->completed;
     }
 
     /**
@@ -292,27 +281,35 @@ class ProcessContext implements ProcessContextInterface
         return $this->progress;
     }
 
-    /**
-     * Get step state.
-     *
-     * @param StepInterface $step
-     *
-     * @return integer
-     */
-    protected function getState(StepInterface $step)
+    public function getStepHistory()
     {
-        return $this->storage->get(sprintf('_state.%s', $step->getName()));
+        return $this->storage->get('history', array());
     }
 
-    /**
-     * Set step state.
-     *
-     * @param StepInterface $step
-     * @param integer       $state
-     */
-    protected function setState(StepInterface $step, $state)
+    public function setStepHistory(array $history)
     {
-        $this->storage->set(sprintf('_state.%s', $step->getName()), $state);
+        $this->storage->set('history', $history);
+    }
+
+    public function rewindHistory()
+    {
+        $history = $this->getStepHistory();
+
+        while ($top = end($history))
+        {
+            if ($top!=$this->currentStep->getName()) {
+                array_pop($history);
+            }
+            else {
+                break;
+            }
+        }
+
+        if (count($history)==0) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->setStepHistory($history);
     }
 
     /**

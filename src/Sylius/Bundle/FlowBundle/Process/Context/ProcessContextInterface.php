@@ -23,9 +23,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface ProcessContextInterface
 {
-    // Step states.
-    const STEP_STATE_PENDING   = 0;
-    const STEP_STATE_COMPLETED = 1;
 
     /**
      * Initialize context with process and current step.
@@ -135,4 +132,10 @@ interface ProcessContextInterface
      * @return integer
      */
     function getProgress();
+
+    function getStepHistory();
+
+    function setStepHistory(array $history);
+
+    function rewindHistory();
 }

@@ -99,6 +99,7 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getStepByName($stepName);
 
         $this->context->initialize($process, $step);
+        $this->context->rewindHistory();
 
         if (!$this->context->isValid()) {
             throw new NotFoundHttpException();
@@ -116,6 +117,7 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getStepByName($stepName);
 
         $this->context->initialize($process, $step);
+        $this->context->rewindHistory();
 
         if (!$this->context->isValid()) {
             throw new NotFoundHttpException();
@@ -172,6 +174,9 @@ class Coordinator implements CoordinatorInterface
      */
     protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step)
     {
+        $history = $this->context->getStepHistory();
+        array_push($history, $step->getName());
+        $this->context->setStepHistory($history);
 
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array(

@@ -15,6 +15,7 @@ use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContext;
 
+
 /**
  * ProcessContext test.
  *
@@ -199,8 +200,20 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException RuntimeException
      */
-    public function shouldNotBeValidWhenProcessValidatorIsNotValid()
+    public function shouldNotBeValidWhenNotInitialized()
+    {
+        $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
+
+        $context->isValid();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldNotBeValidWhenProcessValidatorIsNotValid(
+    )
     {
         $steps = array(
             $this->getStep('step1'),
@@ -222,7 +235,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldNotBeValidWhenOneOfPreviousStepIsCompeleted()
+    public function shouldNotBeValidWhenStepIsNotInHistory()
     {
         $steps = array(
             $this->getStep('step1'),
@@ -231,7 +244,8 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $process = $this->getProcess($steps);
 
         $storage = new TestArrayStorage();
-        $storage->set('_status.step1', ProcessContextInterface::STEP_STATE_COMPLETED);
+        $history = array('step1');
+        $storage->set('history', $history);
 
         $context = new ProcessContext($storage);
         $context->initialize($process, $steps[1]);
@@ -242,7 +256,54 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeValid()
+    public function shouldRewindHistory()
+    {
+        $steps = array(
+            $this->getStep('step1'),
+            $this->getStep('step2'),
+        );
+        $process = $this->getProcess($steps);
+
+        $storage = new TestArrayStorage();
+        $history = array('step1', 'step2');
+        $storage->set('history', $history);
+
+        $context = new ProcessContext($storage);
+        $context->initialize($process, $steps[0]);
+
+        $this->assertTrue($context->isValid());
+        $context->rewindHistory();
+        $this->assertCount(1, $storage->get('history'));
+        $this->assertTrue(in_array('step1', $storage->get('history')));
+        $this->assertFalse(in_array('step2', $storage->get('history')));
+    }
+
+    /**
+     * @test
+     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function shouldFailToRewindHistory()
+    {
+        $steps = array(
+            $this->getStep('step1'),
+            $this->getStep('step2'),
+        );
+        $process = $this->getProcess($steps);
+
+        $storage = new TestArrayStorage();
+        $history = array('stepX', 'stepY');
+        $storage->set('history', $history);
+
+        $context = new ProcessContext($storage);
+        $context->initialize($process, $steps[0]);
+
+        $context->rewindHistory();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeValidWithEmptyHistory()
     {
         $steps = array(
             $this->getStep('step1'),
@@ -250,7 +311,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         );
         $process = $this->getProcess($steps);
 
-        $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
+        $context = new ProcessContext(new TestArrayStorage());
         $context->initialize($process, $steps[0]);
 
         $this->assertTrue($context->isValid());
@@ -259,7 +320,27 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeValidWithoutSteps()
+    public function shouldBeValidWithHistory()
+    {
+        $steps = array(
+            $this->getStep('step1'),
+            $this->getStep('step2')
+        );
+        $process = $this->getProcess($steps);
+
+        $storage = new TestArrayStorage();
+        $history = array('step1', 'step2');
+        $storage->set('history', $history);
+        $context = new ProcessContext($storage);
+        $context->initialize($process, $steps[0]);
+
+        $this->assertTrue($context->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeValidWithoutHistory()
     {
         $process = $this->getProcess(array());
 
@@ -286,7 +367,6 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($context->isCompleted());
         $context->complete();
 
-        $this->assertEquals(ProcessContextInterface::STEP_STATE_COMPLETED, $storage->get('_state.step1'));
         $this->assertTrue($context->isCompleted());
     }
 
@@ -313,8 +393,6 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($context->isCompleted());
         $context->complete('step3');
 
-        $this->assertEquals(ProcessContextInterface::STEP_STATE_COMPLETED, $storage->get('_state.step1'));
-        $this->assertEquals(ProcessContextInterface::STEP_STATE_PENDING, $storage->get('_state.step2'));
         $this->assertTrue($context->isCompleted());
         $this->assertSame($steps[2], $context->getNextStep());
     }

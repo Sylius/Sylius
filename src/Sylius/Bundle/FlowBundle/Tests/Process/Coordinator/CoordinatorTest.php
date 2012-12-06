@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Coordinator;
 
 use Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator;
+use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
 
 /**
  * Coordinator test.
@@ -20,6 +21,7 @@ use Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator;
  */
 class CoordinatorTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var CoordinatorInterface */
     private $coordinator;
 
     public function setUp()
@@ -39,6 +41,12 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
+        $processContext->expects($this->any())
+            ->method('getStepHistory')
+            ->will($this->returnValue(array()));
+        $processContext->expects($this->any())
+            ->method('rewindHistory')
+            ->will($this->returnValue(null));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
     }
@@ -80,6 +88,9 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
+        $processContext->expects($this->any())
+            ->method('getStepHistory')
+            ->will($this->returnValue(array()));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -253,6 +264,9 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext->expects($this->any())
             ->method('isCompleted')
             ->will($this->returnValue(true));
+        $processContext->expects($this->any())
+            ->method('getStepHistory')
+            ->will($this->returnValue(array()));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
