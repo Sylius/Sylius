@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+### v0.1.0
+
+* First development release.
+* Introduced ItemResolvingException.
+* More complete set of [phpspec2](http://phpspec.net) examples.
+
 ### 02-12-2012
 
 * Changed configuration schema.
