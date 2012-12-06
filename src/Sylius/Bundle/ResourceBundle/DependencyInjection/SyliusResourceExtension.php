@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\ResourceServicesFactory;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -36,5 +37,20 @@ class SyliusResourceExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
         $loader->load('services.xml');
+
+        if (isset($config['resources'])) {
+            $this->createResourceServices($config['resources'], $container);
+        }
+    }
+
+    private function createResourceServices(array $configs, ContainerBuilder $container)
+    {
+        $factory = new ResourceServicesFactory($container);
+
+        foreach ($configs as $name => $config) {
+            list($prefix, $resourceName) = explode('.', $name);
+
+            $factory->create($prefix, $resourceName, $config['driver'], $config['classes']);
+        }
     }
 }
