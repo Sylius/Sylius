@@ -16,10 +16,23 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-    </parameters>
-
     <services>
+        <service id="sylius_taxonomies.controller.taxonomy" class="%sylius_taxonomies.controller.taxonomy.class%">
+            <argument>sylius_taxonomies</argument>
+            <argument>taxonomy</argument>
+            <argument>SyliusTaxonomiesBundle:Taxonomy</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius_taxonomies.controller.taxon" class="%sylius_taxonomies.controller.taxon.class%">
+            <argument>sylius_taxonomies</argument>
+            <argument>taxon</argument>
+            <argument>SyliusTaxonomiesBundle:Taxon</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
     </services>
 
 </container>
