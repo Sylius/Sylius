@@ -27,6 +27,17 @@ class TaxonType extends ObjectBehavior
     }
 
     /**
+     * @param Symfony\Component\Form\FormBuilder $builder
+     */
+    function it_should_build_form_with_name_and_permalink_fields($builder)
+    {
+        $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+
+        $this->buildForm($builder, array());
+    }
+
+    /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
     function it_should_define_assigned_data_class($resolver)
