@@ -1,0 +1,39 @@
+{
+    "name": "sylius/taxonomies-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible categorization system for Symfony2.",
+    "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusTaxonomiesBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+
+        "doctrine/common":          "~2.3",
+        "sylius/resource-bundle":   "*",
+        "symfony/framework-bundle": "~2.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "dev-develop",
+        "symfony/form":     "~2.1",
+        "twig/twig":        "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\TaxonomiesBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/TaxonomiesBundle"
+}
