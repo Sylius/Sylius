@@ -23,7 +23,7 @@
 
     <services>
         <service id="sylius_sales.manager.order" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_sales.repository.order" class="%sylius_sales.repository.item.class%">
+        <service id="sylius_sales.repository.order" class="%sylius_sales.repository.order.class%">
             <argument type="service" id="sylius_sales.manager.order" />
             <argument type="service">
                 <service
