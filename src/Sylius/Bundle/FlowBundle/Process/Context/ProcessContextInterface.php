@@ -133,9 +133,32 @@ interface ProcessContextInterface
      */
     function getProgress();
 
+    /**
+     * The array contains the history of all the step names.
+     *
+     * @return array()
+     */
     function getStepHistory();
 
+    /**
+     * Set a new history of step names.
+     *
+     * @param array $history
+     */
     function setStepHistory(array $history);
 
+    /**
+     * Add the given name to the history of step names.
+     *
+     * @param $stepName string
+     */
+    function addStepToHistory($stepName);
+
+    /**
+     * Goes back from the end fo the histroy and deletes all step names until the current one is found.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If the step name is not found in the history.
+     */
     function rewindHistory();
+
 }

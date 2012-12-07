@@ -174,9 +174,7 @@ class Coordinator implements CoordinatorInterface
      */
     protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step)
     {
-        $history = $this->context->getStepHistory();
-        array_push($history, $step->getName());
-        $this->context->setStepHistory($history);
+        $this->context->addStepToHistory($step->getName());
 
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array(

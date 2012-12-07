@@ -15,7 +15,6 @@ use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContext;
 
-
 /**
  * ProcessContext test.
  *

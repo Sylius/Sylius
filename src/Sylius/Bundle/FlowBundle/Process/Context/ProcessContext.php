@@ -142,6 +142,7 @@ class ProcessContext implements ProcessContextInterface
         }
 
         $history = $this->getStepHistory();
+
         return count($history)==0 || in_array($this->currentStep->getName(), $history);
     }
 
@@ -281,16 +282,35 @@ class ProcessContext implements ProcessContextInterface
         return $this->progress;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStepHistory()
     {
         return $this->storage->get('history', array());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setStepHistory(array $history)
     {
         $this->storage->set('history', $history);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function addStepToHistory($stepName)
+    {
+        $history = $this->context->getStepHistory();
+        array_push($history, $stepName);
+        $this->context->setStepHistory($history);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rewindHistory()
     {
         $history = $this->getStepHistory();
