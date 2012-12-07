@@ -44,6 +44,10 @@ class TaxonType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder
+            ->add('name', 'text')
+            ->add('permalink', 'text')
+        ;
     }
 
     /**

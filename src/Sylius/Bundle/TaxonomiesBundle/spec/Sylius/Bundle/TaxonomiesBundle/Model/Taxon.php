@@ -100,37 +100,27 @@ class Taxon extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxonA
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxonB
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function it_should_generate_a_permalink_by_linking_its_slug_and_parent_taxon_slugs($taxonA, $taxonB)
+    function it_should_generate_a_permalink_by_linking_its_slug_and_parent_taxon_slugs($taxon)
     {
-        $taxonB->getParent()->willReturn($taxonA);
-
-        $taxonA->getSlug()->willReturn('clothing');
-        $taxonB->getSlug()->willReturn('accessories');
+        $taxon->getPermalink()->willReturn('clothing/accessories');
 
         $this->setSlug('scarves-and-shawls');
-        $this->setParent($taxonA);
+        $this->setParent($taxon);
 
         $this->getPermalink()->shouldReturn('clothing/accessories/scarves-and-shawls');
     }
 
     /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxonA
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxonB
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function it_should_generate_a_permalink_only_when_its_null($taxonA, $taxonB)
+    function it_should_generate_a_permalink_only_when_its_null($taxon)
     {
         $this->setPermalink('super-promotion-slug');
 
-        $taxonB->getParent()->willReturn($taxonA);
-
-        $taxonA->getSlug()->willReturn('clothing');
-        $taxonB->getSlug()->willReturn('accessories');
-
         $this->setSlug('scarves-and-shawls');
-        $this->setParent($taxonA);
+        $this->setParent($taxon);
 
         $this->getPermalink()->shouldReturn('super-promotion-slug');
     }

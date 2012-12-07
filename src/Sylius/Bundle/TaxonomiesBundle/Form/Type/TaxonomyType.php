@@ -44,6 +44,7 @@ class TaxonomyType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('name', 'text');
     }
 
     /**

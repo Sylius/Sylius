@@ -31,8 +31,8 @@ class TaxonType extends ObjectBehavior
      */
     function it_should_build_form_with_name_and_permalink_fields($builder)
     {
-        $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
-        $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('name', 'text')->shouldBeCalled()->willReturn($builder);
+        $builder->add('permalink', 'text')->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }
