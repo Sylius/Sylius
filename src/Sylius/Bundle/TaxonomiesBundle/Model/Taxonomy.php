@@ -24,6 +24,10 @@ class Taxonomy implements TaxonomyInterface
     protected $root;
     protected $taxons;
 
+    public function getId()
+    {
+    }
+
     public function getRoot()
     {
     }

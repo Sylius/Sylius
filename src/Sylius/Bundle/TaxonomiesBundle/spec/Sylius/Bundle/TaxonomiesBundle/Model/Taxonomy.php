@@ -21,6 +21,11 @@ class Taxonomy extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface');
     }
 
+    function it_should_have_no_id_by_default()
+    {
+        $this->getId()->shouldReturn(null);
+    }
+
     function it_should_not_have_root_by_defualt()
     {
         $this->getRoot()->shouldReturn(null);

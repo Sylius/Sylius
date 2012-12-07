@@ -18,4 +18,54 @@ namespace Sylius\Bundle\TaxonomiesBundle\Model;
  */
 class Taxon implements TaxonInterface
 {
+    private $id;
+    private $taxonomy;
+    private $parent;
+    private $name;
+    private $slug;
+    private $permalink;
+
+    public function getId()
+    {
+    }
+
+    public function getTaxonomy()
+    {
+    }
+
+    public function setTaxonomy(TaxonomyInterface $taxonomy)
+    {
+    }
+
+    public function getParent()
+    {
+    }
+
+    public function setParent(TaxonInterface $parent)
+    {
+    }
+
+    public function getName()
+    {
+    }
+
+    public function setName($name)
+    {
+    }
+
+    public function getSlug()
+    {
+    }
+
+    public function setSlug($slug)
+    {
+    }
+
+    public function getPermalink()
+    {
+    }
+
+    public function setPermalink($permalink)
+    {
+    }
 }
