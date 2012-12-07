@@ -150,7 +150,7 @@ interface ProcessContextInterface
     /**
      * Add the given name to the history of step names.
      *
-     * @param $stepName string
+     * @param string $stepName
      */
     function addStepToHistory($stepName);
 

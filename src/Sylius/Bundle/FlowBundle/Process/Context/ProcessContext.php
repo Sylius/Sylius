@@ -303,9 +303,9 @@ class ProcessContext implements ProcessContextInterface
      */
     public function addStepToHistory($stepName)
     {
-        $history = $this->context->getStepHistory();
+        $history = $this->getStepHistory();
         array_push($history, $stepName);
-        $this->context->setStepHistory($history);
+        $this->setStepHistory($history);
     }
 
     /**
