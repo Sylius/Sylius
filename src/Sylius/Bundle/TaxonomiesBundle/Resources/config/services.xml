@@ -16,6 +16,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="sylius_taxonomies.form.type.taxonomy_choice.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyChoiceType</parameter>
+        <parameter key="sylius_taxonomies.form.type.taxon_choice.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonChoiceType</parameter>
+    </parameters>
+
     <services>
         <service id="sylius_taxonomies.controller.taxonomy" class="%sylius_taxonomies.controller.taxonomy.class%">
             <argument>sylius_taxonomies</argument>
@@ -32,6 +37,24 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="sylius_taxonomies.form.type.taxonomy" class="%sylius_taxonomies.form.type.taxonomy.class%">
+            <argument>%sylius_taxonomies.model.taxonomy.class%</argument>
+            <tag name="form.type" alias="sylius_taxonomies_taxonomy" />
+        </service>
+        <service id="sylius_taxonomies.form.type.taxonomy_choice" class="%sylius_taxonomies.form.type.taxonomy_choice.class%">
+            <argument type="service" id="sylius_taxonomies.repository.taxonomy" />
+            <tag name="form.type" alias="sylius_taxonomies_taxonomy_choice" />
+        </service>
+
+        <service id="sylius_taxonomies.form.type.taxon" class="%sylius_taxonomies.form.type.taxon.class%">
+            <argument>%sylius_taxonomies.model.taxon.class%</argument>
+            <tag name="form.type" alias="sylius_taxonomies_taxon" />
+        </service>
+        <service id="sylius_taxonomies.form.type.taxon_choice" class="%sylius_taxonomies.form.type.taxon_choice.class%">
+            <argument type="service" id="sylius_taxonomies.repository.taxon" />
+            <tag name="form.type" alias="sylius_taxonomies_taxon_choice" />
         </service>
     </services>
 

@@ -18,12 +18,17 @@ namespace Sylius\Bundle\TaxonomiesBundle\Model;
  */
 class Taxon implements TaxonInterface
 {
-    private $id;
-    private $taxonomy;
-    private $parent;
-    private $name;
-    private $slug;
-    private $permalink;
+    protected $id;
+    protected $taxonomy;
+    protected $parent;
+    protected $name;
+    protected $slug;
+    protected $permalink;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId()
     {

@@ -29,10 +29,12 @@ class TaxonType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_should_build_form_with_name_and_permalink_fields($builder)
+    function it_should_build_form_with_proper_fields($builder)
     {
+        $builder->add('taxonomy', 'sylius_taxonomies_taxonomy_choice', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
         $builder->add('name', 'text')->shouldBeCalled()->willReturn($builder);
-        $builder->add('permalink', 'text')->shouldBeCalled()->willReturn($builder);
+        $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('parent', 'sylius_taxonomies_taxon_choice', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

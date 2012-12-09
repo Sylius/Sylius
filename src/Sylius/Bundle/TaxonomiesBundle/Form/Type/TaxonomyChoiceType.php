@@ -11,51 +11,37 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Taxon form type.
+ * Taxonomy choice form form.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxonType extends AbstractType
+class TaxonomyChoiceType extends AbstractType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
+    protected $repository;
 
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     */
-    public function __construct($dataClass)
+    public function __construct(ObjectRepository $repository)
     {
-        $this->dataClass = $dataClass;
+        $this->repository = $repository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('taxonomy', 'sylius_taxonomies_taxonomy_choice', array(
-                'multiple' => false
-            ))
-            ->add('name', 'text')
-            ->add('permalink', 'text', array(
-                'required' => false
-            ))
-            ->add('parent', 'sylius_taxonomies_taxon_choice', array(
-                'required' => false
-            ))
-        ;
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
+    }
+
+    public function getParent()
+    {
+        return 'choice';
     }
 
     /**
@@ -63,9 +49,12 @@ class TaxonType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $taxonomies = $this->repository->findAll();
+        $choiceList = new ObjectChoiceList($taxonomies);
+
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'choice_list' => $choiceList
             ))
         ;
     }
@@ -75,6 +64,6 @@ class TaxonType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxonomies_taxon';
+        return 'sylius_taxonomies_taxonomy_choice';
     }
 }
