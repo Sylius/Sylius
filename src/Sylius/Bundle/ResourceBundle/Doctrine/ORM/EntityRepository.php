@@ -89,6 +89,11 @@ class EntityRepository extends BaseEntityRepository
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $orderBy);
 
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function getPaginator(QueryBuilder $queryBuilder)
+    {
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
     }
 
