@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_taxonomies.repository.taxonomy.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius_taxonomies.repository.taxonomy.class">Sylius\Bundle\TaxonomiesBundle\Entity\TaxonomyRepository</parameter>
         <parameter key="sylius_taxonomies.repository.taxon.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
