@@ -54,13 +54,6 @@ class ProcessContext implements ProcessContextInterface
     protected $nextStep;
 
     /**
-     * Is current step completed?
-     *
-     * @var Boolean
-     */
-    protected $completed;
-
-    /**
      * Storage.
      *
      * @var StorageInterface
@@ -98,7 +91,6 @@ class ProcessContext implements ProcessContextInterface
         $this->storage = $storage;
 
         $this->initialized = false;
-        $this->completed = false;
         $this->progress = 0;
     }
 
@@ -204,30 +196,6 @@ class ProcessContext implements ProcessContextInterface
         $this->assertInitialized();
 
         return null === $this->nextStep;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function complete($stepName = null)
-    {
-        $this->assertInitialized();
-
-        $this->completed = true;
-
-        if (null != $stepName) {
-            $this->nextStep = $this->process->getStepByName($stepName);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isCompleted()
-    {
-        $this->assertInitialized();
-
-        return $this->completed;
     }
 
     /**
@@ -354,5 +322,13 @@ class ProcessContext implements ProcessContextInterface
         $totalSteps = $this->process->countSteps();
 
         $this->progress = floor(($currentStepIndex + 1) / $totalSteps * 100);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNextStepByName($stepName)
+    {
+        $this->nextStep = $this->process->getStepByName($stepName);
     }
 }

@@ -48,7 +48,7 @@ abstract class Step implements StepInterface
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $context->complete();
+        return $this->complete();
     }
 
     /**
@@ -58,4 +58,21 @@ abstract class Step implements StepInterface
     {
         return true;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function complete()
+    {
+        return new ActionResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function proceed($nextStepName)
+    {
+        return new ActionResult($nextStepName);
+    }
+
 }

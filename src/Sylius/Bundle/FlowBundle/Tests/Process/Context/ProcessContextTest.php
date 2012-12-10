@@ -43,8 +43,6 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
             array('getNextStep'),
             array('isFirstStep'),
             array('isLastStep'),
-            array('complete'),
-            array('isCompleted'),
             array('close'),
             array('getProgress'),
             array('getProgress'),
@@ -347,53 +345,6 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $context->initialize($process, $this->getStep('someStep'));
 
         $this->assertTrue($context->isValid());
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCompleteProcess()
-    {
-        $storage = new TestArrayStorage();
-
-        $steps = array(
-            $this->getStep('step1'),
-            $this->getStep('step2')
-        );
-        $process = $this->getProcess($steps);
-        $context = new ProcessContext($storage);
-        $context->initialize($process, $steps[0]);
-        $this->assertFalse($context->isCompleted());
-        $context->complete();
-
-        $this->assertTrue($context->isCompleted());
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCompleteProcessWithStep()
-    {
-        $storage = new TestArrayStorage();
-
-        $steps = array(
-            $this->getStep('step1'),
-            $this->getStep('step2'),
-            $this->getStep('step3')
-        );
-        $process = $this->getProcess($steps);
-        $process->expects($this->once())
-            ->method('getStepByName')
-            ->with('step3')
-            ->will($this->returnValue($steps[2]));
-
-        $context = new ProcessContext($storage);
-        $context->initialize($process, $steps[0]);
-        $this->assertFalse($context->isCompleted());
-        $context->complete('step3');
-
-        $this->assertTrue($context->isCompleted());
-        $this->assertSame($steps[2], $context->getNextStep());
     }
 
     /**

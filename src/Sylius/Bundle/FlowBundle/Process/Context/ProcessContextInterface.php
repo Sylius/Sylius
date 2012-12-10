@@ -75,16 +75,9 @@ interface ProcessContextInterface
     function isLastStep();
 
     /**
-     * Complete current step.
+     * Override the default next step.
      */
-    function complete($stepAlias = null);
-
-    /**
-     * Is current step completed.
-     *
-     * @return Boolean
-     */
-    function isCompleted();
+    function setNextStepByName($stepAlias);
 
     /**
      * Close context and clear all the data.

@@ -53,4 +53,21 @@ interface StepInterface
      * @return Boolean
      */
     function isActive();
+
+    /**
+     * Proceeds to the next step.
+     *
+     * @return ActionResult
+     */
+    public function complete();
+
+    /**
+     * Proceeds to the given step.
+     *
+     * @param string $nextStepName
+     *
+     * @return ActionResult
+     */
+    public function proceed($nextStepName);
+
 }
