@@ -15,9 +15,8 @@ use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
+use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
-use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
@@ -99,6 +98,7 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getStepByName($stepName);
 
         $this->context->initialize($process, $step);
+        $this->context->rewindHistory();
 
         if (!$this->context->isValid()) {
             throw new NotFoundHttpException();
@@ -116,6 +116,7 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getStepByName($stepName);
 
         $this->context->initialize($process, $step);
+        $this->context->rewindHistory();
 
         if (!$this->context->isValid()) {
             throw new NotFoundHttpException();
@@ -123,19 +124,29 @@ class Coordinator implements CoordinatorInterface
 
         $response = $step->forwardAction($this->context);
 
-        if (!$this->context->isCompleted()) {
+        if ($response instanceof ActionResult) {
+            // handle explicit jump to step
+            if ($response->getNextStepName()) {
+                $this->context->setNextStepByName($response->getNextStepName());
+                return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
+            }
+
+            // handle last step
+            if ($this->context->isLastStep()) {
+                $this->context->close();
+
+                $url = $this->router->generate($process->getRedirect());
+
+                return new RedirectResponse($url);
+            }
+
+            // handle default linear behaviour
+            return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
+
+        } else {
+
             return $response;
         }
-
-        if ($this->context->isLastStep()) {
-            $this->context->close();
-
-            $url = $this->router->generate($process->getRedirect());
-
-            return new RedirectResponse($url);
-        }
-
-        return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
     }
 
     /**
@@ -172,6 +183,7 @@ class Coordinator implements CoordinatorInterface
      */
     protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step)
     {
+        $this->context->addStepToHistory($step->getName());
 
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array(

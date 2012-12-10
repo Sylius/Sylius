@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Step;
 
+use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
+
 /**
  * Step test.
  *
@@ -36,11 +38,11 @@ class StepTest extends \PHPUnit_Framework_TestCase
     public function shouldCompleteProcessByDefault()
     {
         $processContext = $this->getMock('Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface');
-        $processContext->expects($this->once())
-            ->method('complete');
 
         $step = $this->getStep();
-        $step->forwardAction($processContext);
+        /** @var $result ActionResult */
+        $result = $step->forwardAction($processContext);
+        $this->assertEmpty($result->getNextStepName());
     }
 
     /**

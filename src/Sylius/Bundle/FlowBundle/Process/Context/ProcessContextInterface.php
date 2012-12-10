@@ -23,9 +23,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface ProcessContextInterface
 {
-    // Step states.
-    const STEP_STATE_PENDING   = 0;
-    const STEP_STATE_COMPLETED = 1;
 
     /**
      * Initialize context with process and current step.
@@ -78,16 +75,9 @@ interface ProcessContextInterface
     function isLastStep();
 
     /**
-     * Complete current step.
+     * Override the default next step.
      */
-    function complete();
-
-    /**
-     * Is current step completed.
-     *
-     * @return Boolean
-     */
-    function isCompleted();
+    function setNextStepByName($stepAlias);
 
     /**
      * Close context and clear all the data.
@@ -135,4 +125,33 @@ interface ProcessContextInterface
      * @return integer
      */
     function getProgress();
+
+    /**
+     * The array contains the history of all the step names.
+     *
+     * @return array()
+     */
+    function getStepHistory();
+
+    /**
+     * Set a new history of step names.
+     *
+     * @param array $history
+     */
+    function setStepHistory(array $history);
+
+    /**
+     * Add the given name to the history of step names.
+     *
+     * @param string $stepName
+     */
+    function addStepToHistory($stepName);
+
+    /**
+     * Goes back from the end fo the histroy and deletes all step names until the current one is found.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If the step name is not found in the history.
+     */
+    function rewindHistory();
+
 }

@@ -11,7 +11,11 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Coordinator;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator;
+use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
+use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 
 /**
  * Coordinator test.
@@ -20,6 +24,7 @@ use Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator;
  */
 class CoordinatorTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var CoordinatorInterface */
     private $coordinator;
 
     public function setUp()
@@ -39,6 +44,12 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
+        $processContext->expects($this->any())
+            ->method('getStepHistory')
+            ->will($this->returnValue(array()));
+        $processContext->expects($this->any())
+            ->method('rewindHistory')
+            ->will($this->returnValue(null));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
     }
@@ -80,6 +91,9 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
+        $processContext->expects($this->any())
+            ->method('getStepHistory')
+            ->will($this->returnValue(array()));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -126,7 +140,9 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
 
-        $this->assertEquals('displayActionResponse', $this->coordinator->display('scenarioOne', 'someStepName'));
+        $result = $this->coordinator->display('scenarioOne', 'someStepName');
+
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $result);
     }
 
     /**
@@ -193,7 +209,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator::forward
      */
-    public function shouldShowForwardActionWhenStepIsNotCompleted()
+    public function shouldShowReturnResponseWhenStepIsNotCompleted()
     {
         $router = $this->getRouter();
 
@@ -203,14 +219,12 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
-        $processContext->expects($this->any())
-            ->method('isCompleted')
-            ->will($this->returnValue(false));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
 
-        $this->assertEquals('forwardActionResponse', $this->coordinator->forward('scenarioOne', 'someStepName'));
+        $result = $this->coordinator->forward('scenarioOne', 'notForwardStep');
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $result);
     }
 
     /**
@@ -251,8 +265,8 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
                 $this->getStep('nextStepName')
             ));
         $processContext->expects($this->any())
-            ->method('isCompleted')
-            ->will($this->returnValue(true));
+            ->method('getStepHistory')
+            ->will($this->returnValue(array()));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -347,10 +361,12 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             ));
         $process->expects($this->any())
             ->method('getStepByName')
-            ->with($this->equalTo('someStepName'))
-            ->will($this->returnValue(
-                $this->getStep('someStepName')
-            ));
+            ->will($this->returnValueMap(
+                array(
+                    array('someStepName', $this->getStep('someStepName')),
+                    array('notForwardStep', $this->getStep('notForwardStep')),
+                )
+               ));
         $process->expects($this->any())
             ->method('setScenarioAlias')
             ->with($this->equalTo('scenarioOne'));
@@ -372,10 +388,10 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($name));
         $step->expects($this->any())
             ->method('displayAction')
-            ->will($this->returnValue('displayActionResponse'));
+            ->will($this->returnValue(new Response()));
         $step->expects($this->any())
             ->method('forwardAction')
-            ->will($this->returnValue('forwardActionResponse'));
+            ->will($this->returnValue($name=='notForwardStep' ? new Response() : new ActionResult()));
 
         return $step;
     }
