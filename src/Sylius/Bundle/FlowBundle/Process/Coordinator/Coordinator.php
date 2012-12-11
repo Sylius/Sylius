@@ -18,6 +18,7 @@ use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -104,7 +105,9 @@ class Coordinator implements CoordinatorInterface
             throw new NotFoundHttpException();
         }
 
-        return $step->displayAction($this->context);
+        $result = $step->displayAction($this->context);
+
+        return $this->processStepResult($process, $result);
     }
 
     /**
@@ -122,16 +125,26 @@ class Coordinator implements CoordinatorInterface
             throw new NotFoundHttpException();
         }
 
-        $response = $step->forwardAction($this->context);
+        $result = $step->forwardAction($this->context);
 
-        if ($response instanceof ActionResult) {
-            // handle explicit jump to step
-            if ($response->getNextStepName()) {
+        return $this->processStepResult($process, $result);
+    }
+
+    public function processStepResult(ProcessInterface $process, $result)
+    {
+        if ($result instanceof Response) {
+            return $result;
+        }
+
+        if ($result instanceof ActionResult) {
+            // Handle explicit jump to step.
+            if ($result->getNextStepName()) {
                 $this->context->setNextStepByName($response->getNextStepName());
+
                 return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
             }
 
-            // handle last step
+            // Handle last step.
             if ($this->context->isLastStep()) {
                 $this->context->close();
 
@@ -140,13 +153,11 @@ class Coordinator implements CoordinatorInterface
                 return new RedirectResponse($url);
             }
 
-            // handle default linear behaviour
+            // Handle default linear behaviour.
             return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
-
-        } else {
-
-            return $response;
         }
+
+        throw new \RuntimeException('Wrong action result, expected Response or ActionResult');
     }
 
     /**
