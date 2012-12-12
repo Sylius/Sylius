@@ -78,7 +78,7 @@ Next step requires creating the item entity, let's do this now.
     }
 
 Now we need to define simple mapping for those entities, because they only extend the Doctrine mapped super classes.
-You should create two mapping files in your ``AppBundle``, put them inside the doctrine mapping directory ``src/App/AppBundle/Resource/config/doctrine/*.orm.xml``.
+You should create two mapping files in your ``AppBundle``, put them inside the doctrine mapping directory ``src/App/AppBundle/Resources/config/doctrine/*.orm.xml``.
 
 .. code-block:: xml
 
@@ -332,7 +332,7 @@ Import default routing from your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_cart:
-        resource: @SyliusCartBundle/Resource/config/routing.yml
+        resource: @SyliusCartBundle/Resources/config/routing.yml
         prefix: /cart
 
 Updating database schema
