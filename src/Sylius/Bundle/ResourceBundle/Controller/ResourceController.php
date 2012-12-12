@@ -180,7 +180,7 @@ class ResourceController extends Controller
         return $this->configuration;
     }
 
-    protected function createNew()
+    public function createNew()
     {
         return $this
             ->getRepository()
@@ -188,12 +188,12 @@ class ResourceController extends Controller
         ;
     }
 
-    protected function getForm($resource = null)
+    public function getForm($resource = null)
     {
         return $this->createForm($this->getFormType(), $resource);
     }
 
-    protected function getFormType()
+    public function getFormType()
     {
         $config = $this->getConfiguration();
 
@@ -204,21 +204,21 @@ class ResourceController extends Controller
         return sprintf('%s_%s', $config->getBundlePrefix(), $config->getResourceName());
     }
 
-    protected function redirectTo($resource)
+    public function redirectTo($resource)
     {
         $route = $this->getRedirectRoute('show');
 
         return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
     }
 
-    protected function redirectToCollection()
+    public function redirectToCollection()
     {
         $route = $this->getRedirectRoute('list');
 
         return $this->handleView(RouteRedirectView::create($route));
     }
 
-    protected function getRedirectRoute($name)
+    public function getRedirectRoute($name)
     {
         $config = $this->getConfiguration();
 
@@ -227,18 +227,18 @@ class ResourceController extends Controller
         }
 
         return sprintf('%s_%s_%s',
-                $config->getBundlePrefix(),
-                $config->getResourceName(),
-                $name
+            $config->getBundlePrefix(),
+            $config->getResourceName(),
+            $name
         );
     }
 
-    protected function getManager()
+    public function getManager()
     {
         return $this->getService('manager');
     }
 
-    protected function persistAndFlush($resource)
+    public function persistAndFlush($resource)
     {
         $manager = $this->getManager();
 
@@ -246,7 +246,7 @@ class ResourceController extends Controller
         $manager->flush();
     }
 
-    protected function removeAndFlush($resource)
+    public function removeAndFlush($resource)
     {
         $manager = $this->getManager();
 
@@ -254,17 +254,12 @@ class ResourceController extends Controller
         $manager->flush();
     }
 
-    protected function getRepository()
+    public function getRepository()
     {
         return $this->getService('repository');
     }
 
-    protected function getService($name)
-    {
-        return $this->get($this->getConfiguration()->getServiceName($name));
-    }
-
-    protected function findOr404(array $criteria)
+    public function findOr404(array $criteria)
     {
         if (!$resource = $this->getRepository()->findOneBy($criteria)) {
             throw new NotFoundHttpException(sprintf('Requested %s does not exist', $this->getConfiguration()->getResourceName()));
@@ -273,12 +268,12 @@ class ResourceController extends Controller
         return $resource;
     }
 
-    protected function renderResponse($templateName, array $parameters = array())
+    public function renderResponse($templateName, array $parameters = array())
     {
         return $this->render($this->getFullTemplateName($templateName), $parameters);
     }
 
-    protected function getFullTemplateName($name)
+    public function getFullTemplateName($name)
     {
         $config = $this->getConfiguration();
 
@@ -293,12 +288,12 @@ class ResourceController extends Controller
         );
     }
 
-    protected function getEngine()
+    public function getEngine()
     {
         return $this->container->getParameter(sprintf('%s.engine', $this->getConfiguration()->getBundlePrefix()));
     }
 
-    protected function handleView(View $view)
+    public function handleView(View $view)
     {
         return $this->get('fos_rest.view_handler')->handle($view);
     }
@@ -310,5 +305,10 @@ class ResourceController extends Controller
             ->getFlashBag()
             ->add($type, $message)
         ;
+    }
+
+    protected function getService($name)
+    {
+        return $this->get($this->getConfiguration()->getServiceName($name));
     }
 }
