@@ -109,7 +109,7 @@ class EntityRepository extends ObjectBehavior
     {
         foreach ($criteria as $property => $value) {
             $queryBuilder
-                ->andWhere('foo.'.$property.' = :'.$property)
+                ->andWhere('o.'.$property.' = :'.$property)
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
