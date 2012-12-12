@@ -1,35 +1,56 @@
 SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
 ======================
 
-This bundle provides basic architecture, forms and interfaces for managing addresses, countries, states and zones in any Symfony2 application.  
+This bundle provides basic architecture, manipulators, forms and interfaces for managing addresses in any Symfony2 application.  
 There is a default address storage agnostic model and interface, although you can customize it to fit your needs.
+
+**This bundle is compatible only with 2.1.x branch of Symfony2**.
+
+Features
+--------
+
+* Base support for many different persistence layers. Currently only Doctrine ORM driver is implemented.
+* Sensible default address implementation.
+* Basic CRUD for address book.
+* It uses [Pagerfanta](http://github.com/whiteoctober/Pagerfanta) to paginate over the addresses.
+* Thanks to awesome [Symfony2](http://symfony.com) everything is configurable and extensible.
 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2.
 
-Visit [Sylius.org](http://sylius.org).
+Please visit [Sylius.org](http://sylius.org) for more details.
 
-[phpspec2](http://phpspec.net) Specifications
----------------------------------------------
+Testing and build status
+------------------------
+
+This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusAddressingBundle) for CI.
+[![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+
+Before running tests, load the dependencies using [Composer](http://packagist.org).
 
 ``` bash
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install --dev
-$ bin/phpspec run
 ```
 
-Documentation
--------------
+Now you can run the tests by simply using this command.
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusAddressingBundle.html).
+``` bash
+$ phpunit
+```
 
 Code examples
 -------------
 
 If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+It's open sourced github project.
 
+Documentation
+-------------
+
+Documentation is available on [readthedocs.org](http://sylius.readthedocs.org/en/latest/bundles/SyliusSalesBundle.html).
 
 Contributing
 ------------
@@ -41,16 +62,19 @@ Mailing lists
 
 ### Users
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+If you are using this bundle and have any questions, feel free to ask on users mailing list.
+[Mail](mailto:sylius@googlegroups.com) or [view it](http://groups.google.com/group/sylius).
 
 ### Developers
 
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
+If you want to contribute, and develop this bundle, use the developers mailing list.
+[Mail](mailto:sylius-dev@googlegroups.com) or [view it](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius)
+or [follow me](http://twitter.com/pjedrzejewski).
 
 Bug tracking
 ------------
@@ -69,13 +93,14 @@ And constructed with the following guidelines.
 * New additions without breaking backwards compatibility bumps the minor.
 * Bug fixes and misc changes bump the patch.
 
-For more information on SemVer, please visit [semver.org website](http://semver.org/)...
+For more information on SemVer, please visit [semver.org website](http://semver.org/).
+
 This versioning method is same for all **Sylius** bundles and applications.
 
-MIT License
------------
+License
+-------
 
-License can be found [here](https://github.com/Sylius/SyliusAddressingBundle/blob/master/Addressings/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusAddressingBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

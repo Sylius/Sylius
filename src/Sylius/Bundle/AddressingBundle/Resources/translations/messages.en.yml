@@ -4,8 +4,15 @@
 sylius_addressing:
     label:
         address:
-            firstname: "First name"
-            lastname: "Last name"
-            street: "Address"
+            first_name: "First name"
+            last_name: "Last name"
+            country: "Country"
+            province: "Province"
+            street: "Street"
             city: "City"
             postcode: "Postcode"
+        country:
+            name: "Name"
+            iso_name: "ISO name"
+        province:
+            name: "Name"

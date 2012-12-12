@@ -11,17 +11,16 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Address form type.
+ * Province form type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class AddressType extends AbstractType
+class ProvinceType extends AbstractType
 {
     /**
      * Data class.
@@ -29,17 +28,15 @@ class AddressType extends AbstractType
      * @var string
      */
     protected $dataClass;
-    protected $eventListener;
 
     /**
      * Constructor.
      *
      * @param string $dataClass
      */
-    public function __construct($dataClass, BuildAddressFormListener $eventListener)
+    public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
-        $this->eventListener = $eventListener;
     }
 
     /**
@@ -48,24 +45,8 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber($this->eventListener)
-            ->add('firstName', 'text', array(
-                'label' => 'sylius_addressing.label.address.first_name'
-            ))
-            ->add('lastName', 'text', array(
-                'label' => 'sylius_addressing.label.address.last_name'
-            ))
-            ->add('country', 'sylius_addressing_country_choice', array(
-                'label' => 'sylius_addressing.label.address.country'
-            ))
-            ->add('street', 'text', array(
-                'label' => 'sylius_addressing.label.address.street'
-            ))
-            ->add('city', 'text', array(
-                'label' => 'sylius_addressing.label.address.city'
-            ))
-            ->add('postcode', 'text', array(
-                'label' => 'sylius_addressing.label.address.postcode'
+            ->add('name', 'text', array(
+                'label' => 'sylius_addressing.label.province.name'
             ))
         ;
     }
@@ -87,6 +68,6 @@ class AddressType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_address';
+        return 'sylius_addressing_province';
     }
 }

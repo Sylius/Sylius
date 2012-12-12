@@ -36,18 +36,57 @@ class SyliusAddressingExtension extends Extension
         $config = $processor->processConfiguration($configuration, $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if (!in_array($config['driver'], SyliusAddressingBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension.', $config['driver']));
+        $driver = $config['driver'];
+
+        if (!in_array($driver, SyliusAddressingBundle::getSupportedDrivers())) {
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusAddressingBundle', $driver));
         }
 
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+        $loader->load(sprintf('driver/%s.xml', $driver));
 
-        $container->setParameter('sylius_addressing.driver', $config['driver']);
+        $container->setParameter('sylius_addressing.driver', $driver);
         $container->setParameter('sylius_addressing.engine', $config['engine']);
 
-        $container->setParameter('sylius_addressing.model.address.class', $config['classes']['model']['address']);
-        $container->setParameter('sylius_addressing.controller.address.class', $config['classes']['controller']['address']);
-        $container->setParameter('sylius_addressing.form.type.address.class', $config['classes']['form']['type']['address']);
+        $classes = $config['classes'];
+
+        $addressClasses = $classes['address'];
+
+        if (isset($addressClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.address.class', $addressClasses['model']);
+        }
+
+        if (isset($addressClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.address.class', $addressClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.controller.address.class', $addressClasses['controller']);
+        $container->setParameter('sylius_addressing.form.type.address.class', $addressClasses['form']);
+
+        $countryClasses = $classes['country'];
+
+        if (isset($countryClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.country.class', $countryClasses['model']);
+        }
+
+        if (isset($countryClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.country.class', $countryClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.controller.country.class', $countryClasses['controller']);
+        $container->setParameter('sylius_addressing.form.type.country.class', $countryClasses['form']);
+
+        $provinceClasses = $classes['province'];
+
+        if (isset($provinceClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.province.class', $provinceClasses['model']);
+        }
+
+        if (isset($provinceClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.province.class', $provinceClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.controller.province.class', $provinceClasses['controller']);
+        $container->setParameter('sylius_addressing.form.type.province.class', $provinceClasses['form']);
 
         $loader->load('services.xml');
     }

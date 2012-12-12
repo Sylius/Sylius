@@ -3,14 +3,18 @@
 
 sylius_addressing:
     address:
-        firstname:
+        first_name:
             not_blank: "Please enter first name"
             min_length: "First name must be at least 2 characters long"
             max_length: "First name must not be longer than 255 characters"
-        lastname:
+        last_name:
             not_blank: "Please enter last name"
             min_length: "Last name must be at least 2 characters long"
             max_length: "Last name must not be longer than 255 characters"
+        country:
+            not_blank: "Please select country"
+        province:
+            valid: "Please select proper province"
         street:
             not_blank: "Please enter street"
             min_length: "Street must be at least 2 characters long"

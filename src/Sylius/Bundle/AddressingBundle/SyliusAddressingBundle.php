@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
+use Sylius\Bundle\AddressingBundle\DependencyInjection\Compiler\ResolveClassesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -33,5 +35,10 @@ class SyliusAddressingBundle extends Bundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new ResolveClassesPass());
     }
 }

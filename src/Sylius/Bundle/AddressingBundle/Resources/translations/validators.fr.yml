@@ -1,10 +1,10 @@
 sylius_addressing:
     address:
-        firstname:
+        first_name:
             not_blank: "Veuillez entrer votre prénom"
             min_length: "Le prénom doit être plus long que 2 caractères"
             max_length: "Le prénom ne doit pas être plus long que 255 caractères"
-        lastname:
+        last_name:
             not_blank: "Veuillez entrer votre nom"
             min_length: "Le nom doit être plus long que 2 caractères"
             max_length: "Le prénom ne doit pas être plus long que 255 caractères"

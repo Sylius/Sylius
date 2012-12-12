@@ -22,12 +22,10 @@
 
         "symfony/framework-bundle":        "~2.1",
         "sylius/resource-bundle":          "*",
-        "stof/doctrine-extensions-bundle": "*",
-        "white-october/pagerfanta-bundle": "*"
+        "stof/doctrine-extensions-bundle": "*"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop",
-        "symfony/form":     "~2.1"
+        "phpspec/phpspec2": "dev-develop"
     },
     "config": {
         "bin-dir": "bin"

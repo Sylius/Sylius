@@ -12,12 +12,117 @@
 namespace Sylius\Bundle\AddressingBundle\Model;
 
 /**
- * Address model interface.
+ * Common address model interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 interface AddressInterface
 {
+    /**
+     * Get first name.
+     *
+     * @return string
+     */
+    function getFirstName();
+
+    /**
+     * Set first name.
+     *
+     * @param string $firstName
+     */
+    function setFirstName($firstName);
+
+    /**
+     * Get last name.
+     *
+     * @return string
+     */
+    function getLastName();
+
+    /**
+     * Set last name.
+     *
+     * @param string $lastName
+     */
+    function setLastName($lastName);
+
+    /**
+     * Get country.
+     *
+     * @return CountryInterface $country
+     */
+    function getCountry();
+
+    /**
+     * Set country.
+     *
+     * @param CountryInterface $country
+     */
+    function setCountry(CountryInterface $country = null);
+
+    /**
+     * Get province.
+     *
+     * @return ProvinceInterface $province
+     */
+    function getProvince();
+
+    /**
+     * Set province.
+     *
+     * @param ProvinceInterface $province
+     */
+    function setProvince(ProvinceInterface $province = null);
+
+    /**
+     * Is country and province selection valid?
+     *
+     * @return Boolean
+     */
+    function isValid();
+
+    /**
+     * Get street.
+     *
+     * @return string
+     */
+    function getStreet();
+
+    /**
+     * Set street.
+     *
+     * @param string $street
+     */
+    function setStreet($street);
+
+    /**
+     * Get city.
+     *
+     * @return string
+     */
+    function getCity();
+
+    /**
+     * Set city.
+     *
+     * @param string $city
+     */
+    function setCity($city);
+
+    /**
+     * Get postcode.
+     *
+     * @return string
+     */
+    function getPostcode();
+
+    /**
+     * Set postcode.
+     *
+     * @param string $postcode
+     */
+    function setPostcode($postcode);
+
     /**
      * Get creation time.
      *
@@ -26,37 +131,9 @@ interface AddressInterface
     function getCreatedAt();
 
     /**
-     * Set creation time.
-     *
-     * @param DateTime $createdAt
-     */
-    function setCreatedAt(\DateTime $createdAt);
-
-    /**
-     * Increments creation time.
-     *
-     * @return null
-     */
-    function incrementCreatedAt();
-
-    /**
      * Get modification time.
      *
      * @return \DateTime
      */
     function getUpdatedAt();
-
-    /**
-     * Set modification time.
-     *
-     * @param DateTime $updatedAt
-     */
-    function setUpdatedAt(\DateTime $updatedAt);
-
-    /**
-     * Increments modification time.
-     *
-     * @return null
-     */
-    function incrementUpdatedAt();
 }

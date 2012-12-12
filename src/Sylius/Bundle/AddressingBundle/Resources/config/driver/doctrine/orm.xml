@@ -14,11 +14,18 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd"
->
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius_addressing.model.address.class">Sylius\Bundle\AddressingBundle\Entity\Address</parameter>
+        <parameter key="sylius_addressing.model.country.class">Sylius\Bundle\AddressingBundle\Entity\Country</parameter>
+        <parameter key="sylius_addressing.model.province.class">Sylius\Bundle\AddressingBundle\Entity\Province</parameter>
+
         <parameter key="sylius_addressing.repository.address.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius_addressing.repository.country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius_addressing.repository.province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+
+        <parameter key="sylius_addressing.form.type.country_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\CountryEntityChoiceType</parameter>
     </parameters>
 
     <services>
@@ -26,15 +33,50 @@
         <service id="sylius_addressing.repository.address" class="%sylius_addressing.repository.address.class%">
             <argument type="service" id="sylius_addressing.manager.address" />
             <argument type="service">
-                <service id="sylius_addressing.doctrine.orm.metadata.address"
-                        factory-service="sylius_addressing.manager.address"
-                        factory-method="getClassMetadata"
-                        class="Doctrine\ORM\Mapping\ClassMetadata"
-                        public="false"
+                <service
+                    factory-service="sylius_addressing.manager.address"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
                 >
                     <argument>%sylius_addressing.model.address.class%</argument>
                 </service>
             </argument>
+        </service>
+
+        <service id="sylius_addressing.manager.country" alias="doctrine.orm.entity_manager" />
+        <service id="sylius_addressing.repository.country" class="%sylius_addressing.repository.country.class%">
+            <argument type="service" id="sylius_addressing.manager.country" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_addressing.manager.country"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
+                >
+                    <argument>%sylius_addressing.model.country.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius_addressing.manager.province" alias="doctrine.orm.entity_manager" />
+        <service id="sylius_addressing.repository.province" class="%sylius_addressing.repository.province.class%">
+            <argument type="service" id="sylius_addressing.manager.province" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_addressing.manager.province"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
+                >
+                    <argument>%sylius_addressing.model.province.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius_addressing.form.type.country_choice" class="%sylius_addressing.form.type.country_choice.class%">
+            <argument>%sylius_addressing.model.country.class%</argument>
+            <tag name="form.type" alias="sylius_addressing_country_choice" />
         </service>
     </services>
 

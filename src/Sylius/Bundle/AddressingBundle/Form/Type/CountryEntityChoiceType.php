@@ -9,15 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Entity;
-
-use Sylius\Bundle\AddressingBundle\Model\CommonAddress as BaseCommonAddress;
+namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 /**
- * Common address entity.
+ * Country choice form type for "doctrine/orm" driver.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class CommonAddress extends BaseCommonAddress
+class CountryEntityChoiceType extends CountryChoiceType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'entity';
+    }
 }

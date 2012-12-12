@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
 
@@ -14,8 +14,12 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd"
->
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius_addressing.form.type.province_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType</parameter>
+        <parameter key="sylius_addressing.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener</parameter>
+    </parameters>
 
     <services>
         <service id="sylius_addressing.controller.address" class="%sylius_addressing.controller.address.class%">
@@ -26,10 +30,44 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+        <service id="sylius_addressing.controller.country" class="%sylius_addressing.controller.country.class%">
+            <argument>sylius_addressing</argument>
+            <argument>country</argument>
+            <argument>SyliusAddressingBundle:Country</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius_addressing.controller.province" class="%sylius_addressing.controller.province.class%">
+            <argument>sylius_addressing</argument>
+            <argument>province</argument>
+            <argument>SyliusAddressingBundle:Province</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
 
         <service id="sylius_addressing.form.type.address" class="%sylius_addressing.form.type.address.class%">
             <argument>%sylius_addressing.model.address.class%</argument>
+            <argument type="service" id="sylius_addressing.form.listener.address" />
             <tag name="form.type" alias="sylius_addressing_address" />
+        </service>
+        <service id="sylius_addressing.form.type.country" class="%sylius_addressing.form.type.country.class%">
+            <argument>%sylius_addressing.model.country.class%</argument>
+            <tag name="form.type" alias="sylius_addressing_country" />
+        </service>
+        <service id="sylius_addressing.form.type.province" class="%sylius_addressing.form.type.province.class%">
+            <argument>%sylius_addressing.model.province.class%</argument>
+            <tag name="form.type" alias="sylius_addressing_province" />
+        </service>
+
+        <service id="sylius_addressing.form.type.province_choice" class="%sylius_addressing.form.type.province_choice.class%">
+            <tag name="form.type" alias="sylius_addressing_province_choice" />
+        </service>
+
+        <service id="sylius_addressing.form.listener.address" class="%sylius_addressing.form.listener.address.class%">
+            <argument type="service" id="sylius_addressing.repository.country" />
+            <argument type="service" id="form.factory" />
         </service>
     </services>
 
