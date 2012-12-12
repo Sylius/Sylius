@@ -139,7 +139,7 @@ class Coordinator implements CoordinatorInterface
         if ($result instanceof ActionResult) {
             // Handle explicit jump to step.
             if ($result->getNextStepName()) {
-                $this->context->setNextStepByName($response->getNextStepName());
+                $this->context->setNextStepByName($result->getNextStepName());
 
                 return $this->redirectToStepDisplayAction($process, $this->context->getNextStep());
             }
