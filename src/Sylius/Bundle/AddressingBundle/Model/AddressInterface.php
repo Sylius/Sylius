@@ -23,117 +23,117 @@ interface AddressInterface
      *
      * @return string
      */
-    function getFirstName();
+    public function getFirstName();
 
     /**
      * Set first name.
      *
      * @param string $firstName
      */
-    function setFirstName($firstName);
+    public function setFirstName($firstName);
 
     /**
      * Get last name.
      *
      * @return string
      */
-    function getLastName();
+    public function getLastName();
 
     /**
      * Set last name.
      *
      * @param string $lastName
      */
-    function setLastName($lastName);
+    public function setLastName($lastName);
 
     /**
      * Get country.
      *
      * @return CountryInterface $country
      */
-    function getCountry();
+    public function getCountry();
 
     /**
      * Set country.
      *
      * @param CountryInterface $country
      */
-    function setCountry(CountryInterface $country = null);
+    public function setCountry(CountryInterface $country = null);
 
     /**
      * Get province.
      *
      * @return ProvinceInterface $province
      */
-    function getProvince();
+    public function getProvince();
 
     /**
      * Set province.
      *
      * @param ProvinceInterface $province
      */
-    function setProvince(ProvinceInterface $province = null);
+    public function setProvince(ProvinceInterface $province = null);
 
     /**
      * Is country and province selection valid?
      *
      * @return Boolean
      */
-    function isValid();
+    public function isValid();
 
     /**
      * Get street.
      *
      * @return string
      */
-    function getStreet();
+    public function getStreet();
 
     /**
      * Set street.
      *
      * @param string $street
      */
-    function setStreet($street);
+    public function setStreet($street);
 
     /**
      * Get city.
      *
      * @return string
      */
-    function getCity();
+    public function getCity();
 
     /**
      * Set city.
      *
      * @param string $city
      */
-    function setCity($city);
+    public function setCity($city);
 
     /**
      * Get postcode.
      *
      * @return string
      */
-    function getPostcode();
+    public function getPostcode();
 
     /**
      * Set postcode.
      *
      * @param string $postcode
      */
-    function setPostcode($postcode);
+    public function setPostcode($postcode);
 
     /**
      * Get creation time.
      *
      * @return DateTime
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * Get modification time.
      *
      * @return \DateTime
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 }
