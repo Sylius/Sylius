@@ -346,7 +346,7 @@ For "**doctrine/orm**" driver run the following command.
 
     $ php app/console doctrine:schema:update --force
 
-.. note::
+.. warning::
 
     This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
 
