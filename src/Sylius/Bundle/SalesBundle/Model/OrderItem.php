@@ -72,6 +72,9 @@ class OrderItem implements OrderItemInterface
      */
     public function setQuantity($quantity)
     {
+        if (0 > $quantity) {
+            throw new \OutOfRangeException('Quantity must be greater than 0');
+        }
         $this->quantity = $quantity;
     }
 

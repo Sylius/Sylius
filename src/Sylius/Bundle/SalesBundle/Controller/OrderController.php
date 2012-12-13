@@ -64,45 +64,9 @@ class OrderController extends ResourceController
         $order->setConfirmed(true);
         $this->getManager()->persist($order);
 
-        return $this->renderResponse('confirmed.html.', array(
+        return $this->renderResponse('confirmed.html', array(
             'order' => $order
         ));
-    }
-
-    /**
-     * Closes order.
-     */
-    public function closeAction()
-    {
-        $criteria = $this
-            ->getRequestFetcher()
-            ->getIdentifierCriteria()
-        ;
-
-        $order = $this->findOr404($criteria);
-
-        $order->setClosed(true);
-        $this->getManager()->persist($order);
-
-        return $this->redirectTo($order);
-    }
-
-    /**
-     * Opens order.
-     */
-    public function openAction($id)
-    {
-        $criteria = $this
-            ->getRequestFetcher()
-            ->getIdentifierCriteria()
-        ;
-
-        $order = $this->findOr404($criteria);
-
-        $order->setClosed(false);
-        $this->getManager()->persist($order);
-
-        return $this->redirectTo($order);
     }
 
     protected function getBuilder()

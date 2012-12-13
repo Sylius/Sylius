@@ -61,20 +61,6 @@ interface OrderInterface
     function setConfirmationToken($confirmationToken);
 
     /**
-     * Is closed?
-     *
-     * @return Boolean
-     */
-    function isClosed();
-
-    /**
-     * Set closed.
-     *
-     * @param Boolean $closed
-     */
-    function setClosed($closed);
-
-    /**
      * Get order items.
      *
      * @return array An array or collection of OrderItemInterface
@@ -128,37 +114,9 @@ interface OrderInterface
     function getCreatedAt();
 
     /**
-     * Set creation time.
-     *
-     * @param \DateTime $createdAt
-     */
-    function setCreatedAt(\DateTime $createdAt);
-
-    /**
-     * Increments creation time.
-     *
-     * @return null
-     */
-    function incrementCreatedAt();
-
-    /**
      * Get modification time.
      *
      * @return \DateTime
      */
     function getUpdatedAt();
-
-    /**
-     * Set modification time.
-     *
-     * @param \DateTime $updatedAt
-     */
-    function setUpdatedAt(\DateTime $updatedAt);
-
-    /**
-     * Increments modification time.
-     *
-     * @return null
-     */
-    function incrementUpdatedAt();
 }

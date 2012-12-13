@@ -40,7 +40,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('engine')->defaultValue('twig')->end()
                 ->scalarNode('builder')->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
 
         $this->addClassesSection($rootNode);
 
@@ -63,9 +64,9 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('order')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\SalesBundle\\Controller\\OrderController')->end()
-                                ->scalarNode('repository')->end()
+                                ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderType')->end()
                             ->end()
                         ->end()
@@ -74,7 +75,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
-                                ->scalarNode('repository')->end()
+                                ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderItemType')->end()
                             ->end()
                         ->end()

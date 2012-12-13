@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\SalesBundle;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -31,5 +33,18 @@ class SyliusSalesBundle extends Bundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $interfaces = array(
+            'Sylius\Bundle\SalesBundle\Model\OrderInterface'     => 'sylius_sales.model.order.class',
+            'Sylius\Bundle\SalesBundle\Model\OrderItemInterface' => 'sylius_sales.model.item.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_cart', $interfaces));
     }
 }

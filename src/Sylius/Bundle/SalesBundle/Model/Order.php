@@ -36,13 +36,6 @@ class Order implements OrderInterface
     protected $items;
 
     /**
-     * Order status.
-     *
-     * @var StatusInterface
-     */
-    protected $status;
-
-    /**
      * Whether order was confirmed.
      *
      * @var Boolean
@@ -55,13 +48,6 @@ class Order implements OrderInterface
      * @var string
      */
     protected $confirmationToken;
-
-    /**
-     * Is closed.
-     *
-     * @var Boolean
-     */
-    protected $closed;
 
     protected $total;
 
@@ -85,8 +71,8 @@ class Order implements OrderInterface
     public function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->closed = false;
         $this->confirmed = true;
+        $this->total = 0;
         $this->generateConfirmationToken();
     }
 
@@ -96,22 +82,6 @@ class Order implements OrderInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isClosed()
-    {
-        return $this->closed;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setClosed($closed)
-    {
-        $this->closed = (Boolean) $closed;
     }
 
     /**
@@ -128,6 +98,8 @@ class Order implements OrderInterface
     public function setConfirmed($confirmed)
     {
         $this->confirmed = (Boolean) $confirmed;
+
+        return $this;
     }
 
     /**
@@ -144,6 +116,8 @@ class Order implements OrderInterface
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
     }
 
     /**
@@ -166,6 +140,8 @@ class Order implements OrderInterface
 
             $this->confirmationToken = base_convert(bin2hex($bytes), 16, 36);
         }
+
+        return $this;
     }
 
     /**
@@ -182,6 +158,18 @@ class Order implements OrderInterface
     public function setItems(Collection $items)
     {
         $this->items = $items;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearItems()
+    {
+        $this->items->clear();
+
+        return $this;
     }
 
     /**
@@ -201,6 +189,8 @@ class Order implements OrderInterface
             $item->setOrder($this);
             $this->items->add($item);
         }
+
+        return $this;
     }
 
     /**
@@ -212,6 +202,8 @@ class Order implements OrderInterface
             $item->setOrder(null);
             $this->items->removeElement($item);
         }
+
+        return $this;
     }
 
     /**
@@ -230,6 +222,8 @@ class Order implements OrderInterface
     public function setTotal($total)
     {
         $this->total = $total;
+
+        return $this;
     }
 
     public function calculateTotal()
@@ -243,6 +237,8 @@ class Order implements OrderInterface
         }
 
         $this->total = $total;
+
+        return $this;
     }
 
     /**
@@ -256,40 +252,8 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incrementCreatedAt()
-    {
-        $this->createdAt = new \DateTime("now");
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incrementUpdatedAt()
-    {
-        $this->updatedAt = new \DateTime("now");
     }
 }

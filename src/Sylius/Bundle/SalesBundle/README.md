@@ -1,9 +1,9 @@
 SyliusSalesBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSalesBundle.png)](http://travis-ci.org/Sylius/SyliusSalesBundle)
-=================
+================
 
-Sales management for Symfony2 e-commerce applications.
-Provides sensible default models, forms, controllers and generally architecture for handling orders.
-Allows using simple orders, orders with items, create, read and update them via format agnostic controllers.
+Sales order bundle for Symfony2 e-commerce applications. It allows you to start building you application with sensible and flexible models.
+Provides default forms, controllers, entities, mappings and everything that can help you building your perfect solution.
+Includes a order builder concept which allows you to quickly build one page checkouts via default controller.
 
 Sylius
 ------
@@ -12,25 +12,23 @@ Sylius
 
 Visit [Sylius.org](http://sylius.org).
 
-[phpspec2](http://phpspec.net) Specifications
----------------------------------------------
+[phpspec2](http://phpspec.net) examples
+---------------------------------------
 
 ``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar install --dev
-$ bin/phpspec run
+$ composer install --dev --prefer-dist
+$ bin/phpspec run -f pretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusSalesBundle.html).
+Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusSalesBundle/index.html).
 
 Code examples
 -------------
 
 If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
-
 
 Contributing
 ------------
@@ -40,12 +38,7 @@ All informations about contributing to Sylius can be found on [this page](http:/
 Mailing lists
 -------------
 
-### Users
-
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).  
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
@@ -70,13 +63,13 @@ And constructed with the following guidelines.
 * New additions without breaking backwards compatibility bumps the minor.
 * Bug fixes and misc changes bump the patch.
 
-For more information on SemVer, please visit [semver.org website](http://semver.org/)...
+For more information on SemVer, please visit [semver.org website](http://semver.org/).  
 This versioning method is same for all **Sylius** bundles and applications.
 
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusSalesBundle/blob/master/Saless/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusSalesBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

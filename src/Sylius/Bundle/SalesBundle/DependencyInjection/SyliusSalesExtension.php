@@ -53,10 +53,12 @@ class SyliusSalesExtension extends Extension
 
         $orderClasses = $config['classes']['order'];
 
-        $container->setParameter('sylius_sales.model.order.class', $orderClasses['model']);
         $container->setParameter('sylius_sales.controller.order.class', $orderClasses['controller']);
         $container->setParameter('sylius_sales.form.type.order.class', $orderClasses['form']);
 
+        if (isset($orderClasses['model'])) {
+            $container->setParameter('sylius_sales.model.order.class', $orderClasses['model']);
+        }
         if (isset($orderClasses['repository'])) {
             $container->setParameter('sylius_sales.repository.order.class', $orderClasses['repository']);
         }
