@@ -27,3 +27,12 @@ sylius_addressing:
             not_blank: "Please enter postcode"
             min_length: "Postcode must be at least 2 characters long"
             max_length: "Postcode must not be longer than 255 characters"
+    country:
+        name:
+            not_blank: "Please enter name"
+            min_length: "Name must be at least 2 characters long"
+            max_length: "Name must not be longer than 255 characters"
+        iso_name:
+            not_blank: "Please enter country ISO code"
+            min_length: "ISO name must be exactly 2 characters long"
+            max_length: "ISO name must be exactly 2 characters long"
