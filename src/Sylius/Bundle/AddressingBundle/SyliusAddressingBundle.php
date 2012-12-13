@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
-use Sylius\Bundle\AddressingBundle\DependencyInjection\Compiler\ResolveClassesPass;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Future plans include zone management, useful for e-commerce applications,
  * where you need set specific tax/shipping rates for concrete zone.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusAddressingBundle extends Bundle
 {
@@ -37,8 +37,17 @@ class SyliusAddressingBundle extends Bundle
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new ResolveClassesPass());
+        $interfaces = array(
+            'Sylius\Bundle\AddressingBundle\Model\AddressInterface'  => 'sylius_addressing.model.address.class',
+            'Sylius\Bundle\AddressingBundle\Model\CountryInterface'  => 'sylius_addressing.model.country.class',
+            'Sylius\Bundle\AddressingBundle\Model\ProvinceInterface' => 'sylius_addressing.model.province.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_addressing', $interfaces));
     }
 }
