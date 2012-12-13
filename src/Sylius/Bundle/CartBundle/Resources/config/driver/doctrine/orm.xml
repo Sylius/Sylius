@@ -17,37 +17,41 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius_cart.model.cart.class">Sylius\Bundle\CartBundle\Entity\Cart</parameter>
+
         <parameter key="sylius_cart.repository.cart.class">Sylius\Bundle\CartBundle\Entity\CartRepository</parameter>
         <parameter key="sylius_cart.repository.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
         <service id="sylius_cart.manager.cart" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_cart.doctrine.orm.metadata.cart"
-                factory-service="sylius_cart.manager.cart"
-                factory-method="getClassMetadata"
-                class="Doctrine\ORM\Mapping\ClassMetadata"
-                public="false"
-        >
-            <argument>%sylius_cart.model.cart.class%</argument>
-        </service>
         <service id="sylius_cart.repository.cart" class="%sylius_cart.repository.cart.class%">
             <argument type="service" id="sylius_cart.manager.cart" />
-            <argument type="service" id="sylius_cart.doctrine.orm.metadata.cart" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_cart.manager.cart"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
+                >
+                    <argument>%sylius_cart.model.cart.class%</argument>
+                </service>
+            </argument>
         </service>
 
         <service id="sylius_cart.manager.item" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_cart.doctrine.orm.metadata.item"
-                factory-service="sylius_cart.manager.item"
-                factory-method="getClassMetadata"
-                class="Doctrine\ORM\Mapping\ClassMetadata"
-                public="false"
-        >
-            <argument>%sylius_cart.model.item.class%</argument>
-        </service>
         <service id="sylius_cart.repository.item" class="%sylius_cart.repository.item.class%">
             <argument type="service" id="sylius_cart.manager.item" />
-            <argument type="service" id="sylius_cart.doctrine.orm.metadata.item" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_cart.manager.item"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
+                >
+                    <argument>%sylius_cart.model.item.class%</argument>
+                </service>
+            </argument>
         </service>
     </services>
 

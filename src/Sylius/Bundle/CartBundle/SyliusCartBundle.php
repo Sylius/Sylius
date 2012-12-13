@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -31,5 +33,15 @@ class SyliusCartBundle extends Bundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+        $interfaces = array(
+            'Sylius\Bundle\CartBundle\Model\CartInterface'     => 'sylius_cart.model.cart.class',
+            'Sylius\Bundle\CartBundle\Model\CartItemInterface' => 'sylius_cart.model.item.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_cart', $interfaces));
     }
 }

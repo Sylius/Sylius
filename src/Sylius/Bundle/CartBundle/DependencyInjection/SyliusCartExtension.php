@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Sylius\Bundle\CartBundle\SyliusCartBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -41,11 +43,11 @@ class SyliusCartExtension extends Extension
         $engine = $config['engine'];
 
         if (!in_array($driver, SyliusCartBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusCartBundle.', $config['driver']));
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusCartBundle', $config['driver']));
         }
 
         if ('twig' !== $engine) {
-            throw new \InvalidArgumentException(sprintf('Templating engine "%s" is unsupported for by SyliusCartBundle.', $config['engine']));
+            throw new \InvalidArgumentException(sprintf('Templating engine "%s" is unsupported for by SyliusCartBundle', $config['engine']));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
@@ -64,12 +66,12 @@ class SyliusCartExtension extends Extension
         $cartClasses = $classes['cart'];
         $cartItemClasses = $classes['item'];
 
-        $loader->load('services.xml');
-
-        $container->setParameter('sylius_cart.model.cart.class', $cartClasses['model']);
         $container->setParameter('sylius_cart.controller.cart.class', $cartClasses['controller']);
         $container->setParameter('sylius_cart.form.type.cart.class', $cartClasses['form']);
 
+        if (isset($cartClasses['model'])) {
+            $container->setParameter('sylius_cart.model.cart.class', $cartClasses['model']);
+        }
         if (isset($cartClasses['repository'])) {
             $container->setParameter('sylius_cart.repository.cart.class', $cartClasses['repository']);
         }
@@ -81,5 +83,7 @@ class SyliusCartExtension extends Extension
         if (isset($cartItemClasses['repository'])) {
             $container->setParameter('sylius_cart.repository.item.class', $cartItemClasses['repository']);
         }
+
+        $loader->load('services.xml');
     }
 }

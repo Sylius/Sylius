@@ -43,7 +43,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('provider')->defaultValue('sylius_cart.provider.default')->end()
                 ->scalarNode('resolver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('storage')->defaultValue('sylius_cart.storage.session')->end()
-            ->end();
+            ->end()
+        ;
 
         $this->addClassesSection($rootNode);
 
@@ -66,9 +67,9 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('cart')
                             ->isRequired()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartController')->end()
-                                ->scalarNode('repository')->end()
+                                ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartType')->end()
                             ->end()
                         ->end()
@@ -77,12 +78,13 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartItemController')->end()
-                                ->scalarNode('repository')->end()
+                                ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartItemType')->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
     }
 }
