@@ -17,8 +17,21 @@
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy">
+        <property name="root">
+            <constraint name="Valid" />
+        </property>
     </class>
+
     <class name="Sylius\Bundle\TaxonomiesBundle\Model\Taxon">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius_taxonomies.taxon.name.not_blank</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_taxonomies.taxon.name.max_length</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>

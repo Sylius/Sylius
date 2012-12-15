@@ -13,7 +13,6 @@ namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\SelectionToTaxonsTransformer;
-use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
