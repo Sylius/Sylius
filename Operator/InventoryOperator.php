@@ -101,7 +101,7 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_AVAILABLE)
+    public function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_SOLD)
     {
         if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 1');
