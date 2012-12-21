@@ -12,20 +12,20 @@
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\SelectionToTaxonsTransformer;
+use Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Taxonomies selection form.
+ * Taxon selection form.
  * It creates one select form for each taxonomy.
  * Transforms it into collection of taxons.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SelectionType extends AbstractType
+class TaxonSelectionType extends AbstractType
 {
     protected $repository;
 
@@ -38,7 +38,7 @@ class SelectionType extends AbstractType
     {
         $taxonomies = $this->repository->findAll();
 
-        $builder->addModelTransformer(new SelectionToTaxonsTransformer($taxonomies));
+        $builder->addModelTransformer(new TaxonSelectionToCollectionTransformer($taxonomies));
 
         foreach ($taxonomies as $taxonomy) {
             $builder->add(strtolower($taxonomy->getName()), 'choice', array(
@@ -68,6 +68,6 @@ class SelectionType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxonomies_selection';
+        return 'sylius_taxonomies_taxon_selection';
     }
 }

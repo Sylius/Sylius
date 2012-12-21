@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -25,13 +25,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonChoiceType extends AbstractType
 {
-    protected $repository;
-
-    public function __construct(ObjectRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['multiple']) {
@@ -49,12 +42,19 @@ class TaxonChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $taxons = $this->repository->findAll();
-        $choiceList = new ObjectChoiceList($taxons);
+        $choiceList = function (Options $options) {
+            return new ObjectChoiceList($options['taxonomy']->getTaxons());
+        };
 
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choiceList
+            ))
+            ->setRequired(array(
+                'taxonomy'
+            ))
+            ->setAllowedTypes(array(
+                'taxonomy' => array('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface')
             ))
         ;
     }

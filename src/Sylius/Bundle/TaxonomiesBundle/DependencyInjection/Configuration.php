@@ -71,7 +71,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\TaxonomiesBundle\\Controller\\TaxonController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType')->end()
                             ->end()

@@ -43,6 +43,15 @@ class Taxon implements TaxonInterface
     public function setTaxonomy(TaxonomyInterface $taxonomy = null)
     {
         $this->taxonomy = $taxonomy;
+
+        if (null !== $taxonomy && null === $this->parent) {
+            $this->setParent($taxonomy->getRoot());
+        }
+    }
+
+    public function isRoot()
+    {
+        return null === $this->parent;
     }
 
     public function getParent()
@@ -50,7 +59,7 @@ class Taxon implements TaxonInterface
         return $this->parent;
     }
 
-    public function setParent(TaxonInterface $parent)
+    public function setParent(TaxonInterface $parent = null)
     {
         $this->parent = $parent;
     }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
+use Sylius\Bundle\TaxonomiesBundle\Form\EventListener\BuildTaxonFormListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -45,16 +46,11 @@ class TaxonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxonomy', 'sylius_taxonomies_taxonomy_choice', array(
-                'multiple' => false
-            ))
             ->add('name', 'text')
             ->add('permalink', 'text', array(
                 'required' => false
             ))
-            ->add('parent', 'sylius_taxonomies_taxon_choice', array(
-                'required' => false
-            ))
+            ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
         ;
     }
 

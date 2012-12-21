@@ -20,7 +20,7 @@
         <parameter key="sylius_taxonomies.form.type.taxonomy_choice.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyChoiceType</parameter>
         <parameter key="sylius_taxonomies.form.type.taxon_choice.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonChoiceType</parameter>
 
-        <parameter key="sylius_taxonomies.form.type.selection.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\SelectionType</parameter>
+        <parameter key="sylius_taxonomies.form.type.taxon_selection.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonSelectionType</parameter>
     </parameters>
 
     <services>
@@ -59,9 +59,9 @@
             <tag name="form.type" alias="sylius_taxonomies_taxon_choice" />
         </service>
 
-        <service id="sylius_taxonomies.form.type.selection" class="%sylius_taxonomies.form.type.selection.class%">
+        <service id="sylius_taxonomies.form.type.taxon_selection" class="%sylius_taxonomies.form.type.taxon_selection.class%">
             <argument type="service" id="sylius_taxonomies.repository.taxonomy" />
-            <tag name="form.type" alias="sylius_taxonomies_selection" />
+            <tag name="form.type" alias="sylius_taxonomies_taxon_selection" />
         </service>
     </services>
 

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\TaxonomiesBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 /**
  * Model for taxonomies.
@@ -54,14 +53,11 @@ class Taxonomy implements TaxonomyInterface
 
     public function getTaxons()
     {
-        return $this->taxons;
-    }
+        $root = $this->root;
 
-    public function setTaxons(Collection $taxons)
-    {
-        $this->taxons = $taxons;
-
-        return $this;
+        return $this->taxons->filter(function (TaxonInterface $taxon) {
+            return !$taxon->isRoot();
+        });
     }
 
     public function hasTaxon(TaxonInterface $taxon)

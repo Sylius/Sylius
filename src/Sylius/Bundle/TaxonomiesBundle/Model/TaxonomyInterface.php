@@ -18,4 +18,13 @@ namespace Sylius\Bundle\TaxonomiesBundle\Model;
  */
 interface TaxonomyInterface
 {
+    public function getId();
+    public function getRoot();
+    public function setRoot(TaxonInterface $root);
+    public function getTaxons();
+    public function hasTaxon(TaxonInterface $taxon);
+    public function addTaxon(TaxonInterface $taxon);
+    public function removeTaxon(TaxonInterface $taxon);
+    public function getName();
+    public function setName($name);
 }

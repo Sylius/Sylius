@@ -68,15 +68,6 @@ class Taxonomy extends ObjectBehavior
     }
 
     /**
-     * @param Doctrine\Common\Collections\Collection $taxons
-     */
-    function its_taxon_collection_should_be_mutable($taxons)
-    {
-        $this->setTaxons($taxons);
-        $this->getTaxons()->shouldReturn($taxons);
-    }
-
-    /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
     function it_should_not_contain_taxon_unless_added($taxon)

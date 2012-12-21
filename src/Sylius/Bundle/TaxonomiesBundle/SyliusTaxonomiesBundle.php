@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -31,5 +33,18 @@ class SyliusTaxonomiesBundle extends Bundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $interfaces = array(
+            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface' => 'sylius_taxonomies.model.taxonomy.class',
+            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface'    => 'sylius_taxonomies.model.taxon.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxonomies', $interfaces));
     }
 }

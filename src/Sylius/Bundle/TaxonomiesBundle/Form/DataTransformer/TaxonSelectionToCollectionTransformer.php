@@ -21,8 +21,13 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SelectionToTaxonsTransformer implements DataTransformerInterface
+class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
 {
+    /**
+     * Taxons map.
+     *
+     * @var array
+     */
     private $taxonomies;
 
     /**
@@ -64,7 +69,7 @@ class SelectionToTaxonsTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        if (null === $value || '' === $value) {
+        if (empty($value)) {
             return new ArrayCollection();
         }
 
@@ -83,4 +88,3 @@ class SelectionToTaxonsTransformer implements DataTransformerInterface
         return $taxons;
     }
 }
-

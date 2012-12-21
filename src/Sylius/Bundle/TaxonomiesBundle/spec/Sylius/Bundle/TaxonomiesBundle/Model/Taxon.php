@@ -33,18 +33,24 @@ class Taxon extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
      */
-    function it_should_allow_assigning_itself_to_taxonomy($taxonomy)
+    function it_should_allow_assigning_itself_to_taxonomy($taxonomy, $root)
     {
+        $taxonomy->getRoot()->willReturn($root);
+
         $this->setTaxonomy($taxonomy);
         $this->getTaxonomy()->shouldReturn($taxonomy);
     }
 
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
      */
-    function it_should_allow_detaching_taxonomy($taxonomy)
+    function it_should_allow_detaching_taxonomy($taxonomy, $root)
     {
+        $taxonomy->getRoot()->willReturn($root);
+
         $this->setTaxonomy($taxonomy);
         $this->getTaxonomy()->shouldReturn($taxonomy);
 
@@ -64,6 +70,34 @@ class Taxon extends ObjectBehavior
     {
         $this->setParent($taxon);
         $this->getParent()->shouldReturn($taxon);
+    }
+
+    function it_should_be_root_by_default()
+    {
+        $this->shouldBeRoot();
+    }
+
+    /**
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
+     */
+    function it_should_not_be_root_if_parent_is_defined($taxon)
+    {
+        $this->setParent($taxon);
+        $this->shouldNotBeRoot();
+    }
+
+    /**
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
+     */
+    function it_should_be_root_if_parent_isnt_defined($taxon)
+    {
+        $this->shouldBeRoot();
+
+        $this->setParent($taxon);
+        $this->shouldNotBeRoot();
+        $this->setParent(null);
+
+        $this->shouldBeRoot();
     }
 
     function it_should_be_unnamed_by_default()
