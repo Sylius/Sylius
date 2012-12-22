@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="Sylius\Bundle\TaxationBundle\Entity\TaxRate" table="sylius_taxation_tax_rate">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="name" column="name" type="string" />
+        <field name="amount" column="amount" type="decimal" precision="10" scale="2" />
+        <field name="includedInPrice" column="included_in_price" type="boolean" />
+        <field name="calculator" column="calculator" type="string" />
+        <many-to-one field="category" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface" inversed-by="rates">
+            <join-column name="category_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+
+</doctrine-mapping>
