@@ -79,4 +79,3 @@ class ZoneType extends AbstractType
         return 'sylius_addressing_zone';
     }
 }
-

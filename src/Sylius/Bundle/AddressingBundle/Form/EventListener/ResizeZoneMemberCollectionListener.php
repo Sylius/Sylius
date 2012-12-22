@@ -62,6 +62,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      * form type is not found, it will return the default form type.
      *
      * @param object $object
+     *
      * @return string
      */
     protected function getTypeForObject($object)
@@ -80,6 +81,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      * the form type to use to process the data.
      *
      * @param array $data
+     *
      * @return string|FormTypeInterface
      * @throws \InvalidArgumentException when _type is not present or is invalid
      */
