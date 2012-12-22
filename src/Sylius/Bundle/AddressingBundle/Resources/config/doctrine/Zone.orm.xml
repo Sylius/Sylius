@@ -13,14 +13,17 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Entity\Province" table="sylius_addressing_province">
+    <entity name="Sylius\Bundle\AddressingBundle\Entity\Zone" table="sylius_addressing_zone">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="name" column="name" type="string" />
-        <many-to-one field="country" target-entity="Sylius\Bundle\AddressingBundle\Model\CountryInterface" inversed-by="provinces">
-            <join-column name="country_id" referenced-column-name="id" />
-        </many-to-one>
+        <field name="type" column="type" type="string" length="8" />
+        <one-to-many field="members" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface" mapped-by="belongsTo">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </entity>
 
 </doctrine-mapping>

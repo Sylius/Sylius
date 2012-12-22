@@ -139,4 +139,20 @@
         </property>
     </class>
 
+    <class name="Sylius\Bundle\AddressingBundle\Model\Zone">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius_addressing.zone.name.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_addressing.zone.name.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_addressing.zone.name.max_length</option>
+            </constraint>
+        </property>
+    </class>
+
 </constraint-mapping>
