@@ -13,10 +13,9 @@ namespace Sylius\Bundle\FlowBundle\Process\Builder;
 
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProcessBuilder implements ProcessBuilderInterface
@@ -79,7 +78,7 @@ class ProcessBuilder implements ProcessBuilderInterface
             throw new \InvalidArgumentException('Step added via builder must implement "Sylius\Bundle\FlowBundle\Process\Step\StepInterface"');
         }
 
-        if ($step instanceof ContainerAwareStep) {
+        if ($step instanceof ContainerAwareInterface) {
             $step->setContainer($this->container);
         }
 
