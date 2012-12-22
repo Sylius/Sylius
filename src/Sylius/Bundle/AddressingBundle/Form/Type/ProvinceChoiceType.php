@@ -46,9 +46,11 @@ class ProvinceChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $choiceList = function (Options $options) {
+        $repository = $this->repository;
+
+        $choiceList = function (Options $options) use ($repository) {
             if (null === $options['country']) {
-                return new ObjectChoiceList($this->repository->findAll());
+                return new ObjectChoiceList($repository->findAll());
             }
 
             return new ObjectChoiceList($options['country']->getProvinces());
