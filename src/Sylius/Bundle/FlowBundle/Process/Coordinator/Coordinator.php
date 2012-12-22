@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
+use FOS\RestBundle\View\View;
 
 /**
  * Default coordinator implementation.
@@ -133,6 +134,10 @@ class Coordinator implements CoordinatorInterface
     public function processStepResult(ProcessInterface $process, $result)
     {
         if ($result instanceof Response) {
+            return $result;
+        }
+
+        if ($result instanceof View) {
             return $result;
         }
 
