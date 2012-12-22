@@ -88,6 +88,68 @@ class SyliusAddressingExtension extends Extension
         $container->setParameter('sylius_addressing.controller.province.class', $provinceClasses['controller']);
         $container->setParameter('sylius_addressing.form.type.province.class', $provinceClasses['form']);
 
+        $zoneClasses = $classes['zone'];
+
+        if (isset($zoneClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.zone.class', $zoneClasses['model']);
+        }
+
+        if (isset($zoneClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.zone.class', $zoneClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.controller.zone.class', $zoneClasses['controller']);
+        $container->setParameter('sylius_addressing.form.type.zone.class', $zoneClasses['form']);
+
+        $zoneMemberClasses = $classes['zone_member'];
+
+        if (isset($zoneMemberClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.zone_member.class', $zoneMemberClasses['model']);
+        }
+
+        if (isset($zoneMemberClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.zone_member.class', $zoneMemberClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.controller.zone_member.class', $zoneMemberClasses['controller']);
+        $container->setParameter('sylius_addressing.form.type.zone_member.class', $zoneMemberClasses['form']);
+
+        $zoneMemberCountryClasses = $classes['zone_member_country'];
+
+        if (isset($zoneMemberCountryClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.zone_member_country.class', $zoneMemberCountryClasses['model']);
+        }
+
+        if (isset($zoneMemberCountryClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.zone_member_country.class', $zoneMemberCountryClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.form.type.zone_member_country.class', $zoneMemberCountryClasses['form']);
+
+        $zoneMemberProvinceClasses = $classes['zone_member_province'];
+
+        if (isset($zoneMemberCountryClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.zone_member_province.class', $zoneMemberProvinceClasses['model']);
+        }
+
+        if (isset($zoneMemberProvinceClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.zone_member_province.class', $zoneMemberProvinceClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.form.type.zone_member_province.class', $zoneMemberProvinceClasses['form']);
+
+        $zoneMemberZoneClasses = $classes['zone_member_zone'];
+
+        if (isset($zoneMemberZoneClasses['model'])) {
+            $container->setParameter('sylius_addressing.model.zone_member_zone.class', $zoneMemberZoneClasses['model']);
+        }
+
+        if (isset($zoneMemberZoneClasses['repository'])) {
+            $container->setParameter('sylius_addressing.repository.zone_member_zone.class', $zoneMemberZoneClasses['repository']);
+        }
+
+        $container->setParameter('sylius_addressing.form.type.zone_member_zone.class', $zoneMemberZoneClasses['form']);
+
         $loader->load('services.xml');
     }
 }
