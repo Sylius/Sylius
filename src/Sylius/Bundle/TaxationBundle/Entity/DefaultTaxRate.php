@@ -11,13 +11,11 @@
 
 namespace Sylius\Bundle\TaxationBundle\Entity;
 
-use Sylius\Bundle\TaxationBundle\Model\TaxRate as BaseTaxRate;
-
 /**
- * Tax rate mapped super-class.
+ * Default tax rate entity.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-abstract class TaxRate extends BaseTaxRate
+class DefaultTaxRate extends TaxRate
 {
 }

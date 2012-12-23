@@ -18,6 +18,6 @@ use Sylius\Bundle\TaxationBundle\Model\TaxCategory as BaseTaxCategory;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class TaxCategory extends BaseTaxCategory
+abstract class TaxCategory extends BaseTaxCategory
 {
 }
