@@ -13,9 +13,6 @@ namespace Sylius\Bundle\AddressingBundle\Matcher;
 
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry;
-use Sylius\Bundle\AddressingBundle\Entity\ZoneMemberProvince;
-use Sylius\Bundle\AddressingBundle\Entity\ZoneMemberZone;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -65,17 +62,25 @@ class ZoneMatcher implements ZoneMatcherInterface
     private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
     {
         foreach ($zone->getMembers() as $member) {
-            if ($member instanceof ZoneMemberProvince) {
-                return null !== $address->getProvince() && $address->getProvince()->getId() === $member->getProvince()->getId();
-            } elseif ($member instanceof ZoneMemberCountry) {
-                return null !== $address->getCountry() && $address->getCountry()->getId() === $member->getCountry()->getId();
-            } elseif ($member instanceof ZoneMemberZone) {
-                return $this->addressBelongsToZone($address, $member->getZone());
-            } else {
-                throw new \InvalidArgumentException(sprintf(
-                    'Unexpected zone member type "%s".',
-                    get_class($member)
-                ));
+            switch ($zone->getType()) {
+                case ZoneInterface::TYPE_PROVINCE:
+                    return null !== $address->getProvince() && $address->getProvince()->getId() === $member->getProvince()->getId();
+                    break;
+
+                case ZoneInterface::TYPE_COUNTRY:
+                    return null !== $address->getCountry() && $address->getCountry()->getId() === $member->getCountry()->getId();
+                    break;
+
+                case ZoneInterface::TYPE_ZONE:
+                    return $this->addressBelongsToZone($address, $member->getZone());
+                    break;
+
+                default:
+                    throw new \InvalidArgumentException(sprintf(
+                        'Unexpected zone type "%s".',
+                        $zone->getType()
+                    ));
+                    break;
             }
         }
     }

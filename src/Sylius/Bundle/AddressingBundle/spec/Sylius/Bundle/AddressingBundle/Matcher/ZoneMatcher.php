@@ -3,6 +3,7 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Matcher;
 
 use PHPSpec2\ObjectBehavior;
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 
 /**
  * Zone matcher spec.
@@ -50,6 +51,7 @@ class ZoneMatcher extends ObjectBehavior
         $province->getId()->shouldBeCalled()->willReturn(7);
         $address->getProvince()->shouldBeCalled()->willReturn($province);
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
+        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
         $zone->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
 
         $this->match($address)->shouldReturn($zone);
@@ -68,6 +70,7 @@ class ZoneMatcher extends ObjectBehavior
         $country->getId()->shouldBeCalled()->willReturn(7);
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
+        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $zone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
 
         $this->match($address)->shouldReturn($zone);
@@ -88,8 +91,10 @@ class ZoneMatcher extends ObjectBehavior
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
         $subZone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $subZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $memberZone->getZone()->shouldBeCalled()->willReturn($subZone);
         $rootZone->getMembers()->shouldBeCalled()->willReturn(array($memberZone));
+        $rootZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_ZONE);
         $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
 
         $this->match($address)->shouldReturn($rootZone);
@@ -109,6 +114,7 @@ class ZoneMatcher extends ObjectBehavior
         $province->getId()->shouldBeCalled()->willReturn(7);
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
         $zoneProvince->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
+        $zoneProvince->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
         $zoneCountry->getMembers()->shouldNotBeCalled();
         $repository->findAll()->shouldBeCalled()->willReturn(array($zoneProvince, $zoneCountry));
 
