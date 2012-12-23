@@ -89,9 +89,14 @@ class DocumentRepository extends BaseDocumentRepository
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sortBy);
         
-        return new Pagerfanta(new DoctrineODMMongoDBAdapter($queryBuilder));
+        return $this->getPaginator($queryBuilder);        
     }
         
+    public function getPaginator(QueryBuilder $queryBuilder)
+    {
+        return new Pagerfanta(new DoctrineODMMongoDBAdapter($queryBuilder));
+    }
+    
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder();
