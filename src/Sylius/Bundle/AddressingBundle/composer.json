@@ -25,7 +25,8 @@
         "stof/doctrine-extensions-bundle": "*"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop"
+        "phpspec/phpspec2": "dev-develop",
+        "doctrine/orm"    : "*"
     },
     "config": {
         "bin-dir": "bin"
