@@ -18,6 +18,6 @@ use Sylius\Bundle\TaxationBundle\Model\TaxRate as BaseTaxRate;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-abstract class TaxRate extends BaseTaxRate
+class TaxRate extends BaseTaxRate
 {
 }
