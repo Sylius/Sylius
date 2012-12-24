@@ -44,7 +44,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function match(AddressInterface $address)
     {
-        foreach ($this->repository->findAll() as $zone) {
+        foreach ($this->getZones() as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 return $zone;
             }
@@ -59,7 +59,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      *
      * @return bool
      */
-    private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
+    protected function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
     {
         foreach ($zone->getMembers() as $member) {
             switch ($zone->getType()) {
@@ -83,5 +83,30 @@ class ZoneMatcher implements ZoneMatcherInterface
                     break;
             }
         }
+    }
+
+    /**
+     * Gets zones sorted by priority/type (province, country, zone).
+     *
+     * @return array $zones
+     */
+    protected function getZones()
+    {
+        $priorities = array(
+            ZoneInterface::TYPE_PROVINCE => 2,
+            ZoneInterface::TYPE_COUNTRY  => 1,
+            ZoneInterface::TYPE_ZONE     => 0,
+        );
+
+        $zones = $this->repository->findAll();
+        usort($zones, function(ZoneInterface $zone1, ZoneInterface $zone2) use ($priorities) {
+            if($priorities[$zone1->getType()] > $priorities[$zone2->getType()]) {
+                return -1;
+            }
+
+            return 1;
+        });
+
+        return $zones;
     }
 }
