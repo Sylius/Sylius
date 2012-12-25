@@ -1,0 +1,37 @@
+{
+    "name": "sylius/shipping-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible shipping system for Symfony2 ecommerce applications.",
+    "keywords": ["shipping", "delivery", "shop", "webshop", "ecommerce"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+
+        "symfony/framework-bundle":        "~2.1",
+        "sylius/resource-bundle":          "*",
+        "stof/doctrine-extensions-bundle": "*"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "dev-develop"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\ShippingBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/ShippingBundle"
+}

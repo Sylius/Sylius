@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius_shipping.form.type.calculator_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType</parameter>
+
+        <parameter key="sylius_shipping.calculator.class">Sylius\Bundle\ShippingBundle\Calculator\DelegatingShippingCalculator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius_shipping.controller.category" class="%sylius_shipping.controller.category.class%">
+            <argument>sylius_shipping</argument>
+            <argument>category</argument>
+            <argument>SyliusShippingBundle:ShippingCategory</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius_shipping.controller.method" class="%sylius_shipping.controller.method.class%">
+            <argument>sylius_shipping</argument>
+            <argument>method</argument>
+            <argument>SyliusShippingBundle:Shippingmethod</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius_shipping.form.type.category" class="%sylius_shipping.form.type.category.class%">
+            <argument>%sylius_shipping.model.category.class%</argument>
+            <tag name="form.type" alias="sylius_shipping_category" />
+        </service>
+        <service id="sylius_shipping.form.type.method" class="%sylius_shipping.form.type.method.class%">
+            <argument>%sylius_shipping.model.method.class%</argument>
+            <tag name="form.type" alias="sylius_shipping_method" />
+        </service>
+
+        <service id="sylius_shipping.form.type.calculator_choice" class="%sylius_shipping.form.type.calculator_choice.class%">
+            <argument>%sylius_shipping.calculators%</argument>
+            <tag name="form.type" alias="sylius_shipping_calculator_choice" />
+        </service>
+
+        <service id="sylius_shipping.calculator" class="%sylius_shipping.calculator.class%" />
+    </services>
+
+</container>
