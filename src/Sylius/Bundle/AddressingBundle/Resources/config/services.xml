@@ -22,6 +22,7 @@
         <parameter key="sylius_addressing.form.type.zone_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneEntityChoiceType</parameter>
         <parameter key="sylius_addressing.form.type.zone_member_collection.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCollectionType</parameter>
         <parameter key="sylius_addressing.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener</parameter>
+        <parameter key="sylius_addressing.zone_matcher.class">Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcher</parameter>
     </parameters>
 
     <services>
@@ -116,6 +117,10 @@
         <service id="sylius_addressing.form.listener.address" class="%sylius_addressing.form.listener.address.class%">
             <argument type="service" id="sylius_addressing.repository.country" />
             <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="sylius_addressing.zone_matcher" class="%sylius_addressing.zone_matcher.class%">
+            <argument type="service" id="sylius_addressing.repository.zone" />
         </service>
     </services>
 

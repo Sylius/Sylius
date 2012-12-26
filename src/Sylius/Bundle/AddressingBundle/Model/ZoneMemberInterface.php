@@ -33,7 +33,7 @@ interface ZoneMemberInterface
      *
      * @return ZoneMemberInterface
      */
-    public function setBelongsTo(ZoneInterface $belongsTo);
+    public function setBelongsTo(ZoneInterface $belongsTo = null);
 
     /**
      * Gets zone member name.
