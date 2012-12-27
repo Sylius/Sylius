@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius_settings.controller.class">Sylius\Bundle\SettingsBundle\Controller\SettingsController</parameter>
+        <parameter key="sylius_settings.form.factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
+        <parameter key="sylius_settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
+        <parameter key="sylius_settings.registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
+        <parameter key="sylius_settings.twig.class">Sylius\Bundle\SettingsBundle\Twig\SyliusSettingsExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius_settings.controller.parameter" class="%sylius_settings.controller.parameter.class%">
+            <argument>sylius_settings</argument>
+            <argument>parameter</argument>
+            <argument>SyliusSettingsBundle:Taxparameter</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius_settings.controller" class="%sylius_settings.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius_settings.form.factory" class="%sylius_settings.form.factory.class%">
+            <argument type="service" id="sylius_settings.registry" />
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="sylius_settings.form.type.parameter" class="%sylius_settings.form.type.parameter.class%">
+            <argument>%sylius_settings.model.parameter.class%</argument>
+            <tag name="form.type" alias="sylius_settings_parameter" />
+        </service>
+
+        <service id="sylius_settings.cache" alias="liip_doctrine_cache.ns.sylius_settings" />
+
+        <service id="sylius_settings.manager" class="%sylius_settings.manager.class%">
+            <argument>%sylius_settings.namespaces%</argument>
+            <argument type="service" id="sylius_settings.cache" />
+            <argument type="service" id="sylius_settings.manager.parameter" />
+            <argument type="service" id="sylius_settings.repository.parameter" />
+        </service>
+
+        <service id="sylius_settings.registry" class="%sylius_settings.registry.class%" />
+
+        <service id="sylius_settings.twig" class="%sylius_settings.twig.class%">
+            <argument type="service" id="sylius_settings.manager" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+
+</container>
