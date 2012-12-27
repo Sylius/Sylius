@@ -27,7 +27,7 @@ class CartRepository extends EntityRepository
     {
         return parent::getQueryBuilder()
             ->select('cart, item')
-            ->leftJoin($this->getAlias().'.items', 'item')
+            ->leftJoin('cart.items', 'item')
         ;
     }
 

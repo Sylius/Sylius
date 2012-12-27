@@ -30,5 +30,10 @@ class CartItemController extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
+
+    function it_should_extend_base_Sylius_cart_bundle_controller()
+    {
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\Controller\Controller');
+    }
 }
 

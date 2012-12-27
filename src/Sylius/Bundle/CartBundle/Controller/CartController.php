@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CartController extends ResourceController
+class CartController extends Controller
 {
     /**
      * Displays current cart summary page.
@@ -33,12 +32,12 @@ class CartController extends ResourceController
      *
      * @return Response
      */
-    public function showAction(Request $request)
+    public function summaryAction(Request $request)
     {
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
-        return $this->renderResponse('show.html', array(
+        return $this->renderResponse('summary.html', array(
             'cart' => $cart,
             'form' => $form->createView()
         ));
@@ -58,26 +57,19 @@ class CartController extends ResourceController
     public function saveAction(Request $request)
     {
         $cart = $this->getCurrentCart();
+        $form = $this->createForm('sylius_cart', $cart);
 
-        $form = $this
-            ->createForm('sylius_cart', $cart)
-            ->bind($request)
-        ;
-
-        if ($form->isValid()) {
+        if ($form->bind($request)->isValid()) {
             $this
                 ->getOperator()
                 ->refresh($cart)
                 ->save($cart)
             ;
 
-            $this->setFlash('success', 'sylius_cart.flashes.saved');
+            $this->setFlash('success', 'The cart have been updated correctly');
         }
 
-        return $this->renderResponse('show.html', array(
-            'cart' => $cart,
-            'form' => $form->createView()
-        ));
+        return $this->redirectToCartSummary();
     }
 
     /**
@@ -93,61 +85,8 @@ class CartController extends ResourceController
             ->clear($this->getCurrentCart())
         ;
 
-        $this->setFlash('success', 'sylius_cart.flashes.cleared');
+        $this->setFlash('success', 'The cart has been successfully cleared');
 
-        return $this->redirectToCart();
-    }
-
-    /**
-     * Redirect to show summary page.
-     *
-     * @return RedirectResponse
-     */
-    protected function redirectToCart()
-    {
-        return $this->redirect($this->generateUrl($this->getCartRoute()));
-    }
-
-    /**
-     * Cart summary page route.
-     *
-     * @return string
-     */
-    protected function getCartRoute()
-    {
-        return 'sylius_cart_show';
-    }
-
-    /**
-     * Get current cart instance.
-     *
-     * @return CartInterface
-     */
-    protected function getCurrentCart()
-    {
-        return $this
-            ->getProvider()
-            ->getCart()
-        ;
-    }
-
-    /**
-     * Get cart provider service.
-     *
-     * @return CartProviderInterface
-     */
-    protected function getProvider()
-    {
-        return $this->get('sylius_cart.provider');
-    }
-
-    /**
-     * Get cart operator service.
-     *
-     * @return CartOperatorInterface
-     */
-    protected function getOperator()
-    {
-        return $this->get('sylius_cart.operator');
-    }
+        return $this->redirectToCartSummary();
+     }
 }

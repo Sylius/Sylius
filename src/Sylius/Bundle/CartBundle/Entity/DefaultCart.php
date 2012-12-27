@@ -11,13 +11,11 @@
 
 namespace Sylius\Bundle\CartBundle\Entity;
 
-use Sylius\Bundle\CartBundle\Model\Cart as BaseCart;
-
 /**
- * Cart mapped superclass.
+ * Default cart entity.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Cart extends BaseCart
+class DefaultCart extends Cart
 {
 }

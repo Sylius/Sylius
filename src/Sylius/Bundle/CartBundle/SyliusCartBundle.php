@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Simple and flexible cart system.
+ * Flexible shopping cart system for Symfony2 e-commerce applications.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -35,6 +35,9 @@ class SyliusCartBundle extends Bundle
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(

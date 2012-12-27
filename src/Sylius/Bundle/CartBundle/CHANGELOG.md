@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+### v0.2.0
+
+* Introduce default cart entity.
+* Use Doctrine RTEL to map interfaces instead of real entities.
+* Rename ``CartController::showAction`` to ``CartController::summaryAction``.
+* Renamed ``SyliusCartBundle:Cart:show.html`` template to ``SyliusCartBundle:Cart:summary.html``.
+* Add base controller.
+
 ### v0.1.0
 
 * First development release.

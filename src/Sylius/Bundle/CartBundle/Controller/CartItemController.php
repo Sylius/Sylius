@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CartBundle\Controller;
 
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CartItemController extends ResourceController
+class CartItemController extends Controller
 {
     /**
      * Adds item to cart.
@@ -51,12 +50,11 @@ class CartItemController extends ResourceController
 
         try {
             $item = $this->getResolver()->resolve($emptyItem, $request);
-
         } catch (ItemResolvingException $exception) {
-            $errorMessage = $exception->getMessage() ?: 'sylius_cart.flashes.add.error';
+            $errorMessage = $exception->getMessage() ?: 'Error occurred while adding item to cart';
             $this->setFlash('error', $errorMessage);
 
-            return $this->redirectToCart();
+            return $this->redirectToCartSummary();
         }
 
         $cartOperator = $this->getOperator();
@@ -69,11 +67,11 @@ class CartItemController extends ResourceController
         $errors = $this->get('validator')->validate($cart);
 
         if (0 === count($errors)) {
-            $this->setFlash('success', 'sylius_cart.flashes.add.success');
+            $this->setFlash('success', 'Item has been added to cart');
             $cartOperator->save($cart);
         }
 
-        return $this->redirectToCart();
+        return $this->redirectToCartSummary();
     }
 
     /**
@@ -93,9 +91,9 @@ class CartItemController extends ResourceController
         $item = $this->getRepository()->find($id);
 
         if (!$item || false === $cart->hasItem($item)) {
-            $this->setFlash('error', 'sylius_cart.flashes.remove.error');
+            $this->setFlash('error', 'Error occurred while removing item from cart');
 
-            return $this->redirectToCart();
+            return $this->redirectToCartSummary();
         }
 
         $this
@@ -105,72 +103,8 @@ class CartItemController extends ResourceController
             ->save($cart)
         ;
 
-        $this->setFlash('success', 'sylius_cart.flashes.remove.success');
+        $this->setFlash('success', 'Item has been removed from cart');
 
-        return $this->redirectToCart();
-    }
-
-    /**
-     * Redirect to cart summary page.
-     *
-     * @return RedirectResponse
-     */
-    protected function redirectToCart()
-    {
-        return $this->redirect($this->generateUrl($this->getCartRoute()));
-    }
-
-    /**
-     * Cart summary page route.
-     *
-     * @return string
-     */
-    protected function getCartRoute()
-    {
-        return 'sylius_cart_show';
-    }
-
-    /**
-     * Get current cart using the provider service.
-     *
-     * @return CartInterface
-     */
-    protected function getCurrentCart()
-    {
-        return $this
-            ->getProvider()
-            ->getCart()
-        ;
-    }
-
-    /**
-     * Get cart provider.
-     *
-     * @return CartProviderInterface
-     */
-    protected function getProvider()
-    {
-        return $this->get('sylius_cart.provider');
-    }
-
-    /**
-     * Get cart operator.
-     *
-     * @return CartOperatorInterface
-     */
-    protected function getOperator()
-    {
-        return $this->get('sylius_cart.operator');
-    }
-
-    /**
-     * Get cart item resolver.
-     * This service is used to build the new cart item instance.
-     *
-     * @return CartResolverInterface
-     */
-    protected function getResolver()
-    {
-        return $this->get('sylius_cart.resolver');
+        return $this->redirectToCartSummary();
     }
 }
