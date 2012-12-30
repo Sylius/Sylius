@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Util\Pluralization;
+use FOS\RestBundle\View\RedirectView;
 use FOS\RestBundle\View\RouteRedirectView;
 use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -209,16 +210,24 @@ class ResourceController extends Controller
 
     public function redirectTo($resource)
     {
-        $route = $this->getRedirectRoute('show');
-
-        return $this->handleView(RouteRedirectView::create($route, array('id' => $resource->getId())));
+        return $this->redirectToRoute(
+            $this->getRedirectRoute('show'),
+            array('id' => $resource->getId())
+        );
     }
 
     public function redirectToCollection()
     {
-        $route = $this->getRedirectRoute('list');
+        return $this->redirectToRoute($this->getRedirectRoute('list'));
+    }
 
-        return $this->handleView(RouteRedirectView::create($route));
+    public function redirectToRoute($route, array $data = array())
+    {
+        if ('referer' === $route) {
+            return $this->handleView(RedirectView::create($this->getRequest()->headers->get('referer')));
+        }
+
+        return $this->handleView(RouteRedirectView::create($route, $data));
     }
 
     public function getRedirectRoute($name)
