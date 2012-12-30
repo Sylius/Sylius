@@ -174,6 +174,11 @@ class Configuration
         return $defaultSorting;
     }
 
+    public function getFlashMessage()
+    {
+        return $this->get('flash');
+    }
+
     public function getRoute()
     {
         return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);

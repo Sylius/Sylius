@@ -105,6 +105,7 @@ class ResourceController extends Controller
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->persistAndFlush($resource);
+            $this->setFlash('success', sprintf('%s has been successfully created.', ucfirst($config->getResourceName())));
 
             return $this->redirectTo($resource);
         }
@@ -136,6 +137,7 @@ class ResourceController extends Controller
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->persistAndFlush($resource);
+            $this->setFlash('success', sprintf('%s has been updated.', ucfirst($config->getResourceName())));
 
             return $this->redirectTo($resource);
         }
@@ -167,6 +169,7 @@ class ResourceController extends Controller
 
         $resource = $this->findOr404($criteria);
         $this->removeAndFlush($resource);
+        $this->setFlash('success', sprintf('%s has been deleted.', ucfirst($this->getConfiguration()->getResourceName())));
 
         return $this->redirectToCollection();
     }
@@ -300,6 +303,10 @@ class ResourceController extends Controller
 
     protected function setFlash($type, $message)
     {
+        if (null !== $customMessage = $this->getConfiguration()->getFlashMessage()) {
+            $message = $customMessage;
+        }
+
         return $this
             ->get('session')
             ->getFlashBag()
