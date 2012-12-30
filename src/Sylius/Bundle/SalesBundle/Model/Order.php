@@ -31,9 +31,38 @@ class Order implements OrderInterface
     /**
      * Items in order.
      *
-     * @var array
+     * @var Collection
      */
     protected $items;
+
+    /**
+     * Items total.
+     *
+     * @var mixed
+     */
+    protected $itemsTotal;
+
+    /**
+     * Adjustments.
+     *
+     * @var Collection
+     */
+    protected $adjustments;
+
+    /**
+     * Adjustments total.
+     *
+     * @var float
+     */
+    protected $adjustmentsTotal;
+
+    /**
+     * Calculated total.
+     * Items total + adjustments total.
+     *
+     * @var float
+     */
+    protected $total;
 
     /**
      * Whether order was confirmed.
@@ -48,8 +77,6 @@ class Order implements OrderInterface
      * @var string
      */
     protected $confirmationToken;
-
-    protected $total;
 
     /**
      * Creation time.
@@ -71,9 +98,13 @@ class Order implements OrderInterface
     public function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->confirmed = true;
+        $this->itemsTotal = 0;
+        $this->adjustments = new ArrayCollection();
+        $this->adjustmentsTotal = 0;
         $this->total = 0;
         $this->generateConfirmationToken();
+        $this->confirmed = true;
+        $this->createdAt = new \DateTime('now');
     }
 
     /**
@@ -214,11 +245,115 @@ class Order implements OrderInterface
         return $this->items->contains($item);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemsTotal()
+    {
+        return $this->itemsTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setItemsTotal($itemsTotal)
+    {
+        $this->itemsTotal = $itemsTotal;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateItemsTotal()
+    {
+        $itemsTotal = 0;
+
+        foreach ($this->items as $item) {
+            $item->calculateTotal();
+
+            $itemsTotal += $item->getTotal();
+        }
+
+        $this->itemsTotal = $itemsTotal;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustments()
+    {
+        return $this->adjustments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAdjustment(AdjustmentInterface $adjustment)
+    {
+        if (!$this->hasAdjustment($adjustment)) {
+            $adjustment->setAdjustable($this);
+            $this->adjustments->add($adjustment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAdjustment(AdjustmentInterface $adjustment)
+    {
+        if ($this->hasAdjustment($adjustment)) {
+            $adjustment->setAdjustable(null);
+            $this->adjustments->removeElement($adjustment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAdjustment(AdjustmentInterface $adjustment)
+    {
+        return $this->adjustments->contains($adjustment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustmentsTotal()
+    {
+        return $this->adjustmentsTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateAdjustmentsTotal()
+    {
+        $this->adjustmentsTotal = 0;
+
+        foreach ($this->adjustments as $adjustment) {
+            $this->adjustmentsTotal += $adjustment->getAmount();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTotal()
     {
         return $this->total;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setTotal($total)
     {
         $this->total = $total;
@@ -226,17 +361,15 @@ class Order implements OrderInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateTotal()
     {
-        $total = 0;
+        $this->calculateItemsTotal();
+        $this->calculateAdjustmentsTotal();
 
-        foreach ($this->items as $item) {
-            $item->calculateTotal();
-
-            $total += $item->getTotal();
-        }
-
-        $this->total = $total;
+        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
 
         return $this;
     }

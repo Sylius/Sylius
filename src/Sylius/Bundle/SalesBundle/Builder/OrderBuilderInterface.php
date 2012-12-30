@@ -20,6 +20,17 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  */
 interface OrderBuilderInterface
 {
-    function build(OrderInterface $order);
-    function finalize(OrderInterface $order);
+    /**
+     * Build order, from a cart for example.
+     *
+     * @param OrderInterface $order
+     */
+    public function build(OrderInterface $order);
+
+    /**
+     * Finalize order.
+     *
+     * @param OrderInterface $order
+     */
+    public function finalize(OrderInterface $order);
 }

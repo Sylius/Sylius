@@ -5,7 +5,7 @@ namespace spec\Sylius\Bundle\SalesBundle\Entity;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Order item entity spec.
+ * Order item mapped superclass spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

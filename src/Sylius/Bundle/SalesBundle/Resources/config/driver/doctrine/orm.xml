@@ -17,8 +17,11 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius_sales.model.adjustment.class">Sylius\Bundle\SalesBundle\Entity\DefaultAdjustment</parameter>
+
         <parameter key="sylius_sales.repository.order.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius_sales.repository.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius_sales.repository.adjustment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
@@ -46,6 +49,20 @@
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
                     <argument>%sylius_sales.model.item.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius_sales.manager.adjustment" alias="doctrine.orm.entity_manager" />
+        <service id="sylius_sales.repository.adjustment" class="%sylius_sales.repository.adjustment.class%">
+            <argument type="service" id="sylius_sales.manager.adjustment" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_sales.manager.adjustment"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius_sales.model.adjustment.class%</argument>
                 </service>
             </argument>
         </service>

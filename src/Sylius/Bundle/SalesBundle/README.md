@@ -4,6 +4,7 @@ SyliusSalesBundle [![Build status...](https://secure.travis-ci.org/Sylius/Sylius
 Sales order bundle for Symfony2 e-commerce applications. It allows you to start building you application with sensible and flexible models.
 Provides default forms, controllers, entities, mappings and everything that can help you building your perfect solution.
 Includes a order builder concept which allows you to quickly build one page checkouts via default controller.
+Includes order and order item total value adjustments system based on ideas from [Spree adjustments](http://guides.spreecommerce.com/adjustments.html).
 
 Sylius
 ------

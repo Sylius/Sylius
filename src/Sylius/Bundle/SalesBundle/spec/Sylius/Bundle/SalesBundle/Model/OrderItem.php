@@ -21,6 +21,11 @@ class OrderItem extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderItemInterface');
     }
 
+    function it_should_be_a_Sylius_sales_adjustable()
+    {
+        $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustableInterface');
+    }
+
     function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
@@ -55,13 +60,58 @@ class OrderItem extends ObjectBehavior
         ;
     }
 
+    function it_should_initialize_adjustments_collection_by_default()
+    {
+        $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     */
+    function it_should_add_adjustments_properly($adjustment)
+    {
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this->hasAdjustment($adjustment)->shouldReturn(false);
+        $this->addAdjustment($adjustment);
+        $this->hasAdjustment($adjustment)->shouldReturn(true);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     */
+    function it_should_remove_adjustments_properly($adjustment)
+    {
+        $this->hasAdjustment($adjustment)->shouldReturn(false);
+
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($adjustment);
+
+        $this->hasAdjustment($adjustment)->shouldReturn(true);
+
+        $adjustment->setAdjustable(null)->shouldBeCalled();
+        $this->removeAdjustment($adjustment);
+
+        $this->hasAdjustment($adjustment)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     */
+    function it_should_have_fluid_interface_for_adjustments_management($adjustment)
+    {
+        $this->addAdjustment($adjustment)->shouldReturn($this);
+        $this->removeAdjustment($adjustment)->shouldReturn($this);
+    }
+
+
     function its_total_should_be_mutable()
     {
         $this->setTotal(59.99);
         $this->getTotal()->shouldReturn(59.99);
     }
 
-    function it_should_calculate_correct_total()
+    function it_should_calculate_correct_total_based_on_quantity_and_unit_price()
     {
         $this->setQuantity(13);
         $this->setUnitPrice(14.99);
@@ -69,5 +119,21 @@ class OrderItem extends ObjectBehavior
         $this->calculateTotal();
 
         $this->getTotal()->shouldReturn(194.87);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     */
+    function it_should_calculate_correct_total_based_on_adjustments($adjustment)
+    {
+        $this->setQuantity(13);
+        $this->setUnitPrice(14.99);
+
+        $adjustment->getAmount()->willReturn(-10);
+        $this->addAdjustment($adjustment);
+
+        $this->calculateTotal();
+
+        $this->getTotal()->shouldReturn(184.87);
     }
 }

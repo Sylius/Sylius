@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\SalesBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Model for order line items.
  *
@@ -38,7 +40,33 @@ class OrderItem implements OrderItemInterface
      * @var integer
      */
     protected $quantity;
+
+    /**
+     * Unit price.
+     *
+     * @var float
+     */
     protected $unitPrice;
+
+    /**
+     * Total adjustments.
+     *
+     * @var Collection
+     */
+    protected $adjustments;
+
+    /**
+     * Adjustments total.
+     *
+     * @var float
+     */
+    protected $adjustmentsTotal;
+
+    /**
+     * Order item total.
+     *
+     * @var float
+     */
     protected $total;
 
     /**
@@ -48,6 +76,8 @@ class OrderItem implements OrderItemInterface
     {
         $this->quantity = 1;
         $this->unitPrice = 0;
+        $this->adjustments = new ArrayCollection();
+        $this->adjustmentsTotal = 0;
         $this->total = 0;
     }
 
@@ -94,28 +124,111 @@ class OrderItem implements OrderItemInterface
         $this->order = $order;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUnitPrice()
     {
         return $this->unitPrice;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUnitPrice($unitPrice)
     {
         $this->unitPrice = $unitPrice;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustments()
+    {
+        return $this->adjustments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAdjustment(AdjustmentInterface $adjustment)
+    {
+        if (!$this->hasAdjustment($adjustment)) {
+            $adjustment->setAdjustable($this);
+            $this->adjustments->add($adjustment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAdjustment(AdjustmentInterface $adjustment)
+    {
+        if ($this->hasAdjustment($adjustment)) {
+            $adjustment->setAdjustable(null);
+            $this->adjustments->removeElement($adjustment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAdjustment(AdjustmentInterface $adjustment)
+    {
+        return $this->adjustments->contains($adjustment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustmentsTotal()
+    {
+        return $this->adjustmentsTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateAdjustmentsTotal()
+    {
+        $this->adjustmentsTotal = 0;
+
+        foreach ($this->adjustments as $adjustment) {
+            $this->adjustmentsTotal += $adjustment->getAmount();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTotal()
     {
         return $this->total;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setTotal($total)
     {
         $this->total = $total;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateTotal()
     {
-        $this->total = $this->unitPrice * $this->quantity;
+        $this->calculateAdjustmentsTotal();
+
+        $this->total = ($this->quantity * $this->unitPrice) + $this->adjustmentsTotal;
+
+        return $this;
     }
 }

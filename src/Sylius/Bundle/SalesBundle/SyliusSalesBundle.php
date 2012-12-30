@@ -28,7 +28,7 @@ class SyliusSalesBundle extends Bundle
      *
      * @return array
      */
-    static public function getSupportedDrivers()
+    public static function getSupportedDrivers()
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
@@ -41,8 +41,9 @@ class SyliusSalesBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\SalesBundle\Model\OrderInterface'     => 'sylius_sales.model.order.class',
-            'Sylius\Bundle\SalesBundle\Model\OrderItemInterface' => 'sylius_sales.model.item.class',
+            'Sylius\Bundle\SalesBundle\Model\OrderInterface'      => 'sylius_sales.model.order.class',
+            'Sylius\Bundle\SalesBundle\Model\OrderItemInterface'  => 'sylius_sales.model.item.class',
+            'Sylius\Bundle\SalesBundle\Model\AdjustmentInterface' => 'sylius_sales.model.adjustment.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_cart', $interfaces));

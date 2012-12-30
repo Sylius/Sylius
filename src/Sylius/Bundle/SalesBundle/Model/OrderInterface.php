@@ -18,105 +18,134 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface
+interface OrderInterface extends AdjustableInterface
 {
     /**
      * Get order id.
      *
      * @return mixed
      */
-    function getId();
+    public function getId();
 
     /**
      * Is confirmed?
      *
      * @return Boolean
      */
-    function isConfirmed();
+    public function isConfirmed();
 
     /**
      * Set confirmed.
      *
      * @param Boolean $confirmed
      */
-    function setConfirmed($confirmed);
+    public function setConfirmed($confirmed);
 
     /**
      * Generate confirmation token.
      */
-    function generateConfirmationToken();
+    public function generateConfirmationToken();
 
     /**
      * Get confirmation token.
      *
      * @return string
      */
-    function getConfirmationToken();
+    public function getConfirmationToken();
 
     /**
      * Set confirmation token.
      *
      * @param string $confirmationToken
      */
-    function setConfirmationToken($confirmationToken);
+    public function setConfirmationToken($confirmationToken);
 
     /**
      * Get order items.
      *
      * @return array An array or collection of OrderItemInterface
      */
-    function getItems();
+    public function getItems();
 
     /**
      * Set items.
      *
      * @param Collection $items
      */
-    function setItems(Collection $items);
+    public function setItems(Collection $items);
 
     /**
      * Returns number of order items.
      *
      * @return integer
      */
-    function countItems();
+    public function countItems();
 
     /**
      * Adds item to order.
      *
      * @param OrderItemInterface $item
      */
-    function addItem(OrderItemInterface $item);
+    public function addItem(OrderItemInterface $item);
 
     /**
      * Remove item from order.
      *
      * @param OrderItemInterface $item
      */
-    function removeItem(OrderItemInterface $item);
+    public function removeItem(OrderItemInterface $item);
 
     /**
      * Has item in order?
      *
      * @param Item
      */
-    function hasItem(OrderItemInterface $item);
+    public function hasItem(OrderItemInterface $item);
 
-    function getTotal();
-    function setTotal($total);
-    function calculateTotal();
+    /**
+     * Get items total.
+     *
+     * @return mixed
+     */
+    public function getItemsTotal();
+
+    /**
+     * Calculate items total based on the items
+     * unit prices and quantities.
+     */
+    public function calculateItemsTotal();
+
+    /**
+     * Get order total.
+     *
+     * @return float
+     */
+    public function getTotal();
+
+    /**
+     * Set total.
+     *
+     * @param float $total
+     */
+    public function setTotal($total);
+
+    /**
+     * Calculate total.
+     * Items total + Adjustments total.
+     */
+    public function calculateTotal();
 
     /**
      * Get creation time.
      *
      * @return \DateTime
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * Get modification time.
      *
      * @return \DateTime
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 }

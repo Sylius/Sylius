@@ -21,22 +21,43 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  */
 class OrderBuilder implements OrderBuilderInterface
 {
+    /**
+     * Order item repository.
+     *
+     * @var ObjectRepository
+     */
     protected $itemRepository;
 
+    /**
+     * Constructor.
+     *
+     * @param ObjectRepository $itemRepository
+     */
     public function __construct(ObjectRepository $itemRepository)
     {
         $this->itemRepository = $itemRepository;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function build(OrderInterface $order)
     {
         $order->calculateTotal();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function finalize(OrderInterface $order)
     {
     }
 
+    /**
+     * Create new order item instance.
+     *
+     * @return OrderItemInterface
+     */
     protected function createNewItem()
     {
         return $this->itemRepository->createNew();

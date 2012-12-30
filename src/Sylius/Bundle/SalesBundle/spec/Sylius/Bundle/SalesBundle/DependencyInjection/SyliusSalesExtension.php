@@ -21,4 +21,3 @@ class SyliusSalesExtension extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\HttpKernel\DependencyInjection\Extension');
     }
 }
-

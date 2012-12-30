@@ -66,7 +66,7 @@ class OrderItemType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    function getName()
+    public function getName()
     {
         return 'sylius_sales_item';
     }

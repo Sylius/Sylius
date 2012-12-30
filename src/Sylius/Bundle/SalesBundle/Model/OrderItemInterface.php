@@ -16,43 +16,74 @@ namespace Sylius\Bundle\SalesBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderItemInterface
+interface OrderItemInterface extends AdjustableInterface
 {
-    function getId();
+    /**
+     * Get order item id.
+     *
+     * @return mixed
+     */
+    public function getId();
 
     /**
      * Return order.
      *
      * @return OrderInterface
      */
-    function getOrder();
+    public function getOrder();
 
     /**
      * Set order.
      *
      * @param OrderInterface $order
      */
-    function setOrder(OrderInterface $order = null);
+    public function setOrder(OrderInterface $order = null);
 
     /**
      * Get item quantity.
      *
      * @return integer
      */
-    function getQuantity();
+    public function getQuantity();
 
     /**
      * Set quantity.
      *
      * @param integer $quantity
      */
-    function setQuantity($quantity);
+    public function setQuantity($quantity);
 
-    function getUnitPrice();
-    function setUnitPrice($unitPrice);
+    /**
+     * Get unit price of item.
+     *
+     * @return mixed
+     */
+    public function getUnitPrice();
 
-    function getTotal();
-    function setTotal($total);
+    /**
+     * Define the unit price of item.
+     *
+     * @param mixed $unitPrice
+     */
+    public function setUnitPrice($unitPrice);
 
-    function calculateTotal();
+    /**
+     * Get item total.
+     *
+     * @return mixed
+     */
+    public function getTotal();
+
+    /**
+     * Set item total.
+     *
+     * @param mixed $total
+     */
+    public function setTotal($total);
+
+    /**
+     * Calculate total based on quantity and unit price.
+     * Take adjustments into accont.
+     */
+    public function calculateTotal();
 }

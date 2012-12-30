@@ -5,7 +5,7 @@ namespace spec\Sylius\Bundle\SalesBundle\Form\Type;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Order form type spec.
+ * Order item form type spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

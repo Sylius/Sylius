@@ -73,6 +73,10 @@ class SyliusSalesExtension extends Extension
             $container->setParameter('sylius_sales.repository.item.class', $itemClasses['repository']);
         }
 
+        if (isset($config['classes']['adjustment']['model'])) {
+            $container->setParameter('sylius_sales.model.adjustment.class', $config['classes']['adjustment']['model']);
+        }
+
         $loader->load('services.xml');
     }
 }
