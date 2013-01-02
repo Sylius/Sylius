@@ -29,14 +29,16 @@ class OrderController extends ResourceController
         $builder = $this->getBuilder();
 
         $order = $this->createNew();
-        $builder->prepare($order);
+        $builder->build($order);
 
         $form = $this->createForm('sylius_sales_place_order', $order);
 
         if ($form->isMethod('POST') && $form->bind($request)->isValid()) {
+            $this->dispatchEvent('pre_create', $order);
             $this->getManager()->persist($order);
+            $this->dispatchEvent('post_create', $order);
 
-            $builder->finalize($order);
+            $this->dispatchEvent('place', $order);
 
             return $this->renderResponse('placed.html', array(
                 'order' => $order

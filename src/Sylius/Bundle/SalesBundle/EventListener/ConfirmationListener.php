@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SalesBundle\EventDispatcher\Listener;
+namespace Sylius\Bundle\SalesBundle\EventListener;
 
-use Sylius\Bundle\SalesBundle\EventDispatcher\Event\FilterOrderEvent;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Confirmation listener.
@@ -26,9 +26,9 @@ class ConfirmationListener
      *
      * @param FilterOrderEvent $event
      */
-    public function onOrderPlace(FilterOrderEvent $event)
+    public function onOrderPlace(GenericEvent $event)
     {
-        $order = $event->getOrder();
+        $order = $event->getSubject();
         $order->setConfirmed(false);
     }
 }

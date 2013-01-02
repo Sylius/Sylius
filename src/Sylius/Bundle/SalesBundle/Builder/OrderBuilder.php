@@ -47,13 +47,6 @@ class OrderBuilder implements OrderBuilderInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function finalize(OrderInterface $order)
-    {
-    }
-
-    /**
      * Create new order item instance.
      *
      * @return OrderItemInterface

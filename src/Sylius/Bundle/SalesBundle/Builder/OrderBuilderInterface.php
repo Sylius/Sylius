@@ -26,11 +26,4 @@ interface OrderBuilderInterface
      * @param OrderInterface $order
      */
     public function build(OrderInterface $order);
-
-    /**
-     * Finalize order.
-     *
-     * @param OrderInterface $order
-     */
-    public function finalize(OrderInterface $order);
 }
