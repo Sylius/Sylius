@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle\Matcher;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface;
 
 /**
  * Default zone matcher.
@@ -25,16 +26,16 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * Zone repository.
      *
-     * @var EntityRepository
+     * @var ObjectRepository
      */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param EntityRepository $repository
+     * @param ObjectRepository $repository
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(ObjectRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -57,31 +58,48 @@ class ZoneMatcher implements ZoneMatcherInterface
      * @param AddressInterface $address
      * @param ZoneInterface    $zone
      *
-     * @return bool
+     * @return Boolean
      */
     protected function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
     {
         foreach ($zone->getMembers() as $member) {
-            switch ($zone->getType()) {
-                case ZoneInterface::TYPE_PROVINCE:
-                    return null !== $address->getProvince() && $address->getProvince()->getId() === $member->getProvince()->getId();
-                    break;
-
-                case ZoneInterface::TYPE_COUNTRY:
-                    return null !== $address->getCountry() && $address->getCountry()->getId() === $member->getCountry()->getId();
-                    break;
-
-                case ZoneInterface::TYPE_ZONE:
-                    return $this->addressBelongsToZone($address, $member->getZone());
-                    break;
-
-                default:
-                    throw new \InvalidArgumentException(sprintf(
-                        'Unexpected zone type "%s".',
-                        $zone->getType()
-                    ));
-                    break;
+            if ($this->addressBelongsToZoneMember($address, $member)) {
+                return true;
             }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if address belongs to particular zone member.
+     *
+     * @param AddressInterface $address
+     * @param ZoneInterface    $zone
+     *
+     * @return Boolean
+     */
+    protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
+    {
+        switch ($member->getBelongsTo()->getType()) {
+            case ZoneInterface::TYPE_PROVINCE:
+                return null !== $address->getProvince() && $address->getProvince() === $member->getProvince();
+            break;
+
+            case ZoneInterface::TYPE_COUNTRY:
+                return null !== $address->getCountry() && $address->getCountry() === $member->getCountry();
+            break;
+
+            case ZoneInterface::TYPE_ZONE:
+                return $this->addressBelongsToZone($address, $member->getZone());
+            break;
+
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'Unexpected zone type "%s".',
+                    $zone->getType()
+                ));
+            break;
         }
     }
 

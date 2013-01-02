@@ -33,8 +33,9 @@ class ZoneMatcher extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
      */
-    function it_should_return_null_if_there_are_no_zones($address)
+    function it_should_return_null_if_there_are_no_zones($repository, $address)
     {
+        $repository->findAll()->willReturn(array());
         $this->match($address)->shouldReturn(null);
     }
 
@@ -47,11 +48,11 @@ class ZoneMatcher extends ObjectBehavior
     function it_should_match_address_by_province($repository, $province, $address, $memberProvince, $zone)
     {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
-        $province->getId()->shouldBeCalled()->willReturn(7);
         $address->getProvince()->shouldBeCalled()->willReturn($province);
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
         $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
         $zone->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
+        $memberProvince->getBelongsTo()->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
     }
@@ -65,11 +66,11 @@ class ZoneMatcher extends ObjectBehavior
     function it_should_match_address_by_country($repository, $country, $address, $memberCountry, $zone)
     {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
-        $country->getId()->shouldBeCalled()->willReturn(7);
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
         $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $zone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $memberCountry->getBelongsTo()->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
     }
@@ -84,7 +85,6 @@ class ZoneMatcher extends ObjectBehavior
      */
     function it_should_match_address_for_nested_zones($repository, $country, $address, $memberCountry, $subZone, $memberZone, $rootZone)
     {
-        $country->getId()->shouldBeCalled()->willReturn(7);
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
         $subZone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
@@ -93,6 +93,7 @@ class ZoneMatcher extends ObjectBehavior
         $rootZone->getMembers()->shouldBeCalled()->willReturn(array($memberZone));
         $rootZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_ZONE);
         $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
+        $memberZone->getBelongsTo()->willReturn($rootZone);
 
         $this->match($address)->shouldReturn($rootZone);
     }
@@ -107,12 +108,12 @@ class ZoneMatcher extends ObjectBehavior
     function it_should_match_address_by_zone_priority($repository, $province, $address, $memberProvince, $zoneCountry, $zoneProvince)
     {
         $address->getProvince()->shouldBeCalled()->willReturn($province);
-        $province->getId()->shouldBeCalled()->willReturn(7);
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
         $zoneProvince->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
         $zoneProvince->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
         $zoneCountry->getMembers()->shouldNotBeCalled();
         $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry, $zoneProvince));
+        $memberProvince->getBelongsTo()->willReturn($zoneProvince);
 
         $this->match($address)->shouldReturn($zoneProvince);
     }
