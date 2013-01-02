@@ -1,0 +1,75 @@
+{% extends 'SyliusAddressingBundle::layout.html.twig' %}
+
+{% block sylius_addressing_header %}
+    <h1>Addresses list <small>All addresses saved in the system</small></h1>
+{% endblock %}
+
+{% block sylius_addressing_content %}
+
+<div class="well">
+    <a href="{{ path('sylius_addressing_address_create') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> new address
+    </a>
+</div>
+
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{% if addresses|length > 0 %}
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('firstName', 'first name') }}</th>
+            <th>{{ sylius_resource_sort('lastName', 'last name') }}</th>
+            <th>{{ sylius_resource_sort('country') }}</th>
+            <th>{{ sylius_resource_sort('province') }}</th>
+            <th>{{ sylius_resource_sort('city') }}</th>
+            <th>{{ sylius_resource_sort('street') }}</th>
+            <th>{{ sylius_resource_sort('postcode') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for address in addresses %}
+        <tr>
+            <td>{{ address.id }}</td>
+            <td>{{ address.firstname }}</td>
+            <td>{{ address.lastname }}</td>
+            <td>{{ address.country }}</td>
+            <td>{{ address.province|default('---') }}</td>
+            <td>{{ address.city }}</td>
+            <td>{{ address.street }}</td>
+            <td>{{ address.postcode }}</td>
+            <td>
+                <div class="btn-group pull-right">
+                    <a href="{{ path('sylius_addressing_address_show', {'id': address.id}) }}" class="btn">
+                        <i class="icon-book"></i> details
+                    </a>
+                    <a href="{{ path('sylius_addressing_address_update', {'id': address.id}) }}" class="btn">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    <a href="{{ path('sylius_addressing_address_delete', {'id': address.id}) }}"  class="btn btn-danger confirmer"
+                        data-confirmer-question="Do you really want to delete address <strong>{{ address.firstname ~ ' ' ~ address.lastname }}</strong>?"
+                    >
+                        <i class="icon-trash icon-white"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    Your address book is empty
+</div>
+{% endif %}
+
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{% endblock %}

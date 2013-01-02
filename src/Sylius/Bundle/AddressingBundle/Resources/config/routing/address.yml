@@ -1,0 +1,42 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_addressing_address_list:
+    pattern: /list
+    defaults:
+        _controller: sylius_addressing.controller.address:getCollectionAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Address:list.html.twig
+            sortable: true
+            sorting:
+                updatedAt: desc
+
+sylius_addressing_address_create:
+    pattern: /create
+    defaults:
+        _controller: sylius_addressing.controller.address:createAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Address:create.html.twig
+            redirect: sylius_addressing_address_show
+
+sylius_addressing_address_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius_addressing.controller.address:updateAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Address:update.html.twig
+            redirect: sylius_addressing_address_show
+
+sylius_addressing_address_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius_addressing.controller.address:deleteAction
+        _sylius.resource:
+            redirect: sylius_addressing_address_list
+
+sylius_addressing_address_show:
+    pattern: /{id}
+    defaults:
+        _controller: sylius_addressing.controller.address:getAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Address:show.html.twig

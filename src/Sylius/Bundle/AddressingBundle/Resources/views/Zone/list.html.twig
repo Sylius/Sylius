@@ -1,0 +1,81 @@
+{% extends 'SyliusAddressingBundle::layout.html.twig' %}
+
+{% block sylius_addressing_header %}
+    <h1>Zones list <small>Here you can configure zones</small></h1>
+{% endblock %}
+
+{% block sylius_addressing_content %}
+<div class="well">
+    <a href="{{ path('sylius_addressing_zone_create') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> add zone
+    </a>
+</div>
+
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{% if zones|length > 0 %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('type') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for zone in zones %}
+        <tr>
+            <td>{{ zone.id }}</td>
+            <td>{{ zone.name }}</td>
+            <td>{{ zone.type }}</td>
+            <td>
+                <div class="btn-group pull-right">
+                    <a href="{{ path('sylius_addressing_zone_update', {'id': zone.id}) }}" class="btn">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    <a href="{{ path('sylius_addressing_zone_delete', {'id': zone.id}) }}" class="btn btn-danger confirmer"
+                        data-confirmer-question="Do you really want to delete zone <strong>{{ zone.name }}</strong>?"
+                    >
+                        <i class="icon-trash icon-white"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% if zone.hasMembers %}
+            <tr style="background-color: #f1f1f1;">
+                <td colspan="4"><strong>Members</strong></td>
+            </tr>
+            {% for member in zone.members %}
+                <tr style="background-color: #f1f1f1;">
+                    <td>{{ member.id }}</td>
+                    <td>{{ member.name }}</td>
+                    <td colspan="2">
+                        <div class="btn-group pull-right">
+                            <a href="{{ path('sylius_addressing_zone_member_delete', {'zoneId': zone.id, 'id': member.id}) }}"  class="btn btn-danger confirmer"
+                                data-confirmer-question="Do you really want to delete zone member <strong>{{ member.name }}</strong>?"
+                            >
+                                <i class="icon-trash icon-white"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    There are no zones configured
+</div>
+{% endif %}
+
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{% endblock %}

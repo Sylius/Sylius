@@ -1,0 +1,87 @@
+{% extends 'SyliusAddressingBundle::layout.html.twig' %}
+
+{% block sylius_addressing_header %}
+    <h1>Countries list <small>Here you can configure countries and provinces</small></h1>
+{% endblock %}
+
+{% block sylius_addressing_content %}
+<div class="well">
+    <a href="{{ path('sylius_addressing_country_create') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> add country
+    </a>
+</div>
+
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{% if countries|length > 0 %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('isoName', 'iso name') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for country in countries %}
+        <tr>
+            <td>{{ country.id }}</td>
+            <td>{{ country.name }}</td>
+            <td>{{ country.isoName }}</td>
+            <td>
+                <div class="btn-group pull-right">
+                    <a href="{{ path('sylius_addressing_province_create', {'countryId': country.id}) }}" class="btn">
+                        <i class="icon-globe"></i> add province
+                    </a>
+                    <a href="{{ path('sylius_addressing_country_update', {'id': country.id}) }}" class="btn">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    <a href="{{ path('sylius_addressing_country_delete', {'id': country.id}) }}"  class="btn btn-danger confirmer"
+                        data-confirmer-question="Do you really want to delete country <strong>{{ country.name }}</strong>?"
+                    >
+                        <i class="icon-trash icon-white"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% if country.hasProvinces %}
+            <tr style="background-color: #f1f1f1;">
+                <td colspan="4"><strong>Provinces</strong></td>
+            </tr>
+            {% for province in country.provinces %}
+                <tr style="background-color: #f1f1f1;">
+                    <td>{{ province.id }}</td>
+                    <td>{{ province.name }}</td>
+                    <td colspan="2">
+                        <div class="btn-group pull-right">
+                            <a href="{{ path('sylius_addressing_province_update', {'countryId': country.id, 'id': province.id}) }}" class="btn">
+                                <i class="icon-pencil"></i> edit
+                            </a>
+                            <a href="{{ path('sylius_addressing_province_delete', {'countryId': country.id, 'id': province.id}) }}"  class="btn btn-danger confirmer"
+                                data-confirmer-question="Do you really want to delete province <strong>{{ province.name }}</strong>?"
+                            >
+                                <i class="icon-trash icon-white"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    There are no countries configured
+</div>
+{% endif %}
+
+{% if paginator.haveToPaginate() %}
+{{ pagerfanta(paginator, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{% endblock %}

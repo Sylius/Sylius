@@ -1,0 +1,32 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_addressing_zone_list:
+    pattern: /
+    defaults:
+        _controller: sylius_addressing.controller.zone:getCollectionAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Zone:list.html.twig
+
+sylius_addressing_zone_create:
+    pattern: /create
+    defaults:
+        _controller: sylius_addressing.controller.zone:createAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Zone:create.html.twig
+            redirect: sylius_addressing_zone_list
+
+sylius_addressing_zone_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius_addressing.controller.zone:updateAction
+        _sylius.resource:
+            template: SyliusAddressingBundle:Zone:update.html.twig
+            redirect: sylius_addressing_zone_list
+
+sylius_addressing_zone_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius_addressing.controller.zone:deleteAction
+        _sylius.resource:
+            redirect: sylius_addressing_zone_list
