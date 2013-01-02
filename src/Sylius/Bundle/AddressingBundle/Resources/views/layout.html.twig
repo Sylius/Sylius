@@ -2,9 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        {% block sylius_addressing_stylesheets %}
+        {% stylesheets
+            'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css'
+            'http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+        {% endblock %}
     </head>
+    {{ sylius_resource_fetch_request(app.request) }}
     <body>
-        {% block sylius_addressing_content %}{% endblock %}
+        <div id="content" class="span10">
+            <div class="page-header">
+                {% block sylius_addressing_header %}{% endblock %}
+            </div>
+            {% block sylius_addressing_content %}{% endblock %}
+        </div>
     </body>
     {% block sylius_addressing_javascripts %}{% endblock %}
 </html>
