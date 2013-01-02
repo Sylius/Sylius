@@ -19,5 +19,6 @@ Bundles
    :numbered:
 
    bundles/SyliusCartBundle/index
+   bundles/SyliusAddressingBundle/index
    bundles/SyliusCategorizerBundle
    bundles/SyliusBloggerBundle
