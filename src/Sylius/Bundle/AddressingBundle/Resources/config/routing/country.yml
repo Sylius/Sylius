@@ -6,7 +6,6 @@ sylius_addressing_country_list:
     defaults:
         _controller: sylius_addressing.controller.country:getCollectionAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Country:list.html.twig
             paginate: 50
 
 sylius_addressing_country_create:
@@ -14,7 +13,6 @@ sylius_addressing_country_create:
     defaults:
         _controller: sylius_addressing.controller.country:createAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Country:create.html.twig
             redirect: sylius_addressing_country_list
 
 sylius_addressing_country_update:
@@ -22,7 +20,6 @@ sylius_addressing_country_update:
     defaults:
         _controller: sylius_addressing.controller.country:updateAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Country:update.html.twig
             redirect: sylius_addressing_country_list
 
 sylius_addressing_country_delete:

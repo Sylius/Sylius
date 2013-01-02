@@ -6,7 +6,6 @@ sylius_addressing_address_list:
     defaults:
         _controller: sylius_addressing.controller.address:getCollectionAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Address:list.html.twig
             sortable: true
             sorting:
                 updatedAt: desc
@@ -16,7 +15,6 @@ sylius_addressing_address_create:
     defaults:
         _controller: sylius_addressing.controller.address:createAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Address:create.html.twig
             redirect: sylius_addressing_address_show
 
 sylius_addressing_address_update:
@@ -24,7 +22,6 @@ sylius_addressing_address_update:
     defaults:
         _controller: sylius_addressing.controller.address:updateAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Address:update.html.twig
             redirect: sylius_addressing_address_show
 
 sylius_addressing_address_delete:
@@ -38,5 +35,3 @@ sylius_addressing_address_show:
     pattern: /{id}
     defaults:
         _controller: sylius_addressing.controller.address:getAction
-        _sylius.resource:
-            template: SyliusAddressingBundle:Address:show.html.twig

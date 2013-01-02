@@ -6,7 +6,6 @@ sylius_addressing_province_create:
     defaults:
         _controller: sylius_addressing.controller.province:createAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Province:create.html.twig
             redirect: sylius_addressing_country_list
 
 sylius_addressing_province_update:
@@ -14,7 +13,6 @@ sylius_addressing_province_update:
     defaults:
         _controller: sylius_addressing.controller.province:updateAction
         _sylius.resource:
-            template: SyliusAddressingBundle:Province:update.html.twig
             redirect: sylius_addressing_country_list
 
 sylius_addressing_province_delete:
