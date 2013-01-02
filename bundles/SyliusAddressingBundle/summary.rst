@@ -62,7 +62,7 @@ Configuration reference
 Working examples
 ----------------
 
-If you want to see working implementation, try out the `Sylius sandbox application <http://github.com/Sylius/Sylius-Sandbox>`_.
+If you want to see working implementation, try out the `Sylius application <http://github.com/Sylius/Sylius>`_.
 
 Bug tracking
 ------------
