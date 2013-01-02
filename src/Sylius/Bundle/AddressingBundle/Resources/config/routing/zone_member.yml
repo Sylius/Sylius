@@ -5,4 +5,5 @@ sylius_addressing_zone_member_delete:
     pattern: /{id}/delete
     defaults:
         _controller: sylius_addressing.controller.zone_member:deleteAction
+        _sylius.resource:
             redirect: sylius_addressing_zone_list

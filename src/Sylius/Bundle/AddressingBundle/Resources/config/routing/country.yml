@@ -26,5 +26,3 @@ sylius_addressing_country_delete:
     pattern: /{id}/delete
     defaults:
         _controller: sylius_addressing.controller.country:deleteAction
-        _sylius.resource:
-            redirect: sylius_addressing_country_list

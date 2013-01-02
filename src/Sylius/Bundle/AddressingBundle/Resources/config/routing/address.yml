@@ -14,22 +14,16 @@ sylius_addressing_address_create:
     pattern: /create
     defaults:
         _controller: sylius_addressing.controller.address:createAction
-        _sylius.resource:
-            redirect: sylius_addressing_address_show
 
 sylius_addressing_address_update:
     pattern: /{id}/update
     defaults:
         _controller: sylius_addressing.controller.address:updateAction
-        _sylius.resource:
-            redirect: sylius_addressing_address_show
 
 sylius_addressing_address_delete:
     pattern: /{id}/delete
     defaults:
         _controller: sylius_addressing.controller.address:deleteAction
-        _sylius.resource:
-            redirect: sylius_addressing_address_list
 
 sylius_addressing_address_show:
     pattern: /{id}

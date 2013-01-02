@@ -10,19 +10,13 @@ sylius_addressing_zone_create:
     pattern: /create
     defaults:
         _controller: sylius_addressing.controller.zone:createAction
-        _sylius.resource:
-            redirect: sylius_addressing_zone_list
 
 sylius_addressing_zone_update:
     pattern: /{id}/update
     defaults:
         _controller: sylius_addressing.controller.zone:updateAction
-        _sylius.resource:
-            redirect: sylius_addressing_zone_list
 
 sylius_addressing_zone_delete:
     pattern: /{id}/delete
     defaults:
         _controller: sylius_addressing.controller.zone:deleteAction
-        _sylius.resource:
-            redirect: sylius_addressing_zone_list
