@@ -83,6 +83,7 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getFirstStep();
 
         $this->context->initialize($process, $step);
+        $this->context->close();
 
         if (!$this->context->isValid()) {
             throw new NotFoundHttpException();
@@ -100,8 +101,28 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getStepByName($stepName);
 
         $this->context->initialize($process, $step);
-        $this->context->rewindHistory();
 
+        try {
+            $this->context->rewindHistory();
+        } catch (NotFoundHttpException $e) {
+            //the step we are supposed to display was not found in the history.
+            if (null == $this->context->getPreviousStep()) {
+                //there is no previous step go to start
+                return $this->start($scenarioAlias);
+            }
+
+            //we will go back to previous step...
+            $history = $this->context->getStepHistory();
+            if (empty($history)) {
+                //there is no history
+                return $this->start($scenarioAlias);
+            }
+            $step = $process->getStepByName(end($history));
+
+            $this->context->initialize($process, $step);
+
+            return $this->redirectToStepDisplayAction($process, $step);
+        }
         if (!$this->context->isValid()) {
             throw new NotFoundHttpException();
         }
