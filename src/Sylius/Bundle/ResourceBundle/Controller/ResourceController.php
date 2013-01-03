@@ -17,6 +17,7 @@ use FOS\RestBundle\View\RouteRedirectView;
 use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -105,7 +106,10 @@ class ResourceController extends Controller
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $this->dispatchEvent('pre_create', $resource);
             $this->persistAndFlush($resource);
+            $this->dispatchEvent('post_create', $resource);
+
             $this->setFlash('success', sprintf('%s has been successfully created.', ucfirst($config->getResourceName())));
 
             return $this->redirectTo($resource);
@@ -137,7 +141,10 @@ class ResourceController extends Controller
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $this->dispatchEvent('pre_update', $resource);
             $this->persistAndFlush($resource);
+            $this->dispatchEvent('post_update', $resource);
+
             $this->setFlash('success', sprintf('%s has been updated.', ucfirst($config->getResourceName())));
 
             return $this->redirectTo($resource);
@@ -298,6 +305,13 @@ class ResourceController extends Controller
             $name,
             $this->getEngine()
         );
+    }
+
+    public function dispatchEvent($name, $resource)
+    {
+        $config = $this->getConfiguration();
+
+        $this->get('event_dispatcher')->dispatch(sprintf('%s.%s.%s', $config->getBundlePrefix(), $config->getResourceName(), $name), new GenericEvent($resource));
     }
 
     public function getEngine()
