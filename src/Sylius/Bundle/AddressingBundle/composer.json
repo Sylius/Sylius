@@ -26,7 +26,7 @@
     },
     "require-dev": {
         "phpspec/phpspec2": "dev-develop",
-        "doctrine/orm"    : "*"
+        "symfony/form"    : "~2.1"
     },
     "config": {
         "bin-dir": "bin"
