@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius_settings.controller.class">Sylius\Bundle\SettingsBundle\Controller\SettingsController</parameter>
-        <parameter key="sylius_settings.form.factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
+        <parameter key="sylius_settings.form.factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\FormFactory</parameter>
         <parameter key="sylius_settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
         <parameter key="sylius_settings.registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
         <parameter key="sylius_settings.twig.class">Sylius\Bundle\SettingsBundle\Twig\SyliusSettingsExtension</parameter>
@@ -53,7 +53,7 @@
         <service id="sylius_settings.cache" alias="liip_doctrine_cache.ns.sylius_settings" />
 
         <service id="sylius_settings.manager" class="%sylius_settings.manager.class%">
-            <argument>%sylius_settings.namespaces%</argument>
+            <argument type="service" id="sylius_settings.registry" />
             <argument type="service" id="sylius_settings.cache" />
             <argument type="service" id="sylius_settings.manager.parameter" />
             <argument type="service" id="sylius_settings.repository.parameter" />

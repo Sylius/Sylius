@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
+use Symfony\Component\Form\DataTransformerInterface;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 
 /**
  * Settings manager.
@@ -22,14 +25,14 @@ use Doctrine\Common\Persistence\ObjectRepository;
  */
 class SettingsManager implements SettingsManagerInterface
 {
-    protected $namespaces;
+    protected $schemaRegistry;
     protected $manager;
     protected $repository;
     protected $cache;
 
-    public function __construct(array $namespaces, Cache $cache, ObjectManager $manager, ObjectRepository $repository)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, Cache $cache, ObjectManager $manager, ObjectRepository $repository)
     {
-        $this->namespaces = $namespaces;
+        $this->schemaRegistry = $schemaRegistry;
         $this->manager = $manager;
         $this->repository = $repository;
         $this->cache = $cache;
@@ -37,12 +40,10 @@ class SettingsManager implements SettingsManagerInterface
 
     public function loadSettings($namespace)
     {
-        if (!in_array($namespace, $this->namespaces)) {
-            throw new \InvalidArgumentException(sprintf('Settings with namespace "%s" do not exist', $namespace));
-        }
+        $schema = $this->schemaRegistry->getSchema($namespace);
 
         if ($this->cache->contains($namespace)) {
-            return $this->cache->fetch($namespace);
+            $this->reverseTransform($schema, $this->cache->fetch($namespace));
         }
 
         $parameters = $this->getParameters($namespace);
@@ -54,11 +55,14 @@ class SettingsManager implements SettingsManagerInterface
 
         $this->cache->save($namespace, $settings);
 
-        return $settings;
+        return $this->reverseTransform($schema, $settings);
     }
 
     public function saveSettings($namespace, array $settings)
     {
+        $schema = $this->schemaRegistry->getSchema($namespace);
+        $settings = $this->transform($schema, $settings);
+
         $parameters = $this->getParameters($namespace);
         $originalSettings = $settings;
 
@@ -87,6 +91,40 @@ class SettingsManager implements SettingsManagerInterface
         $this->cache->save($namespace, $originalSettings);
 
         $this->manager->flush();
+    }
+
+    private function transform(SchemaInterface $schema, array $settings)
+    {
+        $transformers = $schema->getDataTransformers();
+
+        foreach ($transformers as $key => $transformer) {
+            if (!$transformer instanceof DataTransformerInterface) {
+                throw new \InvalidArgumentException('Settings parameter transformers must be instance of "Symfony\Component\Form\DataTransformerInterface"');
+            }
+
+            if (array_key_exists($key, $settings)) {
+                $settings[$key] = $transformer->transform($settings[$key]);
+            }
+        }
+
+        return $settings;
+    }
+
+    private function reverseTransform(SchemaInterface $schema, array $settings)
+    {
+        $transformers = $schema->getDataTransformers();
+
+        foreach ($transformers as $key => $transformer) {
+            if (!$transformer instanceof DataTransformerInterface) {
+                throw new \InvalidArgumentException('Settings parameter transformers must be instance of "Symfony\Component\Form\DataTransformerInterface"');
+            }
+
+            if (array_key_exists($key, $settings)) {
+                $settings[$key] = $transformer->reverseTransform($settings[$key]);
+            }
+        }
+
+        return $settings;
     }
 
     private function getParameters($namespace)

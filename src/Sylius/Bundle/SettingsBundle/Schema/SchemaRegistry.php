@@ -18,22 +18,34 @@ namespace Sylius\Bundle\SettingsBundle\Schema;
  */
 class SchemaRegistry implements SchemaRegistryInterface
 {
+    /**
+     * Schemas.
+     *
+     * @var array
+     */
     protected $schemas;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->schemas = array();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSchemas()
     {
         return $this->schemas;
     }
 
-    public function registerSchema(SchemaInterface $schema)
+    /**
+     * {@inheritdoc}
+     */
+    public function registerSchema($namespace, SchemaInterface $schema)
     {
-        $namespace = $schema->getNamespace();
-
         if ($this->hasSchema($namespace)) {
             throw new \InvalidArgumentException(sprintf('Schema with namespace "%s" has been already registered', $namespace));
         }
@@ -41,6 +53,9 @@ class SchemaRegistry implements SchemaRegistryInterface
         $this->schemas[$namespace] = $schema;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unregisterSchema($namespace)
     {
         if (!$this->hasSchema($namespace)) {
@@ -50,11 +65,17 @@ class SchemaRegistry implements SchemaRegistryInterface
         unset($this->schemas[$namespace]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasSchema($namespace)
     {
         return isset($this->schemas[$namespace]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSchema($namespace)
     {
         if (!$this->hasSchema($namespace)) {

@@ -1,7 +1,7 @@
 {
     "name": "sylius/settings-bundle",
     "type": "symfony-bundle",
-    "description": "Settings system for Symfony2 applications.",
+    "description": "Settings system for Symfony2 applications, editable via web user interface.",
     "keywords": ["config", "configuration", "settings", "shop", "webshop", "ecommerce"],
     "homepage": "http://sylius.org",
     "license": "MIT",
@@ -22,6 +22,7 @@
 
         "symfony/framework-bundle":        "~2.1",
         "sylius/resource-bundle":          "*",
+        "liip/doctrine-cache-bundle":      "dev-master",
         "stof/doctrine-extensions-bundle": "*"
     },
     "require-dev": {

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SettingsFormFactory
+class FormFactory
 {
     private $schemaRegistry;
     private $formFactory;

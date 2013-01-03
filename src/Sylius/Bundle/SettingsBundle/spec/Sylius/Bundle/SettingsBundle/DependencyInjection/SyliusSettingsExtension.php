@@ -5,7 +5,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\DependencyInjection;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Sylius settings bundle extension.
+ * Sylius settings bundle extension spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

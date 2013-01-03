@@ -11,20 +11,18 @@
 
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
-use Sylius\Bundle\SettingsBundle\Schema\Definition\DefinitionBuilderInterface;
-use Symfony\Component\Form\FormBuilderInterface;
-
 /**
- * Settings schema interface.
+ * Base schema class.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface SchemaInterface
+abstract class Schema implements SchemaInterface
 {
     /**
-     * Build form.
-     *
-     * @param FormBuilderInterface $builder
+     * {@inheritdoc}
      */
-    public function build(FormBuilderInterface $builder);
+    public function getDataTransformers()
+    {
+        return array();
+    }
 }
