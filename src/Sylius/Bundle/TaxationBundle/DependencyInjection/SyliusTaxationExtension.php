@@ -47,6 +47,8 @@ class SyliusTaxationExtension extends Extension
         $container->setParameter('sylius_taxation.driver', $driver);
         $container->setParameter('sylius_taxation.engine', $config['engine']);
 
+        $container->setAlias('sylius_taxation.rate_resolver', $config['rate_resolver']);
+
         $classes = $config['classes'];
 
         $categoryClasses = $classes['category'];

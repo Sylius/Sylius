@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
+                ->scalarNode('rate_resolver')->defaultValue('sylius_taxation.rate_resolver.default')->end()
             ->end()
         ;
 

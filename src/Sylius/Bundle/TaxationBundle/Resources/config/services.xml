@@ -22,7 +22,7 @@
         <parameter key="sylius_taxation.calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingTaxCalculator</parameter>
         <parameter key="sylius_taxation.calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultTaxCalculator</parameter>
 
-        <parameter key="sylius_taxation.resolver.rate.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
+        <parameter key="sylius_taxation.rate_resolver.default.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
     </parameters>
 
     <services>
@@ -63,7 +63,7 @@
             <tag name="sylius_taxation.calculator" calculator="default" />
         </service>
 
-        <service id="sylius_taxation.resolver.rate" class="%sylius_taxation.resolver.rate.class%">
+        <service id="sylius_taxation.rate_resolver.default" class="%sylius_taxation.rate_resolver.default.class%">
             <argument type="service" id="sylius_taxation.repository.rate" />
         </service>
     </services>
