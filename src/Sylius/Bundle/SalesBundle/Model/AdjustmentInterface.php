@@ -54,6 +54,20 @@ interface AdjustmentInterface
     public function setLabel($label);
 
     /**
+     * Get short description of adjustment.
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * Set short description of adjustment.
+     *
+     * @param string $description
+     */
+    public function setDescription($description);
+
+    /**
      * Get the adjustment amount.
      *
      * @return float
@@ -66,6 +80,20 @@ interface AdjustmentInterface
      * @param float $amount
      */
     public function setAmount($amount);
+
+    /**
+     * Is adjustment neutral?
+     *
+     * @return Boolean
+     */
+    public function isNeutral();
+
+    /**
+     * Modify the neutrality of the adjustment.
+     *
+     * @param Boolean $neutral
+     */
+    public function setNeutral($neutral);
 
     /**
      * Is charge?

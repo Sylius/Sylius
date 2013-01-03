@@ -172,6 +172,10 @@ class Order extends ObjectBehavior
         $adjustment2->getAmount()->willReturn(-49.99);
         $adjustment3->getAmount()->willReturn(19.29);
 
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment3->isNeutral()->willReturn(false);
+
         $this
             ->addAdjustment($adjustment1)
             ->addAdjustment($adjustment2)
@@ -202,7 +206,9 @@ class Order extends ObjectBehavior
         $item1->equals(ANY_ARGUMENT)->willReturn(false);
         $item2->equals(ANY_ARGUMENT)->willReturn(false);
 
+        $adjustment1->isNeutral()->willReturn(false);
         $adjustment1->getAmount()->willReturn(100);
+        $adjustment2->isNeutral()->willReturn(false);
         $adjustment2->getAmount()->willReturn(-49.99);
 
         $this
@@ -215,6 +221,37 @@ class Order extends ObjectBehavior
         $this->calculateTotal();
 
         $this->getTotal()->shouldReturn(800.00);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
+     */
+    function it_should_ignore_neutral_adjustments_when_calculating_total($item1, $item2, $adjustment1, $adjustment2)
+    {
+        $item1->getTotal()->willReturn(299.99);
+        $item2->getTotal()->willReturn(450);
+
+        $item1->equals(ANY_ARGUMENT)->willReturn(false);
+        $item2->equals(ANY_ARGUMENT)->willReturn(false);
+
+        $adjustment1->isNeutral()->willReturn(true);
+        $adjustment1->getAmount()->willReturn(100);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->getAmount()->willReturn(-49.99);
+
+        $this
+            ->addItem($item1)
+            ->addItem($item2)
+            ->addAdjustment($adjustment1)
+            ->addAdjustment($adjustment2)
+        ;
+
+        $this->calculateTotal();
+
+        $this->getTotal()->shouldReturn(700.00);
     }
 
     function it_should_be_confirmed_by_default()

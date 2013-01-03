@@ -129,8 +129,31 @@ class OrderItem extends ObjectBehavior
         $this->setQuantity(13);
         $this->setUnitPrice(14.99);
 
+        $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-10);
         $this->addAdjustment($adjustment);
+
+        $this->calculateTotal();
+
+        $this->getTotal()->shouldReturn(184.87);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $neutralAdjustment
+     */
+    function it_should_ignore_neutral_adjustments_when_calculating_total($adjustment, $neutralAdjustment)
+    {
+        $this->setQuantity(13);
+        $this->setUnitPrice(14.99);
+
+        $adjustment->isNeutral()->willReturn(false);
+        $adjustment->getAmount()->willReturn(-10);
+        $this->addAdjustment($adjustment);
+
+        $neutralAdjustment->isNeutral()->willReturn(true);
+        $neutralAdjustment->getAmount()->willReturn(24.99);
+        $this->addAdjustment($neutralAdjustment);
 
         $this->calculateTotal();
 

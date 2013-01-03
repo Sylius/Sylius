@@ -74,6 +74,17 @@ class Adjustment extends ObjectBehavior
         $this->getLabel()->shouldReturn('Shipping Fee');
     }
 
+    function it_should_not_have_description_by_default()
+    {
+        $this->getDescription()->shouldReturn(null);
+    }
+
+    function its_description_should_be_mutable()
+    {
+        $this->setDescription('Clothing tax (12%)');
+        $this->getDescription()->shouldReturn('Clothing tax (12%)');
+    }
+
     function it_should_have_amount_equal_to_0_by_default()
     {
         $this->getAmount()->shouldReturn(0);
@@ -83,6 +94,18 @@ class Adjustment extends ObjectBehavior
     {
         $this->setAmount(399);
         $this->getAmount()->shouldReturn(399);
+    }
+
+    function it_should_not_be_neutral_by_default()
+    {
+        $this->shouldNotBeNeutral();
+    }
+
+    function its_neutrality_should_be_mutable()
+    {
+        $this->shouldNotBeNeutral();
+        $this->setNeutral(true);
+        $this->shouldBeNeutral();
     }
 
     function it_should_be_a_charge_if_amount_is_lesser_than_0()

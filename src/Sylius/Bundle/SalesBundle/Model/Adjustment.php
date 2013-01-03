@@ -47,11 +47,26 @@ class Adjustment implements AdjustmentInterface
     protected $label;
 
     /**
+     * Short description of adjustment.
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
      * Adjustment amount.
      *
      * @var float
      */
     protected $amount;
+
+    /**
+     * Is adjustment neutral?
+     * Should it modify the order total?
+     *
+     * @var Boolean
+     */
+    protected $neutral;
 
     /**
      * Creation time.
@@ -73,6 +88,7 @@ class Adjustment implements AdjustmentInterface
     public function __construct()
     {
         $this->amount = 0;
+        $this->neutral = false;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -137,6 +153,24 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAmount()
     {
         return $this->amount;
@@ -148,6 +182,24 @@ class Adjustment implements AdjustmentInterface
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isNeutral()
+    {
+        return $this->neutral;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNeutral($neutral)
+    {
+        $this->neutral = (Boolean) $neutral;
 
         return $this;
     }

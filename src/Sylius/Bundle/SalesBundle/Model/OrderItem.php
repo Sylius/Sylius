@@ -198,7 +198,9 @@ class OrderItem implements OrderItemInterface
         $this->adjustmentsTotal = 0;
 
         foreach ($this->adjustments as $adjustment) {
-            $this->adjustmentsTotal += $adjustment->getAmount();
+            if (!$adjustment->isNeutral()) {
+                $this->adjustmentsTotal += $adjustment->getAmount();
+            }
         }
     }
 
