@@ -98,10 +98,6 @@ class CartItem implements CartItemInterface
      */
     public function setQuantity($quantity)
     {
-        if (1 > $quantity) {
-            throw new \OutOfRangeException('Quantity must be greater than 0');
-        }
-
         $this->quantity = $quantity;
     }
 

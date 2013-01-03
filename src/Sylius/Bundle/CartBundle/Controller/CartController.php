@@ -69,7 +69,10 @@ class CartController extends Controller
             $this->setFlash('success', 'The cart have been updated correctly');
         }
 
-        return $this->redirectToCartSummary();
+        return $this->renderResponse('summary.html', array(
+            'cart' => $cart,
+            'form' => $form->createView()
+        ));
     }
 
     /**
@@ -88,5 +91,5 @@ class CartController extends Controller
         $this->setFlash('success', 'The cart has been successfully cleared');
 
         return $this->redirectToCartSummary();
-     }
+    }
 }

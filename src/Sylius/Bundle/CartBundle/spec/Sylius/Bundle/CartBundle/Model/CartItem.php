@@ -36,14 +36,6 @@ class CartItem extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_should_complain_when_quantity_is_less_than_1()
-    {
-        $this
-            ->shouldThrow(new \OutOfRangeException('Quantity must be greater than 0'))
-            ->duringSetQuantity(-5)
-        ;
-    }
-
     function it_should_calculate_correct_total()
     {
         $this->setQuantity(13);
