@@ -110,7 +110,7 @@ class ResourceController extends Controller
             $this->persistAndFlush($resource);
             $this->dispatchEvent('post_create', $resource);
 
-            $this->setFlash('success', sprintf('%s has been successfully created.', ucfirst($config->getResourceName())));
+            $this->setFlash('success', '%resource% has been successfully created.');
 
             return $this->redirectTo($resource);
         }
@@ -145,7 +145,7 @@ class ResourceController extends Controller
             $this->persistAndFlush($resource);
             $this->dispatchEvent('post_update', $resource);
 
-            $this->setFlash('success', sprintf('%s has been updated.', ucfirst($config->getResourceName())));
+            $this->setFlash('success', '%resource% has been updated.');
 
             return $this->redirectTo($resource);
         }
@@ -177,7 +177,7 @@ class ResourceController extends Controller
 
         $resource = $this->findOr404($criteria);
         $this->removeAndFlush($resource);
-        $this->setFlash('success', sprintf('%s has been deleted.', ucfirst($this->getConfiguration()->getResourceName())));
+        $this->setFlash('success', '%resource% has been deleted.');
 
         return $this->redirectToCollection();
     }
@@ -326,14 +326,23 @@ class ResourceController extends Controller
 
     protected function setFlash($type, $message)
     {
-        if (null !== $customMessage = $this->getConfiguration()->getFlashMessage()) {
+        $config = $this->getConfiguration();
+
+        if (null !== $customMessage = $config->getFlashMessage()) {
             $message = $customMessage;
         }
 
         return $this
             ->get('session')
             ->getFlashBag()
-            ->add($type, $message)
+            ->add(
+                $type,
+                $this->get('translator')->trans(
+                    $message,
+                    array('%resource%' => ucfirst($config->getResourceName())),
+                    'flashes'
+                )
+            )
         ;
     }
 
