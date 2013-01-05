@@ -52,15 +52,37 @@ class InventoryUnit extends ObjectBehavior
         $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_BACKORDERED);
     }
 
+    function it_should_be_sold_if_its_state_says_so()
+    {
+        $this->shouldBeSold();
+    }
+
+    function it_should_be_backordered_if_its_state_says_so()
+    {
+        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
+        $this->shouldBeBackordered();
+    }
+
     /**
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
      */
-    function it_should_return_its_stockable_name_as_inventory_name($stockable)
+    function it_should_return_its_stockable_name($stockable)
     {
         $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
         $this->setStockable($stockable);
 
         $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
+    }
+
+    /**
+     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     */
+    function it_should_return_its_stockable_sku($stockable)
+    {
+        $stockable->getSku()->willReturn('IPHONE5');
+        $this->setStockable($stockable);
+
+        $this->getSku()->shouldReturn('IPHONE5');
     }
 
     function it_should_initialize_creation_date_by_default()

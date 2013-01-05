@@ -86,6 +86,14 @@ class InventoryUnit implements InventoryUnitInterface
         $this->stockable = $stockable;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getSku()
+    {
+        return $this->stockable->getSku();
+    }
+
     public function getInventoryName()
     {
         return $this->stockable->getInventoryName();
@@ -105,6 +113,22 @@ class InventoryUnit implements InventoryUnitInterface
     public function setInventoryState($state)
     {
         $this->inventoryState = $state;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function isSold()
+    {
+        return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function isBackordered()
+    {
+        return InventoryUnitInterface::STATE_BACKORDERED === $this->inventoryState;
     }
 
     /**
