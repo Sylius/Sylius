@@ -46,6 +46,13 @@ interface InventoryUnitInterface
     function setStockable(StockableInterface $stockable);
 
     /**
+     * Get the SKU of stockable.
+     *
+     * @return string
+     */
+    function getSku();
+
+    /**
      * Get displayed inventory name
      *
      * @return string
@@ -65,6 +72,20 @@ interface InventoryUnitInterface
      * @param integer $state
      */
     function setInventoryState($state);
+
+    /**
+     * Is in "sold" state?
+     *
+     * @return Boolean
+     */
+    function isSold();
+
+    /**
+     * Is a backordered inventory unit?
+     *
+     * @return Boolean
+     */
+    function isBackordered();
 
     /**
      * Get creation time.
