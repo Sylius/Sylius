@@ -21,10 +21,8 @@ interface InventoryUnitInterface
     /**
      * Default states.
      */
-    const STATE_SOLD        = 0;
-    const STATE_BACKORDERED = 1;
-    const STATE_RETURNED    = 2;
-    const STATE_SHIPPED     = 3;
+    const STATE_SOLD        = 'sold';
+    const STATE_BACKORDERED = 'backordered';
 
     /**
      * Get inventory unit id.
@@ -34,32 +32,39 @@ interface InventoryUnitInterface
     function getId();
 
     /**
-     * Get related stockable object id.
+     * Get related stockable object.
      *
-     * @return mixed
+     * @return StockableInterface
      */
-    function getStockableId();
+    function getStockable();
 
     /**
-     * Set stockable object id.
+     * Set stockable object.
      *
-     * @param mixed $stockableId
+     * @param $stockable StockableInterface
      */
-    function setStockableId($stockableId);
+    function setStockable(StockableInterface $stockable);
+
+    /**
+     * Get displayed inventory name
+     *
+     * @return string
+     */
+    function getInventoryName();
 
     /**
      * Get inventory unit state.
      *
      * @return integer
      */
-    function getState();
+    function getInventoryState();
 
     /**
      * Set inventory unit state.
      *
      * @param integer $state
      */
-    function setState($state);
+    function setInventoryState($state);
 
     /**
      * Get creation time.
@@ -69,9 +74,9 @@ interface InventoryUnitInterface
     function getCreatedAt();
 
     /**
-     * Set creation time.
+     * Get last update time.
      *
-     * @param \DateTime $createdAt
+     * @return \DateTime
      */
-    function setCreatedAt(\DateTime $createdAt);
+    function getUpdatedAt();
 }

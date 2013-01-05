@@ -22,7 +22,7 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 interface InventoryOperatorInterface
 {
     /**
-     * Update inventory units.
+     * Update stockable inventory units.
      *
      * @param StockableInterface $stockable
      */
@@ -45,7 +45,7 @@ interface InventoryOperatorInterface
      *
      * @return null|array
      */
-    function decrease(StockableInterface $stockable, $quantity, $returnUnitsInState = false);
+    function decrease(StockableInterface $stockable, $quantity, $returnUnitsInState = null);
 
     /**
      * Create inventory units for given stockable, quantity and apply the specified state.
