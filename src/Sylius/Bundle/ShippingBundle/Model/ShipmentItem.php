@@ -22,13 +22,13 @@ class ShipmentItem implements ShipmentItemInterface
 {
     protected $id;
     protected $shipment;
-    protected $state;
+    protected $shippingState;
     protected $createdAt;
     protected $updatedAt;
 
     public function __construct()
     {
-        $this->state = ShipmentItemInterface::STATE_READY;
+        $this->shippingState = ShipmentItemInterface::STATE_READY;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -54,12 +54,12 @@ class ShipmentItem implements ShipmentItemInterface
 
     public function getShippingState()
     {
-        return $this->state;
+        return $this->shippingState;
     }
 
     public function setShippingState($state)
     {
-        $this->state = $state;
+        $this->shippingState = $state;
     }
 
     public function getCreatedAt()
