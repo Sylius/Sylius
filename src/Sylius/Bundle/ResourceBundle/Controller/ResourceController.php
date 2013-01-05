@@ -155,7 +155,7 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setTemplate($this->getFullTemplateName('create.html'))
+            ->setTemplate($this->getFullTemplateName('update.html'))
             ->setData(array(
                 $config->getResourceName() => $resource,
                 'form'                     => $form->createView()
