@@ -42,6 +42,8 @@ class SyliusShippingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
+            'Sylius\Bundle\ShippingBundle\Model\ShipmentInterface'         => 'sylius_shipping.model.shipment.class',
+            'Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface'     => 'sylius_shipping.model.shipment_item.class',
             'Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface' => 'sylius_shipping.model.category.class',
             'Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface'   => 'sylius_shipping.model.method.class',
         );

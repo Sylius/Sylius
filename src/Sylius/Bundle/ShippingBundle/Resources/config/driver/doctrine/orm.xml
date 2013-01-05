@@ -20,6 +20,8 @@
         <parameter key="sylius_shipping.model.category.class">Sylius\Bundle\ShippingBundle\Entity\DefaultShippingCategory</parameter>
         <parameter key="sylius_shipping.model.method.class">Sylius\Bundle\ShippingBundle\Entity\DefaultShippingMethod</parameter>
 
+        <parameter key="sylius_shipping.repository.shipment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius_shipping.repository.shipment_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius_shipping.repository.category.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius_shipping.repository.method.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
 
@@ -27,6 +29,36 @@
     </parameters>
 
     <services>
+        <service id="sylius_shipping.manager.shipment" alias="doctrine.orm.entity_manager" />
+        <service id="sylius_shipping.repository.shipment" class="%sylius_shipping.repository.shipment.class%">
+            <argument type="service" id="sylius_shipping.manager.shipment" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_shipping.manager.shipment"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
+                >
+                    <argument>%sylius_shipping.model.shipment.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius_shipping.manager.shipment_item" alias="doctrine.orm.entity_manager" />
+        <service id="sylius_shipping.repository.shipment_item" class="%sylius_shipping.repository.shipment_item.class%">
+            <argument type="service" id="sylius_shipping.manager.shipment_item" />
+            <argument type="service">
+                <service
+                    factory-service="sylius_shipping.manager.shipment_item"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                    public="false"
+                >
+                    <argument>%sylius_shipping.model.shipment_item.class%</argument>
+                </service>
+            </argument>
+        </service>
+
         <service id="sylius_shipping.manager.category" alias="doctrine.orm.entity_manager" />
         <service id="sylius_shipping.repository.category" class="%sylius_shipping.repository.category.class%">
             <argument type="service" id="sylius_shipping.manager.category" />

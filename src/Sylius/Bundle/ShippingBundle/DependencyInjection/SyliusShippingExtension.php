@@ -49,6 +49,28 @@ class SyliusShippingExtension extends Extension
 
         $classes = $config['classes'];
 
+        $shipmentClasses = $classes['shipment'];
+
+        $container->setParameter('sylius_shipping.model.shipment.class', $shipmentClasses['model']);
+
+        if (isset($shipmentClasses['repository'])) {
+            $container->setParameter('sylius_shipping.repository.shipment.class', $shipmentClasses['repository']);
+        }
+
+        $container->setParameter('sylius_shipping.controller.shipment.class', $shipmentClasses['controller']);
+        $container->setParameter('sylius_shipping.form.type.shipment.class', $shipmentClasses['form']);
+
+        $shipmentItemClasses = $classes['shipment_item'];
+
+        $container->setParameter('sylius_shipping.model.shipment_item.class', $shipmentItemClasses['model']);
+
+        if (isset($shipmentItemClasses['repository'])) {
+            $container->setParameter('sylius_shipping.repository.shipment_item.class', $shipmentItemClasses['repository']);
+        }
+
+        $container->setParameter('sylius_shipping.controller.shipment_item.class', $shipmentItemClasses['controller']);
+        $container->setParameter('sylius_shipping.form.type.shipment_item.class', $shipmentItemClasses['form']);
+
         $categoryClasses = $classes['category'];
 
         if (isset($categoryClasses['model'])) {
