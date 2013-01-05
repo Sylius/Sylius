@@ -111,8 +111,8 @@ class InventoryOperator implements InventoryOperatorInterface
 
         for ($i = 0; $i < $quantity; $i++) {
             $inventoryUnit = $this->repository->createNew();
-            $inventoryUnit->setStockableId($stockable->getStockableId());
-            $inventoryUnit->setState($state);
+            $inventoryUnit->setStockable($stockable);
+            $inventoryUnit->setInventoryState($state);
 
             $units->add($inventoryUnit);
         }

@@ -26,18 +26,18 @@ class InventoryUnit implements InventoryUnitInterface
     protected $id;
 
     /**
-     * Identifier that tells which stockable this unit represents.
+     * Stockable object.
      *
-     * @var string
+     * @var StockableInterface
      */
-    protected $stockableId;
+    protected $stockable;
 
     /**
      * State of the inventory unit.
      *
-     * @var integer
+     * @var string
      */
-    protected $state;
+    protected $inventoryState;
 
     /**
      * Creation time.
@@ -47,10 +47,18 @@ class InventoryUnit implements InventoryUnitInterface
     protected $createdAt;
 
     /**
+     * Last update time.
+     *
+     * @var \DateTime
+     */
+    protected $updatedAt;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
+        $this->inventoryState = InventoryUnitInterface::STATE_SOLD;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -65,33 +73,38 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getStockableId()
+    public function getStockable()
     {
-        return $this->stockableId;
+        return $this->stockable;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setStockableId($stockableId)
+    public function setStockable(StockableInterface $stockable)
     {
-        $this->stockableId = $stockableId;
+        $this->stockable = $stockable;
+    }
+
+    public function getInventoryName()
+    {
+        return $this->stockable->getInventoryName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getInventoryState()
     {
-        return $this->state;
+        return $this->inventoryState;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setState($state)
+    public function setInventoryState($state)
     {
-        $this->state = $state;
+        $this->inventoryState = $state;
     }
 
     /**
@@ -102,12 +115,11 @@ class InventoryUnit implements InventoryUnitInterface
         return $this->createdAt;
     }
 
-
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function getUpdatedAt()
     {
-        $this->createdAt = $createdAt;
+        return $this->updatedAt;
     }
 }

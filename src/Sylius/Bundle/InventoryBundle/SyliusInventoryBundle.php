@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\InventoryBundle;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -31,5 +33,18 @@ class SyliusInventoryBundle extends Bundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $interfaces = array(
+            'Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface' => 'sylius_inventory.model.unit.class',
+            'Sylius\Bundle\InventoryBundle\Model\StockableInterface'     => 'sylius_inventory.model.stockable.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_inventory', $interfaces));
     }
 }

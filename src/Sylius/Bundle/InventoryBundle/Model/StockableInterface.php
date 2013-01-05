@@ -19,18 +19,33 @@ namespace Sylius\Bundle\InventoryBundle\Model;
 interface StockableInterface
 {
     /**
-     * Get stockable object id.
+     * Get stock keeping unit.
      *
      * @return mixed
      */
-    function getStockableId();
+    function getSku();
 
     /**
-     * Shortcut method for implementations that don't need full inventory tracking.
+     * Get inventory displayed name.
+     *
+     * @return string
+     */
+    function getInventoryName();
+
+    /**
+     * Simply checks if there any stock available.
+     * It should also return true for items available on demand.
      *
      * @return Boolean
      */
     function isInStock();
+
+    /**
+     * Is stockable available on demand?
+     *
+     * @return Boolean
+     */
+    function isAvailableOnDemand();
 
     /**
      * Get stock on hand.

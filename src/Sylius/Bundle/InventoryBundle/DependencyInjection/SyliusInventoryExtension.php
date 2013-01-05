@@ -40,36 +40,42 @@ class SyliusInventoryExtension extends Extension
             throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
         }
 
-        $loader->load(sprintf('engine/%s.xml', $config['engine']));
+        $driver = $config['driver'];
+        $engine = $config['engine'];
 
-        $this->loadDriver($config['driver'], $config, $container, $loader);
-
-        $loader->load('services.xml');
-
-        $container->setParameter('sylius_inventory.driver', $config['driver']);
-        $container->setParameter('sylius_inventory.engine', $config['engine']);
-
-        $container->setParameter('sylius_inventory.backorders', $config['backorders']);
-        $container->setParameter('sylius_inventory.model.iu.class', $config['classes']['model']['iu']);
-    }
-
-    /**
-     * Load bundle driver.
-     *
-     * @param string           $driver
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     *
-     * @throws InvalidArgumentException
-     */
-    protected function loadDriver($driver, array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
         if (!in_array($driver, SyliusInventoryBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension', $driver));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
-    }
+        $loader->load(sprintf('engine/%s.xml', $engine));
 
+        $container->setParameter('sylius_inventory.driver', $driver);
+        $container->setParameter('sylius_inventory.engine', $engine);
+
+        $container->setParameter('sylius_inventory.backorders', $config['backorders']);
+
+        $container->setAlias('sylius_inventory.checker', $config['checker']);
+        $container->setAlias('sylius_inventory.operator', $config['operator']);
+
+        $unitClasses = $config['classes']['unit'];
+
+        $container->setParameter('sylius_inventory.controller.unit.class', $unitClasses['controller']);
+        $container->setParameter('sylius_inventory.model.unit.class', $unitClasses['model']);
+
+        if (array_key_exists('repository', $unitClasses)) {
+            $container->setParameter('sylius_inventory.repository.unit.class', $unitClasses['repository']);
+        }
+
+        $stockableClasses = $config['classes']['stockable'];
+
+        $container->setParameter('sylius_inventory.controller.stockable.class', $stockableClasses['controller']);
+        $container->setParameter('sylius_inventory.model.stockable.class', $stockableClasses['model']);
+
+        if (array_key_exists('repository', $stockableClasses)) {
+            $container->setParameter('sylius_inventory.repository.stockable.class', $stockableClasses['repository']);
+        }
+
+        $loader->load('services.xml');
+    }
 }

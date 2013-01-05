@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InventoryBundle\Twig;
 
+use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
-use Sylius\Bundle\InventoryBundle\Resolver\StockResolverInterface;
 use Twig_Extension;
 use Twig_Function_Method;
 
@@ -24,20 +24,20 @@ use Twig_Function_Method;
 class SyliusInventoryExtension extends Twig_Extension
 {
     /**
-     * Stock resolver.
+     * Availability checker.
      *
      * @var StockResolverInterface
      */
-    private $stockResolver;
+    private $checker;
 
     /**
      * Constructor.
      *
-     * @param StockResolverInterface $stockResolver
+     * @param AvailabilityCheckerInterface $checker
      */
-    public function __construct(StockResolverInterface $stockResolver)
+    public function __construct(AvailabilityCheckerInterface $checker)
     {
-        $this->stockResolver = $stockResolver;
+        $this->checker = $checker;
     }
 
     /**
@@ -46,7 +46,8 @@ class SyliusInventoryExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_inventory_in_stock' => new Twig_Function_Method($this, 'isInStock'),
+            'sylius_inventory_is_available' => new Twig_Function_Method($this, 'isStockAvailable'),
+            'sylius_inventory_is_sufficient' => new Twig_Function_Method($this, 'isStockSufficient'),
         );
     }
 
@@ -57,9 +58,23 @@ class SyliusInventoryExtension extends Twig_Extension
      *
      * @return Boolean
      */
-    public function isInStock(StockableInterface $stockable)
+    public function isStockAvailable(StockableInterface $stockable)
     {
-        return $this->stockResolver->isInStock($stockable);
+        return $this->checker->isStockAvailable($stockable);
+    }
+
+    /**
+     * Check whether stock is sufficient for given
+     * stockable and quantity.
+     *
+     * @param StockableInterface $stockable
+     * @param integer            $quantity
+     *
+     * @return Boolean
+     */
+    public function isStockSufficient(StockableInterface $stockable, $quantity)
+    {
+        return $this->checker->isStockSufficient($stockable, $quantity);
     }
 
     /**
