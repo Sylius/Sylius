@@ -19,7 +19,7 @@
         <many-to-one field="method" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface">
             <join-column name="method_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
-        <field name="tracking" column="tracking" type="string" />
+        <field name="tracking" column="tracking" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
