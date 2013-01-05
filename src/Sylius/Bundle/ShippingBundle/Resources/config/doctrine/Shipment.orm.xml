@@ -17,7 +17,7 @@
     <mapped-superclass name="Sylius\Bundle\ShippingBundle\Entity\Shipment" table="sylius_shipment">
         <field name="state" column="state" type="string" nullable="false" />
         <many-to-one field="method" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface">
-            <join-column name="method_id" referenced-column-name="id" nullable="true" />
+            <join-column name="method_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <field name="tracking" column="tracking" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
