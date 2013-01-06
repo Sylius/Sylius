@@ -11,13 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Pluralization;
-use FOS\RestBundle\View\RedirectView;
-use FOS\RestBundle\View\RouteRedirectView;
-use FOS\RestBundle\View\View;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -25,13 +22,32 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class ResourceController extends Controller
+class ResourceController extends FOSRestController
 {
     protected $configuration;
 
+    /**
+     * Constructor.
+     *
+     * @param string $bundlePrefix
+     * @param string $resourceName
+     * @param string $templateNamespace
+     */
     public function __construct($bundlePrefix, $resourceName, $templateNamespace)
     {
         $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace);
+    }
+
+    /**
+     * Get configuration with the bound request.
+     *
+     * @return Configuration
+     */
+    public function getConfiguration()
+    {
+        $this->configuration->setRequest($this->getRequest());
+
+        return $this->configuration;
     }
 
     /**
@@ -44,9 +60,10 @@ class ResourceController extends Controller
         $criteria = $config->getCriteria();
         $sorting = $config->getSorting();
 
-        $pluralName = Pluralization::pluralize($config->getResourceName());
+        $pluralResourceName = Pluralization::pluralize($config->getResourceName());
 
-        $view = View::create()
+        $view = $this
+            ->view()
             ->setTemplate($this->getFullTemplateName('index.html'))
         ;
 
@@ -62,11 +79,11 @@ class ResourceController extends Controller
             $resources = $paginator->getCurrentPageResults();
 
             $data = $config->isHtmlRequest() ? array(
-                $pluralName => $resources,
-                'paginator' => $paginator
+                $pluralResourceName => $resources,
+                'paginator'         => $paginator
             ) : $resources;
         } else {
-            $view->setTemplateVar($pluralName);
+            $view->setTemplateVar($pluralResourceName);
 
             $data = $this
                 ->getRepository()
@@ -84,7 +101,8 @@ class ResourceController extends Controller
      */
     public function showAction()
     {
-        $view = View::create()
+        $view =  $this
+            ->view()
             ->setTemplate($this->getFullTemplateName('show.html'))
             ->setTemplateVar($this->getConfiguration()->getResourceName())
             ->setData($this->findByIdentifierOr404())
@@ -112,16 +130,15 @@ class ResourceController extends Controller
         }
 
         if (!$config->isHtmlRequest()) {
-            return $this->handleView(View::create($form));
+            return $this->handleView($this->view($form));
         }
 
-        $resourceName = $config->getResourceName();
-
-        $view = View::create()
+        $view = $this
+            ->view()
             ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
-                $resourceName => $resource,
-                'form'        => $form->createView()
+                $config->getResourceName() => $resource,
+                'form'                     => $form->createView()
             ))
         ;
 
@@ -147,16 +164,17 @@ class ResourceController extends Controller
         }
 
         if (!$config->isHtmlRequest()) {
-            return $this->handleView(View::create($form));
+            return $this->handleView($this->view($form));
         }
 
         $resourceName = $config->getResourceName();
 
-        $view = View::create()
+        $view = $this
+            ->view()
             ->setTemplate($this->getFullTemplateName('update.html'))
             ->setData(array(
-                $resourceName => $resource,
-                'form'        => $form->createView()
+                $config->getResourceName() => $resource,
+                'form'                     => $form->createView()
             ))
         ;
 
@@ -168,19 +186,18 @@ class ResourceController extends Controller
      */
     public function deleteAction()
     {
-        $this->delete($this->findByIdentifierOr404());
+        $resource = $this->findByIdentifierOr404();
+        $this->delete($resource);
         $this->setFlash('success', '%resource% has been deleted.');
 
         return $this->redirectToCollection($resource);
     }
 
-    public function getConfiguration()
-    {
-        $this->configuration->setRequest($this->getRequest());
-
-        return $this->configuration;
-    }
-
+    /**
+     * Use repository to create a new resource object.
+     *
+     * @return object
+     */
     public function createNew()
     {
         return $this
@@ -189,20 +206,16 @@ class ResourceController extends Controller
         ;
     }
 
+    /**
+     * Get a form instance for given resource.
+     * If no custom form is specified in route defaults as "_form",
+     * then a default name is generated using the template "%bundlePrefix%_%resourceName%".
+     *
+     * @return FormInterface
+     */
     public function getForm($resource = null)
     {
-        return $this->createForm($this->getFormType(), $resource);
-    }
-
-    public function getFormType()
-    {
-        $config = $this->getConfiguration();
-
-        if (null !== $type = $config->getFormType()) {
-            return $type;
-        }
-
-        return sprintf('%s_%s', $config->getBundlePrefix(), $config->getResourceName());
+        return $this->createForm($this->getConfiguration()->getFormType(), $resource);
     }
 
     public function redirectTo($resource)
@@ -211,6 +224,11 @@ class ResourceController extends Controller
             $this->getRedirectRoute('show'),
             array('id' => $resource->getId())
         );
+    }
+
+    protected function redirectToReferer()
+    {
+        return $this->handleView($this->redirectView($this->getRequest()->headers->get('referer')));
     }
 
     public function redirectToCollection($resource)
@@ -224,7 +242,7 @@ class ResourceController extends Controller
             return $this->redirectToReferer();
         }
 
-        return $this->handleView(RouteRedirectView::create($route, $data));
+        return $this->handleView($this->routeRedirectView($route, $data));
     }
 
     public function getRedirectRoute($name)
@@ -335,11 +353,6 @@ class ResourceController extends Controller
         return $this->container->getParameter(sprintf('%s.engine', $this->getConfiguration()->getBundlePrefix()));
     }
 
-    public function handleView(View $view)
-    {
-        return $this->get('fos_rest.view_handler')->handle($view);
-    }
-
     protected function setFlash($type, $message)
     {
         $config = $this->getConfiguration();
@@ -359,11 +372,6 @@ class ResourceController extends Controller
             ->getFlashBag()
             ->add($type, $translatedMessage)
         ;
-    }
-
-    protected function redirectToReferer()
-    {
-        return $this->handleView(RedirectView::create($this->getRequest()->headers->get('referer')));
     }
 
     protected function getService($name)
