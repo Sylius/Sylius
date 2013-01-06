@@ -46,6 +46,19 @@
                 <option name="message">sylius_shipping.method.name.max_length</option>
             </constraint>
         </property>
+        <property name="calculator">
+            <constraint name="NotBlank">
+                <option name="message">sylius_shipping.method.calculator.not_blank</option>
+            </constraint>
+            <constraint name="MinLength">
+                <option name="limit">2</option>
+                <option name="message">sylius_shipping.method.calculator.min_length</option>
+            </constraint>
+            <constraint name="MaxLength">
+                <option name="limit">255</option>
+                <option name="message">sylius_shipping.method.calculator.max_length</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>

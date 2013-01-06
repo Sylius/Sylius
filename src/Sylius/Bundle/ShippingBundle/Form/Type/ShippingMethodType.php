@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethod;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -47,6 +48,14 @@ class ShippingMethodType extends AbstractType
         $builder
             ->add('category', 'sylius_shipping_category_choice', array(
                 'required' => false
+            ))
+            ->add('enabled', 'checkbox', array(
+                'required' => false,
+            ))
+            ->add('requirement', 'choice', array(
+                'choices'  => ShippingMethod::getRequirementLabels(),
+                'multiple' => false,
+                'expanded' => true
             ))
             ->add('name', 'text')
             ->add('calculator', 'sylius_shipping_calculator_choice')
