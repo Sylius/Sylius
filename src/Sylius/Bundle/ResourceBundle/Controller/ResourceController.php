@@ -35,35 +35,19 @@ class ResourceController extends Controller
     }
 
     /**
-     * Get single resource by its identifier.
-     */
-    public function getAction(array $parameters = null)
-    {
-        $config = $this->getConfiguration($parameters);
-        $resource = $this->findOr404($config->getIdentifierCriteria());
-
-        $view = View::create()
-            ->setTemplate($this->getFullTemplateName('show.html'))
-            ->setTemplateVar($config->getResourceName())
-            ->setData($resource)
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
      * Get collection (paginated by default) of resources.
      */
-    public function getCollectionAction(Request $request, array $parameters = null)
+    public function indexAction(Request $request)
     {
-        $config = $this->getConfiguration($parameters);
+        $config = $this->getConfiguration();
 
-        $pluralName = Pluralization::pluralize($config->getResourceName());
         $criteria = $config->getCriteria();
         $sorting = $config->getSorting();
 
+        $pluralName = Pluralization::pluralize($config->getResourceName());
+
         $view = View::create()
-            ->setTemplate($this->getFullTemplateName('list.html'))
+            ->setTemplate($this->getFullTemplateName('index.html'))
         ;
 
         if ($config->isCollectionPaginated()) {
@@ -96,6 +80,20 @@ class ResourceController extends Controller
     }
 
     /**
+     * Get single resource by its identifier.
+     */
+    public function showAction()
+    {
+        $view = View::create()
+            ->setTemplate($this->getFullTemplateName('show.html'))
+            ->setTemplateVar($this->getConfiguration()->getResourceName())
+            ->setData($this->findByIdentifierOr404())
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
      * Create new resource or just display the form.
      */
     public function createAction(Request $request)
@@ -106,9 +104,7 @@ class ResourceController extends Controller
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->dispatchEvent('pre_create', $resource);
-            $this->persistAndFlush($resource);
-            $this->dispatchEvent('post_create', $resource);
+            $this->create($resource);
 
             $this->setFlash('success', '%resource% has been successfully created.');
 
@@ -119,13 +115,16 @@ class ResourceController extends Controller
             return $this->handleView(View::create($form));
         }
 
+        $resourceName = $config->getResourceName();
+
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('create.html'))
             ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
+                $resourceName => $resource,
+                'form'        => $form->createView()
             ))
         ;
+
 
         return $this->handleView($view);
     }
@@ -137,14 +136,11 @@ class ResourceController extends Controller
     {
         $config = $this->getConfiguration();
 
-        $resource = $this->findOr404($config->getIdentifierCriteria());
+        $resource = $this->findByIdentifierOr404();
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->dispatchEvent('pre_update', $resource);
-            $this->persistAndFlush($resource);
-            $this->dispatchEvent('post_update', $resource);
-
+            $this->update($resource);
             $this->setFlash('success', '%resource% has been updated.');
 
             return $this->redirectTo($resource);
@@ -154,11 +150,13 @@ class ResourceController extends Controller
             return $this->handleView(View::create($form));
         }
 
+        $resourceName = $config->getResourceName();
+
         $view = View::create()
             ->setTemplate($this->getFullTemplateName('update.html'))
             ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
+                $resourceName => $resource,
+                'form'        => $form->createView()
             ))
         ;
 
@@ -170,23 +168,15 @@ class ResourceController extends Controller
      */
     public function deleteAction()
     {
-        $criteria = $this
-            ->getConfiguration()
-            ->getIdentifierCriteria()
-        ;
-
-        $resource = $this->findOr404($criteria);
-        $this->removeAndFlush($resource);
+        $this->delete($this->findByIdentifierOr404());
         $this->setFlash('success', '%resource% has been deleted.');
 
         return $this->redirectToCollection($resource);
     }
 
-    public function getConfiguration(array $parameters = null)
+    public function getConfiguration()
     {
-        $source = $parameters ?: $this->getRequest();
-
-        $this->configuration->load($source);
+        $this->configuration->setRequest($this->getRequest());
 
         return $this->configuration;
     }
@@ -257,6 +247,27 @@ class ResourceController extends Controller
         return $this->getService('manager');
     }
 
+    public function create($resource)
+    {
+        $this->dispatchEvent('pre_create', $resource);
+        $this->persistAndFlush($resource);
+        $this->dispatchEvent('post_create', $resource);
+    }
+
+    public function update($resource)
+    {
+        $this->dispatchEvent('pre_update', $resource);
+        $this->persistAndFlush($resource);
+        $this->dispatchEvent('post_update', $resource);
+    }
+
+    public function delete($resource)
+    {
+        $this->dispatchEvent('pre_delete', $resource);
+        $this->removeAndFlush($resource);
+        $this->dispatchEvent('post_delete', $resource);
+    }
+
     public function persistAndFlush($resource)
     {
         $manager = $this->getManager();
@@ -276,6 +287,11 @@ class ResourceController extends Controller
     public function getRepository()
     {
         return $this->getService('repository');
+    }
+
+    public function findByIdentifierOr404()
+    {
+        return $this->findOr404($this->getConfiguration()->getIdentifierCriteria());
     }
 
     public function findOr404(array $criteria)
@@ -332,17 +348,16 @@ class ResourceController extends Controller
             $message = $customMessage;
         }
 
+        $translatedMessage = $this->get('translator')->trans(
+            $message,
+            array('%resource%' => ucfirst($config->getResourceName())),
+            'flashes'
+        );
+
         return $this
             ->get('session')
             ->getFlashBag()
-            ->add(
-                $type,
-                $this->get('translator')->trans(
-                    $message,
-                    array('%resource%' => ucfirst($config->getResourceName())),
-                    'flashes'
-                )
-            )
+            ->add($type, $translatedMessage)
         ;
     }
 

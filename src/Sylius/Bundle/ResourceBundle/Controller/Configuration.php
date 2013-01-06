@@ -52,29 +52,10 @@ class Configuration
         return $this->templateNamespace;
     }
 
-    public function load($source)
+    public function setRequest(Request $request)
     {
-        if (!$source instanceof Request && !is_array($source)) {
-            throw new \InvalidArgumentException('Resource configuration source should be an array or Request object');
-        }
-
-        $defaultConfiguration = $this->getDefaultConfiguration();
-
-        if ($source instanceof Request) {
-            $request = $source;
-
-            $this->parameters = $request->attributes->get('_sylius.resource', $defaultConfiguration);
-            $this->request = $request;
-        } else {
-            $arrayConfiguration = $source;
-
-            $this->parameters = $arrayConfiguration;
-        }
-    }
-
-    public function getServiceName($service)
-    {
-        return sprintf('%s.%s.%s', $this->bundlePrefix, $service, $this->resourceName);
+        $this->parameters = $request->attributes->get('_sylius.resource', array());
+        $this->request = $request;
     }
 
     public function isHtmlRequest()
@@ -84,6 +65,11 @@ class Configuration
         }
 
         return 'html' === $this->request->getRequestFormat();
+    }
+
+    public function getServiceName($service)
+    {
+        return sprintf('%s.%s.%s', $this->bundlePrefix, $service, $this->resourceName);
     }
 
     public function getIdentifier()
@@ -192,10 +178,5 @@ class Configuration
     protected function get($parameter, $default = null)
     {
         return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] : $default;
-    }
-
-    protected function getDefaultConfiguration()
-    {
-        return array();
     }
 }
