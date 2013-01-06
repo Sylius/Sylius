@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ShippingBundle\Calculator\DelegatingShippingChargeCalculator;
+use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethod;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,13 +33,22 @@ class ShippingMethodType extends AbstractType
     protected $dataClass;
 
     /**
+     * Delegating calculator.
+     *
+     * @var DelegatingShippingChargeCalculator
+     */
+    protected $delegatingCalculator;
+
+    /**
      * Constructor.
      *
-     * @param string $dataClass
+     * @param string                             $dataClass
+     * @param DelegatingShippingChargeCalculator $delegatingCalculator
      */
-    public function __construct($dataClass)
+    public function __construct($dataClass, DelegatingShippingChargeCalculator $delegatingCalculator)
     {
         $this->dataClass = $dataClass;
+        $this->delegatingCalculator = $delegatingCalculator;
     }
 
     /**
@@ -46,6 +57,7 @@ class ShippingMethodType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new BuildShippingMethodFormListener($this->delegatingCalculator, $builder->getFormFactory()))
             ->add('category', 'sylius_shipping_category_choice', array(
                 'required' => false
             ))

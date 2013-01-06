@@ -19,7 +19,11 @@
     <parameters>
         <parameter key="sylius_shipping.form.type.calculator_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType</parameter>
 
-        <parameter key="sylius_shipping.calculator.class">Sylius\Bundle\ShippingBundle\Calculator\DelegatingShippingCalculator</parameter>
+        <parameter key="sylius_shipping.calculator.class">Sylius\Bundle\ShippingBundle\Calculator\DelegatingShippingChargeCalculator</parameter>
+
+        <parameter key="sylius_shipping.calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator</parameter>
+        <parameter key="sylius_shipping.calculator.per_item_rate.class">Sylius\Bundle\ShippingBundle\Calculator\PerItemRateCalculator</parameter>
+        <parameter key="sylius_shipping.calculator.flexible_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlexibleRateCalculator</parameter>
     </parameters>
 
     <services>
@@ -54,6 +58,7 @@
         </service>
         <service id="sylius_shipping.form.type.method" class="%sylius_shipping.form.type.method.class%">
             <argument>%sylius_shipping.model.method.class%</argument>
+            <argument type="service" id="sylius_shipping.calculator" />
             <tag name="form.type" alias="sylius_shipping_method" />
         </service>
 
@@ -63,6 +68,16 @@
         </service>
 
         <service id="sylius_shipping.calculator" class="%sylius_shipping.calculator.class%" />
+
+        <service id="sylius_shipping.calculator.flat_rate" class="%sylius_shipping.calculator.flat_rate.class%">
+            <tag name="sylius_shipping.calculator" calculator="flat_rate" label="Flat rate per shipment" />
+        </service>
+        <service id="sylius_shipping.calculator.per_item_rate" class="%sylius_shipping.calculator.per_item_rate.class%">
+            <tag name="sylius_shipping.calculator" calculator="per_item_rate" label="Flat rate per item" />
+        </service>
+        <service id="sylius_shipping.calculator.flexible_rate" class="%sylius_shipping.calculator.flexible_rate.class%">
+            <tag name="sylius_shipping.calculator" calculator="flexible_rate" label="Flexible rate" />
+        </service>
     </services>
 
 </container>

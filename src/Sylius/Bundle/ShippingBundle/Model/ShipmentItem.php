@@ -22,6 +22,7 @@ class ShipmentItem implements ShipmentItemInterface
 {
     protected $id;
     protected $shipment;
+    protected $shippable;
     protected $shippingState;
     protected $createdAt;
     protected $updatedAt;
@@ -50,6 +51,16 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShipment(ShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
+    }
+
+    public function getShippable()
+    {
+        return $this->shippable;
+    }
+
+    public function setShippable(ShippableInterface $shippable)
+    {
+        $this->shippable = $shippable;
     }
 
     public function getShippingState()

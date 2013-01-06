@@ -90,6 +90,14 @@ interface ShipmentInterface
     public function hasItem(ShipmentItemInterface $item);
 
     /**
+     * Get unique shippable types from this shipment.
+     * With a quantity as keys.
+     *
+     * @return Collection
+     */
+    public function getShippables();
+
+    /**
      * Get tracking code.
      *
      * @return string

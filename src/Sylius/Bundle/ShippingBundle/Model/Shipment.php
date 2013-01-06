@@ -91,6 +91,20 @@ class Shipment implements ShipmentInterface
         }
     }
 
+    public function getShippables()
+    {
+        $shippables = new ArrayCollection();
+
+        foreach ($this->items as $item) {
+            $shippable = $item->getShippable();
+            if (!$shippables->contains($shippable)) {
+                $shippables->add($shippable);
+            }
+        }
+
+        return $shippables;
+    }
+
     public function getTracking()
     {
         return $this->tracking;

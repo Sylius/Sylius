@@ -66,33 +66,48 @@ class DelegatingShippingChargeCalculator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface                $method
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface                     $shippable
-     * @param Sylius\Bundle\ShippingBundle\Calculator\ShippingChargeCalculatorInterface $calculator
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
      */
-    function it_should_delegate_calculation_to_a_correct_calculator($method, $shippable, $calculator)
+    function it_should_complain_if_shipment_has_no_method_defined($shipment)
     {
-        $this->registerCalculator('default', $calculator);
-        $method->getCalculator()->willReturn('default');
+        $shipment->getMethod()->willReturn(null);
 
-        $calculator->calculate($method, $shippable, array())->shouldBeCalled()->willReturn(10);
-
-        $this->calculate($method, $shippable)->shouldReturn(10);
+        $this
+            ->shouldThrow('LogicException')
+            ->duringCalculate($shipment)
+        ;
     }
 
     /**
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface                      $shipment
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface                $method
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface                     $shippable
      * @param Sylius\Bundle\ShippingBundle\Calculator\ShippingChargeCalculatorInterface $calculator
      */
-    function it_should_complain_if_correct_calculator_doesnt_exist_for_given_method($method, $shippable, $calculator)
+    function it_should_delegate_calculation_to_a_correct_calculator($shipment, $method, $calculator)
     {
         $this->registerCalculator('default', $calculator);
+        $shipment->getMethod()->willReturn($method);
+        $method->getCalculator()->willReturn('default');
+
+        $calculator->calculate($shipment)->shouldBeCalled()->willReturn(10);
+
+        $this->calculate($shipment)->shouldReturn(10);
+    }
+
+    /**
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface                      $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface                $method
+     * @param Sylius\Bundle\ShippingBundle\Calculator\ShippingChargeCalculatorInterface $calculator
+     */
+    function it_should_complain_if_correct_calculator_doesnt_exist_for_given_method($shipment, $method, $calculator)
+    {
+        $this->registerCalculator('default', $calculator);
+        $shipment->getMethod()->willReturn($method);
         $method->getCalculator()->willReturn('custom');
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringCalculate($method, $shippable)
+            ->duringCalculate($shipment)
         ;
     }
 }

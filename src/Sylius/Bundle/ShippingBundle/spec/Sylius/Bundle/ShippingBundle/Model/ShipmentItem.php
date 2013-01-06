@@ -53,6 +53,20 @@ class ShipmentItem extends ObjectBehavior
         $this->getShipment()->shouldReturn(null);
     }
 
+    function it_should_not_have_shippable_defined_by_default()
+    {
+        $this->getShippable()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface $shippable
+     */
+    function it_should_allow_defining_shippable($shippable)
+    {
+        $this->setShippable($shippable);
+        $this->getShippable()->shouldReturn($shippable);
+    }
+
     function it_should_have_ready_state_by_default()
     {
         $this->getShippingState()->shouldReturn(ShipmentItemInterface::STATE_READY);

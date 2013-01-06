@@ -36,8 +36,9 @@ class RegisterCalculatorsPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('sylius_shipping.calculator') as $id => $attributes) {
             $name = $attributes[0]['calculator'];
+            $label = $attributes[0]['label'];
 
-            $calculators[$name] = $name;
+            $calculators[$name] = $label;
 
             $delegatingCalculator->addMethodCall('registerCalculator', array($name, new Reference($id)));
         }

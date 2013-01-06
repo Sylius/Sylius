@@ -19,6 +19,7 @@
         <field name="name" column="name" type="string" />
         <field name="requirement" column="requirement" type="integer" />
         <field name="calculator" column="calculator" type="string" />
+        <field name="configuration" column="configuration" type="array" />
         <many-to-one field="category" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface" inversed-by="methods">
             <join-column name="category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>

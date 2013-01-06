@@ -46,6 +46,20 @@ interface ShipmentItemInterface
     public function setShipment(ShipmentInterface $shipment = null);
 
     /**
+     * Get shippable object.
+     *
+     * @return ShippableInterface
+     */
+    public function getShippable();
+
+    /**
+     * Set shippable object.
+     *
+     * @param ShippableInterface $shippable
+     */
+    public function setShippable(ShippableInterface $shippable);
+
+    /**
      * Get shipment item state.
      *
      * @return string

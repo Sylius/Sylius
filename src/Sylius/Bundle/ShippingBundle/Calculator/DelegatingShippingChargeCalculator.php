@@ -11,15 +11,14 @@
 
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
 /**
  * Delegating calculator.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class DelegatingShippingChargeCalculator implements ShippingChargeCalculatorInterface
+class DelegatingShippingChargeCalculator extends Calculator
 {
     protected $calculators;
 
@@ -68,10 +67,14 @@ class DelegatingShippingChargeCalculator implements ShippingChargeCalculatorInte
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShippingMethodInterface $method, ShippableInterface $shippable, array $context = array())
+    public function calculate(ShipmentInterface $shipment)
     {
+        if (null === $method = $shipment->getMethod()) {
+            throw new \LogicException('Cannot calculate charge on shipment without defined shipping method');
+        }
+
         $calculator = $this->getCalculator($method->getCalculator());
 
-        return $calculator->calculate($method, $shippable, $context);
+        return $calculator->calculate($shipment);
     }
 }

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Shipping charge calculator.
@@ -22,14 +23,33 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 interface ShippingChargeCalculatorInterface
 {
     /**
-     * Get the shipping charge for given method, shippable and additional
-     * context.
+     * Get the shipping charge for given shipment.
+     * Shipment has to have at least 1 shippable and a method defined.
      *
-     * @param ShippingMethodInterface $method
-     * @param ShippableInterface      $shippable
-     * @param array                   $context
+     * @param ShipmentInterface $shipment
      *
      * @return mixed
      */
-    public function calculate(ShippingMethodInterface $method, ShippableInterface $shippable, array $context = array());
+    public function calculate(ShipmentInterface $shipment);
+
+    /**
+     * Does this calculator has any configuration?
+     *
+     * @return Boolean
+     */
+    public function isConfigurable();
+
+    /**
+     * Build options form if required.
+     *
+     * @param FormBuilderInterface $builder
+     */
+    public function buildConfigurationForm(FormBuilderInterface $builder);
+
+    /**
+     * Resolve default options set.
+     *
+     * @param OptionsResolverInterface $resolver
+     */
+    public function buildConfiguration(OptionsResolverInterface $resolver);
 }
