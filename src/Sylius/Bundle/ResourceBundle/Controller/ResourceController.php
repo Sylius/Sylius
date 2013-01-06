@@ -179,7 +179,7 @@ class ResourceController extends Controller
         $this->removeAndFlush($resource);
         $this->setFlash('success', '%resource% has been deleted.');
 
-        return $this->redirectToCollection();
+        return $this->redirectToCollection($resource);
     }
 
     public function getConfiguration(array $parameters = null)
@@ -223,7 +223,7 @@ class ResourceController extends Controller
         );
     }
 
-    public function redirectToCollection()
+    public function redirectToCollection($resource)
     {
         return $this->redirectToRoute($this->getRedirectRoute('list'));
     }
@@ -231,7 +231,7 @@ class ResourceController extends Controller
     public function redirectToRoute($route, array $data = array())
     {
         if ('referer' === $route) {
-            return $this->handleView(RedirectView::create($this->getRequest()->headers->get('referer')));
+            return $this->redirectToReferer();
         }
 
         return $this->handleView(RouteRedirectView::create($route, $data));
@@ -344,6 +344,11 @@ class ResourceController extends Controller
                 )
             )
         ;
+    }
+
+    protected function redirectToReferer()
+    {
+        return $this->handleView(RedirectView::create($this->getRequest()->headers->get('referer')));
     }
 
     protected function getService($name)
