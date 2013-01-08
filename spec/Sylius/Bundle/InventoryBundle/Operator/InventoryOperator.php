@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Operator;
 
 use PHPSpec2\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
  * Inventory operator spec.

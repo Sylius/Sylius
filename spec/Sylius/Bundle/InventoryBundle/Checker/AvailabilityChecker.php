@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Checker;
 
 use PHPSpec2\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
  * Stockable item model spec.
