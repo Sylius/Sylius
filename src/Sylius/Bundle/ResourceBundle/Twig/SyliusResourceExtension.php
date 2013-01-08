@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Twig;
 
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Extension;
 use Twig_Function_Method;
@@ -20,10 +21,18 @@ use Twig_Function_Method;
  * Sylius resource twig helper.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class SyliusResourceExtension extends Twig_Extension
 {
+    /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
     private $request;
+
+    /**
+     * @var RouterInterface
+     */
     private $router;
 
     public function __construct(RouterInterface $router)
@@ -37,14 +46,17 @@ class SyliusResourceExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_resource_fetch_request' => new Twig_Function_Method($this, 'fetchRequest'),
             'sylius_resource_sort' => new Twig_Function_Method($this, 'renderSortingLink', array('is_safe' => array('html'))),
         );
     }
 
-    public function fetchRequest(Request $request)
+    public function fetchRequest(GetResponseEvent $event)
     {
-        $this->request = $request;
+        if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
+            return;
+        }
+
+        $this->request = $event->getRequest();
     }
 
     public function renderSortingLink($property, $label = null, $order = null, $route = null)
