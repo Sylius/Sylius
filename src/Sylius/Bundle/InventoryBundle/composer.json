@@ -16,7 +16,7 @@
             "homepage": "https://github.com/Sylius/SyliusInventoryBundle/contributors"
         }
     ],
-    "minimum-stability:": "dev",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
 
