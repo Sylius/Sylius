@@ -24,6 +24,7 @@
         <service id="sylius_resource.twig" class="%sylius_resource.twig.class%">
             <argument type="service" id="router" />
             <tag name="twig.extension" />
+            <tag name="kernel.event_listener" event="kernel.request" method="fetchRequest" />
         </service>
     </services>
 
