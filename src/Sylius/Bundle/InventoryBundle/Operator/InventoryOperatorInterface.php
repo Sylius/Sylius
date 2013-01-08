@@ -22,13 +22,6 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 interface InventoryOperatorInterface
 {
     /**
-     * Update stockable inventory units.
-     *
-     * @param StockableInterface $stockable
-     */
-    function refresh(StockableInterface $stockable);
-
-    /**
      * Increase stock on hand for given stockable by quantity.
      *
      * @param StockableInterface $stockable
@@ -57,6 +50,13 @@ interface InventoryOperatorInterface
      * @return array An array of InventoryUnitInterface objects
      */
     function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_SOLD);
+
+    /**
+     * Update backorder inventory units.
+     *
+     * @param StockableInterface $stockable
+     */
+    function fillBackorders(StockableInterface $stockable);
 
     /**
      * Destroy inventory unit.
