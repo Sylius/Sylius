@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Resource controller configuration.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class Configuration
 {
@@ -25,7 +26,9 @@ class Configuration
     protected $resourceName;
     protected $templateNamespace;
 
-    protected $parameters;
+    /**
+     * @var Request
+     */
     protected $request;
 
     public function __construct($bundlePrefix, $resourceName, $templateNamespace = null)
@@ -33,8 +36,6 @@ class Configuration
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
         $this->templateNamespace = $templateNamespace;
-
-        $this->parameters = array();
     }
 
     public function getBundlePrefix()
@@ -54,7 +55,6 @@ class Configuration
 
     public function setRequest(Request $request)
     {
-        $this->parameters = $request->attributes->get('_sylius.resource', array());
         $this->request = $request;
     }
 
@@ -95,12 +95,12 @@ class Configuration
 
     public function getTemplate()
     {
-        return $this->get('template');
+        return $this->get('_template');
     }
 
     public function getFormType()
     {
-        return $this->get('form', $this->getDefaultFormType());
+        return $this->get('_form', $this->getDefaultFormType());
     }
 
     public function getDefaultFormType()
@@ -110,40 +110,40 @@ class Configuration
 
     public function getRedirect()
     {
-        return $this->get('redirect');
+        return $this->get('_redirect');
     }
 
     public function isCollectionPaginated()
     {
-        return (Boolean) $this->get('paginate', true);
+        return (Boolean) $this->get('_paginate', true);
     }
 
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->get('paginate', 10);
+        return (int) $this->get('_paginate', 10);
     }
 
     public function getCollectionLimit()
     {
-        return (int) $this->get('limit', 10);
+        return (int) $this->get('_limit', 10);
     }
 
     public function isCollectionSortable()
     {
-        return (Boolean) $this->get('sortable', false);
+        return (Boolean) $this->get('_sortable', false);
     }
 
     public function isCollectionFilterable()
     {
-        return (Boolean) $this->get('filterable', false);
+        return (Boolean) $this->get('_filterable', false);
     }
 
     public function getCriteria()
     {
-        $defaultCriteria = $this->get('criteria', array());
+        $defaultCriteria = $this->get('_criteria', array());
 
         if ($this->isCollectionFilterable() && null !== $this->request) {
-            return $this->request->get('criteria', $defaultCriteria);
+            return $this->request->get('_criteria', $defaultCriteria);
         }
 
         return $defaultCriteria;
@@ -151,10 +151,10 @@ class Configuration
 
     public function getSorting()
     {
-        $defaultSorting = $this->get('sorting', array());
+        $defaultSorting = $this->get('_sorting', array());
 
         if ($this->isCollectionSortable() && null !== $this->request) {
-            return $this->request->get('sorting', $defaultSorting);
+            return $this->request->get('_sorting', $defaultSorting);
         }
 
         return $defaultSorting;
@@ -162,7 +162,7 @@ class Configuration
 
     public function getFlashMessage()
     {
-        return $this->get('flash');
+        return $this->get('_flash');
     }
 
     public function getRoute()
@@ -177,6 +177,10 @@ class Configuration
 
     protected function get($parameter, $default = null)
     {
-        return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] : $default;
+        if (null === $this->request) {
+            return $default;
+        }
+
+        return $this->request->attributes->get($parameter, $default);
     }
 }

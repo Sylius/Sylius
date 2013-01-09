@@ -21,9 +21,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Base resource controller for Sylius.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class ResourceController extends FOSRestController
 {
+    /**
+     * @var Configuration
+     */
     protected $configuration;
 
     /**
@@ -51,7 +55,7 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * Get collection (paginated by default) of resources.
+     * List collection (paginated by default) of resources.
      */
     public function indexAction(Request $request)
     {
@@ -97,7 +101,7 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * Get single resource by its identifier.
+     * Show single resource by its identifier.
      */
     public function showAction()
     {
@@ -166,8 +170,6 @@ class ResourceController extends FOSRestController
         if (!$config->isHtmlRequest()) {
             return $this->handleView($this->view($form));
         }
-
-        $resourceName = $config->getResourceName();
 
         $view = $this
             ->view()
