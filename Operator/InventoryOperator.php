@@ -18,9 +18,10 @@ use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
- * Default stock operator.
+ * Default inventory operator.
  *
  * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class InventoryOperator implements InventoryOperatorInterface
 {
@@ -62,13 +63,6 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function refresh(StockableInterface $stockable)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function increase(StockableInterface $stockable, $quantity)
     {
         if ($quantity < 1) {
@@ -93,9 +87,23 @@ class InventoryOperator implements InventoryOperatorInterface
             return false;
         }
 
-        $stockable->setOnHand($onHand - $quantity);
+        $stockable->setOnHand(max(0, $onHand - $quantity));
 
-        return $this->create($stockable, $quantity, $state);
+        $units = $this->create($stockable, $quantity, $state);
+
+        if (false === $this->backorders || $quantity <= $onHand) {
+            return $units;
+        }
+
+        // Backorder units
+        $i = 0;
+        foreach ($units as $unit) {
+            if (++$i > $onHand) {
+                $unit->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
+            }
+        }
+
+        return $units;
     }
 
     /**
@@ -123,21 +131,34 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
+    public function fillBackorders(StockableInterface $stockable)
+    {
+        $onHand = $stockable->getOnHand();
+        if ($onHand <= 0) {
+            return;
+        }
+
+        $units = $this->repository->findBy(array(
+            'stockable'      => $stockable,
+            'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
+        ));
+
+        foreach ($units as $unit) {
+            $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+            if (--$onHand === 0) {
+                break;
+            }
+        }
+
+        $stockable->setOnHand($onHand);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function destroy(InventoryUnitInterface $inventoryUnit)
     {
         $this->manager->remove($inventoryUnit);
         $this->manager->flush($inventoryUnit);
-    }
-
-    /**
-     * Fill backordered units.
-     *
-     * @param StockableInterface $stockable
-     * @param integer            $onHand;
-     * @param integer            $backorderedUnits
-     */
-    protected function fillBackorders(StockableInterface $stockable, $onHand, $backorderedUnits)
-    {
-        // pufff.
     }
 }
