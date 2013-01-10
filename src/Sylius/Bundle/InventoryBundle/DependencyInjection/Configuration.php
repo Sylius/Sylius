@@ -22,6 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -41,6 +42,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('backorders')->defaultTrue()->end()
                 ->scalarNode('checker')->defaultValue('sylius_inventory.checker.default')->cannotBeEmpty()->end()
                 ->scalarNode('operator')->defaultValue('sylius_inventory.operator.default')->cannotBeEmpty()->end()
+                ->arrayNode('events')->prototype('scalar')->end()
             ->end();
 
         $this->addClassesSection($rootNode);
