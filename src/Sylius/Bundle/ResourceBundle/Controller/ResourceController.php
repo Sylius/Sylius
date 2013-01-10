@@ -64,38 +64,27 @@ class ResourceController extends FOSRestController
         $criteria = $config->getCriteria();
         $sorting = $config->getSorting();
 
-        $pluralResourceName = Pluralization::pluralize($config->getResourceName());
-
-        $view = $this
-            ->view()
-            ->setTemplate($this->getFullTemplateName('index.html'))
-        ;
-
         if ($config->isCollectionPaginated()) {
-            $paginator = $this
+            $resources = $this
                 ->getRepository()
                 ->createPaginator($criteria, $sorting)
+                ->setCurrentPage($request->get('page', 1), true, true)
+                ->setMaxPerPage($config->getPaginationMaxPerPage())
             ;
-
-            $paginator->setCurrentPage($request->get('page', 1), true, true);
-            $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
-
-            $resources = $paginator->getCurrentPageResults();
-
-            $data = $config->isHtmlRequest() ? array(
-                $pluralResourceName => $resources,
-                'paginator'         => $paginator
-            ) : $resources;
         } else {
-            $view->setTemplateVar($pluralResourceName);
-
-            $data = $this
+            $resources = $this
                 ->getRepository()
                 ->findBy($criteria, $sorting, $config->getCollectionLimit())
             ;
         }
 
-        $view->setData($data);
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->getFullTemplateName('index.html'))
+            ->setTemplateVar(Pluralization::pluralize($config->getResourceName()))
+            ->setData($resources)
+        ;
 
         return $this->handleView($view);
     }
@@ -192,7 +181,7 @@ class ResourceController extends FOSRestController
         $this->delete($resource);
         $this->setFlash('success', '%resource% has been deleted.');
 
-        return $this->redirectToCollection($resource);
+        return $this->redirectToIndex($resource);
     }
 
     /**
@@ -233,9 +222,9 @@ class ResourceController extends FOSRestController
         return $this->handleView($this->redirectView($this->getRequest()->headers->get('referer')));
     }
 
-    public function redirectToCollection($resource)
+    public function redirectToIndex($resource)
     {
-        return $this->redirectToRoute($this->getRedirectRoute('list'));
+        return $this->redirectToRoute($this->getRedirectRoute('index'));
     }
 
     public function redirectToRoute($route, array $data = array())
