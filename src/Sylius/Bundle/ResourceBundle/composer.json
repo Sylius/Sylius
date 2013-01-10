@@ -26,11 +26,13 @@
         "white-october/pagerfanta-bundle": "*"
     },
     "require-dev": {
+        "twig/twig":            "*",
         "doctrine/orm":         "~2.3",
         "doctrine/mongodb-odm": "*",
         "phpspec/phpspec2":     "dev-develop"
     },
     "suggest": {
+        "fsc/hateoas-bundle":   "0.3.x-dev",
         "doctrine/orm":         "~2.3",
         "doctrine/mongodb-odm": "*"
     },

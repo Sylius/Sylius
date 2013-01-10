@@ -59,10 +59,11 @@ class SyliusResourceExtension extends Twig_Extension
         $this->request = $event->getRequest();
     }
 
-    public function renderSortingLink($property, $label = null, $order = null, $route = null)
+    public function renderSortingLink($property, $label = null, $order = null, $route = null, array $routeParameters = array())
     {
         $label = null === $label ? $property : $label;
         $route = null === $route ? $this->request->attributes->get('_route') : $route;
+        $routeParameters = empty($routeParameters) ? $this->request->attributes->get('_route_parameters') : $routeParameters;
 
         $sorting = $this->request->get('sorting');
 
@@ -75,7 +76,7 @@ class SyliusResourceExtension extends Twig_Extension
         $order = null === $order ? 'asc' : $order;
 
         $url = $this->router->generate($route, array(
-            'sorting' => array($property => $order)
+            array_merge(array('sorting' => array($property => $order), $routeParameters))
         ));
 
         return sprintf('<a href="%s">%s</a>', $url, $label);
