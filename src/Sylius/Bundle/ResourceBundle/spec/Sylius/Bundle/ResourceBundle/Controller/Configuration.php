@@ -3,23 +3,23 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PHPSpec2\ObjectBehavior;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
- * Resource controller configuration.
+ * Resource controller configuration spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class Configuration extends ObjectBehavior
 {
     /**
-     * @param Symfony\Component\HttpFoundation\Request      $request
-     * @param Symfony\Component\HttpFoundation\ParameterBag $attributes
+     * @param Symfony\Component\HttpFoundation\Request $request
      */
-    function let($request, $attributes)
+    function let($request)
     {
         $this->beConstructedWith('sylius_resource', 'spec', 'SyliusResourceBundle:Test');
 
-        $request->attributes = $attributes;
+        $request->attributes = new ParameterBag();
     }
 
     function it_should_be_initializable()
@@ -64,12 +64,12 @@ class Configuration extends ObjectBehavior
         $this->isCollectionFilterable()->shouldReturn(false);
     }
 
-    function it_should_return_default_collection_limit_which_is_10($request, $attributes)
+    function it_should_return_default_collection_limit_which_is_10()
     {
         $this->getCollectionLimit()->shouldReturn(10);
     }
 
-    function it_should_recognize_collection_as_paginated_by_default($request, $attributes)
+    function it_should_recognize_collection_as_paginated_by_default()
     {
         $this->isCollectionPaginated()->shouldReturn(true);
     }
@@ -77,26 +77,6 @@ class Configuration extends ObjectBehavior
     function it_should_return_default_collection_pagination_max_per_page_which_is_10()
     {
         $this->getPaginationMaxPerPage()->shouldReturn(10);
-    }
-
-    function it_should_complain_if_source_is_not_a_request_or_array()
-    {
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Resource configuration source should be an array or Request object'))
-            ->duringLoad(123)
-        ;
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Resource configuration source should be an array or Request object'))
-            ->duringLoad('abc')
-        ;
-    }
-
-    function it_should_load_configuration_from_request($request, $attributes)
-    {
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled();
-
-        $this->load($request);
     }
 
     function it_should_complain_if_trying_to_check_request_type_when_request_is_unknown()
@@ -111,7 +91,7 @@ class Configuration extends ObjectBehavior
     {
         $request->getRequestFormat()->willReturn('html');
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->isHtmlRequest()->shouldReturn(true);
     }
 
@@ -119,27 +99,23 @@ class Configuration extends ObjectBehavior
     {
         $request->geRequestFormat()->willReturn('json');
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->isHtmlRequest()->shouldReturn(false);
     }
 
-    function it_should_get_identifier_name_from_request_attributes($request, $attributes)
+    function it_should_get_identifier_name_from_request_attributes($request)
     {
-        $configuration = array('identifier' => 'slug');
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('identifier', 'slug');
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getIdentifier()->shouldReturn('slug');
     }
 
-    function it_should_get_identifier_value_from_request($request, $attributes)
+    function it_should_get_identifier_value_from_request($request)
     {
-        $configuration = array('identifier' => 'slug');
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->get('id')->willReturn('test-slug');
 
-        $request->get('slug')->willReturn('test-slug');
-
-        $this->load($request);
+        $this->setRequest($request);
         $this->getIdentifierValue()->shouldReturn('test-slug');
     }
 
@@ -151,199 +127,113 @@ class Configuration extends ObjectBehavior
         ;
     }
 
-    function it_should_get_identifier_criteria_from_request($request, $attributes)
+    function it_should_get_identifier_criteria_from_request($request)
     {
-        $configuration = array('identifier' => 'slug');
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
-
+        $request->attributes->set('identifier', 'slug');
         $request->get('slug')->willReturn('test-slug');
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getIdentifierCriteria()->shouldReturn(array('slug' => 'test-slug'));
     }
 
-    function it_should_get_template_from_request_attributes($request, $attributes)
+    function it_should_get_template_from_request_attributes($request)
     {
-        $configuration = array('template' => 'SyliusResourceBundle:Test:custom.html.twig');
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_template', 'SyliusResourceBundle:Test:custom.html.twig');
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getTemplate()->shouldReturn('SyliusResourceBundle:Test:custom.html.twig');
     }
 
-    function it_should_get_form_type_from_request_attributes($request, $attributes)
+    function it_should_get_form_type_from_request_attributes()
     {
-        $configuration = array('form' => 'sylius_resource_spec');
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
-
-        $this->load($request);
         $this->getFormType()->shouldReturn('sylius_resource_spec');
     }
 
-    function it_should_get_redirect_from_request_attributes($request, $attributes)
+    function it_should_get_redirect_from_request_attributes($request)
     {
-        $configuration = array('redirect' => 'sylius_resource_list');
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_redirect', 'sylius_resource_list');
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getRedirect()->shouldReturn('sylius_resource_list');
     }
 
-    function it_should_get_criteria_from_request_attributes($request, $attributes)
+    function it_should_get_criteria_from_request_attributes($request)
     {
-        $configuration = array('criteria' => array('enabled' => false));
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_criteria', array('enabled' => false));
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getCriteria()->shouldReturn(array('enabled' => false));
     }
 
-    function it_should_get_criteria_from_request_if_collection_is_filterable($request, $attributes)
+    function it_should_get_criteria_from_request_if_collection_is_filterable($request)
     {
-        $configuration = array('criteria' => array('enabled' => false), 'filterable' => true);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->get('_criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
+        $request->attributes->set('_criteria', array('enabled' => false));
+        $request->attributes->set('_filterable', true);
 
-        $request->get('criteria', ANY_ARGUMENT)->willReturn(array('locked' => true));
-
-        $this->load($request);
-        $this->getCriteria()->shouldReturn(array('locked' => true));
+        $this->setRequest($request);
+        $this->getCriteria()->shouldReturn(array('locked' => false));
     }
 
-    function it_should_not_get_criteria_from_request_if_collection_isnt_filterable($request, $attributes)
+    function it_should_not_get_criteria_from_request_if_collection_isnt_filterable($request)
     {
-        $configuration = array('criteria' => array('enabled' => false), 'filterable' => false);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->get('_criteria', ANY_ARGUMENT)->shouldNotBeCalled();
+        $request->attributes->set('_criteria', array('enabled' => false));
+        $request->attributes->set('_filterable', false);
 
-        $request->get('criteria', ANY_ARGUMENT)->willReturn(array('locked' => true));
-
-        $this->load($request);
+        $this->setRequest($request);
         $this->getCriteria()->shouldReturn(array('enabled' => false));
     }
 
-    function it_should_get_sorting_from_request_if_collection_is_sortable($request, $attributes)
+    function it_should_get_sorting_from_request_if_collection_is_sortable($request)
     {
-        $configuration = array('sorting' => array('name' => 'asc'), 'sortable' => true);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->get('_sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
+        $request->attributes->set('_sorting', array('name' => 'asc'));
+        $request->attributes->set('_sortable', true);
 
-        $request->get('sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
-
-        $this->load($request);
+        $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('createdAt' => 'desc'));
     }
 
-    function it_should_not_get_sorting_from_request_if_collection_isnt_sortable($request, $attributes)
+    function it_should_not_get_sorting_from_request_if_collection_isnt_sortable($request)
     {
-        $configuration = array('sorting' => array('name' => 'asc'), 'sortable' => false);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->get('_sorting', ANY_ARGUMENT)->shouldNotBeCalled();
+        $request->attributes->set('_sorting', array('name' => 'asc'));
+        $request->attributes->set('_sortable', false);
 
-        $request->get('sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
-
-        $this->load($request);
+        $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('name' => 'asc'));
     }
 
-    function it_should_get_sorting_from_request_attributes($request, $attributes)
+    function it_should_get_sorting_from_request_attributes($request)
     {
-        $configuration = array('sorting' => array('createdAt' => 'asc'));
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_sorting', array('createdAt' => 'asc'));
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('createdAt' => 'asc'));
     }
 
-    function it_should_recognize_collection_as_not_paginated_from_request_attributes($request, $attributes)
+    function it_should_recognize_collection_as_not_paginated_from_request_attributes($request)
     {
-        $configuration = array('paginate' => false);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_paginate', false);
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->isCollectionPaginated()->shouldReturn(false);
     }
 
-    function it_should_return_collection_pagination_max_per_page_from_request_attributes($request, $attributes)
+    function it_should_return_collection_pagination_max_per_page_from_request_attributes($request)
     {
-        $configuration = array('paginate' => 25);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_paginate', 25);
 
-        $this->load($request);
+        $this->setRequest($request);
         $this->getPaginationMaxPerPage()->shouldReturn(25);
     }
 
     function it_should_return_collection_limit_from_request_attributes($request, $attributes)
     {
-        $configuration = array('limit' => 20);
-        $attributes->get('_sylius.resource', ANY_ARGUMENT)->shouldBeCalled()->willReturn($configuration);
+        $request->attributes->set('_limit', 20);
 
-        $this->load($request);
-        $this->getCollectionLimit()->shouldReturn(20);
-    }
-
-    function it_should_load_configuration_from_array()
-    {
-        $this->load(array());
-    }
-
-    function it_should_get_template_from_array_configuration()
-    {
-        $configuration = array('template' => 'SyliusResourceBundle:Test:custom.html.twig');
-
-        $this->load($configuration);
-        $this->getTemplate()->shouldReturn('SyliusResourceBundle:Test:custom.html.twig');
-    }
-
-    function it_should_get_form_type_from_array_configuration()
-    {
-        $configuration = array('form' => 'sylius_resource_spec');
-
-        $this->load($configuration);
-        $this->getFormType()->shouldReturn('sylius_resource_spec');
-    }
-
-    function it_should_get_redirect_from_array_configuration()
-    {
-        $configuration = array('redirect' => 'sylius_resource_list');
-
-        $this->load($configuration);
-        $this->getRedirect()->shouldReturn('sylius_resource_list');
-    }
-
-    function it_should_get_criteria_from_array_configuration()
-    {
-        $configuration = array('criteria' => array('enabled' => false));
-
-        $this->load($configuration);
-        $this->getCriteria()->shouldReturn(array('enabled' => false));
-    }
-
-    function it_should_get_sorting_from_array_configuration()
-    {
-        $configuration = array('sorting' => array('createdAt' => 'asc'));
-
-        $this->load($configuration);
-        $this->getSorting()->shouldReturn(array('createdAt' => 'asc'));
-    }
-
-    function it_should_recognize_collection_as_not_paginated_from_array_configuration()
-    {
-        $configuration = array('paginate' => false);
-
-        $this->load($configuration);
-        $this->isCollectionPaginated()->shouldReturn(false);
-    }
-
-    function it_should_return_collection_pagination_max_per_page_from_array_configuration()
-    {
-        $configuration = array('paginate' => 25);
-
-        $this->load($configuration);
-        $this->getPaginationMaxPerPage()->shouldReturn(25);
-    }
-
-    function it_should_return_collection_limit_from_array_configuration()
-    {
-        $configuration = array('limit' => 20);
-
-        $this->load($configuration);
+        $this->setRequest($request);
         $this->getCollectionLimit()->shouldReturn(20);
     }
 }

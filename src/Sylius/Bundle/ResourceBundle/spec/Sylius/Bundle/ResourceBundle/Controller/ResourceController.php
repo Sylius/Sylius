@@ -13,8 +13,8 @@ class ResourceController extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @param Symfony\Component\HttpFoundation\Request $request
-     * @param Symfony\Component\HttpFoundation\ParameterBag $attributes
+     * @param Symfony\Component\HttpFoundation\Request                 $request
+     * @param Symfony\Component\HttpFoundation\ParameterBag            $attributes
      */
     function let($container, $request, $attributes)
     {
