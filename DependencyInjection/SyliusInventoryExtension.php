@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * Inventory dependency injection extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class SyliusInventoryExtension extends Extension
 {
@@ -77,5 +78,15 @@ class SyliusInventoryExtension extends Extension
         }
 
         $loader->load('services.xml');
+
+        $listenerDefinition = $container->getDefinition('sylius_inventory.listener');
+        if (isset($config['events'])) {
+            foreach ($config['events'] as $event) {
+                $listenerDefinition->addTag(
+                    'kernel.event_listener',
+                    array('event' => $event, 'method' => 'onInventoryChange')
+                );
+            }
+        }
     }
 }
