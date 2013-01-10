@@ -20,6 +20,7 @@
     <parameters>
         <parameter key="sylius_inventory.operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
         <parameter key="sylius_inventory.checker.default.class">Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker</parameter>
+        <parameter key="sylius_inventory.listener.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
     </parameters>
 
     <services>
@@ -48,6 +49,10 @@
         </service>
         <service id="sylius_inventory.checker.default" class="%sylius_inventory.checker.default.class%">
             <argument>%sylius_inventory.backorders%</argument>
+        </service>
+
+        <service id="sylius_inventory.listener" class="%sylius_inventory.listener.class%">
+            <argument type="service" id="sylius_inventory.operator" />
         </service>
     </services>
 
