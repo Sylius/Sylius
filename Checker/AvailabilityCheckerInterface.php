@@ -28,7 +28,7 @@ interface AvailabilityCheckerInterface
      *
      * @return Boolean
      */
-    function isStockAvailable(StockableInterface $stockable);
+    public function isStockAvailable(StockableInterface $stockable);
 
     /**
      * Checks whether stockable object is available in stock.
@@ -39,5 +39,5 @@ interface AvailabilityCheckerInterface
      *
      * @return Boolean
      */
-    function isStockSufficient(StockableInterface $stockable, $quantity);
+    public function isStockSufficient(StockableInterface $stockable, $quantity);
 }

@@ -23,14 +23,14 @@ interface StockableInterface
      *
      * @return mixed
      */
-    function getSku();
+    public function getSku();
 
     /**
      * Get inventory displayed name.
      *
      * @return string
      */
-    function getInventoryName();
+    public function getInventoryName();
 
     /**
      * Simply checks if there any stock available.
@@ -38,26 +38,26 @@ interface StockableInterface
      *
      * @return Boolean
      */
-    function isInStock();
+    public function isInStock();
 
     /**
      * Is stockable available on demand?
      *
      * @return Boolean
      */
-    function isAvailableOnDemand();
+    public function isAvailableOnDemand();
 
     /**
      * Get stock on hand.
      *
      * @return integer
      */
-    function getOnHand();
+    public function getOnHand();
 
     /**
      * Set stock on hand.
      *
      * @param integer $onHand
      */
-    function setOnHand($onHand);
+    public function setOnHand($onHand);
 }

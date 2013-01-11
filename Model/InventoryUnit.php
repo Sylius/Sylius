@@ -118,7 +118,7 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    function isSold()
+    public function isSold()
     {
         return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
     }
@@ -126,7 +126,7 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    function isBackordered()
+    public function isBackordered()
     {
         return InventoryUnitInterface::STATE_BACKORDERED === $this->inventoryState;
     }
