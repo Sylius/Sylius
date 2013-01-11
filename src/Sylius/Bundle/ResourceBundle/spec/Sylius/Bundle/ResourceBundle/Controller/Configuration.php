@@ -37,65 +37,76 @@ class Configuration extends ObjectBehavior
         $this->getResourceName()->shouldReturn('spec');
     }
 
+    function it_should_return_plural_resource_name()
+    {
+        $this->getPluralResourceName()->shouldReturn('specs');
+    }
+
     function it_should_return_assigned_template_namespace()
     {
         $this->getTemplateNamespace()->shouldReturn('SyliusResourceBundle:Test');
     }
 
-    function it_should_generate_correct_service_name()
+    function it_should_generate_correct_service_names()
     {
         $this->getServiceName('manager')->shouldReturn('sylius_resource.manager.spec');
         $this->getServiceName('repository')->shouldReturn('sylius_resource.repository.spec');
         $this->getServiceName('controller')->shouldReturn('sylius_resource.controller.spec');
     }
 
-    function it_should_return_id_as_the_default_identifier()
+    function it_should_generate_correct_event_name()
     {
-        $this->getIdentifier()->shouldReturn('id');
+        $this->getEventName('create')->shouldReturn('sylius_resource.spec.create');
+        $this->getEventName('created')->shouldReturn('sylius_resource.spec.created');
     }
 
-    function it_should_not_recognize_collection_as_sortable_by_default()
+    function it_should_return_id_as_the_default_identifier_name()
     {
-        $this->isCollectionSortable()->shouldReturn(false);
+        $this->getIdentifierName()->shouldReturn('id');
     }
 
-    function it_should_not_recognize_collection_as_filterable_by_default()
+    function it_should_not_recognize_resources_as_sortable_by_default()
     {
-        $this->isCollectionFilterable()->shouldReturn(false);
+        $this->isSortable()->shouldReturn(false);
     }
 
-    function it_should_return_default_collection_limit_which_is_10()
+    function it_should_not_recognize_resources_as_filterable_by_default()
     {
-        $this->getCollectionLimit()->shouldReturn(10);
+        $this->isFilterable()->shouldReturn(false);
     }
 
-    function it_should_recognize_collection_as_paginated_by_default()
+    function it_should_return_default_resources_limit_which_is_10()
     {
-        $this->isCollectionPaginated()->shouldReturn(true);
+        $this->getLimit()->shouldReturn(10);
     }
 
-    function it_should_return_default_collection_pagination_max_per_page_which_is_10()
+    function it_should_recognize_resources_as_paginated_by_default()
+    {
+        $this->isPaginated()->shouldReturn(true);
+    }
+
+    function it_should_return_default_pagination_max_per_page_which_is_10()
     {
         $this->getPaginationMaxPerPage()->shouldReturn(10);
     }
 
-    function it_should_complain_if_trying_to_check_request_type_when_request_is_unknown()
+    function it_should_complain_if_trying_to_check_request_type_when_request_is_not_set()
     {
         $this
-            ->shouldThrow(new \BadMethodCallException('Request is unknown, cannot check its format'))
+            ->shouldThrow('BadMethodCallException')
             ->duringIsHtmlRequest()
         ;
     }
 
-    function it_should_recognize_request_as_html_when_its_the_format($request)
+    function it_should_recognize_request_as_html_request_when_its_the_correct_format($request)
     {
         $request->getRequestFormat()->willReturn('html');
-
         $this->setRequest($request);
+
         $this->isHtmlRequest()->shouldReturn(true);
     }
 
-    function it_should_not_recognize_request_as_html_when_its_not_the_format($request)
+    function it_should_not_recognize_request_as_html_request_when_its_not_the_correctformat($request)
     {
         $request->geRequestFormat()->willReturn('json');
 
@@ -103,12 +114,23 @@ class Configuration extends ObjectBehavior
         $this->isHtmlRequest()->shouldReturn(false);
     }
 
+    function it_should_recognize_request_as_api_request_when_format_is_not_html($request)
+    {
+        $this->setRequest($request);
+
+        $request->getRequestFormat()->willReturn('html');
+        $this->isApiRequest()->shouldReturn(false);
+
+        $request->getRequestFormat()->willReturn('xml');
+        $this->isApiRequest()->shouldReturn(true);
+    }
+
     function it_should_get_identifier_name_from_request_attributes($request)
     {
         $request->attributes->set('identifier', 'slug');
 
         $this->setRequest($request);
-        $this->getIdentifier()->shouldReturn('slug');
+        $this->getIdentifierName()->shouldReturn('slug');
     }
 
     function it_should_get_identifier_value_from_request($request)
@@ -136,7 +158,7 @@ class Configuration extends ObjectBehavior
         $this->getIdentifierCriteria()->shouldReturn(array('slug' => 'test-slug'));
     }
 
-    function it_should_get_template_from_request_attributes($request)
+    function it_should_get_view_template_from_request_attributes($request)
     {
         $request->attributes->set('_template', 'SyliusResourceBundle:Test:custom.html.twig');
 
@@ -144,9 +166,17 @@ class Configuration extends ObjectBehavior
         $this->getTemplate()->shouldReturn('SyliusResourceBundle:Test:custom.html.twig');
     }
 
-    function it_should_get_form_type_from_request_attributes()
+    function it_should_generate_form_type_by_default()
     {
         $this->getFormType()->shouldReturn('sylius_resource_spec');
+    }
+
+    function it_should_get_form_type_from_request_attributes($request)
+    {
+        $request->attributes->set('_form', 'sylius_resource_spec_custom');
+
+        $this->setRequest($request);
+        $this->getFormType()->shouldReturn('sylius_resource_spec_custom');
     }
 
     function it_should_get_redirect_from_request_attributes($request)
@@ -165,7 +195,7 @@ class Configuration extends ObjectBehavior
         $this->getCriteria()->shouldReturn(array('enabled' => false));
     }
 
-    function it_should_get_criteria_from_request_if_collection_is_filterable($request)
+    function it_should_get_criteria_from_request_if_resources_are_filterable($request)
     {
         $request->get('_criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
         $request->attributes->set('_criteria', array('enabled' => false));
@@ -175,7 +205,7 @@ class Configuration extends ObjectBehavior
         $this->getCriteria()->shouldReturn(array('locked' => false));
     }
 
-    function it_should_not_get_criteria_from_request_if_collection_isnt_filterable($request)
+    function it_should_not_get_criteria_from_request_if_resources_are_not_filterable($request)
     {
         $request->get('_criteria', ANY_ARGUMENT)->shouldNotBeCalled();
         $request->attributes->set('_criteria', array('enabled' => false));
@@ -185,7 +215,7 @@ class Configuration extends ObjectBehavior
         $this->getCriteria()->shouldReturn(array('enabled' => false));
     }
 
-    function it_should_get_sorting_from_request_if_collection_is_sortable($request)
+    function it_should_get_sorting_from_request_if_resources_are_sortable($request)
     {
         $request->get('_sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
         $request->attributes->set('_sorting', array('name' => 'asc'));
@@ -195,7 +225,7 @@ class Configuration extends ObjectBehavior
         $this->getSorting()->shouldReturn(array('createdAt' => 'desc'));
     }
 
-    function it_should_not_get_sorting_from_request_if_collection_isnt_sortable($request)
+    function it_should_not_get_sorting_from_request_if_resources_are_not_sortable($request)
     {
         $request->get('_sorting', ANY_ARGUMENT)->shouldNotBeCalled();
         $request->attributes->set('_sorting', array('name' => 'asc'));
@@ -213,15 +243,15 @@ class Configuration extends ObjectBehavior
         $this->getSorting()->shouldReturn(array('createdAt' => 'asc'));
     }
 
-    function it_should_recognize_collection_as_not_paginated_from_request_attributes($request)
+    function it_should_recognize_resources_as_not_paginated_from_request_attributes($request)
     {
         $request->attributes->set('_paginate', false);
 
         $this->setRequest($request);
-        $this->isCollectionPaginated()->shouldReturn(false);
+        $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_should_return_collection_pagination_max_per_page_from_request_attributes($request)
+    function it_should_return_pagination_max_per_page_from_request_attributes($request)
     {
         $request->attributes->set('_paginate', 25);
 
@@ -229,11 +259,11 @@ class Configuration extends ObjectBehavior
         $this->getPaginationMaxPerPage()->shouldReturn(25);
     }
 
-    function it_should_return_collection_limit_from_request_attributes($request, $attributes)
+    function it_should_return_resources_limit_from_request_attributes($request, $attributes)
     {
         $request->attributes->set('_limit', 20);
 
         $this->setRequest($request);
-        $this->getCollectionLimit()->shouldReturn(20);
+        $this->getLimit()->shouldReturn(20);
     }
 }

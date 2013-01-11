@@ -24,6 +24,7 @@ class Configuration
 {
     protected $bundlePrefix;
     protected $resourceName;
+    protected $pluralResourceName;
     protected $templateNamespace;
 
     /**
@@ -35,6 +36,7 @@ class Configuration
     {
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
+        $this->pluralResourceName = Pluralization::pluralize($resourceName);
         $this->templateNamespace = $templateNamespace;
     }
 
@@ -46,6 +48,11 @@ class Configuration
     public function getResourceName()
     {
         return $this->resourceName;
+    }
+
+    public function getPluralResourceName()
+    {
+        return $this->pluralResourceName;
     }
 
     public function getTemplateNamespace()
@@ -67,19 +74,29 @@ class Configuration
         return 'html' === $this->request->getRequestFormat();
     }
 
+    public function isApiRequest()
+    {
+        return !$this->isHtmlRequest();
+    }
+
     public function getServiceName($service)
     {
         return sprintf('%s.%s.%s', $this->bundlePrefix, $service, $this->resourceName);
     }
 
-    public function getIdentifier()
+    public function getEventName($event)
+    {
+        return sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $event);
+    }
+
+    public function getIdentifierName()
     {
         return $this->get('identifier', 'id');
     }
 
     public function getIdentifierValue()
     {
-        return $this->request->get($this->getIdentifier());
+        return $this->request->get($this->getIdentifierName());
     }
 
     public function getIdentifierCriteria()
@@ -89,7 +106,7 @@ class Configuration
         }
 
         return array(
-            $this->getIdentifier() => $this->getIdentifierValue()
+            $this->getIdentifierName() => $this->getIdentifierValue()
         );
     }
 
@@ -113,7 +130,7 @@ class Configuration
         return $this->get('_redirect');
     }
 
-    public function isCollectionPaginated()
+    public function isPaginated()
     {
         return (Boolean) $this->get('_paginate', true);
     }
@@ -123,17 +140,17 @@ class Configuration
         return (int) $this->get('_paginate', 10);
     }
 
-    public function getCollectionLimit()
+    public function getLimit()
     {
         return (int) $this->get('_limit', 10);
     }
 
-    public function isCollectionSortable()
+    public function isSortable()
     {
         return (Boolean) $this->get('_sortable', false);
     }
 
-    public function isCollectionFilterable()
+    public function isFilterable()
     {
         return (Boolean) $this->get('_filterable', false);
     }
@@ -142,7 +159,7 @@ class Configuration
     {
         $defaultCriteria = $this->get('_criteria', array());
 
-        if ($this->isCollectionFilterable() && null !== $this->request) {
+        if ($this->isFilterable() && null !== $this->request) {
             return $this->request->get('_criteria', $defaultCriteria);
         }
 
@@ -153,7 +170,7 @@ class Configuration
     {
         $defaultSorting = $this->get('_sorting', array());
 
-        if ($this->isCollectionSortable() && null !== $this->request) {
+        if ($this->isSortable() && null !== $this->request) {
             return $this->request->get('_sorting', $defaultSorting);
         }
 
@@ -170,9 +187,14 @@ class Configuration
         return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
     }
 
-    public function getCollectionRoute()
+    public function getIndexRoute()
     {
-        return sprintf('%s_%s', $this->bundlePrefix, Pluralization::pluralize($this->resourceName));
+        return sprintf('%s_%s', $this->bundlePrefix, $this->pluralResourceName);
+    }
+
+    public function getEngineParameterName()
+    {
+        return sprintf('%s.engine', $this->getBundlePrefix());
     }
 
     protected function get($parameter, $default = null)

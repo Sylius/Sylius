@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Util\Pluralization;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -55,7 +54,7 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * List collection (paginated by default) of resources.
+     * Get collection (paginated by default) of resources.
      */
     public function indexAction(Request $request)
     {
@@ -64,7 +63,9 @@ class ResourceController extends FOSRestController
         $criteria = $config->getCriteria();
         $sorting = $config->getSorting();
 
-        if ($config->isCollectionPaginated()) {
+        $pluralName = $config->getPluralResourceName();
+
+        if ($config->isPaginated()) {
             $resources = $this
                 ->getRepository()
                 ->createPaginator($criteria, $sorting)
@@ -74,15 +75,14 @@ class ResourceController extends FOSRestController
         } else {
             $resources = $this
                 ->getRepository()
-                ->findBy($criteria, $sorting, $config->getCollectionLimit())
+                ->findBy($criteria, $sorting, $config->getLimit())
             ;
         }
-
 
         $view = $this
             ->view()
             ->setTemplate($this->getFullTemplateName('index.html'))
-            ->setTemplateVar(Pluralization::pluralize($config->getResourceName()))
+            ->setTemplateVar($pluralName)
             ->setData($resources)
         ;
 
@@ -90,7 +90,7 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * Show single resource by its identifier.
+     * Get single resource by its identifier.
      */
     public function showAction()
     {
@@ -98,7 +98,7 @@ class ResourceController extends FOSRestController
             ->view()
             ->setTemplate($this->getFullTemplateName('show.html'))
             ->setTemplateVar($this->getConfiguration()->getResourceName())
-            ->setData($this->findByIdentifierOr404())
+            ->setData($this->findOr404())
         ;
 
         return $this->handleView($view);
@@ -122,7 +122,7 @@ class ResourceController extends FOSRestController
             return $this->redirectTo($resource);
         }
 
-        if (!$config->isHtmlRequest()) {
+        if ($config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
 
@@ -146,7 +146,7 @@ class ResourceController extends FOSRestController
     {
         $config = $this->getConfiguration();
 
-        $resource = $this->findByIdentifierOr404();
+        $resource = $this->findOr404();
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
@@ -177,7 +177,7 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction()
     {
-        $resource = $this->findByIdentifierOr404();
+        $resource = $this->findOr404();
         $this->delete($resource);
         $this->setFlash('success', '%resource% has been deleted.');
 
@@ -298,15 +298,16 @@ class ResourceController extends FOSRestController
         return $this->getService('repository');
     }
 
-    public function findByIdentifierOr404()
+    public function findOr404(array $criteria = null)
     {
-        return $this->findOr404($this->getConfiguration()->getIdentifierCriteria());
-    }
+        $config = $this->getConfiguration();
 
-    public function findOr404(array $criteria)
-    {
+        if (null === $criteria) {
+            $criteria = $config->getIdentifierCriteria();
+        }
+
         if (!$resource = $this->getRepository()->findOneBy($criteria)) {
-            throw new NotFoundHttpException(sprintf('Requested %s does not exist', $this->getConfiguration()->getResourceName()));
+            throw new NotFoundHttpException(sprintf('Requested %s does not exist', $config->getResourceName()));
         }
 
         return $resource;
@@ -341,7 +342,7 @@ class ResourceController extends FOSRestController
 
     public function getEngine()
     {
-        return $this->container->getParameter(sprintf('%s.engine', $this->getConfiguration()->getBundlePrefix()));
+        return $this->container->getParameter($this->getConfiguration()->getEngineParameterName());
     }
 
     protected function setFlash($type, $message)
