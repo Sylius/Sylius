@@ -131,6 +131,15 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
+    public function destroy(InventoryUnitInterface $inventoryUnit)
+    {
+        $this->manager->remove($inventoryUnit);
+        $this->manager->flush($inventoryUnit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function fillBackorders(StockableInterface $stockable)
     {
         $onHand = $stockable->getOnHand();
@@ -151,14 +160,5 @@ class InventoryOperator implements InventoryOperatorInterface
         }
 
         $stockable->setOnHand($onHand);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function destroy(InventoryUnitInterface $inventoryUnit)
-    {
-        $this->manager->remove($inventoryUnit);
-        $this->manager->flush($inventoryUnit);
     }
 }
