@@ -14,7 +14,7 @@ namespace Sylius\Bundle\InventoryBundle\Checker;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
- * Stock availability checker.
+ * Checks availability for given stockable object.
  *
  * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
  */
