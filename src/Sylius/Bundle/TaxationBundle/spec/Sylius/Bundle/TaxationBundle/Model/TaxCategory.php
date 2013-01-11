@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\TaxationBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -16,7 +25,7 @@ class TaxCategory extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Model\TaxCategory');
     }
 
-    function it_should_be_a_Sylius_tax_category()
+    function it_should_implement_Sylius_tax_category_interface()
     {
         $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface');
     }
@@ -56,30 +65,42 @@ class TaxCategory extends ObjectBehavior
     /**
      * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
      */
-    function it_should_add_rates_properly($taxRate)
+    function it_should_add_rates($taxRate)
     {
         $this->hasRate($taxRate)->shouldReturn(false);
-
-        $taxRate->setCategory($this)->shouldBeCalled();
         $this->addRate($taxRate);
-
         $this->hasRate($taxRate)->shouldReturn(true);
     }
 
     /**
      * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
      */
-    function it_should_remove_rates_properly($taxRate)
+    function it_should_assign_category_to_rate_when_adding($taxRate)
     {
-        $this->hasRate($taxRate)->shouldReturn(false);
-
         $taxRate->setCategory($this)->shouldBeCalled();
+        $this->addRate($taxRate);
+    }
+
+    /**
+     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
+     */
+    function it_should_remove_rates($taxRate)
+    {
+        $this->addRate($taxRate);
+
+        $this->removeRate($taxRate);
+        $this->hasRate($taxRate)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
+     */
+    function it_should_detach_category_from_rate_when_adding($taxRate)
+    {
         $this->addRate($taxRate);
 
         $taxRate->setCategory(null)->shouldBeCalled();
         $this->removeRate($taxRate);
-
-        $this->hasRate($taxRate)->shouldReturn(false);
     }
 
     function it_should_initialize_creation_date_by_default()

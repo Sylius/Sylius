@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\TaxationBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -16,7 +25,7 @@ class TaxRate extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Model\TaxRate');
     }
 
-    function it_should_be_a_Sylius_tax_rate()
+    function it_should_implement_Sylius_tax_rate_interface()
     {
         $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxRateInterface');
     }
@@ -46,7 +55,6 @@ class TaxRate extends ObjectBehavior
     function it_should_allow_detaching_itself_from_category($category)
     {
         $this->setCategory($category);
-        $this->getCategory()->shouldReturn($category);
 
         $this->setCategory(null);
         $this->getCategory()->shouldReturn(null);
