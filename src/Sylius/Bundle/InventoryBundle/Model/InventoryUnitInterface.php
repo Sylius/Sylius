@@ -29,75 +29,75 @@ interface InventoryUnitInterface
      *
      * @return mixed
      */
-    function getId();
+    public function getId();
 
     /**
      * Get related stockable object.
      *
      * @return StockableInterface
      */
-    function getStockable();
+    public function getStockable();
 
     /**
      * Set stockable object.
      *
      * @param $stockable StockableInterface
      */
-    function setStockable(StockableInterface $stockable);
+    public function setStockable(StockableInterface $stockable);
 
     /**
      * Get the SKU of stockable.
      *
      * @return string
      */
-    function getSku();
+    public function getSku();
 
     /**
      * Get displayed inventory name
      *
      * @return string
      */
-    function getInventoryName();
+    public function getInventoryName();
 
     /**
      * Get inventory unit state.
      *
      * @return integer
      */
-    function getInventoryState();
+    public function getInventoryState();
 
     /**
      * Set inventory unit state.
      *
      * @param integer $state
      */
-    function setInventoryState($state);
+    public function setInventoryState($state);
 
     /**
      * Is in "sold" state?
      *
      * @return Boolean
      */
-    function isSold();
+    public function isSold();
 
     /**
      * Is a backordered inventory unit?
      *
      * @return Boolean
      */
-    function isBackordered();
+    public function isBackordered();
 
     /**
      * Get creation time.
      *
      * @return \DateTime
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * Get last update time.
      *
      * @return \DateTime
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 }

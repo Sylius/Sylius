@@ -28,7 +28,7 @@ class SyliusInventoryBundle extends Bundle
      *
      * @return array
      */
-    static public function getSupportedDrivers()
+    public static function getSupportedDrivers()
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM

@@ -28,7 +28,7 @@ interface InventoryOperatorInterface
      * @param StockableInterface $stockable
      * @param integer            $quantity
      */
-    function increase(StockableInterface $stockable, $quantity);
+    public function increase(StockableInterface $stockable, $quantity);
 
     /**
      * Decrease stock on hand for given stockable by quantity, return units in state if any is passed as third argument.
@@ -39,7 +39,7 @@ interface InventoryOperatorInterface
      *
      * @return null|array
      */
-    function decrease(StockableInterface $stockable, $quantity, $returnUnitsInState = null);
+    public function decrease(StockableInterface $stockable, $quantity, $returnUnitsInState = null);
 
     /**
      * Create inventory units for given stockable, quantity and apply the specified state.
@@ -50,19 +50,19 @@ interface InventoryOperatorInterface
      *
      * @return InventoryUnitInterface[]
      */
-    function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_SOLD);
+    public function create(StockableInterface $stockable, $quantity = 1, $state = InventoryUnitInterface::STATE_SOLD);
 
     /**
      * Destroy inventory unit.
      *
      * @param InventoryUnitInterface $inventoryUnit
      */
-    function destroy(InventoryUnitInterface $inventoryUnit);
+    public function destroy(InventoryUnitInterface $inventoryUnit);
 
     /**
      * Update backorder inventory units.
      *
      * @param StockableInterface $stockable
      */
-    function fillBackorders(StockableInterface $stockable);
+    public function fillBackorders(StockableInterface $stockable);
 }
