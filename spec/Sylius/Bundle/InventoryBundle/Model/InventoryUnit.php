@@ -6,7 +6,7 @@ use PHPSpec2\ObjectBehavior;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
- * Stockable item model spec.
+ * Inventory unit model spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
