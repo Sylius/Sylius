@@ -1,0 +1,43 @@
+{% macro list(categories) %}
+
+{% if categories|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.updatedAt|date }}</td>
+            <td>
+                <div class="btn-group pull-right">
+                    <a href="{{ path('sylius_taxation_category_show', {'id': category.id}) }}" class="btn">
+                       <i class="icon-book"></i> details
+                    </a>
+                    <a href="{{ path('sylius_taxation_category_update', {'id': category.id}) }}" class="btn">
+                       <i class="icon-pencil"></i> edit
+                    </a>
+                    <a href="{{ path('sylius_taxation_category_delete', {'id': category.id}) }}" class="btn btn-danger">
+                        <i class="icon-trash"></i> delete
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    You have no tax categories configured
+</div>
+{% endif %}
+
+{% endmacro %}

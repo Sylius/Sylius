@@ -1,0 +1,17 @@
+<h1>Taxation category details <small>{{ category.name }}</small></h1>
+<hr>
+<div class="well">
+    <a href="{{ path('sylius_taxation_category_index') }}" class="btn btn-primary">
+        <i class="icon-list-alt"></i> manage taxation categories
+    </a>
+    <a href="{{ path('sylius_taxation_category_update', {'id': category.id}) }}" class="btn">
+        <i class="icon-pencil"></i> edit
+    </a>
+    <a href="{{ path('sylius_taxation_category_delete', {'id': category.id}) }}" class="btn btn-danger">
+        <i class="icon-trash"></i>
+    </a>
+</div>
+
+<div class="well">
+{{ category.description|default('No description') }}
+</div>
