@@ -51,7 +51,7 @@ We need two classes, *Cart* and *CartItem*.
     <?php
 
     // src/App/AppBundle/Entity/Cart.php
-    namespace App/AppBundle/Entity;
+    namespace App\AppBundle\Entity;
 
     use Sylius\Bundle\CartBundle\Entity\Cart as BaseCart;
 
@@ -69,7 +69,7 @@ Next step requires creating the item entity, let's do this now.
     <?php
 
     // src/App/AppBundle/Entity/CartItem.php
-    namespace App/AppBundle/Entity;
+    namespace App\AppBundle\Entity;
 
     use Sylius\Bundle\CartBundle\Entity\CartItem as BaseCartItem;
 
@@ -133,7 +133,7 @@ We need to modify the *CartItem* entity and its mapping a bit, so it allows us t
     <?php
 
     // src/App/AppBundle/Entity/CartItem.php
-    namespace App/AppBundle/Entity;
+    namespace App\AppBundle\Entity;
 
     use Sylius\Bundle\CartBundle\Entity\CartItem as BaseCartItem;
 
