@@ -5,7 +5,7 @@ namespace spec\Sylius\Bundle\InventoryBundle\Entity;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Shipment item mapped superclass spec.
+ * Inventory unit entity spec.
  *
  * @author Pawęł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
