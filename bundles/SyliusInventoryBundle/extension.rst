@@ -11,4 +11,4 @@ Here is a simple example, note that `product` variable has to be instance of `St
 
     {% if not sylius_inventory_is_available(product) %}
         <span class="label label-important">out of stock</span>
-    {% else %}
+    {% endif %}
