@@ -5,7 +5,17 @@ php:
   - 5.4
   - 5.5
 
-before_script: composer install --dev --prefer-source
+matrix:
+  allow_failures:
+    - php: 5.5
+
+env: MONGO_VERSION=1.3.2
+
+services: mongodb
+
+before_script:
+  - pecl -q install mongo-${MONGO_VERSION} && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - composer install --dev --prefer-source
 
 script: php bin/phpspec run -n -f pretty
 
