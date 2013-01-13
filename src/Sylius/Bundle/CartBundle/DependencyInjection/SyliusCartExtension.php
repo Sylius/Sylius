@@ -54,7 +54,6 @@ class SyliusCartExtension extends Extension
         $container->setParameter('sylius_cart.driver', $driver);
         $container->setParameter('sylius_cart.engine', $engine);
 
-        $container->setAlias('sylius_cart.operator', $config['operator']);
         $container->setAlias('sylius_cart.provider', $config['provider']);
         $container->setAlias('sylius_cart.resolver', $config['resolver']);
         $container->setAlias('sylius_cart.storage', $config['storage']);
