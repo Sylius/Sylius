@@ -160,7 +160,7 @@ class Configuration
         $defaultCriteria = $this->get('_criteria', array());
 
         if ($this->isFilterable() && null !== $this->request) {
-            return $this->request->get('_criteria', $defaultCriteria);
+            return $this->request->get('criteria', $defaultCriteria);            
         }
 
         return $defaultCriteria;
@@ -171,7 +171,7 @@ class Configuration
         $defaultSorting = $this->get('_sorting', array());
 
         if ($this->isSortable() && null !== $this->request) {
-            return $this->request->get('_sorting', $defaultSorting);
+            return $this->request->get('sorting', $defaultSorting);
         }
 
         return $defaultSorting;

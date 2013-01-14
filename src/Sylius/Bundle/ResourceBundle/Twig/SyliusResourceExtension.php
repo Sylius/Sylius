@@ -75,8 +75,8 @@ class SyliusResourceExtension extends Twig_Extension
 
         $order = null === $order ? 'asc' : $order;
 
-        $url = $this->router->generate($route, array(
-            array_merge(array('sorting' => array($property => $order), $routeParameters))
+        $url = $this->router->generate($route, array_merge(
+            array('sorting' => array($property => $order), $routeParameters)
         ));
 
         return sprintf('<a href="%s">%s</a>', $url, $label);
