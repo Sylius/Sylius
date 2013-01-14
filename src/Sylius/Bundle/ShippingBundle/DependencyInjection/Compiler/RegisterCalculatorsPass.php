@@ -16,9 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all shipping calculators in delegating service.
+ * Registers all shipping calculators in calculator registry service.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class RegisterCalculatorsPass implements CompilerPassInterface
 {
@@ -27,11 +27,11 @@ class RegisterCalculatorsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius_shipping.calculator')) {
+        if (!$container->hasDefinition('sylius_shipping.calculator_registry')) {
             return;
         }
 
-        $delegatingCalculator = $container->getDefinition('sylius_shipping.calculator');
+        $registry = $container->getDefinition('sylius_shipping.calculator_registry');
         $calculators = array();
 
         foreach ($container->findTaggedServiceIds('sylius_shipping.calculator') as $id => $attributes) {
@@ -40,7 +40,7 @@ class RegisterCalculatorsPass implements CompilerPassInterface
 
             $calculators[$name] = $label;
 
-            $delegatingCalculator->addMethodCall('registerCalculator', array($name, new Reference($id)));
+            $registry->addMethodCall('registerCalculator', array($name, new Reference($id)));
         }
 
         $container->setParameter('sylius_shipping.calculators', $calculators);

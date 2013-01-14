@@ -14,11 +14,24 @@ namespace Sylius\Bundle\ShippingBundle\Calculator;
 /**
  * Default calculators.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 final class DefaultCalculators
 {
+    /**
+     * Flat rate per shipment calculator.
+     */
     const FLAT_RATE     = 'flat_rate';
+
+    /**
+     * Fixed price per item calculator.
+     */
     const PER_ITEM_RATE = 'per_item_rate';
+
+    /**
+     * Flexible rate calculator.
+     * Fixed price for first item and constant rate
+     * for each additional item with a limit.
+     */
     const FLEXIBLE_RATE = 'flexible_rate';
 }

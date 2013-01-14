@@ -1,7 +1,8 @@
 SyliusShippingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShippingBundle.png)](http://travis-ci.org/Sylius/SyliusShippingBundle)
 ====================
 
-Shipping component for [**Symfony2**](http://symfony.com) e-commerce applications.
+Shipping component for [**Symfony2**](http://symfony.com) ecommerce applications.
+It's goal is to ease the process of creating shipments management feature for your projects.
 
 Sylius
 ------

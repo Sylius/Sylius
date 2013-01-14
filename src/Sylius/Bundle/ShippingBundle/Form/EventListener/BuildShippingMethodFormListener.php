@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
-use Sylius\Bundle\ShippingBundle\Calculator\DelegatingShippingChargeCalculator;
+use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Event\DataEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * This listener adds configuration form to a method, if
@@ -29,9 +28,9 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * It hold registry of all calculators.
      *
-     * @var DelegatingShippingChargeCalculator
+     * @var CalculatorRegistryInterface
      */
-    private $delegatingCalculator;
+    private $calculatorRegistry;
 
     /**
      * Form factory.
@@ -43,12 +42,12 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param DelegatingShippingChargeCalculator $delegatingCalculator
-     * @param FormFactoryInterface               $factory
+     * @param CalculatorRegistryInterface $delegatingCalculator
+     * @param FormFactoryInterface        $factory
      */
-    public function __construct(DelegatingShippingChargeCalculator $delegatingCalculator, FormFactoryInterface $factory)
+    public function __construct(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
     {
-        $this->delegatingCalculator = $delegatingCalculator;
+        $this->calculatorRegistry = $calculatorRegistry;
         $this->factory = $factory;
     }
 
@@ -77,21 +76,16 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
             return;
         }
 
-        $calculator = $this->delegatingCalculator->getCalculator($method->getCalculator());
+        $calculator = $this->calculatorRegistry->getCalculator($method->getCalculator());
 
-        if (!$calculator->isConfigurable()) {
+        if (true !== $calculator->isConfigurable()) {
             return;
         }
 
         $configuration = $method->getConfiguration();
+        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $configuration);
 
-        $builder = $this->factory->createNamedBuilder('configuration', 'form', $configuration, array(
-            'data_class' => null
-        ));
-
-        $calculator->buildConfigurationForm($builder);
-
-        $form->add($builder->getForm());
+        $form->add($configurationField);
     }
 
     /**
@@ -108,18 +102,14 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
             return;
         }
 
-        $calculator = $this->delegatingCalculator->getCalculator($data['calculator']);
+        $calculator = $this->calculatorRegistry->getCalculator($data['calculator']);
 
-        if (false === $calculator->isConfigurable()) {
+        if (true !== $calculator->isConfigurable()) {
             return;
         }
 
-        $builder = $this->factory->createNamedBuilder('configuration', 'form', null, array(
-            'data_class' => null
-        ));
+        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType());
 
-        $calculator->buildConfigurationForm($builder);
-
-        $form->add($builder->getForm());
+        $form->add($configurationField);
     }
 }

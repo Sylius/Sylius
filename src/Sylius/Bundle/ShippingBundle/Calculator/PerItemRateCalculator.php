@@ -12,15 +12,12 @@
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * Calculator which charges a flat rate per item.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PerItemRateCalculator extends Calculator
 {
@@ -47,24 +44,22 @@ class PerItemRateCalculator extends Calculator
     /**
      * {@inheritdoc}
      */
-    public function buildConfigurationForm(FormBuilderInterface $builder)
+    public function getConfigurationFormType()
     {
-        $builder->add('amount', 'money', array(
-            'constraints' => array(
-                new NotBlank(),
-                new Type(array('type' => 'numeric'))
-            )
-        ));
+        return 'sylius_shipping_calculator_per_item_rate_configuration';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildConfiguration(OptionsResolverInterface $resolver)
+    public function setConfiguration(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setRequired(array(
                 'amount'
+            ))
+            ->setAllowedTypes(array(
+                'amount' => array('numeric')
             ))
         ;
     }

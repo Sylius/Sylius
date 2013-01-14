@@ -11,15 +11,14 @@
 
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Base calculator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Calculator implements ShippingChargeCalculatorInterface
+abstract class Calculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +31,7 @@ abstract class Calculator implements ShippingChargeCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function buildConfigurationForm(FormBuilderInterface $builder)
+    public function getConfigurationFormType()
     {
         // Nothing to do here...
     }
@@ -40,7 +39,7 @@ abstract class Calculator implements ShippingChargeCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function buildConfiguration(OptionsResolverInterface $resolver)
+    public function setConfiguration(OptionsResolverInterface $resolver)
     {
         // Nothing to do here...
     }

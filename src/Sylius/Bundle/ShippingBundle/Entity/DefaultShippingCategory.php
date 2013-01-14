@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Entity;
 /**
  * Default shipping category entity.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class DefaultShippingCategory extends ShippingCategory
 {

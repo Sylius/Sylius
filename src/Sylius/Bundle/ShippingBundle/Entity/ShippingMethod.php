@@ -16,7 +16,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethod as BaseShippingMethod;
 /**
  * Shipping method mapped super-class.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingMethod extends BaseShippingMethod
 {

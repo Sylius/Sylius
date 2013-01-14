@@ -12,20 +12,19 @@
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * Calculator which charges a one rate for first item and other for next items.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class FlexibleRateCalculator extends Calculator
 {
     /**
-     * Calculates flat rate per item on the shipment.
+     * Calculates flexible rate per item on the shipment.
+     * It has defined cost for first item and a separate cost
+     * for each additional item.
      *
      * @return mixed
      */
@@ -33,18 +32,18 @@ class FlexibleRateCalculator extends Calculator
     {
         $configuration = $shipment->getMethod()->getConfiguration();
 
-        $limit = $configuration['limit'];
-        $amount = $configuration['amount'];
-        $rate = $configuration['rate'];
+        $firstItemCost = $configuration['first_item_cost'];
+        $additionalItemCost = $configuration['additional_item_cost'];
+        $additionalItemLimit = $configuration['additional_item_limit'];
 
         $totalItems = $shipment->getItems()->count();
         $additionalItems = $totalItems - 1;
 
-        if (0 !== $limit) {
-            $additionalItems = $limit <= $additionalItems ? $additionalItems : $limit;
+        if (0 !== $additionalItemLimit) {
+            $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
         }
 
-        return $amount + $additionalItems * $rate;
+        return $firstItemCost + $additionalItems * $additionalItemCost;
     }
 
     /**
@@ -58,44 +57,28 @@ class FlexibleRateCalculator extends Calculator
     /**
      * {@inheritdoc}
      */
-    public function buildConfigurationForm(FormBuilderInterface $builder)
+    public function getConfigurationFormType()
     {
-        $builder
-            ->add('amount', 'money', array(
-                'label' => 'First item cost',
-                'constraints' => array(
-                    new NotBlank(),
-                    new Type(array('type' => 'numeric')
-                ))
-            ))
-            ->add('rate', 'money', array(
-                'label' => 'Additional items cost',
-                'constraints' => array(
-                    new NotBlank(),
-                    new Type(array('type' => 'numeric')
-                ))
-            ))
-            ->add('limit', 'integer', array(
-                'label' => 'Additional items limit',
-                'constraints' => array(
-                    new Type(array('type' => 'integer')
-                ))
-            ))
-        ;
+        return 'sylius_shipping_calculator_flexible_rate_configuration';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildConfiguration(OptionsResolverInterface $resolver)
+    public function setConfiguration(OptionsResolverInterface $resolver)
     {
         $resolver
-            ->setRequired(array(
-                'amount',
-                'rate'
-            ))
             ->setDefaults(array(
-                'limit' => 0,
+                'additional_item_limit' => 0,
+            ))
+            ->setRequired(array(
+                'first_item_cost',
+                'additional_item_cost'
+            ))
+            ->setAllowedTypes(array(
+                'first_item_cost'       => array('numeric'),
+                'additional_item_cost'  => array('numeric'),
+                'additional_item_limit' => array('integer')
             ))
         ;
     }

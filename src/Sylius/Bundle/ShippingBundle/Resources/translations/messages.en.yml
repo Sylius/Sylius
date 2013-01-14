@@ -1,0 +1,16 @@
+sylius_shipping:
+    label:
+        method:
+            name: Name
+            category: Category
+            categoryRequirement: Category requirement
+            calculator: Calculator
+            configuration: Configuration
+        flat_rate_calculator:
+            amount: Amount
+        per_item_rate_calculator:
+            amount: Amount
+        flexible_rate_calculator:
+            first_item_cost: First item cost
+            additional_item_cost: Additional item cost
+            additional_item_limit: Limit additional items

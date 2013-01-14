@@ -11,17 +11,19 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
-use Sylius\Bundle\ShippingBundle\Calculator\DelegatingShippingChargeCalculator;
+use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethod;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Shipping method form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingMethodType extends AbstractType
 {
@@ -33,22 +35,22 @@ class ShippingMethodType extends AbstractType
     protected $dataClass;
 
     /**
-     * Delegating calculator.
+     * Calculator registry.
      *
-     * @var DelegatingShippingChargeCalculator
+     * @var CalculatorRegistryInterface
      */
-    protected $delegatingCalculator;
+    protected $calculatorRegistry;
 
     /**
      * Constructor.
      *
-     * @param string                             $dataClass
-     * @param DelegatingShippingChargeCalculator $delegatingCalculator
+     * @param string                      $dataClass
+     * @param CalculatorRegistryInterface $calculatorRegistry
      */
-    public function __construct($dataClass, DelegatingShippingChargeCalculator $delegatingCalculator)
+    public function __construct($dataClass, CalculatorRegistryInterface $calculatorRegistry)
     {
         $this->dataClass = $dataClass;
-        $this->delegatingCalculator = $delegatingCalculator;
+        $this->calculatorRegistry = $calculatorRegistry;
     }
 
     /**
@@ -57,21 +59,49 @@ class ShippingMethodType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildShippingMethodFormListener($this->delegatingCalculator, $builder->getFormFactory()))
-            ->add('category', 'sylius_shipping_category_choice', array(
-                'required' => false
+            ->addEventSubscriber(new BuildShippingMethodFormListener($this->calculatorRegistry, $builder->getFormFactory()))
+            ->add('name', 'text', array(
+                'label' => 'sylius_shipping.label.method.name'
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
+                'label'    => 'sylius_shipping.label.method.enabled'
             ))
-            ->add('requirement', 'choice', array(
-                'choices'  => ShippingMethod::getRequirementLabels(),
+            ->add('category', 'sylius_shipping_category_choice', array(
+                'required' => false,
+                'label'    => 'sylius_shipping.label.method.category'
+            ))
+            ->add('categoryRequirement', 'choice', array(
+                'choices'  => ShippingMethod::getCategoryRequirementLabels(),
                 'multiple' => false,
-                'expanded' => true
+                'expanded' => true,
+                'label'    => 'sylius_shipping.label.method.categoryRequirement'
             ))
-            ->add('name', 'text')
-            ->add('calculator', 'sylius_shipping_calculator_choice')
+            ->add('calculator', 'sylius_shipping_calculator_choice', array(
+                'label'    => 'sylius_shipping.label.method.calculator'
+            ))
         ;
+
+        $prototypes = array();
+        $calculators = $this->calculatorRegistry->getCalculators();
+
+        foreach ($calculators as $name => $calculator) {
+            $prototypes[$name] = $builder->create($name, $calculator->getConfigurationFormType())->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $this->vars['prototypes'] = array();
+
+        foreach ($form->getConfig()->getAttribute('prototypes') as $name => $prototype) {
+            $view->vars['prototypes'][$name] = $prototype->createView($view);
+        }
     }
 
     /**

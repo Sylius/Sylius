@@ -1,7 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ShippingBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPSpec2\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
@@ -17,7 +27,7 @@ class ShippingMethod extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Model\ShippingMethod');
     }
 
-    function it_should_be_a_Sylius_shipping_method()
+    function it_should_implement_Sylius_shipping_method_interface()
     {
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface');
     }
@@ -64,179 +74,167 @@ class ShippingMethod extends ObjectBehavior
         $this->getCategory()->shouldReturn(null);
     }
 
-    function it_should_have_match_any_requirement_by_default()
+    function it_should_have_match_any_category_requirement_by_default()
     {
-        $this->getRequirement()->shouldReturn(ShippingMethodInterface::REQUIREMENT_MATCH_ANY);
+        $this->getCategoryRequirement()->shouldReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
     }
 
-    function its_matching_requirement_should_be_mutable()
+    function its_matching_category_requirement_should_be_mutable()
     {
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_NONE);
-        $this->getRequirement()->shouldReturn(ShippingMethodInterface::REQUIREMENT_MATCH_NONE);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
+        $this->getCategoryRequirement()->shouldReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface $shippablesAware
      */
-    function it_should_complain_if_disabled_and_trying_to_match_shipment($shipment)
+    function it_should_complain_if_disabled_and_trying_to_match_shippables_aware($shippablesAware)
     {
         $this->setEnabled(false);
         $this
             ->shouldThrow('LogicException')
-            ->duringMatches($shipment)
+            ->duringSupports($shippablesAware)
         ;
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface $shippablesAware
      */
-    function it_should_match_any_shipment_if_there_is_no_category_defined($shipment)
+    function it_should_support_any_shippables_aware_if_there_is_no_category_defined($shippablesAware)
     {
-        $this->matches($shipment)->shouldReturn(true);
+        $this->supports($shippablesAware)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface         $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface  $shippablesAware
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category2
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable3
      */
-    function it_should_match_shipment_if_none_of_shippables_has_same_category_when_requirement_says_so(
-        $shipment, $category1, $category2, $shippable1, $shippable2, $shippable3
+    function it_should_support_shippables_if_none_of_them_has_same_category_when_requirement_says_so(
+        $shippablesAware, $category1, $category2, $shippable1, $shippable2
     )
     {
         $this->setCategory($category1);
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_NONE);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
 
         $shippable1->getCategory()->willReturn($category2);
         $shippable2->getCategory()->willReturn($category2);
-        $shippable3->getCategory()->willReturn($category2);
 
-        $shipment->getShippables()->willReturn(array($shippable1, $shippable2, $shippable3));
+        $shippablesAware->getShippables()->willReturn(array($shippable1, $shippable2));
 
-        $this->matches($shipment)->shouldReturn(true);
+        $this->supports($shippablesAware)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface         $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface  $shippablesAware
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category2
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable3
      */
-    function it_should_not_match_shipment_if_one_of_shippables_has_same_category_when_requirement_says_opposite(
-        $shipment, $category1, $category2, $shippable1, $shippable2, $shippable3
+    function it_should_not_support_shippables_if_any_of_them_has_same_category_when_requirement_says_so(
+        $shippablesAware, $category1, $category2, $shippable1, $shippable2, $shippable3
     )
     {
         $this->setCategory($category1);
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_NONE);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
 
-        $shippable1->getCategory()->willReturn($category2);
-        $shippable2->getCategory()->willReturn($category1);
-        $shippable3->getCategory()->willReturn($category2);
+        $shippable1->getShippingCategory()->willReturn($category2);
+        $shippable2->getShippingCategory()->willReturn($category1);
 
-        $shipment->getShippables()->willReturn(array($shippable1, $shippable2, $shippable3));
+        $shippablesAware->getShippables()->willReturn(array($shippable1, $shippable2));
 
-        $this->matches($shipment)->shouldReturn(false);
+        $this->supports($shippablesAware)->shouldReturn(false);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface         $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface  $shippablesAware
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category2
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable3
      */
-    function it_should_match_shipment_if_one_of_shippables_has_same_category_when_requirement_says_so(
-        $shipment, $category1, $category2, $shippable1, $shippable2, $shippable3
+    function it_should_support_shippables_if_any_of_them_has_same_category_when_requirement_says_so(
+        $shippablesAware, $category1, $category2, $shippable1, $shippable2
     )
     {
         $this->setCategory($category1);
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_ANY);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
 
-        $shippable1->getCategory()->willReturn($category2);
-        $shippable2->getCategory()->willReturn($category1);
-        $shippable3->getCategory()->willReturn($category2);
+        $shippable1->getShippingCategory()->willReturn($category2);
+        $shippable2->getShippingCategory()->willReturn($category1);
 
-        $shipment->getShippables()->willReturn(array($shippable1, $shippable2, $shippable3));
+        $shippablesAware->getShippables()->willReturn(array($shippable1, $shippable2));
 
-        $this->matches($shipment)->shouldReturn(true);
+        $this->supports($shippablesAware)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface         $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface  $shippablesAware
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category2
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable3
      */
-    function it_should_not_match_shipment_if_none_of_shippables_has_same_category_when_requirement_says_opposite(
-        $shipment, $category1, $category2, $shippable1, $shippable2, $shippable3
+    function it_should_not_support_shippables_if_none_of_them_has_same_category_when_requirement_says_so(
+        $shippablesAware, $category1, $category2, $shippable1, $shippable2, $shippable3
     )
     {
         $this->setCategory($category1);
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_ANY);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
 
-        $shippable1->getCategory()->willReturn($category2);
-        $shippable2->getCategory()->willReturn($category2);
-        $shippable3->getCategory()->willReturn($category2);
+        $shippable1->getShippingCategory()->willReturn($category2);
+        $shippable2->getShippingCategory()->willReturn($category2);
 
-        $shipment->getShippables()->willReturn(array($shippable1, $shippable2, $shippable3));
+        $shippablesAware->getShippables()->willReturn(array($shippable1, $shippable2));
 
-        $this->matches($shipment)->shouldReturn(false);
+        $this->supports($shippablesAware)->shouldReturn(false);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface         $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface  $shippablesAware
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category2
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable3
      */
-    function it_should_match_shipment_if_all_of_shippables_has_same_category_when_requirement_says_so(
-        $shipment, $category1, $category2, $shippable1, $shippable2, $shippable3
+    function it_should_support_shippables_if_all_of_them_have_same_category_when_requirement_says_so(
+        $shippablesAware, $category1, $category2, $shippable1, $shippable2
     )
     {
         $this->setCategory($category1);
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_ALL);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL);
 
-        $shippable1->getCategory()->willReturn($category1);
-        $shippable2->getCategory()->willReturn($category1);
-        $shippable3->getCategory()->willReturn($category1);
+        $shippable1->getShippingCategory()->willReturn($category1);
+        $shippable2->getShippingCategory()->willReturn($category1);
 
-        $shipment->getShippables()->willReturn(array($shippable1, $shippable2, $shippable3));
+        $shippablesAware->getShippables()->willReturn(array($shippable1, $shippable2));
 
-        $this->matches($shipment)->shouldReturn(true);
+        $this->supports($shippablesAware)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface         $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface  $shippablesAware
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category2
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable1
      * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface        $shippable3
      */
-    function it_should_not_match_shipment_if_one_of_shippables_has_different_category_when_requirement_says_opposite(
-        $shipment, $category1, $category2, $shippable1, $shippable2, $shippable3
+    function it_should_not_support_shippables_if_any_of_them_has_different_category_when_requirement_says_so(
+        $shippablesAware, $category1, $category2, $shippable1, $shippable2
     )
     {
         $this->setCategory($category1);
-        $this->setRequirement(ShippingMethodInterface::REQUIREMENT_MATCH_ALL);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL);
 
-        $shippable1->getCategory()->willReturn($category1);
-        $shippable2->getCategory()->willReturn($category2);
-        $shippable3->getCategory()->willReturn($category1);
+        $shippable1->getShippingCategory()->willReturn($category1);
+        $shippable2->getShippingCategory()->willReturn($category2);
 
-        $shipment->getShippables()->willReturn(array($shippable1, $shippable2, $shippable3));
+        $shippablesAware->getShippables()->willReturn(new ArrayCollection(array($shippable1, $shippable2)));
 
-        $this->matches($shipment)->shouldReturn(false);
+        $this->supports($shippablesAware)->shouldReturn(false);
     }
 
     function it_should_be_unnamed_by_default()
@@ -246,8 +244,14 @@ class ShippingMethod extends ObjectBehavior
 
     function its_name_should_be_mutable()
     {
-        $this->setName('Shippingable goods');
-        $this->getName()->shouldReturn('Shippingable goods');
+        $this->setName('Shippable goods');
+        $this->getName()->shouldReturn('Shippable goods');
+    }
+
+    function it_should_be_convertable_to_string_and_use_its_name_for_this()
+    {
+        $this->setName('Shippable goods');
+        $this->__toString()->shouldReturn('Shippable goods');
     }
 
     function it_should_not_have_calculator_defined_by_default()

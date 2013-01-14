@@ -14,14 +14,14 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 /**
  * Shipment item interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ShipmentItemInterface
 {
     // Shipment item default states.
-    const STATE_SHIPPED  = 'shipped';
     const STATE_READY    = 'ready';
     const STATE_PENDING  = 'pending';
+    const STATE_SHIPPED  = 'shipped';
     const STATE_RETURNED = 'returned';
 
     /**

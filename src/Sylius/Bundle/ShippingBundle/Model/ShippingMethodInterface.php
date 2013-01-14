@@ -14,14 +14,14 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 /**
  * Shipping rate interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ShippingMethodInterface
 {
     // Shippables requirement to match given method.
-    const REQUIREMENT_MATCH_NONE = 0;
-    const REQUIREMENT_MATCH_ANY  = 1;
-    const REQUIREMENT_MATCH_ALL  = 2;
+    const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
+    const CATEGORY_REQUIREMENT_MATCH_ANY  = 1;
+    const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
 
     /**
      * Get shipping method identifier.
@@ -54,30 +54,30 @@ interface ShippingMethodInterface
      *
      * @return integer
      */
-    public function getRequirement();
+    public function getCategoryRequirement();
 
     /**
      * Set the requirement.
      *
      * @param integer $requirement
      */
-    public function setRequirement($requirement);
+    public function setCategoryRequirement($categoryRequirement);
 
     /**
-     * Get the human readable of requirement.
+     * Get the human readable label of category requirement.
      *
      * @return string
      */
-    public function getRequirementLabel();
+    public function getCategoryRequirementLabel();
 
     /**
-     * Check whether this method matches given shipment.
+     * Check whether this method matches given set of shippables.
      *
-     * @param ShipmentInterface $shipment
+     * @param ShippablesAwareInterface $shippablesAware
      *
      * @return Boolean
      */
-    public function matches(ShipmentInterface $shipment);
+    public function supports(ShippablesAwareInterface $shippablesAware);
 
     /**
      * Check whether the shipping method is currently enabled.

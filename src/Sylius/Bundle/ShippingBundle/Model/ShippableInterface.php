@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 /**
  * Shippable interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ShippableInterface
 {

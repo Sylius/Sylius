@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 /**
  * Shipping method model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingMethod implements ShippingMethodInterface
 {
@@ -37,7 +37,7 @@ class ShippingMethod implements ShippingMethodInterface
      *
      * @var integer
      */
-    protected $requirement;
+    protected $categoryRequirement;
 
     /**
      * Is method enabled?
@@ -87,9 +87,17 @@ class ShippingMethod implements ShippingMethodInterface
     public function __construct()
     {
         $this->enabled = true;
-        $this->requirement = ShippingMethodInterface::REQUIREMENT_MATCH_ANY;
+        $this->categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
         $this->createdAt = new \DateTime('now');
         $this->configuration = array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -119,33 +127,33 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function getRequirement()
+    public function getCategoryRequirement()
     {
-        return $this->requirement;
+        return $this->categoryRequirement;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setRequirement($requirement)
+    public function setCategoryRequirement($categoryRequirement)
     {
-        $this->requirement = $requirement;
+        $this->categoryRequirement = $categoryRequirement;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRequirementLabel()
+    public function getCategoryRequirementLabel()
     {
-        $labels = self::getRequirementLabels();
+        $labels = self::getCategoryRequirementLabels();
 
-        return $labels[$this->requirement];
+        return $labels[$this->categoryRequirement];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function matches(ShipmentInterface $shipment)
+    public function supports(ShippablesAwareInterface $shippablesAware)
     {
         if (!$this->enabled) {
             throw new \LogicException('Disabled shipping methods cannot match a shipment');
@@ -155,21 +163,19 @@ class ShippingMethod implements ShippingMethodInterface
             return true;
         }
 
-        if (ShippingMethodInterface::REQUIREMENT_MATCH_NONE === $this->requirement) {
-            $shippables = $shipment->getShippables();
+        $shippables = $shippablesAware->getShippables();
 
+        if (ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE === $this->categoryRequirement) {
             foreach ($shippables as $shippable) {
-                if ($this->category === $shippable->getCategory()) {
+                if ($this->category === $shippable->getShippingCategory()) {
                     return false;
                 }
             }
         }
 
-        if (ShippingMethodInterface::REQUIREMENT_MATCH_ANY === $this->requirement) {
-            $shippables = $shipment->getShippables();
-
+        if (ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY === $this->categoryRequirement) {
             foreach ($shippables as $shippable) {
-                if ($this->category === $shippable->getCategory()) {
+                if ($this->category === $shippable->getShippingCategory()) {
                     return true;
                 }
             }
@@ -177,11 +183,9 @@ class ShippingMethod implements ShippingMethodInterface
             return false;
         }
 
-        if (ShippingMethodInterface::REQUIREMENT_MATCH_ALL === $this->requirement) {
-            $shippables = $shipment->getShippables();
-
+        if (ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL === $this->categoryRequirement) {
             foreach ($shippables as $shippable) {
-                if ($this->category !== $shippable->getCategory()) {
+                if ($this->category !== $shippable->getShippingCategory()) {
                     return false;
                 }
             }
@@ -275,12 +279,12 @@ class ShippingMethod implements ShippingMethodInterface
      *
      * @return array
      */
-    public static function getRequirementLabels()
+    public static function getCategoryRequirementLabels()
     {
         return array(
-            ShippingMethodInterface::REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
-            ShippingMethodInterface::REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
-            ShippingMethodInterface::REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
         );
     }
 }

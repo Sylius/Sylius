@@ -15,14 +15,14 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Bundle\ShippingBundle\Entity\ShippingMethod" table="sylius_shipping_method">
-        <field name="enabled" column="is_enabled" type="boolean" />
         <field name="name" column="name" type="string" />
-        <field name="requirement" column="requirement" type="integer" />
-        <field name="calculator" column="calculator" type="string" />
         <field name="configuration" column="configuration" type="array" />
         <many-to-one field="category" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface" inversed-by="methods">
             <join-column name="category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+        <field name="categoryRequirement" column="category_requirement" type="integer" />
+        <field name="calculator" column="calculator" type="string" />
+        <field name="enabled" column="is_enabled" type="boolean" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Sylius shipping component extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusShippingExtension extends Extension
 {
@@ -47,56 +47,24 @@ class SyliusShippingExtension extends Extension
         $container->setParameter('sylius_shipping.driver', $driver);
         $container->setParameter('sylius_shipping.engine', $config['engine']);
 
-        $classes = $config['classes'];
-
-        $shipmentClasses = $classes['shipment'];
-
-        $container->setParameter('sylius_shipping.model.shipment.class', $shipmentClasses['model']);
-
-        if (isset($shipmentClasses['repository'])) {
-            $container->setParameter('sylius_shipping.repository.shipment.class', $shipmentClasses['repository']);
-        }
-
-        $container->setParameter('sylius_shipping.controller.shipment.class', $shipmentClasses['controller']);
-        $container->setParameter('sylius_shipping.form.type.shipment.class', $shipmentClasses['form']);
-
-        $shipmentItemClasses = $classes['shipment_item'];
-
-        $container->setParameter('sylius_shipping.model.shipment_item.class', $shipmentItemClasses['model']);
-
-        if (isset($shipmentItemClasses['repository'])) {
-            $container->setParameter('sylius_shipping.repository.shipment_item.class', $shipmentItemClasses['repository']);
-        }
-
-        $container->setParameter('sylius_shipping.controller.shipment_item.class', $shipmentItemClasses['controller']);
-        $container->setParameter('sylius_shipping.form.type.shipment_item.class', $shipmentItemClasses['form']);
-
-        $categoryClasses = $classes['category'];
-
-        if (isset($categoryClasses['model'])) {
-            $container->setParameter('sylius_shipping.model.category.class', $categoryClasses['model']);
-        }
-
-        if (isset($categoryClasses['repository'])) {
-            $container->setParameter('sylius_shipping.repository.category.class', $categoryClasses['repository']);
-        }
-
-        $container->setParameter('sylius_shipping.controller.category.class', $categoryClasses['controller']);
-        $container->setParameter('sylius_shipping.form.type.category.class', $categoryClasses['form']);
-
-        $methodClasses = $classes['method'];
-
-        if (isset($methodClasses['model'])) {
-            $container->setParameter('sylius_shipping.model.method.class', $methodClasses['model']);
-        }
-
-        if (isset($methodClasses['repository'])) {
-            $container->setParameter('sylius_shipping.repository.method.class', $methodClasses['repository']);
-        }
-
-        $container->setParameter('sylius_shipping.controller.method.class', $methodClasses['controller']);
-        $container->setParameter('sylius_shipping.form.type.method.class', $methodClasses['form']);
+        $this->mapClassParameters($config['classes'], $container);
 
         $loader->load('services.xml');
+    }
+
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $service = $service === 'form' ? 'form.type' : $service;
+                $container->setParameter(sprintf('sylius_shipping.%s.%s.class', $service, $model), $class);
+            }
+        }
     }
 }

@@ -14,14 +14,14 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 /**
  * Shipment interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShipmentInterface
+interface ShipmentInterface extends ShippablesAwareInterface
 {
     // Shipment default states.
-    const STATE_SHIPPED  = 'shipped';
     const STATE_READY    = 'ready';
     const STATE_PENDING  = 'pending';
+    const STATE_SHIPPED  = 'shipped';
     const STATE_RETURNED = 'returned';
 
     /**
@@ -88,14 +88,6 @@ interface ShipmentInterface
      * @return Boolean
      */
     public function hasItem(ShipmentItemInterface $item);
-
-    /**
-     * Get unique shippable types from this shipment.
-     * With a quantity as keys.
-     *
-     * @return Collection
-     */
-    public function getShippables();
 
     /**
      * Get tracking code.

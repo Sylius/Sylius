@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Shipping category form.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingCategoryType extends AbstractType
 {
@@ -45,9 +45,12 @@ class ShippingCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
+            ->add('name', 'text', array(
+                'label' => 'sylius_shipping.label.category.name'
+            ))
             ->add('description', 'textarea', array(
-                'required' => false
+                'required' => false,
+                'label' => 'sylius_shipping.label.category.description'
             ))
         ;
     }

@@ -14,20 +14,64 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Shipment model.
+ * This model represents single shipment.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class Shipment implements ShipmentInterface
 {
+    /**
+     * Shipment identifier.
+     *
+     * @var mixed
+     */
     protected $id;
+
+    /**
+     * Shipment state.
+     *
+     * @var string
+     */
     protected $state;
+
+    /**
+     * Shipping method.
+     *
+     * @var ShippingMethodInterface
+     */
     protected $method;
+
+    /**
+     * Shipment items.
+     *
+     * @var Collection
+     */
     protected $items;
+
+    /**
+     * Tracking code for this shipment, if any required.
+     *
+     * @var string
+     */
     protected $tracking;
+
+    /**
+     * Creation time.
+     *
+     * @var DateTime
+     */
     protected $createdAt;
+
+    /**
+     * Last update time.
+     *
+     * @var DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->state = ShipmentInterface::STATE_READY;
@@ -35,46 +79,73 @@ class Shipment implements ShipmentInterface
         $this->createdAt = new \DateTime('now');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getState()
     {
         return $this->state;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setState($state)
     {
         $this->state = $state;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMethod()
     {
         return $this->method;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMethod(ShippingMethodInterface $method)
     {
         $this->method = $method;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getItems()
     {
         return $this->items;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasItem(ShipmentItemInterface $item)
     {
         return $this->items->contains($item);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addItem(ShipmentItemInterface $item)
     {
         if (!$this->hasItem($item)) {
@@ -83,6 +154,9 @@ class Shipment implements ShipmentInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeItem(ShipmentItemInterface $item)
     {
         if ($this->hasItem($item)) {
@@ -91,6 +165,9 @@ class Shipment implements ShipmentInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getShippables()
     {
         $shippables = new ArrayCollection();
@@ -105,26 +182,41 @@ class Shipment implements ShipmentInterface
         return $shippables;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTracking()
     {
         return $this->tracking;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setTracking($tracking)
     {
         $this->tracking = $tracking;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isTracked()
     {
         return null !== $this->tracking;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
