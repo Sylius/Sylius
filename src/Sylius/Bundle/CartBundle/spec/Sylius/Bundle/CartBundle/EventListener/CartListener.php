@@ -13,7 +13,7 @@ class CartListener extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectManager $manager
-     * @param Sylius\Bundle\CartBundle\Operator\InventoryOperatorInterface $validator
+     * @param Symfony\Component\Validator\ValidatorInterface $validator
      */
     function let($manager, $validator)
     {

@@ -21,7 +21,7 @@
         <parameter key="sylius_cart.storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
 
         <parameter key="sylius_cart.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
-        <parameter key="sylius_cart.flash_listener.class">Sylius\Bundle\CartBundle\EventListener\InventoryChangeListener</parameter>
+        <parameter key="sylius_cart.flash_listener.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
     </parameters>
 
     <services>

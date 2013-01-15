@@ -53,8 +53,8 @@ class FlashListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            SyliusCartEvents::ITEM_CLEAR_COMPLETED  => 'addSuccessFlash',
-            SyliusCartEvents::ITEM_SAVE_COMPLETED   => 'addSuccessFlash',
+            SyliusCartEvents::CART_CLEAR_COMPLETED  => 'addSuccessFlash',
+            SyliusCartEvents::CART_SAVE_COMPLETED   => 'addSuccessFlash',
 
             SyliusCartEvents::ITEM_ADD_COMPLETED    => 'addSuccessFlash',
             SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'addSuccessFlash',
