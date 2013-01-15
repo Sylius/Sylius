@@ -18,14 +18,14 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.2",
+        "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.1",
-        "sylius/resource-bundle":   "*"
+        "sylius/resource-bundle":   "0.1.*"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop",
-        "symfony/form":     "~2.1"
+        "phpspec/phpspec2":         "dev-develop",
+        "symfony/form":             "~2.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -33,5 +33,10 @@
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\SalesBundle": "" }
     },
-    "target-dir": "Sylius/Bundle/SalesBundle"
+    "target-dir": "Sylius/Bundle/SalesBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
 }
