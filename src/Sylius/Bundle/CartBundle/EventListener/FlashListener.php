@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
+/**
+ * Flash message listener.
+ *
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class FlashListener implements EventSubscriberInterface
 {
     /**

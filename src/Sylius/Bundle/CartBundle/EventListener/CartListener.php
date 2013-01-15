@@ -19,6 +19,11 @@ use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
+/**
+ * Cart & item changes listener.
+ *
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class CartListener implements EventSubscriberInterface
 {
     /**

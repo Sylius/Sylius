@@ -14,6 +14,11 @@ namespace Sylius\Bundle\CartBundle\Event;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 
+/**
+ * Cart item event.
+ *
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class CartItemEvent extends CartEvent
 {
     /**

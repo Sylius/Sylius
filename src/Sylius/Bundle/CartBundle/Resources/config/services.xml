@@ -19,6 +19,9 @@
     <parameters>
         <parameter key="sylius_cart.provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
         <parameter key="sylius_cart.storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
+
+        <parameter key="sylius_cart.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
+        <parameter key="sylius_cart.flash_listener.class">Sylius\Bundle\CartBundle\EventListener\InventoryChangeListener</parameter>
     </parameters>
 
     <services>
@@ -57,6 +60,17 @@
         </service>
 
         <service id="sylius_cart.storage.session" class="%sylius_cart.storage.session.class%">
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="sylius_cart.cart_listener" class="%sylius_cart.cart_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="sylius_cart.manager.cart" />
+            <argument type="service" id="validator" />
+        </service>
+
+        <service id="sylius_cart.flash_listener" class="%sylius_cart.flash_listener.class%">
+            <tag name="kernel.event_subscriber" />
             <argument type="service" id="session" />
         </service>
     </services>

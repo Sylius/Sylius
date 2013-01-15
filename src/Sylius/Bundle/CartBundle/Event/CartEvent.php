@@ -15,6 +15,11 @@ use Symfony\Component\EventDispatcher\Event;
 
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
+/**
+ * Cart event.
+ *
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class CartEvent extends Event
 {
     /**

@@ -13,6 +13,11 @@ namespace Sylius\Bundle\CartBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Flash message event.
+ *
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class FlashEvent extends Event
 {
     /**
