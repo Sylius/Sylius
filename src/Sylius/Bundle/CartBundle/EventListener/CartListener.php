@@ -15,9 +15,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
 /**
  * Cart & item changes listener.
@@ -32,6 +32,7 @@ class CartListener implements EventSubscriberInterface
      * @var ObjectManager
      */
     private $cartManager;
+
     /**
      * @var ValidatorInterface
      */
@@ -93,6 +94,10 @@ class CartListener implements EventSubscriberInterface
         if (!$event->isValid()) {
             $errors = $this->validator->validate($cart);
             $valid  = 0 === count($errors);
+        }
+
+        if ($event->isFresh()) {
+            $this->refreshCart($cart);
         }
 
         if ($valid) {

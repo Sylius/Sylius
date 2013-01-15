@@ -27,7 +27,7 @@ class FlashListener implements EventSubscriberInterface
     /**
      * @var array
      */
-    private $messages = array(
+    private static $messages = array(
         SyliusCartEvents::CART_CLEAR_COMPLETED  => 'The cart have been updated correctly.',
         SyliusCartEvents::CART_SAVE_COMPLETED   => 'The cart has been successfully cleared.',
 
@@ -37,6 +37,7 @@ class FlashListener implements EventSubscriberInterface
         SyliusCartEvents::ITEM_ADD_ERROR        => 'Error occurred while adding item to cart.',
         SyliusCartEvents::ITEM_REMOVE_ERROR     => 'Error occurred while removing item from cart.',
     );
+
     /**
      * @var Session
      */
