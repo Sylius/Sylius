@@ -91,7 +91,7 @@ class Configuration
 
     public function getIdentifierName()
     {
-        return $this->get('identifier', 'id');
+        return $this->get('_identifier', 'id');
     }
 
     public function getIdentifierValue()
@@ -160,7 +160,7 @@ class Configuration
         $defaultCriteria = $this->get('_criteria', array());
 
         if ($this->isFilterable() && null !== $this->request) {
-            return $this->request->get('criteria', $defaultCriteria);            
+            return $this->request->get('criteria', $defaultCriteria);
         }
 
         return $defaultCriteria;
