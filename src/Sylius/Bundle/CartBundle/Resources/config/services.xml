@@ -17,9 +17,11 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_cart.operator.default.class">Sylius\Bundle\CartBundle\Operator\CartOperator</parameter>
         <parameter key="sylius_cart.provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
         <parameter key="sylius_cart.storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
+
+        <parameter key="sylius_cart.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
+        <parameter key="sylius_cart.flash_listener.class">Sylius\Bundle\CartBundle\EventListener\InventoryChangeListener</parameter>
     </parameters>
 
     <services>
@@ -31,6 +33,7 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+
         <service id="sylius_cart.controller.item" class="%sylius_cart.controller.item.class%">
             <argument>sylius_cart</argument>
             <argument>item</argument>
@@ -44,13 +47,10 @@
             <argument>%sylius_cart.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_cart" />
         </service>
+
         <service id="sylius_cart.form.type.item" class="%sylius_cart.form.type.item.class%">
             <argument>%sylius_cart.model.item.class%</argument>
             <tag name="form.type" alias="sylius_cart_item" />
-        </service>
-
-        <service id="sylius_cart.operator.default" class="%sylius_cart.operator.default.class%">
-            <argument type="service" id="sylius_cart.manager.cart" />
         </service>
 
         <service id="sylius_cart.provider.default" class="%sylius_cart.provider.default.class%">
@@ -62,6 +62,16 @@
         <service id="sylius_cart.storage.session" class="%sylius_cart.storage.session.class%">
             <argument type="service" id="session" />
         </service>
-    </services>
 
+        <service id="sylius_cart.cart_listener" class="%sylius_cart.cart_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="sylius_cart.manager.cart" />
+            <argument type="service" id="validator" />
+        </service>
+
+        <service id="sylius_cart.flash_listener" class="%sylius_cart.flash_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="session" />
+        </service>
+    </services>
 </container>

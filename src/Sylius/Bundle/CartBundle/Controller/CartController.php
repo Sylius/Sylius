@@ -14,6 +14,10 @@ namespace Sylius\Bundle\CartBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Bundle\CartBundle\Event\CartEvent;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+
 /**
  * Default cart controller.
  * It extends the format agnostic resource controller.
@@ -60,13 +64,14 @@ class CartController extends Controller
         $form = $this->createForm('sylius_cart', $cart);
 
         if ($form->bind($request)->isValid()) {
-            $this
-                ->getOperator()
-                ->refresh($cart)
-                ->save($cart)
-            ;
+            /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+            $dispatcher = $this->container->get('event_dispatcher');
 
-            $this->setFlash('success', 'The cart have been updated correctly');
+            $event = new CartEvent($cart);
+            $event->isFresh(true);
+
+            $dispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
+            $dispatcher->dispatch(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
         }
 
         return $this->renderResponse('summary.html', array(
@@ -83,12 +88,10 @@ class CartController extends Controller
      */
     public function clearAction()
     {
-        $this
-            ->getOperator()
-            ->clear($this->getCurrentCart())
-        ;
-
-        $this->setFlash('success', 'The cart has been successfully cleared');
+        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+        $dispatcher->dispatch(SyliusCartEvents::CART_CLEAR_INITIALIZE, new CartEvent($this->getCurrentCart()));
+        $dispatcher->dispatch(SyliusCartEvents::CART_CLEAR_COMPLETED, new FlashEvent());
 
         return $this->redirectToCartSummary();
     }

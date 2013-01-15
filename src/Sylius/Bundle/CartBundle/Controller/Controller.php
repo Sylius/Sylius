@@ -64,16 +64,6 @@ abstract class Controller extends ResourceController
     }
 
     /**
-     * Get cart operator.
-     *
-     * @return CartOperatorInterface
-     */
-    protected function getOperator()
-    {
-        return $this->get('sylius_cart.operator');
-    }
-
-    /**
      * Get cart item resolver.
      * This service is used to build the new cart item instance.
      *

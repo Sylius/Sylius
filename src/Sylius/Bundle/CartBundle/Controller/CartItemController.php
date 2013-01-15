@@ -11,9 +11,13 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
-use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Bundle\CartBundle\Event\CartItemEvent;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 
 /**
  * Cart item controller.
@@ -22,8 +26,8 @@ use Symfony\Component\HttpFoundation\Response;
  * two handy methods for easy adding and removing items
  * using the services, an operator and resolver.
  *
- * The operator performs basic cart operations,
- * adding, removing items, saving and clearing the cart.
+ * The basic cart operations like: adding, removing items,
+ * saving and clearing the cart are done in listeners.
  *
  * The resolver is used to create a new cart item, based
  * on the data from current request.
@@ -48,28 +52,25 @@ class CartItemController extends Controller
         $cart = $this->getCurrentCart();
         $emptyItem = $this->createNew();
 
+        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
         try {
             $item = $this->getResolver()->resolve($emptyItem, $request);
         } catch (ItemResolvingException $exception) {
-            $errorMessage = $exception->getMessage() ?: 'Error occurred while adding item to cart';
-            $this->setFlash('error', $errorMessage);
+            $dispatcher->dispatch(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
 
             return $this->redirectToCartSummary();
         }
 
-        $cartOperator = $this->getOperator();
+        $event = new CartItemEvent($cart, $item);
+        $event->isFresh(true);
+        $event->isValid(false);
 
-        $cartOperator
-            ->addItem($cart, $item)
-            ->refresh($cart)
-        ;
+        $dispatcher->dispatch(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);
+        $dispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
 
-        $errors = $this->get('validator')->validate($cart);
-
-        if (0 === count($errors)) {
-            $this->setFlash('success', 'Item has been added to cart');
-            $cartOperator->save($cart);
-        }
+        $dispatcher->dispatch(SyliusCartEvents::ITEM_ADD_COMPLETED, new FlashEvent());
 
         return $this->redirectToCartSummary();
     }
@@ -90,20 +91,21 @@ class CartItemController extends Controller
         $cart = $this->getCurrentCart();
         $item = $this->getRepository()->find($id);
 
+        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
         if (!$item || false === $cart->hasItem($item)) {
-            $this->setFlash('error', 'Error occurred while removing item from cart');
+            $dispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
 
             return $this->redirectToCartSummary();
         }
 
-        $this
-            ->getOperator()
-            ->removeItem($cart, $item)
-            ->refresh($cart)
-            ->save($cart)
-        ;
+        $event = new CartItemEvent($cart, $item);
+        $event->isFresh(true);
 
-        $this->setFlash('success', 'Item has been removed from cart');
+        $dispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_INITIALIZE, $event);
+        $dispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
+        $dispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
 
         return $this->redirectToCartSummary();
     }
