@@ -127,7 +127,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_identifier_name_from_request_attributes($request)
     {
-        $request->attributes->set('identifier', 'slug');
+        $request->attributes->set('_identifier', 'slug');
 
         $this->setRequest($request);
         $this->getIdentifierName()->shouldReturn('slug');
@@ -151,7 +151,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_identifier_criteria_from_request($request)
     {
-        $request->attributes->set('identifier', 'slug');
+        $request->attributes->set('_identifier', 'slug');
         $request->get('slug')->willReturn('test-slug');
 
         $this->setRequest($request);
@@ -197,7 +197,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_criteria_from_request_if_resources_are_filterable($request)
     {
-        $request->get('_criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
+        $request->get('criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
         $request->attributes->set('_criteria', array('enabled' => false));
         $request->attributes->set('_filterable', true);
 
@@ -207,7 +207,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_not_get_criteria_from_request_if_resources_are_not_filterable($request)
     {
-        $request->get('_criteria', ANY_ARGUMENT)->shouldNotBeCalled();
+        $request->get('criteria', ANY_ARGUMENT)->shouldNotBeCalled();
         $request->attributes->set('_criteria', array('enabled' => false));
         $request->attributes->set('_filterable', false);
 
@@ -217,7 +217,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_sorting_from_request_if_resources_are_sortable($request)
     {
-        $request->get('_sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
+        $request->get('sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
         $request->attributes->set('_sorting', array('name' => 'asc'));
         $request->attributes->set('_sortable', true);
 
@@ -227,7 +227,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_not_get_sorting_from_request_if_resources_are_not_sortable($request)
     {
-        $request->get('_sorting', ANY_ARGUMENT)->shouldNotBeCalled();
+        $request->get('sorting', ANY_ARGUMENT)->shouldNotBeCalled();
         $request->attributes->set('_sorting', array('name' => 'asc'));
         $request->attributes->set('_sortable', false);
 
