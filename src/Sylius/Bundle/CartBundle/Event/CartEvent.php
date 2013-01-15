@@ -57,7 +57,7 @@ class CartEvent extends Event
      * Notice the event listeners to refresh/recalculate cart
      * informations
      *
-     * @param  null|Boolean $fresh
+     * @param null|Boolean $fresh
      *
      * @return Boolean
      */
@@ -73,7 +73,7 @@ class CartEvent extends Event
     /**
      * Force the event listeners to check validation of given cart
      *
-     * @param  null|Boolean $valid
+     * @param null|Boolean $valid
      *
      * @return Boolean
      */
