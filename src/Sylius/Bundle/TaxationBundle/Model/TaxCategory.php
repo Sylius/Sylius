@@ -20,54 +20,118 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class TaxCategory implements TaxCategoryInterface
 {
+    /**
+     * Identifier.
+     *
+     * @var mixed
+     */
     protected $id;
+
+    /**
+     * Tax category name.
+     *
+     * Can be 'Clothing' or 'Electronics'.
+     *
+     * @var string
+     */
     protected $name;
+
+    /**
+     * Short description of tax category.
+     *
+     * @var string
+     */
     protected $description;
+
+    /**
+     * All rates applicable for items from this category.
+     *
+     * @var Collection
+     */
     protected $rates;
+
+    /**
+     * Creation time.
+     *
+     * @var DateTime
+     */
     protected $createdAt;
+
+    /**
+     * Last update time.
+     *
+     * @var DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->rates = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRates()
     {
         return $this->rates;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addRate(TaxRateInterface $rate)
     {
         if (!$this->hasRate($rate)) {
@@ -76,6 +140,9 @@ class TaxCategory implements TaxCategoryInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeRate(TaxRateInterface $rate)
     {
         if ($this->hasRate($rate)) {
@@ -84,16 +151,25 @@ class TaxCategory implements TaxCategoryInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasRate(TaxRateInterface $rate)
     {
         return $this->rates->contains($rate);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;

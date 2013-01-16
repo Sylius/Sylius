@@ -18,16 +18,16 @@ use PHPSpec2\ObjectBehavior;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DelegatingTaxCalculator extends ObjectBehavior
+class DelegatingCalculator extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DelegatingTaxCalculator');
+        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator');
     }
 
     function it_should_be_a_Sylius_tax_calculator()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface');
+        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface');
     }
 
     function it_should_initialize_calculators_array_by_default()
@@ -36,7 +36,7 @@ class DelegatingTaxCalculator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface $calculator
+     * @param Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface $calculator
      */
     function it_should_register_calculator_properly($calculator)
     {
@@ -46,7 +46,7 @@ class DelegatingTaxCalculator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface $calculator
+     * @param Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface $calculator
      */
     function it_should_unregister_calculator_properly($calculator)
     {
@@ -58,7 +58,7 @@ class DelegatingTaxCalculator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface $calculator
+     * @param Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface $calculator
      */
     function it_should_retrieve_registered_calculator_by_name($calculator)
     {
@@ -75,8 +75,8 @@ class DelegatingTaxCalculator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface            $rate
-     * @param Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface $calculator
+     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface         $rate
+     * @param Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface $calculator
      */
     function it_should_delegate_calculation_to_a_correct_calculator($rate, $calculator)
     {
@@ -89,8 +89,8 @@ class DelegatingTaxCalculator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface            $rate
-     * @param Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface $calculator
+     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface         $rate
+     * @param Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface $calculator
      */
     function it_should_complain_if_correct_calculator_doesnt_exist_for_given_rate($rate, $calculator)
     {

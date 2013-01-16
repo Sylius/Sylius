@@ -18,16 +18,16 @@ use PHPSpec2\ObjectBehavior;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DefaultTaxCalculator extends ObjectBehavior
+class DefaultCalculator extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DefaultTaxCalculator');
+        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator');
     }
 
     function it_should_be_a_Sylius_tax_calculator()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface');
+        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface');
     }
 
     /**

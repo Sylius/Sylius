@@ -15,24 +15,44 @@ use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
 
 /**
  * Delegating calculator.
+ * It uses proper calculator to calculate the amount of tax.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class DelegatingTaxCalculator implements TaxCalculatorInterface
+class DelegatingCalculator implements CalculatorInterface
 {
-    protected $calculator;
+    /**
+     * Calculators hash by name.
+     *
+     * @var array
+     */
+    protected $calculators;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->calculators = array();
     }
 
+    /**
+     * Get all calculators.
+     *
+     * @return CalculatorInterface[]
+     */
     public function getCalculators()
     {
         return $this->calculators;
     }
 
-    public function registerCalculator($name, TaxCalculatorInterface $calculator)
+    /**
+     * Register calculator under given name.
+     *
+     * @param string    $name
+     * @param CalculatorInterface $calculator
+     */
+    public function registerCalculator($name, CalculatorInterface $calculator)
     {
         if ($this->hasCalculator($name)) {
             throw new \InvalidArgumentException(sprintf('Calculator with name "%s" is already registered', $name));
@@ -41,6 +61,11 @@ class DelegatingTaxCalculator implements TaxCalculatorInterface
         $this->calculators[$name] = $calculator;
     }
 
+    /**
+     * Unregister calculator.
+     *
+     * @param string $name
+     */
     public function unregisterCalculator($name)
     {
         if (!$this->hasCalculator($name)) {
@@ -50,11 +75,25 @@ class DelegatingTaxCalculator implements TaxCalculatorInterface
         unset($this->calculators[$name]);
     }
 
+    /**
+     * Has calculator with name registered?
+     *
+     * @param string $name
+     *
+     * @return Boolean
+     */
     public function hasCalculator($name)
     {
         return isset($this->calculators[$name]);
     }
 
+    /**
+     * Get calculator registered under given name.
+     *
+     * @param string $name
+     *
+     * @return CalculatorInterface
+     */
     public function getCalculator($name)
     {
         if (!$this->hasCalculator($name)) {

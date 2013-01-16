@@ -16,9 +16,9 @@ use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
 /**
  * Tax calculator interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface TaxCalculatorInterface
+interface CalculatorInterface
 {
     /**
      * Get the tax amount for given base amount and tax rate.
@@ -26,7 +26,7 @@ interface TaxCalculatorInterface
      * @param float            $base
      * @param TaxRateInterface $rate
      *
-     * @return mixed
+     * @return float
      */
     public function calculate($base, TaxRateInterface $rate);
 }

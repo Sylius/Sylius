@@ -21,8 +21,18 @@ use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
  */
 class TaxRateResolver implements TaxRateResolverInterface
 {
+    /**
+     * Tax rate repository.
+     *
+     * @var ObjectRepository
+     */
     protected $taxRateRepository;
 
+    /**
+     * Tax rate repository.
+     *
+     * @var ObjectRepository $taxRateRepository
+     */
     public function __construct(ObjectRepository $taxRateRepository)
     {
         $this->taxRateRepository = $taxRateRepository;
@@ -31,12 +41,14 @@ class TaxRateResolver implements TaxRateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(TaxableInterface $taxable, array $options = array())
+    public function resolve(TaxableInterface $taxable, array $criteria = array())
     {
         if (null === $category = $taxable->getTaxCategory()) {
             return;
         }
 
-        return $this->taxRateRepository->findOneBy(array('category' => $category));
+        $criteria = array_merge(array('category' => $category), $criteria);
+
+        return $this->taxRateRepository->findOneBy($criteria);
     }
 }

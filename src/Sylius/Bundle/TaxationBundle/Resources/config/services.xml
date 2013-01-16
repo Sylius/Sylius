@@ -19,8 +19,8 @@
     <parameters>
         <parameter key="sylius_taxation.form.type.calculator_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType</parameter>
 
-        <parameter key="sylius_taxation.calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingTaxCalculator</parameter>
-        <parameter key="sylius_taxation.calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultTaxCalculator</parameter>
+        <parameter key="sylius_taxation.calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius_taxation.calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator</parameter>
 
         <parameter key="sylius_taxation.rate_resolver.default.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
     </parameters>

@@ -25,9 +25,9 @@ interface TaxRateResolverInterface
      * Get the tax rate for given taxable good and context.
      *
      * @param TaxableInterface $taxable
-     * @param array            $context
+     * @param array            $criteria
      *
      * @return null|TaxRateInterface
      */
-    public function resolve(TaxableInterface $taxable, array $context = array());
+    public function resolve(TaxableInterface $taxable, array $criteria = array());
 }
