@@ -1,0 +1,7 @@
+sylius_taxation:
+    category:
+        name:
+            not_blank: Please enter tax category name.
+    rate:
+        name:
+            not_blank: Please enter tax rate name.
