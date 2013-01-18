@@ -146,7 +146,7 @@ class InventoryOperator implements InventoryOperatorInterface
         $units = $this->repository->findBy(array(
             'stockable'      => $stockable,
             'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
-        ));
+        ), array('createdAt' => 'ASC'));
 
         foreach ($units as $unit) {
             $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
