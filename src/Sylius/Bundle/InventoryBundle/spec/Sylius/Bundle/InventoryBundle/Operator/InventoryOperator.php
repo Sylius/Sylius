@@ -14,12 +14,13 @@ use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 class InventoryOperator extends ObjectBehavior
 {
     /**
-     * @param Doctrine\Common\Persistence\ObjectManager    $manager
-     * @param Doctrine\Common\Persistence\ObjectRepository $repository
+     * @param Doctrine\Common\Persistence\ObjectManager                          $manager
+     * @param Doctrine\Common\Persistence\ObjectRepository                       $repository
+     * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
      */
-    function let($manager, $repository)
+    function let($manager, $repository, $availabilityChecker)
     {
-        $this->beConstructedWith($manager, $repository, true);
+        $this->beConstructedWith($manager, $repository, $availabilityChecker);
     }
 
     function it_should_be_initializable()

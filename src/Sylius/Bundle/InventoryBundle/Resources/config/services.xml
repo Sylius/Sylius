@@ -45,7 +45,7 @@
         <service id="sylius_inventory.operator.default" class="%sylius_inventory.operator.default.class%">
             <argument type="service" id="sylius_inventory.manager.unit" />
             <argument type="service" id="sylius_inventory.repository.unit" />
-            <argument>%sylius_inventory.backorders%</argument>
+            <argument type="service" id="sylius_inventory.checker" />
         </service>
         <service id="sylius_inventory.checker.default" class="%sylius_inventory.checker.default.class%">
             <argument>%sylius_inventory.backorders%</argument>
