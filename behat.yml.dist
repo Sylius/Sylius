@@ -1,0 +1,14 @@
+default:
+    paths:
+        features: features
+    context:
+        class: Context\FeatureContext
+    extensions:
+        Behat\MinkExtension\Extension:
+            default_session: symfony2
+        Behat\Symfony2Extension\Extension:
+            kernel:
+                path: sylius/SyliusKernel.php
+                class: SyliusKernel
+                env: testing
+            mink_driver: true

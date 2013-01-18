@@ -1,0 +1,48 @@
+imports:
+    - { resource: parameters.yml }
+    # - { resource: security.yml }
+
+framework:
+    translator:      { fallback: %sylius.locale% }
+    secret:          %sylius.secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing/main.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] }
+    default_locale:  "%sylius.locale%"
+    trusted_proxies: ~
+    session:         ~
+
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        ['SyliusWebBundle']
+    filters:
+        cssrewrite: ~
+
+doctrine:
+    dbal:
+        driver:   %sylius.database.driver%
+        host:     %sylius.database.host%
+        port:     %sylius.database.port%
+        dbname:   %sylius.database.name%
+        user:     %sylius.database.user%
+        password: %sylius.database.password%
+        charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+swiftmailer:
+    transport: %sylius.mailer.transport%
+    host:      %sylius.mailer.host%
+    username:  %sylius.mailer.user%
+    password:  %sylius.mailer.password%
+    spool:     { type: memory }

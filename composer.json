@@ -1,0 +1,66 @@
+{
+    "name":        "sylius/sylius",
+    "description": "Modern ecommerce for Symfony2",
+    "license":     "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                               ">=5.3.3",
+        "symfony/symfony":                   "2.1.*",
+        "doctrine/orm":                      ">=2.2.3,<2.4-dev",
+        "doctrine/doctrine-bundle":          "1.1.*",
+        "doctrine/doctrine-fixtures-bundle": "*",
+        "twig/extensions":                   "1.0.*",
+        "symfony/assetic-bundle":            "2.1.*",
+        "symfony/swiftmailer-bundle":        "2.1.*",
+        "symfony/monolog-bundle":            "2.1.*",
+        "sensio/distribution-bundle":        "2.1.*",
+
+        "sylius/core-bundle":                "0.1.*",
+        "sylius/web-bundle":                 "0.1.*"
+    },
+    "require-dev": {
+        "behat/behat":                       "2.4.*",
+        "behat/symfony2-extension":          "*",
+        "behat/mink-extension":              "*",
+        "behat/mink-browserkit-driver":      "*",
+        "phpspec/phpspec2":                  "dev-develop"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-update-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "autoload": {
+        "psr-0": { "Context": "features/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "symfony-app-dir": "sylius",
+        "symfony-web-dir": "web"
+    }
+}

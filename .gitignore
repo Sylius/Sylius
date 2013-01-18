@@ -1,0 +1,15 @@
+sylius/*\.cache
+sylius/cache/*
+
+sylius/logs/*
+
+sylius/config/container/parameters.yml
+sylius/config/container/*.local.yml
+
+web/bundles/*
+web/css/*
+web/js/*
+web/assets/*
+
+bin/*
+vendor/*

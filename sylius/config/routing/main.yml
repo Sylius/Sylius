@@ -1,0 +1,2 @@
+sylius_web:
+    resource: @SyliusWebBundle/Resources/config/routing/main.yml

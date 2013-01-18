@@ -1,0 +1,14 @@
+imports:
+    - { resource: dev.yml }
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true

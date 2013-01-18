@@ -1,0 +1,15 @@
+parameters:
+    sylius.database.driver:   pdo_mysql
+    sylius.database.host:     127.0.0.1
+    sylius.database.port:     ~
+    sylius.database.name:     sylius
+    sylius.database.user:     root
+    sylius.database.password: ~
+
+    sylius.mailer.transport:  smtp
+    sylius.mailer.host:       127.0.0.1
+    sylius.mailer.user:       ~
+    sylius.mailer.password:   ~
+
+    sylius.locale:            en
+    sylius.secret:            abc
