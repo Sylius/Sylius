@@ -14,6 +14,7 @@ namespace Sylius\Bundle\InventoryBundle\Operator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
@@ -40,24 +41,24 @@ class InventoryOperator implements InventoryOperatorInterface
     protected $repository;
 
     /**
-     * Backorders enabled?
+     * Availability checker.
      *
-     * @var Boolean
+     * @var AvailabilityCheckerInterface
      */
-    protected $backorders;
+    protected $availabilityChecker;
 
     /**
      * Constructor.
      *
-     * @param ObjectManager    $repository
-     * @param ObjectRepository $manager
-     * @param Boolean          $backorders
+     * @param ObjectManager                $repository
+     * @param ObjectRepository             $manager
+     * @param AvailabilityCheckerInterface $availabilityChecker
      */
-    public function __construct(ObjectManager $manager, ObjectRepository $repository, $backorders)
+    public function __construct(ObjectManager $manager, ObjectRepository $repository, AvailabilityCheckerInterface $availabilityChecker)
     {
         $this->manager = $manager;
         $this->repository = $repository;
-        $this->backorders = (Boolean) $backorders;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     /**
@@ -81,19 +82,14 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 1');
         }
 
-        $onHand = $stockable->getOnHand();
-
-        if (false === $this->backorders && $quantity > $onHand) {
-            return false;
+        if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
+            throw new InsufficientStockException($stockable, $quantity);
         }
 
+        $onHand = $stockable->getOnHand();
         $stockable->setOnHand(max(0, $onHand - $quantity));
 
         $units = $this->create($stockable, $quantity, $state);
-
-        if (false === $this->backorders || $quantity <= $onHand) {
-            return $units;
-        }
 
         // Backorder units
         $i = 0;
@@ -150,7 +146,7 @@ class InventoryOperator implements InventoryOperatorInterface
         $units = $this->repository->findBy(array(
             'stockable'      => $stockable,
             'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
-        ));
+        ), array('createdAt' => 'ASC'));
 
         foreach ($units as $unit) {
             $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
