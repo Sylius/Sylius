@@ -25,6 +25,7 @@
         "stof/doctrine-extensions-bundle": "*"
     },
     "require-dev": {
+        "doctrine/orm"    : "~2.3",
         "phpspec/phpspec2": "dev-develop",
         "symfony/form"    : "~2.1"
     },

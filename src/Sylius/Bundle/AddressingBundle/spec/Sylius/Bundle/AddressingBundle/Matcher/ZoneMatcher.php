@@ -92,8 +92,10 @@ class ZoneMatcher extends ObjectBehavior
         $memberZone->getZone()->shouldBeCalled()->willReturn($subZone);
         $rootZone->getMembers()->shouldBeCalled()->willReturn(array($memberZone));
         $rootZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_ZONE);
-        $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
+
+        $memberCountry->getBelongsTo()->willReturn($subZone);
         $memberZone->getBelongsTo()->willReturn($rootZone);
+        $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
 
         $this->match($address)->shouldReturn($rootZone);
     }
@@ -111,10 +113,29 @@ class ZoneMatcher extends ObjectBehavior
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
         $zoneProvince->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
         $zoneProvince->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zoneCountry->getMembers()->shouldNotBeCalled();
+        $zoneCountry->getMembers()->shouldNotBeCalled()->willReturn(array());
+        $zoneCountry->getType()->shouldNotBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry, $zoneProvince));
         $memberProvince->getBelongsTo()->willReturn($zoneProvince);
 
         $this->match($address)->shouldReturn($zoneProvince);
+    }
+
+    /**
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface   $country
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
+     * @param Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry $memberCountry
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zone
+     */
+    function it_should_match_all_addresses($repository, $country, $address, $memberCountry, $zone)
+    {
+        $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
+        $address->getCountry()->shouldBeCalled()->willReturn($country);
+        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
+        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $memberCountry->getBelongsTo()->willReturn($zone);
+
+        $this->matchAll($address)->shouldReturn(array($zone));
     }
 }

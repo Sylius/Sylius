@@ -45,11 +45,48 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function match(AddressInterface $address)
     {
-        foreach ($this->getZones() as $zone) {
+        foreach ($this->getZones(true) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 return $zone;
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function matchAll(AddressInterface $address)
+    {
+        $zones = array();
+        foreach ($this->getZones() as $zone) {
+            $zones = $this->matchAllInZone($address, $zone, $zones);
+        }
+
+        return $zones;
+    }
+
+    /**
+     * Returns all matching zones for address in given zone.
+     *
+     * @param AddressInterface $address
+     * @param ZoneInterface    $zone
+     * @param array            $zones
+     *
+     * @return ZoneInterface[]
+     */
+    protected function matchAllInZone(AddressInterface $address, ZoneInterface $zone, array $zones)
+    {
+        if ($this->addressBelongsToZone($address, $zone)) {
+            $zones[] = $zone;
+
+            foreach ($zone->getMembers() as $member) {
+                if (ZoneInterface::TYPE_ZONE === $zone->getType()) {
+                    $zones = $this->matchAllInZone($address, $member->getZone(), $zones);
+                }
+            }
+        }
+
+        return $zones;
     }
 
     /**
@@ -81,7 +118,8 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
-        switch ($member->getBelongsTo()->getType()) {
+        $type = $member->getBelongsTo()->getType();
+        switch ($type) {
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvince() && $address->getProvince() === $member->getProvince();
             break;
@@ -95,28 +133,32 @@ class ZoneMatcher implements ZoneMatcherInterface
             break;
 
             default:
-                throw new \InvalidArgumentException(sprintf(
-                    'Unexpected zone type "%s".',
-                    $zone->getType()
-                ));
+                throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
             break;
         }
     }
 
     /**
-     * Gets zones sorted by priority/type (province, country, zone).
+     * Gets zones (sorted by priority/type (province, country, zone)).
+     *
+     * @param Boolean $byPriority if true, sorts zones by priority
      *
      * @return array $zones
      */
-    protected function getZones()
+    protected function getZones($byPriority = false)
     {
+        $zones = $this->repository->findAll();
+
+        if (!$byPriority) {
+            return $zones;
+        }
+
         $priorities = array(
             ZoneInterface::TYPE_PROVINCE => 2,
             ZoneInterface::TYPE_COUNTRY  => 1,
             ZoneInterface::TYPE_ZONE     => 0,
         );
 
-        $zones = $this->repository->findAll();
         usort($zones, function(ZoneInterface $zone1, ZoneInterface $zone2) use ($priorities) {
             if($priorities[$zone1->getType()] > $priorities[$zone2->getType()]) {
                 return -1;
