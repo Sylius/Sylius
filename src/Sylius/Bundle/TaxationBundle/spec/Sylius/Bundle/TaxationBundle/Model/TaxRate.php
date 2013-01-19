@@ -82,6 +82,15 @@ class TaxRate extends ObjectBehavior
         $this->getAmount()->shouldReturn(0.23);
     }
 
+    function it_should_represent_amount_as_percentage()
+    {
+        $this->setAmount(0.23);
+        $this->getAmountAsPercentage()->shouldReturn(23.00);
+
+        $this->setAmount(0.125);
+        $this->getAmountAsPercentage()->shouldReturn(12.5);
+    }
+
     function it_should_not_be_included_in_price_by_default()
     {
         $this->shouldNotBeIncludedInPrice();

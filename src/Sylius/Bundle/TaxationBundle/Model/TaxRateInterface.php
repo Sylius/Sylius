@@ -61,6 +61,13 @@ interface TaxRateInterface
     public function getAmount();
 
     /**
+     * Get the amount as percentage.
+     *
+     * @return float
+     */
+    public function getAmountAsPercentage();
+
+    /**
      * Set tax amount.
      *
      * @param float $amount

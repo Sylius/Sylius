@@ -137,6 +137,14 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
+    public function getAmountAsPercentage()
+    {
+        return $this->getAmount() * 100;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setAmount($amount)
     {
         $this->amount = $amount;
