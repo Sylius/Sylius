@@ -45,11 +45,21 @@ class TaxRateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', 'sylius_taxation_category_choice')
-            ->add('name', 'text')
-            ->add('amount', 'number')
-            ->add('includedInPrice', 'checkbox')
-            ->add('calculator', 'sylius_taxation_calculator_choice')
+            ->add('category', 'sylius_taxation_category_choice', array(
+                'label' => 'sylius_taxation.label.rate.category'
+            ))
+            ->add('name', 'text', array(
+                'label' => 'sylius_taxation.label.rate.name'
+            ))
+            ->add('amount', 'percent', array(
+                'label' => 'sylius_taxation.label.rate.amount'
+            ))
+            ->add('includedInPrice', 'checkbox', array(
+                'label' => 'sylius_taxation.label.rate.included_in_price'
+            ))
+            ->add('calculator', 'sylius_taxation_calculator_choice', array(
+                'label' => 'sylius_taxation.label.rate.calculator'
+            ))
         ;
     }
 

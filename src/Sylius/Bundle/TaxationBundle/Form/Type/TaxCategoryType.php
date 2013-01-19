@@ -45,9 +45,12 @@ class TaxCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
+            ->add('name', 'text', array(
+                'label' => 'sylius_taxation.label.category.name'
+            ))
             ->add('description', 'textarea', array(
-                'required' => false
+                'required'              => false,
+                'label' => 'sylius_taxation.label.category.description'
             ))
         ;
     }

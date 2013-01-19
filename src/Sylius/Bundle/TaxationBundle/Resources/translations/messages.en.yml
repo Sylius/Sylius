@@ -1,0 +1,11 @@
+sylius_taxation:
+    label:
+        category:
+            name: Name
+            description: Description
+        rate:
+            category: Category
+            name: Name
+            amount: Amount
+            included_in_price: Included in price?
+            calculator: Calculator
