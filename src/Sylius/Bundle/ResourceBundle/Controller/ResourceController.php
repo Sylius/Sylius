@@ -149,9 +149,9 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
             $this->update($resource);
-            $this->setFlash('success', '%resource% has been updated.');
+            $this->setFlash('success', '%resource% has been successfully updated.');
 
             return $this->redirectTo($resource);
         }
@@ -179,7 +179,7 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404();
         $this->delete($resource);
-        $this->setFlash('success', '%resource% has been deleted.');
+        $this->setFlash('success', '%resource% has been successfully deleted.');
 
         return $this->redirectToIndex($resource);
     }
