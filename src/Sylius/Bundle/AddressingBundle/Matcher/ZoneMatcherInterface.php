@@ -29,4 +29,13 @@ interface ZoneMatcherInterface
      * @return ZoneInterface|null
      */
     public function match(AddressInterface $address);
+
+    /**
+     * Returns all matching zones for given address.
+     *
+     * @param AddressInterface $address
+     *
+     * @return ZoneInterface[]
+     */
+    public function matchAll(AddressInterface $address);
 }
