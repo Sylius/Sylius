@@ -1,23 +1,14 @@
 {% extends 'SyliusResourceBundle::layout.html.twig' %}
 
-{% block sylius_addressing_javascripts %}
-{% javascripts
+{% block sylius_javascripts %}
+    {% javascripts
     '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing-zone.js'
-%}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+    %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 {% block sylius_content %}
-    <h1>Zone updating <small>Use this form to edit existing zone</small></h1>
-<hr />
-<form action="{{ path('sylius_addressing_zone_update', {'id': zone.id}) }}" method="post" class="form-horizontal">
-    {% include 'SyliusAddressingBundle:Zone:_form.html.twig' %}
-    <div class="form-actions">
-       <input type="submit" value="save changes" class="btn btn-large btn-primary" />
-       &nbsp;
-       <a href="{{ path('sylius_addressing_zone_list') }}" class="btn btn-large">cancel</a>
-    </div>
-</form>
+    {% include 'SyliusAddressingBundle:Zone:_update.html.twig' %}
 {% endblock %}

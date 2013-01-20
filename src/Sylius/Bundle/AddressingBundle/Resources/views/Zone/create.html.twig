@@ -1,6 +1,6 @@
 {% extends 'SyliusResourceBundle::layout.html.twig' %}
 
-{% block sylius_addressing_javascripts %}
+{% block sylius_javascripts %}
     {% javascripts
         '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing-zone.js'
     %}
@@ -10,15 +10,5 @@
 {% endblock %}
 
 {% block sylius_content %}
-    <h1>Creating zone <small>Use this form to add new zone</small></h1>
-    <hr />
-
-    <form action="{{ path('sylius_addressing_zone_create', {'id': zone.id}) }}" method="post" class="form-horizontal">
-        {% include 'SyliusAddressingBundle:Zone:_form.html.twig' %}
-        <div class="form-actions">
-            <input type="submit" value="create zone" class="btn btn-large btn-primary" />
-            &nbsp;
-            <a href="{{ path('sylius_addressing_zone_list') }}" class="btn btn-large">cancel</a>
-        </div>
-    </form>
+    {% include 'SyliusAddressingBundle:Zone:_create.html.twig' %}
 {% endblock %}

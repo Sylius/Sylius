@@ -1,15 +1,5 @@
 {% extends 'SyliusResourceBundle::layout.html.twig' %}
 
 {% block sylius_content %}
-    <h1>province updating <small>Use this form to edit existing province</small></h1>
-    <hr />
-
-    <form action="{{ path('sylius_addressing_province_update', {'countryId': province.country.id, 'id': province.id}) }}" method="post" class="form-horizontal" novalidate>
-        {% include 'SyliusAddressingBundle:Province:_form.html.twig' %}
-        <div class="form-actions">
-           <input type="submit" value="save changes" class="btn btn-large btn-primary" />
-           &nbsp;
-           <a href="{{ path('sylius_addressing_country_list') }}" class="btn btn-large">cancel</a>
-        </div>
-    </form>
+    {% include 'SyliusAddressingBundle:Province:_update.html.twig' %}
 {% endblock %}
