@@ -70,6 +70,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Then /^I should be on the (homepage)$/
      * @Then /^I should be on the (.+) page$/
      * @Then /^I should be on the (.+) page in (\w+)$/
      * @Then /^I should be redirected to the (.+) page$/
