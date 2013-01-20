@@ -17,6 +17,9 @@ framework:
     session:         ~
 
 twig:
+    form:
+        resources:
+            - 'SyliusWebBundle::forms.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
@@ -46,3 +49,6 @@ swiftmailer:
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
+
+sylius_taxation:
+    driver: doctrine/orm

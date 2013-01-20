@@ -25,6 +25,14 @@ class SyliusKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            // Sylius bundles.
+            new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
+            new Sylius\Bundle\WebBundle\SyliusWebBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+
+            new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
+
+            // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
@@ -33,13 +41,12 @@ class SyliusKernel extends Kernel
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
-            /*
-             * Sylius bundles.
-             */
-            new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
-            new Sylius\Bundle\WebBundle\SyliusWebBundle(),
+            // Third party bundles.
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new FOS\RestBundle\FOSRestBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'testing'))) {

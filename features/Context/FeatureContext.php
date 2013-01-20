@@ -11,7 +11,7 @@
 
 namespace Context;
 
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -24,7 +24,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FeatureContext extends MinkContext implements KernelAwareInterface
+class FeatureContext extends RawMinkContext implements KernelAwareInterface
 {
     /**
      * Kernel.

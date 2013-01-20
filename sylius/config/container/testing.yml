@@ -12,3 +12,7 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        dbname:   %sylius.database.name%_testing

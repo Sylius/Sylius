@@ -131,19 +131,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal",
-                "reference": "4c33f633c48eeafe3408b308f6fc51743a21a3b7"
+                "reference": "fd45c6f6baa618d871f3201fabe76df5043abb1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/archive/4c33f633c48eeafe3408b308f6fc51743a21a3b7.zip",
-                "reference": "4c33f633c48eeafe3408b308f6fc51743a21a3b7",
+                "url": "https://github.com/doctrine/dbal/archive/fd45c6f6baa618d871f3201fabe76df5043abb1e.zip",
+                "reference": "fd45c6f6baa618d871f3201fabe76df5043abb1e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "2013-01-07 20:03:43",
+            "time": "2013-01-20 11:50:36",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -381,6 +381,243 @@
             ]
         },
         {
+            "name": "friendsofsymfony/rest",
+            "version": "dev-master",
+            "target-dir": "FOS/Rest",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSRest",
+                "reference": "33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FriendsOfSymfony/FOSRest/archive/33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4.zip",
+                "reference": "33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/http-foundation": ">=2.0,<2.3-dev"
+            },
+            "time": "2013-01-18 10:39:23",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\Rest": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Kahwe Smith",
+                    "email": "smith@pooteeweet.org"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSRest/contributors"
+                }
+            ],
+            "description": "This library provides various tools to develop RESTful API's",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "rest"
+            ]
+        },
+        {
+            "name": "friendsofsymfony/rest-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/RestBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle",
+                "reference": "21733cca032528f44dcfe2fca35a006530183b41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/21733cca032528f44dcfe2fca35a006530183b41.zip",
+                "reference": "21733cca032528f44dcfe2fca35a006530183b41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.0,<2.3-dev",
+                "friendsofsymfony/rest": ">=0.7.0,<0.9.0-dev"
+            },
+            "conflict": {
+                "jms/serializer-bundle": "<1.0-dev"
+            },
+            "require-dev": {
+                "sensio/framework-extra-bundle": ">=2.1,<2.3-dev",
+                "symfony/form": ">=2.1,<2.3-dev",
+                "symfony/yaml": ">=2.1,<2.3-dev",
+                "symfony/security": ">=2.1,<2.3-dev",
+                "jms/serializer-bundle": "1.0.*"
+            },
+            "suggest": {
+                "symfony/serializer": "Add support for basic serialization capabilities, requires >=2.0,<2.3-dev",
+                "sensio/framework-extra-bundle": "Add support for route annotations and the view response listener",
+                "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 1.0.*"
+            },
+            "time": "2013-01-19 18:50:47",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.11.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\RestBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Kahwe Smith",
+                    "email": "smith@pooteeweet.org"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSRestBundle/contributors"
+                },
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "This Bundle provides various tools to rapidly develop RESTful API's with Symfony2",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "rest"
+            ]
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker",
+                "reference": "9d7bf6177249873d978d85a170b67b7049032b2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/fzaninotto/Faker/archive/9d7bf6177249873d978d85a170b67b7049032b2d.zip",
+                "reference": "9d7bf6177249873d978d85a170b67b7049032b2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2013-01-12 14:20:46",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "faker",
+                "fixtures",
+                "data"
+            ]
+        },
+        {
+            "name": "gedmo/doctrine-extensions",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/l3pp4rd/DoctrineExtensions.git",
+                "reference": "baa42fda5607978d70040b9f38b6b3a13823c903"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/baa42fda5607978d70040b9f38b6b3a13823c903.zip",
+                "reference": "baa42fda5607978d70040b9f38b6b3a13823c903",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "doctrine/common": ">=2.2,<2.5-dev"
+            },
+            "require-dev": {
+                "doctrine/mongodb": ">=1.0.0-BETA1",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA6",
+                "doctrine/orm": ">=2.2",
+                "doctrine/dbal": ">=2.2",
+                "symfony/yaml": "2.*"
+            },
+            "suggest": {
+                "doctrine/orm": ">=2.2",
+                "doctrine/dbal": ">=2.2",
+                "doctrine/mongodb": ">=1.0.0",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA7"
+            },
+            "time": "2013-01-18 18:21:44",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Gedmo": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gediminas Morkevicius",
+                    "email": "gediminas.morkevicius@gmail.com"
+                }
+            ],
+            "description": "Doctrine2 behavioral extensions",
+            "homepage": "http://gediminasm.org/",
+            "keywords": [
+                "tree",
+                "behaviors",
+                "doctrine2",
+                "extensions",
+                "gedmo",
+                "sluggable",
+                "loggable",
+                "translatable",
+                "nestedset",
+                "sortable",
+                "timestampable"
+            ]
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "dev-master",
             "source": {
@@ -425,6 +662,393 @@
             "keywords": [
                 "sql",
                 "highlight"
+            ]
+        },
+        {
+            "name": "jms/aop-bundle",
+            "version": "dev-master",
+            "target-dir": "JMS/AopBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSAopBundle",
+                "reference": "7018357f5bedf204979a88867a9da05973744422"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/JMSAopBundle/archive/7018357f5bedf204979a88867a9da05973744422.zip",
+                "reference": "7018357f5bedf204979a88867a9da05973744422",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "2.*",
+                "jms/cg": "1.*"
+            },
+            "time": "2013-01-09 08:03:40",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\AopBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Adds AOP capabilities to Symfony2",
+            "keywords": [
+                "annotations",
+                "aop"
+            ]
+        },
+        {
+            "name": "jms/cg",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/schmittjoh/cg-library.git",
+                "reference": "8f3441497215434c95512200fa56f168d1972e47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/cg-library/archive/8f3441497215434c95512200fa56f168d1972e47.zip",
+                "reference": "8f3441497215434c95512200fa56f168d1972e47",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-11-21 10:50:41",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "CG\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Toolset for generating PHP code",
+            "keywords": [
+                "code generation"
+            ]
+        },
+        {
+            "name": "jms/di-extra-bundle",
+            "version": "dev-master",
+            "target-dir": "JMS/DiExtraBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSDiExtraBundle",
+                "reference": "1d17b6cabd914b84a7a386458ff82f6f8a5e7142"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/JMSDiExtraBundle/archive/1d17b6cabd914b84a7a386458ff82f6f8a5e7142.zip",
+                "reference": "1d17b6cabd914b84a7a386458ff82f6f8a5e7142",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1.0,<2.3-dev",
+                "symfony/process": ">=2.1.0,<2.3-dev",
+                "symfony/finder": ">=2.1.0,<2.3-dev",
+                "jms/aop-bundle": ">=1.0.0,<1.2-dev",
+                "jms/metadata": "1.*"
+            },
+            "require-dev": {
+                "jms/security-extra-bundle": "1.*",
+                "symfony/validator": "*",
+                "symfony/form": "*",
+                "symfony/class-loader": "*",
+                "symfony/yaml": "*",
+                "symfony/browser-kit": "*",
+                "symfony/security-bundle": "*",
+                "symfony/twig-bundle": "*",
+                "sensio/framework-extra-bundle": "*",
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/orm": "*",
+                "phpcollection/phpcollection": ">=0.1,<0.3-dev"
+            },
+            "time": "2013-01-06 00:20:23",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\DiExtraBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Allows to configure dependency injection using annotations",
+            "homepage": "http://jmsyst.com/bundles/JMSDiExtraBundle",
+            "keywords": [
+                "dependency injection",
+                "annotations"
+            ]
+        },
+        {
+            "name": "jms/metadata",
+            "version": "1.2.0-RC",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/metadata",
+                "reference": "1.2.0-RC"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/metadata/zipball/1.2.0-RC",
+                "reference": "1.2.0-RC",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "doctrine/common": ">=2.0,<2.4-dev"
+            },
+            "time": "2012-08-21 05:40:10",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Metadata\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Class/method/property metadata management in PHP",
+            "keywords": [
+                "annotations",
+                "yaml",
+                "xml",
+                "metadata"
+            ]
+        },
+        {
+            "name": "jms/parser-lib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/schmittjoh/parser-lib",
+                "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/parser-lib/archive/4d469a70c6dd03f921cbdeadafbcb261bb23e8b0.zip",
+                "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0",
+                "shasum": ""
+            },
+            "require": {
+                "phpoption/phpoption": ">=0.9,<2.0-dev"
+            },
+            "time": "2012-11-30 08:11:04",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "description": "A library for easily creating recursive-descent parsers."
+        },
+        {
+            "name": "jms/serializer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/schmittjoh/serializer",
+                "reference": "f319887562c3334c9bc54bd797034792e2cbf4ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/serializer/archive/f319887562c3334c9bc54bd797034792e2cbf4ed.zip",
+                "reference": "f319887562c3334c9bc54bd797034792e2cbf4ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "jms/metadata": ">=1.1.0,<1.3-dev",
+                "jms/parser-lib": "1.*",
+                "doctrine/common": "2.*",
+                "phpcollection/phpcollection": ">=0.1,<0.3-dev"
+            },
+            "require-dev": {
+                "twig/twig": ">=1.8,<2.0-dev",
+                "doctrine/orm": ">=2.1,<2.4-dev",
+                "symfony/yaml": "2.*",
+                "symfony/translation": ">=2.0,<2.2-dev",
+                "symfony/validator": ">=2.0,<2.2-dev",
+                "symfony/form": ">=2.0,<2.2-dev",
+                "symfony/filesystem": "2.*"
+            },
+            "suggest": {
+                "symfony/yaml": "Required if you'd like to serialize data to YAML format."
+            },
+            "time": "2013-01-20 09:06:41",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\Serializer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Library for (de-)serializing data of any complexity; supports XML, JSON, and YAML.",
+            "homepage": "http://jmsyst.com/libs/serializer",
+            "keywords": [
+                "json",
+                "xml",
+                "serialization",
+                "deserialization",
+                "jaxb"
+            ]
+        },
+        {
+            "name": "jms/serializer-bundle",
+            "version": "dev-master",
+            "target-dir": "JMS/SerializerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
+                "reference": "672f7086223dc3cfb03461bfa3964a62e5fa7c73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/JMSSerializerBundle/archive/672f7086223dc3cfb03461bfa3964a62e5fa7c73.zip",
+                "reference": "672f7086223dc3cfb03461bfa3964a62e5fa7c73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "jms/serializer": "1.0.*",
+                "jms/di-extra-bundle": ">=1.3",
+                "symfony/framework-bundle": ">=2.1,<3.0-dev"
+            },
+            "require-dev": {
+                "symfony/yaml": "*",
+                "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
+                "symfony/finder": "*",
+                "symfony/css-selector": "*",
+                "symfony/process": "*",
+                "doctrine/doctrine-bundle": "*",
+                "symfony/twig-bundle": "*",
+                "doctrine/orm": "*",
+                "symfony/form": "*",
+                "symfony/validator": "*"
+            },
+            "suggest": {
+                "symfony/yaml": "Required if you'd like to serialize content to YAML format."
+            },
+            "time": "2013-01-12 12:57:46",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\SerializerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Allows you to easily serialize, and deserialize data of any complexity",
+            "homepage": "http://jmsyst.com/bundles/JMSSerializerBundle",
+            "keywords": [
+                "json",
+                "xml",
+                "serialization",
+                "deserialization",
+                "jaxb"
             ]
         },
         {
@@ -672,6 +1296,151 @@
             ]
         },
         {
+            "name": "pagerfanta/pagerfanta",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/whiteoctober/Pagerfanta.git",
+                "reference": "12f71d99457b018fb80746f84514dd5b495c5789"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/whiteoctober/Pagerfanta/archive/12f71d99457b018fb80746f84514dd5b495c5789.zip",
+                "reference": "12f71d99457b018fb80746f84514dd5b495c5789",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "doctrine/orm": "2.*",
+                "doctrine/mongodb-odm": "2.*",
+                "solarium/solarium": "2.*"
+            },
+            "time": "2012-08-22 21:56:31",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com",
+                    "homepage": "http://github.com/pablodip"
+                }
+            ],
+            "description": "Pagination for PHP 5.3",
+            "keywords": [
+                "page",
+                "paging"
+            ]
+        },
+        {
+            "name": "phpcollection/phpcollection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/schmittjoh/php-collection",
+                "reference": "3d298a49601381d5155b88a9dc4e8561a1654ab0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/php-collection/archive/3d298a49601381d5155b88a9dc4e8561a1654ab0.zip",
+                "reference": "3d298a49601381d5155b88a9dc4e8561a1654ab0",
+                "shasum": ""
+            },
+            "require": {
+                "phpoption/phpoption": "1.*"
+            },
+            "time": "2013-01-09 23:18:43",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PhpCollection": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "General-Purpose Collection Library for PHP",
+            "keywords": [
+                "map",
+                "set",
+                "list",
+                "sequence",
+                "collection"
+            ]
+        },
+        {
+            "name": "phpoption/phpoption",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/schmittjoh/php-option",
+                "reference": "617bd84bf0d918da79b06ac6765b5390b83b1321"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/php-option/archive/617bd84bf0d918da79b06ac6765b5390b83b1321.zip",
+                "reference": "617bd84bf0d918da79b06ac6765b5390b83b1321",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2013-01-19 11:01:32",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PhpOption\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Option Type for PHP",
+            "keywords": [
+                "php",
+                "language",
+                "type",
+                "option"
+            ]
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "2.1.x-dev",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -715,6 +1484,68 @@
             "keywords": [
                 "distribution",
                 "configuration"
+            ]
+        },
+        {
+            "name": "stof/doctrine-extensions-bundle",
+            "version": "dev-master",
+            "target-dir": "Stof/DoctrineExtensionsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stof/StofDoctrineExtensionsBundle",
+                "reference": "4a17550d8b101c5aafc56c9950149aa189b8402d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/stof/StofDoctrineExtensionsBundle/archive/4a17550d8b101c5aafc56c9950149aa189b8402d.zip",
+                "reference": "4a17550d8b101c5aafc56c9950149aa189b8402d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "gedmo/doctrine-extensions": "2.3.*"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/mongodb-odm-bundle": "2.1.*"
+            },
+            "time": "2012-12-13 17:58:07",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Stof\\DoctrineExtensionsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
+            "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
+            "keywords": [
+                "tree",
+                "behaviors",
+                "doctrine2",
+                "extensions",
+                "gedmo",
+                "sluggable",
+                "loggable",
+                "translatable",
+                "nestedset",
+                "sortable",
+                "timestampable"
             ]
         },
         {
@@ -773,22 +1604,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "a398636e6fb6caedf67f6864d5b692ce0b32fbea"
+                "reference": "036b90218f4d4981fc707bcf4ea525766d7f9335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/a398636e6fb6caedf67f6864d5b692ce0b32fbea.zip",
-                "reference": "a398636e6fb6caedf67f6864d5b692ce0b32fbea",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/036b90218f4d4981fc707bcf4ea525766d7f9335.zip",
+                "reference": "036b90218f4d4981fc707bcf4ea525766d7f9335",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "sylius/taxation-bundle": "0.1.*",
+                "jms/serializer-bundle": "1.0.*",
+                "fzaninotto/faker": "1.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-16 20:49:21",
+            "time": "2013-01-20 18:49:35",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -826,18 +1660,150 @@
             ]
         },
         {
+            "name": "sylius/resource-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/ResourceBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusResourceBundle.git",
+                "reference": "c646106a8c2d473b15eb15b7817811ce137e594b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusResourceBundle/archive/c646106a8c2d473b15eb15b7817811ce137e594b.zip",
+                "reference": "c646106a8c2d473b15eb15b7817811ce137e594b",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "friendsofsymfony/rest-bundle": "0.11.*@dev",
+                "white-october/pagerfanta-bundle": "dev-master",
+                "pagerfanta/pagerfanta": "dev-master"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "doctrine/orm": ">=2.3,<3.0",
+                "twig/twig": ">=1.11.0,<2.0",
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "phpspec/php-diff": "dev-master"
+            },
+            "suggest": {
+                "doctrine/orm": "~2.3",
+                "fsc/hateoas-bundle": "0.3.x-dev",
+                "doctrine/mongodb-odm": "1.0.*@dev"
+            },
+            "time": "2013-01-20 12:27:05",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\ResourceBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
+                }
+            ],
+            "description": "Resource component for Sylius.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "persistence",
+                "storage",
+                "resource"
+            ]
+        },
+        {
+            "name": "sylius/taxation-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/TaxationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
+                "reference": "e8683807c116ff83944572f75afd3ddfad809350"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusTaxationBundle/archive/e8683807c116ff83944572f75afd3ddfad809350.zip",
+                "reference": "e8683807c116ff83944572f75afd3ddfad809350",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "time": "2013-01-19 22:54:26",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\TaxationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusTaxationBundle/contributors"
+                }
+            ],
+            "description": "Flexible taxation system for Symfony2 ecommerce applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "taxation",
+                "tax",
+                "taxes",
+                "webshop"
+            ]
+        },
+        {
             "name": "sylius/web-bundle",
             "version": "dev-master",
             "target-dir": "Sylius/Bundle/WebBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "5ba20b750a2b299dabcbd620954ec0b90dda614a"
+                "reference": "058c0ab98e6955e56d44fca38c2b4c8862369789"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/5ba20b750a2b299dabcbd620954ec0b90dda614a.zip",
-                "reference": "5ba20b750a2b299dabcbd620954ec0b90dda614a",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/058c0ab98e6955e56d44fca38c2b4c8862369789.zip",
+                "reference": "058c0ab98e6955e56d44fca38c2b4c8862369789",
                 "shasum": ""
             },
             "require": {
@@ -849,7 +1815,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-18 20:32:44",
+            "time": "2013-01-20 18:19:01",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -893,12 +1859,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle",
-                "reference": "c8a558c8be571376da0b5811fa298373f977f55a"
+                "reference": "128d3aa1ea65f0615339f20f15f154bd2e7224bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/AsseticBundle/archive/c8a558c8be571376da0b5811fa298373f977f55a.zip",
-                "reference": "c8a558c8be571376da0b5811fa298373f977f55a",
+                "url": "https://github.com/symfony/AsseticBundle/archive/128d3aa1ea65f0615339f20f15f154bd2e7224bb.zip",
+                "reference": "128d3aa1ea65f0615339f20f15f154bd2e7224bb",
                 "shasum": ""
             },
             "require": {
@@ -918,7 +1884,7 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-14 20:08:42",
+            "time": "2013-01-19 21:58:23",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1069,12 +2035,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "9223c5acfd7fca9f9c24994d1f872b630396dc44"
+                "reference": "fada75c42051fde399a4aee30fb0eef757b8992a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/archive/9223c5acfd7fca9f9c24994d1f872b630396dc44.zip",
-                "reference": "9223c5acfd7fca9f9c24994d1f872b630396dc44",
+                "url": "https://github.com/symfony/symfony/archive/fada75c42051fde399a4aee30fb0eef757b8992a.zip",
+                "reference": "fada75c42051fde399a4aee30fb0eef757b8992a",
                 "shasum": ""
             },
             "require": {
@@ -1123,7 +2089,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": ">=1.0,<1.3-dev"
             },
-            "time": "2013-01-18 16:11:07",
+            "time": "2013-01-20 08:33:14",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -1245,6 +2211,49 @@
             "homepage": "http://twig.sensiolabs.org",
             "keywords": [
                 "templating"
+            ]
+        },
+        {
+            "name": "white-october/pagerfanta-bundle",
+            "version": "dev-master",
+            "target-dir": "WhiteOctober/PagerfantaBundle",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
+                "reference": "38e317a3ecd5a68e2322024ea8fe57632d4ddd68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle/archive/38e317a3ecd5a68e2322024ea8fe57632d4ddd68.zip",
+                "reference": "38e317a3ecd5a68e2322024ea8fe57632d4ddd68",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "2.*",
+                "pagerfanta/pagerfanta": "dev-master"
+            },
+            "time": "2012-07-24 12:48:41",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "WhiteOctober\\PagerfantaBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com",
+                    "homepage": "http://github.com/pablodip"
+                }
+            ],
+            "description": "Bundle to use Pagerfanta with Symfony2",
+            "keywords": [
+                "page",
+                "paging"
             ]
         }
     ],

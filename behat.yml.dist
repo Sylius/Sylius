@@ -6,6 +6,8 @@ default:
     extensions:
         Behat\MinkExtension\Extension:
             default_session: symfony2
+            show_cmd: firefox %s
+            show_auto: true
         Behat\Symfony2Extension\Extension:
             kernel:
                 path: sylius/SyliusKernel.php
