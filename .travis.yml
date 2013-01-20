@@ -11,7 +11,7 @@ matrix:
 
 before_script: 
     - cp sylius/config/container/parameters.yml.dist sylius/config/container/parameters.yml
-    - composer install --dev --prefer-dist -q
+    - composer install --dev --prefer-source > /dev/null
     - sylius/console do:da:cr -e=testing > /dev/null
     - sylius/console do:sc:cr -e=testing > /dev/null
 
