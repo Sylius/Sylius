@@ -4,7 +4,7 @@
 sylius_addressing_zone_list:
     pattern: /
     defaults:
-        _controller: sylius_addressing.controller.zone:getCollectionAction
+        _controller: sylius_addressing.controller.zone:indexAction
 
 sylius_addressing_zone_create:
     pattern: /create

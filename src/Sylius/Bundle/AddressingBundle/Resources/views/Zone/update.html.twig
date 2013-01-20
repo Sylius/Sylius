@@ -1,4 +1,4 @@
-{% extends 'SyliusAddressingBundle::layout.html.twig' %}
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
 
 {% block sylius_addressing_javascripts %}
 {% javascripts
@@ -9,11 +9,9 @@
 {% endjavascripts %}
 {% endblock %}
 
-{% block sylius_addressing_header %}
+{% block sylius_content %}
     <h1>Zone updating <small>Use this form to edit existing zone</small></h1>
-{% endblock %}
-
-{% block sylius_addressing_content %}
+<hr />
 <form action="{{ path('sylius_addressing_zone_update', {'id': zone.id}) }}" method="post" class="form-horizontal">
     {% include 'SyliusAddressingBundle:Zone:_form.html.twig' %}
     <div class="form-actions">

@@ -1,0 +1,24 @@
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
+
+{% import 'SyliusAddressingBundle:Country:macros.html.twig' as macros %}
+
+{% block sylius_content %}
+    <h1>Countries list <small>Here you can configure countries and provinces</small></h1>
+    <hr />
+
+    <div class="well">
+        <a href="{{ path('sylius_addressing_country_create') }}" class="btn btn-primary">
+            <i class="icon-plus icon-white"></i> add country
+        </a>
+    </div>
+
+    {% if countries.haveToPaginate()|default(false) %}
+        {{ pagerfanta(countries, 'twitter_bootstrap_translated') }}
+    {% endif %}
+
+    {{ macros.list(countries) }}
+
+    {% if countries.haveToPaginate() %}
+        {{ pagerfanta(countries, 'twitter_bootstrap_translated') }}
+    {% endif %}
+{% endblock %}

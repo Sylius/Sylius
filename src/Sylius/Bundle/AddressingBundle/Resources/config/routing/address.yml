@@ -4,7 +4,7 @@
 sylius_addressing_address_list:
     pattern: /list
     defaults:
-        _controller: sylius_addressing.controller.address:getCollectionAction
+        _controller: sylius_addressing.controller.address:indexAction
         _sylius.resource:
             sortable: true
             sorting:
@@ -28,4 +28,4 @@ sylius_addressing_address_delete:
 sylius_addressing_address_show:
     pattern: /{id}
     defaults:
-        _controller: sylius_addressing.controller.address:getAction
+        _controller: sylius_addressing.controller.address:showAction

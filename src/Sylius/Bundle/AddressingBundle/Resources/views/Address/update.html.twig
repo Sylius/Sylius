@@ -1,25 +1,24 @@
-{% extends 'SyliusAddressingBundle::layout.html.twig' %}
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
 
 {% block sylius_addressing_javascripts %}
-{% javascripts
-    '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing.js'
-%}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+    {% javascripts
+        '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing.js'
+    %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
-{% block sylius_addressing_header %}
+{% block sylius_content %}
     <h1>Address updating <small>Use this form to edit existing address</small></h1>
-{% endblock %}
+    <hr />
 
-{% block sylius_addressing_content %}
-<form action="{{ path('sylius_addressing_address_update', {'id': address.id}) }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusAddressingBundle:Address:_form.html.twig' %}
-    <div class="form-actions">
-       <input type="submit" value="save changes" class="btn btn-large btn-primary" />
-       &nbsp;
-       <a href="{{ path('sylius_addressing_address_show', {'id': address.id})}}" class="btn btn-large">cancel</a>
-    </div>
-</form>
+    <form action="{{ path('sylius_addressing_address_update', {'id': address.id}) }}" method="post" class="form-horizontal" novalidate>
+        {% include 'SyliusAddressingBundle:Address:_form.html.twig' %}
+        <div class="form-actions">
+            <input type="submit" value="save changes" class="btn btn-large btn-primary" />
+            &nbsp;
+            <a href="{{ path('sylius_addressing_address_show', {'id': address.id})}}" class="btn btn-large">cancel</a>
+        </div>
+    </form>
 {% endblock %}
