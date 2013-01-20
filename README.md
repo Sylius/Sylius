@@ -2,7 +2,7 @@ Sylius [![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch
 ======
 
 Sylius is ecommerce solution for [Symfony2 framework](http://symfony.com)...
-See the [DEMO](http://demo.sylius.org).
+See the [DEMO](http://sylius.org/sandbox/).
 
 Quick installation
 ------------------
