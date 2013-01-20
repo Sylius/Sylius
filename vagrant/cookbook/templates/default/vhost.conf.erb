@@ -1,0 +1,12 @@
+# Override the Apache User (vhosts are included at the end of apache2.conf)
+User vagrant
+Group vagrant
+
+<VirtualHost *:80>
+  Servername sylius.lo
+  Serveralias 172.33.33.33
+  DocumentRoot /mnt/sylius/web
+  <Directory "/mnt/sylius/web">
+    AllowOverride All
+  </Directory>
+</VirtualHost>
