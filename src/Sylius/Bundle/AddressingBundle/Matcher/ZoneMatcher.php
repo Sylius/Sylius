@@ -58,9 +58,9 @@ class ZoneMatcher implements ZoneMatcherInterface
             ZoneInterface::TYPE_ZONE
         );
 
-        foreach ($priorities as $piority) {
-            if (isset($zones[$piority])) {
-                return $zones[$piority];
+        foreach ($priorities as $priority) {
+            if (isset($zones[$priority])) {
+                return $zones[$priority];
             }
         }
     }
