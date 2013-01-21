@@ -59,30 +59,8 @@ class ZoneMatcher implements ZoneMatcherInterface
     {
         $zones = array();
         foreach ($this->getZones() as $zone) {
-            $zones = $this->matchAllInZone($address, $zone, $zones);
-        }
-
-        return $zones;
-    }
-
-    /**
-     * Returns all matching zones for address in given zone.
-     *
-     * @param AddressInterface $address
-     * @param ZoneInterface    $zone
-     * @param array            $zones
-     *
-     * @return ZoneInterface[]
-     */
-    protected function matchAllInZone(AddressInterface $address, ZoneInterface $zone, array $zones)
-    {
-        if ($this->addressBelongsToZone($address, $zone)) {
-            $zones[] = $zone;
-
-            foreach ($zone->getMembers() as $member) {
-                if (ZoneInterface::TYPE_ZONE === $zone->getType()) {
-                    $zones = $this->matchAllInZone($address, $member->getZone(), $zones);
-                }
+            if ($this->addressBelongsToZone($address, $zone)) {
+                $zones[] = $zone;
             }
         }
 
