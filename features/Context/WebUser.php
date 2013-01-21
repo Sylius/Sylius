@@ -14,9 +14,11 @@ namespace Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Mink\Exception\ElementNotFoundException;
 use FOS\RestBundle\Util\Pluralization;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Locale\Locale;
 
 /**
  * Web user context.
@@ -33,6 +35,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     protected $repositories = array(
         'tax_category' => 'sylius_taxation.repository.category',
         'tax_rate'     => 'sylius_taxation.repository.rate',
+        'country'      => 'sylius_addressing.repository.country',
     );
 
     /**
@@ -247,9 +250,8 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function iShouldSeeThatMuchItemsInThatList($amount, $item)
     {
-        $actual = $this->getCountOfItemsByName($item);
-
-        assertEquals($amount, $actual, sprintf('Failed asserting there are %d %s in the list, in reality they are "%s"', $amount, $item, $actual));
+        $items = str_replace(' ', '-', Pluralization::pluralize($item));
+        $this->assertElementsCount(sprintf('table tbody tr.%s-row', $items), $amount);
     }
 
     /**
@@ -290,14 +292,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function thereAreNoTaxCategories()
     {
-        $repository = $this->getService('sylius_taxation.repository.category');
-        $manager = $this->getService('sylius_taxation.manager.category');
-
-        foreach ($repository->findAll() as $category) {
-            $manager->remove($category);
-        }
-
-        $manager->flush();
+        $this->thereAreNoItems('sylius_taxation', 'category');
     }
 
     /**
@@ -312,6 +307,22 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $category->setName($name);
 
         $manager->persist($category);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^I created country "([^""]*)"$/
+     */
+    public function iCreatedCountry($name)
+    {
+        $repository = $this->getService('sylius_addressing.repository.country');
+        $manager = $this->getService('sylius_addressing.manager.country');
+
+        $country = $repository->createNew();
+        $country->setName($name);
+        $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+
+        $manager->persist($country);
         $manager->flush();
     }
 
@@ -343,14 +354,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function thereAreNoTaxRates()
     {
-        $repository = $this->getService('sylius_taxation.repository.rate');
-        $manager = $this->getService('sylius_taxation.manager.rate');
-
-        foreach ($repository->findAll() as $rate) {
-            $manager->remove($rate);
-        }
-
-        $manager->flush();
+        $this->thereAreNoItems('sylius_taxation', 'rate');
     }
 
     /**
@@ -368,6 +372,55 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $rate->setCalculator('default');
 
         $manager->persist($rate);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^there are following countries:$/
+     */
+    public function thereAreFollowingCountries(TableNode $table)
+    {
+        $repository = $this->getService('sylius_addressing.repository.country');
+        $manager = $this->getService('sylius_addressing.manager.country');
+
+        foreach ($table->getHash() as $data) {
+            $country = $repository->createNew();
+
+            $country->setName($data['name']);
+            $country->setIsoName($data['iso']);
+
+            $manager->persist($country);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^there are no countries$/
+     */
+    public function thereAreNoCountries()
+    {
+        $this->thereAreNoItems('sylius_addressing', 'country');
+    }
+
+    /**
+     * @Given /^there are following provinces:$/
+     */
+    public function thereAreFollowingProvinces(TableNode $table)
+    {
+        $countryRepository = $this->getService('sylius_addressing.repository.country');
+        $repository = $this->getService('sylius_addressing.repository.province');
+        $manager = $this->getService('sylius_addressing.manager.province');
+
+        foreach ($table->getHash() as $data) {
+            $province = $repository->createNew();
+
+            $province->setName($data['name']);
+            $province->setCountry($countryRepository->findOneByIsoName($data['country']));
+
+            $manager->persist($province);
+        }
+
         $manager->flush();
     }
 
@@ -449,6 +502,23 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         return $path;
     }
 
+    protected function thereAreNoItems($prefix, $item)
+    {
+        $repository = $this->getService($prefix.'.repository.'.$item);
+        $manager = $this->getService($prefix.'.manager.'.$item);
+
+        foreach ($repository->findAll() as $rate) {
+            $manager->remove($rate);
+        }
+
+        $manager->flush();
+    }
+
+    protected function assertElementsCount($selector, $count)
+    {
+        $this->assertSession()->elementsCount('css', $selector, $count);
+    }
+
     /**
      * Fetch all the values of a column inside a table
      *
@@ -474,21 +544,6 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         throw new ElementNotFoundException(
             $this->getSession(), 'table element', 'th', $columnName
         );
-    }
-
-    /**
-     * Get total number of rows by item name.
-     *
-     * @param string $items
-     *
-     * @return integer
-     */
-    protected function getCountOfItemsByName($items)
-    {
-        $items = str_replace(' ', '-', Pluralization::pluralize($items));
-        $nodes = $this->getSession()->getPage()->findAll('css', sprintf('tr.%s-row', $items));
-
-        return count($nodes);
     }
 
     /**

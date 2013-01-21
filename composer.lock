@@ -438,12 +438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle",
-                "reference": "21733cca032528f44dcfe2fca35a006530183b41"
+                "reference": "3e7dce36d822f6863dc2063e07f9d864d2124890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/21733cca032528f44dcfe2fca35a006530183b41.zip",
-                "reference": "21733cca032528f44dcfe2fca35a006530183b41",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/3e7dce36d822f6863dc2063e07f9d864d2124890.zip",
+                "reference": "3e7dce36d822f6863dc2063e07f9d864d2124890",
                 "shasum": ""
             },
             "require": {
@@ -466,7 +466,7 @@
                 "sensio/framework-extra-bundle": "Add support for route annotations and the view response listener",
                 "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 1.0.*"
             },
-            "time": "2013-01-19 18:50:47",
+            "time": "2013-01-21 08:32:22",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1397,22 +1397,22 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/php-option",
-                "reference": "617bd84bf0d918da79b06ac6765b5390b83b1321"
+                "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/php-option/archive/617bd84bf0d918da79b06ac6765b5390b83b1321.zip",
-                "reference": "617bd84bf0d918da79b06ac6765b5390b83b1321",
+                "url": "https://github.com/schmittjoh/php-option/archive/c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27.zip",
+                "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2013-01-19 11:01:32",
+            "time": "2013-01-21 09:59:49",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -1598,18 +1598,81 @@
             ]
         },
         {
+            "name": "sylius/addressing-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/AddressingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
+                "reference": "100d292c849dda56cdd28a49197e1c99908edc3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusAddressingBundle/archive/100d292c849dda56cdd28a49197e1c99908edc3c.zip",
+                "reference": "100d292c849dda56cdd28a49197e1c99908edc3c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0",
+                "doctrine/orm": ">=2.3,<3.0"
+            },
+            "time": "2013-01-20 20:29:57",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\AddressingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusAddressingBundle/contributors"
+                }
+            ],
+            "description": "Addressing and zone management for Symfony2 applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "address",
+                "addressing",
+                "zones"
+            ]
+        },
+        {
             "name": "sylius/core-bundle",
             "version": "dev-master",
             "target-dir": "Sylius/Bundle/CoreBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "036b90218f4d4981fc707bcf4ea525766d7f9335"
+                "reference": "296925f7eb4e389a72e32499f0775ed229c8b9d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/036b90218f4d4981fc707bcf4ea525766d7f9335.zip",
-                "reference": "036b90218f4d4981fc707bcf4ea525766d7f9335",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/296925f7eb4e389a72e32499f0775ed229c8b9d9.zip",
+                "reference": "296925f7eb4e389a72e32499f0775ed229c8b9d9",
                 "shasum": ""
             },
             "require": {
@@ -1617,12 +1680,13 @@
                 "symfony/framework-bundle": ">=2.1,<3.0",
                 "sylius/taxation-bundle": "0.1.*",
                 "jms/serializer-bundle": "1.0.*",
-                "fzaninotto/faker": "1.1.*"
+                "fzaninotto/faker": "1.1.*",
+                "sylius/addressing-bundle": "0.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-20 18:49:35",
+            "time": "2013-01-20 20:38:17",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {

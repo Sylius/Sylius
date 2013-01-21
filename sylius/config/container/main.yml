@@ -52,3 +52,6 @@ swiftmailer:
 
 sylius_taxation:
     driver: doctrine/orm
+
+sylius_addressing:
+    driver: doctrine/orm
