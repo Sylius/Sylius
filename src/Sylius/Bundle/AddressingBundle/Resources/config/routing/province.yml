@@ -5,15 +5,13 @@ sylius_addressing_province_create:
     pattern: /create
     defaults:
         _controller: sylius_addressing.controller.province:createAction
-        _sylius.resource:
-            redirect: sylius_addressing_country_list
+        _redirect: sylius_addressing_country_list
 
 sylius_addressing_province_update:
     pattern: /{id}/update
     defaults:
         _controller: sylius_addressing.controller.province:updateAction
-        _sylius.resource:
-            redirect: sylius_addressing_country_list
+        _redirect: sylius_addressing_country_list
 
 sylius_addressing_province_delete:
     pattern: /{id}/delete

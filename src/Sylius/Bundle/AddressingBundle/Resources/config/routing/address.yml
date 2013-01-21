@@ -2,13 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius_addressing_address_list:
-    pattern: /list
+    pattern: /
     defaults:
         _controller: sylius_addressing.controller.address:indexAction
-        _sylius.resource:
-            sortable: true
-            sorting:
-                updatedAt: desc
+        _sortable: true
+        _sorting:
+            updatedAt: desc
 
 sylius_addressing_address_create:
     pattern: /create
