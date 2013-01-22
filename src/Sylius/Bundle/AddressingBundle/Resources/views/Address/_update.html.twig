@@ -1,0 +1,11 @@
+<h1>Address updating <small>Use this form to edit existing address</small></h1>
+<hr />
+
+<form action="{{ path('sylius_addressing_address_update', {'id': address.id}) }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusAddressingBundle:Address:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="save changes" class="btn btn-large btn-primary" />
+        &nbsp;
+        <a href="{{ path('sylius_addressing_address_show', {'id': address.id})}}" class="btn btn-large">cancel</a>
+    </div>
+</form>
