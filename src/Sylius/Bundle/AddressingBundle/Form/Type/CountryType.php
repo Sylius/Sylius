@@ -51,6 +51,13 @@ class CountryType extends AbstractType
             ->add('isoName', 'text', array(
                 'label' => 'sylius_addressing.label.country.iso_name'
             ))
+            ->add('provinces', 'collection', array(
+                'type'         => 'sylius_addressing_province',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label'        => 'sylius_addressing.label.country.provinces'
+            ))
         ;
     }
 
