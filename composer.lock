@@ -1,5 +1,5 @@
 {
-    "hash": "4b61830d80b950065e1ab4fd580b3ee2",
+    "hash": "e9af27dd6139ece90fd80dc2ed81cb5a",
     "packages": [
         {
             "name": "doctrine/common",
@@ -316,12 +316,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/doctrine2.git",
-                "reference": "6829c464e88cccd7a2a0714e42e95f3930b38e37"
+                "reference": "fdd0af34e6fced967b8751bc3e4792c11ef86d57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/doctrine2/archive/6829c464e88cccd7a2a0714e42e95f3930b38e37.zip",
-                "reference": "6829c464e88cccd7a2a0714e42e95f3930b38e37",
+                "url": "https://github.com/doctrine/doctrine2/archive/fdd0af34e6fced967b8751bc3e4792c11ef86d57.zip",
+                "reference": "fdd0af34e6fced967b8751bc3e4792c11ef86d57",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
-            "time": "2013-01-12 09:32:44",
+            "time": "2013-01-20 19:35:21",
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -438,12 +438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle",
-                "reference": "21733cca032528f44dcfe2fca35a006530183b41"
+                "reference": "3e7dce36d822f6863dc2063e07f9d864d2124890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/21733cca032528f44dcfe2fca35a006530183b41.zip",
-                "reference": "21733cca032528f44dcfe2fca35a006530183b41",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/3e7dce36d822f6863dc2063e07f9d864d2124890.zip",
+                "reference": "3e7dce36d822f6863dc2063e07f9d864d2124890",
                 "shasum": ""
             },
             "require": {
@@ -466,7 +466,7 @@
                 "sensio/framework-extra-bundle": "Add support for route annotations and the view response listener",
                 "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 1.0.*"
             },
-            "time": "2013-01-19 18:50:47",
+            "time": "2013-01-21 08:32:22",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -919,12 +919,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/serializer",
-                "reference": "f319887562c3334c9bc54bd797034792e2cbf4ed"
+                "reference": "2f1b79ef332f83d16aea102e1c7bf41f36a6df28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/serializer/archive/f319887562c3334c9bc54bd797034792e2cbf4ed.zip",
-                "reference": "f319887562c3334c9bc54bd797034792e2cbf4ed",
+                "url": "https://github.com/schmittjoh/serializer/archive/2f1b79ef332f83d16aea102e1c7bf41f36a6df28.zip",
+                "reference": "2f1b79ef332f83d16aea102e1c7bf41f36a6df28",
                 "shasum": ""
             },
             "require": {
@@ -946,7 +946,7 @@
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize data to YAML format."
             },
-            "time": "2013-01-20 09:06:41",
+            "time": "2013-01-21 19:56:19",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1397,22 +1397,22 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/php-option",
-                "reference": "617bd84bf0d918da79b06ac6765b5390b83b1321"
+                "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/php-option/archive/617bd84bf0d918da79b06ac6765b5390b83b1321.zip",
-                "reference": "617bd84bf0d918da79b06ac6765b5390b83b1321",
+                "url": "https://github.com/schmittjoh/php-option/archive/c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27.zip",
+                "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2013-01-19 11:01:32",
+            "time": "2013-01-21 09:59:49",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -1598,18 +1598,81 @@
             ]
         },
         {
+            "name": "sylius/addressing-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/AddressingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
+                "reference": "2d981055864df304a03418da0bc3882c9c386fb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusAddressingBundle/archive/2d981055864df304a03418da0bc3882c9c386fb5.zip",
+                "reference": "2d981055864df304a03418da0bc3882c9c386fb5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0",
+                "doctrine/orm": ">=2.3,<3.0"
+            },
+            "time": "2013-01-22 11:53:37",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\AddressingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusAddressingBundle/contributors"
+                }
+            ],
+            "description": "Addressing and zone management for Symfony2 applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "address",
+                "addressing",
+                "zones"
+            ]
+        },
+        {
             "name": "sylius/core-bundle",
             "version": "dev-master",
             "target-dir": "Sylius/Bundle/CoreBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "036b90218f4d4981fc707bcf4ea525766d7f9335"
+                "reference": "296925f7eb4e389a72e32499f0775ed229c8b9d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/036b90218f4d4981fc707bcf4ea525766d7f9335.zip",
-                "reference": "036b90218f4d4981fc707bcf4ea525766d7f9335",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/296925f7eb4e389a72e32499f0775ed229c8b9d9.zip",
+                "reference": "296925f7eb4e389a72e32499f0775ed229c8b9d9",
                 "shasum": ""
             },
             "require": {
@@ -1617,12 +1680,13 @@
                 "symfony/framework-bundle": ">=2.1,<3.0",
                 "sylius/taxation-bundle": "0.1.*",
                 "jms/serializer-bundle": "1.0.*",
-                "fzaninotto/faker": "1.1.*"
+                "fzaninotto/faker": "1.1.*",
+                "sylius/addressing-bundle": "0.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-20 18:49:35",
+            "time": "2013-01-20 20:38:17",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1798,12 +1862,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "058c0ab98e6955e56d44fca38c2b4c8862369789"
+                "reference": "7b3eb20c9de7a043ed6df67a97651afd2f178643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/058c0ab98e6955e56d44fca38c2b4c8862369789.zip",
-                "reference": "058c0ab98e6955e56d44fca38c2b4c8862369789",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/7b3eb20c9de7a043ed6df67a97651afd2f178643.zip",
+                "reference": "7b3eb20c9de7a043ed6df67a97651afd2f178643",
                 "shasum": ""
             },
             "require": {
@@ -1815,7 +1879,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-20 18:19:01",
+            "time": "2013-01-22 11:57:40",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2035,12 +2099,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "fada75c42051fde399a4aee30fb0eef757b8992a"
+                "reference": "bdc7e91865b4633b01e79ff91aadb58efccfa981"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/archive/fada75c42051fde399a4aee30fb0eef757b8992a.zip",
-                "reference": "fada75c42051fde399a4aee30fb0eef757b8992a",
+                "url": "https://github.com/symfony/symfony/archive/bdc7e91865b4633b01e79ff91aadb58efccfa981.zip",
+                "reference": "bdc7e91865b4633b01e79ff91aadb58efccfa981",
                 "shasum": ""
             },
             "require": {
@@ -2089,7 +2153,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": ">=1.0,<1.3-dev"
             },
-            "time": "2013-01-20 08:33:14",
+            "time": "2013-01-22 07:14:57",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -2532,6 +2596,54 @@
             ]
         },
         {
+            "name": "behat/mink-selenium2-driver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/Behat/MinkSelenium2Driver.git",
+                "reference": "e604ce91d65d01233b3f41ca58847c30138e6867"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Behat/MinkSelenium2Driver/archive/e604ce91d65d01233b3f41ca58847c30138e6867.zip",
+                "reference": "e604ce91d65d01233b3f41ca58847c30138e6867",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "instaclick/php-webdriver": "@dev",
+                "behat/mink": "1.4.*"
+            },
+            "time": "2012-11-21 18:42:20",
+            "type": "mink-driver",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink\\Driver": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Selenium2 (WebDriver) driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "javascript",
+                "testing",
+                "browser",
+                "ajax",
+                "selenium",
+                "webdriver"
+            ]
+        },
+        {
             "name": "behat/symfony2-extension",
             "version": "dev-master",
             "source": {
@@ -2580,6 +2692,55 @@
                 "framework",
                 "symfony",
                 "BDD"
+            ]
+        },
+        {
+            "name": "instaclick/php-webdriver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/instaclick/php-webdriver",
+                "reference": "1.0.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.11.zip",
+                "reference": "1.0.11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "time": "2012-12-02 22:08:47",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "WebDriver": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Bishop",
+                    "email": "jubishop@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anthon Pang",
+                    "email": "apang@softwaredevelopment.ca",
+                    "role": "Fork Maintainer"
+                }
+            ],
+            "description": "PHP WebDriver for Selenium 2",
+            "homepage": "http://instaclick.com/torontotechjobs/",
+            "keywords": [
+                "browser",
+                "selenium",
+                "webdriver",
+                "webtest"
             ]
         },
         {

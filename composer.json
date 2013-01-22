@@ -36,7 +36,8 @@
         "behat/symfony2-extension":          "*",
         "behat/mink-extension":              "*",
         "behat/mink-browserkit-driver":      "*",
-        "phpspec/phpspec2":                  "dev-develop"
+        "phpspec/phpspec2":                  "dev-develop",
+        "behat/mink-selenium2-driver":       "*"
     },
     "scripts": {
         "post-install-cmd": [

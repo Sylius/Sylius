@@ -14,9 +14,13 @@ namespace Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Driver\Selenium2Driver;
 use FOS\RestBundle\Util\Pluralization;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Locale\Locale;
 
 /**
  * Web user context.
@@ -33,6 +37,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     protected $repositories = array(
         'tax_category' => 'sylius_taxation.repository.category',
         'tax_rate'     => 'sylius_taxation.repository.rate',
+        'country'      => 'sylius_addressing.repository.country',
     );
 
     /**
@@ -85,7 +90,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         }
 
         $this->assertSession()->addressEquals($this->generatePageUrl($page, $parameters));
-        $this->assertSession()->statusCodeEquals(200);
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -108,7 +113,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $resource = $this->findOneByName($type, $name);
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_show', $type), array('id' => $resource->getId())));
-        $this->assertSession()->statusCodeEquals(200);
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -118,6 +123,14 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function iShouldSeeText($text)
     {
         $this->assertSession()->pageTextContains($text);
+    }
+    /**
+     * @Then /^I should not see "([^"]*)"$/
+     * @Then /^(?:.* )?"([^"]*)" should not appear on the page$/
+     */
+    public function iShouldNotSeeText($text)
+    {
+        $this->assertSession()->pageTextNotContains($text);
     }
 
     /**
@@ -134,6 +147,32 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function iFillInFieldWith($field, $value)
     {
         $this->getSession()->getPage()->fillField($field, $value);
+    }
+
+    /**
+     * @Given /^I fill in province name with "([^"]*)"$/
+     */
+    public function iFillInProvinceNameWith($value)
+    {
+        $this->iFillInFieldWith('sylius_addressing_country[provinces][0][name]', $value);
+    }
+
+    /**
+     * @Given /^I delete ([^""]*) "([^"]*)"$/
+     */
+    public function iDeleteRowInTable($items, $value)
+    {
+        $column = ucfirst(Pluralization::pluralize($items));
+
+        foreach ($this->getActualValuesInTableByColumnName($items, $column) as $position => $actual) {
+            if ($actual === $value) {
+                $elements = $this->getActualElementsInTable($items, count($this->getActualHeadersInTable($items)) - 1);
+                $elements[$position]->findLink('Delete')->click();
+                return;
+            }
+        }
+
+        throw new ExpectationException(sprintf('Delete button not found for given %s.', $items), $this->getSession());
     }
 
     /**
@@ -247,9 +286,8 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function iShouldSeeThatMuchItemsInThatList($amount, $item)
     {
-        $actual = $this->getCountOfItemsByName($item);
-
-        assertEquals($amount, $actual, sprintf('Failed asserting there are %d %s in the list, in reality they are "%s"', $amount, $item, $actual));
+        $items = str_replace(' ', '-', Pluralization::pluralize($item));
+        $this->assertElementsCount(sprintf('table tbody tr.%s-row', $items), $amount);
     }
 
     /**
@@ -290,14 +328,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function thereAreNoTaxCategories()
     {
-        $repository = $this->getService('sylius_taxation.repository.category');
-        $manager = $this->getService('sylius_taxation.manager.category');
-
-        foreach ($repository->findAll() as $category) {
-            $manager->remove($category);
-        }
-
-        $manager->flush();
+        $this->thereAreNoItems('sylius_taxation', 'category');
     }
 
     /**
@@ -312,6 +343,22 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $category->setName($name);
 
         $manager->persist($category);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^I created country "([^""]*)"$/
+     */
+    public function iCreatedCountry($name)
+    {
+        $repository = $this->getService('sylius_addressing.repository.country');
+        $manager = $this->getService('sylius_addressing.manager.country');
+
+        $country = $repository->createNew();
+        $country->setName($name);
+        $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+
+        $manager->persist($country);
         $manager->flush();
     }
 
@@ -343,14 +390,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function thereAreNoTaxRates()
     {
-        $repository = $this->getService('sylius_taxation.repository.rate');
-        $manager = $this->getService('sylius_taxation.manager.rate');
-
-        foreach ($repository->findAll() as $rate) {
-            $manager->remove($rate);
-        }
-
-        $manager->flush();
+        $this->thereAreNoItems('sylius_taxation', 'rate');
     }
 
     /**
@@ -369,6 +409,42 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
 
         $manager->persist($rate);
         $manager->flush();
+    }
+
+    /**
+     * @Given /^there are following countries:$/
+     */
+    public function thereAreFollowingCountries(TableNode $table)
+    {
+        $repository = $this->getService('sylius_addressing.repository.country');
+        $manager = $this->getService('sylius_addressing.manager.country');
+        $provinceRepository = $this->getService('sylius_addressing.repository.province');
+
+        foreach ($table->getHash() as $data) {
+            $country = $repository->createNew();
+
+            $country->setName($data['name']);
+            $country->setIsoName($data['iso']);
+
+            foreach (explode(',', $data['provinces']) as $provinceName) {
+                $province = $provinceRepository->createNew();
+                $province->setName(trim($provinceName));
+
+                $country->addProvince($province);
+            }
+
+            $manager->persist($country);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^there are no countries$/
+     */
+    public function thereAreNoCountries()
+    {
+        $this->thereAreNoItems('sylius_addressing', 'country');
     }
 
     /**
@@ -449,6 +525,30 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         return $path;
     }
 
+    protected function thereAreNoItems($prefix, $item)
+    {
+        $repository = $this->getService($prefix.'.repository.'.$item);
+        $manager = $this->getService($prefix.'.manager.'.$item);
+
+        foreach ($repository->findAll() as $rate) {
+            $manager->remove($rate);
+        }
+
+        $manager->flush();
+    }
+
+    protected function assertStatusCodeEquals($code)
+    {
+        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+            $this->assertSession()->statusCodeEquals($code);
+        }
+    }
+
+    protected function assertElementsCount($selector, $count)
+    {
+        $this->assertSession()->elementsCount('css', $selector, $count);
+    }
+
     /**
      * Fetch all the values of a column inside a table
      *
@@ -462,10 +562,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     protected function getActualValuesInTableByColumnName($items, $columnName)
     {
-        $id = str_replace(' ', '-', Pluralization::pluralize($items));
-        $rows = $this->getSession()->getPage()->findAll('css', sprintf('table#%s thead tr th', $id));
-
-        foreach ($rows as $key => $row) {
+        foreach ($this->getActualHeadersInTable($items) as $key => $row) {
             if ($row->getText() === $columnName) {
                 return $this->getActualValuesInTable($items, $key);
             }
@@ -477,18 +574,40 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * Get total number of rows by item name.
+     * Fetch all headers from table.
      *
-     * @param string $items
+     * @param $items string the items name
      *
-     * @return integer
+     * @return array
      */
-    protected function getCountOfItemsByName($items)
+    protected function getActualHeadersInTable($items)
+    {
+        $id = str_replace(' ', '-', Pluralization::pluralize($items));
+
+        return $this->getSession()->getPage()->findAll('css', sprintf('table#%s thead tr th', $id));
+    }
+
+    /**
+     * Fetch all the elements of a column inside a table
+     *
+     * @param $items  The name of the items to fetch
+     * @param $column The index of the column
+     *                from where we're getting the values
+     *
+     * @return Behat\Mink\Element\NodeElement[]
+     */
+    protected function getActualElementsInTable($items, $column)
     {
         $items = str_replace(' ', '-', Pluralization::pluralize($items));
-        $nodes = $this->getSession()->getPage()->findAll('css', sprintf('tr.%s-row', $items));
+        $rows = $this->getSession()->getPage()->findAll('css', sprintf('table#%s tbody tr', $items));
 
-        return count($nodes);
+        $elements = array();
+        foreach ($rows as $row) {
+            $cols = $row->findAll('css', 'td');
+            $elements[] = $cols[$column];
+        }
+
+        return $elements;
     }
 
     /**
@@ -502,13 +621,9 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     protected function getActualValuesInTable($items, $column)
     {
-        $items = str_replace(' ', '-', Pluralization::pluralize($items));
-        $rows = $this->getSession()->getPage()->findAll('css', sprintf('table#%s tbody tr', $items));
-
         $values = array();
-        foreach ($rows as $row) {
-            $cols = $row->findAll('css', 'td');
-            $values[] = $cols[$column]->getText();
+        foreach ($this->getActualElementsInTable($items, $column) as $element) {
+            $values[] = $element->getText();
         }
 
         return $values;
