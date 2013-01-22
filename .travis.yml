@@ -17,10 +17,8 @@ before_script:
 
     - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/testgate.php'
 
-    - export DISPLAY=:99
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.28.0.jar
-    - java -jar selenium-server-standalone-2.28.0.jar > /dev/null &
-    - sh -e /etc/init.d/xvfb start
+    - java -jar selenium-server-standalone-2.28.0.jar > /dev/null
     - sleep 5
 
 script:
