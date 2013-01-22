@@ -43,6 +43,6 @@ sylius_addressing:
             max_length: "Province name must not be longer than 255 characters|Name must not be longer than 255 characters"
     zone:
         name:
-            not_blank: "Please zone enter name"
+            not_blank: "Please enter zone name"
             min_length: "Zone name must be at least 2 characters long|Name must be at least 2 characters long"
             max_length: "Zone name must not be longer than 255 characters|Name must not be longer than 255 characters"
