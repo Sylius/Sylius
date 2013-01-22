@@ -5,7 +5,8 @@ default:
         class: Context\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
-            selenium2: ~
+            selenium2:
+                browser: htmlunit
             default_session: symfony2
             base_url: "http://sylius.lo/testgate.php"
             show_cmd: firefox %s

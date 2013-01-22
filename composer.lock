@@ -919,12 +919,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/serializer",
-                "reference": "2f1b79ef332f83d16aea102e1c7bf41f36a6df28"
+                "reference": "68b5a27518d22188f6f42afaf7fc821419841f49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/serializer/archive/2f1b79ef332f83d16aea102e1c7bf41f36a6df28.zip",
-                "reference": "2f1b79ef332f83d16aea102e1c7bf41f36a6df28",
+                "url": "https://github.com/schmittjoh/serializer/archive/68b5a27518d22188f6f42afaf7fc821419841f49.zip",
+                "reference": "68b5a27518d22188f6f42afaf7fc821419841f49",
                 "shasum": ""
             },
             "require": {
@@ -946,7 +946,7 @@
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize data to YAML format."
             },
-            "time": "2013-01-21 19:56:19",
+            "time": "2013-01-22 10:24:33",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -987,12 +987,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "672f7086223dc3cfb03461bfa3964a62e5fa7c73"
+                "reference": "e33cd3069c84c1bb2727d2f27217333b0e3e5cae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/JMSSerializerBundle/archive/672f7086223dc3cfb03461bfa3964a62e5fa7c73.zip",
-                "reference": "672f7086223dc3cfb03461bfa3964a62e5fa7c73",
+                "url": "https://github.com/schmittjoh/JMSSerializerBundle/archive/e33cd3069c84c1bb2727d2f27217333b0e3e5cae.zip",
+                "reference": "e33cd3069c84c1bb2727d2f27217333b0e3e5cae",
                 "shasum": ""
             },
             "require": {
@@ -1017,7 +1017,7 @@
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize content to YAML format."
             },
-            "time": "2013-01-12 12:57:46",
+            "time": "2013-01-15 10:42:14",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1604,12 +1604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
-                "reference": "2d981055864df304a03418da0bc3882c9c386fb5"
+                "reference": "43b42a24ca80cb0195bc83658f7849e2948f1873"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusAddressingBundle/archive/2d981055864df304a03418da0bc3882c9c386fb5.zip",
-                "reference": "2d981055864df304a03418da0bc3882c9c386fb5",
+                "url": "https://github.com/Sylius/SyliusAddressingBundle/archive/43b42a24ca80cb0195bc83658f7849e2948f1873.zip",
+                "reference": "43b42a24ca80cb0195bc83658f7849e2948f1873",
                 "shasum": ""
             },
             "require": {
@@ -1623,7 +1623,7 @@
                 "symfony/form": ">=2.1,<3.0",
                 "doctrine/orm": ">=2.3,<3.0"
             },
-            "time": "2013-01-22 11:53:37",
+            "time": "2013-01-22 17:23:52",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1667,12 +1667,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "296925f7eb4e389a72e32499f0775ed229c8b9d9"
+                "reference": "a38ed2a46f87381026afd4c8c1562d9e11f05fff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/296925f7eb4e389a72e32499f0775ed229c8b9d9.zip",
-                "reference": "296925f7eb4e389a72e32499f0775ed229c8b9d9",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/a38ed2a46f87381026afd4c8c1562d9e11f05fff.zip",
+                "reference": "a38ed2a46f87381026afd4c8c1562d9e11f05fff",
                 "shasum": ""
             },
             "require": {
@@ -1686,7 +1686,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-20 20:38:17",
+            "time": "2013-01-22 17:04:57",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1862,12 +1862,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "7b3eb20c9de7a043ed6df67a97651afd2f178643"
+                "reference": "bc70ae998a9138b437b667777fccab08bbfc7558"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/7b3eb20c9de7a043ed6df67a97651afd2f178643.zip",
-                "reference": "7b3eb20c9de7a043ed6df67a97651afd2f178643",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/bc70ae998a9138b437b667777fccab08bbfc7558.zip",
+                "reference": "bc70ae998a9138b437b667777fccab08bbfc7558",
                 "shasum": ""
             },
             "require": {
@@ -1879,7 +1879,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-22 11:57:40",
+            "time": "2013-01-22 16:58:46",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {

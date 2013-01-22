@@ -21,6 +21,7 @@ use FOS\RestBundle\Util\Pluralization;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Locale\Locale;
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 
 /**
  * Web user context.
@@ -38,6 +39,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         'tax_category' => 'sylius_taxation.repository.category',
         'tax_rate'     => 'sylius_taxation.repository.rate',
         'country'      => 'sylius_addressing.repository.country',
+        'zone'         => 'sylius_addressing.repository.zone',
     );
 
     /**
@@ -111,6 +113,12 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     {
         $type = str_replace(' ', '_', $type);
         $resource = $this->findOneByName($type, $name);
+        if (null === $resource) {
+            throw new ExpectationException(
+                sprintf('%s with name "%s" not found.', ucfirst($type), $name),
+                $this->getSession()
+            );
+        }
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_show', $type), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
@@ -135,8 +143,9 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
 
     /**
      * @When /^I follow "([^"]+)"$/
+     * @When /^I click "([^"]+)"$/
      */
-    public function iFollow($link)
+    public function iClick($link)
     {
         $this->getSession()->getPage()->clickLink($link);
     }
@@ -351,15 +360,19 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function iCreatedCountry($name)
     {
-        $repository = $this->getService('sylius_addressing.repository.country');
-        $manager = $this->getService('sylius_addressing.manager.country');
+        $this->thereIsCountry($name);
 
-        $country = $repository->createNew();
-        $country->setName($name);
-        $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+        $this->getService('sylius_addressing.manager.country')->flush();
+    }
 
-        $manager->persist($country);
-        $manager->flush();
+    /**
+     * @Given /^I created zone "([^"]*)"$/
+     */
+    public function iCreatedZone($name)
+    {
+        $this->thereIsZone($name, ZoneInterface::TYPE_COUNTRY);
+
+        $this->getService('sylius_addressing.manager.zone')->flush();
     }
 
     /**
@@ -394,6 +407,26 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are following zones:$/
+     */
+    public function thereAreFollowingZones(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $zone = $this->thereIsZone($data['name'], $data['type'], explode(',', $data['members']));
+        }
+
+        $this->getService('sylius_addressing.manager.zone')->flush();
+    }
+
+    /**
+     * @Given /^there are no zones$/
+     */
+    public function thereAreNoZones()
+    {
+        $this->thereAreNoItems('sylius_addressing', 'zone');
+    }
+
+    /**
      * @Given /^I created tax rate "([^""]*)" for category "([^""]*)" with amount (\d+)%$/
      */
     public function iCreatedTaxRateWithAmount($name, $category, $amount)
@@ -421,19 +454,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $provinceRepository = $this->getService('sylius_addressing.repository.province');
 
         foreach ($table->getHash() as $data) {
-            $country = $repository->createNew();
-
-            $country->setName($data['name']);
-            $country->setIsoName($data['iso']);
-
-            foreach (explode(',', $data['provinces']) as $provinceName) {
-                $province = $provinceRepository->createNew();
-                $province->setName(trim($provinceName));
-
-                $country->addProvince($province);
-            }
-
-            $manager->persist($country);
+            $this->thereisCountry($data['name'], explode(',', $data['provinces']));
         }
 
         $manager->flush();
@@ -523,6 +544,61 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         }
 
         return $path;
+    }
+
+    private function thereisCountry($name, array $provinces = array())
+    {
+        $country = $this->getService('sylius_addressing.repository.country')->createNew();
+
+        $country->setName($name);
+        $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+
+        foreach ($provinces as $provinceName) {
+            $country->addProvince($this->thereisProvince($provinceName));
+        }
+
+        $this->getService('sylius_addressing.manager.country')->persist($country);
+
+        return $country;
+    }
+
+    private function thereisProvince($name)
+    {
+        $province = $this->getService('sylius_addressing.repository.province')->createNew();
+        $province->setName($name);
+
+        $this->getService('sylius_addressing.manager.province')->persist($province);
+
+        return $province;
+    }
+
+    private function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array())
+    {
+        $repository = $this->getService('sylius_addressing.repository.zone');
+
+        $zone = $repository->createNew();
+        $zone->setName($name);
+        $zone->setType($type);
+
+        foreach ($members as $memberName) {
+            $member = $this->getService('sylius_addressing.repository.zone_member_'.$type)->createNew();
+            if (ZoneInterface::TYPE_ZONE === $type) {
+                $zoneable = $repository->findOneByName($memberName);
+            } else {
+                $zoneable = call_user_func(array($this, 'thereIs'.ucfirst($type)), $memberName);
+            }
+
+            call_user_func(array(
+                $member, 'set'.ucfirst($type)),
+                $zoneable
+            );
+
+            $zone->addMember($member);
+        }
+
+        $this->getService('sylius_addressing.manager.zone')->persist($zone);
+
+        return $zone;
     }
 
     protected function thereAreNoItems($prefix, $item)

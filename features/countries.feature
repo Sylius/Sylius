@@ -5,10 +5,10 @@ Feature: Countries and provinces
     Background:
         Given I am logged in as administrator
         And there are following countries:
-          | name    | iso | provinces                       |
-          | France  | FR  | Lyon, Toulouse, Rennes, Nancy   |
-          | China   | CN  |                                 |
-          | Ukraine | UA  | Kiev, Odessa, Cherkasy, Kharkiv |
+          | name    | provinces                       |
+          | France  | Lyon, Toulouse, Rennes, Nancy   |
+          | China   |                                 |
+          | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
 
     Scenario: Seeing index of all countries
         Given I am on the dashboard page
