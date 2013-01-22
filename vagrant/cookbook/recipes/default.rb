@@ -1,18 +1,18 @@
-# Run apt-get update to create the stamp file
+# Run apt-get update to create the stamp file.
 execute "apt-get-update" do
   command "apt-get update"
   ignore_failure true
   not_if do ::File.exists?('/var/lib/apt/periodic/update-success-stamp') end
 end
 
-# For other recipes to call to force an update
+# For other recipes to call to force an update.
 execute "apt-get update" do
   command "apt-get update"
   ignore_failure true
   action :nothing
 end
 
-# provides /var/lib/apt/periodic/update-success-stamp on apt-get update
+# Provides /var/lib/apt/periodic/update-success-stamp on apt-get update.
 package "update-notifier-common" do
   notifies :run, resources(:execute => "apt-get-update"), :immediately
 end
@@ -26,7 +26,7 @@ execute "apt-get-update-periodic" do
   end
 end
 
-# install the software we need
+# Install the software we need.
 %w(
 curl
 apache2
@@ -35,6 +35,7 @@ git
 php5-cli
 php5-curl
 php5-sqlite
+php5-mysql
 php5-intl
 php-apc
 ).each { | pkg | package pkg }
@@ -81,8 +82,7 @@ bash "Running composer install and preparing the Sylius repository" do
   cwd "/mnt/sylius"
   code <<-EOH
     set -e
-    ln -sf /var/tmp/vendor
     curl -s https://getcomposer.org/installer | php
-    COMPOSER_VENDOR_DIR="/var/tmp/vendor" php composer.phar install
+    COMPOSER_VENDOR_DIR="/var/tmp/vendor" php composer.phar install --dev --prefer-dist --no-scripts
   EOH
 end
