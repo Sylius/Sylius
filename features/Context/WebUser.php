@@ -15,6 +15,8 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Driver\Selenium2Driver;
 use FOS\RestBundle\Util\Pluralization;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -88,7 +90,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         }
 
         $this->assertSession()->addressEquals($this->generatePageUrl($page, $parameters));
-        $this->assertSession()->statusCodeEquals(200);
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -111,7 +113,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $resource = $this->findOneByName($type, $name);
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_show', $type), array('id' => $resource->getId())));
-        $this->assertSession()->statusCodeEquals(200);
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -121,6 +123,14 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function iShouldSeeText($text)
     {
         $this->assertSession()->pageTextContains($text);
+    }
+    /**
+     * @Then /^I should not see "([^"]*)"$/
+     * @Then /^(?:.* )?"([^"]*)" should not appear on the page$/
+     */
+    public function iShouldNotSeeText($text)
+    {
+        $this->assertSession()->pageTextNotContains($text);
     }
 
     /**
@@ -137,6 +147,32 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function iFillInFieldWith($field, $value)
     {
         $this->getSession()->getPage()->fillField($field, $value);
+    }
+
+    /**
+     * @Given /^I fill in province name with "([^"]*)"$/
+     */
+    public function iFillInProvinceNameWith($value)
+    {
+        $this->iFillInFieldWith('sylius_addressing_country[provinces][0][name]', $value);
+    }
+
+    /**
+     * @Given /^I delete ([^""]*) "([^"]*)"$/
+     */
+    public function iDeleteRowInTable($items, $value)
+    {
+        $column = ucfirst(Pluralization::pluralize($items));
+
+        foreach ($this->getActualValuesInTableByColumnName($items, $column) as $position => $actual) {
+            if ($actual === $value) {
+                $elements = $this->getActualElementsInTable($items, count($this->getActualHeadersInTable($items)) - 1);
+                $elements[$position]->findLink('Delete')->click();
+                return;
+            }
+        }
+
+        throw new ExpectationException(sprintf('Delete button not found for given %s.', $items), $this->getSession());
     }
 
     /**
@@ -382,12 +418,20 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     {
         $repository = $this->getService('sylius_addressing.repository.country');
         $manager = $this->getService('sylius_addressing.manager.country');
+        $provinceRepository = $this->getService('sylius_addressing.repository.province');
 
         foreach ($table->getHash() as $data) {
             $country = $repository->createNew();
 
             $country->setName($data['name']);
             $country->setIsoName($data['iso']);
+
+            foreach (explode(',', $data['provinces']) as $provinceName) {
+                $province = $provinceRepository->createNew();
+                $province->setName(trim($provinceName));
+
+                $country->addProvince($province);
+            }
 
             $manager->persist($country);
         }
@@ -401,27 +445,6 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function thereAreNoCountries()
     {
         $this->thereAreNoItems('sylius_addressing', 'country');
-    }
-
-    /**
-     * @Given /^there are following provinces:$/
-     */
-    public function thereAreFollowingProvinces(TableNode $table)
-    {
-        $countryRepository = $this->getService('sylius_addressing.repository.country');
-        $repository = $this->getService('sylius_addressing.repository.province');
-        $manager = $this->getService('sylius_addressing.manager.province');
-
-        foreach ($table->getHash() as $data) {
-            $province = $repository->createNew();
-
-            $province->setName($data['name']);
-            $province->setCountry($countryRepository->findOneByIsoName($data['country']));
-
-            $manager->persist($province);
-        }
-
-        $manager->flush();
     }
 
     /**
@@ -514,6 +537,13 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $manager->flush();
     }
 
+    protected function assertStatusCodeEquals($code)
+    {
+        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+            $this->assertSession()->statusCodeEquals($code);
+        }
+    }
+
     protected function assertElementsCount($selector, $count)
     {
         $this->assertSession()->elementsCount('css', $selector, $count);
@@ -532,10 +562,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     protected function getActualValuesInTableByColumnName($items, $columnName)
     {
-        $id = str_replace(' ', '-', Pluralization::pluralize($items));
-        $rows = $this->getSession()->getPage()->findAll('css', sprintf('table#%s thead tr th', $id));
-
-        foreach ($rows as $key => $row) {
+        foreach ($this->getActualHeadersInTable($items) as $key => $row) {
             if ($row->getText() === $columnName) {
                 return $this->getActualValuesInTable($items, $key);
             }
@@ -544,6 +571,43 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         throw new ElementNotFoundException(
             $this->getSession(), 'table element', 'th', $columnName
         );
+    }
+
+    /**
+     * Fetch all headers from table.
+     *
+     * @param $items string the items name
+     *
+     * @return array
+     */
+    protected function getActualHeadersInTable($items)
+    {
+        $id = str_replace(' ', '-', Pluralization::pluralize($items));
+
+        return $this->getSession()->getPage()->findAll('css', sprintf('table#%s thead tr th', $id));
+    }
+
+    /**
+     * Fetch all the elements of a column inside a table
+     *
+     * @param $items  The name of the items to fetch
+     * @param $column The index of the column
+     *                from where we're getting the values
+     *
+     * @return Behat\Mink\Element\NodeElement[]
+     */
+    protected function getActualElementsInTable($items, $column)
+    {
+        $items = str_replace(' ', '-', Pluralization::pluralize($items));
+        $rows = $this->getSession()->getPage()->findAll('css', sprintf('table#%s tbody tr', $items));
+
+        $elements = array();
+        foreach ($rows as $row) {
+            $cols = $row->findAll('css', 'td');
+            $elements[] = $cols[$column];
+        }
+
+        return $elements;
     }
 
     /**
@@ -557,13 +621,9 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     protected function getActualValuesInTable($items, $column)
     {
-        $items = str_replace(' ', '-', Pluralization::pluralize($items));
-        $rows = $this->getSession()->getPage()->findAll('css', sprintf('table#%s tbody tr', $items));
-
         $values = array();
-        foreach ($rows as $row) {
-            $cols = $row->findAll('css', 'td');
-            $values[] = $cols[$column]->getText();
+        foreach ($this->getActualElementsInTable($items, $column) as $element) {
+            $values[] = $element->getText();
         }
 
         return $values;

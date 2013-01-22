@@ -5,6 +5,7 @@ sylius/logs/*
 
 sylius/config/container/parameters.yml
 sylius/config/container/*.local.yml
+behat.yml
 
 web/bundles/*
 web/css/*
