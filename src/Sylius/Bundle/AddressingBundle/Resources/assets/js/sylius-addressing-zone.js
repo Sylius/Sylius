@@ -20,7 +20,10 @@
             var value = $(this).val();
             $('div[id^="sylius-addressing-zone-members-"]').hide();
             $('#sylius-addressing-zone-members-' + value).show();
-            $('.collection-add-btn').data('collection', 'sylius-addressing-zone-members-' + value);
+            $('a[data-collection-button="add"]')
+                .data('collection', 'sylius-addressing-zone-members-' + value)
+                .data('prototype', 'sylius-addressing-zone-members-' + value)
+            ;
         }).trigger('change');
     });
 })( jQuery );

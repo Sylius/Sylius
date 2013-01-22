@@ -21,7 +21,8 @@
         {% endfor %}
         <div class="control-group">
             <div class="controls">
-                <a class="btn btn-success collection-add-btn" data-collection="sylius-addressing-zone-members-{{ form.type.get('value') }}">add member</a>
+                {% set prototypeId = 'sylius-addressing-zone-members-' ~ form.type.get('value')|default(constant('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneInterface::TYPE_COUNTRY')) %}
+                <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="{{ prototypeId }}" data-collection="{{ prototypeId }}">add member</a>
             </div>
         </div>
     </div>
