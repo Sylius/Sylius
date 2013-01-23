@@ -14,6 +14,8 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * Per item rate calculator configuration form.
@@ -29,7 +31,11 @@ class PerItemRateConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'money', array(
-                'label' => 'sylius_shipping.label.per_item_rate_calculator.amount'
+                'label' => 'sylius_shipping.label.per_item_rate_calculator.amount',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
+                )
             ))
         ;
     }
