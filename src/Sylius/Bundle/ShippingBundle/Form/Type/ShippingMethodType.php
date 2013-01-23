@@ -86,7 +86,7 @@ class ShippingMethodType extends AbstractType
         $calculators = $this->calculatorRegistry->getCalculators();
 
         foreach ($calculators as $name => $calculator) {
-            $prototypes[$name] = $builder->create($name, $calculator->getConfigurationFormType())->getForm();
+            $prototypes[$name] = $builder->create('configuration', $calculator->getConfigurationFormType())->getForm();
         }
 
         $builder->setAttribute('prototypes', $prototypes);
