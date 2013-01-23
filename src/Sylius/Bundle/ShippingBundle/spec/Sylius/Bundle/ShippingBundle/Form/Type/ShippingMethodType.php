@@ -122,11 +122,23 @@ class ShippingMethodType extends ObjectBehavior
         $perItemFormBuilder, $perItemForm, $perItemRateCalculator
     )
     {
-        $builder->add(ANY_ARGUMENTS)->willReturn($builder);
-        $builder->addEventSubscriber(ANY_ARGUMENT)->willReturn($builder);
+        $builder
+            ->add(ANY_ARGUMENTS)
+            ->willReturn($builder)
+        ;
+        $builder
+            ->addEventSubscriber(ANY_ARGUMENT)
+            ->willReturn($builder)
+        ;
 
-        $flatRateCalculator->getConfigurationFormType()->willReturn('sylius_shipping_calculator_flat_rate_configuration');
-        $perItemRateCalculator->getConfigurationFormType()->willReturn('sylius_shipping_calculator_per_item_rate_configuration');
+        $flatRateCalculator
+            ->getConfigurationFormType()
+            ->willReturn('sylius_shipping_calculator_flat_rate_configuration')
+        ;
+        $perItemRateCalculator
+            ->getConfigurationFormType()
+            ->willReturn('sylius_shipping_calculator_per_item_rate_configuration')
+        ;
 
         $calculatorRegistry
             ->getCalculators()
@@ -139,16 +151,31 @@ class ShippingMethodType extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $flatRateFormBuilder->getForm()->willReturn($flatRateForm);
-        $builder->create('configuration', 'sylius_shipping_calculator_flat_rate_configuration')->willReturn($flatRateFormBuilder);
+        $flatRateFormBuilder
+            ->getForm()
+            ->willReturn($flatRateForm)
+        ;
+        $builder
+            ->create('configuration', 'sylius_shipping_calculator_flat_rate_configuration')
+            ->willReturn($flatRateFormBuilder)
+        ;
 
-        $perItemFormBuilder->getForm()->willReturn($perItemForm);
-        $builder->create('configuration', 'sylius_shipping_calculator_per_item_rate_configuration')->willReturn($perItemFormBuilder);
+        $perItemFormBuilder
+            ->getForm()
+            ->willReturn($perItemForm)
+        ;
+        $builder
+            ->create('configuration', 'sylius_shipping_calculator_per_item_rate_configuration')
+            ->willReturn($perItemFormBuilder)
+        ;
 
         $builder
             ->setAttribute(
                 'prototypes',
-                array('flat_rate' => $flatRateForm, 'per_item_rate' => $perItemForm)
+                array(
+                    'flat_rate' => $flatRateForm,
+                    'per_item_rate' => $perItemForm
+                )
             )
             ->shouldBeCalled()
         ;
