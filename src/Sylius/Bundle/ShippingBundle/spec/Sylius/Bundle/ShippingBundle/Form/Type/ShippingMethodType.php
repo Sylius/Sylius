@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PHPSpec2\ObjectBehavior;
-use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
 
 /**
  * Shipping method form type spec.
