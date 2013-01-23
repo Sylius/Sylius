@@ -34,16 +34,15 @@ Feature: Zones
          Then I should still be on the zone creation page
           And I should see "Please enter zone name"
 
-    Scenario: Creating new zone
+    Scenario: Creating new zone requires members
         Given I am on the zone creation page
           And I fill in "Name" with "EU"
-          And I select "Country" from "Type"
          When I press "Create"
-         Then I should be on the page of zone "EU"
-          And I should see "Zone has been successfully created."
+         Then I should be on the zone creation page
+          And I should see "Please add at least 1 zone member."
 
     @javascript
-    Scenario: Creating new zone with members
+    Scenario: Creating new zone
         Given I am on the zone creation page
           And I fill in "Name" with "EU"
           And I select "Country" from "Type"

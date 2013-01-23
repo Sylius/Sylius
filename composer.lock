@@ -438,12 +438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle",
-                "reference": "3e7dce36d822f6863dc2063e07f9d864d2124890"
+                "reference": "73ffa93625bced951c849a84ef0e3eb7dba76390"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/3e7dce36d822f6863dc2063e07f9d864d2124890.zip",
-                "reference": "3e7dce36d822f6863dc2063e07f9d864d2124890",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/73ffa93625bced951c849a84ef0e3eb7dba76390.zip",
+                "reference": "73ffa93625bced951c849a84ef0e3eb7dba76390",
                 "shasum": ""
             },
             "require": {
@@ -466,7 +466,7 @@
                 "sensio/framework-extra-bundle": "Add support for route annotations and the view response listener",
                 "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 1.0.*"
             },
-            "time": "2013-01-21 08:32:22",
+            "time": "2013-01-23 08:15:20",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1604,12 +1604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
-                "reference": "43b42a24ca80cb0195bc83658f7849e2948f1873"
+                "reference": "3e8af3a3b23918d1d0f6024cace8347133253a34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusAddressingBundle/archive/43b42a24ca80cb0195bc83658f7849e2948f1873.zip",
-                "reference": "43b42a24ca80cb0195bc83658f7849e2948f1873",
+                "url": "https://github.com/Sylius/SyliusAddressingBundle/archive/3e8af3a3b23918d1d0f6024cace8347133253a34.zip",
+                "reference": "3e8af3a3b23918d1d0f6024cace8347133253a34",
                 "shasum": ""
             },
             "require": {
@@ -1623,7 +1623,7 @@
                 "symfony/form": ">=2.1,<3.0",
                 "doctrine/orm": ">=2.3,<3.0"
             },
-            "time": "2013-01-22 17:23:52",
+            "time": "2013-01-23 08:26:27",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1667,12 +1667,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "a38ed2a46f87381026afd4c8c1562d9e11f05fff"
+                "reference": "f270586468d5f49e254ae1328442723063ab46d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/a38ed2a46f87381026afd4c8c1562d9e11f05fff.zip",
-                "reference": "a38ed2a46f87381026afd4c8c1562d9e11f05fff",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/f270586468d5f49e254ae1328442723063ab46d3.zip",
+                "reference": "f270586468d5f49e254ae1328442723063ab46d3",
                 "shasum": ""
             },
             "require": {
@@ -1681,12 +1681,13 @@
                 "sylius/taxation-bundle": "0.1.*",
                 "jms/serializer-bundle": "1.0.*",
                 "fzaninotto/faker": "1.1.*",
-                "sylius/addressing-bundle": "0.1.*"
+                "sylius/addressing-bundle": "0.1.*",
+                "sylius/shipping-bundle": "0.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-22 17:04:57",
+            "time": "2013-01-23 13:07:50",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1862,12 +1863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "bc70ae998a9138b437b667777fccab08bbfc7558"
+                "reference": "078cc392d8c5fa871f23539b7c1a8bf600fd25ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/bc70ae998a9138b437b667777fccab08bbfc7558.zip",
-                "reference": "bc70ae998a9138b437b667777fccab08bbfc7558",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/078cc392d8c5fa871f23539b7c1a8bf600fd25ee.zip",
+                "reference": "078cc392d8c5fa871f23539b7c1a8bf600fd25ee",
                 "shasum": ""
             },
             "require": {
@@ -1879,7 +1880,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-22 16:58:46",
+            "time": "2013-01-23 13:41:39",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2892,6 +2893,69 @@
                 "tests",
                 "SpecBDD",
                 "specification"
+            ]
+        },
+        {
+            "name": "sylius/shipping-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/ShippingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
+                "reference": "50868d8e6485a6dab9ba641cd5e334f1bb7813f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusShippingBundle/archive/50868d8e6485a6dab9ba641cd5e334f1bb7813f0.zip",
+                "reference": "50868d8e6485a6dab9ba641cd5e334f1bb7813f0",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "time": "2013-01-23 13:29:55",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\ShippingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
+                }
+            ],
+            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "webshop",
+                "shipping",
+                "delivery",
+                "shipments"
             ]
         }
     ],

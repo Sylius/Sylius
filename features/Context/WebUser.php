@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Locale\Locale;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 
 /**
  * Web user context.
@@ -36,10 +37,12 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      * @var array
      */
     protected $repositories = array(
-        'tax_category' => 'sylius_taxation.repository.category',
-        'tax_rate'     => 'sylius_taxation.repository.rate',
-        'country'      => 'sylius_addressing.repository.country',
-        'zone'         => 'sylius_addressing.repository.zone',
+        'tax_category'      => 'sylius_taxation.repository.category',
+        'tax_rate'          => 'sylius_taxation.repository.rate',
+        'shipping_category' => 'sylius_shipping.repository.category',
+        'shipping_method'   => 'sylius_shipping.repository.method',
+        'country'           => 'sylius_addressing.repository.country',
+        'zone'              => 'sylius_addressing.repository.zone',
     );
 
     /**
@@ -113,12 +116,6 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     {
         $type = str_replace(' ', '_', $type);
         $resource = $this->findOneByName($type, $name);
-        if (null === $resource) {
-            throw new ExpectationException(
-                sprintf('%s with name "%s" not found.', ucfirst($type), $name),
-                $this->getSession()
-            );
-        }
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_show', $type), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
@@ -333,6 +330,14 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are no shipping categories$/
+     */
+    public function thereAreNoShippingCategories()
+    {
+        $this->thereAreNoItems('sylius_shipping', 'category');
+    }
+
+    /**
      * @Given /^there are no tax categories$/
      */
     public function thereAreNoTaxCategories()
@@ -376,6 +381,27 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I created shipping category "([^"]*)"$/
+     */
+    public function iCreatedShippingCategory($name)
+    {
+        $this->thereIsShippingCategory($name);
+
+        $this->getService('sylius_shipping.manager.category')->flush();
+    }
+
+    /**
+     * @Given /^I created shipping method "([^"]*)" for category "([^"]*)"$/
+     */
+    public function iCreatedShippingMethodForCategory($methodName, $categoryName)
+    {
+        $method = $this->thereIsShippingMethod($methodName);
+        $method->setCategory($this->thereIsShippingCategory($categoryName));
+
+        $this->getService('sylius_shipping.manager.method')->flush();
+    }
+
+    /**
      * @Given /^there are following tax rates:$/
      * @Given /^the following tax rates exist:$/
      */
@@ -412,7 +438,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function thereAreFollowingZones(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $zone = $this->thereIsZone($data['name'], $data['type'], explode(',', $data['members']));
+            $this->thereIsZone($data['name'], $data['type'], explode(',', $data['members']));
         }
 
         $this->getService('sylius_addressing.manager.zone')->flush();
@@ -424,6 +450,39 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function thereAreNoZones()
     {
         $this->thereAreNoItems('sylius_addressing', 'zone');
+    }
+
+    /**
+     * @Given /^there are following shipping categories:$/
+     */
+    public function thereAreFollowingShippingCategories(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsShippingCategory($data['name']);
+        }
+
+        $this->getService('sylius_shipping.manager.category')->flush();
+    }
+
+    /**
+     * @Given /^the following shipping methods exist:$/
+     */
+    public function theFollowingShippingMethodsExist(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $method = $this->thereIsShippingMethod($data['name']);
+            $method->setCategory($this->findOneByName('shipping_category', $data['category']));
+        }
+
+        $this->getService('sylius_shipping.manager.method')->flush();
+    }
+
+    /**
+     * @Given /^there are no shipping methods$/
+     */
+    public function thereAreNoShippingMethods()
+    {
+        $this->thereAreNoItems('sylius_shipping', 'method');
     }
 
     /**
@@ -601,6 +660,27 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         return $zone;
     }
 
+    private function thereIsShippingCategory($name)
+    {
+        $category = $this->getService('sylius_shipping.repository.category')->createNew();
+        $category->setName($name);
+
+        $this->getService('sylius_shipping.manager.category')->persist($category);
+
+        return $category;
+    }
+
+    private function thereIsShippingMethod($name)
+    {
+        $method = $this->getService('sylius_shipping.repository.method')->createNew();
+        $method->setName($name);
+        $method->setCalculator(DefaultCalculators::PER_ITEM_RATE);
+
+        $this->getService('sylius_shipping.manager.method')->persist($method);
+
+        return $method;
+    }
+
     protected function thereAreNoItems($prefix, $item)
     {
         $repository = $this->getService($prefix.'.repository.'.$item);
@@ -753,10 +833,19 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     protected function findOneByName($type, $name)
     {
-        return $this
+        $resource = $this
             ->getRepositoryByType($type)
             ->findOneBy(array('name' => $name))
         ;
+
+        if (null === $resource) {
+            throw new ExpectationException(
+                sprintf('%s with name "%s" not found.', ucfirst($type), $name),
+                $this->getSession()
+            );
+        }
+
+        return $resource;
     }
 
     /**
