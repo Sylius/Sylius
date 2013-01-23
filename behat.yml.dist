@@ -1,17 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 default:
-    paths:
-        features: features
     context:
         class: Context\FeatureContext
+    filters:
+        tags: "~@javascript"
     extensions:
         Behat\MinkExtension\Extension:
+            base_url: "http://sylius.local/testgate.php"
+            default_session: symfony2
             selenium2:
                 browser: htmlunit
-            default_session: symfony2
-            base_url: "http://sylius.lo/testgate.php"
         Behat\Symfony2Extension\Extension:
             kernel:
                 path: sylius/SyliusKernel.php
                 class: SyliusKernel
                 env: testing
             mink_driver: true
+
+js:
+    filters:
+        tags: "@javascript"

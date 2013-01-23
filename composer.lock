@@ -1347,18 +1347,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/php-collection",
-                "reference": "3d298a49601381d5155b88a9dc4e8561a1654ab0"
+                "reference": "acb02a921bb364f360ce786b13455345063c4a07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/php-collection/archive/3d298a49601381d5155b88a9dc4e8561a1654ab0.zip",
-                "reference": "3d298a49601381d5155b88a9dc4e8561a1654ab0",
+                "url": "https://github.com/schmittjoh/php-collection/archive/acb02a921bb364f360ce786b13455345063c4a07.zip",
+                "reference": "acb02a921bb364f360ce786b13455345063c4a07",
                 "shasum": ""
             },
             "require": {
                 "phpoption/phpoption": "1.*"
             },
-            "time": "2013-01-09 23:18:43",
+            "time": "2013-01-23 15:16:14",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1791,6 +1791,69 @@
                 "persistence",
                 "storage",
                 "resource"
+            ]
+        },
+        {
+            "name": "sylius/shipping-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/ShippingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
+                "reference": "2e4d5110ef0ef1d8c33b1ee30fe9234bf170ff7d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusShippingBundle/archive/2e4d5110ef0ef1d8c33b1ee30fe9234bf170ff7d.zip",
+                "reference": "2e4d5110ef0ef1d8c33b1ee30fe9234bf170ff7d",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "time": "2013-01-23 14:58:15",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\ShippingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
+                }
+            ],
+            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "webshop",
+                "shipping",
+                "delivery",
+                "shipments"
             ]
         },
         {
@@ -2444,12 +2507,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Mink.git",
-                "reference": "f622a074c55b03d98a7bac9e18fc52d392cb389a"
+                "reference": "8bb5473b9bc79cc742772d07ed70cf5e0a523c78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Mink/archive/f622a074c55b03d98a7bac9e18fc52d392cb389a.zip",
-                "reference": "f622a074c55b03d98a7bac9e18fc52d392cb389a",
+                "url": "https://github.com/Behat/Mink/archive/8bb5473b9bc79cc742772d07ed70cf5e0a523c78.zip",
+                "reference": "8bb5473b9bc79cc742772d07ed70cf5e0a523c78",
                 "shasum": ""
             },
             "require": {
@@ -2471,7 +2534,7 @@
                 "behat/mink-selenium2-driver": "to enable Selenium2 (webdriver support)",
                 "behat/mink-zombie-driver": "to enable Zombie.js support"
             },
-            "time": "2013-01-02 22:33:08",
+            "time": "2013-01-22 10:29:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2836,12 +2899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec2.git",
-                "reference": "a66ff2b37efa5a8f3df83496daf6ac6dbcd899c6"
+                "reference": "30c6e5605a6669168abe69df5430bcd1cdfd872a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpspec/phpspec2/archive/a66ff2b37efa5a8f3df83496daf6ac6dbcd899c6.zip",
-                "reference": "a66ff2b37efa5a8f3df83496daf6ac6dbcd899c6",
+                "url": "https://github.com/phpspec/phpspec2/archive/30c6e5605a6669168abe69df5430bcd1cdfd872a.zip",
+                "reference": "30c6e5605a6669168abe69df5430bcd1cdfd872a",
                 "shasum": ""
             },
             "require": {
@@ -2853,7 +2916,7 @@
                 "symfony/finder": ">=2.1,<3.0",
                 "symfony/yaml": ">=2.1,<3.0"
             },
-            "time": "2013-01-14 09:52:39",
+            "time": "2013-01-21 09:33:29",
             "bin": [
                 "bin/phpspec"
             ],
@@ -2893,69 +2956,6 @@
                 "tests",
                 "SpecBDD",
                 "specification"
-            ]
-        },
-        {
-            "name": "sylius/shipping-bundle",
-            "version": "dev-master",
-            "target-dir": "Sylius/Bundle/ShippingBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "50868d8e6485a6dab9ba641cd5e334f1bb7813f0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/Sylius/SyliusShippingBundle/archive/50868d8e6485a6dab9ba641cd5e334f1bb7813f0.zip",
-                "reference": "50868d8e6485a6dab9ba641cd5e334f1bb7813f0",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/framework-bundle": ">=2.1,<3.0",
-                "php": ">=5.3.3",
-                "sylius/resource-bundle": "0.1.*",
-                "stof/doctrine-extensions-bundle": "1.1.*"
-            },
-            "require-dev": {
-                "phpspec/phpspec2": "dev-develop",
-                "symfony/form": ">=2.1,<3.0"
-            },
-            "time": "2013-01-23 13:29:55",
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Sylius\\Bundle\\ShippingBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "email": "pjedrzejewski@diweb.pl",
-                    "homepage": "http://pjedrzejewski.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
-                }
-            ],
-            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
-            "homepage": "http://sylius.org",
-            "keywords": [
-                "shop",
-                "ecommerce",
-                "webshop",
-                "shipping",
-                "delivery",
-                "shipments"
             ]
         }
     ],
