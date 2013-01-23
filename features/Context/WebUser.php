@@ -674,6 +674,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     {
         $method = $this->getService('sylius_shipping.repository.method')->createNew();
         $method->setName($name);
+        $method->setConfiguration(array('amount' => 10));
         $method->setCalculator(DefaultCalculators::PER_ITEM_RATE);
 
         $this->getService('sylius_shipping.manager.method')->persist($method);
