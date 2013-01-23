@@ -153,6 +153,13 @@
                 <option name="message">sylius_addressing.zone.name.max_length</option>
             </constraint>
         </property>
+        <property name="members">
+            <constraint name="Valid" />
+            <constraint name="Count">
+                <option name="min">1</option>
+                <option name="minMessage">sylius_addressing.zone.members.min_count</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>
