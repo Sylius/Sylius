@@ -37,7 +37,6 @@ Feature: Zones
     Scenario: Creating new zone requires members
         Given I am on the zone creation page
           And I fill in "Name" with "EU"
-          And I select "Country" from "Type"
          When I press "Create"
          Then I should be on the zone creation page
           And I should see "Please add at least 1 zone member."
