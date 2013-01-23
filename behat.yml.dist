@@ -9,8 +9,6 @@ default:
                 browser: htmlunit
             default_session: symfony2
             base_url: "http://sylius.lo/testgate.php"
-            show_cmd: firefox %s
-            show_auto: true
         Behat\Symfony2Extension\Extension:
             kernel:
                 path: sylius/SyliusKernel.php
