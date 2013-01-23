@@ -14,3 +14,6 @@ sylius_shipping:
             first_item_cost: First item cost
             additional_item_cost: Additional item cost
             additional_item_limit: Limit additional items
+        category:
+            name: Name
+            description: Description

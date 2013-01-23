@@ -1,0 +1,11 @@
+sylius_shipping:
+    category:
+        name:
+            not_blank: "Please enter shipping category name."
+            min_length: "Category name must be at least {{ limit }} characters long."
+            max_length: "Category name must be {{ limit }} characters long or more."
+    method:
+        name:
+            not_blank: "Please enter shipping method name."
+            min_length: "Shipping method name must be at least {{ limit }} characters long."
+            max_length: "Shipping method name must be {{ limit }} characters long or more."
