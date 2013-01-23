@@ -53,5 +53,13 @@ swiftmailer:
 sylius_taxation:
     driver: doctrine/orm
 
+sylius_shipping:
+    driver: doctrine/orm
+    classes:
+        shipment:
+            model: Sylius\Bundle\CoreBundle\Entity\Shipment
+        shipment_item:
+            model: Sylius\Bundle\CoreBundle\Entity\InventoryUnit
+
 sylius_addressing:
     driver: doctrine/orm
