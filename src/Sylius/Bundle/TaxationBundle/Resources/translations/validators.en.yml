@@ -5,3 +5,5 @@ sylius_taxation:
     rate:
         name:
             not_blank: Please enter tax rate name.
+        amount:
+            not_blank: Please enter tax rate amount.
