@@ -18,7 +18,7 @@ Feature: Product prototypes
           And there is prototype "T-Shirt" following configuration:
             | options             | properties         |
             | T-Shirt color       | T-Shirt collection |
-            | T-Shirt size        | T-Shirt brand      |
+            | T-Shirt size        | T-Shirt fabric     |
 
     Scenario: Seeing index of all prototypes
         Given I am on the dashboard page
@@ -30,6 +30,23 @@ Feature: Product prototypes
         Given there are no prototypes
          When I am on the prototype index page
          Then I should see "There are no prototypes defined"
+
+    Scenario: Accessing prototype building form
+        Given I am on the prototype index page
+         When I click "Build" near "T-Shirt"
+         Then I should be building prototype "T-Shirt"
+
+    Scenario: Creating product by building prototype
+        Given I am building prototype "T-Shirt"
+         When I fill in the following:
+            | Name               | Super tee               |
+            | Description        | Interesting description |
+            | Price              | 39.99                   |
+            | T-Shirt collection | Summer 2012             |
+            | T-Shirt fabric     | 100% Cotton             |
+         When I press "Create"
+         Then I should be on the page of product "Super tee"
+          And I should see "Product has been created successfully."
 
     Scenario: Accessing the prototype creation form
         Given I am on the dashboard page
