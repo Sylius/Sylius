@@ -11,6 +11,7 @@
 
 namespace Context;
 
+use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
@@ -52,6 +53,20 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     {
         $this->kernel = $kernel;
     }
+
+    /**
+     * @Given /^I add following option values:$/
+     */
+    public function iAddFollowingOptionValues(TableNode $table)
+    {
+        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+
+        foreach ($table->getRows() as $i => $value) {
+            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $this->iFillInFieldWith(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
+        }
+    }
+
 
     /**
      * @When /^I go to the website root$/

@@ -35,14 +35,14 @@ Feature: Product options
 
     Scenario: Submitting form without specifying the presentation
         Given I am on the option creation page
-         When I fill in "Name" with "Bag color"
+         When I fill in "Internal name" with "Bag color"
           And I press "Create"
          Then I should still be on the option creation page
           And I should see "Please enter option presentation."
 
     Scenario: Trying to create option without at least 2 values
         Given I am on the option creation page
-         When I fill in "Name" with "Bag color"
+         When I fill in "Internal name" with "Bag color"
           And I fill in "Presentation" with "Color"
           And I press "Create"
          Then I should still be on the option creation page
@@ -51,7 +51,7 @@ Feature: Product options
     @javascript
     Scenario: Creating option with 4 possible values
         Given I am on the option creation page
-         When I fill in "Name" with "Bag color"
+         When I fill in "Internal name" with "Bag color"
           And I fill in "Presentation" with "Color"
           And I add following option values:
             | Black  |
@@ -59,32 +59,38 @@ Feature: Product options
             | Brown  |
             | Purple |
           And I press "Create"
-         Then I should be on the page of option "Bag color"
+         Then I should be on the option index page
           And I should see "Option has been successfully created."
 
     @javascript
     Scenario: Values are listed after creating the option
         Given I am on the option creation page
-         When I fill in "Name" with "Mug type"
+         When I fill in "Internal name" with "Mug type"
           And I fill in "Presentation" with "Type"
           And I add following option values:
             | Normal mug  |
             | Large mug   |
             | MONSTER mug |
           And I press "Create"
-         Then I should be on the page of option "Mug type"
+         Then I should be on the option index page
           And I should see option with value "Normal mug" in that list
+
+    @javascript
+    Scenario: Adding values to existing option
+        Given I am editing option "T-Shirt size"
+          And I add following option values:
+            | XL  |
+            | XXL |
+          And I press "Save changes"
+         Then I should be on the option index page
+          And "Option has been successfully updated." should appear on the page
+          And I should see option with value "XXL" in the list
 
     Scenario: Created options appear in the list
         Given I created option "Hat size" with values "S, M, L"
          When I go to the option index page
          Then I should see 3 options in the list
           And I should see option with name "Hat size" in that list
-
-    Scenario: Accessing the option editing form
-        Given I am on the page of option "T-Shirt size"
-         When I follow "Edit"
-         Then I should be editing option "T-Shirt size"
 
     Scenario: Accessing the editing form from the list
         Given I am on the option index page
@@ -93,24 +99,13 @@ Feature: Product options
 
     Scenario: Updating the option
         Given I am editing option "T-Shirt size"
-         When I fill in "Name" with "T-Shirt sex"
+         When I fill in "Internal name" with "T-Shirt sex"
           And I press "Save changes"
-         Then I should be on the page of option "T-Shirt sex"
+         Then I should be on the option index page
           And I should see "Option has been successfully updated."
 
-    Scenario: Deleting option
-        Given I am on the page of option "T-Shirt size"
-         When I follow "Delete"
-         Then I should be on the option index page
-          And I should see "Option has been successfully deleted."
-
     Scenario: Deleted option disappears from the list
-        Given I am on the page of option "T-Shirt color"
-         When I follow "Delete"
+        Given I am on the option index page
+         When I click "Delete" near "T-Shirt color"
          Then I should be on the option index page
           And I should not see option with name "T-Shirt color" in that list
-
-    Scenario: Accessing the option details page from list
-        Given I am on the option index page
-         When I click "Details" near "T-Shirt color"
-         Then I should be on the page of option "T-Shirt color"

@@ -35,17 +35,17 @@ Feature: Product properties
 
     Scenario: Submitting form without specifying the presentation
         Given I am on the property creation page
-         When I fill in "Name" with "Book author"
+         When I fill in "Internal name" with "Book author"
           And I press "Create"
          Then I should still be on the property creation page
           And I should see "Please enter property presentation"
 
     Scenario: Creating new property
         Given I am on the property creation page
-         When I fill in "Name" with "Book author"
+         When I fill in "Internal name" with "Book author"
           And I fill in "Presentation" with "Author"
           And I press "Create"
-         Then I should be on the page of property "Book author"
+         Then I should still be on the property index page
           And I should see "Property has been successfully created."
 
     Scenario: Created properties appear in the list
@@ -54,36 +54,21 @@ Feature: Product properties
          Then I should see 3 properties in the list
           And I should see property with name "Food" in that list
 
-    Scenario: Accessing the property editing form
-        Given I am on the page of property "Clothing"
-         When I follow "Edit"
-         Then I should be editing property "Clothing"
-
     Scenario: Accessing the editing form from the list
         Given I am on the property index page
-         When I click "Edit" near "Clothing"
-         Then I should be editing property "Clothing"
+         When I click "Edit" near "T-Shirt collection"
+         Then I should be editing property "T-Shirt collection"
 
     Scenario: Updating the property
         Given I am editing property "T-Shirt collection"
-         When I fill in "Name" with "T-Shirt edition"
+         When I fill in "Internal name" with "T-Shirt edition"
           And I press "Save changes"
-         Then I should be on the page of property "T-Shirt edition"
+         Then I should still be on the property index page
           And I should see "Property has been successfully updated."
 
-    Scenario: Deleting property
-        Given I am on the page of property "T-Shirt fabric"
-         When I follow "Delete"
-         Then I should be on the property index page
-          And I should see "Property has been successfully deleted."
-
     Scenario: Deleted property disappears from the list
-        Given I am on the page of property "T-Shirt fabric"
-         When I follow "Delete"
-         Then I should be on the property index page
-          And I should not see property with name "T-Shirt fabric" in that list
-
-    Scenario: Accessing the property details page from list
         Given I am on the property index page
-         When I click "Details" near "T-Shirt fabric"
-         Then I should be on the page of property "T-Shirt fabric"
+         When I click "Delete" near "T-Shirt fabric"
+         Then I should still be on the property index page
+          And I should see "Property has been successfully deleted."
+          And I should not see property with name "T-Shirt fabric" in that list

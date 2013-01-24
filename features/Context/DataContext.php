@@ -50,6 +50,93 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are following options:$/
+     * @Given /^the following options exist:$/
+     */
+    public function thereAreOptions(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsOption($data['name'], $data['values'], $data['presentation']);
+        }
+    }
+
+    /**
+     * @Given /^I created option "([^""]*)" with values "([^""]*)"$/
+     */
+    public function thereIsOption($name, $values, $presentation = null)
+    {
+        $repository = $this->getRepository('option');
+        $manager = $this->getEntityManager();
+
+        $optionValueClass = $this->getContainer()->getParameter('sylius.model.option_value.class');
+        $presentation = $presentation ?: $name;
+
+        $option = $repository->createNew();
+        $option->setName($name);
+        $option->setPresentation($presentation);
+
+        foreach (explode(',', $values) as $value) {
+            $optionValue = new $optionValueClass;
+            $optionValue->setValue(trim($value));
+
+            $option->addValue($optionValue);
+        }
+
+        $manager->persist($option);
+        $manager->flush();
+
+        return $option;
+    }
+
+    /**
+     * @Given /^there are no options$/
+     */
+    public function thereAreNoOptions()
+    {
+        $this->removeResources('option');
+    }
+
+    /**
+     * @Given /^there are following properties:$/
+     * @Given /^the following properties exist:$/
+     */
+    public function thereAreProperties(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsProperty($data['name'], $data['presentation']);
+        }
+    }
+
+    /**
+     * @Given /^There is property "([^""]*)"$/
+     * @Given /^I created property "([^""]*)"$/
+     */
+    public function thereIsProperty($name, $presentation = null)
+    {
+        $repository = $this->getRepository('property');
+        $manager = $this->getEntityManager();
+
+        $presentation = $presentation ?: $name;
+
+        $property = $repository->createNew();
+        $property->setName($name);
+        $property->setPresentation($presentation);
+
+        $manager->persist($property);
+        $manager->flush();
+
+        return $property;
+    }
+
+    /**
+     * @Given /^there are no properties$/
+     */
+    public function thereAreNoProperties()
+    {
+        $this->removeResources('property');
+    }
+
+    /**
      * @Given /^there are following tax categories:$/
      * @Given /^the following tax categories exist:$/
      */
@@ -372,6 +459,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function getRepository($resource)
     {
+        if (!isset($this->repositories[$resource])) {
+            return $this->getService('sylius.repository.'.$resource);
+        }
+
         return $this->getService($this->repositories[$resource]);
     }
 
