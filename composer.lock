@@ -1864,12 +1864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
-                "reference": "e8683807c116ff83944572f75afd3ddfad809350"
+                "reference": "e4ebe59d3df1e770db434e237a7215c601d8e107"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusTaxationBundle/archive/e8683807c116ff83944572f75afd3ddfad809350.zip",
-                "reference": "e8683807c116ff83944572f75afd3ddfad809350",
+                "url": "https://github.com/Sylius/SyliusTaxationBundle/archive/e4ebe59d3df1e770db434e237a7215c601d8e107.zip",
+                "reference": "e4ebe59d3df1e770db434e237a7215c601d8e107",
                 "shasum": ""
             },
             "require": {
@@ -1882,7 +1882,7 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-19 22:54:26",
+            "time": "2013-01-24 17:17:53",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
