@@ -18,7 +18,7 @@ Feature: Tax categories
 
     Scenario: Seeing empty index of tax categories
         Given there are no tax categories
-          And I am on the tax category index page
+         When I am on the tax category index page
          Then I should see "There are no tax categories configured"
 
     Scenario: Accessing the tax category creation form
@@ -27,7 +27,7 @@ Feature: Tax categories
           And I follow "Create tax category"
          Then I should be on the tax category creation page
 
-    Scenario: Submitting invalid form
+    Scenario: Submitting form without specifying the name
         Given I am on the tax category creation page
          When I press "Create"
          Then I should still be on the tax category creation page
@@ -42,16 +42,26 @@ Feature: Tax categories
 
     Scenario: Created tax categories appear in the list
         Given I created tax category "Food"
-          And I go to the tax category index page
+         When I go to the tax category index page
          Then I should see 3 tax categories in the list
           And I should see tax category with name "Food" in that list
 
-    Scenario: Updating the tax category
+    Scenario: Accessing the tax category editing form
         Given I am on the page of tax category "Clothing"
-          And I follow "Edit"
+         When I follow "Edit"
+         Then I should be editing tax category "Clothing"
+
+    Scenario: Accessing the editing form from the list
+        Given I am on the tax category index page
+         When I click "Edit" near "Clothing"
+         Then I should be editing tax category "Clothing"
+
+    Scenario: Updating the tax category
+        Given I am editing tax category "Clothing"
          When I fill in "Name" with "Clothing & Accessories"
           And I press "Save changes"
          Then I should be on the page of tax category "Clothing & Accessories"
+          And I should see "Category has been successfully updated."
 
     Scenario: Deleting tax category
         Given I am on the page of tax category "Clothing"
@@ -64,3 +74,8 @@ Feature: Tax categories
          When I follow "Delete"
          Then I should be on the tax category index page
           And I should not see tax category with name "Clothing" in that list
+
+    Scenario: Accessing the tax category details page from list
+        Given I am on the tax category index page
+         When I click "Details" near "Clothing"
+         Then I should be on the page of tax category "Clothing"

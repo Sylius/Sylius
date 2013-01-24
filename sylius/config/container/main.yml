@@ -52,10 +52,17 @@ swiftmailer:
 
 sylius_taxation:
     driver: doctrine/orm
+    classes:
+        rate:
+            model: Sylius\Bundle\CoreBundle\Entity\TaxRate
+            form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
     driver: doctrine/orm
     classes:
+        method:
+            model: Sylius\Bundle\CoreBundle\Entity\ShippingMethod
+            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
         shipment:
             model: Sylius\Bundle\CoreBundle\Entity\Shipment
         shipment_item:

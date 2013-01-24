@@ -1,6 +1,7 @@
 Feature: Countries and provinces
     As a store owner
     I want to be able to manage countries and provinces
+    In order to group them into geographical zones
 
     Background:
         Given I am logged in as administrator
@@ -18,7 +19,7 @@ Feature: Countries and provinces
 
     Scenario: Seeing empty index of countries
         Given there are no countries
-          And I am on the country index page
+         When I am on the country index page
          Then I should see "There are no countries configured"
 
     Scenario: Accessing the country creation form
@@ -31,42 +32,51 @@ Feature: Countries and provinces
         Given I am on the country creation page
          When I press "Create"
          Then I should still be on the country creation page
-          And I should see "Please enter country name"
+          And I should see "Please enter country name."
 
     Scenario: Creating new country
         Given I am on the country creation page
-          And I fill in "Name" with "Poland"
+         When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
-         When I press "Create"
+          And I press "Create"
          Then I should be on the page of country "Poland"
           And I should see "Country has been successfully created."
 
     @javascript
     Scenario: Creating new country with provinces
         Given I am on the country creation page
-          And I fill in "Name" with "Poland"
+         When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
           And I follow "Add province"
           And I fill in province name with "Łódź"
-         When I press "Create"
+          And I press "Create"
          Then I should be on the page of country "Poland"
           And I should see "Country has been successfully created."
-          And I should see "Łódź"
+          And "Łódź" should appear on the page
 
     Scenario: Created countries appear in the list
         Given I created country "Poland"
-          And I go to the country index page
+         When I go to the country index page
          Then I should see 4 countries in the list
           And I should see country with name "Poland" in that list
 
+    Scenario: Accessing the country editing form
+        Given I am on the page of country "France"
+         When I follow "Edit"
+         Then I should be editing country "France"
+
+    Scenario: Accessing the editing form from the list
+        Given I am on the country index page
+         When I click "Edit" near "China"
+         Then I should be editing country "China"
+
     Scenario: Updating the country and province
-        Given I am on the page of country "Ukraine"
-          And I follow "Edit"
+        Given I am editing country "Ukraine"
          When I fill in "Name" with "Russia"
+         When I fill in "ISO name" with "RU"
           And I fill in province name with "Volgograd"
           And I press "Save changes"
          Then I should be on the page of country "Russia"
-         And I should see "Volgograd"
 
     Scenario: Deleting country
         Given I am on the page of country "China"
@@ -82,14 +92,6 @@ Feature: Countries and provinces
 
     Scenario: Deleting province
         Given I am on the page of country "France"
-          And I delete province "Toulouse"
+         When I click "Delete" near "Toulouse"
          Then I should be on the page of country "France"
-          And I should not see "Toulouse"
-
-    Scenario: Displaying the country details
-        Given I am on the page of country "France"
-         Then I should see "France"
-          And I should see "Lyon"
-          And I should see "Toulouse"
-          And I should see "Rennes"
-          And I should see "Nancy"
+          And "Toulouse" should not appear on the page

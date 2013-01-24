@@ -31,7 +31,7 @@ $loader = require_once __DIR__.'/../sylius/bootstrap.php.cache';
 require_once __DIR__.'/../sylius/SyliusKernel.php';
 
 // Initialize kernel and run the application.
-$kernel = new SyliusKernel('testing', false);
+$kernel = new SyliusKernel('testing', true);
 $request = Request::createFromGlobals();
 
 $response = $kernel->handle($request);

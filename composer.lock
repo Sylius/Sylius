@@ -1667,12 +1667,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "f270586468d5f49e254ae1328442723063ab46d3"
+                "reference": "a21e1447acdd997ed8f5c129d5c90e1f7c5c9d80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/f270586468d5f49e254ae1328442723063ab46d3.zip",
-                "reference": "f270586468d5f49e254ae1328442723063ab46d3",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/a21e1447acdd997ed8f5c129d5c90e1f7c5c9d80.zip",
+                "reference": "a21e1447acdd997ed8f5c129d5c90e1f7c5c9d80",
                 "shasum": ""
             },
             "require": {
@@ -1685,9 +1685,10 @@
                 "sylius/shipping-bundle": "0.1.*"
             },
             "require-dev": {
-                "phpspec/phpspec2": "dev-develop"
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-23 13:07:50",
+            "time": "2013-01-24 00:18:11",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1926,12 +1927,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "078cc392d8c5fa871f23539b7c1a8bf600fd25ee"
+                "reference": "120443bce1c82ee97c5937d09a337785debe57ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/078cc392d8c5fa871f23539b7c1a8bf600fd25ee.zip",
-                "reference": "078cc392d8c5fa871f23539b7c1a8bf600fd25ee",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/120443bce1c82ee97c5937d09a337785debe57ac.zip",
+                "reference": "120443bce1c82ee97c5937d09a337785debe57ac",
                 "shasum": ""
             },
             "require": {
@@ -1943,7 +1944,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-23 13:41:39",
+            "time": "2013-01-24 00:22:37",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {

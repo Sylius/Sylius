@@ -1,7 +1,7 @@
 Feature: Shipping categories
     As a store owner
     I want to be able to manage shipping categories
-    In order to categorize shipping methods
+    In order to limit products to certain shipping methods
 
     Background:
         Given I am logged in as administrator
@@ -27,7 +27,7 @@ Feature: Shipping categories
           And I follow "Create shipping category"
          Then I should be on the shipping category creation page
 
-    Scenario: Submitting invalid form
+    Scenario: Submitting invalid form without name
         Given I am on the shipping category creation page
          When I press "Create"
          Then I should still be on the shipping category creation page
@@ -46,9 +46,18 @@ Feature: Shipping categories
          Then I should see 3 shipping categories in the list
           And I should see shipping category with name "Light" in that list
 
-    Scenario: Updating the shipping category
+    Scenario: Accessing the shipping category editing form
         Given I am on the page of shipping category "Regular"
-          And I follow "Edit"
+         When I follow "Edit"
+         Then I should be editing shipping category "Regular"
+
+    Scenario: Accessing the editing form from the list
+        Given I am on the shipping category index page
+         When I click "Edit" near "Heavy"
+         Then I should be editing shipping category "Heavy"
+
+    Scenario: Updating the shipping category
+        Given I am editing shipping category "Heavy"
          When I fill in "Name" with "Light"
           And I press "Save changes"
          Then I should be on the page of shipping category "Light"

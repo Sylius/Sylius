@@ -16,9 +16,6 @@ use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-
 /**
  * Sylius main feature context.
  *
@@ -66,9 +63,9 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
      */
     public function purgeDatabase()
     {
-        $em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $entityManager = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
 
-        $purger = new ORMPurger($em);
+        $purger = new ORMPurger($entityManager);
         $purger->purge();
     }
 }
