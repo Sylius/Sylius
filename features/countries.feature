@@ -47,7 +47,7 @@ Feature: Countries and provinces
         Given I am on the country creation page
          When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
-          And I follow "Add province"
+          And I click "Add province"
           And I fill in province name with "Łódź"
           And I press "Create"
          Then I should be on the page of country "Poland"

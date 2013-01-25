@@ -54,6 +54,16 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $this->kernel = $kernel;
     }
 
+
+    /**
+     * @Given /^go to "([^""]*)" tab$/
+     */
+    public function goToTab($tabLabel)
+    {
+        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+    }
+
+
     /**
      * @Given /^I add following option values:$/
      */
@@ -195,6 +205,18 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * Fills in form fields with provided table.
+     *
+     * @When /^(?:|I )fill in the following:$/
+     */
+    public function iFillInFieldsWith(TableNode $fields)
+    {
+        foreach ($fields->getRowsHash() as $field => $value) {
+            $this->iFillInFieldWith($field, $value);
+        }
+    }
+
+    /**
      * @Given /^I fill in province name with "([^"]*)"$/
      */
     public function iFillInProvinceNameWith($value)
@@ -228,6 +250,14 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function iSelectOptionFrom($option, $field)
     {
         $this->getSession()->getPage()->selectFieldOption($field, $option);
+    }
+
+    /**
+     * @When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function additionallySelectOption($select, $option)
+    {
+        $this->getSession()->getPage()->selectFieldOption($select, $option, true);
     }
 
     /**

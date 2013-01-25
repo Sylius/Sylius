@@ -16,6 +16,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Symfony\Component\Form\Util\FormUtil;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
 
@@ -47,6 +48,73 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * @Given /^there are following products:$/
+     * @Given /^the following products exist:$/
+     */
+    public function thereAreProducts(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $repository = $this->getRepository('product');
+
+            $product = $repository->createNew();
+            $product->setName($data['name']);
+            $product->setDescription('...');
+
+            if (!empty($data['options'])) {
+                foreach (explode(',', $data['options']) as $option) {
+                    $option = $this->findOneByName('option', trim($option));
+                    $product->addOption($option);
+                }
+            }
+
+            $manager->persist($product);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^product "([^""]*)" is available in all variations$/
+     */
+    public function productIsAvailableInAllVariations($productName)
+    {
+        $product = $this->findOneByName('product', $productName);
+        $manager = $this->getEntityManager();
+
+        $this->getService('sylius.variant_generator')->generate($product);
+
+        $manager->persist($product);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^there is prototype "([^""]*)" with following configuration:$/
+     */
+    public function thereIsPrototypeWithFollowingConfiguration($name, TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('prototype');
+
+        $prototype = $repository->createNew();
+        $prototype->setName($name);
+
+        $data = $table->getRowsHash();
+
+        foreach (explode(',', $data['options']) as $optionName) {
+            $prototype->addOption($this->findOneByName('option', trim($optionName)));
+        }
+
+        foreach (explode(',', $data['properties']) as $propertyName) {
+            $prototype->addProperty($this->findOneByName('property', trim($propertyName)));
+        }
+
+        $manager->persist($prototype);
+        $manager->flush();
     }
 
     /**
@@ -89,14 +157,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^there are no options$/
-     */
-    public function thereAreNoOptions()
-    {
-        $this->removeResources('option');
-    }
-
-    /**
      * @Given /^there are following properties:$/
      * @Given /^the following properties exist:$/
      */
@@ -129,14 +189,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^there are no properties$/
-     */
-    public function thereAreNoProperties()
-    {
-        $this->removeResources('property');
-    }
-
-    /**
      * @Given /^there are following tax categories:$/
      * @Given /^the following tax categories exist:$/
      */
@@ -163,14 +215,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $manager->flush();
 
         return $category;
-    }
-
-    /**
-     * @Given /^there are no tax categories$/
-     */
-    public function thereAreNoTaxCategories()
-    {
-        $this->removeResources('tax_category');
     }
 
     /**
@@ -207,14 +251,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^there are no tax rates$/
-     */
-    public function thereAreNoTaxRates()
-    {
-        $this->removeResources('tax_rate');
-    }
-
-    /**
      * @Given /^the following shipping categories are configured:$/
      * @Given /^the following shipping categories exist:$/
      * @Given /^there are following shipping categories:$/
@@ -241,14 +277,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $manager->flush();
 
         return $category;
-    }
-
-    /**
-     * @Given /^there are no shipping categories$/
-     */
-    public function thereAreNoShippingCategories()
-    {
-        $this->removeResources('shipping_category');
     }
 
     /**
@@ -288,14 +316,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^there are no shipping methods$/
-     */
-    public function thereAreNoShippingMethods()
-    {
-        $this->removeResources('shipping_method');
-    }
-
-    /**
      * @Given /^there are following countries:$/
      */
     public function thereAreCountries(TableNode $table)
@@ -329,14 +349,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $manager->flush();
 
         return $country;
-    }
-
-    /**
-     * @Given /^there are no countries$/
-     */
-    public function thereAreNoCountries()
-    {
-        $this->removeResources('country');
     }
 
     /**
@@ -388,14 +400,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^there are no zones$/
-     */
-    public function thereAreNoZones()
-    {
-        $this->removeResources('zone');
-    }
-
-    /**
      * @Given /^there is province "([^"]*)"$/
      */
     public function thereisProvince($name)
@@ -411,12 +415,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * Remove all resources of given type.
-     *
-     * @param string $type
+     * @Given /^there are no ([^"]*)$/
      */
-    public function removeResources($type)
+    public function thereAreNoResources($type)
     {
+        $type = str_replace(' ', '_', FormUtil::singularify($type));
+        $type = is_array($type) ? $type[1] : $type; // Hacky hack for multiple singular forms.
+
         $manager = $this->getEntityManager();
 
         foreach ($this->getRepository($type)->findAll() as $resource) {

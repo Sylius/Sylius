@@ -30,6 +30,7 @@ class SyliusKernel extends Kernel
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
+            new Sylius\Bundle\AssortmentBundle\SyliusAssortmentBundle(),
             new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
             new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
@@ -49,6 +50,7 @@ class SyliusKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'testing'))) {

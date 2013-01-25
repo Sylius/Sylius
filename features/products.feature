@@ -12,7 +12,7 @@ Feature: Products
           And there are following properties:
             | name               | presentation |
             | T-Shirt fabric     | T-Shirt      |
-          And the following products without exist:
+          And the following products exist:
             | name          | price | options                     | properties             |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
             | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric: Cotton |
@@ -58,7 +58,7 @@ Feature: Products
             | Price       | 29.99                   |
          When I press "Create"
          Then I should be on the page of product "Book about Everything"
-          And I should see "Product has been created successfully."
+          And I should see "Product has been successfully created."
 
     Scenario: Creating product with options
         Given I am on the product creation page
@@ -69,7 +69,7 @@ Feature: Products
           And I select "T-Shirt size" from "Options"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been created successfully." should appear on the page
+          And I "Product has been successfully created." should appear on the page
           And I should see "T-Shirt size"
 
     @javascript
@@ -79,19 +79,25 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
+          And go to "Properties" tab
           And I click "Add property"
-          And I select "T-Shirt fabric" from property
+          And I select "T-Shirt fabric" from "Property"
           And I fill in "Value" with "Cotton"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been created successfully." should appear on the page
+          And I "Product has been successfully created." should appear on the page
           And I should see "Cotton"
 
     Scenario: Created products appear in the list
-        Given I created random product "Carpet"
+        Given I am on the product creation page
+         When I fill in the following:
+            | Name        | Manchester United tee   |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+          And I press "Create"
          When I go to the product index page
-         Then I should see 4 products in the list
-          And I should see product with name "Carpet" in that list
+         Then I should see 5 products in the list
+          And I should see product with name "Manchester United tee" in that list
 
     Scenario: Accessing the product editing form
         Given I am on the page of product "Super T-Shirt"
