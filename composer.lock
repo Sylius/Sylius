@@ -2053,12 +2053,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "c807a8e000417ce43c45713202f5d61b1df4ce89"
+                "reference": "26c04156899d42fdaf268fec62ff6447f222594c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/c807a8e000417ce43c45713202f5d61b1df4ce89.zip",
-                "reference": "c807a8e000417ce43c45713202f5d61b1df4ce89",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/26c04156899d42fdaf268fec62ff6447f222594c.zip",
+                "reference": "26c04156899d42fdaf268fec62ff6447f222594c",
                 "shasum": ""
             },
             "require": {
@@ -2070,7 +2070,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-25 17:40:07",
+            "time": "2013-01-28 22:51:41",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
