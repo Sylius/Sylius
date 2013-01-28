@@ -94,7 +94,7 @@ Feature: Product options
 
     Scenario: Accessing the editing form from the list
         Given I am on the option index page
-         When I click "Edit" near "T-Shirt color"
+         When I click "edit" near "T-Shirt color"
          Then I should be editing option "T-Shirt color"
 
     Scenario: Updating the option
@@ -106,6 +106,6 @@ Feature: Product options
 
     Scenario: Deleted option disappears from the list
         Given I am on the option index page
-         When I click "Delete" near "T-Shirt color"
+         When I click "delete" near "T-Shirt color"
          Then I should be on the option index page
           And I should not see option with name "T-Shirt color" in that list

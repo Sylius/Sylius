@@ -26,6 +26,11 @@ Feature: Products
          Then I should be on the product index page
           And I should see 4 products in the list
 
+    Scenario: Listing only simple product prices
+        Given I am on the product index page
+         Then I should see product with price "5.99" in that list
+          But I should not see product with price "19.99" in that list
+
     Scenario: Seeing empty index of products
         Given there are no products
          When I am on the product index page
@@ -46,9 +51,24 @@ Feature: Products
     Scenario: Trying to create product without description
         Given I am on the product creation page
          When I fill in "Name" with "Bag"
-         When I press "Create"
+          And I press "Create"
          Then I should still be on the product creation page
           And I should see "Please enter product description."
+
+    Scenario: Trying to create product without the price
+        Given I am on the product creation page
+         When I fill in "Name" with "Bag"
+          And I press "Create"
+         Then I should still be on the product creation page
+          And I should see "Please enter the price."
+
+    Scenario: Trying to create product with invalid price
+        Given I am on the product creation page
+         When I fill in "Name" with "Bag"
+          And I fill in "Price" with "0.00"
+          And I press "Create"
+         Then I should still be on the product creation page
+          And I should see "Price must be greater than 0.01"
 
     Scenario: Creating simple product without any properties and options
         Given I am on the product creation page
@@ -101,12 +121,12 @@ Feature: Products
 
     Scenario: Accessing the product editing form
         Given I am on the page of product "Super T-Shirt"
-         When I follow "Edit"
+         When I follow "edit"
          Then I should be editing product "Super T-Shirt"
 
     Scenario: Accessing the editing form from the list
         Given I am on the product index page
-         When I click "Edit" near "Mug"
+         When I click "edit" near "Mug"
          Then I should be editing product "Mug"
 
     Scenario: Updating the product name
@@ -125,17 +145,17 @@ Feature: Products
 
     Scenario: Deleting product
         Given I am on the page of product "Mug"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the product index page
           And I should see "Product has been successfully deleted."
 
     Scenario: Deleted product disappears from the list
         Given I am on the page of product "Sticker"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the product index page
           And I should not see product with name "Sticker" in that list
 
     Scenario: Accessing the product details page from list
         Given I am on the product index page
-         When I click "Details" near "Mug"
+         When I click "details" near "Mug"
          Then I should be on the page of product "Mug"

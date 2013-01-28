@@ -14,7 +14,9 @@ namespace Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Exception\ExpectationException;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -170,6 +172,27 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am creating variant of "([^""]*)"$/
+     */
+    public function iAmCreatingVariantOf($name)
+    {
+        $product = $this->getDataContext()->findOneByName('product', $name);
+
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+    }
+
+    /**
+     * @Given /^I should be creating variant of "([^""]*)"$/
+     */
+    public function iShouldBeCreatingVariantOf($name)
+    {
+        $product = $this->getDataContext()->findOneByName('product', $name);
+
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+        $this->assertStatusCodeEquals(200);
+    }
+
+    /**
      * @Then /^I should see "([^"]*)"$/
      * @Then /^(?:.* )?"([^"]*)" should appear on the page$/
      */
@@ -234,7 +257,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new NotFoundHttpException(sprintf('Table row with value "%s" does not exist', $value));
+            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
         if ($tr->findButton($button)) {

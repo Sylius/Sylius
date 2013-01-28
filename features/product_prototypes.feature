@@ -64,7 +64,7 @@ Feature: Product prototypes
 
     Scenario: Accessing the editing form from the list
         Given I am on the prototype index page
-         When I click "Edit" near "T-Shirt"
+         When I click "edit" near "T-Shirt"
          Then I should be editing prototype "T-Shirt"
 
     Scenario: Updating the prototype
@@ -76,6 +76,6 @@ Feature: Product prototypes
 
     Scenario: Deleted prototype disappears from the list
         Given I am on the prototype index page
-         When I click "Delete" near "T-Shirt"
+         When I click "delete" near "T-Shirt"
          Then I should be on the prototype index page
           And I should see "There are no prototypes defined"

@@ -504,6 +504,65 @@
             ]
         },
         {
+            "name": "fsc/hateoas-bundle",
+            "version": "dev-master",
+            "target-dir": "FSC/HateoasBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheFootballSocialClub/FSCHateoasBundle",
+                "reference": "b658e186b74da95d0ce7a0f862f48bfd70bc338d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/TheFootballSocialClub/FSCHateoasBundle/archive/b658e186b74da95d0ce7a0f862f48bfd70bc338d.zip",
+                "reference": "b658e186b74da95d0ce7a0f862f48bfd70bc338d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "jms/metadata": ">=1.1.0,<1.3-dev",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "jms/serializer": "1.0.x",
+                "jms/serializer-bundle": "*",
+                "symfony/property-access": "2.2.*"
+            },
+            "require-dev": {
+                "pagerfanta/pagerfanta": "*",
+                "symfony/class-loader": "*",
+                "symfony/yaml": "*",
+                "symfony/browser-kit": "*",
+                "symfony/form": "*",
+                "symfony/validator": "*"
+            },
+            "suggest": {
+                "symfony/form": ">=2.1,<2.3-dev",
+                "symfony/validator": ">=2.1,<2.3-dev",
+                "pagerfanta/pagerfanta": "*"
+            },
+            "time": "2013-01-26 15:58:40",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FSC\\HateoasBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrien Brault",
+                    "email": "adrien.brault@gmail.com"
+                }
+            ]
+        },
+        {
             "name": "fzaninotto/faker",
             "version": "dev-master",
             "source": {
@@ -919,12 +978,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/serializer",
-                "reference": "b491427df28d1992997f78ab80a34a163ac6552c"
+                "reference": "3982db57770f84d264c87674edd334e889b81cec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/serializer/archive/b491427df28d1992997f78ab80a34a163ac6552c.zip",
-                "reference": "b491427df28d1992997f78ab80a34a163ac6552c",
+                "url": "https://github.com/schmittjoh/serializer/archive/3982db57770f84d264c87674edd334e889b81cec.zip",
+                "reference": "3982db57770f84d264c87674edd334e889b81cec",
                 "shasum": ""
             },
             "require": {
@@ -940,13 +999,13 @@
                 "symfony/yaml": "2.*",
                 "symfony/translation": ">=2.0,<2.2-dev",
                 "symfony/validator": ">=2.0,<2.2-dev",
-                "symfony/form": ">=2.0,<2.2-dev",
-                "symfony/filesystem": "2.*"
+                "symfony/filesystem": "2.*",
+                "symfony/form": ">=2.1,<2.2-dev"
             },
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize data to YAML format."
             },
-            "time": "2013-01-24 21:54:46",
+            "time": "2013-01-28 16:45:30",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1667,12 +1726,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAssortmentBundle.git",
-                "reference": "8505b2265c18c1d41ee76fb22a131a8bf255f766"
+                "reference": "764fbbcfa6cf07441738d254208b6f5e56dd26c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusAssortmentBundle/archive/8505b2265c18c1d41ee76fb22a131a8bf255f766.zip",
-                "reference": "8505b2265c18c1d41ee76fb22a131a8bf255f766",
+                "url": "https://github.com/Sylius/SyliusAssortmentBundle/archive/764fbbcfa6cf07441738d254208b6f5e56dd26c2.zip",
+                "reference": "764fbbcfa6cf07441738d254208b6f5e56dd26c2",
                 "shasum": ""
             },
             "require": {
@@ -1689,7 +1748,7 @@
             "suggest": {
                 "friendsofsymfony/rest-bundle": "*"
             },
-            "time": "2013-01-25 17:43:42",
+            "time": "2013-01-28 21:54:46",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1732,12 +1791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "bbebdbd7c056136b26fa1119d38b8228ce6be40c"
+                "reference": "1e04b3f2a3fada73f29f4e322ec8ec28bceec549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/bbebdbd7c056136b26fa1119d38b8228ce6be40c.zip",
-                "reference": "bbebdbd7c056136b26fa1119d38b8228ce6be40c",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/1e04b3f2a3fada73f29f4e322ec8ec28bceec549.zip",
+                "reference": "1e04b3f2a3fada73f29f4e322ec8ec28bceec549",
                 "shasum": ""
             },
             "require": {
@@ -1748,13 +1807,14 @@
                 "fzaninotto/faker": "1.1.*",
                 "sylius/addressing-bundle": "0.1.*",
                 "sylius/shipping-bundle": "0.1.*",
-                "sylius/assortment-bundle": "0.1.*"
+                "sylius/assortment-bundle": "0.1.*",
+                "fsc/hateoas-bundle": "0.3.x-dev"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-25 16:43:08",
+            "time": "2013-01-28 21:56:27",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1798,12 +1858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "c646106a8c2d473b15eb15b7817811ce137e594b"
+                "reference": "e6c4acf58b3e5c5e1a4315a5d82089ff5f96bbd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusResourceBundle/archive/c646106a8c2d473b15eb15b7817811ce137e594b.zip",
-                "reference": "c646106a8c2d473b15eb15b7817811ce137e594b",
+                "url": "https://github.com/Sylius/SyliusResourceBundle/archive/e6c4acf58b3e5c5e1a4315a5d82089ff5f96bbd6.zip",
+                "reference": "e6c4acf58b3e5c5e1a4315a5d82089ff5f96bbd6",
                 "shasum": ""
             },
             "require": {
@@ -1825,7 +1885,7 @@
                 "fsc/hateoas-bundle": "0.3.x-dev",
                 "doctrine/mongodb-odm": "1.0.*@dev"
             },
-            "time": "2013-01-20 12:27:05",
+            "time": "2013-01-28 22:27:46",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2054,12 +2114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle",
-                "reference": "128d3aa1ea65f0615339f20f15f154bd2e7224bb"
+                "reference": "f65ce4736fa79c60fdfc9805abb38aaaef728e95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/AsseticBundle/archive/128d3aa1ea65f0615339f20f15f154bd2e7224bb.zip",
-                "reference": "128d3aa1ea65f0615339f20f15f154bd2e7224bb",
+                "url": "https://github.com/symfony/AsseticBundle/archive/f65ce4736fa79c60fdfc9805abb38aaaef728e95.zip",
+                "reference": "f65ce4736fa79c60fdfc9805abb38aaaef728e95",
                 "shasum": ""
             },
             "require": {
@@ -2079,7 +2139,7 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-19 21:58:23",
+            "time": "2013-01-26 01:02:24",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2117,26 +2177,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/MonologBundle",
-                "reference": "v2.2.0-BETA1"
+                "reference": "253fcda1128a0301aa68d040302cade65095f2c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/MonologBundle/archive/v2.2.0-BETA1.zip",
-                "reference": "v2.2.0-BETA1",
+                "url": "https://github.com/symfony/MonologBundle/archive/253fcda1128a0301aa68d040302cade65095f2c6.zip",
+                "reference": "253fcda1128a0301aa68d040302cade65095f2c6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/monolog-bridge": ">=2.1.0,<2.3-dev",
                 "symfony/dependency-injection": ">=2.1.0,<2.3-dev",
                 "symfony/config": ">=2.1.0,<2.3-dev",
-                "monolog/monolog": ">=1.0,<1.3-dev"
+                "monolog/monolog": ">=1.0,<1.3-dev",
+                "symfony/monolog-bridge": "2.1.*"
             },
             "require-dev": {
                 "symfony/yaml": ">=2.1.0,<2.3-dev",
                 "symfony/config": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-07 10:57:41",
+            "time": "2013-01-28 10:06:42",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2167,6 +2227,64 @@
             "keywords": [
                 "log",
                 "logging"
+            ]
+        },
+        {
+            "name": "symfony/property-access",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/PropertyAccess",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/PropertyAccess",
+                "reference": "v2.2.0-BETA2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/PropertyAccess/archive/v2.2.0-BETA2.zip",
+                "reference": "v2.2.0-BETA2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2013-01-10 08:49:43",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\PropertyAccess\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony PropertyAccess Component",
+            "homepage": "http://symfony.com",
+            "keywords": [
+                "reflection",
+                "array",
+                "injection",
+                "object",
+                "access",
+                "extraction",
+                "index",
+                "property",
+                "property path"
             ]
         },
         {
@@ -2230,12 +2348,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "bdc7e91865b4633b01e79ff91aadb58efccfa981"
+                "reference": "6f7194802359559a6b37e1d2fe940ac902cf26cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/archive/bdc7e91865b4633b01e79ff91aadb58efccfa981.zip",
-                "reference": "bdc7e91865b4633b01e79ff91aadb58efccfa981",
+                "url": "https://github.com/symfony/symfony/archive/6f7194802359559a6b37e1d2fe940ac902cf26cf.zip",
+                "reference": "6f7194802359559a6b37e1d2fe940ac902cf26cf",
                 "shasum": ""
             },
             "require": {
@@ -2284,7 +2402,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": ">=1.0,<1.3-dev"
             },
-            "time": "2013-01-22 07:14:57",
+            "time": "2013-01-27 16:12:43",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -2365,18 +2483,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "93c6a8dedc46c73ccdd61342de3d5e761e4412f6"
+                "reference": "eaadcca54b888db779a355e449a16dd8c7760e11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/archive/93c6a8dedc46c73ccdd61342de3d5e761e4412f6.zip",
-                "reference": "93c6a8dedc46c73ccdd61342de3d5e761e4412f6",
+                "url": "https://github.com/fabpot/Twig/archive/eaadcca54b888db779a355e449a16dd8c7760e11.zip",
+                "reference": "eaadcca54b888db779a355e449a16dd8c7760e11",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-01-18 09:58:04",
+            "time": "2013-01-27 16:32:04",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2455,39 +2573,44 @@
     "packages-dev": [
         {
             "name": "behat/behat",
-            "version": "v2.4.4",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Behat.git",
-                "reference": "v2.4.4"
+                "reference": "4472c4214f908460eadc9290009726d9fc1b09f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Behat/zipball/v2.4.4",
-                "reference": "v2.4.4",
+                "url": "https://github.com/Behat/Behat/archive/4472c4214f908460eadc9290009726d9fc1b09f4.zip",
+                "reference": "4472c4214f908460eadc9290009726d9fc1b09f4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "behat/gherkin": ">=2.2.4,<2.3.0-dev",
-                "symfony/console": ">=2.0.0,<2.2.0-dev",
-                "symfony/config": ">=2.0.0,<2.2.0-dev",
-                "symfony/dependency-injection": ">=2.0.0,<2.2.0-dev",
-                "symfony/event-dispatcher": ">=2.0.0,<2.2.0-dev",
-                "symfony/translation": ">=2.0.0,<2.2.0-dev",
-                "symfony/yaml": ">=2.0.0,<2.2.0-dev",
-                "symfony/finder": ">=2.0.0,<2.2.0-dev"
+                "behat/gherkin": ">=2.2.4,<2.3-dev",
+                "symfony/console": ">=2.0,<2.3-dev",
+                "symfony/config": ">=2.0,<2.3-dev",
+                "symfony/dependency-injection": ">=2.0,<2.3-dev",
+                "symfony/event-dispatcher": ">=2.0,<2.3-dev",
+                "symfony/translation": ">=2.0,<2.3-dev",
+                "symfony/yaml": ">=2.0,<2.3-dev",
+                "symfony/finder": ">=2.0,<2.3-dev"
             },
             "suggest": {
                 "behat/symfony2-extension": "for integration with Symfony2 web framework",
                 "behat/yii-extension": "for integration with Yii web framework",
                 "behat/mink-extension": "for integration with Mink testing framework"
             },
-            "time": "2012-09-04 07:59:18",
+            "time": "2013-01-28 22:41:43",
             "bin": [
                 "bin/behat"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.4-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Behat\\Behat": "src/"
@@ -2514,34 +2637,39 @@
         },
         {
             "name": "behat/gherkin",
-            "version": "v2.2.5",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Gherkin.git",
-                "reference": "v2.2.5"
+                "reference": "f88e765e16eee1566e9942d1457912dd7202e0e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Gherkin/zipball/v2.2.5",
-                "reference": "v2.2.5",
+                "url": "https://github.com/Behat/Gherkin/archive/f88e765e16eee1566e9942d1457912dd7202e0e6.zip",
+                "reference": "f88e765e16eee1566e9942d1457912dd7202e0e6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/finder": ">=2.0,<2.2-dev"
+                "symfony/finder": ">=2.0,<2.3-dev"
             },
             "require-dev": {
-                "symfony/yaml": ">=2.0,<2.2-dev",
-                "symfony/translation": ">=2.0,<2.2-dev",
-                "symfony/config": ">=2.0,<2.2-dev"
+                "symfony/yaml": ">=2.0,<2.3-dev",
+                "symfony/translation": ">=2.0,<2.3-dev",
+                "symfony/config": ">=2.0,<2.3-dev"
             },
             "suggest": {
                 "symfony/yaml": "If you want to parse features, represented in YAML files",
                 "symfony/translation": "If you want to use Symfony2 translations adapter",
                 "symfony/config": "If you want to use Config component to manage resources"
             },
-            "time": "2012-09-26 03:03:21",
+            "time": "2013-01-26 23:59:16",
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Behat\\Gherkin": "src/"
@@ -2574,17 +2702,17 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Mink.git",
-                "reference": "8bb5473b9bc79cc742772d07ed70cf5e0a523c78"
+                "reference": "8c138509002de0639a50c7f047a44c0db8bc23e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Mink/archive/8bb5473b9bc79cc742772d07ed70cf5e0a523c78.zip",
-                "reference": "8bb5473b9bc79cc742772d07ed70cf5e0a523c78",
+                "url": "https://github.com/Behat/Mink/archive/8c138509002de0639a50c7f047a44c0db8bc23e2.zip",
+                "reference": "8c138509002de0639a50c7f047a44c0db8bc23e2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/css-selector": ">=2.0.0,<2.3-dev"
+                "symfony/css-selector": ">=2.0,<2.3-dev"
             },
             "require-dev": {
                 "behat/mink-goutte-driver": "*",
@@ -2592,7 +2720,7 @@
                 "behat/mink-selenium-driver": "*",
                 "behat/mink-selenium2-driver": "*",
                 "behat/mink-zombie-driver": "*",
-                "symfony/finder": ">=2.0.0,<2.2.0-dev"
+                "symfony/finder": ">=2.0,<2.3-dev"
             },
             "suggest": {
                 "behat/mink-goutte-driver": "to enable Goutte support",
@@ -2601,7 +2729,7 @@
                 "behat/mink-selenium2-driver": "to enable Selenium2 (webdriver support)",
                 "behat/mink-zombie-driver": "to enable Zombie.js support"
             },
-            "time": "2013-01-22 10:29:00",
+            "time": "2013-01-27 15:34:58",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2683,23 +2811,23 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkExtension.git",
-                "reference": "63ca078ecd8285972c6cb35c657e6df5fbfdf695"
+                "reference": "de6bd8dba0bbaaaf9ddfa81195423c7989dd0c2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkExtension/archive/63ca078ecd8285972c6cb35c657e6df5fbfdf695.zip",
-                "reference": "63ca078ecd8285972c6cb35c657e6df5fbfdf695",
+                "url": "https://github.com/Behat/MinkExtension/archive/de6bd8dba0bbaaaf9ddfa81195423c7989dd0c2b.zip",
+                "reference": "de6bd8dba0bbaaaf9ddfa81195423c7989dd0c2b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "behat/behat": ">=2.4.0,<2.5.0",
-                "behat/mink": ">=1.4.0,<1.5.0"
+                "behat/behat": ">=2.4,<2.5-dev",
+                "behat/mink": ">=1.4,<1.5-dev"
             },
             "require-dev": {
                 "behat/mink-goutte-driver": "*"
             },
-            "time": "2013-01-11 16:42:03",
+            "time": "2013-01-27 15:32:41",
             "type": "behat-extension",
             "autoload": {
                 "psr-0": {
@@ -2780,18 +2908,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Symfony2Extension.git",
-                "reference": "f8326e8ca5e583ffe475a363ff4f2a7d63789182"
+                "reference": "af142f441fb83e5ea4c02a136ed582a99d23e409"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Symfony2Extension/archive/f8326e8ca5e583ffe475a363ff4f2a7d63789182.zip",
-                "reference": "f8326e8ca5e583ffe475a363ff4f2a7d63789182",
+                "url": "https://github.com/Behat/Symfony2Extension/archive/af142f441fb83e5ea4c02a136ed582a99d23e409.zip",
+                "reference": "af142f441fb83e5ea4c02a136ed582a99d23e409",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "behat/behat": ">=2.4.0,<2.5.0-dev",
-                "symfony/framework-bundle": ">=2.0.0,<2.3-dev"
+                "behat/behat": ">=2.4,<2.5-dev",
+                "symfony/framework-bundle": ">=2.0,<2.3-dev"
             },
             "require-dev": {
                 "symfony/symfony": "dev-master",
@@ -2799,7 +2927,7 @@
                 "behat/mink-browserkit-driver": "dev-master",
                 "behat/mink": "1.4@stable"
             },
-            "time": "2012-10-16 09:38:57",
+            "time": "2013-01-27 15:31:10",
             "type": "behat-extension",
             "autoload": {
                 "psr-0": {

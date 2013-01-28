@@ -56,7 +56,7 @@ Feature: Product properties
 
     Scenario: Accessing the editing form from the list
         Given I am on the property index page
-         When I click "Edit" near "T-Shirt collection"
+         When I click "edit" near "T-Shirt collection"
          Then I should be editing property "T-Shirt collection"
 
     Scenario: Updating the property
@@ -68,7 +68,7 @@ Feature: Product properties
 
     Scenario: Deleted property disappears from the list
         Given I am on the property index page
-         When I click "Delete" near "T-Shirt fabric"
+         When I click "delete" near "T-Shirt fabric"
          Then I should still be on the property index page
           And I should see "Property has been successfully deleted."
           And I should not see property with name "T-Shirt fabric" in that list
