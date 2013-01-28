@@ -179,12 +179,48 @@ class Configuration extends ObjectBehavior
         $this->getFormType()->shouldReturn('sylius_resource_spec_custom');
     }
 
-    function it_should_get_redirect_from_request_attributes($request)
+    function it_should_get_redirect_route_from_request_attributes($request)
     {
         $request->attributes->set('_redirect', 'sylius_resource_list');
 
         $this->setRequest($request);
-        $this->getRedirect()->shouldReturn('sylius_resource_list');
+        $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
+    }
+
+    function it_should_return_empty_array_as_redirect_parameters_by_default()
+    {
+        $this->getRedirectParameters()->shouldReturn(array());
+    }
+
+    function it_should_get_redirect_route_and_parameters_from_request_attributes($request)
+    {
+        $redirect = array(
+            'route'      => 'sylius_resource_list',
+            'parameters' => array('id' => 1)
+        );
+
+        $request->attributes->set('_redirect', $redirect);
+
+        $this->setRequest($request);
+
+        $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
+        $this->getRedirectParameters()->shouldReturn(array('id' => 1));
+    }
+
+    function it_should_get_special_redirect_parameters_from_request($request)
+    {
+        $redirect = array(
+            'route'      => 'sylius_resource_list',
+            'parameters' => array('id' => '$resourceId')
+        );
+
+        $request->attributes->set('_redirect', $redirect);
+        $request->get('resourceId')->shouldBeCalled()->willReturn(16);
+
+        $this->setRequest($request);
+
+        $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
+        $this->getRedirectParameters()->shouldReturn(array('id' => 16));
     }
 
     function it_should_get_criteria_from_request_attributes($request)

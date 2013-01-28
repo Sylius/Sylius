@@ -125,9 +125,32 @@ class Configuration
         return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
     }
 
-    public function getRedirect()
+    public function getRedirectRoute()
     {
-        return $this->get('_redirect');
+        $redirect = $this->get('_redirect');
+
+        if (is_array($redirect)) {
+            return $redirect['route'];
+        }
+
+        return $redirect;
+    }
+
+    public function getRedirectParameters()
+    {
+        $redirect = $this->get('_redirect');
+
+        if (!is_array($redirect)) {
+            return array();
+        }
+
+        foreach ($redirect['parameters'] as $key => $parameter) {
+            if ('$' === $parameter[0]) {
+                $redirect['parameters'][$key] = $this->request->get(str_replace('$', '', $redirect['parameters'][$key]));
+            }
+        }
+
+        return $redirect['parameters'];
     }
 
     public function isPaginated()

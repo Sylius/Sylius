@@ -211,9 +211,15 @@ class ResourceController extends FOSRestController
 
     public function redirectTo($resource)
     {
+        $parameters = $this->getRedirectParameters();
+
+        if (empty($parameters)) {
+            $parameters['id'] = $resource->getId();
+        }
+
         return $this->redirectToRoute(
             $this->getRedirectRoute('show'),
-            array('id' => $resource->getId())
+            $parameters
         );
     }
 
@@ -224,7 +230,7 @@ class ResourceController extends FOSRestController
 
     public function redirectToIndex($resource)
     {
-        return $this->redirectToRoute($this->getRedirectRoute('index'));
+        return $this->redirectToRoute($this->getRedirectRoute('index'), $this->getRedirectParameters());
     }
 
     public function redirectToRoute($route, array $data = array())
@@ -240,7 +246,7 @@ class ResourceController extends FOSRestController
     {
         $config = $this->getConfiguration();
 
-        if (null !== $route = $config->getRedirect()) {
+        if (null !== $route = $config->getRedirectRoute()) {
             return $route;
         }
 
@@ -249,6 +255,11 @@ class ResourceController extends FOSRestController
             $config->getResourceName(),
             $name
         );
+    }
+
+    public function getRedirectParameters()
+    {
+        return $this->getConfiguration()->getRedirectParameters();
     }
 
     public function getManager()
