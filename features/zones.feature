@@ -62,12 +62,12 @@ Feature: Zones
 
     Scenario: Accessing the zone edit form
         Given I am on the page of zone "USA GMT-8"
-         When I follow "Edit"
+         When I follow "edit"
          Then I should be editing zone "USA GMT-8"
 
     Scenario: Accessing the editing form from list
         Given I am on the zone index page
-         When I click "Edit" near "USA GMT-8"
+         When I click "edit" near "USA GMT-8"
          Then I should be editing zone "USA GMT-8"
 
     Scenario: Updating the zone
@@ -90,18 +90,18 @@ Feature: Zones
 
     Scenario: Deleting zone
         Given I am on the page of zone "USA GMT-8"
-         When I click "Delete"
+         When I click "delete"
          Then I should be on the zone index page
           And I should see "Zone has been successfully deleted."
 
     Scenario: Deleting zone from list
         Given I am on the zone index page
-         When I click "Delete" near "USA GMT-8"
+         When I click "delete" near "USA GMT-8"
          Then I should still be on the zone index page
           And I should see "Zone has been successfully deleted."
 
     Scenario: Deleted zone disappears from the list
         Given I am on the page of zone "Germany"
-         When I click "Delete"
+         When I click "delete"
          Then I should be on the zone index page
           But I should not see zone with name "Germany" in that list

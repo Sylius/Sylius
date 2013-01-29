@@ -69,30 +69,30 @@ Feature: Tax rates
 
     Scenario: Accessing the tax rate editing form
         Given I am on the page of tax rate "US Clothing Tax"
-          And I follow "Edit"
+          And I follow "edit"
          Then I should be editing tax rate "US Clothing Tax"
 
     Scenario: Accessing the editing form from the list
         Given I am on the tax rate index page
-          And I click "Edit" near "US Clothing Tax"
+          And I click "edit" near "US Clothing Tax"
          Then I should be editing tax rate "US Clothing Tax"
 
     Scenario: Updating the tax rate
         Given I am on the page of tax rate "UK+DE Clothing Tax"
-          And I follow "Edit"
+          And I follow "edit"
          When I fill in "Name" with "General Tax"
           And I press "Save changes"
          Then I should be on the page of tax rate "General Tax"
 
     Scenario: Deleting tax rate
         Given I am on the page of tax rate "US Clothing Tax"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the tax rate index page
           And I should see "Rate has been successfully deleted."
 
     Scenario: Deleted tax rate disappears from the list
         Given I am on the page of tax rate "US Electronics Tax"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the tax rate index page
           And I should not see tax rate with name "US Electronics Tax" in that list
 

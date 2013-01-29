@@ -43,12 +43,30 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
+stof_doctrine_extensions:
+    default_locale: %sylius.locale%
+    orm:
+        default:
+            tree: true
+            sluggable: true
+            timestampable: true
+
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
+
+sylius_assortment:
+    driver: doctrine/orm
+    classes:
+        product:
+            model: Sylius\Bundle\CoreBundle\Entity\Product
+            form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+        variant:
+            model: Sylius\Bundle\CoreBundle\Entity\Variant
+            form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
 
 sylius_taxation:
     driver: doctrine/orm

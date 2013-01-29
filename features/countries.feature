@@ -47,7 +47,7 @@ Feature: Countries and provinces
         Given I am on the country creation page
          When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
-          And I follow "Add province"
+          And I click "Add province"
           And I fill in province name with "Łódź"
           And I press "Create"
          Then I should be on the page of country "Poland"
@@ -62,12 +62,12 @@ Feature: Countries and provinces
 
     Scenario: Accessing the country editing form
         Given I am on the page of country "France"
-         When I follow "Edit"
+         When I follow "edit"
          Then I should be editing country "France"
 
     Scenario: Accessing the editing form from the list
         Given I am on the country index page
-         When I click "Edit" near "China"
+         When I click "edit" near "China"
          Then I should be editing country "China"
 
     Scenario: Updating the country and province
@@ -80,18 +80,18 @@ Feature: Countries and provinces
 
     Scenario: Deleting country
         Given I am on the page of country "China"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the country index page
           And I should see "Country has been successfully deleted."
 
     Scenario: Deleted country disappears from the list
         Given I am on the page of country "France"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the country index page
           And I should not see country with name "France" in that list
 
     Scenario: Deleting province
         Given I am on the page of country "France"
-         When I click "Delete" near "Toulouse"
+         When I click "delete" near "Toulouse"
          Then I should be on the page of country "France"
           And "Toulouse" should not appear on the page

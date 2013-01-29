@@ -4,8 +4,6 @@
 default:
     context:
         class: Context\FeatureContext
-    filters:
-        tags: "~@javascript"
     extensions:
         Behat\MinkExtension\Extension:
             base_url: "http://sylius.local/testgate.php"
@@ -19,6 +17,6 @@ default:
                 env: testing
             mink_driver: true
 
-js:
+no-js:
     filters:
-        tags: "@javascript"
+        tags: "~@javascript"
