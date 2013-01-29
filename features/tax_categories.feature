@@ -48,12 +48,12 @@ Feature: Tax categories
 
     Scenario: Accessing the tax category editing form
         Given I am on the page of tax category "Clothing"
-         When I follow "Edit"
+         When I follow "edit"
          Then I should be editing tax category "Clothing"
 
     Scenario: Accessing the editing form from the list
         Given I am on the tax category index page
-         When I click "Edit" near "Clothing"
+         When I click "edit" near "Clothing"
          Then I should be editing tax category "Clothing"
 
     Scenario: Updating the tax category
@@ -65,17 +65,17 @@ Feature: Tax categories
 
     Scenario: Deleting tax category
         Given I am on the page of tax category "Clothing"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the tax category index page
           And I should see "Category has been successfully deleted."
 
     Scenario: Deleted tax category disappears from the list
         Given I am on the page of tax category "Clothing"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the tax category index page
           And I should not see tax category with name "Clothing" in that list
 
     Scenario: Accessing the tax category details page from list
         Given I am on the tax category index page
-         When I click "Details" near "Clothing"
+         When I click "details" near "Clothing"
          Then I should be on the page of tax category "Clothing"

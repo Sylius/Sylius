@@ -95,12 +95,12 @@ Feature: Shipping methods
 
     Scenario: Accessing the shipping method editing form
         Given I am on the page of shipping method "DHL"
-         When I follow "Edit"
+         When I follow "edit"
          Then I should be editing shipping method "DHL"
 
     Scenario: Accessing the editing form from the list
         Given I am on the shipping method index page
-         When I click "Edit" near "FedEx"
+         When I click "edit" near "FedEx"
          Then I should be editing shipping method "FedEx"
 
     @javascript
@@ -112,12 +112,12 @@ Feature: Shipping methods
 
     Scenario: Deleting shipping method
         Given I am on the page of shipping method "FedEx"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the shipping method index page
           And I should see "Method has been successfully deleted."
 
     Scenario: Deleted shipping method disappears from the list
         Given I am on the page of shipping method "FedEx"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the shipping method index page
           And I should not see shipping method with name "FedEx" in that list

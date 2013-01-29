@@ -11,9 +11,12 @@
 
 namespace Context;
 
+use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Exception\ExpectationException;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -34,6 +37,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         'viewing'  => 'show',
         'creation' => 'create',
         'editing'  => 'update',
+        'building' => 'build',
     );
 
     /**
@@ -52,6 +56,30 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     {
         $this->kernel = $kernel;
     }
+
+
+    /**
+     * @Given /^go to "([^""]*)" tab$/
+     */
+    public function goToTab($tabLabel)
+    {
+        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+    }
+
+
+    /**
+     * @Given /^I add following option values:$/
+     */
+    public function iAddFollowingOptionValues(TableNode $table)
+    {
+        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+
+        foreach ($table->getRows() as $i => $value) {
+            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $this->iFillInFieldWith(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
+        }
+    }
+
 
     /**
      * @When /^I go to the website root$/
@@ -111,6 +139,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
 
     /**
      * @Then /^I should be on the page of ([^""]*) "([^""]*)"$/
+     * @Then /^I should still be on the page of ([^""]*) "([^""]*)"$/
      */
     public function iShouldBeOnTheResourcePage($type, $name)
     {
@@ -122,25 +151,48 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I am editing ([^""]*) "([^""]*)"$/
+     * @Given /^I am (building|viewing|editing) ([^""]*) "([^""]*)"$/
      */
-    public function iAmEditingResource($type, $name)
+    public function iAmDoingSomethingWithResource($action, $type, $name)
     {
         $type = str_replace(' ', '_', $type);
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
         $resource = $this->getDataContext()->findOneByName($type, $name);
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('sylius_backend_%s_update', $type), array('id' => $resource->getId())));
+        $this->getSession()->visit($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
     }
 
     /**
-     * @Then /^I should be editing ([^""]*) "([^""]*)"$/
+     * @Then /^I should be (building|viewing|editing) ([^""]*) "([^""]*)"$/
      */
-    public function iShouldEditingResource($type, $name)
+    public function iShouldBeDoingSmthWithResource($action, $type, $name)
     {
         $type = str_replace(' ', '_', $type);
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
         $resource = $this->getDataContext()->findOneByName($type, $name);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_update', $type), array('id' => $resource->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
+        $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Given /^I am creating variant of "([^""]*)"$/
+     */
+    public function iAmCreatingVariantOf($name)
+    {
+        $product = $this->getDataContext()->findOneByName('product', $name);
+
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+    }
+
+    /**
+     * @Given /^I should be creating variant of "([^""]*)"$/
+     */
+    public function iShouldBeCreatingVariantOf($name)
+    {
+        $product = $this->getDataContext()->findOneByName('product', $name);
+
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -180,6 +232,18 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * Fills in form fields with provided table.
+     *
+     * @When /^(?:|I )fill in the following:$/
+     */
+    public function iFillInFieldsWith(TableNode $fields)
+    {
+        foreach ($fields->getRowsHash() as $field => $value) {
+            $this->iFillInFieldWith($field, $value);
+        }
+    }
+
+    /**
      * @Given /^I fill in province name with "([^"]*)"$/
      */
     public function iFillInProvinceNameWith($value)
@@ -197,7 +261,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new NotFoundHttpException(sprintf('Table row with value "%s" does not exist', $value));
+            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
         if ($tr->findButton($button)) {
@@ -213,6 +277,14 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     public function iSelectOptionFrom($option, $field)
     {
         $this->getSession()->getPage()->selectFieldOption($field, $option);
+    }
+
+    /**
+     * @When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function additionallySelectOption($select, $option)
+    {
+        $this->getSession()->getPage()->selectFieldOption($select, $option, true);
     }
 
     /**
@@ -264,11 +336,16 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     /**
      * For example: I should see 10 products in that list.
      *
-     * @Then /^I should see (\d+) [^""]* in (that|the) list$/
+     * @Then /^I should see (\d+) ([^""]*) in (that|the) list$/
      */
-    public function iShouldSeeThatMuchResourcesInTheList($amount)
+    public function iShouldSeeThatMuchResourcesInTheList($amount, $type)
     {
-        $this->assertSession()->elementsCount('css', 'table tbody tr', $amount);
+        // If there is only one or none table on page, keep it simple.
+        if (2 > count($this->getSession()->getPage()->findAll('css', 'table'))) {
+            $this->assertSession()->elementsCount('css', 'table tbody tr', $amount);
+        } else {
+            $this->assertSession()->elementsCount('css', sprintf('table#%s tbody tr', str_replace(' ', '-', $type)), $amount);
+        }
     }
 
     /**

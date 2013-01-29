@@ -48,12 +48,12 @@ Feature: Shipping categories
 
     Scenario: Accessing the shipping category editing form
         Given I am on the page of shipping category "Regular"
-         When I follow "Edit"
+         When I follow "edit"
          Then I should be editing shipping category "Regular"
 
     Scenario: Accessing the editing form from the list
         Given I am on the shipping category index page
-         When I click "Edit" near "Heavy"
+         When I click "edit" near "Heavy"
          Then I should be editing shipping category "Heavy"
 
     Scenario: Updating the shipping category
@@ -65,12 +65,12 @@ Feature: Shipping categories
 
     Scenario: Deleting shipping category
         Given I am on the page of shipping category "Regular"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the shipping category index page
           And I should see "Category has been successfully deleted."
 
     Scenario: Deleted shipping category disappears from the list
         Given I am on the page of shipping category "Regular"
-         When I follow "Delete"
+         When I follow "delete"
          Then I should be on the shipping category index page
           And I should not see shipping category with name "Regular" in that list
