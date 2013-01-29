@@ -51,6 +51,25 @@ Feature: Product variants
           And I press "Create"
          Then I should see "Price must be greater than 0.01"
 
+    Scenario: Displaying the "Generate variants" button
+              only for products with options
+        Given I am viewing product "Mug"
+         Then I should not see "Generate variants"
+
+    Scenario: Generating all possible variants of product
+        Given I am viewing product "Black T-Shirt"
+         When I follow "Generate variants"
+         Then I should still be on the page of product "Black T-Shirt"
+          And I should see "Variants have been successfully generated."
+          And I should see 3 variants in the list
+
+    Scenario: Generating variants of product with multiple options
+        Given I am viewing product "Sylius T-Shirt"
+         When I follow "Generate variants"
+         Then I should still be on the page of product "Sylius T-Shirt"
+          And I should see "Variants have been successfully generated."
+          And I should see 9 variants in the list
+
     Scenario: Creating a product variant by selecting option
         Given I am creating variant of "Black T-Shirt"
          When I fill in "Price" with "19.99"
