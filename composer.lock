@@ -613,12 +613,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "93349ad3ab200c7aa69237355c4ee811d359d160"
+                "reference": "a4ad4bf0352f7caaba8934f98d8597a0fc8d5858"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/93349ad3ab200c7aa69237355c4ee811d359d160.zip",
-                "reference": "93349ad3ab200c7aa69237355c4ee811d359d160",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/a4ad4bf0352f7caaba8934f98d8597a0fc8d5858.zip",
+                "reference": "a4ad4bf0352f7caaba8934f98d8597a0fc8d5858",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +638,7 @@
                 "doctrine/mongodb": ">=1.0.0",
                 "doctrine/mongodb-odm": ">=1.0.0-BETA7"
             },
-            "time": "2013-01-24 18:57:40",
+            "time": "2013-01-29 19:10:35",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -978,12 +978,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/schmittjoh/serializer",
-                "reference": "3982db57770f84d264c87674edd334e889b81cec"
+                "reference": "71388cc58d4c146136ff7e32d9691562ddd5ae99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/serializer/archive/3982db57770f84d264c87674edd334e889b81cec.zip",
-                "reference": "3982db57770f84d264c87674edd334e889b81cec",
+                "url": "https://github.com/schmittjoh/serializer/archive/71388cc58d4c146136ff7e32d9691562ddd5ae99.zip",
+                "reference": "71388cc58d4c146136ff7e32d9691562ddd5ae99",
                 "shasum": ""
             },
             "require": {
@@ -1005,7 +1005,7 @@
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize data to YAML format."
             },
-            "time": "2013-01-28 16:45:30",
+            "time": "2013-01-29 10:56:07",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1791,12 +1791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "1e04b3f2a3fada73f29f4e322ec8ec28bceec549"
+                "reference": "020a396efb9b4bbe9852a990d319d8cb2b0addb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/1e04b3f2a3fada73f29f4e322ec8ec28bceec549.zip",
-                "reference": "1e04b3f2a3fada73f29f4e322ec8ec28bceec549",
+                "url": "https://github.com/Sylius/SyliusCoreBundle/archive/020a396efb9b4bbe9852a990d319d8cb2b0addb0.zip",
+                "reference": "020a396efb9b4bbe9852a990d319d8cb2b0addb0",
                 "shasum": ""
             },
             "require": {
@@ -1814,7 +1814,7 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-28 21:56:27",
+            "time": "2013-01-29 15:28:33",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2053,12 +2053,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "6b8a14d633dd7d800c3f151f9feaec8dd1c6c93f"
+                "reference": "7d5ed8d150eb41bb902b3e3dbb2a9801da72bedb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/6b8a14d633dd7d800c3f151f9feaec8dd1c6c93f.zip",
-                "reference": "6b8a14d633dd7d800c3f151f9feaec8dd1c6c93f",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/7d5ed8d150eb41bb902b3e3dbb2a9801da72bedb.zip",
+                "reference": "7d5ed8d150eb41bb902b3e3dbb2a9801da72bedb",
                 "shasum": ""
             },
             "require": {
@@ -2070,7 +2070,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-29 00:25:45",
+            "time": "2013-01-29 15:29:06",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2577,12 +2577,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Behat.git",
-                "reference": "4472c4214f908460eadc9290009726d9fc1b09f4"
+                "reference": "e5e20aa1d71a27942a88707a05bbb0c448c2dccc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Behat/archive/4472c4214f908460eadc9290009726d9fc1b09f4.zip",
-                "reference": "4472c4214f908460eadc9290009726d9fc1b09f4",
+                "url": "https://github.com/Behat/Behat/archive/e5e20aa1d71a27942a88707a05bbb0c448c2dccc.zip",
+                "reference": "e5e20aa1d71a27942a88707a05bbb0c448c2dccc",
                 "shasum": ""
             },
             "require": {
@@ -2601,7 +2601,7 @@
                 "behat/yii-extension": "for integration with Yii web framework",
                 "behat/mink-extension": "for integration with Mink testing framework"
             },
-            "time": "2013-01-28 22:41:43",
+            "time": "2013-01-29 15:47:06",
             "bin": [
                 "bin/behat"
             ],
@@ -3094,12 +3094,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec2.git",
-                "reference": "30c6e5605a6669168abe69df5430bcd1cdfd872a"
+                "reference": "a38c887e80ee93a5a3de97d2090d9354d203d19f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpspec/phpspec2/archive/30c6e5605a6669168abe69df5430bcd1cdfd872a.zip",
-                "reference": "30c6e5605a6669168abe69df5430bcd1cdfd872a",
+                "url": "https://github.com/phpspec/phpspec2/archive/a38c887e80ee93a5a3de97d2090d9354d203d19f.zip",
+                "reference": "a38c887e80ee93a5a3de97d2090d9354d203d19f",
                 "shasum": ""
             },
             "require": {
@@ -3111,7 +3111,7 @@
                 "symfony/finder": ">=2.1,<3.0",
                 "symfony/yaml": ">=2.1,<3.0"
             },
-            "time": "2013-01-21 09:33:29",
+            "time": "2013-01-29 10:39:48",
             "bin": [
                 "bin/phpspec"
             ],
