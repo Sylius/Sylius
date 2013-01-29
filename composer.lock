@@ -1990,12 +1990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
-                "reference": "639d33c3cdabf831552530806f335b4fba382573"
+                "reference": "138bc865afe5ec681527dacb1916acad5b05a8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusTaxationBundle/archive/639d33c3cdabf831552530806f335b4fba382573.zip",
-                "reference": "639d33c3cdabf831552530806f335b4fba382573",
+                "url": "https://github.com/Sylius/SyliusTaxationBundle/archive/138bc865afe5ec681527dacb1916acad5b05a8cd.zip",
+                "reference": "138bc865afe5ec681527dacb1916acad5b05a8cd",
                 "shasum": ""
             },
             "require": {
@@ -2008,7 +2008,7 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-29 22:55:01",
+            "time": "2013-01-29 23:19:58",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2053,12 +2053,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "7d5ed8d150eb41bb902b3e3dbb2a9801da72bedb"
+                "reference": "3371af7d0422af4791418d3187c9652fdc9091f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/7d5ed8d150eb41bb902b3e3dbb2a9801da72bedb.zip",
-                "reference": "7d5ed8d150eb41bb902b3e3dbb2a9801da72bedb",
+                "url": "https://github.com/Sylius/SyliusWebBundle/archive/3371af7d0422af4791418d3187c9652fdc9091f6.zip",
+                "reference": "3371af7d0422af4791418d3187c9652fdc9091f6",
                 "shasum": ""
             },
             "require": {
@@ -2070,7 +2070,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-29 15:29:06",
+            "time": "2013-01-29 23:19:31",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
