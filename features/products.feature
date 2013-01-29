@@ -19,6 +19,11 @@ Feature: Products
             | Mug           | 5.99  |                             |                        |
             | Sticker       | 10.00 |                             |                        |
           And product "Super T-Shirt" is available in all variations
+          And there are following tax categories:
+            | name        |
+            | Clothing    |
+            | Electronics |
+            | Print       |
 
     Scenario: Seeing index of all products
         Given I am on the dashboard page
@@ -142,6 +147,14 @@ Feature: Products
           And I press "Save changes"
          Then I should be on the page of product "Sticker"
           And I should see "This sticker is awesome"
+
+    Scenario: Selecting the product tax category
+        Given I am editing product "Sticker"
+         When I select "Print" from "Tax category"
+          And I press "Save changes"
+         Then I should be on the page of product "Sticker"
+          And I should see "Product has been successfully updated."
+          And "Print" should appear on the page
 
     Scenario: Deleting product
         Given I am on the page of product "Mug"
