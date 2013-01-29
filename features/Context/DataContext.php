@@ -33,8 +33,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @var array
      */
     public $repositories = array(
-        'tax_category'      => 'sylius_taxation.repository.category',
-        'tax_rate'          => 'sylius_taxation.repository.rate',
         'shipping_category' => 'sylius_shipping.repository.category',
         'shipping_method'   => 'sylius_shipping.repository.method',
         'country'           => 'sylius_addressing.repository.country',
@@ -239,8 +237,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereIsTaxRate($amount, $name, $category, $zone)
     {
-        $repository = $this->getService('sylius_taxation.repository.rate');
-        $manager = $this->getService('sylius_taxation.manager.rate');
+        $repository = $this->getRepository('tax_rate');
+        $manager = $this->getEntityManager();
 
         $rate = $repository->createNew();
         $rate->setName($name);

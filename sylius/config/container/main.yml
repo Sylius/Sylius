@@ -71,7 +71,7 @@ sylius_assortment:
 sylius_taxation:
     driver: doctrine/orm
     classes:
-        rate:
+        tax_rate:
             model: Sylius\Bundle\CoreBundle\Entity\TaxRate
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
