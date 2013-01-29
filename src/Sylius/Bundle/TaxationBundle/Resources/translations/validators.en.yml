@@ -1,9 +1,14 @@
-sylius_taxation:
-    category:
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
         name:
             not_blank: Please enter tax category name.
-    rate:
+    tax_rate:
         name:
             not_blank: Please enter tax rate name.
         amount:
             not_blank: Please enter tax rate amount.
+        calculator:
+            not_blank: Please select tax calculator.

@@ -17,54 +17,54 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_taxation.form.type.calculator_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType</parameter>
+        <parameter key="sylius.form.type.tax_calculator_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType</parameter>
 
-        <parameter key="sylius_taxation.calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator</parameter>
-        <parameter key="sylius_taxation.calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator</parameter>
+        <parameter key="sylius.tax_calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius.tax_calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator</parameter>
 
-        <parameter key="sylius_taxation.rate_resolver.default.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
+        <parameter key="sylius.tax_rate_resolver.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_taxation.controller.category" class="%sylius_taxation.controller.category.class%">
-            <argument>sylius_taxation</argument>
-            <argument>category</argument>
+        <service id="sylius.controller.tax_category" class="%sylius.controller.tax_category.class%">
+            <argument>sylius</argument>
+            <argument>tax_category</argument>
             <argument>SyliusTaxationBundle:TaxCategory</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius_taxation.controller.rate" class="%sylius_taxation.controller.rate.class%">
-            <argument>sylius_taxation</argument>
-            <argument>rate</argument>
+        <service id="sylius.controller.tax_rate" class="%sylius.controller.tax_rate.class%">
+            <argument>sylius</argument>
+            <argument>tax_rate</argument>
             <argument>SyliusTaxationBundle:TaxRate</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="sylius_taxation.form.type.category" class="%sylius_taxation.form.type.category.class%">
-            <argument>%sylius_taxation.model.category.class%</argument>
-            <tag name="form.type" alias="sylius_taxation_category" />
+        <service id="sylius.form.type.tax_category" class="%sylius.form.type.tax_category.class%">
+            <argument>%sylius.model.tax_category.class%</argument>
+            <tag name="form.type" alias="sylius_tax_category" />
         </service>
-        <service id="sylius_taxation.form.type.rate" class="%sylius_taxation.form.type.rate.class%">
-            <argument>%sylius_taxation.model.rate.class%</argument>
-            <tag name="form.type" alias="sylius_taxation_rate" />
-        </service>
-
-        <service id="sylius_taxation.form.type.calculator_choice" class="%sylius_taxation.form.type.calculator_choice.class%">
-            <argument>%sylius_taxation.calculators%</argument>
-            <tag name="form.type" alias="sylius_taxation_calculator_choice" />
+        <service id="sylius.form.type.tax_rate" class="%sylius.form.type.tax_rate.class%">
+            <argument>%sylius.model.tax_rate.class%</argument>
+            <tag name="form.type" alias="sylius_tax_rate" />
         </service>
 
-        <service id="sylius_taxation.calculator" class="%sylius_taxation.calculator.class%" />
-
-        <service id="sylius_taxation.calculator.default" class="%sylius_taxation.calculator.default.class%">
-            <tag name="sylius_taxation.calculator" calculator="default" />
+        <service id="sylius.form.type.tax_calculator_choice" class="%sylius.form.type.tax_calculator_choice.class%">
+            <argument>%sylius.tax_calculators%</argument>
+            <tag name="form.type" alias="sylius_tax_calculator_choice" />
         </service>
 
-        <service id="sylius_taxation.rate_resolver.default" class="%sylius_taxation.rate_resolver.default.class%">
-            <argument type="service" id="sylius_taxation.repository.rate" />
+        <service id="sylius.tax_calculator" class="%sylius.tax_calculator.class%" />
+
+        <service id="sylius.tax_calculator.default" class="%sylius.tax_calculator.default.class%">
+            <tag name="sylius.tax_calculator" calculator="default" />
+        </service>
+
+        <service id="sylius.tax_rate_resolver" class="%sylius.tax_rate_resolver.class%">
+            <argument type="service" id="sylius.repository.tax_rate" />
         </service>
     </services>
 

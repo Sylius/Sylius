@@ -47,36 +47,24 @@ class SyliusTaxationExtension extends Extension
         $container->setParameter('sylius_taxation.driver', $driver);
         $container->setParameter('sylius_taxation.engine', $config['engine']);
 
-        $container->setAlias('sylius_taxation.rate_resolver', $config['rate_resolver']);
-
-        $classes = $config['classes'];
-
-        $categoryClasses = $classes['category'];
-
-        if (isset($categoryClasses['model'])) {
-            $container->setParameter('sylius_taxation.model.category.class', $categoryClasses['model']);
-        }
-
-        if (isset($categoryClasses['repository'])) {
-            $container->setParameter('sylius_taxation.repository.category.class', $categoryClasses['repository']);
-        }
-
-        $container->setParameter('sylius_taxation.controller.category.class', $categoryClasses['controller']);
-        $container->setParameter('sylius_taxation.form.type.category.class', $categoryClasses['form']);
-
-        $rateClasses = $classes['rate'];
-
-        if (isset($rateClasses['model'])) {
-            $container->setParameter('sylius_taxation.model.rate.class', $rateClasses['model']);
-        }
-
-        if (isset($rateClasses['repository'])) {
-            $container->setParameter('sylius_taxation.repository.rate.class', $rateClasses['repository']);
-        }
-
-        $container->setParameter('sylius_taxation.controller.rate.class', $rateClasses['controller']);
-        $container->setParameter('sylius_taxation.form.type.rate.class', $rateClasses['form']);
+        $this->mapClassParameters($config['classes'], $container);
 
         $loader->load('services.xml');
+    }
+
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $service = $service === 'form' ? 'form.type' : $service;
+                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+            }
+        }
     }
 }

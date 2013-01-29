@@ -55,6 +55,6 @@ abstract class TaxCategoryChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxation_category_choice';
+        return 'sylius_tax_category_choice';
     }
 }

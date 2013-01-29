@@ -42,8 +42,8 @@ class SyliusTaxationBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface' => 'sylius_taxation.model.category.class',
-            'Sylius\Bundle\TaxationBundle\Model\TaxRateInterface'     => 'sylius_taxation.model.rate.class',
+            'Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
+            'Sylius\Bundle\TaxationBundle\Model\TaxRateInterface'     => 'sylius.model.tax_rate.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxation', $interfaces));

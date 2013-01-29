@@ -46,11 +46,11 @@ class TaxCategoryType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius_taxation.label.category.name'
+                'label' => 'sylius.form.tax_category.name'
             ))
             ->add('description', 'textarea', array(
-                'required'              => false,
-                'label' => 'sylius_taxation.label.category.description'
+                'required' => false,
+                'label'    => 'sylius.form.tax_category.description'
             ))
         ;
     }
@@ -72,6 +72,6 @@ class TaxCategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxation_category';
+        return 'sylius_tax_category';
     }
 }

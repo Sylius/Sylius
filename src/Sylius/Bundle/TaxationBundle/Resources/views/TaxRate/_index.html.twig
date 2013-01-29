@@ -1,22 +1,22 @@
 {% import 'SyliusTaxationBundle:TaxRate:macros.html.twig' as macros %}
 
-<h1>Tax rates <small>Configure your tax rates</small></h1>
+<h1>Tax rates <small>Configure your tax tax_rates</small></h1>
 
 <div class="well">
-    <a href="{{ path('sylius_taxation_rate_create') }}" class="btn btn-primary">
+    <a href="{{ path('sylius_tax_rate_create') }}" class="btn btn-primary">
         <i class="icon-plus-sign"></i> new tax rate
     </a>
-    <a href="{{ path('sylius_taxation_category_index') }}" class="btn btn-success">
-        <i class="icon-list"></i> manage taxation rates
+    <a href="{{ path('sylius_tax_category_index') }}" class="btn btn-success">
+        <i class="icon-list"></i> manage taxation categories
     </a>
 </div>
 
-{% if rates.haveToPaginate()|default(false) %}
-{{ pagerfanta(rates, 'twitter_bootstrap_translated') }}
+{% if tax_rates.haveToPaginate()|default(false) %}
+{{ pagerfanta(tax_rates, 'twitter_bootstrap_translated') }}
 {% endif %}
 
-{{ macros.list(rates) }}
+{{ macros.list(tax_rates) }}
 
-{% if rates.haveToPaginate()|default(false) %}
-{{ pagerfanta(rates, 'twitter_bootstrap_translated') }}
+{% if tax_rates.haveToPaginate()|default(false) %}
+{{ pagerfanta(tax_rates, 'twitter_bootstrap_translated') }}
 {% endif %}

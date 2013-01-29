@@ -63,6 +63,6 @@ class CalculatorChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxation_calculator_choice';
+        return 'sylius_tax_calculator_choice';
     }
 }

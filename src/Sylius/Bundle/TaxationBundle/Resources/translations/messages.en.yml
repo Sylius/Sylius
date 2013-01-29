@@ -1,9 +1,12 @@
-sylius_taxation:
-    label:
-        category:
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        tax_category:
             name: Name
             description: Description
-        rate:
+        tax_rate:
             category: Category
             name: Name
             amount: Amount

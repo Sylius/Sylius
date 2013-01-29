@@ -1,9 +1,9 @@
-<h1>Editing tax rate <small>{{ rate.name }}</small></h1>
+<h1>Editing tax rate <small>{{ tax_rate.name }}</small></h1>
 <hr />
-<form action="{{ path('sylius_taxation_rate_update', {'id': rate.id}) }}" method="post" class="form-horizontal" novalidate>
+<form action="{{ path('sylius_tax_rate_update', {'id': tax_rate.id}) }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusTaxationBundle:TaxRate:_form.html.twig' %}
     <div class="form-actions">
         <input type="submit" value="save changes" class="btn btn-primary btn-large" />
-        <a href="{{ path('sylius_taxation_rate_show', {'id': rate.id}) }}" class="btn btn-large">cancel</a>
+        <a href="{{ path('sylius_tax_rate_show', {'id': tax_rate.id}) }}" class="btn btn-large">cancel</a>
     </div>
 </form>

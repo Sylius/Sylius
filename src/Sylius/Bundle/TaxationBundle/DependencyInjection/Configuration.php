@@ -38,7 +38,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
-                ->scalarNode('rate_resolver')->defaultValue('sylius_taxation.rate_resolver.default')->end()
             ->end()
         ;
 
@@ -59,7 +58,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('category')
+                        ->arrayNode('tax_category')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->end()
@@ -68,7 +67,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxCategoryType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('rate')
+                        ->arrayNode('tax_rate')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->end()
