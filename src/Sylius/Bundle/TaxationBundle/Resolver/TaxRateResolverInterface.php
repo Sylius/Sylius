@@ -17,7 +17,7 @@ use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
 /**
  * Tax rate resolver interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface TaxRateResolverInterface
 {

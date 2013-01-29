@@ -16,7 +16,7 @@ use Sylius\Bundle\TaxationBundle\Model\TaxCategory as BaseTaxCategory;
 /**
  * Tax category entity.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class TaxCategory extends BaseTaxCategory
 {

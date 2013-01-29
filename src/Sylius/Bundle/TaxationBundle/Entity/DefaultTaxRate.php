@@ -14,7 +14,7 @@ namespace Sylius\Bundle\TaxationBundle\Entity;
 /**
  * Default tax rate entity.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class DefaultTaxRate extends TaxRate
 {

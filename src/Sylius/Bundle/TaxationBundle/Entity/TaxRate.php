@@ -16,7 +16,7 @@ use Sylius\Bundle\TaxationBundle\Model\TaxRate as BaseTaxRate;
 /**
  * Tax rate mapped super-class.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class TaxRate extends BaseTaxRate
 {

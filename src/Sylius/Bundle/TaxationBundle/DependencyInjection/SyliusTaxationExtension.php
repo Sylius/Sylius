@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Taxation system extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusTaxationExtension extends Extension
 {

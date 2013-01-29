@@ -17,7 +17,7 @@ use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
  * Delegating calculator.
  * It uses proper calculator to calculate the amount of tax.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class DelegatingCalculator implements CalculatorInterface
 {

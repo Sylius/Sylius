@@ -14,7 +14,7 @@ namespace Sylius\Bundle\TaxationBundle\Model;
 /**
  * Tax rate interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface TaxRateInterface
 {
