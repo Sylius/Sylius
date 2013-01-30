@@ -264,8 +264,10 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
             throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
-        if ($tr->findButton($button)) {
-            $tr->pressButton($button);
+        $locator = sprintf('button:contains("%s")', $button);
+
+        if ($tr->has('css', $locator)) {
+            $tr->find('css', $locator)->press();
         } else {
             $tr->clickLink($button);
         }

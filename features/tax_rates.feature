@@ -86,15 +86,27 @@ Feature: Tax rates
 
     Scenario: Deleting tax rate
         Given I am on the page of tax rate "US Clothing Tax"
-         When I follow "delete"
+         When I press "delete"
          Then I should be on the tax rate index page
           And I should see "Rate has been successfully deleted."
 
     Scenario: Deleted tax rate disappears from the list
         Given I am on the page of tax rate "US Electronics Tax"
-         When I follow "delete"
+         When I press "delete"
          Then I should be on the tax rate index page
           And I should not see tax rate with name "US Electronics Tax" in that list
+
+    Scenario: Deleting tax rate from the list
+        Given I am on the tax rate index page
+         When I click "delete" near "US Electronics Tax"
+         Then I should still be on the tax rate index page
+          And "Rate has been successfully deleted." should appear on the page
+          But I should not see tax rate with name "US Electronics Tax" in that list
+
+    Scenario: Accessing tax rate details page via list
+        Given I am on the tax rate index page
+         When I click "details" near "US Electronics Tax"
+         Then I should be on the page of tax rate "US Electronics Tax"
 
     Scenario: Displaying the tax rate amount on details page
         Given I am on the page of tax rate "US Clothing Tax"

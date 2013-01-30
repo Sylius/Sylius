@@ -613,12 +613,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "a4ad4bf0352f7caaba8934f98d8597a0fc8d5858"
+                "reference": "5ecdc7dd8f4afe8eca7c94725e20995e914f7ff5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/a4ad4bf0352f7caaba8934f98d8597a0fc8d5858.zip",
-                "reference": "a4ad4bf0352f7caaba8934f98d8597a0fc8d5858",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/5ecdc7dd8f4afe8eca7c94725e20995e914f7ff5.zip",
+                "reference": "5ecdc7dd8f4afe8eca7c94725e20995e914f7ff5",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +638,7 @@
                 "doctrine/mongodb": ">=1.0.0",
                 "doctrine/mongodb-odm": ">=1.0.0-BETA7"
             },
-            "time": "2013-01-29 19:10:35",
+            "time": "2013-01-30 04:49:23",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1990,12 +1990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
-                "reference": "138bc865afe5ec681527dacb1916acad5b05a8cd"
+                "reference": "69a75e4ded20e7b053425bbc486a4a0a8b40ad25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusTaxationBundle/archive/138bc865afe5ec681527dacb1916acad5b05a8cd.zip",
-                "reference": "138bc865afe5ec681527dacb1916acad5b05a8cd",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxationBundle/zipball/69a75e4ded20e7b053425bbc486a4a0a8b40ad25",
+                "reference": "69a75e4ded20e7b053425bbc486a4a0a8b40ad25",
                 "shasum": ""
             },
             "require": {
@@ -2008,7 +2008,7 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-29 23:19:58",
+            "time": "2013-01-30 20:10:11",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2053,12 +2053,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "3371af7d0422af4791418d3187c9652fdc9091f6"
+                "reference": "4ad47bdf59f18dda11dac741c2ab716f69a6c92c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusWebBundle/archive/3371af7d0422af4791418d3187c9652fdc9091f6.zip",
-                "reference": "3371af7d0422af4791418d3187c9652fdc9091f6",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/4ad47bdf59f18dda11dac741c2ab716f69a6c92c",
+                "reference": "4ad47bdf59f18dda11dac741c2ab716f69a6c92c",
                 "shasum": ""
             },
             "require": {
@@ -2070,7 +2070,7 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop"
             },
-            "time": "2013-01-29 23:19:31",
+            "time": "2013-01-30 20:35:04",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
