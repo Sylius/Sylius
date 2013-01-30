@@ -19,15 +19,15 @@
     <class name="Sylius\Bundle\ShippingBundle\Model\ShippingCategory">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius_shipping.category.name.not_blank</option>
+                <option name="message">sylius.shipping_category.name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_shipping.category.name.min_length</option>
+                <option name="message">sylius.shipping_category.name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_shipping.category.name.max_length</option>
+                <option name="message">sylius.shipping_category.name.max_length</option>
             </constraint>
         </property>
     </class>
@@ -35,28 +35,28 @@
     <class name="Sylius\Bundle\ShippingBundle\Model\ShippingMethod">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius_shipping.method.name.not_blank</option>
+                <option name="message">sylius.shipping_method.name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_shipping.method.name.min_length</option>
+                <option name="message">sylius.shipping_method.name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_shipping.method.name.max_length</option>
+                <option name="message">sylius.shipping_method.name.max_length</option>
             </constraint>
         </property>
         <property name="calculator">
             <constraint name="NotBlank">
-                <option name="message">sylius_shipping.method.calculator.not_blank</option>
+                <option name="message">sylius.shipping_method.calculator.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_shipping.method.calculator.min_length</option>
+                <option name="message">sylius.shipping_method.calculator.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_shipping.method.calculator.max_length</option>
+                <option name="message">sylius.shipping_method.calculator.max_length</option>
             </constraint>
         </property>
     </class>

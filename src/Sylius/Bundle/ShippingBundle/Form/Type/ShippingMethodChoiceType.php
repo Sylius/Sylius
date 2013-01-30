@@ -68,7 +68,7 @@ class ShippingMethodChoiceType extends AbstractType
                 'shippables',
             ))
             ->setAllowedTypes(array(
-                'shippables' => 'Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface',
+                'shippables' => array('Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface'),
                 'criteria'   => array('array')
             ))
         ;

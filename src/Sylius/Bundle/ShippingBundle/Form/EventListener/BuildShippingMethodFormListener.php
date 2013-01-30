@@ -16,6 +16,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Event\DataEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * This listener adds configuration form to a method, if
@@ -76,16 +77,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
             return;
         }
 
-        $calculator = $this->calculatorRegistry->getCalculator($method->getCalculator());
-
-        if (true !== $calculator->isConfigurable()) {
-            return;
-        }
-
-        $configuration = $method->getConfiguration();
-        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $configuration);
-
-        $form->add($configurationField);
+        $this->addConfigurationFields($form, $method->getCalculator(), $method->getConfiguration());
     }
 
     /**
@@ -102,13 +94,25 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
             return;
         }
 
-        $calculator = $this->calculatorRegistry->getCalculator($data['calculator']);
+        $this->addConfigurationFields($form, $data['calculator']);
+    }
+
+    /**
+     * Add the calculator configuration fields.
+     *
+     * @param FormInterface $form
+     * @param string        $calculatorName
+     * @param array         $data
+     */
+    protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = array())
+    {
+        $calculator = $this->calculatorRegistry->getCalculator($calculatorName);
 
         if (true !== $calculator->isConfigurable()) {
             return;
         }
 
-        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType());
+        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $data);
 
         $form->add($configurationField);
     }

@@ -27,14 +27,14 @@ class RegisterCalculatorsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius_shipping.calculator_registry')) {
+        if (!$container->hasDefinition('sylius.shipping_calculator_registry')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius_shipping.calculator_registry');
+        $registry = $container->getDefinition('sylius.shipping_calculator_registry');
         $calculators = array();
 
-        foreach ($container->findTaggedServiceIds('sylius_shipping.calculator') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('sylius.shipping_calculator') as $id => $attributes) {
             $name = $attributes[0]['calculator'];
             $label = $attributes[0]['label'];
 
@@ -43,6 +43,6 @@ class RegisterCalculatorsPass implements CompilerPassInterface
             $registry->addMethodCall('registerCalculator', array($name, new Reference($id)));
         }
 
-        $container->setParameter('sylius_shipping.calculators', $calculators);
+        $container->setParameter('sylius.shipping_calculators', $calculators);
     }
 }

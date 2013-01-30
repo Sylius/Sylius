@@ -31,7 +31,7 @@ class PerItemRateConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'money', array(
-                'label' => 'sylius_shipping.label.per_item_rate_calculator.amount',
+                'label' => 'sylius.form.shipping_calculator.per_item_rate_configuration.amount',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),

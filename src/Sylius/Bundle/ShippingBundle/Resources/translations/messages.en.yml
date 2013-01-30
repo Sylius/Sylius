@@ -1,19 +1,23 @@
-sylius_shipping:
-    label:
-        method:
-            name: Name
-            category: Category
-            categoryRequirement: Category requirement
-            calculator: Calculator
-            configuration: Configuration
-        flat_rate_calculator:
-            amount: Amount
-        per_item_rate_calculator:
-            amount: Amount
-        flexible_rate_calculator:
-            first_item_cost: First item cost
-            additional_item_cost: Additional item cost
-            additional_item_limit: Limit additional items
-        category:
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_category:
             name: Name
             description: Description
+        shipping_method:
+            name: Name
+            category: Category
+            category_requirement: Category requirement
+            calculator: Calculator
+            configuration: Configuration
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Amount
+            per_item_rate_configuration:
+                amount: Amount
+            flexible_rate_configuration:
+                first_item_cost: First item cost
+                additional_item_cost: Additional item cost
+                additional_item_limit: Limit additional items

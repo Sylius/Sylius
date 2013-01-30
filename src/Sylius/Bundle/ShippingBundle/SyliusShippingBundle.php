@@ -45,10 +45,10 @@ class SyliusShippingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\ShippingBundle\Model\ShipmentInterface'         => 'sylius_shipping.model.shipment.class',
-            'Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface'     => 'sylius_shipping.model.shipment_item.class',
-            'Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface' => 'sylius_shipping.model.category.class',
-            'Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface'   => 'sylius_shipping.model.method.class',
+            'Sylius\Bundle\ShippingBundle\Model\ShipmentInterface'         => 'sylius.model.shipment.class',
+            'Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface'     => 'sylius.model.shipment_item.class',
+            'Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface' => 'sylius.model.shipping_category.class',
+            'Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface'   => 'sylius.model.shipping_method.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_shipping', $interfaces));
