@@ -1,7 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_addressing:
+sylius:
     address:
         first_name:
             not_blank: "Please enter first name."

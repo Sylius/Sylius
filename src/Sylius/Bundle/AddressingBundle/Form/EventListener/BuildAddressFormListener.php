@@ -76,7 +76,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
         }
 
         if ($country->hasProvinces()) {
-            $form->add($this->factory->createNamed('province', 'sylius_addressing_province_choice', $address->getProvince(), array(
+            $form->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
                 'country'  => $country
             )));
         }
@@ -97,7 +97,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
         $country = $this->countryRepository->find($countryId);
 
         if ($country->hasProvinces()) {
-            $form->add($this->factory->createNamed('province', 'sylius_addressing_province_choice', null, array(
+            $form->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
                 'country'  => $country
             )));
         }

@@ -26,8 +26,8 @@ class ZoneMemberCountryType extends ZoneMemberType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_addressing_country_choice', array(
-                'label' => 'sylius_addressing.label.zone_member_country.country'
+            ->add('country', 'sylius_country_choice', array(
+                'label' => 'sylius.form.zone_member_country.country'
             ))
         ;
 
@@ -39,6 +39,6 @@ class ZoneMemberCountryType extends ZoneMemberType
      */
     public function getName()
     {
-        return 'sylius_addressing_zone_member_country';
+        return 'sylius_zone_member_country';
     }
 }

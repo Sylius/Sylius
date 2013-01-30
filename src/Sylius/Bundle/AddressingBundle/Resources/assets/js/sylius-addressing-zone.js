@@ -8,21 +8,21 @@
  */
 (function ( $ ) {
     $(document).ready(function() {
-        var typeSelect = $('#sylius_addressing_zone_type');
+        var typeSelect = $('#sylius_zone_type');
 
         $('form.form-horizontal').on('submit', function(e) {
-            $('div[id^="sylius-addressing-zone-members-"]').not('[id$="'+ typeSelect.val() +'"]').each(function () {
+            $('div[id^="sylius-zone-members-"]').not('[id$="'+ typeSelect.val() +'"]').each(function () {
                 $(this).remove();
             });
         });
 
         typeSelect.on('change', function() {
             var value = $(this).val();
-            $('div[id^="sylius-addressing-zone-members-"]').hide();
-            $('#sylius-addressing-zone-members-' + value).show();
+            $('div[id^="sylius-zone-members-"]').hide();
+            $('#sylius-zone-members-' + value).show();
             $('a[data-collection-button="add"]')
-                .data('collection', 'sylius-addressing-zone-members-' + value)
-                .data('prototype', 'sylius-addressing-zone-members-' + value)
+                .data('collection', 'sylius-zone-members-' + value)
+                .data('prototype', 'sylius-zone-members-' + value)
             ;
         }).trigger('change');
     });

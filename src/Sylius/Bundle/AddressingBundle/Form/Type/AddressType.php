@@ -50,22 +50,22 @@ class AddressType extends AbstractType
         $builder
             ->addEventSubscriber($this->eventListener)
             ->add('firstName', 'text', array(
-                'label' => 'sylius_addressing.label.address.first_name'
+                'label' => 'sylius.form.address.first_name'
             ))
             ->add('lastName', 'text', array(
-                'label' => 'sylius_addressing.label.address.last_name'
+                'label' => 'sylius.form.address.last_name'
             ))
-            ->add('country', 'sylius_addressing_country_choice', array(
-                'label' => 'sylius_addressing.label.address.country'
+            ->add('country', 'sylius_country_choice', array(
+                'label' => 'sylius.form.address.country'
             ))
             ->add('street', 'text', array(
-                'label' => 'sylius_addressing.label.address.street'
+                'label' => 'sylius.form.address.street'
             ))
             ->add('city', 'text', array(
-                'label' => 'sylius_addressing.label.address.city'
+                'label' => 'sylius.form.address.city'
             ))
             ->add('postcode', 'text', array(
-                'label' => 'sylius_addressing.label.address.postcode'
+                'label' => 'sylius.form.address.postcode'
             ))
         ;
     }
@@ -87,6 +87,6 @@ class AddressType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_address';
+        return 'sylius_address';
     }
 }

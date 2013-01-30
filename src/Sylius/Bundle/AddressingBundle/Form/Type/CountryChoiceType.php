@@ -55,6 +55,6 @@ abstract class CountryChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_country_choice';
+        return 'sylius_country_choice';
     }
 }

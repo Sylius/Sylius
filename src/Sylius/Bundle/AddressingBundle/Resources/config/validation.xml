@@ -19,77 +19,77 @@
     <class name="Sylius\Bundle\AddressingBundle\Model\Address">
         <property name="firstName">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.address.first_name.not_blank</option>
+                <option name="message">sylius.address.first_name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.address.first_name.min_length</option>
+                <option name="message">sylius.address.first_name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.address.first_name.max_length</option>
+                <option name="message">sylius.address.first_name.max_length</option>
             </constraint>
         </property>
         <property name="lastName">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.address.last_name.not_blank</option>
+                <option name="message">sylius.address.last_name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.address.last_name.min_length</option>
+                <option name="message">sylius.address.last_name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.address.last_name.max_length</option>
+                <option name="message">sylius.address.last_name.max_length</option>
             </constraint>
         </property>
         <property name="country">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.address.country.not_blank</option>
+                <option name="message">sylius.address.country.not_blank</option>
             </constraint>
         </property>
         <getter property="valid">
             <constraint name="True">
-                <option name="message">sylius_addressing.address.province.valid</option>
+                <option name="message">sylius.address.province.valid</option>
             </constraint>
         </getter>
         <property name="street">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.address.street.not_blank</option>
+                <option name="message">sylius.address.street.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.address.street.min_length</option>
+                <option name="message">sylius.address.street.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.address.street.max_length</option>
+                <option name="message">sylius.address.street.max_length</option>
             </constraint>
         </property>
         <property name="city">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.address.city.not_blank</option>
+                <option name="message">sylius.address.city.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.address.city.min_length</option>
+                <option name="message">sylius.address.city.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.address.city.max_length</option>
+                <option name="message">sylius.address.city.max_length</option>
             </constraint>
         </property>
         <property name="postcode">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.address.postcode.not_blank</option>
+                <option name="message">sylius.address.postcode.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.address.postcode.min_length</option>
+                <option name="message">sylius.address.postcode.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.address.postcode.max_length</option>
+                <option name="message">sylius.address.postcode.max_length</option>
             </constraint>
         </property>
     </class>
@@ -97,28 +97,28 @@
     <class name="Sylius\Bundle\AddressingBundle\Model\Country">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.country.name.not_blank</option>
+                <option name="message">sylius.country.name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.country.name.min_length</option>
+                <option name="message">sylius.country.name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.country.name.max_length</option>
+                <option name="message">sylius.country.name.max_length</option>
             </constraint>
         </property>
         <property name="isoName">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.country.iso_name.not_blank</option>
+                <option name="message">sylius.country.iso_name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.country.iso_name.min_length</option>
+                <option name="message">sylius.country.iso_name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.country.iso_name.max_length</option>
+                <option name="message">sylius.country.iso_name.max_length</option>
             </constraint>
         </property>
     </class>
@@ -126,15 +126,15 @@
     <class name="Sylius\Bundle\AddressingBundle\Model\Province">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.province.name.not_blank</option>
+                <option name="message">sylius.province.name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.province.name.min_length</option>
+                <option name="message">sylius.province.name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.province.name.max_length</option>
+                <option name="message">sylius.province.name.max_length</option>
             </constraint>
         </property>
     </class>
@@ -142,22 +142,22 @@
     <class name="Sylius\Bundle\AddressingBundle\Model\Zone">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius_addressing.zone.name.not_blank</option>
+                <option name="message">sylius.zone.name.not_blank</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
-                <option name="message">sylius_addressing.zone.name.min_length</option>
+                <option name="message">sylius.zone.name.min_length</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
-                <option name="message">sylius_addressing.zone.name.max_length</option>
+                <option name="message">sylius.zone.name.max_length</option>
             </constraint>
         </property>
         <property name="members">
             <constraint name="Valid" />
             <constraint name="Count">
                 <option name="min">1</option>
-                <option name="minMessage">sylius_addressing.zone.members.min_count</option>
+                <option name="minMessage">sylius.zone.members.min_count</option>
             </constraint>
         </property>
     </class>

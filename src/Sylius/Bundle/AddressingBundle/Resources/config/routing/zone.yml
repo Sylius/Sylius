@@ -1,22 +1,22 @@
 # This file is part of the Sylius sandbox application.
 # (c) Paweł Jędrzejewski
 
-sylius_addressing_zone_list:
+sylius_zone_list:
     pattern: /
     defaults:
-        _controller: sylius_addressing.controller.zone:indexAction
+        _controller: sylius.controller.zone:indexAction
 
-sylius_addressing_zone_create:
+sylius_zone_create:
     pattern: /create
     defaults:
-        _controller: sylius_addressing.controller.zone:createAction
+        _controller: sylius.controller.zone:createAction
 
-sylius_addressing_zone_update:
+sylius_zone_update:
     pattern: /{id}/update
     defaults:
-        _controller: sylius_addressing.controller.zone:updateAction
+        _controller: sylius.controller.zone:updateAction
 
-sylius_addressing_zone_delete:
+sylius_zone_delete:
     pattern: /{id}/delete
     defaults:
-        _controller: sylius_addressing.controller.zone:deleteAction
+        _controller: sylius.controller.zone:deleteAction

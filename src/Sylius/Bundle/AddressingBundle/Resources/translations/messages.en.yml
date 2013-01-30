@@ -1,8 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_addressing:
-    label:
+sylius:
+    form:
         address:
             first_name: "First name"
             last_name: "Last name"

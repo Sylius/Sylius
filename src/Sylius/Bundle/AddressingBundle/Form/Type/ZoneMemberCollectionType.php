@@ -60,9 +60,9 @@ class ZoneMemberCollectionType extends AbstractType
     {
         $prototypes = array();
         $types = array(
-            'sylius_addressing_zone_member_country',
-            'sylius_addressing_zone_member_province',
-            'sylius_addressing_zone_member_zone',
+            'sylius_zone_member_country',
+            'sylius_zone_member_province',
+            'sylius_zone_member_zone',
         );
         foreach ($types as $type) {
             $prototype = $this->buildPrototype($builder, $options['prototype_name'], $type, $options['options'])->getForm();
@@ -125,6 +125,6 @@ class ZoneMemberCollectionType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_zone_member_collection';
+        return 'sylius_zone_member_collection';
     }
 }
