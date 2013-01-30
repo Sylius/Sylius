@@ -6,6 +6,8 @@ sylius:
         name:
             not_blank: Please enter tax category name.
     tax_rate:
+        category:
+            not_blank: Please select tax category.
         name:
             not_blank: Please enter tax rate name.
         amount:
