@@ -78,13 +78,13 @@ sylius_taxation:
 sylius_shipping:
     driver: doctrine/orm
     classes:
-        method:
-            model: Sylius\Bundle\CoreBundle\Entity\ShippingMethod
-            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
         shipment:
             model: Sylius\Bundle\CoreBundle\Entity\Shipment
         shipment_item:
             model: Sylius\Bundle\CoreBundle\Entity\InventoryUnit
+        shipping_method:
+            model: Sylius\Bundle\CoreBundle\Entity\ShippingMethod
+            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
 sylius_addressing:
     driver: doctrine/orm

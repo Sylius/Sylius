@@ -33,11 +33,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @var array
      */
     public $repositories = array(
-        'shipping_category' => 'sylius_shipping.repository.category',
-        'shipping_method'   => 'sylius_shipping.repository.method',
-        'country'           => 'sylius_addressing.repository.country',
-        'province'          => 'sylius_addressing.repository.province',
-        'zone'              => 'sylius_addressing.repository.zone',
+        'country'  => 'sylius_addressing.repository.country',
+        'province' => 'sylius_addressing.repository.province',
+        'zone'     => 'sylius_addressing.repository.zone',
     );
 
     /**

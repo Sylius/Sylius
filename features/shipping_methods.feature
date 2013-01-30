@@ -112,12 +112,12 @@ Feature: Shipping methods
 
     Scenario: Deleting shipping method
         Given I am on the page of shipping method "FedEx"
-         When I follow "delete"
+         When I press "delete"
          Then I should be on the shipping method index page
           And I should see "Method has been successfully deleted."
 
     Scenario: Deleted shipping method disappears from the list
         Given I am on the page of shipping method "FedEx"
-         When I follow "delete"
+         When I press "delete"
          Then I should be on the shipping method index page
           And I should not see shipping method with name "FedEx" in that list

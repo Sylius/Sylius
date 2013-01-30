@@ -37,7 +37,7 @@ Feature: Shipping categories
         Given I am on the shipping category creation page
          When I fill in "Name" with "Light"
           And I press "Create"
-         Then I should be on the page of shipping category "Light"
+         Then I should be on the shipping category index page
           And I should see "Category has been successfully created."
 
     Scenario: Created shipping categories appear in the list
@@ -45,11 +45,6 @@ Feature: Shipping categories
           And I go to the shipping category index page
          Then I should see 3 shipping categories in the list
           And I should see shipping category with name "Light" in that list
-
-    Scenario: Accessing the shipping category editing form
-        Given I am on the page of shipping category "Regular"
-         When I follow "edit"
-         Then I should be editing shipping category "Regular"
 
     Scenario: Accessing the editing form from the list
         Given I am on the shipping category index page
@@ -60,17 +55,17 @@ Feature: Shipping categories
         Given I am editing shipping category "Heavy"
          When I fill in "Name" with "Light"
           And I press "Save changes"
-         Then I should be on the page of shipping category "Light"
+         Then I should be on the shipping category index page
           And I should see "Category has been successfully updated."
 
-    Scenario: Deleting shipping category
-        Given I am on the page of shipping category "Regular"
-         When I follow "delete"
+    Scenario: Deleting shipping category from list
+        Given I am on the shipping category index page
+         When I click "delete" near "Heavy"
          Then I should be on the shipping category index page
           And I should see "Category has been successfully deleted."
 
     Scenario: Deleted shipping category disappears from the list
-        Given I am on the page of shipping category "Regular"
-         When I follow "delete"
+        Given I am on the shipping category index page
+         When I click "delete" near "Regular"
          Then I should be on the shipping category index page
           And I should not see shipping category with name "Regular" in that list
