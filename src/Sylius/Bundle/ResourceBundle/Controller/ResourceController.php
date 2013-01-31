@@ -117,7 +117,7 @@ class ResourceController extends FOSRestController
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->create($resource);
 
-            $this->setFlash('success', '%resource% has been successfully created.');
+            $this->setFlash('success', 'create');
 
             return $this->redirectTo($resource);
         }
@@ -151,7 +151,7 @@ class ResourceController extends FOSRestController
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
             $this->update($resource);
-            $this->setFlash('success', '%resource% has been successfully updated.');
+            $this->setFlash('success', 'update');
 
             return $this->redirectTo($resource);
         }
@@ -179,7 +179,7 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404();
         $this->delete($resource);
-        $this->setFlash('success', '%resource% has been successfully deleted.');
+        $this->setFlash('success', 'delete');
 
         return $this->redirectToIndex($resource);
     }
@@ -356,25 +356,42 @@ class ResourceController extends FOSRestController
         return $this->container->getParameter($this->getConfiguration()->getEngineParameterName());
     }
 
-    protected function setFlash($type, $message)
+    protected function setFlash($type, $event)
     {
-        $config = $this->getConfiguration();
-
-        if (null !== $customMessage = $config->getFlashMessage()) {
-            $message = $customMessage;
-        }
-
-        $translatedMessage = $this->get('translator')->trans(
-            $message,
-            array('%resource%' => ucfirst($config->getResourceName())),
-            'flashes'
-        );
-
         return $this
             ->get('session')
             ->getFlashBag()
-            ->add($type, $translatedMessage)
+            ->add($type, $this->generateFlashMessage($event))
         ;
+    }
+
+    protected function generateFlashMessage($event)
+    {
+        $config = $this->getConfiguration();
+
+        if (null !== $message = $config->getFlashMessage()) {
+            return $this->translateFlashMessage($message);
+        }
+
+        $message = implode('.', array($config->getBundlePrefix(), $config->getResourceName(), $event));
+        $translatedMessage = $this->translateFlashMessage($message);
+
+        if ($message !== $translatedMessage) {
+            return $translatedMessage;
+        }
+
+        return $this->translateFlashMessage('sylius.resource.'.$event);
+    }
+
+    protected function translateFlashMessage($message)
+    {
+        $resource = ucfirst(str_replace('_', ' ', $this->getConfiguration()->getResourceName()));
+
+        return $this->get('translator')->trans(
+            $message,
+            array('%resource%' => $resource),
+            'flashes'
+        );
     }
 
     protected function getService($name)

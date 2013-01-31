@@ -4,16 +4,16 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>%resource% has been successfully created.</source>
+                <source>sylius.resource.create</source>
                 <target>%resource% је успешно креиран.</target>
             </trans-unit>
             <trans-unit id="2">
-                <source>%resource% has been updated.</source>
-                <target>%resource% је ажуриран.</target>
+                <source>sylius.resource.update</source>
+                <target>%resource% је успешно ажуриран.</target>
             </trans-unit>
             <trans-unit id="3">
-                <source>%resource% has been deleted.</source>
-                <target>%resource% је обрисан.</target>
+                <source>sylius.resource.delete</source>
+                <target>%resource% је успешно обрисан.</target>
             </trans-unit>
         </body>
     </file>
