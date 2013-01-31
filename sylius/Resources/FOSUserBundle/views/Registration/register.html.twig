@@ -1,0 +1,16 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Registration <small>Create an account in store</small></h1>
+</div>
+
+<form action="{{ path('fos_user_registration_register') }}" method="post" novalidate>
+<fieldset class="well">
+    {{ form_widget(form) }}
+</fieldset>
+<div class="form-actions">
+    <input type="submit" class="btn btn-success btn-large span3" value="register" />
+</div>
+</form>
+{% endblock %}

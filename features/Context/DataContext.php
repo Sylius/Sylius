@@ -16,9 +16,11 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Sylius\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\Form\Util\FormUtil;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
+use Faker\Factory as FakerFactory;
 
 /**
  * Data writing and reading context.
@@ -28,11 +30,53 @@ use Symfony\Component\Locale\Locale;
 class DataContext extends BehatContext implements KernelAwareInterface
 {
     /**
+     * Faker.
+     *
+     * @var Generator
+     */
+    protected $faker;
+
+    public function __construct()
+    {
+        $this->faker = FakerFactory::create();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * @Given /^there are following users:$/
+     */
+    public function thereAreFollowingUsers(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $this->thereIsUser(
+                $data['username'],
+                isset($data['password']) ? $data['password'] : $this->faker->word(),
+                'ROLE_USER',
+                isset($data['enabled']) ? $data['enabled'] : true
+            );
+        }
+    }
+
+    public function thereIsUser($username, $password, $role, $enabled = true)
+    {
+        $user = new User();
+        $user->setUsername($username);
+        $user->setEmail($this->faker->email());
+        $user->addRole($role);
+        $user->setEnabled($enabled);
+        $user->setPlainPassword($password);
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
     }
 
     /**
