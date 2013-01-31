@@ -51,7 +51,7 @@ Feature: Shipping methods
           And I fill in "Amount" with "10"
           And I press "Create"
          Then I should be on the page of shipping method "FedEx World Shipping"
-          And I should see "Method has been successfully created."
+          And I should see "Shipping method has been successfully created."
           And I should see "USA"
 
     @javascript
@@ -63,7 +63,7 @@ Feature: Shipping methods
           And I fill in "Amount" with "10"
           And I press "Create"
          Then I should be on the page of shipping method "FedEx World Shipping"
-          And I should see "Method has been successfully created."
+          And I should see "Shipping method has been successfully created."
 
     @javascript
     Scenario: Creating new shipping method with flat rate per shipment
@@ -73,7 +73,7 @@ Feature: Shipping methods
           And I fill in "Amount" with "10"
           And I press "Create"
          Then I should be on the page of shipping method "FedEx World Shipping"
-          And I should see "Method has been successfully created."
+          And I should see "Shipping method has been successfully created."
 
     @javascript
     Scenario: Creating new shipping method with flexible rate
@@ -85,7 +85,7 @@ Feature: Shipping methods
           And I fill in "Limit additional items" with "5"
           And I press "Create"
          Then I should be on the page of shipping method "FedEx World Shipping"
-          And I should see "Method has been successfully created."
+          And I should see "Shipping method has been successfully created."
 
     Scenario: Created shipping methods appear in the list
         Given I created shipping method "FedEx World Shipping" within zone "USA"
@@ -114,7 +114,7 @@ Feature: Shipping methods
         Given I am on the page of shipping method "FedEx"
          When I press "delete"
          Then I should be on the shipping method index page
-          And I should see "Method has been successfully deleted."
+          And I should see "Shipping method has been successfully deleted."
 
     Scenario: Deleted shipping method disappears from the list
         Given I am on the page of shipping method "FedEx"

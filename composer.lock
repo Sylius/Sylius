@@ -1410,7 +1410,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/php-collection/archive/acb02a921bb364f360ce786b13455345063c4a07.zip",
+                "url": "https://api.github.com/repos/schmittjoh/php-collection/zipball/acb02a921bb364f360ce786b13455345063c4a07",
                 "reference": "acb02a921bb364f360ce786b13455345063c4a07",
                 "shasum": ""
             },
@@ -1858,12 +1858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "e6c4acf58b3e5c5e1a4315a5d82089ff5f96bbd6"
+                "reference": "4a0c8f7e47624d5637009a6953b2125dc19680c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Sylius/SyliusResourceBundle/archive/e6c4acf58b3e5c5e1a4315a5d82089ff5f96bbd6.zip",
-                "reference": "e6c4acf58b3e5c5e1a4315a5d82089ff5f96bbd6",
+                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/4a0c8f7e47624d5637009a6953b2125dc19680c0",
+                "reference": "4a0c8f7e47624d5637009a6953b2125dc19680c0",
                 "shasum": ""
             },
             "require": {
@@ -1885,7 +1885,7 @@
                 "fsc/hateoas-bundle": "0.3.x-dev",
                 "doctrine/mongodb-odm": "1.0.*@dev"
             },
-            "time": "2013-01-28 22:27:46",
+            "time": "2013-01-31 16:19:42",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1918,69 +1918,6 @@
                 "persistence",
                 "storage",
                 "resource"
-            ]
-        },
-        {
-            "name": "sylius/shipping-bundle",
-            "version": "dev-master",
-            "target-dir": "Sylius/Bundle/ShippingBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "25380e57843369378857fe7ba9c2da6667a52827"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/25380e57843369378857fe7ba9c2da6667a52827",
-                "reference": "25380e57843369378857fe7ba9c2da6667a52827",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/framework-bundle": ">=2.1,<3.0",
-                "php": ">=5.3.3",
-                "sylius/resource-bundle": "0.1.*",
-                "stof/doctrine-extensions-bundle": "1.1.*"
-            },
-            "require-dev": {
-                "phpspec/phpspec2": "dev-develop",
-                "symfony/form": ">=2.1,<3.0"
-            },
-            "time": "2013-01-30 22:55:06",
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Sylius\\Bundle\\ShippingBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "email": "pjedrzejewski@diweb.pl",
-                    "homepage": "http://pjedrzejewski.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
-                }
-            ],
-            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
-            "homepage": "http://sylius.org",
-            "keywords": [
-                "shop",
-                "ecommerce",
-                "webshop",
-                "shipping",
-                "delivery",
-                "shipments"
             ]
         },
         {
@@ -3151,6 +3088,69 @@
                 "tests",
                 "SpecBDD",
                 "specification"
+            ]
+        },
+        {
+            "name": "sylius/shipping-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/ShippingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
+                "reference": "25380e57843369378857fe7ba9c2da6667a52827"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/25380e57843369378857fe7ba9c2da6667a52827",
+                "reference": "25380e57843369378857fe7ba9c2da6667a52827",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "time": "2013-01-30 22:55:06",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\ShippingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
+                }
+            ],
+            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "webshop",
+                "shipping",
+                "delivery",
+                "shipments"
             ]
         }
     ],
