@@ -248,7 +248,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function iFillInProvinceNameWith($value)
     {
-        $this->iFillInFieldWith('sylius_addressing_country[provinces][0][name]', $value);
+        $this->iFillInFieldWith('sylius_country[provinces][0][name]', $value);
     }
 
     /**

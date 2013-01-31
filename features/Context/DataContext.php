@@ -28,17 +28,6 @@ use Symfony\Component\Locale\Locale;
 class DataContext extends BehatContext implements KernelAwareInterface
 {
     /**
-     * Repository services map.
-     *
-     * @var array
-     */
-    public $repositories = array(
-        'country'  => 'sylius_addressing.repository.country',
-        'province' => 'sylius_addressing.repository.province',
-        'zone'     => 'sylius_addressing.repository.zone',
-    );
-
-    /**
      * {@inheritdoc}
      */
     public function setKernel(KernelInterface $kernel)
@@ -377,7 +366,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $zone->setType($type);
 
         foreach ($members as $memberName) {
-            $member = $this->getService('sylius_addressing.repository.zone_member_'.$type)->createNew();
+            $member = $this->getService('sylius.repository.zone_member_'.$type)->createNew();
             if (ZoneInterface::TYPE_ZONE === $type) {
                 $zoneable = $repository->findOneByName($memberName);
             } else {
@@ -465,11 +454,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function getRepository($resource)
     {
-        if (!isset($this->repositories[$resource])) {
-            return $this->getService('sylius.repository.'.$resource);
-        }
-
-        return $this->getService($this->repositories[$resource]);
+        return $this->getService('sylius.repository.'.$resource);
     }
 
     /**
