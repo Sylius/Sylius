@@ -38,7 +38,7 @@ Feature: Shipping categories
          When I fill in "Name" with "Light"
           And I press "Create"
          Then I should be on the shipping category index page
-          And I should see "Category has been successfully created."
+          And I should see "Shipping category has been successfully created."
 
     Scenario: Created shipping categories appear in the list
         Given I created shipping category "Light"
@@ -56,13 +56,13 @@ Feature: Shipping categories
          When I fill in "Name" with "Light"
           And I press "Save changes"
          Then I should be on the shipping category index page
-          And I should see "Category has been successfully updated."
+          And I should see "Shipping category has been successfully updated."
 
     Scenario: Deleting shipping category from list
         Given I am on the shipping category index page
          When I click "delete" near "Heavy"
          Then I should be on the shipping category index page
-          And I should see "Category has been successfully deleted."
+          And I should see "Shipping category has been successfully deleted."
 
     Scenario: Deleted shipping category disappears from the list
         Given I am on the shipping category index page
