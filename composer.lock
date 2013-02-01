@@ -80,7 +80,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/data-fixtures/archive/50e7e644984f17038224f6fcd02c2b7c20147980.zip",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/50e7e644984f17038224f6fcd02c2b7c20147980",
                 "reference": "50e7e644984f17038224f6fcd02c2b7c20147980",
                 "shasum": ""
             },
@@ -268,7 +268,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/DoctrineFixturesBundle/archive/95d1e0291878f64d376c878d9578239760cbaf73.zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/95d1e0291878f64d376c878d9578239760cbaf73",
                 "reference": "95d1e0291878f64d376c878d9578239760cbaf73",
                 "shasum": ""
             },
@@ -613,12 +613,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "5ecdc7dd8f4afe8eca7c94725e20995e914f7ff5"
+                "reference": "b7299a90214255a0b0029b7e5fe6e62a929f3e69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/5ecdc7dd8f4afe8eca7c94725e20995e914f7ff5.zip",
-                "reference": "5ecdc7dd8f4afe8eca7c94725e20995e914f7ff5",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/b7299a90214255a0b0029b7e5fe6e62a929f3e69",
+                "reference": "b7299a90214255a0b0029b7e5fe6e62a929f3e69",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +638,7 @@
                 "doctrine/mongodb": ">=1.0.0",
                 "doctrine/mongodb-odm": ">=1.0.0-BETA7"
             },
-            "time": "2013-01-30 04:49:23",
+            "time": "2013-01-31 12:40:49",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -734,7 +734,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/JMSAopBundle/archive/7018357f5bedf204979a88867a9da05973744422.zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSAopBundle/zipball/7018357f5bedf204979a88867a9da05973744422",
                 "reference": "7018357f5bedf204979a88867a9da05973744422",
                 "shasum": ""
             },
@@ -1234,12 +1234,12 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/kriswallsmith/assetic.git",
-                "reference": "5591252faa1c7f3299660daebffd63dee2746b7e"
+                "reference": "faf3b245977d8bc06c9da4710dbcad37756993a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/kriswallsmith/assetic/archive/5591252faa1c7f3299660daebffd63dee2746b7e.zip",
-                "reference": "5591252faa1c7f3299660daebffd63dee2746b7e",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/faf3b245977d8bc06c9da4710dbcad37756993a9",
+                "reference": "faf3b245977d8bc06c9da4710dbcad37756993a9",
                 "shasum": ""
             },
             "require": {
@@ -1264,7 +1264,7 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
-            "time": "2013-01-12 22:20:24",
+            "time": "2013-01-31 17:45:10",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1308,7 +1308,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Seldaek/monolog/zipball/1.2.1",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1.2.1",
                 "reference": "1.2.1",
                 "shasum": ""
             },
@@ -1323,7 +1323,7 @@
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server"
             },
-            "time": "2012-08-29 04:53:20",
+            "time": "2012-08-29 11:53:20",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1506,18 +1506,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioDistributionBundle",
-                "reference": "v2.1.7"
+                "reference": "66545ed7d60342dd1ffdcebd72fe43b11941fef9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sensio/SensioDistributionBundle/archive/v2.1.7.zip",
-                "reference": "v2.1.7",
+                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/66545ed7d60342dd1ffdcebd72fe43b11941fef9",
+                "reference": "66545ed7d60342dd1ffdcebd72fe43b11941fef9",
                 "shasum": ""
             },
             "require": {
                 "symfony/framework-bundle": "2.1.*"
             },
-            "time": "2013-01-04 17:11:22",
+            "time": "2013-01-31 08:08:03",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1791,12 +1791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "44ae5f10835d48b2988ea17abda46e3b147dda14"
+                "reference": "1db9e45b16094b02268ed8b0d07d527af859a049"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/44ae5f10835d48b2988ea17abda46e3b147dda14",
-                "reference": "44ae5f10835d48b2988ea17abda46e3b147dda14",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/1db9e45b16094b02268ed8b0d07d527af859a049",
+                "reference": "1db9e45b16094b02268ed8b0d07d527af859a049",
                 "shasum": ""
             },
             "require": {
@@ -1808,13 +1808,14 @@
                 "sylius/addressing-bundle": "0.1.*",
                 "sylius/shipping-bundle": "0.1.*",
                 "sylius/assortment-bundle": "0.1.*",
-                "fsc/hateoas-bundle": "0.3.x-dev"
+                "fsc/hateoas-bundle": "0.3.x-dev",
+                "sylius/sales-bundle": "0.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-01-30 23:57:55",
+            "time": "2013-01-31 17:42:11",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1918,6 +1919,134 @@
                 "persistence",
                 "storage",
                 "resource"
+            ]
+        },
+        {
+            "name": "sylius/sales-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/SalesBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusSalesBundle.git",
+                "reference": "c0fe306cb2f116e30cfcaadc336a50da04d7132c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Sylius/SyliusSalesBundle/archive/c0fe306cb2f116e30cfcaadc336a50da04d7132c.zip",
+                "reference": "c0fe306cb2f116e30cfcaadc336a50da04d7132c",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "suggest": {
+                "doctrine/orm": "*",
+                "doctrine/doctrine-bundle": "*"
+            },
+            "time": "2013-01-15 08:24:51",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\SalesBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusSalesBundle/contributors"
+                }
+            ],
+            "description": "Sales order management for Symfony2 applications.",
+            "homepage": "http://Sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "sales",
+                "orders",
+                "order"
+            ]
+        },
+        {
+            "name": "sylius/shipping-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/ShippingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
+                "reference": "25380e57843369378857fe7ba9c2da6667a52827"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/25380e57843369378857fe7ba9c2da6667a52827",
+                "reference": "25380e57843369378857fe7ba9c2da6667a52827",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "time": "2013-01-30 22:55:06",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\ShippingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
+                }
+            ],
+            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "shop",
+                "ecommerce",
+                "webshop",
+                "shipping",
+                "delivery",
+                "shipments"
             ]
         },
         {
@@ -2051,12 +2180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle",
-                "reference": "f65ce4736fa79c60fdfc9805abb38aaaef728e95"
+                "reference": "e2984f645ad9b5fb3b6d398d0c65e59c745a110c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/AsseticBundle/archive/f65ce4736fa79c60fdfc9805abb38aaaef728e95.zip",
-                "reference": "f65ce4736fa79c60fdfc9805abb38aaaef728e95",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/e2984f645ad9b5fb3b6d398d0c65e59c745a110c",
+                "reference": "e2984f645ad9b5fb3b6d398d0c65e59c745a110c",
                 "shasum": ""
             },
             "require": {
@@ -2076,7 +2205,7 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-26 01:02:24",
+            "time": "2013-01-31 17:56:17",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2168,7 +2297,7 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "dev-master",
+            "version": "2.2.x-dev",
             "target-dir": "Symfony/Component/PropertyAccess",
             "source": {
                 "type": "git",
@@ -2177,7 +2306,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/PropertyAccess/archive/v2.2.0-BETA2.zip",
+                "url": "https://api.github.com/repos/symfony/PropertyAccess/zipball/v2.2.0-BETA2",
                 "reference": "v2.2.0-BETA2",
                 "shasum": ""
             },
@@ -2235,7 +2364,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/SwiftmailerBundle/archive/v2.1.7.zip",
+                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/v2.1.7",
                 "reference": "v2.1.7",
                 "shasum": ""
             },
@@ -2285,12 +2414,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "6f7194802359559a6b37e1d2fe940ac902cf26cf"
+                "reference": "8c804c79aaaeaba4f0570ee56608a2577c08656c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/archive/6f7194802359559a6b37e1d2fe940ac902cf26cf.zip",
-                "reference": "6f7194802359559a6b37e1d2fe940ac902cf26cf",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/8c804c79aaaeaba4f0570ee56608a2577c08656c",
+                "reference": "8c804c79aaaeaba4f0570ee56608a2577c08656c",
                 "shasum": ""
             },
             "require": {
@@ -2339,7 +2468,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": ">=1.0,<1.3-dev"
             },
-            "time": "2013-01-27 16:12:43",
+            "time": "2013-01-31 07:57:23",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -2420,18 +2549,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "eaadcca54b888db779a355e449a16dd8c7760e11"
+                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/archive/eaadcca54b888db779a355e449a16dd8c7760e11.zip",
-                "reference": "eaadcca54b888db779a355e449a16dd8c7760e11",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/c6445fb5cd6823f7bd65108a717064957b6eafd5",
+                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-01-27 16:32:04",
+            "time": "2013-02-01 09:44:45",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2514,12 +2643,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/Behat.git",
-                "reference": "e5e20aa1d71a27942a88707a05bbb0c448c2dccc"
+                "reference": "1ac2179939f997324c249ea480d33b6999005363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Behat/archive/e5e20aa1d71a27942a88707a05bbb0c448c2dccc.zip",
-                "reference": "e5e20aa1d71a27942a88707a05bbb0c448c2dccc",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/1ac2179939f997324c249ea480d33b6999005363",
+                "reference": "1ac2179939f997324c249ea480d33b6999005363",
                 "shasum": ""
             },
             "require": {
@@ -2538,7 +2667,7 @@
                 "behat/yii-extension": "for integration with Yii web framework",
                 "behat/mink-extension": "for integration with Mink testing framework"
             },
-            "time": "2013-01-29 15:47:06",
+            "time": "2013-01-29 19:59:53",
             "bin": [
                 "bin/behat"
             ],
@@ -2582,7 +2711,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Gherkin/archive/f88e765e16eee1566e9942d1457912dd7202e0e6.zip",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/f88e765e16eee1566e9942d1457912dd7202e0e6",
                 "reference": "f88e765e16eee1566e9942d1457912dd7202e0e6",
                 "shasum": ""
             },
@@ -3088,69 +3217,6 @@
                 "tests",
                 "SpecBDD",
                 "specification"
-            ]
-        },
-        {
-            "name": "sylius/shipping-bundle",
-            "version": "dev-master",
-            "target-dir": "Sylius/Bundle/ShippingBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "25380e57843369378857fe7ba9c2da6667a52827"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/25380e57843369378857fe7ba9c2da6667a52827",
-                "reference": "25380e57843369378857fe7ba9c2da6667a52827",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/framework-bundle": ">=2.1,<3.0",
-                "php": ">=5.3.3",
-                "sylius/resource-bundle": "0.1.*",
-                "stof/doctrine-extensions-bundle": "1.1.*"
-            },
-            "require-dev": {
-                "phpspec/phpspec2": "dev-develop",
-                "symfony/form": ">=2.1,<3.0"
-            },
-            "time": "2013-01-30 22:55:06",
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Sylius\\Bundle\\ShippingBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "email": "pjedrzejewski@diweb.pl",
-                    "homepage": "http://pjedrzejewski.com"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Sylius/SyliusShippingBundle/contributors"
-                }
-            ],
-            "description": "Flexible shipping system for Symfony2 ecommerce applications.",
-            "homepage": "http://sylius.org",
-            "keywords": [
-                "shop",
-                "ecommerce",
-                "webshop",
-                "shipping",
-                "delivery",
-                "shipments"
             ]
         }
     ],
