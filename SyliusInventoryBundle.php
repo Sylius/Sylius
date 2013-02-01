@@ -41,8 +41,8 @@ class SyliusInventoryBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface' => 'sylius_inventory.model.unit.class',
-            'Sylius\Bundle\InventoryBundle\Model\StockableInterface'     => 'sylius_inventory.model.stockable.class',
+            'Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
+            'Sylius\Bundle\InventoryBundle\Model\StockableInterface'     => 'sylius.model.stockable.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_inventory', $interfaces));
