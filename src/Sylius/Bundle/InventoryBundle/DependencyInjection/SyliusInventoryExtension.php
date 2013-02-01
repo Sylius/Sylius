@@ -54,32 +54,32 @@ class SyliusInventoryExtension extends Extension
         $container->setParameter('sylius_inventory.driver', $driver);
         $container->setParameter('sylius_inventory.engine', $engine);
 
-        $container->setParameter('sylius_inventory.backorders', $config['backorders']);
+        $container->setParameter('sylius.backorders', $config['backorders']);
 
-        $container->setAlias('sylius_inventory.checker', $config['checker']);
-        $container->setAlias('sylius_inventory.operator', $config['operator']);
+        $container->setAlias('sylius.availability_checker', $config['checker']);
+        $container->setAlias('sylius.inventory_operator', $config['operator']);
 
         $unitClasses = $config['classes']['unit'];
 
-        $container->setParameter('sylius_inventory.controller.unit.class', $unitClasses['controller']);
-        $container->setParameter('sylius_inventory.model.unit.class', $unitClasses['model']);
+        $container->setParameter('sylius.controller.inventory_unit.class', $unitClasses['controller']);
+        $container->setParameter('sylius.model.inventory_unit.class', $unitClasses['model']);
 
         if (array_key_exists('repository', $unitClasses)) {
-            $container->setParameter('sylius_inventory.repository.unit.class', $unitClasses['repository']);
+            $container->setParameter('sylius.repository.inventory_unit.class', $unitClasses['repository']);
         }
 
         $stockableClasses = $config['classes']['stockable'];
 
-        $container->setParameter('sylius_inventory.controller.stockable.class', $stockableClasses['controller']);
-        $container->setParameter('sylius_inventory.model.stockable.class', $stockableClasses['model']);
+        $container->setParameter('sylius.controller.stockable.class', $stockableClasses['controller']);
+        $container->setParameter('sylius.model.stockable.class', $stockableClasses['model']);
 
         if (array_key_exists('repository', $stockableClasses)) {
-            $container->setParameter('sylius_inventory.repository.stockable.class', $stockableClasses['repository']);
+            $container->setParameter('sylius.repository.stockable.class', $stockableClasses['repository']);
         }
 
         $loader->load('services.xml');
 
-        $listenerDefinition = $container->getDefinition('sylius_inventory.listener');
+        $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
         if (isset($config['events'])) {
             foreach ($config['events'] as $event) {
                 $listenerDefinition->addTag(

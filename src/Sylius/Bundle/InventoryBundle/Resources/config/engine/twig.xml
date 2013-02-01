@@ -17,12 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_inventory.twig.class">Sylius\Bundle\InventoryBundle\Twig\SyliusInventoryExtension</parameter>
+        <parameter key="sylius.inventory_twig.class">Sylius\Bundle\InventoryBundle\Twig\SyliusInventoryExtension</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_inventory.twig" class="%sylius_inventory.twig.class%">
-            <argument type="service" id="sylius_inventory.checker" />
+        <service id="sylius.inventory_twig" class="%sylius.inventory_twig.class%">
+            <argument type="service" id="sylius.availability_checker" />
             <tag name="twig.extension" />
         </service>
     </services>

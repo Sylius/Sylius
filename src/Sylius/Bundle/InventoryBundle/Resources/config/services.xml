@@ -18,23 +18,23 @@
 >
 
     <parameters>
-        <parameter key="sylius_inventory.operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
-        <parameter key="sylius_inventory.checker.default.class">Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker</parameter>
-        <parameter key="sylius_inventory.listener.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
+        <parameter key="sylius.inventory_operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
+        <parameter key="sylius.availability_checker.default.class">Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker</parameter>
+        <parameter key="sylius.inventory_listener.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_inventory.controller.unit" class="%sylius_inventory.controller.unit.class%">
-            <argument>sylius_inventory</argument>
-            <argument>unit</argument>
+        <service id="sylius.controller.inventory_unit" class="%sylius.controller.inventory_unit.class%">
+            <argument>sylius</argument>
+            <argument>inventory_unit</argument>
             <argument>SyliusInventoryBundle:InventoryUnit</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="sylius_inventory.controller.stockable" class="%sylius_inventory.controller.stockable.class%">
-            <argument>sylius_inventory</argument>
+        <service id="sylius.controller.stockable" class="%sylius.controller.stockable.class%">
+            <argument>sylius</argument>
             <argument>stockable</argument>
             <argument>SyliusInventoryBundle:Stockable</argument>
             <call method="setContainer">
@@ -42,17 +42,17 @@
             </call>
         </service>
 
-        <service id="sylius_inventory.operator.default" class="%sylius_inventory.operator.default.class%">
-            <argument type="service" id="sylius_inventory.manager.unit" />
-            <argument type="service" id="sylius_inventory.repository.unit" />
-            <argument type="service" id="sylius_inventory.checker" />
+        <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
+            <argument type="service" id="sylius.manager.inventory_unit" />
+            <argument type="service" id="sylius.repository.inventory_unit" />
+            <argument type="service" id="sylius.availability_checker" />
         </service>
-        <service id="sylius_inventory.checker.default" class="%sylius_inventory.checker.default.class%">
-            <argument>%sylius_inventory.backorders%</argument>
+        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">
+            <argument>%sylius.backorders%</argument>
         </service>
 
-        <service id="sylius_inventory.listener" class="%sylius_inventory.listener.class%">
-            <argument type="service" id="sylius_inventory.operator" />
+        <service id="sylius.inventory_listener" class="%sylius.inventory_listener.class%">
+            <argument type="service" id="sylius.inventory_operator" />
         </service>
     </services>
 
