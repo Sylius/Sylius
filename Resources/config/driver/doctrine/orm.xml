@@ -17,35 +17,35 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_inventory.repository.unit.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_inventory.repository.stockable.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.inventory_unit.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.stockable.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_inventory.manager.unit" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_inventory.repository.unit" class="%sylius_inventory.repository.unit.class%">
-            <argument type="service" id="sylius_inventory.manager.unit" />
+        <service id="sylius.manager.inventory_unit" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.inventory_unit" class="%sylius.repository.inventory_unit.class%">
+            <argument type="service" id="sylius.manager.inventory_unit" />
             <argument type="service">
                 <service
-                    factory-service="sylius_inventory.manager.unit"
+                    factory-service="sylius.manager.inventory_unit"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
-                    <argument>%sylius_inventory.model.unit.class%</argument>
+                    <argument>%sylius.model.inventory_unit.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_inventory.manager.stockable" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_inventory.repository.stockable" class="%sylius_inventory.repository.stockable.class%">
-            <argument type="service" id="sylius_inventory.manager.stockable" />
+        <service id="sylius.manager.stockable" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.stockable" class="%sylius.repository.stockable.class%">
+            <argument type="service" id="sylius.manager.stockable" />
             <argument type="service">
                 <service
-                    factory-service="sylius_inventory.manager.stockable"
+                    factory-service="sylius.manager.stockable"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
-                    <argument>%sylius_inventory.model.stockable.class%</argument>
+                    <argument>%sylius.model.stockable.class%</argument>
                 </service>
             </argument>
         </service>

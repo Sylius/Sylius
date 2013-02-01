@@ -40,8 +40,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
                 ->booleanNode('backorders')->defaultTrue()->end()
-                ->scalarNode('checker')->defaultValue('sylius_inventory.checker.default')->cannotBeEmpty()->end()
-                ->scalarNode('operator')->defaultValue('sylius_inventory.operator.default')->cannotBeEmpty()->end()
+                ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()
+                ->scalarNode('operator')->defaultValue('sylius.inventory_operator.default')->cannotBeEmpty()->end()
                 ->arrayNode('events')->prototype('scalar')->end()
             ->end();
 
