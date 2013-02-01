@@ -257,7 +257,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreProperties(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsProperty($data['name'], $data['presentation']);
+            $type = (isset($data['type'])) ? $data['type'] : 'string';
+            $this->thereIsProperty($data['name'], $data['presentation'], $type);
         }
     }
 
@@ -265,7 +266,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^There is property "([^""]*)"$/
      * @Given /^I created property "([^""]*)"$/
      */
-    public function thereIsProperty($name, $presentation = null)
+    public function thereIsProperty($name, $presentation = null, $type = 'string')
     {
         $repository = $this->getRepository('property');
         $manager = $this->getEntityManager();
@@ -275,6 +276,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $property = $repository->createNew();
         $property->setName($name);
         $property->setPresentation($presentation);
+        $property->setType($type);
 
         $manager->persist($property);
         $manager->flush();
