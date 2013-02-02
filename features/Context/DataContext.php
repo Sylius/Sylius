@@ -257,8 +257,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreProperties(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $type = (isset($data['type'])) ? $data['type'] : 'string';
-            $this->thereIsProperty($data['name'], $data['presentation'], $type);
+            $additionalData = array(
+                'type'         => isset($data['type']) ? $data['type'] : 'string',
+                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
+            );
+            $this->thereIsProperty($data['name'], $additionalData);
         }
     }
 
@@ -266,22 +269,43 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^There is property "([^""]*)"$/
      * @Given /^I created property "([^""]*)"$/
      */
-    public function thereIsProperty($name, $presentation = null, $type = 'string')
+    public function thereIsProperty($name, $additionalData = array())
     {
         $repository = $this->getRepository('property');
         $manager = $this->getEntityManager();
 
-        $presentation = $presentation ?: $name;
+        $additionalData = array_merge(array(
+            'presentation' => $name,
+            'type' => 'string'
+        ), $additionalData);
 
         $property = $repository->createNew();
         $property->setName($name);
-        $property->setPresentation($presentation);
-        $property->setType($type);
+        foreach ($additionalData as $key => $value) {
+            $property->{'set'.\ucfirst($key)}($value);
+        }
 
         $manager->persist($property);
         $manager->flush();
 
         return $property;
+    }
+
+    /**
+     * @Given /^(\w+) with following data should be created:$/
+     */
+    public function objectWithFollowingDataShouldBeCreated($type, TableNode $table)
+    {
+        $data = $table->getRowsHash();
+
+        $object = $this->findOneByName($type, $data['name']);
+        foreach ($data as $property => $value) {
+            $objectValue = $object->{'get'.\ucfirst($property)}();
+
+            if ($objectValue !== $value) {
+                throw new \Exception(sprintf('%s object::%s has "%s" value but "%s" expected', $type, $property, $objectValue, $value));
+            }
+        }
     }
 
     /**

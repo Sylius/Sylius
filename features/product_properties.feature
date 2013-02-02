@@ -73,13 +73,33 @@ Feature: Product properties
           And I should see "Property has been successfully deleted."
           And I should not see property with name "T-Shirt fabric" in that list
 
-    Scenario: Creating new boolean property
+    Scenario: Creating string property by default
         Given I am on the property creation page
          When I fill in "Internal name" with "Book author"
           And I fill in "Presentation" with "Author"
-          And I select "Boolean" from "Type"
           And I press "Create"
          Then I should still be on the property index page
           And I should see "Property has been successfully created."
-          And I should see property with type "Boolean" in that list
-          And show last response
+          And property with following data should be created:
+            | name | Book author |
+            | type | string      | 
+
+    Scenario Outline: Creating new property for type
+        Given I am on the property creation page
+         When I fill in "Internal name" with "Book author"
+          And I fill in "Presentation" with "Author"
+          And I select "<label>" from "Type"
+          And I press "Create"
+         Then I should still be on the property index page
+          And I should see "Property has been successfully created."
+          And property with following data should be created:
+            | name         | Book author |
+            | presentation | Author      |
+            | type         | <value>     |
+
+        Examples:
+          | label   | value   |
+          | Boolean | boolean |
+          | String  | string  |
+          | Choice  | choice  |
+          | Number  | number  |
