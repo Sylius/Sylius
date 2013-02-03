@@ -1,6 +1,12 @@
 (function ($) {
     var methods = {
         init: function(options) {
+            var settings = $.extend({
+              'prototypePrefix': false,
+              'prototypeElementPrefix': '<hr />',
+              'containerSelector': false,
+            }, options);
+
             return this.each(function() {
                 show($(this), false);
                 $(this).change(function() {
@@ -10,13 +16,23 @@
                 function show(element, replace) {
                     var id = element.attr('id');
                     var selectedValue = element.val();
-                    var prototypeElement = $('#' + id + '_' + selectedValue);
-                    var container = $(prototypeElement.data('container'));
+                    var prototypePrefix = id;
+                    if (false != settings.prototypePrefix) {
+                        prototypePrefix = settings.prototypePrefix;
+                    }
+
+                    var prototypeElement = $('#' + prototypePrefix + '_' + selectedValue);
+                    var container;
+                    if (settings.containerSelector) {
+                        container = $(settings.containerSelector);
+                    } else {
+                        container = $(prototypeElement.data('container'));
+                    }
 
                     if (replace) {
-                        container.html('<hr />' + prototypeElement.data('prototype'));
+                        container.html(settings.prototypeElementPrefix + prototypeElement.data('prototype'));
                     } else if (!container.html().trim()) {
-                        container.html('<hr />' + prototypeElement.data('prototype'));
+                        container.html(settings.prototypeElementPrefix + prototypeElement.data('prototype'));
                     }
                 };
             });
