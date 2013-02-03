@@ -277,6 +277,48 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @When /^I select "([^"]*)" from "([^"]*)"$/
+     */
+    public function iSelectOptionFrom($option, $field)
+    {
+        $this->getSession()->getPage()->selectFieldOption($field, $option);
+    }
+
+    /**
+     * @When /^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/
+     */
+    public function checkOption($option)
+    {
+        $this->getSession()->getPage()->checkField($option);
+    }
+
+    /**
+     * @When /^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/
+     */
+    public function uncheckOption($option)
+    {
+        $this->getSession()->getPage()->uncheckField($option);
+    }
+
+    /**
+     * @When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function additionallySelectOption($select, $option)
+    {
+        $this->getSession()->getPage()->selectFieldOption($select, $option, true);
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" field error$/
+     */
+    public function iShouldSeeFieldError($field)
+    {
+        $this->assertSession()->elementExists('xpath', sprintf(
+            "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
+        ));
+    }
+
+    /**
      * @Given /^I leave "([^"]*)" empty$/
      */
     public function iLeaveFieldEmpty($field)

@@ -82,7 +82,7 @@ Feature: Product properties
           And I should see "Property has been successfully created."
           And property with following data should be created:
             | name | Book author |
-            | type | string      | 
+            | type | text        | 
 
     Scenario Outline: Creating new property for type
         Given I am on the property creation page
@@ -98,8 +98,8 @@ Feature: Product properties
             | type         | <value>     |
 
         Examples:
-          | label   | value   |
-          | Boolean | boolean |
-          | String  | string  |
-          | Choice  | choice  |
-          | Number  | number  |
+          | label   | value    |
+          | Boolean | checkbox |
+          | String  | text     |
+          | Choice  | choice   |
+          | Number  | number   |

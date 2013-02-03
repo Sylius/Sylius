@@ -258,7 +258,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $additionalData = array(
-                'type'         => isset($data['type']) ? $data['type'] : 'string',
+                'type'         => isset($data['type']) ? $data['type'] : 'text',
                 'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
             );
             $this->thereIsProperty($data['name'], $additionalData);
@@ -276,7 +276,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         $additionalData = array_merge(array(
             'presentation' => $name,
-            'type' => 'string'
+            'type' => 'text'
         ), $additionalData);
 
         $property = $repository->createNew();
