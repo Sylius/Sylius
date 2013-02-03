@@ -17,52 +17,53 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_sales.model.adjustment.class">Sylius\Bundle\SalesBundle\Entity\DefaultAdjustment</parameter>
+        <parameter key="sylius.model.order_item.class">Sylius\Bundle\SalesBundle\Entity\DefaultOrderItem</parameter>
+        <parameter key="sylius.model.adjustment.class">Sylius\Bundle\SalesBundle\Entity\DefaultAdjustment</parameter>
 
-        <parameter key="sylius_sales.repository.order.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_sales.repository.item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_sales.repository.adjustment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.order.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.order_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.adjustment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_sales.manager.order" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_sales.repository.order" class="%sylius_sales.repository.order.class%">
-            <argument type="service" id="sylius_sales.manager.order" />
+        <service id="sylius.manager.order" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.order" class="%sylius.repository.order.class%">
+            <argument type="service" id="sylius.manager.order" />
             <argument type="service">
                 <service
-                    factory-service="sylius_sales.manager.order"
+                    factory-service="sylius.manager.order"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
-                    <argument>%sylius_sales.model.order.class%</argument>
+                    <argument>%sylius.model.order.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_sales.manager.item" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_sales.repository.item" class="%sylius_sales.repository.item.class%">
-            <argument type="service" id="sylius_sales.manager.item" />
+        <service id="sylius.manager.order_item" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.order_item" class="%sylius.repository.order_item.class%">
+            <argument type="service" id="sylius.manager.order_item" />
             <argument type="service">
                 <service
-                    factory-service="sylius_sales.manager.item"
+                    factory-service="sylius.manager.order_item"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
-                    <argument>%sylius_sales.model.item.class%</argument>
+                    <argument>%sylius.model.order_item.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_sales.manager.adjustment" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_sales.repository.adjustment" class="%sylius_sales.repository.adjustment.class%">
-            <argument type="service" id="sylius_sales.manager.adjustment" />
+        <service id="sylius.manager.adjustment" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.adjustment" class="%sylius.repository.adjustment.class%">
+            <argument type="service" id="sylius.manager.adjustment" />
             <argument type="service">
                 <service
-                    factory-service="sylius_sales.manager.adjustment"
+                    factory-service="sylius.manager.adjustment"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
-                    <argument>%sylius_sales.model.adjustment.class%</argument>
+                    <argument>%sylius.model.adjustment.class%</argument>
                 </service>
             </argument>
         </service>

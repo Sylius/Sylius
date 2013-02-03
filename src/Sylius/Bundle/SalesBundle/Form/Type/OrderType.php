@@ -46,11 +46,11 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('items', 'collection', array(
-                'type'         => 'sylius_sales_item',
+                'type'         => 'sylius_order_item',
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius_sales.label.order.items'
+                'label'        => 'sylius.form.order.items'
             ))
         ;
     }
@@ -72,6 +72,6 @@ class OrderType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_sales_order';
+        return 'sylius_order';
     }
 }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SalesBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -16,12 +25,12 @@ class Order extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Order');
     }
 
-    function it_should_be_a_Sylius_order()
+    function it_should_implement_Sylius_order_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderInterface');
     }
 
-    function it_should_be_a_Sylius_sales_adjustable()
+    function it_should_implement_Sylius_adjustable_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustableInterface');
     }
@@ -31,29 +40,20 @@ class Order extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_should_not_have_number_by_default()
+    {
+        $this->getNumber()->shouldReturn(null);
+    }
+
+    function its_number_should_be_mutable()
+    {
+        $this->setNumber('001351');
+        $this->getNumber()->shouldReturn('001351');
+    }
+
     function it_should_intitialize_items_collection_by_default()
     {
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
-    }
-
-    /**
-     * @param Doctrine\Common\Collections\Collection $items
-     */
-    function its_items_collection_should_be_mutable($items)
-    {
-        $this->setItems($items);
-        $this->getItems()->shouldReturn($items);
-    }
-
-    /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
-     */
-    function it_should_have_fluid_interface_for_items_management($item)
-    {
-        $this->addItem($item)->shouldReturn($this);
-        $this->removeItem($item)->shouldReturn($this);
-
-        $this->clearItems()->shouldReturn($this);
     }
 
     /**
@@ -79,6 +79,17 @@ class Order extends ObjectBehavior
 
         $this->removeItem($item);
         $this->hasItem($item)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     */
+    function it_should_have_fluent_interface_for_items_management($item)
+    {
+        $this->addItem($item)->shouldReturn($this);
+        $this->removeItem($item)->shouldReturn($this);
+
+        $this->clearItems()->shouldReturn($this);
     }
 
     function it_should_have_items_total_equal_to_0_by_default()
@@ -150,7 +161,7 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
-    function it_should_have_fluid_interface_for_adjustments_management($adjustment)
+    function it_should_have_fluent_interface_for_adjustments_management($adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
@@ -265,9 +276,9 @@ class Order extends ObjectBehavior
         $this->isConfirmed()->shouldReturn(false);
     }
 
-    function it_should_generate_confirmation_token_by_default()
+    function it_should_not_have_confirmation_token_by_default()
     {
-        $this->getConfirmationToken()->shouldBeString();
+        $this->getConfirmationToken()->shouldReturn(null);
     }
 
     function its_confirmation_token_should_be_mutable()

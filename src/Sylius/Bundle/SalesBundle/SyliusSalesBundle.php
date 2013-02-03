@@ -41,11 +41,12 @@ class SyliusSalesBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\SalesBundle\Model\OrderInterface'      => 'sylius_sales.model.order.class',
-            'Sylius\Bundle\SalesBundle\Model\OrderItemInterface'  => 'sylius_sales.model.item.class',
-            'Sylius\Bundle\SalesBundle\Model\AdjustmentInterface' => 'sylius_sales.model.adjustment.class',
+            'Sylius\Bundle\SalesBundle\Model\SellableInterface'   => 'sylius.model.sellable.class',
+            'Sylius\Bundle\SalesBundle\Model\OrderInterface'      => 'sylius.model.order.class',
+            'Sylius\Bundle\SalesBundle\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
+            'Sylius\Bundle\SalesBundle\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_cart', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_sales', $interfaces));
     }
 }

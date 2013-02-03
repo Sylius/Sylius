@@ -46,7 +46,7 @@ class OrderItemType extends AbstractType
     {
         $builder
             ->add('quantity', 'integer', array(
-                'label' => 'sylius_sales.lable.item.quantity'
+                'label' => 'sylius.form.order_item.quantity'
             ))
         ;
     }
@@ -68,6 +68,6 @@ class OrderItemType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_sales_item';
+        return 'sylius_order_item';
     }
 }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SalesBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -16,7 +25,7 @@ class Adjustment extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Adjustment');
     }
 
-    function it_should_be_a_Sylius_sales_adjustment()
+    function it_should_implement_Sylius_adjustment_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustmentInterface');
     }
@@ -139,10 +148,12 @@ class Adjustment extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustableInterface $adjustable
      */
-    function it_should_have_fluid_interface($adjustable)
+    function it_should_have_fluent_interface($adjustable)
     {
         $this->setAdjustable($adjustable)->shouldReturn($this);
         $this->setLabel('Shipping fee')->shouldReturn($this);
+        $this->setDescription('Tax (23%)')->shouldReturn($this);
         $this->setAmount(2.99)->shouldReturn($this);
+        $this->setNeutral(true)->shouldReturn($this);
     }
 }

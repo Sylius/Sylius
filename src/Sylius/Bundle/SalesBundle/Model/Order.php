@@ -29,6 +29,13 @@ class Order implements OrderInterface
     protected $id;
 
     /**
+     * Order number.
+     *
+     * @var string
+     */
+    protected $number;
+
+    /**
      * Items in order.
      *
      * @var Collection
@@ -102,7 +109,6 @@ class Order implements OrderInterface
         $this->adjustments = new ArrayCollection();
         $this->adjustmentsTotal = 0;
         $this->total = 0;
-        $this->generateConfirmationToken();
         $this->confirmed = true;
         $this->createdAt = new \DateTime('now');
     }
@@ -113,6 +119,24 @@ class Order implements OrderInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
     }
 
     /**
@@ -147,30 +171,6 @@ class Order implements OrderInterface
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function generateConfirmationToken()
-    {
-        if (null === $this->confirmationToken) {
-            $bytes = false;
-            if (function_exists('openssl_random_pseudo_bytes') && 0 !== stripos(PHP_OS, 'win')) {
-                $bytes = openssl_random_pseudo_bytes(32, $strong);
-
-                if (true !== $strong) {
-                    $bytes = false;
-                }
-            }
-            if (false === $bytes) {
-                $bytes = hash('sha256', uniqid(mt_rand(), true), true);
-            }
-
-            $this->confirmationToken = base_convert(bin2hex($bytes), 16, 36);
-        }
 
         return $this;
     }

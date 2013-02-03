@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SalesBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -16,12 +25,12 @@ class OrderItem extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\OrderItem');
     }
 
-    function it_should_be_Sylius_order_item()
+    function it_should_implement_Sylius_order_item_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderItemInterface');
     }
 
-    function it_should_be_a_Sylius_sales_adjustable()
+    function it_should_implement_Sylius_adjustable_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustableInterface');
     }
@@ -29,6 +38,46 @@ class OrderItem extends ObjectBehavior
     function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function it_should_not_belong_to_an_order_by_default()
+    {
+        $this->getOrder()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     */
+    function it_should_allow_assigning_itself_to_an_order($order)
+    {
+        $this->setOrder($order);
+        $this->getOrder()->shouldReturn($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     */
+    function it_should_allow_detaching_itself_from_an_order($order)
+    {
+        $this->setOrder($order);
+        $this->getOrder()->shouldReturn($order);
+
+        $this->setOrder(null);
+        $this->getOrder()->shouldReturn(null);
+    }
+
+    function it_should_not_have_sellable_defined_by_default()
+    {
+        $this->getSellable()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
+     */
+    function it_should_allow_defining_sellable($sellable)
+    {
+        $this->setSellable($sellable);
+        $this->getSellable()->shouldReturn($sellable);
     }
 
     function it_should_have_quantity_equal_to_1_by_default()
@@ -98,7 +147,7 @@ class OrderItem extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
-    function it_should_have_fluid_interface_for_adjustments_management($adjustment)
+    function it_should_have_fluent_interface_for_adjustments_management($adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $this->removeAdjustment($adjustment)->shouldReturn($this);

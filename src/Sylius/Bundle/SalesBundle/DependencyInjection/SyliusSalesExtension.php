@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Sales extension.
+ * Sales bundle extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -47,36 +47,24 @@ class SyliusSalesExtension extends Extension
         $container->setParameter('sylius_sales.driver', $driver);
         $container->setParameter('sylius_sales.engine', $config['engine']);
 
-        if (isset($config['builder'])) {
-            $container->setAlias('sylius_sales.builder', $config['builder']);
-        }
-
-        $orderClasses = $config['classes']['order'];
-
-        $container->setParameter('sylius_sales.controller.order.class', $orderClasses['controller']);
-        $container->setParameter('sylius_sales.form.type.order.class', $orderClasses['form']);
-
-        if (isset($orderClasses['model'])) {
-            $container->setParameter('sylius_sales.model.order.class', $orderClasses['model']);
-        }
-        if (isset($orderClasses['repository'])) {
-            $container->setParameter('sylius_sales.repository.order.class', $orderClasses['repository']);
-        }
-
-        $itemClasses = $config['classes']['item'];
-
-        $container->setParameter('sylius_sales.model.item.class', $itemClasses['model']);
-        $container->setParameter('sylius_sales.controller.item.class', $itemClasses['controller']);
-        $container->setParameter('sylius_sales.form.type.item.class', $itemClasses['form']);
-
-        if (isset($itemClasses['repository'])) {
-            $container->setParameter('sylius_sales.repository.item.class', $itemClasses['repository']);
-        }
-
-        if (isset($config['classes']['adjustment']['model'])) {
-            $container->setParameter('sylius_sales.model.adjustment.class', $config['classes']['adjustment']['model']);
-        }
+        $this->mapClassParameters($config['classes'], $container);
 
         $loader->load('services.xml');
+    }
+
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $service = $service === 'form' ? 'form.type' : $service;
+                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+            }
+        }
     }
 }

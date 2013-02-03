@@ -12,18 +12,47 @@
 namespace Sylius\Bundle\SalesBundle\Builder;
 
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\SalesBundle\Model\SellableInterface;
 
 /**
  * Order builder interface.
+ * Implementation should support fluid interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface OrderBuilderInterface
 {
     /**
-     * Build order, from a cart for example.
+     * Creates new order instance.
+     *
+     * @return OrderBuilderInterface
+     */
+    public function create();
+
+    /**
+     * Modify existing order.
      *
      * @param OrderInterface $order
+     *
+     * @return OrderBuilderInterface
      */
-    public function build(OrderInterface $order);
+    public function modify(OrderInterface $order);
+
+    /**
+     * Add a sellable item at specified price and with given quantity.
+     *
+     * @param SellableInterface $sellable
+     * @param float             $unitPrice
+     * @param integer           $quantity
+     *
+     * @return OrderBuilderInterface
+     */
+    public function add(SellableInterface $sellable, $unitPrice, $quantity = 1);
+
+    /**
+     * Return final order instance.
+     *
+     * @return OrderInterface
+     */
+    public function getOrder();
 }

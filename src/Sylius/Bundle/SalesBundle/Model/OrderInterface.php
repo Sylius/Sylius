@@ -28,6 +28,20 @@ interface OrderInterface extends AdjustableInterface
     public function getId();
 
     /**
+     * Get order number.
+     *
+     * @return string
+     */
+    public function getNumber();
+
+    /**
+     * Set order number.
+     *
+     * @param string $number
+     */
+    public function setNumber($number);
+
+    /**
      * Is confirmed?
      *
      * @return Boolean
@@ -40,11 +54,6 @@ interface OrderInterface extends AdjustableInterface
      * @param Boolean $confirmed
      */
     public function setConfirmed($confirmed);
-
-    /**
-     * Generate confirmation token.
-     */
-    public function generateConfirmationToken();
 
     /**
      * Get confirmation token.

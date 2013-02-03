@@ -21,58 +21,19 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 class OrderController extends ResourceController
 {
     /**
-     * Place order action.
-     */
-    public function placeAction(Request $request)
-    {
-        $fetcher = $this->getRequestFetcher();
-        $builder = $this->getBuilder();
-
-        $order = $this->createNew();
-        $builder->build($order);
-
-        $form = $this->createForm('sylius_sales_place_order', $order);
-
-        if ($form->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->dispatchEvent('pre_create', $order);
-            $this->getManager()->persist($order);
-            $this->dispatchEvent('post_create', $order);
-
-            $this->dispatchEvent('place', $order);
-
-            return $this->renderResponse('placed.html', array(
-                'order' => $order
-            ));
-        }
-
-        return $this->renderResponse('place.html', array(
-            'form'  => $form->createView(),
-            'order' => $order
-        ));
-    }
-
-    /**
      * Confirms order.
+     *
+     * @param string $confirmationToken
      */
-    public function confirmAction()
+    public function confirmAction($confirmationToken)
     {
-        $criteria = $this
-            ->getRequestFetcher()
-            ->getIdentifierCriteria()
-        ;
-
-        $order = $this->findOr404($criteria);
+        $order = $this->findOr404(array('confirmationToken' => $confirmationToken));
 
         $order->setConfirmed(true);
-        $this->getManager()->persist($order);
+        $this->persistAndFlush($order);
 
         return $this->renderResponse('confirmed.html', array(
             'order' => $order
         ));
-    }
-
-    protected function getBuilder()
-    {
-        return $this->get('sylius_sales.builder');
     }
 }

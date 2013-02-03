@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SalesBundle\Controller;
 
 use PHPSpec2\ObjectBehavior;
@@ -13,7 +22,7 @@ class OrderController extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('sylius_sales', 'order', 'SyliusSalesBundle:Order');
+        $this->beConstructedWith('sylius', 'order', 'SyliusSalesBundle:Order');
     }
 
     function it_should_be_initializable()
@@ -31,4 +40,3 @@ class OrderController extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
 }
-

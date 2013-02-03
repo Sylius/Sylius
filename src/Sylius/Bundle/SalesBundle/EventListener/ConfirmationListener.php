@@ -24,7 +24,7 @@ class ConfirmationListener
      * Catches placed order.
      * Sets confirmed to false and sends confirmation email to buyer.
      *
-     * @param FilterOrderEvent $event
+     * @param GenericEvent $event
      */
     public function onOrderPlace(GenericEvent $event)
     {

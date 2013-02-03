@@ -5,31 +5,51 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="sylius.builder.order.class">Sylius\Bundle\SalesBundle\Builder\OrderBuilder</parameter>
+        <parameter key="sylius.generator.order_number.class">Sylius\Bundle\SalesBundle\Generator\OrderNumberGenerator</parameter>
+        <parameter key="sylius.listener.order_number.class">Sylius\Bundle\SalesBundle\EventListener\OrderNumberListener</parameter>
+    </parameters>
+
     <services>
-        <service id="sylius_sales.controller.order" class="%sylius_sales.controller.order.class%">
-            <argument>sylius_sales</argument>
+        <service id="sylius.controller.order" class="%sylius.controller.order.class%">
+            <argument>sylius</argument>
             <argument>order</argument>
             <argument>SyliusSalesBundle:Order</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius_sales.controller.item" class="%sylius_sales.controller.item.class%">
-            <argument>sylius_sales</argument>
-            <argument>item</argument>
+        <service id="sylius.controller.order_item" class="%sylius.controller.order_item.class%">
+            <argument>sylius</argument>
+            <argument>order_item</argument>
             <argument>SyliusSalesBundle:Item</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="sylius_sales.form.type.order" class="%sylius_sales.form.type.order.class%">
-            <argument>%sylius_sales.model.order.class%</argument>
-            <tag name="form.type" alias="sylius_sales_order" />
+        <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <tag name="form.type" alias="sylius_order" />
         </service>
-        <service id="sylius_sales.form.type.item" class="%sylius_sales.form.type.item.class%">
-            <argument>%sylius_sales.model.item.class%</argument>
-            <tag name="form.type" alias="sylius_sales_item" />
+        <service id="sylius.form.type.order_item" class="%sylius.form.type.order_item.class%">
+            <argument>%sylius.model.order_item.class%</argument>
+            <tag name="form.type" alias="sylius_order_item" />
+        </service>
+
+        <service id="sylius.builder.order" class="%sylius.builder.order.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.order_item" />
+        </service>
+
+        <service id="sylius.generator.order_number" class="%sylius.generator.order_number.class%">
+            <argument type="service" id="sylius.repository.order" />
+        </service>
+
+        <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
+            <argument type="service" id="sylius.generator.order_number" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
         </service>
     </services>
 </container>

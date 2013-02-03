@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SalesBundle\Entity;
 
 use PHPSpec2\ObjectBehavior;
@@ -16,7 +25,7 @@ class Adjustment extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Entity\Adjustment');
     }
 
-    function it_should_be_Sylius_adjustment()
+    function it_should_implement_Sylius_adjustment_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustmentInterface');
     }
