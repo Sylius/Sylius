@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Entity;
 /**
  * Foo entity.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Foo
 {

@@ -16,7 +16,7 @@ use PHPSpec2\ObjectBehavior;
 /**
  * Doctrine ODM driver document repository spec.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class DocumentRepository extends ObjectBehavior
 {

@@ -21,7 +21,7 @@ use Twig_Function_Method;
  * Sylius resource twig helper.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class SyliusResourceExtension extends Twig_Extension
 {

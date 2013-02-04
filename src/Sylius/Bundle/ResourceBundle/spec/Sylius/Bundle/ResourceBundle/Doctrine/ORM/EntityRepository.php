@@ -16,7 +16,7 @@ use PHPSpec2\ObjectBehavior;
 /**
  * Doctrine ORM driver entity repository spec.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class EntityRepository extends ObjectBehavior
 {
