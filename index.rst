@@ -1,15 +1,19 @@
-Welcome
-=======
+Sylius Documentation
+====================
 
-Welcome to the official `Sylius project <http://sylius.org>`_ documentation.
+`Sylius <http://sylius.org>`_ is modern e-commerce solution for PHP, based on `framework Symfony2 <http://symfony.com>`_.
 
-Project
--------
+Book
+----
+
+Developers guide to leveraging the flexibility of Sylius.
 
 .. toctree::
-   :maxdepth: 0
+    :hidden:
 
-   contributing/index
+   book/index
+
+.. include:: /book/map.rst.inc
 
 Bundles
 -------
@@ -23,3 +27,15 @@ Bundles
    bundles/SyliusAddressingBundle/index
    bundles/SyliusCategorizerBundle
    bundles/SyliusBloggerBundle
+
+Contributing
+------------
+
+Contribute to Sylius:
+
+.. toctree::
+    :hidden:
+
+    contributing/index
+
+.. include:: /contributing/map.rst.inc
