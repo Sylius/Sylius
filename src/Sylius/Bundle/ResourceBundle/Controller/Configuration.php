@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Resource controller configuration.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Configuration
 {

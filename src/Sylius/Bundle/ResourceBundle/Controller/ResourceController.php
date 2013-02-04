@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Base resource controller for Sylius.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ResourceController extends FOSRestController
 {

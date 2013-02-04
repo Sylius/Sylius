@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -21,7 +22,7 @@ use Pagerfanta\Pagerfanta;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class EntityRepository extends BaseEntityRepository
+class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
     public function createNew()
     {
@@ -92,7 +93,7 @@ class EntityRepository extends BaseEntityRepository
         return $this->getPaginator($queryBuilder);
     }
 
-    public function getPaginator(QueryBuilder $queryBuilder)
+    public function getPaginator($queryBuilder)
     {
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
     }
