@@ -11,18 +11,15 @@
 
 namespace Sylius\Bundle\ResourceBundle\Model;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+
 /**
  * Model repository interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface RepositoryInterface
+interface RepositoryInterface extends ObjectRepository
 {
     public function createNew();
-    public function find($id);
-    public function findAll();
-    public function findOneBy(array $criteria);
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
     public function createPaginator(array $criteria = null, array $orderBy = null);
-    public function getPaginator($queryBuilder);
 }

@@ -93,7 +93,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->getPaginator($queryBuilder);
     }
 
-    public function getPaginator($queryBuilder)
+    public function getPaginator(QueryBuilder $queryBuilder)
     {
         return new Pagerfanta(new DoctrineODMMongoDBAdapter($queryBuilder));
     }
