@@ -7,4 +7,3 @@ The Book
     symfony
 
 .. include:: /book/map.rst.inc
-
