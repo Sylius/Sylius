@@ -1,0 +1,36 @@
+{
+    "name": "sylius/promotions-bundle",
+    "type": "symfony-bundle",
+    "description": "Manage promotions in your Symfony2 application.",
+    "keywords": ["shop", "ecommerce", "promotions", "coupons", "discounts"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusPromotionsBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":                      ">=5.3.2",
+        "sylius/resource-bundle":   "0.1.*",
+        "sylius/sales-bundle":      "0.1.*",
+        "symfony/framework-bundle": "~2.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec2":  "dev-develop"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\PromotionsBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/PromotionsBundle"
+}
