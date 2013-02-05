@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.address.class">Sylius\Bundle\AddressingBundle\Entity\Address</parameter>
+        <parameter key="sylius.model.address.class">Sylius\Bundle\AddressingBundle\Entity\DefaultAddress</parameter>
         <parameter key="sylius.model.country.class">Sylius\Bundle\AddressingBundle\Entity\Country</parameter>
         <parameter key="sylius.model.province.class">Sylius\Bundle\AddressingBundle\Entity\Province</parameter>
         <parameter key="sylius.model.zone.class">Sylius\Bundle\AddressingBundle\Entity\Zone</parameter>
