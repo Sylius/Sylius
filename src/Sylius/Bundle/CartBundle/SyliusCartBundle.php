@@ -41,8 +41,8 @@ class SyliusCartBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\CartBundle\Model\CartInterface'     => 'sylius_cart.model.cart.class',
-            'Sylius\Bundle\CartBundle\Model\CartItemInterface' => 'sylius_cart.model.item.class',
+            'Sylius\Bundle\CartBundle\Model\CartInterface'     => 'sylius.model.cart.class',
+            'Sylius\Bundle\CartBundle\Model\CartItemInterface' => 'sylius.model.cart_item.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_cart', $interfaces));

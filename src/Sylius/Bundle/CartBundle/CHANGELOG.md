@@ -5,6 +5,7 @@ CHANGELOG
 
 * Remove `CartOperator` & `CartOperatorInterface`,
 * Introduce `SyliusCartEvents` & event listeners.
+* Removed the ``sylius_cart`` prefix from services and models, used ``sylius`` instead.
 
 ### v0.2.0 (2012-12-27)
 

@@ -3,20 +3,20 @@
 
 sylius_cart_summary:
     pattern: /
-    defaults: { _controller: sylius_cart.controller.cart:summaryAction }
+    defaults: { _controller: sylius.controller.cart:summaryAction }
 
 sylius_cart_save:
     pattern: /save
-    defaults: { _controller: sylius_cart.controller.cart:saveAction }
+    defaults: { _controller: sylius.controller.cart:saveAction }
 
 sylius_cart_clear:
     pattern: /clear
-    defaults: { _controller: sylius_cart.controller.cart:clearAction }
+    defaults: { _controller: sylius.controller.cart:clearAction }
 
 sylius_cart_item_add:
     pattern: /add
-    defaults: { _controller: sylius_cart.controller.item:addAction }
+    defaults: { _controller: sylius.controller.cart_item:addAction }
 
 sylius_cart_item_remove:
     pattern: /{id}/remove
-    defaults: { _controller: sylius_cart.controller.item:removeAction }
+    defaults: { _controller: sylius.controller.cart_item:removeAction }

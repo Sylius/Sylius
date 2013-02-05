@@ -13,17 +13,17 @@ namespace Sylius\Bundle\CartBundle;
 
 final class SyliusCartEvents
 {
-    const CART_CLEAR_INITIALIZE  = 'sylius_cart.clear.initialize';
-    const CART_CLEAR_COMPLETED   = 'sylius_cart.clear.completed';
+    const CART_CLEAR_INITIALIZE  = 'sylius.cart_clear.initialize';
+    const CART_CLEAR_COMPLETED   = 'sylius.cart_clear.completed';
 
-    const CART_SAVE_INITIALIZE   = 'sylius_cart.save.initialize';
-    const CART_SAVE_COMPLETED    = 'sylius_cart.save.completed';
+    const CART_SAVE_INITIALIZE   = 'sylius.cart_save.initialize';
+    const CART_SAVE_COMPLETED    = 'sylius.cart_save.completed';
 
-    const ITEM_ADD_INITIALIZE    = 'sylius_cart.item.add.initialize';
-    const ITEM_ADD_COMPLETED     = 'sylius_cart.item.add.completed';
-    const ITEM_ADD_ERROR         = 'sylius_cart.item.add.error';
+    const ITEM_ADD_INITIALIZE    = 'sylius.cart_item.add.initialize';
+    const ITEM_ADD_COMPLETED     = 'sylius.cart_item.add.completed';
+    const ITEM_ADD_ERROR         = 'sylius.cart_item.add.error';
 
-    const ITEM_REMOVE_INITIALIZE = 'sylius_cart.item.remove.initialize';
-    const ITEM_REMOVE_COMPLETED  = 'sylius_cart.item.remove.completed';
-    const ITEM_REMOVE_ERROR      = 'sylius_cart.item.remove.error';
+    const ITEM_REMOVE_INITIALIZE = 'sylius.cart_item.remove.initialize';
+    const ITEM_REMOVE_COMPLETED  = 'sylius.cart_item.remove.completed';
+    const ITEM_REMOVE_ERROR      = 'sylius.cart_item.remove.error';
 }

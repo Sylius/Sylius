@@ -13,7 +13,7 @@ class CartController extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('sylius_cart', 'cart', 'SyliusCartBundle:Cart');
+        $this->beConstructedWith('sylius', 'cart', 'SyliusCartBundle:Cart');
     }
 
     function it_should_be_initializable()
