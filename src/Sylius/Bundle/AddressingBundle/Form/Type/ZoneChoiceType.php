@@ -55,6 +55,6 @@ abstract class ZoneChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_zone_choice';
+        return 'sylius_zone_choice';
     }
 }

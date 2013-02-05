@@ -1,48 +1,50 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_addressing:
+sylius:
     address:
         first_name:
-            not_blank: "Please enter first name"
-            min_length: "First name must be at least 2 characters long|First name must be at least 2 characters long"
-            max_length: "First name must not be longer than 255 characters|First name must not be longer than 255 characters"
+            not_blank: "Please enter first name."
+            min_length: "First name must be at least 2 characters long|First name must be at least 2 characters long."
+            max_length: "First name must not be longer than 255 characters|First name must not be longer than 255 characters."
         last_name:
-            not_blank: "Please enter last name"
-            min_length: "Last name must be at least 2 characters long|Last name must be at least 2 characters long"
-            max_length: "Last name must not be longer than 255 characters|Last name must not be longer than 255 characters"
+            not_blank: "Please enter last name."
+            min_length: "Last name must be at least 2 characters long|Last name must be at least 2 characters long."
+            max_length: "Last name must not be longer than 255 characters|Last name must not be longer than 255 characters."
         country:
-            not_blank: "Please select country"
+            not_blank: "Please select country."
         province:
-            valid: "Please select proper province"
+            valid: "Please select proper province."
         street:
-            not_blank: "Please enter street"
-            min_length: "Street must be at least 2 characters long|Street must be at least 2 characters long"
-            max_length: "Street must not be longer than 255 characters|Street must not be longer than 255 characters"
+            not_blank: "Please enter street."
+            min_length: "Street must be at least 2 characters long|Street must be at least 2 characters long."
+            max_length: "Street must not be longer than 255 characters|Street must not be longer than 255 characters."
         city:
-            not_blank: "Please enter city"
-            min_length: "City must be at least 2 characters long|City must be at least 2 characters long"
-            max_length: "City must not be longer than 255 characters|City must not be longer than 255 characters"
+            not_blank: "Please enter city."
+            min_length: "City must be at least 2 characters long|City must be at least 2 characters long."
+            max_length: "City must not be longer than 255 characters|City must not be longer than 255 characters."
         postcode:
-            not_blank: "Please enter postcode"
-            min_length: "Postcode must be at least 2 characters long|Postcode must be at least 2 characters long"
-            max_length: "Postcode must not be longer than 255 characters|Postcode must not be longer than 255 characters"
+            not_blank: "Please enter postcode."
+            min_length: "Postcode must be at least 2 characters long|Postcode must be at least 2 characters long."
+            max_length: "Postcode must not be longer than 255 characters|Postcode must not be longer than 255 characters."
     country:
         name:
-            not_blank: "Please enter name"
-            min_length: "Name must be at least 2 characters long|Name must be at least 2 characters long"
-            max_length: "Name must not be longer than 255 characters|Name must not be longer than 255 characters"
+            not_blank: "Please enter country name."
+            min_length: "Country name must be at least 2 characters long|Name must be at least 2 characters long."
+            max_length: "Country Name must not be longer than 255 characters|Name must not be longer than 255 characters."
         iso_name:
-            not_blank: "Please enter country ISO code"
-            min_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long"
-            max_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long"
+            not_blank: "Please enter country ISO code."
+            min_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long."
+            max_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long."
     province:
         name:
-            not_blank: "Please enter name"
-            min_length: "Name must be at least 2 characters long|Name must be at least 2 characters long"
-            max_length: "Name must not be longer than 255 characters|Name must not be longer than 255 characters"
+            not_blank: "Please enter province name."
+            min_length: "Province name must be at least 2 characters long|Name must be at least 2 characters long."
+            max_length: "Province name must not be longer than 255 characters|Name must not be longer than 255 characters."
     zone:
         name:
-            not_blank: "Please enter name"
-            min_length: "Name must be at least 2 characters long|Name must be at least 2 characters long"
-            max_length: "Name must not be longer than 255 characters|Name must not be longer than 255 characters"
+            not_blank: "Please enter zone name."
+            min_length: "Zone name must be at least 2 characters long|Name must be at least 2 characters long."
+            max_length: "Zone name must not be longer than 255 characters|Name must not be longer than 255 characters."
+        members:
+            min_count: "Please add at least {{ limit }} zone member."

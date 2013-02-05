@@ -13,7 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Entity\ZoneMember" table="sylius_addressing_zone_member" inheritance-type="SINGLE_TABLE">
+    <entity name="Sylius\Bundle\AddressingBundle\Entity\ZoneMember" table="sylius_zone_member" inheritance-type="SINGLE_TABLE">
         <discriminator-column name="type" type="string" field-name="type" length="8" />
         <discriminator-map>
             <discriminator-mapping value="country" class="Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry" />

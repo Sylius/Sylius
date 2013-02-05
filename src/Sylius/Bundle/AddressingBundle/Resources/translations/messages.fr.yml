@@ -1,5 +1,5 @@
-sylius_addressing:
-    label:
+sylius:
+    form:
         address:
             first_name: "Prénom"
             last_name: "Nom"

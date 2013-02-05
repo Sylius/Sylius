@@ -46,7 +46,7 @@ class ProvinceType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius_addressing.label.province.name'
+                'label' => 'sylius.form.province.name'
             ))
         ;
     }
@@ -68,6 +68,6 @@ class ProvinceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_province';
+        return 'sylius_province';
     }
 }

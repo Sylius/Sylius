@@ -47,14 +47,14 @@ class ZoneType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius_addressing.label.zone.name'
+                'label' => 'sylius.form.zone.name'
             ))
             ->add('type', 'choice', array(
-                'label'   => 'sylius_addressing.label.zone.type',
+                'label'   => 'sylius.form.zone.type',
                 'choices' => Zone::getTypeChoices(),
             ))
-            ->add('members', 'sylius_addressing_zone_member_collection', array(
-                'label' => 'sylius_addressing.label.zone.members'
+            ->add('members', 'sylius_zone_member_collection', array(
+                'label' => 'sylius.form.zone.members'
             ))
         ;
     }
@@ -76,6 +76,6 @@ class ZoneType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_zone';
+        return 'sylius_zone';
     }
 }

@@ -17,142 +17,142 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_addressing.model.address.class">Sylius\Bundle\AddressingBundle\Entity\DefaultAddress</parameter>
-        <parameter key="sylius_addressing.model.country.class">Sylius\Bundle\AddressingBundle\Entity\Country</parameter>
-        <parameter key="sylius_addressing.model.province.class">Sylius\Bundle\AddressingBundle\Entity\Province</parameter>
-        <parameter key="sylius_addressing.model.zone.class">Sylius\Bundle\AddressingBundle\Entity\Zone</parameter>
-        <parameter key="sylius_addressing.model.zone_member.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMember</parameter>
-        <parameter key="sylius_addressing.model.zone_member_country.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry</parameter>
-        <parameter key="sylius_addressing.model.zone_member_province.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberProvince</parameter>
-        <parameter key="sylius_addressing.model.zone_member_zone.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberZone</parameter>
+        <parameter key="sylius.model.address.class">Sylius\Bundle\AddressingBundle\Entity\DefaultAddress</parameter>
+        <parameter key="sylius.model.country.class">Sylius\Bundle\AddressingBundle\Entity\Country</parameter>
+        <parameter key="sylius.model.province.class">Sylius\Bundle\AddressingBundle\Entity\Province</parameter>
+        <parameter key="sylius.model.zone.class">Sylius\Bundle\AddressingBundle\Entity\Zone</parameter>
+        <parameter key="sylius.model.zone_member.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMember</parameter>
+        <parameter key="sylius.model.zone_member_country.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry</parameter>
+        <parameter key="sylius.model.zone_member_province.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberProvince</parameter>
+        <parameter key="sylius.model.zone_member_zone.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberZone</parameter>
 
-        <parameter key="sylius_addressing.repository.address.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.zone.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.zone_member.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.zone_member_country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.zone_member_province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius_addressing.repository.zone_member_zone.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.address.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.zone.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.zone_member.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.zone_member_country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.zone_member_province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.zone_member_zone.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_addressing.manager.address" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.address" class="%sylius_addressing.repository.address.class%">
-            <argument type="service" id="sylius_addressing.manager.address" />
+        <service id="sylius.manager.address" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.address" class="%sylius.repository.address.class%">
+            <argument type="service" id="sylius.manager.address" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.address"
+                    factory-service="sylius.manager.address"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.address.class%</argument>
+                    <argument>%sylius.model.address.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.country" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.country" class="%sylius_addressing.repository.country.class%">
-            <argument type="service" id="sylius_addressing.manager.country" />
+        <service id="sylius.manager.country" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.country" class="%sylius.repository.country.class%">
+            <argument type="service" id="sylius.manager.country" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.country"
+                    factory-service="sylius.manager.country"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.country.class%</argument>
+                    <argument>%sylius.model.country.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.province" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.province" class="%sylius_addressing.repository.province.class%">
-            <argument type="service" id="sylius_addressing.manager.province" />
+        <service id="sylius.manager.province" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.province" class="%sylius.repository.province.class%">
+            <argument type="service" id="sylius.manager.province" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.province"
+                    factory-service="sylius.manager.province"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.province.class%</argument>
+                    <argument>%sylius.model.province.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.zone" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.zone" class="%sylius_addressing.repository.zone.class%">
-            <argument type="service" id="sylius_addressing.manager.zone" />
+        <service id="sylius.manager.zone" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.zone" class="%sylius.repository.zone.class%">
+            <argument type="service" id="sylius.manager.zone" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.zone"
+                    factory-service="sylius.manager.zone"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.zone.class%</argument>
+                    <argument>%sylius.model.zone.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.zone_member_country" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.zone_member_country" class="%sylius_addressing.repository.zone_member_country.class%">
-            <argument type="service" id="sylius_addressing.manager.zone_member_country" />
+        <service id="sylius.manager.zone_member_country" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.zone_member_country" class="%sylius.repository.zone_member_country.class%">
+            <argument type="service" id="sylius.manager.zone_member_country" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.zone_member_country"
+                    factory-service="sylius.manager.zone_member_country"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.zone_member_country.class%</argument>
+                    <argument>%sylius.model.zone_member_country.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.zone_member" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.zone_member" class="%sylius_addressing.repository.zone_member.class%">
-            <argument type="service" id="sylius_addressing.manager.zone_member" />
+        <service id="sylius.manager.zone_member" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.zone_member" class="%sylius.repository.zone_member.class%">
+            <argument type="service" id="sylius.manager.zone_member" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.zone_member"
+                    factory-service="sylius.manager.zone_member"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.zone_member.class%</argument>
+                    <argument>%sylius.model.zone_member.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.zone_member_province" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.zone_member_province" class="%sylius_addressing.repository.zone_member_province.class%">
-            <argument type="service" id="sylius_addressing.manager.zone_member_province" />
+        <service id="sylius.manager.zone_member_province" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.zone_member_province" class="%sylius.repository.zone_member_province.class%">
+            <argument type="service" id="sylius.manager.zone_member_province" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.zone_member_province"
+                    factory-service="sylius.manager.zone_member_province"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.zone_member_province.class%</argument>
+                    <argument>%sylius.model.zone_member_province.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius_addressing.manager.zone_member_zone" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_addressing.repository.zone_member_zone" class="%sylius_addressing.repository.zone_member_zone.class%">
-            <argument type="service" id="sylius_addressing.manager.zone_member_zone" />
+        <service id="sylius.manager.zone_member_zone" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.zone_member_zone" class="%sylius.repository.zone_member_zone.class%">
+            <argument type="service" id="sylius.manager.zone_member_zone" />
             <argument type="service">
                 <service
-                    factory-service="sylius_addressing.manager.zone_member_zone"
+                    factory-service="sylius.manager.zone_member_zone"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                     public="false"
                 >
-                    <argument>%sylius_addressing.model.zone_member_zone.class%</argument>
+                    <argument>%sylius.model.zone_member_zone.class%</argument>
                 </service>
             </argument>
         </service>

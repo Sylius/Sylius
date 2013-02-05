@@ -26,8 +26,8 @@ class ZoneMemberZoneType extends ZoneMemberType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('zone', 'sylius_addressing_zone_choice', array(
-                'label' => 'sylius_addressing.label.zone_member_zone.zone'
+            ->add('zone', 'sylius_zone_choice', array(
+                'label' => 'sylius.form.zone_member_zone.zone'
             ))
         ;
 
@@ -39,6 +39,6 @@ class ZoneMemberZoneType extends ZoneMemberType
      */
     public function getName()
     {
-        return 'sylius_addressing_zone_member_zone';
+        return 'sylius_zone_member_zone';
     }
 }

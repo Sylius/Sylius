@@ -43,13 +43,13 @@ class SyliusAddressingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\AddressingBundle\Model\AddressInterface'    => 'sylius_addressing.model.address.class',
-            'Sylius\Bundle\AddressingBundle\Model\CountryInterface'    => 'sylius_addressing.model.country.class',
-            'Sylius\Bundle\AddressingBundle\Model\ProvinceInterface'   => 'sylius_addressing.model.province.class',
-            'Sylius\Bundle\AddressingBundle\Model\ZoneInterface'       => 'sylius_addressing.model.zone.class',
-            'Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface' => 'sylius_addressing.model.zone_member.class',
+            'Sylius\Bundle\AddressingBundle\Model\AddressInterface'    => 'sylius.model.address.class',
+            'Sylius\Bundle\AddressingBundle\Model\CountryInterface'    => 'sylius.model.country.class',
+            'Sylius\Bundle\AddressingBundle\Model\ProvinceInterface'   => 'sylius.model.province.class',
+            'Sylius\Bundle\AddressingBundle\Model\ZoneInterface'       => 'sylius.model.zone.class',
+            'Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_addressing', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius', $interfaces));
     }
 }

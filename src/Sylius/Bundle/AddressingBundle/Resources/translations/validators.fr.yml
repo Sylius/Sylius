@@ -1,4 +1,4 @@
-sylius_addressing:
+sylius:
     address:
         first_name:
             not_blank: "Veuillez entrer votre prénom"

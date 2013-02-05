@@ -46,10 +46,17 @@ class CountryType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius_addressing.label.country.name'
+                'label' => 'sylius.form.country.name'
             ))
             ->add('isoName', 'text', array(
-                'label' => 'sylius_addressing.label.country.iso_name'
+                'label' => 'sylius.form.country.iso_name'
+            ))
+            ->add('provinces', 'collection', array(
+                'type'         => 'sylius_province',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label'        => 'sylius.form.country.provinces'
             ))
         ;
     }
@@ -71,6 +78,6 @@ class CountryType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_country';
+        return 'sylius_country';
     }
 }

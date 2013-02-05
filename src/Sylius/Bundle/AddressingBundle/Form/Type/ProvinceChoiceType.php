@@ -77,6 +77,6 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_addressing_province_choice';
+        return 'sylius_province_choice';
     }
 }

@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Entity\Address" table="sylius_addressing_address">
+    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Entity\Address" table="sylius_address">
         <field name="firstName" column="first_name" type="string" />
         <field name="lastName" column="last_name" type="string" />
         <many-to-one field="country" target-entity="Sylius\Bundle\AddressingBundle\Model\CountryInterface">

@@ -25,6 +25,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class ProvinceController extends ResourceController
 {
+    /**
+     * Renders the province select field.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function renderProvinceChoiceTypeAction(Request $request)
     {
         if (!$request->isXmlHttpRequest() || null === $countryId = $request->query->get('countryId')) {
@@ -50,6 +57,9 @@ class ProvinceController extends ResourceController
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         if (null === $countryId = $this->getRequest()->get('countryId')) {
@@ -67,18 +77,28 @@ class ProvinceController extends ResourceController
         return $province;
     }
 
+    /**
+     * Get country controller.
+     *
+     * @return ResourceController
+     */
     protected function getCountryController()
     {
-        return $this->get('sylius_addressing.controller.country');
+        return $this->get('sylius.controller.country');
     }
 
+    /**
+     * Create province choice form for given country.
+     *
+     * @param CountryInterface $country
+     */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
         return $this
             ->get('form.factory')
-            ->createNamed('sylius_addressing_address_province', 'sylius_addressing_province_choice', null, array(
+            ->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
                 'country' => $country,
-                'label'   => 'sylius_addressing.label.address.province'
+                'label'   => 'sylius.form.address.province'
             ))
         ;
     }

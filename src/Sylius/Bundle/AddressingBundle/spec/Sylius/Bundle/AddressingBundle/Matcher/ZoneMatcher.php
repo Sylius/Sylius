@@ -92,29 +92,59 @@ class ZoneMatcher extends ObjectBehavior
         $memberZone->getZone()->shouldBeCalled()->willReturn($subZone);
         $rootZone->getMembers()->shouldBeCalled()->willReturn(array($memberZone));
         $rootZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_ZONE);
-        $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
+
+        $memberCountry->getBelongsTo()->willReturn($subZone);
         $memberZone->getBelongsTo()->willReturn($rootZone);
+        $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
 
         $this->match($address)->shouldReturn($rootZone);
     }
 
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface   $province
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface    $country
      * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface    $address
+     * @param Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry  $memberCountry
      * @param Sylius\Bundle\AddressingBundle\Entity\ZoneMemberProvince $memberProvince
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface       $zoneCountry
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface       $zoneProvince
      */
-    function it_should_match_address_by_zone_priority($repository, $province, $address, $memberProvince, $zoneCountry, $zoneProvince)
+    function it_should_match_address_from_province_when_many_are_found(
+        $repository, $country, $province, $address, $memberCountry, $memberProvince, $zoneCountry, $zoneProvince
+    )
     {
-        $address->getProvince()->shouldBeCalled()->willReturn($province);
-        $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
-        $zoneProvince->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
-        $zoneProvince->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zoneCountry->getMembers()->shouldNotBeCalled();
+        $address->getProvince()->willReturn($province);
+        $address->getCountry()->willReturn($country);
+        $memberProvince->getProvince()->willReturn($province);
+        $memberCountry->getCountry()->willReturn($country);
+
+        $zoneProvince->getMembers()->willReturn(array($memberProvince));
+        $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
+        $zoneCountry->getMembers()->willReturn(array($memberCountry));
+        $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+
         $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry, $zoneProvince));
         $memberProvince->getBelongsTo()->willReturn($zoneProvince);
+        $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
         $this->match($address)->shouldReturn($zoneProvince);
+    }
+
+    /**
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface   $country
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
+     * @param Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry $memberCountry
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zoneCountry
+     */
+    function it_should_match_all_zones_when_one_zone_for_address_is_defined($repository, $country, $address, $memberCountry, $zoneCountry)
+    {
+        $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry));
+        $address->getCountry()->shouldBeCalled()->willReturn($country);
+        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
+        $zoneCountry->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zoneCountry->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $memberCountry->getBelongsTo()->willReturn($zoneCountry);
+
+        $this->matchAll($address)->shouldReturn(array($zoneCountry));
     }
 }

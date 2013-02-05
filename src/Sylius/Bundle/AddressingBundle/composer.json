@@ -21,12 +21,13 @@
         "php": ">=5.3.2",
 
         "symfony/framework-bundle":        "~2.1",
-        "sylius/resource-bundle":          "*",
-        "stof/doctrine-extensions-bundle": "*"
+        "sylius/resource-bundle":          "0.1.*",
+        "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop",
-        "symfony/form"    : "~2.1"
+        "doctrine/orm"    :                "~2.3",
+        "phpspec/phpspec2":                "dev-develop",
+        "symfony/form"    :                "~2.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -34,5 +35,10 @@
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\AddressingBundle": "" }
     },
-    "target-dir": "Sylius/Bundle/AddressingBundle"
+    "target-dir": "Sylius/Bundle/AddressingBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
 }
