@@ -5,5 +5,6 @@ The Book
     :hidden:
 
     symfony
+    introduction
 
 .. include:: /book/map.rst.inc

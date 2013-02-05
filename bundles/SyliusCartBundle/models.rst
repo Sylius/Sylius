@@ -9,7 +9,7 @@ Cart
 You can access the cart total value using the ``->getTotal()`` method. The denormalized number of cart items is available via ``->getTotalItems()`` method.
 Recalculation of totals can happen by calling ``->calculateTotal()`` method, using the simplest possible math. It will also update the item totals.
 The carts have their expiration time - ``->getExpiresAt()`` returns that time and ``->incrementExpiresAt()`` sets it to +3 hours from now by default.
-The collection of items (Implementing the ``Doctrine\Common\Collections`` interface) can be obtained using the ``->getItems()``.
+The collection of items (Implementing the ``Doctrine\Common\Collections\Collection`` interface) can be obtained using the ``->getItems()``.
 
 CartItem
 --------

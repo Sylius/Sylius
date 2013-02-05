@@ -10,7 +10,6 @@ Configuration reference
         driver: ~ # The driver used for persistence layer.
         engine: twig # Templating engine to use by default.
         resolver: ~ # Service id of cart item resolver.
-        operator: sylius_cart.operator.default # Cart operator service id.
         provider: sylius_cart.provider.default # Cart provider service id.
         storage: sylius_cart.storage.session # The id of cart storage for default provider.
         classes:

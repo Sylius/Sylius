@@ -4,9 +4,17 @@ Bundles reference
 .. toctree::
     :hidden:
 
+    SyliusResourceBundle/index
+    SyliusAssortmentBundle/index
     SyliusCartBundle/index
+    SyliusSalesBundle/index
     SyliusAddressingBundle/index
     SyliusInventoryBundle/index
-    SyliusBloggerBundle
+    SyliusShippingBundle/index
+    SyliusTaxationBundle/index
+    SyliusTaxonomiesBundle/index
+    SyliusSettingsBundle/index
+    SyliusFlowBundle/index
+    SyliusBloggerBundle/index
 
-.. include:: /book/map.rst.inc
+.. include:: /bundles/map.rst.inc

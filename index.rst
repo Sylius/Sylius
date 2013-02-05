@@ -9,24 +9,25 @@ Book
 Developers guide to leveraging the flexibility of Sylius.
 
 .. toctree::
-    :hidden:
+   :hidden:
 
    book/index
+   book/symfony
+   book/introduction
 
 .. include:: /book/map.rst.inc
 
 Bundles
 -------
 
-.. toctree::
-   :maxdepth: 2
-   :numbered:
+Documentation of all Sylius bundles.
 
-   bundles/SyliusCartBundle/index
-   bundles/SyliusInventoryBundle/index
-   bundles/SyliusAddressingBundle/index
-   bundles/SyliusCategorizerBundle
-   bundles/SyliusBloggerBundle
+.. toctree::
+   :hidden:
+
+   bundles/index
+
+.. include:: /bundles/map.rst.inc
 
 Contributing
 ------------
@@ -34,8 +35,8 @@ Contributing
 Contribute to Sylius:
 
 .. toctree::
-    :hidden:
+   :hidden:
 
-    contributing/index
+   contributing/index
 
 .. include:: /contributing/map.rst.inc

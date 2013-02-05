@@ -39,7 +39,7 @@ You're interacting with them like you usually do with own entities in your proje
         $item = $itemRepository->createNew();
     }
 
-Provider, Operator and Resolver
+Provider and Resolver
 -------------------------------
 
 There are also 3 more services for you.
@@ -61,33 +61,6 @@ This is useful, for example, when after completing an order you want to start wi
         $currentCart = $provider->getCart();
         $provider->setCart($customCart);
         $provider->abandonCart();
-    }
-
-Operator is used to perform basic actions on the given cart.
-It is available as service, you can override its class or even whole service to modify the default logic.
-
-.. code-block:: php
-
-    <?php
-
-    // ...
-    public function addItemAction(Request $request)
-    {
-        // ...
-
-        $provider = $this->get('sylius_cart.provider');
-        $operator = $this->get('sylius_cart.operator'); // Implements the CartOperatorInterface.
-
-        $cart = $provider->getCart();
-
-        $operator
-            ->addItem($cart, $newItem)
-            ->removeItem($cart, $existingItem)
-            ->refresh($cart) // Forces cart to refresh all its data, recalculate totals...
-            ->save($cart) // Save and flush the cart.
-        ;
-
-        $operator->clear($cart); // Clears the cart.
     }
 
 The resolver is used to create a new item based on user request.

@@ -16,6 +16,10 @@ First, you need to enable the bundle inside the kernel.
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
 Don't worry, everything was automatically installed via Composer.
 
+.. note::
+
+    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
+
 .. code-block:: php
 
     <?php
@@ -25,44 +29,22 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            // ...
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),
+
+            // Other bundles...
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
         );
     }
 
 Creating your entities
 ----------------------
 
-.. note::
-
-    We're trying to eliminate or simplify this part of setup, until that happens - you need to do this manually.
-
-You have to create two entities, living inside your application code.
+You have to create your **CartItem** entity, living inside your application code.
 We think that **keeping the app-specific bundle structure simple** is a good practice, so
 let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle`` namespace.
-
-We need two classes, *Cart* and *CartItem*.
-
-.. code-block:: php
-
-    <?php
-
-    // src/App/AppBundle/Entity/Cart.php
-    namespace App\AppBundle\Entity;
-
-    use Sylius\Bundle\CartBundle\Entity\Cart as BaseCart;
-
-    class Cart extends BaseCart
-    {
-    }
-
-Notice that we're using a base cart entity from the Sylius bundle.
-
-That would be all for *Cart* model, at least for simple use cases.
-Next step requires creating the item entity, let's do this now.
 
 .. code-block:: php
 
@@ -77,33 +59,8 @@ Next step requires creating the item entity, let's do this now.
     {
     }
 
-Now we need to define simple mapping for those entities, because they only extend the Doctrine mapped super classes.
-You should create two mapping files in your ``AppBundle``, put them inside the doctrine mapping directory ``src/App/AppBundle/Resources/config/doctrine/*.orm.xml``.
-
-.. code-block:: xml
-
-    <?xml version="1.0" encoding="UTF-8"?>
-
-    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                          http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-        <entity name="App\AppBundle\Entity\Cart" table="app_cart">
-            <id name="id" column="id" type="integer">
-                <generator strategy="AUTO" />
-            </id>
-            <one-to-many field="items" target-entity="App\AppBundle\Entity\CartItem" mapped-by="cart">
-                <cascade>
-                    <cascade-all/>
-                </cascade>
-            </one-to-many>
-        </entity>
-
-    </doctrine-mapping>
-
-This makes our recently created *Cart* class an entity, and adds a relation to items.
-We need to take care of the opposite side of this relationship.
+Now we need to define simple mapping for this entity, because it only extends the Doctrine mapped super class.
+You should create a mapping file in your ``AppBundle``, put it inside the doctrine mapping directory ``src/App/AppBundle/Resources/config/doctrine/CartItem.orm.xml``.
 
 .. code-block:: xml
 
@@ -118,14 +75,18 @@ We need to take care of the opposite side of this relationship.
             <id name="id" column="id" type="integer">
                 <generator strategy="AUTO" />
             </id>
-            <many-to-one field="cart" target-entity="App\AppBundle\Entity\Cart" inversed-by="items">
-                <join-column name="cart_id" referenced-column-name="id" />
-            </many-to-one>
         </entity>
 
     </doctrine-mapping>
 
+Mapping *id* is enough, because the relation between **Cart** and **CartItem** has been already defined in superclass metadata.
+
 Let's assume you have *Product* entity, which represents your main merchandise in webshop.
+
+.. note::
+
+    Please remember that you can use anything else, *Product* here is just an obvious example, but it will work in similar way with other entities.
+
 We need to modify the *CartItem* entity and its mapping a bit, so it allows us to put product inside cart item.
 
 .. code-block:: php
@@ -168,9 +129,6 @@ We have to also map the *Product* to *CartItem*, let's create this relation in m
             <id name="id" column="id" type="integer">
                 <generator strategy="AUTO" />
             </id>
-            <many-to-one field="cart" target-entity="App\AppBundle\Entity\Cart" inversed-by="items">
-                <join-column name="cart_id" referenced-column-name="id" />
-            </many-to-one>
             <many-to-one field="product" target-entity="App\AppBundle\Entity\Product">
                 <join-column name="product_id" referenced-column-name="id" />
             </many-to-one>
@@ -202,7 +160,7 @@ Its only requirement is to implement ``Sylius\Bundle\CartBundle\Resolver\ItemRes
         }
     }
 
-The class is in place, well done. 
+The class is in place, well done.
 
 We need to do some more coding, so the service is actually doing its job.
 In our example we want to put *Product* in our cart, so we should
@@ -318,8 +276,6 @@ Put this configuration inside your ``app/config/config.yml``.
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         resolver: app.cart_item_resolver # The id of our newly created service.
         classes:
-            cart:
-                model: App\AppBundle\Entity\Cart # Our cart entity.
             item:
                 model: App\AppBundle\Entity\CartItem # The item entity.
 

@@ -1,4 +1,12 @@
+* :doc:`/bundles/SyliusResourceBundle/index`
+* :doc:`/bundles/SyliusAssortmentBundle/index`
 * :doc:`/bundles/SyliusCartBundle/index`
+* :doc:`/bundles/SyliusSalesBundle/index`
 * :doc:`/bundles/SyliusAddressingBundle/index`
 * :doc:`/bundles/SyliusInventoryBundle/index`
-* :doc:`/bundles/SyliusBloggerBundle
+* :doc:`/bundles/SyliusShippingBundle/index`
+* :doc:`/bundles/SyliusTaxationBundle/index`
+* :doc:`/bundles/SyliusTaxonomiesBundle/index`
+* :doc:`/bundles/SyliusSettingsBundle/index`
+* :doc:`/bundles/SyliusFlowBundle/index`
+* :doc:`/bundles/SyliusBloggerBundle/index`
