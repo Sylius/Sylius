@@ -18,12 +18,12 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.context.class">Sylius\Bundle\FlowBundle\Process\Context\ProcessContext</parameter>
+        <parameter key="sylius.process.context.class">Sylius\Bundle\FlowBundle\Process\Context\ProcessContext</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_flow.context" class="%sylius_flow.context.class%">
-            <argument type="service" id="sylius_flow.storage" />
+        <service id="sylius.process.context" class="%sylius.process.context.class%">
+            <argument type="service" id="sylius.process_storage" />
         </service>
     </services>
 

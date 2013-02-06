@@ -14,7 +14,6 @@ namespace Sylius\Bundle\FlowBundle\Process\Builder;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
-use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

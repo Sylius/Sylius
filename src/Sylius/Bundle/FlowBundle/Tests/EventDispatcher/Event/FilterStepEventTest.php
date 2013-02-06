@@ -33,7 +33,7 @@ class FilterStepEventTest extends \PHPUnit_Framework_TestCase
         $testCase = $this;
         $dispatcher = new EventDispatcher();
 
-        $dispatcher->addListener('sylius_flow.event.step.display', function (FilterStepEvent $event) use ($testCase, $step) {;
+        $dispatcher->addListener('sylius.step.display', function (FilterStepEvent $event) use ($testCase, $step) {;
             $testCase->assertSame($step, $event->getStep());
         });
 

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\FlowBundle\Process;
 
-use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
@@ -26,14 +25,14 @@ interface ProcessInterface
      *
      * @return string
      */
-    function getScenarioAlias();
+    public function getScenarioAlias();
 
     /**
      * Set scenario alias.
      *
      * @param string $scenarioAlias
      */
-    function setScenarioAlias($scenarioAlias);
+    public function setScenarioAlias($scenarioAlias);
 
     /**
      * Get a collection of steps.
@@ -41,35 +40,35 @@ interface ProcessInterface
      *
      * @return array
      */
-    function getSteps();
+    public function getSteps();
 
     /**
      * Set steps.
      *
      * @param array $steps
      */
-    function setSteps(array $steps);
+    public function setSteps(array $steps);
 
     /**
      * Get steps in correct order.
      *
      * @return array
      */
-    function getOrderedSteps();
+    public function getOrderedSteps();
 
     /**
      * Get first process step.
      *
      * @return StepInterface
      */
-    function getFirstStep();
+    public function getFirstStep();
 
     /**
      * Get last step.
      *
      * @return StepInterface
      */
-    function getLastStep();
+    public function getLastStep();
 
     /**
      * Add step and name it.
@@ -77,14 +76,14 @@ interface ProcessInterface
      * @param string        $name
      * @param StepInterface $step
      */
-    function addStep($name, StepInterface $step);
+    public function addStep($name, StepInterface $step);
 
     /**
      * Remove step.
      *
      * @param string $name
      */
-    function removeStep($name);
+    public function removeStep($name);
 
     /**
      * Has step with given name?
@@ -93,82 +92,86 @@ interface ProcessInterface
      *
      * @return Boolean
      */
-    function hasStep($name);
+    public function hasStep($name);
 
     /**
      * Count all steps.
      *
      * @return integer
      */
-    function countSteps();
+    public function countSteps();
 
     /**
      * Get validator.
      *
      * @return \Closure
      */
-    function getValidator();
+    public function getValidator();
 
     /**
      * Set validator.
      *
      * @param \Closure $validator
      */
-    function setValidator(\Closure $validator);
+    public function setValidator(\Closure $validator);
 
     /**
      * Get redirection after complete.
      *
      * @return string
      */
-    function getRedirect();
+    public function getRedirect();
 
     /**
-     * Set redirection after compelte.
+     * Set redirection after complete.
      *
      * @param string $redirect
      */
-    function setRedirect($redirect);
+    public function setRedirect($redirect);
 
     /**
      * Get display route.
      *
      * @return string
      */
-    function getDisplayRoute();
+    public function getDisplayRoute();
 
     /**
      * Set display route.
      *
      * @param string $route
      */
-    function setDisplayRoute($route);
+    public function setDisplayRoute($route);
 
     /**
      * Get forward route.
      *
-     * @param string $route
+     * @return string
      */
-    function getForwardRoute();
+    public function getForwardRoute();
 
     /**
      * Set forward route.
      *
      * @param string $route
      */
-    function setForwardRoute($route);
+    public function setForwardRoute($route);
 
     /**
      * Get step by index/order
      *
+     * @param string $index
+     *
      * @return StepInterface
      */
-    function getStepByIndex($index);
+    public function getStepByIndex($index);
 
     /**
      * Get step by name
      *
+     * @param string $index
+     *
      * @return StepInterface
      */
-    function getStepByName($index);
+    public function getStepByName($index);
 }

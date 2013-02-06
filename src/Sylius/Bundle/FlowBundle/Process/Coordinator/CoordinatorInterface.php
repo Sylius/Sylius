@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 
 /**
@@ -28,7 +31,7 @@ interface CoordinatorInterface
      *
      * @return RedirectResponse
      */
-    function start($scenarioAlias);
+    public function start($scenarioAlias);
 
     /**
      * Display step.
@@ -38,7 +41,7 @@ interface CoordinatorInterface
      *
      * @return Response
      */
-    function display($scenarioAlias, $stepName);
+    public function display($scenarioAlias, $stepName);
 
     /**
      * Move forward.
@@ -49,22 +52,22 @@ interface CoordinatorInterface
      *
      * @return Response
      */
-    function forward($scenarioAlias, $stepName);
+    public function forward($scenarioAlias, $stepName);
 
     /**
      * Register new process scenario.
      *
      * @param string                   $alias
-     * @param ProcessScenarioInterface $process
+     * @param ProcessScenarioInterface $scenario
      */
-    function registerScenario($alias, ProcessScenarioInterface $scenario);
+    public function registerScenario($alias, ProcessScenarioInterface $scenario);
 
     /**
      * Load process scenario with given alias.
      *
-     * @param string $alias
+     * @param string $scenario
      *
      * @return ProcessScenarioInterface
      */
-    function loadScenario($scenario);
+    public function loadScenario($scenario);
 }

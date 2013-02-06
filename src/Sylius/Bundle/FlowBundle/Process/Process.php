@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\FlowBundle\Process;
 
-use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**

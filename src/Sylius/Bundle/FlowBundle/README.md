@@ -1,10 +1,15 @@
 SyliusFlowBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusFlowBundle.png)](http://travis-ci.org/Sylius/SyliusFlowBundle)
 ================
 
-Multiple action processes with reusable steps for any Symfony2 application.
+Multiple action processes with reusable steps for [**Symfony2**](http://symfony.com) applications.
 Suitable for building checkouts or installations.
 
-This bundle is a **prototype**, it works only with latest Symfony.
+> Note: This bundle is a **prototype**, it works only with latest Symfony.
+
+Sylius
+------
+
+**Sylius**, webshop engine for Symfony2.
 
 ``` php
 <?php
@@ -131,39 +136,31 @@ Now you can run the tests by simply using this command.
 $ phpunit
 ```
 
+Documentation
+-------------
+
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusFlowBundle/index.html).
+
 Code examples
 -------------
 
 If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
 
-Documentation
--------------
-
-Documentation is available on [readthedocs.org](http://sylius.readthedocs.org/en/latest/bundles/SyliusFlowBundle.html).
-
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
 
-### Users
-
-If you are using this bundle and have any questions, feel free to ask on users mailing list.
-[Mail](mailto:sylius@googlegroups.com) or [view it](http://groups.google.com/group/sylius).
-
-### Developers
-
-If you want to contribute, and develop this bundle, use the developers mailing list.
-[Mail](mailto:sylius-dev@googlegroups.com) or [view it](http://groups.google.com/group/sylius-dev).
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius)
-or [follow me](http://twitter.com/pjedrzejewski).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
 
 Bug tracking
 ------------

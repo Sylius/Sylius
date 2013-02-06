@@ -29,7 +29,7 @@ interface ProcessBuilderInterface
      *
      * @return ProcessInterface
      */
-    function build(ProcessScenarioInterface $scenario);
+    public function build(ProcessScenarioInterface $scenario);
 
     /**
      * Add a step with given name.
@@ -37,14 +37,14 @@ interface ProcessBuilderInterface
      * @param string               $name
      * @param string|StepInterface $step Step alias or instance
      */
-    function add($name, $step);
+    public function add($name, $step);
 
     /**
      * Remove step with given name.
      *
      * @param string $name
      */
-    function remove($name);
+    public function remove($name);
 
     /**
      * Check wether or not process has given step.
@@ -53,35 +53,35 @@ interface ProcessBuilderInterface
      *
      * @return Boolean
      */
-    function has($name);
+    public function has($name);
 
     /**
      * Set display route.
      *
      * @param string $route
      */
-    function setDisplayRoute($route);
+    public function setDisplayRoute($route);
 
     /**
      * Set forward route.
      *
      * @param string $route
      */
-    function setForwardRoute($route);
+    public function setForwardRoute($route);
 
     /**
      * Set redirection route after completion.
      *
      * @param string $redirect
      */
-    function setRedirect($redirect);
+    public function setRedirect($redirect);
 
     /**
      * Validation of process, if returns false, process is suspended.
      *
      * @param \Closure $validator
      */
-    function validate(\Closure $validator);
+    public function validate(\Closure $validator);
 
     /**
      * Register new step.
@@ -89,7 +89,7 @@ interface ProcessBuilderInterface
      * @param string        $alias
      * @param StepInterface $step
      */
-    function registerStep($alias, StepInterface $step);
+    public function registerStep($alias, StepInterface $step);
 
     /**
      * Load step.
@@ -98,5 +98,5 @@ interface ProcessBuilderInterface
      *
      * @return StepInterface
      */
-    function loadStep($alias);
+    public function loadStep($alias);
 }

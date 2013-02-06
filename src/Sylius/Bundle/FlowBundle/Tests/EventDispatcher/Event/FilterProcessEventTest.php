@@ -33,7 +33,7 @@ class FilterProcessEventTest extends \PHPUnit_Framework_TestCase
         $testCase = $this;
         $dispatcher = new EventDispatcher();
 
-        $dispatcher->addListener('sylius_flow.event.process.start', function (FilterProcessEvent $event) use ($testCase, $process) {
+        $dispatcher->addListener('sylius.process.start', function (FilterProcessEvent $event) use ($testCase, $process) {
             $testCase->assertSame($process, $event->getProcess());
         });
 

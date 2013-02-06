@@ -28,5 +28,5 @@ interface ProcessScenarioInterface
      *
      * @param ProcessBuilderInterface $builder
      */
-    function build(ProcessBuilderInterface $builder);
+    public function build(ProcessBuilderInterface $builder);
 }

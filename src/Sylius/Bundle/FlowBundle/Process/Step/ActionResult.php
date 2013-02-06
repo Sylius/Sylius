@@ -17,7 +17,6 @@ namespace Sylius\Bundle\FlowBundle\Process\Step;
  */
 class ActionResult
 {
-
     private $stepName;
 
     function __construct($stepName = null)
@@ -32,5 +31,4 @@ class ActionResult
     {
         return $this->stepName;
     }
-
 }
