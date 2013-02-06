@@ -154,11 +154,14 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setItems(Collection $items)
-    {
-        $this->items = $items;
+    public function setItems(Collection $items){
+        foreach($this->items as $item){
+            $this->removeItem($item);
+        }
+        foreach($items as $item){
+            $this->addItem($item);
+        }
     }
-
     /**
      * {@inheritdoc}
      */
@@ -196,10 +199,19 @@ class Cart implements CartInterface
 
         $this->items->add($item);
         $item->setCart($this);
-
+        self::refreshCart($this);
         return $this;
     }
+    
+    public static function refreshCart(CartInterface $cart)
+    {
+        $cart->calculateTotal();
+        $cart->setTotalItems($cart->countItems());
+        return $cart;
+    }
 
+
+  
     /**
      * {@inheritdoc}
      */
@@ -210,7 +222,7 @@ class Cart implements CartInterface
 
             $item->setCart(null);
         }
-
+        self::refreshCart($this);
         return $this;
     }
 
