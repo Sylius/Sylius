@@ -64,14 +64,14 @@ class CartController extends Controller
         $form = $this->createForm('sylius_cart', $cart);
 
         if ($form->bind($request)->isValid()) {
-            /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-            $dispatcher = $this->container->get('event_dispatcher');
-
             $event = new CartEvent($cart);
             $event->isFresh(true);
 
-            $dispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
-            $dispatcher->dispatch(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
+            // Update models
+            $this->dispatchEvent(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
+
+            // Write flash message
+            $this->dispatchEvent(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
         }
 
         return $this->renderResponse('summary.html', array(
@@ -88,10 +88,11 @@ class CartController extends Controller
      */
     public function clearAction()
     {
-        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch(SyliusCartEvents::CART_CLEAR_INITIALIZE, new CartEvent($this->getCurrentCart()));
-        $dispatcher->dispatch(SyliusCartEvents::CART_CLEAR_COMPLETED, new FlashEvent());
+        // Update models
+        $this->dispatchEvent(SyliusCartEvents::CART_CLEAR_INITIALIZE, new CartEvent($this->getCurrentCart()));
+
+        // Write flash message
+        $this->dispatchEvent(SyliusCartEvents::CART_CLEAR_COMPLETED, new FlashEvent());
 
         return $this->redirectToCartSummary();
     }
