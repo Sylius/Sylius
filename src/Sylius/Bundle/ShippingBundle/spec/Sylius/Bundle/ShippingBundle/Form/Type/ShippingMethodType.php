@@ -88,11 +88,9 @@ class ShippingMethodType extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
-     * @param Symfony\Component\Form\FormBuilder          $builder
-     * @param Symfony\Component\Form\FormFactoryInterface $factory
+     * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_should_add_build_shipping_method_event_subscriber($calculatorRegistry, $builder, $factory)
+    function it_should_add_build_shipping_method_event_subscriber($builder)
     {
         $builder->add(ANY_ARGUMENTS)->willReturn($builder);
 
