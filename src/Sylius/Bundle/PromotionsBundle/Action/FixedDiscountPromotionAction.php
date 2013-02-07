@@ -19,7 +19,7 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountPromotionactionAction implements PromotionActionInterface
+class FixedDiscountPromotionAction implements PromotionActionInterface
 {
     protected $repository;
 

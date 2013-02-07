@@ -41,7 +41,7 @@ class PromotionProcessor extends ObjectBehavior
         $checker->isEligible($order, $promotion)->shouldBeCalled()->willReturn(false);
         $applicator->apply($order, $promotion)->shouldNotBeCalled();
 
-        $this->process($order, $promotion);
+        $this->process($order);
     }
 
     /**
@@ -54,6 +54,6 @@ class PromotionProcessor extends ObjectBehavior
         $checker->isEligible($order, $promotion)->shouldBeCalled()->willReturn(true);
         $applicator->apply($order, $promotion)->shouldBeCalled();
 
-        $this->process($order, $promotion);
+        $this->process($order);
     }
 }

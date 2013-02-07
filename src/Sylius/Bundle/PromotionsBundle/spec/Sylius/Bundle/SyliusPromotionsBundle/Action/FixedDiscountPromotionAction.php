@@ -9,7 +9,7 @@ use PHPSpec2\ObjectBehavior;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountPromotionactionAction extends ObjectBehavior
+class FixedDiscountPromotionAction extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
@@ -21,7 +21,7 @@ class FixedDiscountPromotionactionAction extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Action\FixedDiscountPromotionactionAction');
+        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Action\FixedDiscountPromotionAction');
     }
 
     function it_should_be_Sylius_promotion_action()

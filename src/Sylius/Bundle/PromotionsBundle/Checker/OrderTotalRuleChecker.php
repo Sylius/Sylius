@@ -23,9 +23,9 @@ class OrderTotalRuleChecker implements RuleCheckerInterface
     public function isEligible(OrderInterface $order, array $configuration)
     {
         if ($configuration['equal']) {
-            return $order->getTotal() >= $configuration['value'];
+            return $order->getTotal() >= $configuration['amount'];
         }
 
-        return $order->getTotal() > $configuration['value'];
+        return $order->getTotal() > $configuration['amount'];
     }
 }

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\PromotionsBundle\Checker;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 
 /**
- * Checks if order item count exeeds (or at least equal) to the configured value.
+ * Checks if order item count exeeds (or at least equal) to the configured count.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -23,9 +23,8 @@ class ItemCountRuleChecker implements RuleCheckerInterface
     public function isEligible(OrderInterface $order, array $configuration)
     {
         if ($configuration['equal']) {
-            return $order->countItems() >= $configuration['value'];
-        }
+            return $order->countItems() >= $configuration['count']; }
 
-        return $order->countItems() > $configuration['value'];
+        return $order->countItems() > $configuration['count'];
     }
 }

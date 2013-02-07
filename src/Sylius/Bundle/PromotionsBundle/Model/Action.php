@@ -19,8 +19,8 @@ namespace Sylius\Bundle\PromotionsBundle\Model;
 class Action implements ActionInterface
 {
     protected $id;
-    protected $configuration;
     protected $type;
+    protected $configuration;
     protected $promotion;
 
     public function __construct()

@@ -30,7 +30,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     {
         $order->countItems()->shouldBeCalled()->willReturn(0);
 
-        $this->isEligible($order, array('value' => 10, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
     /**
@@ -40,7 +40,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     {
         $order->countItems()->shouldBeCalled()->willReturn(7);
 
-        $this->isEligible($order, array('value' => 10, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
     /**
@@ -50,7 +50,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     {
         $order->countItems()->shouldBeCalled()->willReturn(12);
 
-        $this->isEligible($order, array('value' => 10, 'equal' => false))->shouldReturn(true);
+        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
     /**
@@ -60,7 +60,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     {
         $order->countItems()->shouldBeCalled()->willReturn(10);
 
-        $this->isEligible($order, array('value' => 10, 'equal' => false))->shouldReturn(false);
-        $this->isEligible($order, array('value' => 10, 'equal' => true))->shouldReturn(true);
+        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($order, array('count' => 10, 'equal' => true))->shouldReturn(true);
     }
 }

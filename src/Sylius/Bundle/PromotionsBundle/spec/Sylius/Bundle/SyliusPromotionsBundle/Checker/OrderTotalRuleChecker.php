@@ -30,7 +30,7 @@ class OrderTotalRuleChecker extends ObjectBehavior
     {
         $order->getTotal()->shouldBeCalled()->willReturn(0);
 
-        $this->isEligible($order, array('value' => 500, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($order, array('amount' => 500, 'equal' => false))->shouldReturn(false);
     }
 
     /**
@@ -40,7 +40,7 @@ class OrderTotalRuleChecker extends ObjectBehavior
     {
         $order->getTotal()->shouldBeCalled()->willReturn(400);
 
-        $this->isEligible($order, array('value' => 500, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($order, array('amount' => 500, 'equal' => false))->shouldReturn(false);
     }
 
     /**
@@ -50,7 +50,7 @@ class OrderTotalRuleChecker extends ObjectBehavior
     {
         $order->getTotal()->shouldBeCalled()->willReturn(600);
 
-        $this->isEligible($order, array('value' => 500, 'equal' => false))->shouldReturn(true);
+        $this->isEligible($order, array('amount' => 500, 'equal' => false))->shouldReturn(true);
     }
 
     /**
@@ -60,7 +60,7 @@ class OrderTotalRuleChecker extends ObjectBehavior
     {
         $order->getTotal()->shouldBeCalled()->willReturn(500);
 
-        $this->isEligible($order, array('value' => 500, 'equal' => false))->shouldReturn(false);
-        $this->isEligible($order, array('value' => 500, 'equal' => true))->shouldReturn(true);
+        $this->isEligible($order, array('amount' => 500, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($order, array('amount' => 500, 'equal' => true))->shouldReturn(true);
     }
 }

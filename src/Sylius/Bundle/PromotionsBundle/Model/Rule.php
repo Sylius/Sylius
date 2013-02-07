@@ -19,8 +19,8 @@ namespace Sylius\Bundle\PromotionsBundle\Model;
 class Rule implements RuleInterface
 {
     protected $id;
-    protected $configuration;
     protected $type;
+    protected $configuration;
     protected $promotion;
 
     public function __construct()
