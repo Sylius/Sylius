@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Step;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 
 interface StepInterface
@@ -20,14 +22,14 @@ interface StepInterface
      *
      * @return string
      */
-    function getName();
+    public function getName();
 
     /**
      * Set step name.
      *
-     * @param strgin $step
+     * @param string $name
      */
-    function setName($name);
+    public function setName($name);
 
     /**
      * Display action.
@@ -36,7 +38,7 @@ interface StepInterface
      *
      * @return Response
      */
-    function displayAction(ProcessContextInterface $context);
+    public function displayAction(ProcessContextInterface $context);
 
     /**
      * Forward action.
@@ -45,14 +47,14 @@ interface StepInterface
      *
      * @return null|Response
      */
-    function forwardAction(ProcessContextInterface $context);
+    public function forwardAction(ProcessContextInterface $context);
 
     /**
      * Is step active in process?
      *
      * @return Boolean
      */
-    function isActive();
+    public function isActive();
 
     /**
      * Proceeds to the next step.
@@ -69,5 +71,4 @@ interface StepInterface
      * @return ActionResult
      */
     public function proceed($nextStepName);
-
 }

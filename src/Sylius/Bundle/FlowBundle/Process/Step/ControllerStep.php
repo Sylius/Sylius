@@ -75,5 +75,4 @@ abstract class ControllerStep extends Controller implements StepInterface
     {
         return new ActionResult($nextStepName);
     }
-
 }

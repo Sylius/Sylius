@@ -13,7 +13,6 @@ namespace Sylius\Bundle\FlowBundle\Process\Step;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Container aware step.

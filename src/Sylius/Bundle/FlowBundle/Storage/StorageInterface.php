@@ -21,9 +21,9 @@ interface StorageInterface
     /**
      * Initializes storage for given domain.
      *
-     * @param strgin $domain
+     * @param string $domain
      */
-    function initialize($domain);
+    public function initialize($domain);
 
     /**
      * Checks if the storage has a value for a key.
@@ -32,7 +32,7 @@ interface StorageInterface
      *
      * @return Boolean Whether the storage has a value for this key
      */
-    function has($key);
+    public function has($key);
 
     /**
      * Returns the value for a key.
@@ -42,7 +42,7 @@ interface StorageInterface
      *
      * @return string|null The value in the storage or default if set or null if not found
      */
-    function get($key, $default = null);
+    public function get($key, $default = null);
 
     /**
      * Sets a value in the storage.
@@ -50,17 +50,17 @@ interface StorageInterface
      * @param string $key   A unique key
      * @param string $value The value to storage
      */
-    function set($key, $value);
+    public function set($key, $value);
 
     /**
      * Removes a value from the storage.
      *
      * @param string $key A unique key
      */
-    function remove($key);
+    public function remove($key);
 
     /**
      * Clears all values from current domain.
      */
-    function clear();
+    public function clear();
 }

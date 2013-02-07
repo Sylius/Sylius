@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Context;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Interface for process context.
@@ -23,135 +25,133 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface ProcessContextInterface
 {
-
     /**
      * Initialize context with process and current step.
      *
      * @param ProcessInterface $process
      * @param StepInterface    $currentStep
      */
-    function initialize(ProcessInterface $process, StepInterface $currentStep);
+    public function initialize(ProcessInterface $process, StepInterface $currentStep);
 
     /**
      * Get process.
      *
      * @return ProcessInterface
      */
-    function getProcess();
+    public function getProcess();
 
     /**
      * Get current step.
      *
      * @return StepInterface
      */
-    function getCurrentStep();
+    public function getCurrentStep();
 
     /**
      * Get previous step.
      *
      * @return StepInterface
      */
-    function getPreviousStep();
+    public function getPreviousStep();
 
     /**
      * Get next step.
      *
      * @return StepInterface
      */
-    function getNextStep();
+    public function getNextStep();
 
     /**
      * Is current step the first step?
      *
      * @return Boolean
      */
-    function isFirstStep();
+    public function isFirstStep();
 
     /**
      * Is current step the last step?
      *
      * @return Boolean
      */
-    function isLastStep();
+    public function isLastStep();
 
     /**
      * Override the default next step.
      */
-    function setNextStepByName($stepAlias);
+    public function setNextStepByName($stepAlias);
 
     /**
      * Close context and clear all the data.
      */
-    function close();
+    public function close();
 
     /**
      * Is current flow valid?
      *
      * @return Boolean
      */
-    function isValid();
+    public function isValid();
 
     /**
      * Get storage.
      *
      * @return StorageInterface
      */
-    function getStorage();
+    public function getStorage();
 
     /**
      * Set storage.
      *
      * @param StorageInterface $storage
      */
-    function setStorage(StorageInterface $storage);
+    public function setStorage(StorageInterface $storage);
 
     /**
      * Get current request.
      *
      * @return Request
      */
-    function getRequest();
+    public function getRequest();
 
     /**
      * Set current request.
      *
      * @param Request $request
      */
-    function setRequest(Request $request);
+    public function setRequest(Request $request);
 
     /**
      * Get progress in percents.
      *
      * @return integer
      */
-    function getProgress();
+    public function getProgress();
 
     /**
      * The array contains the history of all the step names.
      *
      * @return array()
      */
-    function getStepHistory();
+    public function getStepHistory();
 
     /**
      * Set a new history of step names.
      *
      * @param array $history
      */
-    function setStepHistory(array $history);
+    public function setStepHistory(array $history);
 
     /**
      * Add the given name to the history of step names.
      *
      * @param string $stepName
      */
-    function addStepToHistory($stepName);
+    public function addStepToHistory($stepName);
 
     /**
-     * Goes back from the end fo the histroy and deletes all step names until the current one is found.
+     * Goes back from the end fo the history and deletes all step names until the current one is found.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If the step name is not found in the history.
+     * @throws NotFoundHttpException If the step name is not found in the history.
      */
-    function rewindHistory();
-
+    public function rewindHistory();
 }

@@ -18,14 +18,14 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.coordinator.class">Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator</parameter>
+        <parameter key="sylius.process.coordinator.class">Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_flow.coordinator" class="%sylius_flow.coordinator.class%">
+        <service id="sylius.process.coordinator" class="%sylius.process.coordinator.class%">
             <argument type="service" id="router" />
-            <argument type="service" id="sylius_flow.builder" />
-            <argument type="service" id="sylius_flow.context" />
+            <argument type="service" id="sylius.process.builder" />
+            <argument type="service" id="sylius.process.context" />
         </service>
     </services>
 

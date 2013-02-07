@@ -135,7 +135,7 @@ class ProcessContext implements ProcessContextInterface
 
         $history = $this->getStepHistory();
 
-        return count($history)==0 || in_array($this->currentStep->getName(), $history);
+        return 0 === count($history) || in_array($this->currentStep->getName(), $history);
     }
 
     /**
@@ -283,17 +283,15 @@ class ProcessContext implements ProcessContextInterface
     {
         $history = $this->getStepHistory();
 
-        while ($top = end($history))
-        {
-            if ($top!=$this->currentStep->getName()) {
+        while ($top = end($history)) {
+            if ($top != $this->currentStep->getName()) {
                 array_pop($history);
-            }
-            else {
+            } else {
                 break;
             }
         }
 
-        if (count($history)==0) {
+        if (0 === count($history)) {
             throw new NotFoundHttpException();
         }
 

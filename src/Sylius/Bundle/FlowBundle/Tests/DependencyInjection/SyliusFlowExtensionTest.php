@@ -45,7 +45,7 @@ class SyliusFlowExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $yaml =
 <<<EOF
-storage: sylius_flow.storage.session
+storage: sylius.process_storage.session
 EOF;
 
         $parser = new Parser();

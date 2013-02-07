@@ -36,7 +36,7 @@ class SyliusFlowExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $config);
 
-        $container->setAlias('sylius_flow.storage', $config['storage']);
+        $container->setAlias('sylius.process_storage', $config['storage']);
 
         $configurations = array(
             'builders',

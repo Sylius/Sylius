@@ -18,15 +18,15 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.storage.session.class">Sylius\Bundle\FlowBundle\Storage\SessionStorage</parameter>
-        <parameter key="sylius_flow.storage.session.bag.class">Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag</parameter>
+        <parameter key="sylius.process_storage.session.class">Sylius\Bundle\FlowBundle\Storage\SessionStorage</parameter>
+        <parameter key="sylius.process_storage.session.bag.class">Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_flow.storage.session" class="%sylius_flow.storage.session.class%">
+        <service id="sylius.process_storage.session" class="%sylius.process_storage.session.class%">
             <argument type="service" id="session" />
         </service>
-        <service id="sylius_flow.storage.session.bag" class="%sylius_flow.storage.session.bag.class%" />
+        <service id="sylius.process_storage.session.bag" class="%sylius.process_storage.session.bag.class%" />
     </services>
 
 </container>

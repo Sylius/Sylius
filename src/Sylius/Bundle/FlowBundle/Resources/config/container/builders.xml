@@ -18,11 +18,11 @@
 >
 
     <parameters>
-        <parameter key="sylius_flow.builder.class">Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilder</parameter>
+        <parameter key="sylius.process.builder.class">Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilder</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_flow.builder" class="%sylius_flow.builder.class%">
+        <service id="sylius.process.builder" class="%sylius.process.builder.class%">
             <argument type="service" id="service_container" />
         </service>
     </services>

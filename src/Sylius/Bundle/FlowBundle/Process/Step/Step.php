@@ -74,5 +74,4 @@ abstract class Step implements StepInterface
     {
         return new ActionResult($nextStepName);
     }
-
 }

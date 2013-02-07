@@ -32,7 +32,7 @@ class ProcessController extends ContainerAware
      */
     public function startAction($scenarioAlias)
     {
-        $coordinator = $this->container->get('sylius_flow.coordinator');
+        $coordinator = $this->container->get('sylius.process.coordinator');
 
         return $coordinator->start($scenarioAlias);
     }
@@ -48,9 +48,9 @@ class ProcessController extends ContainerAware
      */
     public function displayAction(Request $request, $scenarioAlias, $stepName)
     {
-        $this->container->get('sylius_flow.context')->setRequest($request);
+        $this->container->get('sylius.process.context')->setRequest($request);
 
-        $coordinator = $this->container->get('sylius_flow.coordinator');
+        $coordinator = $this->container->get('sylius.process.coordinator');
 
         return $coordinator->display($scenarioAlias, $stepName);
     }
@@ -66,9 +66,9 @@ class ProcessController extends ContainerAware
      */
     public function forwardAction(Request $request, $scenarioAlias, $stepName)
     {
-        $this->container->get('sylius_flow.context')->setRequest($request);
+        $this->container->get('sylius.process.context')->setRequest($request);
 
-        $coordinator = $this->container->get('sylius_flow.coordinator');
+        $coordinator = $this->container->get('sylius.process.coordinator');
 
         return $coordinator->forward($scenarioAlias, $stepName);
     }

@@ -31,12 +31,15 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_flow');
+        $rootNode = $treeBuilder->root('sylius');
 
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('storage')->defaultValue('sylius_flow.storage.session')->cannotBeEmpty()->end()
+                ->scalarNode('storage')
+                ->defaultValue('sylius.process_storage.session')
+                ->cannotBeEmpty()
+                ->end()
             ->end()
         ;
 

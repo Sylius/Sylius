@@ -27,7 +27,7 @@ class SessionFlowsBagTest extends \PHPUnit_Framework_TestCase
     {
         $sessionBag = new SessionFlowsBag();
 
-        $this->assertEquals('sylius_flow.bag', $sessionBag->getName());
+        $this->assertEquals('sylius.flow.bag', $sessionBag->getName());
     }
 
     /**
