@@ -35,10 +35,12 @@ interface PromotionInterface
     public function setStartsAt(DateTime $startsAt);
     public function getEndsAt();
     public function setEndsAt(DateTime $endsAt);
+    public function hasRules();
     public function getRules();
     public function hasRule(RuleInterface $rule);
     public function addRule(RuleInterface $rule);
     public function removeRule(RuleInterface $rule);
+    public function hasActions();
     public function getActions();
     public function hasAction(ActionInterface $action);
     public function addAction(ActionInterface $action);

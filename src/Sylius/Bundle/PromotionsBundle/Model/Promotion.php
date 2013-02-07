@@ -116,6 +116,11 @@ class Promotion implements PromotionInterface
         $this->endsAt = $endsAt;
     }
 
+    public function hasRules()
+    {
+        return !$this->rules->isEmpty();
+    }
+
     public function getRules()
     {
         return $this->rules;
@@ -138,6 +143,11 @@ class Promotion implements PromotionInterface
     {
         $rule->setPromotion(null);
         $this->rules->removeElement($rule);
+    }
+
+    public function hasActions()
+    {
+        return !$this->actions->isEmpty();
     }
 
     public function getActions()

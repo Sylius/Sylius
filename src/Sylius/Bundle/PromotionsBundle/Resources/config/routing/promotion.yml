@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_promotion_list:
+    pattern: /
+    defaults:
+        _controller: sylius.controller.promotion:indexAction
+
+sylius_promotion_create:
+    pattern: /create
+    defaults:
+        _controller: sylius.controller.promotion:createAction
+
+sylius_promotion_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.promotion:updateAction
+
+sylius_promotion_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.promotion:deleteAction

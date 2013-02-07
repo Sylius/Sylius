@@ -30,14 +30,14 @@ class ItemCountConfigurationType extends AbstractType
     {
         $builder
             ->add('count', 'integer', array(
-                'label' => 'sylius.form.promotion_rule.item_count_configuration.count',
+                'label' => 'sylius.form.rule.item_count_configuration.count',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
             ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.promotion_rule.item_count_configuration.equal',
+                'label' => 'sylius.form.rule.item_count_configuration.equal',
                 'constraints' => array(
                     new Type(array('type' => 'bool')),
                 )

@@ -43,4 +43,9 @@ class FixedDiscountPromotionAction extends ObjectBehavior
 
         $this->execute($order, array('amount' => $amount));
     }
+
+    function it_should_return_fixed_discount_configuration_form_type()
+    {
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_fixed_discount_configuration');
+    }
 }

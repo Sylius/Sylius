@@ -12,7 +12,11 @@
 namespace Sylius\Bundle\PromotionsBundle;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\PromotionsBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
+use Sylius\Bundle\PromotionsBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Promotions are used to give discounts or other types of rewards to customers.
@@ -21,15 +25,23 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SyliusPromotionsBundle extends Bundle
 {
-    /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
-     */
     public static function getSupportedDrivers()
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+        $interfaces = array(
+            'Sylius\Bundle\PromotionsBundle\Model\PromotionInterface' => 'sylius.model.promotion.class',
+            'Sylius\Bundle\PromotionsBundle\Model\RuleInterface'      => 'sylius.model.promotion_rule.class',
+            'Sylius\Bundle\PromotionsBundle\Model\ActionInterface'    => 'sylius.model.promotion_action.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_promotions', $interfaces));
+        $container->addCompilerPass(new RegisterRuleCheckersPass());
+        $container->addCompilerPass(new RegisterPromotionActionsPass());
     }
 }

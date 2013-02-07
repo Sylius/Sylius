@@ -63,4 +63,9 @@ class ItemCountRuleChecker extends ObjectBehavior
         $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
         $this->isEligible($order, array('count' => 10, 'equal' => true))->shouldReturn(true);
     }
+
+    function it_should_return_item_count_configuration_form_type()
+    {
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_item_count_configuration');
+    }
 }

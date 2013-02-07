@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountConfiguration extends AbstractType
+class FixedDiscountConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class FixedDiscountConfiguration extends AbstractType
     {
         $builder
             ->add('amount', 'money', array(
-                'label' => 'sylius.form.promotion_action.fixed_discount_configuration.amount',
+                'label' => 'sylius.form.action.fixed_discount_configuration.amount',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),

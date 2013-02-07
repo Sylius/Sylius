@@ -27,4 +27,9 @@ class ItemCountRuleChecker implements RuleCheckerInterface
 
         return $order->countItems() > $configuration['count'];
     }
+
+    public function getConfigurationFormType()
+    {
+        return 'sylius_promotion_rule_item_count_configuration';
+    }
 }

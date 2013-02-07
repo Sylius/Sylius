@@ -18,11 +18,11 @@ use PHPSpec2\ObjectBehavior;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountConfiguration extends ObjectBehavior
+class FixedDiscountConfigurationType extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Action\FixedDiscountConfiguration');
+        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Action\FixedDiscountConfigurationType');
     }
 
     function it_should_be_a_form_type()

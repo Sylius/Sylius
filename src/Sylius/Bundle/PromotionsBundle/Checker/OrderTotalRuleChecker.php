@@ -28,4 +28,9 @@ class OrderTotalRuleChecker implements RuleCheckerInterface
 
         return $order->getTotal() > $configuration['amount'];
     }
+
+    public function getConfigurationFormType()
+    {
+        return 'sylius_promotion_rule_order_total_configuration';
+    }
 }

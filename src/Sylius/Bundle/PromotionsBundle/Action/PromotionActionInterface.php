@@ -21,4 +21,5 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 interface PromotionActionInterface
 {
     public function execute(OrderInterface $order, array $configuration);
+    public function getConfigurationFormType();
 }

@@ -63,4 +63,9 @@ class OrderTotalRuleChecker extends ObjectBehavior
         $this->isEligible($order, array('amount' => 500, 'equal' => false))->shouldReturn(false);
         $this->isEligible($order, array('amount' => 500, 'equal' => true))->shouldReturn(true);
     }
+
+    function it_should_return_order_total_configuration_form_type()
+    {
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_order_total_configuration');
+    }
 }

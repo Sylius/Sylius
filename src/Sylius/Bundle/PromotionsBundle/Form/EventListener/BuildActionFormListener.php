@@ -39,6 +39,7 @@ class BuildActionFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_BIND     => 'preBind'
         );
     }
 
@@ -54,14 +55,21 @@ class BuildActionFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($form, $action->getType(), $action->getConfiguration());
     }
 
-    protected function addConfigurationFields(FormInterface $form, $actionType, array $data = array())
+    public function preBind(DataEvent $event)
     {
-        $action = $this->actionRegistry->getAction($actionType);
+        $data = $event->getData();
+        $form = $event->getForm();
 
-        if (true !== $action->isConfigurable()) {
+        if (empty($data) || !array_key_exists('type', $data)) {
             return;
         }
 
+        $this->addConfigurationFields($form, $data['type']);
+    }
+
+    protected function addConfigurationFields(FormInterface $form, $actionType, array $data = array())
+    {
+        $action = $this->actionRegistry->getAction($actionType);
         $configurationField = $this->factory->createNamed('configuration', $action->getConfigurationFormType(), $data);
 
         $form->add($configurationField);

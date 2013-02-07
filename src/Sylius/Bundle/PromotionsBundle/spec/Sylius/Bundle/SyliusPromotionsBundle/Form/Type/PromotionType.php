@@ -20,9 +20,13 @@ use PHPSpec2\ObjectBehavior;
  */
 class PromotionType extends ObjectBehavior
 {
-    function let()
+    /**
+     * @param Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface    $checkerRegistry
+     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $actionRegistry
+     */
+    function let($checkerRegistry, $actionRegistry)
     {
-        $this->beConstructedWith('Promotion');
+        $this->beConstructedWith('Promotion', $checkerRegistry, $actionRegistry);
     }
 
     function it_should_be_initializable()
@@ -79,13 +83,13 @@ class PromotionType extends ObjectBehavior
         ;
 
         $builder
-            ->add('rule', 'sylius_promotion_rule', ANY_ARGUMENT)
+            ->add('rules', 'collection', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('action', 'sylius_promotion_action', ANY_ARGUMENT)
+            ->add('actions', 'collection', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

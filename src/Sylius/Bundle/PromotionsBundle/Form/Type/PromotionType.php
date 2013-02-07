@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
 
 /**
  * Promotion form type.
@@ -26,10 +27,14 @@ use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface
 class PromotionType extends AbstractType
 {
     protected $dataClass;
+    protected $checkerRegistry;
+    protected $actionRegistry;
 
-    public function __construct($dataClass)
+    public function __construct($dataClass, RuleCheckerRegistryInterface $checkerRegistry, PromotionActionRegistryInterface $actionRegistry)
     {
         $this->dataClass = $dataClass;
+        $this->checkerRegistry = $checkerRegistry;
+        $this->actionRegistry = $actionRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -53,13 +58,44 @@ class PromotionType extends AbstractType
             ->add('endsAt', 'date', array(
                 'label' => 'sylius.form.promotion.ends_at'
             ))
-            ->add('rule', 'sylius_promotion_rule', array(
-                'label' => 'sylius.form.promotion.rule'
+            ->add('rules', 'collection', array(
+                'type'         => 'sylius_promotion_rule',
+                'required'     => false,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'label'        => 'sylius.form.promotion.rules'
             ))
-            ->add('action', 'sylius_promotion_action', array(
-                'label' => 'sylius.form.promotion.action'
+            ->add('actions', 'collection', array(
+                'type'         => 'sylius_promotion_action',
+                'required'     => false,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'label'        => 'sylius.form.promotion.actions'
             ))
         ;
+
+        $prototypes = array();
+        $prototypes['rules'] = array();
+        foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
+            $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
+        }
+        $prototypes['actions'] = array();
+        foreach ($this->actionRegistry->getActions() as $type => $action) {
+            $prototypes['actions'][$type] = $builder->create('__name__', $action->getConfigurationFormType())->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $this->vars['prototypes'] = array();
+
+        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
+            foreach ($prototypes as $type => $prototype) {
+                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
+            }
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

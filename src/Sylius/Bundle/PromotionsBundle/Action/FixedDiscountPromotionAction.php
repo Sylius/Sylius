@@ -35,4 +35,9 @@ class FixedDiscountPromotionAction implements PromotionActionInterface
 
         $order->addAdjustment($adjustment);
     }
+
+    public function getConfigurationFormType()
+    {
+        return 'sylius_promotion_action_fixed_discount_configuration';
+    }
 }

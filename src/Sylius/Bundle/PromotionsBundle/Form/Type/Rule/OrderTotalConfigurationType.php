@@ -30,14 +30,14 @@ class OrderTotalConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'money', array(
-                'label' => 'sylius.form.promotion_rule.order_total_configuration.amount',
+                'label' => 'sylius.form.rule.order_total_configuration.amount',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
             ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.promotion_rule.order_total_configuration.equal',
+                'label' => 'sylius.form.rule.order_total_configuration.equal',
                 'constraints' => array(
                     new Type(array('type' => 'bool')),
                 )

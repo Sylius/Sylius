@@ -39,6 +39,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_BIND     => 'preBind'
         );
     }
 
@@ -54,14 +55,21 @@ class BuildRuleFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($form, $rule->getType(), $rule->getConfiguration());
     }
 
-    protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
+    public function preBind(DataEvent $event)
     {
-        $checker = $this->checkerRegistry->getChecker($ruleType);
+        $data = $event->getData();
+        $form = $event->getForm();
 
-        if (true !== $checker->isConfigurable()) {
+        if (empty($data) || !array_key_exists('type', $data)) {
             return;
         }
 
+        $this->addConfigurationFields($form, $data['type']);
+    }
+
+    protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
+    {
+        $checker = $this->checkerRegistry->getChecker($ruleType);
         $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data);
 
         $form->add($configurationField);

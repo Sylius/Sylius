@@ -21,4 +21,5 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 interface RuleCheckerInterface
 {
     public function isEligible(OrderInterface $order, array $configuration);
+    public function getConfigurationFormType();
 }
