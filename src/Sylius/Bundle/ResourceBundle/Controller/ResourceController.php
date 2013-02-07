@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -227,7 +228,7 @@ class ResourceController extends FOSRestController
         return $this->handleView($this->redirectView($this->getRequest()->headers->get('referer')));
     }
 
-    public function redirectToIndex($resource)
+    public function redirectToIndex()
     {
         return $this->redirectToRoute($this->getRedirectRoute('index'), $this->getRedirectParameters());
     }
@@ -343,11 +344,21 @@ class ResourceController extends FOSRestController
         );
     }
 
-    public function dispatchEvent($name, $resource)
+    /**
+     * Informs listeners that event data was used
+     *
+     * @param string       $name
+     * @param Event|object $eventOrResource
+     */
+    public function dispatchEvent($name, $eventOrResource)
     {
-        $config = $this->getConfiguration();
+        if (!$eventOrResource instanceof Event) {
+            $name = $this->getConfiguration()->getEventName($name);
 
-        $this->get('event_dispatcher')->dispatch(sprintf('%s.%s.%s', $config->getBundlePrefix(), $config->getResourceName(), $name), new GenericEvent($resource));
+            $eventOrResource = new GenericEvent($eventOrResource);
+        }
+
+        $this->container->get('event_dispatcher')->dispatch($name, $eventOrResource);
     }
 
     public function getEngine()
