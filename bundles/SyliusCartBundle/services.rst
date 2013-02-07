@@ -25,15 +25,15 @@ You're interacting with them like you usually do with own entities in your proje
     {
         // ObjectManager which is capable of managing the Cart resource.
         // For *doctrine/orm* driver it will be EntityManager.
-        $this->get('sylius_cart.manager.cart'); 
+        $this->get('sylius.manager.cart');
 
         // ObjectRepository for the Cart resource, it extends the base EntityRepository.
         // You can use it like usual entity repository in project.
-        $this->get('sylius_cart.repository.cart'); 
+        $this->get('sylius.repository.cart');
 
         // Same pair for CartItem resource.
-        $this->get('sylius_cart.manager.item');
-        $this->get('sylius_cart.repository.item');
+        $this->get('sylius.manager.cart_item');
+        $this->get('sylius.repository.cart_item');
 
         // Those repositories have some handy default methods, for example...
         $item = $itemRepository->createNew();
@@ -56,7 +56,7 @@ This is useful, for example, when after completing an order you want to start wi
     // ...
     public function saveAction(Request $request)
     {
-        $provider = $this->get('sylius_cart.provider'); // Implements the CartProviderInterface.
+        $provider = $this->get('sylius.cart_provider'); // Implements the CartProviderInterface.
 
         $currentCart = $provider->getCart();
         $provider->setCart($customCart);
@@ -72,7 +72,7 @@ The resolver is used to create a new item based on user request.
     // ...
     public function addItemAction(Request $request)
     {
-        $resolver = $this->get('sylius_cart.resolver');
+        $resolver = $this->get('sylius.cart_resolver');
         $item = $this->resolve($this->createNew(), $request);
     }
 
