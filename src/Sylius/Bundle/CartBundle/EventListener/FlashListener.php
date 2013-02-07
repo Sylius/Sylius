@@ -28,8 +28,8 @@ class FlashListener implements EventSubscriberInterface
      * @var array
      */
     private static $messages = array(
-        SyliusCartEvents::CART_CLEAR_COMPLETED  => 'The cart have been updated correctly.',
-        SyliusCartEvents::CART_SAVE_COMPLETED   => 'The cart has been successfully cleared.',
+        SyliusCartEvents::CART_SAVE_COMPLETED    => 'The cart have been updated correctly.',
+        SyliusCartEvents::CART_CLEAR_COMPLETED   => 'The cart has been successfully cleared.',
 
         SyliusCartEvents::ITEM_ADD_COMPLETED    => 'Item has been added to cart.',
         SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'Item has been removed from cart.',
