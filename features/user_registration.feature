@@ -1,7 +1,7 @@
 Feature: User registration
-    In order to track my buyings
+    In order to order products
     As a visitor
-    I need to be able to create an account in store
+    I need to be able to create an account in the store
 
     Scenario: Successfully creating account in store
         Given I am on the homepage

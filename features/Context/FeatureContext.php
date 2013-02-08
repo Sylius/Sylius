@@ -14,6 +14,7 @@ namespace Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -48,6 +49,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
 
         // Web user context.
         $this->useContext('web-user', new WebUser());
+
+        Request::enableHttpMethodParameterOverride();
     }
 
     /**

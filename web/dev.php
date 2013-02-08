@@ -32,6 +32,8 @@ require_once __DIR__.'/../sylius/SyliusKernel.php';
 $kernel = new SyliusKernel('dev', true);
 $request = Request::createFromGlobals();
 
+Request::enableHttpMethodParameterOverride();
+
 $response = $kernel->handle($request);
 $response->send();
 
