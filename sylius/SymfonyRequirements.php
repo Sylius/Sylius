@@ -41,11 +41,11 @@ class Requirement
     /**
      * Constructor that initializes the requirement.
      *
-     * @param Boolean      $fulfilled     Whether the requirement is fulfilled
-     * @param string       $testMessage   The message for testing the requirement
-     * @param string       $helpHtml      The help text formatted in HTML for resolving the problem
-     * @param string|null  $helpText      The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
-     * @param Boolean      $optional      Whether this is only an optional recommendation not a mandatory requirement
+     * @param Boolean     $fulfilled   Whether the requirement is fulfilled
+     * @param string      $testMessage The message for testing the requirement
+     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem
+     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @param Boolean     $optional    Whether this is only an optional recommendation not a mandatory requirement
      */
     public function __construct($fulfilled, $testMessage, $helpHtml, $helpText = null, $optional = false)
     {
@@ -117,16 +117,16 @@ class PhpIniRequirement extends Requirement
     /**
      * Constructor that initializes the requirement.
      *
-     * @param string            $cfgName            The configuration name used for ini_get()
-     * @param Boolean|callback  $evaluation         Either a Boolean indicating whether the configuration should evaluate to true or false,
+     * @param string           $cfgName    The configuration name used for ini_get()
+     * @param Boolean|callback $evaluation Either a Boolean indicating whether the configuration should evaluate to true or false,
                                                     or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
-     * @param Boolean           $approveCfgAbsence  If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
+     * @param Boolean $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
                                                     This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
                                                     Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
-     * @param string|null       $testMessage        The message for testing the requirement (when null and $evaluation is a Boolean a default message is derived)
-     * @param string|null       $helpHtml           The help text formatted in HTML for resolving the problem (when null and $evaluation is a Boolean a default help is derived)
-     * @param string|null       $helpText           The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
-     * @param Boolean           $optional           Whether this is only an optional recommendation not a mandatory requirement
+     * @param string|null $testMessage The message for testing the requirement (when null and $evaluation is a Boolean a default message is derived)
+     * @param string|null $helpHtml    The help text formatted in HTML for resolving the problem (when null and $evaluation is a Boolean a default help is derived)
+     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @param Boolean     $optional    Whether this is only an optional recommendation not a mandatory requirement
      */
     public function __construct($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null, $optional = false)
     {
@@ -193,10 +193,10 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Adds a mandatory requirement.
      *
-     * @param Boolean      $fulfilled     Whether the requirement is fulfilled
-     * @param string       $testMessage   The message for testing the requirement
-     * @param string       $helpHtml      The help text formatted in HTML for resolving the problem
-     * @param string|null  $helpText      The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @param Boolean     $fulfilled   Whether the requirement is fulfilled
+     * @param string      $testMessage The message for testing the requirement
+     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem
+     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      */
     public function addRequirement($fulfilled, $testMessage, $helpHtml, $helpText = null)
     {
@@ -206,10 +206,10 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Adds an optional recommendation.
      *
-     * @param Boolean      $fulfilled     Whether the recommendation is fulfilled
-     * @param string       $testMessage   The message for testing the recommendation
-     * @param string       $helpHtml      The help text formatted in HTML for resolving the problem
-     * @param string|null  $helpText      The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @param Boolean     $fulfilled   Whether the recommendation is fulfilled
+     * @param string      $testMessage The message for testing the recommendation
+     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem
+     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      */
     public function addRecommendation($fulfilled, $testMessage, $helpHtml, $helpText = null)
     {
@@ -219,15 +219,15 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Adds a mandatory requirement in form of a php.ini configuration.
      *
-     * @param string            $cfgName            The configuration name used for ini_get()
-     * @param Boolean|callback  $evaluation         Either a Boolean indicating whether the configuration should evaluate to true or false,
+     * @param string           $cfgName    The configuration name used for ini_get()
+     * @param Boolean|callback $evaluation Either a Boolean indicating whether the configuration should evaluate to true or false,
                                                     or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
-     * @param Boolean           $approveCfgAbsence  If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
+     * @param Boolean $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
                                                     This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
                                                     Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
-     * @param string            $testMessage        The message for testing the requirement (when null and $evaluation is a Boolean a default message is derived)
-     * @param string            $helpHtml           The help text formatted in HTML for resolving the problem (when null and $evaluation is a Boolean a default help is derived)
-     * @param string|null       $helpText           The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @param string      $testMessage The message for testing the requirement (when null and $evaluation is a Boolean a default message is derived)
+     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem (when null and $evaluation is a Boolean a default help is derived)
+     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      */
     public function addPhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null)
     {
@@ -237,15 +237,15 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Adds an optional recommendation in form of a php.ini configuration.
      *
-     * @param string            $cfgName            The configuration name used for ini_get()
-     * @param Boolean|callback  $evaluation         Either a Boolean indicating whether the configuration should evaluate to true or false,
+     * @param string           $cfgName    The configuration name used for ini_get()
+     * @param Boolean|callback $evaluation Either a Boolean indicating whether the configuration should evaluate to true or false,
                                                     or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
-     * @param Boolean           $approveCfgAbsence  If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
+     * @param Boolean $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
                                                     This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
                                                     Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
-     * @param string            $testMessage        The message for testing the requirement (when null and $evaluation is a Boolean a default message is derived)
-     * @param string            $helpHtml           The help text formatted in HTML for resolving the problem (when null and $evaluation is a Boolean a default help is derived)
-     * @param string|null       $helpText           The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @param string      $testMessage The message for testing the requirement (when null and $evaluation is a Boolean a default message is derived)
+     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem (when null and $evaluation is a Boolean a default help is derived)
+     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      */
     public function addPhpIniRecommendation($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null)
     {
@@ -430,8 +430,15 @@ class SymfonyRequirements extends RequirementCollection
         );
 
         if (version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>=')) {
+            $timezones = array();
+            foreach (DateTimeZone::listAbbreviations() as $abbreviations) {
+                foreach ($abbreviations as $abbreviation) {
+                    $timezones[$abbreviation['timezone_id']] = true;
+                }
+            }
+
             $this->addRequirement(
-                (in_array(date_default_timezone_get(), DateTimeZone::listIdentifiers())),
+                isset($timezones[date_default_timezone_get()]),
                 sprintf('Configured default timezone "%s" must be supported by your installation of PHP', date_default_timezone_get()),
                 'Your default timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
             );
@@ -468,11 +475,19 @@ class SymfonyRequirements extends RequirementCollection
         );
 
         if (function_exists('apc_store') && ini_get('apc.enabled')) {
-            $this->addRequirement(
-                version_compare(phpversion('apc'), '3.0.17', '>='),
-                'APC version must be at least 3.0.17',
-                'Upgrade your <strong>APC</strong> extension (3.0.17+).'
-            );
+            if (version_compare($installedPhpVersion, '5.4.0', '>=')) {
+                $this->addRequirement(
+                    version_compare(phpversion('apc'), '3.1.13', '>='),
+                    'APC version must be at least 3.1.13 when using PHP 5.4',
+                    'Upgrade your <strong>APC</strong> extension (3.1.13+).'
+                );
+            } else {
+                $this->addRequirement(
+                    version_compare(phpversion('apc'), '3.0.17', '>='),
+                    'APC version must be at least 3.0.17',
+                    'Upgrade your <strong>APC</strong> extension (3.0.17+).'
+                );
+            }
         }
 
         $this->addPhpIniRequirement('detect_unicode', false);
@@ -494,6 +509,14 @@ class SymfonyRequirements extends RequirementCollection
 
             $this->addPhpIniRequirement(
                 'xdebug.scream', false, true
+            );
+
+            $this->addPhpIniRecommendation(
+                'xdebug.max_nesting_level',
+                create_function('$cfgValue', 'return $cfgValue > 100;'),
+                true,
+                'xdebug.max_nesting_level should be above 100 in php.ini',
+                'Set "<strong>xdebug.max_nesting_level</strong>" to e.g. "<strong>250</strong>" in php.ini<a href="#phpini">*</a> to stop Xdebug\'s infinite recursion protection erroneously throwing a fatal error in your project.'
             );
         }
 
@@ -518,7 +541,7 @@ class SymfonyRequirements extends RequirementCollection
             'You should use at least PHP 5.3.4 due to PHP bug #52083 in earlier versions',
             'Your project might malfunction randomly due to PHP bug #52083 ("Notice: Trying to get property of non-object"). Install PHP 5.3.4 or newer.'
         );
-        
+
         $this->addRecommendation(
             version_compare($installedPhpVersion, '5.3.8', '>='),
             'When using annotations you should have at least PHP 5.3.8 due to PHP bug #55156',

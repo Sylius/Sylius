@@ -1,1 +1,29 @@
-security: ~
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+security:
+    providers:
+        fos_userbundle:
+            id: fos_user.user_manager
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+    firewalls:
+        main:
+            form_login:
+                provider: fos_userbundle
+                login_path: /login
+                check_path: /login
+                use_referer: true
+            remember_me:
+                key: eUodAjYEzDza72
+                name: APP_REMEMBER_ME
+                lifetime: 31536000
+                always_remember_me: true
+                remember_me_parameter: _remember_me
+            logout: true
+            anonymous: true
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }

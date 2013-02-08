@@ -11,6 +11,7 @@
 
 namespace Context;
 
+use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
@@ -122,6 +123,24 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         }
 
         $this->assertSession()->addressEquals($this->generatePageUrl($page, $parameters));
+        $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Then /^I should be on login page$/
+     */
+    public function iShouldBeOnLoginPage()
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl('fos_user_security_login'));
+        $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Then /^I should be on registration page$/
+     */
+    public function iShouldBeOnRegistrationPage()
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl('fos_user_registration_register'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -365,7 +384,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function iAmLoggedInAsAdministrator()
     {
-        // No security for now.
+        $this->iAmLoggedInAsRole('ROLE_SYLIUS_ADMIN');
     }
 
     /**
@@ -445,6 +464,17 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     protected function getSecurityContext()
     {
         return $this->getContainer()->get('security.context');
+    }
+
+    private function iAmLoggedInAsRole($role)
+    {
+        $this->getSubcontext('data')->thereIsUser('username', 'password', $role);
+
+        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+        $this->iClick('Login');
+        $this->iFillInFieldWith('Login', 'username');
+        $this->iFillInFieldWith('Password', 'password');
+        $this->iPress('login');
     }
 
     /**
