@@ -54,31 +54,31 @@ class SyliusCartExtension extends Extension
         $container->setParameter('sylius_cart.driver', $driver);
         $container->setParameter('sylius_cart.engine', $engine);
 
-        $container->setAlias('sylius_cart.provider', $config['provider']);
-        $container->setAlias('sylius_cart.resolver', $config['resolver']);
-        $container->setAlias('sylius_cart.storage', $config['storage']);
+        $container->setAlias('sylius.cart_provider', $config['provider']);
+        $container->setAlias('sylius.cart_resolver', $config['resolver']);
+        $container->setAlias('sylius.cart_storage', $config['storage']);
 
         $classes = $config['classes'];
 
         $cartClasses = $classes['cart'];
         $cartItemClasses = $classes['item'];
 
-        $container->setParameter('sylius_cart.controller.cart.class', $cartClasses['controller']);
-        $container->setParameter('sylius_cart.form.type.cart.class', $cartClasses['form']);
+        $container->setParameter('sylius.controller.cart.class', $cartClasses['controller']);
+        $container->setParameter('sylius.form.type.cart.class', $cartClasses['form']);
 
         if (isset($cartClasses['model'])) {
-            $container->setParameter('sylius_cart.model.cart.class', $cartClasses['model']);
+            $container->setParameter('sylius.model.cart.class', $cartClasses['model']);
         }
         if (isset($cartClasses['repository'])) {
-            $container->setParameter('sylius_cart.repository.cart.class', $cartClasses['repository']);
+            $container->setParameter('sylius.repository.cart.class', $cartClasses['repository']);
         }
 
-        $container->setParameter('sylius_cart.model.item.class', $cartItemClasses['model']);
-        $container->setParameter('sylius_cart.controller.item.class', $cartItemClasses['controller']);
-        $container->setParameter('sylius_cart.form.type.item.class', $cartItemClasses['form']);
+        $container->setParameter('sylius.model.cart_item.class', $cartItemClasses['model']);
+        $container->setParameter('sylius.controller.cart_item.class', $cartItemClasses['controller']);
+        $container->setParameter('sylius.form.type.cart_item.class', $cartItemClasses['form']);
 
         if (isset($cartItemClasses['repository'])) {
-            $container->setParameter('sylius_cart.repository.item.class', $cartItemClasses['repository']);
+            $container->setParameter('sylius.repository.cart_item.class', $cartItemClasses['repository']);
         }
 
         $loader->load('services.xml');
