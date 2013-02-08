@@ -1,6 +1,6 @@
 imports:
     - { resource: parameters.yml }
-    # - { resource: security.yml }
+    - { resource: security.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -51,6 +51,11 @@ stof_doctrine_extensions:
             sluggable: true
             timestampable: true
 
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Sylius\Bundle\CoreBundle\Entity\User
+
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
@@ -88,3 +93,10 @@ sylius_shipping:
 
 sylius_addressing:
     driver: doctrine/orm
+
+sylius_resource:
+    resources:
+        sylius_user.user:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Bundle\CoreBundle\Entity\User
