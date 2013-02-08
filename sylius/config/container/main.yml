@@ -107,6 +107,12 @@ sylius_shipping:
             model: Sylius\Bundle\CoreBundle\Entity\ShippingMethod
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
+sylius_promotions:
+    driver: doctrine/orm
+
+sylius_addressing:
+    driver: doctrine/orm
+
 sylius_inventory:
     driver: doctrine/orm
     backorders: true
