@@ -19,7 +19,7 @@ In our simple example, we only need to add following link in the places where we
 
 .. code-block:: html
 
-    <a href="{{ path('sylius_cart_item_add', {'productId': product.id})}}">Add product to cart</a>
+    <a href="{{ path('sylius_cart_item_add', {'productId': product.id}) }}">Add product to cart</a>
 
 Clicking this link will add the selected product to cart.
 
@@ -30,7 +30,7 @@ On cart summary page you have access to all cart items, so another simple link w
 
 .. code-block:: html
 
-    <a href="{{ path('sylius_cart_item_remove', {'id': item.id})}}">Remove from cart</a>
+    <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}">Remove from cart</a>
 
 Where `item` variable represents one of `cart.items` collection item.
 
@@ -51,6 +51,6 @@ with following action.
 
 .. code-block:: html
 
-    <form action="{{ path('sylius_cart_save')}}" method="post">Clear cart</a>
+    <form action="{{ path('sylius_cart_save') }}" method="post">Clear cart</a>
 
 You cart will be validated and saved if everything is alright.
