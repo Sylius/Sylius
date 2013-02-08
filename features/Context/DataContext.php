@@ -27,7 +27,6 @@ use Symfony\Component\PropertyAccess\StringUtil;
 /**
  * Data writing and reading context.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class DataContext extends BehatContext implements KernelAwareInterface
 {
@@ -257,10 +256,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreProperties(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
+            $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
             $additionalData = array(
                 'type'         => isset($data['type']) ? $data['type'] : 'text',
                 'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
             );
+            if ($choices) {
+                $additionalData['options'] = array('choices' => $choices);
+            }
             $this->thereIsProperty($data['name'], $additionalData);
         }
     }

@@ -10,9 +10,10 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following properties:
-            | name               | presentation      | type     |
-            | T-Shirt fabric     | T-Shirt           | text     |
-            | T-Shirt fare trade | Faretrade product | checkbox |
+            | name               | presentation      | type     | choices   |
+            | T-Shirt fabric     | T-Shirt           | text     |           |
+            | T-Shirt fare trade | Faretrade product | checkbox |           |
+            | Color              | color             | choice   | red, blue |
           And the following products exist:
             | name          | price | options                     | properties             |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
@@ -125,6 +126,21 @@ Feature: Products
           And I click "Add property"
           And I select "T-Shirt fare trade" from "Property"
           And I check "Value"
+         When I press "Create"
+         Then I should be on the page of product "Manchester United tee"
+          And I "Product has been successfully created." should appear on the page
+
+    @javascript
+    Scenario: Creating product with properties to choose
+        Given I am on the product creation page
+         When I fill in the following:
+            | Name        | Manchester United tee   |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+          And go to "Properties" tab
+          And I click "Add property"
+          And I select "Color" from "Property"
+          And I select "red" from "Value"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
           And I "Product has been successfully created." should appear on the page
