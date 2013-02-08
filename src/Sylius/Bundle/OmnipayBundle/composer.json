@@ -1,0 +1,37 @@
+{
+    "name": "sylius/payments-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 integration with Tala Payments - multi-gateway, payment processing library.",
+    "keywords": ["shop", "ecommerce", "sylius", "payment", "merchant", "gateway", "paypal", "authorize.net", "dps", "paymentexpress"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "adrianmacneil/tala-payments": "0.1.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\PaymentsBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/PaymentsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
