@@ -30,6 +30,8 @@ $kernel = new SyliusKernel('live', false);
 
 $request = Request::createFromGlobals();
 
+Request::enableHttpMethodParameterOverride();
+
 $response = $kernel->handle($request);
 $response->send();
 

@@ -13,7 +13,7 @@ namespace Context;
 
 use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
-use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
@@ -27,14 +27,14 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class WebUser extends RawMinkContext implements KernelAwareInterface
+class WebUser extends MinkContext implements KernelAwareInterface
 {
     /**
-     * Actions to route parts map.
+     * Actions.
      *
      * @var array
      */
-    protected $actions = array(
+    private $actions = array(
         'viewing'  => 'show',
         'creation' => 'create',
         'editing'  => 'update',
@@ -58,30 +58,6 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
         $this->kernel = $kernel;
     }
 
-
-    /**
-     * @Given /^go to "([^""]*)" tab$/
-     */
-    public function goToTab($tabLabel)
-    {
-        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
-    }
-
-
-    /**
-     * @Given /^I add following option values:$/
-     */
-    public function iAddFollowingOptionValues(TableNode $table)
-    {
-        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
-
-        foreach ($table->getRows() as $i => $value) {
-            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
-            $this->iFillInFieldWith(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
-        }
-    }
-
-
     /**
      * @When /^I go to the website root$/
      */
@@ -91,38 +67,23 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I am on the (homepage)?$/
      * @Given /^I am on the (.+) page?$/
-     * @Given /^I am on the (.+) page in (\w+)$/
      * @When /^I go to the (.+) page?$/
      */
-    public function iAmOnThePage($page, $language = null)
+    public function iAmOnThePage($page)
     {
-        $parameters = array();
-
-        if ($language) {
-            $parameters['_locale'] = $this->getLanguageLocale($language);
-        }
-
-        $this->getSession()->visit($this->generatePageUrl($page, $parameters));
+        $this->getSession()->visit($this->generatePageUrl($page));
     }
 
     /**
      * @Then /^I should be on the (homepage)?$/
      * @Then /^I should be on the (.+) page$/
-     * @Then /^I should be on the (.+) page in (\w+)$/
      * @Then /^I should be redirected to the (.+) page$/
      * @Then /^I should still be on the (.+) page$/
      */
-    public function iShouldBeOnThePage($page, $language = null)
+    public function iShouldBeOnThePage($page)
     {
-        $parameters = array();
-
-        if ($language) {
-            $parameters['_locale'] = $this->getLanguageLocale($language);
-        }
-
-        $this->assertSession()->addressEquals($this->generatePageUrl($page, $parameters));
+        $this->assertSession()->addressEquals($this->generatePageUrl($page));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -145,53 +106,90 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I am on the page of ([^""]*) "([^""]*)"$/
-     * @Given /^I go to the page of ([^""]*) "([^""]*)"$/
+     * @Given /^I am on the page of ([^""]*) with ([^""]*) "([^""]*)"$/
+     * @Given /^I go to the page of ([^""]*) with ([^""]*) "([^""]*)"$/
      */
-    public function iAmOnTheResourcePage($type, $name)
+    public function iAmOnTheResourcePage($type, $property, $value)
     {
         $type = str_replace(' ', '_', $type);
-        $resource = $this->getDataContext()->findOneByName($type, $name);
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('sylius_backend_%s_show', $type), array('id' => $resource->getId())));
+        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
+
+        $this->getSession()->visit($this->generatePageUrl(sprintf('%s_show', $type), array('id' => $resource->getId())));
     }
 
     /**
-     * @Then /^I should be on the page of ([^""]*) "([^""]*)"$/
-     * @Then /^I should still be on the page of ([^""]*) "([^""]*)"$/
+     * @Given /^I am on the page of ([^""(w)]*) "([^""]*)"$/
+     * @Given /^I go to the page of ([^""(w)]*) "([^""]*)"$/
      */
-    public function iShouldBeOnTheResourcePage($type, $name)
+    public function iAmOnTheResourcePageByName($type, $name)
+    {
+        $this->iAmOnTheResourcePage($type, 'name', $name);
+    }
+
+    /**
+     * @Then /^I should be on the page of ([^""]*) with ([^""]*) "([^""]*)"$/
+     * @Then /^I should still be on the page of ([^""]*) with ([^""]*) "([^""]*)"$/
+     */
+    public function iShouldBeOnTheResourcePage($type, $property, $value)
     {
         $type = str_replace(' ', '_', $type);
-        $resource = $this->getDataContext()->findOneByName($type, $name);
+        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_show', $type), array('id' => $resource->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('%s_show', $type), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
     }
 
     /**
-     * @Given /^I am (building|viewing|editing) ([^""]*) "([^""]*)"$/
+     * @Then /^I should be on the page of ([^""(w)]*) "([^""]*)"$/
+     * @Then /^I should still be on the page of ([^""(w)]*) "([^""]*)"$/
      */
-    public function iAmDoingSomethingWithResource($action, $type, $name)
+    public function iShouldBeOnTheResourcePageByName($type, $name)
     {
-        $type = str_replace(' ', '_', $type);
-        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
-        $resource = $this->getDataContext()->findOneByName($type, $name);
-
-        $this->getSession()->visit($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
+        $this->iAmOnTheResourcePage($type, 'name', $name);
     }
 
     /**
-     * @Then /^I should be (building|viewing|editing) ([^""]*) "([^""]*)"$/
+     * @Given /^I am (building|viewing|editing) ([^""]*) with ([^""]*) "([^""]*)"$/
      */
-    public function iShouldBeDoingSmthWithResource($action, $type, $name)
+    public function iAmDoingSomethingWithResource($action, $type, $property, $value)
     {
         $type = str_replace(' ', '_', $type);
+
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
-        $resource = $this->getDataContext()->findOneByName($type, $name);
+        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
+
+        $this->getSession()->visit($this->generatePageUrl(sprintf('%s_%s', $type, $action), array('id' => $resource->getId())));
+    }
+
+    /**
+     * @Given /^I am (building|viewing|editing) ([^""(w)]*) "([^""]*)"$/
+     */
+    public function iAmDoingSomethingWithResourceByName($action, $type, $name)
+    {
+        $this->iAmDoingSomethingWithResource($action, $type, 'name', $name);
+    }
+
+    /**
+     * @Then /^I should be (building|viewing|editing) ([^"]*) with ([^"]*) "([^""]*)"$/
+     */
+    public function iShouldBeDoingSomethingWithResource($action, $type, $property, $value)
+    {
+        $type = str_replace(' ', '_', $type);
+
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
+        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Then /^I should be (building|viewing|editing) ([^""(w)]*) "([^""]*)"$/
+     */
+    public function iShouldBeDoingSomethingWithResourceByName($action, $type, $name)
+    {
+        $this->iShouldBeDoingSomethingWithResource($action, $type, 'name', $name);
     }
 
     /**
@@ -216,25 +214,22 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Then /^I should see "([^"]*)"$/
      * @Then /^(?:.* )?"([^"]*)" should appear on the page$/
      */
-    public function iShouldSeeText($text)
+    public function textShouldAppearOnThePage($text)
     {
         $this->assertSession()->pageTextContains($text);
     }
 
     /**
-     * @Then /^I should not see "([^"]*)"$/
      * @Then /^(?:.* )?"([^"]*)" should not appear on the page$/
      */
-    public function iShouldNotSeeText($text)
+    public function textShouldNotAppearOnThePage($text)
     {
         $this->assertSession()->pageTextNotContains($text);
     }
 
     /**
-     * @When /^I follow "([^"]+)"$/
      * @When /^I click "([^"]+)"$/
      */
     public function iClick($link)
@@ -243,35 +238,16 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * @When /^I fill in "([^"]*)" with "([^"]*)"/
-     */
-    public function iFillInFieldWith($field, $value)
-    {
-        $this->getSession()->getPage()->fillField($field, $value);
-    }
-
-    /**
-     * Fills in form fields with provided table.
-     *
-     * @When /^(?:|I )fill in the following:$/
-     */
-    public function iFillInFieldsWith(TableNode $fields)
-    {
-        foreach ($fields->getRowsHash() as $field => $value) {
-            $this->iFillInFieldWith($field, $value);
-        }
-    }
-
-    /**
      * @Given /^I fill in province name with "([^"]*)"$/
      */
     public function iFillInProvinceNameWith($value)
     {
-        $this->iFillInFieldWith('sylius_country[provinces][0][name]', $value);
+        $this->fillField('sylius_country[provinces][0][name]', $value);
     }
 
     /**
      * @When /^I click "([^"]*)" near "([^"]*)"$/
+     * @When /^I press "([^"]*)" near "([^"]*)"$/
      */
     public function iClickNear($button, $value)
     {
@@ -293,45 +269,11 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * @When /^I select "([^"]*)" from "([^"]*)"$/
-     */
-    public function iSelectOptionFrom($option, $field)
-    {
-        $this->getSession()->getPage()->selectFieldOption($field, $option);
-    }
-
-    /**
-     * @When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
-     */
-    public function additionallySelectOption($select, $option)
-    {
-        $this->getSession()->getPage()->selectFieldOption($select, $option, true);
-    }
-
-    /**
-     * @Then /^I should see "([^"]*)" field error$/
-     */
-    public function iShouldSeeFieldError($field)
-    {
-        $this->assertSession()->elementExists('xpath', sprintf(
-            "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
-        ));
-    }
-
-    /**
      * @Given /^I leave "([^"]*)" empty$/
      */
     public function iLeaveFieldEmpty($field)
     {
         $this->getSession()->getPage()->fillField($field, '');
-    }
-
-    /**
-     * @Given /^I press "([^"]*)"$/
-     */
-    public function iPress($button)
-    {
-        $this->getSession()->getPage()->pressButton($button);
     }
 
     /**
@@ -361,8 +303,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      */
     public function iShouldSeeThatMuchResourcesInTheList($amount, $type)
     {
-        // If there is only one or none table on page, keep it simple.
-        if (2 > count($this->getSession()->getPage()->findAll('css', 'table'))) {
+        if (1 === count($this->getSession()->getPage()->findAll('css', 'table'))) {
             $this->assertSession()->elementsCount('css', 'table tbody tr', $amount);
         } else {
             $this->assertSession()->elementsCount('css', sprintf('table#%s tbody tr', str_replace(' ', '-', $type)), $amount);
@@ -408,11 +349,32 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^go to "([^""]*)" tab$/
+     */
+    public function goToTab($tabLabel)
+    {
+        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+    }
+
+    /**
+     * @Given /^I add following option values:$/
+     */
+    public function iAddFollowingOptionValues(TableNode $table)
+    {
+        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+
+        foreach ($table->getRows() as $i => $value) {
+            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
+        }
+    }
+
+    /**
      * Assert that given code equals the current one.
      *
      * @param integer $code
      */
-    protected function assertStatusCodeEquals($code)
+    private function assertStatusCodeEquals($code)
     {
         if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
             $this->assertSession()->statusCodeEquals($code);
@@ -424,20 +386,9 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      *
      * @return DataContext
      */
-    protected function getDataContext()
+    private function getDataContext()
     {
-        return $this->getSubcontext('data');
-    }
-
-    /**
-     * Assert that there is given count of elements on page.
-     *
-     * @param string  $selector
-     * @param integer $count
-     */
-    protected function assertElementsCount($selector, $count)
-    {
-        $this->assertSession()->elementsCount('css', $selector, $count);
+        return $this->getSubContext('data');
     }
 
     /**
@@ -445,7 +396,7 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      *
      * @return null|UserInterface
      */
-    protected function getUser()
+    private function getUser()
     {
         $token = $this->getSecurityContext()->getToken();
 
@@ -461,20 +412,20 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      *
      * @return SecurityContextInterface
      */
-    protected function getSecurityContext()
+    private function getSecurityContext()
     {
         return $this->getContainer()->get('security.context');
     }
 
     private function iAmLoggedInAsRole($role)
     {
-        $this->getSubcontext('data')->thereIsUser('username', 'password', $role);
-
+        $this->getSubContext('data')->thereIsUser('username', 'password', $role);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+
         $this->iClick('Login');
-        $this->iFillInFieldWith('Login', 'username');
-        $this->iFillInFieldWith('Password', 'password');
-        $this->iPress('login');
+        $this->fillField('Login', 'username');
+        $this->fillField('Password', 'password');
+        $this->pressButton('login');
     }
 
     /**
@@ -523,38 +474,9 @@ class WebUser extends RawMinkContext implements KernelAwareInterface
      *
      * @return string
      */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
+    private function generateUrl($route, array $parameters = array(), $absolute = false)
     {
-        return $this->getContainer()->get('router')->generate($route, $parameters, $absolute);
-    }
-
-    /**
-     * Get language locale by canonical name.
-     *
-     * @param string $language
-     *
-     * @return string
-     */
-    private function getLanguageLocale($language)
-    {
-        $locales  = array('english' => 'en');
-        $language = strtolower($language);
-
-        if (!isset($locales[$language])) {
-            throw new \Exception(sprintf('Unknown language "%s"', $language));
-        }
-
-        return $locales[$language];
-    }
-
-    /**
-     * Get Symfony profiler.
-     *
-     * @return Profiler
-     */
-    protected function getProfiler()
-    {
-        return $this->getContainer()->get('profiler');
+        return $this->getService('router')->generate($route, $parameters, $absolute);
     }
 
     /**

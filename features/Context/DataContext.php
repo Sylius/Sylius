@@ -14,13 +14,15 @@ namespace Context;
 use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 use Sylius\Bundle\CoreBundle\Entity\User;
+use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\Util\FormUtil;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
-use Faker\Factory as FakerFactory;
+use Symfony\Component\PropertyAccess\StringUtil;
 
 /**
  * Data writing and reading context.
@@ -34,10 +36,18 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @var Generator
      */
-    protected $faker;
+    private $faker;
+
+    /**
+     * Created orders.
+     *
+     * @var OrderInterface[]
+     */
+    private $orders;
 
     public function __construct()
     {
+        $this->orders = array();
         $this->faker = FakerFactory::create();
     }
 
@@ -80,6 +90,56 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are following orders:$/
+     * @Given /^the following orders exist:$/
+     * @Given /^there are orders:$/
+     * @Given /^the following orders were placed:$/
+     */
+    public function thereAreOrders(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $orderBuilder = $this->getService('sylius.builder.order');
+
+        foreach ($table->getHash() as $data) {
+            $order = $orderBuilder->create()->getOrder();
+
+            $address = $this->createAddress($data['address']);
+
+            $order->setShippingAddress($address);
+            $order->setBillingAddress($address);
+
+            $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+
+            $manager->persist($order);
+            $manager->flush();
+
+            $this->orders[$order->getNumber()] = $order;
+        }
+    }
+
+    /**
+     * @Given /^order #(\d+) has following items:$/
+     */
+    public function orderHasFollowingItems($number, TableNode $items)
+    {
+        $manager = $this->getEntityManager();
+        $orderBuilder = $this->getService('sylius.builder.order');
+
+        $orderBuilder->modify($this->orders[$number]);
+
+        foreach ($items->getHash() as $data) {
+            $product = $this->findOneByName('product', trim($data['product']));
+            $quantity = $data['quantity'];
+
+            $orderBuilder->add($product->getMasterVariant(), $product->getMasterVariant()->getPrice(), $quantity);
+        }
+
+        $manager->persist($orderBuilder->getOrder());
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^there are products:$/
      * @Given /^there are following products:$/
      * @Given /^the following products exist:$/
      */
@@ -367,7 +427,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         $country = $this->getRepository('country')->createNew();
 
-        $country->setName($name);
+        $country->setName(trim($name));
         $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
 
         if (null !== $provinces) {
@@ -453,7 +513,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereAreNoResources($type)
     {
-        $type = str_replace(' ', '_', FormUtil::singularify($type));
+        $type = str_replace(' ', '_', StringUtil::singularify($type));
         $type = is_array($type) ? $type[1] : $type; // Hacky hack for multiple singular forms.
 
         $manager = $this->getEntityManager();
@@ -466,6 +526,32 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * Create an address instance from string.
+     *
+     * @param string $string
+     *
+     * @return AddressInterface
+     */
+    private function createAddress($string)
+    {
+        $address = $this->getRepository('address')->createNew();
+
+        $addressData = explode(',', $string);
+        $addressData = array_map('trim', $addressData);
+
+        list($firstname, $lastname) = explode(' ', $addressData[0]);
+
+        $address->setFirstname(trim($firstname));
+        $address->setLastname(trim($lastname));
+        $address->setStreet($addressData[1]);
+        $address->setCity($addressData[2]);
+        $address->setPostcode($addressData[3]);
+        $address->setCountry($this->findOneByName('country', $addressData[4]));
+
+        return $address;
+    }
+
+    /**
      * Find one resource by name.
      *
      * @param string $
@@ -475,9 +561,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function findOneByName($type, $name)
     {
+        return $this->findOneBy($type, array('name' => trim($name)));
+    }
+
+    /**
+     * Find one resource by criteria.
+     *
+     * @param string $type
+     * @param array  $criteria
+     *
+     * @return object
+     */
+    public function findOneBy($type, array $criteria)
+    {
         $resource = $this
             ->getRepository($type)
-            ->findOneBy(array('name' => $name))
+            ->findOneBy($criteria)
         ;
 
         if (null === $resource) {

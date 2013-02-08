@@ -100,3 +100,12 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Bundle\CoreBundle\Entity\User
+
+sylius_sales:
+    driver: doctrine/orm
+    classes:
+        order:
+            model: Sylius\Bundle\CoreBundle\Entity\Order
+            form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
+        sellable:
+            model: %sylius.model.variant.class%
