@@ -1,7 +1,7 @@
 Feature: Product options
+    In order to offer my products in many different variations
     As a store owner
     I want to be able to manage options
-    In order to offer my products in many different variations
 
     Background:
         Given I am logged in as administrator

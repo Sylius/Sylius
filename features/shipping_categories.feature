@@ -1,7 +1,7 @@
 Feature: Shipping categories
+    In order to limit products to certain shipping methods
     As a store owner
     I want to be able to manage shipping categories
-    In order to limit products to certain shipping methods
 
     Background:
         Given I am logged in as administrator

@@ -1,7 +1,7 @@
 Feature: Users management
+    In order to manager customers
     As a store owner
     I want to be able to list registered users
-    In order to see user details
 
     Background:
         Given I am logged in as administrator

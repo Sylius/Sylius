@@ -1,15 +1,15 @@
 Feature: Countries and provinces
+    In order to create tax and shipping zones
     As a store owner
     I want to be able to manage countries and provinces
-    In order to group them into geographical zones
 
     Background:
         Given I am logged in as administrator
-        And there are following countries:
-          | name    | provinces                       |
-          | France  | Lyon, Toulouse, Rennes, Nancy   |
-          | China   |                                 |
-          | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
+          And there are following countries:
+            | name    | provinces                       |
+            | France  | Lyon, Toulouse, Rennes, Nancy   |
+            | China   |                                 |
+            | Ukraine | Kiev, Odessa, Cherkasy, Kharkiv |
 
     Scenario: Seeing index of all countries
         Given I am on the dashboard page

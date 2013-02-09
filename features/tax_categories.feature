@@ -1,7 +1,7 @@
 Feature: Tax categories
+    In order to apply different tax rates to my products
     As a store owner
     I want to be able to manage tax categories
-    In order to apply different tax rates to my products
 
     Background:
         Given I am logged in as administrator

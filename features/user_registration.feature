@@ -3,6 +3,11 @@ Feature: User registration
     As a visitor
     I need to be able to create an account in the store
 
+    Background:
+        Given there are following users:
+            | username | password |
+            | bar      | foo      |
+
     Scenario: Successfully creating account in store
         Given I am on the homepage
          When I follow "Register"

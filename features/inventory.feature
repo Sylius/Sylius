@@ -1,7 +1,7 @@
 Feature: Inventory tracking
+    In order track and control my inventory
     As a store owner
-    I want to be able to manage stock levels
-    In order track unit inventory
+    I want to be able to manage stock levels and availability
 
     Background:
         Given I am logged in as administrator

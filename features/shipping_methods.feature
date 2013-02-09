@@ -1,7 +1,7 @@
 Feature: Shipping methods
+    In order to apply proper shipping to my merchandise
     As a store owner
     I want to be able to configure shipping methods
-    In order to apply proper shipping to my merchandise
 
     Background:
         Given I am logged in as administrator

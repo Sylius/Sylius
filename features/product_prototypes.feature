@@ -1,7 +1,7 @@
 Feature: Product prototypes
+    In order to create similar products faster
     As a store owner
     I want to be able to create prototypes
-    In order to create similar products faster
 
     Background:
         Given I am logged in as administrator

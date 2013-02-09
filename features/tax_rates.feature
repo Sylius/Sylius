@@ -1,7 +1,7 @@
 Feature: Tax rates
+    In order to apply proper taxation to my merchandise
     As a store owner
     I want to be able to configure tax rates
-    In order to apply proper taxation to my merchandise
 
     Background:
         Given I am logged in as administrator

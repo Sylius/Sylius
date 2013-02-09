@@ -1,7 +1,7 @@
 Feature: Product variants
+    In order to add different product variations to my offer
     As a store owner
     I want to be able to manage product variants
-    In order to add different product variations to my offer
 
     Background:
         Given I am logged in as administrator

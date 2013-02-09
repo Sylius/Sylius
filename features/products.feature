@@ -1,7 +1,7 @@
 Feature: Products
+    In order to create my offer
     As a store owner
     I want to be able to manage products
-    In order to create my offer
 
     Background:
         Given I am logged in as administrator
