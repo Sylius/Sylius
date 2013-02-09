@@ -49,7 +49,7 @@
         </service>
 
         <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
-            <argument>%sylius.model.item.class%</argument>
+            <argument>%sylius.model.cart_item.class%</argument>
             <tag name="form.type" alias="sylius_cart_item" />
         </service>
 
