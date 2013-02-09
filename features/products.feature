@@ -10,8 +10,8 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following properties:
-            | name               | presentation |
-            | T-Shirt fabric     | T-Shirt      |
+            | name           | presentation |
+            | T-Shirt fabric | T-Shirt      |
           And the following products exist:
             | name          | price | options                     | properties             |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
