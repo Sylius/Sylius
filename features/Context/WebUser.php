@@ -146,7 +146,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnTheResourcePageByName($type, $name)
     {
-        $this->iAmOnTheResourcePage($type, 'name', $name);
+        $this->iShouldBeOnTheResourcePage($type, 'name', $name);
     }
 
     /**

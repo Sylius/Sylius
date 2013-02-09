@@ -1846,12 +1846,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAssortmentBundle.git",
-                "reference": "fb1d30dd66e4773e0b173e04cff7ec99df6db014"
+                "reference": "395d70e9449f4a81b9355c05b81f80db799235ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAssortmentBundle/zipball/fb1d30dd66e4773e0b173e04cff7ec99df6db014",
-                "reference": "fb1d30dd66e4773e0b173e04cff7ec99df6db014",
+                "url": "https://api.github.com/repos/Sylius/SyliusAssortmentBundle/zipball/395d70e9449f4a81b9355c05b81f80db799235ab",
+                "reference": "395d70e9449f4a81b9355c05b81f80db799235ab",
                 "shasum": ""
             },
             "require": {
@@ -1869,7 +1869,7 @@
             "suggest": {
                 "friendsofsymfony/rest-bundle": "*"
             },
-            "time": "2013-02-05 11:54:07",
+            "time": "2013-02-09 19:41:43",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1912,12 +1912,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "cfe92c211aafa862b0a8ffdf29ab07102d769707"
+                "reference": "eb131e32994605771ce865f076429a44357bf7ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/cfe92c211aafa862b0a8ffdf29ab07102d769707",
-                "reference": "cfe92c211aafa862b0a8ffdf29ab07102d769707",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/eb131e32994605771ce865f076429a44357bf7ee",
+                "reference": "eb131e32994605771ce865f076429a44357bf7ee",
                 "shasum": ""
             },
             "require": {
@@ -1938,7 +1938,7 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
-            "time": "2013-02-05 12:09:16",
+            "time": "2013-02-09 19:48:14",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2542,12 +2542,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "7b8c0c1a73226ba0ed12ca6c6b111448f75e7dd7"
+                "reference": "f2258e7ec746623bdd5464db9e3acf58f031b89f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/7b8c0c1a73226ba0ed12ca6c6b111448f75e7dd7",
-                "reference": "7b8c0c1a73226ba0ed12ca6c6b111448f75e7dd7",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f2258e7ec746623bdd5464db9e3acf58f031b89f",
+                "reference": "f2258e7ec746623bdd5464db9e3acf58f031b89f",
                 "shasum": ""
             },
             "require": {
@@ -2599,7 +2599,7 @@
                 "doctrine/orm": ">=2.2,<3.0,>=2.2.3",
                 "propel/propel1": "1.6.*"
             },
-            "time": "2013-02-08 11:43:40",
+            "time": "2013-02-09 18:08:46",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2688,18 +2688,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5"
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/c6445fb5cd6823f7bd65108a717064957b6eafd5",
-                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-02-01 09:44:45",
+            "time": "2013-02-09 18:37:02",
             "type": "library",
             "extra": {
                 "branch-alias": {
