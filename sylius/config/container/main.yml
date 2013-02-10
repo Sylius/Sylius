@@ -118,3 +118,15 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Bundle\CoreBundle\Entity\User
+
+sylius_sales:
+    driver: doctrine/orm
+    classes:
+        sellable:
+            model: Sylius\Bundle\CoreBundle\Entity\Variant
+        order:
+            model: Sylius\Bundle\CoreBundle\Entity\Order
+            form: Sylius\Bundle\SalesBundle\Form\Type\OrderType
+        order_item:
+            model: Sylius\Bundle\SalesBundle\Entity\DefaultOrderItem
+            form: Sylius\Bundle\SalesBundle\Form\Type\OrderItemType
