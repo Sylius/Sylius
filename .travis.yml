@@ -14,6 +14,7 @@ before_script:
     - composer install --dev --prefer-source > /dev/null
     - sylius/console do:da:cr -e=testing > /dev/null
     - sylius/console do:sc:cr -e=testing > /dev/null
+    - sylius/console cache:warmup -e=testing > /dev/null
 
     - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/testgate.php'
 
