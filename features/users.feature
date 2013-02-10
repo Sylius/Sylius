@@ -7,9 +7,9 @@ Feature: Users management
         Given I am logged in as administrator
         And there are following users:
           | username | enabled |
-          | foo      | 1       |
-          | bar      | 0       |
-          | baz      | 1       |
+          | foo      | yes     |
+          | bar      | no      |
+          | baz      | yes     |
 
     Scenario: Seeing index of all users
         Given I am on the dashboard page
@@ -20,7 +20,7 @@ Feature: Users management
     Scenario: Seeing index of unconfirmed users
         Given I am on the dashboard page
          When I follow "Users"
-          And I follow "unconfirmed users"
+          And I follow "Unconfirmed accounts"
          Then I should be on the user index page
           And I should see 1 users in the list
 

@@ -76,13 +76,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
     }
 
-    public function thereIsUser($username, $password, $role, $enabled = true)
+    public function thereIsUser($username, $password, $role, $enabled = 'yes')
     {
         $user = new User();
         $user->setUsername($username);
         $user->setEmail($this->faker->email());
         $user->addRole($role);
-        $user->setEnabled($enabled);
+        $user->setEnabled('yes' === $enabled);
         $user->setPlainPassword($password);
 
         $this->getEntityManager()->persist($user);

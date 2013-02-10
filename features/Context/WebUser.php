@@ -88,6 +88,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am on the store homepage$/
+     */
+    public function iAmOnTheStoreHomepage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_homepage'));
+    }
+
+    /**
      * @Then /^I should be on login page$/
      */
     public function iShouldBeOnLoginPage()

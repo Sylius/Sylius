@@ -103,13 +103,6 @@ sylius_inventory:
 sylius_addressing:
     driver: doctrine/orm
 
-sylius_resource:
-    resources:
-        sylius_user.user:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Bundle\CoreBundle\Entity\User
-
 sylius_sales:
     driver: doctrine/orm
     classes:
@@ -118,3 +111,10 @@ sylius_sales:
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         sellable:
             model: %sylius.model.variant.class%
+
+sylius_resource:
+    resources:
+        sylius.user:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Bundle\CoreBundle\Entity\User

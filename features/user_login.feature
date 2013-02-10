@@ -5,35 +5,35 @@ Feature: Sign in to the store
 
     Background:
         Given there are following users:
-            | username | password |
-            | bar      | foo      |
+            | username | password | enabled |
+            | bar      | foo      | yes     |
 
     Scenario: Log in with username and password
-        Given I am on the homepage
+        Given I am on the store homepage
           And I follow "Login"
          When I fill in the following:
             | Login    | bar |
             | Password | foo |
-        And I press "login"
+        And I press "Login"
        Then I should be on the homepage
         And I should see "Logout"
 
     Scenario: Log in with bad credentials
-        Given I am on the homepage
+        Given I am on the store homepage
           And I follow "Login"
          When I fill in the following:
             | Login    | bar |
             | Password | bar |
-        And I press "login"
+        And I press "Login"
        Then I should be on login page
         And I should see "Bad credentials"
 
     Scenario: Trying to login as non existing user
-        Given I am on the homepage
+        Given I am on the store homepage
           And I follow "Login"
          When I fill in the following:
             | Login    | john |
             | Password | bar  |
-        And I press "login"
+        And I press "Login"
        Then I should be on login page
         And I should see "Bad credentials"

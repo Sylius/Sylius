@@ -9,8 +9,8 @@ Feature: User registration
             | bar      | foo      |
 
     Scenario: Successfully creating account in store
-        Given I am on the homepage
-         When I follow "Register"
+        Given I am on the store homepage
+          And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
             | Username     | foo         |
@@ -21,8 +21,8 @@ Feature: User registration
         And I should see "Logout"
 
     Scenario: Trying to register with non verified password
-        Given I am on the homepage
-         When I follow "Register"
+        Given I am on the store homepage
+          And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
             | Username     | foo         |
