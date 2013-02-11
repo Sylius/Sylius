@@ -33,6 +33,7 @@ class ZoneMemberCollectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $prototypes = $this->buildPrototypes($builder, $options);
+
         if ($options['allow_add'] && $options['prototype']) {
             $builder->setAttribute('prototypes', $prototypes);
         }

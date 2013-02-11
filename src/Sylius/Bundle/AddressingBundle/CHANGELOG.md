@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### 11-02-2013
+
+* Bump the Symfony requirement to version 2.2.
+
 ### 30-01-2013
 
 * Remove ``sylius`` prefix from forms, services and models.

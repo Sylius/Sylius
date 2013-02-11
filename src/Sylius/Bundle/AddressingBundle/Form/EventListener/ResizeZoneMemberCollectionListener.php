@@ -15,7 +15,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\ResolvedFormTypeInterface;
 use Symfony\Component\Security\Core\Util\ClassUtils;
 
 /**
@@ -26,6 +26,13 @@ use Symfony\Component\Security\Core\Util\ClassUtils;
  */
 class ResizeZoneMemberCollectionListener extends ResizeFormListener
 {
+    /**
+     * Form factory.
+     *
+     * @var FormFactoryInterface
+     */
+    protected $factory;
+
     /**
      * Stores an array of Types with the Type name as the key.
      *
@@ -42,19 +49,20 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
 
     public function __construct(FormFactoryInterface $factory, array $prototypes, array $options = array(), $allowAdd = false, $allowDelete = false)
     {
+        $this->factory = $factory;
+
         foreach ($prototypes as $prototype) {
             $dataClass = $prototype->getConfig()->getDataClass();
-            $types     = $prototype->getConfig()->getTypes();
-            $type      = end($types);
+            $type      = $prototype->getConfig()->getType();
 
-            $typeKey = $type instanceof FormTypeInterface ? $type->getName() : $type;
+            $typeKey = $type instanceof ResolvedFormTypeInterface ? $type->getName() : $type;
             $this->typeMap[$typeKey] = $type;
             $this->classMap[$dataClass] = $type;
         }
 
-        $defaultTypes = reset($prototypes)->getConfig()->getTypes();
-        $defaultType  = end($defaultTypes);
-        parent::__construct($factory, $defaultType, $options, $allowAdd, $allowDelete);
+        $defaultType = reset($prototypes)->getConfig()->getType()->getName();
+
+        parent::__construct($defaultType, $options, $allowAdd, $allowDelete);
     }
 
     /**
