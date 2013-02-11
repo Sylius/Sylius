@@ -59,6 +59,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^go to "([^""]*)" tab$/
+     */
+    public function goToTab($tabLabel)
+    {
+        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+    }
+
+    /**
      * @When /^I go to the website root$/
      */
     public function iGoToTheWebsiteRoot()
@@ -277,6 +285,16 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Then /^I should see "([^"]*)" field error$/
+     */
+    public function iShouldSeeFieldError($field)
+    {
+        $this->assertSession()->elementExists('xpath', sprintf(
+            "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
+        ));
+    }
+
+    /**
      * @Given /^I leave "([^"]*)" empty$/
      */
     public function iLeaveFieldEmpty($field)
@@ -354,14 +372,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
         if ($this->getSecurityContext()->isGranted('ROLE_USER')) {
             throw new AuthenticationException('User was not expected to be logged in, but he is.');
         }
-    }
-
-    /**
-     * @Given /^go to "([^""]*)" tab$/
-     */
-    public function goToTab($tabLabel)
-    {
-        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
     }
 
     /**
