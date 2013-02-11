@@ -257,7 +257,15 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreProperties(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsProperty($data['name'], $data['presentation']);
+            $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
+            $additionalData = array(
+                'type'         => isset($data['type']) ? $data['type'] : 'text',
+                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
+            );
+            if ($choices) {
+                $additionalData['options'] = array('choices' => $choices);
+            }
+            $this->thereIsProperty($data['name'], $additionalData);
         }
     }
 
@@ -265,21 +273,45 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^There is property "([^""]*)"$/
      * @Given /^I created property "([^""]*)"$/
      */
-    public function thereIsProperty($name, $presentation = null)
+    public function thereIsProperty($name, $additionalData = array())
     {
         $repository = $this->getRepository('property');
         $manager = $this->getEntityManager();
 
-        $presentation = $presentation ?: $name;
+        $additionalData = array_merge(array(
+            'presentation' => $name,
+            'type' => 'text'
+        ), $additionalData);
 
         $property = $repository->createNew();
         $property->setName($name);
-        $property->setPresentation($presentation);
+        foreach ($additionalData as $key => $value) {
+            $property->{'set'.\ucfirst($key)}($value);
+        }
 
         $manager->persist($property);
         $manager->flush();
 
         return $property;
+    }
+
+    /**
+     * @Given /^(\w+) with following data should be created:$/
+     */
+    public function objectWithFollowingDataShouldBeCreated($type, TableNode $table)
+    {
+        $data = $table->getRowsHash();
+
+        $object = $this->findOneByName($type, $data['name']);
+        foreach ($data as $property => $value) {
+            $objectValue = $object->{'get'.\ucfirst($property)}();
+            if (is_array($objectValue)) {
+                $objectValue = implode(',', $objectValue);;
+            }
+            if ($objectValue !== $value) {
+                throw new \Exception(sprintf('%s object::%s has "%s" value but "%s" expected', $type, $property, $objectValue, $value));
+            }
+        }
     }
 
     /**

@@ -64,7 +64,7 @@ Feature: Product prototypes
 
     Scenario: Accessing the product building form from the list
         Given I am on the prototype index page
-         When I click "build" near "T-Shirt"
+         When I click "Build" near "T-Shirt"
          Then I should be building prototype "T-Shirt"
 
     Scenario: Creating a product by building prototype

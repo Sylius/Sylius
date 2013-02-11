@@ -71,4 +71,17 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         $purger = new ORMPurger($entityManager);
         $purger->purge();
     }
+
+    /**
+     * @Given /^I remove property choice number (\d+)$/
+     */
+    public function iRemovePropertyChoiceInput($number)
+    {
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', sprintf('.sylius_property_choices_%d_delete', $number))
+            ->click()
+        ;
+    }
 }
