@@ -11,7 +11,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/common/archive/bb0aebbf234db52df476a2b473d434745b34221c.zip",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/bb0aebbf234db52df476a2b473d434745b34221c",
                 "reference": "bb0aebbf234db52df476a2b473d434745b34221c",
                 "shasum": ""
             },
@@ -63,11 +63,11 @@
             "description": "Common Library for Doctrine projects",
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
-                "annotations",
                 "collections",
+                "spl",
                 "eventmanager",
-                "persistence",
-                "spl"
+                "annotations",
+                "persistence"
             ]
         },
         {
@@ -85,15 +85,15 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.2,<2.5-dev",
-                "php": ">=5.3.2"
+                "php": ">=5.3.2",
+                "doctrine/common": ">=2.2,<2.5-dev"
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2,<2.5-dev"
             },
             "suggest": {
-                "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
                 "doctrine/orm": "For loading ORM fixtures",
+                "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
                 "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
             },
             "time": "2013-01-05 13:05:52",
@@ -135,13 +135,13 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/archive/fd45c6f6baa618d871f3201fabe76df5043abb1e.zip",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fd45c6f6baa618d871f3201fabe76df5043abb1e",
                 "reference": "fd45c6f6baa618d871f3201fabe76df5043abb1e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "2.3.*",
-                "php": ">=5.3.2"
+                "php": ">=5.3.2",
+                "doctrine/common": "2.3.*"
             },
             "time": "2013-01-20 11:50:36",
             "type": "library",
@@ -183,8 +183,8 @@
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database",
-                "dbal",
                 "persistence",
+                "dbal",
                 "queryobject"
             ]
         },
@@ -204,16 +204,16 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": ">=2.2,<2.5-dev",
-                "jdorn/sql-formatter": ">=1.1,<2.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "2.2.*",
-                "symfony/framework-bundle": ">=2.2.0-beta2,<2.3-dev"
+                "jdorn/sql-formatter": ">=1.1,<2.0",
+                "doctrine/dbal": ">=2.2,<2.5-dev",
+                "symfony/framework-bundle": ">=2.2.0-beta2,<2.3-dev",
+                "symfony/doctrine-bridge": "2.2.*"
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2,<2.5-dev",
-                "symfony/validator": "2.2.*",
-                "symfony/yaml": "2.2.*"
+                "symfony/yaml": "2.2.*",
+                "symfony/validator": "2.2.*"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
@@ -253,9 +253,9 @@
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database",
-                "dbal",
                 "orm",
-                "persistence"
+                "persistence",
+                "dbal"
             ]
         },
         {
@@ -274,10 +274,10 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/data-fixtures": "*",
-                "doctrine/doctrine-bundle": ">=1.0,<2.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": ">=2.1.0,<2.3-dev"
+                "doctrine/data-fixtures": "*",
+                "symfony/doctrine-bridge": ">=2.1.0,<2.3-dev",
+                "doctrine/doctrine-bundle": ">=1.0,<2.0"
             },
             "time": "2013-01-13 12:20:51",
             "type": "symfony-bundle",
@@ -307,8 +307,8 @@
             "description": "Symfony DoctrineFixturesBundle",
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
-                "Fixture",
-                "persistence"
+                "persistence",
+                "Fixture"
             ]
         },
         {
@@ -321,15 +321,15 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/doctrine2/archive/fdd0af34e6fced967b8751bc3e4792c11ef86d57.zip",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/fdd0af34e6fced967b8751bc3e4792c11ef86d57",
                 "reference": "fdd0af34e6fced967b8751bc3e4792c11ef86d57",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "2.3.*",
-                "ext-pdo": "*",
                 "php": ">=5.3.2",
-                "symfony/console": "2.*"
+                "ext-pdo": "*",
+                "symfony/console": "2.*",
+                "doctrine/dbal": "2.3.*"
             },
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
@@ -392,7 +392,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/FriendsOfSymfony/FOSRest/archive/33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4.zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRest/zipball/33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4",
                 "reference": "33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4",
                 "shasum": ""
             },
@@ -448,24 +448,24 @@
                 "shasum": ""
             },
             "require": {
-                "friendsofsymfony/rest": ">=0.7.0,<0.9.0-dev",
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": ">=2.0,<2.3-dev"
+                "symfony/framework-bundle": ">=2.0,<2.3-dev",
+                "friendsofsymfony/rest": ">=0.7.0,<0.9.0-dev"
             },
             "conflict": {
                 "jms/serializer-bundle": "<1.0-dev"
             },
             "require-dev": {
-                "jms/serializer-bundle": "1.0.*",
                 "sensio/framework-extra-bundle": ">=2.1,<2.3-dev",
                 "symfony/form": ">=2.1,<2.3-dev",
+                "symfony/yaml": ">=2.1,<2.3-dev",
                 "symfony/security": ">=2.1,<2.3-dev",
-                "symfony/yaml": ">=2.1,<2.3-dev"
+                "jms/serializer-bundle": "1.0.*"
             },
             "suggest": {
-                "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 1.0.*",
+                "symfony/serializer": "Add support for basic serialization capabilities, requires >=2.0,<2.3-dev",
                 "sensio/framework-extra-bundle": "Add support for route annotations and the view response listener",
-                "symfony/serializer": "Add support for basic serialization capabilities, requires >=2.0,<2.3-dev"
+                "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 1.0.*"
             },
             "time": "2013-02-02 23:16:22",
             "type": "symfony-bundle",
@@ -525,12 +525,12 @@
                 "symfony/security-bundle": ">=2.1,<2.3-dev"
             },
             "require-dev": {
+                "twig/twig": "*",
                 "doctrine/doctrine-bundle": "*",
                 "swiftmailer/swiftmailer": "*",
-                "symfony/validator": "2.1.*",
+                "willdurand/propel-typehintable-behavior": "dev-master",
                 "symfony/yaml": "2.1.*",
-                "twig/twig": "*",
-                "willdurand/propel-typehintable-behavior": "dev-master"
+                "symfony/validator": "2.1.*"
             },
             "time": "2012-12-22 15:09:34",
             "type": "symfony-bundle",
@@ -580,30 +580,30 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/TheFootballSocialClub/FSCHateoasBundle/archive/b658e186b74da95d0ce7a0f862f48bfd70bc338d.zip",
+                "url": "https://api.github.com/repos/TheFootballSocialClub/FSCHateoasBundle/zipball/b658e186b74da95d0ce7a0f862f48bfd70bc338d",
                 "reference": "b658e186b74da95d0ce7a0f862f48bfd70bc338d",
                 "shasum": ""
             },
             "require": {
+                "php": ">=5.3.0",
                 "jms/metadata": ">=1.1.0,<1.3-dev",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
                 "jms/serializer": "1.0.x",
                 "jms/serializer-bundle": "*",
-                "php": ">=5.3.0",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev",
                 "symfony/property-access": "2.2.*"
             },
             "require-dev": {
                 "pagerfanta/pagerfanta": "*",
-                "symfony/browser-kit": "*",
                 "symfony/class-loader": "*",
+                "symfony/yaml": "*",
+                "symfony/browser-kit": "*",
                 "symfony/form": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
+                "symfony/validator": "*"
             },
             "suggest": {
-                "pagerfanta/pagerfanta": "*",
                 "symfony/form": ">=2.1,<2.3-dev",
-                "symfony/validator": ">=2.1,<2.3-dev"
+                "symfony/validator": ">=2.1,<2.3-dev",
+                "pagerfanta/pagerfanta": "*"
             },
             "time": "2013-01-26 15:58:40",
             "type": "symfony-bundle",
@@ -668,9 +668,9 @@
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
             "keywords": [
-                "data",
                 "faker",
-                "fixtures"
+                "fixtures",
+                "data"
             ]
         },
         {
@@ -688,21 +688,21 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.2,<2.5-dev",
-                "php": ">=5.3.2"
+                "php": ">=5.3.2",
+                "doctrine/common": ">=2.2,<2.5-dev"
             },
             "require-dev": {
-                "doctrine/dbal": ">=2.2",
-                "doctrine/mongodb": "1.0.1",
-                "doctrine/mongodb-odm": "1.0.0-BETA7",
                 "doctrine/orm": ">=2.2",
-                "symfony/yaml": "2.*"
+                "doctrine/dbal": ">=2.2",
+                "symfony/yaml": "2.*",
+                "doctrine/mongodb": "1.0.1",
+                "doctrine/mongodb-odm": "1.0.0-BETA7"
             },
             "suggest": {
-                "doctrine/dbal": ">=2.3.2",
-                "doctrine/mongodb": ">=1.0.1",
                 "doctrine/mongodb-odm": ">=1.0.0-BETA7",
-                "doctrine/orm": ">=2.3.2"
+                "doctrine/mongodb": ">=1.0.1",
+                "doctrine/orm": ">=2.3.2",
+                "doctrine/dbal": ">=2.3.2"
             },
             "time": "2013-02-07 07:39:32",
             "type": "library",
@@ -737,18 +737,18 @@
             "description": "Doctrine2 behavioral extensions",
             "homepage": "http://gediminasm.org/",
             "keywords": [
-                "Blameable",
+                "tree",
                 "behaviors",
                 "doctrine2",
                 "extensions",
                 "gedmo",
-                "loggable",
-                "nestedset",
                 "sluggable",
+                "loggable",
+                "translatable",
+                "nestedset",
                 "sortable",
                 "timestampable",
-                "translatable",
-                "tree",
+                "Blameable",
                 "uploadable"
             ]
         },
@@ -795,8 +795,8 @@
             "description": "a PHP SQL highlighting library",
             "homepage": "https://github.com/jdorn/sql-formatter/",
             "keywords": [
-                "highlight",
-                "sql"
+                "sql",
+                "highlight"
             ]
         },
         {
@@ -815,8 +815,8 @@
                 "shasum": ""
             },
             "require": {
-                "jms/cg": "1.*",
-                "symfony/framework-bundle": "2.*"
+                "symfony/framework-bundle": "2.*",
+                "jms/cg": "1.*"
             },
             "time": "2013-01-09 08:03:40",
             "type": "symfony-bundle",
@@ -858,7 +858,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/cg-library/archive/8f3441497215434c95512200fa56f168d1972e47.zip",
+                "url": "https://api.github.com/repos/schmittjoh/cg-library/zipball/8f3441497215434c95512200fa56f168d1972e47",
                 "reference": "8f3441497215434c95512200fa56f168d1972e47",
                 "shasum": ""
             },
@@ -910,25 +910,25 @@
                 "shasum": ""
             },
             "require": {
-                "jms/aop-bundle": ">=1.0.0,<1.2-dev",
-                "jms/metadata": "1.*",
-                "symfony/finder": ">=2.1.0,<2.3-dev",
                 "symfony/framework-bundle": ">=2.1.0,<2.3-dev",
-                "symfony/process": ">=2.1.0,<2.3-dev"
+                "symfony/process": ">=2.1.0,<2.3-dev",
+                "symfony/finder": ">=2.1.0,<2.3-dev",
+                "jms/aop-bundle": ">=1.0.0,<1.2-dev",
+                "jms/metadata": "1.*"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*",
                 "jms/security-extra-bundle": "1.*",
-                "phpcollection/phpcollection": ">=0.1,<0.3-dev",
-                "sensio/framework-extra-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
+                "symfony/validator": "*",
                 "symfony/form": "*",
+                "symfony/class-loader": "*",
+                "symfony/yaml": "*",
+                "symfony/browser-kit": "*",
                 "symfony/security-bundle": "*",
                 "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
+                "sensio/framework-extra-bundle": "*",
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/orm": "*",
+                "phpcollection/phpcollection": ">=0.1,<0.3-dev"
             },
             "time": "2013-01-30 21:51:54",
             "type": "symfony-bundle",
@@ -957,8 +957,8 @@
             "description": "Allows to configure dependency injection using annotations",
             "homepage": "http://jmsyst.com/bundles/JMSDiExtraBundle",
             "keywords": [
-                "annotations",
-                "dependency injection"
+                "dependency injection",
+                "annotations"
             ]
         },
         {
@@ -1008,9 +1008,9 @@
             "description": "Class/method/property metadata management in PHP",
             "keywords": [
                 "annotations",
-                "metadata",
+                "yaml",
                 "xml",
-                "yaml"
+                "metadata"
             ]
         },
         {
@@ -1023,7 +1023,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/parser-lib/archive/4d469a70c6dd03f921cbdeadafbcb261bb23e8b0.zip",
+                "url": "https://api.github.com/repos/schmittjoh/parser-lib/zipball/4d469a70c6dd03f921cbdeadafbcb261bb23e8b0",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0",
                 "shasum": ""
             },
@@ -1058,25 +1058,25 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/serializer/archive/71388cc58d4c146136ff7e32d9691562ddd5ae99.zip",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/71388cc58d4c146136ff7e32d9691562ddd5ae99",
                 "reference": "71388cc58d4c146136ff7e32d9691562ddd5ae99",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "2.*",
+                "php": ">=5.3.2",
                 "jms/metadata": ">=1.1.0,<1.3-dev",
                 "jms/parser-lib": "1.*",
-                "php": ">=5.3.2",
+                "doctrine/common": "2.*",
                 "phpcollection/phpcollection": ">=0.1,<0.3-dev"
             },
             "require-dev": {
+                "twig/twig": ">=1.8,<2.0-dev",
                 "doctrine/orm": ">=2.1,<2.4-dev",
-                "symfony/filesystem": "2.*",
-                "symfony/form": ">=2.1,<2.2-dev",
+                "symfony/yaml": "2.*",
                 "symfony/translation": ">=2.0,<2.2-dev",
                 "symfony/validator": ">=2.0,<2.2-dev",
-                "symfony/yaml": "2.*",
-                "twig/twig": ">=1.8,<2.0-dev"
+                "symfony/filesystem": "2.*",
+                "symfony/form": ">=2.1,<2.2-dev"
             },
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize data to YAML format."
@@ -1108,11 +1108,11 @@
             "description": "Library for (de-)serializing data of any complexity; supports XML, JSON, and YAML.",
             "homepage": "http://jmsyst.com/libs/serializer",
             "keywords": [
-                "deserialization",
-                "jaxb",
                 "json",
+                "xml",
                 "serialization",
-                "xml"
+                "deserialization",
+                "jaxb"
             ]
         },
         {
@@ -1131,23 +1131,23 @@
                 "shasum": ""
             },
             "require": {
-                "jms/di-extra-bundle": ">=1.3",
-                "jms/serializer": "1.0.*",
                 "php": ">=5.3.2",
+                "jms/serializer": "1.0.*",
+                "jms/di-extra-bundle": ">=1.3",
                 "symfony/framework-bundle": ">=2.1,<3.0-dev"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*",
+                "symfony/yaml": "*",
                 "symfony/browser-kit": "*",
                 "symfony/class-loader": "*",
-                "symfony/css-selector": "*",
                 "symfony/finder": "*",
-                "symfony/form": "*",
+                "symfony/css-selector": "*",
                 "symfony/process": "*",
+                "doctrine/doctrine-bundle": "*",
                 "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
+                "doctrine/orm": "*",
+                "symfony/form": "*",
+                "symfony/validator": "*"
             },
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize content to YAML format."
@@ -1179,11 +1179,11 @@
             "description": "Allows you to easily serialize, and deserialize data of any complexity",
             "homepage": "http://jmsyst.com/bundles/JMSSerializerBundle",
             "keywords": [
-                "deserialization",
-                "jaxb",
                 "json",
+                "xml",
                 "serialization",
-                "xml"
+                "deserialization",
+                "jaxb"
             ]
         },
         {
@@ -1196,7 +1196,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/KnpLabs/KnpMenu/archive/730bc37232f5f813822acf80edfbd89381ea5971.zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/730bc37232f5f813822acf80edfbd89381ea5971",
                 "reference": "730bc37232f5f813822acf80edfbd89381ea5971",
                 "shasum": ""
             },
@@ -1204,9 +1204,9 @@
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "pimple/pimple": "1.0.*",
                 "silex/silex": "1.0.*",
-                "twig/twig": ">=1.2,<2.0-dev"
+                "twig/twig": ">=1.2,<2.0-dev",
+                "pimple/pimple": "1.0.*"
             },
             "suggest": {
                 "pimple/pimple": "for the built-in implementations of the menu provider and renderer provider",
@@ -1261,7 +1261,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/KnpLabs/KnpMenuBundle/archive/bfaa9f1a74ee590c5e6460a3139b268fce1f1885.zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/bfaa9f1a74ee590c5e6460a3139b268fce1f1885",
                 "reference": "bfaa9f1a74ee590c5e6460a3139b268fce1f1885",
                 "shasum": ""
             },
@@ -1310,37 +1310,38 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/kriswallsmith/assetic.git",
-                "reference": "cebaadc9042be0c34a5bd89dcc456cba8d235538"
+                "reference": "504c9e8a6357583c20c9d9967ec2febea3157324"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/cebaadc9042be0c34a5bd89dcc456cba8d235538",
-                "reference": "cebaadc9042be0c34a5bd89dcc456cba8d235538",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/504c9e8a6357583c20c9d9967ec2febea3157324",
+                "reference": "504c9e8a6357583c20c9d9967ec2febea3157324",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.1",
-                "symfony/process": ">=2.1.0,<2.3-dev"
+                "symfony/process": ">=2.1.0,<2.3-dev",
+                "php": ">=5.3.1"
             },
             "require-dev": {
-                "cssmin/cssmin": "*",
-                "joliclic/javascript-packer": "*",
-                "kamicane/packager": "*",
+                "twig/twig": ">=1.6.0,<2.0",
                 "leafo/lessphp": "*",
                 "leafo/scssphp": "*",
-                "leafo/scssphp-compass": "*",
-                "mrclay/minify": "*",
                 "ptachoire/cssembed": "*",
-                "twig/twig": ">=1.6.0,<2.0"
+                "leafo/scssphp-compass": "*",
+                "cssmin/cssmin": "*",
+                "mrclay/minify": "*",
+                "kamicane/packager": "*",
+                "joliclic/javascript-packer": "*",
+                "phpunit/phpunit": "3.7.*"
             },
             "suggest": {
+                "twig/twig": "Assetic provides the integration with the Twig templating engine",
                 "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
                 "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
-                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
-                "twig/twig": "Assetic provides the integration with the Twig templating engine"
+                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
-            "time": "2013-02-11 01:33:49",
+            "time": "2013-02-11 18:18:06",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1393,15 +1394,15 @@
                 "psr/log": ">=1.0,<2.0"
             },
             "require-dev": {
-                "doctrine/couchdb": "dev-master",
                 "mlehner/gelf-php": "1.0.*",
+                "doctrine/couchdb": "dev-master",
                 "raven/raven": "0.3.*"
             },
             "suggest": {
-                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
-                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
                 "raven/raven": "Allow sending log messages to a Sentry server"
             },
             "time": "2013-02-11 10:28:59",
@@ -1446,7 +1447,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/whiteoctober/Pagerfanta/archive/12f71d99457b018fb80746f84514dd5b495c5789.zip",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/12f71d99457b018fb80746f84514dd5b495c5789",
                 "reference": "12f71d99457b018fb80746f84514dd5b495c5789",
                 "shasum": ""
             },
@@ -1454,8 +1455,8 @@
                 "php": ">=5.3.0"
             },
             "suggest": {
-                "doctrine/mongodb-odm": "2.*",
                 "doctrine/orm": "2.*",
+                "doctrine/mongodb-odm": "2.*",
                 "solarium/solarium": "2.*"
             },
             "time": "2012-08-22 21:56:31",
@@ -1525,11 +1526,11 @@
             ],
             "description": "General-Purpose Collection Library for PHP",
             "keywords": [
-                "collection",
-                "list",
                 "map",
+                "set",
+                "list",
                 "sequence",
-                "set"
+                "collection"
             ]
         },
         {
@@ -1542,7 +1543,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/schmittjoh/php-option/archive/c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27.zip",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27",
                 "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27",
                 "shasum": ""
             },
@@ -1575,10 +1576,10 @@
             ],
             "description": "Option Type for PHP",
             "keywords": [
-                "language",
-                "option",
                 "php",
-                "type"
+                "language",
+                "type",
+                "option"
             ]
         },
         {
@@ -1626,18 +1627,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioDistributionBundle",
-                "reference": "v2.2.0-RC1"
+                "reference": "15a12bdea8e562ff8a665573c40a8d32ecf38db6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/v2.2.0-RC1",
-                "reference": "v2.2.0-RC1",
+                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/15a12bdea8e562ff8a665573c40a8d32ecf38db6",
+                "reference": "15a12bdea8e562ff8a665573c40a8d32ecf38db6",
                 "shasum": ""
             },
             "require": {
                 "symfony/framework-bundle": "2.2.*"
             },
-            "time": "2013-02-05 08:55:01",
+            "time": "2013-02-11 14:46:49",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1661,8 +1662,8 @@
             ],
             "description": "The base bundle for the Symfony Distributions",
             "keywords": [
-                "configuration",
-                "distribution"
+                "distribution",
+                "configuration"
             ]
         },
         {
@@ -1676,14 +1677,14 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/stof/StofDoctrineExtensionsBundle/archive/4a17550d8b101c5aafc56c9950149aa189b8402d.zip",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/4a17550d8b101c5aafc56c9950149aa189b8402d",
                 "reference": "4a17550d8b101c5aafc56c9950149aa189b8402d",
                 "shasum": ""
             },
             "require": {
-                "gedmo/doctrine-extensions": "2.3.*",
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev"
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "gedmo/doctrine-extensions": "2.3.*"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "*",
@@ -1714,17 +1715,17 @@
             "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
             "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
             "keywords": [
+                "tree",
                 "behaviors",
                 "doctrine2",
                 "extensions",
                 "gedmo",
-                "loggable",
-                "nestedset",
                 "sluggable",
-                "sortable",
-                "timestampable",
+                "loggable",
                 "translatable",
-                "tree"
+                "nestedset",
+                "sortable",
+                "timestampable"
             ]
         },
         {
@@ -1793,14 +1794,14 @@
             },
             "require": {
                 "php": ">=5.3.2",
-                "stof/doctrine-extensions-bundle": "1.1.*",
+                "symfony/framework-bundle": ">=2.1,<3.0",
                 "sylius/resource-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "stof/doctrine-extensions-bundle": "1.1.*"
             },
             "require-dev": {
-                "doctrine/orm": ">=2.3,<3.0",
                 "phpspec/phpspec2": "dev-develop",
-                "symfony/form": ">=2.1,<3.0"
+                "symfony/form": ">=2.1,<3.0",
+                "doctrine/orm": ">=2.3,<3.0"
             },
             "time": "2013-02-05 23:22:25",
             "type": "symfony-bundle",
@@ -1832,10 +1833,10 @@
             "description": "Addressing and zone management for Symfony2 applications.",
             "homepage": "http://sylius.org",
             "keywords": [
+                "shop",
+                "ecommerce",
                 "address",
                 "addressing",
-                "ecommerce",
-                "shop",
                 "zones"
             ]
         },
@@ -1846,30 +1847,30 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAssortmentBundle.git",
-                "reference": "b5419de0d72b09ffddad214fbbb3cfbb34c999e4"
+                "reference": "eac0779190b64b83fa70b05059335566acade424"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAssortmentBundle/zipball/b5419de0d72b09ffddad214fbbb3cfbb34c999e4",
-                "reference": "b5419de0d72b09ffddad214fbbb3cfbb34c999e4",
+                "url": "https://api.github.com/repos/Sylius/SyliusAssortmentBundle/zipball/eac0779190b64b83fa70b05059335566acade424",
+                "reference": "eac0779190b64b83fa70b05059335566acade424",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "stof/doctrine-extensions-bundle": "1.1.*",
                 "sylius/resource-bundle": "0.1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*",
                 "symfony/framework-bundle": ">=2.2,<2.3-dev"
             },
             "require-dev": {
-                "doctrine/orm": ">=2.3,<3.0",
                 "phpspec/phpspec2": "dev-develop",
+                "doctrine/orm": ">=2.3,<3.0",
                 "symfony/form": ">=2.2,<3.0",
                 "symfony/validator": ">=2.2,<3.0"
             },
             "suggest": {
                 "friendsofsymfony/rest-bundle": "*"
             },
-            "time": "2013-02-09 20:18:13",
+            "time": "2013-02-11 19:58:38",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1899,10 +1900,10 @@
             "description": "Manage products, their variants, properties and options in your Symfony2 application.",
             "homepage": "http://sylius.org",
             "keywords": [
+                "shop",
                 "ecommerce",
-                "product",
                 "products",
-                "shop"
+                "product"
             ]
         },
         {
@@ -1921,18 +1922,18 @@
                 "shasum": ""
             },
             "require": {
-                "friendsofsymfony/user-bundle": "1.3.1",
-                "fsc/hateoas-bundle": "0.3.x-dev",
-                "fzaninotto/faker": "1.1.*",
-                "jms/serializer-bundle": "1.0.*",
                 "php": ">=5.3.3",
-                "sylius/addressing-bundle": "0.1.*",
-                "sylius/assortment-bundle": "0.1.*",
-                "sylius/inventory-bundle": "0.1.*",
-                "sylius/sales-bundle": "0.1.*",
-                "sylius/shipping-bundle": "0.1.*",
                 "sylius/taxation-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.2,<2.3-dev"
+                "jms/serializer-bundle": "1.0.*",
+                "fzaninotto/faker": "1.1.*",
+                "sylius/addressing-bundle": "0.1.*",
+                "sylius/shipping-bundle": "0.1.*",
+                "sylius/assortment-bundle": "0.1.*",
+                "fsc/hateoas-bundle": "0.3.x-dev",
+                "sylius/sales-bundle": "0.1.*",
+                "symfony/framework-bundle": ">=2.2,<2.3-dev",
+                "sylius/inventory-bundle": "0.1.*",
+                "friendsofsymfony/user-bundle": "1.3.1"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
@@ -1968,8 +1969,8 @@
             "description": "Sylius core bundle. It integrates all other bundles into full stack Symfony2 ecommerce solution.",
             "homepage": "http://sylius.org",
             "keywords": [
-                "ecommerce",
                 "shop",
+                "ecommerce",
                 "store",
                 "sylius",
                 "webshop"
@@ -1992,8 +1993,8 @@
             },
             "require": {
                 "php": ">=5.3.2",
-                "sylius/resource-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "sylius/resource-bundle": "0.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
@@ -2032,9 +2033,9 @@
             "description": "Flexible inventory management for Symfony2 applications.",
             "homepage": "http://sylius.org",
             "keywords": [
+                "shop",
                 "ecommerce",
                 "inventory",
-                "shop",
                 "stock"
             ]
         },
@@ -2054,23 +2055,23 @@
                 "shasum": ""
             },
             "require": {
-                "friendsofsymfony/rest-bundle": "0.11.*@dev",
-                "pagerfanta/pagerfanta": "dev-master",
-                "php": ">=5.3.3",
                 "symfony/framework-bundle": ">=2.1,<3.0",
-                "white-october/pagerfanta-bundle": "dev-master"
+                "php": ">=5.3.3",
+                "friendsofsymfony/rest-bundle": "0.11.*@dev",
+                "white-october/pagerfanta-bundle": "dev-master",
+                "pagerfanta/pagerfanta": "dev-master"
             },
             "require-dev": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": ">=2.3,<3.0",
-                "phpspec/php-diff": "dev-master",
                 "phpspec/phpspec2": "dev-develop",
-                "twig/twig": ">=1.11.0,<2.0"
+                "doctrine/orm": ">=2.3,<3.0",
+                "twig/twig": ">=1.11.0,<2.0",
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "phpspec/php-diff": "dev-master"
             },
             "suggest": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
                 "doctrine/orm": "~2.3",
-                "fsc/hateoas-bundle": "0.3.x-dev"
+                "fsc/hateoas-bundle": "0.3.x-dev",
+                "doctrine/mongodb-odm": "1.0.*@dev"
             },
             "time": "2013-02-07 08:47:38",
             "type": "symfony-bundle",
@@ -2103,8 +2104,8 @@
             "homepage": "http://sylius.org",
             "keywords": [
                 "persistence",
-                "resource",
-                "storage"
+                "storage",
+                "resource"
             ]
         },
         {
@@ -2123,17 +2124,17 @@
                 "shasum": ""
             },
             "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
                 "php": ">=5.3.3",
-                "sylius/resource-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "sylius/resource-bundle": "0.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
             "suggest": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*"
+                "doctrine/orm": "*",
+                "doctrine/doctrine-bundle": "*"
             },
             "time": "2013-02-03 10:42:47",
             "type": "symfony-bundle",
@@ -2165,11 +2166,11 @@
             "description": "Sales order management for Symfony2 applications.",
             "homepage": "http://Sylius.org",
             "keywords": [
+                "shop",
                 "ecommerce",
-                "order",
-                "orders",
                 "sales",
-                "shop"
+                "orders",
+                "order"
             ]
         },
         {
@@ -2188,10 +2189,10 @@
                 "shasum": ""
             },
             "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
                 "php": ">=5.3.3",
-                "stof/doctrine-extensions-bundle": "1.1.*",
                 "sylius/resource-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "stof/doctrine-extensions-bundle": "1.1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
@@ -2227,12 +2228,12 @@
             "description": "Flexible shipping system for Symfony2 ecommerce applications.",
             "homepage": "http://sylius.org",
             "keywords": [
-                "delivery",
-                "ecommerce",
-                "shipments",
-                "shipping",
                 "shop",
-                "webshop"
+                "ecommerce",
+                "webshop",
+                "shipping",
+                "delivery",
+                "shipments"
             ]
         },
         {
@@ -2251,10 +2252,10 @@
                 "shasum": ""
             },
             "require": {
+                "symfony/framework-bundle": ">=2.1,<3.0",
                 "php": ">=5.3.3",
-                "stof/doctrine-extensions-bundle": "1.*",
                 "sylius/resource-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "stof/doctrine-extensions-bundle": "1.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
@@ -2290,10 +2291,10 @@
             "description": "Flexible taxation system for Symfony2 ecommerce applications.",
             "homepage": "http://sylius.org",
             "keywords": [
-                "ecommerce",
                 "shop",
-                "tax",
+                "ecommerce",
                 "taxation",
+                "tax",
                 "taxes",
                 "webshop"
             ]
@@ -2305,25 +2306,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "5ec00f6e1004a479ecb39d28a1d000e263a473c1"
+                "reference": "c756b1fd3a862f784e05c325ba70af1fac310046"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/5ec00f6e1004a479ecb39d28a1d000e263a473c1",
-                "reference": "5ec00f6e1004a479ecb39d28a1d000e263a473c1",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/c756b1fd3a862f784e05c325ba70af1fac310046",
+                "reference": "c756b1fd3a862f784e05c325ba70af1fac310046",
                 "shasum": ""
             },
             "require": {
-                "knplabs/knp-menu-bundle": "2.0.*",
                 "php": ">=5.3.3",
+                "symfony/framework-bundle": ">=2.1,<3.0",
                 "sylius/core-bundle": "0.1.*",
-                "symfony/framework-bundle": ">=2.1,<3.0"
+                "knplabs/knp-menu-bundle": "2.0.*"
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/security": ">=2.1,<3.0"
             },
-            "time": "2013-02-11 00:08:57",
+            "time": "2013-02-11 17:56:16",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2353,8 +2354,8 @@
             "description": "Sylius store web bundle.",
             "homepage": "http://sylius.org",
             "keywords": [
-                "ecommerce",
                 "shop",
+                "ecommerce",
                 "store",
                 "sylius",
                 "webshop"
@@ -2376,18 +2377,18 @@
                 "shasum": ""
             },
             "require": {
-                "kriswallsmith/assetic": "1.1.*",
                 "php": ">=5.3.0",
+                "kriswallsmith/assetic": "1.1.*",
                 "symfony/framework-bundle": ">=2.1.0,<2.3-dev"
             },
             "require-dev": {
-                "symfony/class-loader": ">=2.1.0,<2.3-dev",
-                "symfony/console": ">=2.1.0,<2.3-dev",
-                "symfony/css-selector": ">=2.1.0,<2.3-dev",
-                "symfony/dom-crawler": ">=2.1.0,<2.3-dev",
-                "symfony/form": ">=2.1.0,<2.3-dev",
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev",
-                "symfony/yaml": ">=2.1.0,<2.3-dev"
+                "symfony/console": ">=2.1.0,<2.3-dev",
+                "symfony/class-loader": ">=2.1.0,<2.3-dev",
+                "symfony/yaml": ">=2.1.0,<2.3-dev",
+                "symfony/form": ">=2.1.0,<2.3-dev",
+                "symfony/dom-crawler": ">=2.1.0,<2.3-dev",
+                "symfony/css-selector": ">=2.1.0,<2.3-dev"
             },
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
@@ -2439,11 +2440,11 @@
                 "shasum": ""
             },
             "require": {
-                "monolog/monolog": ">=1.3,<2.0",
                 "php": ">=5.3.2",
-                "symfony/config": ">=2.2-beta2,<3.0",
+                "monolog/monolog": ">=1.3,<2.0",
+                "symfony/monolog-bridge": ">=2.2-beta2,<3.0",
                 "symfony/dependency-injection": ">=2.2-beta2,<3.0",
-                "symfony/monolog-bridge": ">=2.2-beta2,<3.0"
+                "symfony/config": ">=2.2-beta2,<3.0"
             },
             "require-dev": {
                 "symfony/yaml": ">=2.2-beta2,<3.0"
@@ -2498,13 +2499,13 @@
             },
             "require": {
                 "php": ">=5.3.2",
-                "swiftmailer/swiftmailer": ">=4.2.0,<4.4-dev",
-                "symfony/swiftmailer-bridge": ">=2.1.0,<2.3-dev"
+                "symfony/swiftmailer-bridge": ">=2.1.0,<2.3-dev",
+                "swiftmailer/swiftmailer": ">=4.2.0,<4.4-dev"
             },
             "require-dev": {
-                "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/dependency-injection": ">=2.1.0,<2.3-dev",
                 "symfony/http-kernel": ">=2.1.0,<2.3-dev",
+                "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
             "time": "2013-01-08 20:24:29",
@@ -2542,18 +2543,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "v2.2.0-RC2"
+                "reference": "a4ac5e6374fe27ef68031e743447700fde348341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.2.0-RC2",
-                "reference": "v2.2.0-RC2",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/a4ac5e6374fe27ef68031e743447700fde348341",
+                "reference": "a4ac5e6374fe27ef68031e743447700fde348341",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.2,<3.0",
                 "php": ">=5.3.3",
                 "psr/log": ">=1.0,<2.0",
+                "doctrine/common": ">=2.2,<3.0",
                 "twig/twig": ">=1.11.0,<2.0"
             },
             "replace": {
@@ -2594,12 +2595,12 @@
             },
             "require-dev": {
                 "doctrine/data-fixtures": "1.0.*",
+                "monolog/monolog": ">=1.3,<2.0",
                 "doctrine/dbal": ">=2.2,<3.0",
                 "doctrine/orm": ">=2.2,<3.0,>=2.2.3",
-                "monolog/monolog": ">=1.3,<2.0",
                 "propel/propel1": "1.6.*"
             },
-            "time": "2013-02-11 12:46:49",
+            "time": "2013-02-11 15:24:43",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2645,7 +2646,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig-extensions/archive/5c2d515d4624bdd588226d688173cf0399a4d8cf.zip",
+                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/5c2d515d4624bdd588226d688173cf0399a4d8cf",
                 "reference": "5c2d515d4624bdd588226d688173cf0399a4d8cf",
                 "shasum": ""
             },
@@ -2742,13 +2743,13 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle/archive/38e317a3ecd5a68e2322024ea8fe57632d4ddd68.zip",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/38e317a3ecd5a68e2322024ea8fe57632d4ddd68",
                 "reference": "38e317a3ecd5a68e2322024ea8fe57632d4ddd68",
                 "shasum": ""
             },
             "require": {
-                "pagerfanta/pagerfanta": "dev-master",
-                "symfony/framework-bundle": "2.*"
+                "symfony/framework-bundle": "2.*",
+                "pagerfanta/pagerfanta": "dev-master"
             },
             "time": "2012-07-24 12:48:41",
             "type": "symfony-bundle",
@@ -2791,20 +2792,20 @@
                 "shasum": ""
             },
             "require": {
-                "behat/gherkin": ">=2.2.4,<2.3-dev",
                 "php": ">=5.3.1",
-                "symfony/config": ">=2.0,<2.3-dev",
+                "behat/gherkin": ">=2.2.4,<2.3-dev",
                 "symfony/console": ">=2.0,<2.3-dev",
+                "symfony/config": ">=2.0,<2.3-dev",
                 "symfony/dependency-injection": ">=2.0,<2.3-dev",
                 "symfony/event-dispatcher": ">=2.0,<2.3-dev",
-                "symfony/finder": ">=2.0,<2.3-dev",
                 "symfony/translation": ">=2.0,<2.3-dev",
-                "symfony/yaml": ">=2.0,<2.3-dev"
+                "symfony/yaml": ">=2.0,<2.3-dev",
+                "symfony/finder": ">=2.0,<2.3-dev"
             },
             "suggest": {
-                "behat/mink-extension": "for integration with Mink testing framework",
                 "behat/symfony2-extension": "for integration with Symfony2 web framework",
-                "behat/yii-extension": "for integration with Yii web framework"
+                "behat/yii-extension": "for integration with Yii web framework",
+                "behat/mink-extension": "for integration with Mink testing framework"
             },
             "time": "2013-02-06 16:47:49",
             "bin": [
@@ -2835,9 +2836,9 @@
             "description": "Scenario-oriented BDD framework for PHP 5.3",
             "homepage": "http://behat.org/",
             "keywords": [
+                "Symfony2",
                 "BDD",
-                "Behat",
-                "Symfony2"
+                "Behat"
             ]
         },
         {
@@ -2859,14 +2860,14 @@
                 "symfony/finder": ">=2.0,<2.3-dev"
             },
             "require-dev": {
-                "symfony/config": ">=2.0,<2.3-dev",
+                "symfony/yaml": ">=2.0,<2.3-dev",
                 "symfony/translation": ">=2.0,<2.3-dev",
-                "symfony/yaml": ">=2.0,<2.3-dev"
+                "symfony/config": ">=2.0,<2.3-dev"
             },
             "suggest": {
-                "symfony/config": "If you want to use Config component to manage resources",
+                "symfony/yaml": "If you want to parse features, represented in YAML files",
                 "symfony/translation": "If you want to use Symfony2 translations adapter",
-                "symfony/yaml": "If you want to parse features, represented in YAML files"
+                "symfony/config": "If you want to use Config component to manage resources"
             },
             "time": "2013-01-26 23:59:16",
             "type": "library",
@@ -2894,11 +2895,11 @@
             "description": "Gherkin DSL parser for PHP 5.3",
             "homepage": "http://behat.org/",
             "keywords": [
-                "BDD",
-                "Behat",
-                "DSL",
                 "Symfony2",
-                "parser"
+                "BDD",
+                "parser",
+                "DSL",
+                "Behat"
             ]
         },
         {
@@ -2952,8 +2953,8 @@
             "description": "Web acceptance testing framework for PHP 5.3",
             "homepage": "http://mink.behat.org/",
             "keywords": [
-                "browser",
                 "testing",
+                "browser",
                 "web"
             ]
         },
@@ -2972,8 +2973,8 @@
                 "shasum": ""
             },
             "require": {
-                "behat/mink": ">=1.4,<1.5-dev",
                 "php": ">=5.3.1",
+                "behat/mink": ">=1.4,<1.5-dev",
                 "symfony/browser-kit": ">=2.0,<2.3-dev",
                 "symfony/dom-crawler": ">=2.0,<2.3-dev"
             },
@@ -3006,10 +3007,10 @@
             "description": "Symfony2 BrowserKit driver for Mink framework",
             "homepage": "http://mink.behat.org/",
             "keywords": [
-                "Mink",
                 "Symfony2",
+                "testing",
                 "browser",
-                "testing"
+                "Mink"
             ]
         },
         {
@@ -3027,9 +3028,9 @@
                 "shasum": ""
             },
             "require": {
+                "php": ">=5.3.2",
                 "behat/behat": ">=2.4,<2.5-dev",
-                "behat/mink": ">=1.4,<1.5-dev",
-                "php": ">=5.3.2"
+                "behat/mink": ">=1.4,<1.5-dev"
             },
             "require-dev": {
                 "behat/mink-goutte-driver": "*"
@@ -3055,10 +3056,10 @@
             "description": "Mink extension for Behat",
             "homepage": "http://mink.behat.org",
             "keywords": [
-                "browser",
-                "gui",
                 "test",
-                "web"
+                "browser",
+                "web",
+                "gui"
             ]
         },
         {
@@ -3076,9 +3077,9 @@
                 "shasum": ""
             },
             "require": {
-                "behat/mink": ">=1.4,<1.5.0-dev",
+                "php": ">=5.3.1",
                 "instaclick/php-webdriver": "@dev",
-                "php": ">=5.3.1"
+                "behat/mink": ">=1.4,<1.5.0-dev"
             },
             "time": "2013-02-10 20:03:09",
             "type": "mink-driver",
@@ -3106,11 +3107,11 @@
             "description": "Selenium2 (WebDriver) driver for Mink framework",
             "homepage": "http://mink.behat.org/",
             "keywords": [
-                "ajax",
-                "browser",
                 "javascript",
-                "selenium",
                 "testing",
+                "browser",
+                "ajax",
+                "selenium",
                 "webdriver"
             ]
         },
@@ -3124,20 +3125,20 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/Symfony2Extension/archive/af142f441fb83e5ea4c02a136ed582a99d23e409.zip",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/af142f441fb83e5ea4c02a136ed582a99d23e409",
                 "reference": "af142f441fb83e5ea4c02a136ed582a99d23e409",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": ">=2.4,<2.5-dev",
                 "php": ">=5.3.2",
+                "behat/behat": ">=2.4,<2.5-dev",
                 "symfony/framework-bundle": ">=2.0,<2.3-dev"
             },
             "require-dev": {
-                "behat/mink": "1.4@stable",
-                "behat/mink-browserkit-driver": "dev-master",
+                "symfony/symfony": "dev-master",
                 "behat/mink-extension": "dev-master",
-                "symfony/symfony": "dev-master"
+                "behat/mink-browserkit-driver": "dev-master",
+                "behat/mink": "1.4@stable"
             },
             "time": "2013-01-27 15:31:10",
             "type": "behat-extension",
@@ -3160,9 +3161,9 @@
             "description": "Symfony2 framework extension for Behat",
             "homepage": "http://behat.org",
             "keywords": [
-                "BDD",
                 "framework",
-                "symfony"
+                "symfony",
+                "BDD"
             ]
         },
         {
@@ -3175,7 +3176,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.11.zip",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/1.0.11",
                 "reference": "1.0.11",
                 "shasum": ""
             },
@@ -3255,16 +3256,16 @@
             "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
             "homepage": "http://github.com/padraic/mockery",
             "keywords": [
+                "testing",
+                "library",
                 "BDD",
                 "TDD",
-                "library",
-                "mock",
-                "mock objects",
-                "mockery",
-                "stub",
                 "test",
+                "mockery",
+                "mock",
+                "stub",
                 "test double",
-                "testing"
+                "mock objects"
             ]
         },
         {
@@ -3277,7 +3278,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpspec/php-diff/archive/8d82ac415225fac373a4073ba14b1fe286aa2312.zip",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
                 "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
                 "shasum": ""
             },
@@ -3316,8 +3317,8 @@
             },
             "require": {
                 "mockery/mockery": "0.7.*",
-                "php": ">=5.3.3",
                 "phpspec/php-diff": "*@dev",
+                "php": ">=5.3.3",
                 "symfony/console": ">=2.1,<3.0",
                 "symfony/event-dispatcher": ">=2.1,<3.0",
                 "symfony/finder": ">=2.1,<3.0",
@@ -3356,13 +3357,13 @@
             "description": "Specification-oriented BDD framework for PHP 5.3+",
             "homepage": "http://phpspec.net/",
             "keywords": [
+                "testing",
                 "BDD",
-                "SpecBDD",
                 "TDD",
                 "spec",
-                "specification",
-                "testing",
-                "tests"
+                "tests",
+                "SpecBDD",
+                "specification"
             ]
         }
     ],
