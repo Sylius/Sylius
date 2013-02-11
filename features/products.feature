@@ -158,13 +158,13 @@ Feature: Products
 
     Scenario: Deleting product
         Given I am on the page of product "Mug"
-         When I follow "delete"
+         When I press "delete"
          Then I should be on the product index page
           And I should see "Product has been successfully deleted."
 
     Scenario: Deleted product disappears from the list
         Given I am on the page of product "Sticker"
-         When I follow "delete"
+         When I press "delete"
          Then I should be on the product index page
           And I should not see product with name "Sticker" in that list
 

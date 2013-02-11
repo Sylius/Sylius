@@ -425,12 +425,16 @@ class WebUser extends MinkContext implements KernelAwareInterface
         return $this->getContainer()->get('security.context');
     }
 
+    /**
+     * Create user and login with given role.
+     *
+     * @param string $role
+     */
     private function iAmLoggedInAsRole($role)
     {
         $this->getSubContext('data')->thereIsUser('username', 'password', $role);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
 
-        $this->iClick('Login');
         $this->fillField('Login', 'username');
         $this->fillField('Password', 'password');
         $this->pressButton('login');

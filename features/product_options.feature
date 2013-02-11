@@ -16,9 +16,21 @@ Feature: Product options
          Then I should be on the option index page
           And I should see 2 options in the list
 
+    Scenario: Option names are listed
+        Given I am on the dashboard page
+         When I follow "Manage product options"
+         Then I should be on the option index page
+          And I should see option with name "T-Shirt color" in the list
+
+    Scenario: Option presentation is displayed in the list
+        Given I am on the dashboard page
+         When I follow "Manage product options"
+         Then I should be on the option index page
+          And I should see option with presentation "Color" in the list
+
     Scenario: Seeing empty index of options
         Given there are no options
-         When I am on the option index page
+         When I go to the option index page
          Then I should see "There are no options configured"
 
     Scenario: Accessing the option creation form

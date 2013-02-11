@@ -90,7 +90,7 @@ Feature: Zones
 
     Scenario: Deleting zone
         Given I am on the page of zone "USA GMT-8"
-         When I click "delete"
+         When I press "delete"
          Then I should be on the zone index page
           And I should see "Zone has been successfully deleted."
 
