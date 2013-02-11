@@ -102,6 +102,6 @@ Feature: Zones
 
     Scenario: Deleted zone disappears from the list
         Given I am on the page of zone "Germany"
-         When I click "delete"
+         When I press "delete"
          Then I should be on the zone index page
           But I should not see zone with name "Germany" in that list
