@@ -103,3 +103,40 @@ Feature: Product properties
           | String  | text     |
           | Choice  | choice   |
           | Number  | number   |
+
+    @javascript
+    Scenario: Create new choice property with many choices
+        Given I am on the property creation page
+         When I fill in "Internal name" with "Book author"
+          And I fill in "Presentation" with "Author"
+          And I select "Choice" from "Type"
+          And I click "Add choice"
+          And I fill in "Choice 0" with "J.R.R Tolken"
+          And I click "Add choice"
+          And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
+          And I press "Create"
+          Then property with following data should be created:
+            | name         | Book author                      |
+            | presentation | Author                           |
+            | type         | choice                           |
+            | choices      | J.R.R Tolken,Jaroslaw Grzedowicz |
+          And I should see "Property has been successfully created."
+
+    @javascript
+    Scenario: Remove choice property choice
+        Given I am on the property creation page
+         When I fill in "Internal name" with "Book author"
+          And I fill in "Presentation" with "Author"
+          And I select "Choice" from "Type"
+          And I click "Add choice"
+          And I fill in "Choice 0" with "J.R.R Tolken"
+          And I click "Add choice"
+          And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
+          And I remove property choice number 0
+          And I press "Create"
+          Then property with following data should be created:
+            | name         | Book author         |
+            | presentation | Author              |
+            | type         | choice              |
+            | choices      | Jaroslaw Grzedowicz |
+          And I should see "Property has been successfully created."

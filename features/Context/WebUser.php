@@ -59,6 +59,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^go to "([^""]*)" tab$/
+     */
+    public function goToTab($tabLabel)
+    {
+        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+    }
+
+    /**
      * @When /^I go to the website root$/
      */
     public function iGoToTheWebsiteRoot()
@@ -277,38 +285,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @When /^I select "([^"]*)" from "([^"]*)"$/
-     */
-    public function iSelectOptionFrom($option, $field)
-    {
-        $this->getSession()->getPage()->selectFieldOption($field, $option);
-    }
-
-    /**
-     * @When /^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/
-     */
-    public function checkOption($option)
-    {
-        $this->getSession()->getPage()->checkField($option);
-    }
-
-    /**
-     * @When /^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/
-     */
-    public function uncheckOption($option)
-    {
-        $this->getSession()->getPage()->uncheckField($option);
-    }
-
-    /**
-     * @When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
-     */
-    public function additionallySelectOption($select, $option)
-    {
-        $this->getSession()->getPage()->selectFieldOption($select, $option, true);
-    }
-
-    /**
      * @Then /^I should see "([^"]*)" field error$/
      */
     public function iShouldSeeFieldError($field)
@@ -396,14 +372,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
         if ($this->getSecurityContext()->isGranted('ROLE_USER')) {
             throw new AuthenticationException('User was not expected to be logged in, but he is.');
         }
-    }
-
-    /**
-     * @Given /^go to "([^""]*)" tab$/
-     */
-    public function goToTab($tabLabel)
-    {
-        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
     }
 
     /**

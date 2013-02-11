@@ -73,18 +73,15 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
-     * Opens last response content in browser.
-     *
-     * @Then /^show last response$/
+     * @Given /^I remove property choice number (\d+)$/
      */
-    public function showLastResponse()
+    public function iRemovePropertyChoiceInput($number)
     {
-        if (null === $this->getMinkParameter('show_cmd')) {
-            throw new \RuntimeException('Set "show_cmd" parameter in behat.yml to be able to open page in browser (ex.: "show_cmd: firefox %s")');
-        }
-
-        $filename = rtrim($this->getMinkParameter('show_tmp_dir'), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.uniqid().'.html';
-        file_put_contents($filename, $this->getSession()->getPage()->getContent());
-        system(sprintf($this->getMinkParameter('show_cmd'), escapeshellarg($filename)));
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', sprintf('.sylius_property_choices_%d_delete', $number))
+            ->click()
+        ;
     }
 }

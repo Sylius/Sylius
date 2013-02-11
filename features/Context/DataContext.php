@@ -27,6 +27,7 @@ use Symfony\Component\PropertyAccess\StringUtil;
 /**
  * Data writing and reading context.
  *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class DataContext extends BehatContext implements KernelAwareInterface
 {
@@ -304,7 +305,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $object = $this->findOneByName($type, $data['name']);
         foreach ($data as $property => $value) {
             $objectValue = $object->{'get'.\ucfirst($property)}();
-
+            if (is_array($objectValue)) {
+                $objectValue = implode(',', $objectValue);;
+            }
             if ($objectValue !== $value) {
                 throw new \Exception(sprintf('%s object::%s has "%s" value but "%s" expected', $type, $property, $objectValue, $value));
             }
