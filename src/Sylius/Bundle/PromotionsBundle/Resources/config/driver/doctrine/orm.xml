@@ -21,7 +21,7 @@
         <parameter key="sylius.model.promotion_rule.class">Sylius\Bundle\PromotionsBundle\Entity\Rule</parameter>
         <parameter key="sylius.model.promotion_action.class">Sylius\Bundle\PromotionsBundle\Entity\Action</parameter>
 
-        <parameter key="sylius.repository.promotion.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.promotion.class">Sylius\Bundle\PromotionsBundle\Repository\PromotionRepository</parameter>
         <parameter key="sylius.repository.promotion_rule.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.promotion_action.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>

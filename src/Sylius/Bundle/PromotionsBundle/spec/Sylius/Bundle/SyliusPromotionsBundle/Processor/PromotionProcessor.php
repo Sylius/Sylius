@@ -12,7 +12,7 @@ use PHPSpec2\ObjectBehavior;
 class PromotionProcessor extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface                       $repository
+     * @param Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface       $repository
      * @param Sylius\Bundle\PromotionsBundle\Checker\PromotionEliglibilityCheckerInterface $checker
      * @param Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface           $applicator
      */
@@ -37,7 +37,7 @@ class PromotionProcessor extends ObjectBehavior
      */
     function it_should_not_apply_promotions_that_are_not_eligible($repository, $checker, $applicator, $order, $promotion)
     {
-        $repository->findAll()->shouldBeCalled()->willReturn(array($promotion));
+        $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($order, $promotion)->shouldBeCalled()->willReturn(false);
         $applicator->apply($order, $promotion)->shouldNotBeCalled();
 
@@ -50,7 +50,7 @@ class PromotionProcessor extends ObjectBehavior
      */
     function it_should_apply_promotions_that_are_eligible($repository, $checker, $applicator, $order, $promotion)
     {
-        $repository->findAll()->shouldBeCalled()->willReturn(array($promotion));
+        $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($order, $promotion)->shouldBeCalled()->willReturn(true);
         $applicator->apply($order, $promotion)->shouldBeCalled();
 

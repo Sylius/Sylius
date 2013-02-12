@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionsBundle\Processor;
 
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\PromotionEliglibilityCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface;
 
@@ -29,7 +29,7 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $checker;
     protected $applicator;
 
-    public function __construct(RepositoryInterface $repository, PromotionEliglibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
+    public function __construct(PromotionRepositoryInterface $repository, PromotionEliglibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
         $this->repository = $repository;
         $this->checker = $checker;
@@ -38,7 +38,7 @@ class PromotionProcessor implements PromotionProcessorInterface
 
     public function process(OrderInterface $order)
     {
-        foreach ($this->repository->findAll() as $promotion) {
+        foreach ($this->repository->findActive() as $promotion) {
             if ($this->checker->isEligible($order, $promotion)) {
                 $this->applicator->apply($order, $promotion);
             }
