@@ -121,6 +121,9 @@
                 <option name="message">sylius.country.iso_name.max_length</option>
             </constraint>
         </property>
+        <property name="provinces">
+            <constraint name="Valid" />
+        </property>
     </class>
 
     <class name="Sylius\Bundle\AddressingBundle\Model\Province">
