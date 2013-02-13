@@ -101,7 +101,7 @@ class Promotion implements PromotionInterface
         return $this->startsAt;
     }
 
-    public function setStartsAt(DateTime $startsAt)
+    public function setStartsAt(DateTime $startsAt = null)
     {
         $this->startsAt = $startsAt;
     }
@@ -111,7 +111,7 @@ class Promotion implements PromotionInterface
         return $this->endsAt;
     }
 
-    public function setEndsAt(DateTime $endsAt)
+    public function setEndsAt(DateTime $endsAt = null)
     {
         $this->endsAt = $endsAt;
     }

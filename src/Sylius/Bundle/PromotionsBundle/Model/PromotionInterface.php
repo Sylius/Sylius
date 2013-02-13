@@ -32,9 +32,9 @@ interface PromotionInterface
     public function getUsed();
     public function incrementUsed();
     public function getStartsAt();
-    public function setStartsAt(DateTime $startsAt);
+    public function setStartsAt(DateTime $startsAt = null);
     public function getEndsAt();
-    public function setEndsAt(DateTime $endsAt);
+    public function setEndsAt(DateTime $endsAt = null);
     public function hasRules();
     public function getRules();
     public function hasRule(RuleInterface $rule);

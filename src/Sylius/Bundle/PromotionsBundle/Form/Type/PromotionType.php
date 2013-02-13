@@ -53,10 +53,12 @@ class PromotionType extends AbstractType
                 'label' => 'sylius.form.promotion.usage_limit'
             ))
             ->add('startsAt', 'date', array(
-                'label' => 'sylius.form.promotion.starts_at'
+                'label' => 'sylius.form.promotion.starts_at',
+                'empty_value' => array('year' => '-', 'month' => '-', 'day' => '-')
             ))
             ->add('endsAt', 'date', array(
-                'label' => 'sylius.form.promotion.ends_at'
+                'label' => 'sylius.form.promotion.ends_at',
+                'empty_value' => array('year' => '-', 'month' => '-', 'day' => '-')
             ))
             ->add('rules', 'collection', array(
                 'type'         => 'sylius_promotion_rule',
