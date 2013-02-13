@@ -6,12 +6,14 @@ sylius:
         promotion:
             name: Name
             description: Description
-            code: Code
             usage_limit: Usage limit
             starts_at: Starts at
             ends_at: Ends at
             rules: Rules
             actions: Actions
+        coupon:
+            code: Code
+            usage_limit: Usage limit
         rule:
             type: Type
             order_total_configuration:

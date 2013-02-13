@@ -44,8 +44,6 @@ class PromotionType extends ObjectBehavior
      */
     function it_should_build_form_with_proper_fields($builder)
     {
-        // $builder->addEventSubscriber(ANY_ARGUMENT)->willReturn($builder);
-
         $builder
             ->add('name', 'text', ANY_ARGUMENT)
             ->shouldBeCalled()
@@ -54,12 +52,6 @@ class PromotionType extends ObjectBehavior
 
         $builder
             ->add('description', 'text', ANY_ARGUMENT)
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('code', 'text', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -78,6 +70,12 @@ class PromotionType extends ObjectBehavior
 
         $builder
             ->add('endsAt', 'date', ANY_ARGUMENT)
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('coupons', 'collection', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

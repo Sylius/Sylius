@@ -24,11 +24,11 @@ class Promotion implements PromotionInterface
     protected $id;
     protected $name;
     protected $description;
-    protected $code;
     protected $usageLimit;
     protected $used;
     protected $startsAt;
     protected $endsAt;
+    protected $coupons;
     protected $rules;
     protected $actions;
     protected $updatedAt;
@@ -37,6 +37,7 @@ class Promotion implements PromotionInterface
     public function __construct()
     {
         $this->used = 0;
+        $this->coupons = new ArrayCollection();
         $this->rules = new ArrayCollection();
         $this->actions = new ArrayCollection();
     }
@@ -64,16 +65,6 @@ class Promotion implements PromotionInterface
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     public function getUsageLimit()
@@ -114,6 +105,35 @@ class Promotion implements PromotionInterface
     public function setEndsAt(DateTime $endsAt = null)
     {
         $this->endsAt = $endsAt;
+    }
+
+    public function hasCoupons()
+    {
+        return !$this->coupons->isEmpty();
+    }
+
+    public function getCoupons()
+    {
+        return $this->coupons;
+    }
+
+    public function hasCoupon(CouponInterface $coupon)
+    {
+        return $this->coupons->contains($coupon);
+    }
+
+    public function addCoupon(CouponInterface $coupon)
+    {
+        if (!$this->hasCoupon($coupon)) {
+            $coupon->setPromotion($this);
+            $this->coupons->add($coupon);
+        }
+    }
+
+    public function removeCoupon(CouponInterface $coupon)
+    {
+        $coupon->setPromotion(null);
+        $this->coupons->removeElement($coupon);
     }
 
     public function hasRules()

@@ -25,8 +25,6 @@ interface PromotionInterface
     public function setName($name);
     public function getDescription();
     public function setDescription($desciption);
-    public function getCode();
-    public function setCode($code);
     public function getUsageLimit();
     public function setUsageLimit($usageLimit);
     public function getUsed();
@@ -35,6 +33,11 @@ interface PromotionInterface
     public function setStartsAt(DateTime $startsAt = null);
     public function getEndsAt();
     public function setEndsAt(DateTime $endsAt = null);
+    public function hasCoupons();
+    public function getCoupons();
+    public function hasCoupon(CouponInterface $coupon);
+    public function addCoupon(CouponInterface $coupon);
+    public function removeCoupon(CouponInterface $coupon);
     public function hasRules();
     public function getRules();
     public function hasRule(RuleInterface $rule);

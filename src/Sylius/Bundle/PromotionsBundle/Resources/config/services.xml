@@ -30,8 +30,9 @@
         <parameter key="sylius.registry.promotion_action.class">Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistry</parameter>
 
         <parameter key="sylius.form.type.promotion.class">Sylius\Bundle\PromotionsBundle\Form\Type\PromotionType</parameter>
-        <parameter key="sylius.form.type.promotion_action.class">Sylius\Bundle\PromotionsBundle\Form\Type\ActionType</parameter>
+        <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionsBundle\Form\Type\CouponType</parameter>
         <parameter key="sylius.form.type.promotion_rule.class">Sylius\Bundle\PromotionsBundle\Form\Type\RuleType</parameter>
+        <parameter key="sylius.form.type.promotion_action.class">Sylius\Bundle\PromotionsBundle\Form\Type\ActionType</parameter>
         <parameter key="sylius.form.type.promotion_rule_choice.class">Sylius\Bundle\PromotionsBundle\Form\Type\RuleChoiceType</parameter>
         <parameter key="sylius.form.type.promotion_rule.order_total_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\OrderTotalConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.item_count_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
@@ -44,6 +45,14 @@
             <argument>sylius</argument>
             <argument>promotion</argument>
             <argument>SyliusPromotionsBundle:Promotion</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.promotion_coupon" class="%sylius.controller.promotion_coupon.class%">
+            <argument>sylius</argument>
+            <argument>promotion_coupon</argument>
+            <argument>SyliusPromotionsBundle:Coupon</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -98,15 +107,19 @@
             <argument type="service" id="sylius.registry.promotion_action" />
             <tag name="form.type" alias="sylius_promotion" />
         </service>
-        <service id="sylius.form.type.promotion_action" class="%sylius.form.type.promotion_action.class%">
-            <argument>%sylius.model.promotion_action.class%</argument>
-            <argument type="service" id="sylius.registry.promotion_action" />
-            <tag name="form.type" alias="sylius_promotion_action" />
+        <service id="sylius.form.type.promotion_coupon" class="%sylius.form.type.promotion_coupon.class%">
+            <argument>%sylius.model.promotion_coupon.class%</argument>
+            <tag name="form.type" alias="sylius_promotion_coupon" />
         </service>
         <service id="sylius.form.type.promotion_rule" class="%sylius.form.type.promotion_rule.class%">
             <argument>%sylius.model.promotion_rule.class%</argument>
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
             <tag name="form.type" alias="sylius_promotion_rule" />
+        </service>
+        <service id="sylius.form.type.promotion_action" class="%sylius.form.type.promotion_action.class%">
+            <argument>%sylius.model.promotion_action.class%</argument>
+            <argument type="service" id="sylius.registry.promotion_action" />
+            <tag name="form.type" alias="sylius_promotion_action" />
         </service>
         <service id="sylius.form.type.promotion_rule_choice" class="%sylius.form.type.promotion_rule_choice.class%">
             <argument>%sylius.promotion_rules%</argument>

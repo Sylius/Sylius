@@ -46,9 +46,6 @@ class PromotionType extends AbstractType
             ->add('description', 'text', array(
                 'label' => 'sylius.form.promotion.description'
             ))
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.promotion.code'
-            ))
             ->add('usageLimit', 'integer', array(
                 'label' => 'sylius.form.promotion.usage_limit'
             ))
@@ -59,6 +56,13 @@ class PromotionType extends AbstractType
             ->add('endsAt', 'date', array(
                 'label' => 'sylius.form.promotion.ends_at',
                 'empty_value' => array('year' => '-', 'month' => '-', 'day' => '-')
+            ))
+            ->add('coupons', 'collection', array(
+                'type'         => 'sylius_promotion_coupon',
+                'required'     => false,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'label'        => 'sylius.form.promotion.coupons'
             ))
             ->add('rules', 'collection', array(
                 'type'         => 'sylius_promotion_rule',

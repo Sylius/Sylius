@@ -36,6 +36,7 @@ class SyliusPromotionsBundle extends Bundle
     {
         $interfaces = array(
             'Sylius\Bundle\PromotionsBundle\Model\PromotionInterface' => 'sylius.model.promotion.class',
+            'Sylius\Bundle\PromotionsBundle\Model\CouponInterface'    => 'sylius.model.promotion_coupon.class',
             'Sylius\Bundle\PromotionsBundle\Model\RuleInterface'      => 'sylius.model.promotion_rule.class',
             'Sylius\Bundle\PromotionsBundle\Model\ActionInterface'    => 'sylius.model.promotion_action.class',
         );

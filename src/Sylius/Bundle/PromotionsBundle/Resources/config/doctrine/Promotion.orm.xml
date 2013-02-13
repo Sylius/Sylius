@@ -24,6 +24,11 @@
         <field name="used" type="integer" />
         <field name="startsAt" column="starts_at" type="datetime" nullable="true"/>
         <field name="endsAt" column="ends_at" type="datetime" nullable="true"/>
+        <one-to-many field="coupons" target-entity="Sylius\Bundle\PromotionsBundle\Model\CouponInterface" mapped-by="promotion">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
         <one-to-many field="rules" target-entity="Sylius\Bundle\PromotionsBundle\Model\RuleInterface" mapped-by="promotion">
             <cascade>
                 <cascade-all />

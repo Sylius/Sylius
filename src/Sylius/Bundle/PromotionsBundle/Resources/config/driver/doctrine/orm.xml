@@ -18,10 +18,12 @@
 
     <parameters>
         <parameter key="sylius.model.promotion.class">Sylius\Bundle\PromotionsBundle\Entity\Promotion</parameter>
+        <parameter key="sylius.model.promotion_coupon.class">Sylius\Bundle\PromotionsBundle\Entity\Coupon</parameter>
         <parameter key="sylius.model.promotion_rule.class">Sylius\Bundle\PromotionsBundle\Entity\Rule</parameter>
         <parameter key="sylius.model.promotion_action.class">Sylius\Bundle\PromotionsBundle\Entity\Action</parameter>
 
         <parameter key="sylius.repository.promotion.class">Sylius\Bundle\PromotionsBundle\Repository\PromotionRepository</parameter>
+        <parameter key="sylius.repository.promotion_coupon.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.promotion_rule.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.promotion_action.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
@@ -51,6 +53,20 @@
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
                     <argument>%sylius.model.promotion_rule.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.promotion_coupon" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.promotion_coupon" class="%sylius.repository.promotion_coupon.class%">
+            <argument type="service" id="sylius.manager.promotion_coupon" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.promotion_coupon"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.promotion_coupon.class%</argument>
                 </service>
             </argument>
         </service>

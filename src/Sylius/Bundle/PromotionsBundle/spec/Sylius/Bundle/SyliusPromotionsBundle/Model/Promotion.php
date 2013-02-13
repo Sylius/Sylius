@@ -38,17 +38,6 @@ class Promotion extends ObjectBehavior
         $this->getDescription()->shouldReturn('New Year Sale 50% off.');
     }
 
-    function it__should_not_have_coupon_code_by_default()
-    {
-        $this->getCode()->shouldReturn(null);
-    }
-
-    function its_coupon_code_should_be_mutable()
-    {
-        $this->setCode('xxx');
-        $this->getCode()->shouldReturn('xxx');
-    }
-
     function it_should_have_no_usage_limit_by_default()
     {
         $this->getUsageLimit()->shouldReturn(null);
@@ -87,6 +76,40 @@ class Promotion extends ObjectBehavior
     {
         $this->setEndsAt($date);
         $this->getEndsAt()->shouldReturn($date);
+    }
+
+    function it_should_initialize_coupons_collection_by_default()
+    {
+        $this->getCoupons()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    /**
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface $coupon
+     */
+    function it_should_add_coupons_properly($coupon)
+    {
+        $this->hasCoupon($coupon)->shouldReturn(false);
+
+        $coupon->setPromotion($this)->shouldBeCalled();
+        $this->addCoupon($coupon);
+
+        $this->hasCoupon($coupon)->shouldReturn(true);
+    }
+
+    /**
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface $coupon
+     */
+    function it_should_remove_coupons_properly($coupon)
+    {
+        $this->hasCoupon($coupon)->shouldReturn(false);
+
+        $coupon->setPromotion($this)->shouldBeCalled();
+        $this->addCoupon($coupon);
+
+        $coupon->setPromotion(null)->shouldBeCalled();
+        $this->removeCoupon($coupon);
+
+        $this->hasCoupon($coupon)->shouldReturn(false);
     }
 
     function it_should_initialize_rules_collection_by_default()
