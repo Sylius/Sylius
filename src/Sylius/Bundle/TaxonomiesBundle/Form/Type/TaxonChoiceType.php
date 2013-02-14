@@ -25,6 +25,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonChoiceType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['multiple']) {
@@ -32,6 +35,9 @@ class TaxonChoiceType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'choice';
@@ -64,6 +70,6 @@ class TaxonChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxonomies_taxon_choice';
+        return 'sylius_taxon_choice';
     }
 }

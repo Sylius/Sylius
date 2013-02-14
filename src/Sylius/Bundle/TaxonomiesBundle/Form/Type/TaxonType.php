@@ -46,9 +46,12 @@ class TaxonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.taxon.name'
+            ))
             ->add('permalink', 'text', array(
-                'required' => false
+                'required' => false,
+                'label' => 'sylius.form.taxon.permalink'
             ))
             ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
         ;
@@ -71,6 +74,6 @@ class TaxonType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxonomies_taxon';
+        return 'sylius_taxon';
     }
 }

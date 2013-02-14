@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -27,13 +27,26 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonSelectionType extends AbstractType
 {
+    /**
+     * Taxonomies repository.
+     *
+     * @var RepositoryInterface
+     */
     protected $repository;
 
-    public function __construct(ObjectRepository $repository)
+    /**
+     * Constructor.
+     *
+     * @var RepositoryInterface $repository
+     */
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $taxonomies = $this->repository->findAll();
@@ -68,6 +81,6 @@ class TaxonSelectionType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxonomies_taxon_selection';
+        return 'sylius_taxon_selection';
     }
 }

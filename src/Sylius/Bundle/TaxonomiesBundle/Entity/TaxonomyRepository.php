@@ -20,24 +20,33 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class TaxonomyRepository extends EntityRepository
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()
             ->select('taxonomy, root, taxons')
             ->leftJoin('taxonomy.root', 'root')
-            ->leftJoin('taxonomy.taxons', 'taxons')
+            ->leftJoin('root.children', 'taxons')
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getCollectionQueryBuilder()
     {
         return parent::getQueryBuilder()
             ->select('taxonomy, root, taxons')
             ->leftJoin('taxonomy.root', 'root')
-            ->leftJoin('taxonomy.taxons', 'taxons')
+            ->leftJoin('root.children', 'taxons')
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getAlias()
     {
         return 'taxonomy';

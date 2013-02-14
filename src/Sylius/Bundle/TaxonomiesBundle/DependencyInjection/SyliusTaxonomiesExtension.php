@@ -46,29 +46,31 @@ class SyliusTaxonomiesExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_taxonomies.driver', $driver);
-        $container->setParameter('sylius_taxonomies.engine', $engine);
+        $container->setParameter('sylius.engine', $engine);
 
         $classes = $config['classes'];
 
         $taxonomyClasses = $classes['taxonomy'];
         $taxonClasses = $classes['taxon'];
 
+        $this->mapClassParameters($config['classes'], $container);
+
         $loader->load('services.xml');
+    }
 
-        $container->setParameter('sylius_taxonomies.model.taxonomy.class', $taxonomyClasses['model']);
-        $container->setParameter('sylius_taxonomies.controller.taxonomy.class', $taxonomyClasses['controller']);
-        $container->setParameter('sylius_taxonomies.form.type.taxonomy.class', $taxonomyClasses['form']);
-
-        if (isset($taxonomyClasses['repository'])) {
-            $container->setParameter('sylius_taxonomies.repository.taxonomy.class', $taxonomyClasses['repository']);
-        }
-
-        $container->setParameter('sylius_taxonomies.model.taxon.class', $taxonClasses['model']);
-        $container->setParameter('sylius_taxonomies.controller.taxon.class', $taxonClasses['controller']);
-        $container->setParameter('sylius_taxonomies.form.type.taxon.class', $taxonClasses['form']);
-
-        if (isset($taxonClasses['repository'])) {
-            $container->setParameter('sylius_taxonomies.repository.taxon.class', $taxonClasses['repository']);
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $service = $service === 'form' ? 'form.type' : $service;
+                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+            }
         }
     }
 }

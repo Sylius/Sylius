@@ -20,30 +20,69 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Taxonomy implements TaxonomyInterface
 {
+    /**
+     * Taxonomy id.
+     *
+     * @var mixed
+     */
     protected $id;
+
+    /**
+     * Taxonomy name.
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Root taxon.
+     *
+     * @var TaxonInterface
+     */
     protected $root;
+
+    /**
+     * All taxons collection.
+     *
+     * @var Collection
+     */
     protected $taxons;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->taxons = new ArrayCollection();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return $this->getName();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRoot()
     {
         return $this->root;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setRoot(TaxonInterface $root)
     {
         $this->root = $root;
@@ -51,47 +90,62 @@ class Taxonomy implements TaxonomyInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTaxons()
     {
-        $root = $this->root;
-
-        return $this->taxons->filter(function (TaxonInterface $taxon) {
-            return !$taxon->isRoot();
-        });
+        return $this->root->getChildren();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasTaxon(TaxonInterface $taxon)
     {
-        return $this->taxons->contains($taxon);
+        return $this->root->hasTaxon($taxon);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addTaxon(TaxonInterface $taxon)
     {
         if (!$this->hasTaxon($taxon)) {
             $taxon->setTaxonomy($this);
-            $this->taxons->add($taxon);
+            $this->root->addTaxon($taxon);
         }
 
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeTaxon(TaxonInterface $taxon)
     {
         if ($this->hasTaxon($taxon)) {
             $taxon->setTaxonomy(null);
-            $this->taxons->removeElement($taxon);
+            $this->root->removeTaxon($taxon);
         }
 
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return $this->root->getName();
+        return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
+        $this->name = $name;
         $this->root->setName($name);
 
         return $this;

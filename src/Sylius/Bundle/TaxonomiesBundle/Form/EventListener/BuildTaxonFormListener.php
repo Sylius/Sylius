@@ -67,7 +67,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
 
         $taxonomy = $taxon->getTaxonomy();
 
-        $form->add($this->factory->createNamed('parent', 'sylius_taxonomies_taxon_choice', $taxon->getParent(), array(
+        $form->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
             'taxonomy' => $taxonomy,
             'required' => false
         )));
