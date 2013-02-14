@@ -43,11 +43,12 @@ class Taxonomy extends ObjectBehavior
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function it_should_get_name_from_root_taxon($taxon)
+    function it_should_not_have_name_by_default($taxon)
     {
-        $taxon->getName()->willReturn('Brand');
+        $taxon->setName('Brand')->shouldBeCalled();
         $this->setRoot($taxon);
 
+        $this->setName('Brand');
         $this->getName()->shouldReturn('Brand');
     }
 
@@ -60,61 +61,5 @@ class Taxonomy extends ObjectBehavior
         $this->setRoot($taxon);
 
         $this->setName('Category');
-    }
-
-    function it_should_intitialize_taxon_collection_by_defualt()
-    {
-        $this->getTaxons()->shouldHaveType('Doctrine\Common\Collections\Collection');
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_should_not_contain_taxon_unless_added($taxon)
-    {
-        $this->hasTaxon($taxon)->shouldReturn(false);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_should_contain_taxon_when_added($taxon)
-    {
-        $this->addTaxon($taxon);
-        $this->hasTaxon($taxon)->shouldReturn(true);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_should_not_contain_taxon_after_removing($taxon)
-    {
-        $this->addTaxon($taxon);
-        $this->hasTaxon($taxon)->shouldReturn(true);
-
-        $this->removeTaxon($taxon);
-        $this->hasTaxon($taxon)->shouldReturn(false);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_should_assign_itself_to_taxon_when_adding($taxon)
-    {
-        $taxon->setTaxonomy($this)->shouldBeCalled();
-
-        $this->addTaxon($taxon);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_should_detach_itself_from_taxon_when_removing($taxon)
-    {
-        $taxon->setTaxonomy($this)->shouldBeCalled();
-        $this->addTaxon($taxon);
-
-        $taxon->setTaxonomy(null)->shouldBeCalled();
-        $this->removeTaxon($taxon);
     }
 }

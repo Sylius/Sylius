@@ -34,7 +34,7 @@ class TaxonType extends ObjectBehavior
     {
         $builder->getFormFactory()->willReturn($factory);
 
-        $builder->add('name', 'text')->shouldBeCalled()->willReturn($builder);
+        $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
         $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
