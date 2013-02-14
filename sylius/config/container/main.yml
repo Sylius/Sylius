@@ -66,6 +66,9 @@ swiftmailer:
 sylius_settings:
     driver: doctrine/orm
 
+sylius_taxonomies:
+    driver: doctrine/orm
+
 sylius_assortment:
     driver: doctrine/orm
     classes:

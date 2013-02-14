@@ -38,6 +38,7 @@ class SyliusKernel extends Kernel
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
             new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
+            new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

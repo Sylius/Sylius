@@ -60,6 +60,69 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are following taxonomies defined:$/
+     */
+    public function thereAreFollowingTaxonomies(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $this->thereIsTaxonomy($data['name']);
+        }
+    }
+
+    /**
+     * @Given /^I created taxonomy "([^""]*)"$/
+     */
+    public function thereIsTaxonomy($name)
+    {
+        $taxonomy = $this->getRepository('taxonomy')->createNew();
+        $taxonomy->setName($name);
+
+        $this->getEntityManager()->persist($taxonomy);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given /^taxonomy "([^""]*)" has following taxons:$/
+     */
+    public function taxonomyHasFollowingTaxons($taxonomyName, TableNode $taxonsTable)
+    {
+        $taxonomy = $this->findOneByName('taxonomy', $taxonomyName);
+        $manager = $this->getEntityManager();
+
+        $taxons = array();
+
+        foreach ($taxonsTable->getRows() as $node) {
+            $taxonList = explode('>', $node[0]);
+
+            $parent = null;
+
+            foreach ($taxonList as $taxonName) {
+                $taxonName = trim($taxonName);
+
+                if (!isset($taxons[$taxonName])) {
+                    $taxon = $this->getRepository('taxon')->createNew();
+                    $taxon->setTaxonomy($taxonomy);
+                    $taxon->setName($taxonName);
+
+                    if (null !== $parent) {
+                        $taxon->setParent($parent);
+                    }
+
+                    $manager->persist($taxon);
+                    $manager->flush($taxon);
+
+                    $taxons[$taxonName] = $taxon;
+                    $parent = $taxon;
+                }
+            }
+        }
+
+        $manager->flush();
+    }
+
+    /**
      * @Given /^there are following users:$/
      */
     public function thereAreFollowingUsers(TableNode $table)
