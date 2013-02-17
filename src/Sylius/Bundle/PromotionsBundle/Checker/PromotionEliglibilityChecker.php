@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionsBundle\Checker;
 
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 
 /**
@@ -37,6 +38,10 @@ class PromotionEliglibilityChecker implements PromotionEliglibilityCheckerInterf
             if (false === $checker->isEligible($order, $rule->getConfiguration())) {
                 return false;
             }
+        }
+
+        if ($order instanceof CouponAwareOrderInterface && $promotion->hasCoupons() && !$promotion->hasCoupon($order->getCoupon())) {
+            return false;
         }
 
         return true;

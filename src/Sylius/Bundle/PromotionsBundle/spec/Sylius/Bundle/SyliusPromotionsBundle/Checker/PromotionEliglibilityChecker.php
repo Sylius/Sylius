@@ -68,4 +68,52 @@ class PromotionEliglibilityChecker extends ObjectBehavior
 
         $this->isEligible($order, $promotion)->shouldReturn(false);
     }
+
+    /**
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
+     */
+    function it_should_recognize_order_as_eligible_if_promotion_have_no_coupon_codes($registry, $order, $promotion)
+    {
+        $configuration = array();
+
+        $promotion->getRules()->shouldBeCalled()->willReturn(array());
+        $promotion->hasCoupons()->shouldBeCalled()->willReturn(false);
+
+        $this->isEligible($order, $promotion)->shouldReturn(true);
+    }
+
+    /**
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface           $coupon
+     */
+    function it_should_recognize_order_as_not_eligible_if_coupon_code_does_not_match($registry, $order, $promotion, $coupon)
+    {
+        $configuration = array();
+
+        $order->getCoupon()->shouldBeCalled()->willReturn($coupon);
+        $promotion->getRules()->shouldBeCalled()->willReturn(array());
+        $promotion->hasCoupons()->shouldBeCalled()->willReturn(true);
+        $promotion->hasCoupon($coupon)->shouldBeCalled()->willReturn(false);
+
+        $this->isEligible($order, $promotion)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface           $coupon
+     */
+    function it_should_recognize_order_as_eligible_if_coupon_code_match($registry, $order, $promotion, $coupon)
+    {
+        $configuration = array();
+
+        $order->getCoupon()->shouldBeCalled()->willReturn($coupon);
+        $promotion->getRules()->shouldBeCalled()->willReturn(array());
+        $promotion->hasCoupons()->shouldBeCalled()->willReturn(true);
+        $promotion->hasCoupon($coupon)->shouldBeCalled()->willReturn(true);
+
+        $this->isEligible($order, $promotion)->shouldReturn(true);
+    }
 }
