@@ -16,7 +16,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                   					  http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Document\Taxonomy" collection="sylius_taxonomies_taxonomy">
+    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Document\Taxonomy" collection="sylius_taxonomy">
+        <field name="name" column="name" type="string" />
     </mapped-superclass>
 
 </doctrine-mongo-mapping>

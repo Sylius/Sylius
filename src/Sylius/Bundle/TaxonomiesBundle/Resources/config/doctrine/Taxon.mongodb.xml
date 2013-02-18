@@ -16,8 +16,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                                       http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
-                                      
-    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Document\Taxon" collection="sylius_taxonomies_taxon">
+
+    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Document\Taxon" collection="sylius_taxon">
         <order-by>
             <order-by-field name="left" direction="DESC" />
         </order-by>
@@ -36,6 +36,6 @@
         </field>
         <field name="level" column="tree_level" type="int">
             <gedmo:tree-level />
-        </field>            
+        </field>
     </mapped-superclass>
 </doctrine-mongo-mapping>

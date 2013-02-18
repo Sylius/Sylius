@@ -17,47 +17,47 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_taxonomies.repository.taxonomy.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
-        <parameter key="sylius_taxonomies.repository.taxon.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
+        <parameter key="sylius.repository.taxonomy.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
+        <parameter key="sylius.repository.taxon.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_taxonomies.manager.taxonomy" alias="doctrine.odm.mongodb.document_manager" />
-        <service id="sylius_taxonomies.doctrine.odm.mongodb.metadata.taxonomy"
-                factory-service="sylius_taxonomies.manager.taxonomy"
+        <service id="sylius.manager.taxonomy" alias="doctrine.odm.mongodb.document_manager" />
+        <service id="sylius.doctrine.odm.mongodb.metadata.taxonomy"
+                factory-service="sylius.manager.taxonomy"
                 factory-method="getClassMetadata"
                 class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
                 public="false"
                 >
-            <argument>%sylius_taxonomies.model.taxonomy.class%</argument>
+            <argument>%sylius.model.taxonomy.class%</argument>
         </service>
-        <service id="sylius_taxonomies.doctrine.odm.mongodb.unitOfWork"
+        <service id="sylius.doctrine.odm.mongodb.unitOfWork"
                 factory-service="doctrine.odm.mongodb.document_manager"
                 factory-method="getUnitOfWork"
                 class="Doctrine\ODM\MongoDB\UnitOfWork"
                 public="false"
-        >                    
-        </service>        
-
-        <service id="sylius_taxonomies.repository.taxonomy" class="%sylius_taxonomies.repository.taxonomy.class%">
-            <argument type="service" id="sylius_taxonomies.manager.taxonomy" />
-            <argument type="service" id="sylius_taxonomies.doctrine.odm.mongodb.unitOfWork" />
-            <argument type="service" id="sylius_taxonomies.doctrine.odm.mongodb.metadata.taxonomy" />
+        >
         </service>
 
-        <service id="sylius_taxonomies.manager.taxon" alias="doctrine.odm.mongodb.document_manager" />
-        <service id="sylius_taxonomies.doctrine.odm.mongodb.metadata.taxon"
-                factory-service="sylius_taxonomies.manager.taxon"
+        <service id="sylius.repository.taxonomy" class="%sylius.repository.taxonomy.class%">
+            <argument type="service" id="sylius.manager.taxonomy" />
+            <argument type="service" id="sylius.doctrine.odm.mongodb.unitOfWork" />
+            <argument type="service" id="sylius.doctrine.odm.mongodb.metadata.taxonomy" />
+        </service>
+
+        <service id="sylius.manager.taxon" alias="doctrine.odm.mongodb.document_manager" />
+        <service id="sylius.doctrine.odm.mongodb.metadata.taxon"
+                factory-service="sylius.manager.taxon"
                 factory-method="getClassMetadata"
                 class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
                 public="false"
         >
-            <argument>%sylius_taxonomies.model.taxon.class%</argument>
+            <argument>%sylius.model.taxon.class%</argument>
         </service>
-        <service id="sylius_taxonomies.repository.taxon" class="%sylius_taxonomies.repository.taxon.class%">
-            <argument type="service" id="sylius_taxonomies.manager.taxon" />
-            <argument type="service" id="sylius_taxonomies.doctrine.odm.mongodb.unitOfWork" />
-            <argument type="service" id="sylius_taxonomies.doctrine.odm.mongodb.metadata.taxon" />
+        <service id="sylius.repository.taxon" class="%sylius.repository.taxon.class%">
+            <argument type="service" id="sylius.manager.taxon" />
+            <argument type="service" id="sylius.doctrine.odm.mongodb.unitOfWork" />
+            <argument type="service" id="sylius.doctrine.odm.mongodb.metadata.taxon" />
         </service>
     </services>
 
