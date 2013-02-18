@@ -16,7 +16,7 @@ class DefaultParameter extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Entity\DefaultParameter');
     }
 
-    function it_should_be_a_Sylius_settings_parameter()
+    function it_should_implement_Sylius_parameter_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Model\ParameterInterface');
     }

@@ -42,7 +42,7 @@ class SyliusSettingsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\SettingsBundle\Model\ParameterInterface' => 'sylius_settings.model.parameter.class',
+            'Sylius\Bundle\SettingsBundle\Model\ParameterInterface' => 'sylius.model.parameter.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_settings', $interfaces));

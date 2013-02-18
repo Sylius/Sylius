@@ -58,9 +58,4 @@ class Parameter extends ObjectBehavior
         $this->setValue(true);
         $this->getValue()->shouldReturn(true);
     }
-
-    function it_should_not_have_modification_date_by_default()
-    {
-        $this->getModifiedAt()->shouldReturn(null);
-    }
 }

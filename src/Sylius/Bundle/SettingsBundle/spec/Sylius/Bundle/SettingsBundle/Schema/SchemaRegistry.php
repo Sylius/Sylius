@@ -31,11 +31,9 @@ class SchemaRegistry extends ObjectBehavior
      */
     function it_should_register_schema_properly($schema)
     {
-        $schema->getNamespace()->willReturn('general-settings');
-
-        $this->hasSchema('general-settings')->shouldReturn(false);
-        $this->registerSchema($schema);
-        $this->hasSchema('general-settings')->shouldReturn(true);
+        $this->hasSchema('general')->shouldReturn(false);
+        $this->registerSchema('general', $schema);
+        $this->hasSchema('general')->shouldReturn(true);
     }
 
     /**
@@ -43,13 +41,11 @@ class SchemaRegistry extends ObjectBehavior
      */
     function it_should_unregister_schema_properly($schema)
     {
-        $schema->getNamespace()->willReturn('general-settings');
+        $this->registerSchema('general', $schema);
+        $this->hasSchema('general')->shouldReturn(true);
 
-        $this->registerSchema($schema);
-        $this->hasSchema('general-settings')->shouldReturn(true);
-
-        $this->unregisterSchema('general-settings');
-        $this->hasSchema('general-settings')->shouldReturn(false);
+        $this->unregisterSchema('general');
+        $this->hasSchema('general')->shouldReturn(false);
     }
 
     /**
@@ -57,10 +53,8 @@ class SchemaRegistry extends ObjectBehavior
      */
     function it_should_retrieve_registered_schema_by_namespace($schema)
     {
-        $schema->getNamespace()->willReturn('general-settings');
-
-        $this->registerSchema($schema);
-        $this->getSchema('general-settings')->shouldReturn($schema);
+        $this->registerSchema('general', $schema);
+        $this->getSchema('general')->shouldReturn($schema);
     }
 
     function it_should_complain_if_trying_to_retrieve_non_existing_schema()

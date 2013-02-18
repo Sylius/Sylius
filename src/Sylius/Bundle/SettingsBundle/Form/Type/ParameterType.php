@@ -45,9 +45,15 @@ class ParameterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('namespace', 'text')
-            ->add('name', 'text')
-            ->add('value', 'text')
+            ->add('namespace', 'text', array(
+                'label' => 'sylius.form.parameter.namespace'
+            ))
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.parameter.name'
+            ))
+            ->add('value', 'text', array(
+                'label' => 'sylius.form.parameter.value'
+            ))
         ;
     }
 
@@ -68,6 +74,6 @@ class ParameterType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_settings_parameter';
+        return 'sylius_parameter';
     }
 }

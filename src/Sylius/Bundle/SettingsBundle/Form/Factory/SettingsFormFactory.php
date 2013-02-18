@@ -19,23 +19,43 @@ use Symfony\Component\Form\FormFactoryInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FormFactory
+class SettingsFormFactory implements SettingsFormFactoryInterface
 {
-    private $schemaRegistry;
-    private $formFactory;
+    /**
+     * Schema registry.
+     *
+     * @var SchemaRegistryInterface
+     */
+    protected $schemaRegistry;
 
+    /**
+     * Form factory.
+     *
+     * @var FormFactoryInterface
+     */
+    protected $formFactory;
+
+    /**
+     * Constructor.
+     *
+     * @param SchemaRegistryInterface $schemaRegistry
+     * @param FormFactoryInterface    $formFactory
+     */
     public function __construct(SchemaregistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->formFactory = $formFactory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function create($namespace)
     {
         $schema = $this->schemaRegistry->getSchema($namespace);
         $builder = $this->formFactory->createBuilder('form', null, array('data_class' => null));
 
-        $schema->build($builder);
+        $schema->buildForm($builder);
 
         return $builder->getForm();
     }

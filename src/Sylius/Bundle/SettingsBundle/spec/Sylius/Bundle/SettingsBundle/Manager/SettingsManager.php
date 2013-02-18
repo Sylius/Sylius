@@ -12,19 +12,14 @@ use PHPSpec2\ObjectBehavior;
 class SettingsManager extends ObjectBehavior
 {
     /**
-     * @param Doctrine\Common\Cache\Cache                  $cache
-     * @param Doctrine\Common\Persistence\ObjectManager    $manager
-     * @param Doctrine\Common\Persistence\ObjectRepository $repository
+     * @param Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface $registry
+     * @param Doctrine\Common\Cache\Cache                                 $cache
+     * @param Doctrine\Common\Persistence\ObjectManager                   $manager
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface      $repository
      */
-    function let($cache, $manager, $repository)
+    function let($registry, $cache, $manager, $repository)
     {
-        $namespaces = array(
-            'general-settings',
-            'taxation-settings',
-            'seo-settings',
-        );
-
-        $this->beConstructedWith($namespaces, $cache, $manager, $repository);
+        $this->beConstructedWith($registry, $manager, $repository, $cache);
     }
 
     function it_should_be_initializable()
@@ -37,11 +32,14 @@ class SettingsManager extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface');
     }
 
-    function it_should_fetch_cache_if_available_when_loading_settings($cache)
+    /**
+     * @param Sylius\Bundle\SettingsBundle\Model\SettingsInterface $settings
+     */
+    function it_should_fetch_cache_if_available_when_loading_settings($cache, $settings)
     {
-        $cache->contains('general-settings')->shouldBeCalled()->willReturn(true);
-        $cache->fetch('general-settings')->shouldBeCalled()->willReturn(array());
+        $cache->contains('general')->shouldBeCalled()->willReturn(true);
+        $cache->fetch('general')->shouldBeCalled()->willReturn($settings);
 
-        $this->loadSettings('general-settings')->shouldReturn(array());
+        $this->loadSettings('general')->shouldReturn($settings);
     }
 }

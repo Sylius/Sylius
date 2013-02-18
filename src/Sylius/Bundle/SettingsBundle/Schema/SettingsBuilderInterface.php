@@ -11,18 +11,13 @@
 
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
- * Base schema class.
+ * Settings builder interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class Schema implements SchemaInterface
+interface SettingsBuilderInterface extends OptionsResolverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataTransformers()
-    {
-        return array();
-    }
 }

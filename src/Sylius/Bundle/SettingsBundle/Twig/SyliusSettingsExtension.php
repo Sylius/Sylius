@@ -46,7 +46,7 @@ class SyliusSettingsExtension extends Twig_Extension
     {
         return array(
             'sylius_settings_all' => new Twig_Function_Method($this, 'getSettings'),
-            'sylius_settings_get' => new Twig_Function_Method($this, 'getParameter'),
+            'sylius_settings_get' => new Twig_Function_Method($this, 'getSettingsParameter'),
         );
     }
 
@@ -70,11 +70,11 @@ class SyliusSettingsExtension extends Twig_Extension
      *
      * @return mixed
      */
-    public function getParameter($namespace, $name)
+    public function getSettingsParameter($namespace, $name)
     {
         $settings = $this->settingsManager->loadSettings($namespace);
 
-        return $settings[$name];
+        return $settings->get($name);
     }
 
     /**

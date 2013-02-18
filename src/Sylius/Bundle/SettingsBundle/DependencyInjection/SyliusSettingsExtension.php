@@ -52,15 +52,15 @@ class SyliusSettingsExtension extends Extension
         $parameterClasses = $classes['parameter'];
 
         if (isset($parameterClasses['model'])) {
-            $container->setParameter('sylius_settings.model.parameter.class', $parameterClasses['model']);
+            $container->setParameter('sylius.model.parameter.class', $parameterClasses['model']);
         }
 
         if (isset($parameterClasses['repository'])) {
-            $container->setParameter('sylius_settings.repository.parameter.class', $parameterClasses['repository']);
+            $container->setParameter('sylius.repository.parameter.class', $parameterClasses['repository']);
         }
 
-        $container->setParameter('sylius_settings.controller.parameter.class', $parameterClasses['controller']);
-        $container->setParameter('sylius_settings.form.type.parameter.class', $parameterClasses['form']);
+        $container->setParameter('sylius.controller.parameter.class', $parameterClasses['controller']);
+        $container->setParameter('sylius.form.type.parameter.class', $parameterClasses['form']);
 
         $loader->load('services.xml');
     }

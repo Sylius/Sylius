@@ -20,10 +20,9 @@
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle":        ">=2.2,<2.3-dev",
-        "sylius/resource-bundle":          "0.1.*",
-        "liip/doctrine-cache-bundle":      "*",
-        "stof/doctrine-extensions-bundle": "1.1.*"
+        "symfony/framework-bundle":   ">=2.2,<2.3-dev",
+        "sylius/resource-bundle":     "0.1.*",
+        "liip/doctrine-cache-bundle": "*"
 
     },
     "require-dev": {

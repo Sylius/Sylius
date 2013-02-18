@@ -18,49 +18,93 @@ namespace Sylius\Bundle\SettingsBundle\Model;
  */
 class Parameter implements ParameterInterface
 {
+    /**
+     * Parameter id.
+     *
+     * @var mixed
+     */
     protected $id;
-    protected $name;
-    protected $namespace;
-    protected $value;
-    protected $modifiedAt;
 
+    /**
+     * Parameter settings namespace.
+     *
+     * @var string
+     */
+    protected $namespace;
+
+    /**
+     * Parameter name.
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Parameter value.
+     *
+     * @var string
+     */
+    protected $value;
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getNamespace()
     {
         return $this->namespace;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValue()
     {
         return null === $this->value ? null : unserialize($this->value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValue($value)
     {
         $this->value = serialize($value);
-    }
 
-    public function getModifiedAt()
-    {
-        return $this->modifiedAt;
+        return $this;
     }
 }

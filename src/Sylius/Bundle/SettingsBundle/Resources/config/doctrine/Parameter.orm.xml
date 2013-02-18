@@ -18,9 +18,6 @@
         <field name="namespace" column="namespace" type="string" />
         <field name="name" column="name" type="string" />
         <field name="value" column="value" type="string" nullable="true" />
-        <field name="modifiedAt" column="modified_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
-        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

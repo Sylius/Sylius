@@ -29,17 +29,24 @@ class SyliusSettingsExtension extends ObjectBehavior
         $this->shouldHaveType('Twig_Extension');
     }
 
-    function it_should_return_settings_by_namespace($settingsManager)
+    /**
+     * @param Sylius\Bundle\SettingsBundle\Model\SettingsInterface $settings
+     */
+    function it_should_return_settings_by_namespace($settingsManager, $settings)
     {
-        $settingsManager->loadSettings('general-settings')->shouldBeCalled()->willReturn(array('param' => 'value'));
+        $settingsManager->loadSettings('taxation')->shouldBeCalled()->willReturn($settings);
 
-        $this->getSettings('general-settings')->shouldReturn(array('param' => 'value'));
+        $this->getSettings('taxation')->shouldReturn($settings);
     }
 
-    function it_should_return_settings_parameter_by_namespace_and_name($settingsManager)
+    /**
+     * @param Sylius\Bundle\SettingsBundle\Model\SettingsInterface $settings
+     */
+    function it_should_return_settings_parameter_by_namespace_and_name($settingsManager, $settings)
     {
-        $settingsManager->loadSettings('general-settings')->shouldBeCalled()->willReturn(array('param' => 'value'));
+        $settingsManager->loadSettings('shipping')->shouldBeCalled()->willReturn($settings);
+        $settings->get('price')->willReturn(19.99);
 
-        $this->getParameter('general-settings', 'param')->shouldReturn('value');
+        $this->getSettingsParameter('shipping', 'price')->shouldReturn(19.99);
     }
 }

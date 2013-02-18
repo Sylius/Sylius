@@ -11,12 +11,14 @@
 
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
-use Symfony\Component\Form\DataTransformerInterface;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 
 /**
  * Settings manager.
@@ -25,110 +27,116 @@ use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
  */
 class SettingsManager implements SettingsManagerInterface
 {
+    /**
+     * Schema registry.
+     *
+     * @var SchemaRegistryInterface
+     */
     protected $schemaRegistry;
-    protected $manager;
-    protected $repository;
+
+    /**
+     * Object manager.
+     *
+     * @var ObjectManager
+     */
+    protected $parameterManager;
+
+    /**
+     * Parameter object repository.
+     *
+     * @var RepositoryInterface
+     */
+    protected $parameterRepository;
+
+    /**
+     * Cache.
+     *
+     * @var Cache
+     */
     protected $cache;
 
-    public function __construct(SchemaRegistryInterface $schemaRegistry, Cache $cache, ObjectManager $manager, ObjectRepository $repository)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache)
     {
         $this->schemaRegistry = $schemaRegistry;
-        $this->manager = $manager;
-        $this->repository = $repository;
+        $this->parameterManager = $parameterManager;
+        $this->parameterRepository = $parameterRepository;
         $this->cache = $cache;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadSettings($namespace)
     {
+        if ($this->cache->contains($namespace)) {
+            return $this->cache->fetch($namespace);
+        }
+
+        $schema = $this->schemaRegistry->getSchema($namespace);
+        $parameters = $this->getParameters($namespace);
+
+        $settingsBuilder = new SettingsBuilder();
+        $schema->buildSettings($settingsBuilder);
+        $parameters = $settingsBuilder->resolve($parameters);
+
+        $settings = new Settings($parameters);
+
+        return $settings;
+    }
+
+    public function saveSettings($namespace, SettingsInterface $settings)
+    {
         $schema = $this->schemaRegistry->getSchema($namespace);
 
-        if ($this->cache->contains($namespace)) {
-            $this->reverseTransform($schema, $this->cache->fetch($namespace));
+        $settingsBuilder = new SettingsBuilder();
+        $schema->buildSettings($settingsBuilder);
+        $parameters = $settingsBuilder->resolve($settings->getParameters());
+
+        $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
+        $persistedParametersMap = array();
+
+        foreach ($persistedParameters as $parameter) {
+            $persistedParametersMap[$parameter->getName()] = $parameter;
         }
 
-        $parameters = $this->getParameters($namespace);
-        $settings = array();
+        foreach ($parameters as $name => $value) {
+            if (isset($persistedParametersMap[$name])) {
+                $persistedParametersMap[$name]->setValue($value);
+            } else {
+                $parameter = $this->parameterRepository->createNew();
 
-        foreach ($parameters as $parameter) {
-            $settings[$parameter->getName()] = $parameter->getValue();
+                $parameter
+                    ->setNamespace($namespace)
+                    ->setName($name)
+                    ->setValue($value)
+                ;
+
+                $this->parameterManager->persist($parameter);
+            }
         }
+
+        $this->parameterManager->flush();
+
+        $settings->setParameters($parameters);
 
         $this->cache->save($namespace, $settings);
-
-        return $this->reverseTransform($schema, $settings);
     }
 
-    public function saveSettings($namespace, array $settings)
-    {
-        $schema = $this->schemaRegistry->getSchema($namespace);
-        $settings = $this->transform($schema, $settings);
-
-        $parameters = $this->getParameters($namespace);
-        $originalSettings = $settings;
-
-        foreach ($parameters as $parameter) {
-            $name = $parameter->getName();
-
-            if (isset($settings[$name])) {
-                $parameter->setValue($settings[$name]);
-
-                $this->manager->persist($parameter);
-
-                unset($settings[$name]);
-            }
-        }
-
-        foreach ($settings as $name => $value) {
-            $parameter = $this->repository->createNew();
-
-            $parameter->setNamespace($namespace);
-            $parameter->setName($name);
-            $parameter->setValue($value);
-
-            $this->manager->persist($parameter);
-        }
-
-        $this->cache->save($namespace, $originalSettings);
-
-        $this->manager->flush();
-    }
-
-    private function transform(SchemaInterface $schema, array $settings)
-    {
-        $transformers = $schema->getDataTransformers();
-
-        foreach ($transformers as $key => $transformer) {
-            if (!$transformer instanceof DataTransformerInterface) {
-                throw new \InvalidArgumentException('Settings parameter transformers must be instance of "Symfony\Component\Form\DataTransformerInterface"');
-            }
-
-            if (array_key_exists($key, $settings)) {
-                $settings[$key] = $transformer->transform($settings[$key]);
-            }
-        }
-
-        return $settings;
-    }
-
-    private function reverseTransform(SchemaInterface $schema, array $settings)
-    {
-        $transformers = $schema->getDataTransformers();
-
-        foreach ($transformers as $key => $transformer) {
-            if (!$transformer instanceof DataTransformerInterface) {
-                throw new \InvalidArgumentException('Settings parameter transformers must be instance of "Symfony\Component\Form\DataTransformerInterface"');
-            }
-
-            if (array_key_exists($key, $settings)) {
-                $settings[$key] = $transformer->reverseTransform($settings[$key]);
-            }
-        }
-
-        return $settings;
-    }
-
+    /**
+     * Load parameter from database.
+     *
+     * @param string $namespace
+     *
+     * @return array
+     */
     private function getParameters($namespace)
     {
-        return $this->repository->findBy(array('namespace' => $namespace));
+        $parameters = array();
+
+        foreach($this->parameterRepository->findBy(array('namespace' => $namespace)) as $parameter) {
+            $parameters[$parameter->getName()] = $parameter->getValue();
+        }
+
+        return $parameters;
     }
 }

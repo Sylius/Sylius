@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SettingsBundle\Entity;
 use Sylius\Bundle\SettingsBundle\Model\Parameter as BaseParameter;
 
 /**
- * Settings parameter mapped super-class.
+ * Settings parameter mapped superclass.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */

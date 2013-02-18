@@ -17,22 +17,21 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_settings.model.parameter.class">Sylius\Bundle\SettingsBundle\Entity\DefaultParameter</parameter>
-        <parameter key="sylius_settings.repository.parameter.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.model.parameter.class">Sylius\Bundle\SettingsBundle\Entity\DefaultParameter</parameter>
+        <parameter key="sylius.repository.parameter.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_settings.manager.parameter" alias="doctrine.orm.entity_manager" />
-        <service id="sylius_settings.repository.parameter" class="%sylius_settings.repository.parameter.class%">
-            <argument type="service" id="sylius_settings.manager.parameter" />
+        <service id="sylius.manager.parameter" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.parameter" class="%sylius.repository.parameter.class%">
+            <argument type="service" id="sylius.manager.parameter" />
             <argument type="service">
                 <service
-                    factory-service="sylius_settings.manager.parameter"
+                    factory-service="sylius.manager.parameter"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
-                    <argument>%sylius_settings.model.parameter.class%</argument>
+                    <argument>%sylius.model.parameter.class%</argument>
                 </service>
             </argument>
         </service>

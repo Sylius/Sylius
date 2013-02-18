@@ -23,13 +23,14 @@ use Symfony\Component\HttpFoundation\Response;
 class SettingsController extends Controller
 {
     /**
-     * Displays configuration page.
+     * Edit configuration with given namespace.
      *
-     * @param Request
+     * @param Request $request
+     * @param string  $namespace
      *
      * @return Response
      */
-    public function configureAction(Request $request, $namespace)
+    public function updateAction(Request $request, $namespace)
     {
         $manager = $this->getSettingsManager();
         $settings = $manager->loadSettings($namespace);
@@ -43,7 +44,9 @@ class SettingsController extends Controller
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $manager->saveSettings($namespace, $form->getData());
-            $this->get('session')->getFlashBag()->add('success', 'Configuration has been saved');
+
+            $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
+            $this->get('session')->getFlashBag()->add('success', $message);
         }
 
         $template = $request->attributes->get('template');
@@ -61,7 +64,7 @@ class SettingsController extends Controller
      */
     protected function getSettingsManager()
     {
-        return $this->get('sylius_settings.manager');
+        return $this->get('sylius.settings.manager');
     }
 
     /**
@@ -71,7 +74,16 @@ class SettingsController extends Controller
      */
     protected function getSettingsFormFactory()
     {
-        return $this->get('sylius_settings.form.factory');
+        return $this->get('sylius.settings.form_factory');
+    }
+
+    /**
+     * Get translator.
+     *
+     * @return TranslatorInterface
+     */
+    protected function getTranslator()
+    {
+        return $this->get('translator');
     }
 }
-
