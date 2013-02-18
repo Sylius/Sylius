@@ -33,6 +33,10 @@ class DoctrineTargetEntitiesResolver
         $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
 
         foreach ($interfaces as $interface => $parameter) {
+            if (!$container->hasParameter($parameter)) {
+                continue;
+            }
+
             $resolveTargetEntityListener
                 ->addMethodCall('addResolveTargetEntity', array(
                     $interface, $container->getParameter($parameter), array()
