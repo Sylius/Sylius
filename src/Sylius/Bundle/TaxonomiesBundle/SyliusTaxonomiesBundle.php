@@ -42,8 +42,8 @@ class SyliusTaxonomiesBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface' => 'sylius_taxonomies.model.taxonomy.class',
-            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface'    => 'sylius_taxonomies.model.taxon.class',
+            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface' => 'sylius.model.taxonomy.class',
+            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface'    => 'sylius.model.taxon.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxonomies', $interfaces));

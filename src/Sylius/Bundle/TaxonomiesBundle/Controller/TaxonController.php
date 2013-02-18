@@ -21,6 +21,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class TaxonController extends ResourceController
 {
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         if (null === $taxonomyId = $this->getRequest()->get('taxonomyId')) {
@@ -38,8 +41,13 @@ class TaxonController extends ResourceController
         return $taxon;
     }
 
+    /**
+     * Get taxonomy controller.
+     *
+     * @return ResourceController
+     */
     protected function getTaxonomyController()
     {
-        return $this->get('sylius_taxonomies.controller.taxonomy');
+        return $this->get('sylius.controller.taxonomy');
     }
 }

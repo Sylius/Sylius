@@ -19,46 +19,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Taxonomy choice form form.
+ * Taxonomy entity choice form.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-abstract class TaxonomyChoiceType extends AbstractType
+class TaxonomyEntityChoiceType extends AbstractType
 {
     /**
-     * Taxonomy model class.
-     *
-     * @var string
-     */
-    protected $className;
-
-    /**
-     * Constructor.
-     *
-     * @param string $className
-     */
-    public function __construct($className)
-    {
-        $this->className = $className;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getParent()
     {
-        $resolver
-            ->setDefaults(array(
-                'class' => $this->className
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_taxonomy_choice';
+        return 'entity';
     }
 }

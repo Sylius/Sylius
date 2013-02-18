@@ -44,7 +44,11 @@ class TaxonomyType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text');
+        $builder
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.taxonomy.name'
+            ))
+        ;
     }
 
     /**
@@ -64,6 +68,6 @@ class TaxonomyType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxonomies_taxonomy';
+        return 'sylius_taxonomy';
     }
 }

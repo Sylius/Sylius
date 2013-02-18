@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Entity\Taxon" table="sylius_taxonomies_taxon">
+    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Entity\Taxon" table="sylius_taxon">
         <field name="name" column="name" type="string" />
         <field name="slug" column="slug" type="string" unique="true">
             <gedmo:slug fields="name" unique="true" />
@@ -25,6 +25,9 @@
         <field name="permalink" column="permalink" type="string" unique="true">
             <gedmo:slug fields="name" unique="true" />
         </field>
+        <many-to-one field="taxonomy" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface" inversed-by="taxons">
+            <join-column name="taxonomy_id" referenced-column-name="id" on-delete="SET NULL"/>
+        </many-to-one>
 
         <order-by>
             <order-by-field name="left" direction="DESC" />
