@@ -67,6 +67,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Then /^the page title should be "([^""]*)"$/
+     */
+    public function thePageTitleShouldBe($title)
+    {
+        $this->assertSession()->elementTextContains('css', 'title', $title);
+    }
+
+    /**
      * @When /^I go to the website root$/
      */
     public function iGoToTheWebsiteRoot()

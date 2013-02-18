@@ -30,6 +30,7 @@ class SyliusKernel extends Kernel
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
+            new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new Sylius\Bundle\AssortmentBundle\SyliusAssortmentBundle(),
             new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
             new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
@@ -48,6 +49,7 @@ class SyliusKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
 
             // Third party bundles.
+            new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),

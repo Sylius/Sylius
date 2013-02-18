@@ -63,6 +63,9 @@ swiftmailer:
     password:  %sylius.mailer.password%
     spool:     { type: memory }
 
+sylius_settings:
+    driver: doctrine/orm
+
 sylius_assortment:
     driver: doctrine/orm
     classes:
@@ -118,3 +121,8 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Bundle\CoreBundle\Entity\User
+
+liip_doctrine_cache:
+    namespaces:
+        sylius_settings:
+            type: %sylius.cache%

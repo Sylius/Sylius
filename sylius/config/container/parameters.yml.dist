@@ -13,3 +13,5 @@ parameters:
 
     sylius.locale:            en
     sylius.secret:            abc
+
+    sylius.cache:             file_system
