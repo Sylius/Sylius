@@ -1975,12 +1975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "4f77d57eacb0354fbe872375407887cdab7686d2"
+                "reference": "16c8cf526c1eb4c934242b765692ae8eff7930b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/4f77d57eacb0354fbe872375407887cdab7686d2",
-                "reference": "4f77d57eacb0354fbe872375407887cdab7686d2",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/16c8cf526c1eb4c934242b765692ae8eff7930b7",
+                "reference": "16c8cf526c1eb4c934242b765692ae8eff7930b7",
                 "shasum": ""
             },
             "require": {
@@ -2003,7 +2003,7 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.2,<2.3-dev"
             },
-            "time": "2013-02-19 01:29:03",
+            "time": "2013-02-19 01:32:40",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
