@@ -15,7 +15,6 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
@@ -55,6 +54,14 @@ class SettingsManager implements SettingsManagerInterface
      */
     protected $cache;
 
+    /**
+     * Constructor.
+     *
+     * @param SchemaRegistryInterface $schemaRegistry
+     * @param ObjectManager           $parameterManager
+     * @param RepositoryInterface     $parameterRepository
+     * @param Cache                   $cache
+     */
     public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache)
     {
         $this->schemaRegistry = $schemaRegistry;
@@ -69,28 +76,44 @@ class SettingsManager implements SettingsManagerInterface
     public function loadSettings($namespace)
     {
         if ($this->cache->contains($namespace)) {
-            return $this->cache->fetch($namespace);
+            $parameters = $this->cache->fetch($namespace);
+        } else {
+            $parameters = $this->getParameters($namespace);
         }
 
         $schema = $this->schemaRegistry->getSchema($namespace);
-        $parameters = $this->getParameters($namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
+
+        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
+            if (array_key_exists($parameter, $parameters)) {
+                $parameters[$parameter] = $transformer->reverseTransform($parameters[$parameter]);
+            }
+        }
+
         $parameters = $settingsBuilder->resolve($parameters);
 
-        $settings = new Settings($parameters);
-
-        return $settings;
+        return new Settings($parameters);
     }
 
-    public function saveSettings($namespace, SettingsInterface $settings)
+    /**
+     * {@inheritdoc}
+     */
+    public function saveSettings($namespace, Settings $settings)
     {
         $schema = $this->schemaRegistry->getSchema($namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
+
         $parameters = $settingsBuilder->resolve($settings->getParameters());
+
+        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
+            if (array_key_exists($parameter, $parameters)) {
+                $parameters[$parameter] = $transformer->transform($parameters[$parameter]);
+            }
+        }
 
         $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
         $persistedParametersMap = array();
@@ -117,9 +140,7 @@ class SettingsManager implements SettingsManagerInterface
 
         $this->parameterManager->flush();
 
-        $settings->setParameters($parameters);
-
-        $this->cache->save($namespace, $settings);
+        $this->cache->save($namespace, $parameters);
     }
 
     /**

@@ -28,14 +28,18 @@ class RegisterSchemasPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.settings.registry')) {
+        if (!$container->hasDefinition('sylius.settings.schema_registry')) {
             return;
         }
 
-        $schemaRegistry = $container->getDefinition('sylius.settings.registry');
+        $schemaRegistry = $container->getDefinition('sylius.settings.schema_registry');
         $namespaces = array();
 
         foreach ($container->findTaggedServiceIds('sylius.settings_schema') as $id => $attributes) {
+            if (!array_key_exists('namespace', $attributes[0])) {
+                throw new \InvalidArgumentException(sprintf('Service "%s" must define the "namespace" attribute on "sylius.settings_schema" tags.', $id));
+            }
+
             $namespace = $attributes[0]['namespace'];
             $namespaces[] = $namespace;
 

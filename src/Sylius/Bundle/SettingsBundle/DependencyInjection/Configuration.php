@@ -36,8 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue('doctrine/orm')->cannotBeEmpty()->end()
             ->end()
         ;
 
@@ -62,9 +61,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->cannotBeEmpty()->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\SettingsBundle\\Form\\Type\\ParameterType')->end()
                             ->end()
                         ->end()
                     ->end()

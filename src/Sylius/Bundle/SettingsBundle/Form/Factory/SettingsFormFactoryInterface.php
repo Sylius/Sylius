@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 
-
 /**
  * Settings form factory interface
  *
@@ -20,7 +19,7 @@ namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 interface SettingsFormFactoryInterface
 {
     /**
-     * Create the form for schema registered under given namespace.
+     * Create the form for given schema.
      *
      * @param string $namespace
      *

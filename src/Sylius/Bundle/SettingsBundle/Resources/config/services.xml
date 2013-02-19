@@ -20,20 +20,11 @@
         <parameter key="sylius.controller.settings.class">Sylius\Bundle\SettingsBundle\Controller\SettingsController</parameter>
         <parameter key="sylius.settings.form_factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
         <parameter key="sylius.settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
-        <parameter key="sylius.settings.registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
+        <parameter key="sylius.settings.schema_registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
         <parameter key="sylius.settings.twig.class">Sylius\Bundle\SettingsBundle\Twig\SyliusSettingsExtension</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.controller.parameter" class="%sylius.controller.parameter.class%">
-            <argument>sylius</argument>
-            <argument>parameter</argument>
-            <argument>SyliusSettingsBundle:Parameter</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.controller.settings" class="%sylius.controller.settings.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
@@ -41,25 +32,20 @@
         </service>
 
         <service id="sylius.settings.form_factory" class="%sylius.settings.form_factory.class%">
-            <argument type="service" id="sylius.settings.registry" />
+            <argument type="service" id="sylius.settings.schema_registry" />
             <argument type="service" id="form.factory" />
-        </service>
-
-        <service id="sylius.form.type.parameter" class="%sylius.form.type.parameter.class%">
-            <argument>%sylius.model.parameter.class%</argument>
-            <tag name="form.type" alias="sylius_parameter" />
         </service>
 
         <service id="sylius.settings.cache" alias="liip_doctrine_cache.ns.sylius_settings" />
 
         <service id="sylius.settings.manager" class="%sylius.settings.manager.class%">
-            <argument type="service" id="sylius.settings.registry" />
+            <argument type="service" id="sylius.settings.schema_registry" />
             <argument type="service" id="sylius.manager.parameter" />
             <argument type="service" id="sylius.repository.parameter" />
             <argument type="service" id="sylius.settings.cache" />
         </service>
 
-        <service id="sylius.settings.registry" class="%sylius.settings.registry.class%" />
+        <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%" />
 
         <service id="sylius.settings.twig" class="%sylius.settings.twig.class%">
             <argument type="service" id="sylius.settings.manager" />

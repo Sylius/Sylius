@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 /**
- * Settings parameter model.
+ * Settings container.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Settings implements SettingsInterface
+class Settings implements \ArrayAccess
 {
     /**
      * Parameters.
@@ -54,6 +54,14 @@ class Settings implements SettingsInterface
     /**
      * {@inheritdoc}
      */
+    public function has($name)
+    {
+        return isset($this->parameters[$name]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function get($name)
     {
         if (!$this->has($name)) {
@@ -74,9 +82,13 @@ class Settings implements SettingsInterface
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function remove($name)
     {
-        return isset($this->parameters[$name]);
+        if (!$this->has($name)) {
+            throw new \InvalidArgumentException(sprintf('Parameter with name "%s" does not exist.', $name));
+        }
+
+        unset($this->parameters[$name]);
     }
 
     /**
@@ -108,6 +120,6 @@ class Settings implements SettingsInterface
      */
     public function offsetUnset($offset)
     {
-        unset($this->parameters[$offset]);
+        $this->remove($offset);
     }
 }

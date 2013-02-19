@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SettingsBundle\Twig;
 
 use PHPSpec2\ObjectBehavior;
@@ -30,7 +39,7 @@ class SyliusSettingsExtension extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SettingsBundle\Model\SettingsInterface $settings
+     * @param Sylius\Bundle\SettingsBundle\Model\Settings $settings
      */
     function it_should_return_settings_by_namespace($settingsManager, $settings)
     {
@@ -40,13 +49,13 @@ class SyliusSettingsExtension extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SettingsBundle\Model\SettingsInterface $settings
+     * @param Sylius\Bundle\SettingsBundle\Model\Settings $settings
      */
     function it_should_return_settings_parameter_by_namespace_and_name($settingsManager, $settings)
     {
         $settingsManager->loadSettings('shipping')->shouldBeCalled()->willReturn($settings);
-        $settings->get('price')->willReturn(19.99);
+        $settings->get('price')->shouldBeCalled()->willReturn(19.99);
 
-        $this->getSettingsParameter('shipping', 'price')->shouldReturn(19.99);
+        $this->getSettingsParameter('shipping.price')->shouldReturn(19.99);
     }
 }

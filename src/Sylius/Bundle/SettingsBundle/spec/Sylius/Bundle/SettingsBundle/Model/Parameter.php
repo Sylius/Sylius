@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -57,5 +66,12 @@ class Parameter extends ObjectBehavior
     {
         $this->setValue(true);
         $this->getValue()->shouldReturn(true);
+    }
+
+    function it_should_have_fluent_interface()
+    {
+        $this->setNamespace('taxation')->shouldReturn($this);
+        $this->setName('enable')->shouldReturn($this);
+        $this->setValue(true)->shouldReturn($this);
     }
 }

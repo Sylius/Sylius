@@ -31,24 +31,20 @@ class SyliusSettingsExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
         $processor = new Processor();
-        $configuration = new Configuration();
 
-        $config = $processor->processConfiguration($configuration, $config);
+        $config = $processor->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $driver = $config['driver'];
 
         if (!in_array($driver, SyliusSettingsBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusSettingsBundle', $driver));
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusSettingsBundle.', $driver));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
-
         $container->setParameter('sylius_settings.driver', $driver);
-        $container->setParameter('sylius_settings.engine', $config['engine']);
 
         $classes = $config['classes'];
-
         $parameterClasses = $classes['parameter'];
 
         if (isset($parameterClasses['model'])) {
@@ -58,9 +54,6 @@ class SyliusSettingsExtension extends Extension
         if (isset($parameterClasses['repository'])) {
             $container->setParameter('sylius.repository.parameter.class', $parameterClasses['repository']);
         }
-
-        $container->setParameter('sylius.controller.parameter.class', $parameterClasses['controller']);
-        $container->setParameter('sylius.form.type.parameter.class', $parameterClasses['form']);
 
         $loader->load('services.xml');
     }

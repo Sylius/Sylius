@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -28,14 +37,23 @@ class Settings extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Model\Settings');
     }
 
-    function it_should_implement_Sylius_settings_interface()
+    function it_should_check_for_parameter_existence_by_name()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Model\SettingsInterface');
+        $this->has('zone')->shouldReturn(true);
+        $this->has('cache')->shouldReturn(false);
     }
 
-    function it_should_return_parameter_by_name()
+    function it_should_retrieve_parameter_by_name()
     {
         $this->get('page')->shouldReturn(1);
+    }
+
+    function it_should_complain_when_trying_to_retrieve_non_existing_parameter()
+    {
+        $this
+            ->shouldThrow('InvalidArgumentException')
+            ->duringGet('test')
+        ;
     }
 
     function it_should_set_parameter_by_name()
@@ -50,10 +68,18 @@ class Settings extends ObjectBehavior
         $this->get('page')->shouldReturn(12);
     }
 
-    function it_should_check_for_parameter_existence_by_name()
+    function it_should_complain_when_trying_to_remove_non_existing_parameter()
     {
-        $this->has('zone')->shouldReturn(true);
-        $this->has('cache')->shouldReturn(false);
+        $this
+            ->shouldThrow('InvalidArgumentException')
+            ->duringRemove('test')
+        ;
+    }
+
+    function it_should_remove_parameter_by_name()
+    {
+        $this->remove('page');
+        $this->has('page')->shouldReturn(false);
     }
 
     function it_should_implement_array_access_interface()

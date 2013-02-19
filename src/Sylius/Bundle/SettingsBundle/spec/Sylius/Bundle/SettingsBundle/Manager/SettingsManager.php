@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 
 use PHPSpec2\ObjectBehavior;
@@ -30,16 +39,5 @@ class SettingsManager extends ObjectBehavior
     function it_should_be_a_Sylius_settings_manager()
     {
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface');
-    }
-
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\SettingsInterface $settings
-     */
-    function it_should_fetch_cache_if_available_when_loading_settings($cache, $settings)
-    {
-        $cache->contains('general')->shouldBeCalled()->willReturn(true);
-        $cache->fetch('general')->shouldBeCalled()->willReturn($settings);
-
-        $this->loadSettings('general')->shouldReturn($settings);
     }
 }

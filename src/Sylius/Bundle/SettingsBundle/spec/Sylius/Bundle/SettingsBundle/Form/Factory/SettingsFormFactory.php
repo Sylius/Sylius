@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\SettingsBundle\Form\Factory;
 
 use PHPSpec2\ObjectBehavior;
@@ -37,11 +46,11 @@ class SettingsFormFactory extends ObjectBehavior
      */
     function it_should_create_a_form_for_given_schema_namespace($schemaRegistry, $schema, $formFactory, $formBuilder, $form)
     {
-        $schemaRegistry->getSchema('general-settings')->willReturn($schema);
+        $schemaRegistry->getSchema('general')->willReturn($schema);
         $formFactory->createBuilder('form', null, array('data_class' => null))->willReturn($formBuilder);
         $schema->buildForm($formBuilder)->shouldBeCalled()->willReturn($formBuilder);
         $formBuilder->getForm()->willReturn($form);
 
-        $this->create('general-settings')->shouldReturn($form);
+        $this->create('general')->shouldReturn($form);
     }
 }

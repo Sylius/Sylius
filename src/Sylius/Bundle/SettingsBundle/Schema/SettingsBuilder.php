@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -20,4 +21,36 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SettingsBuilder extends OptionsResolver implements SettingsBuilderInterface
 {
+    /**
+     * Transformers array.
+     *
+     * @var ParameterTransformerInterface[]
+     */
+    protected $transformers;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->transformers = array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTransformer($parameterName, ParameterTransformerInterface $transformer)
+    {
+        $this->transformers[$parameterName] = $transformer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTransformers()
+    {
+        return $this->transformers;
+    }
 }

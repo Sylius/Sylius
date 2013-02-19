@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
 
 /**
  * Settings provider interface.
@@ -25,15 +25,15 @@ interface SettingsManagerInterface
      *
      * @param string $namespace
      *
-     * @return SettingsInterface
+     * @return Settings
      */
     public function loadSettings($namespace);
 
     /**
      * Save settings under given namespace.
      *
-     * @param string            $namespace
-     * @param SettingsInterface $settings
+     * @param string   $namespace
+     * @param Settings $settings
      */
-    public function saveSettings($namespace, SettingsInterface $settings);
+    public function saveSettings($namespace, Settings $settings);
 }
