@@ -1314,13 +1314,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://github.com/kriswallsmith/assetic.git",
-                "reference": "504c9e8a6357583c20c9d9967ec2febea3157324"
+                "url": "https://github.com/kriswallsmith/assetic.git",
+                "reference": "v1.1.0-alpha3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/504c9e8a6357583c20c9d9967ec2febea3157324",
-                "reference": "504c9e8a6357583c20c9d9967ec2febea3157324",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/v1.1.0-alpha3",
+                "reference": "v1.1.0-alpha3",
                 "shasum": ""
             },
             "require": {
@@ -1346,7 +1346,7 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
-            "time": "2013-02-11 18:18:06",
+            "time": "2013-02-18 16:17:57",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1491,12 +1491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/Pagerfanta.git",
-                "reference": "5e6ff5e93c25f2d2a151e1ae88fec7c24812da7b"
+                "reference": "878aee5e274ca75fbdf74262efd05d1207c31669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/5e6ff5e93c25f2d2a151e1ae88fec7c24812da7b",
-                "reference": "5e6ff5e93c25f2d2a151e1ae88fec7c24812da7b",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/878aee5e274ca75fbdf74262efd05d1207c31669",
+                "reference": "878aee5e274ca75fbdf74262efd05d1207c31669",
                 "shasum": ""
             },
             "require": {
@@ -1516,7 +1516,7 @@
                 "propel/propel1": "To use the PropelAdapter",
                 "solarium/solarium": "To use the SolariumAdapter."
             },
-            "time": "2013-02-18 15:07:08",
+            "time": "2013-02-19 13:51:25",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2561,12 +2561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle.git",
-                "reference": "16cb279ea283ce3fb30b8284a391a82512263d8b"
+                "reference": "bc24734343cc6a77dc143d0cf80f33b5e18e4cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/16cb279ea283ce3fb30b8284a391a82512263d8b",
-                "reference": "16cb279ea283ce3fb30b8284a391a82512263d8b",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/bc24734343cc6a77dc143d0cf80f33b5e18e4cc0",
+                "reference": "bc24734343cc6a77dc143d0cf80f33b5e18e4cc0",
                 "shasum": ""
             },
             "require": {
@@ -2586,7 +2586,7 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-02-17 21:36:13",
+            "time": "2013-02-18 16:21:03",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2736,12 +2736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "ae2f424da746de7747637f46d5c14efbe335522c"
+                "reference": "6c5a78ad8ca343802fe554cf40b579fcb9e0fd41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/ae2f424da746de7747637f46d5c14efbe335522c",
-                "reference": "ae2f424da746de7747637f46d5c14efbe335522c",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/6c5a78ad8ca343802fe554cf40b579fcb9e0fd41",
+                "reference": "6c5a78ad8ca343802fe554cf40b579fcb9e0fd41",
                 "shasum": ""
             },
             "require": {
@@ -2793,7 +2793,7 @@
                 "doctrine/orm": ">=2.2,<3.0,>=2.2.3",
                 "propel/propel1": "1.6.*"
             },
-            "time": "2013-02-17 15:28:01",
+            "time": "2013-02-19 08:03:14",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -3266,12 +3266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkSelenium2Driver.git",
-                "reference": "v1.0.4"
+                "reference": "6fb1d663b41150969e1143451840b638188d2298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/v1.0.4",
-                "reference": "v1.0.4",
+                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/6fb1d663b41150969e1143451840b638188d2298",
+                "reference": "6fb1d663b41150969e1143451840b638188d2298",
                 "shasum": ""
             },
             "require": {
@@ -3279,7 +3279,7 @@
                 "behat/mink": ">=1.4,<1.5-dev",
                 "instaclick/php-webdriver": ">=1.0,<1.1-dev"
             },
-            "time": "2013-02-17 15:32:01",
+            "time": "2013-02-19 09:26:15",
             "type": "mink-driver",
             "extra": {
                 "branch-alias": {
@@ -3371,23 +3371,28 @@
         },
         {
             "name": "instaclick/php-webdriver",
-            "version": "1.0.11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/instaclick/php-webdriver",
-                "reference": "1.0.11"
+                "url": "https://github.com/instaclick/php-webdriver.git",
+                "reference": "1.0.12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.11.zip",
-                "reference": "1.0.11",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/1.0.12",
+                "reference": "1.0.12",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2012-12-02 22:08:47",
+            "time": "2013-02-19 18:37:07",
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "WebDriver": "lib/"
@@ -3395,7 +3400,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache"
+                "Apache-2.0"
             ],
             "authors": [
                 {
