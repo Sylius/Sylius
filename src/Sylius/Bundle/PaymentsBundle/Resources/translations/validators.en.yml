@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment_method:
+        name:
+            not_blank: "Please enter payment method name."
+            min_length: "Payment method name must be at least {{ limit }} characters long."
+            max_length: "Payment method name must be {{ limit }} characters long or more."
+        gateway:
+            not_blank: "Please select payment method gateway."

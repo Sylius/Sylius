@@ -1,0 +1,43 @@
+{
+    "name": "sylius/payments-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible payments system for Symfony2 ecommerce applications.",
+    "keywords": ["payments", "payment"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusPaymentsBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle":        "~2.1",
+        "sylius/resource-bundle":          "0.1.*",
+        "stof/doctrine-extensions-bundle": "1.1.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "dev-develop",
+        "symfony/form":     "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\PaymentsBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/PaymentsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
