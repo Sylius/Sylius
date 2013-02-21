@@ -103,6 +103,9 @@ sylius_inventory:
         stockable:
             model: %sylius.model.variant.class%
 
+sylius_payments:
+    driver: doctrine/orm
+
 sylius_addressing:
     driver: doctrine/orm
 

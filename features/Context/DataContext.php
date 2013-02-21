@@ -442,6 +442,28 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are payment methods:$/
+     * @Given /^there are following payment methods:$/
+     * @Given /^the following payment methods exist:$/
+     */
+    public function thereArePaymentMethods(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('payment_method');
+
+        foreach ($table->getHash() as $data) {
+            $method = $repository->createNew();
+            $method->setName(trim($data['name']));
+            $method->setGateway(trim($data['gateway']));
+
+
+            $manager->persist($method);
+        }
+
+        $manager->flush();
+    }
+
+    /**
      * @Given /^there are following countries:$/
      */
     public function thereAreCountries(TableNode $table)
