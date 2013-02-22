@@ -35,5 +35,10 @@
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\PromotionsBundle": "" }
     },
-    "target-dir": "Sylius/Bundle/PromotionsBundle"
+    "target-dir": "Sylius/Bundle/PromotionsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
 }
