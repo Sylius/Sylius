@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.promotion.name.not_blank</source>
+                <target>Please enter promotion name.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.promotion.name.min_length</source>
+                <target>Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.promotion.name.max_length</source>
+                <target>Promotion name must not be longer than 1 character.|Promotion name must not be longer than {{ limit }} characters.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.promotion.description.not_blank</source>
+                <target>Please enter promotion description.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.promotion.description.min_length</source>
+                <target>Promotion description must be at least 1 character long.|Promotion description must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.promotion.description.max_length</source>
+                <target>Promotion description must not be longer than 1 character.|Promotion description must not be longer than {{ limit }} characters.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.promotion_coupon.code.not_blank</source>
+                <target>Please enter coupon code.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.promotion_coupon.code.min_length</source>
+                <target>Coupon code must be at least 1 character long.|Coupon code must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sylius.promotion_coupon.code.max_length</source>
+                <target>Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
