@@ -149,6 +149,44 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function hasChild(TaxonInterface $taxon)
+    {
+        return $this->children->contains($taxon);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChild(TaxonInterface $taxon)
+    {
+        if (!$this->hasChild($taxon)) {
+            $taxon->setTaxonomy($this->getTaxonomy());
+            $taxon->setParent($this);
+
+            $this->children->add($taxon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChild(TaxonInterface $taxon)
+    {
+        if ($this->hasChild($taxon)) {
+            $taxon->setTaxonomy(null);
+            $taxon->setParent(null);
+
+            $this->children->removeChild($taxon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;

@@ -68,6 +68,29 @@ interface TaxonInterface
     public function getChildren();
 
     /**
+     * Has child taxon?
+     *
+     * @param TaxonInterface $taxon
+     *
+     * @return Boolean
+     */
+    public function hasChild(TaxonInterface $taxon);
+
+    /**
+     * Add child taxon.
+     *
+     * @param TaxonInterface $taxon
+     */
+    public function addChild(TaxonInterface $taxon);
+
+    /**
+     * Remove child taxon.
+     *
+     * @param TaxonInterface $taxon
+     */
+    public function removeChild(TaxonInterface $taxon);
+
+    /**
      * Get taxon name.
      *
      * @return string

@@ -103,7 +103,7 @@ class Taxonomy implements TaxonomyInterface
      */
     public function hasTaxon(TaxonInterface $taxon)
     {
-        return $this->root->hasTaxon($taxon);
+        return $this->root->hasChild($taxon);
     }
 
     /**
@@ -112,8 +112,7 @@ class Taxonomy implements TaxonomyInterface
     public function addTaxon(TaxonInterface $taxon)
     {
         if (!$this->hasTaxon($taxon)) {
-            $taxon->setTaxonomy($this);
-            $this->root->addTaxon($taxon);
+            $this->root->addChild($taxon);
         }
 
         return $this;
@@ -125,8 +124,7 @@ class Taxonomy implements TaxonomyInterface
     public function removeTaxon(TaxonInterface $taxon)
     {
         if ($this->hasTaxon($taxon)) {
-            $taxon->setTaxonomy(null);
-            $this->root->removeTaxon($taxon);
+            $this->root->removeChild($taxon);
         }
 
         return $this;
