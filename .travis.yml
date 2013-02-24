@@ -9,14 +9,21 @@ matrix:
     allow_failures:
         - php: 5.5
 
-before_script:
+before_script: 
+    - sudo apt-get update
+    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-mysql php5-curl
+    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+    - export HOSTNAME=localhost
+    - export MINK_EXTENSION_PARAMS='base_url=http://$HOSTNAME/testgate.php'
+
+    - sudo /etc/init.d/apache2 restart
+
     - cp sylius/config/container/parameters.yml.dist sylius/config/container/parameters.yml
+    - chmod -R 777 sylius/cache sylius/logs
     - composer install --dev --prefer-source > /dev/null
     - sylius/console do:da:cr -e=testing > /dev/null
     - sylius/console do:sc:cr -e=testing > /dev/null
     - sylius/console cache:warmup -e=testing > /dev/null
-
-    - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/testgate.php'
 
     - export DISPLAY=:99
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.28.0.jar
@@ -25,7 +32,7 @@ before_script:
     - sleep 5
 
 script:
-    - bin/behat -p no-js --no-snippets --no-paths --verbose
+    - bin/behat --no-snippets --no-paths --verbose
 
 notifications:
   email: "travis-ci@sylius.org"

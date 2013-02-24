@@ -63,6 +63,14 @@ swiftmailer:
     password:  %sylius.mailer.password%
     spool:     { type: memory }
 
+sylius_cart:
+    driver: doctrine/orm
+    resolver: sylius.cart_item_resolver.default
+    classes:
+        item:
+            model: Sylius\Bundle\CoreBundle\Entity\CartItem
+            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+
 sylius_settings:
     driver: doctrine/orm
 

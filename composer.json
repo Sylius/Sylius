@@ -29,7 +29,8 @@
         "sensio/distribution-bundle":        "2.2.*",
 
         "sylius/core-bundle":                "0.1.*",
-        "sylius/web-bundle":                 "0.1.*"
+        "sylius/web-bundle":                 "0.1.*",
+        "mathiasverraes/money": "dev-master@dev"
     },
     "require-dev": {
         "behat/behat":                       "2.4.*",
