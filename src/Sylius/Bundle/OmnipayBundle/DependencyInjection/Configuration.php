@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle\DependencyInjection;
+namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -21,6 +21,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * List of known gateways.
+     *
+     * @var array
+     */
     public static $gateways = array(
         'authorizenet',
         'cardsafe',
@@ -44,53 +49,41 @@ class Configuration implements ConfigurationInterface
         $rootNode = $builder->root('sylius_payments');
 
         $rootNode
-            ->arrayNode('gateways')
-                ->isRequired()
-                ->useAttributeAsKey('name')
-                ->prototype('array')
-                    ->children()
-                        ->scalarNode('type')
-                            ->validate()
-                                ->ifTrue(function($type) {
-                                    if (empty($type)) {
-                                        return true;
-                                    }
+            ->children()
+                ->arrayNode('gateways')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('type')
+                                ->validate()
+                                    ->ifTrue(function($type) {
+                                        if (empty($type)) {
+                                            return true;
+                                        }
 
-                                    if (!in_array(strtolower($type), self::$gateways)) {
-                                        return true;
-                                    }
+                                        if (!in_array(strtolower($type), self::$gateways)) {
+                                            return true;
+                                        }
 
-                                    return false;
-                                })
-                                ->thenInvalid('Unknown payment gateway selected "%s".')
+                                        return false;
+                                    })
+                                    ->thenInvalid('Unknown payment gateway selected "%s".')
+                                ->end()
+                                ->validate()
+                                    ->ifTrue(function($type) {
+                                        return true; // fake =)
+                                    })
+                                    ->then(function($type) {
+                                        return $this->translateTypeName($type);
+                                    })
+                                ->end()
                             ->end()
-                            ->validate()
-                                ->ifTrue(function($type) {
-                                    return true; // fake =)
-                                })
-                                ->then(function($type) {
-                                    return $this->translateTypeName($type);
-                                })
+                            ->booleanNode('mode')->defaultFalse()->end()
+                            ->booleanNode('active')->defaultTrue()->end()
+                            ->arrayNode('options')
+                                ->prototype('scalar')
                             ->end()
                         ->end()
-                        ->scalarNode('username')->cannotBeEmpty()->end()
-                        ->scalarNode('password')->cannotBeEmpty()->end()
-                        ->scalarNode('server')->defaultNull()->end()
-                        ->booleanNode('mode')->deafultFalse()->end()
-                        ->booleanNode('active')->deafultTrue()->end()
-                    ->end()
-                    ->validate()
-                        ->ifTrue(function($options) {
-                            // for each type at least these have to be set
-                            foreach (array('type', 'username', 'password') as $option) {
-                                if (!isset($options[$option])) {
-                                    return true;
-                                }
-                            }
-
-                            return false;
-                        })
-                        ->thenInvalid('You should set at least the "type", "username" and the "password" of a selected gateway.')
                     ->end()
                 ->end()
             ->end()

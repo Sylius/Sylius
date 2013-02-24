@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle;
+namespace Sylius\Bundle\OmnipayBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Sylius payments bundle.
+ * Symfony2 integration with Omnipay payment processing library.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusPaymentsBundle extends Bundle
+class SyliusOmnipayBundle extends Bundle
 {
 }

@@ -1,8 +1,8 @@
 {
-    "name": "sylius/payments-bundle",
+    "name": "sylius/omnipay-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony2 integration with Tala Payments - multi-gateway, payment processing library.",
-    "keywords": ["shop", "ecommerce", "sylius", "payment", "merchant", "gateway", "paypal", "authorize.net", "dps", "paymentexpress"],
+    "description": "Symfony2 integration with Omnipay - multi-gateway, payment processing library.",
+    "keywords": ["shop", "ecommerce", "sylius", "payment", "merchant", "gateway", "paypal", "authorize.net", "dps", "paymentexpress", "omnipay"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -13,22 +13,22 @@
         },
         {
             "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
+            "homepage": "https://github.com/Sylius/SyliusOmnipayBundle/contributors"
         }
     ],
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
 
-        "adrianmacneil/tala-payments": "0.1.*@dev"
+        "omnipay/omnipay": "0.7.*"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\PaymentsBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\OmnipayBundle": "" }
     },
-    "target-dir": "Sylius/Bundle/PaymentsBundle",
+    "target-dir": "Sylius/Bundle/OmnipayBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1.x-dev"
