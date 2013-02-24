@@ -1055,16 +1055,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "dev-master",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "032a4f72c2bd751de66c6d8148c422fbb27b5128"
+                "url": "git://github.com/schmittjoh/serializer",
+                "reference": "0.11.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/032a4f72c2bd751de66c6d8148c422fbb27b5128",
-                "reference": "032a4f72c2bd751de66c6d8148c422fbb27b5128",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/0.11.0",
+                "reference": "0.11.0",
                 "shasum": ""
             },
             "require": {
@@ -1089,7 +1089,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -1118,25 +1118,25 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2013-02-21 12:42:21"
+            "time": "2013-01-29 10:56:07"
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "dev-master",
+            "version": "0.11.0",
             "target-dir": "JMS/SerializerBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "72782da20462c5faffc739a40bffc20f6a4fbc41"
+                "reference": "0.11.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/72782da20462c5faffc739a40bffc20f6a4fbc41",
-                "reference": "72782da20462c5faffc739a40bffc20f6a4fbc41",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/0.11.0",
+                "reference": "0.11.0",
                 "shasum": ""
             },
             "require": {
-                "jms/di-extra-bundle": ">=1.3,<2.0",
+                "jms/di-extra-bundle": ">=1.3",
                 "jms/serializer": "0.11.*",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": ">=2.1,<3.0-dev"
@@ -1157,7 +1157,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
@@ -1186,7 +1186,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2013-02-22 11:44:49"
+            "time": "2013-02-12 08:32:04"
         },
         {
             "name": "knplabs/knp-menu",
@@ -1312,12 +1312,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "v1.1.0-alpha3"
+                "reference": "4fdc4b425cf2a55b2ffc068a4a1f215c73dbe863"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/v1.1.0-alpha3",
-                "reference": "v1.1.0-alpha3",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/4fdc4b425cf2a55b2ffc068a4a1f215c73dbe863",
+                "reference": "4fdc4b425cf2a55b2ffc068a4a1f215c73dbe863",
                 "shasum": ""
             },
             "require": {
@@ -1375,7 +1375,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-02-18 16:17:57"
+            "time": "2013-02-24 00:37:33"
         },
         {
             "name": "liip/doctrine-cache-bundle",
@@ -1686,12 +1686,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioDistributionBundle.git",
-                "reference": "15a12bdea8e562ff8a665573c40a8d32ecf38db6"
+                "reference": "v2.2.0-RC3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/15a12bdea8e562ff8a665573c40a8d32ecf38db6",
-                "reference": "15a12bdea8e562ff8a665573c40a8d32ecf38db6",
+                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
                 "shasum": ""
             },
             "require": {
@@ -1963,18 +1963,82 @@
             "time": "2013-02-20 10:53:16"
         },
         {
+            "name": "sylius/cart-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/CartBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusCartBundle.git",
+                "reference": "1a47e39778d7b8dd2a9c92e6572da35325d3b15c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/1a47e39778d7b8dd2a9c92e6572da35325d3b15c",
+                "reference": "1a47e39778d7b8dd2a9c92e6572da35325d3b15c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
+                "symfony/framework-bundle": ">=2.1,<3.0"
+            },
+            "require-dev": {
+                "phpspec/php-diff": "dev-master",
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0",
+                "symfony/validator": ">=2.1,<3.0",
+                "twig/twig": ">=1.11.0,<2.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\CartBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
+                }
+            ],
+            "description": "Cart feature for your next Symfony2 application.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "cart",
+                "carts",
+                "ecommerce",
+                "shop",
+                "sylius"
+            ],
+            "time": "2013-02-10 21:47:42"
+        },
+        {
             "name": "sylius/core-bundle",
             "version": "dev-master",
             "target-dir": "Sylius/Bundle/CoreBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "1d8c50ebd71aac6336ac119130eb8da6589bc93c"
+                "reference": "2ac23476dadc97e6b0e8043e5094edc1c4aaef7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/1d8c50ebd71aac6336ac119130eb8da6589bc93c",
-                "reference": "1d8c50ebd71aac6336ac119130eb8da6589bc93c",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/2ac23476dadc97e6b0e8043e5094edc1c4aaef7f",
+                "reference": "2ac23476dadc97e6b0e8043e5094edc1c4aaef7f",
                 "shasum": ""
             },
             "require": {
@@ -1985,6 +2049,7 @@
                 "php": ">=5.3.3",
                 "sylius/addressing-bundle": "0.1.*",
                 "sylius/assortment-bundle": "0.1.*",
+                "sylius/cart-bundle": "0.3.*",
                 "sylius/inventory-bundle": "0.1.*",
                 "sylius/payments-bundle": "0.1.*",
                 "sylius/promotions-bundle": "0.1.*",
@@ -2034,7 +2099,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-02-22 11:30:44"
+            "time": "2013-02-23 21:03:04"
         },
         {
             "name": "sylius/inventory-bundle",
@@ -2546,12 +2611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxonomiesBundle.git",
-                "reference": "60e544924dc6f5a412bfe36f19398f9c4353f516"
+                "reference": "cfce61abf02de8428684252d9588944c8ce88cab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/60e544924dc6f5a412bfe36f19398f9c4353f516",
-                "reference": "60e544924dc6f5a412bfe36f19398f9c4353f516",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/cfce61abf02de8428684252d9588944c8ce88cab",
+                "reference": "cfce61abf02de8428684252d9588944c8ce88cab",
                 "shasum": ""
             },
             "require": {
@@ -2602,7 +2667,7 @@
                 "taxonomies",
                 "taxonomy"
             ],
-            "time": "2013-02-23 09:14:09"
+            "time": "2013-02-24 12:36:56"
         },
         {
             "name": "sylius/web-bundle",
@@ -2611,12 +2676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "001adc05f3fed106341b1c49372e50304d0e313e"
+                "reference": "420ca76f0bc86ddb590f02cd14542d35d667a5a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/001adc05f3fed106341b1c49372e50304d0e313e",
-                "reference": "001adc05f3fed106341b1c49372e50304d0e313e",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/420ca76f0bc86ddb590f02cd14542d35d667a5a3",
+                "reference": "420ca76f0bc86ddb590f02cd14542d35d667a5a3",
                 "shasum": ""
             },
             "require": {
@@ -2664,7 +2729,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-02-23 09:01:35"
+            "time": "2013-02-23 21:02:22"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2673,12 +2738,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle.git",
-                "reference": "bc24734343cc6a77dc143d0cf80f33b5e18e4cc0"
+                "reference": "v2.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/bc24734343cc6a77dc143d0cf80f33b5e18e4cc0",
-                "reference": "bc24734343cc6a77dc143d0cf80f33b5e18e4cc0",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/v2.1.2",
+                "reference": "v2.1.2",
                 "shasum": ""
             },
             "require": {
@@ -2727,7 +2792,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-02-18 16:21:03"
+            "time": "2013-02-23 22:29:21"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2736,12 +2801,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "df2a8e33bdb98f848dce28e0d14e318fea71b45f"
+                "reference": "b492800896b6abe2a6fe622c0f03e04a2d5b3fae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/df2a8e33bdb98f848dce28e0d14e318fea71b45f",
-                "reference": "df2a8e33bdb98f848dce28e0d14e318fea71b45f",
+                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/b492800896b6abe2a6fe622c0f03e04a2d5b3fae",
+                "reference": "b492800896b6abe2a6fe622c0f03e04a2d5b3fae",
                 "shasum": ""
             },
             "require": {
@@ -2785,7 +2850,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2013-02-14 10:33:50"
+            "time": "2013-02-23 17:18:24"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -2848,12 +2913,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "825dc17fbc100a3895fc945170bd2d8e16a05b75"
+                "reference": "v2.2.0-RC3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/825dc17fbc100a3895fc945170bd2d8e16a05b75",
-                "reference": "825dc17fbc100a3895fc945170bd2d8e16a05b75",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
                 "shasum": ""
             },
             "require": {
@@ -2939,7 +3004,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-02-23 06:46:07"
+            "time": "2013-02-24 12:07:19"
         },
         {
             "name": "twig/extensions",
