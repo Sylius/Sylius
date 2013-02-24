@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
@@ -11,22 +20,22 @@ use PHPSpec2\ObjectBehavior;
  */
 class Taxon extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomiesBundle\Model\Taxon');
     }
 
-    function it_should_be_Sylius_taxon()
+    function it_implements_Sylius_taxon_interface()
     {
         $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface');
     }
 
-    function it_should_have_no_id_by_default()
+    function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_belong_to_any_taxonomy_by_default()
+    function it_does_not_belong_to_taxonomy_by_default()
     {
         $this->getTaxonomy()->shouldReturn(null);
     }
@@ -35,7 +44,7 @@ class Taxon extends ObjectBehavior
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
      */
-    function it_should_allow_assigning_itself_to_taxonomy($taxonomy, $root)
+    function it_allows_assigning_itself_to_taxonomy($taxonomy, $root)
     {
         $taxonomy->getRoot()->willReturn($root);
 
@@ -47,7 +56,7 @@ class Taxon extends ObjectBehavior
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
      */
-    function it_should_allow_detaching_taxonomy($taxonomy, $root)
+    function it_allows_detaching_itself_from_taxonomy($taxonomy, $root)
     {
         $taxonomy->getRoot()->willReturn($root);
 
@@ -58,7 +67,7 @@ class Taxon extends ObjectBehavior
         $this->getTaxonomy()->shouldReturn(null);
     }
 
-    function it_should_have_no_parent_by_default()
+    function it_has_no_parent_by_default()
     {
         $this->getParent()->shouldReturn(null);
     }
@@ -66,13 +75,13 @@ class Taxon extends ObjectBehavior
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function its_parent_should_be_mutable($taxon)
+    function its_parent_is_mutable($taxon)
     {
         $this->setParent($taxon);
         $this->getParent()->shouldReturn($taxon);
     }
 
-    function it_should_be_root_by_default()
+    function it_is_root_by_default()
     {
         $this->shouldBeRoot();
     }
@@ -80,7 +89,7 @@ class Taxon extends ObjectBehavior
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function it_should_not_be_root_if_parent_is_defined($taxon)
+    function it_is_not_root_when_has_parent($taxon)
     {
         $this->setParent($taxon);
         $this->shouldNotBeRoot();
@@ -89,7 +98,7 @@ class Taxon extends ObjectBehavior
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function it_should_be_root_if_parent_isnt_defined($taxon)
+    function it_is_root_when_has_no_parent($taxon)
     {
         $this->shouldBeRoot();
 
@@ -100,62 +109,82 @@ class Taxon extends ObjectBehavior
         $this->shouldBeRoot();
     }
 
-    function it_should_be_unnamed_by_default()
+    function it_is_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_should_be_mutable()
+    function its_name_is_mutable()
     {
         $this->setName('Brand');
         $this->getName()->shouldReturn('Brand');
     }
 
-    function it_should_not_have_slug_by_default()
+    function it_has_no_slug_by_default()
     {
         $this->getSlug()->shouldReturn(null);
     }
 
-    function its_slug_should_be_mutable()
+    function its_slug_is_mutable()
     {
         $this->setSlug('t-shirts');
         $this->getSlug()->shouldReturn('t-shirts');
     }
 
-    function it_should_not_have_permalink_by_default()
+    function it_has_no_permalink_by_default()
     {
         $this->getPermalink()->shouldReturn(null);
     }
 
-    function its_permalink_should_be_mutable()
+    function its_permalink_is_mutable()
     {
         $this->setPermalink('woman-clothing');
         $this->getPermalink()->shouldReturn('woman-clothing');
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_should_generate_a_permalink_by_linking_its_slug_and_parent_taxon_slugs($taxon)
+    function it_initializes_child_taxon_collection_by_default()
     {
-        $taxon->getPermalink()->willReturn('clothing/accessories');
-
-        $this->setSlug('scarves-and-shawls');
-        $this->setParent($taxon);
-
-        $this->getPermalink()->shouldReturn('clothing/accessories/scarves-and-shawls');
+        $this->getChildren()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
     /**
      * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
      */
-    function it_should_generate_a_permalink_only_when_its_null($taxon)
+    function it_allows_to_check_if_given_taxon_is_its_child($taxon)
     {
-        $this->setPermalink('super-promotion-slug');
+        $this->hasChild($taxon)->shouldReturn(false);
+    }
 
-        $this->setSlug('scarves-and-shawls');
-        $this->setParent($taxon);
+    /**
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface    $taxon
+     */
+    function it_allows_to_add_child_taxons($taxonomy, $taxon)
+    {
+        $this->setTaxonomy($taxonomy);
 
-        $this->getPermalink()->shouldReturn('super-promotion-slug');
+        $taxon->setTaxonomy($taxonomy)->shouldBeCalled();
+        $taxon->setParent($this)->shouldBeCalled();
+
+        $this->addChild($taxon);
+    }
+
+    /**
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
+     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface    $taxon
+     */
+    function it_allows_to_remove_child_taxons($taxonomy, $taxon)
+    {
+        $this->setTaxonomy($taxonomy);
+
+        $taxon->setTaxonomy($taxonomy)->shouldBeCalled();
+        $taxon->setParent($this)->shouldBeCalled();
+
+        $this->addChild($taxon);
+
+        $taxon->setTaxonomy(null)->shouldBeCalled();
+        $taxon->setParent(null)->shouldBeCalled();
+
+        $this->removeChild($taxon);
     }
 }

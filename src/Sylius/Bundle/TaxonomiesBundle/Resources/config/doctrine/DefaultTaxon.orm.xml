@@ -9,7 +9,7 @@
         </id>
 
         <many-to-one field="parent" target-entity="Sylius\Bundle\TaxonomiesBundle\Entity\DefaultTaxon">
-            <join-column name="parent_id" referenced-column-name="id" on-delete="SET NULL" />
+            <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
         </many-to-one>
         <gedmo:tree type="nested" />

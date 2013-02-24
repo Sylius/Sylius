@@ -85,6 +85,8 @@ class Taxonomy implements TaxonomyInterface
      */
     public function setRoot(TaxonInterface $root)
     {
+        $root->setTaxonomy($this);
+
         $this->root = $root;
 
         return $this;
@@ -111,9 +113,7 @@ class Taxonomy implements TaxonomyInterface
      */
     public function addTaxon(TaxonInterface $taxon)
     {
-        if (!$this->hasTaxon($taxon)) {
-            $this->root->addChild($taxon);
-        }
+        $this->root->addChild($taxon);
 
         return $this;
     }
@@ -123,9 +123,7 @@ class Taxonomy implements TaxonomyInterface
      */
     public function removeTaxon(TaxonInterface $taxon)
     {
-        if ($this->hasTaxon($taxon)) {
-            $this->root->removeChild($taxon);
-        }
+        $this->root->removeChild($taxon);
 
         return $this;
     }

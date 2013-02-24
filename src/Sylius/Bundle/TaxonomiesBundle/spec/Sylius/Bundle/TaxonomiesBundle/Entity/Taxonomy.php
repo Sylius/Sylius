@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Entity;
 
 use PHPSpec2\ObjectBehavior;
@@ -11,17 +20,17 @@ use PHPSpec2\ObjectBehavior;
  */
 class Taxonomy extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomiesBundle\Entity\Taxonomy');
     }
 
-    function it_should_be_Sylius_taxonomy()
+    function it_implements_Sylius_taxonomy_interface()
     {
         $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface');
     }
 
-    function it_should_extend_Sylius_taxonomy_model()
+    function it_extends_Sylius_taxonomy_model()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy');
     }

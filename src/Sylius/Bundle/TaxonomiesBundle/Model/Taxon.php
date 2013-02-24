@@ -108,10 +108,6 @@ class Taxon implements TaxonInterface
     public function setTaxonomy(TaxonomyInterface $taxonomy = null)
     {
         $this->taxonomy = $taxonomy;
-
-        if (null !== $taxonomy && null === $this->parent) {
-            $this->setParent($taxonomy->getRoot());
-        }
     }
 
     /**
@@ -160,7 +156,7 @@ class Taxon implements TaxonInterface
     public function addChild(TaxonInterface $taxon)
     {
         if (!$this->hasChild($taxon)) {
-            $taxon->setTaxonomy($this->getTaxonomy());
+            $taxon->setTaxonomy($this->taxonomy);
             $taxon->setParent($this);
 
             $this->children->add($taxon);
@@ -178,7 +174,7 @@ class Taxon implements TaxonInterface
             $taxon->setTaxonomy(null);
             $taxon->setParent(null);
 
-            $this->children->removeChild($taxon);
+            $this->children->removeElement($taxon);
         }
 
         return $this;

@@ -25,8 +25,9 @@
         <field name="permalink" column="permalink" type="string" unique="true">
             <gedmo:slug fields="name" unique="true" />
         </field>
+
         <many-to-one field="taxonomy" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface" inversed-by="taxons">
-            <join-column name="taxonomy_id" referenced-column-name="id" on-delete="SET NULL"/>
+            <join-column name="taxonomy_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <order-by>

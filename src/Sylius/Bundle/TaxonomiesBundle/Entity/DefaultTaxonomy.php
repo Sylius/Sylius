@@ -26,6 +26,6 @@ class DefaultTaxonomy extends Taxonomy
     {
         parent::__construct();
 
-        $this->root = new DefaultTaxon();
+        $this->setRoot(new DefaultTaxon());
     }
 }
