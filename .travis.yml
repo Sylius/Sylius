@@ -19,6 +19,7 @@ before_script:
     - sudo /etc/init.d/apache2 restart
 
     - cp sylius/config/container/parameters.yml.dist sylius/config/container/parameters.yml
+    - mkdir sylius/cache sylius/logs
     - chmod -R 777 sylius/cache sylius/logs
     - composer install --dev --prefer-source > /dev/null
     - sylius/console do:da:cr -e=testing > /dev/null
