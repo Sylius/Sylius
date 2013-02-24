@@ -1,0 +1,43 @@
+{
+    "name": "sylius/money-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius integration with PHP Money library.",
+    "keywords": ["cash", "currency", "money"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusMoneyBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":                      ">=5.3.3",
+
+        "symfony/framework-bundle": "~2.1",
+        "mathiasverraes/money":     "dev-master"
+    },
+    "require-dev": {
+        "twig/twig":        "~1.11",
+        "phpspec/phpspec2": "dev-develop",
+        "phpspec/php-diff": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\MoneyBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/MoneyBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

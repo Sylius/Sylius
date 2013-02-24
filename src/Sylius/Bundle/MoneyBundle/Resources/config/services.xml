@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.twig.money.class">Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.twig.money" class="%sylius.twig.money.class%">
+            <argument>%sylius.money.currency%</argument>
+            <argument>%sylius.money.locale%</argument>
+            <tag name="twig.extension" />
+        </service>
+    </services>
+
+</container>
