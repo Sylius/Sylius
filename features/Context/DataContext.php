@@ -14,6 +14,7 @@ namespace Context;
 use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Entity\User;
@@ -95,7 +96,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($taxonsTable->getRows() as $node) {
             $taxonList = explode('>', $node[0]);
-
             $parent = null;
 
             foreach ($taxonList as $taxonName) {
@@ -103,22 +103,23 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
                 if (!isset($taxons[$taxonName])) {
                     $taxon = $this->getRepository('taxon')->createNew();
-                    $taxon->setTaxonomy($taxonomy);
                     $taxon->setName($taxonName);
 
-                    if (null !== $parent) {
-                        $taxon->setParent($parent);
-                    }
-
-                    $manager->persist($taxon);
-                    $manager->flush($taxon);
-
                     $taxons[$taxonName] = $taxon;
+                }
+
+                $taxon = $taxons[$taxonName];
+
+                if (null !== $parent) {
+                    $parent->addChild($taxon);
                     $parent = $taxon;
+                } else {
+                    $taxonomy->addTaxon($taxon);
                 }
             }
         }
 
+        $manager->persist($taxonomy);
         $manager->flush();
     }
 
@@ -223,6 +224,16 @@ class DataContext extends BehatContext implements KernelAwareInterface
                     $option = $this->findOneByName('option', trim($option));
                     $product->addOption($option);
                 }
+            }
+
+            if (isset($data['taxons'])) {
+                $taxons = new ArrayCollection();
+
+                foreach (explode(',', $data['taxons']) as $taxonName) {
+                    $taxons->add($this->findOneByName('taxon', trim($taxonName)));
+                }
+
+                $product->setTaxons($taxons);
             }
 
             $manager->persist($product);
@@ -698,7 +709,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         if (null === $resource) {
             throw new \InvalidArgumentException(
-                sprintf('%s with name "%s" was not found.', str_replace('_', ' ', ucfirst($type)), $name)
+                sprintf('%s for criteria "%s" was not found.', str_replace('_', ' ', ucfirst($type)), serialize($criteria))
             );
         }
 

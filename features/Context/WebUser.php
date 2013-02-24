@@ -139,7 +139,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('%s_show', $type), array('id' => $resource->getId())));
+        $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
     }
 
     /**
@@ -160,7 +160,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $type = str_replace(' ', '_', $type);
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('%s_show', $type), array('id' => $resource->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -183,7 +183,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('%s_%s', $type, $action), array('id' => $resource->getId())));
+        $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_%s', $type, $action), array('id' => $resource->getId())));
     }
 
     /**
@@ -342,6 +342,38 @@ class WebUser extends MinkContext implements KernelAwareInterface
         } else {
             $this->assertSession()->elementsCount('css', sprintf('table#%s tbody tr', str_replace(' ', '-', $type)), $amount);
         }
+    }
+
+    /**
+     * For example: I should see 10 products.
+     *
+     * @Then /^I should see there (\d+) products/
+     */
+    public function iShouldSeeThatMuchProducts($amount)
+    {
+        $this->assertSession()->elementsCount('css', '.product', $amount);
+    }
+
+    /**
+     * @Given /^I am on the product page for "([^"]*)"$/
+     */
+    public function iAmBeOnTheProductPage($name)
+    {
+        $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
+
+        $this->getSession()->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
+    }
+
+    /**
+     * @Then /^I should be on the product page for "([^"]*)"$/
+     * @Then /^I should still be on the product page for "([^"]*)"$/
+     */
+    public function iShouldBeOnTheProductPage($name)
+    {
+        $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
+
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**

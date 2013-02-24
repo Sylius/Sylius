@@ -74,6 +74,8 @@ sylius_assortment:
     classes:
         product:
             model: Sylius\Bundle\CoreBundle\Entity\Product
+            controller: Sylius\Bundle\CoreBundle\Controller\ProductController
+            repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
         variant:
             model: Sylius\Bundle\CoreBundle\Entity\Variant

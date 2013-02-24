@@ -16,24 +16,24 @@
 </div>
 {% endif %}
 
-<form action="{{ path('fos_user_security_login') }}" method="post" class="well">
+<form action="{{ path('fos_user_security_login') }}" method="post">
 <fieldset>
     <div class="control-group">
-    <label for="username" class="control-label">Login</label>
-    <div class="controls">
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-    </div>
-    </div>
-    <div class="control-group">
-    <label for="password" class="control-label">Password</label>
-    <div class="controls">
-        <input type="password" id="password" name="_password" />
-    </div>
+        <label for="username" class="control-label">Login</label>
+        <div class="controls">
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        </div>
     </div>
     <div class="control-group">
-    <div class="controls">
-        Remember me? <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        <label for="password" class="control-label">Password</label>
+        <div class="controls">
+            <input type="password" id="password" name="_password" />
+        </div>
     </div>
+    <div class="control-group">
+        <div class="controls">
+            Remember me? <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        </div>
     </div>
 </fieldset>
 <div class="form-actions">

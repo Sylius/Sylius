@@ -27,6 +27,16 @@ Feature: Products
             | Clothing    |
             | Electronics |
             | Print       |
+          And there are following taxonomies defined:
+            | name     |
+            | Category |
+            | Special  |
+          And taxonomy "Category" has following taxons:
+            | Clothing > T-Shirts         |
+            | Clothing > Premium T-Shirts |
+          And taxonomy "Special" has following taxons:
+            | Featured |
+            | New      |
 
     Scenario: Seeing index of all products
         Given I am on the dashboard page
@@ -203,6 +213,26 @@ Feature: Products
          Then I should be on the page of product "Sticker"
           And I should see "Product has been successfully updated."
           And "Print" should appear on the page
+
+    Scenario: Selecting the categorization taxons
+        Given I am editing product "Black T-Shirt"
+          And go to "Categorization" tab
+         When I select "Premium T-Shirts" from "Category"
+          And I select "Featured" from "Special"
+          And I press "Save changes"
+         Then I should be on the page of product "Black T-Shirt"
+          And I should see "Product has been successfully updated."
+          And "Featured" should appear on the page
+
+    Scenario: Selecting more than one taxon from taxonomy
+        Given I am editing product "Black T-Shirt"
+          And go to "Categorization" tab
+         When I select "Featured" from "Special"
+          And I additionally select "New" from "Special"
+          And I press "Save changes"
+         Then I should be on the page of product "Black T-Shirt"
+          And I should see "Product has been successfully updated."
+          And "Featured" should appear on the page
 
     Scenario: Deleting product
         Given I am on the page of product "Mug"
