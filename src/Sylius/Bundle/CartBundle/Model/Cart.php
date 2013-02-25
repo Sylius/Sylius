@@ -199,19 +199,10 @@ class Cart implements CartInterface
 
         $this->items->add($item);
         $item->setCart($this);
-        self::refreshCart($this);
         return $this;
     }
     
-    public static function refreshCart(CartInterface $cart)
-    {
-        $cart->calculateTotal();
-        $cart->setTotalItems($cart->countItems());
-        return $cart;
-    }
-
-
-  
+ 
     /**
      * {@inheritdoc}
      */
@@ -222,7 +213,6 @@ class Cart implements CartInterface
 
             $item->setCart(null);
         }
-        self::refreshCart($this);
         return $this;
     }
 
