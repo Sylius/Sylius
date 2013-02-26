@@ -78,6 +78,7 @@ class Configuration implements ConfigurationInterface
                                     })
                                 ->end()
                             ->end()
+                            ->scalarNode('label')->cannotBeEmpty()->end()
                             ->booleanNode('mode')->defaultFalse()->end()
                             ->booleanNode('active')->defaultTrue()->end()
                             ->arrayNode('options')

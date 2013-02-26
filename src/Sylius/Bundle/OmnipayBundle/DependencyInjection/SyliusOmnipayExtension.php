@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -23,6 +25,21 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusOmnipayExtension extends Extension
 {
+    /**
+     * Registered gateways with name and label.
+     *
+     * @var array
+     */
+    private $gateways;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->gateways = array();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -38,6 +55,11 @@ class SyliusOmnipayExtension extends Extension
         foreach ($config['gateways'] as $name => $parameters) {
             $this->createGatewayService($container, $name, $parameters);
         }
+
+        $container->setParameter('sylius.omnipay.gateways', $this->gateways);
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
     }
 
     /**
@@ -50,8 +72,6 @@ class SyliusOmnipayExtension extends Extension
     public function createGatewayService(ContainerBuilder $container, $name, array $parameters)
     {
         $type = str_replace('_', '\\', $parameters['type']);
-        unset($parameters['type']);
-
         $class = 'Omnipay\\'.$type.'\\Gateway';
 
         $definition = new Definition($class);
@@ -71,6 +91,8 @@ class SyliusOmnipayExtension extends Extension
         }
 
         $container->setDefinition(sprintf('sylius.omnipay.gateway.%s', $name), $definition);
+
+        $this->gateways[$name] = isset($parameters['label']) ? $parameters['label'] : $name;
     }
 
     /**
