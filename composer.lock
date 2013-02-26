@@ -6,7 +6,7 @@
             "version": "2.3.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/common.git",
+                "url": "https://github.com/doctrine/common",
                 "reference": "bb0aebbf234db52df476a2b473d434745b34221c"
             },
             "dist": {
@@ -40,7 +40,7 @@
                     "homepage": "http://www.jwage.com/"
                 },
                 {
-                    "name": "Christoph Dorn",
+                    "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -53,7 +53,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -130,7 +130,7 @@
             "version": "2.3.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/dbal.git",
+                "url": "https://github.com/doctrine/dbal",
                 "reference": "fd45c6f6baa618d871f3201fabe76df5043abb1e"
             },
             "dist": {
@@ -165,7 +165,7 @@
                     "homepage": "http://www.jwage.com/"
                 },
                 {
-                    "name": "Christoph Dorn",
+                    "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -194,7 +194,7 @@
             "target-dir": "Doctrine/Bundle/DoctrineBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/DoctrineBundle.git",
+                "url": "git://github.com/doctrine/DoctrineBundle.git",
                 "reference": "v1.2.0-beta1"
             },
             "dist": {
@@ -392,7 +392,7 @@
             "target-dir": "FOS/Rest",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSRest.git",
+                "url": "https://github.com/FriendsOfSymfony/FOSRest",
                 "reference": "33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4"
             },
             "dist": {
@@ -810,7 +810,7 @@
             "target-dir": "JMS/AopBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
+                "url": "https://github.com/schmittjoh/JMSAopBundle",
                 "reference": "7018357f5bedf204979a88867a9da05973744422"
             },
             "dist": {
@@ -1023,7 +1023,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/parser-lib.git",
+                "url": "git://github.com/schmittjoh/parser-lib",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
             },
             "dist": {
@@ -1193,7 +1193,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenu.git",
+                "url": "http://github.com/KnpLabs/KnpMenu.git",
                 "reference": "730bc37232f5f813822acf80edfbd89381ea5971"
             },
             "dist": {
@@ -1258,7 +1258,7 @@
             "target-dir": "Knp/Bundle/MenuBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
+                "url": "http://github.com/KnpLabs/KnpMenuBundle.git",
                 "reference": "bfaa9f1a74ee590c5e6460a3139b268fce1f1885"
             },
             "dist": {
@@ -1292,7 +1292,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -1383,7 +1383,7 @@
             "target-dir": "Liip/DoctrineCacheBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/liip/LiipDoctrineCacheBundle.git",
+                "url": "git://github.com/liip/LiipDoctrineCacheBundle.git",
                 "reference": "9509ac219388440bb90767ea17cba464c69c5482"
             },
             "dist": {
@@ -1597,12 +1597,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-collection.git",
-                "reference": "2b9f71b9261930b05c3cd1d6ee2baa423b830e39"
+                "reference": "3ce8ffb990e9511c7a843f20740373eb27e4c3bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-collection/zipball/2b9f71b9261930b05c3cd1d6ee2baa423b830e39",
-                "reference": "2b9f71b9261930b05c3cd1d6ee2baa423b830e39",
+                "url": "https://api.github.com/repos/schmittjoh/php-collection/zipball/3ce8ffb990e9511c7a843f20740373eb27e4c3bd",
+                "reference": "3ce8ffb990e9511c7a843f20740373eb27e4c3bd",
                 "shasum": ""
             },
             "require": {
@@ -1627,7 +1627,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1639,14 +1639,14 @@
                 "sequence",
                 "set"
             ],
-            "time": "2013-02-20 19:38:18"
+            "time": "2013-02-25 13:15:41"
         },
         {
             "name": "phpoption/phpoption",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/php-option.git",
+                "url": "git://github.com/schmittjoh/php-option",
                 "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27"
             },
             "dist": {
@@ -1677,7 +1677,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1841,7 +1841,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "url": "git://github.com/swiftmailer/swiftmailer.git",
                 "reference": "b6bfc8f7f8ae5dac7883885ee323dc3b53ab7d21"
             },
             "dist": {
@@ -2175,6 +2175,9 @@
                 "phpspec/phpspec2": "dev-develop",
                 "twig/twig": "*"
             },
+            "suggest": {
+                "friendsofsymfony/rest-bundle": "*"
+            },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2487,6 +2490,10 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
             },
+            "suggest": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/orm": "*"
+            },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2786,12 +2793,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "92e6073c743056b325b9b0c16a1bafc8dade8be9"
+                "reference": "007ebdd8556f36d9bdba6c297a3a60b09fb5bb8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/92e6073c743056b325b9b0c16a1bafc8dade8be9",
-                "reference": "92e6073c743056b325b9b0c16a1bafc8dade8be9",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/007ebdd8556f36d9bdba6c297a3a60b09fb5bb8a",
+                "reference": "007ebdd8556f36d9bdba6c297a3a60b09fb5bb8a",
                 "shasum": ""
             },
             "require": {
@@ -2815,7 +2822,7 @@
                     "Sylius\\Bundle\\WebBundle": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2839,7 +2846,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-02-24 21:45:19"
+            "time": "2013-02-26 16:05:45"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -3121,7 +3128,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig-extensions.git",
+                "url": "https://github.com/fabpot/Twig-extensions",
                 "reference": "5c2d515d4624bdd588226d688173cf0399a4d8cf"
             },
             "dist": {
@@ -3267,7 +3274,7 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Behat/Behat.git",
+                "url": "git://github.com/Behat/Behat.git",
                 "reference": "8ff28797b211a559b682e9c3954bc12af6db1ca0"
             },
             "dist": {
@@ -3331,7 +3338,7 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Behat/Gherkin.git",
+                "url": "git://github.com/Behat/Gherkin.git",
                 "reference": "eb0ce5cd10821aea73df216fc0943f2fdd268962"
             },
             "dist": {
