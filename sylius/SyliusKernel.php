@@ -37,6 +37,7 @@ class SyliusKernel extends Kernel
             new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
             new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
             new Sylius\Bundle\PaymentsBundle\SyliusPaymentsBundle(),
+            new Sylius\Bundle\PromotionsBundle\SyliusPromotionsBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
             new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
