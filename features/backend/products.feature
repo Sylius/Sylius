@@ -94,7 +94,7 @@ Feature: Products
             | Name        | Book about Everything   |
             | Description | Interesting description |
             | Price       | 29.99                   |
-         When I press "Create"
+          And I press "Create"
          Then I should be on the page of product "Book about Everything"
           And I should see "Product has been successfully created."
 
@@ -105,10 +105,25 @@ Feature: Products
             | Description | Interesting description |
             | Price       | 59.99                   |
           And I select "T-Shirt size" from "Options"
-         When I press "Create"
+          And I press "Create"
          Then I should be on the page of product "Manchester United tee"
           And I "Product has been successfully created." should appear on the page
           And I should see "T-Shirt size"
+
+    @javascript
+    Scenario: Specifying the variant selection method
+        Given I am on the product creation page
+         When I fill in the following:
+            | Name        | Book about Everything   |
+            | Description | Interesting description |
+            | Price       | 29.99                   |
+          And go to "Options" tab
+          And I select "T-Shirt size" from "Options"
+          And I select "Options matching" from "Variant selection method"
+          And I press "Create"
+         Then I should be on the page of product "Book about Everything"
+          And I should see "Product has been successfully created."
+          And "Options matching" should appear on the page
 
     @javascript
     Scenario: Creating product with string property
@@ -121,7 +136,7 @@ Feature: Products
           And I click "Add property"
           And I select "T-Shirt fabric" from "Property"
           And I fill in "Value" with "Cotton"
-         When I press "Create"
+          And I press "Create"
          Then I should be on the page of product "Manchester United tee"
           And I "Product has been successfully created." should appear on the page
           And I should see "Cotton"

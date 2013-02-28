@@ -6,7 +6,7 @@
             "version": "2.3.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/common",
+                "url": "https://github.com/doctrine/common.git",
                 "reference": "bb0aebbf234db52df476a2b473d434745b34221c"
             },
             "dist": {
@@ -40,7 +40,7 @@
                     "homepage": "http://www.jwage.com/"
                 },
                 {
-                    "name": "Guilherme Blanco",
+                    "name": "Christoph Dorn",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -53,7 +53,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -130,7 +130,7 @@
             "version": "2.3.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/dbal",
+                "url": "https://github.com/doctrine/dbal.git",
                 "reference": "fd45c6f6baa618d871f3201fabe76df5043abb1e"
             },
             "dist": {
@@ -165,7 +165,7 @@
                     "homepage": "http://www.jwage.com/"
                 },
                 {
-                    "name": "Guilherme Blanco",
+                    "name": "Christoph Dorn",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -194,7 +194,7 @@
             "target-dir": "Doctrine/Bundle/DoctrineBundle",
             "source": {
                 "type": "git",
-                "url": "git://github.com/doctrine/DoctrineBundle.git",
+                "url": "https://github.com/doctrine/DoctrineBundle.git",
                 "reference": "v1.2.0-beta1"
             },
             "dist": {
@@ -392,7 +392,7 @@
             "target-dir": "FOS/Rest",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSRest",
+                "url": "https://github.com/FriendsOfSymfony/FOSRest.git",
                 "reference": "33c35fa3f8e7c3dd08085d849ebaa5bda54dfba4"
             },
             "dist": {
@@ -639,12 +639,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "5d0abf6d629e246f388f355738b90857be25c629"
+                "reference": "d2bd9144075c0bb05fc14844e1446c2054b5da66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5d0abf6d629e246f388f355738b90857be25c629",
-                "reference": "5d0abf6d629e246f388f355738b90857be25c629",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d2bd9144075c0bb05fc14844e1446c2054b5da66",
+                "reference": "d2bd9144075c0bb05fc14844e1446c2054b5da66",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2013-02-20 16:49:53"
+            "time": "2013-02-27 10:20:31"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -684,12 +684,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "a8c5b94ffd6da8773b2d6756ded29d44be875a31"
+                "reference": "8017f0f555e925faf60d511f4d091d40bcf14c3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/a8c5b94ffd6da8773b2d6756ded29d44be875a31",
-                "reference": "a8c5b94ffd6da8773b2d6756ded29d44be875a31",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/8017f0f555e925faf60d511f4d091d40bcf14c3c",
+                "reference": "8017f0f555e925faf60d511f4d091d40bcf14c3c",
                 "shasum": ""
             },
             "require": {
@@ -755,7 +755,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-02-24 18:05:30"
+            "time": "2013-02-24 23:48:40"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -810,7 +810,7 @@
             "target-dir": "JMS/AopBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle",
+                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
                 "reference": "7018357f5bedf204979a88867a9da05973744422"
             },
             "dist": {
@@ -1023,7 +1023,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/schmittjoh/parser-lib",
+                "url": "https://github.com/schmittjoh/parser-lib.git",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
             },
             "dist": {
@@ -1193,7 +1193,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://github.com/KnpLabs/KnpMenu.git",
+                "url": "https://github.com/KnpLabs/KnpMenu.git",
                 "reference": "730bc37232f5f813822acf80edfbd89381ea5971"
             },
             "dist": {
@@ -1258,7 +1258,7 @@
             "target-dir": "Knp/Bundle/MenuBundle",
             "source": {
                 "type": "git",
-                "url": "http://github.com/KnpLabs/KnpMenuBundle.git",
+                "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
                 "reference": "bfaa9f1a74ee590c5e6460a3139b268fce1f1885"
             },
             "dist": {
@@ -1292,7 +1292,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -1383,7 +1383,7 @@
             "target-dir": "Liip/DoctrineCacheBundle",
             "source": {
                 "type": "git",
-                "url": "git://github.com/liip/LiipDoctrineCacheBundle.git",
+                "url": "https://github.com/liip/LiipDoctrineCacheBundle.git",
                 "reference": "9509ac219388440bb90767ea17cba464c69c5482"
             },
             "dist": {
@@ -1646,7 +1646,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/schmittjoh/php-option",
+                "url": "https://github.com/schmittjoh/php-option.git",
                 "reference": "c899903cbc4cadc2b6fb7ab74a1470d59e4c2d27"
             },
             "dist": {
@@ -1677,7 +1677,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1781,12 +1781,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "ba84426a47e555fdf346fc9f8434c2a25b3cee9d"
+                "reference": "18957db1734b2fb6a391e77a3be75b9d8e2008fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/ba84426a47e555fdf346fc9f8434c2a25b3cee9d",
-                "reference": "ba84426a47e555fdf346fc9f8434c2a25b3cee9d",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/18957db1734b2fb6a391e77a3be75b9d8e2008fb",
+                "reference": "18957db1734b2fb6a391e77a3be75b9d8e2008fb",
                 "shasum": ""
             },
             "require": {
@@ -1834,14 +1834,14 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2013-02-19 23:30:04"
+            "time": "2013-02-26 02:07:55"
         },
         {
             "name": "swiftmailer/swiftmailer",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/swiftmailer/swiftmailer.git",
+                "url": "https://github.com/swiftmailer/swiftmailer.git",
                 "reference": "b6bfc8f7f8ae5dac7883885ee323dc3b53ab7d21"
             },
             "dist": {
@@ -2018,12 +2018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCartBundle.git",
-                "reference": "1a47e39778d7b8dd2a9c92e6572da35325d3b15c"
+                "reference": "2e66c35a2e00a0fe220d23ecd8c9f3e36764b3ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/1a47e39778d7b8dd2a9c92e6572da35325d3b15c",
-                "reference": "1a47e39778d7b8dd2a9c92e6572da35325d3b15c",
+                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/2e66c35a2e00a0fe220d23ecd8c9f3e36764b3ff",
+                "reference": "2e66c35a2e00a0fe220d23ecd8c9f3e36764b3ff",
                 "shasum": ""
             },
             "require": {
@@ -2073,7 +2073,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-02-10 21:47:42"
+            "time": "2013-02-26 13:15:22"
         },
         {
             "name": "sylius/core-bundle",
@@ -2082,12 +2082,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "265f8c5604d646c9aead611845980ebef7b1a15f"
+                "reference": "1c9dd82b99c8c219290b2eda55bf0149735e6ce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/265f8c5604d646c9aead611845980ebef7b1a15f",
-                "reference": "265f8c5604d646c9aead611845980ebef7b1a15f",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/1c9dd82b99c8c219290b2eda55bf0149735e6ce4",
+                "reference": "1c9dd82b99c8c219290b2eda55bf0149735e6ce4",
                 "shasum": ""
             },
             "require": {
@@ -2149,7 +2149,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-02-24 21:44:58"
+            "time": "2013-02-28 00:45:07"
         },
         {
             "name": "sylius/inventory-bundle",
@@ -2174,9 +2174,6 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "twig/twig": "*"
-            },
-            "suggest": {
-                "friendsofsymfony/rest-bundle": "*"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2489,10 +2486,6 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.1,<3.0"
-            },
-            "suggest": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3128,7 +3121,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig-extensions",
+                "url": "https://github.com/fabpot/Twig-extensions.git",
                 "reference": "5c2d515d4624bdd588226d688173cf0399a4d8cf"
             },
             "dist": {
@@ -3274,7 +3267,7 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "git://github.com/Behat/Behat.git",
+                "url": "https://github.com/Behat/Behat.git",
                 "reference": "8ff28797b211a559b682e9c3954bc12af6db1ca0"
             },
             "dist": {
@@ -3338,7 +3331,7 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "git://github.com/Behat/Gherkin.git",
+                "url": "https://github.com/Behat/Gherkin.git",
                 "reference": "eb0ce5cd10821aea73df216fc0943f2fdd268962"
             },
             "dist": {

@@ -356,6 +356,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
     /**
      * @Given /^I am on the product page for "([^"]*)"$/
+     * @Given /^I go to the product page for "([^"]*)"$/
      */
     public function iAmBeOnTheProductPage($name)
     {
