@@ -60,7 +60,7 @@ class SyliusMoneyExtension extends Twig_Extension
         $amount = $money->getAmount();
         $currency = $money->getCurrency();
 
-        $result = $this->formatter->formatCurrency($amount, $currency);
+        $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
@@ -71,7 +71,8 @@ class SyliusMoneyExtension extends Twig_Extension
 
     public function convertToMoney($amount, $currency = null)
     {
-        $amount = is_float($amount) ? $amount * 100 : $amount;
+        $amount = (float) $amount;
+        $amount = 100 * $amount;
         $amount = (int) $amount;
 
         $currency = null === $currency ? $this->defaultCurrency : $currency;
