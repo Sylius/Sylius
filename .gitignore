@@ -11,6 +11,7 @@ web/bundles/*
 web/css/*
 web/js/*
 web/assets/*
+web/media/*
 
 bin/*
 vendor/*
