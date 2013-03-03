@@ -65,8 +65,9 @@ class SyliusCartExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_cart_get'  => new Twig_Function_Method($this, 'getCurrentCart'),
-            'sylius_cart_form' => new Twig_Function_Method($this, 'getItemFormView'),
+            'sylius_cart_exists'  => new Twig_Function_Method($this, 'hasCart'),
+            'sylius_cart_get'     => new Twig_Function_Method($this, 'getCurrentCart'),
+            'sylius_cart_form'    => new Twig_Function_Method($this, 'getItemFormView'),
         );
     }
 
@@ -78,6 +79,16 @@ class SyliusCartExtension extends Twig_Extension
     public function getCurrentCart()
     {
         return $this->cartProvider->getCart();
+    }
+
+    /**
+     * Check if a cart exists.
+     *
+     * @return boolean
+     */
+    public function hasCart()
+    {
+        return $this->cartProvider->hasCart();
     }
 
     /**
