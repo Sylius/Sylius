@@ -70,11 +70,7 @@ class CartProvider implements CartProviderInterface
      */
     public function hasCart()
     {
-        if (null !== $this->cart) {
-            return true;
-        } else {
-            return false;
-        }
+        return null !== $this->cart;
     }
 
     /**
