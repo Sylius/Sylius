@@ -226,6 +226,6 @@ class Configuration
             return $default;
         }
 
-        return $this->request->attributes->get($parameter, $default);
+        return $result = $this->request->attributes->get('_'.$this->bundlePrefix .'.'.  $parameter, $default);
     }
 }
