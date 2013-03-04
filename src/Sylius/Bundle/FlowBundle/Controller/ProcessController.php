@@ -14,6 +14,7 @@ namespace Sylius\Bundle\FlowBundle\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Process controller.
@@ -52,7 +53,11 @@ class ProcessController extends ContainerAware
 
         $coordinator = $this->container->get('sylius.process.coordinator');
 
-        return $coordinator->display($scenarioAlias, $stepName);
+        try {
+            return $coordinator->display($scenarioAlias, $stepName);
+        } catch (\InvalidArgumentException $e) {
+            throw new NotFoundHttpException('The step you are looking for is not found.');
+        }
     }
 
     /**
