@@ -115,12 +115,12 @@ class Configuration
 
     public function getTemplate()
     {
-        return $this->get('_template');
+        return $this->get('template');
     }
 
     public function getFormType()
     {
-        return $this->get('_form', $this->getDefaultFormType());
+        return $this->get('form', $this->getDefaultFormType());
     }
 
     public function getDefaultFormType()
@@ -130,7 +130,7 @@ class Configuration
 
     public function getRedirectRoute()
     {
-        $redirect = $this->get('_redirect');
+        $redirect = $this->get('redirect');
 
         if (is_array($redirect)) {
             return $redirect['route'];
@@ -141,7 +141,7 @@ class Configuration
 
     public function getRedirectParameters()
     {
-        $redirect = $this->get('_redirect');
+        $redirect = $this->get('redirect');
 
         if (!is_array($redirect)) {
             return array();
@@ -158,32 +158,32 @@ class Configuration
 
     public function isPaginated()
     {
-        return (Boolean) $this->get('_paginate', true);
+        return (Boolean) $this->get('paginate', true);
     }
 
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->get('_paginate', 10);
+        return (int) $this->get('paginate', 10);
     }
 
     public function getLimit()
     {
-        return (int) $this->get('_limit', 10);
+        return (int) $this->get('limit', 10);
     }
 
     public function isSortable()
     {
-        return (Boolean) $this->get('_sortable', false);
+        return (Boolean) $this->get('sortable', false);
     }
 
     public function isFilterable()
     {
-        return (Boolean) $this->get('_filterable', false);
+        return (Boolean) $this->get('filterable', false);
     }
 
     public function getCriteria()
     {
-        $defaultCriteria = $this->get('_criteria', array());
+        $defaultCriteria = $this->get('criteria', array());
 
         if ($this->isFilterable() && null !== $this->request) {
             return $this->request->get('criteria', $defaultCriteria);
@@ -194,7 +194,7 @@ class Configuration
 
     public function getSorting()
     {
-        $defaultSorting = $this->get('_sorting', array());
+        $defaultSorting = $this->get('sorting', array());
 
         if ($this->isSortable() && null !== $this->request) {
             return $this->request->get('sorting', $defaultSorting);
@@ -205,7 +205,7 @@ class Configuration
 
     public function getFlashMessage()
     {
-        return $this->get('_flash');
+        return $this->get('flash');
     }
 
     public function getRoute()
