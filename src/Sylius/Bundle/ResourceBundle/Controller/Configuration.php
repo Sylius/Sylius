@@ -26,6 +26,7 @@ class Configuration
     protected $resourceName;
     protected $pluralResourceName;
     protected $templateNamespace;
+    protected $parameters;
 
     /**
      * @var Request
@@ -38,6 +39,7 @@ class Configuration
         $this->resourceName = $resourceName;
         $this->pluralResourceName = Pluralization::pluralize($resourceName);
         $this->templateNamespace = $templateNamespace;
+        $this->parameters = array();
     }
 
     public function getBundlePrefix()
@@ -62,6 +64,7 @@ class Configuration
 
     public function setRequest(Request $request)
     {
+        $this->parameters = $request->attributes->get('_sylius');
         $this->request = $request;
     }
 
@@ -226,6 +229,6 @@ class Configuration
             return $default;
         }
 
-        return $result = $this->request->attributes->get('_'.$this->bundlePrefix .'.'.  $parameter, $default);
+        return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] :  $this->request->attributes->get($parameter, $default);
     }
 }
