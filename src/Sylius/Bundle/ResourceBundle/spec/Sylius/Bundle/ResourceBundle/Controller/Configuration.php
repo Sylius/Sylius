@@ -127,7 +127,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_identifier_name_from_request_attributes($request)
     {
-        $request->attributes->set('_identifier', 'slug');
+        $request->attributes->set('identifier', 'slug');
 
         $this->setRequest($request);
         $this->getIdentifierName()->shouldReturn('slug');
@@ -151,7 +151,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_identifier_criteria_from_request($request)
     {
-        $request->attributes->set('_identifier', 'slug');
+        $request->attributes->set('identifier', 'slug');
         $request->get('slug')->willReturn('test-slug');
 
         $this->setRequest($request);
@@ -160,7 +160,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_view_template_from_request_attributes($request)
     {
-        $request->attributes->set('_template', 'SyliusResourceBundle:Test:custom.html.twig');
+        $request->attributes->set('template', 'SyliusResourceBundle:Test:custom.html.twig');
 
         $this->setRequest($request);
         $this->getTemplate()->shouldReturn('SyliusResourceBundle:Test:custom.html.twig');
@@ -173,7 +173,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_form_type_from_request_attributes($request)
     {
-        $request->attributes->set('_form', 'sylius_resource_spec_custom');
+        $request->attributes->set('form', 'sylius_resource_spec_custom');
 
         $this->setRequest($request);
         $this->getFormType()->shouldReturn('sylius_resource_spec_custom');
@@ -181,7 +181,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_redirect_route_from_request_attributes($request)
     {
-        $request->attributes->set('_redirect', 'sylius_resource_list');
+        $request->attributes->set('redirect', 'sylius_resource_list');
 
         $this->setRequest($request);
         $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
@@ -199,7 +199,7 @@ class Configuration extends ObjectBehavior
             'parameters' => array('id' => 1)
         );
 
-        $request->attributes->set('_redirect', $redirect);
+        $request->attributes->set('redirect', $redirect);
 
         $this->setRequest($request);
 
@@ -214,7 +214,7 @@ class Configuration extends ObjectBehavior
             'parameters' => array('id' => '$resourceId')
         );
 
-        $request->attributes->set('_redirect', $redirect);
+        $request->attributes->set('redirect', $redirect);
         $request->get('resourceId')->shouldBeCalled()->willReturn(16);
 
         $this->setRequest($request);
@@ -225,7 +225,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_criteria_from_request_attributes($request)
     {
-        $request->attributes->set('_criteria', array('enabled' => false));
+        $request->attributes->set('criteria', array('enabled' => false));
 
         $this->setRequest($request);
         $this->getCriteria()->shouldReturn(array('enabled' => false));
@@ -234,8 +234,8 @@ class Configuration extends ObjectBehavior
     function it_should_get_criteria_from_request_if_resources_are_filterable($request)
     {
         $request->get('criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
-        $request->attributes->set('_criteria', array('enabled' => false));
-        $request->attributes->set('_filterable', true);
+        $request->attributes->set('criteria', array('enabled' => false));
+        $request->attributes->set('filterable', true);
 
         $this->setRequest($request);
         $this->getCriteria()->shouldReturn(array('locked' => false));
@@ -244,8 +244,8 @@ class Configuration extends ObjectBehavior
     function it_should_not_get_criteria_from_request_if_resources_are_not_filterable($request)
     {
         $request->get('criteria', ANY_ARGUMENT)->shouldNotBeCalled();
-        $request->attributes->set('_criteria', array('enabled' => false));
-        $request->attributes->set('_filterable', false);
+        $request->attributes->set('criteria', array('enabled' => false));
+        $request->attributes->set('filterable', false);
 
         $this->setRequest($request);
         $this->getCriteria()->shouldReturn(array('enabled' => false));
@@ -254,8 +254,8 @@ class Configuration extends ObjectBehavior
     function it_should_get_sorting_from_request_if_resources_are_sortable($request)
     {
         $request->get('sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
-        $request->attributes->set('_sorting', array('name' => 'asc'));
-        $request->attributes->set('_sortable', true);
+        $request->attributes->set('sorting', array('name' => 'asc'));
+        $request->attributes->set('sortable', true);
 
         $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('createdAt' => 'desc'));
@@ -264,8 +264,8 @@ class Configuration extends ObjectBehavior
     function it_should_not_get_sorting_from_request_if_resources_are_not_sortable($request)
     {
         $request->get('sorting', ANY_ARGUMENT)->shouldNotBeCalled();
-        $request->attributes->set('_sorting', array('name' => 'asc'));
-        $request->attributes->set('_sortable', false);
+        $request->attributes->set('sorting', array('name' => 'asc'));
+        $request->attributes->set('sortable', false);
 
         $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('name' => 'asc'));
@@ -273,7 +273,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_get_sorting_from_request_attributes($request)
     {
-        $request->attributes->set('_sorting', array('createdAt' => 'asc'));
+        $request->attributes->set('sorting', array('createdAt' => 'asc'));
 
         $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('createdAt' => 'asc'));
@@ -281,7 +281,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_recognize_resources_as_not_paginated_from_request_attributes($request)
     {
-        $request->attributes->set('_paginate', false);
+        $request->attributes->set('paginate', false);
 
         $this->setRequest($request);
         $this->isPaginated()->shouldReturn(false);
@@ -289,7 +289,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_return_pagination_max_per_page_from_request_attributes($request)
     {
-        $request->attributes->set('_paginate', 25);
+        $request->attributes->set('paginate', 25);
 
         $this->setRequest($request);
         $this->getPaginationMaxPerPage()->shouldReturn(25);
@@ -297,7 +297,7 @@ class Configuration extends ObjectBehavior
 
     function it_should_return_resources_limit_from_request_attributes($request, $attributes)
     {
-        $request->attributes->set('_limit', 20);
+        $request->attributes->set('limit', 20);
 
         $this->setRequest($request);
         $this->getLimit()->shouldReturn(20);
