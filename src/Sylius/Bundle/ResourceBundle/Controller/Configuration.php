@@ -94,7 +94,7 @@ class Configuration
 
     public function getIdentifierName()
     {
-        return $this->get('_identifier', 'id');
+        return $this->get('identifier', 'id');
     }
 
     public function getIdentifierValue()
