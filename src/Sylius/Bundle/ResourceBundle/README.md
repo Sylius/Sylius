@@ -24,7 +24,7 @@ $ bin/phpspec run
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusResourceBundle.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/index.html).
 
 Code examples
 -------------
