@@ -34,8 +34,7 @@ sylius:
             max_length: "Country Name must not be longer than 255 characters|Name must not be longer than 255 characters."
         iso_name:
             not_blank: "Please enter country ISO code."
-            min_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long."
-            max_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long."
+            exact_length: "ISO name must be exactly 2 characters long|ISO name must be exactly 2 characters long."
     province:
         name:
             not_blank: "Please enter province name."
