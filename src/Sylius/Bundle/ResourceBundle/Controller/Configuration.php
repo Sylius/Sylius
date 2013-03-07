@@ -185,6 +185,12 @@ class Configuration
     {
         $defaultCriteria = $this->get('criteria', array());
 
+        foreach($defaultCriteria as $key => $value) {
+            if (is_string($value) && 0 === strpos($value, '$') && $value = $this->request->get(substr($value, 1))) {
+                $defaultCriteria[$key] = $value;
+            }
+        }
+
         if ($this->isFilterable() && null !== $this->request) {
             return $this->request->get('criteria', $defaultCriteria);
         }
