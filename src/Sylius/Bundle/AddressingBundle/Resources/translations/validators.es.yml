@@ -35,7 +35,7 @@ sylius:
             max_length: "El nombre del país no debe ser de más de 255 caracteres|El nombre no debe tener más de 255 caracteres."
         iso_name:
             not_blank: "Por favor ingresa el código ISO del país."
-            exact_length: "El nombre ISO debe ser exactamente de 2 characteres de largo|El nombre ISO exactamente debe ser de 2 caracteres de largo."
+            exact_length: "El nombre ISO debe ser exactamente de 2 caracteres de largo|El nombre ISO exactamente debe ser de 2 caracteres de largo."
     province:
         name:
             not_blank: "Por favor ingresa el nombre del estado."
