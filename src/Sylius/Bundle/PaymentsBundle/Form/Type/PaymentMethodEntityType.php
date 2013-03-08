@@ -11,6 +11,10 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Payment method choice type for "doctrine/orm" driver.
  *
@@ -18,6 +22,32 @@ namespace Sylius\Bundle\PaymentsBundle\Form\Type;
  */
 class PaymentMethodEntityType extends PaymentMethodChoiceType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $queryBuilder = function (Options $options) {
+            if ($options['only_enabled']) {
+                return function (EntityRepository $repository) {
+                    return $repository->createQueryBuilder('method')->where('method.enabled = true');
+                };
+            } else {
+                return function (EntityRepository $repository) {
+                    return $repository->createQueryBuilder('method');
+                };
+            }
+        };
+
+        $resolver
+            ->setDefaults(array(
+                'query_builder' => $queryBuilder
+            ))
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
