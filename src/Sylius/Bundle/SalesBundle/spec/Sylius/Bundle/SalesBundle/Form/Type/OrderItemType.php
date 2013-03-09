@@ -38,9 +38,10 @@ class OrderItemType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_builds_form_with_quantity_field($builder)
+    function it_builds_form_with_quantity_and_unit_price_fields($builder)
     {
-        $builder->add('quantity', 'integer', ANY_ARGUMENT)->shouldBeCalled();
+        $builder->add('quantity', 'integer', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('unitPrice', 'money', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

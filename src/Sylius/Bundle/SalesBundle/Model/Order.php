@@ -45,7 +45,7 @@ class Order implements OrderInterface
     /**
      * Items total.
      *
-     * @var mixed
+     * @var integer
      */
     protected $itemsTotal;
 
@@ -59,7 +59,7 @@ class Order implements OrderInterface
     /**
      * Adjustments total.
      *
-     * @var float
+     * @var integer
      */
     protected $adjustmentsTotal;
 
@@ -67,7 +67,7 @@ class Order implements OrderInterface
      * Calculated total.
      * Items total + adjustments total.
      *
-     * @var float
+     * @var integer
      */
     protected $total;
 

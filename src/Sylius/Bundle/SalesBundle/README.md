@@ -1,5 +1,5 @@
-SyliusSalesBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSalesBundle.png)](http://travis-ci.org/Sylius/SyliusSalesBundle)
-================
+SyliusSalesBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSalesBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusSalesBundle)
+=================
 
 Sales order bundle for Symfony2 e-commerce applications. It allows you to start building you application with sensible and flexible models.
 Provides default forms, controllers, entities, mappings and everything that can help you building your perfect solution.
@@ -17,24 +17,19 @@ Visit [Sylius.org](http://sylius.org).
 ---------------------------------------
 
 ``` bash
-$ composer install --dev --prefer-dist
+$ composer install --dev
 $ bin/phpspec run -f pretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusSalesBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**readthedocs.org**](http://docs.sylius.org/en/latest/bundles/SyliusSalesBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
@@ -45,7 +40,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

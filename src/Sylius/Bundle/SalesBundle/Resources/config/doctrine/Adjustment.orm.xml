@@ -15,8 +15,8 @@
         </many-to-one>
         <field name="label" column="label" type="string" />
         <field name="description" column="description" type="string" nullable="true" />
+        <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />
-        <field name="amount" column="amount" type="decimal" precision="10" scale="2" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

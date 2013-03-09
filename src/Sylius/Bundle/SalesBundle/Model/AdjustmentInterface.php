@@ -70,14 +70,14 @@ interface AdjustmentInterface
     /**
      * Get the adjustment amount.
      *
-     * @return float
+     * @return integer
      */
     public function getAmount();
 
     /**
      * Set the amount.
      *
-     * @param float $amount
+     * @param integer $amount
      */
     public function setAmount($amount);
 

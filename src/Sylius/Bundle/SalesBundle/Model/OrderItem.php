@@ -51,7 +51,7 @@ class OrderItem implements OrderItemInterface
     /**
      * Unit price.
      *
-     * @var float
+     * @var integer
      */
     protected $unitPrice;
 
@@ -65,14 +65,14 @@ class OrderItem implements OrderItemInterface
     /**
      * Adjustments total.
      *
-     * @var float
+     * @var integer
      */
     protected $adjustmentsTotal;
 
     /**
      * Order item total.
      *
-     * @var float
+     * @var integer
      */
     protected $total;
 

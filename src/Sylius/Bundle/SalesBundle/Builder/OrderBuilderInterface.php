@@ -42,7 +42,7 @@ interface OrderBuilderInterface
      * Add a sellable item at specified price and with given quantity.
      *
      * @param SellableInterface $sellable
-     * @param float             $unitPrice
+     * @param integer           $unitPrice
      * @param integer           $quantity
      *
      * @return OrderBuilderInterface

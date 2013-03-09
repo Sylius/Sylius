@@ -81,7 +81,7 @@ class OrderBuilder implements OrderBuilderInterface
     public function add(SellableInterface $sellable, $unitPrice, $quantity = 1)
     {
         if (null === $this->order) {
-            throw new \LogicException('Cannot add new item to order via builder, before creating it');
+            throw new \LogicException('Cannot add new item to order via builder, before creating it.');
         }
 
         $item = $this->itemRepository->createNew();
@@ -101,7 +101,7 @@ class OrderBuilder implements OrderBuilderInterface
     public function getOrder()
     {
         if (null === $this->order) {
-            throw new \LogicException('Cannot get order from builder, without creating it');
+            throw new \LogicException('Cannot get order from builder, without creating it.');
         }
 
         $this->order->calculateTotal();

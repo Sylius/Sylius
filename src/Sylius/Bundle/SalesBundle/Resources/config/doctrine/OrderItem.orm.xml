@@ -10,13 +10,13 @@
         <many-to-one field="order" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" inversed-by="items">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <many-to-one field="sellable" target-entity="Sylius\Bundle\SalesBundle\Model\SellableInterface" inversed-by="items">
+        <many-to-one field="sellable" target-entity="Sylius\Bundle\SalesBundle\Model\SellableInterface">
             <join-column name="sellable_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <field name="quantity" column="quantity" type="integer" />
-        <field name="unitPrice" column="unit_price" type="decimal" precision="10" scale="2" />
-        <field name="adjustmentsTotal" column="adjustments_total" type="decimal" precision="10" scale="2" />
-        <field name="total" column="total" type="decimal" precision="10" scale="2" />
+        <field name="unitPrice" column="unit_price" type="integer" />
+        <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
+        <field name="total" column="total" type="integer" />
     </mapped-superclass>
 
 </doctrine-mapping>

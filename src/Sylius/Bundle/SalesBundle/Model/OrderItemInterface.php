@@ -70,28 +70,28 @@ interface OrderItemInterface extends AdjustableInterface
     /**
      * Get unit price of item.
      *
-     * @return mixed
+     * @return integer
      */
     public function getUnitPrice();
 
     /**
      * Define the unit price of item.
      *
-     * @param mixed $unitPrice
+     * @param integer $unitPrice
      */
     public function setUnitPrice($unitPrice);
 
     /**
      * Get item total.
      *
-     * @return mixed
+     * @return integer
      */
     public function getTotal();
 
     /**
      * Set item total.
      *
-     * @param mixed $total
+     * @param integer $total
      */
     public function setTotal($total);
 

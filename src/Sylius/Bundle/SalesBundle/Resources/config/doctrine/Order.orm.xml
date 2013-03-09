@@ -9,9 +9,9 @@
     <mapped-superclass name="Sylius\Bundle\SalesBundle\Entity\Order" table="sylius_order">
         <field name="number" column="number" type="string" unique="true" />
         <field name="confirmed" column="confirmed" type="boolean" />
-        <field name="itemsTotal" column="items_total" type="decimal" precision="10" scale="2" />
-        <field name="adjustmentsTotal" column="adjustments_total" type="decimal" precision="10" scale="2" />
-        <field name="total" column="total" type="decimal" precision="10" scale="2" />
+        <field name="itemsTotal" column="items_total" type="integer" />
+        <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
+        <field name="total" column="total" type="integer" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

@@ -45,7 +45,7 @@ class SyliusSalesExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_sales.driver', $driver);
-        $container->setParameter('sylius_sales.engine', $config['engine']);
+        $container->setParameter('sylius.engine', $config['engine']);
 
         $this->mapClassParameters($config['classes'], $container);
 

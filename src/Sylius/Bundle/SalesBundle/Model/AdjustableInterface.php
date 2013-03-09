@@ -44,7 +44,7 @@ interface AdjustableInterface
     /**
      * Get adjustments total.
      *
-     * @return mixed
+     * @return integer
      */
     public function getAdjustmentsTotal();
 

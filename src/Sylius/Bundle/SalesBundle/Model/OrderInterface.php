@@ -114,7 +114,7 @@ interface OrderInterface extends AdjustableInterface
     /**
      * Get items total.
      *
-     * @return mixed
+     * @return integer
      */
     public function getItemsTotal();
 
@@ -127,14 +127,14 @@ interface OrderInterface extends AdjustableInterface
     /**
      * Get order total.
      *
-     * @return float
+     * @return integer
      */
     public function getTotal();
 
     /**
      * Set total.
      *
-     * @param float $total
+     * @param integer $total
      */
     public function setTotal($total);
 

@@ -56,7 +56,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * Adjustment amount.
      *
-     * @var float
+     * @var integer
      */
     protected $amount;
 
