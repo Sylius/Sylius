@@ -2,7 +2,7 @@ SyliusCartBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusC
 ================
 
 Flexible cart engine for Symfony2. Should be considered as a base for building solution that fits your exact needs.  
-[Read the documentation](http://sylius.readthedocs.org/en/latest/bundles/SyliusCartBundle/index.html) to know more features.
+[Read the documentation](http://docs.sylius.org/en/latest/bundles/SyliusCartBundle/index.html) to know more features.
 
 Sylius
 ------
@@ -22,17 +22,12 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusCartBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusCartBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
