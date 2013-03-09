@@ -245,6 +245,10 @@ This can be done in various ways, but to keep the example simple - we'll use que
         }
     }
 
+.. note::
+
+    Please remember that **item accepts only integer as price and quantity**.
+
 Register our brand new service in container. We'll use XML as example, but you are free to pick any other format.
 
 .. code-block:: xml
