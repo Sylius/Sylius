@@ -83,8 +83,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I am on the (.+) page?$/
-     * @When /^I go to the (.+) page?$/
+     * @Given /^I am on the (.+) (page|step)?$/
+     * @When /^I go to the (.+) (page|step)?$/
      */
     public function iAmOnThePage($page)
     {
@@ -93,9 +93,9 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
     /**
      * @Then /^I should be on the (homepage)?$/
-     * @Then /^I should be on the (.+) page$/
-     * @Then /^I should be redirected to the (.+) page$/
-     * @Then /^I should still be on the (.+) page$/
+     * @Then /^I should be on the (.+) (page|step)$/
+     * @Then /^I should be redirected to the (.+) (page|step)$/
+     * @Then /^I should still be on the (.+) (page|step)$/
      */
     public function iShouldBeOnThePage($page)
     {
@@ -238,6 +238,15 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I added product "([^""]*)" to cart$/
+     */
+    public function iAddedProductToCart($productName)
+    {
+        $this->iAmOnTheProductPage($productName);
+        $this->pressButton('Add to cart');
+    }
+
+    /**
      * @Then /^(?:.* )?"([^"]*)" should appear on the page$/
      */
     public function textShouldAppearOnThePage($text)
@@ -267,6 +276,38 @@ class WebUser extends MinkContext implements KernelAwareInterface
     public function iFillInProvinceNameWith($value)
     {
         $this->fillField('sylius_country[provinces][0][name]', $value);
+    }
+
+    /**
+     * @Given /^I fill in the (billing|shipping) address to (.+)$/
+     */
+    public function iFillInCheckoutAddress($type, $country)
+    {
+        $base = sprintf('sylius_checkout_addressing[%sAddress]', $type);
+
+        $this->fillField($base.'[firstName]', 'John');
+        $this->fillField($base.'[lastName]', 'Doe');
+        $this->fillField($base.'[street]', 'Pvt. Street 15');
+        $this->fillField($base.'[city]', 'Lodz');
+        $this->fillField($base.'[postcode]', '95-253');
+        $this->selectOption($base.'[country]', $country);
+    }
+
+    /**
+     * @Given /^I select the "(?P<field>([^""]|\\")*)" radio button$/
+     */
+    public function iSelectTheRadioButton($field)
+    {
+        $field = str_replace('\\"', '"', $field);
+        $radio = $this->getSession()->getPage()->findField($field);
+
+        if (null === $radio) {
+            throw new ElementNotFoundException(
+                $this->getSession(), 'form field', 'id|name|label|value', $field
+            );
+        }
+
+        $this->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
     }
 
     /**
@@ -358,7 +399,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      * @Given /^I am on the product page for "([^"]*)"$/
      * @Given /^I go to the product page for "([^"]*)"$/
      */
-    public function iAmBeOnTheProductPage($name)
+    public function iAmOnTheProductPage($name)
     {
         $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
 
@@ -393,6 +434,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     public function iAmLoggedInAsAdministrator()
     {
         $this->iAmLoggedInAsRole('ROLE_SYLIUS_ADMIN');
+    }
+
+    /**
+     * @Given /^I am logged in user$/
+     */
+    public function iAmLoggedInUser()
+    {
+        $this->iAmLoggedInAsRole('ROLE_USER');
     }
 
     /**

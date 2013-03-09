@@ -67,6 +67,8 @@ sylius_cart:
     driver: doctrine/orm
     resolver: sylius.cart_item_resolver.default
     classes:
+        cart:
+            model: Sylius\Bundle\CoreBundle\Entity\Cart
         item:
             model: Sylius\Bundle\CoreBundle\Entity\CartItem
             form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType

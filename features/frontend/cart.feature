@@ -24,6 +24,12 @@ Feature: Cart
           And product "Super T-Shirt" is available in all variations
           And product "Git T-Shirt" is available in all variations
           And product "Black T-Shirt" is available in all variations
+    
+    Scenario: Seeing empty cart
+        Given I am on the store homepage
+         When I follow "View cart"
+         Then I should be on the cart summary page
+          And I should see "Your cart is empty"
 
     Scenario: Adding simple product to cart via list
         Given I am on the store homepage

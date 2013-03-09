@@ -303,6 +303,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 $product->setVariantSelectionMethod($data['variants selection']);
             }
 
+            if (isset($data['tax category'])) {
+                $product->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
+            }
+
             if (isset($data['taxons'])) {
                 $taxons = new ArrayCollection();
 
@@ -564,7 +568,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreShippingMethods(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $data['category']);
+            $category = array_key_exists('category', $data) ? $data['category'] : null;
+            $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $category);
         }
     }
 
@@ -607,6 +612,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
 
+            $enabled = true;
+
+            if(array_key_exists('enabled', $data)) {
+                $enabled = 'yes' === trim($data['enabled']);
+            }
+
+            $method->setEnabled($enabled);
 
             $manager->persist($method);
         }
@@ -620,7 +632,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreCountries(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereisCountry($data['name'], explode(',', $data['provinces']));
+            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
+            $this->thereisCountry($data['name'], $provinces);
         }
     }
 
