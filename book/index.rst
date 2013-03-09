@@ -6,5 +6,7 @@ The Book
 
     symfony
     introduction
+    architecture
+    products
 
 .. include:: /book/map.rst.inc
