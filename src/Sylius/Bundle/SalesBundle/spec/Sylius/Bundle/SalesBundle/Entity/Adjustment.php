@@ -20,17 +20,17 @@ use PHPSpec2\ObjectBehavior;
  */
 class Adjustment extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Entity\Adjustment');
     }
 
-    function it_should_implement_Sylius_adjustment_interface()
+    function it_implements_Sylius_adjustment_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustmentInterface');
     }
 
-    function it_should_extend_Sylius_adjustment_model()
+    function it_extends_Sylius_adjustment_model()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Adjustment');
     }

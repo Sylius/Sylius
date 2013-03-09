@@ -20,17 +20,17 @@ use PHPSpec2\ObjectBehavior;
  */
 class OrderItem extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Entity\OrderItem');
     }
 
-    function it_should_implement_Sylius_order_item_interface()
+    function it_implements_Sylius_order_item_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderItemInterface');
     }
 
-    function it_should_extend_Sylius_order_item_model()
+    function it_extends_Sylius_order_item_model()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\OrderItem');
     }

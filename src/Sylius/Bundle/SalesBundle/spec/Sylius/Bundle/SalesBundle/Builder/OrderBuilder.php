@@ -29,17 +29,17 @@ class OrderBuilder extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $itemRepository);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Builder\OrderBuilder');
     }
 
-    function it_should_be_a_Sylius_order_builder()
+    function it_implements_Sylius_order_builder_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Builder\OrderBuilderInterface');
     }
 
-    function it_should_complain_if_trying_to_get_an_order_before_creating_it()
+    function it_throws_exception_if_trying_to_get_the_order_before_creating_it()
     {
         $this
             ->shouldThrow('LogicException')
@@ -50,7 +50,7 @@ class OrderBuilder extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
      */
-    function it_should_complain_if_trying_to_add_an_item_before_creating_order($sellable)
+    function it_throws_exception_if_trying_to_add_an_item_before_creating_order($sellable)
     {
         $this
             ->shouldThrow('LogicException')
@@ -61,7 +61,7 @@ class OrderBuilder extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
-    function it_should_create_and_order_and_return_itself_to_start($orderRepository, $order)
+    function it_creates_and_order_and_returns_itself($orderRepository, $order)
     {
         $orderRepository->createNew()->willReturn($order);
 
@@ -72,7 +72,7 @@ class OrderBuilder extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
-    function it_should_return_itself_when_starting_to_modify_order($order)
+    function it_returns_itself_when_starting_to_modify_order($order)
     {
         $this->modify($order)->shouldReturn($this);
     }
@@ -80,7 +80,7 @@ class OrderBuilder extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
-    function it_should_return_the_modified_order($order)
+    function it_returns_the_modified_order($order)
     {
         $this->modify($order);
         $this->getOrder()->shouldReturn($order);
@@ -91,7 +91,7 @@ class OrderBuilder extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
-    function it_should_create_an_order_item_for_given_sellable_unit_price_and_quantity($orderRepository, $itemRepository, $sellable, $order, $item)
+    function it_creates_an_order_item_for_given_sellable_unit_price_and_quantity($orderRepository, $itemRepository, $sellable, $order, $item)
     {
         $orderRepository->createNew()->willReturn($order);
         $itemRepository->createNew()->willReturn($item);
@@ -113,7 +113,7 @@ class OrderBuilder extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
-    function it_should_add_sellable_with_quantity_equal_to_1_by_default($orderRepository, $itemRepository, $sellable, $order, $item)
+    function it_adds_sellable_with_quantity_equal_to_1_by_default($orderRepository, $itemRepository, $sellable, $order, $item)
     {
         $orderRepository->createNew()->willReturn($order);
         $itemRepository->createNew()->willReturn($item);
@@ -135,7 +135,7 @@ class OrderBuilder extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
-    function it_should_calculate_order_total_on_final($orderRepository, $itemRepository, $sellable, $order, $item)
+    function it_calculates_order_total_at_the_return($orderRepository, $itemRepository, $sellable, $order, $item)
     {
         $orderRepository->createNew()->willReturn($order);
         $itemRepository->createNew()->willReturn($item);

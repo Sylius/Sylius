@@ -25,12 +25,12 @@ class OrderItemType extends ObjectBehavior
         $this->beConstructedWith('OrderItem');
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Form\Type\OrderItemType');
     }
 
-    function it_should_be_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
@@ -38,7 +38,7 @@ class OrderItemType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_should_build_a_form_with_quantity_field($builder)
+    function it_builds_form_with_quantity_field($builder)
     {
         $builder->add('quantity', 'integer', ANY_ARGUMENT)->shouldBeCalled();
 
@@ -48,7 +48,7 @@ class OrderItemType extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    function it_should_define_assigned_data_class($resolver)
+    function it_defines_assigned_data_class($resolver)
     {
         $resolver->setDefaults(array('data_class' => 'OrderItem'))->shouldBeCalled();
 

@@ -20,22 +20,22 @@ use PHPSpec2\ObjectBehavior;
  */
 class Adjustment extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Adjustment');
     }
 
-    function it_should_implement_Sylius_adjustment_interface()
+    function it_implements_Sylius_adjustment_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustmentInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_belong_to_an_adjustable_by_default()
+    function it_does_not_belong_to_an_adjustable_by_default()
     {
         $this->getAdjustable()->shouldReturn(null);
     }
@@ -44,7 +44,7 @@ class Adjustment extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface     $order
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $orderItem
      */
-    function it_should_allow_assigning_itself_to_an_adjustable($order, $orderItem)
+    function it_allows_assigning_itself_to_an_adjustable($order, $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -57,7 +57,7 @@ class Adjustment extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface     $order
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $orderItem
      */
-    function it_should_allow_detaching_itself_from_an_adjustable($order, $orderItem)
+    function it_allows_detaching_itself_from_an_adjustable($order, $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -72,52 +72,52 @@ class Adjustment extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_should_not_have_label_by_default()
+    function it_has_no_label_by_default()
     {
         $this->getLabel()->shouldReturn(null);
     }
 
-    function its_label_should_be_mutable()
+    function its_label_is_mutable()
     {
         $this->setLabel('Shipping Fee');
         $this->getLabel()->shouldReturn('Shipping Fee');
     }
 
-    function it_should_not_have_description_by_default()
+    function it_has_no_description_by_default()
     {
         $this->getDescription()->shouldReturn(null);
     }
 
-    function its_description_should_be_mutable()
+    function its_description_is_mutable()
     {
         $this->setDescription('Clothing tax (12%)');
         $this->getDescription()->shouldReturn('Clothing tax (12%)');
     }
 
-    function it_should_have_amount_equal_to_0_by_default()
+    function it_has_amount_equal_to_0_by_default()
     {
         $this->getAmount()->shouldReturn(0);
     }
 
-    function its_amount_should_be_mutable()
+    function its_amount_is_mutable()
     {
         $this->setAmount(399);
         $this->getAmount()->shouldReturn(399);
     }
 
-    function it_should_not_be_neutral_by_default()
+    function it_is_not_neutral_by_default()
     {
         $this->shouldNotBeNeutral();
     }
 
-    function its_neutrality_should_be_mutable()
+    function its_neutrality_is_mutable()
     {
         $this->shouldNotBeNeutral();
         $this->setNeutral(true);
         $this->shouldBeNeutral();
     }
 
-    function it_should_be_a_charge_if_amount_is_lesser_than_0()
+    function it_is_a_charge_if_amount_is_lesser_than_0()
     {
         $this->setAmount(-4.99);
         $this->shouldBeCharge();
@@ -126,7 +126,7 @@ class Adjustment extends ObjectBehavior
         $this->shouldNotBeCharge();
     }
 
-    function it_should_be_a_credit_if_amount_is_greater_than_0()
+    function it_is_a_credit_if_amount_is_greater_than_0()
     {
         $this->setAmount(29.99);
         $this->shouldBeCredit();
@@ -135,12 +135,12 @@ class Adjustment extends ObjectBehavior
         $this->shouldNotBeCredit();
     }
 
-    function it_should_initialize_creation_date_by_default()
+    function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function it_should_not_have_last_update_date_by_default()
+    function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
@@ -148,7 +148,7 @@ class Adjustment extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustableInterface $adjustable
      */
-    function it_should_have_fluent_interface($adjustable)
+    function it_has_fluent_interface($adjustable)
     {
         $this->setAdjustable($adjustable)->shouldReturn($this);
         $this->setLabel('Shipping fee')->shouldReturn($this);

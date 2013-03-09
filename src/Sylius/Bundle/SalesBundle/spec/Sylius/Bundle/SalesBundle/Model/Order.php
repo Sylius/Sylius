@@ -20,38 +20,38 @@ use PHPSpec2\ObjectBehavior;
  */
 class Order extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Order');
     }
 
-    function it_should_implement_Sylius_order_interface()
+    function it_implements_Sylius_order_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderInterface');
     }
 
-    function it_should_implement_Sylius_adjustable_interface()
+    function it_implements_Sylius_adjustable_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustableInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_number_by_default()
+    function it_has_no_number_by_default()
     {
         $this->getNumber()->shouldReturn(null);
     }
 
-    function its_number_should_be_mutable()
+    function its_number_is_mutable()
     {
         $this->setNumber('001351');
         $this->getNumber()->shouldReturn('001351');
     }
 
-    function it_should_intitialize_items_collection_by_default()
+    function it_creates_items_collection_by_default()
     {
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
@@ -59,7 +59,7 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
-    function it_should_add_items_properly($item)
+    function it_adds_items_properly($item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -70,7 +70,7 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
-    function it_should_remove_items_properly($item)
+    function it_removes_items_properly($item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -84,7 +84,7 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
-    function it_should_have_fluent_interface_for_items_management($item)
+    function it_has_fluent_interface_for_items_management($item)
     {
         $this->addItem($item)->shouldReturn($this);
         $this->removeItem($item)->shouldReturn($this);
@@ -92,7 +92,7 @@ class Order extends ObjectBehavior
         $this->clearItems()->shouldReturn($this);
     }
 
-    function it_should_have_items_total_equal_to_0_by_default()
+    function it_has_items_total_equal_to_0_by_default()
     {
         $this->getItemsTotal()->shouldReturn(0);
     }
@@ -102,11 +102,11 @@ class Order extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item3
      */
-    function it_should_calculate_correct_items_total($item1, $item2, $item3)
+    function it_calculates_correct_items_total($item1, $item2, $item3)
     {
-        $item1->getTotal()->willReturn(299.99);
-        $item2->getTotal()->willReturn(450);
-        $item3->getTotal()->willReturn(2.50);
+        $item1->getTotal()->willReturn(29999);
+        $item2->getTotal()->willReturn(45000);
+        $item3->getTotal()->willReturn(250);
 
         $item1->equals(ANY_ARGUMENT)->willReturn(false);
         $item2->equals(ANY_ARGUMENT)->willReturn(false);
@@ -120,10 +120,10 @@ class Order extends ObjectBehavior
 
         $this->calculateItemsTotal();
 
-        $this->getItemsTotal()->shouldReturn(752.49);
+        $this->getItemsTotal()->shouldReturn(75249);
     }
 
-    function it_should_initialize_adjustments_collection_by_default()
+    function it_creates_adjustments_collection_by_default()
     {
         $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
@@ -131,7 +131,7 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
-    function it_should_add_adjustments_properly($adjustment)
+    function it_adds_adjustments_properly($adjustment)
     {
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -143,7 +143,7 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
-    function it_should_remove_adjustments_properly($adjustment)
+    function it_removes_adjustments_properly($adjustment)
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);
 
@@ -161,13 +161,13 @@ class Order extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
-    function it_should_have_fluent_interface_for_adjustments_management($adjustment)
+    function it_has_fluent_interface_for_adjustments_management($adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
-    function it_should_have_adjustments_total_equal_to_0_by_default()
+    function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
     }
@@ -177,11 +177,11 @@ class Order extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment3
      */
-    function it_should_calculate_correct_adjustments_total($adjustment1, $adjustment2, $adjustment3)
+    function it_calculates_correct_adjustments_total($adjustment1, $adjustment2, $adjustment3)
     {
-        $adjustment1->getAmount()->willReturn(100);
-        $adjustment2->getAmount()->willReturn(-49.99);
-        $adjustment3->getAmount()->willReturn(19.29);
+        $adjustment1->getAmount()->willReturn(10000);
+        $adjustment2->getAmount()->willReturn(-4999);
+        $adjustment3->getAmount()->willReturn(1929);
 
         $adjustment1->isNeutral()->willReturn(false);
         $adjustment2->isNeutral()->willReturn(false);
@@ -195,10 +195,10 @@ class Order extends ObjectBehavior
 
         $this->calculateAdjustmentsTotal();
 
-        $this->getAdjustmentsTotal()->shouldReturn(69.30);
+        $this->getAdjustmentsTotal()->shouldReturn(6930);
     }
 
-    function it_should_have_total_equal_to_0_by_default()
+    function it_has_total_equal_to_0_by_default()
     {
         $this->getTotal()->shouldReturn(0);
     }
@@ -209,18 +209,18 @@ class Order extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
      */
-    function it_should_calculate_correct_total($item1, $item2, $adjustment1, $adjustment2)
+    function it_calculates_correct_total($item1, $item2, $adjustment1, $adjustment2)
     {
-        $item1->getTotal()->willReturn(299.99);
-        $item2->getTotal()->willReturn(450);
+        $item1->getTotal()->willReturn(29999);
+        $item2->getTotal()->willReturn(45000);
 
         $item1->equals(ANY_ARGUMENT)->willReturn(false);
         $item2->equals(ANY_ARGUMENT)->willReturn(false);
 
         $adjustment1->isNeutral()->willReturn(false);
-        $adjustment1->getAmount()->willReturn(100);
+        $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->isNeutral()->willReturn(false);
-        $adjustment2->getAmount()->willReturn(-49.99);
+        $adjustment2->getAmount()->willReturn(-4999);
 
         $this
             ->addItem($item1)
@@ -231,7 +231,7 @@ class Order extends ObjectBehavior
 
         $this->calculateTotal();
 
-        $this->getTotal()->shouldReturn(800.00);
+        $this->getTotal()->shouldReturn(80000);
     }
 
     /**
@@ -240,18 +240,18 @@ class Order extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
      * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
      */
-    function it_should_ignore_neutral_adjustments_when_calculating_total($item1, $item2, $adjustment1, $adjustment2)
+    function it_ignores_neutral_adjustments_when_calculating_total($item1, $item2, $adjustment1, $adjustment2)
     {
-        $item1->getTotal()->willReturn(299.99);
-        $item2->getTotal()->willReturn(450);
+        $item1->getTotal()->willReturn(29999);
+        $item2->getTotal()->willReturn(45000);
 
         $item1->equals(ANY_ARGUMENT)->willReturn(false);
         $item2->equals(ANY_ARGUMENT)->willReturn(false);
 
         $adjustment1->isNeutral()->willReturn(true);
-        $adjustment1->getAmount()->willReturn(100);
+        $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->isNeutral()->willReturn(false);
-        $adjustment2->getAmount()->willReturn(-49.99);
+        $adjustment2->getAmount()->willReturn(-4999);
 
         $this
             ->addItem($item1)
@@ -262,37 +262,37 @@ class Order extends ObjectBehavior
 
         $this->calculateTotal();
 
-        $this->getTotal()->shouldReturn(700.00);
+        $this->getTotal()->shouldReturn(70000);
     }
 
-    function it_should_be_confirmed_by_default()
+    function it_is_confirmed_by_default()
     {
         $this->shouldBeConfirmed();
     }
 
-    function its_confirmation_status_should_be_mutable()
+    function its_confirmation_status_is_mutable()
     {
         $this->setConfirmed(false);
         $this->isConfirmed()->shouldReturn(false);
     }
 
-    function it_should_not_have_confirmation_token_by_default()
+    function it_has_no_confirmation_token_by_default()
     {
         $this->getConfirmationToken()->shouldReturn(null);
     }
 
-    function its_confirmation_token_should_be_mutable()
+    function its_confirmation_token_is_mutable()
     {
         $this->setConfirmationToken('abc123');
         $this->getConfirmationToken()->shouldReturn('abc123');
     }
 
-    function it_should_initialize_creation_date_by_default()
+    function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function it_should_not_have_last_update_date_by_default()
+    function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }

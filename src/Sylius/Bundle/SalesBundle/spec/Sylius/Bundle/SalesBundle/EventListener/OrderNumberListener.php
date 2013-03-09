@@ -28,7 +28,7 @@ class OrderNumberListener extends ObjectBehavior
         $this->beConstructedWith($generator);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\EventListener\OrderNumberListener');
     }
@@ -37,7 +37,7 @@ class OrderNumberListener extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
      */
-    function it_should_generate_order_number($generator, $event, $order)
+    function it_generates_order_number($generator, $event, $order)
     {
         $event->getSubject()->willReturn($order);
         $generator->generate($order)->shouldBeCalled();

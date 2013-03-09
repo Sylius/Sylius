@@ -28,12 +28,12 @@ class OrderNumberGenerator extends ObjectBehavior
         $this->beConstructedWith($orderRepository);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Generator\OrderNumberGenerator');
     }
 
-    function it_should_implement_Sylius_order_number_generator_interface()
+    function it_implements_Sylius_order_number_generator_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Generator\OrderNumberGeneratorInterface');
     }
@@ -41,7 +41,7 @@ class OrderNumberGenerator extends ObjectBehavior
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
-    function it_should_generate_000001_number_for_first_order($orderRepository, $order)
+    function it_generates_000001_number_for_first_order($orderRepository, $order)
     {
         $orderRepository->findBy(array(), array('createdAt' => 'desc'), 1)->willReturn(array());
         $order->setNumber('000001')->shouldBeCalled();
@@ -53,7 +53,7 @@ class OrderNumberGenerator extends ObjectBehavior
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $lastOrder
      */
-    function it_should_generate_a_correct_number_for_following_orders($orderRepository, $order, $lastOrder)
+    function it_generates_a_correct_number_for_following_orders($orderRepository, $order, $lastOrder)
     {
         $orderRepository->findBy(array(), array('createdAt' => 'desc'), 1)->willReturn(array($lastOrder));
         $lastOrder->getNumber()->willReturn('000469');

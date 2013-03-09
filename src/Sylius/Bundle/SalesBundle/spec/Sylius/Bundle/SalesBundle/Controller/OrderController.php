@@ -25,17 +25,17 @@ class OrderController extends ObjectBehavior
         $this->beConstructedWith('sylius', 'order', 'SyliusSalesBundle:Order');
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SalesBundle\Controller\OrderController');
     }
 
-    function it_should_be_a_controller()
+    function it_is_a_controller()
     {
         $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\Controller');
     }
 
-    function it_should_be_Sylius_resource_controller()
+    function it_extends_Sylius_resource_controller()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
