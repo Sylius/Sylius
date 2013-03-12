@@ -46,8 +46,8 @@ Feature: Products
 
     Scenario: Listing only simple product prices
         Given I am on the product index page
-         Then I should see product with price "5.99" in that list
-          But I should not see product with price "19.99" in that list
+         Then I should see product with price "€5.99" in that list
+          But I should not see product with price "€19.99" in that list
 
     Scenario: Seeing empty index of products
         Given there are no products

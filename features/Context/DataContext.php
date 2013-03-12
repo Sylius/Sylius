@@ -290,7 +290,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $product = $repository->createNew();
             $product->setName(trim($data['name']));
             $product->setDescription('...');
-            $product->getMasterVariant()->setPrice($data['price']);
+            $product->getMasterVariant()->setPrice($data['price'] * 100);
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {

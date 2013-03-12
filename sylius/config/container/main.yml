@@ -63,6 +63,9 @@ swiftmailer:
     password:  %sylius.mailer.password%
     spool:     { type: memory }
 
+sylius_money:
+    currency: %sylius.currency%
+
 sylius_cart:
     driver: doctrine/orm
     resolver: sylius.cart_item_resolver.default
