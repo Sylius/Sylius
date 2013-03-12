@@ -2984,12 +2984,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "88a3e98996badc312fd4f92c3764fb4670dd187e"
+                "reference": "9bd7a26089ec207138ab3c5b074ba9c9a1a29248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/88a3e98996badc312fd4f92c3764fb4670dd187e",
-                "reference": "88a3e98996badc312fd4f92c3764fb4670dd187e",
+                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/9bd7a26089ec207138ab3c5b074ba9c9a1a29248",
+                "reference": "9bd7a26089ec207138ab3c5b074ba9c9a1a29248",
                 "shasum": ""
             },
             "require": {
@@ -3039,7 +3039,7 @@
                 "shop",
                 "webshop"
             ],
-            "time": "2013-03-12 22:45:13"
+            "time": "2013-03-12 23:07:49"
         },
         {
             "name": "sylius/taxation-bundle",
@@ -3559,12 +3559,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "b6c2171579b4ab8c193322796ef757a185729cb8"
+                "reference": "ba67e2cf8e2ca6cada1de5a316a724df648c52ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/b6c2171579b4ab8c193322796ef757a185729cb8",
-                "reference": "b6c2171579b4ab8c193322796ef757a185729cb8",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/ba67e2cf8e2ca6cada1de5a316a724df648c52ac",
+                "reference": "ba67e2cf8e2ca6cada1de5a316a724df648c52ac",
                 "shasum": ""
             },
             "require": {
@@ -3600,7 +3600,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-03-07 06:57:14"
+            "time": "2013-03-10 07:23:01"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3651,7 +3651,616 @@
             "time": "2013-02-18 10:43:20"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+        {
+            "name": "behat/behat",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Behat.git",
+                "reference": "982b5ec101c0f383417e2a3cdbd111fdf81908de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/982b5ec101c0f383417e2a3cdbd111fdf81908de",
+                "reference": "982b5ec101c0f383417e2a3cdbd111fdf81908de",
+                "shasum": ""
+            },
+            "require": {
+                "behat/gherkin": ">=2.2.9,<2.3",
+                "php": ">=5.3.1",
+                "symfony/config": ">=2.0,<3.0",
+                "symfony/console": ">=2.0,<3.0",
+                "symfony/dependency-injection": ">=2.0,<3.0",
+                "symfony/event-dispatcher": ">=2.0,<3.0",
+                "symfony/finder": ">=2.0,<3.0",
+                "symfony/translation": ">=2.0,<3.0",
+                "symfony/yaml": ">=2.0,<3.0"
+            },
+            "suggest": {
+                "behat/mink-extension": "for integration with Mink testing framework",
+                "behat/symfony2-extension": "for integration with Symfony2 web framework",
+                "behat/yii-extension": "for integration with Yii web framework"
+            },
+            "bin": [
+                "bin/behat"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Behat": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Scenario-oriented BDD framework for PHP 5.3",
+            "homepage": "http://behat.org/",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "Symfony2"
+            ],
+            "time": "2013-03-11 22:09:36"
+        },
+        {
+            "name": "behat/gherkin",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Gherkin.git",
+                "reference": "70a37689d6fc5d4b9772dfac35c112f031306d09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/70a37689d6fc5d4b9772dfac35c112f031306d09",
+                "reference": "70a37689d6fc5d4b9772dfac35c112f031306d09",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "symfony/finder": ">=2.0,<3.0"
+            },
+            "require-dev": {
+                "symfony/config": ">=2.0,<3.0",
+                "symfony/translation": ">=2.0,<3.0",
+                "symfony/yaml": ">=2.0,<3.0"
+            },
+            "suggest": {
+                "symfony/config": "If you want to use Config component to manage resources",
+                "symfony/translation": "If you want to use Symfony2 translations adapter",
+                "symfony/yaml": "If you want to parse features, represented in YAML files"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Gherkin": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Gherkin DSL parser for PHP 5.3",
+            "homepage": "http://behat.org/",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "DSL",
+                "Symfony2",
+                "parser"
+            ],
+            "time": "2013-03-08 10:25:28"
+        },
+        {
+            "name": "behat/mink",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Mink.git",
+                "reference": "fb92a89923068cb21811a8830063602e90d83dab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Mink/zipball/fb92a89923068cb21811a8830063602e90d83dab",
+                "reference": "fb92a89923068cb21811a8830063602e90d83dab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "symfony/css-selector": ">=2.0,<3.0"
+            },
+            "suggest": {
+                "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
+                "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
+                "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
+                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Web acceptance testing framework for PHP 5.3",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "browser",
+                "testing",
+                "web"
+            ],
+            "time": "2013-03-11 19:39:00"
+        },
+        {
+            "name": "behat/mink-browserkit-driver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/MinkBrowserKitDriver.git",
+                "reference": "v1.0.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/v1.0.4",
+                "reference": "v1.0.4",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": ">=1.4.3,<1.5",
+                "php": ">=5.3.1",
+                "symfony/browser-kit": ">=2.0,<3.0",
+                "symfony/dom-crawler": ">=2.0,<3.0"
+            },
+            "require-dev": {
+                "silex/silex": "@dev"
+            },
+            "type": "mink-driver",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink\\Driver": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Symfony2 BrowserKit driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "Mink",
+                "Symfony2",
+                "browser",
+                "testing"
+            ],
+            "time": "2013-03-08 09:50:41"
+        },
+        {
+            "name": "behat/mink-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/MinkExtension.git",
+                "reference": "07014c6c81ffdb7a2c41681816e513d8c03376e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/07014c6c81ffdb7a2c41681816e513d8c03376e2",
+                "reference": "07014c6c81ffdb7a2c41681816e513d8c03376e2",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": ">=2.4.5,<2.5",
+                "behat/mink": ">=1.4.3,<1.5",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "behat/mink-goutte-driver": ">=1.0.7,<1.1"
+            },
+            "type": "behat-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\MinkExtension": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Mink extension for Behat",
+            "homepage": "http://mink.behat.org",
+            "keywords": [
+                "browser",
+                "gui",
+                "test",
+                "web"
+            ],
+            "time": "2013-03-12 09:30:49"
+        },
+        {
+            "name": "behat/mink-selenium2-driver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/MinkSelenium2Driver.git",
+                "reference": "20011ad0e3aca7ccab324bd15bb0cd72d232229f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/20011ad0e3aca7ccab324bd15bb0cd72d232229f",
+                "reference": "20011ad0e3aca7ccab324bd15bb0cd72d232229f",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": ">=1.4.3,<1.5",
+                "instaclick/php-webdriver": ">=1.0.12.0,<1.1",
+                "php": ">=5.3.1"
+            },
+            "type": "mink-driver",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink\\Driver": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Pete Otaqui",
+                    "email": "pete@otaqui.com",
+                    "homepage": "https://github.com/pete-otaqui"
+                }
+            ],
+            "description": "Selenium2 (WebDriver) driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "ajax",
+                "browser",
+                "javascript",
+                "selenium",
+                "testing",
+                "webdriver"
+            ],
+            "time": "2013-03-09 12:34:04"
+        },
+        {
+            "name": "behat/symfony2-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Symfony2Extension.git",
+                "reference": "64500e58c23c1179c625900ea38bbe46bd106f9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/64500e58c23c1179c625900ea38bbe46bd106f9b",
+                "reference": "64500e58c23c1179c625900ea38bbe46bd106f9b",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": ">=2.4,<2.5-dev",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.0,<2.3-dev"
+            },
+            "require-dev": {
+                "behat/mink": ">=1.4,<2.5-dev",
+                "behat/mink-browserkit-driver": "1.0.*",
+                "behat/mink-extension": "1.0.*",
+                "symfony/symfony": ">=2.1,<2.3-dev"
+            },
+            "type": "behat-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Symfony2Extension": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Symfony2 framework extension for Behat",
+            "homepage": "http://behat.org",
+            "keywords": [
+                "BDD",
+                "framework",
+                "symfony"
+            ],
+            "time": "2013-02-20 19:06:45"
+        },
+        {
+            "name": "instaclick/php-webdriver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/instaclick/php-webdriver.git",
+                "reference": "6f2196bc09dbf4f8eaa2bbcc94d4fc979544706a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/6f2196bc09dbf4f8eaa2bbcc94d4fc979544706a",
+                "reference": "6f2196bc09dbf4f8eaa2bbcc94d4fc979544706a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "WebDriver": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Bishop",
+                    "email": "jubishop@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anthon Pang",
+                    "email": "apang@softwaredevelopment.ca",
+                    "role": "developer"
+                }
+            ],
+            "description": "PHP WebDriver for Selenium 2",
+            "homepage": "http://instaclick.com/torontotechjobs/",
+            "keywords": [
+                "browser",
+                "selenium",
+                "webdriver",
+                "webtest"
+            ],
+            "time": "2013-02-21 16:05:33"
+        },
+        {
+            "name": "mockery/mockery",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/padraic/mockery.git",
+                "reference": "0.7.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/padraic/mockery/zipball/0.7.2",
+                "reference": "0.7.2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "Hamcrest": "1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mockery": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "New BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Pádraic Brady",
+                    "email": "padraic.brady@gmail.com",
+                    "homepage": "http://blog.astrumfutura.com"
+                }
+            ],
+            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
+            "homepage": "http://github.com/padraic/mockery",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "library",
+                "mock",
+                "mock objects",
+                "mockery",
+                "stub",
+                "test",
+                "test double",
+                "testing"
+            ],
+            "time": "2012-01-24 12:22:39"
+        },
+        {
+            "name": "phpspec/php-diff",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/php-diff.git",
+                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Diff": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "homepage": "http://github.com/chrisboulton"
+                }
+            ],
+            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "time": "2012-11-08 08:55:45"
+        },
+        {
+            "name": "phpspec/phpspec2",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/phpspec2.git",
+                "reference": "8e841da15e21121c4c96ef81ec1975ef984b813f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/phpspec2/zipball/8e841da15e21121c4c96ef81ec1975ef984b813f",
+                "reference": "8e841da15e21121c4c96ef81ec1975ef984b813f",
+                "shasum": ""
+            },
+            "require": {
+                "mockery/mockery": "0.7.*",
+                "php": ">=5.3.3",
+                "phpspec/php-diff": "*@dev",
+                "symfony/console": ">=2.1,<3.0",
+                "symfony/event-dispatcher": ">=2.1,<3.0",
+                "symfony/finder": ">=2.1,<3.0",
+                "symfony/yaml": ">=2.1,<3.0"
+            },
+            "bin": [
+                "bin/phpspec"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PHPSpec2": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Marcello Duarte",
+                    "homepage": "http://marcelloduarte.net/"
+                }
+            ],
+            "description": "Specification-oriented BDD framework for PHP 5.3+",
+            "homepage": "http://phpspec.net/",
+            "keywords": [
+                "BDD",
+                "SpecBDD",
+                "TDD",
+                "spec",
+                "specification",
+                "testing",
+                "tests"
+            ],
+            "time": "2013-02-08 11:19:58"
+        }
+    ],
     "aliases": [
 
     ],
@@ -3659,5 +4268,11 @@
     "stability-flags": {
         "mathiasverraes/money": 20,
         "phpspec/phpspec2": 20
-    }
+    },
+    "platform": {
+        "php": ">=5.3.3"
+    },
+    "platform-dev": [
+
+    ]
 }
