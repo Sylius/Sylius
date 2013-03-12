@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Money\Currency;
-use Money\Money;
 use Twig_Extension;
 use Twig_Filter_Method;
 use Twig_Function_Method;
@@ -38,16 +36,6 @@ class SyliusMoneyExtension extends Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
-    {
-        return array(
-            'sylius_money_convert' => new Twig_Function_Method($this, 'convertToMoney', array('is_safe' => array('html'))),
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters()
     {
         return array(
@@ -55,29 +43,24 @@ class SyliusMoneyExtension extends Twig_Extension
         );
     }
 
-    public function formatMoney(Money $money)
+    /**
+     * Format the money amount to nice display form.
+     *
+     * @param integer $amount
+     * @param string  $currency
+     *
+     * @return string
+     */
+    public function formatMoney($amount, $currency = null)
     {
-        $amount = $money->getAmount();
-        $currency = $money->getCurrency();
-
+        $currency = $currency ?: $this->defaultCurrency;
         $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
         }
 
-        return $result;
-    }
-
-    public function convertToMoney($amount, $currency = null)
-    {
-        $amount = (float) $amount;
-        $amount = 100 * $amount;
-        $amount = (int) $amount;
-
-        $currency = null === $currency ? $this->defaultCurrency : $currency;
-
-        return new Money($amount, new Currency($currency));
+        return str_replace(' ', ' ', $result);
     }
 
     /**

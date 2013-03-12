@@ -25,6 +25,7 @@
     },
     "require-dev": {
         "twig/twig":        "~1.11",
+        "symfony/form":     "~2.2",
         "phpspec/phpspec2": "dev-develop",
         "phpspec/php-diff": "*"
     },
