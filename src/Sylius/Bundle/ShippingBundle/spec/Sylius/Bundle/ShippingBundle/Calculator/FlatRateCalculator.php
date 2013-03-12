@@ -58,8 +58,8 @@ class FlatRateCalculator extends ObjectBehavior
     function it_should_calculate_the_flat_rate_amount_configured_on_the_method($shipment, $method)
     {
         $shipment->getMethod()->willReturn($method);
-        $method->getConfiguration()->willReturn(array('amount' => 15.00));
+        $method->getConfiguration()->willReturn(array('amount' => 1500));
 
-        $this->calculate($shipment)->shouldReturn(15.00);
+        $this->calculate($shipment)->shouldReturn(1500);
     }
 }

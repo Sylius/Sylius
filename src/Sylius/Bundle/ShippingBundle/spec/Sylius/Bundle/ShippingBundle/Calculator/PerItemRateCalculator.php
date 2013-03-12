@@ -59,11 +59,11 @@ class PerItemRateCalculator extends ObjectBehavior
     function it_should_calculate_the_total_with_the_per_item_amount_configured_on_the_method($shipment, $shippingItems, $method)
     {
         $shipment->getMethod()->willReturn($method);
-        $method->getConfiguration()->willReturn(array('amount' => 2.00));
+        $method->getConfiguration()->willReturn(array('amount' => 200));
 
         $shippingItems->count()->willReturn(11);
         $shipment->getItems()->willReturn($shippingItems);
 
-        $this->calculate($shipment)->shouldReturn(22.00);
+        $this->calculate($shipment)->shouldReturn(2200);
     }
 }

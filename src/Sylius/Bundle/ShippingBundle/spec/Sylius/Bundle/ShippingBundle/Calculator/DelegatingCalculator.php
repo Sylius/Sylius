@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Calculator;
 
 use PHPSpec2\ObjectBehavior;
-use Sylius\Bundle\ShippingBundle\Calculator\UndefinedShippingMethodException;
 
 /**
  * Delegating calculator spec.
@@ -68,8 +67,8 @@ class DelegatingCalculator extends ObjectBehavior
         $method->getCalculator()->willReturn('default');
 
         $registry->getCalculator('default')->willReturn($calculator);
-        $calculator->calculate($shipment)->shouldBeCalled()->willReturn(10.00);
+        $calculator->calculate($shipment)->shouldBeCalled()->willReturn(1000);
 
-        $this->calculate($shipment)->shouldReturn(10.00);
+        $this->calculate($shipment)->shouldReturn(1000);
     }
 }

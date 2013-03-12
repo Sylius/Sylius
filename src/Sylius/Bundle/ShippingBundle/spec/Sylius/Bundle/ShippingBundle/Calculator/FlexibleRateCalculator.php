@@ -68,8 +68,8 @@ class FlexibleRateCalculator extends ObjectBehavior
     function it_should_calculate_the_first_item_cost_if_shipment_has_only_one_item($shipment, $shippingItems, $method)
     {
         $configuration = array(
-            'first_item_cost'       => 10.00,
-            'additional_item_cost'  => 2.00,
+            'first_item_cost'       => 1000,
+            'additional_item_cost'  => 200,
             'additional_item_limit' => 0
         );
 
@@ -79,7 +79,7 @@ class FlexibleRateCalculator extends ObjectBehavior
         $shippingItems->count()->willReturn(1);
         $shipment->getItems()->willReturn($shippingItems);
 
-        $this->calculate($shipment)->shouldReturn(10.00);
+        $this->calculate($shipment)->shouldReturn(1000);
     }
 
     /**
@@ -90,8 +90,8 @@ class FlexibleRateCalculator extends ObjectBehavior
     function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items($shipment, $shippingItems, $method)
     {
         $configuration = array(
-            'first_item_cost'       => 15.00,
-            'additional_item_cost'  => 3.00,
+            'first_item_cost'       => 1500,
+            'additional_item_cost'  => 300,
             'additional_item_limit' => 0
         );
 
@@ -101,7 +101,7 @@ class FlexibleRateCalculator extends ObjectBehavior
         $shippingItems->count()->willReturn(5);
         $shipment->getItems()->willReturn($shippingItems);
 
-        $this->calculate($shipment)->shouldReturn(27.00);
+        $this->calculate($shipment)->shouldReturn(2700);
     }
 
     /**
@@ -112,8 +112,8 @@ class FlexibleRateCalculator extends ObjectBehavior
     function it_should_calculate_the_first_and_every_additional_item_cost_taking_limit_into_account($shipment, $shippingItems, $method)
     {
         $configuration = array(
-            'first_item_cost'       => 15.00,
-            'additional_item_cost'  => 3.00,
+            'first_item_cost'       => 1500,
+            'additional_item_cost'  => 300,
             'additional_item_limit' => 3
         );
 
@@ -123,6 +123,6 @@ class FlexibleRateCalculator extends ObjectBehavior
         $shippingItems->count()->willReturn(8);
         $shipment->getItems()->willReturn($shippingItems);
 
-        $this->calculate($shipment)->shouldReturn(24.00);
+        $this->calculate($shipment)->shouldReturn(2400);
     }
 }
