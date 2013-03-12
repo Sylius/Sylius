@@ -30,14 +30,14 @@ class FlexibleRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_item_cost', 'money', array(
+            ->add('first_item_cost', 'sylius_money', array(
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_item_cost',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
-            ->add('additional_item_cost', 'money', array(
+            ->add('additional_item_cost', 'sylius_money', array(
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_cost',
                 'constraints' => array(
                     new NotBlank(),
