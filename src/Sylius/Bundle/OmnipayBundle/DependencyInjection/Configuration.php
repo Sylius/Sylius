@@ -46,7 +46,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $builder  = new TreeBuilder();
-        $rootNode = $builder->root('sylius_payments');
+        $rootNode = $builder->root('sylius_omnipay');
 
         $rootNode
             ->children()
