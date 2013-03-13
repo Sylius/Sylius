@@ -24,8 +24,24 @@ $ php sylius/console doctrine:fixtures:load # If you want to load sample data.
 [Behat](http://behat.org) scenarios
 -----------------------------------
 
+You need to copy Behat default configuration file and enter your specific ``base_url``
+option there.
+
+```bash
+$ cp behat.yml.dist behat.yml
+$ vi behat.yml
+```
+
+Then download [Selenium Server](http://seleniumhq.org/download/), and run it.
+
+```bash
+$ java -jar selenium-server-standalone-2.11.0.jar
+```
+You can run Behat using the following command.
+
 ``` bash
-$ ./bin/behat
+$ bin/behat
+$ bin/behat -p no-js # If you want to skip the scenarios which require real browser.
 ```
 
 Contributing
@@ -36,7 +52,7 @@ All informations about contributing to Sylius can be found on [this page](http:/
 Sylius on twitter
 -----------------
 
-If you want to keep up with the updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with the updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
