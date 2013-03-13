@@ -48,35 +48,35 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
                 ->children()
-                ->arrayNode('gateways')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
-                ->children()
-                ->scalarNode('type')
-                ->validate()
-                ->ifTrue(function($type) use ($gateways){
-                            if (empty($type)) {
-                                return true;
-                            }
+                    ->arrayNode('gateways')
+                        ->useAttributeAsKey('name')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('type')
+                                    ->validate()
+                                        ->ifTrue(function($type) use ($gateways){
+                                                    if (empty($type)) {
+                                                        return true;
+                                                    }
 
-                            if (!in_array($type, $gateways)) {
-                                return true;
-                            }
+                                                    if (!in_array($type, $gateways)) {
+                                                        return true;
+                                                    }
 
-                            return false;
-                        })
-                ->thenInvalid(sprintf('Unknown payment gateway selected. Valid gateways are: %s.',  implode(", ",$gateways)))
-                ->end()
-                ->end()
-                ->scalarNode('label')->cannotBeEmpty()->end()
-                ->booleanNode('mode')->defaultFalse()->end()
-                ->booleanNode('active')->defaultTrue()->end()
-                ->arrayNode('options')
-                ->prototype('scalar')
-                ->end()
-                ->end()
-                ->end()
-                ->end()
+                                                    return false;
+                                                })
+                                        ->thenInvalid(sprintf('Unknown payment gateway selected. Valid gateways are: %s.',  implode(", ",$gateways)))
+                                    ->end()
+                                ->end()
+                                ->scalarNode('label')->cannotBeEmpty()->end()
+                                ->booleanNode('mode')->defaultFalse()->end()
+                                ->booleanNode('active')->defaultTrue()->end()
+                                ->arrayNode('options')
+                                    ->prototype('scalar')
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
                 ->end()
         ;
 
