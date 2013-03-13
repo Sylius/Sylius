@@ -1,11 +1,25 @@
 Sylius [![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch=master)](http://travis-ci.org/Sylius/Sylius)
 ======
 
-Sylius is ecommerce solution for [Symfony2 framework](http://symfony.com)...
-See the [DEMO](http://sylius.org/sandbox/).
+Sylius is **modern ecommerce solution for PHP**, based on the [**Symfony2**](http://symfony.com) framework.
 
-Quick installation
-------------------
+Installation
+------------
+
+``` bash
+$ wget http://getcomposer.org/composer.phar
+$ php composer.phar create-project sylius/sylius -s dev
+```
+
+Then configure your project and create database.
+
+``` bash
+$ cd sylius
+$ vi sylius/config/container/parameters.yml # And put your values!
+$ php sylius/console doctrine:database:create
+$ php sylius/console doctrine:schema:create
+$ php sylius/console doctrine:fixtures:load # If you want to load sample data.
+```
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
