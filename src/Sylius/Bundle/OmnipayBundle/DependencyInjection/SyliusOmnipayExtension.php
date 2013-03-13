@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Omnipay\Common\Helper as OmnipayHelper;
+use Omnipay\Common\Helper;
 
 /**
  * Payments dependency injection extension.
@@ -26,7 +26,6 @@ use Omnipay\Common\Helper as OmnipayHelper;
  */
 class SyliusOmnipayExtension extends Extension
 {
-
     /**
      * Registered gateways with name and label.
      *
@@ -74,7 +73,7 @@ class SyliusOmnipayExtension extends Extension
     public function createGatewayService(ContainerBuilder $container, $name, array $parameters)
     {
         $type = $parameters['type'];
-        $class = trim(OmnipayHelper::getGatewayClassName($type), "\\");
+        $class = trim(Helper::getGatewayClassName($type), "\\");
 
         $definition = new Definition($class);
         $definition

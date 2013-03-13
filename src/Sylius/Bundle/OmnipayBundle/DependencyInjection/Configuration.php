@@ -13,8 +13,7 @@ namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Omnipay\Common\GatewayFactory as OmnipayGatewayFactory;
-use Omnipay\Common\Helper as OmnipayHelper;
+use Omnipay\Common\GatewayFactory;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -23,19 +22,6 @@ use Omnipay\Common\Helper as OmnipayHelper;
  */
 class Configuration implements ConfigurationInterface
 {
-
-    /**
-     * List of known gateways.
-     *
-     * @var array
-     */
-    private $gateways;
-
-    public function __construct()
-    {
-        $this->gateways = OmnipayGatewayFactory::find();
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -44,7 +30,7 @@ class Configuration implements ConfigurationInterface
         $builder = new TreeBuilder();
         $rootNode = $builder->root('sylius_omnipay');
 
-        $gateways = $this->getGateways();
+        $gateways = GatewayFactory::find();
 
         $rootNode
                 ->children()
@@ -82,10 +68,4 @@ class Configuration implements ConfigurationInterface
 
         return $builder;
     }
-
-    public function getGateways()
-    {
-        return $this->gateways;
-    }
-
 }
