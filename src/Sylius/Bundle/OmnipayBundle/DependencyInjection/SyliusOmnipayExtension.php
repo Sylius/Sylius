@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Omnipay\Common\Helper as OmnipayHelper;
 
 /**
  * Payments dependency injection extension.
@@ -25,6 +26,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusOmnipayExtension extends Extension
 {
+
     /**
      * Registered gateways with name and label.
      *
@@ -49,7 +51,7 @@ class SyliusOmnipayExtension extends Extension
         $config = $processor->processConfiguration(new Configuration(), $configs);
 
         $container->setDefinition('sylius.omnipay.gateway_factory', new Definition(
-            'Omnipay\\Common\\GatewayFactory'
+                'Omnipay\\Common\\GatewayFactory'
         ));
 
         foreach ($config['gateways'] as $name => $parameters) {
@@ -58,7 +60,7 @@ class SyliusOmnipayExtension extends Extension
 
         $container->setParameter('sylius.omnipay.gateways', $this->gateways);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
 
@@ -71,19 +73,19 @@ class SyliusOmnipayExtension extends Extension
      */
     public function createGatewayService(ContainerBuilder $container, $name, array $parameters)
     {
-        $type = str_replace('_', '\\', $parameters['type']);
-        $class = 'Omnipay\\'.$type.'\\Gateway';
+        $type = $parameters['type'];
+        $class = trim(OmnipayHelper::getGatewayClassName($type), "\\");
 
         $definition = new Definition($class);
         $definition
-            ->setFactoryService('sylius.omnipay.gateway_factory')
-            ->setFactoryMethod('create')
-            ->setArguments(array($type))
+                ->setFactoryService('sylius.omnipay.gateway_factory')
+                ->setFactoryMethod('create')
+                ->setArguments(array($type))
         ;
 
         $reflection = new \ReflectionClass($class);
         foreach ($parameters['options'] as $optionName => $value) {
-            $method = 'set'.ucfirst($optionName);
+            $method = 'set' . ucfirst($optionName);
 
             if ($reflection->hasMethod($method)) {
                 $definition->addMethodCall($method, array($value));
@@ -102,4 +104,5 @@ class SyliusOmnipayExtension extends Extension
     {
         return 'sylius_omnipay';
     }
+
 }
