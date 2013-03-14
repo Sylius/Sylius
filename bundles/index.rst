@@ -12,6 +12,7 @@ Bundles reference
     SyliusInventoryBundle/index
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
+    SyliusOmnipayBundle/index
     SyliusTaxonomiesBundle/index
     SyliusSettingsBundle/index
     SyliusFlowBundle/index
