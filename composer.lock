@@ -3176,12 +3176,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "b457e8f107f3d1c7915011b61fdd4543e77750be"
+                "reference": "eb4dc6a203c5ae93e0a7c73da0ac5ba006f505b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/b457e8f107f3d1c7915011b61fdd4543e77750be",
-                "reference": "b457e8f107f3d1c7915011b61fdd4543e77750be",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/eb4dc6a203c5ae93e0a7c73da0ac5ba006f505b7",
+                "reference": "eb4dc6a203c5ae93e0a7c73da0ac5ba006f505b7",
                 "shasum": ""
             },
             "require": {
@@ -3229,7 +3229,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-03-08 23:59:53"
+            "time": "2013-03-12 19:06:12"
         },
         {
             "name": "symfony/assetic-bundle",
