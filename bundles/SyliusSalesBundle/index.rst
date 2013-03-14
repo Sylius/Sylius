@@ -1,6 +1,17 @@
 SyliusSalesBundle
 =================
 
-.. note::
+This bundle is a foundation for sales order handling for Symfony2 projects.
+It allows you to use any model as the merchandise.
 
-    To be written.
+It also includes super flexible adjustments feature, which serves as a base for any taxation, shipping charges or discounts system.
+
+.. toctree::
+   :numbered:
+
+   installation
+   models
+   adjustments
+   builder
+   services
+   summary
