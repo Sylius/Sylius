@@ -13,6 +13,7 @@ namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Omnipay\Common\GatewayFactory;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -22,117 +23,49 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * List of known gateways.
-     *
-     * @var array
-     */
-    public static $gateways = array(
-        'authorizenet',
-        'cardsafe',
-        'dummy',
-        'gocardless',
-        'paypal',
-        'payflow',
-        'paymentexpress',
-        'pin',
-        'stripe',
-        'twocheckout',
-        'worldpay',
-    );
-
-    /**
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-        $builder  = new TreeBuilder();
-        $rootNode = $builder->root('sylius_payments');
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('sylius_omnipay');
+
+        $gateways = GatewayFactory::find();
 
         $rootNode
-            ->children()
-                ->arrayNode('gateways')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->scalarNode('type')
-                                ->validate()
-                                    ->ifTrue(function($type) {
-                                        if (empty($type)) {
-                                            return true;
-                                        }
+                ->children()
+                    ->arrayNode('gateways')
+                        ->useAttributeAsKey('name')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('type')
+                                    ->validate()
+                                        ->ifTrue(function($type) use ($gateways){
+                                                    if (empty($type)) {
+                                                        return true;
+                                                    }
 
-                                        if (!in_array(strtolower($type), self::$gateways)) {
-                                            return true;
-                                        }
+                                                    if (!in_array($type, $gateways)) {
+                                                        return true;
+                                                    }
 
-                                        return false;
-                                    })
-                                    ->thenInvalid('Unknown payment gateway selected "%s".')
+                                                    return false;
+                                                })
+                                        ->thenInvalid(sprintf('Unknown payment gateway selected. Valid gateways are: %s.',  implode(", ",$gateways)))
+                                    ->end()
                                 ->end()
-                                ->validate()
-                                    ->ifTrue(function($type) {
-                                        return true; // fake =)
-                                    })
-                                    ->then(function($type) {
-                                        return $this->translateTypeName($type);
-                                    })
+                                ->scalarNode('label')->cannotBeEmpty()->end()
+                                ->booleanNode('mode')->defaultFalse()->end()
+                                ->booleanNode('active')->defaultTrue()->end()
+                                ->arrayNode('options')
+                                    ->prototype('scalar')
                                 ->end()
-                            ->end()
-                            ->scalarNode('label')->cannotBeEmpty()->end()
-                            ->booleanNode('mode')->defaultFalse()->end()
-                            ->booleanNode('active')->defaultTrue()->end()
-                            ->arrayNode('options')
-                                ->prototype('scalar')
                             ->end()
                         ->end()
                     ->end()
                 ->end()
-            ->end()
         ;
 
         return $builder;
-    }
-
-    private function translateTypeName($type)
-    {
-        switch ($type) {
-            case 'authorizenet':
-                $class = 'AuthorizeNet';
-                break;
-            case 'cardsafe':
-                $class = 'CardSafe';
-                break;
-            case 'dummy':
-                $class = 'Dummy';
-                break;
-            case 'gocardless':
-                $class = 'GoCardless';
-                break;
-            case 'paypal':
-                $class = 'PayPal';
-                break;
-            case 'payflow':
-                $class = 'Payflow';
-                break;
-            case 'paymentexpress':
-                $class = 'PaymentExpress';
-                break;
-            case 'pin':
-                $class = 'Pin';
-                break;
-            case 'stripe':
-                $class = 'Stripe';
-                break;
-            case 'twocheckout':
-                $class = 'TwoCheckout';
-                break;
-            case 'worldpay':
-                $class = 'WorldPay';
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('Unknown payment gateway selected "%s".', $type));
-        }
-
-        return $class;
     }
 }
