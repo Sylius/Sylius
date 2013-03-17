@@ -63,6 +63,9 @@ swiftmailer:
     password:  %sylius.mailer.password%
     spool:     { type: memory }
 
+sylius_core:
+    driver: doctrine/orm
+
 sylius_money:
     currency: %sylius.currency%
 
@@ -153,3 +156,29 @@ liip_doctrine_cache:
     namespaces:
         sylius_settings:
             type: %sylius.cache%
+
+knp_gaufrette:
+    adapters:
+        variant_image:
+            local:
+                directory:  %kernel.root_dir%/../web/media/image/variant
+                create:     true
+    filesystems:
+        variant_image:
+            adapter: variant_image
+
+liip_imagine:
+    data_root: %kernel.root_dir%/../web/media/image/variant
+    filter_sets:
+        variant_s:
+            filters:
+                thumbnail: { size: [50, 40], mode: outbound }
+        variant_m:
+            filters:
+                thumbnail: { size: [90, 60], mode: outbound }
+        variant_l:
+            filters:
+                thumbnail: { size: [310, 300], mode: outbound }
+        variant_xl:
+            filters:
+                thumbnail: { size: [610, 600], mode: outbound }

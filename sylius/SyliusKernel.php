@@ -56,7 +56,9 @@ class SyliusKernel extends Kernel
 
             // Third party bundles.
             new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
