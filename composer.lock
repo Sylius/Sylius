@@ -1,18 +1,18 @@
 {
-    "hash": "f7a1298bec7bc148a382349a9ba8130b",
+    "hash": "9dc925fb39fd8ecfdda3143a0a64463e",
     "packages": [
         {
             "name": "doctrine/annotations",
-            "version": "v1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "v1.0"
+                "reference": "62d4608f70c5c411a6ad339ed8aedad3542a2be8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/annotations/archive/v1.0.zip",
-                "reference": "v1.0",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/62d4608f70c5c411a6ad339ed8aedad3542a2be8",
+                "reference": "62d4608f70c5c411a6ad339ed8aedad3542a2be8",
                 "shasum": ""
             },
             "require": {
@@ -23,6 +23,11 @@
                 "doctrine/cache": "1.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Common\\Annotations\\": "lib/"
@@ -39,7 +44,7 @@
                     "homepage": "http://www.jwage.com/"
                 },
                 {
-                    "name": "Christoph Dorn",
+                    "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -52,7 +57,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -65,7 +70,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2013-01-12 19:23:32"
+            "time": "2013-03-16 18:48:48"
         },
         {
             "name": "doctrine/cache",
@@ -335,12 +340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "569f1aed578585df904c7dbfc43aa39cb09877cc"
+                "reference": "8df9cd3668363f017dfea56b5ad448ea74dae49b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/569f1aed578585df904c7dbfc43aa39cb09877cc",
-                "reference": "569f1aed578585df904c7dbfc43aa39cb09877cc",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/8df9cd3668363f017dfea56b5ad448ea74dae49b",
+                "reference": "8df9cd3668363f017dfea56b5ad448ea74dae49b",
                 "shasum": ""
             },
             "require": {
@@ -369,7 +374,7 @@
                     "homepage": "http://www.jwage.com/"
                 },
                 {
-                    "name": "Christoph Dorn",
+                    "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -390,7 +395,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-03-04 22:37:48"
+            "time": "2013-03-14 21:55:05"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -768,17 +773,17 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "dev-master",
+            "version": "0.11.0",
             "target-dir": "FOS/RestBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "990ef344d3c937dd2195babe94a4204559876b2d"
+                "reference": "0.11.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/990ef344d3c937dd2195babe94a4204559876b2d",
-                "reference": "990ef344d3c937dd2195babe94a4204559876b2d",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/0.11.0",
+                "reference": "0.11.0",
                 "shasum": ""
             },
             "require": {
@@ -791,10 +796,10 @@
             },
             "require-dev": {
                 "jms/serializer-bundle": "0.11.*",
-                "sensio/framework-extra-bundle": ">=2.1,<2.3-dev",
-                "symfony/form": ">=2.1,<2.3-dev",
-                "symfony/security": ">=2.1,<2.3-dev",
-                "symfony/yaml": ">=2.1,<2.3-dev"
+                "sensio/framework-extra-bundle": ">=2.1,<2.4-dev",
+                "symfony/form": ">=2.1,<2.4-dev",
+                "symfony/security": ">=2.1,<2.4-dev",
+                "symfony/yaml": ">=2.1,<2.4-dev"
             },
             "suggest": {
                 "jms/serializer-bundle": "Add support for advanced serialization capabilities, recommended, requires 0.11.*",
@@ -836,7 +841,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2013-03-05 05:46:40"
+            "time": "2013-03-11 13:13:23"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1087,6 +1092,53 @@
             "time": "2013-03-12 10:18:58"
         },
         {
+            "name": "imagine/Imagine",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine",
+                "reference": "v0.4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/avalanche123/Imagine/archive/v0.4.1.zip",
+                "reference": "v0.4.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2012-12-13 18:31:18"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "dev-master",
             "source": {
@@ -1142,7 +1194,7 @@
             "target-dir": "JMS/AopBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
+                "url": "https://github.com/schmittjoh/JMSAopBundle",
                 "reference": "7018357f5bedf204979a88867a9da05973744422"
             },
             "dist": {
@@ -1355,7 +1407,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/parser-lib.git",
+                "url": "git://github.com/schmittjoh/parser-lib",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
             },
             "dist": {
@@ -1521,11 +1573,143 @@
             "time": "2013-02-12 08:32:04"
         },
         {
+            "name": "knplabs/gaufrette",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/Gaufrette.git",
+                "reference": "88488e9a735a77e519103897d93ec9f89d7510e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/88488e9a735a77e519103897d93ec9f89d7510e1",
+                "reference": "88488e9a735a77e519103897d93ec9f89d7510e1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "amazonwebservices/aws-sdk-for-php": "1.5.*",
+                "doctrine/dbal": ">=2.3",
+                "dropbox-php/dropbox-php": "*",
+                "herzult/php-ssh": "*",
+                "phpspec/phpspec2": "dev-master",
+                "phpunit/phpunit": "3.7.*",
+                "rackspace/php-cloudfiles": "*"
+            },
+            "suggest": {
+                "amazonwebservices/aws-sdk-for-php": "to use the Amazon S3 adapter",
+                "doctrine/dbal": "to use the Doctrine DBAL adapter",
+                "dropbox-php/dropbox-php": "to use the Dropbox adapter",
+                "ext-apc": "to use the APC adapter",
+                "ext-curl": "*",
+                "ext-mbstring": "*",
+                "ext-mongo": "*",
+                "ext-zip": "to use the Zip adapter",
+                "knplabs/knp-gaufrette-bundle": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Gaufrette": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "The contributors",
+                    "homepage": "http://github.com/knplabs/Gaufrette/contributors"
+                },
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "PHP5 library that provides a filesystem abstraction layer",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "abstraction",
+                "file",
+                "filesystem",
+                "media"
+            ],
+            "time": "2013-03-14 13:27:30"
+        },
+        {
+            "name": "knplabs/knp-gaufrette-bundle",
+            "version": "dev-master",
+            "target-dir": "Knp/Bundle/GaufretteBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
+                "reference": "013f50495b58c4d241e5cc993cb58592e179ff98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/013f50495b58c4d241e5cc993cb58592e179ff98",
+                "reference": "013f50495b58c4d241e5cc993cb58592e179ff98",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/gaufrette": "0.2.*@dev",
+                "symfony/framework-bundle": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "symfony/console": "2.*",
+                "symfony/yaml": "2.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Bundle\\GaufretteBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antoine Hérault",
+                    "email": "antoine.herault@gmail.com",
+                    "homepage": "https://github.com/Herzult"
+                },
+                {
+                    "name": "The contributors",
+                    "homepage": "https://github.com/knplabs/KnpGaufretteBundle/contributors"
+                }
+            ],
+            "description": "Allows to easily use the Gaufrette library in a Symfony project",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "abstraction",
+                "file",
+                "filesystem",
+                "media"
+            ],
+            "time": "2013-03-01 13:08:05"
+        },
+        {
             "name": "knplabs/knp-menu",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenu.git",
+                "url": "http://github.com/KnpLabs/KnpMenu.git",
                 "reference": "730bc37232f5f813822acf80edfbd89381ea5971"
             },
             "dist": {
@@ -1590,7 +1774,7 @@
             "target-dir": "Knp/Bundle/MenuBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
+                "url": "http://github.com/KnpLabs/KnpMenuBundle.git",
                 "reference": "bfaa9f1a74ee590c5e6460a3139b268fce1f1885"
             },
             "dist": {
@@ -1624,7 +1808,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -1715,7 +1899,7 @@
             "target-dir": "Liip/DoctrineCacheBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/liip/LiipDoctrineCacheBundle.git",
+                "url": "git://github.com/liip/LiipDoctrineCacheBundle.git",
                 "reference": "9509ac219388440bb90767ea17cba464c69c5482"
             },
             "dist": {
@@ -1751,6 +1935,59 @@
                 "cache"
             ],
             "time": "2013-02-01 07:47:54"
+        },
+        {
+            "name": "liip/imagine-bundle",
+            "version": "v0.9.1",
+            "target-dir": "Liip/ImagineBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liip/LiipImagineBundle.git",
+                "reference": "v0.9.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/v0.9.1",
+                "reference": "v0.9.1",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "0.4.*",
+                "php": ">=5.3.2",
+                "symfony/filesystem": ">=2.0.16,<2.3-dev",
+                "symfony/finder": ">=2.0.16,<2.3-dev",
+                "symfony/framework-bundle": ">=2.0.16,<2.3-dev"
+            },
+            "require-dev": {
+                "symfony/yaml": ">=2.0.16,<2.3-dev",
+                "twig/twig": ">=1.0,<2.0-dev"
+            },
+            "suggest": {
+                "twig/twig": ">=1.0,<2.0-dev"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Liip\\ImagineBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Liip and other contributors",
+                    "homepage": "https://github.com/liip/LiipImagineBundle/contributors"
+                }
+            ],
+            "description": "This Bundle assists in imagine manipulation using the imagine library",
+            "homepage": "http://liip.ch",
+            "keywords": [
+                "image",
+                "imagine"
+            ],
+            "time": "2013-02-20 15:18:48"
         },
         {
             "name": "mathiasverraes/money",
@@ -2173,7 +2410,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "url": "git://github.com/swiftmailer/swiftmailer.git",
                 "reference": "b6bfc8f7f8ae5dac7883885ee323dc3b53ab7d21"
             },
             "dist": {
@@ -2414,12 +2651,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "7bb798a2c7e95be4e0b011c67464b524faa7b467"
+                "reference": "b07f68d5548ada7cec369f593e2278d7c16f143d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/7bb798a2c7e95be4e0b011c67464b524faa7b467",
-                "reference": "7bb798a2c7e95be4e0b011c67464b524faa7b467",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/b07f68d5548ada7cec369f593e2278d7c16f143d",
+                "reference": "b07f68d5548ada7cec369f593e2278d7c16f143d",
                 "shasum": ""
             },
             "require": {
@@ -2427,6 +2664,7 @@
                 "fsc/hateoas-bundle": "0.3.x-dev",
                 "fzaninotto/faker": "1.1.*",
                 "jms/serializer-bundle": "0.11.*",
+                "knplabs/knp-gaufrette-bundle": "0.2.*",
                 "php": ">=5.3.3",
                 "sylius/addressing-bundle": "0.1.*",
                 "sylius/assortment-bundle": "0.1.*",
@@ -2444,7 +2682,7 @@
                 "symfony/framework-bundle": ">=2.2,<2.3-dev"
             },
             "require-dev": {
-                "phpspec/phpspec2": "dev-develop",
+                "phpspec/phpspec2": "1.0.*",
                 "symfony/form": ">=2.2,<2.3-dev"
             },
             "type": "symfony-bundle",
@@ -2482,7 +2720,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-03-12 22:45:33"
+            "time": "2013-03-17 02:04:34"
         },
         {
             "name": "sylius/flow-bundle",
@@ -2562,6 +2800,9 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "twig/twig": "*"
+            },
+            "suggest": {
+                "friendsofsymfony/rest-bundle": "*"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3176,16 +3417,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "eb4dc6a203c5ae93e0a7c73da0ac5ba006f505b7"
+                "reference": "f5d30c5e1fc6717bdf19dfb787c03cad2ed9ba39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/eb4dc6a203c5ae93e0a7c73da0ac5ba006f505b7",
-                "reference": "eb4dc6a203c5ae93e0a7c73da0ac5ba006f505b7",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/f5d30c5e1fc6717bdf19dfb787c03cad2ed9ba39",
+                "reference": "f5d30c5e1fc6717bdf19dfb787c03cad2ed9ba39",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu-bundle": "2.0.*",
+                "liip/imagine-bundle": "0.9.*",
                 "php": ">=5.3.3",
                 "sylius/core-bundle": "0.1.*",
                 "symfony/framework-bundle": ">=2.1,<3.0"
@@ -3229,7 +3471,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-03-12 19:06:12"
+            "time": "2013-03-17 02:05:39"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -3609,12 +3851,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
-                "reference": "f664b66bc9351c6dd24026b3cf4c897705e51b26"
+                "reference": "9cce71a2cfffa4e3d08a41b6ddd31ef0249a0aea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/f664b66bc9351c6dd24026b3cf4c897705e51b26",
-                "reference": "f664b66bc9351c6dd24026b3cf4c897705e51b26",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/9cce71a2cfffa4e3d08a41b6ddd31ef0249a0aea",
+                "reference": "9cce71a2cfffa4e3d08a41b6ddd31ef0249a0aea",
                 "shasum": ""
             },
             "require": {
@@ -3648,7 +3890,7 @@
                 "page",
                 "paging"
             ],
-            "time": "2013-02-18 10:43:20"
+            "time": "2013-03-14 08:58:21"
         }
     ],
     "packages-dev": [
