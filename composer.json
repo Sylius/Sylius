@@ -2,6 +2,7 @@
     "name":        "sylius/sylius",
     "description": "Modern ecommerce for Symfony2",
     "license":     "MIT",
+    "homepage":    "http://sylius.org",
     "authors": [
         {
             "name":     "Paweł Jędrzejewski",
