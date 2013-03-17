@@ -31,6 +31,8 @@ before_script:
 #    - java -jar selenium-server-standalone-2.28.0.jar > /dev/null &
 #    - sh -e /etc/init.d/xvfb start
 #    - sleep 5
+    - export ADDITIONAL_PATH=`php -i | grep -F --color=never 'Scan this dir for additional .ini files'`
+    - echo 'xdebug.max_nesting_level=9999' | sudo tee ${ADDITIONAL_PATH:42}/symfony2.ini
 
 script:
     - bin/behat --no-snippets --no-paths --verbose -p no-js
