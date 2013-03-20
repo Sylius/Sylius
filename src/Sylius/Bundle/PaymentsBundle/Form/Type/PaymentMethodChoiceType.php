@@ -45,8 +45,8 @@ abstract class PaymentMethodChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'class'        => $this->className,
-                'only_enabled' => true
+                'class'    => $this->className,
+                'disabled' => false,
             ))
         ;
     }

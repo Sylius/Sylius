@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Entity;
 
-use Sylius\Bundle\PaymentsBundle\Model\PaymentMethod as BasePaymentMethod;
+use Sylius\Bundle\PaymentsBundle\Model\Transaction as BaseTransaction;
 
 /**
- * Payments method entity.
+ * Payment transaction entity.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class PaymentMethod extends BasePaymentMethod
+class Transaction extends BaseTransaction
 {
 }

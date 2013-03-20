@@ -52,13 +52,8 @@ class PaymentMethodType extends AbstractType
                 'required' => false,
                 'label'    => 'sylius.form.payment_method.description'
             ))
-            ->add('gateway', 'choice', array(
-                'choices'  => array( // Dummy choices for now.
-                    'paypal'      => 'PayPal',
-                    'credit_card' => 'Credit Card',
-                    'braintree'   => 'Braintree'
-                ),
-                'label'    => 'sylius.form.payment_method.gateway'
+            ->add('gateway', 'sylius_payment_gateway_choice', array(
+                'label' => 'sylius.form.payment_method.gateway'
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,

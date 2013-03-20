@@ -14,23 +14,23 @@ namespace spec\Sylius\Bundle\PaymentsBundle\Entity;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Payment method mapped super-class spec.
+ * Payment method mapped superclass spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PaymentMethod extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Entity\PaymentMethod');
     }
 
-    function it_should_implement_Sylius_payment_method_interface()
+    function it_implements_Sylius_payment_method_interface()
     {
         $this->shouldImplement('Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface');
     }
 
-    function it_should_extend_Sylius_payment_method_model()
+    function it_extends_Sylius_payment_method_model()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Model\PaymentMethod');
     }

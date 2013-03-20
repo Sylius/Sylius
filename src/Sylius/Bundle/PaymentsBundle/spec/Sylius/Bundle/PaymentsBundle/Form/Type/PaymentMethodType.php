@@ -25,7 +25,7 @@ class PaymentMethodType extends ObjectBehavior
         $this->beConstructedWith('PaymentMethod');
     }
 
-    function it_should_be_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
@@ -33,7 +33,7 @@ class PaymentMethodType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_should_build_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields($builder)
     {
         $builder
             ->add('name', 'text', ANY_ARGUMENT)
@@ -54,7 +54,7 @@ class PaymentMethodType extends ObjectBehavior
         ;
 
         $builder
-            ->add('gateway', 'choice', ANY_ARGUMENT)
+            ->add('gateway', 'sylius_payment_gateway_choice', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -65,7 +65,7 @@ class PaymentMethodType extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    function it_should_define_assigned_data_class($resolver)
+    function it_defines_assigned_data_class($resolver)
     {
         $resolver->setDefaults(array('data_class' => 'PaymentMethod'))->shouldBeCalled();
 

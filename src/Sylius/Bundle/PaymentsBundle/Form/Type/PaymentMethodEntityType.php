@@ -30,7 +30,7 @@ class PaymentMethodEntityType extends PaymentMethodChoiceType
         parent::setDefaultOptions($resolver);
 
         $queryBuilder = function (Options $options) {
-            if ($options['only_enabled']) {
+            if (!$options['disabled']) {
                 return function (EntityRepository $repository) {
                     return $repository->createQueryBuilder('method')->where('method.enabled = true');
                 };

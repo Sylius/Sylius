@@ -20,12 +20,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class SyliusPaymentsExtension extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\DependencyInjection\SyliusPaymentsExtension');
     }
 
-    function it_should_be_a_container_extension()
+    function it_is_a_container_extension()
     {
         $this->shouldHaveType('Symfony\Component\HttpKernel\DependencyInjection\Extension');
     }
