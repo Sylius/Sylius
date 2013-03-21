@@ -56,7 +56,7 @@ class Settings implements \ArrayAccess
      */
     public function has($name)
     {
-        return isset($this->parameters[$name]);
+        return array_key_exists($name, $this->parameters);
     }
 
     /**
