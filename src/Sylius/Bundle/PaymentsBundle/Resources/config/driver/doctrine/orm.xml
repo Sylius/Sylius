@@ -17,9 +17,15 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.payment_method.class">Sylius\Bundle\PaymentsBundle\Entity\DefaultPaymentMethod</parameter>
+        <parameter key="sylius.model.payment_method.class">Sylius\Bundle\PaymentsBundle\Entity\PaymentMethod</parameter>
         <parameter key="sylius.repository.payment_method.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\PaymentsBundle\Form\Type\PaymentMethodEntityType</parameter>
+
+        <parameter key="sylius.model.payment.class">Sylius\Bundle\PaymentsBundle\Entity\Payment</parameter>
+        <parameter key="sylius.repository.payment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+
+        <parameter key="sylius.model.transaction.class">Sylius\Bundle\PaymentsBundle\Entity\Transaction</parameter>
+        <parameter key="sylius.repository.transaction.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
@@ -33,6 +39,20 @@
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
                     <argument>%sylius.model.payment_method.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.payment" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.payment" class="%sylius.repository.payment.class%">
+            <argument type="service" id="sylius.manager.payment" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.payment"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.payment.class%</argument>
                 </service>
             </argument>
         </service>
