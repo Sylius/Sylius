@@ -23,84 +23,98 @@ interface PaymentInterface
      *
      * @return mixed
      */
-  public function getId();
+    public function getId();
 
-  /**
-   * Get payment method associated with this payment.
-   *
-   * @return PaymentMethodInterface
-   */
-  public function getMethod();
+    /**
+     * Get payment method associated with this payment.
+     *
+     * @return PaymentMethodInterface
+     */
+    public function getMethod();
 
-  /**
-   * Set payment method.
-   *
-   * @param PaymentMethodInterface $method
-   */
-  public function setMethod(PaymentMethodInterface $method);
+    /**
+     * Set payment method.
+     *
+     * @param PaymentMethodInterface $method
+     */
+    public function setMethod(PaymentMethodInterface $method);
 
-  /**
-   * Get payment currency.
-   *
-   * @return string
-   */
-  public function getCurrency();
+    /**
+     * Get payment source.
+     *
+     * @return PaymentSourceInterface
+     */
+    public function getSource();
 
-  /**
-   * Set currency.
-   *
-   * @param string
-   */
-  public function setCurrency($currency);
+    /**
+     * Set payment source.
+     *
+     * @param null|PaymentSourceInterface $source
+     */
+    public function setSource(PaymentSourceInterface $source = null);
 
-  /**
-    * Get amount.
-    *
-    * @return integer
-    */
-  public function getAmount();
+    /**
+     * Get payment currency.
+     *
+     * @return string
+     */
+    public function getCurrency();
 
-  /**
-   * Set amount.
-   *
-   * @param integer $amount
-   */
-  public function setAmount($amount);
+    /**
+     * Set currency.
+     *
+     * @param string
+     */
+    public function setCurrency($currency);
 
-  /**
-   * Return the balance.
-   *
-   * @return integer
-   */
-  public function getBalance();
+    /**
+     * Get amount.
+     *
+     * @return integer
+     */
+    public function getAmount();
 
-  /**
-   * Get all transactions for this payment.
-   *
-   * @return Collection
-   */
-  public function getTransactions();
+    /**
+     * Set amount.
+     *
+     * @param integer $amount
+     */
+    public function setAmount($amount);
 
-  /**
-   * Add transaction to payment.
-   *
-   * @param TransactionInterface
-   */
-  public function addTransaction(TransactionInterface $transaction);
+    /**
+     * Return the balance.
+     *
+     * @return integer
+     */
+    public function getBalance();
 
-  /**
-   * Remove transaction from payment.
-   *
-   * @param TransactionInterface
-   */
-  public function removeTransaction(TransactionInterface $transaction);
+    /**
+     * Get all transactions for this payment.
+     *
+     * @return Collection
+     */
+    public function getTransactions();
 
-  /**
-   * Has transaction?
-   *
-   * @return Boolean
-   */
-  public function hasTransaction(TransactionInterface $transaction);
+    /**
+     * Add transaction to payment.
+     *
+     * @param TransactionInterface
+     */
+    public function addTransaction(TransactionInterface $transaction);
+
+    /**
+     * Remove transaction from payment.
+     *
+     * @param TransactionInterface
+     */
+    public function removeTransaction(TransactionInterface $transaction);
+
+    /**
+     * Has transaction?
+     *
+     * @return Boolean
+     */
+    public function hasTransaction(TransactionInterface $transaction);
 
     /**
      * Get creation time.

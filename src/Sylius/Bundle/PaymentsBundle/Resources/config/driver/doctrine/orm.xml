@@ -26,6 +26,9 @@
 
         <parameter key="sylius.model.transaction.class">Sylius\Bundle\PaymentsBundle\Entity\Transaction</parameter>
         <parameter key="sylius.repository.transaction.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+
+        <parameter key="sylius.model.credit_card.class">Sylius\Bundle\PaymentsBundle\Entity\CreditCard</parameter>
+        <parameter key="sylius.repository.credit_card.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
@@ -53,6 +56,34 @@
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
                     <argument>%sylius.model.payment.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.transaction" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.transaction" class="%sylius.repository.transaction.class%">
+            <argument type="service" id="sylius.manager.transaction" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.transaction"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.transaction.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.credit_card" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.credit_card" class="%sylius.repository.credit_card.class%">
+            <argument type="service" id="sylius.manager.credit_card" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.credit_card"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.credit_card.class%</argument>
                 </service>
             </argument>
         </service>

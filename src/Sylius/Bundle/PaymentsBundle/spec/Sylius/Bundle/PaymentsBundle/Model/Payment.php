@@ -49,6 +49,30 @@ class Payment extends ObjectBehavior
       $this->getMethod()->shouldReturn($method);
     }
 
+    function it_has_no_source_by_default()
+    {
+        $this->getSource()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface $source
+     */
+    function it_allows_to_assign_a_source($source)
+    {
+        $this->setSource($source);
+        $this->getSource()->shouldReturn($source);
+    }
+
+    /**
+     * @param Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface $source
+     */
+    function it_allows_to_remove_a_source($source)
+    {
+        $this->setSource($source);
+        $this->setSource(null);
+        $this->getSource()->shouldReturn(null);
+    }
+
     function it_has_no_currency_by_default()
     {
         $this->getCurrency()->shouldReturn(null);

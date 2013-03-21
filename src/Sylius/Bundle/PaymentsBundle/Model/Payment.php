@@ -56,6 +56,13 @@ class Payment implements PaymentInterface
     protected $transactions;
 
     /**
+     * Credit card as a source.
+     *
+     * @var CreditCardInterface
+     */
+    protected $creditCard;
+
+    /**
      * Creation date.
      *
      * @var DateTime
@@ -74,8 +81,8 @@ class Payment implements PaymentInterface
      */
     public function __construct()
     {
-      $this->amount = 0;
-      $this->transactions = new ArrayCollection();
+        $this->amount = 0;
+        $this->transactions = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
     }
 
@@ -94,21 +101,41 @@ class Payment implements PaymentInterface
 
     public function setMethod(PaymentMethodInterface $method)
     {
-      $this->method = $method;
+        $this->method = $method;
 
-      return $this;
+        return $this;
+    }
+
+    public function setSource(PaymentSourceInterface $source = null)
+    {
+        if (null === $source) {
+            $this->creditCard = null;
+        }
+
+        if ($source instanceof CreditCardInterface) {
+            $this->creditCard = $source;
+        }
+
+        return $this;
+    }
+
+    public function getSource()
+    {
+        if (null !== $this->creditCard) {
+            return $this->creditCard;
+        }
     }
 
     public function getCurrency()
     {
-      return $this->currency;
+        return $this->currency;
     }
 
     public function setCurrency($currency)
     {
-      $this->currency = $currency;
+        $this->currency = $currency;
 
-      return $this;
+        return $this;
     }
 
     public function getAmount()
@@ -135,31 +162,31 @@ class Payment implements PaymentInterface
 
     public function getTransactions()
     {
-      return $this->transactions;
+        return $this->transactions;
     }
 
     public function hasTransaction(TransactionInterface $transaction)
     {
-      return $this->transactions->contains($transaction);
+        return $this->transactions->contains($transaction);
     }
 
     public function getBalance()
     {
-      $total = 0;
+        $total = 0;
 
-      foreach ($this->transactions as $transaction) {
-        $total += $transaction->getAmount();
-      }
+        foreach ($this->transactions as $transaction) {
+            $total += $transaction->getAmount();
+        }
 
-      return $this->amount - $total;
+        return $this->amount - $total;
     }
 
     public function removeTransaction(TransactionInterface $transaction)
     {
-      if ($this->hasTransaction($transaction)) {
-        $transaction->setPayment(null);
-        $this->transactions->removeElement($transaction);
-      }
+        if ($this->hasTransaction($transaction)) {
+            $transaction->setPayment(null);
+            $this->transactions->removeElement($transaction);
+        }
     }
 
     /**
