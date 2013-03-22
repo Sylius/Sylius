@@ -22,7 +22,7 @@
 
         "symfony/framework-bundle":        "~2.1",
         "friendsofsymfony/rest-bundle":    "0.11.*@dev",
-        "white-october/pagerfanta-bundle": "dev-master",
+        "white-october/pagerfanta-bundle": "dev-master"
     },
     "require-dev": {
         "twig/twig":            "~1.11",
