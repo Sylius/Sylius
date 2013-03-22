@@ -170,15 +170,18 @@ knp_gaufrette:
 liip_imagine:
     data_root: %kernel.root_dir%/../web/media/image/variant
     filter_sets:
-        variant_s:
+        sylius_50x40:
             filters:
                 thumbnail: { size: [50, 40], mode: outbound }
-        variant_m:
+        sylius_90x60:
             filters:
                 thumbnail: { size: [90, 60], mode: outbound }
-        variant_l:
+        sylius_200x200:
+            filters:
+                thumbnail: { size: [200, 200], mode: outbound }
+        sylius_310x300:
             filters:
                 thumbnail: { size: [310, 300], mode: outbound }
-        variant_xl:
+        sylius_610x600:
             filters:
                 thumbnail: { size: [610, 600], mode: outbound }

@@ -92,7 +92,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Then /^I should be on the (homepage)?$/
      * @Then /^I should be on the (.+) (page|step)$/
      * @Then /^I should be redirected to the (.+) (page|step)$/
      * @Then /^I should still be on the (.+) (page|step)$/
@@ -101,6 +100,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($page));
         $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Given /^I should be on the store homepage$/
+     */
+    public function iShouldBeOnTheStoreHomepage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_homepage'));
     }
 
     /**

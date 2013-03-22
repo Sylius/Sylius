@@ -33,5 +33,5 @@ Feature: Checkout finalization
           And I select the "Credit Card" radio button
           And I press "Continue"
          When I click "Place order"
-         Then I should be on the homepage
+         Then I should be on the store homepage
           And I should see "Thank you for your order!"

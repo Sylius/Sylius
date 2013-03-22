@@ -15,7 +15,7 @@ Feature: Sign in to the store
             | Login    | bar |
             | Password | foo |
         And I press "Login"
-       Then I should be on the homepage
+       Then I should be on the store homepage
         And I should see "Logout"
 
     Scenario: Log in with bad credentials
