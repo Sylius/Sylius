@@ -63,6 +63,7 @@ class SyliusResourceExtension extends Twig_Extension
     {
         $label = null === $label ? $property : $label;
         $route = null === $route ? $this->request->attributes->get('_route') : $route;
+
         $routeParameters = empty($routeParameters) ? $this->request->attributes->get('_route_parameters', array()) : $routeParameters;
 
         $sorting = $this->request->get('sorting');

@@ -19,12 +19,12 @@ class SyliusResourceExtension extends ObjectBehavior
         $this->beConstructedWith($router);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension');
     }
 
-    function it_should_be_a_Twig_extension()
+    function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

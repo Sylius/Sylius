@@ -24,22 +24,38 @@ class Configuration
 {
     protected $bundlePrefix;
     protected $resourceName;
-    protected $pluralResourceName;
     protected $templateNamespace;
+    protected $templatingEngine;
     protected $parameters;
 
     /**
+     * Current request.
+     *
      * @var Request
      */
     protected $request;
 
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace = null)
+    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
+
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
-        $this->pluralResourceName = Pluralization::pluralize($resourceName);
         $this->templateNamespace = $templateNamespace;
+        $this->templatingEngine = $templatingEngine;
+
         $this->parameters = array();
+    }
+
+    public function load(Request $request)
+    {
+        $this->request = $request;
+
+        $parameters = $request->attributes->get('_sylius', array());
+        $parser = new ParametersParser();
+
+        $parameters = $parser->parse($parameters, $request);
+
+        $this->parameters = $parameters;
     }
 
     public function getBundlePrefix()
@@ -54,7 +70,7 @@ class Configuration
 
     public function getPluralResourceName()
     {
-        return $this->pluralResourceName;
+        return Pluralization::pluralize($this->resourceName);
     }
 
     public function getTemplateNamespace()
@@ -62,24 +78,14 @@ class Configuration
         return $this->templateNamespace;
     }
 
-    public function setRequest(Request $request)
+    public function getTemplatingEngine()
     {
-        $this->parameters = $request->attributes->get('_sylius');
-        $this->request = $request;
-    }
-
-    public function isHtmlRequest()
-    {
-        if (null === $this->request) {
-            throw new \BadMethodCallException('Request is unknown, cannot check its format');
-        }
-
-        return 'html' === $this->request->getRequestFormat();
+        return $this->templatingEngine;
     }
 
     public function isApiRequest()
     {
-        return !$this->isHtmlRequest();
+        return 'html' !== $this->request->getRequestFormat();
     }
 
     public function getServiceName($service)
@@ -92,45 +98,33 @@ class Configuration
         return sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $event);
     }
 
-    public function getIdentifierName()
+    public function getTemplateName($name)
     {
-        return $this->get('identifier', 'id');
+        return sprintf('%s:%s.%s', $this->templateNamespace, $name, $this->templatingEngine);
     }
 
-    public function getIdentifierValue()
+    public function getTemplate($name)
     {
-        return $this->request->get($this->getIdentifierName());
-    }
-
-    public function getIdentifierCriteria()
-    {
-        if (null === $this->request) {
-            throw new \BadMethodCallException('Request is unknown, cannot get single resource criteria');
-        }
-
-        return array(
-            $this->getIdentifierName() => $this->getIdentifierValue()
-        );
-    }
-
-    public function getTemplate()
-    {
-        return $this->get('template');
+        return $this->get('template', $this->getTemplateName($name));
     }
 
     public function getFormType()
     {
-        return $this->get('form', $this->getDefaultFormType());
+        return $this->get('form', sprintf('%s_%s', $this->bundlePrefix, $this->resourceName));
     }
 
-    public function getDefaultFormType()
+    public function getRouteName($name)
     {
-        return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
+        return sprintf('%s_%s_%s', $this->bundlePrefix, $this->resourceName, $name);
     }
 
-    public function getRedirectRoute()
+    public function getRedirectRoute($name)
     {
         $redirect = $this->get('redirect');
+
+        if (null === $redirect) {
+            return $this->getRouteName($name);
+        }
 
         if (is_array($redirect)) {
             return $redirect['route'];
@@ -143,17 +137,16 @@ class Configuration
     {
         $redirect = $this->get('redirect');
 
-        if (!is_array($redirect)) {
+        if (null === $redirect || !is_array($redirect)) {
             return array();
         }
 
-        foreach ($redirect['parameters'] as $key => $parameter) {
-            if ('$' === $parameter[0]) {
-                $redirect['parameters'][$key] = $this->request->get(str_replace('$', '', $redirect['parameters'][$key]));
-            }
-        }
-
         return $redirect['parameters'];
+    }
+
+    public function getLimit()
+    {
+        return (int) $this->get('limit', 10);
     }
 
     public function isPaginated()
@@ -166,16 +159,6 @@ class Configuration
         return (int) $this->get('paginate', 10);
     }
 
-    public function getLimit()
-    {
-        return (int) $this->get('limit', 10);
-    }
-
-    public function isSortable()
-    {
-        return (Boolean) $this->get('sortable', false);
-    }
-
     public function isFilterable()
     {
         return (Boolean) $this->get('filterable', false);
@@ -185,25 +168,24 @@ class Configuration
     {
         $defaultCriteria = $this->get('criteria', array());
 
-        foreach($defaultCriteria as $key => $value) {
-            if (is_string($value) && 0 === strpos($value, '$') && $value = $this->request->get(substr($value, 1))) {
-                $defaultCriteria[$key] = $value;
-            }
-        }
-
-        if ($this->isFilterable() && null !== $this->request) {
-            return $this->request->get('criteria', $defaultCriteria);
+        if ($this->isFilterable()) {
+            return array_merge($defaultCriteria, $this->request->get('criteria', array()));
         }
 
         return $defaultCriteria;
+    }
+
+    public function isSortable()
+    {
+        return (Boolean) $this->get('sortable', false);
     }
 
     public function getSorting()
     {
         $defaultSorting = $this->get('sorting', array());
 
-        if ($this->isSortable() && null !== $this->request) {
-            return $this->request->get('sorting', $defaultSorting);
+        if ($this->isSortable()) {
+            return array_merge($defaultSorting, $this->request->get('sorting', array()));
         }
 
         return $defaultSorting;
@@ -214,27 +196,8 @@ class Configuration
         return $this->get('flash');
     }
 
-    public function getRoute()
-    {
-        return sprintf('%s_%s', $this->bundlePrefix, $this->resourceName);
-    }
-
-    public function getIndexRoute()
-    {
-        return sprintf('%s_%s', $this->bundlePrefix, $this->pluralResourceName);
-    }
-
-    public function getEngineParameterName()
-    {
-        return sprintf('%s.engine', $this->getBundlePrefix());
-    }
-
     protected function get($parameter, $default = null)
     {
-        if (null === $this->request) {
-            return $default;
-        }
-
-        return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] :  $this->request->attributes->get($parameter, $default);
+        return array_key_exists($parameter, $this->parameters) ? $this->parameters[$parameter] : $default;
     }
 }

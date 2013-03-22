@@ -26,18 +26,13 @@ class ResourceController extends ObjectBehavior
         $this->setContainer($container);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
 
-    function it_should_be_a_controller()
+    function it_is_a_controller()
     {
         $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\Controller');
-    }
-
-    function it_should_initialize_a_configuration()
-    {
-        $this->getConfiguration()->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
     }
 }

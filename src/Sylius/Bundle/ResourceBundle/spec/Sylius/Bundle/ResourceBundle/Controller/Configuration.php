@@ -6,7 +6,7 @@ use PHPSpec2\ObjectBehavior;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
- * Resource controller configuration spec.
+ * Resource controller configuration product.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -17,289 +17,268 @@ class Configuration extends ObjectBehavior
      */
     function let($request)
     {
-        $this->beConstructedWith('sylius_resource', 'spec', 'SyliusResourceBundle:Test');
-
+        $this->beConstructedWith('sylius', 'product', 'SyliusWebBundle:Product', 'twig');
         $request->attributes = new ParameterBag();
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
     }
 
-    function it_should_return_assigned_bundle_prefix()
+    function it_returns_assigned_bundle_prefix()
     {
-        $this->getBundlePrefix()->shouldReturn('sylius_resource');
+        $this->getBundlePrefix()->shouldReturn('sylius');
     }
 
-    function it_should_return_assigned_resource_name()
+    function it_returns_assigned_resource_name()
     {
-        $this->getResourceName()->shouldReturn('spec');
+        $this->getResourceName()->shouldReturn('product');
     }
 
-    function it_should_return_plural_resource_name()
+    function it_returns_plural_resource_name()
     {
-        $this->getPluralResourceName()->shouldReturn('specs');
+        $this->getPluralResourceName()->shouldReturn('products');
     }
 
-    function it_should_return_assigned_template_namespace()
+    function it_returns_assigned_template_namespace()
     {
-        $this->getTemplateNamespace()->shouldReturn('SyliusResourceBundle:Test');
+        $this->getTemplateNamespace()->shouldReturn('SyliusWebBundle:Product');
     }
 
-    function it_should_generate_correct_service_names()
+    function it_returns_assigned_templating_engine()
     {
-        $this->getServiceName('manager')->shouldReturn('sylius_resource.manager.spec');
-        $this->getServiceName('repository')->shouldReturn('sylius_resource.repository.spec');
-        $this->getServiceName('controller')->shouldReturn('sylius_resource.controller.spec');
+        $this->getTemplatingEngine()->shouldReturn('twig');
     }
 
-    function it_should_generate_correct_event_name()
+    function it_generates_service_names()
     {
-        $this->getEventName('create')->shouldReturn('sylius_resource.spec.create');
-        $this->getEventName('created')->shouldReturn('sylius_resource.spec.created');
+        $this->getServiceName('manager')->shouldReturn('sylius.manager.product');
+        $this->getServiceName('repository')->shouldReturn('sylius.repository.product');
+        $this->getServiceName('controller')->shouldReturn('sylius.controller.product');
     }
 
-    function it_should_return_id_as_the_default_identifier_name()
+    function it_generates_event_names()
     {
-        $this->getIdentifierName()->shouldReturn('id');
+        $this->getEventName('create')->shouldReturn('sylius.product.create');
+        $this->getEventName('created')->shouldReturn('sylius.product.created');
     }
 
-    function it_should_not_recognize_resources_as_sortable_by_default()
+    function it_generates_template_names()
     {
+        $this->getTemplateName('index.html')->shouldReturn('SyliusWebBundle:Product:index.html.twig');
+        $this->getTemplateName('show.html')->shouldReturn('SyliusWebBundle:Product:show.html.twig');
+        $this->getTemplateName('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
+        $this->getTemplateName('update.html')->shouldReturn('SyliusWebBundle:Product:update.html.twig');
+
+        $this->getTemplateName('custom.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
+    }
+
+    function it_generates_route_names()
+    {
+        $this->getRouteName('index')->shouldReturn('sylius_product_index');
+        $this->getRouteName('show')->shouldReturn('sylius_product_show');
+        $this->getRouteName('custom')->shouldReturn('sylius_product_custom');
+    }
+
+    function its_not_sortable_by_default($request)
+    {
+        $this->load($request);
         $this->isSortable()->shouldReturn(false);
     }
 
-    function it_should_not_recognize_resources_as_filterable_by_default()
+    function its_not_filterable_by_default($request)
     {
+        $this->load($request);
         $this->isFilterable()->shouldReturn(false);
     }
 
-    function it_should_return_default_resources_limit_which_is_10()
+    function it_has_limit_equal_to_10_by_default($request)
     {
+        $this->load($request);
         $this->getLimit()->shouldReturn(10);
     }
 
-    function it_should_recognize_resources_as_paginated_by_default()
+    function its_paginated_by_default($request)
     {
+        $this->load($request);
         $this->isPaginated()->shouldReturn(true);
     }
 
-    function it_should_return_default_pagination_max_per_page_which_is_10()
+    function its_pagination_max_per_page_is_equal_to_10_by_default($request)
     {
+        $this->load($request);
         $this->getPaginationMaxPerPage()->shouldReturn(10);
     }
 
-    function it_should_complain_if_trying_to_check_request_type_when_request_is_not_set()
+    function its_api_request_when_format_is_not_html($request)
     {
-        $this
-            ->shouldThrow('BadMethodCallException')
-            ->duringIsHtmlRequest()
-        ;
-    }
-
-    function it_should_recognize_request_as_html_request_when_its_the_correct_format($request)
-    {
-        $request->getRequestFormat()->willReturn('html');
-        $this->setRequest($request);
-
-        $this->isHtmlRequest()->shouldReturn(true);
-    }
-
-    function it_should_not_recognize_request_as_html_request_when_its_not_the_correctformat($request)
-    {
-        $request->geRequestFormat()->willReturn('json');
-
-        $this->setRequest($request);
-        $this->isHtmlRequest()->shouldReturn(false);
-    }
-
-    function it_should_recognize_request_as_api_request_when_format_is_not_html($request)
-    {
-        $this->setRequest($request);
+        $this->load($request);
 
         $request->getRequestFormat()->willReturn('html');
         $this->isApiRequest()->shouldReturn(false);
 
         $request->getRequestFormat()->willReturn('xml');
         $this->isApiRequest()->shouldReturn(true);
+
+        $request->getRequestFormat()->willReturn('json');
+        $this->isApiRequest()->shouldReturn(true);
     }
 
-    function it_should_get_identifier_name_from_request_attributes($request)
+    function it_generates_view_template_by_default($request)
     {
-        $request->attributes->set('identifier', 'slug');
-
-        $this->setRequest($request);
-        $this->getIdentifierName()->shouldReturn('slug');
+        $this->load($request);
+        $this->getTemplate('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
     }
 
-    function it_should_get_identifier_value_from_request($request)
+    function it_gets_view_template_from_request_attributes_if_available($request)
     {
-        $request->get('id')->willReturn('test-slug');
+        $request->attributes->set('_sylius', array('template' => 'SyliusWebBundle:Product:custom.html.twig'));
+        $this->load($request);
 
-        $this->setRequest($request);
-        $this->getIdentifierValue()->shouldReturn('test-slug');
+        $this->getTemplate('create.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
     }
 
-    function it_should_complain_if_trying_to_get_identifier_criteria_without_request_being_known()
+    function it_generates_form_type_by_default($request)
     {
-        $this
-            ->shouldThrow(new \BadMethodCallException('Request is unknown, cannot get single resource criteria'))
-            ->duringGetIdentifierCriteria()
-        ;
+        $this->load($request);
+        $this->getFormType()->shouldReturn('sylius_product');
     }
 
-    function it_should_get_identifier_criteria_from_request($request)
+    function it_gets_form_type_from_request_attributes_if_available($request)
     {
-        $request->attributes->set('identifier', 'slug');
-        $request->get('slug')->willReturn('test-slug');
+        $request->attributes->set('_sylius', array('form' => 'sylius_product_custom'));
+        $this->load($request);
 
-        $this->setRequest($request);
-        $this->getIdentifierCriteria()->shouldReturn(array('slug' => 'test-slug'));
+        $this->getFormType()->shouldReturn('sylius_product_custom');
     }
 
-    function it_should_get_view_template_from_request_attributes($request)
+    function it_generates_redirect_route_by_default($request)
     {
-        $request->attributes->set('template', 'SyliusResourceBundle:Test:custom.html.twig');
+        $this->load($request);
 
-        $this->setRequest($request);
-        $this->getTemplate()->shouldReturn('SyliusResourceBundle:Test:custom.html.twig');
+        $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
+        $this->getRedirectRoute('show')->shouldReturn('sylius_product_show');
+        $this->getRedirectRoute('custom')->shouldReturn('sylius_product_custom');
     }
 
-    function it_should_generate_form_type_by_default()
+    function it_gets_redirect_route_from_request_attributes_if_available($request)
     {
-        $this->getFormType()->shouldReturn('sylius_resource_spec');
+        $request->attributes->set('_sylius', array('redirect' => 'sylius_product_custom'));
+        $this->load($request);
+
+        $this->getRedirectRoute('index')->shouldReturn('sylius_product_custom');
     }
 
-    function it_should_get_form_type_from_request_attributes($request)
+    function it_returns_empty_array_as_redirect_parameters_by_default($request)
     {
-        $request->attributes->set('form', 'sylius_resource_spec_custom');
-
-        $this->setRequest($request);
-        $this->getFormType()->shouldReturn('sylius_resource_spec_custom');
-    }
-
-    function it_should_get_redirect_route_from_request_attributes($request)
-    {
-        $request->attributes->set('redirect', 'sylius_resource_list');
-
-        $this->setRequest($request);
-        $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
-    }
-
-    function it_should_return_empty_array_as_redirect_parameters_by_default()
-    {
+        $this->load($request);
         $this->getRedirectParameters()->shouldReturn(array());
     }
 
-    function it_should_get_redirect_route_and_parameters_from_request_attributes($request)
+    function it_gets_redirect_route_and_parameters_from_request_attributes($request)
     {
         $redirect = array(
-            'route'      => 'sylius_resource_list',
+            'route'      => 'sylius_list',
             'parameters' => array('id' => 1)
         );
 
-        $request->attributes->set('redirect', $redirect);
+        $request->attributes->set('_sylius', array('redirect' => $redirect));
+        $this->load($request);
 
-        $this->setRequest($request);
-
-        $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
+        $this->getRedirectRoute('index')->shouldReturn('sylius_list');
         $this->getRedirectParameters()->shouldReturn(array('id' => 1));
     }
 
-    function it_should_get_special_redirect_parameters_from_request($request)
+    function it_gets_criteria_from_request_attributes($request)
     {
-        $redirect = array(
-            'route'      => 'sylius_resource_list',
-            'parameters' => array('id' => '$resourceId')
-        );
+        $request->attributes->set('_sylius', array('criteria' => array('enabled' => false)));
+        $this->load($request);
 
-        $request->attributes->set('redirect', $redirect);
-        $request->get('resourceId')->shouldBeCalled()->willReturn(16);
-
-        $this->setRequest($request);
-
-        $this->getRedirectRoute()->shouldReturn('sylius_resource_list');
-        $this->getRedirectParameters()->shouldReturn(array('id' => 16));
-    }
-
-    function it_should_get_criteria_from_request_attributes($request)
-    {
-        $request->attributes->set('criteria', array('enabled' => false));
-
-        $this->setRequest($request);
         $this->getCriteria()->shouldReturn(array('enabled' => false));
     }
 
-    function it_should_get_criteria_from_request_if_resources_are_filterable($request)
+    function it_gets_criteria_from_request_if_resources_are_filterable($request)
     {
         $request->get('criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
-        $request->attributes->set('criteria', array('enabled' => false));
-        $request->attributes->set('filterable', true);
+        $request->attributes->set('_sylius', array(
+            'filterable' => true,
+            'criteria'   => array('enabled' => false)
+        ));
 
-        $this->setRequest($request);
-        $this->getCriteria()->shouldReturn(array('locked' => false));
+        $this->load($request);
+
+        $this->getCriteria()->shouldReturn(array('enabled' => false, 'locked' => false));
     }
 
-    function it_should_not_get_criteria_from_request_if_resources_are_not_filterable($request)
+    function it_does_not_get_criteria_from_request_if_resources_are_not_filterable($request)
     {
         $request->get('criteria', ANY_ARGUMENT)->shouldNotBeCalled();
-        $request->attributes->set('criteria', array('enabled' => false));
-        $request->attributes->set('filterable', false);
+        $request->attributes->set('_sylius', array(
+            'filterable' => false,
+            'criteria'   => array('enabled' => false)
+        ));
 
-        $this->setRequest($request);
+        $this->load($request);
+
         $this->getCriteria()->shouldReturn(array('enabled' => false));
     }
 
-    function it_should_get_sorting_from_request_if_resources_are_sortable($request)
+    function it_gets_sorting_from_request_if_resources_are_sortable($request)
     {
         $request->get('sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
-        $request->attributes->set('sorting', array('name' => 'asc'));
-        $request->attributes->set('sortable', true);
+        $request->attributes->set('_sylius', array(
+            'sortable' => true,
+            'sorting'  => array('name' => 'asc')
+        ));
 
-        $this->setRequest($request);
-        $this->getSorting()->shouldReturn(array('createdAt' => 'desc'));
+        $this->load($request);
+
+        $this->getSorting()->shouldReturn(array('name' => 'asc', 'createdAt' => 'desc'));
     }
 
-    function it_should_not_get_sorting_from_request_if_resources_are_not_sortable($request)
+    function it_does_not_get_sorting_from_request_if_resources_are_not_sortable($request)
     {
         $request->get('sorting', ANY_ARGUMENT)->shouldNotBeCalled();
-        $request->attributes->set('sorting', array('name' => 'asc'));
-        $request->attributes->set('sortable', false);
+        $request->attributes->set('_sylius', array(
+            'sortable' => false,
+            'sorting'  => array('name' => 'asc')
+        ));
 
-        $this->setRequest($request);
+        $this->load($request);
+
         $this->getSorting()->shouldReturn(array('name' => 'asc'));
     }
 
-    function it_should_get_sorting_from_request_attributes($request)
+    function it_gets_sorting_from_request_attributes($request)
     {
-        $request->attributes->set('sorting', array('createdAt' => 'asc'));
+        $request->attributes->set('_sylius', array('sorting' => array('createdAt' => 'asc')));
+        $this->load($request);
 
-        $this->setRequest($request);
         $this->getSorting()->shouldReturn(array('createdAt' => 'asc'));
     }
 
-    function it_should_recognize_resources_as_not_paginated_from_request_attributes($request)
+    function it_is_not_paginated_if_paginate_option_is_set_to_false($request)
     {
-        $request->attributes->set('paginate', false);
+        $request->attributes->set('_sylius', array('paginate' => false));
+        $this->load($request);
 
-        $this->setRequest($request);
         $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_should_return_pagination_max_per_page_from_request_attributes($request)
+    function it_gets_pagination_max_per_page_from_request_attributes($request)
     {
-        $request->attributes->set('paginate', 25);
+        $request->attributes->set('_sylius', array('paginate' => 25));
+        $this->load($request);
 
-        $this->setRequest($request);
         $this->getPaginationMaxPerPage()->shouldReturn(25);
     }
 
-    function it_should_return_resources_limit_from_request_attributes($request, $attributes)
+    function it_gets_limit_from_request_attributes($request)
     {
-        $request->attributes->set('limit', 20);
+        $request->attributes->set('_sylius', array('limit' => 20));
+        $this->load($request);
 
-        $this->setRequest($request);
         $this->getLimit()->shouldReturn(20);
     }
 }

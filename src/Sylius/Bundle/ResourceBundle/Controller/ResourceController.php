@@ -26,9 +26,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ResourceController extends FOSRestController
 {
     /**
+     * Controller configuration.
+     *
      * @var Configuration
      */
     protected $configuration;
+    protected $configured;
 
     /**
      * Constructor.
@@ -36,10 +39,12 @@ class ResourceController extends FOSRestController
      * @param string $bundlePrefix
      * @param string $resourceName
      * @param string $templateNamespace
+     * @param string $templatingEngine
      */
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace)
+    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-        $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace);
+        $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
+        $this->configured = false;
     }
 
     /**
@@ -49,7 +54,10 @@ class ResourceController extends FOSRestController
      */
     public function getConfiguration()
     {
-        $this->configuration->setRequest($this->getRequest());
+        if (false === $this->configured) {
+            $this->configuration->load($this->getRequest());
+            $this->configured = true;
+        }
 
         return $this->configuration;
     }
@@ -82,7 +90,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($this->getFullTemplateName('index.html'))
+            ->setTemplate($config->getTemplate('index.html'))
             ->setTemplateVar($pluralName)
             ->setData($resources)
         ;
@@ -95,10 +103,12 @@ class ResourceController extends FOSRestController
      */
     public function showAction()
     {
+        $config = $this->getConfiguration();
+
         $view =  $this
             ->view()
-            ->setTemplate($this->getFullTemplateName('show.html'))
-            ->setTemplateVar($this->getConfiguration()->getResourceName())
+            ->setTemplate($config->getTemplate('show.html'))
+            ->setTemplateVar($config->getResourceName())
             ->setData($this->findOr404())
         ;
 
@@ -117,7 +127,6 @@ class ResourceController extends FOSRestController
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $this->create($resource);
-
             $this->setFlash('success', 'create');
 
             return $this->redirectTo($resource);
@@ -129,7 +138,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($this->getFullTemplateName('create.html'))
+            ->setTemplate($config->getTemplate('create.html'))
             ->setData(array(
                 $config->getResourceName() => $resource,
                 'form'                     => $form->createView()
@@ -156,13 +165,13 @@ class ResourceController extends FOSRestController
             return $this->redirectTo($resource);
         }
 
-        if (!$config->isHtmlRequest()) {
+        if ($config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
 
         $view = $this
             ->view()
-            ->setTemplate($this->getFullTemplateName('update.html'))
+            ->setTemplate($config->getTemplate('update.html'))
             ->setData(array(
                 $config->getResourceName() => $resource,
                 'form'                     => $form->createView()
@@ -178,6 +187,7 @@ class ResourceController extends FOSRestController
     public function deleteAction()
     {
         $resource = $this->findOr404();
+
         $this->delete($resource);
         $this->setFlash('success', 'delete');
 
@@ -211,14 +221,15 @@ class ResourceController extends FOSRestController
 
     public function redirectTo($resource)
     {
-        $parameters = $this->getRedirectParameters();
+        $config = $this->getConfiguration();
+        $parameters = $config->getRedirectParameters();
 
         if (empty($parameters)) {
             $parameters['id'] = $resource->getId();
         }
 
         return $this->redirectToRoute(
-            $this->getRedirectRoute('show'),
+            $config->getRedirectRoute('show'),
             $parameters
         );
     }
@@ -230,7 +241,8 @@ class ResourceController extends FOSRestController
 
     public function redirectToIndex()
     {
-        return $this->redirectToRoute($this->getRedirectRoute('index'), $this->getRedirectParameters());
+        $config = $this->getConfiguration();
+        return $this->redirectToRoute($config->getRedirectRoute('index'), $config->getRedirectParameters());
     }
 
     public function redirectToRoute($route, array $data = array())
@@ -240,26 +252,6 @@ class ResourceController extends FOSRestController
         }
 
         return $this->handleView($this->routeRedirectView($route, $data));
-    }
-
-    public function getRedirectRoute($name)
-    {
-        $config = $this->getConfiguration();
-
-        if (null !== $route = $config->getRedirectRoute()) {
-            return $route;
-        }
-
-        return sprintf('%s_%s_%s',
-            $config->getBundlePrefix(),
-            $config->getResourceName(),
-            $name
-        );
-    }
-
-    public function getRedirectParameters()
-    {
-        return $this->getConfiguration()->getRedirectParameters();
     }
 
     public function getManager()
@@ -313,8 +305,12 @@ class ResourceController extends FOSRestController
     {
         $config = $this->getConfiguration();
 
-        if (null === $criteria) {
-            $criteria = $config->getIdentifierCriteria();
+        if (empty($criteria)) {
+            $criteria = $config->getCriteria();
+        }
+
+        if (empty($criteria)) {
+            $criteria = array('id' => $this->getRequest()->get('id'));
         }
 
         if (!$resource = $this->getRepository()->findOneBy($criteria)) {
@@ -326,22 +322,7 @@ class ResourceController extends FOSRestController
 
     public function renderResponse($templateName, array $parameters = array())
     {
-        return $this->render($this->getFullTemplateName($templateName), $parameters);
-    }
-
-    public function getFullTemplateName($name)
-    {
-        $config = $this->getConfiguration();
-
-        if (null !== $template = $config->getTemplate()) {
-            return $template;
-        }
-
-        return sprintf('%s:%s.%s',
-            $config->getTemplateNamespace(),
-            $name,
-            $this->getEngine()
-        );
+        return $this->render($this->getConfiguration()->getTemplate($templateName), $parameters);
     }
 
     /**
@@ -358,12 +339,7 @@ class ResourceController extends FOSRestController
             $eventOrResource = new GenericEvent($eventOrResource);
         }
 
-        $this->container->get('event_dispatcher')->dispatch($name, $eventOrResource);
-    }
-
-    public function getEngine()
-    {
-        return $this->container->getParameter($this->getConfiguration()->getEngineParameterName());
+        $this->get('event_dispatcher')->dispatch($name, $eventOrResource);
     }
 
     protected function setFlash($type, $event)

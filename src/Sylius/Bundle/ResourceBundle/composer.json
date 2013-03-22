@@ -16,13 +16,13 @@
             "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.1",
         "friendsofsymfony/rest-bundle":    "0.11.*@dev",
         "white-october/pagerfanta-bundle": "dev-master",
-        "pagerfanta/pagerfanta":           "dev-master"
     },
     "require-dev": {
         "twig/twig":            "~1.11",
