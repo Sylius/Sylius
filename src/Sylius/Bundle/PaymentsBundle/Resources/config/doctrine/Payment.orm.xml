@@ -28,6 +28,11 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+
+        <many-to-one field="creditCard" target-entity="Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface">
+            <join-column name="credit_card_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
