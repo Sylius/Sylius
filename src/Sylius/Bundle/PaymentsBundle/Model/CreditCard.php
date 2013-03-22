@@ -99,6 +99,14 @@ class CreditCard implements CreditCardInterface
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return $this->getMaskedNumber();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
@@ -174,6 +182,11 @@ class CreditCard implements CreditCardInterface
         $this->number = $number;
 
         return $this;
+    }
+
+    public function getMaskedNumber()
+    {
+        return sprintf('XXXX XXXX XXXX %s', substr($this->number, -4));
     }
 
     /**

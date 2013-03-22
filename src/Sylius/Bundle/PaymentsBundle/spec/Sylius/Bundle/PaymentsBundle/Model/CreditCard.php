@@ -76,6 +76,18 @@ class CreditCard extends ObjectBehavior
         $this->getNumber()->shouldReturn('5321');
     }
 
+    function it_returns_last_4_digits_in_masked_number()
+    {
+        $this->setNumber('1244 1242 5434 1234');
+        $this->getMaskedNumber()->shouldReturn('XXXX XXXX XXXX 1234');
+    }
+
+    function it_returns_masked_number_when_converted_to_string()
+    {
+        $this->setNumber('1244 1242 5434 1234');
+        $this->__toString()->shouldReturn('XXXX XXXX XXXX 1234');
+    }
+
     function it_has_no_security_code_by_default()
     {
         $this->getSecurityCode()->shouldReturn(null);

@@ -82,6 +82,13 @@ interface CreditCardInterface extends PaymentSourceInterface
     public function setNumber($number);
 
     /**
+     * Get last 4 digits of number.
+     *
+     * @return string
+     */
+    public function getMaskedNumber();
+
+    /**
      * Get security code.
      *
      * @return string
