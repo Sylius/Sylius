@@ -22,6 +22,7 @@
             <join-column name="owner_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
         <field name="token" column="token" type="string" nullable="true" />
+        <field name="type" column="type" type="string" nullable="true" />
         <field name="cardholderName" column="cardholder_name" type="string" nullable="true" />
         <field name="number" column="number" type="string" nullable="true" />
         <field name="securityCode" column="security_code" type="string" nullable="true" />

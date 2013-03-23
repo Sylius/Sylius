@@ -33,6 +33,13 @@ class CreditCard implements CreditCardInterface
     protected $token;
 
     /**
+     * CC type.
+     *
+     * @var string
+     */
+    protected $type;
+
+    /**
      * Owner.
      *
      * @var CreditCardOwnerInterface
@@ -126,6 +133,24 @@ class CreditCard implements CreditCardInterface
     public function setToken($token)
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }

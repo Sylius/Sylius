@@ -40,6 +40,21 @@ interface CreditCardInterface extends PaymentSourceInterface
     public function setToken($token);
 
     /**
+     * Get the type of credit card.
+     * VISA, MasterCard...
+     *
+     * @return string
+     */
+    public function getType();
+
+    /**
+     * Set the type of cc.
+     *
+     * @param string $type
+     */
+    public function setType($type);
+
+    /**
      * Get owner.
      *
      * @return CreditCardOwnerInterface
