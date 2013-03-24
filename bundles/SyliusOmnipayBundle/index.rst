@@ -1,6 +1,10 @@
 SyliusOmnipayBundle
 ===================
 
-.. note::
+Symfony2 integration for `Omnipay <https://github.com/adrianmacneil/omnipay>`_ library, PHP abstraction for payment gateways.
 
-    To be written.
+.. toctree::
+   :numbered:
+
+   installation
+   usage
