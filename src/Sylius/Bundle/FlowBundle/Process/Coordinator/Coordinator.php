@@ -242,7 +242,7 @@ class Coordinator implements CoordinatorInterface
      *
      * @return ProcessInterface
      */
-    private function buildProcess($scenarioAlias)
+    protected function buildProcess($scenarioAlias)
     {
         $processScenario = $this->loadScenario($scenarioAlias);
 
