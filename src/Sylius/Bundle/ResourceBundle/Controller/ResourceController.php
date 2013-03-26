@@ -31,7 +31,7 @@ class ResourceController extends FOSRestController
      * @var Configuration
      */
     protected $configuration;
-    protected $configured;
+    protected $resolver;
 
     /**
      * Constructor.
@@ -54,10 +54,7 @@ class ResourceController extends FOSRestController
      */
     public function getConfiguration()
     {
-        if (false === $this->configured) {
-            $this->configuration->load($this->getRequest());
-            $this->configured = true;
-        }
+        $this->configuration->load($this->getRequest());
 
         return $this->configuration;
     }
@@ -73,18 +70,22 @@ class ResourceController extends FOSRestController
         $sorting = $config->getSorting();
 
         $pluralName = $config->getPluralResourceName();
+        $repository = $this->getRepository();
 
         if ($config->isPaginated()) {
             $resources = $this
-                ->getRepository()
-                ->createPaginator($criteria, $sorting)
+                ->getResourceResolver()
+                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting))
+            ;
+
+            $resources
                 ->setCurrentPage($request->get('page', 1), true, true)
                 ->setMaxPerPage($config->getPaginationMaxPerPage())
             ;
         } else {
             $resources = $this
-                ->getRepository()
-                ->findBy($criteria, $sorting, $config->getLimit())
+                ->getResourceResolver()
+                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()))
             ;
         }
 
@@ -313,7 +314,9 @@ class ResourceController extends FOSRestController
             $criteria = array('id' => $this->getRequest()->get('id'));
         }
 
-        if (!$resource = $this->getRepository()->findOneBy($criteria)) {
+        $repository = $this->getRepository();
+
+        if (!$resource = $this->getResourceResolver()->getResource($repository, $config, 'findOneBy', array($criteria))) {
             throw new NotFoundHttpException(sprintf('Requested %s does not exist', $config->getResourceName()));
         }
 
@@ -378,6 +381,15 @@ class ResourceController extends FOSRestController
             array('%resource%' => $resource),
             'flashes'
         );
+    }
+
+    protected function getResourceResolver()
+    {
+        if (null === $this->resolver) {
+            $this->resolver = new ResourceResolver();
+        }
+
+        return $this->resolver;
     }
 
     protected function getService($name)

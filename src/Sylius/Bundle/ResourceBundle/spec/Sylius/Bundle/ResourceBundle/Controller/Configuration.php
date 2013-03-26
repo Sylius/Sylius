@@ -281,4 +281,39 @@ class Configuration extends ObjectBehavior
 
         $this->getLimit()->shouldReturn(20);
     }
+
+    function it_returns_given_method_by_default($request)
+    {
+        $this->load($request);
+
+        $this->getMethod('createPaginator')->shouldReturn('createPaginator');
+        $this->getMethod('findBy')->shouldReturn('findBy');
+    }
+
+    function it_gets_method_from_request_attributes_if_available($request)
+    {
+        $request->attributes->set('_sylius', array('method' => 'findLatest'));
+        $this->load($request);
+
+        $this->getMethod('findBy')->shouldReturn('findLatest');
+    }
+
+    function it_returns_empty_array_as_method_arguments_by_default($request)
+    {
+        $this->load($request);
+        $this->getArguments()->shouldReturn(array());
+    }
+
+    function it_gets_method_and_arguments_from_request_attributes($request)
+    {
+        $request->attributes->set('_sylius', array(
+            'method'    => 'findLatest',
+            'arguments' => array(9)
+        ));
+
+        $this->load($request);
+
+        $this->getMethod('findOneBy')->shouldReturn('findLatest');
+        $this->getArguments()->shouldReturn(array(9));
+    }
 }

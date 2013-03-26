@@ -191,6 +191,16 @@ class Configuration
         return $defaultSorting;
     }
 
+    public function getMethod($default)
+    {
+        return $this->get('method', $default);
+    }
+
+    public function getArguments(array $default = array())
+    {
+        return $this->get('arguments', $default);
+    }
+
     public function getFlashMessage()
     {
         return $this->get('flash');
