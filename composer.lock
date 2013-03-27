@@ -2585,12 +2585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCartBundle.git",
-                "reference": "v0.3.0"
+                "reference": "d44c26b23a41ea65ee1a56fc4e31370227597976"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/v0.3.0",
-                "reference": "v0.3.0",
+                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/d44c26b23a41ea65ee1a56fc4e31370227597976",
+                "reference": "d44c26b23a41ea65ee1a56fc4e31370227597976",
                 "shasum": ""
             },
             "require": {
@@ -2640,7 +2640,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-03-09 02:32:34"
+            "time": "2013-03-27 20:19:14"
         },
         {
             "name": "sylius/core-bundle",
@@ -2649,12 +2649,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "f18ac9371658bfe9a9500d8c98f131bfc70a709a"
+                "reference": "06c42836f23373fa895f0df9867d223834aeb289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/f18ac9371658bfe9a9500d8c98f131bfc70a709a",
-                "reference": "f18ac9371658bfe9a9500d8c98f131bfc70a709a",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/06c42836f23373fa895f0df9867d223834aeb289",
+                "reference": "06c42836f23373fa895f0df9867d223834aeb289",
                 "shasum": ""
             },
             "require": {
@@ -2718,7 +2718,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-03-26 23:33:04"
+            "time": "2013-03-27 20:00:23"
         },
         {
             "name": "sylius/flow-bundle",
