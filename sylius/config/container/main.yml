@@ -132,6 +132,9 @@ sylius_inventory:
 
 sylius_payments:
     driver: doctrine/orm
+    classes:
+        credit_card_owner:
+            model: Sylius\Bundle\CoreBundle\Entity\User
 
 sylius_addressing:
     driver: doctrine/orm
