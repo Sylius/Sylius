@@ -113,9 +113,12 @@ class CartListener implements EventSubscriberInterface
     {
         $cart->calculateTotal();
         $cart->setTotalItems($cart->countItems());
+        
+        // Set Total Quantity
         $totalQuantity = 0;
-        foreach ($cart->getItems() as $item)
+        foreach ($cart->getItems() as $item) {
             $totalQuantity += $item->getQuantity();
+        }
         $cart->setTotalQuantity($totalQuantity);
     }
 }
