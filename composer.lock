@@ -1013,12 +1013,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "03799ebed1067cff5bb7fa60b711ce34f3bb689f"
+                "reference": "e96e48a988f7fffbe3cca4763df84f77ba79ddde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/03799ebed1067cff5bb7fa60b711ce34f3bb689f",
-                "reference": "03799ebed1067cff5bb7fa60b711ce34f3bb689f",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/e96e48a988f7fffbe3cca4763df84f77ba79ddde",
+                "reference": "e96e48a988f7fffbe3cca4763df84f77ba79ddde",
                 "shasum": ""
             },
             "require": {
@@ -1084,7 +1084,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-03-26 20:33:31"
+            "time": "2013-03-27 16:49:35"
         },
         {
             "name": "imagine/Imagine",
@@ -3411,12 +3411,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "e7000e3c3ce6184e09738318b37dd7018be84f09"
+                "reference": "c0691bab6e88180507e81582f80489ec1fa4762f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/e7000e3c3ce6184e09738318b37dd7018be84f09",
-                "reference": "e7000e3c3ce6184e09738318b37dd7018be84f09",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/c0691bab6e88180507e81582f80489ec1fa4762f",
+                "reference": "c0691bab6e88180507e81582f80489ec1fa4762f",
                 "shasum": ""
             },
             "require": {
@@ -3465,7 +3465,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-03-26 23:33:44"
+            "time": "2013-03-27 18:37:02"
         },
         {
             "name": "symfony/assetic-bundle",
