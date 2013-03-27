@@ -43,6 +43,27 @@ interface CartInterface
     public function changeTotalItems($amount);
 
     /**
+     * Returns total quantity of items in cart.
+     *
+     * @return integer
+     */
+    public function getTotalQuantity();
+
+    /**
+     * Sets total quantity of items in cart.
+     *
+     * @param integer $totalItems;
+     */
+    public function setTotalQuantity($totalQuantity);
+
+    /**
+     * Change total quantity number by given amount.
+     *
+     * @param integer $amount
+     */
+    public function changeTotalQuantity($amount);
+
+    /**
      * Get total cart value.
      */
     public function getTotal();
