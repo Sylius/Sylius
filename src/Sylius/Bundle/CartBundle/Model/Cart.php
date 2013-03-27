@@ -45,6 +45,13 @@ class Cart implements CartInterface
     protected $totalItems;
 
     /**
+     * Total quantity of items.
+     *
+     * @var integer
+     */
+    protected $totalQuantity;
+
+    /**
      * Total value.
      *
      * @var float
@@ -74,6 +81,7 @@ class Cart implements CartInterface
     {
         $this->items = new ArrayCollection();
         $this->totalItems = 0;
+        $this->totalQuantity = 0;
         $this->total = 0;
         $this->locked = false;
         $this->incrementExpiresAt();
@@ -132,6 +140,38 @@ class Cart implements CartInterface
 
         if (0 > $this->totalItems) {
             $this->totalItems = 0;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalQuantity()
+    {
+        return $this->totalQuantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTotalQuantity($totalQuantity)
+    {
+        if (0 > $totalQuantity) {
+            throw new \OutOfRangeException('Total quantity must not be less than 0');
+        }
+
+        $this->totalQuantity = $totalQuantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeTotalQuantity($amount)
+    {
+        $this->totalQuantity += $amount;
+
+        if (0 > $this->totalQuantity) {
+            $this->totalQuantity = 0;
         }
     }
 

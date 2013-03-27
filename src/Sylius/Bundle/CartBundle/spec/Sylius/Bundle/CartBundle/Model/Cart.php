@@ -26,6 +26,11 @@ class Cart extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
 
+    function it_should_have_0_total_quantity_by_default()
+    {
+        $this->getTotalQuantity()->shouldReturn(0);
+    }
+
     function it_should_have_0_total_items_by_default()
     {
         $this->getTotalItems()->shouldReturn(0);
@@ -61,6 +66,14 @@ class Cart extends ObjectBehavior
         $this->removeItem($item)->shouldReturn($this);
 
         $this->clearItems()->shouldReturn($this);
+    }
+
+    function it_should_complain_when_total_quantity_is_less_than_0()
+    {
+        $this
+            ->shouldThrow(new \OutOfRangeException('Total quantity must not be less than 0'))
+            ->duringSetTotalQuantity(-1)
+        ;
     }
 
     function it_should_complain_when_total_items_is_less_than_0()
