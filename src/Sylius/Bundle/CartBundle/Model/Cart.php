@@ -109,6 +109,8 @@ class Cart implements CartInterface
     public function setLocked($locked)
     {
         $this->locked = $locked;
+
+        return $this;
     }
 
     /**
@@ -129,6 +131,8 @@ class Cart implements CartInterface
         }
 
         $this->totalItems = $totalItems;
+
+        return $this;
     }
 
     /**
@@ -141,6 +145,8 @@ class Cart implements CartInterface
         if (0 > $this->totalItems) {
             $this->totalItems = 0;
         }
+
+        return $this;
     }
 
     /**
@@ -196,7 +202,15 @@ class Cart implements CartInterface
      */
     public function setItems(Collection $items)
     {
-        $this->items = $items;
+        foreach($this->items as $item){
+            $this->removeItem($item);
+        }
+
+        foreach($items as $item){
+            $this->addItem($item);
+        }
+
+        return $this;
     }
 
     /**
@@ -240,6 +254,7 @@ class Cart implements CartInterface
         return $this;
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -267,6 +282,8 @@ class Cart implements CartInterface
     public function setTotal($total)
     {
         $this->total = $total;
+
+        return $this;
     }
 
     public function calculateTotal()
@@ -279,6 +296,8 @@ class Cart implements CartInterface
 
             $this->total += $item->getTotal();
         }
+
+        return $this;
     }
 
     /**
@@ -303,6 +322,8 @@ class Cart implements CartInterface
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
+
+        return $this;
     }
 
     /**
@@ -314,5 +335,7 @@ class Cart implements CartInterface
         $expiresAt->add(new \DateInterval('PT3H'));
 
         $this->expiresAt = $expiresAt;
+
+        return $this;
     }
 }

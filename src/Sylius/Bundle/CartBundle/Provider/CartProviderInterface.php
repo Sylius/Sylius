@@ -22,6 +22,14 @@ use Sylius\Bundle\CartBundle\Model\CartInterface;
 interface CartProviderInterface
 {
     /**
+     * Returns true if a cart exists otherwise false.
+     * It does not create a new cart if none exists
+     *
+     * @return boolean
+     */
+    public function hasCart();
+
+    /**
      * Returns current cart.
      * If none found is by storage, it should create new one and save it.
      *

@@ -60,7 +60,9 @@ abstract class Controller extends ResourceController
      */
     protected function getProvider()
     {
-        return $this->get('sylius_cart.provider');
+
+        return $this->container->get('sylius.cart_provider');
+
     }
 
     /**
@@ -71,6 +73,6 @@ abstract class Controller extends ResourceController
      */
     protected function getResolver()
     {
-        return $this->get('sylius_cart.resolver');
+        return $this->container->get('sylius.cart_resolver');
     }
 }

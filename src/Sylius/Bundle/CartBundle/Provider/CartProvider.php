@@ -68,6 +68,14 @@ class CartProvider implements CartProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function hasCart()
+    {
+        return null !== $this->cart;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCart()
     {
         if (null !== $this->cart) {

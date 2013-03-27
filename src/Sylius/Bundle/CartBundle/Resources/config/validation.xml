@@ -27,8 +27,8 @@
             <constraint name="Type">
                 <option name="type">integer</option>
             </constraint>
-            <constraint name="Min">
-                <option name="limit">1</option>
+            <constraint name="Range">
+                <option name="min">1</option>
             </constraint>
         </property>
     </class>

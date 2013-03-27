@@ -12,12 +12,11 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Validator\ValidatorInterface;
-
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * Cart & item changes listener.
@@ -34,6 +33,8 @@ class CartListener implements EventSubscriberInterface
     private $cartManager;
 
     /**
+     * Validator.
+     *
      * @var ValidatorInterface
      */
     private $validator;
