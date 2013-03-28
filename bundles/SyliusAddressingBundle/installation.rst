@@ -44,7 +44,7 @@ Put this configuration inside your ``app/config/config.yml``.
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
 Routing configuration
--------------------------------
+---------------------
 
 We will show an example here, how you can configure routing.
 Routing is based on `SyliusResourceBundle`.
@@ -53,46 +53,45 @@ Add folowing to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-sylius_address_list:
-    pattern: /address/list
-    defaults:
-        _controller: sylius_addressing.controller.address:getCollectionAction
-        _sylius.resource:
-            template: AcmeDemoBundle:Address:list.html.twig
-            sortable: true
-            sorting:
-                updatedAt: desc
+    sylius_address_list:
+        pattern: /address/list
+        defaults:
+            _controller: sylius_addressing.controller.address:getCollectionAction
+            _sylius.resource:
+                template: AcmeDemoBundle:Address:list.html.twig
+                sortable: true
+                sorting:
+                    updatedAt: desc
 
-sylius_address_create:
-    pattern: /address/create
-    defaults:
-        _controller: sylius_addressing.controller.address:createAction
-        _sylius.resource:
-            template: AcmeDemoBundle:Address:create.html.twig
-            redirect: sylius_address_show
+    sylius_address_create:
+        pattern: /address/create
+        defaults:
+            _controller: sylius_addressing.controller.address:createAction
+            _sylius.resource:
+                template: AcmeDemoBundle:Address:create.html.twig
+                redirect: sylius_address_show
 
-sylius_address_update:
-    pattern: /address/{id}/update
-    defaults:
-        _controller: sylius_addressing.controller.address:updateAction
-        _sylius.resource:
-            template: AcmeDemoBundle:Address:update.html.twig
-            redirect: sylius_address_show
+    sylius_address_update:
+        pattern: /address/{id}/update
+        defaults:
+            _controller: sylius_addressing.controller.address:updateAction
+            _sylius.resource:
+                template: AcmeDemoBundle:Address:update.html.twig
+                redirect: sylius_address_show
 
-sylius_address_delete:
-    pattern: /address/{id}/delete
-    defaults:
-        _controller: sylius_addressing.controller.address:deleteAction
-        _sylius.resource:
-            redirect: sylius_address_list
+    sylius_address_delete:
+        pattern: /address/{id}/delete
+        defaults:
+            _controller: sylius_addressing.controller.address:deleteAction
+            _sylius.resource:
+                redirect: sylius_address_list
 
-sylius_address_show:
-    pattern: /address/{id}
-    defaults:
-        _controller: sylius_addressing.controller.address:getAction
-        _sylius.resource:
-            template: AcmeDemoBundle:Address:show.html.twig
-
+    sylius_address_show:
+        pattern: /address/{id}
+        defaults:
+            _controller: sylius_addressing.controller.address:getAction
+            _sylius.resource:
+                template: AcmeDemoBundle:Address:show.html.twig
 
 Updating database schema
 ------------------------
