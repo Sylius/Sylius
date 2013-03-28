@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: sylius.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -62,98 +63,6 @@ swiftmailer:
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
-
-sylius_core:
-    driver: doctrine/orm
-
-sylius_money:
-    currency: %sylius.currency%
-
-sylius_cart:
-    driver: doctrine/orm
-    resolver: sylius.cart_item_resolver.default
-    classes:
-        cart:
-            model: Sylius\Bundle\CoreBundle\Entity\Cart
-        item:
-            model: Sylius\Bundle\CoreBundle\Entity\CartItem
-            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
-
-sylius_settings:
-    driver: doctrine/orm
-
-sylius_taxonomies:
-    driver: doctrine/orm
-
-sylius_assortment:
-    driver: doctrine/orm
-    classes:
-        product:
-            model: Sylius\Bundle\CoreBundle\Entity\Product
-            controller: Sylius\Bundle\CoreBundle\Controller\ProductController
-            repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
-        variant:
-            model: Sylius\Bundle\CoreBundle\Entity\Variant
-            form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
-
-sylius_taxation:
-    driver: doctrine/orm
-    classes:
-        tax_rate:
-            model: Sylius\Bundle\CoreBundle\Entity\TaxRate
-            form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
-
-sylius_shipping:
-    driver: doctrine/orm
-    classes:
-        shipment:
-            model: Sylius\Bundle\CoreBundle\Entity\Shipment
-        shipment_item:
-            model: Sylius\Bundle\CoreBundle\Entity\InventoryUnit
-        shipping_method:
-            model: Sylius\Bundle\CoreBundle\Entity\ShippingMethod
-            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
-
-sylius_promotions:
-    driver: doctrine/orm
-
-sylius_addressing:
-    driver: doctrine/orm
-
-sylius_inventory:
-    driver: doctrine/orm
-    backorders: true
-    classes:
-        unit:
-            model: Sylius\Bundle\CoreBundle\Entity\InventoryUnit
-        stockable:
-            model: %sylius.model.variant.class%
-
-sylius_payments:
-    driver: doctrine/orm
-    classes:
-        credit_card_owner:
-            model: Sylius\Bundle\CoreBundle\Entity\User
-
-sylius_addressing:
-    driver: doctrine/orm
-
-sylius_sales:
-    driver: doctrine/orm
-    classes:
-        order:
-            model: Sylius\Bundle\CoreBundle\Entity\Order
-            form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
-        sellable:
-            model: %sylius.model.variant.class%
-
-sylius_resource:
-    resources:
-        sylius.user:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Bundle\CoreBundle\Entity\User
 
 liip_doctrine_cache:
     namespaces:
