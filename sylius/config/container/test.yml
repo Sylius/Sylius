@@ -19,3 +19,9 @@ doctrine:
 
 sylius_money:
     currency: EUR
+
+sylius_payments:
+    gateways:
+        cc:     Credit Card
+        test:   Test
+        stripe: Stripe

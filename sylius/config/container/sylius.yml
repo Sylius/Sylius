@@ -67,6 +67,9 @@ sylius_inventory:
 
 sylius_payments:
     driver: doctrine/orm
+    gateways:
+        dummy: Test
+        stripe: Stripe
     classes:
         credit_card_owner:
             model: Sylius\Bundle\CoreBundle\Entity\User
