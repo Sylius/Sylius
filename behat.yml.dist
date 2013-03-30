@@ -6,7 +6,7 @@ default:
         class: Context\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: "http://sylius.local/testgate.php"
+            base_url: "http://sylius.local/test.php"
             default_session: symfony2
             selenium2:
                 browser: htmlunit
@@ -14,7 +14,6 @@ default:
             kernel:
                 path: sylius/SyliusKernel.php
                 class: SyliusKernel
-                env: testing
             mink_driver: true
 
 no-js:
