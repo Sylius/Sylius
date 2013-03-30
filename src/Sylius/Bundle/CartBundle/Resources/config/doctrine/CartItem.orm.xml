@@ -21,8 +21,8 @@
             <join-column name="cart_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <field name="quantity" column="quantity" type="integer" />
-        <field name="unitPrice" column="unit_price" type="decimal" precision="10" scale="2" />
-        <field name="total" column="total" type="decimal" precision="10" scale="2" />
+        <field name="unitPrice" column="unit_price" type="integer" />
+        <field name="total" column="total" type="integer" />
     </mapped-superclass>
 
 </doctrine-mapping>
