@@ -46,6 +46,8 @@ class SyliusPaymentsExtension extends Extension
         $container->setParameter('sylius_payments.driver', $driver);
         $container->setParameter('sylius_payments.engine', $config['engine']);
 
+        $container->setParameter('sylius.payment_gateways', $config['gateways']);
+
         $this->mapClassParameters($config['classes'], $container);
 
         $loader->load('services.xml');
