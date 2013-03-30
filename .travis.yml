@@ -10,8 +10,7 @@ matrix:
         - php: 5.5
 
 before_script: 
-    - export ADDITIONAL_PATH=`php -i | grep -F --color=never 'Scan this dir for additional .ini files'`
-    - echo 'xdebug.max_nesting_level=9999' | sudo tee ${ADDITIONAL_PATH:42}/symfony2.ini
+    - echo 'xdebug.max_nesting_level=9999' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - sudo apt-get update > /dev/null
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
