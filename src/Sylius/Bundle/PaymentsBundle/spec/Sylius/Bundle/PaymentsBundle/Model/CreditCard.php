@@ -40,7 +40,7 @@ class CreditCard extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_owner_by_default()
+    function it_has_no_owner_by_default()
     {
         $this->getOwner()->shouldReturn(null);
     }
