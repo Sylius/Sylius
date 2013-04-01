@@ -1,6 +1,11 @@
 SyliusSettingsBundle
 ====================
 
-.. note::
+Settings system with web editing interface for Symfony2 applications.
 
-    To be written.
+.. toctree::
+   :numbered:
+
+   installation
+   templates
+   summary
