@@ -15,6 +15,20 @@ Issues
 
 The documentation uses [GitHub issues](https://github.com/Sylius/Documentation/issues).
 
+Build
+-----
+
+If you contribute to documentation you will probably want to check how it looks after the build.
+To be able build documentation install [Sphinx](http://sphinx-doc.org/):
+```
+$ sudo easy_install -U Sphinx
+```
+Then run build scipt:
+```
+$ bin/build
+```
+Documentation index is `build/index.html`.
+
 Authors
 -------
 

@@ -36,11 +36,11 @@ You're interacting with them like you usually do with own entities in your proje
         $this->get('sylius.repository.cart_item');
 
         // Those repositories have some handy default methods, for example...
-        $item = $itemRepository->createNew();
+        $item = $this->get('sylius.repository.cart')->createNew();
     }
 
 Provider and Resolver
--------------------------------
+---------------------
 
 There are also 3 more services for you.
 
