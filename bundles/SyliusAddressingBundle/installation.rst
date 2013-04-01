@@ -46,52 +46,12 @@ Put this configuration inside your ``app/config/config.yml``.
 Routing configuration
 ---------------------
 
-We will show an example here, how you can configure routing.
-Routing is based on `SyliusResourceBundle`.
-
-Add folowing to your ``app/config/routing.yml``.
+Import routing configuration by adding folowing to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-    sylius_address_list:
-        pattern: /address/list
-        defaults:
-            _controller: sylius_addressing.controller.address:getCollectionAction
-            _sylius.resource:
-                template: AcmeDemoBundle:Address:list.html.twig
-                sortable: true
-                sorting:
-                    updatedAt: desc
-
-    sylius_address_create:
-        pattern: /address/create
-        defaults:
-            _controller: sylius_addressing.controller.address:createAction
-            _sylius.resource:
-                template: AcmeDemoBundle:Address:create.html.twig
-                redirect: sylius_address_show
-
-    sylius_address_update:
-        pattern: /address/{id}/update
-        defaults:
-            _controller: sylius_addressing.controller.address:updateAction
-            _sylius.resource:
-                template: AcmeDemoBundle:Address:update.html.twig
-                redirect: sylius_address_show
-
-    sylius_address_delete:
-        pattern: /address/{id}/delete
-        defaults:
-            _controller: sylius_addressing.controller.address:deleteAction
-            _sylius.resource:
-                redirect: sylius_address_list
-
-    sylius_address_show:
-        pattern: /address/{id}
-        defaults:
-            _controller: sylius_addressing.controller.address:getAction
-            _sylius.resource:
-                template: AcmeDemoBundle:Address:show.html.twig
+    sylius_addressing:
+        resource: @SyliusAddressingBundle/Resources/config/routing.yml
 
 Updating database schema
 ------------------------
@@ -111,11 +71,8 @@ For "**doctrine/orm**" driver run the following command.
 Templates
 ---------
 
-We think that providing a sensible default templates is really difficult.
-This is the reason why we do not currently include any, but if you have an idea for a good starter template, let us know!
-
-The bundle requires ``list``, ``create``, ``update`` and ``show`` templates for addresses, and similar for zones.
+Bundle provides default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
 
 .. note::
 
-    You can use `the templates from our Sandbox app as inspiration <https://github.com/Sylius/Sylius-Sandbox/tree/master/src/Sylius/Bundle/SandboxBundle/Resources/views/Backend/Address>`_.
+    You can check `Sylius application <http://github.com/Sylius/Sylius>`_ to see how to integrate it in your application.
