@@ -299,6 +299,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 }
             }
 
+            if (isset($data['sku'])) {
+                $product->setSku($data['sku']);
+            }
+
             if (isset($data['variants selection']) && !empty($data['variants selection'])) {
                 $product->setVariantSelectionMethod($data['variants selection']);
             }

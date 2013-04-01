@@ -26,4 +26,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
+        - { path: "/_partial.*", ip: 127.0.0.1 }
