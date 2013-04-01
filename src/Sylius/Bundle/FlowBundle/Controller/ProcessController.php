@@ -56,7 +56,7 @@ class ProcessController extends ContainerAware
         try {
             return $coordinator->display($scenarioAlias, $stepName);
         } catch (\InvalidArgumentException $e) {
-            throw new NotFoundHttpException('The step you are looking for is not found.');
+            throw new NotFoundHttpException('The step you are looking for is not found.', $e);
         }
     }
 
