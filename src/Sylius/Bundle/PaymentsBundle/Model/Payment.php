@@ -99,7 +99,7 @@ class Payment implements PaymentInterface
       return $this->method;
     }
 
-    public function setMethod(PaymentMethodInterface $method)
+    public function setMethod(PaymentMethodInterface $method = null)
     {
         $this->method = $method;
 
