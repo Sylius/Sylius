@@ -108,14 +108,4 @@ class OrderBuilder implements OrderBuilderInterface
 
         return $this->order;
     }
-
-    /**
-     * Create new order item instance.
-     *
-     * @return OrderItemInterface
-     */
-    protected function createNewItem()
-    {
-        return $this->itemRepository->createNew();
-    }
 }
