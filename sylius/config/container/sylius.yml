@@ -82,6 +82,7 @@ sylius_sales:
     classes:
         order:
             model: Sylius\Bundle\CoreBundle\Entity\Order
+            repository: Sylius\Bundle\CoreBundle\Repository\OrderRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         sellable:
             model: %sylius.model.variant.class%
