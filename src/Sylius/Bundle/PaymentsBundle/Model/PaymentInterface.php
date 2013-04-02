@@ -37,7 +37,7 @@ interface PaymentInterface
      *
      * @param PaymentMethodInterface $method
      */
-    public function setMethod(PaymentMethodInterface $method);
+    public function setMethod(PaymentMethodInterface $method = null);
 
     /**
      * Get payment source.
