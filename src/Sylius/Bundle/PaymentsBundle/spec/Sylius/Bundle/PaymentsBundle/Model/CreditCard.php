@@ -59,7 +59,7 @@ class CreditCard extends ObjectBehavior
         $this->getCardholderName()->shouldReturn(null);
     }
 
-    function its_carholder_name_is_mutalbe()
+    function its_carholder_name_is_mutable()
     {
         $this->setCardholderName('John Doe');
         $this->getCardholderName()->shouldReturn('John Doe');
