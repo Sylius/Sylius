@@ -7,4 +7,5 @@ Symfony2 integration for `Omnipay <https://github.com/adrianmacneil/omnipay>`_ l
    :numbered:
 
    installation
-   usage
+   gateway
+   payment
