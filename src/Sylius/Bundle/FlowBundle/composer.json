@@ -21,6 +21,9 @@
 
         "symfony/framework-bundle": "~2.1"
     },
+    "require-dev": {
+        "symfony/yaml": "~2.1"
+    },
     "autoload": {
         "psr-0": { "Sylius\\Bundle\\FlowBundle": "" }
     },

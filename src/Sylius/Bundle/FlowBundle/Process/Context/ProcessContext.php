@@ -292,7 +292,7 @@ class ProcessContext implements ProcessContextInterface
         }
 
         if (0 === count($history)) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException(sprintf('Step "%s" not found in step history.', $this->currentStep->getName()));
         }
 
         $this->setStepHistory($history);
