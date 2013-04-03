@@ -17,10 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.shipping_category.class">Sylius\Bundle\ShippingBundle\Entity\DefaultShippingCategory</parameter>
-        <parameter key="sylius.model.shipping_method.class">Sylius\Bundle\ShippingBundle\Entity\DefaultShippingMethod</parameter>
-        <parameter key="sylius.model.shipping_rule.class">Sylius\Bundle\ShippingBundle\Entity\Rule</parameter>
-
         <parameter key="sylius.repository.shipment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.shipment_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.shipping_category.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
@@ -84,11 +80,6 @@
                     <argument>%sylius.model.shipping_method.class%</argument>
                 </service>
             </argument>
-        </service>
-
-        <service id="sylius.form.type.shipping_category_choice" class="%sylius.form.type.shipping_category_choice.class%">
-            <argument>%sylius.model.shipping_category.class%</argument>
-            <tag name="form.type" alias="sylius_shipping_category_choice" />
         </service>
     </services>
 

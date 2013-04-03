@@ -85,6 +85,10 @@
             <argument type="service" id="sylius.shipping_rule_checker_registry" />
             <tag name="form.type" alias="sylius_shipping_method" />
         </service>
+        <service id="sylius.form.type.shipping_category_choice" class="%sylius.form.type.shipping_category_choice.class%">
+            <argument>%sylius.model.shipping_category.class%</argument>
+            <tag name="form.type" alias="sylius_shipping_category_choice" />
+        </service>
 
         <service id="sylius.shipping_eigibility_checker" class="%sylius.shipping_eigibility_checker.class%">
             <argument type="service" id="sylius.shipping_rule_checker_registry" />

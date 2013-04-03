@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -24,11 +24,9 @@ class PerItemRateCalculator extends Calculator
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShipmentInterface $shipment)
+    public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        $configuration = $shipment->getMethod()->getConfiguration();
-
-        return $configuration['amount'] * $shipment->getItems()->count();
+        return $configuration['amount'] * $subject->getShippingItemCount();
     }
 
     /**

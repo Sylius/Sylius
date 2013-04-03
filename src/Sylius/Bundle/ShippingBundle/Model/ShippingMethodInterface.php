@@ -66,15 +66,6 @@ interface ShippingMethodInterface extends TimestampableInterface
     public function getCategoryRequirementLabel();
 
     /**
-     * Check whether this method matches given set of shippables.
-     *
-     * @param ShippablesAwareInterface $shippablesAware
-     *
-     * @return Boolean
-     */
-    public function supports(ShippablesAwareInterface $shippablesAware);
-
-    /**
      * Check whether the shipping method is currently enabled.
      *
      * @return Boolean
@@ -131,16 +122,15 @@ interface ShippingMethodInterface extends TimestampableInterface
     public function setConfiguration(array $configuration);
 
     /**
-     * @return Boolean
-     */
-    public function hasRules();
-
-    /**
+     * Get all rules assigned to this shipping method.
+     *
      * @return RuleInterface[]
      */
     public function getRules();
 
     /**
+     * Check if this shipping method already contains the rule?
+     *
      * @param RuleInterface $rule
      *
      * @return Boolean
@@ -148,11 +138,15 @@ interface ShippingMethodInterface extends TimestampableInterface
     public function hasRule(RuleInterface $rule);
 
     /**
+     * Adds rule.
+     *
      * @param RuleInterface $rule
      */
     public function addRule(RuleInterface $rule);
 
     /**
+     * Remove rule.
+     *
      * @param RuleInterface $rule
      */
     public function removeRule(RuleInterface $rule);

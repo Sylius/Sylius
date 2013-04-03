@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
@@ -56,5 +57,11 @@ class SyliusShippingBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_shipping', $interfaces));
         $container->addCompilerPass(new RegisterCalculatorsPass());
         $container->addCompilerPass(new RegisterRuleCheckersPass());
+
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\ShippingBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_shipping.driver.doctrine/orm'));
     }
 }

@@ -11,15 +11,23 @@
 
 namespace Sylius\Bundle\ShippingBundle\Checker;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
- * Promotion eliglibility checker interface.
+ * Shipping method eliglibility checker interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ShippingMethodEliglibilityCheckerInterface
 {
-    public function isEligible(ShippablesAwareInterface $shippablesAware, ShippingMethodInterface $shippingMethod);
+    /**
+     * Check if given shipping method supports the concrete subject.
+     *
+     * @param ShippingSubjectInterface $subject
+     * @param ShippingMethodInterface  $method
+     *
+     * @return Boolean
+     */
+    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method);
 }

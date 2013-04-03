@@ -45,7 +45,7 @@ class SyliusShippingExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_shipping.driver', $driver);
-        $container->setParameter('sylius_shipping.engine', $config['engine']);
+        $container->setParameter('sylius_shipping.driver.'.$driver, true);
 
         $this->mapClassParameters($config['classes'], $container);
         $this->mapValidationGroupParameters($config['validation_groups'], $container);

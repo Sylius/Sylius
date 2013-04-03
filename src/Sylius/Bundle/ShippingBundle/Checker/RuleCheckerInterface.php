@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Checker;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
  * Shipping method rule checker interface.
@@ -20,6 +20,19 @@ use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
  */
 interface RuleCheckerInterface
 {
-    public function isEligible(ShippablesAwareInterface $shippablesAware, array $configuration);
+    /**
+     * Check if given subject passes the requirements specified in
+     * configuration.
+     *
+     * @param ShippingSubjectInterface $subject
+     * @param array                    $configuration
+     */
+    public function isEligible(ShippingSubjectInterface $subject, array $configuration);
+
+    /**
+     * Get the name of configuration form type.
+     *
+     * @return string
+     */
     public function getConfigurationFormType();
 }

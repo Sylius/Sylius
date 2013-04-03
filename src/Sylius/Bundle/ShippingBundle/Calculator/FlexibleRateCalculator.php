@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -28,15 +28,13 @@ class FlexibleRateCalculator extends Calculator
      *
      * {@inheritdoc}
      */
-    public function calculate(ShipmentInterface $shipment)
+    public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        $configuration = $shipment->getMethod()->getConfiguration();
-
         $firstItemCost = $configuration['first_item_cost'];
         $additionalItemCost = $configuration['additional_item_cost'];
         $additionalItemLimit = $configuration['additional_item_limit'];
 
-        $totalItems = $shipment->getItems()->count();
+        $totalItems = $subject->getShippingItemCount();
         $additionalItems = $totalItems - 1;
 
         if (0 !== $additionalItemLimit) {

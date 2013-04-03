@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Checker;
 use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
 
 /**
- * Checks if shippables count exceeds (or at least equal) to the configured count.
+ * Checks if item count exceeds (or at least is equal) to the configured count.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */

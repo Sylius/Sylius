@@ -22,8 +22,8 @@ interface RuleInterface
 {
     const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
+    const TYPE_WEIGHT     = 'weight';
 
-    public function getId();
     public function getType();
     public function setType($type);
     public function getConfiguration();

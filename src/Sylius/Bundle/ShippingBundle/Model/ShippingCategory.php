@@ -42,13 +42,6 @@ class ShippingCategory implements ShippingCategoryInterface
     protected $description;
 
     /**
-     * Methods for this category.
-     *
-     * @var ShippingMethodInterface[]
-     */
-    protected $methods;
-
-    /**
      * Creation time.
      *
      * @var \DateTime
@@ -67,7 +60,6 @@ class ShippingCategory implements ShippingCategoryInterface
      */
     public function __construct()
     {
-        $this->methods = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -117,44 +109,6 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMethods()
-    {
-        return $this->methods;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addMethod(ShippingMethodInterface $method)
-    {
-        if (!$this->hasMethod($method)) {
-            $method->setCategory($this);
-            $this->methods->add($method);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeMethod(ShippingMethodInterface $method)
-    {
-        if ($this->hasMethod($method)) {
-            $method->setCategory(null);
-            $this->methods->removeElement($method);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasMethod(ShippingMethodInterface $method)
-    {
-        return $this->methods->contains($method);
     }
 
     /**
