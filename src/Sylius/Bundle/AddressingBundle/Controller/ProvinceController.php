@@ -32,7 +32,7 @@ class ProvinceController extends ResourceController
      *
      * @return Response
      */
-    public function renderProvinceChoiceTypeAction(Request $request)
+    public function choiceFormAction(Request $request)
     {
         if (!$request->isXmlHttpRequest() || null === $countryId = $request->query->get('countryId')) {
             throw new AccessDeniedException();
@@ -48,7 +48,7 @@ class ProvinceController extends ResourceController
         }
 
         $form = $this->createProvinceChoiceForm($country);
-        $content = $this->renderView($this->getFullTemplateName('_provinceChoiceForm.html'), array(
+        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
             'form' => $form->createView()
         ));
 
