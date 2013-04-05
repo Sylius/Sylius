@@ -1,0 +1,10 @@
+<h1>New taxonomy <small>Use this form to create new taxonomy</small></h1>
+<hr />
+
+<form action="{{ path('sylius_taxonomy_create') }}" method="post" class="form-horizontal">
+    {% include 'SyliusTaxonomiesBundle:Taxonomy:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="create taxonomy" class="btn btn-large btn-primary" />
+        <a href="{{ path('sylius_taxonomy_index') }}" class="btn btn-large">cancel</a>
+    </div>
+</form>

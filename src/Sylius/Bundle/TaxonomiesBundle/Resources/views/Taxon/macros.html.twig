@@ -1,0 +1,49 @@
+{% macro list(taxonomy, taxons) %}
+
+{% if taxons|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ _self.tree(taxonomy, taxons) }}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    No taxons to show
+</div>
+{% endif %}
+
+{% endmacro %}
+
+{% macro tree(taxonomy, taxons) %}
+
+{% for taxon in taxons %}
+<tr>
+    <td>
+        {% for i in 1..taxon.level %}<i class="icon-caret-right"></i>{% if not loop.last %}&nbsp;{% endif %}{% endfor %}
+        {{ taxon.name }}
+    </td>
+    <td>
+        <div class="pull-right">
+            <a href="{{ path('sylius_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id}) }}" class="btn">
+                <i class="icon-pencil"></i> edit
+            </a>
+            <form action="{{ path('sylius_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id}) }}" method="post" style="display: inline;">
+                <button class="btn btn-danger">
+                    <i class="icon-trash"></i>
+                </button>
+            </form>
+        </div>
+    </td>
+</tr>
+{% if taxon.children|length > 0 %}
+    {{ _self.tree(taxonomy, taxon.children) }}
+{% endif %}
+{% endfor %}
+{% endmacro %}
