@@ -20,12 +20,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class DefaultCalculator extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator');
     }
 
-    function it_should_be_a_Sylius_tax_calculator()
+    function it_implements_Sylius_tax_calculator_interface()
     {
         $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface');
     }
@@ -33,12 +33,24 @@ class DefaultCalculator extends ObjectBehavior
     /**
      * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $rate
      */
-    function it_should_calculate_tax_from_base_and_tax_rate($rate)
+    function it_calculates_tax_as_percentage_of_given_base_if_rate_is_not_included_in_price($rate)
     {
+        $rate->isIncludedInPrice()->willReturn(false);
         $rate->getAmount()->willReturn(0.23);
 
-        $this->calculate(100, $rate)->shouldReturn(23.00);
-        $this->calculate(1000, $rate)->shouldReturn(230.00);
-        $this->calculate(2495.99, $rate)->shouldReturn(574.07);
+        $this->calculate(10000, $rate)->shouldReturn(2300);
+        $this->calculate(100000, $rate)->shouldReturn(23000);
+        $this->calculate(249599, $rate)->shouldReturn(57408);
+    }
+
+    /**
+     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $rate
+     */
+    function it_calculates_correct_tax_for_given_base_if_rate_is_included_in_price($rate)
+    {
+        $rate->isIncludedInPrice()->willReturn(true);
+        $rate->getAmount()->willReturn(0.23);
+
+        $this->calculate(10000, $rate)->shouldReturn(1870);
     }
 }

@@ -25,6 +25,10 @@ class DefaultCalculator implements CalculatorInterface
      */
     public function calculate($base, TaxRateInterface $rate)
     {
-        return round(bcmul($base, $rate->getAmount(), 2), 2);
+        if ($rate->isIncludedInPrice()) {
+            return intval($base - round($base / (1 + $rate->getAmount())));
+        }
+
+        return intval(round($base * $rate->getAmount()));
     }
 }
