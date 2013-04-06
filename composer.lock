@@ -1,5 +1,5 @@
 {
-    "hash": "9dc925fb39fd8ecfdda3143a0a64463e",
+    "hash": "79445aa424a3f9dd7149ad443a3d41b0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1134,6 +1134,56 @@
             "time": "2012-12-13 18:31:18"
         },
         {
+            "name": "incenteev/composer-parameter-handler",
+            "version": "dev-master",
+            "target-dir": "Incenteev/ParameterHandler",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Incenteev/ParameterHandler.git",
+                "reference": "ec4c32c8dbd9e571165de244aff249a3ecea7102"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/ec4c32c8dbd9e571165de244aff249a3ecea7102",
+                "reference": "ec4c32c8dbd9e571165de244aff249a3ecea7102",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/yaml": ">=2.0,<3.0"
+            },
+            "require-dev": {
+                "composer/composer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Incenteev\\ParameterHandler": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Composer script handling your ignored parameter file",
+            "homepage": "https://github.com/Incenteev/ParameterHandler",
+            "keywords": [
+                "parameters management"
+            ],
+            "time": "2013-04-06 17:40:18"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "dev-master",
             "source": {
@@ -1189,7 +1239,7 @@
             "target-dir": "JMS/AopBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
+                "url": "https://github.com/schmittjoh/JMSAopBundle",
                 "reference": "7018357f5bedf204979a88867a9da05973744422"
             },
             "dist": {
@@ -1402,7 +1452,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/parser-lib.git",
+                "url": "git://github.com/schmittjoh/parser-lib",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
             },
             "dist": {
@@ -1707,7 +1757,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenu.git",
+                "url": "http://github.com/KnpLabs/KnpMenu.git",
                 "reference": "730bc37232f5f813822acf80edfbd89381ea5971"
             },
             "dist": {
@@ -2806,6 +2856,9 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "twig/twig": "*"
+            },
+            "suggest": {
+                "friendsofsymfony/rest-bundle": "*"
             },
             "type": "symfony-bundle",
             "extra": {
