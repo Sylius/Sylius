@@ -21,6 +21,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderNumberListener
 {
+    protected $generator;
+
     /**
      * Constructor.
      *
