@@ -30,8 +30,15 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
+
+            // Other bundles...
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
         );
     }
+
+.. note::
+
+    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
 Container configuration
 -----------------------
