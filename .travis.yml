@@ -9,7 +9,7 @@ matrix:
     allow_failures:
         - php: 5.5
 
-before_script: 
+before_script:
     - echo 'xdebug.max_nesting_level=9999' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - sudo apt-get update > /dev/null
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
@@ -18,7 +18,7 @@ before_script:
     - echo "127.0.0.1 sylius.local" | sudo tee -a /etc/hosts
     - sudo /etc/init.d/apache2 restart
     - composer self-update
-    - composer install --dev --prefer-source > /dev/null
+    - composer install --dev --prefer-source --no-interaction > /dev/null
     - sylius/console do:da:cr -e=test > /dev/null
     - sylius/console do:sc:cr -e=test > /dev/null
     - chmod -R 777 sylius/cache sylius/logs
