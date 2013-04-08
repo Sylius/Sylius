@@ -59,21 +59,18 @@ class PromotionType extends AbstractType
             ))
             ->add('coupons', 'collection', array(
                 'type'         => 'sylius_promotion_coupon',
-                'required'     => false,
                 'allow_add'    => true,
                 'by_reference' => false,
                 'label'        => 'sylius.form.promotion.coupons'
             ))
             ->add('rules', 'collection', array(
                 'type'         => 'sylius_promotion_rule',
-                'required'     => false,
                 'allow_add'    => true,
                 'by_reference' => false,
                 'label'        => 'sylius.form.promotion.rules'
             ))
             ->add('actions', 'collection', array(
                 'type'         => 'sylius_promotion_action',
-                'required'     => false,
                 'allow_add'    => true,
                 'by_reference' => false,
                 'label'        => 'sylius.form.promotion.actions'
