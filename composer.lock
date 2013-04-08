@@ -1,5 +1,5 @@
 {
-    "hash": "79445aa424a3f9dd7149ad443a3d41b0",
+    "hash": "646e29d3683395d0dc9bdf48d16738c0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1618,6 +1618,80 @@
             "time": "2013-02-12 08:32:04"
         },
         {
+            "name": "jms/translation-bundle",
+            "version": "dev-master",
+            "target-dir": "JMS/TranslationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
+                "reference": "1f50addc1686951cf9be37dccf5d23203a0c528d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/1f50addc1686951cf9be37dccf5d23203a0c528d",
+                "reference": "1f50addc1686951cf9be37dccf5d23203a0c528d",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "0.9.1",
+                "symfony/console": "*",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev"
+            },
+            "conflict": {
+                "twig/twig": "1.10.2"
+            },
+            "require-dev": {
+                "jms/di-extra-bundle": "*",
+                "sensio/framework-extra-bundle": "*",
+                "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
+                "symfony/css-selector": "*",
+                "symfony/finder": "*",
+                "symfony/form": "*",
+                "symfony/process": "*",
+                "symfony/security": "*",
+                "symfony/twig-bundle": "*",
+                "symfony/validator": "*",
+                "symfony/yaml": "*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\TranslationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "http://jmsyst.com",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Puts the Symfony2 Translation Component on steroids",
+            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
+            "keywords": [
+                "extract",
+                "extraction",
+                "i18n",
+                "interface",
+                "multilanguage",
+                "translation",
+                "ui",
+                "webinterface"
+            ],
+            "time": "2013-02-06 14:11:31"
+        },
+        {
             "name": "knplabs/gaufrette",
             "version": "dev-master",
             "source": {
@@ -2152,6 +2226,45 @@
                 "psr-3"
             ],
             "time": "2013-03-28 10:41:04"
+        },
+        {
+            "name": "nikic/php-parser",
+            "version": "v0.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser",
+                "reference": "v0.9.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
+                "reference": "v0.9.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPParser": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "time": "2012-04-23 15:52:11"
         },
         {
             "name": "pagerfanta/pagerfanta",
