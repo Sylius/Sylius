@@ -1,0 +1,32 @@
+sylius_taxonomy_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:indexAction
+        _sylius:
+            sortable: true
+            paginate: 50
+
+sylius_taxonomy_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxonomy:createAction
+
+sylius_taxonomy_update:
+    pattern: /{id}/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxonomy:updateAction
+
+sylius_taxonomy_delete:
+    pattern: /{id}
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.taxonomy:deleteAction
+
+sylius_taxonomy_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:showAction
