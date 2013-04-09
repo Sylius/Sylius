@@ -112,10 +112,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
                 if (null !== $parent) {
                     $parent->addChild($taxon);
-                    $parent = $taxon;
                 } else {
                     $taxonomy->addTaxon($taxon);
                 }
+
+                $parent = $taxon;
             }
         }
 

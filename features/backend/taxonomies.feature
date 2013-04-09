@@ -120,7 +120,7 @@ Feature: taxonomies
 
     Scenario: Deleted taxons disappear from the list
         Given I am on the page of taxonomy "Category"
-         When I click "delete" near "Electronics"
+         When I click "delete" near "Clothing"
          Then I should still be on the page of taxonomy "Category"
           And "Taxon has been successfully deleted." should appear on the page
-          And I should see 4 taxons in the list
+          And I should see 5 taxons in the list

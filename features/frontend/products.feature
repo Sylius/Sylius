@@ -24,14 +24,12 @@ Feature: Products
          When I follow "T-Shirts"
          Then I should see there 2 products
           And I should see "Black T-Shirt"
-          But I should not see "Symfony T-Shirt"
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage
          When I follow "PHP T-Shirts"
          Then I should see there 3 products
           And I should see "Sylius Tee"
-          But I should not see "Black T-Shirt"
 
     Scenario: Empty index of products
         Given there are no products
