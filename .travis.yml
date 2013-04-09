@@ -10,7 +10,7 @@ matrix:
         - php: 5.5
 
 before_script:
-    - echo 'xdebug.max_nesting_level=9999' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - sudo apt-get update > /dev/null
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
