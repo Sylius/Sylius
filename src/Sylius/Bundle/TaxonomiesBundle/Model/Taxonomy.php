@@ -42,21 +42,6 @@ class Taxonomy implements TaxonomyInterface
     protected $root;
 
     /**
-     * All taxons collection.
-     *
-     * @var Collection
-     */
-    protected $taxons;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->taxons = new ArrayCollection();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function __toString()
@@ -70,6 +55,25 @@ class Taxonomy implements TaxonomyInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        $this->root->setName($name);
+
+        return $this;
     }
 
     /**
@@ -124,25 +128,6 @@ class Taxonomy implements TaxonomyInterface
     public function removeTaxon(TaxonInterface $taxon)
     {
         $this->root->removeChild($taxon);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        $this->root->setName($name);
 
         return $this;
     }
