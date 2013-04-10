@@ -2065,17 +2065,17 @@
         },
         {
             "name": "liip/imagine-bundle",
-            "version": "v0.9.1",
+            "version": "v0.9.2",
             "target-dir": "Liip/ImagineBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "v0.9.1"
+                "reference": "v0.9.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/v0.9.1",
-                "reference": "v0.9.1",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/v0.9.2",
+                "reference": "v0.9.2",
                 "shasum": ""
             },
             "require": {
@@ -2114,7 +2114,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2013-02-20 15:18:48"
+            "time": "2013-04-08 16:03:27"
         },
         {
             "name": "mathiasverraes/money",
@@ -2817,12 +2817,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCoreBundle.git",
-                "reference": "1ce0b15c625e4becf256f0fe2bff0c5246718555"
+                "reference": "c4a8291db1fdf4dfb8181b31721088a6c73de798"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/1ce0b15c625e4becf256f0fe2bff0c5246718555",
-                "reference": "1ce0b15c625e4becf256f0fe2bff0c5246718555",
+                "url": "https://api.github.com/repos/Sylius/SyliusCoreBundle/zipball/c4a8291db1fdf4dfb8181b31721088a6c73de798",
+                "reference": "c4a8291db1fdf4dfb8181b31721088a6c73de798",
                 "shasum": ""
             },
             "require": {
@@ -2889,7 +2889,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-04-08 18:55:49"
+            "time": "2013-04-10 10:02:02"
         },
         {
             "name": "sylius/flow-bundle",
@@ -3585,12 +3585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusWebBundle.git",
-                "reference": "5a85a8eb5a06fa35bb5db769d8630231e80dd8f4"
+                "reference": "0c53163ffef718dc86498de05a9b67f59eeda0df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/5a85a8eb5a06fa35bb5db769d8630231e80dd8f4",
-                "reference": "5a85a8eb5a06fa35bb5db769d8630231e80dd8f4",
+                "url": "https://api.github.com/repos/Sylius/SyliusWebBundle/zipball/0c53163ffef718dc86498de05a9b67f59eeda0df",
+                "reference": "0c53163ffef718dc86498de05a9b67f59eeda0df",
                 "shasum": ""
             },
             "require": {
@@ -3639,7 +3639,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-04-03 18:39:31"
+            "time": "2013-04-10 08:50:38"
         },
         {
             "name": "symfony/assetic-bundle",
