@@ -1,5 +1,6 @@
 {
     "name":        "sylius/sylius",
+    "type":        "project",
     "description": "Modern ecommerce for Symfony2",
     "license":     "MIT",
     "homepage":    "http://sylius.org",
