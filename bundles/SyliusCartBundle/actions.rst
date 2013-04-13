@@ -51,6 +51,6 @@ with following action.
 
 .. code-block:: html
 
-    <form action="{{ path('sylius_cart_save') }}" method="post">Clear cart</a>
+    <form action="{{ path('sylius_cart_save') }}" method="post">Save cart</a>
 
 You cart will be validated and saved if everything is alright.
