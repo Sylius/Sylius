@@ -173,6 +173,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
+            if (isset($data['shipment'])) {
+                $order->addShipment($this->createShipment($data['shipment']));
+            }
+
             $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
 
             $manager->persist($order);
@@ -802,6 +806,25 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $address->setCountry($this->findOneByName('country', $addressData[4]));
 
         return $address;
+    }
+
+    /**
+     * Create an shipment instance from string.
+     *
+     * @param string $string
+     *
+     * @return ShipmentInterface
+     */
+    private function createShipment($string)
+    {
+        $shipment = $this->getRepository('shipment')->createNew();
+
+        $shipmentData = explode(',', $string);
+        $shipmentData = array_map('trim', $shipmentData);
+
+        $shipment->setMethod($this->getRepository('shipping_method')->findOneByName($shipmentData[0]));
+
+        return $shipment;
     }
 
     /**

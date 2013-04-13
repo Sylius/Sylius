@@ -137,6 +137,17 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am on the shipment page with method "([^""]*)"$/
+     */
+    public function iAmOnTheShipmentPage($value)
+    {
+        $shippingMethod = $this->getDataContext()->findOneBy('shipping_method', array('name' => $value));
+        $shipment = $this->getDataContext()->findOneBy('shipment', array('method' => $shippingMethod));
+
+        $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
+    }
+
+    /**
      * @Given /^I am on the page of ([^""]*) with ([^""]*) "([^""]*)"$/
      * @Given /^I go to the page of ([^""]*) with ([^""]*) "([^""]*)"$/
      */
@@ -156,6 +167,18 @@ class WebUser extends MinkContext implements KernelAwareInterface
     public function iAmOnTheResourcePageByName($type, $name)
     {
         $this->iAmOnTheResourcePage($type, 'name', $name);
+    }
+
+    /**
+     * @Then /^I should be on the shipment page with method "([^"]*)"$/
+     */
+    public function iShouldBeOnTheShipmentPageWithMethod($value)
+    {
+        $shippingMethod = $this->getDataContext()->findOneBy('shipping_method', array('name' => $value));
+        $shipment = $this->getDataContext()->findOneBy('shipment', array('method' => $shippingMethod));
+
+        $this->assertSession()->addressEquals($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
