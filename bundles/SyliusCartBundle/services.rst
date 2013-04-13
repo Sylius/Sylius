@@ -73,7 +73,7 @@ The resolver is used to create a new item based on user request.
     public function addItemAction(Request $request)
     {
         $resolver = $this->get('sylius.cart_resolver');
-        $item = $this->resolve($this->createNew(), $request);
+        $item = $resolver->resolve($this->createNew(), $request);
     }
 
 .. note::
