@@ -65,16 +65,16 @@ execute "check if short_open_tag is Off in /etc/php5/cli/php.ini?" do
   command "sed -i 's/short_open_tag = On/short_open_tag = Off/g' /etc/php5/cli/php.ini"
 end
 
-execute "check if date.timezone is Europe/Paris in /etc/php5/apache2/php.ini?" do
+execute "check if date.timezone is UTC in /etc/php5/apache2/php.ini?" do
   user "root"
-  not_if "grep '^date.timezone = Europe/Paris' /etc/php5/apache2/php.ini"
-  command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Paris/g' /etc/php5/apache2/php.ini"
+  not_if "grep '^date.timezone = UTC' /etc/php5/apache2/php.ini"
+  command "sed -i 's/;date.timezone =.*/date.timezone = UTC/g' /etc/php5/apache2/php.ini"
 end
 
-execute "check if date.timezone is Europe/Paris in /etc/php5/cli/php.ini?" do
+execute "check if date.timezone is UTC in /etc/php5/cli/php.ini?" do
   user "root"
-  not_if "grep '^date.timezone = Europe/Paris' /etc/php5/cli/php.ini"
-  command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Paris/g' /etc/php5/cli/php.ini"
+  not_if "grep '^date.timezone = UTC' /etc/php5/cli/php.ini"
+  command "sed -i 's/;date.timezone =.*/date.timezone = UTC/g' /etc/php5/cli/php.ini"
 end
 
 bash "Running composer install and preparing the Sylius repository" do
