@@ -15,7 +15,7 @@ security:
                 check_path: /login
                 use_referer: true
             remember_me:
-                key: eUodAjYEzDza72
+                key: %sylius.secret%
                 name: APP_REMEMBER_ME
                 lifetime: 31536000
                 always_remember_me: true
