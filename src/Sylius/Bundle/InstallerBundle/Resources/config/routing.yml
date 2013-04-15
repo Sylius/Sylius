@@ -1,0 +1,3 @@
+sylius_flow:
+    resource: @SyliusFlowBundle/Resources/config/routing.yml
+    prefix: /installer

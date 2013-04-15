@@ -1,0 +1,51 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.process.step.check.header'|trans|raw }}</h1>
+</div>
+
+{% set fulfilled = true %}
+{% for collection in collections %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>{{ collection.label }}</th>
+                <th class="span5">{{ 'sylius.process.step.check.table.current'|trans }}</th>
+                <th class="span5">{{ 'sylius.process.step.check.table.required'|trans }}</th>
+                <th class="span1">{{ 'sylius.process.step.check.table.status'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for requirement in collection %}
+            <tr>
+                <td>{{ requirement.label }}</td>
+                <td>{{ requirement.actual }}</td>
+                <td>{{ requirement.expected }}</td>
+                <td>
+                    {% if requirement.fulfilled %}
+                        <span class="label label-success"><i class="icon-ok"></i></span>
+                    {% else %}
+                        <span title="{{ requirement.help }}"
+                            {% if requirement.required %}
+                                {% set fulfilled = false %}
+                                class="label label-important"><i class="icon-remove"
+                            {% else %}
+                                class="label label-warning"><i class="icon-warning-sign"
+                            {% endif %}
+                        ></i></span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+
+<div class="form-actions">
+    <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'sylius_installer', 'stepName': 'welcome'}) }}" class="btn btn-large"><i class="icon-chevron-left"></i> {{ 'sylius.process.step.check.button.back'|trans }}</a> &nbsp;
+    <a href="{{ fulfilled ? path('sylius_flow_forward', {'scenarioAlias': 'sylius_installer', 'stepName': 'check'}) : '#' }}" class="btn btn-large {% if fulfilled %}btn-primary{% else %}disabled{% endif %}">
+        {{ 'sylius.process.step.check.button.next'|trans }} <i class="icon-chevron-right"></i>
+    </a>
+</div>
+{% endblock %}
