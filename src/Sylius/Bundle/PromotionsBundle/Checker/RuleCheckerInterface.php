@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Checker;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion rule checker interface.
@@ -20,6 +20,6 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  */
 interface RuleCheckerInterface
 {
-    public function isEligible(OrderInterface $order, array $configuration);
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration);
     public function getConfigurationFormType();
 }

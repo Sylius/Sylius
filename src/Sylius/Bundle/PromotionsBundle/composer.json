@@ -20,14 +20,16 @@
     "require": {
         "php":                      ">=5.3.2",
         "symfony/framework-bundle": "~2.2",
-        "sylius/resource-bundle":   "0.1.*",
-        "sylius/sales-bundle":      "0.1.*"
+        "sylius/resource-bundle":   "0.1.*"
     },
     "require-dev": {
         "phpspec/phpspec2":         "dev-develop",
         "symfony/form":             "~2.2",
         "symfony/validator":        "~2.2",
         "doctrine/orm":             "~2.3"
+    },
+    "suggest": {
+        "sylius/sales-bundle":      "0.1.*"
     },
     "config": {
         "bin-dir": "bin"

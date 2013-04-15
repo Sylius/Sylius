@@ -74,6 +74,6 @@ class CouponToCodeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_coupon_to_code';
+        return 'sylius_promotion_coupon_to_code';
     }
 }

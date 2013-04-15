@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Action;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 
 /**
- * Applies promotion to given order.
+ * Applies promotion to given subject.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionApplicatorInterface
 {
-    public function apply(OrderInterface $order, PromotionInterface $promotion);
+    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 }

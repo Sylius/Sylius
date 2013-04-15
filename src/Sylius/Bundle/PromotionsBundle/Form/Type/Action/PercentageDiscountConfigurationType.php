@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
+namespace Sylius\Bundle\PromotionsBundle\Form\Type\Action;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,11 +17,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Order total rule configuration form type.
+ * Percentage discount action configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class OrderTotalConfigurationType extends AbstractType
+class PercentageDiscountConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,17 +29,11 @@ class OrderTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'money', array(
-                'label' => 'sylius.form.rule.order_total_configuration.amount',
+            ->add('percentage', 'percent', array(
+                'label' => 'sylius.form.action.percentage_discount_configuration.amount',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.order_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
                 )
             ))
         ;
@@ -47,6 +41,6 @@ class OrderTotalConfigurationType extends AbstractType
 
     public function getName()
     {
-        return 'sylius_promotion_rule_order_total_configuration';
+        return 'sylius_promotion_action_percentage_discount_configuration';
     }
 }

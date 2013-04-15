@@ -16,7 +16,7 @@ sylius:
             usage_limit: Usage limit
         rule:
             type: Type
-            order_total_configuration:
+            item_total_configuration:
                 amount: Amount
                 equal: Equal
             item_count_configuration:

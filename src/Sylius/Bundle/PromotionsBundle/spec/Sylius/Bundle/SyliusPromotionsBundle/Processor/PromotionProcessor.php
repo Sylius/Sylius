@@ -33,27 +33,27 @@ class PromotionProcessor extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
-    function it_should_not_apply_promotions_that_are_not_eligible($repository, $checker, $applicator, $order, $promotion)
+    function it_should_not_apply_promotions_that_are_not_eligible($repository, $checker, $applicator, $subject, $promotion)
     {
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
-        $checker->isEligible($order, $promotion)->shouldBeCalled()->willReturn(false);
-        $applicator->apply($order, $promotion)->shouldNotBeCalled();
+        $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
+        $applicator->apply($subject, $promotion)->shouldNotBeCalled();
 
-        $this->process($order);
+        $this->process($subject);
     }
 
     /**
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
-    function it_should_apply_promotions_that_are_eligible($repository, $checker, $applicator, $order, $promotion)
+    function it_should_apply_promotions_that_are_eligible($repository, $checker, $applicator, $subject, $promotion)
     {
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
-        $checker->isEligible($order, $promotion)->shouldBeCalled()->willReturn(true);
-        $applicator->apply($order, $promotion)->shouldBeCalled();
+        $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
+        $applicator->apply($subject, $promotion)->shouldBeCalled();
 
-        $this->process($order);
+        $this->process($subject);
     }
 }

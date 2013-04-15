@@ -18,7 +18,8 @@ namespace Sylius\Bundle\PromotionsBundle\Model;
  */
 interface ActionInterface
 {
-    const TYPE_FIXED_DISCOUNT = 'fixed_discount';
+    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
+    const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     public function getId();
     public function getType();

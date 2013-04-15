@@ -23,7 +23,7 @@ class ExistingPromotionActionException extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(RuleInterface::TYPE_ORDER_TOTAL);
+        $this->beConstructedWith(RuleInterface::TYPE_ITEM_TOTAL);
     }
 
     function it_should_be_initializable()

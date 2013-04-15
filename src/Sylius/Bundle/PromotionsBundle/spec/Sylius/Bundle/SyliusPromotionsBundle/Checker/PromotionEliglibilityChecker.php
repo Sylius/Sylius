@@ -32,88 +32,88 @@ class PromotionEliglibilityChecker extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface          $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface          $subject
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
      * @param Sylius\Bundle\PromotionsBundle\Model\RuleInterface      $rule
      */
-    function it_should_recognize_order_as_eligible_if_all_checkers_recognize_it_as_eligible($registry, $checker, $order, $promotion, $rule)
+    function it_should_recognize_subject_as_eligible_if_all_checkers_recognize_it_as_eligible($registry, $checker, $subject, $promotion, $rule)
     {
         $configuration = array();
 
-        $registry->getChecker(RuleInterface::TYPE_ORDER_TOTAL)->shouldBeCalled()->willReturn($checker);
+        $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
         $promotion->getRules()->shouldBeCalled()->willReturn(array($rule));
-        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ORDER_TOTAL);
+        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
-        $checker->isEligible($order, $configuration)->shouldBeCalled()->willReturn(true);
+        $checker->isEligible($subject, $configuration)->shouldBeCalled()->willReturn(true);
 
-        $this->isEligible($order, $promotion)->shouldReturn(true);
+        $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface          $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface          $subject
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
      * @param Sylius\Bundle\PromotionsBundle\Model\RuleInterface      $rule
      */
-    function it_should_recognize_order_as_not_eligible_if_any_checker_recognize_it_as_not_eligible($registry, $checker, $order, $promotion, $rule)
+    function it_should_recognize_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible($registry, $checker, $subject, $promotion, $rule)
     {
         $configuration = array();
 
-        $registry->getChecker(RuleInterface::TYPE_ORDER_TOTAL)->shouldBeCalled()->willReturn($checker);
+        $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
         $promotion->getRules()->shouldBeCalled()->willReturn(array($rule));
-        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ORDER_TOTAL);
+        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
-        $checker->isEligible($order, $configuration)->shouldBeCalled()->willReturn(false);
+        $checker->isEligible($subject, $configuration)->shouldBeCalled()->willReturn(false);
 
-        $this->isEligible($order, $promotion)->shouldReturn(false);
+        $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwarePromotionSubjectInterface $subject
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
      */
-    function it_should_recognize_order_as_eligible_if_promotion_have_no_coupon_codes($registry, $order, $promotion)
+    function it_should_recognize_subject_as_eligible_if_promotion_have_no_coupon_codes($registry, $subject, $promotion)
     {
         $configuration = array();
 
         $promotion->getRules()->shouldBeCalled()->willReturn(array());
         $promotion->hasCoupons()->shouldBeCalled()->willReturn(false);
 
-        $this->isEligible($order, $promotion)->shouldReturn(true);
+        $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwarePromotionSubjectInterface $subject
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
      * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface           $coupon
      */
-    function it_should_recognize_order_as_not_eligible_if_coupon_code_does_not_match($registry, $order, $promotion, $coupon)
+    function it_should_recognize_subject_as_not_eligible_if_coupon_code_does_not_match($registry, $subject, $promotion, $coupon)
     {
         $configuration = array();
 
-        $order->getCoupon()->shouldBeCalled()->willReturn($coupon);
+        $subject->getCoupon()->shouldBeCalled()->willReturn($coupon);
         $promotion->getRules()->shouldBeCalled()->willReturn(array());
         $promotion->hasCoupons()->shouldBeCalled()->willReturn(true);
         $promotion->hasCoupon($coupon)->shouldBeCalled()->willReturn(false);
 
-        $this->isEligible($order, $promotion)->shouldReturn(false);
+        $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\CouponAwarePromotionSubjectInterface $subject
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
      * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface           $coupon
      */
-    function it_should_recognize_order_as_eligible_if_coupon_code_match($registry, $order, $promotion, $coupon)
+    function it_should_recognize_subject_as_eligible_if_coupon_code_match($registry, $subject, $promotion, $coupon)
     {
         $configuration = array();
 
-        $order->getCoupon()->shouldBeCalled()->willReturn($coupon);
+        $subject->getCoupon()->shouldBeCalled()->willReturn($coupon);
         $promotion->getRules()->shouldBeCalled()->willReturn(array());
         $promotion->hasCoupons()->shouldBeCalled()->willReturn(true);
         $promotion->hasCoupon($coupon)->shouldBeCalled()->willReturn(true);
 
-        $this->isEligible($order, $promotion)->shouldReturn(true);
+        $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 }

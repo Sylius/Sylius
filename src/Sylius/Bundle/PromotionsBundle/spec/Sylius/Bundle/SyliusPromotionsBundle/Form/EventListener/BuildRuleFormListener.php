@@ -29,7 +29,7 @@ class BuildRuleFormListener extends ObjectBehavior
     function let($checkerRegistry, $checker, $factory)
     {
         $checker->isConfigurable()->willReturn(true);
-        $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_order_total_configuration');
+        $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_subject_total_configuration');
         $checkerRegistry->getChecker(ANY_ARGUMENT)->willReturn($checker);
 
         $this->beConstructedWith($checkerRegistry, $factory);
@@ -56,10 +56,10 @@ class BuildRuleFormListener extends ObjectBehavior
         $event->getData()->shouldBeCalled()->willReturn($rule);
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $rule->getId()->shouldBeCalled()->willReturn(1);
-        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ORDER_TOTAL);
+        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn(array());
 
-        $factory->createNamed('configuration', 'sylius_promotion_rule_order_total_configuration', array())->shouldBeCalled()->willReturn($field);
+        $factory->createNamed('configuration', 'sylius_promotion_rule_subject_total_configuration', array())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);

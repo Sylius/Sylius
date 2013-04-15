@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\PromotionsBundle\Action;
 
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 
 /**
- * Applies all registered promotion actions to given order.
+ * Applies all registered promotion actions to given subject.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -29,12 +29,12 @@ class PromotionApplicator implements PromotionApplicatorInterface
         $this->registry = $registry;
     }
 
-    public function apply(OrderInterface $order, PromotionInterface $promotion)
+    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
             $this->registry
                 ->getAction($action->getType())
-                ->execute($order, $action->getConfiguration())
+                ->execute($subject, $action->getConfiguration())
             ;
         }
     }

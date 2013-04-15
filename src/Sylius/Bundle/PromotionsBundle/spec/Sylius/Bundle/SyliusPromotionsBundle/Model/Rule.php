@@ -34,8 +34,8 @@ class Rule extends ObjectBehavior
 
     function its_type_should_be_mutable()
     {
-        $this->setType(RuleInterface::TYPE_ORDER_TOTAL);
-        $this->getType()->shouldReturn(RuleInterface::TYPE_ORDER_TOTAL);
+        $this->setType(RuleInterface::TYPE_ITEM_TOTAL);
+        $this->getType()->shouldReturn(RuleInterface::TYPE_ITEM_TOTAL);
     }
 
     function it_should_initialize_array_for_configuration_by_default()

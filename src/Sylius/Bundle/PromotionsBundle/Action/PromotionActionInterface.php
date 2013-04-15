@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Action;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
- * Executes promotion action on given order.
+ * Executes promotion action on given subject.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionActionInterface
 {
-    public function execute(OrderInterface $order, array $configuration);
+    public function execute(PromotionSubjectInterface $subject, array $configuration);
     public function getConfigurationFormType();
 }

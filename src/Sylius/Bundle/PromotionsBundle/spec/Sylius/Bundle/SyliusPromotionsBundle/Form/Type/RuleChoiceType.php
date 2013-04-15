@@ -22,7 +22,7 @@ use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 class RuleChoiceType extends ObjectBehavior
 {
     private $choices = array(
-        RuleInterface::TYPE_ORDER_TOTAL => 'Order total',
+        RuleInterface::TYPE_ITEM_TOTAL => 'Order total',
         RuleInterface::TYPE_ITEM_COUNT  => 'Order items count'
     );
 

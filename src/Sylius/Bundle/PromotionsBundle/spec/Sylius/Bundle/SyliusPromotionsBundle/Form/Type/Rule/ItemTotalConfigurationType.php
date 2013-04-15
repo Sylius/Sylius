@@ -14,15 +14,15 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Order total rule configuration form type spec.
+ * Item total rule configuration form type spec.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class OrderTotalConfigurationType extends ObjectBehavior
+class ItemTotalConfigurationType extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Rule\OrderTotalConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemTotalConfigurationType');
     }
 
     function it_should_be_a_form_type()

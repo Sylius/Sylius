@@ -32,11 +32,11 @@ class PromotionApplicator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface          $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface          $subject
      * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
      * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface    $actionModel
      */
-    function it_should_execute_all_actions_registered($registry, $action, $order, $promotion, $actionModel)
+    function it_should_execute_all_actions_registered($registry, $action, $subject, $promotion, $actionModel)
     {
         $configuration = array();
 
@@ -45,8 +45,8 @@ class PromotionApplicator extends ObjectBehavior
         $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
         $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
-        $action->execute($order, $configuration)->shouldBeCalled();
+        $action->execute($subject, $configuration)->shouldBeCalled();
 
-        $this->apply($order, $promotion);
+        $this->apply($subject, $promotion);
     }
 }

@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
-
 /**
- * Coupon aware order model interface.
+ * Promotion subject interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface CouponAwareOrderInterface extends OrderInterface
+interface PromotionSubjectInterface
 {
-    public function getCoupon();
-    public function setCoupon(CouponInterface $coupon);
+    public function getPromotionCoupon();
+    public function getPromotionSubjectItemCount();
+    public function getPromotionSubjectItemTotal();
 }

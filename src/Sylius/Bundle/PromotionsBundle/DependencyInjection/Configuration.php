@@ -75,7 +75,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\PromotionsBundle\Controller\CouponController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionsBundle\Form\Type\CouponType')->end()
                             ->end()

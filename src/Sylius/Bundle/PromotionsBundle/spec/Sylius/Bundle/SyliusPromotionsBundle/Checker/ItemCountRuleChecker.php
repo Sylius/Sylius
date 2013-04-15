@@ -24,44 +24,44 @@ class ItemCountRuleChecker extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
-    function it_should_recognize_empty_order_as_not_eligible($order)
+    function it_should_recognize_empty_subject_as_not_eligible($subject)
     {
-        $order->countItems()->shouldBeCalled()->willReturn(0);
+        $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(0);
 
-        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
-    function it_should_recognize_order_as_not_eligible_if_item_count_is_less_then_configured($order)
+    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured($subject)
     {
-        $order->countItems()->shouldBeCalled()->willReturn(7);
+        $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(7);
 
-        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
-    function it_should_recognize_order_as_eligible_if_item_count_is_greater_then_configured($order)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured($subject)
     {
-        $order->countItems()->shouldBeCalled()->willReturn(12);
+        $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(12);
 
-        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(true);
+        $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
-    function it_should_recognize_order_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($order)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($subject)
     {
-        $order->countItems()->shouldBeCalled()->willReturn(10);
+        $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(10);
 
-        $this->isEligible($order, array('count' => 10, 'equal' => false))->shouldReturn(false);
-        $this->isEligible($order, array('count' => 10, 'equal' => true))->shouldReturn(true);
+        $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($subject, array('count' => 10, 'equal' => true))->shouldReturn(true);
     }
 
     function it_should_return_item_count_configuration_form_type()

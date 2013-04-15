@@ -12,9 +12,8 @@
 namespace Sylius\Bundle\PromotionsBundle\Checker;
 
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
-use Sylius\Bundle\PromotionsBundle\Model\CouponAwareOrderInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Checks if promotion rules are eligible.
@@ -30,18 +29,36 @@ class PromotionEliglibilityChecker implements PromotionEliglibilityCheckerInterf
         $this->registry = $registry;
     }
 
-    public function isEligible(OrderInterface $order, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        foreach ($promotion->getRules() as $rule) {
-            $checker = $this->registry->getChecker($rule->getType());
+        $now = new \DateTime('now');
 
-            if (false === $checker->isEligible($order, $rule->getConfiguration())) {
+        if (null !== $startsAt = $promotion->getStartsAt()) {
+            if ($now < $startsAt) {
                 return false;
             }
         }
 
-        if ($order instanceof CouponAwareOrderInterface && $promotion->hasCoupons() && !$promotion->hasCoupon($order->getCoupon())) {
+        if (null !== $endsAt = $promotion->getEndsAt()) {
+            if ($now > $endsAt) {
+                return false;
+            }
+        }
+
+        if ($promotion->hasCoupons() && null === $subject->getPromotionCoupon()) {
             return false;
+        }
+
+        if ($promotion->hasCoupons() && !$promotion->hasCoupon($subject->getPromotionCoupon())) {
+            return false;
+        }
+
+        foreach ($promotion->getRules() as $rule) {
+            $checker = $this->registry->getChecker($rule->getType());
+
+            if (false === $checker->isEligible($subject, $rule->getConfiguration())) {
+                return false;
+            }
         }
 
         return true;

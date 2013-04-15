@@ -18,7 +18,7 @@ namespace Sylius\Bundle\PromotionsBundle\Model;
  */
 interface RuleInterface
 {
-    const TYPE_ORDER_TOTAL = 'order_total';
+    const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
 
     public function getId();

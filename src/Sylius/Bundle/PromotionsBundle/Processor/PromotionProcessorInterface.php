@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Processor;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion processor interface.
@@ -20,5 +20,5 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
  */
 interface PromotionProcessorInterface
 {
-    public function process(OrderInterface $order);
+    public function process(PromotionSubjectInterface $subject);
 }

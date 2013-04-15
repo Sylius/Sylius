@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Checker;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 
 /**
@@ -21,5 +21,5 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
  */
 interface PromotionEliglibilityCheckerInterface
 {
-    public function isEligible(OrderInterface $order, PromotionInterface $promotion);
+    public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 }

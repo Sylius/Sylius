@@ -75,12 +75,6 @@ class PromotionType extends ObjectBehavior
         ;
 
         $builder
-            ->add('coupons', 'collection', ANY_ARGUMENT)
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('rules', 'collection', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
