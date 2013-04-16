@@ -6,8 +6,8 @@ Here is a quick reference of what the default models can do for you.
 Product
 -------
 
-By default product is represented with `name`, and `description`. Thee is a `slug` which is auto-populated using doctrine sluggable extension,
-and can be used to generate seo friendly routes. Date `availableOn` can be used to control when particular product will become visible.
+By default product is represented with `name`, and `description`. There is a `slug` which is auto-populated using doctrine sluggable extension,
+and can be used to generate seo friendly routes. Date `availableOn` can be used to control when a particular product will become visible.
 There are also metadata `metaKeywords`, `metaDescription` and dates `createdAt`, `updatedAt`, `deletedAt` auto populated using doctrine timestampable extension.
 
 CustomizableProduct
