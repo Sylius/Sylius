@@ -33,6 +33,7 @@ class SyliusKernel extends Kernel
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
+            new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),

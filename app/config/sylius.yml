@@ -1,6 +1,11 @@
 sylius_core:
     driver: doctrine/orm
 
+sylius_installer:
+    classes:
+        user:
+            model: Sylius\Bundle\CoreBundle\Entity\User
+
 sylius_money:
     currency: %sylius.currency%
     locale: %sylius.locale%

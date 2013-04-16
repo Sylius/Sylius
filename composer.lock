@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d888f38264fb5d2719ebe3a6bf3c9a57",
+    "hash": "a451bb2a93a6d0e25b4b32131c32b3eb",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -1488,7 +1488,7 @@
             "target-dir": "JMS/AopBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle",
+                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
                 "reference": "7018357f5bedf204979a88867a9da05973744422"
             },
             "dist": {
@@ -1701,7 +1701,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/schmittjoh/parser-lib",
+                "url": "https://github.com/schmittjoh/parser-lib.git",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
             },
             "dist": {
@@ -3198,6 +3198,68 @@
             "time": "2013-04-03 18:33:42"
         },
         {
+            "name": "sylius/installer-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/InstallerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusInstallerBundle.git",
+                "reference": "c99cd215e20343763bc4a6abaa0c6b928f1f7bc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusInstallerBundle/zipball/c99cd215e20343763bc4a6abaa0c6b928f1f7bc2",
+                "reference": "c99cd215e20343763bc4a6abaa0c6b928f1f7bc2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "sylius/flow-bundle": "0.1.*",
+                "sylius/resource-bundle": "0.1.*",
+                "symfony/framework-bundle": ">=2.2,<3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.2,<3.0",
+                "symfony/validator": ">=2.2,<3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\InstallerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusInstallerBundle/contributors"
+                }
+            ],
+            "description": "Web and command line installer for Sylius.",
+            "homepage": "http://sylius.com",
+            "keywords": [
+                "ecommerce",
+                "install",
+                "installer",
+                "shop"
+            ],
+            "time": "2013-05-20 16:05:20"
+        },
+        {
             "name": "sylius/inventory-bundle",
             "version": "dev-master",
             "target-dir": "Sylius/Bundle/InventoryBundle",
@@ -3220,9 +3282,6 @@
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
                 "twig/twig": "*"
-            },
-            "suggest": {
-                "friendsofsymfony/rest-bundle": "*"
             },
             "type": "symfony-bundle",
             "extra": {
