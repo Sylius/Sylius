@@ -2,8 +2,8 @@
     "name": "sylius/inventory-bundle",
     "type": "symfony-bundle",
     "description": "Flexible inventory management for Symfony2 applications.",
-    "keywords": ["shop", "ecommerce", "stock", "inventory"],
-    "homepage": "http://sylius.org",
+    "keywords": ["shop", "ecommerce", "stock", "inventory", "sylius"],
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -31,7 +31,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\InventoryBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\InventoryBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/InventoryBundle",
     "extra": {
