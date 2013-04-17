@@ -95,6 +95,7 @@ Put this configuration inside your ``app/config/config.yml``.
 And configure doctrine extensions which are used in assortment bundle:
 
 .. code-block:: yaml
+
     stof_doctrine_extensions:
         orm:
             default:
