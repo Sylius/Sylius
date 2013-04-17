@@ -57,6 +57,10 @@ class PromotionType extends AbstractType
                 'label' => 'sylius.form.promotion.ends_at',
                 'empty_value' => array('year' => '-', 'month' => '-', 'day' => '-')
             ))
+            ->add('couponBased', 'checkbox', array(
+                'label' => 'sylius.form.promotion.coupon_based',
+                'required' => false
+            ))
             ->add('rules', 'collection', array(
                 'type'         => 'sylius_promotion_rule',
                 'allow_add'    => true,

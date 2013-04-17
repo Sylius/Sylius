@@ -45,11 +45,11 @@ class PromotionEliglibilityChecker implements PromotionEliglibilityCheckerInterf
             }
         }
 
-        if ($promotion->hasCoupons() && null === $subject->getPromotionCoupon()) {
+        if ($promotion->isCouponBased() && null === $subject->getPromotionCoupon()) {
             return false;
         }
 
-        if ($promotion->hasCoupons() && !$promotion->hasCoupon($subject->getPromotionCoupon())) {
+        if ($promotion->isCouponBased() && $promotion !== $subject->getPromotionCoupon()->getPromotion()) {
             return false;
         }
 

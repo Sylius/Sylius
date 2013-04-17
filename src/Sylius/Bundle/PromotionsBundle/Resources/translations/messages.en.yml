@@ -7,6 +7,7 @@ sylius:
             name: Name
             description: Description
             usage_limit: Usage limit
+            coupon_based: Coupon based
             starts_at: Starts at
             ends_at: Ends at
             rules: Rules

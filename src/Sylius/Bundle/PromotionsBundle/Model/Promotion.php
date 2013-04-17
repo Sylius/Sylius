@@ -28,6 +28,7 @@ class Promotion implements PromotionInterface
     protected $used;
     protected $startsAt;
     protected $endsAt;
+    protected $couponBased;
     protected $coupons;
     protected $rules;
     protected $actions;
@@ -37,6 +38,7 @@ class Promotion implements PromotionInterface
     public function __construct()
     {
         $this->used = 0;
+        $this->couponBased = false;
         $this->coupons = new ArrayCollection();
         $this->rules = new ArrayCollection();
         $this->actions = new ArrayCollection();
@@ -107,9 +109,14 @@ class Promotion implements PromotionInterface
         $this->endsAt = $endsAt;
     }
 
-    public function hasCoupons()
+    public function isCouponBased()
     {
-        return !$this->coupons->isEmpty();
+        return $this->couponBased;
+    }
+
+    public function setCouponBased($couponBased)
+    {
+        $this->couponBased = (Boolean) $couponBased;
     }
 
     public function getCoupons()

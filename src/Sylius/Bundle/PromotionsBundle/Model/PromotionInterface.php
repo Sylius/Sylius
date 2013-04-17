@@ -33,7 +33,8 @@ interface PromotionInterface
     public function setStartsAt(DateTime $startsAt = null);
     public function getEndsAt();
     public function setEndsAt(DateTime $endsAt = null);
-    public function hasCoupons();
+    public function isCouponBased();
+    public function setCouponBased($couponBased);
     public function getCoupons();
     public function hasCoupon(CouponInterface $coupon);
     public function addCoupon(CouponInterface $coupon);
