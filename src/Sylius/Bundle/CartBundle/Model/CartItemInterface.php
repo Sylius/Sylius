@@ -28,7 +28,7 @@ interface CartItemInterface
     /**
      * Sets cart.
      *
-     * @param CartInterface
+     * @param CartInterface|null $cart
      */
     public function setCart(CartInterface $cart = null);
 
@@ -42,38 +42,46 @@ interface CartItemInterface
     /**
      * Sets quantity.
      *
-     * @param $quantity
+     * @param integer $quantity
      */
     public function setQuantity($quantity);
 
     /**
      * Get item price.
+     *
+     * @return integer
      */
     public function getUnitPrice();
 
     /**
      * Set item price.
+     *
+     * @param float $price
      */
     public function setUnitPrice($price);
 
     /**
      * Set total.
+     *
+     * @return integer
      */
     public function getTotal();
 
     /**
      * Set total.
+     *
+     * @param integer $total
      */
     public function setTotal($total);
 
     /**
-     * Calulcate line total.
+     * Calculate line total.
      */
     public function calculateTotal();
 
     /**
      * Checks whether the item given as argument corresponds to
-     * the same cart item. Can be overriden to sum up quantity.
+     * the same cart item. Can be overwritten to sum up quantity.
      *
      * @param CartItemInterface $cartItem
      *
