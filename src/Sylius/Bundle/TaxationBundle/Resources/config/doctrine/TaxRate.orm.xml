@@ -16,7 +16,7 @@
 
     <mapped-superclass name="Sylius\Bundle\TaxationBundle\Entity\TaxRate" table="sylius_tax_rate">
         <field name="name" column="name" type="string" />
-        <field name="amount" column="amount" type="decimal" precision="10" scale="2" />
+        <field name="amount" column="amount" type="decimal" precision="10" scale="4" />
         <field name="includedInPrice" column="included_in_price" type="boolean" />
         <field name="calculator" column="calculator" type="string" />
         <many-to-one field="category" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface" inversed-by="rates">
