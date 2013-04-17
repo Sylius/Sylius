@@ -11,25 +11,20 @@
 
 namespace Sylius\Bundle\InventoryBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Inventory unit interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface InventoryUnitInterface
+interface InventoryUnitInterface extends TimestampableInterface
 {
     /**
      * Default states.
      */
     const STATE_SOLD        = 'sold';
     const STATE_BACKORDERED = 'backordered';
-
-    /**
-     * Get inventory unit id.
-     *
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * Get related stockable object.
@@ -86,18 +81,4 @@ interface InventoryUnitInterface
      * @return Boolean
      */
     public function isBackordered();
-
-    /**
-     * Get creation time.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt();
 }
