@@ -21,8 +21,8 @@ use PHPSpec2\ObjectBehavior;
 class OrderBuilder extends ObjectBehavior
 {
     /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $orderRepository
-     * @param Doctrine\Common\Persistence\ObjectRepository $itemRepository
+     * @param \Doctrine\Common\Persistence\ObjectRepository $orderRepository
+     * @param \Doctrine\Common\Persistence\ObjectRepository $itemRepository
      */
     function let($orderRepository, $itemRepository)
     {
@@ -59,7 +59,7 @@ class OrderBuilder extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
     function it_creates_and_order_and_returns_itself($orderRepository, $order)
     {
@@ -70,7 +70,7 @@ class OrderBuilder extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
     function it_returns_itself_when_starting_to_modify_order($order)
     {
@@ -78,7 +78,7 @@ class OrderBuilder extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
     function it_returns_the_modified_order($order)
     {
@@ -87,9 +87,9 @@ class OrderBuilder extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     * @param \Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
     function it_creates_an_order_item_for_given_sellable_unit_price_and_quantity($orderRepository, $itemRepository, $sellable, $order, $item)
     {
@@ -109,9 +109,9 @@ class OrderBuilder extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     * @param \Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
     function it_adds_sellable_with_quantity_equal_to_1_by_default($orderRepository, $itemRepository, $sellable, $order, $item)
     {
@@ -131,9 +131,9 @@ class OrderBuilder extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     * @param \Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
     function it_calculates_order_total_at_the_return($orderRepository, $itemRepository, $sellable, $order, $item)
     {

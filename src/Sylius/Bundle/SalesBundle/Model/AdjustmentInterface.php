@@ -11,20 +11,15 @@
 
 namespace Sylius\Bundle\SalesBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Adjustment interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface AdjustmentInterface
+interface AdjustmentInterface extends TimestampableInterface
 {
-    /**
-     * Get adjustment id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * Get adjustment subject.
      *
@@ -35,7 +30,7 @@ interface AdjustmentInterface
     /**
      * Set adjustable.
      *
-     * @param AdjustableInterface $adjustable
+     * @param AdjustableInterface|null $adjustable
      */
     public function setAdjustable(AdjustableInterface $adjustable = null);
 
@@ -112,18 +107,4 @@ interface AdjustmentInterface
      * @return Boolean
      */
     public function isCredit();
-
-    /**
-     * Get creation date.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

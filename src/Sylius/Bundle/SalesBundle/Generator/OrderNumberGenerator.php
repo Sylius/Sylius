@@ -39,6 +39,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      * Constructor.
      *
      * @param ObjectRepository $repository
+     * @param integer          $numberLength
      */
     public function __construct(ObjectRepository $repository, $numberLength = 6)
     {
@@ -47,7 +48,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     }
 
     /**
-     * {@interitdoc}
+     * {@inheritdoc}
      */
     public function generate(OrderInterface $order)
     {

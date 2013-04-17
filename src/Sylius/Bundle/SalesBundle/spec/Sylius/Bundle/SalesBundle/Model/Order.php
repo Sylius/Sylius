@@ -35,6 +35,11 @@ class Order extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\AdjustableInterface');
     }
 
+    function it_implements_Sylius_timestampable_interface()
+    {
+        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Model\TimestampableInterface');
+    }
+
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
@@ -57,7 +62,7 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
     function it_adds_items_properly($item)
     {
@@ -68,7 +73,7 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
     function it_removes_items_properly($item)
     {
@@ -82,7 +87,7 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item
      */
     function it_has_fluent_interface_for_items_management($item)
     {
@@ -98,9 +103,9 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item3
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item3
      */
     function it_calculates_correct_items_total($item1, $item2, $item3)
     {
@@ -129,7 +134,7 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_adds_adjustments_properly($adjustment)
     {
@@ -141,7 +146,7 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_removes_adjustments_properly($adjustment)
     {
@@ -159,7 +164,7 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_has_fluent_interface_for_adjustments_management($adjustment)
     {
@@ -173,9 +178,9 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment3
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment3
      */
     function it_calculates_correct_adjustments_total($adjustment1, $adjustment2, $adjustment3)
     {
@@ -204,10 +209,10 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
      */
     function it_calculates_correct_total($item1, $item2, $adjustment1, $adjustment2)
     {
@@ -235,10 +240,10 @@ class Order extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment1
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment2
      */
     function it_ignores_neutral_adjustments_when_calculating_total($item1, $item2, $adjustment1, $adjustment2)
     {

@@ -21,13 +21,6 @@ use Doctrine\Common\Collections\Collection;
 interface OrderInterface extends AdjustableInterface
 {
     /**
-     * Get order id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * Get order number.
      *
      * @return string
@@ -107,7 +100,9 @@ interface OrderInterface extends AdjustableInterface
     /**
      * Has item in order?
      *
-     * @param Item
+     * @param OrderItemInterface $item
+     *
+     * @return Boolean
      */
     public function hasItem(OrderItemInterface $item);
 
@@ -143,18 +138,4 @@ interface OrderInterface extends AdjustableInterface
      * Items total + Adjustments total.
      */
     public function calculateTotal();
-
-    /**
-     * Get creation time.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get modification time.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt();
 }

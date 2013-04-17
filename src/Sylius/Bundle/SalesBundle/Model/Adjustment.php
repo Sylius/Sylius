@@ -89,7 +89,7 @@ class Adjustment implements AdjustmentInterface
     {
         $this->amount = 0;
         $this->neutral = false;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -112,6 +112,8 @@ class Adjustment implements AdjustmentInterface
         if (null !== $this->orderItem) {
             return $this->orderItem;
         }
+
+        return null;
     }
 
     /**
@@ -231,8 +233,24 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }

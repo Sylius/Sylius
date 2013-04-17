@@ -41,8 +41,8 @@ class Adjustment extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface     $order
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $orderItem
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface     $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $orderItem
      */
     function it_allows_assigning_itself_to_an_adjustable($order, $orderItem)
     {
@@ -54,8 +54,8 @@ class Adjustment extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface     $order
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $orderItem
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface     $order
+     * @param \Sylius\Bundle\SalesBundle\Model\OrderItemInterface $orderItem
      */
     function it_allows_detaching_itself_from_an_adjustable($order, $orderItem)
     {
@@ -146,7 +146,7 @@ class Adjustment extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustableInterface $adjustable
+     * @param \Sylius\Bundle\SalesBundle\Model\AdjustableInterface $adjustable
      */
     function it_has_fluent_interface($adjustable)
     {

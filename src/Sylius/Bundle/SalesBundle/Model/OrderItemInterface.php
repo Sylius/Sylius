@@ -19,13 +19,6 @@ namespace Sylius\Bundle\SalesBundle\Model;
 interface OrderItemInterface extends AdjustableInterface
 {
     /**
-     * Get order item id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * Return order.
      *
      * @return OrderInterface
@@ -97,7 +90,7 @@ interface OrderItemInterface extends AdjustableInterface
 
     /**
      * Calculate total based on quantity and unit price.
-     * Take adjustments into accont.
+     * Take adjustments into account.
      */
     public function calculateTotal();
 }
