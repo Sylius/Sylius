@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Resolver;
 
 use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * Returns all methods which can be used to ship a shipment
@@ -24,10 +25,10 @@ interface MethodsResolverInterface
     /**
      * Get all methods available for given shippables aware.
      *
-     * @param ShipmentInterface $shipment
-     * @param array             $criteria
+     * @param ShippablesAwareInterface $shippablesAware
+     * @param array                    $criteria
      *
-     * @return Collection
+     * @return ShippingMethodInterface[]
      */
     public function getSupportedMethods(ShippablesAwareInterface $shippablesAware, array $criteria = array());
 }

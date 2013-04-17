@@ -11,25 +11,20 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Shipment item interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShipmentItemInterface
+interface ShipmentItemInterface extends TimestampableInterface
 {
     // Shipment item default states.
     const STATE_READY    = 'ready';
     const STATE_PENDING  = 'pending';
     const STATE_SHIPPED  = 'shipped';
     const STATE_RETURNED = 'returned';
-
-    /**
-     * Get shipment item unique identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * Get shipment.
@@ -41,7 +36,7 @@ interface ShipmentItemInterface
     /**
      * Define shipment.
      *
-     * @param ShipmentInterface $method
+     * @param ShipmentInterface|null $shipment
      */
     public function setShipment(ShipmentInterface $shipment = null);
 
@@ -72,18 +67,4 @@ interface ShipmentItemInterface
      * @param string $state
      */
     public function setShippingState($state);
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

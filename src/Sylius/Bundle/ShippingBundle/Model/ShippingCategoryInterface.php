@@ -11,20 +11,15 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Shipping category interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShippingCategoryInterface
+interface ShippingCategoryInterface extends TimestampableInterface
 {
-    /**
-     * Get shipping category id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * Get category name.
      *
@@ -56,7 +51,7 @@ interface ShippingCategoryInterface
     /**
      * Get all methods for this category.
      *
-     * @return Collection
+     * @return ShippingMethodInterface[]
      */
     public function getMethods();
 
@@ -82,18 +77,4 @@ interface ShippingCategoryInterface
      * @return Boolean
      */
     public function hasMethod(ShippingMethodInterface $method);
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Set updated at.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

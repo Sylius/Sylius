@@ -34,4 +34,9 @@ final class DefaultCalculators
      * for each additional item with a limit.
      */
     const FLEXIBLE_RATE = 'flexible_rate';
+
+    private function __construct()
+    {
+        // Nothing to do here...
+    }
 }

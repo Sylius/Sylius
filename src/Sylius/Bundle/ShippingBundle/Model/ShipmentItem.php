@@ -49,14 +49,14 @@ class ShipmentItem implements ShipmentItemInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -66,7 +66,7 @@ class ShipmentItem implements ShipmentItemInterface
     public function __construct()
     {
         $this->shippingState = ShipmentItemInterface::STATE_READY;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -144,8 +144,24 @@ class ShipmentItem implements ShipmentItemInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }

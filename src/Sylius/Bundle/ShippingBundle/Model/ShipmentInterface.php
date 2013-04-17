@@ -25,13 +25,6 @@ interface ShipmentInterface extends ShippablesAwareInterface
     const STATE_RETURNED = 'returned';
 
     /**
-     * Get shipment unique identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * Get shipment state.
      *
      * @return string
@@ -62,7 +55,7 @@ interface ShipmentInterface extends ShippablesAwareInterface
     /**
      * Get shipment items.
      *
-     * @return Collection
+     * @return ShipmentItemInterface[]
      */
     public function getItems();
 
@@ -109,18 +102,4 @@ interface ShipmentInterface extends ShippablesAwareInterface
      * @return Boolean
      */
     public function isTracked();
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

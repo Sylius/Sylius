@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\ShippingBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * This model represents single shipment.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Shipment implements ShipmentInterface
+class Shipment implements ShipmentInterface, TimestampableInterface
 {
     /**
      * Shipment identifier.
@@ -44,7 +45,7 @@ class Shipment implements ShipmentInterface
     /**
      * Shipment items.
      *
-     * @var Collection
+     * @var ShipmentItemInterface[]
      */
     protected $items;
 
@@ -58,14 +59,14 @@ class Shipment implements ShipmentInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -76,7 +77,7 @@ class Shipment implements ShipmentInterface
     {
         $this->state = ShipmentInterface::STATE_READY;
         $this->items = new ArrayCollection();
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -217,8 +218,24 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }
