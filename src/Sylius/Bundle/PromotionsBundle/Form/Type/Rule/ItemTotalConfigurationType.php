@@ -29,7 +29,7 @@ class ItemTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'money', array(
+            ->add('amount', 'sylius_money', array(
                 'label' => 'sylius.form.rule.item_total_configuration.amount',
                 'constraints' => array(
                     new NotBlank(),

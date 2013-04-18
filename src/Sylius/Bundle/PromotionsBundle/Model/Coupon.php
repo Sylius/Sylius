@@ -73,4 +73,13 @@ class Coupon implements CouponInterface
     {
         $this->promotion = $promotion;
     }
+
+    public function isValid()
+    {
+        if (null !== $this->usageLimit && $this->used >= $this->usageLimit) {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -65,7 +65,8 @@ class CouponToCodeTransformer implements DataTransformerInterface
             return null;
         }
 
-        return $this->couponRepository->findOneBy(array('code' => $code));
+        $coupon = $this->couponRepository->findOneBy(array('code' => $code));
+
+        return $coupon->isValid() ? $coupon : null;
     }
 }
-
