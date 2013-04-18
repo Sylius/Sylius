@@ -67,7 +67,7 @@ class FlashListener implements EventSubscriberInterface
 
     public function addErrorFlash(Event $event)
     {
-        $this->session->getFlashBag()->add('error', self::$messages[$event->getName()]);
+        $this->session->getFlashBag()->add('error', $event->getMessage() ?: self::$messages[$event->getName()]);
     }
 
     public function addSuccessFlash(Event $event)
