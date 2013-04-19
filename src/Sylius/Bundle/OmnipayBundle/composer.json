@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "omnipay/omnipay": "dev-master"
+        "omnipay/omnipay": "*@dev"
     },
     "config": {
         "bin-dir": "bin"
