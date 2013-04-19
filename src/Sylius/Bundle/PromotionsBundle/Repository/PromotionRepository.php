@@ -26,8 +26,16 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
         $qb = $this->getCollectionQueryBuilder();
 
         return $qb
-            ->where($qb->expr()->andx(
-                $qb->expr()->lt($this->getAlias().'.startsAt', ':now'),
+            ->join($this->getAlias().'.rules', 'r')
+        	->addSelect('r')
+        	->join($this->getAlias().'.actions', 'a')
+        	->addSelect('a')
+            ->where($qb->expr()->orX(
+                $qb->expr()->isNull($this->getAlias().'.startsAt'),
+            	$qb->expr()->lt($this->getAlias().'.startsAt', ':now')
+            ))
+            ->andWhere($qb->expr()->orX(
+            	$qb->expr()->isNull($this->getAlias().'.endsAt'),
                 $qb->expr()->gt($this->getAlias().'.endsAt', ':now')
             ))
             ->setParameter('now', new DateTime())
