@@ -31,7 +31,7 @@ class FixedDiscountPromotionAction implements PromotionActionInterface
     public function execute(OrderInterface $order, array $configuration)
     {
         $adjustment = $this->repository->createNew();
-        $adjustment->setAmount($configuration['amount']);
+        $adjustment->setAmount(-$configuration['amount']);
 
         $order->addAdjustment($adjustment);
     }
