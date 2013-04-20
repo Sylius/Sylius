@@ -18,9 +18,14 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
+        "php":                      ">=5.3.3",
 
-        "omnipay/omnipay": "dev-master#0831779"
+        "symfony/framework-bundle": "~2.1",
+        "omnipay/omnipay":          "dev-master"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "dev-develop",
+        "symfony/form":     "~2.1"
     },
     "config": {
         "bin-dir": "bin"
