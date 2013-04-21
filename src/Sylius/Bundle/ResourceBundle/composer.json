@@ -2,8 +2,8 @@
     "name": "sylius/resource-bundle",
     "type": "symfony-bundle",
     "description": "Resource component for Sylius.",
-    "keywords": ["resource", "storage", "persistence"],
-    "homepage": "http://sylius.org",
+    "keywords": ["resource", "storage", "persistence", "sylius"],
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -40,7 +40,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\ResourceBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\ResourceBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/ResourceBundle",
     "extra": {
