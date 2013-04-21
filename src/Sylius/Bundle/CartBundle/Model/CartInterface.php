@@ -31,7 +31,7 @@ interface CartInterface
     /**
      * Sets number of items in cart.
      *
-     * @param integer $totalItems;
+     * @param integer $totalItems
      */
     public function setTotalItems($totalItems);
 
@@ -52,7 +52,7 @@ interface CartInterface
     /**
      * Sets total quantity of items in cart.
      *
-     * @param integer $totalItems;
+     * @param integer $totalQuantity
      */
     public function setTotalQuantity($totalQuantity);
 
@@ -143,6 +143,8 @@ interface CartInterface
     /**
      * Checks whether given item is inside cart or not.
      *
+     * @param CartItemInterface $item
+     *
      * @return Boolean
      */
     public function hasItem(CartItemInterface $item);
@@ -157,7 +159,7 @@ interface CartInterface
     /**
      * Sets expiration time.
      *
-     * @param \DateTime $expiresAt
+     * @param \DateTime|null $expiresAt
      */
     public function setExpiresAt(\DateTime $expiresAt = null);
 
