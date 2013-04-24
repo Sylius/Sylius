@@ -22,6 +22,7 @@
 
         "symfony/framework-bundle":        "~2.1",
         "friendsofsymfony/rest-bundle":    "0.11.*@dev",
+        "jms/serializer-bundle":           "0.11.*",
         "white-october/pagerfanta-bundle": "dev-master"
     },
     "require-dev": {
@@ -45,7 +46,7 @@
     "target-dir": "Sylius/Bundle/ResourceBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "0.1.x-dev"
         }
     }
 }
