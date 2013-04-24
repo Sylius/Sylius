@@ -32,6 +32,14 @@ You just need to enable proper bundles inside the kernel.
 
 To benefit from bundle services, you have to first register your class as *resource*.
 
+You also need to enable HTTP method parameter override, by calling the following method on the **Request** object.
+
+.. code-block:: php
+
+    use Symfony\Component\HttpFoundation\Request;
+
+    Request::enableHttpMethodParameterOverride();
+
 Registering model as resource
 -----------------------------
 
