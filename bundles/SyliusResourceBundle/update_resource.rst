@@ -72,6 +72,23 @@ Same way like for **createAction** you can override the default form.
                 template: App:Backend/User:update.html.twig
                 form: app_user_custom
 
+Overriding the criteria
+-----------------------
+
+By default, **updateAction** will look for the resource by id. You can easily change that criteria.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_update:
+        pattern: /users/{username}/edit
+        methods: [GET, PUT]
+        defaults:
+            _controller: app.controller.user:updateAction
+            _sylius:
+                criteria: { username: $username }
+
 Custom redirect after success
 -----------------------------
 
