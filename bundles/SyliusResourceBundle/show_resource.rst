@@ -66,3 +66,24 @@ Displaying the user by id can be boring... and let's say we do not want to allow
 
 With this configuration, controller will look for user with given username and exlude disabled users.
 Internally, it simply uses ``$repository->findOneBy(array $criteria)`` method to look for resource.
+
+Using custom repository methods
+-------------------------------
+
+By default, resource repository uses **findOneBy(array $criteria)**, but in some cases it's not enough - for example - you want to do proper joins or use very custom query.
+Creating yet another action to change the called method - you can avoid it. Configuration below will use custom repository method to get the resource.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_show:
+        pattern: /users/{username}
+        methods: [GET]
+        defaults:
+            _controller: app.controller.user:showAction
+            _sylius:
+                method: findOneWithFriends
+                arguments: [$username]
+
+Internally, it simply uses ``$repository->findOneWithFriends($username)`` method, where ``username`` is taken from current request.

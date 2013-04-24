@@ -14,7 +14,7 @@ Configuration reference
                 classes:
                     model: App\Entity\User
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repositoryl: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                    repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------
