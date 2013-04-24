@@ -22,7 +22,7 @@ class ParametersParser
 {
     public function parse(array $parameters, Request $request)
     {
-        foreach($parameters as $key => $value) {
+        foreach ($parameters as $key => $value) {
             if (is_array($value)) {
                 $parameters[$key] = $this->parse($value, $request);
             }

@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PHPSpec2\ObjectBehavior;
-use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Resource resolver spec.

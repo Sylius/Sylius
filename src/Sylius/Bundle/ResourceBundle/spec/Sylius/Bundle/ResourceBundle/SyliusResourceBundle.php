@@ -21,4 +21,3 @@ class SyliusResourceBundle extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\HttpKernel\Bundle\Bundle');
     }
 }
-

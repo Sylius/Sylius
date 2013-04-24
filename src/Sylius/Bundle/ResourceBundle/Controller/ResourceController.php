@@ -243,6 +243,7 @@ class ResourceController extends FOSRestController
     public function redirectToIndex()
     {
         $config = $this->getConfiguration();
+
         return $this->redirectToRoute($config->getRedirectRoute('index'), $config->getRedirectParameters());
     }
 
