@@ -37,13 +37,7 @@ $ bin/phpspec run
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
-
+Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusResourceBundle/index.html).
 
 Contributing
 ------------
@@ -83,7 +77,7 @@ And constructed with the following guidelines.
 * New additions without breaking backwards compatibility bumps the minor.
 * Bug fixes and misc changes bump the patch.
 
-For more information on SemVer, please visit [semver.org website](http://semver.org/)...
+For more information on SemVer, please visit [semver.org website](http://semver.org/).  
 This versioning method is same for all **Sylius** bundles and applications.
 
 MIT License
