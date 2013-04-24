@@ -31,7 +31,7 @@ class ResourceServicesFactory
         $this->container = $container;
     }
 
-    public function create($prefix, $resourceName, $driver, $classes)
+    public function create($prefix, $resourceName, $driver, array $classes, $templates = null)
     {
         if (SyliusResourceBundle::DRIVER_DOCTRINE_ORM === $driver) {
             $pattern = $prefix.'.%s.'.$resourceName;
@@ -39,7 +39,7 @@ class ResourceServicesFactory
 
             $controller = new Definition($classes['controller']);
             $controller
-                ->setArguments(array($prefix, $resourceName, ''))
+                ->setArguments(array($prefix, $resourceName, $templates))
                 ->addMethodCall('setContainer', array(new Reference('service_container')))
             ;
 

@@ -50,7 +50,9 @@ class SyliusResourceExtension extends Extension
         foreach ($configs as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
 
-            $factory->create($prefix, $resourceName, $config['driver'], $config['classes']);
+            $templates = array_key_exists('templates', $config) ? $config['templates'] : null;
+
+            $factory->create($prefix, $resourceName, $config['driver'], $config['classes'], $templates);
         }
     }
 }

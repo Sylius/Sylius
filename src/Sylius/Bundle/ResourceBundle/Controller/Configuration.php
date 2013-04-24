@@ -100,7 +100,7 @@ class Configuration
 
     public function getTemplateName($name)
     {
-        return sprintf('%s:%s.%s', $this->templateNamespace, $name, $this->templatingEngine);
+        return sprintf('%s:%s.%s', $this->templateNamespace ?: ':', $name, $this->templatingEngine);
     }
 
     public function getTemplate($name)

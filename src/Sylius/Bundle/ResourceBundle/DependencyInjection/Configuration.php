@@ -52,6 +52,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('templates')->cannotBeEmpty()->end()
                             ->arrayNode('classes')
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
