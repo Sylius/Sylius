@@ -15,10 +15,10 @@ Then configure your project and create database.
 
 ``` bash
 $ cd sylius
-$ vi sylius/config/container/parameters.yml # And put your values!
-$ php sylius/console doctrine:database:create
-$ php sylius/console doctrine:schema:create
-$ php sylius/console doctrine:fixtures:load # If you want to load sample data.
+$ vi app/config/parameters.yml # And put your values!
+$ php app/console doctrine:database:create
+$ php app/console doctrine:schema:create
+$ php app/console doctrine:fixtures:load # If you want to load sample data.
 ```
 
 [Behat](http://behat.org) scenarios
