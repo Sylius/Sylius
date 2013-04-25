@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    variant:
+        price:
+            not_blank: Please enter the price.
+            min: Price must be greater than {{ limit }}.
+        onHand:
+            not_blank: Please enter on hand.
+            min: On hand must be greater than {{ limit }}.
+    checkout:
+        shipping_method:
+            not_blank: Please select shipping method.
+        payment_method:
+            not_blank: Please select payment method.
+
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: Please enter tax rate zone.

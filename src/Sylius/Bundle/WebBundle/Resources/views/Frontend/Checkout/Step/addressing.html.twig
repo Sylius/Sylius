@@ -1,0 +1,42 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts '@SyliusWebBundle/Resources/assets/js/province-choices.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.checkout.addressing.header'|trans|raw }}</h1>
+</div>
+
+{% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
+
+<form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-vertical" novalidate>
+
+{{ form_errors(form) }}
+
+<fieldset>
+    <div class="fluid-row">
+        <div class="span6 well">
+        {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
+        {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
+        </div>
+        <div class="span6 well hide" id="sylius-billing-address-container">
+        <br />
+        {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
+        </div>
+    </div>
+</fieldset>
+
+{{ form_widget(form._token) }}
+
+<div class="form-actions">
+    <a href="{{ path('sylius_cart_summary') }}" class="btn btn-large"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+    <button type="submit" class="btn btn-primary btn-large">{{ 'sylius.checkout.forward'|trans }} <i class="icon-chevron-right"></i></button>
+</div>
+
+</form>
+{% endblock %}

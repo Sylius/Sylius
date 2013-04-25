@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Sylius\Bundle\CoreBundle\Entity\Variant" table="sylius_variant">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="sku" column="sku" type="string" nullable="true" />
+        <field name="price" column="price" type="integer" />
+        <field name="onHand" column="on_hand" type="integer" />
+        <field name="availableOnDemand" column="available_on_demand" type="boolean"/>
+        <one-to-many field="images" target-entity="Sylius\Bundle\CoreBundle\Entity\VariantImage" mapped-by="variant">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+    </entity>
+
+</doctrine-mapping>

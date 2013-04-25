@@ -1,0 +1,40 @@
+{% macro list(properties) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if properties|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('name') }}</th>
+                <th>{{ sylius_resource_sort('presentation') }}</th>
+                <th>{{ sylius_resource_sort('type') }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for property in properties %}
+            <tr>
+                <td>{{ property.id }}</td>
+                <td>{{ property.name }}</td>
+                <td>{{ property.presentation }}</td>
+                <td>{{ property.type }}</td>
+                <td>{{ property.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_property_update', {'id': property.id})) }}
+                    {{ buttons.delete(path('sylius_backend_property_delete', {'id': property.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.property.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

@@ -1,0 +1,15 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.order.update_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_order_update', {'id': order.id, '_method': 'PUT'}) }}" method="post" class="form-horizontal" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    {% include 'SyliusWebBundle:Backend/Order:_form.html.twig' %}
+    {{ update() }}
+</form>
+{% endblock %}

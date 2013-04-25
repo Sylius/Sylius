@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_user_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/User:index.html.twig
+            filterable: true
+            sortable: true
+            sorting:
+                id: desc
+
+sylius_backend_user_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.user:deleteAction
+
+sylius_backend_user_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/User:show.html.twig

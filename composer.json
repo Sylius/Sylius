@@ -32,8 +32,27 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "mathiasverraes/money":                 "dev-master@dev",
         "jms/translation-bundle":               "1.1.*",
-        "sylius/core-bundle":                   "0.1.*",
-        "sylius/web-bundle":                    "0.1.*"
+        "sylius/assortment-bundle":             "0.1.*",
+        "sylius/cart-bundle":                   "0.3.*",
+        "sylius/money-bundle":                  "0.1.*",
+        "sylius/taxation-bundle":               "0.1.*",
+        "sylius/shipping-bundle":               "0.1.*",
+        "sylius/addressing-bundle":             "0.1.*",
+        "sylius/sales-bundle":                  "0.1.*",
+        "sylius/promotions-bundle":             "0.1.*",
+        "sylius/inventory-bundle":              "0.1.*",
+        "sylius/taxonomies-bundle":             "0.1.*",
+        "sylius/settings-bundle":               "0.1.*",
+        "sylius/payments-bundle":               "0.1.*",
+        "sylius/flow-bundle":                   "0.1.*",
+        "sylius/resource-bundle":               "0.1.*",
+        "jms/serializer-bundle":                "0.11.*",
+        "friendsofsymfony/user-bundle":         "1.3.1",
+        "fsc/hateoas-bundle":                   "0.3.x-dev",
+        "knplabs/knp-gaufrette-bundle":         "0.2.*",
+        "fzaninotto/faker":                     "1.1.*",
+        "knplabs/knp-menu-bundle":              "2.0.*",
+        "liip/imagine-bundle":                  "0.9.*"
     },
     "require-dev": {
         "behat/behat":                       "2.4.*",
@@ -60,7 +79,7 @@
         ]
     },
     "autoload": {
-        "psr-0": { "Context": "features/" }
+        "psr-0": { "Sylius\\": "src/" }
     },
     "config": {
         "bin-dir": "bin"

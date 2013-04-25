@@ -1,0 +1,19 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Promotion:macros.html.twig' import list %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.promotion.index_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    {{ buttons.create(path('sylius_backend_promotion_create'), 'sylius.promotion.create'|trans) }}
+</div>
+
+{{ pagination(promotions) }}
+{{ list(promotions) }}
+{{ pagination(promotions) }}
+{% endblock %}

@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+# (c) Traducido por Nacho Pacheco
+
+sylius:
+    variant:
+        price:
+            not_blank: Por favor ingresa un precio.
+            min: El precio debe ser mayor que {{ limit }}.
+        onHand:
+            not_blank: Por favor ingresa las existencias.
+            min: Las existencias deben ser mayores que {{ limit }}.
+    checkout:
+        shipping_method:
+            not_blank: Por favor, seleccione un modo de envío.
+        payment_method:
+            not_blank: Por favor, seleccione un modo de pago.
+
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: Por favor ingresa la zona fiscal.

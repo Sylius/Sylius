@@ -1,0 +1,21 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/User:macros.html.twig' import list  %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.user.index_header'|trans|raw }}</h1>
+</div>
+
+{{ pagination(users) }}
+
+<ul class="nav nav-tabs">
+    <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><span class="label label-important"><i class="icon-info-sign"></i></span> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
+</ul>
+
+{{ list(users)  }}
+{{ pagination(users) }}
+
+{% endblock %}

@@ -1,0 +1,7 @@
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.options, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.properties, {'attr': {'class': 'input-xlarge'}}) }}
+</fieldset>
+
+{{ form_widget(form._token) }}

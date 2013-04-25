@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+#
+sylius_backend_security_login:
+    pattern: /login
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.backend.security:loginAction
+
+sylius_backend_security_check:
+    pattern: /login-check
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.backend.security:checkAction
+
+sylius_backend_security_logout:
+    pattern: /logout
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.backend.security:logoutAction

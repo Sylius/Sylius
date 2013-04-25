@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_promotion_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Promotion:index.html.twig
+            sortable: true
+
+sylius_backend_promotion_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Promotion:create.html.twig
+            redirect: sylius_backend_promotion_show
+
+sylius_backend_promotion_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.promotion:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Promotion:update.html.twig
+            redirect: sylius_backend_promotion_show
+
+sylius_backend_promotion_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.promotion:deleteAction
+        _sylius:
+            redirect: sylius_backend_promotion_index
+
+sylius_backend_promotion_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Promotion:show.html.twig

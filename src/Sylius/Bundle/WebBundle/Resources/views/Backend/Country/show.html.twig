@@ -1,0 +1,64 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.country.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    <a href="{{ path('sylius_backend_country_index') }}" class="btn btn-primary">
+        <i class="icon-list-alt"></i> {{ 'sylius.country.manage'|trans }}
+    </a>
+    <a href="{{ path('sylius_backend_country_update', {'id': country.id}) }}" class="btn">
+        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+    </a>
+    <form action="{{ path('sylius_backend_country_delete', {'id': country.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
+        </button>
+    </form>
+</div>
+
+<table class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.country.name'|trans }}</th>
+            <th>{{ 'sylius.country.iso_name'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ country.name }}</td>
+            <td>{{ country.isoName }}</td>
+        </tr>
+    </tbody>
+</table>
+{% if country.hasProvinces %}
+    <table id="provinces" class="table table-bordered table-consensed">
+        <thead>
+            <tr>
+                <th>{{ 'sylius.province.provinces'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for province in country.provinces %}
+                <tr>
+                    <td>{{ province.name }}</td>
+                    <td>
+                        <div class="pull-right">
+                            <form action="{{ path('sylius_backend_province_delete', {'countryId': country.id, 'id': province.id}) }}" method="post" style="display: inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">
+                                    <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

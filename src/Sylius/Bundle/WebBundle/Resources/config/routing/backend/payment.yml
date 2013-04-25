@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_payment_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Payment:index.html.twig
+            sortable: true
+
+sylius_backend_payment_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.payment:createAction
+        _sylius:
+                template: SyliusWebBundle:Backend/Payment:create.html.twig
+                redirect: sylius_backend_payment_index
+
+sylius_backend_payment_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.payment:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Payment:update.html.twig
+            redirect: sylius_backend_payment_index
+
+sylius_backend_payment_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.payment:deleteAction
+        _sylius:
+            redirect: sylius_backend_payment_index
+
+sylius_backend_payment_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Payment:show.html.twig

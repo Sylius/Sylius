@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_product:
+    resource: @SyliusWebBundle/Resources/config/routing/partial/product.yml
+    prefix: /product

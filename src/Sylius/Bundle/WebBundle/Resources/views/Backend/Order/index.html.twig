@@ -1,0 +1,33 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import list %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+input[type="text"] {
+    width: 200px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.order.index_header'|trans|raw }}</h1>
+</div>
+
+<div class="well well-small">
+    {{ buttons.create(path('sylius_backend_order_create'), 'sylius.order.create'|trans) }}
+</div>
+<div class="row-fluid">
+    {{ pagination(orders) }}
+</div>
+<div class="row-fluid">
+    {% render(url('sylius_backend_order_filter_form')) %}
+</div>
+{{ list(orders) }}
+{{ pagination(orders) }}
+
+{% endblock %}

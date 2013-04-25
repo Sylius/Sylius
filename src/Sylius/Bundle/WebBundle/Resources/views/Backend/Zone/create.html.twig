@@ -1,0 +1,23 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
+
+{% block javascripts %}
+    {% javascripts
+        '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing-zone.js'
+    %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.zone.create_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_zone_create', {'id': zone.id}) }}" method="post" class="form-horizontal">
+    {% include 'SyliusWebBundle:Backend/Zone:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

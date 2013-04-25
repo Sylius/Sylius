@@ -1,0 +1,59 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    layout:
+        menu:
+            home: Home
+            administration: Administration
+    backend:
+        menu:
+            main:
+                dashboard: Dashboard
+                homepage: Ihr Shop
+                taxonomies: Kategorien
+                assortment: Assortment
+                products: Produkte
+                options: Produktoptionen verwalten
+                properties: Eigenschaften einstellen
+                prototypes: Produkt Prototypen
+                sales: Aufträge
+                orders: Aktuelle Bestellungen
+                new_order: Neue Bestellung
+                promotions: Promotions
+                new_promotion: Neue Promotion
+                configuration: Konfiguration
+                general_settings: Allgemeine Einstellungen
+                taxation_settings: Steuer Einstellungen
+                tax_categories: Steuergruppen
+                tax_rates: Steuersätze
+                shipping_categories: Versandgruppen
+                shipping_methods: Versandmethoden
+                countries: Länder
+                zones: Zonen
+            sidebar:
+                dashboard: Dashboard
+                homepage: Zurück zum Frontend
+                taxonomies: Gruppierung
+                customer: Kunden
+                users: Benutzer
+                assortment: Assortment
+                products: Produkte
+                stockables: Lagerbestände
+                options: Produktoptionen verwalten
+                properties: Eigenschaten konfigurieren
+                prototypes: Produkt Prototypen
+                sales: Aufträge
+                orders: Aktuelle Bestellungen
+                new_order: Neue Bestellung
+                promotions: Promotions
+                new_promotion: Add new promotion
+                configuration: Konfiguration
+                general_settings: Allgemeine Einstellungen
+                taxation_settings: Gruppeneinstellungen
+                tax_categories: Steuergruppen
+                tax_rates: Steuersätze
+                shipping_categories: Versandgruppen
+                shipping_methods: Versandmethoden
+                countries: Länder
+                zones: Zonen

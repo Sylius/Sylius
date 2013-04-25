@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_product_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:index.html.twig
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
+        criteria: {}
+        sorting: { createdAt: desc }
+
+sylius_backend_product_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:create.html.twig
+            redirect: sylius_backend_product_show
+
+sylius_backend_product_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:update.html.twig
+            redirect: sylius_backend_product_show
+
+sylius_backend_product_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product:deleteAction
+        _sylius:
+            redirect: sylius_backend_product_index
+
+sylius_backend_product_filter_form:
+    pattern: /filter-form
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:filterFormAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:filterForm.html.twig
+
+sylius_backend_product_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:show.html.twig

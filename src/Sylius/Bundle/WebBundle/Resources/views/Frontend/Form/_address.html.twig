@@ -1,0 +1,14 @@
+{{ form_row(form.firstName, {'attr': {'class': 'input-large'}}) }}
+{{ form_row(form.lastName, {'attr': {'class': 'input-large'}}) }}
+{{ form_row(form.country, {'attr': {'class': 'select2 input-large country-select'}}) }}
+
+<div class="province-container" data-url="{{ path('sylius_province_choice_form') }}">
+    {% if form.province is defined %}
+        {{ form_row(form.province, {'attr': {'class': 'select2 input-medium'}}) }}
+    {% endif %}
+</div>
+
+{{ form_row(form.street, {'attr': {'class': 'input-xlarge'}}) }}
+{{ form_row(form.city, {'attr': {'class': 'input-medium'}}) }}
+{{ form_row(form.postcode, {'attr': {'class': 'input-small'}}) }}
+{{ form_rest(form) }}

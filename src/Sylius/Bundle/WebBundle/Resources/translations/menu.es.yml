@@ -1,0 +1,62 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    layout:
+        menu:
+            home: Inicio
+            administration: Administración
+    backend:
+        menu:
+            main:
+                dashboard: Panel general
+                homepage: Su tienda
+                taxonomies: Categorización
+                assortment: Surtido
+                # don't like 'surtido' too much in spanish (though it is accepted translation), 'Catálogo' might be better
+                products: Productos
+                options: Administrar opciones de producto
+                properties: Configurar propiedades
+                prototypes: Prototipos de producto
+                sales: Pedidos
+                orders: Pedidos en curso
+                new_order: Añadir nuevo pedido
+                promotions: Promociones
+                new_promotion: Añadir nueva promoción
+                configuration: Configuración
+                general_settings: Configuración general
+                taxation_settings: Configuración de impuestos
+                tax_categories: Categorías de impuestos
+                tax_rates: Tasas de impuestos
+                shipping_categories: Categoriás de envío
+                shipping_methods: Métodos de envío
+                payment_methods: Modos de pago
+                countries: Países
+                zones: Zonas
+            sidebar:
+                dashboard: Panel general
+                homepage: Volver a la tienda
+                taxonomies: Categorización
+                customer: Clientes
+                users: Usuarios
+                assortment: Surtido
+                products: Productos
+                stockables: Niveles de inventario
+                options: Administrar opciones de producto
+                properties: Configurar propiedades
+                prototypes: Prototipos de producto
+                sales: Pedidos
+                orders: Pedidos en curso
+                new_order: Añadir nuevo pedido
+                promotions: Promociones
+                new_promotion: Añadir nueva promoción
+                configuration: Configuración
+                general_settings: Configuración general
+                taxation_settings: Configuración de impuestos
+                tax_categories: Categorías de impuestos
+                tax_rates: Tasas de impuestos
+                shipping_categories: Categoriás de envío
+                shipping_methods: Métodos de envío
+                payment_methods: Modos de pago
+                countries: Países
+                zones: Zonas

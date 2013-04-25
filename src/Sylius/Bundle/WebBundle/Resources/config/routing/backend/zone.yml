@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_zone_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.zone:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Zone:index.html.twig
+            sortable: true
+
+sylius_backend_zone_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.zone:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Zone:create.html.twig
+            redirect: sylius_backend_zone_show
+
+sylius_backend_zone_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.zone:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Zone:update.html.twig
+            redirect: sylius_backend_zone_show
+
+sylius_backend_zone_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.zone:deleteAction
+        _sylius:
+            redirect: sylius_backend_zone_index
+
+sylius_backend_zone_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.zone:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Zone:show.html.twig

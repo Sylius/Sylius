@@ -1,0 +1,66 @@
+{% macro list(products) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if products|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id') }}</th>
+            <th></th>
+            <th>{{ sylius_resource_sort('sku') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('price') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+        <tr>
+            <td>
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
+                    {{ product.id }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="thumbnail" style="width: 50px; height: 40px;">
+                    <img src="{{ product.image.path|default('http://placehold.it/50x40')|imagine_filter('sylius_50x40') }}" alt="" />
+                </a>
+            </td>
+            <td>
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
+                    {{ product.sku|default('sylius.product.no_sku'|trans)|raw }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
+                    <strong>{{ product.name }}</strong>
+                </a>
+                <p>{{ product.shortDescription|truncate(50) }}</p>
+            </td>
+            <td>
+                {% if not product.hasOptions %}
+                    <span class="label label-success">{{ product.masterVariant.price|sylius_money }}</span>
+                {% else %}
+                    ---
+                {% endif %}
+            </td>
+            <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_product_show', {'id': product.id})) }}
+                {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+                {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.product.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

@@ -1,0 +1,18 @@
+{{ form_errors(form) }}
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.presentation, {'attr': {'class': 'input-large'}}) }}
+    <hr />
+    <div id="sylius-option-values" class="collection-container" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">
+        {% for valueForm in form.values %}
+            {{ form_row(valueForm.value)  }}
+        {% endfor %}
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius-option-values" data-collection="sylius-option-values">Add value</a>
+        </div>
+    </div>
+</fieldset>
+
+{{ form_widget(form._token) }}

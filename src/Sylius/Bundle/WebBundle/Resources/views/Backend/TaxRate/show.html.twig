@@ -1,0 +1,41 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.tax_rate.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    <a href="{{ path('sylius_backend_tax_rate_index') }}" class="btn btn-primary">
+        <i class="icon-list-alt"></i> {{ 'sylius.tax_rate.manage'|trans }}
+    </a>
+    <a href="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
+        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+    </a>
+    <form action="{{ path('sylius_backend_tax_rate_delete', {'id': tax_rate.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
+        </button>
+    </form>
+</div>
+
+<table class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.tax_rate.category'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.name'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.zone'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.amount'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ tax_rate.category }}</td>
+            <td>{{ tax_rate.name }}</td>
+            <td>{{ tax_rate.zone }}</td>
+            <td>{{ tax_rate.amountAsPercentage }}%</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

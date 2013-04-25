@@ -1,0 +1,15 @@
+<div class="tab-pane active" id="main">
+    {{ form_row(form.name, {'attr': {'class': 'input-xxlarge'}}) }}
+    {{ form_row(form.description, {'attr': {'class': 'input-xxlarge', 'rows': 10}}) }}
+    {{ form_row(form.shortDescription, {'attr': {'class': 'input-xxlarge', 'rows': 3}}) }}
+    <hr />
+    {{ form_label(form.masterVariant.availableOn) }}
+    {{ form_row(form.masterVariant.availableOn.date, {'label': false}) }}
+    {{ form_row(form.masterVariant.availableOn.time, {'label': false}) }}
+    {{ form_row(form.masterVariant.availableOnDemand) }}
+    {{ form_row(form.masterVariant.price) }}
+    {{ form_row(form.masterVariant.onHand) }}
+    <hr />
+    {{ form_row(form.taxCategory) }}
+    {{ form_row(form.variantSelectionMethod) }}
+</div>

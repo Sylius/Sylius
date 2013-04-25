@@ -1,0 +1,32 @@
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.presentation, {'attr': {'class': 'input-large'}}) }}
+    {{ form_row(form.type, {'attr': {'class': 'input-large'}}) }}
+    {% if form.choices is defined %}
+    {% spaceless %}
+        <div class="property-choices-container hide">
+            <hr />
+            <div id="sylius-assortment-property-choices" class="collection-container" data-prototype="{{ form_row(form.choices.vars.prototype, {'label' : 'Choice __name__'})|e }}">
+                {% for key, choice in form.choices %}
+                    <div clas="control-group">
+                        {{ form_label(choice, 'Choice ' ~ key) }}
+                        <div class="controls">
+                            {{ form_widget(choice) }}
+                            <a class="btn btn-danger delete-link sylius_property_choices_{{ key }}_delete" href="#"><i class="icon-trash"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius-assortment-property-choices" data-collection="sylius-assortment-property-choices">
+                        {{ 'sylius.property.add_choice'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+    {% endif %}
+</fieldset>
+
+{{ form_widget(form._token) }}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            {% block title %}
+                {{ 'sylius.meta.backend_title'|trans }}
+            {% endblock %}
+        </title>
+        <meta charset="UTF-8">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {# stylesheets... #}
+        {% block stylesheets %}
+        {% stylesheets output='assets/compiled/backend.css'
+            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
+            '//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css'
+            '@SyliusWebBundle/Resources/assets/css/backend.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+        {% endblock %}
+    </head>
+    <body class="signin">
+        <div class="container">
+            <form method="post" action="{{ path('sylius_backend_security_login') }}" class="form-signin">
+                <h2 class="form-signin-heading">{{ 'sylius.login_header'|trans }}</h2>
+                <input type="text" name="_username" class="input-block-level" placeholder="{{ 'sylius.email'|trans }}">
+                <input type="password" name="_password" class="input-block-level" placeholder="{{ 'sylius.password'|trans }}">
+                <label class="checkbox">
+                    <input type="checkbox" name="_remember_me" value="remember-me"> {{ 'sylius.remember_me'|trans }}
+                </label>
+                <button class="btn btn-large btn-primary" type="submit">{{ 'sylius.login'|trans }}</button>
+            </form>
+        </div>
+    </body>
+</html>

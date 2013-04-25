@@ -1,0 +1,17 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Taxon:macros.html.twig' import list %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.taxonomy.show_header'|trans({'%name%': taxonomy.name})|raw }}</h1>
+</div>
+
+<div class="well well-small">
+    {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans) }}
+</div>
+
+{{ list(taxonomy, taxonomy.taxons) }}
+
+{% endblock %}

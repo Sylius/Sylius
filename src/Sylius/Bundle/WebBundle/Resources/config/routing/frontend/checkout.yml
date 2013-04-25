@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_checkout_start:
+    pattern: /
+    defaults: { _controller: sylius.controller.process:startAction, scenarioAlias: 'sylius_checkout' }
+
+sylius_checkout_display:
+    pattern: /{stepName}
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout' }
+
+sylius_checkout_forward:
+    pattern: /{stepName}/forward
+    defaults: { _controller: sylius.controller.process:forwardAction, scenarioAlias: 'sylius_checkout' }
+
+sylius_checkout_security:
+    pattern: /security
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'security' }
+
+sylius_checkout_addressing:
+    pattern: /addressing
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'addressing' }
+
+sylius_checkout_shipping:
+    pattern: /shipping
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'shipping' }
+
+sylius_checkout_payment:
+    pattern: /payment
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'payment' }
+
+sylius_checkout_finalize:
+    pattern: /finalize
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'finalize' }

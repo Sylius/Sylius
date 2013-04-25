@@ -1,0 +1,25 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts
+    '@SyliusShippingBundle/Resources/assets/js/prototype-handler.js'
+    '@SyliusShippingBundle/Resources/assets/js/sylius-shipping-method.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.shipping_method.update_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_shipping_method_update', {'id': shipping_method.id}) }}" method="post" class="form-horizontal" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    {% include 'SyliusWebBundle:Backend/ShippingMethod:_form.html.twig' %}
+    {{ update() }}
+</form>
+{% endblock %}

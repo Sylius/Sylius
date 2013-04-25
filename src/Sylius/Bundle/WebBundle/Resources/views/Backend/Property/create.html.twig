@@ -1,0 +1,23 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts
+    '@SyliusWebBundle/Resources/assets/js/sylius-property-choices.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.property.create_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_property_create') }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusWebBundle:Backend/Property:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

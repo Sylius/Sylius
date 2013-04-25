@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_frontend:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/main.yml
+
+sylius_backend:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/main.yml
+    prefix: /administration
+
+sylius_province_choice_form:
+    pattern: /province/choice-form
+    defaults:
+        _controller: sylius.controller.province:choiceFormAction
+
+sylius_partial:
+    resource: @SyliusWebBundle/Resources/config/routing/partial/main.yml
+    prefix: /_partial
+
+_imagine:
+    resource: .
+    type:     imagine

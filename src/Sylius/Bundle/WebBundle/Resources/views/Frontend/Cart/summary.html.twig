@@ -1,0 +1,64 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% form_theme form _self %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.cart.summary_header'|trans|raw }}</h1>
+</div>
+
+{% if not cart.empty %}
+<div class="alert alert-info">
+<strong>{{ cart.total|sylius_money }}</strong>, {{ 'sylius.cart.total_items'|transchoice(cart.totalItems, {'%count%': cart.totalItems}) }}
+</div>
+
+{{ form_errors(form) }}
+
+<form action="{{ path('sylius_cart_save') }}" method="post" novalidate>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th></th>
+            <th>{{ 'sylius.cart.summary.product'|trans }}</th>
+            <th>{{ 'sylius.cart.summary.quantity'|trans }}</th>
+            <th></th>
+            <th>{{ 'sylius.cart.summary.unit_price'|trans }}</th>
+            <th style="text-align: right;">{{ 'sylius.cart.summary.total'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart.items %}
+            {% include 'SyliusWebBundle:Frontend/Cart:_item.html.twig' %}
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6"></td>
+            <td style="text-align: right;">
+                <strong>{{ 'sylius.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_money }}
+            </td>
+        </tr>
+    </tfoot>
+</table>
+{{ form_rest(form) }}
+<div class="well">
+    <button type="submit" class="btn btn-primary btn-large"><i class="icon-save"></i> {{ 'sylius.cart.summary.save'|trans }}</button>
+    <div class="pull-right">
+    <a href="{{ path('sylius_checkout_start') }}" class="btn btn-success btn-large"><i class="icon-shopping-cart"></i> {{ 'sylius.cart.summary.checkout'|trans }}</a>
+    <a href="{{ path('sylius_cart_clear') }}" class="btn btn-danger btn-large"><i class="icon-remove"></i> {{ 'sylius.cart.summary.clear'|trans }}</a>
+    </div>
+</div>
+</form>
+{% else %}
+    {{ alerts.info('sylius.cart.empty'|trans) }}
+{% endif %}
+
+{% endblock %}
+
+{% block sylius_cart_item_row %}
+{{ parent() }}
+{% block form_message %}{% endblock %}
+{% endblock %}

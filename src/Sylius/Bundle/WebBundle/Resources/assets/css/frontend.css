@@ -1,0 +1,119 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+h1.logo {
+}
+
+h1.logo a {
+    color: #333333;
+}
+
+h1.logo a img {
+    width: 40px;
+}
+
+h1.logo a span {
+    margin-left: 5px;
+}
+
+h1.logo a:hover {
+    color: #333333;
+    text-decoration: none;
+}
+
+.jumbotron {
+    margin: 20px 0px 40px 0px;
+    text-align: center;
+}
+
+.jumbotron h1 {
+    font-size: 72px;
+    line-height: 1;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.marketing {
+    margin: 60px 0;
+}
+
+.marketing p + h4 {
+    margin-top: 28px;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+#sidebar_left ul {
+    margin-left: 0;
+    list-style: none;
+}
+
+#sidebar_left ul span.nav-header {
+    padding-left: 0;
+}
+
+#sidebar_left ul.nav-list li {
+
+}
+
+#sidebar_left ul li a {
+    display: block;
+    padding-left: 0;
+}
+
+#sidebar_left ul li a:hover {
+    text-decoration: none;
+}
+
+#sidebar_left ul li img {
+    float: left;
+    margin-right: 10px;
+}
+
+#sidebar_left ul li h4 {
+    font-size: 15px;
+    text-align: left;
+}
+
+div.product-box {
+    margin-bottom: 20px;
+}
+
+div.product-box a {
+    text-decoration: none;
+}
+
+div.product-box a img {
+    margin-bottom: 5px;
+}
+
+div.product-box .btn {
+    float: right;
+    height: 25px;
+    padding: 1px 6px 7px 6px;
+}
+
+div.product-box span.label {
+    font-size: 15px;
+    padding: 6px;
+}
+
+div.product-box h3 {
+   color: #333333;
+}
+
+div.footer p {
+    float: left;
+    margin-top: 8px;
+}
+
+div.footer ul li a {
+    color: #999999;
+}

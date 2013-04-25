@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        settings:
+            general:
+                title: Seitentitel
+                meta_description: Meta Description
+                meta_keywords: Meta Keywords
+            taxation:
+                default_tax_zone: Standard Steuerzone
+        variant:
+            price: Preis
+            available_on_demand: Auf Nachfrage
+            on_hand: Auf Lager
+        product:
+            short_description: Kurzbeschreibung
+            tax_category: Steuerkategorie
+            variant_selection_method: Variantenauswahlmethode

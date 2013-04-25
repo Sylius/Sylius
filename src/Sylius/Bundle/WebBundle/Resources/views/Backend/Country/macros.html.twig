@@ -1,0 +1,37 @@
+{% macro list(countries) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if countries|length > 0 %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.country.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.country.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('isName', 'sylius.country.iso_name'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for country in countries %}
+        <tr>
+            <td>{{ country.id }}</td>
+            <td>{{ country.name }}</td>
+            <td>{{ country.isoName }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_country_show', {'id': country.id})) }}
+                {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
+                {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.country.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

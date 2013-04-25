@@ -1,0 +1,24 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts
+    'https://raw.github.com/brandonaaron/livequery/1.1.1/jquery.livequery.js'
+    '@SyliusPromotionsBundle/Resources/assets/js/sylius-promotion.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.promotion.create_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_promotion_create') }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusWebBundle:Backend/Promotion:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+{% set settings = sylius_settings_all('general') %}
+
+<html>
+    <head>
+        <title>
+            {% block title %}
+                {{ settings.title|default('sylius.meta.frontend_title'|trans) }}
+            {% endblock %}
+        </title>
+        <meta charset="UTF-8">
+        <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
+        <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {# stylesheets... #}
+        {% block stylesheets %}
+        {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
+            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
+            '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
+            '@SyliusWebBundle/Resources/assets/css/frontend.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+        {% block header %}
+            <div class="masthead pull-right">
+                {{ knp_menu_render('sylius.frontend.main', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+            </div>
+            <h1 class="logo"><a href="{{ path('sylius_homepage') }}" title="{{ 'sylius.logo'|trans }}"><img src="{{ asset('assets/img/logo.png') }}" alt="Sylius" style=""><span>{{ 'sylius.logo'|trans }}</span></a></h1>
+        {% endblock %}
+
+        {% for name, flashes in app.session.flashbag.all if name in ['success', 'error'] %}
+            {% for flash in flashes %}
+                <div class="alert alert-{{ name }}">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    {{ flash|trans }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <hr>
+        <div id="sidebar_left" class="row-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    <h4>{{ 'sylius.shop_by'|trans }}</h4>
+                    {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                    {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                </div>
+                <div class="span9">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        {% block footer %}
+            <div class="footer">
+                <p class="muted">
+                    &copy; Sylius, 2011 - {{ 'now'|date('Y') }}.
+                </p>
+                {{ knp_menu_render('sylius.frontend.social', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+            </div>
+        {% endblock %}
+        </div>
+
+        {# javascripts... #}
+        {% block javascripts %}
+        {% javascripts output='assets/compiled/frontend.js'
+            'http://code.jquery.com/jquery-1.8.0.min.js'
+            'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+    </body>
+</html>

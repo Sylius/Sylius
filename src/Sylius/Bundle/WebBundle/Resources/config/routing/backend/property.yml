@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_property_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.property:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Property:index.html.twig
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_backend_property_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.property:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Property:create.html.twig
+            redirect: sylius_backend_property_index
+
+sylius_backend_property_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.property:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Property:update.html.twig
+            redirect: sylius_backend_property_index
+
+sylius_backend_property_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.property:deleteAction
+        _sylius:
+            redirect: sylius_backend_property_index

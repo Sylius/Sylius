@@ -1,0 +1,8 @@
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-large'}}) }}
+    {{ form_row(form.description, {'attr': {'class': 'input-large'}}) }}
+    {{ form_row(form.gateway, {'attr': {'class': 'input-large'}}) }}
+    {{ form_row(form.enabled, {'label': ''}) }}
+</fieldset>
+
+{{ form_rest(form) }}

@@ -1,0 +1,5 @@
+<div class="tab-pane" id="categorization">
+    {% for taxonomyForm in form.taxons %}
+        {{ form_row(taxonomyForm, {'attr': {'class': 'input-xlarge'}}) }}
+    {% endfor %}
+</div>

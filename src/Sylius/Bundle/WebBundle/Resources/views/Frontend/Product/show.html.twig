@@ -1,0 +1,111 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% set form = sylius_cart_form({'product': product}) %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span3">
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail">
+            <img src="{{ product.image.path|default('http://placehold.it/200x200')|imagine_filter('sylius_200x200') }}" alt="" />
+        </a>
+    </div>
+    <div class="span9">
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
+        <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
+    </div>
+</div>
+{% if product.images|length > 0 %}
+<hr>
+<div class="well well-small">
+    {% for image in product.images %}
+        <a href="#" target="_blank"><img class="img-polaroid" src="{{ image.path|default('http://placehold.it/90x60')|imagine_filter('sylius_90x60') }}" alt="" /></a>
+    {% endfor %}
+</div>
+{% endif %}
+<hr>
+<div class="row-fluid">
+    <div class="span6">
+        {% if product.properties|length > 0 %}
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.product.properties'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in product.properties %}
+                <tr>
+                    <td>{{ property.presentation }}</td>
+                    <td>{{ property.value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <div class="span6">
+        <h4>{{ 'sylius.product.description'|trans }}</h4>
+        <p>{{ product.description|default('sylius.product.no_description')|trans|raw }}</p>
+    </div>
+</div>
+<hr>
+<div class="row-fluid">
+    <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
+    <div class="span6">
+        {% if product.hasOptions %}
+            {% if product.isVariantSelectionMethodChoice %}
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'sylius.variant.price'|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for variant in product.variants if variant.available %}
+                    <tr>
+                        <td>
+                            {% if variant.presentation is empty %}
+                            <ul class="unstyled">
+                                {% for option in variant.options %}
+                                <li><strong>{{ option.presentation }}</strong>: {{ option.value }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                {{ variant.presentation }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="label label-success">{{ variant.price|sylius_money }}</span>
+                        </td>
+                        <td>
+                        {% if sylius_inventory_is_available(variant) %}
+                            {{ form_widget(form.variant[loop.index0]) }}
+                        {% else %}
+                            <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <div class="well">
+                {{ form_widget(form.variant) }}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="span6">
+        {% if not product.hasOptions and not sylius_inventory_is_available(product.masterVariant) %}
+            <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
+        {% else %}
+            {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
+            {{ form_widget(form._token) }}
+            <button type="submit" class="btn btn-success btn-large span12"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+        {% endif %}
+    </div>
+</form>
+</div>
+{% endblock %}

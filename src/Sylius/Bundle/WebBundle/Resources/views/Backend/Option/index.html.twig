@@ -1,0 +1,21 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Option:macros.html.twig' import list %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.option.index_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    {{ buttons.create(path('sylius_backend_option_create'), 'sylius.option.create'|trans) }}
+    {{ buttons.manage(path('sylius_backend_property_index'), 'sylius.property.manage'|trans) }}
+</div>
+
+{{ pagination(options) }}
+{{ list(options) }}
+{{ pagination(options) }}
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% macro list(variants) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if variants|length > 0 %}
+<table class="table" id="variants">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th></th>
+            <th>{{ 'sylius.variant.availability'|trans }}</th>
+            <th>{{ 'sylius.variant.last_update'|trans }}</th>
+            <th>{{ 'sylius.variant.options'|trans }}</th>
+            <th>{{ 'sylius.variant.available_on_demand'|trans }}</th>
+            <th>{{ 'sylius.variant.stock'|trans }}</th>
+            <th>{{ 'sylius.variant.price'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for variant in variants %}
+        {% set product = variant.product %}
+        <tr>
+            <td>{{ variant.id }}</td>
+            <td>{% if variant.images.count > 0 %}
+                <img class="img-polaroid" src="{{ variant.images.offsetGet(0).path|imagine_filter('sylius_90x60') }}" />
+            {% endif %}
+            </td>
+            <td><span class="label label-{{ variant.available ? 'success' : 'important' }}">{{ variant.availableOn|date }}</span></td>
+            <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
+            <td>
+                <ul>
+                    {% for option in variant.options %}
+                        <li><strong>{{ option.name }}</strong>: {{ option.value }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                {% if variant.availableOnDemand %}
+                    <span class="badge badge-success">{{ 'sylius.yes'|trans }}</span>
+                {% else %}
+                    <span class="badge badge-warning">{{ 'sylius.no'|trans }}</span>
+                {% endif %}
+            </td>
+            <td><span class="badge badge-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
+            <td>{{ variant.price|sylius_money }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.edit(path('sylius_backend_variant_update', {'productId': product.id, 'id': variant.id})) }}
+                {{ buttons.delete(path('sylius_backend_variant_delete', {'productId': product.id, 'id': variant.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.variant.no_results'|trans) }}
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_shipment_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipment:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Shipment:index.html.twig
+            sortable: true
+            sorting:
+                updatedAt: desc
+
+sylius_backend_shipment_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Shipment:update.html.twig
+            redirect: sylius_backend_shipment_show
+
+sylius_backend_shipment_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.shipment:deleteAction
+        _sylius:
+            redirect: sylius_backend_shipment_index
+
+sylius_backend_shipment_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipment:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Shipment:show.html.twig

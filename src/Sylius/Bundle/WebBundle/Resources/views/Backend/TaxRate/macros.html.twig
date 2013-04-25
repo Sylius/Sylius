@@ -1,0 +1,51 @@
+{% macro list(tax_rates) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if tax_rates|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('category') }}</th>
+            <th>{{ sylius_resource_sort('zone') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('amount') }}</th>
+            <th>{{ sylius_resource_sort('includedInPrice', 'included in price?') }}</th>
+            <th>{{ sylius_resource_sort('calculator') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for tax_rate in tax_rates %}
+        <tr>
+            <td>{{ tax_rate.id }}</td>
+            <td>{{ tax_rate.category }}</td>
+            <td>{{ tax_rate.zone }}</td>
+            <td>{{ tax_rate.name }}</td>
+            <td>{{ tax_rate.amountAsPercentage }}%</td>
+            <td>
+                <span class="label label-{{ tax_rate.includedInPrice ? 'success' : 'important'}}">
+                    {{ tax_rate.includedInPrice ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                </span>
+            </td>
+            <td><span class="label label info">{{ tax_rate.calculator }}</span></td>
+            <td>{{ tax_rate.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_tax_rate_show', {'id': tax_rate.id})) }}
+                {{ buttons.edit(path('sylius_backend_tax_rate_update', {'id': tax_rate.id})) }}
+                {{ buttons.delete(path('sylius_backend_tax_rate_delete', {'id': tax_rate.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.tax_rate.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

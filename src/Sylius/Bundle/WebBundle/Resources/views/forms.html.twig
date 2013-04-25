@@ -1,0 +1,112 @@
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% if 'file' == type %}
+        <span class="btn large file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block field_row %}
+{% spaceless %}
+    <div class="control-group{% if errors|length > 0 %} error{% endif %}">
+        {{ form_label(form, label|default(null)) }}
+        <div class="controls">
+            {{ form_widget(form, {'attr': attr|default({}), 'empty_value': empty_value|default(null)}) }}
+            {{ form_errors(form)}}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    {% for error in errors %}
+        <div class="help-block">
+          {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    {% for error in errors %}
+        <div class="alert alert-error">
+            {{
+                error.messagePluralization is null
+                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+            }}
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_label %}
+{% spaceless %}
+    {% if label is not sameas(false) %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% set label_attr = label_attr|merge({'class': label_attr.class|default('') ~ ' control-label' ~ (required ? ' required' : ' optional') }) %}
+        <label{% for attrname,attrvalue in label_attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
+        {{ label|trans({}, translation_domain) }}
+        </label>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block datetime_widget %}
+{% spaceless %}
+    {% if widget == 'single_text' %}
+        {{ block('form_widget_simple') }}
+    {% else %}
+            {% set attr = attr|merge({'class': attr.class|default('')}) %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form.date) }}
+                {{ form_errors(form.time) }}
+                {{ form_widget(form.date, {'attr': {'class': attr.widget_class|default('')}}) }}
+                {{ form_widget(form.time, {'attr': {'class': attr.widget_class|default('')}}) }}
+            </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block date_widget %}
+{% spaceless %}
+{% if widget == 'single_text' %}
+    {{ block('form_widget_simple') }}
+{% else %}
+        {% set attr = attr|merge({'class': attr.class|default('inline')}) %}
+            {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year, {'attr': {'class': attr.widget_class|default('') ~ ' input-small'}}),
+                '{{ month }}': form_widget(form.month, {'attr': {'class': attr.widget_class|default('') ~ ' input-mini'}}),
+                '{{ day }}':   form_widget(form.day, {'attr': {'class': attr.widget_class|default('') ~ ' input-mini'}}),
+            })|raw }}
+        {{ block('help') }}
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block time_widget %}
+{% spaceless %}
+    {% if widget == 'single_text' %}
+        {{ block('form_widget_simple') }}
+    {% else %}
+        {% set attr = attr|merge({'class': attr.class|default('')}) %}
+        <div {{ block('widget_container_attributes')  }}>
+            {{ form_widget(form.hour, { 'attr': {  'size': '1', 'class': 'input-mini' } }) }}:{{ form_widget(form.minute, { 'attr': { 'size': '1', 'class': 'input-mini' } }) }}{% if with_seconds %}:{{ form_widget(form.second, { 'attr': { 'size': '1', 'class': 'input-mini' } }) }}{% endif %}
+        </div>
+        {{ block('help') }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}

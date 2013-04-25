@@ -1,0 +1,36 @@
+{% macro list(shipping_categories) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if shipping_categories|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', 'sylius.shipping_category.id'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.shipping_category.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.shipping_category.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shipping_category in shipping_categories %}
+            <tr>
+                <td>{{ shipping_category.id }}</td>
+                <td>{{ shipping_category.name }}</td>
+                <td>{{ shipping_category.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_shipping_category_update', {'id': shipping_category.id})) }}
+                    {{ buttons.delete(path('sylius_backend_shipping_category_delete', {'id': shipping_category.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.shipping_category.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

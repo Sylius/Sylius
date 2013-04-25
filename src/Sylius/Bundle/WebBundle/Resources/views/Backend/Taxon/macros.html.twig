@@ -1,0 +1,44 @@
+{% macro list(taxonomy, taxons) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if taxons|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.taxon.name'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ _self.tree(taxonomy, taxons) }}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.taxon.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}
+
+{% macro tree(taxonomy, taxons) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+
+{% for taxon in taxons %}
+<tr>
+    <td>
+        {% for i in 1..taxon.level %}<i class="icon-caret-right"></i>{% if not loop.last %}&nbsp;{% endif %}{% endfor %}
+        {{ taxon.name }}
+    </td>
+    <td>
+        <div class="pull-right">
+        {{ buttons.edit(path('sylius_backend_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
+        {{ buttons.delete(path('sylius_backend_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
+        </div>
+    </td>
+</tr>
+{% if taxon.children|length > 0 %}
+    {{ _self.tree(taxonomy, taxon.children) }}
+{% endif %}
+{% endfor %}
+{% endmacro %}

@@ -1,0 +1,16 @@
+{% form_theme form 'SyliusWebBundle:Backend/Promotion:_forms.html.twig' %}
+
+<fieldset>
+    {{ form_widget(form) }}
+    {% for type, prototype in form.vars.prototypes %}
+        <div id="{{ type }}" data-prototype="{{ form_widget(prototype)|e }}">
+        </div>
+    {% endfor %}
+</fieldset>
+<div class="control-group">
+    <div class="controls">
+        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_coupons" data-collection="sylius_promotion_coupons">{{ 'sylius.promotion.add_coupon'|trans }}</a>
+        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>
+        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>
+    </div>
+</div>

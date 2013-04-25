@@ -1,0 +1,14 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.taxon.create_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_taxon_create', {'taxonomyId': taxon.taxonomy.id}) }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

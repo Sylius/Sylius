@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_taxonomy_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxonomy:index.html.twig
+            sortable: true
+            paginate: 50
+
+sylius_backend_taxonomy_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxonomy:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxonomy:create.html.twig
+            redirect: sylius_backend_taxonomy_show
+
+sylius_backend_taxonomy_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.taxonomy:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxonomy:update.html.twig
+            redirect: sylius_backend_taxonomy_show
+
+sylius_backend_taxonomy_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.taxonomy:deleteAction
+        _sylius:
+            redirect: sylius_backend_taxonomy_index
+
+sylius_backend_taxonomy_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxonomy:show.html.twig

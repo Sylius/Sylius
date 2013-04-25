@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                                        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+
+    <class name="Sylius\Bundle\CoreBundle\Entity\Order">
+        <property name="shippingAddress">
+            <constraint name="Valid" />
+        </property>
+        <property name="billingAddress">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Bundle\CoreBundle\Entity\Variant">
+        <property name="price">
+            <constraint name="NotBlank">
+                <option name="message">sylius.variant.price.not_blank</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">0.01</option>
+                <option name="minMessage">sylius.variant.price.min</option>
+            </constraint>
+        </property>
+        <property name="onHand">
+            <constraint name="NotBlank">
+                <option name="message">sylius.variant.onHand.not_blank</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="minMessage">sylius.variant.onHand.min</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Bundle\CoreBundle\Entity\ShippingMethod">
+        <property name="zone">
+            <constraint name="NotBlank">
+                <option name="message">sylius_shipping.method.zone.not_blank</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Bundle\CoreBundle\Entity\TaxRate">
+        <property name="zone">
+            <constraint name="NotBlank">
+                <option name="message">sylius_taxation.rate.zone.not_blank</option>
+            </constraint>
+        </property>
+    </class>
+
+</constraint-mapping>

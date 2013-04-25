@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
+
+        <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
+
+        <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
+
+        <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
+        <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
+        <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
+        <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
+        <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
+
+        <parameter key="sylius.order_processing.inventory_units_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryUnitsFactory</parameter>
+        <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
+        <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
+        <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessor</parameter>
+
+        <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
+        <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
+        <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
+
+        <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
+        <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
+        <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
+
+        <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
+        <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
+
+        <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
+
+        <parameter key="sylius.image_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageUploader</parameter>
+    </parameters>
+
+    <services>
+        <!-- settings schemas -->
+        <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
+            <tag name="sylius.settings_schema" namespace="general" />
+        </service>
+        <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
+            <argument type="service" id="sylius.repository.zone" />
+            <tag name="sylius.settings_schema" namespace="taxation" />
+        </service>
+
+        <!-- cart -->
+        <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="sylius.availability_checker" />
+        </service>
+
+        <!-- checkout -->
+        <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">
+            <argument type="service" id="sylius.cart_provider" />
+            <tag name="sylius.process.scenario" alias="sylius_checkout" />
+        </service>
+
+        <service id="sylius.checkout_step.security" class="%sylius.checkout_step.security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_security" />
+        </service>
+        <service id="sylius.checkout_step.addressing" class="%sylius.checkout_step.addressing.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_addressing" />
+        </service>
+        <service id="sylius.checkout_step.shipping" class="%sylius.checkout_step.shipping.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_step.payment" class="%sylius.checkout_step.payment.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_payment" />
+        </service>
+        <service id="sylius.checkout_step.finalize" class="%sylius.checkout_step.finalize.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
+        </service>
+
+        <!-- checkout forms -->
+        <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
+            <tag name="form.type" alias="sylius_checkout_addressing" />
+        </service>
+        <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
+            <tag name="form.type" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
+            <tag name="form.type" alias="sylius_checkout_payment" />
+        </service>
+
+        <!-- order processing -->
+        <service id="sylius.order_processing.inventory_units_factory" class="%sylius.order_processing.inventory_units_factory.class%">
+            <argument type="service" id="sylius.inventory_operator" />
+        </service>
+        <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
+            <argument type="service" id="sylius.repository.shipment" />
+        </service>
+        <service id="sylius.order_processing.taxation_processor" class="%sylius.order_processing.taxation_processor.class%">
+            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+            <argument type="service" id="sylius.zone_matcher" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.settings.manager"
+                    factory-method="loadSettings"
+                    class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                >
+                    <argument>taxation</argument>
+                </service>
+            </argument>
+        </service>
+        <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
+            <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.shipping_calculator" />
+        </service>
+
+        <!-- order listeners -->
+        <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
+            <argument type="service" id="sylius.order_processing.taxation_processor" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderTaxation" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderTaxation" />
+        </service>
+        <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
+            <argument type="service" id="sylius.order_processing.shipping_processor" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderShippingCharges" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderShippingCharges" />
+        </service>
+        <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
+            <argument type="service" id="sylius.promotion_processor" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderPromotion" />
+        </service>
+
+        <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
+            <argument>%sylius.model.variant_image.class%</argument>
+            <tag name="form.type" alias="sylius_image" />
+        </service>
+
+        <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
+            <argument type="service" id="sylius.image_uploader" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="upload" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="upload" />
+            <tag name="kernel.event_listener" event="sylius.variant.pre_create" method="upload" />
+            <tag name="kernel.event_listener" event="sylius.variant.pre_update" method="upload" />
+        </service>
+
+        <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
+            <argument type="service">
+                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+                    <argument>variant_image</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.form.type.product_filter" class="%sylius.form.type.product_filter.class%">
+            <tag name="form.type" alias="sylius_product_filter" />
+        </service>
+        <service id="sylius.form.type.order_filter" class="%sylius.form.type.order_filter.class%">
+            <tag name="form.type" alias="sylius_order_filter" />
+        </service>
+    </services>
+
+</container>

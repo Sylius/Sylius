@@ -1,0 +1,79 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.shipment.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="well well-small">
+    {{ buttons.manage(path('sylius_backend_shipment_index'), 'sylius.shipment.manage'|trans) }}
+    {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.shipment.id'|trans }}</th>
+            <th>{{ 'sylius.shipment.order'|trans }}</th>
+            <th>{{ 'sylius.shipment.method'|trans }}</th>
+            <th>{{ 'sylius.shipment.state'|trans }}</th>
+            <th>{{ 'sylius.shipment.updated_at'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ shipment.id }}</td>
+            <td>
+                <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-info btn-small">
+                   #{{ shipment.order.id }}
+                </a>
+            </td>
+            <td>{{ shipment.method.name }}</td>
+            <td><span class="label label-success">{{ shipment.state }}</span></td>
+            <td>{{ shipment.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
+                {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+{% if shipment.items|length > 0 %}
+    <table class="table table-bordered table-consensed">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'sylius.shipment.sku'|trans }}</th>
+                <th>{{ 'sylius.shipment.name'|trans }}</th>
+                <th>{{ 'sylius.shipment.state'|trans }}</th>
+                <th>{{ 'sylius.shipment.inventory_state'|trans }}</th>
+                <th>{{ 'sylius.shipment.created_at'|trans }}</th>
+                <th>{{ 'sylius.shipment.modified'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in shipment.items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.stockable.sku }}</td>
+                <td>{{ item.inventoryName }}</td>
+                <td><span class="label label-success">{{ item.shippingState }}</span></td>
+                <td><span class="label label-{{ item.sold ? 'success' : 'important' }}">{{ item.inventoryState }}</span></td>
+                <td>{{ item.createdAt|date }}</td>
+                <td>{{ item.updatedAt|date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ alerts.info('sylius.shipment.no_items'|trans) }}
+{% endif %}
+
+{% endblock %}

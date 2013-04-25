@@ -1,0 +1,45 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.user.show_header'|trans|raw }}</h1>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">{{ 'sylius.user.general_info'|trans({'%username%': user.username}) }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>{{ 'sylius.user.id'|trans }}</strong></td>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ 'sylius.user.email'|trans }}</strong></td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
+            <td>
+            {% if user.enabled %}
+                <span class="label label-success">{{ 'sylius.yes'|trans }}</span>
+            {% else %}
+                <span class="label label-important">{{ 'sylius.no'|trans }}</span>
+            {% endif %}
+            </td>
+        </tr>
+        {% if user.lastLogin %}
+        <tr>
+            <td><strong>{{ 'sylius.user.last_login'|trans }}</strong></td>
+            <td>{{ user.lastLogin|date }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

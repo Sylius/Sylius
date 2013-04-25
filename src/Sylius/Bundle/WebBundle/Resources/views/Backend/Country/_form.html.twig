@@ -1,0 +1,15 @@
+{{ form_errors(form) }}
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.isoName, {'attr': {'class': 'input-small'}}) }}
+</fieldset>
+
+{{ form_rest(form) }}
+
+<div class="control-group">
+    <div class="controls">
+        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_country_provinces" data-collection="sylius_country_provinces">
+            {{ 'sylius.country.add_province'|trans }}
+        </a>
+    </div>
+</div>

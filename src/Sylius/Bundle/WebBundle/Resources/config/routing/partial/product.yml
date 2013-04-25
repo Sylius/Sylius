@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_partial_product_latest:
+    pattern: /latest
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: false
+            method: findLatest
+            arguments: [$limit]
+            template: $template

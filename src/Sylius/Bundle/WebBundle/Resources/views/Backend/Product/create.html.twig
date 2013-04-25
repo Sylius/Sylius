@@ -1,0 +1,24 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts
+    '@SyliusShippingBundle/Resources/assets/js/prototype-handler.js'
+    '@SyliusWebBundle/Resources/assets/js/dynamic-property-types.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.product.create_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_product_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
+    {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

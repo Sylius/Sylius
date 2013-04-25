@@ -1,0 +1,20 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Zone:macros.html.twig' import list %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.zone.index_header'|trans|raw }}</h1>
+</div>
+
+<div class="well well-small">
+    {{ buttons.create(path('sylius_backend_zone_create'), 'sylius.zone.create'|trans) }}
+</div>
+
+{{ pagination(zones) }}
+{{ list(zones) }}
+{{ pagination(zones) }}
+
+{% endblock %}

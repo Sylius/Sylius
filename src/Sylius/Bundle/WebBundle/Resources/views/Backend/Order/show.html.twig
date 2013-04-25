@@ -1,0 +1,367 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% block content %}
+<div class="page-header">
+<h1>{{ 'sylius.order.show_header'|trans({'%number%': order.number})|raw }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span6">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th colspan="2">{{ 'sylius.order.general_info'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>{{ 'sylius.order.id'|trans }}</strong></td>
+                <td>{{ order.id }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.number'|trans }}</strong></td>
+                <td>#{{ order.number }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.total'|trans }}</strong></td>
+                <td>{{ order.total|sylius_money }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.items_total'|trans }}</strong></td>
+                <td>{{ order.itemsTotal|sylius_money }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.tax_total'|trans }}</strong></td>
+                <td>{{ order.taxTotal|sylius_money }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.shipping_total'|trans }}</strong></td>
+                <td>{{ order.shippingTotal|sylius_money }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.promotion_total'|trans }}</strong></td>
+                <td>{{ order.promotionTotal|sylius_money }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
+                <td>
+                    <strong>
+                        {#
+                        <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                            {{ order.user.username }}
+                        </a>
+                        #}
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.order.created_at'|trans }}</strong></td>
+                <td>{{ order.createdAt|date }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="span6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="5">
+                        {{ 'sylius.order.shipments'|trans }}
+                    </th>
+                </tr>
+                <tr>
+                    <th>{{ 'sylius.shipment.id'|trans }}</th>
+                    <th>{{ 'sylius.shipment.method'|trans }}</th>
+                    <th>{{ 'sylius.shipment.state'|trans }}</th>
+                    <th>{{ 'sylius.shipment.updated_at'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shipment in order.shipments %}
+                <tr>
+                    <td>{{ shipment.id }}</td>
+                    <td>{{ shipment.method.name }}</td>
+                    <td>{{ shipment.state }}</td>
+                    <td>{{ shipment.updatedAt|date }}</td>
+                    <td>
+                        <div class="pull-right">
+                            <a href="{# path('sylius_backend_shipment_show', {'id': shipment.id}) #}" class="btn">
+                                <i class="icon-book"></i> {{ 'sylius.show'|trans }}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">
+                        <hr />
+                        <div class="alert alert-info">{{ 'sylius.order.no_shipments'|trans }}</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.order.shipping_address'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.address.firstname'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.firstname }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.lastname'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.lastname }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.country'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.country }}</td>
+                </tr>
+                {% if order.shippingAddress.province is not empty %}
+                <tr>
+                    <td><strong>{{ 'sylius.address.province'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.province }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td><strong>{{ 'sylius.address.street'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.street }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.city'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.city }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.postcode'|trans }}</strong></td>
+                    <td>{{ order.shippingAddress.postcode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.order.billing_address'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.address.firstname'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.firstname }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.lastname'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.lastname }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.country'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.country }}</td>
+                </tr>
+                {% if order.billingAddress.province is not empty %}
+                <tr>
+                    <td><strong>{{ 'sylius.address.province'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.province }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td><strong>{{ 'sylius.address.street'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.street }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.city'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.city }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.address.postcode'|trans }}</strong></td>
+                    <td>{{ order.billingAddress.postcode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr />
+<div class="well">
+    <a href="{{ path('sylius_backend_order_index') }}" class="btn btn-primary">
+        <i class="icon-list-alt"></i> {{ 'sylius.order.manage'|trans }}
+    </a>
+    <a href="{{ path('sylius_backend_order_update', {'id': order.id}) }}" class="btn">
+        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+    </a>
+    <form action="{{ path('sylius_backend_order_delete', {'id': order.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
+        </button>
+    </form>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ 'sylius.product.sku'|trans }}</th>
+            <th>{{ 'sylius.order_item.sellable'|trans }}</th>
+            <th>{{ 'sylius.order_item.quantity'|trans }}</th>
+            <th><span class="pull-right">{{ 'sylius.order_item.unit_price'|trans }}</span></th>
+            <th><span class="pull-right">{{ 'sylius.order_item.total'|trans }}</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items %}
+        {% set variant = item.sellable %}
+        {% set product = variant.product %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-info">
+                <i class="icon-info-sign"></i> {{ variant.sku|default('SKU') }}
+                </a>
+            </td>
+            <td>
+                <p>
+                    <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a>
+                </p>
+                {% if product.hasOptions %}
+                <ul class="unstyled">
+                    {% for option in variant.options %}
+                    <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </td>
+            <td>{{ item.quantity }}</td>
+            <td>
+                <span class="pull-right">
+                {{ item.unitPrice|sylius_money }}
+                </span>
+            </td>
+            <td>
+                <span class="pull-right">
+                {{ item.total|sylius_money }}
+                </span>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">
+                <hr />
+                <div class="alert alert-info">{{ 'sylius.order.no_items'|trans }}</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                <span class="pull-right">
+                <strong>{{ 'sylius.order.items_total'|trans }}</strong>: {{ order.itemsTotal|sylius_money }}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+            <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
+            <ul>
+            {% for taxAdjustment in order.taxAdjustments %}
+                <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_money }} </li>
+            {% else %}
+                <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
+            {% endfor %}
+            </ul>
+            </td>
+            <td colspan="2">
+                <span class="pull-right">
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ order.taxTotal|sylius_money }}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+            <p><strong>{{ 'sylius.order.shipping_charges'|trans }}</strong></p>
+            <ul>
+            {% for adjustment in order.shippingAdjustments %}
+                <li>{{ adjustment.description }} {{ adjustment.amount|sylius_money }} </li>
+            {% else %}
+                <li><span class="label label-info">{{ 'sylius.order.no_shipping_charges'|trans }}</span></li>
+            {% endfor %}
+            </ul>
+            </td>
+            <td colspan="2">
+                <span class="pull-right">
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ order.shippingTotal|sylius_money }}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+            <p><strong>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</strong></p>
+            <ul>
+            {% for adjustment in order.promotionAdjustments %}
+                <li>{{ adjustment.description }} {{ adjustment.amount|sylius_money }} </li>
+            {% else %}
+                <li><span class="label label-info">{{ 'sylius.checkout.finalize.order.no_promotion'|trans }}</span></li>
+            {% endfor %}
+            </ul>
+            </td>
+            <td colspan="2">
+                <span class="pull-right">
+                <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>: {{ order.promotionTotal|sylius_money }}
+                </span>
+            </td>
+        </tr>
+        <tr style="background-color: #f1f1f1;">
+            <td colspan="6">
+                <span class="pull-right">
+                <strong>{{ 'sylius.order.total'|trans }}</strong>: {{ order.total|sylius_money }}
+                </span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th colspan="7">{{ 'sylius.order.inventory_tracking'|trans }}</th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th>{{ 'sylius.inventory_unit.sku'|trans }}</th>
+            <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
+            <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
+            <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
+            <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
+            <th>{{ 'sylius.inventory_unit.updated_at'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for unit in order.inventoryUnits %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ unit.stockable.sku }}</td>
+            <td>{{ unit.inventoryName }}</td>
+            <td><span class="label">{{ unit.inventoryState }}</span></td>
+            <td><span class="label">{{ unit.shippingState }}</span></td>
+            <td>{{ unit.createdAt|date }}</td>
+            <td>{{ unit.updatedAt|date }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">
+            {{ alerts.info('sylius.inventory_unit.no_results'|trans) }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

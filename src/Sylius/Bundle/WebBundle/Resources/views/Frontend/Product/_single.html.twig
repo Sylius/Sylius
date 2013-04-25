@@ -1,0 +1,29 @@
+<div class="row-fluid product">
+    <div class="span3">
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail">
+            <img src="{{ product.image.path|default('http://placehold.it/200x200')|imagine_filter('sylius_200x200') }}" alt="" />
+        </a>
+    </div>
+    <div class="span9">
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
+        <p>{{ product.shortDescription|default('sylius.product.no_description'|trans)|raw }}</p>
+
+        <hr>
+        {% if not product.hasOptions %}
+            <div class="pull-left">
+            {% if not sylius_inventory_is_available(product.masterVariant) %}
+                <br />
+                <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
+            {% else %}
+                <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
+                    {% set form = sylius_cart_form({'product': product}) %}
+                    {{ form_widget(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
+                    {{ form_widget(form._token) }}
+                    <button type="submit" class="btn btn-success"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+                </form>
+            {% endif %}
+            </div>
+        {% endif %}
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-large btn-info pull-right">{{ 'sylius.product.show'|trans }}</a>
+    </div>
+</div>

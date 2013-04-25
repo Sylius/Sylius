@@ -1,11 +1,11 @@
-sylius/*\.cache
-sylius/cache/*
+app/*\.cache
+app/cache/*
 
-sylius/logs/*
+app/logs/*
 
-sylius/config/container/parameters.yml
-sylius/config/container/*.local.yml
-sylius/config/deploy.rb
+app/config/parameters.yml
+app/config/*.local.yml
+app/config/deploy.rb
 behat.yml
 
 web/bundles/*

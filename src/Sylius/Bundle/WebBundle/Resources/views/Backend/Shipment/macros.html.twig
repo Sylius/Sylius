@@ -1,0 +1,44 @@
+{% macro list(shipments) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if shipments|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('order') }}</th>
+            <th>{{ sylius_resource_sort('method') }}</th>
+            <th>{{ sylius_resource_sort('state') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for shipment in shipments %}
+        <tr>
+            <td>{{ shipment.id }}</td>
+            <td>
+                <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-info btn-small">
+                   #{{ shipment.order.id }}
+                </a>
+            </td>
+            <td>{{ shipment.method.name }}</td>
+            <td><span class="label label-success">{{ shipment.state }}</span></td>
+            <td>{{ shipment.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
+                {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.shipment.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

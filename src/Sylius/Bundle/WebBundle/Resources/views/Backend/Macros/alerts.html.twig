@@ -1,0 +1,27 @@
+{% macro success(text) %}
+<div class="alert alert-success">
+    <h4 class="alert-heading">{{ 'sylius.alert.success'|trans }}</h4>
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro info(text) %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">{{ 'sylius.alert.info'|trans }}</h4>
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro error(text) %}
+<div class="alert alert-error">
+    <h4 class="alert-heading">{{ 'sylius.alert.error'|trans }}</h4>
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro warning(text) %}
+<div class="alert alert-warning">
+    <h4 class="alert-heading">{{ 'sylius.alert.warning'|trans }}</h4>
+    {{ text }}
+</div>
+{% endmacro %}

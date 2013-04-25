@@ -1,0 +1,49 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.shipping_method.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    <a href="{{ path('sylius_backend_shipping_method_index') }}" class="btn btn-primary">
+        <i class="icon-list-alt"></i> {{ 'sylius.shipping_method.manage'|trans }}
+    </a>
+    <a href="{{ path('sylius_backend_shipping_method_update', {'id': shipping_method.id}) }}" class="btn">
+        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+    </a>
+    <form action="{{ path('sylius_backend_shipping_method_delete', {'id': shipping_method.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
+        </button>
+    </form>
+</div>
+
+<table class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.shipping_method.name'|trans }}</th>
+            <th>{{ 'sylius.shipping_method.zone'|trans }}</th>
+            <th>{{ 'sylius.shipping_method.category'|trans }}</th>
+            <th>{{ 'sylius.shipping_method.enabled'|trans }}</th>
+            <th>{{ 'sylius.shipping_method.calculator'|trans }}</th>
+            <th>{{ 'sylius.shipping_method.updated_at'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ shipping_method.name }}</td>
+            <td>{{ shipping_method.zone }}</td>
+            <td>{{ shipping_method.category|default('<i>undefined</i>')|raw }}</td>
+            <td>
+                <span class="label label-{{ shipping_method.enabled ? 'success' : 'important'}}">
+                    {{ shipping_method.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                </span>
+            </td>
+            <td><span class="label label-info">{{ shipping_method.calculator }}</span></td>
+            <td>{{ shipping_method.updatedAt|date }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

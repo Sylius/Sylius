@@ -3,16 +3,16 @@
 
 default:
     context:
-        class: Context\FeatureContext
+        class: Sylius\Bundle\WebBundle\Behat\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: "http://sylius.local/test.php"
+            base_url: "http://sylius.local/app_test.php"
             default_session: symfony2
             selenium2:
                 browser: htmlunit
         Behat\Symfony2Extension\Extension:
             kernel:
-                path: sylius/SyliusKernel.php
+                path: app/SyliusKernel.php
                 class: SyliusKernel
             mink_driver: true
 
