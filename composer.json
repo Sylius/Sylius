@@ -86,10 +86,10 @@
     },
     "minimum-stability": "dev",
     "extra": {
-        "symfony-app-dir": "sylius",
+        "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
-            "file": "sylius/config/container/parameters.yml"
+            "file": "sylius/config/parameters.yml"
         }
     }
 }
