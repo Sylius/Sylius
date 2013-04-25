@@ -1236,7 +1236,7 @@
       <trans-unit id="7b367e608866831fc55fd1de9d6f90332cd63307" resname="sylius.property.no_results">
         <jms:reference-file line="37">Backend/Property/macros.html.twig</jms:reference-file>
         <source>sylius.property.no_results</source>
-        <target>There are no properties to display.</target>
+        <target>There are no properties configured.</target>
       </trans-unit>
       <trans-unit id="36ee1b4446ec8a32a1c5ae5f2d33d99cab22e7cd" resname="sylius.property.update_header">
         <jms:reference-file line="16">Backend/Property/update.html.twig</jms:reference-file>
