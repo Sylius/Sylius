@@ -89,7 +89,7 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
-            "file": "sylius/config/parameters.yml"
+            "file": "app/config/parameters.yml"
         }
     }
 }
