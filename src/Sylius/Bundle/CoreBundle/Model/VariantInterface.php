@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface as BaseVariantInterface;
+use Sylius\Bundle\CoreBundle\Entity\VariantImage;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 use Sylius\Bundle\SalesBundle\Model\SellableInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
@@ -27,4 +28,45 @@ interface VariantInterface extends
     StockableInterface,
     SellableInterface
 {
+    /**
+     * Get variant price.
+     *
+     * @return integer
+     */
+    public function getPrice();
+
+    /**
+     * Set the price.
+     *
+     * @param integer $price
+     */
+    public function setPrice($price);
+
+    /**
+     * Get images.
+     *
+     * @return Collection
+     */
+    public function getImages();
+
+    /**
+     * Checks if product has image.
+     *
+     * @return Boolean
+     */
+    public function hasImage(VariantImage $image);
+
+    /**
+     * Add image.
+     *
+     * @param VariantImage
+     */
+    public function addImage(VariantImage $image);
+
+    /**
+     * Remove image.
+     *
+     * @param VariantImage
+     */
+    public function removeImage(VariantImage $image);
 }

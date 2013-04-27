@@ -1134,7 +1134,7 @@
       <trans-unit id="c8917f163e87e520597aa645eda54ffe7f4569af" resname="sylius.promotion.no_results">
         <jms:reference-file line="38">Backend/Promotion/macros.html.twig</jms:reference-file>
         <source>sylius.promotion.no_results</source>
-        <target>There are no promotions to display.</target>
+        <target>There are no promotions configured.</target>
       </trans-unit>
       <trans-unit id="9019177e741c36e683c1f9eb2a91f6fc0ce02f2b" resname="sylius.promotion.rules">
         <jms:reference-file line="80">Backend/Promotion/show.html.twig</jms:reference-file>

@@ -90,9 +90,7 @@ class Variant extends BaseVariant implements VariantInterface
     }
 
     /**
-     * Get price.
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getPrice()
     {
@@ -100,11 +98,7 @@ class Variant extends BaseVariant implements VariantInterface
     }
 
     /**
-     * Set variant price.
-     *
-     * @param float $price
-     *
-     * @return Variant
+     * {@inheritdoc}
      */
     public function setPrice($price)
     {
@@ -141,16 +135,25 @@ class Variant extends BaseVariant implements VariantInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getInventoryName()
     {
         return $this->product->getName();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isAvailableOnDemand()
     {
         return $this->availableOnDemand;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setAvailableOnDemand($availableOnDemand)
     {
         $this->availableOnDemand = (Boolean) $availableOnDemand;
@@ -183,9 +186,7 @@ class Variant extends BaseVariant implements VariantInterface
     }
 
     /**
-     * Checks if product has image.
-     *
-     * @return Boolean
+     * {@inheritdoc}
      */
     public function hasImage(VariantImage $image)
     {
@@ -193,9 +194,7 @@ class Variant extends BaseVariant implements VariantInterface
     }
 
     /**
-     * Get images.
-     *
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getImages()
     {
@@ -203,9 +202,7 @@ class Variant extends BaseVariant implements VariantInterface
     }
 
     /**
-     * Add image.
-     *
-     * @param VariantImage
+     * {@inheritdoc}
      */
     public function addImage(VariantImage $image)
     {
@@ -216,9 +213,7 @@ class Variant extends BaseVariant implements VariantInterface
     }
 
     /**
-     * Remove image.
-     *
-     * @param VariantImage
+     * {@inheritdoc}
      */
     public function removeImage(VariantImage $image)
     {

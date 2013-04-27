@@ -25,10 +25,12 @@ class FrontendMenuBuilder extends ObjectBehavior
      * @param Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      * @param Symfony\Component\Translation\TranslatorInterface        $translator
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface   $taxonomyRepository
+     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface  $cartProvider
+     * @param Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension      $moneyExtension
      */
-    public function let($factory, $securityContext, $translator, $taxonomyRepository)
+    public function let($factory, $securityContext, $translator, $taxonomyRepository, $cartProvider, $moneyExtension)
     {
-        $this->beConstructedWith($factory, $securityContext, $translator, $taxonomyRepository);
+        $this->beConstructedWith($factory, $securityContext, $translator, $taxonomyRepository, $cartProvider, $moneyExtension);
     }
 
     public function it_is_initializable()

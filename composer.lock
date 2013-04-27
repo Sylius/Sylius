@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "789fa8112b26a5bc365c50fccb4d9a58",
+    "hash": "a4b77193c2dc308a7f9076b7f6aa8062",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3457,12 +3457,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxonomiesBundle.git",
-                "reference": "a43bf8eb37aa5c0942f4a1b3c21f93f34ff47da6"
+                "reference": "287e975d9b38c89b7cbf5ac70ac4801626b13902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/a43bf8eb37aa5c0942f4a1b3c21f93f34ff47da6",
-                "reference": "a43bf8eb37aa5c0942f4a1b3c21f93f34ff47da6",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/287e975d9b38c89b7cbf5ac70ac4801626b13902",
+                "reference": "287e975d9b38c89b7cbf5ac70ac4801626b13902",
                 "shasum": ""
             },
             "require": {
@@ -3513,7 +3513,7 @@
                 "taxonomies",
                 "taxonomy"
             ],
-            "time": "2013-04-09 20:10:08"
+            "time": "2013-04-27 12:01:22"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -3843,12 +3843,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "501ecc5df33faa52cba864c65467419aae0b384f"
+                "reference": "536ea37d1f87a882ce8a5d62680caf881ecaf6fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/501ecc5df33faa52cba864c65467419aae0b384f",
-                "reference": "501ecc5df33faa52cba864c65467419aae0b384f",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/536ea37d1f87a882ce8a5d62680caf881ecaf6fe",
+                "reference": "536ea37d1f87a882ce8a5d62680caf881ecaf6fe",
                 "shasum": ""
             },
             "require": {
@@ -3884,7 +3884,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-04-24 14:49:01"
+            "time": "2013-04-26 09:34:36"
         },
         {
             "name": "white-october/pagerfanta-bundle",
