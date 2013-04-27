@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 default:
+    filters:
+        tags: "~@javascript"
     context:
         class: Sylius\Bundle\WebBundle\Behat\FeatureContext
     extensions:
