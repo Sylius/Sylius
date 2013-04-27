@@ -124,6 +124,19 @@ Feature: Promotions
          When I follow "List coupons"
          Then I should see 6 coupons in the list
 
+    Scenario: Coupon code is required
+        Given I am on the page of promotion "Press Campaign"
+          And I follow "Add coupon"
+         When I press "Create"
+         Then I should see "Please enter coupon code."
+
+    Scenario: Coupon usage limit must be at least 1
+        Given I am on the page of promotion "Press Campaign"
+          And I follow "Add coupon"
+          And I fill in "Usage limit" with "-2"
+         When I press "Create"
+         Then I should see "Coupon usage limit must be at least 1."
+
     Scenario: Adding coupon with usage limit
         Given I am on the page of promotion "Press Campaign"
           And I follow "Add coupon"
@@ -138,8 +151,7 @@ Feature: Promotions
           And I follow "Generate coupons"
          When I fill in "Amount" with "50"
           And I press "Generate"
-         Then I should be on the page of promotion "Press Campaign"
-          And I should see "Promotion coupons have been successfully generated."
+         Then I should see "Promotion coupons have been successfully generated."
 
     Scenario: Generating coupons with usage limit
         Given I am on the page of promotion "Press Campaign"
@@ -147,16 +159,36 @@ Feature: Promotions
          When I fill in "Amount" with "5"
           And I fill in "Usage limit" with "5"
           And I press "Generate"
-         Then I should be on the page of promotion "Press Campaign"
-          And I should see "Promotion coupons have been successfully generated."
+         Then I should see "Promotion coupons have been successfully generated."
 
-    Scenario: Added coupon appears on the list of coupons
+    Scenario: Generated coupon appears on the list of coupons
         Given I am on the page of promotion "Press Campaign"
           And I follow "Generate coupons"
           And I fill in "Amount" with "50"
           And I press "Generate"
-         When I follow "List coupons"
-         Then I should see "Total: 55 coupons"
+         Then I should see "Promotion coupons have been successfully generated."
+          And I should see "Total: 55"
+
+    Scenario: Amount of coupons to generate is required
+        Given I am on the page of promotion "Press Campaign"
+          And I follow "Generate coupons"
+          And I leave "Amount" field blank
+         When I press "Generate"
+         Then I should see "Please enter amount of coupons to generate."
+
+    Scenario: Amount of coupons to generate must be at least 1
+        Given I am on the page of promotion "Press Campaign"
+          And I follow "Generate coupons"
+          And I fill in "Amount" with "-4"
+         When I press "Generate"
+         Then I should see "Amount of coupons to generate must be at least 1."
+
+    Scenario: Usage limit of coupons generated must be at least 1
+        Given I am on the page of promotion "Press Campaign"
+          And I follow "Generate coupons"
+          And I fill in "Usage limit" with "-4"
+         When I press "Generate"
+         Then I should see "Usage limit of generated coupons must be at least 1."
 
     @javascript
     Scenario: Creating promotion with usage limit

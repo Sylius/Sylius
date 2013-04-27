@@ -246,7 +246,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $rule = $repository->createNew();
-            $rule->setType($data['type']);
+            $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($this->getConfiguration($data['configuration']));
 
             $promotion->addRule($rule);
@@ -269,7 +269,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $action = $repository->createNew();
-            $action->setType($data['type']);
+            $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $action->setConfiguration($this->getConfiguration($data['configuration']));
 
             $promotion->addAction($action);

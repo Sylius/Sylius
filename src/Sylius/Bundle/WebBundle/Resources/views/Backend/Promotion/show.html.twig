@@ -13,8 +13,9 @@
     {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
     {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
     {% if promotion.couponBased %}
-    {{ buttons.create(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
-    {{ buttons.manage(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
+    {{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
+    {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
+    {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotion.id}), 'sylius.promotion_coupon.generate'|trans) }}
     {% endif %}
 </div>
 
@@ -58,7 +59,7 @@
     <tbody>
         {% for rule in promotion.rules %}
             <tr>
-                <td><span class="label label-info">{{ rule.type }}</span></td>
+                <td><span class="label label-info">{{ rule.type|capitalize|replace('_', ' ') }}</span></td>
                 <td>{{ configuration(rule.configuration) }}</td>
                 <td>
                     <div class="btn-group pull-right">
@@ -83,7 +84,7 @@
     <tbody>
         {% for action in promotion.actions %}
             <tr>
-                <td><span class="label label-info">{{ action.type }}</span></td>
+                <td><span class="label label-info">{{ action.type|capitalize|replace('_', ' ') }}</span></td>
                 <td>{{ configuration(action.configuration) }}</td>
                 <td>
                     <div class="btn-group pull-right">

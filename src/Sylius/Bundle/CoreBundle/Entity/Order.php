@@ -303,4 +303,28 @@ class Order extends BaseOrder implements OrderInterface
     {
         return $this->shipments->contains($shipment);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionCoupon()
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionSubjectItemTotal()
+    {
+        return $this->getTotal();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionSubjectItemCount()
+    {
+        return $this->items->count();
+    }
 }

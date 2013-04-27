@@ -53,7 +53,7 @@ class FixedDiscountAction extends ObjectBehavior
         $order->addAdjustment($adjustment)->shouldBeCalled();
         $configuration = array('amount' => 500);
 
-        $this->apply($order, $configuration);
+        $this->execute($order, $configuration);
     }
 }
 

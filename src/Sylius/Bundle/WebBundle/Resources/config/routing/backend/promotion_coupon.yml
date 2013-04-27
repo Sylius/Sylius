@@ -39,3 +39,14 @@ sylius_backend_promotion_coupon_delete:
         _controller: sylius.controller.promotion_coupon:deleteAction
         _sylius:
             redirect: referer
+
+sylius_backend_promotion_coupon_generate:
+    pattern: /generate
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:generateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Coupon:generate.html.twig
+            redirect:
+                route: sylius_backend_promotion_coupon_index
+                parameters: {'promotionId': $promotionId}

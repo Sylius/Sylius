@@ -52,10 +52,8 @@ class PercentageDiscountAction extends ObjectBehavior
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
-        $configuration = array('percentage' => 50);
+        $configuration = array('percentage' => 25);
 
-        $this->apply($order, $configuration);
+        $this->execute($order, $configuration);
     }
 }
-
-

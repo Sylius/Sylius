@@ -64,7 +64,7 @@
 {% macro configuration(configuration) %}
 
 {% for key, value in configuration %}
-    <strong>{{ key }}</strong>: {{ value }}
+    <strong>{{ key|capitalize|replace('_', ' ') }}</strong>: {{ value }}
     {% if not loop.last %}<hr>{% endif %}
 {% endfor %}
 

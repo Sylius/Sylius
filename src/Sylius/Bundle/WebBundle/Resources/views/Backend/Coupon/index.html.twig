@@ -14,6 +14,7 @@
 <div class="well">
     {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.show'|trans) }}
     {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotionId}), 'sylius.promotion_coupon.create'|trans) }}
+    {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotionId}), 'sylius.promotion_coupon.generate'|trans) }}
 </div>
 
 {{ pagination(promotion_coupons) }}
