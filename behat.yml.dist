@@ -8,8 +8,7 @@ default:
         Behat\MinkExtension\Extension:
             base_url: "http://sylius.local/app_test.php"
             default_session: symfony2
-            selenium2:
-                browser: htmlunit
+            selenium2: ~
         Behat\Symfony2Extension\Extension:
             kernel:
                 path: app/SyliusKernel.php
