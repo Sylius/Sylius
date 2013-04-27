@@ -47,6 +47,13 @@ interface TaxonomyInterface
     public function getTaxons();
 
     /**
+     * Get all taxons as flat list.
+     *
+     * @return Collections
+     */
+    public function getTaxonsAsList();
+
+    /**
      * Has a taxon?
      *
      * @param TaxonInterface $taxon

@@ -55,7 +55,7 @@ class TaxonSelectionType extends AbstractType
 
         foreach ($taxonomies as $taxonomy) {
             $builder->add(strtolower($taxonomy->getName()), 'choice', array(
-                'choice_list' => new ObjectChoiceList($taxonomy->getTaxons()),
+                'choice_list' => new ObjectChoiceList($taxonomy->getTaxonsAsList()),
                 'multiple'    => $options['multiple'],
                 'label'       => $taxonomy->getName()
             ));
