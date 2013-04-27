@@ -61,6 +61,16 @@ Feature: Tax rates
          Then I should be on the page of tax rate "US Food Tax"
           And I should see "Tax rate has been successfully created."
 
+    Scenario: Creating tax rate included in price
+        Given I am on the tax rate creation page
+          And I fill in "Name" with "EU VAT"
+          And I fill in "Amount" with "19"
+          And I select "UK + Germany" from "Zone"
+          And I check "Included in price?"
+         When I press "Create"
+         Then I should be on the page of tax rate "EU VAT"
+          And I should see "Tax rate has been successfully created."
+
     Scenario: Created tax rates appear in the list
         Given I created 18% tax "Food Tax" for category "Food" within zone "USA"
           And I go to the tax rate index page
