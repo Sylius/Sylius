@@ -229,6 +229,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $manager->persist($coupon);
         }
 
+        $promotion->setCouponBased(true);
+
         $manager->flush();
     }
 

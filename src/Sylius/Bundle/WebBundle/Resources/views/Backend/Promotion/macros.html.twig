@@ -4,27 +4,48 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if promotions|length > 0 %}
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>{{ sylius_resource_sort('id', '#id') }}</th>
-                <th>{{ sylius_resource_sort('name') }}</th>
-                <th>{{ sylius_resource_sort('description') }}</th>
-                <th>{{ sylius_resource_sort('startsAt', 'starts at') }}</th>
-                <th>{{ sylius_resource_sort('endsAt', 'ends at') }}</th>
+                <th>{{ sylius_resource_sort('id', 'ID') }}</th>
+                <th>{{ sylius_resource_sort('name', 'Name') }}</th>
+                <th>{{ sylius_resource_sort('couponBased', 'Coupon based?') }}</th>
+                <th>{{ sylius_resource_sort('usageLimit', 'Usage limit') }}</th>
+                <th>{{ sylius_resource_sort('used', 'Used times') }}</th>
+                <th>{{ sylius_resource_sort('startsAt', 'Starts at') }}</th>
+                <th>{{ sylius_resource_sort('endsAt', 'Ends at') }}</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
         {% for promotion in promotions %}
             <tr>
-                <td>{{ promotion.id }}</td>
-                <td>{{ promotion.name }}</td>
-                <td>{{ promotion.description }}</td>
-                <td>{{ promotion.startsAt is empty ? '' : promotion.startsAt|date }}</td>
-                <td>{{ promotion.endsAt is empty ? '' : promotion.endsAt|date }}</td>
                 <td>
-                    <div class="btn-group pull-right">
+                    <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.id }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.name }}</a>
+                    <p>{{ promotion.description }}</p>
+                </td>
+                <td>
+                    <span class="label label-{{ promotion.couponBased ? 'success' : 'important'}}">
+                        {{ promotion.couponBased ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                    </span>
+                </td>
+                <td>
+                    <span class="label label-info">
+                        {{ promotion.usageLimit|default('sylius.no'|trans) }}
+                    </span>
+                </td>
+                <td>
+                    <span class="label label-{{ promotion.used < promotion.usageLimit|default(1) ? 'success' : 'important'}}">
+                        {{ promotion.used }}
+                    </span>
+                </td>
+                <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
+                <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
+                <td>
+                    <div class="pull-right">
                         {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotion.id})) }}
                         {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
                         {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}

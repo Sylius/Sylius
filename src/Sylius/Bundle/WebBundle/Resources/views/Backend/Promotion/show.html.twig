@@ -9,18 +9,13 @@
 </div>
 
 <div class="well">
-    <a href="{{ path('sylius_backend_promotion_index') }}" class="btn btn-primary">
-        <i class="icon-list-alt"></i> {{ 'sylius.promotion.manage'|trans }}
-    </a>
-    <a href="{{ path('sylius_backend_promotion_update', {'id': promotion.id}) }}" class="btn">
-        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
-    </a>
-    <form action="{{ path('sylius_backend_promotion_delete', {'id': promotion.id}) }}" method="post" style="display: inline;">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
-        </button>
-    </form>
+    {{ buttons.manage(path('sylius_backend_promotion_index'), 'sylius.promotion.manage'|trans) }}
+    {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
+    {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
+    {% if promotion.couponBased %}
+    {{ buttons.create(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
+    {{ buttons.manage(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
+    {% endif %}
 </div>
 
 <table class="table table-bordered table-consensed">
@@ -49,81 +44,55 @@
         </tr>
     </tbody>
 </table>
-{% if promotion.hasCoupons %}
-    <h3>{{ 'sylius.promotion.coupons'|trans }}</h3>
-    <table id="coupons" class="table table-bordered table-consensed">
-        <thead>
-            <tr>
-                <th>{{ 'sylius.promotion_coupon.code'|trans }}</th>
-                <th>{{ 'sylius.promotion_coupon.usage_limit'|trans }}</th>
-                <th>{{ 'sylius.promotion_coupon.used'|trans }}</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for coupon in promotion.coupons %}
-                <tr>
-                    <td><span class="label label-info">{{ coupon.code }}</span></td>
-                    <td>{{ coupon.usageLimit }}</td>
-                    <td>{{ coupon.used }}</td>
-                    <td>
-                        <div class="btn-group pull-right">
-                            {{ buttons.delete(path('sylius_backend_promotion_coupon_delete', {'id': coupon.id})) }}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
+
 {% if promotion.hasRules %}
-    <h3>{{ 'sylius.promotion.rules'|trans }}</h3>
-    <table id="rules" class="table table-bordered table-consensed">
-        <thead>
+<h3>{{ 'sylius.promotion.rules'|trans }}</h3>
+<table id="rules" class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.promotion_rule.type'|trans }}</th>
+            <th>{{ 'sylius.promotion_rule.configuration'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rule in promotion.rules %}
             <tr>
-                <th>{{ 'sylius.promotion_rule.type'|trans }}</th>
-                <th>{{ 'sylius.promotion_rule.configuration'|trans }}</th>
-                <th></th>
+                <td><span class="label label-info">{{ rule.type }}</span></td>
+                <td>{{ configuration(rule.configuration) }}</td>
+                <td>
+                    <div class="btn-group pull-right">
+                        {{ buttons.delete(path('sylius_backend_promotion_rule_delete', {'id': rule.id})) }}
+                    </div>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            {% for rule in promotion.rules %}
-                <tr>
-                    <td><span class="label label-info">{{ rule.type }}</span></td>
-                    <td>{{ configuration(rule.configuration) }}</td>
-                    <td>
-                        <div class="btn-group pull-right">
-                            {{ buttons.delete(path('sylius_backend_promotion_rule_delete', {'id': rule.id})) }}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 {% endif %}
 {% if promotion.hasActions %}
-    <h3>{{ 'sylius.promotion.actions'|trans }}</h3>
-    <table id="actions" class="table table-bordered table-consensed">
-        <thead>
+<h3>{{ 'sylius.promotion.actions'|trans }}</h3>
+<table id="actions" class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.promotion_action.type'|trans }}</th>
+            <th>{{ 'sylius.promotion_action.configuration'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for action in promotion.actions %}
             <tr>
-                <th>{{ 'sylius.promotion_action.type'|trans }}</th>
-                <th>{{ 'sylius.promotion_action.configuration'|trans }}</th>
-                <th></th>
+                <td><span class="label label-info">{{ action.type }}</span></td>
+                <td>{{ configuration(action.configuration) }}</td>
+                <td>
+                    <div class="btn-group pull-right">
+                        {{ buttons.delete(path('sylius_backend_promotion_action_delete', {'id': action.id})) }}
+                    </div>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            {% for action in promotion.actions %}
-                <tr>
-                    <td><span class="label label-info">{{ action.type }}</span></td>
-                    <td>{{ configuration(action.configuration) }}</td>
-                    <td>
-                        <div class="btn-group pull-right">
-                            {{ buttons.delete(path('sylius_backend_promotion_action_delete', {'id': action.id})) }}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 {% endif %}
 {% endblock %}
