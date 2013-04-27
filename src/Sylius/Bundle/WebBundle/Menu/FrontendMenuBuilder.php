@@ -13,12 +13,13 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
 
 /**
  * Frontend menu builder.
@@ -156,16 +157,23 @@ class FrontendMenuBuilder extends MenuBuilder
         foreach ($taxonomies as $taxonomy) {
             $child = $menu->addChild($taxonomy->getName(), $childOptions);
 
-            foreach ($taxonomy->getTaxons() as $taxon) {
-                $child->addChild($taxon->getName(), array(
-                    'route'           => 'sylius_product_index_by_taxon',
-                    'routeParameters' => array('permalink' => $taxon->getPermalink()),
-                    'labelAttributes' => array('icon' => 'icon-angle-right')
-                ));
-            }
+            $this->createTaxonomiesMenuNode($child, $taxonomy->getRoot());
         }
 
         return $menu;
+    }
+
+    private function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
+    {
+        foreach ($taxon->getChildren() as $child) {
+            $childMenu = $menu->addChild($child->getName(), array(
+                'route'           => 'sylius_product_index_by_taxon',
+                'routeParameters' => array('permalink' => $child->getPermalink()),
+                'labelAttributes' => array('icon' => 'icon-angle-right')
+            ));
+
+            $this->createTaxonomiesMenuNode($childMenu, $child);
+        }
     }
 
     /**
@@ -197,11 +205,6 @@ class FrontendMenuBuilder extends MenuBuilder
             'uri' => 'http://facebook.com/SyliusEcommerce',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.facebook')),
             'labelAttributes' => array('icon' => 'icon-facebook-sign icon-large', 'iconOnly' => true)
-        ));
-        $menu->addChild('google', array(
-            'uri' => '#',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.google')),
-            'labelAttributes' => array('icon' => 'icon-google-plus-sign icon-large', 'iconOnly' => true)
         ));
         $menu->addChild('linkedin', array(
             'uri' => 'http://www.linkedin.com/groups/Sylius-Community-4903257',

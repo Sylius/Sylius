@@ -16,6 +16,14 @@ default:
                 class: SyliusKernel
             mink_driver: true
 
-no-js:
-    filters:
-        tags: "~@javascript"
+frontend:
+    paths:
+        features: features/frontend
+
+backend:
+    paths:
+        features: features/backend
+
+api:
+    paths:
+        features: features/api
