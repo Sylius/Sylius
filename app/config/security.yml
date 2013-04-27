@@ -12,7 +12,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 login_path: /login
-                check_path: /login
+                check_path: /login_check
                 use_referer: true
             remember_me:
                 key: %sylius.secret%

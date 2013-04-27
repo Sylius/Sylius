@@ -16,7 +16,7 @@ Feature: User registration
             | Username     | foo         |
             | Password     | bar         |
             | Verification | bar         |
-        And I press "register"
+        And I press "Register"
        Then I should see "Welcome"
         And I should see "Logout"
 
@@ -28,6 +28,6 @@ Feature: User registration
             | Username     | foo         |
             | Password     | bar         |
             | Verification | foo         |
-        And I press "register"
+        And I press "Register"
        Then I should be on registration page
         And I should see "The entered passwords don't match"

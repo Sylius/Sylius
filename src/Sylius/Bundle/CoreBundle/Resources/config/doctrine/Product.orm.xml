@@ -27,10 +27,10 @@
         <many-to-many field="taxons" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
             <join-table name="sylius_product_taxon">
                 <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                    <join-column name="product_id" referenced-column-name="id" nullable="false" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="taxon_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                    <join-column name="taxon_id" referenced-column-name="id" nullable="false" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

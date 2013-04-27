@@ -35,7 +35,7 @@ Feature: Products
         Given there are no products
           And I am on the store homepage
          When I follow "Gloves"
-         Then I should see "Sorry, there are no products to display"
+         Then I should see "There are no products to display"
 
     Scenario: Accessing product page via "View more" button
         Given I am on the store homepage
