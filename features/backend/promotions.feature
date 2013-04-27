@@ -41,7 +41,7 @@ Feature: Promotions
         Given I am on the dashboard page
          When I follow "Promotions"
          Then I should be on the promotion index page
-          And I should see 2 promotions in the list
+          And I should see 4 promotions in the list
 
     Scenario: Seeing empty index of promotions
         Given there are no promotions
@@ -172,10 +172,13 @@ Feature: Promotions
           And I should see "Promotion has been successfully created."
 
     Scenario: Created promotions appear in the list
-        Given I created promotion "Behat Training"
-          And I go to the promotion index page
-         Then I should see 3 promotions in the list
-          And I should see promotion with name "Behat Training" in that list
+        Given I am on the promotion creation page
+          And I fill in "Name" with "First 5 pay half!"
+          And I fill in "Description" with "First 5 orders get 50% discount!"
+          And I press "Create"
+         When I go to the promotion index page
+         Then I should see 5 promotions in the list
+          And I should see promotion with name "First 5 pay half!" in that list
 
     Scenario: Accessing the promotion editing form
         Given I am on the page of promotion "New Year"

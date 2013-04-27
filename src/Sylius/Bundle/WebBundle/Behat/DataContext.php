@@ -208,36 +208,46 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^the following promotion coupons are defined:$/
+     * @Given /^promotion "([^""]*)" has following coupons defined:$/
+     * @Given /^promotion "([^""]*)" has following coupons:$/
      */
-    public function theFollowingPromotionCouponsAreDefined(TableNode $table)
+    public function theFollowingPromotionCouponsAreDefined($name, TableNode $table)
     {
+        $promotion = $this->findOneByName('promotion', $name);
+
         $manager = $this->getEntityManager();
         $repository = $this->getRepository('promotion_coupon');
 
         foreach ($table->getHash() as $data) {
-            $rule = $repository->createNew();
-            $rule->setCode($data['code']);
-            $rule->setUsageLimit($data['usage limit']);
+            $coupon = $repository->createNew();
+            $coupon->setCode($data['code']);
+            $coupon->setUsageLimit($data['usage limit']);
+            $coupon->setUsed($data['used']);
 
-            $manager->persist($rule);
+            $promotion->addCoupon($coupon);
+
+            $manager->persist($coupon);
         }
 
         $manager->flush();
     }
 
     /**
-     * @Given /^the following promotion rules are defined:$/
+     * @Given /^promotion "([^""]*)" has following rules defined:$/
      */
-    public function theFollowingPromotionRulesAreDefined(TableNode $table)
+    public function theFollowingPromotionRulesAreDefined($name, TableNode $table)
     {
+        $promotion = $this->findOneByName('promotion', $name);
+
         $manager = $this->getEntityManager();
         $repository = $this->getRepository('promotion_rule');
 
         foreach ($table->getHash() as $data) {
             $rule = $repository->createNew();
             $rule->setType($data['type']);
-            $rule->setConfiguration($this->getPromotionConfiguration($data));
+            $rule->setConfiguration($this->getConfiguration($data['configuration']));
+
+            $promotion->addRule($rule);
 
             $manager->persist($rule);
         }
@@ -246,17 +256,21 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^the following promotion actions are defined:$/
+     * @Given /^promotion "([^""]*)" has following actions defined:$/
      */
-    public function theFollowingPromotionActionsAreDefined(TableNode $table)
+    public function theFollowingPromotionActionsAreDefined($name, TableNode $table)
     {
+        $promotion = $this->findOneByName('promotion', $name);
+
         $manager = $this->getEntityManager();
         $repository = $this->getRepository('promotion_action');
 
         foreach ($table->getHash() as $data) {
             $action = $repository->createNew();
             $action->setType($data['type']);
-            $action->setConfiguration($this->getPromotionConfiguration($data));
+            $action->setConfiguration($this->getConfiguration($data['configuration']));
+
+            $promotion->addAction($action);
 
             $manager->persist($action);
         }
@@ -266,18 +280,36 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
     /**
      * @Given /^the following promotions exist:$/
+     * @Given /^there are following promotions configured:$/
      */
     public function theFollowingPromotionsExist(TableNode $table)
     {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('promotion');
+
         foreach ($table->getHash() as $data) {
-            $this->thereIsPromotion(
-                $data['name'],
-                $data['description'],
-                explode(',', $data['coupons']),
-                explode(',', $data['rules']),
-                explode(',', $data['actions'])
-            );
+            $promotion = $repository->createNew();
+
+            $promotion->setName($data['name']);
+            $promotion->setDescription($data['description']);
+
+            if (array_key_exists('usage limit', $data)) {
+                $promotion->setUsageLimit($data['usage limit']);
+            }
+            if (array_key_exists('used', $data)) {
+                $promotion->setUsed($data['used']);
+            }
+            if (array_key_exists('starts', $data)) {
+                $promotion->setStartsAt(new \DateTime($data['starts']));
+            }
+            if (array_key_exists('ends', $data)) {
+                $promotion->setEndsAt(new \DateTime($data['ends']));
+            }
+
+            $manager->persist($promotion);
         }
+
+        $manager->flush();
     }
 
     /**
@@ -736,36 +768,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I created promotion "([^"]*)"$/
-     */
-    public function thereIsPromotion($name, $description = null, $coupons = array(), $rules = array(), $actions = array())
-    {
-        if (null === $description) {
-            $description = $this->faker->sentence();
-        }
-
-        $promotion = $this->getRepository('promotion')->createNew();
-        $promotion->setName($name);
-        $promotion->setDescription($description);
-
-        foreach ($coupons as $code) {
-            if (!empty($code)) {
-                $promotion->addCoupon($this->getRepository('promotion_coupon')->findOneByCode($code));
-            }
-        }
-        foreach ($rules as $type) {
-            $promotion->addRule($this->getRepository('promotion_rule')->findOneByType($type));
-        }
-        foreach ($actions as $type) {
-            $promotion->addAction($this->getRepository('promotion_action')->findOneByType($type));
-        }
-
-        $manager = $this->getEntityManager();
-        $manager->persist($promotion);
-        $manager->flush();
-    }
-
-    /**
      * @Given /^there are no ([^"]*)$/
      */
     public function thereAreNoResources($type)
@@ -828,23 +830,20 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * Create promotion rule/action configuration array from table row.
+     * Configuration converter.
      *
-     * @param array $data
+     * @param string $configuraitonString
      *
      * @return array
      */
-    private function getPromotionConfiguration(array $data)
+    private function getConfiguration($configuraitonString)
     {
         $configuration = array();
+        $list = explode(',', $configuraitonString);
 
-        foreach ($data as $key => $value) {
-            if ('type' !== $key) {
-                if (in_array($value, array('yes', 'no'))) {
-                    $value = 'yes' === $value;
-                }
-                $configuration[$key] = $value;
-            }
+        foreach ($list as $parameter) {
+            list($key, $value) = explode(':', $parameter);
+            $configuration[strtolower(trim(str_replace(' ', '_', $key)))] = trim($value);
         }
 
         return $configuration;
