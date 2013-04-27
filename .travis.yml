@@ -32,7 +32,7 @@ before_script:
 
 script:
     - bin/behat --no-snippets --no-paths --verbose -p frontend
-    - bin/behat --no-snippets --no-paths --verbose -p backend
+    - php -d memory_limit=1024M bin/behat --no-snippets --no-paths --verbose -p backend
 #   - bin/behat --no-snippets --no-paths --verbose -p api
     - bin/phpspec run src/Sylius/Bundle/CoreBundle/spec -fpretty --verbose
     - bin/phpspec run src/Sylius/Bundle/WebBundle/spec -fpretty --verbose
