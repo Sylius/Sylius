@@ -3071,18 +3071,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPromotionsBundle.git",
-                "reference": "baa8af14e23d098ae9ac12fb0d5722bb78a7bedb"
+                "reference": "20b8cd92bdadcc65a1465ca8b59b37f719eef932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPromotionsBundle/zipball/baa8af14e23d098ae9ac12fb0d5722bb78a7bedb",
-                "reference": "baa8af14e23d098ae9ac12fb0d5722bb78a7bedb",
+                "url": "https://api.github.com/repos/Sylius/SyliusPromotionsBundle/zipball/20b8cd92bdadcc65a1465ca8b59b37f719eef932",
+                "reference": "20b8cd92bdadcc65a1465ca8b59b37f719eef932",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "sylius/resource-bundle": "0.1.*",
-                "sylius/sales-bundle": "0.1.*",
                 "symfony/framework-bundle": ">=2.2,<3.0"
             },
             "require-dev": {
@@ -3090,6 +3089,9 @@
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/form": ">=2.2,<3.0",
                 "symfony/validator": ">=2.2,<3.0"
+            },
+            "suggest": {
+                "sylius/sales-bundle": "0.1.*"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3126,7 +3128,7 @@
                 "promotions",
                 "shop"
             ],
-            "time": "2013-04-21 08:01:36"
+            "time": "2013-04-28 20:58:04"
         },
         {
             "name": "sylius/resource-bundle",

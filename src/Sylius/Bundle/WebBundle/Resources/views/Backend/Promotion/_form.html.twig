@@ -1,16 +1,43 @@
 {% form_theme form 'SyliusWebBundle:Backend/Promotion:_forms.html.twig' %}
 
 <fieldset>
-    {{ form_widget(form) }}
-    {% for type, prototype in form.vars.prototypes %}
-        <div id="{{ type }}" data-prototype="{{ form_widget(prototype)|e }}">
-        </div>
-    {% endfor %}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.usageLimit) }}
+    {{ form_row(form.startsAt) }}
+    {{ form_row(form.endsAt) }}
+    {{ form_row(form.couponBased) }}
+    {{ form_widget(form._token) }}
 </fieldset>
-<div class="control-group">
-    <div class="controls">
-        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_coupons" data-collection="sylius_promotion_coupons">{{ 'sylius.promotion.add_coupon'|trans }}</a>
-        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>
-        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>
+<hr>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="control-group">
+            <div class="controls">
+                <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>
+            </div>
+        </div>
+        <div id="sylius_promotion_rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
+            {% for ruleForm in form.rules %}
+                {{ form_widget(ruleForm) }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="span6">
+        <div class="control-group">
+            <div class="controls">
+                <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>
+            </div>
+        </div>
+        <div id="sylius_promotion_actions" data-prototype="{{ form_widget(form.actions.vars.prototype)|e }}">
+            {% for actionForm in form.actions %}
+                {{ form_widget(actionForm) }}
+            {% endfor %}
+        </div>
     </div>
 </div>
+
+{% for type, prototype in form.vars.prototypes %}
+    <div id="{{ type }}" data-prototype="{{ form_widget(prototype)|e }}">
+    </div>
+{% endfor %}

@@ -39,7 +39,7 @@ class LoadPromotionsData extends DataFixture
         $promotion = $this->createPromotion(
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
-            array($this->createRule(RuleInterface::TYPE_ORDER_TOTAL, array('amount' => 10000, 'equal' => true))),
+            array($this->createRule(RuleInterface::TYPE_ITEM_TOTAL, array('amount' => 10000, 'equal' => true))),
             array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 250)))
         );
 
