@@ -15,6 +15,9 @@ sylius:
         coupon:
             code: Code
             usage_limit: Usage limit
+        coupon_generate_instruction:
+            amount: Amount
+            usage_limit: Usage limit
         rule:
             type: Type
             item_total_configuration:
@@ -27,3 +30,5 @@ sylius:
             type: Type
             fixed_discount_configuration:
                 amount: Amount
+            percentage_discount_configuration:
+                percentage: Percentage

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Controller;
 
+use Sylius\Bundle\PromotionsBundle\Generator\Instruction;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,6 +23,46 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class CouponController extends ResourceController
 {
+    public function generateAction(Request $request)
+    {
+        if (null === $promotionId = $this->getRequest()->get('promotionId')) {
+            throw new NotFoundHttpException('No promotion id given');
+        }
+
+        $promotion = $this
+            ->getPromotionController()
+            ->findOr404(array('id' => $promotionId))
+        ;
+
+        $config = $this->getConfiguration();
+        $form = $this->createForm('sylius_promotion_coupon_generate_instruction', new Instruction());
+
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $this->getGenerator()->generate($promotion, $form->getData());
+            $this->setFlash('success', 'generate');
+
+            return $this
+                ->getPromotionController()
+                ->redirectTo($promotion);
+            ;
+        }
+
+        if ($config->isApiRequest()) {
+            return $this->handleView($this->view($form));
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($config->getTemplate('generate.html'))
+            ->setData(array(
+                'promotion' => $promotion,
+                'form'      => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -50,5 +91,15 @@ class CouponController extends ResourceController
     protected function getPromotionController()
     {
         return $this->get('sylius.controller.promotion');
+    }
+
+    /**
+     * Get coupon code generator.
+     *
+     * @return CouponGeneratorInterface
+     */
+    protected function getGenerator()
+    {
+        return $this->get('sylius.generator.promotion_coupon');
     }
 }

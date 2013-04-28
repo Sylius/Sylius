@@ -54,6 +54,12 @@ class Promotion extends ObjectBehavior
         $this->getUsed()->shouldReturn(0);
     }
 
+    function its_used_should_be_mutable()
+    {
+        $this->setUsed(5);
+        $this->getUsed()->shouldReturn(5);
+    }
+
     function its_used_should_be_incrementable()
     {
         $this->incrementUsed();

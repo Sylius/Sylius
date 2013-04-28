@@ -24,6 +24,7 @@ interface CouponInterface
     public function getUsageLimit();
     public function setUsageLimit($usageLimit);
     public function getUsed();
+    public function setUsed($used);
     public function incrementUsed();
     public function isValid();
 }

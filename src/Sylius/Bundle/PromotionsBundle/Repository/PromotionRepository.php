@@ -23,21 +23,25 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
 {
     public function findActive()
     {
-        $qb = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->getCollectionQueryBuilder();
 
-        return $qb
-            ->join($this->getAlias().'.rules', 'r')
+        return $queryBuilder
+            ->leftJoin($this->getAlias().'.rules', 'r')
             ->addSelect('r')
-            ->join($this->getAlias().'.actions', 'a')
+            ->leftJoin($this->getAlias().'.actions', 'a')
             ->addSelect('a')
-            ->where($qb->expr()->orX(
-                $qb->expr()->isNull($this->getAlias().'.startsAt'),
-                $qb->expr()->lt($this->getAlias().'.startsAt', ':now')
-            ))
-            ->andWhere($qb->expr()->orX(
-                $qb->expr()->isNull($this->getAlias().'.endsAt'),
-                $qb->expr()->gt($this->getAlias().'.endsAt', ':now')
-            ))
+            ->where(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->isNull($this->getAlias().'.startsAt'),
+                    $queryBuilder->expr()->lt($this->getAlias().'.startsAt', ':now')
+                )
+            )
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->isNull($this->getAlias().'.endsAt'),
+                    $queryBuilder->expr()->gt($this->getAlias().'.endsAt', ':now')
+                )
+            )
             ->setParameter('now', new DateTime())
             ->getQuery()
             ->getResult()

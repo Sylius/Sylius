@@ -39,6 +39,22 @@
                 <source>sylius.promotion_coupon.code.max_length</source>
                 <target>Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.</target>
             </trans-unit>
+            <trans-unit id="12">
+                <source>sylius.promotion_coupon.usage_limit.min</source>
+                <target>Coupon usage limit must be at least {{ limit }}.</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>sylius.promotion_coupon_generate_instruction.amount.not_blank</source>
+                <target>Please enter amount of coupons to generate.</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>sylius.promotion_coupon_generate_instruction.amount.min</source>
+                <target>Amount of coupons to generate must be at least {{ limit }}.</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>sylius.promotion_coupon_generate_instruction.usage_limit.min</source>
+                <target>Usage limit of generated coupons must be at least {{ limit }}.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

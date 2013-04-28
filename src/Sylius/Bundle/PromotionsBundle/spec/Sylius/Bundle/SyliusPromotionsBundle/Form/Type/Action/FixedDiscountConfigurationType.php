@@ -36,7 +36,7 @@ class FixedDiscountConfigurationType extends ObjectBehavior
     function it_should_build_form_with_count_field_and_equal_checkbox($builder)
     {
         $builder
-            ->add('amount', 'money', ANY_ARGUMENT)
+            ->add('amount', 'sylius_money', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

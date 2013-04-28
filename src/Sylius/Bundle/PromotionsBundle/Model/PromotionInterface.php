@@ -28,6 +28,7 @@ interface PromotionInterface
     public function getUsageLimit();
     public function setUsageLimit($usageLimit);
     public function getUsed();
+    public function setUsed($used);
     public function incrementUsed();
     public function getStartsAt();
     public function setStartsAt(DateTime $startsAt = null);

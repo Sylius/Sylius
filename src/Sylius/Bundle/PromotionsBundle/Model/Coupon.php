@@ -59,6 +59,13 @@ class Coupon implements CouponInterface
         return $this->used;
     }
 
+    public function setUsed($used)
+    {
+        $this->used = $used;
+
+        return $this;
+    }
+
     public function incrementUsed()
     {
         $this->used++;

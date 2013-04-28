@@ -39,9 +39,6 @@
                 <option name="maxMessage">sylius.promotion.description.max_length</option>
             </constraint>
         </property>
-        <getter property="coupons">
-            <constraint name="Valid" />
-        </getter>
     </class>
 
     <class name="Sylius\Bundle\PromotionsBundle\Model\Coupon">
@@ -54,6 +51,30 @@
                 <option name="max">255</option>
                 <option name="minMessage">sylius.promotion_coupon.code.min_length</option>
                 <option name="maxMessage">sylius.promotion_coupon.code.max_length</option>
+            </constraint>
+        </property>
+        <property name="usageLimit">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion_coupon.usage_limit.min</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Bundle\PromotionsBundle\Generator\Instruction">
+        <property name="amount">
+            <constraint name="NotBlank">
+                <option name="message">sylius.promotion_coupon_generate_instruction.amount.not_blank</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion_coupon_generate_instruction.amount.min</option>
+            </constraint>
+        </property>
+        <property name="usageLimit">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion_coupon_generate_instruction.usage_limit.min</option>
             </constraint>
         </property>
     </class>
