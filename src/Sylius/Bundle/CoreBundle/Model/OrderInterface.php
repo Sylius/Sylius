@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
@@ -21,7 +22,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends BaseOrderInterface
+interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT      = 'Tax';

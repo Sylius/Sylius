@@ -1,5 +1,36 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
+#
+sylius_backend_promotion_coupon_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Coupon:index.html.twig
+            criteria: { promotion: $promotionId }
+
+sylius_backend_promotion_coupon_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Coupon:create.html.twig
+            redirect:
+                route: sylius_backend_promotion_show
+                parameters: {'id': $promotionId}
+
+sylius_backend_promotion_coupon_update:
+    pattern: /edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Coupon:update.html.twig
+            redirect:
+                route: sylius_backend_promotion_show
+                parameters: {'id': $promotionId}
 
 sylius_backend_promotion_coupon_delete:
     pattern: /{id}
@@ -8,3 +39,14 @@ sylius_backend_promotion_coupon_delete:
         _controller: sylius.controller.promotion_coupon:deleteAction
         _sylius:
             redirect: referer
+
+sylius_backend_promotion_coupon_generate:
+    pattern: /generate
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:generateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Coupon:generate.html.twig
+            redirect:
+                route: sylius_backend_promotion_coupon_index
+                parameters: {'promotionId': $promotionId}

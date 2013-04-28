@@ -375,6 +375,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
     /**
      * @Given /^I leave "([^"]*)" empty$/
+     * @Given /^I leave "([^"]*)" field blank/
      */
     public function iLeaveFieldEmpty($field)
     {

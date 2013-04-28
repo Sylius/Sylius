@@ -49,10 +49,6 @@ sylius_backend_promotion:
     resource: @SyliusWebBundle/Resources/config/routing/backend/promotion.yml
     prefix: /promotions
 
-sylius_backend_promotion_coupon:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/promotion_coupon.yml
-    prefix: /promotion-coupons
-
 sylius_backend_promotion_rule:
     resource: @SyliusWebBundle/Resources/config/routing/backend/promotion_rule.yml
     prefix: /promotion-rules

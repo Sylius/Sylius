@@ -10,7 +10,7 @@ sylius_backend_variant_create:
             template: SyliusWebBundle:Backend/Variant:create.html.twig
             redirect:
                 route: sylius_backend_product_show
-                parameters: {'id': '$productId'}
+                parameters: {'id': $productId}
 
 sylius_backend_variant_update:
     pattern: /{id}/edit
@@ -21,7 +21,7 @@ sylius_backend_variant_update:
             template: SyliusWebBundle:Backend/Variant:update.html.twig
             redirect:
                 route: sylius_backend_product_show
-                parameters: {'id': '$productId'}
+                parameters: {'id': $productId}
 
 sylius_backend_variant_delete:
     pattern: /{id}
@@ -31,7 +31,7 @@ sylius_backend_variant_delete:
         _sylius:
             redirect:
                 route: sylius_backend_product_show
-                parameters: {'id': '$productId'}
+                parameters: {'id': $productId}
 
 sylius_backend_variant_generate:
     pattern: /generate

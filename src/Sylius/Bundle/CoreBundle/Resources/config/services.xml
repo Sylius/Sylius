@@ -39,6 +39,9 @@
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
         <parameter key="sylius.image_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageUploader</parameter>
+
+        <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
+        <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
     </parameters>
 
     <services>
@@ -176,6 +179,16 @@
         </service>
         <service id="sylius.form.type.order_filter" class="%sylius.form.type.order_filter.class%">
             <tag name="form.type" alias="sylius_order_filter" />
+        </service>
+
+        <!-- promotions -->
+        <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
+            <argument type="service" id="sylius.repository.adjustment" />
+            <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
+        </service>
+        <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
+            <argument type="service" id="sylius.repository.adjustment" />
+            <tag name="sylius.promotion_action" type="Percentage_discount" label="Percentage discount" />
         </service>
     </services>
 
