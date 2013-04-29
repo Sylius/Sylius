@@ -1,0 +1,76 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    frontend:
+        menu:
+            main:
+                login: Zaloguj
+                logout: Wyloguj
+                register: Zarejestruj
+                administration: Administracja
+                cart: Zobacz koszyk
+            social:
+                github: GitHub
+                twitter: Twitter
+                facebook: Facebook
+                google: Google+
+                linkedin: LinkedIn
+    backend:
+        menu:
+            main:
+                dashboard: Panel administracyjny
+                homepage: Wróć do sklepu
+                taxonomies: Categorization
+                assortment: Asortyment
+                products: Produkty
+                stockables: Magazyn
+                options: Atrybuty produktów
+                properties: Konfiguruj funkcjonalność
+                prototypes: Product prototypes
+                sales: Zamówienia
+                orders: Aktualne zamówienia
+                new_order: Dodaj nowe zamówienie
+                promotions: Promocje
+                new_promotion: Dodaj nową promocje
+                configuration: Konfiguracja
+                general_settings: Ogólne ustawienia
+                taxation_settings: Podatek
+                tax_categories: Kategorie podatkowe
+                tax_rates: Tax rates
+                shipping_categories: Kategorie wysyłki
+                shipping_methods: Metody wysyłki
+                shipments: Przesyłki
+                payment_methods: Metody płatności
+                payments: Płatności
+                countries: Kraje
+                zones: Strefy
+            sidebar:
+                dashboard: Panel administracyjny
+                homepage: Wróć do sklepu
+                taxonomies: Categorization
+                customer: Klienci
+                users: Użytkownicy
+                assortment: Asortyment
+                products: Produkty
+                stockables: Magazyn
+                options: Atrybuty produktów
+                properties: Konfiguruj funkcjonalność
+                prototypes: Product prototypes
+                sales: Zamówienia
+                orders: Aktualne zamówienia
+                new_order: Dodaj nowe zamówienie
+                promotions: Promocje
+                new_promotion: Dodaj nową promocje
+                configuration: Konfiguracja
+                general_settings: Ogólne ustawienia
+                taxation_settings: Podatek
+                tax_categories: Kategorie podatkowe
+                tax_rates: Tax rates
+                shipping_categories: Kategorie wysyłki
+                shipping_methods: Metody wysyłki
+                shipments: Przesyłki
+                payment_methods: Metody płatności
+                payments: Płatności
+                countries: Kraje
+                zones: Strefy

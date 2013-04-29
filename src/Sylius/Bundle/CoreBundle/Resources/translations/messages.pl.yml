@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        checkout:
+            shipping_method: Metoda wysyłki
+            payment_method: Metoda płatności
+        settings:
+            general:
+                title: Tytuł strony
+                meta_description: Opis w sekcji meta
+                meta_keywords: Słowa kluczowe w sekcji meta
+            taxation:
+                default_tax_zone: Default tax zone
+        variant:
+            price: Cena
+            available_on_demand: Available on demand
+            on_hand: Current stock
+            images: Zdjęcia
+        product:
+            short_description: Krótki opis
+            tax_category: Tax category
+            variant_selection_method: Variant selection method
+        image:
+            file: Zdjęcie
+        product_filter:
+            name: Nazwa
+            sku: SKU
+        order_filter:
+            number: Number
+            total_from: From
+            total_to: To
+            created_at_from: From
+            created_at_to: To
