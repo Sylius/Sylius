@@ -27,7 +27,7 @@ class PaymentStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $form = $this->createCheckoutPaymentForm($context);
+        $form = $this->createCheckoutPaymentForm();
 
         return $this->renderStep($context, $form);
     }
@@ -38,14 +38,11 @@ class PaymentStep extends CheckoutStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $request = $this->getRequest();
-        $form = $this->createCheckoutPaymentForm($context);
+        $form = $this->createCheckoutPaymentForm();
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $data = $form->getData();
-
-            $paymentMethod = $data['paymentMethod'];
-
-            $context->getStorage()->set('payment_method', $paymentMethod->getId());
+            $this->getManager()->persist($this->getCurrentCart());
+            $this->getManager()->flush();
 
             return $this->complete();
         }
@@ -61,8 +58,8 @@ class PaymentStep extends CheckoutStep
         ));
     }
 
-    private function createCheckoutPaymentForm(ProcessContextInterface $context)
+    private function createCheckoutPaymentForm()
     {
-        return $this->createForm('sylius_checkout_payment');
+        return $this->createForm('sylius_checkout_payment', $this->getCurrentCart());
     }
 }

@@ -41,6 +41,9 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Entity\User" inversed-by="orders">
+            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
     </entity>
 
 </doctrine-mapping>

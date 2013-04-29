@@ -24,6 +24,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AddressingStepType extends AbstractType
 {
+    protected $dataClass;
+
+    public function __construct($dataClass)
+    {
+        $this->dataClass = $dataClass;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -55,7 +62,7 @@ class AddressingStepType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => $this->dataClass
             ))
         ;
     }

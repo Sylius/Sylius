@@ -14,6 +14,24 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        <many-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+        <many-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+        <many-to-one field="shippingMethod" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface">
+            <join-column name="shipping_method_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+        <many-to-one field="paymentMethod" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface">
+            <join-column name="payment_method_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
     </entity>
 
 </doctrine-mapping>
