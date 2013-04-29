@@ -19,15 +19,15 @@ sylius:
     backend:
         menu:
             main:
-                dashboard: Panel administracyjny
+                dashboard: Panel
                 homepage: Wróć do sklepu
-                taxonomies: Categorization
+                taxonomies: Taksonomia
                 assortment: Asortyment
                 products: Produkty
                 stockables: Magazyn
-                options: Atrybuty produktów
-                properties: Konfiguruj funkcjonalność
-                prototypes: Product prototypes
+                options: Warianty
+                properties: Właściwości
+                prototypes: Prototypy
                 sales: Zamówienia
                 orders: Aktualne zamówienia
                 new_order: Dodaj nowe zamówienie
@@ -37,7 +37,7 @@ sylius:
                 general_settings: Ogólne ustawienia
                 taxation_settings: Podatek
                 tax_categories: Kategorie podatkowe
-                tax_rates: Tax rates
+                tax_rates: Stawki podatkowe
                 shipping_categories: Kategorie wysyłki
                 shipping_methods: Metody wysyłki
                 shipments: Przesyłki
@@ -46,17 +46,17 @@ sylius:
                 countries: Kraje
                 zones: Strefy
             sidebar:
-                dashboard: Panel administracyjny
+                dashboard: Panel
                 homepage: Wróć do sklepu
-                taxonomies: Categorization
+                taxonomies: Taksonomia
                 customer: Klienci
                 users: Użytkownicy
                 assortment: Asortyment
                 products: Produkty
                 stockables: Magazyn
-                options: Atrybuty produktów
-                properties: Konfiguruj funkcjonalność
-                prototypes: Product prototypes
+                options: Warianty
+                properties: Właściwości
+                prototypes: Prototypy
                 sales: Zamówienia
                 orders: Aktualne zamówienia
                 new_order: Dodaj nowe zamówienie
@@ -66,7 +66,7 @@ sylius:
                 general_settings: Ogólne ustawienia
                 taxation_settings: Podatek
                 tax_categories: Kategorie podatkowe
-                tax_rates: Tax rates
+                tax_rates: Stawki podatkowe
                 shipping_categories: Kategorie wysyłki
                 shipping_methods: Metody wysyłki
                 shipments: Przesyłki
