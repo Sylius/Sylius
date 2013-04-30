@@ -41,16 +41,8 @@ class AddressingStep extends CheckoutStep
         $form = $this->createCheckoutAddressingForm();
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $data = $form->getData();
-
-            $shippingAddress = $data['shippingAddress'];
-            $billingAddress = $data['billingAddress'];
-
-            $this->saveAddress($shippingAddress);
-            $this->saveAddress($billingAddress);
-
-            $context->getStorage()->set('shipping_address', $shippingAddress->getId());
-            $context->getStorage()->set('billing_address', $billingAddress->getId());
+            $this->getManager()->persist($this->getCurrentCart());
+            $this->getManager()->flush();
 
             return $this->complete();
         }
@@ -69,6 +61,6 @@ class AddressingStep extends CheckoutStep
 
     private function createCheckoutAddressingForm()
     {
-        return $this->createForm('sylius_checkout_addressing');
+        return $this->createForm('sylius_checkout_addressing', $this->getCurrentCart());
     }
 }

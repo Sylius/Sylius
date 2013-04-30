@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
@@ -20,4 +21,17 @@ use FOS\UserBundle\Entity\User as BaseUser;
  */
 class User extends BaseUser
 {
+    protected $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+
+        parent::__construct();
+    }
+
+    public function getOrders()
+    {
+        return $this->orders;
+    }
 }

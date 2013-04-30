@@ -100,12 +100,15 @@
 
         <!-- checkout forms -->
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
+            <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
+            <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_shipping" />
         </service>
         <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
+            <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_payment" />
         </service>
 

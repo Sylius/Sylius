@@ -28,7 +28,7 @@ class ShippingStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $form = $this->createCheckoutShippingForm($context);
+        $form = $this->createCheckoutShippingForm();
 
         return $this->renderStep($context, $form);
     }
@@ -39,14 +39,11 @@ class ShippingStep extends CheckoutStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $request = $this->getRequest();
-        $form = $this->createCheckoutShippingForm($context);
+        $form = $this->createCheckoutShippingForm();
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $data = $form->getData();
-
-            $shippingMethod = $data['shippingMethod'];
-
-            $context->getStorage()->set('shipping_method', $shippingMethod->getId());
+            $this->getManager()->persist($this->getCurrentCart());
+            $this->getManager()->flush();
 
             return $this->complete();
         }
@@ -62,13 +59,13 @@ class ShippingStep extends CheckoutStep
         ));
     }
 
-    private function createCheckoutShippingForm(ProcessContextInterface $context)
+    private function createCheckoutShippingForm()
     {
-        $shippingAddress = $this->getAddress($context->getStorage()->get('shipping_address'));
-        $zone = $this->get('sylius.zone_matcher')->match($shippingAddress);
+        $cart = $this->getCurrentCart();
+        $zone = $this->getZoneMatcher()->match($cart->getShippingAddress());
 
-        return $this->createForm('sylius_checkout_shipping', null, array(
-            'shippables' => $this->getCartProvider()->getCart(),
+        return $this->createForm('sylius_checkout_shipping', $cart, array(
+            'shippables' => $cart,
             'criteria'   => array('zone' => $zone)
         ));
     }

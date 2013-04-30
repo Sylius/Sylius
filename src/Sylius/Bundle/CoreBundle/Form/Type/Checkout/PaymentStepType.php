@@ -23,6 +23,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class PaymentStepType extends AbstractType
 {
+    protected $dataClass;
+
+    public function __construct($dataClass)
+    {
+        $this->dataClass = $dataClass;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -49,7 +56,7 @@ class PaymentStepType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => $this->dataClass
             ))
         ;
     }
