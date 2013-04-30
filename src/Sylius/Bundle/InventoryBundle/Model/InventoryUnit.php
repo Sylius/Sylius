@@ -142,8 +142,24 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createAt)
+    {
+        $this->createdAt = $createAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }
