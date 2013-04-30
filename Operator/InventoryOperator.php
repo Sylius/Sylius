@@ -50,8 +50,8 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Constructor.
      *
-     * @param ObjectManager                $repository
      * @param ObjectRepository             $manager
+     * @param ObjectManager                $repository
      * @param AvailabilityCheckerInterface $availabilityChecker
      */
     public function __construct(ObjectManager $manager, ObjectRepository $repository, AvailabilityCheckerInterface $availabilityChecker)
