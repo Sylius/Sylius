@@ -928,7 +928,7 @@
       <trans-unit id="3ab2cd7c5504b3af1ab5b7f4655445e1e8bcaac7" resname="sylius.product.available_on_demand">
         <jms:reference-file line="52">Backend/Product/show.html.twig</jms:reference-file>
         <source>sylius.product.available_on_demand</source>
-        <target>Dostępne na zamówienie</target>
+        <target>Dostępny na zamówienie</target>
       </trans-unit>
       <trans-unit id="ee6bbfeb09d51f905df7b7f2dc756efa163ae8dd" resname="sylius.product.categorization">
         <jms:reference-file line="50">Backend/Product/show.html.twig</jms:reference-file>
