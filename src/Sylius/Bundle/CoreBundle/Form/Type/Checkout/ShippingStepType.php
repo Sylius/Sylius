@@ -23,6 +23,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class ShippingStepType extends AbstractType
 {
+    protected $dataClass;
+
+    public function __construct($dataClass)
+    {
+        $this->dataClass = $dataClass;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -51,7 +58,7 @@ class ShippingStepType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => null
+                'data_class' => $this->dataClass
             ))
             ->setRequired(array(
                 'shippables'

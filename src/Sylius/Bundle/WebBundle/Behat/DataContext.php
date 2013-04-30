@@ -141,17 +141,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
     }
 
-    public function thereIsUser($username, $password, $role, $enabled = 'yes')
+    public function thereIsUser($username, $password, $role = null, $enabled = 'yes')
     {
         $user = new User();
         $user->setUsername($username);
         $user->setEmail($this->faker->email());
-        $user->addRole($role);
         $user->setEnabled('yes' === $enabled);
         $user->setPlainPassword($password);
 
+        if (null !== $role) {
+            $user->addRole($role);
+        }
+
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+
+        return $user;
     }
 
     /**
@@ -172,6 +177,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
+
+            $order->setUser($this->thereIsUser($data['user'], 'password'));
 
             if (isset($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));

@@ -68,32 +68,31 @@ class FinalizeStep extends CheckoutStep
         $orderBuilder = $this->getOrderBuilder();
         $orderBuilder->create();
 
-        foreach ($this->getCurrentCart()->getItems() as $item) {
+        $cart = $this->getCurrentCart();
+
+        foreach ($cart->getItems() as $item) {
             $orderBuilder->add($item->getVariant(), $item->getUnitPrice(), $item->getQuantity());
         }
 
         $order = $orderBuilder->getOrder();
 
-        $shippingAddress = $this->getAddress($context->getStorage()->get('shipping_address'));
-        $billingAddress = $this->getAddress($context->getStorage()->get('billing_address'));
+        $order->setUser($this->getUser());
 
-        $order->setshippingAddress($shippingAddress);
-        $order->setBillingAddress($billingAddress);
+        $order->setshippingAddress($cart->getShippingAddress());
+        $order->setBillingAddress($cart->getBillingAddress());
 
         $this
             ->getInventoryUnitsFactory()
             ->createInventoryUnits($order)
         ;
 
-        $shippingMethod = $this->getShippingMethod($context->getStorage()->get('shipping_method'));
-
         $this
             ->getShipmentFactory()
-            ->createShipment($order, $shippingMethod)
+            ->createShipment($order, $cart->getShippingMethod())
         ;
 
+        $order->calculateTotal();
         $this->get('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
-
         $order->calculateTotal();
 
         return $order;
@@ -127,17 +126,5 @@ class FinalizeStep extends CheckoutStep
     private function getShipmentFactory()
     {
         return $this->get('sylius.order_processing.shipment_factory');
-    }
-
-    private function getShippingMethod($id)
-    {
-        $repository = $this->get('sylius.repository.shipping_method');
-
-        return $repository->find($id);
-    }
-
-    private function createNewShipment()
-    {
-        return $this->get('sylius.repository.shipment')->createNew();
     }
 }

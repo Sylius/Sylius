@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 
 /**
@@ -42,6 +41,26 @@ abstract class CheckoutStep extends ControllerStep
     }
 
     /**
+     * Get object manager.
+     *
+     * @return ObjectManager
+     */
+    protected function getManager()
+    {
+        return $this->get('doctrine')->getManager();
+    }
+
+    /**
+     * Get zone matcher.
+     *
+     * @return ZoneMatcherInterface
+     */
+    protected function getZoneMatcher()
+    {
+        return $this->get('sylius.zone_matcher');
+    }
+
+    /**
      * Is user logged in?
      *
      * @return Boolean
@@ -49,30 +68,5 @@ abstract class CheckoutStep extends ControllerStep
     protected function isUserLoggedIn()
     {
         return is_object($this->get('security.context')->getToken()->getUser());
-    }
-
-    /**
-     * Save address with given id.
-     *
-     * @param AddressInterface
-     */
-    protected function saveAddress(AddressInterface $address)
-    {
-        $addressManager = $this->get('sylius.manager.address');
-
-        $addressManager->persist($address);
-        $addressManager->flush($address);
-    }
-
-    /**
-     * Get address with given id.
-     *
-     * @return AddressInterface
-     */
-    protected function getAddress($id)
-    {
-        $addressRepository = $this->get('sylius.repository.address');
-
-        return $addressRepository->find($id);
     }
 }
