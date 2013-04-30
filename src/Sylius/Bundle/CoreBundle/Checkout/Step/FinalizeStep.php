@@ -76,6 +76,8 @@ class FinalizeStep extends CheckoutStep
 
         $order = $orderBuilder->getOrder();
 
+        $order->setUser($this->getUser());
+
         $order->setshippingAddress($cart->getShippingAddress());
         $order->setBillingAddress($cart->getBillingAddress());
 
