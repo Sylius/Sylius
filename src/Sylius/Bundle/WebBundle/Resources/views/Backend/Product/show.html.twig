@@ -94,7 +94,7 @@
                 {% endif %}
             </td>
             <td><span class="badge badge-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
-            <td>{{ product.masterVariant.price }} &euro;</td>
+            <td>{{ product.masterVariant.price|sylius_money }} &euro;</td>
         </tr>
     </tbody>
 </table>
