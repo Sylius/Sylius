@@ -494,7 +494,7 @@
       <trans-unit id="11f08e68c1845274ee63e5a36afc2890bd19bea7" resname="sylius.inventory_unit.created_at">
         <jms:reference-file line="343">Backend/Order/show.html.twig</jms:reference-file>
         <source>sylius.inventory_unit.created_at</source>
-        <target>Utworzone</target>
+        <target>Utworzono</target>
       </trans-unit>
       <trans-unit id="db3c8d177abbf17bb5467a5a76dd6906a1696119" resname="sylius.inventory_unit.inventory_state">
         <jms:reference-file line="341">Backend/Order/show.html.twig</jms:reference-file>
@@ -524,7 +524,7 @@
       <trans-unit id="77207473692b37b54effc65df49c4b796572d47c" resname="sylius.inventory_unit.updated_at">
         <jms:reference-file line="344">Backend/Order/show.html.twig</jms:reference-file>
         <source>sylius.inventory_unit.updated_at</source>
-        <target>Zmodyfikowany</target>
+        <target>Zmodyfikowano</target>
       </trans-unit>
       <trans-unit id="e36623817eea8e470e3339db301c4412dcd6116b" resname="sylius.login">
         <jms:reference-file line="37">Backend/Security/login.html.twig</jms:reference-file>
@@ -928,7 +928,7 @@
       <trans-unit id="3ab2cd7c5504b3af1ab5b7f4655445e1e8bcaac7" resname="sylius.product.available_on_demand">
         <jms:reference-file line="52">Backend/Product/show.html.twig</jms:reference-file>
         <source>sylius.product.available_on_demand</source>
-        <target>Dostępne na zamówienie</target>
+        <target>Dostępny na zamówienie</target>
       </trans-unit>
       <trans-unit id="ee6bbfeb09d51f905df7b7f2dc756efa163ae8dd" resname="sylius.product.categorization">
         <jms:reference-file line="50">Backend/Product/show.html.twig</jms:reference-file>
