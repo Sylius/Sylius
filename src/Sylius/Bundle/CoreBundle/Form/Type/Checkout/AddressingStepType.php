@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Event\FilterDataEvent;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
 
 /**
  * Checkout addressing step form type.
@@ -37,7 +37,7 @@ class AddressingStepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventListener(FormEvents::PRE_BIND, function (FilterDataEvent $event) {
+            ->addEventListener(FormEvents::PRE_BIND, function (FormEvent $event) {
                 $data = $event->getData();
 
                 if (!array_key_exists('differentBillingAddress', $data) || false === $data['differentBillingAddress']) {
@@ -62,7 +62,8 @@ class AddressingStepType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class' => $this->dataClass,
+                'cascade_validation' => true
             ))
         ;
     }
