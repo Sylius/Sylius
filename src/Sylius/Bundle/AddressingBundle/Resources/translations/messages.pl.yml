@@ -1,0 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            first_name: "Imię"
+            last_name: "Nazwisko"
+            country: "Kraj"
+            province: "Województwo"
+            street: "Adres"
+            city: "Miejscowość"
+            postcode: "Kod pocztowy"
+        country:
+            name: "Nazwa"
+            iso_name: "Kod ISO"
+            provinces: "Województwa"
+        province:
+            name: "Nazwa"
+        zone:
+            name: "Nazwa"
+            type: "Typ"
+            members: "Kraje należące do strefy"
+        zone_member_province:
+            province: "Województwo"
+        zone_member_country:
+            country: "Kraj"
+        zone_member_zone:
+            zone: "Strefa"
