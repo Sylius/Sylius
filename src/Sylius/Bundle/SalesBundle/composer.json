@@ -2,8 +2,8 @@
     "name": "sylius/sales-bundle",
     "type": "symfony-bundle",
     "description": "Sales order management for Symfony2 applications.",
-    "keywords": ["shop", "ecommerce", "sales", "orders", "order"],
-    "homepage": "http://Sylius.org",
+    "keywords": ["shop", "ecommerce", "sales", "orders", "order", "sylius"],
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -31,7 +31,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\SalesBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\SalesBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/SalesBundle",
     "extra": {

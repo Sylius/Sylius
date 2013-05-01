@@ -13,13 +13,14 @@ namespace Sylius\Bundle\SalesBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * Model for orders.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Order implements OrderInterface
+class Order implements OrderInterface, TimestampableInterface
 {
     /**
      * Id.
@@ -110,7 +111,7 @@ class Order implements OrderInterface
         $this->adjustmentsTotal = 0;
         $this->total = 0;
         $this->confirmed = true;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -387,8 +388,25 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
 }
