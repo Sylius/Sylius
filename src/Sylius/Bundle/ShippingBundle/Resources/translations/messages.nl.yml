@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+
+sylius:
+    form:
+        shipping_category:
+            name: Naam
+            description: Omschrijving
+        shipping_method:
+            name: Naam
+            category: Categorie
+            category_requirement: Categorie vereisten
+            calculator: Berekening
+            configuration: Configuratie
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Hoeveelheid
+            per_item_rate_configuration:
+                amount: Hoeveelheid
+            flexible_rate_configuration:
+                first_item_cost: Eerste item kost
+                additional_item_cost: Volgend item kost
+                additional_item_limit: Limiet volgende items
