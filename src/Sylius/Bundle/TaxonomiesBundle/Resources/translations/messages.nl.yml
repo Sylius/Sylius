@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+
+sylius:
+    form:
+        taxonomy:
+            name: Naam
+        taxon:
+            name: Naam
+            permalink: Permalink
+            parent: Ouder
