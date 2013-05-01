@@ -15,8 +15,8 @@ sylius:
                 default_tax_zone: Domyślna strefa podatkowa
         variant:
             price: Cena
-            available_on_demand: Dostępne na zamówienie
-            on_hand: Aktualnie dostepne
+            available_on_demand: Dostępny na zamówienie
+            on_hand: Aktualnie w magazynie
             images: Zdjęcia
         product:
             short_description: Krótki opis
