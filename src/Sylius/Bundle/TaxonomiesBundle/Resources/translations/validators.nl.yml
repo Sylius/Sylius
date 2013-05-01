@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+
+sylius:
+    taxonomy:
+        name:
+            not_blank: "Voer een taxonomie naam in."
+            max_length: "Taxonomie naam mag niet langer zijn dan 255 karakters."
+    taxon:
+        name:
+            not_blank: "Voer een taxon naam in."
+            max_length: "Taxon naam mag niet langer zijn dan 255 karakters."
