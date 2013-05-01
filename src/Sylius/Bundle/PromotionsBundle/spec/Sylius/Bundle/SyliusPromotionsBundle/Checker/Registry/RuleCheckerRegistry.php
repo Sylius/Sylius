@@ -37,7 +37,7 @@ class RuleCheckerRegistry extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
      */
     function it_should_register_checker_under_given_type($checker)
     {
@@ -47,7 +47,7 @@ class RuleCheckerRegistry extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
      */
     function it_should_complain_if_trying_to_register_checker_with_taken_name($checker)
     {
@@ -60,7 +60,7 @@ class RuleCheckerRegistry extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
      */
     function it_should_unregister_checker_with_given_name($checker)
     {
@@ -72,7 +72,7 @@ class RuleCheckerRegistry extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
      */
     function it_should_retrieve_registered_checker_by_name($checker)
     {

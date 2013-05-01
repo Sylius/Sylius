@@ -20,6 +20,16 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
  */
 interface RuleCheckerInterface
 {
+    /**
+     * @param PromotionSubjectInterface $subject
+     * @param array                     $configuration
+     *
+     * @return Boolean
+     */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration);
+
+    /**
+     * @return string
+     */
     public function getConfigurationFormType();
 }

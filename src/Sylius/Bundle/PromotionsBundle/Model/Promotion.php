@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -101,7 +100,7 @@ class Promotion implements PromotionInterface
         return $this->startsAt;
     }
 
-    public function setStartsAt(DateTime $startsAt = null)
+    public function setStartsAt(\DateTime $startsAt = null)
     {
         $this->startsAt = $startsAt;
     }
@@ -111,7 +110,7 @@ class Promotion implements PromotionInterface
         return $this->endsAt;
     }
 
-    public function setEndsAt(DateTime $endsAt = null)
+    public function setEndsAt(\DateTime $endsAt = null)
     {
         $this->endsAt = $endsAt;
     }
@@ -129,6 +128,11 @@ class Promotion implements PromotionInterface
     public function getCoupons()
     {
         return $this->coupons;
+    }
+
+    public function hasCoupons()
+    {
+        return !$this->coupons->isEmpty();
     }
 
     public function hasCoupon(CouponInterface $coupon)
@@ -213,8 +217,18 @@ class Promotion implements PromotionInterface
         return $this->updatedAt;
     }
 
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }

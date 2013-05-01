@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Processor;
 
+use Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\PromotionEliglibilityCheckerInterface;
-use Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface;
 
 /**
  * Process all active promotions.
  *
- * Checks all rules and applies configured actions if rules are eigible.
+ * Checks all rules and applies configured actions if rules are eligible.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -29,7 +29,7 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $checker;
     protected $applicator;
 
-    public function __construct(PromotionRepositoryInterface $repository, PromotionEliglibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
+    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
         $this->repository = $repository;
         $this->checker = $checker;
@@ -38,8 +38,8 @@ class PromotionProcessor implements PromotionProcessorInterface
 
     public function process(PromotionSubjectInterface $subject)
     {
-        foreach ($this->repository->findAll() as $promotion) {
-          if ($this->checker->isEligible($subject, $promotion)) {
+        foreach ($this->repository->findActive() as $promotion) {
+            if ($this->checker->isEligible($subject, $promotion)) {
                 $this->applicator->apply($subject, $promotion);
             }
         }

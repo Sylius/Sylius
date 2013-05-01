@@ -13,7 +13,7 @@ namespace Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -43,28 +43,26 @@ class BuildRuleFormListener implements EventSubscriberInterface
         );
     }
 
-    public function preSetData(DataEvent $event)
+    public function preSetData(FormEvent $event)
     {
         $rule = $event->getData();
-        $form = $event->getForm();
 
         if (null === $rule || null === $rule->getId()) {
             return;
         }
 
-        $this->addConfigurationFields($form, $rule->getType(), $rule->getConfiguration());
+        $this->addConfigurationFields($event->getForm(), $rule->getType(), $rule->getConfiguration());
     }
 
-    public function preBind(DataEvent $event)
+    public function preBind(FormEvent $event)
     {
         $data = $event->getData();
-        $form = $event->getForm();
 
         if (empty($data) || !array_key_exists('type', $data)) {
             return;
         }
 
-        $this->addConfigurationFields($form, $data['type']);
+        $this->addConfigurationFields($event->getForm(), $data['type']);
     }
 
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())

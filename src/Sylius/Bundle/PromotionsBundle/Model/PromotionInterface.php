@@ -11,45 +11,131 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
-use DateTime;
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * Promotion model interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionInterface
+interface PromotionInterface extends TimestampableInterface
 {
-    public function getId();
     public function getName();
     public function setName($name);
     public function getDescription();
-    public function setDescription($desciption);
+    public function setDescription($description);
     public function getUsageLimit();
     public function setUsageLimit($usageLimit);
     public function getUsed();
     public function setUsed($used);
     public function incrementUsed();
     public function getStartsAt();
-    public function setStartsAt(DateTime $startsAt = null);
+    public function setStartsAt(\DateTime $startsAt = null);
     public function getEndsAt();
-    public function setEndsAt(DateTime $endsAt = null);
+    public function setEndsAt(\DateTime $endsAt = null);
+
+    /**
+     * @return Boolean
+     */
     public function isCouponBased();
+
+    /**
+     * @param Boolean $couponBased
+     *
+     * @return self
+     */
     public function setCouponBased($couponBased);
+
+    /**
+     * @return CouponInterface[]
+     */
     public function getCoupons();
+
+    /**
+     * @param CouponInterface $coupon
+     *
+     * @return Boolean
+     */
     public function hasCoupon(CouponInterface $coupon);
+
+    /**
+     * @return Boolean
+     */
+    public function hasCoupons();
+
+    /**
+     * @param CouponInterface $coupon
+     *
+     * @return self
+     */
     public function addCoupon(CouponInterface $coupon);
+
+    /**
+     * @param CouponInterface $coupon
+     *
+     * @return self
+     */
     public function removeCoupon(CouponInterface $coupon);
-    public function hasRules();
+
+    /**
+     * @return RuleInterface[]
+     */
     public function getRules();
+
+    /**
+     * @param RuleInterface $rule
+     *
+     * @return Boolean
+     */
     public function hasRule(RuleInterface $rule);
+
+    /**
+     * @return Boolean
+     */
+    public function hasRules();
+
+    /**
+     * @param RuleInterface $rule
+     *
+     * @return self
+     */
     public function addRule(RuleInterface $rule);
+
+    /**
+     * @param RuleInterface $rule
+     *
+     * @return self
+     */
     public function removeRule(RuleInterface $rule);
-    public function hasActions();
+
+    /**
+     * @return ActionInterface[]
+     */
     public function getActions();
+
+    /**
+     * @param ActionInterface $action
+     *
+     * @return Boolean
+     */
     public function hasAction(ActionInterface $action);
+
+    /**
+     * @return Boolean
+     */
+    public function hasActions();
+
+    /**
+     * @param ActionInterface $action
+     *
+     * @return self
+     */
     public function addAction(ActionInterface $action);
+
+    /**
+     * @param ActionInterface $action
+     *
+     * @return self
+     */
     public function removeAction(ActionInterface $action);
-    public function getUpdatedAt();
-    public function getCreatedAt();
 }

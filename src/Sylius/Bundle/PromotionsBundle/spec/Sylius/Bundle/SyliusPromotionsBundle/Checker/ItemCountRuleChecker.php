@@ -3,8 +3,6 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Checker;
 
 use PHPSpec2\ObjectBehavior;
-use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 
 /**
  * Item count rule checker spec.
@@ -24,7 +22,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
     function it_should_recognize_empty_subject_as_not_eligible($subject)
     {
@@ -34,7 +32,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
     function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured($subject)
     {
@@ -44,7 +42,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
     function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured($subject)
     {
@@ -54,7 +52,7 @@ class ItemCountRuleChecker extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
     function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($subject)
     {

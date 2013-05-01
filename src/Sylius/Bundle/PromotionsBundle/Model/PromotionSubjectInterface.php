@@ -19,7 +19,18 @@ namespace Sylius\Bundle\PromotionsBundle\Model;
  */
 interface PromotionSubjectInterface
 {
+    /**
+     * @return null|CouponInterface
+     */
     public function getPromotionCoupon();
+
+    /**
+     * @return integer
+     */
     public function getPromotionSubjectItemCount();
+
+    /**
+     * @return integer
+     */
     public function getPromotionSubjectItemTotal();
 }

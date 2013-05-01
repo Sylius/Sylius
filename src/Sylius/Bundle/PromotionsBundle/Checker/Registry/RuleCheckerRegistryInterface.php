@@ -20,9 +20,37 @@ use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
  */
 interface RuleCheckerRegistryInterface
 {
+    /**
+     * @return RuleCheckerInterface[]
+     */
     public function getCheckers();
+
+    /**
+     * @param string               $name
+     * @param RuleCheckerInterface $checker
+     *
+     * @return self
+     */
     public function registerChecker($name, RuleCheckerInterface $checker);
+
+    /**
+     * @param string $name
+     *
+     * @return self
+     */
     public function unregisterChecker($name);
+
+    /**
+     * @param string $name
+     *
+     * @return Boolean
+     */
     public function hasChecker($name);
+
+    /**
+     * @param string $name
+     *
+     * @return RuleCheckerInterface
+     */
     public function getChecker($name);
 }
