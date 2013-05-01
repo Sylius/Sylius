@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+
+sylius:
+    payment_method:
+        name:
+            not_blank: "Voer een betalingsmethode naam in."
+            min_length: "Betalingsmethode naam moet minstens {{ limit }} karakters lang zijn."
+            max_length: "Betalingsmethode naam mag niet langer zijn dan {{ limit }} karakters."
+        gateway:
+            not_blank: "Selecteer een betalingsmethode gateway."
