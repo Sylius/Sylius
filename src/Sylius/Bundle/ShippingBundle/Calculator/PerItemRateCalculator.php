@@ -22,9 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class PerItemRateCalculator extends Calculator
 {
     /**
-     * Calculates flat rate per item on the shipment.
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function calculate(ShipmentInterface $shipment)
     {

@@ -11,24 +11,19 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Shipping rate interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShippingMethodInterface
+interface ShippingMethodInterface extends TimestampableInterface
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
     const CATEGORY_REQUIREMENT_MATCH_ANY  = 1;
     const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
-
-    /**
-     * Get shipping method identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * Get shipping category, if any.
@@ -59,7 +54,7 @@ interface ShippingMethodInterface
     /**
      * Set the requirement.
      *
-     * @param integer $requirement
+     * @param integer $categoryRequirement
      */
     public function setCategoryRequirement($categoryRequirement);
 
@@ -134,18 +129,4 @@ interface ShippingMethodInterface
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

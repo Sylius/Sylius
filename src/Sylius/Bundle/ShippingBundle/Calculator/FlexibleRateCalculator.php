@@ -26,7 +26,7 @@ class FlexibleRateCalculator extends Calculator
      * It has defined cost for first item and a separate cost
      * for each additional item.
      *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function calculate(ShipmentInterface $shipment)
     {

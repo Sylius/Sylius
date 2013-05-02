@@ -70,14 +70,14 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * Creation date.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -88,7 +88,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->enabled = true;
         $this->categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
         $this->configuration = array();
     }
 
@@ -269,9 +269,25 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**

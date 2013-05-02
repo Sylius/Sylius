@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -43,7 +43,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param CalculatorRegistryInterface $delegatingCalculator
+     * @param CalculatorRegistryInterface $calculatorRegistry
      * @param FormFactoryInterface        $factory
      */
     public function __construct(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
@@ -66,35 +66,33 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * Add the calculator configuration if any.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
-    public function preSetData(DataEvent $event)
+    public function preSetData(FormEvent $event)
     {
         $method = $event->getData();
-        $form = $event->getForm();
 
         if (null === $method || null === $method->getId()) {
             return;
         }
 
-        $this->addConfigurationFields($form, $method->getCalculator(), $method->getConfiguration());
+        $this->addConfigurationFields($event->getForm(), $method->getCalculator(), $method->getConfiguration());
     }
 
     /**
      * Add the calculator configuration if any.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
-    public function preBind(DataEvent $event)
+    public function preBind(FormEvent $event)
     {
         $data = $event->getData();
-        $form = $event->getForm();
 
         if (empty($data) || !array_key_exists('calculator', $data)) {
             return;
         }
 
-        $this->addConfigurationFields($form, $data['calculator']);
+        $this->addConfigurationFields($event->getForm(), $data['calculator']);
     }
 
     /**
