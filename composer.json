@@ -79,7 +79,7 @@
         ]
     },
     "autoload": {
-        "psr-0": { "Sylius\\": "src/" }
+        "psr-0": { "Sylius\\": "src/", "": "src/" }
     },
     "config": {
         "bin-dir": "bin"
