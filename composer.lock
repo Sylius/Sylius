@@ -344,12 +344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "4abe8f7602e0f4079848950190fb6798781c94c7"
+                "reference": "ac0c0630e63ae5b3c569996aac8f174a74ba599b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/4abe8f7602e0f4079848950190fb6798781c94c7",
-                "reference": "4abe8f7602e0f4079848950190fb6798781c94c7",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/ac0c0630e63ae5b3c569996aac8f174a74ba599b",
+                "reference": "ac0c0630e63ae5b3c569996aac8f174a74ba599b",
                 "shasum": ""
             },
             "require": {
@@ -399,7 +399,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-04-20 08:33:51"
+            "time": "2013-05-01 17:16:27"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -408,12 +408,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "v1.2.0"
+                "reference": "80a7198c470d74755db64aa3f75898f3808778b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/v1.2.0",
-                "reference": "v1.2.0",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/80a7198c470d74755db64aa3f75898f3808778b7",
+                "reference": "80a7198c470d74755db64aa3f75898f3808778b7",
                 "shasum": ""
             },
             "require": {
@@ -469,7 +469,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2013-03-25 20:13:59"
+            "time": "2013-04-30 09:04:17"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -660,12 +660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "ad7b5871bf47040f2d9955cd00409c5a13e3f3f4"
+                "reference": "6063fe4adf3b1d8c0d608f103f55a5562a579391"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ad7b5871bf47040f2d9955cd00409c5a13e3f3f4",
-                "reference": "ad7b5871bf47040f2d9955cd00409c5a13e3f3f4",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/6063fe4adf3b1d8c0d608f103f55a5562a579391",
+                "reference": "6063fe4adf3b1d8c0d608f103f55a5562a579391",
                 "shasum": ""
             },
             "require": {
@@ -722,7 +722,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-04-23 20:26:59"
+            "time": "2013-05-01 09:01:17"
         },
         {
             "name": "friendsofsymfony/rest",
@@ -977,12 +977,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "a9c1c8b76abe4622b285dcd7aa342cab9dfb6de6"
+                "reference": "6108cba60e2bca334c5a0e4e70829562315c0287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a9c1c8b76abe4622b285dcd7aa342cab9dfb6de6",
-                "reference": "a9c1c8b76abe4622b285dcd7aa342cab9dfb6de6",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/6108cba60e2bca334c5a0e4e70829562315c0287",
+                "reference": "6108cba60e2bca334c5a0e4e70829562315c0287",
                 "shasum": ""
             },
             "require": {
@@ -1014,7 +1014,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2013-04-23 12:35:55"
+            "time": "2013-04-30 12:39:11"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1022,12 +1022,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "91d608d5f4a437b47df4e482a964ef534da1e8a8"
+                "reference": "e4ede013a1dff69c82db5035d5028f2798c770c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/91d608d5f4a437b47df4e482a964ef534da1e8a8",
-                "reference": "91d608d5f4a437b47df4e482a964ef534da1e8a8",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/e4ede013a1dff69c82db5035d5028f2798c770c3",
+                "reference": "e4ede013a1dff69c82db5035d5028f2798c770c3",
                 "shasum": ""
             },
             "require": {
@@ -1093,7 +1093,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-04-26 14:37:18"
+            "time": "2013-05-02 17:52:38"
         },
         {
             "name": "imagine/Imagine",
@@ -1906,17 +1906,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "8f84c396927809e885f7a17ef3737358c001d78f"
+                "reference": "a4d6b338e47920880d1c972143ef39ffb564665f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/8f84c396927809e885f7a17ef3737358c001d78f",
-                "reference": "8f84c396927809e885f7a17ef3737358c001d78f",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/a4d6b338e47920880d1c972143ef39ffb564665f",
+                "reference": "a4d6b338e47920880d1c972143ef39ffb564665f",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu": "2.0.*",
-                "symfony/framework-bundle": ">=2.0,<2.3-dev"
+                "symfony/framework-bundle": ">=2.0,<2.4-dev"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1951,7 +1951,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2013-03-18 17:08:00"
+            "time": "2013-05-01 01:55:58"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2481,17 +2481,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "dev-master",
+            "version": "2.2.x-dev",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioDistributionBundle.git",
-                "reference": "4a2c803dc8db79952ad5e71783c16178427bbc02"
+                "reference": "v2.3.0-BETA1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/4a2c803dc8db79952ad5e71783c16178427bbc02",
-                "reference": "4a2c803dc8db79952ad5e71783c16178427bbc02",
+                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/v2.3.0-BETA1",
+                "reference": "v2.3.0-BETA1",
                 "shasum": ""
             },
             "require": {
@@ -2593,12 +2593,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "e77eb358a1aa7157afb922f33e2afc22f6a7bef2"
+                "reference": "a64528efec37173a6dabaedb0e678beffdb446f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e77eb358a1aa7157afb922f33e2afc22f6a7bef2",
-                "reference": "e77eb358a1aa7157afb922f33e2afc22f6a7bef2",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/a64528efec37173a6dabaedb0e678beffdb446f0",
+                "reference": "a64528efec37173a6dabaedb0e678beffdb446f0",
                 "shasum": ""
             },
             "require": {
@@ -2607,7 +2607,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -2617,7 +2617,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -2634,7 +2634,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2013-04-11 10:22:54"
+            "time": "2013-04-30 17:36:15"
         },
         {
             "name": "sylius/addressing-bundle",
@@ -2643,12 +2643,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
-                "reference": "1ac2e847ce72f84f1b19078b60d03b0cf24e2082"
+                "reference": "dcd6e121dbc194cabb79f1fd6b7545ae226112c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/1ac2e847ce72f84f1b19078b60d03b0cf24e2082",
-                "reference": "1ac2e847ce72f84f1b19078b60d03b0cf24e2082",
+                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/dcd6e121dbc194cabb79f1fd6b7545ae226112c3",
+                "reference": "dcd6e121dbc194cabb79f1fd6b7545ae226112c3",
                 "shasum": ""
             },
             "require": {
@@ -2697,7 +2697,7 @@
                 "shop",
                 "zones"
             ],
-            "time": "2013-04-05 13:49:47"
+            "time": "2013-05-01 08:37:53"
         },
         {
             "name": "sylius/assortment-bundle",
@@ -2706,12 +2706,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAssortmentBundle.git",
-                "reference": "52f3065ee59e9a4ba8ca72e48c9a330bad8bdb2b"
+                "reference": "f9462d0452a8eb4165271c950eb8e8f3c9f45dcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAssortmentBundle/zipball/52f3065ee59e9a4ba8ca72e48c9a330bad8bdb2b",
-                "reference": "52f3065ee59e9a4ba8ca72e48c9a330bad8bdb2b",
+                "url": "https://api.github.com/repos/Sylius/SyliusAssortmentBundle/zipball/f9462d0452a8eb4165271c950eb8e8f3c9f45dcc",
+                "reference": "f9462d0452a8eb4165271c950eb8e8f3c9f45dcc",
                 "shasum": ""
             },
             "require": {
@@ -2760,7 +2760,7 @@
                 "products",
                 "shop"
             ],
-            "time": "2013-04-27 12:32:13"
+            "time": "2013-05-02 12:39:04"
         },
         {
             "name": "sylius/cart-bundle",
@@ -2891,12 +2891,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusInventoryBundle.git",
-                "reference": "50420470ebef667a4025f99ab6f554240b32bf4c"
+                "reference": "c16315228993a9b99f24c35e1c603b037a8b643e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusInventoryBundle/zipball/50420470ebef667a4025f99ab6f554240b32bf4c",
-                "reference": "50420470ebef667a4025f99ab6f554240b32bf4c",
+                "url": "https://api.github.com/repos/Sylius/SyliusInventoryBundle/zipball/c16315228993a9b99f24c35e1c603b037a8b643e",
+                "reference": "c16315228993a9b99f24c35e1c603b037a8b643e",
                 "shasum": ""
             },
             "require": {
@@ -2916,7 +2916,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Sylius\\Bundle\\InventoryBundle": ""
+                    "Sylius\\Bundle\\InventoryBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2935,14 +2935,15 @@
                 }
             ],
             "description": "Flexible inventory management for Symfony2 applications.",
-            "homepage": "http://sylius.org",
+            "homepage": "http://sylius.com",
             "keywords": [
                 "ecommerce",
                 "inventory",
                 "shop",
-                "stock"
+                "stock",
+                "sylius"
             ],
-            "time": "2013-02-03 18:20:49"
+            "time": "2013-04-30 10:33:14"
         },
         {
             "name": "sylius/money-bundle",
@@ -3012,12 +3013,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPaymentsBundle.git",
-                "reference": "bbf2ab65b45520c0140d54e4215ff64442f070ea"
+                "reference": "016eccee6fc45e06f87d009198d79ea903183e0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPaymentsBundle/zipball/bbf2ab65b45520c0140d54e4215ff64442f070ea",
-                "reference": "bbf2ab65b45520c0140d54e4215ff64442f070ea",
+                "url": "https://api.github.com/repos/Sylius/SyliusPaymentsBundle/zipball/016eccee6fc45e06f87d009198d79ea903183e0a",
+                "reference": "016eccee6fc45e06f87d009198d79ea903183e0a",
                 "shasum": ""
             },
             "require": {
@@ -3062,7 +3063,7 @@
                 "payment",
                 "payments"
             ],
-            "time": "2013-04-03 18:40:12"
+            "time": "2013-05-01 18:50:07"
         },
         {
             "name": "sylius/promotions-bundle",
@@ -3207,12 +3208,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c"
+                "reference": "a337bebd795e7059e4232d26f46f5de174c01ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/1b6108db1cf4f66328b32c4f8eae621fe05be84c",
-                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/a337bebd795e7059e4232d26f46f5de174c01ee1",
+                "reference": "a337bebd795e7059e4232d26f46f5de174c01ee1",
                 "shasum": ""
             },
             "require": {
@@ -3232,7 +3233,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Sylius\\Bundle\\SalesBundle": ""
+                    "Sylius\\Bundle\\SalesBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3251,15 +3252,16 @@
                 }
             ],
             "description": "Sales order management for Symfony2 applications.",
-            "homepage": "http://Sylius.org",
+            "homepage": "http://sylius.com",
             "keywords": [
                 "ecommerce",
                 "order",
                 "orders",
                 "sales",
-                "shop"
+                "shop",
+                "sylius"
             ],
-            "time": "2013-04-08 16:42:46"
+            "time": "2013-05-01 09:13:39"
         },
         {
             "name": "sylius/settings-bundle",
@@ -3268,12 +3270,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSettingsBundle.git",
-                "reference": "a1dc42b714ee5ef614c6b9dbf19c9c9c547435c1"
+                "reference": "1f7f7846656cf825f3db36fdcce83069beac5d9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSettingsBundle/zipball/a1dc42b714ee5ef614c6b9dbf19c9c9c547435c1",
-                "reference": "a1dc42b714ee5ef614c6b9dbf19c9c9c547435c1",
+                "url": "https://api.github.com/repos/Sylius/SyliusSettingsBundle/zipball/1f7f7846656cf825f3db36fdcce83069beac5d9c",
+                "reference": "1f7f7846656cf825f3db36fdcce83069beac5d9c",
                 "shasum": ""
             },
             "require": {
@@ -3323,7 +3325,7 @@
                 "shop",
                 "webshop"
             ],
-            "time": "2013-04-01 10:05:57"
+            "time": "2013-05-01 18:47:59"
         },
         {
             "name": "sylius/shipping-bundle",
@@ -3332,12 +3334,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "9bd7a26089ec207138ab3c5b074ba9c9a1a29248"
+                "reference": "7fd8da4bf51771e8f87c08e7f545eacf28d6bfd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/9bd7a26089ec207138ab3c5b074ba9c9a1a29248",
-                "reference": "9bd7a26089ec207138ab3c5b074ba9c9a1a29248",
+                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/7fd8da4bf51771e8f87c08e7f545eacf28d6bfd0",
+                "reference": "7fd8da4bf51771e8f87c08e7f545eacf28d6bfd0",
                 "shasum": ""
             },
             "require": {
@@ -3359,7 +3361,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Sylius\\Bundle\\ShippingBundle": ""
+                    "Sylius\\Bundle\\ShippingBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3378,16 +3380,17 @@
                 }
             ],
             "description": "Flexible shipping system for Symfony2 ecommerce applications.",
-            "homepage": "http://sylius.org",
+            "homepage": "http://sylius.com",
             "keywords": [
                 "delivery",
                 "ecommerce",
                 "shipments",
                 "shipping",
                 "shop",
+                "sylius",
                 "webshop"
             ],
-            "time": "2013-03-12 23:07:49"
+            "time": "2013-05-02 12:37:33"
         },
         {
             "name": "sylius/taxation-bundle",
@@ -3459,12 +3462,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxonomiesBundle.git",
-                "reference": "287e975d9b38c89b7cbf5ac70ac4801626b13902"
+                "reference": "1f0c6b12555c97023b8a2ea679246e49a88f3dc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/287e975d9b38c89b7cbf5ac70ac4801626b13902",
-                "reference": "287e975d9b38c89b7cbf5ac70ac4801626b13902",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/1f0c6b12555c97023b8a2ea679246e49a88f3dc1",
+                "reference": "1f0c6b12555c97023b8a2ea679246e49a88f3dc1",
                 "shasum": ""
             },
             "require": {
@@ -3515,7 +3518,7 @@
                 "taxonomies",
                 "taxonomy"
             ],
-            "time": "2013-04-27 12:01:22"
+            "time": "2013-05-01 15:37:19"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -3645,17 +3648,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/SwiftmailerBundle.git",
-                "reference": "v2.2.1"
+                "reference": "ff109ff15bbd2b87fc03a3b2e5b934aeb79260ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/ff109ff15bbd2b87fc03a3b2e5b934aeb79260ce",
+                "reference": "ff109ff15bbd2b87fc03a3b2e5b934aeb79260ce",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "swiftmailer/swiftmailer": ">=4.2.0,<4.4-dev",
+                "swiftmailer/swiftmailer": ">=4.2.0,<5.1-dev",
                 "symfony/swiftmailer-bridge": ">=2.1,<3.0"
             },
             "require-dev": {
@@ -3691,7 +3694,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2013-03-25 20:02:12"
+            "time": "2013-05-01 07:16:50"
         },
         {
             "name": "symfony/symfony",
@@ -3699,12 +3702,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "d29bf50dc88c0dd8b4e04929364714ba98047cdd"
+                "reference": "9f02b0599728434d1119f2b53793c5b180f811cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/d29bf50dc88c0dd8b4e04929364714ba98047cdd",
-                "reference": "d29bf50dc88c0dd8b4e04929364714ba98047cdd",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/9f02b0599728434d1119f2b53793c5b180f811cf",
+                "reference": "9f02b0599728434d1119f2b53793c5b180f811cf",
                 "shasum": ""
             },
             "require": {
@@ -3790,7 +3793,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-04-30 07:15:50"
+            "time": "2013-05-01 07:15:36"
         },
         {
             "name": "twig/extensions",
@@ -3845,12 +3848,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "536ea37d1f87a882ce8a5d62680caf881ecaf6fe"
+                "reference": "7f70bbf77581c25a5b225823e2dde578b63fddb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/536ea37d1f87a882ce8a5d62680caf881ecaf6fe",
-                "reference": "536ea37d1f87a882ce8a5d62680caf881ecaf6fe",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/7f70bbf77581c25a5b225823e2dde578b63fddb3",
+                "reference": "7f70bbf77581c25a5b225823e2dde578b63fddb3",
                 "shasum": ""
             },
             "require": {
@@ -3859,7 +3862,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -3886,7 +3889,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-04-26 09:34:36"
+            "time": "2013-05-01 19:03:39"
         },
         {
             "name": "white-october/pagerfanta-bundle",
