@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Entity;
 
 use Sylius\Bundle\AddressingBundle\Entity\Address as BaseAddress;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Address entity.
@@ -26,4 +27,22 @@ class Address extends BaseAddress
      * @var UserInterface
      */
      protected $user;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUser(UserInterface $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
