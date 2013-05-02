@@ -883,7 +883,7 @@
       <trans-unit id="60b7a67797138ca448d310e9715553e3b713286a" resname="sylius.payment_method.gateway">
         <jms:reference-file line="12">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
         <source>sylius.payment_method.gateway</source>
-        <target>bramka</target>
+        <target>Bramka</target>
       </trans-unit>
       <trans-unit id="3820d17fed996a22dd35c99281fc098e8d447268" resname="sylius.payment_method.id">
         <jms:reference-file line="10">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
