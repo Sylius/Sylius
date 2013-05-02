@@ -62,11 +62,12 @@ abstract class MenuBuilder
      * Translate label.
      *
      * @param string $label
+     * @param array $parameters
      *
      * @return string
      */
-    protected function translate($label)
+    protected function translate($label, $parameters = array())
     {
-        return $this->translator->trans(/** @Ignore */ $label, array(), 'menu');
+        return $this->translator->trans(/** @Ignore */ $label, $parameters, 'menu');
     }
 }

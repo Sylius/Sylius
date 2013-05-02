@@ -9,7 +9,7 @@ sylius:
                 logout: Wyloguj
                 register: Zarejestruj
                 administration: Administracja
-                cart: Zobacz koszyk
+                cart: Zobacz koszyk (%items%) %total%
             social:
                 github: GitHub
                 twitter: Twitter
