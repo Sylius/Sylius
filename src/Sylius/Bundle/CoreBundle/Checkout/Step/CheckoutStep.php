@@ -67,6 +67,7 @@ abstract class CheckoutStep extends ControllerStep
      */
     protected function isUserLoggedIn()
     {
-        return is_object($this->get('security.context')->getToken()->getUser());
+        $token = $this->get('security.context')->getToken();
+        return $token !== null AND is_object($token->getUser());
     }
 }
