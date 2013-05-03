@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $(document).ready(function() {
         toogleChoices($('#sylius_property_type').val());
         $('#sylius_property_type').change(function (e) {
@@ -38,7 +40,7 @@
 
     function toogleChoices(value)
     {
-       if (value == 'choice') {
+       if (value === 'choice') {
            $('.property-choices-container').show();
        } else {
            $('.property-choices-container').hide();

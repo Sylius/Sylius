@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $(document).ready(function() {
         $('select[name$="[country]"]').on('change', function() {
             var provinceContainer = $(this).parents('div.well').find('div.province-container');
