@@ -7,12 +7,14 @@
  * file that was distributed with this source code.
  */
 (function ( $ ) {
+    'use strict';
+
     $(document).ready(function() {
         $("select.country-select").each(function () {
             var $this = $(this);
 
             $this.on('change', function() {
-                provinceContainer = $('div.province-container');
+                var provinceContainer = $('div.province-container');
 
                 $.get(provinceContainer.attr('data-url'), {countryId: $this.val()}, function (response) {
                     if (!response.content) {
