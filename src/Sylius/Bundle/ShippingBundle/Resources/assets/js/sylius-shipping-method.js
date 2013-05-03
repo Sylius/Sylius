@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 (function ($) {
+    'use strict';
+
     $(document).ready(function() {
         $('#sylius_shipping_method_calculator').handlePrototypes();
     });
