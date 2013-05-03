@@ -97,7 +97,10 @@ class FrontendMenuBuilder extends MenuBuilder
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart')),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
-        ))->setLabel(sprintf('View cart (%s) %s', $cart->getTotalItems(), $this->moneyExtension->formatMoney($cart->getTotal())));
+        ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
+                    '%items%' => $cart->getTotalItems(),
+                    '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
+                )));
 
         if ($this->securityContext->isGranted('ROLE_USER')) {
             $menu->addChild('logout', array(

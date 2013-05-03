@@ -883,7 +883,7 @@
       <trans-unit id="60b7a67797138ca448d310e9715553e3b713286a" resname="sylius.payment_method.gateway">
         <jms:reference-file line="12">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
         <source>sylius.payment_method.gateway</source>
-        <target>bramka</target>
+        <target>Bramka</target>
       </trans-unit>
       <trans-unit id="3820d17fed996a22dd35c99281fc098e8d447268" resname="sylius.payment_method.id">
         <jms:reference-file line="10">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
@@ -1153,7 +1153,7 @@
       <trans-unit id="b35e37dca88a4082b06aadca2193ea164d8bfb05" resname="sylius.promotion.update_header">
         <jms:reference-file line="17">Backend/Promotion/update.html.twig</jms:reference-file>
         <source>sylius.promotion.update_header</source>
-        <target>Kończenie promocji</target>
+        <target>Edycja promocji</target>
       </trans-unit>
       <trans-unit id="a6170b2c5ca0d668eeefb52f2532d3b54651fad2" resname="sylius.promotion.updated_at">
         <jms:reference-file line="32">Backend/Promotion/show.html.twig</jms:reference-file>
@@ -1617,12 +1617,12 @@
       <trans-unit id="0067390f5811952129f056d08b4bc3603b2322ca" resname="sylius.tax_rate.amount">
         <jms:reference-file line="29">Backend/TaxRate/show.html.twig</jms:reference-file>
         <source>sylius.tax_rate.amount</source>
-        <target>Ilość</target>
+        <target>Wartość</target>
       </trans-unit>
       <trans-unit id="4effce8e3e8d1012438aa0f6d2297051aad21248" resname="sylius.tax_rate.category">
         <jms:reference-file line="26">Backend/TaxRate/show.html.twig</jms:reference-file>
         <source>sylius.tax_rate.category</source>
-        <target>sylius.tax_rate.category</target>
+        <target>Kategoria</target>
       </trans-unit>
       <trans-unit id="824229a49b92ac233b1e16e97ff5da7323894f24" resname="sylius.tax_rate.create">
         <jms:reference-file line="13">Backend/TaxRate/index.html.twig</jms:reference-file>
@@ -1668,7 +1668,7 @@
       <trans-unit id="cea4b707d401a93e3e55c895c38d74a2e71d7bab" resname="sylius.tax_rate.zone">
         <jms:reference-file line="28">Backend/TaxRate/show.html.twig</jms:reference-file>
         <source>sylius.tax_rate.zone</source>
-        <target>sylius.tax_rate.zone</target>
+        <target>Strefa</target>
       </trans-unit>
       <trans-unit id="7a70e1e3815e3adff549ea21fd75ba225c5b3474" resname="sylius.taxon.create">
         <jms:reference-file line="20">Backend/Taxonomy/macros.html.twig</jms:reference-file>

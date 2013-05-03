@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    'use strict';
+
     $('a[data-collection-button="add"]').on('click', function (e) {
         var collectionContainer = $('#' + $(this).data('collection'));
         var lastElementNumber = (collectionContainer.children().length) - 1;
