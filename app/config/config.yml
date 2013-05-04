@@ -27,7 +27,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle']
+    bundles:        ['SyliusWebBundle', 'FOSCommentBundle']
     filters:
         cssrewrite: ~
 
@@ -101,3 +101,10 @@ liip_imagine:
         sylius_610x600:
             filters:
                 thumbnail: { size: [610, 600], mode: outbound }
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: Ant\Bundle\CommentBundle\Entity\Comment
+            thread: Ant\Bundle\CommentBundle\Entity\Thread

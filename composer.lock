@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6365d28e44eaab3ccef0f0dfac615471",
+    "hash": "0eb600e0d6c96262ddd30ad04466666c",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -344,12 +344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "ac0c0630e63ae5b3c569996aac8f174a74ba599b"
+                "reference": "faacbe7fcb324101d80739ab91aae98d004344f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/ac0c0630e63ae5b3c569996aac8f174a74ba599b",
-                "reference": "ac0c0630e63ae5b3c569996aac8f174a74ba599b",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/faacbe7fcb324101d80739ab91aae98d004344f4",
+                "reference": "faacbe7fcb324101d80739ab91aae98d004344f4",
                 "shasum": ""
             },
             "require": {
@@ -399,7 +399,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-05-01 17:16:27"
+            "time": "2013-05-04 12:09:27"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -408,12 +408,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "80a7198c470d74755db64aa3f75898f3808778b7"
+                "reference": "9218b4116e86b1d278564b8550fb2f53eb400093"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/80a7198c470d74755db64aa3f75898f3808778b7",
-                "reference": "80a7198c470d74755db64aa3f75898f3808778b7",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/9218b4116e86b1d278564b8550fb2f53eb400093",
+                "reference": "9218b4116e86b1d278564b8550fb2f53eb400093",
                 "shasum": ""
             },
             "require": {
@@ -469,7 +469,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2013-04-30 09:04:17"
+            "time": "2013-05-04 07:57:29"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -660,12 +660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "6063fe4adf3b1d8c0d608f103f55a5562a579391"
+                "reference": "209090d338b2bacf2a7fbde3c57fe51702d1b295"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/6063fe4adf3b1d8c0d608f103f55a5562a579391",
-                "reference": "6063fe4adf3b1d8c0d608f103f55a5562a579391",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/209090d338b2bacf2a7fbde3c57fe51702d1b295",
+                "reference": "209090d338b2bacf2a7fbde3c57fe51702d1b295",
                 "shasum": ""
             },
             "require": {
@@ -722,7 +722,81 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-05-01 09:01:17"
+            "time": "2013-05-04 11:39:37"
+        },
+        {
+            "name": "friendsofsymfony/comment-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/CommentBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSCommentBundle.git",
+                "reference": "1c8e61277b8caa88c58968a0e740460c79b903f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCommentBundle/zipball/1c8e61277b8caa88c58968a0e740460c79b903f0",
+                "reference": "1c8e61277b8caa88c58968a0e740460c79b903f0",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofsymfony/rest": "0.8.*@dev",
+                "friendsofsymfony/rest-bundle": ">=0.11,<0.13-dev",
+                "jms/serializer-bundle": ">=0.11,<0.13-dev",
+                "php": ">=5.3.2",
+                "sensio/framework-extra-bundle": ">=2.1,<2.4-dev",
+                "symfony/symfony": ">=2.1,<2.4-dev"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "1.2.*@dev",
+                "doctrine/orm": "2.3.*@stable",
+                "friendsofsymfony/user-bundle": "1.*",
+                "jms/di-extra-bundle": "1.3.*@dev",
+                "kriswallsmith/assetic": "1.1.*@dev",
+                "ornicar/akismet-bundle": "dev-master",
+                "symfony/assetic-bundle": "2.1.*@dev"
+            },
+            "suggest": {
+                "friendsofsymfony/user-bundle": "Allows for user integration.",
+                "ornicar/akismet-bundle": "Integrate Akismet for spamdetection."
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\CommentBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Nagel",
+                    "email": "tim@nagel.com.au"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSCommentBundle/contributors"
+                },
+                {
+                    "name": "Alexander Mols",
+                    "email": "iam.asm89@gmail.com"
+                }
+            ],
+            "description": "This Bundle provides threaded comment functionality for Symfony2 applications",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "comment",
+                "forum",
+                "threads"
+            ],
+            "time": "2013-05-03 01:26:41"
         },
         {
             "name": "friendsofsymfony/rest",
@@ -1022,12 +1096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "e4ede013a1dff69c82db5035d5028f2798c770c3"
+                "reference": "9ff77bf1a13b3847a09e1dcf6d7e27cdeab89f6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/e4ede013a1dff69c82db5035d5028f2798c770c3",
-                "reference": "e4ede013a1dff69c82db5035d5028f2798c770c3",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/9ff77bf1a13b3847a09e1dcf6d7e27cdeab89f6b",
+                "reference": "9ff77bf1a13b3847a09e1dcf6d7e27cdeab89f6b",
                 "shasum": ""
             },
             "require": {
@@ -1093,7 +1167,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-05-02 17:52:38"
+            "time": "2013-05-04 12:20:35"
         },
         {
             "name": "imagine/Imagine",
@@ -2185,12 +2259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "b264026cba83b4f02ebea7d908a6340a9fd010ac"
+                "reference": "1eed379a3b7c31f698e49fa7a822a536e94c31f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b264026cba83b4f02ebea7d908a6340a9fd010ac",
-                "reference": "b264026cba83b4f02ebea7d908a6340a9fd010ac",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1eed379a3b7c31f698e49fa7a822a536e94c31f5",
+                "reference": "1eed379a3b7c31f698e49fa7a822a536e94c31f5",
                 "shasum": ""
             },
             "require": {
@@ -2239,7 +2313,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-04-24 15:45:58"
+            "time": "2013-05-03 09:05:12"
         },
         {
             "name": "nikic/php-parser",
@@ -2524,6 +2598,53 @@
                 "distribution"
             ],
             "time": "2013-04-16 15:18:14"
+        },
+        {
+            "name": "sensio/framework-extra-bundle",
+            "version": "dev-master",
+            "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensio/SensioFrameworkExtraBundle.git",
+                "reference": "v2.3.0-BETA1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensio/SensioFrameworkExtraBundle/zipball/v2.3.0-BETA1",
+                "reference": "v2.3.0-BETA1",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.2,<3.0",
+                "symfony/framework-bundle": ">=2.2,<3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sensio\\Bundle\\FrameworkExtraBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "This bundle provides a way to configure your controllers with annotations",
+            "keywords": [
+                "annotations",
+                "controllers"
+            ],
+            "time": "2013-04-05 07:02:59"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -3702,12 +3823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "9f02b0599728434d1119f2b53793c5b180f811cf"
+                "reference": "cf35eb8ccb43557880c988ccf65d50fa47052f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/9f02b0599728434d1119f2b53793c5b180f811cf",
-                "reference": "9f02b0599728434d1119f2b53793c5b180f811cf",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/cf35eb8ccb43557880c988ccf65d50fa47052f12",
+                "reference": "cf35eb8ccb43557880c988ccf65d50fa47052f12",
                 "shasum": ""
             },
             "require": {
@@ -3793,7 +3914,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-05-01 07:15:36"
+            "time": "2013-05-03 14:19:45"
         },
         {
             "name": "twig/extensions",
@@ -4236,12 +4357,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkSelenium2Driver.git",
-                "reference": "cb343097500c92736aa68656774277fba7dde234"
+                "reference": "49f5a6d8220048899cb12737ed1fe7496f4ceffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/cb343097500c92736aa68656774277fba7dde234",
-                "reference": "cb343097500c92736aa68656774277fba7dde234",
+                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/49f5a6d8220048899cb12737ed1fe7496f4ceffe",
+                "reference": "49f5a6d8220048899cb12737ed1fe7496f4ceffe",
                 "shasum": ""
             },
             "require": {
@@ -4286,7 +4407,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2013-04-17 14:09:11"
+            "time": "2013-05-04 17:20:40"
         },
         {
             "name": "behat/symfony2-extension",
@@ -4557,6 +4678,7 @@
     "stability-flags": {
         "mathiasverraes/money": 20,
         "fsc/hateoas-bundle": 20,
+        "friendsofsymfony/comment-bundle": 20,
         "phpspec/phpspec2": 20
     },
     "platform": {

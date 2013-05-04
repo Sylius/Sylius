@@ -72,6 +72,8 @@ class SyliusKernel extends Kernel
             //Ant
             new Ant\Bundle\WebBundle\AntWebBundle(),
             new Ant\Bundle\CoreBundle\AntCoreBundle(),
+            new Ant\Bundle\CommentBundle\AntCommentBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
