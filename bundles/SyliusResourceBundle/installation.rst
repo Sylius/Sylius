@@ -45,7 +45,7 @@ Registering model as resource
 
 .. code-block:: yaml
 
-    sylius_resources:
+    sylius_resource:
         resources:
             app.user:
                 driver: doctrine/orm
