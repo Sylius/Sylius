@@ -70,8 +70,6 @@ class SyliusKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
 
             //Ant
-            new Ant\Bundle\WebBundle\AntWebBundle(),
-            new Ant\Bundle\CoreBundle\AntCoreBundle(),
             new Ant\Bundle\CommentBundle\AntCommentBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
         );
