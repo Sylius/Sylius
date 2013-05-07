@@ -3,6 +3,7 @@ sylius_core:
 
 sylius_money:
     currency: %sylius.currency%
+    locale: %sylius.locale%
 
 sylius_cart:
     driver: doctrine/orm
