@@ -3,6 +3,7 @@ imports:
 
 framework:
     test: ~
+    default_locale:  "en"
     session:
         storage_id: session.storage.mock_file
 

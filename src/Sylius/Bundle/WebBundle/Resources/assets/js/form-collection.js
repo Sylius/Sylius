@@ -9,6 +9,8 @@
 
 //; here is caused of twitter bootstrap do not have ; at the end of file
 ;(function ( $ ) {
+    'use strict';
+
     $(document).ready(function() {
         $('a[data-collection-button="add"]').on('click', function (e) {
             e.preventDefault();
