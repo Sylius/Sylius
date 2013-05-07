@@ -27,7 +27,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle', 'FOSCommentBundle']
+    bundles:        ['SyliusWebBundle', 'FOSCommentBundle', 'AntWebBundle' ]
     filters:
         cssrewrite: ~
 
@@ -55,7 +55,7 @@ stof_doctrine_extensions:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Sylius\Bundle\CoreBundle\Entity\User
+    user_class: Ant\Bundle\CoreBundle\Entity\User
 
 swiftmailer:
     transport: %sylius.mailer.transport%

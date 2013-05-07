@@ -82,12 +82,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "b5716ea776f349a0fedcf0e7d032386c1f696f76"
+                "reference": "4116eff37635219101a22c9732f409633eb07c5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/b5716ea776f349a0fedcf0e7d032386c1f696f76",
-                "reference": "b5716ea776f349a0fedcf0e7d032386c1f696f76",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/4116eff37635219101a22c9732f409633eb07c5d",
+                "reference": "4116eff37635219101a22c9732f409633eb07c5d",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -140,7 +140,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2013-03-17 13:59:02"
+            "time": "2013-05-04 23:23:40"
         },
         {
             "name": "doctrine/collections",
@@ -2710,16 +2710,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "dev-master",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "a64528efec37173a6dabaedb0e678beffdb446f0"
+                "reference": "v5.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/a64528efec37173a6dabaedb0e678beffdb446f0",
-                "reference": "a64528efec37173a6dabaedb0e678beffdb446f0",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/v5.0.0",
+                "reference": "v5.0.0",
                 "shasum": ""
             },
             "require": {
@@ -2755,7 +2755,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2013-04-30 17:36:15"
+            "time": "2013-04-30 17:35:30"
         },
         {
             "name": "sylius/addressing-bundle",
@@ -3969,12 +3969,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "7f70bbf77581c25a5b225823e2dde578b63fddb3"
+                "reference": "5b94270c8c452aafd6a5415238edbe4f71136681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/7f70bbf77581c25a5b225823e2dde578b63fddb3",
-                "reference": "7f70bbf77581c25a5b225823e2dde578b63fddb3",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/5b94270c8c452aafd6a5415238edbe4f71136681",
+                "reference": "5b94270c8c452aafd6a5415238edbe4f71136681",
                 "shasum": ""
             },
             "require": {
@@ -4010,7 +4010,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-05-01 19:03:39"
+            "time": "2013-05-05 09:25:56"
         },
         {
             "name": "white-october/pagerfanta-bundle",

@@ -24,7 +24,7 @@ sylius_assortment:
     driver: doctrine/orm
     classes:
         product:
-            model: Sylius\Bundle\CoreBundle\Entity\Product
+            model: Ant\Bundle\CoreBundle\Entity\Product
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
             repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
@@ -72,7 +72,7 @@ sylius_payments:
         stripe: Stripe
     classes:
         credit_card_owner:
-            model: Sylius\Bundle\CoreBundle\Entity\User
+            model: Ant\Bundle\CoreBundle\Entity\User
 
 sylius_addressing:
     driver: doctrine/orm
@@ -93,4 +93,4 @@ sylius_resource:
         sylius.user:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Entity\User
+                model: Ant\Bundle\CoreBundle\Entity\User
