@@ -112,7 +112,7 @@ class LoadProductsData extends DataFixture
 
         $this->addMasterVariant($product);
 
-        $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
+        //$this->setTaxons($product, array('T-Shirts', 'SuperTees'));
 
         // T-Shirt brand.
         $randomBrand = $this->faker->randomElement(array('Nike', 'Adidas', 'Puma', 'Potato'));
@@ -155,7 +155,7 @@ class LoadProductsData extends DataFixture
 
         $this->addMasterVariant($product);
 
-        $this->setTaxons($product, array('Stickers', 'Stickypicky'));
+        //$this->setTaxons($product, array('Stickers', 'Stickypicky'));
 
         // Sticker resolution.
         $randomResolution = $this->faker->randomElement(array('Waka waka', 'FULL HD', '300DPI', '200DPI'));
@@ -192,7 +192,7 @@ class LoadProductsData extends DataFixture
 
         $this->addMasterVariant($product);
 
-        $this->setTaxons($product, array('Mugs', 'Mugland'));
+        //$this->setTaxons($product, array('Mugs', 'Mugland'));
 
         $randomMugMaterial = $this->faker->randomElement(array('Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand'));
         $this->addProperty($product, 'Mug material', $randomMugMaterial);
@@ -227,7 +227,7 @@ class LoadProductsData extends DataFixture
 
         $this->addMasterVariant($product, $isbn);
 
-        $this->setTaxons($product, array('Books', 'Bookmania'));
+        //$this->setTaxons($product, array('Books', 'Bookmania'));
 
         $this->addProperty($product, 'Book author', $author);
         $this->addProperty($product, 'Book ISBN', $isbn);
