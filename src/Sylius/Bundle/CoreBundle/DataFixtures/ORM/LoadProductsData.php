@@ -102,7 +102,7 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
+        $product->setTaxCategory($this->getTaxCategory('Podatek'));
         $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
@@ -145,7 +145,7 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
+        $product->setTaxCategory($this->getTaxCategory('Podatek'));
         $product->setName(sprintf('Sticker "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
@@ -183,7 +183,7 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
+        $product->setTaxCategory($this->getTaxCategory('Podatek'));
         $product->setName(sprintf('Mug "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
@@ -218,7 +218,7 @@ class LoadProductsData extends DataFixture
         $author = $this->faker->name;
         $isbn = $this->getUniqueISBN();
 
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
+        $product->setTaxCategory($this->getTaxCategory('Podatek'));
         $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
