@@ -1,0 +1,48 @@
+# This file is part of the Sylius package.
+
+sylius:
+    address:
+        first_name:
+            not_blank: "Voer een voornaam in."
+            min_length: "Voornaam moet minstens 2 karakters lang zijn|Voornaam moet minstens 2 karakters lang zijn."
+            max_length: "Voornaam mag niet langer dan 255 karakters zijn|Voornaam mag niet langer dan 255 karakters zijn."
+        last_name:
+            not_blank: "Voer een achternaam in."
+            min_length: "Achternaam moet minstens 2 karakters lang zijn|Achternaam moet minstens 2 karakters lang zijn."
+            max_length: "Achternaam mag niet langer dan 255 karakters zijn|Achternaam mag niet langer dan 255 karakters zijn."
+        country:
+            not_blank: "Selecteer een land."
+        province:
+            valid: "Selecteer een provincie."
+        street:
+            not_blank: "Voer een straat in."
+            min_length: "Straat moet minstens 2 karakters lang zijn|Straat moet minstens 2 karakters lang zijn."
+            max_length: "Straat mag niet langer dan 255 karakters zijn|Straat mag niet langer dan 255 karakters zijn."
+        city:
+            not_blank: "Voer een plaats in."
+            min_length: "Plaats moet minstens 2 karakters lang zijn|Plaats moet minstens 2 karakters lang zijn."
+            max_length: "Plaats mag niet langer dan 255 karakters zijn|Plaats mag niet langer dan 255 karakters zijn."
+        postcode:
+            not_blank: "Voer een postcode in."
+            min_length: "Postcode moet minstens 2 karakters lang zijn|Postcode moet minstens 2 karakters lang zijn."
+            max_length: "Postcode mag niet langer dan 255 karakters zijn|Postcode mag niet langer dan 255 karakters zijn."
+    country:
+        name:
+            not_blank: "Voer een landnaam in."
+            min_length: "Landnaam moet minstens 2 karakters lang zijn|Landnaam moet minstens 2 karakters lang zijn."
+            max_length: "Landnaam mag niet langer dan 255 karakters zijn|Landnaam mag niet langer dan 255 karakters zijn."
+        iso_name:
+            not_blank: "Voer een ISO landcode in."
+            exact_length: "ISO naam moet exact 2 karakters lang zijn|ISO naam moet exact 2 karakters lang zijn."
+    province:
+        name:
+            not_blank: "Voer een provincie naam in."
+            min_length: "Provincie naam moet minstens 2 karakters lang zijn|Provincie naam moet minstens 2 karakters lang zijn."
+            max_length: "Provincie naam mag niet langer dan 255 karakters zijn|Provincie naam mag niet langer dan 255 karakters zijn."
+    zone:
+        name:
+            not_blank: "Voer een zone naam in."
+            min_length: "Zone naam moet minstens 2 karakters lang zijn|Zone naam moet minstens 2 karakters lang zijn."
+            max_length: "Zone naam mag niet langer dan 255 karakters zijn|Zone naam mag niet langer dan 255 karakters zijn."
+        members:
+            min_count: "Voeg minstens {{ limit }} zone leden toe."
