@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipping_category:
+        name:
+            not_blank: "Proszę podać nazwę kategorii metody wysyłki."
+            min_length: "Nazwa kategorii wysyłki musi mieć co najmniej {{ limit }} znaków."
+            max_length: "Nazwa kategorii wysyłki nie może być dłuższa niż {{ limit }} znaków."
+    shipping_method:
+        name:
+            not_blank: "Proszę podać nazwę metody wysyłki."
+            min_length: "Nazwa metody wysyłki musi mieć co najmniej {{ limit }} znaków."
+            max_length: "Nazwa metody wysyłki nie może być dłuższa niż {{ limit }} znaków."

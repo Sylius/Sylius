@@ -1,10 +1,12 @@
 (function ($) {
+    'use strict';
+
     var methods = {
         init: function(options) {
             var settings = $.extend({
               'prototypePrefix': false,
               'prototypeElementPrefix': '<hr />',
-              'containerSelector': false,
+              'containerSelector': false
             }, options);
 
             return this.each(function() {
