@@ -55,6 +55,9 @@ sylius_promotions:
 
 sylius_addressing:
     driver: doctrine/orm
+    classes:
+        address:
+            model: Sylius\Bundle\CoreBundle\Entity\Address
 
 sylius_inventory:
     driver: doctrine/orm

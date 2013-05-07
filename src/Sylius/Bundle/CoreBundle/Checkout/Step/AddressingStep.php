@@ -41,7 +41,12 @@ class AddressingStep extends CheckoutStep
         $form = $this->createCheckoutAddressingForm();
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($this->getCurrentCart());
+            $cart = $this->getCurrentCart();
+            $user = $this->getUser();
+            $cart->getShippingAddress()->setUser($user);
+            $cart->getBillingAddress()->setUser($user);
+
+            $this->getManager()->persist($cart);
             $this->getManager()->flush();
 
             return $this->complete();
