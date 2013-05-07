@@ -15,6 +15,7 @@ sylius:
             name: "Name"
             iso_name: "ISO name"
             provinces: "Provinces"
+            select: "Select"
         province:
             name: "Name"
         zone:

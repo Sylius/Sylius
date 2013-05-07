@@ -98,7 +98,8 @@ class ProvinceController extends ResourceController
             ->get('form.factory')
             ->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
                 'country' => $country,
-                'label'   => 'sylius.form.address.province'
+                'label'   => 'sylius.form.address.province',
+                'empty_value' => 'sylius.form.province.select'
             ))
         ;
     }

@@ -15,8 +15,10 @@ sylius:
             name: "Nazwa"
             iso_name: "Kod ISO"
             provinces: "Województwa"
+            select: "Wybierz"
         province:
             name: "Nazwa"
+            select: "Wybierz"
         zone:
             name: "Nazwa"
             type: "Typ"

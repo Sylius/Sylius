@@ -13,7 +13,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\Event\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -60,7 +60,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
      *
      * @param DataEvent $event
      */
-    public function preSetData(DataEvent $event)
+    public function preSetData(FormEvent $event)
     {
         $address = $event->getData();
         $form = $event->getForm();
@@ -87,10 +87,14 @@ class BuildAddressFormListener implements EventSubscriberInterface
      *
      * @param DataEvent $event
      */
-    public function preBind(DataEvent $event)
+    public function preBind(FormEvent $event)
     {
         $data = $event->getData();
         $form = $event->getForm();
+
+        if (false === array_key_exists('country', $data)) {
+            return;
+        }
 
         $countryId = $data['country'];
 
