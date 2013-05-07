@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 /**
  * Base class for checkout steps.
@@ -67,6 +68,10 @@ abstract class CheckoutStep extends ControllerStep
      */
     protected function isUserLoggedIn()
     {
-        return is_object($this->get('security.context')->getToken()->getUser());
+        try {
+            return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+        } catch(AuthenticationCredentialsNotFoundException $e) {
+            return false;
+        }
     }
 }
