@@ -21,8 +21,8 @@ use PHPSpec2\ObjectBehavior;
 class CouponGenerator extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
-     * @param Doctrine\Common\Persistence\ObjectManager              $manager
+     * @param \Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
+     * @param \Doctrine\Common\Persistence\ObjectManager              $manager
      */
     function let($repository, $manager)
     {
@@ -40,9 +40,9 @@ class CouponGenerator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface    $coupon
-     * @param Sylius\Bundle\PromotionsBundle\Generator\Instruction    $instruction
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
+     * @param \Sylius\Bundle\PromotionsBundle\Model\CouponInterface    $coupon
+     * @param \Sylius\Bundle\PromotionsBundle\Generator\Instruction    $instruction
      */
     function it_should_generate_coupons_according_to_instruction($repository, $manager, $promotion, $coupon, $instruction)
     {
@@ -50,7 +50,7 @@ class CouponGenerator extends ObjectBehavior
         $instruction->getUsageLimit()->willReturn(null);
 
         $repository->createNew()->willReturn($coupon);
-        $repository->findOneBy(ANY_ARGUMENT)->willReturn(null);
+        $repository->findOneByCode(ANY_ARGUMENT)->willReturn(null);
 
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(ANY_ARGUMENT)->shouldBeCalled();

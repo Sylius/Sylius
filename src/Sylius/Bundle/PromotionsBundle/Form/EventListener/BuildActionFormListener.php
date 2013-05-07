@@ -13,7 +13,7 @@ namespace Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -43,28 +43,26 @@ class BuildActionFormListener implements EventSubscriberInterface
         );
     }
 
-    public function preSetData(DataEvent $event)
+    public function preSetData(FormEvent $event)
     {
         $action = $event->getData();
-        $form = $event->getForm();
 
         if (null === $action || null === $action->getId()) {
             return;
         }
 
-        $this->addConfigurationFields($form, $action->getType(), $action->getConfiguration());
+        $this->addConfigurationFields($event->getForm(), $action->getType(), $action->getConfiguration());
     }
 
-    public function preBind(DataEvent $event)
+    public function preBind(FormEvent $event)
     {
         $data = $event->getData();
-        $form = $event->getForm();
 
         if (empty($data) || !array_key_exists('type', $data)) {
             return;
         }
 
-        $this->addConfigurationFields($form, $data['type']);
+        $this->addConfigurationFields($event->getForm(), $data['type']);
     }
 
     protected function addConfigurationFields(FormInterface $form, $actionType, array $data = array())

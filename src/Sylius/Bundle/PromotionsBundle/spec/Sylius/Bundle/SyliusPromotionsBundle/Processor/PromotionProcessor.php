@@ -12,9 +12,9 @@ use PHPSpec2\ObjectBehavior;
 class PromotionProcessor extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface       $repository
-     * @param Sylius\Bundle\PromotionsBundle\Checker\PromotionEliglibilityCheckerInterface $checker
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface           $applicator
+     * @param \Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface      $repository
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\PromotionEligibilityCheckerInterface $checker
+     * @param \Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface          $applicator
      */
     function let($repository, $checker, $applicator)
     {
@@ -32,8 +32,8 @@ class PromotionProcessor extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
     function it_should_not_apply_promotions_that_are_not_eligible($repository, $checker, $applicator, $subject, $promotion)
     {
@@ -45,8 +45,8 @@ class PromotionProcessor extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
+     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
      */
     function it_should_apply_promotions_that_are_eligible($repository, $checker, $applicator, $subject, $promotion)
     {

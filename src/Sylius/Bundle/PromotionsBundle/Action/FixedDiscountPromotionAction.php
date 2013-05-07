@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Action;
 
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 
@@ -28,12 +29,16 @@ class FixedDiscountPromotionAction implements PromotionActionInterface
         $this->repository = $repository;
     }
 
-    public function execute(OrderInterface $order, array $configuration)
+    public function execute(PromotionSubjectInterface $subject, array $configuration)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw new \InvalidArgumentException('Subject must be instance of SalesBundle\OrderInterface.');
+        }
+
         $adjustment = $this->repository->createNew();
         $adjustment->setAmount(-$configuration['amount']);
 
-        $order->addAdjustment($adjustment);
+        $subject->addAdjustment($adjustment);
     }
 
     public function getConfigurationFormType()

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PromotionsBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use DateTime;
 
 /**
  * Promotion repository.
@@ -21,6 +20,9 @@ use DateTime;
  */
 class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function findActive()
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -42,7 +44,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
                     $queryBuilder->expr()->gt($this->getAlias().'.endsAt', ':now')
                 )
             )
-            ->setParameter('now', new DateTime())
+            ->setParameter('now', new \DateTime())
             ->getQuery()
             ->getResult()
         ;

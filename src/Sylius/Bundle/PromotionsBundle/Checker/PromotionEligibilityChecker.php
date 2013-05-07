@@ -20,18 +20,24 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionEliglibilityChecker implements PromotionEliglibilityCheckerInterface
+class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     protected $registry;
 
+    /**
+     * @param RuleCheckerRegistryInterface $registry
+     */
     public function __construct(RuleCheckerRegistryInterface $registry)
     {
         $this->registry = $registry;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        $now = new \DateTime('now');
+        $now = new \DateTime();
 
         if (null !== $startsAt = $promotion->getStartsAt()) {
             if ($now < $startsAt) {
@@ -45,12 +51,14 @@ class PromotionEliglibilityChecker implements PromotionEliglibilityCheckerInterf
             }
         }
 
-        if ($promotion->isCouponBased() && null === $subject->getPromotionCoupon()) {
-            return false;
-        }
+        if ($promotion->isCouponBased()) {
+            if (null === $subject->getPromotionCoupon()) {
+                return false;
+            }
 
-        if ($promotion->isCouponBased() && $promotion !== $subject->getPromotionCoupon()->getPromotion()) {
-            return false;
+            if ($promotion !== $subject->getPromotionCoupon()->getPromotion()) {
+                return false;
+            }
         }
 
         foreach ($promotion->getRules() as $rule) {
@@ -59,6 +67,15 @@ class PromotionEliglibilityChecker implements PromotionEliglibilityCheckerInterf
             if (false === $checker->isEligible($subject, $rule->getConfiguration())) {
                 return false;
             }
+        }
+
+        if (!$promotion->hasCoupons()) {
+            return true;
+        }
+
+        $coupon = $subject->getPromotionCoupon();
+        if ($coupon && !$promotion->hasCoupon($coupon)) {
+            return false;
         }
 
         return true;

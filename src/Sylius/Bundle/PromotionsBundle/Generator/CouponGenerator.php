@@ -31,6 +31,9 @@ class CouponGenerator implements CouponGeneratorInterface
         $this->manager = $manager;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
         for ($i = 0; $i < $instruction->getAmount(); $i++) {
@@ -46,6 +49,9 @@ class CouponGenerator implements CouponGeneratorInterface
         $this->manager->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function generateUniqueCode()
     {
         $code = null;

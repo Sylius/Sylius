@@ -22,9 +22,9 @@ use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 class BuildRuleFormListener extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface $checkerRegistry
-     * @param Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerRegistryInterface          $checker
-     * @param Symfony\Component\Form\FormFactoryInterface                                  $factory
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface $checkerRegistry
+     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface                  $checker
+     * @param \Symfony\Component\Form\FormFactoryInterface                                  $factory
      */
     function let($checkerRegistry, $checker, $factory)
     {
@@ -46,10 +46,10 @@ class BuildRuleFormListener extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\Event\DataEvent             $event
-     * @param Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
-     * @param Symfony\Component\Form\Form                        $form
-     * @param Symfony\Component\Form\Form                        $field
+     * @param \Symfony\Component\Form\FormEvent                   $event
+     * @param \Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
+     * @param \Symfony\Component\Form\Form                        $form
+     * @param \Symfony\Component\Form\Form                        $field
      */
     function it_should_add_configuration_fields_in_pre_set_data($checkerRegistry, $factory, $event, $rule, $form, $field)
     {
