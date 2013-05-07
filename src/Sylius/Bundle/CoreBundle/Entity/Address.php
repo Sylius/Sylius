@@ -39,7 +39,7 @@ class Address extends BaseAddress
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
 

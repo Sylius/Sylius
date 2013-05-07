@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.checkout.addressing.header'|trans|raw }}</h1>
+    <h1>Billing address step</h1>
 </div>
 
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
@@ -20,8 +20,7 @@
             {{ form_errors(form) }}
 
             <fieldset>
-                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
-                {{ form_row(form.differentBillingAddress) }}
+                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
             </fieldset>
 
             {{ form_widget(form._token) }}
@@ -45,10 +44,6 @@
             <form action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name, 'id': address.id}) }}" method="POST" style="float:left;margin-right: 10px;">
                 {{ form_widget(useForms[address.id]) }}
                 <button type="submit" class="btn btn-primary btn-large">Use <i class="icon-chevron-right"></i></button>
-            </form>
-            <form action="{{ path('sylius_address_unlink', { 'id': address.id }) }}" method="POST">
-                {{ form_widget(unlinkForms[address.id]) }}
-                <button type="submit" class="btn btn-danger btn-large"><i class="icon-trash"></i> Delete</button>
             </form>
             <br/>
         {% endfor %}

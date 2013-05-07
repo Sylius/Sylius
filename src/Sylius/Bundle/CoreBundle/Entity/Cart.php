@@ -26,6 +26,13 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 class Cart extends BaseCart implements CartInterface
 {
     /**
+     * Different billing address.
+     *
+     * @var Boolean
+     */
+    protected $differentBillingAddress;
+    
+    /**
      * Shipping address.
      *
      * @var AddressInterface
@@ -67,6 +74,24 @@ class Cart extends BaseCart implements CartInterface
         return $shippables;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDifferentBillingAddress()
+    {
+        return $this->differentBillingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDifferentBillingAddress($differentBillingAddress = null)
+    {
+        $this->differentBillingAddress = $differentBillingAddress;
+
+        return $this;
+    }
+    
     /**
      * {@inheritdoc}
      */

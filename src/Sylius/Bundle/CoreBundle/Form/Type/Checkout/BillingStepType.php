@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Paweł Jędrzejewkski <pjedrzejewski@diweb.pl>
  */
-class AddressingStepType extends AbstractType
+class BillingStepType extends AbstractType
 {
     protected $dataClass;
 
@@ -37,10 +37,7 @@ class AddressingStepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shippingAddress', 'sylius_address')
-            ->add('differentBillingAddress', 'checkbox', array(
-                'label'  => 'sylius.form.checkout.addressing.different_billing_address'
-            ))
+            ->add('billingAddress', 'sylius_address')
         ;
     }
 
@@ -62,6 +59,6 @@ class AddressingStepType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_checkout_addressing';
+        return 'sylius_checkout_billing';
     }
 }

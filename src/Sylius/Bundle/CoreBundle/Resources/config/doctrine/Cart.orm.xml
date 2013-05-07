@@ -9,6 +9,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <field name="differentBillingAddress" column="differentBillingAddress" type="boolean" nullable="true"/>
         <one-to-many field="items" target-entity="Sylius\Bundle\CartBundle\Model\CartItemInterface" mapped-by="cart" orphan-removal="true">
             <cascade>
                 <cascade-all/>

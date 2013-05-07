@@ -15,6 +15,7 @@
 
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
+        <parameter key="sylius.checkout_step.billing.class">Sylius\Bundle\CoreBundle\Checkout\Step\BillingStep</parameter>
         <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
         <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
@@ -29,6 +30,7 @@
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
+        <parameter key="sylius.checkout_form.billing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\BillingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
@@ -79,6 +81,12 @@
             </call>
             <tag name="sylius.process.step" alias="sylius_checkout_addressing" />
         </service>
+        <service id="sylius.checkout_step.billing" class="%sylius.checkout_step.billing.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_billing" />
+        </service>
         <service id="sylius.checkout_step.shipping" class="%sylius.checkout_step.shipping.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
@@ -102,6 +110,10 @@
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />
+        </service>
+        <service id="sylius.checkout_form.billing" class="%sylius.checkout_form.billing.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <tag name="form.type" alias="sylius_checkout_billing" />
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.cart.class%</argument>

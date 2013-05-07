@@ -15,30 +15,31 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * The addressing step of checkout.
+ * The billing address step of checkout.
  * User enters the shipping and shipping address.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class AddressingStep extends CheckoutStep
+class BillingStep extends CheckoutStep
 {
     /**
      * {@inheritdoc}
      */
     public function displayAction(ProcessContextInterface $context)
     {
+        $cart = $this->getCurrentCart();
+        if (!$cart->getDifferentBillingAddress()) return $this->complete();
+        
         $manager = $this->getManager();
         $cart = $this->getCurrentCart();
-        $cart->setShippingAddress(null); //This is to avoid previous addresses modification
         $cart->setBillingAddress(null); //This is to avoid previous addresses modification
         $manager->flush();
-        
-        $addresses = $manager->getRepository('SyliusCoreBundle:Address')->findBy(array('user' => $this->getUser()));
-        $unlinkForms = $this->createUnlinkForms($addresses);
-        $useForms = $this->createUseForms($addresses);
-        $form = $this->createCheckoutAddressingForm();
 
-        return $this->renderStep($context, $form, $addresses, $unlinkForms, $useForms);
+        $addresses = $manager->getRepository('SyliusCoreBundle:Address')->findBy(array('user' => $this->getUser()));
+        $useForms = $this->createUseForms($addresses);
+        $form = $this->createCheckoutBillingForm();
+
+        return $this->renderStep($context, $form, $addresses, $useForms);
     }
 
     /**
@@ -47,7 +48,7 @@ class AddressingStep extends CheckoutStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $request = $this->getRequest();
-        
+
         if ($request->query->has('id'))
         {
             $id = $request->get('id');
@@ -58,83 +59,55 @@ class AddressingStep extends CheckoutStep
                 $em = $this->getManager();
                 $entity = $em->getRepository('SyliusCoreBundle:Address')->find($id);
                 
-                if ($entity->getUser()!=$this->getUser()) throw new \Exception('Wrong user.');
+                if ($entity->getUser()!=$this->getUser()) throw new \Exception('Wrong address.');
                 
                 $cart = $this->getCurrentCart();
-                $cart->setShippingAddress($entity);
-                $cart->setDifferentBillingAddress(true); //When a previous address is used for shipping, this forces to go through the Billing address step - To Do: add checkbox "use same billing address" for each previous addresses?
+                $cart->setBillingAddress($entity);
                 $em->flush();
                 
                 return $this->complete();
             }
-            return $this->redirect($this->generateUrl('sylius_checkout_addressing'));
+            return $this->redirect($this->generateUrl('sylius_checkout_billing'));
         }
         else
         {
             $manager = $this->getManager();
             $rep = $manager->getRepository('SyliusCoreBundle:Address');
             $addresses = $rep->findBy(array('user' => $this->getUser()));
-            $unlinkForms = $this->createUnlinkForms($addresses);
             $useForms = $this->createUseForms($addresses);
                         
-            $form = $this->createCheckoutAddressingForm();
+            $form = $this->createCheckoutBillingForm();
             
             if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
                 
                 $cart = $this->getCurrentCart();
                 $user = $this->getUser();
-                $cart->getShippingAddress()->setUser($user);
-                
-                if (!$cart->getDifferentBillingAddress())
-                {
-                    $cart->setBillingAddress($cart->getShippingAddress());
-                }
-                else $cart->setBillingAddress(null);
-                
-                $manager->persist($cart);
-                $manager->flush();
+                $cart->getBillingAddress()->setUser($user);
+    
+                $this->getManager()->persist($cart);
+                $this->getManager()->flush();
     
                 return $this->complete();
             }
         }
         
-        return $this->renderStep($context, $form, $addresses, $unlinkForms, $useForms);
+        return $this->renderStep($context, $form, $addresses, $useForms);
     }
 
-    private function renderStep(ProcessContextInterface $context, FormInterface $form, $addresses, $unlinkForms, $useForms)
+    private function renderStep(ProcessContextInterface $context, FormInterface $form, $addresses, $useForms)
     {
-        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:addressing.html.twig', array(
+        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:billing.html.twig', array(
             'form'    => $form->createView(),
             'context' => $context,
             'addresses' => $addresses,
-            'unlinkForms' => $unlinkForms,
             'useForms' => $useForms
         ));
 
     }
 
-    private function createCheckoutAddressingForm()
+    private function createCheckoutBillingForm()
     {
-        return $this->createForm('sylius_checkout_addressing', $this->getCurrentCart());
-    }
-
-    private function createUnlinkForms($addresses)
-    {
-        $unlinkForms=array();
-        foreach ($addresses as $address)
-        {
-            $unlinkForms[$address->getId()] = $this->createUnlinkForm($address->getId())->createView();
-        }
-        
-        return $unlinkForms;
-    }
-    
-    private function createUnlinkForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createForm('sylius_checkout_billing', $this->getCurrentCart());
     }
     
     private function createUseForms($addresses)

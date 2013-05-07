@@ -58,6 +58,7 @@ sylius_addressing:
     classes:
         address:
             model: Sylius\Bundle\CoreBundle\Entity\Address
+            controller: Sylius\Bundle\CoreBundle\Controller\AddressController
 
 sylius_inventory:
     driver: doctrine/orm
@@ -76,9 +77,6 @@ sylius_payments:
     classes:
         credit_card_owner:
             model: Sylius\Bundle\CoreBundle\Entity\User
-
-sylius_addressing:
-    driver: doctrine/orm
 
 sylius_sales:
     driver: doctrine/orm

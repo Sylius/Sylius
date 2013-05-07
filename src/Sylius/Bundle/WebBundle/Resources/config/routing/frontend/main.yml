@@ -12,6 +12,10 @@ sylius_checkout:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/checkout.yml
     prefix: /checkout
 
+sylius_address:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/address.yml
+    prefix: /address
+
 sylius_cart:
     resource: @SyliusCartBundle/Resources/config/routing.yml
     prefix: /cart

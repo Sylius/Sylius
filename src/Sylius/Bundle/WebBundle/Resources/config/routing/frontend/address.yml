@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_address_unlink:
+    pattern: /unlink/{id}
+    defaults:
+        _controller: sylius.controller.address:unlinkAction
+        _requirements: 
+            method: post
