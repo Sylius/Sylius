@@ -102,17 +102,15 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Podatek'));
+        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
-        $product->setCreatedBy($this->getReference('User-Administrator'));
-        $product->setEnabled(true);
 
         $this->addMasterVariant($product);
 
-        //$this->setTaxons($product, array('T-Shirts', 'SuperTees'));
+        $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
 
         // T-Shirt brand.
         $randomBrand = $this->faker->randomElement(array('Nike', 'Adidas', 'Puma', 'Potato'));
@@ -145,17 +143,15 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Podatek'));
+        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName(sprintf('Sticker "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
-        $product->setCreatedBy($this->getReference('User-Administrator'));
-        $product->setEnabled(true);
 
         $this->addMasterVariant($product);
 
-        //$this->setTaxons($product, array('Stickers', 'Stickypicky'));
+        $this->setTaxons($product, array('Stickers', 'Stickypicky'));
 
         // Sticker resolution.
         $randomResolution = $this->faker->randomElement(array('Waka waka', 'FULL HD', '300DPI', '200DPI'));
@@ -183,16 +179,14 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Podatek'));
+        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName(sprintf('Mug "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
-        $product->setCreatedBy($this->getReference('User-Administrator'));
-        $product->setEnabled(true);
 
         $this->addMasterVariant($product);
 
-        //$this->setTaxons($product, array('Mugs', 'Mugland'));
+        $this->setTaxons($product, array('Mugs', 'Mugland'));
 
         $randomMugMaterial = $this->faker->randomElement(array('Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand'));
         $this->addProperty($product, 'Mug material', $randomMugMaterial);
@@ -218,16 +212,14 @@ class LoadProductsData extends DataFixture
         $author = $this->faker->name;
         $isbn = $this->getUniqueISBN();
 
-        $product->setTaxCategory($this->getTaxCategory('Podatek'));
+        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
-        $product->setCreatedBy($this->getReference('User-Administrator'));
-        $product->setEnabled(true);
 
         $this->addMasterVariant($product, $isbn);
 
-        //$this->setTaxons($product, array('Books', 'Bookmania'));
+        $this->setTaxons($product, array('Books', 'Bookmania'));
 
         $this->addProperty($product, 'Book author', $author);
         $this->addProperty($product, 'Book ISBN', $isbn);

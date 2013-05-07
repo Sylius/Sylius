@@ -52,10 +52,7 @@
         "knplabs/knp-gaufrette-bundle":         "0.2.*",
         "fzaninotto/faker":                     "1.1.*",
         "knplabs/knp-menu-bundle":              "2.0.*",
-        "liip/imagine-bundle":                  "0.9.*",
-        "friendsofsymfony/comment-bundle":      "dev-master",
-        "mopa/bootstrap-bundle":                "2.2.*",
-        "twitter/bootstrap":                    "2.3.*"
+        "liip/imagine-bundle":                  "0.9.*"
     },
     "require-dev": {
         "behat/behat":                       "2.4.*",
@@ -71,20 +68,18 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ]
     },
     "autoload": {
-        "psr-0": { "Sylius\\": "src/", "": "src/" }
+        "psr-0": { "Sylius\\": "src/" }
     },
     "config": {
         "bin-dir": "bin"
@@ -95,7 +90,6 @@
         "symfony-web-dir": "web",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "symfony-assets-install": "symlink"
+        }
     }
 }

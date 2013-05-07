@@ -28,12 +28,18 @@ class LoadZonesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $euCountries = array(
-            'PL',
+            'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
+            'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
+            'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
+            'GB'
         );
 
         $restOfWorldCountries = array_diff(Locale::getCountries(), $euCountries + array('US'));
 
         $manager->persist($this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $euCountries));
+        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
+        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();
     }

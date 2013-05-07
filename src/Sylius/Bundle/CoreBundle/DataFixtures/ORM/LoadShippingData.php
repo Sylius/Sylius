@@ -28,12 +28,23 @@ class LoadShippingData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $email = $this->createShippingCategory('E-mail', 'Wysyłka produktów wirtualnych');
+        $regular = $this->createShippingCategory('Regular', 'Regular weight items');
+        $heavy = $this->createShippingCategory('Heavy', 'Heavy items');
 
-        $manager->persist($email);
+        $manager->persist($regular);
+        $manager->persist($heavy);
 
-        $config = array('amount' => 0);
-        $manager->persist($this->createShippingMethod('Email', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $config = array('first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0);
+        $manager->persist($this->createShippingMethod('FedEx', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
+
+        $config = array('amount' => 2500);
+        $manager->persist($this->createShippingMethod('UPS Ground', 'EU', DefaultCalculators::FLAT_RATE, $config));
+
+        $config = array('amount' => 2350);
+        $manager->persist($this->createShippingMethod('DHL', 'EU', DefaultCalculators::FLAT_RATE, $config));
+
+        $config =  array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
+        $manager->persist($this->createShippingMethod('FedEx World Shipping', 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
     }

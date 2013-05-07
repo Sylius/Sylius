@@ -27,13 +27,9 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle', 'FOSCommentBundle', 'MopaBootstrapBundle' ]
+    bundles:        ['SyliusWebBundle']
     filters:
         cssrewrite: ~
-        less:
-            node: %node%
-            node_paths: [ %node_paths% ]
-            apply_to: "\.less$"
 
 doctrine:
     dbal:
@@ -105,23 +101,3 @@ liip_imagine:
         sylius_610x600:
             filters:
                 thumbnail: { size: [610, 600], mode: outbound }
-
-fos_comment:
-    db_driver: orm
-    class:
-        model:
-            comment: Ant\Bundle\CommentBundle\Entity\Comment
-            thread: Ant\Bundle\CommentBundle\Entity\Thread
-
-mopa_bootstrap:
-    form:
-        show_legend: false # default is true
-        show_child_legend: false # default is true
-        error_type: inline # or inline which is default
-        checkbox_label: 'widget' # default is both (label|widget|both)
-
-knp_menu:
-    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
-        template: MopaBootstrapBundle:Menu:menu.html.twig
-    templating: false # if true, enables the helper for PHP templates
-    default_renderer: twig # The renderer to use, list is also available by default

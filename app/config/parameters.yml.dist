@@ -17,6 +17,3 @@ parameters:
     sylius.currency:          EUR
 
     sylius.cache:             file_system
-
-    node:              "/usr/bin/node"
-    node_paths:        "/usr/lib/node_modules"

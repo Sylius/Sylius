@@ -34,20 +34,4 @@ class User extends BaseUser
     {
         return $this->orders;
     }
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $products;
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
 }

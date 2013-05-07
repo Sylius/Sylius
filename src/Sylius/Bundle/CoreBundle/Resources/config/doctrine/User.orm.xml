@@ -10,7 +10,6 @@
             <generator strategy="AUTO" />
         </id>
         <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user" />
-        <one-to-many field="products" target-entity="Sylius\Bundle\CoreBundle\Entity\Product" mapped-by="createdBy" />
     </entity>
 
 </doctrine-mapping>

@@ -12,20 +12,17 @@
         <meta charset="UTF-8">
         <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
         <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
         <!--[if lt IE 9]>
-            {% javascripts '@SyliusWebBundle/Resources/assets/js/html5.js' %}
-            <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
         {# stylesheets... #}
         {% block stylesheets %}
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-            '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
-            '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-datepicker.less'
-            '@SyliusWebBundle/Resources/assets/css/font-awesome.css'
+            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
+            '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/frontend.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
@@ -79,22 +76,8 @@
         {# javascripts... #}
         {% block javascripts %}
         {% javascripts output='assets/compiled/frontend.js'
-            '@SyliusWebBundle/Resources/assets/js/jquery.min.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-transition.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-alert.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-modal.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-dropdown.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-scrollspy.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tab.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tooltip.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-popover.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-button.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-collapse.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-carousel.js'
-            '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-typeahead.js'
-            '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
-            '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
-            '@MopaBootstrapBundle/Resources/public/js/eyecon-bootstrap-datepicker.js'
+            'http://code.jquery.com/jquery-1.8.0.min.js'
+            'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
