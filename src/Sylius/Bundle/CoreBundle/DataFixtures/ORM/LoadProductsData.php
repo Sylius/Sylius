@@ -107,6 +107,8 @@ class LoadProductsData extends DataFixture
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+        $product->setCreatedBy($this->getReference('User-Administrator'));
+        $product->setEnabled(true);
 
         $this->addMasterVariant($product);
 
@@ -148,6 +150,8 @@ class LoadProductsData extends DataFixture
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+        $product->setCreatedBy($this->getReference('User-Administrator'));
+        $product->setEnabled(true);
 
         $this->addMasterVariant($product);
 
@@ -183,6 +187,8 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Mug "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+        $product->setCreatedBy($this->getReference('User-Administrator'));
+        $product->setEnabled(true);
 
         $this->addMasterVariant($product);
 
@@ -216,6 +222,8 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+        $product->setCreatedBy($this->getReference('User-Administrator'));
+        $product->setEnabled(true);
 
         $this->addMasterVariant($product, $isbn);
 

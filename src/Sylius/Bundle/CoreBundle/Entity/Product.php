@@ -73,12 +73,23 @@ class Product extends BaseProduct implements TaxableInterface
     protected $shippingCategory;
 
     /**
+     * @var boolean
+     */
+    protected $enabled;
+
+    /**
+     * @var User
+     */
+    protected $createdBy;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
+        $this->enabled = false;
         $this->setMasterVariant(new Variant());
         $this->taxons = new ArrayCollection();
 
@@ -279,4 +290,51 @@ class Product extends BaseProduct implements TaxableInterface
             self::VARIANT_SELECTION_MATCH  => 'Options matching',
         );
     }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return Product
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \Sylius\Bundle\CoreBundle\Entity\User $createdBy
+     * @return Product
+     */
+    public function setCreatedBy(\Sylius\Bundle\CoreBundle\Entity\User $createdBy)
+    {
+        $this->createdBy = $createdBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Sylius\Bundle\CoreBundle\Entity\User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
 }

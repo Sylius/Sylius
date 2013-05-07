@@ -15,14 +15,16 @@
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
         <!--[if lt IE 9]>
-          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            {% javascripts '@SyliusWebBundle/Resources/assets/js/html5.js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         <![endif]-->
 
         {# stylesheets... #}
         {% block stylesheets %}
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
-            '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
+            '@SyliusWebBundle/Resources/assets/css/bootstrap.no-icons.min.css'
+            '@SyliusWebBundle/Resources/assets/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/frontend.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
@@ -76,8 +78,8 @@
         {# javascripts... #}
         {% block javascripts %}
         {% javascripts output='assets/compiled/frontend.js'
-            'http://code.jquery.com/jquery-1.8.0.min.js'
-            'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js'
+            '@SyliusWebBundle/Resources/assets/css/jquery-1.8.0.min.js'
+            '@SyliusWebBundle/Resources/assets/css/bootstrap.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
