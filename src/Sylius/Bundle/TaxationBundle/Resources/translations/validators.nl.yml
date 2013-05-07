@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Voer een belastingscategorie naam in.
+    tax_rate:
+        category:
+            not_blank: Selecteer een belastingscategorie.
+        name:
+            not_blank: Voer een belastingtarief naam in.
+        amount:
+            not_blank: Voer een belastingtarief hoeveelheid in.
+        calculator:
+            not_blank: Selecteer een belastingsberekening.
