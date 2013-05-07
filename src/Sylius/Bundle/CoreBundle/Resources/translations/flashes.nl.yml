@@ -1,0 +1,5 @@
+# This file is part of the Sylius package.
+
+sylius:
+    checkout:
+        success: Bedankt voor uw bestelling!

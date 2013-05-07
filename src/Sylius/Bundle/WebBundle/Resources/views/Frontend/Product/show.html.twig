@@ -107,5 +107,8 @@
         {% endif %}
     </div>
 </form>
+
+    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'p-' ~ product.id} %}
+
 </div>
 {% endblock %}
