@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 (function ($) {
+    'use strict';
+
     var methods = {
         init: function(options) {
             var settings = $.extend({
