@@ -15,6 +15,10 @@
             var provinceContainer = $(this).parents('div.well').find('div.province-container');
             var provinceName = $(this).attr('name').replace('country', 'province');
 
+            if (null === $(this).val()) {
+                return;
+            }
+
             $.get(provinceContainer.attr('data-url'), {countryId: $(this).val()}, function (response) {
                 if (!response.content) {
                     provinceContainer.fadeOut('slow', function () {
