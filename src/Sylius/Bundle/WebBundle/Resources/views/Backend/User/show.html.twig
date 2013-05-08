@@ -27,11 +27,9 @@
         <tr>
             <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
             <td>
-            {% if user.enabled %}
-                <span class="label label-success">{{ 'sylius.yes'|trans }}</span>
-            {% else %}
-                <span class="label label-important">{{ 'sylius.no'|trans }}</span>
-            {% endif %}
+                <span class="label label-{{ user.enabled ? 'success' : 'important'}}">
+                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                </span>
             </td>
         </tr>
         {% if user.lastLogin %}
