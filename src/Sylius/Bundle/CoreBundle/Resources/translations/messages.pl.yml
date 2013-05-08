@@ -33,5 +33,6 @@ sylius:
             total_to: To
             created_at_from: From
             created_at_to: To
-        shipping_methods:
+        shipping_method:
             zone: Strefa
+            enabled: Aktywna
