@@ -35,4 +35,3 @@ sylius:
             created_at_to: To
         shipping_method:
             zone: Zone
-            enabled: Enabled
