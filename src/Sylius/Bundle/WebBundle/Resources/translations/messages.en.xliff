@@ -226,6 +226,10 @@
         <source>sylius.checkout.finalize.order.no_promotion</source>
         <target state="new">No promotion applied</target>
       </trans-unit>
+      <trans-unit id="0bf37e62a6bfa9005ba8dd56b844ca456ff7be8r" resname="sylius.form.checkout.addressing.different_billing_address">
+              <source>sylius.form.checkout.addressing.different_billing_address</source>
+              <target state="new">Use different address for billing?</target>
+            </trans-unit>
       <trans-unit id="640ca3adb7c0fc0dab40fcb4324fa47c5b4cc258" resname="sylius.checkout.finalize.order.no_shipping_charges">
         <jms:reference-file line="149">Checkout/Step/finalize.html.twig</jms:reference-file>
         <source>sylius.checkout.finalize.order.no_shipping_charges</source>

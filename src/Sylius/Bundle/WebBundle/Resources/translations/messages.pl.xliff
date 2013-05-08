@@ -9,7 +9,7 @@
       <trans-unit id="c87e30d5fde4f2944b5576ce4c3e1648935e381a" resname="sylius.add_to_cart">
         <jms:reference-file line="22">Frontend/Product/_single.html.twig</jms:reference-file>
         <jms:reference-file line="6">Frontend/Product/_singleBox.html.twig</jms:reference-file>
-        <jms:reference-file line="106">Frontend/Product/show.html.twig</jms:reference-file>
+        <jms:reference-file line="106">Frontend/Prodseuct/show.html.twig</jms:reference-file>
         <source>sylius.add_to_cart</source>
         <target>Dodaj do koszyka</target>
       </trans-unit>
@@ -225,6 +225,10 @@
         <jms:reference-file line="312">Backend/Order/show.html.twig</jms:reference-file>
         <source>sylius.checkout.finalize.order.no_promotion</source>
         <target state="new">Brak rabatów</target>
+      </trans-unit>
+      <trans-unit id="0bf37e62a6bfa9005ba8dd56b844ca456ff7be8r" resname="sylius.form.checkout.addressing.different_billing_address">
+        <source>sylius.form.checkout.addressing.different_billing_address</source>
+        <target state="new">Użyć innego adresu do rozliczeń?</target>
       </trans-unit>
       <trans-unit id="640ca3adb7c0fc0dab40fcb4324fa47c5b4cc258" resname="sylius.checkout.finalize.order.no_shipping_charges">
         <jms:reference-file line="149">Checkout/Step/finalize.html.twig</jms:reference-file>
