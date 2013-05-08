@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Entity;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\VariantImageInterface;
 
-class VariantImage extends Image
+class VariantImage extends Image implements VariantImageInterface
 {
     protected $variant;
 
