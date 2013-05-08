@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Entity;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface as BaseVariantInterface;
 use Sylius\Bundle\AssortmentBundle\Entity\Variant\Variant as BaseVariant;
+use Sylius\Bundle\CoreBundle\Model\VariantImageInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -188,7 +189,7 @@ class Variant extends BaseVariant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function hasImage(VariantImage $image)
+    public function hasImage(VariantImageInterface $image)
     {
         return $this->images->contains($image);
     }
@@ -204,7 +205,7 @@ class Variant extends BaseVariant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function addImage(VariantImage $image)
+    public function addImage(VariantImageInterface $image)
     {
         if (!$this->hasImage($image)) {
             $image->setVariant($this);
@@ -215,7 +216,7 @@ class Variant extends BaseVariant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function removeImage(VariantImage $image)
+    public function removeImage(VariantImageInterface $image)
     {
         $image->setVariant(null);
         $this->images->removeElement($image);
