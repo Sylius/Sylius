@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface as BaseVariantInterface;
-use Sylius\Bundle\CoreBundle\Entity\VariantImage;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 use Sylius\Bundle\SalesBundle\Model\SellableInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
@@ -54,19 +53,19 @@ interface VariantInterface extends
      *
      * @return Boolean
      */
-    public function hasImage(VariantImage $image);
+    public function hasImage(VariantImageInterface $image);
 
     /**
      * Add image.
      *
      * @param VariantImage
      */
-    public function addImage(VariantImage $image);
+    public function addImage(VariantImageInterface $image);
 
     /**
      * Remove image.
      *
      * @param VariantImage
      */
-    public function removeImage(VariantImage $image);
+    public function removeImage(VariantImageInterface $image);
 }
