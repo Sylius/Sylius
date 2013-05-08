@@ -5,7 +5,7 @@
     <h1>{{ 'sylius.prototype.build_header'|trans|raw }}</h1>
 </div>
 
-<form action="{{ path('sylius_backend_prototype_build', {'id': prototype.id}) }}" method="post" class="form-horizontal" novalidate>
+<form action="{{ path('sylius_backend_prototype_build', {'id': prototype.id}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
     <div class="form-actions">
         <input type="submit" value="{{ 'sylius.create'|trans }}" class="btn btn-primary btn-large" />
