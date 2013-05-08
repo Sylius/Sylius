@@ -8,13 +8,13 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('category') }}</th>
-            <th>{{ sylius_resource_sort('zone') }}</th>
-            <th>{{ sylius_resource_sort('name') }}</th>
-            <th>{{ sylius_resource_sort('amount') }}</th>
-            <th>{{ sylius_resource_sort('includedInPrice', 'included in price?') }}</th>
-            <th>{{ sylius_resource_sort('calculator') }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th>{{ sylius_resource_sort('category', 'sylius.tax_rate.category'|trans) }}</th>
+            <th>{{ sylius_resource_sort('zone', 'sylius.tax_rate.zone'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.tax_rate.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('amount', 'sylius.tax_rate.amount'|trans) }}</th>
+            <th>{{ sylius_resource_sort('includedInPrice', 'sylius.tax_rate.included_in_price'|trans) }}</th>
+            <th>{{ sylius_resource_sort('calculator', 'sylius.tax_rate.calculator'|trans) }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.tax_rate.updated_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
