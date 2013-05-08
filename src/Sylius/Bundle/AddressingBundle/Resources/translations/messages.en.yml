@@ -18,6 +18,7 @@ sylius:
             select: "Select"
         province:
             name: "Name"
+            select: "Select"
         zone:
             name: "Name"
             type: "Type"
