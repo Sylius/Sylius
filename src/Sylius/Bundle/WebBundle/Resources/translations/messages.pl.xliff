@@ -9,7 +9,7 @@
       <trans-unit id="c87e30d5fde4f2944b5576ce4c3e1648935e381a" resname="sylius.add_to_cart">
         <jms:reference-file line="22">Frontend/Product/_single.html.twig</jms:reference-file>
         <jms:reference-file line="6">Frontend/Product/_singleBox.html.twig</jms:reference-file>
-        <jms:reference-file line="106">Frontend/Prodseuct/show.html.twig</jms:reference-file>
+        <jms:reference-file line="106">Frontend/Product/show.html.twig</jms:reference-file>
         <source>sylius.add_to_cart</source>
         <target>Dodaj do koszyka</target>
       </trans-unit>
