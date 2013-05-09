@@ -86,7 +86,7 @@
         </service>
 
         <service id="sylius.installer.yaml_persister" class="%sylius.installer.yaml_persister.class%">
-            <argument>%kernel.root_dir%/config/container/parameters.yml</argument>
+            <argument>%kernel.root_dir%/config/parameters.yml</argument>
         </service>
     </services>
 
