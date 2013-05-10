@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2013-05-08T22:21:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2013-05-13T06:40:03Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,6 +10,7 @@
         <jms:reference-file line="22">Frontend/Product/_single.html.twig</jms:reference-file>
         <jms:reference-file line="6">Frontend/Product/_singleBox.html.twig</jms:reference-file>
         <jms:reference-file line="106">Frontend/Product/show.html.twig</jms:reference-file>
+        <jms:reference-file line="6">Frontend/Product/_singleBox.html.twig</jms:reference-file>
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
       </trans-unit>
@@ -63,7 +64,6 @@
       </trans-unit>
       <trans-unit id="edab20efc7ba5eefc015bbac8f9a2cf5fde215b5" resname="sylius.alert.info">
         <jms:reference-file line="9">Backend/Dashboard/main.html.twig</jms:reference-file>
-        <jms:reference-file line="10">Backend/Macros/alerts.html.twig</jms:reference-file>
         <jms:reference-file line="38">Backend/User/macros.html.twig</jms:reference-file>
         <jms:reference-file line="40">Backend/TaxCategory/macros.html.twig</jms:reference-file>
         <jms:reference-file line="36">Backend/Stockable/macros.html.twig</jms:reference-file>
@@ -82,6 +82,31 @@
         <jms:reference-file line="24">Frontend/Macros/alerts.html.twig</jms:reference-file>
         <source>sylius.alert.warning</source>
         <target>Warning</target>
+      </trans-unit>
+      <trans-unit id="1d6fb47f22d0d11adda0b3c0fffad8d39c6172a5" resname="sylius.backend.alert.info">
+        <jms:reference-file line="29">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.backend.alert.info</source>
+        <target>Information</target>
+      </trans-unit>
+      <trans-unit id="0fbef37f0446e70363b1b9aa64f21c9bd0eeb539" resname="sylius.backend.dashboard.header">
+        <jms:reference-file line="25">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.backend.dashboard.header</source>
+        <target>Administration dashboard</target>
+      </trans-unit>
+      <trans-unit id="9c89a528dc886dfbdc643130354ac233dd249c8e" resname="sylius.backend.dashboard.orders">
+        <jms:reference-file line="37">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.backend.dashboard.orders</source>
+        <target>Last week orders</target>
+      </trans-unit>
+      <trans-unit id="e59c3d4706bcea798f986532a8c4516fc4894cc2" resname="sylius.backend.dashboard.revenue">
+        <jms:reference-file line="36">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.backend.dashboard.revenue</source>
+        <target>Last week revenue</target>
+      </trans-unit>
+      <trans-unit id="9eed236caa2fd7e85f79479ebc8029eff2343c59" resname="sylius.backend.dashboard.subheader">
+        <jms:reference-file line="25">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.backend.dashboard.subheader</source>
+        <target>Overview of your store</target>
       </trans-unit>
       <trans-unit id="1e3cff41049bc311a755149a9b30092f31885c43" resname="sylius.cancel">
         <jms:reference-file line="4">Backend/Macros/actions.html.twig</jms:reference-file>
@@ -152,10 +177,11 @@
         <target>Addressing step</target>
       </trans-unit>
       <trans-unit id="c9d1f8c14df112c2713a9a5789decc780f147900" resname="sylius.checkout.back">
+        <jms:reference-file line="24">Checkout/Step/shipping.html.twig</jms:reference-file>
+        <jms:reference-file line="37">Checkout/Step/addressing.html.twig</jms:reference-file>
         <jms:reference-file line="24">Checkout/Step/payment.html.twig</jms:reference-file>
         <jms:reference-file line="24">Checkout/Step/shipping.html.twig</jms:reference-file>
         <jms:reference-file line="188">Checkout/Step/finalize.html.twig</jms:reference-file>
-        <jms:reference-file line="37">Checkout/Step/addressing.html.twig</jms:reference-file>
         <source>sylius.checkout.back</source>
         <target>Back</target>
       </trans-unit>
@@ -224,12 +250,8 @@
       <trans-unit id="0bf37e62a6bfa9005ba8dd56b844ca456ff7be8a" resname="sylius.checkout.finalize.order.no_promotion">
         <jms:reference-file line="312">Backend/Order/show.html.twig</jms:reference-file>
         <source>sylius.checkout.finalize.order.no_promotion</source>
-        <target state="new">No promotion applied</target>
+        <target>No promotion applied</target>
       </trans-unit>
-      <trans-unit id="0bf37e62a6bfa9005ba8dd56b844ca456ff7be8r" resname="sylius.form.checkout.addressing.different_billing_address">
-              <source>sylius.form.checkout.addressing.different_billing_address</source>
-              <target state="new">Use different address for billing?</target>
-            </trans-unit>
       <trans-unit id="640ca3adb7c0fc0dab40fcb4324fa47c5b4cc258" resname="sylius.checkout.finalize.order.no_shipping_charges">
         <jms:reference-file line="149">Checkout/Step/finalize.html.twig</jms:reference-file>
         <source>sylius.checkout.finalize.order.no_shipping_charges</source>
@@ -244,13 +266,13 @@
         <jms:reference-file line="307">Backend/Order/show.html.twig</jms:reference-file>
         <jms:reference-file line="162">Checkout/Step/finalize.html.twig</jms:reference-file>
         <source>sylius.checkout.finalize.order.promotion_discount</source>
-        <target state="new">Promotion discounts</target>
+        <target>Promotion discounts</target>
       </trans-unit>
       <trans-unit id="42df986d0c66f72d191fab8ffa96602227b21852" resname="sylius.checkout.finalize.order.promotion_total">
         <jms:reference-file line="318">Backend/Order/show.html.twig</jms:reference-file>
         <jms:reference-file line="171">Checkout/Step/finalize.html.twig</jms:reference-file>
         <source>sylius.checkout.finalize.order.promotion_total</source>
-        <target state="new">Promotion total</target>
+        <target>Promotion total</target>
       </trans-unit>
       <trans-unit id="4e96576e525a2fb422beb5ebe7cd332ff96d9ea6" resname="sylius.checkout.finalize.order.shipping_address">
         <jms:reference-file line="15">Checkout/Step/finalize.html.twig</jms:reference-file>
@@ -308,9 +330,9 @@
         <target>Name</target>
       </trans-unit>
       <trans-unit id="2a9f87f9b3285665821aec47fb8fc966cba5d889" resname="sylius.checkout.forward">
-        <jms:reference-file line="25">Checkout/Step/payment.html.twig</jms:reference-file>
         <jms:reference-file line="25">Checkout/Step/shipping.html.twig</jms:reference-file>
         <jms:reference-file line="38">Checkout/Step/addressing.html.twig</jms:reference-file>
+        <jms:reference-file line="25">Checkout/Step/payment.html.twig</jms:reference-file>
         <source>sylius.checkout.forward</source>
         <target>Continue</target>
       </trans-unit>
@@ -413,40 +435,25 @@
         <source>sylius.create</source>
         <target>Create</target>
       </trans-unit>
-      <trans-unit id="12a6812024fead4f0dbb005bbe9088006c14f7a3" resname="sylius.dashboard.header">
-        <jms:reference-file line="5">Backend/Dashboard/main.html.twig</jms:reference-file>
-        <source>sylius.dashboard.header</source>
-        <target>Administration dashboard</target>
-      </trans-unit>
-      <trans-unit id="f9f0f94c652b07dbffca35917072db5c73a270cc" resname="sylius.dashboard.no_notifications">
-        <jms:reference-file line="10">Backend/Dashboard/main.html.twig</jms:reference-file>
-        <source>sylius.dashboard.no_notifications</source>
-        <target>There are no new notifications.</target>
-      </trans-unit>
-      <trans-unit id="953ba730e56dea166ee6dc252edfc26f76b8c1f0" resname="sylius.dashboard.subheader">
-        <jms:reference-file line="5">Backend/Dashboard/main.html.twig</jms:reference-file>
-        <source>sylius.dashboard.subheader</source>
-        <target>Overview of your store</target>
-      </trans-unit>
       <trans-unit id="9dc4b8a063990cc566dd745cabe01d8c7340750d" resname="sylius.delete">
-        <jms:reference-file line="27">Backend/Macros/buttons.html.twig</jms:reference-file>
         <jms:reference-file line="18">Backend/Country/show.html.twig</jms:reference-file>
         <jms:reference-file line="54">Backend/Country/show.html.twig</jms:reference-file>
-        <jms:reference-file line="18">Backend/ShippingMethod/show.html.twig</jms:reference-file>
-        <jms:reference-file line="18">Backend/TaxRate/show.html.twig</jms:reference-file>
         <jms:reference-file line="204">Backend/Order/show.html.twig</jms:reference-file>
         <jms:reference-file line="29">Backend/TaxCategory/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="18">Backend/TaxRate/show.html.twig</jms:reference-file>
+        <jms:reference-file line="27">Backend/Macros/buttons.html.twig</jms:reference-file>
+        <jms:reference-file line="18">Backend/ShippingMethod/show.html.twig</jms:reference-file>
         <source>sylius.delete</source>
         <target>delete</target>
       </trans-unit>
       <trans-unit id="f82df0efa9caff51ceb1b027a26a3cba221b5e7d" resname="sylius.edit">
-        <jms:reference-file line="18">Backend/Macros/buttons.html.twig</jms:reference-file>
         <jms:reference-file line="13">Backend/Country/show.html.twig</jms:reference-file>
-        <jms:reference-file line="13">Backend/ShippingMethod/show.html.twig</jms:reference-file>
-        <jms:reference-file line="13">Backend/TaxRate/show.html.twig</jms:reference-file>
         <jms:reference-file line="199">Backend/Order/show.html.twig</jms:reference-file>
         <jms:reference-file line="24">Backend/TaxCategory/macros.html.twig</jms:reference-file>
         <jms:reference-file line="26">Backend/Stockable/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="13">Backend/TaxRate/show.html.twig</jms:reference-file>
+        <jms:reference-file line="18">Backend/Macros/buttons.html.twig</jms:reference-file>
+        <jms:reference-file line="13">Backend/ShippingMethod/show.html.twig</jms:reference-file>
         <source>sylius.edit</source>
         <target>edit</target>
       </trans-unit>
@@ -479,7 +486,7 @@
       <trans-unit id="3bb1b479dfb28e88646769cfb904ba9981a38bac" resname="sylius.generate">
         <jms:reference-file line="11">Backend/Coupon/generate.html.twig</jms:reference-file>
         <source>sylius.generate</source>
-        <target state="new">Generate</target>
+        <target>Generate</target>
       </trans-unit>
       <trans-unit id="5db225fa287cd19e6b0e6b96b6284205b8ef4b7f" resname="sylius.homepage.splash.headline">
         <jms:reference-file line="5">Frontend/Homepage/main.html.twig</jms:reference-file>
@@ -574,17 +581,17 @@
         <target>Newest products</target>
       </trans-unit>
       <trans-unit id="ad1992a0960290cf6e9a48ddae0d808afcf57943" resname="sylius.no">
-        <jms:reference-file line="29">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="43">Backend/Variant/macros.html.twig</jms:reference-file>
         <jms:reference-file line="22">Backend/User/macros.html.twig</jms:reference-file>
-        <jms:reference-file line="31">Backend/User/show.html.twig</jms:reference-file>
-        <jms:reference-file line="41">Backend/Variant/macros.html.twig</jms:reference-file>
-        <jms:reference-file line="29">Backend/ShippingMethod/macros.html.twig</jms:reference-file>
-        <jms:reference-file line="41">Backend/ShippingMethod/show.html.twig</jms:reference-file>
+        <jms:reference-file line="33">Backend/User/show.html.twig</jms:reference-file>
+        <jms:reference-file line="93">Backend/Product/show.html.twig</jms:reference-file>
+        <jms:reference-file line="31">Backend/TaxRate/macros.html.twig</jms:reference-file>
         <jms:reference-file line="32">Backend/Promotion/macros.html.twig</jms:reference-file>
         <jms:reference-file line="37">Backend/Promotion/macros.html.twig</jms:reference-file>
-        <jms:reference-file line="31">Backend/TaxRate/macros.html.twig</jms:reference-file>
         <jms:reference-file line="29">Backend/Coupon/macros.html.twig</jms:reference-file>
-        <jms:reference-file line="91">Backend/Product/show.html.twig</jms:reference-file>
+        <jms:reference-file line="29">Backend/ShippingMethod/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="41">Backend/ShippingMethod/show.html.twig</jms:reference-file>
+        <jms:reference-file line="29">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
         <source>sylius.no</source>
         <target>no</target>
       </trans-unit>
@@ -604,9 +611,9 @@
         <target>Product options</target>
       </trans-unit>
       <trans-unit id="bcf88b8f3fcd07bcb6f9cc773d1eedfebadb97a2" resname="sylius.option.manage">
+        <jms:reference-file line="14">Backend/Product/index.html.twig</jms:reference-file>
         <jms:reference-file line="15">Backend/Property/index.html.twig</jms:reference-file>
         <jms:reference-file line="14">Backend/Prototype/index.html.twig</jms:reference-file>
-        <jms:reference-file line="14">Backend/Product/index.html.twig</jms:reference-file>
         <source>sylius.option.manage</source>
         <target>Manage options</target>
       </trans-unit>
@@ -736,7 +743,12 @@
       <trans-unit id="524dbd179e0a304aaed2d68323041812245c127f" resname="sylius.order.promotion_total">
         <jms:reference-file line="44">Backend/Order/show.html.twig</jms:reference-file>
         <source>sylius.order.promotion_total</source>
-        <target state="new">Promotion total</target>
+        <target>Promotion total</target>
+      </trans-unit>
+      <trans-unit id="6b00572323917faab86326abdf4ec713e5da48c4" resname="sylius.order.recent_header">
+        <jms:reference-file line="57">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.order.recent_header</source>
+        <target>Recent orders</target>
       </trans-unit>
       <trans-unit id="9754c0c33f49df82a9da45714512f0cdaf7ea8ed" resname="sylius.order.shipment_state">
         <jms:reference-file line="13">Backend/Order/macros.html.twig</jms:reference-file>
@@ -986,8 +998,8 @@
         <target><![CDATA[Products <small>Index of all products in your store</small>]]></target>
       </trans-unit>
       <trans-unit id="57694f399cd2f62d2a1d5d2131a5fea6395a3bb4" resname="sylius.product.manage">
-        <jms:reference-file line="12">Backend/Stockable/index.html.twig</jms:reference-file>
         <jms:reference-file line="13">Backend/Product/show.html.twig</jms:reference-file>
+        <jms:reference-file line="12">Backend/Stockable/index.html.twig</jms:reference-file>
         <source>sylius.product.manage</source>
         <target>Manage products</target>
       </trans-unit>
@@ -1222,43 +1234,43 @@
         <jms:reference-file line="17">Backend/Promotion/show.html.twig</jms:reference-file>
         <jms:reference-file line="16">Backend/Coupon/index.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.create</source>
-        <target state="new">Add coupon</target>
+        <target>Add coupon</target>
       </trans-unit>
       <trans-unit id="5c278cf3f4ef0d568c821247aa3b188596ad6b63" resname="sylius.promotion_coupon.create_header">
         <jms:reference-file line="9">Backend/Coupon/create.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.create_header</source>
-        <target state="new">Create new coupon</target>
+        <target>Create new coupon</target>
       </trans-unit>
       <trans-unit id="cfdbe7edc57b6c6ed60d68f1f6bd8fe5affbc1a4" resname="sylius.promotion_coupon.generate">
         <jms:reference-file line="18">Backend/Promotion/show.html.twig</jms:reference-file>
         <jms:reference-file line="17">Backend/Coupon/index.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.generate</source>
-        <target state="new">Generate coupons</target>
+        <target>Generate coupons</target>
       </trans-unit>
       <trans-unit id="e3c160d4b05807b1e5606d5dc648f50af04d2e7f" resname="sylius.promotion_coupon.generate_header">
         <jms:reference-file line="5">Backend/Coupon/generate.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.generate_header</source>
-        <target state="new">Generating coupons</target>
+        <target>Generating coupons</target>
       </trans-unit>
       <trans-unit id="ad8449bc1ca4677a15e33756d1591fdf5f59331b" resname="sylius.promotion_coupon.index">
         <jms:reference-file line="16">Backend/Promotion/show.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.index</source>
-        <target state="new">List coupons</target>
+        <target>List coupons</target>
       </trans-unit>
       <trans-unit id="e907e14265fa727fba9ec8ef1958767c5b8bff5e" resname="sylius.promotion_coupon.no_results">
         <jms:reference-file line="48">Backend/Coupon/macros.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.no_results</source>
-        <target state="new">There are no coupon to display.</target>
+        <target>There are no coupon to display.</target>
       </trans-unit>
       <trans-unit id="67ef2ffea4426e9a18fb1aa7bc487e1034cd368e" resname="sylius.promotion_coupon.total_results">
         <jms:reference-file line="16">Backend/Coupon/macros.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.total_results</source>
-        <target state="new">Total: %total%</target>
+        <target>Total: %total%</target>
       </trans-unit>
       <trans-unit id="a4bc2d7800a244c63e8b52fc08c542ffc1a32036" resname="sylius.promotion_coupon.update_header">
         <jms:reference-file line="9">Backend/Coupon/update.html.twig</jms:reference-file>
         <source>sylius.promotion_coupon.update_header</source>
-        <target state="new">Editing coupon</target>
+        <target>Editing coupon</target>
       </trans-unit>
       <trans-unit id="c35d71ca0fd4581668e4f6856c0243c0e14c3bf6" resname="sylius.promotion_rule.configuration">
         <jms:reference-file line="55">Backend/Promotion/show.html.twig</jms:reference-file>
@@ -1292,8 +1304,8 @@
       </trans-unit>
       <trans-unit id="f594cd5a547f5736863a378d5bef39ac72f1aca4" resname="sylius.property.manage">
         <jms:reference-file line="14">Backend/Option/index.html.twig</jms:reference-file>
-        <jms:reference-file line="15">Backend/Prototype/index.html.twig</jms:reference-file>
         <jms:reference-file line="15">Backend/Product/index.html.twig</jms:reference-file>
+        <jms:reference-file line="15">Backend/Prototype/index.html.twig</jms:reference-file>
         <source>sylius.property.manage</source>
         <target>Manage properties</target>
       </trans-unit>
@@ -1750,8 +1762,8 @@
         <target>Tax rates</target>
       </trans-unit>
       <trans-unit id="f58ffb4c3df3fd1f5ebe4301232ef612caaf71a7" resname="sylius.tax_rate.manage">
-        <jms:reference-file line="10">Backend/TaxRate/show.html.twig</jms:reference-file>
         <jms:reference-file line="14">Backend/TaxCategory/index.html.twig</jms:reference-file>
+        <jms:reference-file line="10">Backend/TaxRate/show.html.twig</jms:reference-file>
         <source>sylius.tax_rate.manage</source>
         <target>Manage tax rates</target>
       </trans-unit>
@@ -1896,6 +1908,11 @@
         <source>sylius.user.no_results</source>
         <target>There are no users to display.</target>
       </trans-unit>
+      <trans-unit id="3423d9ec26d169f704bd4db00365d5235120697f" resname="sylius.user.recent_header">
+        <jms:reference-file line="60">Backend/Dashboard/main.html.twig</jms:reference-file>
+        <source>sylius.user.recent_header</source>
+        <target>Recent users</target>
+      </trans-unit>
       <trans-unit id="8259d089b9874e98de0fa335bceda813ac69a66f" resname="sylius.user.show_header">
         <jms:reference-file line="5">Backend/User/show.html.twig</jms:reference-file>
         <source>sylius.user.show_header</source>
@@ -1980,6 +1997,11 @@
         <jms:reference-file line="32">Backend/Promotion/macros.html.twig</jms:reference-file>
         <jms:reference-file line="31">Backend/TaxRate/macros.html.twig</jms:reference-file>
         <jms:reference-file line="91">Backend/Product/show.html.twig</jms:reference-file>
+        <jms:reference-file line="31">Backend/TaxRate/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="32">Backend/Promotion/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="29">Backend/ShippingMethod/macros.html.twig</jms:reference-file>
+        <jms:reference-file line="41">Backend/ShippingMethod/show.html.twig</jms:reference-file>
+        <jms:reference-file line="29">Backend/PaymentMethod/macros.html.twig</jms:reference-file>
         <source>sylius.yes</source>
         <target>yes</target>
       </trans-unit>

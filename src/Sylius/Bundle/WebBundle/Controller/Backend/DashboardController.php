@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use DateTime;
 
 /**
  * Backend dashboard controller.
@@ -27,6 +28,49 @@ class DashboardController extends Controller
      */
     public function mainAction()
     {
-        return $this->render('SyliusWebBundle:Backend/Dashboard:main.html.twig');
+        $orderRepository = $this->get('sylius.repository.order');
+        $months = array_map(
+            function($m) {
+                return date('F', mktime(0, 0, 0, $m, 10));
+            },
+            range(1, 12)
+        );
+
+        return $this->render('SyliusWebBundle:Backend/Dashboard:main.html.twig', array(
+            'revenue' => $orderRepository->revenueBetweenDates(new DateTime('1 week ago'), new DateTime()),
+            'ordersCount' => $orderRepository->countBetweenDates(new DateTime('1 week ago'), new DateTime()),
+            'orders' => $orderRepository->findBy(array(), array('updatedAt' => 'desc'), 5),
+            'users' => $this->get('sylius.repository.user')->findBy(array(), array('id' => 'desc'), 5),
+            'charts' => array(
+                'chart_order_total' => array(
+                    'label' => 'Order value (€)',
+                    'type' => 'Line',
+                    'data' => array(
+                        'labels' => $months,
+                        'datasets' => array(
+                            array(
+                                'fillColor' => "rgba(151,187,205,0.5)",
+                                'strokeColor' => "rgba(151,187,205,1)",
+                                'data' => $orderRepository->getTotalStatistics()
+                            )
+                        )
+                    )
+                ),
+                'chart_order_count' => array(
+                    'label' => 'Number of orders',
+                    'type' => 'Line',
+                    'data' => array(
+                        'labels' => $months,
+                        'datasets' => array(
+                            array(
+                                'fillColor' => "rgba(151,187,205,0.5)",
+                                'strokeColor' => "rgba(151,187,205,1)",
+                                'data' => $orderRepository->getCountStatistics()
+                            )
+                        )
+                    )
+                )
+            )
+        ));
     }
 }
