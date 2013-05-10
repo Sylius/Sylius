@@ -1,5 +1,13 @@
 {% extends 'SyliusResourceBundle::layout.html.twig' %}
 
+{% block sylius_stylesheets %}
+    {{ parent() }}
+
+    <style media="screen" type="text/css">
+        .popover-content { word-break: break-all; }
+    </style>
+{% endblock %}
+
 {% block sylius_javascripts %}
     {{ parent() }}
 
@@ -43,7 +51,7 @@
                     {% if requirement.fulfilled %}
                         <span class="label label-success"><i class="icon-ok"></i></span>
                     {% else %}
-                        <a href="#" data-placement="top" data-trigger="click" title="{{ requirement.help }}"
+                        <a href="#" title="{{ requirement.label }}" data-placement="top" data-trigger="click" data-content="{{ requirement.help }}"
                             {% if requirement.required %}
                                 {% set fulfilled = false %}
                                 class="label label-important"><i class="icon-remove"
