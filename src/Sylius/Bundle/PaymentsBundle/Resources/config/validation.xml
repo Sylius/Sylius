@@ -36,5 +36,38 @@
             </constraint>
         </property>
     </class>
+    
+    <class name="Sylius\Bundle\PaymentsBundle\Model\CreditCard">
+    	<property name="number">
+            <constraint name="Luhn">
+                <option name="message">sylius.credit_card.number.luhn</option>
+            </constraint>
+        </property>
+        <property name="cardholderName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.credit_card.cardholder_name.not_blank</option>
+            </constraint>
+            <constraint name="Length">
+            	<option name="min">4</option>
+            	<option name="minMessage">sylius.credit_card.cardholder_name.min_length</option>
+        	</constraint>
+        </property>
+        <property name="securityCode">
+            <constraint name="Length">
+           		<option name="min">3</option>
+        		<option name="minMessage">sylius.credit_card.security_code.min_length</option>
+            	<option name="max">4</option>
+            	<option name="maxMessage">sylius.credit_card.security_code.max_length</option>
+        	</constraint>
+        </property>
+        <property name="expiryMonth">
+            <constraint name="Range">
+            	<option name="min">1</option>
+            	<option name="minMessage">sylius.credit_card.expiry_month.min_range</option>
+            	<option name="max">12</option>
+            	<option name="maxMessage">sylius.credit_card.expiry_month.max_range</option>
+        	</constraint>
+        </property>
+    </class>
 
 </constraint-mapping>
