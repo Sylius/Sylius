@@ -18,6 +18,23 @@ namespace Sylius\Bundle\PaymentsBundle\Model;
  */
 interface CreditCardInterface extends PaymentSourceInterface
 {
+	/**
+	 * Supported Credit Card Brands
+	 *
+	 */
+	const BRAND_VISA = 'visa';
+    const BRAND_MASTERCARD = 'mastercard';
+    const BRAND_DISCOVER = 'discover';
+    const BRAND_AMEX = 'amex';
+    const BRAND_DINERS_CLUB = 'diners_club';
+    const BRAND_JCB = 'jcb';
+    const BRAND_SWITCH = 'switch';
+    const BRAND_SOLO = 'solo';
+    const BRAND_DANKORT = 'dankort';
+    const BRAND_MAESTRO = 'maestro';
+    const BRAND_FORBRUGSFORENINGEN = 'forbrugsforeningen';
+    const BRAND_LASER = 'laser';
+
     /**
      * Get payments method identifier.
      *

@@ -51,6 +51,11 @@
             <argument>%sylius.payment_gateways%</argument>
             <tag name="form.type" alias="sylius_payment_gateway_choice" />
         </service>
+        <service id="sylius.form.type.credit_card" class="%sylius.form.type.credit_card.class%">
+            <argument>%sylius.model.credit_card.class%</argument>
+            <argument>%app.request.locale%</argument>
+            <tag name="form.type" alias="sylius_credit_card" />
+        </service>
     </services>
 
 </container>

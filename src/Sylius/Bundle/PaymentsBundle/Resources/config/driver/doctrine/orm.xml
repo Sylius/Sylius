@@ -29,6 +29,7 @@
 
         <parameter key="sylius.model.credit_card.class">Sylius\Bundle\PaymentsBundle\Entity\CreditCard</parameter>
         <parameter key="sylius.repository.credit_card.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.form.type.credit_card.class">Sylius\Bundle\PaymentsBundle\Form\Type\CreditCardType</parameter>
     </parameters>
 
     <services>
