@@ -135,12 +135,13 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function __construct()
     {
+        $this->number = uniqid(sha1(microtime(true)));
         $this->items = new ArrayCollection();
         $this->itemsTotal = 0;
         $this->adjustments = new ArrayCollection();
         $this->adjustmentsTotal = 0;
         $this->total = 0;
-        $this->confirmed = true;
+        $this->confirmed = false;
         $this->createdAt = new \DateTime();
         $this->totalItems = 0;
         $this->totalQuantity = 0;
