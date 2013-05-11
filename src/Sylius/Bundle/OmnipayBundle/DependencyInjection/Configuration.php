@@ -43,7 +43,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('type')
                                     ->validate()
-                                        ->ifTrue(function($type) use ($gateways){
+                                        ->ifTrue(function($type) use ($gateways) {
                                                     if (empty($type)) {
                                                         return true;
                                                     }
@@ -61,9 +61,9 @@ class Configuration implements ConfigurationInterface
                                 ->booleanNode('mode')->defaultFalse()->end()
                                 ->booleanNode('active')->defaultTrue()->end()
                                 ->arrayNode('cc_types')
-            						->prototype('scalar')
-            							->validate()
-                                        	->ifTrue(function($ccType) use ($brands){
+                                    ->prototype('scalar')
+                                        ->validate()
+                                            ->ifTrue(function($ccType) use ($ccTypes) {
                                                     if (empty($ccType)) {
                                                         return true;
                                                     }
@@ -74,10 +74,10 @@ class Configuration implements ConfigurationInterface
 
                                                     return false;
                                                 })
-                                        	->thenInvalid(sprintf('Unknown credit card type selected. Valid credit card types are: %s.',  implode(", ",$ccTypes)))
-                                    	->end()
-            						->end()
-        						->end()
+                                            ->thenInvalid(sprintf('Unknown credit card type selected. Valid credit card types are: %s.',  implode(", ",$ccTypes)))
+                                        ->end()
+                                    ->end()
+                                ->end()
                                 ->arrayNode('options')
                                     ->prototype('scalar')
                                 ->end()
