@@ -69,11 +69,19 @@ class CreditCardType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_credit_card';
+    }
+
+    /**
      * Get years to add as choices in expiryYear
      *
      * @return array
      */
-    public function getViableYears()
+    private function getViableYears()
     {
         $yearChoices = array();
         $currentYear = (int) date("Y");
@@ -83,13 +91,5 @@ class CreditCardType extends AbstractType
         }
 
         return $yearChoices;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_credit_card';
     }
 }
