@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Sylius bundles example layout</title>
+        <title>{% block sylius_title %}Sylius bundles example layout{% endblock %}</title>
         <meta charset="UTF-8">
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -10,14 +10,15 @@
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" />
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" />
-
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-            }
-        </style>
+        {% block sylius_stylesheets %}
+            <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" />
+            <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" />
+            <style type="text/css">
+                body {
+                    padding-top: 60px;
+                }
+            </style>
+        {% endblock %}
     </head>
     <body>
         <div class="navbar navbar-fixed-top navbar-inverse">
@@ -44,7 +45,9 @@
                 <p>&copy; <a href="http://Sylius.org">Sylius.org</a>, 2011 - {{ 'now'|date('Y') }}.</p>
             </footer>
         </div>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+        {% block sylius_javascripts %}
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+            <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+        {% endblock %}
     </body>
 </html>
