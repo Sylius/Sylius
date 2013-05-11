@@ -140,7 +140,7 @@ class Order implements OrderInterface, TimestampableInterface
         $this->adjustments = new ArrayCollection();
         $this->adjustmentsTotal = 0;
         $this->total = 0;
-        $this->confirmed = false;
+        $this->confirmed = true;
         $this->createdAt = new \DateTime();
         $this->totalItems = 0;
         $this->totalQuantity = 0;

@@ -301,4 +301,61 @@ class Order extends ObjectBehavior
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
+    
+    function it_is_empty_by_default()
+    {
+        $this->countItems()->shouldReturn(0);
+        $this->shouldBeEmpty();
+    }
+
+    function it_should_not_be_locked_by_default()
+    {
+        $this->shouldNotBeLocked();
+    }
+
+    function it_can_be_locked()
+    {
+        $this->setLocked(true);
+        $this->shouldBeLocked();
+    }
+
+    function it_is_not_expired_by_default()
+    {
+        $this->shouldNotBeExpired();
+    }
+    
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
+     */
+    function it_sums_the_quantities_of_equal_items($item1, $item2)
+    {
+        $item1->getQuantity()->willReturn(3);
+        $item2->getQuantity()->willReturn(7);
+
+        $item1->equals($item2)->willReturn(true);
+
+        $this
+            ->addItem($item1)
+            ->addItem($item2)
+        ;
+
+        $this->countItems()->shouldReturn(1);
+    }
+    
+    function it_is_not_expired_if_the_expiration_time_is_in_future()
+    {
+        $expiresAt = new \DateTime('tomorrow');
+        $this->setExpiresAt($expiresAt);
+
+        $this->shouldNotBeExpired();
+    }
+
+    function it_is_expired_if_the_expiration_time_is_in_past()
+    {
+        $expiresAt = new \DateTime('-1 hour');
+        $this->setExpiresAt($expiresAt);
+
+        $this->shouldBeExpired();
+    }
 }

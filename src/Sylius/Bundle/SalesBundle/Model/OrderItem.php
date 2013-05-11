@@ -112,6 +112,13 @@ class OrderItem implements OrderItemInterface
         if (0 > $quantity) {
             throw new \OutOfRangeException('Quantity must be greater than 0');
         }
+
+        if (!is_integer($quantity)) {
+            throw new \InvalidArgumentException(
+                sprintf('Order item accepts only integer as quantity, "%s" given.', gettype($quantity))
+            );
+        }
+
         $this->quantity = $quantity;
     }
 
@@ -160,6 +167,12 @@ class OrderItem implements OrderItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
+        if (!is_integer($unitPrice)) {
+            throw new \InvalidArgumentException(
+                sprintf('Order item accepts only integer as unit price, "%s" given.', gettype($unitPrice))
+            );
+        }
+
         $this->unitPrice = $unitPrice;
     }
 
