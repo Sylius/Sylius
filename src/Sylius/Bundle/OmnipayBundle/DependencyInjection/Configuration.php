@@ -33,7 +33,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $builder->root('sylius_omnipay');
 
         $gateways = GatewayFactory::find();
-        $ccTypes = array_keys(new CreditCard()->getSupportedBrands());
+        $omnipayCc = new CreditCard();
+        $ccTypes = array_keys($omnipayCc->getSupportedBrands());
 
         $rootNode
                 ->children()
