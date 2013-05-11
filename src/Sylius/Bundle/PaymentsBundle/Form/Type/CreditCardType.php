@@ -25,12 +25,9 @@ class CreditCardType extends AbstractType
 {
     protected $dataClass;
 
-    protected $locale;
-
-    public function __construct($dataClass, $locale = null)
+    public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
-        $this->locale = $locale;
     }
 
     /**
