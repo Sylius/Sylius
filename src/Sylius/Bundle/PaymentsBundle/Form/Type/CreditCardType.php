@@ -33,15 +33,13 @@ class CreditCardType extends AbstractType
         $this->locale = $locale;
     }
     
-    
-    
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     	$builder
-    		->add('type', 'choice', array( // TO-DO: get allowed card types, add as options
+    		->add('type', 'choice', array( 
             	'label'		=> 'sylius.form.credit_card.type',
                 'expanded'	=> true,
           	))
@@ -54,11 +52,11 @@ class CreditCardType extends AbstractType
           	->add('securityCode', 'number', array(
           	    'label'	=> 'sylius.form.credit_card.security_code',
           	))
-          	->add('expiryMonth', 'choice', array( // TO-DO: date-based selects; combine expiry into one field
+          	->add('expiryMonth', 'choice', array( 
           	    'label'		=> 'sylius.form.credit_card.expiry_month',
           	    'choices'	=>	array_combine(range(1,12), range(1,12))
           	))
-          	->add('expiryYear', 'choice', array( // TO-DO: date-based selects; combine expiry into one field
+          	->add('expiryYear', 'choice', array( 
           	    'label'		=> 'sylius.form.credit_card.expiry_year',
           	    'choices'	=>	$this->getViableYears()
           	))
