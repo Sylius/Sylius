@@ -18,11 +18,11 @@ namespace Sylius\Bundle\PaymentsBundle\Model;
  */
 interface CreditCardInterface extends PaymentSourceInterface
 {
-	/**
-	 * Supported Credit Card Brands
-	 *
-	 */
-	const BRAND_VISA = 'visa';
+    /**
+     * Supported Credit Card Brands
+     *
+     */
+    const BRAND_VISA = 'visa';
     const BRAND_MASTERCARD = 'mastercard';
     const BRAND_DISCOVER = 'discover';
     const BRAND_AMEX = 'amex';

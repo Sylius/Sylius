@@ -20,12 +20,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class CreditCardType extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('CreditCard');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
@@ -33,14 +33,14 @@ class CreditCardType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_builds_form_with_proper_fields($builder)
+    public function it_builds_form_with_proper_fields($builder)
     {
         $builder
             ->add('type', 'choice', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
-        
+
         $builder
             ->add('cardholderName', 'text', ANY_ARGUMENT)
             ->shouldBeCalled()
@@ -64,7 +64,7 @@ class CreditCardType extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
-        
+
         $builder
             ->add('expiryYear', 'choice', ANY_ARGUMENT)
             ->shouldBeCalled()
@@ -77,7 +77,7 @@ class CreditCardType extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    function it_defines_assigned_data_class($resolver)
+    public function it_defines_assigned_data_class($resolver)
     {
         $resolver->setDefaults(array('data_class' => 'CreditCard'))->shouldBeCalled();
 

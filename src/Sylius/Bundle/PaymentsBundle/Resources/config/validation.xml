@@ -36,7 +36,7 @@
             </constraint>
         </property>
     </class>
-    
+
     <class name="Sylius\Bundle\PaymentsBundle\Model\CreditCard">
     	<property name="number">
             <constraint name="Luhn">

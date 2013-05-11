@@ -21,4 +21,3 @@ sylius:
         expiry_month:
             min_range: "The credit card's expiration month must be between {{ min }} and {{ max }}."
             max_range: "The credit card's expiration month must be between {{ min }} and {{ max }}."
-            
