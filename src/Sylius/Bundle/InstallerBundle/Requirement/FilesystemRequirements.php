@@ -49,11 +49,11 @@ class FilesystemRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.filesystem.parameters', array(), 'requirements'),
-                $status = is_writable($root.'/config/container/parameters.yml'),
+                $status = is_writable($root.'/config/parameters.yml'),
                 $writable,
                 $status ? $writable : $notWritable,
                 true,
-                $translator->trans('sylius.filesystem.parameters.help', array('%path%' => $root.'/config/container/parameters.yml'), 'requirements')
+                $translator->trans('sylius.filesystem.parameters.help', array('%path%' => $root.'/config/parameters.yml'), 'requirements')
             ))
         ;
     }

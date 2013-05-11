@@ -1,6 +1,31 @@
-{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
 
-{% block content %}
+{% block sylius_stylesheets %}
+    {{ parent() }}
+
+    <style media="screen" type="text/css">
+        .popover-content { word-break: break-all; }
+    </style>
+{% endblock %}
+
+{% block sylius_javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+    (function ($) {
+        $(document).ready(function() {
+
+            $('table a').on('click', function(e) {
+                e.preventDefault();
+
+                $(this).popover();
+            });
+        });
+    })( jQuery );
+    </script>
+{% endblock %}
+
+{% block sylius_content %}
 <div class="page-header">
     <h1>{{ 'sylius.process.step.check.header'|trans|raw }}</h1>
 </div>
@@ -26,14 +51,14 @@
                     {% if requirement.fulfilled %}
                         <span class="label label-success"><i class="icon-ok"></i></span>
                     {% else %}
-                        <span title="{{ requirement.help }}"
+                        <a href="#" title="{{ requirement.label }}" data-placement="top" data-trigger="click" data-content="{{ requirement.help }}"
                             {% if requirement.required %}
                                 {% set fulfilled = false %}
                                 class="label label-important"><i class="icon-remove"
                             {% else %}
                                 class="label label-warning"><i class="icon-warning-sign"
                             {% endif %}
-                        ></i></span>
+                        ></i></a>
                     {% endif %}
                 </td>
             </tr>

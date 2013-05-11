@@ -24,6 +24,7 @@ class LocaleType extends AbstractType
                 'preferred_choices' => array('en', 'pl', 'es', 'de'),
                 'constraints' => array(
                     new Assert\NotBlank(),
+                    new Assert\Locale(),
                 ),
                 'label' => 'sylius.form.configuration.locale.locale',
             ))
