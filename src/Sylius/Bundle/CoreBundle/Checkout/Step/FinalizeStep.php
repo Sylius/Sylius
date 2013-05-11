@@ -71,7 +71,7 @@ class FinalizeStep extends CheckoutStep
         $cart = $this->getCurrentCart();
 
         foreach ($cart->getItems() as $item) {
-            $orderBuilder->add($item->getVariant(), $item->getUnitPrice(), $item->getQuantity());
+            $orderBuilder->add($item->getSellable(), $item->getUnitPrice(), $item->getQuantity());
         }
 
         $order = $orderBuilder->getOrder();

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Cart;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Bundle\SalesBundle\Model\OrderItemInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
@@ -72,7 +72,7 @@ class ItemResolver implements ItemResolverInterface
      *
      * Here we create the item that is going to be added to cart, basing on the current request.
      */
-    public function resolve(CartItemInterface $item, Request $request)
+    public function resolve(OrderItemInterface $item, Request $request)
     {
         if (!$request->isMethod('POST')) {
             throw new ItemResolvingException('Wrong request method');
@@ -98,10 +98,10 @@ class ItemResolver implements ItemResolverInterface
 
         // If our product has no variants, we simply set the master variant of it.
         if (!$product->hasOptions()) {
-            $item->setVariant($product->getMasterVariant());
+            $item->setSellable($product->getMasterVariant());
         }
 
-        $variant = $item->getVariant();
+        $variant = $item->getSellable();
 
         // If all is ok with form, quantity and other stuff, simply return the item.
         if (!$form->isValid() || null === $variant) {

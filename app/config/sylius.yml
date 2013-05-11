@@ -10,9 +10,9 @@ sylius_cart:
     resolver: sylius.cart_item_resolver.default
     classes:
         cart:
-            model: Sylius\Bundle\CoreBundle\Entity\Cart
+            model: Sylius\Bundle\CoreBundle\Entity\Order
         item:
-            model: Sylius\Bundle\CoreBundle\Entity\CartItem
+            model: Sylius\Bundle\SalesBundle\Entity\DefaultOrderItem
             form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
 
 sylius_settings:
