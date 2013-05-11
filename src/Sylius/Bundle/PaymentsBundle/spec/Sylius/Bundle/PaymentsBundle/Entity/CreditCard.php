@@ -16,7 +16,7 @@ use PHPSpec2\ObjectBehavior;
 /**
  * Credit Card spec.
  *
- * @author Dylan Johnson
+ * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
 class CreditCard extends ObjectBehavior
 {

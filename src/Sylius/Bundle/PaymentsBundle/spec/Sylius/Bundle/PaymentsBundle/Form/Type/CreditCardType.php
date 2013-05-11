@@ -16,7 +16,7 @@ use PHPSpec2\ObjectBehavior;
 /**
  * Credit Card form type spec.
  *
- * @author Dylan Johnson
+ * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
 class CreditCardType extends ObjectBehavior
 {
