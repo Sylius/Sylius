@@ -252,11 +252,11 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function addItem(OrderItemInterface $item)
     {
-    	if ($this->hasItem($item)) {
-    		return $this;
-    	}
+        if ($this->hasItem($item)) {
+            return $this;
+        }
 
-    	foreach ($this->items as $existingItem) {
+        foreach ($this->items as $existingItem) {
             if ($item->equals($existingItem)) {
                 $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
 
