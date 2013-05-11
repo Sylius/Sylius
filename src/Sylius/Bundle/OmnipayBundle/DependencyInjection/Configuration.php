@@ -14,11 +14,13 @@ namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Omnipay\Common\GatewayFactory;
+use Omnipay\Common\CreditCard;
 
 /**
  * This class contains the configuration information for the bundle.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -31,6 +33,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $builder->root('sylius_omnipay');
 
         $gateways = GatewayFactory::find();
+        $omnipayCc = new CreditCard();
+        $ccTypes = array_keys($omnipayCc->getSupportedBrands());
 
         $rootNode
                 ->children()
@@ -40,7 +44,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('type')
                                     ->validate()
-                                        ->ifTrue(function($type) use ($gateways){
+                                        ->ifTrue(function($type) use ($gateways) {
                                                     if (empty($type)) {
                                                         return true;
                                                     }
@@ -57,6 +61,24 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('label')->cannotBeEmpty()->end()
                                 ->booleanNode('mode')->defaultFalse()->end()
                                 ->booleanNode('active')->defaultTrue()->end()
+                                ->arrayNode('cc_types')
+                                    ->prototype('scalar')
+                                        ->validate()
+                                            ->ifTrue(function($ccType) use ($ccTypes) {
+                                                    if (empty($ccType)) {
+                                                        return true;
+                                                    }
+
+                                                    if (!in_array($ccType, $ccTypes)) {
+                                                        return true;
+                                                    }
+
+                                                    return false;
+                                                })
+                                            ->thenInvalid(sprintf('Unknown credit card type selected. Valid credit card types are: %s.',  implode(", ",$ccTypes)))
+                                        ->end()
+                                    ->end()
+                                ->end()
                                 ->arrayNode('options')
                                     ->prototype('scalar')
                                 ->end()
