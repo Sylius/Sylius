@@ -44,6 +44,12 @@
         <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Entity\User" inversed-by="orders">
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
+                <many-to-one field="shippingMethod" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface">
+            <join-column name="shipping_method_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+        <many-to-one field="paymentMethod" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface">
+            <join-column name="payment_method_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
     </entity>
 
 </doctrine-mapping>
