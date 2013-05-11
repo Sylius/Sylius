@@ -9,3 +9,15 @@ sylius:
             max_length: "Payment method name must be {{ limit }} characters long or less."
         gateway:
             not_blank: "Please select payment method gateway."
+    credit_card:
+        number:
+            luhn: "The credit card number you entered is invalid."
+        cardholder_name:
+            not_blank: "Please enter the name of the cardholder."
+            min_length: "The cardholder's name must be at least {{ limit }} characters long."
+        security_code:
+            min_length: "The credit card's CVV code must be between {{ min }} and {{ max }} characters long."
+            max_length: "The credit card's CVV code must be between {{ min }} and {{ max }} characters long."
+        expiry_month:
+            min_range: "The credit card's expiration month must be between {{ min }} and {{ max }}."
+            max_range: "The credit card's expiration month must be between {{ min }} and {{ max }}."

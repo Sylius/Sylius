@@ -25,12 +25,12 @@ class Payment extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Entity\Payment');
     }
 
-    function it_implements_Sylius_payment_method_interface()
+    function it_implements_Sylius_payment_interface()
     {
         $this->shouldImplement('Sylius\Bundle\PaymentsBundle\Model\PaymentInterface');
     }
 
-    function it_extends_Sylius_payment_method_model()
+    function it_extends_Sylius_payment_model()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Model\Payment');
     }
