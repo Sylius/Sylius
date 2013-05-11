@@ -138,4 +138,100 @@ interface OrderInterface extends AdjustableInterface
      * Items total + Adjustments total.
      */
     public function calculateTotal();
+
+    /**
+     * Returns number of items in cart.
+     *
+     * @return integer
+     */
+    public function getTotalItems();
+
+    /**
+     * Sets number of items in cart.
+     *
+     * @param integer $totalItems
+     */
+    public function setTotalItems($totalItems);
+
+    /**
+     * Change total items number by given amount.
+     *
+     * @param integer $amount
+     */
+    public function changeTotalItems($amount);
+
+    /**
+     * Returns total quantity of items in cart.
+     *
+     * @return integer
+     */
+    public function getTotalQuantity();
+
+    /**
+     * Sets total quantity of items in cart.
+     *
+     * @param integer $totalQuantity
+     */
+    public function setTotalQuantity($totalQuantity);
+
+    /**
+     * Change total quantity number by given amount.
+     *
+     * @param integer $amount
+     */
+    public function changeTotalQuantity($amount);
+
+    /**
+     * Checks whether the cart is locked or not.
+     * If cart is left unlocked, it should be deleted after expiration time.
+     *
+     * @return Boolean
+     */
+    public function isLocked();
+
+    /**
+     * Sets whether the cart is locked or not.
+     *
+     * @param Boolean $locked
+     */
+    public function setLocked($locked);
+
+    /**
+     * Checks whether the cart is empty or not.
+     *
+     * @return Boolean
+     */
+    public function isEmpty();
+
+    /**
+     * Clears all items in cart.
+     */
+    public function clearItems();
+
+    /**
+     * Gets expiration time.
+     *
+     * @return \DateTime
+     */
+    public function getExpiresAt();
+
+    /**
+     * Sets expiration time.
+     *
+     * @param \DateTime|null $expiresAt
+     */
+    public function setExpiresAt(\DateTime $expiresAt = null);
+
+    /**
+     * Bumps the expiration time.
+     * Default is +3 hours.
+     */
+    public function incrementExpiresAt();
+
+    /**
+     * Checks whether the cart is expired or not.
+     *
+     * @return Boolean
+     */
+    public function isExpired();
 }

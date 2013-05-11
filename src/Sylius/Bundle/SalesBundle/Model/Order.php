@@ -101,6 +101,36 @@ class Order implements OrderInterface, TimestampableInterface
     protected $updatedAt;
 
     /**
+     * Total items count.
+     *
+     * @var integer
+     */
+    protected $totalItems;
+
+    /**
+     * Total quantity of items.
+     *
+     * @var integer
+     */
+    protected $totalQuantity;
+
+    /**
+     * Is cart locked?
+     * Locked carts should not be removed
+     * even if expired.
+     *
+     * @var Boolean
+     */
+    protected $locked;
+
+    /**
+     * Expiration time.
+     *
+     * @var \DateTime
+     */
+    protected $expiresAt;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -112,6 +142,10 @@ class Order implements OrderInterface, TimestampableInterface
         $this->total = 0;
         $this->confirmed = true;
         $this->createdAt = new \DateTime();
+        $this->totalItems = 0;
+        $this->totalQuantity = 0;
+        $this->locked = false;
+        $this->incrementExpiresAt();
     }
 
     /**
@@ -217,10 +251,20 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function addItem(OrderItemInterface $item)
     {
-        if (!$this->hasItem($item)) {
-            $item->setOrder($this);
-            $this->items->add($item);
+    	if ($this->hasItem($item)) {
+    		return $this;
+    	}
+
+    	foreach ($this->items as $existingItem) {
+            if ($item->equals($existingItem)) {
+                $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
+
+                return $this;
+            }
         }
+
+        $item->setOrder($this);
+        $this->items->add($item);
 
         return $this;
     }
@@ -409,4 +453,136 @@ class Order implements OrderInterface, TimestampableInterface
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocked($locked)
+    {
+        $this->locked = $locked;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalItems()
+    {
+        return $this->totalItems;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTotalItems($totalItems)
+    {
+        if (0 > $totalItems) {
+            throw new \OutOfRangeException('Total items must not be less than 0');
+        }
+
+        $this->totalItems = $totalItems;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeTotalItems($amount)
+    {
+        $this->totalItems += $amount;
+
+        if (0 > $this->totalItems) {
+            $this->totalItems = 0;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalQuantity()
+    {
+        return $this->totalQuantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTotalQuantity($totalQuantity)
+    {
+        if (0 > $totalQuantity) {
+            throw new \OutOfRangeException('Total quantity must not be less than 0');
+        }
+
+        $this->totalQuantity = $totalQuantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeTotalQuantity($amount)
+    {
+        $this->totalQuantity += $amount;
+
+        if (0 > $this->totalQuantity) {
+            $this->totalQuantity = 0;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        return 0 === $this->countItems();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isExpired()
+    {
+        return $this->getExpiresAt() < new \DateTime('now');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExpiresAt(\DateTime $expiresAt = null)
+    {
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function incrementExpiresAt()
+    {
+        $expiresAt = new \DateTime();
+        $expiresAt->add(new \DateInterval('PT3H'));
+
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
 }
