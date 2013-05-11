@@ -1,4 +1,4 @@
-{% set product = item.variant.product %}
+{% set product = item.sellable.product %}
 <tr>
     <td>{{ loop.index }}</td>
     <td>
@@ -11,7 +11,7 @@
         <p><strong>{{ product.name }}<strong></p>
         </a>
         <ul>
-            {% for option in item.variant.options %}
+            {% for option in item.sellable.options %}
             <li>{{ option.presentation }}: {{ option.value }}</li>
             {% endfor %}
         </ul>
