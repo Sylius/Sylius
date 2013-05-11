@@ -93,4 +93,14 @@ interface OrderItemInterface extends AdjustableInterface
      * Take adjustments into account.
      */
     public function calculateTotal();
+
+    /**
+     * Checks whether the item given as argument corresponds to
+     * the same cart item. Can be overwritten to sum up quantity.
+     *
+     * @param OrderItemInterface $orderItem
+     *
+     * @return Boolean
+     */
+    public function equals(OrderItemInterface $orderItem);
 }

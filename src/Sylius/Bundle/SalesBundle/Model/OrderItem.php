@@ -256,4 +256,12 @@ class OrderItem implements OrderItemInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(OrderItemInterface $orderItem)
+    {
+        return $this->getId() === $orderItem->getId();
+    }
 }
