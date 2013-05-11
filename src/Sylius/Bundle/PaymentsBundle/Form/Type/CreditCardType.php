@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is an extension of the Sylius package.
+ * This file is part of the Sylius package.
  *
- * (c) Dylan Johnson
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,7 +19,7 @@ use Symfony\Component\Form\AbstractType;
 /**
  * Credit Card Form Type
  *
- * @author Dylan Johnson
+ * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
 class CreditCardType extends AbstractType
 {		
