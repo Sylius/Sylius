@@ -36,11 +36,11 @@ You're interacting with them like you usually do with own entities in your proje
         $this->get('sylius.repository.cart_item');
 
         // Those repositories have some handy default methods, for example...
-        $item = $itemRepository->createNew();
+        $item = $this->get('sylius.repository.cart')->createNew();
     }
 
 Provider and Resolver
--------------------------------
+---------------------
 
 There are also 3 more services for you.
 
@@ -73,7 +73,7 @@ The resolver is used to create a new item based on user request.
     public function addItemAction(Request $request)
     {
         $resolver = $this->get('sylius.cart_resolver');
-        $item = $this->resolve($this->createNew(), $request);
+        $item = $resolver->resolve($this->createNew(), $request);
     }
 
 .. note::

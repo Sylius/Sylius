@@ -30,8 +30,15 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
+
+            // Other bundles...
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
         );
     }
+
+.. note::
+
+    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
 Container configuration
 -----------------------
@@ -44,15 +51,13 @@ Put this configuration inside your ``app/config/config.yml``.
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
 Routing configuration
--------------------------------
+---------------------
 
-We will show an example here, how you can configure routing.
-Routing is based on `SyliusResourceBundle`.
-
-Add folowing to your ``app/config/routing.yml``.
+Import routing configuration by adding folowing to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
+<<<<<<< HEAD
 	sylius_address_list:
 	    pattern: /address/list
 	    defaults:
@@ -93,6 +98,8 @@ Add folowing to your ``app/config/routing.yml``.
 	        _sylius.resource:
 	            template: AcmeDemoBundle:Address:show.html.twig
 
+    sylius_addressing:
+        resource: @SyliusAddressingBundle/Resources/config/routing.yml
 
 Updating database schema
 ------------------------
@@ -112,11 +119,8 @@ For "**doctrine/orm**" driver run the following command.
 Templates
 ---------
 
-We think that providing a sensible default templates is really difficult.
-This is the reason why we do not currently include any, but if you have an idea for a good starter template, let us know!
-
-The bundle requires ``list``, ``create``, ``update`` and ``show`` templates for addresses, and similar for zones.
+Bundle provides default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
 
 .. note::
 
-    You can use `the templates from our Sandbox app as inspiration <https://github.com/Sylius/Sylius-Sandbox/tree/master/src/Sylius/Bundle/SandboxBundle/Resources/views/Backend/Address>`_.
+    You can check `Sylius application <http://github.com/Sylius/Sylius>`_ to see how to integrate it in your application.

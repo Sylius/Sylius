@@ -1,6 +1,13 @@
 SyliusAssortmentBundle
 ======================
 
-.. note::
+Simple yet powerful products system for Symfony2 applications.
+It supports simple product catalogs, as well as stores with requirement for fully customizable variants, options, properties and handy prototypes.
 
-    To be written.
+.. toctree::
+   :numbered:
+
+   installation
+   models
+   services
+   summary

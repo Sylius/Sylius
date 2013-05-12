@@ -7,7 +7,7 @@ You can see usage guide below.
 Cart summary page
 -----------------
 
-To point user to the cart summary page, you can use the ``sylius_cart_show`` route.
+To point user to the cart summary page, you can use the ``sylius_cart_summary`` route.
 It will render the page with the `cart` and `form` variables by default.
 
 The `cart` is the current cart and `form` is the view of cart form.
@@ -51,6 +51,6 @@ with following action.
 
 .. code-block:: html
 
-    <form action="{{ path('sylius_cart_save') }}" method="post">Clear cart</a>
+    <form action="{{ path('sylius_cart_save') }}" method="post">Save cart</a>
 
 You cart will be validated and saved if everything is alright.
