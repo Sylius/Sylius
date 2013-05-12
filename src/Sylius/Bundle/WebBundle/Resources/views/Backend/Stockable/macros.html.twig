@@ -5,10 +5,10 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
-                <th>{{ sylius_resource_sort('sku') }}</th>
-                <th>name</th>
-                <th>{{ sylius_resource_sort('onHand', 'stock level') }}</th>
-                <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+                <th>{{ sylius_resource_sort('sku', 'sylius.stockable.sku'|trans) }}</th>
+                <th>{{ 'sylius.stockable.name'|trans }}</th>
+                <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.stockable.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>

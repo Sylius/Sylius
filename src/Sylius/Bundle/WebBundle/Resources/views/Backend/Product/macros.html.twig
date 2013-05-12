@@ -7,12 +7,12 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id') }}</th>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
             <th></th>
-            <th>{{ sylius_resource_sort('sku') }}</th>
-            <th>{{ sylius_resource_sort('name') }}</th>
-            <th>{{ sylius_resource_sort('price') }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th>{{ sylius_resource_sort('sku', 'sylius.product.sku'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('price', 'sylius.product.price'|trans) }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.product.updated_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>

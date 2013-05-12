@@ -37,11 +37,9 @@
                 </ul>
             </td>
             <td>
-                {% if variant.availableOnDemand %}
-                    <span class="badge badge-success">{{ 'sylius.yes'|trans }}</span>
-                {% else %}
-                    <span class="badge badge-warning">{{ 'sylius.no'|trans }}</span>
-                {% endif %}
+                <span class="badge badge-{{ variant.availableOnDemand ? 'success' : 'warning'}}">
+                    {{ variant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                </span>
             </td>
             <td><span class="badge badge-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
             <td>{{ variant.price|sylius_money }}</td>
