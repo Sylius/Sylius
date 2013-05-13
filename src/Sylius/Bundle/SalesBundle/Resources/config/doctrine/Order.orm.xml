@@ -19,8 +19,6 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="locked" column="locked" type="boolean" />
-        <field name="totalItems" column="total_items" type="integer" />
-        <field name="totalQuantity" column="total_quantity" type="integer" />
         <field name="expiresAt" column="expires_at" type="datetime" />
     </mapped-superclass>
 

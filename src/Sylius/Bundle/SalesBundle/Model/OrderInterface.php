@@ -147,39 +147,11 @@ interface OrderInterface extends AdjustableInterface
     public function getTotalItems();
 
     /**
-     * Sets number of items in cart.
-     *
-     * @param integer $totalItems
-     */
-    public function setTotalItems($totalItems);
-
-    /**
-     * Change total items number by given amount.
-     *
-     * @param integer $amount
-     */
-    public function changeTotalItems($amount);
-
-    /**
      * Returns total quantity of items in cart.
      *
      * @return integer
      */
     public function getTotalQuantity();
-
-    /**
-     * Sets total quantity of items in cart.
-     *
-     * @param integer $totalQuantity
-     */
-    public function setTotalQuantity($totalQuantity);
-
-    /**
-     * Change total quantity number by given amount.
-     *
-     * @param integer $amount
-     */
-    public function changeTotalQuantity($amount);
 
     /**
      * Checks whether the cart is locked or not.

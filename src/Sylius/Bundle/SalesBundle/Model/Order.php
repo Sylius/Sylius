@@ -101,20 +101,6 @@ class Order implements OrderInterface, TimestampableInterface
     protected $updatedAt;
 
     /**
-     * Total items count.
-     *
-     * @var integer
-     */
-    protected $totalItems;
-
-    /**
-     * Total quantity of items.
-     *
-     * @var integer
-     */
-    protected $totalQuantity;
-
-    /**
      * Is cart locked?
      * Locked carts should not be removed
      * even if expired.
@@ -142,8 +128,6 @@ class Order implements OrderInterface, TimestampableInterface
         $this->total = 0;
         $this->confirmed = true;
         $this->createdAt = new \DateTime();
-        $this->totalItems = 0;
-        $this->totalQuantity = 0;
         $this->locked = false;
         $this->incrementExpiresAt();
     }
@@ -476,35 +460,7 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function getTotalItems()
     {
-        return $this->totalItems;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTotalItems($totalItems)
-    {
-        if (0 > $totalItems) {
-            throw new \OutOfRangeException('Total items must not be less than 0');
-        }
-
-        $this->totalItems = $totalItems;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function changeTotalItems($amount)
-    {
-        $this->totalItems += $amount;
-
-        if (0 > $this->totalItems) {
-            $this->totalItems = 0;
-        }
-
-        return $this;
+        return count($this->items);
     }
 
     /**
@@ -512,31 +468,13 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function getTotalQuantity()
     {
-        return $this->totalQuantity;
-    }
+        $quantity = 0;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setTotalQuantity($totalQuantity)
-    {
-        if (0 > $totalQuantity) {
-            throw new \OutOfRangeException('Total quantity must not be less than 0');
+        foreach ($this->items as $item) {
+            $quantity += $item->getQuantity();
         }
 
-        $this->totalQuantity = $totalQuantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function changeTotalQuantity($amount)
-    {
-        $this->totalQuantity += $amount;
-
-        if (0 > $this->totalQuantity) {
-            $this->totalQuantity = 0;
-        }
+        return $quantity;
     }
 
     /**
