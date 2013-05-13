@@ -119,7 +119,7 @@ class Order implements OrderInterface, TimestampableInterface
         $this->total = 0;
         $this->confirmed = true;
         $this->createdAt = new \DateTime();
-        $this->locked = OrderStates::INITIAL;
+        $this->state = OrderStates::INITIAL;
     }
 
     /**
