@@ -8,7 +8,6 @@
 
     <mapped-superclass name="Sylius\Bundle\SalesBundle\Entity\Order" table="sylius_order">
         <field name="number" column="number" type="string" nullable="true" />
-        <field name="confirmed" column="confirmed" type="boolean" />
         <field name="itemsTotal" column="items_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
