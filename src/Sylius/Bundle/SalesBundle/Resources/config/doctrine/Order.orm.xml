@@ -18,7 +18,7 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <field name="locked" column="locked" type="boolean" />
+        <field name="state" column="state" type="integer" />
     </mapped-superclass>
 
 </doctrine-mapping>

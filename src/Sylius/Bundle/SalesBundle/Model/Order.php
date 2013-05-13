@@ -101,13 +101,11 @@ class Order implements OrderInterface, TimestampableInterface
     protected $updatedAt;
 
     /**
-     * Is cart locked?
-     * Locked carts should not be removed
-     * even if expired.
+     * State
      *
-     * @var Boolean
+     * @var integer
      */
-    protected $locked;
+    protected $state;
 
     /**
      * Constructor.
@@ -121,7 +119,7 @@ class Order implements OrderInterface, TimestampableInterface
         $this->total = 0;
         $this->confirmed = true;
         $this->createdAt = new \DateTime();
-        $this->locked = false;
+        $this->locked = OrderStates::INITIAL;
     }
 
     /**
@@ -155,7 +153,7 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function isConfirmed()
     {
-        return $this->confirmed;
+        return OrderStates::ORDER_CONFIRMED === $this->state;
     }
 
     /**
@@ -163,7 +161,7 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function setConfirmed($confirmed)
     {
-        $this->confirmed = (Boolean) $confirmed;
+        $this->state = (Boolean) $confirmed ? OrderStates::ORDER_CONFIRMED : OrderStates::ORDER;
 
         return $this;
     }
@@ -427,24 +425,6 @@ class Order implements OrderInterface, TimestampableInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isLocked()
-    {
-        return $this->locked;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocked($locked)
-    {
-        $this->locked = $locked;
-
-        return $this;
     }
 
     /**

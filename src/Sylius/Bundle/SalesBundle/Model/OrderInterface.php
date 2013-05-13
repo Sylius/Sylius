@@ -154,21 +154,6 @@ interface OrderInterface extends AdjustableInterface
     public function getTotalQuantity();
 
     /**
-     * Checks whether the cart is locked or not.
-     * If cart is left unlocked, it should be deleted after expiration time.
-     *
-     * @return Boolean
-     */
-    public function isLocked();
-
-    /**
-     * Sets whether the cart is locked or not.
-     *
-     * @param Boolean $locked
-     */
-    public function setLocked($locked);
-
-    /**
      * Checks whether the cart is empty or not.
      *
      * @return Boolean

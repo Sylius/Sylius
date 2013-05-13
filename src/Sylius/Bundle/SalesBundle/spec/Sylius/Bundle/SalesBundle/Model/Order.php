@@ -270,9 +270,15 @@ class Order extends ObjectBehavior
         $this->getTotal()->shouldReturn(70000);
     }
 
-    function it_is_confirmed_by_default()
+    function it_is_not_confirmed_by_default()
     {
-        $this->shouldBeConfirmed();
+        $this->shouldNotBeConfirmed();
+    }
+
+    function its_confirmation_status_is_activable()
+    {
+        $this->setConfirmed(true);
+        $this->isConfirmed()->shouldReturn(true);
     }
 
     function its_confirmation_status_is_mutable()
@@ -306,17 +312,6 @@ class Order extends ObjectBehavior
     {
         $this->countItems()->shouldReturn(0);
         $this->shouldBeEmpty();
-    }
-
-    function it_should_not_be_locked_by_default()
-    {
-        $this->shouldNotBeLocked();
-    }
-
-    function it_can_be_locked()
-    {
-        $this->setLocked(true);
-        $this->shouldBeLocked();
     }
 
     /**
