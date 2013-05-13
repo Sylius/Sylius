@@ -1,0 +1,37 @@
+<h1>{{ product.name }} <small>{{ product.description }}</small></h1>
+<hr />
+<div class="well well-small">
+    <a href="{{ path('sylius_product_index') }}" class="btn btn-success">
+        <i class="icon-pencil"></i> manage products
+    </a>
+    <a href="{{ path('sylius_product_update', {'id': product.id}) }}" class="btn">
+        <i class="icon-pencil"></i> update product
+    </a>
+    <form action="{{ path('sylius_product_delete', {'id': product.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i> delete product
+        </button>
+    </form>
+</div>
+<hr>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>{{ 'name' }}</th>
+            <th>{{ 'available on' }}</th>
+            <th>{{ 'created at' }}</th>
+            <th>{{ 'updated at' }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td><span class="label label-{{ product.available ? 'success' : 'important' }}">{{ product.availableOn|date }}</span></td>
+            <td><span class="label label-info">{{ product.createdAt|date }}</span></td>
+            <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.product_to_identifier.class">Sylius\Bundle\ProductBundle\Form\Type\ProductToIdentifierType</parameter>
+
+        <parameter key="sylius.builder.product.class">Sylius\Bundle\ProductBundle\Builder\ProductBuilder</parameter>
+        <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.product" class="%sylius.controller.product.class%">
+            <argument>sylius</argument>
+            <argument>product</argument>
+            <argument>SyliusProductBundle:Product</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.form.type.product" class="%sylius.form.type.product.class%">
+            <argument>%sylius.model.product.class%</argument>
+            <tag name="form.type" alias="sylius_product" />
+        </service>
+        <service id="sylius.form.type.product_to_identifier" class="%sylius.form.type.product_to_identifier.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="form.type" alias="sylius_product_to_identifier" />
+        </service>
+
+        <service id="sylius.builder.product" class="%sylius.builder.product.class%">
+            <argument type="service" id="sylius.manager.product" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.property" />
+            <argument type="service" id="sylius.repository.product_property" />
+            <argument type="service" id="sylius.repository.option" />
+            <argument type="service" id="sylius.repository.option_value" />
+        </service>
+
+        <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
+        </service>
+    </services>
+
+</container>
