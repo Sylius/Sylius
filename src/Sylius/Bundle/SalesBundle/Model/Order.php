@@ -476,43 +476,4 @@ class Order implements OrderInterface, TimestampableInterface
     {
         return 0 === $this->countItems();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isExpired()
-    {
-        return $this->getExpiresAt() < new \DateTime('now');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExpiresAt(\DateTime $expiresAt = null)
-    {
-        $this->expiresAt = $expiresAt;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incrementExpiresAt()
-    {
-        $expiresAt = new \DateTime();
-        $expiresAt->add(new \DateInterval('PT3H'));
-
-        $this->expiresAt = $expiresAt;
-
-        return $this;
-    }
 }
