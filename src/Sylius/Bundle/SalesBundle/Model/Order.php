@@ -110,13 +110,6 @@ class Order implements OrderInterface, TimestampableInterface
     protected $locked;
 
     /**
-     * Expiration time.
-     *
-     * @var \DateTime
-     */
-    protected $expiresAt;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -129,7 +122,6 @@ class Order implements OrderInterface, TimestampableInterface
         $this->confirmed = true;
         $this->createdAt = new \DateTime();
         $this->locked = false;
-        $this->incrementExpiresAt();
     }
 
     /**
@@ -460,7 +452,7 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function getTotalItems()
     {
-        return count($this->items);
+        return $this->countItems(); /** @TODO: We may want to delete that */
     }
 
     /**

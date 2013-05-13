@@ -179,31 +179,4 @@ interface OrderInterface extends AdjustableInterface
      * Clears all items in cart.
      */
     public function clearItems();
-
-    /**
-     * Gets expiration time.
-     *
-     * @return \DateTime
-     */
-    public function getExpiresAt();
-
-    /**
-     * Sets expiration time.
-     *
-     * @param \DateTime|null $expiresAt
-     */
-    public function setExpiresAt(\DateTime $expiresAt = null);
-
-    /**
-     * Bumps the expiration time.
-     * Default is +3 hours.
-     */
-    public function incrementExpiresAt();
-
-    /**
-     * Checks whether the cart is expired or not.
-     *
-     * @return Boolean
-     */
-    public function isExpired();
 }

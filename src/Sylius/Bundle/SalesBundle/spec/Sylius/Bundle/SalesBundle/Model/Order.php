@@ -301,7 +301,7 @@ class Order extends ObjectBehavior
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
-    
+
     function it_is_empty_by_default()
     {
         $this->countItems()->shouldReturn(0);
@@ -319,11 +319,6 @@ class Order extends ObjectBehavior
         $this->shouldBeLocked();
     }
 
-    function it_is_not_expired_by_default()
-    {
-        $this->shouldNotBeExpired();
-    }
-    
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
@@ -341,21 +336,5 @@ class Order extends ObjectBehavior
         ;
 
         $this->countItems()->shouldReturn(1);
-    }
-    
-    function it_is_not_expired_if_the_expiration_time_is_in_future()
-    {
-        $expiresAt = new \DateTime('tomorrow');
-        $this->setExpiresAt($expiresAt);
-
-        $this->shouldNotBeExpired();
-    }
-
-    function it_is_expired_if_the_expiration_time_is_in_past()
-    {
-        $expiresAt = new \DateTime('-1 hour');
-        $this->setExpiresAt($expiresAt);
-
-        $this->shouldBeExpired();
     }
 }

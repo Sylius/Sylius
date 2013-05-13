@@ -19,7 +19,6 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="locked" column="locked" type="boolean" />
-        <field name="expiresAt" column="expires_at" type="datetime" />
     </mapped-superclass>
 
 </doctrine-mapping>
