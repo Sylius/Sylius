@@ -4,7 +4,7 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if orders|length > 0 %}
-<table class="table">
+<table id="orders" class="table">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('createdAt', 'sylius.order.created_at'|trans) }}</th>
