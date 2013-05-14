@@ -22,12 +22,13 @@ class ShippingMethodType extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
-     * @param Symfony\Component\Form\FormBuilder          $builder
-     * @param Symfony\Component\Form\FormFactoryInterface $factory
+     * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface   $checkerRegistry
+     * @param Symfony\Component\Form\FormBuilder                                           $builder
+     * @param Symfony\Component\Form\FormFactoryInterface                                  $factory
      */
-    function let($calculatorRegistry, $builder, $factory)
+    function let($calculatorRegistry, $checkerRegistry, $builder, $factory)
     {
-        $this->beConstructedWith('ShippingMethod', $calculatorRegistry);
+        $this->beConstructedWith('ShippingMethod', $calculatorRegistry, $checkerRegistry);
         $builder->getFormFactory()->willReturn($factory);
     }
 

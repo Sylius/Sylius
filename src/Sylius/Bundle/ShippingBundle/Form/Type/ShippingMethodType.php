@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethod;
+use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -41,16 +42,20 @@ class ShippingMethodType extends AbstractType
      */
     protected $calculatorRegistry;
 
+    protected $checkerRegistry;
+
     /**
      * Constructor.
      *
-     * @param string                      $dataClass
-     * @param CalculatorRegistryInterface $calculatorRegistry
+     * @param string                       $dataClass
+     * @param CalculatorRegistryInterface  $calculatorRegistry
+     * @param RuleCheckerRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, CalculatorRegistryInterface $calculatorRegistry)
+    public function __construct($dataClass, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
         $this->dataClass = $dataClass;
         $this->calculatorRegistry = $calculatorRegistry;
+        $this->checkerRegistry = $checkerRegistry;
     }
 
     /**
