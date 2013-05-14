@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use YaLinqo\Enumerable;
+use DateTime;
 
 class OrderRepository extends EntityRepository
 {
@@ -61,5 +63,75 @@ class OrderRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    public function getTotalStatistics()
+    {
+        return Enumerable::from($this->findBetweenDates(new DateTime('1 year ago'), new DateTime()))
+            ->groupBy(function($order) {
+                return $order->getCreatedAt()->format('m');
+            }, '$v->getTotal()', function($orders) {
+                return Enumerable::from($orders)->sum();
+            })
+            ->toValues()
+            ->toArray()
+        ;
+    }
+
+    public function getCountStatistics()
+    {
+        return Enumerable::from($this->findBetweenDates(new DateTime('1 year ago'), new DateTime()))
+            ->groupBy(function($order) {
+                return $order->getCreatedAt()->format('m');
+            }, null, function($orders) {
+                return Enumerable::from($orders)->count();
+            })
+            ->toValues()
+            ->toArray()
+        ;
+    }
+
+    public function findBetweenDates(DateTime $from, DateTime $to)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countBetweenDates(DateTime $from, DateTime $to)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+
+        return $queryBuilder
+            ->select('count(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function revenueBetweenDates(DateTime $from, DateTime $to)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+
+        return $queryBuilder
+            ->select('sum(o.total)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    protected function getCollectionQueryBuilderBetweenDates(DateTime $from, DateTime $to)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
+            ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
+            ->setParameter('from', $from)
+            ->setParameter('to', $to)
+        ;
     }
 }
