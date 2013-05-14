@@ -52,7 +52,7 @@ Feature: Checkout security
           And I press "Register"
          Then I should be redirected to the checkout addressing step
 
-    Scenario: Creating account during the checkout
+    Scenario: Creating account during the whole checkout
          When I fill in the following:
             | fos_user_registration_form_username             | mike             |
             | fos_user_registration_form_email                | mike@example.com |
@@ -65,6 +65,6 @@ Feature: Checkout security
           And I press "Continue"
           And I select the "Credit Card" radio button
           And I press "Continue"
-         When I click "Place order"
+          And I click "Place order"
          Then I should be on the store homepage
           And I should see "Thank you for your order!"
