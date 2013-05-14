@@ -87,11 +87,9 @@
             </td>
             <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
             <td>
-                {% if product.masterVariant.availableOnDemand %}
-                    <span class="badge badge-success">{{ 'sylius.yes'|trans }}</span>
-                {% else %}
-                    <span class="badge badge-warning">{{ 'sylius.no'|trans }}</span>
-                {% endif %}
+                <span class="badge badge-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
+                    {{ product.masterVariant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                </span>
             </td>
             <td><span class="badge badge-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
             <td>{{ product.masterVariant.price|sylius_money }} &euro;</td>

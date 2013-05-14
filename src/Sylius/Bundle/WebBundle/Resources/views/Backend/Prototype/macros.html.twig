@@ -8,10 +8,10 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('name') }}</th>
-            <th>options</th>
-            <th>properties</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.prototype.name'|trans) }}</th>
+            <th>{{ 'sylius.prototype.options'|trans }}</th>
+            <th>{{ 'sylius.prototype.properties'|trans }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.prototype.updated_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
