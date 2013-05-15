@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use FOS\RestBundle\Util\Pluralization;
+use Doctrine\Common\Inflector\Inflector;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -70,7 +70,7 @@ class Configuration
 
     public function getPluralResourceName()
     {
-        return Pluralization::pluralize($this->resourceName);
+        return Inflector::pluralize($this->resourceName);
     }
 
     public function getTemplateNamespace()

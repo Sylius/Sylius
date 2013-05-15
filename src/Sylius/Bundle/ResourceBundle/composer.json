@@ -20,9 +20,9 @@
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle":        ">=2.1,<2.3-dev",
-        "friendsofsymfony/rest-bundle":    "0.11.*",
-        "jms/serializer-bundle":           "0.11.*",
+        "symfony/framework-bundle":        ">=2.1,<3.0",
+        "friendsofsymfony/rest-bundle":    "0.13.*",
+        "jms/serializer-bundle":           "0.12.*",
         "white-october/pagerfanta-bundle": "1.0.*"
     },
     "require-dev": {
@@ -45,7 +45,7 @@
     "target-dir": "Sylius/Bundle/ResourceBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "0.3.x-dev"
         }
     }
 }
