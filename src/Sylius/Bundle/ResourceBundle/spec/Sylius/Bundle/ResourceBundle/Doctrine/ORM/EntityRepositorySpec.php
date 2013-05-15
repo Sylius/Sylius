@@ -27,8 +27,9 @@ class EntityRepositorySpec extends ObjectBehavior
      * @param Doctrine\ORM\EntityManager         $entityManager
      * @param Doctrine\ORM\Mapping\ClassMetadata $class
      * @param Doctrine\ORM\QueryBuilder          $queryBuilder
+     * @param Doctrine\ORM\AbstractQuery         $query
      */
-    function let($entityManager, $class, $queryBuilder)
+    function let($entityManager, $class, $queryBuilder, $query)
     {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
 
@@ -44,6 +45,10 @@ class EntityRepositorySpec extends ObjectBehavior
         $queryBuilder
             ->from(Argument::any(), Argument::any())
             ->willReturn($queryBuilder)
+        ;
+        $queryBuilder
+            ->getQuery()
+            ->willReturn($query)
         ;
 
         $this->beConstructedWith($entityManager, $class);
@@ -64,9 +69,17 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->createNew()->shouldHaveType('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo');
     }
 
-    function it_returns_null_if_resource_not_found()
+    function it_returns_null_if_resource_not_found($queryBuilder, $query)
     {
-        $this->find(1)->shouldReturn(null);
+        $queryBuilder
+            ->andWhere('o.id = 3')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $query->getOneOrNullResult()->willReturn(null);
+
+        $this->find(3)->shouldReturn(null);
     }
 
     /**
