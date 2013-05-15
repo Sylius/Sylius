@@ -21,9 +21,9 @@ Please note that this bundle **is not admin generator**. It won't create forms, 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2.
 
-Visit [Sylius.org](http://sylius.org).
+Visit [Sylius.com](http://sylius.com).
 
 [phpspec2](http://phpspec.net) Specifications
 ---------------------------------------------
@@ -31,7 +31,7 @@ Visit [Sylius.org](http://sylius.org).
 ``` bash
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install --dev
-$ bin/phpspec run
+$ bin/phpspec run -fpretty
 ```
 
 Documentation
@@ -42,7 +42,7 @@ Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/la
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.com/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
@@ -58,7 +58,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
