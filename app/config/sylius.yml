@@ -12,7 +12,7 @@ sylius_cart:
         cart:
             model: Sylius\Bundle\CoreBundle\Entity\Order
         item:
-            model: Sylius\Bundle\SalesBundle\Entity\DefaultOrderItem
+            model: Sylius\Bundle\CoreBundle\Entity\OrderItem
             form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
 
 sylius_settings:
