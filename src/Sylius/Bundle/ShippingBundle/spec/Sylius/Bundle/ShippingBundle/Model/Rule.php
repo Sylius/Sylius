@@ -60,15 +60,15 @@ class Rule extends ObjectBehavior
 
     function it_should_not_have_shipping_method_by_default()
     {
-        $this->getShippingMethod()->shouldReturn(null);
+        $this->getMethod()->shouldReturn(null);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
      */
-    function its_shipping_method_by_should_be_mutable($shippingMethod)
+    function its_shipping_method_by_should_be_mutable($method)
     {
-        $this->setShippingMethod($shippingMethod);
-        $this->getShippingMethod()->shouldReturn($shippingMethod);
+        $this->setMethod($method);
+        $this->getMethod()->shouldReturn($method);
     }
 }

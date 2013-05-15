@@ -23,7 +23,7 @@ class Rule implements RuleInterface
     protected $id;
     protected $type;
     protected $configuration;
-    protected $shippingMethod;
+    protected $method;
 
     public function __construct()
     {
@@ -55,13 +55,13 @@ class Rule implements RuleInterface
         $this->configuration = $configuration;
     }
 
-    public function getShippingMethod()
+    public function getMethod()
     {
-        return $this->shippingMethod;
+        return $this->method;
     }
 
-    public function setShippingMethod(ShippingMethodInterface $shippingMethod = null)
+    public function setMethod(ShippingMethodInterface $method = null)
     {
-        $this->shippingMethod = $shippingMethod;
+        $this->method = $method;
     }
 }

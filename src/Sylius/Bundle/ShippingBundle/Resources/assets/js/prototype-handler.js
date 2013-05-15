@@ -25,6 +25,7 @@
 
                     var prototypeElement = $('#' + prototypePrefix + '_' + selectedValue);
                     var container;
+
                     if (settings.containerSelector) {
                         container = $(settings.containerSelector);
                     } else {

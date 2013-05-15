@@ -28,6 +28,6 @@ interface RuleInterface
     public function setType($type);
     public function getConfiguration();
     public function setConfiguration(array $configuration);
-    public function getShippingMethod();
-    public function setShippingMethod(ShippingMethodInterface $shippingMethod = null);
+    public function getMethod();
+    public function setMethod(ShippingMethodInterface $method = null);
 }

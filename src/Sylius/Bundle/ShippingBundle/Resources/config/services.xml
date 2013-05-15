@@ -19,11 +19,18 @@
     <parameters>
         <parameter key="sylius.form.type.shipping_calculator_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType</parameter>
 
+        <parameter key="sylius.form.type.shipping_rule_item_count_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
+
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType</parameter>
         <parameter key="sylius.shipping_methods_resolver.class">Sylius\Bundle\ShippingBundle\Resolver\MethodsResolver</parameter>
 
         <parameter key="sylius.shipping_calculator_registry.class">Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistry</parameter>
         <parameter key="sylius.shipping_calculator.class">Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculator</parameter>
+
+        <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistry</parameter>
+
+        <parameter key="sylius.shipping_eigibility_checker.class">Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEliglibilityChecker</parameter>
+        <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Bundle\ShippingBundle\Checker\ItemCountRuleChecker</parameter>
 
         <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.flat_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType</parameter>
@@ -61,6 +68,10 @@
             </call>
         </service>
 
+        <service id="sylius.form.type.shipping_rule_item_count_configuration" class="%sylius.form.type.shipping_rule_item_count_configuration.class%">
+            <tag name="form.type" alias="sylius_shipping_rule_item_count_configuration" />
+        </service>
+
         <service id="sylius.form.type.shipping_category" class="%sylius.form.type.shipping_category.class%">
             <argument>%sylius.model.shipping_category.class%</argument>
             <tag name="form.type" alias="sylius_shipping_category" />
@@ -68,8 +79,18 @@
         <service id="sylius.form.type.shipping_method" class="%sylius.form.type.shipping_method.class%">
             <argument>%sylius.model.shipping_method.class%</argument>
             <argument type="service" id="sylius.shipping_calculator_registry" />
+            <argument type="service" id="sylius.shipping_rule_checker_registry" />
             <tag name="form.type" alias="sylius_shipping_method" />
         </service>
+
+        <service id="sylius.shipping_eigibility_checker" class="%sylius.shipping_eigibility_checker.class%">
+            <argument type="service" id="sylius.shipping_rule_checker_registry" />
+        </service>
+        <service id="sylius.shipping_rule_checker.item_count" class="%sylius.shipping_rule_checker.item_count.class%">
+            <tag name="sylius.shipping_rule_checker" type="item_count" label="Item count" />
+        </service>
+
+        <service id="sylius.shipping_rule_checker_registry" class="%sylius.shipping_rule_checker_registry.class%" />
 
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
             <argument type="service" id="sylius.repository.shipping_method" />

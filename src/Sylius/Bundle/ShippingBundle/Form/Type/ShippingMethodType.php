@@ -88,10 +88,13 @@ class ShippingMethodType extends AbstractType
         ;
 
         $prototypes = array();
-        $calculators = $this->calculatorRegistry->getCalculators();
-
-        foreach ($calculators as $name => $calculator) {
-            $prototypes[$name] = $builder->create('configuration', $calculator->getConfigurationFormType())->getForm();
+        $prototypes['rules'] = array();
+        foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
+            $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
+        }
+        $prototypes['calculators'] = array();
+        foreach ($this->calculatorRegistry->getCalculators() as $name => $calculator) {
+            $prototypes['calculators'][$name] = $builder->create('__name__', $calculator->getConfigurationFormType())->getForm();
         }
 
         $builder->setAttribute('prototypes', $prototypes);
@@ -103,9 +106,10 @@ class ShippingMethodType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $this->vars['prototypes'] = array();
-
-        foreach ($form->getConfig()->getAttribute('prototypes') as $name => $prototype) {
-            $view->vars['prototypes'][$name] = $prototype->createView($view);
+        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
+            foreach ($prototypes as $type => $prototype) {
+                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
+            }
         }
     }
 

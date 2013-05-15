@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ShippingBundle;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
+use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -49,9 +50,11 @@ class SyliusShippingBundle extends Bundle
             'Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface'     => 'sylius.model.shipment_item.class',
             'Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface' => 'sylius.model.shipping_category.class',
             'Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface'   => 'sylius.model.shipping_method.class',
+            'Sylius\Bundle\ShippingBundle\Model\RuleInterface'             => 'sylius.model.shipping_rule.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_shipping', $interfaces));
         $container->addCompilerPass(new RegisterCalculatorsPass());
+        $container->addCompilerPass(new RegisterRuleCheckersPass());
     }
 }
