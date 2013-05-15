@@ -12,6 +12,9 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+
+require_once __DIR__.'/../../Fixture/Entity/Foo.php';
 
 /**
  * Doctrine ORM driver entity repository spec.
@@ -35,11 +38,11 @@ class EntityRepositorySpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->select(ANY_ARGUMENT)
+            ->select(Argument::any())
             ->willReturn($queryBuilder)
         ;
         $queryBuilder
-            ->from(ANY_ARGUMENTS)
+            ->from(Argument::any(), Argument::any())
             ->willReturn($queryBuilder)
         ;
 
