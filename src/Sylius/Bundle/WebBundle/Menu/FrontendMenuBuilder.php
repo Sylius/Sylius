@@ -95,7 +95,10 @@ class FrontendMenuBuilder extends MenuBuilder
 
         $menu->addChild('cart', array(
             'route' => 'sylius_cart_summary',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart')),
+            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
+                    '%items%' => $cart->getTotalItems(),
+                    '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
+            ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
                     '%items%' => $cart->getTotalItems(),
