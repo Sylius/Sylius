@@ -2,14 +2,14 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Resource resolver spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ResourceResolver extends ObjectBehavior
+class ResourceResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -2,7 +2,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Configuration extends ObjectBehavior
+class ConfigurationSpec extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\HttpFoundation\Request $request

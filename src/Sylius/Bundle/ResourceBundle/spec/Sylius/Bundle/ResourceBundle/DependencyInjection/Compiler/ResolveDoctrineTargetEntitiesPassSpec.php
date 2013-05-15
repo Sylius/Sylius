@@ -2,7 +2,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Compiler pass which resolves interfaces into target entity names during
@@ -10,19 +10,19 @@ use PHPSpec2\ObjectBehavior;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ResolveDoctrineTargetEntitiesPass extends ObjectBehavior
+class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith('sylius_resource', array());
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass');
     }
 
-    function it_should_be_a_compiler_pass()
+    function it_is_a_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }

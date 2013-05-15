@@ -2,7 +2,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Doctrine target entities resolver spec.
@@ -10,9 +10,9 @@ use PHPSpec2\ObjectBehavior;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DoctrineTargetEntitiesResolver extends ObjectBehavior
+class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver');
     }

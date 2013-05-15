@@ -11,14 +11,14 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Doctrine ODM driver document repository spec.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class DocumentRepository extends ObjectBehavior
+class DocumentRepositorySpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\ODM\MongoDB\DocumentManager       $documentManager
@@ -38,13 +38,17 @@ class DocumentRepository extends ObjectBehavior
         $this->beConstructedWith($documentManager, $unitOfWork, $class);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository');
-        $this->shouldHaveType('Doctrine\ODM\MongoDB\DocumentRepository');
     }
 
-    function it_should_create_paginator()
+    function it_implements_Sylius_repository_interface()
+    {
+        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Model\RepositoryInterface');
+    }
+
+    function it_creates_Pagerfanta_paginator()
     {
         $this
             ->createPaginator()

@@ -20,17 +20,16 @@
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle":        "~2.1",
-        "friendsofsymfony/rest-bundle":    "0.11.*@dev",
+        "symfony/framework-bundle":        ">=2.1,<2.3-dev",
+        "friendsofsymfony/rest-bundle":    "0.11.*",
         "jms/serializer-bundle":           "0.11.*",
-        "white-october/pagerfanta-bundle": "1.0.*@dev"
+        "white-october/pagerfanta-bundle": "1.0.*"
     },
     "require-dev": {
         "twig/twig":            "~1.11",
         "doctrine/orm":         "~2.3",
         "doctrine/mongodb-odm": "1.0.*@dev",
-        "phpspec/phpspec2":     "dev-develop",
-        "phpspec/php-diff":     "dev-master"
+        "phpspec/phpspec":      "2.0.*"
     },
     "suggest": {
         "fsc/hateoas-bundle":   "0.3.x-dev",

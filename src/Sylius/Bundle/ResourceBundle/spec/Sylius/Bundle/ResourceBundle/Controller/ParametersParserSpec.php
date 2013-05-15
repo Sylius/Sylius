@@ -2,14 +2,14 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Parameters parser spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ParametersParser extends ObjectBehavior
+class ParametersParserSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

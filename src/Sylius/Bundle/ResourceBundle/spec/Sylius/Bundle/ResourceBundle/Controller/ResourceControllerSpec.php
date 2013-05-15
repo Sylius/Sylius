@@ -2,14 +2,14 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Resource controller spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ResourceController extends ObjectBehavior
+class ResourceControllerSpec extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\DependencyInjection\ContainerInterface $container

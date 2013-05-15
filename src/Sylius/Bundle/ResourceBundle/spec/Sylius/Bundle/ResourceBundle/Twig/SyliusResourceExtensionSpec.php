@@ -2,14 +2,14 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Twig;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Sylius resource extension for Twig spec.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusResourceExtension extends ObjectBehavior
+class SyliusResourceExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\Routing\RouterInterface $router
