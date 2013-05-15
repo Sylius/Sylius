@@ -3,6 +3,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -200,7 +201,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_gets_criteria_from_request_if_resources_are_filterable($request)
     {
-        $request->get('criteria', ANY_ARGUMENT)->shouldBeCalled()->willReturn(array('locked' => false));
+        $request->get('criteria', Argument::any())->shouldBeCalled()->willReturn(array('locked' => false));
         $request->attributes->set('_sylius', array(
             'filterable' => true,
             'criteria'   => array('enabled' => false)
@@ -213,7 +214,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_does_not_get_criteria_from_request_if_resources_are_not_filterable($request)
     {
-        $request->get('criteria', ANY_ARGUMENT)->shouldNotBeCalled();
+        $request->get('criteria', Argument::any())->shouldNotBeCalled();
         $request->attributes->set('_sylius', array(
             'filterable' => false,
             'criteria'   => array('enabled' => false)
@@ -226,7 +227,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_gets_sorting_from_request_if_resources_are_sortable($request)
     {
-        $request->get('sorting', ANY_ARGUMENT)->willReturn(array('createdAt' => 'desc'));
+        $request->get('sorting', Argument::any())->willReturn(array('createdAt' => 'desc'));
         $request->attributes->set('_sylius', array(
             'sortable' => true,
             'sorting'  => array('name' => 'asc')
@@ -239,7 +240,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_does_not_get_sorting_from_request_if_resources_are_not_sortable($request)
     {
-        $request->get('sorting', ANY_ARGUMENT)->shouldNotBeCalled();
+        $request->get('sorting', Argument::any())->shouldNotBeCalled();
         $request->attributes->set('_sylius', array(
             'sortable' => false,
             'sorting'  => array('name' => 'asc')

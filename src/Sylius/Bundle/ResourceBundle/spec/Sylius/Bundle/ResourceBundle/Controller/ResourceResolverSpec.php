@@ -22,10 +22,10 @@ class ResourceResolverSpec extends ObjectBehavior
      */
     function it_calls_proper_method_with_arguments_based_on_configuration($repository, $configuration)
     {
-        $configuration->getMethod('findBy')->willReturn('findLatest');
+        $configuration->getMethod('findBy')->willReturn('findAll');
         $configuration->getArguments(array())->willReturn(array(5));
 
-        $repository->findLatest(5)->shouldBeCalled()->willReturn(array('foo', 'bar'));
+        $repository->findAll(5)->shouldBeCalled()->willReturn(array('foo', 'bar'));
 
         $this->getResource($repository, $configuration, 'findBy')->shouldReturn(array('foo', 'bar'));
     }

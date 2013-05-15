@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class EntityRepository extends ObjectBehavior
+class EntityRepositorySpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\ORM\EntityManager         $entityManager
