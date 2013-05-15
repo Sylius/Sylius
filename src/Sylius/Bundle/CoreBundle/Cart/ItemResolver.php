@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Cart;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderItemInterface;
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
@@ -72,7 +72,7 @@ class ItemResolver implements ItemResolverInterface
      *
      * Here we create the item that is going to be added to cart, basing on the current request.
      */
-    public function resolve(OrderItemInterface $item, Request $request)
+    public function resolve(CartItemInterface $item, Request $request)
     {
         if (!$request->isMethod('POST')) {
             throw new ItemResolvingException('Wrong request method');

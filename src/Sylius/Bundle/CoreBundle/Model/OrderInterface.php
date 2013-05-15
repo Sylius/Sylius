@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
@@ -25,7 +25,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface, ShippablesAwareInterface
+interface OrderInterface extends CartInterface, PromotionSubjectInterface, ShippablesAwareInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT      = 'Tax';
@@ -73,7 +73,7 @@ interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface, 
      * @param AddressInterface $address
      */
     public function setBillingAddress(AddressInterface $address);
-    
+
     /**
      * Get shipping method selected during checkout.
      *
