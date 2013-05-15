@@ -1062,7 +1062,7 @@
       <trans-unit id="332dd2136026c1d0da75dbfa645694707af7481d" resname="sylius.product.no_taxons">
         <jms:reference-file line="84">Backend/Product/show.html.twig</jms:reference-file>
         <source>sylius.product.no_taxons</source>
-        <target>sylius.product.no_taxons</target>
+        <target>Brak przypisanych kategorii</target>
       </trans-unit>
       <trans-unit id="4c7d63e3b40ad136005b1909523fdb10721afce5" resname="sylius.product.options">
         <jms:reference-file line="49">Backend/Product/show.html.twig</jms:reference-file>
