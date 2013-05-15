@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\TaxonomiesBundle\Form\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -54,9 +54,9 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     /**
      * Builds proper taxon form after setting the product.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
-    public function preSetData(DataEvent $event)
+    public function preSetData(FormEvent $event)
     {
         $taxon = $event->getData();
         $form = $event->getForm();
@@ -68,18 +68,22 @@ class BuildTaxonFormListener implements EventSubscriberInterface
         $taxonomy = $taxon->getTaxonomy();
 
         $form->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
-            'taxonomy'    => $taxonomy,
-            'required'    => false,
-            'empty_value' => '---'
-        )));
+                    'taxonomy'    => $taxonomy,
+                    'required'    => false,
+                    'label'       => 'sylius.form.taxon.parent',
+                    'empty_value' => '---',
+                    'attr' => array(
+                        'class' => 'input-xlarge'
+                    )
+                )));
     }
 
     /**
      * Reset the taxon root if it's null.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
-    public function postBind(DataEvent $event)
+    public function postBind(FormEvent $event)
     {
         $taxon = $event->getData();
         $form = $event->getForm();
