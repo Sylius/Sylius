@@ -7,8 +7,6 @@ sylius_prototype_index:
             sortable: true
             sorting:
               name: desc
-    requirements:
-        _method: GET
 
 sylius_prototype_create:
     pattern: /new

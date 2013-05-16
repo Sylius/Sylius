@@ -7,8 +7,6 @@ sylius_property_index:
             sortable: true
             sorting:
               name: desc
-    requirements:
-        _method: GET
 
 sylius_property_create:
     pattern: /new

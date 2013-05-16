@@ -7,8 +7,6 @@ sylius_product_index:
             sortable: true
             sorting:
               name: desc
-    requirements:
-        _method: GET
 
 sylius_product_create:
     pattern: /new
