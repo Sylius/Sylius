@@ -24,5 +24,5 @@ namespace Sylius\Bundle\OmnipayBundle\Model;
      *
      * @return array
      */
-    public function mapToOmnipay(array $map);
+    public function transformModel(array $map);
 }
