@@ -71,10 +71,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
                     'taxonomy'    => $taxonomy,
                     'required'    => false,
                     'label'       => 'sylius.form.taxon.parent',
-                    'empty_value' => '---',
-                    'attr' => array(
-                        'class' => 'input-xlarge'
-                    )
+                    'empty_value' => '---'
                 )));
     }
 
