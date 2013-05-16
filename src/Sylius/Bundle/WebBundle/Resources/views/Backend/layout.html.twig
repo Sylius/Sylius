@@ -21,6 +21,7 @@
             '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/select2.css'
             '@SyliusWebBundle/Resources/assets/css/backend.css'
+            '@SyliusWebBundle/Resources/assets/css/bootstrap-image-gallery.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
@@ -67,6 +68,9 @@
                     {% endblock %}
 
                     <hr>
+
+                    {% include 'SyliusWebBundle::gallery.html.twig' %}
+
                     <footer>
                         <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
                     </footer>
@@ -83,6 +87,8 @@
             '@SyliusWebBundle/Resources/assets/js/form-spinner.js'
             '@SyliusWebBundle/Resources/assets/js/select2.js'
             '@SyliusWebBundle/Resources/assets/js/backend.js'
+            '@SyliusWebBundle/Resources/assets/js/load-image.js'
+            '@SyliusWebBundle/Resources/assets/js/bootstrap-image-gallery.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
