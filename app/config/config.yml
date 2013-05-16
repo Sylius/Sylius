@@ -108,3 +108,6 @@ liip_imagine:
         sylius_610x600:
             filters:
                 thumbnail: { size: [610, 600], mode: outbound }
+        sylius_gallery:
+            filters:
+                thumbnail: { size: [640, 480], mode: outbound }
