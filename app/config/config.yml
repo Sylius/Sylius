@@ -42,7 +42,13 @@ doctrine:
         charset:  UTF8
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
 
 stof_doctrine_extensions:
     default_locale: %sylius.locale%
@@ -51,6 +57,7 @@ stof_doctrine_extensions:
             tree: true
             sluggable: true
             timestampable: true
+            softdeleteable: true
 
 fos_user:
     db_driver: orm
