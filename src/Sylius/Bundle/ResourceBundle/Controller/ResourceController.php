@@ -263,22 +263,34 @@ class ResourceController extends FOSRestController
 
     public function create($resource)
     {
+    	$manager = $this->getManager();
+
         $this->dispatchEvent('pre_create', $resource);
-        $this->persistAndFlush($resource);
+        $manager->persist($resource);
+        $this->dispatchEvent('create', $resource);
+        $manager->flush();
         $this->dispatchEvent('post_create', $resource);
     }
 
     public function update($resource)
     {
+    	$manager = $this->getManager();
+
         $this->dispatchEvent('pre_update', $resource);
-        $this->persistAndFlush($resource);
+        $manager->persist($resource);
+        $this->dispatchEvent('update', $resource);
+        $manager->flush();
         $this->dispatchEvent('post_update', $resource);
     }
 
     public function delete($resource)
     {
+    	$manager = $this->getManager();
+
         $this->dispatchEvent('pre_delete', $resource);
-        $this->removeAndFlush($resource);
+        $manager->persist($resource);
+        $this->dispatchEvent('delete', $resource);
+        $manager->flush();
         $this->dispatchEvent('post_delete', $resource);
     }
 
