@@ -288,7 +288,7 @@ class ResourceController extends FOSRestController
         $manager = $this->getManager();
 
         $this->dispatchEvent('pre_delete', $resource);
-        $manager->persist($resource);
+        $manager->remove($resource);
         $this->dispatchEvent('delete', $resource);
         $manager->flush();
         $this->dispatchEvent('post_delete', $resource);
