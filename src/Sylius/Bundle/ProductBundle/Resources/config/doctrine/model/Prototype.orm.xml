@@ -12,21 +12,13 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
->
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\ProductBundle\Entity\Prototype\Prototype">
+    <entity name="Sylius\Bundle\ProductBundle\Model\Prototype\Prototype">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
         <field name="name" column="name" type="string" />
-        <many-to-many field="options" target-entity="Sylius\Bundle\ProductBundle\Model\Option\OptionInterface">
-            <join-table name="sylius_prototype_option">
-                <join-columns>
-                    <join-column name="prototype_id" referenced-column-name="id" nullable="false" unique="false" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="option_id" referenced-column-name="id" nullable="false" unique="false" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
         <many-to-many field="properties" target-entity="Sylius\Bundle\ProductBundle\Model\Property\PropertyInterface">
             <join-table name="sylius_prototype_property">
                 <join-columns>
@@ -43,6 +35,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update" />
         </field>
-    </mapped-superclass>
+    </entity>
 
 </doctrine-mapping>

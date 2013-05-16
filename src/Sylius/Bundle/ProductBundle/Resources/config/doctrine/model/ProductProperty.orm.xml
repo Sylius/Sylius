@@ -16,7 +16,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\ProductBundle\Entity\Property\ProductProperty">
+    <entity name="Sylius\Bundle\ProductBundle\Model\Property\ProductProperty">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
         <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="properties">
             <join-column name="product_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
@@ -24,6 +27,6 @@
             <join-column name="property_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <field name="value" column="value" type="string" />
-    </mapped-superclass>
+    </entity>
 
 </doctrine-mapping>

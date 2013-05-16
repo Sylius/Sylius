@@ -14,7 +14,10 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\ProductBundle\Entity\Property\Property">
+    <entity name="Sylius\Bundle\ProductBundle\Model\Property\Property" table="sylius_property">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
         <field name="name" column="name" type="string" />
         <field name="presentation" column="presentation" type="string" />
         <field name="type" column="type" type="string" />
@@ -25,6 +28,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-    </mapped-superclass>
+    </entity>
 
 </doctrine-mapping>
