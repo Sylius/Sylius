@@ -39,19 +39,19 @@
                 <source>sylius.promotion_coupon.code.max_length</source>
                 <target>Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="10">
                 <source>sylius.promotion_coupon.usage_limit.min</source>
                 <target>Ograniczenie użycia musi wynosić co najmniej {{ limit }}.</target>
             </trans-unit>
-            <trans-unit id="10">
+            <trans-unit id="11">
                 <source>sylius.promotion_coupon_generate_instruction.amount.not_blank</source>
                 <target>Proszę podać liczbę kuponów do wygenerowania.</target>
             </trans-unit>
-            <trans-unit id="11">
+            <trans-unit id="12">
                 <source>sylius.promotion_coupon_generate_instruction.amount.min</source>
                 <target>Liczba kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="13">
                 <source>sylius.promotion_coupon_generate_instruction.usage_limit.min</source>
                 <target>Ograniczenie użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.</target>
             </trans-unit>

@@ -39,19 +39,19 @@
                 <source>sylius.promotion_coupon.code.max_length</source>
                 <target>Coupon code mag niet langer zijn dan 1 karakter.|Coupon code mag niet langer zijn dan {{ limit }} karakters.</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="10">
                 <source>sylius.promotion_coupon.usage_limit.min</source>
                 <target>Coupon gebruikslimiet moet minstens {{ limit }} zijn.</target>
             </trans-unit>
-            <trans-unit id="10">
+            <trans-unit id="11">
                 <source>sylius.promotion_coupon_generate_instruction.amount.not_blank</source>
                 <target>Voer het aantal te genereren coupons in.</target>
             </trans-unit>
-            <trans-unit id="11">
+            <trans-unit id="12">
                 <source>sylius.promotion_coupon_generate_instruction.amount.min</source>
                 <target>Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="13">
                 <source>sylius.promotion_coupon_generate_instruction.usage_limit.min</source>
                 <target>Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.</target>
             </trans-unit>
