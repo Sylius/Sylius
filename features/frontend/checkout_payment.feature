@@ -1,7 +1,7 @@
-Feature: Checkout shipping
-    In order to select shipping method
-    As a visitor
-    I want to be able to use checkout shipping step
+Feature: Checkout Payment
+    In order to submit a payment
+    As a logged in user
+    I want to be able to use checkout payment step
 
     Background:
         Given there are following taxonomies defined:
@@ -26,28 +26,22 @@ Feature: Checkout shipping
           And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page
-
-    Scenario: Accessing payment checkout step
-        Given I fill in the shipping address to United Kingdom
+          And I fill in the shipping address to United Kingdom
           And I press "Continue"
           And I select the "DHL Express" radio button
-         When I press "Continue"
+
+    Scenario: Accessing payment checkout step
+        Given I press "Continue"
          Then I should be on the checkout payment step
 
     Scenario: Only enabled payment methods are displayed
-        Given I fill in the shipping address to United Kingdom
-          And I press "Continue"
-          And I select the "DHL Express" radio button
-         When I press "Continue"
+        Given I press "Continue"
          Then I should be on the checkout payment step
           And I should see "PayPal"
           But I should not see "PayPal PRO"
 
     Scenario: Selecting one of payment methods
-        Given I fill in the shipping address to United Kingdom
-          And I press "Continue"
-          And I select the "DHL Express" radio button
-          And I press "Continue"
+        Given I press "Continue"
          When I select the "PayPal" radio button
           And I press "Continue"
          Then I should be on the checkout finalize step
