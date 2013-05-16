@@ -43,7 +43,7 @@ class OrderNumberGenerator extends ObjectBehavior
      */
     function it_generates_000001_number_for_first_order($orderRepository, $order)
     {
-        $orderRepository->findBy(array(), array('createdAt' => 'desc'), 1)->willReturn(array());
+        $orderRepository->findBy(array(), array('id' => 'desc'), 1)->willReturn(array());
         $order->setNumber('000001')->shouldBeCalled();
 
         $this->generate($order);
@@ -55,7 +55,7 @@ class OrderNumberGenerator extends ObjectBehavior
      */
     function it_generates_a_correct_number_for_following_orders($orderRepository, $order, $lastOrder)
     {
-        $orderRepository->findBy(array(), array('createdAt' => 'desc'), 1)->willReturn(array($lastOrder));
+        $orderRepository->findBy(array(), array('id' => 'desc'), 1)->willReturn(array($lastOrder));
         $lastOrder->getNumber()->willReturn('000469');
         $order->setNumber('000470')->shouldBeCalled();
 

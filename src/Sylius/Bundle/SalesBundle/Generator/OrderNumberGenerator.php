@@ -62,7 +62,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      */
     protected function getLastOrderNumber()
     {
-        $lastOrder = current($this->repository->findBy(array(), array('createdAt' => 'desc'), 1));
+        $lastOrder = current($this->repository->findBy(array(), array('id' => 'desc'), 1));
 
         if (!$lastOrder) {
             return str_repeat('0', $this->numberLength);
