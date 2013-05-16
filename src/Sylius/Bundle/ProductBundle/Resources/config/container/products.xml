@@ -47,8 +47,6 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.property" />
             <argument type="service" id="sylius.repository.product_property" />
-            <argument type="service" id="sylius.repository.option" />
-            <argument type="service" id="sylius.repository.option_value" />
         </service>
 
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
