@@ -19,10 +19,10 @@ namespace Sylius\Bundle\OmnipayBundle\Model;
  interface CreditCardInterface
 {
     /**
-     * Map a credit card model's properties to an array with Omnipay
-     * property names.
+     * Transform any credit card model into an array matching Omnipay
+     * format and naming conventions.
      *
      * @return array
      */
-    public function transformModel(array $map);
+    public function transformToOmnipay(array $map);
 }
