@@ -46,6 +46,7 @@
         "sylius/payments-bundle":               "0.1.*",
         "sylius/flow-bundle":                   "0.1.*",
         "sylius/resource-bundle":               "0.1.*",
+        "sylius/omnipay-bundle":                "0.9.*@dev",
         "jms/serializer-bundle":                "0.11.*",
         "friendsofsymfony/user-bundle":         "1.3.1",
         "fsc/hateoas-bundle":                   "0.3.x-dev",

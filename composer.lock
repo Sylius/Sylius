@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "781f8e68f3cf0127a7fdd537f115fa84",
+    "hash": "d888f38264fb5d2719ebe3a6bf3c9a57",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -1136,6 +1136,204 @@
                 "uploadable"
             ],
             "time": "2013-04-25 07:51:56"
+        },
+        {
+            "name": "guzzle/common",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Common",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/common.git",
+                "reference": "v3.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/common/zipball/v3.5.0",
+                "reference": "v3.5.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/event-dispatcher": ">=2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Common": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Common libraries used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "collection",
+                "common",
+                "event",
+                "exception"
+            ],
+            "time": "2013-05-13 20:17:47"
+        },
+        {
+            "name": "guzzle/http",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Http",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/http.git",
+                "reference": "v3.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/http/zipball/v3.5.0",
+                "reference": "v3.5.0",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/stream": "self.version",
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Http": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "HTTP libraries used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "client",
+                "curl",
+                "http",
+                "http client"
+            ],
+            "time": "2013-05-13 20:17:47"
+        },
+        {
+            "name": "guzzle/parser",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Parser",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/parser.git",
+                "reference": "v3.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/parser/zipball/v3.5.0",
+                "reference": "v3.5.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Parser": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Interchangeable parsers used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "URI Template",
+                "cookie",
+                "http",
+                "message",
+                "url"
+            ],
+            "time": "2013-05-13 20:17:47"
+        },
+        {
+            "name": "guzzle/stream",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Stream",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/stream.git",
+                "reference": "v3.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/stream/zipball/v3.5.0",
+                "reference": "v3.5.0",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "guzzle/http": "To convert Guzzle request objects to PHP streams"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Stream": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle stream wrapper component",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "component",
+                "stream"
+            ],
+            "time": "2013-05-13 20:17:47"
         },
         {
             "name": "imagine/Imagine",
@@ -2323,6 +2521,79 @@
             "time": "2012-04-23 15:52:11"
         },
         {
+            "name": "omnipay/omnipay",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adrianmacneil/omnipay.git",
+                "reference": "v0.9.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adrianmacneil/omnipay/zipball/v0.9.1",
+                "reference": "v0.9.1",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/http": ">=3.0,<4.0",
+                "php": ">=5.3.2",
+                "symfony/http-foundation": ">=2.1,<3.0"
+            },
+            "require-dev": {
+                "guzzle/plugin-mock": ">=3.0,<4.0",
+                "mockery/mockery": ">=0.7,<1.0",
+                "phpunit/phpunit": ">=3.7.16.0,<3.8",
+                "silex/silex": "1.0.*@dev",
+                "squizlabs/php_codesniffer": ">=1.4.4,<1.5",
+                "twig/twig": ">=1.12.0,<2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Omnipay": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Macneil",
+                    "email": "adrian@adrianmacneil.com"
+                }
+            ],
+            "description": "Omnipay is a framework agnostic multi-gateway payment processing library",
+            "homepage": "https://github.com/adrianmacneil/omnipay",
+            "keywords": [
+                "2checkout",
+                "2co",
+                "auth.net",
+                "authorize",
+                "authorize.net",
+                "cardsave",
+                "dps",
+                "gateway",
+                "gocardless",
+                "merchant",
+                "netaxept",
+                "payflow",
+                "payment",
+                "paymentexpress",
+                "paypal",
+                "pin",
+                "purchase",
+                "sage pay",
+                "sagepay",
+                "stripe",
+                "tala",
+                "tala-payments",
+                "twocheckout",
+                "worldpay"
+            ],
+            "time": "2013-05-07 03:45:36"
+        },
+        {
             "name": "pagerfanta/pagerfanta",
             "version": "dev-master",
             "source": {
@@ -3049,6 +3320,73 @@
                 "money"
             ],
             "time": "2013-03-12 19:07:10"
+        },
+        {
+            "name": "sylius/omnipay-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/OmnipayBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusOmnipayBundle.git",
+                "reference": "ec33d6b7c5edf59540633c17968b53046d264c22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusOmnipayBundle/zipball/ec33d6b7c5edf59540633c17968b53046d264c22",
+                "reference": "ec33d6b7c5edf59540633c17968b53046d264c22",
+                "shasum": ""
+            },
+            "require": {
+                "omnipay/omnipay": "dev-master",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": ">=2.1,<3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.1,<3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\OmnipayBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusOmnipayBundle/contributors"
+                }
+            ],
+            "description": "Symfony2 integration with Omnipay - multi-gateway, payment processing library.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "authorize.net",
+                "dps",
+                "ecommerce",
+                "gateway",
+                "merchant",
+                "omnipay",
+                "payment",
+                "paymentexpress",
+                "paypal",
+                "shop",
+                "sylius"
+            ],
+            "time": "2013-05-16 16:03:43"
         },
         {
             "name": "sylius/payments-bundle",
@@ -4598,6 +4936,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "mathiasverraes/money": 20,
+        "sylius/omnipay-bundle": 20,
         "fsc/hateoas-bundle": 20,
         "phpspec/phpspec2": 20
     },
