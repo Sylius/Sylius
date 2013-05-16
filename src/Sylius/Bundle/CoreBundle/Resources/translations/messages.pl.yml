@@ -6,6 +6,8 @@ sylius:
         checkout:
             shipping_method: Metoda wysyłki
             payment_method: Metoda płatności
+            addressing:
+                different_billing_address: Użyć innego adresu do rozliczeń?
         settings:
             general:
                 title: Tytuł strony
