@@ -28,9 +28,11 @@
     </div>
     <div class="span6">
         {% if product.images|length > 0 %}
-        <div class="well">
+        <div class="well" data-toggle="modal-gallery" data-target="#modal-gallery">
             {% for image in product.images %}
-                <a href="{{ image.path|imagine_filter('sylius_90x60') }}" target="_blank"><img class="img-polaroid" src="{{ image.path|default('http://placehold.it/90x60')|imagine_filter('sylius_90x60') }}" alt="" /></a>
+            <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ product.name }}">
+                <img class="img-polaroid" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
+            </a>
             {% endfor %}
         </div>
         {% else %}

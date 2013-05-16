@@ -1167,6 +1167,18 @@
         <source>sylius.form.login.username</source>
         <target>Usuario</target>
       </trans-unit>
+      <trans-unit id="fb7fd19e41805e9b2e4d42d87097dc9b3e113582" resname="sylius.gallery.next">
+        <source>sylius.gallery.next</source>
+        <target state="new">sylius.gallery.next</target>
+      </trans-unit>
+      <trans-unit id="772a75b6796ba740b96b6d0162fe5c0223ca1d46" resname="sylius.gallery.previous">
+        <source>sylius.gallery.previous</source>
+        <target state="new">sylius.gallery.previous</target>
+      </trans-unit>
+      <trans-unit id="26ddc2733c58dc231027454616516920b73b1aa9" resname="sylius.gallery.slideshow">
+        <source>sylius.gallery.slideshow</source>
+        <target state="new">sylius.gallery.slideshow</target>
+      </trans-unit>
       <trans-unit id="c48ec6e0518b64aa64ad04171e85fc6a1efc2910" resname="sylius.frontend.add_to_cart">
         <jms:reference-file line="22">Frontend/Product/_single.html.twig</jms:reference-file>
         <jms:reference-file line="106">Frontend/Product/show.html.twig</jms:reference-file>
