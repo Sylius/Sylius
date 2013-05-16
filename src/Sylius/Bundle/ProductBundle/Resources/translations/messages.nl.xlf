@@ -4,82 +4,42 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>sylius.label.product.sku</source>
-                <target>SKU</target>
-            </trans-unit>
-            <trans-unit id="2">
                 <source>sylius.label.product.name</source>
                 <target>Naam</target>
             </trans-unit>
-            <trans-unit id="3">
+            <trans-unit id="2">
                 <source>sylius.label.product.description</source>
                 <target>Omschrijving</target>
             </trans-unit>
-            <trans-unit id="4">
-                <source>sylius.label.product.options</source>
-                <target>Opties</target>
-            </trans-unit>
-            <trans-unit id="5">
+            <trans-unit id="3">
                 <source>sylius.label.product.properties</source>
                 <target>Eigenschappen</target>
             </trans-unit>
-            <trans-unit id="6">
+            <trans-unit id="4">
                 <source>sylius.label.product.available_on</source>
                 <target>Beschikbaar op</target>
             </trans-unit>
-            <trans-unit id="7">
+            <trans-unit id="5">
                 <source>sylius.label.product.meta_keywords</source>
                 <target>Meta sleutelwoorden</target>
             </trans-unit>
-            <trans-unit id="8">
+            <trans-unit id="6">
                 <source>sylius.label.product.meta_description</source>
                 <target>Meta omschrijving</target>
             </trans-unit>
-            <trans-unit id="9">
-                <source>sylius.label.variant.sku</source>
-                <target>SKU</target>
-            </trans-unit>
-            <trans-unit id="10">
-                <source>sylius.label.variant.presentation</source>
-                <target>Weergave</target>
-            </trans-unit>
-            <trans-unit id="11">
-                <source>sylius.label.variant.available_on</source>
-                <target>Beschikbaar op</target>
-            </trans-unit>
-            <trans-unit id="12">
-                <source>sylius.label.option.name</source>
-                <target>Interne naam</target>
-            </trans-unit>
-            <trans-unit id="13">
-                <source>sylius.label.option.presentation</source>
-                <target>Weergave</target>
-            </trans-unit>
-            <trans-unit id="14">
-                <source>sylius.label.option.values</source>
-                <target>Mogelijke waarden</target>
-            </trans-unit>
-            <trans-unit id="15">
-                <source>sylius.label.option_value.value</source>
-                <target>Waarde</target>
-            </trans-unit>
-            <trans-unit id="16">
+            <trans-unit id="7">
                 <source>sylius.label.property.name</source>
                 <target>Interne naam</target>
             </trans-unit>
-            <trans-unit id="17">
+            <trans-unit id="8">
                 <source>sylius.label.property.presentation</source>
                 <target>Weergave</target>
             </trans-unit>
-            <trans-unit id="18">
+            <trans-unit id="9">
                 <source>sylius.label.prototype.name</source>
                 <target>Naam</target>
             </trans-unit>
-            <trans-unit id="19">
-                <source>sylius.label.prototype.options</source>
-                <target>Opties</target>
-            </trans-unit>
-            <trans-unit id="20">
+            <trans-unit id="10">
                 <source>sylius.label.prototype.properties</source>
                 <target>Eigenschappen</target>
             </trans-unit>
