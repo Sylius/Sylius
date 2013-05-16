@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -52,5 +53,11 @@ class SyliusProductBundle extends Bundle
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_product', $interfaces));
+
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\ProductBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_product.driver.doctrine/orm'));
     }
 }

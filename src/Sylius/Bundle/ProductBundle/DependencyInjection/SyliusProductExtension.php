@@ -44,6 +44,8 @@ class SyliusProductExtension extends Extension
         $container->setParameter('sylius_product.engine', $config['engine']);
 
         $this->mapClassParameters($config['classes'], $container);
+
+        $container->setParameter('sylius_product.driver.'.$driver, true);
     }
 
     /**
