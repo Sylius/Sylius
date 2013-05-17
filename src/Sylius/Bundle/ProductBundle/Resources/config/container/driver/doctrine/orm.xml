@@ -17,10 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.property.class">Sylius\Bundle\ProductBundle\Entity\Property\DefaultProperty</parameter>
-        <parameter key="sylius.model.product_property.class">Sylius\Bundle\ProductBundle\Entity\Property\DefaultProductProperty</parameter>
-        <parameter key="sylius.model.prototype.class">Sylius\Bundle\ProductBundle\Entity\Prototype\DefaultPrototype</parameter>
-
         <parameter key="sylius.repository.product.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.property.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.product_property.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
