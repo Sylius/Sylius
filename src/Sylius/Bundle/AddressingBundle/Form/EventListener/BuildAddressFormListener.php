@@ -92,7 +92,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (false === array_key_exists('country', $data)) {
+        if ( !is_array($data)  || false === array_key_exists('country', $data)) {
             return;
         }
 
