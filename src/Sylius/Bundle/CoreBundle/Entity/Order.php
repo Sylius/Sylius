@@ -15,10 +15,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\CartBundle\Entity\Cart;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
-use Sylius\Bundle\SalesBundle\Entity\Order as BaseOrder;
 use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
@@ -28,7 +28,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Order extends BaseOrder implements OrderInterface
+class Order extends Cart implements OrderInterface
 {
     /**
      * User.
@@ -50,7 +50,7 @@ class Order extends BaseOrder implements OrderInterface
      * @var AddressInterface
      */
     protected $billingAddress;
-    
+
     /**
      * Shipping method.
      *
@@ -139,7 +139,7 @@ class Order extends BaseOrder implements OrderInterface
     {
         $this->billingAddress = $address;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -175,7 +175,7 @@ class Order extends BaseOrder implements OrderInterface
 
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
