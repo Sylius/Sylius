@@ -40,14 +40,14 @@ class FrontendMenuBuilder extends MenuBuilder
      *
      * @var CartProviderInterface
      */
-    private $cartProvider;
+    protected $cartProvider;
 
     /**
      * Money extension.
      *
      * @var SyliusMoneyExtension
      */
-    private $moneyExtension;
+    protected $moneyExtension;
 
     /**
      * Constructor.
