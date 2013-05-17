@@ -34,8 +34,13 @@
             </div>
         </div>
         <div class="container">
-            {% for type, message in app.session.flashes if type in ['success', 'error'] %}
-                <div class="alert alert-{{ type }}">{{ message }}</div>
+            {% for type in ['success', 'error'] %}
+                {% for message in app.session.flashbag.get(type) %}
+                    <div class="alert alert-{{ type }}">
+                        {{ message }}
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    </div>
+                {% endfor %}
             {% endfor %}
 
             {% block sylius_content %}
