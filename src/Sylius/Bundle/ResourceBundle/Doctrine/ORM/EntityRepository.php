@@ -117,10 +117,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         $alias = $this->getAlias();
 
         foreach ($criteria as $property => $value) {
-            $queryBuilder
-                ->andWhere($alias.'.'.$property.' = :'.$property)
-                ->setParameter($property, $value)
-            ;
+            if (!empty($value)) {
+                $queryBuilder
+                    ->andWhere($alias.'.'.$property.' = :'.$property)
+                    ->setParameter($property, $value)
+                ;
+            }
         }
     }
 
