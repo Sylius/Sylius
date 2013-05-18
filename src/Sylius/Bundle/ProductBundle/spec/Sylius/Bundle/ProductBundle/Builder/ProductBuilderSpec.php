@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ProductBundle\Builder;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

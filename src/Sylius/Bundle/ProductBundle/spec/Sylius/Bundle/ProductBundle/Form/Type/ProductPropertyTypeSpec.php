@@ -35,11 +35,11 @@ class ProductPropertyTypeSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     * @param Symfony\Component\Form\FormBuilder $fieldBuilder
-     * @param Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @param Symfony\Component\Form\FormBuilder                                   $builder
+     * @param Symfony\Component\Form\FormBuilder                                   $fieldBuilder
+     * @param Symfony\Component\Form\FormFactoryInterface                          $formFactory
      * @param Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $choiceList
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
+     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface                  $property
      */
     function it_builds_property_types_prototype_and_pass_it_as_argument(
         $builder, $fieldBuilder, $formFactory, $choiceList, $property

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ProductBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
 /**

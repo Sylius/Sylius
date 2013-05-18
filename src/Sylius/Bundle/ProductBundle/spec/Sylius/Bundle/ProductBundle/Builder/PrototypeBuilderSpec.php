@@ -11,9 +11,7 @@
 
 namespace spec\Sylius\Bundle\ProductBundle\Builder;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\Property\Property;
 
 /**

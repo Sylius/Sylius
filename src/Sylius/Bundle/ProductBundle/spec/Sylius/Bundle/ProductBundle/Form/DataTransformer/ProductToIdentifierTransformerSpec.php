@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

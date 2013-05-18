@@ -22,7 +22,7 @@ use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 class PropertyTypeSpec extends ObjectBehavior
 {
     /**
-     * @param Symfony\Component\Form\FormBuilder $builder
+     * @param Symfony\Component\Form\FormBuilder          $builder
      * @param Symfony\Component\Form\FormFactoryInterface $formFactory
      */
     function let($builder, $formFactory)

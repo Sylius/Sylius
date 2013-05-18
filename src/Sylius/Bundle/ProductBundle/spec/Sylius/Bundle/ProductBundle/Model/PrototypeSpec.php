@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ProductBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -107,7 +106,7 @@ class PrototypeSpec extends ObjectBehavior
     }
 
     /**
-     * @param Doctrine\Common\Collections\Collection $properties
+     * @param Doctrine\Common\Collections\Collection              $properties
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
      */
     function it_has_fluent_interface($properties, $property)

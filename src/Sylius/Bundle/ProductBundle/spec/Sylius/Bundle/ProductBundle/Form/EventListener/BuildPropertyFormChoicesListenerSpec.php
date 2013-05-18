@@ -35,7 +35,7 @@ class BuildPropertyFormChoicesListenerSpec extends ObjectBehavior
 
     /**
      * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
+     * @param Symfony\Component\Form\Form      $form
      */
     function it_does_no_not_build_choices_collection_for_null(
         $event, $form, $formFactory
@@ -54,10 +54,10 @@ class BuildPropertyFormChoicesListenerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
+     * @param Symfony\Component\Form\FormEvent                    $event
+     * @param Symfony\Component\Form\Form                         $form
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     * @param Symfony\Component\Form\Form $collectionField
+     * @param Symfony\Component\Form\Form                         $collectionField
      */
     function it_builds_choices_collection_for_new_object_without_type(
         $event, $form, $property, $collectionField, $formFactory
@@ -84,10 +84,10 @@ class BuildPropertyFormChoicesListenerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
+     * @param Symfony\Component\Form\FormEvent                    $event
+     * @param Symfony\Component\Form\Form                         $form
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     * @param Symfony\Component\Form\Form $collectionField
+     * @param Symfony\Component\Form\Form                         $collectionField
      */
     function it_builds_choices_collection_for_choice_property(
         $event, $form, $property, $collectionField, $formFactory
@@ -114,10 +114,10 @@ class BuildPropertyFormChoicesListenerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
+     * @param Symfony\Component\Form\FormEvent                    $event
+     * @param Symfony\Component\Form\Form                         $form
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     * @param Symfony\Component\Form\Form $collectionField
+     * @param Symfony\Component\Form\Form                         $collectionField
      */
     function it_does_not_build_choices_collection_for_other_than_choice_property_types(
         $event, $form, $property, $collectionField, $formFactory

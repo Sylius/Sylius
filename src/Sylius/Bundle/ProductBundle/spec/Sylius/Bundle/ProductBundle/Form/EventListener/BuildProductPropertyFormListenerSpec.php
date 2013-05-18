@@ -34,8 +34,8 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
 
     /**
      * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
-     * @param Symfony\Component\Form\Form $valueField
+     * @param Symfony\Component\Form\Form      $form
+     * @param Symfony\Component\Form\Form      $valueField
      */
     function it_builds_form_with_property_and_value_when_new_product_property(
         $event, $form, $valueField, $formFactory
@@ -51,10 +51,10 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
+     * @param Symfony\Component\Form\FormEvent                           $event
+     * @param Symfony\Component\Form\Form                                $form
      * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     * @param Symfony\Component\Form\Form $valueField
+     * @param Symfony\Component\Form\Form                                $valueField
      */
     function it_builds_value_field_base_on_product_property(
         $event, $form, $productProperty, $valueField, $formFactory
@@ -76,10 +76,10 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form $form
+     * @param Symfony\Component\Form\FormEvent                           $event
+     * @param Symfony\Component\Form\Form                                $form
      * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     * @param Symfony\Component\Form\Form $valueField
+     * @param Symfony\Component\Form\Form                                $valueField
      */
     function it_builds_options_base_on_product_property(
         $event, $form, $productProperty, $valueField, $formFactory
