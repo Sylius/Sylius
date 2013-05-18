@@ -1,5 +1,5 @@
 * :doc:`/bundles/SyliusResourceBundle/index`
-* :doc:`/bundles/SyliusAssortmentBundle/index`
+* :doc:`/bundles/SyliusProductBundle/index`
 * :doc:`/bundles/SyliusCartBundle/index`
 * :doc:`/bundles/SyliusSalesBundle/index`
 * :doc:`/bundles/SyliusAddressingBundle/index`
@@ -11,3 +11,4 @@
 * :doc:`/bundles/SyliusSettingsBundle/index`
 * :doc:`/bundles/SyliusFlowBundle/index`
 * :doc:`/bundles/SyliusBloggerBundle/index`
+* :doc:`/bundles/SyliusAssortmentBundle/index`

@@ -5,7 +5,7 @@ Bundles reference
     :hidden:
 
     SyliusResourceBundle/index
-    SyliusAssortmentBundle/index
+    SyliusProductBundle/index
     SyliusCartBundle/index
     SyliusSalesBundle/index
     SyliusAddressingBundle/index
@@ -17,5 +17,6 @@ Bundles reference
     SyliusSettingsBundle/index
     SyliusFlowBundle/index
     SyliusBloggerBundle/index
+    SyliusAssortmentBundle/index
 
 .. include:: /bundles/map.rst.inc
