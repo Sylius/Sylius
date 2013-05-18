@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Prototype form type spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PrototypeTypeSpec extends ObjectBehavior

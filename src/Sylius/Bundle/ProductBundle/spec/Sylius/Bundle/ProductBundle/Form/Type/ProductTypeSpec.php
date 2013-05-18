@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Product form type spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductTypeSpec extends ObjectBehavior

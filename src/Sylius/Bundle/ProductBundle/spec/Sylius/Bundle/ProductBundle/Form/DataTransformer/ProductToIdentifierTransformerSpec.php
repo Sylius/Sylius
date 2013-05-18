@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Product to identifier transformer spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductToIdentifierTransformerSpec extends ObjectBehavior

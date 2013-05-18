@@ -15,6 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
+/**
+ * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ */
 class BuildPropertyFormChoicesListenerSpec extends ObjectBehavior
 {
     /**

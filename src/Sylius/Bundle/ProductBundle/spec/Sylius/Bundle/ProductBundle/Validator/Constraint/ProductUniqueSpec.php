@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Product unique constraint spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductUniqueSpec extends ObjectBehavior

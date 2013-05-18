@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Product model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductSpec extends ObjectBehavior
@@ -26,7 +24,7 @@ class ProductSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ProductBundle\Model\Product');
     }
 
-    function it_is_a_Sylius_product()
+    function it_implements_Sylius_product_interface()
     {
         $this->shouldImplement('Sylius\Bundle\ProductBundle\Model\ProductInterface');
     }
@@ -159,14 +157,35 @@ class ProductSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
+    function its_creation_date_is_mutable()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
+
     function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
+    function its_last_update_date_is_mutable()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setUpdatedAt($date);
+        $this->getUpdatedAt()->shouldReturn($date);
+    }
+
     function it_has_no_deletion_date_by_default()
     {
         $this->getDeletedAt()->shouldReturn(null);
+    }
+
+    function it_is_not_be_deleted_by_default()
+    {
+        $this->shouldNotBeDeleted();
     }
 
     function its_deletion_date_is_mutable()
@@ -190,8 +209,21 @@ class ProductSpec extends ObjectBehavior
         $this->shouldNotBeDeleted();
     }
 
-    function it_is_not_be_deleted_by_default()
+    /**
+     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $property
+     */
+    function it_has_fluent_interface($property)
     {
-        $this->shouldNotBeDeleted();
+        $date = new \DateTime();
+
+        $this->setName('Foo')->shouldReturn($this);
+        $this->setSlug('product-foo')->shouldReturn($this);
+        $this->setDescription('Foo')->shouldReturn($this);
+        $this->setAvailableOn($date)->shouldReturn($this);
+        $this->setMetaDescription('SEO bla bla')->shouldReturn($this);
+        $this->setMetaKeywords('foo, bar, baz')->shouldReturn($this);
+        $this->setCreatedAt($date)->shouldReturn($this);
+        $this->setUpdatedAt($date)->shouldReturn($this);
+        $this->setDeletedAt($date)->shouldReturn($this);
     }
 }

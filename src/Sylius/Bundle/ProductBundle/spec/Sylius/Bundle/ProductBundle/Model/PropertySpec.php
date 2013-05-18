@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
 /**
- * Property model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PropertySpec extends ObjectBehavior
@@ -67,16 +65,16 @@ class PropertySpec extends ObjectBehavior
 
     function it_has_text_type_by_default()
     {
-        $this->getType()->shouldReturn('text');
+        $this->getType()->shouldReturn(PropertyTypes::TEXT);
     }
 
     function its_type_is_mutable()
     {
-        $this->setType('boolean');
-        $this->getType()->shouldReturn('boolean');
+        $this->setType(PropertyTypes::CHECKBOX);
+        $this->getType()->shouldReturn(PropertyTypes::CHECKBOX);
     }
 
-    function it_has_empty_array_as_configuration_by_default()
+    function it_initializes_empty_configuration_array_by_default()
     {
         $this->getConfiguration()->shouldReturn(array());
     }
@@ -92,11 +90,10 @@ class PropertySpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    /**
-     * @param DateTime $date
-     */
-    function its_creation_date_is_mutable($date)
+    function its_creation_date_is_mutable()
     {
+        $date = new \DateTime();
+
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
@@ -106,20 +103,18 @@ class PropertySpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    /**
-     * @param DateTime $date
-     */
-    function its_last_update_date_is_mutable($date)
+    function its_last_update_date_is_mutable()
     {
+        $date = new \DateTime();
+
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    /**
-     * @param DateTime $date
-     */
-    function it_has_fluent_interface($date)
+    function it_has_fluent_interface()
     {
+        $date = new \DateTime();
+
         $this->setName('T-Shirt brand')->shouldReturn($this);
         $this->setPresentation('Brand')->shouldReturn($this);
         $this->setType(PropertyTypes::CHOICE)->shouldReturn($this);

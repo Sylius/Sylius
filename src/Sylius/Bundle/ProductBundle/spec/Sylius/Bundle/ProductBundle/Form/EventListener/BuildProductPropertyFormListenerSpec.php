@@ -14,6 +14,9 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ */
 class BuildProductPropertyFormListenerSpec extends ObjectBehavior
 {
     /**
@@ -41,7 +44,7 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
         $event->getData()->willReturn(null);
         $event->getForm()->willReturn($form);
 
-        $formFactory->createNamed('value', 'text')->willReturn($valueField)->shouldBeCalled();
+        $formFactory->createNamed('value', 'text', null, Argument::any())->willReturn($valueField)->shouldBeCalled();
         $form->add($valueField)->shouldBeCalled()->willReturn($form);
 
         $this->buildForm($event);
@@ -85,7 +88,7 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
         $productProperty->getType()->willReturn('choice');
         $productProperty->getConfiguration()->willReturn(array(
             'choices' => array(
-                'red' => 'Red',
+                'red'  => 'Red',
                 'blue' => 'Blue'
             )
         ));

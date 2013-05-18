@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique;
 
 /**
- * Product unique constraint validator spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductUniqueValidatorSpec extends ObjectBehavior

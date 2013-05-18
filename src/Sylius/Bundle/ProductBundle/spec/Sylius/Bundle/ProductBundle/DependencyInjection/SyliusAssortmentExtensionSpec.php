@@ -12,11 +12,8 @@
 namespace spec\Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
- * Sylius product extension spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusProductExtensionSpec extends ObjectBehavior

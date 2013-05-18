@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Product prototype spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PrototypeSpec extends ObjectBehavior
@@ -87,11 +85,10 @@ class PrototypeSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    /**
-     * @param DateTime $date
-     */
-    function its_creation_date_is_mutable($date)
+    function its_creation_date_is_mutable()
     {
+        $date = new \DateTime();
+
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
@@ -101,11 +98,10 @@ class PrototypeSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    /**
-     * @param DateTime $date
-     */
-    function its_last_update_date_is_mutable($date)
+    function its_last_update_date_is_mutable()
     {
+        $date = new \DateTime();
+
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
@@ -113,10 +109,11 @@ class PrototypeSpec extends ObjectBehavior
     /**
      * @param Doctrine\Common\Collections\Collection $properties
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     * @param DateTime $date
      */
-    function it_has_fluent_interface($properties, $property, $date)
+    function it_has_fluent_interface($properties, $property)
     {
+        $date = new \DateTime();
+
         $this->setName('T-Shirt')->shouldReturn($this);
         $this->setProperties($properties)->shouldReturn($this);
         $this->addProperty($property)->shouldReturn($this);

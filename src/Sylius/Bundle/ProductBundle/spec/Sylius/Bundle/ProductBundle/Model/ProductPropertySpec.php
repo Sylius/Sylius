@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
 /**
- * Product property model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductPropertySpec extends ObjectBehavior
@@ -91,7 +89,7 @@ class ProductPropertySpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
      */
-    function it_converts_value_to_Boolean_when_property_has_checkbox_type($property)
+    function it_converts_value_to_Boolean_if_property_has_checkbox_type($property)
     {
         $property->getType()->willReturn(PropertyTypes::CHECKBOX);
         $this->setProperty($property);
@@ -109,7 +107,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->__toString()->shouldReturn('S');
     }
 
-    function it_throws_exception_when_trying_to_get_name_without_property_being_assigned()
+    function it_throws_exception_when_trying_to_get_name_without_property_defined()
     {
         $this
             ->shouldThrow('BadMethodCallException')
@@ -128,7 +126,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getName()->shouldReturn('T-Shirt material');
     }
 
-    function it_throws_exception_when_trying_to_get_presentation_without_property_being_assigned()
+    function it_throws_exception_when_trying_to_get_presentation_without_property_defined()
     {
         $this
             ->shouldThrow('BadMethodCallException')
@@ -147,7 +145,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getPresentation()->shouldReturn('Material');
     }
 
-    function it_throws_exception_when_trying_to_get_type_without_property_being_assigned()
+    function it_throws_exception_when_trying_to_get_type_without_property_defined()
     {
         $this
             ->shouldThrow('BadMethodCallException')
@@ -166,7 +164,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getType()->shouldReturn('choice');
     }
 
-    function it_throws_exception_when_trying_to_get_configuration_without_property_being_assigned()
+    function it_throws_exception_when_trying_to_get_configuration_without_property_defined()
     {
         $this
             ->shouldThrow('BadMethodCallException')

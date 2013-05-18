@@ -13,10 +13,9 @@ namespace spec\Sylius\Bundle\ProductBundle;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
- * Sylius product bundle spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusProductBundleSpec extends ObjectBehavior
@@ -33,6 +32,6 @@ class SyliusProductBundleSpec extends ObjectBehavior
 
     function it_supports_correct_drivers()
     {
-        $this->getSupportedDrivers()->shouldReturn(array('doctrine/orm'));
+        $this->getSupportedDrivers()->shouldReturn(array(SyliusResourceBundle::DRIVER_DOCTRINE_ORM));
     }
 }

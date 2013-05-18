@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ProductBundle\Form\EventListener\BuildPropertyFormChoicesListener;
+use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ProductBundle\Form\EventListener\BuildPropertyFormChoicesListener;
 
 /**
  * Property type.
@@ -54,12 +55,7 @@ class PropertyType extends AbstractType
                 'label' => 'sylius.label.property.presentation'
             ))
             ->add('type', 'choice', array(
-                'choices' => array(
-                    'checkbox' => 'Boolean',
-                    'text'     => 'String',
-                    'number'   => 'Number',
-                    'choice'   => 'Choice',
-                )
+                'choices' => PropertyTypes::getChoices()
             ))
             ->addEventSubscriber(new BuildPropertyFormChoicesListener($builder->getFormFactory()))
         ;

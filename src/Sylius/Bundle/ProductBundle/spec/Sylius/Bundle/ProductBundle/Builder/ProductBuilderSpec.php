@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Product builder spec.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ProductBuilderSpec extends ObjectBehavior
@@ -57,7 +55,7 @@ class ProductBuilderSpec extends ObjectBehavior
      * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface        $property
      * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
      */
-    function it_adds_property_to_product($propertyRepository, $productPropertyRepository, $product, $property, $productProperty)
+    function it_adds_property_to_product_if_already_exists($propertyRepository, $productPropertyRepository, $product, $property, $productProperty)
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($property);
         $productPropertyRepository->createNew()->shouldBeCalled()->willReturn($productProperty);

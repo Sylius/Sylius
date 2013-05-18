@@ -17,8 +17,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\Property\Property;
 
 /**
- * Prototype builder spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PrototypeBuilderSpec extends ObjectBehavior

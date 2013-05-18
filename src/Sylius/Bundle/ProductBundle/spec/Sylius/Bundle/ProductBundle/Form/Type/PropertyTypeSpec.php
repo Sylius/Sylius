@@ -13,10 +13,9 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
 /**
- * Property form type spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Leszek Prabucki <leszek.prabucki@gmail.pl>
  */
@@ -28,8 +27,9 @@ class PropertyTypeSpec extends ObjectBehavior
      */
     function let($builder, $formFactory)
     {
-        $builder->getFormFactory()->willReturn($formFactory);
         $this->beConstructedWith('Property');
+
+        $builder->getFormFactory()->willReturn($formFactory);
     }
 
     function it_is_initializable()
@@ -66,18 +66,7 @@ class PropertyTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add(
-                'type',
-                'choice',
-                array(
-                    'choices' => array(
-                        'checkbox' => 'Boolean',
-                        'text'     => 'String',
-                        'number'   => 'Number',
-                        'choice'   => 'Choice',
-                    )
-                )
-            )
+            ->add('type', 'choice', array('choices' => PropertyTypes::getChoices()))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
