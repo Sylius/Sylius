@@ -25,7 +25,7 @@ class OrderRepository extends EntityRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator(array $criteria = array(), array $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array())
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
