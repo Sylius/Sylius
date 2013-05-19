@@ -50,7 +50,7 @@ class ProductRepository extends CustomizableProductRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator(array $criteria = array(), array $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array())
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->select('product, variant')
