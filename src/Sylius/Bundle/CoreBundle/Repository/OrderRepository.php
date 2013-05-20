@@ -25,7 +25,7 @@ class OrderRepository extends EntityRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator(array $criteria = array(), array $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array())
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
@@ -58,6 +58,13 @@ class OrderRepository extends EntityRepository
                 ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
             ;
+        }
+
+        if (empty($sorting['updatedAt'])) {
+            if (!is_array($sorting)) {
+                $sorting = array();
+            }
+            $sorting['updatedAt'] = 'desc';
         }
 
         $this->applySorting($queryBuilder, $sorting);
