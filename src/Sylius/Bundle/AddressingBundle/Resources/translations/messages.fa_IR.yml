@@ -1,8 +1,0 @@
-sylius:
-    form:
-        address:
-            first_name: "نام"
-            last_name: "نام خانوادگی"
-            street: "آدرس"
-            city: "شهر"
-            postcode: "کد پستی"

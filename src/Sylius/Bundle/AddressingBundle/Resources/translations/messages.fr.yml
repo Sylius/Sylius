@@ -1,8 +1,0 @@
-sylius:
-    form:
-        address:
-            first_name: "Prénom"
-            last_name: "Nom"
-            street: "Adresse"
-            city: "Ville"
-            postcode: "Code postal"
