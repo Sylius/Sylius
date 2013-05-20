@@ -70,6 +70,13 @@ class ProductRepository extends CustomizableProductRepository
             ;
         }
 
+        if (empty($sorting['updatedAt'])) {
+            if (!is_array($sorting)) {
+                $sorting = array();
+            }
+            $sorting['updatedAt'] = 'desc';
+        }
+
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
