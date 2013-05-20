@@ -72,6 +72,6 @@ class FlashListener implements EventSubscriberInterface
 
     public function addSuccessFlash(Event $event)
     {
-        $this->session->getFlashBag()->add('success', self::$messages[$event->getName()]);
+        $this->session->getFlashBag()->add('success', $event->getMessage() ?: self::$messages[$event->getName()]);
     }
 }
