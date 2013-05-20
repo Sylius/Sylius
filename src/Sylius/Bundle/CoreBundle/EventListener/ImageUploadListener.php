@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface;
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
@@ -28,16 +30,34 @@ class ImageUploadListener
     public function upload(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface){
-            throw new \InvalidArgumentException('CustomizableProductInterface or VariantInterface expected.');
+
+        if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface && !$subject instanceof TaxonInterface && !$subject instanceof TaxonomyInterface){
+            throw new \InvalidArgumentException('CustomizableProductInterface, VariantInterface, TaxonInterface, TaxonomyInterface or expected.');
         }
 
-        $variant = $subject instanceof VariantInterface ? $subject : $subject->getMasterVariant();
+        if ($subject instanceof VariantInterface || $subject instanceof TaxonInterface || $subject instanceof TaxonomyInterface) {
+            $variant = $subject;
+        }
+        else {
+            $variant = $subject->getMasterVariant();
+        }
 
-        foreach ($variant->getImages() as $image) {
-            if (null === $image->getId()) {
-                $this->uploader->upload($image);
+        if (true === method_exists($variant, 'getImages')) {
+            foreach ($variant->getImages() as $image) {
+                if (null === $image->getId()) {
+                    $this->uploader->upload($image);
+                }
             }
         }
+        else {
+            if (null === $subject->getId()) {
+                $this->uploader->upload($subject);
+            }
+            elseif ($subject instanceof TaxonInterface || $subject instanceof TaxonomyInterface) {
+                $this->uploader->upload($subject);
+            }
+        }
+
+
     }
 }

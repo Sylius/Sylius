@@ -29,9 +29,13 @@ class ImageUploader implements ImageUploaderInterface
             throw new \InvalidArgumentException('The given image has no file attached.');
         }
 
+        if (null !== $image->getPath()) {
+            $this->remove($image->getPath());
+        }
+
         do {
             $hash = md5(uniqid(mt_rand(), true));
-            $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
+            $path = $this->expandPath($hash . '.' . $image->getFile()->guessExtension());
         } while ($this->filesystem->has($path));
 
         $image->setPath($path);
@@ -40,6 +44,11 @@ class ImageUploader implements ImageUploaderInterface
             $image->getPath(),
             file_get_contents($image->getFile()->getPathname())
         );
+    }
+
+    public function remove($path)
+    {
+        return $this->filesystem->delete($path);
     }
 
     private function expandPath($path)

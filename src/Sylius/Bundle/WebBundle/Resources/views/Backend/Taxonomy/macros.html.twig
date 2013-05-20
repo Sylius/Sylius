@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('name', 'sylius.taxonomy.name'|trans) }}</th>
+            <th>{{ 'sylius.taxonomy.image'|trans }}</th>
             <th></th>
         </tr>
     </thead>
@@ -15,6 +16,17 @@
         {% for taxonomy in taxonomies %}
         <tr>
             <td>{{ taxonomy.name }}</td>
+            <td>
+                {% if taxonomy.path|length > 0 %}
+                    <div data-toggle="modal-gallery" data-target="#modal-gallery">
+                        <a href="{{ taxonomy.path }}" title="{{ taxonomy.name }}" class="thumbnail" style="width: 50px; height: 40px;">
+                            <img src="{{ taxonomy.path|imagine_filter('sylius_50x40') }}" alt="" />
+                        </a>
+                    </div>
+                {% else %}
+                    <span class="badge badge-info">{{ 'sylius.taxonomy.no_image'|trans }}</span>
+                {% endif %}
+            </td>
             <td>
                 <div class="pull-right">
                 {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans)|raw }}
