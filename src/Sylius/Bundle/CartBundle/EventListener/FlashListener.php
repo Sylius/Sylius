@@ -27,7 +27,7 @@ class FlashListener implements EventSubscriberInterface
     /**
      * @var array
      */
-    private static $messages = array(
+    public $messages = array(
         SyliusCartEvents::CART_SAVE_COMPLETED    => 'The cart have been updated correctly.',
         SyliusCartEvents::CART_CLEAR_COMPLETED   => 'The cart has been successfully cleared.',
 
@@ -67,11 +67,11 @@ class FlashListener implements EventSubscriberInterface
 
     public function addErrorFlash(Event $event)
     {
-        $this->session->getFlashBag()->add('error', $event->getMessage() ?: self::$messages[$event->getName()]);
+        $this->session->getFlashBag()->add('error', $event->getMessage() ?: $this->messages[$event->getName()]);
     }
 
     public function addSuccessFlash(Event $event)
     {
-        $this->session->getFlashBag()->add('success', self::$messages[$event->getName()]);
+        $this->session->getFlashBag()->add('success', $event->getMessage() ?: $this->messages[$event->getName()]);
     }
 }
