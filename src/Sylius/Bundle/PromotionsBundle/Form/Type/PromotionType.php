@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
+use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * Promotion form type.
@@ -51,11 +52,11 @@ class PromotionType extends AbstractType
             ))
             ->add('startsAt', 'date', array(
                 'label' => 'sylius.form.promotion.starts_at',
-                'empty_value' => array('year' => '-', 'month' => '-', 'day' => '-')
+                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-')
             ))
             ->add('endsAt', 'date', array(
                 'label' => 'sylius.form.promotion.ends_at',
-                'empty_value' => array('year' => '-', 'month' => '-', 'day' => '-')
+                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-')
             ))
             ->add('couponBased', 'checkbox', array(
                 'label' => 'sylius.form.promotion.coupon_based',
