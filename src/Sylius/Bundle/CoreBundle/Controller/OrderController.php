@@ -31,7 +31,7 @@ class OrderController extends ResourceController
     /**
      * @param Request $request
      * @param $id
-     * @return mixed
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexByUserAction(Request $request, $id)
     {

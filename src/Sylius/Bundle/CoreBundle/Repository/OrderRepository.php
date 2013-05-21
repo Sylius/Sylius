@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
+use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use YaLinqo\Enumerable;
 use DateTime;
@@ -25,7 +26,7 @@ class OrderRepository extends EntityRepository
      *
      * @return PagerfantaInterface
      */
-    public function createByUserPaginator($user, array $sorting = array())
+    public function createByUserPaginator(UserInterface $user, array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
