@@ -29,11 +29,11 @@ class ImageUploadListener extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
-     * @param Sylius\Bundle\CoreBundle\Entity\Variant                           $variant
-     * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
-     */
+ * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
+ * @param Sylius\Bundle\CoreBundle\Entity\Variant                           $variant
+ * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
+ * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
+ */
     function it_uses_image_uploader_to_upload_images($event, $variant, $product, $image, $uploader)
     {
         $event->getSubject()->willReturn($product);
@@ -42,6 +42,32 @@ class ImageUploadListener extends ObjectBehavior
         $image->getId()->willReturn(null);
         $uploader->upload($image)->shouldBeCalled();
 
+        $this->upload($event);
+    }
+
+    /**
+     * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
+     * @param Sylius\Bundle\CoreBundle\Entity\Taxon                             $taxon
+     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
+     */
+    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploader)
+    {
+        $event->getSubject()->willReturn($taxon);
+        $uploader->upload($taxon)->shouldBeCalled();
+        $taxon->hasFile()->willReturn(true);
+        $this->upload($event);
+    }
+
+    /**
+     * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
+     * @param Sylius\Bundle\CoreBundle\Entity\Taxonomy                          $taxonomy
+     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
+     */
+    function it_uses_image_uploader_to_upload_taxonomy_image($event, $taxonomy, $image, $uploader)
+    {
+        $event->getSubject()->willReturn($taxonomy);
+        $uploader->upload($taxonomy)->shouldBeCalled();
+        $taxonomy->hasFile()->willReturn(true);
         $this->upload($event);
     }
 
