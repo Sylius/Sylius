@@ -28,8 +28,45 @@ class OrderController extends ResourceController
         ));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function indexByUserAction(Request $request, $id)
+    {
+        $config = $this->getConfiguration();
+        $sorting = $config->getSorting();
+
+        $user = $this
+            ->getUserController()
+            ->findOr404(array('id' => $id));
+
+        $paginator = $this
+            ->getRepository()
+            ->createByUserPaginator($user, $sorting);
+
+        $paginator->setCurrentPage($request->get('page', 1), true, true);
+        $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
+
+        return $this->renderResponse('SyliusWebBundle:Backend/Order:indexByUser.html', array(
+            'user' => $user,
+            'orders' => $paginator
+        ));
+    }
+
     private function getFormFactory()
     {
         return $this->get('form.factory');
+    }
+
+    /**
+     * Get user controller.
+     *
+     * @return ResourceController
+     */
+    private function getUserController()
+    {
+        return $this->get('sylius.controller.user');
     }
 }

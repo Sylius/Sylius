@@ -18,6 +18,29 @@ use DateTime;
 class OrderRepository extends EntityRepository
 {
     /**
+     * Create user orders paginator.
+     *
+     * @param $user
+     * @param array $sorting
+     *
+     * @return PagerfantaInterface
+     */
+    public function createByUserPaginator($user, array $sorting = array())
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('o.user', 'user')
+            ->andWhere('user = :user')
+            ->setParameter('user', $user)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
      * Create filter paginator.
      *
      * @param array $criteria
