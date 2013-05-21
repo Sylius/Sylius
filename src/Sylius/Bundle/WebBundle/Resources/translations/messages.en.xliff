@@ -830,6 +830,26 @@
         <source>sylius.product.stock</source>
         <target>Current stock</target>
       </trans-unit>
+      <trans-unit id="b4090e61911541eb7850133757477645a5085881" resname="sylius.product.tabs.categorization">
+        <source>sylius.product.tabs.categorization</source>
+        <target>Categorization</target>
+      </trans-unit>
+      <trans-unit id="c9e03b33872ad15cdc672c0b9e40a2e304975363" resname="sylius.product.tabs.images">
+        <source>sylius.product.tabs.images</source>
+        <target>Images</target>
+      </trans-unit>
+      <trans-unit id="11aa01a6c0bc241d9a5fc7da67004eae148230e5" resname="sylius.product.tabs.options">
+        <source>sylius.product.tabs.options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="612a936aa72b915bb75e442aefac01ef052cc18b" resname="sylius.product.tabs.product">
+        <source>sylius.product.tabs.product</source>
+        <target>Product</target>
+      </trans-unit>
+      <trans-unit id="c4f1e61ebb003ffd739c6b3ee327d61d0e56a13d" resname="sylius.product.tabs.properties">
+        <source>sylius.product.tabs.properties</source>
+        <target>Properties</target>
+      </trans-unit>
       <trans-unit id="4d4403ca3615055784ace7bab400c4c7bc4c094f" resname="sylius.product.tax_category">
         <source>sylius.product.tax_category</source>
         <target>Tax category</target>
