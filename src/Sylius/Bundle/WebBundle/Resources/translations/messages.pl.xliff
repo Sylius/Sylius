@@ -830,6 +830,26 @@
         <source>sylius.product.stock</source>
         <target>Ilość na magazynie</target>
       </trans-unit>
+      <trans-unit id="b4090e61911541eb7850133757477645a5085881" resname="sylius.product.tabs.categorization">
+        <source>sylius.product.tabs.categorization</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="c9e03b33872ad15cdc672c0b9e40a2e304975363" resname="sylius.product.tabs.images">
+        <source>sylius.product.tabs.images</source>
+        <target>Zdjęcia</target>
+      </trans-unit>
+      <trans-unit id="11aa01a6c0bc241d9a5fc7da67004eae148230e5" resname="sylius.product.tabs.options">
+        <source>sylius.product.tabs.options</source>
+        <target>Warianty</target>
+      </trans-unit>
+      <trans-unit id="612a936aa72b915bb75e442aefac01ef052cc18b" resname="sylius.product.tabs.product">
+        <source>sylius.product.tabs.product</source>
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="c4f1e61ebb003ffd739c6b3ee327d61d0e56a13d" resname="sylius.product.tabs.properties">
+        <source>sylius.product.tabs.properties</source>
+        <target>Właściwości</target>
+      </trans-unit>
       <trans-unit id="4d4403ca3615055784ace7bab400c4c7bc4c094f" resname="sylius.product.tax_category">
         <source>sylius.product.tax_category</source>
         <target>Tax category</target>
@@ -1512,7 +1532,7 @@
       </trans-unit>
       <trans-unit id="2d2942bddc80484ea95b6a38b6a0d13f5af7e5a8" resname="sylius.variant.update_header">
         <source>sylius.variant.update_header</source>
-        <target>Editing variant</target>
+        <target>Edytowanie wariantu</target>
       </trans-unit>
       <trans-unit id="faff6f967ebb907b33fc3767e26f22459617cf2f" resname="sylius.yes">
         <source>sylius.yes</source>
