@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="05212abfc3e29e4b0fe5f6ab18f31da4" resname="sylius.taxon.name.max_length">
+        <source>sylius.taxon.name.max_length</source>
+        <target>Taxon name must not be longer than 255 characters.</target>
+      </trans-unit>
+      <trans-unit id="6b05cd6b996cfafd94c813a707d86fa5" resname="sylius.taxon.name.not_blank">
+        <source>sylius.taxon.name.not_blank</source>
+        <target>Please enter taxon name.</target>
+      </trans-unit>
+      <trans-unit id="29428b426b591aad514fa68434a5dd8a" resname="sylius.taxonomy.name.max_length">
+        <source>sylius.taxonomy.name.max_length</source>
+        <target>Taxonomy name must not be longer than 255 characters.</target>
+      </trans-unit>
+      <trans-unit id="199bbac1dc5f668799b979d986e0746a" resname="sylius.taxonomy.name.not_blank">
+        <source>sylius.taxonomy.name.not_blank</source>
+        <target>Please enter taxonomy name.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -17,6 +17,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * Taxon selection form.
@@ -57,7 +58,7 @@ class TaxonSelectionType extends AbstractType
             $builder->add(strtolower($taxonomy->getName()), 'choice', array(
                 'choice_list' => new ObjectChoiceList($taxonomy->getTaxonsAsList()),
                 'multiple'    => $options['multiple'],
-                'label'       => $taxonomy->getName()
+                'label'       => /** @Ignore */ $taxonomy->getName()
             ));
         }
     }
