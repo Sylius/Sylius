@@ -17,10 +17,10 @@
         <tr>
             <td>{{ taxonomy.name }}</td>
             <td>
-                {% if taxonomy.path|length > 0 %}
+                {% if taxonomy.root.path|length > 0 %}
                     <div data-toggle="modal-gallery" data-target="#modal-gallery">
-                        <a href="{{ taxonomy.path }}" title="{{ taxonomy.name }}" class="thumbnail" style="width: 50px; height: 40px;">
-                            <img src="{{ taxonomy.path|imagine_filter('sylius_50x40') }}" alt="" />
+                        <a href="{{ taxonomy.root.path }}" title="{{ taxonomy.name }}" class="thumbnail thumbnail-image">
+                            <img src="{{ taxonomy.root.path|imagine_filter('sylius_50x40') }}" alt="" />
                         </a>
                     </div>
                 {% else %}

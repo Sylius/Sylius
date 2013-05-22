@@ -2,7 +2,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Entity;
 
-use Sylius\Bundle\CoreBundle\Model\ImageTaxonInterface;
+use Sylius\Bundle\CoreBundle\Model\ImageInterface;
 use Sylius\Bundle\TaxonomiesBundle\Entity\Taxon as BaseTaxon;
 use SplFileInfo;
 use DateTime;
@@ -11,18 +11,18 @@ use DateTime;
  * Sylius core taxon entity.
  *
  */
-class Taxon extends BaseTaxon implements ImageTaxonInterface
+class Taxon extends BaseTaxon implements ImageInterface
 {
 
     /**
      * @var SplFileInfo
      */
-    protected $imageFile;
+    protected $file;
 
     /**
      * @var string
      */
-    protected $imagePath;
+    protected $path;
 
     /**
      * @var \DateTime
@@ -41,29 +41,29 @@ class Taxon extends BaseTaxon implements ImageTaxonInterface
         $this->createdAt = new DateTime();
     }
 
-    public function hasImageFile()
+    public function hasFile()
     {
-        return null !== $this->imageFile;
+        return null !== $this->file;
     }
 
-    public function getImageFile()
+    public function getFile()
     {
-        return $this->imageFile;
+        return $this->file;
     }
 
-    public function setImageFile(SplFileInfo $imageFile)
+    public function setFile(SplFileInfo $file)
     {
-        $this->imageFile = $imageFile;
+        $this->file = $file;
     }
 
-    public function getImagePath()
+    public function getPath()
     {
-        return $this->imagePath;
+        return $this->path;
     }
 
-    public function setImagePath($imagePath)
+    public function setPath($path)
     {
-        $this->imagePath = $imagePath;
+        $this->path = $path;
     }
 
     public function getCreatedAt()

@@ -23,11 +23,10 @@ class Taxonomy extends ObjectBehavior
     function it_is_Sylius_Taxonomy()
     {
         $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface');
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ImageInterface');
     }
 
     function it_should_not_path_defined_by_default()
     {
-        $this->getPath()->shouldReturn(null);
+        $this->getRoot()->getPath()->shouldReturn(null);
     }
 }

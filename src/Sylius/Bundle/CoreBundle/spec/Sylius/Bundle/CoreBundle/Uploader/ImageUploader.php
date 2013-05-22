@@ -14,11 +14,11 @@ namespace spec\Sylius\Bundle\CoreBundle\Uploader;
 use PHPSpec2\ObjectBehavior;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ImageTaxonUploader extends ObjectBehavior
+class ImageUploader extends ObjectBehavior
 {
     /**
-     * @param Gaufrette\Filesystem                                  $filesystem
-     * @param Sylius\Bundle\CoreBundle\Model\ImageTaxonInterface    $image
+     * @param Gaufrette\Filesystem                           $filesystem
+     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface  $image
      */
     function let($filesystem, $image)
     {
@@ -26,14 +26,14 @@ class ImageTaxonUploader extends ObjectBehavior
 
         $file = new \Symfony\Component\HttpFoundation\File\File(__FILE__, 'img.jpg');
         $image->getId()->willReturn(null);
-        $image->getImageFile()->willReturn($file);
+        $image->getFile()->willReturn($file);
 
         $this->beConstructedWith($filesystem);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Uploader\ImageTaxonUploader');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Uploader\ImageUploader');
     }
 
     function it_is_Sylius_image_uploader()
@@ -50,7 +50,7 @@ class ImageTaxonUploader extends ObjectBehavior
 
     function it_throws_exception_if_there_is_no_file_attached($image)
     {
-        $image->hasImageFile()->willReturn(false);
+        $image->hasFile()->willReturn(false);
 
         $this
             ->shouldThrow('InvalidArgumentException')

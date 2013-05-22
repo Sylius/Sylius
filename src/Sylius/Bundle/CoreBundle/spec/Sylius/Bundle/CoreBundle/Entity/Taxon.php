@@ -23,11 +23,11 @@ class Taxon extends ObjectBehavior
     function it_is_Sylius_Taxon()
     {
         $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface');
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ImageTaxonInterface');
+        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ImageInterface');
     }
 
     function it_should_not_path_defined_by_default()
     {
-        $this->getImagePath()->shouldReturn(null);
+        $this->getPath()->shouldReturn(null);
     }
 }

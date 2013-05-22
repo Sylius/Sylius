@@ -23,8 +23,8 @@ class TaxonomyType extends BaseTaxonomyType
             'imageFile',
             'file',
             array(
-                'property_path' => 'root.imageFile',
-                'label' => 'sylius.form.taxonomy.imageFile'
+                'property_path' => 'root.file',
+                'label' => 'sylius.form.taxonomy.file'
             )
         );
     }

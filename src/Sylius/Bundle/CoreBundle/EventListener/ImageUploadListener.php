@@ -20,13 +20,11 @@ use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
 
 class ImageUploadListener
 {
-    protected $uploaderProduct;
-    protected $uploaderTaxon;
+    protected $uploader;
 
-    public function __construct(ImageUploaderInterface $uploaderProduct, ImageUploaderInterface $uploaderTaxon)
+    public function __construct(ImageUploaderInterface $uploader)
     {
-        $this->uploaderProduct = $uploaderProduct;
-        $this->uploaderTaxon = $uploaderTaxon;
+        $this->uploader = $uploader;
     }
 
     public function uploadProductImage(GenericEvent $event)
@@ -40,7 +38,7 @@ class ImageUploadListener
 
         foreach ($variant->getImages() as $image) {
             if (null === $image->getId()) {
-                $this->uploaderProduct->upload($image);
+                $this->uploader->upload($image);
             }
         }
     }
@@ -53,8 +51,8 @@ class ImageUploadListener
             throw new \InvalidArgumentException('TaxonInterface expected.');
         }
 
-        if ($subject->hasImageFile()) {
-            $this->uploaderTaxon->upload($subject);
+        if ($subject->hasFile()) {
+            $this->uploader->upload($subject);
         }
 
     }
@@ -67,8 +65,8 @@ class ImageUploadListener
             throw new \InvalidArgumentException('TaxonomyInterface expected.');
         }
 
-        if ($subject->getRoot()->hasImageFile()) {
-            $this->uploaderTaxon->upload($subject->getRoot());
+        if ($subject->getRoot()->hasFile()) {
+            $this->uploader->upload($subject->getRoot());
         }
 
     }

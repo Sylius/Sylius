@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Uploader;
 
-use Sylius\Bundle\CoreBundle\Model\ImageInterface;
 use Gaufrette\Filesystem;
 
-class ImageProductUploader implements ImageUploaderInterface
+class ImageUploader implements ImageUploaderInterface
 {
     protected $filesystem;
 
@@ -23,7 +22,7 @@ class ImageProductUploader implements ImageUploaderInterface
         $this->filesystem = $filesystem;
     }
 
-    public function upload(ImageInterface $image)
+    public function upload($image)
     {
         if (!$image->hasFile()) {
             throw new \InvalidArgumentException('The given image has no file attached.');

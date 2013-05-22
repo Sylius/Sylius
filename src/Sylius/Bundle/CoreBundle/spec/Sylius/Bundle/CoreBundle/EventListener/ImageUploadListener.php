@@ -16,12 +16,11 @@ use PHPSpec2\ObjectBehavior;
 class ImageUploadListener extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploaderProduct
-     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploaderTaxon
+     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploader
      */
-    function let($uploaderProduct, $uploaderTaxon)
+    function let($uploader)
     {
-        $this->beConstructedWith($uploaderProduct, $uploaderTaxon);
+        $this->beConstructedWith($uploader);
     }
 
     function it_is_initializable()
@@ -33,15 +32,15 @@ class ImageUploadListener extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
      * @param Sylius\Bundle\CoreBundle\Entity\Variant                           $variant
      * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
-     * @param Sylius\Bundle\CoreBundle\Model\ImageProductInterface              $image
+     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
      */
-    function it_uses_image_uploader_to_upload_images($event, $variant, $product, $image, $uploaderProduct)
+    function it_uses_image_uploader_to_upload_images($event, $variant, $product, $image, $uploader)
     {
         $event->getSubject()->willReturn($product);
         $product->getMasterVariant()->willReturn($variant);
         $variant->getImages()->willReturn(array($image));
         $image->getId()->willReturn(null);
-        $uploaderProduct->upload($image)->shouldBeCalled();
+        $uploader->upload($image)->shouldBeCalled();
 
         $this->uploadProductImage($event);
     }
@@ -51,11 +50,11 @@ class ImageUploadListener extends ObjectBehavior
      * @param Sylius\Bundle\CoreBundle\Entity\Taxon                             $taxon
      * @param Sylius\Bundle\CoreBundle\Model\ImageTaxonInterface                $image
      */
-    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploaderTaxon)
+    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploader)
     {
         $event->getSubject()->willReturn($taxon);
-        $uploaderTaxon->upload($taxon)->shouldBeCalled();
-        $taxon->hasImageFile()->willReturn(true);
+        $uploader->upload($taxon)->shouldBeCalled();
+        $taxon->hasFile()->willReturn(true);
         $this->uploadTaxonImage($event);
     }
 
