@@ -161,8 +161,8 @@ class FrontendMenuBuilder extends MenuBuilder
 
         foreach ($taxonomies as $taxonomy) {
             $child = $menu->addChild($taxonomy->getName(), $childOptions);
-            if ($taxonomy->getPath()) {
-                $child->setLabelAttribute('data-image', $taxonomy->getPath());
+            if ($taxonomy->getRoot()->getImagePath()) {
+                $child->setLabelAttribute('data-image', $taxonomy->getRoot()->getImagePath());
             }
 
             $this->createTaxonomiesMenuNode($child, $taxonomy->getRoot());
@@ -179,8 +179,8 @@ class FrontendMenuBuilder extends MenuBuilder
                 'routeParameters' => array('permalink' => $child->getPermalink()),
                 'labelAttributes' => array('icon' => 'icon-angle-right')
             ));
-            if ($child->getPath()) {
-                $childMenu->setLabelAttribute('data-image', $child->getPath());
+            if ($child->getImagePath()) {
+                $childMenu->setLabelAttribute('data-image', $child->getImagePath());
             }
 
             $this->createTaxonomiesMenuNode($childMenu, $child);

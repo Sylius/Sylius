@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use SplFileInfo;
 use DateTime;
 
-class Image implements ImageInterface
+class Image implements ImageProductInterface
 {
     protected $id;
     protected $file;

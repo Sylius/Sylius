@@ -20,10 +20,11 @@ class TaxonomyType extends BaseTaxonomyType
         parent::buildForm($builder, $options);
 
         $builder->add(
-            'file',
+            'imageFile',
             'file',
             array(
-                'label' => 'sylius.form.taxonomy.file'
+                'property_path' => 'root.imageFile',
+                'label' => 'sylius.form.taxonomy.imageFile'
             )
         );
     }

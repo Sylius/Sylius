@@ -38,7 +38,8 @@
 
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
-        <parameter key="sylius.image_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageUploader</parameter>
+        <parameter key="sylius.image_product_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageProductUploader</parameter>
+        <parameter key="sylius.image_taxon_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageTaxonUploader</parameter>
 
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
@@ -162,18 +163,27 @@
         </service>
 
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
-            <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.variant.pre_create" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.variant.pre_update" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="upload" />
+            <argument type="service" id="sylius.image_product_uploader" />
+            <argument type="service" id="sylius.image_taxon_uploader" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.variant.pre_create" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.variant.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
+            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
-        <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
+        <service id="sylius.image_product_uploader" class="%sylius.image_product_uploader.class%">
+            <argument type="service">
+                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+                    <argument>sylius_image</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.image_taxon_uploader" class="%sylius.image_taxon_uploader.class%">
             <argument type="service">
                 <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
                     <argument>sylius_image</argument>

@@ -16,11 +16,12 @@ use PHPSpec2\ObjectBehavior;
 class ImageUploadListener extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploader
+     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploaderProduct
+     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploaderTaxon
      */
-    function let($uploader)
+    function let($uploaderProduct, $uploaderTaxon)
     {
-        $this->beConstructedWith($uploader);
+        $this->beConstructedWith($uploaderProduct, $uploaderTaxon);
     }
 
     function it_is_initializable()
@@ -29,46 +30,33 @@ class ImageUploadListener extends ObjectBehavior
     }
 
     /**
- * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
- * @param Sylius\Bundle\CoreBundle\Entity\Variant                           $variant
- * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
- * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
- */
-    function it_uses_image_uploader_to_upload_images($event, $variant, $product, $image, $uploader)
+     * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
+     * @param Sylius\Bundle\CoreBundle\Entity\Variant                           $variant
+     * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
+     * @param Sylius\Bundle\CoreBundle\Model\ImageProductInterface              $image
+     */
+    function it_uses_image_uploader_to_upload_images($event, $variant, $product, $image, $uploaderProduct)
     {
         $event->getSubject()->willReturn($product);
         $product->getMasterVariant()->willReturn($variant);
         $variant->getImages()->willReturn(array($image));
         $image->getId()->willReturn(null);
-        $uploader->upload($image)->shouldBeCalled();
+        $uploaderProduct->upload($image)->shouldBeCalled();
 
-        $this->upload($event);
+        $this->uploadProductImage($event);
     }
 
     /**
      * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
      * @param Sylius\Bundle\CoreBundle\Entity\Taxon                             $taxon
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
+     * @param Sylius\Bundle\CoreBundle\Model\ImageTaxonInterface                $image
      */
-    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploader)
+    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploaderTaxon)
     {
         $event->getSubject()->willReturn($taxon);
-        $uploader->upload($taxon)->shouldBeCalled();
-        $taxon->hasFile()->willReturn(true);
-        $this->upload($event);
-    }
-
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
-     * @param Sylius\Bundle\CoreBundle\Entity\Taxonomy                          $taxonomy
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface                     $image
-     */
-    function it_uses_image_uploader_to_upload_taxonomy_image($event, $taxonomy, $image, $uploader)
-    {
-        $event->getSubject()->willReturn($taxonomy);
-        $uploader->upload($taxonomy)->shouldBeCalled();
-        $taxonomy->hasFile()->willReturn(true);
-        $this->upload($event);
+        $uploaderTaxon->upload($taxon)->shouldBeCalled();
+        $taxon->hasImageFile()->willReturn(true);
+        $this->uploadTaxonImage($event);
     }
 
     /**
@@ -80,7 +68,7 @@ class ImageUploadListener extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringUpload($event)
+            ->duringUploadProductImage($event)
         ;
     }
 }

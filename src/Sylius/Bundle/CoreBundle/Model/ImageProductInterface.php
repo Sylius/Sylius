@@ -12,13 +12,12 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use SplFileInfo;
-use DateTime;
 
-interface ImageInterface
+interface ImageProductInterface extends ImageInterface
 {
-    public function getId();
-    public function getCreatedAt();
-    public function setCreatedAt(DateTime $createdAt);
-    public function getUpdatedAt();
-    public function setUpdatedAt(DateTime $updatedAt);
+    public function hasFile();
+    public function getFile();
+    public function setFile(SplFileInfo $file);
+    public function getPath();
+    public function setPath($path);
 }

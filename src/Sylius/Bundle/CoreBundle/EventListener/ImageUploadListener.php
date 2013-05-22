@@ -20,44 +20,56 @@ use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
 
 class ImageUploadListener
 {
-    protected $uploader;
+    protected $uploaderProduct;
+    protected $uploaderTaxon;
 
-    public function __construct(ImageUploaderInterface $uploader)
+    public function __construct(ImageUploaderInterface $uploaderProduct, ImageUploaderInterface $uploaderTaxon)
     {
-        $this->uploader = $uploader;
+        $this->uploaderProduct = $uploaderProduct;
+        $this->uploaderTaxon = $uploaderTaxon;
     }
 
-    public function upload(GenericEvent $event)
+    public function uploadProductImage(GenericEvent $event)
+    {
+        $subject = $event->getSubject();
+        if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface){
+            throw new \InvalidArgumentException('CustomizableProductInterface or VariantInterface expected.');
+        }
+
+        $variant = $subject instanceof VariantInterface ? $subject : $subject->getMasterVariant();
+
+        foreach ($variant->getImages() as $image) {
+            if (null === $image->getId()) {
+                $this->uploaderProduct->upload($image);
+            }
+        }
+    }
+
+    public function uploadTaxonImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
 
-        if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface && !$subject instanceof TaxonInterface && !$subject instanceof TaxonomyInterface){
-            throw new \InvalidArgumentException('CustomizableProductInterface, VariantInterface, TaxonInterface, TaxonomyInterface or expected.');
+        if (!$subject instanceof TaxonInterface){
+            throw new \InvalidArgumentException('TaxonInterface expected.');
         }
 
-        if ($subject instanceof VariantInterface || $subject instanceof TaxonInterface || $subject instanceof TaxonomyInterface) {
-            $variant = $subject;
-        }
-        else {
-            $variant = $subject->getMasterVariant();
+        if ($subject->hasImageFile()) {
+            $this->uploaderTaxon->upload($subject);
         }
 
-        if (true === method_exists($variant, 'getImages')) {
-            foreach ($variant->getImages() as $image) {
-                if (null === $image->getId()) {
-                    $this->uploader->upload($image);
-                }
-            }
-        }
-        else {
-            if (null === $subject->getId()) {
-                $this->uploader->upload($subject);
-            }
-            elseif ($subject instanceof TaxonInterface || $subject instanceof TaxonomyInterface) {
-                $this->uploader->upload($subject);
-            }
+    }
+
+    public function uploadTaxonomyImage(GenericEvent $event)
+    {
+        $subject = $event->getSubject();
+
+        if (!$subject instanceof TaxonomyInterface){
+            throw new \InvalidArgumentException('TaxonomyInterface expected.');
         }
 
+        if ($subject->getRoot()->hasImageFile()) {
+            $this->uploaderTaxon->upload($subject->getRoot());
+        }
 
     }
 }

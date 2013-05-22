@@ -20,7 +20,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <field name="path" nullable="true"/>
+        <field name="imagePath" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

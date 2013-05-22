@@ -26,7 +26,7 @@ class LoadImagesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $finder = new Finder();
-        $uploader = $this->get('sylius.image_uploader');
+        $uploader = $this->get('sylius.image_product_uploader');
 
         $path = $this->container->getParameter('kernel.root_dir').'/../web/fixtures';
         foreach ($finder->files()->in($path) as $img) {

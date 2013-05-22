@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Uploader;
 use Sylius\Bundle\CoreBundle\Model\ImageInterface;
 use Gaufrette\Filesystem;
 
-class ImageUploader implements ImageUploaderInterface
+class ImageProductUploader implements ImageUploaderInterface
 {
     protected $filesystem;
 
