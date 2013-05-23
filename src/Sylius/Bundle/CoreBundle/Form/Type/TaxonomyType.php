@@ -20,7 +20,7 @@ class TaxonomyType extends BaseTaxonomyType
         parent::buildForm($builder, $options);
 
         $builder->add(
-            'imageFile',
+            'file',
             'file',
             array(
                 'property_path' => 'root.file',
