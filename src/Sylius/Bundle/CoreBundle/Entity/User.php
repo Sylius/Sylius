@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 
 /**
  * User entity.
@@ -45,7 +46,7 @@ class User extends BaseUser
      * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $billingAddress
      * @return User
      */
-    public function setBillingAddress(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $billingAddress = null)
+    public function setBillingAddress(AddressInterface $billingAddress = null)
     {
         $this->billingAddress = $billingAddress;
 
@@ -68,7 +69,7 @@ class User extends BaseUser
      * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $shippingAddress
      * @return User
      */
-    public function setShippingAddress(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $shippingAddress = null)
+    public function setShippingAddress(AddressInterface $shippingAddress = null)
     {
         $this->shippingAddress = $shippingAddress;
 
@@ -91,9 +92,9 @@ class User extends BaseUser
      * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresses
      * @return User
      */
-    public function addAddresse(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresse)
+    public function addAddress(AddressInterface $address)
     {
-        $this->addresses[] = $addresse;
+        $this->addresses[] = $address;
 
         return $this;
     }
@@ -103,9 +104,9 @@ class User extends BaseUser
      *
      * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresses
      */
-    public function removeAddresse(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresse)
+    public function removeAddress(AddressInterface $address)
     {
-        $this->addresses->removeElement($addresse);
+        $this->addresses->removeElement($address);
     }
 
     /**
