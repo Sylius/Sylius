@@ -28,7 +28,8 @@ class User extends BaseUser
 
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
+        $this->orders    = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
 
         parent::__construct();
     }
@@ -41,10 +42,10 @@ class User extends BaseUser
     /**
      * Set billingAddress
      *
-     * @param \Sylius\Bundle\CoreBundle\Entity\Address $billingAddress
+     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $billingAddress
      * @return User
      */
-    public function setBillingAddress(\Sylius\Bundle\CoreBundle\Entity\Address $billingAddress = null)
+    public function setBillingAddress(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $billingAddress = null)
     {
         $this->billingAddress = $billingAddress;
 
@@ -54,7 +55,7 @@ class User extends BaseUser
     /**
      * Get billingAddress
      *
-     * @return \Sylius\Bundle\CoreBundle\Entity\Address
+     * @return \Sylius\Bundle\AddressingBundle\Model\AddressInterface
      */
     public function getBillingAddress()
     {
@@ -64,10 +65,10 @@ class User extends BaseUser
     /**
      * Set shippingAddress
      *
-     * @param \Sylius\Bundle\CoreBundle\Entity\Address $shippingAddress
+     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $shippingAddress
      * @return User
      */
-    public function setShippingAddress(\Sylius\Bundle\CoreBundle\Entity\Address $shippingAddress = null)
+    public function setShippingAddress(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $shippingAddress = null)
     {
         $this->shippingAddress = $shippingAddress;
 
@@ -77,7 +78,7 @@ class User extends BaseUser
     /**
      * Get shippingAddress
      *
-     * @return \Sylius\Bundle\CoreBundle\Entity\Address
+     * @return \Sylius\Bundle\AddressingBundle\Model\AddressInterface
      */
     public function getShippingAddress()
     {
