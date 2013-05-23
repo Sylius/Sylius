@@ -23,7 +23,8 @@
         "doctrine/common":          "~2.3",
         "sylius/resource-bundle":   "0.1.*",
         "symfony/framework-bundle": ">=2.2,<2.3-dev",
-        "jms/translation-bundle":   "1.1.*"
+        "jms/translation-bundle":   "1.1.*",
+        "gedmo/doctrine-extensions":"2.*"
     },
     "require-dev": {
         "phpspec/phpspec2": "dev-develop",
