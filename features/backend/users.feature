@@ -7,11 +7,16 @@ Feature: Users management
         Given I am logged in as administrator
         And there are following users:
           | username | enabled |
-          | john     | yes     |
           | beth     | no      |
           | martha   | yes     |
           | rick     | no      |
           | dale     | yes     |
+        And the following zones are defined:
+          | name   | type    | members |
+          | Poland | country | Poland  |
+        And the following orders were placed:
+          | user | address                                        |
+          | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
 
     Scenario: Seeing index of all users
         Given I am on the dashboard page
@@ -24,3 +29,9 @@ Feature: Users management
          When I follow "Unconfirmed accounts"
          Then I should still be on the user index page
           But I should see 2 users in the list
+
+    Scenario: Accessing the user details page from users list
+        Given I am on the user index page
+         When I click "details" near "john"
+         Then I should be on the page of user with username "john"
+          And I should see 1 orders in the list

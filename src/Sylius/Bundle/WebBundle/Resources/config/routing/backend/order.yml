@@ -52,3 +52,13 @@ sylius_backend_order_show:
         _controller: sylius.controller.order:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Order:show.html.twig
+
+sylius_backend_order_by_user:
+    pattern: /u/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexByUserAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:indexByUser.html.twig
+            sortable: true
+            sorting: { updatedAt: desc }

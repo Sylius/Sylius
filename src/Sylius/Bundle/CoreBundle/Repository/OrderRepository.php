@@ -11,12 +11,36 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
+use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use YaLinqo\Enumerable;
 use DateTime;
 
 class OrderRepository extends EntityRepository
 {
+    /**
+     * Create user orders paginator.
+     *
+     * @param $user
+     * @param array $sorting
+     *
+     * @return PagerfantaInterface
+     */
+    public function createByUserPaginator(UserInterface $user, array $sorting = array())
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('o.user', 'user')
+            ->andWhere('user = :user')
+            ->setParameter('user', $user)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
     /**
      * Create filter paginator.
      *
