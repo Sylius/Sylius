@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Product controller.
@@ -25,16 +26,20 @@ class ProductController extends ResourceController
      * List products categorized under given taxon.
      *
      * @param Request $request
-     * @param string  $permalink
+     * @param $permalink
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
         $config = $this->getConfiguration();
 
-        $taxon = $this
-            ->getTaxonController()
-            ->findOr404(array('permalink' => $permalink))
-        ;
+        $taxon = $this->get('sylius.repository.taxon')
+            ->findOneByPermalink($permalink);
+
+        if (!isset($taxon)) {
+            throw new NotFoundHttpException('Requested taxon does not exist');
+        }
 
         $paginator = $this
             ->getRepository()
@@ -67,15 +72,5 @@ class ProductController extends ResourceController
     private function getFormFactory()
     {
         return $this->get('form.factory');
-    }
-
-    /**
-     * Get taxon controller.
-     *
-     * @return ResourceController
-     */
-    private function getTaxonController()
-    {
-        return $this->get('sylius.controller.taxon');
     }
 }

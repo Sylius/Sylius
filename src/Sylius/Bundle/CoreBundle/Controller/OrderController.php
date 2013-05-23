@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends ResourceController
 {
@@ -32,15 +33,19 @@ class OrderController extends ResourceController
      * @param Request $request
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function indexByUserAction(Request $request, $id)
     {
         $config = $this->getConfiguration();
         $sorting = $config->getSorting();
 
-        $user = $this
-            ->getUserController()
-            ->findOr404(array('id' => $id));
+        $user = $this->get('sylius.repository.user')
+            ->findOneById($id);
+
+        if (!isset($user)) {
+            throw new NotFoundHttpException('Requested user does not exist');
+        }
 
         $paginator = $this
             ->getRepository()
@@ -58,15 +63,5 @@ class OrderController extends ResourceController
     private function getFormFactory()
     {
         return $this->get('form.factory');
-    }
-
-    /**
-     * Get user controller.
-     *
-     * @return ResourceController
-     */
-    private function getUserController()
-    {
-        return $this->get('sylius.controller.user');
     }
 }
