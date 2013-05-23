@@ -29,7 +29,9 @@ class Address extends BaseAddress
      protected $user;
 
     /**
-     * {@inheritdoc}
+     * Get the user.
+     *
+     * @return UserInterface
      */
     public function getUser()
     {
@@ -37,7 +39,9 @@ class Address extends BaseAddress
     }
 
     /**
-     * {@inheritdoc}
+     * Set the user.
+     *
+     * return Address
      */
     public function setUser(UserInterface $user)
     {
