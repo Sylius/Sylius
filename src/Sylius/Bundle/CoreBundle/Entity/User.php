@@ -22,6 +22,8 @@ use FOS\UserBundle\Entity\User as BaseUser;
 class User extends BaseUser
 {
     protected $orders;
+    protected $billingAddress;
+    protected $shippingAddress;
 
     public function __construct()
     {
@@ -33,5 +35,51 @@ class User extends BaseUser
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * Set billingAddress
+     *
+     * @param \Sylius\Bundle\CoreBundle\Entity\Address $billingAddress
+     * @return User
+     */
+    public function setBillingAddress(\Sylius\Bundle\CoreBundle\Entity\Address $billingAddress = null)
+    {
+        $this->billingAddress = $billingAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get billingAddress
+     *
+     * @return \Sylius\Bundle\CoreBundle\Entity\Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * Set shippingAddress
+     *
+     * @param \Sylius\Bundle\CoreBundle\Entity\Address $shippingAddress
+     * @return User
+     */
+    public function setShippingAddress(\Sylius\Bundle\CoreBundle\Entity\Address $shippingAddress = null)
+    {
+        $this->shippingAddress = $shippingAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingAddress
+     *
+     * @return \Sylius\Bundle\CoreBundle\Entity\Address
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
     }
 }
