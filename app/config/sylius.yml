@@ -54,9 +54,6 @@ sylius_shipping:
 sylius_promotions:
     driver: doctrine/orm
 
-sylius_addressing:
-    driver: doctrine/orm
-
 sylius_inventory:
     driver: doctrine/orm
     backorders: true
