@@ -13,5 +13,5 @@ namespace Sylius\Bundle\CoreBundle\Uploader;
 
 interface ImageUploaderInterface
 {
-    public function upload($image);
+    public function upload(ImageInterface $image);
 }
