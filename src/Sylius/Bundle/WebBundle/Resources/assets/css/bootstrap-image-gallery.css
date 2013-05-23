@@ -67,7 +67,7 @@
   display: none;
 }
 .modal-loading .modal-image {
-  background: url(/assets/img/spinner.gif) center no-repeat;
+  background: url(../img/spinner.gif) center no-repeat;
 }
 .modal-gallery.fade .modal-image {
   -webkit-transition: width 0.15s ease, height 0.15s ease;
