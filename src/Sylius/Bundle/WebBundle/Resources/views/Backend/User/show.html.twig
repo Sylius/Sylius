@@ -40,4 +40,12 @@
         {% endif %}
     </tbody>
 </table>
+
+<div class="row-fluid">
+    <div class="well">
+        <h3>{{ 'sylius.user.orders'|trans }}</h3>
+    </div>
+    {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}
+</div>
+
 {% endblock %}
