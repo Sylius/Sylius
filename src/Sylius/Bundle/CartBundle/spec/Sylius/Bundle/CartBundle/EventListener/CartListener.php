@@ -21,12 +21,13 @@ use PHPSpec2\ObjectBehavior;
 class CartListener extends ObjectBehavior
 {
     /**
-     * @param Doctrine\Common\Persistence\ObjectManager $manager
-     * @param Symfony\Component\Validator\ValidatorInterface $validator
+     * @param Doctrine\Common\Persistence\ObjectManager               $manager
+     * @param Symfony\Component\Validator\ValidatorInterface          $validator
+     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $provider
      */
-    function let($manager, $validator)
+    function let($manager, $validator, $provider)
     {
-        $this->beConstructedWith($manager, $validator);
+        $this->beConstructedWith($manager, $validator, $provider);
     }
 
     function it_is_initializable()

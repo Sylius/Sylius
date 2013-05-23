@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
@@ -40,15 +41,24 @@ class CartListener implements EventSubscriberInterface
     private $validator;
 
     /**
+     * Cart provider.
+     *
+     * @var CartProviderInterface
+     */
+    private $cartProvider;
+
+    /**
      * Constructor.
      *
      * @param ObjectManager      $cartManager
      * @param ValidatorInterface $validator
+     * @param CartPRovider       $cartProvider
      */
-    public function __construct(ObjectManager $cartManager, ValidatorInterface $validator)
+    public function __construct(ObjectManager $cartManager, ValidatorInterface $validator, CartProviderInterface $cartProvider)
     {
-        $this->cartManager = $cartManager;
-        $this->validator   = $validator;
+        $this->cartManager  = $cartManager;
+        $this->validator    = $validator;
+        $this->cartProvider = $cartProvider;
     }
 
     public static function getSubscribedEvents()
@@ -104,6 +114,7 @@ class CartListener implements EventSubscriberInterface
         if ($valid) {
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
+            $this->cartProvider->setCart($cart);
         }
     }
 

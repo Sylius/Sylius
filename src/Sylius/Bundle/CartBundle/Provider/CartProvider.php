@@ -88,13 +88,7 @@ class CartProvider implements CartProviderInterface
             return $this->cart = $cart;
         }
 
-        $cart = $this->repository->createNew();
-        $this->manager->persist($cart);
-        $this->manager->flush($cart);
-
-        $this->setCart($cart);
-
-        return $cart;
+        return $this->cart = $this->repository->createNew();
     }
 
     /**
