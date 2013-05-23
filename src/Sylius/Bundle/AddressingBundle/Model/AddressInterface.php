@@ -47,6 +47,20 @@ interface AddressInterface
     public function setLastName($lastName);
 
     /**
+     * Get company.
+     *
+     * @return string
+     */
+    public function getCompany();
+
+    /**
+     * Set company.
+     *
+     * @param string $company
+     */
+    public function setCompany($company);
+
+    /**
      * Get country.
      *
      * @return CountryInterface $country

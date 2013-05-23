@@ -40,6 +40,13 @@ class Address implements AddressInterface
     protected $lastName;
 
     /**
+     * Company.
+     *
+     * @var string
+     */
+    protected $company;
+
+    /**
      * Country.
      *
      * @var CountryInterface
@@ -140,6 +147,24 @@ class Address implements AddressInterface
     public function getFullName()
     {
         return $this->firstName.' '.$this->lastName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
     }
 
     /**
