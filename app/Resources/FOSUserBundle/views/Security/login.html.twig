@@ -1,44 +1,52 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
 {% block content %}
-<div class="page-header">
-    <h1>Login <small>Sylius store</small></h1>
-</div>
-
-<blockquote>
-  <p>Please login using "<strong>sylius</strong>" username and "<strong>sylius</strong>" as password.</p>
-  <small>Mr. Sylius Demo Guide</small>
-</blockquote>
-
-{% if error %}
-<div class="alert alert-error">
-    {{ error }}
-</div>
-{% endif %}
-
-<form action="{{ path('fos_user_security_check') }}" method="post">
-<fieldset>
-    <div class="control-group">
-        <label for="username" class="control-label">Login</label>
-        <div class="controls">
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
-        </div>
+    <div class="page-header">
+        <h1>{{ 'Login'|trans }}
+            <small>Sylius {{ 'store'|trans }}</small>
+        </h1>
     </div>
-    <div class="control-group">
-        <label for="password" class="control-label">Password</label>
-        <div class="controls">
-            <input type="password" id="password" name="_password" />
+
+    <blockquote>
+        <p>{{ 'Please login using'|trans }} "<strong>sylius</strong>" {{ 'username and'|trans }}
+            "<strong>sylius</strong>" {{ 'as password' }}.</p>
+        <small>Mr. Sylius Demo Guide</small>
+    </blockquote>
+
+    {% if error %}
+        <div class="alert alert-error">
+            {{ error |trans({}, 'FOSUserBundle') }}
         </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            Remember me? <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    {% endif %}
+
+    <form action="{{ path('fos_user_security_check') }}" method="post">
+        <fieldset>
+            <div class="control-group">
+                <label for="username" class="control-label">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+
+                <div class="controls">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="password" class="control-label">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+
+                <div class="controls">
+                    <input type="password" id="password" name="_password"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-large" name="login">
+                <i class="icon-lock"></i>{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
         </div>
-    </div>
-</fieldset>
-<div class="form-actions">
-    <button type="submit" class="btn btn-primary btn-large" name="login"><i class="icon-lock"></i> Login</button>
-</div>
-</form>
+    </form>
 
 {% endblock %}
+
