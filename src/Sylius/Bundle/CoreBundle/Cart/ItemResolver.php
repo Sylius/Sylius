@@ -98,10 +98,10 @@ class ItemResolver implements ItemResolverInterface
 
         // If our product has no variants, we simply set the master variant of it.
         if (!$product->hasOptions()) {
-            $item->setVariant($product->getMasterVariant());
+            $item->setSellable($product->getMasterVariant());
         }
 
-        $variant = $item->getVariant();
+        $variant = $item->getSellable();
 
         // If all is ok with form, quantity and other stuff, simply return the item.
         if (!$form->isValid() || null === $variant) {

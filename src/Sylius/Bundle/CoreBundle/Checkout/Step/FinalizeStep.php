@@ -65,21 +65,7 @@ class FinalizeStep extends CheckoutStep
      */
     private function createOrder(ProcessContextInterface $context)
     {
-        $orderBuilder = $this->getOrderBuilder();
-        $orderBuilder->create();
-
-        $cart = $this->getCurrentCart();
-
-        foreach ($cart->getItems() as $item) {
-            $orderBuilder->add($item->getVariant(), $item->getUnitPrice(), $item->getQuantity());
-        }
-
-        $order = $orderBuilder->getOrder();
-
-        $order->setUser($this->getUser());
-
-        $order->setshippingAddress($cart->getShippingAddress());
-        $order->setBillingAddress($cart->getBillingAddress());
+        $order = $this->getCurrentCart();
 
         $this
             ->getInventoryUnitsFactory()
@@ -88,7 +74,7 @@ class FinalizeStep extends CheckoutStep
 
         $this
             ->getShipmentFactory()
-            ->createShipment($order, $cart->getShippingMethod())
+            ->createShipment($order, $order->getShippingMethod())
         ;
 
         $order->calculateTotal();

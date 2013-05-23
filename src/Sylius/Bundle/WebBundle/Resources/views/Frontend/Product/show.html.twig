@@ -83,7 +83,7 @@
                         </td>
                         <td>
                         {% if sylius_inventory_is_available(variant) %}
-                            {{ form_widget(form.variant[loop.index0]) }}
+                            {{ form_widget(form.sellable[loop.index0]) }}
                         {% else %}
                             <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
                         {% endif %}
@@ -94,7 +94,7 @@
             </table>
             {% else %}
                 <div class="well">
-                {{ form_widget(form.variant) }}
+                {{ form_widget(form.sellable) }}
                 </div>
             {% endif %}
         {% endif %}

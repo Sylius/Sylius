@@ -37,7 +37,7 @@ class CartItemType extends BaseCartItemType
         if (isset($options['product']) && $options['product']->hasOptions()) {
             $type = Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod() ? 'sylius_variant_choice' : 'sylius_variant_match';
 
-            $builder->add('variant', $type, array(
+            $builder->add('sellable', $type, array(
                 'product'  => $options['product']
             ));
         }

@@ -15,18 +15,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\CartBundle\Entity\Cart;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\SalesBundle\Entity\Order as BaseOrder;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * Order entity.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Order extends BaseOrder implements OrderInterface
+class Order extends Cart implements OrderInterface
 {
     /**
      * User.
@@ -48,6 +50,20 @@ class Order extends BaseOrder implements OrderInterface
      * @var AddressInterface
      */
     protected $billingAddress;
+
+    /**
+     * Shipping method.
+     *
+     * @var ShippingMethodInterface
+     */
+    protected $shippingMethod;
+
+    /**
+     * Payment method.
+     *
+     * @var PaymentMethodInterface
+     */
+    protected $paymentMethod;
 
     /**
      * Shipments for this order.
@@ -122,6 +138,56 @@ class Order extends BaseOrder implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethod()
+    {
+        return $this->shippingMethod;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingMethod(ShippingMethodInterface $method = null)
+    {
+        $this->shippingMethod = $method;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaymentMethod(PaymentMethodInterface $method = null)
+    {
+        $this->paymentMethod = $method;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippables()
+    {
+        $shippables = new ArrayCollection();
+
+        foreach ($this->items as $item) {
+            $shippables->add($item->getSellable());
+        }
+
+        return $shippables;
     }
 
     /**
