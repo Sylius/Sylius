@@ -24,6 +24,7 @@ class User extends BaseUser
     protected $orders;
     protected $billingAddress;
     protected $shippingAddress;
+    protected $addresses;
 
     public function __construct()
     {
@@ -81,5 +82,38 @@ class User extends BaseUser
     public function getShippingAddress()
     {
         return $this->shippingAddress;
+    }
+
+    /**
+     * Add addresses
+     *
+     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresses
+     * @return User
+     */
+    public function addAddresse(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresse)
+    {
+        $this->addresses[] = $addresse;
+
+        return $this;
+    }
+
+    /**
+     * Remove addresses
+     *
+     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresses
+     */
+    public function removeAddresse(\Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresse)
+    {
+        $this->addresses->removeElement($addresse);
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
     }
 }
