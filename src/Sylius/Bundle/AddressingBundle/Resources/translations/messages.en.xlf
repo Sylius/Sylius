@@ -6,6 +6,10 @@
         <source>sylius.form.address.city</source>
         <target>City</target>
       </trans-unit>
+      <trans-unit id="4c4207c09a6a7e137d70a1fb5bf2c309" resname="sylius.form.address.company">
+        <source>sylius.form.address.company</source>
+        <target>Company</target>
+      </trans-unit>
       <trans-unit id="bc3c6def58ace06a88e26fb873f4697b" resname="sylius.form.address.country">
         <source>sylius.form.address.country</source>
         <target>Country</target>
