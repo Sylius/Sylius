@@ -13,6 +13,11 @@ namespace Sylius\Bundle\InstallerBundle\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\Tools\SchemaTool;
 
 class SetupStep extends ControllerStep
 {
@@ -27,17 +32,38 @@ class SetupStep extends ControllerStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $form = $this->createForm('sylius_setup');
+        $em = $this->getDoctrine()->getEntityManager();
 
         if ($this->getRequest()->isMethod('POST') && $form->bind($this->getRequest())->isValid()) {
+            $params = $this->get('doctrine')->getConnection()->getParams();
+            $dbname = $params['dbname'];
+            unset($params['dbname']);
+
+            $schemaManager = DriverManager::getConnection($params)->getSchemaManager();
+            if (!in_array($dbname, $schemaManager->listDatabases())) {
+                $schemaManager->createDatabase($dbname);
+            }
+            $schemaTool = new SchemaTool($em);
+            $schemaTool->dropSchema($em->getMetadataFactory()->getAllMetadata());
+            $schemaTool->createSchema($em->getMetadataFactory()->getAllMetadata());
+
             if ($form->get('load_fixtures')->getData()) {
-                // TODO: load fixtures
+                $loader = new ContainerAwareLoader($this->container);
+                foreach ($this->get('kernel')->getBundles() as $bundle) {
+                    if (is_dir($path = $bundle->getPath().'/DataFixtures/ORM')) {
+                        $loader->loadFromDirectory($path);
+                    }
+                }
+                $purger = new ORMPurger($em);
+                $purger->setPurgeMode(ORMPurger::PURGE_MODE_DELETE);
+                $executor = new ORMExecutor($em, $purger);
+                $executor->execute($loader->getFixtures());
             }
 
             $user = $form->getData();
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
 
-            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($user);
             $em->flush();
 
