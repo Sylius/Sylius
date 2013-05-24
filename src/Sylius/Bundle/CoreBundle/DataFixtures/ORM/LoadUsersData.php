@@ -28,7 +28,6 @@ class LoadUsersData extends DataFixture
     {
         $user = new User();
 
-        $user->setUsername('sylius');
         $user->setEmail('sylius@example.com');
         $user->setPlainPassword('sylius');
         $user->setEnabled(true);
@@ -44,7 +43,6 @@ class LoadUsersData extends DataFixture
 
             $username = $this->faker->username;
 
-            $user->setUsername($username);
             $user->setEmail($username.'@example.com');
             $user->setPlainPassword($username);
             $user->setEnabled($this->faker->boolean());
@@ -55,7 +53,6 @@ class LoadUsersData extends DataFixture
         }
 
         $manager->flush();
-
     }
 
     /**
