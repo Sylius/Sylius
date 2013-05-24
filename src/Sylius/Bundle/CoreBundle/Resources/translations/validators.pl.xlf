@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="pl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="a55be57cc201693bfdc2c9021f8fd48d" resname="fos_user.email.already_used">
+        <source>fos_user.email.already_used</source>
+        <target>fos_user.email.already_used</target>
+      </trans-unit>
+      <trans-unit id="6ff439fdb45d5bd0d58e8d210df8be77" resname="fos_user.email.blank">
+        <source>fos_user.email.blank</source>
+        <target>fos_user.email.blank</target>
+      </trans-unit>
+      <trans-unit id="fc6c24981b4c0a57ce247c8687a585ea" resname="fos_user.email.invalid">
+        <source>fos_user.email.invalid</source>
+        <target>fos_user.email.invalid</target>
+      </trans-unit>
+      <trans-unit id="966201b57a32472001eeb20f251cce59" resname="fos_user.email.long">
+        <source>fos_user.email.long</source>
+        <target>fos_user.email.long</target>
+      </trans-unit>
+      <trans-unit id="f21278704589f38c6334b87af1479cf9" resname="fos_user.email.short">
+        <source>fos_user.email.short</source>
+        <target>fos_user.email.short</target>
+      </trans-unit>
+      <trans-unit id="dcd6d14d0786e48363cedfda2f1ae893" resname="fos_user.password.blank">
+        <source>fos_user.password.blank</source>
+        <target>fos_user.password.blank</target>
+      </trans-unit>
+      <trans-unit id="208830cde0e30a97e31cae31d1815c35" resname="fos_user.password.short">
+        <source>fos_user.password.short</source>
+        <target>fos_user.password.short</target>
+      </trans-unit>
+      <trans-unit id="717412185b61194420c7def0b42418f1" resname="fos_user.username.already_used">
+        <source>fos_user.username.already_used</source>
+        <target>fos_user.username.already_used</target>
+      </trans-unit>
+      <trans-unit id="e6b436802106350f126526dff34d889c" resname="fos_user.username.blank">
+        <source>fos_user.username.blank</source>
+        <target>fos_user.username.blank</target>
+      </trans-unit>
+      <trans-unit id="8eb91da705aa09b820f19e5a4e06d1fe" resname="fos_user.username.long">
+        <source>fos_user.username.long</source>
+        <target>fos_user.username.long</target>
+      </trans-unit>
+      <trans-unit id="a96e6b81d15a20e05150a905e30d70c4" resname="fos_user.username.short">
+        <source>fos_user.username.short</source>
+        <target>fos_user.username.short</target>
+      </trans-unit>
+      <trans-unit id="0348392867d5d3c7aba4e136ea48ffec" resname="sylius.checkout.payment_method.not_blank">
+        <source>sylius.checkout.payment_method.not_blank</source>
+        <target>Proszę wybrać metodę płatności.</target>
+      </trans-unit>
+      <trans-unit id="ddb27861aa157d5f22e90a4c51ad26fa" resname="sylius.checkout.shipping_method.not_blank">
+        <source>sylius.checkout.shipping_method.not_blank</source>
+        <target>Proszę wybrać metodę wysyłki.</target>
+      </trans-unit>
+      <trans-unit id="a0bfd28ade710d07ff88637ec653a544" resname="sylius.product.description.min_length">
+        <source>sylius.product.description.min_length</source>
+        <target>sylius.product.description.min_length</target>
+      </trans-unit>
+      <trans-unit id="da4ac75359bd904a29b1436badebfb36" resname="sylius.product.description.not_blank">
+        <source>sylius.product.description.not_blank</source>
+        <target>sylius.product.description.not_blank</target>
+      </trans-unit>
+      <trans-unit id="73b2525aa56b3a73c3d37d667f386e8d" resname="sylius.product.name.max_length">
+        <source>sylius.product.name.max_length</source>
+        <target>sylius.product.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="918d2b35e09d0f3362a2cdada6359b76" resname="sylius.product.name.min_length">
+        <source>sylius.product.name.min_length</source>
+        <target>sylius.product.name.min_length</target>
+      </trans-unit>
+      <trans-unit id="fc83d1d7f8165f2dfde3e02c44104622" resname="sylius.product.name.not_blank">
+        <source>sylius.product.name.not_blank</source>
+        <target>sylius.product.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="4aaf3aca52ae7b6d5982529b4454d0ec" resname="sylius.shipping_method.calculator.max_length">
+        <source>sylius.shipping_method.calculator.max_length</source>
+        <target>sylius.shipping_method.calculator.max_length</target>
+      </trans-unit>
+      <trans-unit id="ba6f1a7fdb93528a6914344721a3a8ef" resname="sylius.shipping_method.calculator.min_length">
+        <source>sylius.shipping_method.calculator.min_length</source>
+        <target>sylius.shipping_method.calculator.min_length</target>
+      </trans-unit>
+      <trans-unit id="9cb1482dfb677ae2df9be7763ed4b102" resname="sylius.shipping_method.calculator.not_blank">
+        <source>sylius.shipping_method.calculator.not_blank</source>
+        <target>sylius.shipping_method.calculator.not_blank</target>
+      </trans-unit>
+      <trans-unit id="31902fa3e20b94342ba0efb7021df190" resname="sylius.shipping_method.name.max_length">
+        <source>sylius.shipping_method.name.max_length</source>
+        <target>sylius.shipping_method.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="419a8d6e6ebd08721602a487371be7cb" resname="sylius.shipping_method.name.min_length">
+        <source>sylius.shipping_method.name.min_length</source>
+        <target>sylius.shipping_method.name.min_length</target>
+      </trans-unit>
+      <trans-unit id="a46d4dbf1771f6a42aa4d012a2637b25" resname="sylius.shipping_method.name.not_blank">
+        <source>sylius.shipping_method.name.not_blank</source>
+        <target>sylius.shipping_method.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="6ba01dc864ac159d6b8d30431c623e76" resname="sylius.tax_rate.amount.not_blank">
+        <source>sylius.tax_rate.amount.not_blank</source>
+        <target>sylius.tax_rate.amount.not_blank</target>
+      </trans-unit>
+      <trans-unit id="6bec12eeded2af36b6edff061395de1f" resname="sylius.tax_rate.calculator.not_blank">
+        <source>sylius.tax_rate.calculator.not_blank</source>
+        <target>sylius.tax_rate.calculator.not_blank</target>
+      </trans-unit>
+      <trans-unit id="dbdea39ef055987f782317215ecf6910" resname="sylius.tax_rate.category.not_blank">
+        <source>sylius.tax_rate.category.not_blank</source>
+        <target>sylius.tax_rate.category.not_blank</target>
+      </trans-unit>
+      <trans-unit id="ce7fea89bff72f24a483d937ca993e6a" resname="sylius.tax_rate.name.max_length">
+        <source>sylius.tax_rate.name.max_length</source>
+        <target>sylius.tax_rate.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="aa79090e3305fc2b2eb25973a226ee7c" resname="sylius.tax_rate.name.min_length">
+        <source>sylius.tax_rate.name.min_length</source>
+        <target>sylius.tax_rate.name.min_length</target>
+      </trans-unit>
+      <trans-unit id="7a3543e1bd19a14e772ec2abcda419bf" resname="sylius.tax_rate.name.not_blank">
+        <source>sylius.tax_rate.name.not_blank</source>
+        <target>sylius.tax_rate.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="8b543b113a901ba9cfeb2410c82fc16f" resname="sylius.variant.onHand.min">
+        <source>sylius.variant.onHand.min</source>
+        <target>On hand must be greater than {{ limit }}.</target>
+      </trans-unit>
+      <trans-unit id="db67320afe0ce04fc652d620c57b89d9" resname="sylius.variant.onHand.not_blank">
+        <source>sylius.variant.onHand.not_blank</source>
+        <target>Please enter on hand.</target>
+      </trans-unit>
+      <trans-unit id="2778024ebd57e2b432792826251bee65" resname="sylius.variant.price.min">
+        <source>sylius.variant.price.min</source>
+        <target>Cena musi być większa niż {{ limit }}.</target>
+      </trans-unit>
+      <trans-unit id="087a6beb8ec9ff5d48d8d620286faa51" resname="sylius.variant.price.not_blank">
+        <source>sylius.variant.price.not_blank</source>
+        <target>Proszę podać cenę.</target>
+      </trans-unit>
+      <trans-unit id="381ad7dedffbd02e6f060ea0cb53a38d" resname="sylius_shipping.method.zone.not_blank">
+        <source>sylius_shipping.method.zone.not_blank</source>
+        <target>sylius_shipping.method.zone.not_blank</target>
+      </trans-unit>
+      <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
+        <source>sylius_taxation.rate.zone.not_blank</source>
+        <target>Please enter tax rate zone.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
