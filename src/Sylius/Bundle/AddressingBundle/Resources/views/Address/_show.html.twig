@@ -24,10 +24,7 @@
             <td>
                 <address class="code">
                     <hr />
-                    <strong>{{ address.fullName}}</strong> <br />
-                    {{ address.street }}, <br />
-                    {{ address.city }} {{ address.postcode }}<br />
-                    {{ address.country }} {% if address.province is not empty %} {{ address.province }} {% endif %} <br />
+                    {% include 'SyliusAddressingBundle:Address:_address.html.twig' %}
                 </address>
             </td>
         <tr>
