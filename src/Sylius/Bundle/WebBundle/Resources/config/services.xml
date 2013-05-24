@@ -71,6 +71,11 @@
         <service id="sylius.twig.text_extension" class="Twig_Extensions_Extension_Text">
             <tag name="twig.extension" />
         </service>
+        
+        <service id="sylius.user.registration.form.type" class="Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType">
+            <tag name="form.type" alias="sylius_user_registration" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
     </services>
 
 </container>

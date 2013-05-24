@@ -56,7 +56,7 @@ class User extends BaseUser
         $this->billingAddress = $billingAddress;
 
         if (null !== $billingAddress && !$this->hasAddress($billingAddress)) {
-        	$this->addAddress($billingAddress);
+            $this->addAddress($billingAddress);
         }
 
         return $this;
@@ -83,7 +83,7 @@ class User extends BaseUser
         $this->shippingAddress = $shippingAddress;
 
         if (null !== $shippingAddress && !$this->hasAddress($shippingAddress)) {
-        	$this->addAddress($shippingAddress);
+            $this->addAddress($shippingAddress);
         }
 
         return $this;
@@ -143,5 +143,21 @@ class User extends BaseUser
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        $this->setUsername($email);
+
+        return $this;
+    }
+
+    public function setEmailCanonical($emailCanonical)
+    {
+        parent::setEmailCanonical($emailCanonical);
+        $this->setUsernameCanonical($emailCanonical);
+
+        return $this;
     }
 }
