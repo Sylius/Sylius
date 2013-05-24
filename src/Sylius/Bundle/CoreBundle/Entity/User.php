@@ -34,4 +34,20 @@ class User extends BaseUser
     {
         return $this->orders;
     }
+
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        $this->setUsername($email);
+
+        return $this;
+    }
+
+    public function setEmailCanonical($emailCanonical)
+    {
+        parent::setEmailCanonical($emailCanonical);
+        $this->setUsernameCanonical($emailCanonical);
+
+        return $this;
+    }
 }

@@ -6,7 +6,7 @@
 </div>
 
 <blockquote>
-  <p>Please login using "<strong>sylius</strong>" username and "<strong>sylius</strong>" as password.</p>
+  <p>Please login using "<strong>sylius@example.com</strong>" email and "<strong>sylius</strong>" as password.</p>
   <small>Mr. Sylius Demo Guide</small>
 </blockquote>
 
@@ -19,7 +19,7 @@
 <form action="{{ path('fos_user_security_check') }}" method="post">
 <fieldset>
     <div class="control-group">
-        <label for="username" class="control-label">Login</label>
+        <label for="username" class="control-label">Email</label>
         <div class="controls">
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
         </div>
