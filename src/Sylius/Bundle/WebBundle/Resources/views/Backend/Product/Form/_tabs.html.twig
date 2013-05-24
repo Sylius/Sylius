@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#main" data-toggle="tab">Product</a></li>
+    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.product.tabs.product'|trans }}</a></li>
     {% if not product.hasVariants %}
-    <li><a href="#options" data-toggle="tab">Options</a></li>
+    <li><a href="#options" data-toggle="tab">{{ 'sylius.product.tabs.options'|trans }}</a></li>
     {% endif %}
-    <li><a href="#properties" data-toggle="tab">Properties</a></li>
-    <li><a href="#categorization" data-toggle="tab">Categorization</a></li>
-    <li><a href="#images" data-toggle="tab">Images</a></li>
+    <li><a href="#properties" data-toggle="tab">{{ 'sylius.product.tabs.properties'|trans }}</a></li>
+    <li><a href="#categorization" data-toggle="tab">{{ 'sylius.product.tabs.categorization'|trans }}</a></li>
+    <li><a href="#images" data-toggle="tab">{{ 'sylius.product.tabs.images'|trans }}</a></li>
 </ul>

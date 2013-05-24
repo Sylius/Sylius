@@ -6,6 +6,8 @@ sylius:
         checkout:
             shipping_method: Shipping Method
             payment_method: Payment Method
+            addressing:
+                different_billing_address: Use different address for billing?
         settings:
             general:
                 title: Page title
@@ -33,3 +35,5 @@ sylius:
             total_to: To
             created_at_from: From
             created_at_to: To
+        shipping_method:
+            zone: Zone

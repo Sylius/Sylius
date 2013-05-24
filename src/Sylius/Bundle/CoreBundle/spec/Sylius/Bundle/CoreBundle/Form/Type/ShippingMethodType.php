@@ -46,7 +46,9 @@ class ShippingMethodType extends ObjectBehavior
     {
         $builder->getFormFactory()->willReturn($factory);
 
-        $builder->add('zone', 'sylius_zone_choice')->shouldBeCalled()->willReturn($builder);
+        $builder->add('zone', 'sylius_zone_choice', array(
+            'label' => 'sylius.form.shipping_method.zone'
+        ))->willReturn($builder)->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }

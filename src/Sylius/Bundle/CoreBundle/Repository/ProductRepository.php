@@ -50,7 +50,7 @@ class ProductRepository extends CustomizableProductRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator(array $criteria = array(), array $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array())
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->select('product, variant')
@@ -68,6 +68,13 @@ class ProductRepository extends CustomizableProductRepository
                 ->andWhere('variant.sku = :sku')
                 ->setParameter('sku', $criteria['sku'])
             ;
+        }
+
+        if (empty($sorting['updatedAt'])) {
+            if (!is_array($sorting)) {
+                $sorting = array();
+            }
+            $sorting['updatedAt'] = 'desc';
         }
 
         $this->applySorting($queryBuilder, $sorting);

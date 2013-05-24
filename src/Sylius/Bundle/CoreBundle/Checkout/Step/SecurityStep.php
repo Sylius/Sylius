@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Security step.
@@ -44,7 +46,19 @@ class SecurityStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        return $this->complete();
+        $form = $this->getRegistrationForm();
+        $request = $this->getRequest();
+
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $user = $form->getData();
+
+            $this->saveUser($user);
+            $this->authenticateUser($user);
+
+            return $this->complete();
+        }
+
+        return $this->renderStep($context, $this->getRegistrationForm());
     }
 
     /**
@@ -80,5 +94,23 @@ class SecurityStep extends CheckoutStep
         $providerKey = $this->container->getParameter('fos_user.firewall_name');
 
         $this->get('session')->set('_security.'.$providerKey.'.target_path', $url);
+    }
+
+
+    /**
+     * @param \Sylius\Bundle\CoreBundle\Entity\User $user
+     */
+    private function saveUser($user)
+    {
+        $user->setEnabled(true);
+        $this->get('fos_user.user_manager')->updateUser($user);
+    }
+
+    private function authenticateUser(UserInterface $user)
+    {
+        $providerKey = $this->container->getParameter('fos_user.firewall_name');
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+
+        $this->container->get('security.context')->setToken($token);
     }
 }

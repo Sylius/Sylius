@@ -1,7 +1,7 @@
 {% macro list(users) %}
 
 {% if users|length > 0 %}
-<table class="table table-bordered">
+<table id="users" class="table table-bordered">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.user.id'|trans) }}</th>

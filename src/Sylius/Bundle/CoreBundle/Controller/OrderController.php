@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends ResourceController
 {
@@ -25,6 +26,37 @@ class OrderController extends ResourceController
 
         return $this->renderResponse('SyliusWebBundle:Backend/Order:filterForm.html', array(
             'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function indexByUserAction(Request $request, $id)
+    {
+        $config = $this->getConfiguration();
+        $sorting = $config->getSorting();
+
+        $user = $this->get('sylius.repository.user')
+            ->findOneById($id);
+
+        if (!isset($user)) {
+            throw new NotFoundHttpException('Requested user does not exist');
+        }
+
+        $paginator = $this
+            ->getRepository()
+            ->createByUserPaginator($user, $sorting);
+
+        $paginator->setCurrentPage($request->get('page', 1), true, true);
+        $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
+
+        return $this->renderResponse('SyliusWebBundle:Backend/Order:indexByUser.html', array(
+            'user' => $user,
+            'orders' => $paginator
         ));
     }
 
