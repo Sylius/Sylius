@@ -7,6 +7,7 @@
 
     <parameters>
         <parameter key="sylius.controller.frontend.homepage.class">Sylius\Bundle\WebBundle\Controller\Frontend\HomepageController</parameter>
+        <parameter key="sylius.controller.frontend.account.class">Sylius\Bundle\WebBundle\Controller\Frontend\AccountController</parameter>
 
         <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
         <parameter key="sylius.controller.backend.security.class">Sylius\Bundle\WebBundle\Controller\Backend\SecurityController</parameter>
@@ -17,6 +18,11 @@
 
     <services>
         <service id="sylius.controller.frontend.homepage" class="%sylius.controller.frontend.homepage.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.frontend.account" class="%sylius.controller.frontend.account.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -53,6 +59,10 @@
         <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonomiesMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.taxonomies" />
+        </service>
+        <service id="sylius.menu.frontend.account" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createAccountMenu" scope="request">
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="sylius.frontend.account" />
         </service>
         <service id="sylius.menu.frontend.social" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createSocialMenu" scope="request">
             <argument type="service" id="request" />
