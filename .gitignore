@@ -14,5 +14,7 @@ web/js/*
 web/assets/compiled/*
 web/media/*
 
-bin/*
+bin/behat
+bin/doctrine*
+bin/phpspec
 vendor/*

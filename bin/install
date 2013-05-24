@@ -1,0 +1,4 @@
+#!/bin/bash
+
+composer.phar install --dev
+./app/console sylius:install
