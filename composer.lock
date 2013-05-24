@@ -1488,7 +1488,7 @@
             "target-dir": "JMS/AopBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle",
+                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
                 "reference": "7018357f5bedf204979a88867a9da05973744422"
             },
             "dist": {
@@ -1701,7 +1701,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/schmittjoh/parser-lib",
+                "url": "https://github.com/schmittjoh/parser-lib.git",
                 "reference": "4d469a70c6dd03f921cbdeadafbcb261bb23e8b0"
             },
             "dist": {
@@ -3221,9 +3221,6 @@
                 "phpspec/phpspec2": "dev-develop",
                 "twig/twig": "*"
             },
-            "suggest": {
-                "friendsofsymfony/rest-bundle": "*"
-            },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -3590,12 +3587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c"
+                "reference": "5a2fda192f2f9834d6af4a2f58493d1d23ba7461"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/1b6108db1cf4f66328b32c4f8eae621fe05be84c",
-                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/5a2fda192f2f9834d6af4a2f58493d1d23ba7461",
+                "reference": "5a2fda192f2f9834d6af4a2f58493d1d23ba7461",
                 "shasum": ""
             },
             "require": {
@@ -3615,7 +3612,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Sylius\\Bundle\\SalesBundle": ""
+                    "Sylius\\Bundle\\SalesBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3634,15 +3631,16 @@
                 }
             ],
             "description": "Sales order management for Symfony2 applications.",
-            "homepage": "http://Sylius.org",
+            "homepage": "http://sylius.com",
             "keywords": [
                 "ecommerce",
                 "order",
                 "orders",
                 "sales",
-                "shop"
+                "shop",
+                "sylius"
             ],
-            "time": "2013-04-08 16:42:46"
+            "time": "2013-05-16 10:11:30"
         },
         {
             "name": "sylius/settings-bundle",
