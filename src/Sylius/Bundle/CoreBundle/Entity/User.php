@@ -35,6 +35,11 @@ class User extends BaseUser
         parent::__construct();
     }
 
+    /**
+     * Get orders
+     *
+     * @return ArrayCollection
+     */
     public function getOrders()
     {
         return $this->orders;
@@ -43,7 +48,7 @@ class User extends BaseUser
     /**
      * Set billingAddress
      *
-     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $billingAddress
+     * @param AddressInterface $billingAddress
      * @return User
      */
     public function setBillingAddress(AddressInterface $billingAddress = null)
@@ -56,7 +61,7 @@ class User extends BaseUser
     /**
      * Get billingAddress
      *
-     * @return \Sylius\Bundle\AddressingBundle\Model\AddressInterface
+     * @return AddressInterface
      */
     public function getBillingAddress()
     {
@@ -66,7 +71,7 @@ class User extends BaseUser
     /**
      * Set shippingAddress
      *
-     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $shippingAddress
+     * @param AddressInterface $shippingAddress
      * @return User
      */
     public function setShippingAddress(AddressInterface $shippingAddress = null)
@@ -79,7 +84,7 @@ class User extends BaseUser
     /**
      * Get shippingAddress
      *
-     * @return \Sylius\Bundle\AddressingBundle\Model\AddressInterface
+     * @return AddressInterface
      */
     public function getShippingAddress()
     {
@@ -87,22 +92,24 @@ class User extends BaseUser
     }
 
     /**
-     * Add addresses
+     * Add address
      *
-     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresses
+     * @param AddressInterface $address
      * @return User
      */
     public function addAddress(AddressInterface $address)
     {
-        $this->addresses[] = $address;
+        if (!$this->hasAddress($address)) {
+            $this->addresses[] = $address;
+        }
 
         return $this;
     }
 
     /**
-     * Remove addresses
+     * Remove address
      *
-     * @param \Sylius\Bundle\AddressingBundle\Model\AddressInterface $addresses
+     * @param AddressInterface $addresses
      */
     public function removeAddress(AddressInterface $address)
     {
@@ -110,9 +117,20 @@ class User extends BaseUser
     }
 
     /**
+     * Has address
+     *
+     * @param AddressInterface $addresses
+     * @return bool
+     */
+    public function hasAddress(AddressInterface $address)
+    {
+        return $this->addresses->contains($address);
+    }
+
+    /**
      * Get addresses
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getAddresses()
     {
