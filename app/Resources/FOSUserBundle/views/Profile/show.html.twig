@@ -1,5 +1,5 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
 {% block content %}
-    <h4>{{ 'sylius.account.welcome'|trans }}</h4>
+    {% include "SyliusWebBundle:Frontend/Account:_profile.html.twig" %}
 {% endblock %}
