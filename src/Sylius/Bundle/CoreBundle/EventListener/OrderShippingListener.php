@@ -43,6 +43,8 @@ class OrderShippingListener
      * Get the order from event and run the shipping processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException When subject object is not OrderInterface instance
      */
     public function processOrderShippingCharges(GenericEvent $event)
     {
@@ -50,7 +52,7 @@ class OrderShippingListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order shipping listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order shipping listener requires event subejct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 

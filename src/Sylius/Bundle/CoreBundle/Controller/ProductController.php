@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -26,20 +28,22 @@ class ProductController extends ResourceController
      * List products categorized under given taxon.
      *
      * @param Request $request
-     * @param $permalink
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @param mixed   $permalink
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
-        $config = $this->getConfiguration();
-
         $taxon = $this->get('sylius.repository.taxon')
             ->findOneByPermalink($permalink);
 
         if (!isset($taxon)) {
             throw new NotFoundHttpException('Requested taxon does not exist');
         }
+
+        $config = $this->getConfiguration();
 
         $paginator = $this
             ->getRepository()
@@ -58,7 +62,9 @@ class ProductController extends ResourceController
     /**
      * Render product filter form.
      *
-     * @param Request
+     * @param Request $request
+     *
+     * @return Response
      */
     public function filterFormAction(Request $request)
     {
@@ -69,6 +75,9 @@ class ProductController extends ResourceController
         ));
     }
 
+    /**
+     * @return FormFactoryInterface
+     */
     private function getFormFactory()
     {
         return $this->get('form.factory');

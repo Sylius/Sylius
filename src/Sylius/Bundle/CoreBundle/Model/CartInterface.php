@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface as BaseCartInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
@@ -35,21 +34,21 @@ interface CartInterface extends BaseCartInterface, ShippablesAwareInterface
     /**
      * Set shipping address.
      *
-     * @param AddressInterface $address
+     * @param null|AddressInterface $address
      */
     public function setShippingAddress(AddressInterface $address = null);
 
     /**
      * Get billing address.
      *
-     * @return AddressInterface
+     * @return null|AddressInterface
      */
     public function getBillingAddress();
 
     /**
      * Set billing address.
      *
-     * @param AddressInterface $address
+     * @param null|AddressInterface $address
      */
     public function setBillingAddress(AddressInterface $address = null);
 

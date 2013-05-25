@@ -131,7 +131,7 @@ interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
     /**
      * Get all inventory units.
      *
-     * @return Collection
+     * @return InventoryUnitInterface[]
      */
     public function getInventoryUnits();
 
@@ -152,7 +152,7 @@ interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
     /**
      * Get all shipments associated with this order.
      *
-     * @return Collection
+     * @return ShipmentInterface[]
      */
     public function getShipments();
 

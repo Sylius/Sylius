@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -66,6 +67,8 @@ class SecurityStep extends CheckoutStep
      *
      * @param ProcessContextInterface $context
      * @param FormInterface           $registrationForm
+     *
+     * @return string
      */
     private function renderStep(ProcessContextInterface $context, FormInterface $registrationForm)
     {
@@ -96,9 +99,8 @@ class SecurityStep extends CheckoutStep
         $this->get('session')->set('_security.'.$providerKey.'.target_path', $url);
     }
 
-
     /**
-     * @param \Sylius\Bundle\CoreBundle\Entity\User $user
+     * @param FOSUserInterface $user
      */
     private function saveUser($user)
     {
@@ -106,6 +108,9 @@ class SecurityStep extends CheckoutStep
         $this->get('fos_user.user_manager')->updateUser($user);
     }
 
+    /**
+     * @param UserInterface $user
+     */
     private function authenticateUser(UserInterface $user)
     {
         $providerKey = $this->container->getParameter('fos_user.firewall_name');

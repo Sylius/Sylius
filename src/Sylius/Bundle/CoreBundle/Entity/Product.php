@@ -117,6 +117,10 @@ class Product extends BaseProduct implements TaxableInterface
      * Set variant selection method.
      *
      * @param string $variantSelectionMethod
+     *
+     * @return self
+     *
+     * @throws \InvalidArgumentException
      */
     public function setVariantSelectionMethod($variantSelectionMethod)
     {
@@ -256,7 +260,7 @@ class Product extends BaseProduct implements TaxableInterface
      */
     public function getImages()
     {
-        return $this->getMasterVariant()->getImageS();
+        return $this->getMasterVariant()->getImages();
     }
 
     /**

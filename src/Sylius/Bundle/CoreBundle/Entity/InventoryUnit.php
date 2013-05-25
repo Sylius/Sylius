@@ -54,22 +54,10 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
      */
     protected $shippingState;
 
-    /**
-     * Creation time.
-     *
-     * @var DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * Last update time.
-     *
-     * @var DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
+        parent::__construct();
+
         $this->shippingState = ShipmentItemInterface::STATE_READY;
     }
 
@@ -122,15 +110,5 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
-
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

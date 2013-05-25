@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
  * User entity.
@@ -30,6 +31,9 @@ class User extends BaseUser
         parent::__construct();
     }
 
+    /**
+     * @return OrderInterface[]
+     */
     public function getOrders()
     {
         return $this->orders;

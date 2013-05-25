@@ -57,6 +57,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param TranslatorInterface      $translator
      * @param RepositoryInterface      $taxonomyRepository
      * @param CartProviderInterface    $cartProvider
+     * @param SyliusMoneyExtension     $moneyExtension
      */
     public function __construct(
         FactoryInterface         $factory,
@@ -168,19 +169,6 @@ class FrontendMenuBuilder extends MenuBuilder
         return $menu;
     }
 
-    private function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
-    {
-        foreach ($taxon->getChildren() as $child) {
-            $childMenu = $menu->addChild($child->getName(), array(
-                'route'           => 'sylius_product_index_by_taxon',
-                'routeParameters' => array('permalink' => $child->getPermalink()),
-                'labelAttributes' => array('icon' => 'icon-angle-right')
-            ));
-
-            $this->createTaxonomiesMenuNode($childMenu, $child);
-        }
-    }
-
     /**
      * Builds frontend social menu.
      *
@@ -218,5 +206,22 @@ class FrontendMenuBuilder extends MenuBuilder
         ));
 
         return $menu;
+    }
+
+    /**
+     * @param ItemInterface  $menu
+     * @param TaxonInterface $taxon
+     */
+    private function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
+    {
+        foreach ($taxon->getChildren() as $child) {
+            $childMenu = $menu->addChild($child->getName(), array(
+                'route'           => 'sylius_product_index_by_taxon',
+                'routeParameters' => array('permalink' => $child->getPermalink()),
+                'labelAttributes' => array('icon' => 'icon-angle-right')
+            ));
+
+            $this->createTaxonomiesMenuNode($childMenu, $child);
+        }
     }
 }

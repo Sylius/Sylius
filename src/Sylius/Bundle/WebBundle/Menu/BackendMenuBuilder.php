@@ -101,6 +101,7 @@ class BackendMenuBuilder extends MenuBuilder
      *
      * @param ItemInterface $menu
      * @param array         $childOptions
+     * @param string        $section
      */
     protected function addAssortmentMenu(ItemInterface $menu, array $childOptions, $section)
     {
@@ -145,6 +146,7 @@ class BackendMenuBuilder extends MenuBuilder
      *
      * @param ItemInterface $menu
      * @param array         $childOptions
+     * @param string        $section
      */
     protected function addSalesMenu(ItemInterface $menu, array $childOptions, $section)
     {
@@ -181,6 +183,7 @@ class BackendMenuBuilder extends MenuBuilder
      *
      * @param ItemInterface $menu
      * @param array         $childOptions
+     * @param string        $section
      */
     protected function addCustomersMenu(ItemInterface $menu, array $childOptions, $section)
     {
@@ -200,6 +203,7 @@ class BackendMenuBuilder extends MenuBuilder
      *
      * @param ItemInterface $menu
      * @param array         $childOptions
+     * @param string        $section
      */
     protected function addConfigurationMenu(ItemInterface $menu, array $childOptions, $section)
     {

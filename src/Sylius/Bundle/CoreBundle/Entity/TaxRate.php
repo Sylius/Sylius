@@ -42,6 +42,8 @@ class TaxRate extends BaseTaxRate
      * Set zone.
      *
      * @param ZoneInterface $zone
+     *
+     * @return self
      */
     public function setZone(ZoneInterface $zone)
     {
