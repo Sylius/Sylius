@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Repository;
 
 use Sylius\Bundle\AssortmentBundle\Entity\CustomizableProductRepository;
+use Sylius\Bundle\AssortmentBundle\Model\ProductInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 
 /**
@@ -25,7 +26,7 @@ class ProductRepository extends CustomizableProductRepository
      * Create paginator for products categorized
      * under given taxon.
      *
-     * @param TaxonInterface
+     * @param TaxonInterface $taxon
      *
      * @return PagerfantaInterface
      */

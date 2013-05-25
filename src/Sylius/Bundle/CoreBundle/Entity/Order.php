@@ -327,9 +327,4 @@ class Order extends BaseOrder implements OrderInterface
     {
         return $this->items->count();
     }
-
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
 }

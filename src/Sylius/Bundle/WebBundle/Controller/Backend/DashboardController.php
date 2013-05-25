@@ -13,6 +13,7 @@ namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Backend dashboard controller.

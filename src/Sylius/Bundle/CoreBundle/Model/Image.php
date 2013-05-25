@@ -11,9 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use SplFileInfo;
-use DateTime;
-
 class Image implements ImageInterface
 {
     protected $id;
@@ -24,7 +21,7 @@ class Image implements ImageInterface
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId()
@@ -42,7 +39,7 @@ class Image implements ImageInterface
         return $this->file;
     }
 
-    public function setFile(SplFileInfo $file)
+    public function setFile(\SplFileInfo $file)
     {
         $this->file = $file;
     }
@@ -57,22 +54,34 @@ class Image implements ImageInterface
         $this->path = $path;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DateTime $updatedAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }

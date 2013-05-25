@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Cart;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
@@ -126,6 +127,10 @@ class ItemResolver implements ItemResolverInterface
      */
     protected function isStockAvailable(VariantInterface $variant)
     {
+        if (!$variant instanceof StockableInterface) {
+            return false;
+        }
+
         return $this->availabilityChecker->isStockAvailable($variant);
     }
 }

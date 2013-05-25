@@ -51,6 +51,8 @@ interface VariantInterface extends
     /**
      * Checks if product has image.
      *
+     * @param VariantImageInterface $image
+     *
      * @return Boolean
      */
     public function hasImage(VariantImageInterface $image);
@@ -58,14 +60,14 @@ interface VariantInterface extends
     /**
      * Add image.
      *
-     * @param VariantImage
+     * @param VariantImageInterface $image
      */
     public function addImage(VariantImageInterface $image);
 
     /**
      * Remove image.
      *
-     * @param VariantImage
+     * @param VariantImageInterface $image
      */
     public function removeImage(VariantImageInterface $image);
 }

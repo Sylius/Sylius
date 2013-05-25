@@ -43,6 +43,8 @@ class OrderPromotionListener
      * Get the order from event and run the promotion processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException When subject object is not OrderInterface instance
      */
     public function processOrderPromotion(GenericEvent $event)
     {
@@ -50,7 +52,7 @@ class OrderPromotionListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order promotion listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order promotion listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 

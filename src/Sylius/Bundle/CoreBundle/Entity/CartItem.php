@@ -43,6 +43,8 @@ class CartItem extends BaseCartItem
      * Set variant.
      *
      * @param VariantInterface $variant
+     *
+     * @return CartItem
      */
     public function setVariant(VariantInterface $variant)
     {

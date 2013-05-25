@@ -11,7 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryUnitsFactoryInterface;
+use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\SalesBundle\Builder\OrderBuilderInterface;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -48,6 +51,21 @@ class FinalizeStep extends CheckoutStep
         return $this->complete();
     }
 
+    /**
+     * Save given order.
+     *
+     * @param OrderInterface $order
+     */
+    protected function saveOrder(OrderInterface $order)
+    {
+        $manager = $this->get('sylius.manager.order');
+
+        $manager->persist($order);
+        $manager->flush($order);
+
+        $this->get('event_dispatcher')->dispatch('sylius.order.post_create', new GenericEvent($order));
+    }
+
     private function renderStep(ProcessContextInterface $context, OrderInterface $order)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:finalize.html.twig', array(
@@ -78,7 +96,7 @@ class FinalizeStep extends CheckoutStep
 
         $order->setUser($this->getUser());
 
-        $order->setshippingAddress($cart->getShippingAddress());
+        $order->setShippingAddress($cart->getShippingAddress());
         $order->setBillingAddress($cart->getBillingAddress());
 
         $this
@@ -99,30 +117,24 @@ class FinalizeStep extends CheckoutStep
     }
 
     /**
-     * Save given order.
-     *
-     * @param OrderInterface $order
+     * @return OrderBuilderInterface
      */
-    protected function saveOrder(OrderInterface $order)
-    {
-        $manager = $this->get('sylius.manager.order');
-
-        $manager->persist($order);
-        $manager->flush($order);
-
-        $this->get('event_dispatcher')->dispatch('sylius.order.post_create', new GenericEvent($order));
-    }
-
     private function getOrderBuilder()
     {
         return $this->get('sylius.builder.order');
     }
 
+    /**
+     * @return InventoryUnitsFactoryInterface
+     */
     private function getInventoryUnitsFactory()
     {
         return $this->get('sylius.order_processing.inventory_units_factory');
     }
 
+    /**
+     * @return ShipmentFactoryInterface
+     */
     private function getShipmentFactory()
     {
         return $this->get('sylius.order_processing.shipment_factory');

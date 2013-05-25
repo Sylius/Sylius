@@ -43,6 +43,8 @@ class OrderTaxationListener
      * Get the order from event and run the taxation processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException When subject object is not OrderInterface instance
      */
     public function processOrderTaxation(GenericEvent $event)
     {
@@ -50,7 +52,7 @@ class OrderTaxationListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order taxation listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order taxation listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
