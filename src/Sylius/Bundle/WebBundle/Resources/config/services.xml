@@ -14,6 +14,8 @@
 
         <parameter key="sylius.menu_builder.frontend.class">Sylius\Bundle\WebBundle\Menu\FrontendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
+
+        <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
     </parameters>
 
     <services>
@@ -76,6 +78,11 @@
         <service id="sylius.menu.backend.sidebar" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createSidebarMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.backend.sidebar" />
+        </service>
+
+        <service id="sylius.form.frontend.profile.type" class="%sylius.form.frontend.profile.type.class%">
+            <tag name="form.type" alias="sylius_user_profile" />
+            <argument>%fos_user.model.user.class%</argument>
         </service>
 
         <service id="sylius.twig.text_extension" class="Twig_Extensions_Extension_Text">
