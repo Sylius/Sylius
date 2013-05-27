@@ -6,6 +6,14 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="0f0f04f09c17d10081eb4993fa863550ecc9d33d" resname="change_password.flash.success">
+        <source>change_password.flash.success</source>
+        <target state="new">Your password has been changed.</target>
+      </trans-unit>
+      <trans-unit id="a067e7e04712aa036ad446379831d4a5fd00c27d" resname="profile.flash.updated">
+        <source>profile.flash.updated</source>
+        <target state="new">Your personal information have been updated.</target>
+      </trans-unit>
       <trans-unit id="3d0bc274c189b6aa1385bfdd6b9067247ecec200" resname="sylius.account.home.email">
         <source>sylius.account.home.email</source>
         <target state="new">Email</target>
