@@ -81,6 +81,16 @@ class User extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
      */
+    function it_can_remove_addresses($address)
+    {
+        $this->addAddress($address);
+        $this->removeAddress($address);
+        $this->hasAddress($address)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     */
     function it_adds_address_when_billing_address_is_set($address)
     {
         $this->setBillingAddress($address);
