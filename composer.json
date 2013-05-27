@@ -32,6 +32,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "mathiasverraes/money":                 "dev-master@dev",
         "jms/translation-bundle":               "1.1.*",
+        "sylius/installer-bundle":              "0.1.*",
         "sylius/assortment-bundle":             "0.1.*",
         "sylius/cart-bundle":                   "0.3.*",
         "sylius/money-bundle":                  "0.1.*",

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d888f38264fb5d2719ebe3a6bf3c9a57",
+    "hash": "a451bb2a93a6d0e25b4b32131c32b3eb",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -3198,6 +3198,68 @@
             "time": "2013-04-03 18:33:42"
         },
         {
+            "name": "sylius/installer-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/InstallerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusInstallerBundle.git",
+                "reference": "81de364899068db9fab1e2e0f5f02fe277977162"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusInstallerBundle/zipball/81de364899068db9fab1e2e0f5f02fe277977162",
+                "reference": "81de364899068db9fab1e2e0f5f02fe277977162",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "sylius/flow-bundle": "0.1.*",
+                "sylius/resource-bundle": "0.1.*",
+                "symfony/framework-bundle": ">=2.2,<3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec2": "dev-develop",
+                "symfony/form": ">=2.2,<3.0",
+                "symfony/validator": ">=2.2,<3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\InstallerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusInstallerBundle/contributors"
+                }
+            ],
+            "description": "Web and command line installer for Sylius.",
+            "homepage": "http://sylius.com",
+            "keywords": [
+                "ecommerce",
+                "install",
+                "installer",
+                "shop"
+            ],
+            "time": "2013-05-24 14:40:02"
+        },
+        {
             "name": "sylius/inventory-bundle",
             "version": "dev-master",
             "target-dir": "Sylius/Bundle/InventoryBundle",
@@ -3587,12 +3649,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "5a2fda192f2f9834d6af4a2f58493d1d23ba7461"
+                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/5a2fda192f2f9834d6af4a2f58493d1d23ba7461",
-                "reference": "5a2fda192f2f9834d6af4a2f58493d1d23ba7461",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/1b6108db1cf4f66328b32c4f8eae621fe05be84c",
+                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c",
                 "shasum": ""
             },
             "require": {
@@ -3612,7 +3674,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Sylius\\Bundle\\SalesBundle\\": ""
+                    "Sylius\\Bundle\\SalesBundle": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3631,16 +3693,15 @@
                 }
             ],
             "description": "Sales order management for Symfony2 applications.",
-            "homepage": "http://sylius.com",
+            "homepage": "http://Sylius.org",
             "keywords": [
                 "ecommerce",
                 "order",
                 "orders",
                 "sales",
-                "shop",
-                "sylius"
+                "shop"
             ],
-            "time": "2013-05-16 10:11:30"
+            "time": "2013-04-08 16:42:46"
         },
         {
             "name": "sylius/settings-bundle",
