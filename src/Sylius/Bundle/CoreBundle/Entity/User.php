@@ -55,6 +55,10 @@ class User extends BaseUser
     {
         $this->billingAddress = $billingAddress;
 
+        if (null !== $billingAddress && !$this->hasAddress($billingAddress)) {
+        	$this->addAddress($billingAddress);
+        }
+
         return $this;
     }
 
@@ -77,6 +81,10 @@ class User extends BaseUser
     public function setShippingAddress(AddressInterface $shippingAddress = null)
     {
         $this->shippingAddress = $shippingAddress;
+
+        if (null !== $shippingAddress && !$this->hasAddress($shippingAddress)) {
+        	$this->addAddress($shippingAddress);
+        }
 
         return $this;
     }

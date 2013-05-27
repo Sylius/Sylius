@@ -152,7 +152,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         if (null !== $role) {
             $user->addRole($role);
         }
-
+var_dump($user);
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 

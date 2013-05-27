@@ -16,3 +16,7 @@ web/media/*
 
 bin/*
 vendor/*
+
+.buildpath
+.project
+.settings

@@ -1,0 +1,18 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+
+<h1>{{ 'sylius.address.edit.header'|trans }}</h1>
+
+<hr />
+
+<form action="{{ path('sylius_address_update', {'id': address.id}) }}" method="post" class="form-horizontal">
+    {% include 'SyliusAddressingBundle:Address:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="save changes" class="btn btn-large btn-primary" />
+        &nbsp;
+        <a href="{{ path('sylius_address_list')}}" class="btn btn-large">cancel</a>
+    </div>
+</form>
+
+{% endblock %}
