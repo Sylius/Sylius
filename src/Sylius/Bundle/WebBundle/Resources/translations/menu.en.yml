@@ -10,12 +10,18 @@ sylius:
                 register: Register
                 administration: Administration
                 cart: View cart (%items%) %total%
+                account: My account
             social:
                 github: GitHub
                 twitter: Twitter
                 facebook: Facebook
                 google: Google+
                 linkedin: LinkedIn
+            account:
+                homepage: Home
+                profile: My personal information
+                password: My password
+                shop: Back to the shop
     backend:
         menu:
             main:
