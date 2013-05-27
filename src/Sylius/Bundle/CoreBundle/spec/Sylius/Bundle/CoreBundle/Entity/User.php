@@ -26,7 +26,7 @@ class User extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\User');
     }
 
-    function it_implements_Sylius_cart_interface()
+    function it_implements_Fos_user_interface()
     {
         $this->shouldImplement('FOS\UserBundle\Model\UserInterface');
     }
