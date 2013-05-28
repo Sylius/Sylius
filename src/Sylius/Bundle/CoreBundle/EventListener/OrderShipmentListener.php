@@ -32,7 +32,7 @@ class OrderShipmentListener
     /**
      * Constructor.
      *
-     * @param ShipmentFactoryInterface $taxationProcessor
+     * @param ShipmentFactoryInterface $shipmentFactory
      */
     public function __construct(ShipmentFactoryInterface $shipmentFactory)
     {

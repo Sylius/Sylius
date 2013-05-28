@@ -32,7 +32,7 @@ class OrderInventoryUnitsListener
     /**
      * Constructor.
      *
-     * @param InventoryUnitsFactoryInterface $taxationProcessor
+     * @param InventoryUnitsFactoryInterface $inventoryUnitsFactory
      */
     public function __construct(InventoryUnitsFactoryInterface $inventoryUnitsFactory)
     {
@@ -50,7 +50,7 @@ class OrderInventoryUnitsListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order shipment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order inventoryUnits listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
