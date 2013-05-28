@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle;
+namespace Sylius\Bundle\SalesBundle;
 
 final class SyliusOrderEvents
 {
