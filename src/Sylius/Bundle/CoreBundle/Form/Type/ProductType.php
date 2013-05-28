@@ -44,6 +44,21 @@ class ProductType extends BaseProductType
                 'label'   => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels()
             ))
+            ->add('translations', 'a2lix_translations', array(
+                'fields' => array(
+                    'shortDescription' => array(
+                        'label' => 'sylius.form.product.short_description',
+                        'type' => 'textarea',
+                    ),
+                    'name' => array(
+                        'label' => 'sylius.form.product.name',
+                    ),
+                    'description' => array(
+                        'label' => 'sylius.form.product.description',
+                        'type' => 'textarea',
+                    ),
+                )
+            ))
         ;
     }
 }

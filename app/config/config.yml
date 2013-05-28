@@ -51,13 +51,17 @@ doctrine:
                         enabled: true
 
 stof_doctrine_extensions:
-    default_locale: %sylius.locale%
+    default_locale: en
     orm:
         default:
             tree: true
             sluggable: true
             timestampable: true
             softdeleteable: true
+            translatable: true
+
+a2lix_translation_form:
+    locales: [pl, ru]
 
 fos_user:
     db_driver: orm

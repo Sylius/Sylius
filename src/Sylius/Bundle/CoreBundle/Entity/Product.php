@@ -73,6 +73,20 @@ class Product extends BaseProduct implements TaxableInterface
     protected $shippingCategory;
 
     /**
+     * Translatable translations.
+     *
+     * @var Collection
+     */
+    protected $translations;
+
+     /**
+     * Translatable locale.
+     *
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -81,6 +95,7 @@ class Product extends BaseProduct implements TaxableInterface
 
         $this->setMasterVariant(new Variant());
         $this->taxons = new ArrayCollection();
+        $this->translations = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
     }
@@ -266,6 +281,36 @@ class Product extends BaseProduct implements TaxableInterface
     {
         return $this->getMasterVariant()->getImages()->first();
     }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function setTranslations(Collection $translations)
+    {
+        foreach ($translations as $translation) {
+            $translation->setTranslatable($this);
+        }
+
+        return $this->translations = $translations;
+    }
+
+    public function translate($locale = null)
+    {
+        if (null === $locale) {
+            return $this;
+        }
+
+        return new \Gedmo\Translator\TranslationProxy(
+            $this,
+            $locale,
+            array('name', 'description', 'shortDescription'),
+            'Sylius\Bundle\CoreBundle\Entity\ProductTranslation',
+            $this->translations
+        );
+    }
+
 
     /**
      * Get hash of variant selection methods and labels.

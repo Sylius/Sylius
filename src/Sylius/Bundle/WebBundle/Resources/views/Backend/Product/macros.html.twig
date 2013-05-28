@@ -38,7 +38,7 @@
                 <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
                     <strong>{{ product.name }}</strong>
                 </a>
-                <p>{{ product.shortDescription|truncate(50) }}</p>
+                <p>{{ product.translate(app.request.locale).shortDescription|truncate(50) }}</p>
             </td>
             <td>
                 {% if not product.hasOptions %}

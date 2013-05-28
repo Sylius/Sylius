@@ -93,3 +93,9 @@ body.signin {
 input[type="date"] {
     width: 120px;
 }
+.multilanguage-form-container input, .multilanguage-form-container textarea {
+    width: 530px;
+}
+.multilanguage-form-container textarea {
+    height: 100px;
+}
