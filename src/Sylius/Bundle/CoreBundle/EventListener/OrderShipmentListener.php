@@ -16,7 +16,7 @@ use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order taxation listener.
+ * Order Shipment listener.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */

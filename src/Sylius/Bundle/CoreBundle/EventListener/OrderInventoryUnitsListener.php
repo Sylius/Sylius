@@ -16,7 +16,7 @@ use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryUnitsFactoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order taxation listener.
+ * Order Inventory Units listener.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
