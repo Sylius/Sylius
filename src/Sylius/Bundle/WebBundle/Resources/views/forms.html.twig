@@ -110,3 +110,38 @@
     {% endif %}
 {% endspaceless %}
 {% endblock %}
+
+{% block a2lix_translations_widget %}
+    <div class="multilanguage-form-container">
+        {% set locales = form.vars.locales %}
+        {% if fields is defined %}
+            {% set locales = form.vars.default_locale|merge(locales) %}
+        {% endif %}
+        {% if locales|length > 1 %}
+            <ul class="nav nav-tabs">
+                {% for locale in locales %}
+                    <li {% if loop.first %}class="active"{% endif %}><a href="#{{ locale }}" data-toggle="tab">{{ locale }}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for locale in locales %}
+                    <div class="tab-pane {% if loop.first %}active{% endif %}" id="{{ locale }}">
+                        {% if (fields is defined) and (form.vars.default_locale[0] == locale) %}
+                            {% for field in fields %}
+                                {{ form_row(field) }}
+                            {% endfor %}
+                        {% else %}
+                            {% for translationsLocale in form if (translationsLocale.vars.name == locale) %}
+                                {{ form_widget(translationsLocale) }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% elseif (fields is defined) %}
+            {% for field in fields %}
+                {{ form_row(field) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

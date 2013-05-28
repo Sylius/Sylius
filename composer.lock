@@ -3,8 +3,56 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d888f38264fb5d2719ebe3a6bf3c9a57",
+    "hash": "eb886eefc7f074a3a09e985324697e41",
     "packages": [
+        {
+            "name": "a2lix/translation-form-bundle",
+            "version": "dev-master",
+            "target-dir": "A2lix/TranslationFormBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/a2lix/TranslationFormBundle.git",
+                "reference": "0.4.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/a2lix/TranslationFormBundle/zipball/0.4.0",
+                "reference": "0.4.0",
+                "shasum": ""
+            },
+            "require": {
+                "stof/doctrine-extensions-bundle": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "A2lix\\TranslationFormBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "A2lix",
+                    "homepage": "http://www.a2lix.fr"
+                },
+                {
+                    "name": "David ALLIX"
+                }
+            ],
+            "description": "Translation field to use with Translatable Doctrine extension",
+            "homepage": "https://github.com/a2lix/TranslationFormBundle",
+            "keywords": [
+                "doctrine2",
+                "form",
+                "gedmo",
+                "translatable",
+                "translation"
+            ],
+            "time": "2013-03-15 15:36:15"
+        },
         {
             "name": "athari/yalinqo",
             "version": "dev-master",
@@ -4936,6 +4984,7 @@
         "mathiasverraes/money": 20,
         "sylius/omnipay-bundle": 20,
         "fsc/hateoas-bundle": 20,
+        "a2lix/translation-form-bundle": 20,
         "phpspec/phpspec2": 20
     },
     "platform": {
