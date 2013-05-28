@@ -82,18 +82,13 @@ class FinalizeStep extends CheckoutStep
         $order->setshippingAddress($cart->getShippingAddress());
         $order->setBillingAddress($cart->getBillingAddress());
 
-        $this
-            ->getInventoryUnitsFactory()
-            ->createInventoryUnits($order)
-        ;
-
-        $this
-            ->getShipmentFactory()
-            ->createShipment($order, $cart->getShippingMethod())
-        ;
-
         $order->calculateTotal();
-        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::ORDER_PRE_CREATE, new GenericEvent($order));
+
+        $this->get('event_dispatcher')->dispatch(
+            SyliusOrderEvents::ORDER_PRE_CREATE,
+            new GenericEvent($order, array('shippingMethod' => $cart->getShippingMethod()))
+        );
+
         $order->calculateTotal();
 
         return $order;
@@ -117,15 +112,5 @@ class FinalizeStep extends CheckoutStep
     private function getOrderBuilder()
     {
         return $this->get('sylius.builder.order');
-    }
-
-    private function getInventoryUnitsFactory()
-    {
-        return $this->get('sylius.order_processing.inventory_units_factory');
-    }
-
-    private function getShipmentFactory()
-    {
-        return $this->get('sylius.order_processing.shipment_factory');
     }
 }

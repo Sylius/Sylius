@@ -27,6 +27,8 @@
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
+        <parameter key="sylius.listener.order_shipment.class">Sylius\Bundle\CoreBundle\EventListener\OrderShipmentListener</parameter>
+        <parameter key="sylius.listener.order_inventory_units.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryUnitsListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -154,6 +156,16 @@
             <argument type="service" id="sylius.promotion_processor" />
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderPromotion" />
+        </service>
+        <service id="sylius.listener.order_shipment" class="%sylius.listener.order_shipment.class%">
+            <argument type="service" id="sylius.order_processing.shipment_factory" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="createOrderShipment" priority="10" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="createOrderShipment" priority="10" />
+        </service>
+        <service id="sylius.listener.order_inventory_units" class="%sylius.listener.order_inventory_units.class%">
+            <argument type="service" id="sylius.order_processing.inventory_units_factory" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="createOrderInventoryUnits" priority="20" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="createOrderInventoryUnits" priority="20" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
