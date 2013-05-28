@@ -16,11 +16,11 @@
       </trans-unit>
       <trans-unit id="3d0bc274c189b6aa1385bfdd6b9067247ecec200" resname="sylius.account.home.email">
         <source>sylius.account.home.email</source>
-        <target state="new">Email</target>
+        <target state="new">Email : </target>
       </trans-unit>
       <trans-unit id="9b3c46ca5d6573965c1992a9968109f53dc70cea" resname="sylius.account.home.id">
         <source>sylius.account.home.id</source>
-        <target state="new">Customer ID</target>
+        <target state="new">Customer ID : </target>
       </trans-unit>
       <trans-unit id="541928c0e4a54f16b91bf983e3eafd46928053aa" resname="sylius.account.home.outline">
         <source>sylius.account.home.outline</source>
