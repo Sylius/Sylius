@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\SalesBundle\SyliusOrderEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -92,7 +93,7 @@ class FinalizeStep extends CheckoutStep
         ;
 
         $order->calculateTotal();
-        $this->get('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::ORDER_PRE_CREATE, new GenericEvent($order));
         $order->calculateTotal();
 
         return $order;
@@ -110,7 +111,7 @@ class FinalizeStep extends CheckoutStep
         $manager->persist($order);
         $manager->flush($order);
 
-        $this->get('event_dispatcher')->dispatch('sylius.order.post_create', new GenericEvent($order));
+        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::ORDER_POST_CREATE, new GenericEvent($order));
     }
 
     private function getOrderBuilder()
