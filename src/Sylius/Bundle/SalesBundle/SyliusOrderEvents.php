@@ -15,4 +15,7 @@ final class SyliusOrderEvents
 {
     const ORDER_PRE_CREATE  = 'sylius.order.pre_create';
     const ORDER_POST_CREATE = 'sylius.order.post_create';
+
+    const ORDER_PRE_UPDATE  = 'sylius.order.pre_update';
+    const ORDER_POST_UPDATE = 'sylius.order.post_update';
 }
