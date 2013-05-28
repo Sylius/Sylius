@@ -63,6 +63,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Sylius\Bundle\CoreBundle\Entity\User
+    profile:
+        form:
+            type: sylius_user_profile
 
 swiftmailer:
     transport: %sylius.mailer.transport%

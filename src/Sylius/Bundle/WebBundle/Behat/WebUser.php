@@ -120,6 +120,78 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am on my account homepage$/
+     */
+    public function iAmOnMyAccountHomepage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_homepage'));
+    }
+
+    /**
+     * @Given /^I should be on my account homepage$/
+     */
+    public function iShouldBeOnMyAccountHomepage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
+    }
+
+    /**
+     * @Given /^I am on my account password page$/
+     */
+    public function iAmOnMyAccountPasswordPage()
+    {
+        $this->getSession()->visit($this->generateUrl('fos_user_change_password'));
+    }
+
+    /**
+     * @Given /^I should be on my account password page$/
+     */
+    public function iShouldBeOnMyAccountPasswordPage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('fos_user_change_password'));
+    }
+
+    /**
+     * @Then /^I should still be on my account password page$/
+     */
+    public function iShouldStillBeOnMyAccountPasswordPage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('fos_user_change_password'));
+    }
+
+    /**
+     * @Given /^I am on my account profile edition page$/
+     */
+    public function iAmOnMyAccountProfileEditionPage()
+    {
+        $this->getSession()->visit($this->generateUrl('fos_user_profile_edit'));
+    }
+
+    /**
+     * @Given /^I should be on my account profile edition page$/
+     */
+    public function iShouldBeOnMyProfileEditionPage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('fos_user_profile_edit'));
+    }
+
+    /**
+     * @Given /^I should still be on my account profile edition page$/
+     */
+    public function iShouldStillBeOnMyProfileEditionPage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('fos_user_profile_edit'));
+    }
+
+    /**
+     * @Given /^I should be on my account profile page$/
+     */
+    public function iShouldBeOnMyProfilePage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('fos_user_profile_show'));
+    }
+
+    /**
      * @Then /^I should be on login page$/
      */
     public function iShouldBeOnLoginPage()
