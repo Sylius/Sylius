@@ -13,9 +13,9 @@ namespace Sylius\Bundle\SalesBundle;
 
 final class SyliusOrderEvents
 {
-    const ORDER_PRE_CREATE  = 'sylius.order.pre_create';
-    const ORDER_POST_CREATE = 'sylius.order.post_create';
+    const ORDER_CREATE_INITIALIZE = 'sylius.order_create.initialize';
+    const ORDER_CREATE_COMPLETED  = 'sylius.order_create.completed';
 
-    const ORDER_PRE_UPDATE  = 'sylius.order.pre_update';
-    const ORDER_POST_UPDATE = 'sylius.order.post_update';
+    const ORDER_UPDATE_INITIALIZE = 'sylius.order_update.initialize';
+    const ORDER_UPDATE_COMPLETED  = 'sylius.order_update.completed';
 }

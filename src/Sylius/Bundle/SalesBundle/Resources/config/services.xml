@@ -49,7 +49,7 @@
 
         <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
             <argument type="service" id="sylius.generator.order_number" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
+            <tag name="kernel.event_listener" event="sylius.order_create.initialize" method="generateOrderNumber" priority="10" />
         </service>
     </services>
 </container>
