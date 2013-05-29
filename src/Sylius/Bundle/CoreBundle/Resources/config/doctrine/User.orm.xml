@@ -10,6 +10,22 @@
             <generator strategy="AUTO" />
         </id>
         <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user" />
+        <one-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+            <join-column name="billing_address_id" />
+        </one-to-one>
+        <one-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+            <join-column name="shipping_address_id" />
+        </one-to-one>
+        <many-to-many field="addresses" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+            <join-table name="sylius_user_address">
+                <join-columns>
+                    <join-column name="user_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="address_id" referenced-column-name="id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 
 </doctrine-mapping>
