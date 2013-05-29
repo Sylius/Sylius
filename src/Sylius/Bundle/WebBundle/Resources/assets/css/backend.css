@@ -53,13 +53,13 @@ th {
 .file-overlay {
     width: 200px;
     margin-left: -275px;
-    cursor: pointer;
 }
-.file-input {
+input[type="file"] {
     -moz-opacity: 0;
     -khtml-opacity: 0;
     -webkit-opacity: 0;
     opacity: 0;
+    cursor: pointer;
 }
 body.signin {
     padding-top: 40px;
