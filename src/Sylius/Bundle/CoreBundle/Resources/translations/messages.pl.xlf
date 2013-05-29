@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="pl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="9efc314b65237d5d646e1b817372afc6" resname="---">
+        <source>---</source>
+        <target>---</target>
+      </trans-unit>
+      <trans-unit id="af5f81fbdd007eed41ece4ac53d44eb5" resname="sylius.form.checkout.addressing.different_billing_address">
+        <source>sylius.form.checkout.addressing.different_billing_address</source>
+        <target>Użyć innego adresu do rozliczeń?</target>
+      </trans-unit>
+      <trans-unit id="046d3661fb78c22b79c702f200a40efa" resname="sylius.form.checkout.payment_method">
+        <source>sylius.form.checkout.payment_method</source>
+        <target>Metoda płatności</target>
+      </trans-unit>
+      <trans-unit id="b4c63a04c6b6a0ad83bc699cac462845" resname="sylius.form.checkout.shipping_method">
+        <source>sylius.form.checkout.shipping_method</source>
+        <target>Metoda wysyłki</target>
+      </trans-unit>
+      <trans-unit id="79fc91b958c3d643f9f68c6ea9f517cf" resname="sylius.form.image.file">
+        <source>sylius.form.image.file</source>
+        <target>Zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="d0a428ce7a524cee57efe279770f7ccf" resname="sylius.form.order_filter.created_at_from">
+        <source>sylius.form.order_filter.created_at_from</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="3a0447842ef11fc7bf20679ada50ee45" resname="sylius.form.order_filter.created_at_to">
+        <source>sylius.form.order_filter.created_at_to</source>
+        <target>To</target>
+      </trans-unit>
+      <trans-unit id="a624a1338ad967be54817e28763997e9" resname="sylius.form.order_filter.number">
+        <source>sylius.form.order_filter.number</source>
+        <target>Number</target>
+      </trans-unit>
+      <trans-unit id="c0a7a1c526f3a80d3b6511a5b41c8124" resname="sylius.form.order_filter.total_from">
+        <source>sylius.form.order_filter.total_from</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="f6fbe4f3384f4c574ce4f8150faa6e14" resname="sylius.form.order_filter.total_to">
+        <source>sylius.form.order_filter.total_to</source>
+        <target>To</target>
+      </trans-unit>
+      <trans-unit id="02a8b57fa162c999afe9cce1745529cd" resname="sylius.form.product.short_description">
+        <source>sylius.form.product.short_description</source>
+        <target>Krótki opis</target>
+      </trans-unit>
+      <trans-unit id="313e975acffd448d8e4c6fe1e1f20e29" resname="sylius.form.product.tax_category">
+        <source>sylius.form.product.tax_category</source>
+        <target>Kategoria podatkowa</target>
+      </trans-unit>
+      <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4cc" resname="sylius.form.product.variant_selection_method">
+        <source>sylius.form.product.variant_selection_method</source>
+        <target>Variant selection method</target>
+      </trans-unit>
+      <trans-unit id="757004bed01aea433f48aea5badf9062" resname="sylius.form.product_filter.name">
+        <source>sylius.form.product_filter.name</source>
+        <target>Nazwa</target>
+      </trans-unit>
+      <trans-unit id="a8b850e79724ab3c741fa81af5bf91d5" resname="sylius.form.product_filter.sku">
+        <source>sylius.form.product_filter.sku</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.meta_description">
+        <source>sylius.form.settings.general.meta_description</source>
+        <target>Opis w sekcji meta</target>
+      </trans-unit>
+      <trans-unit id="5db7f6d7c5a29ca14ed52fa1284531fb" resname="sylius.form.settings.general.meta_keywords">
+        <source>sylius.form.settings.general.meta_keywords</source>
+        <target>Słowa kluczowe w sekcji meta</target>
+      </trans-unit>
+      <trans-unit id="8f325ef09463285fbfa8d52af2c5d607" resname="sylius.form.settings.general.title">
+        <source>sylius.form.settings.general.title</source>
+        <target>Tytuł strony</target>
+      </trans-unit>
+      <trans-unit id="7bba6a252b29ce19174fd7ed1fbc2382" resname="sylius.form.settings.taxation.default_tax_zone">
+        <source>sylius.form.settings.taxation.default_tax_zone</source>
+        <target>Domyślna strefa podatkowa</target>
+      </trans-unit>
+      <trans-unit id="ef8d0ff1b2c69f53d4fde3e09c2d4d6f" resname="sylius.form.shipping_method.zone">
+        <source>sylius.form.shipping_method.zone</source>
+        <target>Strefa</target>
+      </trans-unit>
+      <trans-unit id="9ed17ac3646a409b6fc47330a247a445" resname="sylius.form.variant.available_on_demand">
+        <source>sylius.form.variant.available_on_demand</source>
+        <target>Dostępny na zamówienie</target>
+      </trans-unit>
+      <trans-unit id="54d88f13f82cc3ca1b556b95478c61e2" resname="sylius.form.variant.images">
+        <source>sylius.form.variant.images</source>
+        <target>Zdjęcia</target>
+      </trans-unit>
+      <trans-unit id="c7a57565525fe78457f6a67bd13fafc5" resname="sylius.form.variant.on_hand">
+        <source>sylius.form.variant.on_hand</source>
+        <target>Aktualnie w magazynie</target>
+      </trans-unit>
+      <trans-unit id="4ecf22f299095448d542fcf93b8a6b33" resname="sylius.form.variant.price">
+        <source>sylius.form.variant.price</source>
+        <target>Cena</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
