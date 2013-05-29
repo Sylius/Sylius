@@ -21,6 +21,8 @@ sylius:
             on_hand: Current stock
             images: Images
         product:
+            name: Name
+            description: Description
             short_description: Short description
             tax_category: Tax category
             variant_selection_method: Variant selection method

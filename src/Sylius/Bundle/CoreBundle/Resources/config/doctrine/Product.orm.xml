@@ -3,13 +3,16 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <entity name="Sylius\Bundle\CoreBundle\Entity\Product" table="sylius_product">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="shortDescription" column="short_description" type="string" nullable="true" />
+        <field name="shortDescription" column="short_description" type="string" nullable="true">
+              <gedmo:translatable/>
+        </field>
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
         <one-to-many field="variants" target-entity="Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface" mapped-by="product">
             <cascade>
@@ -34,6 +37,12 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+        <one-to-many field="translations" target-entity="Sylius\Bundle\CoreBundle\Entity\ProductTranslation" mapped-by="object">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+         <gedmo:translation entity="Sylius\Bundle\CoreBundle\Entity\ProductTranslation" locale="locale"/>
     </entity>
 
 </doctrine-mapping>
