@@ -27,5 +27,7 @@ interface CouponInterface
     public function incrementUsed();
     public function getPromotion();
     public function setPromotion(PromotionInterface $promotion = null);
+    public function getExpiresAt();
+    public function setExpiresAt(\DateTime $expiresAt = null);
     public function isValid();
 }

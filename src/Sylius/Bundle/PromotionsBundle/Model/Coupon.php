@@ -23,6 +23,7 @@ class Coupon implements CouponInterface
     protected $usageLimit;
     protected $used;
     protected $promotion;
+    protected $expiresAt;
 
     public function __construct()
     {
@@ -81,9 +82,27 @@ class Coupon implements CouponInterface
         $this->promotion = $promotion;
     }
 
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(\DateTime $expiresAt = null)
+    {
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
     public function isValid()
     {
         if (null !== $this->usageLimit && $this->used >= $this->usageLimit) {
+            return false;
+        }
+
+        $now = new \DateTime();
+
+        if (null !== $this->expiresAt && $this->expiresAt < $now) {
             return false;
         }
 

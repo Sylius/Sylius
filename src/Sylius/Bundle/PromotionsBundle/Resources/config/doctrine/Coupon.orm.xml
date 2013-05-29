@@ -24,6 +24,7 @@
         <many-to-one field="promotion" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="coupons">
             <join-column name="promotion_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+        <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
     </entity>
 
 </doctrine-mapping>
