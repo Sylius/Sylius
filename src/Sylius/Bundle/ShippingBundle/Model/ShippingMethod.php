@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Shipping method model.
  *
@@ -68,6 +70,13 @@ class ShippingMethod implements ShippingMethodInterface
     protected $configuration;
 
     /**
+     * Shipping method rules.
+     *
+     * @var ArrayCollection
+     */
+    protected $rules;
+
+    /**
      * Creation date.
      *
      * @var \DateTime
@@ -90,6 +99,7 @@ class ShippingMethod implements ShippingMethodInterface
         $this->categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
         $this->createdAt = new \DateTime();
         $this->configuration = array();
+        $this->rules = new ArrayCollection();
     }
 
     /**
@@ -256,6 +266,50 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRules()
+    {
+        return !$this->rules->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRules()
+    {
+        return $this->rules;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRule(RuleInterface $rule)
+    {
+        return $this->rules->contains($rule);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addRule(RuleInterface $rule)
+    {
+        if (!$this->hasRule($rule)) {
+            $rule->setShippingMethod($this);
+            $this->rules->add($rule);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeRule(RuleInterface $rule)
+    {
+        $rule->setShippingMethod(null);
+        $this->rules->removeElement($rule);
     }
 
     /**

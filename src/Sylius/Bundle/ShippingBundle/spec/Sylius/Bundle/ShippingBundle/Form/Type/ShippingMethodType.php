@@ -22,12 +22,13 @@ class ShippingMethodType extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
-     * @param Symfony\Component\Form\FormBuilder          $builder
-     * @param Symfony\Component\Form\FormFactoryInterface $factory
+     * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface   $checkerRegistry
+     * @param Symfony\Component\Form\FormBuilder                                           $builder
+     * @param Symfony\Component\Form\FormFactoryInterface                                  $factory
      */
-    function let($calculatorRegistry, $builder, $factory)
+    function let($calculatorRegistry, $checkerRegistry, $builder, $factory)
     {
-        $this->beConstructedWith('ShippingMethod', $calculatorRegistry);
+        $this->beConstructedWith('ShippingMethod', $calculatorRegistry, $checkerRegistry);
         $builder->getFormFactory()->willReturn($factory);
     }
 
@@ -104,7 +105,6 @@ class ShippingMethodType extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
      * @param Symfony\Component\Form\FormBuilder $builder
      * @param Symfony\Component\Form\FormBuilder $flatRateFormBuilder
      * @param Symfony\Component\Form\Form $flatRateForm
@@ -153,7 +153,7 @@ class ShippingMethodType extends ObjectBehavior
             ->willReturn($flatRateForm)
         ;
         $builder
-            ->create('configuration', 'sylius_shipping_calculator_flat_rate_configuration')
+            ->create('__name__', 'sylius_shipping_calculator_flat_rate_configuration')
             ->willReturn($flatRateFormBuilder)
         ;
 
@@ -162,17 +162,17 @@ class ShippingMethodType extends ObjectBehavior
             ->willReturn($perItemForm)
         ;
         $builder
-            ->create('configuration', 'sylius_shipping_calculator_per_item_rate_configuration')
+            ->create('__name__', 'sylius_shipping_calculator_per_item_rate_configuration')
             ->willReturn($perItemFormBuilder)
         ;
 
         $builder
             ->setAttribute(
                 'prototypes',
-                array(
+                array('calculators' => array(
                     'flat_rate' => $flatRateForm,
-                    'per_item_rate' => $perItemForm
-                )
+                    'per_item_rate' => $perItemForm,
+                ))
             )
             ->shouldBeCalled()
         ;

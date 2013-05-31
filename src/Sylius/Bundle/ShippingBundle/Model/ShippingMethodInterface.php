@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
- * Shipping rate interface.
+ * Shipping method interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -129,4 +129,31 @@ interface ShippingMethodInterface extends TimestampableInterface
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
+
+    /**
+     * @return Boolean
+     */
+    public function hasRules();
+
+    /**
+     * @return RuleInterface[]
+     */
+    public function getRules();
+
+    /**
+     * @param RuleInterface $rule
+     *
+     * @return Boolean
+     */
+    public function hasRule(RuleInterface $rule);
+
+    /**
+     * @param RuleInterface $rule
+     */
+    public function addRule(RuleInterface $rule);
+
+    /**
+     * @param RuleInterface $rule
+     */
+    public function removeRule(RuleInterface $rule);
 }

@@ -26,8 +26,9 @@
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
-        "phpspec/phpspec2":                "dev-develop",
-        "symfony/form":                    "~2.1"
+        "phpspec/phpspec2":  "dev-develop",
+        "symfony/form":      "~2.1",
+        "symfony/validator": "~2.1"
     },
     "config": {
         "bin-dir": "bin"
