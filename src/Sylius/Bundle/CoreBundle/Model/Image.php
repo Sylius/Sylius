@@ -47,6 +47,11 @@ class Image implements ImageInterface
         $this->file = $file;
     }
 
+    public function hasPath()
+    {
+        return null !== $this->path;
+    }
+
     public function getPath()
     {
         return $this->path;
