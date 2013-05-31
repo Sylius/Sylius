@@ -117,3 +117,8 @@ div.footer p {
 div.footer ul li a {
     color: #999999;
 }
+
+#sidebar_left ul li img.menu-thumbnail {
+    float: none;
+    margin-right: 0;
+}
