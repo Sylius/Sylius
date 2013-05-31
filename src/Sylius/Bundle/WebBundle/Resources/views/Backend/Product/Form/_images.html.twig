@@ -6,9 +6,11 @@
         <div class="sylius-assortment-variant-images-image">
             <div class="control-group">
                 <div class="controls">
+                    {% if image.path|length > 0 %}
                     <a href="{{ image.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery">
                         <img class="img-polaroid" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="" />
                     </a>
+                    {% endif %}
                     &nbsp;
                     {{ form_widget(form.masterVariant.images[loop.index0].file) }}
                     &nbsp;
