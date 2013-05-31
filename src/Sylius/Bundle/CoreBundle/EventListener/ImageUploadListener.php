@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface;
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
@@ -25,7 +27,7 @@ class ImageUploadListener
         $this->uploader = $uploader;
     }
 
-    public function upload(GenericEvent $event)
+    public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
         if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface){
@@ -39,5 +41,33 @@ class ImageUploadListener
                 $this->uploader->upload($image);
             }
         }
+    }
+
+    public function uploadTaxonImage(GenericEvent $event)
+    {
+        $subject = $event->getSubject();
+
+        if (!$subject instanceof TaxonInterface){
+            throw new \InvalidArgumentException('TaxonInterface expected.');
+        }
+
+        if ($subject->hasFile()) {
+            $this->uploader->upload($subject);
+        }
+
+    }
+
+    public function uploadTaxonomyImage(GenericEvent $event)
+    {
+        $subject = $event->getSubject();
+
+        if (!$subject instanceof TaxonomyInterface){
+            throw new \InvalidArgumentException('TaxonomyInterface expected.');
+        }
+
+        if ($subject->getRoot()->hasFile()) {
+            $this->uploader->upload($subject->getRoot());
+        }
+
     }
 }

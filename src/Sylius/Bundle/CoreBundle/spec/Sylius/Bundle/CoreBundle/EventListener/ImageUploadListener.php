@@ -42,7 +42,20 @@ class ImageUploadListener extends ObjectBehavior
         $image->getId()->willReturn(null);
         $uploader->upload($image)->shouldBeCalled();
 
-        $this->upload($event);
+        $this->uploadProductImage($event);
+    }
+
+    /**
+     * @param Symfony\Component\EventDispatcher\GenericEvent                    $event
+     * @param Sylius\Bundle\CoreBundle\Entity\Taxon                             $taxon
+     * @param Sylius\Bundle\CoreBundle\Model\ImageTaxonInterface                $image
+     */
+    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploader)
+    {
+        $event->getSubject()->willReturn($taxon);
+        $uploader->upload($taxon)->shouldBeCalled();
+        $taxon->hasFile()->willReturn(true);
+        $this->uploadTaxonImage($event);
     }
 
     /**
@@ -54,7 +67,7 @@ class ImageUploadListener extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringUpload($event)
+            ->duringUploadProductImage($event)
         ;
     }
 }

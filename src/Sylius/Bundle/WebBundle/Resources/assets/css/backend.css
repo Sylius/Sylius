@@ -93,3 +93,8 @@ body.signin {
 input[type="date"] {
     width: 120px;
 }
+
+.thumbnail.thumbnail-image {
+    width: 50px;
+    height: 40px;
+}

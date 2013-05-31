@@ -1,35 +1,44 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace Sylius\Bundle\CoreBundle\Entity;
 
-namespace Sylius\Bundle\CoreBundle\Model;
-
+use Sylius\Bundle\CoreBundle\Model\ImageInterface;
+use Sylius\Bundle\TaxonomiesBundle\Entity\Taxon as BaseTaxon;
 use SplFileInfo;
 use DateTime;
 
-class Image implements ImageInterface
+/**
+ * Sylius core taxon entity.
+ *
+ */
+class Taxon extends BaseTaxon implements ImageInterface
 {
-    protected $id;
+
+    /**
+     * @var SplFileInfo
+     */
     protected $file;
+
+    /**
+     * @var string
+     */
     protected $path;
+
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
+
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
-    }
+        parent::__construct();
 
-    public function getId()
-    {
-        return $this->id;
+        $this->createdAt = new DateTime();
     }
 
     public function hasFile()
@@ -81,4 +90,5 @@ class Image implements ImageInterface
     {
         $this->updatedAt = $updatedAt;
     }
+
 }

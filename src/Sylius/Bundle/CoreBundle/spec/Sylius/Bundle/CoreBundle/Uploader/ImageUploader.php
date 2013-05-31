@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\File\File;
 class ImageUploader extends ObjectBehavior
 {
     /**
-     * @param Gaufrette\Filesystem                          $filesystem
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface $image
+     * @param Gaufrette\Filesystem                           $filesystem
+     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface  $image
      */
     function let($filesystem, $image)
     {

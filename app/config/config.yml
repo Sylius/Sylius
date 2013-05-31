@@ -78,17 +78,20 @@ liip_doctrine_cache:
 
 knp_gaufrette:
     adapters:
-        variant_image:
+        sylius_image:
             local:
-                directory:  %kernel.root_dir%/../web/media/image/variant
+                directory:  %kernel.root_dir%/../web/media/image
                 create:     true
     filesystems:
-        variant_image:
-            adapter: variant_image
+        sylius_image:
+            adapter: sylius_image
 
 liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image/variant
+    data_root: %kernel.root_dir%/../web/media/image
     filter_sets:
+        sylius_16x16:
+            filters:
+                thumbnail: { size: [16, 16], mode: outbound }
         sylius_50x40:
             filters:
                 thumbnail: { size: [50, 40], mode: outbound }

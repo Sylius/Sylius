@@ -3,4 +3,5 @@
 {% block label %}
     {% if item.labelAttribute('icon') %}<i class="{{ item.labelAttribute('icon') }}"></i>{% endif %}
     {% if not item.labelAttribute('iconOnly') %}{{ item.label|trans }}{% endif %}
+    {% if item.labelAttribute('data-image') %}<img src="{{ item.labelAttribute('data-image')|imagine_filter('sylius_16x16', true) }}" alt="{{ item.name }}" class="menu-thumbnail"/>{% endif %}
 {% endblock %}
