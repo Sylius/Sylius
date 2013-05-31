@@ -84,7 +84,7 @@ class OrderRepository extends EntityRepository
             ;
         }
 
-        if (empty($sorting['updatedAt'])) {
+        if (empty($sorting)) {
             if (!is_array($sorting)) {
                 $sorting = array();
             }
