@@ -163,16 +163,20 @@
 
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
             <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.variant.pre_create" method="upload" />
-            <tag name="kernel.event_listener" event="sylius.variant.pre_update" method="upload" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.variant.pre_create" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.variant.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
+            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
                 <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
-                    <argument>variant_image</argument>
+                    <argument>sylius_image</argument>
                 </service>
             </argument>
         </service>

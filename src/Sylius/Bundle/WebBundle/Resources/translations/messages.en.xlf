@@ -1398,9 +1398,17 @@
         <source>sylius.taxon.create_header</source>
         <target>New taxon</target>
       </trans-unit>
+      <trans-unit id="3ee8679af3b54e2f8ff944e015c786f7" resname="sylius.taxon.image">
+        <source>sylius.taxon.image</source>
+        <target>Choose image</target>
+      </trans-unit>
       <trans-unit id="1dee435f9aaa23fd39f9330f513be3d7" resname="sylius.taxon.name">
         <source>sylius.taxon.name</source>
         <target>Name</target>
+      </trans-unit>
+      <trans-unit id="32458a71a0707d046acb0b8b70bbba0b" resname="sylius.taxon.no_image">
+        <source>sylius.taxon.no_image</source>
+        <target>There are no image for this taxon</target>
       </trans-unit>
       <trans-unit id="14570359abb67f8a14e33b0a70df40cc" resname="sylius.taxon.no_results">
         <source>sylius.taxon.no_results</source>
@@ -1418,6 +1426,10 @@
         <source>sylius.taxonomy.create_header</source>
         <target>New taxonomy</target>
       </trans-unit>
+      <trans-unit id="0fd8b2b41644eae29694f1f8f2c2c40a" resname="sylius.taxonomy.image">
+        <source>sylius.taxonomy.image</source>
+        <target>Choose image</target>
+      </trans-unit>
       <trans-unit id="73761ee776cbdc59fca8f5adab8483ac" resname="sylius.taxonomy.index_header">
         <source>sylius.taxonomy.index_header</source>
         <target>Categorization &lt;small&gt;Here you see the defined taxonomies&lt;/small&gt;</target>
@@ -1425,6 +1437,10 @@
       <trans-unit id="3994887e084b96e1e18a23c8e4cb1177" resname="sylius.taxonomy.name">
         <source>sylius.taxonomy.name</source>
         <target>Name</target>
+      </trans-unit>
+      <trans-unit id="053e2ad9e8340ee8b9e17baf0e55c90c" resname="sylius.taxonomy.no_image">
+        <source>sylius.taxonomy.no_image</source>
+        <target>There are no image for this taxonomy</target>
       </trans-unit>
       <trans-unit id="69324c688303c98c75ca1baa67437a1d" resname="sylius.taxonomy.no_results">
         <source>sylius.taxonomy.no_results</source>
