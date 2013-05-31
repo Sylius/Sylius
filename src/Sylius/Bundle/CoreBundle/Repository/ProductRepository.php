@@ -70,7 +70,7 @@ class ProductRepository extends CustomizableProductRepository
             ;
         }
 
-        if (empty($sorting['updatedAt'])) {
+        if (empty($sorting)) {
             if (!is_array($sorting)) {
                 $sorting = array();
             }
