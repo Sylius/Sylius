@@ -5,15 +5,15 @@ Feature: Sign in to the store
 
     Background:
         Given there are following users:
-            | username | password | enabled |
-            | bar      | foo      | yes     |
+            | email       | password | enabled |
+            | bar@foo.com | foo      | yes     |
 
     Scenario: Log in with username and password
         Given I am on the store homepage
           And I follow "Login"
          When I fill in the following:
-            | Login    | bar |
-            | Password | foo |
+            | Email    | bar@foo.com |
+            | Password | foo         |
         And I press "Login"
        Then I should be on the store homepage
         And I should see "Logout"
@@ -22,8 +22,8 @@ Feature: Sign in to the store
         Given I am on the store homepage
           And I follow "Login"
          When I fill in the following:
-            | Login    | bar |
-            | Password | bar |
+            | Email    | bar@foo.com |
+            | Password | bar         |
         And I press "Login"
        Then I should be on login page
         And I should see "Bad credentials"
@@ -32,7 +32,7 @@ Feature: Sign in to the store
         Given I am on the store homepage
           And I follow "Login"
          When I fill in the following:
-            | Login    | john |
+            | Email    | john |
             | Password | bar  |
         And I press "Login"
        Then I should be on login page
