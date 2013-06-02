@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\EventListener;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Order number listener spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderNumberListener extends ObjectBehavior
+class OrderNumberListenerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\SalesBundle\Generator\OrderNumberGeneratorInterface $generator

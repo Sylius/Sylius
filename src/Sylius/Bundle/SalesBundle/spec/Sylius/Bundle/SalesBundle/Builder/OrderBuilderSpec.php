@@ -11,18 +11,16 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\Builder;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Default order builder spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderBuilder extends ObjectBehavior
+class OrderBuilderSpec extends ObjectBehavior
 {
     /**
-     * @param \Doctrine\Common\Persistence\ObjectRepository $orderRepository
-     * @param \Doctrine\Common\Persistence\ObjectRepository $itemRepository
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $orderRepository
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $itemRepository
      */
     function let($orderRepository, $itemRepository)
     {

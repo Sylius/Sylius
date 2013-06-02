@@ -263,12 +263,6 @@ class OrderItem implements OrderItemInterface
      */
     public function equals(OrderItemInterface $orderItem)
     {
-        if (null === $this->getSellable() || null === $orderItem->getSellable()) {
-            throw new \InvalidArgumentException(
-                sprintf("Can't compare order items when sellable is not set.")
-            );
-        }
-
-        return $this->getSellable() === $orderItem->getSellable();
+        return $this === $orderItem;
     }
 }

@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Order model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Order extends ObjectBehavior
+class OrderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -109,13 +108,21 @@ class Order extends ObjectBehavior
      */
     function it_calculates_correct_items_total($item1, $item2, $item3)
     {
+        $item1->calculateTotal()->shouldBeCalled();
+        $item2->calculateTotal()->shouldBeCalled();
+        $item3->calculateTotal()->shouldBeCalled();
+
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
         $item3->getTotal()->willReturn(250);
 
-        $item1->equals(ANY_ARGUMENT)->willReturn(false);
-        $item2->equals(ANY_ARGUMENT)->willReturn(false);
-        $item3->equals(ANY_ARGUMENT)->willReturn(false);
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
+        $item3->setOrder($this)->shouldBeCalled();
+
+        $item1->equals(Argument::any())->willReturn(false);
+        $item2->equals(Argument::any())->willReturn(false);
+        $item3->equals(Argument::any())->willReturn(false);
 
         $this
             ->addItem($item1)
@@ -192,6 +199,10 @@ class Order extends ObjectBehavior
         $adjustment2->isNeutral()->willReturn(false);
         $adjustment3->isNeutral()->willReturn(false);
 
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+        $adjustment3->setAdjustable($this)->shouldBeCalled();
+
         $this
             ->addAdjustment($adjustment1)
             ->addAdjustment($adjustment2)
@@ -216,16 +227,25 @@ class Order extends ObjectBehavior
      */
     function it_calculates_correct_total($item1, $item2, $adjustment1, $adjustment2)
     {
+        $item1->calculateTotal()->shouldBeCalled();
+        $item2->calculateTotal()->shouldBeCalled();
+
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
-        $item1->equals(ANY_ARGUMENT)->willReturn(false);
-        $item2->equals(ANY_ARGUMENT)->willReturn(false);
+        $item1->equals(Argument::any())->willReturn(false);
+        $item2->equals(Argument::any())->willReturn(false);
+
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
 
         $adjustment1->isNeutral()->willReturn(false);
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->isNeutral()->willReturn(false);
         $adjustment2->getAmount()->willReturn(-4999);
+
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
 
         $this
             ->addItem($item1)
@@ -247,16 +267,25 @@ class Order extends ObjectBehavior
      */
     function it_ignores_neutral_adjustments_when_calculating_total($item1, $item2, $adjustment1, $adjustment2)
     {
+        $item1->calculateTotal()->shouldBeCalled();
+        $item2->calculateTotal()->shouldBeCalled();
+
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
-        $item1->equals(ANY_ARGUMENT)->willReturn(false);
-        $item2->equals(ANY_ARGUMENT)->willReturn(false);
+        $item1->equals(Argument::any())->willReturn(false);
+        $item2->equals(Argument::any())->willReturn(false);
+
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
 
         $adjustment1->isNeutral()->willReturn(true);
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->isNeutral()->willReturn(false);
         $adjustment2->getAmount()->willReturn(-4999);
+
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
 
         $this
             ->addItem($item1)
@@ -323,7 +352,10 @@ class Order extends ObjectBehavior
         $item1->getQuantity()->willReturn(3);
         $item2->getQuantity()->willReturn(7);
 
-        $item1->equals($item2)->willReturn(true);
+        $item1->setOrder($this)->shouldBeCalled();
+        $item1->setQuantity(10)->shouldBeCalled();
+
+        $item2->equals($item1)->willReturn(true);
 
         $this
             ->addItem($item1)

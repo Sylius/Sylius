@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Total adjustment model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Adjustment extends ObjectBehavior
+class AdjustmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
