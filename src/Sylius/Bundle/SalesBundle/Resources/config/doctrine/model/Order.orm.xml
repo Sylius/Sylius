@@ -6,8 +6,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\SalesBundle\Entity\Order" table="sylius_order">
-        <field name="number" column="number" type="string" nullable="true" />
+    <mapped-superclass name="Sylius\Bundle\SalesBundle\Model\Order">
+        <field name="number" column="number" type="string" unique="true" />
+        <field name="confirmed" column="confirmed" type="boolean" />
+
         <field name="itemsTotal" column="items_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />

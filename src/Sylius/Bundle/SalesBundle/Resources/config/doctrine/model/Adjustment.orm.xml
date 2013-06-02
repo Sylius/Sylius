@@ -6,7 +6,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\SalesBundle\Entity\Adjustment" table="sylius_adjustment">
+    <entity name="Sylius\Bundle\SalesBundle\Model\Adjustment" table="sylius_adjustment">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
         <many-to-one field="order" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" inversed-by="adjustments">
             <join-column name="order_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
@@ -23,6 +26,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-    </mapped-superclass>
+    </entity>
 
 </doctrine-mapping>
