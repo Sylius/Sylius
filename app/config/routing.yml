@@ -9,7 +9,7 @@ fos_user_security:
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
+    prefix: /account/profile
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
@@ -21,4 +21,4 @@ fos_user_resetting:
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /profile
+    prefix: /account
