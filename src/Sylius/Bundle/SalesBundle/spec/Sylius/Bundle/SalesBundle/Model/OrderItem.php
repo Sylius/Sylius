@@ -208,4 +208,28 @@ class OrderItem extends ObjectBehavior
 
         $this->getTotal()->shouldReturn(18487);
     }
+    
+    function it_accepts_only_integer_as_quantity()
+    {
+        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity('52');
+        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity(45.55);
+        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity(false);
+    }
+    
+    function it_accepts_only_integer_as_unit_price()
+    {
+        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice('52');
+        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice(45.55);
+        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice(false);
+    }
+    
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $otherCartItem
+     */
+    function it_does_not_recognize_items_as_equal_if_they_do_not_have_the_same_id($otherCartItem)
+    {
+        $otherCartItem->getId()->willReturn(1);
+
+        $this->equals($otherCartItem)->shouldReturn(false);
+    }
 }

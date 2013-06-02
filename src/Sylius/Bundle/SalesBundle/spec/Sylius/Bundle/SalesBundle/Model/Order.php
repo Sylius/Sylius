@@ -270,9 +270,15 @@ class Order extends ObjectBehavior
         $this->getTotal()->shouldReturn(70000);
     }
 
-    function it_is_confirmed_by_default()
+    function it_is_not_confirmed_by_default()
     {
-        $this->shouldBeConfirmed();
+        $this->shouldNotBeConfirmed();
+    }
+
+    function its_confirmation_status_is_activable()
+    {
+        $this->setConfirmed(true);
+        $this->isConfirmed()->shouldReturn(true);
     }
 
     function its_confirmation_status_is_mutable()
@@ -300,5 +306,30 @@ class Order extends ObjectBehavior
     function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function it_is_empty_by_default()
+    {
+        $this->countItems()->shouldReturn(0);
+        $this->shouldBeEmpty();
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item1
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $item2
+     */
+    function it_sums_the_quantities_of_equal_items($item1, $item2)
+    {
+        $item1->getQuantity()->willReturn(3);
+        $item2->getQuantity()->willReturn(7);
+
+        $item1->equals($item2)->willReturn(true);
+
+        $this
+            ->addItem($item1)
+            ->addItem($item2)
+        ;
+
+        $this->countItems()->shouldReturn(1);
     }
 }

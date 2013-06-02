@@ -101,6 +101,13 @@ class Order implements OrderInterface, TimestampableInterface
     protected $updatedAt;
 
     /**
+     * State
+     *
+     * @var integer
+     */
+    protected $state;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -112,6 +119,7 @@ class Order implements OrderInterface, TimestampableInterface
         $this->total = 0;
         $this->confirmed = true;
         $this->createdAt = new \DateTime();
+        $this->state = OrderStates::INITIAL;
     }
 
     /**
@@ -145,7 +153,7 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function isConfirmed()
     {
-        return $this->confirmed;
+        return OrderStates::ORDER_CONFIRMED === $this->state;
     }
 
     /**
@@ -153,7 +161,7 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function setConfirmed($confirmed)
     {
-        $this->confirmed = (Boolean) $confirmed;
+        $this->state = (Boolean) $confirmed ? OrderStates::ORDER_CONFIRMED : OrderStates::ORDER;
 
         return $this;
     }
@@ -217,10 +225,20 @@ class Order implements OrderInterface, TimestampableInterface
      */
     public function addItem(OrderItemInterface $item)
     {
-        if (!$this->hasItem($item)) {
-            $item->setOrder($this);
-            $this->items->add($item);
+        if ($this->hasItem($item)) {
+            return $this;
         }
+
+        foreach ($this->items as $existingItem) {
+            if ($item->equals($existingItem)) {
+                $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
+
+                return $this;
+            }
+        }
+
+        $item->setOrder($this);
+        $this->items->add($item);
 
         return $this;
     }
@@ -409,4 +427,33 @@ class Order implements OrderInterface, TimestampableInterface
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalItems()
+    {
+        return $this->countItems(); /** @TODO: We may want to delete that */
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalQuantity()
+    {
+        $quantity = 0;
+
+        foreach ($this->items as $item) {
+            $quantity += $item->getQuantity();
+        }
+
+        return $quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        return 0 === $this->countItems();
+    }
 }

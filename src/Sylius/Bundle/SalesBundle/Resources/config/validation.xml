@@ -35,15 +35,6 @@
                 <option name="minMessage">sylius.order_item.quantity.min</option>
             </constraint>
         </property>
-        <property name="unitPrice">
-            <constraint name="NotBlank">
-                <option name="message">sylius.order_item.unit_price.not_blank</option>
-            </constraint>
-            <constraint name="Type">
-                <option name="type">integer</option>
-                <option name="message">sylius.order_item.unit_price.integer</option>
-            </constraint>
-        </property>
     </class>
 
 </constraint-mapping>

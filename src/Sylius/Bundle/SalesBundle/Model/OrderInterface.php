@@ -138,4 +138,30 @@ interface OrderInterface extends AdjustableInterface
      * Items total + Adjustments total.
      */
     public function calculateTotal();
+
+    /**
+     * Returns number of items in cart.
+     *
+     * @return integer
+     */
+    public function getTotalItems();
+
+    /**
+     * Returns total quantity of items in cart.
+     *
+     * @return integer
+     */
+    public function getTotalQuantity();
+
+    /**
+     * Checks whether the cart is empty or not.
+     *
+     * @return Boolean
+     */
+    public function isEmpty();
+
+    /**
+     * Clears all items in cart.
+     */
+    public function clearItems();
 }
