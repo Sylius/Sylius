@@ -44,6 +44,8 @@ class SyliusAddressingExtension extends Extension
 
         $loader->load(sprintf('driver/%s.xml', $driver));
 
+        $container->setParameter('sylius.driver.'.$driver, true);
+
         $container->setParameter('sylius.driver', $driver);
         $container->setParameter('sylius.engine', $config['engine']);
 

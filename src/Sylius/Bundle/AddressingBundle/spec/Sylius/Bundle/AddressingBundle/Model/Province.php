@@ -11,12 +11,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class Province extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Province');
     }
 
-    function it_should_be_Sylius_province()
+    function it_is_Sylius_province()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ProvinceInterface');
     }
@@ -31,7 +31,7 @@ class Province extends ObjectBehavior
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_should_be_mutable()
+    function its_name_is_mutable()
     {
         $this->setName('Texas');
         $this->getName()->shouldReturn('Texas');

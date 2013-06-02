@@ -20,12 +20,12 @@ class ZoneMatcher extends ObjectBehavior
         $this->beConstructedWith($repository);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcher');
     }
 
-    function it_should_be_Sylius_zone_matcher()
+    function it_is_Sylius_zone_matcher()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface');
     }
@@ -33,7 +33,7 @@ class ZoneMatcher extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
      */
-    function it_should_return_null_if_there_are_no_zones($repository, $address)
+    function it_returns_null_if_there_are_no_zones($repository, $address)
     {
         $repository->findAll()->willReturn(array());
         $this->match($address)->shouldReturn(null);

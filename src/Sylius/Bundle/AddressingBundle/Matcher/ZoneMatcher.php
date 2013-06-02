@@ -46,6 +46,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     public function match(AddressInterface $address)
     {
         $zones = array();
+
         foreach ($this->getZones() as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;
@@ -71,6 +72,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     public function matchAll(AddressInterface $address)
     {
         $zones = array();
+
         foreach ($this->getZones() as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[] = $zone;
@@ -110,6 +112,7 @@ class ZoneMatcher implements ZoneMatcherInterface
     protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
         $type = $member->getBelongsTo()->getType();
+
         switch ($type) {
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvince() && $address->getProvince() === $member->getProvince();

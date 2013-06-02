@@ -14,19 +14,22 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Entity\Address" table="sylius_address">
+    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Model\Address">
         <field name="firstName" column="first_name" type="string" />
         <field name="lastName" column="last_name" type="string" />
+
         <many-to-one field="country" target-entity="Sylius\Bundle\AddressingBundle\Model\CountryInterface">
             <join-column name="country_id" referenced-column-name="id" />
         </many-to-one>
         <many-to-one field="province" target-entity="Sylius\Bundle\AddressingBundle\Model\ProvinceInterface">
             <join-column name="province_id" referenced-column-name="id" />
         </many-to-one>
+
         <field name="street" column="street" type="string" />
         <field name="company" column="company" type="string" nullable="true" />
         <field name="city" column="city" type="string" />
         <field name="postcode" column="postcode" type="string" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

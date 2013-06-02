@@ -13,7 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Entity\Zone" table="sylius_zone">
+    <entity name="Sylius\Bundle\AddressingBundle\Model\Zone" table="sylius_zone">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

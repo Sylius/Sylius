@@ -17,15 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.address.class">Sylius\Bundle\AddressingBundle\Entity\DefaultAddress</parameter>
-        <parameter key="sylius.model.country.class">Sylius\Bundle\AddressingBundle\Entity\Country</parameter>
-        <parameter key="sylius.model.province.class">Sylius\Bundle\AddressingBundle\Entity\Province</parameter>
-        <parameter key="sylius.model.zone.class">Sylius\Bundle\AddressingBundle\Entity\Zone</parameter>
-        <parameter key="sylius.model.zone_member.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMember</parameter>
-        <parameter key="sylius.model.zone_member_country.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberCountry</parameter>
-        <parameter key="sylius.model.zone_member_province.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberProvince</parameter>
-        <parameter key="sylius.model.zone_member_zone.class">Sylius\Bundle\AddressingBundle\Entity\ZoneMemberZone</parameter>
-
         <parameter key="sylius.repository.address.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
@@ -45,7 +36,6 @@
                     factory-service="sylius.manager.address"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.address.class%</argument>
                 </service>
@@ -60,7 +50,6 @@
                     factory-service="sylius.manager.country"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.country.class%</argument>
                 </service>
@@ -75,7 +64,6 @@
                     factory-service="sylius.manager.province"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.province.class%</argument>
                 </service>
@@ -90,7 +78,6 @@
                     factory-service="sylius.manager.zone"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.zone.class%</argument>
                 </service>
@@ -105,7 +92,6 @@
                     factory-service="sylius.manager.zone_member_country"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.zone_member_country.class%</argument>
                 </service>
@@ -120,7 +106,6 @@
                     factory-service="sylius.manager.zone_member"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.zone_member.class%</argument>
                 </service>
@@ -135,7 +120,6 @@
                     factory-service="sylius.manager.zone_member_province"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.zone_member_province.class%</argument>
                 </service>
@@ -150,7 +134,6 @@
                     factory-service="sylius.manager.zone_member_zone"
                     factory-method="getClassMetadata"
                     class="Doctrine\ORM\Mapping\ClassMetadata"
-                    public="false"
                 >
                     <argument>%sylius.model.zone_member_zone.class%</argument>
                 </service>

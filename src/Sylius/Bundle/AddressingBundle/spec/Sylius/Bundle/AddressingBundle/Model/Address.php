@@ -11,12 +11,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class Address extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Address');
     }
 
-    function it_should_be_Sylius_address()
+    function it_is_Sylius_address()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\AddressInterface');
     }
@@ -31,7 +31,7 @@ class Address extends ObjectBehavior
         $this->getFirstName()->shouldReturn(null);
     }
 
-    function its_first_name_should_be_mutable()
+    function its_first_name_is_mutable()
     {
         $this->setFirstName('John');
         $this->getFirstName()->shouldReturn('John');
@@ -42,13 +42,13 @@ class Address extends ObjectBehavior
         $this->getLastName()->shouldReturn(null);
     }
 
-    function its_last_name_should_be_mutable()
+    function its_last_name_is_mutable()
     {
         $this->setLastName('Doe');
         $this->getLastName()->shouldReturn('Doe');
     }
 
-    function it_should_return_correct_full_name()
+    function it_returns_correct_full_name()
     {
         $this->setFirstName('John');
         $this->setLastName('Doe');
@@ -64,7 +64,7 @@ class Address extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function its_country_should_be_mutable($country)
+    function its_country_is_mutable($country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);
@@ -119,7 +119,7 @@ class Address extends ObjectBehavior
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function its_province_should_be_mutable($country, $province)
+    function its_province_is_mutable($country, $province)
     {
         $country->hasProvince($province)->willReturn(true);
         $this->setCountry($country);
@@ -168,7 +168,7 @@ class Address extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function it_should_be_valid_if_country_has_no_provinces_and_province_is_not_set($country)
+    function it_is_valid_if_country_has_no_provinces_and_province_is_not_set($country)
     {
         $country->hasProvinces()->willReturn(false);
 
@@ -181,7 +181,7 @@ class Address extends ObjectBehavior
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function it_should_be_valid_if_given_province_belongs_to_selected_country($country, $province)
+    function it_is_valid_if_given_province_belongs_to_selected_country($country, $province)
     {
         $country->hasProvinces()->willReturn(false);
         $country->hasProvince($province)->willReturn(true);
@@ -197,7 +197,7 @@ class Address extends ObjectBehavior
         $this->getStreet()->shouldReturn(null);
     }
 
-    function its_street_should_be_mutable()
+    function its_street_is_mutable()
     {
         $this->setStreet('Foo Street 3/44');
         $this->getStreet()->shouldReturn('Foo Street 3/44');
@@ -208,7 +208,7 @@ class Address extends ObjectBehavior
         $this->getCity()->shouldReturn(null);
     }
 
-    function its_city_should_be_mutable()
+    function its_city_is_mutable()
     {
         $this->setCity('New York');
         $this->getCity()->shouldReturn('New York');
@@ -219,18 +219,18 @@ class Address extends ObjectBehavior
         $this->getPostcode()->shouldReturn(null);
     }
 
-    function its_postcode_should_be_mutable()
+    function its_postcode_is_mutable()
     {
         $this->setPostcode('24154');
         $this->getPostcode()->shouldReturn('24154');
     }
 
-    function its_creation_time_should_be_initialized_by_default()
+    function its_creation_time_is_initialized_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_last_update_time_should_be_undefined_by_default()
+    function its_last_update_time_is_undefined_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }

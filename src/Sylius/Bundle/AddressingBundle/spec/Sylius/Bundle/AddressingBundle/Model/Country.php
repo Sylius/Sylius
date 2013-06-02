@@ -11,12 +11,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class Country extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Country');
     }
 
-    function it_should_be_Sylius_country()
+    function it_is_Sylius_country()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\CountryInterface');
     }
@@ -31,7 +31,7 @@ class Country extends ObjectBehavior
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_should_be_mutable()
+    function its_name_is_mutable()
     {
         $this->setName('United States');
         $this->getName()->shouldReturn('United States');
@@ -42,7 +42,7 @@ class Country extends ObjectBehavior
         $this->getIsoName()->shouldReturn(null);
     }
 
-    function its_iso_name_should_be_mutable()
+    function its_iso_name_is_mutable()
     {
         $this->setIsoName('MX');
         $this->getIsoName()->shouldReturn('MX');
@@ -61,7 +61,7 @@ class Country extends ObjectBehavior
     /**
      * @param Doctrine\Common\Collections\Collection $provinces
      */
-    function its_provinces_should_be_mutable($provinces)
+    function its_provinces_is_mutable($provinces)
     {
         $this->setProvinces($provinces);
         $this->getProvinces()->shouldReturn($provinces);

@@ -11,12 +11,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class ZoneMemberProvince extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMemberProvince');
     }
 
-    function it_should_be_Sylius_zone_member()
+    function it_is_Sylius_zone_member()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMember');
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface');
@@ -40,7 +40,7 @@ class ZoneMemberProvince extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function its_province_should_be_mutable($province)
+    function its_province_is_mutable($province)
     {
         $this->setProvince($province);
         $this->getProvince()->shouldReturn($province);
@@ -49,7 +49,7 @@ class ZoneMemberProvince extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function it_should_return_province_name($province)
+    function it_returns_province_name($province)
     {
         $name = 'New York';
         $province->getName()->willReturn($name);

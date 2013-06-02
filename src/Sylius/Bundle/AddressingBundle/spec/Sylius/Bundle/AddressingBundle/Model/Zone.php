@@ -11,12 +11,12 @@ use PHPSpec2\ObjectBehavior;
  */
 class Zone extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Zone');
     }
 
-    function it_should_be_Sylius_zone()
+    function it_is_Sylius_zone()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ZoneInterface');
     }
@@ -31,7 +31,7 @@ class Zone extends ObjectBehavior
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_should_be_mutable()
+    function its_name_is_mutable()
     {
         $this->setName('Yugoslavia');
         $this->getName()->shouldReturn('Yugoslavia');
@@ -42,7 +42,7 @@ class Zone extends ObjectBehavior
         $this->getType()->shouldReturn(null);
     }
 
-    function its_type_should_be_mutable()
+    function its_type_is_mutable()
     {
         $this->setType('country');
         $this->getType()->shouldReturn('country');
@@ -61,7 +61,7 @@ class Zone extends ObjectBehavior
     /**
      * @param Doctrine\Common\Collections\Collection $members
      */
-    function its_members_should_be_mutable($members)
+    function its_members_is_mutable($members)
     {
         $this->setMembers($members);
         $this->getMembers()->shouldReturn($members);
