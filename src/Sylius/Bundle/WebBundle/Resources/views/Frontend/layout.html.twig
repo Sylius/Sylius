@@ -52,9 +52,11 @@
         <div id="sidebar_left" class="row-fluid">
             <div class="row-fluid">
                 <div class="span3">
+                    {% block sidebar %}
                     <h4>{{ 'sylius.shop_by'|trans }}</h4>
                     {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                     {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                    {% endblock %}
                 </div>
                 <div class="span9">
                 {% block content %}
