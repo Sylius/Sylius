@@ -41,7 +41,7 @@
 
         {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'fos_user_success'] %}
             {% for flash in flashes %}
-                <div class="alert alert-{{ name }}">
+                <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name }}">
                     <a class="close" data-dismiss="alert" href="#">×</a>
                     {{ flash|trans }}
                 </div>
