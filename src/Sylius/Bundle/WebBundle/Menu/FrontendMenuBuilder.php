@@ -248,28 +248,35 @@ class FrontendMenuBuilder extends MenuBuilder
 
         $menu->setCurrent($request->getRequestUri());
 
-        $menu->addChild('account', array(
+        $childOptions = array(
+            'childrenAttributes' => array('class' => 'nav nav-list'),
+            'labelAttributes'    => array('class' => 'nav-header')
+        );
+
+        $child = $menu->addChild($this->translate('sylius.account.title'), $childOptions);
+
+        $child->addChild('account', array(
             'route' => 'sylius_account_homepage',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.homepage')),
-            'labelAttributes' => array('icon' => 'icon-home icon-large', 'iconOnly' => false)
+            'labelAttributes' => array('icon' => 'icon-home', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
 
-        $menu->addChild('profile', array(
+        $child->addChild('profile', array(
             'route' => 'fos_user_profile_edit',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.profile')),
-            'labelAttributes' => array('icon' => 'icon-info-sign icon-large', 'iconOnly' => false)
+            'labelAttributes' => array('icon' => 'icon-info-sign', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.profile'));
 
-        $menu->addChild('password', array(
+        $child->addChild('password', array(
             'route' => 'fos_user_change_password',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.password')),
-            'labelAttributes' => array('icon' => 'icon-lock icon-large', 'iconOnly' => false)
+            'labelAttributes' => array('icon' => 'icon-lock', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.password'));
 
-        $menu->addChild('shop', array(
+        $child->addChild('shop', array(
             'route' => 'sylius_homepage',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.shop')),
-            'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large', 'iconOnly' => false)
+            'labelAttributes' => array('icon' => 'icon-shopping-cart', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.shop'));
 
         return $menu;
