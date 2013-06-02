@@ -14,17 +14,15 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PromotionsBundle\Entity\Coupon" table="sylius_promotion_coupon">
+    <entity name="Sylius\Bundle\PromotionsBundle\Model\Rule" table="sylius_promotion_rule">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="code" type="string" />
-        <field name="usageLimit" column="usage_limit" type="integer" nullable="true" />
-        <field name="used" type="integer" />
-        <many-to-one field="promotion" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="coupons">
+        <field name="type" type="string" />
+        <field name="configuration" type="array" />
+        <many-to-one field="promotion" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="rules">
             <join-column name="promotion_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
-        <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
     </entity>
 
 </doctrine-mapping>

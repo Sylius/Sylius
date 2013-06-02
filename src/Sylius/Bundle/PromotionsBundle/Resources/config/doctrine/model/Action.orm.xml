@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PromotionsBundle\Entity\Action" table="sylius_promotion_action">
+    <entity name="Sylius\Bundle\PromotionsBundle\Model\Action" table="sylius_promotion_action">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>

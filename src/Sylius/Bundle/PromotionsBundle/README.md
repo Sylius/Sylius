@@ -1,37 +1,30 @@
-SyliusPromotionsBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionsBundle.png)](http://travis-ci.org/Sylius/SyliusPromotionsBundle)
-======================
+SyliusPromotionsBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionsBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPromotionsBundle)
+===================
 
-...
+Sylius promotions engine, applicable to any Symfony2 project.
 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.com](http://sylius.com).
 
-Visit [Sylius.org](http://sylius.org).
-
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
 ``` bash
 $ composer install --dev --prefer-dist
-$ bin/phpspec run -f pretty
+$ bin/phpspec run -fpretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://docs.sylius.org/en/latest/bundles/SyliusPromotionsBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusPromotionsBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.com/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
@@ -42,7 +35,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
@@ -74,4 +67,3 @@ Authors
 
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
 See the list of [contributors](https://github.com/Sylius/SyliusPromotionsBundle/contributors).
-
