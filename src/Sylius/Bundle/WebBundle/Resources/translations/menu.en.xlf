@@ -258,6 +258,26 @@
         <source>sylius.frontend.menu.social.twitter</source>
         <target>Twitter</target>
       </trans-unit>
+      <trans-unit id="9144c05a098a6fee4f74327a3b145ff8" resname="sylius.frontend.menu.account.homepage">
+        <source>sylius.frontend.menu.account.homepage</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="7882c9d8888743e5bb14845684f7c23d" resname="sylius.frontend.menu.account.password">
+        <source>sylius.frontend.menu.account.password</source>
+        <target>My password</target>
+      </trans-unit>
+      <trans-unit id="51b90fc4b603c8f0058f87af6f11427f" resname="sylius.frontend.menu.account.profile">
+        <source>sylius.frontend.menu.account.profile</source>
+        <target>My personal information</target>
+      </trans-unit>
+      <trans-unit id="724277edf830f9205a49e4a6e6926c15" resname="sylius.frontend.menu.account.shop">
+        <source>sylius.frontend.menu.account.shop</source>
+        <target>Back to the shop</target>
+      </trans-unit>
+      <trans-unit id="f10a8702eb7ef4f1f5b107c7941efc74" resname="sylius.frontend.menu.main.account">
+        <source>sylius.frontend.menu.main.account</source>
+        <target>My account</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
