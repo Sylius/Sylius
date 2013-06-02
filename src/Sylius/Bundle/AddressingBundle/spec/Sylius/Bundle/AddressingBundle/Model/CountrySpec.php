@@ -120,7 +120,7 @@ class CountrySpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     * @param Doctrine\Common\Collections\Collection $provinces
+     * @param Doctrine\Common\Collections\Collection                 $provinces
      */
     function it_has_fluent_interface($province, $provinces)
     {

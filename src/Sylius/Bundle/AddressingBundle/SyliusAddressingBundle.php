@@ -52,7 +52,7 @@ class SyliusAddressingBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\AddressingBundle\Model',
+            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\AddressingBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_addressing.driver.doctrine/orm'));

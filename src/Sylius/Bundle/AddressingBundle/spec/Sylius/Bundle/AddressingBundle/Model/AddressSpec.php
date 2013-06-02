@@ -90,7 +90,7 @@ class AddressSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
     function it_unsets_the_province_when_erasing_the_country($country, $province)
@@ -123,7 +123,7 @@ class AddressSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
     function its_province_is_mutable($country, $province)
@@ -136,7 +136,7 @@ class AddressSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
     function it_throws_if_trying_to_define_province_which_does_not_belong_to_country($country, $province)
@@ -185,7 +185,7 @@ class AddressSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
     function it_is_valid_if_given_province_belongs_to_selected_country($country, $province)
@@ -254,7 +254,7 @@ class AddressSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
     function it_has_fluent_interface($country, $province)

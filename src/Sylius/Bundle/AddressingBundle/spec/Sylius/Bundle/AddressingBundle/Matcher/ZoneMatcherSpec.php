@@ -47,10 +47,10 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface   $province
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface    $address
+     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface  $province
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberProvince $memberProvince
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface       $zone
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zone
      */
     function it_should_match_address_by_province($repository, $province, $address, $memberProvince, $zone)
     {
@@ -65,10 +65,10 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface   $country
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface  $address
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry $memberCountry
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zone
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface     $zone
      */
     function it_should_match_address_by_country($repository, $country, $address, $memberCountry, $zone)
     {
@@ -83,12 +83,12 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface   $country
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface  $address
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry $memberCountry
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $subZone
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface     $subZone
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberZone    $memberZone
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $rootZone
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface     $rootZone
      */
     function it_should_match_address_for_nested_zones($repository, $country, $address, $memberCountry, $subZone, $memberZone, $rootZone)
     {
@@ -108,13 +108,13 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface   $province
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface    $country
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface    $address
+     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface  $province
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface   $country
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry  $memberCountry
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberProvince $memberProvince
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface       $zoneCountry
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface       $zoneProvince
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zoneCountry
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zoneProvince
      */
     function it_should_match_address_from_province_when_many_are_found(
         $repository, $country, $province, $address, $memberCountry, $memberProvince, $zoneCountry, $zoneProvince
@@ -138,10 +138,10 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface   $country
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface   $address
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
+     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface  $address
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry $memberCountry
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface      $zoneCountry
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface     $zoneCountry
      */
     function it_should_match_all_zones_when_one_zone_for_address_is_defined($repository, $country, $address, $memberCountry, $zoneCountry)
     {
