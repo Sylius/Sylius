@@ -1,32 +1,39 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Default address model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Address extends ObjectBehavior
+class AddressSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Address');
     }
 
-    function it_is_Sylius_address()
+    function it_implements_Sylius_address_interface()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\AddressInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_first_name_by_default()
+    function it_has_no_first_name_by_default()
     {
         $this->getFirstName()->shouldReturn(null);
     }
@@ -37,7 +44,7 @@ class Address extends ObjectBehavior
         $this->getFirstName()->shouldReturn('John');
     }
 
-    function it_should_not_have_last_name_by_default()
+    function it_has_no_last_name_by_default()
     {
         $this->getLastName()->shouldReturn(null);
     }
@@ -56,7 +63,7 @@ class Address extends ObjectBehavior
         $this->getFullName()->shouldReturn('John Doe');
     }
 
-    function it_should_not_have_country_by_default()
+    function it_has_no_country_by_default()
     {
         $this->getCountry()->shouldReturn(null);
     }
@@ -73,7 +80,7 @@ class Address extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function it_should_allow_erasing_the_country($country)
+    function it_allows_to_unset_the_country($country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);
@@ -86,7 +93,7 @@ class Address extends ObjectBehavior
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function it_should_also_erase_province_when_erasing_the_country($country, $province)
+    function it_unsets_the_province_when_erasing_the_country($country, $province)
     {
         $country->hasProvince($province)->willReturn(true);
 
@@ -99,7 +106,7 @@ class Address extends ObjectBehavior
         $this->getProvince()->shouldReturn(null);
     }
 
-    function it_should_not_have_province_by_default()
+    function it_has_no_province_by_default()
     {
         $this->getProvince()->shouldReturn(null);
     }
@@ -107,7 +114,7 @@ class Address extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function it_should_complain_if_trying_to_define_province_without_country($province)
+    function it_throws_exception_if_trying_to_define_province_without_country($province)
     {
         $this
             ->shouldThrow(new \BadMethodCallException('Cannot define province on address without assigned country'))
@@ -132,7 +139,7 @@ class Address extends ObjectBehavior
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function it_should_complain_if_trying_to_define_province_which_does_not_beling_to_country($country, $province)
+    function it_throws_if_trying_to_define_province_which_does_not_belong_to_country($country, $province)
     {
         $country->hasProvince($province)->willReturn(false);
         $this->setCountry($country);
@@ -148,7 +155,7 @@ class Address extends ObjectBehavior
         ;
     }
 
-    function it_should_not_be_valid_by_default()
+    function it_is_not_valid_by_default()
     {
         $this->isValid()->shouldReturn(false);
     }
@@ -156,7 +163,7 @@ class Address extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function it_should_not_be_valid_no_province_selected_and_country_has_provinces($country)
+    function it_is_not_valid_when_no_province_selected_and_country_has_provinces($country)
     {
         $country->hasProvinces()->willReturn(true);
 
@@ -192,7 +199,18 @@ class Address extends ObjectBehavior
         $this->isValid()->shouldReturn(true);
     }
 
-    function it_should_not_have_street_by_default()
+    function it_has_no_company_by_default()
+    {
+        $this->getCompany()->shouldReturn(null);
+    }
+
+    function its_company_is_mutable()
+    {
+        $this->setCompany('Foo Ltd.');
+        $this->getCompany()->shouldReturn('Foo Ltd.');
+    }
+
+    function it_has_no_street_by_default()
     {
         $this->getStreet()->shouldReturn(null);
     }
@@ -203,7 +221,7 @@ class Address extends ObjectBehavior
         $this->getStreet()->shouldReturn('Foo Street 3/44');
     }
 
-    function it_should_not_have_city_by_default()
+    function it_has_no_city_by_default()
     {
         $this->getCity()->shouldReturn(null);
     }
@@ -214,7 +232,7 @@ class Address extends ObjectBehavior
         $this->getCity()->shouldReturn('New York');
     }
 
-    function it_should_not_have_postcode_by_default()
+    function it_has_no_postcode_by_default()
     {
         $this->getPostcode()->shouldReturn(null);
     }
@@ -239,7 +257,7 @@ class Address extends ObjectBehavior
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
      */
-    function it_should_have_fluid_interface($country, $province)
+    function it_has_fluent_interface($country, $province)
     {
         $this->setFirstName('John')->shouldReturn($this);
         $this->setLastName('Doe')->shouldReturn($this);

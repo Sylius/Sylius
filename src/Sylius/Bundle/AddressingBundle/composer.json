@@ -26,6 +26,7 @@
     },
     "require-dev": {
         "phpspec/phpspec":   "2.0.*",
+        "doctrine/orm":      "~2.2",
         "symfony/form":      "2.3.*",
         "symfony/validator": "2.3.*"
     },

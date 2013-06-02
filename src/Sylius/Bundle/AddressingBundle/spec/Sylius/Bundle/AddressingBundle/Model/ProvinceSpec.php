@@ -1,32 +1,39 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Province model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Province extends ObjectBehavior
+class ProvinceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Province');
     }
 
-    function it_is_Sylius_province()
+    function it_implements_Sylius_country_province_interface()
     {
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ProvinceInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_name_by_default()
+    function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
@@ -37,7 +44,7 @@ class Province extends ObjectBehavior
         $this->getName()->shouldReturn('Texas');
     }
 
-    function it_should_not_belong_to_country_by_default()
+    function it_does_not_belong_to_country_by_default()
     {
         $this->getCountry()->shouldReturn(null);
     }
@@ -45,7 +52,7 @@ class Province extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function it_should_defining_the_country($country)
+    function it_allows_to_attach_itself_to_a_country($country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);

@@ -37,7 +37,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->booleanNode('twig')->defaultTrue()->cannotBeEmpty()->end()
             ->end()
         ;
 
@@ -139,7 +138,6 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone_member_province')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
                                 ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneMemberProvince')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneMemberProvinceType')->end()

@@ -1,38 +1,45 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Country zone member model spec.
- *
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
-class ZoneMemberCountry extends ObjectBehavior
+class ZoneMemberCountrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry');
     }
 
-    function it_is_Sylius_zone_member()
+    function it_implements_Sylius_zone_member_interface()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMember');
         $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_country_by_default()
+    function it_has_no_country_by_default()
     {
         $this->getCountry()->shouldReturn(null);
     }
 
-    function it_should_not_belong_to_any_zone_by_default()
+    function it_does_not_belong_to_any_zone_by_default()
     {
         $this->getBelongsTo()->shouldReturn(null);
     }
@@ -51,19 +58,17 @@ class ZoneMemberCountry extends ObjectBehavior
      */
     function it_returns_country_name($country)
     {
-        $name = 'Serbia';
-        $country->getName()->willReturn($name);
-
+        $country->getName()->willReturn('Serbia');
         $this->setCountry($country);
 
-        $this->getName()->shouldReturn($name);
+        $this->getName()->shouldReturn('Serbia');
     }
 
     /**
      * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface    $zone
      */
-    function it_should_have_fluid_interface($country, $zone)
+    function it_has_fluent_interface($country, $zone)
     {
         $this->setCountry($country)->shouldReturn($this);
         $this->setBelongsTo($zone)->shouldReturn($this);
