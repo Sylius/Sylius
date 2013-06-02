@@ -22,7 +22,7 @@
         </many-to-one>
         <field name="categoryRequirement" column="category_requirement" type="integer" />
         <field name="calculator" column="calculator" type="string" />
-        <one-to-many field="rules" target-entity="Sylius\Bundle\ShippingBundle\Model\RuleInterface" mapped-by="mathod">
+        <one-to-many field="rules" target-entity="Sylius\Bundle\ShippingBundle\Model\RuleInterface" mapped-by="method">
             <cascade>
                 <cascade-all />
             </cascade>
