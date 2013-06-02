@@ -22,6 +22,10 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
  */
 class User extends BaseUser
 {
+    protected $firstName;
+
+    protected $lastName;
+
     protected $orders;
     protected $billingAddress;
     protected $shippingAddress;
@@ -143,5 +147,25 @@ class User extends BaseUser
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 }

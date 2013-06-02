@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
         <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user" />
+        <field name="firstName" column="first_name" type="string" nullable="true" />
+        <field name="lastName" column="last_name" type="string" nullable="true" />
         <one-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
             <join-column name="billing_address_id" />
         </one-to-one>

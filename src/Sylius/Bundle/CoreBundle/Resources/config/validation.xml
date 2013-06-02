@@ -62,4 +62,41 @@
         </property>
     </class>
 
+    <class name="Sylius\Bundle\CoreBundle\Entity\User">
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.user.first_name.not_blank</option>
+                <option name="groups">
+                    <value>Profile</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.user.first_name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.user.first_name.max</option>
+                <option name="groups">
+                    <value>Profile</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.user.last_name.not_blank</option>
+                <option name="groups">
+                    <value>Profile</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.user.last_name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.user.last_name.max</option>
+                <option name="groups">
+                    <value>Profile</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+
 </constraint-mapping>
