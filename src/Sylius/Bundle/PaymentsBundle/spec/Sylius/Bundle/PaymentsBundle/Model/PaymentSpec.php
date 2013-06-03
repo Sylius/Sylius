@@ -11,11 +11,9 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Payment instruction.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class Payment extends ObjectBehavior

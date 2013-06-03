@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is an addition to the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -11,21 +11,20 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Credit Card form type spec.
- *
- * @author Dylan Johnson <eponymi.dev@gmail.com>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CreditCardType extends ObjectBehavior
+class PaymentMethodTypeSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
-        $this->beConstructedWith('CreditCard', array('sylius'));
+        $this->beConstructedWith('PaymentMethod', array('sylius'));
     }
 
-    public function it_is_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
@@ -33,40 +32,28 @@ class CreditCardType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    public function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields($builder)
     {
         $builder
-            ->add('type', 'choice', ANY_ARGUMENT)
+            ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('cardholderName', 'text', ANY_ARGUMENT)
+            ->add('description', 'textarea', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('number', 'number', ANY_ARGUMENT)
+            ->add('enabled', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('securityCode', 'number', ANY_ARGUMENT)
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('expiryMonth', 'choice', ANY_ARGUMENT)
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('expiryYear', 'choice', ANY_ARGUMENT)
+            ->add('gateway', 'sylius_payment_gateway_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -77,11 +64,11 @@ class CreditCardType extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function it_defines_assigned_data_class($resolver)
+    function it_defines_assigned_data_class($resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'CreditCard',
+                'data_class'        => 'PaymentMethod',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
