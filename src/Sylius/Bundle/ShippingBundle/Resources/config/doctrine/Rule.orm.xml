@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PromotionsBundle\Entity\Rule" table="sylius_shipping_rule">
+    <entity name="Sylius\Bundle\ShippingBundle\Entity\Rule" table="sylius_shipping_rule">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>

@@ -18,6 +18,11 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <one-to-many field="rules" target-entity="Sylius\Bundle\ShippingBundle\Model\RuleInterface" mapped-by="method">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
     </entity>
 
 </doctrine-mapping>
