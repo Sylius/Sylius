@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PaymentsBundle\Entity\PaymentMethod" table="sylius_payment_method">
+    <entity name="Sylius\Bundle\PaymentsBundle\Model\PaymentMethod" table="sylius_payment_method">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
