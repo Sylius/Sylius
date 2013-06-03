@@ -336,7 +336,7 @@
       </trans-unit>
       <trans-unit id="b90816fa17a609f4ddf5f89e1f59519f" resname="sylius.email">
         <source>sylius.email</source>
-        <target>E-Mail</target>
+        <target>E-Pošta</target>
       </trans-unit>
       <trans-unit id="44f0ed7c15d1974ff291171b96912899" resname="sylius.filter">
         <source>sylius.filter</source>
@@ -364,7 +364,7 @@
       </trans-unit>
       <trans-unit id="9dd0e5f47c51e35f031387e4f5207167" resname="sylius.gallery.slideshow">
         <source>sylius.gallery.slideshow</source>
-        <target>Slideshow</target>
+        <target>Galerija</target>
       </trans-unit>
       <trans-unit id="cb95f07038b3cb0098bccf9ab2a5de8b" resname="sylius.generate">
         <source>sylius.generate</source>
