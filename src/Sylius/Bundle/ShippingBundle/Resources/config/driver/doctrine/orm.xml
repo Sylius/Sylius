@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.model.shipping_category.class">Sylius\Bundle\ShippingBundle\Entity\DefaultShippingCategory</parameter>
         <parameter key="sylius.model.shipping_method.class">Sylius\Bundle\ShippingBundle\Entity\DefaultShippingMethod</parameter>
+        <parameter key="sylius.model.shipping_rule.class">Sylius\Bundle\ShippingBundle\Entity\Rule</parameter>
 
         <parameter key="sylius.repository.shipment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.shipment_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
