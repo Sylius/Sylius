@@ -63,10 +63,12 @@ class LoadZonesData extends DataFixture
         foreach ($members as $id) {
             $zoneMember = $this->getZoneMemberRepository($type)->createNew();
 
-            call_user_func(array(
-                $zoneMember, 'set'.ucfirst($type)),
-                $this->getReference('Sylius.'.ucfirst($type).'.'.$id)
-            );
+            if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
+                call_user_func(array(
+                    $zoneMember, 'set'.ucfirst($type)),
+                    $this->getReference('Sylius.'.ucfirst($type).'.'.$id)
+                );
+            }
 
             $zone->addMember($zoneMember);
         }
