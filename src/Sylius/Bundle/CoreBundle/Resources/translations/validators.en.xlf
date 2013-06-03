@@ -146,6 +146,30 @@
         <source>sylius_taxation.rate.zone.not_blank</source>
         <target>Please enter tax rate zone.</target>
       </trans-unit>
+      <trans-unit id="8518dab2d5a4c2ec2a89fc045bf0a267" resname="sylius.user.first_name.max">
+        <source>sylius.user.first_name.max</source>
+        <target>First name must be not be longer than {{ limit }} characters.</target>
+      </trans-unit>
+      <trans-unit id="9b237441a6dceace1f56b9e2bfe5735a" resname="sylius.user.first_name.min">
+        <source>sylius.user.first_name.min</source>
+        <target>First name must be at least {{ limit }} characters long.</target>
+      </trans-unit>
+      <trans-unit id="0ae371e28b32eadde803aa94e5b33337" resname="sylius.user.first_name.not_blank">
+        <source>sylius.user.first_name.not_blank</source>
+        <target>Please enter a first name.</target>
+      </trans-unit>
+      <trans-unit id="cdea2e1de30b26a46367dd1d9b4427af" resname="sylius.user.last_name.max">
+        <source>sylius.user.last_name.max</source>
+        <target>Last name must be not be longer than {{ limit }} characters.</target>
+      </trans-unit>
+      <trans-unit id="1425fc2b4f6f68ff1a1a85f9eb7e3be3" resname="sylius.user.last_name.min">
+        <source>sylius.user.last_name.min</source>
+        <target>Last name must be at least {{ limit }} characters long.</target>
+      </trans-unit>
+      <trans-unit id="79171aa624a13deea0b33e585c46c588" resname="sylius.user.last_name.not_blank">
+        <source>sylius.user.last_name.not_blank</source>
+        <target>Please enter a last name.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
