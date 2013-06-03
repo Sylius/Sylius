@@ -66,6 +66,10 @@
         <source>sylius.form.product_filter.sku</source>
         <target>SKU</target>
       </trans-unit>
+      <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.currency">
+        <source>sylius.form.settings.general.currency</source>
+        <target>Default currency</target>
+      </trans-unit>
       <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.meta_description">
         <source>sylius.form.settings.general.meta_description</source>
         <target>Meta description</target>
