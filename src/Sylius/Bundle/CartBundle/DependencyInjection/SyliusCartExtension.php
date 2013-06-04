@@ -49,11 +49,10 @@ class SyliusCartExtension extends Extension
         }
 
         $container->setParameter('sylius_cart.driver', $driver);
+        $container->setParameter('sylius_cart.driver.'.$driver, true);
 
         $loader->load(sprintf('driver/%s.xml', $driver));
         $loader->load(sprintf('engine/%s.xml', $engine));
-
-        $container->setParameter('sylius.engine', $engine);
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);

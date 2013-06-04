@@ -17,8 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.cart.class">Sylius\Bundle\CartBundle\Entity\DefaultCart</parameter>
-
         <parameter key="sylius.repository.cart.class">Sylius\Bundle\CartBundle\Entity\CartRepository</parameter>
         <parameter key="sylius.repository.cart_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>

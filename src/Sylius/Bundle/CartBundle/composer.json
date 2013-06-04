@@ -18,17 +18,16 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php":                      ">=5.3.3",
+        "php": ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.1",
-        "sylius/resource-bundle":   "~0.1"
+        "symfony/framework-bundle": "2.3.*",
+        "sylius/resource-bundle":   "0.3.*"
     },
     "require-dev": {
-        "phpspec/phpspec2":         "dev-develop",
-        "phpspec/php-diff":         "dev-master",
-        "symfony/form":             "~2.1",
-        "symfony/validator":        "~2.1",
-        "twig/twig":                "~1.11"
+        "phpspec/phpspec2":  "2.0.*@dev",
+        "symfony/form":      "~2.3",
+        "symfony/validator": "~2.3",
+        "twig/twig":         "~1.11"
     },
     "config": {
         "bin-dir": "bin"
@@ -39,7 +38,7 @@
     "target-dir": "Sylius/Bundle/CartBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.3.x-dev"
+            "dev-master": "0.4.x-dev"
         }
     }
 }
