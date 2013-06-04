@@ -21,6 +21,7 @@
         "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.1",
+        "sylius/resource-bundle":   "0.1.*",
         "mathiasverraes/money":     "dev-master"
     },
     "require-dev": {

@@ -41,7 +41,7 @@ class ExchangeRateType extends ObjectBehavior
     function it_should_build_form_with_proper_fields($builder)
     {
         $builder
-            ->add('currency', 'currency', ANY_ARGUMENT)
+            ->add('currency', 'text', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

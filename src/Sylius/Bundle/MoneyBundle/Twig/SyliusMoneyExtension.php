@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
+use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
 use Twig_Extension;
 use Twig_Filter_Method;
 use Twig_Function_Method;
+use Locale;
+use NumberFormatter;
 
 /**
  * Sylius money twig helper.
@@ -24,13 +27,15 @@ class SyliusMoneyExtension extends Twig_Extension
 {
     protected $defaultCurrency;
     protected $formatter;
+    protected $converter;
 
-    public function __construct($defaultCurrency, $locale = null)
+    public function __construct(CurrencyConverterInterface $converter, $defaultCurrency, $locale = null)
     {
         $this->defaultCurrency = $defaultCurrency;
 
-        $locale = $locale ?: \Locale::getDefault();
-        $this->formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        $locale = $locale ?: Locale::getDefault();
+        $this->formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+        $this->converter = $converter;
     }
 
     /**
@@ -54,6 +59,11 @@ class SyliusMoneyExtension extends Twig_Extension
     public function formatMoney($amount, $currency = null)
     {
         $currency = $currency ?: $this->defaultCurrency;
+
+        if ($currency !== $this->defaultCurrency) {
+            $amount = $this->converter->convert($amount, $currency);
+        }
+
         $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
