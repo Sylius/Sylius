@@ -88,7 +88,7 @@
                     <td>{{ shipment.updatedAt|date }}</td>
                     <td>
                         <div class="pull-right">
-                            <a href="{# path('sylius_backend_shipment_show', {'id': shipment.id}) #}" class="btn">
+                            <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}" class="btn">
                                 <i class="icon-book"></i> {{ 'sylius.show'|trans }}
                             </a>
                         </div>
