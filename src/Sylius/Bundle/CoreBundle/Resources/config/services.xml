@@ -219,6 +219,7 @@
         <!-- twig -->
         <service id="sylius.twig.money" class="%sylius.twig.money.class%">
             <argument type="service" id="sylius.settings.manager" />
+            <argument type="service" id="sylius.currency_converter" />
             <argument>%sylius.locale%</argument>
             <tag name="twig.extension" />
         </service>

@@ -594,6 +594,34 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are following exchange rates:$/
+     */
+    public function thereAreExchangeRates(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsExchangeRate($data['currency'], $data['rate']);
+        }
+    }
+
+    /**
+     * @Given /^I created exchange rate "([^""]*)"$/
+     */
+    public function thereIsExchangeRate($currency, $rate = 1)
+    {
+        $repository = $this->getRepository('exchange_rate');
+        $manager = $this->getEntityManager();
+
+        $exchangeRate = $repository->createNew();
+        $exchangeRate->setCurrency($currency);
+        $exchangeRate->setRate($rate);
+
+        $manager->persist($exchangeRate);
+        $manager->flush();
+
+        return $exchangeRate;
+    }
+
+    /**
      * @Given /^the following shipping categories are configured:$/
      * @Given /^the following shipping categories exist:$/
      * @Given /^there are following shipping categories:$/
