@@ -60,11 +60,11 @@
       </trans-unit>
       <trans-unit id="af5abeac40120831312e8e7bc8f9e687" resname="sylius.backend.menu.main.properties">
         <source>sylius.backend.menu.main.properties</source>
-        <target>Konfiguracija osobina</target>
+        <target>Konfiguracija atributa</target>
       </trans-unit>
       <trans-unit id="2307241e37aed4594c5024bfdd6daf4f" resname="sylius.backend.menu.main.prototypes">
         <source>sylius.backend.menu.main.prototypes</source>
-        <target>Prototipi proizvoda</target>
+        <target>Prototipovi proizvoda</target>
       </trans-unit>
       <trans-unit id="8519017294862107bc163e8f8230b22c" resname="sylius.backend.menu.main.sales">
         <source>sylius.backend.menu.main.sales</source>
@@ -76,15 +76,15 @@
       </trans-unit>
       <trans-unit id="67b31ee62274d0f6a2a2ad4c055d31de" resname="sylius.backend.menu.main.shipping_categories">
         <source>sylius.backend.menu.main.shipping_categories</source>
-        <target>Kategorije pošiljaka</target>
+        <target>Kategorije slanja</target>
       </trans-unit>
       <trans-unit id="0db487586f98e52363e8e92234bea40c" resname="sylius.backend.menu.main.shipping_methods">
         <source>sylius.backend.menu.main.shipping_methods</source>
-        <target>Metodi pošiljaka</target>
+        <target>Načini dostave</target>
       </trans-unit>
       <trans-unit id="9bf052736a106fab9e1596ef29849e2a" resname="sylius.backend.menu.main.stockables">
         <source>sylius.backend.menu.main.stockables</source>
-        <target>Stanja lagera</target>
+        <target>Stanje zaliha</target>
       </trans-unit>
       <trans-unit id="7cf34ab10dea870c2a009352eac284f9" resname="sylius.backend.menu.main.tax_categories">
         <source>sylius.backend.menu.main.tax_categories</source>
@@ -168,11 +168,11 @@
       </trans-unit>
       <trans-unit id="b6468a1b2dae8fafd1186e9be1058b84" resname="sylius.backend.menu.sidebar.properties">
         <source>sylius.backend.menu.sidebar.properties</source>
-        <target>Konfiguracija osobina</target>
+        <target>Konfiguracija atributa</target>
       </trans-unit>
       <trans-unit id="4d036fdb45e10188e4fdbc9367792bdb" resname="sylius.backend.menu.sidebar.prototypes">
         <source>sylius.backend.menu.sidebar.prototypes</source>
-        <target>Prototipi</target>
+        <target>Prototipovi</target>
       </trans-unit>
       <trans-unit id="6840b932d704253195a482d027507718" resname="sylius.backend.menu.sidebar.sales">
         <source>sylius.backend.menu.sidebar.sales</source>
@@ -184,15 +184,15 @@
       </trans-unit>
       <trans-unit id="afbdf4d445acac38529ddb802a329ed2" resname="sylius.backend.menu.sidebar.shipping_categories">
         <source>sylius.backend.menu.sidebar.shipping_categories</source>
-        <target>Kategorije pošiljki</target>
+        <target>Kategorije slanja</target>
       </trans-unit>
       <trans-unit id="7007c8ae07370e45526f1dc178a94514" resname="sylius.backend.menu.sidebar.shipping_methods">
         <source>sylius.backend.menu.sidebar.shipping_methods</source>
-        <target>Metodi pošiljki</target>
+        <target>Načini dostave</target>
       </trans-unit>
       <trans-unit id="6c018645060db97ec15371fb071f68c6" resname="sylius.backend.menu.sidebar.stockables">
         <source>sylius.backend.menu.sidebar.stockables</source>
-        <target>Lager</target>
+        <target>Stanje zaliha</target>
       </trans-unit>
       <trans-unit id="64f660952cc3beebdbb49ed3527eff31" resname="sylius.backend.menu.sidebar.tax_categories">
         <source>sylius.backend.menu.sidebar.tax_categories</source>
@@ -228,11 +228,11 @@
       </trans-unit>
       <trans-unit id="d986cbf1ecce26c5ce35acede3faf0f2" resname="sylius.frontend.menu.main.login">
         <source>sylius.frontend.menu.main.login</source>
-        <target>Prijavite se</target>
+        <target>Prijavi se</target>
       </trans-unit>
       <trans-unit id="043a49bad7a1e1b30c98aa2b88717b4b" resname="sylius.frontend.menu.main.logout">
         <source>sylius.frontend.menu.main.logout</source>
-        <target>Odjavite se</target>
+        <target>Odjavi se</target>
       </trans-unit>
       <trans-unit id="73de6870e2dc5351a69681b64424f691" resname="sylius.frontend.menu.main.register">
         <source>sylius.frontend.menu.main.register</source>
@@ -260,7 +260,7 @@
       </trans-unit>
       <trans-unit resname="sylius.resource.delete">
         <source>sylius.resource.delete</source>
-        <target>%resource% je uspešno obrisan.</target>
+        <target>%resource% je uspešno izbrisan.</target>
       </trans-unit>
     </body>
   </file>
