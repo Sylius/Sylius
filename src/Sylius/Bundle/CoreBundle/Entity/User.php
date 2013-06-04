@@ -14,17 +14,20 @@ namespace Sylius\Bundle\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use DateTime;
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * User entity.
  *
  * @author Paweł Jędrzjewski <pjedrzejewski@diweb.pl>
  */
-class User extends BaseUser
+class User extends BaseUser implements TimestampableInterface
 {
     protected $firstName;
-
     protected $lastName;
+    protected $createdAt;
+    protected $updatedAt;
 
     protected $orders;
     protected $billingAddress;
@@ -33,6 +36,7 @@ class User extends BaseUser
 
     public function __construct()
     {
+        $this->createdAt = new DateTime();
         $this->orders    = new ArrayCollection();
         $this->addresses = new ArrayCollection();
 
@@ -167,5 +171,25 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setUpdatedAt(DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }
