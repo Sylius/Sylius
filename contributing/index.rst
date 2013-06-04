@@ -7,6 +7,7 @@ This part of documentation is based on the great `Symfony2 documentation <http:/
    :hidden:
 
    code/index
+   community/index
    documentation/index
 
 .. include:: /contributing/map.rst.inc

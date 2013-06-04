@@ -6,7 +6,7 @@ Sylius is released under the MIT license.
 The License
 -----------
 
-Copyright (c) 2011-2012 Paweł Jędrzejewski
+Copyright (c) 2011-2013 Paweł Jędrzejewski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
