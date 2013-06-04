@@ -82,6 +82,14 @@
         <source>sylius.form.shipping_method.zone</source>
         <target>Strefa</target>
       </trans-unit>
+      <trans-unit id="03e625de54aede84bb2555c2a568937d" resname="sylius.form.taxon.file">
+        <source>sylius.form.taxon.file</source>
+        <target>Wybierz zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="3c506297d61d1266cc8a2c8c0babe35a" resname="sylius.form.taxonomy.file">
+        <source>sylius.form.taxonomy.file</source>
+        <target>Wybierz zdjęcie</target>
+      </trans-unit>
       <trans-unit id="9ed17ac3646a409b6fc47330a247a445" resname="sylius.form.variant.available_on_demand">
         <source>sylius.form.variant.available_on_demand</source>
         <target>Dostępny na zamówienie</target>
