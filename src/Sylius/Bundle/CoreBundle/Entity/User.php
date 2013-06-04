@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use DateTime;
 
 /**
  * User entity.
@@ -23,8 +24,8 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 class User extends BaseUser
 {
     protected $firstName;
-
     protected $lastName;
+    protected $createdAt;
 
     protected $orders;
     protected $billingAddress;
@@ -33,6 +34,7 @@ class User extends BaseUser
 
     public function __construct()
     {
+        $this->createdAt = new DateTime();
         $this->orders    = new ArrayCollection();
         $this->addresses = new ArrayCollection();
 
@@ -167,5 +169,15 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }

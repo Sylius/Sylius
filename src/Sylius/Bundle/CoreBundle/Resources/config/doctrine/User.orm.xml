@@ -2,6 +2,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
@@ -12,6 +13,9 @@
         <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user" />
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
         <one-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
             <join-column name="billing_address_id" />
         </one-to-one>
