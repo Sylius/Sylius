@@ -35,11 +35,37 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
                 ->scalarNode('locale')->defaultValue('en')->cannotBeEmpty()->end()
                 ->scalarNode('currency')->defaultValue('EUR')->cannotBeEmpty()->end()
             ->end()
         ;
 
+        $this->addClassesSection($rootNode);
+
         return $treeBuilder;
+    }
+
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('classes')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('exchange_rate')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\MoneyBundle\\Form\\Type\\ExchangeRateType')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 }

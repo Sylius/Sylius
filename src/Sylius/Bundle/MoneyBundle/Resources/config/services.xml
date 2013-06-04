@@ -19,9 +19,19 @@
     <parameters>
         <parameter key="sylius.twig.money.class">Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension</parameter>
         <parameter key="sylius.form.type.money.class">Sylius\Bundle\MoneyBundle\Form\Type\MoneyType</parameter>
+        <parameter key="sylius.form.type.exchange_rate.class">Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType</parameter>
     </parameters>
 
     <services>
+      <service id="sylius.controller.exchange_rate" class="%sylius.controller.exchange_rate.class%">
+            <argument>sylius</argument>
+            <argument>exchange_rate</argument>
+            <argument>SyliusMoneyBundle:ExchangeRate</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="sylius.twig.money" class="%sylius.twig.money.class%">
             <argument>%sylius.money.currency%</argument>
             <argument>%sylius.money.locale%</argument>
@@ -31,6 +41,10 @@
         <service id="sylius.form.type.money" class="%sylius.form.type.money.class%">
             <argument>%sylius.money.currency%</argument>
             <tag name="form.type" alias="sylius_money" />
+        </service>
+        <service id="sylius.form.type.exchange_rate" class="%sylius.form.type.exchange_rate.class%">
+            <argument>%sylius.model.exchange_rate.class%</argument>
+            <tag name="form.type" alias="sylius_exchange_rate" />
         </service>
     </services>
 
