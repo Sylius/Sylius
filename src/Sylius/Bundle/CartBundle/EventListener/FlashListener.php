@@ -43,14 +43,14 @@ class FlashListener implements EventSubscriberInterface
     public function setMessages()
     {
         $this->messages = array(
-            SyliusCartEvents::CART_SAVE_COMPLETED    => $this->translator->trans('sylius.cart.cart_save_completed'),
-            SyliusCartEvents::CART_CLEAR_COMPLETED   => $this->translator->trans('sylius.cart.cart_clear_completed'),
+            SyliusCartEvents::CART_SAVE_COMPLETED    => $this->translator->trans('sylius.cart.cart_save_completed', array(), 'flashes'),
+            SyliusCartEvents::CART_CLEAR_COMPLETED   => $this->translator->trans('sylius.cart.cart_clear_completed', array(), 'flashes'),
 
-            SyliusCartEvents::ITEM_ADD_COMPLETED     => $this->translator->trans('sylius.cart.item_add_completed'),
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED  => $this->translator->trans('sylius.cart.item_remove_completed'),
+            SyliusCartEvents::ITEM_ADD_COMPLETED     => $this->translator->trans('sylius.cart.item_add_completed', array(), 'flashes'),
+            SyliusCartEvents::ITEM_REMOVE_COMPLETED  => $this->translator->trans('sylius.cart.item_remove_completed', array(), 'flashes'),
 
-            SyliusCartEvents::ITEM_ADD_ERROR         => $this->translator->trans('sylius.cart.item_add_error'),
-            SyliusCartEvents::ITEM_REMOVE_ERROR      => $this->translator->trans('sylius.cart.item_remove_error')
+            SyliusCartEvents::ITEM_ADD_ERROR         => $this->translator->trans('sylius.cart.item_add_error', array(), 'flashes'),
+            SyliusCartEvents::ITEM_REMOVE_ERROR      => $this->translator->trans('sylius.cart.item_remove_error', array(), 'flashes')
         );
 
         return $this;
