@@ -9,7 +9,7 @@
         <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
 
-        <parameter key="sylius.twig.money.class">Sylius\Bundle\CoreBundle\Twig\SyliusMoneyExtension</parameter>
+        <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
 
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
 
@@ -216,12 +216,11 @@
             <tag name="sylius.promotion_action" type="Percentage_discount" label="Percentage discount" />
         </service>
 
-        <!-- twig -->
-        <service id="sylius.twig.money" class="%sylius.twig.money.class%">
-            <argument type="service" id="sylius.settings.manager" />
-            <argument type="service" id="sylius.currency_converter" />
-            <argument>%sylius.locale%</argument>
-            <tag name="twig.extension" />
+        <!-- money -->
+        <service id="sylius.currency_context" class="%sylius.currency_context.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="session" />
+            <argument>%sylius.money.currency%</argument>
         </service>
     </services>
 

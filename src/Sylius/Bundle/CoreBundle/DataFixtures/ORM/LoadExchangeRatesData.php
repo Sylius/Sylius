@@ -32,7 +32,7 @@ class LoadExchangeRatesData extends DataFixture
             $exchangeRate = $exchangeRateRepository->createNew();
 
             $exchangeRate->setCurrency($name);
-            $exchangeRate->setRate($this->faker->randomFloat());
+            $exchangeRate->setRate($this->faker->randomFloat(null, 0, 100));
 
             $manager->persist($exchangeRate);
         }

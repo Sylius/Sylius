@@ -28,7 +28,7 @@ class User extends BaseUser implements TimestampableInterface
     protected $lastName;
     protected $createdAt;
     protected $updatedAt;
-
+    protected $currency;
     protected $orders;
     protected $billingAddress;
     protected $shippingAddress;
@@ -41,6 +41,16 @@ class User extends BaseUser implements TimestampableInterface
         $this->addresses = new ArrayCollection();
 
         parent::__construct();
+    }
+
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
     /**

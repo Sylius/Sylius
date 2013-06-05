@@ -34,6 +34,7 @@ class LoadUsersData extends DataFixture
         $user->setPlainPassword('sylius');
         $user->setEnabled(true);
         $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
+        $user->setCurrency('EUR');
 
         $manager->persist($user);
         $manager->flush();
@@ -50,6 +51,7 @@ class LoadUsersData extends DataFixture
             $user->setEmail($username.'@example.com');
             $user->setPlainPassword($username);
             $user->setEnabled($this->faker->boolean());
+            $user->setCurrency('EUR');
 
             $manager->persist($user);
 
