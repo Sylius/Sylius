@@ -16,7 +16,7 @@
       </trans-unit>
       <trans-unit id="41289d84073d3bca039e147207c78037" resname="sylius.address.edit.header">
         <source>sylius.address.edit.header</source>
-        <target>Izmena adrese</target>
+        <target>Ažuriranje adrese</target>
       </trans-unit>
       <trans-unit id="1ee551ccff556f9d96bd0c07d3e6628c" resname="sylius.address.firstname">
         <source>sylius.address.firstname</source>
@@ -196,7 +196,7 @@
       </trans-unit>
       <trans-unit id="7f4c16849e705349a57c86aa31517549" resname="sylius.checkout.finalize.order.promotion_discount">
         <source>sylius.checkout.finalize.order.promotion_discount</source>
-        <target>Popusti od promocija</target>
+        <target>Promotivni popust</target>
       </trans-unit>
       <trans-unit id="fb9dab175d90bb42a1e7947e92f5c72b" resname="sylius.checkout.finalize.order.promotion_total">
         <source>sylius.checkout.finalize.order.promotion_total</source>
@@ -256,7 +256,7 @@
       </trans-unit>
       <trans-unit id="ee199c2708bcf82cccaa928a35b55f57" resname="sylius.checkout.security.existing_customer">
         <source>sylius.checkout.security.existing_customer</source>
-        <target>Postojeca mušterija</target>
+        <target>Postojeća mušterija</target>
       </trans-unit>
       <trans-unit id="0789da7ddf260f52f05a74da16a29ca6" resname="sylius.checkout.security.header">
         <source>sylius.checkout.security.header</source>
@@ -276,15 +276,15 @@
       </trans-unit>
       <trans-unit id="e95d4cf3899940e82046cb12a231019d" resname="sylius.checkout.shipping.header">
         <source>sylius.checkout.shipping.header</source>
-        <target>Metod isporuke</target>
+        <target>Način dostave</target>
       </trans-unit>
       <trans-unit id="c4070ca193a5880d8e3185af5e2133ee" resname="sylius.country.add_province">
         <source>sylius.country.add_province</source>
-        <target>Dodajte provinciju</target>
+        <target>Dodaj provinciju</target>
       </trans-unit>
       <trans-unit id="fd7b189dd8e6444011a3a9a01928452a" resname="sylius.country.create">
         <source>sylius.country.create</source>
-        <target>Dodajte zemlju</target>
+        <target>Dodaj zemlju</target>
       </trans-unit>
       <trans-unit id="4523f1e75a0117f4b5bd5964005d204d" resname="sylius.country.create_header">
         <source>sylius.country.create_header</source>
@@ -384,7 +384,7 @@
       </trans-unit>
       <trans-unit id="4b82da7cc4535f95584d2b94f02151cb" resname="sylius.inventory_unit.inventory_state">
         <source>sylius.inventory_unit.inventory_state</source>
-        <target>Stanje lagera</target>
+        <target>Stanje zaliha</target>
       </trans-unit>
       <trans-unit id="0c1b7fa282c11da179cae2fe9e458009" resname="sylius.inventory_unit.name">
         <source>sylius.inventory_unit.name</source>
@@ -392,7 +392,7 @@
       </trans-unit>
       <trans-unit id="7e169bc95984160dc311b9ca625f1fa2" resname="sylius.inventory_unit.no_results">
         <source>sylius.inventory_unit.no_results</source>
-        <target>Nema proizvoda sa lagera za prikaz.</target>
+        <target>Nema proizvoda za prikaz.</target>
       </trans-unit>
       <trans-unit id="cdc0a2a5c5d5cd5a2277927d508f9791" resname="sylius.inventory_unit.shipping_state">
         <source>sylius.inventory_unit.shipping_state</source>
@@ -404,11 +404,11 @@
       </trans-unit>
       <trans-unit id="4cab6cc405cf2fb3f32ccc5e72088f4d" resname="sylius.inventory_unit.updated_at">
         <source>sylius.inventory_unit.updated_at</source>
-        <target>Izmenjeno</target>
+        <target>Ažurirano</target>
       </trans-unit>
       <trans-unit id="4fe0a2de7d941c475f778fea316ba23f" resname="sylius.login">
         <source>sylius.login</source>
-        <target>Prijavite se</target>
+        <target>Prijavljivanje</target>
       </trans-unit>
       <trans-unit id="5dea2cd3c5bc642eb9220c7a1123d922" resname="sylius.login_header">
         <source>sylius.login_header</source>
@@ -432,7 +432,7 @@
       </trans-unit>
       <trans-unit id="efdc8f87c6627a584a8f67386616ce52" resname="sylius.meta.frontend_keywords">
         <source>sylius.meta.frontend_keywords</source>
-        <target>sylius, ecommerce, symfony2, shop, cart, webshop</target>
+        <target>sylius, e-komerc, symfony2, prodavnica, korpa</target>
       </trans-unit>
       <trans-unit id="2d0618f19a2d1f3dda10639899354bec" resname="sylius.meta.frontend_title">
         <source>sylius.meta.frontend_title</source>
@@ -476,11 +476,11 @@
       </trans-unit>
       <trans-unit id="bcac7e4a5b9dd7b4d18eb64fcacca10a" resname="sylius.option.update_header">
         <source>sylius.option.update_header</source>
-        <target>Izmena opcija</target>
+        <target>Ažuriranje opcija</target>
       </trans-unit>
       <trans-unit id="7dbbb8f661a7190c0668aec86603f70e" resname="sylius.option.updated_at">
         <source>sylius.option.updated_at</source>
-        <target>izmenjeno</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="3b6b89bd09520eaf2477ce53a29936ec" resname="sylius.option.values">
         <source>sylius.option.values</source>
@@ -516,7 +516,7 @@
       </trans-unit>
       <trans-unit id="63962f965240cf9389e7ed3dca35cdfd" resname="sylius.order.inventory_tracking">
         <source>sylius.order.inventory_tracking</source>
-        <target>Pracenje lagera</target>
+        <target>Pracenje zaliha</target>
       </trans-unit>
       <trans-unit id="c7d8785b80586e0faf406ffc57ac99df" resname="sylius.order.items_total">
         <source>sylius.order.items_total</source>
@@ -528,7 +528,7 @@
       </trans-unit>
       <trans-unit id="5a15728d62b6c6a07ff0fad2f9006197" resname="sylius.order.no_items">
         <source>sylius.order.no_items</source>
-        <target>Narudžbina ne sadrzi predmete</target>
+        <target>Narudžbina ne sadrzi artikle</target>
       </trans-unit>
       <trans-unit id="4b3483e9f9981c3e81fa2e484c34e935" resname="sylius.order.no_results">
         <source>sylius.order.no_results</source>
@@ -552,7 +552,7 @@
       </trans-unit>
       <trans-unit id="10b9e5ce92a2a4160da8301eb56f4b5e" resname="sylius.order.payment_state">
         <source>sylius.order.payment_state</source>
-        <target>Stanje naplate</target>
+        <target>Stanje plaćanja</target>
       </trans-unit>
       <trans-unit id="0b0dc3ef1aca690c0f2f0b105277c779" resname="sylius.order.payment_states.balance_due">
         <source>sylius.order.payment_states.balance_due</source>
@@ -568,11 +568,11 @@
       </trans-unit>
       <trans-unit id="a5a21eefe7b7d0a07d2b5dd5cc034a39" resname="sylius.order.shipment_state">
         <source>sylius.order.shipment_state</source>
-        <target>Stanje posiljke</target>
+        <target>Stanje pošiljke</target>
       </trans-unit>
       <trans-unit id="31d76442bf902e7994c7a746551d082f" resname="sylius.order.shipment_states.pending">
         <source>sylius.order.shipment_states.pending</source>
-        <target>Na cekanju</target>
+        <target>Na čekanju</target>
       </trans-unit>
       <trans-unit id="bd1abb2f477836c03a17eb0398e509ec" resname="sylius.order.shipments">
         <source>sylius.order.shipments</source>
@@ -608,7 +608,7 @@
       </trans-unit>
       <trans-unit id="4c72a5f475a62837920d00675993b9aa" resname="sylius.order.update_header">
         <source>sylius.order.update_header</source>
-        <target>Izmena narudžbine</target>
+        <target>Ažuriranje narudžbine</target>
       </trans-unit>
       <trans-unit id="1d28ea6e51a93aef13cecac5b8b1b5bb" resname="sylius.order.user">
         <source>sylius.order.user</source>
@@ -644,11 +644,11 @@
       </trans-unit>
       <trans-unit id="7ce14abc81950cace032fcd9134a59b9" resname="sylius.payment.create">
         <source>sylius.payment.create</source>
-        <target>Kreiraj naplatu</target>
+        <target>Kreiraj plaćanje</target>
       </trans-unit>
       <trans-unit id="21a51a3f11c085542aebb7525d2b8805" resname="sylius.payment.create_header">
         <source>sylius.payment.create_header</source>
-        <target>Nova naplata</target>
+        <target>Novo plaćanje</target>
       </trans-unit>
       <trans-unit id="b7c96f1a5e15668865398441cee2641e" resname="sylius.payment.created_at">
         <source>sylius.payment.created_at</source>
@@ -660,7 +660,7 @@
       </trans-unit>
       <trans-unit id="9be1fa97a7b416e250ef73d71567cc32" resname="sylius.payment.index_header">
         <source>sylius.payment.index_header</source>
-        <target>Naplate</target>
+        <target>Plaćanje</target>
       </trans-unit>
       <trans-unit id="a13d05a1fee66fa07ef5060e1204fada" resname="sylius.payment.method">
         <source>sylius.payment.method</source>
@@ -672,19 +672,19 @@
       </trans-unit>
       <trans-unit id="78ab1a69db10f0ba02af568ae1f42321" resname="sylius.payment.update_header">
         <source>sylius.payment.update_header</source>
-        <target>Izmena naplate</target>
+        <target>Ažuriranje plaćanja</target>
       </trans-unit>
       <trans-unit id="af8c70fe7a264bed23b285b596f724f5" resname="sylius.payment.updated_at">
         <source>sylius.payment.updated_at</source>
-        <target>Poslednja naplata</target>
+        <target>Ažurirano</target>
       </trans-unit>
       <trans-unit id="60bb6ed6efbf01815de3ab3ec7ed70fd" resname="sylius.payment_method.create">
         <source>sylius.payment_method.create</source>
-        <target>Kreirajte metod naplate</target>
+        <target>Kreirajte metod plaćanja</target>
       </trans-unit>
       <trans-unit id="825bd3b4263bccd2a5f16b19981117ce" resname="sylius.payment_method.create_header">
         <source>sylius.payment_method.create_header</source>
-        <target>Novi metod naplate</target>
+        <target>Novi metod plaćanja</target>
       </trans-unit>
       <trans-unit id="24fd516d2835d830c952199daed486ee" resname="sylius.payment_method.enabled">
         <source>sylius.payment_method.enabled</source>
@@ -692,7 +692,7 @@
       </trans-unit>
       <trans-unit id="73ec95b7cd3affd72429cc9f969198a1" resname="sylius.payment_method.gateway">
         <source>sylius.payment_method.gateway</source>
-        <target>gateway</target>
+        <target>kapija</target>
       </trans-unit>
       <trans-unit id="a36528398024162229dc13f0a7d44349" resname="sylius.payment_method.id">
         <source>sylius.payment_method.id</source>
@@ -700,7 +700,7 @@
       </trans-unit>
       <trans-unit id="dd3925d7482fba1ad5363f27c78eee03" resname="sylius.payment_method.index_header">
         <source>sylius.payment_method.index_header</source>
-        <target>Metod naplate</target>
+        <target>Metod plaćanja</target>
       </trans-unit>
       <trans-unit id="b3e63fdbbdf953d0cae4e886b63916f3" resname="sylius.payment_method.name">
         <source>sylius.payment_method.name</source>
@@ -708,15 +708,15 @@
       </trans-unit>
       <trans-unit id="c604dc6e5c1cb7597331841c2fe395fe" resname="sylius.payment_method.no_results">
         <source>sylius.payment_method.no_results</source>
-        <target>Nema konfigurisanih metoda naplate.</target>
+        <target>Nema konfigurisanih metoda plaćanja.</target>
       </trans-unit>
       <trans-unit id="35230344a745f9831f9c745cc29b1376" resname="sylius.payment_method.update_header">
         <source>sylius.payment_method.update_header</source>
-        <target>Izmena metoda naplate</target>
+        <target>Ažuriranje metoda plaćanja</target>
       </trans-unit>
       <trans-unit id="7e77b4557f063f259f6a994f7c1bb26e" resname="sylius.payment_method.updated_at">
         <source>sylius.payment_method.updated_at</source>
-        <target>Izmenjeno</target>
+        <target>Ažurirano</target>
       </trans-unit>
       <trans-unit id="e9dfc9469068ea2b0aba68fd96b2721a" resname="sylius.product.add_property">
         <source>sylius.product.add_property</source>
@@ -736,7 +736,7 @@
       </trans-unit>
       <trans-unit id="86cb1f32f7244cd8471e04549728562e" resname="sylius.product.create">
         <source>sylius.product.create</source>
-        <target>Kreirajte proizvod</target>
+        <target>Kreiraj proizvod</target>
       </trans-unit>
       <trans-unit id="20e974f65d4ecc4a59ee655ba246a6c8" resname="sylius.product.create_header">
         <source>sylius.product.create_header</source>
@@ -748,7 +748,7 @@
       </trans-unit>
       <trans-unit id="6a15476f9c711824ee14b098e159bad2" resname="sylius.product.generate_variants">
         <source>sylius.product.generate_variants</source>
-        <target>Generišite varijante</target>
+        <target>Generiši varijante</target>
       </trans-unit>
       <trans-unit id="9d7d7371dde20e1271dbcb88f4b85e77" resname="sylius.product.index_by_taxon_header">
         <source>sylius.product.index_by_taxon_header</source>
@@ -856,15 +856,15 @@
       </trans-unit>
       <trans-unit id="11c4582757733cff795bf9cf6f77b1f4" resname="sylius.product.update_header">
         <source>sylius.product.update_header</source>
-        <target>Izmena proizvoda</target>
+        <target>Ažuriranje proizvoda</target>
       </trans-unit>
       <trans-unit id="b05f514435a6d51c23154f903e659e00" resname="sylius.product.updated_at">
         <source>sylius.product.updated_at</source>
-        <target>Poslednja izmena</target>
+        <target>Ažurirano</target>
       </trans-unit>
       <trans-unit id="57d526d1183ee94d3458f31cb3f325f7" resname="sylius.product.variant_selection_method">
         <source>sylius.product.variant_selection_method</source>
-        <target>Metod izbora vraijante proizvoda</target>
+        <target>Metod izbora varijante proizvoda</target>
       </trans-unit>
       <trans-unit id="a4bb2c4931ba8e00c965dfc2c9c7a1d3" resname="sylius.promotion.actions">
         <source>sylius.promotion.actions</source>
@@ -932,11 +932,11 @@
       </trans-unit>
       <trans-unit id="4dd40790d5f347340298fc7dd3baa8d4" resname="sylius.promotion.update_header">
         <source>sylius.promotion.update_header</source>
-        <target>Izmena promocije</target>
+        <target>Ažuriranje promocije</target>
       </trans-unit>
       <trans-unit id="f95bc34ab60678527c2ba86483cf03a2" resname="sylius.promotion.updated_at">
         <source>sylius.promotion.updated_at</source>
-        <target>Izmenjeno</target>
+        <target>Ažurirano</target>
       </trans-unit>
       <trans-unit id="ea11b16198a5ad8f6a51222d970e33c8" resname="sylius.promotion.usage_limit">
         <source>sylius.promotion.usage_limit</source>
@@ -956,7 +956,7 @@
       </trans-unit>
       <trans-unit id="bdb8cb0153a2f5e8c1854bed7cc3a3b7" resname="sylius.promotion_coupon.create">
         <source>sylius.promotion_coupon.create</source>
-        <target>Dodajte kupon</target>
+        <target>Dodaj kupon</target>
       </trans-unit>
       <trans-unit id="32c74eeea9bd6f74f344a7658a652fed" resname="sylius.promotion_coupon.create_header">
         <source>sylius.promotion_coupon.create_header</source>
@@ -964,7 +964,7 @@
       </trans-unit>
       <trans-unit id="998df5d7da18a542bb8dacd056bfa1a8" resname="sylius.promotion_coupon.generate">
         <source>sylius.promotion_coupon.generate</source>
-        <target>Generišite kupone</target>
+        <target>Generiši kupone</target>
       </trans-unit>
       <trans-unit id="0515968500cc4ca31195dbb566b459aa" resname="sylius.promotion_coupon.generate_header">
         <source>sylius.promotion_coupon.generate_header</source>
@@ -984,7 +984,7 @@
       </trans-unit>
       <trans-unit id="448aa2607d2a0f3c49bb8299ca44625a" resname="sylius.promotion_coupon.update_header">
         <source>sylius.promotion_coupon.update_header</source>
-        <target>Izmena kupona</target>
+        <target>Ažuriranje kupona</target>
       </trans-unit>
       <trans-unit id="464854266b97f4f6c89313ddeed1184a" resname="sylius.promotion_rule.configuration">
         <source>sylius.promotion_rule.configuration</source>
@@ -1004,7 +1004,7 @@
       </trans-unit>
       <trans-unit id="e5fe9cb966262caa0d3584a89e9d1e47" resname="sylius.property.create_header">
         <source>sylius.property.create_header</source>
-        <target>Novi atribu proizvoda</target>
+        <target>Novi atribut proizvoda</target>
       </trans-unit>
       <trans-unit id="f208e7ab1459ea690202db35aad4fac1" resname="sylius.property.index_header">
         <source>sylius.property.index_header</source>
@@ -1032,15 +1032,15 @@
       </trans-unit>
       <trans-unit id="b03f341194928df5109546bb0a227578" resname="sylius.property.update_header">
         <source>sylius.property.update_header</source>
-        <target>Izmena atributa</target>
+        <target>Ažuriranje atributa</target>
       </trans-unit>
       <trans-unit id="9ec9d0c4310f82d8582c70c2178213cc" resname="sylius.property.updated_at">
         <source>sylius.property.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="7ec5caa18aeed16b68cf4934d0b6dc74" resname="sylius.prototype.build">
         <source>sylius.prototype.build</source>
-        <target>Kreirajte prototip</target>
+        <target>Kreiraj prototip</target>
       </trans-unit>
       <trans-unit id="34167df173110e3d28d021d99fc2ee30" resname="sylius.prototype.build_header">
         <source>sylius.prototype.build_header</source>
@@ -1048,7 +1048,7 @@
       </trans-unit>
       <trans-unit id="8b2047ede11d4b27e2c752cd157b6ccf" resname="sylius.prototype.create">
         <source>sylius.prototype.create</source>
-        <target>Kreirajte prototip</target>
+        <target>Kreiraj prototip</target>
       </trans-unit>
       <trans-unit id="afed53cb170f96cb2d174ff2c0c0bf58" resname="sylius.prototype.create_header">
         <source>sylius.prototype.create_header</source>
@@ -1056,7 +1056,7 @@
       </trans-unit>
       <trans-unit id="da2f8618d3b27c12882f258e75b1a990" resname="sylius.prototype.index_header">
         <source>sylius.prototype.index_header</source>
-        <target>Prototipi proizvoda</target>
+        <target>Prototipovi proizvoda</target>
       </trans-unit>
       <trans-unit id="c7f5605c3db005ce3dbfdc3dbfdde17b" resname="sylius.prototype.name">
         <source>sylius.prototype.name</source>
@@ -1064,7 +1064,7 @@
       </trans-unit>
       <trans-unit id="10e3b43839ebe3a43cf84b5bd2c7045f" resname="sylius.prototype.no_results">
         <source>sylius.prototype.no_results</source>
-        <target>Nema definisanih prototipa.</target>
+        <target>Nema definisanih prototipova.</target>
       </trans-unit>
       <trans-unit id="00446397c07cfa9ffe94b98dce8c06e0" resname="sylius.prototype.options">
         <source>sylius.prototype.options</source>
@@ -1076,11 +1076,11 @@
       </trans-unit>
       <trans-unit id="af66900180837d64dd6ad1c13150a9ce" resname="sylius.prototype.update_header">
         <source>sylius.prototype.update_header</source>
-        <target>Izmena prototipa</target>
+        <target>Ažuriranje prototipa</target>
       </trans-unit>
       <trans-unit id="f3893ff1417fa4331255630e43d065d6" resname="sylius.prototype.updated_at">
         <source>sylius.prototype.updated_at</source>
-        <target>izmenjeno</target>
+        <target>Ažurirano</target>
       </trans-unit>
       <trans-unit id="53a438c23549bbae146ec77cd26265f2" resname="sylius.province.provinces">
         <source>sylius.province.provinces</source>
@@ -1096,7 +1096,7 @@
       </trans-unit>
       <trans-unit id="10fa10c1f6224e5247cd40d74fedb994" resname="sylius.settings.general_header">
         <source>sylius.settings.general_header</source>
-        <target>Opšta podešavanja</target>
+        <target>Generalna podešavanja</target>
       </trans-unit>
       <trans-unit id="c49d55a02fb0e73e8c0366be926e1610" resname="sylius.settings.taxation_header">
         <source>sylius.settings.taxation_header</source>
@@ -1116,11 +1116,11 @@
       </trans-unit>
       <trans-unit id="4443ea194da7fef6d7a5b0eb15f1c2a6" resname="sylius.shipment.inventory_state">
         <source>sylius.shipment.inventory_state</source>
-        <target>stanje lagera</target>
+        <target>stanje zaliha</target>
       </trans-unit>
       <trans-unit id="2a35d80e02f6d486b8ed9b536efe06a3" resname="sylius.shipment.manage">
         <source>sylius.shipment.manage</source>
-        <target>Upravljajte isporukama</target>
+        <target>Upravljajte pošiljkama</target>
       </trans-unit>
       <trans-unit id="fa04dde20962a2c25323e2c69296db22" resname="sylius.shipment.method">
         <source>sylius.shipment.method</source>
@@ -1140,7 +1140,7 @@
       </trans-unit>
       <trans-unit id="86ef0135527b214e00dafd292144240d" resname="sylius.shipment.no_results">
         <source>sylius.shipment.no_results</source>
-        <target>Nema isporuka za prikaz.</target>
+        <target>Nema pošiljaka za prikaz.</target>
       </trans-unit>
       <trans-unit id="a176b32d6df6fde032d272941a01a330" resname="sylius.shipment.order">
         <source>sylius.shipment.order</source>
@@ -1148,7 +1148,7 @@
       </trans-unit>
       <trans-unit id="39312ae8b822f349033dbdf6eb509ef6" resname="sylius.shipment.show_header">
         <source>sylius.shipment.show_header</source>
-        <target>Detalji isporuke</target>
+        <target>Detalji pošiljke</target>
       </trans-unit>
       <trans-unit id="928acc87435f0a958ec523b27c61cdb5" resname="sylius.shipment.sku">
         <source>sylius.shipment.sku</source>
@@ -1160,19 +1160,19 @@
       </trans-unit>
       <trans-unit id="3a4fc7c1f7ec07176644e757d8ee988e" resname="sylius.shipment.updated_at">
         <source>sylius.shipment.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="e6da3183b9d8d5e87e53b57a213d8f05" resname="sylius.shipment_category.manage">
         <source>sylius.shipment_category.manage</source>
-        <target>Upravljajte kategorijama isporuke</target>
+        <target>Upravljajte kategorijama slanja</target>
       </trans-unit>
       <trans-unit id="1e9ba86eccf9987a4c79ee5ee28b03f6" resname="sylius.shipping_category.create">
         <source>sylius.shipping_category.create</source>
-        <target>Nova kategorija isporuke</target>
+        <target>Nova kategorija slanja</target>
       </trans-unit>
       <trans-unit id="ddd8647f39d2300f93976f03cae476b0" resname="sylius.shipping_category.create_header">
         <source>sylius.shipping_category.create_header</source>
-        <target>Nova kategorija isporuke</target>
+        <target>Nova kategorija slanja</target>
       </trans-unit>
       <trans-unit id="5fa7919b7e7ded151197073935870270" resname="sylius.shipping_category.id">
         <source>sylius.shipping_category.id</source>
@@ -1180,11 +1180,11 @@
       </trans-unit>
       <trans-unit id="d19ba00585c42d765021a2d4fd377a73" resname="sylius.shipping_category.index_header">
         <source>sylius.shipping_category.index_header</source>
-        <target>Kategorije isporuke</target>
+        <target>Kategorije slanja</target>
       </trans-unit>
       <trans-unit id="0d2778d8d5138c13cd11c3555423ad01" resname="sylius.shipping_category.manage">
         <source>sylius.shipping_category.manage</source>
-        <target>Upravljajte kategorijama isporuke</target>
+        <target>Upravljajte kategorijama slanja</target>
       </trans-unit>
       <trans-unit id="b4ad7dffd894daafc06e0da3d0edbff8" resname="sylius.shipping_category.name">
         <source>sylius.shipping_category.name</source>
@@ -1192,15 +1192,15 @@
       </trans-unit>
       <trans-unit id="9d71256966c1dcf51039011bd2bfa0fc" resname="sylius.shipping_category.no_results">
         <source>sylius.shipping_category.no_results</source>
-        <target>Nema konfigurisanih kategorija isporuke.</target>
+        <target>Nema konfigurisanih kategorija slanja.</target>
       </trans-unit>
       <trans-unit id="828c9df6e25add5c9e7800d78a436c0a" resname="sylius.shipping_category.update_header">
         <source>sylius.shipping_category.update_header</source>
-        <target>Ažuriranje kategorije pošiljke</target>
+        <target>Ažuriranje kategorije slanja</target>
       </trans-unit>
       <trans-unit id="ed5082d714457a6a6979a5b018997d89" resname="sylius.shipping_category.updated_at">
         <source>sylius.shipping_category.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="e9b453c96ed919e5897089ac3d0dae9e" resname="sylius.shipping_method.calculator">
         <source>sylius.shipping_method.calculator</source>
@@ -1212,11 +1212,11 @@
       </trans-unit>
       <trans-unit id="ea14240780fb437a0a0dcf4857b15106" resname="sylius.shipping_method.create">
         <source>sylius.shipping_method.create</source>
-        <target>Novi metod isporuke</target>
+        <target>Novi način dostave</target>
       </trans-unit>
       <trans-unit id="86c66b8d5cbe63efad083028b9a5e98e" resname="sylius.shipping_method.create_header">
         <source>sylius.shipping_method.create_header</source>
-        <target>Novi metod isporuke</target>
+        <target>Novi način dostave</target>
       </trans-unit>
       <trans-unit id="bed2649db04d680f540ada7ecd52a750" resname="sylius.shipping_method.enabled">
         <source>sylius.shipping_method.enabled</source>
@@ -1228,11 +1228,11 @@
       </trans-unit>
       <trans-unit id="5a4585156b35b5ecabeef6b69d44c105" resname="sylius.shipping_method.index_header">
         <source>sylius.shipping_method.index_header</source>
-        <target>Metodi isporuke</target>
+        <target>Načini dostave</target>
       </trans-unit>
       <trans-unit id="ca82c4373065a55649bb5228421acde5" resname="sylius.shipping_method.manage">
         <source>sylius.shipping_method.manage</source>
-        <target>Upravljajte metodima isporuke</target>
+        <target>Upravljajte načinima dostave</target>
       </trans-unit>
       <trans-unit id="880bd3a61456e234a3cb2054e7353fb9" resname="sylius.shipping_method.name">
         <source>sylius.shipping_method.name</source>
@@ -1240,19 +1240,19 @@
       </trans-unit>
       <trans-unit id="5c51bcf96e5e2f0fc0a5b5b84e3c9ebd" resname="sylius.shipping_method.no_results">
         <source>sylius.shipping_method.no_results</source>
-        <target>Nema konfigurisanih metoda isporuke.</target>
+        <target>Nema konfigurisanih načina dostave.</target>
       </trans-unit>
       <trans-unit id="d61a410551d1102a3b96de710e35d435" resname="sylius.shipping_method.show_header">
         <source>sylius.shipping_method.show_header</source>
-        <target>Detalji metoda isporuke</target>
+        <target>Detalji nalina dostave</target>
       </trans-unit>
       <trans-unit id="8a1e1b5093f0dac548af6bba3657068a" resname="sylius.shipping_method.update_header">
         <source>sylius.shipping_method.update_header</source>
-        <target>Izmena metoda isporuke</target>
+        <target>Ažuriranje načina dostave</target>
       </trans-unit>
       <trans-unit id="3f3841131dd2f373def4c51378fad857" resname="sylius.shipping_method.updated_at">
         <source>sylius.shipping_method.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="50c6650d8a30a661d1ec8a3dd91b4dc3" resname="sylius.shipping_method.zone">
         <source>sylius.shipping_method.zone</source>
@@ -1268,7 +1268,7 @@
       </trans-unit>
       <trans-unit id="5b19cea474365ab0f38c4662924eb810" resname="sylius.stockable.index_header">
         <source>sylius.stockable.index_header</source>
-        <target>Lager &lt;small&gt;Pregled stanja lagera&lt;/small&gt;</target>
+        <target>Lager &lt;small&gt;Pregled stanja zaliha&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="edc2233df92cca06b22dadce417facd6" resname="sylius.stockable.name">
         <source>sylius.stockable.name</source>
@@ -1276,11 +1276,11 @@
       </trans-unit>
       <trans-unit id="21dd0fb5d348eca9b8d80dc3aacca134" resname="sylius.stockable.no_results">
         <source>sylius.stockable.no_results</source>
-        <target>Nema rezultata lagera.</target>
+        <target>Nema zaliha.</target>
       </trans-unit>
       <trans-unit id="f508f517cacabab8f2c79fd522c96910" resname="sylius.stockable.on_hand">
         <source>sylius.stockable.on_hand</source>
-        <target>nivo lagera</target>
+        <target>nivo zaliha</target>
       </trans-unit>
       <trans-unit id="5be631b3a5ed175fa93c98a86aea64a8" resname="sylius.stockable.sku">
         <source>sylius.stockable.sku</source>
@@ -1288,7 +1288,7 @@
       </trans-unit>
       <trans-unit id="cb7f83b0d7629ca70d21f18b0915f209" resname="sylius.stockable.updated_at">
         <source>sylius.stockable.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="fce0ccb2944c3cacfef8154a9a4ca809" resname="sylius.tax_category.create">
         <source>sylius.tax_category.create</source>
@@ -1328,11 +1328,11 @@
       </trans-unit>
       <trans-unit id="4cbd002df19f5814759af46af4849a92" resname="sylius.tax_category.update_header">
         <source>sylius.tax_category.update_header</source>
-        <target>Izmena kategorije poreza</target>
+        <target>Ažuriranje kategorije poreza</target>
       </trans-unit>
       <trans-unit id="9830964604d095fedf8c6752b4169a35" resname="sylius.tax_category.updated_at">
         <source>sylius.tax_category.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="bc79b1257540c1e89b9e5ae8eff6376d" resname="sylius.tax_rate.amount">
         <source>sylius.tax_rate.amount</source>
@@ -1344,7 +1344,7 @@
       </trans-unit>
       <trans-unit id="e298731887653e3802eeeb46f6c9a88e" resname="sylius.tax_rate.category">
         <source>sylius.tax_rate.category</source>
-        <target>sylius.tax_rate.category</target>
+        <target>Kategorija poreske stope</target>
       </trans-unit>
       <trans-unit id="c36d5793b834404f9ccb4fdd8b1ca423" resname="sylius.tax_rate.create">
         <source>sylius.tax_rate.create</source>
@@ -1360,11 +1360,11 @@
       </trans-unit>
       <trans-unit id="25545777f71995f6711dfae5e459f212" resname="sylius.tax_rate.index_header">
         <source>sylius.tax_rate.index_header</source>
-        <target>Nivo poreza</target>
+        <target>Poreske stope</target>
       </trans-unit>
       <trans-unit id="7ab823b927fb0d408974dd64deb8131b" resname="sylius.tax_rate.manage">
         <source>sylius.tax_rate.manage</source>
-        <target>Upravljajte nivoima proizvoda</target>
+        <target>Upravljajte poreskim stopama</target>
       </trans-unit>
       <trans-unit id="d30102cbbe9503b4394badeef9c0e1f3" resname="sylius.tax_rate.name">
         <source>sylius.tax_rate.name</source>
@@ -1372,7 +1372,7 @@
       </trans-unit>
       <trans-unit id="77160f13e354e4d970d7ef5f65157c65" resname="sylius.tax_rate.no_results">
         <source>sylius.tax_rate.no_results</source>
-        <target>Nema konfigurisanih nivoa proizvoda.</target>
+        <target>Nema konfigurisanih poreskih stopa.</target>
       </trans-unit>
       <trans-unit id="f5ec8631f2d77c4c98b92955069984ec" resname="sylius.tax_rate.show_header">
         <source>sylius.tax_rate.show_header</source>
@@ -1380,23 +1380,23 @@
       </trans-unit>
       <trans-unit id="153c08cf050f642d1cfa0ce6d06143f6" resname="sylius.tax_rate.update_header">
         <source>sylius.tax_rate.update_header</source>
-        <target>Izmena nivoa poreza</target>
+        <target>Ažuriranje poreske stope</target>
       </trans-unit>
       <trans-unit id="f67ad12e56dcc4a7c1371d13e5d3dc63" resname="sylius.tax_rate.updated_at">
         <source>sylius.tax_rate.updated_at</source>
-        <target>poslednja izmena</target>
+        <target>ažurirano</target>
       </trans-unit>
       <trans-unit id="283c93c20e1546fe3b2db9f8f422c321" resname="sylius.tax_rate.zone">
         <source>sylius.tax_rate.zone</source>
-        <target>sylius.tax_rate.zone</target>
+        <target>Zona</target>
       </trans-unit>
       <trans-unit id="5e6583e9013f7b973968aec3daf61d82" resname="sylius.taxon.create">
         <source>sylius.taxon.create</source>
-        <target>Novi taxon</target>
+        <target>Kreiraj kategoriju</target>
       </trans-unit>
       <trans-unit id="cc020d7e0de1dd9433ee08b1cb8d3d53" resname="sylius.taxon.create_header">
         <source>sylius.taxon.create_header</source>
-        <target>Novi taxon</target>
+        <target>Nova kategorija</target>
       </trans-unit>
       <trans-unit id="3ee8679af3b54e2f8ff944e015c786f7" resname="sylius.taxon.image">
         <source>sylius.taxon.image</source>
@@ -1416,7 +1416,7 @@
       </trans-unit>
       <trans-unit id="be8f3526efb6d1b32012cfe9e2059ad3" resname="sylius.taxon.update_header">
         <source>sylius.taxon.update_header</source>
-        <target>Izmena kategorizacije</target>
+        <target>Ažuriranje kategorizacije</target>
       </trans-unit>
       <trans-unit id="ead07b2e58d2c8dd005c8685ab63185c" resname="sylius.taxonomy.create">
         <source>sylius.taxonomy.create</source>
@@ -1452,7 +1452,7 @@
       </trans-unit>
       <trans-unit id="eeed0e5babbe776a907ee0eeb64fe1bd" resname="sylius.taxonomy.update_header">
         <source>sylius.taxonomy.update_header</source>
-        <target>Editing taxonomy</target>
+        <target>Ažuriranje kategorizacije</target>
       </trans-unit>
       <trans-unit id="e4b61ff5e1add3eef1f9a5433aab958e" resname="sylius.user.email">
         <source>sylius.user.email</source>
@@ -1460,7 +1460,7 @@
       </trans-unit>
       <trans-unit id="7fa56bc8796d1d7eaf984812208245ae" resname="sylius.user.enabled">
         <source>sylius.user.enabled</source>
-        <target>Potvrđen?</target>
+        <target>Omogućeno?</target>
       </trans-unit>
       <trans-unit id="e83931b949194e6c0f2b0ec26c80afe1" resname="sylius.user.filter.all">
         <source>sylius.user.filter.all</source>
@@ -1468,7 +1468,7 @@
       </trans-unit>
       <trans-unit id="376db4cf082634bd4e6720cce5a483dd" resname="sylius.user.filter.unconfirmed">
         <source>sylius.user.filter.unconfirmed</source>
-        <target>Ne potvrđeni nalozi</target>
+        <target>Nepotvrđeni nalozi</target>
       </trans-unit>
       <trans-unit id="3da9dd6cb0fbafd069230df3f6ef9837" resname="sylius.user.general_info">
         <source>sylius.user.general_info</source>
@@ -1484,7 +1484,7 @@
       </trans-unit>
       <trans-unit id="73110b9b63a7a83cb1479914f0842ba9" resname="sylius.user.last_login">
         <source>sylius.user.last_login</source>
-        <target>Poslednje logovanje</target>
+        <target>Poslednje prijavljivanje</target>
       </trans-unit>
       <trans-unit id="2fa67405e07e8ca4d30a3d6424b50940" resname="sylius.user.no_results">
         <source>sylius.user.no_results</source>
@@ -1492,11 +1492,11 @@
       </trans-unit>
       <trans-unit id="746e566b4da02b21b20561fdfef988e5" resname="sylius.user.order.no_results">
         <source>sylius.user.order.no_results</source>
-        <target>sylius.user.order.no_results</target>
+        <target>Nema korinika.</target>
       </trans-unit>
       <trans-unit id="430a7b28909dfcb968875b3862593d6d" resname="sylius.user.orders">
         <source>sylius.user.orders</source>
-        <target>sylius.user.orders</target>
+        <target>Nema narudžbina.</target>
       </trans-unit>
       <trans-unit id="b541c0a6d2177cb6764afd02a184e17b" resname="sylius.user.recent_header">
         <source>sylius.user.recent_header</source>
@@ -1512,7 +1512,7 @@
       </trans-unit>
       <trans-unit id="c2928b60e4bb3e0a42ed78727273473c" resname="sylius.variant.add_image">
         <source>sylius.variant.add_image</source>
-        <target>Dodajte sliku</target>
+        <target>Dodaj sliku</target>
       </trans-unit>
       <trans-unit id="1cf516de2d6cc5bb72b02e5253450d81" resname="sylius.variant.availability">
         <source>sylius.variant.availability</source>
@@ -1524,7 +1524,7 @@
       </trans-unit>
       <trans-unit id="467adf8aeb4013a2ca806f30bd6c4d5c" resname="sylius.variant.create">
         <source>sylius.variant.create</source>
-        <target>Kreirajte varijantu</target>
+        <target>Kreiraj varijantu</target>
       </trans-unit>
       <trans-unit id="29e7399f3c118ff3738f7badd0795b13" resname="sylius.variant.create_header">
         <source>sylius.variant.create_header</source>
@@ -1532,7 +1532,7 @@
       </trans-unit>
       <trans-unit id="8801ee2c0f91a8e411e70bc10a463fa9" resname="sylius.variant.delete_image">
         <source>sylius.variant.delete_image</source>
-        <target>Izbrisite sliku</target>
+        <target>Izbrišite sliku</target>
       </trans-unit>
       <trans-unit id="1534e124dcdf95e19eb15b5cd58b12f2" resname="sylius.variant.last_update">
         <source>sylius.variant.last_update</source>
@@ -1552,11 +1552,11 @@
       </trans-unit>
       <trans-unit id="4a8ed0575bd0bd7c232e9ba37e8c17a3" resname="sylius.variant.stock">
         <source>sylius.variant.stock</source>
-        <target>Lager</target>
+        <target>Zalihe</target>
       </trans-unit>
       <trans-unit id="6860a669917a3b8c316ca41afc192fbd" resname="sylius.variant.update_header">
         <source>sylius.variant.update_header</source>
-        <target>Izmena varijante</target>
+        <target>Ažuriranje varijante</target>
       </trans-unit>
       <trans-unit id="e5a4711d61ec8c3eef696dfa715c14e6" resname="sylius.yes">
         <source>sylius.yes</source>
@@ -1564,7 +1564,7 @@
       </trans-unit>
       <trans-unit id="943429649ff465eaa9e347d926dcf53a" resname="sylius.zone.add_member">
         <source>sylius.zone.add_member</source>
-        <target>Dodajte clana</target>
+        <target>Dodajte člana</target>
       </trans-unit>
       <trans-unit id="c2de300bb9129bd61f6964e72535940b" resname="sylius.zone.create">
         <source>sylius.zone.create</source>
@@ -1576,7 +1576,7 @@
       </trans-unit>
       <trans-unit id="0a46e2b9b142d4c7045a610f1faacc10" resname="sylius.zone.index_header">
         <source>sylius.zone.index_header</source>
-        <target>ZOne</target>
+        <target>Zone</target>
       </trans-unit>
       <trans-unit id="852d9e428284ef1b18d111452cd5d048" resname="sylius.zone.manage">
         <source>sylius.zone.manage</source>
@@ -1600,11 +1600,11 @@
       </trans-unit>
       <trans-unit id="395a3c1bdafd193fe5f973c10fa48c92" resname="sylius.zone.update_header">
         <source>sylius.zone.update_header</source>
-        <target>Izmena zone</target>
+        <target>Ažuriranje zone</target>
       </trans-unit>
       <trans-unit id="b81d7e96fb8731029fd822cc3d845591" resname="sylius.zone_member.members">
         <source>sylius.zone_member.members</source>
-        <target>Clanovi</target>
+        <target>Članovi</target>
       </trans-unit>
       <trans-unit resname="sylius.form.taxonomy.name">
         <source>sylius.form.taxonomy.name</source>
@@ -1616,7 +1616,7 @@
       </trans-unit>
       <trans-unit resname="sylius.user.orders">
         <source>sylius.user.orders</source>
-        <target>Narudzbine korisnika</target>
+        <target>Narudžbine korisnika</target>
       </trans-unit>
       <trans-unit resname="sylius.user.order.no_results">
         <source>sylius.user.order.no_results</source>
@@ -1632,11 +1632,11 @@
       </trans-unit>
       <trans-unit resname="sylius.form.taxon.permalink">
         <source>sylius.form.taxon.permalink</source>
-        <target>Permalink</target>
+        <target>Link</target>
       </trans-unit>
       <trans-unit resname="sylius.resource.delete">
         <source>sylius.form.taxon.file</source>
-        <target>Permalink</target>
+        <target>Fajl</target>
       </trans-unit>
     </body>
   </file>
