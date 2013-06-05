@@ -11,7 +11,7 @@
 
 {% if not cart.empty %}
 <div class="alert alert-info">
-<strong>{{ cart.total|sylius_money }}</strong>, {{ 'sylius.cart.total_items'|transchoice(cart.totalItems, {'%count%': cart.totalItems}) }}
+<strong>{{ cart.total|sylius_price }}</strong>, {{ 'sylius.cart.total_items'|transchoice(cart.totalItems, {'%count%': cart.totalItems}) }}
 </div>
 
 {{ form_errors(form) }}
@@ -38,7 +38,7 @@
         <tr>
             <td colspan="6"></td>
             <td style="text-align: right;">
-                <strong>{{ 'sylius.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_money }}
+                <strong>{{ 'sylius.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}
             </td>
         </tr>
     </tfoot>
