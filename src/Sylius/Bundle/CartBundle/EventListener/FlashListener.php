@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CartBundle\EventListener;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Bundle\FrameworkBundle\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
@@ -36,14 +36,14 @@ class FlashListener implements EventSubscriberInterface
     private $session;
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     private $translator;
 
     public function setMessages()
     {
         $this->messages = array(
-            SyliusCartEvents::CART_SAVE_COMPLETED    => $this->translator->trans('sylius.cart.cart_save_completed'),
+            SyliusCartEvents::CART_SAVE_COMPLETED    => 'sylius.cart.cart_save_completed',
             SyliusCartEvents::CART_CLEAR_COMPLETED   => $this->translator->trans('sylius.cart.cart_clear_completed'),
 
             SyliusCartEvents::ITEM_ADD_COMPLETED     => $this->translator->trans('sylius.cart.item_add_completed'),
@@ -58,9 +58,9 @@ class FlashListener implements EventSubscriberInterface
 
     /**
      * @param SessionInterface $session
-     * @param Translator $translator
+     * @param TranslatorInterface $translator
      */
-    public function __construct(SessionInterface $session, Translator $translator)
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
     {
         $this->session = $session;
         $this->translator = $translator;
