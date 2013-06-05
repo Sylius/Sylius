@@ -20,6 +20,7 @@ use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Frontend menu builder.
@@ -28,6 +29,12 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class FrontendMenuBuilder extends MenuBuilder
 {
+    /**
+     * Currency repository.
+     *
+     * @var RepositoryInterface
+     */
+    protected $exchangeRateRepository;
     /**
      * Taxonomy repository.
      *
@@ -62,6 +69,7 @@ class FrontendMenuBuilder extends MenuBuilder
         FactoryInterface         $factory,
         SecurityContextInterface $securityContext,
         TranslatorInterface      $translator,
+        RepositoryInterface      $exchangeRateRepository,
         RepositoryInterface      $taxonomyRepository,
         CartProviderInterface    $cartProvider,
         SyliusMoneyExtension     $moneyExtension
@@ -69,6 +77,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         parent::__construct($factory, $securityContext, $translator);
 
+        $this->exchangeRateRepository = $exchangeRateRepository;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->moneyExtension = $moneyExtension;
@@ -85,7 +94,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills pull-right'
+                'class' => 'nav nav-pills'
             )
         ));
 
@@ -96,14 +105,14 @@ class FrontendMenuBuilder extends MenuBuilder
         $menu->addChild('cart', array(
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
-                    '%items%' => $cart->getTotalItems(),
-                    '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
+                '%items%' => $cart->getTotalItems(),
+                '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
-                    '%items%' => $cart->getTotalItems(),
-                    '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
-                )));
+            '%items%' => $cart->getTotalItems(),
+            '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
+        )));
 
         if ($this->securityContext->isGranted('ROLE_USER')) {
             $menu->addChild('account', array(
@@ -135,6 +144,31 @@ class FrontendMenuBuilder extends MenuBuilder
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
                 'labelAttributes' => array('icon' => 'icon-briefcase icon-large', 'iconOnly' => false)
             ))->setLabel($this->translate('sylius.frontend.menu.main.administration'));
+        }
+
+        return $menu;
+    }
+
+    /**
+     * Builds frontend currency menu.
+     *
+     * @return ItemInterface
+     */
+    public function createCurrencyMenu()
+    {
+        $menu = $this->factory->createItem('root', array(
+            'childrenAttributes' => array(
+                'class' => 'nav nav-pills'
+            )
+        ));
+
+        foreach ($this->exchangeRateRepository->findAll() as $exchangeRate)
+        {
+            $menu->addChild($exchangeRate->getCurrency(), array(
+                'route' => 'sylius_currency_change',
+                'routeParameters' => array('currency' => $exchangeRate->getCurrency()),
+                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $exchangeRate->getCurrency()))),
+            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($exchangeRate->getCurrency()));
         }
 
         return $menu;

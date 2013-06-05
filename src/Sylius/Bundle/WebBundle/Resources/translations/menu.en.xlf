@@ -230,6 +230,10 @@
         <source>sylius.frontend.menu.main.administration</source>
         <target>Administration</target>
       </trans-unit>
+      <trans-unit id="72a1c20506c99bf710d871e649d73b7a" resname="sylius.frontend.menu.currency">
+        <source>sylius.frontend.menu.currency</source>
+        <target>Show prices in %currency%</target>
+      </trans-unit>
       <trans-unit id="f3c562d05786e3056e97da27f1fac4d3" resname="sylius.frontend.menu.main.cart">
         <source>sylius.frontend.menu.main.cart</source>
         <target>View cart (%items%) %total%</target>

@@ -220,6 +220,7 @@
         <service id="sylius.currency_context" class="%sylius.currency_context.class%">
             <argument type="service" id="security.context" />
             <argument type="service" id="session" />
+            <argument type="service" id="sylius.manager.user" />
             <argument>%sylius.money.currency%</argument>
         </service>
     </services>

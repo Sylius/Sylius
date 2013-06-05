@@ -44,6 +44,7 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
+            <argument type="service" id="sylius.repository.exchange_rate" />
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.twig.money" />
@@ -57,6 +58,9 @@
         <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createMainMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.main" />
+        </service>
+        <service id="sylius.menu.frontend.currency" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createCurrencyMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.currency" />
         </service>
         <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonomiesMenu" scope="request">
             <argument type="service" id="request" />

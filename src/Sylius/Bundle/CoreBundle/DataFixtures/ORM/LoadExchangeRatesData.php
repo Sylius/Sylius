@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Default exchange rate fixtures.
@@ -28,10 +27,10 @@ class LoadExchangeRatesData extends DataFixture
     {
         $exchangeRateRepository = $this->getExchangeRateRepository();
 
-        foreach (Intl::getCurrencyBundle()->getCurrencyNames() as $name => $iso) {
+        foreach (array('EUR', 'USD', 'GBP') as $currency) {
             $exchangeRate = $exchangeRateRepository->createNew();
 
-            $exchangeRate->setCurrency($name);
+            $exchangeRate->setCurrency($currency);
             $exchangeRate->setRate($this->faker->randomFloat(null, 0, 100));
 
             $manager->persist($exchangeRate);

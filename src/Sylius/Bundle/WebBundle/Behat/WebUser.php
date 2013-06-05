@@ -468,6 +468,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Then /^I should see product prices in "([^"]*)"$/
+     */
+    public function iShouldSeeProductPricesIn($currency)
+    {
+        $this->assertSession()->elementExists('css', sprintf('span.label:contains("%s")', $currency));
+    }
+
+    /**
      * @Given /^I leave "([^"]*)" empty$/
      * @Given /^I leave "([^"]*)" field blank/
      */

@@ -18,10 +18,11 @@ class CurrencyContext extends ObjectBehavior
     /**
      * @param Symfony\Component\Security\Core\SecurityContextInterface  $securityContext
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param use Doctrine\Common\Persistence\ObjectManager             $userManager
      */
-    function let($securityContext, $session)
+    function let($securityContext, $session, $userManager)
     {
-        $this->beConstructedWith($securityContext, $session, 'EUR');
+        $this->beConstructedWith($securityContext, $session, $userManager, 'EUR');
     }
 
     function it_is_initializable()
@@ -57,5 +58,30 @@ class CurrencyContext extends ObjectBehavior
         $user->getCurrency()->shouldBeCalled()->willReturn('PLN');
 
         $this->getCurrency()->shouldReturn('PLN');
+    }
+
+    /**
+     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
+     */
+    function it_sets_currency_to_session_if_there_is_no_user($token, $securityContext, $session)
+    {
+        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $token->getUser()->shouldBeCalled()->willReturn(null);
+        $session->set('currency', 'PLN')->shouldBeCalled();
+
+        $this->setCurrency('PLN');
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Entity\User                                $user
+     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
+     */
+    function it_sets_currency_to_user_if_authenticated($user, $token, $securityContext)
+    {
+        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $token->getUser()->shouldBeCalled()->willReturn($user);
+        $user->setCurrency('PLN')->shouldBeCalled();
+
+        $this->setCurrency('PLN');
     }
 }

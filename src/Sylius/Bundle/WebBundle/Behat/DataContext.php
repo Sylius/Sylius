@@ -156,6 +156,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $user->setEmail($email);
         $user->setEnabled('yes' === $enabled);
         $user->setPlainPassword($password);
+        $user->setCurrency('EUR');
 
         if (null !== $address) {
             $user->setShippingAddress($this->createAddress($address));
