@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\EventListener;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
@@ -27,28 +28,43 @@ class FlashListener implements EventSubscriberInterface
     /**
      * @var array
      */
-    public $messages = array(
-        SyliusCartEvents::CART_SAVE_COMPLETED    => 'The cart have been updated correctly.',
-        SyliusCartEvents::CART_CLEAR_COMPLETED   => 'The cart has been successfully cleared.',
-
-        SyliusCartEvents::ITEM_ADD_COMPLETED    => 'Item has been added to cart.',
-        SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'Item has been removed from cart.',
-
-        SyliusCartEvents::ITEM_ADD_ERROR        => 'Error occurred while adding item to cart.',
-        SyliusCartEvents::ITEM_REMOVE_ERROR     => 'Error occurred while removing item from cart.',
-    );
+    public $messages;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     private $session;
 
     /**
-     * @param Session $session
+     * @var Translator
      */
-    public function __construct(SessionInterface $session)
+    private $translator;
+
+    public function setMessages()
+    {
+        $this->messages = array(
+            SyliusCartEvents::CART_SAVE_COMPLETED    => $this->translator->trans('sylius.cart.cart_save_completed'),
+            SyliusCartEvents::CART_CLEAR_COMPLETED   => $this->translator->trans('sylius.cart.cart_clear_completed'),
+
+            SyliusCartEvents::ITEM_ADD_COMPLETED     => $this->translator->trans('sylius.cart.item_add_completed'),
+            SyliusCartEvents::ITEM_REMOVE_COMPLETED  => $this->translator->trans('sylius.cart.item_remove_completed'),
+
+            SyliusCartEvents::ITEM_ADD_ERROR         => $this->translator->trans('sylius.cart.item_add_error'),
+            SyliusCartEvents::ITEM_REMOVE_ERROR      => $this->translator->trans('sylius.cart.item_remove_error')
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param Translator $translator
+     */
+    public function __construct(SessionInterface $session, Translator $translator)
     {
         $this->session = $session;
+        $this->translator = $translator;
+        $this->setMessages();
     }
 
     public static function getSubscribedEvents()

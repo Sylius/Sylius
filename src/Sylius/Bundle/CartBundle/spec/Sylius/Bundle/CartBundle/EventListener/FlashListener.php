@@ -24,10 +24,11 @@ class FlashListener extends ObjectBehavior
 
     /**
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param Symfony\Bundle\FrameworkBundle\Translation\Translator $translator
      */
-    function let($session)
+    function let($session, $translator)
     {
-        $this->beConstructedWith($session);
+        $this->beConstructedWith($session, $translator);
     }
 
     function it_is_initializable()
@@ -141,7 +142,7 @@ class FlashListener extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\Event $event
      * @param Symfony\Component\HttpFoundation\Session\Flash\FlashBag $flashBag
      */
-    function it_should_have_a_default_success_flash_message_for_event_name($session, $event, $flashBag, $cartEvents)
+    function it_should_have_a_default_success_flash_message_for_event_name($session, $translator, $event, $flashBag, $cartEvents)
     {
         $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart have been updated correctly.');
         $this->getWrappedSubject()->messages = $messages;

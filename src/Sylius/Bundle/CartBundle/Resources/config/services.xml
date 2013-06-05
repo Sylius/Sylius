@@ -72,6 +72,7 @@
         <service id="sylius.cart_flash_listener" class="%sylius.cart_flash_listener.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="session" />
+            <argument type="service" id="translator" />
         </service>
     </services>
 </container>
