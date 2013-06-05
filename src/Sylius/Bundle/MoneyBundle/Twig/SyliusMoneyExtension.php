@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
 use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
+use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
 use Twig_Extension;
 use Twig_Filter_Method;
 use Twig_Function_Method;
@@ -25,17 +26,18 @@ use NumberFormatter;
  */
 class SyliusMoneyExtension extends Twig_Extension
 {
-    protected $defaultCurrency;
+    protected $currencyContext;
     protected $formatter;
     protected $converter;
 
-    public function __construct(CurrencyConverterInterface $converter, $defaultCurrency, $locale = null)
+    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, $locale = null)
     {
-        $this->defaultCurrency = $defaultCurrency;
+        $this->currencyContext = $currencyContext;
+        $this->converter = $converter;
 
         $locale = $locale ?: Locale::getDefault();
         $this->formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-        $this->converter = $converter;
+
     }
 
     /**
@@ -59,7 +61,7 @@ class SyliusMoneyExtension extends Twig_Extension
      */
     public function formatMoney($amount, $currency = null)
     {
-        $currency = $currency ?: $this->defaultCurrency;
+        $currency = $this->getCurrency($currency);
         $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
@@ -79,13 +81,15 @@ class SyliusMoneyExtension extends Twig_Extension
      */
     public function formatPrice($amount, $currency = null)
     {
-        $currency = $currency ?: $this->defaultCurrency;
-
-        if ($currency !== $this->defaultCurrency) {
-            $amount = $this->converter->convert($amount, $currency);
-        }
+        $currency = $this->getCurrency($currency);
+        $amount = $this->converter->convert($amount, $currency);
 
         return $this->formatMoney($amount, $currency);
+    }
+
+    private function getCurrency($currency)
+    {
+        return $currency ?: $this->currencyContext->getCurrency();
     }
 
     /**
