@@ -43,7 +43,7 @@ class FlashListener implements EventSubscriberInterface
     public function setMessages()
     {
         $this->messages = array(
-            SyliusCartEvents::CART_SAVE_COMPLETED    => 'sylius.cart.cart_save_completed',
+            SyliusCartEvents::CART_SAVE_COMPLETED    => $this->translator->trans('sylius.cart.cart_save_completed'),
             SyliusCartEvents::CART_CLEAR_COMPLETED   => $this->translator->trans('sylius.cart.cart_clear_completed'),
 
             SyliusCartEvents::ITEM_ADD_COMPLETED     => $this->translator->trans('sylius.cart.item_add_completed'),
@@ -64,7 +64,6 @@ class FlashListener implements EventSubscriberInterface
     {
         $this->session = $session;
         $this->translator = $translator;
-        $this->setMessages();
     }
 
     public static function getSubscribedEvents()
