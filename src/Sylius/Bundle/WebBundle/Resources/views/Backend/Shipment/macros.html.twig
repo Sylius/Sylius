@@ -7,11 +7,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('order') }}</th>
-            <th>{{ sylius_resource_sort('method') }}</th>
-            <th>{{ sylius_resource_sort('state') }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'last updated') }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.shipment.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('order', 'sylius.shipment.order'|trans) }}</th>
+            <th>{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
+            <th>{{ sylius_resource_sort('state', 'sylius.shipment.state'|trans) }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.shipment.updated_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
