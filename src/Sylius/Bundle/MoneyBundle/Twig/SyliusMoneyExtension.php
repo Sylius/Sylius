@@ -45,6 +45,7 @@ class SyliusMoneyExtension extends Twig_Extension
     {
         return array(
             'sylius_money' => new Twig_Filter_Method($this, 'formatMoney', array('is_safe' => array('html'))),
+            'sylius_price' => new Twig_Filter_Method($this, 'formatPrice', array('is_safe' => array('html'))),
         );
     }
 
@@ -59,11 +60,6 @@ class SyliusMoneyExtension extends Twig_Extension
     public function formatMoney($amount, $currency = null)
     {
         $currency = $currency ?: $this->defaultCurrency;
-
-        if ($currency !== $this->defaultCurrency) {
-            $amount = $this->converter->convert($amount, $currency);
-        }
-
         $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
@@ -71,6 +67,25 @@ class SyliusMoneyExtension extends Twig_Extension
         }
 
         return str_replace(' ', ' ', $result);
+    }
+
+    /**
+     * Convert price between currencies and format the amount to nice display form.
+     *
+     * @param integer $amount
+     * @param string  $currency
+     *
+     * @return string
+     */
+    public function formatPrice($amount, $currency = null)
+    {
+        $currency = $currency ?: $this->defaultCurrency;
+
+        if ($currency !== $this->defaultCurrency) {
+            $amount = $this->converter->convert($amount, $currency);
+        }
+
+        return $this->formatMoney($amount, $currency);
     }
 
     /**

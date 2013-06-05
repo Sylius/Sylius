@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\MoneyBundle\Converter;
 
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use InvalidArgumentException;
 
 class CurrencyConverter implements CurrencyConverterInterface
 {
@@ -24,6 +25,11 @@ class CurrencyConverter implements CurrencyConverterInterface
 
     public function convert($value, $currency)
     {
-        return $value / $this->exchangeRateRepository->findOneByCurrency($currency)->getRate();
+        $exchangeRate = $this->exchangeRateRepository->findOneByCurrency($currency);
+        if (null === $exchangeRate) {
+            throw new InvalidArgumentException(sprintf('Exchange rate for "%s" not found.', $currency));
+        }
+
+        return $value / $exchangeRate->getRate();
     }
 }
