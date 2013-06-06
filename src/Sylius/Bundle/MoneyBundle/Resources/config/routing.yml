@@ -4,3 +4,7 @@
 sylius_promotion:
     prefix: /exchange-rates
     resource: @SyliusMoneyBundle/Resources/config/routing/exchange_rate.yml
+
+sylius_promotion:
+    prefix: /currency
+    resource: @SyliusMoneyBundle/Resources/config/routing/currency.yml

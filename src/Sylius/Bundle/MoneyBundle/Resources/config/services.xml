@@ -27,10 +27,15 @@
     </parameters>
 
     <services>
-      <service id="sylius.controller.exchange_rate" class="%sylius.controller.exchange_rate.class%">
+        <service id="sylius.controller.exchange_rate" class="%sylius.controller.exchange_rate.class%">
             <argument>sylius</argument>
             <argument>exchange_rate</argument>
             <argument>SyliusMoneyBundle:ExchangeRate</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.currency" class="%sylius.controller.currency.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

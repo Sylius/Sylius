@@ -39,4 +39,11 @@ class CurrencyContext extends ObjectBehavior
 
         $this->getCurrency()->shouldReturn('RSD');
     }
+
+    function it_sets_currency_to_session($session)
+    {
+        $session->set('currency', 'PLN')->shouldBeCalled();
+
+        $this->setCurrency('PLN');
+    }
 }
