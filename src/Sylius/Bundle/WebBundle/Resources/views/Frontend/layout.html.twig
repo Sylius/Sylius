@@ -49,9 +49,9 @@
         {% endfor %}
 
         <hr>
-        <div id="sidebar_left" class="row-fluid">
+        <div class="row-fluid">
             <div class="row-fluid">
-                <div class="span3">
+                <div class="span3" id="sidebar_left">
                     {% block sidebar %}
                     <h4>{{ 'sylius.shop_by'|trans }}</h4>
                     {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
