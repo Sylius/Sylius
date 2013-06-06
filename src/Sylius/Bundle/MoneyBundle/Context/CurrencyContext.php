@@ -24,6 +24,11 @@ class CurrencyContext implements CurrencyContextInterface
         $this->defaultCurrency = $defaultCurrency;
     }
 
+    public function getDefaultCurrency()
+    {
+        return $this->defaultCurrency;
+    }
+
     public function getCurrency()
     {
         return $this->session->get('currency', $this->defaultCurrency);

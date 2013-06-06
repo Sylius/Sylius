@@ -15,7 +15,6 @@ use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
 use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
 use Twig_Extension;
 use Twig_Filter_Method;
-use Twig_Function_Method;
 use Locale;
 use NumberFormatter;
 
@@ -61,7 +60,7 @@ class SyliusMoneyExtension extends Twig_Extension
      */
     public function formatMoney($amount, $currency = null)
     {
-        $currency = $this->getCurrency($currency);
+        $currency = $currency ?: $this->currencyContext->getDefaultCurrency();
         $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
@@ -81,15 +80,10 @@ class SyliusMoneyExtension extends Twig_Extension
      */
     public function formatPrice($amount, $currency = null)
     {
-        $currency = $this->getCurrency($currency);
+        $currency = $currency ?: $this->currencyContext->getCurrency();
         $amount = $this->converter->convert($amount, $currency);
 
         return $this->formatMoney($amount, $currency);
-    }
-
-    private function getCurrency($currency)
-    {
-        return $currency ?: $this->currencyContext->getCurrency();
     }
 
     /**

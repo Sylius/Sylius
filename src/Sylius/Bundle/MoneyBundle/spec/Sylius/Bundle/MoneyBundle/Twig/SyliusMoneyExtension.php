@@ -32,7 +32,7 @@ class SyliusMoneyExtension extends ObjectBehavior
 
     function it_formats_the_integer_amounts_into_string_representation($currencyContext)
     {
-        $currencyContext->getCurrency()->willReturn('EUR');
+        $currencyContext->getDefaultCurrency()->willReturn('EUR');
 
         $this->formatMoney(15)->shouldReturn('€0.15');
         $this->formatMoney(2500)->shouldReturn('€25.00');
@@ -42,7 +42,7 @@ class SyliusMoneyExtension extends ObjectBehavior
 
     function it_allows_to_format_money_in_different_currencies($currencyContext, $converter)
     {
-        $currencyContext->getCurrency()->willReturn('EUR');
+        $currencyContext->getDefaultCurrency()->willReturn('EUR');
 
         $this->formatMoney(15, 'USD')->shouldReturn('$0.15');
         $this->formatMoney(2500, 'USD')->shouldReturn('$25.00');

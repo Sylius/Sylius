@@ -33,6 +33,11 @@ class CurrencyContext extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface');
     }
 
+    function it_gets_default_currency()
+    {
+        $this->getDefaultCurrency()->shouldReturn('EUR');
+    }
+
     function it_gets_currency_from_session($session)
     {
         $session->get('currency', 'EUR')->shouldBeCalled()->willReturn('RSD');
