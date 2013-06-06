@@ -40,6 +40,7 @@ class LoadOrdersData extends DataFixture
             $order->addShipment($shipment);
 
             $order->setNumber(str_pad((int) $i, 6, 0, STR_PAD_LEFT));
+            $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
             $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());

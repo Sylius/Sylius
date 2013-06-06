@@ -178,4 +178,20 @@ interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
      * @return Boolean
      */
     public function hasShipment(ShipmentInterface $shipment);
+
+    /**
+     * Get currency.
+     *
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * Set currency.
+     *
+     * @param string
+     *
+     * @return OrderInterface
+     */
+    public function setCurrency($currency);
 }

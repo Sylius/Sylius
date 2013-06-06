@@ -30,6 +30,7 @@
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
+        <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
 
         <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
@@ -169,6 +170,11 @@
             <argument type="service" id="sylius.promotion_processor" />
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderPromotion" />
+        </service>
+        <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
+            <argument type="service" id="sylius.currency_context" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderCurrency" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderCurrency" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
