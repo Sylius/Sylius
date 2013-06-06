@@ -133,7 +133,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $this->thereIsUser(
-                $data['username'],
+                $data['email'],
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true
@@ -141,11 +141,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
     }
 
-    public function thereIsUser($username, $password, $role = null, $enabled = 'yes')
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes')
     {
         $user = new User();
-        $user->setUsername($username);
-        $user->setEmail($this->faker->email());
+        $user->setEmail($email);
         $user->setEnabled('yes' === $enabled);
         $user->setPlainPassword($password);
 
