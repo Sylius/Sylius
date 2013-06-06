@@ -104,7 +104,7 @@ class FlashListener extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\Event $event
      * @param Symfony\Component\HttpFoundation\Session\Flash\FlashBag $flashBag
      */
-    function it_should_have_a_default_error_flash_message_for_event_name($session, $event, $flashBag, $cartEvents)
+    function it_should_have_a_default_error_flash_message_for_event_name($session, $translator, $event, $flashBag, $cartEvents)
     {
         $messages = array(SyliusCartEvents::ITEM_ADD_ERROR => 'Error occurred while adding item to cart.');
         $this->getWrappedSubject()->messages = $messages;
@@ -125,6 +125,12 @@ class FlashListener extends ObjectBehavior
             ->getFlashBag()
             ->shouldBeCalled()
             ->willReturn($flashBag)
+        ;
+
+        $translator
+            ->trans(ANY_ARGUMENTS)
+            ->shouldBeCalled()
+            ->willReturn($messages[SyliusCartEvents::ITEM_ADD_ERROR])
         ;
 
         $flashBag
@@ -163,6 +169,12 @@ class FlashListener extends ObjectBehavior
             ->getFlashBag()
             ->shouldBeCalled()
             ->willReturn($flashBag)
+        ;
+
+        $translator
+            ->trans(ANY_ARGUMENTS)
+            ->shouldBeCalled()
+            ->willReturn($messages[SyliusCartEvents::ITEM_ADD_COMPLETED])
         ;
 
         $flashBag
