@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\DependencyInjection;
 
+use Sylius\Bundle\MoneyBundle\SyliusMoneyBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,9 +34,38 @@ class SyliusMoneyExtension extends Extension
         $config = $processor->processConfiguration(new Configuration(), $config);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
 
+        $driver = $config['driver'];
+
+        if (!in_array($driver, SyliusMoneyBundle::getSupportedDrivers())) {
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusMoneyBundle', $driver));
+        }
+
+        $loader->load(sprintf('driver/%s.xml', $driver));
+
+        $container->setParameter('sylius.driver', $driver);
+        $container->setParameter('sylius.engine', $config['engine']);
         $container->setParameter('sylius.money.locale', $config['locale']);
         $container->setParameter('sylius.money.currency', $config['currency']);
+
+        $this->mapClassParameters($config['classes'], $container);
+
+        $loader->load('services.xml');
+    }
+
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $service = $service === 'form' ? 'form.type' : $service;
+                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+            }
+        }
     }
 }

@@ -11,9 +11,13 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
+use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
+use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
 use Twig_Extension;
 use Twig_Filter_Method;
 use Twig_Function_Method;
+use Locale;
+use NumberFormatter;
 
 /**
  * Sylius money twig helper.
@@ -22,15 +26,18 @@ use Twig_Function_Method;
  */
 class SyliusMoneyExtension extends Twig_Extension
 {
-    protected $defaultCurrency;
+    protected $currencyContext;
     protected $formatter;
+    protected $converter;
 
-    public function __construct($defaultCurrency, $locale = null)
+    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, $locale = null)
     {
-        $this->defaultCurrency = $defaultCurrency;
+        $this->currencyContext = $currencyContext;
+        $this->converter = $converter;
 
-        $locale = $locale ?: \Locale::getDefault();
-        $this->formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        $locale = $locale ?: Locale::getDefault();
+        $this->formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+
     }
 
     /**
@@ -40,6 +47,7 @@ class SyliusMoneyExtension extends Twig_Extension
     {
         return array(
             'sylius_money' => new Twig_Filter_Method($this, 'formatMoney', array('is_safe' => array('html'))),
+            'sylius_price' => new Twig_Filter_Method($this, 'formatPrice', array('is_safe' => array('html'))),
         );
     }
 
@@ -53,7 +61,7 @@ class SyliusMoneyExtension extends Twig_Extension
      */
     public function formatMoney($amount, $currency = null)
     {
-        $currency = $currency ?: $this->defaultCurrency;
+        $currency = $this->getCurrency($currency);
         $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
@@ -61,6 +69,27 @@ class SyliusMoneyExtension extends Twig_Extension
         }
 
         return str_replace(' ', ' ', $result);
+    }
+
+    /**
+     * Convert price between currencies and format the amount to nice display form.
+     *
+     * @param integer $amount
+     * @param string  $currency
+     *
+     * @return string
+     */
+    public function formatPrice($amount, $currency = null)
+    {
+        $currency = $this->getCurrency($currency);
+        $amount = $this->converter->convert($amount, $currency);
+
+        return $this->formatMoney($amount, $currency);
+    }
+
+    private function getCurrency($currency)
+    {
+        return $currency ?: $this->currencyContext->getCurrency();
     }
 
     /**
