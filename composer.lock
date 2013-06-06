@@ -4412,12 +4412,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "536ea37d1f87a882ce8a5d62680caf881ecaf6fe"
+                "reference": "a14bcf6a4950a98f678f568a7b24d9c308e3a1a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/536ea37d1f87a882ce8a5d62680caf881ecaf6fe",
-                "reference": "536ea37d1f87a882ce8a5d62680caf881ecaf6fe",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/a14bcf6a4950a98f678f568a7b24d9c308e3a1a8",
+                "reference": "a14bcf6a4950a98f678f568a7b24d9c308e3a1a8",
                 "shasum": ""
             },
             "require": {
@@ -4426,7 +4426,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -4453,7 +4453,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-04-26 09:34:36"
+            "time": "2013-06-06 08:57:56"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -5021,12 +5021,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
+                "reference": "v1.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/v1.0.1",
+                "reference": "v1.0.1",
                 "shasum": ""
             },
             "type": "library",

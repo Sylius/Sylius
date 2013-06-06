@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Context;
 
 use Sylius\Bundle\MoneyBundle\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -19,14 +20,25 @@ use Doctrine\Common\Persistence\ObjectManager;
 class CurrencyContext extends BaseCurrencyContext
 {
     protected $securityContext;
+    protected $settingsManager;
     protected $userManager;
 
-    public function __construct(SecurityContextInterface $securityContext, SessionInterface $session, ObjectManager $userManager, $defaultCurrency)
-    {
+    public function __construct(
+        SecurityContextInterface $securityContext,
+        SessionInterface $session,
+        SettingsManagerInterface $settingsManager,
+        ObjectManager $userManager
+    ) {
         $this->securityContext = $securityContext;
+        $this->settingsManager = $settingsManager;
         $this->userManager = $userManager;
 
-        parent::__construct($session, $defaultCurrency);
+        parent::__construct($session, $this->getDefaultCurrency());
+    }
+
+    public function getDefaultCurrency()
+    {
+        return $this->settingsManager->loadSettings('general')->get('currency');
     }
 
     public function getCurrency()

@@ -35,6 +35,11 @@ class CurrencyContext extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Context\CurrencyContext');
     }
 
+    function it_gets_default_currency()
+    {
+        $this->getDefaultCurrency()->shouldReturn('EUR');
+    }
+
     /**
      * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      */
