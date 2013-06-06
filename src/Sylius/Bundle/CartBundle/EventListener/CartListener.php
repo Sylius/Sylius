@@ -113,7 +113,7 @@ class CartListener implements EventSubscriberInterface
 
         if ($valid) {
             $this->cartManager->persist($cart);
-            $this->cartManager->flush();
+            $this->cartManager->flush($cart);
             $this->cartProvider->setCart($cart);
         }
     }
