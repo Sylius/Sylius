@@ -5,7 +5,7 @@
         <body>
             <trans-unit id="1">
                 <source>sylius.cart.cart_save_completed</source>
-                <target>The cart have been updated correctly</target>
+                <target>The cart have been updated correctly.</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>sylius.cart.cart_clear_completed</source>

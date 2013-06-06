@@ -24,7 +24,7 @@ class FlashListener extends ObjectBehavior
 
     /**
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param Symfony\Bundle\FrameworkBundle\Translation\Translator $translator
+     * @param Symfony\Component\Translation\TranslatorInterface $translator
      */
     function let($session, $translator)
     {
