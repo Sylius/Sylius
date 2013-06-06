@@ -13,6 +13,7 @@ namespace Sylius\Bundle\MoneyBundle\Context;
 
 interface CurrencyContextInterface
 {
+    public function getDefaultCurrency();
     public function getCurrency();
     public function setCurrency($currency);
 }
