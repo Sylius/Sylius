@@ -162,8 +162,7 @@ class FrontendMenuBuilder extends MenuBuilder
             )
         ));
 
-        foreach ($this->exchangeRateRepository->findAll() as $exchangeRate)
-        {
+        foreach ($this->exchangeRateRepository->findAll() as $exchangeRate) {
             $menu->addChild($exchangeRate->getCurrency(), array(
                 'route' => 'sylius_currency_change',
                 'routeParameters' => array('currency' => $exchangeRate->getCurrency()),

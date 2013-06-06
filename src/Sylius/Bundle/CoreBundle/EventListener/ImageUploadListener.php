@@ -30,7 +30,7 @@ class ImageUploadListener
     public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface){
+        if (!$subject instanceof CustomizableProductInterface && !$subject instanceof VariantInterface) {
             throw new \InvalidArgumentException('CustomizableProductInterface or VariantInterface expected.');
         }
 
@@ -47,7 +47,7 @@ class ImageUploadListener
     {
         $subject = $event->getSubject();
 
-        if (!$subject instanceof TaxonInterface){
+        if (!$subject instanceof TaxonInterface) {
             throw new \InvalidArgumentException('TaxonInterface expected.');
         }
 
@@ -61,7 +61,7 @@ class ImageUploadListener
     {
         $subject = $event->getSubject();
 
-        if (!$subject instanceof TaxonomyInterface){
+        if (!$subject instanceof TaxonomyInterface) {
             throw new \InvalidArgumentException('TaxonomyInterface expected.');
         }
 

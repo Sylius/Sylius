@@ -96,7 +96,6 @@ class SecurityStep extends CheckoutStep
         $this->get('session')->set('_security.'.$providerKey.'.target_path', $url);
     }
 
-
     /**
      * @param \Sylius\Bundle\CoreBundle\Entity\User $user
      */

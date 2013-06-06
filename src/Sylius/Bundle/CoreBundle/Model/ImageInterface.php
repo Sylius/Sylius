@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use SplFileInfo;
-use DateTime;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 interface ImageInterface extends TimestampableInterface

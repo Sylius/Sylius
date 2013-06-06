@@ -20,7 +20,6 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Entity\User;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Form\Util\FormUtil;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
 use Symfony\Component\PropertyAccess\StringUtil;
@@ -705,7 +704,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             $enabled = true;
 
-            if(array_key_exists('enabled', $data)) {
+            if (array_key_exists('enabled', $data)) {
                 $enabled = 'yes' === trim($data['enabled']);
             }
 
