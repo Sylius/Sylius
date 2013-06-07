@@ -16,13 +16,18 @@ use PHPSpec2\ObjectBehavior;
 class CurrencyContext extends ObjectBehavior
 {
     /**
-     * @param Symfony\Component\Security\Core\SecurityContextInterface  $securityContext
-     * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param use Doctrine\Common\Persistence\ObjectManager             $userManager
+     * @param Symfony\Component\Security\Core\SecurityContextInterface      $securityContext
+     * @param Symfony\Component\HttpFoundation\Session\SessionInterface     $session
+     * @param Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface $settingsManager
+     * @param Doctrine\Common\Persistence\ObjectManager                     $userManager
+     * @param Sylius\Bundle\SettingsBundle\Model\Settings                   $settings
      */
-    function let($securityContext, $session, $userManager)
+    function let($securityContext, $session, $settingsManager, $userManager, $settings)
     {
-        $this->beConstructedWith($securityContext, $session, $userManager, 'EUR');
+        $settingsManager->loadSettings('general')->shouldBeCalled()->willReturn($settings);
+        $settings->get('currency')->shouldBeCalled()->willReturn('EUR');
+
+        $this->beConstructedWith($securityContext, $session, $settingsManager, $userManager);
     }
 
     function it_is_initializable()
