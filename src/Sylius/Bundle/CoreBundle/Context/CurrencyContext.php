@@ -43,11 +43,11 @@ class CurrencyContext extends BaseCurrencyContext
 
     public function getCurrency()
     {
-        if (null === $user = $this->getUser()) {
-            return parent::getCurrency();
+        if ((null !== $user = $this->getUser()) && null !== $user->getCurrency()) {
+            return $user->getCurrency();
         }
 
-        return $user->getCurrency();
+        return parent::getCurrency();
     }
 
     public function setCurrency($currency)

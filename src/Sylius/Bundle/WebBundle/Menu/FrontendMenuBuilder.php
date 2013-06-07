@@ -106,12 +106,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
                 '%items%' => $cart->getTotalItems(),
-                '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
+                '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
             '%items%' => $cart->getTotalItems(),
-            '%total%' => $this->moneyExtension->formatMoney($cart->getTotal())
+            '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
         )));
 
         if ($this->securityContext->isGranted('ROLE_USER')) {

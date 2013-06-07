@@ -20,19 +20,19 @@ Feature: Currencies
 
     Scenario: Switching currency as visitor
         Given I am on the store homepage
+         When I follow "£"
+         Then I should see product prices in "£"
          When I follow "$"
          Then I should see product prices in "$"
          When I follow "€"
          Then I should see product prices in "€"
-         When I follow "£"
-         Then I should see product prices in "£"
 
     Scenario: Switching currency as logged in user
         Given I am logged in user
           And I am on the store homepage
+         When I follow "£"
+         Then I should see product prices in "£"
          When I follow "$"
          Then I should see product prices in "$"
-         When I follow "€"
-         Then I should see product prices in "€"
          When I follow "£"
          Then I should see product prices in "£"

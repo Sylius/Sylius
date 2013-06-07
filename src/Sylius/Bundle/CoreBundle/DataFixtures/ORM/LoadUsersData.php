@@ -51,7 +51,6 @@ class LoadUsersData extends DataFixture
             $user->setEmail($username.'@example.com');
             $user->setPlainPassword($username);
             $user->setEnabled($this->faker->boolean());
-            $user->setCurrency('EUR');
 
             $manager->persist($user);
 
