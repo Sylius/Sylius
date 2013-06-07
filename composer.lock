@@ -3326,17 +3326,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusMoneyBundle.git",
-                "reference": "c2370f4e08de6f1120ab276aba97250a6f2b4b44"
+                "reference": "6ded3e1298b535d81236a0022ad592cb92a5a7f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusMoneyBundle/zipball/c2370f4e08de6f1120ab276aba97250a6f2b4b44",
-                "reference": "c2370f4e08de6f1120ab276aba97250a6f2b4b44",
+                "url": "https://api.github.com/repos/Sylius/SyliusMoneyBundle/zipball/6ded3e1298b535d81236a0022ad592cb92a5a7f4",
+                "reference": "6ded3e1298b535d81236a0022ad592cb92a5a7f4",
                 "shasum": ""
             },
             "require": {
                 "mathiasverraes/money": "dev-master",
                 "php": ">=5.3.3",
+                "sylius/resource-bundle": "0.1.*",
                 "symfony/framework-bundle": ">=2.1,<3.0"
             },
             "require-dev": {
@@ -3378,7 +3379,7 @@
                 "currency",
                 "money"
             ],
-            "time": "2013-03-12 19:07:10"
+            "time": "2013-06-06 13:01:10"
         },
         {
             "name": "sylius/omnipay-bundle",
@@ -4412,12 +4413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "a14bcf6a4950a98f678f568a7b24d9c308e3a1a8"
+                "reference": "1a6507043782f18e3765b52712cf78d16f3117e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/a14bcf6a4950a98f678f568a7b24d9c308e3a1a8",
-                "reference": "a14bcf6a4950a98f678f568a7b24d9c308e3a1a8",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1a6507043782f18e3765b52712cf78d16f3117e7",
+                "reference": "1a6507043782f18e3765b52712cf78d16f3117e7",
                 "shasum": ""
             },
             "require": {
@@ -4453,7 +4454,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-06-06 08:57:56"
+            "time": "2013-06-07 06:24:46"
         },
         {
             "name": "white-october/pagerfanta-bundle",
