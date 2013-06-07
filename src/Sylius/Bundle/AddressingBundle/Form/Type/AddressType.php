@@ -29,16 +29,30 @@ class AddressType extends AbstractType
      * @var string
      */
     protected $dataClass;
+
+    /**
+     * Validation groups.
+     *
+     * @var string
+     */
+    protected $validationGroups;
+
+    /**
+     * @var BuildAddressFormListener
+     */
     protected $eventListener;
 
     /**
      * Constructor.
      *
-     * @param string $dataClass
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
+     * @param BuildAddressFormListener $eventListener
      */
-    public function __construct($dataClass, BuildAddressFormListener $eventListener)
+    public function __construct($dataClass, array $validationGroups, BuildAddressFormListener $eventListener)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
         $this->eventListener = $eventListener;
     }
 
@@ -82,7 +96,8 @@ class AddressType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
