@@ -1,7 +1,12 @@
 <?php
-/**
- * Author: jj
- * Date: 6/7/13
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Sylius\Bundle\CoreBundle\User;
@@ -9,6 +14,12 @@ namespace Sylius\Bundle\CoreBundle\User;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
 
+/**
+ * User manager : extension of the FOS user manager
+ * to add the customer ID
+ *
+ * @author Julien Janvier <j.janvier@gmail.com>
+ */
 class UserManager extends BaseUserManager
 {
     /**
