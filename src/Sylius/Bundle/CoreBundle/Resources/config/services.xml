@@ -42,6 +42,8 @@
 
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
+
+        <parameter key="sylius.user_manager.default.class">Sylius\Bundle\CoreBundle\User\UserManager</parameter>
     </parameters>
 
     <services>
@@ -196,6 +198,15 @@
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
             <tag name="sylius.promotion_action" type="Percentage_discount" label="Percentage discount" />
+        </service>
+
+        <!-- user -->
+        <service id="sylius.user_manager.default" class="%sylius.user_manager.default.class%" public="false">
+            <argument type="service" id="security.encoder_factory" />
+            <argument type="service" id="fos_user.util.username_canonicalizer" />
+            <argument type="service" id="fos_user.util.email_canonicalizer" />
+            <argument type="service" id="fos_user.entity_manager" />
+            <argument>%fos_user.model.user.class%</argument>
         </service>
     </services>
 

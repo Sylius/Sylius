@@ -23,8 +23,8 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 class User extends BaseUser
 {
     protected $firstName;
-
     protected $lastName;
+    protected $customerId;
 
     protected $orders;
     protected $billingAddress;
@@ -168,4 +168,15 @@ class User extends BaseUser
     {
         return $this->lastName;
     }
+
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+    }
+
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
 }
