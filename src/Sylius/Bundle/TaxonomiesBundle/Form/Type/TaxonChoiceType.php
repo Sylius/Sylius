@@ -49,7 +49,7 @@ class TaxonChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $choiceList = function (Options $options) {
-            return new ObjectChoiceList($options['taxonomy']->getTaxonsAsList());
+            return new ObjectChoiceList($options['taxonomy']->getFilteredTaxonsAsList($options['filter']));
         };
 
         $resolver
@@ -57,10 +57,12 @@ class TaxonChoiceType extends AbstractType
                 'choice_list' => $choiceList
             ))
             ->setRequired(array(
-                'taxonomy'
+                'taxonomy',
+                'filter'
             ))
             ->setAllowedTypes(array(
-                'taxonomy' => array('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface')
+                'taxonomy' => array('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface'),
+                'filter' => array('\Closure', 'null')
             ))
         ;
     }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\EventListener;
 
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -69,6 +70,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
 
         $form->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
                     'taxonomy'    => $taxonomy,
+                    'filter'      => $this->getFilterTaxonOption($taxon),
                     'required'    => false,
                     'label'       => 'sylius.form.taxon.parent',
                     'empty_value' => '---'
@@ -90,5 +92,27 @@ class BuildTaxonFormListener implements EventSubscriberInterface
         if (null === $taxon->getParent()) {
             $taxon->setParent($taxonomy->getRoot());
         }
+    }
+
+    /**
+     * Get the closure to filter taxon collection
+     *
+     * @param TaxonInterface $taxon
+     * @return callable|null
+     */
+    private function getFilterTaxonOption(TaxonInterface $taxon)
+    {
+        $closure = null;
+
+        if ($taxon->getId()) {
+            $closure  = function($entry) use ($taxon) {
+                if ($entry->getId() != $taxon->getId()){
+                    return true;
+                }
+                return false;
+            };
+        }
+
+        return $closure;
     }
 }
