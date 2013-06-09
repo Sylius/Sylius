@@ -8,10 +8,10 @@ Feature: User account orders page
     Given I am logged in user
     And I am on my account homepage
     And the following zones are defined:
-      | name         | type    | members                |
+      | name         | type    | members                 |
       | Scandinavia  | country | Norway, Sweden, Finland |
-      | France       | country | France                 |
-      | USA          | country | USA                    |
+      | France       | country | France                  |
+      | USA          | country | USA                     |
     And there are following shipping categories:
       | name    |
       | Regular |
@@ -31,14 +31,14 @@ Feature: User account orders page
       | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
       | ianmurdock     | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
       | ianmurdock     |           | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
-      | linustorvalds  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland      |
-      | linustorvalds  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland      |
+      | linustorvalds  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
+      | linustorvalds  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
       | username       |           | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
       | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
       | linustorvalds  |           | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
       | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
       | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | ianmurdock     | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA     |
+      | ianmurdock     | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
     # order that has been sent
     And order #000001 has following items:
       | product  | quantity  |
@@ -60,10 +60,12 @@ Feature: User account orders page
      Then I should see "All your orders"
       And I should see 5 orders in the list
       And I should see "<myorder>"
+      And I should see an "<myorder>" element
       And I should not see "<order>"
+      And I should not see an "<order>" element
 
-    Examples:
-      | myorder  | order    |
+  Examples:
+      | myorder | order    |
       | #000001 | #000002  |
       | #000006 | #000003  |
       | #000007 | #000004  |
