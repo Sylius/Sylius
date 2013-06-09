@@ -190,6 +190,23 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Then /^I should be on my account orders page$/
+     */
+    public function iShouldBeOnMyAccountOrdersPage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_orders'));
+    }
+
+    /**
+     * @Given /^I am on my account orders page$/
+     */
+    public function iAmOnMyAccountOrdersPage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_orders'));
+    }
+
+
+    /**
      * @Then /^I should be on login page$/
      */
     public function iShouldBeOnLoginPage()
@@ -546,6 +563,31 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
 
         $this->assertSession()->addressEquals($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
+        $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Given /^I am on the order ([^""]*) page for #(\d+)$/
+     * @Given /^I go to the order ([^""]*) page for #(\d+)$/
+     */
+    public function iAmOnTheOrderPage($action, $number)
+    {
+        $page = "sylius_account_order_$action";
+        $order = $this->getDataContext()->findOneBy('order', array('number' => $number));
+
+        $this->getSession()->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
+    }
+
+    /**
+     * @Then /^I should be on the order ([^""]*) page for #(\d+)$/
+     * @Then /^I should still be on the order ([^""]*) page for #(\d+)$/
+     */
+    public function iShouldBeOnTheOrderPage($action, $number)
+    {
+        $page = "sylius_account_order_$action";
+        $order = $this->getDataContext()->findOneBy('order', array('number' => $number));
+
+        $this->assertSession()->addressEquals($this->generatePageUrl($page, array('number' => $order->getNumber())));
         $this->assertStatusCodeEquals(200);
     }
 

@@ -143,30 +143,31 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
     public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null)
     {
-        $addressData = explode(',', $address);
-        $addressData = array_map('trim', $addressData);
-
-        $user = new User();
-
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
-        $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
-        $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
-        $user->setEmail($email);
-        $user->setEnabled('yes' === $enabled);
-        $user->setPlainPassword($password);
-
-        if (null !== $address) {
-            $user->setShippingAddress($this->createAddress($address));
+        if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
+            $addressData = explode(',', $address);
+            $addressData = array_map('trim', $addressData);
+    
+            $user = new User();
+    
+            $user->setFirstname($this->faker->firstName);
+            $user->setLastname($this->faker->lastName);
+            $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+            $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $user->setEmail($email);
+            $user->setEnabled('yes' === $enabled);
+            $user->setPlainPassword($password);
+    
+            if (null !== $address) {
+                $user->setShippingAddress($this->createAddress($address));
+            }
+    
+            if (null !== $role) {
+                $user->addRole($role);
+            }
+    
+            $this->getEntityManager()->persist($user);
+            $this->getEntityManager()->flush();
         }
-
-        if (null !== $role) {
-            $user->addRole($role);
-        }
-
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
-
         return $user;
     }
 
