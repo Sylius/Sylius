@@ -76,7 +76,7 @@ Feature: User account orders page
     Given I am on my account orders page
       And I follow "order<order>Details"
      Then I should see "Details of your order"
-      And I should be on the <order> order details page
+      And I should be on the order page for <order>
       And I should see <items> items in the list
 
     Examples:
@@ -84,7 +84,20 @@ Feature: User account orders page
       | #000001 | 3     |
       | #000007 | 2     |
 
-  Scenario: Trying to view the detail of an order which is not mine
+  Scenario Outline: Trying to view the detail of an order which is not mine
+    Given I am on my account orders page
+      And I go to the order page for <order>
+     Then the response status code should be 403
+
+  Examples:
+      | order    |
+      | #000002 |
+      | #000003 |
+      | #000004 |
+      | #000005 |
+      | #000008 |
+      | #000011 |
+
   Scenario: Tracking an order that has been sent
   Scenario: Trying to track an order that has not been sent
   Scenario: Generating an invoice for an order that has been sent
