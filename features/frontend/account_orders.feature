@@ -99,10 +99,20 @@ Feature: User account orders page
   Scenario: Tracking an order that has been sent
     Given I am on my account orders page
      Then I should see "Tracking number" in the "#000001" element
+      And I should see an "#000001TrackingNumber" element
 
   Scenario: Trying to track an order that has not been sent
     Given I am on my account orders page
      Then I should not see "Tracking number" in the "#000007" element
+      And I should not see an "#000007TrackingNumber" element
+
+  Scenario: Checking that an invoice is available for an order that has been sent
+    Given I am on my account orders page
+     Then I should see an "#000001Invoice" element
+
+  Scenario: Checking that an invoice is not available for an order that has not been sent
+    Given I am on my account orders page
+    Then I should not see an "#000007Invoice" element
 
   Scenario: Generating an invoice for an order that has been sent
   Scenario: Trying to generate an invoice for an order that has not been sent
