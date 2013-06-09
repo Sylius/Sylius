@@ -20,7 +20,7 @@
                 {% if taxonomy.root is not null %}
                     {% if taxonomy.root.path|length > 0 %}
                         <div data-toggle="modal-gallery" data-target="#modal-gallery">
-                            <a href="{{ taxonomy.root.path|imagine_filter('sylius_gallery') }}" title="{{ taxonomy.name }}" class="thumbnail thumbnail-image">
+                            <a href="{{ taxonomy.root.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery" title="{{ taxonomy.name }}" class="thumbnail thumbnail-image">
                                 <img src="{{ taxonomy.root.path|imagine_filter('sylius_50x40') }}" alt="" />
                             </a>
                         </div>
