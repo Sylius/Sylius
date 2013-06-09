@@ -77,7 +77,7 @@ Feature: User account orders page
     Given I am on my account orders page
       And I follow "<order>Details"
      Then I should see "Details of your order"
-      And I should be on the order page for <order>
+      And I should be on the order show page for <order>
       And I should see <items> items in the list
 
     Examples:
@@ -86,7 +86,7 @@ Feature: User account orders page
       | #000007 | 2     |
 
   Scenario Outline: Trying to view the detail of an order which is not mine
-    Given I go to the order page for <order>
+    Given I go to the order show page for <order>
      Then the response status code should be 403
 
   Examples:
@@ -117,7 +117,26 @@ Feature: User account orders page
     Then I should not see an "#000007Invoice" element
 
   Scenario: Generating an invoice for an order that has been sent
+    Given I go to the order invoice page for #000001
+    Then the response status code should be 200
+
   Scenario: Trying to generate an invoice for an order that has not been sent
+    Given I go to the order invoice page for #000007
+    Then the response status code should be 404
+
+  Scenario Outline: Trying to generate an invoice of an order which is not mine
+    Given I go to the order invoice page for <order>
+    Then the response status code should be 403
+
+  Examples:
+    | order   |
+    | #000002 |
+    | #000003 |
+    | #000004 |
+    | #000005 |
+    | #000008 |
+    | #000011 |
+
   Scenario: Accessing an item from the detail of an order
   Scenario: Trying to access an inactive or deleted item from the detail of an order
 
