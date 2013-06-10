@@ -42,10 +42,12 @@
 
         <service id="sylius.form.type.payment_method" class="%sylius.form.type.payment_method.class%">
             <argument>%sylius.model.payment_method.class%</argument>
+            <argument>%sylius.validation_group.payment_method%</argument>
             <tag name="form.type" alias="sylius_payment_method" />
         </service>
         <service id="sylius.form.type.payment" class="%sylius.form.type.payment.class%">
             <argument>%sylius.model.payment.class%</argument>
+            <argument>%sylius.validation_group.payment%</argument>
             <tag name="form.type" alias="sylius_payment" />
         </service>
         <service id="sylius.form.type.payment_gateway_choice" class="%sylius.form.type.payment_gateway_choice.class%">
@@ -54,6 +56,7 @@
         </service>
         <service id="sylius.form.type.credit_card" class="%sylius.form.type.credit_card.class%">
             <argument>%sylius.model.credit_card.class%</argument>
+            <argument>%sylius.validation_group.credit_card%</argument>
             <tag name="form.type" alias="sylius_credit_card" />
         </service>
     </services>

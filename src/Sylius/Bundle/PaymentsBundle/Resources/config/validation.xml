@@ -20,19 +20,23 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.payment_method.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="MinLength">
                 <option name="limit">2</option>
                 <option name="message">sylius.payment_method.name.min_length</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="MaxLength">
                 <option name="limit">255</option>
                 <option name="message">sylius.payment_method.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="gateway">
             <constraint name="NotBlank">
                 <option name="message">sylius.payment_method.gateway.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -41,15 +45,18 @@
     	<property name="number">
             <constraint name="Luhn">
                 <option name="message">sylius.credit_card.number.luhn</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="cardholderName">
             <constraint name="NotBlank">
                 <option name="message">sylius.credit_card.cardholder_name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
             	<option name="min">4</option>
             	<option name="minMessage">sylius.credit_card.cardholder_name.min_length</option>
+                <option name="groups">sylius</option>
         	</constraint>
         </property>
         <property name="securityCode">
@@ -58,6 +65,7 @@
         		<option name="minMessage">sylius.credit_card.security_code.min_length</option>
             	<option name="max">4</option>
             	<option name="maxMessage">sylius.credit_card.security_code.max_length</option>
+                <option name="groups">sylius</option>
         	</constraint>
         </property>
         <property name="expiryMonth">
@@ -66,6 +74,7 @@
             	<option name="minMessage">sylius.credit_card.expiry_month.min_range</option>
             	<option name="max">12</option>
             	<option name="maxMessage">sylius.credit_card.expiry_month.max_range</option>
+                <option name="groups">sylius</option>
         	</constraint>
         </property>
     </class>

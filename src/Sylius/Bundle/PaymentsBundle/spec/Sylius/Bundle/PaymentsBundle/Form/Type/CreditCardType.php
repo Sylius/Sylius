@@ -22,7 +22,7 @@ class CreditCardType extends ObjectBehavior
 {
     public function let()
     {
-        $this->beConstructedWith('CreditCard');
+        $this->beConstructedWith('CreditCard', array('sylius'));
     }
 
     public function it_is_a_form_type()
@@ -79,7 +79,13 @@ class CreditCardType extends ObjectBehavior
      */
     public function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'CreditCard'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'CreditCard',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

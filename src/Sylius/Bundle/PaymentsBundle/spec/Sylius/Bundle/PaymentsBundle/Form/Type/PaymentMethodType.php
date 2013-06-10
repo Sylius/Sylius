@@ -22,7 +22,7 @@ class PaymentMethodType extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('PaymentMethod');
+        $this->beConstructedWith('PaymentMethod', array('sylius'));
     }
 
     function it_is_a_form_type()
@@ -67,7 +67,13 @@ class PaymentMethodType extends ObjectBehavior
      */
     function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'PaymentMethod'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'PaymentMethod',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

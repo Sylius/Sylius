@@ -30,13 +30,22 @@ class PaymentType extends AbstractType
     protected $dataClass;
 
     /**
+     * Validation groups.
+     *
+     * @var array
+     */
+    protected $validationGroups;
+
+    /**
      * Constructor.
      *
      * @param string $dataClass
+     * @param array  $validationGroups
      */
-    public function __construct($dataClass)
+    public function __construct($dataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -61,7 +70,8 @@ class PaymentType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
