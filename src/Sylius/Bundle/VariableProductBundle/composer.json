@@ -1,0 +1,46 @@
+{
+    "name": "sylius/variable-product-bundle",
+    "type": "symfony-bundle",
+    "description": "Product catalog system with support for product options and variants.",
+    "keywords": ["shop", "ecommerce", "products", "product", "assortment", "options", "variants"],
+    "homepage": "http://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusVariableProductBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle":        "2.3.*",
+        "sylius/product-bundle":           "0.1.*",
+        "sylius/resource-bundle":          "0.3.*",
+        "stof/doctrine-extensions-bundle": "1.1.*"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "1.2.*",
+        "phpspec/phpspec":          "2.0.*",
+        "symfony/form":             "2.3.*",
+        "symfony/validator":        "2.3.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\VariableProductBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/VariableProductBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

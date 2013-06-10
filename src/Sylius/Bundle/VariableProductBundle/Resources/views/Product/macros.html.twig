@@ -1,0 +1,58 @@
+{% macro list(products) %}
+
+{% if products|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('description') }}</th>
+            <th>{{ sylius_resource_sort('createdAt', 'created at') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'updated at') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+        <tr>
+            <td>
+                <a href="{{ path('sylius_product_show', {'id': product.id}) }}" class="btn btn-link">
+                    {{ product.id }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ path('sylius_product_show', {'id': product.id}) }}">
+                    <strong>{{ product.name }}</strong>
+                </a>
+            </td>
+            <td>{{ product.description }}</td>
+            <td><span class="label label-info">{{ product.createdAt|date }}</span></td>
+            <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
+            <td>
+                <div class="pull-right">
+                    <a href="{{ path('sylius_product_show', {'id': product.id}) }}" class="btn">
+                        <i class="icon-book"></i> details
+                    </a>
+                    <a href="{{ path('sylius_product_update', {'id': product.id}) }}" class="btn">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    <form action="{{ path('sylius_product_delete', {'id': product.id}) }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger">
+                            <i class="icon-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    No products to show
+</div>
+{% endif %}
+
+{% endmacro %}
