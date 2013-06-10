@@ -22,7 +22,7 @@ class CartItemType extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CartItem');
+        $this->beConstructedWith('CartItem', array('sylius'));
     }
 
     function it_is_initializable()
@@ -54,7 +54,13 @@ class CartItemType extends ObjectBehavior
      */
     function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'CartItem'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'CartItem',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

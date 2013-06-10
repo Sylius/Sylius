@@ -47,7 +47,7 @@ class SyliusCartExtension extends Extension
         if ('twig' !== $engine) {
             throw new \InvalidArgumentException(sprintf('Templating engine "%s" is unsupported for by SyliusCartBundle', $config['engine']));
         }
-        
+
         $container->setParameter('sylius_cart.driver', $driver);
 
         $loader->load(sprintf('driver/%s.xml', $driver));
@@ -81,6 +81,9 @@ class SyliusCartExtension extends Extension
         if (isset($cartItemClasses['repository'])) {
             $container->setParameter('sylius.repository.cart_item.class', $cartItemClasses['repository']);
         }
+
+        $container->setParameter('sylius.validation_group.cart', $config['validation_groups']['cart']);
+        $container->setParameter('sylius.validation_group.cart_item', $config['validation_groups']['item']);
 
         $loader->load('services.xml');
     }
