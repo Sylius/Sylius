@@ -69,13 +69,13 @@ class BuildTaxonFormListener implements EventSubscriberInterface
         $taxonomy = $taxon->getTaxonomy();
 
         $form->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
-                    'taxonomy'    => $taxonomy,
-                    'filter'      => $this->getFilterTaxonOption($taxon),
-                    'required'    => false,
-                    'label'       => 'sylius.form.taxon.parent',
-                    'empty_value' => '---'
-                )));
-    }
+            'taxonomy'    => $taxonomy,
+            'filter'      => $this->getFilterTaxonOption($taxon),
+            'required'    => false,
+            'label'       => 'sylius.form.taxon.parent',
+            'empty_value' => '---'
+        )));
+}
 
     /**
      * Reset the taxon root if it's null.
@@ -85,7 +85,6 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     public function postBind(FormEvent $event)
     {
         $taxon = $event->getData();
-        $form = $event->getForm();
 
         $taxonomy = $taxon->getTaxonomy();
 
