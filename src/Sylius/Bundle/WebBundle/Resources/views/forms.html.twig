@@ -110,3 +110,17 @@
     {% endif %}
 {% endspaceless %}
 {% endblock %}
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        {% set attr = attr|merge({'class': 'control-group'}) %}
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                <div class="control-choice-input">
+                    {{ form_widget(child) }}
+                    {{ form_label(child) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}
