@@ -181,10 +181,12 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $order->setUser($this->thereIsUser($data['user'], 'password'));
 
             if (isset($data['shipment'])) {
-                $order->addShipment($this->createShipment($data['shipment']));
+                $shipment = $this->createShipment($data['shipment']);
+                $order->addShipment($shipment);
+                $shippingMethod = $shipment->getMethod();
+            } else {
+                $shippingMethod = $this->getRepository('shipping_method')->findOneByName($data['shippingMethod']);
             }
-
-            $shippingMethod = $this->getRepository('shipping_method')->findOneByName($data['shippingMethod']);
 
             $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order, array('shippingMethod' => $shippingMethod)));
 
