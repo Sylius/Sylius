@@ -13,9 +13,9 @@ Feature: Checkout addressing
             | name          | price | taxons       |
             | PHP Top       | 5.99  | PHP T-Shirts |
           And there are following users:
-            | username | password | enabled |
-            | john     | foo      | yes     |
-            | rick     | bar      | yes     |
+            | email             | password | enabled |
+            | john@example.com  | foo      | yes     |
+            | rick@example.com  | bar      | yes     |
           And I am logged in user
           And there are following countries:
             | name           |
