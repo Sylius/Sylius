@@ -23,10 +23,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CouponType extends AbstractType
 {
     protected $dataClass;
+    protected $validationGroups;
 
-    public function __construct($dataClass)
+    public function __construct($dataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -45,7 +47,8 @@ class CouponType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

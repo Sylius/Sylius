@@ -20,6 +20,11 @@ use PHPSpec2\ObjectBehavior;
  */
 class ItemTotalConfigurationType extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith(array('sylius'));
+    }
+
     function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemTotalConfigurationType');

@@ -25,11 +25,13 @@ use Sylius\Bundle\PromotionsBundle\Form\EventListener\BuildActionFormListener;
 class ActionType extends AbstractType
 {
     protected $dataClass;
+    protected $validationGroups;
     protected $actionRegistry;
 
-    public function __construct($dataClass, PromotionActionRegistryInterface $actionRegistry)
+    public function __construct($dataClass, array $validationGroups, PromotionActionRegistryInterface $actionRegistry)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
         $this->actionRegistry = $actionRegistry;
     }
 
@@ -47,7 +49,8 @@ class ActionType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

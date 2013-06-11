@@ -25,7 +25,7 @@ class RuleType extends ObjectBehavior
      */
     function let($checkerRegistry)
     {
-        $this->beConstructedWith('Rule', $checkerRegistry);
+        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
     }
 
     function it_should_be_initializable()
@@ -79,7 +79,13 @@ class RuleType extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Rule'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'Rule',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

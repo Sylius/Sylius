@@ -26,7 +26,7 @@ class PromotionType extends ObjectBehavior
      */
     function let($checkerRegistry, $actionRegistry)
     {
-        $this->beConstructedWith('Promotion', $checkerRegistry, $actionRegistry);
+        $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
     }
 
     function it_should_be_initializable()
@@ -100,7 +100,13 @@ class PromotionType extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Promotion'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'Promotion',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

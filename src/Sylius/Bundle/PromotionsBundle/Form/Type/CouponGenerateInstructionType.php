@@ -22,6 +22,15 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CouponGenerateInstructionType extends AbstractType
 {
+    protected $dataClass;
+    protected $validationGroups;
+
+    public function __construct($dataClass, array $validationGroups)
+    {
+        $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -38,7 +47,8 @@ class CouponGenerateInstructionType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => 'Sylius\Bundle\PromotionsBundle\Generator\Instruction'
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

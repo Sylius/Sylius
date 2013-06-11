@@ -22,7 +22,7 @@ class CouponType extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Coupon');
+        $this->beConstructedWith('Coupon', array('sylius'));
     }
 
     function it_should_be_initializable()
@@ -60,7 +60,13 @@ class CouponType extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Coupon'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'Coupon',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

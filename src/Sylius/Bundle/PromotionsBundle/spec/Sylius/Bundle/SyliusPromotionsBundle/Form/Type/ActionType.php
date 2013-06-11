@@ -25,7 +25,7 @@ class ActionType extends ObjectBehavior
      */
     function let($actionRegistry)
     {
-        $this->beConstructedWith('Action', $actionRegistry);
+        $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
     }
 
     function it_should_be_initializable()
@@ -79,7 +79,13 @@ class ActionType extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Action'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'Action',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

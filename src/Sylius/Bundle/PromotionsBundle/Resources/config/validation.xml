@@ -20,23 +20,27 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.promotion.name.min_length</option>
                 <option name="maxMessage">sylius.promotion.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="description">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion.description.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.promotion.description.min_length</option>
                 <option name="maxMessage">sylius.promotion.description.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -45,18 +49,21 @@
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon.code.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.promotion_coupon.code.min_length</option>
                 <option name="maxMessage">sylius.promotion_coupon.code.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="usageLimit">
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon.usage_limit.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -65,16 +72,19 @@
         <property name="amount">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generate_instruction.amount.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.amount.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="usageLimit">
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.usage_limit.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
