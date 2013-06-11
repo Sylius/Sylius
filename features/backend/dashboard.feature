@@ -12,10 +12,13 @@ Feature: Store dashboard
             | name          | price |
             | Mug           | 5.99  |
             | Sticker       | 10.00 |
+          And the following shipping methods exist:
+            | category | zone         | name        |
+            |          | German lands | FedEx       |
           And the following orders were placed:
-            | user              | address                                                |
-            | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-            | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
+            | user              | address                                                | shippingMethod |
+            | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany | FedEx          |
+            | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       | FedEx          |
         And order #000001 has following items:
             | product | quantity |
             | Mug     | 2        |

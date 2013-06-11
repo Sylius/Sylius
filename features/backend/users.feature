@@ -14,9 +14,12 @@ Feature: Users management
         And the following zones are defined:
           | name   | type    | members |
           | Poland | country | Poland  |
+        And the following shipping methods exist:
+            | category | zone   | name        |
+            |          | Poland | FedEx       |
         And the following orders were placed:
-          | user | address                                        |
-          | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+          | user | address                                        | shippingMethod |
+          | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland | FedEx          |
 
     Scenario: Seeing index of all users
         Given I am on the dashboard page
