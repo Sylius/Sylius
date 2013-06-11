@@ -31,10 +31,12 @@
 
         <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
             <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_group.order%</argument>
             <tag name="form.type" alias="sylius_order" />
         </service>
         <service id="sylius.form.type.order_item" class="%sylius.form.type.order_item.class%">
             <argument>%sylius.model.order_item.class%</argument>
+            <argument>%sylius.validation_group.order_item%</argument>
             <tag name="form.type" alias="sylius_order_item" />
         </service>
 
