@@ -11,6 +11,13 @@ Feature: General settings
          When I follow "General settings"
          Then I should be on the general settings page
 
+    Scenario: Submitting empty parameter
+        Given I am on the general settings page
+         When I fill in "Page title" with ""
+          And I press "Save changes"
+         Then I should still be on the general settings page
+          And I should see "This value should not be blank."
+
     Scenario: Saving the configuration
         Given I am on the general settings page
          When I press "Save changes"
