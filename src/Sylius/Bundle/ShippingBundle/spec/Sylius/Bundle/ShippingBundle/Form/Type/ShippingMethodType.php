@@ -169,10 +169,13 @@ class ShippingMethodType extends ObjectBehavior
         $builder
             ->setAttribute(
                 'prototypes',
-                array('calculators' => array(
-                    'flat_rate' => $flatRateForm,
-                    'per_item_rate' => $perItemForm,
-                ))
+                array(
+                    'calculators' => array(
+                        'flat_rate' => $flatRateForm,
+                        'per_item_rate' => $perItemForm,
+                    ),
+                    'rules' => array()
+                )
             )
             ->shouldBeCalled()
         ;
@@ -207,16 +210,18 @@ class ShippingMethodType extends ObjectBehavior
         $builder
             ->getAttribute('prototypes')
             ->willReturn(array(
-                'flat_rate'     => $flatRateForm,
-                'per_item_rate' => $perItemRateForm
+                'calculators' => array(
+                    'flat_rate'     => $flatRateForm,
+                    'per_item_rate' => $perItemRateForm
+                )
             ))
         ;
         $form->getConfig()->willReturn($builder);
 
         $this->buildView($formView, $form, array());
 
-        $formView->vars['prototypes']['flat_rate']->shouldBe($flatRateFormView);
-        $formView->vars['prototypes']['per_item_rate']->shouldBe($perItemRateFormView);
+        $formView->vars['prototypes']['calculators_flat_rate']->shouldBe($flatRateFormView);
+        $formView->vars['prototypes']['calculators_per_item_rate']->shouldBe($perItemRateFormView);
     }
 
     /**
