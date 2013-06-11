@@ -48,6 +48,7 @@ class SyliusShippingExtension extends Extension
         $container->setParameter('sylius_shipping.engine', $config['engine']);
 
         $this->mapClassParameters($config['classes'], $container);
+        $this->mapValidationGroupParameters($config['validation_groups'], $container);
 
         $loader->load('services.xml');
     }
@@ -65,6 +66,19 @@ class SyliusShippingExtension extends Extension
                 $service = $service === 'form' ? 'form.type' : $service;
                 $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
             }
+        }
+    }
+
+    /**
+     * Remap validation group parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
+    {
+        foreach ($validationGroups as $model => $groups) {
+            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
         }
     }
 }

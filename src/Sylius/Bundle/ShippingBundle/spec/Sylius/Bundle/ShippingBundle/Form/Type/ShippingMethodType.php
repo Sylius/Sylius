@@ -28,7 +28,7 @@ class ShippingMethodType extends ObjectBehavior
      */
     function let($calculatorRegistry, $checkerRegistry, $builder, $factory)
     {
-        $this->beConstructedWith('ShippingMethod', $calculatorRegistry, $checkerRegistry);
+        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
         $builder->getFormFactory()->willReturn($factory);
     }
 
@@ -229,7 +229,13 @@ class ShippingMethodType extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'ShippingMethod'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'ShippingMethod',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }
