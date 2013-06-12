@@ -41,6 +41,7 @@
 
         <service id="sylius.form.type.taxonomy" class="%sylius.form.type.taxonomy.class%">
             <argument>%sylius.model.taxonomy.class%</argument>
+            <argument>%sylius.validation_group.taxonomy%</argument>
             <tag name="form.type" alias="sylius_taxonomy" />
         </service>
         <service id="sylius.form.type.taxonomy_choice" class="%sylius.form.type.taxonomy_choice.class%">
@@ -50,6 +51,7 @@
 
         <service id="sylius.form.type.taxon" class="%sylius.form.type.taxon.class%">
             <argument>%sylius.model.taxon.class%</argument>
+            <argument>%sylius.validation_group.taxon%</argument>
             <tag name="form.type" alias="sylius_taxon" />
         </service>
         <service id="sylius.form.type.taxon_choice" class="%sylius.form.type.taxon_choice.class%">
