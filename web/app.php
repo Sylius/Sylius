@@ -22,11 +22,11 @@ $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 //$loader = new ApcClassLoader('sylius', $loader);
 //$loader->register(true);
 
-require_once __DIR__.'/../app/SyliusKernel.php';
-//require_once __DIR__.'/../app/SyliusCache.php';
+require_once __DIR__.'/../app/AppKernel.php';
+//require_once __DIR__.'/../app/AppCache.php';
 
-$kernel = new SyliusKernel('prod', false);
-//$kernel = new SyliusCache($kernel);
+$kernel = new AppKernel('prod', false);
+//$kernel = new AppCache($kernel);
 
 $request = Request::createFromGlobals();
 
