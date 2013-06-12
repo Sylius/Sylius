@@ -5,9 +5,9 @@
 <html>
     <head>
         <title>
-            {% block title %}
-                {{ settings.title|default('sylius.meta.frontend_title'|trans) }}
-            {% endblock %}
+            {%- block title -%}
+                {{- settings.title|default('sylius.meta.frontend_title'|trans) -}}
+            {%- endblock -%}
         </title>
         <meta charset="UTF-8">
         <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
