@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Percentage discount action configuration form type.
@@ -23,6 +24,13 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class PercentageDiscountConfigurationType extends AbstractType
 {
+    protected $validationGroups;
+
+    public function __construct(array $validationGroups)
+    {
+        $this->validationGroups = $validationGroups;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +43,15 @@ class PercentageDiscountConfigurationType extends AbstractType
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
+            ))
+        ;
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

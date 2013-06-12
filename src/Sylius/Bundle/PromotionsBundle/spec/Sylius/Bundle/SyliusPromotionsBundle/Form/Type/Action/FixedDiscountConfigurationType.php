@@ -20,6 +20,11 @@ use PHPSpec2\ObjectBehavior;
  */
 class FixedDiscountConfigurationType extends ObjectBehavior
 {
+    function let($actionRegistry)
+    {
+        $this->beConstructedWith(array('sylius'));
+    }
+
     function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Action\FixedDiscountConfigurationType');

@@ -28,12 +28,14 @@ use JMS\TranslationBundle\Annotation\Ignore;
 class PromotionType extends AbstractType
 {
     protected $dataClass;
+    protected $validationGroups;
     protected $checkerRegistry;
     protected $actionRegistry;
 
-    public function __construct($dataClass, RuleCheckerRegistryInterface $checkerRegistry, PromotionActionRegistryInterface $actionRegistry)
+    public function __construct($dataClass, array $validationGroups, RuleCheckerRegistryInterface $checkerRegistry, PromotionActionRegistryInterface $actionRegistry)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
         $this->checkerRegistry = $checkerRegistry;
         $this->actionRegistry = $actionRegistry;
     }
@@ -104,7 +106,8 @@ class PromotionType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

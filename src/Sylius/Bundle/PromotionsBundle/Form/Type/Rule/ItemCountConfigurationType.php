@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Item count rule configuration form type.
@@ -23,6 +24,13 @@ use Symfony\Component\Validator\Constraints\Type;
  */
 class ItemCountConfigurationType extends AbstractType
 {
+    protected $validationGroups;
+
+    public function __construct(array $validationGroups)
+    {
+        $this->validationGroups = $validationGroups;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -41,6 +49,15 @@ class ItemCountConfigurationType extends AbstractType
                 'constraints' => array(
                     new Type(array('type' => 'bool')),
                 )
+            ))
+        ;
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
