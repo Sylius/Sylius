@@ -36,24 +36,38 @@ class ShippingMethodType extends AbstractType
     protected $dataClass;
 
     /**
+     * Validation groups.
+     *
+     * @var array
+     */
+    protected $validationGroups;
+
+    /**
      * Calculator registry.
      *
      * @var CalculatorRegistryInterface
      */
     protected $calculatorRegistry;
 
+    /**
+     * Rule checker registry.
+     *
+     * @var RuleCheckerRegistryInterface
+     */
     protected $checkerRegistry;
 
     /**
      * Constructor.
      *
      * @param string                       $dataClass
+     * @param array                        $validationGroups
      * @param CalculatorRegistryInterface  $calculatorRegistry
      * @param RuleCheckerRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
         $this->calculatorRegistry = $calculatorRegistry;
         $this->checkerRegistry = $checkerRegistry;
     }
@@ -120,7 +134,8 @@ class ShippingMethodType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

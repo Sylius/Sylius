@@ -22,7 +22,7 @@ class ShippingCategoryType extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShippingCategory');
+        $this->beConstructedWith('ShippingCategory', array('sylius'));
     }
 
     function it_should_be_initializable()
@@ -60,7 +60,13 @@ class ShippingCategoryType extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'ShippingCategory'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'ShippingCategory',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }
