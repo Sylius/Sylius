@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Kernel;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusKernel extends Kernel
+class AppKernel extends Kernel
 {
     /**
      * {@inheritdoc}
