@@ -73,31 +73,38 @@
         </service>
         <service id="sylius.form.type.address" class="%sylius.form.type.address.class%">
             <argument>%sylius.model.address.class%</argument>
+            <argument>%sylius.validation_group.address%</argument>
             <argument type="service" id="sylius.form.listener.address" />
             <tag name="form.type" alias="sylius_address" />
         </service>
         <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
             <argument>%sylius.model.country.class%</argument>
+            <argument>%sylius.validation_group.country%</argument>
             <tag name="form.type" alias="sylius_country" />
         </service>
         <service id="sylius.form.type.province" class="%sylius.form.type.province.class%">
             <argument>%sylius.model.province.class%</argument>
+            <argument>%sylius.validation_group.province%</argument>
             <tag name="form.type" alias="sylius_province" />
         </service>
         <service id="sylius.form.type.zone" class="%sylius.form.type.zone.class%">
             <argument>%sylius.model.zone.class%</argument>
+            <argument>%sylius.validation_group.zone%</argument>
             <tag name="form.type" alias="sylius_zone" />
         </service>
         <service id="sylius.form.type.zone_member_country" class="%sylius.form.type.zone_member_country.class%">
             <argument>%sylius.model.zone_member_country.class%</argument>
+            <argument>%sylius.validation_group.zone_member%</argument>
             <tag name="form.type" alias="sylius_zone_member_country" />
         </service>
         <service id="sylius.form.type.zone_member_province" class="%sylius.form.type.zone_member_province.class%">
             <argument>%sylius.model.zone_member_province.class%</argument>
+            <argument>%sylius.validation_group.zone_member%</argument>
             <tag name="form.type" alias="sylius_zone_member_province" />
         </service>
         <service id="sylius.form.type.zone_member_zone" class="%sylius.form.type.zone_member_zone.class%">
             <argument>%sylius.model.zone_member_zone.class%</argument>
+            <argument>%sylius.validation_group.zone_member%</argument>
             <tag name="form.type" alias="sylius_zone_member_zone" />
         </service>
 

@@ -20,17 +20,20 @@
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.first_name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.first_name.min_length</option>
                 <option name="maxMessage">sylius.address.first_name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="lastName">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.last_name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
 
             <constraint name="Length">
@@ -38,49 +41,58 @@
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.last_name.min_length</option>
                 <option name="maxMessage">sylius.address.last_name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="country">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.country.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <getter property="valid">
             <constraint name="True">
                 <option name="message">sylius.address.province.valid</option>
+                <option name="groups">sylius</option>
             </constraint>
         </getter>
         <property name="street">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.street.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.street.min_length</option>
                 <option name="maxMessage">sylius.address.street.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="city">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.city.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.city.min_length</option>
                 <option name="maxMessage">sylius.address.city.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="postcode">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.postcode.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.postcode.min_length</option>
                 <option name="maxMessage">sylius.address.postcode.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -89,22 +101,26 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.country.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.country.name.min_length</option>
                 <option name="maxMessage">sylius.country.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="isoName">
             <constraint name="NotBlank">
                 <option name="message">sylius.country.iso_name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">2</option>
                 <option name="exactMessage">sylius.country.iso_name.exact_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="provinces">
@@ -116,12 +132,14 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.province.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.province.name.min_length</option>
                 <option name="maxMessage">sylius.province.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -130,12 +148,14 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.zone.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.zone.name.max_length</option>
                 <option name="maxMessage">sylius.zone.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="members">
@@ -143,6 +163,7 @@
             <constraint name="Count">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.zone.members.min_count</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

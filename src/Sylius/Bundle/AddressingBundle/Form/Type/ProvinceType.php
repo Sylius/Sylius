@@ -33,10 +33,12 @@ class ProvinceType extends AbstractType
      * Constructor.
      *
      * @param string $dataClass
+     * @param array  $validationGroups
      */
-    public function __construct($dataClass)
+    public function __construct($dataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -58,7 +60,8 @@ class ProvinceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
