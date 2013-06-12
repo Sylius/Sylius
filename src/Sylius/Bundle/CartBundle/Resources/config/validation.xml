@@ -23,12 +23,16 @@
     </class>
     <class name="Sylius\Bundle\CartBundle\Model\CartItem">
         <property name="quantity">
-            <constraint name="NotBlank" />
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Type">
                 <option name="type">integer</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

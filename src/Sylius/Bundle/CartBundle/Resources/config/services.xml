@@ -45,11 +45,13 @@
 
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
             <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.validation_group.cart%</argument>
             <tag name="form.type" alias="sylius_cart" />
         </service>
 
         <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
             <argument>%sylius.model.cart_item.class%</argument>
+            <argument>%sylius.validation_group.cart_item%</argument>
             <tag name="form.type" alias="sylius_cart_item" />
         </service>
 
