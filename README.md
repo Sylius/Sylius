@@ -44,6 +44,14 @@ $ bin/behat
 $ bin/behat -p no-js # If you want to skip the scenarios which require real browser.
 ```
 
+Troubleshooting
+------------
+If something goes wrong, errors & exceptions are logged at the application level:
+````
+tail -f app/logs/prod.log
+tail -f app/logs/dev.log
+````
+
 Contributing
 ------------
 
