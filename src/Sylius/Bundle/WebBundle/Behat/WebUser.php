@@ -194,7 +194,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnMyAccountOrdersPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_orders'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_order_index'));
     }
 
     /**
@@ -202,7 +202,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountOrdersPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_orders'));
+        $this->getSession()->visit($this->generateUrl('sylius_account_order_index'));
     }
 
 
