@@ -22,7 +22,7 @@ class TaxonomyType extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Taxonomy');
+        $this->beConstructedWith('Taxonomy', array('sylius'));
     }
 
     function it_is_initializable()
@@ -50,7 +50,13 @@ class TaxonomyType extends ObjectBehavior
      */
     function it_defines_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Taxonomy'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'Taxonomy',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

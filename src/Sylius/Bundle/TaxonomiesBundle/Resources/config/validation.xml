@@ -20,10 +20,12 @@
         <getter property="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.taxonomy.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.taxonomy.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </getter>
     </class>
@@ -32,10 +34,12 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.taxon.name.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.taxon.name.max_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
