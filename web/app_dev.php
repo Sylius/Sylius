@@ -26,10 +26,10 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
 }
 
 require_once __DIR__.'/../app/bootstrap.php.cache';
-require_once __DIR__.'/../app/SyliusKernel.php';
+require_once __DIR__.'/../app/AppKernel.php';
 
 // Initialize kernel and run the application.
-$kernel = new SyliusKernel('dev', true);
+$kernel = new AppKernel('dev', true);
 $request = Request::createFromGlobals();
 
 Request::enableHttpMethodParameterOverride();

@@ -13,8 +13,8 @@ default:
             selenium2: ~
         Behat\Symfony2Extension\Extension:
             kernel:
-                path: app/SyliusKernel.php
-                class: SyliusKernel
+                path: app/AppKernel.php
+                class: AppKernel
             mink_driver: true
 
 frontend:

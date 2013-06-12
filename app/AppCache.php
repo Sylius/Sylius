@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-require_once __DIR__.'/SyliusKernel.php';
+require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 
-class SyliusCache extends HttpCache
+class AppCache extends HttpCache
 {
 }
