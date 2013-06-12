@@ -14,7 +14,7 @@ namespace Sylius\Bundle\InventoryBundle\Document;
 use Sylius\Bundle\InventoryBundle\Model\Stockable as BaseStockable;
 
 /**
- * Stocakble entity.
+ * Stocakble document.
  *
  * @author Eymen Gunay <eymen@egunay.com>
  */
