@@ -22,7 +22,7 @@ class OrderType extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Order');
+        $this->beConstructedWith('Order', array('sylius'));
     }
 
     function it_is_initializable()
@@ -50,7 +50,13 @@ class OrderType extends ObjectBehavior
      */
     function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Order'))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class'        => 'Order',
+                'validation_groups' => array('sylius'),
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

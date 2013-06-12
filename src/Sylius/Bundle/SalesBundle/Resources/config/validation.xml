@@ -25,14 +25,17 @@
         <property name="quantity">
             <constraint name="NotBlank">
                 <option name="message">sylius.order_item.quantity.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Type">
                 <option name="type">integer</option>
                 <option name="message">sylius.order_item.quantity.integer</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.order_item.quantity.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
