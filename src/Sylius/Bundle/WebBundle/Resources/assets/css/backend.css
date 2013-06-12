@@ -98,3 +98,22 @@ input[type="date"] {
     width: 50px;
     height: 40px;
 }
+/* choice widget expanded */
+.control-choice-input {
+    position: relative;
+    height: 20px;
+}
+.control-choice-input input {
+    float: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    top: 4px;
+}
+.control-choice-input .control-label {
+    float: none;
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: auto;
+}
