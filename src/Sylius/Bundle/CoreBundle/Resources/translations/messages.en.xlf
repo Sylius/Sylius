@@ -122,6 +122,10 @@
         <source>sylius.form.user.shipping_address</source>
         <target>Shipping address</target>
       </trans-unit>
+      <trans-unit id="a3ce61827077d955fa0b4db8ec6beac4" resname="sylius.form.user_filter.query">
+        <source>sylius.form.user_filter.query</source>
+        <target>Search</target>
+      </trans-unit>
       <trans-unit id="9ed17ac3646a409b6fc47330a247a445" resname="sylius.form.variant.available_on_demand">
         <source>sylius.form.variant.available_on_demand</source>
         <target>Available on demand</target>

@@ -1150,6 +1150,10 @@
         <source>sylius.save_changes</source>
         <target>Save changes</target>
       </trans-unit>
+      <trans-unit id="bab3d3f6b080df1004b32c650fd8c29d" resname="sylius.search">
+        <source>sylius.search</source>
+        <target>Search</target>
+      </trans-unit>
       <trans-unit id="10fa10c1f6224e5247cd40d74fedb994" resname="sylius.settings.general_header">
         <source>sylius.settings.general_header</source>
         <target>General settings</target>

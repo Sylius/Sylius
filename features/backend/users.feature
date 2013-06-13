@@ -33,6 +33,13 @@ Feature: Users management
          Then I should still be on the user index page
           But I should see 2 users in the list
 
+    Scenario: Searching for users
+        Given I am on the user index page
+         When I fill in "criteria_query" with "Klaus"
+          And I press "Search"
+         Then I should be on the user index page
+          And I should see 2 users in the list
+
     Scenario: Accessing the user details page from users list
         Given I am on the user index page
          When I click "details" near "john"

@@ -8,10 +8,16 @@ sylius_backend_user_index:
         _controller: sylius.controller.user:indexAction
         _sylius:
             template: SyliusWebBundle:Backend/User:index.html.twig
-            filterable: true
-            sortable: true
-            sorting:
-                id: desc
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
+
+sylius_backend_user_filter_form:
+    pattern: /filter-form
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user:filterFormAction
+        _sylius:
+            template: SyliusWebBundle:Backend/User:filterForm.html.twig
 
 sylius_backend_user_create:
     pattern: /new

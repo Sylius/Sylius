@@ -13,7 +13,14 @@
     {{ buttons.create(path('sylius_backend_user_create'), 'sylius.user.create'|trans) }}
 </div>
 
-{{ pagination(users) }}
+<div class="row-fluid">
+    <div class="span5">
+        {{ pagination(users) }}
+    </div>
+    <div class="span4 pull-right">
+        {% render(url('sylius_backend_user_filter_form')) %}
+    </div>
+</div>
 
 <ul class="nav nav-tabs">
     <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>

@@ -35,6 +35,7 @@
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
 
@@ -193,6 +194,9 @@
             </argument>
         </service>
 
+        <service id="sylius.form.type.user_filter" class="%sylius.form.type.user_filter.class%">
+            <tag name="form.type" alias="sylius_user_filter" />
+        </service>
         <service id="sylius.form.type.product_filter" class="%sylius.form.type.product_filter.class%">
             <tag name="form.type" alias="sylius_product_filter" />
         </service>
