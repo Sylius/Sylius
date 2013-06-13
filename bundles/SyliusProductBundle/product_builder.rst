@@ -9,7 +9,7 @@ Example is self explanatory:
 
     <?php
 
-    $product = $this->get('sylius.product_builder')
+    $product = $this->get('sylius.builder.product')
         ->create('Github mug')
         ->setDescription("Coffee. Let's face it — humans need to drink liquids!")
         ->addProperty('collection', 2013)
