@@ -28,6 +28,7 @@
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
 
+        <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
@@ -99,6 +100,10 @@
         </service>
 
         <!-- checkout forms -->
+        <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_user" />
+        </service>
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />

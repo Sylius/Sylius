@@ -13,11 +13,22 @@ sylius_backend_user_index:
             sorting:
                 id: desc
 
+sylius_backend_user_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.user:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/User:update.html.twig
+            redirect: sylius_backend_user_show
+
 sylius_backend_user_delete:
     pattern: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.user:deleteAction
+        _sylius:
+            redirect: sylius_backend_user_index
 
 sylius_backend_user_show:
     pattern: /{id}

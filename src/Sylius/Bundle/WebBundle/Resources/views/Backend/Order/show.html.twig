@@ -108,85 +108,10 @@
 </div>
 <div class="row-fluid">
     <div class="span6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="2">{{ 'sylius.order.shipping_address'|trans }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>{{ 'sylius.address.firstname'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.firstname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.lastname'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.lastname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.country'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.country }}</td>
-                </tr>
-                {% if order.shippingAddress.province is not empty %}
-                <tr>
-                    <td><strong>{{ 'sylius.address.province'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.province }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td><strong>{{ 'sylius.address.street'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.street }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.city'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.city }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.postcode'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.postcode }}</td>
-                </tr>
-            </tbody>
-        </table>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': order.shippingAddress, 'title': 'sylius.order.shipping_address'|trans} %}
     </div>
     <div class="span6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="2">{{ 'sylius.order.billing_address'|trans }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>{{ 'sylius.address.firstname'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.firstname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.lastname'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.lastname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.country'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.country }}</td>
-                </tr>
-                {% if order.billingAddress.province is not empty %}
-                <tr>
-                    <td><strong>{{ 'sylius.address.province'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.province }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td><strong>{{ 'sylius.address.street'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.street }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.city'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.city }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.address.postcode'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.postcode }}</td>
-                </tr>
-            </tbody>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': order.billingAddress, 'title': 'sylius.order.billing_address'|trans} %}
         </table>
     </div>
 </div>

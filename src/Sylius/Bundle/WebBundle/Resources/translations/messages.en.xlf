@@ -2,6 +2,26 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
+      <trans-unit id="aa5d1d6b185c783bb19dc29190828a5e" resname="sylius.account.home.email">
+        <source>sylius.account.home.email</source>
+        <target>Email : </target>
+      </trans-unit>
+      <trans-unit id="6968e9427145cfed58f58e5a2a6bcf06" resname="sylius.account.home.id">
+        <source>sylius.account.home.id</source>
+        <target>Customer ID : </target>
+      </trans-unit>
+      <trans-unit id="5f81f7f249201ad12ab74f5a7da6afcd" resname="sylius.account.home.outline">
+        <source>sylius.account.home.outline</source>
+        <target>Enjoy all the features that are available on your personal space to view, track and manage all your data.</target>
+      </trans-unit>
+      <trans-unit id="c501f09ad630e9e77e7ba2d401a30656" resname="sylius.account.home.since">
+        <source>sylius.account.home.since</source>
+        <target>You are customer since</target>
+      </trans-unit>
+      <trans-unit id="4c4234eba4ccf272a578ae3161fd2456" resname="sylius.account.home.welcome">
+        <source>sylius.account.home.welcome</source>
+        <target>Welcome to your space</target>
+      </trans-unit>
       <trans-unit id="94508ad78d6cdae4de43ed99efed1fc6" resname="sylius.add_to_cart">
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
@@ -10,13 +30,13 @@
         <source>sylius.address.city</source>
         <target>City</target>
       </trans-unit>
+      <trans-unit id="36d1054361378200825465eaf80c5807" resname="sylius.address.company">
+        <source>sylius.address.company</source>
+        <target>Company</target>
+      </trans-unit>
       <trans-unit id="13bb7a2428b440096560dc9f179b29e7" resname="sylius.address.country">
         <source>sylius.address.country</source>
         <target>Country</target>
-      </trans-unit>
-      <trans-unit id="41289d84073d3bca039e147207c78037" resname="sylius.address.edit.header">
-        <source>sylius.address.edit.header</source>
-        <target>sylius.address.edit.header</target>
       </trans-unit>
       <trans-unit id="1ee551ccff556f9d96bd0c07d3e6628c" resname="sylius.address.firstname">
         <source>sylius.address.firstname</source>
@@ -346,6 +366,26 @@
         <source>sylius.form.choose_file</source>
         <target>Choose file</target>
       </trans-unit>
+      <trans-unit id="737d82e384946e4946cfea34afb9b7d8" resname="sylius.form.frontend.password.confirmation">
+        <source>sylius.form.frontend.password.confirmation</source>
+        <target>Confirmation</target>
+      </trans-unit>
+      <trans-unit id="b771f518bbcb9c488ca04c3f823dc9d9" resname="sylius.form.frontend.password.current">
+        <source>sylius.form.frontend.password.current</source>
+        <target>Current password</target>
+      </trans-unit>
+      <trans-unit id="3081a42d6da5f25be3e47723f66bab9d" resname="sylius.form.frontend.password.new">
+        <source>sylius.form.frontend.password.new</source>
+        <target>New password</target>
+      </trans-unit>
+      <trans-unit id="f79f1f6a2584f1542be7e6a9bab5d988" resname="sylius.form.frontend.password.title">
+        <source>sylius.form.frontend.password.title</source>
+        <target>Change my password</target>
+      </trans-unit>
+      <trans-unit id="b41497d414e58dae641cf537989578b8" resname="sylius.form.frontend.profile.title">
+        <source>sylius.form.frontend.profile.title</source>
+        <target>Edit my personal information</target>
+      </trans-unit>
       <trans-unit id="725075e6afc8a166392a2261d7880d37" resname="sylius.form.login.password">
         <source>sylius.form.login.password</source>
         <target>Password</target>
@@ -353,6 +393,22 @@
       <trans-unit id="ea0c4a2c08a2d13161d6e4312d5f7e22" resname="sylius.form.login.email">
         <source>sylius.form.login.email</source>
         <target>Email</target>
+      </trans-unit>
+      <trans-unit id="24a58cc80b3622348ed028ea8b9793ac" resname="sylius.form.profile.email">
+        <source>sylius.form.profile.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="d84fd73990d8cb5f31054749096220d7" resname="sylius.form.profile.firstName">
+        <source>sylius.form.profile.firstName</source>
+        <target>First name</target>
+      </trans-unit>
+      <trans-unit id="f434362fba3003af96b35062e2fc1c54" resname="sylius.form.profile.lastName">
+        <source>sylius.form.profile.lastName</source>
+        <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="4b98ba240ca8c3cf96133a7b78d765f0" resname="sylius.form.profile.username">
+        <source>sylius.form.profile.username</source>
+        <target>Username</target>
       </trans-unit>
       <trans-unit id="25b6370883ff5b94aef1ceb697b6d3f6" resname="sylius.gallery.next">
         <source>sylius.gallery.next</source>
@@ -1454,6 +1510,10 @@
         <source>sylius.taxonomy.update_header</source>
         <target>Editing taxonomy</target>
       </trans-unit>
+      <trans-unit id="d4dd621e8d7998e4dcc0aa3093c024a1" resname="sylius.user.billing_address">
+        <source>sylius.user.billing_address</source>
+        <target>Billing address</target>
+      </trans-unit>
       <trans-unit id="e4b61ff5e1add3eef1f9a5433aab958e" resname="sylius.user.email">
         <source>sylius.user.email</source>
         <target>E-Mail</target>
@@ -1469,6 +1529,10 @@
       <trans-unit id="376db4cf082634bd4e6720cce5a483dd" resname="sylius.user.filter.unconfirmed">
         <source>sylius.user.filter.unconfirmed</source>
         <target>Unconfirmed accounts</target>
+      </trans-unit>
+      <trans-unit id="538e68a9b291a09e2bd0f48bf1db260d" resname="sylius.user.first_name">
+        <source>sylius.user.first_name</source>
+        <target>First name</target>
       </trans-unit>
       <trans-unit id="3da9dd6cb0fbafd069230df3f6ef9837" resname="sylius.user.general_info">
         <source>sylius.user.general_info</source>
@@ -1486,6 +1550,14 @@
         <source>sylius.user.last_login</source>
         <target>Last login</target>
       </trans-unit>
+      <trans-unit id="a891001243af49a114b41d2d430b96cf" resname="sylius.user.last_name">
+        <source>sylius.user.last_name</source>
+        <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="35a2e8d0fe7103442cd041fc024a4e86" resname="sylius.user.manage">
+        <source>sylius.user.manage</source>
+        <target>manage users</target>
+      </trans-unit>
       <trans-unit id="2fa67405e07e8ca4d30a3d6424b50940" resname="sylius.user.no_results">
         <source>sylius.user.no_results</source>
         <target>There are no users to display.</target>
@@ -1496,15 +1568,23 @@
       </trans-unit>
       <trans-unit id="430a7b28909dfcb968875b3862593d6d" resname="sylius.user.orders">
         <source>sylius.user.orders</source>
-        <target>sylius.user.orders</target>
+        <target>User orders</target>
       </trans-unit>
       <trans-unit id="b541c0a6d2177cb6764afd02a184e17b" resname="sylius.user.recent_header">
         <source>sylius.user.recent_header</source>
         <target>Recent users</target>
       </trans-unit>
+      <trans-unit id="1cc3843529c72b288a252bcf91c12492" resname="sylius.user.shipping_address">
+        <source>sylius.user.shipping_address</source>
+        <target>Shipping address</target>
+      </trans-unit>
       <trans-unit id="bffeb700587dcbddc8a1153e569a802f" resname="sylius.user.show_header">
         <source>sylius.user.show_header</source>
         <target>User details</target>
+      </trans-unit>
+      <trans-unit id="4724f9b5b450129ebaad98f2c8ab74b3" resname="sylius.user.update_header">
+        <source>sylius.user.update_header</source>
+        <target>Editing user</target>
       </trans-unit>
       <trans-unit id="28a2e95eafe4003ebc5d86a4d3ee2123" resname="sylius.user.username">
         <source>sylius.user.username</source>
@@ -1605,82 +1685,6 @@
       <trans-unit id="b81d7e96fb8731029fd822cc3d845591" resname="sylius.zone_member.members">
         <source>sylius.zone_member.members</source>
         <target>Members</target>
-      </trans-unit>
-      <trans-unit id="0f0f04f09c17d10081eb4993fa863550ecc9d33d" resname="change_password.flash.success">
-        <source>change_password.flash.success</source>
-        <target state="new">Your password has been changed.</target>
-      </trans-unit>
-      <trans-unit id="a067e7e04712aa036ad446379831d4a5fd00c27d" resname="profile.flash.updated">
-        <source>profile.flash.updated</source>
-        <target state="new">Your personal information have been updated.</target>
-      </trans-unit>
-      <trans-unit id="3d0bc274c189b6aa1385bfdd6b9067247ecec200" resname="sylius.account.home.email">
-        <source>sylius.account.home.email</source>
-        <target state="new">Email : </target>
-      </trans-unit>
-      <trans-unit id="9b3c46ca5d6573965c1992a9968109f53dc70cea" resname="sylius.account.home.id">
-        <source>sylius.account.home.id</source>
-        <target state="new">Customer ID : </target>
-      </trans-unit>
-      <trans-unit id="541928c0e4a54f16b91bf983e3eafd46928053aa" resname="sylius.account.home.outline">
-        <source>sylius.account.home.outline</source>
-        <target state="new">Enjoy all the features that are available on your personal space to view, track and manage all your data.</target>
-      </trans-unit>
-      <trans-unit id="77658adaa51262d9d500b4107908a1bbd18048a9" resname="sylius.account.home.since">
-        <source>sylius.account.home.since</source>
-        <target state="new">You are customer since</target>
-      </trans-unit>
-      <trans-unit id="ae8ba795bdbe353a378ea72e51194d2691a9338d" resname="sylius.account.home.welcome">
-        <source>sylius.account.home.welcome</source>
-        <target state="new">Welcome to your space</target>
-      </trans-unit>
-      <trans-unit id="a2fc8502b1fa534d9c312e5f3a6ffea4d12658d5" resname="sylius.account.title">
-        <source>sylius.account.title</source>
-        <target state="new">My account</target>
-      </trans-unit>
-      <trans-unit id="94916ad253d5fe678af936bfcc3ade235be465bf" resname="sylius.form.frontend.password.title">
-        <source>sylius.form.frontend.password.title</source>
-        <target state="new">Change my password</target>
-      </trans-unit>
-      <trans-unit id="e5c9560e26b4c561723653c88d4b6b1801c9eaf7" resname="sylius.form.frontend.profile.title">
-        <source>sylius.form.frontend.profile.title</source>
-        <target state="new">Edit my personal information</target>
-      </trans-unit>
-      <trans-unit id="df4e0ba47974427785ba76614a958af03e6741f6" resname="sylius.form.frontend.password.confirmation">
-       <source>sylius.form.frontend.password.confirmation</source>
-       <target state="new">Confirmation</target>
-      </trans-unit>
-      <trans-unit id="c8bf38f33bff9aa29dfc8321e2f9e6063f704b30" resname="sylius.form.frontend.password.current">
-        <source>sylius.form.frontend.password.current</source>
-        <target state="new">Current password</target>
-      </trans-unit>
-      <trans-unit id="89cef5f4148ead625041b9e94838ba8fba55a2ec" resname="sylius.form.frontend.password.new">
-        <source>sylius.form.frontend.password.new</source>
-        <target state="new">New password</target>
-      </trans-unit>
-      <trans-unit id="8aad64651dc162f2179df2eea7c03e345e88c1cc" resname="sylius.form.profile.email">
-        <source>sylius.form.profile.email</source>
-        <target state="new">Email</target>
-      </trans-unit>
-      <trans-unit id="c8487950ff3c39cb0f6d59262b0bef15f01a5254" resname="sylius.form.profile.firstName">
-        <source>sylius.form.profile.firstName</source>
-        <target state="new">First name</target>
-      </trans-unit>
-      <trans-unit id="9d74713fb46f9207b3de83fcbdc5cbe4811e0208" resname="sylius.form.profile.lastName">
-        <source>sylius.form.profile.lastName</source>
-        <target state="new">Last name</target>
-      </trans-unit>
-      <trans-unit id="beef4e8d02d014dbb6d5042f2e48d519d2b069bc" resname="sylius.form.profile.username">
-        <source>sylius.form.profile.username</source>
-        <target state="new">Username</target>
-      </trans-unit>
-      <trans-unit id="5d5cb1a5553b14920408b3dfa00348dab7cdac73" resname="sylius.user.order.no_results">
-        <source>sylius.user.order.no_results</source>
-        <target state="new">sylius.user.order.no_results</target>
-      </trans-unit>
-      <trans-unit id="ad9e02dd9c29bee32350f3b944f93af61d39bb61" resname="sylius.user.orders">
-        <source>sylius.user.orders</source>
-        <target state="new">sylius.user.orders</target>
       </trans-unit>
     </body>
   </file>
