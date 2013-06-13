@@ -1,5 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/User:macros.html.twig' import list  %}
 
@@ -8,7 +9,18 @@
     <h1>{{ 'sylius.user.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(users) }}
+<div class="well">
+    {{ buttons.create(path('sylius_backend_user_create'), 'sylius.user.create'|trans) }}
+</div>
+
+<div class="row-fluid">
+    <div class="span5">
+        {{ pagination(users) }}
+    </div>
+    <div class="span4 pull-right">
+        {% render(url('sylius_backend_user_filter_form')) %}
+    </div>
+</div>
 
 <ul class="nav nav-tabs">
     <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>

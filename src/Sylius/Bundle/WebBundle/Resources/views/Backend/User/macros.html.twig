@@ -1,5 +1,8 @@
 {% macro list(users) %}
 
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
 {% if users|length > 0 %}
 <table id="users" class="table table-bordered">
     <thead>
@@ -24,9 +27,9 @@
             </td>
             <td>
                 <div class="btn-group pull-right">
-                    <a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}" class="btn">
-                        <i class="icon-book"></i> {{ 'sylius.show'|trans }}
-                    </a>
+                    {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
+                    {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
+                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
                 </div>
             </td>
         </tr>
@@ -34,9 +37,7 @@
     </tbody>
 </table>
 {% else %}
-<div class="alert alert-info">
-    <h4 class="alert-heading">{{ 'sylius.alert.info'|trans }}</h4>
-    {{ 'sylius.user.no_results'|trans }}
+{{ alerts.info('sylius.user.no_results'|trans) }}
 </div>
 {% endif %}
 

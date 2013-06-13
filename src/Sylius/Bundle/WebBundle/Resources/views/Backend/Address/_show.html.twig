@@ -1,0 +1,45 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">{{ title }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>{{ 'sylius.address.firstname'|trans }}</strong></td>
+            <td>{{ address.firstname }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ 'sylius.address.lastname'|trans }}</strong></td>
+            <td>{{ address.lastname }}</td>
+        </tr>
+        {% if address.company is not empty %}
+        <tr>
+            <td><strong>{{ 'sylius.address.company'|trans }}</strong></td>
+            <td>{{ address.company }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td><strong>{{ 'sylius.address.country'|trans }}</strong></td>
+            <td>{{ address.country }}</td>
+        </tr>
+        {% if address.province is not empty %}
+        <tr>
+            <td><strong>{{ 'sylius.address.province'|trans }}</strong></td>
+            <td>{{ address.province }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td><strong>{{ 'sylius.address.street'|trans }}</strong></td>
+            <td>{{ address.street }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ 'sylius.address.city'|trans }}</strong></td>
+            <td>{{ address.city }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ 'sylius.address.postcode'|trans }}</strong></td>
+            <td>{{ address.postcode }}</td>
+        </tr>
+    </tbody>
+</table>

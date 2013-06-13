@@ -1,0 +1,5 @@
+<form method="get" action="{{ path('sylius_backend_user_index') }}" class="form-inline well well-small">
+    {{ form_widget(form.query) }}
+    {{ form_rest(form) }}
+<button type="submit" class="btn btn-primary"><i class="icon-search"></i> {{ 'sylius.search'|trans }}</button>
+</form>
