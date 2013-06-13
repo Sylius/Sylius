@@ -142,7 +142,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
     }
 
-    public function thereIsUser($username, $password, $role = null, $enabled = 'yes', $address = null)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null)
     {
         $addressData = explode(',', $address);
         $addressData = array_map('trim', $addressData);
@@ -153,7 +153,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $user->setLastname($this->faker->lastName);
         $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
         $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
-        $user->setEmail($this->faker->email());
+        $user->setEmail($email);
         $user->setEnabled('yes' === $enabled);
         $user->setPlainPassword($password);
 
