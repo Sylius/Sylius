@@ -5,15 +5,14 @@ Feature: User registration
 
     Background:
         Given there are following users:
-            | username | password |
-            | bar      | foo      |
+            | email       | password |
+            | bar@bar.com | foo      |
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage
           And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
-            | Username     | foo         |
             | Password     | bar         |
             | Verification | bar         |
         And I press "Register"
@@ -25,9 +24,19 @@ Feature: User registration
           And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
-            | Username     | foo         |
             | Password     | bar         |
             | Verification | foo         |
         And I press "Register"
        Then I should be on registration page
         And I should see "The entered passwords don't match"
+
+    Scenario: Trying to register with already existing email
+        Given I am on the store homepage
+          And I follow "Register"
+         When I fill in the following:
+            | Email        | bar@bar.com |
+            | Password     | bar         |
+            | Verification | bar         |
+        And I press "Register"
+       Then I should be on registration page
+        And I should see "The email is already used"

@@ -6,11 +6,11 @@ Feature: Users management
     Background:
         Given I am logged in as administrator
         And there are following users:
-          | username | enabled |
-          | beth     | no      |
-          | martha   | yes     |
-          | rick     | no      |
-          | dale     | yes     |
+          | email           | enabled |
+          | beth@foo.com    | no      |
+          | martha@foo.com  | yes     |
+          | rick@foo.com    | no      |
+          | dale@foo.com    | yes     |
         And the following zones are defined:
           | name   | type    | members |
           | Poland | country | Poland  |

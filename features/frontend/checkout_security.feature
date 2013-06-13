@@ -13,9 +13,9 @@ Feature: Checkout security
             | name          | price | taxons       |
             | PHP Top       | 5.99  | PHP T-Shirts |
           And there are following users:
-            | username | password | enabled |
-            | john     | foo      | yes     |
-            | rick     | bar      | yes     |
+            | email            | password | enabled |
+            | john@example.com | foo      | yes     |
+            | rick@example.com | bar      | yes     |
           And the following zones are defined:
             | name  | type    | members        |
             | UK    | country | United Kingdom |
@@ -31,21 +31,20 @@ Feature: Checkout security
     Scenario: Trying to sign in with bad credentials
               during the checkout
          When I fill in the following:
-            | Username | john     |
-            | Password | habababa |
+            | Email    | john@example.com |
+            | Password | habababa         |
           And I press "Login"
          Then I should see "Bad credentials"
 
     Scenario: Signing in during the checkout
          When I fill in the following:
-            | Username | john |
-            | Password | foo  |
+            | Email    | john@example.com |
+            | Password | foo              |
           And I press "Login"
          Then I should be redirected to the checkout addressing step
 
     Scenario: Creating account during the checkout
          When I fill in the following:
-            | fos_user_registration_form_username             | mike             |
             | fos_user_registration_form_email                | mike@example.com |
             | fos_user_registration_form_plainPassword_first  | mikepass         |
             | fos_user_registration_form_plainPassword_second | mikepass         |
@@ -54,7 +53,6 @@ Feature: Checkout security
 
     Scenario: Creating account during the whole checkout
          When I fill in the following:
-            | fos_user_registration_form_username             | mike             |
             | fos_user_registration_form_email                | mike@example.com |
             | fos_user_registration_form_plainPassword_first  | mikepass         |
             | fos_user_registration_form_plainPassword_second | mikepass         |

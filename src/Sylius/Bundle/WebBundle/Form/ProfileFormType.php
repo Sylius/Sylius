@@ -30,9 +30,6 @@ class ProfileFormType extends BaseType
             ->add('lastName', 'text', array(
                 'label'    => 'sylius.form.profile.lastName'
             ))
-            ->add('username', null, array(
-                'label'    => 'sylius.form.profile.username'
-            ))
             ->add('email', 'email', array(
                 'label'    => 'sylius.form.profile.email'
             ))

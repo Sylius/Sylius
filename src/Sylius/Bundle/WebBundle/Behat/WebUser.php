@@ -636,10 +636,10 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     private function iAmLoggedInAsRole($role)
     {
-        $this->getSubContext('data')->thereIsUser('username', 'password', $role);
+        $this->getSubContext('data')->thereIsUser('email@foo.com', 'password', $role);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
 
-        $this->fillField('Login', 'username');
+        $this->fillField('Email', 'email@foo.com');
         $this->fillField('Password', 'password');
         $this->pressButton('login');
     }

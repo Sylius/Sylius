@@ -350,9 +350,9 @@
         <source>sylius.form.login.password</source>
         <target>Password</target>
       </trans-unit>
-      <trans-unit id="ff22d36333dd2c7f46f18088cd81f596" resname="sylius.form.login.username">
-        <source>sylius.form.login.username</source>
-        <target>Username</target>
+      <trans-unit id="ea0c4a2c08a2d13161d6e4312d5f7e22" resname="sylius.form.login.email">
+        <source>sylius.form.login.email</source>
+        <target>Email</target>
       </trans-unit>
       <trans-unit id="25b6370883ff5b94aef1ceb697b6d3f6" resname="sylius.gallery.next">
         <source>sylius.gallery.next</source>
