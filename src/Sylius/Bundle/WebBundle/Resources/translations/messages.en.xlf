@@ -1514,6 +1514,14 @@
         <source>sylius.user.billing_address</source>
         <target>Billing address</target>
       </trans-unit>
+      <trans-unit id="4dfd473a9e57e65692fea4cc051c2ce5" resname="sylius.user.create">
+        <source>sylius.user.create</source>
+        <target>create user</target>
+      </trans-unit>
+      <trans-unit id="05ce2929ffaef98f478a849b67f42a59" resname="sylius.user.create_header">
+        <source>sylius.user.create_header</source>
+        <target>New user</target>
+      </trans-unit>
       <trans-unit id="e4b61ff5e1add3eef1f9a5433aab958e" resname="sylius.user.email">
         <source>sylius.user.email</source>
         <target>E-Mail</target>
@@ -1564,7 +1572,7 @@
       </trans-unit>
       <trans-unit id="746e566b4da02b21b20561fdfef988e5" resname="sylius.user.order.no_results">
         <source>sylius.user.order.no_results</source>
-        <target>sylius.user.order.no_results</target>
+        <target>There are no orders for this user to display.</target>
       </trans-unit>
       <trans-unit id="430a7b28909dfcb968875b3862593d6d" resname="sylius.user.orders">
         <source>sylius.user.orders</source>

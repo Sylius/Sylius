@@ -39,6 +39,30 @@ Feature: Users management
          Then I should be on the page of user with username "john"
           And I should see 1 orders in the list
 
+    Scenario: Accessing the user creation form
+        Given I am on the user index page
+          And I follow "create user"
+         Then I should be on the user creation page
+
+    Scenario: Submitting empty form
+        Given I am on the user creation page
+         When I press "Create"
+         Then I should still be on the user creation page
+          And I should see "Please enter a first name."
+
+    Scenario: Creating user
+        Given I am on the user creation page
+         When I fill in the following:
+            | First name | Saša               |
+            | Last name  | Stamenković        |
+            | Username   | umpirsky           |
+            | Password   | Password           |
+            | Email      | umpirsky@gmail.com |
+          And I fill in the users shipping address to Germany
+          And I press "Create"
+         Then I should be on the page of user with username "umpirsky"
+          And I should see "User has been successfully created."
+
     Scenario: Accessing the user editing form
         Given I am on the page of user with username "rick"
          When I follow "edit"

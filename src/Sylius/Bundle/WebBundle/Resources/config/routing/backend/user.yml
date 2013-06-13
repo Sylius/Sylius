@@ -13,6 +13,15 @@ sylius_backend_user_index:
             sorting:
                 id: desc
 
+sylius_backend_user_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.user:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/User:create.html.twig
+            redirect: sylius_backend_user_show
+
 sylius_backend_user_update:
     pattern: /{id}/edit
     methods: [GET, PUT, POST]
@@ -37,3 +46,4 @@ sylius_backend_user_show:
         _controller: sylius.controller.user:showAction
         _sylius:
             template: SyliusWebBundle:Backend/User:show.html.twig
+            redirect: sylius_backend_user_show

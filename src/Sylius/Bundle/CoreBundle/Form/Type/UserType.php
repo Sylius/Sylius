@@ -49,6 +49,9 @@ class UserType extends ProfileFormType
         $this->buildUserForm($builder, $options);
 
         $builder
+            ->add('plainPassword', 'password', array(
+                'label' => 'sylius.form.user.password'
+            ))
             ->add('enabled', 'checkbox', array(
                 'label' => 'sylius.form.user.enabled'
             ))
