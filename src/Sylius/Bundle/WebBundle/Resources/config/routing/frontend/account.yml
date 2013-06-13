@@ -4,3 +4,7 @@
 sylius_account_homepage:
     pattern: /
     defaults: { _controller: FOSUserBundle:Profile:show }
+
+sylius_account_addresses:
+    pattern:  /addresses
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:showAddresses }

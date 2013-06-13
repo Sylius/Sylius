@@ -272,6 +272,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.password')),
             'labelAttributes' => array('icon' => 'icon-lock', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.password'));
+        
+        $child->addChild('addresses', array(
+        		'route' => 'sylius_account_addresses',
+        		'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.addresses')),
+        		'labelAttributes' => array('icon' => 'icon-info-sign', 'iconOnly' => false)
+        ))->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
 
         $child->addChild('shop', array(
             'route' => 'sylius_homepage',

@@ -11,7 +11,10 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
+use Sylius\Bundle\AddressingBundle\Model\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Frontend user account controller.
@@ -28,5 +31,17 @@ class AccountController extends Controller
     public function homepageAction()
     {
         return $this->render('SyliusWebBundle:Frontend/Account:homepage.html.twig');
+    }
+    
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAddressesAction()
+    {
+        $user = $this->get('sylius.repository.user')->find($this->getUser()->getId());
+        
+        return $this->render('SyliusWebBundle:Frontend/Account/Address:index.html.twig', array(
+            'user' => $user,
+        ));
     }
 }
