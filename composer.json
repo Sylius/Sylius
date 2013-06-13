@@ -49,7 +49,7 @@
         "sylius/resource-bundle":               "0.1.*",
         "sylius/omnipay-bundle":                "0.9.*@dev",
         "jms/serializer-bundle":                "0.11.*",
-        "friendsofsymfony/user-bundle":         "1.3.1",
+        "friendsofsymfony/user-bundle":        "dev-master",
         "fsc/hateoas-bundle":                   "0.3.x-dev",
         "knplabs/knp-gaufrette-bundle":         "0.2.*",
         "fzaninotto/faker":                     "1.1.*",

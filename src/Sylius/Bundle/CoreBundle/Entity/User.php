@@ -26,6 +26,7 @@ class User extends BaseUser implements TimestampableInterface
 {
     protected $firstName;
     protected $lastName;
+    protected $customerId;
     protected $createdAt;
     protected $updatedAt;
 
@@ -207,5 +208,15 @@ class User extends BaseUser implements TimestampableInterface
         $this->setUsernameCanonical($emailCanonical);
 
         return $this;
+    }
+
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+    }
+
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 }

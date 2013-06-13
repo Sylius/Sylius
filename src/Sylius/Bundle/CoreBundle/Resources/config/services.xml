@@ -42,6 +42,8 @@
 
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
+
+        <parameter key="sylius.listener.user_profile_edition.class">Sylius\Bundle\CoreBundle\EventListener\ProfileEditionListener</parameter>
     </parameters>
 
     <services>
@@ -196,6 +198,12 @@
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
             <tag name="sylius.promotion_action" type="Percentage_discount" label="Percentage discount" />
+        </service>
+
+        <!-- user -->
+        <service id="sylius.listener.user_profile_edition" class="%sylius.listener.user_profile_edition.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 
