@@ -104,3 +104,5 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Bundle\CoreBundle\Entity\User
+                repository: Sylius\Bundle\CoreBundle\Repository\UserRepository
+
