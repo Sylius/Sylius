@@ -59,31 +59,31 @@ Feature: User account orders page
     Given I am on my account orders page
      Then I should see "All your orders"
       And I should see 5 orders in the list
-      And I should see "<myorder>"
-      And I should see an "<myorder>" element
-      And I should not see "<order>"
-      And I should not see an "<order>" element
+      And I should see "#<myorder>"
+      And I should see an "order-<myorder>" element
+      And I should not see "#<order>"
+      And I should not see an "order-<order>" element
 
   Examples:
       | myorder | order    |
-      | #000001 | #000002  |
-      | #000006 | #000003  |
-      | #000007 | #000004  |
-      | #000009 | #000005  |
-      | #000010 | #000008  |
-      | #000010 | #000011  |
+      | 000001  | 000002  |
+      | 000006  | 000003  |
+      | 000007  | 000004  |
+      | 000009  | 000005  |
+      | 000010  | 000008  |
+      | 000010  | 000011  |
 
   Scenario Outline: Viewing the detail of an order
     Given I am on my account orders page
-      And I follow "<order>Details"
+      And I follow "order-<order>-details"
      Then I should see "Details of your order"
       And I should be on the order show page for <order>
       And I should see <items> items in the list
 
     Examples:
       | order   | items |
-      | #000001 | 3     |
-      | #000007 | 2     |
+      | 000001  | 3     |
+      | 000007  | 2     |
 
   Scenario Outline: Trying to view the detail of an order which is not mine
     Given I go to the order show page for <order>
@@ -100,21 +100,21 @@ Feature: User account orders page
 
   Scenario: Tracking an order that has been sent
     Given I am on my account orders page
-     Then I should see "Tracking number" in the "#000001" element
-      And I should see an "#000001TrackingNumber" element
+     Then I should see "Tracking number" in the "order-000001" element
+      And I should see an "order-000001-trackingNumber" element
 
   Scenario: Trying to track an order that has not been sent
     Given I am on my account orders page
-     Then I should not see "Tracking number" in the "#000007" element
-      And I should not see an "#000007TrackingNumber" element
+     Then I should not see "Tracking number" in the "order-000007" element
+      And I should not see an "order-000007-trackingNumber" element
 
   Scenario: Checking that an invoice is available for an order that has been sent
     Given I am on my account orders page
-     Then I should see an "#000001Invoice" element
+     Then I should see an "order-000001-invoice" element
 
   Scenario: Checking that an invoice is not available for an order that has not been sent
     Given I am on my account orders page
-    Then I should not see an "#000007Invoice" element
+    Then I should not see an "order-000007-invoice" element
 
   Scenario: Generating an invoice for an order that has been sent
     Given I go to the order invoice page for #000001
@@ -129,13 +129,13 @@ Feature: User account orders page
     Then the response status code should be 403
 
   Examples:
-    | order   |
-    | #000002 |
-    | #000003 |
-    | #000004 |
-    | #000005 |
-    | #000008 |
-    | #000011 |
+    | order  |
+    | 000002 |
+    | 000003 |
+    | 000004 |
+    | 000005 |
+    | 000008 |
+    | 000011 |
 
   Scenario: Accessing an item from the detail of an order
   Scenario: Trying to access an inactive or deleted item from the detail of an order
