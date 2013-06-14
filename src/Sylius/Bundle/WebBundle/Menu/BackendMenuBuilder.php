@@ -218,6 +218,11 @@ class BackendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'icon-credit-card'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.payment_methods', $section)));
 
+        $child->addChild('exchange_rates', array(
+            'route' => 'sylius_backend_exchange_rate_index',
+            'labelAttributes' => array('icon' => 'icon-money'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.exchange_rates', $section)));
+
         $child->addChild('taxation_settings', array(
             'route' => 'sylius_backend_taxation_settings',
             'labelAttributes' => array('icon' => 'icon-cog'),

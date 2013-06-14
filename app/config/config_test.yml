@@ -27,3 +27,8 @@ sylius_payments:
         cc:     Credit Card
         test:   Test
         stripe: Stripe
+
+liip_doctrine_cache:
+    namespaces:
+        sylius_settings:
+            type: array

@@ -62,7 +62,7 @@ abstract class MenuBuilder
      * Translate label.
      *
      * @param string $label
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return string
      */

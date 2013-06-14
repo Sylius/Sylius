@@ -121,3 +121,7 @@ div.footer ul li a {
     float: none;
     margin-right: 0;
 }
+
+div.currency-menu {
+    margin-right: 50px;
+}

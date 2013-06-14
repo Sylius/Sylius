@@ -5,6 +5,10 @@ sylius_homepage:
     pattern: /
     defaults: { _controller: sylius.controller.frontend.homepage:mainAction }
 
+sylius_currency:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/currency.yml
+    prefix: /currency
+
 sylius_product:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/product.yml
 

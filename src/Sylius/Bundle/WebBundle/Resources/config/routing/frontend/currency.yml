@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_currency_change:
+    pattern: /change/{currency}
+    defaults:
+        _controller: sylius.controller.currency:changeAction
