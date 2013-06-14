@@ -35,23 +35,9 @@ class CartItem extends ObjectBehavior
         $this->getQuantity()->shouldReturn(1);
     }
 
-    function it_accepts_only_integer_as_quantity()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity('52');
-        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity(45.55);
-        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity(false);
-    }
-
     function it_has_unit_price_equal_to_0_by_default()
     {
         $this->getUnitPrice()->shouldReturn(0);
-    }
-
-    function it_accepts_only_integer_as_unit_price()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice('52');
-        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice(45.55);
-        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice(false);
     }
 
     function it_has_total_equal_to_0_by_default()
