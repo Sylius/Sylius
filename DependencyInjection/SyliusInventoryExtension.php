@@ -49,10 +49,9 @@ class SyliusInventoryExtension extends Extension
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
-        $loader->load(sprintf('engine/%s.xml', $engine));
+        $container->setParameter('sylius_inventory.driver.'.$driver, true);
 
-        $container->setParameter('sylius_inventory.driver', $driver);
-        $container->setParameter('sylius_inventory.engine', $engine);
+        $loader->load('twig.xml');
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
@@ -69,17 +68,12 @@ class SyliusInventoryExtension extends Extension
         }
 
         $stockableClasses = $config['classes']['stockable'];
-
-        $container->setParameter('sylius.controller.stockable.class', $stockableClasses['controller']);
         $container->setParameter('sylius.model.stockable.class', $stockableClasses['model']);
-
-        if (array_key_exists('repository', $stockableClasses)) {
-            $container->setParameter('sylius.repository.stockable.class', $stockableClasses['repository']);
-        }
 
         $loader->load('services.xml');
 
         $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
+
         if (isset($config['events'])) {
             foreach ($config['events'] as $event) {
                 $listenerDefinition->addTag(
