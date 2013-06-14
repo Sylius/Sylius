@@ -113,12 +113,6 @@ class OrderItem implements OrderItemInterface
             throw new \OutOfRangeException('Quantity must be greater than 0');
         }
 
-        if (!is_integer($quantity)) {
-            throw new \InvalidArgumentException(
-                sprintf('Order item accepts only integer as quantity, "%s" given.', gettype($quantity))
-            );
-        }
-
         $this->quantity = $quantity;
     }
 
@@ -167,12 +161,6 @@ class OrderItem implements OrderItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
-        if (!is_integer($unitPrice)) {
-            throw new \InvalidArgumentException(
-                sprintf('Order item accepts only integer as unit price, "%s" given.', gettype($unitPrice))
-            );
-        }
-
         $this->unitPrice = $unitPrice;
     }
 
@@ -275,6 +263,12 @@ class OrderItem implements OrderItemInterface
      */
     public function equals(OrderItemInterface $orderItem)
     {
-        return $this->getId() === $orderItem->getId();
+        if (null === $this->getSellable() || null === $orderItem->getSellable()) {
+            throw new \InvalidArgumentException(
+                sprintf("Can't compare order items when sellable is not set.")
+            );
+        }
+
+        return $this->getSellable() === $orderItem->getSellable();
     }
 }
