@@ -8,7 +8,6 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.user.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('username', 'sylius.user.username'|trans) }}</th>
             <th>{{ sylius_resource_sort('email', 'sylius.user.email'|trans) }}</th>
             <th>{{ sylius_resource_sort('enabled', 'sylius.user.enabled'|trans) }}</th>
             <th></th>
@@ -18,7 +17,6 @@
         {% for user in users %}
         <tr>
             <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>
                 <span class="label label-{{ user.enabled ? 'success' : 'important'}}">
