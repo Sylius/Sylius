@@ -102,12 +102,6 @@ class CartItem implements CartItemInterface
      */
     public function setQuantity($quantity)
     {
-        if (!is_integer($quantity)) {
-            throw new \InvalidArgumentException(
-                sprintf('Cart item accepts only integer as quantity, "%s" given.', gettype($quantity))
-            );
-        }
-
         $this->quantity = $quantity;
 
         return $this;
@@ -126,12 +120,6 @@ class CartItem implements CartItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
-        if (!is_integer($unitPrice)) {
-            throw new \InvalidArgumentException(
-                sprintf('Cart item accepts only integer as unit price, "%s" given.', gettype($unitPrice))
-            );
-        }
-
         $this->unitPrice = $unitPrice;
 
         return $this;
