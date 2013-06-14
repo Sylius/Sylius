@@ -46,7 +46,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
     function it_allows_assigning_itself_to_an_order($order)
     {
@@ -55,7 +55,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
      */
     function it_allows_detaching_itself_from_an_order($order)
     {
@@ -72,7 +72,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
+     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
      */
     function it_allows_defining_sellable($sellable)
     {
@@ -115,7 +115,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_adds_adjustments_properly($adjustment)
     {
@@ -127,7 +127,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_removes_adjustments_properly($adjustment)
     {
@@ -145,7 +145,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_has_fluent_interface_for_adjustments_management($adjustment)
     {
@@ -171,7 +171,7 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
      */
     function it_calculates_correct_total_based_on_adjustments($adjustment)
     {
@@ -188,8 +188,8 @@ class OrderItem extends ObjectBehavior
     }
 
     /**
-     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
-     * @param \Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $neutralAdjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $neutralAdjustment
      */
     function it_ignores_neutral_adjustments_when_calculating_total($adjustment, $neutralAdjustment)
     {
@@ -208,28 +208,29 @@ class OrderItem extends ObjectBehavior
 
         $this->getTotal()->shouldReturn(18487);
     }
-    
-    function it_accepts_only_integer_as_quantity()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity('52');
-        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity(45.55);
-        $this->shouldThrow('InvalidArgumentException')->duringSetQuantity(false);
-    }
-    
-    function it_accepts_only_integer_as_unit_price()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice('52');
-        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice(45.55);
-        $this->shouldThrow('InvalidArgumentException')->duringSetUnitPrice(false);
-    }
-    
+
     /**
      * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $otherCartItem
+     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface  $sellable1
+     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface  $sellable2
      */
-    function it_does_not_recognize_items_as_equal_if_they_do_not_have_the_same_id($otherCartItem)
+    function it_does_not_recognize_items_as_equal_if_they_do_not_have_the_same_sellable($otherCartItem, $sellable1, $sellable2)
     {
-        $otherCartItem->getId()->willReturn(1);
+        $otherCartItem->getSellable()->willReturn($sellable1);
+        $this->setSellable($sellable2);
 
         $this->equals($otherCartItem)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $otherCartItem
+     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface  $sellable
+     */
+    function it_recognize_items_as_equal_if_they_have_the_same_sellable($otherCartItem, $sellable)
+    {
+        $otherCartItem->getSellable()->willReturn($sellable);
+        $this->setSellable($sellable);
+
+        $this->equals($otherCartItem)->shouldReturn(true);
     }
 }
