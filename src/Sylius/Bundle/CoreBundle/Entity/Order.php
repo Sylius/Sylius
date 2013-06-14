@@ -64,6 +64,13 @@ class Order extends BaseOrder implements OrderInterface
     protected $inventoryUnits;
 
     /**
+     * Currency ISO code.
+     *
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -326,6 +333,24 @@ class Order extends BaseOrder implements OrderInterface
     public function getPromotionSubjectItemCount()
     {
         return $this->items->count();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
     }
 
     public function setCreatedAt(\DateTime $createdAt)

@@ -29,10 +29,6 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // Sylius bundles.
-            new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
-            new Sylius\Bundle\WebBundle\SyliusWebBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-
             new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
@@ -47,6 +43,10 @@ class AppKernel extends Kernel
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
             new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
             new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
+
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
+            new Sylius\Bundle\WebBundle\SyliusWebBundle(),
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

@@ -23,9 +23,9 @@
         <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
     </td>
     <td>
-        {{ item.unitPrice|sylius_money }}
+        {{ item.unitPrice|sylius_price }}
     </td>
     <td style="text-align: right">
-        {{ item.total|sylius_money }}
+        {{ item.total|sylius_price }}
     </td>
 </tr>

@@ -358,6 +358,42 @@
         <source>sylius.email</source>
         <target>E-Mail</target>
       </trans-unit>
+      <trans-unit id="becc401bdd9a4d18b62142fd8ac48006" resname="sylius.exchange_rate.create">
+        <source>sylius.exchange_rate.create</source>
+        <target>Create exchange rate</target>
+      </trans-unit>
+      <trans-unit id="26dd86004325335b61efd2b2294d34ad" resname="sylius.exchange_rate.create_header">
+        <source>sylius.exchange_rate.create_header</source>
+        <target>New exchange rate</target>
+      </trans-unit>
+      <trans-unit id="ab6070222f4c55d91b05a2c3eeef6cde" resname="sylius.exchange_rate.currency">
+        <source>sylius.exchange_rate.currency</source>
+        <target>currency</target>
+      </trans-unit>
+      <trans-unit id="3515dad310c65917daae1e5246ad7c94" resname="sylius.exchange_rate.id">
+        <source>sylius.exchange_rate.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="55614e2ad158f69b7ce9b665feab7c73" resname="sylius.exchange_rate.index_header">
+        <source>sylius.exchange_rate.index_header</source>
+        <target>Exchange rates</target>
+      </trans-unit>
+      <trans-unit id="09b89ff09207bd27dfe3112081cda9f1" resname="sylius.exchange_rate.no_results">
+        <source>sylius.exchange_rate.no_results</source>
+        <target>There are no exchange rates to display.</target>
+      </trans-unit>
+      <trans-unit id="a93b2617af276a73cac9914465912d74" resname="sylius.exchange_rate.rate">
+        <source>sylius.exchange_rate.rate</source>
+        <target>rate</target>
+      </trans-unit>
+      <trans-unit id="cb526459642a416c693bc039ee6c9cf6" resname="sylius.exchange_rate.update_header">
+        <source>sylius.exchange_rate.update_header</source>
+        <target>Editing exchange rate</target>
+      </trans-unit>
+      <trans-unit id="265dd64991f89f4b3619eb34a72d1f3b" resname="sylius.exchange_rate.updated_at">
+        <source>sylius.exchange_rate.updated_at</source>
+        <target>last update</target>
+      </trans-unit>
       <trans-unit id="44f0ed7c15d1974ff291171b96912899" resname="sylius.filter">
         <source>sylius.filter</source>
         <target>Filter</target>
@@ -460,7 +496,7 @@
       </trans-unit>
       <trans-unit id="4cab6cc405cf2fb3f32ccc5e72088f4d" resname="sylius.inventory_unit.updated_at">
         <source>sylius.inventory_unit.updated_at</source>
-        <target>Modified</target>
+        <target>Last update</target>
       </trans-unit>
       <trans-unit id="4fe0a2de7d941c475f778fea316ba23f" resname="sylius.login">
         <source>sylius.login</source>
@@ -536,7 +572,7 @@
       </trans-unit>
       <trans-unit id="7dbbb8f661a7190c0668aec86603f70e" resname="sylius.option.updated_at">
         <source>sylius.option.updated_at</source>
-        <target>last updated</target>
+        <target>last update</target>
       </trans-unit>
       <trans-unit id="3b6b89bd09520eaf2477ce53a29936ec" resname="sylius.option.values">
         <source>sylius.option.values</source>
@@ -916,7 +952,7 @@
       </trans-unit>
       <trans-unit id="b05f514435a6d51c23154f903e659e00" resname="sylius.product.updated_at">
         <source>sylius.product.updated_at</source>
-        <target>Last updated</target>
+        <target>Last update</target>
       </trans-unit>
       <trans-unit id="57d526d1183ee94d3458f31cb3f325f7" resname="sylius.product.variant_selection_method">
         <source>sylius.product.variant_selection_method</source>
@@ -992,7 +1028,7 @@
       </trans-unit>
       <trans-unit id="f95bc34ab60678527c2ba86483cf03a2" resname="sylius.promotion.updated_at">
         <source>sylius.promotion.updated_at</source>
-        <target>Updated at</target>
+        <target>Last update</target>
       </trans-unit>
       <trans-unit id="ea11b16198a5ad8f6a51222d970e33c8" resname="sylius.promotion.usage_limit">
         <source>sylius.promotion.usage_limit</source>
@@ -1092,7 +1128,7 @@
       </trans-unit>
       <trans-unit id="9ec9d0c4310f82d8582c70c2178213cc" resname="sylius.property.updated_at">
         <source>sylius.property.updated_at</source>
-        <target>last updated</target>
+        <target>last update</target>
       </trans-unit>
       <trans-unit id="7ec5caa18aeed16b68cf4934d0b6dc74" resname="sylius.prototype.build">
         <source>sylius.prototype.build</source>
@@ -1136,7 +1172,7 @@
       </trans-unit>
       <trans-unit id="f3893ff1417fa4331255630e43d065d6" resname="sylius.prototype.updated_at">
         <source>sylius.prototype.updated_at</source>
-        <target>last updated</target>
+        <target>last update</target>
       </trans-unit>
       <trans-unit id="53a438c23549bbae146ec77cd26265f2" resname="sylius.province.provinces">
         <source>sylius.province.provinces</source>
@@ -1348,7 +1384,7 @@
       </trans-unit>
       <trans-unit id="cb7f83b0d7629ca70d21f18b0915f209" resname="sylius.stockable.updated_at">
         <source>sylius.stockable.updated_at</source>
-        <target>last updated</target>
+        <target>last update</target>
       </trans-unit>
       <trans-unit id="fce0ccb2944c3cacfef8154a9a4ca809" resname="sylius.tax_category.create">
         <source>sylius.tax_category.create</source>
@@ -1444,7 +1480,7 @@
       </trans-unit>
       <trans-unit id="f67ad12e56dcc4a7c1371d13e5d3dc63" resname="sylius.tax_rate.updated_at">
         <source>sylius.tax_rate.updated_at</source>
-        <target>Last updated</target>
+        <target>Last update</target>
       </trans-unit>
       <trans-unit id="283c93c20e1546fe3b2db9f8f422c321" resname="sylius.tax_rate.zone">
         <source>sylius.tax_rate.zone</source>

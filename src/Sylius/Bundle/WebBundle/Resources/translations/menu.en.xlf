@@ -46,6 +46,10 @@
         <source>sylius.backend.menu.main.payment_methods</source>
         <target>Payment methods</target>
       </trans-unit>
+      <trans-unit id="96fad72b5156d217d479762961dfab32" resname="sylius.backend.menu.main.exchange_rates">
+        <source>sylius.backend.menu.main.exchange_rates</source>
+        <target>Exchange rates</target>
+      </trans-unit>
       <trans-unit id="de24c4089204c074b2515399d87288bf" resname="sylius.backend.menu.main.payments">
         <source>sylius.backend.menu.main.payments</source>
         <target>Payments</target>
@@ -154,6 +158,10 @@
         <source>sylius.backend.menu.sidebar.payment_methods</source>
         <target>Payment methods</target>
       </trans-unit>
+      <trans-unit id="2b9984059c74969e64141573b81601b3" resname="sylius.backend.menu.sidebar.exchange_rates">
+        <source>sylius.backend.menu.sidebar.exchange_rates</source>
+        <target>Exchange rates</target>
+      </trans-unit>
       <trans-unit id="55e31aa27306d407a076d474b915159b" resname="sylius.backend.menu.sidebar.payments">
         <source>sylius.backend.menu.sidebar.payments</source>
         <target>Payments</target>
@@ -221,6 +229,10 @@
       <trans-unit id="72a1c20506c99bf710d871e649d73b7a" resname="sylius.frontend.menu.main.administration">
         <source>sylius.frontend.menu.main.administration</source>
         <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="72a1c20506c99bf710d871e649d73b7a" resname="sylius.frontend.menu.currency">
+        <source>sylius.frontend.menu.currency</source>
+        <target>Show prices in %currency%</target>
       </trans-unit>
       <trans-unit id="f3c562d05786e3056e97da27f1fac4d3" resname="sylius.frontend.menu.main.cart">
         <source>sylius.frontend.menu.main.cart</source>

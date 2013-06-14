@@ -32,12 +32,14 @@ class GeneralSettingsSchema implements SchemaInterface
             ->setDefaults(array(
                 'title'            => 'Sylius - Modern ecommerce for Symfony2',
                 'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
-                'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.'
+                'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
+                'currency'         => 'EUR',
             ))
             ->setAllowedTypes(array(
                 'title'            => array('string'),
                 'meta_keywords'    => array('string'),
                 'meta_description' => array('string'),
+                'currency' => array('string'),
             ))
         ;
     }
@@ -62,6 +64,12 @@ class GeneralSettingsSchema implements SchemaInterface
             ))
             ->add('meta_description', 'textarea', array(
                 'label'       => 'sylius.form.settings.general.meta_description',
+                'constraints' => array(
+                    new NotBlank()
+                )
+            ))
+            ->add('currency', 'text', array( // TODO: use currency type when we upgrade to 2.3
+                'label'       => 'sylius.form.settings.general.currency',
                 'constraints' => array(
                     new NotBlank()
                 )

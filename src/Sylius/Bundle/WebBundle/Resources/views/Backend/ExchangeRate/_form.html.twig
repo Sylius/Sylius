@@ -1,0 +1,7 @@
+{{ form_errors(form) }}
+<fieldset>
+    {{ form_row(form.currency, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.rate, {'attr': {'class': 'input-small'}}) }}
+</fieldset>
+
+{{ form_rest(form) }}

@@ -15,6 +15,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        <field name="currency" length="3" nullable="true" />
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">

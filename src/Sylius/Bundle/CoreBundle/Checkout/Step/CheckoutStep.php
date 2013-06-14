@@ -70,7 +70,7 @@ abstract class CheckoutStep extends ControllerStep
     {
         try {
             return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
-        } catch(AuthenticationCredentialsNotFoundException $e) {
+        } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }
     }

@@ -20,7 +20,6 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Entity\User;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Form\Util\FormUtil;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
 use Symfony\Component\PropertyAccess\StringUtil;
@@ -594,6 +593,34 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^there are following exchange rates:$/
+     */
+    public function thereAreExchangeRates(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsExchangeRate($data['currency'], $data['rate']);
+        }
+    }
+
+    /**
+     * @Given /^I created exchange rate "([^""]*)"$/
+     */
+    public function thereIsExchangeRate($currency, $rate = 1)
+    {
+        $repository = $this->getRepository('exchange_rate');
+        $manager = $this->getEntityManager();
+
+        $exchangeRate = $repository->createNew();
+        $exchangeRate->setCurrency($currency);
+        $exchangeRate->setRate($rate);
+
+        $manager->persist($exchangeRate);
+        $manager->flush();
+
+        return $exchangeRate;
+    }
+
+    /**
      * @Given /^the following shipping categories are configured:$/
      * @Given /^the following shipping categories exist:$/
      * @Given /^there are following shipping categories:$/
@@ -676,7 +703,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             $enabled = true;
 
-            if(array_key_exists('enabled', $data)) {
+            if (array_key_exists('enabled', $data)) {
                 $enabled = 'yes' === trim($data['enabled']);
             }
 
