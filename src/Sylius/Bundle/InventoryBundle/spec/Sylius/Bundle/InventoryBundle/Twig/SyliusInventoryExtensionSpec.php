@@ -1,15 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\InventoryBundle\Twig;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Sylius inventory extensions for Twig spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusInventoryExtension extends ObjectBehavior
+class SyliusInventoryExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $checker
@@ -19,12 +26,12 @@ class SyliusInventoryExtension extends ObjectBehavior
         $this->beConstructedWith($checker);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Twig\SyliusInventoryExtension');
     }
 
-    function it_should_be_a_twig_extension()
+    function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }
@@ -32,7 +39,7 @@ class SyliusInventoryExtension extends ObjectBehavior
     /**
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
      */
-    function it_should_delegate_the_stock_availability_checking_to_the_checker($checker, $stockable)
+    function it_delegates_the_stock_availability_checking_to_the_checker($checker, $stockable)
     {
         $checker->isStockAvailable($stockable)->shouldBeCalled()->willReturn(true);
 
@@ -42,7 +49,7 @@ class SyliusInventoryExtension extends ObjectBehavior
     /**
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
      */
-    function it_should_delegate_the_stock_sufficiency_checking_to_the_checker($checker, $stockable)
+    function it_delegates_the_stock_sufficiency_checking_to_the_checker($checker, $stockable)
     {
         $checker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(false);
 

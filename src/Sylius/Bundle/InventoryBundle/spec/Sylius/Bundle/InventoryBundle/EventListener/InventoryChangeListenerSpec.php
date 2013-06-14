@@ -1,15 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\InventoryBundle\EventListener;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Inventory change listener spec.
- *
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
-class InventoryChangeListener extends ObjectBehavior
+class InventoryChangeListenerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface $operator
@@ -19,12 +26,12 @@ class InventoryChangeListener extends ObjectBehavior
         $this->beConstructedWith($operator);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener');
     }
 
-    function it_should_be_a_Sylius_inventory_change_listener()
+    function it_is_a_Sylius_inventory_change_listener()
     {
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListenerInterface');
     }
@@ -33,7 +40,7 @@ class InventoryChangeListener extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent         $event
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
      */
-    function it_should_fill_backorders_on_inventory_change($operator, $event, $stockable)
+    function it_fills_backorders_on_inventory_change($operator, $event, $stockable)
     {
         $event->getSubject()->shouldBeCalled()->willReturn($stockable);
         $operator->fillBackorders($stockable)->shouldBeCalled();

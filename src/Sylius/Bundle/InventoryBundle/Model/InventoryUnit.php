@@ -84,6 +84,8 @@ class InventoryUnit implements InventoryUnitInterface
     public function setStockable(StockableInterface $stockable)
     {
         $this->stockable = $stockable;
+
+        return $this;
     }
 
     /**
@@ -113,6 +115,8 @@ class InventoryUnit implements InventoryUnitInterface
     public function setInventoryState($state)
     {
         $this->inventoryState = $state;
+
+        return $this;
     }
 
     /**
@@ -145,6 +149,8 @@ class InventoryUnit implements InventoryUnitInterface
     public function setCreatedAt(\DateTime $createAt)
     {
         $this->createdAt = $createAt;
+
+        return $this;
     }
 
     /**
@@ -161,5 +167,7 @@ class InventoryUnit implements InventoryUnitInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }
