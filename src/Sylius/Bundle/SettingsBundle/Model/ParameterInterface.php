@@ -19,13 +19,6 @@ namespace Sylius\Bundle\SettingsBundle\Model;
 interface ParameterInterface
 {
     /**
-     * Get parameter id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * Get settings namespace.
      *
      * @return string
