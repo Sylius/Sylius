@@ -24,15 +24,18 @@
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessor</parameter>
 
+        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
 
+        <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
 
@@ -99,12 +102,17 @@
         </service>
 
         <!-- checkout forms -->
+        <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_user" />
+        </service>
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.cart.class%</argument>
+            <argument type="service" id="translator" />
             <tag name="form.type" alias="sylius_checkout_shipping" />
         </service>
         <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
@@ -139,7 +147,12 @@
             <argument type="service" id="sylius.shipping_calculator" />
         </service>
 
-        <!-- order listeners -->
+        <!-- listeners -->
+        <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
+            <argument type="service" id="fos_user.user_manager" />
+            <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
+            <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
+        </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderTaxation" />
@@ -181,6 +194,9 @@
             </argument>
         </service>
 
+        <service id="sylius.form.type.user_filter" class="%sylius.form.type.user_filter.class%">
+            <tag name="form.type" alias="sylius_user_filter" />
+        </service>
         <service id="sylius.form.type.product_filter" class="%sylius.form.type.product_filter.class%">
             <tag name="form.type" alias="sylius_product_filter" />
         </service>

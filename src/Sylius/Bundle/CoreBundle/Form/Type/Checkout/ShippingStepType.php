@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Checkout shipping step form type.
@@ -24,10 +25,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class ShippingStepType extends AbstractType
 {
     protected $dataClass;
+    protected $translator;
 
-    public function __construct($dataClass)
+    public function __construct($dataClass, TranslatorInterface $translator)
     {
         $this->dataClass = $dataClass;
+        $this->translator = $translator;
     }
 
     /**
@@ -36,7 +39,7 @@ class ShippingStepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $notBlank = new NotBlank();
-        $notBlank->message = 'sylius.checkout.shipping_method.not_blank';
+        $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
 
         $builder
             ->add('shippingMethod', 'sylius_shipping_method_choice', array(

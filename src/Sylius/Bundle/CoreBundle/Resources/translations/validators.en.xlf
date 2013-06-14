@@ -46,14 +46,6 @@
         <source>fos_user.username.short</source>
         <target>fos_user.username.short</target>
       </trans-unit>
-      <trans-unit id="0348392867d5d3c7aba4e136ea48ffec" resname="sylius.checkout.payment_method.not_blank">
-        <source>sylius.checkout.payment_method.not_blank</source>
-        <target>Please select payment method.</target>
-      </trans-unit>
-      <trans-unit id="ddb27861aa157d5f22e90a4c51ad26fa" resname="sylius.checkout.shipping_method.not_blank">
-        <source>sylius.checkout.shipping_method.not_blank</source>
-        <target>Please select shipping method.</target>
-      </trans-unit>
       <trans-unit id="a0bfd28ade710d07ff88637ec653a544" resname="sylius.product.description.min_length">
         <source>sylius.product.description.min_length</source>
         <target>sylius.product.description.min_length</target>
@@ -122,6 +114,46 @@
         <source>sylius.tax_rate.name.not_blank</source>
         <target>sylius.tax_rate.name.not_blank</target>
       </trans-unit>
+      <trans-unit id="05212abfc3e29e4b0fe5f6ab18f31da4" resname="sylius.taxon.name.max_length">
+        <source>sylius.taxon.name.max_length</source>
+        <target>sylius.taxon.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="6b05cd6b996cfafd94c813a707d86fa5" resname="sylius.taxon.name.not_blank">
+        <source>sylius.taxon.name.not_blank</source>
+        <target>sylius.taxon.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="29428b426b591aad514fa68434a5dd8a" resname="sylius.taxonomy.name.max_length">
+        <source>sylius.taxonomy.name.max_length</source>
+        <target>sylius.taxonomy.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="199bbac1dc5f668799b979d986e0746a" resname="sylius.taxonomy.name.not_blank">
+        <source>sylius.taxonomy.name.not_blank</source>
+        <target>sylius.taxonomy.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="0004066cb8a3ad8b40bc84c8131febcc" resname="sylius.user.first_name.max">
+        <source>sylius.user.first_name.max</source>
+        <target>First name must be not be longer than {{ limit }} characters.</target>
+      </trans-unit>
+      <trans-unit id="50b0ee1d48a8e08f2d4e14a3464df4d6" resname="sylius.user.first_name.min">
+        <source>sylius.user.first_name.min</source>
+        <target>First name must be at least {{ limit }} characters long.</target>
+      </trans-unit>
+      <trans-unit id="1a4e98b8754497fa3704c316c2510326" resname="sylius.user.first_name.not_blank">
+        <source>sylius.user.first_name.not_blank</source>
+        <target>Please enter a first name.</target>
+      </trans-unit>
+      <trans-unit id="60b6e5effce78494863245c780fde824" resname="sylius.user.last_name.max">
+        <source>sylius.user.last_name.max</source>
+        <target>Last name must be not be longer than {{ limit }} characters.</target>
+      </trans-unit>
+      <trans-unit id="d809d7775c184088481d5cb29ae9b760" resname="sylius.user.last_name.min">
+        <source>sylius.user.last_name.min</source>
+        <target>Last name must be at least {{ limit }} characters long.</target>
+      </trans-unit>
+      <trans-unit id="c159555909906bd5df37a0f2edd6a7cd" resname="sylius.user.last_name.not_blank">
+        <source>sylius.user.last_name.not_blank</source>
+        <target>Please enter a last name.</target>
+      </trans-unit>
       <trans-unit id="8b543b113a901ba9cfeb2410c82fc16f" resname="sylius.variant.onHand.min">
         <source>sylius.variant.onHand.min</source>
         <target>On hand must be greater than {{ limit }}.</target>
@@ -145,30 +177,6 @@
       <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
         <source>sylius_taxation.rate.zone.not_blank</source>
         <target>Please enter tax rate zone.</target>
-      </trans-unit>
-      <trans-unit id="8518dab2d5a4c2ec2a89fc045bf0a267" resname="sylius.user.first_name.max">
-        <source>sylius.user.first_name.max</source>
-        <target>First name must be not be longer than {{ limit }} characters.</target>
-      </trans-unit>
-      <trans-unit id="9b237441a6dceace1f56b9e2bfe5735a" resname="sylius.user.first_name.min">
-        <source>sylius.user.first_name.min</source>
-        <target>First name must be at least {{ limit }} characters long.</target>
-      </trans-unit>
-      <trans-unit id="0ae371e28b32eadde803aa94e5b33337" resname="sylius.user.first_name.not_blank">
-        <source>sylius.user.first_name.not_blank</source>
-        <target>Please enter a first name.</target>
-      </trans-unit>
-      <trans-unit id="cdea2e1de30b26a46367dd1d9b4427af" resname="sylius.user.last_name.max">
-        <source>sylius.user.last_name.max</source>
-        <target>Last name must be not be longer than {{ limit }} characters.</target>
-      </trans-unit>
-      <trans-unit id="1425fc2b4f6f68ff1a1a85f9eb7e3be3" resname="sylius.user.last_name.min">
-        <source>sylius.user.last_name.min</source>
-        <target>Last name must be at least {{ limit }} characters long.</target>
-      </trans-unit>
-      <trans-unit id="79171aa624a13deea0b33e585c46c588" resname="sylius.user.last_name.not_blank">
-        <source>sylius.user.last_name.not_blank</source>
-        <target>Please enter a last name.</target>
       </trans-unit>
     </body>
   </file>

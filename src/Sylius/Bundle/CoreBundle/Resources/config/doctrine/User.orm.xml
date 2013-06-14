@@ -10,7 +10,11 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user" />
+        <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
@@ -34,6 +38,9 @@
                     <join-column name="address_id" referenced-column-name="id" unique="true" />
                 </inverse-join-columns>
             </join-table>
+            <cascade>
+                <cascade-all />
+            </cascade>
         </many-to-many>
     </entity>
 

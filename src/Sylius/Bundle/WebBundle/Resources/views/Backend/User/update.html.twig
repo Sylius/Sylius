@@ -1,0 +1,22 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts '@SyliusWebBundle/Resources/assets/js/province-choices.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.user.update_header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_backend_user_update', {'id': user.id}) }}" method="post" class="form-horizontal" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    {% include 'SyliusWebBundle:Backend/User:_form.html.twig' %}
+    {{ update() }}
+</form>
+{% endblock %}
