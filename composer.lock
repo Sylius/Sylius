@@ -3082,12 +3082,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCartBundle.git",
-                "reference": "8ba84603f4196ad8ecd36f29e58711fb859876ff"
+                "reference": "74c459a73baa4e8d081a68c603c163a7d17e91e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/8ba84603f4196ad8ecd36f29e58711fb859876ff",
-                "reference": "8ba84603f4196ad8ecd36f29e58711fb859876ff",
+                "url": "https://api.github.com/repos/Sylius/SyliusCartBundle/zipball/74c459a73baa4e8d081a68c603c163a7d17e91e2",
+                "reference": "74c459a73baa4e8d081a68c603c163a7d17e91e2",
                 "shasum": ""
             },
             "require": {
@@ -3137,7 +3137,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-04-21 08:04:58"
+            "time": "2013-06-14 14:22:24"
         },
         {
             "name": "sylius/flow-bundle",
@@ -3650,12 +3650,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c"
+                "reference": "d75e081f92a10a4ac13d6ad55f6f4e18822ac8e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/1b6108db1cf4f66328b32c4f8eae621fe05be84c",
-                "reference": "1b6108db1cf4f66328b32c4f8eae621fe05be84c",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/d75e081f92a10a4ac13d6ad55f6f4e18822ac8e0",
+                "reference": "d75e081f92a10a4ac13d6ad55f6f4e18822ac8e0",
                 "shasum": ""
             },
             "require": {
@@ -3675,7 +3675,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Sylius\\Bundle\\SalesBundle": ""
+                    "Sylius\\Bundle\\SalesBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3694,15 +3694,16 @@
                 }
             ],
             "description": "Sales order management for Symfony2 applications.",
-            "homepage": "http://Sylius.org",
+            "homepage": "http://sylius.com",
             "keywords": [
                 "ecommerce",
                 "order",
                 "orders",
                 "sales",
-                "shop"
+                "shop",
+                "sylius"
             ],
-            "time": "2013-04-08 16:42:46"
+            "time": "2013-06-14 14:22:13"
         },
         {
             "name": "sylius/settings-bundle",
@@ -4413,12 +4414,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "1a6507043782f18e3765b52712cf78d16f3117e7"
+                "reference": "6f753205834b511269a97fe35108bbd5c8d245f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1a6507043782f18e3765b52712cf78d16f3117e7",
-                "reference": "1a6507043782f18e3765b52712cf78d16f3117e7",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/6f753205834b511269a97fe35108bbd5c8d245f5",
+                "reference": "6f753205834b511269a97fe35108bbd5c8d245f5",
                 "shasum": ""
             },
             "require": {
@@ -4454,7 +4455,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-06-07 06:24:46"
+            "time": "2013-06-09 06:03:21"
         },
         {
             "name": "white-october/pagerfanta-bundle",
