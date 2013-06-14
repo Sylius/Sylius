@@ -4,3 +4,34 @@
 sylius_account_homepage:
     pattern: /
     defaults: { _controller: FOSUserBundle:Profile:show }
+
+sylius_account_order_index:
+    pattern: /orders
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            paginate: false
+            sorting:
+                createdAt: desc
+            template: SyliusWebBundle:Frontend/Account:Order/index.html.twig
+
+sylius_account_order_show:
+    pattern: /order/{number}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:Order/show.html.twig
+            criteria:
+                number: $number
+
+sylius_account_order_invoice:
+    pattern: /invoice/{number}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Order:invoice.html.twig
+            criteria:
+                number: $number
