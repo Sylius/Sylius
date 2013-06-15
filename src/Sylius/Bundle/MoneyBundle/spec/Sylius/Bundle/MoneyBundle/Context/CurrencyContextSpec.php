@@ -11,9 +11,9 @@
 
 namespace spec\Sylius\Bundle\MoneyBundle\Context;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
-class CurrencyContext extends ObjectBehavior
+class CurrencyContextSpec extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session

@@ -38,13 +38,14 @@ class SyliusMoneyExtension extends Extension
         $driver = $config['driver'];
 
         if (!in_array($driver, SyliusMoneyBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusMoneyBundle', $driver));
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusMoneyBundle.', $driver));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
 
-        $container->setParameter('sylius.driver', $driver);
-        $container->setParameter('sylius.engine', $config['engine']);
+        $container->setParameter('sylius_money.driver', $driver);
+        $container->setParameter('sylius_money.driver.'.$driver, true);
+
         $container->setParameter('sylius.money.locale', $config['locale']);
         $container->setParameter('sylius.money.currency', $config['currency']);
 

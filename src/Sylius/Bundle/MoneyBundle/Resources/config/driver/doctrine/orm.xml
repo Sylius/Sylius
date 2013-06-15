@@ -17,8 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.exchange_rate.class">Sylius\Bundle\MoneyBundle\Entity\ExchangeRate</parameter>
-
         <parameter key="sylius.repository.exchange_rate.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 

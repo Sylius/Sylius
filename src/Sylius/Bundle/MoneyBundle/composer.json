@@ -20,15 +20,14 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.1",
-        "sylius/resource-bundle":   "0.1.*",
+        "symfony/framework-bundle": "~2.3",
+        "sylius/resource-bundle":   "0.3.*",
         "mathiasverraes/money":     "dev-master"
     },
     "require-dev": {
-        "twig/twig":        "~1.11",
-        "symfony/form":     "~2.2",
-        "phpspec/phpspec2": "dev-develop",
-        "phpspec/php-diff": "*"
+        "twig/twig":        "~1.21",
+        "symfony/form":     "~2.3",
+        "phpspec/phpspec2": "2.0.*"
     },
     "config": {
         "bin-dir": "bin"
