@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
@@ -18,7 +18,7 @@ class InventoryUnit extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\InventoryUnit');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\InventoryUnit');
     }
 
     function it_does_not_belong_to_an_order_by_default()

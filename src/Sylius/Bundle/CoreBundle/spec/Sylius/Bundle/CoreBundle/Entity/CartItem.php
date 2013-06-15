@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
@@ -23,7 +23,7 @@ class CartItem extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\CartItem');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\CartItem');
     }
 
     function it_implements_Sylius_cart_item_interface()
@@ -53,7 +53,7 @@ class CartItem extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $variantA
      * @param Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $variantB
-     * @param Sylius\Bundle\CoreBundle\Entity\CartItem                   $cartItem
+     * @param Sylius\Bundle\CoreBundle\Model\CartItem                   $cartItem
      */
     function it_should_be_equal_to_item_with_same_variant($variantA, $variantB, $cartItem)
     {
@@ -69,7 +69,7 @@ class CartItem extends ObjectBehavior
     /**
      * @param Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $variantA
      * @param Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $variantB
-     * @param Sylius\Bundle\CoreBundle\Entity\CartItem                   $cartItem
+     * @param Sylius\Bundle\CoreBundle\Model\CartItem                   $cartItem
      */
     function it_should_not_be_equal_to_item_with_different_variant($variantA, $variantB, $cartItem)
     {

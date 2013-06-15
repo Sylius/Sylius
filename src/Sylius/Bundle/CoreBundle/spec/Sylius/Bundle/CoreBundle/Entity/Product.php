@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\CoreBundle\Entity\Product as ProductClass;
+use Sylius\Bundle\CoreBundle\Model\Product as ProductClass;
 use PHPSpec2\ObjectBehavior;
 
 class Product extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\Product');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Product');
     }
 
     function it_implements_Sylius_customizable_product_interface()

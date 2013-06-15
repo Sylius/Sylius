@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Entity;
+namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;

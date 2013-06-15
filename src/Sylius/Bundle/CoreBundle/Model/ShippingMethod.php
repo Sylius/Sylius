@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Entity;
+namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Entity\ShippingMethod as BaseShippingMethod;

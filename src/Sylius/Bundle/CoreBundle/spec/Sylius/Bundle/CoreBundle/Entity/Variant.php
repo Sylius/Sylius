@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 
@@ -17,7 +17,7 @@ class Variant extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\Variant');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Variant');
     }
 
     function it_should_implement_Sylius_product_variant_interface()

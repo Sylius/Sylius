@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Entity;
+namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantImageInterface;

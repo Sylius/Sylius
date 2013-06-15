@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PHPSpec2\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Entity\Order;
+use Sylius\Bundle\CoreBundle\Model\Order;
 
 /**
  * Shipping charges processor spec.

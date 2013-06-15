@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\CoreBundle\Entity;
+namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\TaxonomiesBundle\Entity\Taxonomy as BaseTaxonomy;
 

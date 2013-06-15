@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 
@@ -22,7 +22,7 @@ class Order extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\Order');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Order');
     }
 
     function it_should_implement_Sylius_order_interface()

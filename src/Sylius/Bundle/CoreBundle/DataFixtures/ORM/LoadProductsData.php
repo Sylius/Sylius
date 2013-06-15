@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface;
-use Sylius\Bundle\CoreBundle\Entity\Product;
+use Sylius\Bundle\CoreBundle\Model\Product;
 
 /**
  * Default assortment products to play with Sylius sandbox.

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\AssortmentBundle\Form\Type\CustomizableProductType as BaseProductType;
-use Sylius\Bundle\CoreBundle\Entity\Product;
+use Sylius\Bundle\CoreBundle\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

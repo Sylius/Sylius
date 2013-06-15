@@ -51,7 +51,7 @@ class InventoryUnitsFactory extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $order
-     * @param Sylius\Bundle\CoreBundle\Entity\OrderItem             $item
+     * @param Sylius\Bundle\CoreBundle\Model\OrderItem             $item
      * @param Sylius\Bundle\CoreBundle\Model\VariantInterface       $variant
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unitA
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unitB

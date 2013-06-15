@@ -58,7 +58,7 @@ class CurrencyContext extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Entity\User                                $user
+     * @param Sylius\Bundle\CoreBundle\Model\User                                $user
      * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      */
     function it_gets_currency_from_user_if_authenticated($user, $token, $securityContext)
@@ -83,7 +83,7 @@ class CurrencyContext extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Entity\User                                $user
+     * @param Sylius\Bundle\CoreBundle\Model\User                                $user
      * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      */
     function it_sets_currency_to_user_if_authenticated($user, $token, $securityContext)

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 
@@ -17,7 +17,7 @@ class VariantImage extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\VariantImage');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\VariantImage');
     }
 
     function it_should_be_Sylius_Image()

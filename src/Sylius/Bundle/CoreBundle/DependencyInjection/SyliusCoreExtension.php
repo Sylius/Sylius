@@ -45,6 +45,7 @@ class SyliusCoreExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_core.driver', $driver);
+        $container->setParameter('sylius_core.driver.'.$driver, true);
 
         $loader->load('services.xml');
     }

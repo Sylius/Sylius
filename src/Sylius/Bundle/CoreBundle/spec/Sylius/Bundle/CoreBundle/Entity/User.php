@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPSpec2\ObjectBehavior;
@@ -23,7 +23,7 @@ class User extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\User');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\User');
     }
 
     function it_implements_Fos_user_interface()

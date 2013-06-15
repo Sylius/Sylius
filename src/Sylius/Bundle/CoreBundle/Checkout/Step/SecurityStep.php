@@ -97,7 +97,7 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
-     * @param \Sylius\Bundle\CoreBundle\Entity\User $user
+     * @param \Sylius\Bundle\CoreBundle\Model\User $user
      */
     private function saveUser($user)
     {

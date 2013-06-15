@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Entity\User;
+use Sylius\Bundle\CoreBundle\Model\User;
 
 /**
  * User fixtures.

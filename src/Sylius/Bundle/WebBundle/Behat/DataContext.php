@@ -17,7 +17,7 @@ use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Entity\User;
+use Sylius\Bundle\CoreBundle\Model\User;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;

@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\CoreBundle\Entity\Order" table="sylius_order">
+    <entity name="Sylius\Bundle\CoreBundle\Model\Order" table="sylius_order">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -41,7 +41,7 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
-        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Entity\User" inversed-by="orders">
+        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Model\User" inversed-by="orders">
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <field name="currency" length="3" />

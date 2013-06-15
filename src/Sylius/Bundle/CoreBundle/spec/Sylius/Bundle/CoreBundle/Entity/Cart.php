@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 
@@ -22,7 +22,7 @@ class Cart extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\Cart');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Cart');
     }
 
     function it_implements_Sylius_cart_interface()

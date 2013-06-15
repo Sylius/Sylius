@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Entity;
+namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 
@@ -17,7 +17,7 @@ class Taxon extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Entity\Taxon');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Taxon');
     }
 
     function it_is_Sylius_Taxon()

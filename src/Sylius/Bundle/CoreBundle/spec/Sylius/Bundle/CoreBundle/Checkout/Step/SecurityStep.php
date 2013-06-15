@@ -74,7 +74,7 @@ class SecurityStep extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface $context
-     * @param Sylius\Bundle\CoreBundle\Entity\User                             $user
+     * @param Sylius\Bundle\CoreBundle\Model\User                             $user
      */
     function its_forwardAction_complete_and_register_new_user($context, $templating, $request, $form, $user, $userManager, $container, $security)
     {
