@@ -2,7 +2,7 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
 {% block content %}
-    <h4>{{ 'sylius.account.order.details' }}</h4>
+    <h4>{{ 'sylius.account.order.details'|trans }}</h4>
 
     {% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
 {% endblock %}

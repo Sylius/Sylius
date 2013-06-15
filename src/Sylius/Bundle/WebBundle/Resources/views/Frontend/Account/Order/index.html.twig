@@ -2,17 +2,17 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
 {% block content %}
-    <h4>{{ 'sylius.account.order.list' }}</h4>
+    <h4>{{ 'sylius.account.order.list'|trans }}</h4>
 
     <div class="row-fluid">
         <table id="orders" class="table">
             <thead>
                 <tr>
-                    <td>date</td>
-                    <td>number</td>
-                    <td>amount</td>
-                    <td>status</td>
-                    <td>invoice</td>
+                    <td>{{ 'sylius.account.order.created_at'|trans }}</td>
+                    <td>{{ 'sylius.account.order.number'|trans }}</td>
+                    <td>{{ 'sylius.account.order.total'|trans }}</td>
+                    <td>{{ 'sylius.account.order.status'|trans }}</td>
+                    <td>{{ 'sylius.account.order.invoice'|trans }}</td>
                     <td>&nbsp;</td>
                 </tr>
             </thead>
@@ -23,7 +23,11 @@
                         <td>{{ order.number }}</td>
                         <td>{{ order.total|sylius_money }}</td>
                         <td>TODO</td>
-                        <td>TODO</td>
+                        <td>
+                            <a href="{{ path('sylius_account_order_invoice', {'number': order.number}) }}">
+                                <i class="icon-file"></i>
+                            </a>
+                        </td>
                         <td>
                             {{ buttons.show(path('sylius_account_order_show', {'number': order.number}), '', 'order-' ~ order.number ~ '-details') }}
                         </td>

@@ -27,11 +27,6 @@ sylius_account_order_show:
                 number: $number
 
 sylius_account_order_invoice:
-    pattern: /invoice/{number}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order:showAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Order:invoice.html.twig
-            criteria:
-                number: $number
+    path:     /invoice/{number}
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:orderInvoice }
+    methods:  [GET]
