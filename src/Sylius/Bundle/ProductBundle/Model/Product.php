@@ -289,6 +289,34 @@ class Product implements ProductInterface
     {
         return $this->properties->contains($property);
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPropertyByName($propertyName)
+    {
+        foreach ($this->properties as $property) {
+            if ($property->getName() == $propertyName) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getPropertyByName($propertyName)
+    {
+        foreach ($this->properties as $property) {
+            if ($property->getName() == $propertyName) {
+                return $property;
+            }
+        }
+        
+        return null;
+    }
 
     /**
      * {@inheritdoc}
