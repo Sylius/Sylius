@@ -24,9 +24,12 @@
                         <td>{{ order.total|sylius_money }}</td>
                         <td>TODO</td>
                         <td>
-                            <a href="{{ path('sylius_account_order_invoice', {'number': order.number}) }}">
-                                <i class="icon-file"></i>
-                            </a>
+                            {{ buttons.btn(
+                                    path('sylius_account_order_invoice', {'number': order.number}),
+                                    'sylius.account.order.download_invoice'|trans,
+                                    'order-' ~ order.number ~ '-invoice',
+                                    'file'
+                            ) }}
                         </td>
                         <td>
                             {{ buttons.show(path('sylius_account_order_show', {'number': order.number}), '', 'order-' ~ order.number ~ '-details') }}
