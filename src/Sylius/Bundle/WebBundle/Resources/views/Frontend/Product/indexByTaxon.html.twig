@@ -5,9 +5,7 @@
 {% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import list %}
 
 {% block content %}
-<div class="page-header">
-    <h1>{{ 'sylius.product.index_by_taxon_header'|trans({'%taxon%': taxon.name})|raw }}</h1>
-</div>
+<h1>{{ 'sylius.product.index_by_taxon_header'|trans({'%taxon%': taxon.name})|raw }}</h1>
 
 {{ pagination(products) }}
 {{ list(products) }}

@@ -2,8 +2,8 @@
 <tr>
     <td>{{ loop.index }}</td>
     <td>
-        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail" style="width: 90px;">
-            <img src="{{ product.image.path|default('http://placehold.it/90x60')|imagine_filter('sylius_90x60') }}" alt="" />
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" style="width: 90px;">
+            <img src="{{ product.image.path|default('http://placehold.it/90x60')|imagine_filter('sylius_90x60') }}" alt="" class="thumb" />
         </a>
     </td>
     <td>
@@ -17,7 +17,7 @@
         </ul>
     </td>
     <td>
-        {{ form_row(form.items[loop.index0].quantity, {'attr': {'class': 'input-small'}, 'label': false}) }}
+        {{ form_row(form.items[loop.index0].quantity, {'attr': {'class': 'input-small cart-quantity'}, 'label': false}) }}
     </td>
     <td>
         <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>

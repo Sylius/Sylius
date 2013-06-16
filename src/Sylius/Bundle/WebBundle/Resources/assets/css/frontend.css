@@ -1,9 +1,11 @@
 body {
     padding-top: 20px;
     padding-bottom: 40px;
+    background-color: #ECF0F1;
 }
 
-h1.logo {
+h1.logo a {
+    text-decoration: none;
 }
 
 h1.logo a {
@@ -47,60 +49,144 @@ h1.logo a:hover {
 }
 
 th {
-    background-color: #f1f1f1;
+    background-color: #34495E;
+    color: #FFFFFF;
 }
 
-#sidebar_left ul {
+td {
+    background-color: #F9F9F9;
+}
+
+td.totals {
+    background-color: #34495E;
+    color: #FFFFFF;
+}
+
+td a {
+    color: #34495E;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-gallery {
+    background-color: #34495E;
+}
+
+.modal-image {
+    border: 6px solid white;
+}
+
+.modal-footer {
+    background-color: #34495E;
+    border: 0;
+}
+
+h3.modal-title {
+    color: #FFFFFF;
+}
+
+div.modal-header a.close {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+#sidebar-left ul {
     margin-left: 0;
     list-style: none;
 }
 
-#sidebar_left ul span.nav-header {
+#sidebar-left ul span.nav-header {
     padding-left: 0;
+    font-size: 12px;
 }
 
-#sidebar_left ul.nav-list li {
-
+#sidebar-left ul.nav-list li {
 }
 
-#sidebar_left ul li a {
+#sidebar-left ul li a {
     display: block;
+    text-shadow: 0;
 }
 
-#sidebar_left ul li a:hover {
+#sidebar-left ul li a {
     text-decoration: none;
+    color: #34495E;
 }
 
-#sidebar_left ul li img {
+#sidebar-left ul li a:hover {
+    text-decoration: none;
+    color: #1ABC9C;
+}
+
+#sidebar-left ul li img {
     float: left;
     margin-right: 10px;
 }
 
-#sidebar_left ul li h4 {
-    font-size: 15px;
+#sidebar-left ul li h4 {
+    font-size: 20px;
     text-align: left;
+}
+
+div.product {
+    margin-bottom: 20px;
+}
+
+div.product-content {
+    padding: 5px;
+    position: relative;
+}
+
+.product-short-desc {
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+div.product a.product-link {
+    font-size: 18px;
+    text-decoration: none;
+    background-color: #34495E;
+    color: #FFFFFF;
+    padding: 5px;
+    margin-left: 15px;
+}
+
+.label-large {
+    font-size: 16px;
+    padding: 5px;
+}
+
+div.product a.product-link:hover {
+    background-color: #4e6d8d;
 }
 
 div.product-box {
     margin-bottom: 20px;
+    text-align: center;
+}
+
+.cart-quantity {
+    width: 40px;
+    padding: 2px !important;
+    height: 30px !important;
+    text-align: center !important;
 }
 
 div.product-box a {
     text-decoration: none;
 }
 
-div.product-box a img {
-    margin-bottom: 5px;
-}
-
-div.product-box .btn {
-    float: right;
-    height: 25px;
-    padding: 1px 6px 7px 6px;
-}
-
 div.product-box span.label {
     font-size: 15px;
+    padding: 6px;
+}
+
+div.product-box a.btn {
+    font-size: 14px;
     padding: 6px;
 }
 
@@ -114,14 +200,96 @@ div.footer p {
 }
 
 div.footer ul li a {
-    color: #999999;
+    color: #BDC3C7;
 }
 
-#sidebar_left ul li img.menu-thumbnail {
+div.footer ul li a:hover {
+    color: #1ABC9C;
+}
+
+#sidebar-left ul li img.menu-thumbnail {
     float: none;
     margin-right: 0;
 }
 
+#sidebar-left ul ul {
+    margin-left: 15px;
+}
+
 div.currency-menu {
     margin-right: 50px;
+    font-size: 14px;
+}
+
+div.currency-menu ul li a {
+    font-weight: bold;
+    background-color: #BDC3C7;
+    color: #FFFFFF;
+}
+
+div.currency-menu ul li a:hover {
+    background-color: #1ABC9C;
+    color: #FFFFFF;
+}
+
+img.thumb {
+    border: 6px solid white;
+}
+
+a.product-title {
+    background-color: #34495E;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 5px;
+}
+
+a.product-title:hover {
+    background-color: #4e6d8d;
+}
+
+.product-box img {
+    margin-top: 10px;
+}
+
+a.product-menu {
+    background-color: #34495E;
+    font-size: 16px;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+li.product-sidebox {
+    margin-top: 10px;
+    background-color: #34495E;
+}
+
+.product-long-desc-container {
+    background-color: #34495E;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+.images-gallery {
+    background-color: #34495E;
+    padding: 5px;
+}
+
+li.product-sidebox img {
+    float: left;
+}
+
+li.product-sidebox a {
+    font-size: 14px;
+    text-align: left;
+    color: #FFFFFF !important;
+    height: 53px;
+    padding: 5px;
+}
+
+li.product-sidebox a:hover {
+    background-color: #4e6d8d;
+}
+
+.nav-pills a {
+    text-decoration: none;
 }
