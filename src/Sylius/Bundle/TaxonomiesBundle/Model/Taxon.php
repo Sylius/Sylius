@@ -71,6 +71,13 @@ class Taxon implements TaxonInterface
     protected $permalink;
 
     /**
+     * Taxon description.
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -234,5 +241,21 @@ class Taxon implements TaxonInterface
     public function setPermalink($permalink)
     {
         $this->permalink = $permalink;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

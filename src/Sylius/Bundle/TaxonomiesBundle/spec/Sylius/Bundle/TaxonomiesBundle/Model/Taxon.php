@@ -120,6 +120,17 @@ class Taxon extends ObjectBehavior
         $this->getName()->shouldReturn('Brand');
     }
 
+    function it_has_no_description_by_default()
+    {
+        $this->getDescription()->shouldReturn(null);
+    }
+
+    function its_description_is_mutable()
+    {
+        $this->setDescription('This is a list of brands.');
+        $this->getDescription()->shouldReturn('This is a list of brands.');
+    }
+
     function it_has_no_slug_by_default()
     {
         $this->getSlug()->shouldReturn(null);

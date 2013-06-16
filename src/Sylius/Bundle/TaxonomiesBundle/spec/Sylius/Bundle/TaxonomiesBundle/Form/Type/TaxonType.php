@@ -39,12 +39,13 @@ class TaxonType extends ObjectBehavior
      * @param Symfony\Component\Form\FormBuilder $builder
      * @param Symfony\Component\Form\FormFactoryInterface $factory
      */
-    function it_builds_form_with_name_and_permalink_fields($builder, $factory)
+    function it_builds_form_with_name_and_permalink_and_description_fields($builder, $factory)
     {
         $builder->getFormFactory()->willReturn($factory);
 
         $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
         $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('description', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

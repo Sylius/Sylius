@@ -62,6 +62,10 @@ class TaxonType extends AbstractType
                 'required' => false,
                 'label' => 'sylius.form.taxon.permalink'
             ))
+            ->add('description', 'text', array(
+                'required' => false,
+                'label' => 'sylius.form.taxon.description'
+            ))
             ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
         ;
     }
