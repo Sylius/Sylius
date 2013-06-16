@@ -28,7 +28,7 @@
         <field name="permalink" column="permalink" type="string" unique="true">
             <gedmo:slug fields="name" unique="true" />
         </field>
-        <field name="description" column="description" type="text" />
+        <field name="description" column="description" type="string" />
         <field name="left" column="tree_left" type="int">
             <gedmo:tree-left />
         </field>
