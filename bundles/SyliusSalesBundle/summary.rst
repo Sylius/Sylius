@@ -30,6 +30,9 @@ Configuration reference
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\SalesBundle\Form\Type\AdjustmentType
+        validation_groups:
+            order: [sylius] # Order validation groups.
+            order_item: [sylius] # Order item validation groups.
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

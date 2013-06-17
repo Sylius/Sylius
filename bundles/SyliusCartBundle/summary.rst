@@ -23,6 +23,9 @@ Configuration reference
                 controller: Sylius\Bundle\CartBundle\Controller\CartItemController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\CartBundle\Form\Type\CartItemType # The form type class name to use.
+        validation_groups:
+            cart: [sylius] # Cart validation groups.
+            item: [sylius] # Cart item validation groups.
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------
