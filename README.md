@@ -11,11 +11,13 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project sylius/sylius -s dev
 ```
 
-Then configure your project and create database.
+Then configure your project, set file permissions, and create database.
 
 ``` bash
 $ cd sylius
 $ vi app/config/parameters.yml # And put your values!
+$ chmod -R 777 app/cache
+$ chmod -R 777 app/logs
 $ php app/console doctrine:database:create
 $ php app/console doctrine:schema:create
 $ php app/console doctrine:fixtures:load # If you want to load sample data.
