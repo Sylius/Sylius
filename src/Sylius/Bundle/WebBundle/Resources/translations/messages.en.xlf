@@ -1504,7 +1504,7 @@
       </trans-unit>
       <trans-unit id="32458a71a0707d046acb0b8b70bbba0b" resname="sylius.taxon.no_image">
         <source>sylius.taxon.no_image</source>
-        <target>There are no image for this taxon</target>
+        <target>There is no image for this taxon</target>
       </trans-unit>
       <trans-unit id="14570359abb67f8a14e33b0a70df40cc" resname="sylius.taxon.no_results">
         <source>sylius.taxon.no_results</source>
@@ -1536,7 +1536,7 @@
       </trans-unit>
       <trans-unit id="053e2ad9e8340ee8b9e17baf0e55c90c" resname="sylius.taxonomy.no_image">
         <source>sylius.taxonomy.no_image</source>
-        <target>There are no image for this taxonomy</target>
+        <target>There is no image for this taxonomy</target>
       </trans-unit>
       <trans-unit id="69324c688303c98c75ca1baa67437a1d" resname="sylius.taxonomy.no_results">
         <source>sylius.taxonomy.no_results</source>
