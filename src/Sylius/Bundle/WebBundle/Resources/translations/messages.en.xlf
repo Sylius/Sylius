@@ -422,13 +422,13 @@
         <source>sylius.form.frontend.profile.title</source>
         <target>Edit my personal information</target>
       </trans-unit>
-      <trans-unit id="725075e6afc8a166392a2261d7880d37" resname="sylius.form.login.password">
-        <source>sylius.form.login.password</source>
-        <target>Password</target>
-      </trans-unit>
       <trans-unit id="ea0c4a2c08a2d13161d6e4312d5f7e22" resname="sylius.form.login.email">
         <source>sylius.form.login.email</source>
         <target>Email</target>
+      </trans-unit>
+      <trans-unit id="725075e6afc8a166392a2261d7880d37" resname="sylius.form.login.password">
+        <source>sylius.form.login.password</source>
+        <target>Password</target>
       </trans-unit>
       <trans-unit id="24a58cc80b3622348ed028ea8b9793ac" resname="sylius.form.profile.email">
         <source>sylius.form.profile.email</source>
@@ -441,10 +441,6 @@
       <trans-unit id="f434362fba3003af96b35062e2fc1c54" resname="sylius.form.profile.lastName">
         <source>sylius.form.profile.lastName</source>
         <target>Last name</target>
-      </trans-unit>
-      <trans-unit id="4b98ba240ca8c3cf96133a7b78d765f0" resname="sylius.form.profile.username">
-        <source>sylius.form.profile.username</source>
-        <target>Username</target>
       </trans-unit>
       <trans-unit id="25b6370883ff5b94aef1ceb697b6d3f6" resname="sylius.gallery.next">
         <source>sylius.gallery.next</source>
@@ -892,7 +888,7 @@
       </trans-unit>
       <trans-unit id="54cc7ecdb027bf1a8a7acd6c474a1fe0" resname="sylius.product.no_taxons">
         <source>sylius.product.no_taxons</source>
-        <target>sylius.product.no_taxons</target>
+        <target>There are no taxons for this product</target>
       </trans-unit>
       <trans-unit id="a25f803bf0dac5d8437abe1cb4ea2bf4" resname="sylius.product.options">
         <source>sylius.product.options</source>
@@ -913,6 +909,10 @@
       <trans-unit id="27923918f10e9dab07e21b793e64c7d1" resname="sylius.product.show_header">
         <source>sylius.product.show_header</source>
         <target>Product details &lt;small&gt;Viewing product "&lt;strong&gt;%product%&lt;/strong&gt;"&lt;/small&gt;</target>
+      </trans-unit>
+      <trans-unit id="95a7ea9d4d79fc2c7321c9281a896992" resname="sylius.product.show_in_store">
+        <source>sylius.product.show_in_store</source>
+        <target>show in store</target>
       </trans-unit>
       <trans-unit id="0c2d930198f3c5792c83b5bc006996e0" resname="sylius.product.sku">
         <source>sylius.product.sku</source>
