@@ -9,16 +9,8 @@ Installation
 ``` bash
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project sylius/sylius -s dev
-```
-
-Then configure your project and create database.
-
-``` bash
 $ cd sylius
-$ vi app/config/parameters.yml # And put your values!
-$ php app/console doctrine:database:create
-$ php app/console doctrine:schema:create
-$ php app/console doctrine:fixtures:load # If you want to load sample data.
+$ php app/console sylius:install
 ```
 
 [Behat](http://behat.org) scenarios
