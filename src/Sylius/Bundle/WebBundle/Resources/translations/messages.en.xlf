@@ -422,13 +422,13 @@
         <source>sylius.form.frontend.profile.title</source>
         <target>Edit my personal information</target>
       </trans-unit>
-      <trans-unit id="725075e6afc8a166392a2261d7880d37" resname="sylius.form.login.password">
-        <source>sylius.form.login.password</source>
-        <target>Password</target>
-      </trans-unit>
       <trans-unit id="ea0c4a2c08a2d13161d6e4312d5f7e22" resname="sylius.form.login.email">
         <source>sylius.form.login.email</source>
         <target>Email</target>
+      </trans-unit>
+      <trans-unit id="725075e6afc8a166392a2261d7880d37" resname="sylius.form.login.password">
+        <source>sylius.form.login.password</source>
+        <target>Password</target>
       </trans-unit>
       <trans-unit id="24a58cc80b3622348ed028ea8b9793ac" resname="sylius.form.profile.email">
         <source>sylius.form.profile.email</source>
@@ -441,10 +441,6 @@
       <trans-unit id="f434362fba3003af96b35062e2fc1c54" resname="sylius.form.profile.lastName">
         <source>sylius.form.profile.lastName</source>
         <target>Last name</target>
-      </trans-unit>
-      <trans-unit id="4b98ba240ca8c3cf96133a7b78d765f0" resname="sylius.form.profile.username">
-        <source>sylius.form.profile.username</source>
-        <target>Username</target>
       </trans-unit>
       <trans-unit id="25b6370883ff5b94aef1ceb697b6d3f6" resname="sylius.gallery.next">
         <source>sylius.gallery.next</source>
@@ -581,6 +577,18 @@
       <trans-unit id="104696ab2c4e527f4865c507d8f25f49" resname="sylius.order.billing_address">
         <source>sylius.order.billing_address</source>
         <target>Billing address</target>
+      </trans-unit>
+      <trans-unit id="d6c7e02bc9e2bf246955ff7b0a142fcb" resname="sylius.order.confirmed">
+        <source>sylius.order.confirmed</source>
+        <target>Confirmed</target>
+      </trans-unit>
+      <trans-unit id="5963bb6a33b7db83087c69fea19517cc" resname="sylius.order.confirmed_header">
+        <source>sylius.order.confirmed_header</source>
+        <target>Order confirmation</target>
+      </trans-unit>
+      <trans-unit id="9244b83f0da982a646249fd9e8d1572c" resname="sylius.order.confirmed_info">
+        <source>sylius.order.confirmed_info</source>
+        <target>Your order has been confirmed.</target>
       </trans-unit>
       <trans-unit id="7299e7abdd3c5d31ea1349cc561c1166" resname="sylius.order.create">
         <source>sylius.order.create</source>

@@ -32,3 +32,11 @@ liip_doctrine_cache:
     namespaces:
         sylius_settings:
             type: array
+
+services:
+    sylius.swift.message_file_logger:
+        class: Sylius\Bundle\CoreBundle\Swift\MessageFileLogger
+        arguments:
+            - %kernel.cache_dir%/messages.log.cache
+        tags:
+            - { name: swiftmailer.plugin }

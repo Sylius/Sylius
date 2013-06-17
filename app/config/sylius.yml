@@ -98,6 +98,11 @@ sylius_sales:
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         sellable:
             model: %sylius.model.variant.class%
+    confirmation:
+        enabled: true
+        from_email:
+            address: %sylius.admin.email.address%
+            sender_name: %sylius.admin.email.sender_name%
 
 sylius_resource:
     resources:

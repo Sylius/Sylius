@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\SalesBundle\Controller\OrderController as BaseOrderController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class OrderController extends ResourceController
+class OrderController extends BaseOrderController
 {
     /**
      * Render order filter form.
