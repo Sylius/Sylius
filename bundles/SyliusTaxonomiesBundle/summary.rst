@@ -20,6 +20,9 @@ Configuration reference
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # Taxon repository class.
                 form: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType # Taxon form type class name.
+        validation_groups:
+            taxonomy: [sylius] # Taxonomy validation groups.
+            taxon: [sylius] # Taxon validation groups.
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

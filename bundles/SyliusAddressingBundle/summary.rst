@@ -50,6 +50,12 @@ Configuration reference
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType # The form type class name to use
+        validation_groups:
+            address: [sylius] # Address validation groups.
+            country: [sylius] # Country item validation groups.
+            province: [sylius] # Province item validation groups.
+            zone: [sylius] # Zone item validation groups.
+            zone_member: [sylius] # Zone member item validation groups.
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------
