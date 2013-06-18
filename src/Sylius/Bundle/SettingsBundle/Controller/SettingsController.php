@@ -47,6 +47,8 @@ class SettingsController extends Controller
 
             $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
             $this->get('session')->getFlashBag()->add('success', $message);
+
+            return $this->redirect($request->headers->get('referer'));
         }
 
         $template = $request->attributes->get('template');
