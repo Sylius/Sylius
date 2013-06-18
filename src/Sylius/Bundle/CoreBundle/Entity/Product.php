@@ -256,7 +256,7 @@ class Product extends BaseProduct implements TaxableInterface
      */
     public function getImages()
     {
-        return $this->getMasterVariant()->getImageS();
+        return $this->getMasterVariant()->getImages();
     }
 
     /**
