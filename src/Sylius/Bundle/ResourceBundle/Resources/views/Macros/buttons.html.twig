@@ -16,7 +16,7 @@
 </a>
 {% endmacro %}
 
-{% macro delete(url, message, disabled) %}
+{% macro delete(url, message, disabled, confirmationMessage) %}
 {% if disabled %}
 <span class="btn btn-danger disabled">
     <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
@@ -24,7 +24,7 @@
 {% else %}
 <form action="{{ url }}" method="post" style="display: inline;">
     <input type="hidden" name="_method" value="DELETE">
-    <button class="btn btn-danger">
+    <button class="btn btn-danger" data-toggle="confirmation" data-message="{{ confirmationMessage is empty ? 'sylius.confirmation.message'|trans : confirmationMessage }}" data-target="#confirmationModalContainer">
         <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
     </button>
 </form>

@@ -1,3 +1,4 @@
+{% import "SyliusWebBundle:Backend/Macros:modal.html.twig" as modal %}
 <!DOCTYPE html>
 
 <html>
@@ -61,6 +62,9 @@
                 </div>
             </div>
         </div>
+
+        {# Confirmation modal #}
+        {{ modal.confirmationModal() }}
 
         {# javascripts... #}
         {% block javascripts %}
