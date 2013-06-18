@@ -21,24 +21,33 @@ class OrderRepository extends EntityRepository
     /**
      * Create user orders paginator.
      *
-     * @param $user
+     * @param UserInterface $user
      * @param array $sorting
      *
      * @return PagerfantaInterface
      */
     public function createByUserPaginator(UserInterface $user, array $sorting = array())
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-
-        $queryBuilder
-            ->innerJoin('o.user', 'user')
-            ->andWhere('user = :user')
-            ->setParameter('user', $user)
-        ;
-
-        $this->applySorting($queryBuilder, $sorting);
+        $queryBuilder = $this->getCollectionQueryBuilderByUser($user, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Gets orders by user
+     *
+     * @param UserInterface $user
+     * @param array $sorting
+     * @return array
+     */
+    public function getByUser(UserInterface $user, array $sorting = array())
+    {
+        $queryBuilder = $this->getCollectionQueryBuilderByUser($user, $sorting);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -164,5 +173,20 @@ class OrderRepository extends EntityRepository
             ->setParameter('from', $from)
             ->setParameter('to', $to)
         ;
+    }
+
+    protected function getCollectionQueryBuilderByUser(UserInterface $user, array $sorting = array())
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('o.user', 'user')
+            ->andWhere('user = :user')
+            ->setParameter('user', $user)
+        ;
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $queryBuilder;
     }
 }

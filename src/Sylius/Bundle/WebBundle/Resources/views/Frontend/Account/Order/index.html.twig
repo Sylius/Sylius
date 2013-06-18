@@ -5,6 +5,7 @@
     <h4>{{ 'sylius.account.order.list'|trans }}</h4>
 
     <div class="row-fluid">
+        {% if orders is not empty %}
         <table id="orders" class="table">
             <thead>
                 <tr>
@@ -38,6 +39,8 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        {% else %}
+            <p>{{ 'sylius.account.order.empty'|trans }}</p>
+        {% endif %}
     </div>
 {% endblock %}

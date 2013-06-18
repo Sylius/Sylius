@@ -8,25 +8,14 @@ sylius_account_homepage:
 sylius_account_order_index:
     pattern: /orders
     methods: [GET]
-    defaults:
-        _controller: sylius.controller.order:indexAction
-        _sylius:
-            paginate: false
-            sorting:
-                createdAt: desc
-            template: SyliusWebBundle:Frontend/Account:Order/index.html.twig
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:indexOrder }
 
 sylius_account_order_show:
     pattern: /order/{number}
     methods: [GET]
-    defaults:
-        _controller: sylius.controller.order:showAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Account:Order/show.html.twig
-            criteria:
-                number: $number
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:showOrder }
 
 sylius_account_order_invoice:
     path:     /invoice/{number}
-    defaults: { _controller: SyliusWebBundle:Frontend/Account:orderInvoice }
     methods:  [GET]
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:generateInvoice }
