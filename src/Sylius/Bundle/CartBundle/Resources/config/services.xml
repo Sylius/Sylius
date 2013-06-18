@@ -69,6 +69,7 @@
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="validator" />
+            <argument type="service" id="sylius.cart_provider" />
         </service>
 
         <service id="sylius.cart_flash_listener" class="%sylius.cart_flash_listener.class%">
