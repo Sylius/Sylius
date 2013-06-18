@@ -136,7 +136,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
-                $data['address']
+                isset($data['address']) ? $data['address'] : null
             );
         }
     }
