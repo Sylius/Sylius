@@ -117,3 +117,6 @@ input[type="date"] {
     top: 0;
     width: auto;
 }
+.delete-action-form {
+    display: inline;
+}
