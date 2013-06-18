@@ -296,7 +296,7 @@ class Product implements ProductInterface
     public function hasPropertyByName($propertyName)
     {
         foreach ($this->properties as $property) {
-            if ($property->getName() == $propertyName) {
+            if ($property->getName() === $propertyName) {
                 return true;
             }
         }
@@ -310,7 +310,7 @@ class Product implements ProductInterface
     public function getPropertyByName($propertyName)
     {
         foreach ($this->properties as $property) {
-            if ($property->getName() == $propertyName) {
+            if ($property->getName() === $propertyName) {
                 return $property;
             }
         }
