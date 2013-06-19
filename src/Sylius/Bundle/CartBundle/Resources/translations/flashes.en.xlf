@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.cart.cart_save_completed</source>
+                <target>The cart have been updated correctly.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.cart.cart_clear_completed</source>
+                <target>The cart has been successfully cleared.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.cart.item_add_completed</source>
+                <target>Item has been added to cart.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.cart.item_remove_completed</source>
+                <target>Item has been removed from cart.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.cart.item_add_error</source>
+                <target>Error occurred while adding item to cart.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.cart.item_remove_error</source>
+                <target>Error occurred while removing item from cart.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

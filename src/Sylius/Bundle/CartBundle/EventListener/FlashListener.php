@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\EventListener;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
@@ -27,28 +28,42 @@ class FlashListener implements EventSubscriberInterface
     /**
      * @var array
      */
-    public $messages = array(
-        SyliusCartEvents::CART_SAVE_COMPLETED    => 'The cart have been updated correctly.',
-        SyliusCartEvents::CART_CLEAR_COMPLETED   => 'The cart has been successfully cleared.',
-
-        SyliusCartEvents::ITEM_ADD_COMPLETED    => 'Item has been added to cart.',
-        SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'Item has been removed from cart.',
-
-        SyliusCartEvents::ITEM_ADD_ERROR        => 'Error occurred while adding item to cart.',
-        SyliusCartEvents::ITEM_REMOVE_ERROR     => 'Error occurred while removing item from cart.',
-    );
+    public $messages;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     private $session;
 
     /**
-     * @param Session $session
+     * @var TranslatorInterface
      */
-    public function __construct(SessionInterface $session)
+    private $translator;
+
+    public function setMessages()
+    {
+        $this->messages = array(
+            SyliusCartEvents::CART_SAVE_COMPLETED    => 'sylius.cart.cart_save_completed',
+            SyliusCartEvents::CART_CLEAR_COMPLETED   => 'sylius.cart.cart_clear_completed',
+
+            SyliusCartEvents::ITEM_ADD_COMPLETED     => 'sylius.cart.item_add_completed',
+            SyliusCartEvents::ITEM_REMOVE_COMPLETED  => 'sylius.cart.item_remove_completed',
+
+            SyliusCartEvents::ITEM_ADD_ERROR         => 'sylius.cart.item_add_error',
+            SyliusCartEvents::ITEM_REMOVE_ERROR      => 'sylius.cart.item_remove_error'
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
     {
         $this->session = $session;
+        $this->translator = $translator;
     }
 
     public static function getSubscribedEvents()
@@ -67,11 +82,11 @@ class FlashListener implements EventSubscriberInterface
 
     public function addErrorFlash(Event $event)
     {
-        $this->session->getFlashBag()->add('error', $event->getMessage() ?: $this->messages[$event->getName()]);
+        $this->session->getFlashBag()->add('error', $event->getMessage() ?: $this->translator->trans($this->messages[$event->getName()], array(), 'flashes'));
     }
 
     public function addSuccessFlash(Event $event)
     {
-        $this->session->getFlashBag()->add('success', $event->getMessage() ?: $this->messages[$event->getName()]);
+        $this->session->getFlashBag()->add('success', $event->getMessage() ?: $this->translator->trans($this->messages[$event->getName()], array(), 'flashes'));
     }
 }
