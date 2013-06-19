@@ -49,7 +49,13 @@ class TaxonChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $choiceList = function (Options $options) {
-            return new ObjectChoiceList($options['taxonomy']->getFilteredTaxonsAsList($options['filter']));
+            $taxon = $options['taxonomy']->getTaxonsAsList();
+
+            if (null !== $options['filter']) {
+                $taxon = $taxon->filter($options['filter']);
+            }
+
+            return new ObjectChoiceList($taxon);
         };
 
         $resolver

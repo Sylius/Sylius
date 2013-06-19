@@ -127,17 +127,6 @@ class Taxonomy implements TaxonomyInterface
         }
     }
 
-    public function getFilteredTaxonsAsList(\Closure $filter = null)
-    {
-        $taxons = $this->getTaxonsAsList();
-
-        if (null !== $filter) {
-            $taxons = $taxons->filter($filter);
-        }
-
-        return $taxons;
-    }
-
     /**
      * {@inheritdoc}
      */
