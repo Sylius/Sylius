@@ -28,26 +28,6 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            // Sylius bundles.
-            new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
-            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
-            new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
-            new Sylius\Bundle\CartBundle\SyliusCartBundle(),
-            new Sylius\Bundle\AssortmentBundle\SyliusAssortmentBundle(),
-            new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
-            new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
-            new Sylius\Bundle\PaymentsBundle\SyliusPaymentsBundle(),
-            new Sylius\Bundle\PromotionsBundle\SyliusPromotionsBundle(),
-            new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
-            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
-            new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
-            new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
-            new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
-
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
-            new Sylius\Bundle\WebBundle\SyliusWebBundle(),
-
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
@@ -69,6 +49,26 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
+            
+            // Sylius bundles.
+            new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
+            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
+            new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
+            new Sylius\Bundle\CartBundle\SyliusCartBundle(),
+            new Sylius\Bundle\AssortmentBundle\SyliusAssortmentBundle(),
+            new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
+            new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
+            new Sylius\Bundle\PaymentsBundle\SyliusPaymentsBundle(),
+            new Sylius\Bundle\PromotionsBundle\SyliusPromotionsBundle(),
+            new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
+            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
+            new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
+            new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
+            new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
+
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
+            new Sylius\Bundle\WebBundle\SyliusWebBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
