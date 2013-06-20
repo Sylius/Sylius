@@ -58,6 +58,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @BeforeScenario
+     */
+    public function clearMailerLogger()
+    {
+        $this->getMailerLogger()->clear();
+    }
+
+    /**
      * @Given /^go to "([^""]*)" tab$/
      */
     public function goToTab($tabLabel)
@@ -606,6 +614,57 @@ class WebUser extends MinkContext implements KernelAwareInterface
             $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
+    }
+
+    /**
+     * @Given /^an email should have been sent to "([^"]*)"$/
+     */
+    public function anEmailShouldHaveBeenSentTo($email)
+    {
+        $messages = $this->getMailerLogger()->getMessages();
+
+        if (0 === count($messages)) {
+            throw new ExpectationException('No email has been sent.', $this->getSession());
+        }
+
+        foreach ($messages as $message) {
+            if ($message->getHeaders()->has('X-Swift-To')) {
+                $to = $message->getHeaders()->get('X-Swift-To')->getFieldBodyModel();
+            } else {
+                $to = $message->getTo();
+            }
+
+            if (in_array($email, array_keys($to))) {
+                return;
+            }
+        }
+
+        throw new ExpectationException(sprintf(
+            'None of the %s email(s) has been sent to %s.',
+            count($messages),
+            $email
+        ), $this->getSession());
+    }
+
+    /**
+     * @Given /^I click on order confirmation link$/
+     */
+    public function iClickOnOrderConfirmationLink()
+    {
+        $orders = $this
+            ->getDataContext()
+            ->getRepository('order')
+            ->findBy(array(), array('id' => 'desc'), 1)
+        ;
+
+        $this->getSession()->visit(
+            $this->generateUrl('sylius_order_confirm', array('token' => $orders[0]->getConfirmationToken()))
+        );
+    }
+
+    protected function getMailerLogger()
+    {
+        return $this->getService('sylius.swift.message_file_logger');
     }
 
     /**

@@ -16,6 +16,13 @@ sylius_checkout:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/checkout.yml
     prefix: /checkout
 
+sylius_order_confirm:
+    pattern: /order/confirm/{token}
+    defaults:
+        _controller: sylius.controller.order:confirmAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Order:confirm.html.twig
+
 sylius_account:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account.yml
     prefix: /account

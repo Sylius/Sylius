@@ -578,6 +578,18 @@
         <source>sylius.order.billing_address</source>
         <target>Billing address</target>
       </trans-unit>
+      <trans-unit id="d6c7e02bc9e2bf246955ff7b0a142fcb" resname="sylius.order.confirmed">
+        <source>sylius.order.confirmed</source>
+        <target>Confirmed</target>
+      </trans-unit>
+      <trans-unit id="5963bb6a33b7db83087c69fea19517cc" resname="sylius.order.confirmed_header">
+        <source>sylius.order.confirmed_header</source>
+        <target>Order confirmation</target>
+      </trans-unit>
+      <trans-unit id="9244b83f0da982a646249fd9e8d1572c" resname="sylius.order.confirmed_info">
+        <source>sylius.order.confirmed_info</source>
+        <target>Your order has been confirmed.</target>
+      </trans-unit>
       <trans-unit id="7299e7abdd3c5d31ea1349cc561c1166" resname="sylius.order.create">
         <source>sylius.order.create</source>
         <target>Create order</target>
