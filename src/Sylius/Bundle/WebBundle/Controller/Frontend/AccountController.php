@@ -78,8 +78,22 @@ class AccountController extends Controller
             'order'  => $order
         ));
 
+        $generator = $this
+            ->get('knp_snappy.pdf')
+            ->getInternalGenerator();
+
+        $generator->setOptions(
+                array(
+                    'footer-left' => '[title]',
+                    'footer-right' => '[page]/[topage]',
+                    'footer-line' => true,
+                    'footer-font-name' => '"Helvetica Neue",​Helvetica,​Arial,​sans-serif',
+                    'footer-font-size' => 10,
+                )
+            );
+
         return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            $generator->getOutputFromHtml($html),
             200,
             array(
                 'Content-Type'          => 'application/pdf',

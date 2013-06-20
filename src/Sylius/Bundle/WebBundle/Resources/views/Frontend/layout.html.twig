@@ -53,6 +53,7 @@
             {% endfor %}
         {% endblock %}
 
+        {% block main %}
         <hr>
         <div class="row-fluid">
             <div class="row-fluid">
@@ -70,8 +71,11 @@
             </div>
         </div>
         <hr>
+        {% endblock %}
 
+        {% block gallery %}
         {% include 'SyliusWebBundle::gallery.html.twig' %}
+        {% endblock %}
 
         {% block footer %}
             <div class="footer">

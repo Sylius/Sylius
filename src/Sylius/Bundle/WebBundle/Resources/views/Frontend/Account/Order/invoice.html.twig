@@ -1,2 +1,26 @@
-<h4>{{ 'sylius.account.order.invoice'|trans }}</h4>
-{% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <style>
+        .img-polaroid { display: none; }
+    </style>
+{% endblock %}
+
+{% block title %}
+    {{ 'sylius.account.order.invoice'|trans }} {{ order.number }}
+{% endblock %}
+
+{% block header %}
+    <h1>{{ 'sylius.account.order.invoice'|trans }} {{ order.number }}</h1>
+{% endblock %}
+
+{% block main %}
+    {% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
+{% endblock %}
+
+{% block gallery %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% set shipment = order.lastShipment %}
+{% if shipment %}
+    {{ ('sylius.account.order.shipment.' ~ shipment.state) |trans({'%at%': shipment.updatedAt|date}) }}
+    {% if shipment.tracking %}
+        <br>
+        {{ 'sylius.account.order.tracking_number'|trans}}
+        {{ shipment.tracking }}
+    {% endif %}
+{% else %}
+    {{ 'sylius.account.order.placed_at'|trans({'%at%': order.createdAt|date}) }}
+{% endif %}

@@ -357,4 +357,22 @@ class Order extends BaseOrder implements OrderInterface
     {
         $this->createdAt = $createdAt;
     }
+
+    /**
+     * Gets the last updated shipment of the order
+     *
+     * @return null|ShipmentInterface
+     */
+    public function getLastShipment()
+    {
+        $last = $this->shipments->count() ? $this->shipments->first() : null;
+
+        foreach ($this->shipments as $shipment) {
+            if ($shipment->getUpdatedAt() > $last->getUpdatedAt()) {
+                $last = $shipment;
+            }
+        }
+
+        return $last;
+    }
 }

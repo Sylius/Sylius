@@ -7,8 +7,8 @@
     <div class="span6">
         <br><br>
         {{ 'sylius.account.order.number'|trans }} <strong>{{ order.number }}</strong><br>
-        {{ 'sylius.account.order.status'|trans }} <strong>TODO</strong><br>
-        {{ 'sylius.account.order.tracking_number'|trans }} <strong>TODO</strong><br>
+        {{ 'sylius.account.order.state'|trans }}
+        {% include "SyliusWebBundle:Frontend/Account:Order/_state.html.twig" %}
     </div>
 </div>
 
@@ -16,7 +16,8 @@
     <table id="items" class="table table-striped">
         <thead>
         <tr>
-            <th colspan="3">{{ 'sylius.order_item.sellable'|trans }}</th>
+            <th colspan="2">{{ 'sylius.order_item.sellable'|trans }}</th>
+            <th>{{ 'sylius.order_item.quantity'|trans }}</th>
             <th>{{ 'sylius.order_item.unit_price'|trans }}</th>
             <th>{{ 'sylius.order_item.total'|trans }}</th>
         </tr>
@@ -37,10 +38,10 @@
                         </div>
                     {% endif %}
                 </td>
-                <td>{{ item.quantity }}</td>
                 <td>
                     <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}">{{ product.name }}</a>
                 </td>
+                <td>{{ item.quantity }}</td>
                 <td>{{ item.unitPrice|sylius_money }}</td>
                 <td>{{ item.total|sylius_money }}</td>
             </tr>
