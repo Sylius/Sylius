@@ -147,4 +147,22 @@ interface ProductInterface extends SoftDeletableInterface, TimestampableInterfac
      * @return Boolean
      */
     public function hasProperty(ProductPropertyInterface $property);
+    
+    /**
+     * Checks whether product has given product property, access by name.
+     *
+     * @param string $propertyName
+     *
+     * @return Boolean
+     */
+    public function hasPropertyByName($propertyName);
+    
+    /**
+     * Returns a property by its name.
+     *
+     * @param string $propertyName
+     *
+     * @return ProductPropertyInterface
+     */
+    public function getPropertyByName($propertyName);
 }
