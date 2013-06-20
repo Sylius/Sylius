@@ -19,10 +19,10 @@ before_script:
 #   - sudo /etc/init.d/apache2 restart
     - composer self-update
     - composer install --dev --prefer-source --no-interaction > /dev/null
-    - app/console do:da:cr -e=test > /dev/null
-    - app/console do:sc:cr -e=test > /dev/null
+    - app/console doctrine:database:create --env=test > /dev/null
+    - app/console doctrine:schema:create --env=test > /dev/null
     - chmod -R 777 app/cache app/logs
-    - app/console cache:warmup -e=test > /dev/null
+    - app/console cache:warmup --env=test > /dev/null
     - chmod -R 777 app/cache app/logs
 #   - "sh -e /etc/init.d/xvfb start"
 #   - "export DISPLAY=:99.0"
