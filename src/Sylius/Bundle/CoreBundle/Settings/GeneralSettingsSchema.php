@@ -15,6 +15,7 @@ use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Locale;
 
 /**
  * General settings schema.
@@ -33,13 +34,15 @@ class GeneralSettingsSchema implements SchemaInterface
                 'title'            => 'Sylius - Modern ecommerce for Symfony2',
                 'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
                 'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
+                'locale'           => 'en',
                 'currency'         => 'EUR',
             ))
             ->setAllowedTypes(array(
                 'title'            => array('string'),
                 'meta_keywords'    => array('string'),
                 'meta_description' => array('string'),
-                'currency' => array('string'),
+                'locale'           => array('string'),
+                'currency'         => array('string'),
             ))
         ;
     }
@@ -66,6 +69,13 @@ class GeneralSettingsSchema implements SchemaInterface
                 'label'       => 'sylius.form.settings.general.meta_description',
                 'constraints' => array(
                     new NotBlank()
+                )
+            ))
+            ->add('locale', 'locale', array(
+                'label'       => 'sylius.form.settings.general.locale',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Locale(),
                 )
             ))
             ->add('currency', 'text', array( // TODO: use currency type when we upgrade to 2.3

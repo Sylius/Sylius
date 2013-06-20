@@ -260,7 +260,7 @@
       </trans-unit>
       <trans-unit id="0789da7ddf260f52f05a74da16a29ca6" resname="sylius.checkout.security.header">
         <source>sylius.checkout.security.header</source>
-        <target>Улогујете се &lt;смалл&gt;или направите нови налог&lt;/смалл&gt;</target>
+        <target>Улогујете се &lt;small&gt;или направите нови налог&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="950464e3dc03957076025cf517b7f4eb" resname="sylius.checkout.security.login">
         <source>sylius.checkout.security.login</source>
@@ -752,11 +752,11 @@
       </trans-unit>
       <trans-unit id="9d7d7371dde20e1271dbcb88f4b85e77" resname="sylius.product.index_by_taxon_header">
         <source>sylius.product.index_by_taxon_header</source>
-        <target>Производи &lt;смалл&gt;Категорисани у "%taxon%"&lt;/смалл&gt;</target>
+        <target>Производи &lt;small&gt;Категорисани у "%taxon%"&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="fe2e58665dfcdf52557b30b522d27268" resname="sylius.product.index_header">
         <source>sylius.product.index_header</source>
-        <target>Производи &lt;смалл&gt;Сви производи у продавници&lt;/смалл&gt;</target>
+        <target>Производи &lt;small&gt;Сви производи у продавници&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="78ef8357982ad4dfe94751e6f620e12c" resname="sylius.product.manage">
         <source>sylius.product.manage</source>
@@ -820,7 +820,7 @@
       </trans-unit>
       <trans-unit id="27923918f10e9dab07e21b793e64c7d1" resname="sylius.product.show_header">
         <source>sylius.product.show_header</source>
-        <target>Детаљи производа &lt;смалл&gt;Преглед производа "&lt;стронг&gt;%product%&lt;/стронг&gt;"&lt;/смалл&gt;</target>
+        <target>Детаљи производа &lt;small&gt;Преглед производа "&lt;стронг&gt;%product%&lt;/стронг&gt;"&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="0c2d930198f3c5792c83b5bc006996e0" resname="sylius.product.sku">
         <source>sylius.product.sku</source>
@@ -1268,7 +1268,7 @@
       </trans-unit>
       <trans-unit id="5b19cea474365ab0f38c4662924eb810" resname="sylius.stockable.index_header">
         <source>sylius.stockable.index_header</source>
-        <target>Лагер &lt;смалл&gt;Преглед стања залиха&lt;/смалл&gt;</target>
+        <target>Лагер &lt;small&gt;Преглед стања залиха&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="edc2233df92cca06b22dadce417facd6" resname="sylius.stockable.name">
         <source>sylius.stockable.name</source>
@@ -1432,7 +1432,7 @@
       </trans-unit>
       <trans-unit id="73761ee776cbdc59fca8f5adab8483ac" resname="sylius.taxonomy.index_header">
         <source>sylius.taxonomy.index_header</source>
-        <target>Категоризација &lt;смалл&gt;Дефинисане категорије&lt;/смалл&gt;</target>
+        <target>Категоризација &lt;small&gt;Дефинисане категорије&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="3994887e084b96e1e18a23c8e4cb1177" resname="sylius.taxonomy.name">
         <source>sylius.taxonomy.name</source>
@@ -1448,7 +1448,7 @@
       </trans-unit>
       <trans-unit id="cb4e339316729f91898d65d17ff41fb7" resname="sylius.taxonomy.show_header">
         <source>sylius.taxonomy.show_header</source>
-        <target>Категоризација &lt;смалл&gt;&lt;стронг&gt;%name%&lt;/стронг&gt;&lt;/смалл&gt;</target>
+        <target>Категоризација &lt;small&gt;&lt;стронг&gt;%name%&lt;/стронг&gt;&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="eeed0e5babbe776a907ee0eeb64fe1bd" resname="sylius.taxonomy.update_header">
         <source>sylius.taxonomy.update_header</source>
@@ -1480,7 +1480,7 @@
       </trans-unit>
       <trans-unit id="a040b706c3703fc511a244cecec335e5" resname="sylius.user.index_header">
         <source>sylius.user.index_header</source>
-        <target>Корисници &lt;смалл&gt;Листа свих регистрованих корисника&lt;/смалл&gt;</target>
+        <target>Корисници &lt;small&gt;Листа свих регистрованих корисника&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="73110b9b63a7a83cb1479914f0842ba9" resname="sylius.user.last_login">
         <source>sylius.user.last_login</source>
