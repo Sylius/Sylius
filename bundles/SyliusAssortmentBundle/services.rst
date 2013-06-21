@@ -51,7 +51,7 @@ Example is self explanatory:
 
     <?php
 
-    $peoduct = $this->get('sylius.product_builder')
+    $product = $this->get('sylius.product_builder')
         ->create('Github mug')
         ->setDescription("Coffee. Tea. Coke. Water. Let's face it — humans need to drink liquids")
         ->setPrice(12.00)
