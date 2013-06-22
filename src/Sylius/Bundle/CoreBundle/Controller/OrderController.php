@@ -24,7 +24,7 @@ class OrderController extends ResourceController
     {
         $form = $this->getFormFactory()->createNamed('criteria', 'sylius_order_filter');
 
-        return $this->renderResponse('SyliusWebBundle:Backend/Order:filterForm.html', array(
+        return $this->renderResponse('SyliusWebBundle:Backend/Order:filterForm.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -54,7 +54,7 @@ class OrderController extends ResourceController
         $paginator->setCurrentPage($request->get('page', 1), true, true);
         $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
 
-        return $this->renderResponse('SyliusWebBundle:Backend/Order:indexByUser.html', array(
+        return $this->renderResponse('SyliusWebBundle:Backend/Order:indexByUser.html.twig', array(
             'user' => $user,
             'orders' => $paginator
         ));
