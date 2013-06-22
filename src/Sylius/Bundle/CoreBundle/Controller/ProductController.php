@@ -49,7 +49,7 @@ class ProductController extends ResourceController
         $paginator->setCurrentPage($request->query->get('page', 1));
         $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
 
-        return $this->renderResponse('indexByTaxon.html.twig', array(
+        return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
             'taxon'    => $taxon,
             'products' => $paginator,
         ));
@@ -64,7 +64,7 @@ class ProductController extends ResourceController
     {
         $form = $this->getFormFactory()->createNamed('criteria', 'sylius_product_filter');
 
-        return $this->renderResponse('filterForm.html.twig', array(
+        return $this->renderResponse('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
             'form' => $form->createView()
         ));
     }
