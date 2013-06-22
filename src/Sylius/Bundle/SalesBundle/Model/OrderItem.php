@@ -35,13 +35,6 @@ class OrderItem implements OrderItemInterface
     protected $order;
 
     /**
-     * Sellable.
-     *
-     * @var SellableInterface
-     */
-    protected $sellable;
-
-    /**
      * Quantity.
      *
      * @var integer
@@ -130,22 +123,6 @@ class OrderItem implements OrderItemInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSellable()
-    {
-        return $this->sellable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSellable(SellableInterface $sellable)
-    {
-        $this->sellable = $sellable;
     }
 
     /**

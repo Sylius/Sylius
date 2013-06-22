@@ -33,20 +33,6 @@ interface OrderItemInterface extends AdjustableInterface
     public function setOrder(OrderInterface $order = null);
 
     /**
-     * Get sellable item.
-     *
-     * @return SellableInterface
-     */
-    public function getSellable();
-
-    /**
-     * Set sellable item.
-     *
-     * @param SellableInterface $sellable
-     */
-    public function setSellable(SellableInterface $sellable);
-
-    /**
      * Get item quantity.
      *
      * @return integer

@@ -6,7 +6,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.builder.order.class">Sylius\Bundle\SalesBundle\Builder\OrderBuilder</parameter>
         <parameter key="sylius.generator.order_number.class">Sylius\Bundle\SalesBundle\Generator\OrderNumberGenerator</parameter>
         <parameter key="sylius.listener.order_number.class">Sylius\Bundle\SalesBundle\EventListener\OrderNumberListener</parameter>
     </parameters>
@@ -28,21 +27,24 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+        <service id="sylius.controller.adjustment" class="%sylius.controller.adjustment.class%">
+            <argument>sylius</argument>
+            <argument>adjustment</argument>
+            <argument>SyliusSalesBundle:Adjustment</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
 
         <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_group.order%</argument>
             <tag name="form.type" alias="sylius_order" />
         </service>
-        <service id="sylius.form.type.order_item" class="%sylius.form.type.order_item.class%">
-            <argument>%sylius.model.order_item.class%</argument>
-            <argument>%sylius.validation_group.order_item%</argument>
-            <tag name="form.type" alias="sylius_order_item" />
-        </service>
-
-        <service id="sylius.builder.order" class="%sylius.builder.order.class%">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.order_item" />
+        <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
+            <argument>%sylius.model.adjustment.class%</argument>
+            <argument>%sylius.validation_group.adjustment%</argument>
+            <tag name="form.type" alias="sylius_adjustment" />
         </service>
 
         <service id="sylius.generator.order_number" class="%sylius.generator.order_number.class%">

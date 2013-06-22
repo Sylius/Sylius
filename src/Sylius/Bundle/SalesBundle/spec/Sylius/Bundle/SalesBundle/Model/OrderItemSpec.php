@@ -64,20 +64,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_has_no_sellable_defined_by_default()
-    {
-        $this->getSellable()->shouldReturn(null);
-    }
-
-    /**
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
-     */
-    function it_allows_defining_sellable($sellable)
-    {
-        $this->setSellable($sellable);
-        $this->getSellable()->shouldReturn($sellable);
-    }
-
     function it_has_quantity_equal_to_1_by_default()
     {
         $this->getQuantity()->shouldReturn(1);

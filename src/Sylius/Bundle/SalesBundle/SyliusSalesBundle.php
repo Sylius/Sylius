@@ -42,7 +42,6 @@ class SyliusSalesBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\SalesBundle\Model\SellableInterface'   => 'sylius.model.sellable.class',
             'Sylius\Bundle\SalesBundle\Model\OrderInterface'      => 'sylius.model.order.class',
             'Sylius\Bundle\SalesBundle\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
             'Sylius\Bundle\SalesBundle\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
