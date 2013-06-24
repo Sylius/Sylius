@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AssortmentBundle\Validator;
+namespace Sylius\Bundle\VariableProductBundle\Validator;
 
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
 use Symfony\Component\Validator\Constraint;
@@ -29,7 +29,7 @@ class VariantCombinationValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Bundle\VariableProductBundle\Model\Variant\VariantInterface');
         }
 
         $variant = $value;

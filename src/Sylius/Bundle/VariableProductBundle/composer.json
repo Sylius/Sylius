@@ -29,7 +29,8 @@
         "doctrine/doctrine-bundle": "1.2.*",
         "phpspec/phpspec":          "2.0.*",
         "symfony/form":             "2.3.*",
-        "symfony/validator":        "2.3.*"
+        "symfony/validator":        "2.3.*",
+        "doctrine/orm":             ">=2.2.3,<2.4-dev"
     },
     "config": {
         "bin-dir": "bin"

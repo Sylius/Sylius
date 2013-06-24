@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+>
+
+    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\VariableProduct" table="sylius_product">
+
+        <one-to-many field="variants" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" mapped-by="product"/>
+
+        <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionInterface">
+            <join-table name="sylius_product_option">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="option_id" referenced-column-name="id" nullable="false" nique="false" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+    </mapped-superclass>
+
+</doctrine-mapping>
