@@ -52,7 +52,7 @@ class VariantUniqueValidator extends ConstraintValidator
         }
 
         $variant = $value;
-        $accessor = PropertyAccess::getPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
 
         $criteria = array($constraint->property => $accessor->getValue($variant, $constraint->property));
         $conflictualVariant = $this->variantRepository->findOneBy($criteria);
