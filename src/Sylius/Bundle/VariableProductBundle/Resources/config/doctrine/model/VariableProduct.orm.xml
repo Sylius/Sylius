@@ -28,7 +28,7 @@
                     <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="option_id" referenced-column-name="id" nullable="false" nique="false" />
+                    <join-column name="option_id" referenced-column-name="id" nullable="false" unique="false" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

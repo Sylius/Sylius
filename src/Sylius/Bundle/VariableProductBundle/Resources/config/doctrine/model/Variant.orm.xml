@@ -29,7 +29,6 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
-        <gedmo:soft-deleteable field-name="deletedAt" />
 
         <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="variants">
             <join-column name="product_id" referenced-column-name="id" nullable="false" />
@@ -45,6 +44,8 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+
+        <gedmo:soft-deleteable field-name="deletedAt" />
 
     </mapped-superclass>
 
