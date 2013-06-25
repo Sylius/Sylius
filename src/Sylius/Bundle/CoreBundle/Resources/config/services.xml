@@ -51,6 +51,10 @@
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
 
+        <parameter key="sylius.report_data_fetcher.order.class">Sylius\Bundle\CoreBundle\Report\DataFetcher\OrderDataFetcher</parameter>
+
+        <parameter key="sylius.form.type.data_fetcher.order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Report\DataFetcher\OrderConfigurationType</parameter>
+
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
     </parameters>
 
@@ -239,6 +243,16 @@
             <argument type="service" id="session" />
             <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.manager.user" />
+        </service>
+
+        <!-- report -->
+        <service id="sylius.report_data_fetcher.order" class="%sylius.report_data_fetcher.order.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.report_data_fetcher" type="order" label="Order" />
+        </service>
+
+        <service id="sylius.form.type.data_fetcher.order_configuration" class="%sylius.form.type.data_fetcher.order_configuration.class%">
+            <tag name="form.type" alias="sylius_report_data_fetcher_order_configuration" />
         </service>
 
         <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">

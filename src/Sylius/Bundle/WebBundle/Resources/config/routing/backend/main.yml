@@ -111,3 +111,6 @@ sylius_backend_settings:
 
 sylius_backend_security:
     resource: @SyliusWebBundle/Resources/config/routing/backend/security.yml
+
+sylius_backend_report:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/report.yml

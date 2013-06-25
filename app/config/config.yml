@@ -70,6 +70,10 @@ fos_user:
         form:
             type: sylius_user_registration
 
+fos_rest:
+    service:
+        view_handler: sylius.rest.view_handler
+
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%

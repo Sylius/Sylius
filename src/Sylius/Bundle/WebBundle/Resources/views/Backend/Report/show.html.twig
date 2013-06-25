@@ -1,0 +1,47 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/Report:macros.html.twig' import configuration %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.report.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    <a href="{{ path('sylius_backend_report_render', {'id': report.id}) }}" class="btn btn-primary">
+        <i class="icon-table"></i> {{ 'sylius.render'|trans }}
+    </a>
+    <a href="{{ path('sylius_backend_report_index') }}" class="btn">
+        <i class="icon-list-alt"></i> {{ 'sylius.report.manage'|trans }}
+    </a>
+    <a href="{{ path('sylius_backend_report_update', {'id': report.id}) }}" class="btn">
+        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+    </a>
+    <form action="{{ path('sylius_backend_report_delete', {'id': report.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
+        </button>
+    </form>
+</div>
+
+<table class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.report.name'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ report.name }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>{{ 'sylius.report.data_fetcher'|trans }}</h3>
+{{ configuration(report.fetcher) }}
+
+<h3>{{ 'sylius.report.renderer'|trans }}</h3>
+{{ configuration(report.renderer) }}
+
+{% endblock %}

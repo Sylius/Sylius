@@ -1,0 +1,32 @@
+{{ form_errors(form) }}
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
+    <hr>
+    {{ form_row(form.fetcher.type) }}
+    {% for name, configurationPrototype in form.fetcher.vars.prototypes %}
+        <div id="{{ form.fetcher.vars.id }}_type_{{ name }}" data-container="#fetcher_configuration" data-prototype="{{ form_widget(configurationPrototype)|e }}">
+        </div>
+    {% endfor %}
+    <div id="fetcher_configuration">
+        {% if form.fetcher.configuration is defined %}
+            {% for field in form.fetcher.configuration %}
+                {{ form_row(field) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <hr>
+    {{ form_row(form.renderer.type) }}
+    {% for name, configurationPrototype in form.renderer.vars.prototypes %}
+        <div id="{{ form.renderer.vars.id }}_type_{{ name }}" data-container="#renderer_configuration" data-prototype="{{ form_widget(configurationPrototype)|e }}">
+        </div>
+    {% endfor %}
+    <div id="renderer_configuration">
+        {% if form.renderer.configuration is defined %}
+            {% for field in form.renderer.configuration %}
+                {{ form_row(field) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+</fieldset>
+
+{{ form_rest(form) }}

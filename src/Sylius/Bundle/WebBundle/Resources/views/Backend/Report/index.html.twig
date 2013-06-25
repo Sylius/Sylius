@@ -1,0 +1,20 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Report:macros.html.twig' import list %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.report.index_header'|trans|raw }}</h1>
+</div>
+
+<div class="well">
+    {{ buttons.create(path('sylius_backend_report_create'), 'sylius.report.create'|trans) }}
+</div>
+
+{{ pagination(reports) }}
+{{ list(reports) }}
+{{ pagination(reports) }}
+
+{% endblock %}

@@ -266,5 +266,10 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_zone_index',
             'labelAttributes' => array('icon' => 'icon-globe'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.zones', $section)));
+
+        $child->addChild('reports', array(
+            'route' => 'sylius_backend_report_index',
+            'labelAttributes' => array('icon' => 'icon-table'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.reports', $section)));
     }
 }

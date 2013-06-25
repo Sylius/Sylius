@@ -238,6 +238,70 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^the following reports exist:$/
+     */
+    public function theFollowingReportsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('report');
+
+        foreach ($table->getHash() as $data) {
+            $report = $repository->createNew();
+            $report->setName($data['name']);
+
+            $manager->persist($report);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^report "([^"]*)" has following fetcher defined:$/
+     */
+    public function reportHasFollowingFetcherDefined($name, TableNode $table)
+    {
+        $report = $this->findOneByName('report', $name);
+
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('report_data_fetcher');
+
+        foreach ($table->getHash() as $data) {
+            $fetcher = $repository->createNew();
+            $fetcher->setType(strtolower(str_replace(' ', '_', $data['type'])));
+            $fetcher->setConfiguration($this->getConfiguration($data['configuration']));
+
+            $report->setFetcher($fetcher);
+
+            $manager->persist($fetcher);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^report "([^"]*)" has following renderer defined:$/
+     */
+    public function reportHasFollowingRendererDefined($name, TableNode $table)
+    {
+        $report = $this->findOneByName('report', $name);
+
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('report_renderer');
+
+        foreach ($table->getHash() as $data) {
+            $renderer = $repository->createNew();
+            $renderer->setType(strtolower(str_replace(' ', '_', $data['type'])));
+            $renderer->setConfiguration($this->getConfiguration($data['configuration']));
+
+            $report->setRenderer($renderer);
+
+            $manager->persist($renderer);
+        }
+
+        $manager->flush();
+    }
+
+    /**
      * @Given /^promotion "([^""]*)" has following coupons defined:$/
      * @Given /^promotion "([^""]*)" has following coupons:$/
      */
@@ -937,7 +1001,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($list as $parameter) {
             list($key, $value) = explode(':', $parameter);
-            $configuration[strtolower(trim(str_replace(' ', '_', $key)))] = trim($value);
+            $configuration[strtolower(trim(str_replace(' ', '_', trim($key))))] = trim($value);
         }
 
         return $configuration;

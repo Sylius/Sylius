@@ -22,6 +22,26 @@
         <source>sylius.form.checkout.shipping_method</source>
         <target>Shipping Method</target>
       </trans-unit>
+      <trans-unit id="d4964b77a05213fdc516f417c3d4a1a3" resname="sylius.form.data_fetcher.order_configuration.group">
+        <source>sylius.form.data_fetcher.order_configuration.group</source>
+        <target>Group by</target>
+      </trans-unit>
+      <trans-unit id="754dbfb63a4705a3ff6ddefb56830232" resname="sylius.form.data_fetcher.order_configuration.group.day">
+        <source>sylius.form.data_fetcher.order_configuration.group.day</source>
+        <target>Day</target>
+      </trans-unit>
+      <trans-unit id="382569db8f2a0ef4baf41e46cd8acdae" resname="sylius.form.data_fetcher.order_configuration.group.month">
+        <source>sylius.form.data_fetcher.order_configuration.group.month</source>
+        <target>Month</target>
+      </trans-unit>
+      <trans-unit id="d81e6bd028c84c9a3ce103a87871f965" resname="sylius.form.data_fetcher.order_configuration.group.week">
+        <source>sylius.form.data_fetcher.order_configuration.group.week</source>
+        <target>Week</target>
+      </trans-unit>
+      <trans-unit id="ba104843ef5caec62fbdd9688885d972" resname="sylius.form.data_fetcher.order_configuration.group.year">
+        <source>sylius.form.data_fetcher.order_configuration.group.year</source>
+        <target>Year</target>
+      </trans-unit>
       <trans-unit id="79fc91b958c3d643f9f68c6ea9f517cf" resname="sylius.form.image.file">
         <source>sylius.form.image.file</source>
         <target>Image</target>
@@ -66,13 +86,13 @@
         <source>sylius.form.product_filter.sku</source>
         <target>SKU</target>
       </trans-unit>
-      <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.locale">
-        <source>sylius.form.settings.general.locale</source>
-        <target>Language</target>
-      </trans-unit>
-      <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.currency">
+      <trans-unit id="0340b231018d2e94073fdf4d68532b77" resname="sylius.form.settings.general.currency">
         <source>sylius.form.settings.general.currency</source>
         <target>Default currency</target>
+      </trans-unit>
+      <trans-unit id="bc0d080561ef618e2a01cbb7ec3a0a7e" resname="sylius.form.settings.general.locale">
+        <source>sylius.form.settings.general.locale</source>
+        <target>Language</target>
       </trans-unit>
       <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.meta_description">
         <source>sylius.form.settings.general.meta_description</source>
