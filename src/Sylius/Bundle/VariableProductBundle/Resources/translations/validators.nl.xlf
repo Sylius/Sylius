@@ -4,6 +4,38 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
+                <source>sylius.option.name.not_blank</source>
+                <target>Voer een optie naam in.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.option.name.min_length</source>
+                <target>Optie naam moet minstens 1 karakter lang zijn.|Optie naam moet minstens {{ limit }} karakters lang zijn.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.option.name.max_length</source>
+                <target>Optie naam mag niet langer zijn dan 1 karakter.|Optie naam mag niet langer zijn dan {{ limit }} karakters.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.option.presentation.not_blank</source>
+                <target>Voer een optie weergave in.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.option.presentation.min_length</source>
+                <target>Optie weergave moet minstens 1 karakter lang zijn.|Optie weergave moet minstens {{ limit }} karakters lang zijn.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.option.presentation.max_length</source>
+                <target>Optie weergave mag niet langer zijn dan 1 karakter.|Optie weergave mag niet langer zijn dan {{ limit }} karakters.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.option.values.min_count</source>
+                <target>Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.option_value.value.not_blank</source>
+                <target>Voer een optie waarde in.</target>
+            </trans-unit>
+            <trans-unit id="9">
                 <source>sylius.variant.combination</source>
                 <target>Er bestaat reeds een variant met deze optie.</target>
             </trans-unit>

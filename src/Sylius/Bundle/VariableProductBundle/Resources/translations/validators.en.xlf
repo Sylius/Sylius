@@ -4,6 +4,38 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
+                <source>sylius.option.name.not_blank</source>
+                <target>Please enter option name.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.option.name.min_length</source>
+                <target>Option name must be at least 1 character long.|Option name must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.option.name.max_length</source>
+                <target>Option name must not be longer than 1 character.|Option name must not be longer than {{ limit }} characters.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.option.presentation.not_blank</source>
+                <target>Please enter option presentation.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.option.presentation.min_length</source>
+                <target>Option presentation must be at least 1 character long.|Option presentation must be at least {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.option.presentation.max_length</source>
+                <target>Option presentation must not be longer than 1 character.|Option presentation must not be longer than {{ limit }} characters.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.option.values.min_count</source>
+                <target>Please add at least {{ limit }} option value.|Please add at least {{ limit }} option values.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.option_value.value.not_blank</source>
+                <target>Please enter option value.</target>
+            </trans-unit>
+            <trans-unit id="9">
                 <source>sylius.variant.combination</source>
                 <target>Variant with this option set already exists.</target>
             </trans-unit>

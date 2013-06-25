@@ -4,12 +4,32 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
+                <source>sylius.form.product.options</source>
+                <target>Opties</target>
+            </trans-unit>
+            <trans-unit id="2">
                 <source>sylius.form.variant.presentation</source>
                 <target>Weergave</target>
             </trans-unit>
-            <trans-unit id="2">
+            <trans-unit id="3">
                 <source>sylius.form.variant.available_on</source>
                 <target>Beschikbaar op</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.form.option.name</source>
+                <target>Interne naam</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.form.option.presentation</source>
+                <target>Weergave</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.form.option.values</source>
+                <target>Mogelijke waarden</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.form.option_value.value</source>
+                <target>Waarde</target>
             </trans-unit>
         </body>
     </file>
