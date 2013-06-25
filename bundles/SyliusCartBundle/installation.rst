@@ -136,7 +136,7 @@ We have to also map the *Product* to *CartItem*, let's create this relation in m
 
     </doctrine-mapping>
 
-And that would be all about entities. 
+And that would be all about entities.
 
 Now we need to create really simple service.
 The **ItemResolver**, which will be used by controller to resolve the new cart item - based on user request information.
@@ -320,4 +320,4 @@ Easiest way to override the view is placing it here ``app/Resources/SyliusCartBu
 
 .. note::
 
-    You can use `the templates from our Sandbox app as inspiration <https://github.com/Sylius/Sylius-Sandbox/blob/master/sandbox/Resources/SyliusCartBundle/views/Cart/show.html.twig>`_.
+    You can use `the templates from our Sylius app as inspiration <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/WebBundle/Resources/views/Frontend/Cart/summary.html.twig>`_.
