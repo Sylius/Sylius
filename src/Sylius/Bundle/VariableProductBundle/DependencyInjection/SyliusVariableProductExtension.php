@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusProductExtension extends Extension
+class SyliusVariableProductExtension extends Extension
 {
     /**
      * {@inheritdoc}
