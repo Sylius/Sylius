@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use DateTime;
 
 class LoadOrdersData extends DataFixture
 {
@@ -44,7 +45,9 @@ class LoadOrdersData extends DataFixture
             $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
-            $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
+            $order->setCreatedAt(
+                50 === $i ? new DateTime() : $this->faker->dateTimeBetween('1 year ago', 'now')
+            );
 
             $order->calculateTotal();
 
