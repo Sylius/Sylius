@@ -33,15 +33,6 @@
             </call>
         </service>
 
-        <service id="sylius.controller.stockable" class="%sylius.controller.stockable.class%">
-            <argument>sylius</argument>
-            <argument>stockable</argument>
-            <argument>SyliusInventoryBundle:Stockable</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
             <argument type="service" id="sylius.manager.inventory_unit" />
             <argument type="service" id="sylius.repository.inventory_unit" />

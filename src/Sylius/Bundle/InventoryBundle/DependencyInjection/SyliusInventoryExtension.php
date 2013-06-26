@@ -49,6 +49,7 @@ class SyliusInventoryExtension extends Extension
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
+        $container->setParameter('sylius_inventory.driver', $driver);
         $container->setParameter('sylius_inventory.driver.'.$driver, true);
 
         $loader->load('twig.xml');
