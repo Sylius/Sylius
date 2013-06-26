@@ -54,7 +54,7 @@
         "fsc/hateoas-bundle":                   "0.3.x-dev",
         "knplabs/knp-gaufrette-bundle":         "0.2.*",
         "fzaninotto/faker":                     "1.2.*",
-        "knplabs/knp-menu-bundle":              "2.0.*",
+        "knplabs/knp-menu-bundle":              ">=2.0.0-alpha1",
         "liip/imagine-bundle":                  "0.9.*",
         "athari/yalinqo":                       "*"
     },
