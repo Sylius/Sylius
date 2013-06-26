@@ -59,7 +59,7 @@ class CartItemType extends BaseCartItemType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => array('Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface')
+                'product' => array('Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface')
             ))
         ;
     }
