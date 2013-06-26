@@ -15,9 +15,9 @@ Feature: User registration
             | Email        | foo@bar.com |
             | Password     | bar         |
             | Verification | bar         |
-        And I press "Register"
-       Then I should see "Welcome"
-        And I should see "Logout"
+          And I press "Register"
+         Then I should see "Welcome"
+          And I should see "Logout"
 
     Scenario: Trying to register with non verified password
         Given I am on the store homepage
@@ -26,9 +26,9 @@ Feature: User registration
             | Email        | foo@bar.com |
             | Password     | bar         |
             | Verification | foo         |
-        And I press "Register"
-       Then I should be on registration page
-        And I should see "The entered passwords don't match"
+          And I press "Register"
+         Then I should be on registration page
+          And I should see "The entered passwords don't match"
 
     Scenario: Trying to register with already existing email
         Given I am on the store homepage
@@ -37,6 +37,6 @@ Feature: User registration
             | Email        | bar@bar.com |
             | Password     | bar         |
             | Verification | bar         |
-        And I press "Register"
-       Then I should be on registration page
-        And I should see "The email is already used"
+          And I press "Register"
+         Then I should be on registration page
+          And I should see "The email is already used"
