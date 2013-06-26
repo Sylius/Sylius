@@ -31,7 +31,7 @@ class OptionValueChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $choiceList = function (Options $options) {
-            return new ObjectChoiceList($options['option']->getValues(), 'value', array(), null, null, PropertyAccess::getPropertyAccessor());
+            return new ObjectChoiceList($options['option']->getValues(), 'value', array(), null, null, PropertyAccess::createPropertyAccessor());
         };
 
         $resolver

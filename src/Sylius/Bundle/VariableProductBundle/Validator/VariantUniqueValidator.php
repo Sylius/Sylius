@@ -48,11 +48,11 @@ class VariantUniqueValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
         }
 
         $variant = $value;
-        $accessor = PropertyAccess::getPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
 
         $criteria = array($constraint->property => $accessor->getValue($variant, $constraint->property));
         $conflictualVariant = $this->variantRepository->findOneBy($criteria);

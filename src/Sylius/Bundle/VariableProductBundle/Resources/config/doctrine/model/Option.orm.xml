@@ -12,9 +12,13 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+>
 
-    <mapped-superclass name="Sylius\Bundle\AssortmentBundle\Entity\Option\Option" table="sylius_option">
+    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\Option" table="sylius_option">
         <field name="name" column="name" type="string" />
         <field name="presentation" column="presentation" type="string" />
         <field name="createdAt" column="created_at" type="datetime">
@@ -23,6 +27,9 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <one-to-many field="values" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface" mapped-by="option"/>
+
     </mapped-superclass>
 
 </doctrine-mapping>

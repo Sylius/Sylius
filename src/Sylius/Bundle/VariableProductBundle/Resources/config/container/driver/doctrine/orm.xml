@@ -17,71 +17,58 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.repository.product.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.property.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.product_property.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.prototype.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-
-        <parameter key="sylius.form.type.property_choice.class">Sylius\Bundle\VariableProductBundle\Form\Type\PropertyEntityChoiceType</parameter>
-
+        <parameter key="sylius.model.option.class">Sylius\Bundle\AssortmentBundle\Entity\Option\DefaultOption</parameter>
+        <parameter key="sylius.model.option_value.class">Sylius\Bundle\AssortmentBundle\Entity\Option\DefaultOptionValue</parameter>
+        <parameter key="sylius.repository.option.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.variant.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.option_value.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.form.type.option_choice.class">Sylius\Bundle\AssortmentBundle\Form\Type\OptionEntityChoiceType</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.manager.product" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.product" class="%sylius.repository.product.class%">
-            <argument type="service" id="sylius.manager.product" />
+
+        <service id="sylius.manager.option" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.option" class="%sylius.repository.option.class%">
+            <argument type="service" id="sylius.manager.option" />
             <argument type="service">
                 <service
                         factory-service="doctrine.orm.default_entity_manager"
                         factory-method="getClassMetadata"
                         class="Doctrine\ORM\Mapping\ClassMetadata"
-                        public="false"
-                >
-                    <argument>%sylius.model.product.class%</argument>
+                        >
+                    <argument>%sylius.model.option.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius.manager.property" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.property" class="%sylius.repository.property.class%">
-            <argument type="service" id="sylius.manager.property" />
+        <service id="sylius.manager.variant" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.variant" class="%sylius.repository.variant.class%">
+            <argument type="service" id="sylius.manager.variant" />
             <argument type="service">
                 <service
                         factory-service="doctrine.orm.default_entity_manager"
                         factory-method="getClassMetadata"
                         class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.property.class%</argument>
-                </service>
-            </argument>
-        </service>
-        <service id="sylius.manager.product_property" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.product_property" class="%sylius.repository.product_property.class%">
-            <argument type="service" id="sylius.manager.product_property" />
-            <argument type="service">
-                <service
-                        factory-service="doctrine.orm.default_entity_manager"
-                        factory-method="getClassMetadata"
-                        class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.product_property.class%</argument>
+                        >
+                    <argument>%sylius.model.variant.class%</argument>
                 </service>
             </argument>
         </service>
 
-        <service id="sylius.manager.prototype" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.prototype" class="%sylius.repository.prototype.class%">
-            <argument type="service" id="sylius.manager.prototype" />
+        <service id="sylius.manager.option_value" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.option_value" class="%sylius.repository.option_value.class%">
+            <argument type="service" id="sylius.manager.option_value" />
             <argument type="service">
                 <service
                         factory-service="doctrine.orm.default_entity_manager"
                         factory-method="getClassMetadata"
                         class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.prototype.class%</argument>
+                        >
+                    <argument>%sylius.model.option_value.class%</argument>
                 </service>
             </argument>
         </service>
+
     </services>
 
 </container>

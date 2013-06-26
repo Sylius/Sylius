@@ -4,118 +4,38 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>sylius.product.sku.not_blank</source>
-                <target>Voer een product SKU in.</target>
-            </trans-unit>
-            <trans-unit id="2">
-                <source>sylius.product.sku.unique</source>
-                <target>Product SKU moet uniek zijn.</target>
-            </trans-unit>
-            <trans-unit id="3">
-                <source>sylius.product.name.not_blank</source>
-                <target>Voer een productnaam in.</target>
-            </trans-unit>
-            <trans-unit id="4">
-                <source>sylius.product.name.min_length</source>
-                <target>Productnaam moet minstens 1 karakter lang zijn.|Productnaam moet minstens {{ limit }} karakters lang zijn.</target>
-            </trans-unit>
-            <trans-unit id="5">
-                <source>sylius.product.name.max_length</source>
-                <target>Productnaam mag niet langer zijn dan 1 karakter.|Productnaam mag niet langer zijn dan {{ limit }} karakters.</target>
-            </trans-unit>
-            <trans-unit id="6">
-                <source>sylius.product.description.not_blank</source>
-                <target>Voer een product omschrijving in.</target>
-            </trans-unit>
-            <trans-unit id="7">
-                <source>sylius.product.description.min_length</source>
-                <target>Product omschrijving moet minstens 1 karakter lang zijn.|Product omschrijving moet minstens {{ limit }} karakters lang zijn.</target>
-            </trans-unit>
-            <trans-unit id="8">
-                <source>sylius.variant.sku.not_blank</source>
-                <target>Voer een variant SKU in.</target>
-            </trans-unit>
-            <trans-unit id="9">
-                <source>sylius.variant.sku.unique</source>
-                <target>Variant SKU moet uniek zijn.</target>
-            </trans-unit>
-            <trans-unit id="10">
                 <source>sylius.option.name.not_blank</source>
                 <target>Voer een optie naam in.</target>
             </trans-unit>
-            <trans-unit id="11">
+            <trans-unit id="2">
                 <source>sylius.option.name.min_length</source>
                 <target>Optie naam moet minstens 1 karakter lang zijn.|Optie naam moet minstens {{ limit }} karakters lang zijn.</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="3">
                 <source>sylius.option.name.max_length</source>
                 <target>Optie naam mag niet langer zijn dan 1 karakter.|Optie naam mag niet langer zijn dan {{ limit }} karakters.</target>
             </trans-unit>
-            <trans-unit id="13">
+            <trans-unit id="4">
                 <source>sylius.option.presentation.not_blank</source>
                 <target>Voer een optie weergave in.</target>
             </trans-unit>
-            <trans-unit id="14">
+            <trans-unit id="5">
                 <source>sylius.option.presentation.min_length</source>
                 <target>Optie weergave moet minstens 1 karakter lang zijn.|Optie weergave moet minstens {{ limit }} karakters lang zijn.</target>
             </trans-unit>
-            <trans-unit id="15">
+            <trans-unit id="6">
                 <source>sylius.option.presentation.max_length</source>
                 <target>Optie weergave mag niet langer zijn dan 1 karakter.|Optie weergave mag niet langer zijn dan {{ limit }} karakters.</target>
             </trans-unit>
-            <trans-unit id="16">
+            <trans-unit id="7">
                 <source>sylius.option.values.min_count</source>
                 <target>Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.</target>
             </trans-unit>
-            <trans-unit id="18">
+            <trans-unit id="8">
                 <source>sylius.option_value.value.not_blank</source>
                 <target>Voer een optie waarde in.</target>
             </trans-unit>
-            <trans-unit id="19">
-                <source>sylius.property.name.not_blank</source>
-                <target>Voer een eigenschap naam in.</target>
-            </trans-unit>
-            <trans-unit id="20">
-                <source>sylius.property.name.min_length</source>
-                <target>Eigenschap naam moet minstens 1 karakter lang zijn.|Eigenschap naam moet minstens {{ limit }} karakters lang zijn.</target>
-            </trans-unit>
-            <trans-unit id="21">
-                <source>sylius.property.name.max_length</source>
-                <target>Eigenschap naam mag niet langer zijn dan 1 karakter.|Eigenschap naam mag niet langer zijn dan {{ limit }} karakters.</target>
-            </trans-unit>
-            <trans-unit id="22">
-                <source>sylius.property.presentation.not_blank</source>
-                <target>Voer een eigenschap weergave in.</target>
-            </trans-unit>
-            <trans-unit id="23">
-                <source>sylius.property.presentation.min_length</source>
-                <target>Eigenschap weergave moet minstens 1 karakter lang zijn.|Eigenschap weergave moet minstens {{ limit }} karakters lang zijn.</target>
-            </trans-unit>
-            <trans-unit id="24">
-                <source>sylius.property.presentation.max_length</source>
-                <target>Eigenschap weergave mag niet langer zijn dan 1 karakter.|Eigenschap weergave mag niet langer zijn dan {{ limit }} karakters.</target>
-            </trans-unit>
-            <trans-unit id="25">
-                <source>sylius.product_property.property.not_blank</source>
-                <target>Selecteer een eigenschap.</target>
-            </trans-unit>
-            <trans-unit id="26">
-                <source>sylius.product_property.value.not_blank</source>
-                <target>Voer een eigenschap waarde in.</target>
-            </trans-unit>
-            <trans-unit id="27">
-                <source>sylius.prototype.name.not_blank</source>
-                <target>Voer een prototype naam in.</target>
-            </trans-unit>
-            <trans-unit id="28">
-                <source>sylius.prototype.name.min_length</source>
-                <target>Prototype naam weergave moet minstens 1 karakter lang zijn.|Prototype naam moet minstens {{ limit }} karakters lang zijn.</target>
-            </trans-unit>
-            <trans-unit id="29">
-                <source>sylius.prototype.name.max_length</source>
-                <target>Prototype naam mag niet langer zijn dan 1 karakter.|Prototype naam mag niet langer zijn dan {{ limit }} karakters.</target>
-            </trans-unit>
-            <trans-unit id="30">
+            <trans-unit id="9">
                 <source>sylius.variant.combination</source>
                 <target>Er bestaat reeds een variant met deze optie.</target>
             </trans-unit>

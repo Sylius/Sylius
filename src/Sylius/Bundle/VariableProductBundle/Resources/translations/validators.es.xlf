@@ -4,118 +4,38 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>sylius.product.sku.not_blank</source>
-                <target>Por favor introduzca SKU del producto.</target>
-            </trans-unit>
-            <trans-unit id="2">
-                <source>sylius.product.sku.unique</source>
-                <target>El SKU del producto debe ser único.</target>
-            </trans-unit>
-            <trans-unit id="3">
-                <source>sylius.product.name.not_blank</source>
-                <target>Por favor introduzca el nombre del producto.</target>
-            </trans-unit>
-            <trans-unit id="4">
-                <source>sylius.product.name.min_length</source>
-                <target>El nombre del producto debe tener al menos 1 carácter de longitud.|El nombre de producto debe tener al menos {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="5">
-                <source>sylius.product.name.max_length</source>
-                <target>El nombre de producto debe tener como máximo 1 carácter de longitud.|El nombre de producto no debe ser más largo de {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="6">
-                <source>sylius.product.description.not_blank</source>
-                <target>Por favor introduzca la descripción del producto.</target>
-            </trans-unit>
-            <trans-unit id="7">
-                <source>sylius.product.description.min_length</source>
-                <target>La descripción de producto debe tener al menos 1 carácter de longitud.|La descripción de producto debe tener al menos {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="8">
-                <source>sylius.variant.sku.not_blank</source>
-                <target>Por favor introduzca el SKU de la variante.</target>
-            </trans-unit>
-            <trans-unit id="9">
-                <source>sylius.variant.sku.unique</source>
-                <target>El SKU de la variante debe ser único.</target>
-            </trans-unit>
-            <trans-unit id="10">
                 <source>sylius.option.name.not_blank</source>
                 <target>Por favor introduzca el nombre de la opción.</target>
             </trans-unit>
-            <trans-unit id="11">
+            <trans-unit id="2">
                 <source>sylius.option.name.min_length</source>
                 <target>El nombre de la opción debe tener al menos 1 carácter de longitud.|El nombre de opción debe tener al menos {{ limit }} caracteres de longitud.</target>
             </trans-unit>
-            <trans-unit id="12">
+            <trans-unit id="3">
                 <source>sylius.option.name.max_length</source>
                 <target>El nombre de la opción debe tener como máximo 1 carácter de longitud.|El nombre de la opción no debe ser más largo de {{ limit }} caracteres de longitud.</target>
             </trans-unit>
-            <trans-unit id="13">
+            <trans-unit id="4">
                 <source>sylius.option.presentation.not_blank</source>
                 <target>Por favor complete la presentación de la opción.</target>
             </trans-unit>
-            <trans-unit id="14">
+            <trans-unit id="5">
                 <source>sylius.option.presentation.min_length</source>
                 <target>La presentación de la opción debe tener al menos 1 carácter de longitud.|La presentación de la opción debe tener al menos {{ limit }} caracteres de longitud.</target>
             </trans-unit>
-            <trans-unit id="15">
+            <trans-unit id="6">
                 <source>sylius.option.presentation.max_length</source>
                 <target>La presentación de la opción debe tener como máximo 1 carácter de longitud.|La presentación de la opción no debe ser más larga de {{ limit }} caracteres de longitud.</target>
             </trans-unit>
-            <trans-unit id="16">
+            <trans-unit id="7">
                 <source>sylius.option.values.min_count</source>
                 <target>Por favor añada al menos {{ limit }} valor para la opción.|Por favor añada al menos {{ limit }} valores para la opción.</target>
             </trans-unit>
-            <trans-unit id="18">
+            <trans-unit id="8">
                 <source>sylius.option_value.value.not_blank</source>
                 <target>Por favor inserte un valor de opción.</target>
             </trans-unit>
-            <trans-unit id="19">
-                <source>sylius.property.name.not_blank</source>
-                <target>Por favor inserte el nombre de la propiedad.</target>
-            </trans-unit>
-            <trans-unit id="20">
-                <source>sylius.property.name.min_length</source>
-                <target>El nombre de la propiedad debe tener al menos 1 carácter de longitud.|El nombre de la propiedad debe tener al menos {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="21">
-                <source>sylius.property.name.max_length</source>
-                <target>El nombre de la propiedad debe tener como máximo 1 carácter de longitud.|El nombre de la propiedad no debe ser más largo de {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="22">
-                <source>sylius.property.presentation.not_blank</source>
-                <target>Por favor complete la presentación de la propiedad.</target>
-            </trans-unit>
-            <trans-unit id="23">
-                <source>sylius.property.presentation.min_length</source>
-                <target>La presentación de la propiedad debe tener al menos 1 carácter de longitud.|La presentación la propiedad debe tener al menos {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="24">
-                <source>sylius.property.presentation.max_length</source>
-                <target>La presentación de la propiedad debe tener como máximo 1 carácter de longitud.|La presentación de la propiedad no debe ser más larga de {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="25">
-                <source>sylius.product_property.property.not_blank</source>
-                <target>Por favor seleccione una propiedad.</target>
-            </trans-unit>
-            <trans-unit id="26">
-                <source>sylius.product_property.value.not_blank</source>
-                <target>Por favor introduzca un valor para la propiedad.</target>
-            </trans-unit>
-            <trans-unit id="27">
-                <source>sylius.prototype.name.not_blank</source>
-                <target>Por favor introduzca el nombre del prototipo.</target>
-            </trans-unit>
-            <trans-unit id="28">
-                <source>sylius.prototype.name.min_length</source>
-                <target>El nombre del prototipo debe tener al menos 1 carácter de longitud.|El nombre del prototipo debe tener al menos {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="29">
-                <source>sylius.prototype.name.max_length</source>
-                <target>El nombre del prototipo debe tener como máximo 1 carácter de longitud.|El nombre del prototipo no debe ser más largo de {{ limit }} caracteres de longitud.</target>
-            </trans-unit>
-            <trans-unit id="30">
+            <trans-unit id="9">
                 <source>sylius.variant.combination</source>
                 <target>Ya existe una variante con este conjunto de opciones.</target>
             </trans-unit>

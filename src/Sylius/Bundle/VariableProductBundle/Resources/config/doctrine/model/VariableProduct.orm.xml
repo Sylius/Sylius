@@ -12,16 +12,21 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="Sylius\Bundle\AssortmentBundle\Entity\CustomizableProduct" table="sylius_product">
-        <field name="name" column="name" type="string" />
-        <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
-        </field>
-        <field name="description" column="description" type="text" />
-        <many-to-many field="options" target-entity="Sylius\Bundle\AssortmentBundle\Model\Option\OptionInterface">
+    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\VariableProduct" table="sylius_product">
+
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <one-to-many field="variants" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" mapped-by="product"/>
+
+        <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionInterface">
             <join-table name="sylius_product_option">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" />
@@ -31,14 +36,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <field name="createdAt" column="created_at" type="datetime">
-            <gedmo:timestampable on="create"/>
-        </field>
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
-        </field>
-        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
-        <gedmo:soft-deleteable field-name="deletedAt" />
+
     </mapped-superclass>
 
 </doctrine-mapping>
