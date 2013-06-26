@@ -567,8 +567,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I am on the order ([^""]*) page for #(\d+)$/
-     * @Given /^I go to the order ([^""]*) page for #(\d+)$/
+     * @Given /^I am on the order ([^""]*) page for (\d+)$/
+     * @Given /^I go to the order ([^""]*) page for (\d+)$/
      */
     public function iAmOnTheOrderPage($action, $number)
     {
@@ -579,8 +579,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Then /^I should be on the order ([^""]*) page for #(\d+)$/
-     * @Then /^I should still be on the order ([^""]*) page for #(\d+)$/
+     * @Then /^I should be on the order ([^""]*) page for (\d+)$/
+     * @Then /^I should still be on the order ([^""]*) page for (\d+)$/
      */
     public function iShouldBeOnTheOrderPage($action, $number)
     {

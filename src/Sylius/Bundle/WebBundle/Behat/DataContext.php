@@ -192,7 +192,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             $order->setUser($this->thereIsUser($data['user'], 'password'));
 
-            if (isset($data['shipment'])) {
+            if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
             }
 

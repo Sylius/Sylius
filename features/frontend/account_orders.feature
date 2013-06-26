@@ -27,18 +27,18 @@ Feature: User account orders page
       | Sticker       | 10.00 | 213 |
       | Book          | 22.50 | 948 |
     And the following orders exist:
-      | user           | shipment  | address                                                                  |
-      | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | ianmurdock     | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
-      | ianmurdock     |           | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
-      | linustorvalds  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
-      | linustorvalds  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
-      | username       |           | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | linustorvalds  |           | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
-      | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | username       | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | ianmurdock     | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
+      | user                       | shipment  | address                                                                  |
+      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
+      | ianmurdock@debian.org    | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
+      | ianmurdock@debian.org    |           | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
+      | linustorvalds@linux.com  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
+      | linustorvalds@linux.com  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
+      | email@foo.com             |           | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
+      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
+      | linustorvalds@linux.com  |           | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
+      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
+      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
+      | ianmurdock@debian.org    | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
     # order that has been sent
     And order #000001 has following items:
       | product  | quantity  |
@@ -59,11 +59,8 @@ Feature: User account orders page
     Given I am on my account orders page
      Then I should see "All your orders"
       And I should see 5 orders in the list
-      And I should see "#<myorder>"
-      And I should see an "order-<myorder>" element
-      And I should not see "#<order>"
-      And I should not see an "order-<order>" element
-
+      And I should see "<myorder>"
+      And I should not see "<order>"
   Examples:
       | myorder | order    |
       | 000001  | 000002  |
@@ -91,12 +88,12 @@ Feature: User account orders page
 
   Examples:
       | order   |
-      | #000002 |
-      | #000003 |
-      | #000004 |
-      | #000005 |
-      | #000008 |
-      | #000011 |
+      | 000002 |
+      | 000003 |
+      | 000004 |
+      | 000005 |
+      | 000008 |
+      | 000011 |
 
   Scenario: Tracking an order that has been sent
     Given I am on my account orders page
@@ -117,11 +114,11 @@ Feature: User account orders page
     Then I should not see an "order-000007-invoice" element
 
   Scenario: Generating an invoice for an order that has been sent
-    Given I go to the order invoice page for #000001
+    Given I go to the order invoice page for 000001
     Then the response status code should be 200
 
   Scenario: Trying to generate an invoice for an order that has not been sent
-    Given I go to the order invoice page for #000007
+    Given I go to the order invoice page for 000007
     Then the response status code should be 404
 
   Scenario Outline: Trying to generate an invoice of an order which is not mine
