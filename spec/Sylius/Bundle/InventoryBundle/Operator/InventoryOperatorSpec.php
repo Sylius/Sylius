@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Operator;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
@@ -52,14 +53,24 @@ class InventoryOperatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
+     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
      */
-    function it_decreases_stockable_on_hand($availabilityChecker, $stockable)
+    function it_decreases_stockable_on_hand($stockable, $inventoryUnit1, $inventoryUnit2, $repository, $availabilityChecker)
     {
         $availabilityChecker->isStockSufficient($stockable, 2)->willReturn(true);
 
         $stockable->getOnHand()->shouldBeCalled()->willReturn(7);
         $stockable->setOnHand(5)->shouldBeCalled();
+
+        $inventoryUnit1->setStockable($stockable)->shouldBeCalled();
+        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
+        $repository->createNew()->willReturn($inventoryUnit1);
+
+        $inventoryUnit2->setStockable($stockable)->shouldBeCalled();
+        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
+        $repository->createNew()->willReturn($inventoryUnit2);
 
         $this->decrease($stockable, 2);
     }
@@ -76,13 +87,13 @@ class InventoryOperatorSpec extends ObjectBehavior
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
 
+        $repository->createNew()->willReturn($inventoryUnit1);
         $inventoryUnit1->setStockable($stockable)->shouldBeCalled();
         $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-        $repository->createNew()->willReturn($inventoryUnit1);
 
+        $repository->createNew()->willReturn($inventoryUnit2);
         $inventoryUnit2->setStockable($stockable)->shouldBeCalled();
         $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
-        $repository->createNew()->willReturn($inventoryUnit2);
 
         $this->decrease($stockable, 2)->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
     }
@@ -96,9 +107,12 @@ class InventoryOperatorSpec extends ObjectBehavior
     function it_fills_backorder_units($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
     {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
+        $stockable->setOnHand(0)->shouldBeCalled();
+
         $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
         $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldNotBeCalled();
-        $repository->findBy(ANY_ARGUMENTS)->willReturn(array($inventoryUnit1, $inventoryUnit2));
+
+        $repository->findBy(Argument::any(), Argument::any())->willReturn(array($inventoryUnit1, $inventoryUnit2));
 
         $this->fillBackorders($stockable);
     }

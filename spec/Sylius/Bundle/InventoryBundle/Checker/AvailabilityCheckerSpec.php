@@ -159,5 +159,4 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $stockable->getOnHand()->willReturn(-5);
         $this->isStockSufficient($stockable, 3)->shouldReturn(true);
     }
-
 }
