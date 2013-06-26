@@ -6,10 +6,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\CoreBundle\Model\Taxonomy" table="sylius_core_taxonomy">
+    <entity name="Sylius\Bundle\CoreBundle\Model\Taxonomy" table="sylius_taxonomy">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <many-to-one field="root" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
             <join-column name="root_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
             <cascade>

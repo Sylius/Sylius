@@ -12,13 +12,9 @@ sylius_money:
     locale: %sylius.locale%
 
 sylius_cart:
-    driver: doctrine/orm
     resolver: sylius.cart_item_resolver.default
     classes:
-        cart:
-            model: Sylius\Bundle\CoreBundle\Model\Cart
         item:
-            model: Sylius\Bundle\CoreBundle\Model\CartItem
             form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
 
 sylius_settings:
@@ -34,7 +30,7 @@ sylius_taxonomies:
             model: Sylius\Bundle\CoreBundle\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
-sylius_assortment:
+sylius_product:
     driver: doctrine/orm
     classes:
         product:
@@ -42,6 +38,9 @@ sylius_assortment:
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
             repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+
+sylius_variable_product:
+    classes:
         variant:
             model: Sylius\Bundle\CoreBundle\Model\Variant
             form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
@@ -87,6 +86,9 @@ sylius_payments:
 
 sylius_addressing:
     driver: doctrine/orm
+    classes:
+        address:
+            model: Sylius\Bundle\CoreBundle\Model\Address
 
 sylius_sales:
     driver: doctrine/orm
@@ -96,8 +98,8 @@ sylius_sales:
             controller: Sylius\Bundle\CoreBundle\Controller\OrderController
             repository: Sylius\Bundle\CoreBundle\Repository\OrderRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
-        sellable:
-            model: %sylius.model.variant.class%
+        order_item:
+            model: Sylius\Bundle\CoreBundle\Model\OrderItem
 
 sylius_resource:
     resources:

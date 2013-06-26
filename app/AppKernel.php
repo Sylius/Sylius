@@ -30,6 +30,7 @@ class AppKernel extends Kernel
         $bundles = array(
             // Sylius bundles.
             new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
+            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),
@@ -40,7 +41,6 @@ class AppKernel extends Kernel
             new Sylius\Bundle\PaymentsBundle\SyliusPaymentsBundle(),
             new Sylius\Bundle\PromotionsBundle\SyliusPromotionsBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
-            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
             new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
             new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),

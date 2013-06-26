@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6249e0aa320c394cb1f79afff9d212f9",
+    "hash": "69e521bbf30d0fb78b331d49c942ee50",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -827,12 +827,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "b340e62246b49c51db1d8d1b7d567083da44c746"
+                "reference": "78d9719c1d210cf2258b1fde371a7f47be1a0090"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/b340e62246b49c51db1d8d1b7d567083da44c746",
-                "reference": "b340e62246b49c51db1d8d1b7d567083da44c746",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/78d9719c1d210cf2258b1fde371a7f47be1a0090",
+                "reference": "78d9719c1d210cf2258b1fde371a7f47be1a0090",
                 "shasum": ""
             },
             "require": {
@@ -892,7 +892,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2013-06-19 19:36:14"
+            "time": "2013-06-20 18:01:21"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2484,12 +2484,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "ac7ba91525f4945100677758fe808e16dd8c4927"
+                "reference": "875ada786bf49b765db8cf4f4dff0607f7d5f5b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ac7ba91525f4945100677758fe808e16dd8c4927",
-                "reference": "ac7ba91525f4945100677758fe808e16dd8c4927",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/875ada786bf49b765db8cf4f4dff0607f7d5f5b5",
+                "reference": "875ada786bf49b765db8cf4f4dff0607f7d5f5b5",
                 "shasum": ""
             },
             "require": {
@@ -2538,7 +2538,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-06-19 11:44:29"
+            "time": "2013-06-20 14:40:07"
         },
         {
             "name": "nikic/php-parser",
@@ -3513,12 +3513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusProductBundle.git",
-                "reference": "9f3d850a04008eb02fadb9ba08c8b7cfd9dea4aa"
+                "reference": "6f10760b2e5cc894ab59ec9727207f07d41be5b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/9f3d850a04008eb02fadb9ba08c8b7cfd9dea4aa",
-                "reference": "9f3d850a04008eb02fadb9ba08c8b7cfd9dea4aa",
+                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/6f10760b2e5cc894ab59ec9727207f07d41be5b6",
+                "reference": "6f10760b2e5cc894ab59ec9727207f07d41be5b6",
                 "shasum": ""
             },
             "require": {
@@ -3568,7 +3568,7 @@
                 "products",
                 "shop"
             ],
-            "time": "2013-06-06 21:14:26"
+            "time": "2013-06-20 18:29:12"
         },
         {
             "name": "sylius/promotions-bundle",
@@ -4029,6 +4029,73 @@
                 "taxonomy"
             ],
             "time": "2013-06-02 22:17:23"
+        },
+        {
+            "name": "sylius/variable-product-bundle",
+            "version": "dev-master",
+            "target-dir": "Sylius/Bundle/VariableProductBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusVariableProductBundle.git",
+                "reference": "85b51c68019145b785d4bf117f905eea40fc3a21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusVariableProductBundle/zipball/85b51c68019145b785d4bf117f905eea40fc3a21",
+                "reference": "85b51c68019145b785d4bf117f905eea40fc3a21",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "stof/doctrine-extensions-bundle": "1.1.*",
+                "sylius/product-bundle": "0.1.*",
+                "sylius/resource-bundle": "0.3.*",
+                "symfony/framework-bundle": "2.3.*"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "1.2.*",
+                "phpspec/phpspec": "2.0.*",
+                "symfony/form": "2.3.*",
+                "symfony/validator": "2.3.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sylius\\Bundle\\VariableProductBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "email": "pjedrzejewski@diweb.pl",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Sylius/SyliusVariableProductBundle/contributors"
+                }
+            ],
+            "description": "Product catalog system with support for product options and variants.",
+            "homepage": "http://sylius.com",
+            "keywords": [
+                "assortment",
+                "ecommerce",
+                "options",
+                "product",
+                "products",
+                "shop",
+                "variants"
+            ],
+            "time": "2013-06-21 11:10:16"
         },
         {
             "name": "symfony/assetic-bundle",

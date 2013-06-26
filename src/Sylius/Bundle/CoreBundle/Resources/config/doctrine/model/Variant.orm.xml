@@ -9,10 +9,12 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="sku" column="sku" type="string" nullable="true" />
         <field name="price" column="price" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean"/>
+
         <one-to-many field="images" target-entity="Sylius\Bundle\CoreBundle\Model\VariantImage" mapped-by="variant">
             <cascade>
                 <cascade-all />

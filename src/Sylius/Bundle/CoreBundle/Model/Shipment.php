@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
-use Sylius\Bundle\ShippingBundle\Entity\Shipment as BaseShipment;
+use Sylius\Bundle\ShippingBundle\Model\Shipment as BaseShipment;
 
 /**
  * Shipment attached to order.

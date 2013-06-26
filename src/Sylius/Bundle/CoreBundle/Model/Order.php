@@ -15,9 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\SalesBundle\Entity\Order as BaseOrder;
+use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
@@ -26,7 +24,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Order extends BaseOrder implements OrderInterface
+class Order extends Cart implements OrderInterface
 {
     /**
      * User.
@@ -353,6 +351,9 @@ class Order extends BaseOrder implements OrderInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -378,7 +379,8 @@ class Order extends BaseOrder implements OrderInterface
 
     /**
      * Tells is the invoice of the order can be generated.
-     * @return bool
+     *
+     * @return Boolean
      */
     public function isInvoiceAvailable()
     {

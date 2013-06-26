@@ -2,15 +2,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\TaxonomiesBundle\Entity\Taxonomy as BaseTaxonomy;
+use Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy as BaseTaxonomy;
 
-/**
- * Sylius core taxononomy entity.
- *
- */
 class Taxonomy extends BaseTaxonomy
 {
-
     /**
      * {@inheritdoc}
      */

@@ -14,8 +14,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 use PHPSpec2\ObjectBehavior;
 
 /**
- * Cart spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class Cart extends ObjectBehavior

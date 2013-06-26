@@ -13,24 +13,27 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PHPSpec2\ObjectBehavior;
 
-class Variant extends ObjectBehavior
+/**
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+class VariantSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Variant');
     }
 
-    function it_should_implement_Sylius_product_variant_interface()
+    function it_implements_Sylius_product_variant_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface');
+        $this->shouldImplement('Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
     }
 
-    function it_should_extend_Sylius_product_variant_mapped_superclass()
+    function it_extends_Sylius_product_variant_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\AssortmentBundle\Entity\Variant\Variant');
+        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\Variant');
     }
 
-    function it_should_implement_Sylius_sellable_interface()
+    function it_implements_Sylius_sellable_interface()
     {
         $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\SellableInterface');
     }
@@ -51,7 +54,7 @@ class Variant extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $masterVariant
+     * @param Sylius\Bundle\VariableProductBundle\Model\Variant\VariantInterface $masterVariant
      */
     function it_should_inherit_price_from_master_variant($masterVariant)
     {
@@ -70,7 +73,7 @@ class Variant extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
+     * @param Sylius\Bundle\VariableProductBundle\Model\CustomizableProductInterface $product
      */
     function it_returns_null_if_product_has_no_shipping_category($product)
     {
@@ -81,7 +84,7 @@ class Variant extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface $product
+     * @param Sylius\Bundle\VariableProductBundle\Model\CustomizableProductInterface $product
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategorYInterface      $shippingCategory
      */
     function it_returns_the_product_shipping_category($product, $shippingCategory)
@@ -90,5 +93,56 @@ class Variant extends ObjectBehavior
 
         $product->getShippingCategory()->willReturn($shippingCategory)->shouldBeCalled();
         $this->getShippingCategory()->shouldReturn($shippingCategory);
+    }
+
+    function it_has_no_weight_by_default()
+    {
+        $this->getWeight()->shouldReturn(null);
+    }
+
+    function its_weight_is_mutable()
+    {
+        $this->setWeight(120);
+        $this->getWeight()->shouldReturn(120);
+    }
+
+    function it_has_no_width_by_default()
+    {
+        $this->getWidth()->shouldReturn(null);
+    }
+
+    function its_width_is_mutable()
+    {
+        $this->setWidth(15);
+        $this->getWidth()->shouldReturn(15);
+    }
+
+    function it_has_no_height_by_default()
+    {
+        $this->getHeigth()->shouldReturn(null);
+    }
+
+    function its_height_is_mutable()
+    {
+        $this->setHeight(40);
+        $this->getHeight()->shouldReturn(40);
+    }
+
+    function it_returns_correct_shipping_weight()
+    {
+        $this->setWeight(140);
+        $this->getShippingWeight()->shouldReturn(140);
+    }
+
+    function it_returns_correct_shipping_width()
+    {
+        $this->setWidth(100);
+        $this->getShippingWidth()->shouldReturn(100);
+    }
+
+    function it_returns_correct_shipping_height()
+    {
+        $this->setHeight(110);
+        $this->getShippingHeight()->shouldReturn(110);
     }
 }

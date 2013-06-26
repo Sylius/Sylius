@@ -11,23 +11,31 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-class VariantImage extends Image implements VariantImageInterface
+use Sylius\Bundle\CartBundle\Model\CartItem;
+
+/**
+ * Order item model.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+class OrderItem extends CartItem implements OrderItemInterface
 {
     protected $variant;
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getProduct()
+    {
+        return $this->variant->getProduct();
+    }
+
     public function getVariant()
     {
         return $this->variant;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setVariant(VariantInterface $variant = null)
+    public function setVariant(VariantInterface $variant)
     {
         $this->variant = $variant;
+
+        return $this;
     }
 }

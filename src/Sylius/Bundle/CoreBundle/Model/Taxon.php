@@ -3,17 +3,12 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\CoreBundle\Model\ImageInterface;
-use Sylius\Bundle\TaxonomiesBundle\Entity\Taxon as BaseTaxon;
+use Sylius\Bundle\TaxonomiesBundle\Model\Taxon as BaseTaxon;
 use SplFileInfo;
 use DateTime;
 
-/**
- * Sylius core taxon entity.
- *
- */
 class Taxon extends BaseTaxon implements ImageInterface
 {
-
     /**
      * @var SplFileInfo
      */

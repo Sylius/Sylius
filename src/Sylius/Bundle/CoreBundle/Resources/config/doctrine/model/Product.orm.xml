@@ -11,12 +11,12 @@
         </id>
         <field name="shortDescription" column="short_description" type="string" nullable="true" />
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
-        <one-to-many field="variants" target-entity="Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface" mapped-by="product">
+        <one-to-many field="variants" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" mapped-by="product">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="properties" target-entity="Sylius\Bundle\AssortmentBundle\Model\Property\ProductPropertyInterface" mapped-by="product">
+        <one-to-many field="properties" target-entity="Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface" mapped-by="product">
             <cascade>
                 <cascade-all />
             </cascade>

@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface;
 use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
 
 /**
  * Default assortment products to play with Sylius sandbox.
@@ -233,9 +233,9 @@ class LoadProductsData extends DataFixture
     /**
      * Generates all possible variants with random prices.
      *
-     * @param CustomizableProductInterface $product
+     * @param VariableProductInterface $product
      */
-    private function generateVariants(CustomizableProductInterface $product)
+    private function generateVariants(VariableProductInterface $product)
     {
         $this
             ->getVariantGenerator()
@@ -256,10 +256,10 @@ class LoadProductsData extends DataFixture
     /**
      * Adds master variant to product.
      *
-     * @param CustomizableProductInterface $product
+     * @param VariableProductInterface $product
      * @param string                       $sku
      */
-    private function addMasterVariant(CustomizableProductInterface $product, $sku = null)
+    private function addMasterVariant(VariableProductInterface $product, $sku = null)
     {
         if (null === $sku) {
             $sku = $this->getUniqueSku();
@@ -291,7 +291,7 @@ class LoadProductsData extends DataFixture
      * @param string                       $name
      * @param string                       $value
      */
-    private function addProperty(CustomizableProductInterface $product, $name, $value)
+    private function addProperty(VariableProductInterface $product, $name, $value)
     {
         $property = $this->getProductPropertyRepository()->createNew();
         $property->setProperty($this->getReference('Sylius.Property.'.$name));
@@ -304,10 +304,10 @@ class LoadProductsData extends DataFixture
     /**
      * Add product to given taxons.
      *
-     * @param CustomizableProductInterface $product
+     * @param VariableProductInterface $product
      * @param array                        $taxonNames
      */
-    private function setTaxons(CustomizableProductInterface $product, array $taxonNames)
+    private function setTaxons(VariableProductInterface $product, array $taxonNames)
     {
         $taxons = new ArrayCollection();
 

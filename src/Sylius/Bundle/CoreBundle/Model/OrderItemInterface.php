@@ -11,8 +11,22 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-interface VariantImageInterface extends ImageInterface
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+
+/**
+ * Order item interface.
+ *
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ */
+interface OrderItemInterface extends CartItemInterface
 {
+    /**
+     * Get the product.
+     *
+     * @return ProductInterface
+     */
+    public function getProduct();
+
     /**
      * Get variant.
      *
@@ -21,9 +35,9 @@ interface VariantImageInterface extends ImageInterface
     public function getVariant();
 
     /**
-     * Set the variant.
+     * Set variant.
      *
      * @param VariantInterface $variant
      */
-    public function setVariant(VariantInterface $variant = null);
+    public function setVariant(VariantInterface $variant);
 }

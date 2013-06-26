@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
-use Sylius\Bundle\AssortmentBundle\Entity\CustomizableProductRepository;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Bundle\VariableProductBundle\Entity\VariableProductRepository;
 
 /**
  * Product repository.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ProductRepository extends CustomizableProductRepository
+class ProductRepository extends VariableProductRepository
 {
     /**
      * Create paginator for products categorized
