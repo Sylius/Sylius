@@ -31,7 +31,7 @@ class InventoryChangeListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener');
     }
 
-    function it_is_a_Sylius_inventory_change_listener()
+    function it_implements_Sylius_inventory_change_listener_interface()
     {
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListenerInterface');
     }

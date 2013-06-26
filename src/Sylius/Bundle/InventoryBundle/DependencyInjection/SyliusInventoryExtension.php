@@ -42,7 +42,6 @@ class SyliusInventoryExtension extends Extension
         }
 
         $driver = $config['driver'];
-        $engine = $config['engine'];
 
         if (!in_array($driver, SyliusInventoryBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension', $driver));
@@ -52,7 +51,6 @@ class SyliusInventoryExtension extends Extension
         $container->setParameter('sylius_inventory.driver', $driver);
         $container->setParameter('sylius_inventory.driver.'.$driver, true);
 
-        $loader->load('twig.xml');
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
@@ -72,15 +70,13 @@ class SyliusInventoryExtension extends Extension
         $container->setParameter('sylius.model.stockable.class', $stockableClasses['model']);
 
         $loader->load('services.xml');
+        $loader->load('twig.xml');
 
         $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
 
         if (isset($config['events'])) {
             foreach ($config['events'] as $event) {
-                $listenerDefinition->addTag(
-                    'kernel.event_listener',
-                    array('event' => $event, 'method' => 'onInventoryChange')
-                );
+                $listenerDefinition->addTag('kernel.event_listener', array('event' => $event, 'method' => 'onInventoryChange'));
             }
         }
     }

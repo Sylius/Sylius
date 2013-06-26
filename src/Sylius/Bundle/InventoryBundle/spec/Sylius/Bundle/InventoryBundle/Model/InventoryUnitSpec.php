@@ -97,8 +97,24 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
+    function its_creation_date_is_mutable()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
+
     function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function its_last_update_date_is_mutable()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setUpdatedAt($date);
+        $this->getUpdatedAt()->shouldReturn($date);
     }
 }
