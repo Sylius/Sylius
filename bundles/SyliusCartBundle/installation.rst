@@ -213,6 +213,7 @@ This can be done in various ways, but to keep the example simple - we'll use que
     use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
     use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
     use Symfony\Component\HttpFoundation\Request;
+    use Doctrine\ORM\EntityManager;
 
     class ItemResolver implements ItemResolverInterface
     {
