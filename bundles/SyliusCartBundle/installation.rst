@@ -176,6 +176,7 @@ inject the entity manager to our resolver service.
     use Sylius\Bundle\CartBundle\Model\CartItemInterface;
     use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
     use Symfony\Component\HttpFoundation\Request;
+    use Doctrine\ORM\EntityManager;
 
     class ItemResolver implements ItemResolverInterface
     {
