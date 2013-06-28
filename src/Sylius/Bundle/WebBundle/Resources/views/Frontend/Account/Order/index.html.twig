@@ -10,9 +10,9 @@
             <thead>
                 <tr>
                     <td>{{ 'sylius.account.order.created_at'|trans }}</td>
-                    <td>{{ 'sylius.account.order.number'|trans }}</td>
-                    <td>{{ 'sylius.account.order.total'|trans }}</td>
-                    <td>{{ 'sylius.account.order.state'|trans }}</td>
+                    <td>{{ 'sylius.order.number'|trans }}</td>
+                    <td>{{ 'sylius.order.total'|trans }}</td>
+                    <td>{{ 'sylius.shipment.state'|trans }}</td>
                     <td>{{ 'sylius.account.order.invoice'|trans }}</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -29,7 +29,7 @@
                         <td>
                             {{ buttons.btn(
                                     path('sylius_account_order_invoice', {'number': order.number}),
-                                    'sylius.account.order.download_invoice'|trans,
+                                    '',
                                     'order-' ~ order.number ~ '-invoice',
                                     'file'
                             ) }}

@@ -2,27 +2,95 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
-      <trans-unit id="aa5d1d6b185c783bb19dc29190828a5e" resname="sylius.account.home.email">
+      <trans-unit id="3d0bc274c189b6aa1385bfdd6b9067247ecec200" resname="sylius.account.home.email">
         <source>sylius.account.home.email</source>
         <target>Email : </target>
       </trans-unit>
-      <trans-unit id="6968e9427145cfed58f58e5a2a6bcf06" resname="sylius.account.home.id">
+      <trans-unit id="9b3c46ca5d6573965c1992a9968109f53dc70cea" resname="sylius.account.home.id">
         <source>sylius.account.home.id</source>
         <target>Customer ID : </target>
       </trans-unit>
-      <trans-unit id="5f81f7f249201ad12ab74f5a7da6afcd" resname="sylius.account.home.outline">
+      <trans-unit id="541928c0e4a54f16b91bf983e3eafd46928053aa" resname="sylius.account.home.outline">
         <source>sylius.account.home.outline</source>
         <target>Enjoy all the features that are available on your personal space to view, track and manage all your data.</target>
       </trans-unit>
-      <trans-unit id="c501f09ad630e9e77e7ba2d401a30656" resname="sylius.account.home.since">
+      <trans-unit id="77658adaa51262d9d500b4107908a1bbd18048a9" resname="sylius.account.home.since">
         <source>sylius.account.home.since</source>
         <target>You are customer since</target>
       </trans-unit>
-      <trans-unit id="4c4234eba4ccf272a578ae3161fd2456" resname="sylius.account.home.welcome">
+      <trans-unit id="ae8ba795bdbe353a378ea72e51194d2691a9338d" resname="sylius.account.home.welcome">
         <source>sylius.account.home.welcome</source>
         <target>Welcome to your space</target>
       </trans-unit>
-      <trans-unit id="94508ad78d6cdae4de43ed99efed1fc6" resname="sylius.add_to_cart">
+      <trans-unit id="60fe6a419828d3e5dde3018538d9e3cfb0a0a50c" resname="sylius.account.order.created_at">
+        <source>sylius.account.order.created_at</source>
+        <target state="new">Placed at</target>
+      </trans-unit>
+      <trans-unit id="a425391411c5d7a210082d6909a74e9d6cd5c583" resname="sylius.account.order.details">
+        <source>sylius.account.order.details</source>
+        <target state="new">Details of your order</target>
+      </trans-unit>
+      <trans-unit id="2c467fc380f17a70f18a00d3bb8fd57e526faf05" resname="sylius.account.order.download_invoice">
+        <source>sylius.account.order.download_invoice</source>
+        <target state="new">Download the invoice</target>
+      </trans-unit>
+      <trans-unit id="18a6d94ed7fe78537657f6005f87ace547329909" resname="sylius.account.order.empty">
+        <source>sylius.account.order.empty</source>
+        <target state="new">You have placed no order yet.</target>
+      </trans-unit>
+      <trans-unit id="fd8a066fba9e2d55db0cd8b6ada816601097fdcd" resname="sylius.account.order.invoice">
+        <source>sylius.account.order.invoice</source>
+        <target state="new">Invoice</target>
+      </trans-unit>
+      <trans-unit id="c80bf73aecf10fe337bce8a5a1afa672cea97e88" resname="sylius.account.order.list">
+        <source>sylius.account.order.list</source>
+        <target state="new">All your orders</target>
+      </trans-unit>
+      <trans-unit id="8d6dc8dfa8658c5dfc2ece01b795c98cc57ee2b3" resname="sylius.account.order.number">
+        <source>sylius.account.order.number</source>
+        <target state="new">Number : </target>
+      </trans-unit>
+      <trans-unit id="f0fa8be6065db75a736e49ecf99eab2eb981802b" resname="sylius.account.order.payment_mode">
+        <source>sylius.account.order.payment_mode</source>
+        <target state="new">Payment mode : </target>
+      </trans-unit>
+      <trans-unit id="c8ef7d21deddd3af65b3133e90259a0a28280b31" resname="sylius.account.order.placed_at">
+        <source>sylius.account.order.placed_at</source>
+        <target state="new">Placed at</target>
+      </trans-unit>
+      <trans-unit id="981296390775f985bda4c885accf8a3e131aa364" resname="sylius.account.order.shipment_mode">
+        <source>sylius.account.order.shipment_mode</source>
+        <target state="new">Shipment mode : </target>
+      </trans-unit>
+      <trans-unit id="bcbb2dc615ff9815de282e1a5024bdaf4efdd405" resname="sylius.account.order.state">
+        <source>sylius.account.order.state</source>
+        <target state="new">State : </target>
+      </trans-unit>
+      <trans-unit id="6d05fa528f352acd40cb9205f71e25ea3ece7296" resname="sylius.account.order.total">
+        <source>sylius.account.order.total</source>
+        <target state="new">Total</target>
+      </trans-unit>
+      <trans-unit id="994d6bfdc60651e1371c40fc572d12b9a1922e31" resname="sylius.account.order.tracking_number">
+        <source>sylius.account.order.tracking_number</source>
+        <target state="new">Tracking number</target>
+      </trans-unit>
+      <trans-unit id="e5edc859f18c291d8e92d688183b3f6145baa153" resname="sylius.account.order.shipment.pending">
+        <source>sylius.account.order.shipment.pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="266a54e54fdd5d001018b9141b59e9ee0dc1be54" resname="sylius.account.order.shipment.ready">
+        <source>sylius.account.order.shipment.ready</source>
+        <target>Ready since %at%</target>
+      </trans-unit>
+      <trans-unit id="bb6cd9341b942f546ae3b183822361fceda544a8" resname="sylius.account.order.shipment.returned">
+        <source>sylius.account.order.shipment.returned</source>
+        <target>Returned %at%</target>
+      </trans-unit>
+      <trans-unit id="78c80a0409647137a40a2c33da2eab8641df1716" resname="sylius.account.order.shipment.shipped">
+        <source>sylius.account.order.shipment.shipped</source>
+        <target>Shipped %at%</target>
+      </trans-unit>
+      <trans-unit id="c87e30d5fde4f2944b5576ce4c3e1648935e381a" resname="sylius.add_to_cart">
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
       </trans-unit>

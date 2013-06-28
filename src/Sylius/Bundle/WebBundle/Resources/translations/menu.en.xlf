@@ -286,6 +286,10 @@
         <source>sylius.frontend.menu.account.shop</source>
         <target>Back to the shop</target>
       </trans-unit>
+      <trans-unit id="762c1503bddba381bcf83ff117488f5678638fdd" resname="sylius.frontend.menu.account.orders">
+        <source>sylius.frontend.menu.account.orders</source>
+        <target state="new">My orders / my invoices</target>
+      </trans-unit>
       <trans-unit id="f10a8702eb7ef4f1f5b107c7941efc74" resname="sylius.frontend.menu.main.account">
         <source>sylius.frontend.menu.main.account</source>
         <target>My account</target>
