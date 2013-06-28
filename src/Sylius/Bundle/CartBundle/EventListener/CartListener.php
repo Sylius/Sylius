@@ -113,7 +113,7 @@ class CartListener implements EventSubscriberInterface
 
         if ($valid) {
             $this->cartManager->persist($cart);
-            $this->cartManager->flush($cart);
+            $this->cartManager->flush();
             $this->cartProvider->setCart($cart);
         }
     }
@@ -130,6 +130,7 @@ class CartListener implements EventSubscriberInterface
         $totalQuantity = 0;
         foreach ($cart->getItems() as $item) {
             $totalQuantity += $item->getQuantity();
+            $this->cartManager->persist($item);
         }
         $cart->setTotalQuantity($totalQuantity);
     }
