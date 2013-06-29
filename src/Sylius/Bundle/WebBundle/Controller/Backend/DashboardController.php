@@ -43,7 +43,7 @@ class DashboardController extends Controller
             'users' => $this->get('sylius.repository.user')->findBy(array(), array('id' => 'desc'), 5),
             'charts' => array(
                 'chart_order_total' => array(
-                    'label' => $this->container->get('translator')->trans('sylius.backend.dashboard.chart_order_total'),
+                    'label' => /** @Ignore */ $this->container->get('translator')->trans('sylius.backend.dashboard.chart_order_total'),
                     'type' => 'Line',
                     'data' => array(
                         'labels' => $months,
@@ -57,7 +57,7 @@ class DashboardController extends Controller
                     )
                 ),
                 'chart_order_count' => array(
-                    'label' => $this->container->get('translator')->trans('sylius.backend.dashboard.chart_order_count'),
+                    'label' => /** @Ignore */ $this->container->get('translator')->trans('sylius.backend.dashboard.chart_order_count'),
                     'type' => 'Line',
                     'data' => array(
                         'labels' => $months,
