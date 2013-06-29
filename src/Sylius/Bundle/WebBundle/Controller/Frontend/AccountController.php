@@ -34,7 +34,7 @@ class AccountController extends Controller
     {
         $orders = $this
             ->getOrderRepository()
-            ->getByUser($this->getUser(), array('updatedAt' => 'desc'));
+            ->findByUser($this->getUser(), array('updatedAt' => 'desc'));
 
         return $this->render(
             'SyliusWebBundle:Frontend/Account:Order/index.html.twig',
@@ -69,7 +69,7 @@ class AccountController extends Controller
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
-    public function generateInvoiceAction($number)
+    public function renderInvoiceAction($number)
     {
         $order = $this->findOrderOr404($number);
         $this->accessOrderOr403($order);

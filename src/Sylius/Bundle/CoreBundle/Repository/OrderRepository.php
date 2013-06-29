@@ -40,7 +40,7 @@ class OrderRepository extends EntityRepository
      * @param array $sorting
      * @return array
      */
-    public function getByUser(UserInterface $user, array $sorting = array())
+    public function findByUser(UserInterface $user, array $sorting = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilderByUser($user, $sorting);
 

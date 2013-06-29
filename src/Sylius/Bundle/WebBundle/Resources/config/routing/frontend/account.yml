@@ -18,4 +18,4 @@ sylius_account_order_show:
 sylius_account_order_invoice:
     path:     /invoice/{number}
     methods:  [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account:generateInvoice }
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:renderInvoice }

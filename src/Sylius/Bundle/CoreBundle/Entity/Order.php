@@ -383,12 +383,10 @@ class Order extends BaseOrder implements OrderInterface
     public function isInvoiceAvailable()
     {
         if (null !== $lastShipment = $this->getLastShipment()) {
-            if (in_array(
+            return (in_array(
                     $lastShipment->getState(),
                     array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED))
-            ) {
-                return true;
-            }
+            );
         }
 
         return false;
