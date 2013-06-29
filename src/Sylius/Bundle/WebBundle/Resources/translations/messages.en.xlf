@@ -56,7 +56,7 @@
       </trans-unit>
       <trans-unit id="c8ef7d21deddd3af65b3133e90259a0a28280b31" resname="sylius.account.order.placed_at">
         <source>sylius.account.order.placed_at</source>
-        <target state="new">Placed at</target>
+        <target state="new">Placed at %at%</target>
       </trans-unit>
       <trans-unit id="981296390775f985bda4c885accf8a3e131aa364" resname="sylius.account.order.shipment_mode">
         <source>sylius.account.order.shipment_mode</source>

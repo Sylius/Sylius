@@ -379,6 +379,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 $product->setTaxons($taxons);
             }
 
+            if (isset($data['deleted']) && 'yes' === $data['deleted']) {
+                $product->setDeletedAt(new \DateTime());
+            }
+
             $manager->persist($product);
         }
 
@@ -874,6 +878,12 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $shipmentData = array_map('trim', $shipmentData);
 
         $shipment->setMethod($this->getRepository('shipping_method')->findOneByName($shipmentData[0]));
+        if (isset($shipmentData[1])) {
+            $shipment->setState($shipmentData[1]);
+        }
+        if (isset($shipmentData[2])) {
+            $shipment->setTracking($shipmentData[2]);
+        }
 
         return $shipment;
     }

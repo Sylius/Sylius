@@ -74,6 +74,10 @@ class AccountController extends Controller
         $order = $this->findOrderOr404($number);
         $this->accessOrderOr403($order);
 
+        if (!$order->isInvoiceAvailable()) {
+            throw $this->createNotFoundException('The invoice can not yet be generated');
+        }
+
         $html = $this->renderView('SyliusWebBundle:Frontend/Account:Order/invoice.html.twig', array(
             'order'  => $order
         ));

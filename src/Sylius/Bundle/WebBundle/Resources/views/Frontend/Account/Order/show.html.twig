@@ -6,10 +6,12 @@
 
     {% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
 
+    {% if order.isInvoiceAvailable %}
     {{ buttons.btn(
         path('sylius_account_order_invoice', {'number': order.number}),
         'sylius.account.order.download_invoice',
         'order-' ~ order.number ~ '-invoice',
         'file'
     ) }}
+    {% endif %}
 {% endblock %}

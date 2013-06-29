@@ -27,8 +27,8 @@ Feature: User account orders page
       | Sticker       | 10.00 | 213 |
       | Book          | 22.50 | 948 |
     And the following orders exist:
-      | user                       | shipment  | address                                                                  |
-      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
+      | user                       | shipment                      | address                                                                  |
+      | email@foo.com             | UPS, shipped, DTBHH380HG    | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
       | ianmurdock@debian.org    | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
       | ianmurdock@debian.org    |           | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
       | linustorvalds@linux.com  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
@@ -97,21 +97,41 @@ Feature: User account orders page
 
   Scenario: Tracking an order that has been sent
     Given I am on my account orders page
-     Then I should see "Tracking number" in the "order-000001" element
-      And I should see an "order-000001-trackingNumber" element
+     Then I should see "Tracking number DTBHH380HG" in the "#order-000001" element
+      And I should see "Shipped" in the "#order-000001" element
 
-  Scenario: Trying to track an order that has not been sent
+  Scenario Outline: Trying to track an order that has not been sent
     Given I am on my account orders page
-     Then I should not see "Tracking number" in the "order-000007" element
-      And I should not see an "order-000007-trackingNumber" element
+     Then I should not see "Tracking number" in the "#order-<order>" element
+      And I should see "<state>" in the "#order-<order>" element
+
+  Examples:
+      | order   | state       |
+      | 000006 | Placed at   |
+      | 000007 | Ready since |
+
+  Scenario: Tracking an order that has been sent in its details page
+    Given I go to the order show page for 000001
+     Then I should see "Tracking number DTBHH380HG" in the "#information" element
+      And I should see "Shipped" in the "#information" element
+
+  Scenario Outline: Trying to track an order that has not been sent in its details page
+    Given I go to the order show page for <order>
+     Then I should not see "Tracking number" in the "#information" element
+      And I should see "<state>" in the "#information" element
+
+  Examples:
+      | order   | state       |
+      | 000006 | Placed at   |
+      | 000007 | Ready since |
 
   Scenario: Checking that an invoice is available for an order that has been sent
     Given I am on my account orders page
-     Then I should see an "order-000001-invoice" element
+     Then I should see an "#order-000001-invoice" element
 
   Scenario: Checking that an invoice is not available for an order that has not been sent
     Given I am on my account orders page
-    Then I should not see an "order-000007-invoice" element
+    Then I should not see an "#order-000007-invoice" element
 
   Scenario: Generating an invoice for an order that has been sent
     Given I go to the order invoice page for 000001
@@ -134,8 +154,7 @@ Feature: User account orders page
     | 000008 |
     | 000011 |
 
-  Scenario: Accessing an item from the detail of an order
-  Scenario: Trying to access an inactive or deleted item from the detail of an order
+
 
 
 

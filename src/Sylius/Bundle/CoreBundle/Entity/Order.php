@@ -375,4 +375,22 @@ class Order extends BaseOrder implements OrderInterface
 
         return $last;
     }
+
+    /**
+     * Tells is the invoice of the order can be generated.
+     * @return bool
+     */
+    public function isInvoiceAvailable()
+    {
+        if (null !== $lastShipment = $this->getLastShipment()) {
+            if (in_array(
+                    $lastShipment->getState(),
+                    array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED))
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
