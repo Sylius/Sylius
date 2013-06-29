@@ -10,6 +10,7 @@
  */
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Annotations\AnnotationReader;
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 
@@ -19,5 +20,12 @@ if (!function_exists('intl_get_error_code')) {
 }
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+
+AnnotationReader::addGlobalIgnoredName('BeforeScenario');
+AnnotationReader::addGlobalIgnoredName('Given');
+AnnotationReader::addGlobalIgnoredName('When');
+AnnotationReader::addGlobalIgnoredName('Then');
+AnnotationReader::addGlobalIgnoredName('BeforeSuite');
+AnnotationReader::addGlobalIgnoredName('AfterScenario');
 
 return $loader;
