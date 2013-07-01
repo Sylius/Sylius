@@ -63,7 +63,7 @@ class ProductToIdentifierTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($product, 'Sylius\Bundle\ProductBundle\Model\ProductInterface');
         }
 
-        $accessor = PropertyAccess::getPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
 
         return $accessor->getValue($product, $this->identifier);
     }
