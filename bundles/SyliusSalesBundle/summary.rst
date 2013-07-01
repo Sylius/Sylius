@@ -24,7 +24,7 @@ Configuration reference
                 model: ~ # The order item model class.
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\OrderlBundle\Form\Type\OrderItemType # The form type class name to use.
+                form: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType # The form type class name to use.
             adjustment:
                 model: ~ # The adjustment model class.
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController

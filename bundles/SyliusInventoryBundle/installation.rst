@@ -213,7 +213,7 @@ Put this configuration inside your ``app/config/config.yml``.
 Routing configuration
 -------------------------------
 
-Import routing configuration by adding folowing to your `app/config/routing.yml``.
+Import routing configuration by adding following to your `app/config/routing.yml``.
 
 .. code-block:: yaml
 

@@ -76,7 +76,7 @@ Custom redirect after success
 -----------------------------
 
 By default the controller will try to get the id of newly created resource and redirect to "show" route. You can easily change that.
-For example, to redirect user to list after successfuly creating new resource - you can use following configuration.
+For example, to redirect user to list after successfully creating new resource - you can use following configuration.
 
 .. code-block:: yaml
 

@@ -82,7 +82,7 @@ Creating your post class
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Next step requires creating your own **Post** class.
-If you're using the parent bundle model, you should obiously put in under this bundle namespace, but the place does not really matter for **SyliusBloggerBundle**.
+If you're using the parent bundle model, you should obviously put in under this bundle namespace, but the place does not really matter for **SyliusBloggerBundle**.
 
 .. code-block:: php
 
@@ -164,7 +164,7 @@ Customizing the form
 ~~~~~~~~~~~~~~~~~~~~
 
 Perhaps you want to modify or extend the post form? This is really easy and configurable.
-Overriding the form can be achieved in two ways, if you only need to add or remove some fields, wihout adding any dependencies to form type, simply create your own `PostType` class that will extend the **Sylius** one.
+Overriding the form can be achieved in two ways, if you only need to add or remove some fields, without adding any dependencies to form type, simply create your own `PostType` class that will extend the **Sylius** one.
 
 .. code-block:: php
 
@@ -211,7 +211,7 @@ This will put your form type service. If you're using this method, please rememb
 Configuration reference
 -----------------------
 
-Full configuration refernce with default values.
+Full configuration reference with default values.
 
 .. code-block:: yaml
 
@@ -232,8 +232,8 @@ Full configuration refernce with default values.
             manipulator:
                 post: Sylius\Bundle\BloggerBundle\Manipulator\PostManipulator
 
-Testing and continous integration
----------------------------------
+Testing and continuous integration
+----------------------------------
 
 .. image:: http://travis-ci.org/Sylius/SyliusBloggerBundle.png
 

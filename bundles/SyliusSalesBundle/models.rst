@@ -24,7 +24,7 @@ Confirmation status
 
 To check whether the order is confirmed or not, you can use the ``isConfirmed()`` method, which returns *true/false* value.
 To change that status, you can use the confirmation setter, ``setConfirmed(false)``. All orders are confirmed by default, unless you enabled e-mail confirmation feature.
-Order also can contain a confirmation token, accessible by appriopriate getter and setter.
+Order also can contain a confirmation token, accessible by appropriate getter and setter.
 
 .. code-block:: php
 
