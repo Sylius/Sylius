@@ -55,7 +55,7 @@ class ProductSpec extends ObjectBehavior
         $this->getSlug()->shouldReturn('super-product');
     }
 
-    function it_has_no_description_by_defualt()
+    function it_has_no_description_by_default()
     {
         $this->getDescription()->shouldReturn(null);
     }

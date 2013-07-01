@@ -31,7 +31,7 @@ class ProductToIdentifierTransformerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductToIdentifierTransformer');
     }
 
-    function it_returns_empty_string_if_null_transormed()
+    function it_returns_empty_string_if_null_transformed()
     {
         $this->transform(null)->shouldReturn('');
     }
