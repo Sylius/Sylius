@@ -17,6 +17,14 @@ default:
                 class: AppKernel
             mink_driver: true
 
+saucelabs:
+    extensions:
+        Behat\MinkExtension\Extension:
+            selenium2:
+                browser: firefox
+                wd_host: your_saucelabs_username:your_saucelabs_apikey@ondemand.saucelabs.com/wd/hub
+                capabilities: { "platform": "Windows 8", "browser": "firefox", "version": "21"}
+
 frontend:
     paths:
         features: features/frontend
