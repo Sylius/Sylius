@@ -4,7 +4,6 @@
 
 {% for product in products %}
 {% include 'SyliusWebBundle:Frontend/Product:_single.html.twig' %}
-{% if not loop.last %}<hr>{% endif %}
 {% else %}
 {{ alerts.info('sylius.product.no_results'|trans) }}
 {% endfor %}

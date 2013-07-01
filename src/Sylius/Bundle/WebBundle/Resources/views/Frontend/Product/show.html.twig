@@ -5,21 +5,24 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span3">
-        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail">
-            <img src="{{ product.image.path|default('http://placehold.it/200x200')|imagine_filter('sylius_200x200') }}" alt="" />
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}">
+            <img src="{{ product.image.path|default('http://placehold.it/200x200')|imagine_filter('sylius_200x200') }}" alt="" class="thumb" />
         </a>
     </div>
     <div class="span9">
-        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
-        <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn" style="margin-left: 15px;"><h3>{{ product.name }}</h3></a>
+        {% if not product.hasOptions and not sylius_inventory_is_available(product.masterVariant) %}
+            <span class="label label-important label-large">{{ 'sylius.out_of_stock'|trans }}</span>
+        {% endif %}
+        <p class="product-short-desc">{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
     </div>
 </div>
 {% if product.images|length > 0 %}
 <hr>
-<div class="well well-small" data-toggle="modal-gallery" data-target="#modal-gallery">
+<div class="images-gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
     {% for image in product.images %}
         <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ product.name }}">
-            <img class="img-polaroid" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
+            <img class="thumb" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
         </a>
     {% endfor %}
 </div>
@@ -46,8 +49,10 @@
         {% endif %}
     </div>
     <div class="span6">
-        <h4>{{ 'sylius.product.description'|trans }}</h4>
-        <p>{{ product.description|default('sylius.product.no_description')|trans|raw }}</p>
+        <div class="product-long-desc-container">
+            <h4>{{ 'sylius.product.description'|trans }}</h4>
+            <p>{{ product.description|default('sylius.product.no_description')|trans|raw }}</p>
+        </div>
     </div>
 </div>
 <hr>
@@ -101,7 +106,6 @@
     </div>
     <div class="span6">
         {% if not product.hasOptions and not sylius_inventory_is_available(product.masterVariant) %}
-            <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
         {% else %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
             {{ form_widget(form._token) }}

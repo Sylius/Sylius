@@ -21,7 +21,8 @@
         {# stylesheets... #}
         {% block stylesheets %}
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
+            '@SyliusWebBundle/Resources/assets/css/bootstrap.css'
+            '@SyliusWebBundle/Resources/assets/css/flat-ui.css'
             '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/frontend.css'
             '@SyliusWebBundle/Resources/assets/css/bootstrap-image-gallery.css'
@@ -39,7 +40,7 @@
             <div class="currency-menu masthead pull-right">
                 {{ knp_menu_render('sylius.frontend.currency', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
-            <h1 class="logo"><a href="{{ path('sylius_homepage') }}" title="{{ 'sylius.logo'|trans }}"><img src="{{ asset('assets/img/logo.png') }}" alt="{{ 'sylius.logo'|trans }}"><span>{{ 'sylius.logo'|trans }}</span></a></h1>
+            <h1 class="logo"><a href="{{ path('sylius_homepage') }}" title="{{ 'sylius.logo'|trans }}"><span>{{ 'sylius.logo'|trans }}</span></a></h1>
         {% endblock %}
 
         {% block flashes %}
@@ -56,7 +57,7 @@
         <hr>
         <div class="row-fluid">
             <div class="row-fluid">
-                <div class="span3" id="sidebar_left">
+                <div class="span3" id="sidebar-left">
                     {% block sidebar %}
                     <h4>{{ 'sylius.shop_by'|trans }}</h4>
                     {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
