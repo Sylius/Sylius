@@ -20,8 +20,8 @@ Configuration reference
                 model: ~ # The stockable model class.
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
-        checker: sylius_inventory.checker.default # The availability checker servce id.
-        operator: sylius_inventory.operator.default # The inventory operator servce id.
+        checker: sylius_inventory.checker.default # The availability checker service id.
+        operator: sylius_inventory.operator.default # The inventory operator service id.
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

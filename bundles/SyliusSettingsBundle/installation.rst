@@ -118,7 +118,7 @@ Import default routing from your ``app/config/routing.yml``.
 .. note::
 
     We used ``default`` namespace in this example. If you want to use other namespaces for saving your settings, routing config should
-    be updated as it containes namespace parameter.
+    be updated as it contains namespace parameter.
 
 Updating database schema
 ------------------------

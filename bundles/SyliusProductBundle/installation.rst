@@ -119,7 +119,7 @@ And configure doctrine extensions which are used in assortment bundle:
 Routing configuration
 ---------------------
 
-Add folowing to your ``app/config/routing.yml``.
+Add following to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 

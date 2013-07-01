@@ -17,7 +17,7 @@ Each taxon can contain many sub-child taxons, so it is implemented as a tree str
 
 .. code-block:: text
 
-    | Caterory
+    | Category
     |--  T-Shirts
     |--  Stickers
     |    |-- Men

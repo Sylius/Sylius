@@ -94,7 +94,7 @@ let's assume you have your ``DemoBundle`` registered under ``Acme\DemoBundle`` n
         }
     }
 
-Product is just an example where we have many to many realationship with taxons,
+Product is just an example where we have many to many relationship with taxons,
 which will make it possible to categorize products and list them by taxon later.
 
 Creating your forms
@@ -131,7 +131,7 @@ it is handy to use `sylius_taxon_selection` form type:
         }
     }
 
-This `sylius_taxon_selection` type will add a select input field for wach taxonomy, with seelct option for each taxon.
+This `sylius_taxon_selection` type will add a select input field for watch taxonomy, with select option for each taxon.
 
 Container configuration
 -----------------------
@@ -159,7 +159,7 @@ Routing configuration
 We will show an example here, how you can configure routing.
 Routing is based on `SyliusResourceBundle`.
 
-Add folowing to your ``app/config/routing.yml``.
+Add following to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 

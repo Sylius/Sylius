@@ -24,7 +24,7 @@ Variant
 
 Products that can have different sizes, styles, colors, and so on, can be modeled as variants of the product.
 A product can have zero or more variants. Variant have `master` flag which defines it as master (default) variant, `sku` - stock-keeping unit,
-`presentation` string, reerence to product, collection of options, and dates similar to `Product`.
+`presentation` string, reference to product, collection of options, and dates similar to `Product`.
 
 Property and ProductProperty
 ----------------------------
