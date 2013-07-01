@@ -288,7 +288,7 @@ class LoadProductsData extends DataFixture
      * Adds property to product with given value.
      *
      * @param CustomizableProductInterface $product
-     * @param string                       $propertyReference
+     * @param string                       $name
      * @param string                       $value
      */
     private function addProperty(CustomizableProductInterface $product, $name, $value)

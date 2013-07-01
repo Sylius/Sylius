@@ -58,7 +58,7 @@ class ProductController extends ResourceController
     /**
      * Render product filter form.
      *
-     * @param Request
+     * @param Request $request
      */
     public function filterFormAction(Request $request)
     {
