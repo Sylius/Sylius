@@ -72,7 +72,7 @@ class SyliusSalesExtension extends Extension
     /**
      * Remap validation group parameters.
      *
-     * @param array            $classes
+     * @param array            $validationGroups
      * @param ContainerBuilder $container
      */
     protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
