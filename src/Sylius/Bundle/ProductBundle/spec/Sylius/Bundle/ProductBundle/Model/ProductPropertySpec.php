@@ -100,7 +100,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getValue()->shouldReturn(false);
     }
 
-    function it_returns_its_value_when_converteted_to_string()
+    function it_returns_its_value_when_converted_to_string()
     {
         $this->setValue('S');
         $this->__toString()->shouldReturn('S');
