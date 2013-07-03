@@ -46,7 +46,7 @@ interface InventoryOperatorInterface
      *
      * @param StockableInterface $stockable
      * @param integer            $quantity
-     * @param integer            $state
+     * @param string             $state
      *
      * @return InventoryUnitInterface[]
      */

@@ -52,7 +52,7 @@ class SyliusInventoryExtension extends Twig_Extension
     }
 
     /**
-     * Check wether stockable is in stock or not.
+     * Check whether stockable is in stock or not.
      *
      * @param StockableInterface $stockable
      *

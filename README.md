@@ -74,7 +74,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusInventoryBundle/blob/master/Inventorys/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusInventoryBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------
