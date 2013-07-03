@@ -25,6 +25,7 @@ class VariantChoiceList extends ObjectChoiceList
      * Constructor.
      *
      * @param VariableProductInterface $product
+     * @param Boolean                  $onlyAvailable
      */
     public function __construct(VariableProductInterface $product, $onlyAvailable = true)
     {
