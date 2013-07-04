@@ -59,14 +59,18 @@ Feature: Shipping categories
          Then I should be on the shipping category index page
           And I should see "Shipping category has been successfully updated."
 
+    @javascript
     Scenario: Deleting shipping category from list
         Given I am on the shipping category index page
          When I click "delete" near "Heavy"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the shipping category index page
           And I should see "Shipping category has been successfully deleted."
 
+    @javascript
     Scenario: Deleted shipping category disappears from the list
         Given I am on the shipping category index page
          When I click "delete" near "Regular"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the shipping category index page
           And I should not see shipping category with name "Regular" in that list

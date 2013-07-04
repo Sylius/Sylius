@@ -59,14 +59,18 @@ Feature: Tax categories
          Then I should be on the tax category index page
           And I should see "Tax category has been successfully updated."
 
+    @javascript
     Scenario: Deleting tax category
         Given I am on the tax category index page
          When I click "delete" near "Clothing"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the tax category index page
           And I should see "Tax category has been successfully deleted."
 
+    @javascript
     Scenario: Deleted tax category disappears from the list
         Given I am on the tax category index page
          When I click "delete" near "Clothing"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the tax category index page
           And I should not see tax category with name "Clothing" in that list

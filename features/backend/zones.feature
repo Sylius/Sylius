@@ -88,21 +88,26 @@ Feature: Zones
          Then I should be on the page of zone "Baltic states"
           And I should see "Zone has been successfully updated."
           And "Estonia" should appear on the page
-
+    @javascript
     Scenario: Deleting zone
         Given I am on the page of zone "USA GMT-8"
          When I press "delete"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the zone index page
           And I should see "Zone has been successfully deleted."
 
+    @javascript
     Scenario: Deleting zone from list
         Given I am on the zone index page
          When I click "delete" near "USA GMT-8"
+          And I validate the "confirmationModalContainer" modal
          Then I should still be on the zone index page
           And I should see "Zone has been successfully deleted."
 
+    @javascript
     Scenario: Deleted zone disappears from the list
         Given I am on the page of zone "Germany"
          When I press "delete"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the zone index page
           But I should not see zone with name "Germany" in that list

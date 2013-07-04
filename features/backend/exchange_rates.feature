@@ -75,9 +75,11 @@ Feature: Exchange rates
          Then I should see 3 exchange rates in the list
           And I should see "0.76498"
 
+    @javascript
     Scenario: Deleting exchange rate
         Given I am on the exchange rate index page
          When I press "delete" near "US Dollar"
+          And I validate the "confirmationModalContainer" modal
          Then I should still be on the exchange rate index page
           And I should see "Exchange rate has been successfully deleted."
           But I should not see exchange rate with name "US Dollar" in the list

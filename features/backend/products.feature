@@ -40,6 +40,7 @@ Feature: Products
             | New      |
 
     Scenario: Seeing index of all products
+    Scenario: Seeing index of all products
         Given I am on the dashboard page
          When I follow "Products"
          Then I should be on the product index page
@@ -250,15 +251,19 @@ Feature: Products
           And I should see "Product has been successfully updated."
           And "Featured" should appear on the page
 
+    @javascript
     Scenario: Deleting product
         Given I am on the page of product "Mug"
          When I press "delete"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the product index page
           And I should see "Product has been successfully deleted."
 
+    @javascript
     Scenario: Deleted product disappears from the list
         Given I am on the page of product "Sticker"
          When I press "delete"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the product index page
           And I should not see product with name "Sticker" in that list
 

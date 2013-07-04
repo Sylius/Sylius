@@ -97,9 +97,11 @@ Feature: Product variants
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Variant has been successfully updated."
 
+    @javascript
     Scenario: Deleting product variant
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
          When I click "delete" near "T-Shirt size: L"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Variant has been successfully deleted."

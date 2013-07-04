@@ -806,6 +806,30 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I validate the "([^"]*)" modal$/
+     */
+    public function isOpenedModal($modal)
+    {
+        $containerLocator = sprintf('#%s', $modal);
+        $buttonLocator = $containerLocator.' [data-modal-action="confirm"]';
+        $modalContainer = $this->getSession()->getPage()->find('css', $containerLocator);
+        $primaryButton = $modalContainer->find('css', $buttonLocator);
+
+        $this->assertSession()->elementExists('css', $containerLocator);
+        $this->assertSession()->elementExists('css', $buttonLocator);
+
+        $this->getSession()->wait(100);
+
+        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
+            throw new \Exception('The modal has not the css class "in"');
+        }
+
+        $this->getSession()->wait(100);
+
+        $primaryButton->press();
+    }
+
+    /**
      * Assert that given code equals the current one.
      *
      * @param integer $code
