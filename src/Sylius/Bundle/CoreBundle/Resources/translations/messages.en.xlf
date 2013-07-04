@@ -22,26 +22,6 @@
         <source>sylius.form.checkout.shipping_method</source>
         <target>Shipping Method</target>
       </trans-unit>
-      <trans-unit id="d4964b77a05213fdc516f417c3d4a1a3" resname="sylius.form.data_fetcher.order_configuration.group">
-        <source>sylius.form.data_fetcher.order_configuration.group</source>
-        <target>Group by</target>
-      </trans-unit>
-      <trans-unit id="754dbfb63a4705a3ff6ddefb56830232" resname="sylius.form.data_fetcher.order_configuration.group.day">
-        <source>sylius.form.data_fetcher.order_configuration.group.day</source>
-        <target>Day</target>
-      </trans-unit>
-      <trans-unit id="382569db8f2a0ef4baf41e46cd8acdae" resname="sylius.form.data_fetcher.order_configuration.group.month">
-        <source>sylius.form.data_fetcher.order_configuration.group.month</source>
-        <target>Month</target>
-      </trans-unit>
-      <trans-unit id="d81e6bd028c84c9a3ce103a87871f965" resname="sylius.form.data_fetcher.order_configuration.group.week">
-        <source>sylius.form.data_fetcher.order_configuration.group.week</source>
-        <target>Week</target>
-      </trans-unit>
-      <trans-unit id="ba104843ef5caec62fbdd9688885d972" resname="sylius.form.data_fetcher.order_configuration.group.year">
-        <source>sylius.form.data_fetcher.order_configuration.group.year</source>
-        <target>Year</target>
-      </trans-unit>
       <trans-unit id="79fc91b958c3d643f9f68c6ea9f517cf" resname="sylius.form.image.file">
         <source>sylius.form.image.file</source>
         <target>Image</target>
