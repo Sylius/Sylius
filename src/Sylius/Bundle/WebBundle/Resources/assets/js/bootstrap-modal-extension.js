@@ -18,14 +18,15 @@
             if(this.getType() == 'confirmation') {
                 var primaryButton = this.getPrimaryButton();
                 var clickableElement = this.getClickableElement();
-                var destination = this.getDomConfig('destination');
 
                 this.setBodyElement(this.getDomConfig('message'));
 
                 if (clickableElement.is('a')) {
-                    primaryButton.attr('href', destination);
+                    primaryButton.attr('href', clickableElement.attr('href'));
                 } else {
+                    var destination = this.getDomConfig('destination');
                     var form;
+
                     if (destination == null) {
                         form = clickableElement.closest('form')
                     } else {
@@ -46,7 +47,7 @@
          * @returns string
          */
         getType: function() {
-            return this.options.type;
+            return this.options.toggle;
         },
 
         /**
