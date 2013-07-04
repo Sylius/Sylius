@@ -65,15 +65,19 @@ Feature: taxonomies
          Then I should be on the page of taxonomy "Brands"
           And I should see "Taxonomy has been successfully updated."
 
+    @javascript
     Scenario: Deleting taxonomy
         Given I am on the taxonomy index page
          When I click "delete" near "Brand"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the taxonomy index page
           And I should see "Taxonomy has been successfully deleted."
 
+    @javascript
     Scenario: Deleted taxonomy disappears from the list
         Given I am on the taxonomy index page
          When I click "delete" near "Category"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the taxonomy index page
           And I should not see taxonomy with name "Category" in that list
 
@@ -113,15 +117,19 @@ Feature: taxonomies
          Then I should be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully updated."
 
+    @javascript
     Scenario: Deleting taxons
         Given I am on the page of taxonomy "Category"
          When I click "delete" near "Electronics"
+          And I validate the "confirmationModalContainer" modal
          Then I should still be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully deleted."
 
+    @javascript
     Scenario: Deleted taxons disappear from the list
         Given I am on the page of taxonomy "Category"
          When I click "delete" near "Clothing"
+          And I validate the "confirmationModalContainer" modal
          Then I should still be on the page of taxonomy "Category"
           And "Taxon has been successfully deleted." should appear on the page
           And I should see 5 taxons in the list

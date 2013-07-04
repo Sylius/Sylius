@@ -117,8 +117,10 @@ Feature: Product options
          Then I should be on the option index page
           And I should see "Option has been successfully updated."
 
+    @javascript
     Scenario: Deleted option disappears from the list
         Given I am on the option index page
          When I click "delete" near "T-Shirt color"
+          And I validate the "confirmationModalContainer" modal
          Then I should be on the option index page
           And I should not see option with name "T-Shirt color" in that list
