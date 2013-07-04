@@ -72,6 +72,11 @@ Feature: Reports
      Then I should see 3 reports in the list
       And I should see report with name "Weekly orders (CSV)" in that list
 
+  Scenario: Rendering report
+    Given I am on the page of report "Monthly orders (CSV)"
+     When I follow "render"
+     Then the response status code should be 200
+
   Scenario: Accessing the report editing form
     Given I am on the page of report "Monthly orders (CSV)"
      When I follow "edit"
