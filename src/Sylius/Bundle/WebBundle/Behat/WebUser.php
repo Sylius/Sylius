@@ -665,7 +665,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $this->getSession()->wait(100);
 
         if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The modal has not the css class "in"');
+            throw new \Exception('The confirmation modal was not opened...');
         }
 
         $this->getSession()->wait(100);
