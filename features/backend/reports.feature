@@ -14,13 +14,13 @@ Feature: Reports
         | order | group: m      |
       And report "Monthly orders (CSV)" has following renderer defined:
         | type | configuration              |
-        | csv  | delimeter: ;, enclosure: " |
+        | csv  | delimiter: ;, enclosure: " |
       And report "Yearly orders (CSV)" has following fetcher defined:
         | type  | configuration |
         | order | group: y      |
       And report "Yearly orders (CSV)" has following renderer defined:
         | type | configuration              |
-        | csv  | delimeter: ;, enclosure: " |
+        | csv  | delimiter: ;, enclosure: " |
 
   Scenario: Seeing index of all reports
     Given I am on the dashboard page
@@ -52,7 +52,7 @@ Feature: Reports
       And I select "Order" from "Data fetcher"
       And I select "Week" from "Group by"
       And I select "CSV" from "Renderer"
-      And I fill in "Delimeter" with ";"
+      And I fill in "Delimiter" with ";"
       And I fill in "Enclosure" with "'"
       And I press "Create"
      Then I should be on the page of report "Weekly orders (CSV)"
@@ -65,7 +65,7 @@ Feature: Reports
       And I select "Order" from "Data fetcher"
       And I select "Week" from "Group by"
       And I select "CSV" from "Renderer"
-      And I fill in "Delimeter" with ";"
+      And I fill in "Delimiter" with ";"
       And I fill in "Enclosure" with "'"
       And I press "Create"
      When I go to the report index page

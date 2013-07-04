@@ -30,7 +30,7 @@ class LoadReportsData extends DataFixture
         $report->setRenderer($this->createRenderer(
             'csv',
             array(
-                'delimeter' => ';',
+                'delimiter' => ';',
                 'enclosure' => '"',
             )
         ));
