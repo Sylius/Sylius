@@ -1,4 +1,5 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -20,12 +21,7 @@
     <a href="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
         <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
     </a>
-    <form action="{{ path('sylius_backend_tax_rate_delete', {'id': tax_rate.id}) }}" method="post" style="display: inline;">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
-        </button>
-    </form>
+    {{ buttons.delete(path('sylius_backend_tax_rate_delete', {'id': tax_rate.id})) }}
 </div>
 
 <table class="table table-bordered table-condensed">

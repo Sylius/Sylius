@@ -71,7 +71,7 @@ Feature: Product properties
     Scenario: Deleted property disappears from the list
         Given I am on the property index page
          When I click "delete" near "T-Shirt fabric"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should still be on the property index page
           And I should see "Property has been successfully deleted."
           And I should not see property with name "T-Shirt fabric" in that list

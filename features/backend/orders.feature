@@ -67,7 +67,7 @@ Feature: Orders management
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
@@ -75,7 +75,7 @@ Feature: Orders management
     Scenario: Deleting the order via list button
         Given I am on the order index page
          When I press "delete" near "#000000001"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
@@ -83,7 +83,7 @@ Feature: Orders management
     Scenario: Deleted order disappears from the list
         Given I am viewing order with number "000000002"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the order index page
           And I should not see order with number "#000000002" in the list
 

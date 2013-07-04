@@ -92,7 +92,7 @@ Feature: Zones
     Scenario: Deleting zone
         Given I am on the page of zone "USA GMT-8"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the zone index page
           And I should see "Zone has been successfully deleted."
 
@@ -100,7 +100,7 @@ Feature: Zones
     Scenario: Deleting zone from list
         Given I am on the zone index page
          When I click "delete" near "USA GMT-8"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should still be on the zone index page
           And I should see "Zone has been successfully deleted."
 
@@ -108,6 +108,6 @@ Feature: Zones
     Scenario: Deleted zone disappears from the list
         Given I am on the page of zone "Germany"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the zone index page
           But I should not see zone with name "Germany" in that list

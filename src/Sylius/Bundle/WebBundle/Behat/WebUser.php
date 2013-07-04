@@ -806,22 +806,19 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I validate the "([^"]*)" modal$/
+     * @Given /^I click "([^"]*)" from the confirmation modal$/
      */
-    public function isOpenedModal($modal)
+    public function iClickOnConfirmationModal($button)
     {
-        $containerLocator = sprintf('#%s', $modal);
-        $buttonLocator = $containerLocator.' [data-modal-action="confirm"]';
-        $modalContainer = $this->getSession()->getPage()->find('css', $containerLocator);
-        $primaryButton = $modalContainer->find('css', $buttonLocator);
+        $this->assertSession()->elementExists('css', '#confirmationModalContainer');
 
-        $this->assertSession()->elementExists('css', $containerLocator);
-        $this->assertSession()->elementExists('css', $buttonLocator);
+        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
 
         $this->getSession()->wait(100);
 
         if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The modal has not the css class "in"');
+            throw new \Exception('The confirmation modal was not opened...');
         }
 
         $this->getSession()->wait(100);

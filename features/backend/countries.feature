@@ -103,7 +103,7 @@ Feature: Countries and provinces
     Scenario: Deleting country via the list button
         Given I am on the country index page
          When I press "delete" near "China"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should still be on the country index page
           And I should see "Country has been successfully deleted."
           But I should not see country with name "China" in the list
@@ -112,7 +112,7 @@ Feature: Countries and provinces
     Scenario: Deleting country
         Given I am on the page of country "China"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the country index page
           And I should see "Country has been successfully deleted."
 
@@ -120,7 +120,7 @@ Feature: Countries and provinces
     Scenario: Deleted country disappears from the list
         Given I am on the page of country "France"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the country index page
           And I should not see country with name "France" in that list
 
@@ -139,6 +139,6 @@ Feature: Countries and provinces
     Scenario: Deleting province
         Given I am on the page of country "France"
          When I press "delete" near "Toulouse"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should still be on the page of country "France"
           And "Toulouse" should not appear on the page
