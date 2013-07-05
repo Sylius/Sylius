@@ -243,8 +243,17 @@
 
         <!-- report -->
         <service id="sylius.report_data_fetcher.order" class="%sylius.report_data_fetcher.orm.class%">
+            <argument>sylius_report_data_fetcher_order_configuration</argument>
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.report_data_fetcher" type="order" label="Order" />
+        </service>
+
+        <service id="sylius.form.type.report_data_fetcher.order" class="%sylius.form.type.report_data_fetcher.orm.class%">
+            <argument>sylius_report_data_fetcher_order_configuration</argument>
+            <argument type="collection">
+                <argument key="total">Total</argument>
+            </argument>
+            <tag name="form.type" alias="sylius_report_data_fetcher_order_configuration" />
         </service>
 
         <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">

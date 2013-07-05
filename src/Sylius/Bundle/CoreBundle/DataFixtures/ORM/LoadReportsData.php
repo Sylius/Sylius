@@ -24,7 +24,9 @@ class LoadReportsData extends DataFixture
         $report->setFetcher($this->createFetcher(
             'order',
             array(
-                'group' => 'm',
+                'property'    => 'total',
+                'aggregation' => 'sum',
+                'group'       => 'm',
             )
         ));
         $report->setRenderer($this->createRenderer(
