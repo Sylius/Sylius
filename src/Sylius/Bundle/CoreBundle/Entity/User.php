@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use DateTime;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
@@ -24,185 +22,51 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
  */
 class User extends BaseUser implements TimestampableInterface
 {
-    protected $firstName;
-    protected $lastName;
     protected $createdAt;
     protected $updatedAt;
-    protected $currency;
-    protected $orders;
-    protected $billingAddress;
-    protected $shippingAddress;
-    protected $addresses;
 
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        $this->orders    = new ArrayCollection();
-        $this->addresses = new ArrayCollection();
 
         parent::__construct();
     }
 
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-    }
-
     /**
-     * Get orders
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-
-    /**
-     * Set billingAddress
-     *
-     * @param  AddressInterface $billingAddress
-     * @return User
-     */
-    public function setBillingAddress(AddressInterface $billingAddress = null)
-    {
-        $this->billingAddress = $billingAddress;
-
-        if (null !== $billingAddress && !$this->hasAddress($billingAddress)) {
-            $this->addAddress($billingAddress);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get billingAddress
-     *
-     * @return AddressInterface
-     */
-    public function getBillingAddress()
-    {
-        return $this->billingAddress;
-    }
-
-    /**
-     * Set shippingAddress
-     *
-     * @param  AddressInterface $shippingAddress
-     * @return User
-     */
-    public function setShippingAddress(AddressInterface $shippingAddress = null)
-    {
-        $this->shippingAddress = $shippingAddress;
-
-        if (null !== $shippingAddress && !$this->hasAddress($shippingAddress)) {
-            $this->addAddress($shippingAddress);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get shippingAddress
-     *
-     * @return AddressInterface
-     */
-    public function getShippingAddress()
-    {
-        return $this->shippingAddress;
-    }
-
-    /**
-     * Add address
-     *
-     * @param  AddressInterface $address
-     * @return User
-     */
-    public function addAddress(AddressInterface $address)
-    {
-        if (!$this->hasAddress($address)) {
-            $this->addresses[] = $address;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remove address
-     *
-     * @param AddressInterface $addresses
-     */
-    public function removeAddress(AddressInterface $address)
-    {
-        $this->addresses->removeElement($address);
-    }
-
-    /**
-     * Has address
-     *
-     * @param  AddressInterface $addresses
-     * @return bool
-     */
-    public function hasAddress(AddressInterface $address)
-    {
-        return $this->addresses->contains($address);
-    }
-
-    /**
-     * Get addresses
-     *
-     * @return ArrayCollection
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function setEmail($email)
     {
         parent::setEmail($email);
@@ -211,6 +75,9 @@ class User extends BaseUser implements TimestampableInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setEmailCanonical($emailCanonical)
     {
         parent::setEmailCanonical($emailCanonical);
