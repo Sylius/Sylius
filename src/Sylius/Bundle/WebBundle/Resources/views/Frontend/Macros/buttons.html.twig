@@ -1,5 +1,20 @@
-{% macro btn(url, message) %}
-<a href="{{ url }}" class="btn">
+{% macro btn(url, message, id, icon) %}
+<a href="{{ url }}" class="btn" {% if id is not empty %} id="{{ id }}"{% endif %}>
+    {% if icon is not empty %}
+        <i class="icon-{{ icon }}"></i>
+    {% endif %}
     {{ message|trans }}
 </a>
 {% endmacro %}
+
+{% macro show(url, message, id) %}
+    {% import _self as buttons %}
+
+    {% if message is empty %}
+        {% set message = 'sylius.show'|trans %}
+    {% endif %}
+
+    {{ buttons.btn(url, message, id, 'book') }}
+{% endmacro %}
+
+
