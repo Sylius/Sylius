@@ -120,3 +120,13 @@ liip_imagine:
         sylius_gallery:
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/bin/wkhtmltopdf
+        options:    []
+    image:
+        enabled:    true
+        binary:     /usr/bin/wkhtmltoimage
+        options:    []

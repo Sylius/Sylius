@@ -128,8 +128,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereAreFollowingUsers(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-
         foreach ($table->getHash() as $data) {
             $this->thereIsUser(
                 $data['email'],
@@ -143,30 +141,31 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
     public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null)
     {
-        $addressData = explode(',', $address);
-        $addressData = array_map('trim', $addressData);
-
-        $user = new User();
-
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
-        $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
-        $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
-        $user->setEmail($email);
-        $user->setEnabled('yes' === $enabled);
-        $user->setPlainPassword($password);
-
-        if (null !== $address) {
-            $user->setShippingAddress($this->createAddress($address));
+        if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
+            $addressData = explode(',', $address);
+            $addressData = array_map('trim', $addressData);
+    
+            $user = new User();
+    
+            $user->setFirstname($this->faker->firstName);
+            $user->setLastname($this->faker->lastName);
+            $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+            $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $user->setEmail($email);
+            $user->setEnabled('yes' === $enabled);
+            $user->setPlainPassword($password);
+    
+            if (null !== $address) {
+                $user->setShippingAddress($this->createAddress($address));
+            }
+    
+            if (null !== $role) {
+                $user->addRole($role);
+            }
+    
+            $this->getEntityManager()->persist($user);
+            $this->getEntityManager()->flush();
         }
-
-        if (null !== $role) {
-            $user->addRole($role);
-        }
-
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
-
         return $user;
     }
 
@@ -191,7 +190,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             $order->setUser($this->thereIsUser($data['user'], 'password'));
 
-            if (isset($data['shipment'])) {
+            if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
             }
 
@@ -376,6 +375,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 }
 
                 $product->setTaxons($taxons);
+            }
+
+            if (isset($data['deleted']) && 'yes' === $data['deleted']) {
+                $product->setDeletedAt(new \DateTime());
             }
 
             $manager->persist($product);
@@ -873,6 +876,12 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $shipmentData = array_map('trim', $shipmentData);
 
         $shipment->setMethod($this->getRepository('shipping_method')->findOneByName($shipmentData[0]));
+        if (isset($shipmentData[1])) {
+            $shipment->setState($shipmentData[1]);
+        }
+        if (isset($shipmentData[2])) {
+            $shipment->setTracking($shipmentData[2]);
+        }
 
         return $shipment;
     }

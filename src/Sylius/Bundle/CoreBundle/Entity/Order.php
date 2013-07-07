@@ -357,4 +357,38 @@ class Order extends BaseOrder implements OrderInterface
     {
         $this->createdAt = $createdAt;
     }
+
+    /**
+     * Gets the last updated shipment of the order
+     *
+     * @return null|ShipmentInterface
+     */
+    public function getLastShipment()
+    {
+        $last = $this->shipments->count() ? $this->shipments->first() : null;
+
+        foreach ($this->shipments as $shipment) {
+            if ($shipment->getUpdatedAt() > $last->getUpdatedAt()) {
+                $last = $shipment;
+            }
+        }
+
+        return $last;
+    }
+
+    /**
+     * Tells is the invoice of the order can be generated.
+     * @return bool
+     */
+    public function isInvoiceAvailable()
+    {
+        if (null !== $lastShipment = $this->getLastShipment()) {
+            return (in_array(
+                    $lastShipment->getState(),
+                    array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED))
+            );
+        }
+
+        return false;
+    }
 }
