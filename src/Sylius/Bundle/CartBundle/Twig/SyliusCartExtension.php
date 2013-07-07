@@ -29,21 +29,21 @@ class SyliusCartExtension extends Twig_Extension
      *
      * @var CartProviderInterface
      */
-    private $cartProvider;
+    protected $cartProvider;
 
     /**
      * Cart item manager.
      *
      * @var ObjectRepository
      */
-    private $cartItemRepository;
+    protected $cartItemRepository;
 
     /**
      * Form factory.
      *
      * @var FormFactory
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * Constructor.
