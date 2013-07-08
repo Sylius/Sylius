@@ -9,7 +9,7 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>sylius.form.variant.presentation</source>
-                <target>Presentation</target>
+                <target>Présentation</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>sylius.form.variant.available_on</source>
