@@ -117,7 +117,7 @@
             </trans-unit>
             <trans-unit id="30">
                 <source>sylius.variant.combination</source>
-                <target>La variante avec cette option existe déja.</target>
+                <target>La variante avec cette option existe déjà.</target>
             </trans-unit>
         </body>
     </file>
