@@ -19,6 +19,7 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+
         <service id="sylius.controller.order_item" class="%sylius.controller.order_item.class%">
             <argument>sylius</argument>
             <argument>order_item</argument>
@@ -27,6 +28,7 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+
         <service id="sylius.controller.adjustment" class="%sylius.controller.adjustment.class%">
             <argument>sylius</argument>
             <argument>adjustment</argument>
@@ -40,6 +42,11 @@
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_group.order%</argument>
             <tag name="form.type" alias="sylius_order" />
+        </service>
+        <service id="sylius.form.type.order_item" class="%sylius.form.type.order_item.class%">
+            <argument>%sylius.model.order_item.class%</argument>
+            <argument>%sylius.validation_group.order_item%</argument>
+            <tag name="form.type" alias="sylius_order_item" />
         </service>
         <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
             <argument>%sylius.model.adjustment.class%</argument>
