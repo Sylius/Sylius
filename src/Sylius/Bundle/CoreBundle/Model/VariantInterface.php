@@ -58,14 +58,14 @@ interface VariantInterface extends
     /**
      * Add image.
      *
-     * @param VariantImage
+     * @param VariantImage $image
      */
     public function addImage(VariantImageInterface $image);
 
     /**
      * Remove image.
      *
-     * @param VariantImage
+     * @param VariantImage $image
      */
     public function removeImage(VariantImageInterface $image);
 }
