@@ -889,14 +889,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
     /**
      * Configuration converter.
      *
-     * @param string $configuraitonString
+     * @param string $configurationString
      *
      * @return array
      */
-    private function getConfiguration($configuraitonString)
+    private function getConfiguration($configurationString)
     {
         $configuration = array();
-        $list = explode(',', $configuraitonString);
+        $list = explode(',', $configurationString);
 
         foreach ($list as $parameter) {
             list($key, $value) = explode(':', $parameter);
@@ -909,7 +909,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     /**
      * Find one resource by name.
      *
-     * @param string $
+     * @param string $type
      * @param string $name
      *
      * @return object

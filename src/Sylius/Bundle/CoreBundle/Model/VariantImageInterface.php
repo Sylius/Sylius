@@ -25,7 +25,7 @@ interface VariantImageInterface extends ImageInterface
     /**
      * Set the variant.
      *
-     * @param \Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $price
+     * @param \Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $variant
      */
     public function setVariant(BaseVariantInterface $variant = null);
 }

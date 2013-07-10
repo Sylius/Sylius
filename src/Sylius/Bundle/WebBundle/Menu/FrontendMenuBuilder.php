@@ -62,8 +62,10 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param FactoryInterface         $factory
      * @param SecurityContextInterface $securityContext
      * @param TranslatorInterface      $translator
+     * @param RepositoryInterface      $exchangeRateRepository
      * @param RepositoryInterface      $taxonomyRepository
      * @param CartProviderInterface    $cartProvider
+     * @param SyliusMoneyExtension     $moneyExtension
      */
     public function __construct(
         FactoryInterface         $factory,

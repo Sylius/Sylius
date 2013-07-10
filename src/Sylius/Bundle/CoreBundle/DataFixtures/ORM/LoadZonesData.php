@@ -49,7 +49,7 @@ class LoadZonesData extends DataFixture
      *
      * @param string $name
      * @param string $type
-     * @param array  $member
+     * @param array  $members
      *
      * @return ZoneInterface
      */

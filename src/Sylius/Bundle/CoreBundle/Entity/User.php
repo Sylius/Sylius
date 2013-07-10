@@ -135,7 +135,7 @@ class User extends BaseUser implements TimestampableInterface
     /**
      * Remove address
      *
-     * @param AddressInterface $addresses
+     * @param AddressInterface $address
      */
     public function removeAddress(AddressInterface $address)
     {
@@ -145,7 +145,7 @@ class User extends BaseUser implements TimestampableInterface
     /**
      * Has address
      *
-     * @param  AddressInterface $addresses
+     * @param  AddressInterface $address
      * @return bool
      */
     public function hasAddress(AddressInterface $address)

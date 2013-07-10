@@ -25,7 +25,7 @@ class ProductRepository extends CustomizableProductRepository
      * Create paginator for products categorized
      * under given taxon.
      *
-     * @param TaxonInterface
+     * @param TaxonInterface $taxon
      *
      * @return PagerfantaInterface
      */
