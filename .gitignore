@@ -18,3 +18,5 @@ bin/behat
 bin/doctrine*
 bin/phpspec
 vendor/*
+
+.DS_Store
