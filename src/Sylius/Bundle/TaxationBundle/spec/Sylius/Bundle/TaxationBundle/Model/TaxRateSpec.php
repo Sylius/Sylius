@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\TaxationBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Tax rate model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxRate extends ObjectBehavior
+class TaxRateSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {

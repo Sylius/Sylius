@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\TaxationBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Tax category model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxCategory extends ObjectBehavior
+class TaxCategorySpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {

@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+### v0.2.0
+
+* Symfony 2.3 upgrade.
+* Removed `Entity` classes.
+
+### v0.1.0
+
+* Symfony 2.2 compatible version.
+
 ### 29-01.2013
 
 * Remove the ``sylius_taxation`` prefix from services and models.

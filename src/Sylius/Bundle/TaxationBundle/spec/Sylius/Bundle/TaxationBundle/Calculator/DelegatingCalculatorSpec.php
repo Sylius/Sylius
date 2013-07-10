@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\TaxationBundle\Calculator;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Delegating tax calculator spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DelegatingCalculator extends ObjectBehavior
+class DelegatingCalculatorSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {

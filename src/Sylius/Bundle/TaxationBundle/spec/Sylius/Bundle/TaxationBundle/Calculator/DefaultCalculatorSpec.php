@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\TaxationBundle\Calculator;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Default calculator spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class DefaultCalculator extends ObjectBehavior
+class DefaultCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
