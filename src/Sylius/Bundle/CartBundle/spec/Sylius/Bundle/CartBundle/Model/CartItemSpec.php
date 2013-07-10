@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Cart item spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CartItem extends ObjectBehavior
+class CartItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

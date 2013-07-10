@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.4.0
+
+* Symfony 2.3 compatible version.
+* Removed `Entity` classes.
+
 ### v0.3.0
 
 * Remove `CartOperator` & `CartOperatorInterface`.

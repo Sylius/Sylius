@@ -17,6 +17,9 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.model.cart.class">%sylius.model.order.class%</parameter>
+        <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
+
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
         <parameter key="sylius.cart_storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
 
@@ -42,6 +45,12 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+
+        <service id="sylius.manager.cart" alias="sylius.manager.order" />
+        <service id="sylius.manager.cart_item" alias="sylius.manager.order_item" />
+
+        <service id="sylius.repository.cart" alias="sylius.repository.order" />
+        <service id="sylius.repository.cart_item" alias="sylius.repository.order_item" />
 
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
             <argument>%sylius.model.cart.class%</argument>

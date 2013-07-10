@@ -7,9 +7,7 @@ Flexible cart engine for Symfony2. Should be considered as a base for building s
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
-
-Visit [Sylius.org](http://sylius.org).
+**Sylius** - Modern ecommerce solution Symfony2. Visit [Sylius.org](http://sylius.org).
 
 [phpspec2](http://phpspec.net) examples
 ---------------------------------------

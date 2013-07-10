@@ -11,17 +11,14 @@
 
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
 /**
- * Flash message listener spec.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class FlashListener extends ObjectBehavior
+class FlashListenerSpec extends ObjectBehavior
 {
-
     /**
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
      * @param Symfony\Component\Translation\TranslatorInterface $translator

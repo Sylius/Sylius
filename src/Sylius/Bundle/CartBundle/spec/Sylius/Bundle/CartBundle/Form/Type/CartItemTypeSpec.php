@@ -11,23 +11,21 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Cart form spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CartType extends ObjectBehavior
+class CartItemTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Cart', array('sylius'));
+        $this->beConstructedWith('CartItem', array('sylius'));
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Form\Type\CartType');
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\Form\Type\CartItemType');
     }
 
     function it_is_a_form_type()
@@ -38,10 +36,10 @@ class CartType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_builds_form_with_items_collection($builder)
+    function it_builds_form_with_quantity_field($builder)
     {
         $builder
-            ->add('items', 'collection', array('type' => 'sylius_cart_item'))
+            ->add('quantity', 'integer', ANY_ARGUMENT)
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -56,7 +54,7 @@ class CartType extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Cart',
+                'data_class'        => 'CartItem',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()

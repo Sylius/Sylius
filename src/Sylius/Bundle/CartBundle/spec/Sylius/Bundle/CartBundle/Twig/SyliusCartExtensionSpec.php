@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Twig;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Sylius cart extensions for Twig spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartExtension extends ObjectBehavior
+class SyliusCartExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $cartProvider

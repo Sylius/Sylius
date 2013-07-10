@@ -46,12 +46,12 @@ class SyliusCartBundle extends Bundle
             'Sylius\Bundle\CartBundle\Model\CartItemInterface' => 'sylius.model.cart_item.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_cart', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_sales', $interfaces));
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\CartBundle\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_cart.driver.doctrine/orm'));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_sales.driver.doctrine/orm'));
     }
 }
