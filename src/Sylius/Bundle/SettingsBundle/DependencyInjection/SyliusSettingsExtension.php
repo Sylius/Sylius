@@ -42,6 +42,8 @@ class SyliusSettingsExtension extends Extension
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
+
+        $container->setParameter('sylius_settings.driver', $driver);
         $container->setParameter('sylius_settings.driver.'.$driver, true);
 
         $classes = $config['classes'];

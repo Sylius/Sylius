@@ -17,7 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.parameter.class">Sylius\Bundle\SettingsBundle\Entity\DefaultParameter</parameter>
         <parameter key="sylius.repository.parameter.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 

@@ -60,7 +60,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('parameter')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\SettingsBundle\Model\Parameter')->cannotBeEmpty()->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                             ->end()
                         ->end()
