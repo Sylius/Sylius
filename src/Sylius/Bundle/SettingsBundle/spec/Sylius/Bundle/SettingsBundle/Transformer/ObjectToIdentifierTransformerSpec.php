@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Object to id parameter transformer spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ObjectToIdentifierTransformer extends ObjectBehavior
+class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository $repository
