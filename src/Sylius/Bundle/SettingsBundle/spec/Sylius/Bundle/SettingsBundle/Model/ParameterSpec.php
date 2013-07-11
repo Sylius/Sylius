@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Settings parameter model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Parameter extends ObjectBehavior
+class ParameterSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {

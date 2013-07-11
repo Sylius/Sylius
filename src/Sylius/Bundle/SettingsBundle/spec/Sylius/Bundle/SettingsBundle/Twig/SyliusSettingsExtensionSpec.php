@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Twig;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Sylius settings extension for Twig spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusSettingsExtension extends ObjectBehavior
+class SyliusSettingsExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface $settingsManager

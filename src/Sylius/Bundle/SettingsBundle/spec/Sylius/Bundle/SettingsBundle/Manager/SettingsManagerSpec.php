@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Settings manager spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SettingsManager extends ObjectBehavior
+class SettingsManagerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface $registry

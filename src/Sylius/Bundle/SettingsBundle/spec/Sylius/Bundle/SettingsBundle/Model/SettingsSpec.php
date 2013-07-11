@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Settings model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Settings extends ObjectBehavior
+class SettingsSpec extends ObjectBehavior
 {
     function let()
     {

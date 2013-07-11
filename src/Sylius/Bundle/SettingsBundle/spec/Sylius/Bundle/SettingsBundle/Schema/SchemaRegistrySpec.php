@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Schema registry spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SchemaRegistry extends ObjectBehavior
+class SchemaRegistrySpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {

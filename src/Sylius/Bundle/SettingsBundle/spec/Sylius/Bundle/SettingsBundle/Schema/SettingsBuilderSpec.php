@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Settings builder spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SettingsBuilder extends ObjectBehavior
+class SettingsBuilderSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
