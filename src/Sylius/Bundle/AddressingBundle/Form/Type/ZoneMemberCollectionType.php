@@ -67,7 +67,7 @@ class ZoneMemberCollectionType extends AbstractType
         );
         foreach ($types as $type) {
             $prototype = $this->buildPrototype($builder, $options['prototype_name'], $type, $options['options'])->getForm();
-            $prototypes[$builder->getFormFactory()->getType($type)->getName()] = $prototype;
+            $prototypes[$type] = $prototype;
         }
 
         return $prototypes;

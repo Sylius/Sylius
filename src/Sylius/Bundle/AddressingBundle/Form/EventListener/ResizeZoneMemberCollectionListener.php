@@ -124,7 +124,8 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
         foreach ($data as $name => $value) {
             $type = $this->getTypeForObject($value);
             $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
-                'property_path' => '['.$name.']',
+                'property_path'   => '['.$name.']',
+                'auto_initialize' => false
             ), $this->options)));
         }
     }
@@ -158,6 +159,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
                     $type = $this->getTypeForData($value);
                     $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
                         'property_path' => '['.$name.']',
+                        'auto_initialize' => false
                     ), $this->options)));
                 }
             }
