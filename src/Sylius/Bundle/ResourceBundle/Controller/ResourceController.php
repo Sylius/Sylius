@@ -253,7 +253,7 @@ class ResourceController extends FOSRestController
             return $this->redirectToReferer();
         }
 
-        return $this->handleView($this->routeRedirectView($route, $data));
+        return $this->handleView($this->redirectView($this->generateUrl($route, $data)));
     }
 
     public function getManager()
