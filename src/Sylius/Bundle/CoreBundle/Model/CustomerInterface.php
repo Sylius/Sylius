@@ -134,4 +134,18 @@ interface CustomerInterface
      */
     public function getLastName();
 
+    /**
+     * Set currency
+     *
+     * @param $currency
+     * @return CustomerInterface
+     */
+    public function setCurrency($currency);
+
+    /**
+     * Get currency
+     *
+     * @return string
+     */
+    public function getCurrency();
 }

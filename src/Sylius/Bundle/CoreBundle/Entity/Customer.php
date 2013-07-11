@@ -28,6 +28,7 @@ class Customer implements CustomerInterface, TimestampableInterface
     protected $id;
     protected $firstName;
     protected $lastName;
+    protected $currency;
     protected $createdAt;
     protected $updatedAt;
 
@@ -156,6 +157,8 @@ class Customer implements CustomerInterface, TimestampableInterface
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
@@ -172,6 +175,8 @@ class Customer implements CustomerInterface, TimestampableInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
     /**
@@ -196,6 +201,8 @@ class Customer implements CustomerInterface, TimestampableInterface
     public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -212,5 +219,27 @@ class Customer implements CustomerInterface, TimestampableInterface
     public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+
 }
