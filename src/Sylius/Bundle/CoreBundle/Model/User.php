@@ -11,18 +11,17 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Entity\User as BaseUser;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use DateTime;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 
 /**
- * User entity.
+ * User model.
  *
  * @author Paweł Jędrzjewski <pjedrzejewski@diweb.pl>
  */
-class User extends BaseUser implements TimestampableInterface
+class User extends BaseUser implements UserInterface
 {
     protected $firstName;
     protected $lastName;
@@ -202,7 +201,7 @@ class User extends BaseUser implements TimestampableInterface
     {
         $this->updatedAt = $updatedAt;
     }
-    
+
     public function setEmail($email)
     {
         parent::setEmail($email);

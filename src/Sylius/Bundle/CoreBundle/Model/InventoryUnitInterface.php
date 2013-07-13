@@ -15,7 +15,7 @@ use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface as BaseInventoryU
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 
 /**
- * Sylius core inventory unit interface.
+ * Inventory unit interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -23,4 +23,6 @@ interface InventoryUnitInterface extends
     BaseInventoryUnitInterface,
     ShipmentItemInterface
 {
+    public function getOrder();
+    public function setOrder(OrderInterface $order);
 }

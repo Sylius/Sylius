@@ -62,6 +62,8 @@ class OrderRepository extends EntityRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
+          $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+
         if (!empty($criteria['number'])) {
             $queryBuilder
                 ->andWhere('o.number LIKE :number')
@@ -188,5 +190,12 @@ class OrderRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $queryBuilder;
+    }
+
+    protected function getCollectionQueryBuilder()
+    {
+        $queryBuilder = parent::getCollectionQueryBuilder();
+
+        return $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
     }
 }

@@ -16,14 +16,13 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
 
 /**
  * Sylius core product entity.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Product extends BaseProduct implements TaxableInterface
+class Product extends BaseProduct implements ProductInterface
 {
     /*
      * Variant selection methods.
@@ -104,9 +103,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Get the variant selection method.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getVariantSelectionMethod()
     {
@@ -114,9 +111,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Set variant selection method.
-     *
-     * @param string $variantSelectionMethod
+     * {@inheritdoc}
      */
     public function setVariantSelectionMethod($variantSelectionMethod)
     {
@@ -130,9 +125,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Check if variant is selectable by simple variant choice.
-     *
-     * @return Boolean
+     * {@inheritdoc}
      */
     public function isVariantSelectionMethodChoice()
     {
@@ -140,9 +133,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Get pretty label for variant selection method.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getVariantSelectionMethodLabel()
     {
@@ -152,9 +143,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Get taxons.
-     *
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getTaxons()
     {
@@ -162,9 +151,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Set categorization taxons.
-     *
-     * @param Collection $taxons
+     * {@inheritdoc}
      */
     public function setTaxons(Collection $taxons)
     {
@@ -172,9 +159,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Gets product price.
-     *
-     * @return float $price
+     * {@inheritdoc}
      */
     public function getPrice()
     {
@@ -182,11 +167,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Sets product price.
-     *
-     * @param float $price
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setPrice($price)
     {
@@ -196,9 +177,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Get product short description.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getShortDescription()
     {
@@ -206,11 +185,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Set product short description.
-     *
-     * @param string $shortDescription
-     *
-     * @return Product
+     * {@inheritdoc}
      */
     public function setShortDescription($shortDescription)
     {
@@ -268,9 +243,7 @@ class Product extends BaseProduct implements TaxableInterface
     }
 
     /**
-     * Get hash of variant selection methods and labels.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getVariantSelectionMethodLabels()
     {

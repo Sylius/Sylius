@@ -13,11 +13,9 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
 /**
  * Order entity.
@@ -77,6 +75,7 @@ class Order extends Cart implements OrderInterface
 
         $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
+        $this->currency = 'EUR'; // @todo: Temporary
     }
 
     /**

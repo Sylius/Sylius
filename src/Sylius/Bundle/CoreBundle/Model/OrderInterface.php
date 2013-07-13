@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Sylius core Order model.

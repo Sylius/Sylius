@@ -29,9 +29,7 @@ class TaxRate extends BaseTaxRate
     protected $zone;
 
     /**
-     * Get zone.
-     *
-     * @return ZoneInterface
+     * {@inheritdoc}
      */
     public function getZone()
     {
@@ -39,9 +37,7 @@ class TaxRate extends BaseTaxRate
     }
 
     /**
-     * Set zone.
-     *
-     * @param ZoneInterface $zone
+     * {@inheritdoc}
      */
     public function setZone(ZoneInterface $zone)
     {

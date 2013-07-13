@@ -23,13 +23,13 @@
             <cascade>
                 <cascade-persist/>
             </cascade>
-            <join-column name="shipping_address_id" referenced-column-name="id" nullable="false" />
+            <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
         <many-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
             <cascade>
                 <cascade-all/>
             </cascade>
-            <join-column name="billing_address_id" referenced-column-name="id" nullable="false" />
+            <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
         <one-to-many field="inventoryUnits" target-entity="Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface" mapped-by="order">
             <cascade>
@@ -42,7 +42,7 @@
             </cascade>
         </one-to-many>
         <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Model\User" inversed-by="orders">
-            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+            <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
         <field name="currency" length="3" />
     </entity>

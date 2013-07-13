@@ -19,7 +19,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethod as BaseShippingMethod;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ShippingMethod extends BaseShippingMethod
+class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
     /**
      * Geographical zone.
@@ -29,9 +29,7 @@ class ShippingMethod extends BaseShippingMethod
     protected $zone;
 
     /**
-     * Get zone.
-     *
-     * @return ZoneInterface
+     * {@inheritdoc}
      */
     public function getZone()
     {
@@ -39,9 +37,7 @@ class ShippingMethod extends BaseShippingMethod
     }
 
     /**
-     * Set zone.
-     *
-     * @param ZoneInterface $zone
+     * {@inheritdoc}
      */
     public function setZone(ZoneInterface $zone)
     {

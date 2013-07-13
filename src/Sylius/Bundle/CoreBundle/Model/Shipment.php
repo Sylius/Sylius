@@ -18,7 +18,7 @@ use Sylius\Bundle\ShippingBundle\Model\Shipment as BaseShipment;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Shipment extends BaseShipment
+class Shipment extends BaseShipment implements ShipmentInterface
 {
     /**
      * Order.
@@ -28,9 +28,7 @@ class Shipment extends BaseShipment
     protected $order;
 
     /**
-     * Get the order.
-     *
-     * @return OrderInterface
+     * {@inheritdoc}
      */
     public function getOrder()
     {
@@ -38,9 +36,7 @@ class Shipment extends BaseShipment
     }
 
     /**
-     * Set the order.
-     *
-     * @param OrderInterface $order
+     * {@inheritdoc}
      */
     public function setOrder(OrderInterface $order = null)
     {

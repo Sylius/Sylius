@@ -16,7 +16,6 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 interface ImageInterface extends TimestampableInterface
 {
-    public function getId();
     public function hasFile();
     public function getFile();
     public function setFile(SplFileInfo $file);

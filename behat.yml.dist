@@ -12,9 +12,6 @@ default:
             default_session: symfony2
             selenium2: ~
         Behat\Symfony2Extension\Extension:
-            kernel:
-                path: app/AppKernel.php
-                class: AppKernel
             mink_driver: true
 
 saucelabs:

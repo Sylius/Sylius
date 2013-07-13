@@ -14,7 +14,7 @@
         {{ form_label(form, label|default(null)) }}
         <div class="controls">
             {{ form_widget(form, {'attr': attr|default({}), 'empty_value': empty_value|default(null)}) }}
-            {{ form_errors(form)}}
+            {{ form_errors(form) }}
         </div>
     </div>
 {% endspaceless %}

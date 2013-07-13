@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnit as BaseInventoryUnit;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
 
@@ -41,7 +41,7 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * Shipment
      *
-     * @var ShipmentInterface
+     * @var BaseShipmentInterface
      */
     protected $shipment;
 
@@ -71,19 +71,30 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
         $this->shippingState = ShipmentItemInterface::STATE_READY;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOrder()
     {
         return $this->order;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
+
+        return $this;
     }
 
     /**
@@ -97,38 +108,46 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function setShipment(ShipmentInterface $shipment = null)
+    public function setShipment(BaseShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getShippable()
     {
         return $this->getStockable();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setShippable(ShippableInterface $shippable)
     {
         $this->setStockable($shippable);
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingState()
     {
         return $this->shippingState;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
 
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
+        return $this;
     }
 }

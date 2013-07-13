@@ -9,21 +9,26 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="shortDescription" column="short_description" type="string" nullable="true" />
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
+
         <one-to-many field="variants" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" mapped-by="product">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
+
         <one-to-many field="properties" target-entity="Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface" mapped-by="product">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
+
         <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+
         <many-to-many field="taxons" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
             <join-table name="sylius_product_taxon">
                 <join-columns>

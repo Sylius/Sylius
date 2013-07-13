@@ -20,18 +20,32 @@ use Sylius\Bundle\CartBundle\Model\CartItem;
  */
 class OrderItem extends CartItem implements OrderItemInterface
 {
+    /**
+     * Product variant.
+     *
+     * @var VariantInterface
+     */
     protected $variant;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getProduct()
     {
         return $this->variant->getProduct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getVariant()
     {
         return $this->variant;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setVariant(VariantInterface $variant)
     {
         $this->variant = $variant;
