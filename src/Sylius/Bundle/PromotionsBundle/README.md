@@ -6,7 +6,7 @@ Sylius promotions engine, applicable to any Symfony2 project.
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.com](http://sylius.com).
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
 [phpspec](http://phpspec.net) examples
 --------------------------------------

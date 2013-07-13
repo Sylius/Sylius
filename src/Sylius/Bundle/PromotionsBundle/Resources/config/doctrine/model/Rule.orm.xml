@@ -18,8 +18,10 @@
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="type" type="string" />
         <field name="configuration" type="array" />
+
         <many-to-one field="promotion" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="rules">
             <join-column name="promotion_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
