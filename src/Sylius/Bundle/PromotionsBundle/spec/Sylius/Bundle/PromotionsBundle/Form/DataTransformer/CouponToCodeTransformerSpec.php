@@ -81,6 +81,8 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
             ->willReturn($coupon)
         ;
 
+        $coupon->isValid()->shouldBeCalled()->willReturn(true);
+
         $this->reverseTransform('FREEIPHONE5')->shouldReturn($coupon);
     }
 }

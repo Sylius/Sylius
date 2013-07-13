@@ -41,7 +41,7 @@ class PromotionTypeSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_should_build_form_with_proper_fields($builder)
+    function it_should_build_form_with_proper_fields($builder, $checkerRegistry, $actionRegistry)
     {
         $builder
             ->add('name', 'text', Argument::any())
@@ -90,6 +90,11 @@ class PromotionTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
+
+        $checkerRegistry->getCheckers()->willReturn(array());
+        $actionRegistry->getActions()->willReturn(array());
+
+        $builder->setAttribute('prototypes', Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }

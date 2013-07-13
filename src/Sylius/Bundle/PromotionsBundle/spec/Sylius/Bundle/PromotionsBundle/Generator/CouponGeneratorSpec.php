@@ -49,7 +49,7 @@ class CouponGeneratorSpec extends ObjectBehavior
         $instruction->getUsageLimit()->willReturn(null);
 
         $repository->createNew()->willReturn($coupon);
-        $repository->findOneByCode(Argument::any())->willReturn(null);
+        $repository->findOneBy(Argument::any())->willReturn(null);
 
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(Argument::any())->shouldBeCalled();

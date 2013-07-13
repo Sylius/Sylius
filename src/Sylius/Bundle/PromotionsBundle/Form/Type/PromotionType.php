@@ -80,10 +80,13 @@ class PromotionType extends AbstractType
 
         $prototypes = array();
         $prototypes['rules'] = array();
+
         foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
+
         $prototypes['actions'] = array();
+
         foreach ($this->actionRegistry->getActions() as $type => $action) {
             $prototypes['actions'][$type] = $builder->create('__name__', $action->getConfigurationFormType())->getForm();
         }

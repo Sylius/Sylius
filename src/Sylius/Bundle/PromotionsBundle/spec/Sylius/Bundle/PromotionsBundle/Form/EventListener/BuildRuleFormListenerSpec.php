@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 
 /**
@@ -26,7 +27,6 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
      */
     function let($checkerRegistry, $checker, $factory)
     {
-        $checker->isConfigurable()->willReturn(true);
         $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_item_total_configuration');
         $checkerRegistry->getChecker(Argument::any())->willReturn($checker);
 
@@ -53,7 +53,6 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
     {
         $event->getData()->shouldBeCalled()->willReturn($rule);
         $event->getForm()->shouldBeCalled()->willReturn($form);
-        $rule->getId()->shouldBeCalled()->willReturn(1);
         $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn(array());
 

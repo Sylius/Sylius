@@ -61,7 +61,7 @@ class ActionTypeSpec extends ObjectBehavior
      */
     function it_should_add_build_promotion_action_event_subscriber($builder, $factory)
     {
-        $builder->add(Argument::any(), Argument::any())->willReturn($builder);
+        $builder->add(Argument::any(), Argument::any(), Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
