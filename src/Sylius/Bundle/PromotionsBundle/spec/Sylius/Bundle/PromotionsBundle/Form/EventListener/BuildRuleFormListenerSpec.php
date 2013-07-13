@@ -28,7 +28,7 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
     {
         $checker->isConfigurable()->willReturn(true);
         $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_item_total_configuration');
-        $checkerRegistry->getChecker(ANY_ARGUMENT)->willReturn($checker);
+        $checkerRegistry->getChecker(Argument::any())->willReturn($checker);
 
         $this->beConstructedWith($checkerRegistry, $factory);
     }

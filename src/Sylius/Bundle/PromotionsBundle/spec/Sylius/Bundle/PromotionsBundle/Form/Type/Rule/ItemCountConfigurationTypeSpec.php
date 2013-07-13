@@ -12,11 +12,12 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationTypeSpec extends ObjectBehavior
+class ItemCountConfigurationTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -25,7 +26,7 @@ class ItemTotalConfigurationTypeSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemTotalConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemCountConfigurationType');
     }
 
     function it_should_be_a_form_type()
@@ -36,16 +37,16 @@ class ItemTotalConfigurationTypeSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_should_build_form_with_amount_field_and_equals_checkbox($builder)
+    function it_should_build_form_with_count_field_and_equal_checkbox($builder)
     {
         $builder
-            ->add('amount', 'sylius_money', ANY_ARGUMENT)
+            ->add('count', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('equal', 'checkbox', ANY_ARGUMENT)
+            ->add('equal', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

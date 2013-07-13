@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type\Action;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -39,7 +40,7 @@ class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
     function it_should_build_form_with_count_field_and_equal_checkbox($builder)
     {
         $builder
-            ->add('amount', 'sylius_money', ANY_ARGUMENT)
+            ->add('amount', 'sylius_money', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

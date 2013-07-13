@@ -35,7 +35,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldBeAnInstanceOf('Sylius\Bundle\PromotionsBundle\Checker\PromotionEligibilityCheckerInterface');
     }
 
-    function it_recognize_subject_as_eligible_if_all_checkers_recognize_it_as_eligible(
+    function it_recognizes_subject_as_eligible_if_all_checkers_recognize_it_as_eligible(
         $registry, RuleCheckerInterface $checker, PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule
     )
     {
@@ -56,10 +56,14 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_recognize_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible(
+    function it_recognizes_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible(
         $registry, RuleCheckerInterface $checker, PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule
     )
     {
+        $promotion->getStartsAt()->willReturn(null);
+        $promotion->getEndsAt()->willReturn(null);
+        $promotion->isCouponBased()->willReturn(false);
+
         $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $promotion->getRules()->willReturn(array($rule));
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
@@ -70,7 +74,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
-    function it_recognize_subject_as_eligible_if_promotion_have_no_coupon_codes(
+    function it_recognizes_subject_as_eligible_if_promotion_have_no_coupon_codes(
         PromotionSubjectInterface $subject, PromotionInterface $promotion
     )
     {
@@ -84,7 +88,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_recognize_subject_as_not_eligible_if_coupon_code_does_not_match(
+    function it_recognizes_subject_as_not_eligible_if_coupon_code_does_not_match(
         PromotionSubjectInterface $subject, PromotionInterface $promotion, CouponInterface $coupon
     )
     {
@@ -100,7 +104,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
-    function it_recognize_subject_as_eligible_if_coupon_code_match(
+    function it_recognizes_subject_as_eligible_if_coupon_code_match(
         PromotionSubjectInterface $subject, PromotionInterface $promotion, CouponInterface $coupon
     )
     {

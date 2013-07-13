@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -39,13 +40,13 @@ class CouponTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields($builder)
     {
         $builder
-            ->add('code', 'text', ANY_ARGUMENT)
+            ->add('code', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('usageLimit', 'integer', ANY_ARGUMENT)
+            ->add('usageLimit', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

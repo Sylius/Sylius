@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -43,49 +44,49 @@ class PromotionTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields($builder)
     {
         $builder
-            ->add('name', 'text', ANY_ARGUMENT)
+            ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'text', ANY_ARGUMENT)
+            ->add('description', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('usageLimit', 'integer', ANY_ARGUMENT)
+            ->add('usageLimit', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('startsAt', 'date', ANY_ARGUMENT)
+            ->add('startsAt', 'date', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('endsAt', 'date', ANY_ARGUMENT)
+            ->add('endsAt', 'date', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('couponBased', 'checkbox', ANY_ARGUMENT)
+            ->add('couponBased', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('rules', 'collection', ANY_ARGUMENT)
+            ->add('rules', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('actions', 'collection', ANY_ARGUMENT)
+            ->add('actions', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Generator;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -48,10 +49,10 @@ class CouponGeneratorSpec extends ObjectBehavior
         $instruction->getUsageLimit()->willReturn(null);
 
         $repository->createNew()->willReturn($coupon);
-        $repository->findOneByCode(ANY_ARGUMENT)->willReturn(null);
+        $repository->findOneByCode(Argument::any())->willReturn(null);
 
         $coupon->setPromotion($promotion)->shouldBeCalled();
-        $coupon->setCode(ANY_ARGUMENT)->shouldBeCalled();
+        $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
 
         $manager->persist($coupon)->shouldBeCalled();

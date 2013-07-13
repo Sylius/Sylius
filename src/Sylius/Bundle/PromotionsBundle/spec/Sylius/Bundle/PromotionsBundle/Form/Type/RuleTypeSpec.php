@@ -12,23 +12,24 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ActionTypeSpec extends ObjectBehavior
+class RuleTypeSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $actionRegistry
+     * @param Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface $checkerRegistry
      */
-    function let($actionRegistry)
+    function let($checkerRegistry)
     {
-        $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
+        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
     }
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\ActionType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\RuleType');
     }
 
     function it_should_be_a_form_type()
@@ -40,13 +41,13 @@ class ActionTypeSpec extends ObjectBehavior
      * @param Symfony\Component\Form\FormBuilder          $builder
      * @param Symfony\Component\Form\FormFactoryInterface $factory
      */
-    function it_should_build_form_with_action_choice_field($builder, $factory)
+    function it_should_build_form_with_rule_choice_field($builder, $factory)
     {
-        $builder->addEventSubscriber(ANY_ARGUMENT)->willReturn($builder);
+        $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
-            ->add('type', 'sylius_promotion_action_choice', ANY_ARGUMENT)
+            ->add('type', 'sylius_promotion_rule_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -58,13 +59,13 @@ class ActionTypeSpec extends ObjectBehavior
      * @param Symfony\Component\Form\FormBuilder          $builder
      * @param Symfony\Component\Form\FormFactoryInterface $factory
      */
-    function it_should_add_build_promotion_action_event_subscriber($builder, $factory)
+    function it_should_add_build_promotion_rule_event_subscriber($builder, $factory)
     {
-        $builder->add(ANY_ARGUMENTS)->willReturn($builder);
+        $builder->add(Argument::any(), Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
-            ->addEventSubscriber(\Mockery::type('Sylius\Bundle\PromotionsBundle\Form\EventListener\BuildActionFormListener'))
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\PromotionsBundle\Form\EventListener\BuildRuleFormListener'))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -79,7 +80,7 @@ class ActionTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'Action',
+                'data_class'        => 'Rule',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
