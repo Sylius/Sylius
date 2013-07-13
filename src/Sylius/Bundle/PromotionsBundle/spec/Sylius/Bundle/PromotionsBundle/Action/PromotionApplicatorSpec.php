@@ -39,9 +39,9 @@ class PromotionApplicatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface          $subject
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface    $actionModel
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
+     * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface           $actionModel
      */
     function it_should_execute_all_actions_registered($registry, $action, $subject, $promotion, $actionModel)
     {
