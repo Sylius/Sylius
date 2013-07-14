@@ -55,52 +55,6 @@ class TaxCategorySpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('All taxable goods');
     }
 
-    function it_should_initialize_rates_collection_by_default()
-    {
-        $this->getRates()->shouldHaveType('Doctrine\Common\Collections\Collection');
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
-     */
-    function it_should_add_rates($taxRate)
-    {
-        $this->hasRate($taxRate)->shouldReturn(false);
-        $this->addRate($taxRate);
-        $this->hasRate($taxRate)->shouldReturn(true);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
-     */
-    function it_should_assign_category_to_rate_when_adding($taxRate)
-    {
-        $taxRate->setCategory($this)->shouldBeCalled();
-        $this->addRate($taxRate);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
-     */
-    function it_should_remove_rates($taxRate)
-    {
-        $this->addRate($taxRate);
-
-        $this->removeRate($taxRate);
-        $this->hasRate($taxRate)->shouldReturn(false);
-    }
-
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxRateInterface $taxRate
-     */
-    function it_should_detach_category_from_rate_when_adding($taxRate)
-    {
-        $this->addRate($taxRate);
-
-        $taxRate->setCategory(null)->shouldBeCalled();
-        $this->removeRate($taxRate);
-    }
-
     function it_should_initialize_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');

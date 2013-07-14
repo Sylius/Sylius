@@ -190,11 +190,25 @@ class TaxRate implements TaxRateInterface
         return $this->createdAt;
     }
 
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

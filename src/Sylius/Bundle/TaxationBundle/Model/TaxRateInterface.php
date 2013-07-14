@@ -11,20 +11,15 @@
 
 namespace Sylius\Bundle\TaxationBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Tax rate interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface TaxRateInterface
+interface TaxRateInterface extends TimestampableInterface
 {
-    /**
-     * Get identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * Get category.
      *
@@ -101,18 +96,4 @@ interface TaxRateInterface
      * @param string $calculator
      */
     public function setCalculator($calculator);
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }
