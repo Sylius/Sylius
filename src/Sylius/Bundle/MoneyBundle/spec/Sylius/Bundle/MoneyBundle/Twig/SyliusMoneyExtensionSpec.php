@@ -1,15 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\MoneyBundle\Twig;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Sylius money extension for Twig spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusMoneyExtension extends ObjectBehavior
+class SyliusMoneyExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface     $currencyContext

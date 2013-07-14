@@ -24,7 +24,7 @@ class CurrencyConverter implements CurrencyConverterInterface
 
     public function convert($value, $currency)
     {
-        if (null === $exchangeRate = $this->exchangeRateRepository->findOneByCurrency($currency)) {
+        if (null === $exchangeRate = $this->exchangeRateRepository->findOneBy(array('currency' => $currency))) {
             return $value;
         }
 

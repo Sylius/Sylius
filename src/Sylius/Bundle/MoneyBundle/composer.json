@@ -1,8 +1,8 @@
 {
     "name": "sylius/money-bundle",
     "type": "symfony-bundle",
-    "description": "Sylius integration with PHP Money library.",
-    "keywords": ["cash", "currency", "money"],
+    "description": "Currencies and money formatting engine bundle for Symfony2.",
+    "keywords": ["cash", "currency", "money", "currencies"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -25,9 +25,9 @@
         "mathiasverraes/money":     "dev-master"
     },
     "require-dev": {
-        "twig/twig":        "~1.21",
-        "symfony/form":     "~2.3",
-        "phpspec/phpspec2": "2.0.*"
+        "phpspec/phpspec": "2.0.*@dev",
+        "twig/twig":       "~1.0",
+        "symfony/form":    "~2.3"
     },
     "config": {
         "bin-dir": "bin"
@@ -38,7 +38,7 @@
     "target-dir": "Sylius/Bundle/MoneyBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "0.2.x-dev"
         }
     }
 }
