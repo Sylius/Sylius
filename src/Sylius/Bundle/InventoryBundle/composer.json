@@ -27,7 +27,7 @@
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev",
         "symfony/form":    "~2.3",
-        "twig/twig":       "1.13.*"
+        "twig/twig":       "~1.0"
     },
     "config": {
         "bin-dir": "bin"

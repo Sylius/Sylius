@@ -24,7 +24,7 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Model\InventoryUnit');
     }
 
-    function it_is_a_Sylius_inventory_unit()
+    function it_implements_Sylius_inventory_unit_interface()
     {
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface');
     }

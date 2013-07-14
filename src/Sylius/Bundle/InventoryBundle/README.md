@@ -1,16 +1,17 @@
 SyliusInventoryBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusInventoryBundle.png)](http://travis-ci.org/Sylius/SyliusInventoryBundle)
 =====================
 
-Flexible inventory management for Symfony2 applications.  
-It is inspired by [Spree inventory system](http://guides.spreecommerce.com/inventory.html).
+Flexible inventory management for Symfony2 applications.
+
+It was heavily inspired by [Spree inventory system](http://guides.spreecommerce.com/inventory.html).
 
 Sylius
 ------
 
-**Sylius**, modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-[phpspec2](http://phpspec.net) Specifications
----------------------------------------------
+[phpspec2](http://phpspec.net) examples
+---------------------------------------
 
 ``` bash
 $ composer install --dev --prefer-dist

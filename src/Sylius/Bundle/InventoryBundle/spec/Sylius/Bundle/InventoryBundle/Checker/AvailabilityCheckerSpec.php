@@ -28,7 +28,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker');
     }
 
-    function it_implements_Sylius_inventory_availability_checker()
+    function it_implements_Sylius_inventory_availability_checker_interface()
     {
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface');
     }
