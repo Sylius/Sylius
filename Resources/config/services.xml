@@ -38,6 +38,7 @@
             <argument type="service" id="sylius.repository.inventory_unit" />
             <argument type="service" id="sylius.availability_checker" />
         </service>
+
         <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">
             <argument>%sylius.backorders%</argument>
         </service>

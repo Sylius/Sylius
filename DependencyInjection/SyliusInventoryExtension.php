@@ -37,37 +37,30 @@ class SyliusInventoryExtension extends Extension
         $config = $processor->processConfiguration($configuration, $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if (!in_array($config['engine'], array('twig'))) {
-            throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
-        }
-
         $driver = $config['driver'];
 
         if (!in_array($driver, SyliusInventoryBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension', $driver));
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusInventoryBundle.', $driver));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
+
         $container->setParameter('sylius_inventory.driver', $driver);
         $container->setParameter('sylius_inventory.driver.'.$driver, true);
-
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
 
-        $unitClasses = $config['classes']['unit'];
+        $container->setParameter('sylius.controller.inventory_unit.class', $classes['unit']['controller']);
+        $container->setParameter('sylius.model.inventory_unit.class', $classes['unit']['model']);
 
-        $container->setParameter('sylius.controller.inventory_unit.class', $unitClasses['controller']);
-        $container->setParameter('sylius.model.inventory_unit.class', $unitClasses['model']);
-
-        if (array_key_exists('repository', $unitClasses)) {
-            $container->setParameter('sylius.repository.inventory_unit.class', $unitClasses['repository']);
+        if (array_key_exists('repository', $classes['unit'])) {
+            $container->setParameter('sylius.repository.inventory_unit.class', $classes['unit']['repository']);
         }
 
-        $stockableClasses = $config['classes']['stockable'];
-        $container->setParameter('sylius.model.stockable.class', $stockableClasses['model']);
+        $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
 
         $loader->load('services.xml');
         $loader->load('twig.xml');
