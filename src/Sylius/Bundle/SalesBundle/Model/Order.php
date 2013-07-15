@@ -473,6 +473,22 @@ class Order implements OrderInterface, TimestampableInterface
     /**
      * {@inheritdoc}
      */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTotalItems()
     {
         return $this->countItems(); /** @TODO: We may want to delete that */

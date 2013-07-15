@@ -190,4 +190,18 @@ interface OrderInterface extends AdjustableInterface
      * Clears all items in cart.
      */
     public function clearItems();
+
+    /**
+     * Get order state.
+     *
+     * @return string
+     */
+    public function getState();
+
+    /**
+     * Set order state.
+     *
+     * @param string $state
+     */
+    public function setState($state);
 }
