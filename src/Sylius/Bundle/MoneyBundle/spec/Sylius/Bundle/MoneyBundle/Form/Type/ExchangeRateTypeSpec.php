@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\MoneyBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Sylius exchange rate form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ExchangeRateType extends ObjectBehavior
+class ExchangeRateTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -41,13 +40,13 @@ class ExchangeRateType extends ObjectBehavior
     function it_should_build_form_with_proper_fields($builder)
     {
         $builder
-            ->add('currency', 'text', ANY_ARGUMENT)
+            ->add('currency', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('rate', 'text', ANY_ARGUMENT)
+            ->add('rate', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

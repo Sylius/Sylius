@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\MoneyBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Sylius money form type.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class MoneyType extends ObjectBehavior
+class MoneyTypeSpec extends ObjectBehavior
 {
     function let()
     {

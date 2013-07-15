@@ -6,12 +6,14 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\MoneyBundle\Entity\ExchangeRate" table="sylius_exchange_rate">
+    <entity name="Sylius\Bundle\MoneyBundle\Model\ExchangeRate" table="sylius_exchange_rate">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="currency" length="3" />
         <field name="rate" type="decimal" precision="10" scale="5" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

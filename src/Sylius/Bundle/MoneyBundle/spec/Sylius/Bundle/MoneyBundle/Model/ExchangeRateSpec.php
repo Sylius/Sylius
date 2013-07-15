@@ -11,9 +11,9 @@
 
 namespace spec\Sylius\Bundle\MoneyBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
-class ExchangeRate extends ObjectBehavior
+class ExchangeRateSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

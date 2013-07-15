@@ -57,7 +57,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('exchange_rate')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\MoneyBundle\Model\ExchangeRate')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType')->end()

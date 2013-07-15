@@ -11,11 +11,10 @@
 
 namespace spec\Sylius\Bundle\MoneyBundle\Converter;
 
-use PHPSpec2\ObjectBehavior;
-use PHPSpec2\Matcher\InlineMatcher;
-use PHPSpec2\Matcher\CustomMatchersProviderInterface;
+use PhpSpec\ObjectBehavior;
+use PhpSpec\Matcher\InlineMatcher;
 
-class CurrencyConverter extends ObjectBehavior implements CustomMatchersProviderInterface
+class CurrencyConverterSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $exchangeRateRepository
@@ -40,18 +39,18 @@ class CurrencyConverter extends ObjectBehavior implements CustomMatchersProvider
      */
     function it_converts_to_any_currency($exchangeRate, $exchangeRateRepository)
     {
-        $exchangeRateRepository->findOneByCurrency('USD')->shouldBeCalled()->willReturn($exchangeRate);
+        $exchangeRateRepository->findOneBy(array('currency' => 'USD'))->shouldBeCalled()->willReturn($exchangeRate);
         $exchangeRate->getRate()->shouldBeCalled()->willReturn(0.76495);
 
         $this->convert(65.55, 'USD')->shouldReturnFloat(85.691875285966);
     }
 
-    public static function getMatchers()
+    public function getMatchers()
     {
         return array(
-            new InlineMatcher('returnFloat', function ($a, $b) {
+            'returnFloat' => function ($a, $b) {
                 return (string) $a === (string) $b;
-            })
+            }
         );
     }
 }
