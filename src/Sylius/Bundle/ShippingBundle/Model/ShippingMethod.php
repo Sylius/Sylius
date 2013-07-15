@@ -311,4 +311,18 @@ class ShippingMethod implements ShippingMethodInterface
 
         return $this;
     }
+
+    /**
+     * Get the default requirement labels.
+     *
+     * @return array
+     */
+    public static function getCategoryRequirementLabels()
+    {
+        return array(
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
+        );
+    }
 }

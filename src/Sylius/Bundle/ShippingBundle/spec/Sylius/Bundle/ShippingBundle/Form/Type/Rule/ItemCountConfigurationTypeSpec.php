@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Rule;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * Item count rule configuration form type spec.

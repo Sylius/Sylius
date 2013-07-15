@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -57,15 +58,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->add(
                 'categoryRequirement',
                 'choice',
-                \Mockery::subset(
-                    array(
-                        'choices' => array(
-                            0 => 'None of items have to match method category',
-                            1 => 'At least 1 item have to match method category',
-                            2 => 'All items have to match method category'
-                        )
-                    )
-                )
+                Argument::type('array')
             )
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -94,7 +87,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $builder->add(Argument::any())->willReturn($builder);
 
         $builder
-            ->addEventSubscriber(\Mockery::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener'))
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener'))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

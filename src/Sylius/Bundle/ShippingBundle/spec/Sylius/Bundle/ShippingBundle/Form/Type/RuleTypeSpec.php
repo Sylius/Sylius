@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -64,7 +65,7 @@ class RuleTypeSpec extends ObjectBehavior
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
-            ->addEventSubscriber(\Mockery::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener'))
+            ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener'))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
