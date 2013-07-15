@@ -18,7 +18,7 @@ use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class PaymentMethod extends ObjectBehavior
+class PaymentMethodSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

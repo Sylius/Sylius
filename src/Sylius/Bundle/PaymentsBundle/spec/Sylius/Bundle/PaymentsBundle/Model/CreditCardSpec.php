@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CreditCard extends ObjectBehavior
+class CreditCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

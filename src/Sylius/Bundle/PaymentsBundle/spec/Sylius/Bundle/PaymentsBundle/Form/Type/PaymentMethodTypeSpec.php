@@ -76,4 +76,9 @@ class PaymentMethodTypeSpec extends ObjectBehavior
 
         $this->setDefaultOptions($resolver);
     }
+
+    function it_has_valid_name()
+    {
+        $this->getName()->shouldReturn('sylius_payment_method');
+    }
 }

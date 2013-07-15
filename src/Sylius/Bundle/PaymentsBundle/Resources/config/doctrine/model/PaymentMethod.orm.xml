@@ -18,11 +18,13 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="name" column="name" type="string" />
         <field name="description" column="description" type="string" nullable="true" />
         <field name="gateway" column="gateway" type="string" />
         <field name="environment" column="environment" type="string" nullable="true" />
         <field name="enabled" column="is_enabled" type="boolean" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

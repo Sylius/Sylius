@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Payment extends ObjectBehavior
+class PaymentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -101,6 +101,9 @@ class Payment extends ObjectBehavior
     {
         $transactionA->getAmount()->willReturn(5000);
         $transactionB->getAmount()->willReturn(2500);
+
+        $transactionA->setPayment($this)->shouldBeCalled();
+        $transactionB->setPayment($this)->shouldBeCalled();
 
         $this->addTransaction($transactionA);
         $this->addTransaction($transactionB);
