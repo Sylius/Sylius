@@ -16,11 +16,11 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
- * Checks if shipping method rules are eligible.
+ * Checks if shipping method rules are capable of shipping given subject.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingMethodEliglibilityChecker implements ShippingMethodEliglibilityCheckerInterface
+class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
     /**
      * Shipping rules registry.

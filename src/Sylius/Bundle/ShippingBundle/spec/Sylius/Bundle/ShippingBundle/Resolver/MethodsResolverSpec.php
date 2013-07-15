@@ -21,7 +21,7 @@ class MethodsResolverSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository $methodRepository
-     * @param Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEliglibilityCheckerInterface $eliglibilityChecker
+     * @param Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface $eliglibilityChecker
      */
     function let($methodRepository, $eliglibilityChecker)
     {

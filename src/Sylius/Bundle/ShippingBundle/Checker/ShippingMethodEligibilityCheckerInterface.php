@@ -19,7 +19,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ShippingMethodEliglibilityCheckerInterface
+interface ShippingMethodEligibilityCheckerInterface
 {
     /**
      * Check if given shipping method supports the concrete subject.

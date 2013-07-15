@@ -30,12 +30,12 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEliglibilityChecker');
+        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityChecker');
     }
 
     function it_implements_Sylius_shipping_method_eliglibility_checker_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEliglibilityCheckerInterface');
+        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface');
     }
 
     /**
