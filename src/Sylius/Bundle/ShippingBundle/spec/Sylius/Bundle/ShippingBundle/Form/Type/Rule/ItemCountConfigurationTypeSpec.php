@@ -11,12 +11,14 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Rule;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
+ * Item count rule configuration form type spec.
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountConfigurationTypeSpec extends ObjectBehavior
+class ItemCountConfigurationType extends ObjectBehavior
 {
     function let()
     {
@@ -39,13 +41,13 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
     function it_should_build_form_with_count_field_and_equal_checkbox($builder)
     {
         $builder
-            ->add('count', 'integer', ANY_ARGUMENT)
+            ->add('count', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('equal', 'checkbox', ANY_ARGUMENT)
+            ->add('equal', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -39,13 +39,13 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
     function it_builds_form_with_name_and_description_fields($builder)
     {
         $builder
-            ->add('name', 'text', ANY_ARGUMENT)
+            ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'textarea', ANY_ARGUMENT)
+            ->add('description', 'textarea', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

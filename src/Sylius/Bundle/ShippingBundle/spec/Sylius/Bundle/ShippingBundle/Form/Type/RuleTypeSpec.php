@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -42,11 +42,11 @@ class RuleTypeSpec extends ObjectBehavior
      */
     function it_should_build_form_with_rule_choice_field($builder, $factory)
     {
-        $builder->addEventSubscriber(ANY_ARGUMENT)->willReturn($builder);
+        $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
-            ->add('type', 'sylius_shipping_rule_choice', ANY_ARGUMENT)
+            ->add('type', 'sylius_shipping_rule_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -60,7 +60,7 @@ class RuleTypeSpec extends ObjectBehavior
      */
     function it_should_add_build_promotion_rule_event_subscriber($builder, $factory)
     {
-        $builder->add(ANY_ARGUMENTS)->willReturn($builder);
+        $builder->add(Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
         $builder

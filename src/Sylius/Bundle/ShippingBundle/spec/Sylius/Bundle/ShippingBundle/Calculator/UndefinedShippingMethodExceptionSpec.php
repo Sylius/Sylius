@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Calculator;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

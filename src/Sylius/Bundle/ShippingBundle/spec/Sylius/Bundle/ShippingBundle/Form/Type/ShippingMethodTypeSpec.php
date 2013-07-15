@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -40,15 +40,15 @@ class ShippingMethodTypeSpec extends ObjectBehavior
      */
     function it_builds_form_with_proper_fields($builder)
     {
-        $builder->addEventSubscriber(ANY_ARGUMENT)->willReturn($builder);
+        $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder
-            ->add('name', 'text', ANY_ARGUMENT)
+            ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('category', 'sylius_shipping_category_choice', ANY_ARGUMENT)
+            ->add('category', 'sylius_shipping_category_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -72,13 +72,13 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('enabled', 'checkbox', ANY_ARGUMENT)
+            ->add('enabled', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('calculator', 'sylius_shipping_calculator_choice', ANY_ARGUMENT)
+            ->add('calculator', 'sylius_shipping_calculator_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -91,7 +91,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
      */
     function it_adds_build_shipping_method_event_subscriber($builder)
     {
-        $builder->add(ANY_ARGUMENTS)->willReturn($builder);
+        $builder->add(Argument::any())->willReturn($builder);
 
         $builder
             ->addEventSubscriber(\Mockery::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener'))
@@ -118,11 +118,11 @@ class ShippingMethodTypeSpec extends ObjectBehavior
     )
     {
         $builder
-            ->add(ANY_ARGUMENTS)
+            ->add(Argument::any())
             ->willReturn($builder)
         ;
         $builder
-            ->addEventSubscriber(ANY_ARGUMENT)
+            ->addEventSubscriber(Argument::any())
             ->willReturn($builder)
         ;
 

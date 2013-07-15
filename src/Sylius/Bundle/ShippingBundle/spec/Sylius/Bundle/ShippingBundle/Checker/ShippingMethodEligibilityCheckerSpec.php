@@ -11,13 +11,13 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Checker;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingMethodEliglibilityCheckerSpec extends ObjectBehavior
+class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface $registry

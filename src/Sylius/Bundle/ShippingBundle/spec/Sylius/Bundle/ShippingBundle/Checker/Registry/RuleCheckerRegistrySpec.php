@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Checker\Registry;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
 
 /**

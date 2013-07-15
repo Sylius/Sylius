@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Resolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
