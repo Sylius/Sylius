@@ -17,11 +17,11 @@
     <entity name="Sylius\Bundle\PaymentsBundle\Model\CreditCard" table="sylius_credit_card">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
-          </id>
+        </id>
 
         <many-to-one field="owner" target-entity="Sylius\Bundle\PaymentsBundle\Model\CreditCardOwnerInterface">
             <join-column name="owner_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-          </many-to-one>
+        </many-to-one>
 
         <field name="token" column="token" type="string" nullable="true" />
         <field name="type" column="type" type="string" nullable="true" />
