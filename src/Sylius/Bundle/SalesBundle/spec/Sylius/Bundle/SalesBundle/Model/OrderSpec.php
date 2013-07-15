@@ -44,6 +44,37 @@ class OrderSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
+    function it_is_not_completed_by_default()
+    {
+        $this->shouldNotBeCompleted();
+    }
+
+    function it_can_be_completed()
+    {
+        $this->complete();
+        $this->shouldBeCompleted();
+    }
+
+    function it_is_completed_when_completion_date_is_set()
+    {
+        $this->shouldNotBeCompleted();
+        $this->setCompletedAt(new \DateTime('2 days ago'));
+        $this->shouldBeCompleted();
+    }
+
+    function it_has_no_completion_date_by_default()
+    {
+        $this->getCompletedAt()->shouldReturn(null);
+    }
+
+    function its_completion_date_is_mutable()
+    {
+        $date = new \DateTime('1 hour ago');
+
+        $this->setCompletedAt($date);
+        $this->getCompletedAt()->shouldReturn($date);
+    }
+
     function it_has_no_number_by_default()
     {
         $this->getNumber()->shouldReturn(null);

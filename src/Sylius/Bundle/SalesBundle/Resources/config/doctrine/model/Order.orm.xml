@@ -8,7 +8,9 @@
 
     <mapped-superclass name="Sylius\Bundle\SalesBundle\Model\Order">
         <field name="number" column="number" type="string" unique="true" nullable="true" />
-        <field name="confirmed" column="confirmed" type="boolean" />
+
+        <field name="state" column="state" type="integer" />
+        <field name="completedAt" column="completed_at" type="datetime" nullable="true" />
 
         <field name="itemsTotal" column="items_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
@@ -20,7 +22,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <field name="state" column="state" type="integer" />
     </mapped-superclass>
 
 </doctrine-mapping>
