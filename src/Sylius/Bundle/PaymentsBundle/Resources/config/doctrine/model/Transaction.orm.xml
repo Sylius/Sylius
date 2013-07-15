@@ -14,14 +14,17 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PaymentsBundle\Entity\Transaction" table="sylius_transaction">
+    <entity name="Sylius\Bundle\PaymentsBundle\Model\Transaction" table="sylius_transaction">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <many-to-one field="payment" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentInterface">
             <join-column name="payment_id" referenced-column-name="id" />
         </many-to-one>
+
         <field name="amount" column="amount" type="integer" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

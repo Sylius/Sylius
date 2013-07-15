@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Payment method form type spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class PaymentMethodType extends ObjectBehavior
+class PaymentMethodTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -36,25 +35,25 @@ class PaymentMethodType extends ObjectBehavior
     function it_builds_form_with_proper_fields($builder)
     {
         $builder
-            ->add('name', 'text', ANY_ARGUMENT)
+            ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'textarea', ANY_ARGUMENT)
+            ->add('description', 'textarea', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('enabled', 'checkbox', ANY_ARGUMENT)
+            ->add('enabled', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('gateway', 'sylius_payment_gateway_choice', ANY_ARGUMENT)
+            ->add('gateway', 'sylius_payment_gateway_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -76,5 +75,10 @@ class PaymentMethodType extends ObjectBehavior
         ;
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_has_valid_name()
+    {
+        $this->getName()->shouldReturn('sylius_payment_method');
     }
 }

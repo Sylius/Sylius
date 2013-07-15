@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Credit card spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CreditCard extends ObjectBehavior
+class CreditCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

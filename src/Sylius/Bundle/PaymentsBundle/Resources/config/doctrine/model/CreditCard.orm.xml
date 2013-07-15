@@ -14,13 +14,15 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PaymentsBundle\Entity\CreditCard" table="sylius_credit_card">
+    <entity name="Sylius\Bundle\PaymentsBundle\Model\CreditCard" table="sylius_credit_card">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <many-to-one field="owner" target-entity="Sylius\Bundle\PaymentsBundle\Model\CreditCardOwnerInterface">
             <join-column name="owner_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
+
         <field name="token" column="token" type="string" nullable="true" />
         <field name="type" column="type" type="string" nullable="true" />
         <field name="cardholderName" column="cardholder_name" type="string" nullable="true" />
@@ -28,6 +30,7 @@
         <field name="securityCode" column="security_code" type="string" nullable="true" />
         <field name="expiryMonth" column="expiry_month" type="integer" nullable="true" />
         <field name="expiryYear" column="expiry_year" type="integer" nullable="true" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

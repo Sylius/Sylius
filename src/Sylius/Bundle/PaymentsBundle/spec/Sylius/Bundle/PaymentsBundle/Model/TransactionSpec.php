@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Transaction spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Transaction extends ObjectBehavior
+class TransactionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

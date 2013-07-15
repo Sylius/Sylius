@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Credit Card form type spec.
- *
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
-class CreditCardType extends ObjectBehavior
+class CreditCardTypeSpec extends ObjectBehavior
 {
     public function let()
     {
@@ -36,37 +35,37 @@ class CreditCardType extends ObjectBehavior
     public function it_builds_form_with_proper_fields($builder)
     {
         $builder
-            ->add('type', 'choice', ANY_ARGUMENT)
+            ->add('type', 'choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('cardholderName', 'text', ANY_ARGUMENT)
+            ->add('cardholderName', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('number', 'number', ANY_ARGUMENT)
+            ->add('number', 'number', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('securityCode', 'number', ANY_ARGUMENT)
+            ->add('securityCode', 'number', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('expiryMonth', 'choice', ANY_ARGUMENT)
+            ->add('expiryMonth', 'choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('expiryYear', 'choice', ANY_ARGUMENT)
+            ->add('expiryYear', 'choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -88,5 +87,10 @@ class CreditCardType extends ObjectBehavior
         ;
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_has_valid_name()
+    {
+        $this->getName()->shouldReturn('sylius_credit_card');
     }
 }

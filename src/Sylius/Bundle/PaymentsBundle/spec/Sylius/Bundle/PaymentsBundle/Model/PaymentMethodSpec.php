@@ -12,15 +12,13 @@
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 
 /**
- * Payment method model spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class PaymentMethod extends ObjectBehavior
+class PaymentMethodSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
