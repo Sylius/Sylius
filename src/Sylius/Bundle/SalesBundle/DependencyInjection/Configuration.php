@@ -37,11 +37,11 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -55,33 +55,14 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('order')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('order_item')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
                 ->arrayNode('classes')
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('sellable')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->cannotBeEmpty()->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('order')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->cannotBeEmpty()->end()
+                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\SalesBundle\\Controller\\OrderController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\OrderType')->end()
@@ -99,8 +80,41 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('adjustment')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\SalesBundle\\Model\\Adjustment')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
+                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\SalesBundle\\Form\\Type\\AdjustmentType')->end()
                             ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `validation_groups` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('order')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('order_item')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('adjustment')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
                         ->end()
                     ->end()
                 ->end()

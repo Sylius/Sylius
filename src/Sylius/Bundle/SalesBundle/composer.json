@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Sales order management for Symfony2 applications.",
     "keywords": ["shop", "ecommerce", "sales", "orders", "order", "sylius"],
-    "homepage": "http://sylius.com",
+    "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
@@ -18,14 +18,17 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php":                      ">=5.3.3",
+        "php": ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.1",
-        "sylius/resource-bundle":   "~0.1"
+        "symfony/framework-bundle":        "~2.3",
+        "sylius/resource-bundle":          "0.3.*",
+        "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
-        "phpspec/phpspec2":         "dev-develop",
-        "symfony/form":             "~2.1"
+        "phpspec/phpspec":    "2.0.*@dev",
+        "doctrine/orm":       "~2.2",
+        "symfony/form":       "~2.3",
+        "symfony/validator":  "~2.3"
     },
     "config": {
         "bin-dir": "bin"
@@ -36,7 +39,7 @@
     "target-dir": "Sylius/Bundle/SalesBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "0.2.x-dev"
         }
     }
 }

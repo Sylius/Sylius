@@ -35,13 +35,6 @@ class OrderItem implements OrderItemInterface
     protected $order;
 
     /**
-     * Sellable.
-     *
-     * @var SellableInterface
-     */
-    protected $sellable;
-
-    /**
      * Quantity.
      *
      * @var integer
@@ -130,22 +123,6 @@ class OrderItem implements OrderItemInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSellable()
-    {
-        return $this->sellable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSellable(SellableInterface $sellable)
-    {
-        $this->sellable = $sellable;
     }
 
     /**
@@ -263,12 +240,6 @@ class OrderItem implements OrderItemInterface
      */
     public function equals(OrderItemInterface $orderItem)
     {
-        if (null === $this->getSellable() || null === $orderItem->getSellable()) {
-            throw new \InvalidArgumentException(
-                sprintf("Can't compare order items when sellable is not set.")
-            );
-        }
-
-        return $this->getSellable() === $orderItem->getSellable();
+        return $this === $orderItem;
     }
 }

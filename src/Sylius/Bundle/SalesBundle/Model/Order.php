@@ -30,6 +30,13 @@ class Order implements OrderInterface, TimestampableInterface
     protected $id;
 
     /**
+     * Completion time.
+     *
+     * @var DateTime
+     */
+    protected $completedAt;
+
+    /**
      * Order number.
      *
      * @var string
@@ -128,6 +135,42 @@ class Order implements OrderInterface, TimestampableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCompleted()
+    {
+        return null !== $this->completedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function complete()
+    {
+        $this->completedAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompletedAt()
+    {
+        return $this->completedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompletedAt(\DateTime $completedAt = null)
+    {
+        $this->completedAt = $completedAt;
+
+        return $this;
     }
 
     /**

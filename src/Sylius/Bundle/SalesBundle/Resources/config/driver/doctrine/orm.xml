@@ -17,9 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.order_item.class">Sylius\Bundle\SalesBundle\Entity\DefaultOrderItem</parameter>
-        <parameter key="sylius.model.adjustment.class">Sylius\Bundle\SalesBundle\Entity\DefaultAdjustment</parameter>
-
         <parameter key="sylius.repository.order.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.order_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.adjustment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>

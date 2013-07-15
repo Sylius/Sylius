@@ -21,6 +21,7 @@
             <constraint name="Valid" />
         </property>
     </class>
+
     <class name="Sylius\Bundle\SalesBundle\Model\OrderItem">
         <property name="quantity">
             <constraint name="NotBlank">
@@ -35,6 +36,26 @@
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.order_item.quantity.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Bundle\SalesBundle\Model\Adjustment">
+        <property name="label">
+            <constraint name="NotBlank">
+                <option name="message">sylius.adjustment.label.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="amount">
+            <constraint name="NotBlank">
+                <option name="message">sylius.adjustment.amount.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Type">
+                <option name="type">integer</option>
+                <option name="message">sylius.adjustment.amount.integer</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

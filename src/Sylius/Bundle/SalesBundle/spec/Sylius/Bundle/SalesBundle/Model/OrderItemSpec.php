@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Order item spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderItem extends ObjectBehavior
+class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -64,20 +62,6 @@ class OrderItem extends ObjectBehavior
 
         $this->setOrder(null);
         $this->getOrder()->shouldReturn(null);
-    }
-
-    function it_has_no_sellable_defined_by_default()
-    {
-        $this->getSellable()->shouldReturn(null);
-    }
-
-    /**
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface $sellable
-     */
-    function it_allows_defining_sellable($sellable)
-    {
-        $this->setSellable($sellable);
-        $this->getSellable()->shouldReturn($sellable);
     }
 
     function it_has_quantity_equal_to_1_by_default()
@@ -153,7 +137,6 @@ class OrderItem extends ObjectBehavior
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
-
     function its_total_is_mutable()
     {
         $this->setTotal(5999);
@@ -180,6 +163,8 @@ class OrderItem extends ObjectBehavior
 
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-1000);
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
         $this->addAdjustment($adjustment);
 
         $this->calculateTotal();
@@ -198,39 +183,16 @@ class OrderItem extends ObjectBehavior
 
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-1000);
+        $adjustment->setAdjustable($this)->shouldBeCalled();
         $this->addAdjustment($adjustment);
 
         $neutralAdjustment->isNeutral()->willReturn(true);
         $neutralAdjustment->getAmount()->willReturn(2499);
+        $neutralAdjustment->setAdjustable($this)->shouldBeCalled();
         $this->addAdjustment($neutralAdjustment);
 
         $this->calculateTotal();
 
         $this->getTotal()->shouldReturn(18487);
-    }
-
-    /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $otherCartItem
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface  $sellable1
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface  $sellable2
-     */
-    function it_does_not_recognize_items_as_equal_if_they_do_not_have_the_same_sellable($otherCartItem, $sellable1, $sellable2)
-    {
-        $otherCartItem->getSellable()->willReturn($sellable1);
-        $this->setSellable($sellable2);
-
-        $this->equals($otherCartItem)->shouldReturn(false);
-    }
-
-    /**
-     * @param Sylius\Bundle\SalesBundle\Model\OrderItemInterface $otherCartItem
-     * @param Sylius\Bundle\SalesBundle\Model\SellableInterface  $sellable
-     */
-    function it_recognize_items_as_equal_if_they_have_the_same_sellable($otherCartItem, $sellable)
-    {
-        $otherCartItem->getSellable()->willReturn($sellable);
-        $this->setSellable($sellable);
-
-        $this->equals($otherCartItem)->shouldReturn(true);
     }
 }

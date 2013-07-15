@@ -11,23 +11,22 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Order item form type spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderItemType extends ObjectBehavior
+class OrderTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('OrderItem', array('sylius'));
+        $this->beConstructedWith('Order', array('sylius'));
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Form\Type\OrderItemType');
+        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Form\Type\OrderType');
     }
 
     function it_is_a_form_type()
@@ -38,10 +37,9 @@ class OrderItemType extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_builds_form_with_quantity_and_unit_price_fields($builder)
+    function it_builds_form_with_items_collection_field($builder)
     {
-        $builder->add('quantity', 'integer', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
-        $builder->add('unitPrice', 'money', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('items', 'collection', Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }
@@ -53,12 +51,17 @@ class OrderItemType extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                'data_class'        => 'OrderItem',
+                'data_class'        => 'Order',
                 'validation_groups' => array('sylius'),
             ))
             ->shouldBeCalled()
         ;
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_has_valid_name()
+    {
+        $this->getName()->shouldReturn('sylius_order');
     }
 }

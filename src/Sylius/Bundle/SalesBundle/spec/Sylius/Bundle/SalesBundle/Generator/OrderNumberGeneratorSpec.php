@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\SalesBundle\Generator;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Default order number generator spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderNumberGenerator extends ObjectBehavior
+class OrderNumberGeneratorSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository $orderRepository

@@ -21,6 +21,32 @@ use Doctrine\Common\Collections\Collection;
 interface OrderInterface extends AdjustableInterface
 {
     /**
+     * Has the order been completed by user and can be handled.
+     *
+     * @return Boolean
+     */
+    public function isCompleted();
+
+    /**
+     * Mark the order as completed.
+     */
+    public function complete();
+
+    /**
+     * Return completion date.
+     *
+     * @return DateTime
+     */
+    public function getCompletedAt();
+
+    /**
+     * Set completion time.
+     *
+     * @param DateTime $completedAt
+     */
+    public function setCompletedAt(\DateTime $completedAt = null);
+
+    /**
      * Get order number.
      *
      * @return string

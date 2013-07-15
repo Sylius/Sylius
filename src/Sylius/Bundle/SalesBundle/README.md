@@ -3,28 +3,26 @@ SyliusSalesBundle [![Build status...](https://secure.travis-ci.org/Sylius/Sylius
 
 Sales order bundle for Symfony2 e-commerce applications. It allows you to start building you application with sensible and flexible models.
 Provides default forms, controllers, entities, mappings and everything that can help you building your perfect solution.
-Includes a order builder concept which allows you to quickly build one page checkouts via default controller.
+
 Includes order and order item total value adjustments system based on ideas from [Spree adjustments](http://guides.spreecommerce.com/adjustments.html).
 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-Visit [Sylius.org](http://sylius.org).
-
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
 ``` bash
-$ composer install --dev
-$ bin/phpspec run -f pretty
+$ composer install --dev --prefer-dist
+$ bin/phpspec run -fpretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://docs.sylius.org/en/latest/bundles/SyliusSalesBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusSalesBundle/index.html).
 
 Contributing
 ------------

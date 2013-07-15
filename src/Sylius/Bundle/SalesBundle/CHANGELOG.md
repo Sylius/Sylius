@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+### v0.2.0
+
+* Symfony 2.3 upgrade.
+* Removed ``Entity`` classes, please extend ``Model``.
+* Removed sellable interface and order builder to give more freedom for custom implementations.
+
 ### v0.1.0
 
 * Initial development release.

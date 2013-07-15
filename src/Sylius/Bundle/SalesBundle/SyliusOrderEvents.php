@@ -13,9 +13,15 @@ namespace Sylius\Bundle\SalesBundle;
 
 final class SyliusOrderEvents
 {
-    const ORDER_PRE_CREATE  = 'sylius.order.pre_create';
-    const ORDER_POST_CREATE = 'sylius.order.post_create';
+    const PRE_CREATE  = 'sylius.order.pre_create';
+    const CREATE      = 'sylius.order.create';
+    const POST_CREATE = 'sylius.order.post_create';
 
-    const ORDER_PRE_UPDATE  = 'sylius.order.pre_update';
-    const ORDER_POST_UPDATE = 'sylius.order.post_update';
+    const PRE_UPDATE  = 'sylius.order.pre_update';
+    const UPDATE      = 'sylius.order.update';
+    const POST_UPDATE = 'sylius.order.post_update';
+
+    const PRE_DELETE  = 'sylius.order.pre_delete';
+    const DELETE      = 'sylius.order.delete';
+    const POST_DELETE = 'sylius.order.post_delete';
 }
