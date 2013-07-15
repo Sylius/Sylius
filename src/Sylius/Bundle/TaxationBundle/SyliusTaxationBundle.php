@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxationBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
@@ -48,5 +49,11 @@ class SyliusTaxationBundle extends Bundle
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxation', $interfaces));
         $container->addCompilerPass(new RegisterCalculatorsPass());
+
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxationBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxation.driver.doctrine/orm'));
     }
 }

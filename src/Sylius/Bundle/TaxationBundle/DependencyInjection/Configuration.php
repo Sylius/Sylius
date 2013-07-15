@@ -37,11 +37,11 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -55,6 +55,44 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
+                ->arrayNode('classes')
+                    ->isRequired()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('tax_category')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\TaxationBundle\Model\TaxCategory')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxCategoryType')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('tax_rate')
+                            ->isRequired()
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->isRequired()->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxRateType')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `validation_groups` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('validation_groups')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -65,29 +103,6 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('tax_rate')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('tax_category')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxCategoryType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('tax_rate')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxRateType')->end()
-                            ->end()
                         ->end()
                     ->end()
                 ->end()

@@ -17,9 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.tax_category.class">Sylius\Bundle\TaxationBundle\Entity\DefaultTaxCategory</parameter>
-        <parameter key="sylius.model.tax_rate.class">Sylius\Bundle\TaxationBundle\Entity\DefaultTaxRate</parameter>
-
         <parameter key="sylius.repository.tax_category.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.tax_rate.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
 
