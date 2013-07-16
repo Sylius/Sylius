@@ -15,11 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Item count rule configuration form type spec.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountConfigurationType extends ObjectBehavior
+class ItemCountConfigurationTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -48,7 +46,7 @@ class ItemCountConfigurationType extends ObjectBehavior
         ;
 
         $builder
-            ->add('equal', 'checkbox', Argument::any())
+          ->add('equal', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

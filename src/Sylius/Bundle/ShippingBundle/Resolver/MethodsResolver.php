@@ -34,18 +34,18 @@ class MethodsResolver implements MethodsResolverInterface
      *
      * @var ShippingMethodEligibilityCheckerInterface
      */
-    protected $eliglibilityChecker;
+    protected $eligibilityChecker;
 
     /**
      * Constructor.
      *
      * @param ObjectRepository                           $repository
-     * @param ShippingMethodEligibilityCheckerInterface $eliglibilityChecker
+     * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
     public function __construct(ObjectRepository $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
     {
         $this->repository = $repository;
-        $this->eliglibilityChecker = $eliglibilityChecker;
+        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     /**
@@ -56,7 +56,7 @@ class MethodsResolver implements MethodsResolverInterface
         $methods = array();
 
         foreach ($this->getMethods($criteria) as $method) {
-            if ($this->eliglibilityChecker->isEliglible($subject, $method)) {
+            if ($this->eligibilityChecker->isEligible($subject, $method)) {
                 $methods[] = $method;
             }
         }

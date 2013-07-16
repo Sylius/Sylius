@@ -59,9 +59,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     * @param Doctrine\Common\Collections\Collection                     $shippingItems
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
      */
     function it_should_calculate_the_first_item_cost_if_shipment_has_only_one_item($shipment, $shippingItems, $method)
     {
@@ -71,19 +69,14 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             'additional_item_limit' => 0
         );
 
-        $shipment->getMethod()->willReturn($method);
-        $method->getConfiguration()->willReturn($configuration);
 
-        $shippingItems->count()->willReturn(1);
-        $shipment->getItems()->willReturn($shippingItems);
+        $shipment->getShippingItemCount()->willReturn(1);
 
-        $this->calculate($shipment)->shouldReturn(1000);
+        $this->calculate($shipment, $configuration)->shouldReturn(1000);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     * @param Doctrine\Common\Collections\Collection                     $shippingItems
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
      */
     function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items($shipment, $shippingItems, $method)
     {
@@ -93,19 +86,14 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             'additional_item_limit' => 0
         );
 
-        $shipment->getMethod()->willReturn($method);
-        $method->getConfiguration()->willReturn($configuration);
 
-        $shippingItems->count()->willReturn(5);
-        $shipment->getItems()->willReturn($shippingItems);
+        $shipment->getShippingItemCount()->willReturn(5);
 
-        $this->calculate($shipment)->shouldReturn(2700);
+        $this->calculate($shipment, $configuration)->shouldReturn(2700);
     }
 
     /**
      * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     * @param Doctrine\Common\Collections\Collection                     $shippingItems
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
      */
     function it_should_calculate_the_first_and_every_additional_item_cost_taking_limit_into_account($shipment, $shippingItems, $method)
     {
@@ -115,12 +103,8 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             'additional_item_limit' => 3
         );
 
-        $shipment->getMethod()->willReturn($method);
-        $method->getConfiguration()->willReturn($configuration);
+        $shipment->getShippingItemCount()->willReturn(8);
 
-        $shippingItems->count()->willReturn(8);
-        $shipment->getItems()->willReturn($shippingItems);
-
-        $this->calculate($shipment)->shouldReturn(2400);
+        $this->calculate($shipment, $configuration)->shouldReturn(2400);
     }
 }

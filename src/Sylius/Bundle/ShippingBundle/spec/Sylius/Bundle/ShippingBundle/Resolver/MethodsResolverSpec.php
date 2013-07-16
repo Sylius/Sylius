@@ -21,11 +21,11 @@ class MethodsResolverSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository $methodRepository
-     * @param Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface $eliglibilityChecker
+     * @param Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
-    function let($methodRepository, $eliglibilityChecker)
+    function let($methodRepository, $eligibilityChecker)
     {
-        $this->beConstructedWith($methodRepository, $eliglibilityChecker);
+        $this->beConstructedWith($methodRepository, $eligibilityChecker);
     }
 
     function it_is_initializable()
@@ -45,15 +45,15 @@ class MethodsResolverSpec extends ObjectBehavior
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method3
      */
     function it_returns_all_methods_eliglible_for_given_subject(
-        $methodRepository, $eliglibilityChecker, $subject, $method1, $method2, $method3
+        $methodRepository, $eligibilityChecker, $subject, $method1, $method2, $method3
     )
     {
         $methods = array($method1, $method2, $method3);
         $methodRepository->findBy(array())->shouldBeCalled()->willReturn($methods);
 
-        $eliglibilityChecker->isEliglible($subject, $method1)->shouldBeCalled()->willReturn(true);
-        $eliglibilityChecker->isEliglible($subject, $method2)->shouldBeCalled()->willReturn(true);
-        $eliglibilityChecker->isEliglible($subject, $method3)->shouldBeCalled()->willReturn(false);
+        $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(true);
+        $eligibilityChecker->isEligible($subject, $method2)->shouldBeCalled()->willReturn(true);
+        $eligibilityChecker->isEligible($subject, $method3)->shouldBeCalled()->willReturn(false);
 
         $this->getSupportedMethods($subject)->shouldReturn(array($method1, $method2));
     }
@@ -65,16 +65,16 @@ class MethodsResolverSpec extends ObjectBehavior
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method3
      */
     function it_filters_the_methods_pool_by_given_criteria(
-        $methodRepository, $eliglibilityChecker, $subject, $method1, $method2, $method3
+        $methodRepository, $eligibilityChecker, $subject, $method1, $method2, $method3
     )
     {
         $methods = array($method1, $method3);
         $methodRepository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn($methods);
 
-        $eliglibilityChecker->isEliglible($subject, $method1)->shouldBeCalled()->willReturn(false);
-        $eliglibilityChecker->isEliglible($subject, $method2)->shouldNotBeCalled();
-        $eliglibilityChecker->isEliglible($subject, $method3)->shouldBeCalled()->willReturn(true);
+        $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(false);
+        $eligibilityChecker->isEligible($subject, $method2)->shouldNotBeCalled();
+        $eligibilityChecker->isEligible($subject, $method3)->shouldBeCalled()->willReturn(true);
 
-        $this->getSupportedMethods($subject, array('enabled' => true))->shouldReturn(array($method1, $method3));
+        $this->getSupportedMethods($subject, array('enabled' => true))->shouldReturn(array($method3));
     }
 }

@@ -15,7 +15,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
- * Shipping method eliglibility checker interface.
+ * Shipping method eligibility checker interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */

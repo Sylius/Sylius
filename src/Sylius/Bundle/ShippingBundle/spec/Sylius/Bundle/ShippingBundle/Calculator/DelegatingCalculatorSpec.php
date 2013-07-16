@@ -31,14 +31,9 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculator');
     }
 
-    function it_should_implement_Sylius_shipping_calculator_interface()
+    function it_implements_Sylius_delegating_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface');
-    }
-
-    function it_should_extend_base_Sylius_shipping_calculator()
-    {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\Calculator');
+        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface');
     }
 
     /**
@@ -62,11 +57,13 @@ class DelegatingCalculatorSpec extends ObjectBehavior
     function it_should_delegate_calculation_to_a_calculator_defined_on_shipping_method($registry, $shipment, $method, $calculator)
     {
         $shipment->getMethod()->willReturn($method);
+
         $method->getCalculator()->willReturn('default');
+        $method->getConfiguration()->willReturn(array());
 
         $registry->getCalculator('default')->willReturn($calculator);
-        $calculator->calculate($shipment)->shouldBeCalled()->willReturn(1000);
+        $calculator->calculate($shipment, array())->shouldBeCalled()->willReturn(1000);
 
-        $this->calculate($shipment)->shouldReturn(1000);
+        $this->calculate($shipment, array())->shouldReturn(1000);
     }
 }

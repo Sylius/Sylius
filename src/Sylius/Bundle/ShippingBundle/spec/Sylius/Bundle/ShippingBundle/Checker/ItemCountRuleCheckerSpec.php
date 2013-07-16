@@ -30,48 +30,40 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Countable                                                   $countable
      */
-    function it_should_recognize_empty_subject_as_not_eligible($subject, $countable)
+    function it_should_recognize_empty_subject_as_not_eligible($subject)
     {
-        $countable->count()->shouldBeCalled()->willReturn(0);
-        $subject->getShippables()->shouldBeCalled()->willReturn($countable);
+        $subject->getShippingItemCount()->shouldBeCalled()->willReturn(0);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
     /**
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Countable                                                   $countable
      */
-    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured($subject, $countable)
+    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured($subject)
     {
-        $countable->count()->shouldBeCalled()->willReturn(7);
-        $subject->getShippables()->shouldBeCalled()->willReturn($countable);
+        $subject->getShippingItemCount()->shouldBeCalled()->willReturn(7);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
     /**
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Countable                                                   $countable
      */
-    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured($subject, $countable)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured($subject)
     {
-        $countable->count()->shouldBeCalled()->willReturn(12);
-        $subject->getShippables()->shouldBeCalled()->willReturn($countable);
+        $subject->getShippingItemCount()->shouldBeCalled()->willReturn(12);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
     /**
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Countable                                                   $countable
      */
-    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($subject, $countable)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($subject)
     {
-        $countable->count()->shouldBeCalled()->willReturn(10);
-        $subject->getShippables()->shouldBeCalled()->willReturn($countable);
+        $subject->getShippingItemCount()->shouldBeCalled()->willReturn(10);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
         $this->isEligible($subject, array('count' => 10, 'equal' => true))->shouldReturn(true);

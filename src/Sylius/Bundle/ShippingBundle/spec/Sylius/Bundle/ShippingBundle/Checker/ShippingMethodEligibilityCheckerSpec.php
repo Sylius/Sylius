@@ -33,7 +33,7 @@ class ShippingMethodEligibilityChecker extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityChecker');
     }
 
-    function it_implements_Sylius_shipping_method_eliglibility_checker_interface()
+    function it_implements_Sylius_shipping_method_eligibility_checker_interface()
     {
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface');
     }

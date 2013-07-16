@@ -59,9 +59,9 @@ class RuleTypeSpec extends ObjectBehavior
      * @param Symfony\Component\Form\FormBuilder          $builder
      * @param Symfony\Component\Form\FormFactoryInterface $factory
      */
-    function it_should_add_build_promotion_rule_event_subscriber($builder, $factory)
+    function it_should_add_rule_event_subscriber($builder, $factory)
     {
-        $builder->add(Argument::any())->willReturn($builder);
+        $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
         $builder

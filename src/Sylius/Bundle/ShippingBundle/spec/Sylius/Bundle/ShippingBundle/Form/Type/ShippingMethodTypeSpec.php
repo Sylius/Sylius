@@ -28,7 +28,9 @@ class ShippingMethodTypeSpec extends ObjectBehavior
     function let($calculatorRegistry, $checkerRegistry, $builder, $factory)
     {
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
+
         $builder->getFormFactory()->willReturn($factory);
+        $checkerRegistry->getCheckers()->willReturn(array());
     }
 
     function it_is_a_form_type()
@@ -39,8 +41,10 @@ class ShippingMethodTypeSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields($builder, $calculatorRegistry)
     {
+        $calculatorRegistry->getCalculators()->willReturn(array());
+
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder
             ->add('name', 'text', Argument::any())
@@ -76,21 +80,26 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
+
         $this->buildForm($builder, array());
     }
 
     /**
      * @param Symfony\Component\Form\FormBuilder $builder
      */
-    function it_adds_build_shipping_method_event_subscriber($builder)
+    function it_adds_build_shipping_method_event_subscriber($builder, $calculatorRegistry)
     {
-        $builder->add(Argument::any())->willReturn($builder);
+        $calculatorRegistry->getCalculators()->willReturn(array());
+        $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
 
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener'))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
+
+        $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }
@@ -111,7 +120,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
     )
     {
         $builder
-            ->add(Argument::any())
+            ->add(Argument::any(), Argument::cetera())
             ->willReturn($builder)
         ;
         $builder
@@ -172,47 +181,6 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $this->buildForm($builder, array());
-    }
-
-    /**
-     * @param Symfony\Component\Form\FormView $formView
-     * @param Symfony\Component\Form\FormBuilder $builder
-     * @param Symfony\Component\Form\Form $form
-     * @param Symfony\Component\Form\Form $flatRateForm
-     * @param Symfony\Component\Form\FormView $flatRateFormView
-     * @param Symfony\Component\Form\Form $perItemRateForm
-     * @param Symfony\Component\Form\FormView $perItemRateFormView
-     */
-    function it_creates_form_view_for_calculators_prototypes_when_building_view(
-        $formView, $builder, $form, $flatRateForm, $flatRateFormView, $perItemRateForm, $perItemRateFormView
-    )
-    {
-        $flatRateForm
-            ->createView($formView)
-            ->willReturn($flatRateFormView)
-            ->shouldBeCalled()
-        ;
-        $perItemRateForm
-            ->createView($formView)
-            ->willReturn($perItemRateFormView)
-            ->shouldBeCalled()
-        ;
-
-        $builder
-            ->getAttribute('prototypes')
-            ->willReturn(array(
-                'calculators' => array(
-                    'flat_rate'     => $flatRateForm,
-                    'per_item_rate' => $perItemRateForm
-                )
-            ))
-        ;
-        $form->getConfig()->willReturn($builder);
-
-        $this->buildView($formView, $form, array());
-
-        $formView->vars['prototypes']['calculators_flat_rate']->shouldBe($flatRateFormView);
-        $formView->vars['prototypes']['calculators_per_item_rate']->shouldBe($perItemRateFormView);
     }
 
     /**
