@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\VariableProductBundle\Form\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -52,9 +52,9 @@ class BuildVariantFormListener implements EventSubscriberInterface
     /**
      * Builds proper variant form after setting the product.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
-    public function preSetData(DataEvent $event)
+    public function preSetData(FormEvent $event)
     {
         $variant = $event->getData();
         $form = $event->getForm();
@@ -72,8 +72,9 @@ class BuildVariantFormListener implements EventSubscriberInterface
         // If product has options, lets add this configuration field.
         if ($product->hasOptions()) {
             $form->add($this->factory->createNamed('options', 'sylius_option_value_collection', $variant->getOptions(), array(
-                'options'  => $product->getOptions(),
-                'disabled' => $disabled
+                'options'         => $product->getOptions(),
+                'disabled'        => $disabled,
+                'auto_initialize' => false
             )));
         }
     }

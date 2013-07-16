@@ -46,6 +46,7 @@
 
         <service id="sylius.form.type.variant" class="%sylius.form.type.variant.class%">
             <argument>%sylius.model.variant.class%</argument>
+            <argument>%sylius.validation_group.variant%</argument>
             <tag name="form.type" alias="sylius_variant" />
         </service>
         <service id="sylius.form.type.variant_choice" class="%sylius.form.type.variant_choice.class%">

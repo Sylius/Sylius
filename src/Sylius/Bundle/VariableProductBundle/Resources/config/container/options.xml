@@ -34,6 +34,7 @@ http://symfony.com/schema/dic/services/services-1.0.xsd">
 
         <service id="sylius.form.type.option" class="%sylius.form.type.option.class%">
             <argument>%sylius.model.option.class%</argument>
+            <argument>%sylius.validation_group.option%</argument>
             <tag name="form.type" alias="sylius_option" />
         </service>
         <service id="sylius.form.type.option_choice" class="%sylius.form.type.option_choice.class%">
@@ -43,6 +44,7 @@ http://symfony.com/schema/dic/services/services-1.0.xsd">
 
         <service id="sylius.form.type.option_value" class="%sylius.form.type.option_value.class%">
             <argument>%sylius.model.option_value.class%</argument>
+            <argument>%sylius.validation_group.option_value%</argument>
             <tag name="form.type" alias="sylius_option_value" />
         </service>
         <service id="sylius.form.type.option_value_choice" class="%sylius.form.type.option_value_choice.class%">

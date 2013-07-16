@@ -19,19 +19,9 @@
 >
 
     <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\Variant" table="sylius_variant">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
         <field name="master" column="is_master" type="boolean" />
         <field name="title" column="title" type="string" nullable="true" />
         <field name="availableOn" column="available_on" type="datetime" />
-        <field name="createdAt" column="created_at" type="datetime">
-            <gedmo:timestampable on="create"/>
-        </field>
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
-        </field>
-        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="variants">
             <join-column name="product_id" referenced-column-name="id" nullable="false" />
@@ -48,8 +38,15 @@
             </join-table>
         </many-to-many>
 
-        <gedmo:soft-deleteable field-name="deletedAt" />
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
+        <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>
 
 </doctrine-mapping>

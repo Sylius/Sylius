@@ -21,7 +21,7 @@ class OptionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Option');
+        $this->beConstructedWith('Option', array());
     }
 
     function it_is_initializable()
@@ -63,9 +63,9 @@ class OptionTypeSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    function it_defines_assigned_data_class($resolver)
+    function it_defines_assigned_data_class_and_validation_groups($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Option'))->shouldBeCalled();
+        $resolver->setDefaults(array('data_class' => 'Option', 'validation_groups' => array()))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
