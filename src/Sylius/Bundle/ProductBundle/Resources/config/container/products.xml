@@ -35,6 +35,7 @@
 
         <service id="sylius.form.type.product" class="%sylius.form.type.product.class%">
             <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product" />
         </service>
         <service id="sylius.form.type.product_to_identifier" class="%sylius.form.type.product_to_identifier.class%">

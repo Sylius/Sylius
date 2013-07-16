@@ -32,6 +32,7 @@
 
         <service id="sylius.form.type.property" class="%sylius.form.type.property.class%">
             <argument>%sylius.model.property.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_property" />
         </service>
         <service id="sylius.form.type.property_choice" class="%sylius.form.type.property_choice.class%">
@@ -40,6 +41,7 @@
         </service>
         <service id="sylius.form.type.product_property" class="%sylius.form.type.product_property.class%">
             <argument>%sylius.model.product_property.class%</argument>
+            <argument>%sylius.validation_group.product_property%</argument>
             <tag name="form.type" alias="sylius_product_property" />
         </service>
     </services>

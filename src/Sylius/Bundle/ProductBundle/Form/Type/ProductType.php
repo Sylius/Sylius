@@ -23,24 +23,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ProductType extends AbstractType
 {
     /**
-     * Data class.
+     * Validation groups.
      *
-     * @var string
+     * @var array
      */
-    protected $dataClass;
+    protected $validationGroups;
 
     /**
      * Constructor.
      *
-     * It's important to set the data class that was configured inside 'config.yml'.
-     * This will be done automatically when using this class, but if you would like to extend it,
-     * remember to pass '%sylius.model.product.class%' as an argument inside service definition.
-     *
-     * @param string $dataClass FQCN of the product model
+     * @param string $dataClass
+     * @param array  $validationGroups
      */
-    public function __construct($dataClass)
+    public function __construct($dataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -86,7 +84,8 @@ class ProductType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class'        => $this->dataClass,
+                'validation_groups' => $this->validationGroups
             ))
         ;
     }
