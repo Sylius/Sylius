@@ -14,7 +14,7 @@ namespace Sylius\Bundle\InventoryBundle\Entity;
 use Sylius\Bundle\InventoryBundle\Model\Stockable as BaseStockable;
 
 /**
- * Stocakble entity.
+ * Stockable entity.
  *
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
