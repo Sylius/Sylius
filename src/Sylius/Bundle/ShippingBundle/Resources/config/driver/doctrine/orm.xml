@@ -21,6 +21,7 @@
         <parameter key="sylius.repository.shipment_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.shipping_category.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.shipping_method.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.shipping_method_rule.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
 
         <parameter key="sylius.form.type.shipping_category_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryEntityType</parameter>
     </parameters>
@@ -78,6 +79,20 @@
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
                     <argument>%sylius.model.shipping_method.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.shipping_method_rule" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.shipping_method_rule" class="%sylius.repository.shipping_method_rule.class%">
+            <argument type="service" id="sylius.manager.shipping_method_rule" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.shipping_method_rule"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.shipping_method_rule.class%</argument>
                 </service>
             </argument>
         </service>

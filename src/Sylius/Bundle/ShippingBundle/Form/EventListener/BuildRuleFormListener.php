@@ -70,7 +70,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
     {
         $checker = $this->checkerRegistry->getChecker($ruleType);
-        $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data);
+        $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data, array('auto_initialize' => false));
 
         $form->add($configurationField);
     }

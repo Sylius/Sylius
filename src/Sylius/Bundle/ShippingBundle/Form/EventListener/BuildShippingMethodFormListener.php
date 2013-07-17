@@ -110,7 +110,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
             return;
         }
 
-        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $data);
+        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $data, array('auto_initialize' => false));
 
         $form->add($configurationField);
     }

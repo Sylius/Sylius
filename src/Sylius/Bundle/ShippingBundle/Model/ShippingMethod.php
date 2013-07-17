@@ -258,7 +258,7 @@ class ShippingMethod implements ShippingMethodInterface
     public function addRule(RuleInterface $rule)
     {
         if (!$this->hasRule($rule)) {
-            $rule->setShippingMethod($this);
+            $rule->setMethod($this);
             $this->rules->add($rule);
         }
 
@@ -270,7 +270,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function removeRule(RuleInterface $rule)
     {
-        $rule->setShippingMethod(null);
+        $rule->setMethod(null);
         $this->rules->removeElement($rule);
 
         return $this;
