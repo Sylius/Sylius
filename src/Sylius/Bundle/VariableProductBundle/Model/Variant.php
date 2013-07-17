@@ -36,11 +36,11 @@ class Variant implements VariantInterface
     protected $master;
 
     /**
-     * Variant title.
+     * Variant presentation.
      *
      * @var string
      */
-    protected $title;
+    protected $presentation;
 
     /**
      * Product.
@@ -124,17 +124,17 @@ class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
+    public function getPresentation()
     {
-        return $this->title;
+        return $this->presentation;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
+    public function setPresentation($presentation)
     {
-        $this->title = $title;
+        $this->presentation = $presentation;
 
         return $this;
     }

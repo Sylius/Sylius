@@ -20,7 +20,7 @@
 
     <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\Variant" table="sylius_variant">
         <field name="master" column="is_master" type="boolean" />
-        <field name="title" column="title" type="string" nullable="true" />
+        <field name="presentation" column="presentation" type="string" nullable="true" />
         <field name="availableOn" column="available_on" type="datetime" />
 
         <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="variants">

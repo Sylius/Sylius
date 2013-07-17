@@ -18,7 +18,7 @@ use Sylius\Bundle\VariableProductBundle\Validator\Constraint\VariantUnique;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class VariantUniqueValidator extends ObjectBehavior
+class VariantUniqueValidatorSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository          $variantRepository
@@ -47,16 +47,14 @@ class VariantUniqueValidator extends ObjectBehavior
     function it_should_add_violation_if_variant_with_given_property_value_already_exists($variantRepository, $variant, $conflictualVariant, $context)
     {
         $constraint = new VariantUnique(array(
-            'property' => 'sku',
-            'message'  => 'Variant with given sku already exists'
+            'property' => 'presentation',
+            'message'  => 'Variant with given presentation already exists'
         ));
 
-        $variant->getSku()->willReturn('IPHONE5WHITE');
-        $variantRepository->findOneBy(array('sku' => 'IPHONE5WHITE'))->shouldBeCalled()->willReturn($conflictualVariant);
-        $variant->getId()->willReturn(1);
-        $conflictualVariant->getId()->willReturn(3);
+        $variant->getPresentation()->willReturn('IPHONE5WHITE');
+        $variantRepository->findOneBy(array('presentation' => 'IPHONE5WHITE'))->shouldBeCalled()->willReturn($conflictualVariant);
 
-        $context->addViolationAt('sku', 'Variant with given sku already exists', Argument::any())->shouldBeCalled();
+        $context->addViolationAt('presentation', 'Variant with given presentation already exists', Argument::any())->shouldBeCalled();
 
         $this->validate($variant, $constraint);
     }
@@ -67,12 +65,12 @@ class VariantUniqueValidator extends ObjectBehavior
     function it_should_not_add_violation_if_variant_with_given_property_value_does_not_exist($variantRepository, $variant, $context)
     {
         $constraint = new VariantUnique(array(
-            'property' => 'sku',
-            'message'  => 'Variant with given sku already exists'
+            'property' => 'presentation',
+            'message'  => 'Variant with given presentation already exists'
         ));
 
-        $variant->getSku()->willReturn('111AAA');
-        $variantRepository->findOneBy(array('sku' => '111AAA'))->shouldBeCalled()->willReturn(null);
+        $variant->getPresentation()->willReturn('111AAA');
+        $variantRepository->findOneBy(array('presentation' => '111AAA'))->shouldBeCalled()->willReturn(null);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 
@@ -80,20 +78,17 @@ class VariantUniqueValidator extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $conflictualVariant
      * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
      */
-    function it_should_not_add_violation_if_conflictual_variant_and_validated_one_are_the_same($variantRepository, $variant, $conflictualVariant, $context)
+    function it_should_not_add_violation_if_conflictual_variant_and_validated_one_are_the_same($variantRepository, $variant, $context)
     {
         $constraint = new VariantUnique(array(
-            'property' => 'sku',
-            'message'  => 'Variant with given sku already exists'
+            'property' => 'presentation',
+            'message'  => 'Variant with given presentation already exists'
         ));
 
-        $variant->getSku()->willReturn('111AAA');
-        $variantRepository->findOneBy(array('sku' => '111AAA'))->shouldBeCalled()->willReturn($conflictualVariant);
-        $variant->getId()->willReturn(3);
-        $conflictualVariant->getId()->willReturn(3);
+        $variant->getPresentation()->willReturn('111AAA');
+        $variantRepository->findOneBy(array('presentation' => '111AAA'))->shouldBeCalled()->willReturn($variant);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 

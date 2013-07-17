@@ -23,7 +23,7 @@ class VariantToIdentifierTransformerSpec extends ObjectBehavior
      */
     function let($variantRepository)
     {
-        $this->beConstructedWith($variantRepository, 'title');
+        $this->beConstructedWith($variantRepository, 'presentation');
     }
 
     function it_is_initializable()
@@ -51,7 +51,7 @@ class VariantToIdentifierTransformerSpec extends ObjectBehavior
      */
     function it_transforms_variant_into_its_identifier_value($variant)
     {
-        $variant->getTitle()->willReturn('IPHONE5BLACK');
+        $variant->getPresentation()->willReturn('IPHONE5BLACK');
 
         $this->transform($variant)->shouldReturn('IPHONE5BLACK');
     }
@@ -64,7 +64,7 @@ class VariantToIdentifierTransformerSpec extends ObjectBehavior
     function it_returns_null_if_variant_not_found_on_reverse_transform($variantRepository)
     {
         $variantRepository
-            ->findOneBy(array('title' => 'IPHONE5WHITE'))
+            ->findOneBy(array('presentation' => 'IPHONE5WHITE'))
             ->shouldBeCalled()
             ->willReturn(null)
         ;
@@ -78,7 +78,7 @@ class VariantToIdentifierTransformerSpec extends ObjectBehavior
     function it_returns_variant_if_found_on_reverse_transform($variantRepository, $variant)
     {
         $variantRepository
-            ->findOneBy(array('title' => 'IPHONE5BLACK'))
+            ->findOneBy(array('presentation' => 'IPHONE5BLACK'))
             ->shouldBeCalled()
             ->willReturn($variant)
         ;

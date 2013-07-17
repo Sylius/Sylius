@@ -42,21 +42,21 @@ interface VariantInterface extends SoftDeletableInterface, TimestampableInterfac
     public function setMaster($master);
 
     /**
-     * Get title.
+     * Get presentation.
      *
      * This should be generated from option values
      * when no other is set.
      *
      * @return string
      */
-    public function getTitle();
+    public function getPresentation();
 
     /**
-     * Set custom title.
+     * Set custom presentation.
      *
-     * @param string $title
+     * @param string $presentation
      */
-    public function setTitle($title);
+    public function setPresentation($presentation);
 
     /**
      * Get product.

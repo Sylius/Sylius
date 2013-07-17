@@ -55,7 +55,7 @@ class VariantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array(
+            ->add('presentation', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.variant.presentation'
             ))

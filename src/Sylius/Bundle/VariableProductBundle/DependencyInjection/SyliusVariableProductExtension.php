@@ -38,10 +38,10 @@ class SyliusVariableProductExtension extends Extension
 
         $driver = $container->getParameter('sylius_product.driver');
 
+        $this->loadDriver($driver, $config, $loader);
+
         $this->mapClassParameters($config['classes'], $container);
         $this->mapValidationGroupParameters($config['validation_groups'], $container);
-
-        $this->loadDriver($driver, $config, $loader);
     }
 
     /**

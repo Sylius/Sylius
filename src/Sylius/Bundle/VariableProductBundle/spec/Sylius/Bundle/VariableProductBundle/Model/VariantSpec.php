@@ -73,15 +73,15 @@ class VariantSpec extends ObjectBehavior
         $this->shouldBeMaster();
     }
 
-    function it_should_not_have_title_by_default()
+    function it_should_not_have_presentation_by_default()
     {
-        $this->getTitle()->shouldReturn(null);
+        $this->getPresentation()->shouldReturn(null);
     }
 
-    function its_title_should_be_mutable()
+    function its_presentation_should_be_mutable()
     {
-        $this->setTitle('Super variant');
-        $this->getTitle()->shouldReturn('Super variant');
+        $this->setPresentation('Super variant');
+        $this->getPresentation()->shouldReturn('Super variant');
     }
 
     function it_should_initialize_option_values_collection_by_default()
