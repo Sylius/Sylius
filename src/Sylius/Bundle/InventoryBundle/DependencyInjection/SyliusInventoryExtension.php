@@ -53,6 +53,8 @@ class SyliusInventoryExtension extends Extension
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
 
+        $classes = $config['classes'];
+
         $container->setParameter('sylius.controller.inventory_unit.class', $classes['unit']['controller']);
         $container->setParameter('sylius.model.inventory_unit.class', $classes['unit']['model']);
 
