@@ -29,19 +29,23 @@
         <property name="price">
             <constraint name="NotBlank">
                 <option name="message">sylius.variant.price.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0.01</option>
                 <option name="minMessage">sylius.variant.price.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="onHand">
             <constraint name="NotBlank">
                 <option name="message">sylius.variant.onHand.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0</option>
                 <option name="minMessage">sylius.variant.onHand.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -50,6 +54,7 @@
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_shipping.method.zone.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -58,6 +63,7 @@
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_taxation.rate.zone.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

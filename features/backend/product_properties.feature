@@ -98,11 +98,11 @@ Feature: Product properties
             | type         | <value>     |
 
         Examples:
-          | label   | value    |
-          | Boolean | checkbox |
-          | String  | text     |
-          | Choice  | choice   |
-          | Number  | number   |
+          | label    | value    |
+          | Checkbox | checkbox |
+          | Text     | text     |
+          | Choice   | choice   |
+          | Number   | number   |
 
     @javascript
     Scenario: Create new choice property with many choices

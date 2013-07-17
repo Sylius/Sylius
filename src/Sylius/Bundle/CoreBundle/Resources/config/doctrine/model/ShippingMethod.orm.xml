@@ -14,12 +14,11 @@
             <join-column name="zone_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
-        <one-to-many field="rules" target-entity="Sylius\Bundle\ShippingBundle\Model\RuleInterface" mapped-by="mathod">
+        <one-to-many field="rules" target-entity="Sylius\Bundle\ShippingBundle\Model\RuleInterface" mapped-by="method">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-
     </entity>
 
 </doctrine-mapping>

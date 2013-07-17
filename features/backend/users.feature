@@ -5,21 +5,27 @@ Feature: Users management
 
     Background:
         Given I am logged in as administrator
-        And the following zones are defined:
-          | name         | type    | members                       |
-          | German lands | country | Germany, Austria, Switzerland |
-        And there are following users:
-          | email          | enabled | address                                                |
-          | beth@foo.com   | no      | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-          | martha@foo.com | yes     | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-          | rick@foo.com   | no      | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-          | dale @foo.com  | yes     | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-        And the following zones are defined:
-          | name   | type    | members |
-          | Poland | country | Poland  |
-        And the following orders were placed:
-          | user | address                                        |
-          | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+          And there are products:
+            | name | price |
+            | Mug  | 5.99  |
+          And the following zones are defined:
+            | name         | type    | members                       |
+            | German lands | country | Germany, Austria, Switzerland |
+          And there are following users:
+            | email          | enabled | address                                                |
+            | beth@foo.com   | no      | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
+            | martha@foo.com | yes     | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
+            | rick@foo.com   | no      | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
+            | dale @foo.com  | yes     | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
+          And the following zones are defined:
+            | name   | type    | members |
+            | Poland | country | Poland  |
+          And the following orders were placed:
+            | user | address                                        |
+            | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+        And order #000001 has following items:
+            | product | quantity |
+            | Mug     | 2        |
 
     Scenario: Seeing index of all users
         Given I am on the dashboard page
@@ -62,48 +68,46 @@ Feature: Users management
          When I fill in the following:
             | First name | Saša               |
             | Last name  | Stamenković        |
-            | Username   | umpirsky           |
             | Password   | Password           |
             | Email      | umpirsky@gmail.com |
           And I fill in the users shipping address to Germany
           And I press "Create"
-         Then I should be on the page of user with username "umpirsky"
+         Then I should be on the page of user with username "umpirsky@gmail.com"
           And I should see "User has been successfully created."
 
     Scenario: Accessing the user editing form
-        Given I am on the page of user with username "rick"
+        Given I am on the page of user with username "rick@foo.com"
          When I follow "edit"
-         Then I should be editing user with username "rick"
+         Then I should be editing user with username "rick@foo.com"
 
     Scenario: Accessing the editing form from the list
         Given I am on the user index page
-         When I click "edit" near "rick"
-         Then I should be editing user with username "rick"
+         When I click "edit" near "rick@foo.com"
+         Then I should be editing user with username "rick@foo.com"
 
     Scenario: Updating the user
-        Given I am editing user with username "rick"
-         When I fill in "Username" with "umpirsky"
-          And I fill in "Email" with "umpirsky@gmail.com"
+        Given I am editing user with username "rick@foo.com"
+         When I fill in "Email" with "umpirsky@gmail.com"
           And I press "Save changes"
-         Then I should be on the page of user with username "umpirsky"
+         Then I should be on the page of user with username "umpirsky@gmail.com"
           And "User has been successfully updated." should appear on the page
           And "umpirsky@gmail.com" should appear on the page
 
     Scenario: Deleting user
-        Given I am on the page of user with username "rick"
+        Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
          Then I should be on the user index page
           And I should see "User has been successfully deleted."
 
     Scenario: Deleted user disappears from the list
-        Given I am on the page of user with username "rick"
+        Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
          Then I should be on the user index page
-          And I should not see user with username "rick" in that list
+          And I should not see user with username "rick@foo.com" in that list
 
     Scenario: Deleting user from the list
         Given I am on the user index page
-         When I click "delete" near "rick"
+         When I click "delete" near "rick@foo.com"
          Then I should still be on the user index page
           And "User has been successfully deleted." should appear on the page
-          But I should not see user with username "rick" in that list
+          But I should not see user with username "rick@foo.com" in that list

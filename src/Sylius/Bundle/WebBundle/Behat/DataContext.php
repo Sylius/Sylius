@@ -676,6 +676,29 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^shipping method "([^""]*)" has following rules defined:$/
+     */
+    public function theShippingMethodHasFollowingRulesDefined($name, TableNode $table)
+    {
+        $shippingMethod = $this->findOneByName('shipping_method', $name);
+
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('shipping_method_rule');
+
+        foreach ($table->getHash() as $data) {
+            $rule = $repository->createNew();
+            $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
+            $rule->setConfiguration($this->getConfiguration($data['configuration']));
+
+            $shippingMethod->addRule($rule);
+
+            $manager->persist($rule);
+        }
+
+        $manager->flush();
+    }
+
+    /**
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
      */
