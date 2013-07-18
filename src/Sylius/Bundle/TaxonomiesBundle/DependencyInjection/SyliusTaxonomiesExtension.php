@@ -37,7 +37,6 @@ class SyliusTaxonomiesExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $driver = $config['driver'];
-        $engine = $config['engine'];
 
         if (!in_array($driver, SyliusTaxonomiesBundle::getSupportedDrivers())) {
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusTaxonomiesBundle.', $config['driver']));
@@ -46,7 +45,7 @@ class SyliusTaxonomiesExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_taxonomies.driver', $driver);
-        $container->setParameter('sylius.engine', $engine);
+        $container->setParameter('sylius_taxonomies.driver.'.$driver, true);
 
         $classes = $config['classes'];
 

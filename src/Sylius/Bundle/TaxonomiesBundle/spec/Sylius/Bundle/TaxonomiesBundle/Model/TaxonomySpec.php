@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Taxonomy spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Taxonomy extends ObjectBehavior
+class TaxonomySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -60,6 +58,7 @@ class Taxonomy extends ObjectBehavior
     function its_name_is_mutable($taxon)
     {
         $taxon->setName('Brand')->shouldBeCalled();
+        $taxon->setTaxonomy($this)->shouldBeCalled();
         $this->setRoot($taxon);
 
         $this->setName('Brand');
@@ -72,6 +71,7 @@ class Taxonomy extends ObjectBehavior
     function it_also_sets_name_on_the_root_taxon($taxon)
     {
         $taxon->setName('Category')->shouldBeCalled();
+        $taxon->setTaxonomy($this)->shouldBeCalled();
         $this->setRoot($taxon);
 
         $this->setName('Category');

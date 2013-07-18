@@ -27,13 +27,12 @@ class TaxonController extends ResourceController
     public function createNew()
     {
         if (null === $taxonomyId = $this->getRequest()->get('taxonomyId')) {
-            throw new NotFoundHttpException('No taxonomy given');
+            throw new NotFoundHttpException('No taxonomy id given.');
         }
 
-        $taxonomy = $this
-            ->getTaxonomyController()
-            ->findOr404(array('id' => $taxonomyId))
-        ;
+        if (!$taxonomy = $this->getTaxonomyRepository()->find($taxonomyId)) {
+            throw new NotFoundHttpException('Requested taxonomy does not exist.');
+        }
 
         $taxon = parent::createNew();
         $taxon->setTaxonomy($taxonomy);
@@ -42,12 +41,12 @@ class TaxonController extends ResourceController
     }
 
     /**
-     * Get taxonomy controller.
+     * Get taxonomy repository.
      *
-     * @return ResourceController
+     * @return ObjectRepository
      */
-    protected function getTaxonomyController()
+    protected function getTaxonomyRepository()
     {
-        return $this->get('sylius.controller.taxonomy');
+        return $this->get('sylius.repository.taxonomy');
     }
 }

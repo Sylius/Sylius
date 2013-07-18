@@ -78,6 +78,27 @@ class Taxon implements TaxonInterface
     protected $description;
 
     /**
+     * Required by DoctrineExtensions.
+     *
+     * @var mixed
+     */
+    protected $left;
+
+    /**
+     * Required by DoctrineExtensions.
+     *
+     * @var mixed
+     */
+    protected $right;
+
+    /**
+     * Required by DoctrineExtensions.
+     *
+     * @var mixed
+     */
+    protected $level;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -257,5 +278,57 @@ class Taxon implements TaxonInterface
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLeft()
+    {
+        return $this->left;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLeft($left)
+    {
+        $this->left = $left;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRight($right)
+    {
+        $this->right = $right;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
     }
 }
