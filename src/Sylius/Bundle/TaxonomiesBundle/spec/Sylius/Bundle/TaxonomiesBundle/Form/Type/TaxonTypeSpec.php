@@ -43,9 +43,9 @@ class TaxonTypeSpec extends ObjectBehavior
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\TaxonomiesBundle\Form\EventListener\BuildTaxonFormListener'))->shouldBeCalled();
 
-        $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
-        $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
-        $builder->add('description', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
+        $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('permalink', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('description', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }
