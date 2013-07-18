@@ -73,9 +73,10 @@ class BuildTaxonFormListener implements EventSubscriberInterface
             'filter'      => $this->getFilterTaxonOption($taxon),
             'required'    => false,
             'label'       => 'sylius.form.taxon.parent',
-            'empty_value' => '---'
+            'empty_value' => '---',
+            'auto_initialize' => false,
         )));
-}
+    }
 
     /**
      * Reset the taxon root if it's null.

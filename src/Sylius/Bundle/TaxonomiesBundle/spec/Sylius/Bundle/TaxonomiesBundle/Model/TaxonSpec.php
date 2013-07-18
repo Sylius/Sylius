@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Model;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Taxon spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Taxon extends ObjectBehavior
+class TaxonSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

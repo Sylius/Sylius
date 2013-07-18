@@ -6,9 +6,7 @@ Flexible categorization system based on [Spree Taxonomies system](http://guides.
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
-
-Visit [Sylius.org](http://sylius.org).
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
 [phpspec2](http://phpspec.net) examples
 ---------------------------------------
@@ -21,17 +19,12 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusTaxonomiesBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusTaxonomiesBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
@@ -42,7 +35,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Taxon form spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxonType extends ObjectBehavior
+class TaxonTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -42,6 +41,7 @@ class TaxonType extends ObjectBehavior
     function it_builds_form_with_name_and_permalink_and_description_fields($builder, $factory)
     {
         $builder->getFormFactory()->willReturn($factory);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\TaxonomiesBundle\Form\EventListener\BuildTaxonFormListener'))->shouldBeCalled();
 
         $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);
         $builder->add('permalink', 'text', ANY_ARGUMENT)->shouldBeCalled()->willReturn($builder);

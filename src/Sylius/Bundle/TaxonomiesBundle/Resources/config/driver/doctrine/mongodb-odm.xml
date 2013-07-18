@@ -24,10 +24,10 @@
     <services>
         <service id="sylius.manager.taxonomy" alias="doctrine.odm.mongodb.document_manager" />
         <service id="sylius.doctrine.odm.mongodb.metadata.taxonomy"
-                factory-service="sylius.manager.taxonomy"
-                factory-method="getClassMetadata"
-                class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
-                public="false"
+            factory-service="sylius.manager.taxonomy"
+            factory-method="getClassMetadata"
+            class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
+            public="false"
                 >
             <argument>%sylius.model.taxonomy.class%</argument>
         </service>

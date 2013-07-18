@@ -16,8 +16,15 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Entity\Taxonomy" table="sylius_taxonomy">
+    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy">
         <field name="name" column="name" type="string" />
+
+        <many-to-one field="root" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
+            <join-column name="root_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

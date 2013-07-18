@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
- * Taxonomy form type.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxonomyType extends ObjectBehavior
+class TaxonomyTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -40,7 +39,7 @@ class TaxonomyType extends ObjectBehavior
      */
     function it_builds_form_with_name_field($builder)
     {
-        $builder->add('name', 'text', ANY_ARGUMENT)->shouldBeCalled();
+        $builder->add('name', 'text', Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }

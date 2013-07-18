@@ -46,7 +46,7 @@ class SyliusTaxonomiesExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_taxonomies.driver', $driver);
-        $container->setParameter('sylius.engine', $engine);
+        $container->setParameter('sylius_taxonomies.driver.'.$driver, true);
 
         $classes = $config['classes'];
 
