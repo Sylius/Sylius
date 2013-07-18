@@ -27,7 +27,7 @@ class TaxonController extends ResourceController
     public function createNew()
     {
         if (null === $taxonomyId = $this->getRequest()->get('taxonomyId')) {
-            throw new NotFoundHttpException('No taxonomy given.');
+            throw new NotFoundHttpException('No taxonomy id given.');
         }
 
         if (!$taxonomy = $this->getTaxonomyRepository()->find($taxonomyId)) {

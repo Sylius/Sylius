@@ -37,20 +37,20 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->end()
             ->end();
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
+     * Adds `validation_groups` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -67,22 +67,38 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `classes` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
+                    ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('taxonomy')
+                            ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->cannotBeEmpty()->end()
+                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('taxon')
+                            ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->cannotBeEmpty()->end()
+                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\TaxonomiesBundle\\Controller\\TaxonController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType')->end()
