@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8663fafadbc25cb3e014cf3e22161dd3",
+    "hash": "b853d99e8c885f5ab88e606814841d1a",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -1019,12 +1019,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "a9c1c8b76abe4622b285dcd7aa342cab9dfb6de6"
+                "reference": "3613b1466d5e9518b83f87d828f93f962ff0f997"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a9c1c8b76abe4622b285dcd7aa342cab9dfb6de6",
-                "reference": "a9c1c8b76abe4622b285dcd7aa342cab9dfb6de6",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/3613b1466d5e9518b83f87d828f93f962ff0f997",
+                "reference": "3613b1466d5e9518b83f87d828f93f962ff0f997",
                 "shasum": ""
             },
             "require": {
@@ -1033,12 +1033,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
-                    "Faker": "src/"
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1056,7 +1057,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2013-04-23 12:35:55"
+            "time": "2013-07-15 16:26:12"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2192,6 +2193,111 @@
                 "menu"
             ],
             "time": "2013-03-18 17:08:00"
+        },
+        {
+            "name": "knplabs/knp-snappy",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/snappy.git",
+                "reference": "2e6d2fb18ecbf20449da4dacda9611cda5851106"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/2e6d2fb18ecbf20449da4dacda9611cda5851106",
+                "reference": "2e6d2fb18ecbf20449da4dacda9611cda5851106",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "google/wkhtmltopdf-amd64": "Provide wkhtmltopdf-amd64 binary, use version `0.11.0-RC1` as dependency",
+                "google/wkhtmltopdf-i386": "Provide wkhtmltopdf-i386 binary, use version `0.11.0-RC1` as dependency",
+                "symfony/process": "Process Component of Symfony2."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Snappy": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
+                }
+            ],
+            "description": "PHP5 library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
+            "homepage": "http://github.com/KnpLabs/snappy",
+            "keywords": [
+                "knp",
+                "knplabs",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2013-07-10 09:06:39"
+        },
+        {
+            "name": "knplabs/knp-snappy-bundle",
+            "version": "dev-master",
+            "target-dir": "Knp/Bundle/SnappyBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
+                "reference": "7540f32c2d0cf0a1932ff8c7228e6637556f1014"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/7540f32c2d0cf0a1932ff8c7228e6637556f1014",
+                "reference": "7540f32c2d0cf0a1932ff8c7228e6637556f1014",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/knp-snappy": "*",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.0.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Bundle\\SnappyBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/KnpSnappyBundle/contributors"
+                }
+            ],
+            "description": "Easily create PDF and images in Symfony2 by converting Twig/HTML templates.",
+            "homepage": "http://github.com/KnpLabs/KnpSnappyBundle",
+            "keywords": [
+                "bundle",
+                "knp",
+                "knplabs",
+                "pdf",
+                "snappy"
+            ],
+            "time": "2013-07-10 09:09:18"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -5123,6 +5229,7 @@
         "mathiasverraes/money": 20,
         "sylius/omnipay-bundle": 20,
         "fsc/hateoas-bundle": 20,
+        "knplabs/knp-snappy-bundle": 20,
         "phpspec/phpspec2": 20
     },
     "platform": {
