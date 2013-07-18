@@ -13,13 +13,15 @@
 
 <doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
       xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
-                    http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd"
-      xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                          http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\InventoryBundle\Document\InventoryUnit">
+    <mapped-superclass name="Sylius\Bundle\InventoryBundle\Model\InventoryUnit">
         <field name="inventoryState" fieldName="inventoryState" type="string" />
+
         <reference-one fieldName="stockable" target-document="Sylius\Bundle\InventoryBundle\Model\StockableInterface" />
+
         <field fieldName="createdAt" name="createdAt" type="date">
             <gedmo:timestampable on="create"/>
         </field>
