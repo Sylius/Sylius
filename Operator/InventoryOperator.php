@@ -91,7 +91,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $units = $this->create($stockable, $quantity, $state);
 
-        // Backorder units
+        // Backorder units.
         $i = 0;
         foreach ($units as $unit) {
             if (++$i > $onHand) {
@@ -150,6 +150,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         foreach ($units as $unit) {
             $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+
             if (--$onHand === 0) {
                 break;
             }

@@ -37,55 +37,41 @@ class SyliusInventoryExtension extends Extension
         $config = $processor->processConfiguration($configuration, $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        if (!in_array($config['engine'], array('twig'))) {
-            throw new \InvalidArgumentException(sprintf('Engine "%s" is unsupported for this extension.', $config['engine']));
-        }
-
         $driver = $config['driver'];
-        $engine = $config['engine'];
 
         if (!in_array($driver, SyliusInventoryBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for this extension', $driver));
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusInventoryBundle.', $driver));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
-        $loader->load(sprintf('engine/%s.xml', $engine));
 
         $container->setParameter('sylius_inventory.driver', $driver);
-        $container->setParameter('sylius_inventory.engine', $engine);
+        $container->setParameter('sylius_inventory.driver.'.$driver, true);
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
 
-        $unitClasses = $config['classes']['unit'];
+        $classes = $config['classes'];
 
-        $container->setParameter('sylius.controller.inventory_unit.class', $unitClasses['controller']);
-        $container->setParameter('sylius.model.inventory_unit.class', $unitClasses['model']);
+        $container->setParameter('sylius.controller.inventory_unit.class', $classes['unit']['controller']);
+        $container->setParameter('sylius.model.inventory_unit.class', $classes['unit']['model']);
 
-        if (array_key_exists('repository', $unitClasses)) {
-            $container->setParameter('sylius.repository.inventory_unit.class', $unitClasses['repository']);
+        if (array_key_exists('repository', $classes['unit'])) {
+            $container->setParameter('sylius.repository.inventory_unit.class', $classes['unit']['repository']);
         }
 
-        $stockableClasses = $config['classes']['stockable'];
-
-        $container->setParameter('sylius.controller.stockable.class', $stockableClasses['controller']);
-        $container->setParameter('sylius.model.stockable.class', $stockableClasses['model']);
-
-        if (array_key_exists('repository', $stockableClasses)) {
-            $container->setParameter('sylius.repository.stockable.class', $stockableClasses['repository']);
-        }
+        $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
 
         $loader->load('services.xml');
+        $loader->load('twig.xml');
 
         $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
+
         if (isset($config['events'])) {
             foreach ($config['events'] as $event) {
-                $listenerDefinition->addTag(
-                    'kernel.event_listener',
-                    array('event' => $event, 'method' => 'onInventoryChange')
-                );
+                $listenerDefinition->addTag('kernel.event_listener', array('event' => $event, 'method' => 'onInventoryChange'));
             }
         }
     }
