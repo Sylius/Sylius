@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\SalesBundle\Generator;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\SalesBundle\Repository\OrderRepositoryInterface;
 
 /**
  * Default order number generator.
@@ -24,7 +24,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     /**
      * Order repository.
      *
-     * @var ObjectRepository
+     * @var OrderRepositoryInterface
      */
     protected $repository;
 
@@ -38,10 +38,10 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     /**
      * Constructor.
      *
-     * @param ObjectRepository $repository
-     * @param integer          $numberLength
+     * @param OrderRepositoryInterface $repository
+     * @param integer                  $numberLength
      */
-    public function __construct(ObjectRepository $repository, $numberLength = 6)
+    public function __construct(OrderRepositoryInterface $repository, $numberLength = 6)
     {
         $this->repository = $repository;
         $this->numberLength = $numberLength;
@@ -62,12 +62,12 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      */
     protected function getLastOrderNumber()
     {
-        $lastOrder = current($this->repository->findBy(array(), array('id' => 'desc'), 1));
+        $lastOrders = $this->repository->findRecentOrders(1);
 
-        if (!$lastOrder) {
+        if (empty($lastOrders)) {
             return str_repeat('0', $this->numberLength);
         }
 
-        return $lastOrder->getNumber();
+        return current($lastOrders)->getNumber();
     }
 }
