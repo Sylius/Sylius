@@ -13,9 +13,9 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Entity\ZoneMemberZone">
-        <many-to-one field="zone" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneInterface">
-            <join-column name="zone_id" referenced-column-name="id" />
+    <entity name="Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry">
+        <many-to-one field="country" target-entity="Sylius\Bundle\AddressingBundle\Model\CountryInterface">
+            <join-column name="country_id" referenced-column-name="id" />
         </many-to-one>
     </entity>
 

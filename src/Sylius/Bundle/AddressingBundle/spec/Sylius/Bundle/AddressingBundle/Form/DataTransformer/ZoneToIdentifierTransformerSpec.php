@@ -1,15 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\AddressingBundle\Form\DataTransformer;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Zone to identifier transformer spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ZoneToIdentifierTransformer extends ObjectBehavior
+class ZoneToIdentifierTransformerSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository $zoneRepository
@@ -19,12 +26,12 @@ class ZoneToIdentifierTransformer extends ObjectBehavior
         $this->beConstructedWith($zoneRepository, 'name');
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\DataTransformer\ZoneToIdentifierTransformer');
     }
 
-    function it_should_return_empty_string_if_null_transormed()
+    function it_returns_empty_string_if_null_transormed()
     {
         $this->transform(null)->shouldReturn('');
     }
@@ -49,12 +56,12 @@ class ZoneToIdentifierTransformer extends ObjectBehavior
         $this->transform($zone)->shouldReturn('EU');
     }
 
-    function it_should_return_null_if_empty_string_reverse_transformed()
+    function it_returns_null_if_empty_string_reverse_transformed()
     {
         $this->reverseTransform('')->shouldReturn(null);
     }
 
-    function it_should_return_null_if_zone_not_found_on_reverse_transform($zoneRepository)
+    function it_returns_null_if_zone_not_found_on_reverse_transform($zoneRepository)
     {
         $zoneRepository
             ->findOneBy(array('name' => 'EU'))

@@ -38,16 +38,16 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
-        $country = $this
-            ->getCountryController()
-            ->findOr404(array('id' => $countryId))
-        ;
+        if (!$country = $this->getCountryRepository()->find($countryId)) {
+            throw new NotFoundHttpException('Requested country does not exist.');
+        }
 
         if (!$country->hasProvinces()) {
             return new JsonResponse(array('content' => false));
         }
 
         $form = $this->createProvinceChoiceForm($country);
+
         $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
             'form' => $form->createView()
         ));
@@ -78,13 +78,13 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country controller.
+     * Get country repository.
      *
-     * @return ResourceController
+     * @return ObjectRepository
      */
-    protected function getCountryController()
+    protected function getCountryRepository()
     {
-        return $this->get('sylius.controller.country');
+        return $this->get('sylius.repository.country');
     }
 
     /**
@@ -97,8 +97,8 @@ class ProvinceController extends ResourceController
         return $this
             ->get('form.factory')
             ->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
-                'country' => $country,
-                'label'   => 'sylius.form.address.province',
+                'country'     => $country,
+                'label'       => 'sylius.form.address.province',
                 'empty_value' => 'sylius.form.province.select'
             ))
         ;

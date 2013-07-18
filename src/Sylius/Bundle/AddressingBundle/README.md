@@ -1,39 +1,39 @@
-SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
 ======================
 
-Addressing system Symfony2 applications. With minimal configuration you can introduce addresses, countries and provinces management into your project.  
-It's fully customizable, but the default setup should be optimal for many use cases.  
-Includes models, forms, validation, mappings and controllers which will help you build a solution that meets the application needs.
+Addresses management is a common task for almost every ecommerce application.  
+This bundle, with minimal configuration, provides you sensible models and architecture for addresses, countries and provinces.
+
+It's fully customizable - you can easily add custom fields to your address entity, or split it into several models to handle different address types.
+Includes a set of forms that will be sufficient for most popular actions.
+
+Countries can handle multiple provinces (states), and you can easily extend that to more levels by introducing your own models.
+
+Bundle also supports very flexible Zones system, which allows you to group countries and provinces into geographical areas.
+Every address can be matched against all defined zones, which is useful for tax or shipping systems.
 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-Visit [Sylius.org](http://sylius.org).
-
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
 ``` bash
 $ composer install --dev --prefer-dist
-$ bin/phpspec run -f pretty
+$ bin/phpspec run -fpretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusAddressingBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusAddressingBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
@@ -44,7 +44,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

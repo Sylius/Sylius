@@ -37,21 +37,21 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
+     * Adds `validation_groups` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -80,13 +80,26 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `classes` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('address')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->isRequired()->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\AddressType')->end()
@@ -95,7 +108,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('country')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\Country')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\CountryType')->end()
@@ -104,7 +117,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('province')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\Province')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Controller\\ProvinceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ProvinceType')->end()
@@ -113,7 +126,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\Zone')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneType')->end()
@@ -122,7 +135,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone_member')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneMember')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneMemberType')->end()
@@ -131,7 +144,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone_member_country')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneMemberCountry')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneMemberCountryType')->end()
                             ->end()
@@ -139,7 +152,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone_member_province')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneMemberProvince')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneMemberProvinceType')->end()
                             ->end()
@@ -147,7 +160,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone_member_zone')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneMemberZone')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneMemberZoneType')->end()
                             ->end()

@@ -17,12 +17,15 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 /**
  * Zone matcher interface.
  *
+ * Service implementing this interface should be able to find
+ * best matching zones for provided address model.
+ *
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 interface ZoneMatcherInterface
 {
     /**
-     * Returns best matching zone for given address if any.
+     * Returns best matching zone for given address.
      *
      * @param AddressInterface $address
      *

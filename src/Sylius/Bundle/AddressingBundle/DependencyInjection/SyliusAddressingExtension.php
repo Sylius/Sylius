@@ -39,13 +39,13 @@ class SyliusAddressingExtension extends Extension
         $driver = $config['driver'];
 
         if (!in_array($driver, SyliusAddressingBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusAddressingBundle', $driver));
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusAddressingBundle.', $driver));
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
 
-        $container->setParameter('sylius.driver', $driver);
-        $container->setParameter('sylius.engine', $config['engine']);
+        $container->setParameter('sylius_addressing.driver', $driver);
+        $container->setParameter('sylius_addressing.driver.'.$driver, true);
 
         $this->mapClassParameters($config['classes'], $container);
         $this->mapValidationGroupParameters($config['validation_groups'], $container);

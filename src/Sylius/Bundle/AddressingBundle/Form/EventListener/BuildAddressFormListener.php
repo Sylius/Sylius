@@ -96,9 +96,12 @@ class BuildAddressFormListener implements EventSubscriberInterface
             return;
         }
 
-        $countryId = $data['country'];
+        $country = $this->countryRepository->find($data['country']);
 
-        $country = $this->countryRepository->find($countryId);
+        if (null === $country) {
+            return;
+        }
+
 
         if ($country->hasProvinces()) {
             $form->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(

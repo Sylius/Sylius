@@ -11,15 +11,14 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * This bundle provides simple architecture for addresses management.
- * Future plans include zone management, useful for e-commerce applications,
- * where you need set specific tax/shipping rates for concrete zone.
+ * Sylius addressing and zones management bundle.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -50,6 +49,12 @@ class SyliusAddressingBundle extends Bundle
             'Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_addressing', $interfaces));
+
+        $mappings = array(
+            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\AddressingBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_addressing.driver.doctrine/orm'));
     }
 }
