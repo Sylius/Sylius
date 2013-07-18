@@ -1,14 +1,18 @@
 CHANGELOG
 =========
 
-### v0.2.0
+### v0.3.0
 
 * Symfony 2.3 upgrade.
 * Removal of ``Entity`` namespace, extend ``Model`` instead.
 
+### v0.2.0
+
+* Last version compatible with Symfony 2.2.
+
 ### v0.1.0
 
-* Initial dev release, last compatible version with Symfony 2.3.
+* Initial dev release.
 
 ### 11-02-2013
 
