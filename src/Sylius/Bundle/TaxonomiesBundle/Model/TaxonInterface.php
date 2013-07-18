@@ -19,13 +19,6 @@ namespace Sylius\Bundle\TaxonomiesBundle\Model;
 interface TaxonInterface
 {
     /**
-     * Get taxon id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
-    /**
      * Get the taxonomy.
      *
      * @return TaxonomyInterface
@@ -131,4 +124,11 @@ interface TaxonInterface
      * @param string $permalink
      */
     public function setPermalink($permalink);
+
+    public function getLeft();
+    public function setLeft($left);
+    public function getRight();
+    public function setRight($right);
+    public function getLevel();
+    public function setLevel($level);
 }
