@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Entity;
+namespace Sylius\Bundle\VariableProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -40,4 +40,3 @@ class VariableProductRepository extends EntityRepository
         return 'product';
     }
 }
-
