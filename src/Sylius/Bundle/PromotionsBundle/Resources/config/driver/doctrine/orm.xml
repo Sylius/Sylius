@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.repository.promotion.class">Sylius\Bundle\PromotionsBundle\Repository\PromotionRepository</parameter>
+        <parameter key="sylius.repository.promotion.class">Sylius\Bundle\PromotionsBundle\Doctrine\ORM\PromotionRepository</parameter>
         <parameter key="sylius.repository.promotion_coupon.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.promotion_rule.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.promotion_action.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>

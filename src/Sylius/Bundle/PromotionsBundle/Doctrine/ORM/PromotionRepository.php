@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Repository;
+namespace Sylius\Bundle\PromotionsBundle\Doctrine\ORM;
 
+use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
