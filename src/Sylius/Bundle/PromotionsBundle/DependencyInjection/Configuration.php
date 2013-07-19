@@ -34,16 +34,16 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -88,6 +88,14 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
