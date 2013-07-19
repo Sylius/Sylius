@@ -17,7 +17,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
- * Option values combination to variant trasnformer.
+ * Option values combination to variant transformer.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
