@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CartBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -39,7 +40,7 @@ class CartItemTypeSpec extends ObjectBehavior
     function it_builds_form_with_quantity_field($builder)
     {
         $builder
-            ->add('quantity', 'integer', ANY_ARGUMENT)
+            ->add('quantity', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

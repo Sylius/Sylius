@@ -19,9 +19,9 @@ use PhpSpec\ObjectBehavior;
 class CartProviderSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface $storage
-     * @param Doctrine\Common\Persistence\ObjectManager             $manager
-     * @param Doctrine\Common\Persistence\ObjectRepository          $repository
+     * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface  $storage
+     * @param Doctrine\Common\Persistence\ObjectManager              $manager
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
      */
     function let($storage, $manager, $repository)
     {
