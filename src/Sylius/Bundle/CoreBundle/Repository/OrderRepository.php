@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
-use FOS\UserBundle\Model\UserInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use YaLinqo\Enumerable;
 use DateTime;
+use FOS\UserBundle\Model\UserInterface;
+use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use YaLinqo\Enumerable;
 
-class OrderRepository extends EntityRepository
+class OrderRepository extends BaseOrderRepository
 {
     /**
      * Create user orders paginator.

@@ -229,6 +229,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $order->calculateTotal();
         $order->complete();
 
+        $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+
         $manager->persist($order);
         $manager->flush();
     }

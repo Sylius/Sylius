@@ -9,9 +9,16 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <many-to-one field="variant" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface">
             <join-column name="variant_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
+
+        <one-to-many field="adjustments" target-entity="Sylius\Bundle\SalesBundle\Model\AdjustmentInterface" mapped-by="orderItem" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </entity>
 
 </doctrine-mapping>

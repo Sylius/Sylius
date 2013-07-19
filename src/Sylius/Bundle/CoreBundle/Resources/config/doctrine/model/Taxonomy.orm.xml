@@ -10,14 +10,6 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="name" column="name" type="string" />
-
-        <many-to-one field="root" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
-            <join-column name="root_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </many-to-one>
     </entity>
 
 </doctrine-mapping>

@@ -11,13 +11,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" column="name" type="string" />
-        <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
-            <gedmo:tree-path-source />
-        </field>
-
-        <many-to-one field="parent" target-entity="Sylius\Bundle\CoreBundle\Model\Taxon">
+        <many-to-one field="parent" target-entity="Sylius\Bundle\CoreBundle\Model\Taxon" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
         </many-to-one>
@@ -27,16 +21,6 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-
-        <gedmo:tree type="materializedPath" />
-
-        <field name="permalink" column="permalink" type="string" unique="true" nullable="true">
-            <gedmo:tree-path separator="/" />
-        </field>
-
-        <field name="level" column="level" type="integer" nullable="true">
-            <gedmo:tree-level />
-        </field>
     </entity>
 
 </doctrine-mapping>

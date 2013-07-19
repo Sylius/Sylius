@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\CartBundle\Model\CartItem;
+use Sylius\Bundle\SalesBundle\Model\OrderItemInterface as BaseOrderItemInterface;
 
 /**
  * Order item model.
@@ -51,5 +52,10 @@ class OrderItem extends CartItem implements OrderItemInterface
         $this->variant = $variant;
 
         return $this;
+    }
+
+    public function equals(BaseOrderItemInterface $item)
+    {
+        return $item->getVariant() === $this->variant;
     }
 }
