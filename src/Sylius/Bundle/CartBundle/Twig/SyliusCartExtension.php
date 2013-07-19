@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Twig;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Symfony\Component\Form\FormFactory;
 use Twig_Extension;
 use Twig_Function_Method;
@@ -34,7 +34,7 @@ class SyliusCartExtension extends Twig_Extension
     /**
      * Cart item manager.
      *
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $cartItemRepository;
 
@@ -49,10 +49,10 @@ class SyliusCartExtension extends Twig_Extension
      * Constructor.
      *
      * @param CartProviderInterface $cartProvider
-     * @param ObjectRepository      $cartItemRepository
+     * @param RepositoryInterface      $cartItemRepository
      * @param FormFactory           $formFactory
      */
-    public function __construct(CartProviderInterface $cartProvider, ObjectRepository $cartItemRepository, FormFactory $formFactory)
+    public function __construct(CartProviderInterface $cartProvider, RepositoryInterface $cartItemRepository, FormFactory $formFactory)
     {
         $this->cartProvider = $cartProvider;
         $this->cartItemRepository = $cartItemRepository;

@@ -11,18 +11,16 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Twig;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Sylius cart extensions for Twig spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartExtension extends ObjectBehavior
+class SyliusCartExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $cartProvider
-     * @param Doctrine\Common\Persistence\ObjectRepository            $itemRepository
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface  $itemRepository
      * @param Symfony\Component\Form\FormFactory                      $formFactory
      */
     function let($cartProvider, $itemRepository, $formFactory)
@@ -52,7 +50,7 @@ class SyliusCartExtension extends ObjectBehavior
 
     /**
      * @param Symfony\Component\Form\Form                      $form
-     * @param Symfony\Component\Form\FormViewInterface         $formView
+     * @param Symfony\Component\Form\FormView                  $formView
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
      */
     function its_getItemFormView_returns_a_form_view_of_cart_item_form(
@@ -68,7 +66,7 @@ class SyliusCartExtension extends ObjectBehavior
 
     /**
      * @param Symfony\Component\Form\Form                      $form
-     * @param Symfony\Component\Form\FormViewInterface         $formView
+     * @param Symfony\Component\Form\FormView                  $formView
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
      */
     function its_getItemFormView_uses_given_options_when_creating_form(

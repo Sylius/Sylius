@@ -11,15 +11,13 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Storage;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CartBundle\Storage\SessionCartStorage as SessionCartStorageClass;
 
 /**
- * Session cart storage spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SessionCartStorage extends ObjectBehavior
+class SessionCartStorageSpec extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session

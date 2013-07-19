@@ -60,9 +60,7 @@ abstract class Controller extends ResourceController
      */
     protected function getProvider()
     {
-
         return $this->container->get('sylius.cart_provider');
-
     }
 
     /**

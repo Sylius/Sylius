@@ -21,6 +21,7 @@
             <constraint name="Valid" />
         </property>
     </class>
+
     <class name="Sylius\Bundle\CartBundle\Model\CartItem">
         <property name="quantity">
             <constraint name="NotBlank">

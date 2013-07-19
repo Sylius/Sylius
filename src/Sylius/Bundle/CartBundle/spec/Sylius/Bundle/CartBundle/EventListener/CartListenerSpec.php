@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 /**
- * Cart listener spec.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class CartListener extends ObjectBehavior
+class CartListenerSpec extends ObjectBehavior
 {
     /**
      * @param Doctrine\Common\Persistence\ObjectManager               $manager

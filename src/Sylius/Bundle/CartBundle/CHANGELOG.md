@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+### v0.5.0
+
+* Symfony 2.3 compatible version.
+* Removed `Entity` classes.
+* Based on SyliusSalesBundle order model.
+
+### v0.4.0
+
+* Last Symfony 2.2 compatible version.
+
 ### v0.3.0
 
 * Remove `CartOperator` & `CartOperatorInterface`.

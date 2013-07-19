@@ -16,12 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CartBundle\Entity\Cart" table="sylius_cart">
-        <field name="locked" column="locked" type="boolean" />
-        <field name="totalItems" column="total_items" type="integer" />
-        <field name="totalQuantity" column="total_quantity" type="integer" />
-        <field name="total" column="total" type="integer" />
-        <field name="expiresAt" column="expires_at" type="datetime" />
+    <mapped-superclass name="Sylius\Bundle\CartBundle\Model\CartItem">
     </mapped-superclass>
 
 </doctrine-mapping>
