@@ -13,6 +13,9 @@ product variations with very flexible architecture.
    :numbered:
 
    installation
-   models
-   services
-   summary
+   product
+   properties
+   forms
+   prototypes
+   product_builder
+   configuration

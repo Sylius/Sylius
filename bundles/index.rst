@@ -6,6 +6,7 @@ Bundles reference
 
     SyliusResourceBundle/index
     SyliusProductBundle/index
+    SyliusVariableProductBundle/index
     SyliusCartBundle/index
     SyliusSalesBundle/index
     SyliusAddressingBundle/index
