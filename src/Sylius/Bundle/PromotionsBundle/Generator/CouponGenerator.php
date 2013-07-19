@@ -66,6 +66,6 @@ class CouponGenerator implements CouponGeneratorInterface
 
     protected function isUsedCode($code)
     {
-        return null !== $this->repository->findOneByCode($code);
+        return null !== $this->repository->findOneBy(array('code' => $code));
     }
 }

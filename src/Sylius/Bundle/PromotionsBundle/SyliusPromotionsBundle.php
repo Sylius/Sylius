@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\PromotionsBundle;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use Sylius\Bundle\PromotionsBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\PromotionsBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\PromotionsBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Promotions are used to give discounts or other types of rewards to customers.
@@ -44,5 +45,11 @@ class SyliusPromotionsBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_promotions', $interfaces));
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterPromotionActionsPass());
+
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\PromotionsBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_promotions.driver.doctrine/orm'));
     }
 }

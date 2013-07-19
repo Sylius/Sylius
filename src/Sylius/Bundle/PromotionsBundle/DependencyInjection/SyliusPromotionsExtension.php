@@ -42,7 +42,7 @@ class SyliusPromotionsExtension extends Extension
         $loader->load(sprintf('driver/%s.xml', $driver));
 
         $container->setParameter('sylius_promotions.driver', $driver);
-        $container->setParameter('sylius_promotions.engine', $config['engine']);
+        $container->setParameter('sylius_promotions.driver.'.$driver, true);
 
         $this->mapClassParameters($config['classes'], $container);
         $this->mapValidationGroupParameters($config['validation_groups'], $container);

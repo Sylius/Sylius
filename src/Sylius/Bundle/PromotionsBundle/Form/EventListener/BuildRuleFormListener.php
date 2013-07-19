@@ -47,7 +47,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
     {
         $rule = $event->getData();
 
-        if (null === $rule || null === $rule->getId()) {
+        if (null === $rule || null === $rule->getType()) {
             return;
         }
 

@@ -40,6 +40,9 @@ class PromotionType extends AbstractType
         $this->actionRegistry = $actionRegistry;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -80,10 +83,13 @@ class PromotionType extends AbstractType
 
         $prototypes = array();
         $prototypes['rules'] = array();
+
         foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
+
         $prototypes['actions'] = array();
+
         foreach ($this->actionRegistry->getActions() as $type => $action) {
             $prototypes['actions'][$type] = $builder->create('__name__', $action->getConfigurationFormType())->getForm();
         }
@@ -91,6 +97,9 @@ class PromotionType extends AbstractType
         $builder->setAttribute('prototypes', $prototypes);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $this->vars['prototypes'] = array();
@@ -102,6 +111,9 @@ class PromotionType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -112,6 +124,9 @@ class PromotionType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion';

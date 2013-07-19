@@ -34,16 +34,16 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -88,46 +88,51 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('promotion')
-                            ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PromotionsBundle\Model\Promotion')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionsBundle\Form\Type\PromotionType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('promotion_rule')
-                            ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PromotionsBundle\Model\Rule')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionsBundle\Form\Type\RuleType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('promotion_coupon')
-                            ->isRequired()
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\PromotionsBundle\Controller\CouponController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionsBundle\Form\Type\CouponType')->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('promotion_action')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PromotionsBundle\Model\Action')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionsBundle\Form\Type\ActionType')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('promotion_coupon')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PromotionsBundle\Model\Coupon')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\PromotionsBundle\Controller\CouponController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\PromotionsBundle\Form\Type\CouponType')->end()
                             ->end()
                         ->end()
                     ->end()
