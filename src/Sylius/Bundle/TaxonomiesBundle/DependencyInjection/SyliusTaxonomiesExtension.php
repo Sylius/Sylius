@@ -56,6 +56,12 @@ class SyliusTaxonomiesExtension extends Extension
         $this->mapValidationGroupParameters($config['validation_groups'], $container);
 
         $loader->load('services.xml');
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        }
+
+        $container->setParameter('sylius.config.classes', $classes);
     }
 
     /**
