@@ -14,20 +14,22 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\ProductBundle\Model\Property" table="sylius_property">
+    <mapped-superclass name="Sylius\Bundle\ProductBundle\Model\Property" table="sylius_property">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="name" column="name" type="string" />
         <field name="presentation" column="presentation" type="string" />
         <field name="type" column="type" type="string" />
         <field name="configuration" column="configuration" type="array" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>
