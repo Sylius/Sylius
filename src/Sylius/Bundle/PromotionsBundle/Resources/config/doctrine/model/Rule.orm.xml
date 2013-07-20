@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="Sylius\Bundle\PromotionsBundle\Model\Rule" table="sylius_promotion_rule">
+    <mapped-superclass name="Sylius\Bundle\PromotionsBundle\Model\Rule" table="sylius_promotion_rule">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -25,6 +25,6 @@
         <many-to-one field="promotion" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="rules">
             <join-column name="promotion_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>
