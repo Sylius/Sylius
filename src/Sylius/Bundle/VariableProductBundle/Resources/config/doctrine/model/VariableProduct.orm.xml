@@ -19,6 +19,12 @@
 >
 
     <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\VariableProduct" table="sylius_product">
+        <one-to-many field="variants" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" mapped-by="product">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
         <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionInterface">
             <join-table name="sylius_product_option">
                 <join-columns>

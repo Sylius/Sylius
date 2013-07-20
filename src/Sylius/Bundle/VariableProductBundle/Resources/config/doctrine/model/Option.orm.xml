@@ -18,7 +18,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <entity name="Sylius\Bundle\VariableProductBundle\Model\Option" table="sylius_option">
+    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\Option" table="sylius_option">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -38,6 +38,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

@@ -18,7 +18,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <entity name="Sylius\Bundle\VariableProductBundle\Model\OptionValue" table="sylius_option_value">
+    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\OptionValue" table="sylius_option_value">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -28,6 +28,6 @@
         </many-to-one>
 
         <field name="value" column="value" type="string" />
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>
