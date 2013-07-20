@@ -12,17 +12,16 @@ namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
- * Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataListener
+ * Doctrine listener used to manipulate mappings.
  *
  * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
  */
 class LoadMetadataSubscriber implements EventSubscriber
 {
-
     /**
      * @var array
      */
@@ -55,28 +54,30 @@ class LoadMetadataSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
+
         foreach ($this->classes as $class) {
             if ($class['model'] === $metadata->getName()) {
                 $metadata->isMappedSuperclass = false;
             }
         }
+
         if (!$metadata->isMappedSuperclass) {
             foreach (class_parents($metadata->getName()) as $parent) {
                 $parentMetadata = new ClassMetadata(
                     $parent,
                     $eventArgs->getEntityManager()->getConfiguration()->getNamingStrategy()
                 );
+
                 $eventArgs
                     ->getEntityManager()
                     ->getConfiguration()
                     ->getMetadataDriverImpl()
-                    ->loadMetadataForClass(
-                        $parent,
-                        $parentMetadata
-                    );
+                    ->loadMetadataForClass($parent, $parentMetadata)
+                ;
+
                 if ($parentMetadata->isMappedSuperclass) {
                     foreach ($parentMetadata->getAssociationMappings() as $key => $value) {
-                        if ($value['type'] === ClassMetadataInfo::ONE_TO_MANY || $value['type'] === ClassMetadataInfo::ONE_TO_ONE) {
+                        if (ClassMetadataInfo::ONE_TO_MANY === $value['type'] || ClassMetadataInfo::ONE_TO_ONE  === $value['type']) {
                             $metadata->associationMappings[$key] = $value;
                         }
                     }

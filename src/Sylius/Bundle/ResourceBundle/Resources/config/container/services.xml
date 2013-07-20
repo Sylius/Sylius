@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius_resource.twig.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
-        <parameter key="sylius.event_subscribers.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
+        <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
     </parameters>
 
     <services>
@@ -27,7 +27,8 @@
             <tag name="twig.extension" />
             <tag name="kernel.event_listener" event="kernel.request" method="fetchRequest" />
         </service>
-        <service id="sylius.event_subscribers.load_metadata" class="%sylius.event_subscribers.load_metadata.class%">
+
+        <service id="sylius.event_subscriber.load_metadata" class="%sylius.event_subscriber.load_metadata.class%">
             <tag name="doctrine.event_subscriber" />
             <argument>%sylius.config.classes%</argument>
         </service>
