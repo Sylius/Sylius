@@ -6,7 +6,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\MoneyBundle\Model\ExchangeRate" table="sylius_exchange_rate">
+    <mapped-superclass name="Sylius\Bundle\MoneyBundle\Model\ExchangeRate" table="sylius_exchange_rate">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -20,6 +20,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

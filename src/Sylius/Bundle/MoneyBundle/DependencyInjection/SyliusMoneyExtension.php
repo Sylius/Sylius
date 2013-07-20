@@ -49,9 +49,17 @@ class SyliusMoneyExtension extends Extension
         $container->setParameter('sylius.money.locale', $config['locale']);
         $container->setParameter('sylius.money.currency', $config['currency']);
 
-        $this->mapClassParameters($config['classes'], $container);
+        $classes = $config['classes'];
+
+        $this->mapClassParameters($classes, $container);
 
         $loader->load('services.xml');
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        }
+
+        $container->setParameter('sylius.config.classes', $classes);
     }
 
     /**

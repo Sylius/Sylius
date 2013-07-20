@@ -36,7 +36,6 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
                 ->scalarNode('locale')->defaultValue('en')->cannotBeEmpty()->end()
                 ->scalarNode('currency')->defaultValue('EUR')->cannotBeEmpty()->end()
             ->end()
