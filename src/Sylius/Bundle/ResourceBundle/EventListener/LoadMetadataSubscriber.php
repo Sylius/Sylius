@@ -56,7 +56,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         foreach ($this->classes as $class) {
-            if ($class['model'] === $metadata->getName()) {
+            if (array_key_exists('model', $class) && $class['model'] === $metadata->getName()) {
                 $metadata->isMappedSuperclass = false;
             }
         }
