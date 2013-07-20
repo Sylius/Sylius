@@ -13,17 +13,19 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Model\Zone" table="sylius_zone">
+    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Model\Zone" table="sylius_zone">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
-        </id>
+          </id>
+
         <field name="name" column="name" type="string" />
         <field name="type" column="type" type="string" length="8" />
+
         <one-to-many field="members" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface" mapped-by="belongsTo">
             <cascade>
                 <cascade-all/>
             </cascade>
         </one-to-many>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

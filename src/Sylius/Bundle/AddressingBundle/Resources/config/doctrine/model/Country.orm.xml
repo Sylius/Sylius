@@ -13,10 +13,11 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <entity name="Sylius\Bundle\AddressingBundle\Model\Country" table="sylius_country">
+    <mapped-superclass name="Sylius\Bundle\AddressingBundle\Model\Country" table="sylius_country">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="name" column="name" type="string" />
         <field name="isoName" column="iso_name" type="string" />
         <one-to-many field="provinces" target-entity="Sylius\Bundle\AddressingBundle\Model\ProvinceInterface" mapped-by="country">
@@ -24,6 +25,6 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>
