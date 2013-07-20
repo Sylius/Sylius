@@ -15,10 +15,16 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Bundle\ShippingBundle\Model\ShipmentItem" table="sylius_shipment_item">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
         <field name="shippingState" column="shipping_state" type="string" nullable="false" />
+
         <many-to-one field="shipment" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentInterface">
             <join-column name="shipment_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
