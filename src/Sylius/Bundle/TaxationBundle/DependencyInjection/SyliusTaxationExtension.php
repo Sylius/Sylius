@@ -47,8 +47,16 @@ class SyliusTaxationExtension extends Extension
         $container->setParameter('sylius_taxation.driver', $driver);
         $container->setParameter('sylius_taxation.driver.'.$driver, true);
 
-        $this->mapClassParameters($config['classes'], $container);
+        $classes = $config['classes'];
+
+        $this->mapClassParameters($classes, $container);
         $this->mapValidationGroupParameters($config['validation_groups'], $container);
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        }
+
+        $container->setParameter('sylius.config.classes', $classes);
 
         $loader->load('services.xml');
     }
