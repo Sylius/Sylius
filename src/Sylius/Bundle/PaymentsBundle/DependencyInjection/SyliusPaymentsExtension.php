@@ -48,10 +48,18 @@ class SyliusPaymentsExtension extends Extension
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
 
-        $this->mapClassParameters($config['classes'], $container);
+        $classes = $config['classes'];
+
+        $this->mapClassParameters($classes, $container);
         $this->mapValidationGroupParameters($config['validation_groups'], $container);
 
         $loader->load('services.xml');
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        }
+
+        $container->setParameter('sylius.config.classes', $classes);
     }
 
     /**
