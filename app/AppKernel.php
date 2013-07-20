@@ -45,9 +45,9 @@ class AppKernel extends Kernel
             new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
             new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
 
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

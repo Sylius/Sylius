@@ -6,16 +6,6 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Sylius\Bundle\CoreBundle\Model\Shipment" table="sylius_shipment">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
-
-        <one-to-many field="items" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface" mapped-by="shipment" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
-
         <many-to-one field="order" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" inversed-by="shipments">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
         </many-to-one>

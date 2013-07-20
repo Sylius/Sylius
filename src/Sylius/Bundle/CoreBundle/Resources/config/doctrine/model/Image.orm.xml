@@ -5,10 +5,12 @@
 >
 
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Image">
-         <id name="id" column="id" type="integer">
+        <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
         <field name="path" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

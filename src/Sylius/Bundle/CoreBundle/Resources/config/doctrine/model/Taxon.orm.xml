@@ -6,10 +6,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\CoreBundle\Model\Taxon" table="sylius_taxon">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
+    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Taxon" table="sylius_taxon">
+        <field name="path" nullable="true" />
 
         <many-to-one field="parent" target-entity="Sylius\Bundle\CoreBundle\Model\Taxon" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
@@ -21,6 +19,6 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

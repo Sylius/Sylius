@@ -86,9 +86,6 @@ sylius_payments:
 
 sylius_addressing:
     driver: doctrine/orm
-    classes:
-        address:
-            model: Sylius\Bundle\CoreBundle\Model\Address
 
 sylius_sales:
     driver: doctrine/orm

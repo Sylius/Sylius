@@ -1015,12 +1015,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "93cc1c9d023ec77dadff5a6d6df1859e04295c3a"
+                "reference": "3cd559bee99b9265868d2350b4649226ddf49525"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/93cc1c9d023ec77dadff5a6d6df1859e04295c3a",
-                "reference": "93cc1c9d023ec77dadff5a6d6df1859e04295c3a",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/3cd559bee99b9265868d2350b4649226ddf49525",
+                "reference": "3cd559bee99b9265868d2350b4649226ddf49525",
                 "shasum": ""
             },
             "require": {
@@ -1087,7 +1087,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-07-19 10:23:18"
+            "time": "2013-07-19 19:49:05"
         },
         {
             "name": "guzzle/common",
@@ -1341,12 +1341,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "8e559af963b6442a208fcd8f9c675e60cf99e0f8"
+                "reference": "ba63d234e041632e340d30dbda46408f1f5b337e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/8e559af963b6442a208fcd8f9c675e60cf99e0f8",
-                "reference": "8e559af963b6442a208fcd8f9c675e60cf99e0f8",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/ba63d234e041632e340d30dbda46408f1f5b337e",
+                "reference": "ba63d234e041632e340d30dbda46408f1f5b337e",
                 "shasum": ""
             },
             "require": {
@@ -1359,7 +1359,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -1382,7 +1382,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2013-07-15 09:27:51"
+            "time": "2013-07-20 11:36:20"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3027,12 +3027,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusAddressingBundle.git",
-                "reference": "40adbb2bbd09d7d46a6800acf945502c1d3b78f0"
+                "reference": "c412878457960fb204f86f6d74d870fc33f90a26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/40adbb2bbd09d7d46a6800acf945502c1d3b78f0",
-                "reference": "40adbb2bbd09d7d46a6800acf945502c1d3b78f0",
+                "url": "https://api.github.com/repos/Sylius/SyliusAddressingBundle/zipball/c412878457960fb204f86f6d74d870fc33f90a26",
+                "reference": "c412878457960fb204f86f6d74d870fc33f90a26",
                 "shasum": ""
             },
             "require": {
@@ -3082,7 +3082,7 @@
                 "shop",
                 "zones"
             ],
-            "time": "2013-07-19 08:33:37"
+            "time": "2013-07-20 14:42:53"
         },
         {
             "name": "sylius/cart-bundle",
@@ -3275,12 +3275,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusInventoryBundle.git",
-                "reference": "174a22eb02025d530095fa8c2a355b1253b04a2b"
+                "reference": "85ca7c941d4b39ffc19f41c54df64a8fc4ce05a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusInventoryBundle/zipball/174a22eb02025d530095fa8c2a355b1253b04a2b",
-                "reference": "174a22eb02025d530095fa8c2a355b1253b04a2b",
+                "url": "https://api.github.com/repos/Sylius/SyliusInventoryBundle/zipball/85ca7c941d4b39ffc19f41c54df64a8fc4ce05a6",
+                "reference": "85ca7c941d4b39ffc19f41c54df64a8fc4ce05a6",
                 "shasum": ""
             },
             "require": {
@@ -3329,7 +3329,7 @@
                 "stock",
                 "sylius"
             ],
-            "time": "2013-07-19 09:22:01"
+            "time": "2013-07-20 15:08:33"
         },
         {
             "name": "sylius/money-bundle",
@@ -3338,12 +3338,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusMoneyBundle.git",
-                "reference": "664945dbeb1c5deb6eacb97df772767c90c3dd9f"
+                "reference": "cb1d0ccba8b4657d1c5b3bd7352e1b36fd7bd071"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusMoneyBundle/zipball/664945dbeb1c5deb6eacb97df772767c90c3dd9f",
-                "reference": "664945dbeb1c5deb6eacb97df772767c90c3dd9f",
+                "url": "https://api.github.com/repos/Sylius/SyliusMoneyBundle/zipball/cb1d0ccba8b4657d1c5b3bd7352e1b36fd7bd071",
+                "reference": "cb1d0ccba8b4657d1c5b3bd7352e1b36fd7bd071",
                 "shasum": ""
             },
             "require": {
@@ -3391,7 +3391,7 @@
                 "currency",
                 "money"
             ],
-            "time": "2013-07-15 07:16:49"
+            "time": "2013-07-20 15:13:09"
         },
         {
             "name": "sylius/omnipay-bundle",
@@ -3467,12 +3467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPaymentsBundle.git",
-                "reference": "4246a5008fc3cd58135c1fdf91431d8a519ef89b"
+                "reference": "af0e6991cad001381a1fab3306aa994347b01f8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPaymentsBundle/zipball/4246a5008fc3cd58135c1fdf91431d8a519ef89b",
-                "reference": "4246a5008fc3cd58135c1fdf91431d8a519ef89b",
+                "url": "https://api.github.com/repos/Sylius/SyliusPaymentsBundle/zipball/af0e6991cad001381a1fab3306aa994347b01f8a",
+                "reference": "af0e6991cad001381a1fab3306aa994347b01f8a",
                 "shasum": ""
             },
             "require": {
@@ -3521,7 +3521,7 @@
                 "shop",
                 "webshop"
             ],
-            "time": "2013-07-15 07:48:06"
+            "time": "2013-07-20 15:09:16"
         },
         {
             "name": "sylius/product-bundle",
@@ -3530,12 +3530,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusProductBundle.git",
-                "reference": "d1f4df34309bc64cf033fd9c6a1700e216e3d156"
+                "reference": "164eb6f997257dfe57eef015dd66928f60f076e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/d1f4df34309bc64cf033fd9c6a1700e216e3d156",
-                "reference": "d1f4df34309bc64cf033fd9c6a1700e216e3d156",
+                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/164eb6f997257dfe57eef015dd66928f60f076e2",
+                "reference": "164eb6f997257dfe57eef015dd66928f60f076e2",
                 "shasum": ""
             },
             "require": {
@@ -3585,7 +3585,7 @@
                 "products",
                 "shop"
             ],
-            "time": "2013-07-16 15:15:30"
+            "time": "2013-07-20 15:18:58"
         },
         {
             "name": "sylius/promotions-bundle",
@@ -3594,12 +3594,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusPromotionsBundle.git",
-                "reference": "bb962bcf39a7b4d19839770f6682ffaac1982a18"
+                "reference": "b4ed15c2aa929116348fea243fb757c993bbc57c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusPromotionsBundle/zipball/bb962bcf39a7b4d19839770f6682ffaac1982a18",
-                "reference": "bb962bcf39a7b4d19839770f6682ffaac1982a18",
+                "url": "https://api.github.com/repos/Sylius/SyliusPromotionsBundle/zipball/b4ed15c2aa929116348fea243fb757c993bbc57c",
+                "reference": "b4ed15c2aa929116348fea243fb757c993bbc57c",
                 "shasum": ""
             },
             "require": {
@@ -3650,7 +3650,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-07-19 12:42:45"
+            "time": "2013-07-20 15:06:39"
         },
         {
             "name": "sylius/resource-bundle",
@@ -3659,12 +3659,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "3fc87ee21ca721436585ebcfd6fe5fb2ecd4f002"
+                "reference": "68e40218a41002e6f19bc860dcef653b7f8a7b33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/3fc87ee21ca721436585ebcfd6fe5fb2ecd4f002",
-                "reference": "3fc87ee21ca721436585ebcfd6fe5fb2ecd4f002",
+                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/68e40218a41002e6f19bc860dcef653b7f8a7b33",
+                "reference": "68e40218a41002e6f19bc860dcef653b7f8a7b33",
                 "shasum": ""
             },
             "require": {
@@ -3719,7 +3719,7 @@
                 "storage",
                 "sylius"
             ],
-            "time": "2013-07-11 10:25:39"
+            "time": "2013-07-20 14:42:14"
         },
         {
             "name": "sylius/sales-bundle",
@@ -3728,12 +3728,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "ea6e96c9b73ccadfb473451fa835c9d8ddf67539"
+                "reference": "9cefc9a76452a8d82676858d7db90fee7b162015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/ea6e96c9b73ccadfb473451fa835c9d8ddf67539",
-                "reference": "ea6e96c9b73ccadfb473451fa835c9d8ddf67539",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/9cefc9a76452a8d82676858d7db90fee7b162015",
+                "reference": "9cefc9a76452a8d82676858d7db90fee7b162015",
                 "shasum": ""
             },
             "require": {
@@ -3784,7 +3784,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-07-19 09:49:57"
+            "time": "2013-07-20 15:19:17"
         },
         {
             "name": "sylius/settings-bundle",
@@ -3793,12 +3793,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSettingsBundle.git",
-                "reference": "28f04818cc4ef22eee22be24debdcf4f5810c574"
+                "reference": "1b42b7ff8e33146335f5e608bc17b834e18e840d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSettingsBundle/zipball/28f04818cc4ef22eee22be24debdcf4f5810c574",
-                "reference": "28f04818cc4ef22eee22be24debdcf4f5810c574",
+                "url": "https://api.github.com/repos/Sylius/SyliusSettingsBundle/zipball/1b42b7ff8e33146335f5e608bc17b834e18e840d",
+                "reference": "1b42b7ff8e33146335f5e608bc17b834e18e840d",
                 "shasum": ""
             },
             "require": {
@@ -3849,7 +3849,7 @@
                 "shop",
                 "webshop"
             ],
-            "time": "2013-07-15 07:09:58"
+            "time": "2013-07-20 15:05:53"
         },
         {
             "name": "sylius/shipping-bundle",
@@ -3858,12 +3858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusShippingBundle.git",
-                "reference": "3ef4e92281b0dd80f4d6330a20b79db782e5da1e"
+                "reference": "0afc242617d740e79e84dd2ec434242538647e1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/3ef4e92281b0dd80f4d6330a20b79db782e5da1e",
-                "reference": "3ef4e92281b0dd80f4d6330a20b79db782e5da1e",
+                "url": "https://api.github.com/repos/Sylius/SyliusShippingBundle/zipball/0afc242617d740e79e84dd2ec434242538647e1c",
+                "reference": "0afc242617d740e79e84dd2ec434242538647e1c",
                 "shasum": ""
             },
             "require": {
@@ -3915,7 +3915,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2013-07-17 15:44:24"
+            "time": "2013-07-20 15:09:56"
         },
         {
             "name": "sylius/taxation-bundle",
@@ -3924,12 +3924,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxationBundle.git",
-                "reference": "2cce0cac5549a5685c12d71da521842bf66614ee"
+                "reference": "54492b62e853ff7f69493a19e16d261e3d3d6615"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxationBundle/zipball/2cce0cac5549a5685c12d71da521842bf66614ee",
-                "reference": "2cce0cac5549a5685c12d71da521842bf66614ee",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxationBundle/zipball/54492b62e853ff7f69493a19e16d261e3d3d6615",
+                "reference": "54492b62e853ff7f69493a19e16d261e3d3d6615",
                 "shasum": ""
             },
             "require": {
@@ -3979,7 +3979,7 @@
                 "taxes",
                 "webshop"
             ],
-            "time": "2013-07-18 11:25:43"
+            "time": "2013-07-20 15:23:52"
         },
         {
             "name": "sylius/taxonomies-bundle",
@@ -3988,12 +3988,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusTaxonomiesBundle.git",
-                "reference": "47cd1420865ba6b424e3f2551a141046e3a1b037"
+                "reference": "1ab6b37d2da6404f396b75151932da3c3d5d9720"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/47cd1420865ba6b424e3f2551a141046e3a1b037",
-                "reference": "47cd1420865ba6b424e3f2551a141046e3a1b037",
+                "url": "https://api.github.com/repos/Sylius/SyliusTaxonomiesBundle/zipball/1ab6b37d2da6404f396b75151932da3c3d5d9720",
+                "reference": "1ab6b37d2da6404f396b75151932da3c3d5d9720",
                 "shasum": ""
             },
             "require": {
@@ -4045,7 +4045,7 @@
                 "taxonomies",
                 "taxonomy"
             ],
-            "time": "2013-07-18 11:08:53"
+            "time": "2013-07-20 15:07:10"
         },
         {
             "name": "sylius/variable-product-bundle",
@@ -4054,12 +4054,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusVariableProductBundle.git",
-                "reference": "37c07c69e116d06af73c0c1fa6f2d5ab804c2fd1"
+                "reference": "319d0f221d47004a083bb945e0d9812854211be6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusVariableProductBundle/zipball/37c07c69e116d06af73c0c1fa6f2d5ab804c2fd1",
-                "reference": "37c07c69e116d06af73c0c1fa6f2d5ab804c2fd1",
+                "url": "https://api.github.com/repos/Sylius/SyliusVariableProductBundle/zipball/319d0f221d47004a083bb945e0d9812854211be6",
+                "reference": "319d0f221d47004a083bb945e0d9812854211be6",
                 "shasum": ""
             },
             "require": {
@@ -4112,7 +4112,7 @@
                 "shop",
                 "variants"
             ],
-            "time": "2013-07-17 09:39:51"
+            "time": "2013-07-20 15:12:25"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -4344,12 +4344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1efb0f00ffaef5f0157e80f409af239b9246f629"
+                "reference": "183796312d3ac9a4778e6174b9ccd43e8ac1dc13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/1efb0f00ffaef5f0157e80f409af239b9246f629",
-                "reference": "1efb0f00ffaef5f0157e80f409af239b9246f629",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/183796312d3ac9a4778e6174b9ccd43e8ac1dc13",
+                "reference": "183796312d3ac9a4778e6174b9ccd43e8ac1dc13",
                 "shasum": ""
             },
             "require": {
@@ -4444,7 +4444,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-07-19 10:20:37"
+            "time": "2013-07-20 07:42:02"
         },
         {
             "name": "twig/extensions",
