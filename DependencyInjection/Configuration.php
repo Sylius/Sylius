@@ -63,7 +63,6 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('unit')
-                            ->isRequired()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\InventoryBundle\Model\InventoryUnit')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
