@@ -19,6 +19,9 @@
 >
 
     <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\Variant" table="sylius_variant">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
         <field name="master" column="is_master" type="boolean" />
         <field name="presentation" column="presentation" type="string" nullable="true" />
         <field name="availableOn" column="available_on" type="datetime" />
