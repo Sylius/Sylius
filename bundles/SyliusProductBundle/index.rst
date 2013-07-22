@@ -13,11 +13,14 @@ product variations with very flexible architecture.
 
    installation
    product
-   properties
+   property
+   prototype
    controllers
    forms
    events
-   Product Builder <product_builder>
-   prototypes
    templates
+   overriding_controllers
+   overriding_forms
+   overriding_models
+   Product Builder <product_builder>
    Configuration reference <configuration>
