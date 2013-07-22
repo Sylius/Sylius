@@ -10,5 +10,8 @@
 * :doc:`/bundles/SyliusTaxonomiesBundle/index`
 * :doc:`/bundles/SyliusSettingsBundle/index`
 * :doc:`/bundles/SyliusFlowBundle/index`
+
+Depracated bundles.
+
 * :doc:`/bundles/SyliusBloggerBundle/index`
 * :doc:`/bundles/SyliusAssortmentBundle/index`
