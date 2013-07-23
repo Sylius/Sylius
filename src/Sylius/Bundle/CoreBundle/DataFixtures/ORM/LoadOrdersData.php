@@ -71,7 +71,7 @@ class LoadOrdersData extends DataFixture
         } while ('UK' === $isoName);
 
         $country = $this->getReference('Sylius.Country.'.$isoName);
-        $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()) : null;
+        $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
 
         $address->setCountry($country);
         $address->setProvince($province);
