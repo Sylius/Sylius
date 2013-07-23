@@ -9,9 +9,7 @@ Its initial version was inspired by [Spree product and variants system](http://g
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2.
-
-Visit [Sylius.com](http://sylius.com).
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
 [phpspec](http://phpspec.net) examples
 ---------------------------------------
@@ -24,12 +22,12 @@ $ bin/phpspec run -fpretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusProductBundle/index.html).
+Documentation is available on [**docs.sylius.com**](http://docs.sylius.org/en/latest/bundles/SyliusProductBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.com/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
