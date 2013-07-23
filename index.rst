@@ -37,6 +37,7 @@ Documentation of all Sylius bundles.
 .. toctree::
    :hidden:
 
+   bundles/introduction
    bundles/index
 
 .. include:: /bundles/map.rst.inc
