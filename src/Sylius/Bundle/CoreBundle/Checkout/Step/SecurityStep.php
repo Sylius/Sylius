@@ -11,6 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -20,7 +25,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Security step.
  *
  * If user is not logged in, displays login & registration form.
- * Also guest checkout is possible.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -46,14 +50,24 @@ class SecurityStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $form = $this->getRegistrationForm();
         $request = $this->getRequest();
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $user = $form->getData();
+        $userManager = $this->get('fos_user.user_manager');
+        $dispatcher = $this->get('event_dispatcher');
 
-            $this->saveUser($user);
-            $this->authenticateUser($user);
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+
+        $form = $this->getRegistrationForm();
+        $form->setData($user);
+
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
+
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+            $userManager->updateUser($user);
 
             return $this->complete();
         }
@@ -82,7 +96,7 @@ class SecurityStep extends CheckoutStep
      */
     private function getRegistrationForm()
     {
-        return $this->get('fos_user.registration.form');
+        return $this->get('fos_user.registration.form.factory')->createForm();
     }
 
     /**
@@ -97,9 +111,9 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
-     * @param \Sylius\Bundle\CoreBundle\Model\User $user
+     * @param UserInterface $user
      */
-    private function saveUser($user)
+    private function saveUser(UserInterface $user)
     {
         $user->setEnabled(true);
         $this->get('fos_user.user_manager')->updateUser($user);
