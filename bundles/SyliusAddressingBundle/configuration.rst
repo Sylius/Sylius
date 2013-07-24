@@ -1,52 +1,48 @@
-Summary
-=======
-
 Configuration reference
------------------------
+=======================
 
 .. code-block:: yaml
 
     sylius_addressing:
         driver: ~ # The driver used for persistence layer.
-        engine: twig # Templating engine to use by default.
         classes:
             address:
-                model: ~ # The address model class.
+                model: Sylius\Bundle\AddressingBundle\Model\Address
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\AddressType # The form type name to use.
             country:
-                model: ~ # The country model class.
+                model: Sylius\Bundle\AddressingBundle\Model\Country
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\CountryType # The form type class name to use.
             province:
-                model: ~ # The province model class.
+                model: Sylius\Bundle\AddressingBundle\Model\Province
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType # The form type class name to use.
             zone:
-                model: ~ # The zone model class.
+                model: Sylius\Bundle\AddressingBundle\Model\Zone
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType # The form type class name to use
             zone_member:
-                model: ~ # The zone member model class.
+                model: Sylius\Bundle\AddressingBundle\Model\ZoneMember
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType # The form type class name to use
             zone_member_country:
-                model: ~ # The country zone member model class.
+                model: Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType # The form type class name to use
             zone_member_province:
-                model: ~ # The province zone member model class.
+                model: Sylius\Bundle\AddressingBundle\Model\ZoneMemberProvince
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType # The form type class name to use
             zone_member_zone:
-                model: ~ # The zone zone member model class.
+                model: Sylius\Bundle\AddressingBundle\Model\ZoneMemberZone
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~ # You can override the repository class here.
                 form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType # The form type class name to use
@@ -56,22 +52,3 @@ Configuration reference
             province: [sylius] # Province item validation groups.
             zone: [sylius] # Zone item validation groups.
             zone_member: [sylius] # Zone member item validation groups.
-
-`phpspec2 <http://phpspec.net>`_ examples
------------------------------------------
-
-.. code-block:: bash
-
-    $ composer install --dev --prefer-dist
-    $ bin/phpspec run -f pretty
-
-Working examples
-----------------
-
-If you want to see working implementation, try out the `Sylius application <http://github.com/Sylius/Sylius>`_.
-
-Bug tracking
-------------
-
-This bundle uses `GitHub issues <https://github.com/Sylius/SyliusAddressingBundle/issues>`_.
-If you have found bug, please create an issue.
