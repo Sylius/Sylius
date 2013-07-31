@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="cd1ac84fcaa92336771b2f537b546f7c" resname="sylius.backend.menu.main.assortment">
                 <source>sylius.backend.menu.main.assortment</source>
-                <target>Ассортемент</target>
+                <target>Ассортимент</target>
             </trans-unit>
             <trans-unit id="a372a7d5b6e2991da23009440f5b1c98" resname="sylius.backend.menu.main.configuration">
                 <source>sylius.backend.menu.main.configuration</source>
@@ -100,7 +100,7 @@
             </trans-unit>
             <trans-unit id="049995581d729e0f1d38a7f0148b0e51" resname="sylius.backend.menu.main.taxation_settings">
                 <source>sylius.backend.menu.main.taxation_settings</source>
-                <target>Настройки налогооблажения</target>
+                <target>Настройки налогообложения</target>
             </trans-unit>
             <trans-unit id="520f49cd08a95a76ca0e779834cb9ec2" resname="sylius.backend.menu.main.taxonomies">
                 <source>sylius.backend.menu.main.taxonomies</source>
@@ -112,7 +112,7 @@
             </trans-unit>
             <trans-unit id="b82bee2bddf68adf095856b85e41b6cb" resname="sylius.backend.menu.sidebar.assortment">
                 <source>sylius.backend.menu.sidebar.assortment</source>
-                <target>Ассортемент</target>
+                <target>Ассортимент</target>
             </trans-unit>
             <trans-unit id="7486e100b253cf670a06bf260d24d6c3" resname="sylius.backend.menu.sidebar.configuration">
                 <source>sylius.backend.menu.sidebar.configuration</source>
@@ -136,7 +136,7 @@
             </trans-unit>
             <trans-unit id="d5ab9f2471615eb2a22c363e7aab01fc" resname="sylius.backend.menu.sidebar.homepage">
                 <source>sylius.backend.menu.sidebar.homepage</source>
-                <target>Back to frontend</target>
+                <target>Вернуться к магазину</target>
             </trans-unit>
             <trans-unit id="cc4cae0efe5b617a36e61f0c8f3c650e" resname="sylius.backend.menu.sidebar.new_order">
                 <source>sylius.backend.menu.sidebar.new_order</source>
@@ -184,7 +184,7 @@
             </trans-unit>
             <trans-unit id="6840b932d704253195a482d027507718" resname="sylius.backend.menu.sidebar.sales">
                 <source>sylius.backend.menu.sidebar.sales</source>
-                <target>заказы</target>
+                <target>Заказы</target>
             </trans-unit>
             <trans-unit id="4f8dcbe9a191e195cf2c64850ec4f26a" resname="sylius.backend.menu.sidebar.shipments">
                 <source>sylius.backend.menu.sidebar.shipments</source>
@@ -212,7 +212,7 @@
             </trans-unit>
             <trans-unit id="acd501b89fb4d6fa8f0ff59c4dab0a6d" resname="sylius.backend.menu.sidebar.taxation_settings">
                 <source>sylius.backend.menu.sidebar.taxation_settings</source>
-                <target>Настройки налогооблажения</target>
+                <target>Настройки налогообложения</target>
             </trans-unit>
             <trans-unit id="617a399dbf0823ca50db6284392cc6f9" resname="sylius.backend.menu.sidebar.taxonomies">
                 <source>sylius.backend.menu.sidebar.taxonomies</source>
@@ -232,11 +232,11 @@
             </trans-unit>
             <trans-unit id="72a1c20506c99bf710d871e649d73b7a" resname="sylius.frontend.menu.currency">
                 <source>sylius.frontend.menu.currency</source>
-                <target>Показывать дены в %currency%</target>
+                <target>Показывать деньги в %currency%</target>
             </trans-unit>
             <trans-unit id="f3c562d05786e3056e97da27f1fac4d3" resname="sylius.frontend.menu.main.cart">
                 <source>sylius.frontend.menu.main.cart</source>
-                <target>View cart (%items%) %total%</target>
+                <target>Корзина (%items%) %total%</target>
             </trans-unit>
             <trans-unit id="d986cbf1ecce26c5ce35acede3faf0f2" resname="sylius.frontend.menu.main.login">
                 <source>sylius.frontend.menu.main.login</source>
