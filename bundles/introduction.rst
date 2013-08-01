@@ -1,7 +1,7 @@
 Introduction
 ============
 
-Sylius bundles share the same architecture and conventions. This quick introduction will help you understand usage basics.
+Sylius bundles share the same architecture and conventions. This quick introduction will help you understand the usage basics.
 
 Compatiblity
 ------------
@@ -23,7 +23,7 @@ SyliusResourceBundle
 
 Every bundle which provides some models (entities), uses :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`. All examples in SyliusResourceBundle documentation are valid for every model in Sylius.
 
-For example... using different template for product display action is as simple as configuring the following route.
+For example... using a different template for the product display action is as simple as configuring the following route.
 
 .. code-block:: yaml
 
@@ -75,7 +75,7 @@ If you change the class of ProductProperty model, this relation will be automati
 Managers, Repositories and Controllers
 --------------------------------------
 
-Every model in Sylius bundles has it's own manager, repository and controller services.
+Every model in Sylius bundles has its own manager, repository and controller services.
 
 .. code-block:: php
 
@@ -109,7 +109,7 @@ Every model in Sylius bundles has it's own manager, repository and controller se
 Overriding Classes
 ------------------
 
-Every class of particular model, repository, controller or form type can be overriden directly in the bundle config.
+Every class of a particular model, repository, controller or form type can be overriden directly via its bundle configuration.
 
 .. code-block:: yaml
 
@@ -143,4 +143,4 @@ All default forms and mappings use ``sylius`` as validation group. If you want t
 Default Models
 --------------
 
-All bundles ship with already mapped entities. If you configure your own, custom classes, the default models automagically become mapped super classes.
+All bundles ship with already mapped entities. If you configure your own custom classes, the default models automagically become mapped super classes.
