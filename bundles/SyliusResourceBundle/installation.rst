@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 
 .. code-block:: bash
 
@@ -30,7 +30,7 @@ You just need to enable proper bundles inside the kernel.
         );
     }
 
-To benefit from bundle services, you have to first register your class as *resource*.
+To benefit from bundle services, you have to first register your bundle class as a *resource*.
 
 You also need to enable HTTP method parameter override, by calling the following method on the **Request** object.
 
@@ -57,11 +57,11 @@ And... we're done!
 
 This configuration registers for you several services and service aliases.
 
-First of all, it gives you **app.manager.user**, which is simple alias to proper **ObjectManager** service.
+First of all, it gives you **app.manager.user**, which is simple alias to a proper **ObjectManager** service.
 For *doctrine/orm* it will be your default entity manager, and unless you want to stay completely storage agnostic, you can use
 the entity (or document) manager the "usual way".
 
-Secondly, you get an **app.repository.user**. It represents repository. This service by default has custom class, which implements
+Secondly, you get an **app.repository.user**. It represents repository. This service by default has a custom class, which implements
 ``Sylius\\Bundle\\ResourceBundle\\Model\\RepositoryInterface`` (which extends the Doctrine **ObjectRepository**).
 
-The last and most important service is **app.controller.user**, you'll learn about it in next part.
+The last and most important service is **app.controller.user**, you'll learn about it in next section.
