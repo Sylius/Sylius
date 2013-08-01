@@ -1,8 +1,8 @@
-Getting paginated (or flat) list of resources
-=============================================
+Getting a paginated (or flat) list of resources
+===============================================
 
 To get a paginated list of users, we will use **indexAction** of our controller!
-In the default scenario, it will return instance of paginator, with a list of Users.
+In the default scenario, it will return an instance of paginator, with a list of Users.
 
 .. code-block:: yaml
 
@@ -15,7 +15,7 @@ In the default scenario, it will return instance of paginator, with a list of Us
             _controller: app.controller.user:indexAction
 
 When you go to ``/users``, ResourceController will use the repository (``app.repository.user``) to create a paginator.
-The default template will be rendered - ``App:User:index.html.twig`` with the paginator as ``users`` variable.
+The default template will be rendered - ``App:User:index.html.twig`` with the paginator as the ``users`` variable.
 
 Overriding the template and criteria
 ------------------------------------
@@ -36,7 +36,7 @@ Just like for the **showAction**, you can override the default template and crit
                     enabled: false
                 template: App:User:inactive.html.twig
 
-This action will render custom template with a paginator only for disabled users.
+This action will render a custom template with a paginator only for disabled users.
 
 Sorting collection or paginator
 -------------------------------
@@ -102,4 +102,4 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
                     score: desc
                 template: App:User:top3.html.twig
 
-That action will return top 3 users by score, as ``users`` variable.
+That action will return the top 3 users by score, as the ``users`` variable.
