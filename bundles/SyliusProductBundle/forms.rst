@@ -43,7 +43,7 @@ The default product form consists of following fields.
 | metaKeywords    | text     |
 +-----------------+----------+
 
-You can render each of these using the usual Symfony ``{{ form_row(form.description) }}``.
+You can render each of these using the usual Symfony way ``{{ form_row(form.description) }}``.
 
 Property form
 -------------
@@ -63,7 +63,7 @@ Default form for the Property model has name ``sylius_property`` and contains se
 Prototype form
 --------------
 
-Default form for the Prototype model has name ``sylius_prototype`` and is built from following fields.
+The default form for the Prototype model has name ``sylius_prototype`` and is built from the following fields.
 
 +------------+------------------------+
 | Field      | Type                   |
@@ -77,11 +77,11 @@ Default form for the Prototype model has name ``sylius_prototype`` and is built 
 Miscellaneous fields
 --------------------
 
-There are few more form types, which can become useful when integrating the bundle into your app.
+There are a few more form types, which can become useful when integrating the bundle into your app.
 
 ``sylius_product_property`` is a form which is used to set the product properties (and their values). It has 2 fields, the property choice field and a value input.
 
-``sylius_property_choice`` is a ready to use select field, with a list of all Properties from database.
+``sylius_property_choice`` is a ready-to-use select field, with a list of all Properties from database.
 
 ``sylius_product_to_identifier`` can be used to render a text field, which will transform the value into a product.
 

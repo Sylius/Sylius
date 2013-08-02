@@ -44,9 +44,9 @@ Provider and Resolver
 
 There are also 3 more services for you.
 
-You use provider to obtain the current user cart, if there is none, a new one is created and saved.
+You use the provider to obtain the current user cart, if there is none, a new one is created and saved.
 The ``->setCart()`` method also allows you to replace the current cart.
-``->abandonCart()`` is resetting the current cart, a new one will be created on next ``->getCart()`` call.
+``->abandonCart()`` is resetting the current cart, a new one will be created on the next ``->getCart()`` call.
 This is useful, for example, when after completing an order you want to start with a brand new and clean cart.
 
 .. code-block:: php
@@ -63,7 +63,7 @@ This is useful, for example, when after completing an order you want to start wi
         $provider->abandonCart();
     }
 
-The resolver is used to create a new item based on user request.
+The resolver is used to create a new item based on the user request.
 
 .. code-block:: php
 
@@ -78,4 +78,4 @@ The resolver is used to create a new item based on user request.
 
 .. note::
 
-    A more advanced example of resolver implementation is available `in Sylius Sandbox application on GitHub <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Resolver/ItemResolver.php>`_.
+    A more advanced example of a resolver implementation is available `in Sylius Sandbox application on GitHub <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Resolver/ItemResolver.php>`_.

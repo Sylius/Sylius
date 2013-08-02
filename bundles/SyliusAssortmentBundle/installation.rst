@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 
 .. code-block:: bash
 
@@ -13,7 +13,7 @@ Adding required bundles to the kernel
 -------------------------------------
 
 First, you need to enable the bundle inside the kernel.
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
 If you're not using `FOSRestBundle`, then you also have to select a serializer component.

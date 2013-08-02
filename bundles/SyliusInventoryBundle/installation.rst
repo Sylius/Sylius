@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 
 .. code-block:: bash
 
@@ -13,7 +13,7 @@ Adding required bundles to the kernel
 -------------------------------------
 
 First, you need to enable the bundle inside the kernel.
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
@@ -35,9 +35,9 @@ Don't worry, everything was automatically installed via Composer.
 Creating your entities
 ----------------------
 
-Let's assume we want to implement book store application and track books inventory.
+Let's assume we want to implement a book store application and track the books inventory.
 
-You have to create `Book` and `InventoryUnit` entity, living inside your application code.
+You have to create a `Book` and an `InventoryUnit` entity, living inside your application code.
 We think that **keeping the app-specific bundle structure simple** is a good practice, so
 let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle`` namespace.
 
@@ -156,15 +156,15 @@ We will create `Book` entity.
 .. note::
 
     This example shows the full power of `StockableInterface`.
-    Bundle also provides `Stockable` entity which implements `StockableInterface` for you.
-    By extending `Stockable` entity, example above can be dramatically simplified.
+    The bundle also provides an `Stockable` entity which implements `StockableInterface` for you.
+    By extending the `Stockable` entity, the example above can be dramatically simplified.
 
-In order to track books inventory our `Book` entity must implement `StockableInterface`.
+In order to track the books inventory our `Book` entity must implement `StockableInterface`.
 Note that we added ``->getSku()`` method which is alias to ``->getIsbn()``, this is the power of the interface,
-we have a full control over entity mapping.
-Similar goes for ``->getInventoryName()`` which exposes book title as display name for our stockable entity.
+we now have full control over the entity mapping.
+In the same way ``->getInventoryName()`` exposes the book title as the displayed name for our stockable entity.
 
-Next step requires creating the `InventoryUnit` entity, let’s do this now.
+The next step requires the creating of the `InventoryUnit` entity, let’s do this now.
 
 .. code-block:: php
 
@@ -192,7 +192,7 @@ Next step requires creating the `InventoryUnit` entity, let’s do this now.
 
 Note that we are using base entity from Sylius bundle, which means inheriting some functionality inventory bundle provides.
 `InventoryUnit` holds the reference to stockable object, which is `Book` in our case.
-So, if we use `InventoryOperator` to create inventory units, they will reference given book entity.
+So, if we use the `InventoryOperator` to create inventory units, they will reference the given book entity.
 
 Container configuration
 -----------------------
@@ -213,7 +213,7 @@ Put this configuration inside your ``app/config/config.yml``.
 Routing configuration
 -------------------------------
 
-Import routing configuration by adding following to your `app/config/routing.yml``.
+Import the routing configuration by adding the following to your `app/config/routing.yml``.
 
 .. code-block:: yaml
 
@@ -239,7 +239,7 @@ For "**doctrine/orm**" driver run the following command.
 Templates
 ---------
 
-Bundle provides default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
+The bundle provides some default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
 
 .. note::
 
