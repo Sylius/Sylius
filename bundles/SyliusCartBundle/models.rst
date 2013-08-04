@@ -14,7 +14,7 @@ The collection of items (Implementing the ``Doctrine\Common\Collections\Collecti
 CartItem
 --------
 
-Just like for cart, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()`` 
+Just like for cart, the total is available via the same method (``->getTotal()``), but the unit price is accessible using the ``->getUnitPrice()`` 
 Each item also can calculate its total, using the quantity (``->getQuantity()``) and the unit price.
 It also has a very important method called ``->equals(CartItemInterface $item)``, which decides whether the items are "same" or not.
 If they are, it should return *true*, *false* otherwise. This is taken into account when adding item to cart.
