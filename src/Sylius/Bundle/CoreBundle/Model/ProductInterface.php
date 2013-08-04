@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
+use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
 
 /**
@@ -21,7 +22,7 @@ use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ProductInterface extends VariableProductInterface
+interface ProductInterface extends VariableProductInterface, TaxableInterface
 {
     /**
      * Get product SKU.
@@ -104,13 +105,6 @@ interface ProductInterface extends VariableProductInterface
      * @param string $shortDescription
      */
     public function setShortDescription($shortDescription);
-
-    /**
-     * Get taxation category.
-     *
-     * @return TaxCategoryInterface
-     */
-    public function getTaxCategory();
 
     /**
      * Set taxation category.

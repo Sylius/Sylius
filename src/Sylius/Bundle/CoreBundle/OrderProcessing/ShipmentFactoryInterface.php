@@ -27,5 +27,5 @@ interface ShipmentFactoryInterface
      * @param OrderInterface          $order
      * @param ShippingMethodInterface $method
      */
-    public function createShipment(OrderInterface $order, ShippingMethodInterface $method);
+    public function createShipment(OrderInterface $order, ShippingMethodInterface $method = null);
 }

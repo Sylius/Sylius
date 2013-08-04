@@ -42,7 +42,7 @@ class ShipmentFactory implements ShipmentFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createShipment(OrderInterface $order, ShippingMethodInterface $method)
+    public function createShipment(OrderInterface $order, ShippingMethodInterface $method = null)
     {
         $shipment = $this->shipmentRepository->createNew();
         $shipment->setMethod($method);

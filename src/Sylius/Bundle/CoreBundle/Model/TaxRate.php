@@ -19,7 +19,7 @@ use Sylius\Bundle\TaxationBundle\Model\TaxRate as BaseTaxRate;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxRate extends BaseTaxRate
+class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
     /**
      * Tax zone.

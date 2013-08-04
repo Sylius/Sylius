@@ -24,5 +24,5 @@ interface InventoryUnitInterface extends
     ShipmentItemInterface
 {
     public function getOrder();
-    public function setOrder(OrderInterface $order);
+    public function setOrder(OrderInterface $order = null);
 }

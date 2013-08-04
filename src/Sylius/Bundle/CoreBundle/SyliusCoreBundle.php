@@ -34,7 +34,7 @@ class SyliusCoreBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            // 'Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface' => 'sylius.model.variant.class',
+            // 'x' => 'sylius.model.x.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_core', $interfaces));

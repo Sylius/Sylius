@@ -13,20 +13,21 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 
-class TaxonomySpec extends ObjectBehavior
+class TaxonSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Taxonomy');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Taxon');
     }
 
-    function it_is_Sylius_Taxonomy()
+    function it_is_Sylius_Taxon()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface');
+        $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface');
+        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ImageInterface');
     }
 
     function it_should_not_path_defined_by_default()
     {
-        $this->getRoot()->getPath()->shouldReturn(null);
+        $this->getPath()->shouldReturn(null);
     }
 }
