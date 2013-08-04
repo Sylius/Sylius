@@ -6,7 +6,7 @@ There are several ways to override the default forms and you have full freedom, 
 Changing the form type class
 ----------------------------
 
-To change the class behind ``sylius_product`` type or any other form from this bundle, you have to configure it in container.
+To change the class behind ``sylius_product`` type or any other form from this bundle, you have to configure it in the container.
 
 Let's assume you want to add a "price" field and remove the default "availableOn" input to the form.
 
@@ -36,7 +36,7 @@ Firstly, you have to create new ``ProductType`` class.
         }
     }
 
-Secondly, you have to configure your new class in container.
+Secondly, you have to configure your new class in the container.
 
 .. code-block:: yaml
 
@@ -54,11 +54,11 @@ That's it! The new form type class will be used. This is possible for all other 
 
     Please remember, that you also need to add new fields to the model. Read the :doc:`chapter about overriding models </bundles/SyliusProductBundle/overriding_models>`.
 
-Using different form type
--------------------------
+Using different form types
+--------------------------
 
-Thanks to flexibility of the controllers (see :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`) you can use different form type per action (per route, actually).
-Below you can see usage of custom form in product create action.
+Thanks to flexibility of the controllers (see :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`) you can use different form types per action (per route, actually).
+Below you can see the usage of a custom form in the product create action.
 
 .. code-block:: yaml
 
