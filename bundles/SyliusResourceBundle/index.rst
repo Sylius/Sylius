@@ -16,7 +16,7 @@ another super simple action for that purpose.
 
 If these are issues you're struggling with, this bundle may be helpful!
 
-Please note that this bundle **is not admin generator**. It won't create forms, filters and grids for you. It only provides format agnostic controllers as foundation to build on, with some basic sorting and filter mechanisms.
+Please note that this bundle **is not an admin generator**. It won't create forms, filters and grids for you. It only provides format agnostic controllers as foundation to build on, with some basic sorting and filter mechanisms.
 
 .. toctree::
    :numbered:
