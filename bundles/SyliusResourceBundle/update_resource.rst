@@ -64,7 +64,7 @@ Same way like for **createAction** you can override the default form.
     # routing.yml
 
     app_user_update:
-        pattern: /users/new
+        pattern: /users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -99,7 +99,7 @@ By default the controller will try to get the id of resource and redirect to "sh
     # routing.yml
 
     app_user_update:
-        pattern: /users/new
+        pattern: /users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -113,7 +113,7 @@ You can also perform more complex redirects, with parameters. For example...
     # routing.yml
 
     app_user_update:
-        pattern: /competition/{competitionId}/users/new
+        pattern: /competition/{competitionId}/users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
