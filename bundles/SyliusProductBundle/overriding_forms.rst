@@ -1,7 +1,7 @@
 Overriding Forms
 ================
 
-There are several ways to override the default forms and you have full freedoom, you can even replace them completely.
+There are several ways to override the default forms and you have full freedom, you can even replace them completely.
 
 Changing the form type class
 ----------------------------
