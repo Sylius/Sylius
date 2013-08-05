@@ -24,8 +24,8 @@
         </thead>
         <tbody>
         {% for item in order.items %}
-            {% set variant = item.sellable %}
-            {% set product = variant.product %}
+            {% set variant = item.variant %}
+            {% set product = item.product %}
             <tr>
                 <td>
                     {% if product.images|length > 0 %}

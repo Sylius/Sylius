@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
-use Sylius\Bundle\CoreBundle\Entity\Order;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -136,7 +136,7 @@ class AccountController extends Controller
      * @param Order $order
      * @throws AccessDeniedException
      */
-    private function accessOrderOr403(Order $order)
+    private function accessOrderOr403(OrderInterface $order)
     {
         if (false === $this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') &&
             $this->getUser()->getId() !== $order->getUser()->getId()) {
