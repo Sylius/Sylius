@@ -85,6 +85,8 @@ class FinalizeStep extends CheckoutStep
     {
         $manager = $this->get('sylius.manager.order');
 
+        $order->complete();
+
         $manager->persist($order);
         $manager->flush($order);
 

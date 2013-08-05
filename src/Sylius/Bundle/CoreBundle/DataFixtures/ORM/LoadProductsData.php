@@ -233,9 +233,9 @@ class LoadProductsData extends DataFixture
     /**
      * Generates all possible variants with random prices.
      *
-     * @param VariableProductInterface $product
+     * @param ProductInterface $product
      */
-    private function generateVariants(VariableProductInterface $product)
+    private function generateVariants(ProductInterface $product)
     {
         $this
             ->getVariantGenerator()
@@ -256,10 +256,10 @@ class LoadProductsData extends DataFixture
     /**
      * Adds master variant to product.
      *
-     * @param VariableProductInterface $product
-     * @param string                       $sku
+     * @param ProductInterface $product
+     * @param string           $sku
      */
-    private function addMasterVariant(VariableProductInterface $product, $sku = null)
+    private function addMasterVariant(ProductInterface $product, $sku = null)
     {
         if (null === $sku) {
             $sku = $this->getUniqueSku();
@@ -304,10 +304,10 @@ class LoadProductsData extends DataFixture
     /**
      * Add product to given taxons.
      *
-     * @param VariableProductInterface $product
-     * @param array                        $taxonNames
+     * @param ProductInterface $product
+     * @param array            $taxonNames
      */
-    private function setTaxons(VariableProductInterface $product, array $taxonNames)
+    private function setTaxons(ProductInterface $product, array $taxonNames)
     {
         $taxons = new ArrayCollection();
 
