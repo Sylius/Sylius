@@ -3728,12 +3728,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "9c9bc49c3dcd6395fa0217603279c8d56bf3f6dc"
+                "reference": "f9e21d54f0d5efeda08ac17a1c28f61d15f866ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/9c9bc49c3dcd6395fa0217603279c8d56bf3f6dc",
-                "reference": "9c9bc49c3dcd6395fa0217603279c8d56bf3f6dc",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/f9e21d54f0d5efeda08ac17a1c28f61d15f866ae",
+                "reference": "f9e21d54f0d5efeda08ac17a1c28f61d15f866ae",
                 "shasum": ""
             },
             "require": {
@@ -3784,7 +3784,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-08-05 12:12:17"
+            "time": "2013-08-05 21:09:43"
         },
         {
             "name": "sylius/settings-bundle",
