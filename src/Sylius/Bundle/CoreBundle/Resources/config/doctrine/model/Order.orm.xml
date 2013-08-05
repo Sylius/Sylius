@@ -20,6 +20,13 @@
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
+        <many-to-one field="payment" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentInterface">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <join-column name="payment" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <one-to-many field="inventoryUnits" target-entity="Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface" mapped-by="order">
             <cascade>
                 <cascade-all/>

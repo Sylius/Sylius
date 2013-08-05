@@ -14,16 +14,16 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
- * Order shipment factory.
+ * Order payment processor interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShipmentFactoryInterface
+interface PaymentProcessorInterface
 {
     /**
-     * Create shipment for order.
+     * Create payment.
      *
      * @param OrderInterface $order
      */
-    public function createShipment(OrderInterface $order);
+    public function createPayment(OrderInterface $order);
 }

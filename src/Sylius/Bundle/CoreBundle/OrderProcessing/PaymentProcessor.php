@@ -15,40 +15,39 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
- * Shipment factory.
+ * Payment processor.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ShipmentFactory implements ShipmentFactoryInterface
+class PaymentProcessor implements PaymentProcessorInterface
 {
     /**
-    * Shipment repository.
+     * Payment repository.
      *
      * @var RepositoryInterface
      */
-    protected $shipmentRepository;
+    protected $paymentRepository;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $shipmentRepository
+     * @param RepositoryInterface $paymentRepository
      */
-    public function __construct(RepositoryInterface $shipmentRepository)
+    public function __construct(RepositoryInterface $paymentRepository)
     {
-        $this->shipmentRepository = $shipmentRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createShipment(OrderInterface $order)
+    public function createPayment(OrderInterface $order)
     {
-        $shipment = $this->shipmentRepository->createNew();
+        $payment = $this->paymentRepository->createNew();
 
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            $shipment->addItem($inventoryUnit);
-        }
+        $payment->setCurrency($order->getCurrency());
+        $order->setPayment($payment);
 
-        $order->addShipment($shipment);
+        return $payment;
     }
 }

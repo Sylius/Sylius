@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
 
 /**
@@ -51,6 +52,13 @@ class Order extends Cart implements OrderInterface
      * @var Collection
      */
     protected $shipments;
+
+    /**
+     * Payment.
+     *
+     * @var PaymentInterface
+     */
+    protected $payment;
 
     /**
      * Inventory units.
@@ -239,6 +247,24 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getPayment()
+    {
+        return $this->payment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPayment(PaymentInterface $payment)
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getInventoryUnits()
     {
         return $this->inventoryUnits;
@@ -276,6 +302,14 @@ class Order extends Cart implements OrderInterface
     public function getShipments()
     {
         return $this->shipments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShipments()
+    {
+        return !$this->shipments->isEmpty();
     }
 
     /**

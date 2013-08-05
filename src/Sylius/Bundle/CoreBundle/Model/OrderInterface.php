@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 /**
  * Sylius core Order model.
@@ -127,6 +128,20 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function removeShippingAdjustments();
 
     /**
+     * Get the payment associated with the order.
+     *
+     * @return PaymentInterface
+     */
+    public function getPayment();
+
+    /**
+     * Set payment.
+     *
+     * @param PaymentInterface $payment
+     */
+    public function setPayment(PaymentInterface $payment);
+
+    /**
      * Get all inventory units.
      *
      * @return Collection
@@ -153,6 +168,13 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return Collection
      */
     public function getShipments();
+
+    /**
+     * Check if order has any shipments.
+     *
+     * @return Boolean
+     */
+    public function hasShipments();
 
     /**
      * Add a shipment.
