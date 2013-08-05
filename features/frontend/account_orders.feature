@@ -17,39 +17,39 @@ Feature: User account orders page
       | Regular |
       | Heavy   |
     And the following shipping methods exist:
-      | category | zone          | name    |
-      | Regular  | Scandinavia   | DHL     |
-      | Heavy    | USA           | FedEx   |
-      |          | France        | UPS     |
+      | category | zone          | name  |
+      | Regular  | Scandinavia   | DHL   |
+      | Heavy    | USA           | FedEx |
+      |          | France        | UPS   |
     And the following products exist:
       | name          | price | sku |
       | Mug           | 5.99  | 456 |
       | Sticker       | 10.00 | 213 |
       | Book          | 22.50 | 948 |
     And the following orders exist:
-      | user                       | shipment                      | address                                                                  |
-      | email@foo.com             | UPS, shipped, DTBHH380HG    | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | ianmurdock@debian.org    | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
-      | ianmurdock@debian.org    |           | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
-      | linustorvalds@linux.com  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
-      | linustorvalds@linux.com  | DHL       | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
-      | email@foo.com             |           | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | linustorvalds@linux.com  |           | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland     |
-      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | email@foo.com             | UPS       | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France  |
-      | ianmurdock@debian.org    | FedEx     | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA    |
+      | user                    | shipment                 | address                                                           |
+      | email@foo.com           | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
+      | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
+      | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
+      | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
+      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
+      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
     # order that has been sent
     And order #000001 has following items:
-      | product  | quantity  |
-      | Mug      | 2         |
-      | Sticker  | 4         |
-      | Book     | 1         |
+      | product  | quantity |
+      | Mug      | 2        |
+      | Sticker  | 4        |
+      | Book     | 1        |
     # order that has not been sent yet
     And order #000007 has following items:
-      | product  | quantity  |
-      | Mug      | 5         |
-      | Sticker  | 1         |
+      | product  | quantity |
+      | Mug      | 5        |
+      | Sticker  | 1        |
 
   Scenario: Viewing my account orders page
     Given I follow "My orders / my invoices"
@@ -106,7 +106,7 @@ Feature: User account orders page
       And I should see "<state>" in the "#order-<order>" element
 
   Examples:
-      | order   | state       |
+      | order  | state       |
       | 000006 | Placed at   |
       | 000007 | Ready since |
 
@@ -121,7 +121,7 @@ Feature: User account orders page
       And I should see "<state>" in the "#information" element
 
   Examples:
-      | order   | state       |
+      | order  | state       |
       | 000006 | Placed at   |
       | 000007 | Ready since |
 
@@ -153,8 +153,3 @@ Feature: User account orders page
     | 000005 |
     | 000008 |
     | 000011 |
-
-
-
-
-

@@ -124,12 +124,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "dc3438804c6303f1b5892f184a79aa8e3ce5d81d"
+                "reference": "beb242e0e22eebdca1db571edb1bac788b054124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/dc3438804c6303f1b5892f184a79aa8e3ce5d81d",
-                "reference": "dc3438804c6303f1b5892f184a79aa8e3ce5d81d",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/beb242e0e22eebdca1db571edb1bac788b054124",
+                "reference": "beb242e0e22eebdca1db571edb1bac788b054124",
                 "shasum": ""
             },
             "require": {
@@ -185,7 +185,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2013-07-04 15:48:06"
+            "time": "2013-07-31 00:07:06"
         },
         {
             "name": "doctrine/collections",
@@ -193,12 +193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "3db3ab843ff76774bee4679d4cb3a10cffb0a935"
+                "reference": "623caf42551b416460df786154d89bc50e3d1798"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/3db3ab843ff76774bee4679d4cb3a10cffb0a935",
-                "reference": "3db3ab843ff76774bee4679d4cb3a10cffb0a935",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/623caf42551b416460df786154d89bc50e3d1798",
+                "reference": "623caf42551b416460df786154d89bc50e3d1798",
                 "shasum": ""
             },
             "require": {
@@ -241,7 +241,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -252,7 +252,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2013-05-26 05:21:22"
+            "time": "2013-07-23 08:27:26"
         },
         {
             "name": "doctrine/common",
@@ -260,12 +260,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "6a39bb947b20d12a16820f2709509e41e28af005"
+                "reference": "9c6b8615a988117dec83bdbb0fad80afef23eab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/6a39bb947b20d12a16820f2709509e41e28af005",
-                "reference": "6a39bb947b20d12a16820f2709509e41e28af005",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/9c6b8615a988117dec83bdbb0fad80afef23eab8",
+                "reference": "9c6b8615a988117dec83bdbb0fad80afef23eab8",
                 "shasum": ""
             },
             "require": {
@@ -326,7 +326,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2013-07-02 11:26:20"
+            "time": "2013-07-30 05:35:10"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -470,8 +470,8 @@
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2,<2.5-dev",
-                "symfony/validator": "~2.2",
-                "symfony/yaml": "~2.2"
+                "symfony/validator": ">=2.2,<3.0",
+                "symfony/yaml": ">=2.2,<3.0"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
@@ -1015,12 +1015,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "3cd559bee99b9265868d2350b4649226ddf49525"
+                "reference": "7ba748cf8b024de45bad9133482ee224744dce7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/3cd559bee99b9265868d2350b4649226ddf49525",
-                "reference": "3cd559bee99b9265868d2350b4649226ddf49525",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/7ba748cf8b024de45bad9133482ee224744dce7d",
+                "reference": "7ba748cf8b024de45bad9133482ee224744dce7d",
                 "shasum": ""
             },
             "require": {
@@ -1087,7 +1087,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-07-19 19:49:05"
+            "time": "2013-07-30 15:21:07"
         },
         {
             "name": "guzzle/common",
@@ -2685,7 +2685,7 @@
                 "doctrine/mongodb-odm": "*",
                 "doctrine/orm": "2.*",
                 "mandango/mandango": "*",
-                "propel/propel1": "~1.6",
+                "propel/propel1": ">=1.6,<2.0",
                 "solarium/solarium": "dev-develop"
             },
             "suggest": {
@@ -2812,7 +2812,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3229,8 +3229,8 @@
             },
             "require-dev": {
                 "phpspec/phpspec2": "dev-develop",
-                "symfony/form": "~2.2",
-                "symfony/validator": "~2.2"
+                "symfony/form": ">=2.2,<3.0",
+                "symfony/validator": ">=2.2,<3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3728,12 +3728,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusSalesBundle.git",
-                "reference": "9cefc9a76452a8d82676858d7db90fee7b162015"
+                "reference": "9c9bc49c3dcd6395fa0217603279c8d56bf3f6dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/9cefc9a76452a8d82676858d7db90fee7b162015",
-                "reference": "9cefc9a76452a8d82676858d7db90fee7b162015",
+                "url": "https://api.github.com/repos/Sylius/SyliusSalesBundle/zipball/9c9bc49c3dcd6395fa0217603279c8d56bf3f6dc",
+                "reference": "9c9bc49c3dcd6395fa0217603279c8d56bf3f6dc",
                 "shasum": ""
             },
             "require": {
@@ -3784,7 +3784,7 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2013-07-20 15:19:17"
+            "time": "2013-08-05 12:12:17"
         },
         {
             "name": "sylius/settings-bundle",
@@ -4135,13 +4135,13 @@
                 "symfony/framework-bundle": "~2.1"
             },
             "require-dev": {
-                "symfony/class-loader": "~2.1",
-                "symfony/console": "~2.1",
-                "symfony/css-selector": "~2.1",
-                "symfony/dom-crawler": "~2.1",
-                "symfony/form": "~2.1",
-                "symfony/twig-bundle": "~2.1",
-                "symfony/yaml": "~2.1"
+                "symfony/class-loader": ">=2.1,<3.0",
+                "symfony/console": ">=2.1,<3.0",
+                "symfony/css-selector": ">=2.1,<3.0",
+                "symfony/dom-crawler": ">=2.1,<3.0",
+                "symfony/form": ">=2.1,<3.0",
+                "symfony/twig-bundle": ">=2.1,<3.0",
+                "symfony/yaml": ">=2.1,<3.0"
             },
             "suggest": {
                 "symfony/twig-bundle": "~2.1"
@@ -4248,7 +4248,7 @@
                 "symfony/monolog-bridge": "~2.2-beta2"
             },
             "require-dev": {
-                "symfony/yaml": "~2.2-beta2"
+                "symfony/yaml": ">=2.2-beta2,<3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -4679,9 +4679,9 @@
                 "symfony/finder": "~2.0"
             },
             "require-dev": {
-                "symfony/config": "~2.0",
-                "symfony/translation": "~2.0",
-                "symfony/yaml": "~2.0"
+                "symfony/config": ">=2.0,<3.0",
+                "symfony/translation": ">=2.0,<3.0",
+                "symfony/yaml": ">=2.0,<3.0"
             },
             "suggest": {
                 "symfony/config": "If you want to use Config component to manage resources",
@@ -4851,7 +4851,7 @@
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "behat/mink-goutte-driver": "~1.0"
+                "behat/mink-goutte-driver": ">=1.0,<2.0"
             },
             "type": "behat-extension",
             "extra": {

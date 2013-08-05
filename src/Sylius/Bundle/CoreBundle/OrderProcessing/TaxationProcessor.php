@@ -105,7 +105,7 @@ class TaxationProcessor implements TaxationProcessorInterface
         $taxes = array();
 
         foreach ($order->getItems() as $item) {
-            $taxable = $item->getSellable()->getProduct();
+            $taxable = $item->getProduct();
             $rate = $this->taxRateResolver->resolve($taxable, array('zone' => $zone));
 
             if (null === $rate) {
