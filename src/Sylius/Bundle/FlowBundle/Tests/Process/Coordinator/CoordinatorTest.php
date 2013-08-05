@@ -115,7 +115,6 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function shouldNotStartWhenProcessIsNotValid()
     {
@@ -126,7 +125,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext = $this->getProcessContext();
         $processContext->expects($this->any())
             ->method('isValid')
-            ->will($this->returnValue(false));
+            ->will($this->returnValue($this->getMock('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface')));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -147,7 +146,6 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function shouldNotShowDisplayActionWhenProcessIsNotValid()
     {
@@ -158,7 +156,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext = $this->getProcessContext();
         $processContext->expects($this->any())
             ->method('isValid')
-            ->will($this->returnValue(false));
+            ->will($this->returnValue($this->getMock('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface')));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -187,7 +185,6 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function shouldNotShowForwardWhenProcessIsNotValid()
     {
@@ -198,7 +195,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext = $this->getProcessContext();
         $processContext->expects($this->any())
             ->method('isValid')
-            ->will($this->returnValue(false));
+            ->will($this->returnValue($this->getMock('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface')));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));

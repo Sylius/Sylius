@@ -81,7 +81,7 @@ interface ProcessBuilderInterface
      *
      * @param \Closure $validator
      */
-    public function validate(\Closure $validator);
+    public function validate($validator);
 
     /**
      * Register new step.

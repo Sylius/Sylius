@@ -14,6 +14,8 @@ namespace Sylius\Bundle\FlowBundle\Process\Builder;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -147,9 +149,17 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(\Closure $validator)
+    public function validate($validator)
     {
         $this->assertHasProcess();
+
+        if ($validator instanceof \Closure) {
+            $validator = new ProcessValidator($validator, 'An error occured.');
+        }
+
+        if (!$validator instanceof ProcessValidatorInterface) {
+            throw new \InvalidArumentException();
+        }
 
         $this->process->setValidator($validator);
 

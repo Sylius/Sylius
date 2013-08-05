@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Process;
 
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
 /**
  * Interface for setup object.
@@ -113,7 +114,7 @@ interface ProcessInterface
      *
      * @param \Closure $validator
      */
-    public function setValidator(\Closure $validator);
+    public function setValidator(ProcessValidatorInterface $validator);
 
     /**
      * Get redirection after complete.

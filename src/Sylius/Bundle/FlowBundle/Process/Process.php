@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Process;
 
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
 /**
  * Base class for process.
@@ -256,7 +257,7 @@ class Process implements ProcessInterface
     /**
      * {@inheritdoc}
      */
-    public function setValidator(\Closure $validator)
+    public function setValidator(ProcessValidatorInterface $validator)
     {
         $this->validator = $validator;
     }

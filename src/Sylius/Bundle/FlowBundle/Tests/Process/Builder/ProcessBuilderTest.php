@@ -228,11 +228,11 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $this->builder->build($this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
         $this->builder->validate(function () {
-            return 'my-closure';
+            return false;
         });
 
         $validator = $this->builder->getProcess()->getValidator();
-        $this->assertEquals('my-closure', $validator());
+        $this->assertEquals(false, $validator->isValid());
     }
 
     /**
