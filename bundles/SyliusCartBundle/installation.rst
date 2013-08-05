@@ -44,7 +44,7 @@ Creating your entities
 
 You have to create your **CartItem** entity, living inside your application code.
 We think that **keeping the app-specific bundle structure simple** is a good practice, so
-let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle`` namespace.
+let's assume you have your ``AppBundle`` registered under ``App\AppBundle`` namespace.
 
 .. code-block:: php
 
@@ -251,7 +251,7 @@ This can be done in various ways, but to keep the example simple - we'll use que
 
     Please remember that **item accepts only integer as price and quantity**.
 
-Register our brand new service in container. We'll use XML as example, but you are free to pick any other format.
+Register our brand new service in the container. We'll use XML as example, but you are free to pick any other format.
 
 .. code-block:: xml
 
