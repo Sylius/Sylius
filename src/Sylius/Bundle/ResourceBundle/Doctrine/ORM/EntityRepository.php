@@ -114,12 +114,10 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
             return;
         }
 
-        $alias = $this->getAlias();
-
         foreach ($criteria as $property => $value) {
             if (!empty($value)) {
                 $queryBuilder
-                    ->andWhere($alias.'.'.$property.' = :'.$property)
+                    ->andWhere($this->getPropertyName($property).' = :'.$property)
                     ->setParameter($property, $value)
                 ;
             }
@@ -132,11 +130,20 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
             return;
         }
 
-        $alias = $this->getAlias();
-
         foreach ($sorting as $property => $order) {
-            $queryBuilder->orderBy($alias.'.'.$property, $order);
+            if (!empty($order)) {
+                $queryBuilder->orderBy($this->getPropertyName($property), $order);
+            }
         }
+    }
+
+    protected function getPropertyName($name)
+    {
+        if (false === strpos($name, '.')) {
+            return $this->getAlias().'.'.$name;
+        }
+
+        return $name;
     }
 
     protected function getAlias()
