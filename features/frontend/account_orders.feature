@@ -107,7 +107,6 @@ Feature: User account orders page
 
   Examples:
       | order  | state       |
-      | 000006 | Placed at   |
       | 000007 | Ready since |
 
   Scenario: Tracking an order that has been sent in its details page
@@ -122,7 +121,6 @@ Feature: User account orders page
 
   Examples:
       | order  | state       |
-      | 000006 | Placed at   |
       | 000007 | Ready since |
 
   Scenario: Checking that an invoice is available for an order that has been sent
