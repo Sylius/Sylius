@@ -1,3 +1,4 @@
+@checkout
 Feature: Checkout taxation
     In order to handle product taxation
     As a store owner

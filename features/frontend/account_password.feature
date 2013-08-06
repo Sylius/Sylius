@@ -1,3 +1,4 @@
+@account
 Feature: User account password change
     In order to enhance the security of my account
     As a logged user

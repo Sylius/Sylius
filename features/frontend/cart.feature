@@ -1,3 +1,4 @@
+@cart
 Feature: Cart
     In order to select products for purchase
     As a visitor
@@ -24,7 +25,7 @@ Feature: Cart
           And product "Super T-Shirt" is available in all variations
           And product "Git T-Shirt" is available in all variations
           And product "Black T-Shirt" is available in all variations
-    
+
     Scenario: Seeing empty cart
         Given I am on the store homepage
          When I follow "View cart"

@@ -1,3 +1,4 @@
+@products
 Feature: Product properties
     In order to show specific product parameters to customer
     As a store owner

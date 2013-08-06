@@ -1,3 +1,4 @@
+@shipping
 Feature: Shipping methods
     In order to apply proper shipping to my merchandise
     As a store owner

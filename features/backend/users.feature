@@ -1,3 +1,4 @@
+@users
 Feature: Users management
     In order to manager customers
     As a store owner

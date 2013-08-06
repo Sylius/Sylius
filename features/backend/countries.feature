@@ -1,3 +1,4 @@
+@addressing
 Feature: Countries and provinces
     In order to create tax and shipping zones
     As a store owner

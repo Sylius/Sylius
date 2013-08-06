@@ -1,3 +1,4 @@
+@checkout
 Feature: Checkout starting
     In order to buy products
     As a visitor
