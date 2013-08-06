@@ -1,13 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_backend_stockable_index:
+sylius_backend_inventory_index:
     pattern: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.stockable:indexAction
+        _controller: sylius.controller.product:indexAction
         _sylius:
-            template: SyliusWebBundle:Backend/Stockable:index.html.twig
+            template: SyliusWebBundle:Backend/Inventory:index.html.twig
             sortable: true
             sorting:
                 updatedAt: asc

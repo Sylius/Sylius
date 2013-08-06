@@ -16,15 +16,15 @@ Feature: Inventory tracking
             | Mug            | 5.99  |                             |
             | Sticker        | 10.00 |                             |
 
-    Scenario: Seeing index of all stockables
+    Scenario: Seeing index of inventory
         Given I am on the dashboard page
          When I follow "Inventory levels"
-         Then I should be on the stockable index page
+         Then I should be on the inventory index page
           And I should see 4 stockables in the list
 
-    Scenario: Seeing empty index of stockables
+    Scenario: Seeing empty index of inventory
          Given there are no products
-         When I am on the stockable index page
+         When I am on the inventory index page
          Then I should see "There are no inventory items to display"
 
     Scenario: Updating product stock level

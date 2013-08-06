@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Stockable:macros.html.twig' as macros %}
+{% import 'SyliusWebBundle:Backend/Inventory:macros.html.twig' as macros %}
 
 {% block content %}
 <div class="page-header">
@@ -13,14 +13,14 @@
     </a>
 </div>
 
-{% if stockables.haveToPaginate() %}
-    {{ pagerfanta(stockables, 'twitter_bootstrap_translated') }}
+{% if products.haveToPaginate() %}
+    {{ pagerfanta(products, 'twitter_bootstrap_translated') }}
 {% endif %}
 
-{{ macros.list(stockables) }}
+{{ macros.list(products) }}
 
-{% if stockables.haveToPaginate() %}
-    {{ pagerfanta(stockables, 'twitter_bootstrap_translated') }}
+{% if products.haveToPaginate() %}
+    {{ pagerfanta(products, 'twitter_bootstrap_translated') }}
 {% endif %}
 
 {% endblock %}
