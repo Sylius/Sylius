@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\FlowBundle\Validator;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
  * Default process validator
@@ -95,12 +96,12 @@ class ProcessValidator implements ProcessValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getResponse($step)
+    public function getResponse(StepInterface $step)
     {
         if ($this->getTemplate()) {
             return $step->render($this->getTemplate(), array('error' => $this->getMessage()));
-        } else {
-            throw new HttpException(400, $this->getMessage());
         }
+            
+        throw new HttpException(400, $this->getMessage());      
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Validator;
 
+use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+
 /**
  * Interface for process validation
  *
@@ -42,13 +44,13 @@ interface ProcessValidatorInterface
     /**
      * Check validation
      *
-     * @return mixed
+     * @return boolean
      */
     public function isValid();
 
     /**
-     * @param \Sylius\Bundle\FlowBundle\Process\Step\ControllerStep $step
+     * @param StepInterface $step
      * @return mixed
      */
-    public function getResponse($step);
+    public function getResponse(StepInterface $step);
 }
