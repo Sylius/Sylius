@@ -1,15 +1,15 @@
 Performing basic CRUD operations
 ================================
 
-...
+Sylius is using the Doctrine Common persistence interfaces. This means that every model within Sylius bundles has its own repository and object manager.
 
 Retrieving resources
 --------------------
 
-Retrieving any resource from database should always happen via repository, which always implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
-If you are using Doctrine, you're already familiar with this concept, as it extends the native Doctrine ``ObjectRepository`` interface.
+Retrieving any resource from database always happens via the repository, which implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+If you have been using Doctrine, you should already be familiar with this concept, as it extends the default Doctrine ``ObjectRepository`` interface.
 
-Let's assume you want to load a product from database. Your product repository is always accessible via ``sylius.repository.product`` service.
+Let's assume you want to load a product from database. Your product repository is always accessible via the ``sylius.repository.product`` service.
 
 .. code-block:: php
 
@@ -20,7 +20,7 @@ Let's assume you want to load a product from database. Your product repository i
         $repository = $this->container->get('sylius.repository.product');
     }
 
-Retrieving many resources is as simple as calling proper methods on the repository.
+Retrieving many resources is as simple as calling the proper methods on the repository.
 
 .. code-block:: php
 
@@ -37,7 +37,7 @@ Retrieving many resources is as simple as calling proper methods on the reposito
         $products = $repository->findBy(array('special' => true)); // Find products matching some custom criteria.
     }
 
-Every Sylius repository also supports paginating products. To create a `Pagerfanta instance <https://github.com/whiteoctober/Pagerfanta>`_ use the ``createPaginator`` method.
+Every Sylius repository supports paginating products. To create a `Pagerfanta instance <https://github.com/whiteoctober/Pagerfanta>`_ use the ``createPaginator`` method.
 
 .. code-block:: php
 
@@ -51,10 +51,10 @@ Every Sylius repository also supports paginating products. To create a `Pagerfan
         $products->setMaxPerPage(3);
         $products->setCurrentPage($request->query->get('page', 1));
 
-       // Now you can returns products to template and iterate over it to get products from current page.
+        // Now you can returns products to template and iterate over it to get products from current page.
     }
 
-Paginator also can be created for specific criteria and with desired sorting.
+Paginator can be created for a specific criteria and with desired sorting.
 
 .. code-block:: php
 
@@ -69,12 +69,12 @@ Paginator also can be created for specific criteria and with desired sorting.
         $products->setCurrentPage($request->query->get('page', 1));
     }
 
-Creating new resource object
-----------------------------
+Creating a new resource object
+------------------------------
 
-To create new resource instance, you can simply call ``createNew()`` method on the repository.
+To create a new resource instance, you can simply call the ``createNew()`` method on the repository.
 
-Now let's try something else than product, we'll create new TaxRate model.
+Now let's try something else than product, we'll create a new TaxRate model.
 
 .. code-block:: php
 
@@ -90,13 +90,13 @@ Now let's try something else than product, we'll create new TaxRate model.
 
     Creating resources via this factory method makes the code more testable, and allows you to change the model class easily.
 
-Saving & removing resources
--------------------------
+Saving and removing resources
+-----------------------------
 
-To save or remove resource, you can use any ``ObjectManager`` which is capable of managing the class.
-Every model has it's own manager alias, for example ``sylius.manager.address`` is an alias to the entity manager.
+To save or remove a resource, you can use any ``ObjectManager`` which is capable of managing the class.
+Every model has its own manager alias, for example the ``sylius.manager.address`` is an alias to the ORM EntityManager.
 
-Of course, it is also perfectly fine if you use ``doctrine.orm.entity_manager`` or other appropriate manager service.
+Of course, it is also perfectly fine if you use the ``doctrine.orm.entity_manager`` service name or any other appropriate manager service.
 
 .. code-block:: php
 
@@ -105,7 +105,7 @@ Of course, it is also perfectly fine if you use ``doctrine.orm.entity_manager`` 
     public function myAction()
     {
         $repository = $this->container->get('sylius.repository.address');
-        $manager = $this->container->get('sylius.manager.address'); // Alias for appropriate doctrine manager service.
+        $manager = $this->container->get('sylius.manager.address'); // Alias to the appropriate doctrine manager service.
 
         $address = $repository->createNew();
 

@@ -1,7 +1,7 @@
 Overriding Repositories
 =======================
 
-...
+Overriding Sylius model repository involves extending the base class and configuring it inside the bundle configuration.
 
 Extending base Repository
 -------------------------
@@ -62,3 +62,8 @@ That's it! Now ``sylius.repository.order`` is using your new class.
 
         $orders = $repository->findByCustomer($customer);
     }
+
+What has happened?
+
+* Parameter ``sylius.repository.order.class`` contains ``Acme\\ShopBundle\\Repository\\OrderRepository``.
+* Repository service ``sylius.repository.order`` is using your new class.

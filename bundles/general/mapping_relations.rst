@@ -1,13 +1,13 @@
 Mapping Relations
 =================
 
-...
+All Sylius bundles use the Doctrine RTEL functionality, which allows to map the relations using interfaces, not implementations.
 
 Using interfaces
 ----------------
 
 When defining relation to Sylius model, use the interface name instead of concrete class.
-It will be automatically replaced with configured model, enabling greater flexibility.
+It will be automatically replaced with the configured model, enabling much greater flexibility.
 
 .. code-block:: xml
 
@@ -20,10 +20,10 @@ It will be automatically replaced with configured model, enabling greater flexib
 
         <entity name="Acme\ShopBundle\Entity\Product" table="sylius_product">
             <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
-                <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
+               <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
         </entity>
 
     </doctrine-mapping>
 
-Thanks to this approach, if the **TaxCategory** model is changed, you do not need to worry about remapping other entities.
+Thanks to this approach, if the **TaxCategory** model has changed, you do not need to worry about remapping other entities.

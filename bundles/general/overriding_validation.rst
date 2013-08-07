@@ -1,7 +1,7 @@
 Overriding Validation
 =====================
 
-...
+All Sylius validation mapping and forms are using ``sylius`` as the default group.
 
 Changing the validation group
 -----------------------------
@@ -35,7 +35,7 @@ You can configure your own validation for Sylius models. If the defaults do not 
 
     </constraint-mapping>
 
-You also need to configure the new validati on group in ``app/config/config.yml``.
+You also need to configure the new validation group in ``app/config/config.yml``.
 
 .. code-block:: yaml
 

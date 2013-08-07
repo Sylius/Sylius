@@ -1,7 +1,7 @@
 Overriding Controllers
 ======================
 
-All Sylius bundles are using :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`.
+All Sylius bundles are using :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>` as a foundation for database storage.
 
 Extending base Controller
 -------------------------
@@ -54,6 +54,8 @@ That's it! Now ``sylius.controller.product:recommendAction`` is available. You c
         pattern: /products/{id}/recommend
         defaults:
             _controller: sylius.controller.product:recommendAction
+
+What has happened?
 
 * Parameter ``sylius.controller.product.class`` contains ``Acme\\Bundle\\ShopBundle\\Controller\\ProductController``.
 * Controller service ``sylius.controller.product`` is using your new controller class.

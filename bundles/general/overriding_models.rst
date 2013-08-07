@@ -68,6 +68,8 @@ Finally, you configure your class in ``app/config/config.yml`` file.
 
 Done! Sylius will now use your **TaxRate** model!
 
+What has happened?
+
 * Parameter ``sylius.model.tax_rate.class`` contains ``Acme\\Bundle\\ShopBundle\\Entity\\TaxRate``.
 * ``sylius.repository.tax_rate`` represents Doctrine repository for your new class.
 * ``sylius.manager.tax_rate`` represents Doctrine object manager for your new class.

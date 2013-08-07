@@ -1,7 +1,7 @@
 Overriding Forms
 ================
 
-...
+Every form type in Sylius holds its class name in a specific parameter. This allows you to easily add or remove fields by extending the base form class.
 
 Extending base Forms
 --------------------
@@ -43,6 +43,8 @@ Now, define the new form class in the ``app/config/config.yml``.
                 form: Acme\ShopBundle\Form\Type\AddressType
 
 Done! Sylius will now use your custom address form everywhere!
+
+What has happened?
 
 * Parameter ``sylius.form.type.address.class`` contains ``Acme\\Bundle\\ShopBundle\\Form\\Type\\AddressType``.
 * ``sylius.form.type.address`` form type service uses your custom class.
