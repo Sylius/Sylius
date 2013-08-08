@@ -16,7 +16,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th colspan="2">{{ 'sylius.user.general_info'|trans({'%username%': user.username}) }}</th>
+            <th colspan="2">{{ 'sylius.user.general_info'|trans({'%username%': user.email}) }}</th>
         </tr>
     </thead>
     <tbody>
@@ -36,10 +36,6 @@
                 <td>{{ user.lastName }}</td>
             </tr>
         {% endif %}
-        <tr>
-            <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
-            <td>{{ user.username }}</td>
-        </tr>
         <tr>
             <td><strong>{{ 'sylius.user.email'|trans }}</strong></td>
             <td>{{ user.email }}</td>
