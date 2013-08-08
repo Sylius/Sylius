@@ -97,9 +97,9 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->enabled = true;
         $this->categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
-        $this->createdAt = new \DateTime();
         $this->configuration = array();
         $this->rules = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -132,6 +132,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setCategory(ShippingCategoryInterface $category = null)
     {
         $this->category = $category;
+
+        return $this;
     }
 
     /**
@@ -148,6 +150,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setCategoryRequirement($categoryRequirement)
     {
         $this->categoryRequirement = $categoryRequirement;
+
+        return $this;
     }
 
     /**
@@ -158,50 +162,6 @@ class ShippingMethod implements ShippingMethodInterface
         $labels = self::getCategoryRequirementLabels();
 
         return $labels[$this->categoryRequirement];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports(ShippablesAwareInterface $shippablesAware)
-    {
-        if (!$this->enabled) {
-            throw new \LogicException('Disabled shipping methods cannot match a shipment');
-        }
-
-        if (null === $this->category) {
-            return true;
-        }
-
-        $shippables = $shippablesAware->getShippables();
-
-        if (ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE === $this->categoryRequirement) {
-            foreach ($shippables as $shippable) {
-                if ($this->category === $shippable->getShippingCategory()) {
-                    return false;
-                }
-            }
-        }
-
-        if (ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY === $this->categoryRequirement) {
-            foreach ($shippables as $shippable) {
-                if ($this->category === $shippable->getShippingCategory()) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        if (ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL === $this->categoryRequirement) {
-            foreach ($shippables as $shippable) {
-                if ($this->category !== $shippable->getShippingCategory()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -218,6 +178,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setEnabled($enabled)
     {
         $this->enabled = (Boolean) $enabled;
+
+        return $this;
     }
 
     /**
@@ -234,6 +196,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -250,6 +214,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setCalculator($calculator)
     {
         $this->calculator = $calculator;
+
+        return $this;
     }
 
     /**
@@ -266,14 +232,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasRules()
-    {
-        return !$this->rules->isEmpty();
+        return $this;
     }
 
     /**
@@ -298,9 +258,11 @@ class ShippingMethod implements ShippingMethodInterface
     public function addRule(RuleInterface $rule)
     {
         if (!$this->hasRule($rule)) {
-            $rule->setShippingMethod($this);
+            $rule->setMethod($this);
             $this->rules->add($rule);
         }
+
+        return $this;
     }
 
     /**
@@ -308,8 +270,10 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function removeRule(RuleInterface $rule)
     {
-        $rule->setShippingMethod(null);
+        $rule->setMethod(null);
         $this->rules->removeElement($rule);
+
+        return $this;
     }
 
     /**
@@ -326,6 +290,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -342,6 +308,8 @@ class ShippingMethod implements ShippingMethodInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**

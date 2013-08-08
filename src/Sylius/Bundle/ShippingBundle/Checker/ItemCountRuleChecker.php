@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\ShippingBundle\Checker;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
- * Checks if shippables count exceeds (or at least equal) to the configured count.
+ * Checks if item count exceeds (or at least is equal) to the configured count.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemCountRuleChecker implements RuleCheckerInterface
 {
-    public function isEligible(ShippablesAwareInterface $shippablesAware, array $configuration)
+    public function isEligible(ShippingSubjectInterface $subject, array $configuration)
     {
-        $count = $shippablesAware->getShippables()->count();
+        $count = $subject->getShippingItemCount();
 
         if ($configuration['equal']) {
             return $count >= $configuration['count'];

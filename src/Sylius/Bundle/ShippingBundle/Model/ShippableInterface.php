@@ -19,6 +19,34 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 interface ShippableInterface
 {
     /**
+     * Get the weight of an item.
+     *
+     * @return integer
+     */
+    public function getShippingWeight();
+
+    /**
+     * Get the width of an item.
+     *
+     * @return integer
+     */
+    public function getShippingWidth();
+
+    /**
+     * Get the height of an item.
+     *
+     * @return integer
+     */
+    public function getShippingHeight();
+
+    /**
+     * Get the depth of an item.
+     *
+     * @return integer
+     */
+    public function getShippingDepth();
+
+    /**
      * Get the shipping category for transportable object.
      *
      * @return ShippingCategoryInterface

@@ -42,16 +42,17 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
+     * Adds `validation_groups` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -84,51 +85,62 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `classes` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('shipment')
-                            ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\ShippingBundle\Model\Shipping')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('shipment_item')
-                            ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\ShippingBundle\Model\ShippingItem')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentItemType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('shipping_category')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType')->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('shipping_method')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\ShippingBundle\Model\ShippingMethod')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('shipping_rule')
+                        ->arrayNode('shipping_category')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\ShippingBundle\Model\ShippingCategory')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('shipping_method_rule')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\ShippingBundle\Model\Rule')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\ShippingBundle\Form\Type\RuleType')->end()

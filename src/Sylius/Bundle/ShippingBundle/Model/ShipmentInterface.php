@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ShippingBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShipmentInterface extends ShippablesAwareInterface
+interface ShipmentInterface extends ShippingSubjectInterface
 {
     // Shipment default states.
     const STATE_READY    = 'ready';

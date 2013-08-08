@@ -11,32 +11,25 @@
 
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Shipping charge calculator.
+ * Shipping charges calculator.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface CalculatorInterface
 {
     /**
-     * Get the shipping cost for given shipment.
-     * Shipment has to have at least 1 shippable and a method defined.
+     * Calculate the shipping charge for given subject and configuration.
      *
-     * @param ShipmentInterface $shipment
+     * @param ShippingSubjectInterface $subject
+     * @param array                    $configuration
      *
-     * @return mixed
+     * @return integer
      */
-    public function calculate(ShipmentInterface $shipment);
-
-    /**
-     * Does this calculator has any configuration?
-     *
-     * @return Boolean
-     */
-    public function isConfigurable();
+    public function calculate(ShippingSubjectInterface $subject, array $configuration);
 
     /**
      * Get calculator configuration form type, if any required.

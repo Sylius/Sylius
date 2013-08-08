@@ -47,34 +47,4 @@ interface ShippingCategoryInterface extends TimestampableInterface
      * @param string $description
      */
     public function setDescription($description);
-
-    /**
-     * Get all methods for this category.
-     *
-     * @return ShippingMethodInterface[]
-     */
-    public function getMethods();
-
-    /**
-     * Add method.
-     *
-     * @param ShippingMethodInterface $method
-     */
-    public function addMethod(ShippingMethodInterface $method);
-
-    /**
-     * Remove method.
-     *
-     * @param ShippingMethodInterface $method
-     */
-    public function removeMethod(ShippingMethodInterface $method);
-
-    /**
-     * Has method?
-     *
-     * @param ShippingMethodInterface $method
-     *
-     * @return Boolean
-     */
-    public function hasMethod(ShippingMethodInterface $method);
 }

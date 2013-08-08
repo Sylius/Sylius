@@ -29,7 +29,7 @@
 
         <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistry</parameter>
 
-        <parameter key="sylius.shipping_eigibility_checker.class">Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEliglibilityChecker</parameter>
+        <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityChecker</parameter>
         <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Bundle\ShippingBundle\Checker\ItemCountRuleChecker</parameter>
 
         <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator</parameter>
@@ -85,8 +85,12 @@
             <argument type="service" id="sylius.shipping_rule_checker_registry" />
             <tag name="form.type" alias="sylius_shipping_method" />
         </service>
+        <service id="sylius.form.type.shipping_category_choice" class="%sylius.form.type.shipping_category_choice.class%">
+            <argument>%sylius.model.shipping_category.class%</argument>
+            <tag name="form.type" alias="sylius_shipping_category_choice" />
+        </service>
 
-        <service id="sylius.shipping_eigibility_checker" class="%sylius.shipping_eigibility_checker.class%">
+        <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%">
             <argument type="service" id="sylius.shipping_rule_checker_registry" />
         </service>
         <service id="sylius.shipping_rule_checker.item_count" class="%sylius.shipping_rule_checker.item_count.class%">
@@ -97,6 +101,7 @@
 
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.shipping_eligibility_checker" />
         </service>
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
             <argument type="service" id="sylius.shipping_methods_resolver" />

@@ -12,7 +12,8 @@
 namespace Sylius\Bundle\ShippingBundle\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface;
+use Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
  * Default available methods resolver.
@@ -29,24 +30,33 @@ class MethodsResolver implements MethodsResolverInterface
     protected $repository;
 
     /**
+     * Shipping method eligibility checker.
+     *
+     * @var ShippingMethodEligibilityCheckerInterface
+     */
+    protected $eligibilityChecker;
+
+    /**
      * Constructor.
      *
-     * @param ObjectRepository $repository
+     * @param ObjectRepository                           $repository
+     * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(ObjectRepository $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
     {
         $this->repository = $repository;
+        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(ShippablesAwareInterface $shippablesAware, array $criteria = array())
+    public function getSupportedMethods(ShippingSubjectInterface $subject, array $criteria = array())
     {
         $methods = array();
 
         foreach ($this->getMethods($criteria) as $method) {
-            if ($method->supports($shippablesAware)) {
+            if ($this->eligibilityChecker->isEligible($subject, $method)) {
                 $methods[] = $method;
             }
         }
@@ -59,10 +69,8 @@ class MethodsResolver implements MethodsResolverInterface
      *
      * @param array $criteria
      */
-    protected function getMethods(array $criteria)
+    protected function getMethods(array $criteria = array())
     {
-        $criteria = array_merge(array('enabled' => true), $criteria);
-
         return $this->repository->findBy($criteria);
     }
 }

@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+### v0.1.0
+
+* Initial dev release.
+* Remove entities, use dynamic mapping.
+* Introduce shipping rules system.
+
 ### 12-03-2013
 
 * Use SyliusMoneyBundle and integers to represent charges.
