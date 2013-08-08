@@ -6,6 +6,7 @@ The Book
 
     symfony
     introduction
+    installation
     architecture
     products
 

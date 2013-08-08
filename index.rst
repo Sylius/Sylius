@@ -6,7 +6,7 @@ Sylius Documentation
 The Book
 --------
 
-Developers guide to leveraging the flexibility of Sylius.
+Developer's guide to leveraging the flexibility of Sylius.
 
 .. toctree::
    :hidden:
@@ -16,6 +16,18 @@ Developers guide to leveraging the flexibility of Sylius.
    book/introduction
 
 .. include:: /book/map.rst.inc
+
+The User Guide
+--------------
+
+User's guide around Sylius interface and configuration.
+
+.. toctree::
+   :hidden:
+
+   guide/index
+
+.. include:: /guide/map.rst.inc
 
 Cookbook
 --------

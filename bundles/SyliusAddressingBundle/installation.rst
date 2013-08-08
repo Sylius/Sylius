@@ -2,17 +2,26 @@ Installation
 ============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-
 Use following command to add the bundle to your `composer.json` and download package.
+
+If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
 
-    $ composer require sylius/addressing-bundle:*
+    $ composer require sylius/addressing-bundle:0.2.*
+
+Otherwise you have to download .phar file.
+
+.. code-block:: bash
+
+    $ curl -sS https://getcomposer.org/installer | php
+    $ php composer.phar require sylius/addressing-bundle:0.2.*
 
 Adding required bundles to the kernel
 -------------------------------------
 
-First, you need to enable the bundle inside the kernel.
+You need to enable the bundle inside the kernel.
+
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
 Don't worry, everything was automatically installed via Composer.
 
@@ -25,11 +34,12 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            // ...
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -50,53 +60,21 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_addressing:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
-Routing configuration
----------------------
-
-Import routing configuration by adding following to your ``app/config/routing.yml``.
+And configure doctrine extensions which are used in assortment bundle:
 
 .. code-block:: yaml
 
-<<<<<<< HEAD
-	sylius_address_list:
-	    pattern: /address/list
-	    defaults:
-	        _controller: sylius_addressing.controller.address:getCollectionAction
-	        _sylius.resource:
-	            template: AcmeDemoBundle:Address:list.html.twig
-	            sortable: true
-	            sorting:
-	                updatedAt: desc
+    stof_doctrine_extensions:
+        orm:
+            default:
+                timestampable: true
 
-	sylius_address_create:
-	    pattern: /address/create
-	    defaults:
-	        _controller: sylius_addressing.controller.address:createAction
-	        _sylius.resource:
-	            template: AcmeDemoBundle:Address:create.html.twig
-	            redirect: sylius_address_show
+Routing configuration
+---------------------
 
-	sylius_address_update:
-	    pattern: /address/{id}/update
-	    defaults:
-	        _controller: sylius_addressing.controller.address:updateAction
-	        _sylius.resource:
-	            template: AcmeDemoBundle:Address:update.html.twig
-	            redirect: sylius_address_show
+Add following to your ``app/config/routing.yml``.
 
-	sylius_address_delete:
-	    pattern: /address/{id}/delete
-	    defaults:
-	        _controller: sylius_addressing.controller.address:deleteAction
-	        _sylius.resource:
-	            redirect: sylius_address_list
-
-	sylius_address_show:
-	    pattern: /address/{id}
-	    defaults:
-	        _controller: sylius_addressing.controller.address:getAction
-	        _sylius.resource:
-	            template: AcmeDemoBundle:Address:show.html.twig
+.. code-block:: yaml
 
     sylius_addressing:
         resource: @SyliusAddressingBundle/Resources/config/routing.yml
@@ -104,9 +82,7 @@ Import routing configuration by adding following to your ``app/config/routing.ym
 Updating database schema
 ------------------------
 
-Remember to update your database schema.
-
-For "**doctrine/orm**" driver run the following command.
+Run the following command.
 
 .. code-block:: bash
 
@@ -115,12 +91,3 @@ For "**doctrine/orm**" driver run the following command.
 .. warning::
 
     This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
-
-Templates
----------
-
-Bundle provides default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
-
-.. note::
-
-    You can check `Sylius application <http://github.com/Sylius/Sylius>`_ to see how to integrate it in your application.

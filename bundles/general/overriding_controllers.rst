@@ -1,19 +1,12 @@
-Using the Controllers
-=====================
+Overriding Controllers
+======================
 
-When using the bundle, you have access to a controller for each model.
-You can use them to manipulate and manage your product catalog.
+All Sylius bundles are using :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>` as a foundation for database storage.
 
-Controller services
--------------------
-
-All controllers in bundle are powered by :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>`. Please read the documentation to have a complete understanding what you can do.
-
-Overriding controllers
-----------------------
+Extending base Controller
+-------------------------
 
 If you want to modify the controller or add your custom actions, you can do so by defining a new controller class.
-By extending resource controller, you also get access to several handy methods.
 
 .. code-block:: php
 
@@ -39,7 +32,7 @@ By extending resource controller, you also get access to several handy methods.
         }
     }
 
-Now you just need to configure your class to be used for Product controller service.
+You also need to configure your controller class in ``app/config/config.yml``.
 
 .. code-block:: yaml
 
@@ -49,11 +42,9 @@ Now you just need to configure your class to be used for Product controller serv
         driver: doctrine/orm
         classes:
             product:
-                model: Acme\ShopBundle\Entity\Product
                 controller: Acme\ShopBundle\Controller\ProductController
 
-That's it! Now ``sylius.controller.product:recommendAction`` is available.
-You can use it by defining a new route.
+That's it! Now ``sylius.controller.product:recommendAction`` is available. You can use it by defining a new route.
 
 .. code-block:: yaml
 
@@ -63,3 +54,8 @@ You can use it by defining a new route.
         pattern: /products/{id}/recommend
         defaults:
             _controller: sylius.controller.product:recommendAction
+
+What has happened?
+
+* Parameter ``sylius.controller.product.class`` contains ``Acme\\Bundle\\ShopBundle\\Controller\\ProductController``.
+* Controller service ``sylius.controller.product`` is using your new controller class.

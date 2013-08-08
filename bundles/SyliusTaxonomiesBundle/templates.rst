@@ -1,5 +1,5 @@
-Events
-======
+Templates
+=========
 
 .. note::
 

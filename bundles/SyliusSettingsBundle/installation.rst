@@ -2,19 +2,27 @@ Installation
 ============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-
 Use following command to add the bundle to your `composer.json` and download package.
+
+If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
 
-    $ composer require sylius/settings-bundle:*
+    $ composer require sylius/settings-bundle:0.2.*
+
+Otherwise you have to download .phar file.
+
+.. code-block:: bash
+
+    $ curl -sS https://getcomposer.org/installer | php
+    $ php composer.phar require sylius/settings-bundle:0.2.*
 
 Adding required bundles to the kernel
 -------------------------------------
 
 First, you need to enable the bundle inside the kernel.
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
-This bundle also uses `LiipDoctrineCacheBundle`. Don't worry, everything was automatically installed via Composer.
+Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
 
@@ -25,61 +33,22 @@ This bundle also uses `LiipDoctrineCacheBundle`. Don't worry, everything was aut
     public function registerBundles()
     {
         $bundles = array(
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
         );
     }
 
-Creating your settings schema
------------------------------
+.. note::
 
-You have to implement **SchemaInterface** in order to be able to save setting.
-Lets define for example our page metadata like this:
-
-.. code-block:: php
-
-    <?php
-
-    // src/Acme/DemoBundle/Settings/MetaSettingsSchema.php
-    namespace Acme\DemoBundle\Settings;
-
-    use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
-    use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
-    use Symfony\Component\Form\FormBuilderInterface;
-
-    class MetaSettingsSchema implements SchemaInterface
-    {
-        public function buildSettings(SettingsBuilderInterface $builder)
-        {
-            $builder
-                ->setDefaults(array(
-                    'title'            => 'Sylius - Modern ecommerce for Symfony2',
-                    'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
-                    'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
-                ))
-                ->setAllowedTypes(array(
-                    'title'            => array('string'),
-                    'meta_keywords'    => array('string'),
-                    'meta_description' => array('string'),
-                ))
-            ;
-        }
-
-        public function buildForm(FormBuilderInterface $builder)
-        {
-            $builder
-                ->add('title')
-                ->add('meta_keywords')
-                ->add('meta_description', 'textarea')
-            ;
-        }
-    }
-
-As you can see there are two methods in our schema, and both of them are very simple. First one ``->buildSettings()``
-defines default values and allowed data types. ``->buildForm()`` creates form to be used in web interface to update settings.
+    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
 Container configuration
 -----------------------
@@ -96,14 +65,6 @@ Put this configuration inside your ``app/config/config.yml``.
             sylius_settings:
                 type: file_system
 
-Now, lets register our **MetaSettingsSchema** service. Note that we are tagging it as `sylius.settings_schema`:
-
-.. code-block:: xml
-
-    <service id="acme.demo.settings_schema.meta" class="Acme\DemoBundle\Settings\MetaSettingsSchema">
-        <tag name="sylius.settings_schema" namespace="default" />
-    </service>
-
 Importing routing configuration
 -------------------------------
 
@@ -111,21 +72,14 @@ Import default routing from your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-    sylius_settings_meta:
+    sylius_settings:
         resource: @SyliusSettingsBundle/Resources/config/routing.yml
-        prefix: /meta
-
-.. note::
-
-    We used ``default`` namespace in this example. If you want to use other namespaces for saving your settings, routing config should
-    be updated as it contains namespace parameter.
+        prefix: /settings
 
 Updating database schema
 ------------------------
 
-Remember to update your database schema.
-
-For "**doctrine/orm**" driver run the following command.
+Run the following command.
 
 .. code-block:: bash
 

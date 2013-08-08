@@ -2,29 +2,25 @@ Installation
 ============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-
 Use following command to add the bundle to your `composer.json` and download package.
+
 If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
 
-    $ composer require sylius/taxonomies-bundle:0.2.*
+    $ composer require sylius/taxation-bundle:0.2.*
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/taxonomies-bundle:0.2.*@dev
-
-.. note::
-
-    This version is compatible only with Symfony 2.3 or newer. Please see the CHANGELOG file in the repository, to find version to use with older vendors.
+    $ php composer.phar require sylius/taxation-bundle:0.2.*
 
 Adding required bundles to the kernel
 -------------------------------------
 
-You need to enable the bundle inside the kernel.
+First, you need to enable the bundle inside the kernel.
 
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
 Don't worry, everything was automatically installed via Composer.
@@ -42,7 +38,7 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
+            new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
@@ -61,29 +57,27 @@ Put this configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
-    sylius_taxonomies:
-        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+    sylius_taxation:
+        driver: doctrine/orm # Configure the Doctrine ORM driver used in documentation.
 
-And configure doctrine extensions which are used in taxonomies bundle:
+And configure doctrine extensions which are used by this bundle:
 
 .. code-block:: yaml
 
     stof_doctrine_extensions:
         orm:
             default:
-                tree: true
-                sluggable: true
+                timestampable: true
 
 Routing configuration
 ---------------------
 
-Add the following lines to your ``app/config/routing.yml``.
+Add the following to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-    sylius_taxonomies:
-        resource: @SyliusTaxonomiesBundle/Resources/config/routing.yml
-        prefix: /taxonomies
+    sylius_taxation:
+        resource: @SyliusTaxation/Resources/config/routing.yml
 
 Updating database schema
 ------------------------

@@ -9,18 +9,13 @@ product variations with very flexible architecture.
 
 
 .. toctree::
+   :maxdepth: 1
    :numbered:
 
    installation
    product
-   property
-   prototype
-   controllers
+   properties
    forms
-   events
-   templates
-   overriding_controllers
-   overriding_forms
-   overriding_models
-   Product Builder <product_builder>
-   Configuration reference <configuration>
+   prototypes
+   product_builder
+   configuration
