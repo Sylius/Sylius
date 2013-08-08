@@ -65,7 +65,7 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
             return;
         }
 
-        $options = array('label' => $productProperty->getName());
+        $options = array('label' => $productProperty->getName(), 'auto_initialize' => false);
 
         if (is_array($productProperty->getConfiguration())) {
             $options = array_merge($options, $productProperty->getConfiguration());
