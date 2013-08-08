@@ -31,6 +31,10 @@
                 <source>sylius.form.option_value.value</source>
                 <target>Value</target>
             </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.form.prototype.options</source>
+                <target>Options</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -15,6 +15,7 @@ use Sylius\Bundle\VariableProductBundle\SyliusVariableProductBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -23,7 +24,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusVariableProductExtension extends Extension
+class SyliusVariableProductExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -71,6 +72,26 @@ class SyliusVariableProductExtension extends Extension
 
         $loader->load('options.xml');
         $loader->load('variants.xml');
+        $loader->load('prototypes.xml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $config = array('classes' => array(
+            'product' => array(
+                'model' => 'Sylius\Bundle\VariableProductBundle\Model\VariableProduct',
+                'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType'
+            ),
+            'prototype' => array(
+                'model' => 'Sylius\Bundle\VariableProductBundle\Model\Prototype',
+                'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\PrototypeType'
+            )
+        ));
+
+        $container->prependExtensionConfig('sylius_product', $config);
     }
 
     /**
