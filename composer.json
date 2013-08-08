@@ -38,7 +38,7 @@
         "sylius/cart-bundle":                   "0.5.*",
         "sylius/money-bundle":                  "0.2.*",
         "sylius/taxation-bundle":               "0.3.*",
-        "sylius/shipping-bundle":               "dev-refactoring",
+        "sylius/shipping-bundle":               "0.2.*",
         "sylius/addressing-bundle":             "0.2.*",
         "sylius/promotions-bundle":             "0.2.*",
         "sylius/inventory-bundle":              "0.3.*",
