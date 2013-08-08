@@ -4,6 +4,7 @@ Bundles reference
 .. toctree::
     :hidden:
 
+    general/index
     SyliusResourceBundle/index
     SyliusProductBundle/index
     SyliusVariableProductBundle/index

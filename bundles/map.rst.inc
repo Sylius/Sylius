@@ -1,4 +1,4 @@
-* :doc:`/bundles/introduction`
+* :doc:`/bundles/general/index`
 * :doc:`/bundles/SyliusResourceBundle/index`
 * :doc:`/bundles/SyliusProductBundle/index`
 * :doc:`/bundles/SyliusVariableProductBundle/index`
