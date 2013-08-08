@@ -11,23 +11,22 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderInterface as BaseOrderInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 /**
  * Sylius core Order model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
+interface OrderInterface extends CartInterface, PromotionSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
-    const TAX_ADJUSTMENT      = 'Tax';
-    const SHIPPING_ADJUSTMENT = 'Shipping';
-    const PROMOTION_ADJUSTMENT = 'Promotion';
+    const TAX_ADJUSTMENT       = 'tax';
+    const SHIPPING_ADJUSTMENT  = 'shipping';
+    const PROMOTION_ADJUSTMENT = 'promotion';
 
     /**
      * Get user.
@@ -129,6 +128,20 @@ interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
     public function removeShippingAdjustments();
 
     /**
+     * Get the payment associated with the order.
+     *
+     * @return PaymentInterface
+     */
+    public function getPayment();
+
+    /**
+     * Set payment.
+     *
+     * @param PaymentInterface $payment
+     */
+    public function setPayment(PaymentInterface $payment);
+
+    /**
      * Get all inventory units.
      *
      * @return Collection
@@ -155,6 +168,13 @@ interface OrderInterface extends BaseOrderInterface, PromotionSubjectInterface
      * @return Collection
      */
     public function getShipments();
+
+    /**
+     * Check if order has any shipments.
+     *
+     * @return Boolean
+     */
+    public function hasShipments();
 
     /**
      * Add a shipment.

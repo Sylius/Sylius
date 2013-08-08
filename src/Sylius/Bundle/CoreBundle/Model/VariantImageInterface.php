@@ -11,21 +11,19 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface as BaseVariantInterface;
-
 interface VariantImageInterface extends ImageInterface
 {
     /**
      * Get variant.
      *
-     * @return \Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface
+     * @return VariantInterface
      */
     public function getVariant();
 
     /**
      * Set the variant.
      *
-     * @param \Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface $variant
+     * @param VariantInterface $variant
      */
-    public function setVariant(BaseVariantInterface $variant = null);
+    public function setVariant(VariantInterface $variant = null);
 }

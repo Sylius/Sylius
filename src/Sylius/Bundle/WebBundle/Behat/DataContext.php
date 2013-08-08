@@ -17,7 +17,7 @@ use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Entity\User;
+use Sylius\Bundle\CoreBundle\Model\User;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -134,7 +134,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
-                $data['address']
+                isset($data['address']) ? $data['address'] : null
             );
         }
     }
@@ -144,9 +144,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
-    
+
             $user = new User();
-    
+
             $user->setFirstname($this->faker->firstName);
             $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
@@ -154,15 +154,15 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);
             $user->setPlainPassword($password);
-    
+
             if (null !== $address) {
                 $user->setShippingAddress($this->createAddress($address));
             }
-    
+
             if (null !== $role) {
                 $user->addRole($role);
             }
-    
+
             $this->getEntityManager()->persist($user);
             $this->getEntityManager()->flush();
         }
@@ -178,10 +178,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreOrders(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $orderBuilder = $this->getService('sylius.builder.order');
+        $orderRepository = $this->getRepository('order');
 
         foreach ($table->getHash() as $data) {
-            $order = $orderBuilder->create()->getOrder();
+            $order = $orderRepository->createNew();
 
             $address = $this->createAddress($data['address']);
 
@@ -196,6 +196,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
 
+            $order->complete();
+
             $manager->persist($order);
             $manager->flush();
 
@@ -209,18 +211,29 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function orderHasFollowingItems($number, TableNode $items)
     {
         $manager = $this->getEntityManager();
-        $orderBuilder = $this->getService('sylius.builder.order');
+        $orderItemRepository = $this->getRepository('order_item');
 
-        $orderBuilder->modify($this->orders[$number]);
+        $order = $this->orders[$number];
 
         foreach ($items->getHash() as $data) {
             $product = $this->findOneByName('product', trim($data['product']));
             $quantity = $data['quantity'];
 
-            $orderBuilder->add($product->getMasterVariant(), $product->getMasterVariant()->getPrice(), $quantity);
+            $item = $orderItemRepository->createNew();
+
+            $item->setVariant($product->getMasterVariant());
+            $item->setUnitPrice($product->getMasterVariant()->getPrice());
+            $item->setQuantity($quantity);
+
+            $order->addItem($item);
         }
 
-        $manager->persist($orderBuilder->getOrder());
+        $order->calculateTotal();
+        $order->complete();
+
+        $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+
+        $manager->persist($order);
         $manager->flush();
     }
 
@@ -395,7 +408,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $product = $this->findOneByName('product', $productName);
         $manager = $this->getEntityManager();
 
-        $this->getService('sylius.variant_generator')->generate($product);
+        $this->getService('sylius.generator.variant')->generate($product);
 
         foreach ($product->getVariants() as $variant) {
             $variant->setPrice($product->getMasterVariant()->getPrice());
@@ -482,7 +495,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
             );
             if ($choices) {
-                $additionalData['options'] = array('choices' => $choices);
+                $additionalData['configuration'] = array('choices' => $choices);
             }
             $this->thereIsProperty($data['name'], $additionalData);
         }
@@ -504,6 +517,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         $property = $repository->createNew();
         $property->setName($name);
+
         foreach ($additionalData as $key => $value) {
             $property->{'set'.\ucfirst($key)}($value);
         }
@@ -663,6 +677,29 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $category = array_key_exists('category', $data) ? $data['category'] : null;
             $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $category);
         }
+    }
+
+    /**
+     * @Given /^shipping method "([^""]*)" has following rules defined:$/
+     */
+    public function theShippingMethodHasFollowingRulesDefined($name, TableNode $table)
+    {
+        $shippingMethod = $this->findOneByName('shipping_method', $name);
+
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('shipping_method_rule');
+
+        foreach ($table->getHash() as $data) {
+            $rule = $repository->createNew();
+            $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
+            $rule->setConfiguration($this->getConfiguration($data['configuration']));
+
+            $shippingMethod->addRule($rule);
+
+            $manager->persist($rule);
+        }
+
+        $manager->flush();
     }
 
     /**

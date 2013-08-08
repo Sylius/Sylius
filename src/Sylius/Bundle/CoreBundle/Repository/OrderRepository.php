@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
-use FOS\UserBundle\Model\UserInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use YaLinqo\Enumerable;
 use DateTime;
+use FOS\UserBundle\Model\UserInterface;
+use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use YaLinqo\Enumerable;
 
-class OrderRepository extends EntityRepository
+class OrderRepository extends BaseOrderRepository
 {
     /**
      * Create user orders paginator.
@@ -61,6 +61,8 @@ class OrderRepository extends EntityRepository
     public function createFilterPaginator($criteria = array(), $sorting = array())
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
+
+          $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
 
         if (!empty($criteria['number'])) {
             $queryBuilder
@@ -188,5 +190,12 @@ class OrderRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $queryBuilder;
+    }
+
+    protected function getCollectionQueryBuilder()
+    {
+        $queryBuilder = parent::getCollectionQueryBuilder();
+
+        return $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
     }
 }

@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sylius core bundle.
@@ -33,9 +34,15 @@ class SyliusCoreBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            // 'Sylius\Bundle\AssortmentBundle\Model\Variant\VariantInterface' => 'sylius.model.variant.class',
+            // 'x' => 'sylius.model.x.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_core', $interfaces));
+
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\CoreBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_core.driver.doctrine/orm'));
     }
 }

@@ -65,6 +65,7 @@ class UserType extends ProfileFormType
             ->add('billingAddress', 'sylius_address', array(
                 'label' => 'sylius.form.user.billing_address'
             ))
+            ->remove('username')
         ;
     }
 

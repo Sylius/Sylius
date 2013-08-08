@@ -44,7 +44,7 @@ class InventoryUnitsFactory implements InventoryUnitsFactoryInterface
     public function createInventoryUnits(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $variant = $item->getSellable();
+            $variant = $item->getVariant();
             $units = $this->inventoryOperator->decrease($variant, $item->getQuantity());
 
             foreach ($units as $unit) {

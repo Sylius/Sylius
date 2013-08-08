@@ -1,3 +1,4 @@
+@products
 Feature: Products filter
     In order to easily find products
     As a store owner

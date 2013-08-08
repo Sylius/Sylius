@@ -13,11 +13,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AssortmentBundle\Model\CustomizableProductInterface;
-use Sylius\Bundle\CoreBundle\Entity\Product;
+use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 
 /**
- * Default assortment products to play with Sylius sandbox.
+ * Default assortment products to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -233,9 +233,9 @@ class LoadProductsData extends DataFixture
     /**
      * Generates all possible variants with random prices.
      *
-     * @param CustomizableProductInterface $product
+     * @param ProductInterface $product
      */
-    private function generateVariants(CustomizableProductInterface $product)
+    private function generateVariants(ProductInterface $product)
     {
         $this
             ->getVariantGenerator()
@@ -256,10 +256,10 @@ class LoadProductsData extends DataFixture
     /**
      * Adds master variant to product.
      *
-     * @param CustomizableProductInterface $product
-     * @param string                       $sku
+     * @param ProductInterface $product
+     * @param string           $sku
      */
-    private function addMasterVariant(CustomizableProductInterface $product, $sku = null)
+    private function addMasterVariant(ProductInterface $product, $sku = null)
     {
         if (null === $sku) {
             $sku = $this->getUniqueSku();
@@ -287,11 +287,11 @@ class LoadProductsData extends DataFixture
     /**
      * Adds property to product with given value.
      *
-     * @param CustomizableProductInterface $product
-     * @param string                       $name
-     * @param string                       $value
+     * @param ProductInterface $product
+     * @param string           $name
+     * @param string           $value
      */
-    private function addProperty(CustomizableProductInterface $product, $name, $value)
+    private function addProperty(ProductInterface $product, $name, $value)
     {
         $property = $this->getProductPropertyRepository()->createNew();
         $property->setProperty($this->getReference('Sylius.Property.'.$name));
@@ -304,10 +304,10 @@ class LoadProductsData extends DataFixture
     /**
      * Add product to given taxons.
      *
-     * @param CustomizableProductInterface $product
-     * @param array                        $taxonNames
+     * @param ProductInterface $product
+     * @param array            $taxonNames
      */
-    private function setTaxons(CustomizableProductInterface $product, array $taxonNames)
+    private function setTaxons(ProductInterface $product, array $taxonNames)
     {
         $taxons = new ArrayCollection();
 

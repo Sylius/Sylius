@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -30,7 +31,7 @@ class ShippingStep extends CheckoutStep
     {
         $form = $this->createCheckoutShippingForm();
 
-        return $this->renderStep($context, $form);
+        return $this->renderStep($context, $this->getCurrentCart(), $form);
     }
 
     /**
@@ -41,19 +42,22 @@ class ShippingStep extends CheckoutStep
         $request = $this->getRequest();
         $form = $this->createCheckoutShippingForm();
 
+        $cart = $this->getCurrentCart();
+
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($this->getCurrentCart());
+            $this->getManager()->persist($cart);
             $this->getManager()->flush();
 
             return $this->complete();
         }
 
-        return $this->renderStep($context, $form);
+        return $this->renderStep($context, $cart, $form);
     }
 
-    private function renderStep(ProcessContextInterface $context, FormInterface $form)
+    private function renderStep(ProcessContextInterface $context, OrderInterface $cart, FormInterface $form)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig', array(
+            'cart'    => $cart,
             'form'    => $form->createView(),
             'context' => $context
         ));
@@ -64,9 +68,31 @@ class ShippingStep extends CheckoutStep
         $cart = $this->getCurrentCart();
         $zone = $this->getZoneMatcher()->match($cart->getShippingAddress());
 
+        if (!$cart->hasShipments()) {
+            $this
+                ->getInventoryUnitsFactory()
+                ->createInventoryUnits($cart)
+            ;
+
+            $this
+                ->getShipmentFactory()
+                ->createShipment($cart)
+            ;
+        }
+
         return $this->createForm('sylius_checkout_shipping', $cart, array(
-            'shippables' => $cart,
-            'criteria'   => array('zone' => $zone)
+            'criteria'  => array('zone' => $zone)
         ));
+    }
+
+
+    private function getInventoryUnitsFactory()
+    {
+        return $this->get('sylius.order_processing.inventory_units_factory');
+    }
+
+    private function getShipmentFactory()
+    {
+        return $this->get('sylius.order_processing.shipment_factory');
     }
 }

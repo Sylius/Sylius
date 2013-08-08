@@ -1,3 +1,4 @@
+@products
 Feature: Product variants
     In order to add different product variations to my offer
     As a store owner

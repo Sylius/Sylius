@@ -23,6 +23,7 @@
 
         <parameter key="sylius.order_processing.inventory_units_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryUnitsFactory</parameter>
         <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
+        <parameter key="sylius.order_processing.payment_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessor</parameter>
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessor</parameter>
 
@@ -35,6 +36,7 @@
         <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
+        <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
@@ -117,8 +119,12 @@
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.cart.class%</argument>
-            <argument type="service" id="translator" />
             <tag name="form.type" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <argument type="service" id="translator" />
+            <tag name="form.type" alias="sylius_checkout_shipment" />
         </service>
         <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
             <argument>%sylius.model.cart.class%</argument>
@@ -131,6 +137,9 @@
         </service>
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
             <argument type="service" id="sylius.repository.shipment" />
+        </service>
+        <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
+            <argument type="service" id="sylius.repository.payment" />
         </service>
         <service id="sylius.order_processing.taxation_processor" class="%sylius.order_processing.taxation_processor.class%">
             <argument type="service" id="sylius.repository.adjustment" />

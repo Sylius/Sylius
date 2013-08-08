@@ -25,12 +25,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 class ShippingStepType extends AbstractType
 {
     protected $dataClass;
-    protected $translator;
 
-    public function __construct($dataClass, TranslatorInterface $translator)
+    public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
-        $this->translator = $translator;
     }
 
     /**
@@ -38,18 +36,10 @@ class ShippingStepType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $notBlank = new NotBlank();
-        $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
-
         $builder
-            ->add('shippingMethod', 'sylius_shipping_method_choice', array(
-                'label'       => 'sylius.form.checkout.shipping_method',
-                'shippables'  => $options['shippables'],
-                'criteria'    => $options['criteria'],
-                'expanded'    => true,
-                'constraints' => array(
-                    $notBlank
-                )
+            ->add('shipments', 'collection', array(
+                'type'    => 'sylius_checkout_shipment',
+                'options' => array('criteria' => $options['criteria'])
             ))
         ;
     }
@@ -63,15 +53,11 @@ class ShippingStepType extends AbstractType
             ->setDefaults(array(
                 'data_class' => $this->dataClass
             ))
-            ->setRequired(array(
-                'shippables'
-            ))
             ->setOptional(array(
                 'criteria'
             ))
             ->setAllowedTypes(array(
-                'shippables' => 'Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface',
-                'criteria'   => array('array')
+                'criteria' => array('array')
             ))
         ;
     }

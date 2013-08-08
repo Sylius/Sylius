@@ -17,4 +17,5 @@ web/media/*
 bin/behat
 bin/doctrine*
 bin/phpspec
+bin/webunit
 vendor/*

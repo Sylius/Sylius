@@ -17,18 +17,23 @@ class LoadOrdersData extends DataFixture
 {
     public function load(ObjectManager $manager)
     {
-        $orderBuilder = $this->get('sylius.builder.order');
+        $orderRepository = $this->getOrderRepository();
+        $orderItemRepository = $this->getOrderItemRepository();
 
         for ($i = 1; $i <= 50; $i++) {
-            $orderBuilder->create();
+            $order = $orderRepository->createNew();
 
             for ($j = 0; $j <= rand(3, 6); $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
-                $orderBuilder->add($variant, $variant->getPrice(), rand(1, 5));
-            }
+                $item = $orderItemRepository->createNew();
 
-            $order = $orderBuilder->getOrder();
+                $item->setVariant($variant);
+                $item->setUnitPrice($variant->getPrice());
+                $item->setQuantity(rand(1, 5));
+
+                $order->addItem($item);
+            }
 
             $shipment = $this->getShipmentRepository()->createNew();
             $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
@@ -47,6 +52,7 @@ class LoadOrdersData extends DataFixture
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
 
             $order->calculateTotal();
+            $order->complete();
 
             $this->setReference('Sylius.Order-'.$i, $order);
 

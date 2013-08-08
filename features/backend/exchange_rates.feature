@@ -1,3 +1,4 @@
+@currencies
 Feature: Exchange rates
     In order to sell products to customers paying in different currencies
     As a store owner

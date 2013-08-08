@@ -1,3 +1,4 @@
+@products
 Feature: Products
     In order to create my offer
     As a store owner

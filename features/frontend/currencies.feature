@@ -1,3 +1,4 @@
+@currencies
 Feature: Currencies
     In order to buy products paying in different currencies
     As a visitor or as a logged in user
