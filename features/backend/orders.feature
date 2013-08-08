@@ -46,7 +46,7 @@ Feature: Orders management
         Given I am on the dashboard page
          When I follow "Current orders"
          Then I should be on the order index page
-          And I should see order with total "€11.98" in the list
+          And I should see order with total "€14.74" in the list
 
     Scenario: Accessing the order creation form
         Given I am on the dashboard page
@@ -92,10 +92,14 @@ Feature: Orders management
          When I click "#000002"
          Then I should be viewing order with number "000002"
 
+    Scenario: Displaying correct total on order page
+        Given I am viewing order with number "000002"
+         Then I should see "Total: €56.57"
+
     Scenario: Displaying correct items total on order page
         Given I am viewing order with number "000002"
          Then I should see "Items total: €45.99"
 
     Scenario: Displaying correct tax total on order page
         Given I am viewing order with number "000002"
-         Then I should see "Tax total: €0.00"
+         Then I should see "Tax total: €10.58"
