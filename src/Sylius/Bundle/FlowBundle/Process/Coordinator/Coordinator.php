@@ -124,8 +124,8 @@ class Coordinator implements CoordinatorInterface
             return $this->redirectToStepDisplayAction($process, $step);
         }
 
-        if (!$this->context->isValid()) {
-            throw new NotFoundHttpException();
+        if (($validator = $this->context->isValid()) !== true) {
+            return $validator->getResponse($step);
         }
 
         $result = $step->displayAction($this->context);
