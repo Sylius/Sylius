@@ -44,7 +44,7 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
      */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {
-        foreach ($shippingMethod->getRules() as $rule) {
+        foreach ($method->getRules() as $rule) {
             $checker = $this->registry->getChecker($rule->getType());
 
             if (false === $checker->isEligible($subject, $rule->getConfiguration())) {

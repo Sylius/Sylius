@@ -50,11 +50,7 @@ class ShippingMethodChoiceType extends AbstractType
         $methodsResolver = $this->resolver;
 
         $choiceList = function (Options $options) use ($methodsResolver) {
-            if (!isset($options['shipment']) && !isset($options['shippables'])) {
-                throw new \InvalidArgumentException('One of options "shipment" and "shippables" is required');
-            }
-
-            $methods = $methodsResolver->getSupportedMethods($options['shippables'], $options['criteria']);
+            $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
 
             return new ObjectChoiceList($methods);
         };
@@ -65,11 +61,11 @@ class ShippingMethodChoiceType extends AbstractType
                 'criteria'    => array()
             ))
             ->setRequired(array(
-                'shippables',
+                'subject',
             ))
             ->setAllowedTypes(array(
-                'shippables' => array('Sylius\Bundle\ShippingBundle\Model\ShippablesAwareInterface'),
-                'criteria'   => array('array')
+                'subject'  => array('Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface'),
+                'criteria' => array('array')
             ))
         ;
     }

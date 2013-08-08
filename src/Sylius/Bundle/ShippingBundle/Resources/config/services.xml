@@ -101,6 +101,7 @@
 
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.shipping_eligibility_checker" />
         </service>
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
             <argument type="service" id="sylius.shipping_methods_resolver" />
