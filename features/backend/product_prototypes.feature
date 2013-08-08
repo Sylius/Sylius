@@ -1,3 +1,4 @@
+@products
 Feature: Product prototypes
     In order to create similar products faster
     As a store owner

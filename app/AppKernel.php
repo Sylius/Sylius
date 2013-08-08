@@ -30,23 +30,24 @@ class AppKernel extends Kernel
         $bundles = array(
             // Sylius bundles.
             new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
+            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),
-            new Sylius\Bundle\AssortmentBundle\SyliusAssortmentBundle(),
+            new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
+            new Sylius\Bundle\VariableProductBundle\SyliusVariableProductBundle(),
             new Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
             new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
             new Sylius\Bundle\PaymentsBundle\SyliusPaymentsBundle(),
             new Sylius\Bundle\PromotionsBundle\SyliusPromotionsBundle(),
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
-            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
             new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
             new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
             new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
 
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

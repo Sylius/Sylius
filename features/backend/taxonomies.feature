@@ -1,3 +1,4 @@
+@taxonomies
 Feature: taxonomies
     In order to categorize my merchandise
     As a store owner

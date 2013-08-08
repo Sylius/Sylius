@@ -9,13 +9,14 @@
 
 <form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
 
-{{ form_errors(form.shippingMethod) }}
-
-{{ form_label(form.shippingMethod) }}
 <fieldset>
-    {% for shippingMethodForm in form.shippingMethod %}
-        {{ form_row(shippingMethodForm) }}
-    {% endfor %}
+{% for shipment in cart.shipments %}
+
+{% set shipmentForm = form.shipments[loop.index0] %}
+
+{{ form_row(shipmentForm.method) }}
+
+{% endfor %}
 </fieldset>
 
 {{ form_widget(form._token) }}

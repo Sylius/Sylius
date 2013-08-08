@@ -1,0 +1,41 @@
+{% macro list(products) %}
+
+{% if products|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('sku', 'sylius.stockable.sku'|trans) }}</th>
+                <th>{{ 'sylius.stockable.name'|trans }}</th>
+                <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.stockable.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.sku }}</td>
+                    <td>{{ product.name }}</td>
+                    <td><span class="badge badge-{{ product.masterVariant.isInStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
+                    <td>{{ product.updatedAt|date }}</td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{# path('sylius_sandbox_backend_product_update', {'id': product.id}) #}" class="btn disabled">
+                               <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-info">
+        <h4 class="alert-heading">{{ 'sylius.alert.info'|trans }}</h4>
+        {{ 'sylius.stockable.no_results'|trans }}
+    </div>
+{% endif %}
+
+{% endmacro %}

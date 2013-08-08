@@ -65,31 +65,9 @@ class FinalizeStep extends CheckoutStep
      */
     private function createOrder(ProcessContextInterface $context)
     {
-        $orderBuilder = $this->getOrderBuilder();
-        $orderBuilder->create();
-
-        $cart = $this->getCurrentCart();
-
-        foreach ($cart->getItems() as $item) {
-            $orderBuilder->add($item->getVariant(), $item->getUnitPrice(), $item->getQuantity());
-        }
-
-        $order = $orderBuilder->getOrder();
+        $order = $this->getCurrentCart();
 
         $order->setUser($this->getUser());
-
-        $order->setshippingAddress($cart->getShippingAddress());
-        $order->setBillingAddress($cart->getBillingAddress());
-
-        $this
-            ->getInventoryUnitsFactory()
-            ->createInventoryUnits($order)
-        ;
-
-        $this
-            ->getShipmentFactory()
-            ->createShipment($order, $cart->getShippingMethod())
-        ;
 
         $order->calculateTotal();
         $this->get('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
@@ -107,24 +85,11 @@ class FinalizeStep extends CheckoutStep
     {
         $manager = $this->get('sylius.manager.order');
 
+        $order->complete();
+
         $manager->persist($order);
         $manager->flush($order);
 
         $this->get('event_dispatcher')->dispatch('sylius.order.post_create', new GenericEvent($order));
-    }
-
-    private function getOrderBuilder()
-    {
-        return $this->get('sylius.builder.order');
-    }
-
-    private function getInventoryUnitsFactory()
-    {
-        return $this->get('sylius.order_processing.inventory_units_factory');
-    }
-
-    private function getShipmentFactory()
-    {
-        return $this->get('sylius.order_processing.shipment_factory');
     }
 }

@@ -1,3 +1,4 @@
+@homepage
 Feature: Store homepage
     In order to access and browse the store
     As a visitor

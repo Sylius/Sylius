@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\CoreBundle\Entity\Order">
+    <class name="Sylius\Bundle\CoreBundle\Model\Order">
         <property name="shippingAddress">
             <constraint name="Valid" />
         </property>
@@ -25,44 +25,50 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Entity\Variant">
+    <class name="Sylius\Bundle\CoreBundle\Model\Variant">
         <property name="price">
             <constraint name="NotBlank">
                 <option name="message">sylius.variant.price.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0.01</option>
                 <option name="minMessage">sylius.variant.price.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="onHand">
             <constraint name="NotBlank">
                 <option name="message">sylius.variant.onHand.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0</option>
                 <option name="minMessage">sylius.variant.onHand.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Entity\ShippingMethod">
+    <class name="Sylius\Bundle\CoreBundle\Model\ShippingMethod">
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_shipping.method.zone.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Entity\TaxRate">
+    <class name="Sylius\Bundle\CoreBundle\Model\TaxRate">
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_taxation.rate.zone.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Entity\User">
+    <class name="Sylius\Bundle\CoreBundle\Model\User">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.first_name.not_blank</option>

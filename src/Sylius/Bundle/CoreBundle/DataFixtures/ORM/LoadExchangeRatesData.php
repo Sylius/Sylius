@@ -27,11 +27,17 @@ class LoadExchangeRatesData extends DataFixture
     {
         $exchangeRateRepository = $this->getExchangeRateRepository();
 
-        foreach (array('EUR', 'USD', 'GBP') as $currency) {
+        $currencies = array(
+            'EUR' => 1.00,
+            'USD' => 1.30,
+            'GBP' => 0.85
+        );
+
+        foreach ($currencies as $currency => $rate) {
             $exchangeRate = $exchangeRateRepository->createNew();
 
             $exchangeRate->setCurrency($currency);
-            $exchangeRate->setRate($this->faker->randomFloat(null, 0, 100));
+            $exchangeRate->setRate($rate);
 
             $manager->persist($exchangeRate);
         }

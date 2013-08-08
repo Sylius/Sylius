@@ -1,11 +1,10 @@
 {{ form_errors(form) }}
 <div class="row-fluid">
     <fieldset>
+        {{ form_row(form.email) }}
         {{ form_row(form.firstName) }}
         {{ form_row(form.lastName) }}
-        {{ form_row(form.username) }}
         {{ form_row(form.plainPassword) }}
-        {{ form_row(form.email) }}
         {{ form_row(form.enabled) }}
     </fieldset>
     <div class="span5 well">

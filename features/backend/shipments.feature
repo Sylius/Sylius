@@ -1,3 +1,4 @@
+@shipping
 Feature: Shipments
     In order to track shipments
     As a store owner

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -27,7 +28,8 @@ class PaymentStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $form = $this->createCheckoutPaymentForm();
+        $cart = $this->getCurrentCart();
+        $form = $this->createCheckoutPaymentForm($cart);
 
         return $this->renderStep($context, $form);
     }
@@ -38,10 +40,12 @@ class PaymentStep extends CheckoutStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $request = $this->getRequest();
-        $form = $this->createCheckoutPaymentForm();
+
+        $cart = $this->getCurrentCart();
+        $form = $this->createCheckoutPaymentForm($cart);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($this->getCurrentCart());
+            $this->getManager()->persist($cart);
             $this->getManager()->flush();
 
             return $this->complete();
@@ -58,8 +62,17 @@ class PaymentStep extends CheckoutStep
         ));
     }
 
-    private function createCheckoutPaymentForm()
+    private function createCheckoutPaymentForm(OrderInterface $cart)
     {
-        return $this->createForm('sylius_checkout_payment', $this->getCurrentCart());
+        if (null === $cart->getPayment()) {
+            $this->getPaymentProcessor()->createPayment($cart);
+        }
+
+        return $this->createForm('sylius_checkout_payment', $cart);
+    }
+
+    private function getPaymentProcessor()
+    {
+        return $this->get('sylius.order_processing.payment_processor');
     }
 }

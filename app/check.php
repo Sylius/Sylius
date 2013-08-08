@@ -25,8 +25,13 @@ echo "*  from your web server using the web/config.php script.\n";
 
 echo_title('Mandatory requirements');
 
+$checkPassed = true;
 foreach ($symfonyRequirements->getRequirements() as $req) {
+    /** @var $req Requirement */
     echo_requirement($req);
+    if (!$req->isFulfilled()) {
+        $checkPassed = false;
+    }
 }
 
 echo_title('Optional recommendations');
@@ -34,6 +39,8 @@ echo_title('Optional recommendations');
 foreach ($symfonyRequirements->getRecommendations() as $req) {
     echo_requirement($req);
 }
+
+exit($checkPassed ? 0 : 1);
 
 /**
  * Prints a Requirement instance

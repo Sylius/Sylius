@@ -1,3 +1,4 @@
+@taxation
 Feature: Taxation settings
     In order configure my store taxation system
     As a store owner

@@ -1,3 +1,4 @@
+@account
 Feature: User account password change
     In order to enhance the security of my account
     As a logged user
@@ -36,5 +37,5 @@ Feature: User account password change
           And I fill in "Confirmation" with "newpassword"
           And I press "Save changes"
          Then I should be on my account profile page
-          And I should see "Your password has been changed"
+          And I should see "The password has been changed"
 

@@ -40,9 +40,10 @@ class PaymentStepType extends AbstractType
 
         $builder
             ->add('paymentMethod', 'sylius_payment_method_choice', array(
-                'label'       => 'sylius.form.checkout.payment_method',
-                'expanded'    => true,
-                'constraints' => array(
+                'label'         => 'sylius.form.checkout.payment_method',
+                'expanded'      => true,
+                'property_path' => 'payment.method',
+                'constraints'   => array(
                     $notBlank
                 )
             ))

@@ -201,6 +201,7 @@ class FrontendMenuBuilder extends MenuBuilder
 
         foreach ($taxonomies as $taxonomy) {
             $child = $menu->addChild($taxonomy->getName(), $childOptions);
+
             if ($taxonomy->getRoot()->hasPath()) {
                 $child->setLabelAttribute('data-image', $taxonomy->getRoot()->getPath());
             }

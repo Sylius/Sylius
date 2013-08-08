@@ -17,17 +17,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php":                      ">=5.3.3",
+        "php":                       ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.1",
-        "sylius/core-bundle":       "0.1.*",
-        "knplabs/knp-menu-bundle":  "2.0.*",
-        "liip/imagine-bundle":      "0.9.*",
+        "symfony/framework-bundle":  "~2.3",
+        "sylius/core-bundle":        "0.2.*",
+        "knplabs/knp-menu-bundle":   "2.0.*",
+        "liip/imagine-bundle":       "0.9.*",
         "knplabs/knp-snappy-bundle": "dev-master"
-    },
-    "require-dev": {
-        "phpspec/phpspec2":         "dev-develop",
-        "symfony/security":         "~2.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -38,7 +34,7 @@
     "target-dir": "Sylius/Bundle/WebBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "0.2.x-dev"
         }
     }
 }

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\AssortmentBundle\Form\Type\VariantType as BaseVariantType;
+use Sylius\Bundle\VariableProductBundle\Form\Type\VariantType as BaseVariantType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

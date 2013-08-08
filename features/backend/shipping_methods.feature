@@ -1,3 +1,4 @@
+@shipping
 Feature: Shipping methods
     In order to apply proper shipping to my merchandise
     As a store owner
@@ -14,16 +15,23 @@ Feature: Shipping methods
             | Regular |
             | Heavy   |
           And the following shipping methods exist:
-            | category | zone         | name        |
-            | Regular  | USA          | FedEx       |
-            | Heavy    | UK + Germany | DHL         |
-            |          | UK + Germany | DHL Express |
+            | category | zone         | name         |
+            | Regular  | USA          | FedEx        |
+            | Heavy    | UK + Germany | DHL          |
+            |          | UK + Germany | DHL Express  |
+            |          | USA          | TurboPackage |
+          And shipping method "DHL Express" has following rules defined:
+            | type       | configuration |
+            | Item total | Amount: 10000 |
+          And shipping method "TurboPackage" has following rules defined:
+            | type   | configuration     |
+            | Weight | Min: 10, Max: 500 |
 
     Scenario: Seeing index of all shipping methods
         Given I am on the dashboard page
          When I follow "Shipping methods"
          Then I should be on the shipping method index page
-          And I should see 3 shipping methods in the list
+          And I should see 4 shipping methods in the list
 
     Scenario: Seeing empty index of shipping methods
         Given there are no shipping methods
@@ -90,7 +98,7 @@ Feature: Shipping methods
     Scenario: Created shipping methods appear in the list
         Given I created shipping method "FedEx World Shipping" within zone "USA"
           And I go to the shipping method index page
-         Then I should see 4 shipping methods in the list
+         Then I should see 5 shipping methods in the list
           And I should see shipping method with name "FedEx World Shipping" in that list
 
     Scenario: Accessing the shipping method editing form

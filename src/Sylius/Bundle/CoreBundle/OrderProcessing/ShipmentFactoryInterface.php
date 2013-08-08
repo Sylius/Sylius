@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * Order shipment factory.
@@ -24,8 +23,7 @@ interface ShipmentFactoryInterface
     /**
      * Create shipment for order.
      *
-     * @param OrderInterface          $order
-     * @param ShippingMethodInterface $method
+     * @param OrderInterface $order
      */
-    public function createShipment(OrderInterface $order, ShippingMethodInterface $method);
+    public function createShipment(OrderInterface $order);
 }

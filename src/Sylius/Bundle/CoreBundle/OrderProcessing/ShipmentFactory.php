@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
@@ -42,10 +41,9 @@ class ShipmentFactory implements ShipmentFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createShipment(OrderInterface $order, ShippingMethodInterface $method)
+    public function createShipment(OrderInterface $order)
     {
         $shipment = $this->shipmentRepository->createNew();
-        $shipment->setMethod($method);
 
         foreach ($order->getInventoryUnits() as $inventoryUnit) {
             $shipment->addItem($inventoryUnit);
