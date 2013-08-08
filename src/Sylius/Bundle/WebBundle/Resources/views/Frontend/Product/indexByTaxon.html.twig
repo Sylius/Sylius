@@ -4,6 +4,10 @@
 {% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import list %}
 
+{%- block title -%}
+    {{ parent() }} | {{ taxon.name|truncate(20) }}
+{%- endblock -%}
+
 {% block content %}
 <div class="page-header">
     <h1>{{ 'sylius.product.index_by_taxon_header'|trans({'%taxon%': taxon.name})|raw }}</h1>

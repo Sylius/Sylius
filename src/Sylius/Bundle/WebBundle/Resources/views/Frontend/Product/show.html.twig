@@ -2,6 +2,10 @@
 
 {% set form = sylius_cart_form({'product': product}) %}
 
+{%- block title -%}
+    {{ parent() }} | {{ product.name|truncate(20) }}
+{%- endblock -%}
+
 {% block content %}
 <div class="row-fluid">
     <div class="span3">
