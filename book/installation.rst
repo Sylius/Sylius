@@ -12,7 +12,7 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer create-project -s dev sylius/sylius:0.2.*@dev
+    $ composer create-project -s dev sylius/sylius
 
 Otherwise you have to download .phar file.
 
