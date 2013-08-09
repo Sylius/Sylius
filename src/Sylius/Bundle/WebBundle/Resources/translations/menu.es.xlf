@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="cd1ac84fcaa92336771b2f537b546f7c" resname="sylius.backend.menu.main.assortment">
         <source>sylius.backend.menu.main.assortment</source>
-        <target>Surtido</target>
+        <target>Varios</target>
       </trans-unit>
       <trans-unit id="a372a7d5b6e2991da23009440f5b1c98" resname="sylius.backend.menu.main.configuration">
         <source>sylius.backend.menu.main.configuration</source>
@@ -24,7 +24,7 @@
       </trans-unit>
       <trans-unit id="2c21cdef4aa00a86044bf3ebf9709493" resname="sylius.backend.menu.main.homepage">
         <source>sylius.backend.menu.main.homepage</source>
-        <target>Su tienda</target>
+        <target>Mi tienda</target>
       </trans-unit>
       <trans-unit id="d38ec9ab0caf4fec0e9d90fadaddbdff" resname="sylius.backend.menu.main.new_order">
         <source>sylius.backend.menu.main.new_order</source>
@@ -68,7 +68,7 @@
       </trans-unit>
       <trans-unit id="67b31ee62274d0f6a2a2ad4c055d31de" resname="sylius.backend.menu.main.shipping_categories">
         <source>sylius.backend.menu.main.shipping_categories</source>
-        <target>Categoriás de envío</target>
+        <target>Categorías de envío</target>
       </trans-unit>
       <trans-unit id="0db487586f98e52363e8e92234bea40c" resname="sylius.backend.menu.main.shipping_methods">
         <source>sylius.backend.menu.main.shipping_methods</source>
@@ -96,7 +96,7 @@
       </trans-unit>
       <trans-unit id="b82bee2bddf68adf095856b85e41b6cb" resname="sylius.backend.menu.sidebar.assortment">
         <source>sylius.backend.menu.sidebar.assortment</source>
-        <target>Surtido</target>
+        <target>Varios</target>
       </trans-unit>
       <trans-unit id="7486e100b253cf670a06bf260d24d6c3" resname="sylius.backend.menu.sidebar.configuration">
         <source>sylius.backend.menu.sidebar.configuration</source>
@@ -152,7 +152,7 @@
       </trans-unit>
       <trans-unit id="b6468a1b2dae8fafd1186e9be1058b84" resname="sylius.backend.menu.sidebar.properties">
         <source>sylius.backend.menu.sidebar.properties</source>
-        <target>Configurar propiedades</target>
+        <target>Configuración de propiedades</target>
       </trans-unit>
       <trans-unit id="4d036fdb45e10188e4fdbc9367792bdb" resname="sylius.backend.menu.sidebar.prototypes">
         <source>sylius.backend.menu.sidebar.prototypes</source>
@@ -164,7 +164,7 @@
       </trans-unit>
       <trans-unit id="afbdf4d445acac38529ddb802a329ed2" resname="sylius.backend.menu.sidebar.shipping_categories">
         <source>sylius.backend.menu.sidebar.shipping_categories</source>
-        <target>Categoriás de envío</target>
+        <target>Categorías de envío</target>
       </trans-unit>
       <trans-unit id="7007c8ae07370e45526f1dc178a94514" resname="sylius.backend.menu.sidebar.shipping_methods">
         <source>sylius.backend.menu.sidebar.shipping_methods</source>
