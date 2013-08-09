@@ -35,11 +35,17 @@ class ProductController extends ResourceController
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
-        $taxon = $this->get('sylius.repository.taxon')
-            ->findOneByPermalink($permalink);
+        $config = $this->getConfiguration();
 
-        if (!isset($taxon)) {
-            throw new NotFoundHttpException('Requested taxon does not exist.');
+        if ($request->attributes->has('_sylius_entity')) {
+            $taxon = $request->attributes->get('_sylius_entity');
+        } else {
+            $taxon = $this->get('sylius.repository.taxon')
+                ->findOneByPermalink($permalink);
+
+            if (!isset($taxon)) {
+                throw new NotFoundHttpException('Requested taxon does not exist.');
+            }
         }
 
         $paginator = $this
@@ -115,5 +121,14 @@ class ProductController extends ResourceController
         return $this->render('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
             'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
         ));
+    }
+
+    public function findOr404(Request $request, array $criteria = array())
+    {
+        if ($request->attributes->has('_sylius_entity')) {
+            return $request->attributes->get('_sylius_entity');
+        }
+
+        return parent::findOr404($request, $criteria);
     }
 }
