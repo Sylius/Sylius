@@ -72,6 +72,13 @@ class Product extends BaseProduct implements ProductInterface
     protected $shippingCategory;
 
     /**
+     * Optional UUID
+     *
+     * @var string
+     */
+    protected $uuid;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -240,6 +247,16 @@ class Product extends BaseProduct implements ProductInterface
     public function getImage()
     {
         return $this->getMasterVariant()->getImages()->first();
+    }
+
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
     }
 
     /**

@@ -245,6 +245,14 @@
             <argument type="service" id="sylius.settings.manager" />
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
+
+        <service id="sylius.listener.product_phpcr" class="Sylius\Bundle\CoreBundle\EventListener\ProductPhpcrListener">
+            <argument type="service" id="doctrine_phpcr" />
+            <argument>%sylius.product_path%</argument>
+            <tag name="doctrine.event_listener" event="preFlush" />
+            <tag name="doctrine.event_listener" event="postLoad" />
+        </service>
+
     </services>
 
 </container>

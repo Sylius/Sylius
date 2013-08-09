@@ -55,7 +55,10 @@
         "knplabs/knp-menu-bundle":              "2.0.*",
         "liip/imagine-bundle":                  "0.9.*",
         "knplabs/knp-snappy-bundle":           "dev-master",
-        "athari/yalinqo":                       "*"
+        "athari/yalinqo":                       "*",
+        "doctrine/phpcr-bundle":                "1.0.*@dev",
+        "jackalope/jackalope-doctrine-dbal":    "1.0.0-beta3",
+        "liip/doctrine-cache-bundle":           "1.0.*"
     },
     "require-dev": {
         "behat/behat":                  "2.4.*",
