@@ -3,6 +3,9 @@ Performing basic CRUD operations
 
 Sylius is using the Doctrine Common persistence interfaces. This means that every model within Sylius bundles has its own repository and object manager.
 
+Some interfaces extend the Timestampable and SoftDeletable interfaces. Those interfaces are defined in the SyliusResourceBundle to not create a dependency on Doctrine ORM.
+They are however compatible with the GedmoDoctrineExtensions when using Doctrine ORM.
+
 Retrieving resources
 --------------------
 
