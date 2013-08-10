@@ -121,7 +121,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('prototype')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\ProductBundle\\Model\\PrototypeProperty')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\ProductBundle\\Model\\Prototype')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ProductBundle\\Controller\\PrototypeController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\ProductBundle\\Form\\Type\\PrototypeType')->end()
