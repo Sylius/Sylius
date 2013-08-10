@@ -12,48 +12,48 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order taxation listener.
+ * Order payment listener.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderTaxationListener
+class OrderPaymentListener
 {
     /**
-     * Order taxation processor.
+     * Order payment processor.
      *
-     * @var TaxationProcessorInterface
+     * @var PaymentProcessorInterface
      */
-    protected $taxationProcessor;
+    protected $paymentProcessor;
 
     /**
      * Constructor.
      *
-     * @param TaxationProcessorInterface $taxationProcessor
+     * @param PaymentProcessorInterface $paymentProcessor
      */
-    public function __construct(TaxationProcessorInterface $taxationProcessor)
+    public function __construct(PaymentProcessorInterface $paymentProcessor)
     {
-        $this->taxationProcessor = $taxationProcessor;
+        $this->paymentProcessor = $paymentProcessor;
     }
 
     /**
-     * Get the order from event and run the taxation processor on it.
+     * Get the order from event and create payment.
      *
      * @param GenericEvent $event
      */
-    public function onCartChange(GenericEvent $event)
+    public function processOrderPayment(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order taxation listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order payment listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
-        $this->taxationProcessor->applyTaxes($order);
+        $this->paymentProcessor->createPayment($order);
     }
 }

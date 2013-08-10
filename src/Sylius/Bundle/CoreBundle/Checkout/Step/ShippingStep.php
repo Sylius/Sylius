@@ -11,12 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
  * The shipping step of checkout.
+ *
  * Based on the user address, we present the available shipping methods,
  * and ask him to select his preffered one.
  *
@@ -29,9 +31,12 @@ class ShippingStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $form = $this->createCheckoutShippingForm();
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
 
-        return $this->renderStep($context, $this->getCurrentCart(), $form);
+        $form = $this->createCheckoutShippingForm($order);
+
+        return $this->renderStep($context, $order, $form);
     }
 
     /**
@@ -40,58 +45,41 @@ class ShippingStep extends CheckoutStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $request = $this->getRequest();
-        $form = $this->createCheckoutShippingForm();
 
-        $cart = $this->getCurrentCart();
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
+
+        $form = $this->createCheckoutShippingForm($order);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($cart);
+            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
+
+            $this->getManager()->persist($order);
             $this->getManager()->flush();
+
+            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_COMPLETE, $order);
 
             return $this->complete();
         }
 
-        return $this->renderStep($context, $cart, $form);
+        return $this->renderStep($context, $order, $form);
     }
 
-    private function renderStep(ProcessContextInterface $context, OrderInterface $cart, FormInterface $form)
+    private function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig', array(
-            'cart'    => $cart,
+            'order'   => $order,
             'form'    => $form->createView(),
             'context' => $context
         ));
     }
 
-    private function createCheckoutShippingForm()
+    private function createCheckoutShippingForm(OrderInterface $order)
     {
-        $cart = $this->getCurrentCart();
-        $zone = $this->getZoneMatcher()->match($cart->getShippingAddress());
+        $zone = $this->getZoneMatcher()->match($order->getShippingAddress());
 
-        if (!$cart->hasShipments()) {
-            $this
-                ->getInventoryUnitsFactory()
-                ->createInventoryUnits($cart)
-            ;
-
-            $this
-                ->getShipmentFactory()
-                ->createShipment($cart)
-            ;
-        }
-
-        return $this->createForm('sylius_checkout_shipping', $cart, array(
+        return $this->createForm('sylius_checkout_shipping', $order, array(
             'criteria'  => array('zone' => $zone)
         ));
-    }
-
-    private function getInventoryUnitsFactory()
-    {
-        return $this->get('sylius.order_processing.inventory_units_factory');
-    }
-
-    private function getShipmentFactory()
-    {
-        return $this->get('sylius.order_processing.shipment_factory');
     }
 }
