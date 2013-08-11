@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Operator;
+namespace Sylius\Bundle\InventoryBundle\Factory;
 
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
- * Stock operator interface.
- * Manage stock levels and inventory units.
+ * Inventory unit factory interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
  */
-interface InventoryOperatorInterface
+interface InventoryUnitFactoryInterface
 {
     /**
-     * Increase stock on hand for given stockable by quantity.
+     * Create given amount of inventory units.
      *
      * @param StockableInterface $stockable
      * @param integer            $quantity
+     * @param string             $state
      */
-    public function increase(StockableInterface $stockable, $quantity);
-
-    /**
-     * Decrease stock by count of given inventory units.
-     *
-     * @param array $inventoryUnits
-     */
-    public function decrease(array $inventoryUnits);
+    public function create(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD);
 }

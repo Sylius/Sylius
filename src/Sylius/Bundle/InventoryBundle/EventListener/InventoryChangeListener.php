@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\InventoryBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
+use Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface;
 
 /**
  * Inventory change listener.
@@ -24,31 +24,31 @@ use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
 class InventoryChangeListener implements InventoryChangeListenerInterface
 {
     /**
-     * Inventory operator.
+     * backorders handler.
      *
-     * @var InventoryOperatorInterface
+     * @var BackordersHandlerInterface
      */
-    private $inventoryOperator;
+    private $backordersHandler;
 
     /**
      * Constructor.
      *
-     * @param InventoryOperatorInterface $inventoryOperator
+     * @param BackordersHandlerInterface $backordersHandler
      */
-    public function __construct(InventoryOperatorInterface $inventoryOperator)
+    public function __construct(BackordersHandlerInterface $backordersHandler)
     {
-        $this->inventoryOperator = $inventoryOperator;
+        $this->backordersHandler = $backordersHandler;
     }
 
     /**
      * {@inheritdoc}
      *
-     * Fills backorders using inventory operator.
+     * Fills backorders using backorders handler.
      *
      * @param GenericEvent $event
      */
     public function onInventoryChange(GenericEvent $event)
     {
-        $this->inventoryOperator->fillBackorders($event->getSubject());
+        $this->backordersHandler->fillBackorders($event->getSubject());
     }
 }

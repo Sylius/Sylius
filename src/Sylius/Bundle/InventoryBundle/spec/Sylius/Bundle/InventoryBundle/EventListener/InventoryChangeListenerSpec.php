@@ -19,11 +19,11 @@ use PhpSpec\ObjectBehavior;
 class InventoryChangeListenerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface $operator
+     * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface $backordersHandler
      */
-    function let($operator)
+    function let($backordersHandler)
     {
-        $this->beConstructedWith($operator);
+        $this->beConstructedWith($backordersHandler);
     }
 
     function it_is_initializable()
@@ -40,10 +40,10 @@ class InventoryChangeListenerSpec extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent         $event
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
      */
-    function it_fills_backorders_on_inventory_change($operator, $event, $stockable)
+    function it_fills_backorders_on_inventory_change($backordersHandler, $event, $stockable)
     {
         $event->getSubject()->shouldBeCalled()->willReturn($stockable);
-        $operator->fillBackorders($stockable)->shouldBeCalled();
+        $backordersHandler->fillBackorders($stockable)->shouldBeCalled();
 
         $this->onInventoryChange($event);
     }
