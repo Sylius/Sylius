@@ -85,8 +85,8 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->close();
 
-        if (!$this->context->isValid()) {
-            throw new NotFoundHttpException();
+        if (($validator = $this->context->isValid()) !== true) {
+            return $validator->getResponse($step);
         }
 
         return $this->redirectToStepDisplayAction($process, $step);
@@ -124,8 +124,8 @@ class Coordinator implements CoordinatorInterface
             return $this->redirectToStepDisplayAction($process, $step);
         }
 
-        if (!$this->context->isValid()) {
-            throw new NotFoundHttpException();
+        if (($validator = $this->context->isValid()) !== true) {
+            return $validator->getResponse($step);
         }
 
         $result = $step->displayAction($this->context);
@@ -144,8 +144,8 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->rewindHistory();
 
-        if (!$this->context->isValid()) {
-            throw new NotFoundHttpException();
+        if (($validator = $this->context->isValid()) !== true) {
+            return $validator->getResponse($step);
         }
 
         $result = $step->forwardAction($this->context);

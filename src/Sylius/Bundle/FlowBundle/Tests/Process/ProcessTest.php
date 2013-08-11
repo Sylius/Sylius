@@ -14,6 +14,7 @@ namespace Sylius\Bundle\FlowBundle\Tests\Process;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Step\Step;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
  * Process test.
@@ -267,16 +268,16 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process->setDisplayRoute('displayRoute');
         $process->setForwardRoute('forwardRoute');
         $process->setRedirect('http://somepage');
-        $process->setValidator(function () {
-            return 'Awesome validator';
-        });
+        $process->setValidator(new ProcessValidator(function () {
+            return false;
+        }));
 
         $validator = $process->getValidator();
         $this->assertSame('alias', $process->getScenarioAlias());
         $this->assertSame('displayRoute', $process->getDisplayRoute());
         $this->assertSame('forwardRoute', $process->getForwardRoute());
         $this->assertSame('http://somepage', $process->getRedirect());
-        $this->assertSame('Awesome validator', $validator());
+        $this->assertSame(false, $validator->isValid());
     }
 
     /**
