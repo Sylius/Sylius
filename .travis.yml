@@ -10,6 +10,9 @@ matrix:
         - php: 5.5
 
 before_script:
+    - "sudo apt-get install -y wkhtmltopdf"
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
 #   - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 #   - sudo apt-get update > /dev/null
 #   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
