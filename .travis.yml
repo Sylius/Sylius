@@ -33,7 +33,7 @@ before_script:
 script:
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose -p frontend
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose -p backend
-    - bin/phpspec run src/Sylius/Bundle/CoreBundle/spec -fpretty --verbose
+    - cd src/Sylius/Bundle/CoreBundle/spec; bin/phpspec run -fpretty --verbose
 
 notifications:
   email: "travis-ci@sylius.org"
