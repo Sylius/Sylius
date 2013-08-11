@@ -16,9 +16,15 @@ Flexible shipping cost calculation system allows you to create your own calculat
 
    installation
    shippable_interface
+   shipping_subject_interface
    shipping_categories
    shipping_methods
    shipments
    calculating_shipping_cost
+   default_calculators
+   custom_calculators
    resolving_shipping_methods
+   shipping_requirements
+   default_checkers
+   custom_checkers
    Configuration reference <configuration>
