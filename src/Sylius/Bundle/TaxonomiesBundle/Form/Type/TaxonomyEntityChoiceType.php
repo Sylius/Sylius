@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyChoiceType;
 
 /**
  * Taxonomy entity choice form.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxonomyEntityChoiceType extends AbstractType
+class TaxonomyEntityChoiceType extends TaxonomyChoiceType
 {
     /**
      * {@inheritdoc}
