@@ -129,8 +129,8 @@ class ProcessContext implements ProcessContextInterface
 
         $validator = $this->process->getValidator();
 
-        if (null !== $validator && !$validator()) {
-            return false;
+        if (null !== $validator && !$validator->isValid()) {
+            return $validator;
         }
 
         $history = $this->getStepHistory();
