@@ -27,12 +27,4 @@ class TaxonomyEntityChoiceType extends TaxonomyChoiceType
     {
         return 'entity';
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_taxonomy_entity_choice';
-    }
 }
