@@ -50,6 +50,13 @@ doctrine:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
 
+doctrine_phpcr:
+    session:
+        backend: %phpcr_backend%
+        workspace: %phpcr_workspace%
+        username: %phpcr_user%
+        password: %phpcr_pass%
+
 stof_doctrine_extensions:
     default_locale: %sylius.locale%
     orm:
@@ -80,6 +87,10 @@ swiftmailer:
 liip_doctrine_cache:
     namespaces:
         sylius_settings:
+            type: %sylius.cache%
+        meta:
+            type: %sylius.cache%
+        nodes:
             type: %sylius.cache%
 
 knp_gaufrette:

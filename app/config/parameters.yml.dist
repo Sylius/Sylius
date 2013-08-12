@@ -17,3 +17,15 @@ parameters:
     sylius.currency:          EUR
 
     sylius.cache:             file_system
+
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: liip_doctrine_cache.ns.meta
+            nodes: liip_doctrine_cache.ns.nodes
+    phpcr_workspace: default
+    phpcr_user: admin
+    phpcr_pass: admin
+
+    sylius.product_path: /products
