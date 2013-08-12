@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Symfony\Component\Locale\Locale;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Default zone fixtures.
@@ -34,7 +34,7 @@ class LoadZonesData extends DataFixture
             'GB'
         );
 
-        $restOfWorldCountries = array_diff(Locale::getCountries(), $euCountries + array('US'));
+        $restOfWorldCountries = array_diff(Intl::getRegionBundle()->getCountryNames(), $euCountries + array('US'));
 
         $manager->persist($this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $euCountries));
         $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
