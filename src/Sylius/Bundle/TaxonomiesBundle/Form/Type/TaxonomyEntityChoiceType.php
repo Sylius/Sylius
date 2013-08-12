@@ -33,6 +33,6 @@ class TaxonomyEntityChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_taxon_entity_choice';
+        return 'sylius_taxonomy_entity_choice';
     }
 }
