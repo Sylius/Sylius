@@ -118,6 +118,9 @@ class ProductPhpcrListener
 
         /** @var NodeInterface $productNode */
         $productNode = $phpcrSession->getNode($this->productPath.'/'.$entity->getUuid());
+        // TODO this should better be the following, but we do not support caching for this in Jackalope yet
+        // $productNode = $phpcrSession->getNodeByIdentifier($entity->getUuid());
+
         if (!$productNode) {
             return;
         }
