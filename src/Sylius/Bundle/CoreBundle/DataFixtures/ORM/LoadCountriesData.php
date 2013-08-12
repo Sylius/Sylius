@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
-use Symfony\Component\Locale\Locale;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Default country fixtures.
@@ -27,9 +27,8 @@ class LoadCountriesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $locale = $this->container->getParameter('sylius.locale');
         $countryRepository = $this->getCountryRepository();
-        $countries = Locale::getDisplayCountries($locale);
+        $countries = Intl::getRegionBundle()->getCountryNames();
 
         foreach ($countries as $isoName => $name) {
             $country = $countryRepository->createNew();
