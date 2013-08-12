@@ -5,10 +5,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Bundle\CoreBundle\Model\Shipment" table="sylius_shipment">
+    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Shipment" table="sylius_shipment">
         <many-to-one field="order" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" inversed-by="shipments">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>
