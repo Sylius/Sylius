@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\Type;
 
+use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Bundle\VariableProductBundle\Form\DataTransformer\VariantToCombinationTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class VariantMatchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         foreach ($options['product']->getOptions() as $i => $option) {
-            $builder->add((string) $i, 'sylius_option_value_choice', array(
+            $builder->add(Urlizer::urlize($option->getName()), 'sylius_option_value_choice', array(
                 'label'         => $option->getPresentation(),
                 'option'        => $option,
                 'property_path' => '['.$i.']'
