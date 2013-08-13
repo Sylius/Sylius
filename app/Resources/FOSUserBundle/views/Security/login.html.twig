@@ -5,16 +5,18 @@
     <h1>Login <small>Sylius store</small></h1>
 </div>
 
+{% if error %}
+    <div class="alert alert-error">
+        {{ error }}
+    </div>
+{% endif %}
+
+{% render url('hwi_oauth_connect') %}
+
 <blockquote>
   <p>Please login using "<strong>sylius@example.com</strong>" email and "<strong>sylius</strong>" as password.</p>
   <small>Mr. Sylius Demo Guide</small>
 </blockquote>
-
-{% if error %}
-<div class="alert alert-error">
-    {{ error }}
-</div>
-{% endif %}
 
 <form action="{{ path('fos_user_security_check') }}" method="post">
 <fieldset>

@@ -13,6 +13,15 @@ default:
             selenium2: ~
         Behat\Symfony2Extension\Extension:
             mink_driver: true
+        Behat\CommonFormatters\Extension:
+            formatters:
+                progress_false: 'Behat\CommonFormatters\ProgressWithFalseStepsFormatter'
+                pretty_false: 'Behat\CommonFormatters\PrettyWithFalseStepsFormatter'
+                html_false: 'Behat\CommonFormatters\HtmlWithFalseStepsFormatter'
+                csv_statistics: 'Behat\CommonFormatters\CsvStatisticsFormatter'
+                json: 'Behat\CommonFormatters\JsonFormatter'
+
+
 
 saucelabs:
     extensions:
@@ -21,6 +30,8 @@ saucelabs:
                 browser: firefox
                 wd_host: your_saucelabs_username:your_saucelabs_apikey@ondemand.saucelabs.com/wd/hub
                 capabilities: { "platform": "Windows 8", "browser": "firefox", "version": "21"}
+    paths:
+        features: features/saucelabs
 
 frontend:
     paths:
