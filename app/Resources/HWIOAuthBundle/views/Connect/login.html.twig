@@ -1,0 +1,5 @@
+<div class="hero-unit">
+    {% for owner in hwi_oauth_resource_owners() %}
+        <a class="oauth-login oauth-login-{{ owner | trans({}, 'HWIOAuthBundle') }}" href="{{ hwi_oauth_login_url(owner) }}" title="{{ owner | trans({}, 'HWIOAuthBundle') }}"><span></span></a>
+    {% endfor %}
+</div>

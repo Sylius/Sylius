@@ -133,7 +133,6 @@ div.currency-menu {
     margin-right: 50px;
 }
 
-
 .checkout-new-customer form, .checkout-existing-customer form {
     margin-top: 20px;
 }
@@ -152,4 +151,22 @@ div.currency-menu {
 
 .checkout-new-customer .form-group > .col-lg-10, .address-container .form-group > .col-lg-10 {
     width: 75%;
+}
+
+a.oauth-login {
+    margin-right: 8px;
+}
+
+a.oauth-login span {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
+
+a.oauth-login-amazon span {
+    background: url('/assets/img/icon/64/amazon.png') no-repeat;
+}
+
+a.oauth-login-google span {
+    background: url('/assets/img/icon/64/google.png') no-repeat;
 }

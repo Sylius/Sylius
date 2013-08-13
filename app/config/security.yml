@@ -43,14 +43,24 @@ security:
                 lifetime: 31536000
                 always_remember_me: true
                 remember_me_parameter: _remember_me
+            oauth:
+                resource_owners:
+                    amazon: "/login/check-amazon"
+                    google: "/login/check-google"
+                login_path: /connect
+                failure_path: /connect
+                oauth_user_provider:
+                    service: sylius.oauth.user_provider
             logout: true
             anonymous: true
+
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
