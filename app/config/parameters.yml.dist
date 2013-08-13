@@ -18,7 +18,7 @@ parameters:
 
     sylius.cache:                     file_system
 
-    sylius.oauth.amazon.clientid:     ~
-    sylius.oauth.amazon.clientsecret: ~
-    sylius.oauth.google.clientid:     ~
-    sylius.oauth.google.clientsecret: ~
+    sylius.oauth.amazon.clientid:     <amazon_client_id>
+    sylius.oauth.amazon.clientsecret: <amazon_client_secret>
+    sylius.oauth.google.clientid:     <google_client_id>
+    sylius.oauth.google.clientsecret: <google_client_secret>
