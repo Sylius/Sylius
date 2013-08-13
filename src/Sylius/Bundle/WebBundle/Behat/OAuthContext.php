@@ -21,12 +21,6 @@ use Behat\MinkExtension\Context\RawMinkContext;
  */
 class OAuthContext extends RawMinkContext
 {
-/**
- *@When /^I wait some time$/
- */
-public function waitsometime() {
-$this->getSession('selenium2')->wait(30000, 'false');
-}
     /**
      * @When /^I allow the use of my (.+) account \(if I am still on the (.+) website\)$/
      */
