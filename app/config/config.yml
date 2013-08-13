@@ -71,6 +71,19 @@ fos_user:
         form:
             type: sylius_user_registration
 
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        amazon:
+            type:          amazon
+            client_id:     %sylius.oauth.amazon.clientid% 
+            client_secret: %sylius.oauth.amazon.clientsecret%
+        google:
+            type:          google
+            client_id:     %sylius.oauth.google.clientid%
+            client_secret: %sylius.oauth.google.clientsecret%
+            scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%

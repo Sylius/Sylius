@@ -26,6 +26,7 @@
         "doctrine/orm":                         "~2.3",
         "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
+        "hwi/oauth-bundle":                     "0.3.*@dev",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle":                "0.12.*",
         "jms/translation-bundle":               "1.1.*",
