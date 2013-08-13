@@ -22,27 +22,6 @@ use Behat\MinkExtension\Context\RawMinkContext;
 class OAuthContext extends RawMinkContext
 {
     /**
-     * @When /^I allow the use of my (.+) account \(if I am still on the (.+) website\)$/
-     */
-    public function iAllowTheUseOfMyAccount($providerName, $domain)
-    {
-        if ($this->currentUrlContains($domain)) {
-
-            $submitButtons = $this->getSession('selenium2')->getPage()->findAll('xpath', '//form//button[@type="submit"]');
-            if (count($submitButtons) != 2) {
-                throw new ExpectationException('Page should contain a form with 2 buttons.', $this->getSession('selenium2'));
-            }
-
-            if ($providerName == 'Google') {
-                $submitButtons[0]->click();
-            } else {
-                $submitButtons[1]->click();
-            }
-
-        }
-    }
-
-    /**
      * @Given /^I am not logged in$/
      */
     public function iAmNotLoggedIn()
