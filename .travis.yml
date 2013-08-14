@@ -18,16 +18,14 @@ addons:
   sauce_connect: true
 
 before_script:
-    - "sudo apt-get install -y wkhtmltopdf"
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
-#   - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-#   - sudo apt-get update > /dev/null
-#   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
-#   - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
-#   - sudo sed -i -e "/DocumentRoot/i\ServerName sylius.local" /etc/apache2/sites-available/default
-#   - echo "127.0.0.1 sylius.local" | sudo tee -a /etc/hosts
-#   - sudo /etc/init.d/apache2 restart
+    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - sudo apt-get update > /dev/null
+    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
+    - sudo sed -i -e "/DocumentRoot/i\ServerName sylius.local" /etc/apache2/sites-available/default
+    - echo "127.0.0.1 sylius.local" | sudo tee -a /etc/hosts
+    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+    - sudo /etc/init.d/apache2 restart
+    - sudo /etc/init.d/mysql restart
     - composer self-update
     - composer install --dev --prefer-source --no-interaction > /dev/null
     - app/console doctrine:database:create --env=test > /dev/null
@@ -35,19 +33,14 @@ before_script:
     - chmod -R 777 app/cache app/logs
     - app/console cache:warmup --env=test > /dev/null
     - chmod -R 777 app/cache app/logs
-#   - "sh -e /etc/init.d/xvfb start"
-#   - "export DISPLAY=:99.0"
-#   - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
-#   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
-#   - sleep 5
     - sed -i "s/your_saucelabs_username/$SAUCE_USERNAME/" behat.yml.dist
     - sed -i "s/your_saucelabs_apikey/$SAUCE_ACCESS_KEY/" behat.yml.dist
 
 script:
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose -p frontend
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose -p backend
-#   - bin/behat --no-snippets --no-paths --verbose -p saucelabs
-    - cd src/Sylius/Bundle/CoreBundle; ../../../../bin/phpspec run -fpretty --verbose
+#   - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose -p frontend
+#   - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose -p backend
+    - bin/behat --no-snippets --no-paths --expand -p saucelabs
+#   - cd src/Sylius/Bundle/CoreBundle; ../../../../bin/phpspec run -fpretty --verbose
 
 notifications:
   email: "travis-ci@sylius.org"
