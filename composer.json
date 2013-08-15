@@ -50,6 +50,7 @@
         "sylius/omnipay-bundle":                "0.9.*@dev",
         "jms/serializer-bundle":                "0.12.*",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
+        "hwi/oauth-bundle":                     "dev-master",
         "knplabs/knp-gaufrette-bundle":         "0.2.*",
         "fzaninotto/faker":                     "1.2.*",
         "knplabs/knp-menu-bundle":              "2.0.*",
@@ -58,12 +59,17 @@
         "athari/yalinqo":                       "*"
     },
     "require-dev": {
-        "behat/behat":                  "2.4.*",
-        "behat/symfony2-extension":     "*",
-        "behat/mink-extension":         "*",
-        "behat/mink-browserkit-driver": "*",
-        "phpspec/phpspec":              "2.0.*@dev",
-        "behat/mink-selenium2-driver":  "*"
+        "behat/behat":                       "2.4.*",
+        "behat/symfony2-extension":          "*",
+        "behat/mink-extension":              "*",
+        "behat/mink-browserkit-driver":      "*",
+        "phpspec/phpspec":                   "2.0.*@dev",
+        "behat/mink-selenium2-driver":       "*",
+        "behat/common-formatters":           "*",
+        "webignition/json-pretty-print":     "@dev",
+        "hasbridge/json-schema-validator":   "@dev",
+        "sauce/sausage":                     ">=0.8.1",
+        "sauce/connect":                     ">=3.0"
     },
     "scripts": {
         "post-install-cmd": [
