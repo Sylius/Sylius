@@ -1,3 +1,4 @@
+@users
 Feature: Sign in to the store via OAuth
     In order to view my orders list
     As a visitor with an OAuth account

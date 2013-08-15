@@ -21,18 +21,6 @@ default:
                 csv_statistics: 'Behat\CommonFormatters\CsvStatisticsFormatter'
                 json: 'Behat\CommonFormatters\JsonFormatter'
 
-
-
-saucelabs:
-    extensions:
-        Behat\MinkExtension\Extension:
-            selenium2:
-                browser: firefox
-                wd_host: your_saucelabs_username:your_saucelabs_apikey@ondemand.saucelabs.com/wd/hub
-                capabilities: { "platform": "Windows 8", "browser": "firefox", "version": "21"}
-    paths:
-        features: features/saucelabs
-
 frontend:
     paths:
         features: features/frontend
@@ -40,7 +28,3 @@ frontend:
 backend:
     paths:
         features: features/backend
-
-api:
-    paths:
-        features: features/api

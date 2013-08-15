@@ -1,3 +1,4 @@
+@users
 Feature: User registration via OAuth
     In order to order products
     As a visitor with an OAuth account
