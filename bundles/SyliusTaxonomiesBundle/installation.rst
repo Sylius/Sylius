@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
@@ -24,9 +24,8 @@ Otherwise you have to download .phar file.
 Adding required bundles to the kernel
 -------------------------------------
 
-You need to enable the bundle inside the kernel.
-
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+First, you need to enable the bundle inside the kernel.
+If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
@@ -64,7 +63,7 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_taxonomies:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
-And configure doctrine extensions which are used in taxonomies bundle:
+And configure doctrine extensions which are used in the taxonomies bundle:
 
 .. code-block:: yaml
 

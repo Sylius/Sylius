@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 
 .. code-block:: bash
 
@@ -13,11 +13,11 @@ Adding required bundles to the kernel
 -------------------------------------
 
 First, you need to enable the bundle inside the kernel.
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
 If you're not using `FOSRestBundle`, then you also have to select a serializer component.
-We recommend `JMSSerializerBundle`, you can include it in your `composer.json` by executing following command.
+We recommend `JMSSerializerBundle`, you can include it in your `composer.json` by executing the following command.
 
 .. code-block:: bash
 
@@ -101,7 +101,7 @@ You should create a mapping file in your ``AppBundle``, put it inside the doctri
 
     You might wonder why are we putting interface inside mapping, you can read about this Doctrine feature `here <http://symfony.com/doc/current/cookbook/doctrine/resolve_target_entity.html>`_.
 
-Now let's assume you have *Product* entity, which represents your main merchandise in webshop.
+Now let's assume you have a *Product* entity, which represents your main merchandise in your webshop.
 
 .. note::
 
@@ -129,7 +129,7 @@ All you need to do is making your *Product* entity to implement ``SellableInterf
         }
     }
 
-Now, you do not even have to map your *Product* model to order items. It is all done automatically.
+Now, you do not even have to map your *Product* model to the order items. It is all done automatically.
 And that would be all about entities.
 
 Container configuration

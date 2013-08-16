@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 
 .. code-block:: bash
 
@@ -13,7 +13,7 @@ Adding required bundles to the kernel
 -------------------------------------
 
 First, you need to enable the bundle inside the kernel.
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
@@ -34,9 +34,9 @@ Don't worry, everything was automatically installed via Composer.
 Creating your steps
 -------------------
 
-We will create very simple wizard now, without forms, storage, to keep things simple and get started fast.
+We will create a very simple wizard now, without forms, storage, to keep things simple and get started fast.
 
-Lets create few simple steps:
+Lets create a few simple steps:
 
 .. code-block:: php
 
@@ -86,8 +86,8 @@ Lets create few simple steps:
 And so on, one class for each step in the wizard.
 
 As you can see, there are two actions in each step, display and forward.
-Usually, there is a form in forward action where you can pick some data.
-When you ``return $this->complete()`` wizard will take you to the next step.
+Usually, there is a form in a forward action where you can pick some data.
+When you do ``return $this->complete()`` the wizard will take you to the next step.
 
 Creating scenario
 -----------------
@@ -117,8 +117,8 @@ To group steps into the wizard, we will implement *ProcessScenarioInterface*:
         }
     }
 
-As you can see, we just add each step to process builder with desired name.
-Name will be used in routes to navigate to particular step.
+As you can see, we just add each step to process builder with a desired name.
+The name will be used in the routes to navigate to particular step.
 
 Registering scenario
 --------------------
@@ -134,7 +134,7 @@ In order for this to work, we need to register `SyliusScenario` and tag it as ``
         <tag name="sylius.process.scenario" alias="sylius_flow" />
     </service>
 
-Configured alias will be used later in route parameters to identify the scenario as you can have more then one.
+The configured alias will be used later in the route parameters to identify the scenario as you can have more then one.
 
 Routing configuration
 ---------------------
@@ -148,8 +148,8 @@ Import routing configuration:
         prefix: /flow
 
 If you take a look into imported routing configuration, you will see that ``sylius_flow_start`` is a wizard entry point.
-``sylius_flow_display`` displays step with given name, ``sylius_flow_forward`` forwards to the next step from step with given name.
-All routes have `scenarioAlias` as a required parameter to identify scenario.
+``sylius_flow_display`` displays the step with the given name, ``sylius_flow_forward`` forwards to the next step from the step with the given name.
+All routes have an `scenarioAlias` as a required parameter to identify the scenario.
 
 Templates
 ---------

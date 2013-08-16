@@ -22,9 +22,9 @@ The number is mutable, so you can change it by calling ``->setNumber('E001')`` o
 Confirmation status
 -------------------
 
-To check whether the order is confirmed or not, you can use the ``isConfirmed()`` method, which returns *true/false* value.
-To change that status, you can use the confirmation setter, ``setConfirmed(false)``. All orders are confirmed by default, unless you enabled e-mail confirmation feature.
-Order also can contain a confirmation token, accessible by appropriate getter and setter.
+To check whether the order is confirmed or not, you can use the ``isConfirmed()`` method, which returns a *true/false* value.
+To change that status, you can use the confirmation setter, ``setConfirmed(false)``. All orders are confirmed by default, unless you enabled the e-mail confirmation feature.
+Order also can contain a confirmation token, accessible by the appropriate getter and setter.
 
 .. code-block:: php
 
@@ -39,13 +39,13 @@ Order totals
 
 .. note::
 
-    All money amount in Sylius are represented as "cents" - integers.
+    All money amounts in Sylius are represented as "cents" - integers.
 
-Order has 3 basic totals, which are all persisted together with the order.
+An order has 3 basic totals, which are all persisted together with the order.
 
-First total is the *items total*, it's calculated as a sum of all item totals.
+The first total is the *items total*, it is calculated as the sum of all item totals.
 
-Second total is the *adjustments total*, you can read more about those in next chapter.
+The second total is the *adjustments total*, you can read more about this in next chapter.
 
 .. code-block:: php
 
@@ -57,7 +57,7 @@ Second total is the *adjustments total*, you can read more about those in next c
     $order->calculateTotal();
     echo $order->getTotal(); // 1650.
 
-Main order total is a sum of the previously mentioned values.
+The main order total is a sum of the previously mentioned values.
 You can access the order total value using the ``->getTotal()`` method.
 Recalculation of totals can happen by calling ``->calculateTotal()`` method, using the simplest possible math. It will also update the item totals.
 
@@ -80,7 +80,7 @@ To add or remove items, you can simply use the ``addItem`` and ``removeItem`` me
 OrderItem basics
 ----------------
 
-Order item model has only the id as identifier, also it has the order to which it belongs, accessible via ``->getOrder()`` method.
+An order item model has only the id as identifier, also it has the order to which it belongs, accessible via ``->getOrder()`` method.
 
 The sellable object can be retrieved and set, using the following setter and getter - ``->getSellable()`` & ``->setSellable(SellableInterface $sellable)``.
 
@@ -94,7 +94,7 @@ The sellable object can be retrieved and set, using the following setter and get
 
     In most cases you'll use the **OrderBuilder** service to create your orders.
 
-Just like for order, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()`` 
+Just like for the order, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()`` 
 Each item also can calculate its total, using the quantity (``->getQuantity()``) and the unit price.
 
 .. code-block:: php
@@ -111,4 +111,4 @@ Each item also can calculate its total, using the quantity (``->getQuantity()``)
 
     echo $item->getTotal(); // 8000.
 
-OrderItem can also hold adjustments.
+An OrderItem can also hold adjustments.

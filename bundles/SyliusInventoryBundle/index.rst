@@ -11,7 +11,7 @@ There is `StockableInterface` and `InventoryUnit` model inside the bundle.
 
 There are services **AvailabilityChecker**, **InventoryOperator** and **InventoryChangeListener**.
 
-You'll get familiar with them in further parts of this documentation.
+You'll get familiar with them in later parts of this documentation.
 
 .. toctree::
    :maxdepth: 1

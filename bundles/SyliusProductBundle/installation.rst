@@ -2,7 +2,7 @@ Installation
 ============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 
 If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
@@ -58,7 +58,7 @@ Put this configuration inside your ``app/config/config.yml``.
 .. code-block:: yaml
 
     sylius_product:
-        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+        driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
 
 And configure doctrine extensions which are used by the bundle.
 
@@ -73,7 +73,7 @@ And configure doctrine extensions which are used by the bundle.
 Routing configuration
 ---------------------
 
-Add following to your ``app/config/routing.yml``.
+Add the following to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 

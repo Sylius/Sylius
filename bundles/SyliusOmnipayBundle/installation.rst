@@ -3,7 +3,7 @@ Installation
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 
-Use following command to add the bundle to your `composer.json` and download package.
+Use the following command to add the bundle to your `composer.json` and download the package.
 Simply add to your `composer.json` file:
 
 .. code-block:: yaml
@@ -96,4 +96,4 @@ The following gateways are already implemented:
 * Stripe
 * WorldPay
 
-The above list all time is growing. Full list of supported gateways you can find at the `Omnipay <https://github.com/adrianmacneil/omnipay>`_ github repository.
+The list above is always growing. The full list of supported gateways can be found at the `Omnipay <https://github.com/adrianmacneil/omnipay>`_ github repository.

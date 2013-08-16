@@ -1,9 +1,9 @@
 Product Builder
 ===============
 
-This service provides fluent interface for easy product creation.
+This service provides a fluent interface for easy product creation.
 
-Example is self explanatory:
+The example shown below is self explanatory:
 
 .. code-block:: php
 

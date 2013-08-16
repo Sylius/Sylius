@@ -1,12 +1,12 @@
 How to manage gateways
 ======================
 
-The bundle provide handy services, which help to manage activated gateways and options.
+The bundle provide handy services, which help to manage the activated gateways and options.
 
 Services
 -------
 
-Just briefly about services which available to use out of the box.
+Here are a couple of services which are available to use out of the box.
 
 * **sylius.omnipay.gateway_factory** - implement *Omnipay\\Common\\GatewayFactory* to manipulate with gateway and options
 * **sylius.form.type.omnipay.gateway_choice** - quick proxy service to list defined in configuration gateways
@@ -14,3 +14,4 @@ Just briefly about services which available to use out of the box.
 Controller
 ----------
 
+To be written.

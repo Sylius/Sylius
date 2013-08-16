@@ -3,7 +3,7 @@ In templates
 
 When using Twig as your template engine, you have access to 2 handy functions.
 
-The ``sylius_cart_get`` function uses provider to get the current cart.
+The ``sylius_cart_get`` function uses the provider to get the current cart.
 
 .. code-block:: jinja
 
@@ -26,4 +26,4 @@ adding items to cart. In this simple example we allow to provide the quantity of
 .. note::
 
      An example with multiple variants of this form `can be found in Sylius Sandbox app <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Form/Type/CartItemType.php>`_.
-     It allows for selecting a variation/options/quantity of product. It also adapts to the product type.
+     It allows for selecting a variation/options/quantity of the product. It also adapts to the product type.

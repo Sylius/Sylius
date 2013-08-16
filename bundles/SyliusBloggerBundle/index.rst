@@ -206,7 +206,7 @@ If you need to include some custom services in the form type, you should create 
 
     sylius_blogger_post
 
-This will put your form type service. If you're using this method, please remember to pass the FQCN of your post model to the parent constructor or `data_class` form option.
+This will put your form type as a service. If you're using this method, please remember to pass the FQCN of your post model to the parent constructor or `data_class` form option.
 
 Configuration reference
 -----------------------
@@ -235,7 +235,7 @@ Full configuration reference with default values.
 Testing and continuous integration
 ----------------------------------
 
-.. image:: http://travis-ci.org/Sylius/SyliusBloggerBundle.png
+.. image:: https://api.travis-ci.org/Sylius/SyliusBloggerBundle.png
 
 This bundle uses `travis-ci.org <http://travis-ci.org/Sylius/SyliusBloggerBundle>`_ for CI.
 

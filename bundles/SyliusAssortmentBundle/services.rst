@@ -11,7 +11,7 @@ Managers and Repositories
 
     Sylius uses ``Doctrine\Common\Persistence`` interfaces.
 
-You have access to following services which are used to manage and retrieve resources.
+You have access to the following services which are used to manage and retrieve resources.
 
 This set of default services is shared across almost all Sylius bundles, but this is just a convention.
 You're interacting with them like you usually do with own entities in your project.
@@ -43,7 +43,7 @@ You're interacting with them like you usually do with own entities in your proje
 ProductBuilder
 --------------
 
-This service provides fluent interface for easy product creation.
+This service provides a fluent interface for easy product creation.
 
 Example is self explanatory:
 

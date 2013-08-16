@@ -2,7 +2,7 @@ The Product
 ===========
 
 Product is the main model in SyliusProductBundle. This simple class represents every unique product in the catalog.
-Default interface contains following attributes with appropriate setters and getters.
+The default interface contains the following attributes with appropriate setters and getters.
 
 +-----------------+----------------------------------------------------+
 | Attribute       | Description                                        |
@@ -31,10 +31,10 @@ Default interface contains following attributes with appropriate setters and get
 Retrieving products
 -------------------
 
-Retrieving product from database should always happen via repository, which always implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+Retrieving a product from the database should always happen via repository, which always implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
 If you are using Doctrine, you're already familiar with this concept, as it extends the native Doctrine ``ObjectRepository`` interface.
 
-Your product repository is always accessible via ``sylius.repository.product`` service.
+Your product repository is always accessible via the ``sylius.repository.product`` service.
 
 .. code-block:: php
 
@@ -76,10 +76,10 @@ Product repository also supports paginating products. To create a `Pagerfanta in
         $products->setMaxPerPage(3);
         $products->setCurrentPage($request->query->get('page', 1));
 
-       // Now you can returns products to template and iterate over it to get products from current page.
+       // Now you can return products to the template and iterate over it to get products from the current page.
     }
 
-Paginator also can be created for specific criteria and with desired sorting.
+The paginator also can be created for specific criteria and with desired sorting.
 
 .. code-block:: php
 
@@ -111,7 +111,7 @@ To create new product instance, you can simply call ``createNew()`` method on th
 
 .. note::
 
-    Creating product via this factory method makes the code more testable, and allows you to change product class easily.
+    Creating a product via this factory method makes the code more testable, and allows you to change the product class easily.
 
 Saving & removing product
 -------------------------
@@ -159,4 +159,4 @@ To remove a product, you also use the manager.
 Properties
 ----------
 
-Product can also have a set of defined Properties (think Attributes), you'll learn about them in next chapter of this documentation.
+A product can also have a set of defined Properties (think Attributes), you'll learn about them in next chapter of this documentation.

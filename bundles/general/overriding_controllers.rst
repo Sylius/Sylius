@@ -7,6 +7,7 @@ Extending base Controller
 -------------------------
 
 If you want to modify the controller or add your custom actions, you can do so by defining a new controller class.
+By extending resource controller, you also get access to several handy methods. Let's add to our custom controller a new method to recommend a product:
 
 .. code-block:: php
 

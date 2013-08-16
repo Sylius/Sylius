@@ -72,7 +72,7 @@ And configure doctrine extensions which are used in assortment bundle:
 Routing configuration
 ---------------------
 
-Add following to your ``app/config/routing.yml``.
+Import the routing configuration by adding the following to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
@@ -91,3 +91,12 @@ Run the following command.
 .. warning::
 
     This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
+
+Templates
+---------
+
+This bundle provides some default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
+
+.. note::
+
+    You can check `Sylius application <http://github.com/Sylius/Sylius>`_ to see how to integrate it in your application.
