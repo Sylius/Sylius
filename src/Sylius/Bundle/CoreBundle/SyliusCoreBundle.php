@@ -34,7 +34,8 @@ class SyliusCoreBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\CoreBundle\Model\UserInterface' => 'sylius.model.user.class',
+            'Sylius\Bundle\CoreBundle\Model\UserInterface'         => 'sylius.model.user.class',
+            'Sylius\Bundle\CoreBundle\Model\VariantImageInterface' => 'sylius.model.variant_image.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_core', $interfaces));

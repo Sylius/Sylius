@@ -48,5 +48,31 @@ class SyliusCoreExtension extends Extension
         $container->setParameter('sylius_core.driver.'.$driver, true);
 
         $loader->load('services.xml');
+
+        $classes = $config['classes'];
+
+        $this->mapClassParameters($classes, $container);
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        }
+
+        $container->setParameter('sylius.config.classes', $classes);
+    }
+
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $service = $service === 'form' ? 'form.type' : $service;
+                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+            }
+        }
     }
 }
