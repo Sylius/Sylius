@@ -162,8 +162,8 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
-            if($this->create($resource)) {
-                $this->setFlash('success', 'create');
+            if($this->update($resource)) {
+                $this->setFlash('success', 'update');
                 return $this->redirectTo($resource);
             } else {
                 //TODO
