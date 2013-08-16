@@ -24,7 +24,7 @@
             <cascade>
                 <cascade-all/>
             </cascade>
-            <join-column name="payment" referenced-column-name="id" nullable="true" />
+            <join-column name="payment_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
         <one-to-many field="inventoryUnits" target-entity="Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface" mapped-by="order">
