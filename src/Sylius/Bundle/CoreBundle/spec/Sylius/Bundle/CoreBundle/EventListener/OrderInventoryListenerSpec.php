@@ -16,19 +16,19 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderTaxationListenerSpec extends ObjectBehavior
+class OrderInventoryListenerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessorInterface $taxationProcessor
+     * @param Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface $inventoryHandler
      */
-    function let($taxationProcessor)
+    function let($inventoryHandler)
     {
-        $this->beConstructedWith($taxationProcessor);
+        $this->beConstructedWith($inventoryHandler);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener');
     }
 
     /**
@@ -41,7 +41,7 @@ class OrderTaxationListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringOnCartChange($event)
+            ->duringOnOrderPreComplete($event)
         ;
     }
 
@@ -49,11 +49,23 @@ class OrderTaxationListenerSpec extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
      */
-    function it_calls_taxation_processor_on_order($taxationProcessor, $event, $order)
+    function it_updates_inventory_on_order_pre_complete_event($inventoryHandler, $event, $order)
     {
         $event->getSubject()->willReturn($order);
-        $taxationProcessor->applyTaxes($order)->shouldBeCalled();
+        $inventoryHandler->updateInventory($order)->shouldBeCalled();
 
-        $this->onCartChange($event);
+        $this->onOrderPreComplete($event);
+    }
+
+    /**
+     * @param Symfony\Component\EventDispatcher\GenericEvent $event
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
+     */
+    function it_processes_inventory_units_on_order_change_event($inventoryHandler, $event, $order)
+    {
+        $event->getSubject()->willReturn($order);
+        $inventoryHandler->processInventoryUnits($order)->shouldBeCalled();
+
+        $this->onOrderChange($event);
     }
 }
