@@ -13,9 +13,9 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
  * Base resource controller for Sylius.
@@ -276,7 +276,7 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_create', $resource);
 
-        if(!$event->isPropagationStopped()) {
+        if(!$event->hasError()) {
             $manager->persist($resource);
             $this->dispatchEvent('create', $resource);
             $manager->flush();
@@ -294,7 +294,7 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_update', $resource);
 
-        if(!$event->isPropagationStopped()) {
+        if(!$event->hasError()) {
             $manager->persist($resource);
             $this->dispatchEvent('update', $resource);
             $manager->flush();
@@ -312,7 +312,7 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_delete', $resource);
 
-        if(!$event->isPropagationStopped()) {
+        if(!$event->hasError()) {
             $manager->remove($resource);
             $this->dispatchEvent('delete', $resource);
             $manager->flush();
@@ -382,7 +382,9 @@ class ResourceController extends FOSRestController
         if (!$eventOrResource instanceof Event) {
             $name = $this->getConfiguration()->getEventName($name);
 
-            $eventOrResource = new GenericEvent($eventOrResource);
+            $eventOrResource = new ResourceEvent($eventOrResource);
+        } else if(!$eventOrResource instanceof ResourceEvent) {
+            throw new \Exception('If you provide an Event, it need to extends Sylius\Bundle\ResourceBundle\Event\ResourceEvent.');
         }
 
         return $this->get('event_dispatcher')->dispatch($name, $eventOrResource);
