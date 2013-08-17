@@ -132,7 +132,7 @@ class ResourceController extends FOSRestController
                 $this->setFlash('success', 'create');
                 return $this->redirectTo($resource);
             } else {
-                $this->setFlash($event->getMessageType(), $event->getMessage());
+                $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             }
         }
 
@@ -168,7 +168,7 @@ class ResourceController extends FOSRestController
                 $this->setFlash('success', 'update');
                 return $this->redirectTo($resource);
             } else {
-                $this->setFlash($event->getMessageType(), $event->getMessage());
+                $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             }
         }
 
@@ -200,7 +200,7 @@ class ResourceController extends FOSRestController
             $this->setFlash('success', 'delete');
             return $this->redirectToIndex($resource);
         } else {
-            $this->setFlash($event->getMessageType(), $event->getMessage());
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             return $this->redirectTo($resource);
         }
     }
@@ -382,40 +382,40 @@ class ResourceController extends FOSRestController
         return $this->get('event_dispatcher')->dispatch($name, $eventOrResource);
     }
 
-    protected function setFlash($type, $event)
+    protected function setFlash($type, $event, $params = array())
     {
         return $this
             ->get('session')
             ->getFlashBag()
-            ->add($type, $this->generateFlashMessage($event))
+            ->add($type, $this->generateFlashMessage($event, $params))
         ;
     }
 
-    protected function generateFlashMessage($event)
+    protected function generateFlashMessage($event, $params = array())
     {
         $config = $this->getConfiguration();
 
         if (null !== $message = $config->getFlashMessage()) {
-            return $this->translateFlashMessage($message);
+            return $this->translateFlashMessage($message, $params);
         }
 
         $message = $this->configuration->getFlashName($event);
-        $translatedMessage = $this->translateFlashMessage($message);
+        $translatedMessage = $this->translateFlashMessage($message, $params);
 
         if ($message !== $translatedMessage) {
             return $translatedMessage;
         }
 
-        return $this->translateFlashMessage('sylius.resource.'.$event);
+        return $this->translateFlashMessage('sylius.resource.'.$event, $params);
     }
 
-    protected function translateFlashMessage($message)
+    protected function translateFlashMessage($message, $params = array())
     {
         $resource = ucfirst(str_replace('_', ' ', $this->getConfiguration()->getResourceName()));
 
         return $this->get('translator')->trans(
             $message,
-            array('%resource%' => $resource),
+            array_merge(array('%resource%' => $resource), $params),
             'flashes'
         );
     }

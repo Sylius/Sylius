@@ -49,6 +49,13 @@ class ResourceEvent extends GenericEvent
     protected $message = '';
 
     /**
+     * Message parameters
+     *
+     * @var array
+     */
+    protected $message_params = array();
+
+    /**
      * Get error property
      *
      * @return boolean $error
@@ -110,5 +117,25 @@ class ResourceEvent extends GenericEvent
     public function setMessage($message)
     {
         return $this->message = $message;
+    }
+
+    /**
+     * Get message_params property
+     *
+     * @return string $message_params
+     */
+    public function getMessageParams()
+    {
+        return $this->message_params;
+    }
+
+    /**
+     * Set message_params property
+     *
+     * @return string $message_params
+     */
+    public function setMessageParams($message_params)
+    {
+        return $this->message_params = $message_params;
     }
 }
