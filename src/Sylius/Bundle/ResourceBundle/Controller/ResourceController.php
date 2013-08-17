@@ -127,11 +127,12 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            if($this->create($resource)) {
+            $event = $this->create($resource);
+            if(!$event->hasError()) {
                 $this->setFlash('success', 'create');
                 return $this->redirectTo($resource);
             } else {
-                $this->setFlash('success', 'create_error');
+                $this->setFlash('error', $event->getErrorMessage());
             }
         }
 
@@ -162,11 +163,12 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
-            if($this->update($resource)) {
+            $event = $this->update($resource);
+            if(!$event->hasError()) {
                 $this->setFlash('success', 'update');
                 return $this->redirectTo($resource);
             } else {
-                $this->setFlash('success', 'update_error');
+                $this->setFlash('error', $event->getErrorMessage());
             }
         }
 
@@ -193,11 +195,12 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404();
 
-        if($this->delete($resource)) {
+        $event = $this->delete($resource);
+        if(!$event->hasError()) {
             $this->setFlash('success', 'delete');
             return $this->redirectToIndex($resource);
         } else {
-            $this->setFlash('success', 'delete_error');
+            $this->setFlash('error', $event->getErrorMessage());
             return $this->redirectTo($resource);
         }
     }
@@ -279,11 +282,10 @@ class ResourceController extends FOSRestController
             $this->dispatchEvent('create', $resource);
             $manager->flush();
             $this->dispatchEvent('post_create', $resource);
-            return true;
         } else {
             $event = $this->dispatchEvent('pre_create_error', $resource);
-            return false;
         }
+        return $event;
     }
 
     public function update($resource)
@@ -297,11 +299,10 @@ class ResourceController extends FOSRestController
             $this->dispatchEvent('update', $resource);
             $manager->flush();
             $this->dispatchEvent('post_update', $resource);
-            return true;
         } else {
             $event = $this->dispatchEvent('pre_create_error', $resource);
-            return false;
         }
+        return $event;
     }
 
     public function delete($resource)
@@ -315,11 +316,10 @@ class ResourceController extends FOSRestController
             $this->dispatchEvent('delete', $resource);
             $manager->flush();
             $this->dispatchEvent('post_delete', $resource);
-            return true;
         } else {
             $event = $this->dispatchEvent('pre_create_error', $resource);
-            return false;
         }
+        return $event;
     }
 
     public function persistAndFlush($resource)
@@ -405,7 +405,7 @@ class ResourceController extends FOSRestController
             return $this->translateFlashMessage($message);
         }
 
-        $message = implode('.', array($config->getBundlePrefix(), $config->getResourceName(), $event));
+        $message = $this->config->getFlashName($event);
         $translatedMessage = $this->translateFlashMessage($message);
 
         if ($message !== $translatedMessage) {
