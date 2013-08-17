@@ -29,6 +29,7 @@ class ResourceEvent extends GenericEvent
         $this->message_type = self::TYPE_ERROR;
         $this->message = $message;
         $this->message_params = $params;
+        $this->stopPropagation();
     }
 
     public function stopWithWarning($message, $params = array())
@@ -37,6 +38,7 @@ class ResourceEvent extends GenericEvent
         $this->message_type = self::TYPE_WARNING;
         $this->message = $message;
         $this->message_params = $params;
+        $this->stopPropagation();
     }
 
     /**
