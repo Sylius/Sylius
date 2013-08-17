@@ -74,7 +74,7 @@ class ResourceEvent extends GenericEvent
      *
      * @return boolean $error
      */
-    public function hasStopped()
+    public function isStopped()
     {
         return $this->error === true;
     }
