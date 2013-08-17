@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Event;
 
-use Symfony\Component\EventDispatcher;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Resource event.
@@ -20,6 +20,13 @@ use Symfony\Component\EventDispatcher;
  */
 class ResourceEvent extends GenericEvent
 {
+    const TYPE_SUCCESS  = 'success';
+    const TYPE_ERROR    = 'error';
+    const TYPE_INFO     = 'info';
+    const TYPE_WARNING  = 'warning';
+
+    protected $allowed_types = array(self::TYPE_SUCCESS, self::TYPE_ERROR, self::TYPE_INFO, self::TYPE_WARNING);
+
     /**
      * Indicate if an error has been detected
      *
@@ -28,11 +35,18 @@ class ResourceEvent extends GenericEvent
     protected $error = false;
 
     /**
-     * Error message
+     * Message type
      *
      * @var string
      */
-    protected $error_message = '';
+    protected $message_type = '';
+
+    /**
+     * Message
+     *
+     * @var string
+     */
+    protected $message = '';
 
     /**
      * Get error property
@@ -55,22 +69,46 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get error_message property
+     * Get message_type property
      *
-     * @return string $error_message
+     * @return string $message_type
      */
-    public function getErrorMessage()
+    public function getMessageType()
     {
-        return $this->error_message;
+        return $this->message_type;
     }
 
     /**
-     * Set error_message property
+     * Set message_type property
      *
-     * @return string $error_message
+     * @return string $message_type
      */
-    public function setErrorMessage($error_message)
+    public function setMessageType($message_type)
     {
-        return $this->error_message = $error_message;
+        if(!in_array($message_type, $this->allowed_types)) {
+            throw new \InvalidArgumentException('Allowed message types are \''.implode(', ', $this->allowed_types).'\'');
+        }
+
+        return $this->message_type = $message_type;
+    }
+
+    /**
+     * Get message property
+     *
+     * @return string $message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set message property
+     *
+     * @return string $message
+     */
+    public function setMessage($message)
+    {
+        return $this->message = $message;
     }
 }
