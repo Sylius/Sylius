@@ -22,13 +22,12 @@ use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 class InventoryOperatorSpec extends ObjectBehavior
 {
     /**
-     * @param Doctrine\Common\Persistence\ObjectManager                          $manager
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface             $repository
+     * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface  $backordersHandler
      * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
      */
-    function let($manager, $repository, $availabilityChecker)
+    function let($backordersHandler, $availabilityChecker)
     {
-        $this->beConstructedWith($manager, $repository, $availabilityChecker);
+        $this->beConstructedWith($backordersHandler, $availabilityChecker);
     }
 
     function it_is_initializable()
@@ -54,61 +53,48 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit
+     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
      */
-    function it_decreases_stockable_on_hand($repository, $availabilityChecker, $stockable, $inventoryUnit)
+    function it_decreases_stockable_on_hand_by_count_of_sold_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2)
     {
-        $availabilityChecker->isStockSufficient($stockable, 2)->willReturn(true);
+        $inventoryUnit1->getStockable()->willReturn($stockable);
+        $inventoryUnit2->getStockable()->willReturn($stockable);
+
+        $availabilityChecker->isStockSufficient($stockable, 2)->shouldBeCalled()->willReturn(true);
+        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2))->shouldBeCalled();
+
+        $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
         $stockable->getOnHand()->shouldBeCalled()->willReturn(7);
-        $stockable->setOnHand(6)->shouldBeCalled();
+        $stockable->setOnHand(5)->shouldBeCalled();
 
-        $repository->createNew()->willReturn($inventoryUnit);
-        $inventoryUnit->setStockable($stockable)->shouldBeCalled();
-        $inventoryUnit->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-
-        $this->decrease($stockable, 1);
+        $this->decrease(array($inventoryUnit1, $inventoryUnit2));
     }
 
     /**
      * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
      * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
      * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
      */
-    function it_backorders_units_if_quantity_is_greater_then_on_hand($stockable, $inventoryUnit1, $inventoryUnit2, $repository, $availabilityChecker)
+    function it_decreases_stockable_on_hand_and_ignores_backordered_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
     {
-        $availabilityChecker->isStockSufficient($stockable, 2)->willReturn(true);
+        $inventoryUnit1->getStockable()->willReturn($stockable);
+        $inventoryUnit2->getStockable()->willReturn($stockable);
+        $inventoryUnit3->getStockable()->willReturn($stockable);
+
+        $availabilityChecker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(true);
+        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3))->shouldBeCalled();
+
+        $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
+        $inventoryUnit3->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
 
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
 
-        $repository->createNew()->willReturn($inventoryUnit1);
-        $inventoryUnit1->setStockable($stockable)->shouldBeCalled();
-        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-
-        $repository->createNew()->willReturn($inventoryUnit2);
-        $inventoryUnit2->setStockable($stockable)->shouldBeCalled();
-        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
-
-        $this->decrease($stockable, 2)->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
-    }
-
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Doctrine\Common\Persistence\ObjectRepository               $repository
-     */
-    function it_fills_backorder_units($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
-    {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
-        $stockable->setOnHand(0)->shouldBeCalled();
-
-        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldNotBeCalled();
-
-        $repository->findBy(Argument::any(), Argument::any())->willReturn(array($inventoryUnit1, $inventoryUnit2));
-
-        $this->fillBackorders($stockable);
+        $this->decrease(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
     }
 }

@@ -18,8 +18,11 @@
 >
 
     <parameters>
-        <parameter key="sylius.inventory_operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
         <parameter key="sylius.availability_checker.default.class">Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker</parameter>
+        <parameter key="sylius.inventory_operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
+        <parameter key="sylius.backorders_handler.class">Sylius\Bundle\InventoryBundle\Operator\BackordersHandler</parameter>
+        <parameter key="sylius.inventory_unit_factory.class">Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory</parameter>
+
         <parameter key="sylius.inventory_listener.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
     </parameters>
 
@@ -34,8 +37,7 @@
         </service>
 
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
-            <argument type="service" id="sylius.manager.inventory_unit" />
-            <argument type="service" id="sylius.repository.inventory_unit" />
+            <argument type="service" id="sylius.backorders_handler" />
             <argument type="service" id="sylius.availability_checker" />
         </service>
 
@@ -43,8 +45,16 @@
             <argument>%sylius.backorders%</argument>
         </service>
 
+        <service id="sylius.backorders_handler" class="%sylius.backorders_handler.class%">
+            <argument type="service" id="sylius.repository.inventory_unit" />
+        </service>
+
+        <service id="sylius.inventory_unit_factory" class="%sylius.inventory_unit_factory.class%">
+            <argument type="service" id="sylius.repository.inventory_unit" />
+        </service>
+
         <service id="sylius.inventory_listener" class="%sylius.inventory_listener.class%">
-            <argument type="service" id="sylius.inventory_operator" />
+            <argument type="service" id="sylius.backorders_handler" />
         </service>
     </services>
 
