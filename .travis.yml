@@ -10,6 +10,7 @@ matrix:
         - php: 5.5
 
 before_script:
+    - "ulimit -n 10000"
     - "sudo apt-get install -y wkhtmltopdf"
     - "export DISPLAY=:99.0"
     - "sh -e /etc/init.d/xvfb start"
