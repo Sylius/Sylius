@@ -20,12 +20,24 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ResourceEvent extends GenericEvent
 {
-    const TYPE_SUCCESS  = 'success';
     const TYPE_ERROR    = 'error';
-    const TYPE_INFO     = 'info';
     const TYPE_WARNING  = 'warning';
 
-    protected $allowed_types = array(self::TYPE_SUCCESS, self::TYPE_ERROR, self::TYPE_INFO, self::TYPE_WARNING);
+    public function stopWithError($message, $params = array())
+    {
+        $this->error = true;
+        $this->message_type = self::TYPE_ERROR;
+        $this->message = $message;
+        $this->message_params = $params;
+    }
+
+    public function stopWithWarning($message, $params = array())
+    {
+        $this->error = true;
+        $this->message_type = self::TYPE_WARNING;
+        $this->message = $message;
+        $this->message_params = $params;
+    }
 
     /**
      * Indicate if an error has been detected
@@ -60,19 +72,9 @@ class ResourceEvent extends GenericEvent
      *
      * @return boolean $error
      */
-    public function hasError()
+    public function hasStopped()
     {
-        return $this->error;
-    }
-
-    /**
-     * Set error property
-     *
-     * @return boolean $error
-     */
-    public function setError($error)
-    {
-        return $this->error = $error;
+        return $this->error === true;
     }
 
     /**
@@ -86,20 +88,6 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Set message_type property
-     *
-     * @return string $message_type
-     */
-    public function setMessageType($message_type)
-    {
-        if(!in_array($message_type, $this->allowed_types)) {
-            throw new \InvalidArgumentException('Allowed message types are \''.implode(', ', $this->allowed_types).'\'');
-        }
-
-        return $this->message_type = $message_type;
-    }
-
-    /**
      * Get message property
      *
      * @return string $message
@@ -110,16 +98,6 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Set message property
-     *
-     * @return string $message
-     */
-    public function setMessage($message)
-    {
-        return $this->message = $message;
-    }
-
-    /**
      * Get message_params property
      *
      * @return string $message_params
@@ -127,15 +105,5 @@ class ResourceEvent extends GenericEvent
     public function getMessageParams()
     {
         return $this->message_params;
-    }
-
-    /**
-     * Set message_params property
-     *
-     * @return string $message_params
-     */
-    public function setMessageParams($message_params)
-    {
-        return $this->message_params = $message_params;
     }
 }
