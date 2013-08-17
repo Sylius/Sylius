@@ -132,7 +132,6 @@ class ResourceController extends FOSRestController
                 return $this->redirectTo($resource);
             } else {
                 $this->setFlash('success', 'create_error');
-                return $this->redirectToIndex($resource);
             }
         }
 
@@ -168,7 +167,6 @@ class ResourceController extends FOSRestController
                 return $this->redirectTo($resource);
             } else {
                 $this->setFlash('success', 'update_error');
-                return $this->redirectToIndex($resource);
             }
         }
 
