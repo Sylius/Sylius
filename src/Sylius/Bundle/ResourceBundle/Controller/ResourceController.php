@@ -128,7 +128,7 @@ class ResourceController extends FOSRestController
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $event = $this->create($resource);
-            if(!$event->hasError()) {
+            if(!$event->hasStopped()) {
                 $this->setFlash('success', 'create');
                 return $this->redirectTo($resource);
             } else {
@@ -164,7 +164,7 @@ class ResourceController extends FOSRestController
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
             $event = $this->update($resource);
-            if(!$event->hasError()) {
+            if(!$event->hasStopped()) {
                 $this->setFlash('success', 'update');
                 return $this->redirectTo($resource);
             } else {
@@ -196,7 +196,7 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404();
 
         $event = $this->delete($resource);
-        if(!$event->hasError()) {
+        if(!$event->hasStopped()) {
             $this->setFlash('success', 'delete');
             return $this->redirectToIndex($resource);
         } else {
@@ -277,7 +277,7 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_create', $resource);
 
-        if(!$event->hasError()) {
+        if(!$event->hasStopped()) {
             $manager->persist($resource);
             $this->dispatchEvent('create', $resource);
             $manager->flush();
@@ -292,7 +292,7 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_update', $resource);
 
-        if(!$event->hasError()) {
+        if(!$event->hasStopped()) {
             $manager->persist($resource);
             $this->dispatchEvent('update', $resource);
             $manager->flush();
@@ -307,7 +307,7 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_delete', $resource);
 
-        if(!$event->hasError()) {
+        if(!$event->hasStopped()) {
             $manager->remove($resource);
             $this->dispatchEvent('delete', $resource);
             $manager->flush();
