@@ -26,18 +26,18 @@ class ResourceEvent extends GenericEvent
     public function stopWithError($message, $params = array())
     {
         $this->error = true;
-        $this->message_type = self::TYPE_ERROR;
+        $this->messageType = self::TYPE_ERROR;
         $this->message = $message;
-        $this->message_params = $params;
+        $this->messageParams = $params;
         $this->stopPropagation();
     }
 
     public function stopWithWarning($message, $params = array())
     {
         $this->error = true;
-        $this->message_type = self::TYPE_WARNING;
+        $this->messageType = self::TYPE_WARNING;
         $this->message = $message;
-        $this->message_params = $params;
+        $this->messageParams = $params;
         $this->stopPropagation();
     }
 
@@ -53,7 +53,7 @@ class ResourceEvent extends GenericEvent
      *
      * @var string
      */
-    protected $message_type = '';
+    protected $messageType = '';
 
     /**
      * Message
@@ -67,7 +67,7 @@ class ResourceEvent extends GenericEvent
      *
      * @var array
      */
-    protected $message_params = array();
+    protected $messageParams = array();
 
     /**
      * Get error property
@@ -80,13 +80,13 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get message_type property
+     * Get messageType property
      *
-     * @return string $message_type
+     * @return string $messageType
      */
     public function getMessageType()
     {
-        return $this->message_type;
+        return $this->messageType;
     }
 
     /**
@@ -100,12 +100,12 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get message_params property
+     * Get messageParams property
      *
-     * @return string $message_params
+     * @return string $messageParams
      */
     public function getMessageParams()
     {
-        return $this->message_params;
+        return $this->messageParams;
     }
 }
