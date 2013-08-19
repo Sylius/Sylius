@@ -75,11 +75,6 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getTemplateName('custom.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
     }
 
-    function it_generates_flash_name()
-    {
-        $this->getFlashName('custom_message')->shouldReturn('sylius.product.custom_message');
-    }
-
     function it_generates_route_names()
     {
         $this->getRouteName('index')->shouldReturn('sylius_product_index');

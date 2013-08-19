@@ -395,11 +395,7 @@ class ResourceController extends FOSRestController
     {
         $config = $this->getConfiguration();
 
-        if (null !== $message = $config->getFlashMessage()) {
-            return $this->translateFlashMessage($message, $params);
-        }
-
-        $message = $this->configuration->getFlashName($event);
+        $message = $config->getFlashMessage($event);
         $translatedMessage = $this->translateFlashMessage($message, $params);
 
         if ($message !== $translatedMessage) {

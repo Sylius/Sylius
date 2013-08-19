@@ -103,11 +103,6 @@ class Configuration
         return sprintf('%s:%s.%s', $this->templateNamespace ?: ':', $name, $this->templatingEngine);
     }
 
-    public function getFlashName($message)
-    {
-        return sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);
-    }
-
     public function getTemplate($name)
     {
         return $this->get('template', $this->getTemplateName($name));
@@ -206,9 +201,10 @@ class Configuration
         return $this->get('arguments', $default);
     }
 
-    public function getFlashMessage()
+    public function getFlashMessage($message = null)
     {
-        return $this->get('flash');
+        $message = sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);
+        return $this->get('flash', $message);
     }
 
     protected function get($parameter, $default = null)
