@@ -131,9 +131,9 @@ class ResourceController extends FOSRestController
             if(!$event->isStopped()) {
                 $this->setFlash('success', 'create');
                 return $this->redirectTo($resource);
-            } else {
-                $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             }
+
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
         }
 
         if ($config->isApiRequest()) {
@@ -167,9 +167,9 @@ class ResourceController extends FOSRestController
             if(!$event->isStopped()) {
                 $this->setFlash('success', 'update');
                 return $this->redirectTo($resource);
-            } else {
-                $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             }
+
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
         }
 
         if ($config->isApiRequest()) {
@@ -196,13 +196,14 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404();
 
         $event = $this->delete($resource);
-        if(!$event->isStopped()) {
-            $this->setFlash('success', 'delete');
-            return $this->redirectToIndex($resource);
-        } else {
+
+        if($event->isStopped()) {
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             return $this->redirectTo($resource);
         }
+
+        $this->setFlash('success', 'delete');
+        return $this->redirectToIndex($resource);
     }
 
     /**
