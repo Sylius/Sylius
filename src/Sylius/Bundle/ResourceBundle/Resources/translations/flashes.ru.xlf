@@ -12,7 +12,7 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>sylius.resource.delete</source>
-                <target>%resource% был удален.</target>
+                <target>%resource% был удален успешно.</target>
             </trans-unit>
         </body>
     </file>
