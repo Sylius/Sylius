@@ -98,6 +98,9 @@ sylius_sales:
         order_item:
             model: Sylius\Bundle\CoreBundle\Model\OrderItem
 
+sylius_report:
+    driver: doctrine/orm
+
 sylius_resource:
     resources:
         sylius.user:

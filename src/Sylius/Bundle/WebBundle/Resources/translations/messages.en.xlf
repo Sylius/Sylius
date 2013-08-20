@@ -1250,6 +1250,58 @@
         <source>sylius.remember_me</source>
         <target>Remember me?</target>
       </trans-unit>
+      <trans-unit id="4cea621428ed0897a481aea3a48f0065" resname="sylius.render">
+        <source>sylius.render</source>
+        <target>render</target>
+      </trans-unit>
+      <trans-unit id="e51cb35af60166f9401282a665e4710c" resname="sylius.report.configurable_type">
+        <source>sylius.report.configurable_type</source>
+        <target>type</target>
+      </trans-unit>
+      <trans-unit id="f62b624a1555bd0d38108047035b1bc7" resname="sylius.report.create">
+        <source>sylius.report.create</source>
+        <target>create report</target>
+      </trans-unit>
+      <trans-unit id="b695817347fc3c2ce89f3da6d3cf3bc6" resname="sylius.report.create_header">
+        <source>sylius.report.create_header</source>
+        <target>New report</target>
+      </trans-unit>
+      <trans-unit id="b15ba52b056564bef2a63da56cc9733c" resname="sylius.report.data_fetcher">
+        <source>sylius.report.data_fetcher</source>
+        <target>Data fetcher</target>
+      </trans-unit>
+      <trans-unit id="83a84e3511378bcb4ee9a1a8075e2119" resname="sylius.report.id">
+        <source>sylius.report.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="d036c954bd7def2cbb985d2ccee4ecfa" resname="sylius.report.index_header">
+        <source>sylius.report.index_header</source>
+        <target>Reports</target>
+      </trans-unit>
+      <trans-unit id="d0c3076fc86f32afcad1de49357a1cf1" resname="sylius.report.manage">
+        <source>sylius.report.manage</source>
+        <target>manage reports</target>
+      </trans-unit>
+      <trans-unit id="0f3453af30b28b8a5a5c2603317a61c3" resname="sylius.report.name">
+        <source>sylius.report.name</source>
+        <target>name</target>
+      </trans-unit>
+      <trans-unit id="79dc46328cc30dffc8c0d65a7936f7cc" resname="sylius.report.no_results">
+        <source>sylius.report.no_results</source>
+        <target>There are no reports to display.</target>
+      </trans-unit>
+      <trans-unit id="631441bdef5c558f029bc6eec1f5e315" resname="sylius.report.renderer">
+        <source>sylius.report.renderer</source>
+        <target>Renderer</target>
+      </trans-unit>
+      <trans-unit id="b7e7b51a5d8443636c871712cf439205" resname="sylius.report.show_header">
+        <source>sylius.report.show_header</source>
+        <target>Report details</target>
+      </trans-unit>
+      <trans-unit id="a5e4d236047b6a6895e07bf7f8ea1e75" resname="sylius.report.update_header">
+        <source>sylius.report.update_header</source>
+        <target>Editing report</target>
+      </trans-unit>
       <trans-unit id="f24e233a88755afd2f3e02bc65d81732" resname="sylius.save_changes">
         <source>sylius.save_changes</source>
         <target>Save changes</target>
