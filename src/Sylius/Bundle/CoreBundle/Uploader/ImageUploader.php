@@ -26,7 +26,7 @@ class ImageUploader implements ImageUploaderInterface
     public function upload(ImageInterface $image)
     {
         if (!$image->hasFile()) {
-            throw new \InvalidArgumentException('The given image has no file attached.');
+            return;
         }
 
         if (null !== $image->getPath()) {
