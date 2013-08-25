@@ -68,7 +68,7 @@ class ResourceServicesFactory
 
             $controller = new Definition($classes['controller']);
             $controller
-                ->setArguments(array($prefix, $resourceName, ''))
+                ->setArguments(array($prefix, $resourceName, $templates))
                 ->addMethodCall('setContainer', array(new Reference('service_container')))
             ;
 
