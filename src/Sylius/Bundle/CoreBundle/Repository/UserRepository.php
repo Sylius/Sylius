@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Repository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
- * Product repository.
+ * User repository.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
