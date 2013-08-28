@@ -52,7 +52,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      */
     public function generate(OrderInterface $order)
     {
-        if(null === $order->getNumber()) {
+        if (null === $order->getNumber()) {
             $order->setNumber(str_pad((int) $this->getLastOrderNumber() + 1, $this->numberLength, 0, STR_PAD_LEFT));
         }
     }
