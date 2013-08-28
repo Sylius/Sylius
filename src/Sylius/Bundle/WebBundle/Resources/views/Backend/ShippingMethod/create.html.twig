@@ -4,7 +4,7 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% javascripts
+{% javascripts output='assets/compiled/backend_shipping_method.js'
     '@SyliusShippingBundle/Resources/assets/js/prototype-handler.js'
     '@SyliusShippingBundle/Resources/assets/js/sylius-shipping-method.js'
 %}
