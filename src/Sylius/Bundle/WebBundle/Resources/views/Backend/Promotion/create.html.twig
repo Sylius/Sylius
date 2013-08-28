@@ -4,7 +4,7 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% javascripts
+{% javascripts output='assets/compiled/backend_promotion.js'
     'https://raw.github.com/brandonaaron/livequery/1.1.1/jquery.livequery.js'
     '@SyliusPromotionsBundle/Resources/assets/js/sylius-promotion.js'
 %}
