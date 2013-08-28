@@ -59,4 +59,19 @@ class UserRepository extends EntityRepository
 
         return $this->getPaginator($queryBuilder);
     }
+    
+    protected function getQueryBuilder()
+    {
+        return parent::getQueryBuilder()
+            ->leftJoin('u.addresses', 'a')       ->addSelect('a')
+            ->leftJoin('a.country', 'c')         ->addSelect('c')
+            ->leftJoin('u.billingAddress', 'ba') ->addSelect('ba')
+            ->leftJoin('u.shippingAddress', 'sa')->addSelect('sa')
+        ;
+    }
+
+    protected function getAlias()
+    {
+        return 'u';
+    }
 }

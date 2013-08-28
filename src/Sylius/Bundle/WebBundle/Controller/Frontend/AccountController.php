@@ -13,10 +13,12 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
+use Sylius\Bundle\AddressingBundle\Model\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Frontend user account controller.
@@ -105,6 +107,19 @@ class AccountController extends Controller
             )
         );
     }
+    
+    /**
+     * Shows an Address
+     * @return Response
+     */
+    public function showAddressesAction()
+    {
+        $user = $this->get('sylius.repository.user')->find($this->getUser()->getId());
+        
+        return $this->render('SyliusWebBundle:Frontend/Account/Address:index.html.twig', array(
+            'user' => $user,
+        ));
+    }
 
     /**
      * @return OrderRepository
@@ -145,5 +160,4 @@ class AccountController extends Controller
 
         return;
     }
-
 }

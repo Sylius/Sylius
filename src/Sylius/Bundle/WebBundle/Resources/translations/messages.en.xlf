@@ -94,6 +94,18 @@
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
       </trans-unit>
+      <trans-unit id="e74d540803b88ee940a118a7cf249fa0" resname="sylius.address.actions">
+        <source>sylius.address.actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="45b5c1f4c5215a7cb12fdf125d77df02" resname="sylius.address.add">
+        <source>sylius.address.add</source>
+        <target>Add address</target>
+      </trans-unit>
+      <trans-unit id="8a7fd3657b60d9725c41b2caf32f5d10" resname="sylius.address.addresses">
+        <source>sylius.address.addresses</source>
+        <target>Addresses</target>
+      </trans-unit>
       <trans-unit id="b862b765ec4aedc20d6569059f66c34d" resname="sylius.address.city">
         <source>sylius.address.city</source>
         <target>City</target>
@@ -106,13 +118,53 @@
         <source>sylius.address.country</source>
         <target>Country</target>
       </trans-unit>
+      <trans-unit id="dbe91d3f74c5209a802e538b4ff24ba4" resname="sylius.address.default">
+        <source>sylius.address.default</source>
+        <target>Default</target>
+      </trans-unit>
+      <trans-unit id="101687590cc90f5620cabbc283e343ef" resname="sylius.address.default_billing">
+        <source>sylius.address.default_billing</source>
+        <target>Default billing address</target>
+      </trans-unit>
+      <trans-unit id="f5b0c55366d554255be90661db7bb6d5" resname="sylius.address.default_shipping">
+        <source>sylius.address.default_shipping</source>
+        <target>Default shipping address</target>
+      </trans-unit>
+      <trans-unit id="dd0b61790d753c56138f93f06118fa82" resname="sylius.address.delete">
+        <source>sylius.address.delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="053e831363d2af60f6d3bad42ebc6aa9" resname="sylius.address.edit">
+        <source>sylius.address.edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="41289d84073d3bca039e147207c78037" resname="sylius.address.edit.header">
+        <source>sylius.address.edit.header</source>
+        <target>Edit address</target>
+      </trans-unit>
       <trans-unit id="1ee551ccff556f9d96bd0c07d3e6628c" resname="sylius.address.firstname">
         <source>sylius.address.firstname</source>
         <target>First name</target>
       </trans-unit>
+      <trans-unit id="cf1592feed0c27e00f9e0807142fb3bd" resname="sylius.address.header">
+        <source>sylius.address.header</source>
+        <target>My addresses</target>
+      </trans-unit>
       <trans-unit id="dba857a6ab7bc2dc4c05fe6470e25fb0" resname="sylius.address.lastname">
         <source>sylius.address.lastname</source>
         <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="b0e96e7e5c65e9c3de41782f04bbbeee" resname="sylius.address.no_default_billing">
+        <source>sylius.address.no_default_billing</source>
+        <target>No default billing address</target>
+      </trans-unit>
+      <trans-unit id="39990924b34c7d33332f81116c2112b5" resname="sylius.address.no_default_shipping">
+        <source>sylius.address.no_default_shipping</source>
+        <target>No default shipping address</target>
+      </trans-unit>
+      <trans-unit id="957b51ac3ff4ce38852b7ac0c201c460" resname="sylius.address.no_result">
+        <source>sylius.address.no_result</source>
+        <target>There is no address to display</target>
       </trans-unit>
       <trans-unit id="7df68fe61c4c8a32475734c2408fd2c6" resname="sylius.address.postcode">
         <source>sylius.address.postcode</source>
@@ -121,6 +173,14 @@
       <trans-unit id="d44476afc2a3907d73c947c6b63221af" resname="sylius.address.province">
         <source>sylius.address.province</source>
         <target>Province</target>
+      </trans-unit>
+      <trans-unit id="02eb1065ca6b6f43573261b53977d078" resname="sylius.address.set_default_billing">
+        <source>sylius.address.set_default_billing</source>
+        <target>Set as default billing address</target>
+      </trans-unit>
+      <trans-unit id="924b0f6db5ee47b635784153154e1509" resname="sylius.address.set_default_shipping">
+        <source>sylius.address.set_default_shipping</source>
+        <target>Set as default shipping address</target>
       </trans-unit>
       <trans-unit id="e82a886986a385b0877e15d6964d2aa5" resname="sylius.address.street">
         <source>sylius.address.street</source>
@@ -509,6 +569,10 @@
       <trans-unit id="f434362fba3003af96b35062e2fc1c54" resname="sylius.form.profile.lastName">
         <source>sylius.form.profile.lastName</source>
         <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="4b98ba240ca8c3cf96133a7b78d765f0" resname="sylius.form.profile.username">
+        <source>sylius.form.profile.username</source>
+        <target>Username</target>
       </trans-unit>
       <trans-unit id="25b6370883ff5b94aef1ceb697b6d3f6" resname="sylius.gallery.next">
         <source>sylius.gallery.next</source>

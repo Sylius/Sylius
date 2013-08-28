@@ -19,3 +19,7 @@ sylius_account_order_invoice:
     pattern: /invoice/{number}
     methods:  [GET]
     defaults: { _controller: SyliusWebBundle:Frontend/Account:renderInvoice }
+
+sylius_account_addresses:
+    pattern:  /addresses
+    defaults: { _controller: SyliusWebBundle:Frontend/Account:showAddresses }
