@@ -62,7 +62,7 @@ class OrderRepository extends BaseOrderRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
-          $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+          $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.number'));
 
         if (!empty($criteria['number'])) {
             $queryBuilder
@@ -196,6 +196,6 @@ class OrderRepository extends BaseOrderRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
-        return $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+        return $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.number'));
     }
 }
