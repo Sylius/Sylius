@@ -128,7 +128,7 @@ class ResourceController extends FOSRestController
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
             $event = $this->create($resource);
-            if(!$event->isStopped()) {
+            if (!$event->isStopped()) {
                 $this->setFlash('success', 'create');
                 return $this->redirectTo($resource);
             }
@@ -164,7 +164,7 @@ class ResourceController extends FOSRestController
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
             $event = $this->update($resource);
-            if(!$event->isStopped()) {
+            if (!$event->isStopped()) {
                 $this->setFlash('success', 'update');
                 return $this->redirectTo($resource);
             }
@@ -197,12 +197,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->delete($resource);
 
-        if($event->isStopped()) {
+        if ($event->isStopped()) {
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
             return $this->redirectTo($resource);
         }
 
         $this->setFlash('success', 'delete');
+        
         return $this->redirectToIndex($resource);
     }
 
@@ -284,6 +285,7 @@ class ResourceController extends FOSRestController
             $manager->flush();
             $this->dispatchEvent('post_create', $resource);
         }
+        
         return $event;
     }
 
@@ -299,6 +301,7 @@ class ResourceController extends FOSRestController
             $manager->flush();
             $this->dispatchEvent('post_update', $resource);
         }
+        
         return $event;
     }
 
@@ -314,6 +317,7 @@ class ResourceController extends FOSRestController
             $manager->flush();
             $this->dispatchEvent('post_delete', $resource);
         }
+        
         return $event;
     }
 
