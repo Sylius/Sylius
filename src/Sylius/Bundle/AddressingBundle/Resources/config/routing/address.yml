@@ -1,0 +1,30 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_address_list:
+    pattern: /
+    defaults:
+        _controller: sylius.controller.address:indexAction
+        _sortable: true
+        _sorting:
+            updatedAt: desc
+
+sylius_address_create:
+    pattern: /create
+    defaults:
+        _controller: sylius.controller.address:createAction
+
+sylius_address_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.address:updateAction
+
+sylius_address_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.address:deleteAction
+
+sylius_address_show:
+    pattern: /{id}
+    defaults:
+        _controller: sylius.controller.address:showAction

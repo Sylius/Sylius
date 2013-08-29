@@ -1,0 +1,14 @@
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
+
+{% block sylius_javascripts %}
+    {% javascripts
+        '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing.js'
+    %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block sylius_content %}
+    {% include 'SyliusAddressingBundle:Address:_update.html.twig' %}
+{% endblock %}

@@ -1,0 +1,11 @@
+<h1>Creating province <small>Use this form to add new item to province book</small></h1>
+<hr />
+
+<form action="{{ path('sylius_province_create', {'countryId': province.country.id}) }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusAddressingBundle:Province:_form.html.twig' %}
+    <div class="form-actions">
+       <input type="submit" value="create province" class="btn btn-large btn-primary" />
+       &nbsp;
+       <input type="reset" value="cancel" class="btn btn-large" />
+    </div>
+</form>

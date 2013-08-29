@@ -1,0 +1,25 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_country_list:
+    pattern: /
+    defaults:
+        _controller: sylius.controller.country:indexAction
+        _paginate: 50
+
+sylius_country_create:
+    pattern: /create
+    defaults:
+        _controller: sylius.controller.country:createAction
+        _redirect: sylius_country_list
+
+sylius_country_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.country:updateAction
+        _redirect: sylius_country_list
+
+sylius_country_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.country:deleteAction
