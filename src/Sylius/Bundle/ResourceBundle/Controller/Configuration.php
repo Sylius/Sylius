@@ -201,9 +201,11 @@ class Configuration
         return $this->get('arguments', $default);
     }
 
-    public function getFlashMessage()
+    public function getFlashMessage($message = null)
     {
-        return $this->get('flash');
+        $message = sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);
+        
+        return $this->get('flash', $message);
     }
 
     protected function get($parameter, $default = null)
