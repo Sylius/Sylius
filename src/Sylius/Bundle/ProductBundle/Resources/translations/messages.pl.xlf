@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.label.product.name</source>
+                <target>Nazwa</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.label.product.description</source>
+                <target>Opis</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.label.product.properties</source>
+                <target>Właściwości</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.label.product.available_on</source>
+                <target>Dostępny od</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.label.product.meta_keywords</source>
+                <target>Słowa kluczowe w sekcji Meta</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.label.product.meta_description</source>
+                <target>Opis w sekcji Meta</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.label.property.name</source>
+                <target>Nazwa w systemie</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.label.property.presentation</source>
+                <target>Nazwa publiczna</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sylius.label.prototype.name</source>
+                <target>Nazwa</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>sylius.label.prototype.properties</source>
+                <target>Właściwości</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
