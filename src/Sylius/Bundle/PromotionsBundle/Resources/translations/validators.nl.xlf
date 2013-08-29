@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.promotion.name.not_blank</source>
+                <target>Voer een promotie naam in.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.promotion.name.min_length</source>
+                <target>Promotie naam moet minstens 1 karakter lang zijn.|Promotie naam moet minstens {{ limit }} karakters lang zijn.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.promotion.name.max_length</source>
+                <target>Promotie naam mag niet langer zijn dan 1 karakter.|Promotie naam mag niet langer zijn dan {{ limit }} karakters.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.promotion.description.not_blank</source>
+                <target>Voer een promotie omschrijving in.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.promotion.description.min_length</source>
+                <target>Promotie omschrijving moet minstens 1 karakter lang zijn.|Promotie omschrijving moet minstens {{ limit }} karakters lang zijn.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.promotion.description.max_length</source>
+                <target>Promotie omschrijving mag niet langer zijn dan 1 karakter.|Promotie omschrijving mag niet langer zijn dan {{ limit }} karakters.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.promotion_coupon.code.not_blank</source>
+                <target>Voer een coupon code in.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.promotion_coupon.code.min_length</source>
+                <target>Coupon code moet minstens 1 karakter lang zijn.|Coupon code moet minstens {{ limit }} karakters lang zijn.</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sylius.promotion_coupon.code.max_length</source>
+                <target>Coupon code mag niet langer zijn dan 1 karakter.|Coupon code mag niet langer zijn dan {{ limit }} karakters.</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>sylius.promotion_coupon.usage_limit.min</source>
+                <target>Coupon gebruikslimiet moet minstens {{ limit }} zijn.</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>sylius.promotion_coupon_generate_instruction.amount.not_blank</source>
+                <target>Voer het aantal te genereren coupons in.</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>sylius.promotion_coupon_generate_instruction.amount.min</source>
+                <target>Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>sylius.promotion_coupon_generate_instruction.usage_limit.min</source>
+                <target>Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
