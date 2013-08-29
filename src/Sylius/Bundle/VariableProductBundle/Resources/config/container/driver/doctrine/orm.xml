@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.repository.variant.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.option.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.option_value.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+
+        <parameter key="sylius.form.type.option_choice.class">Sylius\Bundle\VariableProductBundle\Form\Type\OptionEntityChoiceType</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="sylius.manager.option" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.option" class="%sylius.repository.option.class%">
+            <argument type="service" id="sylius.manager.option" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%sylius.model.option.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.variant" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.variant" class="%sylius.repository.variant.class%">
+            <argument type="service" id="sylius.manager.variant" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%sylius.model.variant.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.option_value" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.option_value" class="%sylius.repository.option_value.class%">
+            <argument type="service" id="sylius.manager.option_value" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%sylius.model.option_value.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+
+</container>

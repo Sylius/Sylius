@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.generator.variant.class">Sylius\Bundle\VariableProductBundle\Generator\VariantGenerator</parameter>
+
+        <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\VariableProductBundle\Validator\VariantUniqueValidator</parameter>
+        <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariableProductBundle\Validator\VariantCombinationValidator</parameter>
+
+        <parameter key="sylius.form.type.variant.class">Sylius\Bundle\VariableProductBundle\Form\Type\VariantType</parameter>
+        <parameter key="sylius.form.type.variant_choice.class">Sylius\Bundle\VariableProductBundle\Form\Type\VariantChoiceType</parameter>
+        <parameter key="sylius.form.type.variant_match.class">Sylius\Bundle\VariableProductBundle\Form\Type\VariantMatchType</parameter>
+        <parameter key="sylius.form.type.variant_to_identifier.class">Sylius\Bundle\VariableProductBundle\Form\Type\VariantToIdentifierType</parameter>
+
+        <parameter key="sylius.controller.variant.class">Sylius\Bundle\VariableProductBundle\Controller\VariantController</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.generator.variant" class="%sylius.generator.variant.class%">
+            <argument type="service" id="validator" />
+            <argument type="service" id="sylius.repository.variant"/>
+        </service>
+
+        <service id="sylius.validator.variant.unique" class="%sylius.validator.variant.unique.class%">
+            <argument type="service" id="sylius.repository.variant" />
+            <tag name="validator.constraint_validator" alias="sylius.validator.variant.unique" />
+        </service>
+        <service id="sylius.validator.variant.combination" class="%sylius.validator.variant.combination.class%">
+            <tag name="validator.constraint_validator" alias="sylius.validator.variant.combination" />
+        </service>
+
+        <service id="sylius.form.type.variant" class="%sylius.form.type.variant.class%">
+            <argument>%sylius.model.variant.class%</argument>
+            <argument>%sylius.validation_group.variant%</argument>
+            <tag name="form.type" alias="sylius_variant" />
+        </service>
+        <service id="sylius.form.type.variant_choice" class="%sylius.form.type.variant_choice.class%">
+            <tag name="form.type" alias="sylius_variant_choice" />
+        </service>
+        <service id="sylius.form.type.variant_match" class="%sylius.form.type.variant_match.class%">
+            <tag name="form.type" alias="sylius_variant_match" />
+        </service>
+        <service id="sylius.form.type.variant_to_identifier" class="%sylius.form.type.variant_to_identifier.class%">
+            <argument type="service" id="sylius.repository.variant" />
+            <tag name="form.type" alias="sylius_variant_to_identifier" />
+        </service>
+
+        <service id="sylius.controller.variant" class="%sylius.controller.variant.class%">
+            <argument>sylius</argument>
+            <argument>variant</argument>
+            <argument>SyliusVariableProductBundle:Variant</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+    </services>
+
+</container>
