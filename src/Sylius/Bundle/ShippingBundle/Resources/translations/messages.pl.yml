@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_category:
+            name: Nazwa
+            description: Opis
+        shipping_method:
+            name: Nazwa
+            category: Kategoria
+            category_requirement: Wymagania kategorii
+            calculator: Kalkulator
+            configuration: Konfiguracja
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Kwota
+            per_item_rate_configuration:
+                amount: Kwota
+            flexible_rate_configuration:
+                first_item_cost: Koszt pierwszej sztuki
+                additional_item_cost: Koszt kolejnych sztuk
+                additional_item_limit: Maksymalnie w paczce
