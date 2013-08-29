@@ -1,0 +1,46 @@
+{
+    "name": "sylius/settings-bundle",
+    "type": "symfony-bundle",
+    "description": "Settings system for Symfony2 applications, editable via web user interface.",
+    "keywords": ["config", "configuration", "settings", "shop", "webshop", "ecommerce"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusSettingsBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle":        "~2.3",
+        "sylius/resource-bundle":          "0.3.*",
+        "stof/doctrine-extensions-bundle": "1.1.*",
+        "liip/doctrine-cache-bundle":      "*"
+
+    },
+    "require-dev": {
+        "phpspec/phpspec":          "2.0.*@dev",
+        "symfony/form":             "~2.3",
+        "symfony/validator":        "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\SettingsBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/SettingsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.2.x-dev"
+        }
+    }
+}

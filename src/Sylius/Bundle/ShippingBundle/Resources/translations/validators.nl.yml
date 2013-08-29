@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+
+sylius:
+    shipping_category:
+        name:
+            not_blank: "Voer een naam in voor de verzendingscategorie."
+            min_length: "Categorie naam moet minstens {{ limit }} karakters lang zijn."
+            max_length: "Categorie naam mag niet langer zijn dan {{ limit }} karakters."
+    shipping_method:
+        name:
+            not_blank: "Voer een naam in voor de verzendingsmethode."
+            min_length: "Naam van verzendingsmethode moet minstens {{ limit }} karakters lang zijn."
+            max_length: "Naam van verzendingsmethode mag niet langer zijn dan {{ limit }} karakters."

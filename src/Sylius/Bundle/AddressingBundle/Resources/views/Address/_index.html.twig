@@ -1,0 +1,20 @@
+{% import 'SyliusAddressingBundle:Address:macros.html.twig' as macros %}
+
+<h1>Addresses list <small>All addresses saved in the system</small></h1>
+<hr />
+
+<div class="well">
+    <a href="{{ path('sylius_address_create') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> new address
+    </a>
+</div>
+
+{% if addresses.haveToPaginate()|default(false) %}
+    {{ pagerfanta(addresses, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{{ macros.list(addresses) }}
+
+{% if addresses.haveToPaginate()|default(false) %}
+    {{ pagerfanta(addresses, 'twitter_bootstrap_translated') }}
+{% endif %}

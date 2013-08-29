@@ -1,0 +1,17 @@
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
+
+{% block sylius_content %}
+<div class="page-header">
+    <h1>{{ 'sylius.process.step.setup.header'|trans|raw }}</h1>
+</div>
+
+<form action="{{ path('sylius_flow_forward', {'scenarioAlias': 'sylius_installer', 'stepName': 'setup'}) }}" method="post" class="form-horizontal">
+    <div>{{ form_widget(form) }}</div>
+    <div class="form-actions">
+        <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'sylius_installer', 'stepName': 'configure'}) }}" class="btn btn-large"><i class="icon-chevron-left"></i> {{ 'sylius.process.step.check.button.back'|trans }}</a> &nbsp;
+        <button class="btn btn-large btn-primary" type="submit">
+            <i class="icon-magic"></i> {{ 'sylius.process.step.check.button.install'|trans }}
+        </button>
+    </div>
+</form>
+{% endblock %}

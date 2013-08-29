@@ -1,0 +1,44 @@
+{
+    "name": "sylius/taxation-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible taxation system for Symfony2 ecommerce applications.",
+    "keywords": ["tax", "taxes", "taxation", "shop", "webshop", "ecommerce"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusTaxationBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle":        "~2.3",
+        "sylius/resource-bundle":          "0.3.*",
+        "stof/doctrine-extensions-bundle": "1.1.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec":    "2.0.*@dev",
+        "doctrine/orm":       "~2.2",
+        "symfony/form":       "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\TaxationBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/TaxationBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.3.x-dev"
+        }
+    }
+}

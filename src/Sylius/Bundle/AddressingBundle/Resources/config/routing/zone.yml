@@ -1,0 +1,22 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_zone_list:
+    pattern: /
+    defaults:
+        _controller: sylius.controller.zone:indexAction
+
+sylius_zone_create:
+    pattern: /create
+    defaults:
+        _controller: sylius.controller.zone:createAction
+
+sylius_zone_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.zone:updateAction
+
+sylius_zone_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.zone:deleteAction

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="nl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="4cd9195643343df2e0718b76c84b0e61" resname="sylius.address.city.max_length">
+        <source>sylius.address.city.max_length</source>
+        <target>Plaats mag niet langer dan 255 karakters zijn|Plaats mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="5e64f28e013767d9d9052c5962c52839" resname="sylius.address.city.min_length">
+        <source>sylius.address.city.min_length</source>
+        <target>Plaats moet minstens 2 karakters lang zijn|Plaats moet minstens 2 karakters lang zijn.</target>
+      </trans-unit>
+      <trans-unit id="594a3a47d5f964256ec0b564afd517fc" resname="sylius.address.city.not_blank">
+        <source>sylius.address.city.not_blank</source>
+        <target>Voer een plaats in.</target>
+      </trans-unit>
+      <trans-unit id="4d3a803eb489ffaeea16b07683fd39b6" resname="sylius.address.country.not_blank">
+        <source>sylius.address.country.not_blank</source>
+        <target>Selecteer een land.</target>
+      </trans-unit>
+      <trans-unit id="e252a88f87165620971393df7c314712" resname="sylius.address.first_name.max_length">
+        <source>sylius.address.first_name.max_length</source>
+        <target>Voornaam mag niet langer dan 255 karakters zijn|Voornaam mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="a5c95b252bcb6c28191bce06e8bfb207" resname="sylius.address.first_name.min_length">
+        <source>sylius.address.first_name.min_length</source>
+        <target>Voornaam moet minstens 2 karakters lang zijn|Voornaam moet minstens 2 karakters lang zijn.</target>
+      </trans-unit>
+      <trans-unit id="f9655e0e8621e76ef71899cb818dfc20" resname="sylius.address.first_name.not_blank">
+        <source>sylius.address.first_name.not_blank</source>
+        <target>Voer een voornaam in.</target>
+      </trans-unit>
+      <trans-unit id="fb4e92106b0cceb7e0dfdf61b9b18407" resname="sylius.address.last_name.max_length">
+        <source>sylius.address.last_name.max_length</source>
+        <target>Achternaam mag niet langer dan 255 karakters zijn|Achternaam mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="2480b94251a02c47bef7c3aba4b1ab93" resname="sylius.address.last_name.min_length">
+        <source>sylius.address.last_name.min_length</source>
+        <target>Achternaam moet minstens 2 karakters lang zijn|Achternaam moet minstens 2 karakters lang zijn.</target>
+      </trans-unit>
+      <trans-unit id="7fe433ec5724f8661f5abb73f802a100" resname="sylius.address.last_name.not_blank">
+        <source>sylius.address.last_name.not_blank</source>
+        <target>Voer een achternaam in.</target>
+      </trans-unit>
+      <trans-unit id="0558d4aeb03ea384f20cc700dd82c82a" resname="sylius.address.postcode.max_length">
+        <source>sylius.address.postcode.max_length</source>
+        <target>Postcode mag niet langer dan 255 karakters zijn|Postcode mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="7f21a001520d738294163c6846caea33" resname="sylius.address.postcode.min_length">
+        <source>sylius.address.postcode.min_length</source>
+        <target>Postcode moet minstens 2 karakters lang zijn|Postcode moet minstens 2 karakters lang zijn.</target>
+      </trans-unit>
+      <trans-unit id="0bb933abd4f0217d4d1e2d521b60b9ef" resname="sylius.address.postcode.not_blank">
+        <source>sylius.address.postcode.not_blank</source>
+        <target>Voer een postcode in.</target>
+      </trans-unit>
+      <trans-unit id="0a5ba0dfc005b06148f006a3e51a2643" resname="sylius.address.province.valid">
+        <source>sylius.address.province.valid</source>
+        <target>Selecteer een provincie.</target>
+      </trans-unit>
+      <trans-unit id="79a20c64ff0131a40b96664c3b7555d7" resname="sylius.address.street.max_length">
+        <source>sylius.address.street.max_length</source>
+        <target>Straat mag niet langer dan 255 karakters zijn|Straat mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="858516d3703954d8e45cb2f6a2ec0a66" resname="sylius.address.street.min_length">
+        <source>sylius.address.street.min_length</source>
+        <target>Straat moet minstens 2 karakters lang zijn|Straat moet minstens 2 karakters lang zijn.</target>
+      </trans-unit>
+      <trans-unit id="cf60b55d4dbd7a0bfb9b770bfca9b1fb" resname="sylius.address.street.not_blank">
+        <source>sylius.address.street.not_blank</source>
+        <target>Voer een straat in.</target>
+      </trans-unit>
+      <trans-unit id="297fe83c9650547bae5e88505cd9dd40" resname="sylius.country.iso_name.not_blank">
+        <source>sylius.country.iso_name.not_blank</source>
+        <target>Voer een ISO landcode in.</target>
+      </trans-unit>
+      <trans-unit id="254a443f9ab6f5e0dd9574db7afcffa2" resname="sylius.country.name.max_length">
+        <source>sylius.country.name.max_length</source>
+        <target>Landnaam mag niet langer dan 255 karakters zijn|Landnaam mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="8877699fed4ff2ec488e3f819fc5c777" resname="sylius.country.name.not_blank">
+        <source>sylius.country.name.not_blank</source>
+        <target>Voer een landnaam in.</target>
+      </trans-unit>
+      <trans-unit id="7226e2da1b30b33c37f32f40d755a722" resname="sylius.province.name.max_length">
+        <source>sylius.province.name.max_length</source>
+        <target>Provincie naam mag niet langer dan 255 karakters zijn|Provincie naam mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="2dcf7777230a72d2c6f7c4f94f797150" resname="sylius.province.name.min_length">
+        <source>sylius.province.name.min_length</source>
+        <target>Provincie naam moet minstens 2 karakters lang zijn|Provincie naam moet minstens 2 karakters lang zijn.</target>
+      </trans-unit>
+      <trans-unit id="f9c7fe354d624dabeea17830a8e5973f" resname="sylius.province.name.not_blank">
+        <source>sylius.province.name.not_blank</source>
+        <target>Voer een provincie naam in.</target>
+      </trans-unit>
+      <trans-unit id="b0f64f444c33a62394f6feb2ebcd743c" resname="sylius.zone.members.min_count">
+        <source>sylius.zone.members.min_count</source>
+        <target>Voeg minstens {{ limit }} zone leden toe.</target>
+      </trans-unit>
+      <trans-unit id="ef3addb393985a9e74e90c1e070dcdb7" resname="sylius.zone.name.max_length">
+        <source>sylius.zone.name.max_length</source>
+        <target>Zone naam mag niet langer dan 255 karakters zijn|Zone naam mag niet langer dan 255 karakters zijn.</target>
+      </trans-unit>
+      <trans-unit id="104cd1e655781eb8b0401c01ca772463" resname="sylius.zone.name.not_blank">
+        <source>sylius.zone.name.not_blank</source>
+        <target>Voer een zone naam in.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
