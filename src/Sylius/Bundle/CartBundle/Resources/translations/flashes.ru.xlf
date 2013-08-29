@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="ru" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.cart.cart_save_completed</source>
+                <target>Корзина успешно обновлена.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.cart.cart_clear_completed</source>
+                <target>Корзина успешно очищена.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.cart.item_add_completed</source>
+                <target>Позиция добавлена в корзину.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.cart.item_remove_completed</source>
+                <target>Позиция удалена из корзины.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.cart.item_add_error</source>
+                <target>При добавлении позиции в корзину возникла ошибка.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.cart.item_remove_error</source>
+                <target>При удалении из корзины возникла ошибка.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

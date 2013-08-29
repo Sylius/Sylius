@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.model.cart.class">%sylius.model.order.class%</parameter>
+        <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
+
+        <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
+        <parameter key="sylius.cart_storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
+
+        <parameter key="sylius.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
+        <parameter key="sylius.cart_flash_listener.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.cart" class="%sylius.controller.cart.class%">
+            <argument>sylius</argument>
+            <argument>cart</argument>
+            <argument>SyliusCartBundle:Cart</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.controller.cart_item" class="%sylius.controller.cart_item.class%">
+            <argument>sylius</argument>
+            <argument>cart_item</argument>
+            <argument>SyliusCartBundle:CartItem</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.manager.cart" alias="sylius.manager.order" />
+        <service id="sylius.manager.cart_item" alias="sylius.manager.order_item" />
+
+        <service id="sylius.repository.cart" alias="sylius.repository.order" />
+        <service id="sylius.repository.cart_item" alias="sylius.repository.order_item" />
+
+        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.validation_group.cart%</argument>
+            <tag name="form.type" alias="sylius_cart" />
+        </service>
+
+        <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
+            <argument>%sylius.model.cart_item.class%</argument>
+            <argument>%sylius.validation_group.cart_item%</argument>
+            <tag name="form.type" alias="sylius_cart_item" />
+        </service>
+
+        <service id="sylius.cart_provider.default" class="%sylius.cart_provider.default.class%">
+            <argument type="service" id="sylius.cart_storage" />
+            <argument type="service" id="sylius.manager.cart" />
+            <argument type="service" id="sylius.repository.cart" />
+        </service>
+
+        <service id="sylius.cart_storage.session" class="%sylius.cart_storage.session.class%">
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="sylius.cart_listener" class="%sylius.cart_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="sylius.manager.cart" />
+            <argument type="service" id="validator" />
+            <argument type="service" id="sylius.cart_provider" />
+        </service>
+
+        <service id="sylius.cart_flash_listener" class="%sylius.cart_flash_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <call method="setMessages"/>
+        </service>
+    </services>
+</container>
