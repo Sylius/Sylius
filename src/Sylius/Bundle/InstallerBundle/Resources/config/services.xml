@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+    http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.installer.scenario.class">Sylius\Bundle\InstallerBundle\Process\InstallerScenario</parameter>
+        <parameter key="sylius.requirements.class">Sylius\Bundle\InstallerBundle\Requirement\SyliusRequirements</parameter>
+        <parameter key="sylius.requirements.settings.class">Sylius\Bundle\InstallerBundle\Requirement\SettingsRequirements</parameter>
+        <parameter key="sylius.requirements.extensions.class">Sylius\Bundle\InstallerBundle\Requirement\ExtensionsRequirements</parameter>
+        <parameter key="sylius.requirements.filesystem.class">Sylius\Bundle\InstallerBundle\Requirement\FilesystemRequirements</parameter>
+        <parameter key="sylius.form.type.configuration.class">Sylius\Bundle\InstallerBundle\Form\Type\ConfigurationType</parameter>
+        <parameter key="sylius.form.type.configuration.database.class">Sylius\Bundle\InstallerBundle\Form\Type\Configuration\DatabaseType</parameter>
+        <parameter key="sylius.form.type.configuration.mailer.class">Sylius\Bundle\InstallerBundle\Form\Type\Configuration\MailerType</parameter>
+        <parameter key="sylius.form.type.configuration.locale.class">Sylius\Bundle\InstallerBundle\Form\Type\Configuration\LocaleType</parameter>
+        <parameter key="sylius.form.type.configuration.hidden.class">Sylius\Bundle\InstallerBundle\Form\Type\Configuration\HiddenType</parameter>
+        <parameter key="sylius.form.type.setup.class">Sylius\Bundle\InstallerBundle\Form\Type\SetupType</parameter>
+        <parameter key="sylius.installer.yaml_persister.class">Sylius\Bundle\InstallerBundle\Persister\YamlPersister</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.installer.scenario" class="%sylius.installer.scenario.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.scenario" alias="sylius_installer" />
+        </service>
+
+        <service id="sylius.requirements" class="%sylius.requirements.class%">
+            <argument type="collection">
+                <argument type="service">
+                    <service class="%sylius.requirements.settings.class%">
+                        <argument type="service" id="translator" />
+                    </service>
+                </argument>
+                <argument type="service">
+                    <service class="%sylius.requirements.extensions.class%">
+                        <argument type="service" id="translator" />
+                    </service>
+                </argument>
+                <argument type="service">
+                    <service class="%sylius.requirements.filesystem.class%">
+                        <argument type="service" id="translator" />
+                        <argument>%kernel.root_dir%</argument>
+                    </service>
+                </argument>
+            </argument>
+        </service>
+
+        <service id="sylius.form.type.configuration" class="%sylius.form.type.configuration.class%">
+            <tag name="form.type" alias="sylius_configuration" />
+        </service>
+
+        <service id="sylius.form.type.configuration.database" class="%sylius.form.type.configuration.database.class%">
+            <tag name="form.type" alias="sylius_configuration_database" />
+        </service>
+
+        <service id="sylius.form.type.configuration.mailer" class="%sylius.form.type.configuration.mailer.class%">
+            <tag name="form.type" alias="sylius_configuration_mailer" />
+        </service>
+
+        <service id="sylius.form.type.configuration.locale" class="%sylius.form.type.configuration.locale.class%">
+            <tag name="form.type" alias="sylius_configuration_locale" />
+        </service>
+
+        <service id="sylius.form.type.configuration.hidden" class="%sylius.form.type.configuration.hidden.class%">
+            <tag name="form.type" alias="sylius_configuration_hidden" />
+        </service>
+
+        <service id="sylius.form.type.setup" class="%sylius.form.type.setup.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_setup" />
+        </service>
+
+        <service id="sylius.installer.yaml_persister" class="%sylius.installer.yaml_persister.class%">
+            <argument>%kernel.root_dir%/config/parameters.yml</argument>
+        </service>
+    </services>
+
+</container>

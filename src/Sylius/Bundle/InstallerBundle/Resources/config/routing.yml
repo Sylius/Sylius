@@ -1,0 +1,7 @@
+sylius_installer:
+    pattern: /installer
+    defaults: { _controller: sylius.controller.process:startAction, scenarioAlias: 'sylius_installer' }
+
+sylius_flow:
+    resource: @SyliusFlowBundle/Resources/config/routing.yml
+    prefix: /installer
