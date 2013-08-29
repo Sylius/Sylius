@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.tax_calculator_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType</parameter>
+
+        <parameter key="sylius.tax_calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius.tax_calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator</parameter>
+
+        <parameter key="sylius.tax_rate_resolver.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.tax_category" class="%sylius.controller.tax_category.class%">
+            <argument>sylius</argument>
+            <argument>tax_category</argument>
+            <argument>SyliusTaxationBundle:TaxCategory</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.tax_rate" class="%sylius.controller.tax_rate.class%">
+            <argument>sylius</argument>
+            <argument>tax_rate</argument>
+            <argument>SyliusTaxationBundle:TaxRate</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.form.type.tax_category" class="%sylius.form.type.tax_category.class%">
+            <argument>%sylius.model.tax_category.class%</argument>
+            <argument>%sylius.validation_group.tax_category%</argument>
+            <tag name="form.type" alias="sylius_tax_category" />
+        </service>
+        <service id="sylius.form.type.tax_rate" class="%sylius.form.type.tax_rate.class%">
+            <argument>%sylius.model.tax_rate.class%</argument>
+            <argument>%sylius.validation_group.tax_rate%</argument>
+            <tag name="form.type" alias="sylius_tax_rate" />
+        </service>
+
+        <service id="sylius.form.type.tax_calculator_choice" class="%sylius.form.type.tax_calculator_choice.class%">
+            <argument>%sylius.tax_calculators%</argument>
+            <tag name="form.type" alias="sylius_tax_calculator_choice" />
+        </service>
+
+        <service id="sylius.tax_calculator" class="%sylius.tax_calculator.class%" />
+
+        <service id="sylius.tax_calculator.default" class="%sylius.tax_calculator.default.class%">
+            <tag name="sylius.tax_calculator" calculator="default" />
+        </service>
+
+        <service id="sylius.tax_rate_resolver" class="%sylius.tax_rate_resolver.class%">
+            <argument type="service" id="sylius.repository.tax_rate" />
+        </service>
+    </services>
+
+</container>
