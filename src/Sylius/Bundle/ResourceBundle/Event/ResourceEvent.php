@@ -22,20 +22,13 @@ class ResourceEvent extends GenericEvent
 {
     const TYPE_ERROR    = 'error';
     const TYPE_WARNING  = 'warning';
+    const TYPE_INFO     = 'info';
+    const TYPE_SUCCESS  = 'success';
 
-    public function stopWithError($message, $params = array())
+    public function stop($message, $type = self::TYPE_ERROR, $params = array())
     {
         $this->error = true;
-        $this->messageType = self::TYPE_ERROR;
-        $this->message = $message;
-        $this->messageParams = $params;
-        $this->stopPropagation();
-    }
-
-    public function stopWithWarning($message, $params = array())
-    {
-        $this->error = true;
-        $this->messageType = self::TYPE_WARNING;
+        $this->messageType = $type;
         $this->message = $message;
         $this->messageParams = $params;
         $this->stopPropagation();
