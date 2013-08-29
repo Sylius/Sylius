@@ -1,7 +1,13 @@
 Sylius [![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch=master)](http://travis-ci.org/Sylius/Sylius)
 ======
 
-Sylius is **modern ecommerce solution for PHP**, based on the [**Symfony2**](http://symfony.com) framework.
+Sylius is a an open source e-commerce solution for **PHP**, based on the [**Symfony2**](http://symfony.com) framework.
+
+Ultimate goal of the project is to create a webshop engine, which is user-friendly, *loved* by developers and has a helpful community.
+
+Sylius is constructed from fully decoupled components (bundles in Symfony2 glossary), which means that every feature (products catalog, shipping engine, promotions system...) can be used in any other application. 
+
+We're using full-stack BDD methodology, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
 
 Installation
 ------------
@@ -29,16 +35,18 @@ Then download [Selenium Server](http://seleniumhq.org/download/), and run it.
 ```bash
 $ java -jar selenium-server-standalone-2.11.0.jar
 ```
+
 You can run Behat using the following command.
 
 ``` bash
 $ bin/behat
-$ bin/behat -p no-js # If you want to skip the scenarios which require real browser.
 ```
 
 Troubleshooting
-------------
-If something goes wrong, errors & exceptions are logged at the application level:
+---------------
+
+If something goes wrong, errors & exceptions are logged at the application level.
+
 ````
 tail -f app/logs/prod.log
 tail -f app/logs/dev.log
