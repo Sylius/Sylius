@@ -1,0 +1,4 @@
+<strong>{{ address.fullName}}</strong> <br />
+{{ address.street }}, <br />
+{{ address.city }} {{ address.postcode }}<br />
+{{ address.country|upper }} {% if address.province is not empty %} {{ address.province }} {% endif %}

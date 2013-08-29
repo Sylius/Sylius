@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_tax_rate_index:
+    pattern: /
+    defaults:
+        _controller: sylius.controller.tax_rate:indexAction
+        _sortable: true
+        _sorting:
+            name: desc
+    requirements:
+        _method: GET
+
+sylius_tax_rate_create:
+    pattern: /{id}/create
+    defaults:
+        _controller: sylius.controller.tax_rate:createAction
+    requirements:
+        _method: GET|POST
+
+sylius_tax_rate_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.tax_rate:updateAction
+    requirements:
+        _method: GET|POST|PUT
+
+sylius_tax_rate_delete:
+    pattern: /{id}
+    defaults:
+        _controller: sylius.controller.tax_rate:deleteAction
+    requirements:
+        _method: DELETE
+
+sylius_tax_rate_show:
+    pattern: /{id}
+    defaults:
+        _controller: sylius.controller.tax_rate:showAction
+    requirements:
+        _method: GET

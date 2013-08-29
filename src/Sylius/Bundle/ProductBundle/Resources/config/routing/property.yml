@@ -1,0 +1,39 @@
+sylius_property_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.property:indexAction
+        _sylius:
+            sortable: true
+            sorting:
+              name: desc
+
+sylius_property_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.property:createAction
+        _sylius:
+            redirect: sylius_property_index
+
+sylius_property_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.property:updateAction
+        _sylius:
+            redirect: sylius_property_index
+
+sylius_property_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.property:deleteAction
+        _sylius:
+            redirect: sylius_property_index
+
+sylius_property_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.property:showAction

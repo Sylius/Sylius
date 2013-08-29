@@ -1,0 +1,42 @@
+{
+    "name": "sylius/omnipay-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 integration with Omnipay - multi-gateway, payment processing library.",
+    "keywords": ["shop", "ecommerce", "sylius", "payment", "merchant", "gateway", "paypal", "authorize.net", "dps", "paymentexpress", "omnipay"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusOmnipayBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":                      ">=5.3.3",
+
+        "symfony/framework-bundle": "~2.1",
+        "omnipay/omnipay":          "dev-master"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "dev-develop",
+        "symfony/form":     "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\OmnipayBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/OmnipayBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9.x-dev"
+        }
+    }
+}

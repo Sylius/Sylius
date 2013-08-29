@@ -1,0 +1,20 @@
+{% import 'SyliusAddressingBundle:Zone:macros.html.twig' as macros %}
+
+<h1>Zones list <small>Here you can configure zones</small></h1>
+<hr />
+
+<div class="well">
+    <a href="{{ path('sylius_zone_create') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> add zone
+    </a>
+</div>
+
+{% if zones.haveToPaginate()|default(false) %}
+    {{ pagerfanta(zones, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{{ macros.list(zones) }}
+
+{% if zones.haveToPaginate()|default(false) %}
+    {{ pagerfanta(zones, 'twitter_bootstrap_translated') }}
+{% endif %}

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.option.name.not_blank</source>
+                <target>Por favor introduzca el nombre de la opción.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.option.name.min_length</source>
+                <target>El nombre de la opción debe tener al menos 1 carácter de longitud.|El nombre de opción debe tener al menos {{ limit }} caracteres de longitud.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.option.name.max_length</source>
+                <target>El nombre de la opción debe tener como máximo 1 carácter de longitud.|El nombre de la opción no debe ser más largo de {{ limit }} caracteres de longitud.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.option.presentation.not_blank</source>
+                <target>Por favor complete la presentación de la opción.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.option.presentation.min_length</source>
+                <target>La presentación de la opción debe tener al menos 1 carácter de longitud.|La presentación de la opción debe tener al menos {{ limit }} caracteres de longitud.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.option.presentation.max_length</source>
+                <target>La presentación de la opción debe tener como máximo 1 carácter de longitud.|La presentación de la opción no debe ser más larga de {{ limit }} caracteres de longitud.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.option.values.min_count</source>
+                <target>Por favor añada al menos {{ limit }} valor para la opción.|Por favor añada al menos {{ limit }} valores para la opción.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.option_value.value.not_blank</source>
+                <target>Por favor inserte un valor de opción.</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sylius.variant.combination</source>
+                <target>Ya existe una variante con este conjunto de opciones.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

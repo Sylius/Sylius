@@ -1,0 +1,32 @@
+<h1>Address details <small>{{ address.fullName }}</small></h1>
+<hr />
+
+<div class="well well-small">
+    <a href="{{ path('sylius_address_update', {'id': address.id}) }}" class="btn">
+        <i class="icon-pencil icon-white"></i> edit
+    </a>
+    <a href="{{ path('sylius_address_delete', {'id': address.id}) }}" class="btn btn-danger">
+        <i class="icon-trash icon-white"></i>
+    </a>
+    <a href="{{ path('sylius_address_create') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> new address
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#{{ address.id }} for "{{ address.fullName }}"</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <address class="code">
+                    <hr />
+                    {% include 'SyliusAddressingBundle:Address:_address.html.twig' %}
+                </address>
+            </td>
+        <tr>
+    </tbody>
+</table>

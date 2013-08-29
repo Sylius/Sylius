@@ -1,0 +1,49 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        first_name:
+            not_blank: "Proszę podać swoje imię."
+            min_length: "Imię jest zbyt krótkie. Powinno mieć 2 lub więcej znaków|Imię jest zbyt krótkie. Powinno mieć 2 lub więcej znaków."
+            max_length: "Imię jest zbyt długie. Powinno mieć mniej niż 255 znaków|Imię jest zbyt długie. Powinno mieć mniej niż 255 znaków."
+        last_name:
+            not_blank: "Proszę podać swoje naziwsko."
+            min_length: "Nazwisko jest zbyt krótkie. Powinno mieć 2 lub więcej znaków|Nazwisko jest zbyt krótkie. Powinno mieć 2 lub więcej znaków."
+            max_length: "Nazwisko jest zbyt długie. Powinno mieć mniej niż 255 znaków|Nazwisko jest zbyt długie. Powinno mieć mniej niż 255 znaków."
+        country:
+            not_blank: "Proszę wybrać kraj."
+        province:
+            valid: "Proszę wybrać prawidłowe województwo."
+        street:
+            not_blank: "Proszę podać ulicę."
+            min_length: "Adres jest zbyt krótki. Powinien mieć 2 lub więcej znaków|Adres jest zbyt krótki. Powinien mieć 2 lub więcej znaków."
+            max_length: "Adres jest zbyt długi. Powinien mieć mniej niż 255 znaków|Adres jest zbyt długi. Powinien mieć mniej niż 255 znaków."
+        city:
+            not_blank: "Proszę podać miejscowość."
+            min_length: "Nazwa miejscowości jest zbyt krótka. Powinna mieć 2 lub więcej znaków|Nazwa miejscowości jest zbyt krótka. Powinienna mieć 2 lub więcej znaków."
+            max_length: "Nazwa miejscowości jest zbyt długa. Powininna mieć mniej niż 255 znaków|Nazwa miejscowości jest zbyt długa. Powinienna mieć mniej niż 255 znaków."
+        postcode:
+            not_blank: "Proszę podać kod pocztowy."
+            min_length: "Kod pocztowy jest zbyt krótki. Powinien mieć 2 lub więcej znaków|Kod pocztowy jest zbyt krótki. Powinien mieć 2 lub więcej znaków."
+            max_length: "Kod pocztowy jest zbyt długi. Powinien mieć mniej niż 255 znaków|Kod pocztowy jest zbyt długi. Powinien mieć mniej niż 255 znaków."
+    country:
+        name:
+            not_blank: "Proszę podać nazwę kraju."
+            min_length: "Nazwa kraju jest zbyt krótka. Powinna mieć 2 lub więcej znaków|Nazwa kraju jest zbyt krótka. Powinienna mieć 2 lub więcej znaków."
+            max_length: "Nazwa kraju jest zbyt długa. Powininna mieć mniej niż 255 znaków|Nazwa kraju jest zbyt długa. Powinienna mieć mniej niż 255 znaków."
+        iso_name:
+            not_blank: "Proszę podać kod ISO kraju."
+            exact_length: "Kod ISO powienien mieć dokładnie 2 znaki|Kod ISO powienien mieć dokładnie 2 znaki."
+    province:
+        name:
+            not_blank: "Proszę podać nazwę województwa."
+            min_length: "Nazwa województwa jest zbyt krótka. Powinna mieć 2 lub więcej znaków|Nazwa województwa jest zbyt krótka. Powinienna mieć 2 lub więcej znaków."
+            max_length: "Nazwa województwa jest zbyt długa. Powininna mieć mniej niż 255 znaków|Nazwa województwa jest zbyt długa. Powinienna mieć mniej niż 255 znaków."
+    zone:
+        name:
+            not_blank: "Proszę podać nazwę strefy."
+            min_length: "Nazwa strefy jest zbyt krótka. Powinna mieć 2 lub więcej znaków|Nazwa strefy jest zbyt krótka. Powinienna mieć 2 lub więcej znaków."
+            max_length: "Nazwa strefy jest zbyt długa. Powininna mieć mniej niż 255 znaków|Nazwa strefy jest zbyt długa. Powinienna mieć mniej niż 255 znaków."
+        members:
+            min_count: "Proszę podać conajmniej {{ limit }} kraj."

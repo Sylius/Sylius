@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_flow_start:
+    pattern: /flow/{scenarioAlias}
+    defaults: { _controller: sylius.controller.process:startAction }
+
+sylius_flow_display:
+    pattern: /flow/{scenarioAlias}/{stepName}
+    defaults: { _controller: sylius.controller.process:displayAction }
+
+sylius_flow_forward:
+    pattern: /flow/{scenarioAlias}/{stepName}/forward
+    defaults: { _controller: sylius.controller.process:forwardAction }

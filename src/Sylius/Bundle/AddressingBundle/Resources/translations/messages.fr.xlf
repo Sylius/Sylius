@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="30d6b7cae83842de6b0be3436b49fa57" resname="sylius.form.address.city">
+        <source>sylius.form.address.city</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="bc3c6def58ace06a88e26fb873f4697b" resname="sylius.form.address.country">
+        <source>sylius.form.address.country</source>
+        <target>sylius.form.address.country</target>
+      </trans-unit>
+      <trans-unit id="e1eaef329d355a008d8fddf6c6bb301a" resname="sylius.form.address.first_name">
+        <source>sylius.form.address.first_name</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="1e33909fd1ed82313af82cc10d3d9680" resname="sylius.form.address.last_name">
+        <source>sylius.form.address.last_name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="14bde8608db160b03c70945fcdf62613" resname="sylius.form.address.postcode">
+        <source>sylius.form.address.postcode</source>
+        <target>Code postal</target>
+      </trans-unit>
+      <trans-unit id="f4bdea11ce109e29f1101090b84f0b80" resname="sylius.form.address.street">
+        <source>sylius.form.address.street</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="00522dcfbec9b5e1ac9cbf39d62d1692" resname="sylius.form.country.iso_name">
+        <source>sylius.form.country.iso_name</source>
+        <target>sylius.form.country.iso_name</target>
+      </trans-unit>
+      <trans-unit id="1a9ff4ef54c3d6850913dd85da9995b5" resname="sylius.form.country.name">
+        <source>sylius.form.country.name</source>
+        <target>sylius.form.country.name</target>
+      </trans-unit>
+      <trans-unit id="fb2f23317fa10e33b0eb423a814aea67" resname="sylius.form.country.provinces">
+        <source>sylius.form.country.provinces</source>
+        <target>sylius.form.country.provinces</target>
+      </trans-unit>
+      <trans-unit id="0232425332ba32edd83d5c3dfe8a6080" resname="sylius.form.country.select">
+        <source>sylius.form.country.select</source>
+        <target>sylius.form.country.select</target>
+      </trans-unit>
+      <trans-unit id="90c305763d958c3dd319253193a69c4e" resname="sylius.form.province.name">
+        <source>sylius.form.province.name</source>
+        <target>sylius.form.province.name</target>
+      </trans-unit>
+      <trans-unit id="2df1138e962c235812c817d080de1b73" resname="sylius.form.zone.members">
+        <source>sylius.form.zone.members</source>
+        <target>sylius.form.zone.members</target>
+      </trans-unit>
+      <trans-unit id="e8988be3de9b838c9dbe0d836ca6b3f0" resname="sylius.form.zone.name">
+        <source>sylius.form.zone.name</source>
+        <target>sylius.form.zone.name</target>
+      </trans-unit>
+      <trans-unit id="ff8121a85e95c9c38c36fcd73d10041c" resname="sylius.form.zone.type">
+        <source>sylius.form.zone.type</source>
+        <target>sylius.form.zone.type</target>
+      </trans-unit>
+      <trans-unit id="907717f6664a9fb26a9c117ee17d2972" resname="sylius.form.zone_member_country.country">
+        <source>sylius.form.zone_member_country.country</source>
+        <target>sylius.form.zone_member_country.country</target>
+      </trans-unit>
+      <trans-unit id="9006ddea149a0842bf0daea9f5db0ebb" resname="sylius.form.zone_member_province.province">
+        <source>sylius.form.zone_member_province.province</source>
+        <target>sylius.form.zone_member_province.province</target>
+      </trans-unit>
+      <trans-unit id="358a5aa568f76607395efcbdccd4d036" resname="sylius.form.zone_member_zone.zone">
+        <source>sylius.form.zone_member_zone.zone</source>
+        <target>sylius.form.zone_member_zone.zone</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

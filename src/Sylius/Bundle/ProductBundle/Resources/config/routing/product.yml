@@ -1,0 +1,39 @@
+sylius_product_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            sortable: true
+            sorting:
+              name: desc
+
+sylius_product_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            redirect: sylius_product_show
+
+sylius_product_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            redirect: sylius_product_show
+
+sylius_product_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product:deleteAction
+        _sylius:
+            redirect: sylius_product_index
+
+sylius_product_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction

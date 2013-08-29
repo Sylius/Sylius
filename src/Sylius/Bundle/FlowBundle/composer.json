@@ -1,0 +1,36 @@
+{
+    "name": "sylius/flow-bundle",
+    "type": "symfony-bundle",
+    "description": "Multiple action setups for Symfony2, build your checkouts/installers or whatever needs more than one step to complete.",
+    "keywords": ["checkout", "flow", "installation", "steps"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "email": "pjedrzejewski@diweb.pl",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusFlowBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+
+        "symfony/framework-bundle": "~2.1"
+    },
+    "require-dev": {
+        "symfony/yaml": "~2.1"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\FlowBundle": "" }
+    },
+    "target-dir": "Sylius/Bundle/FlowBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

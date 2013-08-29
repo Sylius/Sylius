@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.cart.cart_save_completed</source>
+                <target>カートに保存しました。</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.cart.cart_clear_completed</source>
+                <target>カートを空にしました。</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.cart.item_add_completed</source>
+                <target>商品をカートに追加しました。</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.cart.item_remove_completed</source>
+                <target>商品をカートから削除しました。</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.cart.item_add_error</source>
+                <target>商品をカートに追加できませんでした。</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.cart.item_remove_error</source>
+                <target>商品をカートから削除できませんでした。</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
