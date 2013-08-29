@@ -233,7 +233,7 @@ Feature: Promotions
     Scenario: Deleting promotion
         Given I am on the page of promotion "New Year"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the promotion index page
           And I should see "Promotion has been successfully deleted."
 
@@ -241,7 +241,7 @@ Feature: Promotions
     Scenario: Deleted promotion disappears from the list
         Given I am on the page of promotion "New Year"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the promotion index page
           And I should not see promotion with name "New Year" in that list
 
@@ -249,7 +249,7 @@ Feature: Promotions
     Scenario: Deleting promotion via list
         Given I am on the promotion index page
          When I click "delete" near "Press Campaign"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the promotion index page
           And I should see "Promotion has been successfully deleted."
 
@@ -257,7 +257,7 @@ Feature: Promotions
     Scenario: Deleting promotion rule
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Item total"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the page of promotion "Christmas"
           And I should see "Promotion rule has been successfully deleted."
           And I should not see "Order total"
@@ -266,7 +266,7 @@ Feature: Promotions
     Scenario: Deleting promotion action
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Fixed discount"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the page of promotion "Christmas"
           And I should see "Promotion action has been successfully deleted."
           And I should not see "Fixed discount"

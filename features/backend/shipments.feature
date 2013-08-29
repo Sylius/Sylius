@@ -57,7 +57,7 @@ Feature: Shipments
     Scenario: Deleting shipment
         Given I am on the shipment page with method "DHL"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the shipment index page
           And I should see "Shipment has been successfully deleted."
 
@@ -65,7 +65,7 @@ Feature: Shipments
     Scenario: Deleted shipment disappears from the list
         Given I am on the shipment page with method "DHL"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the shipment index page
           And I should not see shipment with name "DHL" in that list
 
@@ -73,7 +73,7 @@ Feature: Shipments
     Scenario: Deleting shipment from the list
         Given I am on the shipment index page
          When I click "delete" near "DHL"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should still be on the shipment index page
           And "Shipment has been successfully deleted." should appear on the page
           But I should not see shipment with name "DHL" in that list

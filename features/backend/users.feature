@@ -97,7 +97,7 @@ Feature: Users management
     Scenario: Deleting user
         Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the user index page
           And I should see "User has been successfully deleted."
 
@@ -105,7 +105,7 @@ Feature: Users management
     Scenario: Deleted user disappears from the list
         Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the user index page
           And I should not see user with username "rick@foo.com" in that list
 
@@ -113,7 +113,7 @@ Feature: Users management
     Scenario: Deleting user from the list
         Given I am on the user index page
          When I click "delete" near "rick@foo.com"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should still be on the user index page
           And "User has been successfully deleted." should appear on the page
           But I should not see user with username "rick@foo.com" in that list

@@ -122,7 +122,7 @@ Feature: Shipping methods
     Scenario: Deleting shipping method
         Given I am on the page of shipping method "FedEx"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the shipping method index page
           And I should see "Shipping method has been successfully deleted."
 
@@ -130,6 +130,6 @@ Feature: Shipping methods
     Scenario: Deleted shipping method disappears from the list
         Given I am on the page of shipping method "FedEx"
          When I press "delete"
-          And I validate the "confirmationModalContainer" modal
+          And I click "Yes" from the confirmation modal
          Then I should be on the shipping method index page
           And I should not see shipping method with name "FedEx" in that list
