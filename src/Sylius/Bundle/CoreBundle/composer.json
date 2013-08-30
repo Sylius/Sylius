@@ -33,11 +33,16 @@
         "sylius/payments-bundle":         "0.2.*",
         "sylius/flow-bundle":             "0.1.*",
         "sylius/resource-bundle":         "0.3.*",
-        "sylius/omnipay-bundle":          "0.9.*@dev",
         "jms/serializer-bundle":          "0.12.*",
+        "sylius/omnipay-bundle":          "0.9.*@dev",
+        "liip/imagine-bundle":            "0.9.*",
+        "mathiasverraes/money":           "dev-master@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*",
+        "knplabs/knp-snappy-bundle":      "dev-master",
         "fzaninotto/faker":               "1.2.*"
+        "athari/yalinqo":                 "*",
+        "omnipay/omnipay":                "dev-master"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev",
