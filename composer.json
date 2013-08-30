@@ -43,8 +43,9 @@
         "knplabs/knp-menu-bundle":              "2.0.*",
         "liip/imagine-bundle":                  "0.9.*",
         "liip/doctrine-cache-bundle":           "*",
-        "knplabs/knp-snappy-bundle":           "dev-master",
-        "athari/yalinqo":                       "*"
+        "knplabs/knp-snappy-bundle":            "dev-master",
+        "athari/yalinqo":                       "*",
+        "omnipay/omnipay":                      "dev-master"
     },
     "require-dev": {
         "behat/behat":                  "2.4.*",
