@@ -35,7 +35,7 @@ class UserUpdateListener
 
         if (!$user instanceof UserInterface) {
             throw new \InvalidArgumentException(
-                'User update listener requires event subjct to be instance of "FOS\UserBundle\Model\UserInterface".'
+                'User update listener requires event subject to be instance of "FOS\UserBundle\Model\UserInterface".'
             );
         }
 
