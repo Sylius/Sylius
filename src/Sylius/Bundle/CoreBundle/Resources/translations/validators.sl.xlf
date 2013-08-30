@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="a55be57cc201693bfdc2c9021f8fd48d" resname="fos_user.email.already_used">
+        <source>fos_user.email.already_used</source>
+        <target>fos_user.email.already_used</target>
+      </trans-unit>
+      <trans-unit id="6ff439fdb45d5bd0d58e8d210df8be77" resname="fos_user.email.blank">
+        <source>fos_user.email.blank</source>
+        <target>fos_user.email.blank</target>
+      </trans-unit>
+      <trans-unit id="fc6c24981b4c0a57ce247c8687a585ea" resname="fos_user.email.invalid">
+        <source>fos_user.email.invalid</source>
+        <target>fos_user.email.invalid</target>
+      </trans-unit>
+      <trans-unit id="966201b57a32472001eeb20f251cce59" resname="fos_user.email.long">
+        <source>fos_user.email.long</source>
+        <target>fos_user.email.long</target>
+      </trans-unit>
+      <trans-unit id="f21278704589f38c6334b87af1479cf9" resname="fos_user.email.short">
+        <source>fos_user.email.short</source>
+        <target>fos_user.email.short</target>
+      </trans-unit>
+      <trans-unit id="dcd6d14d0786e48363cedfda2f1ae893" resname="fos_user.password.blank">
+        <source>fos_user.password.blank</source>
+        <target>fos_user.password.blank</target>
+      </trans-unit>
+      <trans-unit id="208830cde0e30a97e31cae31d1815c35" resname="fos_user.password.short">
+        <source>fos_user.password.short</source>
+        <target>fos_user.password.short</target>
+      </trans-unit>
+      <trans-unit id="717412185b61194420c7def0b42418f1" resname="fos_user.username.already_used">
+        <source>fos_user.username.already_used</source>
+        <target>fos_user.username.already_used</target>
+      </trans-unit>
+      <trans-unit id="e6b436802106350f126526dff34d889c" resname="fos_user.username.blank">
+        <source>fos_user.username.blank</source>
+        <target>fos_user.username.blank</target>
+      </trans-unit>
+      <trans-unit id="8eb91da705aa09b820f19e5a4e06d1fe" resname="fos_user.username.long">
+        <source>fos_user.username.long</source>
+        <target>fos_user.username.long</target>
+      </trans-unit>
+      <trans-unit id="a96e6b81d15a20e05150a905e30d70c4" resname="fos_user.username.short">
+        <source>fos_user.username.short</source>
+        <target>fos_user.username.short</target>
+      </trans-unit>
+      <trans-unit id="0004066cb8a3ad8b40bc84c8131febcc" resname="sylius.user.first_name.max">
+        <source>sylius.user.first_name.max</source>
+        <target>Ime ne sme biti daljše od {{ limit }} znakov.</target>
+      </trans-unit>
+      <trans-unit id="50b0ee1d48a8e08f2d4e14a3464df4d6" resname="sylius.user.first_name.min">
+        <source>sylius.user.first_name.min</source>
+        <target>Ime mora biti dolgo vsaj {{ limit }} znakov.</target>
+      </trans-unit>
+      <trans-unit id="1a4e98b8754497fa3704c316c2510326" resname="sylius.user.first_name.not_blank">
+        <source>sylius.user.first_name.not_blank</source>
+        <target>Prosimo, vpišite ime.</target>
+      </trans-unit>
+      <trans-unit id="60b6e5effce78494863245c780fde824" resname="sylius.user.last_name.max">
+        <source>sylius.user.last_name.max</source>
+        <target>Priimek ne sme biti daljši od {{ limit }} znakov.</target>
+      </trans-unit>
+      <trans-unit id="d809d7775c184088481d5cb29ae9b760" resname="sylius.user.last_name.min">
+        <source>sylius.user.last_name.min</source>
+        <target>Priimek mora biti dolg vsaj {{ limit }} znakov.</target>
+      </trans-unit>
+      <trans-unit id="c159555909906bd5df37a0f2edd6a7cd" resname="sylius.user.last_name.not_blank">
+        <source>sylius.user.last_name.not_blank</source>
+        <target>Prosimo, vpišite priimek.</target>
+      </trans-unit>
+      <trans-unit id="8b543b113a901ba9cfeb2410c82fc16f" resname="sylius.variant.onHand.min">
+        <source>sylius.variant.onHand.min</source>
+        <target>Dobavljivost mora biti večja od {{ limit }}.</target>
+      </trans-unit>
+      <trans-unit id="db67320afe0ce04fc652d620c57b89d9" resname="sylius.variant.onHand.not_blank">
+        <source>sylius.variant.onHand.not_blank</source>
+        <target>Prosimo, vpišite dobavljivost.</target>
+      </trans-unit>
+      <trans-unit id="2778024ebd57e2b432792826251bee65" resname="sylius.variant.price.min">
+        <source>sylius.variant.price.min</source>
+        <target>Cena mora biti večja od {{ limit }}.</target>
+      </trans-unit>
+      <trans-unit id="087a6beb8ec9ff5d48d8d620286faa51" resname="sylius.variant.price.not_blank">
+        <source>sylius.variant.price.not_blank</source>
+        <target>Prosimo, vpišite ceno.</target>
+      </trans-unit>
+      <trans-unit id="381ad7dedffbd02e6f060ea0cb53a38d" resname="sylius_shipping.method.zone.not_blank">
+        <source>sylius_shipping.method.zone.not_blank</source>
+        <target>sylius_shipping.method.zone.not_blank</target>
+      </trans-unit>
+      <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
+        <source>sylius_taxation.rate.zone.not_blank</source>
+        <target>Prosimo, vpišite cono davčne stopnje.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
