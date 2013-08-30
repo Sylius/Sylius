@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Doctrine\Common\Inflector\Inflector;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Resource controller configuration.
@@ -22,6 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class Configuration
 {
+    protected $container;
     protected $bundlePrefix;
     protected $resourceName;
     protected $templateNamespace;
@@ -35,27 +38,17 @@ class Configuration
      */
     protected $request;
 
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
+    public function __construct(Container $container, $bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-
+        $this->container = $container;
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
         $this->templateNamespace = $templateNamespace;
         $this->templatingEngine = $templatingEngine;
 
-        $this->parameters = array();
-    }
-
-    public function load(Request $request)
-    {
-        $this->request = $request;
-
-        $parameters = $request->attributes->get('_sylius', array());
-        $parser = new ParametersParser();
-
-        $parameters = $parser->parse($parameters, $request);
-
-        $this->parameters = $parameters;
+        $this->request = $this->container->get('request');
+        $parameters = $this->request->attributes->get('_sylius', array());
+        $this->parameters = $this->container->get('sylius_resource.parameters_parser')->parse($parameters);
     }
 
     public function getBundlePrefix()

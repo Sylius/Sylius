@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
@@ -36,15 +36,11 @@ class ResourceController extends FOSRestController
     /**
      * Constructor.
      *
-     * @param string $bundlePrefix
-     * @param string $resourceName
-     * @param string $templateNamespace
-     * @param string $templatingEngine
+     * @param Sylius\Bundle\ResourceBundle\Controller\Configuration $configuration
      */
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
+    public function __construct(Configuration $configuration)
     {
-        $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
-        $this->configured = false;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -54,8 +50,6 @@ class ResourceController extends FOSRestController
      */
     public function getConfiguration()
     {
-        $this->configuration->load($this->getRequest());
-
         return $this->configuration;
     }
 
@@ -75,26 +69,22 @@ class ResourceController extends FOSRestController
         if ($config->isPaginated()) {
             $resources = $this
                 ->getResourceResolver()
-                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting))
-            ;
+                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting));
 
             $resources
                 ->setCurrentPage($request->get('page', 1), true, true)
-                ->setMaxPerPage($config->getPaginationMaxPerPage())
-            ;
+                ->setMaxPerPage($config->getPaginationMaxPerPage());
         } else {
             $resources = $this
                 ->getResourceResolver()
-                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()))
-            ;
+                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()));
         }
 
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('index.html'))
             ->setTemplateVar($pluralName)
-            ->setData($resources)
-        ;
+            ->setData($resources);
 
         return $this->handleView($view);
     }
@@ -110,8 +100,7 @@ class ResourceController extends FOSRestController
             ->view()
             ->setTemplate($config->getTemplate('show.html'))
             ->setTemplateVar($config->getResourceName())
-            ->setData($this->findOr404())
-        ;
+            ->setData($this->findOr404());
 
         return $this->handleView($view);
     }
@@ -143,11 +132,7 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('create.html'))
-            ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
-            ))
-        ;
+            ->setData(array($config->getResourceName() => $resource, 'form'=> $form->createView()));
 
         return $this->handleView($view);
     }
@@ -179,11 +164,7 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('update.html'))
-            ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
-            ))
-        ;
+            ->setData(array($config->getResourceName() => $resource, 'form' => $form->createView()));
 
         return $this->handleView($view);
     }
@@ -203,7 +184,7 @@ class ResourceController extends FOSRestController
         }
 
         $this->setFlash('success', 'delete');
-        
+
         return $this->redirectToIndex($resource);
     }
 
@@ -216,8 +197,7 @@ class ResourceController extends FOSRestController
     {
         return $this
             ->getRepository()
-            ->createNew()
-        ;
+            ->createNew();
     }
 
     /**
@@ -279,13 +259,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_create', $resource);
 
-        if(!$event->isStopped()) {
+        if (!$event->isStopped()) {
             $manager->persist($resource);
             $this->dispatchEvent('create', $resource);
             $manager->flush();
             $this->dispatchEvent('post_create', $resource);
         }
-        
+
         return $event;
     }
 
@@ -295,13 +275,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_update', $resource);
 
-        if(!$event->isStopped()) {
+        if (!$event->isStopped()) {
             $manager->persist($resource);
             $this->dispatchEvent('update', $resource);
             $manager->flush();
             $this->dispatchEvent('post_update', $resource);
         }
-        
+
         return $event;
     }
 
@@ -311,13 +291,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_delete', $resource);
 
-        if(!$event->isStopped()) {
+        if (!$event->isStopped()) {
             $manager->remove($resource);
             $this->dispatchEvent('delete', $resource);
             $manager->flush();
             $this->dispatchEvent('post_delete', $resource);
         }
-        
+
         return $event;
     }
 
@@ -380,7 +360,7 @@ class ResourceController extends FOSRestController
             $name = $this->getConfiguration()->getEventName($name);
 
             $eventOrResource = new ResourceEvent($eventOrResource);
-        } else if(!$eventOrResource instanceof ResourceEvent) {
+        } elseif (!$eventOrResource instanceof ResourceEvent) {
             throw new \InvalidArgumentException('If you provide an Event, it need to extends Sylius\Bundle\ResourceBundle\Event\ResourceEvent.');
         }
 
@@ -392,8 +372,7 @@ class ResourceController extends FOSRestController
         return $this
             ->get('session')
             ->getFlashBag()
-            ->add($type, $this->generateFlashMessage($event, $params))
-        ;
+            ->add($type, $this->generateFlashMessage($event, $params));
     }
 
     protected function generateFlashMessage($event, $params = array())
