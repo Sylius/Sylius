@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * Configuration parameters parser.
@@ -26,9 +28,15 @@ class ParametersParser
      */
     protected $container;
 
+    /**
+     * @var PropertyAccessor
+     */
+    protected $propertyAccessor;
+
     public function __construct(Container $container)
     {
         $this->container = $container;
+        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 
     public function parse(array $parameters = array())
@@ -43,9 +51,8 @@ class ParametersParser
             }
 
             if (is_string($value) && $result = $this->getServiceAndExpression($value)) {
-                $accessor = PropertyAccess::createPropertyAccessor();
                 try{
-                    $value = $accessor->getValue($result['service'], $result['expression']);
+                    $value = $this->propertyAccessor->getValue($result['service'], $result['expression']);
                     $parameters[$key] = $value;
                 } catch (\Exception $e) {
                     return false;
