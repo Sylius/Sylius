@@ -36,4 +36,23 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->getResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getQueryBuilder()
+    {
+        return parent::getQueryBuilder()
+            ->leftJoin('o.items', 'item')
+            ->addSelect('item')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getAlias()
+    {
+        return 'o';
+    }
 }
