@@ -61,11 +61,11 @@ class ParametersParser
 
     protected function getServiceAndExpression($expression)
     {
-        $parts = preg_split("/^([^:]*):([^:]*)$/", $expression);
+        if(!preg_match("/^@([^:]*):([^:]*)$/", $expression, $matches)) return false;
 
         return array(
-            'service' => $this->container->get($parts[0]),
-            'expression' => implode('.', $parts[1])
+            'service' => $this->container->get($matches[1]),
+            'expression' => $matches[2]
         );
     }
 }
