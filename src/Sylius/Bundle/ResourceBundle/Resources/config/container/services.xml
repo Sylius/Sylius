@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius_resource.twig.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
+        <parameter key="sylius_resource.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
     </parameters>
 
     <services>
