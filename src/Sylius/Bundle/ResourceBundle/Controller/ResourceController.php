@@ -125,6 +125,13 @@ class ResourceController extends FOSRestController
         $config = $this->getConfiguration();
 
         $resource = $this->createNew();
+
+        $event = $this->dispatchEvent('pre_create_action', $resource);
+        if ($event->isStopped()) {
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+            return $this->redirectToIndex($resource);
+        }
+
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
