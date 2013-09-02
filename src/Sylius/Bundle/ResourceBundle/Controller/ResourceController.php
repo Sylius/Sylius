@@ -69,22 +69,26 @@ class ResourceController extends FOSRestController
         if ($config->isPaginated()) {
             $resources = $this
                 ->getResourceResolver()
-                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting));
+                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting))
+            ;
 
             $resources
                 ->setCurrentPage($request->get('page', 1), true, true)
-                ->setMaxPerPage($config->getPaginationMaxPerPage());
+                ->setMaxPerPage($config->getPaginationMaxPerPage())
+            ;
         } else {
             $resources = $this
                 ->getResourceResolver()
-                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()));
+                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()))
+            ;
         }
 
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('index.html'))
             ->setTemplateVar($pluralName)
-            ->setData($resources);
+            ->setData($resources)
+        ;
 
         return $this->handleView($view);
     }
@@ -100,7 +104,8 @@ class ResourceController extends FOSRestController
             ->view()
             ->setTemplate($config->getTemplate('show.html'))
             ->setTemplateVar($config->getResourceName())
-            ->setData($this->findOr404());
+            ->setData($this->findOr404())
+        ;
 
         return $this->handleView($view);
     }
@@ -132,7 +137,11 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('create.html'))
-            ->setData(array($config->getResourceName() => $resource, 'form'=> $form->createView()));
+            ->setData(array(
+                $config->getResourceName() => $resource,
+                'form'=> $form->createView()
+            ))
+        ;
 
         return $this->handleView($view);
     }
@@ -164,7 +173,11 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('update.html'))
-            ->setData(array($config->getResourceName() => $resource, 'form' => $form->createView()));
+            ->setData(array(
+                $config->getResourceName() => $resource,
+                'form' => $form->createView()
+            ))
+        ;
 
         return $this->handleView($view);
     }
@@ -197,7 +210,8 @@ class ResourceController extends FOSRestController
     {
         return $this
             ->getRepository()
-            ->createNew();
+            ->createNew()
+        ;
     }
 
     /**
@@ -372,7 +386,8 @@ class ResourceController extends FOSRestController
         return $this
             ->get('session')
             ->getFlashBag()
-            ->add($type, $this->generateFlashMessage($event, $params));
+            ->add($type, $this->generateFlashMessage($event, $params))
+        ;
     }
 
     protected function generateFlashMessage($event, $params = array())
