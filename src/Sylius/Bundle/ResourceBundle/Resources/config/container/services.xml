@@ -35,7 +35,7 @@
         </service>
 
         <service id="sylius_resource.parameters_parser" class="%sylius_resource.parameters_parser.class%">
-            <argument>@service_container</argument>
+            <argument type="service" id="service_container" />
         </service>
     </services>
 
