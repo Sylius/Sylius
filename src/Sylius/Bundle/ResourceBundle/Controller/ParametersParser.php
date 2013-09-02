@@ -51,12 +51,8 @@ class ParametersParser
             }
 
             if (is_string($value) && $result = $this->getServiceAndExpression($value)) {
-                try{
-                    $value = $this->propertyAccessor->getValue($result['service'], $result['expression']);
-                    $parameters[$key] = $value;
-                } catch (\Exception $e) {
-                    return false;
-                }
+                $value = $this->propertyAccessor->getValue($result['service'], $result['expression']);
+                $parameters[$key] = $value;
             }
         }
 
