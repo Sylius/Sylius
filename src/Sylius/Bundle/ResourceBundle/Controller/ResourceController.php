@@ -107,11 +107,17 @@ class ResourceController extends FOSRestController
     {
         $config = $this->getConfiguration();
 
-        $view =  $this
+        $event = $this->dispatchEvent('pre_show_action', $this->findOr404());
+        if ($event->isStopped()) {
+            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+            return $this->redirectToIndex($resource);
+        }
+
+        $view = $this
             ->view()
             ->setTemplate($config->getTemplate('show.html'))
             ->setTemplateVar($config->getResourceName())
-            ->setData($this->findOr404())
+            ->setData($event->getSubject())
         ;
 
         return $this->handleView($view);
