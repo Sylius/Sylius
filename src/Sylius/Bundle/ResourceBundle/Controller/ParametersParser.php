@@ -65,20 +65,11 @@ class ParametersParser
 
     protected function getServiceAndExpression($expression)
     {
-        $expressionParts = explode('.', $expression);
-
-        $serviceName = "";
-        $serviceExists = false;
-        while (count($expressionParts) > 0 && !$serviceExists = $this->container->has($serviceName))
-        {
-            $serviceName .= ($serviceName === "") ? array_shift($expressionParts) : '.'.array_shift($expressionParts);
-        }
-
-        if (!$serviceExists) return false;
+        $parts = preg_split("/^([^:]*):([^:]*)$/", $expression);
 
         return array(
-            'service' => $this->container->get($serviceName),
-            'expression' => implode('.', $expressionParts)
+            'service' => $this->container->get($parts[0]),
+            'expression' => implode('.', $parts[1])
         );
     }
 }
