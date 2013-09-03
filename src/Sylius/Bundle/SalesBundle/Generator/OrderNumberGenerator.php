@@ -41,7 +41,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      * @param OrderRepositoryInterface $repository
      * @param integer                  $numberLength
      */
-    public function __construct(OrderRepositoryInterface $repository, $numberLength = 6)
+    public function __construct(OrderRepositoryInterface $repository, $numberLength = 9)
     {
         $this->repository = $repository;
         $this->numberLength = $numberLength;
