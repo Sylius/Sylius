@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
@@ -36,15 +36,11 @@ class ResourceController extends FOSRestController
     /**
      * Constructor.
      *
-     * @param string $bundlePrefix
-     * @param string $resourceName
-     * @param string $templateNamespace
-     * @param string $templatingEngine
+     * @param Sylius\Bundle\ResourceBundle\Controller\Configuration $configuration
      */
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
+    public function __construct(Configuration $configuration)
     {
-        $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
-        $this->configured = false;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -54,8 +50,6 @@ class ResourceController extends FOSRestController
      */
     public function getConfiguration()
     {
-        $this->configuration->load($this->getRequest());
-
         return $this->configuration;
     }
 
@@ -203,7 +197,7 @@ class ResourceController extends FOSRestController
         }
 
         $this->setFlash('success', 'delete');
-        
+
         return $this->redirectToIndex($resource);
     }
 
@@ -279,13 +273,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_create', $resource);
 
-        if(!$event->isStopped()) {
+        if (!$event->isStopped()) {
             $manager->persist($resource);
             $this->dispatchEvent('create', $resource);
             $manager->flush();
             $this->dispatchEvent('post_create', $resource);
         }
-        
+
         return $event;
     }
 
@@ -295,13 +289,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_update', $resource);
 
-        if(!$event->isStopped()) {
+        if (!$event->isStopped()) {
             $manager->persist($resource);
             $this->dispatchEvent('update', $resource);
             $manager->flush();
             $this->dispatchEvent('post_update', $resource);
         }
-        
+
         return $event;
     }
 
@@ -311,13 +305,13 @@ class ResourceController extends FOSRestController
 
         $event = $this->dispatchEvent('pre_delete', $resource);
 
-        if(!$event->isStopped()) {
+        if (!$event->isStopped()) {
             $manager->remove($resource);
             $this->dispatchEvent('delete', $resource);
             $manager->flush();
             $this->dispatchEvent('post_delete', $resource);
         }
-        
+
         return $event;
     }
 
@@ -380,7 +374,7 @@ class ResourceController extends FOSRestController
             $name = $this->getConfiguration()->getEventName($name);
 
             $eventOrResource = new ResourceEvent($eventOrResource);
-        } else if(!$eventOrResource instanceof ResourceEvent) {
+        } elseif (!$eventOrResource instanceof ResourceEvent) {
             throw new \InvalidArgumentException('If you provide an Event, it need to extends Sylius\Bundle\ResourceBundle\Event\ResourceEvent.');
         }
 
