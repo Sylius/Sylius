@@ -110,7 +110,8 @@ class ResourceController extends FOSRestController
         $event = $this->dispatchEvent('pre_show_action', $this->findOr404());
         if ($event->isStopped()) {
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
-            return $this->redirectToIndex($resource);
+
+            return $this->redirectToIndex($event->getSubject());
         }
 
         $view = $this
