@@ -44,15 +44,18 @@ class ParametersParser
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
                 $parameters[$key] = $this->parse($value);
+                continue;
             }
 
             if (is_string($value) && 0 === strpos($value, '$')) {
                 $parameters[$key] = $this->container->get('request')->get(substr($value, 1));
+                continue;
             }
 
             if (is_string($value) && $result = $this->getServiceAndExpression($value)) {
                 $value = $this->propertyAccessor->getValue($result['service'], $result['expression']);
                 $parameters[$key] = $value;
+                continue;
             }
         }
 
