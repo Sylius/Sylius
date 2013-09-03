@@ -146,7 +146,13 @@ class Configuration
 
     public function getLimit()
     {
-        return (int) $this->get('limit', 10);
+        $limit = $this->get('limit', 10);
+
+        if (null === $limit) {
+            return null;
+        }
+
+        return (int) $limit;
     }
 
     public function isPaginated()
