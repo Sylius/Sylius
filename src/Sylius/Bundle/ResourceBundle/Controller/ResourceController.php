@@ -135,6 +135,7 @@ class ResourceController extends FOSRestController
         $event = $this->dispatchEvent('pre_create_action', $resource);
         if ($event->isStopped()) {
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+
             return $this->redirectToIndex($resource);
         }
 
