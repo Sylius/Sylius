@@ -47,7 +47,7 @@ class ParametersParser
             }
 
             if (is_string($value) && 0 === strpos($value, '$')) {
-                $parameters[$key] = $request->get(substr($value, 1));
+                $parameters[$key] = $this->container->get('request')->get(substr($value, 1));
             }
 
             if (is_string($value) && $result = $this->getServiceAndExpression($value)) {
