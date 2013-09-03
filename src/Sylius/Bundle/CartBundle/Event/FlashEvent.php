@@ -11,19 +11,19 @@
 
 namespace Sylius\Bundle\CartBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
  * Flash message event.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class FlashEvent extends Event
+class FlashEvent extends ResourceEvent
 {
     /**
      * @var string
      */
-    private $message;
+    protected $message;
 
     /**
      * @param string $message
