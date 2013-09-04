@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    settings:
+        update: Die Einstellungen wurden erfolgreich aktualisiert.
