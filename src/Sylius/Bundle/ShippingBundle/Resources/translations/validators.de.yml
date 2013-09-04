@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipping_category:
+        name:
+            not_blank: "Bitte geben Sie den Namen der Versandkosten Kategorie an."
+            min_length: "Die Kategorie muss mindestens {{ limit }} Zeichen lang sein."
+            max_length: "Die Kategorie darf nicht länger als {{ limit }} Zeichen sein."
+    shipping_method:
+        name:
+            not_blank: "Bitte geben Sie den Namen der Versandmethode an."
+            min_length: "Der Name der Versandmethode muss mindestens {{ limit }} Zeichen lang sein."
+            max_length: "Der Name der Versandmethode darf nicht länger als {{ limit }} Zeichen sein."
