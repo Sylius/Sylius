@@ -206,6 +206,54 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am on my account addresses page$/
+     */
+    public function iAmOnMyAccountAddressesPage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_address_index'));
+    }
+
+    /**
+     * @Then /^I should be on my account addresses page$/
+     */
+    public function iShouldBeOnMyAccountAddressesPage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_address_index'));
+    }
+
+    /**
+     * @Given /^I should still be on my account addresses page$/
+     */
+    public function iShouldStillBeOnMyAccountAddressesPage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_address_index'));
+    }
+
+    /**
+     * @Given /^I am on my account address creation page$/
+     */
+    public function iAmOnMyAccountAddressCreationPage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_address_create'));
+    }
+
+    /**
+     * @Then /^I should be on my account address creation page$/
+     */
+    public function iShouldBeOnMyAccountAddressCreationPage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_address_create'));
+    }
+
+    /**
+     * @Then /^I should still be on my account address creation page$/
+     */
+    public function iShouldStillBeOnMyAccountAddressCreationPage()
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_account_address_create'));
+    }
+
+    /**
      * @Then /^I should be on login page$/
      */
     public function iShouldBeOnLoginPage()
@@ -412,7 +460,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I fill in the users (billing|shipping) address to (.+)$/
+     * @Given /^I fill in the users (billing|shipping|account) address to (.+)$/
      */
     public function iFillInUserAddress($type, $country)
     {
@@ -479,6 +527,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $this->assertSession()->elementExists('xpath', sprintf(
             "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
         ));
+    }
+
+    /**
+     * @Given /^I should see (\d+) fields on error$/
+     */
+    public function iShouldSeeFieldsOnError($amount)
+    {
+        $this->assertSession()->elementsCount('css', '.alert-error', $amount);
     }
 
     /**

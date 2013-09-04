@@ -239,6 +239,21 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^the following addresses exist:$/
+     */
+    public function theFollowingAddressesExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $address = $this->createAddress($data['address']);
+            $address->setUser($this->thereIsUser($data['user'], 'password'));
+            $manager->persist($address);
+            $manager->flush();
+        }
+    }
+
+    /**
      * @Given /^promotion "([^""]*)" has following coupons defined:$/
      * @Given /^promotion "([^""]*)" has following coupons:$/
      */
