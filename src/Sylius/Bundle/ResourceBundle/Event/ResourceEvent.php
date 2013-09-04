@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Resource event.
@@ -25,12 +26,13 @@ class ResourceEvent extends GenericEvent
     const TYPE_INFO     = 'info';
     const TYPE_SUCCESS  = 'success';
 
-    public function stop($message, $type = self::TYPE_ERROR, $params = array())
+    public function stop($message, $type = self::TYPE_ERROR, $params = array(), RedirectResponse $redirectResponse = null)
     {
         $this->error = true;
         $this->messageType = $type;
         $this->message = $message;
         $this->messageParams = $params;
+        $this->redirectResponse = $redirectResponse;
         $this->stopPropagation();
     }
 
@@ -61,6 +63,13 @@ class ResourceEvent extends GenericEvent
      * @var array
      */
     protected $messageParams = array();
+
+    /**
+     * RedirectResponse
+     *
+     * @var Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected $redirectResponse;
 
     /**
      * Get error property
@@ -100,5 +109,15 @@ class ResourceEvent extends GenericEvent
     public function getMessageParams()
     {
         return $this->messageParams;
+    }
+
+    /**
+     * Get redirectResponse property
+     *
+     * @return string $redirectResponse
+     */
+    public function getRedirectResponse()
+    {
+        return $this->redirectResponse;
     }
 }
