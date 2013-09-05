@@ -26,13 +26,13 @@ class ResourceEvent extends GenericEvent
     const TYPE_INFO     = 'info';
     const TYPE_SUCCESS  = 'success';
 
-    public function stop($message, $type = self::TYPE_ERROR, $params = array(), RedirectResponse $redirectResponse = null)
+    public function stop($message, $type = self::TYPE_ERROR, $params = array(), Response $response = null)
     {
         $this->error = true;
         $this->messageType = $type;
         $this->message = $message;
         $this->messageParams = $params;
-        $this->redirectResponse = $redirectResponse;
+        $this->response = $response;
         $this->stopPropagation();
     }
 
@@ -65,11 +65,11 @@ class ResourceEvent extends GenericEvent
     protected $messageParams = array();
 
     /**
-     * RedirectResponse
+     * response
      *
-     * @var Symfony\Component\HttpFoundation\RedirectResponse
+     * @var Symfony\Component\HttpFoundation\Response
      */
-    protected $redirectResponse;
+    protected $response;
 
     /**
      * Get error property
@@ -112,12 +112,12 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get redirectResponse property
+     * Get response property
      *
-     * @return string $redirectResponse
+     * @return string $response
      */
-    public function getRedirectResponse()
+    public function getResponse()
     {
-        return $this->redirectResponse;
+        return $this->response;
     }
 }
