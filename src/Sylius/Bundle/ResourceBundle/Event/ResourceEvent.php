@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Resource event.
@@ -21,100 +22,22 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class ResourceEvent extends GenericEvent
 {
-    const TYPE_ERROR    = 'error';
-    const TYPE_WARNING  = 'warning';
-    const TYPE_INFO     = 'info';
-    const TYPE_SUCCESS  = 'success';
-
-    public function stop($message, $type = self::TYPE_ERROR, $params = array(), Response $response = null)
-    {
-        $this->error = true;
-        $this->messageType = $type;
-        $this->message = $message;
-        $this->messageParams = $params;
-        $this->response = $response;
-        $this->stopPropagation();
-    }
-
     /**
-     * Indicate if an error has been detected
-     *
-     * @var boolean
-     */
-    protected $error = false;
-
-    /**
-     * Message type
-     *
-     * @var string
-     */
-    protected $messageType = '';
-
-    /**
-     * Message
-     *
-     * @var string
-     */
-    protected $message = '';
-
-    /**
-     * Message parameters
-     *
-     * @var array
-     */
-    protected $messageParams = array();
-
-    /**
-     * response
+     * Set response property
      *
      * @var Symfony\Component\HttpFoundation\Response
      */
     protected $response;
 
-    /**
-     * Get error property
-     *
-     * @return boolean $error
-     */
-    public function isStopped()
+    public function setResponse(Response $response)
     {
-        return $this->error === true;
-    }
-
-    /**
-     * Get messageType property
-     *
-     * @return string $messageType
-     */
-    public function getMessageType()
-    {
-        return $this->messageType;
-    }
-
-    /**
-     * Get message property
-     *
-     * @return string $message
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Get messageParams property
-     *
-     * @return string $messageParams
-     */
-    public function getMessageParams()
-    {
-        return $this->messageParams;
+        $this->response = $response;
     }
 
     /**
      * Get response property
      *
-     * @return string $response
+     * @return Symfony\Component\HttpFoundation\Response $response
      */
     public function getResponse()
     {
