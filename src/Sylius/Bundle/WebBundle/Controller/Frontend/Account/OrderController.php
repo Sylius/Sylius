@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\WebBundle\Controller\Frontend;
+namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
@@ -19,11 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Frontend user account controller.
+ * Account order controller.
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class AccountController extends Controller
+class OrderController extends Controller
 {
     /**
      * List orders of the current user
