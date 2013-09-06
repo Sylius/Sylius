@@ -40,13 +40,13 @@ Feature: User account orders page
       | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
       | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
     # order that has been sent
-    And order #000001 has following items:
+    And order #000000001 has following items:
       | product  | quantity |
       | Mug      | 2        |
       | Sticker  | 4        |
       | Book     | 1        |
     # order that has not been sent yet
-    And order #000007 has following items:
+    And order #000000007 has following items:
       | product  | quantity |
       | Mug      | 5        |
       | Sticker  | 1        |
@@ -62,13 +62,13 @@ Feature: User account orders page
       And I should see "<myorder>"
       And I should not see "<order>"
   Examples:
-      | myorder | order    |
-      | 000001  | 000002  |
-      | 000006  | 000003  |
-      | 000007  | 000004  |
-      | 000009  | 000005  |
-      | 000010  | 000008  |
-      | 000010  | 000011  |
+      | myorder    | order    |
+      | 000000001  | 000000002  |
+      | 000000006  | 000000003  |
+      | 000000007  | 000000004  |
+      | 000000009  | 000000005  |
+      | 000000010  | 000000008  |
+      | 000000010  | 000000011  |
 
   Scenario Outline: Viewing the detail of an order
     Given I am on my account orders page
@@ -78,27 +78,27 @@ Feature: User account orders page
       And I should see <items> items in the list
 
     Examples:
-      | order   | items |
-      | 000001  | 3     |
-      | 000007  | 2     |
+      | order      | items |
+      | 000000001  | 3     |
+      | 000000007  | 2     |
 
   Scenario Outline: Trying to view the detail of an order which is not mine
     Given I go to the order show page for <order>
      Then the response status code should be 403
 
   Examples:
-      | order   |
-      | 000002 |
-      | 000003 |
-      | 000004 |
-      | 000005 |
-      | 000008 |
-      | 000011 |
+      | order      |
+      | 000000002 |
+      | 000000003 |
+      | 000000004 |
+      | 000000005 |
+      | 000000008 |
+      | 000000011 |
 
   Scenario: Tracking an order that has been sent
     Given I am on my account orders page
-     Then I should see "Tracking number DTBHH380HG" in the "#order-000001" element
-      And I should see "Shipped" in the "#order-000001" element
+     Then I should see "Tracking number DTBHH380HG" in the "#order-000000001" element
+      And I should see "Shipped" in the "#order-000000001" element
 
   Scenario Outline: Trying to track an order that has not been sent
     Given I am on my account orders page
@@ -106,11 +106,11 @@ Feature: User account orders page
       And I should see "<state>" in the "#order-<order>" element
 
   Examples:
-      | order  | state       |
-      | 000007 | Ready since |
+      | order     | state       |
+      | 000000007 | Ready since |
 
   Scenario: Tracking an order that has been sent in its details page
-    Given I go to the order show page for 000001
+    Given I go to the order show page for 000000001
      Then I should see "Tracking number DTBHH380HG" in the "#information" element
       And I should see "Shipped" in the "#information" element
 
@@ -120,23 +120,23 @@ Feature: User account orders page
       And I should see "<state>" in the "#information" element
 
   Examples:
-      | order  | state       |
-      | 000007 | Ready since |
+      | order     | state       |
+      | 000000007 | Ready since |
 
   Scenario: Checking that an invoice is available for an order that has been sent
     Given I am on my account orders page
-     Then I should see an "#order-000001-invoice" element
+     Then I should see an "#order-000000001-invoice" element
 
   Scenario: Checking that an invoice is not available for an order that has not been sent
     Given I am on my account orders page
-    Then I should not see an "#order-000007-invoice" element
+    Then I should not see an "#order-000000007-invoice" element
 
   Scenario: Generating an invoice for an order that has been sent
-    Given I go to the order invoice page for 000001
+    Given I go to the order invoice page for 000000001
     Then the response status code should be 200
 
   Scenario: Trying to generate an invoice for an order that has not been sent
-    Given I go to the order invoice page for 000007
+    Given I go to the order invoice page for 000000007
     Then the response status code should be 404
 
   Scenario Outline: Trying to generate an invoice of an order which is not mine
@@ -144,10 +144,10 @@ Feature: User account orders page
     Then the response status code should be 403
 
   Examples:
-    | order  |
-    | 000002 |
-    | 000003 |
-    | 000004 |
-    | 000005 |
-    | 000008 |
-    | 000011 |
+    | order     |
+    | 000000002 |
+    | 000000003 |
+    | 000000004 |
+    | 000000005 |
+    | 000000008 |
+    | 000000011 |
