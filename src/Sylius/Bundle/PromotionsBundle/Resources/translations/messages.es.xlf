@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-05-18T17:53:52Z" source-language="es" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="f1ce538e99ec436c6e9762896356e17f6815b01d" resname="sylius.form.action.fixed_discount_configuration.amount">
+        <source>sylius.form.action.fixed_discount_configuration.amount</source>
+        <target>Cantidad</target>
+      </trans-unit>
+      <trans-unit id="ad47d162f1e5e26c36afeeaf8f7594d7397688b4" resname="sylius.form.action.percentage_discount_configuration.percentage">
+        <source>sylius.form.action.percentage_discount_configuration.percentage</source>
+        <target>Porcentaje</target>
+      </trans-unit>
+      <trans-unit id="e4e0d308b09d83aa13db4d91965b3976fba78b00" resname="sylius.form.action.type">
+        <source>sylius.form.action.type</source>
+        <target>Tipo</target>
+      </trans-unit>
+      <trans-unit id="aaaa426fa3e08e6f3f6f8f762554b3f6258c3bec" resname="sylius.form.coupon.code">
+        <source>sylius.form.coupon.code</source>
+        <target>Código</target>
+      </trans-unit>
+      <trans-unit id="61111b9749ce72d06eb748f3d28ca240872a7634" resname="sylius.form.coupon.usage_limit">
+        <source>sylius.form.coupon.usage_limit</source>
+        <target>Limite de uso</target>
+      </trans-unit>
+      <trans-unit id="e5fdadabe5ae0e8a046722b8a63af17f931368aa" resname="sylius.form.coupon_generate_instruction.amount">
+        <source>sylius.form.coupon_generate_instruction.amount</source>
+        <target>Cantidad</target>
+      </trans-unit>
+      <trans-unit id="35010d79c31d1f17be2e2c7c5e68298a18ab95a1" resname="sylius.form.coupon_generate_instruction.usage_limit">
+        <source>sylius.form.coupon_generate_instruction.usage_limit</source>
+        <target>Límite de uso</target>
+      </trans-unit>
+      <trans-unit id="66a7b85a6a4d31dfc41b43b83a660155e8930b6a" resname="sylius.form.promotion.actions">
+        <source>sylius.form.promotion.actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit id="5b44f620a8ef16dc3fd0ca831a92540c76956f3b" resname="sylius.form.promotion.coupon_based">
+        <source>sylius.form.promotion.coupon_based</source>
+        <target>Basado en cupones</target>
+      </trans-unit>
+      <trans-unit id="9ca56f14aa804499746600d0a7353a11128c59a4" resname="sylius.form.promotion.description">
+        <source>sylius.form.promotion.description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit id="76e81408b3553a88d7b0da695b413f92e0d50e25" resname="sylius.form.promotion.ends_at">
+        <source>sylius.form.promotion.ends_at</source>
+        <target>Termina el</target>
+      </trans-unit>
+      <trans-unit id="0cf247feeb53a0302064e984def39d318fc9e0d5" resname="sylius.form.promotion.name">
+        <source>sylius.form.promotion.name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="3fd78c591816e158c041f87b38abe83260f9fcf3" resname="sylius.form.promotion.rules">
+        <source>sylius.form.promotion.rules</source>
+        <target>Reglas</target>
+      </trans-unit>
+      <trans-unit id="4a027a44fe4e0d4f33947efed2bebce31929a052" resname="sylius.form.promotion.starts_at">
+        <source>sylius.form.promotion.starts_at</source>
+        <target>Empieza el</target>
+      </trans-unit>
+      <trans-unit id="5092b7f84f9f4b19fed2427eb6911554178d4ce6" resname="sylius.form.promotion.usage_limit">
+        <source>sylius.form.promotion.usage_limit</source>
+        <target>Límite de uso</target>
+      </trans-unit>
+      <trans-unit id="2643acad6063eb448bcf57ed93c05cdbedd5f9f6" resname="sylius.form.rule.item_count_configuration.count">
+        <source>sylius.form.rule.item_count_configuration.count</source>
+        <target>Contador</target>
+      </trans-unit>
+      <trans-unit id="7ccffb0059b36c543ef6c3c90e55c4a0126e81c7" resname="sylius.form.rule.item_count_configuration.equal">
+        <source>sylius.form.rule.item_count_configuration.equal</source>
+        <target>Igual</target>
+      </trans-unit>
+      <trans-unit id="66d14c1ae07aa27361e3c8364bd1fb3752a60669" resname="sylius.form.rule.item_total_configuration.amount">
+        <source>sylius.form.rule.item_total_configuration.amount</source>
+        <target>Cantidad</target>
+      </trans-unit>
+      <trans-unit id="218050498b1c32f7174ce6caa818cd7e4ec99070" resname="sylius.form.rule.item_total_configuration.equal">
+        <source>sylius.form.rule.item_total_configuration.equal</source>
+        <target>Igual</target>
+      </trans-unit>
+      <trans-unit id="0d4066bcf74e779abcd0b9c38537cb0263fc3cb0" resname="sylius.form.rule.type">
+        <source>sylius.form.rule.type</source>
+        <target>Tipo</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

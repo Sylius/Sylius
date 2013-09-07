@@ -9,11 +9,11 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>sylius.option.name.min_length</source>
-                <target>El nombre de la opción debe tener al menos 1 carácter de longitud.|El nombre de opción debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de la opción debe tener al menos 1 carácter.|El nombre de opción debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>sylius.option.name.max_length</source>
-                <target>El nombre de la opción debe tener como máximo 1 carácter de longitud.|El nombre de la opción no debe ser más largo de {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de la opción debe tener como máximo 1 carácter.|El nombre de la opción no debe tener más de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>sylius.option.presentation.not_blank</source>
@@ -21,11 +21,11 @@
             </trans-unit>
             <trans-unit id="5">
                 <source>sylius.option.presentation.min_length</source>
-                <target>La presentación de la opción debe tener al menos 1 carácter de longitud.|La presentación de la opción debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>La presentación de la opción debe tener al menos 1 carácter.|La presentación de la opción debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>sylius.option.presentation.max_length</source>
-                <target>La presentación de la opción debe tener como máximo 1 carácter de longitud.|La presentación de la opción no debe ser más larga de {{ limit }} caracteres de longitud.</target>
+                <target>La presentación de la opción debe tener como máximo 1 carácter.|La presentación de la opción no debe tener más de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>sylius.option.values.min_count</source>

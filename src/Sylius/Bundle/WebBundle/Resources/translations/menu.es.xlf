@@ -46,6 +46,14 @@
         <source>sylius.backend.menu.main.payment_methods</source>
         <target>Modos de pago</target>
       </trans-unit>
+      <trans-unit id="96fad72b5156d217d479762961dfab32" resname="sylius.backend.menu.main.exchange_rates">
+        <source>sylius.backend.menu.main.exchange_rates</source>
+        <target>Tipos de cambio</target>
+      </trans-unit>
+      <trans-unit id="de24c4089204c074b2515399d87288bf" resname="sylius.backend.menu.main.payments">
+        <source>sylius.backend.menu.main.payments</source>
+        <target>Pagos</target>
+      </trans-unit>
       <trans-unit id="7e3ac23a2e8c487e9ae4f8e7072cd9ea" resname="sylius.backend.menu.main.products">
         <source>sylius.backend.menu.main.products</source>
         <target>Productos</target>
@@ -66,6 +74,10 @@
         <source>sylius.backend.menu.main.sales</source>
         <target>Pedidos</target>
       </trans-unit>
+      <trans-unit id="19ee56216b22fd756531e4543baa4af9" resname="sylius.backend.menu.main.shipments">
+        <source>sylius.backend.menu.main.shipments</source>
+        <target>Envíos</target>
+      </trans-unit>
       <trans-unit id="67b31ee62274d0f6a2a2ad4c055d31de" resname="sylius.backend.menu.main.shipping_categories">
         <source>sylius.backend.menu.main.shipping_categories</source>
         <target>Categorías de envío</target>
@@ -73,6 +85,10 @@
       <trans-unit id="0db487586f98e52363e8e92234bea40c" resname="sylius.backend.menu.main.shipping_methods">
         <source>sylius.backend.menu.main.shipping_methods</source>
         <target>Métodos de envío</target>
+      </trans-unit>
+      <trans-unit id="9bf052736a106fab9e1596ef29849e2a" resname="sylius.backend.menu.main.stockables">
+        <source>sylius.backend.menu.main.stockables</source>
+        <target>Niveles de inventario</target>
       </trans-unit>
       <trans-unit id="7cf34ab10dea870c2a009352eac284f9" resname="sylius.backend.menu.main.tax_categories">
         <source>sylius.backend.menu.main.tax_categories</source>
@@ -142,6 +158,14 @@
         <source>sylius.backend.menu.sidebar.payment_methods</source>
         <target>Modos de pago</target>
       </trans-unit>
+      <trans-unit id="2b9984059c74969e64141573b81601b3" resname="sylius.backend.menu.sidebar.exchange_rates">
+        <source>sylius.backend.menu.sidebar.exchange_rates</source>
+        <target>Tipos de cambio</target>
+      </trans-unit>
+      <trans-unit id="55e31aa27306d407a076d474b915159b" resname="sylius.backend.menu.sidebar.payments">
+        <source>sylius.backend.menu.sidebar.payments</source>
+        <target>Pagos</target>
+      </trans-unit>
       <trans-unit id="61118a24751d1fe2394de857fc80a470" resname="sylius.backend.menu.sidebar.products">
         <source>sylius.backend.menu.sidebar.products</source>
         <target>Productos</target>
@@ -161,6 +185,10 @@
       <trans-unit id="6840b932d704253195a482d027507718" resname="sylius.backend.menu.sidebar.sales">
         <source>sylius.backend.menu.sidebar.sales</source>
         <target>Pedidos</target>
+      </trans-unit>
+      <trans-unit id="4f8dcbe9a191e195cf2c64850ec4f26a" resname="sylius.backend.menu.sidebar.shipments">
+        <source>sylius.backend.menu.sidebar.shipments</source>
+        <target>Envíos</target>
       </trans-unit>
       <trans-unit id="afbdf4d445acac38529ddb802a329ed2" resname="sylius.backend.menu.sidebar.shipping_categories">
         <source>sylius.backend.menu.sidebar.shipping_categories</source>
@@ -198,13 +226,73 @@
         <source>sylius.backend.menu.sidebar.zones</source>
         <target>Zonas</target>
       </trans-unit>
-      <trans-unit id="2412a7ec5898363d170ba15e2000a188" resname="sylius.layout.menu.administration">
-        <source>sylius.layout.menu.administration</source>
+      <trans-unit id="72a1c20506c99bf710d871e649d73b7a" resname="sylius.frontend.menu.main.administration">
+        <source>sylius.frontend.menu.main.administration</source>
         <target>Administración</target>
       </trans-unit>
-      <trans-unit id="768adbad781edf49750e3f7561911315" resname="sylius.layout.menu.home">
-        <source>sylius.layout.menu.home</source>
+      <trans-unit id="72a1c20506c99bf710d871e649d73b7a" resname="sylius.frontend.menu.currency">
+        <source>sylius.frontend.menu.currency</source>
+        <target>Mostrar los precios en %currency%</target>
+      </trans-unit>
+      <trans-unit id="f3c562d05786e3056e97da27f1fac4d3" resname="sylius.frontend.menu.main.cart">
+        <source>sylius.frontend.menu.main.cart</source>
+        <target>Ver carrito (%items%) %total%</target>
+      </trans-unit>
+      <trans-unit id="d986cbf1ecce26c5ce35acede3faf0f2" resname="sylius.frontend.menu.main.login">
+        <source>sylius.frontend.menu.main.login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="043a49bad7a1e1b30c98aa2b88717b4b" resname="sylius.frontend.menu.main.logout">
+        <source>sylius.frontend.menu.main.logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="73de6870e2dc5351a69681b64424f691" resname="sylius.frontend.menu.main.register">
+        <source>sylius.frontend.menu.main.register</source>
+        <target>Registrarse</target>
+      </trans-unit>
+      <trans-unit id="00a3fe9755bd94bf11297984489adf9b" resname="sylius.frontend.menu.social.facebook">
+        <source>sylius.frontend.menu.social.facebook</source>
+        <target>Facebook</target>
+      </trans-unit>
+      <trans-unit id="40020f85e5545d1adc1d8442ade45493" resname="sylius.frontend.menu.social.github">
+        <source>sylius.frontend.menu.social.github</source>
+        <target>GitHub</target>
+      </trans-unit>
+      <trans-unit id="04f974eef35d699fd51b85ffd4068ffc" resname="sylius.frontend.menu.social.google">
+        <source>sylius.frontend.menu.social.google</source>
+        <target>Google+</target>
+      </trans-unit>
+      <trans-unit id="06962a355b7bbdc81d28215a83904e0f" resname="sylius.frontend.menu.social.linkedin">
+        <source>sylius.frontend.menu.social.linkedin</source>
+        <target>LinkedIn</target>
+      </trans-unit>
+      <trans-unit id="90b8787bb7c8b9b67866bf520ef89d76" resname="sylius.frontend.menu.social.twitter">
+        <source>sylius.frontend.menu.social.twitter</source>
+        <target>Twitter</target>
+      </trans-unit>
+      <trans-unit id="9144c05a098a6fee4f74327a3b145ff8" resname="sylius.frontend.menu.account.homepage">
+        <source>sylius.frontend.menu.account.homepage</source>
         <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="7882c9d8888743e5bb14845684f7c23d" resname="sylius.frontend.menu.account.password">
+        <source>sylius.frontend.menu.account.password</source>
+        <target>Mi contraseña</target>
+      </trans-unit>
+      <trans-unit id="51b90fc4b603c8f0058f87af6f11427f" resname="sylius.frontend.menu.account.profile">
+        <source>sylius.frontend.menu.account.profile</source>
+        <target>Mi información personal</target>
+      </trans-unit>
+      <trans-unit id="724277edf830f9205a49e4a6e6926c15" resname="sylius.frontend.menu.account.shop">
+        <source>sylius.frontend.menu.account.shop</source>
+        <target>Volver a la tienda</target>
+      </trans-unit>
+      <trans-unit id="762c1503bddba381bcf83ff117488f5678638fdd" resname="sylius.frontend.menu.account.orders">
+        <source>sylius.frontend.menu.account.orders</source>
+        <target state="new">Mis pedidos / mis facturas</target>
+      </trans-unit>
+      <trans-unit id="f10a8702eb7ef4f1f5b107c7941efc74" resname="sylius.frontend.menu.main.account">
+        <source>sylius.frontend.menu.main.account</source>
+        <target>Mi cuenta</target>
       </trans-unit>
     </body>
   </file>
