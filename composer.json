@@ -45,7 +45,8 @@
         "liip/doctrine-cache-bundle":           "*",
         "knplabs/knp-snappy-bundle":            "dev-master",
         "athari/yalinqo":                       "*",
-        "omnipay/omnipay":                      "dev-master"
+        "omnipay/omnipay":                      "dev-master",
+        "sensio/framework-extra-bundle":        "2.3.*"
     },
     "require-dev": {
         "behat/behat":                  "2.4.*",
