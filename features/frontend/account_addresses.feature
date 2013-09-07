@@ -7,25 +7,34 @@ Feature: User account addresses page
   Background:
     Given I am logged in user
       And I am on my account addresses page
+      And the following countries exist:
+        | name    |
+        | France  |
+        | Germany |
+        | Austria |
+        | Poland  |
+        | Finland |
+        | USA     |
       And the following addresses exist:
-        | sylius@example.com  | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany  |
+        | user                 | address                                                      |
+        | sylius@example.com  | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany   |
         | sylius@example.com  | Jan Kowalski, Fun-Straße 1, 90032, Vienna, Austria      |
         | sylius@example.com  | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland          |
 
   Scenario: Viewing that no address has been defined
-    Given there are no address
+    Given there are no addresses
      Then I should see "No address has been defined"
 
   Scenario: Viewing only my addresses
     Given the following addresses exist:
-      | user                       | address                                                                  |
-      | ianmurdock@example.com    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
+      | user                       | address                                                             |
+      | ianmurdock@example.com   | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
       | linustorvalds@example.com | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | tmorel@example.com         | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | tmorel@example.com        | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
     Then I should see 3 addresses in the list
 
   Scenario: Accessing the creation address page
-    Given I click "Add a new address"
+    Given I click "Create a new address"
      Then I should be on my account address creation page
 
   Scenario: Adding an address

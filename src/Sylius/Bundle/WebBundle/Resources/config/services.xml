@@ -16,6 +16,8 @@
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
 
         <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
+
+        <parameter key="sylius.listener.frontend.address.class">Sylius\Bundle\WebBundle\EventListener\Account\AddressListener</parameter>
     </parameters>
 
     <services>
@@ -99,6 +101,12 @@
         <service id="sylius.user.registration.form.type" class="Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType">
             <tag name="form.type" alias="sylius_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+        <service id="sylius.listener.frontend.address" class="%sylius.listener.frontend.address.class%">
+            <tag name="kernel.event_listener" event="sylius.address.pre_create" method="onAddressPreCreate" />
+            <tag name="kernel.event_listener" event="sylius.address.pre_delete" method="onAddressPreDelete" />
+            <argument type="service" id="security.context" />
         </service>
     </services>
 

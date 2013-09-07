@@ -1,0 +1,10 @@
+<strong>{{ address.firstName|capitalize }} {{ address.firstName|upper }}</strong><br>
+{% if address.company is not empty %}
+    {{ address.company|capitalize }}<br>
+{% endif %}
+{{ address.street }},<br>
+{{ address.city }} {{ address.postcode }}<br>
+{% if address.province is not empty %}
+    {{ address.province|capitalize }}<br>
+{% endif %}
+{{ address.country|upper }}
