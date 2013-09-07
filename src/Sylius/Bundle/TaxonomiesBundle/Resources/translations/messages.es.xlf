@@ -14,6 +14,14 @@
         <source>sylius.form.taxonomy.name</source>
         <target>Nombre</target>
       </trans-unit>
+      <trans-unit id="d4847da399cfbd5328ec238207ab9309" resname="sylius.form.taxon.parent">
+        <source>sylius.form.taxon.parent</source>
+        <target>Padre</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.form.taxon.description">
+        <source>sylius.form.taxon.description</source>
+        <target>Descripción</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

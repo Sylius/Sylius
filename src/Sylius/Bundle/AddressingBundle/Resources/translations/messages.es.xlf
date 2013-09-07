@@ -6,6 +6,10 @@
         <source>sylius.form.address.city</source>
         <target>Ciudad</target>
       </trans-unit>
+      <trans-unit id="4c4207c09a6a7e137d70a1fb5bf2c309" resname="sylius.form.address.company">
+        <source>sylius.form.address.company</source>
+        <target>Empresa</target>
+      </trans-unit>
       <trans-unit id="bc3c6def58ace06a88e26fb873f4697b" resname="sylius.form.address.country">
         <source>sylius.form.address.country</source>
         <target>País</target>
@@ -16,7 +20,7 @@
       </trans-unit>
       <trans-unit id="1e33909fd1ed82313af82cc10d3d9680" resname="sylius.form.address.last_name">
         <source>sylius.form.address.last_name</source>
-        <target>Apellido</target>
+        <target>Apellidos</target>
       </trans-unit>
       <trans-unit id="14bde8608db160b03c70945fcdf62613" resname="sylius.form.address.postcode">
         <source>sylius.form.address.postcode</source>
@@ -36,11 +40,11 @@
       </trans-unit>
       <trans-unit id="fb2f23317fa10e33b0eb423a814aea67" resname="sylius.form.country.provinces">
         <source>sylius.form.country.provinces</source>
-        <target>Estados</target>
+        <target>Provincias</target>
       </trans-unit>
       <trans-unit id="0232425332ba32edd83d5c3dfe8a6080" resname="sylius.form.country.select">
         <source>sylius.form.country.select</source>
-        <target>sylius.form.country.select</target>
+        <target>Selecciona</target>
       </trans-unit>
       <trans-unit id="90c305763d958c3dd319253193a69c4e" resname="sylius.form.province.name">
         <source>sylius.form.province.name</source>
@@ -64,7 +68,7 @@
       </trans-unit>
       <trans-unit id="9006ddea149a0842bf0daea9f5db0ebb" resname="sylius.form.zone_member_province.province">
         <source>sylius.form.zone_member_province.province</source>
-        <target>Estado</target>
+        <target>Provincia</target>
       </trans-unit>
       <trans-unit id="358a5aa568f76607395efcbdccd4d036" resname="sylius.form.zone_member_zone.zone">
         <source>sylius.form.zone_member_zone.zone</source>

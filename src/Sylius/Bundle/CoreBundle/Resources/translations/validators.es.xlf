@@ -46,13 +46,29 @@
         <source>fos_user.username.short</source>
         <target>fos_user.username.short</target>
       </trans-unit>
-      <trans-unit id="0348392867d5d3c7aba4e136ea48ffec" resname="sylius.checkout.payment_method.not_blank">
-        <source>sylius.checkout.payment_method.not_blank</source>
-        <target>Por favor, seleccione un modo de pago.</target>
+      <trans-unit id="0004066cb8a3ad8b40bc84c8131febcc" resname="sylius.user.first_name.max">
+        <source>sylius.user.first_name.max</source>
+        <target>El nombre no debe tener más de {{ limit }} caracteres.</target>
       </trans-unit>
-      <trans-unit id="ddb27861aa157d5f22e90a4c51ad26fa" resname="sylius.checkout.shipping_method.not_blank">
-        <source>sylius.checkout.shipping_method.not_blank</source>
-        <target>Por favor, seleccione un modo de envío.</target>
+      <trans-unit id="50b0ee1d48a8e08f2d4e14a3464df4d6" resname="sylius.user.first_name.min">
+        <source>sylius.user.first_name.min</source>
+        <target>El nombre debe tener al menos {{ limit }} caracteres.</target>
+      </trans-unit>
+      <trans-unit id="1a4e98b8754497fa3704c316c2510326" resname="sylius.user.first_name.not_blank">
+        <source>sylius.user.first_name.not_blank</source>
+        <target>Por favor introduzca el nombre.</target>
+      </trans-unit>
+      <trans-unit id="60b6e5effce78494863245c780fde824" resname="sylius.user.last_name.max">
+        <source>sylius.user.last_name.max</source>
+        <target>Los apellidos no deben tener más de {{ limit }} caracteres.</target>
+      </trans-unit>
+      <trans-unit id="d809d7775c184088481d5cb29ae9b760" resname="sylius.user.last_name.min">
+        <source>sylius.user.last_name.min</source>
+        <target>Los apellidos deben tener al menos {{ limit }} caracteres.</target>
+      </trans-unit>
+      <trans-unit id="c159555909906bd5df37a0f2edd6a7cd" resname="sylius.user.last_name.not_blank">
+        <source>sylius.user.last_name.not_blank</source>
+        <target>Por favor introduzca los apellidos.</target>
       </trans-unit>
       <trans-unit id="8b543b113a901ba9cfeb2410c82fc16f" resname="sylius.variant.onHand.min">
         <source>sylius.variant.onHand.min</source>
