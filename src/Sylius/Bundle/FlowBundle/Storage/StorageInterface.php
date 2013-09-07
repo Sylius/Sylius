@@ -37,7 +37,7 @@ interface StorageInterface
     /**
      * Returns the value for a key.
      *
-     * @param string $key A unique key
+     * @param string $key     A unique key
      * @param mixed  $default
      *
      * @return string|null The value in the storage or default if set or null if not found

@@ -210,7 +210,7 @@ class Configuration
     public function getFlashMessage($message = null)
     {
         $message = sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);
-        
+
         return $this->get('flash', $message);
     }
 

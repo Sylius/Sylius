@@ -19,7 +19,7 @@ class ActionResult
 {
     private $stepName;
 
-    function __construct($stepName = null)
+    public function __construct($stepName = null)
     {
         $this->stepName = $stepName;
     }

@@ -49,7 +49,7 @@ class DelegatingCalculator implements CalculatorInterface
     /**
      * Register calculator under given name.
      *
-     * @param string    $name
+     * @param string              $name
      * @param CalculatorInterface $calculator
      */
     public function registerCalculator($name, CalculatorInterface $calculator)

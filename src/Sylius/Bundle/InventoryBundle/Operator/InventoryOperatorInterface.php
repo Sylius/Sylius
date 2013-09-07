@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**

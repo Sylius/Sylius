@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Context;
 
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContext;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 

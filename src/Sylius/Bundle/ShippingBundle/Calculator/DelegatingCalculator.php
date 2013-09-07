@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ShippingBundle\Calculator;
 
 use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorregistryInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**

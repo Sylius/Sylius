@@ -66,4 +66,3 @@ class GatewayChoiceType extends AbstractType
         return 'sylius_omnipay_gateway_choice';
     }
 }
-

@@ -58,4 +58,3 @@ interface PrototypeInterface extends BasePrototypeInterface
      */
     public function hasOption(OptionInterface $option);
 }
-

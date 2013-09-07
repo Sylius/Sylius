@@ -85,7 +85,6 @@ class ShippingStep extends CheckoutStep
         ));
     }
 
-
     private function getInventoryUnitsFactory()
     {
         return $this->get('sylius.order_processing.inventory_units_factory');

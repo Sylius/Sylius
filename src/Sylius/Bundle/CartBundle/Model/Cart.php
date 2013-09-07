@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\SalesBundle\Model\Order;
 
 /**

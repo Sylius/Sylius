@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
@@ -34,7 +32,7 @@ class BackordersHandler implements BackordersHandlerInterface
     /**
      * Constructor.
      *
-     * @param ObjectRepository             $repository
+     * @param ObjectRepository $repository
      */
     public function __construct(ObjectRepository $repository)
     {

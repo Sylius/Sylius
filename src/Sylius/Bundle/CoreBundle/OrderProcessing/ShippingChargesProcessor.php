@@ -39,7 +39,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $adjustmentRepository
+     * @param RepositoryInterface           $adjustmentRepository
      * @param DelegatingCalculatorInterface $calculator
      */
     public function __construct(RepositoryInterface $adjustmentRepository, DelegatingCalculatorInterface $calculator)

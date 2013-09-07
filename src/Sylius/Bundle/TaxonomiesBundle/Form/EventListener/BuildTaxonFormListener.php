@@ -97,7 +97,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     /**
      * Get the closure to filter taxon collection
      *
-     * @param TaxonInterface $taxon
+     * @param  TaxonInterface $taxon
      * @return callable|null
      */
     private function getFilterTaxonOption(TaxonInterface $taxon)
@@ -106,9 +106,10 @@ class BuildTaxonFormListener implements EventSubscriberInterface
 
         if ($taxon->getId()) {
             $closure  = function($entry) use ($taxon) {
-                if ($entry->getId() != $taxon->getId()){
+                if ($entry->getId() != $taxon->getId()) {
                     return true;
                 }
+
                 return false;
             };
         }

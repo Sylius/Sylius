@@ -39,7 +39,7 @@ class MethodsResolver implements MethodsResolverInterface
     /**
      * Constructor.
      *
-     * @param ObjectRepository                           $repository
+     * @param ObjectRepository                          $repository
      * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
     public function __construct(ObjectRepository $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)

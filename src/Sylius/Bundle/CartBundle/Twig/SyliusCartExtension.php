@@ -49,7 +49,7 @@ class SyliusCartExtension extends Twig_Extension
      * Constructor.
      *
      * @param CartProviderInterface $cartProvider
-     * @param RepositoryInterface      $cartItemRepository
+     * @param RepositoryInterface   $cartItemRepository
      * @param FormFactory           $formFactory
      */
     public function __construct(CartProviderInterface $cartProvider, RepositoryInterface $cartItemRepository, FormFactory $formFactory)

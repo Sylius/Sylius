@@ -14,7 +14,6 @@ namespace Sylius\Bundle\FlowBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 /**
  * Registers a namespaced attribute bag for all processes.

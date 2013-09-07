@@ -166,6 +166,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $this->getEntityManager()->persist($user);
             $this->getEntityManager()->flush();
         }
+
         return $user;
     }
 

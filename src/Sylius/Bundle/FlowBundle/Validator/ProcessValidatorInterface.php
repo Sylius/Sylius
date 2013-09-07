@@ -49,7 +49,7 @@ interface ProcessValidatorInterface
     public function isValid();
 
     /**
-     * @param StepInterface $step
+     * @param  StepInterface $step
      * @return mixed
      */
     public function getResponse(StepInterface $step);

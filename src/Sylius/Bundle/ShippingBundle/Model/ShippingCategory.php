@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Shipping category model.
  *

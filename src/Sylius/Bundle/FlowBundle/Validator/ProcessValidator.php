@@ -101,7 +101,7 @@ class ProcessValidator implements ProcessValidatorInterface
         if ($this->getTemplate()) {
             return $step->render($this->getTemplate(), array('error' => $this->getMessage()));
         }
-            
-        throw new HttpException(400, $this->getMessage());      
+
+        throw new HttpException(400, $this->getMessage());
     }
 }

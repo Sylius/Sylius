@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
-use Sylius\Bundle\CartBundle\SyliusCartBundle;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

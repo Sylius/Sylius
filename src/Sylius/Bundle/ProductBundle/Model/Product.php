@@ -289,7 +289,7 @@ class Product implements ProductInterface
     {
         return $this->properties->contains($property);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -300,10 +300,10 @@ class Product implements ProductInterface
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -314,7 +314,7 @@ class Product implements ProductInterface
                 return $property;
             }
         }
-        
+
         return null;
     }
 

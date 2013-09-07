@@ -44,7 +44,7 @@ class SettingsBuilder extends OptionsResolver implements SettingsBuilderInterfac
     public function setTransformer($parameterName, ParameterTransformerInterface $transformer)
     {
         $this->transformers[$parameterName] = $transformer;
-        
+
         return $this;
     }
 

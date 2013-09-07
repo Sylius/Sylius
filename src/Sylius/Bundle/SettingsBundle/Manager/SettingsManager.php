@@ -15,7 +15,6 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 
@@ -154,7 +153,7 @@ class SettingsManager implements SettingsManagerInterface
     {
         $parameters = array();
 
-        foreach($this->parameterRepository->findBy(array('namespace' => $namespace)) as $parameter) {
+        foreach ($this->parameterRepository->findBy(array('namespace' => $namespace)) as $parameter) {
             $parameters[$parameter->getName()] = $parameter->getValue();
         }
 

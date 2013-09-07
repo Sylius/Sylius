@@ -37,7 +37,6 @@ class LoadMetadataSubscriber implements EventSubscriber
         $this->classes = $classes;
     }
 
-
     /**
      * @return array
      */

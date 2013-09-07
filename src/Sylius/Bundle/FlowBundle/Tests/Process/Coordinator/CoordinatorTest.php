@@ -475,7 +475,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $step->expects($this->any())
             ->method('displayAction')
             ->will($this->returnValue(new Response()));
-        switch($name) {
+        switch ($name) {
             case 'notForwardStep':
                 $step->expects($this->any())
                     ->method('forwardAction')
@@ -496,6 +496,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
                     ->method('forwardAction')
                     ->will($this->returnValue(new ActionResult()));
         }
+
         return $step;
     }
 

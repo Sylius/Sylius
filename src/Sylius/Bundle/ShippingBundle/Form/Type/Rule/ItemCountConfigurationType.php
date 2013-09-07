@@ -34,7 +34,7 @@ class ItemCountConfigurationType extends AbstractType
     /**
      * Constructor.
      *
-     * @param array  $validationGroups
+     * @param array $validationGroups
      */
     public function __construct(array $validationGroups)
     {

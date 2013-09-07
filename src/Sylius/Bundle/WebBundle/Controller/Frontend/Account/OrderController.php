@@ -14,7 +14,6 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -133,7 +132,7 @@ class OrderController extends Controller
     /**
      * Accesses order or throws 403
      *
-     * @param Order $order
+     * @param  Order                 $order
      * @throws AccessDeniedException
      */
     private function accessOrderOr403(OrderInterface $order)

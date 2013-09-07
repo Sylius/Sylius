@@ -56,7 +56,7 @@ class CartProvider implements CartProviderInterface
      *
      * @param CartStorageInterface $storage
      * @param ObjectManager        $manager
-     * @param RepositoryInterface     $repository
+     * @param RepositoryInterface  $repository
      */
     public function __construct(CartStorageInterface $storage, ObjectManager $manager, RepositoryInterface $repository)
     {

@@ -57,7 +57,7 @@ class FlashListener implements EventSubscriberInterface
     }
 
     /**
-     * @param SessionInterface $session
+     * @param SessionInterface    $session
      * @param TranslatorInterface $translator
      */
     public function __construct(SessionInterface $session, TranslatorInterface $translator)

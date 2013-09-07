@@ -39,4 +39,3 @@ class PrototypeBuilder extends BasePrototypeBuilder
         parent::build($prototype, $product);
     }
 }
-
