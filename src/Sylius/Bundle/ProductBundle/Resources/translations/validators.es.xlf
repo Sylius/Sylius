@@ -17,11 +17,11 @@
             </trans-unit>
             <trans-unit id="4">
                 <source>sylius.product.name.min_length</source>
-                <target>El nombre del producto debe tener al menos 1 carácter de longitud.|El nombre de producto debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>El nombre del producto debe tener al menos 1 carácter.|El nombre de producto debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>sylius.product.name.max_length</source>
-                <target>El nombre de producto debe tener como máximo 1 carácter de longitud.|El nombre de producto no debe ser más largo de {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>sylius.product.description.not_blank</source>
@@ -29,7 +29,7 @@
             </trans-unit>
             <trans-unit id="7">
                 <source>sylius.product.description.min_length</source>
-                <target>La descripción de producto debe tener al menos 1 carácter de longitud.|La descripción de producto debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>La descripción de producto debe tener al menos 1 carácter.|La descripción de producto debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>sylius.variant.sku.not_blank</source>
@@ -45,11 +45,11 @@
             </trans-unit>
             <trans-unit id="11">
                 <source>sylius.option.name.min_length</source>
-                <target>El nombre de la opción debe tener al menos 1 carácter de longitud.|El nombre de opción debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de la opción debe tener al menos 1 carácter.|El nombre de opción debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>sylius.option.name.max_length</source>
-                <target>El nombre de la opción debe tener como máximo 1 carácter de longitud.|El nombre de la opción no debe ser más largo de {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de la opción debe tener como máximo 1 carácter.|El nombre de la opción no debe tener más de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>sylius.option.presentation.not_blank</source>
@@ -57,11 +57,11 @@
             </trans-unit>
             <trans-unit id="14">
                 <source>sylius.option.presentation.min_length</source>
-                <target>La presentación de la opción debe tener al menos 1 carácter de longitud.|La presentación de la opción debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>La presentación de la opción debe tener al menos 1 carácter.|La presentación de la opción debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>sylius.option.presentation.max_length</source>
-                <target>La presentación de la opción debe tener como máximo 1 carácter de longitud.|La presentación de la opción no debe ser más larga de {{ limit }} caracteres de longitud.</target>
+                <target>La presentación de la opción debe tener como máximo 1 carácter.|La presentación de la opción no debe tener más de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>sylius.option.values.min_count</source>
@@ -77,11 +77,11 @@
             </trans-unit>
             <trans-unit id="20">
                 <source>sylius.property.name.min_length</source>
-                <target>El nombre de la propiedad debe tener al menos 1 carácter de longitud.|El nombre de la propiedad debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de la propiedad debe tener al menos 1 carácter.|El nombre de la propiedad debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>sylius.property.name.max_length</source>
-                <target>El nombre de la propiedad debe tener como máximo 1 carácter de longitud.|El nombre de la propiedad no debe ser más largo de {{ limit }} caracteres de longitud.</target>
+                <target>El nombre de la propiedad debe tener como máximo 1 carácter.|El nombre de la propiedad no debe ser más largo de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="22">
                 <source>sylius.property.presentation.not_blank</source>
@@ -89,11 +89,11 @@
             </trans-unit>
             <trans-unit id="23">
                 <source>sylius.property.presentation.min_length</source>
-                <target>La presentación de la propiedad debe tener al menos 1 carácter de longitud.|La presentación la propiedad debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>La presentación de la propiedad debe tener al menos 1 carácter.|La presentación la propiedad debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>sylius.property.presentation.max_length</source>
-                <target>La presentación de la propiedad debe tener como máximo 1 carácter de longitud.|La presentación de la propiedad no debe ser más larga de {{ limit }} caracteres de longitud.</target>
+                <target>La presentación de la propiedad debe tener como máximo 1 carácter.|La presentación de la propiedad no debe tener más de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>sylius.product_property.property.not_blank</source>
@@ -109,11 +109,11 @@
             </trans-unit>
             <trans-unit id="28">
                 <source>sylius.prototype.name.min_length</source>
-                <target>El nombre del prototipo debe tener al menos 1 carácter de longitud.|El nombre del prototipo debe tener al menos {{ limit }} caracteres de longitud.</target>
+                <target>El nombre del prototipo debe tener al menos 1 carácter.|El nombre del prototipo debe tener al menos {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>sylius.prototype.name.max_length</source>
-                <target>El nombre del prototipo debe tener como máximo 1 carácter de longitud.|El nombre del prototipo no debe ser más largo de {{ limit }} caracteres de longitud.</target>
+                <target>El nombre del prototipo debe tener como máximo 1 carácter.|El nombre del prototipo no debe ser más largo de {{ limit }} caracteres.</target>
             </trans-unit>
             <trans-unit id="30">
                 <source>sylius.variant.combination</source>

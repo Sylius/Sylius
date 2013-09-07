@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-04-16T10:36:17Z" source-language="es" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="00fcb42de3baf3ba0a301f5c7e1fb7b34455213b" resname="sylius.extensions">
+        <jms:reference-file line="22">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions</source>
+        <target>Extensiones</target>
+      </trans-unit>
+      <trans-unit id="59ac16cd0e1988c15eff4a18570693f49816f08f" resname="sylius.extensions.accelerator">
+        <jms:reference-file line="151">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.accelerator</source>
+        <target>Acelerador</target>
+      </trans-unit>
+      <trans-unit id="83a09d50a2025e0d226af1a7d212801f710dc8dd" resname="sylius.extensions.accelerator.help">
+        <jms:reference-file line="156">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.accelerator.help</source>
+        <target>Instala y activa un acelerador PHP como APC (altamente recomendado).</target>
+      </trans-unit>
+      <trans-unit id="846185e3ad3aa928595cd9555443cb08bc09ffc9" resname="sylius.extensions.apc">
+        <jms:reference-file line="71">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.apc</source>
+        <target>APC</target>
+      </trans-unit>
+      <trans-unit id="e8a7715283a4cef9e8d10019f48a6cf64b71889c" resname="sylius.extensions.ctype">
+        <jms:reference-file line="47">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.ctype</source>
+        <target>Ctype</target>
+      </trans-unit>
+      <trans-unit id="98326ed595e83cc5305ad6a0fffb02526f9ec261" resname="sylius.extensions.help">
+        <jms:reference-file line="36">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="44">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="52">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="60">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="68">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="76">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="84">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="92">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="100">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="108">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="116">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="140">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <jms:reference-file line="164">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.help</source>
+        <target>Instala y activa la extensión %extension%.</target>
+      </trans-unit>
+      <trans-unit id="e2b527fe23b615d1ae4c2fb9ee1977327773f409" resname="sylius.extensions.iconv">
+        <jms:reference-file line="103">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.iconv</source>
+        <target>Iconv</target>
+      </trans-unit>
+      <trans-unit id="bf4928c53d38d268dc8c865f0ba6234af28351b4" resname="sylius.extensions.icu">
+        <jms:reference-file line="135">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.icu</source>
+        <target>ICU</target>
+      </trans-unit>
+      <trans-unit id="84043f91ffbc40ebdde9700bc2488cb6b62c2bbb" resname="sylius.extensions.intl">
+        <jms:reference-file line="111">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.intl</source>
+        <target>Intl</target>
+      </trans-unit>
+      <trans-unit id="5d98cf698aeaa1d192a5b676c9eb24b166be4a08" resname="sylius.extensions.json_encode">
+        <jms:reference-file line="31">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.json_encode</source>
+        <target>JSON</target>
+      </trans-unit>
+      <trans-unit id="2078077db99666c1fab0ffc5e8f5fab165fd5826" resname="sylius.extensions.mbstring">
+        <jms:reference-file line="95">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.mbstring</source>
+        <target>String Multibyte</target>
+      </trans-unit>
+      <trans-unit id="c3f75e08ccf3d6c46a17f70924f3faf25436c2c9" resname="sylius.extensions.off">
+        <jms:reference-file line="25">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.off</source>
+        <target>Desactivado</target>
+      </trans-unit>
+      <trans-unit id="72ed3504f4d44c2b5b6899597f4070cb6f217525" resname="sylius.extensions.on">
+        <jms:reference-file line="24">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.on</source>
+        <target>Activado</target>
+      </trans-unit>
+      <trans-unit id="ea88fc6d080f8273fe878eb87f5fb71bb20c05f1" resname="sylius.extensions.pcre">
+        <jms:reference-file line="79">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.pcre</source>
+        <target>PCRE</target>
+      </trans-unit>
+      <trans-unit id="37e863c403b06a7fa177c5dac68593ded477021a" resname="sylius.extensions.pdo">
+        <jms:reference-file line="159">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.pdo</source>
+        <target>PDO</target>
+      </trans-unit>
+      <trans-unit id="57ea7ac7c650fe3cb116f6d6c4254aa6e4e80ddd" resname="sylius.extensions.php_xml">
+        <jms:reference-file line="87">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.php_xml</source>
+        <target>PHP-XML</target>
+      </trans-unit>
+      <trans-unit id="63e1c1220bf2083220ea684ce5aa4fda7743fc38" resname="sylius.extensions.session_start">
+        <jms:reference-file line="39">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.session_start</source>
+        <target>Sesión</target>
+      </trans-unit>
+      <trans-unit id="f709548269416c3d961304d8c1c9ed111b9ba4be" resname="sylius.extensions.simplexml_import_dom">
+        <jms:reference-file line="63">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.simplexml_import_dom</source>
+        <target>SimpleXML</target>
+      </trans-unit>
+      <trans-unit id="ea4ea63a1e1227a695c22e22ca1b3959e4d950d5" resname="sylius.extensions.token_get_all">
+        <jms:reference-file line="55">InstallerBundle/Requirement/ExtensionsRequirements.php</jms:reference-file>
+        <source>sylius.extensions.token_get_all</source>
+        <target>Tokenizer</target>
+      </trans-unit>
+      <trans-unit id="5e8a08d61cf3eecfc568f910fadae129772c342f" resname="sylius.filesystem">
+        <jms:reference-file line="20">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem</source>
+        <target>sistema de ficheros</target>
+      </trans-unit>
+      <trans-unit id="0f5601fb8724e5fee2d1e962dca07846ab1516f0" resname="sylius.filesystem.cache">
+        <jms:reference-file line="35">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.cache</source>
+        <target>cache</target>
+      </trans-unit>
+      <trans-unit id="8636bd33d41f2843ed5f665a5a82ee2a76ec1459" resname="sylius.filesystem.cache.help">
+        <jms:reference-file line="40">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.cache.help</source>
+        <target><![CDATA[Para asignar permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%]]></target>
+      </trans-unit>
+      <trans-unit id="e977a4100d674c9f35c2db14903b8360bcb8f399" resname="sylius.filesystem.exists">
+        <jms:reference-file line="22">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.exists</source>
+        <target>Existe</target>
+      </trans-unit>
+      <trans-unit id="4dffb871bdc016dadf9fa86f1cbc3d5e2bdda5e5" resname="sylius.filesystem.logs">
+        <jms:reference-file line="43">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.logs</source>
+        <target>logs</target>
+      </trans-unit>
+      <trans-unit id="94eb066cdae35eb8a4106e14fdb78fe8e0e94d9a" resname="sylius.filesystem.logs.help">
+        <jms:reference-file line="48">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.logs.help</source>
+        <target><![CDATA[Para asignar permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%]]></target>
+      </trans-unit>
+      <trans-unit id="2ce97c296a8ee85144a2a088244fa48f797e2e0c" resname="sylius.filesystem.not_exists">
+        <jms:reference-file line="23">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.not_exists</source>
+        <target>No existe</target>
+      </trans-unit>
+      <trans-unit id="46eb8efae268033964d3d8b3bad7160a0484c243" resname="sylius.filesystem.not_writable">
+        <jms:reference-file line="25">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <jms:reference-file line="38">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.not_writable</source>
+        <target>Sin permisos de escritura</target>
+      </trans-unit>
+      <trans-unit id="d52416e55d50fe9b9036e28ad0cf77e1d91f9b8f" resname="sylius.filesystem.parameters">
+        <jms:reference-file line="51">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.parameters</source>
+        <target>parameters.yml</target>
+      </trans-unit>
+      <trans-unit id="e5992e643b88ba56c8761730324de2ee24fc9ac6" resname="sylius.filesystem.parameters.help">
+        <jms:reference-file line="56">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.parameters.help</source>
+        <target>Para asignar permisos ejecuta: sudo chmod a+w %path%</target>
+      </trans-unit>
+      <trans-unit id="cd7f539c16dde019485361ec21a5c1b3f773e292" resname="sylius.filesystem.vendors">
+        <jms:reference-file line="29">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.vendors</source>
+        <target>Vendors</target>
+      </trans-unit>
+      <trans-unit id="6d49b686628f1f1465c2bcb73ddb8fd42f762330" resname="sylius.filesystem.writable">
+        <jms:reference-file line="24">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <jms:reference-file line="37">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <jms:reference-file line="38">InstallerBundle/Requirement/FilesystemRequirements.php</jms:reference-file>
+        <source>sylius.filesystem.writable</source>
+        <target>Con permisos de escritura</target>
+      </trans-unit>
+      <trans-unit id="cfdd65491a6400a15ad3930b3e86019ce9c8e210" resname="sylius.settings">
+        <jms:reference-file line="23">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings</source>
+        <target>Versión de PHP y configuración</target>
+      </trans-unit>
+      <trans-unit id="97f4f11fa3e93cec469ec253101270b52f6fedc1" resname="sylius.settings.any">
+        <jms:reference-file line="45">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.any</source>
+        <target>Cualquiera</target>
+      </trans-unit>
+      <trans-unit id="b0aae58badee90b385ddca716299773b02963748" resname="sylius.settings.detect_unicode">
+        <jms:reference-file line="63">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <jms:reference-file line="70">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.detect_unicode</source>
+        <target>detect_unicode</target>
+      </trans-unit>
+      <trans-unit id="7a9e69e28c530cdca129d732305e5ddea09e05db" resname="sylius.settings.magic_quotes_gpc">
+        <jms:reference-file line="84">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.magic_quotes_gpc</source>
+        <target>magic_quotes_gpc</target>
+      </trans-unit>
+      <trans-unit id="4d15909e2f18c92ddaf0bddb78a64aa7a562a27b" resname="sylius.settings.non_deprecated">
+        <jms:reference-file line="54">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.non_deprecated</source>
+        <target>No obsoleto</target>
+      </trans-unit>
+      <trans-unit id="cf71870fa07651e71a1ee83f272607e2c465a0ae" resname="sylius.settings.off">
+        <jms:reference-file line="26">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.off</source>
+        <target>Desactivado</target>
+      </trans-unit>
+      <trans-unit id="d28ce2c0ec8eeea6c63a40c006d184545544d8fb" resname="sylius.settings.on">
+        <jms:reference-file line="25">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.on</source>
+        <target>Activado</target>
+      </trans-unit>
+      <trans-unit id="9d7debe61e36ba406faf9c4c6d1acee82ee8131a" resname="sylius.settings.register_globals">
+        <jms:reference-file line="91">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.register_globals</source>
+        <target>register_globals</target>
+      </trans-unit>
+      <trans-unit id="553d80c65ffb7be27a98b2bc162e466546ae30ed" resname="sylius.settings.session.auto_start">
+        <jms:reference-file line="98">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.session.auto_start</source>
+        <target>session.auto_start</target>
+      </trans-unit>
+      <trans-unit id="040133db223ab4fd247e753f9e5b90cf9b7c7b60" resname="sylius.settings.short_open_tag">
+        <jms:reference-file line="77">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.short_open_tag</source>
+        <target>short_open_tag</target>
+      </trans-unit>
+      <trans-unit id="9b2207af3d964bcb5b807a78d82071891c316d30" resname="sylius.settings.timezone">
+        <jms:reference-file line="43">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.timezone</source>
+        <target>Zona horaria</target>
+      </trans-unit>
+      <trans-unit id="040b81f5faef888d5f2d4ed613f5b9f1937a03eb" resname="sylius.settings.timezone_deprecated">
+        <jms:reference-file line="52">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.timezone_deprecated</source>
+        <target>Zona horaria obsoleta</target>
+      </trans-unit>
+      <trans-unit id="abf3bd38672ee693f1dc9e7e6082bdf05d4e3f46" resname="sylius.settings.timezone_deprecated.help">
+        <jms:reference-file line="57">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.timezone_deprecated.help</source>
+        <target>La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).</target>
+      </trans-unit>
+      <trans-unit id="1067761d5bf199bea084cb68393a01a910d2fa73" resname="sylius.settings.version">
+        <jms:reference-file line="30">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.version</source>
+        <target>Versión de PHP</target>
+      </trans-unit>
+      <trans-unit id="f160e567caa48c2d478f0daf401fe1e8aced7067" resname="sylius.settings.version_recommanded">
+        <jms:reference-file line="36">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
+        <source>sylius.settings.version_recommanded</source>
+        <target>Versión de PHP recomendada</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
