@@ -47,7 +47,7 @@ class AddressListener
         if ($address == $user->getBillingAddress()) {
             $user->setBillingAddress(null);
         }
-        elseif ($address == $user->getShippingAddress()) {
+        if ($address == $user->getShippingAddress()) {
             $user->setShippingAddress(null);
         }
     }

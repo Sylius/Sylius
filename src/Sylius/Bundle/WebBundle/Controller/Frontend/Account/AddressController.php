@@ -42,13 +42,13 @@ class AddressController extends Controller
     /**
      * Set an address as default billing address for the current user.
      *
-     * @param Address $address
+     * @param $id address ID
      * @return RedirectResponse
-     *
      */
-    public function setAsDefaultBillingAddressAction(Address $address)
+    public function setAsDefaultBillingAddressAction($id)
     {
-//        $this->accessOr403($address);
+        $address = $this->findOr404($id);
+        $this->accessOr403($address);
 
         $manager = $this->getUserManager();
         $user = $this->getUser();
@@ -56,14 +56,25 @@ class AddressController extends Controller
         $user->setBillingAddress($address);
         $manager->persist($user);
         $manager->flush();
-        $this->setFlash('success', 'set_billing');
 
-        return $this->redirect('sylius_account_address_index');
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'sylius.account.address.flash.billing.success'
+        );
+
+        return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
 
-    public function setAsDefaultShippingAddressAction(Address $address)
+    /**
+     * Set an address as shipping billing address for the current user.
+     *
+     * @param $id address ID
+     * @return RedirectResponse
+     */
+    public function setAsDefaultShippingAddressAction($id)
     {
-//      $this->accessOr403($address);
+        $address = $this->findOr404($id);
+        $this->accessOr403($address);
 
         $manager = $this->getUserManager();
         $user = $this->getUser();
@@ -71,18 +82,53 @@ class AddressController extends Controller
         $user->setShippingAddress($address);
         $manager->persist($user);
         $manager->flush();
-        $this->setFlash('success', 'set_shipping');
 
-        return $this->redirect('sylius_account_address_index');
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'sylius.account.address.flash.shipping.success'
+        );
+
+        return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
 
     private function getUserManager()
     {
-        $this->get('sylius.manager.user');
+        return $this->get('sylius.manager.user');
     }
 
     private function getAddressRepository()
     {
         return $this->get('sylius.repository.address');
+    }
+
+    /**
+     * Finds address or throws 404
+     *
+     * @param $id
+     * @return Order
+     * @throws NotFoundHttpException
+     */
+    private function findOr404($id)
+    {
+        if (null === $address = $this->getAddressRepository()->find($id)) {
+            throw $this->createNotFoundException('The address does not exist');
+        }
+
+        return $address;
+    }
+
+    /**
+     * Accesses address or throws 403
+     *
+     * @param AddressInterface $address
+     * @throws AccessDeniedException
+     */
+    private function accessOr403(AddressInterface $address)
+    {
+        if (!$this->getUser()->hasAddress($address)) {
+            throw new AccessDeniedException();
+        }
+
+        return;
     }
 }

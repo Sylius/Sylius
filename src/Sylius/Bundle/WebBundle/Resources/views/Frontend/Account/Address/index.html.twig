@@ -4,22 +4,20 @@
 {% block content %}
     <h4>{{ 'sylius.account.address.list'|trans }}</h4>
 
-    {% if app.user.billingAddress is empty %}
-        <span class="label label-success">{{ 'sylius.account.address.default.no_billing'|trans }}</span><br>
-    {% endif %}
-    {% if app.user.shippingAddress is empty %}
-        <span class="label label-info">{{ 'sylius.account.address.default.no_shipping'|trans }}</span><br>
+    {% if app.user.billingAddress is empty or app.user.shippingAddress is empty %}
+        <p>
+        {% if app.user.billingAddress is empty %}
+            <span class="label label-success">{{ 'sylius.account.address.default.no_billing'|trans }}</span>
+        {% endif %}
+        {% if app.user.shippingAddress is empty %}
+            <span class="label label-info">{{ 'sylius.account.address.default.no_shipping'|trans }}</span>
+        {% endif %}
+        </p>
     {% endif %}
 
     <div class="row-fluid">
         {% if addresses is not empty %}
             <table id="addresses" class="table">
-                <thead>
-                <tr>
-                    <th>{{ 'sylius.account.address.list.adress' }}</th>
-                    <th colspan="2">{{ 'sylius.account.address.list.action' }}</th>
-                </tr>
-                </thead>
                 <tbody>
                 {% for address in addresses %}
                     <tr>
@@ -29,7 +27,8 @@
                         <td>
                             {% if address == app.user.billingAddress %}
                                 <span id="defaultBilling" class="label label-success">{{ 'sylius.account.address.default.billing'|trans }}</span><br><br>
-                            {% elseif address == app.user.shippingAddress %}
+                            {% endif %}
+                            {% if address == app.user.shippingAddress %}
                                 <span id="defaultShipping" class="label label-info">{{ 'sylius.account.address.default.shipping'|trans }}</span><br><br>
                             {% endif %}
 
