@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
-
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 
 /**
@@ -20,7 +19,7 @@ use Sylius\Bundle\CartBundle\Model\CartInterface;
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class CartEvent extends Event
+class CartEvent extends ResourceEvent
 {
     /**
      * @var CartInterface
