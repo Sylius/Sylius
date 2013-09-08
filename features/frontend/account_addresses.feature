@@ -9,7 +9,6 @@ Feature: User account addresses page
       And I am on my account addresses page
       And the following countries exist:
         | name    |
-        | France  |
         | Germany |
         | Austria |
         | Poland  |
@@ -23,14 +22,13 @@ Feature: User account addresses page
 
   Scenario: Viewing that no address has been defined
     Given there are no addresses
-     Then I should see "No address has been defined"
+     Then I should see "You have created no adress yet"
 
   Scenario: Viewing only my addresses
     Given the following addresses exist:
       | user                       | address                                                             |
       | ianmurdock@example.com   | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
       | linustorvalds@example.com | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | tmorel@example.com        | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
     Then I should see 3 addresses in the list
 
   Scenario: Accessing the creation address page

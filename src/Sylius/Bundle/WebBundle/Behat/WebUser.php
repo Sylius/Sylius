@@ -218,7 +218,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnMyAccountAddressesPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_address_index'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_index'));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -226,7 +227,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldStillBeOnMyAccountAddressesPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_address_index'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_index'));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -242,7 +244,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnMyAccountAddressCreationPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_address_create'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_create'));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -250,7 +253,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldStillBeOnMyAccountAddressCreationPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_address_create'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_create'));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -760,11 +764,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     private function iAmLoggedInAsRole($role)
     {
-        $this->getSubContext('data')->thereIsUser('email@foo.com', 'password', $role);
+        $this->getSubContext('data')->thereIsUser('sylius@example.com', 'sylius', $role);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
 
-        $this->fillField('Email', 'email@foo.com');
-        $this->fillField('Password', 'password');
+        $this->fillField('Email', 'sylius@example.com');
+        $this->fillField('Password', 'sylius');
         $this->pressButton('login');
     }
 

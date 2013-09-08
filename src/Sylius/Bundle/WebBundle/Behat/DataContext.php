@@ -247,8 +247,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $address->setUser($this->thereIsUser($data['user'], 'password'));
+            $user = $this->thereIsUser($data['user'], 'password');
+            $user->addAddress($address);
             $manager->persist($address);
+            $manager->persist($user);
             $manager->flush();
         }
     }
@@ -773,6 +775,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
     /**
      * @Given /^there are following countries:$/
+     * @Given /^the following countries exist:$/
      */
     public function thereAreCountries(TableNode $table)
     {
@@ -893,6 +896,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         $type = str_replace(' ', '_', StringUtil::singularify($type));
         $type = is_array($type) ? $type[1] : $type; // Hacky hack for multiple singular forms.
+        $type = $type == 'addresse' ? 'address' : $type; // Hacky hack again because we do not retrieve the right singular with the previous hack...
 
         $manager = $this->getEntityManager();
 
