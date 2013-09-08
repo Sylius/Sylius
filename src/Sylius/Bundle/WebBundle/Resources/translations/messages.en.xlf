@@ -22,6 +22,10 @@
         <source>sylius.account.home.welcome</source>
         <target>Welcome to your space</target>
       </trans-unit>
+      <trans-unit id="a2fc8502b1fa534d9c312e5f3a6ffea4d12658d5" resname="sylius.account.title">
+        <source>sylius.account.title</source>
+        <target>My account</target>
+      </trans-unit>
       <trans-unit id="60fe6a419828d3e5dde3018538d9e3cfb0a0a50c" resname="sylius.account.order.created_at">
         <source>sylius.account.order.created_at</source>
         <target>Placed at</target>
@@ -121,6 +125,34 @@
       <trans-unit id="936abea9fd1fc70b89c2c5b6358e084ee1640e10" resname="sylius.account.address.update">
         <source>sylius.account.address.update</source>
         <target>Edit my address</target>
+      </trans-unit>
+      <trans-unit id="9db7c8733ad783746247212f4663134ebe8ce8cb" resname="sylius.account.address.action.billing">
+        <source>sylius.account.address.action.billing</source>
+        <target>Set as default billing address</target>
+      </trans-unit>
+      <trans-unit id="0a908d3af1c1c39b30a727b828976398e2cc5f96" resname="sylius.account.address.action.create">
+        <source>sylius.account.address.action.create</source>
+        <target>Create a new address</target>
+      </trans-unit>
+      <trans-unit id="f0824c68af924f3300ca69215bffb06fb5bfc958" resname="sylius.account.address.action.delete">
+        <source>sylius.account.address.action.delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="5cc83d018f7b60a7025c8d62734b136d4295eb82" resname="sylius.account.address.action.edit">
+        <source>sylius.account.address.action.edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="5bdcc2e480a6cf791b2d1d5cf8adbca2180a40cf" resname="sylius.account.address.action.shipping">
+        <source>sylius.account.address.action.shipping</source>
+        <target>Set as default shipping address</target>
+      </trans-unit>
+      <trans-unit id="c945b678f90b1ef283863ffc2506e2846179fa41" resname="sylius.account.address.flash.billing.success">
+        <source>sylius.account.address.flash.billing.success</source>
+        <target>The address has been successfully set as your default billing address.</target>
+      </trans-unit>
+      <trans-unit id="386ea21ad386f4fca8c2a37f1f0d72aa319adcb5" resname="sylius.account.address.flash.shipping.success">
+        <source>sylius.account.address.flash.shipping.success</source>
+        <target>The address has been successfully set as your default shipping address.</target>
       </trans-unit>
       <trans-unit id="c87e30d5fde4f2944b5576ce4c3e1648935e381a" resname="sylius.add_to_cart">
         <source>sylius.add_to_cart</source>
@@ -516,11 +548,11 @@
       </trans-unit>
       <trans-unit id="f79f1f6a2584f1542be7e6a9bab5d988" resname="sylius.form.frontend.password.title">
         <source>sylius.form.frontend.password.title</source>
-        <target>Change my password</target>
+        <target>Change your password</target>
       </trans-unit>
       <trans-unit id="b41497d414e58dae641cf537989578b8" resname="sylius.form.frontend.profile.title">
         <source>sylius.form.frontend.profile.title</source>
-        <target>Edit my personal information</target>
+        <target>Edit your personal information</target>
       </trans-unit>
       <trans-unit id="ea0c4a2c08a2d13161d6e4312d5f7e22" resname="sylius.form.login.email">
         <source>sylius.form.login.email</source>

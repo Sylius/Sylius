@@ -1,6 +1,6 @@
-<strong>{{ address.firstName|capitalize }} {{ address.firstName|upper }}</strong><br>
+<strong>{{ address.firstName|capitalize }} {{ address.lastName|upper }}</strong><br>
 {% if address.company is not empty %}
-    {{ address.company|capitalize }}<br>
+    <strong>{{ address.company|capitalize }}</strong><br>
 {% endif %}
 {{ address.street }},<br>
 {{ address.city }} {{ address.postcode }}<br>

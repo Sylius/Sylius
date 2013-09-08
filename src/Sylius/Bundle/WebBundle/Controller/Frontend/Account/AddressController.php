@@ -59,7 +59,7 @@ class AddressController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            'sylius.account.address.flash.billing.success'
+            $this->get('translator')->trans('sylius.account.address.flash.billing.success')
         );
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
@@ -85,7 +85,7 @@ class AddressController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            'sylius.account.address.flash.shipping.success'
+            $this->get('translator')->trans('sylius.account.address.flash.shipping.success')
         );
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));

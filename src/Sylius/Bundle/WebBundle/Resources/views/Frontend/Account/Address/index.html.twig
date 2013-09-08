@@ -50,7 +50,7 @@
                                 'sylius.account.address.action.edit') }}&nbsp;
                             {{ buttons.delete(
                                 path('sylius_account_address_delete', {'id': address.id}),
-                                'sylius.account.address.action.delete') }}
+                                'sylius.account.address.action.delete'|trans) }}
                         </td>
                     </tr>
                 {% endfor %}
