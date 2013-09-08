@@ -1,0 +1,54 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_account_address_index:
+    pattern: /addresses
+    methods: [GET]
+    defaults: { _controller: SyliusWebBundle:Frontend/Account/Address:index }
+
+sylius_account_address_create:
+    pattern: /address/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.address:createAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:Address/create.html.twig
+            redirect:
+                route: sylius_account_address_index
+                parameters: {}
+
+sylius_account_address_update:
+    pattern: /address/{id}/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.address:updateAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:Address/update.html.twig
+            redirect:
+                route: sylius_account_address_index
+                parameters: {}
+
+sylius_account_address_delete:
+    pattern: /address/{id}/delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.address:deleteAction
+        _sylius:
+            redirect:
+                route: sylius_account_address_index
+                parameters: {}
+
+sylius_account_address_set_default_billing:
+    pattern: /address/{id}/default/billing
+    methods: [GET]
+    defaults: { _controller: SyliusWebBundle:Frontend/Account/Address:setAsDefaultBillingAddress }
+    requirements:
+        id:  \d+
+
+sylius_account_address_set_default_shipping:
+    pattern: /address/{id}/default/shipping
+    methods: [GET]
+    defaults: { _controller: SyliusWebBundle:Frontend/Account/Address:setAsDefaultShippingAddress }
+    requirements:
+        id:  \d+
+
