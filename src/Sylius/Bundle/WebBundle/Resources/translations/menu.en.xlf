@@ -290,6 +290,10 @@
         <source>sylius.frontend.menu.account.orders</source>
         <target state="new">My orders / my invoices</target>
       </trans-unit>
+      <trans-unit id="56fa84e8aed489485e67cb845eb10794439fac43" resname="sylius.frontend.menu.account.addresses">
+        <source>sylius.frontend.menu.account.addresses</source>
+        <target state="new">My address book</target>
+      </trans-unit>
       <trans-unit id="f10a8702eb7ef4f1f5b107c7941efc74" resname="sylius.frontend.menu.main.account">
         <source>sylius.frontend.menu.main.account</source>
         <target>My account</target>
