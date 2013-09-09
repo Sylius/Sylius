@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
+use Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactoryInterface;
 
 /**
  * Inventory units factory.
@@ -29,13 +30,22 @@ class InventoryUnitsFactory implements InventoryUnitsFactoryInterface
     protected $inventoryOperator;
 
     /**
+     * Inventory unit factory
+     *
+     * @var InventoryUnitFactoryInterface
+     */
+    protected $inventoryUnitFactory;
+
+    /**
      * Constructor.
      *
      * @param InventoryOperatorInterface $inventoryOperator
+     * @param InventoryUnitFactoryInterface $inventoryUnitFactory
      */
-    public function __construct(InventoryOperatorInterface $inventoryOperator)
+    public function __construct(InventoryOperatorInterface $inventoryOperator, InventoryUnitFactoryInterface $inventoryUnitFactory)
     {
         $this->inventoryOperator = $inventoryOperator;
+        $this->inventoryUnitFactory = $inventoryUnitFactory;
     }
 
     /**
@@ -45,7 +55,9 @@ class InventoryUnitsFactory implements InventoryUnitsFactoryInterface
     {
         foreach ($order->getItems() as $item) {
             $variant = $item->getVariant();
-            $units = $this->inventoryOperator->decrease($variant, $item->getQuantity());
+            $units = $this->inventoryUnitFactory->create($variant, $item->getQuantity());
+
+            $this->inventoryOperator->decrease($units->toArray());
 
             foreach ($units as $unit) {
                 $order->addInventoryUnit($unit);
