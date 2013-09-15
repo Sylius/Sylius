@@ -23,10 +23,10 @@ Feature: Orders management
             | user              | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-        And order #000001 has following items:
+        And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
-        And order #000002 has following items:
+        And order #000000002 has following items:
             | product | quantity |
             | Mug     | 1        |
             | Sticker | 4        |
@@ -61,7 +61,7 @@ Feature: Orders management
 
     Scenario: Accessing the editing form from the list
         Given I am on the order index page
-         When I click "edit" near "#000002"
+         When I click "edit" near "#000000002"
          Then I should be editing order with number "000002"
 
     Scenario: Deleting the order
@@ -72,7 +72,7 @@ Feature: Orders management
 
     Scenario: Deleting the order via list button
         Given I am on the order index page
-         When I press "delete" near "#000001"
+         When I press "delete" near "#000000001"
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
@@ -80,16 +80,16 @@ Feature: Orders management
         Given I am viewing order with number "000002"
          When I press "delete"
          Then I should be on the order index page
-          And I should not see order with number "#000002" in the list
+          And I should not see order with number "#000000002" in the list
 
     Scenario: Accessing the order details page from list
         Given I am on the order index page
-         When I click "details" near "#000001"
+         When I click "details" near "#000000001"
          Then I should be viewing order with number "000001"
 
     Scenario: Accessing the order details page by clicking the number
         Given I am on the order index page
-         When I click "#000002"
+         When I click "#000000002"
          Then I should be viewing order with number "000002"
 
     Scenario: Displaying correct total on order page

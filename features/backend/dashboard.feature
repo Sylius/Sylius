@@ -17,10 +17,10 @@ Feature: Store dashboard
             | user              | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-        And order #000001 has following items:
+        And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
-        And order #000002 has following items:
+        And order #000000002 has following items:
             | product | quantity |
             | Mug     | 1        |
             | Sticker | 4        |

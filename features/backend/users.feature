@@ -24,7 +24,7 @@ Feature: Users management
           And the following orders were placed:
             | user | address                                        |
             | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
-        And order #000001 has following items:
+        And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
 
