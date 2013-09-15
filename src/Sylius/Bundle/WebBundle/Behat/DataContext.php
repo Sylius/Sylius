@@ -926,8 +926,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $address->setFirstname(trim($firstname));
         $address->setLastname(trim($lastname));
         $address->setStreet($addressData[1]);
-        $address->setCity($addressData[2]);
-        $address->setPostcode($addressData[3]);
+        $address->setPostcode($addressData[2]);
+        $address->setCity($addressData[3]);
         $address->setCountry($this->findOneByName('country', $addressData[4]));
 
         return $address;

@@ -122,7 +122,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountHomepage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_homepage'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_homepage'));
     }
 
     /**
@@ -138,7 +138,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generateUrl('fos_user_change_password'));
+        $this->getSession()->visit($this->generatePageUrl('fos_user_change_password'));
     }
 
     /**
@@ -162,7 +162,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generateUrl('fos_user_profile_edit'));
+        $this->getSession()->visit($this->generatePageUrl('fos_user_profile_edit'));
     }
 
     /**
@@ -202,7 +202,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountOrdersPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_order_index'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_index'));
     }
 
     /**
@@ -210,7 +210,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountAddressesPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_address_index'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_address_index'));
     }
 
     /**
@@ -218,7 +218,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnMyAccountAddressesPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_index'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_index'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -227,7 +227,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldStillBeOnMyAccountAddressesPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_index'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_index'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -236,7 +236,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountAddressCreationPage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_account_address_create'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_address_create'));
     }
 
     /**
@@ -253,7 +253,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldStillBeOnMyAccountAddressCreationPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_create'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_create'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -452,29 +452,30 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iFillInCheckoutAddress($type, $country)
     {
-        $this->iFillInAddress('sylius_checkout_addressing', $type, $country);
+//        $this->iFillInAddress('sylius_checkout_addressing', $type, $country);
         $base = sprintf('sylius_checkout_addressing[%sAddress]', $type);
 
-        $this->fillField($base.'[firstName]', 'John');
-        $this->fillField($base.'[lastName]', 'Doe');
-        $this->fillField($base.'[street]', 'Pvt. Street 15');
-        $this->fillField($base.'[city]', 'Lodz');
-        $this->fillField($base.'[postcode]', '95-253');
-        $this->selectOption($base.'[country]', $country);
+        $this->iFillInAddressFields($base, $country);
     }
-
     /**
-     * @Given /^I fill in the users (billing|shipping|account) address to (.+)$/
+     * @Given /^I fill in the users (billing|shipping) address to (.+)$/
      */
     public function iFillInUserAddress($type, $country)
     {
-        $this->iFillInAddress('sylius_user', $type, $country);
+        $base = sprintf('%s[%sAddress]', 'sylius_user', $type);
+        $this->iFillInAddressFields($base, $country);
     }
 
-    protected function iFillInAddress($prefix, $type, $country)
+    /**
+     * @Given /^I fill in the users account address to (.+)$/
+     */
+    public function iFillInUserAccountAddress($country)
     {
-        $base = sprintf('%s[%sAddress]', $prefix, $type);
+        $this->iFillInAddressFields('sylius_address', $country);
+    }
 
+    protected function iFillInAddressFields($base, $country)
+    {
         $this->fillField($base.'[firstName]', 'John');
         $this->fillField($base.'[lastName]', 'Doe');
         $this->fillField($base.'[street]', 'Pvt. Street 15');
@@ -498,6 +499,22 @@ class WebUser extends MinkContext implements KernelAwareInterface
         }
 
         $this->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
+    }
+
+    /**
+     * @Given /^I should see an? "(?P<element>[^"]*)" element near "([^"]*)"$/
+     */
+    public function iShouldSeeAElementNear($element, $value)
+    {
+        $tr = $this->getSession()->getPage()->find('css',
+            sprintf('table tbody tr:contains("%s")', $value)
+        );
+
+        if (null === $tr) {
+            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
+        }
+
+        $this->assertSession()->elementExists('css', $element, $tr);
     }
 
     /**

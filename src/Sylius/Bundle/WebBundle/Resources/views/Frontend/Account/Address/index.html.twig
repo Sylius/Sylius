@@ -26,10 +26,10 @@
                         </td>
                         <td>
                             {% if address == app.user.billingAddress %}
-                                <span id="defaultBilling" class="label label-success">{{ 'sylius.account.address.default.billing'|trans }}</span><br><br>
+                                <span id="defaultBillingAddress" class="label label-success">{{ 'sylius.account.address.default.billing'|trans }}</span><br><br>
                             {% endif %}
                             {% if address == app.user.shippingAddress %}
-                                <span id="defaultShipping" class="label label-info">{{ 'sylius.account.address.default.shipping'|trans }}</span><br><br>
+                                <span id="defaultShippingAddress" class="label label-info">{{ 'sylius.account.address.default.shipping'|trans }}</span><br><br>
                             {% endif %}
 
                             {% if address != app.user.billingAddress %}

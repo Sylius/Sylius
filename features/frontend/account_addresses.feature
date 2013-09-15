@@ -6,7 +6,6 @@ Feature: User account addresses page
 
   Background:
     Given I am logged in user
-      And I am on my account addresses page
       And the following countries exist:
         | name    |
         | Germany |
@@ -19,10 +18,17 @@ Feature: User account addresses page
         | sylius@example.com  | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany   |
         | sylius@example.com  | Jan Kowalski, Fun-Straße 1, 90032, Vienna, Austria      |
         | sylius@example.com  | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland          |
+      And I am on my account addresses page
+
+  Scenario: Viewing my account addresses page
+    Given I am on my account homepage
+    And I follow "My address book"
+    Then I should be on my account addresses page
 
   Scenario: Viewing that no address has been defined
     Given there are no addresses
-     Then I should see "You have created no adress yet"
+      And I am on my account addresses page
+     Then I should see "You have created no address yet"
 
   Scenario: Viewing only my addresses
     Given the following addresses exist:
@@ -37,10 +43,10 @@ Feature: User account addresses page
 
   Scenario: Adding an address
     Given I am on my account address creation page
-      And I fill in the users account address to France
+      And I fill in the users account address to Finland
       And I press "Create"
      Then I should be on my account addresses page
-      And I should see "Your address has been created"
+      And I should see "Address has been successfully created"
       And I should see 4 addresses in the list
 
   Scenario: Trying to add an address with empty fields
@@ -56,31 +62,31 @@ Feature: User account addresses page
       And I should see 6 fields on error
 
   Scenario: Deleting an address
-    Given I press "Delete" near "Germany"
+    Given I press "Delete" near "GERMANY"
      Then I should see 2 addresses in the list
-      And I should not see "Germany"
+      And I should not see "GERMANY"
       And I should still be on my account addresses page
-      And I should see "Your address has been deleted"
+      And I should see "Address has been successfully deleted"
 
   Scenario: Editing an address
-    Given I press "Edit" near "Germany"
-      And I fill in the users account address to France
-      And I press "Edit"
+    Given I press "Edit" near "GERMANY"
+      And I fill in the users account address to Finland
+      And I press "Save changes"
      Then I should see 3 addresses in the list
-      And I should not see "Germany"
-      And I should see "France"
+      And I should not see "GERMANY"
+      And I should see "FINLAND"
       And I should still be on my account addresses page
-      And I should see "Your address has been edited"
+      And I should see "Address has been successfully updated"
 
   Scenario: Trying to edit an address with empty fields
-    Given I press "Edit" near "Germany"
+    Given I press "Edit" near "GERMANY"
       And I leave "First name" empty
       And I leave "Last name" empty
       And I leave "Country" empty
       And I leave "Street" empty
       And I leave "City" empty
       And I leave "Postcode" empty
-      And I press "Edit"
+      And I press "Save changes"
      Then I should see 6 fields on error
 
   Scenario: Viewing that no default shipping and billing addresses have been defined
@@ -89,13 +95,13 @@ Feature: User account addresses page
       And I should see "No default shipping address"
 
   Scenario: Setting an address as the default billing address
-    Given I press "Set as default billing address" near "Austria"
+    Given I press "Set as default billing address" near "AUSTRIA"
      Then I should not see "No default billing address"
-      And I should see "Austria" in the "billing_address" element
-      And I should see "Your default billing address has been saved"
+      And I should see a "#defaultBillingAddress" element near "AUSTRIA"
+      And I should see "The address has been successfully set as your default billing address"
 
   Scenario: Setting an address as the default shipping address
-    Given I press "Set as default billing address" near "Poland"
+    Given I press "Set as default shipping address" near "POLAND"
      Then I should not see "No default shipping address"
-      And I should see "Poland" in the "shipping_address" element
-      And I should see "Your default shipping address has been saved"
+      And I should see a "#defaultShippingAddress" element near "POLAND"
+      And I should see "The address has been successfully set as your default shipping address"
