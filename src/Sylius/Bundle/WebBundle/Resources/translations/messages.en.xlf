@@ -116,7 +116,7 @@
       </trans-unit>
       <trans-unit id="c6aa9d9f067ff5be4c2fd383bf14731b508d101c" resname="sylius.account.address.empty">
         <source>sylius.account.address.empty</source>
-        <target>You have created no adress yet.</target>
+        <target>You have created no address yet.</target>
       </trans-unit>
       <trans-unit id="6d85d32cc81276c0a3aa7a2764edfb71b6611465" resname="sylius.account.address.list">
         <source>sylius.account.address.list</source>
