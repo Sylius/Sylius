@@ -48,22 +48,22 @@ script:
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@users'
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@dashboard'
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@orders'
-    - cd ~/src/Sylius/Bundle/AddressingBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/CartBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/InventoryBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/OmnipayBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/CoreBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/SalesBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/ProductBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/VariableProductBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/TaxationBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/ShippingBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/TaxonomiesBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/ResourceBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/MoneyBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/SettingsBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/PromotionsBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ~/src/Sylius/Bundle/PaymentsBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd src/Sylius/Bundle/AddressingBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../CartBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../InventoryBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../OmnipayBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../CoreBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../SalesBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../ProductBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../VariableProductBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../TaxationBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../ShippingBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../TaxonomiesBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../ResourceBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../MoneyBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../SettingsBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../PromotionsBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../PaymentsBundle; ../../../../bin/phpspec run -fpretty --verbose
 
 notifications:
   email: "travis-ci@sylius.org"
