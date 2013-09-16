@@ -14,10 +14,7 @@ before_script:
     - sudo apt-get update
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-mysql php5-curl wkhtmltopdf
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
-    - export HOSTNAME=sylius.local
-    - export MINK_EXTENSION_PARAMS='base_url=http://$HOSTNAME:8000/app_test.php'
-    - sudo sed -i -e "/DocumentRoot/i\ServerName $HOSTNAME" /etc/apache2/sites-available/default
-    - echo "127.0.0.1    $HOSTNAME" | sudo tee -a /etc/hosts
+    - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
     - sudo /etc/init.d/apache2 restart
     - composer self-update
     - composer install --dev --prefer-source --no-interaction > /dev/null
@@ -28,8 +25,8 @@ before_script:
     - chmod -R 777 app/cache app/logs
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99
-    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.34.0.jar
-    - java -jar selenium-server-standalone-2.34.0.jar > /dev/null &
+    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
+    - java -jar selenium-server-standalone-2.35.0.jar > /dev/null &
     - sleep 10
 
 script:

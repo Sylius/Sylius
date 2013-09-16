@@ -7,8 +7,8 @@ default:
     extensions:
         Behat\MinkExtension\Extension:
             default_session: symfony2
-            browser_name: firefox
             selenium2: ~
+            browser_name: firefox
         Behat\Symfony2Extension\Extension:
             mink_driver: true
 
