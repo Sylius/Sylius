@@ -10,6 +10,6 @@
     'use strict';
 
     $(document).ready(function() {
-        $('select').select2();
+        //$('select').select2();
     });
 })( jQuery );

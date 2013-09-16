@@ -9,6 +9,7 @@
 <table id="orders" class="table">
     <thead>
         <tr>
+            <th></th>
             <th>{{ sylius_resource_sort('createdAt', 'sylius.order.created_at'|trans, null, null, router_paramters) }}</th>
             <th>{{ sylius_resource_sort('number', 'sylius.order.number'|trans, null, null, router_paramters) }}</th>
             <th>{{ sylius_resource_sort('paymentState', 'sylius.order.payment_state'|trans, null, null, router_paramters) }}</th>
@@ -21,6 +22,7 @@
     <tbody>
         {% for order in orders %}
         <tr>
+            <td class="center-text"><input type="checkbox" /></td>
             <td>{{ order.createdAt|date }}</td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}" class="btn btn-link">
@@ -29,13 +31,13 @@
             </td>
             <td>
                 {% if order.payment %}
-                    <span class="label label-important">{{ order.payment.balance }}</span>
+                    <span class="label label-danger">{{ order.payment.state }}</span>
                 {% endif %}
             </td>
             <td>
                 <span class="label label-warning">{{ order.state }}</span>
             </td>
-            <td><a href="mailto:{{ order.user.email|default('john@example.com') }}" class="btn btn-link">{{ order.user.email|default('john@example.com') }}</a></td>
+            <td><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="btn btn-link">{{ order.user.email }}</a></td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
                 <div class="pull-right">

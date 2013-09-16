@@ -23,9 +23,9 @@
                 <strong>{{ payment_method.name }}</strong>
                 <p>{{ payment_method.description }}</p>
             </td>
-            <td><span class="label label-info">{{ payment_method.gateway }}</span></td>
+            <td><span class="label label-primary">{{ payment_method.gateway }}</span></td>
             <td>
-                <span class="label label-{{ payment_method.enabled ? 'success' : 'important'}}">
+                <span class="label label-{{ payment_method.enabled ? 'success' : 'danger'}}">
                     {{ payment_method.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                 </span>
             </td>

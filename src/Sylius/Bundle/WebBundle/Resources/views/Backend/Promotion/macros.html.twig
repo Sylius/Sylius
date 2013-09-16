@@ -28,7 +28,7 @@
                     <p>{{ promotion.description }}</p>
                 </td>
                 <td>
-                    <span class="label label-{{ promotion.couponBased ? 'success' : 'important'}}">
+                    <span class="label label-{{ promotion.couponBased ? 'success' : 'danger'}}">
                         {{ promotion.couponBased ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                     </span>
                 </td>
@@ -38,7 +38,7 @@
                     </span>
                 </td>
                 <td>
-                    <span class="label label-{{ promotion.used < promotion.usageLimit|default(1) ? 'success' : 'important'}}">
+                    <span class="label label-{{ promotion.used < promotion.usageLimit|default(1) ? 'success' : 'danger'}}">
                         {{ promotion.used }}
                     </span>
                 </td>
@@ -63,9 +63,10 @@
 
 {% macro configuration(configuration) %}
 
+<ul>
 {% for key, value in configuration %}
-    <strong>{{ key|capitalize|replace('_', ' ') }}</strong>: {{ value }}
-    {% if not loop.last %}<hr>{% endif %}
+    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
 {% endfor %}
+</ul>
 
 {% endmacro %}

@@ -1,0 +1,11 @@
+<div id="flashes">
+{% for type in ['success', 'error', 'info', 'warning'] %}
+    {% for message in app.session.flashbag.get(type) %}
+        {% set type = type == 'warning' ? 'block' : type %}
+        <div class="alert alert-{{ type }}">
+            {{ message }}
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>

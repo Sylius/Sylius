@@ -4,8 +4,7 @@
     {{ form_row(form.shortDescription, {'attr': {'class': 'input-xxlarge', 'rows': 3}}) }}
     <hr />
     {{ form_label(form.masterVariant.availableOn) }}
-    {{ form_row(form.masterVariant.availableOn.date, {'label': false}) }}
-    {{ form_row(form.masterVariant.availableOn.time, {'label': false}) }}
+    {{ form_widget(form.masterVariant.availableOn, {'label': false}) }}
     {{ form_row(form.masterVariant.availableOnDemand) }}
     {{ form_row(form.masterVariant.price) }}
     {{ form_row(form.masterVariant.onHand) }}

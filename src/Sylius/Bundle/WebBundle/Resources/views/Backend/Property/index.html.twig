@@ -1,28 +1,20 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Property:macros.html.twig' as macros %}
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Property:macros.html.twig' import list %}
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.property.index_header'|trans|raw }}</h1>
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_property_create'), 'sylius.property.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_option_index'), 'sylius.option.manage'|trans) }}
+    </div>
+    <h1><i class="icon-cog"></i> {{ 'sylius.property.index_header'|trans|raw }}</h1>
 </div>
 
-<div class="well">
-    <a href="{{ path('sylius_backend_property_create') }}" class="btn btn-primary">
-        <i class="icon-plus-sign"></i> {{ 'sylius.property.create'|trans }}
-    </a>
-    <a href="{{ path('sylius_backend_option_index') }}" class="btn btn-success">
-        <i class="icon-adjust"></i> {{ 'sylius.option.manage'|trans }}
-    </a>
-</div>
+{{ pagination(properties) }}
+{{ list(properties) }}
+{{ pagination(properties) }}
 
-{% if properties.haveToPaginate() %}
-    {{ pagerfanta(properties, 'twitter_bootstrap_translated') }}
-{% endif %}
-
-{{ macros.list(properties) }}
-
-{% if properties.haveToPaginate() %}
-    {{ pagerfanta(properties, 'twitter_bootstrap_translated') }}
-{% endif %}
 {% endblock %}

@@ -6,14 +6,14 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.promotion.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well">
-    {{ buttons.create(path('sylius_backend_promotion_create'), 'sylius.promotion.create'|trans) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_promotion_create'), 'sylius.promotion.create'|trans) }}
+    </div>
+    <h1><i class="icon-bullhorn"></i> {{ 'sylius.promotion.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(promotions) }}
 {{ list(promotions) }}
 {{ pagination(promotions) }}
+
 {% endblock %}

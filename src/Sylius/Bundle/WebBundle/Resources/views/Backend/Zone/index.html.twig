@@ -6,11 +6,11 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.zone.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well well-small">
-    {{ buttons.create(path('sylius_backend_zone_create'), 'sylius.zone.create'|trans) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_zone_create'), 'sylius.zone.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
+    </div>
+    <h1><i class="icon-globe"></i> {{ 'sylius.zone.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(zones) }}

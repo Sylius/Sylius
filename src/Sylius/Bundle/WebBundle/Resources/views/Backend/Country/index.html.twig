@@ -6,11 +6,11 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.country.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well">
-    {{ buttons.create(path('sylius_backend_country_create'), 'sylius.country.create'|trans) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_country_create'), 'sylius.country.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_zone_index'), 'sylius.zone.manage'|trans) }}
+    </div>
+    <h1><i class="icon-flag"></i> {{ 'sylius.country.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(countries) }}

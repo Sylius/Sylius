@@ -4,50 +4,43 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if products|length > 0 %}
-<table class="table table-hover">
+<table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
             <th></th>
             <th>{{ 'sylius.product.sku'|trans }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
             <th>{{ 'sylius.product.price'|trans }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.product.updated_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
     {% for product in products %}
         <tr>
+            <td class="center-text"><input type="checkbox" /></td>
             <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
-                    {{ product.id }}
-                </a>
-            </td>
-            <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="thumbnail thumbnail-image">
-                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" />
-                </a>
-            </td>
-            <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
-                    {{ product.sku|default('sylius.product.no_sku'|trans)|raw }}
-                </a>
+                {{ product.id }}
             </td>
             <td>
                 <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
+                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" class="img-rounded" />
+                </a>
+            </td>
+            <td>{{ product.sku|default('sylius.product.no_sku'|trans)|raw }}</td>
+            <td>
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
                     <strong>{{ product.name }}</strong>
                 </a>
-                <p>{{ product.shortDescription|truncate(50) }}</p>
             </td>
             <td>
                 {% if not product.hasOptions %}
-                    <span class="label label-success">{{ product.masterVariant.price|sylius_money }}</span>
+                    {{ product.masterVariant.price|sylius_money }}
                 {% else %}
                     ---
                 {% endif %}
             </td>
-            <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
             <td>
                 <div class="pull-right">
                 {{ buttons.show(path('sylius_backend_product_show', {'id': product.id})) }}

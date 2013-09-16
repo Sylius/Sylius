@@ -7,11 +7,7 @@
             <div id="property-prototype_{{ key }}" class="property-prototypes" data-prototype="{{ form_widget(prototype, {'attr': {'class': 'input-xlarge'}})|e }}"></div>
         {% endfor %}
     </div>
-    <div class="control-group">
-        <div class="controls">
-            <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius-assortment-product-properties" data-collection="sylius-assortment-product-properties">
-                {{ 'sylius.product.add_property'|trans }}
-            </a>
-        </div>
-    </div>
+    <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius-assortment-product-properties" data-collection="sylius-assortment-product-properties">
+        {{ 'sylius.product.add_property'|trans }}
+    </a>
 </div>

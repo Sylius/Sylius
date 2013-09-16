@@ -5,95 +5,123 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.promotion.show_header'|trans|raw }}</h1>
-</div>
-
-<div class="well">
-    {{ buttons.manage(path('sylius_backend_promotion_index'), 'sylius.promotion.manage'|trans) }}
-    {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
-    {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_promotion_index'), 'sylius.promotion.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
+        {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
     {% if promotion.couponBased %}
-    {{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
-    {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotion.id}), 'sylius.promotion_coupon.generate'|trans) }}
+        {{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
+        {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotion.id}), 'sylius.promotion_coupon.generate'|trans) }}
     {% endif %}
+    </div>
+    <h1><i class="icon-info-sign"></i> {{ 'sylius.promotion.show_header'|trans|raw }}</h1>
 </div>
 
-<table class="table table-bordered table-consensed">
-    <thead>
-        <tr>
-            <th>{{ 'sylius.promotion.name'|trans }}</th>
-            <th>{{ 'sylius.promotion.description'|trans }}</th>
-            <th>{{ 'sylius.promotion.usage_limit'|trans }}</th>
-            <th>{{ 'sylius.promotion.used'|trans }}</th>
-            <th>{{ 'sylius.promotion.starts_at'|trans }}</th>
-            <th>{{ 'sylius.promotion.ends_at'|trans }}</th>
-            <th>{{ 'sylius.promotion.created_at'|trans }}</th>
-            <th>{{ 'sylius.promotion.updated_at'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ promotion.name }}</td>
-            <td>{{ promotion.description }}</td>
-            <td>{{ promotion.usageLimit }}</td>
-            <td>{{ promotion.used }}</td>
-            <td>{{ promotion.startsAt is empty ? '' : promotion.startsAt|date }}</td>
-            <td>{{ promotion.endsAt is empty ? '' : promotion.endsAt|date }}</td>
-            <td>{{ promotion.createdAt|date }}</td>
-            <td>{{ promotion.updatedAt|date }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.promotion.general_info'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.id'|trans }}</strong></td>
+                    <td>{{ promotion.id }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.name'|trans }}</strong></td>
+                    <td>{{ promotion.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.coupon_based'|trans }}</strong></td>
+                    <td>{{ promotion.couponBased ? 'sylius.yes'|trans : 'sylius.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.starts_at'|trans }}</strong></td>
+                    <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.ends_at'|trans }}</strong></td>
+                    <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.usage_limit'|trans }}</strong></td>
+                    <td>
+                        <span class="label label-info">
+                            {{ promotion.usageLimit|default('sylius.no'|trans) }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.promotion.used'|trans }}</strong></td>
+                    <td>
+                        <span class="label label-{{ promotion.used < promotion.usageLimit|default(1) ? 'success' : 'danger'}}">
+                            {{ promotion.used }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-{% if promotion.hasRules %}
-<h3>{{ 'sylius.promotion.rules'|trans }}</h3>
-<table id="rules" class="table table-bordered table-consensed">
-    <thead>
-        <tr>
-            <th>{{ 'sylius.promotion_rule.type'|trans }}</th>
-            <th>{{ 'sylius.promotion_rule.configuration'|trans }}</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for rule in promotion.rules %}
-            <tr>
-                <td><span class="label label-info">{{ rule.type|capitalize|replace('_', ' ') }}</span></td>
-                <td>{{ configuration(rule.configuration) }}</td>
-                <td>
-                    <div class="btn-group pull-right">
-                        {{ buttons.delete(path('sylius_backend_promotion_rule_delete', {'id': rule.id})) }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endif %}
-{% if promotion.hasActions %}
-<h3>{{ 'sylius.promotion.actions'|trans }}</h3>
-<table id="actions" class="table table-bordered table-consensed">
-    <thead>
-        <tr>
-            <th>{{ 'sylius.promotion_action.type'|trans }}</th>
-            <th>{{ 'sylius.promotion_action.configuration'|trans }}</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for action in promotion.actions %}
-            <tr>
-                <td><span class="label label-info">{{ action.type|capitalize|replace('_', ' ') }}</span></td>
-                <td>{{ configuration(action.configuration) }}</td>
-                <td>
-                    <div class="btn-group pull-right">
-                        {{ buttons.delete(path('sylius_backend_promotion_action_delete', {'id': action.id})) }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endif %}
+<div class="row">
+    <div class="col-md-6">
+        {% if promotion.hasRules %}
+        <h4>{{ 'sylius.promotion.rules'|trans }}</h4>
+        <table id="rules" class="table table-consensed">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.promotion_rule.type'|trans }}</th>
+                    <th>{{ 'sylius.promotion_rule.configuration'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rule in promotion.rules %}
+                    <tr>
+                        <td><span class="label label-info">{{ rule.type|capitalize|replace('_', ' ') }}</span></td>
+                        <td>{{ configuration(rule.configuration) }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                {{ buttons.delete(path('sylius_backend_promotion_rule_delete', {'id': rule.id})) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        {% if promotion.hasActions %}
+        <h4>{{ 'sylius.promotion.actions'|trans }}</h4>
+        <table id="actions" class="table table-consensed">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.promotion_action.type'|trans }}</th>
+                    <th>{{ 'sylius.promotion_action.configuration'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for action in promotion.actions %}
+                    <tr>
+                        <td><span class="label label-info">{{ action.type|capitalize|replace('_', ' ') }}</span></td>
+                        <td>{{ configuration(action.configuration) }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                {{ buttons.delete(path('sylius_backend_promotion_action_delete', {'id': action.id})) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

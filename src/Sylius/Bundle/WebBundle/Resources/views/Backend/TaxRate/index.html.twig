@@ -6,15 +6,16 @@
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.tax_rate.index_header'|trans|raw }}</h1>
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_tax_rate_create'), 'sylius.tax_rate.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_tax_category_index'), 'sylius.tax_category.manage'|trans) }}
+    </div>
+    <h1>{{ 'sylius.tax_rate.index_header'|trans|raw }}</h1>
 </div>
 
-<div class="well well-small">
-    {{ buttons.create(path('sylius_backend_tax_rate_create'), 'sylius.tax_rate.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_tax_category_index'), 'sylius.tax_category.manage'|trans) }}
-</div>
 
 {{ pagination(tax_rates) }}
 {{ list(tax_rates) }}
 {{ pagination(tax_rates) }}
+
 {% endblock %}

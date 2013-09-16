@@ -8,17 +8,22 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.promotion.index_header'|trans|raw }}</h1>
+    <h1><i class="icon-ticket"></i> {{ 'sylius.promotion_coupon.index_header'|trans|raw }}</h1>
 </div>
 
-<div class="well">
-    {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.show'|trans) }}
-    {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotionId}), 'sylius.promotion_coupon.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotionId}), 'sylius.promotion_coupon.generate'|trans) }}
+<div class="row">
+    <div class="col-md-10">
+        {{ pagination(promotion_coupons) }}
+        {{ list(promotion_coupons) }}
+        {{ pagination(promotion_coupons) }}
+    </div>
+    <div class="col-md-2">
+        <div class="actions-menu">
+        {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.show'|trans) }}
+        {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotionId}), 'sylius.promotion_coupon.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotionId}), 'sylius.promotion_coupon.generate'|trans) }}
+        </div>
+    </div>
 </div>
-
-{{ pagination(promotion_coupons) }}
-{{ list(promotion_coupons) }}
-{{ pagination(promotion_coupons) }}
 
 {% endblock %}
