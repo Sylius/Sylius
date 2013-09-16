@@ -10,12 +10,13 @@ matrix:
         - php: 5.5
 
 before_script:
-    - "ulimit -n 10000"
+    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - ulimit -n 10000
     - sudo apt-get update
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-mysql php5-curl wkhtmltopdf
-    #- sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
     - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
-    #- sudo /etc/init.d/apache2 restart
+    - sudo /etc/init.d/apache2 restart
     - composer self-update
     - composer install --dev --prefer-source --no-interaction > /dev/null
     - app/console doctrine:database:create --env=test > /dev/null
@@ -23,31 +24,14 @@ before_script:
     - chmod -R 777 app/cache app/logs
     - app/console cache:warmup --env=test > /dev/null
     - chmod -R 777 app/cache app/logs
-    - app/console server:run
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
     - java -jar selenium-server-standalone-2.35.0.jar > /dev/null &
-    - sleep 10
+    - sleep 5
 
 script:
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@cart'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@taxation'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@shipping'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@addressing'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@promotions'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@inventory'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@taxonomies'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@settings'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@payments'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@currencies'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@account'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@checkout'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@homepage'
-    - php -d memory_limit=4096M bin/behat --no-snippets --no-paths --verbose --tags '@products'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@users'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@dashboard'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@orders'
+    - php -d memory_limit=4096M bin/behat --no-snippets --no-paths --verbose --tags '~@javascript'
     - cd src/Sylius/Bundle/AddressingBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../CartBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../InventoryBundle; ../../../../bin/phpspec run -fpretty --verbose
