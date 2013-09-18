@@ -40,7 +40,7 @@
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*",
         "knplabs/knp-snappy-bundle":      "dev-master",
-        "fzaninotto/faker":               "1.2.*"
+        "fzaninotto/faker":               "1.2.*",
         "athari/yalinqo":                 "*",
         "omnipay/omnipay":                "dev-master"
     },
