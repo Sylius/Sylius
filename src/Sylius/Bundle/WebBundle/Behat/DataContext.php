@@ -842,6 +842,21 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^the default tax zone is "([^""]*)"$/
+     */
+    public function theDefaultTaxZoneIs($zone)
+    {
+        $settingsManager = $this->getService('sylius.settings.manager');
+
+        $settings = $settingsManager->loadSettings('taxation');
+        $zone = $this->findOneByName('zone', $zone);
+
+        $settings->set('default_tax_zone', $zone);
+
+        $settingsManager->saveSettings('taxation', $settings);
+    }
+
+    /**
      * @Given /^there is province "([^"]*)"$/
      */
     public function thereisProvince($name)
