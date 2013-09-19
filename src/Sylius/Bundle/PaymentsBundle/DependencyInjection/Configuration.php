@@ -37,7 +37,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
                 ->arrayNode('gateways')
                     ->prototype('scalar')
                 ->end()
@@ -45,6 +44,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -58,23 +58,6 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('payment_method')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('payment')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('credit_card')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
                 ->arrayNode('classes')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -96,13 +79,12 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentsBundle\\Form\\Type\\PaymentType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('transaction')
+                        ->arrayNode('payment_log')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PaymentsBundle\Model\Transaction')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PaymentsBundle\Model\PaymentLog')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentsBundle\\Form\\Type\\PaymentType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('credit_card')
@@ -114,11 +96,35 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentsBundle\\Form\\Type\\CreditCardType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('credit_card_owner')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->isRequired()->end()
-                            ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `validation_groups` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('payment_method')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('payment')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('credit_card')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
                         ->end()
                     ->end()
                 ->end()

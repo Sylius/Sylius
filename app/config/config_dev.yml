@@ -7,7 +7,7 @@ framework:
 
 web_profiler:
     toolbar: true
-    intercept_redirects: true
+    intercept_redirects: false
 
 monolog:
     handlers:

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -23,7 +24,7 @@ class PaymentSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Model\Payment');
     }
 
-    function it_implements_Sylius_payment_instruction_interface()
+    function it_implements_Sylius_payment_interface()
     {
         $this->shouldImplement('Sylius\Bundle\PaymentsBundle\Model\PaymentInterface');
     }
@@ -41,7 +42,7 @@ class PaymentSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface $method
      */
-    function its_method_is_mutable($method)
+    function its_payment_method_is_mutable($method)
     {
       $this->setMethod($method);
       $this->getMethod()->shouldReturn($method);
@@ -93,58 +94,40 @@ class PaymentSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(4999);
     }
 
-    /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\TransactionInterface $transactionA
-     * @param Sylius\Bundle\PaymentsBundle\Model\TransactionInterface $transactionB
-     */
-    function it_calculates_balance_by_subtracting_transacttions_total_from_amount($transactionA, $transactionB)
+    function it_has_pending_state_by_default()
     {
-        $transactionA->getAmount()->willReturn(5000);
-        $transactionB->getAmount()->willReturn(2500);
-
-        $transactionA->setPayment($this)->shouldBeCalled();
-        $transactionB->setPayment($this)->shouldBeCalled();
-
-        $this->addTransaction($transactionA);
-        $this->addTransaction($transactionB);
-
-        $this->setAmount(7500);
-        $this->getBalance()->shouldReturn(0);
-
-        $this->setAmount(10000);
-        $this->getBalance()->shouldReturn(2500);
+        $this->getState()->shouldReturn(PaymentInterface::STATE_PENDING);
     }
 
-    function it_initializes_transaction_collection_by_default()
+    function its_state_is_mutable()
     {
-        $this->getTransactions()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->setState(PaymentInterface::STATE_COMPLETED);
+        $this->getState()->shouldReturn(PaymentInterface::STATE_COMPLETED);
+    }
+
+    function it_initializes_log_collection_by_default()
+    {
+        $this->getLogs()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
     /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\TransactionInterface $transaction
+     * @param Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface $log
      */
-    function it_adds_transactions($transaction)
+    function it_adds_logs($log)
     {
-        $this->hasTransaction($transaction)->shouldReturn(false);
-
-        $transaction->setPayment($this)->shouldBeCalled();
-        $this->addTransaction($transaction);
-
-        $this->hasTransaction($transaction)->shouldReturn(true);
+        $this->hasLog($log)->shouldReturn(false);
+        $this->addLog($log);
+        $this->hasLog($log)->shouldReturn(true);
     }
 
     /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\TransactionInterface $transaction
+     * @param Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface $log
      */
-    function it_removes_transactions($transaction)
+    function it_removes_logs($log)
     {
-        $transaction->setPayment($this)->shouldBeCalled();
-        $this->addTransaction($transaction);
-
-        $transaction->setPayment(null)->shouldBeCalled();
-        $this->removeTransaction($transaction);
-
-        $this->hasTransaction($transaction)->shouldReturn(false);
+        $this->addLog($log);
+        $this->removeLog($log);
+        $this->hasLog($log)->shouldReturn(false);
     }
 
     function it_initializes_creation_date_by_default()
@@ -152,8 +135,24 @@ class PaymentSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
+    function its_creation_date_is_mutable()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
+
     function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function its_last_update_date_is_mutable()
+    {
+        $date = new \DateTime('last year');
+
+        $this->setUpdatedAt($date);
+        $this->getUpdatedAt()->shouldReturn($date);
     }
 }

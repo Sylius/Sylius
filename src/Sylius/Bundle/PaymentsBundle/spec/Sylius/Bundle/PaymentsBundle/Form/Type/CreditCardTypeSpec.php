@@ -76,7 +76,7 @@ class CreditCardTypeSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function it_defines_assigned_data_class($resolver)
+    public function it_defines_assigned_data_class_and_validation_groups($resolver)
     {
         $resolver
             ->setDefaults(array(
