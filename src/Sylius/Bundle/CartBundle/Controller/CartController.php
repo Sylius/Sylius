@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -66,6 +67,8 @@ class CartController extends Controller
         if ($form->bind($request)->isValid()) {
             $event = new CartEvent($cart);
             $event->isFresh(true);
+
+            $this->dispatchEvent(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
             // Update models
             $this->dispatchEvent(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
