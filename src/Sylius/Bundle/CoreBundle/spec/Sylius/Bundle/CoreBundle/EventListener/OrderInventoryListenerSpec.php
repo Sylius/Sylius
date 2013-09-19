@@ -61,11 +61,11 @@ class OrderInventoryListenerSpec extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
      */
-    function it_processes_inventory_units_on_order_change_event($inventoryHandler, $event, $order)
+    function it_processes_inventory_units_on_cart_change_event($inventoryHandler, $event, $order)
     {
         $event->getSubject()->willReturn($order);
         $inventoryHandler->processInventoryUnits($order)->shouldBeCalled();
 
-        $this->onOrderChange($event);
+        $this->onCartChange($event);
     }
 }

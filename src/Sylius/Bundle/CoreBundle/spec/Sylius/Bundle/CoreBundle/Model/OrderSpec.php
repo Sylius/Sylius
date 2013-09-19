@@ -136,10 +136,12 @@ class OrderSpec extends ObjectBehavior
         $this->hasShipment($shipment)->shouldReturn(false);
     }
 
+    /*
     function it_should_not_have_currency_defined_by_default()
     {
         $this->getCurrency()->shouldReturn(null);
     }
+    */
 
     function it_should_allow_defining_currency()
     {
