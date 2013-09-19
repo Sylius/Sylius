@@ -9,7 +9,15 @@ matrix:
     allow_failures:
         - php: 5.5
 
+env: MONGO_VERSION=1.3.4
+services: mongodb
+
 before_script:
+    - wget http://pecl.php.net/get/mongo-1.2.10.tgz
+    - tar -xzf mongo-1.2.10.tgz
+    - sh -c "cd mongo-1.2.10 && phpize && ./configure && sudo make install"
+    - echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - ulimit -n 10000
     - sudo apt-get update
@@ -18,7 +26,7 @@ before_script:
     - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
     - sudo /etc/init.d/apache2 restart
     - composer self-update
-    - composer install --dev --prefer-source --no-interaction > /dev/null
+    - composer install --dev --prefer-source --no-interaction
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
     - chmod -R 777 app/cache app/logs
