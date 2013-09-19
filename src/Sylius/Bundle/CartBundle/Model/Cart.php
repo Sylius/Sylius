@@ -42,6 +42,14 @@ class Cart extends Order implements CartInterface
     /**
      * {@inheritdoc}
      */
+    public function getIdentifier()
+    {
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isExpired()
     {
         return $this->getExpiresAt() < new \DateTime('now');

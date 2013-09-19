@@ -49,7 +49,7 @@ class SessionCartStorageSpec extends ObjectBehavior
      */
     function it_sets_cart_identifier_via_session($session, $cart)
     {
-        $cart->getId()->willReturn(3);
+        $cart->getIdentifier()->willReturn(3);
         $session->set(SessionCartStorageClass::KEY, 3)->shouldBeCalled();
 
         $this->setCurrentCartIdentifier($cart);
