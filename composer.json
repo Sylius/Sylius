@@ -53,7 +53,8 @@
         "behat/mink-extension":         "*",
         "behat/mink-browserkit-driver": "*",
         "phpspec/phpspec":              "2.0.*@dev",
-        "behat/mink-selenium2-driver":  "*"
+        "behat/mink-selenium2-driver":  "*",
+        "doctrine/mongodb-odm":         "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
