@@ -16,13 +16,6 @@ First, you need to enable the bundle inside the kernel.
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
-If you're not using `FOSRestBundle`, then you also have to select a serializer component.
-We recommend `JMSSerializerBundle`, you can include it in your `composer.json` by executing the following command.
-
-.. code-block:: bash
-
-    $ composer require jms/serializer-bundle:0.11.*
-
 .. code-block:: php
 
     <?php
