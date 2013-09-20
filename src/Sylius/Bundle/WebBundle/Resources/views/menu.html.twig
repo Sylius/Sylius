@@ -2,6 +2,8 @@
 
 {% block label %}
     {% if item.labelAttribute('icon') %}<i class="{{ item.labelAttribute('icon') }}"></i>{% endif %}
-    {% if not item.labelAttribute('iconOnly') %}{{ item.label|trans }}{% endif %}
+    {% if not item.labelAttribute('iconOnly') %}
+        {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|trans|raw }}{% else %}{{ item.label|trans }}{% endif %}
+    {% endif %}
     {% if item.labelAttribute('data-image') %}<img src="{{ item.labelAttribute('data-image')|imagine_filter('sylius_16x16', true) }}" alt="{{ item.name }}" class="menu-thumbnail"/>{% endif %}
 {% endblock %}
