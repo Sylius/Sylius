@@ -63,7 +63,18 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('Pay by check.');
     }
 
-    function it_does_not_require_app_environment_by_default()
+    function it_has_no_gateway_by_default()
+    {
+        $this->getGateway()->shouldReturn(null);
+    }
+
+    function its_gateway_is_mutable()
+    {
+        $this->setGateway('paypal');
+        $this->getGateway()->shouldReturn('paypal');
+    }
+
+    function it_has_no_app_environment_by_default()
     {
         $this->getEnvironment()->shouldReturn(null);
     }
@@ -72,17 +83,6 @@ class PaymentMethodSpec extends ObjectBehavior
     {
         $this->setEnvironment('dev');
         $this->getEnvironment()->shouldReturn('dev');
-    }
-
-    function it_has_no_gateway_by_default()
-    {
-        $this->getGateway()->shouldReturn(null);
-    }
-
-    function its_gateway_is_mutable()
-    {
-        $this->setGateway('dev');
-        $this->getGateway()->shouldReturn('dev');
     }
 
     function it_is_enabled_by_default()

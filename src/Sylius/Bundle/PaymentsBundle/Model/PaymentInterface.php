@@ -11,19 +11,22 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Single payment interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface PaymentInterface
+interface PaymentInterface extends TimestampableInterface
 {
-    /**
-     * Get payments identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
+    // Payment states.
+    const STATE_CHECKOUT   = 'checkout';
+    const STATE_PROCESSING = 'processing';
+    const STATE_PENDING    = 'pending';
+    const STATE_FAILED     = 'failed';
+    const STATE_VOID       = 'void';
+    const STATE_COMPLETED  = 'completed';
 
     /**
      * Get payment method associated with this payment.
@@ -54,6 +57,20 @@ interface PaymentInterface
     public function setSource(PaymentSourceInterface $source = null);
 
     /**
+     * Get state.
+     *
+     * @return string
+     */
+    public function getState();
+
+    /**
+     * Set state.
+     *
+     * @param string $state
+     */
+    public function setState($state);
+
+    /**
      * Get payment currency.
      *
      * @return string
@@ -82,51 +99,32 @@ interface PaymentInterface
     public function setAmount($amount);
 
     /**
-     * Return the balance.
-     *
-     * @return integer
-     */
-    public function getBalance();
-
-    /**
-     * Get all transactions for this payment.
+     * Get processing logs.
      *
      * @return Collection
      */
-    public function getTransactions();
+    public function getLogs();
 
     /**
-     * Add transaction to payment.
+     * Has given log already?
      *
-     * @param TransactionInterface
-     */
-    public function addTransaction(TransactionInterface $transaction);
-
-    /**
-     * Remove transaction from payment.
-     *
-     * @param TransactionInterface
-     */
-    public function removeTransaction(TransactionInterface $transaction);
-
-    /**
-     * Has transaction?
+     * @param PaymentLogInterface $log
      *
      * @return Boolean
      */
-    public function hasTransaction(TransactionInterface $transaction);
+    public function hasLog(PaymentLogInterface $log);
 
     /**
-     * Get creation time.
+     * Add payment processing log.
      *
-     * @return DateTime
+     * @param PaymentLogInterface $log
      */
-    public function getCreatedAt();
+    public function addLog(PaymentLogInterface $log);
 
     /**
-     * Get last update time.
+     * Remove payment processing log.
      *
-     * @return DateTime
+     * @param PaymentLogInterface $log
      */
-    public function getUpdatedAt();
+    public function removeLog(PaymentLogInterface $log);
 }

@@ -232,7 +232,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $order->calculateTotal();
         $order->complete();
 
-        $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+        $this->getService('event_dispatcher')->dispatch('sylius.cart_change', new GenericEvent($order));
 
         $manager->persist($order);
         $manager->flush();
@@ -839,6 +839,21 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $manager->flush();
 
         return $zone;
+    }
+
+    /**
+     * @Given /^the default tax zone is "([^""]*)"$/
+     */
+    public function theDefaultTaxZoneIs($zone)
+    {
+        $settingsManager = $this->getService('sylius.settings.manager');
+
+        $settings = $settingsManager->loadSettings('taxation');
+        $zone = $this->findOneByName('zone', $zone);
+
+        $settings->set('default_tax_zone', $zone);
+
+        $settingsManager->saveSettings('taxation', $settings);
     }
 
     /**

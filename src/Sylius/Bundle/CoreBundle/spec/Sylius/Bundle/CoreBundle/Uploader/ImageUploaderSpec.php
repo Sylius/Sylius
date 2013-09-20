@@ -12,9 +12,10 @@
 namespace spec\Sylius\Bundle\CoreBundle\Uploader;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ImageUploader extends ObjectBehavior
+class ImageUploaderSpec extends ObjectBehavior
 {
     /**
      * @param Gaufrette\Filesystem                           $filesystem
@@ -22,10 +23,9 @@ class ImageUploader extends ObjectBehavior
      */
     function let($filesystem, $image)
     {
-        $filesystem->has(ANY_ARGUMENT)->willReturn(false);
+        $filesystem->has(Argument::any())->willReturn(false);
 
         $file = new \Symfony\Component\HttpFoundation\File\File(__FILE__, 'img.jpg');
-        $image->getId()->willReturn(null);
         $image->getFile()->willReturn($file);
 
         $this->beConstructedWith($filesystem);
@@ -43,18 +43,14 @@ class ImageUploader extends ObjectBehavior
 
     function it_uploads_image($filesystem, $image)
     {
-        $filesystem->write(ANY_ARGUMENT, ANY_ARGUMENT)->shouldBeCalled();
+        $image->hasFile()->willReturn(true);
+        $image->getPath()->willReturn('foo.jpg');
+
+        $filesystem->delete(Argument::any())->shouldBeCalled();
+        $filesystem->write(Argument::any(), Argument::any())->shouldBeCalled();
+
+        $image->setPath(Argument::any())->shouldBeCalled();
 
         $this->upload($image);
-    }
-
-    function it_throws_exception_if_there_is_no_file_attached($image)
-    {
-        $image->hasFile()->willReturn(false);
-
-        $this
-            ->shouldThrow('InvalidArgumentException')
-            ->duringUpload($image)
-        ;
     }
 }

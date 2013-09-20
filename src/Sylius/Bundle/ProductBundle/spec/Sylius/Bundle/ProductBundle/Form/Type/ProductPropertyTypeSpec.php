@@ -21,7 +21,7 @@ class ProductPropertyTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ProductProperty');
+        $this->beConstructedWith('ProductProperty', array('sylius'));
     }
 
     function it_is_initializable()
@@ -85,7 +85,7 @@ class ProductPropertyTypeSpec extends ObjectBehavior
      */
     function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'ProductProperty'))->shouldBeCalled();
+        $resolver->setDefaults(array('data_class' => 'ProductProperty', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

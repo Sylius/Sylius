@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
 /**
- * Payment transaction model.
+ * Payment log model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Transaction implements TransactionInterface
+class PaymentLog implements PaymentLogInterface
 {
     /**
-     * Payments method identifier.
+     * Payments log identifier.
      *
      * @var mixed
      */
@@ -28,16 +28,16 @@ class Transaction implements TransactionInterface
     /**
      * Payment.
      *
-     * @var PaymentInterface
+     * @var PaymentMethodInterface
      */
     protected $payment;
 
     /**
-     * Amount.
+     * Message.
      *
      * @var string
      */
-    protected $amount;
+    protected $message;
 
     /**
      * Creation date.
@@ -58,7 +58,6 @@ class Transaction implements TransactionInterface
      */
     public function __construct()
     {
-        $this->amount = 0;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -70,37 +69,40 @@ class Transaction implements TransactionInterface
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPayment()
     {
       return $this->payment;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setPayment(PaymentInterface $payment = null)
     {
-      $this->payment = $payment;
+        $this->payment = $payment;
 
-      return $this;
+        return $this;
     }
 
-    public function getAmount()
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessage()
     {
-      return $this->amount;
+        return $this->message;
     }
 
-    public function setAmount($amount)
+    /**
+     * {@inheritdoc}
+     */
+    public function setMessage($message)
     {
-      $this->amount = $amount;
+        $this->message = $message;
 
-      return $this;
-    }
-
-    public function getCurrency()
-    {
-      if (null === $this->payment) {
-        throw new \BadMethodCallException('Cannot get transaction currency without payment assigned.');
-      }
-
-      return $this->payment->getCurrency();
+        return $this;
     }
 
     /**
@@ -114,9 +116,28 @@ class Transaction implements TransactionInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }

@@ -16,20 +16,19 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class OrderShippingListenerSpec extends ObjectBehavior
+class OrderInventoryListenerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface          $shipmentFactory
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface $shippingProcessor
+     * @param Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface $inventoryHandler
      */
-    function let($shipmentFactory, $shippingProcessor)
+    function let($inventoryHandler)
     {
-        $this->beConstructedWith($shipmentFactory, $shippingProcessor);
+        $this->beConstructedWith($inventoryHandler);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener');
     }
 
     /**
@@ -42,7 +41,7 @@ class OrderShippingListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringProcessOrderShippingCharges($event)
+            ->duringOnOrderPreComplete($event)
         ;
     }
 
@@ -50,11 +49,23 @@ class OrderShippingListenerSpec extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
      */
-    function it_calls_shipping_processor_on_order($shippingProcessor, $event, $order)
+    function it_updates_inventory_on_order_pre_complete_event($inventoryHandler, $event, $order)
     {
         $event->getSubject()->willReturn($order);
-        $shippingProcessor->applyShippingCharges($order)->shouldBeCalled();
+        $inventoryHandler->updateInventory($order)->shouldBeCalled();
 
-        $this->processOrderShippingCharges($event);
+        $this->onOrderPreComplete($event);
+    }
+
+    /**
+     * @param Symfony\Component\EventDispatcher\GenericEvent $event
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
+     */
+    function it_processes_inventory_units_on_cart_change_event($inventoryHandler, $event, $order)
+    {
+        $event->getSubject()->willReturn($order);
+        $inventoryHandler->processInventoryUnits($order)->shouldBeCalled();
+
+        $this->onCartChange($event);
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -67,6 +68,7 @@ class CartItemController extends Controller
 
         // Update models
         $this->dispatchEvent(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);
+        $this->dispatchEvent(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
         $this->dispatchEvent(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
 
         // Write flash message
@@ -103,6 +105,7 @@ class CartItemController extends Controller
 
         // Update models
         $this->dispatchEvent(SyliusCartEvents::ITEM_REMOVE_INITIALIZE, $event);
+        $this->dispatchEvent(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
         $this->dispatchEvent(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
 
         // Write flash message

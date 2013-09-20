@@ -21,17 +21,19 @@
         <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
 
-        <parameter key="sylius.order_processing.inventory_units_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryUnitsFactory</parameter>
+        <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandler</parameter>
         <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
         <parameter key="sylius.order_processing.payment_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessor</parameter>
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessor</parameter>
 
-        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
-        <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
-        <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
-        <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
+        <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
+        <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
+        <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
+        <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
+        <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
+        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
 
         <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
@@ -132,8 +134,9 @@
         </service>
 
         <!-- order processing -->
-        <service id="sylius.order_processing.inventory_units_factory" class="%sylius.order_processing.inventory_units_factory.class%">
+        <service id="sylius.order_processing.inventory_handler" class="%sylius.order_processing.inventory_handler.class%">
             <argument type="service" id="sylius.inventory_operator" />
+            <argument type="service" id="sylius.inventory_unit_factory" />
         </service>
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
             <argument type="service" id="sylius.repository.shipment" />
@@ -167,15 +170,25 @@
             <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
             <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
         </service>
+        <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
+            <argument type="service" id="sylius.order_processing.inventory_handler" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="onOrderPreComplete" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
+        </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderTaxation" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderTaxation" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="onCartChange" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
+            <argument type="service" id="sylius.order_processing.shipment_factory" />
             <argument type="service" id="sylius.order_processing.shipping_processor" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderShippingCharges" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderShippingCharges" />
+            <tag name="kernel.event_listener" event="sylius.checkout.shipping.initialize" method="processOrderShipments" />
+            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderShippingCharges" />
+        </service>
+        <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
+            <argument type="service" id="sylius.order_processing.payment_processor" />
+            <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="processOrderPayment" />
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />

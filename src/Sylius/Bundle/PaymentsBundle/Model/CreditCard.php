@@ -40,13 +40,6 @@ class CreditCard implements CreditCardInterface
     protected $type;
 
     /**
-     * Owner.
-     *
-     * @var CreditCardOwnerInterface
-     */
-    protected $owner;
-
-    /**
      * Cardholder name.
      *
      * @var string
@@ -158,24 +151,6 @@ class CreditCard implements CreditCardInterface
     /**
      * {@inheritdoc}
      */
-    public function getOwner()
-    {
-      return $this->owner;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOwner(CreditCardOwnerInterface $owner)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCardholderName()
     {
         return $this->cardholderName;
@@ -279,8 +254,28 @@ class CreditCard implements CreditCardInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

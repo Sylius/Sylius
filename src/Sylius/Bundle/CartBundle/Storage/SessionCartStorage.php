@@ -62,7 +62,7 @@ class SessionCartStorage implements CartStorageInterface
      */
     public function setCurrentCartIdentifier(CartInterface $cart)
     {
-        $this->session->set($this->key, $cart->getId());
+        $this->session->set($this->key, $cart->getIdentifier());
     }
 
     /**

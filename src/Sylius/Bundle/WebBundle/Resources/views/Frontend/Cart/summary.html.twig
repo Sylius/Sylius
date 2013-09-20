@@ -10,10 +10,6 @@
 </div>
 
 {% if not cart.empty %}
-<div class="alert alert-info">
-<strong>{{ cart.total|sylius_price }}</strong>, {{ 'sylius.cart.total_items'|transchoice(cart.totalItems, {'%count%': cart.totalItems}) }}
-</div>
-
 {{ form_errors(form) }}
 
 <form action="{{ path('sylius_cart_save') }}" method="post" novalidate>
@@ -35,6 +31,18 @@
         {% endfor %}
     </tbody>
     <tfoot>
+        <tr>
+            <td colspan="6"></td>
+            <td style="text-align: right;">
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.shippingTotal|sylius_price }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td style="text-align: right;">
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.taxTotal|sylius_price }}
+            </td>
+        </tr>
         <tr>
             <td colspan="6"></td>
             <td style="text-align: right;">

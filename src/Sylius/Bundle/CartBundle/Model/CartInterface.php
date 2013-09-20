@@ -22,6 +22,13 @@ use Sylius\Bundle\SalesBundle\Model\OrderInterface;
 interface CartInterface extends OrderInterface
 {
     /**
+     * Get the identifier.
+     *
+     * @return string
+     */
+    public function getIdentifier();
+
+    /**
      * Gets expiration time.
      *
      * @return \DateTime

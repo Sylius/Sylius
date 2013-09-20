@@ -95,11 +95,18 @@ class TaxationProcessor implements TaxationProcessorInterface
         }
 
         $order->removeTaxAdjustments(); // Remove all tax adjustments, we recalculate everything from scratch.
+        $zone = null;
 
-        $zone = $this->zoneMatcher->match($order->getShippingAddress()); // Match the tax zone.
+        if (null !== $order->getShippingAddress()) {
+            $zone = $this->zoneMatcher->match($order->getShippingAddress()); // Match the tax zone.
+        }
+
+        if ($this->settings->has('default_tax_zone')) {
+            $zone = $zone ?: $this->settings->get('default_tax_zone'); // If address does not match any zone, use the default one.
+        }
 
         if (null === $zone) {
-            $zone = $this->settings->get('default_tax_zone'); // If address does not match any zone, use the default one.
+            return;
         }
 
         $taxes = array();

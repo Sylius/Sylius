@@ -38,20 +38,6 @@ class CreditCardSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_owner_by_default()
-    {
-        $this->getOwner()->shouldReturn(null);
-    }
-
-    /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\CreditCardOwnerInterface $owner
-     */
-    function it_allows_to_assign_an_owner($owner)
-    {
-      $this->setOwner($owner);
-      $this->getOwner()->shouldReturn($owner);
-    }
-
     function it_has_no_cardholder_name_by_default()
     {
         $this->getCardholderName()->shouldReturn(null);
