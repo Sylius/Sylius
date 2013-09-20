@@ -13,8 +13,7 @@ class InstallCommand extends ContainerAwareCommand
     {
         $this
             ->setName('sylius:install')
-            ->setDescription('Sylius installer.')
-        ;
+            ->setDescription('Sylius installer.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -24,8 +23,7 @@ class InstallCommand extends ContainerAwareCommand
 
         $this
             ->checkStep($input, $output)
-            ->setupStep($input, $output)
-        ;
+            ->setupStep($input, $output);
 
         $output->writeln('<info>Sylius has been successfully installed.</info>');
     }
@@ -36,25 +34,34 @@ class InstallCommand extends ContainerAwareCommand
 
         $fulfilled = true;
 
-        foreach ($this->getContainer()->get('sylius.requirements') as $collection) {
+        foreach ($this->getContainer()->get('sylius.requirements') as $collection)
+        {
             $output->writeln(sprintf('<comment>%s</comment>', $collection->getLabel()));
-            foreach ($collection as $requirement) {
+            foreach ($collection as $requirement)
+            {
                 $output->write($requirement->getLabel());
-                if ($requirement->isFulfilled()) {
+                if ($requirement->isFulfilled())
+                {
                     $output->writeln(' <info>OK</info>');
-                } else {
-                    if ($requirement->isRequired()) {
+                }
+                else
+                {
+                    if ($requirement->isRequired())
+                    {
                         $fulfilled = false;
                         $output->writeln(' <error>ERROR</error>');
                         $output->writeln(sprintf('<comment>%s</comment>', $requirement->getHelp()));
-                    } else {
+                    }
+                    else
+                    {
                         $output->writeln(' <comment>WARNING</comment>');
                     }
                 }
             }
         }
 
-        if (!$fulfilled) {
+        if (!$fulfilled)
+        {
             throw new RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
         }
 
@@ -69,13 +76,17 @@ class InstallCommand extends ContainerAwareCommand
 
         $dialog = $this->getHelperSet()->get('dialog');
 
-        $this
-            ->runCommand('doctrine:database:create', $input, $output)
-            ->runCommand('doctrine:schema:create', $input, $output)
-            ->runCommand('assetic:dump', $input, $output)
-        ;
+        if ($dialog->askConfirmation($output, '<question>Create database (Y/N)?</question>', false))
+        {
+            $this
+                ->runCommand('doctrine:database:create', $input, $output)
+                ->runCommand('doctrine:schema:create', $input, $output);
+        }
 
-        if ($dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {
+        $this->runCommand('assetic:dump', $input, $output);
+
+        if ($dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false))
+        {
             $this->runCommand('doctrine:fixtures:load', $input, $output);
         }
 
@@ -105,8 +116,7 @@ class InstallCommand extends ContainerAwareCommand
         $this
             ->getApplication()
             ->find($command)
-            ->run($input, $output)
-        ;
+            ->run($input, $output);
 
         return $this;
     }
