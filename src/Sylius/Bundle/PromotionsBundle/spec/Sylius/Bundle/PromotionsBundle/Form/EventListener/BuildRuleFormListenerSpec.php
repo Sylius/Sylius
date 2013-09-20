@@ -56,7 +56,7 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
         $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn(array());
 
-        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', array())->shouldBeCalled()->willReturn($field);
+        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);

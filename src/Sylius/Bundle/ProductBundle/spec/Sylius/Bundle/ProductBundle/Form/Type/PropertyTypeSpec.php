@@ -27,7 +27,7 @@ class PropertyTypeSpec extends ObjectBehavior
      */
     function let($builder, $formFactory)
     {
-        $this->beConstructedWith('Property');
+        $this->beConstructedWith('Property', array('sylius'));
 
         $builder->getFormFactory()->willReturn($formFactory);
     }
@@ -79,7 +79,7 @@ class PropertyTypeSpec extends ObjectBehavior
      */
     function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Property'))->shouldBeCalled();
+        $resolver->setDefaults(array('data_class' => 'Property', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

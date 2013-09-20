@@ -49,11 +49,11 @@ class Payment implements PaymentInterface
     protected $amount;
 
     /**
-     * Transactions.
+     * State.
      *
-     * @var Collection
+     * @var string
      */
-    protected $transactions;
+    protected $state;
 
     /**
      * Credit card as a source.
@@ -61,6 +61,13 @@ class Payment implements PaymentInterface
      * @var CreditCardInterface
      */
     protected $creditCard;
+
+    /*
+     * Processing logs.
+     *
+     * @var Collection
+     */
+    protected $logs;
 
     /**
      * Creation date.
@@ -82,7 +89,8 @@ class Payment implements PaymentInterface
     public function __construct()
     {
         $this->amount = 0;
-        $this->transactions = new ArrayCollection();
+        $this->state = PaymentInterface::STATE_PENDING;
+        $this->logs = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
     }
 
@@ -94,11 +102,17 @@ class Payment implements PaymentInterface
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMethod()
     {
       return $this->method;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMethod(PaymentMethodInterface $method = null)
     {
         $this->method = $method;
@@ -106,6 +120,9 @@ class Payment implements PaymentInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setSource(PaymentSourceInterface $source = null)
     {
         if (null === $source) {
@@ -119,6 +136,9 @@ class Payment implements PaymentInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSource()
     {
         if (null !== $this->creditCard) {
@@ -126,11 +146,17 @@ class Payment implements PaymentInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCurrency($currency)
     {
         $this->currency = $currency;
@@ -138,55 +164,80 @@ class Payment implements PaymentInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAmount()
     {
-      return $this->amount;
+        return $this->amount;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setAmount($amount)
     {
-      $this->amount = $amount;
+        $this->amount = $amount;
 
-      return $this;
+        return $this;
     }
 
-    public function addTransaction(TransactionInterface $transaction)
+    /**
+     * {@inheritdoc}
+     */
+    public function getState()
     {
-      if (!$this->hasTransaction($transaction)) {
-        $transaction->setPayment($this);
-        $this->transactions->add($transaction);
-      }
-
-      return $this;
+        return $this->state;
     }
 
-    public function getTransactions()
+    /**
+     * {@inheritdoc}
+     */
+    public function setState($state)
     {
-        return $this->transactions;
+        $this->state = $state;
+
+        return $this;
     }
 
-    public function hasTransaction(TransactionInterface $transaction)
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogs()
     {
-        return $this->transactions->contains($transaction);
+        return $this->logs;
     }
 
-    public function getBalance()
+    /**
+     * {@inheritdoc}
+     */
+    public function hasLog(PaymentLogInterface $log)
     {
-        $total = 0;
+        return $this->logs->contains($log);
+    }
 
-        foreach ($this->transactions as $transaction) {
-            $total += $transaction->getAmount();
+    /**
+     * {@inheritdoc}
+     */
+    public function addLog(PaymentLogInterface $log)
+    {
+        if (!$this->hasLog($log)) {
+            $this->logs->add($log);
         }
 
-        return $this->amount - $total;
+        return $this;
     }
 
-    public function removeTransaction(TransactionInterface $transaction)
+    /**
+     * {@inheritdoc}
+     */
+    public function removeLog(PaymentLogInterface $log)
     {
-        if ($this->hasTransaction($transaction)) {
-            $transaction->setPayment(null);
-            $this->transactions->removeElement($transaction);
+        if ($this->hasLog($log)) {
+            $this->logs->removeElement($log);
         }
+
+        return $this;
     }
 
     /**
@@ -200,8 +251,28 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

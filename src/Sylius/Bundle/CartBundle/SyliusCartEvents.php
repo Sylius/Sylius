@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CartBundle;
 
 final class SyliusCartEvents
 {
+    const CART_CHANGE            = 'sylius.cart_change';
+
     const CART_CLEAR_INITIALIZE  = 'sylius.cart_clear.initialize';
     const CART_CLEAR_COMPLETED   = 'sylius.cart_clear.completed';
 

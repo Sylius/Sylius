@@ -41,7 +41,7 @@ class OrderTaxationListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringProcessOrderTaxation($event)
+            ->duringOnCartChange($event)
         ;
     }
 
@@ -54,6 +54,6 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($order);
         $taxationProcessor->applyTaxes($order)->shouldBeCalled();
 
-        $this->processOrderTaxation($event);
+        $this->onCartChange($event);
     }
 }

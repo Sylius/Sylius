@@ -15,11 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
- * Percentage discount promotion action spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class PercentageDiscountAction extends ObjectBehavior
+class PercentageDiscountActionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $adjustmentRepository

@@ -383,8 +383,6 @@ class ResourceController extends FOSRestController
             $name = $this->getConfiguration()->getEventName($name);
 
             $eventOrResource = new ResourceEvent($eventOrResource);
-        } elseif (!$eventOrResource instanceof ResourceEvent) {
-            throw new \InvalidArgumentException('If you provide an Event, it need to extends Sylius\Bundle\ResourceBundle\Event\ResourceEvent.');
         }
 
         return $this->get('event_dispatcher')->dispatch($name, $eventOrResource);

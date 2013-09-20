@@ -38,25 +38,25 @@ class CreditCardType extends AbstractType
     {
         $builder
             ->add('type', 'choice', array(
-                'label'		=> 'sylius.form.credit_card.type',
-                'expanded'	=> true,
+                'label'    => 'sylius.form.credit_card.type',
+                'expanded' => true,
               ))
               ->add('cardholderName', 'text', array(
-                'label'	=> 'sylius.form.credit_card.cardholder_name',
+                'label' => 'sylius.form.credit_card.cardholder_name',
               ))
               ->add('number', 'number', array(
-                  'label'	=> 'sylius.form.credit_card.number',
+                  'label' => 'sylius.form.credit_card.number',
               ))
               ->add('securityCode', 'number', array(
-                  'label'	=> 'sylius.form.credit_card.security_code',
+                  'label' => 'sylius.form.credit_card.security_code',
               ))
               ->add('expiryMonth', 'choice', array(
-                  'label'		=> 'sylius.form.credit_card.expiry_month',
-                  'choices'	=>	array_combine(range(1,12), range(1,12))
+                  'label'   => 'sylius.form.credit_card.expiry_month',
+                  'choices' => array_combine(range(1,12), range(1,12))
               ))
               ->add('expiryYear', 'choice', array(
-                  'label'		=> 'sylius.form.credit_card.expiry_year',
-                  'choices'	=>	$this->getViableYears()
+                  'label'   => 'sylius.form.credit_card.expiry_year',
+                  'choices' =>  $this->getViableYears()
               ))
         ;
     }

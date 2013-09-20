@@ -12,14 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
 
 /**
- * Taxation processor spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxationProcessor extends ObjectBehavior
+class TaxationProcessorSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface         $adjustmentRepository
@@ -49,7 +48,7 @@ class TaxationProcessor extends ObjectBehavior
     function it_doesnt_apply_any_taxes_if_order_has_no_items($order)
     {
         $order->getItems()->willReturn(array());
-        $order->addAdjustment(ANY_ARGUMENT)->shouldNotBeCalled();
+        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->applyTaxes($order);
     }

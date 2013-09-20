@@ -2,15 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 default:
-    filters:
-        tags: "~@javascript"
     context:
         class: Sylius\Bundle\WebBundle\Behat\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: "http://sylius.local/app_test.php"
             default_session: symfony2
             selenium2: ~
+            browser_name: firefox
         Behat\Symfony2Extension\Extension:
             mink_driver: true
 
@@ -21,15 +19,3 @@ saucelabs:
                 browser: firefox
                 wd_host: your_saucelabs_username:your_saucelabs_apikey@ondemand.saucelabs.com/wd/hub
                 capabilities: { "platform": "Windows 8", "browser": "firefox", "version": "21"}
-
-frontend:
-    paths:
-        features: features/frontend
-
-backend:
-    paths:
-        features: features/backend
-
-api:
-    paths:
-        features: features/api
