@@ -162,6 +162,30 @@ class ExtensionsRequirements extends RequirementCollection
                 false,
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'PDO'), 'requirements')
             ))
+            ->add(new Requirement(
+                $translator->trans('sylius.extensions.curl', array(), 'requirements'),
+                $status = function_exists('curl_init'),
+                $on,
+                $status ? $on : $off,
+                true,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'cURL'), 'requirements')
+            ))
+            ->add(new Requirement(
+                $translator->trans('sylius.extensions.openssl', array(), 'requirements'),
+                $status = extension_loaded('openssl'),
+                $on,
+                $status ? $on : $off,
+                true,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'OpenSSL'), 'requirements')
+            ))
+            ->add(new Requirement(
+                $translator->trans('sylius.extensions.gd', array(), 'requirements'),
+                $status = function_exists('gd_info'),
+                $on,
+                $status ? $on : $off,
+                true,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'GD'), 'requirements')
+            ))
         ;
     }
 }
