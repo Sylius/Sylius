@@ -48,6 +48,9 @@
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.twig.money" />
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
         </service>
         <service id="sylius.menu_builder.backend" class="%sylius.menu_builder.backend.class%">
             <argument type="service" id="knp_menu.factory" />
