@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="ru" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="a1c0695bf5bacd6d133270e2f80c0402" resname="sylius.form.taxon.name">
+        <source>sylius.form.taxon.name</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="6650744d08fd00bfac34d5d0ada224fc" resname="sylius.form.taxon.permalink">
+        <source>sylius.form.taxon.permalink</source>
+        <target>Постоянная ссылка</target>
+      </trans-unit>
+      <trans-unit id="d4847da399cfbd5328ec238207ab9308" resname="sylius.form.taxonomy.name">
+        <source>sylius.form.taxonomy.name</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="d4847da399cfbd5328ec238207ab9309" resname="sylius.form.taxon.parent">
+        <source>sylius.form.taxon.parent</source>
+        <target>Родитель</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.form.taxon.description">
+        <source>sylius.form.taxon.description</source>
+        <target>Описание</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

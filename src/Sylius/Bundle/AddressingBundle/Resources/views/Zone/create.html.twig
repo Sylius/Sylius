@@ -1,0 +1,15 @@
+{% extends 'SyliusResourceBundle::layout.html.twig' %}
+
+{% block sylius_javascripts %}
+    {{ parent() }}
+
+    {% javascripts output='assets/compiled/sylius-addressing-zone.js'
+        '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing-zone.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block sylius_content %}
+    {% include 'SyliusAddressingBundle:Zone:_create.html.twig' %}
+{% endblock %}

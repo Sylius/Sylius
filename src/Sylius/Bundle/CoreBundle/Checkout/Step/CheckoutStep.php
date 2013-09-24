@@ -11,7 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 /**
@@ -73,5 +76,27 @@ abstract class CheckoutStep extends ControllerStep
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }
+    }
+
+    /**
+     * Dispatch event.
+     *
+     * @param string $name
+     * @param Event  $event
+     */
+    protected function dispatchEvent($name, Event $event)
+    {
+        $this->get('event_dispatcher')->dispatch($name, $event);
+    }
+
+    /**
+     * Dispatch checkout event.
+     *
+     * @param string         $name
+     * @param OrderInterface $order
+     */
+    protected function dispatchCheckoutEvent($name, OrderInterface $order)
+    {
+        $this->dispatchEvent($name, new GenericEvent($order));
     }
 }

@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_promotion:
+    prefix: /exchange-rates
+    resource: @SyliusMoneyBundle/Resources/config/routing/exchange_rate.yml
+
+sylius_promotion:
+    prefix: /currency
+    resource: @SyliusMoneyBundle/Resources/config/routing/currency.yml

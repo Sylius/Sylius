@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_exchange_rate_list:
+    pattern: /
+    defaults:
+        _controller: sylius.controller.exchange_rate:indexAction
+
+sylius_exchange_rate_create:
+    pattern: /create
+    defaults:
+        _controller: sylius.controller.exchange_rate:createAction
+
+sylius_exchange_rate_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.exchange_rate:updateAction
+
+sylius_exchange_rate_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.exchange_rate:deleteAction

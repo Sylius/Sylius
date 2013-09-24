@@ -34,4 +34,3 @@ interface ShipmentInterface extends BaseShipmentInterface
      */
     public function setOrder(OrderInterface $order = null);
 }
-

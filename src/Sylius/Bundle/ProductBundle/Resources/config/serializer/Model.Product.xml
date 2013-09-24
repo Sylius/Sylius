@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<serializer>
+    <class name="Sylius\Bundle\ProductBundle\Model\Product" exclusion-policy="ALL" xml-root-name="product">
+        <property name="id" expose="true" type="integer" />
+        <property name="name" expose="true" type="string" />
+        <property name="slug" expose="true" type="string" />
+        <property name="description" expose="true" type="string" />
+        <property name="createdAt" expose="true" type="datetime" />
+        <property name="updatedAt" expose="true" type="datetime" />
+        <property name="deletedAt" expose="true" type="datetime" />
+    </class>
+</serializer>

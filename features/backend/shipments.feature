@@ -34,10 +34,10 @@ Feature: Shipments
             | user              | address                                                | shipment |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany | FedEx    |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       | DHL      |
-        And order #000001 has following items:
+        And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
-        And order #000002 has following items:
+        And order #000000002 has following items:
             | product | quantity |
             | Mug     | 1        |
             | Sticker | 4        |

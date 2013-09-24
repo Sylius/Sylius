@@ -1,0 +1,24 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_province_create:
+    pattern: /create
+    defaults:
+        _controller: sylius.controller.province:createAction
+        _redirect: sylius_country_list
+
+sylius_province_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: sylius.controller.province:updateAction
+        _redirect: sylius_country_list
+
+sylius_province_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.province:deleteAction
+
+sylius_province_choice_form:
+    pattern: /choice-form
+    defaults:
+        _controller: sylius.controller.province:choiceFormAction

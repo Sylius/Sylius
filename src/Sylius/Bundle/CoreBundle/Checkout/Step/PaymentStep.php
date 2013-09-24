@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
@@ -28,10 +29,12 @@ class PaymentStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $cart = $this->getCurrentCart();
-        $form = $this->createCheckoutPaymentForm($cart);
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
 
-        return $this->renderStep($context, $form);
+        $form = $this->createCheckoutPaymentForm($order);
+
+        return $this->renderStep($context, $order, $form);
     }
 
     /**
@@ -41,38 +44,36 @@ class PaymentStep extends CheckoutStep
     {
         $request = $this->getRequest();
 
-        $cart = $this->getCurrentCart();
-        $form = $this->createCheckoutPaymentForm($cart);
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
+
+        $form = $this->createCheckoutPaymentForm($order);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->getManager()->persist($cart);
+            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
+
+            $this->getManager()->persist($order);
             $this->getManager()->flush();
+
+            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_COMPLETE, $order);
 
             return $this->complete();
         }
 
-        return $this->renderStep($context, $form);
+        return $this->renderStep($context, $order, $form);
     }
 
-    private function renderStep(ProcessContextInterface $context, FormInterface $form)
+    private function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig', array(
+      return $this->render('SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig', array(
+            'order'   => $order,
             'form'    => $form->createView(),
             'context' => $context
         ));
     }
 
-    private function createCheckoutPaymentForm(OrderInterface $cart)
+    private function createCheckoutPaymentForm(OrderInterface $order)
     {
-        if (null === $cart->getPayment()) {
-            $this->getPaymentProcessor()->createPayment($cart);
-        }
-
-        return $this->createForm('sylius_checkout_payment', $cart);
-    }
-
-    private function getPaymentProcessor()
-    {
-        return $this->get('sylius.order_processing.payment_processor');
+        return $this->createForm('sylius_checkout_payment', $order);
     }
 }

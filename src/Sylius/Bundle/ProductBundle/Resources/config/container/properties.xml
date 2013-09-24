@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.product_property.class">Sylius\Bundle\ProductBundle\Form\Type\ProductPropertyType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.property" class="%sylius.controller.property.class%">
+            <argument>sylius</argument>
+            <argument>property</argument>
+            <argument>SyliusProductBundle:Property</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.form.type.property" class="%sylius.form.type.property.class%">
+            <argument>%sylius.model.property.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_property" />
+        </service>
+        <service id="sylius.form.type.property_choice" class="%sylius.form.type.property_choice.class%">
+            <argument>%sylius.model.property.class%</argument>
+            <tag name="form.type" alias="sylius_property_choice" />
+        </service>
+        <service id="sylius.form.type.product_property" class="%sylius.form.type.product_property.class%">
+            <argument>%sylius.model.product_property.class%</argument>
+            <argument>%sylius.validation_group.product_property%</argument>
+            <tag name="form.type" alias="sylius_product_property" />
+        </service>
+    </services>
+
+</container>

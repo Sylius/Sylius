@@ -1,0 +1,11 @@
+sylius_product:
+    resource: @SyliusProductBundle/Resources/config/routing/product.yml
+    prefix: /products
+
+sylius_property:
+    resource: @SyliusProductBundle/Resources/config/routing/property.yml
+    prefix: /properties
+
+sylius_prototype:
+    resource: @SyliusProductBundle/Resources/config/routing/prototype.yml
+    prefix: /prototypes

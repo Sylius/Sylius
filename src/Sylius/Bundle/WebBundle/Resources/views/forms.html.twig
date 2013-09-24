@@ -8,7 +8,7 @@
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
-{% block field_row %}
+{% block form_row %}
 {% spaceless %}
     <div class="control-group{% if errors|length > 0 %} error{% endif %}">
         {{ form_label(form, label|default(null)) }}

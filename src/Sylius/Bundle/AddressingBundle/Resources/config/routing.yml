@@ -1,0 +1,22 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_address:
+    prefix: /addresses
+    resource: @SyliusAddressingBundle/Resources/config/routing/address.yml
+
+sylius_country:
+    prefix: /countries
+    resource: @SyliusAddressingBundle/Resources/config/routing/country.yml
+
+sylius_province:
+    prefix: /countries/{countryId}/provinces
+    resource: @SyliusAddressingBundle/Resources/config/routing/province.yml
+
+sylius_zone:
+    prefix: /zones
+    resource: @SyliusAddressingBundle/Resources/config/routing/zone.yml
+
+sylius_zone_member:
+    prefix: /zones/{zoneId}/members
+    resource: @SyliusAddressingBundle/Resources/config/routing/zone_member.yml

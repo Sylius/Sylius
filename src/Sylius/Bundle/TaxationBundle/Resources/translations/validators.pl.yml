@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Proszę podać nazwę kategorii podatku.
+    tax_rate:
+        category:
+            not_blank: Proszę wybrać kategorię podatku.
+        name:
+            not_blank: Proszę podać nazwę stawki podatkowej.
+        amount:
+            not_blank: Proszę podać wartość stawki podatkowej.
+        calculator:
+            not_blank: Proszę podać kalkulator stawki podatkowej.

@@ -3,7 +3,7 @@
 {% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
 
 {% block javascripts %}
-    {% javascripts
+    {% javascripts output='assets/compiled/backend_addressing_zone.js'
         '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing-zone.js'
     %}
         {{ parent() }}

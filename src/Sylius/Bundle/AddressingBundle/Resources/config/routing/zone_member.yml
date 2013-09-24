@@ -1,0 +1,8 @@
+# This file is part of the Sylius sandbox application.
+# (c) Paweł Jędrzejewski
+
+sylius_zone_member_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: sylius.controller.zone_member:deleteAction
+        _redirect: sylius_zone_list

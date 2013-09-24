@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Per favore inserisci il nome della categoria della tassa.
+    tax_rate:
+        category:
+            not_blank: Per favore seleziona la categoria della tassa.
+        name:
+            not_blank: Per favore inserisci il nome della tassa.
+        amount:
+            not_blank: Per favore inserisci il valore della tassa.
+        calculator:
+            not_blank: Per favore seleziona il calcolatore della tassa.

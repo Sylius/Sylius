@@ -22,7 +22,7 @@ class OrderRepository extends BaseOrderRepository
      * Create user orders paginator.
      *
      * @param UserInterface $user
-     * @param array $sorting
+     * @param array         $sorting
      *
      * @return PagerfantaInterface
      */
@@ -36,8 +36,8 @@ class OrderRepository extends BaseOrderRepository
     /**
      * Gets orders by user
      *
-     * @param UserInterface $user
-     * @param array $sorting
+     * @param  UserInterface $user
+     * @param  array         $sorting
      * @return array
      */
     public function findByUser(UserInterface $user, array $sorting = array())

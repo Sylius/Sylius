@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Sylius\Bundle\SettingsBundle\Model\Parameter" table="sylius_settings_parameter">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="namespace" column="namespace" type="string" />
+        <field name="name" column="name" type="string" />
+        <field name="value" column="value" type="string" nullable="true" />
+    </mapped-superclass>
+
+</doctrine-mapping>
