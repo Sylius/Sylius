@@ -72,7 +72,7 @@ class SecurityStep extends CheckoutStep
             return $this->complete();
         }
 
-        return $this->renderStep($context, $this->getRegistrationForm());
+        return $this->renderStep($context, $form);
     }
 
     /**
