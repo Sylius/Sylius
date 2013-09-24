@@ -19,12 +19,11 @@ use PhpSpec\ObjectBehavior;
 class OrderShippingListenerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface          $shipmentFactory
      * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface $shippingProcessor
      */
-    function let($shipmentFactory, $shippingProcessor)
+    function let($shippingProcessor)
     {
-        $this->beConstructedWith($shipmentFactory, $shippingProcessor);
+        $this->beConstructedWith($shippingProcessor);
     }
 
     function it_is_initializable()

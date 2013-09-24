@@ -14,9 +14,11 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 
 /**
+ * Shipment factory spec.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ShipmentFactorySpec extends ObjectBehavior
+class ShipmentFactory extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $shipmentRepository
@@ -38,16 +40,18 @@ class ShipmentFactorySpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnit
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface           $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface   $inventoryUnit
+     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
      */
-    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it($shipmentRepository, $order, $shipment, $inventoryUnit)
+    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it($shipmentRepository, $order, $shipment, $inventoryUnit, $method)
     {
         $shipmentRepository->createNew()->willReturn($shipment);
         $order->getInventoryUnits()->willReturn(array($inventoryUnit));
         $shipment->addItem($inventoryUnit)->shouldBeCalled();
+        $shipment->setMethod($method)->shouldBeCalled();
         $order->addShipment($shipment)->shouldBeCalled();
 
-        $this->createShipment($order);
+        $this->createShipment($order, $method);
     }
 }

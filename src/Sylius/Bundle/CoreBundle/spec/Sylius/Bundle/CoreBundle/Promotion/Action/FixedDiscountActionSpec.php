@@ -15,9 +15,11 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
+ * Fixed discount promotion action spec.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FixedDiscountActionSpec extends ObjectBehavior
+class FixedDiscountAction extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $adjustmentRepository
@@ -54,3 +56,4 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $this->execute($order, $configuration);
     }
 }
+

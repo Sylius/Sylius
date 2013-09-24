@@ -205,6 +205,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $this->getSession()->visit($this->generateUrl('sylius_account_order_index'));
     }
 
+
     /**
      * @Then /^I should be on login page$/
      */

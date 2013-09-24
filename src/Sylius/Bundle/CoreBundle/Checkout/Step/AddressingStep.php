@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -29,12 +27,9 @@ class AddressingStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $order = $this->getCurrentCart();
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
+        $form = $this->createCheckoutAddressingForm();
 
-        $form = $this->createCheckoutAddressingForm($order);
-
-        return $this->renderStep($context, $order, $form);
+        return $this->renderStep($context, $form);
     }
 
     /**
@@ -43,38 +38,29 @@ class AddressingStep extends CheckoutStep
     public function forwardAction(ProcessContextInterface $context)
     {
         $request = $this->getRequest();
-
-        $order = $this->getCurrentCart();
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-
-        $form = $this->createCheckoutAddressingForm($order);
+        $form = $this->createCheckoutAddressingForm();
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
-
-            $this->getManager()->persist($order);
+            $this->getManager()->persist($this->getCurrentCart());
             $this->getManager()->flush();
-
-            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_COMPLETE, $order);
 
             return $this->complete();
         }
 
-        return $this->renderStep($context, $order, $form);
+        return $this->renderStep($context, $form);
     }
 
-    private function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
+    private function renderStep(ProcessContextInterface $context, FormInterface $form)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:addressing.html.twig', array(
-            'order'   => $order,
             'form'    => $form->createView(),
             'context' => $context
         ));
 
     }
 
-    private function createCheckoutAddressingForm(OrderInterface $order)
+    private function createCheckoutAddressingForm()
     {
-        return $this->createForm('sylius_checkout_addressing', $order);
+        return $this->createForm('sylius_checkout_addressing', $this->getCurrentCart());
     }
 }

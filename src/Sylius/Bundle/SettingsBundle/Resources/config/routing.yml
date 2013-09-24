@@ -1,6 +1,0 @@
-sylius_settings:
-    pattern: /settings
-    defaults:
-        _controller: sylius.controller.settings:updateAction
-        namespace: default
-        template: SyliusSettingsBundle:Settings:index.html.twig

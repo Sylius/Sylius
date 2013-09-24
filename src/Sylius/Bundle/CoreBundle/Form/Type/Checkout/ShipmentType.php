@@ -89,3 +89,4 @@ class ShipmentType extends AbstractType
         return 'sylius_checkout_shipment';
     }
 }
+

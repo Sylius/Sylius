@@ -6,7 +6,7 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% javascripts output='assets/compiled/chart.js'
+{% javascripts
     'https://raw.github.com/nnnick/Chart.js/master/Chart.min.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>

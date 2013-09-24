@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -24,13 +23,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderShippingListener
 {
     /**
-     * Order shipments factory.
-     *
-     * @var ShipmentFactoryInterface
-     */
-    protected $shipmentFactory;
-
-    /**
      * Order shipping processor.
      *
      * @var ShippingChargesProcessorInterface
@@ -40,31 +32,11 @@ class OrderShippingListener
     /**
      * Constructor.
      *
-     * @param ShipmentFactoryInterface          $shipmentFactory
      * @param ShippingChargesProcessorInterface $shippingProcessor
      */
-    public function __construct(ShipmentFactoryInterface $shipmentFactory, ShippingChargesProcessorInterface $shippingProcessor)
+    public function __construct(ShippingChargesProcessorInterface $shippingProcessor)
     {
-        $this->shipmentFactory = $shipmentFactory;
         $this->shippingProcessor = $shippingProcessor;
-    }
-
-    /**
-     * Get the order from event and create shipments.
-     *
-     * @param GenericEvent $event
-     */
-    public function processOrderShipments(GenericEvent $event)
-    {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order shipping listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
-        }
-
-        $this->shipmentFactory->createShipment($order);
     }
 
     /**

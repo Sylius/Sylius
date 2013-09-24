@@ -4,8 +4,7 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% javascripts output='assets/compiled/backend_province.js'
-    '@SyliusWebBundle/Resources/assets/js/province-choices.js' %}
+{% javascripts '@SyliusWebBundle/Resources/assets/js/province-choices.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}
