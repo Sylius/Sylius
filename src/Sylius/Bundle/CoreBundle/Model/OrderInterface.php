@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
@@ -150,6 +151,8 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
 
     /**
      * Get all inventory units by the product variant.
+     *
+     * @param VariantInterface $variant
      *
      * @return Collection
      */
