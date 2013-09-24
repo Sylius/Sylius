@@ -35,14 +35,14 @@ interface OrderInterface extends AdjustableInterface
     /**
      * Return completion date.
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCompletedAt();
 
     /**
      * Set completion time.
      *
-     * @param DateTime $completedAt
+     * @param null|\DateTime $completedAt
      */
     public function setCompletedAt(\DateTime $completedAt = null);
 
@@ -91,7 +91,7 @@ interface OrderInterface extends AdjustableInterface
     /**
      * Get order items.
      *
-     * @return array An array or collection of OrderItemInterface
+     * @return OrderItemInterface[] An array or collection of OrderItemInterface
      */
     public function getItems();
 
