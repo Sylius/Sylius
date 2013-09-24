@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
@@ -33,7 +32,7 @@ interface InventoryOperatorInterface
     /**
      * Decrease stock by count of given inventory units.
      *
-     * @param array|Collection $inventoryUnits
+     * @param array $inventoryUnits
      */
-    public function decrease($inventoryUnits);
+    public function decrease(array $inventoryUnits);
 }

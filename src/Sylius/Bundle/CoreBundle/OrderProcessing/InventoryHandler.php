@@ -34,15 +34,15 @@ class InventoryHandler implements InventoryHandlerInterface
     /**
      * Inventory unit factory.
      *
-     * @var InventoryUnitFactoryInterface
+     * @var InventoryUnitsFactoryInterface
      */
     protected $inventoryUnitFactory;
 
     /**
      * Constructor.
      *
-     * @param InventoryOperatorInterface    $inventoryOperator
-     * @param InventoryUnitFactoryInterface $inventoryUnitFactory
+     * @param InventoryOperatorInterface     $inventoryOperator
+     * @param InventoryUnitsFactoryInterface $inventoryUnitFactory
      */
     public function __construct(InventoryOperatorInterface $inventoryOperator, InventoryUnitFactoryInterface $inventoryUnitFactory)
     {
