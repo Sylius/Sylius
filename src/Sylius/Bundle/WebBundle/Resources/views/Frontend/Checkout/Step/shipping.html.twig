@@ -10,7 +10,7 @@
 <form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
 
 <fieldset>
-{% for shipment in order.shipments %}
+{% for shipment in cart.shipments %}
 
 {% set shipmentForm = form.shipments[loop.index0] %}
 

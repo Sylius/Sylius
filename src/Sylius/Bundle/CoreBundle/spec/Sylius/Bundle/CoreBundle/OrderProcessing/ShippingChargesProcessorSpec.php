@@ -12,17 +12,18 @@
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
 
 /**
+ * Shipping charges processor spec.
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ShippingChargesProcessorSpec extends ObjectBehavior
+class ShippingChargesProcessor extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface                $adjustmentRepository
-     * @param Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface $calculator
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface      $adjustmentRepository
+     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
      */
     function let($adjustmentRepository, $calculator)
     {
@@ -44,8 +45,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
      */
     function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments($order)
     {
-        $order->getShipments()->shouldBeCalled()->willReturn(array());
-        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
+        $order->addAdjustment(ANY_ARGUMENT)->shouldNotBeCalled();
 
         $this->applyShippingCharges($order);
     }

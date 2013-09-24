@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Pawe≈Ç Jƒôdrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,18 +13,21 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Security step.
  *
  * If user is not logged in, displays login & registration form.
  *
- * @author Pawe≈Ç Jƒôdrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SecurityStep extends CheckoutStep
 {
@@ -72,7 +75,7 @@ class SecurityStep extends CheckoutStep
             return $this->complete();
         }
 
-        return $this->renderStep($context, $form);
+        return $this->renderStep($context, $this->getRegistrationForm());
     }
 
     /**

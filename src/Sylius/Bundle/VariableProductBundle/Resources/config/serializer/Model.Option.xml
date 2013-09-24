@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<serializer>
-    <class name="Sylius\Bundle\VariableProductBundle\Model\Option" exclusion-policy="ALL" xml-root-name="option">
-    </class>
-</serializer>

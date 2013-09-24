@@ -80,6 +80,9 @@ sylius_payments:
     gateways:
         dummy: Test
         stripe: Stripe
+    classes:
+        credit_card_owner:
+            model: Sylius\Bundle\CoreBundle\Model\User
 
 sylius_addressing:
     driver: doctrine/orm

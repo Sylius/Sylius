@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
@@ -69,7 +70,7 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     /**
      * Set shipping address.
      *
-     * @param AddressInterface $shippingAddress
+     * @param  AddressInterface $shippingAddress
      */
     public function setShippingAddress(AddressInterface $shippingAddress = null);
 
