@@ -72,7 +72,7 @@ class ShippingMethod implements ShippingMethodInterface
     /**
      * Shipping method rules.
      *
-     * @var ArrayCollection
+     * @var RuleInterface[]
      */
     protected $rules;
 

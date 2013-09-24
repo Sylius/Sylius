@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Shipping subject.
  *

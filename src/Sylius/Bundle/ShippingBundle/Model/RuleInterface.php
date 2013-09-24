@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
-
 /**
  * Shipping method rule model interface.
  *
@@ -24,10 +22,33 @@ interface RuleInterface
     const TYPE_ITEM_COUNT = 'item_count';
     const TYPE_WEIGHT     = 'weight';
 
+    /**
+     * @return string
+     */
     public function getType();
+
+    /**
+     * @param string $type
+     */
     public function setType($type);
+
+    /**
+     * @return array
+     */
     public function getConfiguration();
+
+    /**
+     * @param array $configuration
+     */
     public function setConfiguration(array $configuration);
+
+    /**
+     * @return null|ShippingMethodInterface
+     */
     public function getMethod();
+
+    /**
+     * @param null|ShippingMethodInterface $method
+     */
     public function setMethod(ShippingMethodInterface $method = null);
 }
