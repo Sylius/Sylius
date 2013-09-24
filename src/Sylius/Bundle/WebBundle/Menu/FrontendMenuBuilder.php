@@ -57,6 +57,13 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $moneyExtension;
 
     /**
+     * Request.
+     *
+     * @var Request
+     */
+    protected $request;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
@@ -83,6 +90,16 @@ class FrontendMenuBuilder extends MenuBuilder
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->moneyExtension = $moneyExtension;
+    }
+
+    /**
+     * Sets the request the service
+     *
+     * @param Request $request
+     */
+    public function setRequest(Request $request = null)
+    {
+        $this->request = $request;
     }
 
     /**
@@ -117,11 +134,23 @@ class FrontendMenuBuilder extends MenuBuilder
         )));
 
         if ($this->securityContext->isGranted('ROLE_USER')) {
-            $menu->addChild('account', array(
-                'route' => 'sylius_account_homepage',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.account')),
-                'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.account'));
+
+            $route = $this->request === null ? '' : $this->request->get('_route');
+
+            if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
+                $menu->addChild('shop', array(
+                    'route' => 'sylius_homepage',
+                    'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.shop')),
+                    'labelAttributes' => array('icon' => 'icon-th icon-large', 'iconOnly' => false)
+                ))->setLabel($this->translate('sylius.frontend.menu.account.shop'));
+            }
+            else {
+                $menu->addChild('account', array(
+                    'route' => 'sylius_account_homepage',
+                    'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.account')),
+                    'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
+                ))->setLabel($this->translate('sylius.frontend.menu.main.account'));
+            }
             $menu->addChild('logout', array(
                 'route' => 'fos_user_security_logout',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.logout')),
@@ -309,12 +338,6 @@ class FrontendMenuBuilder extends MenuBuilder
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.orders')),
             'labelAttributes' => array('icon' => 'icon-briefcase', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.orders'));
-
-        $child->addChild('shop', array(
-            'route' => 'sylius_homepage',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.shop')),
-            'labelAttributes' => array('icon' => 'icon-shopping-cart', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.shop'));
 
         return $menu;
     }
