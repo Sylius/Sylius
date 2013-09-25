@@ -18,7 +18,7 @@ use Sylius\Bundle\CartBundle\Model\CartInterface;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-interface ExpiredCartsPurgerInterface
+interface PurgerInterface
 {
     /**
      * Purge all expired carts.

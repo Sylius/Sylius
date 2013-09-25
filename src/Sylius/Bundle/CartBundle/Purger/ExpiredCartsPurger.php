@@ -20,7 +20,7 @@ use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class ExpiredCartsPurger implements ExpiredCartsPurgerInterface
+class ExpiredCartsPurger implements PurgerInterface
 {
     /**
      * Cart manager.
