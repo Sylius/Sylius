@@ -6,7 +6,7 @@
     {{ form_row(form.enabled, {'label': ''}) }}
     {{ form_row(form.calculator) }}
     {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
-        <div id="{{ form.calculator.vars.id }}_{{ name }}" data-container=".configuration" data-prototype="{{ form_widget(calculatorConfigurationPrototype)|e }}">
+        <div id="{{ form.calculator.vars.id }}_{{ name }}" data-prototype="{{ form_widget(calculatorConfigurationPrototype)|e }}">
         </div>
     {% endfor %}
     <div class="configuration">
