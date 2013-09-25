@@ -19,6 +19,3 @@ bin/doctrine*
 bin/phpspec
 bin/webunit
 vendor/*
-
-composer.phar
-nbproject/*
