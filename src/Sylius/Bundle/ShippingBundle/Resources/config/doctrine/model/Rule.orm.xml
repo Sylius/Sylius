@@ -15,14 +15,14 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Bundle\ShippingBundle\Model\Rule" table="sylius_shipping_rule">
-        <id name="id" type="integer">
+        <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="type" type="string" />
-        <field name="configuration" type="array" />
+        <field name="type" column="type" type="string" />
+        <field name="configuration" column="configuration" type="array" />
 
-        <many-to-one field="method" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface">
+        <many-to-one field="method" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface" inversed-by="rules">
             <join-column name="method_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
     </mapped-superclass>
