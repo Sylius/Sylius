@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\ExpiredCartsPurger;
+namespace Sylius\Bundle\CartBundle\Purger;
 
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 

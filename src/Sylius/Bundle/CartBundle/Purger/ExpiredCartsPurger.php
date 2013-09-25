@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\ExpiredCartsPurger;
+namespace Sylius\Bundle\CartBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
