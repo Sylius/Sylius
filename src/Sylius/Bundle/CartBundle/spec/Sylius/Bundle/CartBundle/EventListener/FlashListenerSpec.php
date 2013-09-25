@@ -148,7 +148,7 @@ class FlashListenerSpec extends ObjectBehavior
      */
     function it_should_have_a_default_success_flash_message_for_event_name($session, $translator, $event, $flashBag, $cartEvents)
     {
-        $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart have been updated correctly.');
+        $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart has been successfully updated.');
         $this->messages = $messages;
 
         $event
