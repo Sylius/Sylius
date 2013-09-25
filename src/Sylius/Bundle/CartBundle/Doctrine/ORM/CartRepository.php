@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Doctrine\ORM;
 
+use Datetime;
 use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Bundle\SalesBundle\Model\OrderStates;
@@ -33,7 +34,7 @@ class CartRepository extends OrderRepository implements CartRepositoryInterface
         $queryBuilder
             ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.expiresAt', ':now'))
             ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.state', OrderStates::CART))
-            ->setParameter('now', new \Datetime())
+            ->setParameter('now', new Datetime())
         ;
 
         return $queryBuilder->getQuery()->getResult();
