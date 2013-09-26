@@ -173,6 +173,15 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function removeInventoryUnit(InventoryUnitInterface $unit);
 
     /**
+     * Has inventory unit?
+     *
+     * @param InventoryUnitInterface $unit
+     *
+     * @return Boolean
+     */
+    public function hasInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
      * Get all shipments associated with this order.
      *
      * @return Collection
