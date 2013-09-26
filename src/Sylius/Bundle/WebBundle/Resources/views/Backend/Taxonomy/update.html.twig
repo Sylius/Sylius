@@ -7,6 +7,8 @@
 <h1>{{ 'sylius.taxonomy.update_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_taxonomy_update', {'id': taxonomy.id, '_method': 'PUT'}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/Taxonomy:_form.html.twig' %}

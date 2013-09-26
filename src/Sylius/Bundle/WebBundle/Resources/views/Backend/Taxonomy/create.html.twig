@@ -7,6 +7,8 @@
 <h1>{{ 'sylius.taxonomy.create_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_taxonomy_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {% include 'SyliusWebBundle:Backend/Taxonomy:_form.html.twig' %}
     {{ create() }}

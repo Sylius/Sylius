@@ -16,6 +16,8 @@
     <h1>{{ 'sylius.zone.create_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_zone_create', {'id': zone.id}) }}" method="post" class="form-horizontal">
     {% include 'SyliusWebBundle:Backend/Zone:_form.html.twig' %}
     {{ create() }}

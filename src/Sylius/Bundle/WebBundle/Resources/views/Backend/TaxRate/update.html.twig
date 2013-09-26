@@ -7,6 +7,8 @@
 <h1>{{ 'sylius.tax_rate.update_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/TaxRate:_form.html.twig' %}

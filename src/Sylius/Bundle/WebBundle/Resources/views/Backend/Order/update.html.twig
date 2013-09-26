@@ -7,6 +7,8 @@
 <h1>{{ 'sylius.order.update_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_order_update', {'id': order.id, '_method': 'PUT'}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/Order:_form.html.twig' %}

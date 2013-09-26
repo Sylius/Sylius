@@ -7,6 +7,8 @@
     <h1>{{ 'sylius.exchange_rate.update_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_exchange_rate_update', {'id': exchange_rate.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/ExchangeRate:_form.html.twig' %}
