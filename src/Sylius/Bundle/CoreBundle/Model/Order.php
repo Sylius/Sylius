@@ -299,7 +299,6 @@ class Order extends Cart implements OrderInterface
     public function removeInventoryUnit(InventoryUnitInterface $unit)
     {
         if ($this->inventoryUnits->contains($unit)) {
-            $unit->setOrder(null);
             $this->inventoryUnits->removeElement($unit);
         }
 
