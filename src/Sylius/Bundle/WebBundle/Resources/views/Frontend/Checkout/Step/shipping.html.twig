@@ -7,6 +7,8 @@
 
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
 
+{{ form_errors(form) }}
+
 <form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
 
 <fieldset>
