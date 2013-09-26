@@ -112,4 +112,22 @@ class AppKernel extends Kernel
             $loader->load($file);
         }
     }
+
+    public function getCacheDir()
+    {
+        if (in_array($this->environment, array('dev', 'test')) && is_dir('/dev/shm')) {
+            return '/dev/shm/sylius/cache/' .  $this->environment;
+        }
+
+        return parent::getCacheDir();
+    }
+
+    public function getLogDir()
+    {
+        if (in_array($this->environment, array('dev', 'test')) && is_dir('/dev/shm')) {
+            return '/dev/shm/sylius/logs';
+        }
+
+        return parent::getLogDir();
+    }
 }

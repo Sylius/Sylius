@@ -1,0 +1,27 @@
+[submodule "vagrant/modules/stdlib"]
+	path = vagrant/modules/stdlib
+	url = git@github.com:puppetlabs/puppetlabs-stdlib.git
+[submodule "vagrant/modules/puppi"]
+	path = vagrant/modules/puppi
+	url = git@github.com:example42/puppi.git
+[submodule "vagrant/modules/apache"]
+	path = vagrant/modules/apache
+	url = git@github.com:example42/puppet-apache.git
+[submodule "vagrant/modules/apt"]
+	path = vagrant/modules/apt
+	url = git@github.com:puppetlabs/puppetlabs-apt.git
+[submodule "vagrant/modules/composer"]
+	path = vagrant/modules/composer
+	url = git@github.com:vagrantee/puppet-composer.git
+[submodule "vagrant/modules/mysql"]
+	path = vagrant/modules/mysql
+	url = git@github.com:puppetlabs/puppetlabs-mysql.git
+[submodule "vagrant/modules/php"]
+	path = vagrant/modules/php
+	url = git@github.com:example42/puppet-php.git
+[submodule "vagrant/modules/puphpet"]
+	path = vagrant/modules/puphpet
+	url = git@github.com:puphpet/puppet-puphpet.git
+[submodule "vagrant/modules/xdebug"]
+	path = vagrant/modules/xdebug
+	url = git@github.com:puphpet/puphpet-xdebug.git
