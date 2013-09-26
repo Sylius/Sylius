@@ -309,6 +309,14 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function hasInventoryUnit(InventoryUnitInterface $unit)
+    {
+        return $this->inventoryUnits->contains($unit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getShipments()
     {
         return $this->shipments;

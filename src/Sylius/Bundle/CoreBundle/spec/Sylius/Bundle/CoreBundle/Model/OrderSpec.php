@@ -98,8 +98,12 @@ class OrderSpec extends ObjectBehavior
         $unit->setOrder($this)->shouldBeCalled();
         $this->addInventoryUnit($unit);
 
+        $this->hasInventoryUnit($unit)->shouldReturn(true);
+
         $unit->setOrder(null)->shouldBeCalled();
         $this->removeInventoryUnit($unit);
+
+        $this->hasInventoryUnit($unit)->shouldReturn(false);
     }
 
     function it_should_initialize_shipments_collection_by_default()
