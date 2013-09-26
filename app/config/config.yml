@@ -78,6 +78,10 @@ hwi_oauth:
             type:          amazon
             client_id:     %sylius.oauth.amazon.clientid% 
             client_secret: %sylius.oauth.amazon.clientsecret%
+        facebook:
+            type:          facebook
+            client_id:     %sylius.oauth.facebook.clientid%
+            client_secret: %sylius.oauth.facebook.clientsecret%
         google:
             type:          google
             client_id:     %sylius.oauth.google.clientid%

@@ -26,7 +26,9 @@ parameters:
     stripe.secret_key: EDITME
     stripe.test_mode: true
 
-    sylius.oauth.amazon.clientid:     <amazon_client_id>
-    sylius.oauth.amazon.clientsecret: <amazon_client_secret>
-    sylius.oauth.google.clientid:     <google_client_id>
-    sylius.oauth.google.clientsecret: <google_client_secret>
+    sylius.oauth.amazon.clientid:       <amazon_client_id>
+    sylius.oauth.amazon.clientsecret:   <amazon_client_secret>
+    sylius.oauth.facebook.clientid:     <facebook_client_id>
+    sylius.oauth.facebook.clientsecret: <facebook_client_secret>
+    sylius.oauth.google.clientid:       <google_client_id>
+    sylius.oauth.google.clientsecret:   <google_client_secret>
