@@ -37,5 +37,8 @@ hwi_oauth_redirect:
 amazon_login:
     pattern: /login/check-amazon
 
+facebook_login:
+    pattern: /login/check-facebook
+
 google_login:
     pattern: /login/check-google

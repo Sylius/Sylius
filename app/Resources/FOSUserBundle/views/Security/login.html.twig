@@ -11,8 +11,6 @@
     </div>
 {% endif %}
 
-{% render url('hwi_oauth_connect') %}
-
 <blockquote>
   <p>Please login using "<strong>sylius@example.com</strong>" email and "<strong>sylius</strong>" as password.</p>
   <small>Mr. Sylius Demo Guide</small>
@@ -38,7 +36,12 @@
         </div>
     </div>
 </fieldset>
+<div class="form-actions">
+    <div class="pull-right">
+        {{ render(url('hwi_oauth_connect')) }}
+    </div>
     <button type="submit" class="btn btn-primary btn-lg pull-left" name="login"><i class="icon-lock"></i> Login</button>
+</div>
 </form>
 
 {% endblock %}

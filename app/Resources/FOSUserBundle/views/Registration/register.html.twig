@@ -5,7 +5,6 @@
     <h1>Registration <small>Create an account in store</small></h1>
 </div>
 
-{{ render url('hwi_oauth_connect') }}
 
 <form action="{{ path('fos_user_registration_register') }}" method="post" novalidate class="form-horizontal">
 <fieldset class="well">
@@ -14,6 +13,9 @@
     {% endfor %}
 </fieldset>
 <div class="form-actions">
+    <div class="pull-right">
+        {{ render(url('hwi_oauth_connect')) }}
+    </div>
     <button type="submit" class="btn btn-success btn-large span3"><i class="icon-user"></i> Register</button>
 </div>
 </form>
