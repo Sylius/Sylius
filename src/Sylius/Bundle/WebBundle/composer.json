@@ -15,15 +15,14 @@
             "homepage": "https://github.com/Sylius/SyliusWebBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php":                       ">=5.3.3",
 
         "symfony/framework-bundle":  "~2.3",
-        "sylius/core-bundle":        "0.2.*",
-        "knplabs/knp-menu-bundle":   "2.0.*",
-        "liip/imagine-bundle":       "0.9.*",
-        "knplabs/knp-snappy-bundle": "dev-master"
+        "sylius/core-bundle":        "1.0.*@dev",
+        "knplabs/knp-menu-bundle":   "2.0.*@dev",
+        "liip/imagine-bundle":       "0.15.*",
+        "knplabs/knp-snappy-bundle": "dev-master@dev"
     },
     "config": {
         "bin-dir": "bin"
@@ -34,7 +33,7 @@
     "target-dir": "Sylius/Bundle/WebBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

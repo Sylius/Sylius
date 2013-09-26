@@ -16,15 +16,14 @@
             "homepage": "https://github.com/Sylius/SyliusOmnipayBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.1",
-        "omnipay/omnipay":          "dev-master"
+        "omnipay/omnipay":          "dev-master@dev"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop",
+        "phpspec/phpspec2": "2.0.*@dev",
         "symfony/form":     "~2.1"
     },
     "config": {
@@ -36,7 +35,7 @@
     "target-dir": "Sylius/Bundle/OmnipayBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9.x-dev"
+            "dev-master": "1-0-dev"
         }
     }
 }

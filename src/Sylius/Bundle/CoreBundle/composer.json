@@ -15,34 +15,33 @@
             "homepage": "https://github.com/Sylius/SyliusCoreBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php":                          ">=5.3.3",
+        "php":                            ">=5.3.3",
 
         "symfony/framework-bundle":       "~2.3",
-        "sylius/variable-product-bundle": "0.1.*",
-        "sylius/cart-bundle":             "0.5.*",
-        "sylius/money-bundle":            "0.2.*",
-        "sylius/taxation-bundle":         "0.3.*",
-        "sylius/shipping-bundle":         "0.2.*",
-        "sylius/addressing-bundle":       "0.2.*",
-        "sylius/promotions-bundle":       "0.2.*",
-        "sylius/inventory-bundle":        "0.3.*",
-        "sylius/taxonomies-bundle":       "0.2.*",
-        "sylius/settings-bundle":         "0.2.*",
-        "sylius/payments-bundle":         "0.2.*",
-        "sylius/flow-bundle":             "0.1.*",
-        "sylius/resource-bundle":         "0.3.*",
-        "jms/serializer-bundle":          "0.12.*",
+        "sylius/variable-product-bundle": "1.0.*@dev",
+        "sylius/cart-bundle":             "1.0.*@dev",
+        "sylius/money-bundle":            "1.0.*@dev",
+        "sylius/taxation-bundle":         "1.0.*@dev",
+        "sylius/shipping-bundle":         "1.0.*@dev",
+        "sylius/addressing-bundle":       "1.0.*@dev",
+        "sylius/promotions-bundle":       "1.0.*@dev",
+        "sylius/inventory-bundle":        "1.0.*@dev",
+        "sylius/taxonomies-bundle":       "1.0.*@dev",
+        "sylius/settings-bundle":         "1.0.*@dev",
+        "sylius/payments-bundle":         "1.0.*@dev",
+        "sylius/flow-bundle":             "1.0.*@dev",
+        "sylius/resource-bundle":         "1.0.*@dev",
         "sylius/omnipay-bundle":          "0.9.*@dev",
+        "athari/yalinqo":                 "*@dev",
+        "friendsofsymfony/user-bundle":   "2.0.*@dev",
+        "fzaninotto/faker":               "1.2.*",
+        "jms/serializer-bundle":          "0.12.*",
+        "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
+        "knplabs/knp-snappy-bundle":      "dev-master@dev",
         "liip/imagine-bundle":            "0.9.*",
         "mathiasverraes/money":           "dev-master@dev",
-        "friendsofsymfony/user-bundle":   "2.0.*@dev",
-        "knplabs/knp-gaufrette-bundle":   "0.2.*",
-        "knplabs/knp-snappy-bundle":      "dev-master",
-        "fzaninotto/faker":               "1.2.*",
-        "athari/yalinqo":                 "*",
-        "omnipay/omnipay":                "dev-master"
+        "omnipay/omnipay":                "dev-master@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev",
@@ -60,7 +59,7 @@
     "target-dir": "Sylius/Bundle/CoreBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
