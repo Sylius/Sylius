@@ -1,7 +1,7 @@
 Mapping Relations
 =================
 
-All Sylius bundles use the Doctrine RTEL functionality, which allows to map the relations using interfaces, not implementations.
+All Sylius bundles use the `Doctrine RTEL functionality <http://symfony.com/doc/current/cookbook/doctrine/resolve_target_entity.html>`_, which allows to map the relations using interfaces, not implementations.
 
 Using interfaces
 ----------------

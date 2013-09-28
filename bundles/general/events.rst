@@ -47,7 +47,7 @@ All the dispatches are using the ``GenericEvent`` class and return the **Product
 Registering a listener
 ----------------------
 
-We'll stay with the **Product** model and create a listener which update Solr (search engine) document every time a product is updated.
+We'll stay with the **Product** model and create a listener which updates Solr (search engine) document every time a product is updated.
 
 .. code-block:: php
 

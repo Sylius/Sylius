@@ -1,12 +1,12 @@
 Overriding Repositories
 =======================
 
-Overriding Sylius model repository involves extending the base class and configuring it inside the bundle configuration.
+Overriding a Sylius model repository involves extending the base class and configuring it inside the bundle configuration.
 
 Extending base Repository
 -------------------------
 
-Sylius is using both custom and default Doctrine repositories and often you'll need to add your own methods. Let's assume you want to find all orders for given customer.
+Sylius is using both custom and default Doctrine repositories and often you'll need to add your own methods. Let's assume you want to find all orders for a given customer.
 
 Firstly, you need to create your own repository class
 
