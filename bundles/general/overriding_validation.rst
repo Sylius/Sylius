@@ -1,7 +1,7 @@
 Overriding Validation
 =====================
 
-All Sylius validation mapping and forms are using ``sylius`` as the default group.
+All Sylius validation mappings and forms are using ``sylius`` as the default group.
 
 Changing the validation group
 -----------------------------

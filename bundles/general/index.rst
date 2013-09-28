@@ -15,3 +15,4 @@ You'll learn how to perform basic CRUD operations on the data and how to overrid
     overriding_validation
     overriding_forms
     mapping_relations
+    events
