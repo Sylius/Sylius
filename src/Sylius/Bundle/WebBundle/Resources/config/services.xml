@@ -104,7 +104,6 @@
         </service>
 
         <service id="sylius.listener.frontend.address" class="%sylius.listener.frontend.address.class%">
-            <tag name="kernel.event_listener" event="sylius.address.pre_create" method="onAddressPreCreate" />
             <tag name="kernel.event_listener" event="sylius.address.pre_delete" method="onAddressPreDelete" />
             <argument type="service" id="security.context" />
         </service>

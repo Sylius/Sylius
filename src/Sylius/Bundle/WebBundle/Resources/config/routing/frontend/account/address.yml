@@ -4,7 +4,10 @@
 sylius_account_address_index:
     pattern: /addresses
     methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Address:index }
+    defaults:
+      _controller: sylius.controller.address:indexAction
+      _sylius:
+        template: SyliusWebBundle:Frontend/Account:Address/index.html.twig
 
 sylius_account_address_create:
     pattern: /address/new
@@ -41,14 +44,16 @@ sylius_account_address_delete:
 sylius_account_address_set_default_billing:
     pattern: /address/{id}/default/billing
     methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Address:setAsDefaultBillingAddress }
+    defaults:
+        _controller: sylius.controller.address:setAsDefaultBillingAddressAction
     requirements:
         id:  \d+
 
 sylius_account_address_set_default_shipping:
     pattern: /address/{id}/default/shipping
     methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Address:setAsDefaultShippingAddress }
+    defaults:
+        _controller: sylius.controller.address:setAsDefaultShippingAddressAction
     requirements:
         id:  \d+
 
