@@ -1,28 +1,35 @@
-# Getting started using Vagrant
+# Description
+This configuration includes following software:
 
-## You will need:
+* PHP 5.4.19 
+* MySQL 5.5.32
+* GIT 1.7.9.5
+* Apache 2.2.22
+* Vim
+* MC (Midnight commander)
+* Curl
+* Xdebug
+* Composer
 
-  * Git 1.6+
-  * NFS (MacOS works OOB, on Debian based linux distributions install **nfs-kernel-server** package)
-  * [Vagrant](http://vagrantup.com)
+# Usage
 
-## Get the code
+First you need to install git submodules. Go to your project root folder and execute following commands:
+```
+$ git submodule init
+$ git submodule update
+```
 
-    git clone git://github.com/Sylius/Sylius.git
-    cd Sylius/vagrant
-    vagrant up
+Now you are ready to run
 
-Now everything is getting prepared.  
-In the meantime you can optionally add an entry to your `/etc/hosts` file like so:
+```
+$ cd vagrant
+$ vagrant up
+```
 
-    172.33.33.33 sylius.local
+While waiting for the vagrant to stand up you should add an entry into /etc/hosts file at host machine.
 
-## Access by web browser
+```
+10.0.0.200      sylius.dev
+```
 
-If you have added the entry to `/etc/hosts` you should be able to access the Sylius like this:
-
-<http://sylius.local/dev.php>
-
-Otherwise you can also use the IP address:
-
-<http://172.33.33.33/dev.php>
+From now you should be able to access your sylius project at host machine under http://sylius.dev/ address.
