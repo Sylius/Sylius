@@ -37,7 +37,7 @@
     "target-dir": "Sylius/Bundle/MoneyBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1-0-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
