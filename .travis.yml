@@ -12,6 +12,9 @@ matrix:
 env: MONGO_VERSION=1.3.4
 services: mongodb
 
+install:
+    - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
+
 before_script:
     - wget http://pecl.php.net/get/mongo-1.4.3.tgz
     - tar -xzf mongo-1.4.3.tgz
@@ -29,9 +32,9 @@ before_script:
     - composer install --dev --prefer-source --no-interaction
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
-    - chmod -R 777 app/cache app/logs
+    - chmod -R 777 /dev/shm/sylius/cache /dev/shm/sylius/logs
     - app/console cache:warmup --env=test > /dev/null
-    - chmod -R 777 app/cache app/logs
+    - chmod -R 777 /dev/shm/sylius/cache /dev/shm/sylius/logs
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
