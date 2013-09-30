@@ -108,7 +108,7 @@ class ShippingMethodType extends AbstractType
         }
         $prototypes['calculators'] = array();
         foreach ($this->calculatorRegistry->getCalculators() as $name => $calculator) {
-            if (true !== $calculator->isConfigurable()) {
+            if (!$calculator->isConfigurable()) {
                 continue;
             }
             $prototypes['calculators'][$name] = $builder->create('configuration', $calculator->getConfigurationFormType())->getForm();
