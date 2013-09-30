@@ -40,6 +40,10 @@
 
         <parameter key="sylius.shipping_calculator.flexible_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlexibleRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.flexible_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType</parameter>
+
+        <parameter key="sylius.form.shipping_method_choice_list_factory.class">Sylius\Bundle\ShippingBundle\Form\ChoiceList\ShippingMethodChoiceListFactory</parameter>
+        <parameter key="sylius.form.shipping_method_choice_view_enhancer.class">Sylius\Bundle\ShippingBundle\Form\View\PricedShippingMethodChoiceViewEnhancer</parameter>
+        <parameter key="sylius.shipping_method_sorter.price.class">Sylius\Bundle\ShippingBundle\Sorter\PricedShippingMethodSorter</parameter>
     </parameters>
 
     <services>
@@ -103,8 +107,23 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_eligibility_checker" />
         </service>
+
+        <service id="sylius.shipping_method_sorter.price" class="%sylius.shipping_method_sorter.price.class%">
+            <argument type="service" id="sylius.shipping_calculator_registry" />
+        </service>
+
+        <service id="sylius.form.shipping_method_choice_view_enhancer" class="%sylius.form.shipping_method_choice_view_enhancer.class%">
+            <argument type="service" id="sylius.shipping_calculator_registry" />
+        </service>
+
+        <service id="sylius.form.shipping_method_choice_list_factory" class="%sylius.form.shipping_method_choice_list_factory.class%">
+            <argument type="service" id="sylius.form.shipping_method_choice_view_enhancer" />
+            <argument type="service" id="sylius.shipping_method_sorter.price" />
+        </service>
+
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
             <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="sylius.form.shipping_method_choice_list_factory" />
             <tag name="form.type" alias="sylius_shipping_method_choice" />
         </service>
 
@@ -114,6 +133,7 @@
         </service>
 
         <service id="sylius.shipping_calculator_registry" class="%sylius.shipping_calculator_registry.class%" />
+
         <service id="sylius.shipping_calculator" class="%sylius.shipping_calculator.class%">
             <argument type="service" id="sylius.shipping_calculator_registry" />
         </service>
@@ -121,6 +141,7 @@
         <service id="sylius.shipping_shipping_calculator.flat_rate" class="%sylius.shipping_calculator.flat_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="flat_rate" label="Flat rate per shipment" />
         </service>
+
         <service id="sylius.form.type.shipping_calculator.flat_rate_configuration" class="%sylius.form.type.shipping_calculator.flat_rate_configuration.class%">
             <argument>%sylius.validation_group.shipping_calculator_flat_rate_configuration%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_flat_rate_configuration" />
@@ -129,6 +150,7 @@
         <service id="sylius.shipping_calculator.per_item_rate" class="%sylius.shipping_calculator.per_item_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="per_item_rate" label="Flat rate per item" />
         </service>
+
         <service id="sylius.form.type.shipping_calculator.per_item_rate_configuration" class="%sylius.form.type.shipping_calculator.per_item_rate_configuration.class%">
             <argument>%sylius.validation_group.shipping_calculator_per_item_rate_configuration%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_per_item_rate_configuration" />
@@ -137,6 +159,7 @@
         <service id="sylius.shipping_calculator.flexible_rate" class="%sylius.shipping_calculator.flexible_rate.class%">
             <tag name="sylius.shipping_calculator" calculator="flexible_rate" label="Flexible rate" />
         </service>
+
         <service id="sylius.form.type.shipping_calculator.flexible_rate_configuration" class="%sylius.form.type.shipping_calculator.flexible_rate_configuration.class%">
             <argument>%sylius.validation_group.shipping_calculator_flexible_rate_configuration%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_flexible_rate_configuration" />
