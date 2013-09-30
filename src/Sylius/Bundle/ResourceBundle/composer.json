@@ -16,20 +16,19 @@
             "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle":        ">=2.1,<3.0",
+        "symfony/framework-bundle":        "~2.3",
         "friendsofsymfony/rest-bundle":    "0.13.*",
         "jms/serializer-bundle":           "0.12.*",
         "white-october/pagerfanta-bundle": "1.0.*"
     },
     "require-dev": {
+        "phpspec/phpspec":      "2.0.*@dev",
         "twig/twig":            "~1.11",
         "doctrine/orm":         "~2.3",
-        "doctrine/mongodb-odm": "1.0.*@dev",
-        "phpspec/phpspec":      "2.0.*"
+        "doctrine/mongodb-odm": "1.0.*@dev"
     },
     "suggest": {
         "fsc/hateoas-bundle":   "0.3.x-dev",
@@ -45,7 +44,7 @@
     "target-dir": "Sylius/Bundle/ResourceBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.4.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
