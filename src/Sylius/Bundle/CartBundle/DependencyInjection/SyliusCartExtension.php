@@ -64,8 +64,7 @@ class SyliusCartExtension extends Extension implements PrependExtensionInterface
      */
     public function prepend(ContainerBuilder $container)
     {
-        if(!array_key_exists('SyliusSalesBundle', $container->getParameter('kernel.bundles')))
-        {
+        if (!array_key_exists('SyliusSalesBundle', $container->getParameter('kernel.bundles'))) {
             return;
         }
 
