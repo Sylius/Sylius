@@ -16,16 +16,15 @@
             "homepage": "https://github.com/Sylius/SyliusInstallerBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
+        "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.2",
-        "sylius/resource-bundle":   "~0.1",
-        "sylius/flow-bundle":       "0.1.*"
+        "sylius/resource-bundle":   "1.0.*@dev",
+        "sylius/flow-bundle":       "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec2":         "dev-develop",
+        "phpspec/phpspec2":         "2.0.*@dev",
         "symfony/form":             "~2.2",
         "symfony/validator":        "~2.2"
     },

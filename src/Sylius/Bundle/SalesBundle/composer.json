@@ -16,12 +16,11 @@
             "homepage": "https://github.com/Sylius/SyliusSalesBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "sylius/resource-bundle":          "0.3.*",
+        "sylius/resource-bundle":          "1.0.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
@@ -39,7 +38,7 @@
     "target-dir": "Sylius/Bundle/SalesBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

@@ -16,17 +16,16 @@
             "homepage": "https://github.com/Sylius/SyliusProductBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
 
         "symfony/framework-bundle":        "2.3.*",
-        "sylius/resource-bundle":          "0.3.*",
+        "sylius/resource-bundle":          "1.0.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
+        "phpspec/phpspec":          "2.0.*@dev",
         "doctrine/doctrine-bundle": "1.2.*",
-        "phpspec/phpspec":          "2.0.*",
         "symfony/form":             "2.3.*",
         "symfony/validator":        "2.3.*"
     },
@@ -39,7 +38,7 @@
     "target-dir": "Sylius/Bundle/ProductBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
