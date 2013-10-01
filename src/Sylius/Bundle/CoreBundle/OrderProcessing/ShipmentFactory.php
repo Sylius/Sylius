@@ -43,12 +43,17 @@ class ShipmentFactory implements ShipmentFactoryInterface
      */
     public function createShipment(OrderInterface $order)
     {
-        $shipment = $this->shipmentRepository->createNew();
+        $shipment = $order->getShipments()->first();
 
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            $shipment->addItem($inventoryUnit);
+        if (!$shipment) {
+            $shipment = $this->shipmentRepository->createNew();
+            $order->addShipment($shipment);
         }
 
-        $order->addShipment($shipment);
+        foreach ($order->getInventoryUnits() as $inventoryUnit) {
+            if (null === $inventoryUnit->getShipment()) {
+                $shipment->addItem($inventoryUnit);
+            }
+        }
     }
 }

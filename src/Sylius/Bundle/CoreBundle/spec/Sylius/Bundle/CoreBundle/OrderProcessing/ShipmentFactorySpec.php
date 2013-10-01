@@ -40,13 +40,89 @@ class ShipmentFactorySpec extends ObjectBehavior
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnit
      * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface           $shipment
+     * @param Doctrine\Common\Collections\ArrayCollection                $shipments
      */
-    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it($shipmentRepository, $order, $shipment, $inventoryUnit)
+    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it($shipmentRepository, $order, $shipment, $shipments, $inventoryUnit)
     {
-        $shipmentRepository->createNew()->willReturn($shipment);
-        $order->getInventoryUnits()->willReturn(array($inventoryUnit));
-        $shipment->addItem($inventoryUnit)->shouldBeCalled();
-        $order->addShipment($shipment)->shouldBeCalled();
+
+        $shipmentRepository
+            ->createNew()
+            ->willReturn($shipment)
+        ;
+
+        $order
+            ->getShipments()
+            ->willReturn($shipments)
+            ->shouldBeCalled()
+        ;
+
+        $shipments
+            ->first()
+            ->willReturn(null)
+            ->shouldBeCalled()
+        ;
+
+        $order
+            ->getInventoryUnits()
+            ->willReturn(array($inventoryUnit))
+        ;
+
+        $shipment
+            ->addItem($inventoryUnit)
+            ->shouldBeCalled()
+        ;
+
+        $order
+            ->addShipment($shipment)
+            ->shouldBeCalled()
+        ;
+
+        $this->createShipment($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnit
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnitWithoutShipment
+     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface           $shipment
+     * @param Doctrine\Common\Collections\ArrayCollection                $shipments
+     */
+    function it_adds_new_inventory_units_to_existing_shipment($order, $shipment, $shipments, $inventoryUnit, $inventoryUnitWithoutShipment)
+    {
+        $shipments
+            ->first()
+            ->willReturn($shipment)
+            ->shouldBeCalled()
+        ;
+
+        $inventoryUnit
+            ->getShipment()
+            ->willReturn($shipment)
+        ;
+
+        $order
+            ->getInventoryUnits()
+            ->willReturn(array(
+                $inventoryUnit,
+                $inventoryUnitWithoutShipment
+            ))
+        ;
+
+        $order
+            ->getShipments()
+            ->willReturn($shipments)
+            ->shouldBeCalled()
+        ;
+
+        $shipment
+            ->addItem($inventoryUnitWithoutShipment)
+            ->shouldBeCalled()
+        ;
+
+        $shipment
+            ->addItem($inventoryUnit)
+            ->shouldNotBeCalled()
+        ;
 
         $this->createShipment($order);
     }
