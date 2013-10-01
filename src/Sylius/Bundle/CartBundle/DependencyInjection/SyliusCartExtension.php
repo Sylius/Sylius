@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -22,8 +23,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class SyliusCartExtension extends Extension
+class SyliusCartExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -53,5 +55,27 @@ class SyliusCartExtension extends Extension
 
         $loader->load('services.xml');
         $loader->load('twig.xml');
+    }
+
+    /**
+     * Allow an extension to prepend the extension configurations.
+     *
+     * @param ContainerBuilder $container
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!array_key_exists('SyliusSalesBundle', $container->getParameter('kernel.bundles'))) {
+            return;
+        }
+
+        $config = array('classes' => array(
+            'order_item' => array(
+                'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
+            ),
+            'order' => array(
+                'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
+            )
+        ));
+        $container->prependExtensionConfig('sylius_sales', $config);
     }
 }
