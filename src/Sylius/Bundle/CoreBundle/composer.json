@@ -32,7 +32,7 @@
         "sylius/payments-bundle":         "1.0.*@dev",
         "sylius/flow-bundle":             "1.0.*@dev",
         "sylius/resource-bundle":         "1.0.*@dev",
-        "sylius/omnipay-bundle":          "0.9.*@dev",
+        "sylius/omnipay-bundle":          "1.0.*@dev",
         "athari/yalinqo":                 "*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "fzaninotto/faker":               "1.2.*",
