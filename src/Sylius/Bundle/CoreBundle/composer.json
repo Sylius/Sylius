@@ -39,7 +39,7 @@
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "knplabs/knp-snappy-bundle":      "dev-master@dev",
-        "liip/imagine-bundle":            "0.9.*",
+        "liip/imagine-bundle":            "1.0.*@dev",
         "mathiasverraes/money":           "dev-master@dev",
         "omnipay/omnipay":                "dev-master@dev"
     },
