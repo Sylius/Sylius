@@ -13,7 +13,7 @@
     </div>
     </div>
     <div class="hidden-xs pull-right">
-        <p class="navbar-text">{{ 'sylius.backend_welcome'|trans({'name': app.user.fullname}) }}</p>
+        <p class="navbar-text">{{ 'sylius.backend_welcome'|trans({'%name%': app.user.fullname})|raw }}</p>
 
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
