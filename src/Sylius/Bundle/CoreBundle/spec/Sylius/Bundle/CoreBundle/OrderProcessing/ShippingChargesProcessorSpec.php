@@ -42,8 +42,20 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
      */
+    function it_removes_existing_shipping_adjustments($order)
+    {
+        $order->getShipments()->shouldBeCalled()->willReturn(array());
+        $order->removeShippingAdjustments()->shouldBeCalled();
+
+        $this->applyShippingCharges($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     */
     function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments($order)
     {
+        $order->removeShippingAdjustments()->shouldBeCalled();
         $order->getShipments()->shouldBeCalled()->willReturn(array());
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
@@ -72,6 +84,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $adjustment->setLabel(Order::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('FedEx')->shouldBeCalled();
 
+        $order->removeShippingAdjustments()->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
 
         $this->applyShippingCharges($order);

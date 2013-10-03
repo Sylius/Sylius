@@ -48,7 +48,19 @@ class TaxationProcessorSpec extends ObjectBehavior
     function it_doesnt_apply_any_taxes_if_order_has_no_items($order)
     {
         $order->getItems()->willReturn(array());
+        $order->removeTaxAdjustments()->shouldBeCalled();
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $this->applyTaxes($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     */
+    function it_removes_existing_tax_adjustments($order)
+    {
+        $order->getItems()->willReturn(array());
+        $order->removeTaxAdjustments()->shouldBeCalled();
 
         $this->applyTaxes($order);
     }
