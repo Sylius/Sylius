@@ -848,7 +848,7 @@
       </trans-unit>
       <trans-unit id="0fea2c0d773e0fd31071242bf3e08cc1e4985e4d" resname="sylius.order_item.product">
         <source>sylius.order_item.product</source>
-        <target state="new">sylius.order_item.product</target>
+        <target state="new">Item</target>
       </trans-unit>
       <trans-unit id="d6996fff9a652255c942a01fdf1f8bf2dccd9581" resname="sylius.order_item.quantity">
         <source>sylius.order_item.quantity</source>
@@ -900,7 +900,7 @@
       </trans-unit>
       <trans-unit id="00e2e839f9e93cf829db14571158e7294eb59abe" resname="sylius.payment.manage">
         <source>sylius.payment.manage</source>
-        <target state="new">sylius.payment.manage</target>
+        <target state="new">Manage payments</target>
       </trans-unit>
       <trans-unit id="e1feb8dab161ec13f09d208db81764f4930e1dc0" resname="sylius.payment.method">
         <source>sylius.payment.method</source>
@@ -912,7 +912,7 @@
       </trans-unit>
       <trans-unit id="062b84c2acb5e0ce654f9e4ba370be9adb8879f6" resname="sylius.payment.state">
         <source>sylius.payment.state</source>
-        <target state="new">sylius.payment.state</target>
+        <target state="new">State</target>
       </trans-unit>
       <trans-unit id="4626fae315fee34c6d67338788fc047e722e08e1" resname="sylius.payment.update_header">
         <source>sylius.payment.update_header</source>
@@ -1152,11 +1152,11 @@
       </trans-unit>
       <trans-unit id="4d2b6e3aca0d7e0a1603a28f7c3cb43d69bd5f15" resname="sylius.promotion.general_info">
         <source>sylius.promotion.general_info</source>
-        <target state="new">sylius.promotion.general_info</target>
+        <target state="new">General Info</target>
       </trans-unit>
       <trans-unit id="77842c29927bd96d6a3f85724e15659aa73d0676" resname="sylius.promotion.id">
         <source>sylius.promotion.id</source>
-        <target state="new">sylius.promotion.id</target>
+        <target state="new">ID</target>
       </trans-unit>
       <trans-unit id="c132a586506c97c8c4c018517eb1c51a859509a5" resname="sylius.promotion.index_header">
         <source>sylius.promotion.index_header</source>
@@ -1232,7 +1232,7 @@
       </trans-unit>
       <trans-unit id="2f02ea4a29c7b12a324cefb85bfbc389b7886b98" resname="sylius.promotion_coupon.index_header">
         <source>sylius.promotion_coupon.index_header</source>
-        <target state="new">sylius.promotion_coupon.index_header</target>
+        <target state="new">Coupons</target>
       </trans-unit>
       <trans-unit id="e907e14265fa727fba9ec8ef1958767c5b8bff5e" resname="sylius.promotion_coupon.no_results">
         <source>sylius.promotion_coupon.no_results</source>
@@ -1700,7 +1700,7 @@
       </trans-unit>
       <trans-unit id="18cb1d2e47ed42d1eac695f5678eba8391328ad4" resname="sylius.taxonomy.manage">
         <source>sylius.taxonomy.manage</source>
-        <target state="new">sylius.taxonomy.manage</target>
+        <target>Manage taxonomies</target>
       </trans-unit>
       <trans-unit id="f741a9948d736e718345ee8154c43c1ef6fd3998" resname="sylius.taxonomy.name">
         <source>sylius.taxonomy.name</source>

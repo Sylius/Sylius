@@ -8,7 +8,7 @@ body.signin {
     padding-top: 200px;
     background-color: #333;
 }
-body.signin img {
+img.swan {
     position: absolute;
     z-index: -1000;
     margin-left: 250px;
@@ -66,6 +66,9 @@ a:visited {
 }
 .btn-link {
     font-size: 14px;
+}
+.btn-link:hover {
+    color: #5a5a5a;
 }
 a.btn-default:link {
     background-color: #f1f1f1;

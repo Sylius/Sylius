@@ -26,7 +26,7 @@
     </head>
     <body class="signin">
         <form method="post" action="{{ path('sylius_backend_security_login') }}" class="form-signin">
-            <img src="{{ asset('bundles/syliusweb/img/swan.png') }}" />
+            <img src="{{ asset('bundles/syliusweb/img/swan.png') }}" class="swan" />
             <h2 class="form-signin-heading">{{ 'sylius.login_header'|trans }}</h2>
             <input type="text" name="_username" class="form-control" placeholder="{{ 'sylius.email'|trans }}"><br>
             <input type="password" name="_password" class="form-control" placeholder="{{ 'sylius.password'|trans }}">

@@ -6,10 +6,7 @@
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
-</div>
-
-<div class="well well-small">
+    <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
@@ -17,25 +14,106 @@
        <i class="icon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
+    </div>
+    <h1><i class="icon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
 </div>
 
-<div class="well">
-    <h3>{{ product.name }}</h3>
-    <p>{{ product.shortDescription|default('sylius.product.no_short_description'|trans)|raw }}</p>
-</div>
-
-<div class="fluid-row">
-    <div class="span6">
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ product.name }}</div>
+            <div class="panel-body">{{ product.shortDescription|default('sylius.product.no_short_description'|trans)|raw }}</div>
+        </div>
+    </div>
+    <div class="col-md-6">
         <div class="well">
             <p>{{ product.description }}</p>
         </div>
     </div>
-    <div class="span6">
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.order.general_info'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.shipment.id'|trans }}</strong></td>
+                    <td>{{ product.id }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.name'|trans }}</td>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.available_on'|trans }}</td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.options'|trans }}</td>
+                    <td>
+                        {% if product.hasOptions %}
+                        <ul>
+                        {% for option in product.options %}
+                            <li>{{ option.name }} ({{ option.values|join(', ') }})</li>
+                        {% endfor %}
+                        </ul>
+                        {% else %}
+                            <span class="label label-info">
+                                <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.categorization'|trans }}</td>
+                    <td>
+                        {% if product.taxons|length > 0 %}
+                        <ul>
+                        {% for taxon in product.taxons %}
+                            <li>{{ taxon.name }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% else %}
+                            <span class="label label-info">
+                                <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_taxons'|trans }}
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.tax_category'|trans }}</td>
+                    <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
+                    <td>
+                        <span class="badge badge-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
+                            {{ product.masterVariant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.stock'|trans }}</td>
+                    <td><span class="badge badge-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.price'|trans }}</td>
+                    <td>{{ product.masterVariant.price|sylius_money }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
         {% if product.images|length > 0 %}
-        <div class="well" data-toggle="modal-gallery" data-target="#modal-gallery">
+        <div data-toggle="modal-gallery" data-target="#modal-gallery">
             {% for image in product.images %}
-            <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ product.name }}">
-                <img class="img-polaroid" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
+            <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ product.name }}" class="thumbnail" style="width: 90px;">
+                <img src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
             </a>
             {% endfor %}
         </div>
@@ -45,63 +123,6 @@
     </div>
 </div>
 
-<hr>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>{{ 'sylius.product.name'|trans }}</th>
-            <th>{{ 'sylius.product.available_on'|trans }}</th>
-            <th>{{ 'sylius.product.options'|trans }}</th>
-            <th>{{ 'sylius.product.categorization'|trans }}</th>
-            <th>{{ 'sylius.product.tax_category'|trans }}</th>
-            <th>{{ 'sylius.product.available_on_demand'|trans }}</th>
-            <th>{{ 'sylius.product.stock'|trans }}</th>
-            <th>{{ 'sylius.product.price'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td><span class="label label-{{ product.available ? 'success' : 'important' }}">{{ product.availableOn|date }}</span></td>
-            <td>
-                {% if product.hasOptions %}
-                <ul>
-                {% for option in product.options %}
-                    <li>{{ option.name }} ({{ option.values|join(', ') }})</li>
-                {% endfor %}
-                </ul>
-                {% else %}
-                    <span class="label label-info">
-                        <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
-                    </span>
-                {% endif %}
-            </td>
-            <td>
-                {% if product.taxons|length > 0 %}
-                <ul>
-                {% for taxon in product.taxons %}
-                    <li>{{ taxon.name }}</li>
-                {% endfor %}
-                </ul>
-                {% else %}
-                    <span class="label label-info">
-                        <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_taxons'|trans }}
-                    </span>
-                {% endif %}
-            </td>
-            <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
-            <td>
-                <span class="badge badge-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
-                    {{ product.masterVariant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
-            </td>
-            <td><span class="badge badge-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
-            <td>{{ product.masterVariant.price|sylius_money }}</td>
-        </tr>
-    </tbody>
-</table>
 {% if product.hasOptions %}
 <hr>
 <div class="well well-small">
