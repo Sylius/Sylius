@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
 *
@@ -134,6 +135,88 @@ class OrderSpec extends ObjectBehavior
         $this->removeShipment($shipment);
 
         $this->hasShipment($shipment)->shouldReturn(false);
+    }
+
+    /**
+     * helper method
+     *
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     */
+    protected function addShippingAndTaxAdjustments($order, $shippingAdjustment, $taxAdjustment)
+    {
+        $shippingAdjustment->getLabel()->willReturn(OrderInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->setAdjustable($order)->shouldBeCalled();
+        $taxAdjustment->getLabel()->willReturn(OrderInterface::TAX_ADJUSTMENT);
+        $taxAdjustment->setAdjustable($order)->shouldBeCalled();
+
+        $order->addAdjustment($shippingAdjustment);
+        $order->addAdjustment($taxAdjustment);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     */
+    function it_should_return_shipping_adjustments($shippingAdjustment, $taxAdjustment)
+    {
+        $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
+
+        $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
+
+        $shippingAdjustments = $this->getShippingAdjustments();
+        $shippingAdjustments->count()->shouldReturn(1); //but here we only get shipping
+        $shippingAdjustments->first()->shouldReturn($shippingAdjustment);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     */
+    function it_should_remove_shipping_adjustments($shippingAdjustment, $taxAdjustment)
+    {
+        $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
+
+        $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
+
+        $shippingAdjustment->setAdjustable(null)->shouldBeCalled();
+        $this->removeShippingAdjustments();
+
+        $this->getAdjustments()->count()->shouldReturn(1); //one has been removed
+        $this->getShippingAdjustments()->count()->shouldReturn(0); //shipping adjustment has been removed
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     */
+    function it_should_return_tax_adjustments($shippingAdjustment, $taxAdjustment)
+    {
+        $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
+
+        $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
+
+        $taxAdjustments = $this->getTaxAdjustments();
+        $taxAdjustments->count()->shouldReturn(1); //but here we only get tax
+        $taxAdjustments->first()->shouldReturn($taxAdjustment);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     */
+    function it_should_remove_tax_adjustments($shippingAdjustment, $taxAdjustment)
+    {
+        $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
+
+        $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
+
+        $taxAdjustment->setAdjustable(null)->shouldBeCalled();
+        $this->removeTaxAdjustments();
+
+        $this->getAdjustments()->count()->shouldReturn(1); //one has been removed
+        $this->getTaxAdjustments()->count()->shouldReturn(0); //tax adjustment has been removed
     }
 
     /*
