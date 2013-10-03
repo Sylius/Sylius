@@ -17,7 +17,7 @@
     {% for zone in zones %}
         <tr>
             <td>{{ zone.id }}</td>
-            <td><a href="{{ path('sylius_backend_zone_show', {'id': zone.id}) }}">{{ zone.name }}</a></td>
+            <td><a href="{{ path('sylius_backend_zone_show', {'id': zone.id}) }}"><strong>{{ zone.name }}</strong></a></td>
             <td><span class="label label-primary">{{ zone.type }}</span></td>
             <td>
                 <div class="pull-right">

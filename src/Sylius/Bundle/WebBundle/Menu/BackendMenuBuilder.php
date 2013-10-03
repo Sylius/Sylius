@@ -81,6 +81,11 @@ class BackendMenuBuilder extends MenuBuilder
             'labelAttributes'    => array('class' => 'nav-header')
         );
 
+        $menu->addChild('dashboard', array(
+            'route' => 'sylius_backend_dashboard',
+            'labelAttributes' => array('icon' => 'icon-dashboard'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.dashboard', 'sidebar')));
+
         $this->addAssortmentMenu($menu, $childOptions, 'sidebar');
         $this->addSalesMenu($menu, $childOptions, 'sidebar');
         $this->addCustomersMenu($menu, $childOptions, 'sidebar');

@@ -1,35 +1,39 @@
 {% form_theme form 'SyliusWebBundle:Backend/Promotion:_forms.html.twig' %}
 
 <div class="row">
-    <div class="col-md-12">
-    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.usageLimit) }}
-    {{ form_row(form.startsAt) }}
-    {{ form_row(form.endsAt) }}
-    {{ form_row(form.couponBased) }}
-    {{ form_widget(form._token) }}
+    <div class="col-md-8" style="border-right: 1px solid #ccc">
+        {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.usageLimit) }}
+        {{ form_row(form.startsAt) }}
+        {{ form_row(form.endsAt) }}
+        {{ form_row(form.couponBased) }}
+        {{ form_widget(form._token) }}
+    </div>
+
+    <div class="col-md-4">
+        <div class="col-md-12">
+            <div id="sylius_promotion_rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
+                {% for ruleForm in form.rules %}
+                    {{ form_widget(ruleForm) }}
+                {% endfor %}
+            </div>
+            <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>
+        </div>
+
+        <hr>
+
+        <div class="col-md-12">
+            <div id="sylius_promotion_actions" data-prototype="{{ form_widget(form.actions.vars.prototype)|e }}">
+                {% for actionForm in form.actions %}
+                    {{ form_row(actionForm) }}
+                {% endfor %}
+            </div>
+            <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>
+        </div>
     </div>
 </div>
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <div id="sylius_promotion_rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
-            {% for ruleForm in form.rules %}
-            {{ form_widget(ruleForm) }}
-            {% endfor %}
-        </div>
-        <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>
-    </div>
-    <div class="col-md-6">
-        <div id="sylius_promotion_actions" data-prototype="{{ form_widget(form.actions.vars.prototype)|e }}">
-            {% for actionForm in form.actions %}
-                {{ form_row(actionForm) }}
-            {% endfor %}
-        </div>
-        <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>
-    </div>
-</div>
+
 <hr>
 
 {% for type, prototype in form.vars.prototypes %}

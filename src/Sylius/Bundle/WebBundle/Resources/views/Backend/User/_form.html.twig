@@ -1,5 +1,5 @@
 {{ form_errors(form) }}
-<div class="row-fluid">
+<div class="row">
     <fieldset>
         {{ form_row(form.email) }}
         {{ form_row(form.firstName) }}
@@ -7,14 +7,14 @@
         {{ form_row(form.plainPassword) }}
         {{ form_row(form.enabled) }}
     </fieldset>
-    <div class="span5 well">
+    <div class="col-md-5 well">
         <fieldset>
             <h4>{{ form.shippingAddress.vars.label|trans({}, form.shippingAddress.vars.translation_domain) }}</h4>
             {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
             {{ form_row(form.differentBillingAddress) }}
         </fieldset>
     </div>
-    <div id="sylius-billing-address-container" class="span5 well">
+    <div id="sylius-billing-address-container" class="col-md-5 well">
         <fieldset>
             <h4>{{ form.billingAddress.vars.label|trans({}, form.billingAddress.vars.translation_domain) }}</h4>
             {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}

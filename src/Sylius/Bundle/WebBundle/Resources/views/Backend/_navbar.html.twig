@@ -7,24 +7,24 @@
         </button>
         <a class="navbar-brand" href="#" style="padding:0"><img src="{{ asset('bundles/syliusweb/img/logo.png') }}" style="height: 30px; margin-left: 10px; margin-top: 10px;"/></a>
     </div>
-    <div class="visible-xs">
-    <div class="collapse navbar-collapse">
-        {{ knp_menu_render('sylius.backend.main', {'template': 'SyliusWebBundle:Backend:menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}
+    <div class="visible-xs visible-sm">
+        <div class="collapse navbar-collapse">
+            {{ knp_menu_render('sylius.backend.main', {'template': 'SyliusWebBundle:Backend:menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}
+        </div>
     </div>
-    </div>
-    <div class="hidden-xs pull-right">
+    <div class="hidden-xs hidden-sm pull-right">
         <p class="navbar-text">{{ 'sylius.backend_welcome'|trans({'%name%': app.user.fullname})|raw }}</p>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle navbar-widget" data-toggle="dropdown">
-                  <i class="icon-sort-down"></i>
-              </a>
-              <ul class="dropdown-menu">
-                  <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> {{ 'sylius.backend.logout'|trans }}</a></li>
-                  <li><a href="{{ path('sylius_homepage') }}"><i class="icon-home"></i> {{ 'sylius.backend.menu.main.homepage'|trans({}, 'menu') }}</a></li>
-              </ul>
-          </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle navbar-widget" data-toggle="dropdown">
+                    <i class="icon-sort-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('sylius_homepage') }}"><i class="icon-home"></i> {{ 'sylius.backend.menu.main.homepage'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> {{ 'sylius.backend.logout'|trans }}</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

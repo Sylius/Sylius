@@ -26,6 +26,7 @@
 </div>
 
 <div class="alert alert-info">
+    <button type="button" class="close" aria-hidden="true">&times;</button>
     <h4 class="alert-heading">{{ 'sylius.backend.alert.info'|trans }}</h4>
     There are no new notifications.
 </div>
@@ -45,19 +46,19 @@
     </tbody>
 </table>
 
-<div class="row-fluid">
+<div class="row" class="visible-md">
     {% for id, chart in charts %}
-        <div class="span6">
-            <h3>{{ chart.label|trans }}</h3>
-            <canvas id="{{ id }}" width="600" height="400"></canvas>
+        <div class="col-md-6">
+            <h3><i class="{{ loop.first ? 'icon-dollar' : 'icon-shopping-cart' }}"></i> {{ chart.label|trans }}</h3>
+            <canvas id="{{ id }}" width="700" height="400"></canvas>
         </div>
     {% endfor %}
 </div>
 
-<h3>{{ 'sylius.order.recent_header'|trans }}</h3>
+<h3><a href="{{ path('sylius_backend_order_index') }}"><i class="icon-shopping-cart"></i> {{ 'sylius.order.recent_header'|trans }}</a></h3>
 {{ listOrders(orders)  }}
 
-<h3>{{ 'sylius.user.recent_header'|trans }}</h3>
+<h3><a href="{{ path('sylius_backend_user_index') }}"><i class="icon-user"></i> {{ 'sylius.user.recent_header'|trans }}</a></h3>
 {{ listUsers(users)  }}
 
 {% endblock %}

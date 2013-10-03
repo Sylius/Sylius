@@ -43,32 +43,39 @@
                 </td>
             </tr>
             {% if product.hasOptions %}
-                <tr>
-                    <th>id</th>
-                    <th>{{ 'sylius.variant.availability'|trans }}</th>
-                    <th>{{ 'sylius.variant.options'|trans }}</th>
-                    <th></th>
-                    <th colspan="2"></th>
-                </tr>
-                {% for variant in product.variants %}
-                    <tr>
-                        <td>{{ variant.id }}</td>
-                        <td><span class="label label-{{ variant.available ? 'success' : 'danger' }}">{{ variant.availableOn|date }}</span></td>
-                        <td>
-                            <ul>
-                                {% for option in variant.options %}
-                                    <li><strong>{{ option.name }}</strong>: {{ option.value }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <td><span class="label label-{{ variant.inStock ? 'success' : 'danger' }}">{{ variant.onHand }}</span></td>
-                        <td>
-                            <div class="pull-right">
-                            {{ buttons.edit(path('sylius_backend_variant_update', {'productId': product.id, 'id': variant.id})) }}
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
+            <tr>
+                <td style="padding-top: 0;border-top: 0">&nbsp;</td>
+                <td colspan="4" style="padding-top: 0;border-top: 0">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>id</th>
+                                <th>{{ 'sylius.variant.availability'|trans }}</th>
+                                <th>{{ 'sylius.variant.options'|trans }}</th>
+                                <th></th>
+                                <th colspan="2"></th>
+                            </tr>
+                            {% for variant in product.variants %}
+                                <tr>
+                                    <td>{{ variant.id }}</td>
+                                    <td><span class="label label-{{ variant.available ? 'success' : 'danger' }}">{{ variant.availableOn|date }}</span></td>
+                                    <td>
+                                        {% for option in variant.options %}
+                                            <span class="label label-primary">{{ option.name }}: {{ option.value }}</span>
+                                        {% endfor %}
+                                    </td>
+                                    <td><span class="label label-{{ variant.inStock ? 'success' : 'danger' }}">{{ variant.onHand }}</span></td>
+                                    <td>
+                                        <div class="pull-right">
+                                            {{ buttons.edit(path('sylius_backend_variant_update', {'productId': product.id, 'id': variant.id})) }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
             {% endif %}
         {% endfor %}
     </tbody>
