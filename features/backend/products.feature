@@ -81,6 +81,14 @@ Feature: Products
          Then I should still be on the product creation page
           And I should see "Please enter the price."
 
+    Scenario: Trying to create product with invalid price
+        Given I am on the product creation page
+         When I fill in "Name" with "Bag"
+          And I fill in "Price" with "-0.01"
+          And I press "Create"
+         Then I should still be on the product creation page
+          And I should see "Price must not be negative."
+
     Scenario: Creating simple product without any properties and options
         Given I am on the product creation page
          When I fill in the following:

@@ -46,6 +46,12 @@ Feature: Product variants
          When I press "Create"
          Then I should see "Variant with this option set already exists."
 
+    Scenario: Trying to create product variant with invalid price
+        Given I am creating variant of "Black T-Shirt"
+         When I fill in "Price" with "-0.01"
+          And I press "Create"
+         Then I should see "Price must not be negative"
+
     Scenario: Displaying the "Generate variants" button
               only for products with options
         Given I am viewing product "Mug"
