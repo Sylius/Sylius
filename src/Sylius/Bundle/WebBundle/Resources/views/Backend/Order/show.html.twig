@@ -2,6 +2,14 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
+    <li>#{{ order.number }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
 <h1>{{ 'sylius.order.show_header'|trans({'%number%': order.number})|raw }}</h1>

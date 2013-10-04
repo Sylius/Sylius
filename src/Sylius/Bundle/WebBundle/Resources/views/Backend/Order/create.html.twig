@@ -2,9 +2,17 @@
 
 {% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.order.create_header'|trans|raw }}</h1>
+    <h1><i class="icon-plus"></i> {{ 'sylius.order.create_header'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

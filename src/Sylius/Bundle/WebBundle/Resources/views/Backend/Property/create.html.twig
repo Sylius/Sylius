@@ -11,6 +11,14 @@
 {% endjavascripts %}
 {% endblock %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_property_index') }}">{{ 'sylius.breadcrumb.property.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</a></li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1><i class="icon-plus-sign"></i> {{ 'sylius.property.create_header'|trans|raw }}</h1>

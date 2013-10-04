@@ -2,6 +2,15 @@
 
 {% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_shipping_method_index') }}">{{ 'sylius.breadcrumb.shipping_method.index'|trans }}</a></li>
+    <li>{{ tax_category.name }}</li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1><i class="icon-pencil">{{ 'sylius.tax_category.update_header'|trans|raw }}</h1>

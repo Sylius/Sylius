@@ -5,6 +5,14 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_shipment_index') }}">{{ 'sylius.breadcrumb.shipment.index'|trans }}</a></li>
+    <li>{{ shipment.id }}</a></li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1><i class="icon-info-sign"></i> {{ 'sylius.shipment.show_header'|trans|raw }}</h1>
