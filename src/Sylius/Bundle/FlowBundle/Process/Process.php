@@ -188,6 +188,7 @@ class Process implements ProcessInterface
 
         unset($this->steps[$name]);
         unset($this->orderedSteps[$index]);
+        $this->orderedSteps = array_values($this->orderedSteps); //keep sequential index intact
     }
 
     /**
