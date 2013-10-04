@@ -1,11 +1,12 @@
 {{ form_errors(form) }}
 
 <div class="row">
-    <div class="col-md-6">
-    {{ form_row(form.name) }}
-    {{ form_row(form.presentation) }}
+    <div class="col-md-8 row-split">
+        {{ form_row(form.name) }}
+        {{ form_row(form.presentation) }}
     </div>
-    <div class="col-md-6">
+
+    <div class="col-md-4">
         <div id="sylius-option-values" class="collection-container" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">
             {% for valueForm in form.values %}
                 {{ form_row(valueForm.value)  }}

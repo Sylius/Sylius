@@ -19,10 +19,7 @@ h2.form-signin-heading {
     background-color: #f1f1f1;
     text-transform: uppercase;
     padding: 10px;
-    margin-left: -15px;
-    margin-right: -15px;
-    margin-top: -10px;
-    margin-bottom: 20px;
+    margin: -10px -15px 20px;
     text-align: center;
 }
 form.form-signin {
@@ -30,7 +27,6 @@ form.form-signin {
     padding: 15px;
     background-color: #fff;
     max-width: 330px;
-    margin: auto;
     border-radius: 6px;
 }
 form.form-signin label {
@@ -139,6 +135,14 @@ a.btn-success:visited {
 .navbar-collapse {
     border: none;
 }
+.navbar-brand {
+    padding: 0
+}
+.navbar-brand img {
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
 .navbar-inverse {
   border: none;
   background-color: #333;
@@ -182,6 +186,14 @@ th a:link {
 th a:visited {
     color: #5a5a5a;
 }
+.table tbody > tr.sub-table > td {
+    padding-top: 0;
+    border-top: 0
+}
+
+.row-split {
+    border-right: 1px solid #eee
+}
 
 .grid-tabs {
     margin-bottom: 10px;
@@ -223,7 +235,7 @@ th a:visited {
 #sidebar span.nav-header {
     display: block;
     text-align: center;
-    padding: 10px 0 10px 0;
+    padding: 10px 0;
     font-weight: bold;
     font-size: 1.2em;
     color: #fff;
@@ -271,10 +283,7 @@ th a:visited {
 .actions-menu a {
 }
 .page-header {
-    margin-left: -15px;
-    margin-top: 0;
-    margin-right: -15px;
-    margin-bottom: 20px;
+    margin: 0 -15px 20px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -351,7 +360,6 @@ input[type="file"] {
     float: none;
     position: absolute;
     left: 0;
-    top: 0;
     top: 4px;
 }
 .control-choice-input .control-label {

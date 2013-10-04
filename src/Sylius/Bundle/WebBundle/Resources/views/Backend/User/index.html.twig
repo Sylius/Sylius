@@ -14,11 +14,13 @@
 
 {% render(url('sylius_backend_user_filter_form')) %}
 
+{% set activeTab = (app.request.query.get('criteria') is not empty and app.request.query.get('criteria').enabled == '0') ? 'disabled' : 'all' %}
+
 <div class="row">
     <div class="col-md-12">
         <ul class="nav nav-tabs grid-tabs">
-            <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>
-            <li><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><span class="label label-important"><i class="icon-info-sign"></i></span> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
+            <li class="{{ activeTab == 'all' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>
+            <li class="{{ activeTab == 'disabled' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><i class="icon-info-sign"></i> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
         </ul>
     </div>
 </div>
