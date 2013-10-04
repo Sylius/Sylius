@@ -1,5 +1,15 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.orders'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_promotion_index') }}">{{ 'sylius.breadcrumb.promotion.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id}) }}">{{ promotion.name }}</a></li>
+    <li><a href="{{ path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}) }}">{{ 'sylius.breadcrumb.promotion_coupon.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.generate'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1><i class="icon-random"></i> {{ 'sylius.promotion_coupon.generate_header'|trans|raw }}</h1>

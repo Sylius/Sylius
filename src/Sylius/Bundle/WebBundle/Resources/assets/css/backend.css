@@ -72,48 +72,37 @@ a:visited {
 }
 a.btn-default:link {
     background-color: #f1f1f1;
-    border-bottom: 4px solid #ddd;
     color: #5a5a5a;
 }
 a.btn-default:visited {
     background-color: #f1f1f1;
-    border-bottom: 2px solid #ddd;
     color: #5a5a5a;
 }
 a.btn-default:hover {
     background-color: #f1f1f1;
-    border-bottom: 2px solid #ddd;
     color: #5a5a5a;
 }
 a.btn-default:focus {
     background-color: #f1f1f1;
-    border-bottom: 4px solid #ddd;
     color: #5a5a5a;
 }
 a.btn-primary:link {
     color: #fff;
-    border-bottom: 4px solid #357ebd;
 }
 a.btn-primary:visited {
     color: #fff;
 }
 a.btn-primary:hover {
-    background-color: #428bca;
     color: #fff;
-    border-bottom: 2px solid #357ebd;
 }
 .btn-primary {
     color: #fff;
-    border-bottom: 4px solid #357ebd;
 }
 .btn-primary:hover {
-    background-color: #428bca;
     color: #fff;
-    border-bottom: 2px solid #357ebd;
 }
 a.btn-info:link {
     color: #fff;
-    border-bottom: 4px solid #39b3d7;
 }
 a.btn-info:visited {
     color: #fff;
@@ -121,17 +110,9 @@ a.btn-info:visited {
 a.btn-info:hover {
     color: #fff;
     background-color: #5bc0de;
-    border-bottom: 2px solid #39b3d7;
 }
 a.btn-danger:link {
     color: #fff;
-}
-.btn-danger {
-    border-bottom: 4px solid #d2322d;
-}
-.btn-danger:hover {
-    background-color: #d9534f;
-    border-bottom: 2px solid #d2322d;
 }
 a.btn-danger:visited {
     color: #fff;
@@ -140,13 +121,11 @@ a.btn-danger:visited {
     background-color: #1abb9c;
     border: none;
     color: #fff !important;
-    border-bottom: 4px solid #10846e;
 }
 .btn-success:hover {
     background-color: #1abb9c;
     border: none;
     color: #fff;
-    border-bottom: 2px solid #10846e;
 }
 a.btn-success:visited {
     background-color: #1abb9c;
@@ -323,17 +302,17 @@ th a:visited {
     margin-top: 25px;
 }
 
-#breadcrumb {
+#topbar {
     background-color: #f1f1f1;
     margin-left: -15px;
     margin-top: -30px;
     padding: 8px 0 8px 0;
 }
-#breadcrumb ol {
+#topbar ol {
     margin: 0;
     padding: 0 0 0 15px;
 }
-#breadcrumb li {
+#topbar li {
     display: inline;
 }
 

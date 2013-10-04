@@ -3,6 +3,14 @@
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Taxon:macros.html.twig' import list %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
+    <li>{{ taxonomy.name }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">

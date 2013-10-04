@@ -3284,17 +3284,17 @@
         },
         {
             "name": "white-october/pagerfanta-bundle",
-            "version": "v1.0.0",
+            "version": "dev-master",
             "target-dir": "WhiteOctober/PagerfantaBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
-                "reference": "6bea6f3a23ea4b69d821b00c89a3746e437b8880"
+                "reference": "d02dcf3fb08e57267dfdae73687a20601157e6a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/6bea6f3a23ea4b69d821b00c89a3746e437b8880",
-                "reference": "6bea6f3a23ea4b69d821b00c89a3746e437b8880",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/d02dcf3fb08e57267dfdae73687a20601157e6a5",
+                "reference": "d02dcf3fb08e57267dfdae73687a20601157e6a5",
                 "shasum": ""
             },
             "require": {
@@ -3329,7 +3329,7 @@
                 "page",
                 "paging"
             ],
-            "time": "2013-06-06 08:08:38"
+            "time": "2013-09-26 11:26:40"
         },
         {
             "name": "willdurand/negotiation",
@@ -4017,6 +4017,8 @@
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
         "omnipay/omnipay": 20,
+        "white-october/pagerfanta-bundle": 20,
+        "behat/behat": 0,
         "phpspec/phpspec": 20
     },
     "platform": {

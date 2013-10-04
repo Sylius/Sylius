@@ -39,7 +39,11 @@
                 {% endblock %}
             </div>
             <div class="col-md-10">
-                {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
+                <div id="topbar">
+                    {% block topbar %}
+                    {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
+                    {% endblock %}
+                </div>
                 <div id="content">
                 {% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
 
