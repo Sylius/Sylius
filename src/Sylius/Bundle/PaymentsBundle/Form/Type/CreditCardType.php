@@ -44,10 +44,10 @@ class CreditCardType extends AbstractType
               ->add('cardholderName', 'text', array(
                 'label' => 'sylius.form.credit_card.cardholder_name',
               ))
-              ->add('number', 'number', array(
+              ->add('number', 'text', array(
                   'label' => 'sylius.form.credit_card.number',
               ))
-              ->add('securityCode', 'number', array(
+              ->add('securityCode', 'text', array(
                   'label' => 'sylius.form.credit_card.security_code',
               ))
               ->add('expiryMonth', 'choice', array(
