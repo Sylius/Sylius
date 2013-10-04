@@ -32,7 +32,7 @@
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
-                <option name="min">0.01</option>
+                <option name="min">0.00</option>
                 <option name="minMessage">sylius.variant.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
