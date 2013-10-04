@@ -80,7 +80,7 @@
       </trans-unit>
       <trans-unit id="2778024ebd57e2b432792826251bee65" resname="sylius.variant.price.min">
         <source>sylius.variant.price.min</source>
-        <target>Price must be greater than {{ limit }}.</target>
+        <target>Price must not be negative.</target>
       </trans-unit>
       <trans-unit id="087a6beb8ec9ff5d48d8d620286faa51" resname="sylius.variant.price.not_blank">
         <source>sylius.variant.price.not_blank</source>

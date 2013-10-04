@@ -48,9 +48,9 @@ Feature: Product variants
 
     Scenario: Trying to create product variant with invalid price
         Given I am creating variant of "Black T-Shirt"
-         When I fill in "Price" with "0.00"
+         When I fill in "Price" with "-0.01"
           And I press "Create"
-         Then I should see "Price must be greater than 0.01"
+         Then I should see "Price must not be negative"
 
     Scenario: Displaying the "Generate variants" button
               only for products with options
