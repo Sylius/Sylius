@@ -23,7 +23,7 @@ Feature: User account password change
 
     Scenario: Changing my password with a wrong confirmation password
         Given I am on my account password page
-         When I fill in "Current password" with "password"
+         When I fill in "Current password" with "sylius"
           And I fill in "New password" with "newpassword"
           And I fill in "Confirmation" with "wrongnewpassword"
           And I press "Save changes"
@@ -32,7 +32,7 @@ Feature: User account password change
 
     Scenario: Successfully changing my password
         Given I am on my account password page
-         When I fill in "Current password" with "password"
+         When I fill in "Current password" with "sylius"
           And I fill in "New password" with "newpassword"
           And I fill in "Confirmation" with "newpassword"
           And I press "Save changes"

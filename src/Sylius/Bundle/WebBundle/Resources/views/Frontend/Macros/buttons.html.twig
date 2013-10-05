@@ -1,5 +1,7 @@
-{% macro btn(url, message, id, icon) %}
-<a href="{{ url }}" class="btn" {% if id is not empty %} id="{{ id }}"{% endif %}>
+{% macro btn(url, message, id, icon, class) %}
+<a  class="btn {% if class is not empty %} {{ class }} {% endif %}"
+    {% if id is not empty %} id="{{ id }}"{% endif %}
+    href="{{ url }}">
     {% if icon is not empty %}
         <i class="icon-{{ icon }}"></i>
     {% endif %}
@@ -7,7 +9,7 @@
 </a>
 {% endmacro %}
 
-{% macro show(url, message, id) %}
+{% macro show(url, message, id, class) %}
     {% import _self as buttons %}
 
     {% if message is empty %}
@@ -15,4 +17,34 @@
     {% endif %}
 
     {{ buttons.btn(url, message, id, 'book') }}
+{% endmacro %}
+
+{% macro create(url, message, id) %}
+    {% import _self as buttons %}
+
+    {% if message is empty %}
+        {% set message = 'sylius.create'|trans %}
+    {% endif %}
+
+    {{ buttons.btn(url, message, id, 'plus-sign', 'btn-primary') }}
+{% endmacro %}
+
+{% macro edit(url, message, id) %}
+    {% import _self as buttons %}
+
+    {% if message is empty %}
+        {% set message = 'sylius.edit'|trans %}
+    {% endif %}
+
+    {{ buttons.btn(url, message, id, 'pencil') }}
+{% endmacro %}
+
+{% macro delete(url, message) %}
+    <form action="{{ url }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i>
+            {{ message is empty ? 'sylius.delete'|trans : message }}
+        </button>
+    </form>
 {% endmacro %}

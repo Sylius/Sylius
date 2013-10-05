@@ -239,6 +239,23 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^the following addresses exist:$/
+     */
+    public function theFollowingAddressesExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $address = $this->createAddress($data['address']);
+            $user = $this->thereIsUser($data['user'], 'password');
+            $user->addAddress($address);
+            $manager->persist($address);
+            $manager->persist($user);
+            $manager->flush();
+        }
+    }
+
+    /**
      * @Given /^promotion "([^""]*)" has following coupons defined:$/
      * @Given /^promotion "([^""]*)" has following coupons:$/
      */
@@ -758,6 +775,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
     /**
      * @Given /^there are following countries:$/
+     * @Given /^the following countries exist:$/
      */
     public function thereAreCountries(TableNode $table)
     {
@@ -878,6 +896,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         $type = str_replace(' ', '_', StringUtil::singularify($type));
         $type = is_array($type) ? $type[1] : $type; // Hacky hack for multiple singular forms.
+        $type = $type == 'addresse' ? 'address' : $type; // Hacky hack again because we do not retrieve the right singular with the previous hack...
 
         $manager = $this->getEntityManager();
 
@@ -907,8 +926,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $address->setFirstname(trim($firstname));
         $address->setLastname(trim($lastname));
         $address->setStreet($addressData[1]);
-        $address->setCity($addressData[2]);
-        $address->setPostcode($addressData[3]);
+        $address->setPostcode($addressData[2]);
+        $address->setCity($addressData[3]);
         $address->setCountry($this->findOneByName('country', $addressData[4]));
 
         return $address;

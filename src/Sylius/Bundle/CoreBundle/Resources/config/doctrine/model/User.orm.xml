@@ -31,10 +31,10 @@
         <many-to-many field="addresses" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
             <join-table name="sylius_user_address">
                 <join-columns>
-                    <join-column name="user_id" referenced-column-name="id" />
+                    <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="address_id" referenced-column-name="id" unique="true" />
+                    <join-column name="address_id" referenced-column-name="id" unique="true" on-delete="CASCADE"/>
                 </inverse-join-columns>
             </join-table>
             <cascade>
