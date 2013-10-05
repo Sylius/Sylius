@@ -106,7 +106,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     {
         $calculator = $this->calculatorRegistry->getCalculator($calculatorName);
 
-        if (true !== $calculator->isConfigurable()) {
+        if (!$calculator->isConfigurable()) {
             return;
         }
 
