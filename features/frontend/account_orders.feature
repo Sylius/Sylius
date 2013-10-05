@@ -28,16 +28,16 @@ Feature: User account orders page
       | Book          | 22.50 | 948 |
     And the following orders exist:
       | user                    | shipment                 | address                                                           |
-      | email@foo.com           | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | sylius@example.com       | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
       | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
       | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
       | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
       | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | sylius@example.com       | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | sylius@example.com       | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
       | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | email@foo.com           | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | sylius@example.com       | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+      | sylius@example.com       | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
       | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
     # order that has been sent
     And order #000000001 has following items:

@@ -1,0 +1,64 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'sylius.account.address.list'|trans }}</h4>
+
+    {% if app.user.billingAddress is empty or app.user.shippingAddress is empty %}
+        <p>
+        {% if app.user.billingAddress is empty %}
+            <span class="label label-success">{{ 'sylius.account.address.default.no_billing'|trans }}</span>
+        {% endif %}
+        {% if app.user.shippingAddress is empty %}
+            <span class="label label-info">{{ 'sylius.account.address.default.no_shipping'|trans }}</span>
+        {% endif %}
+        </p>
+    {% endif %}
+
+    <div class="row-fluid">
+        {% if addresses is not empty %}
+            <table id="addresses" class="table">
+                <tbody>
+                {% for address in addresses %}
+                    <tr>
+                        <td>
+                            {{ include('SyliusWebBundle:Frontend/Account/Address:_address.html.twig') }}
+                        </td>
+                        <td>
+                            {% if address == app.user.billingAddress %}
+                                <span id="defaultBillingAddress" class="label label-success">{{ 'sylius.account.address.default.billing'|trans }}</span><br><br>
+                            {% endif %}
+                            {% if address == app.user.shippingAddress %}
+                                <span id="defaultShippingAddress" class="label label-info">{{ 'sylius.account.address.default.shipping'|trans }}</span><br><br>
+                            {% endif %}
+
+                            {% if address != app.user.billingAddress %}
+                                {{ buttons.btn(
+                                    path('sylius_account_address_set_default_billing', {'id': address.id}),
+                                    'sylius.account.address.action.billing', '', 'star-empty') }}
+                                <br>
+                            {% endif %}
+                            {% if address != app.user.shippingAddress %}
+                                {{ buttons.btn(
+                                    path('sylius_account_address_set_default_shipping', {'id': address.id}),
+                                    'sylius.account.address.action.shipping', '', 'star') }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ buttons.edit(
+                                path('sylius_account_address_update', {'id': address.id}),
+                                'sylius.account.address.action.edit') }}&nbsp;
+                            {{ buttons.delete(
+                                path('sylius_account_address_delete', {'id': address.id}),
+                                'sylius.account.address.action.delete'|trans) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{{ 'sylius.account.address.empty'|trans }}</p>
+        {% endif %}
+        <p>{{ buttons.create(path('sylius_account_address_create'), 'sylius.account.address.action.create') }}</p>
+    </div>
+{% endblock %}
