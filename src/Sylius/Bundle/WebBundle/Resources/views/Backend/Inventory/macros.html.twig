@@ -5,7 +5,7 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if products|length > 0 %}
-<table class="table">
+<table class="table" id="stockables">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>

@@ -603,9 +603,9 @@ class WebUser extends MinkContext implements KernelAwareInterface
     public function iShouldSeeThatMuchResourcesInTheList($amount, $type)
     {
         if (1 === count($this->getSession()->getPage()->findAll('css', 'table'))) {
-            $this->assertSession()->elementsCount('css', 'table tbody tr', $amount);
+            $this->assertSession()->elementsCount('css', 'table tbody > tr', $amount);
         } else {
-            $this->assertSession()->elementsCount('css', sprintf('table#%s tbody tr', str_replace(' ', '-', $type)), $amount);
+            $this->assertSession()->elementsCount('css', sprintf('table#%s tbody > tr', str_replace(' ', '-', $type)), $amount);
         }
     }
 
