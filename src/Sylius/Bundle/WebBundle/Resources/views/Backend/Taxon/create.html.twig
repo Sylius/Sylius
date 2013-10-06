@@ -2,6 +2,15 @@
 
 {% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_taxonomy_show', {'id': taxon.taxonomy.id}) }}">{{ taxon.taxonomy.name }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</a></li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1><i class="icon-plus-sign"></i> {{ 'sylius.taxon.create_header'|trans|raw }}</h1>

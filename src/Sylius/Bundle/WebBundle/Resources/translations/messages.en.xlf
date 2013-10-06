@@ -1995,7 +1995,6 @@
         <target>Create zone</target>
       </trans-unit>
       <trans-unit id="389f17f78a9bddaa339b1851058931ce" resname="sylius.zone.create_header">
-        <source>sylius.zone.create_header</source>
         <target>New zone</target>
       </trans-unit>
       <trans-unit id="0a46e2b9b142d4c7045a610f1faacc10" resname="sylius.zone.index_header">

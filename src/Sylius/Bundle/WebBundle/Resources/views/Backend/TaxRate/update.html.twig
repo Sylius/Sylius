@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_tax_rate_index') }}">{{ 'sylius.breadcrumb.tax_rate.index'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_tax_rate_show') }}">{{ tax_rate.name }}</a></li>
+    <li><a href="{{ path('sylius_backend_tax_rate_show', {'id': tax_rate.id}) }}">{{ tax_rate.name }}</a></li>
     <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
 </ol>
 {% endblock %}

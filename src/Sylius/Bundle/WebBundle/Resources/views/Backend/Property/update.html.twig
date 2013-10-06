@@ -15,7 +15,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_property_index') }}">{{ 'sylius.breadcrumb.property.index'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_property_show', {'id': property.id}) }}">{{ property.name }}</a></li>
+    <li>{{ property.name }}</li>
     <li>{{ 'sylius.breadcrumb.edit'|trans }}</a></li>
 </ol>
 {% endblock %}

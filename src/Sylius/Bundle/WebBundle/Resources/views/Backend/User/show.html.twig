@@ -2,6 +2,14 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.breadcrumb.user.index'|trans }}</a></li>
+    <li>{{ user.fullName  }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
