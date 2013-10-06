@@ -128,6 +128,31 @@
         {% else %}
             {{ alerts.info('sylius.product.no_images'|trans) }}
         {% endif %}
+
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.product.properties'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in product.properties %}
+                <tr>
+                    <td><strong>{{ property.name }}</strong></td>
+                    <td>{{ property.value }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">
+                        <span class="label label-info">
+                            <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_properties'|trans }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -142,32 +167,5 @@
 </div>
 
 {{ list_variants(product.variants) }}
-
 {% endif %}
-
-<hr>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th colspan="2">{{ 'sylius.product.properties'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for property in product.properties %}
-        <tr>
-            <td><strong>{{ property.name }}</strong></td>
-            <td>{{ property.value }}</td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="2">
-                <span class="label label-info">
-                    <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_properties'|trans }}
-                </span>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 {% endblock %}
