@@ -36,7 +36,7 @@
       </trans-unit>
       <trans-unit id="a624a1338ad967be54817e28763997e9" resname="sylius.form.order_filter.number">
         <source>sylius.form.order_filter.number</source>
-        <target>Anzahl</target>
+        <target>Nummer</target>
       </trans-unit>
       <trans-unit id="c0a7a1c526f3a80d3b6511a5b41c8124" resname="sylius.form.order_filter.total_from">
         <source>sylius.form.order_filter.total_from</source>
