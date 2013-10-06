@@ -56,7 +56,7 @@
       </trans-unit>
       <trans-unit id="1a4e98b8754497fa3704c316c2510326" resname="sylius.user.first_name.not_blank">
         <source>sylius.user.first_name.not_blank</source>
-        <target>Bitte geben Sie Ihren Vornamen ein.</target>
+        <target>Bitte geben Sie Ihren Vornamen an.</target>
       </trans-unit>
       <trans-unit id="60b6e5effce78494863245c780fde824" resname="sylius.user.last_name.max">
         <source>sylius.user.last_name.max</source>
@@ -80,11 +80,11 @@
       </trans-unit>
       <trans-unit id="2778024ebd57e2b432792826251bee65" resname="sylius.variant.price.min">
         <source>sylius.variant.price.min</source>
-        <target>Preis muss höher sein als {{ limit }}.</target>
+        <target>Der Preis darf nicht negativ sein.</target>
       </trans-unit>
       <trans-unit id="087a6beb8ec9ff5d48d8d620286faa51" resname="sylius.variant.price.not_blank">
         <source>sylius.variant.price.not_blank</source>
-        <target>Bitte Preis eingeben</target>
+        <target>Bitte geben Sie den Preis an.</target>
       </trans-unit>
       <trans-unit id="381ad7dedffbd02e6f060ea0cb53a38d" resname="sylius_shipping.method.zone.not_blank">
         <source>sylius_shipping.method.zone.not_blank</source>
@@ -92,7 +92,7 @@
       </trans-unit>
       <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
         <source>sylius_taxation.rate.zone.not_blank</source>
-        <target>Bitte Steuerzone angeben</target>
+        <target>Bitte geben Sie die Steuerzone an.</target>
       </trans-unit>
     </body>
   </file>
