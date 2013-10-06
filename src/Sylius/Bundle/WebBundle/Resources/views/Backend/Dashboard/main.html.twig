@@ -30,15 +30,15 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ 'sylius.backend.statistics.sales_this_month' }}</td>
+                    <td>{{ 'sylius.backend.statistics.sales_this_month'|trans }}</td>
                     <td>{{ sales|default(45623)|sylius_money }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.backend.statistics.orders_this_month' }}</td>
+                    <td>{{ 'sylius.backend.statistics.orders_this_month'|trans }}</td>
                     <td>{{ orders_count }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.backend.statistics.registrations_this_month' }}</td>
+                    <td>{{ 'sylius.backend.statistics.registrations_this_month'|trans }}</td>
                     <td>{{ registrations_count|default(6) }}</td>
                 </tr>
             </tbody>

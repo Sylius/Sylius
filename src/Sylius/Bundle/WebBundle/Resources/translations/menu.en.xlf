@@ -226,6 +226,10 @@
         <source>sylius.backend.menu.sidebar.zones</source>
         <target>Zones</target>
       </trans-unit>
+      <trans-unit id="b241b5168f9ae79f801f3a9da9fa356a" resname="sylius.frontend.menu.account.addresses">
+        <source>sylius.frontend.menu.account.addresses</source>
+        <target>My address book</target>
+      </trans-unit>
       <trans-unit id="9144c05a098a6fee4f74327a3b145ff8" resname="sylius.frontend.menu.account.homepage">
         <source>sylius.frontend.menu.account.homepage</source>
         <target>Home</target>
@@ -293,10 +297,6 @@
       <trans-unit id="90b8787bb7c8b9b67866bf520ef89d76" resname="sylius.frontend.menu.social.twitter">
         <source>sylius.frontend.menu.social.twitter</source>
         <target>Twitter</target>
-      </trans-unit>
-      <trans-unit id="56fa84e8aed489485e67cb845eb10794439fac43" resname="sylius.frontend.menu.account.addresses">
-        <source>sylius.frontend.menu.account.addresses</source>
-        <target state="new">My address book</target>
       </trans-unit>
     </body>
   </file>
