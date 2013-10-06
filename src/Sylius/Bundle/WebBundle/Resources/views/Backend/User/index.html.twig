@@ -21,7 +21,7 @@
 
 {% render(url('sylius_backend_user_filter_form')) %}
 
-{% set activeTab = (app.request.query.get('criteria') is not empty and app.request.query.get('criteria').enabled == '0') ? 'disabled' : 'all' %}
+{% set activeTab = (app.request.query.get('criteria') is not empty and app.request.query.get('criteria').enabled|default('1') == '0') ? 'disabled' : 'all' %}
 
 <div class="row">
     <div class="col-md-12">

@@ -551,11 +551,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I should see (\d+) fields on error$/
+     * @Given /^I should see (\d+) validation errors$/
      */
     public function iShouldSeeFieldsOnError($amount)
     {
-        $this->assertSession()->elementsCount('css', '.alert-error', $amount);
+        $this->assertSession()->elementsCount('css', '.form-error', $amount);
     }
 
     /**
