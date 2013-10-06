@@ -12,7 +12,7 @@
       </trans-unit>
       <trans-unit id="af5f81fbdd007eed41ece4ac53d44eb5" resname="sylius.form.checkout.addressing.different_billing_address">
         <source>sylius.form.checkout.addressing.different_billing_address</source>
-        <target>Möchten Sie eine andere Rechnungsadresse verwenden?</target>
+        <target>Möchten Sie eine andere Rechnungsadresse angeben</target>
       </trans-unit>
       <trans-unit id="046d3661fb78c22b79c702f200a40efa" resname="sylius.form.checkout.payment_method">
         <source>sylius.form.checkout.payment_method</source>
@@ -108,7 +108,7 @@
       </trans-unit>
       <trans-unit id="1a94897ae32dcbe5134f01c37660ef3d" resname="sylius.form.user.different_billing_address">
         <source>sylius.form.user.different_billing_address</source>
-        <target>Möchten Sie eine andere Rechnungsadresse verwenden?</target>
+        <target>Möchten Sie eine andere Rechnungsadresse angeben?</target>
       </trans-unit>
       <trans-unit id="944cf6ef4aa78e99e44806e693c69a30" resname="sylius.form.user.enabled">
         <source>sylius.form.user.enabled</source>
