@@ -30,11 +30,9 @@
             <td><span class="label label-{{ variant.available ? 'success' : 'important' }}">{{ variant.availableOn|date }}</span></td>
             <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
             <td>
-                <ul>
-                    {% for option in variant.options %}
-                        <li><strong>{{ option.name }}</strong>: {{ option.value }}</li>
-                    {% endfor %}
-                </ul>
+                {% for option in variant.options %}
+                    <span class="label label-primary">{{ option.name }}: {{ option.value }}</span>
+                {% endfor %}
             </td>
             <td>
                 <span class="badge badge-{{ variant.availableOnDemand ? 'success' : 'warning'}}">

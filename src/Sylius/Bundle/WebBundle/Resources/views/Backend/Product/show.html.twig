@@ -64,17 +64,13 @@
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
-                        {% if product.hasOptions %}
-                        <ul>
                         {% for option in product.options %}
-                            <li>{{ option.name }} ({{ option.values|join(', ') }})</li>
-                        {% endfor %}
-                        </ul>
+                            <span class="label label-primary">{{ option.name }}: {{ option.values|join(', ') }}</span>
                         {% else %}
                             <span class="label label-info">
                                 <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
                             </span>
-                        {% endif %}
+                        {% endfor %}
                     </td>
                 </tr>
                 <tr>

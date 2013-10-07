@@ -187,14 +187,18 @@ th a:visited {
 }
 
 #sidebar {
-    margin-top: -80px;
+    margin-top: -50px;
     padding-top: 50px;
     background-color: #333;
+    margin-bottom: -8000px;
+    padding-bottom: 8000px;
 }
 
 .main-container {
-    margin-top: 80px;
+    margin-top: 50px;
     margin-right: 0;
+    position: relative;
+    overflow: hidden;
 }
 .main-container .col-md-10 {
     padding-right: 0;
@@ -280,8 +284,8 @@ th a:visited {
 #topbar {
     background-color: #f1f1f1;
     margin-left: -15px;
-    margin-top: -30px;
-    padding: 8px 0 8px 0;
+    margin-top: 0;
+    padding: 8px 0;
 }
 #topbar ol {
     margin: 0;
