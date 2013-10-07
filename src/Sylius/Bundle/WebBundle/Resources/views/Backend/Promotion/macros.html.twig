@@ -25,7 +25,7 @@
                 </td>
                 <td>
                     <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.name }}</a>
-                    <p>{{ promotion.description }}</p>
+                    <p class="hidden-xs">{{ promotion.description }}</p>
                 </td>
                 <td>
                     <span class="label label-{{ promotion.couponBased ? 'success' : 'default'}}">
