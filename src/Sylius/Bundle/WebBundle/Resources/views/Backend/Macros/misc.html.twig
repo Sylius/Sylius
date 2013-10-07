@@ -1,12 +1,13 @@
 {% macro pagination(paginator, options) %}
 {% if paginator.haveToPaginate()|default(false) %}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-9">
         {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
     </div>
-    <div class="col-md-6">
+
+    <div class="col-xs-3">
         <div class="pull-right">
-            <div class="btn-group">
+            <div class="btn-group paginator">
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ paginator.maxPerPage }} &nbsp;<i class="icon-angle-down"></i></a>
                 <ul class="dropdown-menu pull-left" role="menu">
                     <li><a href="#">10</a></li>

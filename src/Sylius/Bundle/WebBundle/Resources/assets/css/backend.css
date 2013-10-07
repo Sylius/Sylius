@@ -124,6 +124,10 @@ a.btn-success:visited {
     background-color: #1abb9c;
     color: #fff;
 }
+.navbar-inverse .navbar-nav > .active.dropdown > a .caret {
+    border-bottom-color: #fff;
+    border-top-color: #fff;
+}
 .navbar-inverse .dropdown-menu {
     border: 0;
     box-shadow: none;
@@ -179,6 +183,9 @@ th a:visited {
 .pagination li.active > a, .pagination li.active > a:hover {
     background-color: #1abb9c;
     border-color: #ddd;
+}
+.paginator {
+    margin-top: -3px
 }
 
 /* Main layout. */
