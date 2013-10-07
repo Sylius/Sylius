@@ -341,6 +341,10 @@ input[type="file"] {
     border-color: #428bca;
 }
 
+.help-block {
+    margin-bottom: 0;
+}
+
 .control-choice-input {
     position: relative;
     height: 20px;
