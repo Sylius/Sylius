@@ -78,7 +78,7 @@
 
 {% block form_row %}
 {% spaceless %}
-    <div class="form-group {% if errors|length > 0 %}has-error{% endif %}">
+    <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
         {{ form_label(form) }}
         <div class="col-lg-10">
         {{ form_widget(form) }}

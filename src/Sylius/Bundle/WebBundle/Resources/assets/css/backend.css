@@ -52,13 +52,13 @@ a:visited {
 /* Buttons. */
 .btn {
     color: #fff;
-    border: none;
+    border: 0;
     text-transform: uppercase;
     font-size: 13px;
 }
 .btn i {
     font-size: 16px;
-    margin-right: 3px;
+    margin-right: 4px;
 }
 .btn-link {
     font-size: 14px;
@@ -66,51 +66,24 @@ a:visited {
 .btn-link:hover {
     color: #5a5a5a;
 }
-a.btn-default:link {
+a.btn-default:link, a.btn-default:visited, a.btn-default:hover, a.btn-default:focus {
     background-color: #f1f1f1;
     color: #5a5a5a;
 }
-a.btn-default:visited {
-    background-color: #f1f1f1;
-    color: #5a5a5a;
-}
-a.btn-default:hover {
-    background-color: #f1f1f1;
-    color: #5a5a5a;
-}
-a.btn-default:focus {
-    background-color: #f1f1f1;
-    color: #5a5a5a;
-}
-a.btn-primary:link {
+a.btn-primary:link, a.btn-primary:visited, a.btn-primary:hover {
     color: #fff;
 }
-a.btn-primary:visited {
+.btn-primary, .btn-primary:hover {
     color: #fff;
 }
-a.btn-primary:hover {
-    color: #fff;
-}
-.btn-primary {
-    color: #fff;
-}
-.btn-primary:hover {
-    color: #fff;
-}
-a.btn-info:link {
-    color: #fff;
-}
-a.btn-info:visited {
+a.btn-info:link, a.btn-info:visited {
     color: #fff;
 }
 a.btn-info:hover {
     color: #fff;
     background-color: #5bc0de;
 }
-a.btn-danger:link {
-    color: #fff;
-}
-a.btn-danger:visited {
+a.btn-danger:link, a.btn-danger:visited {
     color: #fff;
 }
 .btn-success {
@@ -144,7 +117,7 @@ a.btn-success:visited {
     margin-top: 10px;
 }
 .navbar-inverse {
-  border: none;
+  border: 0;
   background-color: #333;
 }
 .navbar-inverse .navbar-nav > li.active > a {
@@ -152,7 +125,7 @@ a.btn-success:visited {
     color: #fff;
 }
 .navbar-inverse .dropdown-menu {
-    border: none;
+    border: 0;
     box-shadow: none;
     border-radius: 0;
     background-color: #333;
@@ -203,11 +176,7 @@ th a:visited {
 .pagination {
     margin: 0 0 15px 0;
 }
-.pagination li.active > a {
-    background-color: #1abb9c;
-    border-color: #ddd;
-}
-.pagination li.active > a:hover {
+.pagination li.active > a, .pagination li.active > a:hover {
     background-color: #1abb9c;
     border-color: #ddd;
 }
@@ -379,4 +348,22 @@ input[type="file"] {
 
 .center-text {
     text-align: center;
+}
+
+/* Hide button text on small devices, as well remove some other margin/padding */
+@media (max-width: 992px) {
+    .btn i {
+        margin-right: 0;
+    }
+    .btn span {
+        display: none;
+    }
+
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .main-container .col-md-10 {
+        padding-left: 15px;
+    }
 }
