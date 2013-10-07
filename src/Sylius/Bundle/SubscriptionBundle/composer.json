@@ -1,0 +1,43 @@
+{
+    "name": "sylius/subscription-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible subscription system for Symfony2 ecommerce applications.",
+    "keywords": ["subscription", "club-membership", "recurring", "shop", "webshop", "ecommerce", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Richter",
+            "email": "nexyz9@gmail.com",
+            "homepage": "http://www.codemassacre.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/SyliusSubscriptionBundle/contributors"
+        }
+    ],
+    "require": {
+        "php":                             ">=5.3.3",
+
+        "symfony/framework-bundle":        "2.3.*",
+        "sylius/resource-bundle":          "1.0.*@dev",
+        "stof/doctrine-extensions-bundle": "1.1.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "2.0.*@dev",
+        "symfony/form":      "~2.3",
+        "symfony/validator": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\SubscriptionBundle\\": "" }
+    },
+    "target-dir": "Sylius/Bundle/SubscriptionBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

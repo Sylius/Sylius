@@ -48,6 +48,18 @@ sylius:
             total: Total
             tracking_number: Tracking number
         title: My account
+        subscription:
+            list: My Subscriptions
+            details: Subscription Details
+            update: Update Subscription
+            create: New Subscription
+            scheduled_date: Scheduled Date
+            num_items: Items
+            interval: Interval
+            limit: Limit
+            no_limit: ongoing
+            product: Product
+            quantity: Qty
     add_to_cart: Add to cart
     address:
         city: City

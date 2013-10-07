@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="sylius.subscription.processor.class">Sylius\Bundle\SubscriptionBundle\Processor\SubscriptionProcessor</parameter>
+        <parameter key="sylius.subscription.scheduler.class">Sylius\Bundle\SubscriptionBundle\Scheduler\SubscriptionScheduler</parameter>
+
+        <parameter key="sylius.form.type.subscription.class">Sylius\Bundle\SubscriptionBundle\Form\Type\SubscriptionType</parameter>
+        <parameter key="sylius.form.type.subscription_item.class">Sylius\Bundle\SubscriptionBundle\Form\Type\SubscriptionItemType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.subscription" class="%sylius.controller.subscription.class%">
+            <argument>sylius</argument>
+            <argument>subscription</argument>
+            <argument>SyliusSubscriptionBundle:Subscription</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.subscription.scheduler" class="%sylius.subscription.scheduler.class%" />
+
+        <service id="sylius.subscription.processor" class="%sylius.subscription.processor.class%">
+            <argument type="service" id="sylius.repository.subscription" />
+            <argument type="service" id="sylius.manager.subscription" />
+            <argument type="service" id="sylius.subscription.scheduler" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="sylius.form.subscriber.subscription" class="Sylius\Bundle\SubscriptionBundle\Form\EventListener\SubscriptionTypeSubscriber" />
+
+        <service id="sylius.form.type.subscription" class="%sylius.form.type.subscription.class%">
+            <argument>%sylius.model.subscription.class%</argument>
+            <argument type="service" id="sylius.form.subscriber.subscription" />
+            <tag name="form.type" alias="sylius_subscription" />
+        </service>
+        <service id="sylius.form.type.subscription_item" class="%sylius.form.type.subscription_item.class%">
+            <argument>%sylius.model.subscription_item.class%</argument>
+            <tag name="form.type" alias="sylius_subscription_item" />
+        </service>
+    </services>
+
+</container>

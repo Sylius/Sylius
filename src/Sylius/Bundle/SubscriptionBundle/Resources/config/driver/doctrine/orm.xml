@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.repository.subscription.class">Sylius\Bundle\SubscriptionBundle\Doctrine\ORM\SubscriptionRepository</parameter>
+        <parameter key="sylius.repository.subscription_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.manager.subscription" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.subscription" class="%sylius.repository.subscription.class%">
+            <argument type="service" id="sylius.manager.subscription" />
+            <argument type="service">
+                <service
+                        factory-service="sylius.manager.subscription"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%sylius.model.subscription.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.subscription_item" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.subscription_item" class="%sylius.repository.subscription_item.class%">
+            <argument type="service" id="sylius.manager.subscription_item" />
+            <argument type="service">
+                <service
+                        factory-service="sylius.manager.subscription_item"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%sylius.model.subscription_item.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+
+</container>

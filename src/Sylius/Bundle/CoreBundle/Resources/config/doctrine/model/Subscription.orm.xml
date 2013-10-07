@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Subscription" table="sylius_subscription">
+        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Model\UserInterface" inversed-by="subscriptions">
+            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+        <many-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+            <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+    </mapped-superclass>
+
+</doctrine-mapping>

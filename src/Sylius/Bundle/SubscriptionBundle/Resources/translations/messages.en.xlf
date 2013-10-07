@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="bcb360725d6d3f7ad8dc3eaaf448bf89" resname="sylius.form.subscription.scheduled_date">
+        <source>sylius.form.subscription.scheduled_date</source>
+        <target>Scheduled Date</target>
+      </trans-unit>
+      <trans-unit id="f77a53803391983d89ba195ec3545380" resname="sylius.form.subscription.interval">
+        <source>sylius.form.subscription.interval</source>
+        <target>Interval</target>
+      </trans-unit>
+      <trans-unit id="4c74b285ea7c0229d1f25ae0f17731a4" resname="sylius.form.subscription.limit">
+        <source>sylius.form.subscription.limit</source>
+        <target>Limit</target>
+      </trans-unit>
+      <trans-unit id="c19bc4a70c2a65c0b162899784daa461" resname="sylius.form.subscription.limit.help">
+        <source>sylius.form.subscription.limit.help</source>
+        <target>Leave empty for ongoing subscription.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,38 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'sylius.account.subscription.list'|trans }}</h4>
+
+    <div class="row-fluid">
+        {% if subscriptions is not empty %}
+            <table id="subscriptions" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{ 'sylius.account.subscription.scheduled_date'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.num_items'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.interval'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.limit'|trans }}</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subscription in subscriptions %}
+                    <tr class="subscription" id="subscription-{{ subscription.id }}">
+                        <td>{{ subscription.scheduledDate|date }}</td>
+                        <td>{{ subscription.countItems }}</td>
+                        <td>{{ subscription.interval }}</td>
+                        <td>{{ subscription.limit ?: 'sylius.account.subscription.no_limit'|trans }}</td>
+                        <td>
+                            {{ buttons.show(path('sylius_account_subscription_show', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}
+                            {{ buttons.edit(path('sylius_account_subscription_update', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{{ 'sylius.account.subscription.empty'|trans }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

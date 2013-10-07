@@ -1,0 +1,57 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'sylius.account.subscription.details'|trans }}</h4>
+
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="well">
+                <h5>{{ 'sylius.account.subscription.scheduled_date'|trans }}</h5>
+                <p>{{ subscription.scheduledDate|date }}</p>
+
+                <h5>{{ 'sylius.account.subscription.interval'|trans }}</h5>
+                <p>{{ subscription.interval }}</p>
+
+                <h5>{{ 'sylius.account.subscription.limit'|trans }}</h5>
+                <p>{{ subscription.limit }}</p>
+            </div>
+        </div>
+        <div class="span8">
+            {% if subscription.items is not empty %}
+                <table class="table table-striped">
+                    <tr>
+                        <th colspan="2">{{ 'sylius.account.subscription.product'|trans }}</th>
+                        <th>{{ 'sylius.account.subscription.quantity'|trans }}</th>
+                    </tr>
+                    {% for item in subscription.items %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('sylius_product_show', {'slug': item.product.slug}) }}">
+                                    <img class="thumbnail" src="{{ item.product.image ? item.product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="{{ item.product.name }}" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('sylius_product_show', {'slug': item.product.slug}) }}">
+                                    <strong>{{ item.product.name }}</strong>
+                                </a>
+                                <ul>
+                                    {% for option in item.variant.options %}
+                                        <li>{{ option.presentation }}: {{ option.value }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ item.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p class="label label-warning">{{ 'sylius.account.subscription.no_items'|trans }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {{ buttons.edit(path('sylius_account_subscription_update', { id: subscription.id })) }}&nbsp;
+    {{ buttons.delete(path('sylius_account_subscription_delete', { id: subscription.id })) }}
+
+{% endblock %}
