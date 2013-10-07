@@ -64,13 +64,17 @@
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
+                        <ul>
                         {% for option in product.options %}
-                            <span class="label label-primary">{{ option.name }}: {{ option.values|join(', ') }}</span>
+                            <li><strong>{{ option.name }}</strong>: {{ option.values|join(', ') }}.</li>
                         {% else %}
-                            <span class="label label-info">
-                                <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
-                            </span>
+                            <li>
+                                <span class="label label-info">
+                                    <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
+                                </span>
+                            </li>
                         {% endfor %}
+                        </ul>
                     </td>
                 </tr>
                 <tr>
@@ -96,14 +100,14 @@
                 <tr>
                     <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
                     <td>
-                        <span class="badge badge-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
+                        <span class="label label-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
                             {{ product.masterVariant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.stock'|trans }}</td>
-                    <td><span class="badge badge-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
+                    <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>

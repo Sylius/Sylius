@@ -33,7 +33,7 @@
                 {% block sidebar %}
                 <div id="sidebar">
                     <div class="sidebar-nav">
-                        {{ knp_menu_render('sylius.backend.sidebar', {'template': 'SyliusWebBundle::menu.html.twig', 'currentClass': 'active'}) }}
+                        {{ knp_menu_render('sylius.backend.sidebar', {'template': 'SyliusWebBundle::menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}
                     </div>
                 </div>
                 {% endblock %}

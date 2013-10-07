@@ -3,19 +3,19 @@
         {% set images = product.images %}
 
         {% for image in product.images %}
-        <div class="sylius-assortment-variant-images-image">
-            <div class="control-group">
-                <div class="controls">
-                    {% if image.path|length > 0 %}
-                    <a href="{{ image.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery">
-                        <img class="img-polaroid" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="" />
-                    </a>
-                    {% endif %}
-                    &nbsp;
-                    {{ form_widget(form.masterVariant.images[loop.index0].file) }}
-                    &nbsp;
-                    <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="icon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
-                </div>
+        <div class="sylius-assortment-variant-images-image row">
+            <div class="col-md-1">
+                {% if image.path|length > 0 %}
+                <a href="{{ image.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery">
+                    <img class="img-rounded" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="" />
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-md-9">
+                {{ form_widget(form.masterVariant.images[loop.index0].file) }}
+            </div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="icon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
             </div>
         </div>
         {% endfor %}

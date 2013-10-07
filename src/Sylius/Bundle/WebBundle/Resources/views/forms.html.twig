@@ -70,8 +70,8 @@
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        {% set vars = widget == 'text' ? { 'attr': { 'size': 1, 'style': 'width: 40px; display: inline;' }} : {} %}
-        {{ form_widget(form.hour, vars) }}{% if with_minutes %}:{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %} {{ form_widget(form.second, vars) }}{% endif %}
+        {% set vars = widget == 'text' ? { 'attr': { 'size': 1, 'style': 'width: 60px; display: inline;' }} : {} %}
+        &nbsp;{{ form_widget(form.hour, vars) }}{% if with_minutes %}:{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %} {{ form_widget(form.second, vars) }}{% endif %}
     {% endif %}
 {% endspaceless %}
 {% endblock time_widget %}
