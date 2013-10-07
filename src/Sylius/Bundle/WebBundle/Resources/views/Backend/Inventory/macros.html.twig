@@ -38,16 +38,16 @@
                 </td>
                 <td>
                     <div class="pull-right">
-                    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+                        {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
                     </div>
                 </td>
             </tr>
             {% if product.hasOptions %}
             <tr class="sub-table">
-                <td>&nbsp;</td>
+                <td class="variant-table-toggle"><i class="icon icon-chevron-down"></i></td>
                 <td colspan="4">
                     <table class="table">
-                        <tbody>
+                        <thead>
                             <tr>
                                 <th>id</th>
                                 <th>{{ 'sylius.variant.availability'|trans }}</th>
@@ -55,6 +55,8 @@
                                 <th></th>
                                 <th colspan="2"></th>
                             </tr>
+                        </thead>
+                        <tbody style="display: none">
                             {% for variant in product.variants %}
                                 <tr>
                                     <td>{{ variant.id }}</td>

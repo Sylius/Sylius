@@ -26,7 +26,7 @@ use Twig_Function_Method;
 class SyliusResourceExtension extends Twig_Extension
 {
     /**
-     * @var Symfony\Component\HttpFoundation\Request
+     * @var \Symfony\Component\HttpFoundation\Request
      */
     private $request;
 
@@ -66,7 +66,7 @@ class SyliusResourceExtension extends Twig_Extension
 
         $routeParameters = empty($routeParameters) ? $this->request->attributes->get('_route_parameters', array()) : $routeParameters;
 
-        $sorting = $this->request->get('sorting');
+        $sorting = $this->request->get('sorting', array());
 
         if (null === $order && isset($sorting[$property])) {
             $currentOrder = $sorting[$property];
@@ -80,7 +80,9 @@ class SyliusResourceExtension extends Twig_Extension
             array('sorting' => array($property => $order)), $routeParameters
         ));
 
-        return sprintf('<a href="%s">%s</a>', $url, $label);
+        $active = $property == key($sorting) ? ($currentOrder === 'desc' ? ' <i class="icon icon-chevron-down"></i>' : ' <i class="icon icon-chevron-up"></i>'): '';
+
+        return sprintf('<a href="%s">%s%s</a>', $url, $label, $active);
     }
 
     /**

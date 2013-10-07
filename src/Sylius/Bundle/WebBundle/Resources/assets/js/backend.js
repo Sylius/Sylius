@@ -10,6 +10,14 @@
     'use strict';
 
     $(document).ready(function() {
+        $('.variant-table-toggle .icon').toggle(function() {
+            $(this).removeClass('icon-chevron-down').addClass('icon-chevron-up');
+            $(this).parent().parent().find('.table tbody').show();
+        }, function() {
+            $(this).addClass('icon-chevron-down').removeClass('icon-chevron-up');
+            $(this).parent().parent().find('.table tbody').hide();
+        });
+
         //$('select').select2();
     });
 })( jQuery );

@@ -100,6 +100,9 @@ a.btn-success:visited {
     background-color: #1abb9c;
     color: #fff;
 }
+.btn-lg.file-overlay {
+    text-align: center;
+}
 
 /* Labels. */
 .label-success { background-color: #1abb9c; }
@@ -166,6 +169,15 @@ th a:visited {
 .table tbody > tr.sub-table > td {
     padding-top: 0;
     border-top: 0
+}
+
+.variant-table-toggle {
+    text-align: center;
+}
+
+.variant-table-toggle i {
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .row-split {
