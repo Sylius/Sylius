@@ -37,7 +37,9 @@
             <td>
                 <span class="label label-warning">{{ order.state }}</span>
             </td>
-            <td><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="btn btn-link">{{ order.user.email }}</a></td>
+            <td>
+                <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="">{{ order.user.email }}</a></p>
+            </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
                 <div class="pull-right">
@@ -92,7 +94,9 @@
             <td>
                 <span class="label label-warning">{{ order.state }}</span>
             </td>
-            <td><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="btn btn-link">{{ order.user.email }}</a></td>
+            <td>
+                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="btn btn-link">{{ order.user.email }}</a>
+            </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
         </tr>
         {% endfor %}
