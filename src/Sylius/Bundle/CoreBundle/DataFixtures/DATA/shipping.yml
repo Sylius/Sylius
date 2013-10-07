@@ -1,0 +1,30 @@
+Sylius\Bundle\ShippingBundle\Model\ShippingCategory:
+    Sylius.Shipping.Category.Regular:
+        name: Regular
+        description: Regular weight items
+    Sylius.Shipping.Category.Heavy:
+        name: Heavy
+        description: Heavy items
+
+Sylius\Bundle\CoreBundle\Model\ShippingMethod:
+    Sylius.Shipping.Method.FedEx:
+        name: FedEx
+        zone: @Sylius.Zone.USA
+        calculator: flexible_rate
+        configuration: {first_item_cost: 1000, additional_item_cost: 500, additional_item_limit: 0}
+    Sylius.Shipping.Method.UPS:
+        name: UPS Ground
+        zone: @Sylius.Zone.EU
+        calculator: flat_rate
+        configuration: {amount: 2500}
+    Sylius.Shipping.Method.DHL:
+        name: DHL
+        zone: @Sylius.Zone.EU
+        calculator: flat_rate
+        configuration: {amount: 2500}
+    Sylius.Shipping.Method.FedExWorld:
+        name: FedEx World Shipping
+        zone: @Sylius.Zone.RestOfWorld
+        calculator: flexible_rate
+        configuration: {first_item_cost: 4000, additional_item_cost: 500, additional_item_limit: 10}
+

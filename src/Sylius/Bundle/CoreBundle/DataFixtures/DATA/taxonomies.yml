@@ -1,0 +1,13 @@
+Sylius\Bundle\CoreBundle\Model\Taxonomy:
+    Sylius.Taxonomy.Category:
+        name: Category
+    Sylius.Taxonomy.Brand:
+        name: Brand
+
+Sylius\Bundle\CoreBundle\Model\Taxon:
+    Sylius.Taxon.Category.{T-Shirts, Stickers, Mugs, Books}:
+        name: <current()>
+        taxonomy: @Sylius.Taxonomy.Category
+    Sylius.Taxon.Brand.{SuperTees, Stickypicky, Mugland, Bookmania}:
+        name: <current()>
+        taxonomy: @Sylius.Taxonomy.Brand

@@ -11,95 +11,24 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
-
 /**
  * Basic taxation fixtures.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadTaxationData extends DataFixture
+class LoadTaxationData extends AbstractDataFixture
 {
+
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $taxableGoods = $this->createTaxCategory('Taxable goods', 'Default taxation category');
+        return  array(
+            __DIR__ . '/../DATA/taxation.yml',
 
-        $manager->persist($taxableGoods);
-        $manager->flush();
-
-        $taxRate = $this->createTaxRate('EU VAT', 'EU', 0.23);
-        $taxRate->setCategory($taxableGoods);
-
-        $manager->persist($taxRate);
-        $manager->flush();
-
-        $taxableGoods->addRate($this->createTaxRate('US Sales Tax', 'USA', 0.08));
-        $taxRate->setCategory($taxableGoods);
-
-        $manager->persist($taxRate);
-        $manager->flush();
-
-        $taxableGoods->addRate($this->createTaxRate('No tax', 'Rest of World', 0.00));
-        $taxRate->setCategory($taxableGoods);
-
-        $manager->persist($taxRate);
-        $manager->flush();
-    }
-
-    /**
-     * Create tax category.
-     *
-     * @param string $name
-     * @param string $description
-     *
-     * @return TaxCategoryInterface
-     */
-    private function createTaxCategory($name, $description)
-    {
-        $category = $this
-            ->getTaxCategoryRepository()
-            ->createNew()
-        ;
-
-        $category->setName($name);
-        $category->setDescription($description);
-
-        $this->setReference('Sylius.TaxCategory.'.$name, $category);
-
-        return $category;
-    }
-
-    /**
-     * Create tax rate.
-     *
-     * @param string  $name
-     * @param string  $zoneName
-     * @param float   $amount
-     * @param Boolean $includedInPrice
-     * @param string  $calculator
-     *
-     * @return TaxRateInterface
-     */
-    private function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
-    {
-        $rate = $this
-            ->getTaxRateRepository()
-            ->createNew()
-        ;
-
-        $rate->setName($name);
-        $rate->setZone($this->getZoneByName($zoneName));
-        $rate->setAmount($amount);
-        $rate->setIncludedInPrice($includedInPrice);
-        $rate->setCalculator($calculator);
-
-        $this->setReference('Sylius.TaxRate.'.$name, $rate);
-
-        return $rate;
+        );
     }
 
     /**

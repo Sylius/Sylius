@@ -1,0 +1,28 @@
+Sylius\Bundle\VariableProductBundle\Model\Option:
+    Sylius.Option.TShirt.Size:
+        name: T-Shirt size
+        presentation: Size
+    Sylius.Option.TShirt.Color:
+        name: T-Shirt color
+        presentation: Color
+    Sylius.Option.Sticker.Size:
+        name: Sticker size
+        presentation: Size
+    Sylius.Option.Mug.Type:
+        name: Mug type
+        presentation: Type
+
+Sylius\Bundle\VariableProductBundle\Model\OptionValue:
+    Sylius.Option.TShirt.Size.{S, M, L, XL, XXL}:
+        value: <current()>
+        option: @Sylius.Option.TShirt.Size
+    Sylius.Option.TShirt.Color.{Red, Blue, Green}:
+        value: <current()>
+        option: @Sylius.Option.TShirt.Color
+    Sylius.Option.Sticker.Size.{3", 5", 7"}:
+        value: <current()>
+        option: @Sylius.Option.Sticker.Size
+    Sylius.Option.Mug.Type.{Medium mug, Double mug, MONSTER mug}:
+        value: <current()>
+        option: @Sylius.Option.Mug.Type
+

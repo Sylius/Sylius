@@ -11,114 +11,37 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
+use Nelmio\Alice\Fixtures;
 use Symfony\Component\Intl\Intl;
 
 /**
  * Default country fixtures.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadCountriesData extends DataFixture
+class LoadCountriesData extends AbstractDataFixture
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(ObjectManager $manager)
+    public function getCountryName($iso)
     {
-        $countryRepository = $this->getCountryRepository();
-        $countries = Intl::getRegionBundle()->getCountryNames();
+        return $this->getCountries()[$iso];
+    }
 
-        foreach ($countries as $isoName => $name) {
-            $country = $countryRepository->createNew();
-
-            $country->setName($name);
-            $country->setIsoName($isoName);
-
-            if ('US' === $isoName) {
-                $this->addUsStates($country);
-            }
-
-            $manager->persist($country);
-
-            $this->setReference('Sylius.Country.'.$isoName, $country);
-        }
-
-        $manager->flush();
+    public function getCountries()
+    {
+        $locale = $this->container->getParameter('sylius.locale');
+        return Intl::getRegionBundle()->getCountryNames($locale);
     }
 
     /**
-     * Adds all US states as provinces to given country.
-     *
-     * @param CountryInterface $country
+     * {@inheritdoc}
      */
-    private function addUsStates(CountryInterface $country)
+    protected function getFixtures()
     {
-        $states = array(
-            'AL' => 'Alabama',
-            'AK' => 'Alaska',
-            'AZ' => 'Arizona',
-            'AR' => 'Arkansas',
-            'CA' => 'California',
-            'CO' => 'Colorado',
-            'CT' => 'Connecticut',
-            'DE' => 'Delaware',
-            'DC' => 'District Of Columbia',
-            'FL' => 'Florida',
-            'GA' => 'Georgia',
-            'HI' => 'Hawaii',
-            'ID' => 'Idaho',
-            'IL' => 'Illinois',
-            'IN' => 'Indiana',
-            'IA' => 'Iowa',
-            'KS' => 'Kansas',
-            'KY' => 'Kentucky',
-            'LA' => 'Louisiana',
-            'ME' => 'Maine',
-            'MD' => 'Maryland',
-            'MA' => 'Massachusetts',
-            'MI' => 'Michigan',
-            'MN' => 'Minnesota',
-            'MS' => 'Mississippi',
-            'MO' => 'Missouri',
-            'MT' => 'Montana',
-            'NE' => 'Nebraska',
-            'NV' => 'Nevada',
-            'NH' => 'New Hampshire',
-            'NJ' => 'New Jersey',
-            'NM' => 'New Mexico',
-            'NY' => 'New York',
-            'NC' => 'North Carolina',
-            'ND' => 'North Dakota',
-            'OH' => 'Ohio',
-            'OK' => 'Oklahoma',
-            'OR' => 'Oregon',
-            'PA' => 'Pennsylvania',
-            'RI' => 'Rhode Island',
-            'SC' => 'South Carolina',
-            'SD' => 'South Dakota',
-            'TN' => 'Tennessee',
-            'TX' => 'Texas',
-            'UT' => 'Utah',
-            'VT' => 'Vermont',
-            'VA' => 'Virginia',
-            'WA' => 'Washington',
-            'WV' => 'West Virginia',
-            'WI' => 'Wisconsin',
-            'WY' => 'Wyoming'
+        return  array(
+            __DIR__ . '/../DATA/countries.yml',
+
         );
-
-        $provinceRepository = $this->getProvinceRepository();
-
-        foreach ($states as $isoName => $name) {
-            $province = $provinceRepository->createNew();
-            $province->setName($name);
-
-            $country->addProvince($province);
-
-            $this->setReference('Sylius.Province.'.$isoName, $province);
-        }
     }
 
     /**

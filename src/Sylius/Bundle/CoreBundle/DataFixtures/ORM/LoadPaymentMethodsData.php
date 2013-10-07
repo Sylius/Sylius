@@ -11,26 +11,24 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
-
 /**
  * Sample payment methods.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadPaymentMethodsData extends DataFixture
+class LoadPaymentMethodsData extends AbstractDataFixture
 {
+
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $manager->persist($this->createPaymentMethod('Dummy', 'dummy'));
-        $manager->persist($this->createPaymentMethod('Paypal Express Checkout', 'paypal_express_checkout'));
-        $manager->persist($this->createPaymentMethod('Stripe', 'stripe'));
-        $manager->persist($this->createPaymentMethod('Be2bill', 'be2bill'));
+        return  array(
+            __DIR__ . '/../DATA/payment_methods.yml',
 
-        $manager->flush();
+        );
     }
 
     /**
@@ -39,30 +37,5 @@ class LoadPaymentMethodsData extends DataFixture
     public function getOrder()
     {
         return 4;
-    }
-
-    /**
-     * Create payment method.
-     *
-     * @param string  $name
-     * @param string  $gateway
-     * @param Boolean $enabled
-     *
-     * @return PaymentMethodInterface
-     */
-    private function createPaymentMethod($name, $gateway, $enabled = true)
-    {
-        $method = $this
-            ->getPaymentMethodRepository()
-            ->createNew()
-        ;
-
-        $method->setName($name);
-        $method->setGateway($gateway);
-        $method->setEnabled($enabled);
-
-        $this->setReference('Sylius.PaymentMethod.'.$name, $method);
-
-        return $method;
     }
 }

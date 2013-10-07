@@ -11,52 +11,32 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
-
 /**
- * User fixtures.
+ * User fixtures.s
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadUsersData extends DataFixture
+class LoadUsersData extends AbstractDataFixture
 {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $user = $this->getUserRepository()->createNew();
+        return  array(
+            __DIR__ . '/../DATA/users.yml',
 
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
-        $user->setEmail('sylius@example.com');
-        $user->setPlainPassword('sylius');
-        $user->setEnabled(true);
-        $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
-        $user->setCurrency('EUR');
+        );
+    }
 
-        $manager->persist($user);
-        $manager->flush();
-
-        $this->setReference('User-Administrator', $user);
-
-        for ($i = 1; $i <= 15; $i++) {
-            $user = $this->getUserRepository()->createNew();
-
-            $username = $this->faker->username;
-
-            $user->setFirstname($this->faker->firstName);
-            $user->setLastname($this->faker->lastName);
-            $user->setEmail($username.'@example.com');
-            $user->setPlainPassword($username);
-            $user->setEnabled($this->faker->boolean());
-
-            $manager->persist($user);
-
-            $this->setReference('Sylius.User-'.$i, $user);
-        }
-
-        $manager->flush();
+    /**
+     * {@inheritdoc}
+     */
+    protected function getProcessors()
+    {
+        $userManager = $this->get('fos_user.user_manager');
+        return array(new UserProcessor($userManager));
     }
 
     /**
@@ -66,4 +46,5 @@ class LoadUsersData extends DataFixture
     {
         return 1;
     }
+
 }

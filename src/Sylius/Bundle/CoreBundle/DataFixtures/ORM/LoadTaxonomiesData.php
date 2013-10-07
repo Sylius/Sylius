@@ -11,63 +11,29 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
-
 /**
- * Default taxonomies to play with Sylius.
+ * Default country fixtures.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadTaxonomiesData extends DataFixture
+class LoadTaxonomiesData extends AbstractDataFixture
 {
+
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $manager->persist($this->createTaxonomy('Category', array(
-            'T-Shirts', 'Stickers', 'Mugs', 'Books'
-        )));
+        return  array(
+            __DIR__ . '/../DATA/taxonomies.yml',
 
-        $manager->persist($this->createTaxonomy('Brand', array(
-            'SuperTees', 'Stickypicky', 'Mugland', 'Bookmania'
-        )));
-
-        $manager->flush();
+        );
     }
 
     /**
-     * Create and save taxonomy with given taxons.
-     *
-     * @param string $name
-     * @param array  $taxons
+     * {@inheritdoc}
      */
-    private function createTaxonomy($name, array $taxons)
-    {
-        $taxonomy = $this
-            ->getTaxonomyRepository()
-            ->createNew()
-        ;
-
-        $taxonomy->setName($name);
-
-        foreach ($taxons as $taxonName) {
-            $taxon = $this
-                ->getTaxonRepository()
-                ->createNew()
-            ;
-
-            $taxon->setName($taxonName);
-
-            $taxonomy->addTaxon($taxon);
-            $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);
-        }
-
-        $this->setReference('Sylius.Taxonomy.'.$name, $taxonomy);
-
-        return $taxonomy;
-    }
-
     public function getOrder()
     {
         return 5;

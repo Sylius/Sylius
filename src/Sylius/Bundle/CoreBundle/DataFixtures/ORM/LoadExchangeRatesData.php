@@ -11,38 +11,25 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Nelmio\Alice\Fixtures;
 
 /**
  * Default exchange rate fixtures.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadExchangeRatesData extends DataFixture
+class LoadExchangeRatesData extends AbstractDataFixture
 {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $exchangeRateRepository = $this->getExchangeRateRepository();
+        return  array(
+            __DIR__ . '/../DATA/exchange_rates.yml',
 
-        $currencies = array(
-            'EUR' => 1.00,
-            'USD' => 1.30,
-            'GBP' => 0.85
         );
-
-        foreach ($currencies as $currency => $rate) {
-            $exchangeRate = $exchangeRateRepository->createNew();
-
-            $exchangeRate->setCurrency($currency);
-            $exchangeRate->setRate($rate);
-
-            $manager->persist($exchangeRate);
-        }
-
-        $manager->flush();
     }
 
     /**
@@ -52,4 +39,5 @@ class LoadExchangeRatesData extends DataFixture
     {
         return 1;
     }
+
 }

@@ -1,0 +1,28 @@
+Sylius\Bundle\PromotionsBundle\Model\Rule:
+    Sylius.Promotion.Rule.ItemCount:
+        type: item_count
+        configuration: {count: 3, equal: true}
+    Sylius.Promotion.Rule.ItemTotal:
+        type: item_total
+        configuration: {amount: 10000, equal: true}
+
+Sylius\Bundle\PromotionsBundle\Model\Action:
+    Sylius.Promotion.Action.FixedDiscount1:
+        type: fixed_discount
+        configuration: {amount: 500}
+    Sylius.Promotion.Action.FixedDiscount2:
+        type: fixed_discount
+        configuration: {amount: 250}
+
+Sylius\Bundle\PromotionsBundle\Model\Promotion:
+    Sylius.Promotion.NewYear:
+        name: New Year
+        description: New Year Sale for 3 and more items.
+        rules: [@Sylius.Promotion.Rule.ItemCount]
+        actions: [@Sylius.Promotion.Action.FixedDiscount1]
+    Sylius.Promotion.Christmas:
+        name: Christmas
+        description: Christmas Sale for orders over 100 EUR.
+        rules: [@Sylius.Promotion.Rule.ItemTotal]
+        actions: [@Sylius.Promotion.Action.FixedDiscount2]
+

@@ -11,48 +11,24 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Persistence\ObjectManager;
-
 /**
  * Default assortment product properties to play with Sylius sandbox.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Julien Janvier <j.janvier@gmail.com>
  */
-class LoadPropertiesData extends DataFixture
+class LoadPropertiesData extends AbstractDataFixture
 {
+
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $property = $this->createProperty('T-Shirt brand', 'Brand');
-        $manager->persist($property);
+        return  array(
+            __DIR__ . '/../DATA/properties.yml',
 
-        $property = $this->createProperty('T-Shirt collection', 'Collection');
-        $manager->persist($property);
-
-        $property = $this->createProperty('T-Shirt material', 'Made of');
-        $manager->persist($property);
-
-        $property = $this->createProperty('Sticker resolution', 'Print resolution');
-        $manager->persist($property);
-
-        $property = $this->createProperty('Sticker paper', 'Paper');
-        $manager->persist($property);
-
-        $property = $this->createProperty('Mug material', 'Material');
-        $manager->persist($property);
-
-        $property = $this->createProperty('Book author', 'Author');
-        $manager->persist($property);
-
-        $property = $this->createProperty('Book ISBN', 'ISBN');
-        $manager->persist($property);
-
-        $property = $this->createProperty('Book pages', 'Number of pages');
-        $manager->persist($property);
-
-        $manager->flush();
+        );
     }
 
     /**
@@ -63,22 +39,4 @@ class LoadPropertiesData extends DataFixture
         return 2;
     }
 
-    /**
-     * Create property.
-     *
-     * @param string $name
-     * @param string $presentation
-     */
-    private function createProperty($name, $presentation)
-    {
-        $repository = $this->getPropertyRepository();
-
-        $property = $repository->createNew();
-        $property->setName($name);
-        $property->setPresentation($presentation);
-
-        $this->setReference('Sylius.Property.'.$name, $property);
-
-        return $property;
-    }
 }
