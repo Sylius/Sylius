@@ -25,7 +25,10 @@ class UserFilterType extends AbstractType
     {
         $builder
             ->add('query', 'text', array(
-                'label' => 'sylius.form.user_filter.query'
+                'label' => 'sylius.form.user_filter.query',
+                'attr'  => array(
+                    'placeholder' => 'sylius.form.user_filter.query'
+                )
             ))
         ;
     }
