@@ -1,10 +1,12 @@
+{% form_theme form 'SyliusWebBundle:Backend/ShippingMethod:_forms.html.twig' %}
+
 <fieldset>
     <div class="row">
         <div class="col-md-6">
             {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
             {{ form_row(form.zone) }}
             {{ form_row(form.category, {'attr': {'class': 'select2'}}) }}
-            {{ form_row(form.categoryRequirement, {'attr': {'class': 'input-large'}}) }}
+            {{ form_row(form.categoryRequirement) }}
             {{ form_row(form.enabled, {'label': ''}) }}
         </div>
         <div class="col-md-6">
@@ -17,7 +19,7 @@
             {% if form.configuration is defined %}
                 <hr>
                 {% for field in form.configuration %}
-                {{ form_row(field) }}
+                    {{ form_row(field) }}
                 {% endfor %}
             {% endif %}
             </div>
