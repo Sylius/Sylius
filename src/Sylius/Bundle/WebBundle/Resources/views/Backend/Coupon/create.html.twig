@@ -9,6 +9,8 @@
     <h1>{{ 'sylius.promotion_coupon.create_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}) }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusWebBundle:Backend/Coupon:_form.html.twig' %}
     {{ create() }}

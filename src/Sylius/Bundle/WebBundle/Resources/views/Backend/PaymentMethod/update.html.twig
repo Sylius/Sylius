@@ -7,6 +7,8 @@
     <h1>{{ 'sylius.payment_method.update_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_payment_method_update', {'id': payment_method.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/PaymentMethod:_form.html.twig' %}

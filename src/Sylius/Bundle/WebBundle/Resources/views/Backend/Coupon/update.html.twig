@@ -9,6 +9,8 @@
     <h1>{{ 'sylius.promotion_coupon.update_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_promotion_coupon_update', {'id': promotion_coupon.id, 'promotionId': promotion.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/Coupon:_form.html.twig' %}

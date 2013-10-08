@@ -7,6 +7,8 @@
     <h1>{{ 'sylius.payment.create_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_payment_create') }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusWebBundle:Backend/Payment:_form.html.twig' %}
     {{ create() }}
