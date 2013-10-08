@@ -47,13 +47,13 @@ class CreditCardTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('number', 'number', Argument::any())
+            ->add('number', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('securityCode', 'number', Argument::any())
+            ->add('securityCode', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
