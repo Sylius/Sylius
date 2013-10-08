@@ -17,6 +17,8 @@
 <h1>{{ 'sylius.product.create_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_product_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
     {{ create() }}

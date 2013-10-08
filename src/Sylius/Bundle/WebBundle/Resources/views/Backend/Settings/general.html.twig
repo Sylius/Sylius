@@ -7,8 +7,9 @@
     <h1>{{ 'sylius.settings.general_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_general_settings') }}" method="post" class="form-horizontal" novalidate>
-    {{ form_errors(form) }}
     {{ form_row(form.title, {'attr': {'class': 'input-xlarge'}}) }}
     {{ form_row(form.meta_keywords, {'attr': {'class': 'input-xlarge'}}) }}
     {{ form_row(form.meta_description, {'attr': {'class': 'input-xxlarge'}}) }}

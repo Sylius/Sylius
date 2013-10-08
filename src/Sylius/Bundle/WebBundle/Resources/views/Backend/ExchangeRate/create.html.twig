@@ -7,6 +7,8 @@
     <h1>{{ 'sylius.exchange_rate.create_header'|trans|raw }}</h1>
 </div>
 
+{{ form_errors(form) }}
+
 <form action="{{ path('sylius_backend_exchange_rate_create') }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusWebBundle:Backend/ExchangeRate:_form.html.twig' %}
     {{ create() }}
