@@ -8,11 +8,34 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
     firewalls:
+        administration:
+            switch_user: true
+            context:     user
+            pattern:     /administration/.*
+            form_login:
+                provider:     fos_userbundle
+                login_path:   /administration/login
+                check_path:   /administration/login-check
+                failure_path: /administration/login
+                default_target_path: /administration/dashboard
+                use_forward:  false
+                use_referer:  true
+            logout:
+                path:   /administration/logout
+                target: /administration/login
+            anonymous: true
+
         main:
+            switch_user: false
+            context:     user
+            pattern:     /.*
             form_login:
                 provider: fos_userbundle
                 login_path: /login
                 check_path: /login_check
+                failure_path: /login
+                default_target_path: /
+                use_forward:  false
                 use_referer: true
             remember_me:
                 key: %sylius.secret%
@@ -22,12 +45,19 @@ security:
                 remember_me_parameter: _remember_me
             logout: true
             anonymous: true
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
+
         - { path: "/account.*", role: ROLE_USER }
+
         - { path: "/_partial.*", ip: 127.0.0.1 }

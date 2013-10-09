@@ -11,23 +11,20 @@ body.signin {
 img.swan {
     position: absolute;
     z-index: -1000;
-    margin-left: 250px;
-    margin-top: -90px;
+    margin-left: 350px;
+    margin-top: -50px;
     height: 300px;
 }
-h2.form-signin-heading {
-    background-color: #f1f1f1;
-    text-transform: uppercase;
-    padding: 10px;
-    margin: -10px -15px 20px;
-    text-align: center;
-}
 form.form-signin {
-    margin: auto;
-    padding: 15px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -200px;
+    padding: 40px;
     background-color: #fff;
-    max-width: 330px;
-    border-radius: 6px;
+    width: 400px;
+    height: 300px;
+    border-radius: 3px;
 }
 form.form-signin label {
     font-weight: normal;
@@ -261,7 +258,6 @@ th a:visited {
     background-color: #1abb9c;
 }
 
-
 .form-actions {
     background-color: #f1f1f1;
     padding: 10px;
@@ -335,6 +331,7 @@ input[type="file"] {
 }
 
 .form-control {
+    border-radius: 0;
 }
 .form-control:focus {
     box-shadow: none;
