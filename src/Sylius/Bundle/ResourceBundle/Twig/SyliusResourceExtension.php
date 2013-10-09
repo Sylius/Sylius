@@ -80,6 +80,7 @@ class SyliusResourceExtension extends Twig_Extension
             array('sorting' => array($property => $order)), $routeParameters
         ));
 
+        // @TODO: Move this to templates when we refactor resource bundle.
         $active = $property == key($sorting) ? ($currentOrder === 'desc' ? ' <i class="icon icon-chevron-down"></i>' : ' <i class="icon icon-chevron-up"></i>'): '';
 
         return sprintf('<a href="%s">%s%s</a>', $url, $label, $active);
