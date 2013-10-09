@@ -288,7 +288,7 @@
       </trans-unit>
       <trans-unit id="c340171685afbeaf6a2dfecfbb334636" resname="sylius.breadcrumb.customers">
         <source>sylius.breadcrumb.customers</source>
-        <target>sylius.breadcrumb.customers</target>
+        <target>Customers</target>
       </trans-unit>
       <trans-unit id="546d2e3534df032132eaac58ffd76f98" resname="sylius.breadcrumb.edit">
         <source>sylius.breadcrumb.edit</source>
