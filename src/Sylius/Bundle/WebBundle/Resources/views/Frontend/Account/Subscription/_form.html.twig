@@ -1,9 +1,10 @@
 <div class="row-fluid">
     <div class="span4">
         <div class="well">
-            {{ form_row(form.scheduled_date) }}
-            {{ form_row(form.interval, { attr: { class: 'span4' } }) }}
-            {{ form_row(form.limit, { attr: { class: 'span4' } }) }}
+            {{ form_row(form.scheduledDate) }}
+            {{ form_row(form.intervalUnit, { attr: { class: 'span4' } }) }}
+            {{ form_row(form.intervalFrequency, { attr: { class: 'span4' } }) }}
+            {{ form_row(form.maxCycles, { attr: { class: 'span4' } }) }}
         </div>
     </div>
     <div class="span8">

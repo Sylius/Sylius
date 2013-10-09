@@ -38,11 +38,6 @@ class SubscriptionProcessor implements SubscriptionProcessorInterface
     protected $manager;
 
     /**
-     * @var SubscriptionSchedulerInterface
-     */
-    protected $scheduler;
-
-    /**
      * @var EventDispatcherInterface
      */
     protected $dispatcher;
@@ -52,20 +47,17 @@ class SubscriptionProcessor implements SubscriptionProcessorInterface
      *
      * @param SubscriptionRepositoryInterface $repository
      * @param ObjectManager $manager
-     * @param SubscriptionSchedulerInterface $scheduler
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         SubscriptionRepositoryInterface $repository,
         ObjectManager $manager,
-        EventDispatcherInterface $dispatcher,
-        SubscriptionSchedulerInterface $scheduler = null
+        EventDispatcherInterface $dispatcher
     )
     {
         $this->repository = $repository;
         $this->manager = $manager;
         $this->dispatcher = $dispatcher;
-        $this->scheduler = $scheduler;
     }
 
     /**
@@ -95,9 +87,5 @@ class SubscriptionProcessor implements SubscriptionProcessorInterface
         $subscription
             ->setProcessedDate(new \DateTime())
         ;
-
-        if ($this->scheduler) {
-            $this->scheduler->schedule($subscription);
-        }
     }
 }

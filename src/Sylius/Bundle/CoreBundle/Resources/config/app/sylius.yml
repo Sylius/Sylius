@@ -159,7 +159,7 @@ sylius_subscription:
     classes:
         subscription:
             model: Sylius\Bundle\CoreBundle\Model\Subscription
-            form:  Sylius\Bundle\SubscriptionBundle\Form\Type\LimitedIntervalSubscriptionType
+            form:  Sylius\Bundle\SubscriptionBundle\Form\Type\RecurringSubscriptionType
             controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\SubscriptionController
         subscription_item:
             model: Sylius\Bundle\CoreBundle\Model\SubscriptionItem

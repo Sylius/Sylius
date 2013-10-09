@@ -24,8 +24,13 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\SubscriptionBundle\Model\LimitedIntervalSubscription">
-        <property name="interval">
+    <class name="Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscription">
+        <property name="intervalUnit">
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="intervalFrequency">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>
             </constraint>
@@ -34,7 +39,7 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="limit">
+        <property name="maxCycles">
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="groups">sylius</option>

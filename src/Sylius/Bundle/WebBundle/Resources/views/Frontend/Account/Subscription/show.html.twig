@@ -11,10 +11,10 @@
                 <p>{{ subscription.scheduledDate|date }}</p>
 
                 <h5>{{ 'sylius.account.subscription.interval'|trans }}</h5>
-                <p>{{ subscription.interval }}</p>
+                <p>{{ subscription.intervalFrequency }} {{ subscription.intervalUnit }}</p>
 
                 <h5>{{ 'sylius.account.subscription.limit'|trans }}</h5>
-                <p>{{ subscription.limit }}</p>
+                <p>{{ subscription.maxCycles }}</p>
             </div>
         </div>
         <div class="span8">

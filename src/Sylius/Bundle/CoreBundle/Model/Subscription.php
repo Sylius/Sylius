@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\SubscriptionBundle\Model\LimitedIntervalSubscription;
+use Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscription;
 
 /**
  * Subscription implementation
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class Subscription extends LimitedIntervalSubscription implements SubscriptionInterface
+class Subscription extends RecurringSubscription implements SubscriptionInterface
 {
     /**
      * User.

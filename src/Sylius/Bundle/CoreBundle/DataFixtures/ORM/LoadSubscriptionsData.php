@@ -40,8 +40,9 @@ class LoadSubscriptionsData extends DataFixture
             ->setUser($user)
             ->setScheduledDate($this->faker->dateTimeBetween('now', '+1 month'))
             ->setProcessedDate($this->faker->dateTimeBetween('now', '+1 month'))
-            ->setInterval($this->faker->randomElement(array(15, 30, 60, 90)))
-            ->setLimit($this->faker->randomElement(array(null, rand(1, 12))))
+            ->setIntervalUnit('days')
+            ->setIntervalFrequency($this->faker->randomElement(array(15, 30, 60, 90)))
+            ->setMaxCycles($this->faker->randomElement(array(null, rand(1, 12))))
         ;
 
         for ($j = 1;$j < rand(1, 5);$j++) {

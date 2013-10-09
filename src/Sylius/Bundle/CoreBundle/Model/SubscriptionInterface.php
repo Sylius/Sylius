@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\SubscriptionBundle\Model\LimitedIntervalSubscriptionInterface;
+use Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface;
 
 /**
  * SubscriptionInterface
@@ -21,16 +21,27 @@ use Sylius\Bundle\SubscriptionBundle\Model\LimitedIntervalSubscriptionInterface;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-interface SubscriptionInterface extends LimitedIntervalSubscriptionInterface
+interface SubscriptionInterface extends RecurringSubscriptionInterface
 {
     /**
      * @return UserInterface
      */
     public function getUser();
 
+    /**
+     * @param UserInterface $user
+     * @return SubscriptionInterface
+     */
     public function setUser(UserInterface $user);
 
+    /**
+     * @return AddressInterface
+     */
     public function getShippingAddress();
 
+    /**
+     * @param AddressInterface $address
+     * @return SubscriptionInterface
+     */
     public function setShippingAddress(AddressInterface $address);
 }

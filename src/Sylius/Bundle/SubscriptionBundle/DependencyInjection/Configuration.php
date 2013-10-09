@@ -33,8 +33,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-            ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
+                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('engine')->defaultValue('twig')->cannotBeEmpty()->end()
+                ->booleanNode('recurring')->defaultTrue()->end()
             ->end()
         ;
 

@@ -18,9 +18,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * Sylius subscription component extension.
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ * @author Daniel Richter <nexyz9@gmail.com>
  */
 class SyliusSubscriptionExtension extends Extension
 {
@@ -45,6 +45,10 @@ class SyliusSubscriptionExtension extends Extension
 
         $loader->load(sprintf('driver/%s.xml', $driver));
         $loader->load('services.xml');
+
+        if ($config['recurring']) {
+            $loader->load('recurring.xml');
+        }
 
         $classes = $config['classes'];
 

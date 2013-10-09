@@ -21,8 +21,8 @@
                     <tr class="subscription" id="subscription-{{ subscription.id }}">
                         <td>{{ subscription.scheduledDate|date }}</td>
                         <td>{{ subscription.countItems }}</td>
-                        <td>{{ subscription.interval }}</td>
-                        <td>{{ subscription.limit ?: 'sylius.account.subscription.no_limit'|trans }}</td>
+                        <td>{{ subscription.intervalFrequency }} {{ subscription.intervalUnit }}</td>
+                        <td>{{ subscription.maxCycles ?: 'sylius.account.subscription.no_limit'|trans }}</td>
                         <td>
                             {{ buttons.show(path('sylius_account_subscription_show', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}
                             {{ buttons.edit(path('sylius_account_subscription_update', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <mapped-superclass name="Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscription" table="sylius_subscription">
+        <field name="intervalUnit" column="interval_unit" type="string" nullable="false" />
+        <field name="intervalFrequency" column="interval_frequency" type="integer" nullable="false" />
+        <field name="maxCycles" column="max_cycles" type="integer" nullable="true" />
+    </mapped-superclass>
+
+</doctrine-mapping>

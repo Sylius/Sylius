@@ -16,19 +16,8 @@ namespace Sylius\Bundle\SubscriptionBundle\Model;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-interface SubscriptionInterface
+interface SubscriptionInterface extends SchedulableInterface
 {
-    /**
-     * @return \DateTime
-     */
-    public function getScheduledDate();
-
-    /**
-     * @param \DateTime $date
-     * @return SubscriptionInterface
-     */
-    public function setScheduledDate(\DateTime $date);
-
     /**
      * @return \DateTime
      */

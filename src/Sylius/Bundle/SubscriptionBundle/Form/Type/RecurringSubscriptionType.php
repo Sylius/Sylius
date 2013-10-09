@@ -15,22 +15,27 @@ namespace Sylius\Bundle\SubscriptionBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * LimitedIntervalSubscriptionType
+ * RecurringSubscriptionType
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class LimitedIntervalSubscriptionType extends SubscriptionType
+class RecurringSubscriptionType extends SubscriptionType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('interval', 'integer', array(
-            'label' => 'sylius.form.subscription.interval'
+        $builder->add('intervalUnit', 'text', array(
+            'label' => 'sylius.form.subscription.interval_unit'
         ));
-        $builder->add('limit', 'integer', array(
+
+        $builder->add('intervalFrequency', 'integer', array(
+            'label' => 'sylius.form.subscription.interval_frequency'
+        ));
+
+        $builder->add('maxCycles', 'integer', array(
             'required' => false,
-            'label' => 'sylius.form.subscription.limit'
+            'label' => 'sylius.form.subscription.max_cycles'
         ));
     }
 }

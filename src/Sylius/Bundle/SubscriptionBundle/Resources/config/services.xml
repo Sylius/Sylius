@@ -7,8 +7,6 @@
 
     <parameters>
         <parameter key="sylius.subscription.processor.class">Sylius\Bundle\SubscriptionBundle\Processor\SubscriptionProcessor</parameter>
-        <parameter key="sylius.subscription.scheduler.class">Sylius\Bundle\SubscriptionBundle\Scheduler\LimitedIntervalScheduler</parameter>
-
         <parameter key="sylius.form.type.subscription.class">Sylius\Bundle\SubscriptionBundle\Form\Type\SubscriptionType</parameter>
         <parameter key="sylius.form.type.subscription_item.class">Sylius\Bundle\SubscriptionBundle\Form\Type\SubscriptionItemType</parameter>
     </parameters>
@@ -23,13 +21,10 @@
             </call>
         </service>
 
-        <service id="sylius.subscription.scheduler" class="%sylius.subscription.scheduler.class%" />
-
         <service id="sylius.subscription.processor" class="%sylius.subscription.processor.class%">
             <argument type="service" id="sylius.repository.subscription" />
             <argument type="service" id="sylius.manager.subscription" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sylius.subscription.scheduler" />
         </service>
 
         <service id="sylius.form.subscriber.subscription" class="Sylius\Bundle\SubscriptionBundle\Form\EventListener\SubscriptionTypeSubscriber" />

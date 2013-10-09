@@ -50,7 +50,7 @@ class SubscriptionType extends AbstractType
         $builder->addEventSubscriber($this->subscriber);
 
         $builder
-            ->add('scheduled_date', 'date', array(
+            ->add('scheduledDate', 'date', array(
                 'label' => 'sylius.form.subscription.scheduled_date'
             ))
             ->add('items', 'collection', array(

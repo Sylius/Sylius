@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.subscription.recurring_scheduler.class">Sylius\Bundle\SubscriptionBundle\Scheduler\RecurringScheduler</parameter>
+        <parameter key="sylius.subscription.recurring_scheduler_listener.class">Sylius\Bundle\SubscriptionBundle\EventListener\RecurringSchedulerListener</parameter>
+        <parameter key="sylius.subscription.max_cycles_listener.class">Sylius\Bundle\SubscriptionBundle\EventListener\MaxCyclesListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.subscription.recurring_scheduler" class="%sylius.subscription.recurring_scheduler.class%" />
+
+        <service id="sylius.subscription.recurring_scheduler_listener" class="%sylius.subscription.recurring_scheduler_listener.class%">
+            <argument type="service" id="sylius.subscription.recurring_scheduler" />
+            <tag name="kernel.event_listener" event="sylius.subscription_process.initialize" method="onSubscriptionProcessing" />
+        </service>
+
+        <service id="sylius.subscription.max_cycles_listener" class="%sylius.subscription.max_cycles_listener.class%">
+            <argument type="service" id="sylius.manager.subscription" />
+            <tag name="kernel.event_listener" event="sylius.subscription_process.initialize" method="onSubscriptionProcessing" />
+        </service>
+    </services>
+
+</container>
