@@ -45,7 +45,7 @@ abstract class ShippingCategoryChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->className
+                'class' => $this->className
             ))
         ;
     }
