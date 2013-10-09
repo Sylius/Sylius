@@ -47,6 +47,6 @@ class SyliusSubscriptionBundle extends Bundle
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\SubscriptionBundle\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_shipping.driver.doctrine/orm'));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_subscription.driver.doctrine/orm'));
     }
 }
