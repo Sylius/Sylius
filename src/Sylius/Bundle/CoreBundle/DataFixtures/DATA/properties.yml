@@ -14,7 +14,7 @@ Sylius\Bundle\ProductBundle\Model\Property:
     Sylius.Property.Sticker.Paper:
         name: Sticker paper
         presentation: Paper
-    Sylius.Property.Mug.Materiel:
+    Sylius.Property.Mug.Material:
         name: Mug material
         presentation: Material
     Sylius.Property.Book.Author:

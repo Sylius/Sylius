@@ -15,4 +15,4 @@ Sylius\Bundle\CoreBundle\Model\User:
         email (unique): <safeEmail()>
         plainPassword: password
         enabled: <boolean()>
-        currency: 75%? <randomElement(array('EUR', 'USD', 'GBP'))>
+        currency: 75%? <currency()>

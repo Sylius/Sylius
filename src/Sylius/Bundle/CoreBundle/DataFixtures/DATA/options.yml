@@ -2,15 +2,19 @@ Sylius\Bundle\VariableProductBundle\Model\Option:
     Sylius.Option.TShirt.Size:
         name: T-Shirt size
         presentation: Size
+        values: [@Sylius.Option.TShirt.Size.S, @Sylius.Option.TShirt.Size.M, @Sylius.Option.TShirt.Size.L, @Sylius.Option.TShirt.Size.XL, @Sylius.Option.TShirt.Size.XXL]
     Sylius.Option.TShirt.Color:
         name: T-Shirt color
         presentation: Color
+        values: [@Sylius.Option.TShirt.Color.Red, @Sylius.Option.TShirt.Color.Blue, @Sylius.Option.TShirt.Color.Green]
     Sylius.Option.Sticker.Size:
         name: Sticker size
         presentation: Size
+        values: [@Sylius.Option.Sticker.Size.3, @Sylius.Option.Sticker.Size.5, @Sylius.Option.Sticker.Size.7]
     Sylius.Option.Mug.Type:
         name: Mug type
         presentation: Type
+        values: [@Sylius.Option.Mug.Type.Medium, @Sylius.Option.Mug.Type.Double, @Sylius.Option.Mug.Type.MONSTER]
 
 Sylius\Bundle\VariableProductBundle\Model\OptionValue:
     Sylius.Option.TShirt.Size.{S, M, L, XL, XXL}:
@@ -19,10 +23,10 @@ Sylius\Bundle\VariableProductBundle\Model\OptionValue:
     Sylius.Option.TShirt.Color.{Red, Blue, Green}:
         value: <current()>
         option: @Sylius.Option.TShirt.Color
-    Sylius.Option.Sticker.Size.{3", 5", 7"}:
-        value: <current()>
+    Sylius.Option.Sticker.Size.{3, 5, 7}:
+        value: <current()>"
         option: @Sylius.Option.Sticker.Size
-    Sylius.Option.Mug.Type.{Medium mug, Double mug, MONSTER mug}:
-        value: <current()>
+    Sylius.Option.Mug.Type.{Medium, Double, MONSTER}:
+        value: <current()> mug
         option: @Sylius.Option.Mug.Type
 
