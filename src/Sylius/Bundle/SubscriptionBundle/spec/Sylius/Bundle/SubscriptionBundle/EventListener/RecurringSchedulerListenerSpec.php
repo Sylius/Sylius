@@ -32,13 +32,13 @@ class RecurringSchedulerListenerSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface $subscription
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
+     * @param Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent $event
      */
     function it_decrements_max_cycles($subscription, $event, $scheduler)
     {
-        $event->getSubject()->willReturn($subscription);
+        $event->getSubscription()->willReturn($subscription);
         $scheduler->schedule($subscription, $subscription)->shouldBeCalled();
 
-        $this->onSubscriptionProcessing($event);
+        $this->onSuccess($event);
     }
 }

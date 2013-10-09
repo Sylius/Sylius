@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\SubscriptionBundle\EventListener;
 
 
+use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
+use Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface;
 use Sylius\Bundle\SubscriptionBundle\Scheduler\RecurringSchedulerInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * RecurringSchedulerListener
@@ -34,9 +35,13 @@ class RecurringSchedulerListener
         $this->scheduler = $scheduler;
     }
 
-    public function onSubscriptionProcessing(GenericEvent $event)
+    public function onSuccess(SubscriptionEvent $event)
     {
-        $subscription = $event->getSubject();
+        $subscription = $event->getSubscription();
+
+        if (!$subscription instanceof RecurringSubscriptionInterface) {
+            throw new \InvalidArgumentException('Subscription must implement RecurringSubscriptionInterface');
+        }
 
         $this->scheduler->schedule($subscription, $subscription);
     }

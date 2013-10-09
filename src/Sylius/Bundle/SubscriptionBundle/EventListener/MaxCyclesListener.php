@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\EventListener;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
+use Sylius\Bundle\SubscriptionBundle\Model\RecurringInterface;
+use Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface;
 
 /**
  * MaxCyclesListener
@@ -27,9 +29,13 @@ class MaxCyclesListener
         $this->manager = $manager;
     }
 
-    public function onSubscriptionProcessing(GenericEvent $event)
+    public function onSuccess(SubscriptionEvent $event)
     {
-        $subscription = $event->getSubject();
+        $subscription = $event->getSubscription();
+
+        if (!$subscription instanceof RecurringSubscriptionInterface) {
+            throw new \InvalidArgumentException('Subscription must implement RecurringSubscriptionInterface');
+        }
 
         if (null === $maxCycles = $subscription->getMaxCycles()) {
             return;

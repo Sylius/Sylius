@@ -18,7 +18,11 @@ namespace Sylius\Bundle\SubscriptionBundle\Event;
  */
 final class SubscriptionEvents
 {
+    const SUBSCRIPTION_PROCESS_BATCH_START = 'sylius.subscription_process.batch.start';
+    const SUBSCRIPTION_PROCESS_BATCH_END = 'sylius.subscription_process.batch.end';
+
     const SUBSCRIPTION_PROCESS_INITIALIZE = 'sylius.subscription_process.initialize';
+    const SUBSCRIPTION_PROCESS_SUCCESS = 'sylius.subscription_process.success';
     const SUBSCRIPTION_PROCESS_COMPLETED = 'sylius.subscription_process.completed';
     const SUBSCRIPTION_PROCESS_ERROR = 'sylius.subscription_process.error';
 }

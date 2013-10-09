@@ -48,10 +48,20 @@ class SubscriptionProcessorSpec extends ObjectBehavior
         ));
 
         $dispatcher
-            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))
+            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_BATCH_START, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))
             ->shouldBeCalled();
         $dispatcher
-            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))
+            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_BATCH_END, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))
+            ->shouldBeCalled();
+
+        $dispatcher
+            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, Argument::type('Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent'))
+            ->shouldBeCalled();
+        $dispatcher
+            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_SUCCESS, Argument::type('Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent'))
+            ->shouldBeCalled();
+        $dispatcher
+            ->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, Argument::type('Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent'))
             ->shouldBeCalled();
 
         $this->process();

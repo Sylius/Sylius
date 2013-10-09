@@ -13,10 +13,10 @@ namespace Sylius\Bundle\SubscriptionBundle\Processor;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
 use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvents;
 use Sylius\Bundle\SubscriptionBundle\Model\SubscriptionInterface;
 use Sylius\Bundle\SubscriptionBundle\Repository\SubscriptionRepositoryInterface;
-use Sylius\Bundle\SubscriptionBundle\Scheduler\SubscriptionSchedulerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -67,19 +67,25 @@ class SubscriptionProcessor implements SubscriptionProcessorInterface
     {
         $subscriptions = $this->repository->findScheduled();
 
+        $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_BATCH_START, new GenericEvent($subscriptions));
+
         foreach ($subscriptions as $subscription) {
 
             try {
-                $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, new GenericEvent($subscription));
+                $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, new SubscriptionEvent($subscription));
                 $this->processSubscription($subscription);
             } catch (\Exception $e) {
-                $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_ERROR, $subscription, array('exception' => $e));
+                $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_ERROR, new SubscriptionEvent($subscription, array('exception' => $e)));
                 continue;
             }
 
+            $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_SUCCESS, new SubscriptionEvent($subscription));
+
             $this->manager->flush();
-            $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, new GenericEvent($subscription));
+            $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, new SubscriptionEvent($subscription));
         }
+
+        $this->dispatcher->dispatch(SubscriptionEvents::SUBSCRIPTION_PROCESS_BATCH_END, new GenericEvent($subscriptions));
     }
 
     protected function processSubscription(SubscriptionInterface $subscription)

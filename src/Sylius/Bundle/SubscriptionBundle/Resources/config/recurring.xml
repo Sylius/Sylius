@@ -15,12 +15,12 @@
 
         <service id="sylius.subscription.recurring_scheduler_listener" class="%sylius.subscription.recurring_scheduler_listener.class%">
             <argument type="service" id="sylius.subscription.recurring_scheduler" />
-            <tag name="kernel.event_listener" event="sylius.subscription_process.initialize" method="onSubscriptionProcessing" />
+            <tag name="kernel.event_listener" event="sylius.subscription_process.success" method="onSuccess" />
         </service>
 
         <service id="sylius.subscription.max_cycles_listener" class="%sylius.subscription.max_cycles_listener.class%">
             <argument type="service" id="sylius.manager.subscription" />
-            <tag name="kernel.event_listener" event="sylius.subscription_process.initialize" method="onSubscriptionProcessing" />
+            <tag name="kernel.event_listener" event="sylius.subscription_process.success" method="onSuccess" />
         </service>
     </services>
 

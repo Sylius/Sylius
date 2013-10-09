@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\Command;
 
+use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
 use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Command to process subscriptions
@@ -54,16 +54,16 @@ class ProcessSubscriptionsCommand extends ContainerAwareCommand
     {
         $dispatcher = $this->getContainer()->get('event_dispatcher');
 
-        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, function (GenericEvent $event) use ($output, &$counter) {
-            $output->write(sprintf('<comment>Processing Subscription %s...</comment>', $event->getSubject()->getId()));
+        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, function (SubscriptionEvent $event) use ($output, &$counter) {
+            $output->write(sprintf('<comment>Processing Subscription %s...</comment>', $event->getSubscription()->getId()));
             $counter['total']++;
         });
 
-        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, function (GenericEvent $event) use ($output) {
+        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, function (SubscriptionEvent $event) use ($output) {
             $output->writeln('<info>OK</info>');
         });
 
-        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_ERROR, function (GenericEvent $event) use ($output, &$counter) {
+        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_ERROR, function (SubscriptionEvent $event) use ($output, &$counter) {
             $output->writeln('<error>ERROR (%s)</error>', $event['exception']->getMessage());
             $counter['errors']++;
         });
