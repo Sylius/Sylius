@@ -36,35 +36,36 @@ class ProcessSubscriptionsCommand extends ContainerAwareCommand
     {
         $output->writeln('Processing Subscriptions...');
 
-        $counter = new \stdClass();
-        $counter->total = 0;
-        $counter->errors = 0;
+        $counter = array(
+            'total' => 0,
+            'errors' => 0
+        );
 
         $this->attachListeners($output, $counter);
 
         $subscriptionProcessor = $this->getContainer()->get('sylius.subscription.processor');
         $subscriptionProcessor->process();
 
-        $tag = (0 === $counter->errors) ? 'info' : 'error';
-        $output->writeln(sprintf('<%s>%s Subscription(s) processed (%s errors).</%s>', $tag, $counter->total, $counter->errors, $tag));
+        $tag = (0 === $counter['errors']) ? 'info' : 'error';
+        $output->writeln(sprintf('<%s>%s Subscription(s) processed (%s errors).</%s>', $tag, $counter['total'], $counter['errors'], $tag));
     }
 
-    protected function attachListeners(OutputInterface $output, $counter)
+    protected function attachListeners(OutputInterface $output, &$counter)
     {
         $dispatcher = $this->getContainer()->get('event_dispatcher');
 
-        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, function (GenericEvent $event) use ($output, $counter) {
+        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_INITIALIZE, function (GenericEvent $event) use ($output, &$counter) {
             $output->write(sprintf('<comment>Processing Subscription %s...</comment>', $event->getSubject()->getId()));
-            $counter->total++;
+            $counter['total']++;
         });
 
         $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_COMPLETED, function (GenericEvent $event) use ($output) {
             $output->writeln('<info>OK</info>');
         });
 
-        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_ERROR, function (GenericEvent $event) use ($output, $counter) {
+        $dispatcher->addListener(SubscriptionEvents::SUBSCRIPTION_PROCESS_ERROR, function (GenericEvent $event) use ($output, &$counter) {
             $output->writeln('<error>ERROR (%s)</error>', $event['exception']->getMessage());
-            $counter->errors++;
+            $counter['errors']++;
         });
     }
 }
