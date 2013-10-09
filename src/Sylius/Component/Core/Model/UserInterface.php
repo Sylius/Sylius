@@ -153,4 +153,34 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
      * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
+
+    /**
+     * Get subscriptions
+     *
+     * @return SubscriptionInterface[]
+     */
+    public function getSubscriptions();
+
+    /**
+     * Add subscription
+     *
+     * @param SubscriptionInterface $subscription
+     */
+    public function addSubscription(SubscriptionInterface $subscription);
+
+    /**
+     * Remove subscription
+     *
+     * @param SubscriptionInterface $subscription
+     */
+    public function removeSubscription(SubscriptionInterface $subscription);
+
+    /**
+     * Has subscription?
+     *
+     * @param SubscriptionInterface $subscription
+     *
+     * @return Boolean
+     */
+    public function hasSubscription(SubscriptionInterface $subscription);
 }

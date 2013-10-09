@@ -86,4 +86,35 @@ class UserSpec extends ObjectBehavior
         $this->setShippingAddress($address);
         $this->hasAddress($address)->shouldReturn(true);
     }
+
+    function it_initializes_subscriptions()
+    {
+        $this->getSubscriptions()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\SubscriptionInterface $subscription
+     */
+    function it_can_add_subscriptions($subscription)
+    {
+        $this->getSubscriptions()->count()->shouldReturn(0);
+        $this->hasSubscription($subscription)->shouldReturn(false);
+
+        $this->addSubscription($subscription);
+
+        $this->getSubscriptions()->count()->shouldReturn(1);
+        $this->hasSubscription($subscription)->shouldReturn(true);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\SubscriptionInterface $subscription
+     */
+    function it_can_remove_subscriptions($subscription)
+    {
+        $this->addSubscription($subscription);
+        $this->hasSubscription($subscription)->shouldReturn(true);
+
+        $this->removeSubscription($subscription);
+        $this->hasSubscription($subscription)->shouldReturn(false);
+    }
 }

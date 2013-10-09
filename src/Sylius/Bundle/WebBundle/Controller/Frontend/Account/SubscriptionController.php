@@ -49,8 +49,7 @@ class SubscriptionController extends ResourceController
      */
     private function accessSubscriptionOr403(SubscriptionInterface $subscription)
     {
-        if (false === $this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') &&
-            $this->getUser()->getId() !== $subscription->getUser()->getId()) {
+        if (!$this->getUser()->hasSubscription($subscription)) {
             throw new AccessDeniedException();
         }
     }
