@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\ItemInterface;
+use Knp\Menu\Matcher\Matcher;
+use Knp\Menu\Matcher\Voter\UriVoter;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -35,8 +37,6 @@ class BackendMenuBuilder extends MenuBuilder
                 'class' => 'nav navbar-nav navbar-right'
             )
         ));
-
-        $menu->setCurrent($request->getRequestUri());
 
         $childOptions = array(
             'attributes'         => array('class' => 'dropdown'),
@@ -77,8 +77,6 @@ class BackendMenuBuilder extends MenuBuilder
                 'class' => 'nav'
             )
         ));
-
-        $menu->setCurrent($request->getRequestUri());
 
         $childOptions = array(
             'childrenAttributes' => array('class' => 'nav'),

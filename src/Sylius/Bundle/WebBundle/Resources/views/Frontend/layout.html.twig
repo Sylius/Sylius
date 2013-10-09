@@ -18,11 +18,13 @@
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+
         {# stylesheets... #}
         {% block stylesheets %}
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
-            '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
+            '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
+            '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/frontend.css'
             '@SyliusWebBundle/Resources/assets/css/bootstrap-image-gallery.css'
         %}
@@ -55,19 +57,17 @@
 
         {% block main %}
         <hr>
-        <div class="row-fluid">
-            <div class="row-fluid">
-                <div class="span3" id="sidebar_left">
-                    {% block sidebar %}
-                    <h4>{{ 'sylius.shop_by'|trans }}</h4>
-                    {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
-                    {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
-                    {% endblock %}
-                </div>
-                <div class="span9">
+        <div class="row">
+            <div class="col-md-3" id="sidebar">
+                {% block sidebar %}
+                <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
+                {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                {% endblock %}
+            </div>
+            <div class="col-md-9">
                 {% block content %}
                 {% endblock %}
-                </div>
             </div>
         </div>
         <hr>
@@ -91,7 +91,7 @@
         {% block javascripts %}
         {% javascripts output='assets/compiled/frontend.js'
             'http://code.jquery.com/jquery-1.8.0.min.js'
-            'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js'
+            'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'
             '@SyliusWebBundle/Resources/assets/js/load-image.js'
             '@SyliusWebBundle/Resources/assets/js/bootstrap-image-gallery.js'
         %}

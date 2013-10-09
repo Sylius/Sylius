@@ -1,5 +1,5 @@
 {% macro btn(url, message, id, icon, class) %}
-<a  class="btn {% if class is not empty %} {{ class }} {% endif %}"
+<a  class="btn {% if class is not empty %} {{ class }} {% else %}btn-default{% endif %}"
     {% if id is not empty %} id="{{ id }}"{% endif %}
     href="{{ url }}">
     {% if icon is not empty %}
@@ -16,7 +16,7 @@
         {% set message = 'sylius.show'|trans %}
     {% endif %}
 
-    {{ buttons.btn(url, message, id, 'book') }}
+    {{ buttons.btn(url, message, id, 'book', 'btn-default') }}
 {% endmacro %}
 
 {% macro create(url, message, id) %}
@@ -36,7 +36,7 @@
         {% set message = 'sylius.edit'|trans %}
     {% endif %}
 
-    {{ buttons.btn(url, message, id, 'pencil') }}
+    {{ buttons.btn(url, message, id, 'pencil', 'btn-primary') }}
 {% endmacro %}
 
 {% macro delete(url, message) %}

@@ -15,14 +15,14 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
-<div class="row-fluid">
+<div class="row">
     {% for product in products %}
-        <div class="span{{ 12 / size }}">
+        <div class="col-md-{{ 12 / size }}">
             {% include 'SyliusWebBundle:Frontend/Product:_singleBox.html.twig' %}
         </div>
         {% if 0 == loop.index % size %}
             </div>
-            <div class="row-fluid">
+            <div class="row">
         {% endif %}
     {% else %}
         {{ alerts.info('sylius.product.no_results'|trans) }}

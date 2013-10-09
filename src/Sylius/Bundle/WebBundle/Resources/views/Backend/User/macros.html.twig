@@ -44,3 +44,46 @@
 {% endif %}
 
 {% endmacro %}
+
+{% macro simple_list(users) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if users|length > 0 %}
+<table id="users" class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.user.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('email', 'sylius.user.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('enabled', 'sylius.user.enabled'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
+            <td>
+                <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
+                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                </span>
+            </td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
+                    {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
+                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.user.no_results'|trans) }}
+</div>
+{% endif %}
+
+{% endmacro %}
