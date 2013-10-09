@@ -50,6 +50,8 @@ class SubscriptionItem extends BaseSubscriptionItem implements SubscriptionItemI
      */
     public function getProduct()
     {
-        return $this->variant->getProduct();
+        if ($this->variant) {
+            return $this->variant->getProduct();
+        }
     }
 }

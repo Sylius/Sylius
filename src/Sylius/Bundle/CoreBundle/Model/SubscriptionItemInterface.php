@@ -32,7 +32,7 @@ interface SubscriptionItemInterface
     public function setVariant(VariantInterface $variant);
 
     /**
-     * @return ProductInterface
+     * @return null|ProductInterface
      */
     public function getProduct();
 }

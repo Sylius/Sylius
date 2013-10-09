@@ -44,4 +44,21 @@ class SubscriptionItemSpec extends ObjectBehavior
         $this->setVariant($variant);
         $this->getVariant()->shouldReturn($variant);
     }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
+     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
+     */
+    function it_should_return_product_from_variant($variant, $product)
+    {
+        $variant->getProduct()->willReturn($product);
+        $this->setVariant($variant);
+
+        $this->getProduct()->shouldReturn($product);
+    }
+
+    function it_returns_no_product_by_default()
+    {
+        $this->getProduct()->shouldReturn(null);
+    }
 }
