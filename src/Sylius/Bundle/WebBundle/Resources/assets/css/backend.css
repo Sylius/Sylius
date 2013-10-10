@@ -371,6 +371,10 @@ input[type="file"] {
     text-align: center;
 }
 
+.thumbnail {
+    width: 90px;
+}
+
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
     .btn i {
