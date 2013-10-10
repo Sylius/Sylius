@@ -75,6 +75,8 @@ class CartController extends Controller
 
             // Write flash message
             $this->dispatchEvent(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
+
+            return $this->redirectToCartSummary();
         }
 
         return $this->renderResponse('summary.html', array(
