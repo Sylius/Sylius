@@ -16,9 +16,9 @@
 </div>
 {% if product.images|length > 0 %}
 <hr>
-<div data-toggle="modal-gallery" data-target="#modal-gallery">
+<div id="gallery">
     {% for image in product.images %}
-        <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ product.name }}">
+        <a href="{{ image.path|imagine_filter('sylius_gallery') }}" title="{{ product.name }}">
             <img class="img-rounded" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
         </a>
     {% endfor %}

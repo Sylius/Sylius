@@ -1,16 +1,20 @@
-<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
+<script>
+document.getElementById('gallery').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+            link = target.src ? target.parentNode : target,
+            options = {index: link, event: event},
+            links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+</script>
 
-        <h3 class="modal-title"></h3>
-    </div>
-    <div class="modal-body">
-        <div class="modal-image"></div>
-    </div>
-    <div class="modal-footer">
-        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> {{ 'sylius.gallery.previous'|trans }}</a>
-        <a class="btn btn-primary modal-next">{{ 'sylius.gallery.next'|trans }} <i class="icon-arrow-right icon-white"></i></a>
-        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000"><i class="icon-play icon-white"></i>
-            {{ 'sylius.gallery.slideshow'|trans }}</a>
-    </div>
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
 </div>
