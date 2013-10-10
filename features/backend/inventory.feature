@@ -21,7 +21,7 @@ Feature: Inventory tracking
         Given I am on the dashboard page
          When I follow "Inventory levels"
          Then I should be on the inventory index page
-          And I should see 8 stockables in the list
+          And I should see 6 stockables in the list
 
     Scenario: Seeing empty index of inventory
          Given there are no products
