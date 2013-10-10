@@ -1,0 +1,9 @@
+\Sylius\Bundle\CoreBundle\Model\VariantImage:
+    Sylius.Image.Mug.{1..25}:
+        variant: @Sylius.Product.Mug.<current()>->masterVariant
+    Sylius.Image.TShirt.{1..35}:
+        variant: @Sylius.Product.TShirt.<current()>->masterVariant
+    Sylius.Image.Sticker.{1..20}:
+        variant: @Sylius.Product.Sticker.<current()>->masterVariant
+    Sylius.Image.Book.{1..40}:
+        variant: @Sylius.Product.Book.<current()>->masterVariant

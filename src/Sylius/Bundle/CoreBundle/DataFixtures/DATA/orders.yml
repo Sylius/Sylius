@@ -1,0 +1,14 @@
+\Sylius\Bundle\CoreBundle\Model\Shipment:
+    Sylius.Shipment.{1..70}:
+        method: @Sylius.Shipping.Method.*
+
+\Sylius\Bundle\CoreBundle\Model\Order:
+    Sylius.Order.{1..70}:
+        shipments: [@Sylius.Shipment.<current()>]
+        number: <orderNumber($this->currentValue)>
+        shippingAddress: @Sylius.Address.*
+        billingAddress: 80%? <randomElement(array($shippingAddress))> : @Sylius.Address.*
+        user: @Sylius.User.*
+        currency: <currency()>
+        createdAt: <dateTimeBetween('1 year ago', 'now')>
+

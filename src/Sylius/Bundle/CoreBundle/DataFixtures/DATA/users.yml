@@ -8,7 +8,7 @@ Sylius\Bundle\CoreBundle\Model\User:
         enabled: true
         roles: [ROLE_SYLIUS_ADMIN]
         currency: EUR
-    Sylius.User{1..15}:
+    Sylius.User.{1..15}:
         firstName: <firstName()>
         lastName: <lastName()>
         username (unique): <userName()>
@@ -16,3 +16,4 @@ Sylius\Bundle\CoreBundle\Model\User:
         plainPassword: password
         enabled: <boolean()>
         currency: 75%? <currency()>
+

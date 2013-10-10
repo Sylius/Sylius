@@ -1,0 +1,10 @@
+\Sylius\Bundle\AddressingBundle\Model\Address:
+    Sylius.Address.{1..110}:
+        firstName: <firstName()>
+        lastName: <lastName()>
+        city: <city()>
+        street:  <streetAddress()>
+        postCode: <postCode()>
+        country: @Sylius.Country.*
+        company: 20%? <company()>
+
