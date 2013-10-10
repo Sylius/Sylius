@@ -1,5 +1,8 @@
 {% macro list(tax_categories) %}
 
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
 {% if tax_categories|length > 0 %}
 <table class="table">
     <thead>
@@ -20,15 +23,8 @@
             <td>{{ tax_category.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                    <a href="{{ path('sylius_backend_tax_category_update', {'id': tax_category.id}) }}" class="btn">
-                       <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
-                    </a>
-                    <form action="{{ path('sylius_backend_tax_category_delete', {'id': tax_category.id}) }}" method="post" style="display: inline;">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger">
-                            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
-                        </button>
-                    </form>
+                    {{ buttons.edit(path('sylius_backend_tax_category_update', {'id': tax_category.id})) }}
+                    {{ buttons.delete(path('sylius_backend_tax_category_delete', {'id': tax_category.id})) }}
                 </div>
             </td>
         </tr>
@@ -36,10 +32,7 @@
     </tbody>
 </table>
 {% else %}
-<div class="alert alert-info">
-    <h4 class="alert-heading">{{ 'sylius.alert.info'|trans }}</h4>
-    {{ 'sylius.tax_category.no_results'|trans }}
-</div>
+{{ alerts.info('sylius.tax_category.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}

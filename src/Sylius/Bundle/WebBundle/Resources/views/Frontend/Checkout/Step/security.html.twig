@@ -7,8 +7,8 @@
 
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
 
-<div class="row-fluid form-vertical">
-    <div class="span6">
+<div class="row form-vertical">
+    <div class="col-md-6">
         <div class="well">
             <h3>{{ 'sylius.checkout.security.existing_customer'|trans }}</h3>
                 <form action="{{ path('fos_user_security_check') }}" method="post">
@@ -32,7 +32,7 @@
                 </form>
         </div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
         <div class="well">
             <h3>{{ 'sylius.checkout.security.new_customer'|trans }}</h3>
                 <form action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" method="post" novalidate>

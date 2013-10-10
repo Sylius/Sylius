@@ -18,27 +18,25 @@
 
 <form action="{{ path('fos_user_security_check') }}" method="post">
 <fieldset>
-    <div class="control-group">
+    <div class="form-group">
         <label for="username" class="control-label">Email</label>
         <div class="controls">
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
         </div>
     </div>
-    <div class="control-group">
+    <div class="form-group">
         <label for="password" class="control-label">Password</label>
         <div class="controls">
-            <input type="password" id="password" name="_password" />
+            <input type="password" id="password" name="_password" class="form-control" />
         </div>
     </div>
-    <div class="control-group">
+    <div class="form-group">
         <div class="controls">
-            Remember me? <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
         </div>
     </div>
 </fieldset>
-<div class="form-actions">
-    <button type="submit" class="btn btn-primary btn-large" name="login"><i class="icon-lock"></i> Login</button>
-</div>
+    <button type="submit" class="btn btn-primary btn-lg pull-left" name="login"><i class="icon-lock"></i> Login</button>
 </form>
 
 {% endblock %}

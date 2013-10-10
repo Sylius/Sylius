@@ -59,7 +59,7 @@ Feature: User account addresses page
       And I leave "Postcode" empty
       And I press "Create"
      Then I should still be on my account address creation page
-      And I should see 6 fields on error
+      And I should see 6 validation errors
 
   Scenario: Deleting an address
     Given I press "Delete" near "GERMANY"
@@ -87,7 +87,7 @@ Feature: User account addresses page
       And I leave "City" empty
       And I leave "Postcode" empty
       And I press "Save changes"
-     Then I should see 6 fields on error
+     Then I should see 6 validation errors
 
   Scenario: Viewing that no default shipping and billing addresses have been defined
     Given I am on my account addresses page

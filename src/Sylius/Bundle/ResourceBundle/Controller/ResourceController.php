@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
@@ -227,6 +228,8 @@ class ResourceController extends FOSRestController
      * Get a form instance for given resource.
      * If no custom form is specified in route defaults as "_form",
      * then a default name is generated using the template "%bundlePrefix%_%resourceName%".
+     *
+     * @param null|string $resource
      *
      * @return FormInterface
      */

@@ -120,12 +120,12 @@ Feature: Countries and provinces
 
     Scenario: Accessing country details via the list
         Given I am on the country index page
-         When I press "details" near "China"
+         When I click "China"
          Then I should be on the page of country "China"
 
     Scenario: Provinces are listed on country page
         Given I am on the country index page
-         When I press "details" near "France"
+         When I click "France"
          Then I should be on the page of country "France"
           And I should see 4 provinces in the list
 

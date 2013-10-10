@@ -11,9 +11,18 @@
     {% endjavascripts %}
 {% endblock %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_zone_index') }}">{{ 'sylius.breadcrumb.zone.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_zone_show', {'id': zone.id}) }}">{{ zone.name }}</a></li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.zone.update_header'|trans|raw }}</h1>
+    <h1><i class="icon-pencil"></i> {{ 'sylius.zone.update_header'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

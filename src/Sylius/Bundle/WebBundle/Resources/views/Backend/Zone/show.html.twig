@@ -2,6 +2,14 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_zone_index') }}">{{ 'sylius.breadcrumb.zone.index'|trans }}</a></li>
+    <li>{{ zone.name }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1>{{ 'sylius.zone.show_header'|trans|raw }}</h1>

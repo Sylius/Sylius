@@ -12,9 +12,17 @@
 {% endjavascripts %}
 {% endblock %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</a></li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.product.create_header'|trans|raw }}</h1>
+    <h1><i class="icon-plus"></i> {{ 'sylius.product.create_header'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

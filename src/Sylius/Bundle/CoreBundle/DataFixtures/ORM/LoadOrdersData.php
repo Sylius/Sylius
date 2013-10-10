@@ -54,6 +54,13 @@ class LoadOrdersData extends DataFixture
             $order->calculateTotal();
             $order->complete();
 
+            $payment = $this->getPaymentRepository()->createNew();
+            $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
+            $payment->setAmount($order->getTotal());
+            $payment->setCurrency($order->getCurrency());
+
+            $order->setPayment($payment);
+
             $this->setReference('Sylius.Order-'.$i, $order);
 
             $manager->persist($order);

@@ -7,34 +7,33 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('name', 'sylius.taxonomy.name'|trans) }}</th>
-            <th>{{ 'sylius.taxonomy.image'|trans }}</th>
-            <th></th>
+            <th colspan="3">{{ sylius_resource_sort('name', 'sylius.taxonomy.name'|trans) }}</th>
         </tr>
     </thead>
     <tbody>
         {% for taxonomy in taxonomies %}
         <tr>
-            <td>{{ taxonomy.name }}</td>
             <td>
-                {% if taxonomy.root is not null %}
-                    {% if taxonomy.root.path|length > 0 %}
-                        <div data-toggle="modal-gallery" data-target="#modal-gallery">
-                            <a href="{{ taxonomy.root.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery" title="{{ taxonomy.name }}" class="thumbnail thumbnail-image">
-                                <img src="{{ taxonomy.root.path|imagine_filter('sylius_50x40') }}" alt="" />
-                            </a>
-                        </div>
-                    {% else %}
-                        <span class="badge badge-info">{{ 'sylius.taxonomy.no_image'|trans }}</span>
-                    {% endif %}
+                <a href="{{ path('sylius_backend_taxonomy_show', {'id': taxonomy.id}) }}" class="btn btn-link">
+                    <strong>{{ taxonomy.name }}</strong>
+                </a>
+            </td>
+            <td>
+                {% if taxonomy.root is not null and taxonomy.root.path|length > 0 %}
+                    <div data-toggle="modal-gallery" data-target="#modal-gallery">
+                        <a href="{{ taxonomy.root.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery" title="{{ taxonomy.name }}">
+                            <img src="{{ taxonomy.root.path|imagine_filter('sylius_50x40') }}" alt="" class="img-rounded" />
+                        </a>
+                    </div>
+                {% else %}
+                    <span class="label label-default">{{ 'sylius.taxonomy.no_image'|trans }}</span>
                 {% endif %}
             </td>
             <td>
                 <div class="pull-right">
-                {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans)|raw }}
-                {{ buttons.show(path('sylius_backend_taxonomy_show', {'id': taxonomy.id})) }}
-                {{ buttons.edit(path('sylius_backend_taxonomy_update', {'id': taxonomy.id})) }}
-                {{ buttons.delete(path('sylius_backend_taxonomy_delete', {'id': taxonomy.id})) }}
+                    {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans)|raw }}
+                    {{ buttons.edit(path('sylius_backend_taxonomy_update', {'id': taxonomy.id})) }}
+                    {{ buttons.delete(path('sylius_backend_taxonomy_delete', {'id': taxonomy.id})) }}
                 </div>
             </td>
         </tr>

@@ -1,0 +1,30 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('sylius_backend_dashboard') }}"><img src="{{ asset('bundles/syliusweb/img/logo.png') }}" /></a>
+    </div>
+    <div class="visible-xs visible-sm">
+        <div class="collapse navbar-collapse">
+            {{ knp_menu_render('sylius.backend.main', {'template': 'SyliusWebBundle:Backend:menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active'}) }}
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm pull-right">
+        <p class="navbar-text">{{ 'sylius.backend_welcome'|trans({'%name%': app.user.fullname})|raw }}</p>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle navbar-widget" data-toggle="dropdown">
+                    <i class="icon-sort-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('sylius_homepage') }}"><i class="icon-home"></i> {{ 'sylius.backend.menu.main.homepage'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> {{ 'sylius.backend.logout'|trans }}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

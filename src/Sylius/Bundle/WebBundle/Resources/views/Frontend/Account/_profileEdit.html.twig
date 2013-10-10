@@ -1,6 +1,7 @@
 {% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import update %}
 
 <h4>{{ 'sylius.form.frontend.profile.title'|trans }}</h4>
+<br>
 
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
     <fieldset>

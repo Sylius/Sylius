@@ -3,13 +3,21 @@
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Taxon:macros.html.twig' import list %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
+    <li>{{ taxonomy.name }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.taxonomy.show_header'|trans({'%name%': taxonomy.name})|raw }}</h1>
-</div>
-
-<div class="well well-small">
-    {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_taxonomy_index'), 'sylius.taxonomy.manage'|trans) }}
+    </div>
+    <h1><i class="icon-tags"></i> {{ 'sylius.taxonomy.show_header'|trans({'%name%': taxonomy.name})|raw }}</h1>
 </div>
 
 {{ list(taxonomy, taxonomy.taxons) }}

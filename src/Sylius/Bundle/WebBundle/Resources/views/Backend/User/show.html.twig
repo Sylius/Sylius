@@ -2,16 +2,24 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.breadcrumb.user.index'|trans }}</a></li>
+    <li>{{ user.fullName  }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.user.show_header'|trans|raw }}</h1>
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
+        {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+    </div>
+    <h1><i class="icon-info-sign"></i> {{ 'sylius.user.show_header'|trans|raw }}</h1>
 </div>
 
-<div class="well well-small">
-    {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
-    {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
-</div>
 
 <table class="table table-bordered">
     <thead>
@@ -61,23 +69,22 @@
     </tbody>
 </table>
 
-<div class="row-fluid">
+<div class="row">
     {% if user.shippingAddress %}
-        <div class="span6">
+        <div class="col-md-6">
             {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.shippingAddress, 'title': 'sylius.user.shipping_address'|trans} %}
         </div>
     {% endif %}
     {% if user.billingAddress %}
-        <div class="span6">
+        <div class="col-md-6">
             {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.billingAddress, 'title': 'sylius.user.billing_address'|trans} %}
         </div>
     {% endif %}
 </div>
-<div class="row-fluid">
-    <div class="well">
-        <h3>{{ 'sylius.user.orders'|trans }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}
     </div>
-    {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}
 </div>
 
 {% endblock %}

@@ -9,7 +9,7 @@ sylius_backend_exchange_rate_index:
         _sylius:
             template: SyliusWebBundle:Backend/ExchangeRate:index.html.twig
             sortable: true
-            paginate: 50
+            paginate: false
 
 sylius_backend_exchange_rate_create:
     pattern: /new

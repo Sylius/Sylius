@@ -2,9 +2,18 @@
 
 {% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_exchange_rate_index') }}">{{ 'sylius.breadcrumb.exchange_rate.index'|trans }}</a></li>
+    <li>{{ exchange_rate.currency }}</li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.exchange_rate.update_header'|trans|raw }}</h1>
+    <h1><i class="icon-pencil"></i> {{ 'sylius.exchange_rate.update_header'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}
