@@ -1,10 +1,8 @@
+{% extends 'SyliusWebBundle::forms.html.twig' %}
+
 {% block form_widget %}
 {% spaceless %}
-    {% if compound %}
-        {{ block('form_widget_compound') }}
-    {% else %}
-        {{ block('form_widget_simple') }}
-    {% endif %}
+    {{ parent() }}
     <div class="configuration"></div>
 {% endspaceless %}
 {% endblock form_widget %}
@@ -12,9 +10,7 @@
 {% block form_row %}
 {% spaceless %}
     <div>
-        {{ form_label(form) }}
-        {{ form_errors(form) }}
-        {{ form_widget(form) }}
+        {{ parent() }}
     </div>
 {% endspaceless %}
 {% endblock form_row %}

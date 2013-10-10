@@ -30,11 +30,17 @@ class ProductFilterType extends AbstractType
         $builder
             ->add('name', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.product_filter.name'
+                'label'    => 'sylius.form.product_filter.name',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.product_filter.name'
+                )
             ))
             ->add('sku', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.product_filter.sku'
+                'label'    => 'sylius.form.product_filter.sku',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.product_filter.sku'
+                )
             ))
         ;
     }

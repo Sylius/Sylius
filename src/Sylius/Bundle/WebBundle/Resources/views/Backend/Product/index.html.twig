@@ -4,26 +4,26 @@
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Product:macros.html.twig' import list %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.product.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well well-small">
-    {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_option_index'), 'sylius.option.manage'|trans) }}
-    {{ buttons.manage(path('sylius_backend_property_index'), 'sylius.property.manage'|trans) }}
-</div>
-
-<div class="row-fluid">
-    <div class="span5">
-        {{ pagination(products) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_option_index'), 'sylius.option.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_property_index'), 'sylius.property.manage'|trans) }}
     </div>
-    <div class="span7">
-        {% render(url('sylius_backend_product_filter_form')) %}
-    </div>
+    <h1><i class="icon-folder-open"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
 </div>
 
+{% render(url('sylius_backend_product_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+
+{{ pagination(products) }}
 {{ list(products) }}
 {{ pagination(products) }}
 

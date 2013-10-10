@@ -4,14 +4,20 @@
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/ShippingMethod:macros.html.twig' import list %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.shipping_method.index'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.shipping_method.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well well-small">
-    {{ buttons.create(path('sylius_backend_shipping_method_create'), 'sylius.shipping_method.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_shipping_method_create'), 'sylius.shipping_method.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
+    </div>
+    <h1><i class="icon-truck"></i> {{ 'sylius.shipping_method.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(shipping_methods) }}

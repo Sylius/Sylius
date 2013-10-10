@@ -1,23 +1,23 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_country_index') }}">{{ 'sylius.breadcrumb.country.index'|trans }}</a></li>
+    <li>{{ country.name }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.country.show_header'|trans|raw }}</h1>
-</div>
-
-<div class="well">
-    <a href="{{ path('sylius_backend_country_index') }}" class="btn btn-primary">
-        <i class="icon-list-alt"></i> {{ 'sylius.country.manage'|trans }}
-    </a>
-    <a href="{{ path('sylius_backend_country_update', {'id': country.id}) }}" class="btn">
-        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
-    </a>
-    <form action="{{ path('sylius_backend_country_delete', {'id': country.id}) }}" method="post" style="display: inline;">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
-        </button>
-    </form>
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
+        {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
+    </div>
+    <h1><i class="icon-flag"></i> {{ 'sylius.country.show_header'|trans|raw }}</h1>
 </div>
 
 <table class="table table-bordered table-consensed">

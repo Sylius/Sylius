@@ -4,13 +4,19 @@
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Payment:macros.html.twig' import list %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.payment.index'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.payment.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well well-small">
-    {{ buttons.create(path('sylius_backend_payment_create'), 'sylius.payment.create'|trans) }}
+    <div class="pull-right">
+        {{ buttons.create(path('sylius_backend_payment_create'), 'sylius.payment.create'|trans) }}
+    </div>
+    <h1><i class="icon-money"></i> {{ 'sylius.payment.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(payments) }}

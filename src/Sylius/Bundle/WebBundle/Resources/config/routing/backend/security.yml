@@ -7,9 +7,9 @@ sylius_backend_security_login:
     defaults:
         _controller: sylius.controller.backend.security:loginAction
 
-sylius_backend_security_check:
+sylius_backend_security_login_check:
     pattern: /login-check
-    methods: [GET]
+    methods: [POST]
     defaults:
         _controller: sylius.controller.backend.security:checkAction
 

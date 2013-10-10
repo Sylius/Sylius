@@ -1,15 +1,13 @@
-<div class="form-container">
-<fieldset>
-    {{ form_errors(form)  }}
-    {% include 'SyliusWebBundle:Backend/Product/Form:_tabs.html.twig' %}
-    <div class="tab-content">
-        {% include 'SyliusWebBundle:Backend/Product/Form:_main.html.twig' %}
-        {% include 'SyliusWebBundle:Backend/Product/Form:_options.html.twig' %}
-        {% include 'SyliusWebBundle:Backend/Product/Form:_properties.html.twig' %}
-        {% include 'SyliusWebBundle:Backend/Product/Form:_categorization.html.twig' %}
-        {% include 'SyliusWebBundle:Backend/Product/Form:_images.html.twig' %}
-    </div>
-</fieldset>
+{{ form_errors(form)  }}
+{% include 'SyliusWebBundle:Backend/Product/Form:_tabs.html.twig' %}
+<br>
+<div class="tab-content">
+    {% include 'SyliusWebBundle:Backend/Product/Form:_main.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/Product/Form:_options.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/Product/Form:_properties.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/Product/Form:_categorization.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/Product/Form:_images.html.twig' %}
 </div>
+<hr>
 
 {{ form_widget(form._token) }}

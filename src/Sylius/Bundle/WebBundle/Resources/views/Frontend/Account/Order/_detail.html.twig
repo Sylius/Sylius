@@ -1,10 +1,10 @@
-<div class="row-fluid well well-small" id="information">
-    <div class="span6">
+<div class="row well well-small" id="information">
+    <div class="col-md-6">
         <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
         {#{{ 'sylius.account.order.shipment_mode'|trans }} <strong>TODO</strong><br>#}
         {#{{ 'sylius.account.order.payment_mode'|trans }} <strong>TODO</strong><br>#}
     </div>
-    <div class="span6">
+    <div class="col-md-6">
         <br><br>
         {{ 'sylius.account.order.number'|trans }} <strong>{{ order.number }}</strong><br>
         {{ 'sylius.account.order.state'|trans }}
@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="row-fluid">
+<div class="row">
     <table id="items" class="table table-striped">
         <thead>
         <tr>
@@ -29,9 +29,9 @@
             <tr>
                 <td>
                     {% if product.images|length > 0 %}
-                        <div data-toggle="modal-gallery" data-target="#modal-gallery">
+                        <div id="gallery">
                             {% for image in product.images %}
-                                <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ product.name }}">
+                                <a href="{{ image.path|imagine_filter('sylius_gallery') }}" title="{{ product.name }}">
                                     <img class="img-polaroid" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
                                 </a>
                             {% endfor %}

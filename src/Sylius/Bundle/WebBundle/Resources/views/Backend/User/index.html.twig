@@ -4,28 +4,33 @@
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/User:macros.html.twig' import list  %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.user.index'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.user.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well">
-    {{ buttons.create(path('sylius_backend_user_create'), 'sylius.user.create'|trans) }}
-</div>
-
-<div class="row-fluid">
-    <div class="span5">
-        {{ pagination(users) }}
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_user_create'), 'sylius.user.create'|trans) }}
     </div>
-    <div class="span4 pull-right">
-        {% render(url('sylius_backend_user_filter_form')) %}
-    </div>
+    <h1><i class="icon-user"></i> {{ 'sylius.user.index_header'|trans|raw }}</h1>
 </div>
 
-<ul class="nav nav-tabs">
-    <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><span class="label label-important"><i class="icon-info-sign"></i></span> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
-</ul>
+{% render(url('sylius_backend_user_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+
+{% set activeTab = (app.request.query.get('criteria') is not empty and app.request.query.get('criteria').enabled|default('1') == '0') ? 'disabled' : 'all' %}
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs grid-tabs">
+            <li class="{{ activeTab == 'all' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>
+            <li class="{{ activeTab == 'disabled' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><i class="icon-info-sign"></i> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
+        </ul>
+    </div>
+</div>
 
 {{ list(users)  }}
 {{ pagination(users) }}

@@ -6,15 +6,22 @@
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Coupon:macros.html.twig' import list %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_promotion_index') }}">{{ 'sylius.breadcrumb.promotion.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.promotion_coupon.index'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.promotion.index_header'|trans|raw }}</h1>
-</div>
-
-<div class="well">
-    {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.show'|trans) }}
-    {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotionId}), 'sylius.promotion_coupon.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotionId}), 'sylius.promotion_coupon.generate'|trans) }}
+    <div class="actions-menu">
+        {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.show'|trans) }}
+        {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotionId}), 'sylius.promotion_coupon.create'|trans) }}
+        {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotionId}), 'sylius.promotion_coupon.generate'|trans) }}
+    </div>
+    <h1><i class="icon-ticket"></i> {{ 'sylius.promotion_coupon.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(promotion_coupons) }}

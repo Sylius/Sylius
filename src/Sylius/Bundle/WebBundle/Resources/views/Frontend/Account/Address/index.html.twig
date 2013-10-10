@@ -10,12 +10,12 @@
             <span class="label label-success">{{ 'sylius.account.address.default.no_billing'|trans }}</span>
         {% endif %}
         {% if app.user.shippingAddress is empty %}
-            <span class="label label-info">{{ 'sylius.account.address.default.no_shipping'|trans }}</span>
+            <span class="label label-primary">{{ 'sylius.account.address.default.no_shipping'|trans }}</span>
         {% endif %}
         </p>
     {% endif %}
 
-    <div class="row-fluid">
+    <div class="row">
         {% if addresses is not empty %}
             <table id="addresses" class="table">
                 <tbody>
@@ -36,6 +36,7 @@
                                 {{ buttons.btn(
                                     path('sylius_account_address_set_default_billing', {'id': address.id}),
                                     'sylius.account.address.action.billing', '', 'star-empty') }}
+                                <br>
                                 <br>
                             {% endif %}
                             {% if address != app.user.shippingAddress %}

@@ -79,12 +79,12 @@ Feature: taxonomies
 
     Scenario: Accessing taxonomy tree via the list
         Given I am on the taxonomy index page
-         When I click "details" near "Category"
+         When I click "Category"
          Then I should be on the page of taxonomy "Category"
 
     Scenario: Seeing index of all taxonomy taxons
         Given I am on the taxonomy index page
-         When I click "details" near "Category"
+         When I click "Category"
          Then I should be on the page of taxonomy "Category"
           And I should see 8 taxons in the list
 

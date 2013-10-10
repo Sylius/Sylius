@@ -4,7 +4,7 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if countries|length > 0 %}
-<table class="table table-bordered">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.exchange_rate.id'|trans) }}</th>
@@ -19,8 +19,8 @@
         <tr>
             <td>{{ exchange_rate.id }}</td>
             <td>{{ exchange_rate.currency }}</td>
-            <td>{{ exchange_rate.rate }}</td>
-            <td><span class="label label-info">{{ exchange_rate.updatedAt|date }}</span></td>
+            <td><span class="label label-primary">{{ exchange_rate.rate }}</span></td>
+            <td>{{ exchange_rate.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.edit(path('sylius_backend_exchange_rate_update', {'id': exchange_rate.id})) }}

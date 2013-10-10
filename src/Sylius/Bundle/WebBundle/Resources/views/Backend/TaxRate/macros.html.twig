@@ -27,11 +27,11 @@
             <td>{{ tax_rate.name }}</td>
             <td>{{ tax_rate.amountAsPercentage }}%</td>
             <td>
-                <span class="label label-{{ tax_rate.includedInPrice ? 'success' : 'important'}}">
+                <span class="label label-{{ tax_rate.includedInPrice ? 'success' : 'danger'}}">
                     {{ tax_rate.includedInPrice ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                 </span>
             </td>
-            <td><span class="label label info">{{ tax_rate.calculator }}</span></td>
+            <td><span class="label label-primary">{{ tax_rate.calculator|humanize|upper }}</span></td>
             <td>{{ tax_rate.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">

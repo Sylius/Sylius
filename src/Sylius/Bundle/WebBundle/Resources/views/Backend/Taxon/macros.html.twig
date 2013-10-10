@@ -7,7 +7,6 @@
     <thead>
         <tr>
             <th>{{ 'sylius.taxon.name'|trans }}</th>
-            <th>{{ 'sylius.taxon.image'|trans }}</th>
             <th></th>
         </tr>
     </thead>
@@ -28,19 +27,14 @@
 {% for taxon in taxons %}
 <tr>
     <td>
-        {% for i in 1..taxon.level %}<i class="icon-caret-right"></i>{% if not loop.last %}&nbsp;{% endif %}{% endfor %}
-        {{ taxon.name }}
-    </td>
-    <td>
-        {% if taxon.path|length > 0 %}
-            <div data-toggle="modal-gallery" data-target="#modal-gallery">
-                <a href="{{ taxon.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" title="{{ taxon.name }}" class="thumbnail thumbnail-image">
-                    <img src="{{ taxon.path|imagine_filter('sylius_50x40') }}" alt="" />
+        <span style="border-left: {{ (taxon.level - 1) * 20}}px solid #f1f1f1; padding-left: 10px;">
+            {% if taxon.path|length > 0 %}
+                <a href="{{ taxon.path|imagine_filter('sylius_gallery') }}" title="{{ taxon.name }}">
+                    <img src="{{ taxon.path|imagine_filter('sylius_50x40') }}" alt="" class="img-rounded" />
                 </a>
-            </div>
-        {% else %}
-            <span class="badge badge-info">{{ 'sylius.taxon.no_image'|trans }}</span>
-        {% endif %}
+            {% endif %}
+            {{ taxon.name }}
+        </span>
     </td>
     <td>
         <div class="pull-right">

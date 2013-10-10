@@ -22,7 +22,7 @@ class OrderController extends ResourceController
      */
     public function filterFormAction(Request $request)
     {
-        $form = $this->getFormFactory()->createNamed('criteria', 'sylius_order_filter');
+        $form = $this->getFormFactory()->createNamed('criteria', 'sylius_order_filter', $request->query->get('criteria'));
 
         return $this->renderResponse('SyliusWebBundle:Backend/Order:filterForm.html.twig', array(
             'form' => $form->createView()

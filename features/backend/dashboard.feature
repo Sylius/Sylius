@@ -29,11 +29,6 @@ Feature: Store dashboard
         Given I am on the dashboard page
          Then I should see "Administration dashboard"
 
-    Scenario: Viewing sales info for last week
-         Given I am on the dashboard page
-          Then I should see last week revenue with value "€57.97" in the list
-          Then I should see last week orders with value "2" in the list
-
     Scenario: Viewing recent orders
          Given I am on the dashboard page
           Then I should see 2 orders in the list

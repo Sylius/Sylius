@@ -1,30 +1,34 @@
 {{ form_errors(form) }}
 <fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
-    {{ form_row(form.type) }}
-    <div class="control-group">
-        {% for type in ['country', 'province', 'zone'] %}
-            <div id="sylius-zone-members-{{ type }}" data-prototype="{{ form_widget(form.members.vars.prototypes['sylius_zone_member_' ~ type], {'attr': {'class': 'select2 input-large'}})|e }}">
-                {% if form.type.vars.value == type %}
-                    {% for member in form.members %}
-                        {% if member.offsetExists(form.type.vars.value) %}
-                            <div class="control-group">
-                                <div class="controls">
-                                    {{ form_widget(member[form.type.vars.value], {'attr': {'class': 'select2 input-large'}}) }}
-                                    <a href="#" class="btn btn-danger collection-remove-btn"><i class="icon-trash icon-white"></i></a>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            </div>
-        {% endfor %}
-        <div class="control-group">
-            <div class="controls">
-                {% set prototypeId = 'sylius-zone-members-' ~ form.type.vars.value|default(constant('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneInterface::TYPE_COUNTRY')) %}
-                <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="{{ prototypeId }}" data-collection="{{ prototypeId }}">{{ 'sylius.zone.add_member'|trans }}</a>
-            </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+            {{ form_row(form.type) }}
         </div>
+        <div class="col-md-6">
+            <div class="control-group">
+                {% for type in ['country', 'province', 'zone'] %}
+                    <div id="sylius-zone-members-{{ type }}" data-prototype="{{ form_widget(form.members.vars.prototypes['sylius_zone_member_' ~ type], {'attr': {'class': 'select2 input-large'}})|e }}">
+                        {% if form.type.vars.value == type %}
+                            {% for member in form.members %}
+                                {% if member.offsetExists(form.type.vars.value) %}
+                                    <div class="row" style="margin-bottom: 10px;">
+                                        <div class="col-md-11">
+                                            {{ form_widget(member[form.type.vars.value], {'attr': {'class': 'select2 float-right input-large'}}) }}
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a href="#" class="btn btn-danger collection-remove-btn float-left"><i class="icon-trash icon-white"></i></a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                {% set prototypeId = 'sylius-zone-members-' ~ form.type.vars.value|default(constant('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneInterface::TYPE_COUNTRY')) %}
+                <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="{{ prototypeId }}" data-collection="{{ prototypeId }}">{{ 'sylius.zone.add_member'|trans }}</a>
+            </div>
     </div>
 </fieldset>
+<hr>
 {{ form_widget(form._token) }}

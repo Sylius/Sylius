@@ -162,6 +162,11 @@ class User extends BaseUser implements UserInterface
         return $this->addresses;
     }
 
+    public function getFullName()
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
+
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;

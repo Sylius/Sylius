@@ -1,63 +1,59 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import list as listOrders %}
-{% from 'SyliusWebBundle:Backend/User:macros.html.twig' import list as listUsers %}
-
-
-{% block javascripts %}
-{{ parent() }}
-{% javascripts output='assets/compiled/chart.js'
-    'https://raw.github.com/nnnick/Chart.js/master/Chart.min.js'
-%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            {% for id, chart in charts %}
-                new Chart($('#{{ id }}').get(0).getContext('2d')).{{ chart.type }}({{ chart.data|json_encode()|raw }});
-            {% endfor %}
-        });
-    </script>
-{% endjavascripts %}
-{% endblock %}
+{% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import simple_list as list_orders %}
+{% from 'SyliusWebBundle:Backend/User:macros.html.twig' import simple_list as list_users %}
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.backend.dashboard.header'|trans }}<small> {{ 'sylius.backend.dashboard.subheader'|trans }}</small></h1>
+    <h1><i class="icon-dashboard"></i> {{ 'sylius.backend.dashboard.header'|trans }} <small>{{ 'sylius.backend.dashboard.subheader'|trans }}</small></h1>
 </div>
 
-<div class="alert alert-info">
-    <h4 class="alert-heading">{{ 'sylius.backend.alert.info'|trans }}</h4>
-    There are no new notifications.
+<div class="row">
+    <div class="col-md-6">
+        <ul class="nav nav-pills nav-justified">
+            <li><a href="{{ path('sylius_backend_order_index') }}"><i class="icon-shopping-cart"></i> {{ 'sylius.backend.quick_links.orders'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_user_index') }}"><i class="icon-user"></i> {{ 'sylius.backend.quick_links.users'|trans }}</a></li>
+        </ul>
+        <hr>
+        <ul class="nav nav-pills nav-justified">
+            <li><a href="{{ path('sylius_backend_product_index') }}"><i class="icon-folder-open"></i> {{ 'sylius.backend.quick_links.products'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_product_create') }}"><i class="icon-plus"></i> {{ 'sylius.backend.quick_links.add_product'|trans }}</a></li>
+        </ul>
+        <br>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.backend.statistics'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ 'sylius.backend.statistics.sales_this_month'|trans }}</td>
+                    <td>{{ sales|default(45623)|sylius_money }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.backend.statistics.orders_this_month'|trans }}</td>
+                    <td>{{ orders_count }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.backend.statistics.registrations_this_month'|trans }}</td>
+                    <td>{{ registrations_count|default(6) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>{{ 'sylius.backend.dashboard.revenue'|trans }}</th>
-            <th>{{ 'sylius.backend.dashboard.orders'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ revenue|sylius_money }}</td>
-            <td>{{ ordersCount }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="row-fluid">
-    {% for id, chart in charts %}
-        <div class="span6">
-            <h3>{{ chart.label|trans }}</h3>
-            <canvas id="{{ id }}" width="600" height="400"></canvas>
-        </div>
-    {% endfor %}
+<div class="row">
+    <div class="col-md-6">
+        {{ list_orders(orders)  }}
+        <a href="{{ path('sylius_backend_order_index') }}" class="btn btn-primary btn-block"><i class="icon-shopping-cart"></i> {{ 'sylius.show_all'|trans }}</a>
+    </div>
+    <div class="col-md-6">
+        {{ list_users(users)  }}
+        <a href="{{ path('sylius_backend_user_index') }}" class="btn btn-primary btn-block"><i class="icon-user"></i> {{ 'sylius.show_all'|trans }}</a>
+    </div>
 </div>
-
-<h3>{{ 'sylius.order.recent_header'|trans }}</h3>
-{{ listOrders(orders)  }}
-
-<h3>{{ 'sylius.user.recent_header'|trans }}</h3>
-{{ listUsers(users)  }}
-
 {% endblock %}
