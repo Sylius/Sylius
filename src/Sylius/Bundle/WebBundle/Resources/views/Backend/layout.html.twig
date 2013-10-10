@@ -1,3 +1,4 @@
+{% import "SyliusWebBundle:Backend/Macros:modal.html.twig" as modal %}
 <!DOCTYPE html>
 
 <html>
@@ -78,6 +79,8 @@
                 </div>
             </div>
     </div>
+        {# Confirmation modal #}
+        {{ modal.confirmationModal() }}
 
         {# javascripts... #}
         {% block javascripts %}
@@ -90,6 +93,7 @@
             '@SyliusWebBundle/Resources/assets/js/backend.js'
             '@SyliusWebBundle/Resources/assets/js/load-image.js'
             '@SyliusWebBundle/Resources/assets/js/bootstrap-image-gallery.js'
+            '@SyliusWebBundle/Resources/assets/js/bootstrap-modal-extension.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

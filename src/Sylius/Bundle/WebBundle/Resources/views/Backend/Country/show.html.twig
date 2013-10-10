@@ -1,5 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+
 {% block content %}
 <div class="page-header">
     <h1>{{ 'sylius.country.show_header'|trans|raw }}</h1>
@@ -12,12 +14,7 @@
     <a href="{{ path('sylius_backend_country_update', {'id': country.id}) }}" class="btn">
         <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
     </a>
-    <form action="{{ path('sylius_backend_country_delete', {'id': country.id}) }}" method="post" style="display: inline;">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
-        </button>
-    </form>
+    {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
 </div>
 
 <table class="table table-bordered table-consensed">
@@ -48,12 +45,7 @@
                     <td>{{ province.name }}</td>
                     <td>
                         <div class="pull-right">
-                            <form action="{{ path('sylius_backend_province_delete', {'countryId': country.id, 'id': province.id}) }}" method="post" style="display: inline;">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger">
-                                    <i class="icon-trash"></i> {{ 'sylius.delete'|trans }}
-                                </button>
-                            </form>
+                            {{ buttons.delete(path('sylius_backend_province_delete', {'id': province.id, 'countryId' : country.id})) }}
                         </div>
                     </td>
                 </tr>

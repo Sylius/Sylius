@@ -19,10 +19,13 @@
 </a>
 {% endmacro %}
 
-{% macro delete(url, message) %}
-<form action="{{ url }}" method="post" style="display: inline;">
+{% macro delete(url, message, confirmationMessage) %}
+<form action="{{ url }}" method="post" class="delete-action-form">
     <input type="hidden" name="_method" value="DELETE">
-    <button class="btn btn-danger">
+    <button class="btn btn-danger"
+            data-toggle="confirmation"
+            data-message="{{ confirmationMessage is empty ? 'sylius.confirmation.message'|trans : confirmationMessage }}"
+            data-target="#confirmationModalContainer">
         <i class="icon-trash"></i>
         {{ message is empty ? 'sylius.delete'|trans : message }}
     </button>
