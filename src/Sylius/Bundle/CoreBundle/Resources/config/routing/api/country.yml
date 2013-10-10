@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_country_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.country:indexAction
+        _format: xml
+
+sylius_api_country_create:
+    pattern: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.country:createAction
+        _format: xml
+
+sylius_api_country_update:
+    pattern: /{id}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.country:updateAction
+        _format: xml
+
+sylius_api_country_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.country:deleteAction
+        _format: xml
+
+sylius_api_country_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.country:showAction
+        _format: xml

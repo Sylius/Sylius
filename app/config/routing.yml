@@ -1,6 +1,9 @@
 sylius_installer:
     resource: @SyliusInstallerBundle/Resources/config/routing.yml
 
+sylius_core:
+    resource: @SyliusCoreBundle/Resources/config/routing/main.yml
+
 sylius_web:
     resource: @SyliusWebBundle/Resources/config/routing/main.yml
 

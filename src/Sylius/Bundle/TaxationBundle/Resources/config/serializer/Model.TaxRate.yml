@@ -1,0 +1,38 @@
+Sylius\Bundle\TaxationBundle\Model\TaxRate:
+    exclusion_policy: ALL
+    xml_root_name: tax-rate
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        amount:
+            expose: true
+            type: float
+        includedInPrice:
+            expose: true
+            type: boolean
+            xml_attribute: true
+        calculator:
+            expose: true
+            type: string
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_tax_rate_show
+                parameters:
+                    id: expr(object.getId())
+        - rel: tax-category
+          href:
+                route: sylius_api_tax_category_show
+                parameters:
+                    id: expr(object.getCategory().getId())
