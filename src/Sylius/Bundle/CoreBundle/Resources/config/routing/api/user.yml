@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_user_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user:indexAction
+        _format: xml
+        _sylius:
+            filterable: true
+            sortable: true
+            sorting:
+                id: desc
+
+sylius_api_user_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.user:deleteAction
+        _format: xml
+
+sylius_api_user_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user:showAction
+        _format: json
