@@ -1,0 +1,9 @@
+Sylius\Bundle\CoreBundle\Model\TaxRate:
+    exclusion_policy: ALL
+    xml_root_name: tax-rate
+    relations:
+        - rel: zone
+          href:
+                route: sylius_api_zone_show
+                parameters:
+                    id: expr(object.getZone().getId())
