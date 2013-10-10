@@ -2,7 +2,7 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.orders'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
     <li><a href="{{ path('sylius_backend_promotion_index') }}">{{ 'sylius.breadcrumb.promotion.index'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id}) }}">{{ promotion.name }}</a></li>
     <li><a href="{{ path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}) }}">{{ 'sylius.breadcrumb.promotion_coupon.index'|trans }}</a></li>

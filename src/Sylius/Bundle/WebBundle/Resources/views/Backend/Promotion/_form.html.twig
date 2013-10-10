@@ -12,25 +12,23 @@
     </div>
 
     <div class="col-md-4">
-        <div class="col-md-12">
             <div id="sylius_promotion_rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
                 {% for ruleForm in form.rules %}
-                    {{ form_widget(ruleForm) }}
+                    {{ form_row(ruleForm.type) }}
+                    {{ form_row(ruleForm.configuration, {'label': false}) }}
                 {% endfor %}
             </div>
             <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>
-        </div>
 
         <hr>
 
-        <div class="col-md-12">
             <div id="sylius_promotion_actions" data-prototype="{{ form_widget(form.actions.vars.prototype)|e }}">
                 {% for actionForm in form.actions %}
-                    {{ form_row(actionForm) }}
+                    {{ form_row(actionForm.type) }}
+                    {{ form_row(actionForm.configuration, {'label': false}) }}
                 {% endfor %}
             </div>
             <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>
-        </div>
     </div>
 </div>
 

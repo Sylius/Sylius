@@ -62,9 +62,11 @@
                                     <td>{{ variant.id }}</td>
                                     <td><span class="label label-{{ variant.available ? 'success' : 'danger' }}">{{ variant.availableOn|date }}</span></td>
                                     <td>
+                                        <ul>
                                         {% for option in variant.options %}
-                                            <span class="label label-primary">{{ option.name }}: {{ option.value }}</span>
+                                            <li><strong>{{ option.name }}</strong>: {{ option.value }}</li>
                                         {% endfor %}
+                                        </ul>
                                     </td>
                                     <td><span class="label label-{{ variant.inStock ? 'success' : 'danger' }}">{{ variant.onHand }}</span></td>
                                     <td>
