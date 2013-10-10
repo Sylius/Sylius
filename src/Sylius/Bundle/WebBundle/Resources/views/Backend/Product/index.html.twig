@@ -21,7 +21,7 @@
     <h1><i class="icon-folder-open"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_product_filter_form')) %}
+{% render(url('sylius_backend_product_filter_form', {'criteria': app.request.query.get('criteria')})) %}
 
 {{ pagination(products) }}
 {{ list(products) }}

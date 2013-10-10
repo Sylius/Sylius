@@ -19,7 +19,7 @@
     <h1><i class="icon-user"></i> {{ 'sylius.user.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_user_filter_form')) %}
+{% render(url('sylius_backend_user_filter_form', {'criteria': app.request.query.get('criteria')})) %}
 
 {% set activeTab = (app.request.query.get('criteria') is not empty and app.request.query.get('criteria').enabled|default('1') == '0') ? 'disabled' : 'all' %}
 

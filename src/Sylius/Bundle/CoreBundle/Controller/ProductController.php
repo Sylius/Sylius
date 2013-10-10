@@ -26,14 +26,14 @@ class ProductController extends ResourceController
      * List products categorized under given taxon.
      *
      * @param Request $request
-     * @param $permalink
+     * @param string  $permalink
+     *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @throws NotFoundHttpException
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
-        $config = $this->getConfiguration();
-
         $taxon = $this->get('sylius.repository.taxon')
             ->findOneByPermalink($permalink);
 
@@ -47,7 +47,7 @@ class ProductController extends ResourceController
         ;
 
         $paginator->setCurrentPage($request->query->get('page', 1));
-        $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($this->getConfiguration()->getPaginationMaxPerPage());
 
         return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
             'taxon'    => $taxon,
@@ -62,15 +62,8 @@ class ProductController extends ResourceController
      */
     public function filterFormAction(Request $request)
     {
-        $form = $this->getFormFactory()->createNamed('criteria', 'sylius_product_filter');
-
         return $this->renderResponse('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
-            'form' => $form->createView()
+            'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
         ));
-    }
-
-    private function getFormFactory()
-    {
-        return $this->get('form.factory');
     }
 }

@@ -19,7 +19,7 @@
     <h1><i class="icon-shopping-cart"></i> {{ 'sylius.order.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_order_filter_form')) %}
+{% render(url('sylius_backend_order_filter_form', {'criteria': app.request.query.get('criteria')})) %}
 
 {{ pagination(orders) }}
 {{ list(orders) }}

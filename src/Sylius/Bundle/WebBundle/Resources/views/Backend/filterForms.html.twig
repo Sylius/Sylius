@@ -4,7 +4,7 @@
 {% spaceless %}
     <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
         {{ form_label(form, null, {'label_attr': {'class': 'sr-only'}}) }}
-        {{ form_widget(form) }}
+        {{ form_widget(form, criteria|default({})) }}
         {% for error in errors %}
             <span class="help-block">
                 {{
