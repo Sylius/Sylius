@@ -36,15 +36,24 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     protected $numberLength;
 
     /**
+     * Start number
+     *
+     * @var integer
+     */
+    protected $startNumber;
+
+    /**
      * Constructor.
      *
      * @param OrderRepositoryInterface $repository
-     * @param integer                  $numberLength
+     * @param null|integer $numberLength
+     * @param null|integer $startNumber
      */
-    public function __construct(OrderRepositoryInterface $repository, $numberLength = 9)
+    public function __construct(OrderRepositoryInterface $repository, $numberLength = 9, $startNumber = 1)
     {
         $this->repository = $repository;
         $this->numberLength = $numberLength;
+        $this->startNumber = $startNumber;
     }
 
     /**
@@ -52,24 +61,26 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      */
     public function generate(OrderInterface $order)
     {
-        if (null === $order->getNumber()) {
-            $order->setNumber(str_pad((int) $this->getLastOrderNumber() + 1, $this->numberLength, 0, STR_PAD_LEFT));
+        if (null !== $order->getNumber()) {
+            return;
         }
+
+        $order->setNumber(str_pad($this->getNextOrderNumber(), $this->numberLength, 0, STR_PAD_LEFT));
     }
 
     /**
-     * Get last order number.
+     * Get next order number.
      *
      * @return string
      */
-    protected function getLastOrderNumber()
+    protected function getNextOrderNumber()
     {
         $lastOrders = $this->repository->findRecentOrders(1);
 
         if (empty($lastOrders)) {
-            return str_repeat('0', $this->numberLength);
+            return $this->startNumber;
         }
 
-        return current($lastOrders)->getNumber();
+        return (int) current($lastOrders)->getNumber() + 1;
     }
 }

@@ -63,4 +63,27 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
 
         $this->generate($order);
     }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     */
+    function it_starts_at_start_number_if_specified($orderRepository, $order)
+    {
+        $this->beConstructedWith($orderRepository, 9, 123);
+        $order->getNumber()->willReturn(null);
+        $order->setNumber('000000123')->shouldBeCalled();
+
+        $this->generate($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\SalesBundle\Model\OrderInterface $order
+     */
+    function it_leaves_existing_numbers_alone($order)
+    {
+        $order->getNumber()->willReturn('123');
+        $order->setNumber()->shouldNotBeCalled();
+
+        $this->generate($order);
+    }
 }
