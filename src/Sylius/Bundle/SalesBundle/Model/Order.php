@@ -32,7 +32,7 @@ class Order implements OrderInterface, TimestampableInterface
     /**
      * Completion time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $completedAt;
 
