@@ -15,6 +15,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Sylius\Bundle\CoreBundle\Model\User;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
@@ -43,7 +44,7 @@ class UserProvider extends FOSUBUserProvider
     /**
      * {@inheritDoc}
      */
-    public function connect($user, UserResponseInterface $response)
+    public function connect(UserInterface $user, UserResponseInterface $response)
     {
         $providerName = $response->getResourceOwner()->getName();
         $uniqueId = $response->getUsername();

@@ -35,10 +35,9 @@ class OAuthContext extends RawMinkContext
     public function iAllowTheUseOfMyAccount($providerName, $domain)
     {
         if ($this->currentUrlContains($domain)) {
-
             $submitButtons = $this->getSession('selenium2')->getPage()->findAll('xpath', '//form//button[@type="submit"]');
-            if (count($submitButtons) != 2) {
-                throw new ExpectationException('Page should contain a form with 2 buttons.', $this->getSession('selenium2'));
+            if (count($submitButtons) != 3) {
+                throw new ExpectationException('Page should contain a form with 3 buttons.', $this->getSession('selenium2'));
             }
 
             if ($providerName == 'Google') {
@@ -46,7 +45,6 @@ class OAuthContext extends RawMinkContext
             } else {
                 $submitButtons[1]->click();
             }
-
         }
     }
 
@@ -57,8 +55,7 @@ class OAuthContext extends RawMinkContext
     public function iShouldBeOnTheWebsite($domain)
     {
         if (!$this->currentUrlContains($domain)) {
-            $message = sprintf('Current URL should contain "%s".', $domain);
-            throw new ExpectationException($message, $this->getSession('selenium2'));
+            throw new ExpectationException(sprintf('Current URL should contain "%s".', $domain), $this->getSession('selenium2'));
         }
     }
 
@@ -68,8 +65,7 @@ class OAuthContext extends RawMinkContext
     public function iShouldNotBeOnTheWebsiteAnymore($domain)
     {
         if ($this->currentUrlContains($domain)) {
-            $message = sprintf('Current URL should not contain "%s".', $domain);
-            throw new ExpectationException($message, $this->getSession('selenium2'));
+            throw new ExpectationException(sprintf('Current URL should not contain "%s".', $domain), $this->getSession('selenium2'));
         }
 
         // Re-set default session

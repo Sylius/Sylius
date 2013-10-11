@@ -1,4 +1,4 @@
-@users
+@users @oauth
 Feature: User registration via OAuth
     In order to order products
     As a visitor with an OAuth account
@@ -17,6 +17,7 @@ Feature: User registration via OAuth
         Examples:
           | provider_name | provider_site |
           | Amazon        | amazon.com    |
+          | Facebook      | facebook.com  |
           | Google        | google.com    |
 
     Scenario Outline: Successfully creating account in store
