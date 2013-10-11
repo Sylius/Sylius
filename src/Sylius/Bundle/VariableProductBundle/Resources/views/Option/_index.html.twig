@@ -1,0 +1,20 @@
+{% import 'SyliusVariableProductBundle:Option:macros.html.twig' as macros %}
+
+<h1>Options list <small>All options saved in the system</small></h1>
+<hr />
+
+<div class="well">
+    <a href="{{ path('sylius_option_create') }}" class="btn btn-primary">
+        <i class="icon-plus-sign"></i> create option
+    </a>
+</div>
+
+{% if options.haveToPaginate()|default(false) %}
+    {{ pagerfanta(options, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{{ macros.list(options) }}
+
+{% if options.haveToPaginate()|default(false) %}
+    {{ pagerfanta(options, 'twitter_bootstrap_translated') }}
+{% endif %}

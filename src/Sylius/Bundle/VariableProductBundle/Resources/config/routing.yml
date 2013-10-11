@@ -1,0 +1,3 @@
+sylius_option:
+    resource: @SyliusVariableProductBundle/Resources/config/routing/option.yml
+    prefix: /options

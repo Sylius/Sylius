@@ -1,0 +1,31 @@
+{{ form_row(form.name) }}
+{{ form_row(form.presentation) }}
+
+<div class="control-group">
+    {{ form_label(form.values)  }}
+    <div class="controls">
+        <ul id="sylius-option-values" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">
+            {% for valueForm in form.values %}
+                <li>{{ form_row(valueForm.value)  }}</li>
+            {% endfor %}
+        </ul>
+
+        {{ form_errors(form) }}
+        <a href="#" class="btn btn-primary" data-collection-button="add" onclick="addValue()">Add value</a>
+        <script>
+            function addValue()
+            {
+                var list = document.getElementById("sylius-option-values");
+                var prototype = list.dataset.prototype;
+                var newForm = prototype.replace(/__name__/g, list.childNodes.length);
+
+                var li = document.createElement('li');
+                li.innerHTML = newForm;
+
+                list.appendChild(li);
+            }
+        </script>
+    </div>
+</div>
+
+{{ form_widget(form._token) }}
