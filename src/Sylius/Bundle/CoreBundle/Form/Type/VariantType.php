@@ -30,6 +30,9 @@ class VariantType extends BaseVariantType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('sku', 'text', array(
+                'label' => 'sylius.form.variant.sku'
+            ))
             ->add('price', 'sylius_money', array(
                 'label' => 'sylius.form.variant.price'
             ))

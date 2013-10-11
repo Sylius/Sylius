@@ -150,6 +150,10 @@
         <source>sylius.form.variant.price</source>
         <target>Price</target>
       </trans-unit>
+      <trans-unit id="6bd77fa4ee5506db723f5e64327f3cb2" resname="sylius.form.variant.sku">
+        <source>sylius.form.variant.sku</source>
+        <target>SKU</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
