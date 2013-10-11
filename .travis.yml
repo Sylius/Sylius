@@ -29,9 +29,7 @@ before_script:
     - composer install --prefer-source --no-interaction
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
-    - chmod -R 777 /dev/shm/sylius/cache /dev/shm/sylius/logs
     - app/console cache:warmup --env=test > /dev/null
-    - chmod -R 777 /dev/shm/sylius/cache /dev/shm/sylius/logs
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
