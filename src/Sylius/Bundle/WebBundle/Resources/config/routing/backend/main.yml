@@ -1,6 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_backend_index:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sylius_backend_dashboard
+        permanent: true
+
 sylius_backend_dashboard:
     pattern: /dashboard
     defaults: { _controller: sylius.controller.backend.dashboard:mainAction }
