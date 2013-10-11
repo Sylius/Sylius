@@ -59,4 +59,33 @@ class UserRepository extends EntityRepository
 
         return $this->getPaginator($queryBuilder);
     }
+
+    public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+        if (null !== $status) {
+            $queryBuilder
+                ->andWhere('o.status = :status')
+                ->setParameter('status', $status)
+            ;
+        }
+
+        return $queryBuilder
+            ->select('count(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
+            ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
+            ->setParameter('from', $from)
+            ->setParameter('to', $to)
+        ;
+    }
 }
