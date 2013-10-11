@@ -140,4 +140,17 @@ class VariantSpec extends ObjectBehavior
         $this->setHeight(110);
         $this->getShippingHeight()->shouldReturn(110);
     }
+
+    function it_has_no_sku_by_default()
+    {
+        $this->getSku()->shouldReturn(null);
+    }
+
+    function its_sku_is_mutable()
+    {
+        $sku = 'dummy-sku123';
+
+        $this->setSku($sku);
+        $this->getSku()->shouldReturn($sku);
+    }
 }
