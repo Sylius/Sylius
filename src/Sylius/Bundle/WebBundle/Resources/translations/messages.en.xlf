@@ -698,6 +698,10 @@
         <source>sylius.form.choose_file</source>
         <target>Choose file</target>
       </trans-unit>
+      <trans-unit id="44dbe7f496bf7362d917fac33bd5b5fc" resname="sylius.variant.sku">
+        <source>sylius.variant.sku</source>
+        <target>SKU</target>
+      </trans-unit>
       <trans-unit id="737d82e384946e4946cfea34afb9b7d8" resname="sylius.form.frontend.password.confirmation">
         <source>sylius.form.frontend.password.confirmation</source>
         <target>Confirmation</target>
