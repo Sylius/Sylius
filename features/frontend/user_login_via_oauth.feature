@@ -1,4 +1,4 @@
-@users
+@users @oauth
 Feature: Sign in to the store via OAuth
     In order to view my orders list
     As a visitor with an OAuth account
@@ -17,6 +17,7 @@ Feature: Sign in to the store via OAuth
         Examples:
           | provider_name | provider_site |
           | Amazon        | amazon.com    |
+          | Facebook      | facebook.com  |
           | Google        | google.com    |
 
     Scenario Outline: Log in with username and password

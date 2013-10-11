@@ -32,11 +32,13 @@
     </div>
     <div class="form-group">
         <div class="controls">
-            Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">
+                Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            </label>
         </div>
     </div>
 </fieldset>
-<div class="form-actions">
+<div class="form-actions clearfix">
     <div class="pull-right">
         {{ render(url('hwi_oauth_connect')) }}
     </div>

@@ -8,7 +8,7 @@ h1.logo {
 }
 
 h1.logo a {
-    color: #333333;
+    color: #333;
 }
 
 h1.logo a img {
@@ -25,7 +25,7 @@ h1.logo a:hover {
 }
 
 .jumbotron {
-    margin: 20px 0px 40px 0px;
+    margin: 20px 0 40px;
     text-align: center;
 }
 
@@ -96,7 +96,7 @@ div.product-box a img {
 div.product-box .btn {
     float: right;
     height: 25px;
-    padding: 1px 6px 7px 6px;
+    padding: 1px 6px 7px;
 }
 
 div.product-box span.label {
@@ -105,7 +105,7 @@ div.product-box span.label {
 }
 
 div.product-box h3 {
-   color: #333333;
+   color: #333;
 }
 
 div.footer p {
@@ -114,7 +114,7 @@ div.footer p {
 }
 
 div.footer ul li a {
-    color: #999999;
+    color: #999;
 }
 
 #sidebar ul li img.menu-thumbnail {
@@ -157,16 +157,6 @@ a.oauth-login {
     margin-right: 8px;
 }
 
-a.oauth-login span {
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-}
-
-a.oauth-login-amazon span {
-    background: url('/assets/img/icon/64/amazon.png') no-repeat;
-}
-
-a.oauth-login-google span {
-    background: url('/assets/img/icon/64/google.png') no-repeat;
+a.oauth-login:hover {
+    text-decoration: none;
 }

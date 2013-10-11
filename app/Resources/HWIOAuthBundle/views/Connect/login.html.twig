@@ -1,3 +1,5 @@
 {% for owner in hwi_oauth_resource_owners() %}
-    <a class="oauth-login oauth-login-{{ owner | trans({}, 'HWIOAuthBundle') }}" href="{{ hwi_oauth_login_url(owner) }}" title="{{ owner | trans({}, 'HWIOAuthBundle') }}"><span></span></a>
+    <a class="oauth-login oauth-login-{{ owner|trans({}, 'HWIOAuthBundle') }}" href="{{ hwi_oauth_login_url(owner) }}" title="{{ owner|trans({}, 'HWIOAuthBundle') }}">
+        <img src="/assets/img/icon/64/{{ owner|trans({}, 'HWIOAuthBundle') }}.png" alt="{{ owner|trans({}, 'HWIOAuthBundle') }}">
+    </a>
 {% endfor %}
