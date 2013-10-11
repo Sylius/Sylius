@@ -1,0 +1,10 @@
+<h1>Updating property <small>Use this form to update existing property</small></h1>
+<hr />
+
+<form action="{{ path('sylius_property_update', {'id': property.id}) }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusProductBundle:Property:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="save changes" class="btn btn-large btn-primary" />
+        <a href="{{ path('sylius_property_index') }}" class="btn btn-large">cancel</a>
+    </div>
+</form>

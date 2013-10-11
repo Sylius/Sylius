@@ -1,0 +1,71 @@
+{% macro list(prototypes) %}
+
+{% if prototypes|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id') }}</th>
+            <th>{{ sylius_resource_sort('name') }}</th>
+            <th>{{ sylius_resource_sort('options') }}</th>
+            <th>{{ sylius_resource_sort('properties') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'updated at') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for prototype in prototypes %}
+        <tr>
+            <td>
+                <a href="{{ path('sylius_prototype_show', {'id': prototype.id}) }}" class="btn btn-link">
+                    {{ prototype.id }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ path('sylius_prototype_show', {'id': prototype.id}) }}">
+                    <strong>{{ prototype.name }}</strong>
+                </a>
+            </td>
+            <td>
+                <ul>
+                    {% for v in prototype.options %}
+                        <li>
+                            <span class="label label-info">{{ v|upper }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for v in prototype.properties %}
+                        <li>
+                            <span class="label label-info">{{ v|upper }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ prototype.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                    <a href="{{ path('sylius_prototype_update', {'id': prototype.id}) }}" class="btn">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    <form action="{{ path('sylius_prototype_delete', {'id': prototype.id}) }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger">
+                            <i class="icon-trash"></i> delete
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    No prototypes to show
+</div>
+{% endif %}
+
+{% endmacro %}

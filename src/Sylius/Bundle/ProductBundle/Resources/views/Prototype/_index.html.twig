@@ -1,0 +1,20 @@
+{% import 'SyliusProductBundle:Prototype:macros.html.twig' as macros %}
+
+<h1>Prototypes list <small>All prototypes saved in the system</small></h1>
+<hr />
+
+<div class="well">
+    <a href="{{ path('sylius_prototype_create') }}" class="btn btn-primary">
+        <i class="icon-plus-sign"></i> create prototype
+    </a>
+</div>
+
+{% if prototypes.haveToPaginate()|default(false) %}
+    {{ pagerfanta(prototypes, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{{ macros.list(prototypes) }}
+
+{% if prototypes.haveToPaginate()|default(false) %}
+    {{ pagerfanta(prototypes, 'twitter_bootstrap_translated') }}
+{% endif %}
