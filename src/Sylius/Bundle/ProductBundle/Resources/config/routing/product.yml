@@ -6,7 +6,7 @@ sylius_product_index:
         _sylius:
             sortable: true
             sorting:
-              name: desc
+                name: desc
 
 sylius_product_create:
     pattern: /new
