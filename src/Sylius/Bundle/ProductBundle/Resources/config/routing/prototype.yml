@@ -32,8 +32,10 @@ sylius_prototype_delete:
         _sylius:
             redirect: sylius_prototype_index
 
-sylius_prototype_show:
-    pattern: /{id}
-    methods: [GET]
+sylius_prototype_build:
+    pattern: /{id}/build
+    methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.prototype:showAction
+        _controller: sylius.controller.prototype:buildAction
+        _sylius:
+            redirect: sylius_product_show

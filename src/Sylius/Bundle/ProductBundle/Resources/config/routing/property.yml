@@ -31,9 +31,3 @@ sylius_property_delete:
         _controller: sylius.controller.property:deleteAction
         _sylius:
             redirect: sylius_property_index
-
-sylius_property_show:
-    pattern: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.property:showAction

@@ -15,15 +15,9 @@
     <tbody>
     {% for prototype in prototypes %}
         <tr>
+            <td>{{ prototype.id }}</td>
             <td>
-                <a href="{{ path('sylius_prototype_show', {'id': prototype.id}) }}" class="btn btn-link">
-                    {{ prototype.id }}
-                </a>
-            </td>
-            <td>
-                <a href="{{ path('sylius_prototype_show', {'id': prototype.id}) }}">
-                    <strong>{{ prototype.name }}</strong>
-                </a>
+                <strong>{{ prototype.name }}</strong>
             </td>
             <td>
                 <ul>
@@ -46,7 +40,10 @@
             <td>{{ prototype.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                    <a href="{{ path('sylius_prototype_update', {'id': prototype.id}) }}" class="btn">
+                    <a href="{{ path('sylius_prototype_build', {'id': prototype.id}) }}" class="btn">
+                        <i class="icon-book"></i> build prototype
+                    </a>
+                    <a href="{{ path('sylius_prototype_update', {'id': prototype.id}) }}" class="btn btn-primary">
                         <i class="icon-pencil"></i> edit
                     </a>
                     <form action="{{ path('sylius_prototype_delete', {'id': prototype.id}) }}" method="post" style="display: inline;">
