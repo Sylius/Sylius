@@ -1,125 +1,402 @@
+/* General. */
 body {
-    padding-top: 20px;
-    padding-bottom: 40px;
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    color: #5a5a5a;
+    background-color: #f7f7f7;
 }
 
-h1.logo {
+.center-form {
+    margin: auto;
+    max-width: 40%;
 }
 
 h1.logo a {
     color: #333;
 }
-
-h1.logo a img {
-    width: 40px;
+#search {
+    width: 30%;
+    float: right;
 }
 
-h1.logo a span {
-    margin-left: 5px;
+#main-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fff;
+}
+#main-menu {
+    padding-top: 1px;
+    background-color: #333333;
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 40px;
+}
+#main-menu li a {
+    color: #ffffff;
+    border-top: 3px solid #333333;
+    border-bottom: 3px solid #333333;
+}
+#main-menu li > a:hover {
+    color: #1abb9c;
+    border-bottom: 3px solid #1abb9c;
+}
+#main-menu .dropdown-menu li > a:hover {
+    color: #fff;
+}
+.product-header {
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+.product-header h1 {
+    margin-top: 0;
 }
 
-h1.logo a:hover {
+h1.logo {
+    margin: 0;
+    font-weight: bold;
+}
+h1.logo > a {
     color: #333333;
-    text-decoration: none;
+    border: 0;
 }
 
-.jumbotron {
-    margin: 20px 0 40px;
+.center-text {
+    text-align: center;
+}
+.page-header {
+    margin-top: 0;
+    padding-bottom: 0;
+}
+.page-header h1 {
+    margin-top: 0;
+}
+
+/* Buttons. */
+.btn {
+    color: #fff;
+    border: 0;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.btn i {
+    font-size: 16px;
+}
+.btn-link {
+    font-size: 14px;
+}
+.btn-link:hover {
+    color: #5a5a5a;
+}
+a.btn-default:link, a.btn-default:visited, a.btn-default:hover, a.btn-default:focus {
+    background-color: #f7f7f7;
+    color: #5a5a5a;
+    border: 0;
+}
+.content-container {
+    padding: 15px;
+}
+.form-actions {
+    text-align: center;
+}
+.progress {
+    box-shadow: none;
+}
+a.btn-primary:link, a.btn-primary:visited, a.btn-primary:hover {
+    color: #fff;
+    border: 0;
+}
+.btn-primary, .btn-primary:hover {
+    color: #fff;
+    border: 0;
+}
+a.btn-info:link, a.btn-info:visited {
+    color: #fff;
+}
+a.btn-info:hover {
+    color: #fff;
+    background-color: #5bc0de;
+}
+a.btn-danger:link, a.btn-danger:visited {
+    color: #fff;
+    border: 0;
+}
+a.btn-success:link {
+    background-color: #1abb9c;
+    border: 0;
+    color: #fff !important;
+}
+a.btn-success:visited {
+    background-color: #1abb9c;
+    border: 0;
+    color: #fff !important;
+}
+.btn-success {
+    background-color: #1abb9c;
+    border: 0;
+    color: #fff !important;
+}
+.btn-success:hover {
+    background-color: #1abb9c;
+    border: 0;
+    color: #fff;
+}
+a.btn-success:visited {
+    background-color: #1abb9c;
+    border: 0;
+    color: #fff;
+}
+.btn-lg.file-overlay {
     text-align: center;
 }
 
-.jumbotron h1 {
-    font-size: 72px;
-    line-height: 1;
+.block {
+    padding: 20px;
+    background-color: #333333;
+    color: #ffffff;
+}
+.block h2 {
+    font-size: 20px;
+    border-bottom: 1px solid #ffffff;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+h3 {
+    margin: 0 0 20px 0;
 }
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+.block-blank {
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+.block-blank h2 {
+    font-size: 20px;
+    border-bottom: 1px solid #333333;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
-.marketing {
-    margin: 60px 0;
-}
+/* Labels. */
+.label-price { font-size: 100%; }
+.label-success { background-color: #1abb9c; }
 
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
-th {
-    background-color: #f1f1f1;
-}
-
-#sidebar ul {
-    margin-left: 0;
-    list-style: none;
-    padding: 0;
-    overflow: hidden;
-}
-
-#sidebar ul span.nav-header {
-    padding-left: 10px;
-    font-weight: bold;
-}
-
-#sidebar ul.nav-list {
-    margin-top: 10px;
-}
-
-#sidebar ul li a:hover {
+/* Links. */
+a:link {
+    color: #1abb9c;
     text-decoration: none;
+    border-bottom: 1px solid #1abb9c;
+}
+a:visited {
+    color: #1abb9c;
+    text-decoration: none;
+    border-bottom: 1px solid #1abb9c;
+}
+a:hover {
+    color: #5a5a5a;
+    text-decoration: none;
+    border-bottom: 1px solid #5a5a5a;
 }
 
-#sidebar ul li img {
+/* Forms. */
+.form-control {
+    border-radius: 0;
+}
+.form-control:focus {
+    box-shadow: none;
+}
+.form-actions {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Layout. */
+.row-topbar {
+    margin-bottom: 30px;
+}
+.row-header {
+    margin-bottom: 20px;
+}
+.row-carousel {
+    margin-bottom: 40px;
+}
+
+.product-grid-row {
+    margin-bottom: 30px;
+}
+.product-box {
+    width: 100%;
+    text-align: center;
+}
+.product-box a.title {
+    font-weight: bold;
+    color: #333333;
+    font-size: 1.3em;
+    width: 100%;
+    border-bottom: 0;
+}
+.product-box a.image {
+    width: 100%;
+    float: left;
+    border-bottom: 0;
+}
+.product-box .menu {
+    margin-top: 10px;
+    width: 100%;
+    float: left;
+}
+
+.cart-widget:link {
+    color: #333333;
+}
+.cart-widget:visited {
+    color: #333333;
+}
+
+.links {
+    list-style-type: none;
+}
+ul.links li {
+    display: inline;
+    float: left;
+    margin-right: 10px;
+    border-right: 1px solid #333333;
+    padding-right: 10px;
+}
+ul.links li:last-child {
+    border-right: 0;
+}
+
+.social {
+    list-style-type: none;
+}
+ul.social li {
+    display: inline;
     float: left;
     margin-right: 10px;
 }
-
-#sidebar ul li h4 {
-    font-size: 15px;
-    text-align: left;
+.social a {
+    border-radius: 50%;
+    padding-top: 2px;
+    width: 32px;
+    height: 32px;
+    display: block;
+    background-color: #333333;
+    color: #fff;
+    font-size: 1.4em;
+    text-align: center;
+    border: 0;
 }
 
-div.product-box {
-    margin-bottom: 20px;
+div.product-box .btn {
+    float: right;
+    height: 25px;
+    padding: 1px 6px 7px;
+}
+.social a:hover {
+    color: #1abb9c;
+    border: 0;
 }
 
-div.product-box a {
-    text-decoration: none;
-}
-
-div.product-box a img {
-    margin-bottom: 5px;
+a.product-name:link {
+    color: #5a5a5a;
 }
 
 div.product-box h3 {
    color: #333;
 }
+a.product-name:visited {
+    color: #5a5a5a;
+}
 
-div.footer p {
-    float: left;
-    margin-top: 8px;
+th {
+    background-color: #f7f7f7;
 }
 
 div.footer ul li a {
     color: #999;
 }
-
-#sidebar ul li img.menu-thumbnail {
-    float: none;
-    margin-right: 0;
+p.copyright {
+    width: 50%;
 }
 
-.form-actions {
+span.nav-header {
     padding: 10px;
-    text-align: center;
-    background-color: #f1f1f1;
-    border-top: 3px solid #ddd;
+}
+#sidebar ul {
+    margin-top: 10px;
+}
+#sidebar ul a {
+    border: 0;
+}
+#sidebar ul a:hover {
+    background-color: #333333;
+    color: #fff;
+    border-bottom: 0;
+}
+#sidebar ul a.nav-header {
+    border-bottom: 1px solid #333;
+}
+#sidebar ul a.nav-header:hover {
+    background-color: #fff;
+    color: #333;
 }
 
-div.currency-menu {
-    margin-right: 50px;
+.cart-widget {
+    background-color: #f7f7f7;
+    padding: 5px;
+    font-size: 1.1em;
+}
+.well {
+    background-color: #f7f7f7;
+}
+.box {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-bottom: 3px solid #333;
+}
+.cart-widget a:link {
+    border: 0;
+}
+.pagination {
+    margin: 0 0 15px 0;
+}
+.pagination li.active > a, .pagination li.active > a:hover {
+    background-color: #1abb9c;
+    border-color: #ddd;
+}
+
+.navbar-inverse .navbar-nav > li.active > a {
+    color: #1abb9c;
+    background-color: #333 !important;
+    border-bottom: 3px solid #1abb9c !important;
+}
+.navbar-inverse .navbar-nav > .active.dropdown > a .caret {
+    border-bottom-color: #fff;
+    border-top-color: #fff;
+}
+.navbar-inverse .dropdown-menu {
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    background-color: #333;
+}
+.navbar-inverse .dropdown-menu li > a:hover {
+    background-color: #1abb9c;
+    color: #fff;
+}
+.navbar-inverse .dropdown-menu li > a {
+    padding: 10px 20px;
+    color: #fff;
+}
+.dropdown-menu {
+    box-shadow: none;
+    border-radius: 0;
+    border: 1px solid #f1f1f1;
+}
+.dropdown-menu li > a:hover {
+    background-color: #1abb9c;
+    color: #fff;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+    background-color: #333;
 }
 
 .checkout-new-customer form, .checkout-existing-customer form {
@@ -148,4 +425,16 @@ a.oauth-login {
 
 a.oauth-login:hover {
     text-decoration: none;
+}
+a.nav-header:hover {
+    color: #333;
+    font-weight: bold;
+    background: #fff;
+}
+a.nav-header {
+    color: #333;
+    font-weight: bold;
+}
+a.nav-header b.caret {
+    display: none;
 }

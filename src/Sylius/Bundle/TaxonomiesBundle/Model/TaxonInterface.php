@@ -61,6 +61,13 @@ interface TaxonInterface
     public function getChildren();
 
     /**
+     * Has children?
+     *
+     * @return Boolean
+     */
+    public function hasChildren();
+
+    /**
      * Has child taxon?
      *
      * @param TaxonInterface $taxon

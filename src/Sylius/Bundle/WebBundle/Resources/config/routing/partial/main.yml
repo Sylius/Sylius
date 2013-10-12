@@ -4,3 +4,7 @@
 sylius_product:
     resource: @SyliusWebBundle/Resources/config/routing/partial/product.yml
     prefix: /product
+
+sylius_taxonomy:
+    resource: @SyliusWebBundle/Resources/config/routing/partial/taxonomy.yml
+    prefix: /taxonomy

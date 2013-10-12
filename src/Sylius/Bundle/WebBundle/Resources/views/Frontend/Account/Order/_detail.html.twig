@@ -1,19 +1,16 @@
-<div class="row well well-sm" id="information">
+<div class="row" id="information">
     <div class="col-md-6">
-        <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
-        {#{{ 'sylius.account.order.shipment_mode'|trans }} <strong>TODO</strong><br>#}
-        {#{{ 'sylius.account.order.payment_mode'|trans }} <strong>TODO</strong><br>#}
+        <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|date() }}</strong>.
     </div>
     <div class="col-md-6">
-        <br><br>
         {{ 'sylius.account.order.number'|trans }} <strong>{{ order.number }}</strong><br>
         {{ 'sylius.account.order.state'|trans }}
         {% include "SyliusWebBundle:Frontend/Account:Order/_state.html.twig" %}
     </div>
 </div>
-
+<hr>
 <div class="row">
-    <table id="items" class="table table-striped">
+    <table id="items" class="table">
         <thead>
         <tr>
             <th>{{ 'sylius.order_item.sellable'|trans }}</th>

@@ -15,14 +15,14 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
-<div class="row">
+<div class="row product-grid-row">
     {% for product in products %}
         <div class="col-md-{{ 12 / size }}">
             {% include 'SyliusWebBundle:Frontend/Product:_singleBox.html.twig' %}
         </div>
         {% if 0 == loop.index % size %}
             </div>
-            <div class="row">
+            <div class="row product-grid-row">
         {% endif %}
     {% else %}
         <div class="col-md-12">

@@ -8,20 +8,20 @@
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
 
 <div class="row form-vertical">
-    <div class="col-md-6 checkout-existing-customer">
-        <div class="well">
-            <form action="{{ path('fos_user_security_check') }}" method="post" class="form-horizontal">
+    <div class="col-md-6">
+        <div class="box">
+            <h3>{{ 'sylius.checkout.security.existing_customer'|trans }}</h3>
+                <form action="{{ path('fos_user_security_check') }}" method="post">
                 <fieldset>
-                    <legend>{{ 'sylius.checkout.security.existing_customer'|trans }}</legend>
                     <div class="form-group">
-                        <label for="username" class="control-label col-lg-3">{{ 'sylius.form.login.email'|trans }}</label>
-                        <div class="controls col-lg-9">
+                        <label for="username" class="control-label">{{ 'sylius.form.login.email'|trans }}</label>
+                        <div class="controls">
                             <input type="text" id="username" name="_username" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                    <label for="password" class="control-label col-lg-3">{{ 'sylius.form.login.password'|trans }}</label>
-                        <div class="controls col-lg-9">
+                    <label for="password" class="control-label">{{ 'sylius.form.login.password'|trans }}</label>
+                        <div class="controls">
                             <input type="password" id="password" name="_password" class="form-control" />
                         </div>
                     </div>
@@ -32,11 +32,11 @@
             </form>
         </div>
     </div>
-    <div class="col-md-6 checkout-new-customer">
-        <div class="well">
-            <form action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
+    <div class="col-md-6">
+        <div class="box">
+            <h3>{{ 'sylius.checkout.security.new_customer'|trans }}</h3>
+                <form action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" method="post" class="form-horizontal" novalidate>
                 <fieldset>
-                    <legend>{{ 'sylius.checkout.security.new_customer'|trans }}</legend>
                     {{ form_widget(registration_form) }}
                 </fieldset>
                 <div class="form-actions">

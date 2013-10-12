@@ -11,6 +11,16 @@
     {% endfor %}
 {% endblock %}
 
-{% block sidebar %}
-{{ knp_menu_render('sylius.frontend.account', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
-{% endblock sidebar %}
+{% block main %}
+<div class="row row-main">
+    <div class="col-md-3" id="sidebar">
+        {{ knp_menu_render('sylius.frontend.account', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+    </div>
+    <div class="col-md-9">
+        <div class="content-container">
+        {% block content %}
+        {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

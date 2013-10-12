@@ -1252,7 +1252,7 @@
       </trans-unit>
       <trans-unit id="9d7d7371dde20e1271dbcb88f4b85e77" resname="sylius.product.index_by_taxon_header">
         <source>sylius.product.index_by_taxon_header</source>
-        <target>Products &lt;small&gt;Categorized under "%taxon%" taxon&lt;/small&gt;</target>
+        <target>%taxon% &lt;small&gt;Products in our catalog&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="fe2e58665dfcdf52557b30b522d27268" resname="sylius.product.index_header">
         <source>sylius.product.index_header</source>
