@@ -278,6 +278,10 @@
         <source>sylius.breadcrumb.assortment</source>
         <target>Assortment</target>
       </trans-unit>
+      <trans-unit id="ecbc07235ab3979589f48332f3d5fe52" resname="sylius.breadcrumb.build">
+        <source>sylius.breadcrumb.build</source>
+        <target>sylius.breadcrumb.build</target>
+      </trans-unit>
       <trans-unit id="a3c8ec8b16ef356a807604bcb7019955" resname="sylius.breadcrumb.configuration">
         <source>sylius.breadcrumb.configuration</source>
         <target>Configuration</target>
@@ -305,6 +309,10 @@
       <trans-unit id="642d050c250d149a92c05342ef24e72d" resname="sylius.breadcrumb.generate">
         <source>sylius.breadcrumb.generate</source>
         <target>Generate</target>
+      </trans-unit>
+      <trans-unit id="67b81464d46806ca861f464f9b6d2697" resname="sylius.breadcrumb.group.index">
+        <source>sylius.breadcrumb.group.index</source>
+        <target>Groups</target>
       </trans-unit>
       <trans-unit id="827f2b8d9ee8d790231f61188e1bf374" resname="sylius.breadcrumb.inventory.index">
         <source>sylius.breadcrumb.inventory.index</source>
@@ -706,10 +714,6 @@
         <source>sylius.form.choose_file</source>
         <target>Choose file</target>
       </trans-unit>
-      <trans-unit id="44dbe7f496bf7362d917fac33bd5b5fc" resname="sylius.variant.sku">
-        <source>sylius.variant.sku</source>
-        <target>SKU</target>
-      </trans-unit>
       <trans-unit id="737d82e384946e4946cfea34afb9b7d8" resname="sylius.form.frontend.password.confirmation">
         <source>sylius.form.frontend.password.confirmation</source>
         <target>Confirmation</target>
@@ -765,6 +769,38 @@
       <trans-unit id="cb95f07038b3cb0098bccf9ab2a5de8b" resname="sylius.generate">
         <source>sylius.generate</source>
         <target>Generate</target>
+      </trans-unit>
+      <trans-unit id="cf56fefacff6ea4a6503d3415477ce5a" resname="sylius.group.create">
+        <source>sylius.group.create</source>
+        <target>Create group</target>
+      </trans-unit>
+      <trans-unit id="9e7e865037ebdb09540be2f1cf7c4596" resname="sylius.group.create_header">
+        <source>sylius.group.create_header</source>
+        <target>Adding new user groups</target>
+      </trans-unit>
+      <trans-unit id="77a3e1f0580598f1afb242ae5b24281a" resname="sylius.group.id">
+        <source>sylius.group.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="77823b1d46e485f009f2e27d53e535e2" resname="sylius.group.index_header">
+        <source>sylius.group.index_header</source>
+        <target>Groups</target>
+      </trans-unit>
+      <trans-unit id="c66fa2efe2a66c534570be48fd6fd4fb" resname="sylius.group.name">
+        <source>sylius.group.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="386108cf569469f87e3ed98f90bc74ba" resname="sylius.group.no_results">
+        <source>sylius.group.no_results</source>
+        <target>There are no groups to display.</target>
+      </trans-unit>
+      <trans-unit id="022c2a636633829c720d5328c7329fe8" resname="sylius.group.roles">
+        <source>sylius.group.roles</source>
+        <target>Roles</target>
+      </trans-unit>
+      <trans-unit id="ad1ab095616aee8987ec9bb27a25736b" resname="sylius.group.update_header">
+        <source>sylius.group.update_header</source>
+        <target>Edit group</target>
       </trans-unit>
       <trans-unit id="ce71111cec2ffc480f4a947e170afa33" resname="sylius.homepage.splash.headline">
         <source>sylius.homepage.splash.headline</source>
@@ -2037,6 +2073,10 @@
       <trans-unit id="794b3f973185140d46575a87548b5089" resname="sylius.variant.price">
         <source>sylius.variant.price</source>
         <target>Price</target>
+      </trans-unit>
+      <trans-unit id="44dbe7f496bf7362d917fac33bd5b5fc" resname="sylius.variant.sku">
+        <source>sylius.variant.sku</source>
+        <target>SKU</target>
       </trans-unit>
       <trans-unit id="4a8ed0575bd0bd7c232e9ba37e8c17a3" resname="sylius.variant.stock">
         <source>sylius.variant.stock</source>

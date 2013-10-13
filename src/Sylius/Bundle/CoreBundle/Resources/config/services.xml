@@ -35,13 +35,13 @@
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
 
-        <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
@@ -114,6 +114,10 @@
         <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
             <argument>%sylius.model.user.class%</argument>
             <tag name="form.type" alias="sylius_user" />
+        </service>
+        <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
+            <argument>%sylius.model.group.class%</argument>
+            <tag name="form.type" alias="sylius_group" />
         </service>
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
@@ -208,6 +212,9 @@
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
             <argument>%sylius.model.variant_image.class%</argument>
             <tag name="form.type" alias="sylius_image" />
+        </service>
+        <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
+            <tag name="form.type" alias="list" />
         </service>
 
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">

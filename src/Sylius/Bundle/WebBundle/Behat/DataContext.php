@@ -134,7 +134,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
-                isset($data['address']) ? $data['address'] : null
+                isset($data['address']) && !empty($data['address']) ? $data['address'] : null
             );
         }
     }
@@ -168,6 +168,31 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
 
         return $user;
+    }
+
+    /**
+     * @Given /^there are groups:$/
+     * @Given /^there are following groups:$/
+     * @Given /^the following groups exist:$/
+     */
+    public function thereAreGroups(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('group');
+
+        foreach ($table->getHash() as $data) {
+            $group = $repository->createNew();
+            $group->setName(trim($data['name']));
+
+            $roles = explode(',', $data['roles']);
+            $roles = array_map('trim', $roles);
+
+            $group->setRoles($roles);
+
+            $manager->persist($group);
+        }
+
+        $manager->flush();
     }
 
     /**

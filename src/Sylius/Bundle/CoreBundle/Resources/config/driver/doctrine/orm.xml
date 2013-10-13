@@ -18,6 +18,14 @@
 
     <parameters>
         <parameter key="sylius.model.variant_image.class">Sylius\Bundle\CoreBundle\Model\VariantImage</parameter>
+        <parameter key="sylius.form.type.group_choice.class">Sylius\Bundle\CoreBundle\Form\Type\GroupEntityType</parameter>
     </parameters>
+
+    <services>
+        <service id="sylius.form.type.group_choice" class="%sylius.form.type.group_choice.class%">
+            <argument>%sylius.model.group.class%</argument>
+            <tag name="form.type" alias="sylius_group_choice" />
+        </service>
+    </services>
 
 </container>
