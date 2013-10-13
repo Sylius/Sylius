@@ -36,7 +36,7 @@ class ProcessController extends ContainerAware
     {
         $coordinator = $this->container->get('sylius.process.coordinator');
 
-        return $coordinator->start($scenarioAlias, $request->query);
+        return $coordinator->start($scenarioAlias, $request->query, $request->attributes->get('_route_params'));
     }
 
     /**

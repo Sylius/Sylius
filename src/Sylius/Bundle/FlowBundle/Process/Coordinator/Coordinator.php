@@ -78,7 +78,7 @@ class Coordinator implements CoordinatorInterface
     /**
      * {@inheritdoc}
      */
-    public function start($scenarioAlias, ParameterBag $queryParameters = null)
+    public function start($scenarioAlias, ParameterBag $queryParameters = null, array $routeParameters = null)
     {
         $process = $this->buildProcess($scenarioAlias);
         $step = $process->getFirstStep();
@@ -90,7 +90,7 @@ class Coordinator implements CoordinatorInterface
             return $validator->getResponse($step);
         }
 
-        return $this->redirectToStepDisplayAction($process, $step, $queryParameters);
+        return $this->redirectToStepDisplayAction($process, $step, $queryParameters, $routeParameters);
     }
 
     /**
@@ -214,32 +214,35 @@ class Coordinator implements CoordinatorInterface
      * @param ProcessInterface $process
      * @param StepInterface    $step
      * @param ParameterBag     $queryParameters
+     * @param array            $routeParameters
      *
      * @return RedirectResponse
      */
-    protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step, ParameterBag $queryParameters = null)
+    protected function redirectToStepDisplayAction(ProcessInterface $process, StepInterface $step, ParameterBag $queryParameters = null, array $routeParameters = null)
     {
         $this->context->addStepToHistory($step->getName());
 
+        $parameters = array(
+            'stepName'      => $step->getName(),
+        );
+
+        if (null !== $routeParameters) {
+            $parameters = array_merge($parameters, $routeParameters);
+        }
+
         if (null !== $route = $process->getDisplayRoute()) {
-            $url = $this->router->generate($route, array(
-                'stepName' => $step->getName()
-            ));
+            $url = $this->router->generate($route, $parameters);
 
             return new RedirectResponse($url);
         }
 
-        // Default parameters for display route
-        $routeParameters = array(
-                'scenarioAlias' => $process->getScenarioAlias(),
-                'stepName'      => $step->getName(),
-        );
+        $parameters['scenarioAlias'] = $process->getScenarioAlias();
 
         if (null !== $queryParameters) {
-            $routeParameters = array_merge($queryParameters->all(), $routeParameters);
+            $parameters = array_merge($queryParameters->all(), $parameters);
         }
 
-        $url = $this->router->generate('sylius_flow_display', $routeParameters);
+        $url = $this->router->generate('sylius_flow_display', $parameters);
 
         return new RedirectResponse($url);
     }
