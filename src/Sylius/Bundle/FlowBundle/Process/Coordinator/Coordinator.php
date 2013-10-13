@@ -223,11 +223,15 @@ class Coordinator implements CoordinatorInterface
         $this->context->addStepToHistory($step->getName());
 
         $parameters = array(
-            'stepName'      => $step->getName(),
+            'stepName' => $step->getName(),
         );
 
         if (null !== $routeParameters) {
             $parameters = array_merge($parameters, $routeParameters);
+        }
+        
+        if (null !== $queryParameters) {
+            $parameters = array_merge($queryParameters->all(), $parameters);
         }
 
         if (null !== $route = $process->getDisplayRoute()) {
@@ -237,10 +241,6 @@ class Coordinator implements CoordinatorInterface
         }
 
         $parameters['scenarioAlias'] = $process->getScenarioAlias();
-
-        if (null !== $queryParameters) {
-            $parameters = array_merge($queryParameters->all(), $parameters);
-        }
 
         $url = $this->router->generate('sylius_flow_display', $parameters);
 
