@@ -1,5 +1,5 @@
 @checkout
-Feature: Checkout taxation
+Feature: Cart taxation
     In order to handle product taxation
     As a store owner
     I want to apply taxes during checkout
