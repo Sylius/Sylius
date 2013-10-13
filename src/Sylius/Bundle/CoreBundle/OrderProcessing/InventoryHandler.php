@@ -78,6 +78,11 @@ class InventoryHandler implements InventoryHandlerInterface
     {
         foreach ($order->getItems() as $item) {
             $units = $order->getInventoryUnitsByVariant($item->getVariant());
+
+            foreach ($units as $unit) {
+                $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+            }
+
             $this->inventoryOperator->decrease($units);
         }
     }

@@ -44,7 +44,7 @@ class OrderInventoryListener
      *
      * @param GenericEvent $event
      */
-    public function onOrderPreComplete(GenericEvent $event)
+    public function onCheckoutFinalizePreComplete(GenericEvent $event)
     {
         $order = $event->getSubject();
 

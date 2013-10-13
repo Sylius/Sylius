@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
@@ -42,8 +43,12 @@ class BackordersHandler implements BackordersHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function processBackorders(array $inventoryUnits)
+    public function processBackorders($inventoryUnits)
     {
+        if (!is_array($inventoryUnits) && !$inventoryUnits instanceof Collection) {
+            throw new \InvalidArgumentException('Inventory units value must be array or instance of "Doctrine\Common\Collections\Collection".');
+        }
+
         if (0 === count($inventoryUnits)) {
             return;
         }
@@ -54,7 +59,11 @@ class BackordersHandler implements BackordersHandlerInterface
             }
         }
 
-        $stockable = $inventoryUnits[0]->getStockable();
+        if ($inventoryUnits instanceof Collection) {
+            $stockable = $inventoryUnits->first()->getStockable();
+        } else {
+            $stockable = $inventoryUnits[0]->getStockable();
+        }
 
         $onHand = $stockable->getOnHand();
 
