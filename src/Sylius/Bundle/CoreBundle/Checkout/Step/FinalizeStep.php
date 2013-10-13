@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\SalesBundle\SyliusOrderEvents;
 
 /**
  * Final checkout step.
@@ -40,6 +41,7 @@ class FinalizeStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
 
         $order->setUser($this->getUser());
 
@@ -70,11 +72,13 @@ class FinalizeStep extends CheckoutStep
         $manager = $this->get('sylius.manager.order');
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::CREATE, $order);
         $order->complete();
 
         $manager->persist($order);
-        $manager->flush();
+        $manager->flush($order);
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
     }
 }

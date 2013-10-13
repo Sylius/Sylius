@@ -33,12 +33,12 @@
         "sylius/flow-bundle":             "1.0.*@dev",
         "sylius/resource-bundle":         "1.0.*@dev",
         "sylius/omnipay-bundle":          "1.0.*@dev",
+        "sylius/sales-bundle":            "1.0.*@dev",
         "athari/yalinqo":                 "*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "fzaninotto/faker":               "1.2.*",
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
-        "knplabs/knp-snappy-bundle":      "dev-master@dev",
         "mathiasverraes/money":           "dev-master@dev",
         "omnipay/omnipay":                "dev-master@dev"
     },
