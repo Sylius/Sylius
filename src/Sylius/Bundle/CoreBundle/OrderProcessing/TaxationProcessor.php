@@ -129,18 +129,20 @@ class TaxationProcessor implements TaxationProcessorInterface
             $description = sprintf('%s (%d%%)', $rateName, $taxAmount);
 
             if (!array_key_exists($description, $taxes)) {
-                $taxes[$description] = 0;
+                $taxes[$description]['amount'] = 0;
             }
 
-            $taxes[$description] += $amount;
+            $taxes[$description]['amount'] += $amount;
+            $taxes[$description]['included'] = $rate->isIncludedInPrice();
         }
 
-        foreach ($taxes as $description => $amount) {
+        foreach ($taxes as $description => $tax) {
             $adjustment = $this->adjustmentRepository->createNew();
 
             $adjustment->setLabel(OrderInterface::TAX_ADJUSTMENT);
-            $adjustment->setAmount($amount);
+            $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);
+            $adjustment->setNeutral($tax['included']);
 
             $order->addAdjustment($adjustment);
         }
