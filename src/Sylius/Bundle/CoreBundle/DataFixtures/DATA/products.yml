@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 Sylius\Bundle\CoreBundle\Model\Product:
     Sylius.Product.Mug.{1..25}:
         name: Mug "<word()>"
@@ -77,7 +80,7 @@ Sylius\Bundle\ProductBundle\Model\ProductProperty:
     Sylius.Product.Property.Book.Isbn{1..40}:
         property: @Sylius.Property.Book.Isbn
         product: @Sylius.Product.Book.<current()>
-        value: <isbn()>
+        value (unique): <isbn()>
     Sylius.Product.Property.Book.Pages{1..40}:
         property: @Sylius.Property.Book.Pages
         product: @Sylius.Product.Book.<current()>

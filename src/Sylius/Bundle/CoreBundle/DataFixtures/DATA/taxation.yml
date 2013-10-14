@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 Sylius\Bundle\TaxationBundle\Model\TaxCategory:
     Sylius.Tax.Category.Goods:
         name: Taxable goods

@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 Sylius\Bundle\ShippingBundle\Model\ShippingCategory:
     Sylius.Shipping.Category.Regular:
         name: Regular

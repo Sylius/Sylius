@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 /**
- * Additional address Faker provider
+ * Additional order Faker provider
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */

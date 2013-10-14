@@ -25,7 +25,7 @@ class ProductProvider extends AbstractProvider
 
     public function sku()
     {
-        return $this->faker->/*unique()->*/randomNumber(8);
+        return $this->faker->randomNumber(8);
     }
 
     public function onHand()
@@ -70,7 +70,7 @@ class ProductProvider extends AbstractProvider
 
     public function isbn()
     {
-        return $this->faker->/*unique()->*/randomNumber(13);
+        return $this->faker->randomNumber(13);
     }
 
 
