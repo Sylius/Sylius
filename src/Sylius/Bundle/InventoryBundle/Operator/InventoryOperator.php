@@ -77,7 +77,11 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
         }
 
-        $stockable = $inventoryUnits[0]->getStockable();
+        if ($inventoryUnits instanceof Collection) {
+            $stockable = $inventoryUnits->first()->getStockable();
+        } else {
+            $stockable = $inventoryUnits[0]->getStockable();
+        }
 
         if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
             throw new InsufficientStockException($stockable, $quantity);

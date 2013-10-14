@@ -21,6 +21,9 @@ use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
+
 /**
  * Web user context.
  *
@@ -457,6 +460,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $this->iFillInAddressFields($base, $country);
     }
+
     /**
      * @Given /^I fill in the users (billing|shipping) address to (.+)$/
      */
@@ -724,6 +728,59 @@ class WebUser extends MinkContext implements KernelAwareInterface
             $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
+    }
+
+
+    /**
+     * @Given /^I added product "([^""]*)" to cart, with quantity "([^""]*)"$/
+     */
+    public function iAddedProductToCartWithQuantity($productName, $quantity)
+    {
+        $this->iAmOnTheProductPage($productName);
+        $this->fillField('Quantity', $quantity);
+        $this->pressButton('Add to cart');
+    }
+
+    /**
+     * @Given /^I finish the checkout process$/
+     */
+    public function iFinishTheCheckoutProcess()
+    {
+        $this->iFillInCheckoutAddress('shipping', 'United Kingdom');
+        $this->pressButton('Continue');
+        $this->iSelectTheRadioButton('DHL Express');
+        $this->pressButton('Continue');
+        $this->iSelectTheRadioButton('Credit Card');
+        $this->pressButton('Continue');
+        $this->iClick('Place order');
+        $this->assertSession()->pageTextContains('Thank you for your order!');
+    }
+
+    /**
+     * @Then /^I should see ([^""]*) "([^""]*)" for "([^""]*)"$/
+     */
+    public function iShouldSeeQuantityFor($property, $expectedValue, $item)
+    {
+        $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
+
+        foreach ($rows as $key => $row) {
+            if ($row->getText() === $property) {
+                $column = $key; break;
+            }
+        }
+
+        $tr = $this->getSession()->getPage()->find('css',
+            sprintf('table tbody tr:contains("%s")', $item)
+        );
+
+        if (null === $tr) {
+            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
+        }
+
+        $cols = $tr->findAll('css', 'td');
+        $value = $cols[$column]->getText();
+
+        assertEquals($expectedValue, $value);
     }
 
     /**

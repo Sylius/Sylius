@@ -172,7 +172,7 @@
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="onOrderPreComplete" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">

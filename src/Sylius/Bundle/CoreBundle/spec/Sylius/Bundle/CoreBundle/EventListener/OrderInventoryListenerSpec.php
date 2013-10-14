@@ -41,7 +41,7 @@ class OrderInventoryListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringOnOrderPreComplete($event)
+            ->duringOnCheckoutFinalizePreComplete($event)
         ;
     }
 
@@ -49,12 +49,12 @@ class OrderInventoryListenerSpec extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
      */
-    function it_updates_inventory_on_order_pre_complete_event($inventoryHandler, $event, $order)
+    function it_updates_inventory_on_checkout_finalize_pre_complete_event($inventoryHandler, $event, $order)
     {
         $event->getSubject()->willReturn($order);
         $inventoryHandler->updateInventory($order)->shouldBeCalled();
 
-        $this->onOrderPreComplete($event);
+        $this->onCheckoutFinalizePreComplete($event);
     }
 
     /**
