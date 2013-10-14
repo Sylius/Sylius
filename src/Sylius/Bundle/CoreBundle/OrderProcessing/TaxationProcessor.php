@@ -128,12 +128,10 @@ class TaxationProcessor implements TaxationProcessorInterface
             $taxAmount = $rate->getAmountAsPercentage();
             $description = sprintf('%s (%d%%)', $rateName, $taxAmount);
 
-            if (!array_key_exists($description, $taxes)) {
-                $taxes[$description]['amount'] = 0;
-            }
-
-            $taxes[$description]['amount'] += $amount;
-            $taxes[$description]['included'] = $rate->isIncludedInPrice();
+            $taxes[$description] = array(
+                'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
+                'included' => $rate->isIncludedInPrice()
+            );
         }
 
         foreach ($taxes as $description => $tax) {
