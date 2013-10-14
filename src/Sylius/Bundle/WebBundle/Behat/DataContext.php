@@ -601,7 +601,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreTaxRates(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxRate($data['amount'], $data['name'], $data['category'], $data['zone']);
+            $this->thereIsTaxRate($data['amount'], $data['name'], $data['category'], $data['zone'], isset($data['included in price?']) ? $data['included in price?'] : false);
         }
     }
 
@@ -609,7 +609,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^there is (\d+)% tax "([^""]*)" for category "([^""]*)" within zone "([^""]*)"$/
      * @Given /^I created (\d+)% tax "([^""]*)" for category "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsTaxRate($amount, $name, $category, $zone)
+    public function thereIsTaxRate($amount, $name, $category, $zone, $includedInPrice = false)
     {
         $repository = $this->getRepository('tax_rate');
         $manager = $this->getEntityManager();
@@ -617,6 +617,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $rate = $repository->createNew();
         $rate->setName($name);
         $rate->setAmount($amount / 100);
+        $rate->setIncludedInPrice($includedInPrice);
         $rate->setCategory($this->findOneByName('tax_category', $category));
         $rate->setZone($this->findOneByName('zone', $zone));
         $rate->setCalculator('default');
