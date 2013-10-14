@@ -38,7 +38,7 @@ class BackendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $menu->setCurrentUri($request->getRequestUri());
+        $menu->setCurrent($request->getRequestUri());
 
         $childOptions = array(
             'attributes'         => array('class' => 'dropdown'),
@@ -80,7 +80,7 @@ class BackendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $menu->setCurrentUri($request->getRequestUri());
+        $menu->setCurrent($request->getRequestUri());
 
         $childOptions = array(
             'childrenAttributes' => array('class' => 'nav'),
