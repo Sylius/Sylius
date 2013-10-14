@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Promotion\Action;
+namespace spec\SyliusN\Bundle\CoreBundle\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
@@ -39,7 +39,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface       $order
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
      */
     function it_applies_percentage_discount_as_promotion_adjustment($adjustmentRepository, $order, $adjustment)
     {

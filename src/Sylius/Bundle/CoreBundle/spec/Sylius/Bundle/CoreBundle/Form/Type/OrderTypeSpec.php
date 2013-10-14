@@ -32,6 +32,6 @@ class OrderTypeSpec extends ObjectBehavior
 
     function it_should_extend_Sylius_order_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Form\Type\OrderType');
+        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\OrderType');
     }
 }

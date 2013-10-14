@@ -67,7 +67,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface        $adjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface        $adjustment
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
      * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod

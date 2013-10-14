@@ -15,7 +15,7 @@ use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\SalesBundle\SyliusOrderEvents;
+use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
 
 /**
  * Final checkout step.

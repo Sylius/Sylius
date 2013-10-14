@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
-use Sylius\Bundle\SalesBundle\Model\OrderStates;
+use Sylius\Bundle\OrderBundle\Model\OrderStates;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**

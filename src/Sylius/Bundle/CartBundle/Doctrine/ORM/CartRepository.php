@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CartBundle\Doctrine\ORM;
 
 use Datetime;
 use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
-use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository;
-use Sylius\Bundle\SalesBundle\Model\OrderStates;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Bundle\OrderBundle\Model\OrderStates;
 
 /**
  * Default cart entity repository.

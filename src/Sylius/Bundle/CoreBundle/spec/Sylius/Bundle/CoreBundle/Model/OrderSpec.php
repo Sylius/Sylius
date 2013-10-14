@@ -27,12 +27,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderInterface');
+        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\OrderInterface');
     }
 
     function it_should_extend_Sylius_order_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\Order');
     }
 
     function it_should_not_have_user_defined_by_default()
@@ -145,8 +145,8 @@ class OrderSpec extends ObjectBehavior
      * helper method
      *
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     protected function addShippingAndTaxAdjustments($order, $shippingAdjustment, $taxAdjustment)
     {
@@ -160,8 +160,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_return_shipping_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -175,8 +175,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_remove_shipping_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -192,8 +192,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_return_tax_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -207,8 +207,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_remove_tax_adjustments($shippingAdjustment, $taxAdjustment)
     {

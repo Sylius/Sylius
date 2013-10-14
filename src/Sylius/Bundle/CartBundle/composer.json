@@ -23,7 +23,7 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/sales-bundle":      "1.0.*@dev",
+        "sylius/order-bundle":      "1.0.*@dev",
         "sylius/resource-bundle":   "1.0.*@dev"
     },
     "require-dev": {

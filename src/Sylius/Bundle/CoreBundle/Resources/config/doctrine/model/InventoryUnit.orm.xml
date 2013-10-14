@@ -6,7 +6,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\InventoryUnit" table="sylius_inventory_unit">
-        <many-to-one field="order" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" inversed-by="inventoryUnits">
+        <many-to-one field="order" target-entity="Sylius\Bundle\OrderBundle\Model\OrderInterface" inversed-by="inventoryUnits">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
