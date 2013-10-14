@@ -41,6 +41,7 @@ class FinalizeStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
 
         $order->setUser($this->getUser());
 
@@ -72,10 +73,11 @@ class FinalizeStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::CREATE, $order);
         $order->complete();
 
         $manager->persist($order);
-        $manager->flush();
+        $manager->flush($order);
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
         $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
