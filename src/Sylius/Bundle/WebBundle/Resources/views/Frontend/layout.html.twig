@@ -61,6 +61,7 @@
                 <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
                 {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                {{ sonata_block_render({'name': '/cms/content/contact'}) }}
                 {% endblock %}
             </div>
             <div class="col-md-9">
