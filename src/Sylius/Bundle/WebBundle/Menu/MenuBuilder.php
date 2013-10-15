@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use JMS\TranslationBundle\Annotation\Ignore;
@@ -45,6 +46,13 @@ abstract class MenuBuilder
     protected $translator;
 
     /**
+     * Request.
+     *
+     * @var Request
+     */
+    protected $request;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
@@ -56,6 +64,16 @@ abstract class MenuBuilder
         $this->factory = $factory;
         $this->securityContext = $securityContext;
         $this->translator = $translator;
+    }
+
+    /**
+     * Sets the request the service
+     *
+     * @param Request $request
+     */
+    public function setRequest(Request $request = null)
+    {
+        $this->request = $request;
     }
 
     /**

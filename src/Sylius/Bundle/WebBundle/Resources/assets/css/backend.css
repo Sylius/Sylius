@@ -113,8 +113,16 @@ a.btn-success:visited {
 }
 .navbar-brand img {
     height: 30px;
-    margin-left: 10px;
-    margin-top: 10px;
+    margin: 10px 15px 10px 10px;
+}
+.navbar-brand span {
+    color: #333;
+    font-size: 15px;
+    float: right;
+    margin-top: 13px;
+}
+.navbar-brand:hover span {
+    color: #fff;
 }
 .navbar-inverse {
   border: 0;
