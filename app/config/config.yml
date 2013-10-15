@@ -179,3 +179,13 @@ cmf_core:
 cmf_block:
     persistence:
         phpcr: ~
+
+cmf_content:
+    persistence:
+        phpcr: ~
+
+cmf_routing:
+    dynamic:
+        generic_controller: cmf_content.controller:indexAction
+        persistence:
+            phpcr: ~
