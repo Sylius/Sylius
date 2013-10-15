@@ -70,6 +70,7 @@ script:
     - cd ../SettingsBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../PromotionsBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../PaymentsBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../PayumBundle; ../../../../bin/phpspec run -fpretty --verbose
 
 notifications:
   email: "travis-ci@sylius.org"

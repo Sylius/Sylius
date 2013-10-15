@@ -24,8 +24,8 @@ Feature: Checkout security
             | zone | name        |
             | UK   | DHL Express |
           And the following payment methods exist:
-            | name        | gateway | enabled |
-            | Credit Card | stripe  | yes     |
+            | name  | gateway | enabled |
+            | Dummy | dummy   | yes     |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 
@@ -62,7 +62,7 @@ Feature: Checkout security
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Credit Card" radio button
+          And I select the "Dummy" radio button
           And I press "Continue"
           And I click "Place order"
          Then I should be on the store homepage

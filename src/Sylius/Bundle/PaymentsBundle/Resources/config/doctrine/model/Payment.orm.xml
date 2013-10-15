@@ -26,6 +26,7 @@
         <field name="currency" column="currency" type="string" />
         <field name="amount" column="amount" type="integer" />
         <field name="state" column="state" type="string" />
+        <field name="details" column="details" type="json_array" />
 
         <many-to-one field="creditCard" target-entity="Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface">
             <join-column name="credit_card_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />

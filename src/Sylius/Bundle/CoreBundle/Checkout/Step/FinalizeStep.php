@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\SalesBundle\SyliusOrderEvents;
 
@@ -45,10 +46,6 @@ class FinalizeStep extends CheckoutStep
         $order->setUser($this->getUser());
 
         $this->completeOrder($order);
-        $this->getCartProvider()->abandonCart();
-
-        $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add('success', $translator->trans('sylius.checkout.success', array(), 'flashes'));
 
         return $this->complete();
     }

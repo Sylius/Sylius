@@ -72,6 +72,9 @@ sylius_payments:
         dummy: Test
         stripe: Stripe
 
+sylius_payum:
+    driver: doctrine/orm
+
 sylius_addressing:
     classes:
         address:
