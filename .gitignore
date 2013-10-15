@@ -18,4 +18,7 @@ bin/behat
 bin/doctrine*
 bin/phpspec
 bin/webunit
+bin/phpcrodm
+bin/phpcrodm.php
+bin/jackalope
 vendor/*
