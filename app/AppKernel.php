@@ -49,8 +49,17 @@ class AppKernel extends Kernel
             new Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
+            // CMF bundles.
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
+            new Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
+            new Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
+
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
