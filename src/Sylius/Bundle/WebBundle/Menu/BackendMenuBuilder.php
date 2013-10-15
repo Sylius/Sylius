@@ -38,8 +38,6 @@ class BackendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $menu->setCurrentUri($request->getRequestUri());
-
         $childOptions = array(
             'attributes'         => array('class' => 'dropdown'),
             'childrenAttributes' => array('class' => 'dropdown-menu'),
@@ -53,6 +51,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addAssortmentMenu($menu, $childOptions, 'main');
         $this->addSalesMenu($menu, $childOptions, 'main');
         $this->addConfigurationMenu($menu, $childOptions, 'main');
+        $this->addCustomersMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
             'route' => 'sylius_homepage'
@@ -80,17 +79,10 @@ class BackendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $menu->setCurrentUri($request->getRequestUri());
-
         $childOptions = array(
             'childrenAttributes' => array('class' => 'nav'),
             'labelAttributes'    => array('class' => 'nav-header')
         );
-
-        $menu->addChild('dashboard', array(
-            'route' => 'sylius_backend_dashboard',
-            'labelAttributes' => array('icon' => 'icon-dashboard'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.dashboard', 'sidebar')));
 
         $this->addAssortmentMenu($menu, $childOptions, 'sidebar');
         $this->addSalesMenu($menu, $childOptions, 'sidebar');
