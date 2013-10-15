@@ -14,6 +14,10 @@
         <source>sylius.backend.menu.main.countries</source>
         <target>Countries</target>
       </trans-unit>
+      <trans-unit id="8c5b50399905da82f9f4c3f91c40b717" resname="sylius.backend.menu.main.customer">
+        <source>sylius.backend.menu.main.customers</source>
+        <target>Customers</target>
+      </trans-unit>
       <trans-unit id="bd5421cfee1b38c03bddcd2612e5eb65" resname="sylius.backend.menu.main.dashboard">
         <source>sylius.backend.menu.main.dashboard</source>
         <target>Dashboard</target>
@@ -105,6 +109,10 @@
       <trans-unit id="520f49cd08a95a76ca0e779834cb9ec2" resname="sylius.backend.menu.main.taxonomies">
         <source>sylius.backend.menu.main.taxonomies</source>
         <target>Categorization</target>
+      </trans-unit>
+      <trans-unit id="37a2d92b617ca46a081a4d0539e5ada2" resname="sylius.backend.menu.main.users">
+        <source>sylius.backend.menu.main.users</source>
+        <target>Users</target>
       </trans-unit>
       <trans-unit id="4a6f9dc181c7429270cb511235b151a8" resname="sylius.backend.menu.main.zones">
         <source>sylius.backend.menu.main.zones</source>
