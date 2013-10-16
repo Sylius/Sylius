@@ -383,6 +383,22 @@ input[type="file"] {
     width: 90px;
 }
 
+.sylius-assortment-variant-images-image {
+    margin: 5px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.sylius-assortment-variant-images-image:last-child {
+    border: 0
+}
+
+.sylius-assortment-variant-images-image .thumbnail {
+    height: 60px;
+    display: block;
+    border: 0;
+}
+
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
     .btn i {
