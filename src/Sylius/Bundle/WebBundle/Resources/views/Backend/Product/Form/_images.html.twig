@@ -1,12 +1,25 @@
-<div class="tab-pane" id="images">
-    <div id="sylius-assortment-product-images" data-toggle="modal-gallery" data-target="#modal-gallery" class="collection-container" data-prototype="{{ form_widget(form.masterVariant.images.vars.prototype)|e }}">
-        {% set images = product.images %}
+{% macro imagePrototype() %}
+<div class="sylius-assortment-variant-images-image row" id="sylius_product_masterVariant_images___name__">
+    <div class="col-md-1">
+        <span class="thumbnail"></span>
+    </div>
+    <div class="col-md-9">
+        <span class="btn-primary btn-lg file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+        <input type="file" class="form-control" required="required" name="sylius_product[masterVariant][images][__name__][file]" id="sylius_product_masterVariant_images___name___file">
+    </div>
+    <div class="col-md-2">
+        <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="icon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+    </div>
+</div>
+{% endmacro %}
 
+<div class="tab-pane" id="images">
+    <div id="sylius-assortment-product-images" data-toggle="modal-gallery" data-target="#modal-gallery" class="collection-container" data-prototype="{{ _self.imagePrototype()|e }}">
         {% for image in product.images %}
         <div class="sylius-assortment-variant-images-image row">
             <div class="col-md-1">
                 {% if image.path|length > 0 %}
-                <a href="{{ image.path|imagine_filter('sylius_gallery') }}"  data-gallery="gallery">
+                <a href="{{ image.path|imagine_filter('sylius_gallery') }}" data-gallery="gallery">
                     <img class="img-rounded" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="" />
                 </a>
                 {% endif %}
