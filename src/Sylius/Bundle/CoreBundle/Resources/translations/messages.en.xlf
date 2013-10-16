@@ -66,11 +66,11 @@
         <source>sylius.form.product_filter.sku</source>
         <target>SKU</target>
       </trans-unit>
-      <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.locale">
+      <trans-unit id="bc0d080561ef618e2a01cbb7ec3a0a7e" resname="sylius.form.settings.general.locale">
         <source>sylius.form.settings.general.locale</source>
         <target>Language</target>
       </trans-unit>
-      <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.currency">
+      <trans-unit id="0340b231018d2e94073fdf4d68532b77" resname="sylius.form.settings.general.currency">
         <source>sylius.form.settings.general.currency</source>
         <target>Default currency</target>
       </trans-unit>
