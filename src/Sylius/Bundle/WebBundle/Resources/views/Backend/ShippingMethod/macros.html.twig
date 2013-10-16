@@ -19,7 +19,7 @@
     </thead>
     <tbody>
     {% for shipping_method in shipping_methods %}
-        <tr>
+        <tr id="{{ shipping_method.id }}">
             <td>{{ shipping_method.id }}</td>
             <td>{{ shipping_method.name }}</td>
             <td>{{ shipping_method.zone }}</td>

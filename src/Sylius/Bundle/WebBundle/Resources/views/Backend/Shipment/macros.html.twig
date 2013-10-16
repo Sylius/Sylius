@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     {% for shipment in shipments %}
-        <tr>
+        <tr id="{{ shipment.id }}">
             <td>{{ shipment.id }}</td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-primary btn-sm">

@@ -251,19 +251,35 @@ Feature: Products
           And I should see "Product has been successfully updated."
           And "Featured" should appear on the page
 
-    @javascript
     Scenario: Deleting product
         Given I am on the page of product "Mug"
          When I press "delete"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the product index page
           And I should see "Product has been successfully deleted."
 
     @javascript
+    Scenario: Deleting product with js modal
+        Given I am on the page of product "Mug"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
+         Then I should be on the product index page
+          And I should see "Product has been successfully deleted."
+
     Scenario: Deleted product disappears from the list
         Given I am on the page of product "Sticker"
          When I press "delete"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the product index page
+          And I should not see product with name "Sticker" in that list
+
+    @javascript
+    Scenario: Deleted product disappears from the list with js modal
+        Given I am on the page of product "Sticker"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the product index page
           And I should not see product with name "Sticker" in that list
 

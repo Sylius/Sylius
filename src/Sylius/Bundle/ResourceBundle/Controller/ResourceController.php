@@ -14,7 +14,9 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
@@ -107,7 +109,7 @@ class ResourceController extends FOSRestController
     {
         $config = $this->getConfiguration();
 
-        $view =  $this
+        $view = $this
             ->view()
             ->setTemplate($config->getTemplate('show.html'))
             ->setTemplateVar($config->getResourceName())
@@ -194,21 +196,43 @@ class ResourceController extends FOSRestController
     /**
      * Delete resource.
      */
-    public function deleteAction()
+    public function deleteAction(Request $request)
     {
         $resource = $this->findOr404();
 
-        $event = $this->delete($resource);
+        if ($request->request->get('confirmed', false)) {
+            $event = $this->delete($resource);
 
-        if ($event->isStopped()) {
-            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+            if ($request->isXmlHttpRequest()) {
+                return JsonResponse::create(array('id' => $request->get('id')));
+            }
 
-            return $this->redirectTo($resource);
+            if ($event->isStopped()) {
+                $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+
+                return $this->redirectTo($resource);
+            }
+
+            $this->setFlash('success', 'delete');
+
+            $config = $this->getConfiguration();
+
+            return $this->redirectToRoute(
+                $config->getRedirectRoute('index'),
+                $config->getRedirectParameters()
+            );
         }
 
-        $this->setFlash('success', 'delete');
+        if ($request->isXmlHttpRequest()) {
+            throw new AccessDeniedHttpException;
+        }
 
-        return $this->redirectToIndex($resource);
+        $view = $this
+            ->view()
+            ->setTemplate($request->attributes->get('template', 'SyliusWebBundle:Backend/Misc:delete.html.twig'))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**
@@ -281,15 +305,9 @@ class ResourceController extends FOSRestController
 
     public function create($resource)
     {
-        $manager = $this->getManager();
-
         $event = $this->dispatchEvent('pre_create', $resource);
-
         if (!$event->isStopped()) {
-            $manager->persist($resource);
-            $this->dispatchEvent('create', $resource);
-            $manager->flush();
-            $this->dispatchEvent('post_create', $resource);
+            $this->persistAndFlush($resource);
         }
 
         return $event;
@@ -297,15 +315,9 @@ class ResourceController extends FOSRestController
 
     public function update($resource)
     {
-        $manager = $this->getManager();
-
         $event = $this->dispatchEvent('pre_update', $resource);
-
         if (!$event->isStopped()) {
-            $manager->persist($resource);
-            $this->dispatchEvent('update', $resource);
-            $manager->flush();
-            $this->dispatchEvent('post_update', $resource);
+            $this->persistAndFlush($resource, 'update');
         }
 
         return $event;
@@ -313,26 +325,22 @@ class ResourceController extends FOSRestController
 
     public function delete($resource)
     {
-        $manager = $this->getManager();
-
         $event = $this->dispatchEvent('pre_delete', $resource);
-
         if (!$event->isStopped()) {
-            $manager->remove($resource);
-            $this->dispatchEvent('delete', $resource);
-            $manager->flush();
-            $this->dispatchEvent('post_delete', $resource);
+            $this->removeAndFlush($resource);
         }
 
         return $event;
     }
 
-    public function persistAndFlush($resource)
+    public function persistAndFlush($resource, $action = 'create')
     {
         $manager = $this->getManager();
 
         $manager->persist($resource);
+        $this->dispatchEvent($action, $resource);
         $manager->flush();
+        $this->dispatchEvent(sprintf('post_%s', $action), $resource);
     }
 
     public function removeAndFlush($resource)
@@ -340,7 +348,9 @@ class ResourceController extends FOSRestController
         $manager = $this->getManager();
 
         $manager->remove($resource);
+        $this->dispatchEvent('delete', $resource);
         $manager->flush();
+        $this->dispatchEvent('post_delete', $resource);
     }
 
     public function getRepository()

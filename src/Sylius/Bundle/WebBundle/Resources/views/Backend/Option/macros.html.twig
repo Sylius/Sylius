@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         {% for option in options %}
-            <tr>
+            <tr id="{{ option.id }}">
                 <td>{{ option.id }}</td>
                 <td>{{ option.name }}</td>
                 <td>{{ option.presentation }}</td>

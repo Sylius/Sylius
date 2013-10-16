@@ -15,7 +15,7 @@
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
         {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
-        {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
+        {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id}), null, false, false) }}
     </div>
     <h1><i class="icon-flag"></i> {{ 'sylius.country.show_header'|trans|raw }}</h1>
 </div>
@@ -44,7 +44,7 @@
         </thead>
         <tbody>
             {% for province in country.provinces %}
-                <tr>
+                <tr id="{{ province.id }}">
                     <td>{{ province.name }}</td>
                     <td>
                         <div class="pull-right">

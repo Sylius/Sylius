@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     {% for country in countries %}
-        <tr>
+        <tr id="{{ country.id }}">
             <td>{{ country.id }}</td>
             <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
             <td><span class="label label-primary">{{ country.isoName }}</span></td>

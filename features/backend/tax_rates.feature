@@ -95,27 +95,52 @@ Feature: Tax rates
           And I press "Save changes"
          Then I should be on the page of tax rate "General Tax"
 
-    @javascript
     Scenario: Deleting tax rate
         Given I am on the page of tax rate "US Clothing Tax"
          When I press "delete"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the tax rate index page
           And I should see "Tax rate has been successfully deleted."
 
     @javascript
+    Scenario: Deleting tax rate with js modal
+        Given I am on the page of tax rate "US Clothing Tax"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
+         Then I should be on the tax rate index page
+          And I should see "Tax rate has been successfully deleted."
+
     Scenario: Deleted tax rate disappears from the list
         Given I am on the page of tax rate "US Electronics Tax"
          When I press "delete"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the tax rate index page
           And I should not see tax rate with name "US Electronics Tax" in that list
 
     @javascript
+    Scenario: Deleted tax rate disappears from the list with js modal
+        Given I am on the page of tax rate "US Electronics Tax"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
+         Then I should be on the tax rate index page
+          And I should not see tax rate with name "US Electronics Tax" in that list
+
     Scenario: Deleting tax rate from the list
         Given I am on the tax rate index page
          When I click "delete" near "US Electronics Tax"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should still be on the tax rate index page
+          And "Tax rate has been successfully deleted." should appear on the page
+          But I should not see tax rate with name "US Electronics Tax" in that list
+
+    @javascript
+    Scenario: Deleting tax rate from the list with js modal
+        Given I am on the tax rate index page
+         When I click "delete" near "US Electronics Tax"
+          And I click "delete" from the confirmation modal
          Then I should still be on the tax rate index page
           And "Tax rate has been successfully deleted." should appear on the page
           But I should not see tax rate with name "US Electronics Tax" in that list

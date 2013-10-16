@@ -22,7 +22,7 @@
     <tbody>
     {% for variant in variants %}
         {% set product = variant.product %}
-        <tr>
+        <tr id="{{ variant.id }}">
             <td>{{ variant.id }}</td>
             <td>{{ variant.sku ?: '-' }}</td>
             <td>{% if variant.images.count > 0 %}

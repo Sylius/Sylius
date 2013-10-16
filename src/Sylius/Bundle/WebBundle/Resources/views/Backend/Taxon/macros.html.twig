@@ -25,7 +25,7 @@
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 
 {% for taxon in taxons %}
-<tr>
+<tr id="{{ taxon.id }}">
     <td>
         <span style="border-left: {{ (taxon.level - 1) * 20}}px solid #f1f1f1; padding-left: 10px;">
             {% if taxon.path|length > 0 %}

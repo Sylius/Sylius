@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         {% for tax_category in tax_categories %}
-        <tr>
+        <tr id="{{ tax_category.id }}">
             <td>{{ tax_category.id }}</td>
             <td>{{ tax_category.name }}</td>
             <td>{{ tax_category.description|default('sylius.tax_category.no_description'|trans) }}</td>

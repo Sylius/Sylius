@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         {% for property in properties %}
-            <tr>
+            <tr id="{{ property.id }}">
                 <td>{{ property.id }}</td>
                 <td>{{ property.name }}</td>
                 <td>{{ property.presentation }}</td>

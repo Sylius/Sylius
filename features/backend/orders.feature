@@ -1,3 +1,4 @@
+@orders
 Feature: Orders management
     In order to manage my sales
     As a store owner
@@ -63,27 +64,51 @@ Feature: Orders management
          When I click "edit" near "#000000002"
          Then I should be editing order with number "000000002"
 
-    @javascript
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"
          When I press "delete"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
     @javascript
+    Scenario: Deleting the order with js modal
+        Given I am viewing order with number "000000001"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
+         Then I should be on the order index page
+          And I should see "Order has been successfully deleted."
+
     Scenario: Deleting the order via list button
         Given I am on the order index page
          When I press "delete" near "#000000001"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
     @javascript
+    Scenario: Deleting the order via list button with js modal
+        Given I am on the order index page
+         When I press "delete" near "#000000001"
+          And I click "delete" from the confirmation modal
+         Then I should be on the order index page
+          And I should see "Order has been successfully deleted."
+
     Scenario: Deleted order disappears from the list
         Given I am viewing order with number "000000002"
          When I press "delete"
-          And I click "Yes" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the order index page
+          And I should not see order with number "#000000002" in the list
+
+    @javascript
+    Scenario: Deleted order disappears from the list with js modal
+        Given I am viewing order with number "000000002"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the order index page
           And I should not see order with number "#000000002" in the list
 

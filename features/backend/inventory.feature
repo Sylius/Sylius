@@ -24,7 +24,7 @@ Feature: Inventory tracking
           And I should see 6 stockables in the list
 
     Scenario: Seeing empty index of inventory
-         Given there are no products
+        Given there are no products
          When I am on the inventory index page
          Then I should see "There are no products to display."
 

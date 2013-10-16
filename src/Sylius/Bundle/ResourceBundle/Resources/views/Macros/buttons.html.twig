@@ -16,16 +16,16 @@
 </a>
 {% endmacro %}
 
-{% macro delete(url, message, disabled, confirmationMessage) %}
+{% macro delete(url, message, disabled=false, modal=true) %}
 {% if disabled %}
 <span class="btn btn-danger disabled">
     <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
 </span>
 {% else %}
-<form action="{{ url }}" method="post" style="display: inline;">
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
     <input type="hidden" name="_method" value="DELETE">
-    <button class="btn btn-danger" data-toggle="confirmation" data-message="{{ confirmationMessage is empty ? 'sylius.confirmation.message'|trans : confirmationMessage }}" data-target="#confirmationModalContainer">
-        <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+    <button class="btn btn-danger{% if modal %} btn-confirm{% endif %}" type="submit">
+        <i class="icon-trash"></i> <span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
     </button>
 </form>
 {% endif %}

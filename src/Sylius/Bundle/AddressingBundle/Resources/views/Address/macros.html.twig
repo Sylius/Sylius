@@ -19,7 +19,7 @@
         </thead>
         <tbody>
         {% for address in addresses %}
-            <tr>
+            <tr id="{{ address.id }}">
                 <td>{{ address.id }}</td>
                 <td>{{ address.firstname }}</td>
                 <td>{{ address.lastname }}</td>
