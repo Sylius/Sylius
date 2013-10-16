@@ -1,6 +1,7 @@
 <script>
-if (null !== document.getElementById('gallery')) {
-    document.getElementById('gallery').onclick = function (event) {
+var gallery = document.getElementById('gallery');
+if (gallery) {
+    gallery.onclick = function (event) {
         event = event || window.event;
         var target = event.target || event.srcElement,
                 link = target.src ? target.parentNode : target,
