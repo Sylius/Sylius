@@ -13,7 +13,7 @@
 
         <service id="sylius.listener.order_confirmation_email" class="%sylius.listener.order_confirmation_email.class%">
             <argument type="service" id="sylius.mailer.order_confirmation" />
-            <tag name="kernel.event_listener" event="sylius.order.post_create" method="processOrderConfirmation" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.complete" method="processOrderConfirmation" />
         </service>
 
     </services>

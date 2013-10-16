@@ -45,13 +45,13 @@ class OrderConfirmationMailer implements OrderConfirmationMailerInterface
             throw new \InvalidArgumentException('Order has to belong to a User');
         }
 
-        $template = $this->parameters['template'];
-        $from = $this->parameters['from_email'];
-        $to = $order->getUser()->getEmail();
-        $context = array(
-            'order' => $order
+        $this->mailer->sendEmail(
+            $this->parameters['template'],
+            $context = array(
+                'order' => $order
+            ),
+            $this->parameters['from_email'],
+            $user->getEmail()
         );
-
-        $this->mailer->sendEmail($template, $context, $from, $to);
     }
 }
