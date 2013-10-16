@@ -28,7 +28,7 @@ class LoadImagesData extends DataFixture
         $finder = new Finder();
         $uploader = $this->get('sylius.image_uploader');
 
-        $path = $this->container->getParameter('kernel.root_dir').'/../web/fixtures';
+        $path = __DIR__.'/../../Resources/fixtures';
         foreach ($finder->files()->in($path) as $img) {
             $image = new VariantImage();
             $image->setFile(new UploadedFile($img->getRealPath(), $img->getFilename()));
