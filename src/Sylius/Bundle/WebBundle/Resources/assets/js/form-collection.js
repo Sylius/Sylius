@@ -17,7 +17,15 @@
             var collectionContainer = $('#' + $(this).data('collection'));
             var prototype = $('#' + $(this).data('prototype')).data('prototype');
             var item = prototype.replace(/__name__/g, collectionContainer.children().length);
+            item = $(item);
             collectionContainer.append(item);
+            var deleteButton = $('<a href="#" class="btn btn-danger"><i class="icon-trash"></i>&nbsp;Delete</a>');
+            var control = collectionContainer.find('div.controls').last();
+            control.append(deleteButton);
+            deleteButton.on('click', function(e) {
+                e.preventDefault();
+                item.remove();
+            });
         });
         $(document).on('click', 'a[data-collection-button="delete"]', function(e) {
             e.preventDefault();
