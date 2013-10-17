@@ -200,6 +200,11 @@
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderCurrency" />
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderCurrency" />
         </service>
+        <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
+            <argument type="service" id="sylius.generator.order_number" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
+            <tag name="kerner.event_listener" event="sylius.checkout.finalize.pre_complete" method="generateOrderNumber" priority="10" />
+        </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
             <argument>%sylius.model.variant_image.class%</argument>
