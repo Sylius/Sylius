@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
@@ -23,7 +24,7 @@ use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCoreExtension extends Extension
+class SyliusCoreExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -58,6 +59,36 @@ class SyliusCoreExtension extends Extension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $configs = $container->getExtensionConfig($this->getAlias());
+        $config  = $this->processConfiguration(new Configuration(), $configs);
+
+        if (isset($config['driver'])) {
+            $config = array('driver' => $config['driver']);
+            foreach ($container->getExtensions() as $name => $extension) {
+                switch ($name) {
+                    case 'sylius_addressing':
+                    case 'sylius_inventory':
+                    case 'sylius_money':
+                    case 'sylius_payments':
+                    case 'sylius_product':
+                    case 'sylius_promotions':
+                    case 'sylius_sales':
+                    case 'sylius_settings':
+                    case 'sylius_shipping':
+                    case 'sylius_taxation':
+                    case 'sylius_taxonomies':
+                        $container->prependExtensionConfig($name, $config);
+                        break;
+                }
+            }
+        }
     }
 
     /**
