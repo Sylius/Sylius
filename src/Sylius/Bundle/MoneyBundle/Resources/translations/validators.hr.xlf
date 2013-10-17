@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="hr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="7a947a76dc422e47944dfd9d2480017a" resname="sylius.exchange_rate.currency.not_blank">
+        <source>sylius.exchange_rate.currency.not_blank</source>
+        <target>Odaberite ispravnu valutu.</target>
+      </trans-unit>
+      <trans-unit id="e5d151b77f405c8d14d33b679a86f6ed" resname="sylius.exchange_rate.rate.not_blank">
+        <source>sylius.exchange_rate.rate.not_blank</source>
+        <target>Unesite trenutni devizni tečaj.</target>
+      </trans-unit>
+      <trans-unit id="0abf53f709f72effb991c15640979adc" resname="sylius.exchange_rate.unique">
+        <source>sylius.exchange_rate.unique</source>
+        <target>Valuta mora biti jedinstvena.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

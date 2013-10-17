@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="hr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="cd5f4f3ac9dcb450f35a191f22f70431" resname="sylius.form.exchange_rate.currency">
+        <source>sylius.form.exchange_rate.currency</source>
+        <target>Valuta</target>
+      </trans-unit>
+      <trans-unit id="b65014d9bbde2ec09a3110397658430d" resname="sylius.form.exchange_rate.rate">
+        <source>sylius.form.exchange_rate.rate</source>
+        <target>Tečaj</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
