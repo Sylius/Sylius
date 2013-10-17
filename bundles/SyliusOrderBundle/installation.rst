@@ -8,7 +8,7 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/sales-bundle:*
+    $ composer require sylius/order-bundle:*
 
 Otherwise you have to download .phar file.
 
@@ -37,7 +37,7 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
-            new Sylius\Bundle\SalesBundle\SyliusSalesBundle(),
+            new Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -62,7 +62,7 @@ let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle
     // src/App/AppBundle/Entity/Order.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\SalesBundle\Entity\Order as BaseOrder;
+    use Sylius\Bundle\OrderBundle\Entity\Order as BaseOrder;
 
     class Order extends BaseOrder
     {
@@ -84,12 +84,12 @@ You should create a mapping file in your ``AppBundle``, put it inside the doctri
             <id name="id" column="id" type="integer">
                 <generator strategy="AUTO" />
             </id>
-            <one-to-many field="items" target-entity="Sylius\Bundle\SalesBundle\Model\OrderItemInterface" mapped-by="order" orphan-removal="true">
+            <one-to-many field="items" target-entity="Sylius\Bundle\OrderBundle\Model\OrderItemInterface" mapped-by="order" orphan-removal="true">
                 <cascade>
                     <cascade-all/>
                 </cascade>
             </one-to-many>
-            <one-to-many field="adjustments" target-entity="Sylius\Bundle\SalesBundle\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
+            <one-to-many field="adjustments" target-entity="Sylius\Bundle\OrderBundle\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
                 <cascade>
                     <cascade-all/>
                 </cascade>
@@ -117,7 +117,7 @@ All you need to do is making your *Product* entity to implement ``SellableInterf
     // src/App/AppBundle/Entity/Product.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\SalesBundle\Model\SellableInterface;
+    use Sylius\Bundle\OrderBundle\Model\SellableInterface;
 
     class Product implements SellableInterface
     {
@@ -140,7 +140,7 @@ Put this configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
-    sylius_sales:
+    sylius_order:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         classes:
             sellable:

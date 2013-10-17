@@ -9,7 +9,7 @@ Bundles reference
     SyliusProductBundle/index
     SyliusVariableProductBundle/index
     SyliusCartBundle/index
-    SyliusSalesBundle/index
+    SyliusOrderBundle/index
     SyliusAddressingBundle/index
     SyliusInventoryBundle/index
     SyliusShippingBundle/index

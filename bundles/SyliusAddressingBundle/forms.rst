@@ -37,7 +37,7 @@ You can also embed it into another form.
 
     namespace Acme\ShopBundle\Form\Type;
 
-    use Sylius\Bundle\SalesBundle\Form\Type\OrderType as BaseOrderType;
+    use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
     use Symfony\Component\Form\FormBuilderInterface;
 
     class OrderType extends BaseOrderType
