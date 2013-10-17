@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="hr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="3c3fad9ed9e9dce4693320d03211fb69" resname="sylius.form.credit_card.cardholder_name">
+        <source>sylius.form.credit_card.cardholder_name</source>
+        <target>Vlasnik kartice</target>
+      </trans-unit>
+      <trans-unit id="5c4d48acc6f51d1fdceb046c7a2d7e97" resname="sylius.form.credit_card.expiry_month">
+        <source>sylius.form.credit_card.expiry_month</source>
+        <target>Mjesec isteka kartice</target>
+      </trans-unit>
+      <trans-unit id="9e2fafcc68bd9c5f56704bf3e2311867" resname="sylius.form.credit_card.expiry_year">
+        <source>sylius.form.credit_card.expiry_year</source>
+        <target>Godina isteka kartice</target>
+      </trans-unit>
+      <trans-unit id="4f8aea56447f3b7dfdc83403769b07b7" resname="sylius.form.credit_card.number">
+        <source>sylius.form.credit_card.number</source>
+        <target>Broj kartice</target>
+      </trans-unit>
+      <trans-unit id="b0e830dcbd1c0e54516f28f6a5f0f779" resname="sylius.form.credit_card.security_code">
+        <source>sylius.form.credit_card.security_code</source>
+        <target>Sigurnosni (CVV) Kod</target>
+      </trans-unit>
+      <trans-unit id="835d77d0421cdf3e75a65363205aa3a0" resname="sylius.form.credit_card.type">
+        <source>sylius.form.credit_card.type</source>
+        <target>Tip kartice</target>
+      </trans-unit>
+      <trans-unit id="4b2bd16369add8f5e09952df5e2da02f" resname="sylius.form.payment.amount">
+        <source>sylius.form.payment.amount</source>
+        <target>Iznos</target>
+      </trans-unit>
+      <trans-unit id="cfd694e828dc0f90777547eeaa2dba13" resname="sylius.form.payment.method">
+        <source>sylius.form.payment.method</source>
+        <target>Tip plaćanja</target>
+      </trans-unit>
+      <trans-unit id="a5c8dae58a59fe570e21ce2283d0c5e6" resname="sylius.form.payment_method.description">
+        <source>sylius.form.payment_method.description</source>
+        <target>Opis</target>
+      </trans-unit>
+      <trans-unit id="b4663fd843dbc9413d9a6f67d0ee7a71" resname="sylius.form.payment_method.enabled">
+        <source>sylius.form.payment_method.enabled</source>
+        <target>Aktivna?</target>
+      </trans-unit>
+      <trans-unit id="587e7779da2b4dd688f67313d76b6428" resname="sylius.form.payment_method.gateway">
+        <source>sylius.form.payment_method.gateway</source>
+        <target>Tip plaćanja</target>
+      </trans-unit>
+      <trans-unit id="9eea5f1c89f4fa2dc8bd8abb0d380316" resname="sylius.form.payment_method.name">
+        <source>sylius.form.payment_method.name</source>
+        <target>Naziv</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipping_category:
+        name:
+            not_blank: "Molimo vas, unesite naziv dostavne kategorije."
+            min_length: "Naziv kategorije mora imati najmanje {{ limit }} znakova."
+            max_length: "Naziv kategorije ne smije biti dulji od {{ limit }} znakova."
+    shipping_method:
+        name:
+            not_blank: "Molimo vas, unesite naziv tipa dostave."
+            min_length: "Naziv tipa dostave mora imati najmanje {{ limit }} znakova."
+            max_length: "Naziv tipa dostave ne smije biti dulji od {{ limit }} znakova."

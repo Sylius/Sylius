@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="hr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.resource.create</source>
+                <target>%resource% je uspješno izvršen.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.resource.update</source>
+                <target>%resource% je uspješno ažuriran.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.resource.delete</source>
+                <target>%resource% je uspješno obrisan.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
