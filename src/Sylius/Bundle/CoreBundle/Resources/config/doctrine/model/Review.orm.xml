@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Review" table="sylius_review">
+        <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface">
+            <join-column name="product_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Model\UserInterface" inversed-by="reviews">
+            <join-column name="user_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+    </mapped-superclass>
+</doctrine-mapping>

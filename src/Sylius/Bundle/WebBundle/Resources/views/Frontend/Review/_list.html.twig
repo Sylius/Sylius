@@ -1,0 +1,11 @@
+{% import 'SyliusReviewBundle::macros.html.twig' as review_macros %}
+
+{% for review in reviews %}
+    <div class="review">
+        <span class="pull-right">{{ review.createdAt|date }}</span>
+        <h4 class="title"><span class="badge rating" data-score="{{ review.rating }}">{{ review.rating }}</span> {{ review.title }} <small>{{ 'sylius.review.author'|trans({'%name%': review_macros.reviewer_name(review)}) }}</small></h4>
+        <p class="comment">{{ review.comment }}</p>
+    </div>
+{% else %}
+    <p>{{ 'sylius.review.no_results'|trans }}</p>
+{% endfor %}
