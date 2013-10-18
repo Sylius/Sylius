@@ -9,8 +9,13 @@ Sylius is constructed from fully decoupled components (bundles in Symfony2 gloss
 
 We're using full-stack BDD methodology, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
 
-Installation
-------------
+Documentation
+-------------
+
+Documentation is available at [docs.sylius.org](http://docs.sylius.org).
+
+Quick Installation
+------------------
 
 ``` bash
 $ wget http://getcomposer.org/composer.phar
