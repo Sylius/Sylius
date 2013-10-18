@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: sylius.yml }
+    - { resource: payum.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }

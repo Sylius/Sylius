@@ -84,14 +84,20 @@ class Payment implements PaymentInterface
     protected $updatedAt;
 
     /**
+     * @var array
+     */
+    protected $details;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->amount = 0;
-        $this->state = PaymentInterface::STATE_PENDING;
+        $this->state = PaymentInterface::STATE_NEW;
         $this->logs = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
+        $this->details = array();
     }
 
     /**
@@ -274,5 +280,21 @@ class Payment implements PaymentInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @param array $details
+     */
+    public function setDetails(array $details)
+    {
+        $this->details = $details;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

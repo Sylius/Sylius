@@ -27,6 +27,8 @@ interface PaymentInterface extends TimestampableInterface
     const STATE_FAILED     = 'failed';
     const STATE_VOID       = 'void';
     const STATE_COMPLETED  = 'completed';
+    const STATE_NEW        = 'new';
+    const STATE_UNKNOWN    = 'unknown';
 
     /**
      * Get payment method associated with this payment.
@@ -127,4 +129,14 @@ interface PaymentInterface extends TimestampableInterface
      * @param PaymentLogInterface $log
      */
     public function removeLog(PaymentLogInterface $log);
+
+    /**
+     * @param array $details
+     */
+    public function setDetails(array $details);
+
+    /**
+     * @return array
+     */
+    public function getDetails();
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.payum.checkout_step.purchase.class">Sylius\Bundle\PayumBundle\Checkout\Step\PurchaseStep</parameter>
+        <parameter key="sylius.payum.action.capture_order_with_paypal.class">Sylius\Bundle\PayumBundle\Payum\Action\CaptureOrderWithPaypalAction</parameter>
+        <parameter key="sylius.payum.action.capture_order_with_dummy.class">Sylius\Bundle\PayumBundle\Payum\Action\CaptureOrderWithDummyAction</parameter>
+        <parameter key="sylius.payum.action.capture_order_with_stripe.class">Sylius\Bundle\PayumBundle\Payum\Action\CaptureOrderWithStripeAction</parameter>
+        <parameter key="sylius.payum.action.order_status.class">Sylius\Bundle\PayumBundle\Payum\Action\OrderStatusAction</parameter>
+        <parameter key="sylius.payum.action.dummy_order_status.class">Sylius\Bundle\PayumBundle\Payum\Action\DummyOrderStatusAction</parameter>
+        <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.payum.checkout_step.purchase" class="%sylius.payum.checkout_step.purchase.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_purchase" />
+        </service>
+        <service id="sylius.payum.action.capture_order_with_paypal" class="%sylius.payum.action.capture_order_with_paypal.class%" />
+        <service id="sylius.payum.action.capture_order_with_stripe" class="%sylius.payum.action.capture_order_with_stripe.class%" />
+        <service id="sylius.payum.action.order_status" class="%sylius.payum.action.order_status.class%" />
+        <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" >
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="templating" />
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+        </service>
+
+        <!-- dummy -->
+        <service id="sylius.payum.action.capture_order_with_dummy" class="%sylius.payum.action.capture_order_with_dummy.class%" />
+        <service id="sylius.payum.action.dummy_order_status" class="%sylius.payum.action.dummy_order_status.class%" />
+    </services>
+
+</container>

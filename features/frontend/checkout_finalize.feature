@@ -20,8 +20,8 @@ Feature: Checkout finalization
             | zone | name        |
             | UK   | DHL Express |
           And the following payment methods exist:
-            | name        | gateway | enabled |
-            | Credit Card | stripe  | yes     |
+            | name  | gateway | enabled |
+            | Dummy | dummy   | yes     |
 
     Scenario: Placing the order
         Given I am logged in user
@@ -31,7 +31,7 @@ Feature: Checkout finalization
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Credit Card" radio button
+          And I select the "Dummy" radio button
           And I press "Continue"
          When I click "Place order"
          Then I should be on the store homepage
