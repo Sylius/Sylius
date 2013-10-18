@@ -1,0 +1,18 @@
+{{ form_errors(form) }}
+
+{{ form_start(form, { attr: {class: 'form-horizontal' } }) }}
+
+    {{ form_row(form.rating) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.comment) }}
+
+    {% if form.guest_reviewer is defined %}
+        <div>
+            {{ form_row(form.guest_reviewer.name) }}
+            {{ form_row(form.guest_reviewer.email) }}
+        </div>
+    {% endif %}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+{{ form_end(form) }}

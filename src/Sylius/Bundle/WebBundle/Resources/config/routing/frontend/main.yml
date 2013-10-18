@@ -20,6 +20,9 @@ sylius_account:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account.yml
     prefix: /account
 
+sylius_review:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/review.yml
+
 sylius_cart:
     resource: @SyliusCartBundle/Resources/config/routing.yml
     prefix: /cart

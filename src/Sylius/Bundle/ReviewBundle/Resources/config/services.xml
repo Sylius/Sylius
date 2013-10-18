@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.controller.review" class="%sylius.controller.review.class%">
+            <argument>sylius</argument>
+            <argument>review</argument>
+            <argument>SyliusReviewBundle:Review</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.form.type.review" class="Sylius\Bundle\ReviewBundle\Form\Type\ReviewType">
+            <argument>%sylius.model.review.class%</argument>
+            <tag name="form.type" alias="sylius_review" />
+        </service>
+        <service id="sylius.form.type.review_admin" class="Sylius\Bundle\ReviewBundle\Form\Type\ReviewAdminType">
+            <argument>%sylius.model.review.class%</argument>
+            <tag name="form.type" alias="sylius_review_admin" />
+        </service>
+        <service id="sylius.form.type.guest_reviewer" class="Sylius\Bundle\ReviewBundle\Form\Type\GuestReviewerType">
+            <argument>%sylius.model.guest_reviewer.class%</argument>
+            <tag name="form.type" alias="sylius_guest_reviewer" />
+        </service>
+    </services>
+</container>

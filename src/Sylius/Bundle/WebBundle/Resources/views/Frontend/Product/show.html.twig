@@ -112,4 +112,16 @@
     </div>
 </form>
 </div>
+
+<hr />
+
+<div>
+    <h3>Reviews</h3>
+    {% render(url("sylius_partial_product_review_list", { 'slug': product.slug })) %}
+
+    <div class="well">
+        <h3>Write your own review</h3>
+        {% render(url("sylius_partial_product_review_form", { 'slug': product.slug })) %}
+    </div>
+</div>
 {% endblock %}
