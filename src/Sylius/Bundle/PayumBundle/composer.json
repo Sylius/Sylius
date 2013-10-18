@@ -8,7 +8,7 @@
     "authors": [
         {
             "name": "Kotlyar Maksim",
-            "email": "kotlyar.maksim@gmail.com",
+            "email": "kotlyar.maksim@gmail.com"
         },
         {
             "name": "Community contributions",
@@ -16,14 +16,14 @@
         }
     ],
     "require": {
-        "php":                             ">=5.3.3",
+        "php":                    ">=5.3.3",
 
-        "sylius/sales-bundle":             "1.0.*@dev",
-        "sylius/core-bundle":              "1.0.*@dev",
-        "sylius/payments-bundle":          "1.0.*@dev",
-        "sylius/resource-bundle":          "1.0.*@dev",
-        "payum/payum-bundle":              "0.6.*@dev",
-        "payum/payum":                     "0.6.*@dev"
+        "sylius/sales-bundle":    "1.0.*@dev",
+        "sylius/core-bundle":     "1.0.*@dev",
+        "sylius/payments-bundle": "1.0.*@dev",
+        "sylius/resource-bundle": "1.0.*@dev",
+        "payum/payum-bundle":     "0.6.*@dev",
+        "payum/payum":            "0.6.*@dev"
     },
     "config": {
         "bin-dir": "bin"
