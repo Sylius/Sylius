@@ -1,0 +1,58 @@
+sylius_backend_review_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.review:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Review:index.html.twig
+
+sylius_backend_review_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.review:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Review:create.html.twig
+            redirect: sylius_backend_review_show
+
+sylius_backend_review_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.review:updateAction
+        _sylius:
+            form: sylius_review_admin
+            template: SyliusWebBundle:Backend/Review:update.html.twig
+            redirect: sylius_backend_review_show
+
+sylius_backend_review_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.review:deleteAction
+        _sylius:
+            redirect: sylius_backend_review_index
+
+sylius_backend_review_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.review:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Review:show.html.twig
+
+sylius_backend_review_approve:
+    pattern: /{id}/approve
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.review:approveAction
+        _sylius:
+            redirect: sylius_backend_product_show
+
+sylius_backend_review_deny:
+    pattern: /{id}/deny
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.review:denyAction
+        _sylius:
+            redirect: sylius_backend_product_show

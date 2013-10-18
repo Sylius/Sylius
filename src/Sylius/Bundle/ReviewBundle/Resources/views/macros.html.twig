@@ -1,0 +1,9 @@
+{% macro reviewer_name(review) %}
+    {% if review.guestReviewer %}
+        {{ review.guestReviewer.name }}
+    {% elseif review.user %}
+        {{ review.user.firstName }}
+    {% else %}
+        {{ 'anonymous' }}
+    {% endif %}
+{% endmacro %}

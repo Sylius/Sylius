@@ -162,3 +162,7 @@ sylius_backend_content:
 sylius_backend_report:
     resource: @SyliusWebBundle/Resources/config/routing/backend/report.yml
     prefix: /reports
+
+sylius_backend_review:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/review.yml
+    prefix: /reviews
