@@ -51,6 +51,12 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             }
         }
 
+        if (null !== $usageLimit = $promotion->getUsageLimit()) {
+            if ($promotion->getUsed() >= $usageLimit) {
+                return false;
+            }
+        }
+
         if ($promotion->isCouponBased()) {
             if (null === $subject->getPromotionCoupon()) {
                 return false;
