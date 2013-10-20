@@ -39,10 +39,7 @@ Feature: Checkout fixed discount promotions
     Scenario: Fixed discount promotion is applied when the cart
               has the required amount
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Woody"
-         When I fill in "Quantity" with "3"
-          And I press "Add to cart"
+         When I add product "Woody" to cart, with quantity "3"
          Then I should be on the cart summary page
           And "Promotion total: (€40.00)" should appear on the page
           And "Grand total: €335.00" should appear on the page
@@ -51,30 +48,18 @@ Feature: Checkout fixed discount promotions
     Scenario: Fixed discount promotion is not applied when the cart
               has not the required amount
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Sarge"
-         When I fill in "Quantity" with "8"
-          And I press "Add to cart"
+         When I add product "Sarge" to cart, with quantity "8"
          Then I should be on the cart summary page
-          And "Promotion total: €0.00" should appear on the page
+          And "Promotion total" should not appear on the page
           And "Grand total: €200.00" should appear on the page
 
     # item count promotion (3 items)
     Scenario: Item count promotion is applied when the cart has the
               number of items required
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Sarge"
-          And I fill in "Quantity" with "3"
-          And I press "Add to cart"
-          And I follow "Debian T-Shirts"
-          And I click "Etch"
-          And I fill in "Quantity" with "1"
-          And I press "Add to cart"
-         When I follow "Debian T-Shirts"
-          And I click "Lenny"
-          And I fill in "Quantity" with "2"
-          And I press "Add to cart"
+          And I added product "Sarge" to cart, with quantity "3"
+          And I added product "Etch" to cart, with quantity "1"
+         When I add product "Lenny" to cart, with quantity "2"
          Then I should be on the cart summary page
           And "Promotion total: (€15.00)" should appear on the page
           And "Grand total: €110.00" should appear on the page
@@ -83,30 +68,18 @@ Feature: Checkout fixed discount promotions
     Scenario: Item count promotion is not applied when the cart has
               not the number of items required
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Etch"
-         When I fill in "Quantity" with "8"
-          And I press "Add to cart"
+         When I add product "Etch" to cart, with quantity "8"
          Then I should be on the cart summary page
-          And "Promotion total: €0.00" should appear on the page
+          And "Promotion total" should not appear on the page
           And "Grand total: €160.00" should appear on the page
 
     # let's cumulate the promotions (3 items + 300 EUR)
     Scenario: Several promotions are applied when an cart fulfills
               the rules of several promotions
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Potato"
-          And I fill in "Quantity" with "4"
-          And I press "Add to cart"
-          And I follow "Debian T-Shirts"
-          And I click "Buzz"
-          And I fill in "Quantity" with "1"
-          And I press "Add to cart"
-          And I follow "Debian T-Shirts"
-          And I click "Woody"
-         When I fill in "Quantity" with "3"
-          And I press "Add to cart"
+          And I added product "Potato" to cart, with quantity "4"
+          And I added product "Buzz" to cart, with quantity "1"
+         When I add product "Woody" to cart, with quantity "3"
          Then I should still be on the cart summary page
           And "Promotion total: (€55.00)" should appear on the page
           # 4*200 + 1*500 + 3*125 = 1675 - 15 - 40 = 1620

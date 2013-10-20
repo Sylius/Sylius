@@ -1,5 +1,5 @@
 @checkout
-Feature: Checkout promotions
+Feature: Checkout usage limited promotions
     In order to handle product promotions
     As a store owner
     I want to apply promotion discounts during checkout
@@ -39,10 +39,7 @@ Feature: Checkout promotions
     Scenario: Promotion with usage limit is applied when the
               number of usage is not reached
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Buzz"
-         When I fill in "Quantity" with "2"
-          And I press "Add to cart"
+         When I add product "Buzz" to cart, with quantity "2"
          Then I should be on the cart summary page
           And "Promotion total: (€500.00)" should appear on the page
           And "Grand total: €500.00" should appear on the page
@@ -51,18 +48,11 @@ Feature: Checkout promotions
     Scenario: Promotion with usage limit is not applied when the
               number of usage is reached
         Given I am on the store homepage
-          And I follow "Debian T-Shirts"
-          And I click "Sarge"
-          And I fill in "Quantity" with "3"
-          And I press "Add to cart"
-          And I follow "Debian T-Shirts"
-          And I click "Etch"
-          And I fill in "Quantity" with "1"
-          And I press "Add to cart"
-         When I follow "Debian T-Shirts"
-          And I click "Lenny"
-          And I fill in "Quantity" with "2"
-          And I press "Add to cart"
+          And I added product "Sarge" to cart, with quantity "3"
+          And I added product "Etch" to cart, with quantity "1"
+         When I add product "Lenny" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: €0.00" should appear on the page
+          And "Promotion total" should not appear on the page
           And "Grand total: €125.00" should appear on the page
+
+    # TODO: find a way to check that usage limit is reached

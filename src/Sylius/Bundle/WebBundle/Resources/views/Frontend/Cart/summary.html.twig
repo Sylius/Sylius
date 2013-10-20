@@ -31,12 +31,14 @@
         {% endfor %}
     </tbody>
     <tfoot>
+        {% if cart.promotionTotal %}
         <tr>
             <td colspan="6"></td>
             <td style="text-align: right;">
                 <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
             </td>
         </tr>
+        {% endif %}
         <tr>
             <td colspan="6"></td>
             <td style="text-align: right;">

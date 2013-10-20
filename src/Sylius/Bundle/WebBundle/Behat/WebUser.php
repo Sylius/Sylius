@@ -732,6 +732,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
     /**
      * @Given /^I added product "([^""]*)" to cart, with quantity "([^""]*)"$/
+     * @When /^I add product "([^""]*)" to cart, with quantity "([^""]*)"$/
      */
     public function iAddedProductToCartWithQuantity($productName, $quantity)
     {

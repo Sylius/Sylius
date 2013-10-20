@@ -1005,8 +1005,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
                     $configuration[$key] = (int)$value * 100;
                     break;
                 case 'count':
-                case 'percentage':
                     $configuration[$key] = (int)$value;
+                    break;
+                case 'percentage':
+                    $configuration[$key] = (int)$value / 100;
                     break;
                 case 'equal':
                     $configuration[$key] = (boolean)$value;
