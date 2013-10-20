@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Promotion\CouponHandler;
 use Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -30,13 +31,20 @@ class OrderPromotionListener
     protected $promotionProcessor;
 
     /**
+     * @var CouponHandler
+     */
+    protected $couponHandler;
+
+    /**
      * Constructor.
      *
      * @param PromotionProcessorInterface $promotionProcessor
+     * @param CouponHandler $couponHandler
      */
-    public function __construct(PromotionProcessorInterface $promotionProcessor)
+    public function __construct(PromotionProcessorInterface $promotionProcessor, CouponHandler $couponHandler)
     {
         $this->promotionProcessor = $promotionProcessor;
+        $this->couponHandler = $couponHandler;
     }
 
     /**
@@ -50,10 +58,13 @@ class OrderPromotionListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order promotion listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order promotion listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
+        // remove former promotion adjustments as they are calculated each time the cart changes
+        $order->removePromotionAdjustments();
+        $this->couponHandler->handle($order);
         $this->promotionProcessor->process($order);
     }
 }

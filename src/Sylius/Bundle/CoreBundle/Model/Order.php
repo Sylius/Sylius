@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
 
 /**
@@ -73,6 +74,20 @@ class Order extends Cart implements OrderInterface
      * @var string
      */
     protected $currency;
+
+    /**
+     * Coupon code
+     *
+     * @var string
+     */
+    protected $couponCode;
+
+    /**
+     * Promotion coupon
+     *
+     * @var CouponInterface
+     */
+    protected $promotionCoupon;
 
     /**
      * Constructor.
@@ -365,7 +380,15 @@ class Order extends Cart implements OrderInterface
      */
     public function getPromotionCoupon()
     {
-        return null;
+        return $this->promotionCoupon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPromotionCoupon(CouponInterface $coupon)
+    {
+        $this->promotionCoupon = $coupon;
     }
 
     /**
@@ -400,6 +423,22 @@ class Order extends Cart implements OrderInterface
         $this->currency = $currency;
 
         return $this;
+    }
+
+    /**
+     * @param string $couponCode
+     */
+    public function setCouponCode($couponCode)
+    {
+        $this->couponCode = $couponCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCouponCode()
+    {
+        return $this->couponCode;
     }
 
     /**

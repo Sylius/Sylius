@@ -34,6 +34,12 @@
         <tr>
             <td colspan="6"></td>
             <td style="text-align: right;">
+                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td style="text-align: right;">
                 <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.shippingTotal|sylius_price }}
             </td>
         </tr>
@@ -60,6 +66,12 @@
         </tr>
     </tfoot>
 </table>
+
+<div class="well well-small">
+    {{ form_row(form.couponCode) }}
+    <button type="submit" class="btn btn-primary btn-small">{{ 'sylius.cart.summary.add_coupon'|trans }}</button>
+</div>
+
 {{ form_rest(form) }}
 <div class="well">
     <button type="submit" class="btn btn-primary btn-lg"><i class="icon-save"></i> {{ 'sylius.cart.summary.save'|trans }}</button>

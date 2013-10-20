@@ -15,6 +15,8 @@ sylius_cart:
     classes:
         item:
             form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+        cart:
+            form: Sylius\Bundle\CoreBundle\Form\Type\CartType
 
 sylius_settings: ~
 
