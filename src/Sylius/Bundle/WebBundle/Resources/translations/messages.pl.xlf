@@ -106,6 +106,42 @@
         <source>sylius.backend.dashboard.subheader</source>
         <target>Przegląd Twojego sklepu</target>
       </trans-unit>
+      <trans-unit id="88048c16fdb4816785b63624719c14da" resname="sylius.backend.logout">
+        <source>sylius.backend.logout</source>
+        <target>Wyloguj</target>
+      </trans-unit>
+      <trans-unit id="8e1945174a926f8948ff52b4930d43e2" resname="sylius.backend.quick_links.add_product">
+        <source>sylius.backend.quick_links.add_product</source>
+        <target>Nowy produkt</target>
+      </trans-unit>
+      <trans-unit id="bcaf0c6ab5fcd4265e16315de5d04c71" resname="sylius.backend.quick_links.orders">
+        <source>sylius.backend.quick_links.orders</source>
+        <target>Najnowsze zamówienia</target>
+      </trans-unit>
+      <trans-unit id="2c1f67e5539dc78af7f57cc2281a25c5" resname="sylius.backend.quick_links.products">
+        <source>sylius.backend.quick_links.products</source>
+        <target>Twoje produkty</target>
+      </trans-unit>
+      <trans-unit id="63121b09a345a806511cd6496887054c" resname="sylius.backend.quick_links.users">
+        <source>sylius.backend.quick_links.users</source>
+        <target>Użytkownicy</target>
+      </trans-unit>
+      <trans-unit id="0858703b722c491a68ddc36b0ef4612d" resname="sylius.backend.statistics">
+        <source>sylius.backend.statistics</source>
+        <target>Miesięczne statystyki</target>
+      </trans-unit>
+      <trans-unit id="53a5c74b01f3d38399a0fc2a86b66d89" resname="sylius.backend.statistics.orders_this_month">
+        <source>sylius.backend.statistics.orders_this_month</source>
+        <target>Zamówienia</target>
+      </trans-unit>
+      <trans-unit id="a29196b0ea143d08b2a062c7ac870c6e" resname="sylius.backend.statistics.registrations_this_month">
+        <source>sylius.backend.statistics.registrations_this_month</source>
+        <target>Rejestracje</target>
+      </trans-unit>
+      <trans-unit id="5a7dcffa661988c43c707bd6544b9439" resname="sylius.backend.statistics.sales_this_month">
+        <source>sylius.backend.statistics.sales_this_month</source>
+        <target>Sprzedaż</target>
+      </trans-unit>
       <trans-unit id="1c928a5890ba6f86642da79b1e7a2ea6" resname="sylius.cancel">
         <source>sylius.cancel</source>
         <target>Anuluj</target>
@@ -1325,6 +1361,10 @@
       <trans-unit id="6583e71b745cfeeae0195842eed3b1a3" resname="sylius.show">
         <source>sylius.show</source>
         <target>szczegóły</target>
+      </trans-unit>
+      <trans-unit id="e3941c0ac12c8042d373b4eb3b00e6d2" resname="sylius.show_all">
+        <source>sylius.show_all</source>
+        <target>Pokaż wszystko</target>
       </trans-unit>
       <trans-unit id="5b19cea474365ab0f38c4662924eb810" resname="sylius.stockable.index_header">
         <source>sylius.stockable.index_header</source>
