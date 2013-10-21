@@ -7,17 +7,20 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusFlowBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.1"
     },
@@ -25,7 +28,7 @@
         "symfony/yaml": "~2.1"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\FlowBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\FlowBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/FlowBundle",
     "extra": {

@@ -7,12 +7,16 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusCoreBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
@@ -35,16 +39,15 @@
         "sylius/omnipay-bundle":          "1.0.*@dev",
         "athari/yalinqo":                 "*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
-        "fzaninotto/faker":               "1.2.*",
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
-        "knplabs/knp-snappy-bundle":      "dev-master@dev",
-        "mathiasverraes/money":           "dev-master@dev",
-        "omnipay/omnipay":                "dev-master@dev"
+        "mathiasverraes/money":           "*@dev",
+        "omnipay/omnipay":                "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
-        "symfony/form":    "~2.3"
+        "fzaninotto/faker": "1.2.*",
+        "phpspec/phpspec":  "2.0.*@dev",
+        "symfony/form":     "~2.3"
     },
     "suggest": {
         "sylius/web-bundle": "Provides default web interface"
@@ -53,7 +56,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CoreBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\CoreBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/CoreBundle",
     "extra": {

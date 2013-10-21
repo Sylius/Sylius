@@ -1,4 +1,3 @@
-
 {
     "name":        "sylius/sylius",
     "type":        "project",
@@ -24,11 +23,9 @@
 
         "athari/yalinqo":                       "*@dev",
         "doctrine/doctrine-bundle":             "1.2.*@dev",
-        "doctrine/doctrine-fixtures-bundle":    "2.2.*",
         "doctrine/orm":                         "~2.3",
         "friendsofsymfony/rest-bundle":         "0.13.*",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
-        "fzaninotto/faker":                     "1.2.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle":                "0.12.*",
         "jms/translation-bundle":               "1.1.*",
@@ -55,12 +52,14 @@
         "payum/omnipay-bridge":                 "0.6.*@dev"
     },
     "require-dev": {
-        "behat/behat":                  "2.4.*@stable",
-        "behat/symfony2-extension":     "*",
-        "behat/mink-extension":         "*",
-        "behat/mink-browserkit-driver": "*",
-        "phpspec/phpspec":              "2.0.*@dev",
-        "behat/mink-selenium2-driver":  "*"
+        "behat/behat":                       "2.4.*@stable",
+        "behat/symfony2-extension":          "*",
+        "behat/mink-extension":              "*",
+        "behat/mink-browserkit-driver":      "*",
+        "behat/mink-selenium2-driver":       "*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "fzaninotto/faker":                  "1.2.*",
+        "phpspec/phpspec":                   "2.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

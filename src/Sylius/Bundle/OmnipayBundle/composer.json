@@ -20,7 +20,7 @@
         "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.1",
-        "omnipay/omnipay":          "dev-master@dev"
+        "omnipay/omnipay":          "1.0.*"
     },
     "require-dev": {
         "phpspec/phpspec2": "2.0.*@dev",
