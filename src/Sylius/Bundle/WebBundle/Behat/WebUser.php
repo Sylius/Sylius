@@ -748,7 +748,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         // Re-set default session
         $currentUrl = $this->getSession()->getCurrentUrl();
-        $this->getMink()->setDefaultSessionName('selenium2');
+        $this->getMink()->setDefaultSessionName('goutte');
         $this->getSession()->visit($currentUrl);
     }
 
