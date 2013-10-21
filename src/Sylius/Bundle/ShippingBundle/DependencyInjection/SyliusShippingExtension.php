@@ -37,10 +37,7 @@ class SyliusShippingExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_shipping.driver', $driver);
-        $container->setParameter('sylius_shipping.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $classes = $config['classes'];
 

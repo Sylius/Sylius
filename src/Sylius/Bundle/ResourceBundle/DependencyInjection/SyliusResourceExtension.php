@@ -77,12 +77,13 @@ class SyliusResourceExtension extends Extension
     /**
      * Load bundle driver.
      *
-     * @param string        $driver
-     * @param XmlFileLoader $loader
+     * @param string                $driver
+     * @param XmlFileLoader         $loader
+     * @param null|ContainerBuilder $container
      *
      * @throws \InvalidArgumentException
      */
-    protected function loadDatabaseDriver($driver, XmlFileLoader $loader)
+    protected function loadDatabaseDriver($driver, XmlFileLoader $loader, ContainerBuilder $container = null)
     {
         $bundle = str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
         if (!in_array($driver, call_user_func(array($bundle, 'getSupportedDrivers')))) {
@@ -90,6 +91,11 @@ class SyliusResourceExtension extends Extension
         }
 
         $loader->load(sprintf('driver/%s.xml', $driver));
+
+        if (null !== $container) {
+            $container->setParameter($this->getAlias().'.driver', $driver);
+            $container->setParameter($this->getAlias().'.driver.'.$driver, true);
+        }
     }
 
     /**

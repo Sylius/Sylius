@@ -38,10 +38,7 @@ class SyliusInventoryExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_inventory.driver', $driver);
-        $container->setParameter('sylius_inventory.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 

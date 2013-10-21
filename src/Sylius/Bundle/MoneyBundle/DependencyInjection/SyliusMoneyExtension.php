@@ -36,10 +36,7 @@ class SyliusMoneyExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_money.driver', $driver);
-        $container->setParameter('sylius_money.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $container->setParameter('sylius.money.locale', $config['locale']);
         $container->setParameter('sylius.money.currency', $config['currency']);

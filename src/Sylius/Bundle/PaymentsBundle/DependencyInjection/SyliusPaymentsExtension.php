@@ -36,10 +36,7 @@ class SyliusPaymentsExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_payments.driver', $driver);
-        $container->setParameter('sylius_payments.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
 
