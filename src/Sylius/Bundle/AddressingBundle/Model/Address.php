@@ -19,7 +19,7 @@ namespace Sylius\Bundle\AddressingBundle\Model;
 class Address implements AddressInterface
 {
     /**
-     * Addres id.
+     * Address id.
      *
      * @var mixed
      */
@@ -84,14 +84,14 @@ class Address implements AddressInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 

@@ -17,7 +17,7 @@ use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingMethodEligibilityChecker extends ObjectBehavior
+class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface $registry

@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ProductBundle\Builder;
 
+use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+
 /**
  * Product builder interface.
  *

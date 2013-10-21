@@ -64,6 +64,8 @@ class ZoneMatcher implements ZoneMatcherInterface
                 return $zones[$priority];
             }
         }
+
+        return null;
     }
 
     /**
@@ -104,10 +106,12 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * Checks if address belongs to particular zone member.
      *
-     * @param AddressInterface $address
-     * @param ZoneInterface    $zone
+     * @param AddressInterface    $address
+     * @param ZoneMemberInterface $member
      *
      * @return Boolean
+     *
+     * @throws \InvalidArgumentException
      */
     protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
@@ -116,19 +120,15 @@ class ZoneMatcher implements ZoneMatcherInterface
         switch ($type) {
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvince() && $address->getProvince() === $member->getProvince();
-            break;
 
             case ZoneInterface::TYPE_COUNTRY:
                 return null !== $address->getCountry() && $address->getCountry() === $member->getCountry();
-            break;
 
             case ZoneInterface::TYPE_ZONE:
                 return $this->addressBelongsToZone($address, $member->getZone());
-            break;
 
             default:
                 throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
-            break;
         }
     }
 
