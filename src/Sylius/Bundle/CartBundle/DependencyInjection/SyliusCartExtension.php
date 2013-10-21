@@ -58,24 +58,23 @@ class SyliusCartExtension extends Extension implements PrependExtensionInterface
     }
 
     /**
-     * Allow an extension to prepend the extension configurations.
-     *
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
     public function prepend(ContainerBuilder $container)
     {
-        if (!array_key_exists('SyliusSalesBundle', $container->getParameter('kernel.bundles'))) {
+        if (!$container->hasExtension('sylius_sales')) {
             return;
         }
 
-        $config = array('classes' => array(
-            'order_item' => array(
-                'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
-            ),
-            'order' => array(
-                'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
-            )
-        ));
-        $container->prependExtensionConfig('sylius_sales', $config);
+        $container->prependExtensionConfig('sylius_sales', array(
+            'classes' => array(
+                'order_item' => array(
+                    'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
+                ),
+                'order' => array(
+                    'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
+                )
+            ))
+        );
     }
 }

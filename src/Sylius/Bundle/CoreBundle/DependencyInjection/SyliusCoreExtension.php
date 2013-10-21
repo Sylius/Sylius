@@ -11,21 +11,38 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
-use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 
 /**
  * Core extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCoreExtension extends Extension implements PrependExtensionInterface
+class SyliusCoreExtension extends SyliusResourceExtension implements PrependExtensionInterface
 {
+    /**
+     * @var array
+     */
+    private $bundles = array(
+        'sylius_addressing',
+        'sylius_inventory',
+        'sylius_money',
+        'sylius_payments',
+        'sylius_payum',
+        'sylius_product',
+        'sylius_promotions',
+        'sylius_sales',
+        'sylius_settings',
+        'sylius_shipping',
+        'sylius_taxation',
+        'sylius_taxonomies',
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -39,11 +56,7 @@ class SyliusCoreExtension extends Extension implements PrependExtensionInterface
 
         $driver = $config['driver'];
 
-        if (!in_array($driver, SyliusCoreBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusCoreBundle', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
+        $this->loadDatabaseDriver($driver, $loader);
 
         $container->setParameter('sylius_core.driver', $driver);
         $container->setParameter('sylius_core.driver.'.$driver, true);
@@ -66,43 +79,11 @@ class SyliusCoreExtension extends Extension implements PrependExtensionInterface
      */
     public function prepend(ContainerBuilder $container)
     {
-        $configs = $container->getExtensionConfig($this->getAlias());
-        $config  = $this->processConfiguration(new Configuration(), $configs);
+        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        if (isset($config['driver'])) {
-            $config = array('driver' => $config['driver']);
-            foreach ($container->getExtensions() as $name => $extension) {
-                switch ($name) {
-                    case 'sylius_addressing':
-                    case 'sylius_inventory':
-                    case 'sylius_money':
-                    case 'sylius_payments':
-                    case 'sylius_product':
-                    case 'sylius_promotions':
-                    case 'sylius_sales':
-                    case 'sylius_settings':
-                    case 'sylius_shipping':
-                    case 'sylius_taxation':
-                    case 'sylius_taxonomies':
-                        $container->prependExtensionConfig($name, $config);
-                        break;
-                }
-            }
-        }
-    }
-
-    /**
-     * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
-    {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                $service = $service === 'form' ? 'form.type' : $service;
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+        foreach ($container->getExtensions() as $name => $extension) {
+            if (in_array($name, $this->bundles)) {
+                $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }
         }
     }

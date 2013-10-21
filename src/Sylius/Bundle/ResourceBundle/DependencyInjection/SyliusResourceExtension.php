@@ -46,6 +46,56 @@ class SyliusResourceExtension extends Extension
         }
     }
 
+    /**
+     * Remap class parameters.
+     *
+     * @param array            $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $model => $serviceClasses) {
+            foreach ($serviceClasses as $service => $class) {
+                $container->setParameter(sprintf('sylius.%s.%s.class', $service === 'form' ? 'form.type' : $service, $model), $class);
+            }
+        }
+    }
+
+    /**
+     * Remap validation group parameters.
+     *
+     * @param array            $validationGroups
+     * @param ContainerBuilder $container
+     */
+    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
+    {
+        foreach ($validationGroups as $model => $groups) {
+            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
+        }
+    }
+
+    /**
+     * Load bundle driver.
+     *
+     * @param string        $driver
+     * @param XmlFileLoader $loader
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function loadDatabaseDriver($driver, XmlFileLoader $loader)
+    {
+        $bundle = str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
+        if (!in_array($driver, call_user_func(array($bundle, 'getSupportedDrivers')))) {
+            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by %s.', $driver, basename($bundle)));
+        }
+
+        $loader->load(sprintf('driver/%s.xml', $driver));
+    }
+
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     */
     private function createResourceServices(array $configs, ContainerBuilder $container)
     {
         $factory = new ResourceServicesFactory($container);
@@ -53,9 +103,7 @@ class SyliusResourceExtension extends Extension
         foreach ($configs as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
 
-            $templates = array_key_exists('templates', $config) ? $config['templates'] : null;
-
-            $factory->create($prefix, $resourceName, $config['driver'], $config['classes'], $templates);
+            $factory->create($prefix, $resourceName, $config['driver'], $config['classes'], array_key_exists('templates', $config) ? $config['templates'] : null);
         }
     }
 }

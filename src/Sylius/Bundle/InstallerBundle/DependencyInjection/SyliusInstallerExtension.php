@@ -19,6 +19,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SyliusInstallerExtension extends Extension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $processor = new Processor();

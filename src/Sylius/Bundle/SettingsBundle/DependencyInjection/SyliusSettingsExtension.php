@@ -11,19 +11,18 @@
 
 namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
-use Sylius\Bundle\SettingsBundle\SyliusSettingsBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Settings system extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class SyliusSettingsExtension extends Extension
+class SyliusSettingsExtension extends SyliusResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -37,11 +36,7 @@ class SyliusSettingsExtension extends Extension
 
         $driver = $config['driver'];
 
-        if (!in_array($driver, SyliusSettingsBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusSettingsBundle.', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
+        $this->loadDatabaseDriver($driver, $loader);
 
         $container->setParameter('sylius_settings.driver', $driver);
         $container->setParameter('sylius_settings.driver.'.$driver, true);
