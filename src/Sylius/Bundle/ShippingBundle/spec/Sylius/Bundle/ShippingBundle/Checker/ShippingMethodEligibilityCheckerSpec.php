@@ -39,7 +39,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjecteInterface $subject
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface  $subject
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface   $shippingMethod
      * @param Sylius\Bundle\ShippingBundle\Model\RuleInterface             $rule
      */
