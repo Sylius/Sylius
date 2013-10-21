@@ -730,7 +730,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
         }
     }
 
-
     /**
      * @Given /^I added product "([^""]*)" to cart, with quantity "([^""]*)"$/
      */
@@ -809,6 +808,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      * Get current user instance.
      *
      * @return null|UserInterface
+     *
+     * @throws \Exception
      */
     private function getUser()
     {

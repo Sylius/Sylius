@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\ItemInterface;
-use Knp\Menu\Matcher\Matcher;
-use Knp\Menu\Matcher\Voter\UriVoter;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

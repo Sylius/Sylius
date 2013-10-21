@@ -17,6 +17,7 @@ use Payum\Exception\LogicException;
 use Payum\Exception\RequestNotSupportedException;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
@@ -40,7 +41,7 @@ class ObtainCreditCardAction implements ActionInterface
 
     /**
      * @param FormFactoryInterface $formFactory
-     * @param EngineInterface $templating
+     * @param EngineInterface      $templating
      */
     public function __construct(FormFactoryInterface $formFactory, EngineInterface $templating)
     {
@@ -93,7 +94,7 @@ class ObtainCreditCardAction implements ActionInterface
     }
 
     /**
-     * @return \Symfony\Component\Form\Form
+     * @return FormInterface
      */
     protected function createCreditCardForm()
     {

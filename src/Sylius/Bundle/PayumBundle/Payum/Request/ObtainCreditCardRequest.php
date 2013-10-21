@@ -57,4 +57,4 @@ class ObtainCreditCardRequest
     {
         return $this->creditCard;
     }
-} 
+}

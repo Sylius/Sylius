@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Request;
-
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * User account address controller.
@@ -25,7 +24,6 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
  */
 class AddressController extends ResourceController
 {
-
     /**
      * Get collection of user's addresses.
      */
@@ -61,6 +59,7 @@ class AddressController extends ResourceController
 
             if (!$event->isStopped()) {
                 $this->setFlash('success', 'create');
+
                 return $this->redirectTo($resource);
             }
 
@@ -100,17 +99,14 @@ class AddressController extends ResourceController
         $manager->persist($user);
         $manager->flush();
 
-        $this->get('session')->getFlashBag()->add(
-            'success',
-            $this->get('translator')->trans('sylius.account.address.flash.billing.success')
-        );
+        $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.billing.success'));
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
 
     /**
      * Set an address as shipping billing address for the current user.
-     *s
+     *
      * @return RedirectResponse
      */
     public function setAsDefaultShippingAddressAction()
@@ -125,10 +121,7 @@ class AddressController extends ResourceController
         $manager->persist($user);
         $manager->flush();
 
-        $this->get('session')->getFlashBag()->add(
-            'success',
-            $this->get('translator')->trans('sylius.account.address.flash.shipping.success')
-        );
+        $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.shipping.success'));
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
@@ -145,6 +138,7 @@ class AddressController extends ResourceController
      * Accesses address or throws 403
      *
      * @param AddressInterface $address
+     *
      * @throws AccessDeniedException
      */
     private function accessOr403(AddressInterface $address)
@@ -152,7 +146,5 @@ class AddressController extends ResourceController
         if (!$this->getUser()->hasAddress($address)) {
             throw new AccessDeniedException();
         }
-
-        return;
     }
 }
