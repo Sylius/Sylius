@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
-use Sylius\Bundle\InventoryBundle\SyliusInventoryBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Inventory dependency injection extension.
@@ -24,7 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends Extension
+class SyliusInventoryExtension extends SyliusResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -39,11 +38,7 @@ class SyliusInventoryExtension extends Extension
 
         $driver = $config['driver'];
 
-        if (!in_array($driver, SyliusInventoryBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusInventoryBundle.', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
+        $this->loadDatabaseDriver($driver, $loader);
 
         $container->setParameter('sylius_inventory.driver', $driver);
         $container->setParameter('sylius_inventory.driver.'.$driver, true);

@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\CartBundle\Purger;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-
 /**
  * Interface for the expired carts purger.
  *

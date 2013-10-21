@@ -46,8 +46,8 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      * Constructor.
      *
      * @param OrderRepositoryInterface $repository
-     * @param null|integer $numberLength
-     * @param null|integer $startNumber
+     * @param integer                  $numberLength
+     * @param integer                  $startNumber
      */
     public function __construct(OrderRepositoryInterface $repository, $numberLength = 9, $startNumber = 1)
     {

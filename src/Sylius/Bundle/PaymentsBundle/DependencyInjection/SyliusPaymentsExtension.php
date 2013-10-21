@@ -11,19 +11,18 @@
 
 namespace Sylius\Bundle\PaymentsBundle\DependencyInjection;
 
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentsBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Sylius payments component extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusPaymentsExtension extends Extension
+class SyliusPaymentsExtension extends SyliusResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -37,11 +36,7 @@ class SyliusPaymentsExtension extends Extension
 
         $driver = $config['driver'];
 
-        if (!in_array($driver, SyliusPaymentsBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusPaymentsBundle.', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
+        $this->loadDatabaseDriver($driver, $loader);
 
         $container->setParameter('sylius_payments.driver', $driver);
         $container->setParameter('sylius_payments.driver.'.$driver, true);
@@ -60,34 +55,5 @@ class SyliusPaymentsExtension extends Extension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
-    }
-
-    /**
-     * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
-    {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                $service = $service === 'form' ? 'form.type' : $service;
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
-            }
-        }
-    }
-
-    /**
-     * Remap validation group parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
-    {
-        foreach ($validationGroups as $model => $groups) {
-            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
-        }
     }
 }
