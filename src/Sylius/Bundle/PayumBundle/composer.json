@@ -7,12 +7,20 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Kotlyar Maksim",
-            "email": "kotlyar.maksim@gmail.com"
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusPaymentsBundle/contributors"
+            "name":     "Kotlyar Maksim",
+            "email":    "kotlyar.maksim@gmail.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
@@ -29,7 +37,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\PayumBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\PayumBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/PayumBundle",
     "extra": {
