@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\ResourceServicesFactory;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,25 +26,70 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusResourceExtension extends Extension
 {
+    const CONFIGURE_LOADER     = 1;
+    const CONFIGURE_DATABASE   = 2;
+    const CONFIGURE_PARAMETERS = 4;
+    const CONFIGURE_VALIDATORS = 8;
+
+    protected $configDir;
+    protected $configFiles = array(
+        'services',
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $this->configDir = __DIR__.'/../Resources/config/container';
 
-        $config = $processor->processConfiguration($configuration, $config);
-
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
-        $loader->load('services.xml');
+        list($config) = $this->configure($config, new Configuration(), $container);
 
         if (isset($config['resources'])) {
             $this->createResourceServices($config['resources'], $container);
         }
-        if (!$container->hasParameter('sylius.config.classes')) {
-            $container->setParameter('sylius.config.classes', array());
+    }
+
+    /**
+     * @param array                  $config
+     * @param ConfigurationInterface $configuration
+     * @param ContainerBuilder       $container
+     * @param mixed                  $configure
+     *
+     * @return array
+     */
+    public function configure(array $config, ConfigurationInterface $configuration, ContainerBuilder $container, $configure = self::CONFIGURE_LOADER)
+    {
+        $processor = new Processor();
+        $config    = $processor->processConfiguration($configuration, $config);
+
+        $loader = new XmlFileLoader($container, new FileLocator($this->configDir));
+
+        foreach ($this->configFiles as $filename) {
+            $loader->load($filename.'.xml');
         }
+
+        if ($configure & self::CONFIGURE_DATABASE) {
+            $this->loadDatabaseDriver($config['driver'], $loader, $container);
+        }
+
+        $classes = isset($config['classes']) ? $config['classes'] : array();
+
+        if ($configure & self::CONFIGURE_PARAMETERS) {
+            $this->mapClassParameters($classes, $container);
+        }
+
+        if ($configure & self::CONFIGURE_VALIDATORS) {
+            $this->mapValidationGroupParameters($config['validation_groups'], $container);
+        }
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        }
+
+        $container->setParameter('sylius.config.classes', $classes);
+
+        return array($config, $loader);
     }
 
     /**

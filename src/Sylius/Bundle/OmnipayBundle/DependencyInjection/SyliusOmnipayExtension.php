@@ -49,9 +49,7 @@ class SyliusOmnipayExtension extends Extension
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
 
-        $container->setDefinition('sylius.omnipay.gateway_factory', new Definition(
-                'Omnipay\\Common\\GatewayFactory'
-        ));
+        $container->setDefinition('sylius.omnipay.gateway_factory', new Definition('Omnipay\\Common\\GatewayFactory'));
 
         foreach ($config['gateways'] as $name => $parameters) {
             $this->createGatewayService($container, $name, $parameters);
@@ -77,9 +75,9 @@ class SyliusOmnipayExtension extends Extension
 
         $definition = new Definition($class);
         $definition
-                ->setFactoryService('sylius.omnipay.gateway_factory')
-                ->setFactoryMethod('create')
-                ->setArguments(array($type))
+            ->setFactoryService('sylius.omnipay.gateway_factory')
+            ->setFactoryMethod('create')
+            ->setArguments(array($type))
         ;
 
         $reflection = new \ReflectionClass($class);

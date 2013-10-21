@@ -12,10 +12,7 @@
 namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Settings system extension.
@@ -29,14 +26,9 @@ class SyliusSettingsExtension extends SyliusResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
+        $this->configDir = __DIR__.'/../Resources/config';
 
-        $config = $processor->processConfiguration(new Configuration(), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $driver = $config['driver'];
-
-        $this->loadDatabaseDriver($driver, $loader, $container);
+        list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE);
 
         $classes = $config['classes'];
         $parameterClasses = $classes['parameter'];
@@ -54,7 +46,5 @@ class SyliusSettingsExtension extends SyliusResourceExtension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
-
-        $loader->load('services.xml');
     }
 }
