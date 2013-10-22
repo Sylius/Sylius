@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ShippingBundle\Form\ChoiceList\ShippingMethodChoiceListFactoryInterface;
 use Sylius\Bundle\ShippingBundle\Resolver\MethodsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -33,13 +34,22 @@ class ShippingMethodChoiceType extends AbstractType
     protected $resolver;
 
     /**
+     * Shipping Method Choice List Factory
+     *
+     * @var ShippingMethodChoiceListFactoryInterface
+     */
+    protected $choiceFactory;
+
+    /**
      * Constructor.
      *
      * @param MethodsResolverInterface $resolver
+     * @param ShippingMethodChoiceListFactoryInterface $choiceFactory
      */
-    public function __construct(MethodsResolverInterface $resolver)
+    public function __construct(MethodsResolverInterface $resolver, ShippingMethodChoiceListFactoryInterface $choiceFactory = null)
     {
         $this->resolver = $resolver;
+        $this->choiceFactory = $choiceFactory;
     }
 
     /**
@@ -48,11 +58,12 @@ class ShippingMethodChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $methodsResolver = $this->resolver;
+        $choiceFactory = $this->choiceFactory;
 
-        $choiceList = function (Options $options) use ($methodsResolver) {
+        $choiceList = function (Options $options) use ($methodsResolver, $choiceFactory) {
             $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
 
-            return new ObjectChoiceList($methods);
+            return $choiceFactory ? $choiceFactory->createChoiceList($options['subject'], $methods) : new ObjectChoiceList($methods);
         };
 
         $resolver
