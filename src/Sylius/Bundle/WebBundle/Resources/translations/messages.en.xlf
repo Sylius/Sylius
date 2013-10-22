@@ -446,14 +446,6 @@
         <source>sylius.cart.summary.coupon</source>
       <target>If you have a promotion coupon, enter it here</target>
       </trans-unit>
-      <trans-unit id="029750f7e228fe698712c71e11d7be1e413d8ebd" resname="sylius.cart.summary.coupon_added">
-        <source>sylius.cart.summary.coupon_added</source>
-        <target>Your promotion coupon has been added to the cart.</target>
-      </trans-unit>
-      <trans-unit id="e371c7b824e92f76045dbab70c3ca59f083cd41f" resname="sylius.cart.summary.coupon_invalid">
-        <source>sylius.cart.summary.coupon_invalid</source>
-        <target>Your promotion coupon is not valid.</target>
-      </trans-unit>
       <trans-unit id="76d49756fa413fa05e6221e3bab2a029d1e582b4" resname="sylius.cart.summary.add_coupon">
         <source>sylius.cart.summary.add_coupon</source>
         <target>OK</target>

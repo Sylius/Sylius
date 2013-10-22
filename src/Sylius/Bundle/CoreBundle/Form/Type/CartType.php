@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
-use Sylius\Bundle\PromotionsBundle\Form\Type\CouponToCodeType;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

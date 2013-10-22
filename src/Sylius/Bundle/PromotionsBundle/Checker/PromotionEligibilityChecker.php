@@ -14,6 +14,9 @@ namespace Sylius\Bundle\PromotionsBundle\Checker;
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Checks if promotion rules are eligible.
@@ -22,14 +25,24 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
  */
 class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
+    /**
+     * @var RuleCheckerRegistryInterface
+     */
     protected $registry;
 
     /**
-     * @param RuleCheckerRegistryInterface $registry
+     * @var EventDispatcher
      */
-    public function __construct(RuleCheckerRegistryInterface $registry)
+    protected $dispatcher;
+
+    /**
+     * @param RuleCheckerRegistryInterface $registry
+     * @param EventDispatcher $dispatcher
+     */
+    public function __construct(RuleCheckerRegistryInterface $registry, EventDispatcher $dispatcher)
     {
         $this->registry = $registry;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -71,6 +84,9 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             $checker = $this->registry->getChecker($rule->getType());
 
             if (false === $checker->isEligible($subject, $rule->getConfiguration())) {
+                if ($promotion === $subject->getPromotionCoupon()->getPromotion()) {
+                    $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
+                }
                 return false;
             }
         }
@@ -82,6 +98,10 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
         $coupon = $subject->getPromotionCoupon();
         if ($coupon && !$promotion->hasCoupon($coupon)) {
             return false;
+        }
+
+        if ($coupon) {
+            $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, new GenericEvent($promotion));
         }
 
         return true;
