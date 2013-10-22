@@ -224,12 +224,10 @@ class OrderSpec extends ObjectBehavior
         $this->getTaxAdjustments()->count()->shouldReturn(0); //tax adjustment has been removed
     }
 
-    /*
     function it_should_not_have_currency_defined_by_default()
     {
         $this->getCurrency()->shouldReturn(null);
     }
-    */
 
     function it_should_allow_defining_currency()
     {

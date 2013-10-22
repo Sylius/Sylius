@@ -231,8 +231,7 @@
         </service>
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
             <argument type="service" id="sylius.currency_context" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderCurrency" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderCurrency" />
+            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderCurrency" />
         </service>
         <service id="sylius.listener.restricted_zone" class="%sylius.listener.restricted_zone.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
