@@ -241,4 +241,25 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @param CouponInterface $coupon
      */
     public function setPromotionCoupon(CouponInterface $coupon = null);
+
+    /**
+     * Get the shipping state.
+     *
+     * @return string
+     */
+    public function getShippingState();
+
+    /**
+     * Set shipping state.
+     *
+     * @param string $state
+     */
+    public function setShippingState($state);
+
+    /**
+     * Has any pending inventory?
+     *
+     * @return Boolean
+     */
+    public function isBackorder();
 }

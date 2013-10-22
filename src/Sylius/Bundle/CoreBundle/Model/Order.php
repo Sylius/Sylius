@@ -83,6 +83,14 @@ class Order extends Cart implements OrderInterface
     protected $promotionCoupon;
 
     /**
+     * Order shipping state.
+     * It depends on the status of all order shipments.
+     *
+     * @var string
+     */
+    protected $shippingState;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -92,6 +100,8 @@ class Order extends Cart implements OrderInterface
         $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
         $this->currency = 'EUR'; // @todo: Temporary
+
+        $this->shippingState = OrderShippingStates::READY;
     }
 
     /**
@@ -427,11 +437,33 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function getShippingState()
     {
-        $this->createdAt = $createdAt;
+        return $this->shippingState;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingState($state)
+    {
+        $this->shippingState = $state;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBackorder()
+    {
+        foreach ($this->inventoryUnits as $unit) {
+            if (InventoryUnitInterface::STATE_BACKORDERED === $unit->getInventoryState()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

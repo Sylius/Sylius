@@ -22,6 +22,7 @@
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
 
         <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandler</parameter>
+        <parameter key="sylius.order_processing.state_resolver.class">Sylius\Bundle\CoreBundle\OrderProcessing\StateResolver</parameter>
         <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
         <parameter key="sylius.order_processing.payment_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessor</parameter>
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
@@ -29,6 +30,7 @@
 
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
+        <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
@@ -148,6 +150,7 @@
             <argument type="service" id="sylius.inventory_operator" />
             <argument type="service" id="sylius.inventory_unit_factory" />
         </service>
+        <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
             <argument type="service" id="sylius.repository.shipment" />
         </service>
@@ -184,6 +187,10 @@
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
+        </service>
+        <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
+            <argument type="service" id="sylius.order_processing.state_resolver" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />

@@ -13,9 +13,10 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
+use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
-*
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderSpec extends ObjectBehavior
@@ -234,5 +235,52 @@ class OrderSpec extends ObjectBehavior
     {
         $this->setCurrency('PLN');
         $this->getCurrency()->shouldReturn('PLN');
+    }
+
+    function it_has_ready_shipping_state_by_default()
+    {
+        $this->getShippingState()->shouldReturn(OrderShippingStates::READY);
+    }
+
+    function its_shipping_state_is_mutable()
+    {
+        $this->setShippingState(OrderShippingStates::SHIPPED);
+        $this->getShippingState()->shouldReturn(OrderShippingStates::SHIPPED);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     */
+    function it_is_a_backorder_if_contains_at_least_one_backordered_unit($unit1, $unit2)
+    {
+        $unit1->setOrder($this)->shouldBeCalled();
+        $unit2->setOrder($this)->shouldBeCalled();
+
+        $this->addInventoryUnit($unit1);
+        $this->addInventoryUnit($unit2);
+
+        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
+        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+
+        $this->shouldBeBackorder();
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     */
+    function it_not_a_backorder_if_contains_no_backordered_units($unit1, $unit2)
+    {
+        $unit1->setOrder($this)->shouldBeCalled();
+        $unit2->setOrder($this)->shouldBeCalled();
+
+        $this->addInventoryUnit($unit1);
+        $this->addInventoryUnit($unit2);
+
+        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+
+        $this->shouldNotBeBackorder();
     }
 }
