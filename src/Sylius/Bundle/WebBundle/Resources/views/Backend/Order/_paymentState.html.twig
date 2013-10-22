@@ -1,4 +1,4 @@
-{% set state = order.payment ? order.payment.state : 'new' %}
+{% set state = order.payment.state %}
 {% set label = 'primary' %}
 
 {% if 'pending' == state %}

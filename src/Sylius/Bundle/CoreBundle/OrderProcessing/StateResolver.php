@@ -46,6 +46,7 @@ class StateResolver implements StateResolverInterface
     private function getShippingState(OrderInterface $order)
     {
         $states = array();
+
         foreach ($order->getShipments() as $shipment) {
             $states[] = $shipment->getState();
         }
