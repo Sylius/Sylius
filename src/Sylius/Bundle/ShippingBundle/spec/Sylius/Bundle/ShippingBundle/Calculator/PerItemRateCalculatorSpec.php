@@ -50,18 +50,12 @@ class PerItemRateCalculatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     * @param Doctrine\Common\Collections\Collection                     $shippingItems
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
      */
-    function it_should_calculate_the_total_with_the_per_item_amount_configured_on_the_method($shipment, $shippingItems, $method)
+    function it_should_calculate_the_total_with_the_per_item_amount_configured_on_the_method($subject)
     {
-        $shipment->getMethod()->willReturn($method);
-        $method->getConfiguration()->willReturn(array('amount' => 200));
+        $subject->getShippingItemCount()->willReturn(11);
 
-        $shippingItems->count()->willReturn(11);
-        $shipment->getItems()->willReturn($shippingItems);
-
-        $this->calculate($shipment)->shouldReturn(2200);
+        $this->calculate($subject, array('amount' => 200))->shouldReturn(2200);
     }
 }

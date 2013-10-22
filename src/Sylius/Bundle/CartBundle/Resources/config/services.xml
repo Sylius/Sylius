@@ -25,7 +25,7 @@
 
         <parameter key="sylius.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
         <parameter key="sylius.cart_flash_listener.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
-        
+
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
     </parameters>
 
@@ -89,7 +89,7 @@
             <argument type="service" id="translator" />
             <call method="setMessages"/>
         </service>
-        
+
         <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="sylius.repository.cart" />

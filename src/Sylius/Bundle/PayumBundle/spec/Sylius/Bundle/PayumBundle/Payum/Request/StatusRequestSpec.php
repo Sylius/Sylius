@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Request;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class StatusRequestSpec extends ObjectBehavior

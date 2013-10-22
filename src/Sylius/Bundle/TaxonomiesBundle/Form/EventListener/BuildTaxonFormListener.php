@@ -48,7 +48,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_BIND => 'postBind'
+            FormEvents::POST_SUBMIT  => 'postBind'
         );
     }
 
@@ -60,7 +60,6 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $taxon = $event->getData();
-        $form = $event->getForm();
 
         if (null === $taxon) {
             return;
@@ -68,7 +67,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
 
         $taxonomy = $taxon->getTaxonomy();
 
-        $form->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
+        $event->getForm()->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
             'taxonomy'    => $taxonomy,
             'filter'      => $this->getFilterTaxonOption($taxon),
             'required'    => false,
@@ -105,12 +104,8 @@ class BuildTaxonFormListener implements EventSubscriberInterface
         $closure = null;
 
         if ($taxon->getId()) {
-            $closure  = function($entry) use ($taxon) {
-                if ($entry->getId() != $taxon->getId()) {
-                    return true;
-                }
-
-                return false;
+            $closure = function($entry) use ($taxon) {
+                return $entry->getId() != $taxon->getId();
             };
         }
 

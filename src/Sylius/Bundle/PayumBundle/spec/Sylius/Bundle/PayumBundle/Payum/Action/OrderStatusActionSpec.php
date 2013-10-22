@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class OrderStatusActionSpec extends ObjectBehavior
 {

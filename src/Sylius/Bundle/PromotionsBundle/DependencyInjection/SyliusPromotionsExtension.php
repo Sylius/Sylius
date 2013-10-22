@@ -37,10 +37,7 @@ class SyliusPromotionsExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_promotions.driver', $driver);
-        $container->setParameter('sylius_promotions.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $classes = $config['classes'];
 

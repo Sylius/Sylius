@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\PayumBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class PaymentSecurityTokenSpec extends ObjectBehavior
 {

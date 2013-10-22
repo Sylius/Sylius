@@ -56,10 +56,7 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_core.driver', $driver);
-        $container->setParameter('sylius_core.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $loader->load('services.xml');
 

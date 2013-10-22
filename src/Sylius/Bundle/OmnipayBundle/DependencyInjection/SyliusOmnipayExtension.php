@@ -103,5 +103,4 @@ class SyliusOmnipayExtension extends Extension
     {
         return 'sylius_omnipay';
     }
-
 }

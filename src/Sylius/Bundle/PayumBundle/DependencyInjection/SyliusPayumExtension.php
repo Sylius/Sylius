@@ -32,10 +32,7 @@ class SyliusPayumExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_payum.driver', $driver);
-        $container->setParameter('sylius_payum.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $loader->load('services.xml');
 

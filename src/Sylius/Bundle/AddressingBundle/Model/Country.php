@@ -22,13 +22,29 @@ use Doctrine\Common\Collections\Collection;
 class Country implements CountryInterface
 {
     /**
-     * Addres id.
+     * Country id.
      *
      * @var mixed
      */
     protected $id;
+
+    /**
+     * Country name.
+     *
+     * @var string
+     */
     protected $name;
+
+    /**
+     * Country name in ISO format.
+     *
+     * @var string
+     */
     protected $isoName;
+
+    /**
+     * @var ProvinceInterface[]
+     */
     protected $provinces;
 
     public function __construct()

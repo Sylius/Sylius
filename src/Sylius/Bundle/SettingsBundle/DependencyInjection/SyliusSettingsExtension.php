@@ -36,10 +36,7 @@ class SyliusSettingsExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
-
-        $container->setParameter('sylius_settings.driver', $driver);
-        $container->setParameter('sylius_settings.driver.'.$driver, true);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $classes = $config['classes'];
         $parameterClasses = $classes['parameter'];

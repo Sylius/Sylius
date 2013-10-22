@@ -37,14 +37,11 @@ class SyliusProductExtension extends SyliusResourceExtension
 
         $driver = $config['driver'];
 
-        $this->loadDatabaseDriver($driver, $loader);
+        $this->loadDatabaseDriver($driver, $loader, $container);
 
         $loader->load('products.xml');
         $loader->load('properties.xml');
         $loader->load('prototypes.xml');
-
-        $container->setParameter('sylius_product.driver', $driver);
-        $container->setParameter('sylius_product.driver.'.$driver, true);
 
         $classes = $config['classes'];
 

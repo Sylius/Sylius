@@ -56,4 +56,3 @@ sylius_account_address_set_default_shipping:
         _controller: sylius.controller.address:setAsDefaultShippingAddressAction
     requirements:
         id:  \d+
-
