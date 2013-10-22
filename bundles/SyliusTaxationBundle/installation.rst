@@ -77,7 +77,7 @@ Add the following to your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_taxation:
-        resource: @SyliusTaxation/Resources/config/routing.yml
+        resource: @SyliusTaxationBundle/Resources/config/routing.yml
 
 Updating database schema
 ------------------------
