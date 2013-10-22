@@ -1,11 +1,20 @@
 <?php
 
-namespace Sylius\Bundle\ReviewBundle\Model;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
+namespace Sylius\Bundle\ReviewBundle\Model;
 
 /**
  * Review
+ *
+ * @author Daniel Richter <nexyz9@gmail.com>
  */
 class Review implements ReviewInterface
 {

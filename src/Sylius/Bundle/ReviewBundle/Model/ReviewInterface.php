@@ -1,9 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\ReviewBundle\Model;
 
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
+/**
+ * ReviewInterface
+ *
+ * @author Daniel Richter <nexyz9@gmail.com>
+ */
 interface ReviewInterface extends TimestampableInterface
 {
     const MODERATION_STATUS_UNMODERATED = 'new';
@@ -55,14 +69,14 @@ interface ReviewInterface extends TimestampableInterface
     public function getModerationStatus();
 
     /**
-     * Set guestReviewer.
+     * Set GuestReviewer.
      *
      * @param GuestReviewerInterface $guestReviewer
      */
     public function setGuestReviewer(GuestReviewerInterface $guestReviewer);
 
     /**
-     * Get guestReviewer.
+     * Get GuestReviewer.
      *
      * @return GuestReviewerInterface
      */

@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Sylius review component extension.
  *
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Daniel Richter <nexyz9@gmail.com>
  */
 class SyliusReviewExtension extends Extension
 {

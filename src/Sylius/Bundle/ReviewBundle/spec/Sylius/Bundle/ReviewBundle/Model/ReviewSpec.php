@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\Model;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Daniel Richter <nexyz9@gmail.com>
  */
 class ReviewSpec extends ObjectBehavior
 {
