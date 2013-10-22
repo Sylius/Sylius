@@ -1,18 +1,25 @@
-{{ form_errors(form) }}
-
 {{ form_start(form, { attr: {class: 'form-horizontal' } }) }}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'sylius.review.form_header'|trans }}</h3>
+    </div>
+    <div class="panel-body">
 
-    {{ form_row(form.rating) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.comment) }}
+        {{ form_errors(form) }}
 
-    {% if form.guest_reviewer is defined %}
-        <div>
-            {{ form_row(form.guest_reviewer.name) }}
-            {{ form_row(form.guest_reviewer.email) }}
-        </div>
-    {% endif %}
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {{ form_row(form.rating, { 'attr': { 'class': 'rating-widget' } }) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.comment) }}
+
+        {% if form.guest_reviewer is defined %}
+            <div>
+                {{ form_row(form.guest_reviewer.name) }}
+                {{ form_row(form.guest_reviewer.email) }}
+            </div>
+        {% endif %}
+
+    </div>
+    <div class="panel-footer">
+        <button type="submit" class="btn btn-primary">{{ 'sylius.review.submit'|trans }}</button>
     </div>
 {{ form_end(form) }}

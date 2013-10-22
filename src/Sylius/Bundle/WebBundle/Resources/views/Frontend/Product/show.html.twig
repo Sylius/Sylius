@@ -116,12 +116,19 @@
 <hr />
 
 <div>
-    <h3>Reviews</h3>
-    {% render(url("sylius_partial_product_review_list", { 'slug': product.slug })) %}
-
-    <div class="well">
-        <h3>Write your own review</h3>
-        {% render(url("sylius_partial_product_review_form", { 'slug': product.slug })) %}
-    </div>
+    <h3>{{ 'sylius.review.header'|trans }}</h3>
+    {% render(url("sylius_partial_product_review_list", { 'slug': product.slug, limit: 3 })) %}
+    <hr />
+    {% render(url("sylius_partial_product_review_form", { 'slug': product.slug })) %}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/frontend_raty.js'
+    '@SyliusWebBundle/Resources/assets/js/jquery.raty.js'
+    '@SyliusWebBundle/Resources/assets/js/sylius-ratings.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

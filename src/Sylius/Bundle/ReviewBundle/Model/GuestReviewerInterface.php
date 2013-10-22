@@ -16,49 +16,49 @@ namespace Sylius\Bundle\ReviewBundle\Model;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-interface GuestReviewerInterface 
+interface GuestReviewerInterface
 {
-	/**
-     * @param string $name
+    /**
+     * @param  string               $name
      * @return GuestReviewInterface
      */
-	public function setName($name);
+    public function setName($name);
 
     /**
      * @return string
      */
-	public function getName();
+    public function getName();
 
     /**
-     * @param string $email
+     * @param  string          $email
      * @return ReviewInterface
      */
-	public function setEmail($email);
+    public function setEmail($email);
 
     /**
      * @return string
      */
-	public function getEmail();
+    public function getEmail();
 
     /**
-     * @param \DateTime $createdAt
+     * @param  \DateTime       $createdAt
      * @return ReviewInterface
      */
-	public function setCreatedAt(\DateTime $createdAt);
+    public function setCreatedAt(\DateTime $createdAt);
 
     /**
      * @return datetime
      */
-	public function getCreatedAt();
+    public function getCreatedAt();
 
     /**
-     * @param \DateTime $updatedAt
+     * @param  \DateTime       $updatedAt
      * @return ReviewInterface
      */
-	public function setUpdatedAt(\DateTime $updatedAt);
+    public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
      * @return datetime
      */
-	public function getUpdatedAt();
+    public function getUpdatedAt();
 }

@@ -27,10 +27,11 @@ class ReviewAdminType extends ReviewType
         $builder->remove('rating');
         $builder->add('moderationStatus', 'choice', array(
             'choices' => array(
-                ReviewInterface::MODERATION_STATUS_UNMODERATED => 'Unmoderated',
-                ReviewInterface::MODERATION_STATUS_APPROVED => 'Approved',
-                ReviewInterface::MODERATION_STATUS_REJECTED => 'Rejected'
-            )
+                ReviewInterface::MODERATION_STATUS_UNMODERATED => 'sylius.form.review.moderation_status.unmoderated',
+                ReviewInterface::MODERATION_STATUS_APPROVED => 'sylius.form.review.moderation_status.approved',
+                ReviewInterface::MODERATION_STATUS_REJECTED => 'sylius.form.review.moderation_status.rejected'
+            ),
+            'label' => 'sylius.form.review.moderation_status.label'
         ));
     }
 

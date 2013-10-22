@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTar
 
 class SyliusReviewBundle extends Bundle
 {
-	/**
+    /**
      * Return array of currently supported database drivers.
      *
      * @return array

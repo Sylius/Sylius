@@ -32,8 +32,13 @@ class GuestReviewerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        	->add('name', 'text')
-        	->add('email', 'email');
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.guest_reviewer.name.label'
+            ))
+            ->add('email', 'email', array(
+                'label' => 'sylius.form.guest_reviewer.email.label'
+            ))
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

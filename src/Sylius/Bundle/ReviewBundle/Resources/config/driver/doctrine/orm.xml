@@ -17,14 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.repository.review.class">Sylius\Bundle\ReviewBundle\Doctrine\ORM\ReviewRepository</parameter>
+        <parameter key="sylius.repository.review.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.guest_reviewer.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
         <service id="sylius.manager.review" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.manager.guest_reviewer" alias="doctrine.orm.entity_manager" />
-
         <service id="sylius.repository.review" class="%sylius.repository.review.class%">
             <argument type="service" id="sylius.manager.review" />
             <argument type="service">
@@ -38,6 +36,7 @@
             </argument>
         </service>
 
+        <service id="sylius.manager.guest_reviewer" alias="doctrine.orm.entity_manager" />
         <service id="sylius.repository.guest_reviewer" class="%sylius.repository.guest_reviewer.class%">
             <argument type="service" id="sylius.manager.guest_reviewer" />
             <argument type="service">

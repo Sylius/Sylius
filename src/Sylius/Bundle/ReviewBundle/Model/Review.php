@@ -58,7 +58,6 @@ class Review implements ReviewInterface
      */
     protected $guestReviewer;
 
-
     /**
      * Constructor
      */
@@ -82,7 +81,7 @@ class Review implements ReviewInterface
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -100,7 +99,7 @@ class Review implements ReviewInterface
     public function setRating($rating)
     {
         $this->rating = $rating;
-    
+
         return $this;
     }
 
@@ -118,7 +117,7 @@ class Review implements ReviewInterface
     public function setComment($comment)
     {
         $this->comment = $comment;
-    
+
         return $this;
     }
 
@@ -136,7 +135,7 @@ class Review implements ReviewInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
@@ -154,7 +153,7 @@ class Review implements ReviewInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
@@ -172,7 +171,7 @@ class Review implements ReviewInterface
     public function setModerationStatus($moderationStatus)
     {
         $this->moderationStatus = $moderationStatus;
-    
+
         return $this;
     }
 

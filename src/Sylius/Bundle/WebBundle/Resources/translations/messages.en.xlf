@@ -2066,6 +2066,26 @@
         <source>sylius.zone_member.members</source>
         <target>Members</target>
       </trans-unit>
+      <trans-unit id="7bfdc70bdd4e73899d647ec6a50fa1f2" resname="sylius.review.header">
+        <source>sylius.review.header</source>
+        <target>Reviews</target>
+      </trans-unit>
+      <trans-unit id="16c8650d97724412911bcd24279038c1" resname="sylius.review.form_header">
+        <source>sylius.review.form_header</source>
+        <target>Write your own review</target>
+      </trans-unit>
+      <trans-unit id="9a3bac3309feb134ba1a403df30905d1" resname="sylius.review.submit">
+        <source>sylius.review.submit</source>
+        <target>Submit Review</target>
+      </trans-unit>
+      <trans-unit id="126b2336ed4841c3f41e741c9718d551" resname="sylius.review.no_results">
+        <source>sylius.review.no_results</source>
+        <target>There are no reviews yet.</target>
+      </trans-unit>
+      <trans-unit id="126b2336ed4841c3f41e741c9718d551" resname="sylius.review.author">
+        <source>sylius.review.author</source>
+        <target>by %name%</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

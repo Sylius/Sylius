@@ -31,10 +31,20 @@ class ReviewType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $ratingRange = range(1, $options['rating_steps']);
+
         $builder
-            ->add('rating', 'choice', array('choices' => array_combine(range(1,5), range(1,5))))
-            ->add('title', 'text')
-            ->add('comment', 'textarea');
+            ->add('rating', 'choice', array(
+                'choices' => array_combine($ratingRange, $ratingRange),
+                'empty_value' => 'sylius.form.review.rating.empty_value',
+                'label' => 'sylius.form.review.rating.label'
+            ))
+            ->add('title', 'text', array(
+                'label' => 'sylius.form.review.title.label'
+            ))
+            ->add('comment', 'textarea', array(
+                'label' => 'sylius.form.review.comment.label'
+            ));
 
         if ($options['allow_guest']) {
             $builder->add('guest_reviewer', 'sylius_guest_reviewer');
@@ -44,8 +54,9 @@ class ReviewType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-           'data_class' => $this->dataClass,
-           'allow_guest' => false
+            'rating_steps' => 5,
+            'data_class' => $this->dataClass,
+            'allow_guest' => false
         ));
     }
 

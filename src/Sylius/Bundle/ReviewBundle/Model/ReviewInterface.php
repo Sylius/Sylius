@@ -25,46 +25,46 @@ interface ReviewInterface extends TimestampableInterface
     const MODERATION_STATUS_REJECTED = 'rejected';
 
     /**
-     * @param string $title
+     * @param  string          $title
      * @return ReviewInterface
      */
     public function setTitle($title);
 
     /**
-     * @return string 
+     * @return string
      */
     public function getTitle();
 
     /**
-     * @param integer $rating
+     * @param  integer         $rating
      * @return ReviewInterface
      */
     public function setRating($rating);
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getRating();
 
     /**
-     * @param string $comment
+     * @param  string          $comment
      * @return ReviewInterface
      */
     public function setComment($comment);
 
     /**
-     * @return string 
+     * @return string
      */
     public function getComment();
 
     /**
-     * @param string $moderationStatus
+     * @param  string          $moderationStatus
      * @return ReviewInterface
      */
     public function setModerationStatus($moderationStatus);
 
     /**
-     * @return string 
+     * @return string
      */
     public function getModerationStatus();
 

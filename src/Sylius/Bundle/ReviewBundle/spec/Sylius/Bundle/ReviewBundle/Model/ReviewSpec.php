@@ -18,24 +18,24 @@ use PhpSpec\ObjectBehavior;
  */
 class ReviewSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Model\Review');
     }
 
-    function it_should_be_Sylius_review()
+    public function it_should_be_Sylius_review()
     {
         $this->shouldImplement('Sylius\Bundle\ReviewBundle\Model\ReviewInterface');
     }
 
-    function it_should_not_have_id_by_default()
+    public function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function its_rating_should_be_mutable()
+    public function its_rating_should_be_mutable()
     {
-    	$this->setRating(1);
-    	$this->getRating()->shouldReturn(1);
+        $this->setRating(1);
+        $this->getRating()->shouldReturn(1);
     }
 }
