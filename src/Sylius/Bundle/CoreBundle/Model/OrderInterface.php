@@ -236,22 +236,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function setCurrency($currency);
 
     /**
-     * Get coupon code.
-     *
-     * @return string
-     */
-    public function getCouponCode();
-
-    /**
-     * Set coupon code.
-     *
-     * @param string
-     *
-     * @return OrderInterface
-     */
-    public function setCouponCode($couponCode);
-
-    /**
      * Set promotion coupon.
      *
      * @param CouponInterface $coupon

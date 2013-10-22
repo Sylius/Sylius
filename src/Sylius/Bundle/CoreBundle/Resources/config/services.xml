@@ -52,7 +52,6 @@
 
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
-        <parameter key="sylius.promotion.coupon_handler.class">Sylius\Bundle\CoreBundle\Promotion\CouponHandler</parameter>
 
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
     </parameters>
@@ -193,7 +192,6 @@
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
-            <argument type="service" id="sylius.promotion.coupon_handler" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" />
         </service>
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
@@ -245,10 +243,6 @@
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
             <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
-        </service>
-        <service id="sylius.promotion.coupon_handler" class="%sylius.promotion.coupon_handler.class%">
-            <argument type="service" id="sylius.repository.promotion_coupon" />
-            <argument type="service" id="session" />
         </service>
 
         <!-- money -->

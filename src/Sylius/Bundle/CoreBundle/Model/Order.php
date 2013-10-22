@@ -76,13 +76,6 @@ class Order extends Cart implements OrderInterface
     protected $currency;
 
     /**
-     * Coupon code
-     *
-     * @var string
-     */
-    protected $couponCode;
-
-    /**
      * Promotion coupon
      *
      * @var CouponInterface
@@ -423,22 +416,6 @@ class Order extends Cart implements OrderInterface
         $this->currency = $currency;
 
         return $this;
-    }
-
-    /**
-     * @param string $couponCode
-     */
-    public function setCouponCode($couponCode)
-    {
-        $this->couponCode = $couponCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCouponCode()
-    {
-        return $this->couponCode;
     }
 
     /**

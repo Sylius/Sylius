@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
+use Sylius\Bundle\PromotionsBundle\Form\Type\CouponToCodeType;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -21,6 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CartType extends BaseCartType
 {
+
     /**
      * {@inheritdoc}
      */
@@ -29,7 +32,7 @@ class CartType extends BaseCartType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('couponCode', 'text', array(
+            ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', array(
                 'label'  => 'sylius.cart.summary.coupon'
             ))
         ;
