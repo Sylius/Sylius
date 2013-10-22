@@ -12,10 +12,7 @@
 namespace Sylius\Bundle\PromotionsBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Sylius promotions component extension.
@@ -29,27 +26,8 @@ class SyliusPromotionsExtension extends SyliusResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $this->configDir = __DIR__.'/../Resources/config';
 
-        $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $driver = $config['driver'];
-
-        $this->loadDatabaseDriver($driver, $loader, $container);
-
-        $classes = $config['classes'];
-
-        $this->mapClassParameters($classes, $container);
-        $this->mapValidationGroupParameters($config['validation_groups'], $container);
-
-        $loader->load('services.xml');
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
+        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }
 }
