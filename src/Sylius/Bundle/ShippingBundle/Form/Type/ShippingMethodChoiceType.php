@@ -11,11 +11,16 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Resolver\MethodsResolverInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * A select form which allows the user to select
@@ -33,13 +38,20 @@ class ShippingMethodChoiceType extends AbstractType
     protected $resolver;
 
     /**
+     * @var CalculatorRegistryInterface
+     */
+    protected $calculators;
+
+    /**
      * Constructor.
      *
      * @param MethodsResolverInterface $resolver
+     * @param CalculatorRegistryInterface $calculators
      */
-    public function __construct(MethodsResolverInterface $resolver)
+    public function __construct(MethodsResolverInterface $resolver, CalculatorRegistryInterface $calculators)
     {
         $this->resolver = $resolver;
+        $this->calculators = $calculators;
     }
 
     /**
@@ -68,6 +80,28 @@ class ShippingMethodChoiceType extends AbstractType
                 'criteria' => array('array')
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $subject = $options['subject'];
+        $shippingCosts = array();
+
+        foreach ($view->vars['choices'] as $choiceView) {
+            $method = $choiceView->data;
+
+            if (!$method instanceof ShippingMethodInterface) {
+                throw new UnexpectedTypeException($method, 'ShippingMethodInterface');
+            }
+
+            $calculator = $this->calculators->getCalculator($method->getCalculator());
+            $shippingCosts[$choiceView->value] = $calculator->calculate($subject, $method->getConfiguration());
+        }
+
+        $view->vars['shipping_costs'] = $shippingCosts;
     }
 
     /**
