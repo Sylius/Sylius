@@ -45,7 +45,7 @@
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
-        "omnipay/omnipay":                      "1.0.*",
+        "omnipay/omnipay":                      "1.1.*",
         "payum/payum":                          "0.6.*@dev",
         "payum/payum-bundle":                   "0.6.*@dev",
         "payum/paypal-express-checkout-nvp":    "0.6.*@dev",
