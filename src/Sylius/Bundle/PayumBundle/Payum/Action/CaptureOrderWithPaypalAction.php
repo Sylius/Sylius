@@ -40,7 +40,7 @@ class CaptureOrderWithPaypalAction extends PaymentAwareAction
             $paymentDetails['INVNUM'] = $order->getNumber();
 
             $paymentDetails['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
-            $paymentDetails['PAYMENTREQUEST_0_AMT'] = number_format(($order->getTotal() + $order->getShippingTotal()) / 100, 2);
+            $paymentDetails['PAYMENTREQUEST_0_AMT'] = number_format($order->getTotal() / 100, 2);
             $paymentDetails['PAYMENTREQUEST_0_ITEMAMT'] = number_format($order->getItemsTotal() / 100, 2);
             $paymentDetails['PAYMENTREQUEST_0_TAXAMT'] = number_format($order->getTaxTotal() / 100, 2);
             $paymentDetails['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format($order->getShippingTotal() / 100, 2);
