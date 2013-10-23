@@ -28,7 +28,7 @@ class ZoneToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\DataTransformer\ZoneToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\DataTransformer\ZoneToIdentifierTransformerBREAKINGs');
     }
 
     function it_returns_empty_string_if_null_transormed()

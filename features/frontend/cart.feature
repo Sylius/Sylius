@@ -34,7 +34,7 @@ Feature: Cart
 
     Scenario: Adding simple product to cart via list
         Given I am on the store homepage
-          And I follow "T-Shirts"
+          And I follow UNDEFINED "T-Shirts"
          When I press "Add to cart"
          Then I should be on the cart summary page
           And I should see "Item has been added to cart."
@@ -45,7 +45,7 @@ Feature: Cart
           And I click "Git T-Shirt"
          When I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see "Item has been added to cart."
+          And I should UNDEFINED see "Item has been added to cart."
 
     Scenario: Added simple products appear on the cart summary
         Given I am on the store homepage
