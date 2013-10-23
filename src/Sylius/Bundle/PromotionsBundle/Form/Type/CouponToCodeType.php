@@ -41,7 +41,7 @@ class CouponToCodeType extends AbstractType
      * See CouponType description for information about data class.
      *
      * @param ObjectRepository $couponRepository
-     * @param EventDispatcher $dispatcher
+     * @param EventDispatcher  $dispatcher
      */
     public function __construct(ObjectRepository $couponRepository, EventDispatcher $dispatcher)
     {

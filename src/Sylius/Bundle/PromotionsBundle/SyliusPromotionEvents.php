@@ -21,5 +21,4 @@ class SyliusPromotionEvents
     const COUPON_INVALID         = 'sylius.promotion.coupon_invalid';
     const COUPON_ELIGIBLE        = 'sylius.promotion.coupon_eligible';
     const COUPON_NOT_ELIGIBLE    = 'sylius.promotion.coupon_not_eligible';
-
 }

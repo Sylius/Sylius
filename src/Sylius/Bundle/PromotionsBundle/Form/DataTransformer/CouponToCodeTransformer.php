@@ -42,7 +42,7 @@ class CouponToCodeTransformer implements DataTransformerInterface
      * Constructor.
      *
      * @param ObjectRepository $couponRepository
-     * @param EventDispatcher $dispatcher
+     * @param EventDispatcher  $dispatcher
      */
     public function __construct(ObjectRepository $couponRepository, EventDispatcher $dispatcher)
     {
@@ -77,9 +77,16 @@ class CouponToCodeTransformer implements DataTransformerInterface
 
         if (!$coupon = $this->couponRepository->findOneBy(array('code' => $code))) {
             $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_INVALID, new GenericEvent());
+
             return null;
         }
 
-        return $coupon->isValid() ? $coupon : null;
+        if (!$coupon->isValid()) {
+            $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent());
+
+            return null;
+        }
+
+        return $coupon;
     }
 }

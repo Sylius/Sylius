@@ -37,7 +37,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
 
     /**
      * @param RuleCheckerRegistryInterface $registry
-     * @param EventDispatcher $dispatcher
+     * @param EventDispatcher              $dispatcher
      */
     public function __construct(RuleCheckerRegistryInterface $registry, EventDispatcher $dispatcher)
     {
@@ -87,6 +87,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
                 if ($promotion === $subject->getPromotionCoupon()->getPromotion()) {
                     $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
                 }
+
                 return false;
             }
         }
