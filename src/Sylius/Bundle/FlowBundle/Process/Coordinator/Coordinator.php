@@ -96,7 +96,7 @@ class Coordinator implements CoordinatorInterface
     /**
      * {@inheritdoc}
      */
-    public function display($scenarioAlias, $stepName, ParameterBag $queryParameters = null)
+    public function display($scenarioAlias, $stepName, ParameterBag $queryParameters = null, array $routeParameters = null)
     {
         $process = $this->buildProcess($scenarioAlias);
         $step = $process->getStepByName($stepName);
@@ -109,14 +109,14 @@ class Coordinator implements CoordinatorInterface
             //the step we are supposed to display was not found in the history.
             if (null === $this->context->getPreviousStep()) {
                 //there is no previous step go to start
-                return $this->start($scenarioAlias, $queryParameters);
+                return $this->start($scenarioAlias, $queryParameters, $routeParameters);
             }
 
             //we will go back to previous step...
             $history = $this->context->getStepHistory();
             if (empty($history)) {
                 //there is no history
-                return $this->start($scenarioAlias);
+                return $this->start($scenarioAlias, $queryParameters, $routeParameters);
             }
             $step = $process->getStepByName(end($history));
 
@@ -229,7 +229,7 @@ class Coordinator implements CoordinatorInterface
         if (null !== $routeParameters) {
             $parameters = array_merge($parameters, $routeParameters);
         }
-        
+
         if (null !== $queryParameters) {
             $parameters = array_merge($queryParameters->all(), $parameters);
         }
@@ -264,3 +264,4 @@ class Coordinator implements CoordinatorInterface
         return $process;
     }
 }
+
