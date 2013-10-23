@@ -731,7 +731,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $zoneName, $category = null, $calculator = null, array $configuration = null)
+    public function thereIsShippingMethod($name, $zoneName, $category = null, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null)
     {
         $method = $this
             ->getRepository('shipping_method')
