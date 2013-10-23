@@ -26,6 +26,8 @@
 
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
+
+        <parameter key="sylius.naming_strategy.class">Sylius\Bundle\ResourceBundle\Doctrine\NamingStrategy</parameter>
     </parameters>
 
     <services>
@@ -61,6 +63,10 @@
              <argument type="service" id="doctrine.orm.entity_manager" />
              <tag name="form.type" alias="sylius_entity_to_identifier" />
          </service>
+
+        <service id="sylius.naming_strategy" class="%sylius.naming_strategy.class%">
+            <argument>%sylius.naming_strategy.table_prefix%</argument>
+        </service>
     </services>
 
 </container>

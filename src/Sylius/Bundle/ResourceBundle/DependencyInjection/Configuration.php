@@ -33,6 +33,13 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_resource');
 
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('table_prefix')->defaultValue('sylius')->cannotBeEmpty()->end()
+            ->end()
+        ;
+
         $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
