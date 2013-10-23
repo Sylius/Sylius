@@ -104,7 +104,7 @@ class BuildTaxonFormListener implements EventSubscriberInterface
         $closure = null;
 
         if ($taxon->getId()) {
-            $closure = function($entry) use ($taxon) {
+            $closure = function ($entry) use ($taxon) {
                 return $entry->getId() != $taxon->getId();
             };
         }

@@ -45,7 +45,7 @@ class ShippingMethodChoiceType extends AbstractType
     /**
      * Constructor.
      *
-     * @param MethodsResolverInterface $resolver
+     * @param MethodsResolverInterface    $resolver
      * @param CalculatorRegistryInterface $calculators
      */
     public function __construct(MethodsResolverInterface $resolver, CalculatorRegistryInterface $calculators)

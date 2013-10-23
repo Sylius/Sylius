@@ -111,9 +111,9 @@ class OrderRepository extends CartRepository
         $to   = null === $to ? new \DateTime() : $to;
 
         return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function($order) {
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, '$v->getTotal()', function($orders) {
+            }, '$v->getTotal()', function ($orders) {
                 return Enumerable::from($orders)->sum();
             })
             ->toValues()
@@ -127,9 +127,9 @@ class OrderRepository extends CartRepository
         $to   = null === $to ? new \DateTime() : $to;
 
         return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function($order) {
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, null, function($orders) {
+            }, null, function ($orders) {
                 return Enumerable::from($orders)->count();
             })
             ->toValues()

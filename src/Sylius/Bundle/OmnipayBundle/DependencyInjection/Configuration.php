@@ -44,7 +44,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('type')
                                     ->validate()
-                                        ->ifTrue(function($type) use ($gateways) {
+                                        ->ifTrue(function ($type) use ($gateways) {
                                                     if (empty($type)) {
                                                         return true;
                                                     }
@@ -64,7 +64,7 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('cc_types')
                                     ->prototype('scalar')
                                         ->validate()
-                                            ->ifTrue(function($ccType) use ($ccTypes) {
+                                            ->ifTrue(function ($ccType) use ($ccTypes) {
                                                     if (empty($ccType)) {
                                                         return true;
                                                     }
