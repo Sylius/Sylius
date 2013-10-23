@@ -47,6 +47,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->getShipments()->shouldBeCalled()->willReturn(array());
         $order->removeShippingAdjustments()->shouldBeCalled();
 
+        $order->calculateTotal()->shouldBeCalled();
+
         $this->applyShippingCharges($order);
     }
 
@@ -58,6 +60,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->removeShippingAdjustments()->shouldBeCalled();
         $order->getShipments()->shouldBeCalled()->willReturn(array());
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }
@@ -86,6 +90,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
         $order->removeShippingAdjustments()->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }
