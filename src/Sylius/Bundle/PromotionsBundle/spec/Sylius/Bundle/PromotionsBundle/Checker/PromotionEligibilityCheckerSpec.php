@@ -19,15 +19,16 @@ use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PromotionEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $registry)
+    function let(RuleCheckerRegistryInterface $registry, EventDispatcher $dispatcher)
     {
-        $this->beConstructedWith($registry);
+        $this->beConstructedWith($registry, $dispatcher);
     }
 
     function it_is_a_rule_checker()
@@ -42,6 +43,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->isCouponBased()->willReturn(false);
+        $promotion->getUsageLimit()->willReturn(null);
 
         $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $promotion->getRules()->willReturn(array($rule));
@@ -63,6 +65,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->isCouponBased()->willReturn(false);
+        $promotion->getUsageLimit()->willReturn(null);
 
         $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $promotion->getRules()->willReturn(array($rule));
@@ -81,6 +84,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->isCouponBased()->willReturn(false);
+        $promotion->getUsageLimit()->willReturn(null);
 
         $promotion->getRules()->willReturn(array());
         $promotion->hasCoupons()->willReturn(false);
@@ -95,6 +99,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->isCouponBased()->willReturn(false);
+        $promotion->getUsageLimit()->willReturn(null);
 
         $subject->getPromotionCoupon()->willReturn($coupon);
         $promotion->getRules()->willReturn(array());
@@ -111,6 +116,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->isCouponBased()->willReturn(false);
+        $promotion->getUsageLimit()->willReturn(null);
 
         $subject->getPromotionCoupon()->willReturn($coupon);
         $promotion->getRules()->willReturn(array());

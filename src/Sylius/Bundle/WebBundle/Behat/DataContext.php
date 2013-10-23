@@ -994,7 +994,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     /**
      * Cleaning promotion configuration that is serialized in database.
      *
-     * @param array $configuration
+     * @param  array $configuration
      * @return array
      */
     private function cleanPromotionConfiguration(array $configuration)
@@ -1002,16 +1002,16 @@ class DataContext extends BehatContext implements KernelAwareInterface
         foreach ($configuration as $key => $value) {
             switch ($key) {
                 case 'amount':
-                    $configuration[$key] = (int)$value * 100;
+                    $configuration[$key] = (int) $value * 100;
                     break;
                 case 'count':
-                    $configuration[$key] = (int)$value;
+                    $configuration[$key] = (int) $value;
                     break;
                 case 'percentage':
-                    $configuration[$key] = (int)$value / 100;
+                    $configuration[$key] = (int) $value / 100;
                     break;
                 case 'equal':
-                    $configuration[$key] = (boolean)$value;
+                    $configuration[$key] = (boolean) $value;
                     break;
                 default:
                     break;

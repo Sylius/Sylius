@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PromotionsBundle\Form\Type;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\PromotionsBundle\Form\DataTransformer\CouponToCodeTransformer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -40,10 +41,10 @@ class CouponToCodeType extends AbstractType
     /**
      * See CouponType description for information about data class.
      *
-     * @param ObjectRepository $couponRepository
-     * @param EventDispatcher  $dispatcher
+     * @param ObjectRepository          $couponRepository
+     * @param EventDispatcherInterface  $dispatcher
      */
-    public function __construct(ObjectRepository $couponRepository, EventDispatcher $dispatcher)
+    public function __construct(ObjectRepository $couponRepository, EventDispatcherInterface $dispatcher)
     {
         $this->couponRepository = $couponRepository;
         $this->dispatcher = $dispatcher;

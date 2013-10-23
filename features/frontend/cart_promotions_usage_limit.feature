@@ -1,4 +1,4 @@
-@checkout
+@promotions
 Feature: Checkout usage limited promotions
     In order to handle product promotions
     As a store owner
@@ -35,7 +35,6 @@ Feature: Checkout usage limited promotions
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
 
-    # 50% off over 200 EUR
     Scenario: Promotion with usage limit is applied when the
               number of usage is not reached
         Given I am on the store homepage
@@ -44,7 +43,6 @@ Feature: Checkout usage limited promotions
           And "Promotion total: (€500.00)" should appear on the page
           And "Grand total: €500.00" should appear on the page
 
-    # Free order over 10 items
     Scenario: Promotion with usage limit is not applied when the
               number of usage is reached
         Given I am on the store homepage
@@ -54,5 +52,3 @@ Feature: Checkout usage limited promotions
          Then I should be on the cart summary page
           And "Promotion total" should not appear on the page
           And "Grand total: €125.00" should appear on the page
-
-    # TODO: find a way to check that usage limit is reached

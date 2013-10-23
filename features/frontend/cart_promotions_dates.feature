@@ -1,4 +1,4 @@
-@checkout
+@promotions
 Feature: Checkout limited time promotions
     In order to handle product promotions
     As a store owner
@@ -40,5 +40,3 @@ Feature: Checkout limited time promotions
          Then I should be on the cart summary page
           And "Promotion total: (€20.00)" should appear on the page
           And "Grand total: €180.00" should appear on the page
-
-

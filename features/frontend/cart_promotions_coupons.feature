@@ -1,4 +1,4 @@
-@checkout
+@promotions
 Feature: Checkout coupon promotions
     In order to handle product promotions
     As a store owner
@@ -54,7 +54,7 @@ Feature: Checkout coupon promotions
           And "Grand total: €100.00" should appear on the page
 
     Scenario: A valid coupon can not be added to the cart if the cart does
-              not fulfills the rules required by the promotion
+              not fulfill the rules required by the promotion
         Given I am on the store homepage
           And I added product "Etch" to cart, with quantity "4"
          When I fill in "If you have a promotion coupon, enter it here" with "XD0001"

@@ -31,7 +31,7 @@ class CartType extends BaseCartType
 
         $builder
             ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', array(
-                'label'  => 'sylius.cart.summary.coupon'
+                'label'  => 'sylius.form.cart.coupon'
             ))
         ;
     }

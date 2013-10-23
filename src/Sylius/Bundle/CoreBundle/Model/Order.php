@@ -379,7 +379,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setPromotionCoupon(CouponInterface $coupon)
+    public function setPromotionCoupon(CouponInterface $coupon = null)
     {
         $this->promotionCoupon = $coupon;
     }

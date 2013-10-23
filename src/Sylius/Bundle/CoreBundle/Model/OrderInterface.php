@@ -240,5 +240,5 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      *
      * @param CouponInterface $coupon
      */
-    public function setPromotionCoupon(CouponInterface $coupon);
+    public function setPromotionCoupon(CouponInterface $coupon = null);
 }

@@ -442,8 +442,8 @@
         <source>sylius.cart.summary_header</source>
         <target>Cart summary</target>
       </trans-unit>
-      <trans-unit id="3e1b5b7f50ae18ddf6a6aaf82fc3cfd9b8ca3f50" resname="sylius.cart.summary.coupon">
-        <source>sylius.cart.summary.coupon</source>
+      <trans-unit id="3e1b5b7f50ae18ddf6a6aaf82fc3cfd9b8ca3f50" resname="sylius.form.cart.coupon">
+        <source>sylius.form.cart.coupon</source>
       <target>If you have a promotion coupon, enter it here</target>
       </trans-unit>
       <trans-unit id="76d49756fa413fa05e6221e3bab2a029d1e582b4" resname="sylius.cart.summary.add_coupon">

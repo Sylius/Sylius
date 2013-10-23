@@ -16,6 +16,7 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -37,9 +38,9 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
 
     /**
      * @param RuleCheckerRegistryInterface $registry
-     * @param EventDispatcher              $dispatcher
+     * @param EventDispatcherInterface     $dispatcher
      */
-    public function __construct(RuleCheckerRegistryInterface $registry, EventDispatcher $dispatcher)
+    public function __construct(RuleCheckerRegistryInterface $registry, EventDispatcherInterface $dispatcher)
     {
         $this->registry = $registry;
         $this->dispatcher = $dispatcher;
@@ -84,7 +85,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             $checker = $this->registry->getChecker($rule->getType());
 
             if (false === $checker->isEligible($subject, $rule->getConfiguration())) {
-                if ($promotion === $subject->getPromotionCoupon()->getPromotion()) {
+                if ($promotion->isCouponBased() && $promotion === $subject->getPromotionCoupon()->getPromotion()) {
                     $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
                 }
 
