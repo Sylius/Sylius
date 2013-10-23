@@ -697,7 +697,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $category = array_key_exists('category', $data) ? $data['category'] : null;
-            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : null;
+            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
             $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
 
             $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $category, $calculator, $configuration);
@@ -731,12 +731,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $zoneName, $category = null, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array('amount' => 2500))
+    public function thereIsShippingMethod($name, $zoneName, $category = null, $calculator = null, array $configuration = null)
     {
         $method = $this
             ->getRepository('shipping_method')
             ->createNew()
         ;
+
+        $configuration = $configuration ?: array('amount' => 2500);
 
         $method->setName($name);
         $method->setZone($this->findOneByName('zone', $zoneName));
