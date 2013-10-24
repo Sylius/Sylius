@@ -31,7 +31,7 @@
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, user.id is sameas(app.user.id)) }}
                 </div>
             </td>
         </tr>
