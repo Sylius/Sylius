@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
