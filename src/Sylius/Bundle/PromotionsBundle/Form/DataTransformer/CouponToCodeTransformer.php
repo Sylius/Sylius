@@ -13,6 +13,9 @@ namespace Sylius\Bundle\PromotionsBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
+use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -31,13 +34,20 @@ class CouponToCodeTransformer implements DataTransformerInterface
     private $couponRepository;
 
     /**
+     * @var EventDispatcher
+     */
+    protected $dispatcher;
+
+    /**
      * Constructor.
      *
-     * @param ObjectRepository $couponRepository
+     * @param ObjectRepository          $couponRepository
+     * @param EventDispatcherInterface  $dispatcher
      */
-    public function __construct(ObjectRepository $couponRepository)
+    public function __construct(ObjectRepository $couponRepository, EventDispatcherInterface $dispatcher)
     {
         $this->couponRepository = $couponRepository;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -66,9 +76,17 @@ class CouponToCodeTransformer implements DataTransformerInterface
         }
 
         if (!$coupon = $this->couponRepository->findOneBy(array('code' => $code))) {
+            $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_INVALID, new GenericEvent());
+
             return null;
         }
 
-        return $coupon->isValid() ? $coupon : null;
+        if (!$coupon->isValid()) {
+            $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent());
+
+            return null;
+        }
+
+        return $coupon;
     }
 }

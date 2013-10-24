@@ -192,8 +192,12 @@
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderPromotion" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
         </service>
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
             <argument type="service" id="sylius.currency_context" />
@@ -243,7 +247,7 @@
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
-            <tag name="sylius.promotion_action" type="Percentage_discount" label="Percentage discount" />
+            <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
         </service>
 
         <!-- money -->

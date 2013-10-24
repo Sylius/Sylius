@@ -293,9 +293,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('promotion_rule');
 
         foreach ($table->getHash() as $data) {
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+
             $rule = $repository->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $rule->setConfiguration($this->getConfiguration($data['configuration']));
+            $rule->setConfiguration($configuration);
 
             $promotion->addRule($rule);
 
@@ -316,9 +318,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('promotion_action');
 
         foreach ($table->getHash() as $data) {
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+
             $action = $repository->createNew();
             $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $action->setConfiguration($this->getConfiguration($data['configuration']));
+            $action->setConfiguration($configuration);
 
             $promotion->addAction($action);
 
@@ -982,6 +986,36 @@ class DataContext extends BehatContext implements KernelAwareInterface
         foreach ($list as $parameter) {
             list($key, $value) = explode(':', $parameter);
             $configuration[strtolower(trim(str_replace(' ', '_', $key)))] = trim($value);
+        }
+
+        return $configuration;
+    }
+
+    /**
+     * Cleaning promotion configuration that is serialized in database.
+     *
+     * @param  array $configuration
+     * @return array
+     */
+    private function cleanPromotionConfiguration(array $configuration)
+    {
+        foreach ($configuration as $key => $value) {
+            switch ($key) {
+                case 'amount':
+                    $configuration[$key] = (int) $value * 100;
+                    break;
+                case 'count':
+                    $configuration[$key] = (int) $value;
+                    break;
+                case 'percentage':
+                    $configuration[$key] = (int) $value / 100;
+                    break;
+                case 'equal':
+                    $configuration[$key] = (boolean) $value;
+                    break;
+                default:
+                    break;
+            }
         }
 
         return $configuration;

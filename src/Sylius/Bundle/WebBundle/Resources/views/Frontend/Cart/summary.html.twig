@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Frontend/Macros:alerts.html.twig' as alerts %}
 
 {% form_theme form _self %}
 
@@ -31,6 +31,14 @@
         {% endfor %}
     </tbody>
     <tfoot>
+        {% if cart.promotionTotal %}
+        <tr>
+            <td colspan="6"></td>
+            <td style="text-align: right;">
+                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
+            </td>
+        </tr>
+        {% endif %}
         <tr>
             <td colspan="6"></td>
             <td style="text-align: right;">
@@ -60,6 +68,12 @@
         </tr>
     </tfoot>
 </table>
+
+<div class="well well-small">
+    {{ form_row(form.promotionCoupon) }}
+    <button type="submit" class="btn btn-primary btn-small">{{ 'sylius.cart.summary.add_coupon'|trans }}</button>
+</div>
+
 {{ form_rest(form) }}
 <div class="well">
     <button type="submit" class="btn btn-primary btn-lg"><i class="icon-save"></i> {{ 'sylius.cart.summary.save'|trans }}</button>
