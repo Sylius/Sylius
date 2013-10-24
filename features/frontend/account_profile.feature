@@ -28,7 +28,7 @@ Feature: User account profile edition
           And I fill in "Last name" with "Doe"
           And I press "Save changes"
          Then I should still be on my account profile edition page
-          And I should see "Please enter a first name"
+          And I should see "Please enter your first name"
 
     Scenario: Editing my information with a blank last name
         Given I am on my account profile edition page
@@ -37,7 +37,7 @@ Feature: User account profile edition
           And I leave "Last name" field blank
           And I press "Save changes"
          Then I should still be on my account profile edition page
-          And I should see "Please enter a last name"
+          And I should see "Please enter your last name"
 
     Scenario: Editing my information with an invalid email
         Given I am on my account profile edition page
