@@ -41,7 +41,7 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
      * @param SchemaRegistryInterface $schemaRegistry
      * @param FormFactoryInterface    $formFactory
      */
-    public function __construct(SchemaregistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->formFactory = $formFactory;
