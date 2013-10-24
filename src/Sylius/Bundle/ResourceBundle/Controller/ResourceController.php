@@ -299,10 +299,7 @@ class ResourceController extends FOSRestController
             return $event->getResponse();
         }
 
-        $manager->persist($resource);
-        $this->dispatchEvent('create', $resource);
-        $manager->flush();
-        $this->dispatchEvent('post_create', $resource);
+        $manager->persistAndFlush($resource, 'create');
 
         return $event;
     }
@@ -317,10 +314,7 @@ class ResourceController extends FOSRestController
             return $event->getResponse();
         }
 
-        $manager->persist($resource);
-        $this->dispatchEvent('update', $resource);
-        $manager->flush();
-        $this->dispatchEvent('post_update', $resource);
+        $manager->persistAndFlush($resource, 'update');
 
         return $event;
     }
@@ -335,20 +329,23 @@ class ResourceController extends FOSRestController
             return $event->getResponse();
         }
 
-        $manager->remove($resource);
-        $this->dispatchEvent('delete', $resource);
-        $manager->flush();
-        $this->dispatchEvent('post_delete', $resource);
+        $manager->removeAndFlush($resource, 'delete');
 
         return $event;
     }
 
-    public function persistAndFlush($resource)
+    public function persistAndFlush($resource, $type = null)
     {
         $manager = $this->getManager();
 
         $manager->persist($resource);
+        if (null !== $type) {
+            $this->dispatchEvent($type, $resource);
+        }
         $manager->flush();
+        if (null !== $type) {
+            $this->dispatchEvent(sprintf('post_%s', $type), $resource);
+        }
     }
 
     public function removeAndFlush($resource)
@@ -356,7 +353,9 @@ class ResourceController extends FOSRestController
         $manager = $this->getManager();
 
         $manager->remove($resource);
+        $this->dispatchEvent('delete', $resource);
         $manager->flush();
+        $this->dispatchEvent('post_delete', $resource);
     }
 
     public function getRepository()
