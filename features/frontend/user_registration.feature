@@ -13,6 +13,8 @@ Feature: User registration
         Given I am on the store homepage
           And I follow "Register"
          When I fill in the following:
+            | First name   | John        |
+            | Last name    | Doe         |
             | Email        | foo@bar.com |
             | Password     | bar         |
             | Verification | bar         |
@@ -41,3 +43,15 @@ Feature: User registration
           And I press "Register"
          Then I should be on registration page
           And I should see "The email is already used"
+
+    Scenario: Trying to register without first and last name
+        Given I am on the store homepage
+          And I follow "Register"
+         When I fill in the following:
+            | Email        | foo@bar.com  |
+            | Password     | bar          |
+            | Verification | bar          |
+          And I press "Register"
+         Then I should be on registration page
+          And I should see "Please enter your first name"
+          And I should see "Please enter your last name"
