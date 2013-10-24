@@ -62,7 +62,7 @@ Feature: Users management
         Given I am on the user creation page
          When I press "Create"
          Then I should still be on the user creation page
-          And I should see "Please enter a first name."
+          And I should see "Please enter your first name."
 
     Scenario: Creating user
         Given I am on the user creation page
