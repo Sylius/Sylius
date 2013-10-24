@@ -24,7 +24,7 @@ class ResourceEvent extends GenericEvent
     /**
      * Set response property
      *
-     * @var Symfony\Component\HttpFoundation\Response
+     * @var Response
      */
     protected $response;
 
@@ -36,7 +36,7 @@ class ResourceEvent extends GenericEvent
     /**
      * Get response property
      *
-     * @return Symfony\Component\HttpFoundation\Response $response
+     * @return Response $response
      */
     public function getResponse()
     {
