@@ -19,3 +19,5 @@ bin/doctrine*
 bin/phpspec
 bin/webunit
 vendor/*
+
+.idea
