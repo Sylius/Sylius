@@ -105,12 +105,12 @@ class ResourceController extends FOSRestController
      */
     public function showAction()
     {
-        $config = $this->getConfiguration();
-
         $event = $this->dispatchEvent('pre_show_action', $this->findOr404());
-        if ($event->getResponse() !== null) {
+        if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
+
+        $config = $this->getConfiguration();
 
         $view = $this
             ->view()
@@ -127,8 +127,6 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $config = $this->getConfiguration();
-
         $resource = $this->createNew();
 
         $event = $this->dispatchEvent('pre_create_action', $resource);
@@ -148,6 +146,8 @@ class ResourceController extends FOSRestController
 
             return $this->redirectTo($resource);
         }
+
+        $config = $this->getConfiguration();
 
         if ($config->isApiRequest()) {
             return $this->handleView($this->view($form));
