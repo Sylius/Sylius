@@ -79,6 +79,7 @@
                 <option name="message">sylius.user.first_name.not_blank</option>
                 <option name="groups">
                     <value>Profile</value>
+                    <value>Registration</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -88,6 +89,7 @@
                 <option name="maxMessage">sylius.user.first_name.max</option>
                 <option name="groups">
                     <value>Profile</value>
+                    <value>Registration</value>
                 </option>
             </constraint>
         </property>
@@ -96,6 +98,7 @@
                 <option name="message">sylius.user.last_name.not_blank</option>
                 <option name="groups">
                     <value>Profile</value>
+                    <value>Registration</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -105,6 +108,7 @@
                 <option name="maxMessage">sylius.user.last_name.max</option>
                 <option name="groups">
                     <value>Profile</value>
+                    <value>Registration</value>
                 </option>
             </constraint>
         </property>

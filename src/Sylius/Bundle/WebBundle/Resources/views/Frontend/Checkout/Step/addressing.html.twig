@@ -21,14 +21,19 @@
 {{ form_errors(form) }}
 
 <fieldset>
-    <div class="fluid-row">
-        <div class="col-md-6 well">
-        {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
-        {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
+    <div class="row">
+        <div class="col-md-6 address-container">
+            <div class="well">
+                <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
+                {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
+            </div>
         </div>
-        <div class="col-md-6 well hide" id="sylius-billing-address-container">
-        <br />
-        {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
+        <div class="col-md-6 hide address-container" id="sylius-billing-address-container">
+            <div class="well">
+                <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
+            </div>
         </div>
     </div>
 </fieldset>

@@ -56,7 +56,7 @@
       </trans-unit>
       <trans-unit id="1a4e98b8754497fa3704c316c2510326" resname="sylius.user.first_name.not_blank">
         <source>sylius.user.first_name.not_blank</source>
-        <target>Please enter a first name.</target>
+        <target>Please enter your first name.</target>
       </trans-unit>
       <trans-unit id="60b6e5effce78494863245c780fde824" resname="sylius.user.last_name.max">
         <source>sylius.user.last_name.max</source>
@@ -68,7 +68,7 @@
       </trans-unit>
       <trans-unit id="c159555909906bd5df37a0f2edd6a7cd" resname="sylius.user.last_name.not_blank">
         <source>sylius.user.last_name.not_blank</source>
-        <target>Please enter a last name.</target>
+        <target>Please enter your last name.</target>
       </trans-unit>
       <trans-unit id="8b543b113a901ba9cfeb2410c82fc16f" resname="sylius.variant.onHand.min">
         <source>sylius.variant.onHand.min</source>

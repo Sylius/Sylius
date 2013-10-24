@@ -132,3 +132,24 @@ div.footer ul li a {
 div.currency-menu {
     margin-right: 50px;
 }
+
+
+.checkout-new-customer form, .checkout-existing-customer form {
+    margin-top: 20px;
+}
+
+.checkout-new-customer .form-group {
+    clear: both;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.checkout-new-customer .form-group > .control-label, .address-container .form-group > .control-label {
+    padding-left: 0;
+    padding-right: 0;
+    width: 25%;
+}
+
+.checkout-new-customer .form-group > .col-lg-10, .address-container .form-group > .col-lg-10 {
+    width: 75%;
+}
