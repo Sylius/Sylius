@@ -408,6 +408,10 @@ input[type="file"] {
         display: none;
     }
 
+    .table .btn {
+        margin-bottom: 3px;
+    }
+
     .row {
         margin-left: 0;
         margin-right: 0;

@@ -1248,7 +1248,7 @@
       </trans-unit>
       <trans-unit id="e7df3e27011c8dfa4bfa31113ae78183" resname="sylius.product.no_sku">
         <source>sylius.product.no_sku</source>
-        <target>&lt;i&gt;No SKU&lt;/i&gt;</target>
+        <target>No SKU</target>
       </trans-unit>
       <trans-unit id="a1be672ef677d5e5d57e287eb34891e1" resname="sylius.product.no_tax_category">
         <source>sylius.product.no_tax_category</source>
