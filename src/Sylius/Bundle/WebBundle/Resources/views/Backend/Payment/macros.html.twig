@@ -22,7 +22,7 @@
             <td>{{ payment.id }}</td>
             <td><span class="label label-primary">{{ payment.method }}</span></td>
             <td>
-                {{ payment.amount|sylius_money(payment.currency) }}
+                {{ payment.amount|sylius_price(payment.currency) }}
             </td>
             <td><span class="label label-success">{{ payment.state }}</span></td>
             <td>{{ payment.createdAt|date }}</td>

@@ -36,7 +36,7 @@
             </td>
             <td>
                 {% if not product.hasOptions %}
-                    {{ product.masterVariant.price|sylius_money }}
+                    {{ product.masterVariant.price|sylius_price }}
                 {% else %}
                     ---
                 {% endif %}
