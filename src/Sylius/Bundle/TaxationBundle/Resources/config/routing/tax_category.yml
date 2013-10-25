@@ -12,7 +12,7 @@ sylius_tax_category_index:
         _method: GET
 
 sylius_tax_category_create:
-    pattern: /{id}/create
+    pattern: /create
     defaults:
         _controller: sylius.controller.tax_category:createAction
     requirements:
