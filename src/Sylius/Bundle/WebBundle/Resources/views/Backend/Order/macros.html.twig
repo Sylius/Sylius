@@ -1,3 +1,15 @@
+{% macro order_state(state) %}
+{% if state is sameas(1) %}
+    {{ 'sylius.order.state.in_cart'|trans }}
+{% elseif state is sameas(2) %}
+    {{ 'sylius.order.state.cart_locked'|trans }}
+{% elseif state is sameas(3) %}
+    {{ 'sylius.order.state.ordered'|trans }}
+{% elseif state is sameas(4) %}
+    {{ 'sylius.order.state.order_confimed'|trans }}
+{% endif %}
+{% endmacro %}
+
 {% macro list(orders, user) %}
 
 {% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
@@ -22,11 +34,11 @@
     <tbody>
         {% for order in orders %}
         <tr>
-            <td class="center-text"><input type="checkbox" /></td>
+            <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
             <td>{{ order.createdAt|date }}</td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}" class="btn btn-link">
-                <strong>#{{ order.number }}</strong>
+                    <strong>#{{ order.number }}</strong>
                 </a>
             </td>
             <td>
@@ -35,10 +47,10 @@
                 {% endif %}
             </td>
             <td>
-                <span class="label label-warning">{{ order.state }}</span>
+                <span class="label label-warning">{{ _self.order_state(order.state) }}</span>
             </td>
             <td>
-                <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="">{{ order.user.email }}</a></p>
+                <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
@@ -92,7 +104,7 @@
                 {% endif %}
             </td>
             <td>
-                <span class="label label-warning">{{ order.state }}</span>
+                <span class="label label-warning">{{ _self.order_state(order.state) }}</span>
             </td>
             <td>
                 <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="btn btn-link">{{ order.user.email }}</a>

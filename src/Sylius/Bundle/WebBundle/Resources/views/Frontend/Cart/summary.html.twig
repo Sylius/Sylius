@@ -33,20 +33,18 @@
     <tfoot>
         {% if cart.promotionTotal %}
         <tr>
-            <td colspan="6"></td>
-            <td style="text-align: right;">
+            <td colspan="7" style="text-align: right;">
                 <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
             </td>
         </tr>
         {% endif %}
         <tr>
-            <td colspan="6"></td>
-            <td style="text-align: right;">
+            <td colspan="7" style="text-align: right;">
                 <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.shippingTotal|sylius_price }}
             </td>
         </tr>
         <tr>
-            <td colspan="6">
+            <td colspan="5">
                 <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
                 <ul>
                 {% for taxAdjustment in cart.taxAdjustments %}
@@ -56,13 +54,12 @@
                 {% endfor %}
                 </ul>
             </td>
-            <td style="text-align: right;">
+            <td colspan="2" style="text-align: right;">
                 <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.taxTotal|sylius_price }}
             </td>
         </tr>
         <tr>
-            <td colspan="6"></td>
-            <td style="text-align: right;">
+            <td colspan="7" style="text-align: right;">
                 <strong>{{ 'sylius.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}
             </td>
         </tr>
@@ -70,7 +67,7 @@
 </table>
 
 <div class="well well-small">
-    {{ form_row(form.promotionCoupon) }}
+    {{ form_row(form.promotionCoupon, {'label_attr': {'class': 'col-lg-12'}}) }}
     <button type="submit" class="btn btn-primary btn-small">{{ 'sylius.cart.summary.add_coupon'|trans }}</button>
 </div>
 
