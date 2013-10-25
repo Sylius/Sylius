@@ -7,7 +7,7 @@ Use following command to add the bundle to your `composer.json` and download pac
 If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
-s
+
     $ composer require sylius/flow-bundle:*
 
 Otherwise you have to download .phar file.
