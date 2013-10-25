@@ -15,7 +15,7 @@
 {{ pagerfanta(tax_categories, 'twitter_bootstrap_translated') }}
 {% endif %}
 
-{{ macros.list(categories) }}
+{{ macros.list(tax_categories) }}
 
 {% if tax_categories.haveToPaginate()|default(false) %}
 {{ pagerfanta(tax_categories, 'twitter_bootstrap_translated') }}
