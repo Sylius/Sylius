@@ -12,7 +12,7 @@ sylius_tax_rate_index:
         _method: GET
 
 sylius_tax_rate_create:
-    pattern: /{id}/create
+    pattern: /create
     defaults:
         _controller: sylius.controller.tax_rate:createAction
     requirements:
