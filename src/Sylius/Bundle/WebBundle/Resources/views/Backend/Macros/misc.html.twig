@@ -22,3 +22,39 @@
 </div>
 {% endif %}
 {% endmacro %}
+
+{% macro state_label(state, type) %}
+{% if type == 'payment' %}
+    {% set label = 'sylius.payment.state.'~state %}
+    {% if state is sameas('completed') %}
+        {% set class = 'label-success' %}
+    {% elseif state in ['checkout', 'processing', 'new'] %}
+        {% set class = 'label-info' %}
+    {% else %}
+        {% set class = 'label-danger' %}
+    {% endif %}
+{% elseif type == 'order' %}
+    {% if state is sameas(1) %}
+        {% set label = 'sylius.order.state.in_cart' %}
+        {% set class = 'label-warning' %}
+    {% elseif state is sameas(2) %}
+        {% set label = 'sylius.order.state.cart_locked' %}
+        {% set class = 'label-default' %}
+    {% elseif state is sameas(3) %}
+        {% set label = 'sylius.order.state.ordered' %}
+        {% set class = 'label-info' %}
+    {% else %}
+        {% set label = 'sylius.order.state.order_confimed' %}
+        {% set class = 'label-success' %}
+    {% endif %}
+{% else %}
+    {% if state %}
+        {% set label = 'sylius.yes' %}
+        {% set class = 'label-success' %}
+    {% else %}
+        {% set label = 'sylius.no' %}
+        {% set class = 'label-danger' %}
+    {% endif %}
+{% endif %}
+<span class="label {{ class }}">{{ label|trans }}</span>
+{% endmacro %}

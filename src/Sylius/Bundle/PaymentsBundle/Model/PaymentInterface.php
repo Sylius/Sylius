@@ -103,7 +103,7 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Get processing logs.
      *
-     * @return Collection
+     * @return PaymentLogInterface[]
      */
     public function getLogs();
 

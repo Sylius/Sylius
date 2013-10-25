@@ -28,11 +28,47 @@
       </trans-unit>
       <trans-unit id="4b2bd16369add8f5e09952df5e2da02f" resname="sylius.form.payment.amount">
         <source>sylius.form.payment.amount</source>
-        <target>sylius.form.payment.amount</target>
+        <target>Payment amount</target>
       </trans-unit>
       <trans-unit id="cfd694e828dc0f90777547eeaa2dba13" resname="sylius.form.payment.method">
         <source>sylius.form.payment.method</source>
-        <target>sylius.form.payment.method</target>
+        <target>Payment method</target>
+      </trans-unit>
+      <trans-unit id="bbce6d62d595a0226d773158f3cc3ad9" resname="sylius.form.payment.state">
+        <source>sylius.form.payment.state</source>
+        <target>Payment state</target>
+      </trans-unit>
+      <trans-unit id="121771e965341ff8984f23b8f8342990" resname="sylius.form.payment.state.checkout">
+        <source>sylius.form.payment.state.checkout</source>
+        <target>Checkout</target>
+      </trans-unit>
+      <trans-unit id="ffbfedb9f21ce6841a7728d875435d36" resname="sylius.form.payment.state.completed">
+        <source>sylius.form.payment.state.completed</source>
+        <target>Completed</target>
+      </trans-unit>
+      <trans-unit id="8f587db2580ef31e2507a0c18595d98d" resname="sylius.form.payment.state.failed">
+        <source>sylius.form.payment.state.failed</source>
+        <target>Failed</target>
+      </trans-unit>
+      <trans-unit id="0e185128533dcd5614d621905f6f68b9" resname="sylius.form.payment.state.new">
+        <source>sylius.form.payment.state.new</source>
+        <target>New</target>
+      </trans-unit>
+      <trans-unit id="4ff1d61ea8920e3acf15efa3017d3af9" resname="sylius.form.payment.state.pending">
+        <source>sylius.form.payment.state.pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="700331d57f2cc45737edc42332d60442" resname="sylius.form.payment.state.processing">
+        <source>sylius.form.payment.state.processing</source>
+        <target>Processing</target>
+      </trans-unit>
+      <trans-unit id="cf0228f61e0aebdd9fee4840f2fdd108" resname="sylius.form.payment.state.unknown">
+        <source>sylius.form.payment.state.unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="e9eb04055e6e2430eb23b5efdd4bc2ca" resname="sylius.form.payment.state.void">
+        <source>sylius.form.payment.state.void</source>
+        <target>Void</target>
       </trans-unit>
       <trans-unit id="a5c8dae58a59fe570e21ce2283d0c5e6" resname="sylius.form.payment_method.description">
         <source>sylius.form.payment_method.description</source>
