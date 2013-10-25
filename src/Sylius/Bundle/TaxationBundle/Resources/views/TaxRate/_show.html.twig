@@ -7,9 +7,12 @@
     <a href="{{ path('sylius_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
         <i class="icon-pencil"></i> edit
     </a>
-    <a href="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" class="btn btn-danger">
-        <i class="icon-trash"></i>
-    </a>
+    <form action="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" method="post" class="inline">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="icon-trash"></i>
+        </button>
+    </form>
 </div>
 
 <table class="table table-bordered table-consensed">
