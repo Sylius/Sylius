@@ -990,6 +990,22 @@
         <source>sylius.order.show_header</source>
         <target>Order details</target>
       </trans-unit>
+      <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.in_cart">
+        <source>sylius.order.state.in_cart</source>
+        <target>In cart</target>
+      </trans-unit>
+      <trans-unit id="ceeef31deebf65053049505d50007cc4" resname="sylius.order.state.cart_locked">
+        <source>sylius.order.state.cart_locked</source>
+        <target>Cart locked</target>
+      </trans-unit>
+      <trans-unit id="78b7b027c6a4d8fd17734d54349bb291" resname="sylius.order.state.ordered">
+        <source>sylius.order.state.ordered</source>
+        <target>Ordered</target>
+      </trans-unit>
+      <trans-unit id="73389298216efee6a629bf7e2c2881d6" resname="sylius.order.state.order_confimed">
+        <source>sylius.order.state.order_confimed</source>
+        <target>Order confirmed</target>
+      </trans-unit>
       <trans-unit id="ce513cdfe77e17927dc61fa5dba2fefd" resname="sylius.order.tax_total">
         <source>sylius.order.tax_total</source>
         <target>Tax total</target>
@@ -1961,6 +1977,10 @@
       <trans-unit id="b541c0a6d2177cb6764afd02a184e17b" resname="sylius.user.recent_header">
         <source>sylius.user.recent_header</source>
         <target>Recent users</target>
+      </trans-unit>
+      <trans-unit id="1766e7b55cbb86ef7d0c99b4537dad3b" resname="sylius.user.registration_date">
+        <source>sylius.user.registration_date</source>
+        <target>Registration date</target>
       </trans-unit>
       <trans-unit id="1cc3843529c72b288a252bcf91c12492" resname="sylius.user.shipping_address">
         <source>sylius.user.shipping_address</source>
