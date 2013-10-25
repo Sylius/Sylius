@@ -11,3 +11,20 @@
         <i class="icon-trash"></i>
     </a>
 </div>
+
+<table class="table table-bordered table-consensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.tax_rate.category'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.name'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.amount'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ tax_rate.category }}</td>
+            <td>{{ tax_rate.name }}</td>
+            <td>{{ tax_rate.amountAsPercentage }}%</td>
+        </tr>
+    </tbody>
+</table>
