@@ -14,13 +14,13 @@ namespace Sylius\Bundle\PayumBundle\Checkout\Step;
 use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Registry\RegistryInterface;
 use Payum\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep;
+use Sylius\Bundle\CoreBundle\Checkout\Step\PurchaseStep as BasePurchaseStep;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class PurchaseStep extends CheckoutStep
+class PurchaseStep extends BasePurchaseStep
 {
     /**
      * {@inheritdoc}
@@ -55,11 +55,6 @@ class PurchaseStep extends CheckoutStep
 
         /** @var OrderInterface $order */
         $order = $status->getModel();
-
-        if (!$order instanceof OrderInterface) {
-            throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
-        }
-
         $order->getPayment()->setState($status->getStatus());
 
         if ($status->isSuccess()) {
