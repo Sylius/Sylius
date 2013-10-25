@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 
 use Payum\Action\PaymentAwareAction;
 use Payum\Exception\RequestNotSupportedException;
