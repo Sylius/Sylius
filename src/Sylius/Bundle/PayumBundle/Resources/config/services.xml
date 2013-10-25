@@ -27,12 +27,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.payum.checkout_step.purchase" class="%sylius.payum.checkout_step.purchase.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="sylius.process.step" alias="sylius_checkout_purchase" />
-        </service>
         <service id="sylius.payum.action.capture_order_with_paypal" class="%sylius.payum.action.capture_order_with_paypal.class%" />
         <service id="sylius.payum.action.capture_order_with_stripe" class="%sylius.payum.action.capture_order_with_stripe.class%" />
         <service id="sylius.payum.action.order_status" class="%sylius.payum.action.order_status.class%" />
