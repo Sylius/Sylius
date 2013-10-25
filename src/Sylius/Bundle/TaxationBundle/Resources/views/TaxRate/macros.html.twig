@@ -37,7 +37,7 @@
                        <i class="icon-pencil"></i> edit
                     </a>
                     <form action="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" method="post" class="btn-group inline pull-right">
-                        <input type="hidden" name="_method" value="DELETE" class="btn"><!-- fake sibling to left -->
+                        <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger">
                             <i class="icon-trash"></i> delete
                         </button>
