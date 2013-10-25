@@ -11,14 +11,33 @@
 
 namespace Sylius\Bundle\MoneyBundle\Model;
 
-use DateTime;
+use Symfony\Component\Intl\Intl;
 
 class ExchangeRate implements ExchangeRateInterface
 {
+    /**
+     * @var mixed
+     */
     protected $id;
+
+    /**
+     * @var string
+     */
     protected $currency;
+
+    /**
+     * @var float
+     */
     protected $rate;
+
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
+
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
     public function getId()
@@ -26,42 +45,74 @@ class ExchangeRate implements ExchangeRateInterface
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrencyName()
+    {
+        return Intl::getCurrencyBundle()->getCurrencyName($this->currency);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCurrency($currency)
     {
         $this->currency = $currency;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRate()
     {
         return $this->rate;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setRate($rate)
     {
         $this->rate = $rate;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DateTime $updatedAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
