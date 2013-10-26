@@ -9,34 +9,42 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 
 use Payum\Action\PaymentAwareAction;
 use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\CaptureRequest;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Payum\Request\StatusRequestInterface;
+use Sylius\Bundle\CoreBundle\Model\Order;
 
-class CaptureOrderWithDummyAction extends PaymentAwareAction
+class OrderStatusAction extends PaymentAwareAction
 {
     /**
      * {@inheritDoc}
      */
     public function execute($request)
     {
-        /** @var $request CaptureRequest */
+        /** @var $request StatusRequestInterface */
         if (!$this->supports($request)) {
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
+        /** @var Order $order */
         $order = $request->getModel();
 
         $paymentDetails = $order->getPayment()->getDetails();
         if (empty($paymentDetails)) {
-            $order->getPayment()->setDetails(array(
-                'captured' => true,
-            ));
+            $request->markNew();
+
+            return;
         }
+
+        if (isset($paymentDetails['captured'])) {
+            $request->markSuccess();
+
+            return;
+        }
+
+        $request->markUnknown();
     }
 
     /**
@@ -45,8 +53,8 @@ class CaptureOrderWithDummyAction extends PaymentAwareAction
     public function supports($request)
     {
         return
-            $request instanceof CaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request instanceof StatusRequestInterface &&
+            $request->getModel() instanceof Order
         ;
     }
 }

@@ -18,11 +18,11 @@
 
     <parameters>
         <parameter key="sylius.payum.checkout_step.purchase.class">Sylius\Bundle\PayumBundle\Checkout\Step\PurchaseStep</parameter>
-        <parameter key="sylius.payum.action.capture_order_with_paypal.class">Sylius\Bundle\PayumBundle\Payum\Action\CaptureOrderWithPaypalAction</parameter>
-        <parameter key="sylius.payum.action.capture_order_with_dummy.class">Sylius\Bundle\PayumBundle\Payum\Action\CaptureOrderWithDummyAction</parameter>
-        <parameter key="sylius.payum.action.capture_order_with_stripe.class">Sylius\Bundle\PayumBundle\Payum\Action\CaptureOrderWithStripeAction</parameter>
+        <parameter key="sylius.payum.paypal.action.capture_order_using_express_checkout.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\CaptureOrderUsingExpressCheckoutAction</parameter>
+        <parameter key="sylius.payum.stripe.action.capture_order_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Stripe\Action\CaptureOrderUsingCreditCardAction</parameter>
+        <parameter key="sylius.payum.dummy.action.capture_order.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CaptureOrderAction</parameter>
+        <parameter key="sylius.payum.dummy.action.order_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\OrderStatusAction</parameter>
         <parameter key="sylius.payum.action.order_status.class">Sylius\Bundle\PayumBundle\Payum\Action\OrderStatusAction</parameter>
-        <parameter key="sylius.payum.action.dummy_order_status.class">Sylius\Bundle\PayumBundle\Payum\Action\DummyOrderStatusAction</parameter>
         <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
     </parameters>
 
@@ -33,8 +33,8 @@
             </call>
             <tag name="sylius.process.step" alias="sylius_checkout_purchase" />
         </service>
-        <service id="sylius.payum.action.capture_order_with_paypal" class="%sylius.payum.action.capture_order_with_paypal.class%" />
-        <service id="sylius.payum.action.capture_order_with_stripe" class="%sylius.payum.action.capture_order_with_stripe.class%" />
+        <service id="sylius.payum.paypal.action.capture_order_using_express_checkout" class="%sylius.payum.paypal.action.capture_order_using_express_checkout.class%" />
+        <service id="sylius.payum.stripe.action.capture_order_using_credit_card" class="%sylius.payum.stripe.action.capture_order_using_credit_card.class%" />
         <service id="sylius.payum.action.order_status" class="%sylius.payum.action.order_status.class%" />
         <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" >
             <argument type="service" id="form.factory" />
@@ -45,8 +45,8 @@
         </service>
 
         <!-- dummy -->
-        <service id="sylius.payum.action.capture_order_with_dummy" class="%sylius.payum.action.capture_order_with_dummy.class%" />
-        <service id="sylius.payum.action.dummy_order_status" class="%sylius.payum.action.dummy_order_status.class%" />
+        <service id="sylius.payum.dummy.action.capture_order" class="%sylius.payum.dummy.action.capture_order.class%" />
+        <service id="sylius.payum.dummy.action.order_status" class="%sylius.payum.dummy.action.order_status.class%" />
     </services>
 
 </container>

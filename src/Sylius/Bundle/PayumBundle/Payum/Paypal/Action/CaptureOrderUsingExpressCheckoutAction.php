@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Payum\Action\PaymentAwareAction;
 use Payum\Bridge\Spl\ArrayObject;
@@ -17,12 +17,11 @@ use Payum\Exception\RequestNotSupportedException;
 use Payum\Request\CaptureRequest;
 use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
-class CaptureOrderWithStripeAction extends PaymentAwareAction
+class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute($request)
     {
@@ -36,18 +35,23 @@ class CaptureOrderWithStripeAction extends PaymentAwareAction
 
         $paymentDetails = $order->getPayment()->getDetails();
         if (empty($paymentDetails)) {
-            $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
+            $paymentDetails['RETURNURL'] = $request->getToken()->getTargetUrl();
+            $paymentDetails['CANCELURL'] = $request->getToken()->getTargetUrl();
+            $paymentDetails['INVNUM'] = $order->getNumber();
 
-            $paymentDetails = array(
-                'card' => array(
-                    'number' => $obtainCreditCardRequest->getCreditCard()->getNumber(),
-                    'expiryMonth' => $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(),
-                    'expiryYear' => $obtainCreditCardRequest->getCreditCard()->getExpiryYear(),
-                    'cvv' => $obtainCreditCardRequest->getCreditCard()->getSecurityCode()
-                ),
-                'amount' => number_format($order->getTotal() / 100, 2),
-                'currency' => $order->getCurrency(),
-            );
+            $paymentDetails['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
+            $paymentDetails['PAYMENTREQUEST_0_AMT'] = number_format($order->getTotal() / 100, 2);
+            $paymentDetails['PAYMENTREQUEST_0_ITEMAMT'] = number_format($order->getItemsTotal() / 100, 2);
+            $paymentDetails['PAYMENTREQUEST_0_TAXAMT'] = number_format($order->getTaxTotal() / 100, 2);
+            $paymentDetails['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format($order->getShippingTotal() / 100, 2);
+
+            $m = 0;
+            foreach ($order->getItems() as $item) {
+                $paymentDetails['L_PAYMENTREQUEST_0_AMT'.$m] =  number_format($item->getTotal() / 100, 2);
+                $paymentDetails['L_PAYMENTREQUEST_0_QTY'.$m] =  $item->getQuantity();
+
+                $m++;
+            }
         }
 
         // TODO: find a way to simply the next logic
@@ -56,11 +60,8 @@ class CaptureOrderWithStripeAction extends PaymentAwareAction
 
         try {
             $this->payment->execute(new CaptureRequest($paymentDetails));
-
-            unset($paymentDetails['card']);
             $order->getPayment()->setDetails((array) $paymentDetails);
         } catch (\Exception $e) {
-            unset($paymentDetails['card']);
             $order->getPayment()->setDetails((array) $paymentDetails);
 
             throw $e;
@@ -68,7 +69,7 @@ class CaptureOrderWithStripeAction extends PaymentAwareAction
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supports($request)
     {
