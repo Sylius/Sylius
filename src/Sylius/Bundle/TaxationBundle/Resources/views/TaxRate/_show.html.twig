@@ -1,18 +1,12 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 <h1>Tax rate details <small>{{ tax_rate.name }}</small></h1>
 <hr>
+
 <div class="well">
-    <a href="{{ path('sylius_tax_rate_index') }}" class="btn btn-primary">
-        <i class="icon-list-alt"></i> manage tax rates
-    </a>
-    <a href="{{ path('sylius_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
-        <i class="icon-pencil"></i> edit
-    </a>
-    <form action="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" method="post" class="inline">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i>
-        </button>
-    </form>
+    {{ buttons.manage(path('sylius_tax_rate_index'), 'manage tax rates') }}
+    {{ buttons.edit(path('sylius_tax_rate_update', {'id': tax_rate.id})) }}
+    {{ buttons.delete(path('sylius_tax_rate_delete', {'id': tax_rate.id})) }}
 </div>
 
 <table class="table table-bordered table-consensed">

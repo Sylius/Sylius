@@ -22,6 +22,30 @@
         <source>sylius.form.taxon.description</source>
         <target>Description</target>
       </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.taxon.create_taxon">
+        <source>sylius.taxon.create_taxon</source>
+        <target>Create Taxon</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.taxon.delete_taxonomy">
+        <source>sylius.taxon.delete_taxonomy</source>
+        <target>Delete Taxonomy</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.taxon.manage_taxonomies">
+        <source>sylius.taxon.manage_taxonomies</source>
+        <target>Manage Taxonomies</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.taxon.no_taxonomies">
+        <source>sylius.taxon.no_taxonomies</source>
+        <target>No taxonomies to show.</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.taxon.no_taxons">
+        <source>sylius.taxon.no_taxons</source>
+        <target>No taxons to show.</target>
+      </trans-unit>
+      <trans-unit id="285fed3f121c6505108465ee0a26873f" resname="sylius.taxon.update_taxonomy">
+        <source>sylius.taxon.update_taxonomy</source>
+        <target>Update Taxonomy</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

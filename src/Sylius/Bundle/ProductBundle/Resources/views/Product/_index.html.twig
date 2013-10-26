@@ -1,12 +1,11 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusProductBundle:Product:macros.html.twig' as macros %}
 
 <h1>Products list <small>All products saved in the system</small></h1>
 <hr />
 
 <div class="well">
-    <a href="{{ path('sylius_product_create') }}" class="btn btn-primary">
-        <i class="icon-plus-sign"></i> create product
-    </a>
+    {{ buttons.create(path('sylius_product_create'), 'create product') }}
 </div>
 
 {% if products.haveToPaginate()|default(false) %}

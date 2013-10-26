@@ -1,5 +1,7 @@
 {% macro list(tax_categories) %}
 
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 {% if tax_categories|length > 0 %}
 <table class="table">
     <thead>
@@ -18,18 +20,9 @@
             <td>{{ tax_category.updatedAt|date }}</td>
             <td>
                 <div class="btn-group pull-right">
-                    <a href="{{ path('sylius_tax_category_show', {'id': tax_category.id}) }}" class="btn">
-                       <i class="icon-book"></i> details
-                    </a>
-                    <a href="{{ path('sylius_tax_category_update', {'id': tax_category.id}) }}" class="btn">
-                       <i class="icon-pencil"></i> edit
-                    </a>
-                    <form action="{{ path('sylius_tax_category_delete', {'id': tax_category.id}) }}" method="post" class="btn-group inline pull-right">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger">
-                            <i class="icon-trash"></i> delete
-                        </button>
-                    </form>
+                    {{ buttons.show(path('sylius_tax_category_show', {'id': tax_category.id})) }}
+                    {{ buttons.edit(path('sylius_tax_category_update', {'id': tax_category.id})) }}
+                    {{ buttons.delete(path('sylius_tax_category_delete', {'id': tax_category.id})) }}
                 </div>
             </td>
         </tr>

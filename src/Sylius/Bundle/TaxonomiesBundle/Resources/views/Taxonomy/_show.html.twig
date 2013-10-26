@@ -1,22 +1,13 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusTaxonomiesBundle:Taxon:macros.html.twig' import list %}
 
 <h1>{{ taxonomy.name }} <small>Taxonomy details</small></h1>
 <hr />
 <div class="well well-small">
-    <a href="{{ path('sylius_taxon_create', {'taxonomyId': taxonomy.id}) }}" class="btn btn-primary">
-        <i class="icon-plus-sign"></i> create taxon
-    </a>
-    <a href="{{ path('sylius_taxonomy_index') }}" class="btn btn-success">
-        <i class="icon-pencil"></i> manage taxonomies
-    </a>
-    <a href="{{ path('sylius_taxonomy_update', {'id': taxonomy.id}) }}" class="btn">
-        <i class="icon-pencil"></i> update taxonomy
-    </a>
-    <form action="{{ path('sylius_taxonomy_delete', {'id': taxonomy.id}) }}" method="post" style="display: inline;">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i> delete taxonomy
-        </button>
-    </form>
+    {{ buttons.create(path('sylius_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create_taxon'|trans) }}
+    {{ buttons.manage(path('sylius_taxonomy_index'), 'sylius.taxon.manage_taxonomies'|trans) }}
+    {{ buttons.edit(path('sylius_taxonomy_update', {'id': taxonomy.id}), 'sylius.taxon.update_taxonomy'|trans) }}
+    {{ buttons.delete(path('sylius_taxonomy_delete', {'id': taxonomy.id}), 'sylius.taxon.delete_taxonomy'|trans) }}
 </div>
 <hr>
 {{ list(taxonomy, taxonomy.taxons) }}

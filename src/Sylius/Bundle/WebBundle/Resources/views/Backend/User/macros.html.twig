@@ -1,6 +1,6 @@
 {% macro list(users) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if users|length > 0 %}
@@ -49,7 +49,7 @@
 
 {% macro simple_list(users) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if users|length > 0 %}

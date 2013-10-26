@@ -1,9 +1,9 @@
+{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
+
 <h1>Editing tax category <small>{{ tax_category.name }}</small></h1>
 <hr />
+
 <form action="{{ path('sylius_tax_category_update', {'id': tax_category.id}) }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusTaxationBundle:TaxCategory:_form.html.twig' %}
-    <div class="form-actions">
-        <input type="submit" value="save changes" class="btn btn-primary btn-large" />
-        <a href="{{ path('sylius_tax_category_show', {'id': tax_category.id}) }}" class="btn btn-large">cancel</a>
-    </div>
+    {{ actions.update(path('sylius_tax_category_show', {'id': tax_category.id})) }}
 </form>
