@@ -2,7 +2,7 @@
 * :doc:`/bundles/SyliusResourceBundle/index`
 * :doc:`/bundles/SyliusProductBundle/index`
 * :doc:`/bundles/SyliusVariableProductBundle/index`
-* :doc:`/bundles/SyliusSalesBundle/index`
+* :doc:`/bundles/SyliusOrderBundle/index`
 * :doc:`/bundles/SyliusCartBundle/index`
 * :doc:`/bundles/SyliusAddressingBundle/index`
 * :doc:`/bundles/SyliusInventoryBundle/index`

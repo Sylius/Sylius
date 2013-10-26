@@ -41,7 +41,7 @@ integrated into your existing project. You can also build a tailored solution fr
 components. (**Bundles** in Symfony2 glossary)
 
 If you have an existing Symfony2 application, for example: A book catalogue, you can use 
-:doc:`SyliusSalesBundle </bundles/SyliusSalesBundle/index>` and add orders management feature.
+:doc:`SyliusOrderBundle </bundles/SyliusOrderBundle/index>` and add orders management feature.
 
 Here you can find a documentation index for all Sylius bundles available to you:
 

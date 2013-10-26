@@ -43,7 +43,7 @@ Secondly, need to configure your repository class in ``app/config/config.yml``.
 
     # app/config/config.yml
 
-    sylius_sales:
+    sylius_order:
         driver: doctrine/orm
         classes:
             order:

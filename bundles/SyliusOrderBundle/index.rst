@@ -1,4 +1,4 @@
-SyliusSalesBundle
+SyliusOrderBundle
 =================
 
 This bundle is a foundation for sales order handling for Symfony2 projects.
