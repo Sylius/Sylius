@@ -39,6 +39,7 @@ class OrderProcessor implements ProcessorInterface
     public function preProcess($order)
     {
         if ($order instanceof OrderInterface) {
+            // add items to order
             for ($i = 0; $i <= rand(3, 6); $i++) {
                 $item = $this->orderItemRepository->createNew();
                 $variant = $this->variants[rand(0, $this->nbVariants - 1)];
@@ -50,12 +51,18 @@ class OrderProcessor implements ProcessorInterface
                 $order->addItem($item);
             }
 
+            // add shipments to order
             foreach ($order->getInventoryUnits() as $item) {
                 $order->getShipments()->first()->addItem($item);
             }
 
             $order->calculateTotal();
             $order->complete();
+
+            // set payment order details
+            $payment = $order->getPayment();
+            $payment->setAmount($order->getTotal());
+            $payment->setCurrency($order->getCurrency());
         }
     }
 

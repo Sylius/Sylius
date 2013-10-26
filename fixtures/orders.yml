@@ -5,6 +5,12 @@
     Sylius.Shipment.{1..70}:
         method: @Sylius.Shipping.Method.*
 
+\Sylius\Bundle\PaymentsBundle\Model\Payment:
+    Sylius.Payment.{1..70}:
+        method: @Sylius.Payment.Method.*
+        currency: CUR
+        amount: 0
+
 \Sylius\Bundle\CoreBundle\Model\Order:
     Sylius.Order.{1..70}:
         shipments: [@Sylius.Shipment.<current()>]
@@ -12,6 +18,7 @@
         shippingAddress: @Sylius.Address.*
         billingAddress: 80%? <randomElement(array($shippingAddress))> : @Sylius.Address.*
         user: @Sylius.User.*
+        payment: @Sylius.Payment.<current()>
         currency: <currency()>
         createdAt: <dateTimeBetween('1 year ago', 'now')>
 
