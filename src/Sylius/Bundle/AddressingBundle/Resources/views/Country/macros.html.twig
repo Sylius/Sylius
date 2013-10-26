@@ -1,5 +1,7 @@
 {% macro list(countries) %}
 
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 {% if countries|length > 0 %}
     <table class="table table-bordered">
         <thead>
@@ -18,17 +20,9 @@
                 <td>{{ country.isoName }}</td>
                 <td>
                     <div class="btn-group pull-right">
-                        <a href="{{ path('sylius_province_create', {'countryId': country.id}) }}" class="btn">
-                            <i class="icon-globe"></i> add province
-                        </a>
-                        <a href="{{ path('sylius_country_update', {'id': country.id}) }}" class="btn">
-                            <i class="icon-pencil"></i> edit
-                        </a>
-                        <a href="{{ path('sylius_country_delete', {'id': country.id}) }}"  class="btn btn-danger confirmer"
-                            data-confirmer-question="Do you really want to delete country <strong>{{ country.name }}</strong>?"
-                        >
-                            <i class="icon-trash icon-white"></i>
-                        </a>
+                        {{ buttons.create(path('sylius_province_create', {'countryId': country.id}), 'add province') }}
+                        {{ buttons.edit(path('sylius_country_update', {'id': country.id})) }}
+                        {{ buttons.delete(path('sylius_country_delete', {'id': country.id})) }}
                     </div>
                 </td>
             </tr>
@@ -42,14 +36,8 @@
                         <td>{{ province.name }}</td>
                         <td colspan="2">
                             <div class="btn-group pull-right">
-                                <a href="{{ path('sylius_province_update', {'countryId': country.id, 'id': province.id}) }}" class="btn">
-                                    <i class="icon-pencil"></i> edit
-                                </a>
-                                <a href="{{ path('sylius_province_delete', {'countryId': country.id, 'id': province.id}) }}"  class="btn btn-danger confirmer"
-                                    data-confirmer-question="Do you really want to delete province <strong>{{ province.name }}</strong>?"
-                                >
-                                    <i class="icon-trash icon-white"></i>
-                                </a>
+                                {{ buttons.edit(path('sylius_province_update', {'countryId': country.id, 'id': province.id})) }}
+                                {{ buttons.delete(path('sylius_province_delete', {'countryId': country.id, 'id': province.id})) }}
                             </div>
                         </td>
                     </tr>

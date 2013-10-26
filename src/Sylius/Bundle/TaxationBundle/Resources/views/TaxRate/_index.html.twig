@@ -1,14 +1,11 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusTaxationBundle:TaxRate:macros.html.twig' as macros %}
 
 <h1>Tax rates <small>Configure your tax tax_rates</small></h1>
 
 <div class="well">
-    <a href="{{ path('sylius_tax_rate_create') }}" class="btn btn-primary">
-        <i class="icon-plus-sign"></i> new tax rate
-    </a>
-    <a href="{{ path('sylius_tax_category_index') }}" class="btn btn-success">
-        <i class="icon-list"></i> manage taxation categories
-    </a>
+    {{ buttons.manage(path('sylius_tax_category_index'), 'manage taxation categories') }}
+    {{ buttons.create(path('sylius_tax_rate_create'), 'new tax rate') }}
 </div>
 
 {% if tax_rates.haveToPaginate()|default(false) %}

@@ -1,5 +1,7 @@
 {% macro list(taxonomy, taxons) %}
 
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 {% if taxons|length > 0 %}
 <table class="table">
     <thead>
@@ -15,7 +17,7 @@
 {% else %}
 <div class="alert alert-info">
     <h4 class="alert-heading">Information</h4>
-    No taxons to show
+    {{ 'sylius.taxon.no_taxons'|trans }}
 </div>
 {% endif %}
 
@@ -31,14 +33,8 @@
     </td>
     <td>
         <div class="pull-right">
-            <a href="{{ path('sylius_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id}) }}" class="btn">
-                <i class="icon-pencil"></i> edit
-            </a>
-            <form action="{{ path('sylius_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id}) }}" method="post" style="display: inline;">
-                <button class="btn btn-danger">
-                    <i class="icon-trash"></i>
-                </button>
-            </form>
+            {{ buttons.edit(path('sylius_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
+            {{ buttons.delete(path('sylius_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
         </div>
     </td>
 </tr>

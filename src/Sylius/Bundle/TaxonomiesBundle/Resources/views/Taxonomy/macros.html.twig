@@ -1,5 +1,7 @@
 {% macro list(taxonomies) %}
 
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 {% if taxonomies|length > 0 %}
 <table class="table table-hover">
     <thead>
@@ -24,20 +26,10 @@
             </td>
             <td>
                 <div class="pull-right">
-                    <a href="{{ path('sylius_taxon_create', {'taxonomyId': taxonomy.id}) }}" class="btn btn-primary">
-                        <i class="icon-plus-sign"></i> create taxon
-                    </a>
-                    <a href="{{ path('sylius_taxonomy_show', {'id': taxonomy.id}) }}" class="btn">
-                        <i class="icon-book"></i> details
-                    </a>
-                    <a href="{{ path('sylius_taxonomy_update', {'id': taxonomy.id}) }}" class="btn">
-                        <i class="icon-pencil"></i> edit
-                    </a>
-                    <form action="{{ path('sylius_taxonomy_delete', {'id': taxonomy.id}) }}" method="post" style="display: inline;">
-                        <button class="btn btn-danger">
-                            <i class="icon-trash"></i>
-                        </button>
-                    </form>
+                    {{ buttons.create(path('sylius_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create_taxon'|trans) }}
+                    {{ buttons.show(path('sylius_taxonomy_show', {'id': taxonomy.id}), 'sylius.taxon.manage_taxonomies'|trans) }}
+                    {{ buttons.edit(path('sylius_taxonomy_update', {'id': taxonomy.id}), 'sylius.taxon.update_taxonomy'|trans) }}
+                    {{ buttons.delete(path('sylius_taxonomy_delete', {'id': taxonomy.id}), 'sylius.taxon.delete_taxonomy'|trans) }}
                 </div>
             </td>
         </tr>
@@ -47,7 +39,7 @@
 {% else %}
 <div class="alert alert-info">
     <h4 class="alert-heading">Information</h4>
-    No taxonomies to show
+    {{ 'sylius.taxon.no_taxonomies'|trans }}
 </div>
 {% endif %}
 
