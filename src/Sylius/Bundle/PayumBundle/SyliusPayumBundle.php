@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PayumBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\IntegrationPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -47,5 +48,7 @@ class SyliusPayumBundle extends Bundle
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payum.driver.doctrine/orm'));
+
+        $container->addCompilerPass(new IntegrationPass);
     }
 }
