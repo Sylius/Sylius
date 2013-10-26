@@ -19,7 +19,7 @@ use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
-class CaptureOrderUsingCreditCardStripeAction extends PaymentAwareAction
+class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 {
     /**
      * {@inheritdoc}

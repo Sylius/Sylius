@@ -33,7 +33,7 @@ payum:
                     apiKey:   %stripe.secret_key%
                     testMode: %stripe.test_mode%
                 actions:
-                    - sylius.payum.stripe.action.capture_order_using_credit_card_stripe
+                    - sylius.payum.stripe.action.capture_order_using_credit_card
                     - sylius.payum.action.obtain_credit_card
                     - sylius.payum.action.order_status
 
