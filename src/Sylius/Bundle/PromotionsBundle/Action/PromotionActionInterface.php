@@ -20,6 +20,19 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
  */
 interface PromotionActionInterface
 {
+    /**
+     * Applies the promotion to its subject.
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param array $configuration
+     * @return mixed
+     */
     public function execute(PromotionSubjectInterface $subject, array $configuration);
+
+    /**
+     * Returns the form name related to this action.
+     *
+     * @return string
+     */
     public function getConfigurationFormType();
 }
