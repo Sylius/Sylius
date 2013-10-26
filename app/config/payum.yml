@@ -48,8 +48,8 @@ payum:
         dummy:
             custom:
                 actions:
-                    - sylius.payum.dummy.action.dummy_capture_order
-                    - sylius.payum.dummy.action.dummy_order_status
+                    - sylius.payum.dummy.action.capture_order
+                    - sylius.payum.dummy.action.order_status
 
             storages:
                 Sylius\Bundle\CoreBundle\Model\Order:
