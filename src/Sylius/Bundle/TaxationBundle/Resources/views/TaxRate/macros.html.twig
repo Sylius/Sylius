@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for rate in rates %}
+    {% for tax_rate in tax_rates %}
         <tr>
             <td>{{ tax_rate.id }}</td>
             <td>{{ tax_rate.category }}</td>
@@ -36,9 +36,12 @@
                     <a href="{{ path('sylius_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
                        <i class="icon-pencil"></i> edit
                     </a>
-                    <a href="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" class="btn btn-danger">
-                        <i class="icon-trash"></i> delete
-                    </a>
+                    <form action="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" method="post" class="btn-group inline pull-right">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger">
+                            <i class="icon-trash"></i> delete
+                        </button>
+                    </form>
                 </div>
             </td>
         </tr>

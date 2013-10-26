@@ -24,9 +24,12 @@
                     <a href="{{ path('sylius_tax_category_update', {'id': tax_category.id}) }}" class="btn">
                        <i class="icon-pencil"></i> edit
                     </a>
-                    <a href="{{ path('sylius_tax_category_delete', {'id': tax_category.id}) }}" class="btn btn-danger">
-                        <i class="icon-trash"></i> delete
-                    </a>
+                    <form action="{{ path('sylius_tax_category_delete', {'id': tax_category.id}) }}" method="post" class="btn-group inline pull-right">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger">
+                            <i class="icon-trash"></i> delete
+                        </button>
+                    </form>
                 </div>
             </td>
         </tr>
