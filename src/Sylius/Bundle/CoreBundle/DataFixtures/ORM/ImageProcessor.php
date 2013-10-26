@@ -26,16 +26,16 @@ use Symfony\Component\Intl\Intl;
 class ImageProcessor implements ProcessorInterface
 {
     protected $uploader;
-    protected $kernelRootDirectory;
+    protected $fixturesDir;
     protected $files = array();
 
-    public function __construct(ImageUploaderInterface $uploader, $kernelRootDirectory)
+    public function __construct(ImageUploaderInterface $uploader, $fixturesDir)
     {
         $this->uploader = $uploader;
-        $this->kernelRootDirectory = $kernelRootDirectory;
+        $this->fixturesDir = $fixturesDir;
 
         $finder = new Finder();
-        foreach ($finder->files()->in($this->kernelRootDirectory . '/../web/fixtures') as $file) {
+        foreach ($finder->files()->in($this->fixturesDir . '/images') as $file) {
             $this->files[$file->getRelativePathname()] = $file;
         }
     }

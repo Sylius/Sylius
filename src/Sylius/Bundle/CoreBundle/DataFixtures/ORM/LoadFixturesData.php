@@ -55,6 +55,16 @@ class LoadFixturesData implements FixtureInterface, ContainerAwareInterface
     protected $locale;
 
     /**
+     * @var string
+     */
+    protected $kernelRootDir;
+
+    /**
+     * @var string
+     */
+    protected $fixturesDir;
+
+    /**
      * Faker.
      *
      * @var Generator
@@ -74,7 +84,7 @@ class LoadFixturesData implements FixtureInterface, ContainerAwareInterface
         // load regular fixtures
         $regulars = array('countries', 'exchange_rates', 'promotions', 'users', 'addresses', 'properties', 'zones', 'options', 'taxation', 'shipping', 'payment_methods', 'taxonomies', 'taxonomies');
         array_walk($regulars, function(&$file) {
-            $file = __DIR__ . "/../DATA/$file.yml";
+            $file = $this->fixturesDir . "$file.yml";
         });
         Fixtures::load($regulars, $manager, $this->getAliceOptions());
 
@@ -82,19 +92,19 @@ class LoadFixturesData implements FixtureInterface, ContainerAwareInterface
         $productProcessors = array(
             new ProductProcessor($this->get('sylius.generator.variant'), $this->productProvider),
         );
-        Fixtures::load(__DIR__ . '/../DATA/products.yml', $manager, $this->getAliceOptions(), $productProcessors);
+        Fixtures::load($this->fixturesDir . 'products.yml', $manager, $this->getAliceOptions(), $productProcessors);
 
         // load images
         $imageProcessors = array(
-            new ImageProcessor($this->get('sylius.image_uploader'), $this->container->getParameter('kernel.root_dir')),
+            new ImageProcessor($this->get('sylius.image_uploader'), $this->fixturesDir),
         );
-        Fixtures::load(__DIR__ . '/../DATA/images.yml', $manager, $this->getAliceOptions(), $imageProcessors);
+        Fixtures::load($this->fixturesDir . 'images.yml', $manager, $this->getAliceOptions(), $imageProcessors);
 
         // load orders
         $orderProcessors = array(
             new OrderProcessor($this->get('sylius.repository.order_item'), $this->get('sylius.repository.variant')),
         );
-        Fixtures::load(__DIR__ . '/../DATA/orders.yml', $manager, $this->getAliceOptions(), $orderProcessors);
+        Fixtures::load($this->fixturesDir . 'orders.yml', $manager, $this->getAliceOptions(), $orderProcessors);
 
         $this->loadSettings();
     }
@@ -107,6 +117,8 @@ class LoadFixturesData implements FixtureInterface, ContainerAwareInterface
         $this->container = $container;
 
         $this->locale = $this->container->getParameter('sylius.locale');
+        $this->kernelRootDir = $this->container->getParameter('kernel.root_dir');
+        $this->fixturesDir = $this->kernelRootDir . '/../fixtures/';
 
         $this->countryProvider = new CountryProvider($this->locale, $this->faker);
         $this->productProvider = new ProductProvider($this->locale, $this->faker);
