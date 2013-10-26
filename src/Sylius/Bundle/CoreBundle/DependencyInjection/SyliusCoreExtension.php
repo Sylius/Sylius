@@ -33,7 +33,7 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
         'sylius_payum',
         'sylius_product',
         'sylius_promotions',
-        'sylius_sales',
+        'sylius_order',
         'sylius_settings',
         'sylius_shipping',
         'sylius_taxation',

@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SalesBundle\DependencyInjection;
+namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Sales bundle extension.
+ * Order bundle extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusSalesExtension extends SyliusResourceExtension
+class SyliusOrderExtension extends SyliusResourceExtension
 {
     /**
      * {@inheritdoc}
