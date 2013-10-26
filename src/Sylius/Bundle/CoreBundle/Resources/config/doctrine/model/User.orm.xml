@@ -15,7 +15,7 @@
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
 
-        <one-to-many field="orders" target-entity="Sylius\Bundle\SalesBundle\Model\OrderInterface" mapped-by="user">
+        <one-to-many field="orders" target-entity="Sylius\Bundle\OrderBundle\Model\OrderInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>

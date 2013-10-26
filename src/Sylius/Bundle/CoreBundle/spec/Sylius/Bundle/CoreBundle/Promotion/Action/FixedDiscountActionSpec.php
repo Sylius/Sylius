@@ -39,7 +39,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface       $order
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
      */
     function it_applies_fixed_discount_as_promotion_adjustment($adjustmentRepository, $order, $adjustment)
     {

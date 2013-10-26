@@ -81,7 +81,7 @@ sylius_addressing:
         address:
             controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController
 
-sylius_sales:
+sylius_order:
     classes:
         order:
             model: Sylius\Bundle\CoreBundle\Model\Order

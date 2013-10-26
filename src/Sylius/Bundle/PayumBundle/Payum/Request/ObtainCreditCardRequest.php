@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Request;
 
 use Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 
 class ObtainCreditCardRequest
 {

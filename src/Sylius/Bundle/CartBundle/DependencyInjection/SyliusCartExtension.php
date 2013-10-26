@@ -59,11 +59,11 @@ class SyliusCartExtension extends SyliusResourceExtension implements PrependExte
      */
     public function prepend(ContainerBuilder $container)
     {
-        if (!$container->hasExtension('sylius_sales')) {
+        if (!$container->hasExtension('sylius_order')) {
             return;
         }
 
-        $container->prependExtensionConfig('sylius_sales', array(
+        $container->prependExtensionConfig('sylius_order', array(
             'classes' => array(
                 'order_item' => array(
                     'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
