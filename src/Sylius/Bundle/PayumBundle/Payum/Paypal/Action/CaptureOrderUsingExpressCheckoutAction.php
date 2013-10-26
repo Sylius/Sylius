@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Payum\Action\PaymentAwareAction;
 use Payum\Bridge\Spl\ArrayObject;
@@ -18,7 +18,7 @@ use Payum\Request\CaptureRequest;
 use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
-class CaptureOrderWithPaypalAction extends PaymentAwareAction
+class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 {
     /**
      * {@inheritDoc}

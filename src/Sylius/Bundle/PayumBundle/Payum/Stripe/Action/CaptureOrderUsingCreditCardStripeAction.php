@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 
 use Payum\Action\PaymentAwareAction;
 use Payum\Bridge\Spl\ArrayObject;
@@ -19,7 +19,7 @@ use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
-class CaptureOrderWithStripeAction extends PaymentAwareAction
+class CaptureOrderUsingCreditCardStripeAction extends PaymentAwareAction
 {
     /**
      * {@inheritdoc}
