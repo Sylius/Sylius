@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Faker\Factory as FakerFactory;
-
 /**
  * Abstract additional Faker provider
  *

@@ -16,7 +16,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Generator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Intl\Intl;
 use Nelmio\Alice\Fixtures;
 use Faker\Factory as FakerFactory;
 
@@ -83,7 +82,7 @@ class LoadFixturesData implements FixtureInterface, ContainerAwareInterface
     {
         // load regular fixtures
         $regulars = array('countries', 'exchange_rates', 'promotions', 'users', 'addresses', 'properties', 'zones', 'options', 'taxation', 'shipping', 'payment_methods', 'taxonomies', 'taxonomies');
-        array_walk($regulars, function(&$file) {
+        array_walk($regulars, function (&$file) {
             $file = $this->fixturesDir . "$file.yml";
         });
         Fixtures::load($regulars, $manager, $this->getAliceOptions());

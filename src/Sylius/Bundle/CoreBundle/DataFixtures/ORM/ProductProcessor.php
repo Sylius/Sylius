@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 use Nelmio\Alice\ProcessorInterface;
 use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\VariableProductBundle\Generator\VariantGenerator;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Product processor: generates all possible variants with random prices.

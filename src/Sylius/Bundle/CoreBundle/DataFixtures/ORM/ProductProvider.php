@@ -73,5 +73,4 @@ class ProductProvider extends AbstractProvider
         return $this->faker->randomNumber(13);
     }
 
-
 }

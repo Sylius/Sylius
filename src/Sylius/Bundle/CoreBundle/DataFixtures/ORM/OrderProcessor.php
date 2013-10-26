@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 use Nelmio\Alice\ProcessorInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Order processor : adds items to the order and its shipment, calculates its amount

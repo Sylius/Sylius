@@ -16,7 +16,6 @@ use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Image processor : uploads the variant image
@@ -56,7 +55,7 @@ class ImageProcessor implements ProcessorInterface
     /**
      * Return the image file associated to the given variant.
      *
-     * @param VariantInterface $variant
+     * @param  VariantInterface $variant
      * @return mixed
      */
     protected function findFile(VariantInterface $variant)
