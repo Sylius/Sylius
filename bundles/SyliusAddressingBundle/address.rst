@@ -16,7 +16,7 @@ Address is very simple model you should use to store all address data in your ap
 +-----------+--------------------------------+
 | country   | Reference to Country model     |
 +-----------+--------------------------------+
-| province  | Refernce to Province model     |
+| province  | Reference to Province model    |
 +-----------+--------------------------------+
 | street    |                                |
 +-----------+--------------------------------+

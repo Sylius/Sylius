@@ -108,7 +108,7 @@ Routing configuration
 We will show an example here, how you can configure routing.
 Routing is based on `SyliusResourceBundle`.
 
-Add folowing to your ``app/config/routing.yml``.
+Add following to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
