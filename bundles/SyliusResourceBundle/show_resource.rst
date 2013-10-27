@@ -64,7 +64,7 @@ Displaying the user by id can be boring... and let's say we do not want to allow
                     username: $username
                     enabled:  true
 
-With this configuration, the controller will look for a user with the given username and exlude disabled users.
+With this configuration, the controller will look for a user with the given username and exclude disabled users.
 Internally, it simply uses the ``$repository->findOneBy(array $criteria)`` method to look for the resource.
 
 Using custom repository methods

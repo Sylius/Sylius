@@ -73,7 +73,7 @@ What has happened?
 * Parameter ``sylius.model.tax_rate.class`` contains ``Acme\\Bundle\\ShopBundle\\Entity\\TaxRate``.
 * ``sylius.repository.tax_rate`` represents Doctrine repository for your new class.
 * ``sylius.manager.tax_rate`` represents Doctrine object manager for your new class.
-* ``sylius.controller.tax_rate`` represents the controler for your new class.
+* ``sylius.controller.tax_rate`` represents the controller for your new class.
 * All Doctrine relations to ``Sylius\\Bundle\\TaxationBundle\\Model\\TaxRateInterface`` are using your new class as *target-entity*, you do not need to update any mappings.
 * ``TaxRateType`` form type is using your model as ``data_class``.
 * ``Sylius\\Bundle\\TaxationBundle\\Model\\TaxRate`` is automatically turned into Doctrine Mapped Superclass.

@@ -7,7 +7,7 @@ It is a very simple interface, with only one method - the ``getTaxCategory()``, 
 Implementing the interface
 --------------------------
 
-Let's assume that you have a **Server** entity in your application. Every server has it's price and other parameters, but you would like to calculate the tax included in price Every server has it's price and other parameters, but a would like to aclculate the tax included in price.
+Let's assume that you have a **Server** entity in your application. Every server has it's price and other parameters, but you would like to calculate the tax included in price Every server has it's price and other parameters, but a would like to calculate the tax included in price.
 You could calculate the math in a simple method, but it's not enough when you have to handle multiple tax rates, categories and zones.
 
 First step is to implement the simple interface.
