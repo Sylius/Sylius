@@ -24,7 +24,7 @@
         "athari/yalinqo":                       "*@dev",
         "doctrine/doctrine-bundle":             "1.2.*@dev",
         "doctrine/orm":                         "~2.3",
-        "friendsofsymfony/rest-bundle":         "0.13.*",
+        "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle":                "0.12.*",
