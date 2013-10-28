@@ -33,6 +33,7 @@
         "sylius/inventory-bundle":        "1.0.*@dev",
         "sylius/taxonomies-bundle":       "1.0.*@dev",
         "sylius/settings-bundle":         "1.0.*@dev",
+        "sylius/payum-bundle":            "1.0.*@dev",
         "sylius/payments-bundle":         "1.0.*@dev",
         "sylius/flow-bundle":             "1.0.*@dev",
         "sylius/resource-bundle":         "1.0.*@dev",
