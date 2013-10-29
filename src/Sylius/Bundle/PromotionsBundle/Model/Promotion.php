@@ -50,7 +50,7 @@ class Promotion implements PromotionInterface
 
     public function getName()
     {
-    return $this->name;
+        return $this->name;
     }
 
     public function setName($name)

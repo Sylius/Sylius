@@ -55,14 +55,14 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 

@@ -21,7 +21,7 @@ interface OptionValueInterface
     /**
      * Get option.
      *
-     * @return OptionInterface $option
+     * @return OptionInterface
      */
     public function getOption();
 

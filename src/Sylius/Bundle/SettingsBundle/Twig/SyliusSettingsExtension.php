@@ -12,15 +12,13 @@
 namespace Sylius\Bundle\SettingsBundle\Twig;
 
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Twig_Extension;
-use Twig_Function_Method;
 
 /**
  * Sylius settings extension for Twig.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusSettingsExtension extends Twig_Extension
+class SyliusSettingsExtension extends \Twig_Extension
 {
     /**
      * Settings manager.
@@ -45,8 +43,8 @@ class SyliusSettingsExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_settings_all' => new Twig_Function_Method($this, 'getSettings'),
-            'sylius_settings_get' => new Twig_Function_Method($this, 'getSettingsParameter'),
+            'sylius_settings_all' => new \Twig_Function_Method($this, 'getSettings'),
+            'sylius_settings_get' => new \Twig_Function_Method($this, 'getSettingsParameter'),
         );
     }
 
@@ -68,6 +66,8 @@ class SyliusSettingsExtension extends Twig_Extension
      * @param string $name
      *
      * @return mixed
+     *
+     * @throws \InvalidArgumentException
      */
     public function getSettingsParameter($name)
     {

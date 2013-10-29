@@ -50,7 +50,7 @@ interface VariableProductInterface extends ProductInterface
      * Returns all product variants.
      * This collection should exclude the master variant.
      *
-     * @return Collection of VariantInterface
+     * @return VariantInterface[]
      */
     public function getVariants();
 
@@ -103,7 +103,7 @@ interface VariableProductInterface extends ProductInterface
     /**
      * Returns all product options.
      *
-     * @return Collection
+     * @return OptionInterface[]
      */
     public function getOptions();
 

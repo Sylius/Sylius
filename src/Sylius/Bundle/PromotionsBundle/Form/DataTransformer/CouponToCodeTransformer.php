@@ -34,15 +34,15 @@ class CouponToCodeTransformer implements DataTransformerInterface
     private $couponRepository;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     protected $dispatcher;
 
     /**
      * Constructor.
      *
-     * @param ObjectRepository          $couponRepository
-     * @param EventDispatcherInterface  $dispatcher
+     * @param ObjectRepository         $couponRepository
+     * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(ObjectRepository $couponRepository, EventDispatcherInterface $dispatcher)
     {
