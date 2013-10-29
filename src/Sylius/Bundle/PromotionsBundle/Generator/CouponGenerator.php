@@ -22,7 +22,14 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
  */
 class CouponGenerator implements CouponGeneratorInterface
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $repository;
+
+    /**
+     * @var ObjectManager
+     */
     protected $manager;
 
     public function __construct(RepositoryInterface $repository, ObjectManager $manager)
@@ -36,9 +43,8 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
-        for ($i = 0; $i < $instruction->getAmount(); $i++) {
+        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
             $coupon = $this->repository->createNew();
-
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
             $coupon->setUsageLimit($instruction->getUsageLimit());
@@ -64,6 +70,11 @@ class CouponGenerator implements CouponGeneratorInterface
         return $code;
     }
 
+    /**
+     * @param string $code
+     *
+     * @return boolean
+     */
     protected function isUsedCode($code)
     {
         return null !== $this->repository->findOneBy(array('code' => $code));

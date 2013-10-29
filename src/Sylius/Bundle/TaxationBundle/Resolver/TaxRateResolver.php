@@ -44,7 +44,7 @@ class TaxRateResolver implements TaxRateResolverInterface
     public function resolve(TaxableInterface $taxable, array $criteria = array())
     {
         if (null === $category = $taxable->getTaxCategory()) {
-            return;
+            return null;
         }
 
         $criteria = array_merge(array('category' => $category), $criteria);

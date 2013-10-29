@@ -65,14 +65,14 @@ class TaxRate implements TaxRateInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -190,6 +190,9 @@ class TaxRate implements TaxRateInterface
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -205,6 +208,9 @@ class TaxRate implements TaxRateInterface
         return $this->updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;

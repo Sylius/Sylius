@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**

@@ -15,7 +15,6 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
     <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\OptionValue" table="sylius_option_value">
