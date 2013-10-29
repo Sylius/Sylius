@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\OAuth;
 
+use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Sylius\Bundle\CoreBundle\Model\User;
@@ -34,11 +35,10 @@ class UserProvider extends FOSUBUserProvider
         } catch (UsernameNotFoundException $e) {
             if (null === $user = $this->userManager->findUserByEmail($response->getEmail())) {
                 return $this->createUserByOAuthUserResponse($response);
-            } else {
-                return $this->updateUserByOAuthUserResponse($user, $response);
             }
-        }
 
+            return $this->updateUserByOAuthUserResponse($user, $response);
+        }
     }
 
     /**
@@ -69,6 +69,7 @@ class UserProvider extends FOSUBUserProvider
         if (null !== $email = $response->getEmail()) {
             $user->setEmail($email);
         }
+
         if (null === $this->userManager->findUserByUsername($response->getNickname())) {
             $user->setUsername($response->getNickname());
         }
@@ -81,12 +82,12 @@ class UserProvider extends FOSUBUserProvider
     /**
      * Attach OAuth sign-in provider account to existing user
      *
-     * @param User $user
+     * @param FOSUserInterface      $user
      * @param UserResponseInterface $response
      *
-     * @return User
+     * @return FOSUserInterface
      */
-    protected function updateUserByOAuthUserResponse(User $user, UserResponseInterface $response)
+    protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
     {
         $providerName = $response->getResourceOwner()->getName();
         $providerNameSetter = 'set'.ucfirst($providerName).'Id';

@@ -8,8 +8,12 @@ Feature: Sign in to the store via OAuth
         Given I am not logged in
           And I am on the store homepage
 
-    Scenario: Get to the OAuth login page
+    Scenario Outline: Get to the OAuth login page
          When I follow "Login"
-          And I press the login with Amazon button
-         Then I should be on the amazon.com website
-          And I should see the Amazon login form
+         Then I should see the connect with "<oauth>" button
+
+    Examples:
+        | oauth    |
+        | Amazon   |
+        | Facebook |
+        | Google   |
