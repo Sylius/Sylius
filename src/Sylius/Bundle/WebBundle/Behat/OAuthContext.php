@@ -30,39 +30,10 @@ class OAuthContext extends RawMinkContext
     }
 
     /**
-     * @Then /^I should be on the (.+) website$/
+     * @Then /^I should see the connect with "([^""]*)" button$/
      */
-    public function iShouldBeOnTheWebsite($domain)
+    public function iShouldSeeTheConnectWithButton($connect)
     {
-        if (!$this->currentUrlContains($domain)) {
-            throw new ExpectationException(sprintf('Current URL should contain "%s".', $domain), $this->getSession());
-        }
-    }
-
-    /**
-     * @Then /^I should see the .+ login form$/
-     */
-    public function iShouldSeeTheLoginForm()
-    {
-        $loginForm = $this->getLoginForm();
-
-        // Re-set default session
-        $this->getMink()->setDefaultSessionName('symfony2');
-    }
-
-    protected function currentUrlContains($domain)
-    {
-        $currentUrl = $this->getSession()->getCurrentUrl();
-        return strpos($currentUrl, $domain) !== false;
-    }
-
-    protected function getLoginForm()
-    {
-        return $this->assertSession()->elementExists('xpath',
-            '//form//input[@type="email"]' .
-            '/ancestor::form//input[@type="password"]' .
-            '/ancestor::form//*[@type="submit"]' .
-            '/ancestor::form'
-        );
+        $this->assertSession()->elementExists('css', sprintf('.oauth-login-%s', strtolower($connect)));
     }
 }
