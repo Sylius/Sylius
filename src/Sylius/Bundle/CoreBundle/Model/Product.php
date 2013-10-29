@@ -156,6 +156,8 @@ class Product extends BaseProduct implements ProductInterface
     public function setTaxons(Collection $taxons)
     {
         $this->taxons = $taxons;
+
+        return $this;
     }
 
     /**
@@ -208,6 +210,8 @@ class Product extends BaseProduct implements ProductInterface
     public function setTaxCategory(TaxCategoryInterface $category = null)
     {
         $this->taxCategory = $category;
+
+        return $this;
     }
 
     /**
@@ -224,6 +228,8 @@ class Product extends BaseProduct implements ProductInterface
     public function setShippingCategory(ShippingCategoryInterface $category = null)
     {
         $this->shippingCategory = $category;
+
+        return $this;
     }
 
     /**

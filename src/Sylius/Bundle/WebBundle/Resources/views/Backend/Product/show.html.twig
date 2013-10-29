@@ -98,6 +98,10 @@
                     <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
                 </tr>
                 <tr>
+                    <td>{{ 'sylius.product.shipping_category'|trans }}</td>
+                    <td>{{ product.shippingCategory|default('sylius.product.no_shipping_category'|trans) }}</td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
                     <td>
                         <span class="label label-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
