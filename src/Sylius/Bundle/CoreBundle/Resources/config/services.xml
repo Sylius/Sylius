@@ -59,6 +59,10 @@
     <services>
         <!-- settings schemas -->
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
+            <argument type="collection">
+                <argument key="currency">%sylius.money.currency%</argument>
+                <argument key="locale">%sylius.locale%</argument>
+            </argument>
             <tag name="sylius.settings_schema" namespace="general" />
         </service>
         <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
