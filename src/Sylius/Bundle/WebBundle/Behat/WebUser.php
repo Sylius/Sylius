@@ -53,6 +53,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         // Sylius data creation context.
         $this->useContext('data', new DataContext());
+        // Sylius OAuth context.
+        $this->useContext('oauth', new OAuthContext());
     }
 
     /**
@@ -731,6 +733,23 @@ class WebUser extends MinkContext implements KernelAwareInterface
             $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
+    }
+
+    /**
+     * @When /^I click the login with (.+) button$/
+     * @When /^I press the login with (.+) button$/
+     */
+    public function iClickTheLoginWithButton($provider)
+    {
+        $loginButton = $this->getSession()->getPage()->find('css',
+            sprintf('a.oauth-login-%s', strtolower($provider))
+        );
+        $loginButton->click();
+
+        // Re-set default session
+        $currentUrl = $this->getSession()->getCurrentUrl();
+        $this->getMink()->setDefaultSessionName('goutte');
+        $this->getSession()->visit($currentUrl);
     }
 
     /**

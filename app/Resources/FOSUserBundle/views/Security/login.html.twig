@@ -5,16 +5,16 @@
     <h1>Login <small>Sylius store</small></h1>
 </div>
 
+{% if error %}
+    <div class="alert alert-error">
+        {{ error }}
+    </div>
+{% endif %}
+
 <blockquote>
   <p>Please login using "<strong>sylius@example.com</strong>" email and "<strong>sylius</strong>" as password.</p>
   <small>Mr. Sylius Demo Guide</small>
 </blockquote>
-
-{% if error %}
-<div class="alert alert-error">
-    {{ error }}
-</div>
-{% endif %}
 
 <form action="{{ path('fos_user_security_check') }}" method="post">
 <fieldset>
@@ -32,11 +32,18 @@
     </div>
     <div class="form-group">
         <div class="controls">
-            Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">
+                Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            </label>
         </div>
     </div>
 </fieldset>
+<div class="form-actions clearfix">
+    <div class="pull-right">
+        {{ render(url('hwi_oauth_connect')) }}
+    </div>
     <button type="submit" class="btn btn-primary btn-lg pull-left" name="login"><i class="icon-lock"></i> Login</button>
+</div>
 </form>
 
 {% endblock %}

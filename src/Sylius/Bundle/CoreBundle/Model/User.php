@@ -22,6 +22,9 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
  */
 class User extends BaseUser implements UserInterface
 {
+    protected $amazonId;
+    protected $facebookId;
+    protected $googleId;
     protected $firstName;
     protected $lastName;
     protected $createdAt;
@@ -49,6 +52,78 @@ class User extends BaseUser implements UserInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+    }
+
+    /**
+     * Set ID of Amazon account attached to the user
+     *
+     * @param string $amazonId
+     *
+     * @return User
+     */
+    public function setAmazonId($amazonId)
+    {
+        $this->amazonId = $amazonId;
+
+        return $this;
+    }
+
+    /**
+     * Get ID of Amazon account attached to the user
+     *
+     * @return string|null
+     */
+    public function getAmazonId()
+    {
+        return $this->amazonId;
+    }
+
+    /**
+     * Set ID of Facebook account attached to the user
+     *
+     * @param string $facebookId
+     *
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get ID of Facebook account attached to the user
+     *
+     * @return string|null
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * Set ID of Google account attached to the user
+     *
+     * @param string $googleId
+     *
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get ID of Google account attached to the user
+     *
+     * @return string|null
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
     }
 
     /**
