@@ -3,6 +3,7 @@
 {% from 'SyliusWebBundle:Backend/Variant:macros.html.twig' import list as list_variants %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -64,17 +65,17 @@
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
+                        {% if product.options|length > 0 %}
                         <ul>
                         {% for option in product.options %}
                             <li><strong>{{ option.name }}</strong>: {{ option.values|join(', ') }}.</li>
-                        {% else %}
-                            <li>
-                                <span class="label label-info">
-                                    <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
-                                </span>
-                            </li>
                         {% endfor %}
                         </ul>
+                        {% else %}
+                            <span class="label label-info">
+                                <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
+                            </span>
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>
@@ -104,9 +105,7 @@
                 <tr>
                     <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
                     <td>
-                        <span class="label label-{{ product.masterVariant.availableOnDemand ? 'success' : 'warning'}}">
-                            {{ product.masterVariant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                        </span>
+                        {{ misc.state_label(product.masterVariant.availableOnDemand) }}
                     </td>
                 </tr>
                 <tr>
@@ -115,7 +114,7 @@
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
-                    <td>{{ product.masterVariant.price|sylius_money }}</td>
+                    <td>{{ product.masterVariant.price|sylius_price }}</td>
                 </tr>
             </tbody>
         </table>
@@ -167,7 +166,7 @@
     {{ buttons.create(path('sylius_backend_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
     <div class="pull-right">
-    <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
+        <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>
 </div>
 

@@ -1094,6 +1094,38 @@
         <source>sylius.payment.state</source>
         <target>State</target>
       </trans-unit>
+      <trans-unit id="121771e965341ff8984f23b8f8342990" resname="sylius.payment.state.checkout">
+        <source>sylius.payment.state.checkout</source>
+        <target>Checkout</target>
+      </trans-unit>
+      <trans-unit id="ffbfedb9f21ce6841a7728d875435d36" resname="sylius.payment.state.completed">
+        <source>sylius.payment.state.completed</source>
+        <target>Completed</target>
+      </trans-unit>
+      <trans-unit id="8f587db2580ef31e2507a0c18595d98d" resname="sylius.payment.state.failed">
+        <source>sylius.payment.state.failed</source>
+        <target>Failed</target>
+      </trans-unit>
+      <trans-unit id="0e185128533dcd5614d621905f6f68b9" resname="sylius.payment.state.new">
+        <source>sylius.payment.state.new</source>
+        <target>New</target>
+      </trans-unit>
+      <trans-unit id="4ff1d61ea8920e3acf15efa3017d3af9" resname="sylius.payment.state.pending">
+        <source>sylius.payment.state.pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="700331d57f2cc45737edc42332d60442" resname="sylius.payment.state.processing">
+        <source>sylius.payment.state.processing</source>
+        <target>Processing</target>
+      </trans-unit>
+      <trans-unit id="cf0228f61e0aebdd9fee4840f2fdd108" resname="sylius.payment.state.unknown">
+        <source>sylius.payment.state.unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="e9eb04055e6e2430eb23b5efdd4bc2ca" resname="sylius.payment.state.void">
+        <source>sylius.payment.state.void</source>
+        <target>Void</target>
+      </trans-unit>
       <trans-unit id="78ab1a69db10f0ba02af568ae1f42321" resname="sylius.payment.update_header">
         <source>sylius.payment.update_header</source>
         <target>Editing payment</target>
@@ -1216,7 +1248,7 @@
       </trans-unit>
       <trans-unit id="e7df3e27011c8dfa4bfa31113ae78183" resname="sylius.product.no_sku">
         <source>sylius.product.no_sku</source>
-        <target>&lt;i&gt;No SKU&lt;/i&gt;</target>
+        <target>No SKU</target>
       </trans-unit>
       <trans-unit id="a1be672ef677d5e5d57e287eb34891e1" resname="sylius.product.no_tax_category">
         <source>sylius.product.no_tax_category</source>

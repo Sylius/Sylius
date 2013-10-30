@@ -40,7 +40,7 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Set payment method.
      *
-     * @param PaymentMethodInterface $method
+     * @param null|PaymentMethodInterface $method
      */
     public function setMethod(PaymentMethodInterface $method = null);
 
@@ -103,7 +103,7 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Get processing logs.
      *
-     * @return Collection
+     * @return PaymentLogInterface[]
      */
     public function getLogs();
 

@@ -38,6 +38,15 @@
 {% endspaceless %}
 {% endblock money_widget %}
 
+{% block percent_widget %}
+{% spaceless %}
+    <div class="input-group">
+        <span class="input-group-addon">%</span>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endspaceless %}
+{% endblock percent_widget %}
+
 {% block datetime_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}

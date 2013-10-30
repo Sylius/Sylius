@@ -22,7 +22,7 @@ Feature: Exchange rates
         Given I am on the dashboard page
          When I follow "Exchange rates"
          Then I should be on the exchange rate index page
-          And I should see exchange rate with currency "GBP" in the list
+          And I should see exchange rate with currency "British Pound Sterling" in the list
 
     Scenario: Rates are listed in the index
         Given I am on the dashboard page
@@ -49,7 +49,7 @@ Feature: Exchange rates
 
     Scenario: Creating new exchange rate
         Given I am on the exchange rate creation page
-         When I fill in "Currency" with "PLN"
+         When I select "Polish Zloty" from "Currency"
           And I fill in "Rate" with "0.235654"
           And I press "Create"
          Then I should be on the exchange rate index page
@@ -59,12 +59,12 @@ Feature: Exchange rates
         Given I created exchange rate "PLN"
          When I go to the exchange rate index page
          Then I should see 4 exchange rates in the list
-          And I should see exchange rate with currency "PLN" in that list
+          And I should see exchange rate with currency "Polish Zloty" in that list
 
     Scenario: Accessing the exchange rate editing form
         Given I am on the dashboard page
          When I follow "Exchange rates"
-          And I click "edit" near "USD"
+          And I click "edit" near "US Dollar"
          Then I should be editing exchange rate with currency "USD"
 
     Scenario: Updating the exchange rate
@@ -77,7 +77,7 @@ Feature: Exchange rates
 
     Scenario: Deleting exchange rate
         Given I am on the exchange rate index page
-         When I press "delete" near "USD"
+         When I press "delete" near "US Dollar"
          Then I should still be on the exchange rate index page
           And I should see "Exchange rate has been successfully deleted."
-          But I should not see exchange rate with name "USD" in the list
+          But I should not see exchange rate with name "US Dollar" in the list

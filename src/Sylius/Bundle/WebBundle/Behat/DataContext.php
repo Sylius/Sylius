@@ -15,10 +15,14 @@ use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Model\User;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
@@ -64,8 +68,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereAreFollowingTaxonomies(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-
         foreach ($table->getHash() as $data) {
             $this->thereIsTaxonomy($data['name']);
         }
@@ -1041,6 +1043,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @param array  $criteria
      *
      * @return object
+     *
+     * @throws \InvalidArgumentException
      */
     public function findOneBy($type, array $criteria)
     {
@@ -1073,7 +1077,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     /**
      * Get entity manager.
      *
-     * @return EntityManager
+     * @return ObjectManager
      */
     public function getEntityManager()
     {

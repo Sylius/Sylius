@@ -2,6 +2,7 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if users|length > 0 %}
 <table id="users" class="table">
@@ -25,9 +26,7 @@
             <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
             <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
             <td>
-                <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
-                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
+                {{ misc.state_label(user.enabled) }}
             </td>
             <td>
                 <div class="pull-right">
@@ -42,7 +41,6 @@
 </table>
 {% else %}
 {{ alerts.info('sylius.user.no_results'|trans) }}
-</div>
 {% endif %}
 
 {% endmacro %}
@@ -51,6 +49,7 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if users|length > 0 %}
 <table id="users" class="table">
@@ -68,9 +67,7 @@
             <td>{{ user.id }}</td>
             <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
             <td>
-                <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
-                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
+                {{ misc.state_label(user.enabled) }}
             </td>
             <td>
                 <div class="pull-right">
@@ -85,7 +82,6 @@
 </table>
 {% else %}
 {{ alerts.info('sylius.user.no_results'|trans) }}
-</div>
 {% endif %}
 
 {% endmacro %}

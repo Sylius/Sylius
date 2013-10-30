@@ -62,24 +62,24 @@ class Payment implements PaymentInterface
      */
     protected $creditCard;
 
-    /*
+    /**
      * Processing logs.
      *
-     * @var Collection
+     * @var PaymentLogInterface[]
      */
     protected $logs;
 
     /**
      * Creation date.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -150,6 +150,8 @@ class Payment implements PaymentInterface
         if (null !== $this->creditCard) {
             return $this->creditCard;
         }
+
+        return null;
     }
 
     /**
