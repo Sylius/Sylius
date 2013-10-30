@@ -190,6 +190,10 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_user_index',
             'labelAttributes' => array('icon' => 'icon-user'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.users', $section)));
+        $child->addChild('groups', array(
+            'route' => 'sylius_backend_group_index',
+            'labelAttributes' => array('icon' => 'icon-group'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.groups', $section)));
     }
 
     /**

@@ -16,6 +16,10 @@ sylius_backend_user:
     resource: @SyliusWebBundle/Resources/config/routing/backend/user.yml
     prefix: /users
 
+sylius_backend_group:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/group.yml
+    prefix: /groups
+
 sylius_backend_product:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product.yml
     prefix: /products

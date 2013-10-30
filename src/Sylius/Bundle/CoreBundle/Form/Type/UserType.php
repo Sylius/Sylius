@@ -55,6 +55,11 @@ class UserType extends ProfileFormType
             ->add('enabled', 'checkbox', array(
                 'label' => 'sylius.form.user.enabled'
             ))
+            ->add('groups', 'sylius_group_choice', array(
+                'label'    => 'sylius.form.user.groups',
+                'multiple' => true,
+                'required' => false
+            ))
             ->add('shippingAddress', 'sylius_address', array(
                 'label' => 'sylius.form.user.shipping_address'
             ))

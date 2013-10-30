@@ -2,49 +2,17 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
-      <trans-unit id="a55be57cc201693bfdc2c9021f8fd48d" resname="fos_user.email.already_used">
-        <source>fos_user.email.already_used</source>
-        <target>fos_user.email.already_used</target>
+      <trans-unit id="a7dd2127e3327431a56034e6cc0bcb8b" resname="sylius.group.name.max">
+        <source>sylius.group.name.max</source>
+        <target>Group name must be not be longer than {{ limit }} characters.</target>
       </trans-unit>
-      <trans-unit id="6ff439fdb45d5bd0d58e8d210df8be77" resname="fos_user.email.blank">
-        <source>fos_user.email.blank</source>
-        <target>fos_user.email.blank</target>
+      <trans-unit id="064c308ce05edbb50ca351acbc076dea" resname="sylius.group.name.min">
+        <source>sylius.group.name.min</source>
+        <target>Group name must be at least {{ limit }} characters long.</target>
       </trans-unit>
-      <trans-unit id="fc6c24981b4c0a57ce247c8687a585ea" resname="fos_user.email.invalid">
-        <source>fos_user.email.invalid</source>
-        <target>fos_user.email.invalid</target>
-      </trans-unit>
-      <trans-unit id="966201b57a32472001eeb20f251cce59" resname="fos_user.email.long">
-        <source>fos_user.email.long</source>
-        <target>fos_user.email.long</target>
-      </trans-unit>
-      <trans-unit id="f21278704589f38c6334b87af1479cf9" resname="fos_user.email.short">
-        <source>fos_user.email.short</source>
-        <target>fos_user.email.short</target>
-      </trans-unit>
-      <trans-unit id="dcd6d14d0786e48363cedfda2f1ae893" resname="fos_user.password.blank">
-        <source>fos_user.password.blank</source>
-        <target>fos_user.password.blank</target>
-      </trans-unit>
-      <trans-unit id="208830cde0e30a97e31cae31d1815c35" resname="fos_user.password.short">
-        <source>fos_user.password.short</source>
-        <target>fos_user.password.short</target>
-      </trans-unit>
-      <trans-unit id="717412185b61194420c7def0b42418f1" resname="fos_user.username.already_used">
-        <source>fos_user.username.already_used</source>
-        <target>fos_user.username.already_used</target>
-      </trans-unit>
-      <trans-unit id="e6b436802106350f126526dff34d889c" resname="fos_user.username.blank">
-        <source>fos_user.username.blank</source>
-        <target>fos_user.username.blank</target>
-      </trans-unit>
-      <trans-unit id="8eb91da705aa09b820f19e5a4e06d1fe" resname="fos_user.username.long">
-        <source>fos_user.username.long</source>
-        <target>fos_user.username.long</target>
-      </trans-unit>
-      <trans-unit id="a96e6b81d15a20e05150a905e30d70c4" resname="fos_user.username.short">
-        <source>fos_user.username.short</source>
-        <target>fos_user.username.short</target>
+      <trans-unit id="70b67f1bf334dc1de16785df8cd0309e" resname="sylius.group.name.not_blank">
+        <source>sylius.group.name.not_blank</source>
+        <target>Please enter group name.</target>
       </trans-unit>
       <trans-unit id="0004066cb8a3ad8b40bc84c8131febcc" resname="sylius.user.first_name.max">
         <source>sylius.user.first_name.max</source>
@@ -86,9 +54,13 @@
         <source>sylius.variant.price.not_blank</source>
         <target>Please enter the price.</target>
       </trans-unit>
+      <trans-unit id="037feafe4e225e37e282013f608a4a49" resname="sylius.variant.sku.unique">
+        <source>sylius.variant.sku.unique</source>
+        <target>sylius.variant.sku.unique</target>
+      </trans-unit>
       <trans-unit id="381ad7dedffbd02e6f060ea0cb53a38d" resname="sylius_shipping.method.zone.not_blank">
         <source>sylius_shipping.method.zone.not_blank</source>
-        <target>sylius_shipping.method.zone.not_blank</target>
+        <target>Please enter shipping method zone.</target>
       </trans-unit>
       <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
         <source>sylius_taxation.rate.zone.not_blank</source>

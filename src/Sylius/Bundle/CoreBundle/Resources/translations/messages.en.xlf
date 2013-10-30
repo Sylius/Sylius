@@ -10,6 +10,10 @@
         <source>sylius.checkout.shipping_method.not_blank</source>
         <target>Please select shipping method.</target>
       </trans-unit>
+      <trans-unit id="fcd701dd96af1ffb980eaa25750df014" resname="sylius.form.cart.coupon">
+        <source>sylius.form.cart.coupon</source>
+        <target>Coupon</target>
+      </trans-unit>
       <trans-unit id="af5f81fbdd007eed41ece4ac53d44eb5" resname="sylius.form.checkout.addressing.different_billing_address">
         <source>sylius.form.checkout.addressing.different_billing_address</source>
         <target>Use different address for billing?</target>
@@ -21,6 +25,14 @@
       <trans-unit id="b4c63a04c6b6a0ad83bc699cac462845" resname="sylius.form.checkout.shipping_method">
         <source>sylius.form.checkout.shipping_method</source>
         <target>Shipping Method</target>
+      </trans-unit>
+      <trans-unit id="c6e24c20e0490a3b71c74642f026a399" resname="sylius.form.group.name">
+        <source>sylius.form.group.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="147b8797d848e182c4c847155587be58" resname="sylius.form.group.roles">
+        <source>sylius.form.group.roles</source>
+        <target>Roles</target>
       </trans-unit>
       <trans-unit id="79fc91b958c3d643f9f68c6ea9f517cf" resname="sylius.form.image.file">
         <source>sylius.form.image.file</source>
@@ -70,13 +82,13 @@
         <source>sylius.form.product_filter.sku</source>
         <target>SKU</target>
       </trans-unit>
-      <trans-unit id="bc0d080561ef618e2a01cbb7ec3a0a7e" resname="sylius.form.settings.general.locale">
-        <source>sylius.form.settings.general.locale</source>
-        <target>Language</target>
-      </trans-unit>
       <trans-unit id="0340b231018d2e94073fdf4d68532b77" resname="sylius.form.settings.general.currency">
         <source>sylius.form.settings.general.currency</source>
         <target>Default currency</target>
+      </trans-unit>
+      <trans-unit id="bc0d080561ef618e2a01cbb7ec3a0a7e" resname="sylius.form.settings.general.locale">
+        <source>sylius.form.settings.general.locale</source>
+        <target>Language</target>
       </trans-unit>
       <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.meta_description">
         <source>sylius.form.settings.general.meta_description</source>
@@ -121,6 +133,10 @@
       <trans-unit id="51d1b3166647640229e7329940d07e58" resname="sylius.form.user.first_name">
         <source>sylius.form.user.first_name</source>
         <target>First name</target>
+      </trans-unit>
+      <trans-unit id="e6a02c9ac27893e4ed240c24b8cab3d5" resname="sylius.form.user.groups">
+        <source>sylius.form.user.groups</source>
+        <target>Groups</target>
       </trans-unit>
       <trans-unit id="711db7c8e5f9a2f36ed531a7371ef32c" resname="sylius.form.user.last_name">
         <source>sylius.form.user.last_name</source>

@@ -99,3 +99,7 @@ sylius_resource:
                 model: Sylius\Bundle\CoreBundle\Model\User
                 controller: Sylius\Bundle\CoreBundle\Controller\UserController
                 repository: Sylius\Bundle\CoreBundle\Repository\UserRepository
+        sylius.group:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Bundle\CoreBundle\Model\Group
