@@ -1222,6 +1222,10 @@
         <source>sylius.product.no_tax_category</source>
         <target>No tax category</target>
       </trans-unit>
+      <trans-unit id="8be7a394aa4d7e59b74a86eb06832c12" resname="sylius.product.no_shipping_category">
+        <source>sylius.product.no_shipping_category</source>
+        <target>No shipping category</target>
+      </trans-unit>
       <trans-unit id="54cc7ecdb027bf1a8a7acd6c474a1fe0" resname="sylius.product.no_taxons">
         <source>sylius.product.no_taxons</source>
         <target>There are no taxons for this product</target>
@@ -1281,6 +1285,10 @@
       <trans-unit id="ef63be619b3f38199c730b04fe6df3a9" resname="sylius.product.tax_category">
         <source>sylius.product.tax_category</source>
         <target>Tax category</target>
+      </trans-unit>
+      <trans-unit id="3b63c6858f4e05f2bdad30801fa12a21" resname="sylius.product.shipping_category">
+        <source>sylius.product.shipping_category</source>
+        <target>Shipping category</target>
       </trans-unit>
       <trans-unit id="11c4582757733cff795bf9cf6f77b1f4" resname="sylius.product.update_header">
         <source>sylius.product.update_header</source>

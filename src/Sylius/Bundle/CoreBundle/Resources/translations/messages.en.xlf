@@ -54,6 +54,10 @@
         <source>sylius.form.product.tax_category</source>
         <target>Tax category</target>
       </trans-unit>
+      <trans-unit id="737416fcfe721dea8cfc1247ec9e2c3b" resname="sylius.form.product.shipping_category">
+        <source>sylius.form.product.shipping_category</source>
+        <target>Shipping category</target>
+      </trans-unit>
       <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4cc" resname="sylius.form.product.variant_selection_method">
         <source>sylius.form.product.variant_selection_method</source>
         <target>Variant selection method</target>
