@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PromotionsBundle\Checker;
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -51,6 +52,64 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      */
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
+        if (false === $this->isEligibleToDates($promotion)) {
+            return false;
+        }
+
+        if (false === $this->isEligibleToUsageLimit($promotion)) {
+            return false;
+        }
+
+        if (false === $this->isSubjectEligibleToCoupon($subject, $promotion)) {
+            return false;
+        }
+
+        foreach ($promotion->getRules() as $rule) {
+            if (false === $this->isEligibleToRule($subject, $promotion, $rule)) {
+                return false;
+            }
+        }
+
+        if (false === $this->isCouponEligibleToPromotion($subject, $promotion)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks is a promotion is eligible to a subject for a given rule.
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
+     * @param RuleInterface             $rule
+     *
+     * @return bool
+     */
+    private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
+    {
+        $checker = $this->registry->getChecker($rule->getType());
+
+        if (false === $checker->isEligible($subject, $rule->getConfiguration())) {
+            if ($promotion->isCouponBased() && $promotion === $subject->getPromotionCoupon()->getPromotion()) {
+                $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if the current is between promotion limits.
+     *
+     * @param PromotionInterface $promotion
+     *
+     * @return bool
+     */
+    private function isEligibleToDates(PromotionInterface $promotion)
+    {
         $now = new \DateTime();
 
         if (null !== $startsAt = $promotion->getStartsAt()) {
@@ -65,12 +124,38 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             }
         }
 
+        return true;
+    }
+
+    /**
+     * Checks if promotion usage limit has been reached.
+     *
+     * @param PromotionInterface $promotion
+     *
+     * @return bool
+     */
+    private function isEligibleToUsageLimit(PromotionInterface $promotion)
+    {
         if (null !== $usageLimit = $promotion->getUsageLimit()) {
             if ($promotion->getUsed() >= $usageLimit) {
                 return false;
             }
         }
 
+        return true;
+    }
+
+
+    /**
+     * Checks if subject's is eligible to promotion coupon.
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
+     *
+     * @return bool
+     */
+    private function isSubjectEligibleToCoupon(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    {
         if ($promotion->isCouponBased()) {
             if (null === $subject->getPromotionCoupon()) {
                 return false;
@@ -81,18 +166,19 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             }
         }
 
-        foreach ($promotion->getRules() as $rule) {
-            $checker = $this->registry->getChecker($rule->getType());
+        return true;
+    }
 
-            if (false === $checker->isEligible($subject, $rule->getConfiguration())) {
-                if ($promotion->isCouponBased() && $promotion === $subject->getPromotionCoupon()->getPromotion()) {
-                    $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
-                }
-
-                return false;
-            }
-        }
-
+    /**
+     * Checks is subject's coupon is eligible to promotion.
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
+     *
+     * @return bool
+     */
+    private function isCouponEligibleToPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    {
         if (!$promotion->hasCoupons()) {
             return true;
         }
