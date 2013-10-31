@@ -56,7 +56,7 @@
       </trans-unit>
       <trans-unit id="7e3ac23a2e8c487e9ae4f8e7072cd9ea" resname="sylius.backend.menu.main.products">
         <source>sylius.backend.menu.main.products</source>
-        <target>Продукты</target>
+        <target>Товары</target>
       </trans-unit>
       <trans-unit id="8f3c8f3739c1ab5dc001f182a0df8ae9" resname="sylius.backend.menu.main.promotions">
         <source>sylius.backend.menu.main.promotions</source>
@@ -104,7 +104,7 @@
       </trans-unit>
       <trans-unit id="520f49cd08a95a76ca0e779834cb9ec2" resname="sylius.backend.menu.main.taxonomies">
         <source>sylius.backend.menu.main.taxonomies</source>
-        <target>Категории</target>
+        <target>Каталоги</target>
       </trans-unit>
       <trans-unit id="4a6f9dc181c7429270cb511235b151a8" resname="sylius.backend.menu.main.zones">
         <source>sylius.backend.menu.main.zones</source>
@@ -168,7 +168,7 @@
       </trans-unit>
       <trans-unit id="61118a24751d1fe2394de857fc80a470" resname="sylius.backend.menu.sidebar.products">
         <source>sylius.backend.menu.sidebar.products</source>
-        <target>Продукты</target>
+        <target>Товары</target>
       </trans-unit>
       <trans-unit id="d34a1fe027fb41294819937c4f53751d" resname="sylius.backend.menu.sidebar.promotions">
         <source>sylius.backend.menu.sidebar.promotions</source>
