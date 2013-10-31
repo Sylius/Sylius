@@ -240,7 +240,7 @@
       <trans-unit id="abf3bd38672ee693f1dc9e7e6082bdf05d4e3f46" resname="sylius.settings.timezone_deprecated.help">
         <jms:reference-file line="57">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
         <source>sylius.settings.timezone_deprecated.help</source>
-        <target>Timezone %timezone% is deprcated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).</target>
+        <target>Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).</target>
       </trans-unit>
       <trans-unit id="1067761d5bf199bea084cb68393a01a910d2fa73" resname="sylius.settings.version">
         <jms:reference-file line="30">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
@@ -250,7 +250,7 @@
       <trans-unit id="f160e567caa48c2d478f0daf401fe1e8aced7067" resname="sylius.settings.version_recommanded">
         <jms:reference-file line="36">InstallerBundle/Requirement/SettingsRequirements.php</jms:reference-file>
         <source>sylius.settings.version_recommanded</source>
-        <target>Recommanded PHP version</target>
+        <target>Recommended PHP version</target>
       </trans-unit>
     </body>
   </file>
