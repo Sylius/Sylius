@@ -47,8 +47,8 @@
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "omnipay/omnipay":                      "1.0.*",
-        "payum/payum":                          "0.6.*",
-        "payum/payum-bundle":                   "0.6.*",
+        "payum/payum":                          "~0.6.3",
+        "payum/payum-bundle":                   "~0.6.2",
         "payum/paypal-express-checkout-nvp":    "0.6.*",
         "payum/omnipay-bridge":                 "0.6.*"
     },
