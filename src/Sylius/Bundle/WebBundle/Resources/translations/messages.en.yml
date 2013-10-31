@@ -204,6 +204,7 @@ sylius:
         order:
             index: Orders
             adjustments: Adjustments
+        oauth_settings: OAuth Settings
         page:
             index: Pages
         payment:
@@ -828,6 +829,7 @@ sylius:
         general_header: General settings
         security_header: Security settings
         taxation_header: Taxation settings
+        oauth_header: Settings for OAuth provider: "%provider%"
     shipment_category:
         manage: Manage shipping categories
     shipping_address: Shipping address

@@ -16,6 +16,7 @@ use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
@@ -31,25 +32,33 @@ class SettingsController extends FOSRestController
      * Edit configuration with given namespace.
      *
      * @param Request $request
+     * @param string  $alias
      * @param string  $namespace
      *
      * @return Response
+     *
+     * @throws NotFoundHttpException
      */
-    public function updateAction(Request $request, $namespace)
+    public function updateAction(Request $request, $alias, $namespace = null)
     {
         $manager = $this->getSettingsManager();
-        $settings = $manager->loadSettings($namespace);
-        $isApiRequest = $this->isApiRequest($request);
+        $isApiRequest = 'html' !== $request->getRequestFormat();
+
+        try {
+            $settings = $manager->loadSettings($alias, $namespace);
+        } catch (\InvalidArgumentException $e) {
+            throw $this->createNotFoundException();
+        }
 
         $form = $this
             ->getSettingsFormFactory()
-            ->create($namespace, $settings, $isApiRequest ? array('csrf_protection' => false) : array())
+            ->create($alias, $settings, $isApiRequest ? array('csrf_protection' => false) : array())
         ;
 
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
-                $manager->saveSettings($namespace, $form->getData());
+                $manager->saveSettings($alias, $namespace, $form->getData());
                 $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
             } catch (ValidatorException $exception) {
                 $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'validators');
@@ -67,7 +76,7 @@ class SettingsController extends FOSRestController
             }
         }
 
-        return $this->render($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), array(
+        return $this->render(sprintf($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), $alias), array(
             'settings' => $settings,
             'form'     => $form->createView(),
         ));
@@ -80,7 +89,7 @@ class SettingsController extends FOSRestController
      */
     protected function getSettingsManager()
     {
-        return $this->get('sylius.settings.manager');
+        return $this->container->get('sylius.settings.manager');
     }
 
     /**
@@ -90,7 +99,7 @@ class SettingsController extends FOSRestController
      */
     protected function getSettingsFormFactory()
     {
-        return $this->get('sylius.settings.form_factory');
+        return $this->container->get('sylius.settings.form_factory');
     }
 
     /**
@@ -100,7 +109,7 @@ class SettingsController extends FOSRestController
      */
     protected function getTranslator()
     {
-        return $this->get('translator');
+        return $this->container->get('translator');
     }
 
     /**
@@ -116,19 +125,10 @@ class SettingsController extends FOSRestController
             return true;
         }
 
-        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
+        if (!$this->container->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
             throw new AccessDeniedException();
         }
 
         return false;
-    }
-
-    /**
-     * @param Request $request
-     * @return bool
-     */
-    private function isApiRequest(Request $request)
-    {
-        return 'html' !== $request->getRequestFormat();
     }
 }

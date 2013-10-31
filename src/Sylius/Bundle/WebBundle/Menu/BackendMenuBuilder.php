@@ -380,16 +380,24 @@ class BackendMenuBuilder extends MenuBuilder
 
         if ($this->authorizationChecker->isGranted('sylius.settings.general')) {
             $child->addChild('general_settings', array(
-                'route'           => 'sylius_backend_general_settings',
+                'route'           => 'sylius_backend_settings',
+                'routeParameters' => array('alias' => 'general'),
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-info-sign'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
         }
 
         if ($this->authorizationChecker->isGranted('sylius.settings.security')) {
             $child->addChild('security_settings', array(
-                'route'           => 'sylius_backend_security_settings',
+                'route'           => 'sylius_backend_settings',
+                'routeParameters' => array('alias' => 'security'),
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-lock'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.security_settings', $section)));
+
+            $child->addChild('security_settings', array(
+                'route'           => 'sylius_backend_settings',
+                'routeParameters' => array('alias' => 'oauth'),
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-lock'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.oauth_settings', $section)));
         }
 
         if ($this->authorizationChecker->isGranted('sylius.locale.index')) {
@@ -415,7 +423,8 @@ class BackendMenuBuilder extends MenuBuilder
 
         if ($this->authorizationChecker->isGranted('sylius.settings.taxation')) {
             $child->addChild('taxation_settings', array(
-                'route'           => 'sylius_backend_taxation_settings',
+                'route'           => 'sylius_backend_settings',
+                'routeParameters' => array('alias' => 'taxation'),
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxation_settings', $section)));
         }

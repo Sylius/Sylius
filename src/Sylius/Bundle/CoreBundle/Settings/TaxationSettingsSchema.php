@@ -64,9 +64,26 @@ class TaxationSettingsSchema implements SchemaInterface
     {
         $builder
             ->add('default_tax_zone', 'sylius_zone_choice', array(
-                'required' => false,
-                'label'    => 'sylius.form.settings.taxation.default_tax_zone',
+                'empty_value' => 'sylius.form.unknown',
+                'required'    => false,
+                'label'       => 'sylius.form.settings.taxation.default_tax_zone',
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDynamic()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'taxation';
     }
 }

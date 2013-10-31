@@ -36,14 +36,18 @@ class SchemaRegistrySpec extends ObjectBehavior
 
     function it_should_register_schema_properly(SchemaInterface $schema)
     {
+        $schema->getAlias()->shouldReturn('general');
+
         $this->hasSchema('general')->shouldReturn(false);
-        $this->registerSchema('general', $schema);
+        $this->registerSchema($schema);
         $this->hasSchema('general')->shouldReturn(true);
     }
 
     function it_should_unregister_schema_properly(SchemaInterface $schema)
     {
-        $this->registerSchema('general', $schema);
+        $schema->getAlias()->shouldReturn('general');
+
+        $this->registerSchema($schema);
         $this->hasSchema('general')->shouldReturn(true);
 
         $this->unregisterSchema('general');
@@ -52,7 +56,9 @@ class SchemaRegistrySpec extends ObjectBehavior
 
     function it_should_retrieve_registered_schema_by_namespace(SchemaInterface $schema)
     {
-        $this->registerSchema('general', $schema);
+        $schema->getAlias()->shouldReturn('general');
+
+        $this->registerSchema($schema);
         $this->getSchema('general')->shouldReturn($schema);
     }
 

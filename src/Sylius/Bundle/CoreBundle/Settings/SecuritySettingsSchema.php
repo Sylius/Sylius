@@ -48,4 +48,20 @@ class SecuritySettingsSchema implements SchemaInterface
             ))
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDynamic()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'security';
+    }
 }

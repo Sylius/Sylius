@@ -13,6 +13,7 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
@@ -108,10 +109,10 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function loadSettings($namespace)
+    public function loadSettings($alias, $namespace = null)
     {
-        if (isset($this->resolvedSettings[$namespace])) {
-            return $this->resolvedSettings[$namespace];
+        if (isset($this->resolvedSettings[$alias.$namespace])) {
+            return $this->resolvedSettings[$alias.$namespace];
         }
 
         if ($this->cache->contains($namespace)) {
@@ -120,24 +121,25 @@ class SettingsManager implements SettingsManagerInterface
             $parameters = $this->getParameters($namespace);
         }
 
-        $schema = $this->schemaRegistry->getSchema($namespace);
-
         $settingsBuilder = new SettingsBuilder();
+
+        $schema = $this->schemaRegistry->getSchema($alias, $namespace);
         $schema->buildSettings($settingsBuilder);
 
         $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
 
-        return $this->resolvedSettings[$namespace] = new Settings($parameters);
+        return $this->resolvedSettings[$alias.$namespace] = new Settings($parameters);
     }
 
     /**
      * {@inheritdoc}
+     *
      * @throws ValidatorException
      */
-    public function saveSettings($namespace, Settings $settings)
+    public function saveSettings($alias, $namespace, Settings $settings)
     {
-        $schema = $this->schemaRegistry->getSchema($namespace);
+        $schema = $this->schemaRegistry->getSchema($alias, $namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
@@ -156,8 +158,10 @@ class SettingsManager implements SettingsManagerInterface
         }
 
         $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
+        /* @var $persistedParametersMap ParameterInterface[] */
         $persistedParametersMap = array();
 
+        /* @var $parameter ParameterInterface */
         foreach ($persistedParameters as $parameter) {
             $persistedParametersMap[$parameter->getName()] = $parameter;
         }
@@ -168,13 +172,7 @@ class SettingsManager implements SettingsManagerInterface
             if (isset($persistedParametersMap[$name])) {
                 $persistedParametersMap[$name]->setValue($value);
             } else {
-                $parameter = $this->parameterRepository->createNew();
-
-                $parameter
-                    ->setNamespace($namespace)
-                    ->setName($name)
-                    ->setValue($value)
-                ;
+                $parameter = $this->createParameter($namespace, $name, $value);
 
                 /* @var $errors ConstraintViolationListInterface */
                 $errors = $this->validator->validate($parameter);
@@ -204,6 +202,7 @@ class SettingsManager implements SettingsManagerInterface
     {
         $parameters = array();
 
+        /** @var $parameter ParameterInterface */
         foreach ($this->parameterRepository->findBy(array('namespace' => $namespace)) as $parameter) {
             $parameters[$parameter->getName()] = $parameter->getValue();
         }
@@ -222,5 +221,23 @@ class SettingsManager implements SettingsManagerInterface
         }
 
         return $transformedParameters;
+    }
+
+    /**
+     * @param string $namespace
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return ParameterInterface
+     */
+    private function createParameter($namespace, $name, $value)
+    {
+        /** @var $parameter ParameterInterface */
+        $parameter = $this->parameterRepository->createNew();
+        $parameter->setNamespace($namespace);
+        $parameter->setName($name);
+        $parameter->setValue($value);
+
+        return $parameter;
     }
 }
