@@ -148,7 +148,7 @@ class Configuration
     {
         $limit = $this->get('limit', 10);
 
-        if (null === $limit) {
+        if (false === $limit) {
             return null;
         }
 
@@ -216,6 +216,6 @@ class Configuration
 
     protected function get($parameter, $default = null)
     {
-        return array_key_exists($parameter, $this->parameters) ? $this->parameters[$parameter] : $default;
+        return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] : $default;
     }
 }
