@@ -21,7 +21,7 @@
     {{ buttons.delete(path('sylius_backend_zone_delete', {'id': zone.id})) }}
 </div>
 
-<table class="table table-bordered table-consensed">
+<table class="table table-bordered table-condensed">
     <thead>
         <tr>
             <th>{{ 'sylius.zone.name'|trans }}</th>
@@ -36,7 +36,7 @@
     </tbody>
 </table>
 {% if zone.hasMembers %}
-    <table id="members" class="table table-bordered table-consensed">
+    <table id="members" class="table table-bordered table-condensed">
         <thead>
             <tr>
                 <th>{{ 'sylius.zone_member.members'|trans }}</th>

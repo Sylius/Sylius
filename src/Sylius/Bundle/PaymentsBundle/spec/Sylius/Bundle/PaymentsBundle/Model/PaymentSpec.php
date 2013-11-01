@@ -83,7 +83,7 @@ class PaymentSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('EUR');
     }
 
-    function it_has_amount_equal_to_0_by_defualt()
+    function it_has_amount_equal_to_0_by_default()
     {
         $this->getAmount()->shouldReturn(0);
     }
