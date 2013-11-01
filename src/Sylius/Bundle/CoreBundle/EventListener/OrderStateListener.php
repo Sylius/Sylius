@@ -43,6 +43,8 @@ class OrderStateListener
      * Get the order from event and run the inventory processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function onCheckoutFinalizePreComplete(GenericEvent $event)
     {
@@ -50,7 +52,7 @@ class OrderStateListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order inventory listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order inventory listener requires event subject to be an instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 

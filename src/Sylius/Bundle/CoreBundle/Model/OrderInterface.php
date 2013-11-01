@@ -146,7 +146,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all inventory units.
      *
-     * @return Collection
+     * @return InventoryUnitInterface[]
      */
     public function getInventoryUnits();
 
@@ -155,7 +155,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      *
      * @param VariantInterface $variant
      *
-     * @return Collection
+     * @return InventoryUnitInterface[]
      */
     public function getInventoryUnitsByVariant(VariantInterface $variant);
 
@@ -185,7 +185,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all shipments associated with this order.
      *
-     * @return Collection
+     * @return ShipmentInterface[]
      */
     public function getShipments();
 

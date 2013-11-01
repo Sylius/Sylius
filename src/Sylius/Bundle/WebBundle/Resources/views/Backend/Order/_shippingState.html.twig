@@ -1,15 +1,11 @@
 {% set state = order.shippingState %}
 {% set label = 'primary' %}
 
-{% if 'backorder' == state %}
-    {% set label = 'warning' %}
-{% elseif 'dispatched' == state %}
-    {% set label = 'info' %}
-{% elseif 'partially_shipped' == state %}
+{% if 'backorder' == state or 'partially_shipped' == state %}
     {% set label = 'warning' %}
 {% elseif 'shipped' == state %}
     {% set label = 'success' %}
-{% elseif 'returned' == state %}
+{% elseif 'returned' == state or 'dispatched' == state %}
     {% set label = 'info' %}
 {% endif %}
 

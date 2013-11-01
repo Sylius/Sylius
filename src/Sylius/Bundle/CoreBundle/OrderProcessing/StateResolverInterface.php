@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
- * Order states resolver.
+ * Order state resolver.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

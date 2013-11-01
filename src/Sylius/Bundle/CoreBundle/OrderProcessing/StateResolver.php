@@ -16,7 +16,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 
 /**
- * Order states resolver.
+ * Order state resolver.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -40,8 +40,12 @@ class StateResolver implements StateResolverInterface
             return;
         }
 
-        $states = array();
+        $order->setShippingState($this->getShippingState($order));
+    }
 
+    private function getShippingState(OrderInterface $order)
+    {
+        $states = array();
         foreach ($order->getShipments() as $shipment) {
             $states[] = $shipment->getState();
         }
@@ -49,21 +53,17 @@ class StateResolver implements StateResolverInterface
         $states = array_unique($states);
 
         if (array(ShipmentInterface::STATE_SHIPPED) === $states) {
-            $order->setShippingState(OrderShippingStates::SHIPPED);
-
-            return;
+            return OrderShippingStates::SHIPPED;
         }
+
         if (array(ShipmentInterface::STATE_DISPATCHED) === $states) {
-            $order->setShippingState(OrderShippingStates::DISPATCHED);
-
-            return;
+            return OrderShippingStates::DISPATCHED;
         }
+
         if (array(ShipmentInterface::STATE_RETURNED) === $states) {
-            $order->setShippingState(OrderShippingStates::RETURNED);
-
-            return;
+            return OrderShippingStates::RETURNED;
         }
 
-        $order->setShippingState(OrderShippingStates::PARTIALLY_SHIPPED);
+        return OrderShippingStates::PARTIALLY_SHIPPED;
     }
 }
