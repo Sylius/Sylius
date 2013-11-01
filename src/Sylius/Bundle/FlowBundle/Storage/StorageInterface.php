@@ -47,8 +47,8 @@ interface StorageInterface
     /**
      * Sets a value in the storage.
      *
-     * @param string $key   A unique key
-     * @param string $value The value to storage
+     * @param string       $key   A unique key
+     * @param string|array $value The value to storage
      */
     public function set($key, $value);
 

@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use DateTime;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 
 /**
  * Checks if user is created before/after configured period of time.

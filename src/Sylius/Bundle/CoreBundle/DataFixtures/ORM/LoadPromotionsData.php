@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 
 /**
  * Default promotion fixtures.

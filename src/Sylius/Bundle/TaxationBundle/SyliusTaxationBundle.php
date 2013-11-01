@@ -51,7 +51,7 @@ class SyliusTaxationBundle extends Bundle
         $container->addCompilerPass(new RegisterCalculatorsPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxationBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxationBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxation.driver.doctrine/orm'));

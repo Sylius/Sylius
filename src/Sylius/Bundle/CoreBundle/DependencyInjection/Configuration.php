@@ -35,6 +35,13 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * Adds `emails` section.
+     *
+     * @param ArrayNodeDefinition $node
+     *
+     * @return ArrayNodeDefinition
+     */
     protected function addEmailsSection(ArrayNodeDefinition $node)
     {
         $emailNode = $node->children()->arrayNode('emails');
@@ -57,34 +64,6 @@ class Configuration implements ConfigurationInterface
         $this->addEmailConfiguration($emailNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
 
         return $emailNode;
-    }
-
-    /**
-     * Helper method to configure a single email type
-     *
-     * @param ArrayNodeDefinition $node
-     * @param string $name
-     * @param string $template
-     */
-    protected function addEmailConfiguration(ArrayNodeDefinition $node, $name, $template)
-    {
-        $node
-            ->children()
-                ->arrayNode($name)
-                ->addDefaultsIfNotSet()
-                ->canBeUnset()
-                ->children()
-                    ->booleanNode('enabled')->defaultTrue()->end()
-                    ->scalarNode('template')->defaultValue($template)->end()
-                    ->arrayNode('from_email')
-                    ->canBeUnset()
-                    ->children()
-                        ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('sender_name')->isRequired()->cannotBeEmpty()->end()
-                    ->end()
-                ->end()
-            ->end()
-        ->end();
     }
 
     /**
@@ -144,5 +123,33 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+    }
+
+    /**
+     * Helper method to configure a single email type.
+     *
+     * @param ArrayNodeDefinition $node
+     * @param string              $name
+     * @param string              $template
+     */
+    private function addEmailConfiguration(ArrayNodeDefinition $node, $name, $template)
+    {
+        $node
+            ->children()
+                ->arrayNode($name)
+                ->addDefaultsIfNotSet()
+                ->canBeUnset()
+                ->children()
+                    ->booleanNode('enabled')->defaultTrue()->end()
+                    ->scalarNode('template')->defaultValue($template)->end()
+                    ->arrayNode('from_email')
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('sender_name')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ->end();
     }
 }

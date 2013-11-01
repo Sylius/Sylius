@@ -43,6 +43,8 @@ class OrderInventoryListener
      * Get the order from event and run the inventory processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function updateInventoryUnits(GenericEvent $event)
     {
@@ -61,6 +63,8 @@ class OrderInventoryListener
      * Update the inventory units.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function createInventoryUnits(GenericEvent $event)
     {

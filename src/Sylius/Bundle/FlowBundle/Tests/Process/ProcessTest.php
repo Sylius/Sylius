@@ -11,9 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process;
 
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
-use Sylius\Bundle\FlowBundle\Process\Step\Step;
+use Sylius\Bundle\FlowBundle\Tests\Fixtures\TestStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
@@ -341,13 +340,5 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
                 3
             ),
         );
-    }
-}
-
-class TestStep extends Step
-{
-    public function displayAction(ProcessContextInterface $context)
-    {
-        // pufff.
     }
 }

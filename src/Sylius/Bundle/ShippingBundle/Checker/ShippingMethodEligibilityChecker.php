@@ -63,7 +63,8 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
      * Returns whether the subject satisfies the category requirement configured in the method
      *
      * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface $method
+     * @param ShippingMethodInterface  $method
+     *
      * @return Boolean
      */
     public function isCategoryEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)

@@ -6,6 +6,10 @@ parameters:
     sylius.database.user:             root
     sylius.database.password:         ~
 
+    sylius.phpcr.workspace:           default
+    sylius.phpcr.username:            admin
+    sylius.phpcr.password:            admin
+
     sylius.mailer.transport:          smtp
     sylius.mailer.host:               127.0.0.1
     sylius.mailer.user:               ~

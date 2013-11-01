@@ -34,8 +34,9 @@ class OrderRepository extends CartRepository
     /**
      * Gets orders for user.
      *
-     * @param  UserInterface $user
-     * @param  array         $sorting
+     * @param UserInterface $user
+     * @param array         $sorting
+     *
      * @return array
      */
     public function findByUser(UserInterface $user, array $sorting = array())

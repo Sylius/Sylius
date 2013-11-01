@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnit as BaseInventoryUnit;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
@@ -128,6 +129,10 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
      */
     public function setShippable(ShippableInterface $shippable)
     {
+        if (!$shippable instanceof StockableInterface) {
+            throw new \InvalidArgumentException('"Sylius\Bundle\InventoryBundle\Model\StockableInterface" expected.');
+        }
+
         $this->setStockable($shippable);
 
         return $this;

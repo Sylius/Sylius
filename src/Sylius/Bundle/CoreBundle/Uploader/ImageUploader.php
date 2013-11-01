@@ -23,6 +23,9 @@ class ImageUploader implements ImageUploaderInterface
         $this->filesystem = $filesystem;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function upload(ImageInterface $image)
     {
         if (!$image->hasFile()) {
@@ -46,6 +49,9 @@ class ImageUploader implements ImageUploaderInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function remove($path)
     {
         return $this->filesystem->delete($path);

@@ -18,6 +18,9 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class DoctrineODMFactory extends AbstractFactory
 {
+    /**
+     * {@inheritdoc}
+     */
     public function create($prefix, $resourceName, array $classes, $templates = null)
     {
         $pattern = $prefix.'.%s.'.$resourceName;
@@ -57,6 +60,9 @@ class DoctrineODMFactory extends AbstractFactory
         $this->container->setDefinition(sprintf($pattern, 'repository'), $repository);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSupportedDriver()
     {
         return SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM;

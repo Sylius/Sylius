@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -29,9 +31,11 @@ class SecurityController extends Controller
      * Target action for _switch_user=_exit, redirects admin back to impersonated user
      *
      * @param string $username
+     *
+     * @return RedirectResponse
+     *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
-     * @return RedirectResponse
      */
     public function exitUserSwitchAction($username)
     {
@@ -48,6 +52,11 @@ class SecurityController extends Controller
         return $this->redirect($this->generateUrl('sylius_backend_user_show', array('id' => $user->getId())));
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function loginAction(Request $request)
     {
         $session = $request->getSession();
@@ -78,16 +87,25 @@ class SecurityController extends Controller
         ));
     }
 
+    /**
+     * @throws \RuntimeException
+     */
     public function checkAction()
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
 
+    /**
+     * @throws \RuntimeException
+     */
     public function logoutAction()
     {
         throw new \RuntimeException('You must activate the logout in your security firewall configuration');
     }
 
+    /**
+     * @return CsrfProviderInterface
+     */
     private function getFormCsrfProvider()
     {
         return $this->get('form.csrf_provider');

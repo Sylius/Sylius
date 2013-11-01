@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\PromotionsBundle\Generator\CouponGeneratorInterface;
 use Sylius\Bundle\PromotionsBundle\Generator\Instruction;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,14 +35,7 @@ class CouponController extends ResourceController
      */
     public function generateAction(Request $request)
     {
-        if (null === $promotionId = $request->get('promotionId')) {
-            throw new NotFoundHttpException('No promotion id given');
-        }
-
-        $promotion = $this
-            ->getPromotionController()
-            ->findOr404(array('id' => $promotionId))
-        ;
+        $promotion = $this->findPromotionOr404($request->get('promotionId'));
 
         $form = $this->createForm('sylius_promotion_coupon_generate_instruction', new Instruction());
 
@@ -74,21 +69,36 @@ class CouponController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    protected function createNew(Request $request)
     {
-        if (null === $promotionId = $this->getRequest()->get('promotionId')) {
-            throw new NotFoundHttpException('No promotion id given');
-        }
+        $promotion = $this->findPromotionOr404($request->get('promotionId'));
 
-        $promotion = $this
-            ->getPromotionController()
-            ->findOr404(array('id' => $promotionId))
-        ;
-
-        $coupon = parent::createNew();
+        $coupon = parent::createNew($request);
         $coupon->setPromotion($promotion);
 
         return $coupon;
+    }
+
+    /**
+     * Get promotion entity.
+     *
+     * @param integer $id
+     *
+     * @return PromotionInterface
+     *
+     * @throws NotFoundHttpException
+     */
+    protected function findPromotionOr404($id)
+    {
+        if (!$id) {
+            throw new NotFoundHttpException('No promotion id given.');
+        }
+
+        if (!$promotion = $this->getPromotionRepository()->find($id)) {
+            throw new NotFoundHttpException('Requested promotion does not exist.');
+        }
+
+        return $promotion;
     }
 
     /**
@@ -98,7 +108,17 @@ class CouponController extends ResourceController
      */
     protected function getPromotionController()
     {
-        return $this->get('sylius.controller.promotion');
+        return $this->get('sylius.controller.product');
+    }
+
+    /**
+     * Get promotion repository.
+     *
+     * @return ObjectRepository
+     */
+    protected function getPromotionRepository()
+    {
+        return $this->get('sylius.repository.promotion');
     }
 
     /**

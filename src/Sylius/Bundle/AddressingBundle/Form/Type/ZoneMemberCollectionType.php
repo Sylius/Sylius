@@ -50,47 +50,6 @@ class ZoneMemberCollectionType extends AbstractType
     }
 
     /**
-     * Builds prototypes for each of the form types used for the collection.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array                                        $options
-     *
-     * @return array
-     */
-    protected function buildPrototypes(FormBuilderInterface $builder, array $options)
-    {
-        $prototypes = array();
-        $types = array(
-            'sylius_zone_member_country',
-            'sylius_zone_member_province',
-            'sylius_zone_member_zone',
-        );
-        foreach ($types as $type) {
-            $prototype = $this->buildPrototype($builder, $options['prototype_name'], $type, $options['options'])->getForm();
-            $prototypes[$type] = $prototype;
-        }
-
-        return $prototypes;
-    }
-
-    /**
-     * Builds an individual prototype.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param string                                       $name
-     * @param string|FormTypeInterface                     $type
-     * @param array                                        $options
-     *
-     * @return \Symfony\Component\Form\FormBuilderInterface
-     */
-    protected function buildPrototype(FormBuilderInterface $builder, $name, $type, array $options)
-    {
-        return $builder->create($name, $type, array_replace(array(
-            'label' => $name . 'label__',
-        ), $options));
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -127,5 +86,40 @@ class ZoneMemberCollectionType extends AbstractType
     public function getName()
     {
         return 'sylius_zone_member_collection';
+    }
+
+    /**
+     * Builds prototypes for each of the form types used for the collection.
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     *
+     * @return array
+     */
+    protected function buildPrototypes(FormBuilderInterface $builder, array $options)
+    {
+        $prototypes = array();
+        foreach (array('sylius_zone_member_country', 'sylius_zone_member_province', 'sylius_zone_member_zone') as $type) {
+            $prototypes[$type] = $this->buildPrototype($builder, $options['prototype_name'], $type, $options['options'])->getForm();
+        }
+
+        return $prototypes;
+    }
+
+    /**
+     * Builds an individual prototype.
+     *
+     * @param FormBuilderInterface     $builder
+     * @param string                   $name
+     * @param string|FormTypeInterface $type
+     * @param array                    $options
+     *
+     * @return FormBuilderInterface
+     */
+    protected function buildPrototype(FormBuilderInterface $builder, $name, $type, array $options)
+    {
+        return $builder->create($name, $type, array_replace(array(
+            'label' => $name.'label__',
+        ), $options));
     }
 }

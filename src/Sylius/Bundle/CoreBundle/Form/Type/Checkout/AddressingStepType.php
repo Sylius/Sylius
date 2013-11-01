@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvent;
 
 /**
  * Checkout addressing step form type.

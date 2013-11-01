@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\TaxonomiesBundle\Model\Taxon as BaseTaxon;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\TaxonomiesBundle\Model\Taxon as BaseTaxon;
 
 class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
 {

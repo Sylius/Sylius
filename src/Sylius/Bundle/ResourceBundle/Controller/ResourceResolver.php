@@ -25,6 +25,10 @@ class ResourceResolver
      *
      * @param RepositoryInterface $repository
      * @param Configuration       $configuration
+     * @param string              $defaultMethod
+     * @param array               $defaultArguments
+     *
+     * @return mixed
      */
     public function getResource(RepositoryInterface $repository, Configuration $configuration, $defaultMethod, array $defaultArguments = array())
     {

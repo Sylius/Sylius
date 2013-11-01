@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 

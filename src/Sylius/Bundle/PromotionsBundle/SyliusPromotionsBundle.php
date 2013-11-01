@@ -48,7 +48,7 @@ class SyliusPromotionsBundle extends Bundle
         $container->addCompilerPass(new RegisterPromotionActionsPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\PromotionsBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\PromotionsBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_promotions.driver.doctrine/orm'));

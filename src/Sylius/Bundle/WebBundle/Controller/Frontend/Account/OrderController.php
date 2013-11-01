@@ -93,9 +93,9 @@ class OrderController extends Controller
             ->getInternalGenerator();
 
         $generator->setOptions(array(
-            'footer-left' => '[title]',
-            'footer-right' => '[page]/[topage]',
-            'footer-line' => true,
+            'footer-left'      => '[title]',
+            'footer-right'     => '[page]/[topage]',
+            'footer-line'      => true,
             'footer-font-name' => '"Helvetica Neue",​Helvetica,​Arial,​sans-serif',
             'footer-font-size' => 10,
         ));
@@ -104,13 +104,15 @@ class OrderController extends Controller
             $generator->getOutputFromHtml($html),
             200,
             array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="' . $order->getNumber() . '.pdf"'
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $order->getNumber() . '.pdf"'
             )
         );
     }
 
     /**
+     * Get order repository.
+     *
      * @return OrderRepository
      */
     private function getOrderRepository()

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\OAuth;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class UserProviderSpec extends ObjectBehavior
 {

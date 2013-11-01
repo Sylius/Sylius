@@ -49,6 +49,15 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      */
     protected $classMap = array();
 
+    /**
+     * Constructor.
+     *
+     * @param FormFactoryInterface $factory
+     * @param array                $prototypes
+     * @param array                $options
+     * @param boolean              $allowAdd
+     * @param boolean              $allowDelete
+     */
     public function __construct(FormFactoryInterface $factory, array $prototypes, array $options = array(), $allowAdd = false, $allowDelete = false)
     {
         $this->factory = $factory;
@@ -93,6 +102,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      * @param array $data
      *
      * @return string|FormTypeInterface
+     *
      * @throws \InvalidArgumentException when _type is not present or is invalid
      */
     protected function getTypeForData(array $data)

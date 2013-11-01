@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Form\Type;
 
+use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Form\EventListener\BuildRuleFormListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Sylius\Bundle\PromotionsBundle\Form\EventListener\BuildRuleFormListener;
 
 /**
  * Promotion rule form type.

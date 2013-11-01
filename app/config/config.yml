@@ -16,7 +16,8 @@ framework:
     templating:      { engines: ['twig'] }
     default_locale:  "%sylius.locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        name:        sylius
 
 twig:
     form:
@@ -61,9 +62,9 @@ doctrine_phpcr:
     session:
         backend:
             type: doctrinedbal
-        workspace: default
-        username: admin
-        password: admin
+        workspace: %sylius.phpcr.workspace%
+        username:  %sylius.phpcr.username%
+        password:  %sylius.phpcr.password%
     odm:
         auto_mapping: true
 

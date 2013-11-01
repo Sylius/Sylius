@@ -13,12 +13,14 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Factory;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Alias;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class DoctrineORMFactory extends AbstractFactory
 {
+    /**
+     * {@inheritdoc}
+     */
     public function create($prefix, $resourceName, array $classes, $templates = null)
     {
         $pattern = $prefix.'.%s.'.$resourceName;
@@ -51,6 +53,9 @@ class DoctrineORMFactory extends AbstractFactory
         $this->container->setDefinition(sprintf($pattern, 'repository'), $repository);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSupportedDriver()
     {
         return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;

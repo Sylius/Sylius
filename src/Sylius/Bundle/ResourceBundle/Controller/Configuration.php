@@ -37,7 +37,6 @@ class Configuration
 
     public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
         $this->templateNamespace = $templateNamespace;

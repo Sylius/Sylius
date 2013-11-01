@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -28,7 +29,7 @@ class ProductController extends ResourceController
      * @param Request $request
      * @param string  $permalink
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws NotFoundHttpException
      */
@@ -93,7 +94,7 @@ class ProductController extends ResourceController
         $config = $this->getConfiguration();
         $logEntryRepository = $this->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
 
-        $product = $this->findOr404();
+        $product = $this->findOr404($request);
 
         $data = array(
             $config->getResourceName() => $product,
@@ -113,6 +114,8 @@ class ProductController extends ResourceController
      * Render product filter form.
      *
      * @param Request $request
+     *
+     * @return Response
      */
     public function filterFormAction(Request $request)
     {

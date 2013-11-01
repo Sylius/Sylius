@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Action;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Applies promotion to given subject.

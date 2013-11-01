@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {
@@ -27,6 +27,9 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
         $this->zoneMatcher = $zoneMatcher;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isRestricted(ProductInterface $product, AddressInterface $address = null)
     {
         if (!$this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {

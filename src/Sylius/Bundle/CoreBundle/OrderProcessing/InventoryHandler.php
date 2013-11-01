@@ -68,7 +68,7 @@ class InventoryHandler implements InventoryHandlerInterface
      * Removes inventory units which are not linked to any of specified variants
      *
      * @param OrderInterface $order
-     * @param array $variants
+     * @param array          $variants
      */
     private function removeUnusedUnits(OrderInterface $order, array $variants)
     {
@@ -82,9 +82,9 @@ class InventoryHandler implements InventoryHandlerInterface
     /**
      * Update inventory units related to passed variant to the specified quantity
      *
-     * @param OrderInterface $order
+     * @param OrderInterface   $order
      * @param VariantInterface $variant
-     * @param int $quantity
+     * @param integer          $quantity
      */
     private function updateVariantUnits(OrderInterface $order, VariantInterface $variant, $quantity)
     {
@@ -107,6 +107,7 @@ class InventoryHandler implements InventoryHandlerInterface
      * Return format: [[Variant1, Variant2], [QuantityForVariant1, QuantityForVariant2]]
      *
      * @param OrderInterface $order
+     *
      * @return array
      */
     private function getVariantQuantities(OrderInterface $order)

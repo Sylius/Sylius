@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
+use Sylius\Bundle\TaxonomiesBundle\Repository\TaxonRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\TaxonomiesBundle\Repository\TaxonRepositoryInterface;
 
 /**
  * Taxon choice form form.

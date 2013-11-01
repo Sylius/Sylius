@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Process\Builder;
 
 use Sylius\Bundle\FlowBundle\Process\Process;
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
@@ -19,7 +20,7 @@ use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ProcessBuilder implements ProcessBuilderInterface
+class ProcessBuilder implements ProcessBuilderInterface, ContainerAwareInterface
 {
     /**
      * Container.
@@ -43,11 +44,9 @@ class ProcessBuilder implements ProcessBuilderInterface
     protected $process;
 
     /**
-     * Constructor.
-     *
-     * @param ContainerInterface $container
+     * {@inheritdoc}
      */
-    public function __construct(ContainerInterface $container)
+    public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -158,7 +157,7 @@ class ProcessBuilder implements ProcessBuilderInterface
         }
 
         if (!$validator instanceof ProcessValidatorInterface) {
-            throw new \InvalidArumentException();
+            throw new \InvalidArgumentException();
         }
 
         $this->process->setValidator($validator);

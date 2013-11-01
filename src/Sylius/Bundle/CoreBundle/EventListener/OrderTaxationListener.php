@@ -43,6 +43,8 @@ class OrderTaxationListener
      * Get the order from event and run the taxation processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function applyTaxes(GenericEvent $event)
     {

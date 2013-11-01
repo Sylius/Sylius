@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Form\Type;
 
+use JMS\TranslationBundle\Annotation\Ignore;
+use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
-use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * Promotion form type.

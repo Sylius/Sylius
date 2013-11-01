@@ -50,6 +50,8 @@ class ProcessController extends ContainerAware
      * @throws NotFoundHttpException
      *
      * @return Response
+     *
+     * @throws NotFoundHttpException
      */
     public function displayAction(Request $request, $scenarioAlias, $stepName)
     {

@@ -12,20 +12,42 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 
 class RestrictedZoneListener
 {
+    /**
+     * @var RestrictedZoneCheckerInterface
+     */
     private $restrictedZoneChecker;
+    /**
+     * @var CartProviderInterface
+     */
     private $cartProvider;
+    /**
+     * @var ObjectManager
+     */
     private $cartManager;
+    /**
+     * @var SessionInterface
+     */
     private $session;
+    /**
+     * @var TranslatorInterface
+     */
     private $translator;
 
+    /**
+     * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
+     * @param CartProviderInterface          $cartProvider
+     * @param ObjectManager                  $cartManager
+     * @param SessionInterface               $session
+     * @param TranslatorInterface            $translator
+     */
     public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ObjectManager $cartManager, SessionInterface $session, TranslatorInterface $translator)
     {
         $this->restrictedZoneChecker = $restrictedZoneChecker;
@@ -35,6 +57,9 @@ class RestrictedZoneListener
         $this->translator = $translator;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function handleRestrictedZone(GenericEvent $event)
     {
         $removed = false;
