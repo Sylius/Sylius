@@ -52,7 +52,7 @@ class PromotionApplicatorSpec extends ObjectBehavior
         $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
         $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
-        $action->execute($subject, $configuration)->shouldBeCalled();
+        $action->execute($subject, $configuration, $promotion)->shouldBeCalled();
 
         $this->apply($subject, $promotion);
     }
