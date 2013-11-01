@@ -21,6 +21,7 @@
         {{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
         {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotion.id}), 'sylius.promotion_coupon.generate'|trans) }}
+        {{ buttons.manage(path('sylius_backend_promotion_coupon_download', {'promotionId': promotion.id}), 'sylius.promotion_coupon.download'|trans) }}
     {% endif %}
     </div>
     <h1><i class="icon-info-sign"></i> {{ 'sylius.promotion.show_header'|trans|raw }}</h1>

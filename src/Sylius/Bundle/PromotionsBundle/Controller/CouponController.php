@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Controller;
 
+use Sylius\Bundle\PromotionsBundle\Downloader\CouponDownloader;
 use Sylius\Bundle\PromotionsBundle\Generator\CouponGeneratorInterface;
 use Sylius\Bundle\PromotionsBundle\Generator\Instruction;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -82,6 +83,29 @@ class CouponController extends ResourceController
         $coupon->setPromotion($promotion);
 
         return $coupon;
+    }
+
+    /**
+     * Download coupons for a specific promotion
+     *
+     * @param Request $request
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function downloadAction(Request $request)
+    {
+        if (null === $promotionId = $request->get('promotionId')) {
+            throw new NotFoundHttpException('No promotion id given');
+        }
+
+        $promotion = $this
+            ->getPromotionController()
+            ->findOr404(array('id' => $promotionId))
+        ;
+
+        $downloader = $this->get('sylius.promotion.coupon_downloader');
+
+        return $downloader->getDownloadResponse($promotion);
     }
 
     /**

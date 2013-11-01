@@ -1478,6 +1478,10 @@
         <source>sylius.promotion_coupon.generate</source>
         <target>Generate coupons</target>
       </trans-unit>
+      <trans-unit id="b8f63111fe6fe2ea209c15e44b6751ff" resname="sylius.promotion_coupon.download">
+        <source>sylius.promotion_coupon.download</source>
+        <target>Download coupons</target>
+      </trans-unit>
       <trans-unit id="0515968500cc4ca31195dbb566b459aa" resname="sylius.promotion_coupon.generate_header">
         <source>sylius.promotion_coupon.generate_header</source>
         <target>Generating coupons</target>
