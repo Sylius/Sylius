@@ -35,9 +35,8 @@ class SyliusVariableProductExtension extends SyliusResourceExtension implements 
     {
         $this->configDir = __DIR__.'/../Resources/config/container';
 
-        list(, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
-
-        $this->loadDatabaseDriver($container->getParameter('sylius_product.driver'), $loader);
+        $config[0]['driver'] = $container->getParameter('sylius_product.driver');
+        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }
 
     /**

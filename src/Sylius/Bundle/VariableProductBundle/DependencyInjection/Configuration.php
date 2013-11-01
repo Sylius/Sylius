@@ -33,6 +33,13 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_variable_product');
 
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('driver')->defaultNull()->end()
+            ->end()
+        ;
+
         $this->addClassesSection($rootNode);
         $this->addValidationGroupsSection($rootNode);
 
