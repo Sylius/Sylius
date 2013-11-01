@@ -1,23 +1,8 @@
-{% set variant = item.variant %}
 {% set product = item.product %}
 <tr>
     <td>{{ loop.index }}</td>
     <td>
-        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail pull-left" style="width: 90px; margin-right: 15px;">
-            <img src="{{ product.image ? product.image.path|imagine_filter('sylius_90x60') : 'http://placehold.it/90x60' }}" alt="" />
-        </a>
-        <div>
-            <p>
-                <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}">{{ product.name }}</a>
-            </p>
-            {% if product.hasOptions %}
-            <ul class="unstyled">
-                {% for option in variant.options %}
-                <li><strong>{{ option.presentation }}</strong>: {{ option.value }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
+        {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': item.variant}) }}
     </td>
     <td>{{ item.quantity }}</td>
     <td>
