@@ -28,6 +28,7 @@
                 {% set prototypeId = 'sylius-zone-members-' ~ form.type.vars.value|default(constant('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneInterface::TYPE_COUNTRY')) %}
                 <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="{{ prototypeId }}" data-collection="{{ prototypeId }}">{{ 'sylius.zone.add_member'|trans }}</a>
             </div>
+        </div>
     </div>
 </fieldset>
 <hr>
