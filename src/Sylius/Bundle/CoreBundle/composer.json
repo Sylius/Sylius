@@ -43,7 +43,8 @@
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
-        "omnipay/omnipay":                "1.0.*@dev"
+        "omnipay/omnipay":                "1.0.*@dev",
+        "hwi/oauth-bundle":               "0.3.*"
     },
     "require-dev": {
         "fzaninotto/faker": "1.2.*",
