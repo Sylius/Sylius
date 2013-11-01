@@ -209,8 +209,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldNotBeValidWhenProcessValidatorIsNotValid(
-    )
+    public function shouldNotBeValidWhenProcessValidatorIsNotValid()
     {
         $steps = array(
             $this->getStep('step1'),

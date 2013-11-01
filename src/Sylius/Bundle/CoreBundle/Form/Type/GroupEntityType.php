@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 /**
- * Group chocie form type.
+ * Group choice form type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -26,4 +26,3 @@ class GroupEntityType extends GroupChoiceType
         return 'entity';
     }
 }
-

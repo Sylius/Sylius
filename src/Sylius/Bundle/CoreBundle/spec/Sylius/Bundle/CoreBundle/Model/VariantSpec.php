@@ -79,8 +79,8 @@ class VariantSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\Corebundle\Model\ProductInterface $product
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategorYInterface      $shippingCategory
+     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface      $shippingCategory
      */
     function it_returns_the_product_shipping_category($product, $shippingCategory)
     {

@@ -499,5 +499,4 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
         return $step;
     }
-
 }
