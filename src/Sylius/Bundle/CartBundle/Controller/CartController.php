@@ -33,7 +33,7 @@ class CartController extends Controller
      * Displays current cart summary page.
      * The parameters includes the form created from `sylius_cart` type.
      *
-     * @param Request
+     * @param Request $request
      *
      * @return Response
      */

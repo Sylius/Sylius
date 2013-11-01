@@ -59,4 +59,3 @@ abstract class GroupChoiceType extends AbstractType
         return 'sylius_group_choice';
     }
 }
-

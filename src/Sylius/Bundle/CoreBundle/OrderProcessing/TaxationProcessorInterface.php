@@ -15,7 +15,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
  * Order taxation processor.
- * Service implementing this servie should apply taxes to given order.
+ * Service implementing this service should apply taxes to given order.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */

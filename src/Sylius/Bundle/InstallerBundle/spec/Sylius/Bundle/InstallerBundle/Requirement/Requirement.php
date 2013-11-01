@@ -25,27 +25,27 @@ class Requirement extends ObjectBehavior
         $this->getLabel()->shouldReturn('PHP version');
     }
 
-    function it_get_fulsfilled()
+    function it_gets_fulfilled()
     {
         $this->isFulfilled()->shouldReturn(true);
     }
 
-    function it_get_exspected()
+    function it_gets_expected()
     {
         $this->getExpected()->shouldReturn('5.4');
     }
 
-    function it_get_sactual()
+    function it_gets_actual()
     {
         $this->getActual()->shouldReturn('5.5');
     }
 
-    function it_get_resquired()
+    function it_gets_required()
     {
         $this->isRequired()->shouldReturn(true);
     }
 
-    function it_gest_help()
+    function it_gets_help()
     {
         $this->getHelp()->shouldReturn('Please upgrade.');
     }

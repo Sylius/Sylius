@@ -50,7 +50,7 @@ class OrderInventoryListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order inventory listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
@@ -68,7 +68,7 @@ class OrderInventoryListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order inventory listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
