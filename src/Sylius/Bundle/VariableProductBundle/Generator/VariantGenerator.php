@@ -92,7 +92,7 @@ class VariantGenerator implements VariantGeneratorInterface
 
             $product->addVariant($variant);
 
-            if (0 < count($this->validator->validate($variant))) {
+            if (0 < count($this->validator->validate($variant, array('sylius')))) {
                 $product->removeVariant($variant);
             }
         }
