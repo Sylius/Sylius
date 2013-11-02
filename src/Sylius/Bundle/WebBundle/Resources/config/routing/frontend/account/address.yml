@@ -35,6 +35,7 @@ sylius_account_address_delete:
     pattern: /address/{id}/delete
     methods: [DELETE]
     defaults:
+        template: SyliusWebBundle:Frontend/Account:Address/delete.html.twig
         _controller: sylius.controller.address:deleteAction
         _sylius:
             redirect:

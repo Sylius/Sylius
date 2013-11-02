@@ -19,7 +19,7 @@
         </thead>
         <tbody>
         {% for promotion in promotions %}
-            <tr>
+            <tr id="{{ promotion.id }}">
                 <td>
                     <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.id }}</a>
                 </td>

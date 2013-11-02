@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         {% for taxonomy in taxonomies %}
-        <tr>
+        <tr id="{{ taxonomy.id }}">
             <td>
                 <a href="{{ path('sylius_backend_taxonomy_show', {'id': taxonomy.id}) }}" class="btn btn-link">
                     <strong>{{ taxonomy.name }}</strong>

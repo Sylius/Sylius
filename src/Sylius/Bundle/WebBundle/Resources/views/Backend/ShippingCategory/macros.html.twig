@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         {% for shipping_category in shipping_categories %}
-            <tr>
+            <tr id="{{ shipping_category.id }}">
                 <td>{{ shipping_category.id }}</td>
                 <td>{{ shipping_category.name }}</td>
                 <td>{{ shipping_category.updatedAt|date }}</td>

@@ -367,9 +367,14 @@ input[type="file"] {
     top: 0;
 }
 
+.delete-action-form {
+    display: inline;
+}
+
 .widgets a i {
     margin: 0
 }
+
 #flashes .alert {
     margin-top: 10px;
     margin-bottom: 5px;

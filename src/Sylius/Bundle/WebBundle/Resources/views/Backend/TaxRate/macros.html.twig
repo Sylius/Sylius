@@ -21,7 +21,7 @@
     </thead>
     <tbody>
     {% for tax_rate in tax_rates %}
-        <tr>
+        <tr id="{{ tax_rate.id }}">
             <td>{{ tax_rate.id }}</td>
             <td>{{ tax_rate.category }}</td>
             <td>{{ tax_rate.zone }}</td>

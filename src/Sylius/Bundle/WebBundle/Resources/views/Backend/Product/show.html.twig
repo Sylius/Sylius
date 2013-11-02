@@ -18,7 +18,7 @@
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
+    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
     <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-info">
        <i class="icon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}

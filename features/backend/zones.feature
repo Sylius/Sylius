@@ -92,17 +92,47 @@ Feature: Zones
     Scenario: Deleting zone
         Given I am on the page of zone "USA GMT-8"
          When I press "delete"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the zone index page
+          And I should see "Zone has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting zone with js modal
+        Given I am on the page of zone "USA GMT-8"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the zone index page
           And I should see "Zone has been successfully deleted."
 
     Scenario: Deleting zone from list
         Given I am on the zone index page
          When I click "delete" near "USA GMT-8"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should still be on the zone index page
+          And I should see "Zone has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting zone from list with js modal
+        Given I am on the zone index page
+         When I click "delete" near "USA GMT-8"
+          And I click "delete" from the confirmation modal
          Then I should still be on the zone index page
           And I should see "Zone has been successfully deleted."
 
     Scenario: Deleted zone disappears from the list
         Given I am on the page of zone "Germany"
          When I press "delete"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the zone index page
+          But I should not see zone with name "Germany" in that list
+
+    @javascript
+    Scenario: Deleted zone disappears from the list with js modal
+        Given I am on the page of zone "Germany"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the zone index page
           But I should not see zone with name "Germany" in that list

@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         {% for order in orders %}
-        <tr>
+        <tr id="{{ order.id }}">
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
             <td>{{ order.createdAt|date }}</td>
             <td>

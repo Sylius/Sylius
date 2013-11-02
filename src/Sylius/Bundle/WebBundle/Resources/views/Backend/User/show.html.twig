@@ -15,7 +15,7 @@
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
         {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-        {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+        {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, false, false) }}
     </div>
     <h1><i class="icon-info-sign"></i> {{ 'sylius.user.show_header'|trans|raw }}</h1>
 </div>

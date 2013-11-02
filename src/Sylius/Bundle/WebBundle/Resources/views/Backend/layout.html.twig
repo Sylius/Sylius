@@ -53,7 +53,11 @@
 
                 <hr>
 
+                {# Gallery modal #}
                 {% include 'SyliusWebBundle::gallery.html.twig' %}
+
+                {# Confirmation modal #}
+                {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
 
                 <footer>
                     <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
@@ -68,6 +72,7 @@
             'http://code.jquery.com/jquery-1.8.0.min.js'
             'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'
             '@SyliusWebBundle/Resources/assets/js/jquery.blueimp-gallery.min.js'
+            '@SyliusWebBundle/Resources/assets/js/confirm-modal.js'
             '@SyliusWebBundle/Resources/assets/js/form-collection.js'
             '@SyliusWebBundle/Resources/assets/js/form-spinner.js'
             '@SyliusWebBundle/Resources/assets/js/select2.js'

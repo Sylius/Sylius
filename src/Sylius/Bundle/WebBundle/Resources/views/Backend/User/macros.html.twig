@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr>
+        <tr id="{{ user.id }}">
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>

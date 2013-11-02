@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         {% for zone in zones %}
-            <tr>
+            <tr id="{{ zone.id }}">
                 <td>{{ zone.id }}</td>
                 <td>{{ zone.name }}</td>
                 <td>{{ zone.type }}</td>
@@ -30,7 +30,7 @@
                     <td colspan="4"><strong>Members</strong></td>
                 </tr>
                 {% for member in zone.members %}
-                    <tr style="background-color: #f1f1f1;">
+                    <tr id="{{ member.id }}" style="background-color: #f1f1f1;">
                         <td>{{ member.id }}</td>
                         <td>{{ member.name }}</td>
                         <td colspan="2">

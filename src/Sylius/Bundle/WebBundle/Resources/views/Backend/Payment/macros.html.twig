@@ -19,7 +19,7 @@
     </thead>
     <tbody>
     {% for payment in payments %}
-        <tr>
+        <tr id="{{ payment.id }}">
             <td>{{ payment.id }}</td>
             <td><span class="label label-primary">{{ payment.method }}</span></td>
             <td>

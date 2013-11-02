@@ -31,7 +31,7 @@
                     <td colspan="4"><strong>Provinces</strong></td>
                 </tr>
                 {% for province in country.provinces %}
-                    <tr style="background-color: #f1f1f1;">
+                    <tr id="{{ province.id }}" style="background-color: #f1f1f1;">
                         <td>{{ province.id }}</td>
                         <td>{{ province.name }}</td>
                         <td colspan="2">

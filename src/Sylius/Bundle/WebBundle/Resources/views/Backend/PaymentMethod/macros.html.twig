@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     {% for payment_method in payment_methods %}
-        <tr>
+        <tr id="{{ payment_method.id }}">
             <td>{{ payment_method.id }}</td>
             <td>
                 <strong>{{ payment_method.name }}</strong>

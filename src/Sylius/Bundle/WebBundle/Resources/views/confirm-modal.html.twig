@@ -1,0 +1,21 @@
+<div class="modal fade" id="confirmation-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ 'sylius.confirmation.title'|trans }}</h4>
+            </div>
+
+            <div class="modal-body">
+                {{ 'sylius.confirmation.message'|trans }}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</button>
+                <button class="btn btn-danger">
+                    <i class="icon-trash"></i><span>{{ message is defined ? message : 'sylius.delete'|trans }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

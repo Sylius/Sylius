@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         {% for group in groups %}
-        <tr>
+        <tr id="{{ group.id }}">
             <td>{{ group.id }}</td>
             <td>{{ group.name }}</td>
             <td>

@@ -78,6 +78,17 @@ Feature: Exchange rates
     Scenario: Deleting exchange rate
         Given I am on the exchange rate index page
          When I press "delete" near "US Dollar"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the exchange rate index page
+          And I should see "Exchange rate has been successfully deleted."
+          But I should not see exchange rate with name "US Dollar" in the list
+
+    @javascript
+    Scenario: Deleting exchange rate with js modal
+        Given I am on the exchange rate index page
+         When I press "delete" near "US Dollar"
+          And I click "delete" from the confirmation modal
          Then I should still be on the exchange rate index page
           And I should see "Exchange rate has been successfully deleted."
           But I should not see exchange rate with name "US Dollar" in the list

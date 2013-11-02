@@ -16,7 +16,7 @@
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_promotion_index'), 'sylius.promotion.manage'|trans) }}
         {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
-        {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
+        {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id}), null, false, false) }}
     {% if promotion.couponBased %}
         {{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
         {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
@@ -90,12 +90,12 @@
             </thead>
             <tbody>
                 {% for rule in promotion.rules %}
-                    <tr>
+                    <tr id="{{ rule.id }}">
                         <td><span class="label label-info">{{ rule.type|capitalize|replace('_', ' ') }}</span></td>
                         <td>{{ configuration(rule.configuration) }}</td>
                         <td>
                             <div class="btn-group pull-right">
-                                {{ buttons.delete(path('sylius_backend_promotion_rule_delete', {'id': rule.id})) }}
+                                {{ buttons.delete(path('sylius_backend_promotion_rule_delete', {'id': rule.id, 'promotionId': promotion.id})) }}
                             </div>
                         </td>
                     </tr>
@@ -117,12 +117,12 @@
             </thead>
             <tbody>
                 {% for action in promotion.actions %}
-                    <tr>
+                    <tr id="{{ action.id }}">
                         <td><span class="label label-info">{{ action.type|capitalize|replace('_', ' ') }}</span></td>
                         <td>{{ configuration(action.configuration) }}</td>
                         <td>
                             <div class="btn-group pull-right">
-                                {{ buttons.delete(path('sylius_backend_promotion_action_delete', {'id': action.id})) }}
+                                {{ buttons.delete(path('sylius_backend_promotion_action_delete', {'id': action.id, 'promotionId': promotion.id})) }}
                             </div>
                         </td>
                     </tr>

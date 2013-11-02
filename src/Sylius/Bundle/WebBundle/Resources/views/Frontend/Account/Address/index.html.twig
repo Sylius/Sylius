@@ -20,7 +20,7 @@
             <table id="addresses" class="table">
                 <tbody>
                 {% for address in addresses %}
-                    <tr>
+                    <tr id="{{ address.id }}">
                         <td>
                             {{ include('SyliusWebBundle:Frontend/Account/Address:_address.html.twig') }}
                         </td>
