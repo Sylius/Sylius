@@ -17,7 +17,6 @@
     <thead>
         <tr>
             <th>#</th>
-            <th></th>
             <th>{{ 'sylius.cart.summary.product'|trans }}</th>
             <th>{{ 'sylius.cart.summary.quantity'|trans }}</th>
             <th></th>
@@ -33,18 +32,18 @@
     <tfoot>
         {% if cart.promotionTotal %}
         <tr>
-            <td colspan="7" style="text-align: right;">
+            <td colspan="6" style="text-align: right;">
                 <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
             </td>
         </tr>
         {% endif %}
         <tr>
-            <td colspan="7" style="text-align: right;">
+            <td colspan="6" style="text-align: right;">
                 <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.shippingTotal|sylius_price }}
             </td>
         </tr>
         <tr>
-            <td colspan="5">
+            <td colspan="4">
                 <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
                 <ul>
                 {% for taxAdjustment in cart.taxAdjustments %}
@@ -59,7 +58,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7" style="text-align: right;">
+            <td colspan="6" style="text-align: right;">
                 <strong>{{ 'sylius.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}
             </td>
         </tr>
