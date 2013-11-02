@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="30d6b7cae83842de6b0be3436b49fa57" resname="sylius.form.address.city">
         <source>sylius.form.address.city</source>
-        <target>Città</target>
+        <target>CittÃ </target>
       </trans-unit>
       <trans-unit id="4c4207c09a6a7e137d70a1fb5bf2c309" resname="sylius.form.address.company">
         <source>sylius.form.address.company</source>
