@@ -17,7 +17,7 @@
 {{ form_errors(form) }}
 
 <form action="{{ path('sylius_backend_taxation_settings') }}" method="post" class="form-horizontal" novalidate>
-    {{ form_row(form.default_tax_zone, {'attr': {'class': 'input-large'}}) }}
+    {{ form_row(form.default_tax_zone) }}
     {{ form_rest(form) }}
     {{ update() }}
 </form>
