@@ -16,8 +16,8 @@
     <div>{{ form_widget(form.hidden) }}</div>
     {{ form_rest(form) }}
     <div class="form-actions">
-        <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'sylius_installer', 'stepName': 'check'}) }}" class="btn btn-large"><i class="icon-chevron-left"></i> {{ 'sylius.process.step.check.button.back'|trans }}</a> &nbsp;
-        <button class="btn btn-large btn-primary" type="submit">
+        <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'sylius_installer', 'stepName': 'check'}) }}" class="btn btn-lg btn-default"><i class="icon-chevron-left"></i> {{ 'sylius.process.step.check.button.back'|trans }}</a> &nbsp;
+        <button class="btn btn-lg btn-primary" type="submit">
             {{ 'sylius.process.step.check.button.next'|trans }} <i class="icon-chevron-right"></i>
         </button>
     </div>

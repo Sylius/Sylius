@@ -63,7 +63,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr>
+        <tr id="{{ user.id }}">
             <td>{{ user.id }}</td>
             <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
             <td>

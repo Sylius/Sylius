@@ -162,7 +162,7 @@
 
 {% if product.hasOptions %}
 <hr>
-<div class="well well-small">
+<div class="well well-sm">
     {{ buttons.create(path('sylius_backend_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
     <div class="pull-right">

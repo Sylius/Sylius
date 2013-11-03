@@ -1,10 +1,10 @@
 <fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
-    {{ form_row(form.presentation, {'attr': {'class': 'input-large'}}) }}
-    {{ form_row(form.type, {'attr': {'class': 'input-large'}}) }}
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.presentation, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.type, {'attr': {'class': 'input-lg'}}) }}
     {% if form.choices is defined %}
     {% spaceless %}
-        <div class="property-choices-container hide">
+        <div class="property-choices-container hidden">
             <hr />
             <div id="sylius-assortment-property-choices" class="collection-container" data-prototype="{{ form_row(form.choices.vars.prototype, {'label' : 'Choice __name__'})|e }}">
                 {% for key, choice in form.choices %}
