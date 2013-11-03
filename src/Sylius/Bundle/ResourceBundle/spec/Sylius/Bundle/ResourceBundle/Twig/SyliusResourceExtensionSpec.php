@@ -114,6 +114,38 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName');
     }
 
+    function it_should_render_a_sorting_link_with_custom_options(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
+    {
+        $request->get('sorting', array())->willReturn(array());
+
+        $event = $this->getGetResponseEvent($request, $event);
+
+        $router->generate(
+            'new_route',
+            array(
+                'sorting' => array('propertyName' => 'asc'),
+                'params' => 'value'
+            )
+        )->shouldBeCalled()->willReturn('?sorting[propertyName]=asc&params=value');
+
+        $templating->render(
+            'SyliusResourceBundle:Twig:newsorting.html.twig',
+            array(
+                'url' => '?sorting[propertyName]=asc&params=value',
+                'label' => 'fieldName',
+                'icon' => false,
+                'currentOrder' => null
+            )
+        )->shouldBeCalled();
+
+        $this->fetchRequest($event);
+        $this->renderSortingLink('propertyName', 'fieldName', null, array(
+            'route' => 'new_route',
+            'template' => 'SyliusResourceBundle:Twig:newsorting.html.twig',
+            'route_params' => array('params' => 'value')
+        ));
+    }
+
     function it_should_not_render_sorting_link(Request $request, GetResponseEvent $event)
     {
         $request->get('sorting', array())->willReturn(array());
@@ -166,7 +198,52 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->fetchRequest($event);
-        $this->renderPaginateSelect(array(10,20), $paginator);
+        $this->renderPaginateSelect($paginator, array(10,20));
+    }
+
+    function it_should_render_a_paginate_select_with_custom_options(Request $request, GetResponseEvent $event, Pagerfanta $paginator, Router $router, TwigEngine $templating)
+    {
+        $limits = array(10, 20);
+
+        $event = $this->getGetResponseEvent(
+            $request,
+            $event,
+            'route_name',
+            array(
+                'page' => 3,
+                '_sylius' => array('paginate' => '$paginate')
+            )
+        );
+
+        foreach ($limits as $limit) {
+            $router->generate(
+                'new_route',
+                array(
+                    'page' => 1,
+                    'params' => 'value',
+                    'paginate' => $limit,
+                    '_sylius' => array('paginate' => '$paginate')
+                )
+            )->shouldBeCalled()->willReturn('?paginate=' . $limit . '&params=value');
+        }
+
+        $templating->render(
+            'SyliusResourceBundle:Twig:newpaginate.html.twig',
+            array(
+                'paginator' => $paginator,
+                'limits' => array(
+                    10 => '?paginate=10&params=value',
+                    20 => '?paginate=20&params=value'
+                ),
+            )
+        )->shouldBeCalled();
+
+        $this->fetchRequest($event);
+        $this->renderPaginateSelect($paginator, array(10,20), array(
+            'route' => 'new_route',
+            'template' => 'SyliusResourceBundle:Twig:newpaginate.html.twig',
+            'route_params' => array('params' => 'value')
+        ));
     }
 
     function it_should_have_a_name()
