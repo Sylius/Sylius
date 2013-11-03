@@ -750,22 +750,6 @@
         <source>sylius.form.login.password</source>
         <target>Password</target>
       </trans-unit>
-      <trans-unit id="7f14ae4c9b79b9913a832ccf1b00daca" resname="sylius.form.option.name">
-        <source>sylius.form.option.name</source>
-        <target>Name</target>
-      </trans-unit>
-      <trans-unit id="918e9d373b59174961879f76bf7d1a38" resname="sylius.form.option.presentation">
-        <source>sylius.form.option.presentation</source>
-        <target>Presentation</target>
-      </trans-unit>
-      <trans-unit id="872f019b57a6ebda68f4907e4e9a34c4" resname="sylius.form.option_value.add_value">
-        <source>sylius.form.option_value.add_value</source>
-        <target>Add value</target>
-      </trans-unit>
-      <trans-unit id="debbef60395a012a98daeacc8f21c0e1" resname="sylius.form.option_value.value">
-        <source>sylius.form.option_value.value</source>
-        <target>Value</target>
-      </trans-unit>
       <trans-unit id="24a58cc80b3622348ed028ea8b9793ac" resname="sylius.form.profile.email">
         <source>sylius.form.profile.email</source>
         <target>Email</target>
