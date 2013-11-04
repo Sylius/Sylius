@@ -65,7 +65,7 @@ class ShippingStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
-    private function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
+    protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig', array(
             'order'   => $order,
@@ -74,7 +74,7 @@ class ShippingStep extends CheckoutStep
         ));
     }
 
-    private function createCheckoutShippingForm(OrderInterface $order)
+    protected function createCheckoutShippingForm(OrderInterface $order)
     {
         $zone = $this->getZoneMatcher()->match($order->getShippingAddress());
 
