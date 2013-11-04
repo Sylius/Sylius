@@ -1,13 +1,27 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 <h1>Tax rate details <small>{{ tax_rate.name }}</small></h1>
 <hr>
+
 <div class="well">
-    <a href="{{ path('sylius_tax_rate_index') }}" class="btn btn-primary">
-        <i class="icon-list-alt"></i> manage tax rates
-    </a>
-    <a href="{{ path('sylius_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
-        <i class="icon-pencil"></i> edit
-    </a>
-    <a href="{{ path('sylius_tax_rate_delete', {'id': tax_rate.id}) }}" class="btn btn-danger">
-        <i class="icon-trash"></i>
-    </a>
+    {{ buttons.manage(path('sylius_tax_rate_index'), 'manage tax rates') }}
+    {{ buttons.edit(path('sylius_tax_rate_update', {'id': tax_rate.id})) }}
+    {{ buttons.delete(path('sylius_tax_rate_delete', {'id': tax_rate.id})) }}
 </div>
+
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.tax_rate.category'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.name'|trans }}</th>
+            <th>{{ 'sylius.tax_rate.amount'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ tax_rate.category }}</td>
+            <td>{{ tax_rate.name }}</td>
+            <td>{{ tax_rate.amountAsPercentage }}%</td>
+        </tr>
+    </tbody>
+</table>

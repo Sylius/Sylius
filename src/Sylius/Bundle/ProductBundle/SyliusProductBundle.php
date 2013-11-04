@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Product management bundle with highly flexible architecture.
  * Implements basic product model with properties support.
  *
- * Use *SyliusCustomizableProductBundle* to get variants, options and
+ * Use *SyliusVariableProductBundle* to get variants, options and
  * customizations support.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

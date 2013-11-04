@@ -20,10 +20,7 @@ use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface VariantInterface extends
-    BaseVariantInterface,
-    ShippableInterface,
-    StockableInterface
+interface VariantInterface extends BaseVariantInterface, ShippableInterface, StockableInterface
 {
     /**
      * Get variant price.
@@ -42,12 +39,14 @@ interface VariantInterface extends
     /**
      * Get images.
      *
-     * @return Collection
+     * @return VariantImageInterface[]
      */
     public function getImages();
 
     /**
      * Checks if product has image.
+     *
+     * @param VariantImageInterface $image
      *
      * @return Boolean
      */
@@ -56,14 +55,14 @@ interface VariantInterface extends
     /**
      * Add image.
      *
-     * @param VariantImage $image
+     * @param VariantImageInterface $image
      */
     public function addImage(VariantImageInterface $image);
 
     /**
      * Remove image.
      *
-     * @param VariantImage $image
+     * @param VariantImageInterface $image
      */
     public function removeImage(VariantImageInterface $image);
 

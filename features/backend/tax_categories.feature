@@ -62,11 +62,31 @@ Feature: Tax categories
     Scenario: Deleting tax category
         Given I am on the tax category index page
          When I click "delete" near "Clothing"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the tax category index page
+          And I should see "Tax category has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting tax category with js modal
+        Given I am on the tax category index page
+         When I click "delete" near "Clothing"
+          And I click "delete" from the confirmation modal
          Then I should be on the tax category index page
           And I should see "Tax category has been successfully deleted."
 
     Scenario: Deleted tax category disappears from the list
         Given I am on the tax category index page
          When I click "delete" near "Clothing"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the tax category index page
+          And I should not see tax category with name "Clothing" in that list
+
+    @javascript
+    Scenario: Deleted tax category disappears from the list with js modal
+        Given I am on the tax category index page
+         When I click "delete" near "Clothing"
+          And I click "delete" from the confirmation modal
          Then I should be on the tax category index page
           And I should not see tax category with name "Clothing" in that list

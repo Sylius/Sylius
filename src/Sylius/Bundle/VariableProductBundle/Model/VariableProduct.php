@@ -25,14 +25,14 @@ class VariableProduct extends Product implements VariableProductInterface
     /**
      * Product variants.
      *
-     * @var Collection
+     * @var VariantInterface[]
      */
     protected $variants;
 
     /**
      * Product options.
      *
-     * @var Collection
+     * @var OptionInterface[]
      */
     protected $options;
 
@@ -228,5 +228,4 @@ class VariableProduct extends Product implements VariableProductInterface
     {
         return $this->options->contains($option);
     }
-
 }

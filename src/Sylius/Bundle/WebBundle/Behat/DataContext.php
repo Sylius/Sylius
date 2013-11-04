@@ -15,10 +15,14 @@ use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Model\User;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
@@ -64,8 +68,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereAreFollowingTaxonomies(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-
         foreach ($table->getHash() as $data) {
             $this->thereIsTaxonomy($data['name']);
         }
@@ -134,7 +136,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
-                isset($data['address']) ? $data['address'] : null
+                isset($data['address']) && !empty($data['address']) ? $data['address'] : null
             );
         }
     }
@@ -168,6 +170,31 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
 
         return $user;
+    }
+
+    /**
+     * @Given /^there are groups:$/
+     * @Given /^there are following groups:$/
+     * @Given /^the following groups exist:$/
+     */
+    public function thereAreGroups(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('group');
+
+        foreach ($table->getHash() as $data) {
+            $group = $repository->createNew();
+            $group->setName(trim($data['name']));
+
+            $roles = explode(',', $data['roles']);
+            $roles = array_map('trim', $roles);
+
+            $group->setRoles($roles);
+
+            $manager->persist($group);
+        }
+
+        $manager->flush();
     }
 
     /**
@@ -293,9 +320,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('promotion_rule');
 
         foreach ($table->getHash() as $data) {
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+
             $rule = $repository->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $rule->setConfiguration($this->getConfiguration($data['configuration']));
+            $rule->setConfiguration($configuration);
 
             $promotion->addRule($rule);
 
@@ -316,9 +345,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('promotion_action');
 
         foreach ($table->getHash() as $data) {
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+
             $action = $repository->createNew();
             $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $action->setConfiguration($this->getConfiguration($data['configuration']));
+            $action->setConfiguration($configuration);
 
             $promotion->addAction($action);
 
@@ -697,7 +728,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $category = array_key_exists('category', $data) ? $data['category'] : null;
-            $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $category);
+            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
+            $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
+
+            $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $category, $calculator, $configuration);
         }
     }
 
@@ -728,17 +762,19 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $zoneName)
+    public function thereIsShippingMethod($name, $zoneName, $category = null, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null)
     {
         $method = $this
             ->getRepository('shipping_method')
             ->createNew()
         ;
 
+        $configuration = $configuration ?: array('amount' => 2500);
+
         $method->setName($name);
         $method->setZone($this->findOneByName('zone', $zoneName));
-        $method->setCalculator(DefaultCalculators::PER_ITEM_RATE);
-        $method->setConfiguration(array('amount' => 25.00));
+        $method->setCalculator($calculator);
+        $method->setConfiguration($configuration);
 
         $manager = $this->getEntityManager();
 
@@ -983,6 +1019,36 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * Cleaning promotion configuration that is serialized in database.
+     *
+     * @param  array $configuration
+     * @return array
+     */
+    private function cleanPromotionConfiguration(array $configuration)
+    {
+        foreach ($configuration as $key => $value) {
+            switch ($key) {
+                case 'amount':
+                    $configuration[$key] = (int) $value * 100;
+                    break;
+                case 'count':
+                    $configuration[$key] = (int) $value;
+                    break;
+                case 'percentage':
+                    $configuration[$key] = (int) $value / 100;
+                    break;
+                case 'equal':
+                    $configuration[$key] = (boolean) $value;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $configuration;
+    }
+
+    /**
      * Find one resource by name.
      *
      * @param string $type
@@ -1002,6 +1068,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @param array  $criteria
      *
      * @return object
+     *
+     * @throws \InvalidArgumentException
      */
     public function findOneBy($type, array $criteria)
     {
@@ -1034,7 +1102,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     /**
      * Get entity manager.
      *
-     * @return EntityManager
+     * @return ObjectManager
      */
     public function getEntityManager()
     {

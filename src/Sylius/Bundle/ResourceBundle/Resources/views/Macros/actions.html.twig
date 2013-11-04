@@ -1,0 +1,13 @@
+{% macro create(url) %}
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-lg"><i class="icon-ok"></i> {{ 'sylius.create'|trans }}</button>
+    <a href="{{ app.request.headers.get('referer', url) }}" class="btn btn-danger btn-lg"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+</div>
+{% endmacro %}
+
+{% macro update(url) %}
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-lg"><i class="icon-save"></i> {{ 'sylius.save_changes'|trans }}</button>
+    <a href="{{ app.request.headers.get('referer', url) }}" class="btn btn-danger btn-lg"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+</div>
+{% endmacro %}

@@ -77,7 +77,7 @@ class Product implements ProductInterface
     /**
      * Properties.
      *
-     * @var Collection
+     * @var ProductPropertyInterface[]
      */
     protected $properties;
 

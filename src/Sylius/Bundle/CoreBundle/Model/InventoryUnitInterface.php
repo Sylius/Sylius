@@ -19,10 +19,15 @@ use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface InventoryUnitInterface extends
-    BaseInventoryUnitInterface,
-    ShipmentItemInterface
+interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentItemInterface
 {
+    /**
+     * @return null|OrderInterface
+     */
     public function getOrder();
+
+    /**
+     * @param null|OrderInterface $order
+     */
     public function setOrder(OrderInterface $order = null);
 }

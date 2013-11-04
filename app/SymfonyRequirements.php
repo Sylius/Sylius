@@ -648,8 +648,6 @@ class SymfonyRequirements extends RequirementCollection
             ||
             (extension_loaded('apc') && ini_get('apc.enabled'))
             ||
-            (extension_loaded('Zend Optimizer+') && ini_get('zend_optimizerplus.enable'))
-            ||
             (extension_loaded('Zend OPcache') && ini_get('opcache.enable'))
             ||
             (extension_loaded('xcache') && ini_get('xcache.cacher'))

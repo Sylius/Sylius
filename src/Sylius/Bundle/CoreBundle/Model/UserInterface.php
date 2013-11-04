@@ -90,7 +90,7 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     /**
      * Remove address.
      *
-     * @param AddressInterface $addresses
+     * @param AddressInterface $address
      */
     public function removeAddress(AddressInterface $address);
 

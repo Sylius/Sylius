@@ -12,6 +12,9 @@
     {% endfor %}
 </fieldset>
 <div class="form-actions">
+    <div class="pull-right">
+        {{ render(url('hwi_oauth_connect')) }}
+    </div>
     <button type="submit" class="btn btn-success btn-large span3"><i class="icon-user"></i> Register</button>
 </div>
 </form>

@@ -11,68 +11,33 @@
 
 namespace Sylius\Bundle\VariableProductBundle\DependencyInjection;
 
-use Sylius\Bundle\VariableProductBundle\SyliusVariableProductBundle;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Sylius product catalog system container extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusVariableProductExtension extends Extension implements PrependExtensionInterface
+class SyliusVariableProductExtension extends SyliusResourceExtension implements PrependExtensionInterface
 {
+    protected $configFiles = array(
+        'options',
+        'variants',
+        'prototypes',
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $this->configDir = __DIR__.'/../Resources/config/container';
 
-        $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
+        list(, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
 
-        $driver = $container->getParameter('sylius_product.driver');
-
-        $this->loadDriver($driver, $config, $loader);
-
-        $classes = $config['classes'];
-
-        $this->mapClassParameters($classes, $container);
-        $this->mapValidationGroupParameters($config['validation_groups'], $container);
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
-    }
-
-    /**
-     * Load bundle driver.
-     *
-     * @param string        $driver
-     * @param array         $config
-     * @param XmlFileLoader $loader
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function loadDriver($driver, array $config, XmlFileLoader $loader)
-    {
-        if (!in_array($driver, SyliusVariableProductBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusVariableProductBundle.', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
-
-        $loader->load('options.xml');
-        $loader->load('variants.xml');
-        $loader->load('prototypes.xml');
+        $this->loadDatabaseDriver($container->getParameter('sylius_product.driver'), $loader);
     }
 
     /**
@@ -80,46 +45,21 @@ class SyliusVariableProductExtension extends Extension implements PrependExtensi
      */
     public function prepend(ContainerBuilder $container)
     {
-        $config = array('classes' => array(
-            'product' => array(
-                'model' => 'Sylius\Bundle\VariableProductBundle\Model\VariableProduct',
-                'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType'
-            ),
-            'prototype' => array(
-                'model' => 'Sylius\Bundle\VariableProductBundle\Model\Prototype',
-                'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\PrototypeType'
-            )
-        ));
-
-        $container->prependExtensionConfig('sylius_product', $config);
-    }
-
-    /**
-     * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
-    {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                $service = $service === 'form' ? 'form.type' : $service;
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
-            }
+        if (!$container->hasExtension('sylius_product')) {
+            return;
         }
-    }
 
-    /**
-     * Remap validation group parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
-    {
-        foreach ($validationGroups as $model => $groups) {
-            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
-        }
+        $container->prependExtensionConfig('sylius_product', array(
+            'classes' => array(
+                'product' => array(
+                    'model' => 'Sylius\Bundle\VariableProductBundle\Model\VariableProduct',
+                    'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType'
+                ),
+                'prototype' => array(
+                    'model' => 'Sylius\Bundle\VariableProductBundle\Model\Prototype',
+                    'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\PrototypeType'
+                )
+            ))
+        );
     }
 }

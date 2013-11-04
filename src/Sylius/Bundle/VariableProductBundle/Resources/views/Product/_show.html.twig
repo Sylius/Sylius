@@ -1,18 +1,12 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 <h1>{{ product.name }} <small>{{ product.description }}</small></h1>
 <hr />
+
 <div class="well well-small">
-    <a href="{{ path('sylius_product_index') }}" class="btn btn-success">
-        <i class="icon-pencil"></i> manage products
-    </a>
-    <a href="{{ path('sylius_product_update', {'id': product.id}) }}" class="btn">
-        <i class="icon-pencil"></i> update product
-    </a>
-    <form action="{{ path('sylius_product_delete', {'id': product.id}) }}" method="post" style="display: inline;">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i> delete product
-        </button>
-    </form>
+    {{ buttons.manage(path('sylius_product_index'), 'manage products') }}
+    {{ buttons.edit(path('sylius_product_update', {'id': product.id}), 'update product') }}
+    {{ buttons.delete(path('sylius_product_delete', {'id': product.id}), 'delete product') }}
 </div>
 <hr>
 <table class="table table-bordered">

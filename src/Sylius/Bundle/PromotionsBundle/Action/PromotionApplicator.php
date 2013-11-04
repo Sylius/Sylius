@@ -34,7 +34,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
         foreach ($promotion->getActions() as $action) {
             $this->registry
                 ->getAction($action->getType())
-                ->execute($subject, $action->getConfiguration())
+                ->execute($subject, $action->getConfiguration(), $promotion)
             ;
         }
     }

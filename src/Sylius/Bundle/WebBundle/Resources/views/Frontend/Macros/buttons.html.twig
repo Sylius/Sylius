@@ -1,5 +1,5 @@
 {% macro btn(url, message, id, icon, class) %}
-<a  class="btn {% if class is not empty %} {{ class }} {% else %}btn-default{% endif %}"
+<a class="btn {% if class is not empty %} {{ class }} {% else %}btn-default{% endif %}"
     {% if id is not empty %} id="{{ id }}"{% endif %}
     href="{{ url }}">
     {% if icon is not empty %}
@@ -39,12 +39,17 @@
     {{ buttons.btn(url, message, id, 'pencil', 'btn-primary') }}
 {% endmacro %}
 
-{% macro delete(url, message) %}
-    <form action="{{ url }}" method="post" style="display: inline;">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">
-            <i class="icon-trash"></i>
-            {{ message is empty ? 'sylius.delete'|trans : message }}
-        </button>
-    </form>
+{% macro delete(url, message, disabled) %}
+{% if disabled %}
+<span class="btn btn-danger disabled">
+    <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+</span>
+{% else %}
+<form action="{{ url }}" method="post" style="display: inline;">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger btn-confirm" type="submit">
+        <i class="icon-trash"></i> <span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+    </button>
+</form>
+{% endif %}
 {% endmacro %}

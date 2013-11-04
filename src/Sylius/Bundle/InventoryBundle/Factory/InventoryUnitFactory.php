@@ -26,14 +26,14 @@ class InventoryUnitFactory implements InventoryUnitFactoryInterface
     /**
      * Inventory unit repository.
      *
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param ObjectRepository $repository
+     * @param RepositoryInterface $repository
      */
     public function __construct(RepositoryInterface $repository)
     {

@@ -25,7 +25,7 @@ class Prototype extends BasePrototype implements PrototypeInterface
     /**
      * Product options.
      *
-     * @var Collection
+     * @var OptionInterface[]
      */
     protected $options;
 

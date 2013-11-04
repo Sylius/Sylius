@@ -54,7 +54,7 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \RuntimeException
      */
-    public function shouldNotAddWihtoutProcess()
+    public function shouldNotAddWithoutProcess()
     {
         $process = $this->getMock('Sylius\Bundle\FlowBundle\Process\ProcessInterface');
 

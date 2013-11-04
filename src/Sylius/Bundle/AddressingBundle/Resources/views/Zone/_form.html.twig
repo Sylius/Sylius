@@ -1,16 +1,16 @@
 {{ form_errors(form) }}
 <fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.type) }}
     <div class="control-group">
         {% for type in ['country', 'province', 'zone'] %}
-            <div id="sylius-addressing-zone-members-{{ type }}" data-prototype="{{ form_widget(form.members.vars.prototypes['sylius_zone_member_' ~ type], {'attr': {'class': 'select2 input-large'}})|e }}">
+            <div id="sylius-addressing-zone-members-{{ type }}" data-prototype="{{ form_widget(form.members.vars.prototypes['sylius_zone_member_' ~ type], {'attr': {'class': 'select2 input-lg'}})|e }}">
                 {% if form.type.get('value') == type %}
                     {% for member in form.members %}
                         {% if member.offsetExists(form.type.get('value')) %}
                             <div class="control-group">
                                 <div class="controls">
-                                    {{ form_widget(member[form.type.get('value')], {'attr': {'class': 'select2 input-large'}}) }}
+                                    {{ form_widget(member[form.type.get('value')], {'attr': {'class': 'select2 input-lg'}}) }}
                                     <a href="#" class="btn btn-danger collection-remove-btn"><i class="icon-trash icon-white"></i></a>
                                 </div>
                             </div>

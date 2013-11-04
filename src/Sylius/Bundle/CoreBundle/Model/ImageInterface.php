@@ -11,14 +11,32 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use SplFileInfo;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 interface ImageInterface extends TimestampableInterface
 {
+    /**
+     * @return boolean
+     */
     public function hasFile();
+
+    /**
+     * @return null|\SplFileInfo
+     */
     public function getFile();
-    public function setFile(SplFileInfo $file);
+
+    /**
+     * @param \SplFileInfo $file
+     */
+    public function setFile(\SplFileInfo $file);
+
+    /**
+     * @return string
+     */
     public function getPath();
+
+    /**
+     * @param string $path
+     */
     public function setPath($path);
 }

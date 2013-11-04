@@ -7,13 +7,16 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusInstallerBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
@@ -32,7 +35,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\InstallerBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\InstallerBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/InstallerBundle",
     "extra": {

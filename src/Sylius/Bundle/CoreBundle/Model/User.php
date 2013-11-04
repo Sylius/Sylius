@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
@@ -23,6 +22,9 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
  */
 class User extends BaseUser implements UserInterface
 {
+    protected $amazonId;
+    protected $facebookId;
+    protected $googleId;
     protected $firstName;
     protected $lastName;
     protected $createdAt;
@@ -35,7 +37,7 @@ class User extends BaseUser implements UserInterface
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
+        $this->createdAt = new \DateTime();
         $this->orders    = new ArrayCollection();
         $this->addresses = new ArrayCollection();
 
@@ -50,6 +52,78 @@ class User extends BaseUser implements UserInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+    }
+
+    /**
+     * Set ID of Amazon account attached to the user
+     *
+     * @param string $amazonId
+     *
+     * @return User
+     */
+    public function setAmazonId($amazonId)
+    {
+        $this->amazonId = $amazonId;
+
+        return $this;
+    }
+
+    /**
+     * Get ID of Amazon account attached to the user
+     *
+     * @return string|null
+     */
+    public function getAmazonId()
+    {
+        return $this->amazonId;
+    }
+
+    /**
+     * Set ID of Facebook account attached to the user
+     *
+     * @param string $facebookId
+     *
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get ID of Facebook account attached to the user
+     *
+     * @return string|null
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * Set ID of Google account attached to the user
+     *
+     * @param string $googleId
+     *
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get ID of Google account attached to the user
+     *
+     * @return string|null
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
     }
 
     /**
@@ -155,7 +229,7 @@ class User extends BaseUser implements UserInterface
     /**
      * Get addresses
      *
-     * @return ArrayCollection
+     * @return AddressInterface[]
      */
     public function getAddresses()
     {
@@ -187,26 +261,41 @@ class User extends BaseUser implements UserInterface
         return $this->lastName;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(DateTime $updatedAt)
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setEmail($email)
     {
         parent::setEmail($email);
@@ -215,6 +304,9 @@ class User extends BaseUser implements UserInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setEmailCanonical($emailCanonical)
     {
         parent::setEmailCanonical($emailCanonical);

@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Repository;
 
 use FOS\UserBundle\Model\UserInterface;
-use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use YaLinqo\Enumerable;
 
-class OrderRepository extends BaseOrderRepository
+class OrderRepository extends CartRepository
 {
     /**
      * Create user orders paginator.
@@ -111,9 +111,9 @@ class OrderRepository extends BaseOrderRepository
         $to   = null === $to ? new \DateTime() : $to;
 
         return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function($order) {
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, '$v->getTotal()', function($orders) {
+            }, '$v->getTotal()', function ($orders) {
                 return Enumerable::from($orders)->sum();
             })
             ->toValues()
@@ -127,9 +127,9 @@ class OrderRepository extends BaseOrderRepository
         $to   = null === $to ? new \DateTime() : $to;
 
         return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function($order) {
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, null, function($orders) {
+            }, null, function ($orders) {
                 return Enumerable::from($orders)->count();
             })
             ->toValues()

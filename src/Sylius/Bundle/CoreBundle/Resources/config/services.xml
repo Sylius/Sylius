@@ -35,13 +35,13 @@
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
 
-        <parameter key="sylius.form.type.user.class">Sylius\Bundle\CoreBundle\Form\Type\UserType</parameter>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
@@ -54,11 +54,17 @@
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
 
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
+
+        <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
     </parameters>
 
     <services>
         <!-- settings schemas -->
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
+            <argument type="collection">
+                <argument key="currency">%sylius.money.currency%</argument>
+                <argument key="locale">%sylius.locale%</argument>
+            </argument>
             <tag name="sylius.settings_schema" namespace="general" />
         </service>
         <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
@@ -114,6 +120,10 @@
         <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
             <argument>%sylius.model.user.class%</argument>
             <tag name="form.type" alias="sylius_user" />
+        </service>
+        <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
+            <argument>%sylius.model.group.class%</argument>
+            <tag name="form.type" alias="sylius_group" />
         </service>
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
@@ -192,8 +202,12 @@
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderPromotion" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
         </service>
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
             <argument type="service" id="sylius.currency_context" />
@@ -204,6 +218,9 @@
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
             <argument>%sylius.model.variant_image.class%</argument>
             <tag name="form.type" alias="sylius_image" />
+        </service>
+        <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
+            <tag name="form.type" alias="list" />
         </service>
 
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
@@ -243,7 +260,7 @@
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
-            <tag name="sylius.promotion_action" type="Percentage_discount" label="Percentage discount" />
+            <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
         </service>
 
         <!-- money -->
@@ -257,6 +274,15 @@
         <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">
             <argument type="service" id="sylius.settings.manager" />
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
+        <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="collection">
+                <argument key="amazon">amazonId</argument>
+                <argument key="facebook">facebookId</argument>
+                <argument key="google">googleId</argument>
+            </argument>
         </service>
     </services>
 

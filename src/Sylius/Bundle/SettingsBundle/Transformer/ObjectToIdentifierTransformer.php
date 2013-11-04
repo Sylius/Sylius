@@ -56,7 +56,7 @@ class ObjectToIdentifierTransformer implements ParameterTransformerInterface
             return null;
         }
 
-        $accessor = PropertyAccess::getPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
 
         return $accessor->getValue($value, $this->identifier);
     }

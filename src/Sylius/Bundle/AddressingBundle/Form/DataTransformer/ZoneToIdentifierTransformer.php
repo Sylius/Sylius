@@ -63,7 +63,7 @@ class ZoneToIdentifierTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($zone, 'Sylius\Bundle\AddressingBundle\Model\ZoneInterface');
         }
 
-        $accessor = PropertyAccess::getPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
 
         return $accessor->getValue($zone, $this->identifier);
     }

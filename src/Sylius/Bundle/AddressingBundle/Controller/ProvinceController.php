@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,7 +31,10 @@ class ProvinceController extends ResourceController
      *
      * @param Request $request
      *
-     * @return Response
+     * @return JsonResponse
+     *
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
      */
     public function choiceFormAction(Request $request)
     {
@@ -94,13 +98,10 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this
-            ->get('form.factory')
-            ->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
-                'country'     => $country,
-                'label'       => 'sylius.form.address.province',
-                'empty_value' => 'sylius.form.province.select'
-            ))
-        ;
+        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
+            'country'     => $country,
+            'label'       => 'sylius.form.address.province',
+            'empty_value' => 'sylius.form.province.select'
+        ));
     }
 }

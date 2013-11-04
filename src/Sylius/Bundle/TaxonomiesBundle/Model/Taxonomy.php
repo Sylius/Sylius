@@ -105,6 +105,9 @@ class Taxonomy implements TaxonomyInterface
         return $this->root->getChildren();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTaxonsAsList()
     {
         $taxons = new ArrayCollection();
@@ -116,15 +119,6 @@ class Taxonomy implements TaxonomyInterface
         }
 
         return $taxons;
-    }
-
-    private function getChildTaxons(TaxonInterface $taxon, Collection $taxons)
-    {
-        foreach ($taxon->getChildren() as $child) {
-            $taxons[] = $child;
-
-            $this->getChildTaxons($child, $taxons);
-        }
     }
 
     /**
@@ -153,5 +147,14 @@ class Taxonomy implements TaxonomyInterface
         $this->root->removeChild($taxon);
 
         return $this;
+    }
+
+    private function getChildTaxons(TaxonInterface $taxon, Collection $taxons)
+    {
+        foreach ($taxon->getChildren() as $child) {
+            $taxons[] = $child;
+
+            $this->getChildTaxons($child, $taxons);
+        }
     }
 }

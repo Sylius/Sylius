@@ -83,7 +83,7 @@ class PaymentSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('EUR');
     }
 
-    function it_has_amount_equal_to_0_by_defualt()
+    function it_has_amount_equal_to_0_by_default()
     {
         $this->getAmount()->shouldReturn(0);
     }
@@ -94,9 +94,9 @@ class PaymentSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(4999);
     }
 
-    function it_has_pending_state_by_default()
+    function it_has_new_state_by_default()
     {
-        $this->getState()->shouldReturn(PaymentInterface::STATE_PENDING);
+        $this->getState()->shouldReturn(PaymentInterface::STATE_NEW);
     }
 
     function its_state_is_mutable()

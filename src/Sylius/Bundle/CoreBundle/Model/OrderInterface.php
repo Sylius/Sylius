@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
@@ -233,4 +234,11 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return OrderInterface
      */
     public function setCurrency($currency);
+
+    /**
+     * Set promotion coupon.
+     *
+     * @param CouponInterface $coupon
+     */
+    public function setPromotionCoupon(CouponInterface $coupon = null);
 }

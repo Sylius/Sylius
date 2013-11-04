@@ -18,8 +18,11 @@ use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -50,6 +53,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         // Sylius data creation context.
         $this->useContext('data', new DataContext());
+        // Sylius OAuth context.
+        $this->useContext('oauth', new OAuthContext());
     }
 
     /**
@@ -730,9 +735,26 @@ class WebUser extends MinkContext implements KernelAwareInterface
         }
     }
 
+    /**
+     * @When /^I click the login with (.+) button$/
+     * @When /^I press the login with (.+) button$/
+     */
+    public function iClickTheLoginWithButton($provider)
+    {
+        $loginButton = $this->getSession()->getPage()->find('css',
+            sprintf('a.oauth-login-%s', strtolower($provider))
+        );
+        $loginButton->click();
+
+        // Re-set default session
+        $currentUrl = $this->getSession()->getCurrentUrl();
+        $this->getMink()->setDefaultSessionName('goutte');
+        $this->getSession()->visit($currentUrl);
+    }
 
     /**
      * @Given /^I added product "([^""]*)" to cart, with quantity "([^""]*)"$/
+     * @When /^I add product "([^""]*)" to cart, with quantity "([^""]*)"$/
      */
     public function iAddedProductToCartWithQuantity($productName, $quantity)
     {
@@ -784,6 +806,27 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I click "([^"]*)" from the confirmation modal$/
+     */
+    public function iClickOnConfirmationModal($button)
+    {
+        $this->assertSession()->elementExists('css', '#confirmationModalContainer');
+
+        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+
+        $this->getSession()->wait(100);
+
+        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
+            throw new \Exception('The confirmation modal was not opened...');
+        }
+
+        $this->getSession()->wait(100);
+
+        $primaryButton->press();
+    }
+
+    /**
      * Assert that given code equals the current one.
      *
      * @param integer $code
@@ -809,6 +852,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      * Get current user instance.
      *
      * @return null|UserInterface
+     *
+     * @throws \Exception
      */
     private function getUser()
     {

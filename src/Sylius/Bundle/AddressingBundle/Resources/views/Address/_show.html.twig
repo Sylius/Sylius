@@ -1,16 +1,12 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 <h1>Address details <small>{{ address.fullName }}</small></h1>
 <hr />
 
 <div class="well well-small">
-    <a href="{{ path('sylius_address_update', {'id': address.id}) }}" class="btn">
-        <i class="icon-pencil icon-white"></i> edit
-    </a>
-    <a href="{{ path('sylius_address_delete', {'id': address.id}) }}" class="btn btn-danger">
-        <i class="icon-trash icon-white"></i>
-    </a>
-    <a href="{{ path('sylius_address_create') }}" class="btn btn-primary">
-        <i class="icon-plus icon-white"></i> new address
-    </a>
+    {{ buttons.create(path('sylius_address_create'), 'new address') }}
+    {{ buttons.edit(path('sylius_address_update', {'id': address.id})) }}
+    {{ buttons.delete(path('sylius_address_delete', {'id': address.id})) }}
 </div>
 
 <table class="table table-bordered">

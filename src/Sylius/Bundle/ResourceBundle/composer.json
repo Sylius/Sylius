@@ -7,20 +7,23 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "friendsofsymfony/rest-bundle":    "0.13.*",
+        "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "0.12.*",
         "white-october/pagerfanta-bundle": "1.0.*"
     },

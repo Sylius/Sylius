@@ -53,8 +53,8 @@
 <hr>
 <div class="row">
     <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
-    <div class="col-md-6">
-        {% if product.hasOptions %}
+    {% if product.hasVariants %}
+        <div class="col-md-6">
             {% if product.isVariantSelectionMethodChoice %}
             <table class="table table-condensed">
                 <thead>
@@ -93,14 +93,14 @@
                 </tbody>
             </table>
             {% else %}
-                <div class="well">
-                {{ form_widget(form.variant) }}
+                <div class="well clearfix">
+                    {{ form_widget(form.variant) }}
                 </div>
             {% endif %}
-        {% endif %}
-    </div>
-    <div class="col-md-6">
-        {% if not product.hasOptions and not sylius_inventory_is_available(product.masterVariant) %}
+        </div>
+    {% endif %}
+    <div class="col-md-6 pull-right">
+        {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
             <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
         {% else %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}

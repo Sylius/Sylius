@@ -50,9 +50,9 @@ class CartListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param ObjectManager      $cartManager
-     * @param ValidatorInterface $validator
-     * @param CartPRovider       $cartProvider
+     * @param ObjectManager         $cartManager
+     * @param ValidatorInterface    $validator
+     * @param CartProviderInterface $cartProvider
      */
     public function __construct(ObjectManager $cartManager, ValidatorInterface $validator, CartProviderInterface $cartProvider)
     {
