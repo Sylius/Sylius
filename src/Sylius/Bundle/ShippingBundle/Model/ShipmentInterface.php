@@ -19,6 +19,7 @@ namespace Sylius\Bundle\ShippingBundle\Model;
 interface ShipmentInterface extends ShippingSubjectInterface
 {
     // Shipment default states.
+    const STATE_ORDERING = 'ordering';
     const STATE_READY    = 'ready';
     const STATE_PENDING  = 'pending';
     const STATE_SHIPPED  = 'shipped';
