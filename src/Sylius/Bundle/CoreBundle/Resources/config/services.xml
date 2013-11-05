@@ -195,6 +195,7 @@
             <argument type="service" id="sylius.order_processing.shipping_processor" />
             <tag name="kernel.event_listener" event="sylius.checkout.shipping.initialize" method="processOrderShipments" />
             <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderShippingCharges" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processShipmentStates" />
         </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <argument type="service" id="sylius.order_processing.payment_processor" />
