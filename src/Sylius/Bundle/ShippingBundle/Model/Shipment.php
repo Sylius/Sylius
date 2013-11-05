@@ -75,7 +75,7 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      */
     public function __construct()
     {
-        $this->state = ShipmentInterface::STATE_READY;
+        $this->state = ShipmentInterface::STATE_CHECKOUT;
         $this->items = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
