@@ -129,7 +129,7 @@ class SyliusResourceExtension extends Twig_Extension
                 'url' => $url,
                 'label' => $label,
                 'icon' => $property == key($sorting),
-                'currentOrder' => $currentOrder
+                'currentOrder' => $currentOrder,
             )
         );
     }
@@ -167,7 +167,7 @@ class SyliusResourceExtension extends Twig_Extension
                 $options['template'],
                 array(
                     'paginator' => $paginator,
-                    'limits' => $limits
+                    'limits' => $limits,
                 )
             );
         }

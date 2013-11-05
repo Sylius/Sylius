@@ -81,7 +81,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                 'url' => '?sorting[propertyName]=asc',
                 'label' => 'fieldName',
                 'icon' => false,
-                'currentOrder' => null
+                'currentOrder' => null,
             )
         )->shouldBeCalled();
 
@@ -106,7 +106,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                 'url' => '?sorting[propertyName]=desc',
                 'label' => 'fieldName',
                 'icon' => true,
-                'currentOrder' => 'asc'
+                'currentOrder' => 'asc',
             )
         )->shouldBeCalled();
 
@@ -124,7 +124,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
             'new_route',
             array(
                 'sorting' => array('propertyName' => 'asc'),
-                'params' => 'value'
+                'params' => 'value',
             )
         )->shouldBeCalled()->willReturn('?sorting[propertyName]=asc&params=value');
 
@@ -134,7 +134,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                 'url' => '?sorting[propertyName]=asc&params=value',
                 'label' => 'fieldName',
                 'icon' => false,
-                'currentOrder' => null
+                'currentOrder' => null,
             )
         )->shouldBeCalled();
 
@@ -142,7 +142,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName', null, array(
             'route' => 'new_route',
             'template' => 'SyliusResourceBundle:Twig:newsorting.html.twig',
-            'route_params' => array('params' => 'value')
+            'route_params' => array('params' => 'value'),
         ));
     }
 
@@ -171,7 +171,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
             'route_name',
             array(
                 'page' => 3,
-                '_sylius' => array('paginate' => '$paginate')
+                '_sylius' => array('paginate' => '$paginate'),
             )
         );
 
@@ -181,7 +181,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                 array(
                     'page' => 1,
                     'paginate' => $limit,
-                    '_sylius' => array('paginate' => '$paginate')
+                    '_sylius' => array('paginate' => '$paginate'),
                 )
             )->shouldBeCalled()->willReturn('?paginate=' . $limit);
         }
@@ -192,7 +192,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                 'paginator' => $paginator,
                 'limits' => array(
                     10 => '?paginate=10',
-                    20 => '?paginate=20'
+                    20 => '?paginate=20',
                 ),
             )
         )->shouldBeCalled();
@@ -211,7 +211,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
             'route_name',
             array(
                 'page' => 3,
-                '_sylius' => array('paginate' => '$paginate')
+                '_sylius' => array('paginate' => '$paginate'),
             )
         );
 
@@ -222,7 +222,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                     'page' => 1,
                     'params' => 'value',
                     'paginate' => $limit,
-                    '_sylius' => array('paginate' => '$paginate')
+                    '_sylius' => array('paginate' => '$paginate'),
                 )
             )->shouldBeCalled()->willReturn('?paginate=' . $limit . '&params=value');
         }
@@ -233,7 +233,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
                 'paginator' => $paginator,
                 'limits' => array(
                     10 => '?paginate=10&params=value',
-                    20 => '?paginate=20&params=value'
+                    20 => '?paginate=20&params=value',
                 ),
             )
         )->shouldBeCalled();
@@ -242,7 +242,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderPaginateSelect($paginator, array(10,20), array(
             'route' => 'new_route',
             'template' => 'SyliusResourceBundle:Twig:newpaginate.html.twig',
-            'route_params' => array('params' => 'value')
+            'route_params' => array('params' => 'value'),
         ));
     }
 
