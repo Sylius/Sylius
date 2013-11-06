@@ -19,7 +19,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Model\User;
 use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -147,7 +146,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
 
-            $user = new User();
+            $user = $this->getRepository('user')->createNew();
 
             $user->setFirstname($this->faker->firstName);
             $user->setLastname($this->faker->lastName);
