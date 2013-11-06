@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\PromotionsBundle\Action\Sylius;
 use Sylius\Component\Promotion\Model\ActionInterface;
 
 /**
@@ -21,8 +20,8 @@ use Sylius\Component\Promotion\Model\ActionInterface;
 class PromotionApplicatorSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $registry
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface                  $action
+     * @param Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface $registry
+     * @param Sylius\Component\Promotion\Action\PromotionActionInterface                  $action
      */
     function let($registry)
     {
@@ -31,18 +30,18 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Action\PromotionApplicator');
+        $this->shouldHaveType('Sylius\Component\Promotion\Action\PromotionApplicator');
     }
 
     function it_should_be_Sylius_promotion_applicator()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionApplicatorInterface');
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
-     * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface           $actionModel
+     * @param Sylius\Component\Promotion\Model\PromotionSubjectInterface $subject
+     * @param Sylius\Component\Promotion\Model\PromotionInterface        $promotion
+     * @param Sylius\Component\Promotion\Model\ActionInterface           $actionModel
      */
     function it_should_execute_all_actions_registered($registry, $action, $subject, $promotion, $actionModel)
     {

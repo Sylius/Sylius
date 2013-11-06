@@ -20,12 +20,12 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Checker\ItemCountRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Promotion\Checker\ItemCountRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
     /**

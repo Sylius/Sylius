@@ -30,12 +30,12 @@ class CouponGeneratorSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Generator\CouponGenerator');
+        $this->shouldHaveType('Sylius\Component\Promotion\Generator\CouponGenerator');
     }
 
     function it_should_implement_Sylius_promotion_coupon_generator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Generator\CouponGeneratorInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Generator\CouponGeneratorInterface');
     }
 
     /**

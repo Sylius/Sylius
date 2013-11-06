@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Promotion\Action\Registry;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\PromotionsBundle\Action\Registry\Sylius;
 use Sylius\Component\Promotion\Model\ActionInterface;
 
 /**
@@ -22,12 +21,12 @@ class PromotionActionRegistrySpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistry');
+        $this->shouldHaveType('Sylius\Component\Promotion\Action\Registry\PromotionActionRegistry');
     }
 
     function it_should_be_Sylius_promotion_action_registry()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface');
     }
 
     function it_should_initialize_actions_array_by_default()
@@ -36,7 +35,7 @@ class PromotionActionRegistrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
+     * @param Sylius\Component\Promotion\Action\PromotionActionInterface $action
      */
     function it_should_register_action_under_given_type($action)
     {
@@ -46,20 +45,20 @@ class PromotionActionRegistrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
+     * @param Sylius\Component\Promotion\Action\PromotionActionInterface $action
      */
     function it_should_complain_if_trying_to_register_action_with_taken_name($action)
     {
         $this->registerAction(ActionInterface::TYPE_FIXED_DISCOUNT, $action);
 
         $this
-            ->shouldThrow('Sylius\Bundle\PromotionsBundle\Action\Registry\ExistingPromotionActionException')
+            ->shouldThrow('Sylius\Component\Promotion\Action\Registry\ExistingPromotionActionException')
             ->duringRegisterAction(ActionInterface::TYPE_FIXED_DISCOUNT, $action)
         ;
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
+     * @param Sylius\Component\Promotion\Action\PromotionActionInterface $action
      */
     function it_should_unregister_action_with_given_name($action)
     {
@@ -71,7 +70,7 @@ class PromotionActionRegistrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
+     * @param Sylius\Component\Promotion\Action\PromotionActionInterface $action
      */
     function it_should_retrieve_registered_action_by_name($action)
     {
@@ -82,7 +81,7 @@ class PromotionActionRegistrySpec extends ObjectBehavior
     function it_should_complain_if_trying_to_retrieve_non_existing_checker()
     {
         $this
-            ->shouldThrow('Sylius\Bundle\PromotionsBundle\Action\Registry\NonExistingPromotionActionException')
+            ->shouldThrow('Sylius\Component\Promotion\Action\Registry\NonExistingPromotionActionException')
             ->duringGetAction(ActionInterface::TYPE_FIXED_DISCOUNT)
         ;
     }

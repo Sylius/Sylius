@@ -33,7 +33,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
 
     function it_is_a_rule_checker()
     {
-        $this->shouldBeAnInstanceOf('Sylius\Bundle\PromotionsBundle\Checker\PromotionEligibilityCheckerInterface');
+        $this->shouldBeAnInstanceOf('Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface');
     }
 
     function it_recognizes_subject_as_eligible_if_all_checkers_recognize_it_as_eligible(

@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NonExistingRuleCheckerExceptionSpec extends ObjectBehavior
+class ExistingRuleCheckerExceptionSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,7 +26,7 @@ class NonExistingRuleCheckerExceptionSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Checker\Registry\NonExistingRuleCheckerException');
+        $this->shouldHaveType('Sylius\Component\Promotion\Checker\Registry\ExistingRuleCheckerException');
     }
 
     function it_should_be_an_exception()

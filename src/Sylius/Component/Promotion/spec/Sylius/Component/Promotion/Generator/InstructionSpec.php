@@ -20,7 +20,7 @@ class InstructionSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Generator\Instruction');
+        $this->shouldHaveType('Sylius\Component\Promotion\Generator\Instruction');
     }
 
     function it_should_have_amount_equal_to_5_by_default()
