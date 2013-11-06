@@ -20,8 +20,8 @@ use Prophecy\Argument;
 class PromotionTypeSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface    $checkerRegistry
-     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $actionRegistry
+     * @param \Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface    $checkerRegistry
+     * @param \Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface $actionRegistry
      */
     function let($checkerRegistry, $actionRegistry)
     {
@@ -39,7 +39,7 @@ class PromotionTypeSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\Form\FormBuilder $builder
+     * @param \Symfony\Component\Form\FormBuilder $builder
      */
     function it_should_build_form_with_proper_fields($builder, $checkerRegistry, $actionRegistry)
     {
@@ -100,7 +100,7 @@ class PromotionTypeSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
     function it_should_define_assigned_data_class($resolver)
     {

@@ -46,7 +46,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface $coupon
+     * @param \Sylius\Component\Promotion\Model\CouponInterface $coupon
      */
     function it_should_transform_coupon_into_its_code($coupon)
     {
@@ -72,7 +72,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface $coupon
+     * @param \Sylius\Component\Promotion\Model\CouponInterface $coupon
      */
     function it_should_return_coupon_if_found_on_reverse_transform($couponRepository, $coupon)
     {
