@@ -26,7 +26,7 @@ class NonExistingPromotionActionExceptionSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Action\Registry\NonExistingPromotionActionException');
+        $this->shouldHaveType('Sylius\Component\Promotion\Action\Registry\NonExistingPromotionActionException');
     }
 
     function it_should_be_an_exception()

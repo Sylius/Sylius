@@ -12,8 +12,6 @@
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\PromotionsBundle\Model\DateTime;
-use spec\Sylius\Bundle\PromotionsBundle\Model\Sylius;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -22,12 +20,12 @@ class PromotionSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Model\Promotion');
+        $this->shouldHaveType('Sylius\Component\Promotion\Model\Promotion');
     }
 
     function it_should_be_Sylius_promotion()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Model\PromotionInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Model\PromotionInterface');
     }
 
     function it_should_not_have_id_by_default()
@@ -99,7 +97,7 @@ class PromotionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface $coupon
+     * @param Sylius\Component\Promotion\Model\CouponInterface $coupon
      */
     function it_should_add_coupons_properly($coupon)
     {
@@ -112,7 +110,7 @@ class PromotionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\CouponInterface $coupon
+     * @param Sylius\Component\Promotion\Model\CouponInterface $coupon
      */
     function it_should_remove_coupons_properly($coupon)
     {
@@ -133,7 +131,7 @@ class PromotionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
+     * @param Sylius\Component\Promotion\Model\RuleInterface $rule
      */
     function it_should_add_rules_properly($rule)
     {
@@ -146,7 +144,7 @@ class PromotionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
+     * @param Sylius\Component\Promotion\Model\RuleInterface $rule
      */
     function it_should_remove_rules_properly($rule)
     {
@@ -167,7 +165,7 @@ class PromotionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface $action
+     * @param Sylius\Component\Promotion\Model\ActionInterface $action
      */
     function it_should_add_actions_properly($action)
     {
@@ -180,7 +178,7 @@ class PromotionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface $action
+     * @param Sylius\Component\Promotion\Model\ActionInterface $action
      */
     function it_should_remove_actions_properly($action)
     {
