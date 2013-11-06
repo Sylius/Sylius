@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\PromotionsBundle\Model\Promotion">
+    <class name="Sylius\Component\Promotion\Model\Promotion">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion.name.not_blank</option>
@@ -45,7 +45,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\PromotionsBundle\Model\Coupon">
+    <class name="Sylius\Component\Promotion\Model\Coupon">
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon.code.not_blank</option>
