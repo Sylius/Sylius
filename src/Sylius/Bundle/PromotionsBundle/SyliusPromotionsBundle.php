@@ -36,10 +36,10 @@ class SyliusPromotionsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\PromotionsBundle\Model\PromotionInterface' => 'sylius.model.promotion.class',
-            'Sylius\Bundle\PromotionsBundle\Model\CouponInterface'    => 'sylius.model.promotion_coupon.class',
-            'Sylius\Bundle\PromotionsBundle\Model\RuleInterface'      => 'sylius.model.promotion_rule.class',
-            'Sylius\Bundle\PromotionsBundle\Model\ActionInterface'    => 'sylius.model.promotion_action.class',
+            'Sylius\Component\Promotion\Model\PromotionInterface' => 'sylius.model.promotion.class',
+            'Sylius\Component\Promotion\Model\CouponInterface'    => 'sylius.model.promotion_coupon.class',
+            'Sylius\Component\Promotion\Model\RuleInterface'      => 'sylius.model.promotion_rule.class',
+            'Sylius\Component\Promotion\Model\ActionInterface'    => 'sylius.model.promotion_action.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_promotions', $interfaces));
@@ -47,7 +47,7 @@ class SyliusPromotionsBundle extends Bundle
         $container->addCompilerPass(new RegisterPromotionActionsPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\PromotionsBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Promotion\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_promotions.driver.doctrine/orm'));

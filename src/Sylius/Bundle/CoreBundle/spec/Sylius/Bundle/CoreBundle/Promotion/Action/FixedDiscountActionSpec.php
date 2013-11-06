@@ -34,7 +34,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
     function it_implements_Sylius_promotion_action_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
     /**
