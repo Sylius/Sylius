@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

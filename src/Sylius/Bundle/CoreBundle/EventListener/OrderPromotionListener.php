@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessorInterface;
+use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -45,7 +45,7 @@ class OrderPromotionListener
     /**
      * Constructor.
      *
-     * @param PromotionProcessorInterface $promotionProcessor
+     * @param \Sylius\Component\Promotion\Processor\PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
      */

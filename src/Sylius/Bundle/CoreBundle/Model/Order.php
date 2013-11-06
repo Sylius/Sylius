@@ -13,11 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
-use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
 
 /**
  * Order entity.
@@ -78,7 +78,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotion coupon
      *
-     * @var CouponInterface
+     * @var \Sylius\Component\Promotion\Model\CouponInterface
      */
     protected $promotionCoupon;
 
