@@ -92,14 +92,14 @@ class OrderShippingListener
      */
     public function processShipmentStates(GenericEvent $event)
     {
-    	$order = $event->getSubject();
+        $order = $event->getSubject();
 
-    	if (!$order instanceof OrderInterface) {
-    		throw new \InvalidArgumentException(
-    				'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-    		);
-    	}
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            );
+        }
 
-    	$this->shipmentFactory->updateShipmentStates($order);
+        $this->shipmentFactory->updateShipmentStates($order);
     }
 }
