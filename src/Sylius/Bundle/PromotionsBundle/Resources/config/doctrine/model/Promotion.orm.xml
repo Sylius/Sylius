@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\PromotionsBundle\Model\Promotion" table="sylius_promotion">
+    <mapped-superclass name="Sylius\Component\Promotion\Model\Promotion" table="sylius_promotion">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -27,17 +27,17 @@
         <field name="startsAt" column="starts_at" type="datetime" nullable="true"/>
         <field name="endsAt" column="ends_at" type="datetime" nullable="true"/>
 
-        <one-to-many field="coupons" target-entity="Sylius\Bundle\PromotionsBundle\Model\CouponInterface" mapped-by="promotion">
+        <one-to-many field="coupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface" mapped-by="promotion">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="rules" target-entity="Sylius\Bundle\PromotionsBundle\Model\RuleInterface" mapped-by="promotion">
+        <one-to-many field="rules" target-entity="Sylius\Component\Promotion\Model\RuleInterface" mapped-by="promotion">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="actions" target-entity="Sylius\Bundle\PromotionsBundle\Model\ActionInterface" mapped-by="promotion">
+        <one-to-many field="actions" target-entity="Sylius\Component\Promotion\Model\ActionInterface" mapped-by="promotion">
             <cascade>
                 <cascade-all />
             </cascade>

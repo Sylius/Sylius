@@ -17,17 +17,17 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.promotion_processor.class">Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessor</parameter>
+        <parameter key="sylius.promotion_processor.class">Sylius\Component\Promotion\Processor\PromotionProcessor</parameter>
 
-        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Bundle\PromotionsBundle\Checker\PromotionEligibilityChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Bundle\PromotionsBundle\Checker\ItemTotalRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Bundle\PromotionsBundle\Checker\ItemCountRuleChecker</parameter>
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\PromotionEligibilityChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\ItemTotalRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Component\Promotion\Checker\ItemCountRuleChecker</parameter>
 
-        <parameter key="sylius.promotion_applicator.class">Sylius\Bundle\PromotionsBundle\Action\PromotionApplicator</parameter>
+        <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
         <parameter key="sylius.generator.instructions.class">Sylius\Bundle\PromotionsBundle\Generator\Instruction</parameter>
 
-        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistry</parameter>
-        <parameter key="sylius.registry.promotion_action.class">Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistry</parameter>
+        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistry</parameter>
+        <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Promotion\Action\Registry\PromotionActionRegistry</parameter>
 
         <parameter key="sylius.form.type.promotion.class">Sylius\Bundle\PromotionsBundle\Form\Type\PromotionType</parameter>
         <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionsBundle\Form\Type\CouponType</parameter>
