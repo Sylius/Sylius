@@ -14,7 +14,7 @@ namespace Sylius\Bundle\PromotionsBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Form\EventListener\BuildRuleFormListener;
 
 /**

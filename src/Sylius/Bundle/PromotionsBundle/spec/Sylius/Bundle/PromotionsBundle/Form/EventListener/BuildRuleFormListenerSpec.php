@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -21,8 +21,8 @@ use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 class BuildRuleFormListenerSpec extends ObjectBehavior
 {
     /**
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface $checkerRegistry
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface                  $checker
+     * @param \Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface $checkerRegistry
+     * @param \Sylius\Component\Promotion\Checker\RuleCheckerInterface                  $checker
      * @param \Symfony\Component\Form\FormFactoryInterface                                  $factory
      */
     function let($checkerRegistry, $checker, $factory)
@@ -45,7 +45,7 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
 
     /**
      * @param \Symfony\Component\Form\FormEvent                   $event
-     * @param \Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
+     * @param \Sylius\Component\Promotion\Model\RuleInterface $rule
      * @param \Symfony\Component\Form\Form                        $form
      * @param \Symfony\Component\Form\Form                        $field
      */
