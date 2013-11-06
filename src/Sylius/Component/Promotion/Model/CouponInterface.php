@@ -1,0 +1,35 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Promotion\Model;
+
+use Sylius\Component\Promotion\Model\PromotionInterface;
+
+/**
+ * Coupon model interface.
+ *
+ * @author Saša Stamenković <umpirsky@gmail.com>
+ */
+interface CouponInterface
+{
+    public function getCode();
+    public function setCode($code);
+    public function getUsageLimit();
+    public function setUsageLimit($usageLimit);
+    public function getUsed();
+    public function setUsed($used);
+    public function incrementUsed();
+    public function getPromotion();
+    public function setPromotion(PromotionInterface $promotion = null);
+    public function getExpiresAt();
+    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function isValid();
+}

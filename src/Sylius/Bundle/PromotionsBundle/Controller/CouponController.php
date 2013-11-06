@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Controller;
 
-use Sylius\Bundle\PromotionsBundle\Generator\CouponGeneratorInterface;
-use Sylius\Bundle\PromotionsBundle\Generator\Instruction;
+use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
+use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -97,7 +97,7 @@ class CouponController extends ResourceController
     /**
      * Get coupon code generator.
      *
-     * @return CouponGeneratorInterface
+     * @return \Sylius\Component\Promotion\Generator\CouponGeneratorInterface
      */
     protected function getGenerator()
     {

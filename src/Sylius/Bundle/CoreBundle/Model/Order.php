@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 
 /**
@@ -78,7 +78,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotion coupon
      *
-     * @var CouponInterface
+     * @var \Sylius\Component\Promotion\Model\CouponInterface
      */
     protected $promotionCoupon;
 

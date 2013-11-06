@@ -14,8 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 /**
@@ -23,7 +23,7 @@ use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends CartInterface, PromotionSubjectInterface
+interface OrderInterface extends CartInterface, \Sylius\Component\Promotion\Model\PromotionSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
@@ -238,7 +238,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Set promotion coupon.
      *
-     * @param CouponInterface $coupon
+     * @param \Sylius\Component\Promotion\Model\CouponInterface $coupon
      */
     public function setPromotionCoupon(CouponInterface $coupon = null);
 }

@@ -16,8 +16,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
 use JMS\TranslationBundle\Annotation\Ignore;
 
 /**

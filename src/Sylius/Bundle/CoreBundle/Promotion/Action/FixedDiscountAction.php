@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Promotion\Action;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
@@ -21,7 +21,7 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FixedDiscountAction implements PromotionActionInterface
+class FixedDiscountAction implements \Sylius\Component\Promotion\Action\PromotionActionInterface
 {
     /**
      * Adjustment repository.

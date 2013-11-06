@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
-use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
