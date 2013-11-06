@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Promotion\Action\Registry;
+namespace spec\Sylius\Component\Promotion\Checker\Registry;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\RuleInterface;
@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ExistingPromotionActionExceptionSpec extends ObjectBehavior
+class NonExistingRuleCheckerExceptionSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,7 +26,7 @@ class ExistingPromotionActionExceptionSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Action\Registry\ExistingPromotionActionException');
+        $this->shouldHaveType('Sylius\Component\Promotion\Checker\Registry\NonExistingRuleCheckerException');
     }
 
     function it_should_be_an_exception()

@@ -12,22 +12,21 @@
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\PromotionsBundle\Model\Sylius;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ActionSpec extends ObjectBehavior
+class RuleSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Model\Action');
+        $this->shouldHaveType('Sylius\Component\Promotion\Model\Rule');
     }
 
-    function it_should_be_Sylius_promotion_action()
+    function it_should_be_Sylius_promotion_rule()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Model\ActionInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Model\RuleInterface');
     }
 
     function it_should_not_have_id_by_default()
@@ -42,8 +41,8 @@ class ActionSpec extends ObjectBehavior
 
     function its_type_should_be_mutable()
     {
-        $this->setType(ActionInterface::TYPE_FIXED_DISCOUNT);
-        $this->getType()->shouldReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
+        $this->setType(RuleInterface::TYPE_ITEM_TOTAL);
+        $this->getType()->shouldReturn(RuleInterface::TYPE_ITEM_TOTAL);
     }
 
     function it_should_initialize_array_for_configuration_by_default()
@@ -63,7 +62,7 @@ class ActionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
+     * @param Sylius\Component\Promotion\Model\PromotionInterface $promotion
      */
     function its_promotion_by_should_be_mutable($promotion)
     {

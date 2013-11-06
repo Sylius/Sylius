@@ -30,12 +30,12 @@ class PromotionProcessorSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessor');
+        $this->shouldHaveType('Sylius\Component\Promotion\Processor\PromotionProcessor');
     }
 
     function it_should_be_Sylius_promotion_processor()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessorInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Processor\PromotionProcessorInterface');
     }
 
     /**
