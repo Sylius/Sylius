@@ -22,8 +22,8 @@ before_script:
     - sudo /etc/init.d/apache2 restart
     - composer self-update
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
-    - composer update doctrine/mongodb-odm
     - composer install --prefer-source --no-interaction
+    - composer update doctrine/mongodb-odm
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
     - app/console cache:warmup --env=test > /dev/null
