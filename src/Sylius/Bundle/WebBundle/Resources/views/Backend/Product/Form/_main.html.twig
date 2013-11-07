@@ -1,7 +1,7 @@
 <div class="tab-pane active" id="main">
-    {{ form_row(form.name, {'attr': {'class': 'input-xxlarge'}}) }}
-    {{ form_row(form.description, {'attr': {'class': 'input-xxlarge', 'rows': 10}}) }}
-    {{ form_row(form.shortDescription, {'attr': {'class': 'input-xxlarge', 'rows': 3}}) }}
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.description, {'attr': {'class': 'input-lg', 'rows': 10}}) }}
+    {{ form_row(form.shortDescription, {'attr': {'class': 'input-lg', 'rows': 3}}) }}
     <hr />
     {{ form_label(form.masterVariant.availableOn) }}
     {{ form_widget(form.masterVariant.availableOn, {'label': false}) }}

@@ -3,7 +3,7 @@
 
 <h1>{{ taxonomy.name }} <small>Taxonomy details</small></h1>
 <hr />
-<div class="well well-small">
+<div class="well well-sm">
     {{ buttons.create(path('sylius_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create_taxon'|trans) }}
     {{ buttons.manage(path('sylius_taxonomy_index'), 'sylius.taxon.manage_taxonomies'|trans) }}
     {{ buttons.edit(path('sylius_taxonomy_update', {'id': taxonomy.id}), 'sylius.taxon.update_taxonomy'|trans) }}

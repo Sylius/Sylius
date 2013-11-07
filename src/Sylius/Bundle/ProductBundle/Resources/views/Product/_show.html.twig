@@ -3,7 +3,7 @@
 <h1>{{ product.name }} <small>{{ product.description }}</small></h1>
 <hr />
 
-<div class="well well-small">
+<div class="well well-sm">
     {{ buttons.manage(path('sylius_product_index'), 'manage products') }}
     {{ buttons.edit(path('sylius_product_update', {'id': product.id}), 'update product') }}
     {{ buttons.delete(path('sylius_product_delete', {'id': product.id}), 'delete product') }}

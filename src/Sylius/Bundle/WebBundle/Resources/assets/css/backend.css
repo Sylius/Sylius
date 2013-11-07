@@ -100,6 +100,10 @@ a.btn-success:visited {
 .btn-lg.file-overlay {
     text-align: center;
 }
+.btn-group form:last-child .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 /* Labels. */
 .label-success { background-color: #1abb9c; }
@@ -203,6 +207,13 @@ th a:visited {
 }
 .paginator {
     margin-top: -3px
+}
+.paginator .dropdown-menu {
+    min-width: 100%;
+    padding: 0;
+}
+.paginator .dropdown-menu > li > a {
+    padding: 3px 10px;
 }
 
 /* Main layout. */

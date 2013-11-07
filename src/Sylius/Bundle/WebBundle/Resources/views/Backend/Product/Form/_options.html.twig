@@ -1,5 +1,5 @@
 <div class="tab-pane" id="options">
-    {% if form.options is defined %}
-        {{ form_row(form.options, {'attr': {'class': 'input-xlarge'}}) }}
-    {% endif %}
+{% if form.options is defined %}
+    {{ form_row(form.options) }}
+{% endif %}
 </div>

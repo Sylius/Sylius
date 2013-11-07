@@ -29,7 +29,7 @@
                 {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
             </div>
         </div>
-        <div class="col-md-6 hide address-container" id="sylius-billing-address-container">
+        <div class="col-md-6 hidden address-container" id="sylius-billing-address-container">
             <div class="well">
                 <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
                 {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}

@@ -1,6 +1,8 @@
 {{ form_errors(form) }}
+
 <fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
-    {{ form_row(form.isoName, {'attr': {'class': 'input-small'}}) }}
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.isoName, {'attr': {'class': 'input-sm'}}) }}
 </fieldset>
-    {{ form_rest(form) }}
+
+{{ form_rest(form) }}

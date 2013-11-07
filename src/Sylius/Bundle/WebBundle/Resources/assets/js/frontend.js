@@ -12,7 +12,7 @@
     $(document).ready(function() {
 
         $('.sylius-different-billing-address-trigger').click(function() {
-            $('#sylius-billing-address-container').toggleClass('hide');
+            $('#sylius-billing-address-container').toggleClass('hidden');
         });
 
     });

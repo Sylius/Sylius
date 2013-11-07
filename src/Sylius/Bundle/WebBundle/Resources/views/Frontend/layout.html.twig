@@ -16,10 +16,10 @@
         {# stylesheets... #}
         {% block stylesheets %}
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-            '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
+            '//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css'
             '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/frontend.css'
-            '@SyliusWebBundle/Resources/assets/css/blueimp-gallery.min.css'
+            '@SyliusWebBundle/Resources/assets/css/blueimp-gallery.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
@@ -81,7 +81,7 @@
 
         {% block footer %}
             <div class="footer">
-                <p class="muted">
+                <p class="text-muted">
                     &copy; Sylius, 2011 - {{ 'now'|date('Y') }}.
                 </p>
                 {{ knp_menu_render('sylius.frontend.social', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
@@ -92,8 +92,8 @@
         {# javascripts... #}
         {% block javascripts %}
         {% javascripts output='assets/compiled/frontend.js'
-            'http://code.jquery.com/jquery-1.8.0.min.js'
-            'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'
+            '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
+            '//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js'
             '@SyliusWebBundle/Resources/assets/js/jquery.blueimp-gallery.min.js'
             '@SyliusWebBundle/Resources/assets/js/confirm-modal.js'
             '@SyliusWebBundle/Resources/assets/js/frontend.js'
