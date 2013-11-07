@@ -20,18 +20,93 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
  */
 interface PromotionInterface extends TimestampableInterface
 {
+    /**
+     * Get name
+     *
+     * @return string
+     */
     public function getName();
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
     public function setName($name);
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
     public function getDescription();
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     */
     public function setDescription($description);
+
+    /**
+     * Get usage limit
+     *
+     * @return integer
+     */
     public function getUsageLimit();
+
+    /**
+     * Set usage limit
+     *
+     * @param integer $usageLimit
+     */
     public function setUsageLimit($usageLimit);
+
+    /**
+     * Get usage
+     *
+     * @return integer
+     */
     public function getUsed();
+
+    /**
+     * Set usage
+     *
+     * @param integer $used
+     */
     public function setUsed($used);
+
+    /**
+     * Increment usage
+     */
     public function incrementUsed();
+
+    /**
+     * Get start date
+     *
+     * @return \DateTime
+     */
     public function getStartsAt();
+
+    /**
+     * Set start date
+     *
+     * @param \DateTime $startsAt
+     */
     public function setStartsAt(\DateTime $startsAt = null);
+
+    /**
+     * Get end date
+     *
+     * @return \DateTime
+     */
     public function getEndsAt();
+
+    /**
+     * Set end date
+     *
+     * @param \DateTime $endsAt
+     */
     public function setEndsAt(\DateTime $endsAt = null);
 
     /**

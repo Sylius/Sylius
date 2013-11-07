@@ -78,6 +78,8 @@ class VariableProduct extends Product implements VariableProductInterface
             ->getMasterVariant()
             ->setAvailableOn($availableOn)
         ;
+
+        return $this;
     }
 
     /**
@@ -98,13 +100,15 @@ class VariableProduct extends Product implements VariableProductInterface
     public function setMasterVariant(VariantInterface $masterVariant)
     {
         if ($this->variants->contains($masterVariant)) {
-            return;
+            return $this;
         }
 
         $masterVariant->setProduct($this);
         $masterVariant->setMaster(true);
 
         $this->variants->add($masterVariant);
+
+        return $this;
     }
 
     /**
@@ -145,6 +149,8 @@ class VariableProduct extends Product implements VariableProductInterface
         foreach ($variants as $variant) {
             $this->addVariant($variant);
         }
+
+        return $this;
     }
 
     /**
@@ -156,6 +162,8 @@ class VariableProduct extends Product implements VariableProductInterface
             $variant->setProduct($this);
             $this->variants->add($variant);
         }
+
+        return $this;
     }
 
     /**
@@ -167,6 +175,8 @@ class VariableProduct extends Product implements VariableProductInterface
             $variant->setProduct(null);
             $this->variants->removeElement($variant);
         }
+
+        return $this;
     }
 
     /**
@@ -199,6 +209,8 @@ class VariableProduct extends Product implements VariableProductInterface
     public function setOptions(Collection $options)
     {
         $this->options = $options;
+
+        return $this;
     }
 
     /**
@@ -209,6 +221,8 @@ class VariableProduct extends Product implements VariableProductInterface
         if (!$this->hasOption($option)) {
             $this->options->add($option);
         }
+
+        return $this;
     }
 
     /**
@@ -219,6 +233,8 @@ class VariableProduct extends Product implements VariableProductInterface
         if ($this->hasOption($option)) {
             $this->options->removeElement($option);
         }
+
+        return $this;
     }
 
     /**

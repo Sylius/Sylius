@@ -123,6 +123,8 @@ class OrderItem implements OrderItemInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
+
+        return $this;
     }
 
     /**
@@ -139,6 +141,8 @@ class OrderItem implements OrderItemInterface
     public function setUnitPrice($unitPrice)
     {
         $this->unitPrice = $unitPrice;
+
+        return $this;
     }
 
     /**

@@ -52,6 +52,8 @@ class User extends BaseUser implements UserInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
+        return $this;
     }
 
     /**
@@ -213,6 +215,8 @@ class User extends BaseUser implements UserInterface
     public function removeAddress(AddressInterface $address)
     {
         $this->addresses->removeElement($address);
+
+        return $this;
     }
 
     /**
@@ -241,21 +245,37 @@ class User extends BaseUser implements UserInterface
         return $this->firstName.' '.$this->lastName;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFirstName()
     {
         return $this->firstName;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLastName()
     {
         return $this->lastName;
@@ -275,6 +295,8 @@ class User extends BaseUser implements UserInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -291,6 +313,8 @@ class User extends BaseUser implements UserInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**

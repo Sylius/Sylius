@@ -41,5 +41,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
+
+        return $this;
     }
 }

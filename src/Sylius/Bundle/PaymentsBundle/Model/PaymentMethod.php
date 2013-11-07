@@ -113,6 +113,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnabled($enabled)
     {
         $this->enabled = (Boolean) $enabled;
+
+        return $this;
     }
 
     /**
@@ -129,6 +131,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -145,6 +149,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -161,6 +167,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setGateway($gateway)
     {
         $this->gateway = $gateway;
+
+        return $this;
     }
 
     /**
@@ -177,6 +185,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
+
+        return $this;
     }
 
     /**

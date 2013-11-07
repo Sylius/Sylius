@@ -13,10 +13,39 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 class Image implements ImageInterface
 {
+    /**
+     * Id
+     *
+     * @var integer
+     */
     protected $id;
+
+    /**
+     * File
+     *
+     * @var \SplFileInfo
+     */
     protected $file;
+
+    /**
+     * Path to file
+     *
+     * @var string
+     */
     protected $path;
+
+    /**
+     * Creation date
+     *
+     * @var \DateTime
+     */
     protected $createdAt;
+
+    /**
+     * Update date
+     *
+     * @var \DateTime
+     */
     protected $updatedAt;
 
     public function __construct()
@@ -24,6 +53,11 @@ class Image implements ImageInterface
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
@@ -51,6 +85,8 @@ class Image implements ImageInterface
     public function setFile(\SplFileInfo $file)
     {
         $this->file = $file;
+
+        return $this;
     }
 
     /**
@@ -75,6 +111,8 @@ class Image implements ImageInterface
     public function setPath($path)
     {
         $this->path = $path;
+
+        return $this;
     }
 
     /**
@@ -91,6 +129,8 @@ class Image implements ImageInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -107,5 +147,7 @@ class Image implements ImageInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }
