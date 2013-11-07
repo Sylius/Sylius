@@ -66,7 +66,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array());
 
-        $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_IN_CART)->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled()->willReturn(array($unit1, $unit2));
 
         $order->addInventoryUnit($unit1)->shouldBeCalled();
         $order->addInventoryUnit($unit2)->shouldBeCalled();
@@ -90,7 +90,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1));
 
-        $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_IN_CART)->shouldBeCalled()->willReturn(array($unit2));
+        $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled()->willReturn(array($unit2));
 
         $order->addInventoryUnit($unit1)->shouldNotBeCalled();
         $order->addInventoryUnit($unit2)->shouldBeCalled();

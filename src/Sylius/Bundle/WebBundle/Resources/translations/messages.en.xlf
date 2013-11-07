@@ -1034,9 +1034,9 @@
         <source>sylius.order.show_header</source>
         <target>Order details</target>
       </trans-unit>
-      <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.in_cart">
-        <source>sylius.order.state.in_cart</source>
-        <target>In cart</target>
+      <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.checkout">
+        <source>sylius.order.state.checkout</source>
+        <target>Checkout</target>
       </trans-unit>
       <trans-unit id="ceeef31deebf65053049505d50007cc4" resname="sylius.order.state.cart_locked">
         <source>sylius.order.state.cart_locked</source>
