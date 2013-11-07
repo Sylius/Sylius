@@ -103,3 +103,50 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
                 template: App:User:top3.html.twig
 
 That action will return the top 3 users by score, as the ``users`` variable.
+
+Twig Extensions
+---------------
+
+sylius_resource_sort
+--------------------
+
+**Parameters :**
+    - **property (string) :** [Mandatory] Name of the property (defined in your resource)
+    - **label (string) :** Label of the column on your grid (default : property name)
+    - **order (string) :** Default order, it can be asc or desc (default : asc)
+    - **options (array) :** Additional options, the extension can use a custom template or generate a custom route
+        + **template (string) :** Path to the template
+        + **route (string) :** Key of the new route
+        + **route_params (array) :** Additional route parameters
+
+This extension renders the following template : SyliusResourceBundle:Twig:paginate.html.twig
+
+**Example :**
+
+.. code-block:: html
+
+    <div>
+        {{ sylius_resource_sort('productId', 'product.id'|trans) }}
+    </div>
+
+sylius_resource_paginate
+------------------------
+
+**Parameters :**
+    - **paginator (object) :** [Mandatory] An instance of PagerFanta
+    - **limits (array) :** [Mandatory] An array of paginate value
+    - **options (array) :** Additional options, the extension can use a custom template or generate a custom route
+        + **template (string) :** Path to the template
+        + **route (string) :** Key of the new route
+        + **route_params (array) :** Additional route parameters
+
+This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig
+
+**Example :**
+
+.. code-block:: html
+
+    <div>
+        {{ sylius_resource_paginate(paginator, [10, 20, 30]) }}
+    </div>
+    
