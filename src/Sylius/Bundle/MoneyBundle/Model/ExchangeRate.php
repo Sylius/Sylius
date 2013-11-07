@@ -67,6 +67,8 @@ class ExchangeRate implements ExchangeRateInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
+        return $this;
     }
 
     /**
@@ -83,6 +85,8 @@ class ExchangeRate implements ExchangeRateInterface
     public function setRate($rate)
     {
         $this->rate = $rate;
+
+        return $this;
     }
 
     /**
@@ -99,6 +103,8 @@ class ExchangeRate implements ExchangeRateInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -115,5 +121,7 @@ class ExchangeRate implements ExchangeRateInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

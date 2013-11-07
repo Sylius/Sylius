@@ -66,6 +66,9 @@ interface VariantInterface extends BaseVariantInterface, ShippableInterface, Sto
      */
     public function removeImage(VariantImageInterface $image);
 
+    /**
+     * @return integer
+     */
     public function getWeight();
     public function setWeight($weight);
 

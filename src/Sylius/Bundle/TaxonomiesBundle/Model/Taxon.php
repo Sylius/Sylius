@@ -136,6 +136,8 @@ class Taxon implements TaxonInterface
     public function setTaxonomy(TaxonomyInterface $taxonomy = null)
     {
         $this->taxonomy = $taxonomy;
+
+        return $this;
     }
 
     /**
@@ -160,6 +162,8 @@ class Taxon implements TaxonInterface
     public function setParent(TaxonInterface $parent = null)
     {
         $this->parent = $parent;
+
+        return $this;
     }
 
     /**
@@ -222,6 +226,8 @@ class Taxon implements TaxonInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -238,6 +244,8 @@ class Taxon implements TaxonInterface
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     /**
@@ -262,6 +270,8 @@ class Taxon implements TaxonInterface
     public function setPermalink($permalink)
     {
         $this->permalink = $permalink;
+
+        return $this;
     }
 
     /**
@@ -278,6 +288,8 @@ class Taxon implements TaxonInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -330,5 +342,7 @@ class Taxon implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
+
+        return $this;
     }
 }

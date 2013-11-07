@@ -23,19 +23,42 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
  */
 interface UserInterface extends BaseUserInterface, TimestampableInterface
 {
+    /**
+     * Get first name
+     */
     public function getFirstName();
 
     /**
-     * Set firstname.
+     * Set first name
      *
      * @param string $firstName
      */
     public function setFirstName($firstName);
 
+    /**
+     * Get last name
+     */
     public function getLastName();
+
+    /**
+     * Set last name
+     *
+     * @param string $lastName
+     */
     public function setLastName($lastName);
 
+    /**
+     * Get currency
+     *
+     * @return string
+     */
     public function getCurrency();
+
+    /**
+     * Set currency
+     *
+     * @param string $currency
+     */
     public function setCurrency($currency);
 
     /**

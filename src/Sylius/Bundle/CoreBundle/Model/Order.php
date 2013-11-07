@@ -126,6 +126,8 @@ class Order extends Cart implements OrderInterface
     public function setShippingAddress(AddressInterface $address)
     {
         $this->shippingAddress = $address;
+
+        return $this;
     }
 
     /**
@@ -142,6 +144,8 @@ class Order extends Cart implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
+
+        return $this;
     }
 
     /**
@@ -382,6 +386,8 @@ class Order extends Cart implements OrderInterface
     public function setPromotionCoupon(CouponInterface $coupon = null)
     {
         $this->promotionCoupon = $coupon;
+
+        return $this;
     }
 
     /**
@@ -424,6 +430,8 @@ class Order extends Cart implements OrderInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**

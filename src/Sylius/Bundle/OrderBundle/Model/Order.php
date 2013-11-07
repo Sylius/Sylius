@@ -452,6 +452,8 @@ class Order implements OrderInterface, TimestampableInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -468,6 +470,8 @@ class Order implements OrderInterface, TimestampableInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**
@@ -476,6 +480,8 @@ class Order implements OrderInterface, TimestampableInterface
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
     }
 
     /**

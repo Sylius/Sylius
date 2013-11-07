@@ -236,6 +236,8 @@ class Adjustment implements AdjustmentInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -252,5 +254,7 @@ class Adjustment implements AdjustmentInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

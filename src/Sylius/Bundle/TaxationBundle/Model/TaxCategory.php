@@ -104,6 +104,8 @@ class TaxCategory implements TaxCategoryInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -120,6 +122,8 @@ class TaxCategory implements TaxCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -139,6 +143,8 @@ class TaxCategory implements TaxCategoryInterface
             $rate->setCategory($this);
             $this->rates->add($rate);
         }
+
+        return $this;
     }
 
     /**
@@ -150,6 +156,8 @@ class TaxCategory implements TaxCategoryInterface
             $rate->setCategory(null);
             $this->rates->removeElement($rate);
         }
+
+        return $this;
     }
 
     /**
