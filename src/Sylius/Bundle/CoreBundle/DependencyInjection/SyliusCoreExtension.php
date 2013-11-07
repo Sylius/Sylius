@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Core extension.
@@ -47,7 +48,13 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
     {
         $this->configDir = __DIR__.'/../Resources/config';
 
-        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+        list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+
+        $loader->load('mailer.xml');
+
+        if (!empty($config['order_confirmation'])) {
+            $this->loadOrderConfirmation($config['order_confirmation'], $container, $loader, $config['from_email']);
+        }
     }
 
     /**
@@ -62,5 +69,23 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
                 $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }
         }
+    }
+
+    protected function loadOrderConfirmation(array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    {
+        $loader->load('order_confirmation_mailer.xml');
+
+        if ($config['enabled']) {
+            $loader->load('order_confirmation_listener.xml');
+        }
+
+        if (isset($config['from_email'])) {
+            // overwrite the global one
+            $fromEmail = $config['from_email'];
+            unset($config['from_email']);
+        }
+
+        $container->setParameter('sylius.email.order_confirmation.from_email', array($fromEmail['address'] => $fromEmail['sender_name']));
+        $container->setParameter('sylius.email.order_confirmation.template', $config['template']);
     }
 }

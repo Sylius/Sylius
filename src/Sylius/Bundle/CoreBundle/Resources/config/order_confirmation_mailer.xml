@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.mailer.order_confirmation.class">Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailer</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="sylius.mailer.order_confirmation" class="%sylius.mailer.order_confirmation.class%">
+            <argument type="service" id="sylius.mailer" />
+            <argument type="collection">
+                <argument key="template">%sylius.email.order_confirmation.template%</argument>
+                <argument key="from_email">%sylius.email.order_confirmation.from_email%</argument>
+            </argument>
+        </service>
+
+    </services>
+
+</container>
