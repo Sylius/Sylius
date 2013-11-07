@@ -30,7 +30,7 @@ class OrderConfirmationEmailListenerSpec extends ObjectBehavior
 
     /**
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
      */
     function it_should_delegate_event_properly($event, $order, $mailer)
     {

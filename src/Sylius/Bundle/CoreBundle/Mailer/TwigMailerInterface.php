@@ -21,10 +21,10 @@ interface TwigMailerInterface
     /**
      * Render a template and send result as email
      *
-     * @param string $templateName
-     * @param array $context
+     * @param string       $templateName
+     * @param array        $context
      * @param string|array $fromEmail
-     * @param string $toEmail
+     * @param string       $toEmail
      */
     public function sendEmail($templateName, $context, $fromEmail, $toEmail);
 }

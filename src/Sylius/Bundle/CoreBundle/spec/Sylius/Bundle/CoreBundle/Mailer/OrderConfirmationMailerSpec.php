@@ -39,13 +39,19 @@ class OrderConfirmationMailerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface $user
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface       $order
+     * @param Sylius\Bundle\CoreBundle\Model\UserInterface        $user
+     * @param Sylius\Bundle\CoreBundle\Mailer\TwigMailerInterface $mailer
      */
     function it_sends_order_confirmation_email($order, $user, $mailer)
     {
-        $order->getUser()->shouldBeCalled()->willReturn($user);
-        $context = array('order' => $order);
+        $parameters = array('template' => 'test-template.html.twig', 'from_email' => 'from@example.com');
+        $this->beConstructedWith($mailer, $parameters);
+
+        $user->getEmail()->willReturn('recipient@example.com');
+        $order->getUser()->willReturn($user);
+
+        $mailer->sendEmail('test-template.html.twig', array('order' => $order), 'from@example.com', 'recipient@example.com')->shouldBeCalled();
 
         $this->sendOrderConfirmation($order);
     }

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Mailer\MailerInterface;
 use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -34,7 +33,7 @@ class OrderConfirmationEmailListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param  GenericEvent              $event
      * @throws \InvalidArgumentException
      */
     public function processOrderConfirmation(GenericEvent $event)

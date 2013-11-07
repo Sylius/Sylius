@@ -11,10 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 /**
  * TwigMailer implementation
  *
