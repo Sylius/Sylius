@@ -35,7 +35,7 @@
     {% endif %}
 {% elseif type == 'order' %}
     {% if state is sameas(1) %}
-        {% set label = 'sylius.order.state.in_cart' %}
+        {% set label = 'sylius.order.state.checkout' %}
         {% set class = 'label-warning' %}
     {% elseif state is sameas(2) %}
         {% set label = 'sylius.order.state.cart_locked' %}

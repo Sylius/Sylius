@@ -1030,8 +1030,8 @@
         <source>sylius.order.show_header</source>
         <target>Dettagli ordine</target>
       </trans-unit>
-      <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.in_cart">
-        <source>sylius.order.state.in_cart</source>
+      <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.checkout">
+        <source>sylius.order.state.checkout</source>
         <target>Nel carrello</target>
       </trans-unit>
       <trans-unit id="ceeef31deebf65053049505d50007cc4" resname="sylius.order.state.cart_locked">
