@@ -58,6 +58,7 @@
         "behat/mink-extension":              "*",
         "behat/mink-browserkit-driver":      "*",
         "behat/mink-goutte-driver":          "*",
+        "behat/mink-selenium2-driver":       "*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "2.0.*@dev"
