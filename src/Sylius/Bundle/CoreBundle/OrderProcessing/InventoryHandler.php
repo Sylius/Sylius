@@ -112,10 +112,10 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     protected function removeInventoryUnits(OrderInterface $order, VariantInterface $variant, $quantity)
     {
-        $units = $order->getInventoryUnitsByVariant($variant);
+        $units = $order->getInventoryUnitsByVariant($variant)->slice(0, $quantity);
 
-        for ($i = 0; $i < $quantity; $i++) {
-            $order->removeInventoryUnit($units[$i]);
+        foreach ($units as $unit) {
+            $order->removeInventoryUnit($unit);
         }
     }
 }
