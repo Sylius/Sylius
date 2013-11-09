@@ -258,6 +258,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $order->calculateTotal();
         $order->complete();
 
+        $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
         $this->getService('event_dispatcher')->dispatch('sylius.cart_change', new GenericEvent($order));
 
         $manager->persist($order);
