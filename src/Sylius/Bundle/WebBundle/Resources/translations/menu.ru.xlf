@@ -294,6 +294,10 @@
         <source>sylius.frontend.menu.social.twitter</source>
         <target>Twitter</target>
       </trans-unit>
+      <trans-unit id="608617987d64def83501a66c2dbce621" resname="sylius.backend.menu.sidebar.groups">
+        <source>sylius.backend.menu.sidebar.groups</source>
+        <target>Группы</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

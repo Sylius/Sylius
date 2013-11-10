@@ -112,7 +112,7 @@
             </trans-unit>
             <trans-unit id="944cf6ef4aa78e99e44806e693c69a30" resname="sylius.form.user.enabled">
                 <source>sylius.form.user.enabled</source>
-                <target>Включенно</target>
+                <target>Активен</target>
             </trans-unit>
             <trans-unit id="51d1b3166647640229e7329940d07e58" resname="sylius.form.user.first_name">
                 <source>sylius.form.user.first_name</source>
