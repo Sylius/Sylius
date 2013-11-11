@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\VariableProductBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\SoftDeletableInterface;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Product variant interface.

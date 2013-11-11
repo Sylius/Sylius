@@ -21,7 +21,7 @@ class CartProviderSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CartBundle\Storage\CartStorageInterface  $storage
      * @param Doctrine\Common\Persistence\ObjectManager              $manager
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $repository
      */
     function let($storage, $manager, $repository)
     {

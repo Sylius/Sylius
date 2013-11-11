@@ -12,7 +12,7 @@
 namespace Sylius\Component\Inventory\Model;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Inventory unit interface.

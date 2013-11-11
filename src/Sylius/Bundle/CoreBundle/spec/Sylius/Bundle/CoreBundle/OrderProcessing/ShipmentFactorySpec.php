@@ -19,7 +19,7 @@ use PhpSpec\ObjectBehavior;
 class ShipmentFactorySpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $shipmentRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $shipmentRepository
      */
     function let($shipmentRepository)
     {

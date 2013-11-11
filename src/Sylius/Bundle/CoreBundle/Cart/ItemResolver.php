@@ -16,7 +16,7 @@ use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Model\RepositoryInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 

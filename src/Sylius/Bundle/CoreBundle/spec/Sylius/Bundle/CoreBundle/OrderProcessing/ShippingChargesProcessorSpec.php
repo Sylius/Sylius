@@ -21,7 +21,7 @@ use Sylius\Bundle\CoreBundle\Model\Order;
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface                $adjustmentRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface                $adjustmentRepository
      * @param Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface $calculator
      */
     function let($adjustmentRepository, $calculator)

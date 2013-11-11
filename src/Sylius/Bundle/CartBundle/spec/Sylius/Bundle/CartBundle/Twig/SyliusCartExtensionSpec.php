@@ -20,7 +20,7 @@ class SyliusCartExtensionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $cartProvider
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface  $itemRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface  $itemRepository
      * @param Symfony\Component\Form\FormFactory                      $formFactory
      */
     function let($cartProvider, $itemRepository, $formFactory)

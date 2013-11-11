@@ -12,9 +12,9 @@
 namespace spec\Sylius\Component\Inventory\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

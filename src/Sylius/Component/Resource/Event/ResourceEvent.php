@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Event;
+namespace Sylius\Component\Resource\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
 

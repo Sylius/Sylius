@@ -21,9 +21,9 @@ class ProductBuilderSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\ProductBundle\Model\ProductInterface     $product
      * @param Doctrine\Common\Persistence\ObjectManager              $productManager
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $productRepository
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $propertyRepository
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $productPropertyRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $productRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $propertyRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $productPropertyRepository
      */
     function let(
         $product,
