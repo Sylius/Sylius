@@ -51,7 +51,7 @@ class SyliusInventoryBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_inventory', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\InventoryBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Inventory\Model',
         );
 
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {

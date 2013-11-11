@@ -21,7 +21,7 @@ class ItemResolverSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface             $productRepository
      * @param Symfony\Component\Form\FormFactory                                 $formFactory
-     * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
+     * @param Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $availabilityChecker
      * @param Symfony\Component\HttpFoundation\Request                           $request
      */
     function let($productRepository, $formFactory, $availabilityChecker)
