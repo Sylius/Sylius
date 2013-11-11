@@ -25,7 +25,9 @@
             <div class="row">
         {% endif %}
     {% else %}
-        {{ alerts.info('sylius.product.no_results'|trans) }}
+        <div class="col-md-12">
+            {{ alerts.info('sylius.product.no_results'|trans) }}
+        </div>
     {% endfor %}
 </div>
 
