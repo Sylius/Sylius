@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Checker;
+namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\InventoryBundle\Checker\Sylius;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

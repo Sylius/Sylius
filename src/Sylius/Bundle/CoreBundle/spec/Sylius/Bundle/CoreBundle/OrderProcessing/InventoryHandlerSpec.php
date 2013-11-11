@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

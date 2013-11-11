@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Checker;
+namespace Sylius\Component\Inventory\Checker;
 
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * Stock availability checker interface.
@@ -24,7 +24,7 @@ interface AvailabilityCheckerInterface
      * Checks whether stockable object is available in stock.
      * This method should not care about what quantity is required.
      *
-     * @param StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      *
      * @return Boolean
      */
@@ -34,7 +34,7 @@ interface AvailabilityCheckerInterface
      * Checks whether stockable object is available in stock.
      * Takes required quantity into account.
      *
-     * @param StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      * @param integer            $quantity
      *
      * @return Boolean

@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -260,8 +260,8 @@ class OrderSpec extends ObjectBehavior
         $this->addInventoryUnit($unit1);
         $this->addInventoryUnit($unit2);
 
-        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
-        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $unit1->getInventoryState()->willReturn(\Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface::STATE_BACKORDERED);
+        $unit2->getInventoryState()->willReturn(\Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface::STATE_SOLD);
 
         $this->shouldBeBackorder();
     }
@@ -278,8 +278,8 @@ class OrderSpec extends ObjectBehavior
         $this->addInventoryUnit($unit1);
         $this->addInventoryUnit($unit2);
 
-        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
-        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $unit1->getInventoryState()->willReturn(\Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface::STATE_SOLD);
+        $unit2->getInventoryState()->willReturn(\Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface::STATE_SOLD);
 
         $this->shouldNotBeBackorder();
     }

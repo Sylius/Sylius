@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactoryInterface;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
+use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
 /**
  * Order inventory handler.
@@ -41,8 +41,8 @@ class InventoryHandler implements InventoryHandlerInterface
     /**
      * Constructor.
      *
-     * @param InventoryOperatorInterface    $inventoryOperator
-     * @param InventoryUnitFactoryInterface $inventoryUnitFactory
+     * @param \Sylius\Component\Inventory\Operator\InventoryOperatorInterface    $inventoryOperator
+     * @param \Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface $inventoryUnitFactory
      */
     public function __construct(InventoryOperatorInterface $inventoryOperator, InventoryUnitFactoryInterface $inventoryUnitFactory)
     {

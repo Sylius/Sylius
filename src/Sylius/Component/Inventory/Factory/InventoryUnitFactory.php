@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Factory;
+namespace Sylius\Component\Inventory\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
+use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**

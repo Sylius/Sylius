@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Operator;
+namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * Stock operator interface.
@@ -25,7 +25,7 @@ interface InventoryOperatorInterface
     /**
      * Increase stock on hand for given stockable by quantity.
      *
-     * @param StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      * @param integer            $quantity
      */
     public function increase(StockableInterface $stockable, $quantity);

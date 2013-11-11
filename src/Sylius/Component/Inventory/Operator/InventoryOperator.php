@@ -9,12 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Operator;
+namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Operator\InsufficientStockException;
 
 /**
  * Default inventory operator.
@@ -34,7 +37,7 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Availability checker.
      *
-     * @var AvailabilityCheckerInterface
+     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
      */
     protected $availabilityChecker;
 
@@ -42,7 +45,7 @@ class InventoryOperator implements InventoryOperatorInterface
      * Constructor.
      *
      * @param BackordersHandlerInterface   $backordersHandler
-     * @param AvailabilityCheckerInterface $availabilityChecker
+     * @param \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $availabilityChecker
      */
     public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker)
     {

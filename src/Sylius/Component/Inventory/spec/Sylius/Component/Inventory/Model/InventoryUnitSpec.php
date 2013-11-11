@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Model;
+namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use spec\Sylius\Bundle\InventoryBundle\Model\Sylius;
+use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
