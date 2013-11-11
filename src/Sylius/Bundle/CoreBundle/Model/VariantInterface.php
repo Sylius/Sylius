@@ -20,7 +20,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface VariantInterface extends BaseVariantInterface, ShippableInterface, \Sylius\Component\Inventory\Model\StockableInterface
+interface VariantInterface extends BaseVariantInterface, ShippableInterface, StockableInterface
 {
     /**
      * Get variant price.

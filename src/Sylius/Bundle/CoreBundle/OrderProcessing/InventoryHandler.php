@@ -41,8 +41,8 @@ class InventoryHandler implements InventoryHandlerInterface
     /**
      * Constructor.
      *
-     * @param \Sylius\Component\Inventory\Operator\InventoryOperatorInterface    $inventoryOperator
-     * @param \Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface $inventoryUnitFactory
+     * @param InventoryOperatorInterface    $inventoryOperator
+     * @param InventoryUnitFactoryInterface $inventoryUnitFactory
      */
     public function __construct(InventoryOperatorInterface $inventoryOperator, InventoryUnitFactoryInterface $inventoryUnitFactory)
     {

@@ -24,7 +24,7 @@ class SyliusInventoryExtension extends \Twig_Extension
     /**
      * Availability checker.
      *
-     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
+     * @var AvailabilityCheckerInterface
      */
     private $checker;
 
