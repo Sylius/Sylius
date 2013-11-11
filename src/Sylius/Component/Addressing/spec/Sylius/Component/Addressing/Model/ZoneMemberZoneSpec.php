@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
@@ -44,19 +45,13 @@ class ZoneMemberZoneSpec extends ObjectBehavior
         $this->getBelongsTo()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
-     */
-    function its_zone_is_mutable($zone)
+    function its_zone_is_mutable(ZoneInterface $zone)
     {
         $this->setZone($zone);
         $this->getZone()->shouldReturn($zone);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
-     */
-    function it_returns_zone_name($zone)
+    function it_returns_zone_name(ZoneInterface $zone)
     {
         $zone->getName()->willReturn('USA');
         $this->setZone($zone);
@@ -64,11 +59,7 @@ class ZoneMemberZoneSpec extends ObjectBehavior
         $this->getName()->shouldReturn('USA');
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $belongsTo
-     */
-    function it_has_fluent_interface($zone, $belongsTo)
+    function it_has_fluent_interface(ZoneInterface $zone, ZoneInterface $belongsTo)
     {
         $this->setZone($zone)->shouldReturn($this);
         $this->setBelongsTo($belongsTo)->shouldReturn($this);

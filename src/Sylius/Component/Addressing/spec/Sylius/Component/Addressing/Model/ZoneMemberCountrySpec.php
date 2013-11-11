@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
@@ -44,19 +46,13 @@ class ZoneMemberCountrySpec extends ObjectBehavior
         $this->getBelongsTo()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\CountryInterface $country
-     */
-    function its_country_is_mutable($country)
+    function its_country_is_mutable(CountryInterface $country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\CountryInterface $country
-     */
-    function it_returns_country_name($country)
+    function it_returns_country_name(CountryInterface $country)
     {
         $country->getName()->willReturn('Serbia');
         $this->setCountry($country);
@@ -64,11 +60,7 @@ class ZoneMemberCountrySpec extends ObjectBehavior
         $this->getName()->shouldReturn('Serbia');
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\CountryInterface $country
-     * @param Sylius\Component\Addressing\Model\ZoneInterface    $zone
-     */
-    function it_has_fluent_interface($country, $zone)
+    function it_has_fluent_interface(CountryInterface $country, ZoneInterface $zone)
     {
         $this->setCountry($country)->shouldReturn($this);
         $this->setBelongsTo($zone)->shouldReturn($this);
