@@ -11,18 +11,18 @@
 
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\DataTransformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CouponToCodeTransformerSpec extends ObjectBehavior
 {
-    /**
-     * @param \Doctrine\Common\Persistence\ObjectRepository      $couponRepository
-     * @param \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
-     */
-    function let($couponRepository, $dispatcher)
+
+    function let(ObjectRepository $couponRepository, EventDispatcher $dispatcher)
     {
         $this->beConstructedWith($couponRepository, $dispatcher);
     }
@@ -45,10 +45,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param \Sylius\Component\Promotion\Model\CouponInterface $coupon
-     */
-    function it_should_transform_coupon_into_its_code($coupon)
+    function it_should_transform_coupon_into_its_code(CouponInterface $coupon)
     {
         $coupon->getCode()->willReturn('C123');
 
@@ -71,10 +68,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         $this->reverseTransform('FREEIPHONE5')->shouldReturn(null);
     }
 
-    /**
-     * @param \Sylius\Component\Promotion\Model\CouponInterface $coupon
-     */
-    function it_should_return_coupon_if_found_on_reverse_transform($couponRepository, $coupon)
+    function it_should_return_coupon_if_found_on_reverse_transform($couponRepository, CouponInterface $coupon)
     {
         $couponRepository
             ->findOneBy(array('code' => 'FREEIPHONE5'))

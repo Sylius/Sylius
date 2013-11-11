@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -33,10 +34,7 @@ class ActionChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_should_set_action_types_to_choose_from($resolver)
+    function it_should_set_action_types_to_choose_from(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('choices' => array()))->shouldBeCalled();
 
