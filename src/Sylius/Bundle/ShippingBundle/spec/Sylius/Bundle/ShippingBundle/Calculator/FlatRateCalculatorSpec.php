@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -33,10 +35,7 @@ class FlatRateCalculatorSpec extends ObjectBehavior
         $this->shouldBeConfigurable();
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_has_required_amount_configuration_options($resolver)
+    function it_has_required_amount_configuration_options(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array('amount'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes(array('amount' => array('numeric')))->shouldBeCalled()->willReturn($resolver);
@@ -49,10 +48,7 @@ class FlatRateCalculatorSpec extends ObjectBehavior
         $this->getConfigurationFormType()->shouldReturn('sylius_shipping_calculator_flat_rate_configuration');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_should_calculate_the_flat_rate_amount_configured_on_the_method($shipment)
+    function it_should_calculate_the_flat_rate_amount_configured_on_the_method(ShipmentInterface $shipment)
     {
         $this->calculate($shipment, array('amount' => 1500))->shouldReturn(1500);
     }

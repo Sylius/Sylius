@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Calculator\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -33,20 +34,14 @@ class CalculatorRegistrySpec extends ObjectBehavior
         $this->getCalculators()->shouldReturn(array());
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
-     */
-    function it_registers_calculator_under_given_name($calculator)
+    function it_registers_calculator_under_given_name(CalculatorInterface $calculator)
     {
         $this->hasCalculator('default')->shouldReturn(false);
         $this->registerCalculator('default', $calculator);
         $this->hasCalculator('default')->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
-     */
-    function it_throws_exception_if_trying_to_register_calculator_with_taken_name($calculator)
+    function it_throws_exception_if_trying_to_register_calculator_with_taken_name(CalculatorInterface $calculator)
     {
         $this->registerCalculator('default', $calculator);
 
@@ -56,10 +51,7 @@ class CalculatorRegistrySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
-     */
-    function it_unregisters_calculator_with_given_name($calculator)
+    function it_unregisters_calculator_with_given_name(CalculatorInterface $calculator)
     {
         $this->registerCalculator('default', $calculator);
         $this->hasCalculator('default')->shouldReturn(true);
@@ -68,10 +60,7 @@ class CalculatorRegistrySpec extends ObjectBehavior
         $this->hasCalculator('default')->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
-     */
-    function it_provides_registered_calculator_by_name($calculator)
+    function it_provides_registered_calculator_by_name(CalculatorInterface $calculator)
     {
         $this->registerCalculator('default', $calculator);
         $this->getCalculator('default')->shouldReturn($calculator);
