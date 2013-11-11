@@ -260,8 +260,8 @@ class OrderSpec extends ObjectBehavior
         $this->addInventoryUnit($unit1);
         $this->addInventoryUnit($unit2);
 
-        $unit1->getInventoryState()->willReturn(\Sylius\Component\Inventory\Model\InventoryUnitInterface::STATE_BACKORDERED);
-        $unit2->getInventoryState()->willReturn(\Sylius\Component\Inventory\Model\InventoryUnitInterface::STATE_SOLD);
+        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
+        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
         $this->shouldBeBackorder();
     }
@@ -278,8 +278,8 @@ class OrderSpec extends ObjectBehavior
         $this->addInventoryUnit($unit1);
         $this->addInventoryUnit($unit2);
 
-        $unit1->getInventoryState()->willReturn(\Sylius\Component\Inventory\Model\InventoryUnitInterface::STATE_SOLD);
-        $unit2->getInventoryState()->willReturn(\Sylius\Component\Inventory\Model\InventoryUnitInterface::STATE_SOLD);
+        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
         $this->shouldNotBeBackorder();
     }

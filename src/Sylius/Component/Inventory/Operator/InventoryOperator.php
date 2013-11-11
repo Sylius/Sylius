@@ -37,7 +37,7 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Availability checker.
      *
-     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
+     * @var AvailabilityCheckerInterface
      */
     protected $availabilityChecker;
 
