@@ -56,7 +56,7 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function it_should_allow_defining_shipping_address($address)
     {
@@ -70,7 +70,7 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function it_should_allow_defining_billing_address($address)
     {

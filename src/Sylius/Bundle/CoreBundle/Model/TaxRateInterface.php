@@ -11,8 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
+<<<<<<< HEAD
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface as BaseTaxRateInterface;
+=======
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface as BaseTaxRateInterface;
+>>>>>>>  Fixing hardcoded references to AddressingBundle classes
 
 /**
  * Tax rate interface.

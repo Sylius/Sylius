@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
