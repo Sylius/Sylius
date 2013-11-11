@@ -15,7 +15,7 @@ First step is to create a new tax category.
     public function configureAction()
     {
         $repository = $this->container->get('sylius.repository.tax_category');
-        $manager = $this->container->get('sylius.repository.tax_category');
+        $manager = $this->container->get('sylius.repository.tax_manager');
 
         $clothing = $repository
             ->createNew()
