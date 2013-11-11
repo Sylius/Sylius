@@ -16,8 +16,8 @@ use PhpSpec\ObjectBehavior;
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
-     * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface   $checkerRegistry
+     * @param Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
+     * @param Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface   $checkerRegistry
      */
     function let($calculatorRegistry, $checkerRegistry)
     {

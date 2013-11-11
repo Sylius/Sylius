@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface as BaseShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 
 /**
  * Shipment interface.

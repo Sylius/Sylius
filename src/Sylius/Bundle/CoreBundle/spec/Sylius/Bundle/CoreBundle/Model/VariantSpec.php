@@ -64,7 +64,7 @@ class VariantSpec extends ObjectBehavior
 
     function it_implements_Sylius_shippable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShippableInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');
     }
 
     /**
@@ -80,7 +80,7 @@ class VariantSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface      $shippingCategory
+     * @param Sylius\Component\Shipping\Model\ShippingCategoryInterface      $shippingCategory
      */
     function it_returns_the_product_shipping_category($product, $shippingCategory)
     {

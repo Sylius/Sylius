@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 
 /**
@@ -67,7 +67,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * Shipping category.
      *
-     * @var ShippingCategoryInterface
+     * @var \Sylius\Component\Shipping\Model\ShippingCategoryInterface
      */
     protected $shippingCategory;
 
@@ -225,7 +225,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingCategory(ShippingCategoryInterface $category = null)
+    public function setShippingCategory(\Sylius\Component\Shipping\Model\ShippingCategoryInterface $category = null)
     {
         $this->shippingCategory = $category;
 

@@ -11,7 +11,7 @@
         </many-to-one>
 
         <field name="shippingState" column="shipping_state" type="string" nullable="false" />
-        <many-to-one field="shipment" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentInterface" inversed-by="items">
+        <many-to-one field="shipment" target-entity="Sylius\Component\Shipping\Model\ShipmentInterface" inversed-by="items">
             <join-column name="shipment_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>

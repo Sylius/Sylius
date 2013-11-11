@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 
 /**
  * Shipping charges processor.
@@ -40,7 +40,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
      * Constructor.
      *
      * @param RepositoryInterface           $adjustmentRepository
-     * @param DelegatingCalculatorInterface $calculator
+     * @param \Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface $calculator
      */
     public function __construct(RepositoryInterface $adjustmentRepository, DelegatingCalculatorInterface $calculator)
     {

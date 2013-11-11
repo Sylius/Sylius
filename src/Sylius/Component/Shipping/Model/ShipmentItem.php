@@ -14,7 +14,6 @@ namespace Sylius\Component\Shipping\Model;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * Shipment item model.
