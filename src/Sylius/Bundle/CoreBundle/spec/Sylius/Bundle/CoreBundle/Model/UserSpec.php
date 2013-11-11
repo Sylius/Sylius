@@ -51,7 +51,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function its_shipping_address_is_mutable($address)
     {
@@ -60,7 +60,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function its_billing_address_is_mutable($address)
     {
@@ -69,7 +69,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function its_addresses_are_mutable($address)
     {
@@ -78,7 +78,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function it_can_remove_addresses($address)
     {
@@ -88,7 +88,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function it_adds_address_when_billing_address_is_set($address)
     {
@@ -97,7 +97,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
+     * @param Sylius\Component\Addressing\Model\AddressInterface $address
      */
     function it_adds_address_when_shipping_address_is_set($address)
     {

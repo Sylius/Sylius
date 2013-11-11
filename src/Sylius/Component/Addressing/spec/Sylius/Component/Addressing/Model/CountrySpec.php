@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AddressingBundle\Model;
+namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,12 +20,12 @@ class CountrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Country');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\Country');
     }
 
     function it_implements_Sylius_country_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\CountryInterface');
+        $this->shouldImplement('Sylius\Component\Addressing\Model\CountryInterface');
     }
 
     function it_has_no_id_by_default()
@@ -75,7 +75,7 @@ class CountrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
+     * @param Sylius\Component\Addressing\Model\ProvinceInterface $province
      */
     function it_adds_province($province)
     {
@@ -84,7 +84,7 @@ class CountrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
+     * @param Sylius\Component\Addressing\Model\ProvinceInterface $province
      */
     function it_removes_province($province)
     {
@@ -96,7 +96,7 @@ class CountrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
+     * @param Sylius\Component\Addressing\Model\ProvinceInterface $province
      */
     function it_sets_country_on_added_province($province)
     {
@@ -106,7 +106,7 @@ class CountrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
+     * @param Sylius\Component\Addressing\Model\ProvinceInterface $province
      */
     function it_unsets_country_on_removed_province($province)
     {
@@ -119,7 +119,7 @@ class CountrySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
+     * @param Sylius\Component\Addressing\Model\ProvinceInterface $province
      * @param Doctrine\Common\Collections\Collection                 $provinces
      */
     function it_has_fluent_interface($province, $provinces)

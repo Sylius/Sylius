@@ -36,14 +36,14 @@
             </cascade>
         </one-to-many>
 
-        <one-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="billing_address_id" />
         </one-to-one>
-        <one-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="shipping_address_id" />
         </one-to-one>
 
-        <many-to-many field="addresses" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <many-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-table name="sylius_user_address">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>

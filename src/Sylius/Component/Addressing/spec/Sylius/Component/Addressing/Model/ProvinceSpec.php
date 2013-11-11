@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AddressingBundle\Model;
+namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,12 +20,12 @@ class ProvinceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Province');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\Province');
     }
 
     function it_implements_Sylius_country_province_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ProvinceInterface');
+        $this->shouldImplement('Sylius\Component\Addressing\Model\ProvinceInterface');
     }
 
     function it_has_no_id_by_default()
@@ -50,7 +50,7 @@ class ProvinceSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
+     * @param Sylius\Component\Addressing\Model\CountryInterface $country
      */
     function it_allows_to_attach_itself_to_a_country($country)
     {

@@ -47,7 +47,7 @@ class ZoneToIdentifierTransformerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
+     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
      */
     function it_should_transform_zone_into_its_identifier_value($zone)
     {
@@ -73,7 +73,7 @@ class ZoneToIdentifierTransformerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
+     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
      */
     function it_should_zone_if_found_on_reverse_transform($zoneRepository, $zone)
     {
