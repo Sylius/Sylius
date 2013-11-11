@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -60,7 +60,7 @@ class ZoneToIdentifierTransformer implements DataTransformerInterface
         }
 
         if (!$zone instanceof ZoneInterface) {
-            throw new UnexpectedTypeException($zone, 'Sylius\Bundle\AddressingBundle\Model\ZoneInterface');
+            throw new UnexpectedTypeException($zone, 'Sylius\Component\Addressing\Model\ZoneInterface');
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();
