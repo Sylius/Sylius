@@ -12,8 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Factory;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\InventoryBundle\Factory\Sylius;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -30,16 +29,16 @@ class InventoryUnitFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory');
+        $this->shouldHaveType('Sylius\Component\Inventory\Factory\InventoryUnitFactory');
     }
 
     function it_implements_Sylius_inventory_unit_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactoryInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface');
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_throws_exception_if_given_quantity_is_less_than_1($stockable)
     {
@@ -50,10 +49,10 @@ class InventoryUnitFactorySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      */
     function it_creates_inventory_units($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3, $repository)
     {

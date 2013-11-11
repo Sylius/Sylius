@@ -22,12 +22,12 @@ class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Model\InventoryUnit');
+        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
     }
 
     function it_implements_Sylius_inventory_unit_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Model\InventoryUnitInterface');
     }
 
     function it_has_no_id_by_default()
@@ -41,7 +41,7 @@ class InventoryUnitSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_allows_defining_stockable_subject($stockable)
     {
@@ -72,7 +72,7 @@ class InventoryUnitSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_returns_its_stockable_name($stockable)
     {
@@ -83,7 +83,7 @@ class InventoryUnitSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_returns_its_stockable_sku($stockable)
     {
