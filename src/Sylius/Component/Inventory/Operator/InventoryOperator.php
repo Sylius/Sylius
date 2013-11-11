@@ -14,7 +14,7 @@ namespace Sylius\Component\Inventory\Operator;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Sylius\Component\Inventory\Operator\InsufficientStockException;

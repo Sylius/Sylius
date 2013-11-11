@@ -12,8 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\InventoryBundle\Model\Sylius;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -41,7 +40,7 @@ class InventoryUnitSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_allows_defining_stockable_subject($stockable)
     {
@@ -72,7 +71,7 @@ class InventoryUnitSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_returns_its_stockable_name($stockable)
     {
@@ -83,7 +82,7 @@ class InventoryUnitSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_returns_its_stockable_sku($stockable)
     {

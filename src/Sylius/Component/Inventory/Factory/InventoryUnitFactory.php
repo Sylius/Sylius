@@ -13,7 +13,7 @@ namespace Sylius\Component\Inventory\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 

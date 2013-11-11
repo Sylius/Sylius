@@ -13,9 +13,7 @@ namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use spec\Sylius\Bundle\InventoryBundle\Operator\Doctrine;
-use spec\Sylius\Bundle\InventoryBundle\Operator\Sylius;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -23,7 +21,7 @@ use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
 class BackordersHandlerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
+     * @param \Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
      */
     function let($repository)
     {
@@ -32,19 +30,19 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Operator\BackordersHandler');
+        $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
    }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Operator\BackordersHandlerInterface');
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      */
     function it_backorders_units_if_quantity_is_greater_than_on_hand($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
     {
@@ -62,10 +60,10 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable1
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable2
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable1
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable2
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
      */
     function it_complains_if_inventory_units_contain_different_stockables($stockable1, $stockable2, $inventoryUnit1, $inventoryUnit2)
     {
@@ -81,10 +79,10 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Doctrine\Common\Persistence\ObjectRepository               $repository
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Doctrine\Common\Persistence\ObjectRepository               $repository
      */
     function it_partially_fills_backordered_units_if_not_enough_in_stock($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
     {
@@ -111,11 +109,11 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
-     * @param Doctrine\Common\Persistence\ObjectRepository               $repository
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
+     * @param \Doctrine\Common\Persistence\ObjectRepository               $repository
      */
     function it_fills_all_backordered_units_if_enough_in_stock($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3, $repository)
     {
@@ -143,10 +141,10 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Doctrine\Common\Persistence\ObjectRepository               $repository
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Doctrine\Common\Persistence\ObjectRepository               $repository
      */
     function it_partially_fills_backordered_units_and_updates_stock_accordingly($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
     {

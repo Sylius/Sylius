@@ -35,7 +35,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_any_stockable_as_available_if_backorders_are_enabled($stockable)
     {
@@ -47,7 +47,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_any_stockable_as_available_if_its_on_demand_and_backorders_are_disabled($stockable)
     {
@@ -59,7 +59,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_any_stockable_as_available_if_its_on_demand_and_backorders_are_disabled_and_on_hand_quantity_insufficient($stockable)
     {
@@ -77,7 +77,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_stockable_as_available_if_on_hand_quantity_is_greater_than_0($stockable)
     {
@@ -90,7 +90,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_stockable_as_available_even_if_hand_quantity_is_lesser_than_or_equal_to_0_when_backorders_are_enabled($stockable)
     {
@@ -104,7 +104,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_lesser_than_or_equal_to_0($stockable)
     {
@@ -120,7 +120,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_any_stockable_and_quantity_as_sufficient_if_backorders_are_enabled($stockable)
     {
@@ -130,7 +130,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_stockable_stock_sufficient_if_on_hand_quantity_is_greater_than_required_quantity($stockable)
     {
@@ -146,7 +146,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_recognizes_stock_sufficient_if_its_available_on_demand_and_backorders_are_disabled($stockable)
     {

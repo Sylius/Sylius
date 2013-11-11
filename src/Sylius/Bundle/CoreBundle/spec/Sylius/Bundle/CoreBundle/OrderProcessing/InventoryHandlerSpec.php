@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,7 +21,7 @@ use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
 class InventoryHandlerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface $inventoryOperator
+     * @param Sylius\Component\Inventory\Operator\InventoryOperatorInterface $inventoryOperator
      * @param Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory        $inventoryUnitFactory
      */
     function let($inventoryOperator, $inventoryUnitFactory)

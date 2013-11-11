@@ -12,8 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\InventoryBundle\Operator\Sylius;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -22,8 +21,8 @@ use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
 class InventoryOperatorSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface  $backordersHandler
-     * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
+     * @param \Sylius\Component\Inventory\Operator\BackordersHandlerInterface  $backordersHandler
+     * @param \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $availabilityChecker
      */
     function let($backordersHandler, $availabilityChecker)
     {
@@ -32,16 +31,16 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Operator\InventoryOperator');
+        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InventoryOperator');
    }
 
     function it_implements_Sylius_inventory_operator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_increases_stockable_on_hand($stockable)
     {
@@ -52,9 +51,9 @@ class InventoryOperatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
      */
     function it_decreases_stockable_on_hand_by_count_of_sold_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2)
     {
@@ -74,10 +73,10 @@ class InventoryOperatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      */
     function it_decreases_stockable_on_hand_and_ignores_backordered_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
     {

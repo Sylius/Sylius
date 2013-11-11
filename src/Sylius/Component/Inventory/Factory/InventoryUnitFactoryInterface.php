@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Inventory\Factory;
 
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**

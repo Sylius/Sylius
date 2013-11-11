@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
-use Sylius\Compo\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
 /**
