@@ -13,16 +13,18 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ActionTypeSpec extends ObjectBehavior
 {
-    /**
-     * @param \Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface $actionRegistry
-     */
-    function let($actionRegistry)
+
+    function let(PromotionActionRegistryInterface $actionRegistry)
     {
         $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
     }
@@ -37,11 +39,7 @@ class ActionTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormBuilder          $builder
-     * @param \Symfony\Component\Form\FormFactoryInterface $factory
-     */
-    function it_should_build_form_with_action_choice_field($builder, $factory)
+    function it_should_build_form_with_action_choice_field(FormBuilder $builder, FormFactoryInterface $factory)
     {
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
@@ -55,11 +53,7 @@ class ActionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormBuilder          $builder
-     * @param \Symfony\Component\Form\FormFactoryInterface $factory
-     */
-    function it_should_add_build_promotion_action_event_subscriber($builder, $factory)
+    function it_should_add_build_promotion_action_event_subscriber(FormBuilder $builder, FormFactoryInterface $factory)
     {
         $builder->add(Argument::any(), Argument::any(), Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
@@ -73,10 +67,7 @@ class ActionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_should_define_assigned_data_class($resolver)
+    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

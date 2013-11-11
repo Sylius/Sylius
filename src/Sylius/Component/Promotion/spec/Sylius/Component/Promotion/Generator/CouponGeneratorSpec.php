@@ -11,19 +11,29 @@
 
 namespace spec\Sylius\Component\Promotion\Generator;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Promotion\Generator\Instruction;
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
+<<<<<<< HEAD
     /**
      * @param \Sylius\Component\Resource\Repository\RepositoryInterface $repository
      * @param \Doctrine\Common\Persistence\ObjectManager              $manager
      */
     function let($repository, $manager)
+=======
+
+    function let(RepositoryInterface $repository, ObjectManager $manager)
+>>>>>>> Fix after code review, type hinting specs \o/
     {
         $this->beConstructedWith($repository, $manager);
     }
@@ -38,12 +48,7 @@ class CouponGeneratorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Promotion\Generator\CouponGeneratorInterface');
     }
 
-    /**
-     * @param \Sylius\Component\Promotion\Model\PromotionInterface $promotion
-     * @param \Sylius\Component\Promotion\Model\CouponInterface    $coupon
-     * @param \Sylius\Component\Promotion\Generator\Instruction    $instruction
-     */
-    function it_should_generate_coupons_according_to_instruction($repository, $manager, $promotion, $coupon, $instruction)
+    function it_should_generate_coupons_according_to_instruction($repository, $manager, PromotionInterface $promotion, CouponInterface $coupon, Instruction $instruction)
     {
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);

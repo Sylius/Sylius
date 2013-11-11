@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -61,10 +62,7 @@ class ActionSpec extends ObjectBehavior
         $this->getPromotion()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Promotion\Model\PromotionInterface $promotion
-     */
-    function its_promotion_by_should_be_mutable($promotion)
+    function its_promotion_by_should_be_mutable(PromotionInterface $promotion)
     {
         $this->setPromotion($promotion);
         $this->getPromotion()->shouldReturn($promotion);
