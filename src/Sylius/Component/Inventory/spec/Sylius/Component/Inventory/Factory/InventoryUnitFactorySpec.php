@@ -20,7 +20,7 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 class InventoryUnitFactorySpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
+     * @param \Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
      */
     function let($repository)
     {
@@ -38,7 +38,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_throws_exception_if_given_quantity_is_less_than_1($stockable)
     {
@@ -49,10 +49,10 @@ class InventoryUnitFactorySpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
+     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      */
     function it_creates_inventory_units($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3, $repository)
     {
