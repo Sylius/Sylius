@@ -24,7 +24,7 @@ interface InventoryUnitFactoryInterface
     /**
      * Create given amount of inventory units.
      *
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param StockableInterface $stockable
      * @param integer            $quantity
      * @param string             $state
      */

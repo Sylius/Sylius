@@ -11,19 +11,20 @@
 
 namespace spec\Sylius\Component\Inventory\Operator;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class BackordersHandlerSpec extends ObjectBehavior
 {
-    /**
-     * @param \Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
-     */
-    function let($repository)
+
+    function let(RepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
@@ -31,20 +32,14 @@ class BackordersHandlerSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
-   }
+    }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()
     {
         $this->shouldImplement('Sylius\Component\Inventory\Operator\BackordersHandlerInterface');
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
-     */
-    function it_backorders_units_if_quantity_is_greater_than_on_hand($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
+    function it_backorders_units_if_quantity_is_greater_than_on_hand(StockableInterface $stockable, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2, InventoryUnitInterface $inventoryUnit3)
     {
         $inventoryUnit1->getStockable()->shouldBeCalled()->willReturn($stockable);
         $inventoryUnit2->getStockable()->shouldBeCalled()->willReturn($stockable);
@@ -59,13 +54,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $this->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable1
-     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable2
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     */
-    function it_complains_if_inventory_units_contain_different_stockables($stockable1, $stockable2, $inventoryUnit1, $inventoryUnit2)
+    function it_complains_if_inventory_units_contain_different_stockables(StockableInterface $stockable1, StockableInterface $stockable2, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2)
     {
         $inventoryUnit1->getStockable()->shouldBeCalled()->willReturn($stockable1);
         $inventoryUnit2->getStockable()->shouldBeCalled()->willReturn($stockable2);
@@ -78,13 +67,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param \Doctrine\Common\Persistence\ObjectRepository               $repository
-     */
-    function it_partially_fills_backordered_units_if_not_enough_in_stock($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
+    function it_partially_fills_backordered_units_if_not_enough_in_stock(StockableInterface $stockable, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2, ObjectRepository $repository)
     {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
@@ -108,14 +91,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $this->fillBackorders($stockable);
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
-     * @param \Doctrine\Common\Persistence\ObjectRepository               $repository
-     */
-    function it_fills_all_backordered_units_if_enough_in_stock($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3, $repository)
+    function it_fills_all_backordered_units_if_enough_in_stock(StockableInterface $stockable, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2, InventoryUnitInterface $inventoryUnit3, ObjectRepository $repository)
     {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(3);
         $stockable->setOnHand(0)->shouldBeCalled();
@@ -140,13 +116,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $this->fillBackorders($stockable);
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface     $stockable
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
-     * @param \Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
-     * @param \Doctrine\Common\Persistence\ObjectRepository               $repository
-     */
-    function it_partially_fills_backordered_units_and_updates_stock_accordingly($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
+    function it_partially_fills_backordered_units_and_updates_stock_accordingly(StockableInterface $stockable, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2, ObjectRepository $repository)
     {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(5);
         $stockable->setOnHand(3)->shouldBeCalled();

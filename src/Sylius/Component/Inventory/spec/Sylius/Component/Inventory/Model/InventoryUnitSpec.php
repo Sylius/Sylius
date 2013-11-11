@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -39,10 +40,7 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getStockable()->shouldReturn(null);
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
-     */
-    function it_allows_defining_stockable_subject($stockable)
+    function it_allows_defining_stockable_subject(StockableInterface $stockable)
     {
         $this->setStockable($stockable);
         $this->getStockable()->shouldReturn($stockable);
@@ -70,21 +68,15 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->shouldBeBackordered();
     }
 
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
-     */
-    function it_returns_its_stockable_name($stockable)
+    function it_returns_its_stockable_name(StockableInterface $stockable)
     {
         $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
         $this->setStockable($stockable);
 
         $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
     }
-
-    /**
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
-     */
-    function it_returns_its_stockable_sku($stockable)
+    
+    function it_returns_its_stockable_sku(StockableInterface $stockable)
     {
         $stockable->getSku()->willReturn('IPHONE5');
         $this->setStockable($stockable);

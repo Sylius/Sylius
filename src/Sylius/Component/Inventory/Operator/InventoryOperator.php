@@ -45,7 +45,7 @@ class InventoryOperator implements InventoryOperatorInterface
      * Constructor.
      *
      * @param BackordersHandlerInterface   $backordersHandler
-     * @param \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $availabilityChecker
+     * @param AvailabilityCheckerInterface $availabilityChecker
      */
     public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker)
     {

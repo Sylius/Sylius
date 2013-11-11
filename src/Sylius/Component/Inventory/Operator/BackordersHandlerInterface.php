@@ -31,7 +31,7 @@ interface BackordersHandlerInterface
     /**
      * Update backordered inventory units if quantity is sufficient.
      *
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param StockableInterface $stockable
      */
     public function fillBackorders(StockableInterface $stockable);
 }
