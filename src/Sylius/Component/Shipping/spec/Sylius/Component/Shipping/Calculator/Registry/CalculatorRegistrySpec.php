@@ -21,12 +21,12 @@ class CalculatorRegistrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistry');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistry');
     }
 
     function it_implements_Sylius_shipping_calculator_registry()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface');
     }
 
     function it_initializes_calculators_array_by_default()
@@ -46,7 +46,7 @@ class CalculatorRegistrySpec extends ObjectBehavior
         $this->registerCalculator('default', $calculator);
 
         $this
-            ->shouldThrow('Sylius\Bundle\ShippingBundle\Calculator\Registry\ExistingCalculatorException')
+            ->shouldThrow('Sylius\Component\Shipping\Calculator\Registry\ExistingCalculatorException')
             ->duringRegisterCalculator('default', $calculator)
         ;
     }
@@ -69,7 +69,7 @@ class CalculatorRegistrySpec extends ObjectBehavior
     function it_throws_exception_if_trying_to_retrieve_non_existing_calculator()
     {
         $this
-            ->shouldThrow('Sylius\Bundle\ShippingBundle\Calculator\Registry\NonExistingCalculatorException')
+            ->shouldThrow('Sylius\Component\Shipping\Calculator\Registry\NonExistingCalculatorException')
             ->duringGetCalculator('default')
         ;
     }

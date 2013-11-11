@@ -21,12 +21,12 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\ItemCountRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Shipping\Checker\ItemCountRuleChecker');
     }
 
     function it_is_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\RuleCheckerInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Checker\RuleCheckerInterface');
     }
 
     function it_should_recognize_empty_subject_as_not_eligible(ShippingSubjectInterface $subject)

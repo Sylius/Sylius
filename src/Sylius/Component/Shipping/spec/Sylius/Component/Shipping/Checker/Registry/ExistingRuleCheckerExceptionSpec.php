@@ -26,7 +26,7 @@ class ExistingRuleCheckerExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\Registry\ExistingRuleCheckerException');
+        $this->shouldHaveType('Sylius\Component\Shipping\Checker\Registry\ExistingRuleCheckerException');
     }
 
     function it_extends_invalid_argument_exception()

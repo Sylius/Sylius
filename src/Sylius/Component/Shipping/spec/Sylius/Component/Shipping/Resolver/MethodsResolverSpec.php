@@ -30,12 +30,12 @@ class MethodsResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Resolver\MethodsResolver');
+        $this->shouldHaveType('Sylius\Component\Shipping\Resolver\MethodsResolver');
     }
 
     function it_implements_Sylius_shipping_methods_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Resolver\MethodsResolverInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Resolver\MethodsResolverInterface');
     }
 
     function it_returns_all_methods_eligible_for_given_subject(

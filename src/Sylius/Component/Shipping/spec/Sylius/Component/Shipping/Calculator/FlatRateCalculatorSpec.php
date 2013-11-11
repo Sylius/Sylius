@@ -22,12 +22,12 @@ class FlatRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\FlatRateCalculator');
     }
 
     function it_should_implement_Sylius_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
     }
 
     function it_is_configurable()

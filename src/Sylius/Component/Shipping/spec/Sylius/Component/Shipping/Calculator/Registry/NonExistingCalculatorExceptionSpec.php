@@ -25,7 +25,7 @@ class NonExistingCalculatorExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\Registry\NonExistingCalculatorException');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\Registry\NonExistingCalculatorException');
     }
 
     function it_is_an_exception()

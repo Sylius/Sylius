@@ -22,12 +22,12 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistry');
+        $this->shouldHaveType('Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry');
     }
 
     function it_is_Sylius_rule_checker_registry()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface');
     }
 
     function it_should_initialize_checkers_array_by_default()
@@ -47,7 +47,7 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
 
         $this
-            ->shouldThrow('Sylius\Bundle\ShippingBundle\Checker\Registry\ExistingRuleCheckerException')
+            ->shouldThrow('Sylius\Component\Shipping\Checker\Registry\ExistingRuleCheckerException')
             ->duringRegisterChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker)
         ;
     }
@@ -70,7 +70,7 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
     function it_should_complain_if_trying_to_retrieve_non_existing_checker()
     {
         $this
-            ->shouldThrow('Sylius\Bundle\ShippingBundle\Checker\Registry\NonExistingRuleCheckerException')
+            ->shouldThrow('Sylius\Component\Shipping\Checker\Registry\NonExistingRuleCheckerException')
             ->duringGetChecker(RuleInterface::TYPE_ITEM_TOTAL)
         ;
     }

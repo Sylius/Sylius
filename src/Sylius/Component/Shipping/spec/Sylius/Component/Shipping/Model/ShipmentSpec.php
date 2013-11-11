@@ -23,12 +23,12 @@ class ShipmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Model\Shipment');
+        $this->shouldHaveType('Sylius\Component\Shipping\Model\Shipment');
     }
 
     function it_implements_Sylius_shipment_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShipmentInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShipmentInterface');
     }
 
     function it_has_no_id_by_default()
