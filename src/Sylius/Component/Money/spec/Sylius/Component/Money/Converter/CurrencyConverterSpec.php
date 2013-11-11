@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Money\Converter;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\MoneyBundle\Converter\Sylius;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
@@ -26,16 +25,16 @@ class CurrencyConverterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverter');
+        $this->shouldHaveType('Sylius\Component\Money\Converter\CurrencyConverter');
     }
 
     function it_implements_Sylius_exchange_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface');
+        $this->shouldImplement('Sylius\Component\Money\Converter\CurrencyConverterInterface');
     }
 
     /**
-     * @param Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface $exchangeRate
+     * @param \Sylius\Component\Money\Model\ExchangeRateInterface $exchangeRate
      */
     function it_converts_to_any_currency($exchangeRate, $exchangeRateRepository)
     {
