@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -61,19 +62,13 @@ class RuleSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
-     */
-    function it_allows_to_assign_itself_to_a_shipping_method($method)
+    function it_allows_to_assign_itself_to_a_shipping_method(ShippingMethodInterface $method)
     {
         $this->setMethod($method);
         $this->getMethod()->shouldReturn($method);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $method
-     */
-    function it_allows_to_detach_itself_from_a_shipping_method($method)
+    function it_allows_to_detach_itself_from_a_shipping_method(ShippingMethodInterface $method)
     {
         $this->setMethod($method);
         $this->getMethod()->shouldReturn($method);

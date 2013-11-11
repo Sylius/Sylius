@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
@@ -50,19 +51,13 @@ class ShippingMethodSpec extends ObjectBehavior
         $this->getCategory()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category
-     */
-    function it_allows_assigning_itself_to_category($category)
+    function it_allows_assigning_itself_to_category(ShippingCategoryInterface $category)
     {
         $this->setCategory($category);
         $this->getCategory()->shouldReturn($category);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $category
-     */
-    function it_allows_detaching_itself_from_category($category)
+    function it_allows_detaching_itself_from_category(ShippingCategoryInterface $category)
     {
         $this->setCategory($category);
         $this->getCategory()->shouldReturn($category);
