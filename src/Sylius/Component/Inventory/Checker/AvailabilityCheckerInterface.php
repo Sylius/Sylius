@@ -24,7 +24,7 @@ interface AvailabilityCheckerInterface
      * Checks whether stockable object is available in stock.
      * This method should not care about what quantity is required.
      *
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param StockableInterface $stockable
      *
      * @return Boolean
      */
@@ -34,7 +34,7 @@ interface AvailabilityCheckerInterface
      * Checks whether stockable object is available in stock.
      * Takes required quantity into account.
      *
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param StockableInterface $stockable
      * @param integer            $quantity
      *
      * @return Boolean

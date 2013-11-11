@@ -33,7 +33,7 @@ class InventoryChangeListener implements InventoryChangeListenerInterface
     /**
      * Constructor.
      *
-     * @param \Sylius\Component\Inventory\Operator\BackordersHandlerInterface $backordersHandler
+     * @param BackordersHandlerInterface $backordersHandler
      */
     public function __construct(BackordersHandlerInterface $backordersHandler)
     {

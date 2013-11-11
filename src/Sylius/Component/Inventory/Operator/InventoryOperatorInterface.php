@@ -25,7 +25,7 @@ interface InventoryOperatorInterface
     /**
      * Increase stock on hand for given stockable by quantity.
      *
-     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
+     * @param StockableInterface $stockable
      * @param integer            $quantity
      */
     public function increase(StockableInterface $stockable, $quantity);
