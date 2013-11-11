@@ -22,7 +22,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface                $adjustmentRepository
-     * @param Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface $calculator
+     * @param Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface $calculator
      */
     function let($adjustmentRepository, $calculator)
     {
@@ -69,8 +69,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface        $adjustment
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod
+     * @param Sylius\Component\Shipping\Model\ShipmentInterface       $shipment
+     * @param Sylius\Component\Shipping\Model\ShippingMethodInterface $shippingMethod
      */
     function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
         $adjustmentRepository, $calculator, $adjustment, $order, $shipment, $shippingMethod

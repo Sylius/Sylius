@@ -20,7 +20,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\OrderBundle\Model\OrderInterface;
-use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;

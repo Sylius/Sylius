@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnit as BaseInventoryUnit;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface as BaseShipmentInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 
 /**
  * Custom inventory unit class.
@@ -68,7 +68,7 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
 
     public function __construct()
     {
-        $this->shippingState = ShipmentItemInterface::STATE_READY;
+        $this->shippingState = \Sylius\Component\Shipping\Model\ShipmentItemInterface::STATE_READY;
     }
 
     /**

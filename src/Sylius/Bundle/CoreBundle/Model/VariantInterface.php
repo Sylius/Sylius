@@ -13,14 +13,14 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 
 /**
  * Sylius core product Variant interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface VariantInterface extends BaseVariantInterface, ShippableInterface, StockableInterface
+interface VariantInterface extends BaseVariantInterface, \Sylius\Component\Shipping\Model\ShippableInterface, StockableInterface
 {
     /**
      * Get variant price.

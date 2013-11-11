@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Calculator\DefaultCalculators;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * Default shipping fixtures.
@@ -55,7 +55,7 @@ class LoadShippingData extends DataFixture
      * @param string $name
      * @param string $description
      *
-     * @return ShippingCategoryInterface
+     * @return \Sylius\Component\Shipping\Model\ShippingCategoryInterface
      */
     private function createShippingCategory($name, $description)
     {
@@ -79,7 +79,7 @@ class LoadShippingData extends DataFixture
      * @param string                    $zoneName
      * @param string                    $calculator
      * @param array                     $configuration
-     * @param ShippingCategoryInterface $category
+     * @param \Sylius\Component\Shipping\Model\ShippingCategoryInterface $category
      *
      * @return ShippingMethodInterface
      */

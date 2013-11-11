@@ -120,7 +120,7 @@ class ProductSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface $shippingCategory
+     * @param Sylius\Component\Shipping\Model\ShippingCategoryInterface $shippingCategory
      */
     function its_shipping_category_is_mutable($shippingCategory)
     {
