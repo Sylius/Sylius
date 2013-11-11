@@ -17,7 +17,7 @@ class ResourceResolverSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $repository
      * @param Sylius\Bundle\ResourceBundle\Controller\Configuration  $configuration
      */
     function it_calls_proper_method_with_arguments_based_on_configuration($repository, $configuration)

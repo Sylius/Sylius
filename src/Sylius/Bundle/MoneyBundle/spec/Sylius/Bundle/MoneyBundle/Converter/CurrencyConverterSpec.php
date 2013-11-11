@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 class CurrencyConverterSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $exchangeRateRepository
+     * @param Sylius\Component\Resource\Model\RepositoryInterface $exchangeRateRepository
      */
     function let($exchangeRateRepository)
     {

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Payment processing log entry interface.

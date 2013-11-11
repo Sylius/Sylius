@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface ImageInterface extends TimestampableInterface
 {

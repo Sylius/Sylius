@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Twig;
 
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Model\RepositoryInterface;
 use Symfony\Component\Form\FormFactory;
 use Twig_Extension;
 use Twig_Function_Method;
