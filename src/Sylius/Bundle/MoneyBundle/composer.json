@@ -22,11 +22,9 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
-        "sylius/money-component":   "*",
-        "sylius/resource-bundle":   "1.0.*@dev",
-        "mathiasverraes/money":     "*@dev"
+        "sylius/money-component":   "1.0.*@dev",
+        "sylius/resource-bundle":   "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev",
