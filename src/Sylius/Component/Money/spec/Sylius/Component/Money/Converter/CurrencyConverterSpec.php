@@ -12,13 +12,12 @@
 namespace spec\Sylius\Component\Money\Converter;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Component\Resource\Repository\RepositoryInterface $exchangeRateRepository
-     */
-    function let($exchangeRateRepository)
+    function let(RepositoryInterface $exchangeRateRepository)
     {
         $this->beConstructedWith($exchangeRateRepository);
     }
@@ -33,10 +32,7 @@ class CurrencyConverterSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Money\Converter\CurrencyConverterInterface');
     }
 
-    /**
-     * @param \Sylius\Component\Money\Model\ExchangeRateInterface $exchangeRate
-     */
-    function it_converts_to_any_currency($exchangeRate, $exchangeRateRepository)
+    function it_converts_to_any_currency(ExchangeRateInterface $exchangeRate, $exchangeRateRepository)
     {
         $exchangeRateRepository->findOneBy(array('currency' => 'USD'))->shouldBeCalled()->willReturn($exchangeRate);
         $exchangeRate->getRate()->shouldBeCalled()->willReturn(0.76495);
