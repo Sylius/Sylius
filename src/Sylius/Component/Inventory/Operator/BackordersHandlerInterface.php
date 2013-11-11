@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Operator;
+namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * Backorders handler interface.
@@ -31,7 +31,7 @@ interface BackordersHandlerInterface
     /**
      * Update backordered inventory units if quantity is sufficient.
      *
-     * @param StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     public function fillBackorders(StockableInterface $stockable);
 }
