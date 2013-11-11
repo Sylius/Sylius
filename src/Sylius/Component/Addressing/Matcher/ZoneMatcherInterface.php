@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Matcher;
+namespace Sylius\Component\Addressing\Matcher;
 
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * Zone matcher interface.
