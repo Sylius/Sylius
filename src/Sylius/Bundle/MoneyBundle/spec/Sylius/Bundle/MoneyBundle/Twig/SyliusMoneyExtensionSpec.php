@@ -12,17 +12,15 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusMoneyExtensionSpec extends ObjectBehavior
 {
-    /**
-     * @param \Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface     $currencyContext
-     * @param \Sylius\Component\Money\Converter\CurrencyConverterInterface $converter
-     */
-    function let($currencyContext, $converter)
+    function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
     {
         $this->beConstructedWith($currencyContext, $converter, 'en');
     }
