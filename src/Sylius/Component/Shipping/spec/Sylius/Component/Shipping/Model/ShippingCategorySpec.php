@@ -20,12 +20,12 @@ class ShippingCategorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Model\ShippingCategory');
+        $this->shouldHaveType('Sylius\Component\Shipping\Model\ShippingCategory');
     }
 
     function it_implements_Sylius_shipping_category_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippingCategoryInterface');
     }
 
     function it_has_no_id_by_default()

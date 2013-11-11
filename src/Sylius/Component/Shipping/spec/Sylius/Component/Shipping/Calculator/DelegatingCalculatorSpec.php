@@ -30,12 +30,12 @@ class DelegatingCalculatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculator');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\DelegatingCalculator');
     }
 
     function it_implements_Sylius_delegating_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface');
     }
 
     function it_should_complain_if_shipment_has_no_method_defined(ShipmentInterface $shipment)
@@ -43,7 +43,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $shipment->getMethod()->willReturn(null);
 
         $this
-            ->shouldThrow('Sylius\Bundle\ShippingBundle\Calculator\UndefinedShippingMethodException')
+            ->shouldThrow('Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException')
             ->duringCalculate($shipment)
         ;
     }

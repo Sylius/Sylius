@@ -20,7 +20,7 @@ class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\UndefinedShippingMethodException');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException');
     }
 
     function it_is_an_exception()
