@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Model;
+namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
 

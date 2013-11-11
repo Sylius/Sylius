@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Matcher;
+namespace Sylius\Component\Addressing\Matcher;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
  * Default zone matcher.
