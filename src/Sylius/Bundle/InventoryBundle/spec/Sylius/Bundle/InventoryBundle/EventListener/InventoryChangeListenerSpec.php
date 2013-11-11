@@ -19,7 +19,7 @@ use PhpSpec\ObjectBehavior;
 class InventoryChangeListenerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface $backordersHandler
+     * @param \Sylius\Component\Inventory\Operator\BackordersHandlerInterface $backordersHandler
      */
     function let($backordersHandler)
     {
@@ -37,8 +37,8 @@ class InventoryChangeListenerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent         $event
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param \Symfony\Component\EventDispatcher\GenericEvent         $event
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_fills_backorders_on_inventory_change($backordersHandler, $event, $stockable)
     {

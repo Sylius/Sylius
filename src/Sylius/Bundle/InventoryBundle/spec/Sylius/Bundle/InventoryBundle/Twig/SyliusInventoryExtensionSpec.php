@@ -19,7 +19,7 @@ use PhpSpec\ObjectBehavior;
 class SyliusInventoryExtensionSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $checker
+     * @param \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $checker
      */
     function let($checker)
     {
@@ -37,7 +37,7 @@ class SyliusInventoryExtensionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_delegates_the_stock_availability_checking_to_the_checker($checker, $stockable)
     {
@@ -47,7 +47,7 @@ class SyliusInventoryExtensionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param \Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_delegates_the_stock_sufficiency_checking_to_the_checker($checker, $stockable)
     {
