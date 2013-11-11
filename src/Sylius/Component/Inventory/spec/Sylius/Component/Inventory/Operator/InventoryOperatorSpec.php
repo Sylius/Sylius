@@ -41,7 +41,7 @@ class InventoryOperatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     * @param Sylius\Component\Inventory\Model\StockableInterface $stockable
      */
     function it_increases_stockable_on_hand($stockable)
     {
@@ -52,9 +52,9 @@ class InventoryOperatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
      */
     function it_decreases_stockable_on_hand_by_count_of_sold_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2)
     {
@@ -74,10 +74,10 @@ class InventoryOperatorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      */
     function it_decreases_stockable_on_hand_and_ignores_backordered_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
     {

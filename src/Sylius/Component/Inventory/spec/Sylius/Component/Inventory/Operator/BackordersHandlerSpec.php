@@ -41,10 +41,10 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      */
     function it_backorders_units_if_quantity_is_greater_than_on_hand($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
     {
@@ -62,10 +62,10 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable1
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable1
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable2
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
      */
     function it_complains_if_inventory_units_contain_different_stockables($stockable1, $stockable2, $inventoryUnit1, $inventoryUnit2)
     {
@@ -81,9 +81,9 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
      * @param Doctrine\Common\Persistence\ObjectRepository               $repository
      */
     function it_partially_fills_backordered_units_if_not_enough_in_stock($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
@@ -111,10 +111,10 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit3
      * @param Doctrine\Common\Persistence\ObjectRepository               $repository
      */
     function it_fills_all_backordered_units_if_enough_in_stock($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3, $repository)
@@ -143,9 +143,9 @@ class BackordersHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
+     * @param Sylius\Component\Inventory\Model\StockableInterface     $stockable
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit1
+     * @param Sylius\Component\Inventory\Model\InventoryUnitInterface $inventoryUnit2
      * @param Doctrine\Common\Persistence\ObjectRepository               $repository
      */
     function it_partially_fills_backordered_units_and_updates_stock_accordingly($stockable, $inventoryUnit1, $inventoryUnit2, $repository)
