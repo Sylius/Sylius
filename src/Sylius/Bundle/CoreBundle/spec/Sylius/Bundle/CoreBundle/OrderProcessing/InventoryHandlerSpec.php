@@ -22,7 +22,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Component\Inventory\Operator\InventoryOperatorInterface $inventoryOperator
-     * @param Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory        $inventoryUnitFactory
+     * @param Sylius\Component\Inventory\Factory\InventoryUnitFactory        $inventoryUnitFactory
      */
     function let($inventoryOperator, $inventoryUnitFactory)
     {

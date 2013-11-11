@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\InventoryBundle\Checker\Sylius;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
