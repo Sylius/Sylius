@@ -13,10 +13,10 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator;
-use Sylius\Bundle\ShippingBundle\Calculator\PerItemRateCalculator;
-use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
+use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;

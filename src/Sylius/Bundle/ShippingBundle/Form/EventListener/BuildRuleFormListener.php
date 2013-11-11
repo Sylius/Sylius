@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
-use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
 class BuildRuleFormListener implements EventSubscriberInterface
 {
     /**
-     * @var RuleCheckerRegistryInterface
+     * @var \Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface
      */
     private $checkerRegistry;
 
