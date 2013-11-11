@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\MoneyBundle\Model;
+namespace Sylius\Component\Money\Model;
 
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 use Symfony\Component\Intl\Intl;
 
 class ExchangeRate implements ExchangeRateInterface
