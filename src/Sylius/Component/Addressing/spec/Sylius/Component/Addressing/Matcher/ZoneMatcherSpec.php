@@ -12,17 +12,22 @@
 namespace spec\Sylius\Component\Addressing\Matcher;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberCountry;
+use Sylius\Component\Addressing\Model\ZoneMemberProvince;
+use Sylius\Component\Addressing\Model\ZoneMemberZone;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class ZoneMatcherSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository $repository
-     */
-    function let($repository)
+
+    function let(EntityRepository $repository)
     {
         $this->beConstructedWith($repository);
     }
@@ -37,22 +42,13 @@ class ZoneMatcherSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Addressing\Matcher\ZoneMatcherInterface');
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\AddressInterface $address
-     */
-    function it_returns_null_if_there_are_no_zones($repository, $address)
+    function it_returns_null_if_there_are_no_zones($repository, AddressInterface $address)
     {
         $repository->findAll()->willReturn(array());
         $this->match($address)->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ProvinceInterface  $province
-     * @param Sylius\Component\Addressing\Model\AddressInterface   $address
-     * @param Sylius\Component\Addressing\Model\ZoneMemberProvince $memberProvince
-     * @param Sylius\Component\Addressing\Model\ZoneInterface      $zone
-     */
-    function it_should_match_address_by_province($repository, $province, $address, $memberProvince, $zone)
+    function it_should_match_address_by_province($repository, ProvinceInterface $province, AddressInterface $address, ZoneMemberProvince $memberProvince, ZoneInterface $zone)
     {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
         $address->getProvince()->shouldBeCalled()->willReturn($province);
@@ -64,13 +60,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zone);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\CountryInterface  $country
-     * @param Sylius\Component\Addressing\Model\AddressInterface  $address
-     * @param Sylius\Component\Addressing\Model\ZoneMemberCountry $memberCountry
-     * @param Sylius\Component\Addressing\Model\ZoneInterface     $zone
-     */
-    function it_should_match_address_by_country($repository, $country, $address, $memberCountry, $zone)
+    function it_should_match_address_by_country($repository, CountryInterface $country, AddressInterface $address, ZoneMemberCountry $memberCountry, ZoneInterface $zone)
     {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
         $address->getCountry()->shouldBeCalled()->willReturn($country);
@@ -82,15 +72,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zone);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\CountryInterface  $country
-     * @param Sylius\Component\Addressing\Model\AddressInterface  $address
-     * @param Sylius\Component\Addressing\Model\ZoneMemberCountry $memberCountry
-     * @param Sylius\Component\Addressing\Model\ZoneInterface     $subZone
-     * @param Sylius\Component\Addressing\Model\ZoneMemberZone    $memberZone
-     * @param Sylius\Component\Addressing\Model\ZoneInterface     $rootZone
-     */
-    function it_should_match_address_for_nested_zones($repository, $country, $address, $memberCountry, $subZone, $memberZone, $rootZone)
+    function it_should_match_address_for_nested_zones($repository, CountryInterface $country, AddressInterface $address, ZoneMemberCountry $memberCountry, ZoneInterface $subZone, ZoneMemberZone $memberZone, ZoneInterface $rootZone)
     {
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
@@ -107,17 +89,8 @@ class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($rootZone);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ProvinceInterface  $province
-     * @param Sylius\Component\Addressing\Model\CountryInterface   $country
-     * @param Sylius\Component\Addressing\Model\AddressInterface   $address
-     * @param Sylius\Component\Addressing\Model\ZoneMemberCountry  $memberCountry
-     * @param Sylius\Component\Addressing\Model\ZoneMemberProvince $memberProvince
-     * @param Sylius\Component\Addressing\Model\ZoneInterface      $zoneCountry
-     * @param Sylius\Component\Addressing\Model\ZoneInterface      $zoneProvince
-     */
     function it_should_match_address_from_province_when_many_are_found(
-        $repository, $country, $province, $address, $memberCountry, $memberProvince, $zoneCountry, $zoneProvince
+        $repository, CountryInterface $country, ProvinceInterface $province, AddressInterface $address, ZoneMemberCountry $memberCountry, ZoneMemberProvince $memberProvince, ZoneInterface $zoneCountry, ZoneInterface $zoneProvince
     )
     {
         $address->getProvince()->willReturn($province);
@@ -137,13 +110,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zoneProvince);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\CountryInterface  $country
-     * @param Sylius\Component\Addressing\Model\AddressInterface  $address
-     * @param Sylius\Component\Addressing\Model\ZoneMemberCountry $memberCountry
-     * @param Sylius\Component\Addressing\Model\ZoneInterface     $zoneCountry
-     */
-    function it_should_match_all_zones_when_one_zone_for_address_is_defined($repository, $country, $address, $memberCountry, $zoneCountry)
+    function it_should_match_all_zones_when_one_zone_for_address_is_defined($repository, CountryInterface $country, AddressInterface $address, ZoneMemberCountry $memberCountry, ZoneInterface $zoneCountry)
     {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry));
         $address->getCountry()->shouldBeCalled()->willReturn($country);

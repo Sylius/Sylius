@@ -11,17 +11,17 @@
 
 namespace spec\Sylius\Bundle\AddressingBundle\Form\DataTransformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ZoneToIdentifierTransformerSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $zoneRepository
-     */
-    function let($zoneRepository)
+
+    function let(ObjectRepository $zoneRepository)
     {
         $this->beConstructedWith($zoneRepository, 'name');
     }
@@ -46,10 +46,7 @@ class ZoneToIdentifierTransformerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
-     */
-    function it_should_transform_zone_into_its_identifier_value($zone)
+    function it_should_transform_zone_into_its_identifier_value(ZoneInterface $zone)
     {
         $zone->getName()->willReturn('EU');
 
@@ -72,10 +69,7 @@ class ZoneToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform('EU')->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
-     */
-    function it_should_zone_if_found_on_reverse_transform($zoneRepository, $zone)
+    function it_should_zone_if_found_on_reverse_transform(ZoneInterface $zoneRepository, $zone)
     {
         $zoneRepository
             ->findOneBy(array('name' => 'EU'))
