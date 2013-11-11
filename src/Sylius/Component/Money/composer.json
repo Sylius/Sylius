@@ -22,15 +22,11 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.3",
-        "symfony/intl":             "~2.3",
-        "sylius/resource-bundle":   "1.0.*@dev",
-        "mathiasverraes/money":     "*@dev"
+        "sylius/resource-component": "1.0.*@dev",
+        "mathiasverraes/money":      "*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
-        "twig/twig":       "~1.0",
-        "symfony/form":    "~2.3"
+        "phpspec/phpspec": "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"
