@@ -19,8 +19,8 @@ use PhpSpec\ObjectBehavior;
 class SyliusMoneyExtensionSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface     $currencyContext
-     * @param Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface $converter
+     * @param \Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface     $currencyContext
+     * @param \Sylius\Component\Money\Converter\CurrencyConverterInterface $converter
      */
     function let($currencyContext, $converter)
     {

@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\MoneyBundle\Converter;
+namespace Sylius\Component\Money\Converter;
 
+use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 class CurrencyConverter implements CurrencyConverterInterface

@@ -1,0 +1,47 @@
+{
+    "name": "sylius/money-component",
+    "type": "library",
+    "description": "Currencies and money formatting engine bundle for PHP applications.",
+    "keywords": ["cash", "currency", "money", "currencies"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                      ">=5.3.3",
+
+        "symfony/framework-bundle": "~2.3",
+        "symfony/intl":             "~2.3",
+        "sylius/resource-bundle":   "1.0.*@dev",
+        "mathiasverraes/money":     "*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev",
+        "twig/twig":       "~1.0",
+        "symfony/form":    "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Component\\Money\\": "" }
+    },
+    "target-dir": "Sylius/Component/Money",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
