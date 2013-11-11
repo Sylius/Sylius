@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Model;
+namespace spec\Sylius\Component\Money\Model;
 
 use PhpSpec\ObjectBehavior;
 

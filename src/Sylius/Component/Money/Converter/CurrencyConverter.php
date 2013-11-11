@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\MoneyBundle\Converter;
+namespace Sylius\Component\Money\Converter;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

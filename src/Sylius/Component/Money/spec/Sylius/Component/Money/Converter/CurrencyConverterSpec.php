@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Converter;
+namespace spec\Sylius\Component\Money\Converter;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\MoneyBundle\Converter\Sylius;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
