@@ -39,7 +39,7 @@ class TaxRateSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
+     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
      */
     function it_should_allow_defining_zone($zone)
     {
