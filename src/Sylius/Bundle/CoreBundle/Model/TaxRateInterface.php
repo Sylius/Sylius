@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface as BaseTaxRateInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface as BaseTaxRateInterface;
 
 /**
  * Tax rate interface.

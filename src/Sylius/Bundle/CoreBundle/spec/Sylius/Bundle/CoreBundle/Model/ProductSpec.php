@@ -85,7 +85,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_implements_Sylius_taxable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxableInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxableInterface');
     }
 
     function it_does_not_have_tax_category_by_default()
@@ -94,7 +94,7 @@ class ProductSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface $taxCategory
+     * @param Sylius\Component\Taxation\Model\TaxCategoryInterface $taxCategory
      */
     function it_allows_setting_the_tax_category($taxCategory)
     {
@@ -103,7 +103,7 @@ class ProductSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface $taxCategory
+     * @param Sylius\Component\Taxation\Model\TaxCategoryInterface $taxCategory
      */
     function it_allows_resetting_the_tax_category($taxCategory)
     {
