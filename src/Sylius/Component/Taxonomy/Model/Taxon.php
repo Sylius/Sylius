@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxonomiesBundle\Model;
+namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * Model for taxons.

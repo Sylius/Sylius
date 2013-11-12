@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxonomiesBundle\Model;
+namespace Sylius\Component\Taxonomy\Model;
 
 /**
  * Taxonomy model interface.
