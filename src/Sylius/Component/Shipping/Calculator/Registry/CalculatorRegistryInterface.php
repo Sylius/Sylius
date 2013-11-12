@@ -31,7 +31,7 @@ interface CalculatorRegistryInterface
      * Register calculator under given name.
      *
      * @param string              $name
-     * @param \Sylius\Component\Shipping\Calculator\CalculatorInterface $calculator
+     * @param CalculatorInterface $calculator
      */
     public function registerCalculator($name, CalculatorInterface $calculator);
 

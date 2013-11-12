@@ -125,7 +125,7 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      *
      * @param ShippingCategoryInterface $category
      */
-    public function setShippingCategory(\Sylius\Component\Shipping\Model\ShippingCategoryInterface $category = null);
+    public function setShippingCategory(ShippingCategoryInterface $category = null);
 
     /**
      * Get all product images.

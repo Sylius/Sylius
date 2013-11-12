@@ -40,7 +40,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
      * Constructor.
      *
      * @param RepositoryInterface           $adjustmentRepository
-     * @param \Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface $calculator
+     * @param DelegatingCalculatorInterface $calculator
      */
     public function __construct(RepositoryInterface $adjustmentRepository, DelegatingCalculatorInterface $calculator)
     {

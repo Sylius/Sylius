@@ -38,13 +38,13 @@ class ShipmentSpec extends ObjectBehavior
 
     function it_has_ready_state_by_default()
     {
-        $this->getState()->shouldReturn(\Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CHECKOUT);
+        $this->getState()->shouldReturn(ShipmentInterface::STATE_CHECKOUT);
     }
 
     function its_state_is_mutable()
     {
-        $this->setState(\Sylius\Component\Shipping\Model\ShipmentInterface::STATE_PENDING);
-        $this->getState()->shouldReturn(\Sylius\Component\Shipping\Model\ShipmentInterface::STATE_PENDING);
+        $this->setState(ShipmentInterface::STATE_PENDING);
+        $this->getState()->shouldReturn(ShipmentInterface::STATE_PENDING);
     }
 
     function it_has_no_shipping_method_by_default()
@@ -52,7 +52,7 @@ class ShipmentSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    function its_shipping_method_is_mutable(\Sylius\Component\Shipping\Model\ShippingMethodInterface $shippingMethod)
+    function its_shipping_method_is_mutable(ShippingMethodInterface $shippingMethod)
     {
         $this->setMethod($shippingMethod);
         $this->getMethod()->shouldReturn($shippingMethod);
@@ -63,7 +63,7 @@ class ShipmentSpec extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_items(\Sylius\Component\Shipping\Model\ShipmentItemInterface $shipmentItem)
+    function it_adds_items(ShipmentItemInterface $shipmentItem)
     {
         $this->hasItem($shipmentItem)->shouldReturn(false);
 
@@ -73,7 +73,7 @@ class ShipmentSpec extends ObjectBehavior
         $this->hasItem($shipmentItem)->shouldReturn(true);
     }
 
-    function it_removes_item(\Sylius\Component\Shipping\Model\ShipmentItemInterface $shipmentItem)
+    function it_removes_item(ShipmentItemInterface $shipmentItem)
     {
         $this->hasItem($shipmentItem)->shouldReturn(false);
 

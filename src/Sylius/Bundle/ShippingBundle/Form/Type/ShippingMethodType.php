@@ -45,7 +45,7 @@ class ShippingMethodType extends AbstractType
     /**
      * Calculator registry.
      *
-     * @var \Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface
+     * @var CalculatorRegistryInterface
      */
     protected $calculatorRegistry;
 

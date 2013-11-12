@@ -33,7 +33,7 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
     /**
      * Constructor.
      *
-     * @param \Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface $registry
+     * @param RuleCheckerRegistryInterface $registry
      */
     public function __construct(RuleCheckerRegistryInterface $registry)
     {

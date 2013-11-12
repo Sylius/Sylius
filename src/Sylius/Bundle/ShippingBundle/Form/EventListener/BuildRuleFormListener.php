@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
 class BuildRuleFormListener implements EventSubscriberInterface
 {
     /**
-     * @var \Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface
+     * @var RuleCheckerRegistryInterface
      */
     private $checkerRegistry;
 

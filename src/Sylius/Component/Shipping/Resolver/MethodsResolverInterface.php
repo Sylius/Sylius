@@ -27,7 +27,7 @@ interface MethodsResolverInterface
      * @param ShippingSubjectInterface $subject
      * @param array                    $criteria
      *
-     * @return \Sylius\Component\Shipping\Model\ShippingMethodInterface[]
+     * @return ShippingMethodInterface[]
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject, array $criteria = array());
 }

@@ -24,8 +24,8 @@ interface ShippingMethodEligibilityCheckerInterface
     /**
      * Check if given shipping method supports the concrete subject.
      *
-     * @param \Sylius\Component\Shipping\Model\ShippingSubjectInterface $subject
-     * @param \Sylius\Component\Shipping\Model\ShippingMethodInterface  $method
+     * @param ShippingSubjectInterface $subject
+     * @param ShippingMethodInterface  $method
      *
      * @return Boolean
      */
