@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Model;
+namespace Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\VariableProduct\Model\OptionInterface;
+use Sylius\Component\VariableProduct\Model\OptionValueInterface;
 
 /**
  * Product option default implementation.

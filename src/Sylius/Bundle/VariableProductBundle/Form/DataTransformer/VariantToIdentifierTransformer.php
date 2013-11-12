@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\VariableProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 

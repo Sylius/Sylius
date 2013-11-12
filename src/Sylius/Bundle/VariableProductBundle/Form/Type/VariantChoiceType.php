@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\VariableProductBundle\Form\Type;
 
 use Sylius\Bundle\VariableProductBundle\Form\ChoiceList\VariantChoiceList;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

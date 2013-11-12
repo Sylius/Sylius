@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Model;
+namespace Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ProductBundle\Model\Prototype as BasePrototype;
+use Sylius\Component\VariableProduct\Model\PrototypeInterface;
+use Sylius\Component\VariableProduct\Model\OptionInterface;
 
 /**
  * Prototype with options support.

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\VariableProductBundle\Model;
+namespace spec\Sylius\Component\VariableProduct\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
+use Sylius\Component\VariableProduct\Model\OptionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
