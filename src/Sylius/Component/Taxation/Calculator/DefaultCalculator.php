@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxationBundle\Calculator;
+namespace Sylius\Component\Taxation\Calculator;
 
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 
 /**
  * Default tax calculator.

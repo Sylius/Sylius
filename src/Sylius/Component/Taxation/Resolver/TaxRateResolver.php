@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxationBundle\Resolver;
+namespace Sylius\Component\Taxation\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
 
 /**
  * Default tax rate resolver.

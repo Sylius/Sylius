@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Model;
+namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
 

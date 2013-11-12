@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxationBundle\Model;
+namespace Sylius\Component\Taxation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * Tax category model.
