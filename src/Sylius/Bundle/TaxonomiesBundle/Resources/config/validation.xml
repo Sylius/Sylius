@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy">
+    <class name="Sylius\Component\Taxonomy\Model\Taxonomy">
         <getter property="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.taxonomy.name.not_blank</option>
@@ -30,7 +30,7 @@
         </getter>
     </class>
 
-    <class name="Sylius\Bundle\TaxonomiesBundle\Model\Taxon">
+    <class name="Sylius\Component\Taxonomy\Model\Taxon">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.taxon.name.not_blank</option>
