@@ -11,17 +11,17 @@
 
 namespace spec\Sylius\Bundle\VariableProductBundle\Form\DataTransformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class VariantToIdentifierTransformerSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $variantRepository
-     */
-    function let($variantRepository)
+
+    function let(ObjectRepository $variantRepository)
     {
         $this->beConstructedWith($variantRepository, 'presentation');
     }
@@ -46,10 +46,7 @@ class VariantToIdentifierTransformerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
-     */
-    function it_transforms_variant_into_its_identifier_value($variant)
+    function it_transforms_variant_into_its_identifier_value(VariantInterface $variant)
     {
         $variant->getPresentation()->willReturn('IPHONE5BLACK');
 
@@ -72,10 +69,7 @@ class VariantToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform('IPHONE5WHITE')->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
-     */
-    function it_returns_variant_if_found_on_reverse_transform($variantRepository, $variant)
+    function it_returns_variant_if_found_on_reverse_transform(VariantInterface $variantRepository, $variant)
     {
         $variantRepository
             ->findOneBy(array('presentation' => 'IPHONE5BLACK'))

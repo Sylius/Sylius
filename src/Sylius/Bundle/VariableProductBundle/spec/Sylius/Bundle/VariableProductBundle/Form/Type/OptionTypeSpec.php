@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\VariableProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -34,10 +36,7 @@ class OptionTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_name_and_presentation_and_values_fields($builder)
+    function it_builds_form_with_name_and_presentation_and_values_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::any())
@@ -60,10 +59,7 @@ class OptionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_defines_assigned_data_class_and_validation_groups($resolver)
+    function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'Option', 'validation_groups' => array()))->shouldBeCalled();
 
