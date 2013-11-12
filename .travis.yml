@@ -64,7 +64,7 @@ script:
     - cd ../PaymentsBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../PayumBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../ProductBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../PromotionsBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../PromotionBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../ResourceBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../SettingsBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../ShippingBundle; ../../../../bin/phpspec run -fpretty --verbose

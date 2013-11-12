@@ -15,7 +15,7 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
+use Sylius\Bundle\PromotionBundle\Repository\PromotionRepositoryInterface;
 
 /**
  * Process all active promotions.
