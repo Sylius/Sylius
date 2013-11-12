@@ -97,7 +97,7 @@ class CouponController extends ResourceController
     /**
      * Get coupon code generator.
      *
-     * @return \Sylius\Component\Promotion\Generator\CouponGeneratorInterface
+     * @return CouponGeneratorInterface
      */
     protected function getGenerator()
     {

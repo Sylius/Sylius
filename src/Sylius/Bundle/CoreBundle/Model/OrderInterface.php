@@ -23,7 +23,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends CartInterface, \Sylius\Component\Promotion\Model\PromotionSubjectInterface
+interface OrderInterface extends CartInterface, PromotionSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
@@ -238,7 +238,7 @@ interface OrderInterface extends CartInterface, \Sylius\Component\Promotion\Mode
     /**
      * Set promotion coupon.
      *
-     * @param \Sylius\Component\Promotion\Model\CouponInterface $coupon
+     * @param CouponInterface $coupon
      */
     public function setPromotionCoupon(CouponInterface $coupon = null);
 

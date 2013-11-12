@@ -28,7 +28,7 @@ interface PromotionActionInterface
     /**
      * Applies the promotion to its subject.
      *
-     * @param \Sylius\Component\Promotion\Model\PromotionSubjectInterface $subject
+     * @param PromotionSubjectInterface $subject
      * @param array $configuration
      * @return mixed
      */

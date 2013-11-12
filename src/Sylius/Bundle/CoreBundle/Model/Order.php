@@ -78,7 +78,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotion coupon
      *
-     * @var \Sylius\Component\Promotion\Model\CouponInterface
+     * @var CouponInterface
      */
     protected $promotionCoupon;
 
