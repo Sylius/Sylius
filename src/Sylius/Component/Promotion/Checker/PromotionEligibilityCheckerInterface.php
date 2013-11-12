@@ -22,8 +22,8 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 interface PromotionEligibilityCheckerInterface
 {
     /**
-     * @param \Sylius\Component\Promotion\Model\PromotionSubjectInterface $subject
-     * @param \Sylius\Component\Promotion\Model\PromotionInterface        $promotion
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
      *
      * @return Boolean
      */

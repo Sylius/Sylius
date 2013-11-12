@@ -59,7 +59,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible(
-        $registry, \Sylius\Component\Promotion\Checker\RuleCheckerInterface $checker, PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule
+        $registry, RuleCheckerInterface $checker, PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule
     )
     {
         $promotion->getStartsAt()->willReturn(null);

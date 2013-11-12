@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class FixedDiscountAction implements \Sylius\Component\Promotion\Action\PromotionActionInterface
+class FixedDiscountAction implements PromotionActionInterface
 {
     /**
      * Adjustment repository.

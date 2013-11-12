@@ -24,7 +24,7 @@ interface PromotionRepositoryInterface extends RepositoryInterface
     /**
      * Finds all active promotions.
      *
-     * @return \Sylius\Component\Promotion\Model\PromotionInterface[]
+     * @return PromotionInterface[]
      */
     public function findActive();
 }

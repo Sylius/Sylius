@@ -81,7 +81,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     /**
      * Checks is a promotion is eligible to a subject for a given rule.
      *
-     * @param \Sylius\Component\Promotion\Model\PromotionSubjectInterface $subject
+     * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      * @param RuleInterface             $rule
      *
@@ -105,7 +105,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     /**
      * Checks if the current is between promotion limits.
      *
-     * @param \Sylius\Component\Promotion\Model\PromotionInterface $promotion
+     * @param PromotionInterface $promotion
      *
      * @return bool
      */
@@ -131,7 +131,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     /**
      * Checks if promotion usage limit has been reached.
      *
-     * @param \Sylius\Component\Promotion\Model\PromotionInterface $promotion
+     * @param PromotionInterface $promotion
      *
      * @return bool
      */
@@ -150,7 +150,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     /**
      * Checks if subject's is eligible to promotion coupon.
      *
-     * @param \Sylius\Component\Promotion\Model\PromotionSubjectInterface $subject
+     * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
      * @return bool
@@ -173,8 +173,8 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     /**
      * Checks is subject's coupon is eligible to promotion.
      *
-     * @param \Sylius\Component\Promotion\Model\PromotionSubjectInterface $subject
-     * @param \Sylius\Component\Promotion\Model\PromotionInterface        $promotion
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
      *
      * @return bool
      */

@@ -45,7 +45,7 @@ class OrderPromotionListener
     /**
      * Constructor.
      *
-     * @param \Sylius\Component\Promotion\Processor\PromotionProcessorInterface $promotionProcessor
+     * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
      */
