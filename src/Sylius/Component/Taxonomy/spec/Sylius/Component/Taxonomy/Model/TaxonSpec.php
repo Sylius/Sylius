@@ -22,12 +22,12 @@ class TaxonSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomiesBundle\Model\Taxon');
+        $this->shouldHaveType('Sylius\Component\Taxonomy\Model\Taxon');
     }
 
     function it_implements_Sylius_taxon_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface');
+        $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonInterface');
     }
 
     function it_has_no_id_by_default()
