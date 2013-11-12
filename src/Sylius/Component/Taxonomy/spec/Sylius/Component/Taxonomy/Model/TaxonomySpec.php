@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxonomiesBundle\Model;
+namespace spec\Sylius\Component\Taxonomy\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
