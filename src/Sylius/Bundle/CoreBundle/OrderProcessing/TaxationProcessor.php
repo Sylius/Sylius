@@ -15,8 +15,8 @@ use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
-use Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * Taxation processor.

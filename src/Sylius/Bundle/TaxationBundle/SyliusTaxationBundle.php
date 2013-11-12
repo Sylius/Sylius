@@ -43,15 +43,15 @@ class SyliusTaxationBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
-            'Sylius\Bundle\TaxationBundle\Model\TaxRateInterface'     => 'sylius.model.tax_rate.class',
+            'Sylius\Component\Taxation\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
+            'Sylius\Component\Taxation\Model\TaxRateInterface'     => 'sylius.model.tax_rate.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxation', $interfaces));
         $container->addCompilerPass(new RegisterCalculatorsPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxationBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Taxation\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxation.driver.doctrine/orm'));
