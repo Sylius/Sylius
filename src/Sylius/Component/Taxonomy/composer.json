@@ -1,7 +1,7 @@
 {
-    "name": "sylius/taxonomies-bundle",
+    "name": "sylius/taxonomy-component",
     "type": "symfony-bundle",
-    "description": "Flexible categorization system for Symfony2.",
+    "description": "Flexible categorization system for PHP applications.",
     "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",
@@ -22,23 +22,18 @@
     "require": {
         "php":                             ">=5.3.3",
 
-        "sylius/resource-bundle":          "1.0.*@dev",
-        "sylius/taxonomy-component":       "1.0.*@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*"
+        "sylius/resource-component":        "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":    "2.0.*@dev",
-        "doctrine/orm":       "~2.2",
-        "symfony/form":       "~2.3",
-        "symfony/validator":  "~2.3"
+        "phpspec/phpspec":    "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\TaxonomiesBundle\\": "" }
+        "psr-0": { "Sylius\\Component\\Taxonomy\\": "" }
     },
-    "target-dir": "Sylius/Bundle/TaxonomiesBundle",
+    "target-dir": "Sylius/Component/Taxonomy",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
