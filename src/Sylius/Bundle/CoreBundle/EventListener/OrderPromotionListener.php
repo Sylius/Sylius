@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
-use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
+use Sylius\Bundle\PromotionBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;

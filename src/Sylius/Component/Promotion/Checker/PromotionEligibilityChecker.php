@@ -16,7 +16,7 @@ use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
-use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
+use Sylius\Bundle\PromotionBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
