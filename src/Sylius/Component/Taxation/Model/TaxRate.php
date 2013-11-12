@@ -13,7 +13,6 @@ namespace Sylius\Component\Taxation\Model;
 
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * Tax rate model.
