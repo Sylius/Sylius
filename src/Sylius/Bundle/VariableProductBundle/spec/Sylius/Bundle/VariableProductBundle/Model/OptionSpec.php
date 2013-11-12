@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\VariableProductBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -66,10 +67,7 @@ class OptionSpec extends ObjectBehavior
         $this->getValues()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface $value
-     */
-    function it_should_add_value($value)
+    function it_should_add_value(OptionValueInterface $value)
     {
         $value->setOption($this)->shouldBeCalled();
 
@@ -77,10 +75,7 @@ class OptionSpec extends ObjectBehavior
         $this->hasValue($value)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface $value
-     */
-    function it_should_remove_value($value)
+    function it_should_remove_value(OptionValueInterface $value)
     {
         $value->setOption($this)->shouldBeCalled();
 
