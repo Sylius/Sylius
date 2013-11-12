@@ -56,7 +56,7 @@ class VariantChoiceType extends AbstractType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => array('Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface')
+                'product' => array('Sylius\Component\VariableProduct\Model\VariableProductInterface')
             ))
         ;
     }

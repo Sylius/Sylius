@@ -51,11 +51,11 @@ class SyliusVariableProductExtension extends SyliusResourceExtension implements 
         $container->prependExtensionConfig('sylius_product', array(
             'classes' => array(
                 'product' => array(
-                    'model' => 'Sylius\Bundle\VariableProductBundle\Model\VariableProduct',
+                    'model' => 'Sylius\Component\VariableProduct\Model\VariableProduct',
                     'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType'
                 ),
                 'prototype' => array(
-                    'model' => 'Sylius\Bundle\VariableProductBundle\Model\Prototype',
+                    'model' => 'Sylius\Component\VariableProduct\Model\Prototype',
                     'form'  => 'Sylius\Bundle\VariableProductBundle\Form\Type\PrototypeType'
                 )
             ))

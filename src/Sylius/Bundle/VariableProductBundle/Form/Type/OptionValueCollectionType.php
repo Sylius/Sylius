@@ -37,13 +37,13 @@ class OptionValueCollectionType extends AbstractType
             !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)
         ) {
             throw new FormException(
-                'array or (\Traversable and \ArrayAccess) of "Sylius\Bundle\VariableProductBundle\Model\OptionInterface" must be passed to collection'
+                'array or (\Traversable and \ArrayAccess) of "Sylius\Component\VariableProduct\Model\OptionInterface" must be passed to collection'
             );
         }
 
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof OptionInterface) {
-                throw new FormException('Each object passed as option list must implement "Sylius\Bundle\VariableProductBundle\Model\OptionInterface"');
+                throw new FormException('Each object passed as option list must implement "Sylius\Component\VariableProduct\Model\OptionInterface"');
             }
 
             $builder->add((string) $i, 'sylius_option_value_choice', array(

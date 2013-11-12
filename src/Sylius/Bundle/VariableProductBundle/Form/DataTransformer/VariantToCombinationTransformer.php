@@ -50,7 +50,7 @@ class VariantToCombinationTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Component\VariableProduct\Model\VariantInterface');
         }
 
         return $value->getOptions();
