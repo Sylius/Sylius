@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\VariableProductBundle\Validator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

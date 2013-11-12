@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\VariableProductBundle\Model;
+namespace spec\Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\VariableProduct\Model\OptionInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

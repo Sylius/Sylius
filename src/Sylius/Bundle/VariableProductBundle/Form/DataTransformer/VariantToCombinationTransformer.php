@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\DataTransformer;
 
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
