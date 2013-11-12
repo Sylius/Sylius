@@ -21,12 +21,12 @@ class OptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\Option');
+        $this->shouldHaveType('Sylius\Component\VariableProduct\Model\Option');
     }
 
     function it_implement_Sylius_option_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\VariableProductBundle\Model\OptionInterface');
+        $this->shouldImplement('Sylius\Component\VariableProduct\Model\OptionInterface');
     }
 
     function it_should_not_have_id_by_default()

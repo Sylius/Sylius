@@ -23,12 +23,12 @@ class VariableProductSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\VariableProduct');
+        $this->shouldHaveType('Sylius\Component\VariableProduct\Model\VariableProduct');
     }
 
     function it_is_a_Sylius_customizable_product()
     {
-        $this->shouldImplement('Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface');
+        $this->shouldImplement('Sylius\Component\VariableProduct\Model\VariableProductInterface');
     }
 
     function it_should_not_have_master_variant_by_default()

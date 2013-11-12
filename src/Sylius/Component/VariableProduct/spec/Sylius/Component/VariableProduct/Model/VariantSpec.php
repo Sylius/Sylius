@@ -24,12 +24,12 @@ class VariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\Variant');
+        $this->shouldHaveType('Sylius\Component\VariableProduct\Model\Variant');
     }
 
     function it_is_a_Sylius_product_variant()
     {
-        $this->shouldImplement('Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
+        $this->shouldImplement('Sylius\Component\VariableProduct\Model\VariantInterface');
     }
 
     function it_should_not_have_id_by_default()
