@@ -68,7 +68,7 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
 
     public function __construct()
     {
-        $this->shippingState = \Sylius\Component\Shipping\Model\ShipmentItemInterface::STATE_READY;
+        $this->shippingState = ShipmentItemInterface::STATE_READY;
     }
 
     /**

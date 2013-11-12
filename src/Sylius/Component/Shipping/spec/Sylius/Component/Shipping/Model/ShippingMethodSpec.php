@@ -68,12 +68,12 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_has_match_any_category_requirement_by_default()
     {
-        $this->getCategoryRequirement()->shouldReturn(\Sylius\Component\Shipping\Model\ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
+        $this->getCategoryRequirement()->shouldReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
     }
 
     function its_category_matching_requirement_is_mutable()
     {
-        $this->setCategoryRequirement(\Sylius\Component\Shipping\Model\ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
+        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
         $this->getCategoryRequirement()->shouldReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
     }
 

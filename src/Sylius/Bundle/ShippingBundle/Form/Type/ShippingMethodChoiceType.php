@@ -33,7 +33,7 @@ class ShippingMethodChoiceType extends AbstractType
     /**
      * Supported methods resolver.
      *
-     * @var \Sylius\Component\Shipping\Resolver\MethodsResolverInterface
+     * @var MethodsResolverInterface
      */
     protected $resolver;
 

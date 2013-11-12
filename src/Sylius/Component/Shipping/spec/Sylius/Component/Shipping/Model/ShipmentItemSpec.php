@@ -41,13 +41,13 @@ class ShipmentItemSpec extends ObjectBehavior
         $this->getShipment()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_shipment(\Sylius\Component\Shipping\Model\ShipmentInterface $shipment)
+    function it_allows_assigning_itself_to_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    function it_allows_detaching_itself_from_shipment(\Sylius\Component\Shipping\Model\ShipmentInterface $shipment)
+    function it_allows_detaching_itself_from_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
@@ -69,13 +69,13 @@ class ShipmentItemSpec extends ObjectBehavior
 
     function it_has_ready_state_by_default()
     {
-        $this->getShippingState()->shouldReturn(\Sylius\Component\Shipping\Model\ShipmentItemInterface::STATE_READY);
+        $this->getShippingState()->shouldReturn(ShipmentItemInterface::STATE_READY);
     }
 
     function its_state_is_mutable()
     {
-        $this->setShippingState(\Sylius\Component\Shipping\Model\ShipmentItemInterface::STATE_PENDING);
-        $this->getShippingState()->shouldReturn(\Sylius\Component\Shipping\Model\ShipmentItemInterface::STATE_PENDING);
+        $this->setShippingState(ShipmentItemInterface::STATE_PENDING);
+        $this->getShippingState()->shouldReturn(ShipmentItemInterface::STATE_PENDING);
     }
 
     function it_initializes_creation_date_by_default()

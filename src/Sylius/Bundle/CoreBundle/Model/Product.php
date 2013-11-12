@@ -67,7 +67,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * Shipping category.
      *
-     * @var \Sylius\Component\Shipping\Model\ShippingCategoryInterface
+     * @var ShippingCategoryInterface
      */
     protected $shippingCategory;
 
@@ -225,7 +225,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingCategory(\Sylius\Component\Shipping\Model\ShippingCategoryInterface $category = null)
+    public function setShippingCategory(ShippingCategoryInterface $category = null)
     {
         $this->shippingCategory = $category;
 

@@ -42,8 +42,8 @@ class RuleSpec extends ObjectBehavior
 
     function its_type_is_mutable()
     {
-        $this->setType(\Sylius\Component\Shipping\Model\RuleInterface::TYPE_ITEM_COUNT);
-        $this->getType()->shouldReturn(\Sylius\Component\Shipping\Model\RuleInterface::TYPE_ITEM_COUNT);
+        $this->setType(RuleInterface::TYPE_ITEM_COUNT);
+        $this->getType()->shouldReturn(RuleInterface::TYPE_ITEM_COUNT);
     }
 
     function it_initializes_empty_array_for_configuration_by_default()
@@ -62,7 +62,7 @@ class RuleSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    function it_allows_to_assign_itself_to_a_shipping_method(\Sylius\Component\Shipping\Model\ShippingMethodInterface $method)
+    function it_allows_to_assign_itself_to_a_shipping_method(ShippingMethodInterface $method)
     {
         $this->setMethod($method);
         $this->getMethod()->shouldReturn($method);

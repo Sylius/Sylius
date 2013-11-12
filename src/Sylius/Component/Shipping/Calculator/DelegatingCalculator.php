@@ -27,14 +27,14 @@ class DelegatingCalculator implements DelegatingCalculatorInterface
     /**
      * Calculator registry.
      *
-     * @var \Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface
+     * @var CalculatorRegistryInterface
      */
     protected $registry;
 
     /**
      * Constructor.
      *
-     * @param \Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface $registry
+     * @param CalculatorRegistryInterface $registry
      */
     public function __construct(CalculatorRegistryInterface $registry)
     {

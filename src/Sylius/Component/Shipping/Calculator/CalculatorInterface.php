@@ -24,7 +24,7 @@ interface CalculatorInterface
     /**
      * Calculate the shipping charge for given subject and configuration.
      *
-     * @param \Sylius\Component\Shipping\Model\ShippingSubjectInterface $subject
+     * @param ShippingSubjectInterface $subject
      * @param array                    $configuration
      *
      * @return integer

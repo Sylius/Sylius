@@ -55,7 +55,7 @@ class LoadShippingData extends DataFixture
      * @param string $name
      * @param string $description
      *
-     * @return \Sylius\Component\Shipping\Model\ShippingCategoryInterface
+     * @return ShippingCategoryInterface
      */
     private function createShippingCategory($name, $description)
     {
@@ -79,7 +79,7 @@ class LoadShippingData extends DataFixture
      * @param string                    $zoneName
      * @param string                    $calculator
      * @param array                     $configuration
-     * @param \Sylius\Component\Shipping\Model\ShippingCategoryInterface $category
+     * @param ShippingCategoryInterface $category
      *
      * @return ShippingMethodInterface
      */

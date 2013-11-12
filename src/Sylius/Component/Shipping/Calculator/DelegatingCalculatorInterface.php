@@ -23,7 +23,7 @@ interface DelegatingCalculatorInterface
     /**
      * Calculate the shipping charge for given subject.
      *
-     * @param \Sylius\Component\Shipping\Model\ShippingSubjectInterface $subject
+     * @param ShippingSubjectInterface $subject
      *
      * @return integer
      */
