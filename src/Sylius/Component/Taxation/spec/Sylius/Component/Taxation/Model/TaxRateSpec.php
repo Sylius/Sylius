@@ -21,12 +21,12 @@ class TaxRateSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Model\TaxRate');
+        $this->shouldHaveType('Sylius\Component\Taxation\Model\TaxRate');
     }
 
     function it_should_implement_Sylius_tax_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxRateInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxRateInterface');
     }
 
     function it_should_not_have_id_by_default()

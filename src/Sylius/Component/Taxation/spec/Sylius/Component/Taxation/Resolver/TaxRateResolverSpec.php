@@ -30,12 +30,12 @@ class TaxRateResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver');
+        $this->shouldHaveType('Sylius\Component\Taxation\Resolver\TaxRateResolver');
     }
 
     function it_implements_Sylius_tax_rate_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Resolver\TaxRateResolverInterface');
     }
 
     function it_returns_tax_rate_for_given_taxable_category($taxRateRepository, TaxableInterface $taxable, TaxCategoryInterface $taxCategory, TaxRateInterface $taxRate)
