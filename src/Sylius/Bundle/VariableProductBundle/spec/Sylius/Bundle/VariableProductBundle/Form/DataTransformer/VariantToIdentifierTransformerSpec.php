@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\VariableProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
