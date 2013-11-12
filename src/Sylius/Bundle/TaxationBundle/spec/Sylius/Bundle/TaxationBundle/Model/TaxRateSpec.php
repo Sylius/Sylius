@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\TaxationBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,19 +39,13 @@ class TaxRateSpec extends ObjectBehavior
         $this->getCategory()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface $category
-     */
-    function it_should_allow_assigning_itself_to_category($category)
+    function it_should_allow_assigning_itself_to_category(TaxCategoryInterface $category)
     {
         $this->setCategory($category);
         $this->getCategory()->shouldReturn($category);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface $category
-     */
-    function it_should_allow_detaching_itself_from_category($category)
+    function it_should_allow_detaching_itself_from_category(TaxCategoryInterface $category)
     {
         $this->setCategory($category);
 
