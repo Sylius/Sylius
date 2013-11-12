@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,11 +40,7 @@ class TaxonSpec extends ObjectBehavior
         $this->getTaxonomy()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
-     */
-    function it_allows_assigning_itself_to_taxonomy($taxonomy, $root)
+    function it_allows_assigning_itself_to_taxonomy(TaxonomyInterface $taxonomy, TaxonInterface $root)
     {
         $taxonomy->getRoot()->willReturn($root);
 
@@ -50,11 +48,7 @@ class TaxonSpec extends ObjectBehavior
         $this->getTaxonomy()->shouldReturn($taxonomy);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
-     */
-    function it_allows_detaching_itself_from_taxonomy($taxonomy, $root)
+    function it_allows_detaching_itself_from_taxonomy(TaxonomyInterface $taxonomy, TaxonInterface $root)
     {
         $taxonomy->getRoot()->willReturn($root);
 
@@ -70,10 +64,7 @@ class TaxonSpec extends ObjectBehavior
         $this->getParent()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function its_parent_is_mutable($taxon)
+    function its_parent_is_mutable(TaxonInterface $taxon)
     {
         $this->setParent($taxon);
         $this->getParent()->shouldReturn($taxon);
@@ -84,19 +75,13 @@ class TaxonSpec extends ObjectBehavior
         $this->shouldBeRoot();
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_is_not_root_when_has_parent($taxon)
+    function it_is_not_root_when_has_parent(TaxonInterface $taxon)
     {
         $this->setParent($taxon);
         $this->shouldNotBeRoot();
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_is_root_when_has_no_parent($taxon)
+    function it_is_root_when_has_no_parent(TaxonInterface $taxon)
     {
         $this->shouldBeRoot();
 
@@ -156,19 +141,12 @@ class TaxonSpec extends ObjectBehavior
         $this->getChildren()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_allows_to_check_if_given_taxon_is_its_child($taxon)
+    function it_allows_to_check_if_given_taxon_is_its_child(TaxonInterface $taxon)
     {
         $this->hasChild($taxon)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface    $taxon
-     */
-    function it_allows_to_add_child_taxons($taxonomy, $taxon)
+    function it_allows_to_add_child_taxons(TaxonomyInterface $taxonomy, TaxonInterface $taxon)
     {
         $this->setTaxonomy($taxonomy);
 
@@ -178,11 +156,7 @@ class TaxonSpec extends ObjectBehavior
         $this->addChild($taxon);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface $taxonomy
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface    $taxon
-     */
-    function it_allows_to_remove_child_taxons($taxonomy, $taxon)
+    function it_allows_to_remove_child_taxons(TaxonomyInterface $taxonomy, TaxonInterface $taxon)
     {
         $this->setTaxonomy($taxonomy);
 
