@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Model;
+namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -45,7 +45,7 @@ class TaxRateSpec extends ObjectBehavior
         $this->getCategory()->shouldReturn($category);
     }
 
-    function it_should_allow_detaching_itself_from_category(TaxCategoryInterface $category)
+    function it_should_allow_detaching_itself_from_category(\Sylius\Component\Taxation\Model\TaxCategoryInterface $category)
     {
         $this->setCategory($category);
 
