@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Bundle\VariableProductBundle\Doctrine\ORM\VariableProductRepository;
 
 /**

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\EventListener;
 
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
