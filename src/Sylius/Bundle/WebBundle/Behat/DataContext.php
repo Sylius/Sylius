@@ -248,6 +248,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
             }
 
             $order->setNumber(str_pad($currentOrderNumber, 9, 0, STR_PAD_LEFT));
+            $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+
+            $order->setCurrency('EUR');
             $order->complete();
 
             $shippingFactory->updateShipmentStates($order);
