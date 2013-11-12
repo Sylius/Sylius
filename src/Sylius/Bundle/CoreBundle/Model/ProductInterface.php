@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
 
 /**
  * Product interface.

@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\VariableProductBundle\Model\Variant as BaseVariant;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
+use Sylius\Component\VariableProduct\Model\Variant as BaseVariant;
+use Sylius\Component\VariableProduct\Model\VariantInterface as BaseVariantInterface;
 
 /**
  * Sylius core product variant entity.

@@ -48,7 +48,7 @@ class VariantUniqueValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Component\VariableProduct\Model\VariantInterface');
         }
 
         $variant = $value;
