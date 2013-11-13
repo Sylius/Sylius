@@ -63,7 +63,7 @@ class OrderStatusActionSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\PaymentsBundle\Model\PaymentInterface $payment
+     * @param Sylius\Component\Payment\Model\PaymentInterface $payment
      * @param Payum\Request\StatusRequestInterface $statusRequest
      */
     function it_should_mark_new_if_order_have_empty_payment_details($order, $payment, $statusRequest)
@@ -79,7 +79,7 @@ class OrderStatusActionSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\PaymentsBundle\Model\PaymentInterface $payment
+     * @param Sylius\Component\Payment\Model\PaymentInterface $payment
      * @param Payum\Request\StatusRequestInterface $statusRequest
      * @param Payum\PaymentInterface $payment
      */

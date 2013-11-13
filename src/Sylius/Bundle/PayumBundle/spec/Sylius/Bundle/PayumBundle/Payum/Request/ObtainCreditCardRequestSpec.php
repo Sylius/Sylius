@@ -37,7 +37,7 @@ class ObtainCreditCardRequestSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface $creditCard
+     * @param Sylius\Component\Payment\Model\CreditCardInterface $creditCard
      */
     function it_should_allow_get_credit_card_set_before($creditCard)
     {
