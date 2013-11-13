@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\PaymentsBundle\Model\PaymentMethod">
+    <class name="Sylius\Component\Payment\Model\PaymentMethod">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.payment_method.name.not_blank</option>
@@ -37,7 +37,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\PaymentsBundle\Model\CreditCard">
+    <class name="Sylius\Component\Payment\Model\CreditCard">
         <property name="number">
             <constraint name="Luhn">
                 <option name="message">sylius.credit_card.number.luhn</option>
