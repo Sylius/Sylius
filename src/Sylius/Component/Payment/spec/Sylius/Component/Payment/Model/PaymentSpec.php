@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\PaymentsBundle\Model;
+namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\CreditCardInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentLogInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -42,7 +42,7 @@ class PaymentSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    function its_payment_method_is_mutable(PaymentMethodInterface $method)
+    function its_payment_method_is_mutable(\Sylius\Component\Payment\Model\PaymentMethodInterface $method)
     {
       $this->setMethod($method);
       $this->getMethod()->shouldReturn($method);

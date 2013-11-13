@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle\Model;
+namespace Sylius\Component\Payment\Model;
+
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
  * Payments method model.
