@@ -21,12 +21,12 @@ class PaymentLogSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Model\PaymentLog');
+        $this->shouldHaveType('Sylius\Component\Payment\Model\PaymentLog');
     }
 
     function it_implements_Sylius_payment_log_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface');
+        $this->shouldImplement('Sylius\Component\Payment\Model\PaymentLogInterface');
     }
 
     function it_has_no_id_by_default()

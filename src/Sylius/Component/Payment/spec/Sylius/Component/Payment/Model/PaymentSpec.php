@@ -24,12 +24,12 @@ class PaymentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Model\Payment');
+        $this->shouldHaveType('Sylius\Component\Payment\Model\Payment');
     }
 
     function it_implements_Sylius_payment_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PaymentsBundle\Model\PaymentInterface');
+        $this->shouldImplement('Sylius\Component\Payment\Model\PaymentInterface');
     }
 
     function it_has_no_id_by_default()
