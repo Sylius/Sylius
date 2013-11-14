@@ -43,14 +43,14 @@ class SyliusTaxonomiesBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface' => 'sylius.model.taxonomy.class',
-            'Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface'    => 'sylius.model.taxon.class',
+            'Sylius\Component\Taxonomy\Model\TaxonomyInterface' => 'sylius.model.taxonomy.class',
+            'Sylius\Component\Taxonomy\Model\TaxonInterface'    => 'sylius.model.taxon.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxonomies', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxonomiesBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Taxonomy\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxonomies.driver.doctrine/orm'));

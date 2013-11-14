@@ -13,7 +13,6 @@ namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
-use Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -56,7 +55,6 @@ class TaxonSelectionType extends AbstractType
         $builder->addModelTransformer(new TaxonSelectionToCollectionTransformer($taxonomies));
 
         foreach ($taxonomies as $taxonomy) {
-            /* @var $taxonomy Taxonomy*/
             $builder->add($taxonomy->getId(), 'choice', array(
                 'choice_list' => new ObjectChoiceList($taxonomy->getTaxonsAsList()),
                 'multiple'    => $options['multiple'],
