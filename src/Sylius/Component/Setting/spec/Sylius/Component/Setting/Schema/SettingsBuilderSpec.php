@@ -21,12 +21,12 @@ class SettingsBuilderSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder');
+        $this->shouldHaveType('Sylius\Component\Setting\Schema\SettingsBuilder');
     }
 
     function it_should_implement_settings_builder_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface');
+        $this->shouldImplement('Sylius\Component\Setting\Schema\SettingsBuilderInterface');
     }
 
     function it_should_extend_options_resolver()
