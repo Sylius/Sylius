@@ -42,7 +42,7 @@ class PaymentSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    function its_payment_method_is_mutable(\Sylius\Component\Payment\Model\PaymentMethodInterface $method)
+    function its_payment_method_is_mutable(PaymentMethodInterface $method)
     {
       $this->setMethod($method);
       $this->getMethod()->shouldReturn($method);

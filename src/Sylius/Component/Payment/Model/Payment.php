@@ -12,11 +12,6 @@
 namespace Sylius\Component\Payment\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Model\PaymentLogInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentSourceInterface;
-use Sylius\Component\Payment\Model\CreditCardInterface;
 
 /**
  * Payments model.

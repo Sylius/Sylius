@@ -11,9 +11,6 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Payment\Model\PaymentLogInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * Payment log model.
