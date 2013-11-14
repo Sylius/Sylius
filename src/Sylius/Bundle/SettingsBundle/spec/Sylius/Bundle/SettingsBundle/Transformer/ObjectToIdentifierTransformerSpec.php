@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,7 +23,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
     /**
      * @param Doctrine\Common\Persistence\ObjectRepository $repository
      */
-    function let($repository)
+    function let(ObjectRepository $repository)
     {
         $this->beConstructedWith($repository, 'name');
     }
@@ -41,10 +43,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->transform(null)->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\ParameterInterface $object
-     */
-    function it_should_transform_object_into_its_identifier($object)
+    function it_should_transform_object_into_its_identifier(ParameterInterface $object)
     {
         $object->getName()->willReturn('name');
 
@@ -56,10 +55,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\ParameterInterface $object
-     */
-    function it_should_find_object_when_identifier_reverse_transformed($repository, $object)
+    function it_should_find_object_when_identifier_reverse_transformed($repository, ParameterInterface $object)
     {
         $repository->findOneBy(array('name' => 'foo'))->shouldBeCalled()->willReturn($object);
 
