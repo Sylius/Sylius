@@ -1,5 +1,5 @@
 {
-    "name": "sylius/inventory-component",
+    "name": "sylius/inventory",
     "type": "library",
     "description": "Flexible inventory management for PHP applications.",
     "keywords": ["shop", "ecommerce", "stock", "inventory", "sylius"],
