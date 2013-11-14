@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\SettingsBundle\Schema;
+namespace spec\Sylius\Component\Setting\Schema;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
+use Sylius\Component\Setting\Transformer\ParameterTransformerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

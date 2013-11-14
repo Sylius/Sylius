@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SettingsBundle\Transformer;
+namespace Sylius\Component\Setting\Transformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;

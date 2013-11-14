@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SettingsBundle\Manager;
+namespace Sylius\Component\Setting\Manager;
 
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Component\Setting\Model\Settings;
 
 /**
  * Settings provider interface.

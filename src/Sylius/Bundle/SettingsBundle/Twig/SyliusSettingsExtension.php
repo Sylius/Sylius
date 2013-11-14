@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Twig;
 
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Component\Setting\Manager\SettingsManagerInterface;
 
 /**
  * Sylius settings extension for Twig.
