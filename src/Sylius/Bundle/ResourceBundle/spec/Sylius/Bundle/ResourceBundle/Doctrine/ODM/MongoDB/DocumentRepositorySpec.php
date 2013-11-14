@@ -45,7 +45,7 @@ class DocumentRepositorySpec extends ObjectBehavior
 
     function it_implements_Sylius_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\RepositoryInterface');
+        $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
     function it_creates_Pagerfanta_paginator()

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Resource resolver.
@@ -25,6 +25,10 @@ class ResourceResolver
      *
      * @param RepositoryInterface $repository
      * @param Configuration       $configuration
+     * @param string              $defaultMethod
+     * @param array               $defaultArguments
+     *
+     * @return object
      */
     public function getResource(RepositoryInterface $repository, Configuration $configuration, $defaultMethod, array $defaultArguments = array())
     {

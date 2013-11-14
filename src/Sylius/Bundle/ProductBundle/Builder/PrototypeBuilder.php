@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Builder;
 
 use Sylius\Bundle\ProductBundle\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Prototype builder.

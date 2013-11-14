@@ -15,7 +15,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
 use Pagerfanta\Adapter\DoctrineODMMongoDBAdapter;
 use Pagerfanta\Pagerfanta;
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine ODM driver resource manager.

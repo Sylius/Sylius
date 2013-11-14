@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Model;
+namespace Sylius\Component\Resource\Repository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\Converter;
 
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class CurrencyConverter implements CurrencyConverterInterface
 {
