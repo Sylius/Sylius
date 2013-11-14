@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Repository;
 
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Order repository interface.

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 

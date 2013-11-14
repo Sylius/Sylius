@@ -19,11 +19,11 @@ use PhpSpec\ObjectBehavior;
 class ProductBuilderSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface     $product
-     * @param Doctrine\Common\Persistence\ObjectManager              $productManager
-     * @param Sylius\Component\Resource\Model\RepositoryInterface $productRepository
-     * @param Sylius\Component\Resource\Model\RepositoryInterface $propertyRepository
-     * @param Sylius\Component\Resource\Model\RepositoryInterface $productPropertyRepository
+     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface       $product
+     * @param Doctrine\Common\Persistence\ObjectManager                $productManager
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface $productRepository
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface $propertyRepository
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface $productPropertyRepository
      */
     function let(
         $product,

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionsBundle\Repository;
 
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Promotion repository interface.

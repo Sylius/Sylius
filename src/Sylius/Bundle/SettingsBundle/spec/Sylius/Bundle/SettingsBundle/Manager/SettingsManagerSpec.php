@@ -22,7 +22,7 @@ class SettingsManagerSpec extends ObjectBehavior
      * @param Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface $registry
      * @param Doctrine\Common\Cache\Cache                                 $cache
      * @param Doctrine\Common\Persistence\ObjectManager                   $manager
-     * @param Sylius\Component\Resource\Model\RepositoryInterface      $repository
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface      $repository
      */
     function let($registry, $cache, $manager, $repository)
     {

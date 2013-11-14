@@ -20,7 +20,7 @@ use Prophecy\Argument;
 class CouponGeneratorSpec extends ObjectBehavior
 {
     /**
-     * @param \Sylius\Component\Resource\Model\RepositoryInterface $repository
+     * @param \Sylius\Component\Resource\Repository\RepositoryInterface $repository
      * @param \Doctrine\Common\Persistence\ObjectManager              $manager
      */
     function let($repository, $manager)

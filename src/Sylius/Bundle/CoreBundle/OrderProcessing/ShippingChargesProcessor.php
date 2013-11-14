@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Component\Resource\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 
 /**
