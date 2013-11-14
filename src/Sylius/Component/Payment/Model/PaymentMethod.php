@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-
 /**
  * Payments method model.
  *
