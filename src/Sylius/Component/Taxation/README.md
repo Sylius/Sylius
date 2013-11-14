@@ -1,7 +1,7 @@
-Shipping Component
+Taxation Component
 ==================
 
-Shipping management library for PHP.
+Taxation for PHP.
 
 Sylius
 ------
@@ -19,4 +19,4 @@ $ bin/phpspec run -fpretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Shipping/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Taxation/index.html).
