@@ -23,8 +23,6 @@
     <h1><i class="icon-plus-sign"></i> {{ 'sylius.user.create_header'|trans|raw }}</h1>
 </div>
 
-{{ form_errors(form) }}
-
 <form action="{{ path('sylius_backend_user_create') }}" method="post" class="form-horizontal" novalidate>
     {% include 'SyliusWebBundle:Backend/User:_form.html.twig' %}
     {{ create() }}
