@@ -72,6 +72,7 @@ script:
     - cd ../VariableProductBundle; ../../../../bin/phpspec run -fpretty --verbose
 
     - cd ../../Component/Shipping; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Taxation; ../../../../bin/phpspec run -fpretty --verbose
 
 notifications:
   email: "travis-ci@sylius.org"

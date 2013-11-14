@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxationBundle\Model;
+namespace Sylius\Component\Taxation\Model;
+
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * Taxable interface.

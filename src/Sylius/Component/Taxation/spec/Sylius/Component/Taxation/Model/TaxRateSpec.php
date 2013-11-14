@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Model;
+namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -20,12 +21,12 @@ class TaxRateSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Model\TaxRate');
+        $this->shouldHaveType('Sylius\Component\Taxation\Model\TaxRate');
     }
 
     function it_should_implement_Sylius_tax_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxRateInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxRateInterface');
     }
 
     function it_should_not_have_id_by_default()
@@ -38,19 +39,13 @@ class TaxRateSpec extends ObjectBehavior
         $this->getCategory()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface $category
-     */
-    function it_should_allow_assigning_itself_to_category($category)
+    function it_should_allow_assigning_itself_to_category(TaxCategoryInterface $category)
     {
         $this->setCategory($category);
         $this->getCategory()->shouldReturn($category);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface $category
-     */
-    function it_should_allow_detaching_itself_from_category($category)
+    function it_should_allow_detaching_itself_from_category(\Sylius\Component\Taxation\Model\TaxCategoryInterface $category)
     {
         $this->setCategory($category);
 
