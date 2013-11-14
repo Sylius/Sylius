@@ -20,9 +20,7 @@ use Sylius\Component\Setting\Model\ParameterInterface;
  */
 class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $repository
-     */
+
     function let(ObjectRepository $repository)
     {
         $this->beConstructedWith($repository, 'name');
@@ -30,12 +28,12 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Component\Setting\Transformer\ObjectToIdentifierTransformer');
     }
 
     function it_should_implement_parameter_transformer_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface');
+        $this->shouldImplement('Sylius\Component\Setting\Transformer\ParameterTransformerInterface');
     }
 
     function it_should_return_null_when_null_transformed()

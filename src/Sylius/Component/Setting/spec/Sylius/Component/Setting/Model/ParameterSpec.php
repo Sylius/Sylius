@@ -20,12 +20,12 @@ class ParameterSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Model\Parameter');
+        $this->shouldHaveType('Sylius\Component\Setting\Model\Parameter');
     }
 
     function it_should_be_a_Sylius_settings_parameter()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Model\ParameterInterface');
+        $this->shouldImplement('Sylius\Component\Setting\Model\ParameterInterface');
     }
 
     function it_should_not_have_id_by_default()
