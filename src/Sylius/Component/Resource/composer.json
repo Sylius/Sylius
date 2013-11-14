@@ -1,7 +1,7 @@
 {
     "name": "sylius/resource",
     "type": "library",
-    "description": "Resource component for Sylius.",
+    "description": "Commonly used interfaces & event classes for PHP e-commerce applications.",
     "keywords": ["resource", "storage", "persistence", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",

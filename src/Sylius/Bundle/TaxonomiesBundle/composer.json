@@ -23,8 +23,9 @@
         "php":                             ">=5.3.3",
 
         "sylius/resource-bundle":          "1.0.*@dev",
-        "sylius/taxonomy-component":       "1.0.*@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*"
+        "stof/doctrine-extensions-bundle": "1.1.*",
+
+        "sylius/taxonomy":                 "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":    "2.0.*@dev",
