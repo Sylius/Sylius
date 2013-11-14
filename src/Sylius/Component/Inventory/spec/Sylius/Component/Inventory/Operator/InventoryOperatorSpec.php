@@ -9,10 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Operator;
+namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -20,29 +23,23 @@ use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
  */
 class InventoryOperatorSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface  $backordersHandler
-     * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
-     */
-    function let($backordersHandler, $availabilityChecker)
+
+    function let(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker)
     {
         $this->beConstructedWith($backordersHandler, $availabilityChecker);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Operator\InventoryOperator');
+        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InventoryOperator');
    }
 
     function it_implements_Sylius_inventory_operator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_increases_stockable_on_hand($stockable)
+    function it_increases_stockable_on_hand(StockableInterface $stockable)
     {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(2);
         $stockable->setOnHand(7)->shouldBeCalled();
@@ -50,12 +47,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $this->increase($stockable, 5);
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     */
-    function it_decreases_stockable_on_hand_by_count_of_sold_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2)
+    function it_decreases_stockable_on_hand_by_count_of_sold_units($availabilityChecker, $backordersHandler, StockableInterface $stockable, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2)
     {
         $inventoryUnit1->getStockable()->willReturn($stockable);
         $inventoryUnit2->getStockable()->willReturn($stockable);
@@ -72,13 +64,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $this->decrease(array($inventoryUnit1, $inventoryUnit2));
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
-     */
-    function it_decreases_stockable_on_hand_and_ignores_backordered_units($availabilityChecker, $backordersHandler, $stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3)
+    function it_decreases_stockable_on_hand_and_ignores_backordered_units($availabilityChecker, $backordersHandler, StockableInterface $stockable, InventoryUnitInterface $inventoryUnit1, InventoryUnitInterface $inventoryUnit2, InventoryUnitInterface $inventoryUnit3)
     {
         $inventoryUnit1->getStockable()->willReturn($stockable);
         $inventoryUnit2->getStockable()->willReturn($stockable);

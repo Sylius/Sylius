@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Model;
+namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,12 +22,12 @@ class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Model\InventoryUnit');
+        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
     }
 
     function it_implements_Sylius_inventory_unit_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Model\InventoryUnitInterface');
     }
 
     function it_has_no_id_by_default()
@@ -39,10 +40,7 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getStockable()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_allows_defining_stockable_subject($stockable)
+    function it_allows_defining_stockable_subject(StockableInterface $stockable)
     {
         $this->setStockable($stockable);
         $this->getStockable()->shouldReturn($stockable);
@@ -70,21 +68,15 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->shouldBeBackordered();
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_returns_its_stockable_name($stockable)
+    function it_returns_its_stockable_name(StockableInterface $stockable)
     {
         $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
         $this->setStockable($stockable);
 
         $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
     }
-
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_returns_its_stockable_sku($stockable)
+    
+    function it_returns_its_stockable_sku(StockableInterface $stockable)
     {
         $stockable->getSku()->willReturn('IPHONE5');
         $this->setStockable($stockable);

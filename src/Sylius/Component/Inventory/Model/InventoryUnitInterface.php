@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Model;
+namespace Sylius\Component\Inventory\Model;
 
+use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
