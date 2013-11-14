@@ -436,3 +436,8 @@ input[type="file"] {
         padding-left: 15px;
     }
 }
+
+/** Dashboard */
+.col-md-6 #users .btn span {
+    display: none;
+}

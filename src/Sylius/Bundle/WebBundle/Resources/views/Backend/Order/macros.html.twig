@@ -82,7 +82,7 @@
         {% for order in orders %}
         <tr>
             <td>
-                <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}" class="btn btn-link">
+                <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">
                 <strong>#{{ order.number }}</strong>
                 </a>
             </td>
@@ -92,8 +92,11 @@
             <td>
                 {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
             </td>
-            <td>
-                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}" class="btn btn-link">{{ order.user.email }}</a>
+            <td style="width: 20%">
+                {{ order.user.fullname }}<br>
+                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                    {{ order.user.email }}
+                </a>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
         </tr>
