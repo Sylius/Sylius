@@ -1,5 +1,5 @@
 {
-    "name": "sylius/taxonomy-component",
+    "name": "sylius/taxonomy",
     "type": "symfony-bundle",
     "description": "Flexible categorization system for PHP applications.",
     "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
@@ -20,9 +20,9 @@
         }
     ],
     "require": {
-        "php":                             ">=5.3.3",
+        "php":                       ">=5.3.3",
 
-        "sylius/resource-component":        "1.0.*@dev"
+        "sylius/resource-component": "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":    "2.0.*@dev"
