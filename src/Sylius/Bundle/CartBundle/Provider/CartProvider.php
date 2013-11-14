@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CartBundle\Provider;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Default provider cart.

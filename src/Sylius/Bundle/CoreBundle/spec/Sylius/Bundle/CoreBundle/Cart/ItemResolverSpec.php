@@ -19,8 +19,8 @@ use PhpSpec\ObjectBehavior;
 class ItemResolverSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface             $productRepository
-     * @param Symfony\Component\Form\FormFactory                                 $formFactory
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface           $productRepository
+     * @param Symfony\Component\Form\FormFactoryInterface                        $formFactory
      * @param Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $availabilityChecker
      * @param Symfony\Component\HttpFoundation\Request                           $request
      */

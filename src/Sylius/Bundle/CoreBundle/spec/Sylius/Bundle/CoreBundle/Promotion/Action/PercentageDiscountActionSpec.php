@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $adjustmentRepository
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface $adjustmentRepository
      */
     function let($adjustmentRepository)
     {

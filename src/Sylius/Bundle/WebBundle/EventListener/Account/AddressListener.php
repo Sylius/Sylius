@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\EventListener\Account;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -39,13 +39,16 @@ class AddressListener
      */
     public function onAddressPreDelete(ResourceEvent $event)
     {
-        $address = $event->getSubject();
         $user = $this->securityContext->getToken()->getUser();
+        if (!$user) {
+            return;
+        }
 
-        if ($address == $user->getBillingAddress()) {
+        $address = $event->getSubject();
+        if ($address === $user->getBillingAddress()) {
             $user->setBillingAddress(null);
         }
-        if ($address == $user->getShippingAddress()) {
+        if ($address === $user->getShippingAddress()) {
             $user->setShippingAddress(null);
         }
     }

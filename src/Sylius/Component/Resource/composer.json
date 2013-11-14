@@ -1,8 +1,8 @@
 {
-    "name": "sylius/inventory",
+    "name": "sylius/resource",
     "type": "library",
-    "description": "Flexible inventory management for PHP applications.",
-    "keywords": ["shop", "ecommerce", "stock", "inventory", "sylius"],
+    "description": "Commonly used interfaces & event classes for PHP e-commerce applications.",
+    "keywords": ["resource", "storage", "persistence", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -22,18 +22,16 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "1.0.*@dev"
-    },
-    "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev"
+        "doctrine/common":          "~2.3",
+        "symfony/event-dispatcher": "~2.3"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Inventory\\": "" }
+        "psr-0": { "Sylius\\Component\\Resource\\": "" }
     },
-    "target-dir": "Sylius/Component/Inventory",
+    "target-dir": "Sylius/Component/Resource",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

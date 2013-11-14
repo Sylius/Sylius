@@ -20,7 +20,7 @@ use Sylius\Bundle\ProductBundle\Model\Property\Property;
 class PrototypeBuilderSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $productPropertyRepository
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface $productPropertyRepository
      */
     function let($productPropertyRepository)
     {

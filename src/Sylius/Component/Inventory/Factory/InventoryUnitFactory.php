@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Default inventory operator.

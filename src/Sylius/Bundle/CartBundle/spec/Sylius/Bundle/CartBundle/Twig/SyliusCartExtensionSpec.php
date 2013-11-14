@@ -19,9 +19,9 @@ use PhpSpec\ObjectBehavior;
 class SyliusCartExtensionSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $cartProvider
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface  $itemRepository
-     * @param Symfony\Component\Form\FormFactory                      $formFactory
+     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface  $cartProvider
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface $itemRepository
+     * @param Symfony\Component\Form\FormFactoryInterface              $formFactory
      */
     function let($cartProvider, $itemRepository, $formFactory)
     {

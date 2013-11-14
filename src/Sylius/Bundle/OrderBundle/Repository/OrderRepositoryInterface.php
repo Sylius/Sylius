@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Repository;
 
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Order repository interface.
@@ -22,6 +22,8 @@ interface OrderRepositoryInterface extends RepositoryInterface
 {
     /**
      * Get recently completed orders.
+     *
+     * @param integer $amount
      *
      * @return array
      */

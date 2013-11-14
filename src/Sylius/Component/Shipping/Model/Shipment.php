@@ -12,7 +12,7 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;

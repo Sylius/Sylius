@@ -21,7 +21,7 @@ use Sylius\Bundle\CoreBundle\Model\Order;
 class TaxationProcessorSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface         $adjustmentRepository
+     * @param Sylius\Component\Resource\Repository\RepositoryInterface       $adjustmentRepository
      * @param Sylius\Component\Taxation\Calculator\CalculatorInterface       $calculator
      * @param Sylius\Component\Taxation\Resolver\TaxRateResolverInterface    $taxRateResolver
      * @param Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface    $zoneMatcher
