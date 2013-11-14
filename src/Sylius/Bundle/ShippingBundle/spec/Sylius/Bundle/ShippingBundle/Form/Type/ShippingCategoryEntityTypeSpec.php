@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,10 +39,7 @@ class ShippingCategoryEntityTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('entity');
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_defines_assigned_class_name($resolver)
+    function it_defines_assigned_class_name(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('class' => 'ShippingCategory'))->shouldBeCalled();
 

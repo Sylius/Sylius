@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;

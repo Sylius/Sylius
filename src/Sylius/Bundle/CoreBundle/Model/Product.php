@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 
 /**

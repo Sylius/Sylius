@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 
 /**
  * Sylius core product Variant interface.
