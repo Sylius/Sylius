@@ -20,7 +20,7 @@ class CurrencyContextSpec extends ObjectBehavior
      * @param Symfony\Component\HttpFoundation\Session\SessionInterface     $session
      * @param Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface $settingsManager
      * @param Doctrine\Common\Persistence\ObjectManager                     $userManager
-     * @param Sylius\Bundle\SettingsBundle\Model\Settings                   $settings
+     * @param Sylius\Component\Setting\Model\Settings                   $settings
      */
     function let($securityContext, $session, $settingsManager, $userManager, $settings)
     {

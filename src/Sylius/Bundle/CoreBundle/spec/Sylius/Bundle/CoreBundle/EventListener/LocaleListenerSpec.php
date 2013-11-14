@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 class LocaleListenerSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface $settingsManager
+     * @param Sylius\Component\Setting\Manager\SettingsManagerInterface $settingsManager
      */
     function let($settingsManager)
     {
@@ -30,7 +30,7 @@ class LocaleListenerSpec extends ObjectBehavior
 
     /**
      * @param Symfony\Component\HttpKernel\Event\GetResponseEvent $event
-     * @param Sylius\Bundle\SettingsBundle\Model\Settings         $settings
+     * @param Sylius\Component\Setting\Model\Settings         $settings
      * @param Symfony\Component\HttpFoundation\Request            $request
      */
     function it_sets_locale_on_request($settingsManager, $event, $settings, $request)
