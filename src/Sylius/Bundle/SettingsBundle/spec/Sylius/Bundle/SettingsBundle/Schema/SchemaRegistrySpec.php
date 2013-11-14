@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -33,20 +34,14 @@ class SchemaRegistrySpec extends ObjectBehavior
         $this->getSchemas()->shouldReturn(array());
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Schema\SchemaInterface $schema
-     */
-    function it_should_register_schema_properly($schema)
+    function it_should_register_schema_properly(SchemaInterface $schema)
     {
         $this->hasSchema('general')->shouldReturn(false);
         $this->registerSchema('general', $schema);
         $this->hasSchema('general')->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Schema\SchemaInterface $schema
-     */
-    function it_should_unregister_schema_properly($schema)
+    function it_should_unregister_schema_properly(SchemaInterface $schema)
     {
         $this->registerSchema('general', $schema);
         $this->hasSchema('general')->shouldReturn(true);
@@ -55,10 +50,7 @@ class SchemaRegistrySpec extends ObjectBehavior
         $this->hasSchema('general')->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Schema\SchemaInterface $schema
-     */
-    function it_should_retrieve_registered_schema_by_namespace($schema)
+    function it_should_retrieve_registered_schema_by_namespace(SchemaInterface $schema)
     {
         $this->registerSchema('general', $schema);
         $this->getSchema('general')->shouldReturn($schema);
