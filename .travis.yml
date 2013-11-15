@@ -69,7 +69,7 @@ script:
     - cd ../SettingsBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../ShippingBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../TaxationBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../TaxonomiesBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../TaxonomyBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../VariableProductBundle; ../../../../bin/phpspec run -fpretty --verbose
 
     - cd ../../Component/Addressing; ../../../../bin/phpspec run -fpretty --verbose

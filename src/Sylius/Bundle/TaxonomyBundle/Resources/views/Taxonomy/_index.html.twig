@@ -1,0 +1,19 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusTaxonomyBundle:Taxonomy:macros.html.twig' as macros %}
+
+<h1>Categorization <small>Here you see the defined taxonomies</small></h1>
+<hr />
+
+<div class="well">
+    {{ buttons.create(path('sylius_taxonomy_create')) }}
+</div>
+
+{% if taxonomies.haveToPaginate()|default(false) %}
+    {{ pagerfanta(taxonomies, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{{ macros.list(taxonomies) }}
+
+{% if taxonomies.haveToPaginate()|default(false) %}
+    {{ pagerfanta(taxonomies, 'twitter_bootstrap_translated') }}
+{% endif %}
