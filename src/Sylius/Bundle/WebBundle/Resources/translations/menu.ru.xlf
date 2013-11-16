@@ -196,7 +196,7 @@
       </trans-unit>
       <trans-unit id="7007c8ae07370e45526f1dc178a94514" resname="sylius.backend.menu.sidebar.shipping_methods">
         <source>sylius.backend.menu.sidebar.shipping_methods</source>
-        <target>Методы доставки</target>
+        <target>Способы доставки</target>
       </trans-unit>
       <trans-unit id="6c018645060db97ec15371fb071f68c6" resname="sylius.backend.menu.sidebar.stockables">
         <source>sylius.backend.menu.sidebar.stockables</source>
@@ -216,7 +216,7 @@
       </trans-unit>
       <trans-unit id="617a399dbf0823ca50db6284392cc6f9" resname="sylius.backend.menu.sidebar.taxonomies">
         <source>sylius.backend.menu.sidebar.taxonomies</source>
-        <target>Категории</target>
+        <target>Каталоги</target>
       </trans-unit>
       <trans-unit id="608617987d64def83501a66c2dbce621" resname="sylius.backend.menu.sidebar.users">
         <source>sylius.backend.menu.sidebar.users</source>

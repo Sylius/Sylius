@@ -32,7 +32,7 @@
       </trans-unit>
       <trans-unit id="1a9ff4ef54c3d6850913dd85da9995b5" resname="sylius.form.country.name">
         <source>sylius.form.country.name</source>
-        <target>Наименование</target>
+        <target>Страна</target>
       </trans-unit>
       <trans-unit id="fb2f23317fa10e33b0eb423a814aea67" resname="sylius.form.country.provinces">
         <source>sylius.form.country.provinces</source>
@@ -44,7 +44,7 @@
       </trans-unit>
       <trans-unit id="90c305763d958c3dd319253193a69c4e" resname="sylius.form.province.name">
         <source>sylius.form.province.name</source>
-        <target>Наименование</target>
+        <target>Округ</target>
       </trans-unit>
       <trans-unit id="2df1138e962c235812c817d080de1b73" resname="sylius.form.zone.members">
         <source>sylius.form.zone.members</source>
@@ -52,7 +52,7 @@
       </trans-unit>
       <trans-unit id="e8988be3de9b838c9dbe0d836ca6b3f0" resname="sylius.form.zone.name">
         <source>sylius.form.zone.name</source>
-        <target>Наименование</target>
+        <target>Название</target>
       </trans-unit>
       <trans-unit id="ff8121a85e95c9c38c36fcd73d10041c" resname="sylius.form.zone.type">
         <source>sylius.form.zone.type</source>

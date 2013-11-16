@@ -268,7 +268,7 @@
       </trans-unit>
       <trans-unit id="5aa4900078a2a0f1013dabf83dda8aaa" resname="sylius.breadcrumb.country.index">
         <source>sylius.breadcrumb.country.index</source>
-        <target>sylius.breadcrumb.country.index</target>
+        <target>Список стран</target>
       </trans-unit>
       <trans-unit id="c340171685afbeaf6a2dfecfbb334636" resname="sylius.breadcrumb.customers">
         <source>sylius.breadcrumb.customers</source>
@@ -340,15 +340,15 @@
       </trans-unit>
       <trans-unit id="f2257bef4698c935c085c2accd68af88" resname="sylius.breadcrumb.shipment.index">
         <source>sylius.breadcrumb.shipment.index</source>
-        <target>sylius.breadcrumb.shipment.index</target>
+        <target>Список посылок</target>
       </trans-unit>
       <trans-unit id="5a082457b5f7c62e5550267b191b814a" resname="sylius.breadcrumb.shipping_category.index">
         <source>sylius.breadcrumb.shipping_category.index</source>
-        <target>sylius.breadcrumb.shipping_category.index</target>
+        <target>Список категорий доставки</target>
       </trans-unit>
       <trans-unit id="f2bd0a1b46f57c64b1d8ea3576b6ca3a" resname="sylius.breadcrumb.shipping_method.index">
         <source>sylius.breadcrumb.shipping_method.index</source>
-        <target>sylius.breadcrumb.shipping_method.index</target>
+        <target>Список способов доставки</target>
       </trans-unit>
       <trans-unit id="e41ed56dcd093c0cfc26ebe6cdf25be4" resname="sylius.breadcrumb.tax_category.index">
         <source>sylius.breadcrumb.tax_category.index</source>
@@ -580,15 +580,15 @@
       </trans-unit>
       <trans-unit id="c4070ca193a5880d8e3185af5e2133ee" resname="sylius.country.add_province">
         <source>sylius.country.add_province</source>
-        <target>Add province</target>
+        <target>Добавить округ</target>
       </trans-unit>
       <trans-unit id="fd7b189dd8e6444011a3a9a01928452a" resname="sylius.country.create">
         <source>sylius.country.create</source>
-        <target>Create country</target>
+        <target>Добавить страну</target>
       </trans-unit>
       <trans-unit id="4523f1e75a0117f4b5bd5964005d204d" resname="sylius.country.create_header">
         <source>sylius.country.create_header</source>
-        <target>New country</target>
+        <target>Добавление страны</target>
       </trans-unit>
       <trans-unit id="065e077c26105cef2eb20f602d7bc0be" resname="sylius.country.id">
         <source>sylius.country.id</source>
@@ -596,15 +596,15 @@
       </trans-unit>
       <trans-unit id="646685fe52ae5e2097f33e3dd045297d" resname="sylius.country.index_header">
         <source>sylius.country.index_header</source>
-        <target>Countries</target>
+        <target>Страны</target>
       </trans-unit>
       <trans-unit id="33e877111fafb69275ca6088a784e847" resname="sylius.country.iso_name">
         <source>sylius.country.iso_name</source>
-        <target>ISO name</target>
+        <target>Название ISO</target>
       </trans-unit>
       <trans-unit id="7d7dd34792607d640ac1ec9b60573394" resname="sylius.country.manage">
         <source>sylius.country.manage</source>
-        <target>Manage countries</target>
+        <target>Редактировать страны</target>
       </trans-unit>
       <trans-unit id="a61d74d6d42afb0110c26865e259ed12" resname="sylius.country.name">
         <source>sylius.country.name</source>
@@ -612,15 +612,15 @@
       </trans-unit>
       <trans-unit id="d809dc346f3a72dccf9b06399ba200e8" resname="sylius.country.no_results">
         <source>sylius.country.no_results</source>
-        <target>There are no countries configured.</target>
+        <target>Нет созданных стран.</target>
       </trans-unit>
       <trans-unit id="c972c12c75655f81e8804e7de3610a83" resname="sylius.country.show_header">
         <source>sylius.country.show_header</source>
-        <target>Country details</target>
+        <target>Детали страны</target>
       </trans-unit>
       <trans-unit id="4e582f3f129f313dfa9bde45f835444a" resname="sylius.country.update_header">
         <source>sylius.country.update_header</source>
-        <target>Editing country</target>
+        <target>Редактировать страну</target>
       </trans-unit>
       <trans-unit id="42f9ef9fd2580b44f38dbbaee57f763c" resname="sylius.create">
         <source>sylius.create</source>
@@ -628,11 +628,11 @@
       </trans-unit>
       <trans-unit id="6a5224b93e0ac331cd56065d1a30ac01" resname="sylius.delete">
         <source>sylius.delete</source>
-        <target>удалить</target>
+        <target>Удалить</target>
       </trans-unit>
       <trans-unit id="f55c72369ccc38deb172ad6643392f5d" resname="sylius.edit">
         <source>sylius.edit</source>
-        <target>редактировать</target>
+        <target>Редактировать</target>
       </trans-unit>
       <trans-unit id="b90816fa17a609f4ddf5f89e1f59519f" resname="sylius.email">
         <source>sylius.email</source>
@@ -964,7 +964,7 @@
       </trans-unit>
       <trans-unit id="bd1abb2f477836c03a17eb0398e509ec" resname="sylius.order.shipments">
         <source>sylius.order.shipments</source>
-        <target>Доставка</target>
+        <target>Посылки</target>
       </trans-unit>
       <trans-unit id="87e600739dd24c17844e39b4e26c7568" resname="sylius.order.shipping_address">
         <source>sylius.order.shipping_address</source>
@@ -1556,11 +1556,11 @@
       </trans-unit>
       <trans-unit id="2a35d80e02f6d486b8ed9b536efe06a3" resname="sylius.shipment.manage">
         <source>sylius.shipment.manage</source>
-        <target>Manage shipments</target>
+        <target>Управление посылками</target>
       </trans-unit>
       <trans-unit id="fa04dde20962a2c25323e2c69296db22" resname="sylius.shipment.method">
         <source>sylius.shipment.method</source>
-        <target>метод</target>
+        <target>Способ</target>
       </trans-unit>
       <trans-unit id="96c65c40484b6857e29189060e4c100b" resname="sylius.shipment.modified">
         <source>sylius.shipment.modified</source>
@@ -1580,11 +1580,11 @@
       </trans-unit>
       <trans-unit id="a176b32d6df6fde032d272941a01a330" resname="sylius.shipment.order">
         <source>sylius.shipment.order</source>
-        <target>order</target>
+        <target>заказ</target>
       </trans-unit>
       <trans-unit id="39312ae8b822f349033dbdf6eb509ef6" resname="sylius.shipment.show_header">
         <source>sylius.shipment.show_header</source>
-        <target>Shipment details</target>
+        <target>Детали посылки</target>
       </trans-unit>
       <trans-unit id="928acc87435f0a958ec523b27c61cdb5" resname="sylius.shipment.sku">
         <source>sylius.shipment.sku</source>
@@ -1592,7 +1592,7 @@
       </trans-unit>
       <trans-unit id="5bae86ae3a917e7b3f1b087b1997edd8" resname="sylius.shipment.state">
         <source>sylius.shipment.state</source>
-        <target>статус</target>
+        <target>Cтатус</target>
       </trans-unit>
       <trans-unit id="3a4fc7c1f7ec07176644e757d8ee988e" resname="sylius.shipment.updated_at">
         <source>sylius.shipment.updated_at</source>
@@ -1600,15 +1600,15 @@
       </trans-unit>
       <trans-unit id="e6da3183b9d8d5e87e53b57a213d8f05" resname="sylius.shipment_category.manage">
         <source>sylius.shipment_category.manage</source>
-        <target>Manage shipping categories</target>
+        <target>Редактировать категории доставки</target>
       </trans-unit>
       <trans-unit id="1e9ba86eccf9987a4c79ee5ee28b03f6" resname="sylius.shipping_category.create">
         <source>sylius.shipping_category.create</source>
-        <target>Create shipping category</target>
+        <target>Создать категорию доставки</target>
       </trans-unit>
       <trans-unit id="ddd8647f39d2300f93976f03cae476b0" resname="sylius.shipping_category.create_header">
         <source>sylius.shipping_category.create_header</source>
-        <target>New shipping category</target>
+        <target>Новая категория доставки</target>
       </trans-unit>
       <trans-unit id="5fa7919b7e7ded151197073935870270" resname="sylius.shipping_category.id">
         <source>sylius.shipping_category.id</source>
@@ -1616,11 +1616,11 @@
       </trans-unit>
       <trans-unit id="d19ba00585c42d765021a2d4fd377a73" resname="sylius.shipping_category.index_header">
         <source>sylius.shipping_category.index_header</source>
-        <target>Shipping categories</target>
+        <target>Категории доставки</target>
       </trans-unit>
       <trans-unit id="0d2778d8d5138c13cd11c3555423ad01" resname="sylius.shipping_category.manage">
         <source>sylius.shipping_category.manage</source>
-        <target>Manage shipping categories</target>
+        <target>Редактировать категорию доставки</target>
       </trans-unit>
       <trans-unit id="b4ad7dffd894daafc06e0da3d0edbff8" resname="sylius.shipping_category.name">
         <source>sylius.shipping_category.name</source>
@@ -1628,11 +1628,11 @@
       </trans-unit>
       <trans-unit id="9d71256966c1dcf51039011bd2bfa0fc" resname="sylius.shipping_category.no_results">
         <source>sylius.shipping_category.no_results</source>
-        <target>There are no shipping categories configured.</target>
+        <target>Нет созданных категорий доставки.</target>
       </trans-unit>
       <trans-unit id="828c9df6e25add5c9e7800d78a436c0a" resname="sylius.shipping_category.update_header">
         <source>sylius.shipping_category.update_header</source>
-        <target>Editing shipping category</target>
+        <target>Редактировать категорию доставки</target>
       </trans-unit>
       <trans-unit id="ed5082d714457a6a6979a5b018997d89" resname="sylius.shipping_category.updated_at">
         <source>sylius.shipping_category.updated_at</source>
@@ -1640,7 +1640,7 @@
       </trans-unit>
       <trans-unit id="e9b453c96ed919e5897089ac3d0dae9e" resname="sylius.shipping_method.calculator">
         <source>sylius.shipping_method.calculator</source>
-        <target>Calculator</target>
+        <target>Калькулятор</target>
       </trans-unit>
       <trans-unit id="f7dfe26ea2ea79a1c5c668a4e0f07cef" resname="sylius.shipping_method.category">
         <source>sylius.shipping_method.category</source>
@@ -1648,15 +1648,15 @@
       </trans-unit>
       <trans-unit id="ea14240780fb437a0a0dcf4857b15106" resname="sylius.shipping_method.create">
         <source>sylius.shipping_method.create</source>
-        <target>Create shipping method</target>
+        <target>Создать способ доставки</target>
       </trans-unit>
       <trans-unit id="86c66b8d5cbe63efad083028b9a5e98e" resname="sylius.shipping_method.create_header">
         <source>sylius.shipping_method.create_header</source>
-        <target>New shipping method</target>
+        <target>Новый способ доставки</target>
       </trans-unit>
       <trans-unit id="bed2649db04d680f540ada7ecd52a750" resname="sylius.shipping_method.enabled">
         <source>sylius.shipping_method.enabled</source>
-        <target>Is enabled?</target>
+        <target>Включен?</target>
       </trans-unit>
       <trans-unit id="209314cb9eccccead435738afc6238ec" resname="sylius.shipping_method.id">
         <source>sylius.shipping_method.id</source>
@@ -1664,11 +1664,11 @@
       </trans-unit>
       <trans-unit id="5a4585156b35b5ecabeef6b69d44c105" resname="sylius.shipping_method.index_header">
         <source>sylius.shipping_method.index_header</source>
-        <target>Shipping methods</target>
+        <target>Способы доставки</target>
       </trans-unit>
       <trans-unit id="ca82c4373065a55649bb5228421acde5" resname="sylius.shipping_method.manage">
         <source>sylius.shipping_method.manage</source>
-        <target>Manage shipping methods</target>
+        <target>Редактировать способы доставки</target>
       </trans-unit>
       <trans-unit id="880bd3a61456e234a3cb2054e7353fb9" resname="sylius.shipping_method.name">
         <source>sylius.shipping_method.name</source>
@@ -1676,15 +1676,15 @@
       </trans-unit>
       <trans-unit id="5c51bcf96e5e2f0fc0a5b5b84e3c9ebd" resname="sylius.shipping_method.no_results">
         <source>sylius.shipping_method.no_results</source>
-        <target>There are no shipping methods configured.</target>
+        <target>Нет созданных способов доставки.</target>
       </trans-unit>
       <trans-unit id="d61a410551d1102a3b96de710e35d435" resname="sylius.shipping_method.show_header">
         <source>sylius.shipping_method.show_header</source>
-        <target>Shipping method details</target>
+        <target>Детали способа доставки</target>
       </trans-unit>
       <trans-unit id="8a1e1b5093f0dac548af6bba3657068a" resname="sylius.shipping_method.update_header">
         <source>sylius.shipping_method.update_header</source>
-        <target>Editing shipping method</target>
+        <target>Редактировать способ доставки</target>
       </trans-unit>
       <trans-unit id="3f3841131dd2f373def4c51378fad857" resname="sylius.shipping_method.updated_at">
         <source>sylius.shipping_method.updated_at</source>
@@ -1692,7 +1692,7 @@
       </trans-unit>
       <trans-unit id="50c6650d8a30a661d1ec8a3dd91b4dc3" resname="sylius.shipping_method.zone">
         <source>sylius.shipping_method.zone</source>
-        <target>Zone</target>
+        <target>Зона</target>
       </trans-unit>
       <trans-unit id="468b862724c2bd06a09a17d380194397" resname="sylius.shop_by">
         <source>sylius.shop_by</source>
@@ -2048,23 +2048,23 @@
       </trans-unit>
       <trans-unit id="943429649ff465eaa9e347d926dcf53a" resname="sylius.zone.add_member">
         <source>sylius.zone.add_member</source>
-        <target>Add member</target>
+        <target>Добавить</target>
       </trans-unit>
       <trans-unit id="c2de300bb9129bd61f6964e72535940b" resname="sylius.zone.create">
         <source>sylius.zone.create</source>
-        <target>Create zone</target>
+        <target>Создать новую зону</target>
       </trans-unit>
       <trans-unit id="389f17f78a9bddaa339b1851058931ce" resname="sylius.zone.create_header">
         <source>sylius.zone.create_header</source>
-        <target>New zone</target>
+        <target>Новая зона</target>
       </trans-unit>
       <trans-unit id="0a46e2b9b142d4c7045a610f1faacc10" resname="sylius.zone.index_header">
         <source>sylius.zone.index_header</source>
-        <target>Zones</target>
+        <target>Зоны</target>
       </trans-unit>
       <trans-unit id="852d9e428284ef1b18d111452cd5d048" resname="sylius.zone.manage">
         <source>sylius.zone.manage</source>
-        <target>Manage zones</target>
+        <target>Редактирование зон</target>
       </trans-unit>
       <trans-unit id="bb144a761d1479b7179eb4ba7ec315e4" resname="sylius.zone.name">
         <source>sylius.zone.name</source>
