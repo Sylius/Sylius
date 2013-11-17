@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 
