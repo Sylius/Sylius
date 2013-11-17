@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InstallerBundle;
+namespace spec\Sylius\Bundle\SettingsBundle;
 
 use PhpSpec\ObjectBehavior;
 
-class SyliusInstallerBundleSpec extends ObjectBehavior
+class SyliusSettingsBundleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InstallerBundle\SyliusInstallerBundle');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\SyliusSettingsBundle');
     }
 
     function it_is_a_bundle()

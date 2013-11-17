@@ -17,7 +17,7 @@ class SyliusVariableProductSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProduct\SyliusVariableProductBundle');
+        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\SyliusVariableProductBundle');
     }
 
     function it_is_a_bundle()
