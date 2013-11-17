@@ -12,7 +12,7 @@
 namespace Sylius\Component\Cart\Model;
 
 use Sylius\Component\Cart\Model\CartItemInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderItem;
+use Sylius\Component\Order\Model\OrderItem;
 
 /**
  * Model for cart items.
