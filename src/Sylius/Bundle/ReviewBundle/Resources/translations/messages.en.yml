@@ -13,7 +13,7 @@ sylius:
                 label: Comment
             moderation_status:
                 label: Moderation Status
-                unmoderated: Unmoderated
+                unmoderated: Awaiting moderation
                 accepted: Accepted
                 rejected: Rejected
         guest_reviewer:

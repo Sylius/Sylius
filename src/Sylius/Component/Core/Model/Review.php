@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Model;
+namespace Sylius\Component\Core\Model;
 
-use Sylius\Bundle\ReviewBundle\Model\Review as BaseReview;
+use Sylius\Component\Review\Model\Review as BaseReview;
 
 /**
  * Review

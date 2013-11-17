@@ -414,6 +414,13 @@ sylius:
         update_header: Editing option
         updated_at: last update
         values: values
+    review:
+        author: by %name%
+        form:
+            header: Write your own review
+        header: Reviews
+        no_results: There are no reviews yet.
+        submit: Submit Review
     order:
         billing_address: Billing address
         create: Create order

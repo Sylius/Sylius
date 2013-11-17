@@ -174,3 +174,8 @@ sylius_resource:
 sylius_pricing:
     forms:
         - sylius_product_variant
+
+sylius_review:
+    classes:
+        review:
+            model: Sylius\Component\Core\Model\Review

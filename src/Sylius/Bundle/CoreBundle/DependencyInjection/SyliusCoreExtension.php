@@ -29,6 +29,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     private $bundles = array(
         'sylius_addressing',
+        'sylius_api',
+        'sylius_attribute',
         'sylius_inventory',
         'sylius_currency',
         'sylius_contact',
@@ -37,16 +39,14 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_payum',
         'sylius_product',
         'sylius_promotion',
-        'sylius_api',
+        'sylius_review',
         'sylius_order',
         'sylius_settings',
+        'sylius_sequence',
         'sylius_shipping',
         'sylius_taxation',
         'sylius_taxonomy',
-        'sylius_attribute',
         'sylius_variation',
-        'sylius_sequence',
-        'sylius_review',
     );
 
     protected $configFiles = array(
