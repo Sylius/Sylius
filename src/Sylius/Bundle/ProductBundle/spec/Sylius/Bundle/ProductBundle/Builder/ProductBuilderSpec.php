@@ -23,6 +23,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ProductBuilderSpec extends ObjectBehavior
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Type hinting specs \o/
     function let(
         ProductInterface $product,
         ObjectManager $productManager,
@@ -49,7 +53,13 @@ class ProductBuilderSpec extends ObjectBehavior
     }
 
     function it_adds_property_to_product_if_already_exists(
+<<<<<<< HEAD
         $propertyRepository, $productPropertyRepository, $product, PropertyInterface $property, ProductPropertyInterface $productProperty
+=======
+        $propertyRepository, $productPropertyRepository, $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
+>>>>>>> Type hinting specs \o/
     )
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($property);
@@ -64,7 +74,13 @@ class ProductBuilderSpec extends ObjectBehavior
     }
 
     function it_creates_property_if_it_does_not_exist(
+<<<<<<< HEAD
         $propertyRepository, $productPropertyRepository, $productManager, $product, PropertyInterface $property, ProductPropertyInterface $productProperty
+=======
+        $propertyRepository, $productPropertyRepository, $productManager, $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
+>>>>>>> Type hinting specs \o/
     )
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
