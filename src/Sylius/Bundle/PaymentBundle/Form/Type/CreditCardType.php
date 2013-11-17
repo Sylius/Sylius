@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle\Form\Type;
+namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\AbstractType;
 
 /**
  * Credit Card Form Type
@@ -22,9 +22,26 @@ use Symfony\Component\Form\AbstractType;
  */
 class CreditCardType extends AbstractType
 {
+    /**
+     * Data class.
+     *
+     * @var string
+     */
     protected $dataClass;
+
+    /**
+     * Validation groups.
+     *
+     * @var array
+     */
     protected $validationGroups;
 
+    /**
+     * Constructor.
+     *
+     * @param string $dataClass
+     * @param array  $validationGroups
+     */
     public function __construct($dataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
@@ -61,6 +78,9 @@ class CreditCardType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -87,7 +107,7 @@ class CreditCardType extends AbstractType
     private function getViableYears()
     {
         $yearChoices = array();
-        $currentYear = (int) date("Y");
+        $currentYear = date('Y');
 
         for ($i = 0; $i <= 20; $i++) {
             $yearChoices[$currentYear + $i] = $currentYear + $i;

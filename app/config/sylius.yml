@@ -71,7 +71,7 @@ sylius_inventory:
         stockable:
             model: %sylius.model.variant.class%
 
-sylius_payments:
+sylius_payment:
     gateways:
         dummy: Test
         stripe: Stripe

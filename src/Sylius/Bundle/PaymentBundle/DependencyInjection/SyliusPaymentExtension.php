@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle\DependencyInjection;
+namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusPaymentsExtension extends SyliusResourceExtension
+class SyliusPaymentExtension extends SyliusResourceExtension
 {
     /**
      * {@inheritdoc}

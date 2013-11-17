@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle;
+namespace Sylius\Bundle\PaymentBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusPaymentsBundle extends Bundle
+class SyliusPaymentBundle extends Bundle
 {
     /**
      * Return array of currently supported database drivers.
@@ -54,6 +54,6 @@ class SyliusPaymentsBundle extends Bundle
             realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Payment\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payments.driver.doctrine/orm'));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payment.driver.doctrine/orm'));
     }
 }
