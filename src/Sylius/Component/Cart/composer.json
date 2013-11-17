@@ -1,7 +1,7 @@
 {
-    "name": "sylius/cart-bundle",
-    "type": "symfony-bundle",
-    "description": "Cart engine for your next Symfony2 application.",
+    "name": "sylius/cart",
+    "type": "library",
+    "description": "Cart engine for your PHP application.",
     "keywords": ["shop", "ecommerce", "cart", "carts", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",
@@ -22,23 +22,19 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/order-bundle":      "1.0.*@dev",
-        "sylius/resource-bundle":   "1.0.*@dev",
-        "sylius/cart":              "1.0.*@dev"
+        "sylius/resource": "1.0.*@dev",
+        "sylius/order":    "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":   "2.0.*@dev",
-        "symfony/form":      "~2.3",
-        "symfony/validator": "~2.3",
-        "twig/twig":         "~1.0"
+        "phpspec/phpspec":   "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CartBundle\\": "" }
+        "psr-0": { "Sylius\\Component\\Cart\\": "" }
     },
-    "target-dir": "Sylius/Bundle/CartBundle",
+    "target-dir": "Sylius/Component/Cart",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
