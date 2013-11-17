@@ -1,5 +1,5 @@
-SyliusPromotionsBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionsBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPromotionsBundle)
-===================
+SyliusPromotionBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPromotionBundle)
+=====================
 
 Sylius promotions engine, applicable to any Symfony2 project.
 
@@ -19,7 +19,7 @@ $ bin/phpspec run -fpretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusPromotionsBundle/index.html).
+Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusPromotionBundle/index.html).
 
 Contributing
 ------------
@@ -40,7 +40,7 @@ If you want to keep up with updates, [follow the official Sylius account on twit
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/SyliusPromotionsBundle/issues).
+This bundle uses [GitHub issues](https://github.com/Sylius/SyliusPromotionBundle/issues).
 If you have found bug, please create an issue.
 
 Versioning
@@ -60,10 +60,10 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusPromotionsBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusPromotionBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------
 
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/SyliusPromotionsBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/SyliusPromotionBundle/contributors).
