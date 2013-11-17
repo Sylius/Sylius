@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ProductBundle\Model;
+namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
+use Sylius\Component\Product\Model\PropertyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -22,12 +22,12 @@ class PrototypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Model\Prototype');
+        $this->shouldHaveType('Sylius\Component\Product\Model\Prototype');
     }
 
     function it_implements_Sylius_product_prototype_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ProductBundle\Model\PrototypeInterface');
+        $this->shouldImplement('Sylius\Component\Product\Model\PrototypeInterface');
     }
 
     function it_has_no_id_by_default()

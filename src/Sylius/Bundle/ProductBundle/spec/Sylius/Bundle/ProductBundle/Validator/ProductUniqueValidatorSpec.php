@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Validator;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique;
 use Symfony\Component\Validator\ExecutionContext;
 
@@ -40,7 +40,10 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_with_given_property_value_already_exists(
-        $productRepository, ProductInterface $product, ProductInterface $conflictualProduct, $context
+        $productRepository,
+        ProductInterface $product,
+        ProductInterface $conflictualProduct,
+        $context
     )
     {
         $constraint = new ProductUnique(array(

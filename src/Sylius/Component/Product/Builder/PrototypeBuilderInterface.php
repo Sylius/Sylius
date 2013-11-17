@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Builder;
+namespace Sylius\Component\Product\Builder;
 
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\PrototypeInterface;
 
 /**
  * Prototype builder interface.

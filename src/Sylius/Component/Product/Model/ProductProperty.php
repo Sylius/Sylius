@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Model;
+namespace Sylius\Component\Product\Model;
 
 /**
  * Property to product relation.

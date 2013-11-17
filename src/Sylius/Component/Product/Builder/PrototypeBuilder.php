@@ -9,11 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Builder;
+namespace Sylius\Component\Product\Builder;
 
+<<<<<<< HEAD:src/Sylius/Bundle/ProductBundle/Builder/PrototypeBuilder.php
 use Sylius\Bundle\ProductBundle\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+=======
+use Sylius\Component\Product\Builder\PrototypeBuilderInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\PrototypeInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+>>>>>>> Creating Product component:src/Sylius/Component/Product/Builder/PrototypeBuilder.php
 
 /**
  * Prototype builder.

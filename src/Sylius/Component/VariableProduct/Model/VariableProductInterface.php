@@ -12,9 +12,9 @@
 namespace Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Component\VariableProduct\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\VariableProduct\Model\OptionInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 
 /**
  * Variable product interface.

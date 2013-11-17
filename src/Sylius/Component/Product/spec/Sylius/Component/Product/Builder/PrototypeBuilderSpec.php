@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ProductBundle\Builder;
+namespace spec\Sylius\Component\Product\Builder;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
-use Sylius\Bundle\ProductBundle\Model\Property\Property;
-use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
-use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductPropertyInterface;
+use Sylius\Component\Product\Model\PropertyInterface;
+use Sylius\Component\Product\Model\PrototypeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -31,16 +30,20 @@ class PrototypeBuilderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Builder\PrototypeBuilder');
+        $this->shouldHaveType('Sylius\Component\Product\Builder\PrototypeBuilder');
     }
 
     function it_implements_Sylius_prototype_builder_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ProductBundle\Builder\PrototypeBuilderInterface');
+        $this->shouldImplement('Sylius\Component\Product\Builder\PrototypeBuilderInterface');
     }
 
     function it_assigns_prototype_properties_to_product(
-        $productPropertyRepository, PrototypeInterface $prototype, ProductInterface $product, PropertyInterface $property, ProductPropertyInterface $productProperty
+        $productPropertyRepository,
+        PrototypeInterface $prototype,
+        ProductInterface $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
     )
     {
         $prototype->getProperties()->willReturn(array($property))->shouldBeCalled();

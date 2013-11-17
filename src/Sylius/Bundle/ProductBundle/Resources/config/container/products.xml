@@ -19,7 +19,7 @@
     <parameters>
         <parameter key="sylius.form.type.product_to_identifier.class">Sylius\Bundle\ProductBundle\Form\Type\ProductToIdentifierType</parameter>
 
-        <parameter key="sylius.builder.product.class">Sylius\Bundle\ProductBundle\Builder\ProductBuilder</parameter>
+        <parameter key="sylius.builder.product.class">Sylius\Component\Product\Builder\ProductBuilder</parameter>
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
     </parameters>
 

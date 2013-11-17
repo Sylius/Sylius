@@ -9,38 +9,49 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Model;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+namespace Sylius\Component\Product\Model;
 
 /**
- * Default prototype implementation.
+ * Model for product properties.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Prototype implements PrototypeInterface
+class Property implements PropertyInterface
 {
     /**
-     * Id.
+     * Property id.
      *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Name.
+     * Internal name.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Product properties.
-     *
-     * @var Collection
+     * Type.
+     * @var string
      */
-    protected $properties;
+    protected $type;
+
+    /**
+     * Presentation.
+     * Displayed to user.
+     *
+     * @var string
+     */
+    protected $presentation;
+
+    /**
+     * Property configuration.
+     *
+     * @var array
+     */
+    protected $configuration;
 
     /**
      * Creation time.
@@ -56,13 +67,19 @@ class Prototype implements PrototypeInterface
      */
     protected $updatedAt;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
-        $this->properties = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->type = PropertyTypes::TEXT;
+        $this->configuration = array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -94,51 +111,43 @@ class Prototype implements PrototypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getProperties()
+    public function getPresentation()
     {
-        return $this->properties;
+        return $this->presentation;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProperties(Collection $properties)
+    public function setPresentation($presentation)
     {
-        $this->properties = $properties;
+        $this->presentation = $presentation;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addProperty(PropertyInterface $property)
+    public function getType()
     {
-        if (!$this->hasProperty($property)) {
-            $this->properties->add($property);
-        }
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeProperty(PropertyInterface $property)
+    public function getConfiguration()
     {
-        if ($this->hasProperty($property)) {
-            $this->properties->removeElement($property);
-        }
-
-        return $this;
+        return $this->configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProperty(PropertyInterface $property)
+    public function setConfiguration(array $configuration)
     {
-        return $this->properties->contains($property);
+        $this->configuration = $configuration;
+
+        return $this;
     }
 
     /**
