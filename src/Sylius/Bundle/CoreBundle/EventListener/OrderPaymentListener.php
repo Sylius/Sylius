@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -50,7 +50,7 @@ class OrderPaymentListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order payment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order payment listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
             );
         }
 

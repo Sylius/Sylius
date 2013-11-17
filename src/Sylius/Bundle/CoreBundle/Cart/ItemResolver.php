@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Cart;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Core\Model\VariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactory;

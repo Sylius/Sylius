@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;

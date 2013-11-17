@@ -11,14 +11,7 @@
 
 namespace Sylius\Component\Promotion\Model;
 
-<<<<<<< HEAD:src/Sylius/Bundle/PromotionsBundle/Model/PromotionInterface.php
 use Sylius\Component\Resource\Model\TimestampableInterface;
-=======
-use Sylius\Component\Promotion\Model\RuleInterface;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
->>>>>>> Creating Promotion component:src/Sylius/Component/Promotion/Model/PromotionInterface.php
 
 /**
  * Promotion model interface.

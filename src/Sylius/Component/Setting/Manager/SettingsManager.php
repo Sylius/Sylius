@@ -13,17 +13,10 @@ namespace Sylius\Component\Setting\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-<<<<<<< HEAD:src/Sylius/Bundle/SettingsBundle/Manager/SettingsManager.php
-use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
-use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-=======
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Component\Setting\Model\Settings;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Component\Setting\Schema\SettingsBuilder;
->>>>>>> Creating Setting component:src/Sylius/Component/Setting/Manager/SettingsManager.php
 
 /**
  * Settings manager.

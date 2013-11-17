@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Doctrine\ORM;
 
 use Datetime;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Sylius\Component\Order\Model\OrderStates;
 
