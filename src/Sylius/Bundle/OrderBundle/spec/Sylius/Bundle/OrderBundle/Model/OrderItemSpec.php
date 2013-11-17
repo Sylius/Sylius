@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\OrderBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -43,19 +45,13 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_allows_assigning_itself_to_an_order($order)
+    function it_allows_assigning_itself_to_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_allows_detaching_itself_from_an_order($order)
+    function it_allows_detaching_itself_from_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
@@ -98,10 +94,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_adds_adjustments_properly($adjustment)
+    function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -110,10 +103,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_removes_adjustments_properly($adjustment)
+    function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);
 
@@ -128,10 +118,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_has_fluent_interface_for_adjustments_management($adjustment)
+    function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
@@ -153,10 +140,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(19487);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_calculates_correct_total_based_on_adjustments($adjustment)
+    function it_calculates_correct_total_based_on_adjustments(AdjustmentInterface $adjustment)
     {
         $this->setQuantity(13);
         $this->setUnitPrice(1499);
@@ -172,11 +156,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(18487);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $neutralAdjustment
-     */
-    function it_ignores_neutral_adjustments_when_calculating_total($adjustment, $neutralAdjustment)
+    function it_ignores_neutral_adjustments_when_calculating_total(AdjustmentInterface $adjustment, AdjustmentInterface $neutralAdjustment)
     {
         $this->setQuantity(13);
         $this->setUnitPrice(1499);
