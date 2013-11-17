@@ -42,13 +42,13 @@ class SyliusMoneyBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface' => 'sylius.model.exchange_rate.class',
+            'Sylius\Component\Money\Model\ExchangeRateInterface' => 'sylius.model.exchange_rate.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_money', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\MoneyBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Money\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_money.driver.doctrine/orm'));

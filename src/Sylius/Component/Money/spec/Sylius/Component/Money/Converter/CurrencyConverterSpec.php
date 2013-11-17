@@ -9,34 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Converter;
+namespace spec\Sylius\Component\Money\Converter;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Component\Resource\Repository\RepositoryInterface $exchangeRateRepository
-     */
-    function let($exchangeRateRepository)
+    function let(RepositoryInterface $exchangeRateRepository)
     {
         $this->beConstructedWith($exchangeRateRepository);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverter');
+        $this->shouldHaveType('Sylius\Component\Money\Converter\CurrencyConverter');
     }
 
     function it_implements_Sylius_exchange_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface');
+        $this->shouldImplement('Sylius\Component\Money\Converter\CurrencyConverterInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface $exchangeRate
-     */
-    function it_converts_to_any_currency($exchangeRate, $exchangeRateRepository)
+    function it_converts_to_any_currency(ExchangeRateInterface $exchangeRate, $exchangeRateRepository)
     {
         $exchangeRateRepository->findOneBy(array('currency' => 'USD'))->shouldBeCalled()->willReturn($exchangeRate);
         $exchangeRate->getRate()->shouldBeCalled()->willReturn(0.76495);
