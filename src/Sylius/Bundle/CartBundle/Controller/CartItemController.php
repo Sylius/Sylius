@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\CartBundle\Event\CartItemEvent;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
+use Sylius\Component\Cart\Event\CartItemEvent;
+use Sylius\Component\Cart\Event\FlashEvent;
+use Sylius\Component\Cart\Resolver\ItemResolvingException;
 
 /**
  * Cart item controller.

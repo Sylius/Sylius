@@ -12,9 +12,10 @@
 namespace spec\Sylius\Bundle\CoreBundle\Cart;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,7 +24,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ItemResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $productRepository, FormFactoryInterface $formFactory, AvailabilityCheckerInterface $availabilityChecker, Request $request)
+
+    function let(
+        RepositoryInterface $productRepository,
+        FormFactory $formFactory,
+        AvailabilityCheckerInterface $availabilityChecker
+    )
     {
         $this->beConstructedWith($productRepository, $formFactory, $availabilityChecker);
     }

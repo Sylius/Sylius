@@ -12,11 +12,19 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+<<<<<<< HEAD
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+=======
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+>>>>>>>  Fixing hardcoded references to CartBundle classes
 
 /**
  * Sylius core Order model.

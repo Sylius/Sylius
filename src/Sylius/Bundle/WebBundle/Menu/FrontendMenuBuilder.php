@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;

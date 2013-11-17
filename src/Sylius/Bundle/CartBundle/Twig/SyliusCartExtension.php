@@ -11,11 +11,13 @@
 
 namespace Sylius\Bundle\CartBundle\Twig;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
+use Twig_Extension;
+use Twig_Function_Method;
 
 /**
  * Sylius cart engine twig extension.
