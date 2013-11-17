@@ -23,7 +23,7 @@
         "php":                             ">=5.3.3",
 
         "sylius/resource-bundle":          "1.0.*@dev",
-        "sylius/payment-component":        "1.0.*@dev",
+        "sylius/payment":                  "1.0.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
