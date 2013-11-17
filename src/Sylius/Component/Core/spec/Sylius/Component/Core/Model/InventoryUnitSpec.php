@@ -1,0 +1,101 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace spec\Sylius\Component\Core\Model;
+
+use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+
+class InventoryUnitSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Sylius\Component\Core\Model\InventoryUnit');
+    }
+
+    function it_implements_Sylius_core_inventory_unit_interface()
+    {
+        $this->shouldImplement('Sylius\Component\Core\Model\InventoryUnitInterface');
+    }
+
+    function it_extends_Sylius_inventory_unit_model()
+    {
+        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
+    }
+
+    function it_implements_Sylius_shipment_item_interface()
+    {
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShipmentItemInterface');
+    }
+
+    function it_does_not_belong_to_any_shipment_by_default()
+    {
+        $this->getShipment()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Component\Shipping\Model\ShipmentInterface $shipment
+     */
+    function it_allows_assigning_itself_to_a_shipment($shipment)
+    {
+        $this->setShipment($shipment);
+        $this->getShipment()->shouldReturn($shipment);
+    }
+
+    /**
+     * @param Sylius\Component\Shipping\Model\ShipmentInterface $shipment
+     */
+    function it_allows_detaching_itself_from_a_shipment($shipment)
+    {
+        $this->setShipment($shipment);
+        $this->getShipment()->shouldReturn($shipment);
+
+        $this->setShipment(null);
+        $this->getShipment()->shouldReturn(null);
+    }
+
+    function it_has_ready_shipping_state_by_default()
+    {
+        $this->getShippingState()->shouldReturn(ShipmentItemInterface::STATE_READY);
+    }
+
+    function its_shipping_state_is_mutable()
+    {
+        $this->setShippingState(ShipmentItemInterface::STATE_SHIPPED);
+        $this->getShippingState()->shouldReturn(ShipmentItemInterface::STATE_SHIPPED);
+    }
+
+    function it_does_not_belong_to_an_order_by_default()
+    {
+        $this->getOrder()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Component\Core\Model\OrderInterface $order
+     */
+    function it_allows_attaching_itself_to_an_order($order)
+    {
+        $this->setOrder($order);
+        $this->getOrder()->shouldReturn($order);
+    }
+
+    /**
+     * @param Sylius\Component\Core\Model\OrderInterface $order
+     */
+    function it_allows_detaching_itself_from_an_order($order)
+    {
+        $this->setOrder($order);
+        $this->getOrder()->shouldReturn($order);
+
+        $this->setOrder(null);
+        $this->getOrder()->shouldReturn(null);
+    }
+}

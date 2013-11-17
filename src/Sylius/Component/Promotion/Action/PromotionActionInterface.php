@@ -11,12 +11,7 @@
 
 namespace Sylius\Component\Promotion\Action;
 
-<<<<<<< HEAD:src/Sylius/Bundle/PromotionsBundle/Action/PromotionActionInterface.php
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-=======
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
->>>>>>> Creating Promotion component:src/Sylius/Component/Promotion/Action/PromotionActionInterface.php
 
 /**
  * Executes promotion action on given subject.
@@ -29,10 +24,11 @@ interface PromotionActionInterface
      * Applies the promotion to its subject.
      *
      * @param PromotionSubjectInterface $subject
-     * @param array $configuration
+     * @param array                     $configuration
+     *
      * @return mixed
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
+    public function execute(PromotionSubjectInterface $subject, array $configuration);
 
     /**
      * Returns the form name related to this action.

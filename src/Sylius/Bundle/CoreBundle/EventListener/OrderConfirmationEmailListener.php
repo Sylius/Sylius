@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -42,7 +42,7 @@ class OrderConfirmationEmailListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order confirmation email listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order confirmation email listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
             );
         }
 

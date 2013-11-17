@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\ShippingMethod" table="sylius_shipping_method">
+    <mapped-superclass name="Sylius\Component\Core\Model\ShippingMethod" table="sylius_shipping_method">
         <many-to-one field="zone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="zone_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
