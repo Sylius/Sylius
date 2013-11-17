@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Cart\Model;
 
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * Cart model interface.

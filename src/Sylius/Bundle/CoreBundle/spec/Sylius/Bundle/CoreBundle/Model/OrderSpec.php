@@ -32,12 +32,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\OrderInterface');
+        $this->shouldImplement('Sylius\Component\Order\Model\OrderInterface');
     }
 
     function it_should_extend_Sylius_order_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
     function it_should_not_have_user_defined_by_default()
@@ -129,10 +129,10 @@ class OrderSpec extends ObjectBehavior
     {
         $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
 
-        $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
+        $this->getAdjustments()->count()->shouldReturn(2);
 
         $shippingAdjustments = $this->getShippingAdjustments();
-        $shippingAdjustments->count()->shouldReturn(1); //but here we only get shipping
+        $shippingAdjustments->count()->shouldReturn(1);
         $shippingAdjustments->first()->shouldReturn($shippingAdjustment);
     }
 
