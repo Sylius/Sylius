@@ -1,5 +1,5 @@
 {
-    "name": "sylius/payment-component",
+    "name": "sylius/payment",
     "type": "library",
     "description": "Flexible payments system for PHP e-commerce applications.",
     "keywords": ["payments", "payment", "shop", "webshop", "ecommerce"],
@@ -20,9 +20,9 @@
         }
     ],
     "require": {
-        "php":                             ">=5.3.3",
+        "php":             ">=5.3.3",
 
-        "sylius/resource-component":       "1.0.*@dev"
+        "sylius/resource": "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev"
