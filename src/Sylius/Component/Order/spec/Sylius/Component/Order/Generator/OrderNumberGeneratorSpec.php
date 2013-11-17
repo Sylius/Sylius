@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Generator;
+namespace spec\Sylius\Component\Order\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
-use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -27,12 +27,12 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Generator\OrderNumberGenerator');
+        $this->shouldHaveType('Sylius\Component\Order\Generator\OrderNumberGenerator');
     }
 
     function it_implements_Sylius_order_number_generator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface');
+        $this->shouldImplement('Sylius\Component\Order\Generator\OrderNumberGeneratorInterface');
     }
 
     function it_generates_000001_number_for_first_order($orderRepository, OrderInterface $order)

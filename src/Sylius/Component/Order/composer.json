@@ -1,7 +1,7 @@
 {
-    "name": "sylius/order-bundle",
-    "type": "symfony-bundle",
-    "description": "Sales order management for Symfony2 applications.",
+    "name": "sylius/order",
+    "type": "library",
+    "description": "Sales order management for PHP applications.",
     "keywords": ["shop", "ecommerce", "sales", "orders", "order", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",
@@ -22,24 +22,18 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource-bundle":          "1.0.*@dev",
-        "sylius/money-bundle":             "1.0.*@dev",
-        "sylius/order":                    "1.0.*@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*"
+        "sylius/resource": "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":    "2.0.*@dev",
-        "doctrine/orm":       "~2.2",
-        "symfony/form":       "~2.3",
-        "symfony/validator":  "~2.3"
+        "phpspec/phpspec":    "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\OrderBundle\\": "" }
+        "psr-0": { "Sylius\\Component\\Order\\": "" }
     },
-    "target-dir": "Sylius/Bundle/OrderBundle",
+    "target-dir": "Sylius/Component/Order",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

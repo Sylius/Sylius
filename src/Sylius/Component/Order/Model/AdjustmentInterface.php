@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Model;
+namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
 

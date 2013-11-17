@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Generator;
+namespace Sylius\Component\Order\Generator;
 
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
-use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
  * Default order number generator.
