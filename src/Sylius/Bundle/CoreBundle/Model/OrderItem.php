@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\CartBundle\Model\CartItem;
+use Sylius\Component\Cart\Model\CartItem;
 use Sylius\Bundle\OrderBundle\Model\OrderItemInterface as BaseOrderItemInterface;
 
 /**

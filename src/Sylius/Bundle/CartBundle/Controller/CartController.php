@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Event\FlashEvent;
 
 /**
  * Default cart controller.
