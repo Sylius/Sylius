@@ -17,9 +17,9 @@ before_script:
 
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 
-    - composer install --prefer-source
+    - composer install --dev --prefer-source
 
-script: php bin/phpspec run -f pretty
+script: bin/phpspec run -fpretty --verbose
 
 notifications:
     email: "travis-ci@sylius.org"

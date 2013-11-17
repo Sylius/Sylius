@@ -23,7 +23,7 @@
         "php":                      ">=5.3.3",
 
         "symfony/intl":             "~2.3",
-        "sylius/money-component":   "1.0.*@dev",
+        "sylius/money":             "1.0.*@dev",
         "sylius/resource-bundle":   "1.0.*@dev"
     },
     "require-dev": {
