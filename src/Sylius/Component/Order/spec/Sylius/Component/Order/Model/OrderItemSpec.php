@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Model;
+namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -22,17 +22,17 @@ class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\OrderItem');
+        $this->shouldHaveType('Sylius\Component\Order\Model\OrderItem');
     }
 
     function it_implements_Sylius_order_item_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\OrderItemInterface');
+        $this->shouldImplement('Sylius\Component\Order\Model\OrderItemInterface');
     }
 
     function it_implements_Sylius_adjustable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\AdjustableInterface');
+        $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
     }
 
     function it_has_no_id_by_default()
