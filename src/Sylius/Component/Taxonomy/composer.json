@@ -1,6 +1,6 @@
 {
     "name": "sylius/taxonomy",
-    "type": "symfony-bundle",
+    "type": "library",
     "description": "Flexible categorization system for PHP applications.",
     "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
     "homepage": "http://sylius.org",
@@ -25,7 +25,7 @@
         "sylius/resource": "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":    "2.0.*@dev"
+        "phpspec/phpspec": "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"
