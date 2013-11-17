@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\VariableProduct\Model\VariableProduct as BaseProduct;
 
 /**
  * Sylius core product entity.

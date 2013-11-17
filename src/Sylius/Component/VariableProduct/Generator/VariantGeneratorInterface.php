@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Generator;
+namespace Sylius\Component\VariableProduct\Generator;
 
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
 
 /**
  * Interface for variant generating service.

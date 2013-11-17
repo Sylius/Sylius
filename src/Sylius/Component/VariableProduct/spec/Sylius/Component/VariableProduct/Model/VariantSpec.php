@@ -9,9 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\VariableProductBundle\Model;
+namespace spec\Sylius\Component\VariableProduct\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\VariableProduct\Model\OptionValueInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -20,12 +24,12 @@ class VariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\Variant');
+        $this->shouldHaveType('Sylius\Component\VariableProduct\Model\Variant');
     }
 
     function it_is_a_Sylius_product_variant()
     {
-        $this->shouldImplement('Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
+        $this->shouldImplement('Sylius\Component\VariableProduct\Model\VariantInterface');
     }
 
     function it_should_not_have_id_by_default()
@@ -38,19 +42,13 @@ class VariantSpec extends ObjectBehavior
         $this->getProduct()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface $product
-     */
-    function it_should_allow_assigning_itself_to_a_product($product)
+    function it_should_allow_assigning_itself_to_a_product(VariableProductInterface $product)
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface $product
-     */
-    function it_should_allow_detaching_itself_from_a_product($product)
+    function it_should_allow_detaching_itself_from_a_product(VariableProductInterface $product)
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
@@ -89,28 +87,19 @@ class VariantSpec extends ObjectBehavior
         $this->getOptions()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection $options
-     */
-    function its_option_values_collection_should_be_mutable($options)
+    function its_option_values_collection_should_be_mutable(Collection $options)
     {
         $this->setOptions($options);
         $this->getOptions()->shouldReturn($options);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface $option
-     */
-    function it_should_add_option_value_properly($option)
+    function it_should_add_option_value_properly(OptionValueInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface $option
-     */
-    function it_should_remove_option_value_properly($option)
+    function it_should_remove_option_value_properly(OptionValueInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
@@ -150,23 +139,7 @@ class VariantSpec extends ObjectBehavior
         $this->shouldNotBeAvailable();
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $masterVariant
-     */
-    function it_throws_exception_if_trying_to_inherit_values_and_being_a_master_variant($masterVariant)
-    {
-        $this->setMaster(true);
-
-        $this
-            ->shouldThrow('LogicException')
-            ->duringSetDefaults($masterVariant)
-        ;
-    }
-
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
-     */
-    function it_throws_exception_if_trying_to_inherit_values_from_non_master_variant($variant)
+    function it_throws_exception_if_trying_to_inherit_values_from_non_master_variant(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(false);
 
@@ -176,10 +149,17 @@ class VariantSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $masterVariant
-     */
-    function it_should_inherit_availability_time_from_master_variant($masterVariant)
+    function it_throws_exception_if_trying_to_inherit_values_and_being_a_master_variant(VariantInterface $masterVariant)
+    {
+        $this->setMaster(true);
+
+        $this
+            ->shouldThrow('LogicException')
+            ->duringSetDefaults($masterVariant)
+        ;
+    }
+
+    function it_should_inherit_availability_time_from_master_variant(VariantInterface $masterVariant)
     {
         $availableOn = new \DateTime('tomorrow');
 

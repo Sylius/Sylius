@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Generator;
+namespace Sylius\Component\VariableProduct\Generator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\VariableProduct\Generator\VariantGeneratorInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**

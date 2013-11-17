@@ -9,10 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Model;
+namespace Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\VariableProduct\Model\VariantInterface;
+use Sylius\Component\VariableProduct\Model\OptionValueInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
 
 /**
  * Model for product variants.

@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\VariableProductBundle\Builder;
+namespace Sylius\Component\VariableProduct\Builder;
 
 use Sylius\Bundle\ProductBundle\Builder\PrototypeBuilder as BasePrototypeBuilder;
 use Sylius\Bundle\ProductBundle\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\VariableProduct\Model\VariableProductInterface;
 
 /**
  * Prototype builder.
