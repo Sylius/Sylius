@@ -11,7 +11,11 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
+use Payum\PaymentInterface as PayumPaymentInterface;
+use Payum\Request\StatusRequestInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class OrderStatusActionSpec extends ObjectBehavior
 {
@@ -25,21 +29,14 @@ class OrderStatusActionSpec extends ObjectBehavior
         $this->shouldHaveType('Payum\Action\PaymentAwareAction');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Payum\Request\StatusRequestInterface $statusRequest
-     */
-    function it_should_support_status_request_with_order_model($order, $statusRequest)
+    function it_should_support_status_request_with_order_model(OrderInterface $order, StatusRequestInterface $statusRequest)
     {
         $statusRequest->getModel()->willReturn($order);
 
         $this->supports($statusRequest)->shouldReturn(true);
     }
 
-    /**
-     * @param Payum\Request\StatusRequestInterface $statusRequest
-     */
-    function it_should_not_support_status_request_with_no_order_model($statusRequest)
+    function it_should_not_support_status_request_with_no_order_model(StatusRequestInterface $statusRequest)
     {
         $statusRequest->getModel()->willReturn('foo');
 
@@ -61,12 +58,9 @@ class OrderStatusActionSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Component\Payment\Model\PaymentInterface $payment
-     * @param Payum\Request\StatusRequestInterface $statusRequest
-     */
-    function it_should_mark_new_if_order_have_empty_payment_details($order, $payment, $statusRequest)
+    function it_should_mark_new_if_order_have_empty_payment_details(
+        OrderInterface $order, PaymentInterface $payment, StatusRequestInterface $statusRequest
+    )
     {
         $statusRequest->getModel()->willReturn($order);
         $statusRequest->markNew()->shouldBeCalled();
@@ -77,13 +71,9 @@ class OrderStatusActionSpec extends ObjectBehavior
         $this->execute($statusRequest);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Component\Payment\Model\PaymentInterface $payment
-     * @param Payum\Request\StatusRequestInterface $statusRequest
-     * @param Payum\PaymentInterface $payment
-     */
-    function it_should_do_status_subrequest_with_payment_details_as_model($order, $payment, $statusRequest, $payment)
+    function it_should_do_status_subrequest_with_payment_details_as_model(
+        OrderInterface $order, PaymentInterface $payment, StatusRequestInterface $statusRequest, PayumPaymentInterface $payment
+    )
     {
         $details = array('foo' => 'foo', 'bar' => 'baz');
 
