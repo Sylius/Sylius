@@ -71,9 +71,14 @@ script:
     - cd ../TaxonomiesBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../VariableProductBundle; ../../../../bin/phpspec run -fpretty --verbose
 
-    - cd ../../Component/Shipping; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../Taxation; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../../Component/Addressing; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../Inventory; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Money; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Payment; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Promotion; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Setting; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Shipping; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../Taxation; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../Taxonomy; ../../../../bin/phpspec run -fpretty --verbose
 
 notifications:
