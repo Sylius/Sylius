@@ -11,14 +11,12 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Requirement;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection;
 
-class SyliusRequirements extends ObjectBehavior
+class SyliusRequirementsSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection $requirementCollection
-     */
-    function let($requirementCollection)
+    function let(RequirementCollection $requirementCollection)
     {
         $this->beConstructedWith(array($requirementCollection));
     }

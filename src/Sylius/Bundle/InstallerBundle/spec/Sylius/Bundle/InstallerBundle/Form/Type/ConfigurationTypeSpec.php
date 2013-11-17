@@ -9,42 +9,41 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InstallerBundle\Form\Type\Configuration;
+namespace spec\Sylius\Bundle\InstallerBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
-class MailerType extends ObjectBehavior
+class ConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('sylius_mailer_transport', 'choice', ANY_ARGUMENT)
+            ->add('database', 'sylius_configuration_database', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('sylius_mailer_host', 'text', ANY_ARGUMENT)
+            ->add('mailer', 'sylius_configuration_mailer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('sylius_mailer_user', 'text', ANY_ARGUMENT)
+            ->add('locale', 'sylius_configuration_locale', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('sylius_mailer_password', 'password', ANY_ARGUMENT)
+            ->add('hidden', 'sylius_configuration_hidden')
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

@@ -11,11 +11,10 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Persister;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Yaml\Yaml;
-use UnexpectedValueException;
 
-class YamlPersister extends ObjectBehavior
+class YamlPersisterSpec extends ObjectBehavior
 {
     function let()
     {
@@ -26,8 +25,8 @@ class YamlPersister extends ObjectBehavior
     {
         $this->dump(array('database' => array('user' => 'root')));
 
-        if (Yaml::dump(array('parameters' => array('user' => 'root'))) !== $actial = file_get_contents($this->getTmpFileName())) {
-            throw new UnexpectedValueException($actial);
+        if (Yaml::dump(array('parameters' => array('user' => 'root'))) !== $actual = file_get_contents($this->getTmpFileName())) {
+            throw new \UnexpectedValueException($actual);
         }
     }
 

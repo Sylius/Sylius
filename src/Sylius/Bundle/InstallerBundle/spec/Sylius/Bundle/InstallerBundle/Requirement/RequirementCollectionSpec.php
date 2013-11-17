@@ -11,9 +11,10 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Requirement;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InstallerBundle\Requirement\Requirement;
 
-class RequirementCollection extends ObjectBehavior
+class RequirementCollectionSpec extends ObjectBehavior
 {
     function let()
     {
@@ -35,10 +36,7 @@ class RequirementCollection extends ObjectBehavior
         $this->getIterator()->shouldHaveType('ArrayIterator');
     }
 
-    /**
-     * @param Sylius\Bundle\InstallerBundle\Requirement\Requirement $requirement
-     */
-    function its_add_should_have_fluent_interface($requirement)
+    function its_add_should_have_fluent_interface(Requirement $requirement)
     {
         $this->add($requirement)->shouldHaveType('Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection');
     }

@@ -11,9 +11,11 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
-class SetupType extends ObjectBehavior
+class SetupTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -25,31 +27,28 @@ class SetupType extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('username', 'text', ANY_ARGUMENT)
+            ->add('username', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('plain_password', 'password', ANY_ARGUMENT)
+            ->add('plain_password', 'password', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('email', 'email', ANY_ARGUMENT)
+            ->add('email', 'email', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('load_fixtures', 'checkbox', ANY_ARGUMENT)
+            ->add('load_fixtures', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
