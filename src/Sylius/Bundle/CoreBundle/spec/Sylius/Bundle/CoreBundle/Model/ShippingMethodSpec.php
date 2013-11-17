@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 class ShippingMethodSpec extends ObjectBehavior
 {
@@ -35,10 +36,7 @@ class ShippingMethodSpec extends ObjectBehavior
         $this->getZone()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Addressing\Model\ZoneInterface $zone
-     */
-    function it_should_allow_defining_zone($zone)
+    function it_should_allow_defining_zone(ZoneInterface $zone)
     {
         $this->setZone($zone);
         $this->getZone()->shouldReturn($zone);

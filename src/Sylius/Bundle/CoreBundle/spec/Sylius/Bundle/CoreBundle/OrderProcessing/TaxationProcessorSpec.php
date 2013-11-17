@@ -14,20 +14,25 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Setting\Model\Settings;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class TaxationProcessorSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Component\Resource\Repository\RepositoryInterface    $adjustmentRepository
-     * @param Sylius\Component\Taxation\Calculator\CalculatorInterface    $calculator
-     * @param Sylius\Component\Taxation\Resolver\TaxRateResolverInterface $taxRateResolver
-     * @param Sylius\Component\Addressing\Matcher\ZoneMatcherInterface    $zoneMatcher
-     * @param Sylius\Component\Setting\Model\Settings                     $taxationSettings
-     */
-    function let($adjustmentRepository, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings)
+    function let(
+        RepositoryInterface $adjustmentRepository,
+        CalculatorInterface $calculator,
+        TaxRateResolverInterface $taxRateResolver,
+        ZoneMatcherInterface $zoneMatcher,
+        Settings $taxationSettings
+    )
     {
         $this->beConstructedWith($adjustmentRepository, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings);
     }
@@ -42,10 +47,7 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessorInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_doesnt_apply_any_taxes_if_order_has_no_items($order)
+    function it_doesnt_apply_any_taxes_if_order_has_no_items(OrderInterface $order)
     {
         $order->getItems()->willReturn(array());
         $order->removeTaxAdjustments()->shouldBeCalled();
@@ -54,10 +56,7 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->applyTaxes($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_removes_existing_tax_adjustments($order)
+    function it_removes_existing_tax_adjustments(OrderInterface $order)
     {
         $order->getItems()->willReturn(array());
         $order->removeTaxAdjustments()->shouldBeCalled();

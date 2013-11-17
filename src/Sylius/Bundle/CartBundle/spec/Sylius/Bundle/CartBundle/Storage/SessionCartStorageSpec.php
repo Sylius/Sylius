@@ -12,17 +12,16 @@
 namespace spec\Sylius\Bundle\CartBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Storage\SessionCartStorage as SessionCartStorageClass;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SessionCartStorageSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     */
-    function let($session)
+    function let(SessionInterface $session)
     {
         $this->beConstructedWith($session);
     }
@@ -44,10 +43,7 @@ class SessionCartStorageSpec extends ObjectBehavior
         $this->getCurrentCartIdentifier()->shouldReturn(7);
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
-     */
-    function it_sets_cart_identifier_via_session($session, $cart)
+    function it_sets_cart_identifier_via_session($session, CartInterface $cart)
     {
         $cart->getIdentifier()->willReturn(3);
         $session->set(SessionCartStorageClass::KEY, 3)->shouldBeCalled();

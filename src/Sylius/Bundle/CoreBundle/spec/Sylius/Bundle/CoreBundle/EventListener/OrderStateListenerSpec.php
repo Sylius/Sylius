@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderStateListenerSpec extends ObjectBehavior
 {
-    /**
-      @param Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface $stateResolver
-     */
-    function let($stateResolver)
+    function let(StateResolverInterface $stateResolver)
     {
         $this->beConstructedWith($stateResolver);
     }
@@ -31,11 +31,7 @@ class OrderStateListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderStateListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param \stdClass                                      $invalidSubject
-     */
-    function it_throws_exception_if_event_has_non_order_subject($event, $invalidSubject)
+    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
     {
         $event->getSubject()->willReturn($invalidSubject);
 
@@ -45,11 +41,7 @@ class OrderStateListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_resolves_order_states_before_after_finalizing_the_checkout($stateResolver, $event, $order)
+    function it_resolves_order_states_before_after_finalizing_the_checkout($stateResolver, GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
         $stateResolver->resolveShippingState($order)->shouldBeCalled();

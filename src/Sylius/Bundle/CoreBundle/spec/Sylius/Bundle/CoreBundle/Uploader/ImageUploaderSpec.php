@@ -11,21 +11,19 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Uploader;
 
+use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
 {
-    /**
-     * @param Gaufrette\Filesystem                           $filesystem
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface  $image
-     */
-    function let($filesystem, $image)
+    function let(Filesystem $filesystem, ImageInterface $image)
     {
         $filesystem->has(Argument::any())->willReturn(false);
 
-        $file = new \Symfony\Component\HttpFoundation\File\File(__FILE__, 'img.jpg');
+        $file = new File(__FILE__, 'img.jpg');
         $image->getFile()->willReturn($file);
 
         $this->beConstructedWith($filesystem);

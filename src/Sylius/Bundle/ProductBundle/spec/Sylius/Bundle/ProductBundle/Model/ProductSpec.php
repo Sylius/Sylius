@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ProductBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -124,10 +125,7 @@ class ProductSpec extends ObjectBehavior
         $this->getProperties()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $property
-     */
-    function it_adds_property($property)
+    function it_adds_property(ProductPropertyInterface $property)
     {
         $property->setProduct($this)->shouldBeCalled();
 
@@ -135,10 +133,7 @@ class ProductSpec extends ObjectBehavior
         $this->hasProperty($property)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $property
-     */
-    function it_removes_property($property)
+    function it_removes_property(ProductPropertyInterface $property)
     {
         $property->setProduct($this)->shouldBeCalled();
 
@@ -208,10 +203,7 @@ class ProductSpec extends ObjectBehavior
         $this->shouldNotBeDeleted();
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $property
-     */
-    function it_has_fluent_interface($property)
+    function it_has_fluent_interface(ProductPropertyInterface $property)
     {
         $date = new \DateTime();
 

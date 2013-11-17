@@ -13,18 +13,18 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class FlashListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\HttpFoundation\Session\Session  $session
-     * @param Symfony\Component\Translation\TranslatorInterface $translator
-     */
-    function let($session, $translator)
+    function let(Session $session, TranslatorInterface $translator)
     {
         $this->beConstructedWith($session, $translator);
     }
@@ -34,13 +34,8 @@ class FlashListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\FlashListener');
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Event\FlashEvent $event
-     * @param Symfony\Component\HttpFoundation\Session\Flash\FlashBag $flashBag
-     */
-    function it_should_add_a_custom_error_flash_message_from_event($session, $event, $flashBag)
+    function it_should_add_a_custom_error_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
     {
-
         $message = "This is an error message";
 
         $event
@@ -66,13 +61,8 @@ class FlashListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Event\FlashEvent $event
-     * @param Symfony\Component\HttpFoundation\Session\Flash\FlashBag $flashBag
-     */
-    function it_should_add_a_custom_success_flash_message_from_event($session, $event, $flashBag)
+    function it_should_add_a_custom_success_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
     {
-
         $message = "This is an success message";
 
         $event
@@ -98,11 +88,7 @@ class FlashListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Event\FlashEvent $event
-     * @param Symfony\Component\HttpFoundation\Session\Flash\FlashBag $flashBag
-     */
-    function it_should_have_a_default_error_flash_message_for_event_name($session, $translator, $event, $flashBag, $cartEvents)
+    function it_should_have_a_default_error_flash_message_for_event_name($session, $translator, FlashEvent $event, FlashBag $flashBag)
     {
         $messages = array(SyliusCartEvents::ITEM_ADD_ERROR => 'Error occurred while adding item to cart.');
         $this->messages = $messages;
@@ -142,11 +128,7 @@ class FlashListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Event\FlashEvent $event
-     * @param Symfony\Component\HttpFoundation\Session\Flash\FlashBag $flashBag
-     */
-    function it_should_have_a_default_success_flash_message_for_event_name($session, $translator, $event, $flashBag, $cartEvents)
+    function it_should_have_a_default_success_flash_message_for_event_name($session, $translator, FlashEvent $event, FlashBag $flashBag)
     {
         $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart has been successfully updated.');
         $this->messages = $messages;

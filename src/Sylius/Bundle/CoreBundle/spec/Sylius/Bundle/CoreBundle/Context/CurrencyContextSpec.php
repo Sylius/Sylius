@@ -11,18 +11,20 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\User;
+use Sylius\Component\Setting\Manager\SettingsManagerInterface;
+use Sylius\Component\Setting\Model\Settings;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\Security\Core\SecurityContextInterface      $securityContext
-     * @param Symfony\Component\HttpFoundation\Session\SessionInterface     $session
-     * @param Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface $settingsManager
-     * @param Doctrine\Common\Persistence\ObjectManager                     $userManager
-     * @param Sylius\Component\Setting\Model\Settings                   $settings
-     */
-    function let($securityContext, $session, $settingsManager, $userManager, $settings)
+    function let(
+        SecurityContextInterface $securityContext, SessionInterface $session, SettingsManagerInterface $settingsManager, ObjectManager $userManager, Settings $settings
+    )
     {
         $settingsManager->loadSettings('general')->shouldBeCalled()->willReturn($settings);
         $settings->get('currency')->shouldBeCalled()->willReturn('EUR');
@@ -45,10 +47,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getDefaultCurrency()->shouldReturn('EUR');
     }
 
-    /**
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     */
-    function it_gets_currency_from_session_if_there_is_no_user($token, $securityContext, $session)
+    function it_gets_currency_from_session_if_there_is_no_user(TokenInterface $token, $securityContext, $session)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn(null);
@@ -57,11 +56,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('RSD');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\User                                $user
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     */
-    function it_gets_currency_from_user_if_authenticated($user, $token, $securityContext)
+    function it_gets_currency_from_user_if_authenticated(User $user, TokenInterface $token, $securityContext)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
@@ -70,10 +65,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('PLN');
     }
 
-    /**
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     */
-    function it_sets_currency_to_session_if_there_is_no_user($token, $securityContext, $session)
+    function it_sets_currency_to_session_if_there_is_no_user(TokenInterface $token, $securityContext, $session)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn(null);
@@ -82,11 +74,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->setCurrency('PLN');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\User                                $user
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     */
-    function it_sets_currency_to_user_if_authenticated($user, $token, $securityContext)
+    function it_sets_currency_to_user_if_authenticated(User $user, TokenInterface $token, $securityContext)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);

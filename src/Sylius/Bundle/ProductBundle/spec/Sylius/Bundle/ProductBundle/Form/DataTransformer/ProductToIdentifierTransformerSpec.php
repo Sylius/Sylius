@@ -11,17 +11,16 @@
 
 namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductToIdentifierTransformerSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $productRepository
-     */
-    function let($productRepository)
+    function let(ObjectRepository $productRepository)
     {
         $this->beConstructedWith($productRepository, 'name');
     }
@@ -44,10 +43,7 @@ class ProductToIdentifierTransformerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     */
-    function it_transforms_product_into_its_identifier_value($product)
+    function it_transforms_product_into_its_identifier_value(ProductInterface $product)
     {
         $product->getName()->willReturn('IPHONE5');
 
@@ -70,10 +66,7 @@ class ProductToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform('IPHONE5WHITE')->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     */
-    function it_returns_product_if_found_on_reverse_transform($productRepository, $product)
+    function it_returns_product_if_found_on_reverse_transform($productRepository, ProductInterface $product)
     {
         $productRepository
             ->findOneBy(array('name' => 'IPHONE5'))
