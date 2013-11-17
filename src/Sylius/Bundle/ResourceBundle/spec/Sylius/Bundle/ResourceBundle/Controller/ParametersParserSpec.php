@@ -3,6 +3,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Parameters parser spec.
@@ -16,10 +17,7 @@ class ParametersParserSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ParametersParser');
     }
 
-    /**
-     * @param Symfony\Component\HttpFoundation\Request $request
-     */
-    function it_replaces_parameter_values_starting_with_dollar_sign_by_request_values($request)
+    function it_replaces_parameter_values_starting_with_dollar_sign_by_request_values(Request $request)
     {
         $parameters = array(
             'template' => 'SyliusAssortmentBundle:Product:custom.html.twig',
