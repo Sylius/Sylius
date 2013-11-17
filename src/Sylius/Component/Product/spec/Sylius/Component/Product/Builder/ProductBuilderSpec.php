@@ -9,24 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ProductBundle\Builder;
+namespace spec\Sylius\Component\Product\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
-use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductPropertyInterface;
+use Sylius\Component\Product\Model\PropertyInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ProductBuilderSpec extends ObjectBehavior
 {
-<<<<<<< HEAD
-=======
-
->>>>>>> Type hinting specs \o/
     function let(
         ProductInterface $product,
         ObjectManager $productManager,
@@ -49,17 +45,13 @@ class ProductBuilderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Builder\ProductBuilder');
+        $this->shouldHaveType('Sylius\Component\Product\Builder\ProductBuilder');
     }
 
     function it_adds_property_to_product_if_already_exists(
-<<<<<<< HEAD
-        $propertyRepository, $productPropertyRepository, $product, PropertyInterface $property, ProductPropertyInterface $productProperty
-=======
         $propertyRepository, $productPropertyRepository, $product,
         PropertyInterface $property,
         ProductPropertyInterface $productProperty
->>>>>>> Type hinting specs \o/
     )
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($property);
@@ -74,13 +66,9 @@ class ProductBuilderSpec extends ObjectBehavior
     }
 
     function it_creates_property_if_it_does_not_exist(
-<<<<<<< HEAD
-        $propertyRepository, $productPropertyRepository, $productManager, $product, PropertyInterface $property, ProductPropertyInterface $productProperty
-=======
         $propertyRepository, $productPropertyRepository, $productManager, $product,
         PropertyInterface $property,
         ProductPropertyInterface $productProperty
->>>>>>> Type hinting specs \o/
     )
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);

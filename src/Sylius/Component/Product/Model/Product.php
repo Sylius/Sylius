@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Model;
+namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductPropertyInterface;
 
 /**
  * This is main model for simplest product.
