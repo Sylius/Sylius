@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle\Form\Type;
+namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\Options;

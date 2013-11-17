@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentsBundle\DependencyInjection;
+namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -31,7 +31,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_payments');
+        $rootNode = $treeBuilder->root('sylius_payment');
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -67,7 +67,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\PaymentMethod')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentsBundle\\Form\\Type\\PaymentMethodType')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentBundle\\Form\\Type\\PaymentMethodType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('payment')
@@ -76,7 +76,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\Payment')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentsBundle\\Form\\Type\\PaymentType')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentBundle\\Form\\Type\\PaymentType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('payment_log')
@@ -93,7 +93,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Payment\Model\CreditCard')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentsBundle\\Form\\Type\\CreditCardType')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\\Bundle\\PaymentBundle\\Form\\Type\\CreditCardType')->end()
                             ->end()
                         ->end()
                     ->end()

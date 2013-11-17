@@ -60,7 +60,7 @@ script:
     - cd ../MoneyBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../OmnipayBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../OrderBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../PaymentsBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - cd ../PaymentBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../PayumBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../ProductBundle; ../../../../bin/phpspec run -fpretty --verbose
     - cd ../PromotionBundle; ../../../../bin/phpspec run -fpretty --verbose

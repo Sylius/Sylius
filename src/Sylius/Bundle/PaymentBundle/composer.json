@@ -1,5 +1,5 @@
 {
-    "name": "sylius/payments-bundle",
+    "name": "sylius/payment-bundle",
     "type": "symfony-bundle",
     "description": "Flexible payments system for Symfony2 e-commerce applications.",
     "keywords": ["payments", "payment", "shop", "webshop", "ecommerce"],
@@ -35,9 +35,9 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\PaymentsBundle\\": "" }
+        "psr-0": { "Sylius\\Bundle\\PaymentBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/PaymentsBundle",
+    "target-dir": "Sylius/Bundle/PaymentBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
