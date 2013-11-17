@@ -21,12 +21,11 @@ use Sylius\Bundle\CoreBundle\Model\Order;
 class TaxationProcessorSpec extends ObjectBehavior
 {
     /**
-<<<<<<< HEAD
      * @param Sylius\Component\Resource\Repository\RepositoryInterface    $adjustmentRepository
      * @param Sylius\Component\Taxation\Calculator\CalculatorInterface    $calculator
      * @param Sylius\Component\Taxation\Resolver\TaxRateResolverInterface $taxRateResolver
      * @param Sylius\Component\Addressing\Matcher\ZoneMatcherInterface    $zoneMatcher
-     * @param Sylius\Bundle\SettingsBundle\Model\Settings                 $taxationSettings
+     * @param Sylius\Component\Setting\Model\Settings                     $taxationSettings
      */
     function let($adjustmentRepository, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings)
     {

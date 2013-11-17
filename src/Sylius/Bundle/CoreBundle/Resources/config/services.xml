@@ -166,7 +166,7 @@
                 <service
                     factory-service="sylius.settings.manager"
                     factory-method="loadSettings"
-                    class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                    class="Sylius\Component\Setting\Model\Settings"
                 >
                     <argument>taxation</argument>
                 </service>

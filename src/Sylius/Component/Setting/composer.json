@@ -1,7 +1,7 @@
 {
-    "name": "sylius/settings-bundle",
-    "type": "symfony-bundle",
-    "description": "Settings system for Symfony2 applications, editable via web user interface.",
+    "name": "sylius/setting",
+    "type": "library",
+    "description": "Setting system for PHP applications",
     "keywords": ["config", "configuration", "settings", "shop", "webshop", "ecommerce"],
     "homepage": "http://sylius.org",
     "license": "MIT",
@@ -20,26 +20,20 @@
         }
     ],
     "require": {
-        "php":                             ">=5.3.3",
+        "php":             ">=5.3.3",
 
-        "symfony/framework-bundle":        "~2.3",
-        "sylius/resource-bundle":          "1.0.*@dev",
-        "sylius/setting":                  "1.0.*@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*",
-        "liip/doctrine-cache-bundle":      "*"
+        "sylius/resource": "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":          "2.0.*@dev",
-        "symfony/form":             "~2.3",
-        "symfony/validator":        "~2.3"
+        "phpspec/phpspec": "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\SettingsBundle\\": "" }
+        "psr-0": { "Sylius\\Component\\Setting\\": "" }
     },
-    "target-dir": "Sylius/Bundle/SettingsBundle",
+    "target-dir": "Sylius/Component/Setting",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

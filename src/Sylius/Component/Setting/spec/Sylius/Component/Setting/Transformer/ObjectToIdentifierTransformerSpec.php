@@ -9,31 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
+namespace spec\Sylius\Component\Setting\Transformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Setting\Model\ParameterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $repository
-     */
-    function let($repository)
+
+    function let(ObjectRepository $repository)
     {
         $this->beConstructedWith($repository, 'name');
     }
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Component\Setting\Transformer\ObjectToIdentifierTransformer');
     }
 
     function it_should_implement_parameter_transformer_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface');
+        $this->shouldImplement('Sylius\Component\Setting\Transformer\ParameterTransformerInterface');
     }
 
     function it_should_return_null_when_null_transformed()
@@ -41,10 +41,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->transform(null)->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\ParameterInterface $object
-     */
-    function it_should_transform_object_into_its_identifier($object)
+    function it_should_transform_object_into_its_identifier(ParameterInterface $object)
     {
         $object->getName()->willReturn('name');
 
@@ -56,10 +53,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\ParameterInterface $object
-     */
-    function it_should_find_object_when_identifier_reverse_transformed($repository, $object)
+    function it_should_find_object_when_identifier_reverse_transformed($repository, ParameterInterface $object)
     {
         $repository->findOneBy(array('name' => 'foo'))->shouldBeCalled()->willReturn($object);
 

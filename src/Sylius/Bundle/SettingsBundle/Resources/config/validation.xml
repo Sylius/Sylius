@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\SettingsBundle\Model\Parameter">
+    <class name="Sylius\Component\Setting\Model\Parameter">
         <property name="namespace">
             <constraint name="NotBlank">
                 <option name="message">sylius.parameter.namespace.not_blank</option>

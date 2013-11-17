@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\SettingsBundle\Schema;
+namespace spec\Sylius\Component\Setting\Schema;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Setting\Transformer\ParameterTransformerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -20,12 +21,12 @@ class SettingsBuilderSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder');
+        $this->shouldHaveType('Sylius\Component\Setting\Schema\SettingsBuilder');
     }
 
     function it_should_implement_settings_builder_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface');
+        $this->shouldImplement('Sylius\Component\Setting\Schema\SettingsBuilderInterface');
     }
 
     function it_should_extend_options_resolver()
@@ -38,10 +39,7 @@ class SettingsBuilderSpec extends ObjectBehavior
         $this->getTransformers()->shouldReturn(array());
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface $transformer
-     */
-    function it_should_set_transformer_for_parameter_by_name($transformer)
+    function it_should_set_transformer_for_parameter_by_name(ParameterTransformerInterface $transformer)
     {
         $this->setTransformer('test', $transformer);
 

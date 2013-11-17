@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SettingsBundle\Controller;
 
 use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Component\Setting\Manager\SettingsManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
