@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AddressingBundle\Model;
+namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
@@ -20,13 +21,13 @@ class ZoneMemberZoneSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMemberZone');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMemberZone');
     }
 
     function it_implements_Sylius_zone_member_interface()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMember');
-        $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMember');
+        $this->shouldImplement('Sylius\Component\Addressing\Model\ZoneMemberInterface');
     }
 
     function it_has_no_id_by_default()
@@ -44,19 +45,13 @@ class ZoneMemberZoneSpec extends ObjectBehavior
         $this->getBelongsTo()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
-     */
-    function its_zone_is_mutable($zone)
+    function its_zone_is_mutable(ZoneInterface $zone)
     {
         $this->setZone($zone);
         $this->getZone()->shouldReturn($zone);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
-     */
-    function it_returns_zone_name($zone)
+    function it_returns_zone_name(ZoneInterface $zone)
     {
         $zone->getName()->willReturn('USA');
         $this->setZone($zone);
@@ -64,11 +59,7 @@ class ZoneMemberZoneSpec extends ObjectBehavior
         $this->getName()->shouldReturn('USA');
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $belongsTo
-     */
-    function it_has_fluent_interface($zone, $belongsTo)
+    function it_has_fluent_interface(ZoneInterface $zone, ZoneInterface $belongsTo)
     {
         $this->setZone($zone)->shouldReturn($this);
         $this->setBelongsTo($belongsTo)->shouldReturn($this);

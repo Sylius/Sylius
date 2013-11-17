@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AddressingBundle\Model;
+namespace spec\Sylius\Component\Addressing\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
@@ -20,12 +22,12 @@ class ZoneSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\Zone');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\Zone');
     }
 
     function it_implements_Sylius_zone_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ZoneInterface');
+        $this->shouldImplement('Sylius\Component\Addressing\Model\ZoneInterface');
     }
 
     function it_has_no_id_by_default()
@@ -65,29 +67,20 @@ class ZoneSpec extends ObjectBehavior
         $this->hasMembers()->shouldReturn(false);
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection $members
-     */
-    function its_members_are_mutable($members)
+    function its_members_are_mutable(Collection $members)
     {
         $this->setMembers($members);
         $this->getMembers()->shouldReturn($members);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface $member
-     */
-    function it_adds_member($member)
+    function it_adds_member(ZoneMemberInterface $member)
     {
         $this->addMember($member);
         $this->hasMembers()->shouldReturn(true);
         $this->hasMember($member)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface $member
-     */
-    function it_removes_member($member)
+    function it_removes_member(ZoneMemberInterface $member)
     {
         $this->addMember($member);
         $this->hasMember($member)->shouldReturn(true);
@@ -96,11 +89,7 @@ class ZoneSpec extends ObjectBehavior
         $this->hasMember($member)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface $member
-     * @param Doctrine\Common\Collections\Collection                   $members
-     */
-    function it_has_fluent_interface($member, $members)
+    function it_has_fluent_interface(ZoneMemberInterface $member, Collection $members)
     {
         $this->setName('Yugoslavia')->shouldReturn($this);
         $this->setMembers($members)->shouldReturn($this);

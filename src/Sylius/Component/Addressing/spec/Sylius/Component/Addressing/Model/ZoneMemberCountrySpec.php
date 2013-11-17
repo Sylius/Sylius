@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AddressingBundle\Model;
+namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
@@ -20,13 +22,13 @@ class ZoneMemberCountrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMemberCountry');
     }
 
     function it_implements_Sylius_zone_member_interface()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Model\ZoneMember');
-        $this->shouldImplement('Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMember');
+        $this->shouldImplement('Sylius\Component\Addressing\Model\ZoneMemberInterface');
     }
 
     function it_has_no_id_by_default()
@@ -44,19 +46,13 @@ class ZoneMemberCountrySpec extends ObjectBehavior
         $this->getBelongsTo()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function its_country_is_mutable($country)
+    function its_country_is_mutable(CountryInterface $country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function it_returns_country_name($country)
+    function it_returns_country_name(CountryInterface $country)
     {
         $country->getName()->willReturn('Serbia');
         $this->setCountry($country);
@@ -64,11 +60,7 @@ class ZoneMemberCountrySpec extends ObjectBehavior
         $this->getName()->shouldReturn('Serbia');
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface    $zone
-     */
-    function it_has_fluent_interface($country, $zone)
+    function it_has_fluent_interface(CountryInterface $country, ZoneInterface $zone)
     {
         $this->setCountry($country)->shouldReturn($this);
         $this->setBelongsTo($zone)->shouldReturn($this);

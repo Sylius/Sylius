@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * Tax rate applicable to selected zone.

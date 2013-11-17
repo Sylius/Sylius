@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * Shipping method available for selected zone.
