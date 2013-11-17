@@ -1,6 +1,6 @@
 {
-    "name": "sylius/variable-product-component",
-    "type": "symfony-bundle",
+    "name": "sylius/variable-product",
+    "type": "library",
     "description": "Product catalog system with support for product options and variants.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment", "options", "variants"],
     "homepage": "http://sylius.org",
@@ -20,12 +20,10 @@
         }
     ],
     "require": {
-        "php":                                ">=5.3.3",
+        "php":             ">=5.3.3",
 
-        "sylius/product-bundle":              "1.0.*@dev",
-        "sylius/resource-bundle":             "1.0.*@dev",
-        "sylius/variable-product-component":  "1.0.*@dev",
-        "stof/doctrine-extensions-bundle":    "1.1.*"
+        "sylius/resource": "1.0.*@dev",
+        "sylius/product":  "1.0.*@dev",
     },
     "require-dev": {
         "phpspec/phpspec":   "2.0.*@dev",
@@ -37,9 +35,9 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\VariableProductBundle\\": "" }
+        "psr-0": { "Sylius\\Component\\VariableProduct\\": "" }
     },
-    "target-dir": "Sylius/Bundle/VariableProductBundle",
+    "target-dir": "Sylius/Component/VariableProduct",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
