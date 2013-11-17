@@ -12,13 +12,14 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Setting\Manager\SettingsManagerInterface;
+use Sylius\Component\Setting\Model\Settings;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class LocaleListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Component\Setting\Manager\SettingsManagerInterface $settingsManager
-     */
-    function let($settingsManager)
+    function let(SettingsManagerInterface $settingsManager)
     {
         $this->beConstructedWith($settingsManager);
     }
@@ -28,12 +29,7 @@ class LocaleListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\LocaleListener');
     }
 
-    /**
-     * @param Symfony\Component\HttpKernel\Event\GetResponseEvent $event
-     * @param Sylius\Component\Setting\Model\Settings         $settings
-     * @param Symfony\Component\HttpFoundation\Request            $request
-     */
-    function it_sets_locale_on_request($settingsManager, $event, $settings, $request)
+    function it_sets_locale_on_request($settingsManager, GetResponseEvent $event, Settings $settings, Request $request)
     {
         $settingsManager->loadSettings('general')->willReturn($settings);
         $settings->get('locale')->willReturn('en');

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 
 class VariantImageSpec extends ObjectBehavior
 {
@@ -30,10 +31,7 @@ class VariantImageSpec extends ObjectBehavior
         $this->getVariant()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
-     */
-    function its_variant_is_mutable($variant)
+    function its_variant_is_mutable(VariantInterface $variant)
     {
         $this->setVariant($variant);
         $this->getVariant()->shouldReturn($variant);
