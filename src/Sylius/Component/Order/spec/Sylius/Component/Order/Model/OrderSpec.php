@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Model;
+namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -23,17 +23,17 @@ class OrderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
     function it_implements_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\OrderInterface');
+        $this->shouldImplement('Sylius\Component\Order\Model\OrderInterface');
     }
 
     function it_implements_Sylius_adjustable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\AdjustableInterface');
+        $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
     }
 
     function it_implements_Sylius_timestampable_interface()
@@ -93,10 +93,7 @@ class OrderSpec extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item
-     */
-    function it_adds_items_properly($item)
+    function it_adds_items_properly(OrderItemInterface $item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -197,7 +194,11 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
-    function it_calculates_correct_adjustments_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, AdjustmentInterface $adjustment3)
+    function it_calculates_correct_adjustments_total(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3
+    )
     {
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->getAmount()->willReturn(-4999);
@@ -227,7 +228,12 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
+    function it_calculates_correct_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    )
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
@@ -261,7 +267,12 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(80000);
     }
 
-    function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
+    function it_ignores_neutral_adjustments_when_calculating_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    )
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();

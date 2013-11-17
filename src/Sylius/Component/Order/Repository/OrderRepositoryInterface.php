@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Repository;
+namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
