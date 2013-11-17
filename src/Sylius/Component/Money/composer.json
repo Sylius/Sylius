@@ -1,5 +1,5 @@
 {
-    "name": "sylius/money-component",
+    "name": "sylius/money",
     "type": "library",
     "description": "Currencies and money formatting engine bundle for PHP applications.",
     "keywords": ["cash", "currency", "money", "currencies"],
@@ -20,10 +20,10 @@
         }
     ],
     "require": {
-        "php":                      ">=5.3.3",
+        "php":                  ">=5.3.3",
 
-        "sylius/resource-component": "1.0.*@dev",
-        "mathiasverraes/money":      "*@dev"
+        "sylius/resource":      "1.0.*@dev",
+        "mathiasverraes/money": "*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev"
