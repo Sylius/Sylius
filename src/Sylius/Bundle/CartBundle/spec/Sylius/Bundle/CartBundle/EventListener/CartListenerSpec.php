@@ -11,19 +11,17 @@
 
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class CartListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectManager               $manager
-     * @param Symfony\Component\Validator\ValidatorInterface          $validator
-     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $provider
-     */
-    function let($manager, $validator, $provider)
+    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
     {
         $this->beConstructedWith($manager, $validator, $provider);
     }
