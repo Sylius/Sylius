@@ -122,3 +122,7 @@ sylius_backend_settings:
 
 sylius_backend_security:
     resource: @SyliusWebBundle/Resources/config/routing/backend/security.yml
+
+sylius_backend_review:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/review.yml
+    prefix: /reviews

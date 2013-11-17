@@ -1,0 +1,5 @@
+sylius_review_product:
+    pattern: /p/{slug}/review
+    methods:  [POST]
+    defaults:
+        _controller: sylius.controller.frontend.review:createAction

@@ -1,0 +1,66 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Review:macros.html.twig' as review_macros %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.review'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_review_index') }}">Reviews</a></li>
+    <li>{{ review.title }}</li>
+    <li>Show</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_review_index'), 'sylius.review.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_review_update', {'id': review.id})) }}
+        {{ buttons.delete(path('sylius_backend_review_delete', {'id': review.id})) }}
+    </div>
+    <h1><i class="icon-ellipsis-vertical"></i> Review Details</h1>
+</div>
+
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td><strong>ID</strong></td>
+            <td>{{ review.id }}</td>
+        </tr>
+        <tr>
+            <td><strong>Product</strong></td>
+            <td>{{ review.product.name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Title</strong></td>
+            <td>{{ review.title }}</td>
+        </tr>
+        <tr>
+            <td><strong>Comment</strong></td>
+            <td>{{ review.comment }}</td>
+        </tr>
+        <tr>
+            <td><strong>Rating</strong></td>
+            <td><span class="label label-default">{{ review.rating }}</span></td>
+        </tr>
+        <tr>
+            <td><strong>Moderation Status</strong></td>
+            <td><span class="label label-{{ review_macros.moderation_label(review) }}">{{ review.moderationStatus }}</span></td>
+        </tr>
+        {% if review.guestReviewer %}
+        <tr>
+            <td><strong>Guest Reviewer</strong></td>
+            <td>{{ review.guestReviewer.name }} ({{ review.guestReviewer.email }})</td>
+        </tr>
+        {% endif %}
+        {% if review.user %}
+        <tr>
+            <td><strong>User</strong></td>
+            <td>{{ review.user.email }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

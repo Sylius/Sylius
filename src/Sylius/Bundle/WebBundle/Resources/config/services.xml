@@ -8,6 +8,7 @@
     <parameters>
         <parameter key="sylius.controller.frontend.homepage.class">Sylius\Bundle\WebBundle\Controller\Frontend\HomepageController</parameter>
         <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
+        <parameter key="sylius.controller.frontend.review.class">Sylius\Bundle\WebBundle\Controller\Frontend\Review\ProductReviewController</parameter>
 
         <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
         <parameter key="sylius.controller.backend.security.class">Sylius\Bundle\WebBundle\Controller\Backend\SecurityController</parameter>
@@ -21,12 +22,21 @@
     </parameters>
 
     <services>
+
         <service id="sylius.controller.frontend.homepage" class="%sylius.controller.frontend.homepage.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
         <service id="sylius.controller.frontend.account.order" class="%sylius.controller.frontend.account.order.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.frontend.review" class="%sylius.controller.frontend.review.class%">
+            <argument>sylius</argument>
+            <argument>review</argument>
+            <argument>SyliusReviewBundle:Review</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

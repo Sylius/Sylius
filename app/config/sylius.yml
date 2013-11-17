@@ -93,6 +93,11 @@ sylius_order:
         order_item:
             model: Sylius\Bundle\CoreBundle\Model\OrderItem
 
+sylius_review:
+    classes:
+        review:
+            model: Sylius\Bundle\CoreBundle\Model\Review
+
 sylius_resource:
     resources:
         sylius.user:

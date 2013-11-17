@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        review:
+            rating:
+                label: Overall Rating
+                empty_value: Select a rating
+            title:
+                label: Title
+            comment:
+                label: Comment
+            moderation_status:
+                label: Moderation Status
+                unmoderated: Unmoderated
+                accepted: Accepted
+                rejected: Rejected
+        guest_reviewer:
+            name:
+                label: Your Name
+            email:
+                label: Your Email

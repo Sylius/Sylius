@@ -39,6 +39,7 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
         'sylius_shipping',
         'sylius_taxation',
         'sylius_taxonomies',
+        'sylius_review'
     );
 
     /**

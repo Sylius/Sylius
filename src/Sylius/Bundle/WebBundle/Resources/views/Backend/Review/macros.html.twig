@@ -1,0 +1,49 @@
+{% macro moderation_label(review) %}
+{% spaceless %}
+    {% set statusLabels = { 'new': 'default', 'approved': 'success', 'rejected': 'danger' } %}
+    {{ statusLabels[review.moderationStatus] }}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro list(reviews) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Review:macros.html.twig' as review_macros %}
+
+{% if reviews|length > 0 %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Rating</th>
+                <th>Created At</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.id }}</td>
+                <td>{{ review.product.name }}</td>
+                <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.moderationStatus }}</label></td>
+                <td><label class="label label-default">{{ review.rating }}</label></td>
+                <td>{{ review.createdAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                        {{ buttons.show(path('sylius_backend_review_show', {'id': review.id})) }}
+                        {{ buttons.edit(path('sylius_backend_review_update', {'id': review.id})) }}
+                        {{ buttons.delete(path('sylius_backend_review_delete', {'id': review.id})) }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('There are no reviews. ') }}
+{% endif %}
+
+{% endmacro %}
