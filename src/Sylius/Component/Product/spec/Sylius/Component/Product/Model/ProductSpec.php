@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ProductBundle\Model;
+namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
+use Sylius\Component\Product\Model\ProductPropertyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,12 +21,12 @@ class ProductSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Model\Product');
+        $this->shouldHaveType('Sylius\Component\Product\Model\Product');
     }
 
     function it_implements_Sylius_product_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ProductBundle\Model\ProductInterface');
+        $this->shouldImplement('Sylius\Component\Product\Model\ProductInterface');
     }
 
     function it_has_no_id_by_default()
