@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\OrderBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Order\Generator\OrderNumberGeneratorInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
