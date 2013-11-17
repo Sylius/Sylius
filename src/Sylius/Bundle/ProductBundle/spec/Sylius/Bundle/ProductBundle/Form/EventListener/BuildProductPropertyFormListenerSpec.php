@@ -13,16 +13,18 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class BuildProductPropertyFormListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\Form\FormFactoryInterface $formFactory
-     */
-    function let($formFactory)
+
+    function let(FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($formFactory);
     }
@@ -32,13 +34,8 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
         self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'buildForm'));
     }
 
-    /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Symfony\Component\Form\Form      $form
-     * @param Symfony\Component\Form\Form      $valueField
-     */
     function it_builds_form_with_property_and_value_when_new_product_property(
-        $event, $form, $valueField, $formFactory
+        FormEvent $event, Form $form, Form $valueField, $formFactory
     )
     {
         $event->getData()->willReturn(null);
@@ -50,14 +47,8 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
         $this->buildForm($event);
     }
 
-    /**
-     * @param Symfony\Component\Form\FormEvent                           $event
-     * @param Symfony\Component\Form\Form                                $form
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     * @param Symfony\Component\Form\Form                                $valueField
-     */
     function it_builds_value_field_base_on_product_property(
-        $event, $form, $productProperty, $valueField, $formFactory
+        FormEvent $event, Form $form, ProductPropertyInterface $productProperty, Form $valueField, $formFactory
     )
     {
         $productProperty->getType()->willReturn('checkbox');
@@ -75,14 +66,8 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
         $this->buildForm($event);
     }
 
-    /**
-     * @param Symfony\Component\Form\FormEvent                           $event
-     * @param Symfony\Component\Form\Form                                $form
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     * @param Symfony\Component\Form\Form                                $valueField
-     */
     function it_builds_options_base_on_product_property(
-        $event, $form, $productProperty, $valueField, $formFactory
+        FormEvent $event, Form $form, ProductPropertyInterface $productProperty, Form $valueField, $formFactory
     )
     {
         $productProperty->getType()->willReturn('choice');

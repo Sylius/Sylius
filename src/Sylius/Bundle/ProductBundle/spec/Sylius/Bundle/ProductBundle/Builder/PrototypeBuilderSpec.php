@@ -24,6 +24,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PrototypeBuilderSpec extends ObjectBehavior
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Type hinting specs \o/
     function let(RepositoryInterface $productPropertyRepository)
     {
         $this->beConstructedWith($productPropertyRepository);
@@ -40,7 +44,15 @@ class PrototypeBuilderSpec extends ObjectBehavior
     }
 
     function it_assigns_prototype_properties_to_product(
+<<<<<<< HEAD
         $productPropertyRepository, PrototypeInterface $prototype, ProductInterface $product, PropertyInterface $property, ProductPropertyInterface $productProperty
+=======
+        $productPropertyRepository,
+        PrototypeInterface $prototype,
+        ProductInterface $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
+>>>>>>> Type hinting specs \o/
     )
     {
         $prototype->getProperties()->willReturn(array($property))->shouldBeCalled();

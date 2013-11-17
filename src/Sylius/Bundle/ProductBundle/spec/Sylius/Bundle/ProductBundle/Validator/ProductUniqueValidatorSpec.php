@@ -40,7 +40,10 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_with_given_property_value_already_exists(
-        $productRepository, ProductInterface $product, ProductInterface $conflictualProduct, $context
+        $productRepository,
+        ProductInterface $product,
+        ProductInterface $conflictualProduct,
+        $context
     )
     {
         $constraint = new ProductUnique(array(
