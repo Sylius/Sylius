@@ -21,7 +21,7 @@
         <parameter key="sylius.repository.payment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.credit_card.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
 
-        <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\PaymentsBundle\Form\Type\PaymentMethodEntityType</parameter>
+        <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodEntityType</parameter>
     </parameters>
 
     <services>
