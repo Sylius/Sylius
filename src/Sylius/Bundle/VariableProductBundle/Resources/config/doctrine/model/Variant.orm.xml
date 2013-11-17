@@ -26,7 +26,7 @@
         <field name="presentation" column="presentation" type="string" nullable="true" />
         <field name="availableOn" column="available_on" type="datetime" />
 
-        <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="variants">
+        <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="variants">
             <join-column name="product_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 

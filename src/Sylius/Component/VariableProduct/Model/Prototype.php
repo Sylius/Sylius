@@ -13,9 +13,9 @@ namespace Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ProductBundle\Model\Prototype as BasePrototype;
-use Sylius\Component\VariableProduct\Model\PrototypeInterface;
+use Sylius\Component\Product\Model\Prototype as BasePrototype;
 use Sylius\Component\VariableProduct\Model\OptionInterface;
+use Sylius\Component\VariableProduct\Model\PrototypeInterface;
 
 /**
  * Prototype with options support.

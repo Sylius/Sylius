@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\VariableProduct\Builder;
 
-use Sylius\Bundle\ProductBundle\Builder\PrototypeBuilder as BasePrototypeBuilder;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
+use Sylius\Component\Product\Builder\PrototypeBuilder as BasePrototypeBuilder;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\PrototypeInterface;
 use Sylius\Component\VariableProduct\Model\VariableProductInterface;
 
 /**

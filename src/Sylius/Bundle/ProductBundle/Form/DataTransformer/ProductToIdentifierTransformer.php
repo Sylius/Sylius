@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -60,7 +60,7 @@ class ProductToIdentifierTransformer implements DataTransformerInterface
         }
 
         if (!$product instanceof ProductInterface) {
-            throw new UnexpectedTypeException($product, 'Sylius\Bundle\ProductBundle\Model\ProductInterface');
+            throw new UnexpectedTypeException($product, 'Sylius\Component\Product\Model\ProductInterface');
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();

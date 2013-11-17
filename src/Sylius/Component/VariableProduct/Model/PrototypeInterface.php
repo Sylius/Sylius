@@ -12,7 +12,7 @@
 namespace Sylius\Component\VariableProduct\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ProductBundle\Model\PrototypeInterface as BasePrototypeInterface;
+use Sylius\Component\Product\Model\PrototypeInterface as BasePrototypeInterface;
 use Sylius\Component\VariableProduct\Model\OptionInterface;
 
 /**
