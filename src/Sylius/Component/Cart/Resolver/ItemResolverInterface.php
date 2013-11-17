@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Resolver;
+namespace Sylius\Component\Cart\Resolver;
 
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

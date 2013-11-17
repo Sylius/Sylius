@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
+namespace Sylius\Component\Cart\Model;
 
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Bundle\OrderBundle\Model\Order;
 
 /**
