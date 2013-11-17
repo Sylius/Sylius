@@ -42,16 +42,16 @@ class SyliusPaymentsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface'    => 'sylius.model.credit_card.class',
-            'Sylius\Bundle\PaymentsBundle\Model\PaymentInterface'       => 'sylius.model.payment.class',
-            'Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface'    => 'sylius.model.payment_log.class',
-            'Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface' => 'sylius.model.payment_method.class',
+            'Sylius\Component\Payment\Model\CreditCardInterface'    => 'sylius.model.credit_card.class',
+            'Sylius\Component\Payment\Model\PaymentInterface'       => 'sylius.model.payment.class',
+            'Sylius\Component\Payment\Model\PaymentLogInterface'    => 'sylius.model.payment_log.class',
+            'Sylius\Component\Payment\Model\PaymentMethodInterface' => 'sylius.model.payment_method.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_payments', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\PaymentsBundle\Model',
+            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Payment\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payments.driver.doctrine/orm'));

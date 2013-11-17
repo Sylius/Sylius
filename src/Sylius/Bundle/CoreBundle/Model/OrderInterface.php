@@ -16,7 +16,7 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * Sylius core Order model.

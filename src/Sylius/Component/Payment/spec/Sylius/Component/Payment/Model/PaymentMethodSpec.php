@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\PaymentsBundle\Model;
+namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,12 +20,12 @@ class PaymentMethodSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentsBundle\Model\PaymentMethod');
+        $this->shouldHaveType('Sylius\Component\Payment\Model\PaymentMethod');
     }
 
     function it_implements_Sylius_payment_method_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface');
+        $this->shouldImplement('Sylius\Component\Payment\Model\PaymentMethodInterface');
     }
 
     function it_has_no_id_by_default()
