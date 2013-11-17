@@ -11,6 +11,10 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -23,13 +27,7 @@ require_once __DIR__.'/../../Fixture/Entity/Foo.php';
  */
 class EntityRepositorySpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\ORM\EntityManager         $entityManager
-     * @param Doctrine\ORM\Mapping\ClassMetadata $class
-     * @param Doctrine\ORM\QueryBuilder          $queryBuilder
-     * @param Doctrine\ORM\AbstractQuery         $query
-     */
-    function let($entityManager, $class, $queryBuilder, $query)
+    function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
 
@@ -82,10 +80,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->find(3)->shouldReturn(null);
     }
 
-    /**
-     * @param Doctrine\ORM\QueryBuilder $queryBuilder
-     */
-    function it_applies_criteria_when_finding_one($queryBuilder)
+    function it_applies_criteria_when_finding_one(QueryBuilder $queryBuilder)
     {
         $criteria = array(
             'foo' => 'bar',
@@ -109,10 +104,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->findOneBy($criteria)->shouldReturn(null);
     }
 
-    /**
-     * @param Doctrine\ORM\QueryBuilder $queryBuilder
-     */
-    function it_applies_criteria_when_finding_by($queryBuilder)
+    function it_applies_criteria_when_finding_by(QueryBuilder $queryBuilder)
     {
         $criteria = array(
             'foo' => 'bar',
@@ -141,7 +133,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->findAll()->shouldReturn(null);
     }
 
-    function it_creates_Pagerfanta_paginator()
+    function it_creates_pagerfanta_paginator()
     {
         $this
             ->createPaginator()

@@ -11,6 +11,10 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\UnitOfWork;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
+use Doctrine\ODM\MongoDB\Query\Builder;
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -20,13 +24,7 @@ use PhpSpec\ObjectBehavior;
  */
 class DocumentRepositorySpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\ODM\MongoDB\DocumentManager       $documentManager
-     * @param Doctrine\ODM\MongoDB\UnitOfWork            $unitOfWork
-     * @param Doctrine\ODM\MongoDB\Mapping\ClassMetadata $class
-     * @param Doctrine\ODM\MongoDB\Query\Builder         $queryBuilder
-     */
-    function let($documentManager, $unitOfWork, $class, $queryBuilder)
+    function let(DocumentManager $documentManager, UnitOfWork $unitOfWork, ClassMetadata $class, Builder $queryBuilder)
     {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
 
@@ -48,7 +46,7 @@ class DocumentRepositorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
-    function it_creates_Pagerfanta_paginator()
+    function it_creates_pagerfanta_paginator()
     {
         $this
             ->createPaginator()
