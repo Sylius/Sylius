@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Purger;
+namespace Sylius\Component\Cart\Repository;
+
+use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
- * Interface for the expired carts purger.
+ * Order repository interface.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-interface PurgerInterface
+interface CartRepositoryInterface extends OrderRepositoryInterface
 {
     /**
-     * Purge all expired carts.
+     * Get expired carts
      *
-     * @return boolean
+     * @return array
      */
-    public function purge();
+    public function findExpiredCarts();
 }
