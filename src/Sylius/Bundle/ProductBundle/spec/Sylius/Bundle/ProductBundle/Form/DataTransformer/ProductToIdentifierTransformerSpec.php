@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

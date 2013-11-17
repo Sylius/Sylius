@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
+use Sylius\Component\Product\Model\PropertyTypes;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
