@@ -11,8 +11,11 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -50,10 +53,7 @@ class ProductSpec extends ObjectBehavior
         $this->getTaxons()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection $taxons
-     */
-    function its_taxons_are_mutable($taxons)
+    function its_taxons_are_mutable(Collection $taxons)
     {
         $this->setTaxons($taxons);
         $this->getTaxons()->shouldReturn($taxons);
@@ -93,19 +93,13 @@ class ProductSpec extends ObjectBehavior
         $this->getTaxCategory()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Taxation\Model\TaxCategoryInterface $taxCategory
-     */
-    function it_allows_setting_the_tax_category($taxCategory)
+    function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory)
     {
         $this->setTaxCategory($taxCategory);
         $this->getTaxCategory()->shouldReturn($taxCategory);
     }
 
-    /**
-     * @param Sylius\Component\Taxation\Model\TaxCategoryInterface $taxCategory
-     */
-    function it_allows_resetting_the_tax_category($taxCategory)
+    function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory)
     {
         $this->setTaxCategory($taxCategory);
         $this->getTaxCategory()->shouldReturn($taxCategory);
@@ -119,10 +113,7 @@ class ProductSpec extends ObjectBehavior
         $this->getShippingCategory()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Component\Shipping\Model\ShippingCategoryInterface $shippingCategory
-     */
-    function its_shipping_category_is_mutable($shippingCategory)
+    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory)
     {
         $this->setShippingCategory($shippingCategory);
         $this->getShippingCategory()->shouldReturn($shippingCategory);

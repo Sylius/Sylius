@@ -12,19 +12,18 @@
 namespace spec\Sylius\Bundle\CoreBundle\Cart;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ItemResolverSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Component\Resource\Repository\RepositoryInterface           $productRepository
-     * @param Symfony\Component\Form\FormFactoryInterface                        $formFactory
-     * @param Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface $availabilityChecker
-     * @param Symfony\Component\HttpFoundation\Request                           $request
-     */
-    function let($productRepository, $formFactory, $availabilityChecker)
+    function let(RepositoryInterface $productRepository, FormFactoryInterface $formFactory, AvailabilityCheckerInterface $availabilityChecker, Request $request)
     {
         $this->beConstructedWith($productRepository, $formFactory, $availabilityChecker);
     }
@@ -39,10 +38,7 @@ class ItemResolverSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
-     */
-    function it_throws_exception_unless_request_method_is_POST($item, $request)
+    function it_throws_exception_unless_request_method_is_POST(CartItemInterface $item, $request)
     {
         $request->isMethod('POST')->willReturn(false);
 
@@ -52,10 +48,7 @@ class ItemResolverSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
-     */
-    function it_throws_exception_when_product_id_is_missing_on_request($item, $request)
+    function it_throws_exception_when_product_id_is_missing_on_request(CartItemInterface $item, $request)
     {
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(null);
@@ -66,10 +59,7 @@ class ItemResolverSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
-     */
-    function it_throws_exception_if_product_with_given_id_does_not_exist($productRepository, $item, $request)
+    function it_throws_exception_if_product_with_given_id_does_not_exist($productRepository, CartItemInterface $item, $request)
     {
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(5);
