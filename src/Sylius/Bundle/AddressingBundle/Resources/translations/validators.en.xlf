@@ -56,7 +56,7 @@
       </trans-unit>
       <trans-unit id="0a5ba0dfc005b06148f006a3e51a2643" resname="sylius.address.province.valid">
         <source>sylius.address.province.valid</source>
-        <target>Please select proper province.</target>
+        <target>Please select proper state.</target>
       </trans-unit>
       <trans-unit id="79a20c64ff0131a40b96664c3b7555d7" resname="sylius.address.street.max_length">
         <source>sylius.address.street.max_length</source>
@@ -84,15 +84,15 @@
       </trans-unit>
       <trans-unit id="7226e2da1b30b33c37f32f40d755a722" resname="sylius.province.name.max_length">
         <source>sylius.province.name.max_length</source>
-        <target>Province name must not be longer than 255 characters|Province name must not be longer than 255 characters.</target>
+        <target>State name must not be longer than 255 characters|State name must not be longer than 255 characters.</target>
       </trans-unit>
       <trans-unit id="2dcf7777230a72d2c6f7c4f94f797150" resname="sylius.province.name.min_length">
         <source>sylius.province.name.min_length</source>
-        <target>Province name must be at least 2 characters long|Province name must be at least 2 characters long.</target>
+        <target>State name must be at least 2 characters long|State name must be at least 2 characters long.</target>
       </trans-unit>
       <trans-unit id="f9c7fe354d624dabeea17830a8e5973f" resname="sylius.province.name.not_blank">
         <source>sylius.province.name.not_blank</source>
-        <target>Please enter province name.</target>
+        <target>Please enter state name.</target>
       </trans-unit>
       <trans-unit id="b0f64f444c33a62394f6feb2ebcd743c" resname="sylius.zone.members.min_count">
         <source>sylius.zone.members.min_count</source>
