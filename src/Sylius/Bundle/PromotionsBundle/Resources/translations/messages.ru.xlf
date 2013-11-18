@@ -24,7 +24,7 @@
       </trans-unit>
       <trans-unit id="61111b9749ce72d06eb748f3d28ca240872a7634" resname="sylius.form.coupon.usage_limit">
         <source>sylius.form.coupon.usage_limit</source>
-        <target>Лимит использования</target>
+        <target>Предел использования</target>
       </trans-unit>
       <trans-unit id="e5fdadabe5ae0e8a046722b8a63af17f931368aa" resname="sylius.form.coupon_generate_instruction.amount">
         <source>sylius.form.coupon_generate_instruction.amount</source>
@@ -32,7 +32,7 @@
       </trans-unit>
       <trans-unit id="35010d79c31d1f17be2e2c7c5e68298a18ab95a1" resname="sylius.form.coupon_generate_instruction.usage_limit">
         <source>sylius.form.coupon_generate_instruction.usage_limit</source>
-        <target>Лимит использования</target>
+        <target>Предел использования</target>
       </trans-unit>
       <trans-unit id="66a7b85a6a4d31dfc41b43b83a660155e8930b6a" resname="sylius.form.promotion.actions">
         <source>sylius.form.promotion.actions</source>
@@ -64,7 +64,7 @@
       </trans-unit>
       <trans-unit id="5092b7f84f9f4b19fed2427eb6911554178d4ce6" resname="sylius.form.promotion.usage_limit">
         <source>sylius.form.promotion.usage_limit</source>
-        <target>Лимит использования</target>
+        <target>Предел использования</target>
       </trans-unit>
       <trans-unit id="2643acad6063eb448bcf57ed93c05cdbedd5f9f6" resname="sylius.form.rule.item_count_configuration.count">
         <source>sylius.form.rule.item_count_configuration.count</source>

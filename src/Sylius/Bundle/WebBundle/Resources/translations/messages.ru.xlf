@@ -1368,7 +1368,7 @@
       </trans-unit>
       <trans-unit id="ea11b16198a5ad8f6a51222d970e33c8" resname="sylius.promotion.usage_limit">
         <source>sylius.promotion.usage_limit</source>
-        <target>Лимит</target>
+        <target>Предел</target>
       </trans-unit>
       <trans-unit id="e55d7a8164a73e12e6b85Product propertiesc36f01a9403" resname="sylius.promotion.used">
         <source>sylius.promotion.used</source>
