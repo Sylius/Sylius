@@ -12,7 +12,7 @@
 
     $(document).ready(function() {
         $('select[name$="[country]"]').on('change', function() {
-            var provinceContainer = $(this).parents('div.well').find('div.province-container');
+            var provinceContainer = $(this).parents('div.address-container').find('div.province-container');
             var provinceName = $(this).attr('name').replace('country', 'province');
 
             if (null === $(this).val()) {
