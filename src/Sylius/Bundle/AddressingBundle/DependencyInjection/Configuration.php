@@ -160,7 +160,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('zone_member_zone')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneMemberZone')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\\Component\\Addressing\\Model\\ZoneMemberZone')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\AddressingBundle\\Form\\Type\\ZoneMemberZoneType')->end()
                             ->end()
