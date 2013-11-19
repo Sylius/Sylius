@@ -62,25 +62,26 @@ class InventoryHandler implements InventoryHandlerInterface
         $variants = array();
 
         // We first iterate over cart items, counting items in positive
-        // and inventory units already existing in negative
         foreach ($order->getItems() as $item) {
             $variant = $item->getVariant();
 
             if (!isset($units[$variant->getId()])) {
-                $quantities[$variant->getId()] = $item->getQuantity() - count($order->getInventoryUnitsByVariant($variant));
+                $quantities[$variant->getId()] = $item->getQuantity();
                 $variants[$variant->getId()] = $variant;
             } else {
                 $quantities[$variant->getId()] += $item->getQuantity();
             }
         }
 
-        // We then iterate over inventory units to count those not matching any item
+        // We then iterate over inventory units to count them in negative
         foreach ($order->getInventoryUnits() as $unit) {
             $variant = $unit->getStockable();
 
             if (!isset($quantities[$variant->getId()])) {
-                $quantities[$variant->getId()] = -count($order->getInventoryUnitsByVariant($variant));
+                $quantities[$variant->getId()] = -1;
                 $variants[$variant->getId()] = $variant;
+            } else {
+            	$quantities[$variant->getId()]--;
             }
         }
 

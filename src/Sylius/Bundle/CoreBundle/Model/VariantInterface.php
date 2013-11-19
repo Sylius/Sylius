@@ -23,6 +23,11 @@ use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
 interface VariantInterface extends BaseVariantInterface, ShippableInterface, StockableInterface
 {
     /**
+     * Return variant id
+     */
+    public function getId();
+
+    /**
      * Get variant price.
      *
      * @return integer

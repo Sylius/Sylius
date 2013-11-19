@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
@@ -45,6 +46,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     function it_does_not_create_any_inventory_units_if_order_has_no_items($order)
     {
         $order->getItems()->willReturn(array());
+        $order->getInventoryUnits()->willReturn(array());
         $order->addInventoryUnit(Argument::any())->shouldNotBeCalled();
 
         $this->processInventoryUnits($order);
@@ -64,7 +66,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array());
+        $order->getInventoryUnits()->willReturn(array());
 
         $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled()->willReturn(array($unit1, $unit2));
 
@@ -88,7 +90,13 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1));
+        //$variant->getId()->willReturn(1);
+
+        $unit1->getStockable()->willReturn($variant);
+        $unit2->getStockable()->willReturn($variant);
+
+        $order->getInventoryUnitsByVariant($variant)->willReturn(array($unit1));
+        $order->getInventoryUnits()->willReturn(array($unit1));
 
         $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled()->willReturn(array($unit2));
 
@@ -107,12 +115,18 @@ class InventoryHandlerSpec extends ObjectBehavior
      */
     function it_removes_extra_inventory_units($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2)
     {
-        $order->getItems()->willReturn(array($item));
+    	$order->getItems()->willReturn(array($item));
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(1);
 
-        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $unit1->getStockable()->willReturn($variant);
+        $unit2->getStockable()->willReturn($variant);
+
+        $variant->getId()->willReturn(1);
+
+        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(new ArrayCollection(array($unit1, $unit2)));
+        $order->getInventoryUnits()->willReturn(new ArrayCollection(array($unit1, $unit2)));
 
         $inventoryUnitFactory->create(Argument::any())->shouldNotBeCalled();
 
