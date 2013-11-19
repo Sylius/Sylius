@@ -95,6 +95,7 @@ class CartListener implements EventSubscriberInterface
     {
         $this->cartManager->remove($event->getCart());
         $this->cartManager->flush();
+        $this->cartProvider->abandonCart();
     }
 
     public function saveCart(CartEvent $event)
