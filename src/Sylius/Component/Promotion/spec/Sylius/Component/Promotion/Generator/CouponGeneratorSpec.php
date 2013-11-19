@@ -11,29 +11,21 @@
 
 namespace spec\Sylius\Component\Promotion\Generator;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-<<<<<<< HEAD
-    /**
-     * @param \Sylius\Component\Resource\Repository\RepositoryInterface $repository
-     * @param \Doctrine\Common\Persistence\ObjectManager              $manager
-     */
-    function let($repository, $manager)
-=======
 
     function let(RepositoryInterface $repository, ObjectManager $manager)
->>>>>>> Fix after code review, type hinting specs \o/
     {
         $this->beConstructedWith($repository, $manager);
     }

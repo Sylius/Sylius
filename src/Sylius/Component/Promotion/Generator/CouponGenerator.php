@@ -12,15 +12,9 @@
 namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
-<<<<<<< HEAD:src/Sylius/Bundle/PromotionsBundle/Generator/CouponGenerator.php
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-=======
-use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
-use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
->>>>>>> Creating Promotion component:src/Sylius/Component/Promotion/Generator/CouponGenerator.php
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+
 
 /**
  * Default coupon generator.
