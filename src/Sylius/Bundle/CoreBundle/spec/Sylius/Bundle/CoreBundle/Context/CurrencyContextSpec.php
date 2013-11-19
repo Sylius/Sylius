@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\User;
+use Sylius\Component\Core\Model\User;
 use Sylius\Component\Setting\Manager\SettingsManagerInterface;
 use Sylius\Component\Setting\Model\Settings;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

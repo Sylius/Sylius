@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;

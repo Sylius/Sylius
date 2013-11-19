@@ -12,14 +12,9 @@
 namespace Sylius\Component\Product\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
-<<<<<<< HEAD:src/Sylius/Bundle/ProductBundle/Builder/ProductBuilder.php
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-=======
-use Sylius\Component\Product\Builder\ProductBuilderInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
->>>>>>> Creating Product component:src/Sylius/Component/Product/Builder/ProductBuilder.php
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+
 
 /**
  * Product builder with fluent interface.
