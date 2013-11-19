@@ -15,7 +15,7 @@ Firstly, you need to create your own ``TaxRate`` class, which will extend the ba
 
 .. code-block:: php
 
-    namespace Acme\Bundle\ShopBundle\Model;
+    namespace Acme\Bundle\ShopBundle\Entity;
 
     use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
     use Sylius\Bundle\TaxationBundle\Model\TaxRate as BaseTaxRate;
