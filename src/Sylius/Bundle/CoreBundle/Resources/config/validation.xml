@@ -112,6 +112,13 @@
                 </option>
             </constraint>
         </property>
+        <property name="plainPassword">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>ProfileAdd</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Sylius\Bundle\CoreBundle\Model\Group">

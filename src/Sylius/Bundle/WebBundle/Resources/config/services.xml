@@ -16,6 +16,7 @@
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
 
         <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
+        <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
 
         <parameter key="sylius.listener.frontend.address.class">Sylius\Bundle\WebBundle\EventListener\Account\AddressListener</parameter>
     </parameters>
@@ -98,7 +99,7 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.user.registration.form.type" class="Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType">
+        <service id="sylius.user.registration.form.type" class="%sylius.form.frontend.registration.type.class%">
             <tag name="form.type" alias="sylius_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
         </service>
