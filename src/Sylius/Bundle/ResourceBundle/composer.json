@@ -7,29 +7,32 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusResourceBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle":        ">=2.1,<3.0",
-        "friendsofsymfony/rest-bundle":    "0.13.*",
+        "symfony/framework-bundle":        "~2.3",
+        "symfony/twig-bundle":             "~2.3",
+        "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "0.12.*",
         "white-october/pagerfanta-bundle": "1.0.*"
     },
     "require-dev": {
+        "phpspec/phpspec":      "2.0.*@dev",
         "twig/twig":            "~1.11",
         "doctrine/orm":         "~2.3",
-        "doctrine/mongodb-odm": "1.0.*@dev",
-        "phpspec/phpspec":      "2.0.*"
+        "doctrine/mongodb-odm": "1.0.*@dev"
     },
     "suggest": {
         "fsc/hateoas-bundle":   "0.3.x-dev",
@@ -45,7 +48,7 @@
     "target-dir": "Sylius/Bundle/ResourceBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.4.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

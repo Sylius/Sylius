@@ -7,4 +7,6 @@ sylius_backend_promotion_action_delete:
     defaults:
         _controller: sylius.controller.promotion_action:deleteAction
         _sylius:
-            redirect: referer
+            redirect:
+                route: sylius_backend_promotion_show
+                parameters: {'id': $promotionId}

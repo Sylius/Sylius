@@ -1,0 +1,40 @@
+{% macro list(groups) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if groups|length > 0 %}
+<table id="groups" class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.group.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.group.name'|trans) }}</th>
+            <th>{{ 'sylius.group.roles'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for group in groups %}
+        <tr id="{{ group.id }}">
+            <td>{{ group.id }}</td>
+            <td>{{ group.name }}</td>
+            <td>
+                {% for role in group.roles %}
+                    <span class="label label-primary">{{ role }}</span>
+                {% endfor %}
+            </td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_group_update', {'id': group.id})) }}
+                    {{ buttons.delete(path('sylius_backend_group_delete', {'id': group.id})) }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.group.no_results'|trans) }}
+</div>
+{% endif %}
+{% endmacro %}

@@ -7,22 +7,24 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusVariableProductBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
+        "php":                             ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "sylius/product-bundle":           "~0.1",
-        "sylius/resource-bundle":          "0.3.*",
+        "sylius/product-bundle":           "1.0.*@dev",
+        "sylius/resource-bundle":          "1.0.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
@@ -35,12 +37,12 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\VariableProductBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\VariableProductBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/VariableProductBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

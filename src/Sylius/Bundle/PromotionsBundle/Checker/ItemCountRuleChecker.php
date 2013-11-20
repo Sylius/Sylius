@@ -25,7 +25,7 @@ class ItemCountRuleChecker implements RuleCheckerInterface
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
-        if ($configuration['equal']) {
+        if (isset($configuration['equal']) && $configuration['equal']) {
             return $subject->getPromotionSubjectItemCount() >= $configuration['count'];
         }
 

@@ -35,21 +35,21 @@ interface TaxonomyInterface
     /**
      * Set root taxon.
      *
-     * @param TaxonInterface $taxon
+     * @param TaxonInterface $root
      */
     public function setRoot(TaxonInterface $root);
 
     /**
      * Get all taxons except the root.
      *
-     * @return Collection
+     * @return TaxonInterface[]
      */
     public function getTaxons();
 
     /**
      * Get all taxons as flat list.
      *
-     * @return Collections
+     * @return TaxonInterface[]
      */
     public function getTaxonsAsList();
 

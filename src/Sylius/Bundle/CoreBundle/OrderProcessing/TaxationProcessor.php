@@ -90,16 +90,24 @@ class TaxationProcessor implements TaxationProcessorInterface
      */
     public function applyTaxes(OrderInterface $order)
     {
+        $order->removeTaxAdjustments(); // Remove all tax adjustments, we recalculate everything from scratch.
+
         if (0 === count($order->getItems())) {
             return;
         }
 
-        $order->removeTaxAdjustments(); // Remove all tax adjustments, we recalculate everything from scratch.
+        $zone = null;
 
-        $zone = $this->zoneMatcher->match($order->getShippingAddress()); // Match the tax zone.
+        if (null !== $order->getShippingAddress()) {
+            $zone = $this->zoneMatcher->match($order->getShippingAddress()); // Match the tax zone.
+        }
+
+        if ($this->settings->has('default_tax_zone')) {
+            $zone = $zone ?: $this->settings->get('default_tax_zone'); // If address does not match any zone, use the default one.
+        }
 
         if (null === $zone) {
-            $zone = $this->settings->get('default_tax_zone'); // If address does not match any zone, use the default one.
+            return;
         }
 
         $taxes = array();
@@ -120,19 +128,19 @@ class TaxationProcessor implements TaxationProcessorInterface
             $taxAmount = $rate->getAmountAsPercentage();
             $description = sprintf('%s (%d%%)', $rateName, $taxAmount);
 
-            if (!array_key_exists($description, $taxes)) {
-                $taxes[$description] = 0;
-            }
-
-            $taxes[$description] += $amount;
+            $taxes[$description] = array(
+                'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
+                'included' => $rate->isIncludedInPrice()
+            );
         }
 
-        foreach ($taxes as $description => $amount) {
+        foreach ($taxes as $description => $tax) {
             $adjustment = $this->adjustmentRepository->createNew();
 
             $adjustment->setLabel(OrderInterface::TAX_ADJUSTMENT);
-            $adjustment->setAmount($amount);
+            $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);
+            $adjustment->setNeutral($tax['included']);
 
             $order->addAdjustment($adjustment);
         }

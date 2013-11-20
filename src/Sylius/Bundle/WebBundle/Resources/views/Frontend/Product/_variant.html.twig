@@ -1,0 +1,16 @@
+{% set product = variant.product %}
+<a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail pull-left" style="margin-right: 15px;">
+    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_90x60') : 'http://placehold.it/90x60' }}" alt="{{ product.name }}" />
+</a>
+<div>
+    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><strong>{{ product.name }}</strong></a>
+    {% if variant.presentation is not empty %}
+        <strong>{{ variant.presentation }}</strong>
+    {% elseif product.hasOptions %}
+        <ul class="list-unstyled">
+            {% for option in variant.options %}
+                <li><strong>{{ option.presentation }}</strong>: {{ option.value }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>

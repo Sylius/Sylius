@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Promotion\Action;
+namespace spec\SyliusN\Bundle\CoreBundle\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
- * Percentage discount promotion action spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class PercentageDiscountAction extends ObjectBehavior
+class PercentageDiscountActionSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $adjustmentRepository
@@ -40,19 +38,22 @@ class PercentageDiscountAction extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface       $order
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $adjustment
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface           $order
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface     $adjustment
+     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
      */
-    function it_applies_percentage_discount_as_promotion_adjustment($adjustmentRepository, $order, $adjustment)
+    function it_applies_percentage_discount_as_promotion_adjustment($adjustmentRepository, $order, $adjustment, $promotion)
     {
-        $order->getTotal()->willReturn(10000);
+        $order->getPromotionSubjectItemTotal()->willReturn(10000);
         $adjustmentRepository->createNew()->willReturn($adjustment);
+        $promotion->getDescription()->willReturn('promotion description');
 
         $adjustment->setAmount(-2500)->shouldBeCalled();
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
-
+        $adjustment->setDescription('promotion description')->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
-        $configuration = array('percentage' => 25);
+
+        $configuration = array('percentage' => 0.25);
 
         $this->execute($order, $configuration);
     }

@@ -1,12 +1,11 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusAddressingBundle:Country:macros.html.twig' as macros %}
 
 <h1>Countries list <small>Here you can configure countries and provinces</small></h1>
 <hr />
 
 <div class="well">
-    <a href="{{ path('sylius_country_create') }}" class="btn btn-primary">
-        <i class="icon-plus icon-white"></i> add country
-    </a>
+    {{ buttons.create(path('sylius_country_create'), 'add country') }}
 </div>
 
 {% if countries.haveToPaginate()|default(false) %}

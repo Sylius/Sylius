@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_category:
+            name: Название
+            description: Описание
+        shipping_method:
+            name: Название
+            category: Категория
+            category_requirement: Условия категории
+            calculator: Калькулятор
+            configuration: Конфигурация
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Сумма
+            per_item_rate_configuration:
+                amount: Сумма
+            flexible_rate_configuration:
+                first_item_cost: Стоимость первого товара
+                additional_item_cost: Стоимость дополнительного товара
+                additional_item_limit: Limit additional items

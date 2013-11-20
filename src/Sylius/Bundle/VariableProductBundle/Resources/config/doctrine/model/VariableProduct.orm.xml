@@ -15,7 +15,6 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
     <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\VariableProduct" table="sylius_product">
@@ -28,10 +27,10 @@
         <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionInterface">
             <join-table name="sylius_product_option">
                 <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" />
+                    <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="option_id" referenced-column-name="id" nullable="false" unique="false" />
+                    <join-column name="option_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
 
 {% block javascripts %}
 {{ parent() }}
@@ -11,10 +11,21 @@
 {% endjavascripts %}
 {% endblock %}
 
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_property_index') }}">{{ 'sylius.breadcrumb.property.index'|trans }}</a></li>
+    <li>{{ property.name }}</li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.property.update_header'|trans|raw }}</h1>
+    <h1><i class="icon-pencil"></i> {{ 'sylius.property.update_header'|trans|raw }}</h1>
 </div>
+
+{{ form_errors(form) }}
 
 <form action="{{ path('sylius_backend_property_update', {'id': property.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">

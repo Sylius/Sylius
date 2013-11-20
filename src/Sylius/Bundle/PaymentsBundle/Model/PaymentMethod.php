@@ -63,14 +63,14 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * Creation date.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -113,6 +113,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnabled($enabled)
     {
         $this->enabled = (Boolean) $enabled;
+
+        return $this;
     }
 
     /**
@@ -129,6 +131,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -145,6 +149,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -161,6 +167,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setGateway($gateway)
     {
         $this->gateway = $gateway;
+
+        return $this;
     }
 
     /**
@@ -177,6 +185,8 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
+
+        return $this;
     }
 
     /**
@@ -190,22 +200,28 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
     /**
-     * Get the default requirement labels.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public static function getCategoryRequirementLabels()
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
-        return array(
-            PaymentsMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
-            PaymentsMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
-            PaymentsMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
-        );
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

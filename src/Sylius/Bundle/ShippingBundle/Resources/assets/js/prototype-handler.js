@@ -32,12 +32,19 @@
                         container = $(prototypeElement.data('container'));
                     }
 
-                    if (replace) {
-                        container.html(settings.prototypeElementPrefix + prototypeElement.data('prototype'));
-                    } else if (!container.html().trim()) {
+                    if (!container.length) {
+                        return;
+                    }
+
+                    if (!prototypeElement.length) {
+                        container.empty();
+                        return;
+                    }
+
+                    if (replace || !container.html().trim()) {
                         container.html(settings.prototypeElementPrefix + prototypeElement.data('prototype'));
                     }
-                };
+                }
             });
         }
     };

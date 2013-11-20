@@ -1,5 +1,7 @@
 sylius_core:
     driver: doctrine/orm
+    order_confirmation:
+        enabled: true
 
 sylius_installer:
     classes:
@@ -7,7 +9,6 @@ sylius_installer:
             model: Sylius\Bundle\CoreBundle\Model\User
 
 sylius_money:
-    driver: doctrine/orm
     currency: %sylius.currency%
     locale: %sylius.locale%
 
@@ -16,12 +17,12 @@ sylius_cart:
     classes:
         item:
             form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+        cart:
+            form: Sylius\Bundle\CoreBundle\Form\Type\CartType
 
-sylius_settings:
-    driver: doctrine/orm
+sylius_settings: ~
 
 sylius_taxonomies:
-    driver: doctrine/orm
     classes:
         taxonomy:
             model: Sylius\Bundle\CoreBundle\Model\Taxonomy
@@ -31,7 +32,6 @@ sylius_taxonomies:
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
 sylius_product:
-    driver: doctrine/orm
     classes:
         product:
             model: Sylius\Bundle\CoreBundle\Model\Product
@@ -46,14 +46,12 @@ sylius_variable_product:
             form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
 
 sylius_taxation:
-    driver: doctrine/orm
     classes:
         tax_rate:
             model: Sylius\Bundle\CoreBundle\Model\TaxRate
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
-    driver: doctrine/orm
     classes:
         shipment:
             model: Sylius\Bundle\CoreBundle\Model\Shipment
@@ -63,11 +61,9 @@ sylius_shipping:
             model: Sylius\Bundle\CoreBundle\Model\ShippingMethod
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
-sylius_promotions:
-    driver: doctrine/orm
+sylius_promotions: ~
 
 sylius_inventory:
-    driver: doctrine/orm
     backorders: true
     classes:
         unit:
@@ -76,19 +72,18 @@ sylius_inventory:
             model: %sylius.model.variant.class%
 
 sylius_payments:
-    driver: doctrine/orm
     gateways:
         dummy: Test
         stripe: Stripe
-    classes:
-        credit_card_owner:
-            model: Sylius\Bundle\CoreBundle\Model\User
+
+sylius_payum: ~
 
 sylius_addressing:
-    driver: doctrine/orm
+    classes:
+        address:
+            controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController
 
-sylius_sales:
-    driver: doctrine/orm
+sylius_order:
     classes:
         order:
             model: Sylius\Bundle\CoreBundle\Model\Order
@@ -106,3 +101,7 @@ sylius_resource:
                 model: Sylius\Bundle\CoreBundle\Model\User
                 controller: Sylius\Bundle\CoreBundle\Controller\UserController
                 repository: Sylius\Bundle\CoreBundle\Repository\UserRepository
+        sylius.group:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Bundle\CoreBundle\Model\Group

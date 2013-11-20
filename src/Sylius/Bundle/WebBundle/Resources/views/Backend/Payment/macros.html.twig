@@ -1,7 +1,8 @@
 {% macro list(payments) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if payments|length > 0 %}
 <table class="table">
@@ -10,6 +11,7 @@
             <th>{{ sylius_resource_sort('id', 'sylius.payment.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('method', 'sylius.payment.method'|trans) }}</th>
             <th>{{ sylius_resource_sort('amount', 'sylius.payment.amount'|trans) }}</th>
+            <th>{{ sylius_resource_sort('state', 'sylius.payment.state'|trans) }}</th>
             <th>{{ sylius_resource_sort('createdAt', 'sylius.payment.created_at'|trans) }}</th>
             <th>{{ sylius_resource_sort('updatedAt', 'sylius.payment.updated_at'|trans) }}</th>
             <th></th>
@@ -17,12 +19,13 @@
     </thead>
     <tbody>
     {% for payment in payments %}
-        <tr>
+        <tr id="{{ payment.id }}">
             <td>{{ payment.id }}</td>
-            <td><span class="label label-info">{{ payment.method }}</span></td>
+            <td><span class="label label-primary">{{ payment.method }}</span></td>
             <td>
-                {{ payment.amount|sylius_money(payment.currency) }}
+                {{ payment.amount|sylius_price(payment.currency) }}
             </td>
+            <td>{{ misc.state_label(payment.state, 'payment') }}</td>
             <td>{{ payment.createdAt|date }}</td>
             <td>{{ payment.updatedAt|date }}</td>
             <td>

@@ -13,6 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 class VariantImage extends Image implements VariantImageInterface
 {
+    /**
+     * The associated variant
+     *
+     * @var VariantInterface
+     */
     protected $variant;
 
     /**
@@ -29,5 +34,7 @@ class VariantImage extends Image implements VariantImageInterface
     public function setVariant(VariantInterface $variant = null)
     {
         $this->variant = $variant;
+
+        return $this;
     }
 }

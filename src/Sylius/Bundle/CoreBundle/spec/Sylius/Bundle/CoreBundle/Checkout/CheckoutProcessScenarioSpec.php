@@ -50,6 +50,7 @@ class CheckoutProcessScenarioSpec extends ObjectBehavior
         $builder->add('shipping', 'sylius_checkout_shipping')->willReturn($builder)->shouldBeCalled();
         $builder->add('payment', 'sylius_checkout_payment')->willReturn($builder)->shouldBeCalled();
         $builder->add('finalize', 'sylius_checkout_finalize')->willReturn($builder)->shouldBeCalled();
+        $builder->add("purchase", "sylius_checkout_purchase")->willReturn($builder)->shouldBeCalled();
 
         $builder->setDisplayRoute('sylius_checkout_display')->willReturn($builder)->shouldBeCalled();
         $builder->setForwardRoute('sylius_checkout_forward')->willReturn($builder)->shouldBeCalled();

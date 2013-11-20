@@ -70,7 +70,7 @@ class OptionValueSpec extends ObjectBehavior
         $this->getValue()->shouldReturn('XXL');
     }
 
-    function it_returns_its_value_when_converteted_to_string()
+    function it_returns_its_value_when_converted_to_string()
     {
         $this->setValue('S');
         $this->__toString()->shouldReturn('S');

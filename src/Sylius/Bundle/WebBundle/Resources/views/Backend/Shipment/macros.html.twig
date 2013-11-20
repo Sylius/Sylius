@@ -1,6 +1,6 @@
 {% macro list(shipments) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if shipments|length > 0 %}
@@ -17,10 +17,10 @@
     </thead>
     <tbody>
     {% for shipment in shipments %}
-        <tr>
+        <tr id="{{ shipment.id }}">
             <td>{{ shipment.id }}</td>
             <td>
-                <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-info btn-small">
+                <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-primary btn-sm">
                    #{{ shipment.order.id }}
                 </a>
             </td>

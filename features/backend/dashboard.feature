@@ -17,27 +17,22 @@ Feature: Store dashboard
             | user              | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-        And order #000001 has following items:
+        And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
-        And order #000002 has following items:
+        And order #000000002 has following items:
             | product | quantity |
             | Mug     | 1        |
             | Sticker | 4        |
 
     Scenario: Viewing the dashboard at website root
-        Given I am on the dashboard page
-         Then I should see "Administration dashboard"
-
-    Scenario: Viewing sales info for last week
-         Given I am on the dashboard page
-          Then I should see last week revenue with value "€57.97" in the list
-          Then I should see last week orders with value "2" in the list
+       Given I am on the dashboard page
+        Then I should see "Administration dashboard"
 
     Scenario: Viewing recent orders
-         Given I am on the dashboard page
-          Then I should see 2 orders in the list
+        Given I am on the dashboard page
+         Then I should see 2 orders in the list
 
     Scenario: Viewing recent users
-         Given I am on the dashboard page
-          Then I should see 3 users in the list
+        Given I am on the dashboard page
+         Then I should see 3 users in the list

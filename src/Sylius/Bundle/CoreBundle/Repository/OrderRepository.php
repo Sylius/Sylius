@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
-use DateTime;
 use FOS\UserBundle\Model\UserInterface;
-use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use YaLinqo\Enumerable;
 
-class OrderRepository extends BaseOrderRepository
+class OrderRepository extends CartRepository
 {
     /**
      * Create user orders paginator.
@@ -61,8 +60,7 @@ class OrderRepository extends BaseOrderRepository
     public function createFilterPaginator($criteria = array(), $sorting = array())
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
-
-          $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+        $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
 
         if (!empty($criteria['number'])) {
             $queryBuilder
@@ -107,12 +105,15 @@ class OrderRepository extends BaseOrderRepository
         return $this->getPaginator($queryBuilder);
     }
 
-    public function getTotalStatistics()
+    public function getTotalStatistics(\DateTime $from = null, \DateTime $to = null)
     {
-        return Enumerable::from($this->findBetweenDates(new DateTime('1 year ago'), new DateTime()))
-            ->groupBy(function($order) {
+        $from = null === $from ? new \DateTime('1 year ago') : $from;
+        $to   = null === $to ? new \DateTime() : $to;
+
+        return Enumerable::from($this->findBetweenDates($from, $to))
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, '$v->getTotal()', function($orders) {
+            }, '$v->getTotal()', function ($orders) {
                 return Enumerable::from($orders)->sum();
             })
             ->toValues()
@@ -120,12 +121,15 @@ class OrderRepository extends BaseOrderRepository
         ;
     }
 
-    public function getCountStatistics()
+    public function getCountStatistics(\DateTime $from = null, \DateTime $to = null)
     {
-        return Enumerable::from($this->findBetweenDates(new DateTime('1 year ago'), new DateTime()))
-            ->groupBy(function($order) {
+        $from = null === $from ? new \DateTime('1 year ago') : $from;
+        $to   = null === $to ? new \DateTime() : $to;
+
+        return Enumerable::from($this->findBetweenDates($from, $to))
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, null, function($orders) {
+            }, null, function ($orders) {
                 return Enumerable::from($orders)->count();
             })
             ->toValues()
@@ -133,7 +137,7 @@ class OrderRepository extends BaseOrderRepository
         ;
     }
 
-    public function findBetweenDates(DateTime $from, DateTime $to)
+    public function findBetweenDates(\DateTime $from, \DateTime $to)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
 
@@ -143,9 +147,15 @@ class OrderRepository extends BaseOrderRepository
         ;
     }
 
-    public function countBetweenDates(DateTime $from, DateTime $to)
+    public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+        if (null !== $state) {
+            $queryBuilder
+                ->andWhere('o.state = :state')
+                ->setParameter('state', $state)
+            ;
+        }
 
         return $queryBuilder
             ->select('count(o.id)')
@@ -154,9 +164,15 @@ class OrderRepository extends BaseOrderRepository
         ;
     }
 
-    public function revenueBetweenDates(DateTime $from, DateTime $to)
+    public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+        if (null !== $state) {
+            $queryBuilder
+                ->andWhere('o.state = :state')
+                ->setParameter('state', $state)
+            ;
+        }
 
         return $queryBuilder
             ->select('sum(o.total)')
@@ -165,7 +181,7 @@ class OrderRepository extends BaseOrderRepository
         ;
     }
 
-    protected function getCollectionQueryBuilderBetweenDates(DateTime $from, DateTime $to)
+    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 

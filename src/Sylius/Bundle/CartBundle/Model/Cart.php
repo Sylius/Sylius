@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
-use Sylius\Bundle\SalesBundle\Model\Order;
+use Sylius\Bundle\OrderBundle\Model\Order;
 
 /**
  * Model for carts.
@@ -37,6 +37,14 @@ class Cart extends Order implements CartInterface
         parent::__construct();
 
         $this->incrementExpiresAt();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        return parent::getId();
     }
 
     /**

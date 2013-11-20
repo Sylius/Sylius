@@ -21,25 +21,40 @@ class OrderFilterType extends AbstractType
         $builder
             ->add('number', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.number'
+                'label'    => 'sylius.form.order_filter.number',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.order_filter.number'
+                )
             ))
             ->add('totalFrom', 'money', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.total_from'
+                'label'    => 'sylius.form.order_filter.total_from',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.order_filter.total_from'
+                )
             ))
             ->add('totalTo', 'money', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.total_to'
+                'label'    => 'sylius.form.order_filter.total_to',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.order_filter.total_to'
+                )
             ))
             ->add('createdAtFrom', 'date', array(
                 'required' => false,
                 'widget'   => 'single_text',
-                'label'    => 'sylius.form.order_filter.created_at_from'
+                'label'    => 'sylius.form.order_filter.created_at_from',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.order_filter.created_at_from'
+                )
             ))
             ->add('createdAtTo', 'date', array(
                 'required' => false,
                 'widget'   => 'single_text',
-                'label'    => 'sylius.form.order_filter.created_at_to'
+                'label'    => 'sylius.form.order_filter.created_at_to',
+                'attr'     => array(
+                    'placeholder' => 'sylius.form.order_filter.created_at_to'
+                )
             ))
         ;
     }

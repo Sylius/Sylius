@@ -11,12 +11,8 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
-use Sylius\Bundle\InventoryBundle\SyliusInventoryBundle;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Inventory dependency injection extension.
@@ -24,29 +20,21 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends Extension
+class SyliusInventoryExtension extends SyliusResourceExtension
 {
+    protected $configFiles = array(
+        'services',
+        'twig',
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $this->configDir = __DIR__.'/../Resources/config';
 
-        $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $driver = $config['driver'];
-
-        if (!in_array($driver, SyliusInventoryBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by SyliusInventoryBundle.', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
-
-        $container->setParameter('sylius_inventory.driver', $driver);
-        $container->setParameter('sylius_inventory.driver.'.$driver, true);
+        list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE);
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
@@ -64,12 +52,8 @@ class SyliusInventoryExtension extends Extension
 
         $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
 
-        $loader->load('services.xml');
-        $loader->load('twig.xml');
-
-        $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
-
         if (isset($config['events'])) {
+            $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
             foreach ($config['events'] as $event) {
                 $listenerDefinition->addTag('kernel.event_listener', array('event' => $event, 'method' => 'onInventoryChange'));
             }

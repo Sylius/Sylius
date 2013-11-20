@@ -15,6 +15,8 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\ResolvedFormTypeInterface;
 use Symfony\Component\Security\Core\Util\ClassUtils;
 
@@ -36,7 +38,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
     /**
      * Stores an array of Types with the Type name as the key.
      *
-     * @var array
+     * @var FormTypeInterface[]
      */
     protected $typeMap = array();
 
@@ -95,18 +97,21 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      */
     protected function getTypeForData(array $data)
     {
-        if (!array_key_exists('_type', $data) or !array_key_exists($data['_type'], $this->typeMap)) {
+        if (!array_key_exists('_type', $data) || !array_key_exists($data['_type'], $this->typeMap)) {
             throw new \InvalidArgumentException('Unable to determine the Type for given data');
         }
 
         return $this->typeMap[$data['_type']];
     }
 
+    /**
+     * @param FormEvent $event
+     *
+     * @throws UnexpectedTypeException
+     */
     public function preSetData(FormEvent $event)
     {
-        $form = $event->getForm();
         $data = $event->getData();
-
         if (null === $data) {
             $data = array();
         }
@@ -115,6 +120,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
             throw new UnexpectedTypeException($data, 'array or (\Traversable and \ArrayAccess)');
         }
 
+        $form = $event->getForm();
         // First remove all rows
         foreach ($form as $name => $child) {
             $form->remove($name);
@@ -122,19 +128,18 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
 
         // Then add all rows again in the correct order
         foreach ($data as $name => $value) {
-            $type = $this->getTypeForObject($value);
-            $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
-                'property_path'   => '['.$name.']',
-                'auto_initialize' => false
-            ), $this->options)));
+            $this->createFormField($form, $this->getTypeForObject($value), $name);
         }
     }
 
+    /**
+     * @param FormEvent $event
+     *
+     * @throws UnexpectedTypeException
+     */
     public function preBind(FormEvent $event)
     {
-        $form = $event->getForm();
         $data = $event->getData();
-
         if (null === $data || '' === $data) {
             $data = array();
         }
@@ -143,6 +148,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
             throw new UnexpectedTypeException($data, 'array or (\Traversable and \ArrayAccess)');
         }
 
+        $form = $event->getForm();
         // Remove all empty rows
         if ($this->allowDelete) {
             foreach ($form as $name => $child) {
@@ -156,13 +162,22 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
         if ($this->allowAdd) {
             foreach ($data as $name => $value) {
                 if (!$form->has($name)) {
-                    $type = $this->getTypeForData($value);
-                    $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
-                        'property_path' => '['.$name.']',
-                        'auto_initialize' => false
-                    ), $this->options)));
+                    $this->createFormField($form, $this->getTypeForData($value), $name);
                 }
             }
         }
+    }
+
+    /**
+     * @param FormInterface            $form
+     * @param string|FormTypeInterface $type
+     * @param string                   $name
+     */
+    private function createFormField(FormInterface $form, $type, $name)
+    {
+        $form->add($this->factory->createNamed($name, $type, null, array_replace(array(
+            'property_path'   => '['.$name.']',
+            'auto_initialize' => false
+        ), $this->options)));
     }
 }

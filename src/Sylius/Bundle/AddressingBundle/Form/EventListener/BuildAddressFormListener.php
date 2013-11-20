@@ -24,6 +24,9 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class BuildAddressFormListener implements EventSubscriberInterface
 {
+    /**
+     * @var ObjectRepository
+     */
     private $countryRepository;
 
     /**
@@ -36,6 +39,7 @@ class BuildAddressFormListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
+     * @param ObjectRepository     $countryRepository
      * @param FormFactoryInterface $factory
      */
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
@@ -51,33 +55,30 @@ class BuildAddressFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_BIND     => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind'
         );
     }
 
     /**
      * Removes or adds a province field based on the country set.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
     {
         $address = $event->getData();
-        $form = $event->getForm();
-
         if (null === $address) {
             return;
         }
 
         $country = $address->getCountry();
-
         if (null === $country) {
             return;
         }
 
         if ($country->hasProvinces()) {
-            $form->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
-                'country'  => $country, 'auto_initialize' => false
+            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
+                'country' => $country, 'auto_initialize' => false
             )));
         }
     }
@@ -85,25 +86,22 @@ class BuildAddressFormListener implements EventSubscriberInterface
     /**
      * Removes or adds a province field based on the country set on submitted form.
      *
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
     public function preBind(FormEvent $event)
     {
         $data = $event->getData();
-        $form = $event->getForm();
-
-        if ( !is_array($data)  || false === array_key_exists('country', $data)) {
+        if (!is_array($data) || !array_key_exists('country', $data)) {
             return;
         }
 
         $country = $this->countryRepository->find($data['country']);
-
         if (null === $country) {
             return;
         }
 
         if ($country->hasProvinces()) {
-            $form->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
+            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
                 'country'  => $country, 'auto_initialize' => false
             )));
         }

@@ -69,7 +69,6 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             'additional_item_limit' => 0
         );
 
-
         $shipment->getShippingItemCount()->willReturn(1);
 
         $this->calculate($shipment, $configuration)->shouldReturn(1000);
@@ -85,7 +84,6 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
             'additional_item_cost'  => 300,
             'additional_item_limit' => 0
         );
-
 
         $shipment->getShippingItemCount()->willReturn(5);
 

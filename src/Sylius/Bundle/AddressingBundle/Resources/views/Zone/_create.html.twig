@@ -1,11 +1,9 @@
+{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
+
 <h1>Creating zone <small>Use this form to add new zone</small></h1>
 <hr />
 
 <form action="{{ path('sylius_zone_create', {'id': zone.id}) }}" method="post" class="form-horizontal">
     {% include 'SyliusAddressingBundle:Zone:_form.html.twig' %}
-    <div class="form-actions">
-        <input type="submit" value="create zone" class="btn btn-large btn-primary" />
-        &nbsp;
-        <a href="{{ path('sylius_zone_list') }}" class="btn btn-large">cancel</a>
-    </div>
+    {{ actions.create(path('sylius_zone_list')) }}
 </form>

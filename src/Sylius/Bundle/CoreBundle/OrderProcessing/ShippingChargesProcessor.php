@@ -53,6 +53,8 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
      */
     public function applyShippingCharges(OrderInterface $order)
     {
+        $order->removeShippingAdjustments(); // Remove all shipping adjustments, we recalculate everything from scratch.
+
         foreach ($order->getShipments() as $shipment) {
             $shippingCharge = $this->calculator->calculate($shipment);
 
@@ -63,5 +65,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
 
             $order->addAdjustment($adjustment);
         }
+
+        $order->calculateTotal();
     }
 }

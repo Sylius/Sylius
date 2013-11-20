@@ -1,10 +1,10 @@
 {% macro list(zones) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if zones|length > 0 %}
-<table class="table table-bordered">
+<table class="table">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
@@ -15,13 +15,12 @@
     </thead>
     <tbody>
     {% for zone in zones %}
-        <tr>
+        <tr id="{{ zone.id }}">
             <td>{{ zone.id }}</td>
-            <td>{{ zone.name }}</td>
-            <td>{{ zone.type }}</td>
+            <td><a href="{{ path('sylius_backend_zone_show', {'id': zone.id}) }}"><strong>{{ zone.name }}</strong></a></td>
+            <td><span class="label label-primary">{{ zone.type }}</span></td>
             <td>
                 <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_zone_show', {'id': zone.id})) }}
                 {{ buttons.edit(path('sylius_backend_zone_update', {'id': zone.id})) }}
                 {{ buttons.delete(path('sylius_backend_zone_delete', {'id': zone.id})) }}
                 </div>

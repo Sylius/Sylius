@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Model\User;
 
 /**
  * User fixtures.
@@ -26,7 +25,7 @@ class LoadUsersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $user = new User();
+        $user = $this->getUserRepository()->createNew();
 
         $user->setFirstname($this->faker->firstName);
         $user->setLastname($this->faker->lastName);
@@ -42,7 +41,7 @@ class LoadUsersData extends DataFixture
         $this->setReference('User-Administrator', $user);
 
         for ($i = 1; $i <= 15; $i++) {
-            $user = new User();
+            $user = $this->getUserRepository()->createNew();
 
             $username = $this->faker->username;
 

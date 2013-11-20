@@ -11,20 +11,15 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Payment method interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface PaymentMethodInterface
+interface PaymentMethodInterface extends TimestampableInterface
 {
-    /**
-     * Get payments method identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * Check whether the payments method is currently enabled.
      *
@@ -94,18 +89,4 @@ interface PaymentMethodInterface
      * @param string $environment
      */
     public function setEnvironment($environment);
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

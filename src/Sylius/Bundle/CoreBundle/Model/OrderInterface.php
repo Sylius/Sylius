@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
@@ -144,9 +146,18 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all inventory units.
      *
-     * @return Collection
+     * @return InventoryUnitInterface[]
      */
     public function getInventoryUnits();
+
+    /**
+     * Get all inventory units by the product variant.
+     *
+     * @param VariantInterface $variant
+     *
+     * @return InventoryUnitInterface[]
+     */
+    public function getInventoryUnitsByVariant(VariantInterface $variant);
 
     /**
      * Add inventory unit.
@@ -163,9 +174,18 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function removeInventoryUnit(InventoryUnitInterface $unit);
 
     /**
+     * Has inventory unit?
+     *
+     * @param InventoryUnitInterface $unit
+     *
+     * @return Boolean
+     */
+    public function hasInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
      * Get all shipments associated with this order.
      *
-     * @return Collection
+     * @return ShipmentInterface[]
      */
     public function getShipments();
 
@@ -214,4 +234,32 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return OrderInterface
      */
     public function setCurrency($currency);
+
+    /**
+     * Set promotion coupon.
+     *
+     * @param CouponInterface $coupon
+     */
+    public function setPromotionCoupon(CouponInterface $coupon = null);
+
+    /**
+     * Get the shipping state.
+     *
+     * @return string
+     */
+    public function getShippingState();
+
+    /**
+     * Set shipping state.
+     *
+     * @param string $state
+     */
+    public function setShippingState($state);
+
+    /**
+     * Has any pending inventory?
+     *
+     * @return Boolean
+     */
+    public function isBackorder();
 }

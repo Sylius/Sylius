@@ -96,6 +96,9 @@ class InventoryUnit implements InventoryUnitInterface
         return $this->stockable->getSku();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getInventoryName()
     {
         return $this->stockable->getInventoryName();

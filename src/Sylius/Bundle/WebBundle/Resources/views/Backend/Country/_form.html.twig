@@ -1,15 +1,17 @@
 {{ form_errors(form) }}
 <fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-xlarge'}}) }}
-    {{ form_row(form.isoName, {'attr': {'class': 'input-small'}}) }}
-</fieldset>
-
-{{ form_rest(form) }}
-
-<div class="control-group">
-    <div class="controls">
-        <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius_country_provinces" data-collection="sylius_country_provinces">
-            {{ 'sylius.country.add_province'|trans }}
-        </a>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.name) }}
+            {{ form_row(form.isoName) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_widget(form.provinces) }}
+            <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_country_provinces" data-collection="sylius_country_provinces">
+                {{ 'sylius.country.add_province'|trans }}
+            </a>
+        </div>
     </div>
-</div>
+</fieldset>
+<hr>
+{{ form_widget(form._token) }}

@@ -11,7 +11,8 @@
 
     $(document).ready(function() {
         $('#sylius_shipping_method_calculator').handlePrototypes({
-            'prototypePrefix': 'sylius_shipping_method_calculator_calculators'
+            'prototypePrefix': 'sylius_shipping_method_calculator_calculators',
+            'containerSelector': '.configuration'
         });
     });
 })( jQuery );

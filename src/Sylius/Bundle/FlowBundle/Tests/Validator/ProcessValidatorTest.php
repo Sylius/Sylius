@@ -18,7 +18,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeValid()
     {
-        $validator = new ProcessValidator(function() {
+        $validator = new ProcessValidator(function () {
             return true;
         });
 
@@ -30,7 +30,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeInvalid()
     {
-        $validator = new ProcessValidator(function() {
+        $validator = new ProcessValidator(function () {
             return false;
         });
 
@@ -47,7 +47,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
 
         $process->addStep('foo', new TestStep());
 
-        $process->setValidator(new ProcessValidator(function() {
+        $process->setValidator(new ProcessValidator(function () {
             return false;
         }));
 
@@ -91,7 +91,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
         $step->setContainer($container);
         $process->addStep('foo', $step);
 
-        $process->setValidator(new ProcessValidator(function() {
+        $process->setValidator(new ProcessValidator(function () {
             return false;
         }, $message, 'error.html.php'));
 

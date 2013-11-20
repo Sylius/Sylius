@@ -73,6 +73,33 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function shouldKeepStepsInSequentialOrderAfterRemoveStep()
+    {
+        $process = new Process();
+
+        $process->setSteps(array(
+            'foo' => new TestStep(),
+            'bar' => new TestStep(),
+            'foobar' => new TestStep()
+        ));
+
+        $process->removeStep('bar');
+        $process->addStep('bar', new TestStep());
+
+        $correctOrder = array('foo', 'foobar', 'bar');
+
+        foreach ($process->getOrderedSteps() as $i => $step) {
+            $this->assertSame($correctOrder[$i], $step->getName());
+        }
+
+        foreach ($correctOrder as $i => $name) {
+            $this->assertSame($name, $process->getStepByIndex($i)->getName());
+        }
+    }
+
+    /**
+     * @test
+     */
     public function shouldAddStep()
     {
         $process = new Process();

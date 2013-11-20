@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="hr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.product.sku.not_blank</source>
+                <target>Unesite kod proizvoda.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.product.sku.unique</source>
+                <target>Kod proizvoda mora biti jedinstven.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.product.name.not_blank</source>
+                <target>Unesite naziv proizvoda.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.product.name.min_length</source>
+                <target>Naziv proizvoda mora imati najmanje jedan znak.|Naziv proizvoda mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.product.name.max_length</source>
+                <target>Naziv proizvoda ne smije biti duži od jednog znaka.|Naziv proizvoda ne smije biti duži od {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.product.description.not_blank</source>
+                <target>Unesite opis proizvoda.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.product.description.min_length</source>
+                <target>Opis proizvoda mora imati najmanje jedan znak.|Opis proizvoda mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.variant.sku.not_blank</source>
+                <target>Unesite alternativni kod proizvoda.</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sylius.variant.sku.unique</source>
+                <target>Alternativni kod proizvoda mora biti jedinstven.</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>sylius.option.name.not_blank</source>
+                <target>Unesite naziv svojstva.</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>sylius.option.name.min_length</source>
+                <target>Naziv svojstva mora imati najmanje jedan znak.|Naziv svojstva proizvoda mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>sylius.option.name.max_length</source>
+                <target>Naziv svojstva ne smije biti duži od jednog znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>sylius.option.presentation.not_blank</source>
+                <target>Unesite naziv svojstva.</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>sylius.option.presentation.min_length</source>
+                <target>Opis svojstva mora imati najmanje jedan znak.|Opis svojstva mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>sylius.option.presentation.max_length</source>
+                <target>Opis svojstva ne smije biti duži od jednog znaka.|Opis svojstva artikla ne smije biti duži od {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>sylius.option.values.min_count</source>
+                <target>Unesite barem {{ limit }} opciju artikla.|nesite barem {{ limit }} opciju artikla.</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>sylius.option_value.value.not_blank</source>
+                <target>Unesite vrijednost svojstva.</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>sylius.property.name.not_blank</source>
+                <target>Unesite naziv svojstva artikla.</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>sylius.property.name.min_length</source>
+                <target>Naziv svojstva artikla mora imati najmanje jedan znak.|Naziv svojstva artikla mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>sylius.property.name.max_length</source>
+                <target>Naziv svojstva artikla ne smije biti duži od jednog znaka.|Naziv svojstva artikla ne smije biti duži od {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>sylius.property.presentation.not_blank</source>
+                <target>Unesite opis opcije artikla.</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>sylius.property.presentation.min_length</source>
+                <target>Opis svojstva mora imati najmanje jedan znak.|Opis svojstva mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>sylius.property.presentation.max_length</source>
+                <target>Opcija artikla ne smije biti duža od jednog znaka.|Opcija artikla ne smije biti duža od {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>sylius.product_property.property.not_blank</source>
+                <target>Odaberite opciju artikla.</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>sylius.product_property.value.not_blank</source>
+                <target>Unesite vrijednost opcije artikla.</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>sylius.prototype.name.not_blank</source>
+                <target>Unesite naziv prototipa.</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>sylius.prototype.name.min_length</source>
+                <target>Naziv prototipa mora imati najmanje jedan znak.|Naziv prototipa mora imati najmanje {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>sylius.prototype.name.max_length</source>
+                <target>Naziv prototipa ne smije biti duži od jednog znaka.|Naziv prototipa ne smije biti duži od {{ limit }} znakova.</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>sylius.variant.combination</source>
+                <target>Verzija sa ovim opcijama već postoji.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

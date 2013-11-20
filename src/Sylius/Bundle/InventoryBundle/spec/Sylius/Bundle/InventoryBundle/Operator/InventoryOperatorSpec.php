@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Operator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 
 /**

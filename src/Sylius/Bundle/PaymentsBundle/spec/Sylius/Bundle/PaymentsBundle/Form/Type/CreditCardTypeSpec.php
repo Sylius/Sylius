@@ -47,13 +47,13 @@ class CreditCardTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('number', 'number', Argument::any())
+            ->add('number', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('securityCode', 'number', Argument::any())
+            ->add('securityCode', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -76,7 +76,7 @@ class CreditCardTypeSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function it_defines_assigned_data_class($resolver)
+    public function it_defines_assigned_data_class_and_validation_groups($resolver)
     {
         $resolver
             ->setDefaults(array(

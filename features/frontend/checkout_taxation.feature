@@ -26,8 +26,8 @@ Feature: Checkout taxation
             | zone | name        |
             | UK   | DHL Express |
           And the following payment methods exist:
-            | name        | gateway | enabled |
-            | Credit Card | stripe  | yes     |
+            | name  | gateway | enabled |
+            | Dummy | dummy   | yes     |
           And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page
@@ -37,7 +37,7 @@ Feature: Checkout taxation
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Credit Card" radio button
+          And I select the "Dummy" radio button
          When I press "Continue"
          Then I should be on the checkout finalize step
           And "Tax total: €37.50" should appear on the page

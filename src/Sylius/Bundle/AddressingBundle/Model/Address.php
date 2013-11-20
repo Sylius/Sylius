@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\AddressingBundle\Model;
 
+use Symfony\Component\Validator\ExecutionContextInterface;
+
 /**
  * Default address model.
  *
@@ -19,7 +21,7 @@ namespace Sylius\Bundle\AddressingBundle\Model;
 class Address implements AddressInterface
 {
     /**
-     * Addres id.
+     * Address id.
      *
      * @var mixed
      */
@@ -84,14 +86,14 @@ class Address implements AddressInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -217,6 +219,13 @@ class Address implements AddressInterface
         $this->province = $province;
 
         return $this;
+    }
+
+    public function isValidProvince(ExecutionContextInterface $context)
+    {
+        if (!$this->isValid()) {
+            $context->addViolationAt('province', 'sylius.address.province.valid', array(), null);
+        }
     }
 
     public function isValid()

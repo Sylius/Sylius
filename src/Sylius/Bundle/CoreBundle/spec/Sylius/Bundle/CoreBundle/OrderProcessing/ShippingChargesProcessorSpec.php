@@ -12,18 +12,17 @@
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
 
 /**
- * Shipping charges processor spec.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ShippingChargesProcessor extends ObjectBehavior
+class ShippingChargesProcessorSpec extends ObjectBehavior
 {
     /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface      $adjustmentRepository
-     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
+     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface                $adjustmentRepository
+     * @param Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface $calculator
      */
     function let($adjustmentRepository, $calculator)
     {
@@ -43,15 +42,32 @@ class ShippingChargesProcessor extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
      */
-    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments($order)
+    function it_removes_existing_shipping_adjustments($order)
     {
-        $order->addAdjustment(ANY_ARGUMENT)->shouldNotBeCalled();
+        $order->getShipments()->shouldBeCalled()->willReturn(array());
+        $order->removeShippingAdjustments()->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface        $adjustment
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     */
+    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments($order)
+    {
+        $order->removeShippingAdjustments()->shouldBeCalled();
+        $order->getShipments()->shouldBeCalled()->willReturn(array());
+        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
+
+        $this->applyShippingCharges($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface        $adjustment
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
      * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod
@@ -72,7 +88,10 @@ class ShippingChargesProcessor extends ObjectBehavior
         $adjustment->setLabel(Order::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('FedEx')->shouldBeCalled();
 
+        $order->removeShippingAdjustments()->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }

@@ -33,7 +33,6 @@ class RegisterSchemasPass implements CompilerPassInterface
         }
 
         $schemaRegistry = $container->getDefinition('sylius.settings.schema_registry');
-        $namespaces = array();
 
         foreach ($container->findTaggedServiceIds('sylius.settings_schema') as $id => $attributes) {
             if (!array_key_exists('namespace', $attributes[0])) {
@@ -41,7 +40,6 @@ class RegisterSchemasPass implements CompilerPassInterface
             }
 
             $namespace = $attributes[0]['namespace'];
-            $namespaces[] = $namespace;
 
             $schemaRegistry->addMethodCall('registerSchema', array($namespace, new Reference($id)));
         }

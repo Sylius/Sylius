@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,7 +33,7 @@ class CartController extends Controller
      * Displays current cart summary page.
      * The parameters includes the form created from `sylius_cart` type.
      *
-     * @param Request
+     * @param Request $request
      *
      * @return Response
      */
@@ -67,11 +68,15 @@ class CartController extends Controller
             $event = new CartEvent($cart);
             $event->isFresh(true);
 
+            $this->dispatchEvent(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
+
             // Update models
             $this->dispatchEvent(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
 
             // Write flash message
             $this->dispatchEvent(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
+
+            return $this->redirectToCartSummary();
         }
 
         return $this->renderResponse('summary.html', array(

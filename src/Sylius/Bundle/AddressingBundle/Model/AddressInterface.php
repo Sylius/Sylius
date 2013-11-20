@@ -140,7 +140,7 @@ interface AddressInterface
     /**
      * Get creation time.
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreatedAt();
 

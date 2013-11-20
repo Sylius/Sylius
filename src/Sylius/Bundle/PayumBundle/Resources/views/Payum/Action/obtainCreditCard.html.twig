@@ -1,0 +1,22 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.checkout.credit_card.header'|trans|raw }}</h1>
+</div>
+
+<form action="" method="post" class="form-horizontal" novalidate>
+    {{ form_errors(form) }}
+
+    <fieldset>
+        {{ form_widget(form) }}
+    </fieldset>
+
+    {{ form_widget(form._token) }}
+
+    <div class="form-actions">
+        <a href="{{ path('sylius_cart_summary') }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+        <button type="submit" class="btn btn-primary btn-lg">{{ 'sylius.checkout.forward'|trans }} <i class="icon-chevron-right"></i></button>
+    </div>
+</form>
+{% endblock %}

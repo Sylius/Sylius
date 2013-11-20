@@ -100,18 +100,18 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getLimit()->shouldReturn(10);
     }
 
-    function it_has_limit_equal_to_null_if_limit_is_null($request)
-    {
-        $request->attributes->set('_sylius', array('limit' => null));
-        $this->load($request);
-
-        $this->getLimit()->shouldReturn(null);
-    }
-
     function its_paginated_by_default($request)
     {
         $this->load($request);
         $this->isPaginated()->shouldReturn(true);
+    }
+
+    function it_has_limit_equal_to_null_if_limit_is_set_to_false($request)
+    {
+        $request->attributes->set('_sylius', array('limit' => false));
+        $this->load($request);
+
+        $this->getLimit()->shouldReturn(null);
     }
 
     function its_pagination_max_per_page_is_equal_to_10_by_default($request)

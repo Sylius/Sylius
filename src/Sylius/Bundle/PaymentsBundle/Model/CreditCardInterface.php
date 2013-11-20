@@ -11,36 +11,30 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+
 /**
  * Payment method interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface CreditCardInterface extends PaymentSourceInterface
+interface CreditCardInterface extends PaymentSourceInterface, TimestampableInterface
 {
     /**
-     * Supported Credit Card Brands
-     *
+     * Supported CC brands.
      */
-    const BRAND_VISA = 'visa';
-    const BRAND_MASTERCARD = 'mastercard';
-    const BRAND_DISCOVER = 'discover';
-    const BRAND_AMEX = 'amex';
-    const BRAND_DINERS_CLUB = 'diners_club';
-    const BRAND_JCB = 'jcb';
-    const BRAND_SWITCH = 'switch';
-    const BRAND_SOLO = 'solo';
-    const BRAND_DANKORT = 'dankort';
-    const BRAND_MAESTRO = 'maestro';
+    const BRAND_VISA               = 'visa';
+    const BRAND_MASTERCARD         = 'mastercard';
+    const BRAND_DISCOVER           = 'discover';
+    const BRAND_AMEX               = 'amex';
+    const BRAND_DINERS_CLUB        = 'diners_club';
+    const BRAND_JCB                = 'jcb';
+    const BRAND_SWITCH             = 'switch';
+    const BRAND_SOLO               = 'solo';
+    const BRAND_DANKORT            = 'dankort';
+    const BRAND_MAESTRO            = 'maestro';
     const BRAND_FORBRUGSFORENINGEN = 'forbrugsforeningen';
-    const BRAND_LASER = 'laser';
-
-    /**
-     * Get payments method identifier.
-     *
-     * @return mixed
-     */
-    public function getId();
+    const BRAND_LASER              = 'laser';
 
     /**
      * Get payment gateway token.
@@ -70,20 +64,6 @@ interface CreditCardInterface extends PaymentSourceInterface
      * @param string $type
      */
     public function setType($type);
-
-    /**
-     * Get owner.
-     *
-     * @return CreditCardOwnerInterface
-     */
-    public function getOwner();
-
-    /**
-     * Set owner.
-     *
-     * @param CreditCardOwnerInterface
-     */
-    public function setOwner(CreditCardOwnerInterface $owner);
 
     /**
      * Get cardholder name.
@@ -161,18 +141,4 @@ interface CreditCardInterface extends PaymentSourceInterface
      * @param integer $expiryYear
      */
     public function setExpiryYear($expiryYear);
-
-    /**
-     * Get creation time.
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get last update time.
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

@@ -1,10 +1,10 @@
 {% macro list(countries) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if countries|length > 0 %}
-<table class="table table-bordered">
+<table class="table table-condensed">
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.country.id'|trans) }}</th>
@@ -15,13 +15,12 @@
     </thead>
     <tbody>
     {% for country in countries %}
-        <tr>
+        <tr id="{{ country.id }}">
             <td>{{ country.id }}</td>
-            <td>{{ country.name }}</td>
-            <td>{{ country.isoName }}</td>
+            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
+            <td><span class="label label-primary">{{ country.isoName }}</span></td>
             <td>
                 <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_country_show', {'id': country.id})) }}
                 {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
                 {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
                 </div>

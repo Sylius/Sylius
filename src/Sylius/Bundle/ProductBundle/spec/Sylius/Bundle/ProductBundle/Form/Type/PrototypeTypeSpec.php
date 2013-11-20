@@ -21,7 +21,7 @@ class PrototypeTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Prototype');
+        $this->beConstructedWith('Prototype', array('sylius'));
     }
 
     function it_is_initializable()
@@ -46,12 +46,6 @@ class PrototypeTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('options', 'sylius_option_choice', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('properties', 'sylius_property_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -65,7 +59,7 @@ class PrototypeTypeSpec extends ObjectBehavior
      */
     function it_defines_assigned_data_class($resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Prototype'))->shouldBeCalled();
+        $resolver->setDefaults(array('data_class' => 'Prototype', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

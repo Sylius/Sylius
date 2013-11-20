@@ -1,8 +1,9 @@
 <h4>{{ 'sylius.account.home.welcome'|trans }}</h4>
+<br>
 
-<div class="row-fluid">
-    <div class="span8">{{ 'sylius.account.home.outline'|trans }} </div>
-    <div class="span4 well well-small">
+<div class="row">
+    <div class="col-md-7">{{ 'sylius.account.home.outline'|trans }} </div>
+    <div class="col-md-5">
         <strong>{{ app.user.lastName|upper }} {{ app.user.firstName }}</strong><br><br>
         {{ 'sylius.account.home.id'|trans }} {{ app.user.id }} <br>
         {{ 'sylius.account.home.email'|trans }} {{ app.user.email }}<br>

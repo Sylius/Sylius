@@ -1,13 +1,14 @@
 body {
     padding-top: 20px;
     padding-bottom: 40px;
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 h1.logo {
 }
 
 h1.logo a {
-    color: #333333;
+    color: #333;
 }
 
 h1.logo a img {
@@ -24,7 +25,7 @@ h1.logo a:hover {
 }
 
 .jumbotron {
-    margin: 20px 0px 40px 0px;
+    margin: 20px 0 40px;
     text-align: center;
 }
 
@@ -50,33 +51,32 @@ th {
     background-color: #f1f1f1;
 }
 
-#sidebar_left ul {
+#sidebar ul {
     margin-left: 0;
     list-style: none;
+    padding: 0;
+    overflow: hidden;
 }
 
-#sidebar_left ul span.nav-header {
-    padding-left: 0;
+#sidebar ul span.nav-header {
+    padding-left: 10px;
+    font-weight: bold;
 }
 
-#sidebar_left ul.nav-list li {
-
+#sidebar ul.nav-list {
+    margin-top: 10px;
 }
 
-#sidebar_left ul li a {
-    display: block;
-}
-
-#sidebar_left ul li a:hover {
+#sidebar ul li a:hover {
     text-decoration: none;
 }
 
-#sidebar_left ul li img {
+#sidebar ul li img {
     float: left;
     margin-right: 10px;
 }
 
-#sidebar_left ul li h4 {
+#sidebar ul li h4 {
     font-size: 15px;
     text-align: left;
 }
@@ -96,7 +96,7 @@ div.product-box a img {
 div.product-box .btn {
     float: right;
     height: 25px;
-    padding: 1px 6px 7px 6px;
+    padding: 1px 6px 7px;
 }
 
 div.product-box span.label {
@@ -105,7 +105,7 @@ div.product-box span.label {
 }
 
 div.product-box h3 {
-   color: #333333;
+   color: #333;
 }
 
 div.footer p {
@@ -114,14 +114,49 @@ div.footer p {
 }
 
 div.footer ul li a {
-    color: #999999;
+    color: #999;
 }
 
-#sidebar_left ul li img.menu-thumbnail {
+#sidebar ul li img.menu-thumbnail {
     float: none;
     margin-right: 0;
 }
 
+.form-actions {
+    padding: 10px;
+    text-align: center;
+    background-color: #f1f1f1;
+    border-top: 3px solid #ddd;
+}
+
 div.currency-menu {
     margin-right: 50px;
+}
+
+.checkout-new-customer form, .checkout-existing-customer form {
+    margin-top: 20px;
+}
+
+.checkout-new-customer .form-group {
+    clear: both;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.checkout-new-customer .form-group > .control-label, .address-container .form-group > .control-label {
+    padding-left: 0;
+    padding-right: 0;
+    width: 25%;
+}
+
+.checkout-new-customer .form-group > .col-lg-10, .address-container .form-group > .col-lg-10 {
+    width: 75%;
+}
+
+a.oauth-login {
+    margin-right: 8px;
+}
+
+a.oauth-login:hover {
+    text-decoration: none;
 }

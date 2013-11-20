@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 {% set settings = sylius_settings_all('general') %}
-
 <html>
     <head>
         <title>
@@ -13,22 +11,24 @@
         <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
         <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
 
-        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-        <!--[if lt IE 9]>
-          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 
         {# stylesheets... #}
         {% block stylesheets %}
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-            '//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css'
-            '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css'
+            '//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css'
+            '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
             '@SyliusWebBundle/Resources/assets/css/frontend.css'
-            '@SyliusWebBundle/Resources/assets/css/bootstrap-image-gallery.css'
+            '@SyliusWebBundle/Resources/assets/css/blueimp-gallery.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
         {% endblock %}
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </head>
     <body>
         <div class="container">
@@ -55,31 +55,33 @@
 
         {% block main %}
         <hr>
-        <div class="row-fluid">
-            <div class="row-fluid">
-                <div class="span3" id="sidebar_left">
-                    {% block sidebar %}
-                    <h4>{{ 'sylius.shop_by'|trans }}</h4>
-                    {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
-                    {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
-                    {% endblock %}
-                </div>
-                <div class="span9">
+        <div class="row">
+            <div class="col-md-3" id="sidebar">
+                {% block sidebar %}
+                <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
+                {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                {% endblock %}
+            </div>
+            <div class="col-md-9">
                 {% block content %}
                 {% endblock %}
-                </div>
             </div>
         </div>
         <hr>
         {% endblock %}
 
         {% block gallery %}
+        {# Gallery modal #}
         {% include 'SyliusWebBundle::gallery.html.twig' %}
         {% endblock %}
 
+        {# Confirmation modal #}
+        {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
+
         {% block footer %}
             <div class="footer">
-                <p class="muted">
+                <p class="text-muted">
                     &copy; Sylius, 2011 - {{ 'now'|date('Y') }}.
                 </p>
                 {{ knp_menu_render('sylius.frontend.social', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
@@ -90,10 +92,11 @@
         {# javascripts... #}
         {% block javascripts %}
         {% javascripts output='assets/compiled/frontend.js'
-            'http://code.jquery.com/jquery-1.8.0.min.js'
-            'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js'
-            '@SyliusWebBundle/Resources/assets/js/load-image.js'
-            '@SyliusWebBundle/Resources/assets/js/bootstrap-image-gallery.js'
+            '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
+            '//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js'
+            '@SyliusWebBundle/Resources/assets/js/jquery.blueimp-gallery.min.js'
+            '@SyliusWebBundle/Resources/assets/js/confirm-modal.js'
+            '@SyliusWebBundle/Resources/assets/js/frontend.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

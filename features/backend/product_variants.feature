@@ -48,9 +48,9 @@ Feature: Product variants
 
     Scenario: Trying to create product variant with invalid price
         Given I am creating variant of "Black T-Shirt"
-         When I fill in "Price" with "0.00"
+         When I fill in "Price" with "-0.01"
           And I press "Create"
-         Then I should see "Price must be greater than 0.01"
+         Then I should see "Price must not be negative"
 
     Scenario: Displaying the "Generate variants" button
               only for products with options
@@ -64,9 +64,30 @@ Feature: Product variants
           And I should see "Variants have been successfully generated."
           And I should see 3 variants in the list
 
-    Scenario: Generating variants of product with multiple options
+    Scenario: Generating only missing variants of product
+        Given I am creating variant of "Black T-Shirt"
+         When I fill in "Price" with "19.99"
+          And I select "L" from "T-Shirt size"
+          And I press "Create"
+          And I follow "Generate variants"
+         Then I should still be on the page of product with name "Black T-Shirt"
+          And I should see "Variants have been successfully generated."
+          And I should see 3 variants in the list
+
+    Scenario: Generating all possible variants of product with multiple options
         Given I am viewing product "Sylius T-Shirt"
          When I follow "Generate variants"
+         Then I should still be on the page of product with name "Sylius T-Shirt"
+          And I should see "Variants have been successfully generated."
+          And I should see 9 variants in the list
+
+    Scenario: Generating only missing variants of product with multiple options
+        Given I am creating variant of "Sylius T-Shirt"
+         When I fill in "Price" with "19.99"
+          And I select "L" from "T-Shirt size"
+          And I select "Red" from "T-Shirt color"
+          And I press "Create"
+          And I follow "Generate variants"
          Then I should still be on the page of product with name "Sylius T-Shirt"
           And I should see "Variants have been successfully generated."
           And I should see 9 variants in the list
@@ -101,5 +122,16 @@ Feature: Product variants
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
          When I click "delete" near "T-Shirt size: L"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the page of product "Black T-Shirt"
+          And I should see "Variant has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting product variant with js modal
+        Given product "Black T-Shirt" is available in all variations
+          And I am on the page of product "Black T-Shirt"
+         When I click "delete" near "T-Shirt size: L"
+          And I click "delete" from the confirmation modal
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Variant has been successfully deleted."

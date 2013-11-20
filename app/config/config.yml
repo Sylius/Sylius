@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: sylius.yml }
+    - { resource: payum.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -63,12 +64,31 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Sylius\Bundle\CoreBundle\Model\User
+    group:
+        group_class: Sylius\Bundle\CoreBundle\Model\Group
     profile:
         form:
             type: sylius_user_profile
     registration:
         form:
             type: sylius_user_registration
+
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        amazon:
+            type:          amazon
+            client_id:     %sylius.oauth.amazon.clientid% 
+            client_secret: %sylius.oauth.amazon.clientsecret%
+        facebook:
+            type:          facebook
+            client_id:     %sylius.oauth.facebook.clientid%
+            client_secret: %sylius.oauth.facebook.clientsecret%
+        google:
+            type:          google
+            client_id:     %sylius.oauth.google.clientid%
+            client_secret: %sylius.oauth.google.clientsecret%
+            scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
 
 swiftmailer:
     transport: %sylius.mailer.transport%

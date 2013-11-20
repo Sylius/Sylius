@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Tax category model.
@@ -53,14 +54,14 @@ class TaxCategory implements TaxCategoryInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -103,6 +104,8 @@ class TaxCategory implements TaxCategoryInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -119,6 +122,8 @@ class TaxCategory implements TaxCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -138,6 +143,8 @@ class TaxCategory implements TaxCategoryInterface
             $rate->setCategory($this);
             $this->rates->add($rate);
         }
+
+        return $this;
     }
 
     /**
@@ -149,6 +156,8 @@ class TaxCategory implements TaxCategoryInterface
             $rate->setCategory(null);
             $this->rates->removeElement($rate);
         }
+
+        return $this;
     }
 
     /**
@@ -167,6 +176,9 @@ class TaxCategory implements TaxCategoryInterface
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -182,6 +194,9 @@ class TaxCategory implements TaxCategoryInterface
         return $this->updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;

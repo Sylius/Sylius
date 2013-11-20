@@ -102,6 +102,17 @@ Feature: Countries and provinces
     Scenario: Deleting country via the list button
         Given I am on the country index page
          When I press "delete" near "China"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should still be on the country index page
+          And I should see "Country has been successfully deleted."
+          But I should not see country with name "China" in the list
+
+    @javascript
+    Scenario: Deleting country via the list button with js modal
+        Given I am on the country index page
+         When I press "delete" near "China"
+          And I click "delete" from the confirmation modal
          Then I should still be on the country index page
           And I should see "Country has been successfully deleted."
           But I should not see country with name "China" in the list
@@ -109,28 +120,58 @@ Feature: Countries and provinces
     Scenario: Deleting country
         Given I am on the page of country "China"
          When I press "delete"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the country index page
+          And I should see "Country has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting country with js modal
+        Given I am on the page of country "China"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the country index page
           And I should see "Country has been successfully deleted."
 
     Scenario: Deleted country disappears from the list
         Given I am on the page of country "France"
          When I press "delete"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the country index page
+          And I should not see country with name "France" in that list
+
+    @javascript
+    Scenario: Deleted country disappears from the list with js modal
+        Given I am on the page of country "France"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the country index page
           And I should not see country with name "France" in that list
 
     Scenario: Accessing country details via the list
         Given I am on the country index page
-         When I press "details" near "China"
+         When I click "China"
          Then I should be on the page of country "China"
 
     Scenario: Provinces are listed on country page
         Given I am on the country index page
-         When I press "details" near "France"
+         When I click "France"
          Then I should be on the page of country "France"
           And I should see 4 provinces in the list
 
     Scenario: Deleting province
         Given I am on the page of country "France"
          When I press "delete" near "Toulouse"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should still be on the page of country "France"
+          And "Toulouse" should not appear on the page
+
+    @javascript
+    Scenario: Deleting province with js modal
+        Given I am on the page of country "France"
+         When I press "delete" near "Toulouse"
+          And I click "delete" from the confirmation modal
          Then I should still be on the page of country "France"
           And "Toulouse" should not appear on the page

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
@@ -23,9 +24,9 @@ interface BackordersHandlerInterface
     /**
      * Processes given inventory units and marks backorders if any.
      *
-     * @param array $inventoryUnits
+     * @param array|Collection $inventoryUnits
      */
-    public function processBackorders(array $inventoryUnits);
+    public function processBackorders($inventoryUnits);
 
     /**
      * Update backordered inventory units if quantity is sufficient.

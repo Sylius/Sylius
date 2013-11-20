@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Operator;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
@@ -64,15 +65,23 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function decrease(array $inventoryUnits)
+    public function decrease($inventoryUnits)
     {
+        if (!is_array($inventoryUnits) && !$inventoryUnits instanceof Collection) {
+            throw new \InvalidArgumentException('Inventory units value must be array or instance of "Doctrine\Common\Collections\Collection".');
+        }
+
         $quantity = count($inventoryUnits);
 
         if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
         }
 
-        $stockable = $inventoryUnits[0]->getStockable();
+        if ($inventoryUnits instanceof Collection) {
+            $stockable = $inventoryUnits->first()->getStockable();
+        } else {
+            $stockable = $inventoryUnits[0]->getStockable();
+        }
 
         if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
             throw new InsufficientStockException($stockable, $quantity);
@@ -84,7 +93,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         foreach ($inventoryUnits as $inventoryUnit) {
             if (InventoryUnitInterface::STATE_SOLD === $inventoryUnit->getInventoryState()) {
-                $onHand--;
+                --$onHand;
             }
         }
 

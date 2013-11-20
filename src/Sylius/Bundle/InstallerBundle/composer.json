@@ -7,25 +7,27 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusInstallerBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
+        "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.2",
-        "sylius/resource-bundle":   "~0.1",
-        "sylius/flow-bundle":       "0.1.*"
+        "sylius/resource-bundle":   "1.0.*@dev",
+        "sylius/flow-bundle":       "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec2":         "dev-develop",
+        "phpspec/phpspec2":         "2.0.*@dev",
         "symfony/form":             "~2.2",
         "symfony/validator":        "~2.2"
     },
@@ -33,12 +35,12 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\InstallerBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\InstallerBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/InstallerBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.x-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

@@ -209,8 +209,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldNotBeValidWhenProcessValidatorIsNotValid(
-    )
+    public function shouldNotBeValidWhenProcessValidatorIsNotValid()
     {
         $steps = array(
             $this->getStep('step1'),
@@ -219,7 +218,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $process = $this->getProcess($steps);
         $process->expects($this->once())
             ->method('getValidator')
-            ->will($this->returnValue(new ProcessValidator(function() { return false; })));
+            ->will($this->returnValue(new ProcessValidator(function () { return false; })));
 
         $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
         $context->initialize($process, $steps[0]);

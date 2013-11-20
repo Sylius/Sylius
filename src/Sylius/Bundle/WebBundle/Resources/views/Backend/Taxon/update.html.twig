@@ -1,11 +1,23 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_taxonomy_show', {'id': taxon.taxonomy.id}) }}">{{ taxon.taxonomy.name }}</a></li>
+    <li>{{ taxon.name }}</a></li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.taxon.update_header'|trans|raw }}</h1>
+    <h1><i class="icon-pencil"></i> {{ 'sylius.taxon.update_header'|trans|raw }}</h1>
 </div>
+
+{{ form_errors(form) }}
 
 <form action="{{ path('sylius_backend_taxon_update', {'taxonomyId': taxon.taxonomy.id, 'id': taxon.id}) }}" method="post"  class="form-horizontal" {{ form_enctype(form) }}novalidate>
     <input type="hidden" name="_method" value="PUT">

@@ -5,17 +5,8 @@ sylius_account_homepage:
     pattern: /
     defaults: { _controller: FOSUserBundle:Profile:show }
 
-sylius_account_order_index:
-    pattern: /orders
-    methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Order:indexOrder }
+sylius_account_order:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/account/order.yml
 
-sylius_account_order_show:
-    pattern: /order/{number}
-    methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Order:showOrder }
-
-sylius_account_order_invoice:
-    pattern: /invoice/{number}
-    methods:  [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Order:renderInvoice }
+sylius_account_address:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/account/address.yml

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
 /**
  * Shipment factory.
@@ -43,12 +44,29 @@ class ShipmentFactory implements ShipmentFactoryInterface
      */
     public function createShipment(OrderInterface $order)
     {
-        $shipment = $this->shipmentRepository->createNew();
+        $shipment = $order->getShipments()->first();
 
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            $shipment->addItem($inventoryUnit);
+        if (!$shipment) {
+            $shipment = $this->shipmentRepository->createNew();
+            $order->addShipment($shipment);
         }
 
-        $order->addShipment($shipment);
+        foreach ($order->getInventoryUnits() as $inventoryUnit) {
+            if (null === $inventoryUnit->getShipment()) {
+                $shipment->addItem($inventoryUnit);
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateShipmentStates(OrderInterface $order)
+    {
+        foreach ($order->getShipments() as $shipment) {
+            if (ShipmentInterface::STATE_CHECKOUT === $shipment->getState()) {
+                $shipment->setState(ShipmentInterface::STATE_READY);
+            }
+        }
     }
 }

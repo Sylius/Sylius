@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\SalesBundle\Model\OrderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
 
 /**
  * Final checkout step.
@@ -27,7 +29,8 @@ class FinalizeStep extends CheckoutStep
      */
     public function displayAction(ProcessContextInterface $context)
     {
-        $order = $this->createOrder($context);
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
 
         return $this->renderStep($context, $order);
     }
@@ -37,18 +40,17 @@ class FinalizeStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $order = $this->createOrder($context);
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
 
-        $this->saveOrder($order);
-        $this->getCartProvider()->abandonCart();
+        $order->setUser($this->getUser());
 
-        $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add('success', $translator->trans('sylius.checkout.success', array(), 'flashes'));
+        $this->completeOrder($order);
 
         return $this->complete();
     }
 
-    private function renderStep(ProcessContextInterface $context, OrderInterface $order)
+    protected function renderStep(ProcessContextInterface $context, OrderInterface $order)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:finalize.html.twig', array(
             'context' => $context,
@@ -57,39 +59,22 @@ class FinalizeStep extends CheckoutStep
     }
 
     /**
-     * Create order based on the checkout context.
-     *
-     * @param ProcessContextInterface $context
-     *
-     * @return OrderInterface
-     */
-    private function createOrder(ProcessContextInterface $context)
-    {
-        $order = $this->getCurrentCart();
-
-        $order->setUser($this->getUser());
-
-        $order->calculateTotal();
-        $this->get('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
-        $order->calculateTotal();
-
-        return $order;
-    }
-
-    /**
-     * Save given order.
+     * Mark the order as completed.
      *
      * @param OrderInterface $order
      */
-    protected function saveOrder(OrderInterface $order)
+    protected function completeOrder(OrderInterface $order)
     {
         $manager = $this->get('sylius.manager.order');
 
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
         $order->complete();
 
         $manager->persist($order);
-        $manager->flush($order);
+        $manager->flush();
 
-        $this->get('event_dispatcher')->dispatch('sylius.order.post_create', new GenericEvent($order));
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
     }
 }

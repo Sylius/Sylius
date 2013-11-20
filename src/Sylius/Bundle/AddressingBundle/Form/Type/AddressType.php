@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -38,7 +38,7 @@ class AddressType extends AbstractType
     protected $validationGroups;
 
     /**
-     * @var BuildAddressFormListener
+     * @var EventSubscriberInterface
      */
     protected $eventListener;
 
@@ -47,9 +47,9 @@ class AddressType extends AbstractType
      *
      * @param string                   $dataClass
      * @param array                    $validationGroups
-     * @param BuildAddressFormListener $eventListener
+     * @param EventSubscriberInterface $eventListener
      */
-    public function __construct($dataClass, array $validationGroups, BuildAddressFormListener $eventListener)
+    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventListener)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;

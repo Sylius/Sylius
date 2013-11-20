@@ -16,7 +16,8 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Sylius\Bundle\SalesBundle\Model\AdjustmentInterface;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
+use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 
 /**
  * Order entity.
@@ -75,6 +76,21 @@ class Order extends Cart implements OrderInterface
     protected $currency;
 
     /**
+     * Promotion coupon
+     *
+     * @var CouponInterface
+     */
+    protected $promotionCoupon;
+
+    /**
+     * Order shipping state.
+     * It depends on the status of all order shipments.
+     *
+     * @var string
+     */
+    protected $shippingState;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -84,6 +100,8 @@ class Order extends Cart implements OrderInterface
         $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
         $this->currency = 'EUR'; // @todo: Temporary
+
+        $this->shippingState = OrderShippingStates::READY;
     }
 
     /**
@@ -118,6 +136,8 @@ class Order extends Cart implements OrderInterface
     public function setShippingAddress(AddressInterface $address)
     {
         $this->shippingAddress = $address;
+
+        return $this;
     }
 
     /**
@@ -134,6 +154,8 @@ class Order extends Cart implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
+
+        return $this;
     }
 
     /**
@@ -273,6 +295,16 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getInventoryUnitsByVariant(VariantInterface $variant)
+    {
+        return $this->inventoryUnits->filter(function (InventoryUnitInterface $unit) use ($variant) {
+            return $variant === $unit->getStockable();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addInventoryUnit(InventoryUnitInterface $unit)
     {
         if (!$this->inventoryUnits->contains($unit)) {
@@ -294,6 +326,14 @@ class Order extends Cart implements OrderInterface
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasInventoryUnit(InventoryUnitInterface $unit)
+    {
+        return $this->inventoryUnits->contains($unit);
     }
 
     /**
@@ -347,7 +387,17 @@ class Order extends Cart implements OrderInterface
      */
     public function getPromotionCoupon()
     {
-        return null;
+        return $this->promotionCoupon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPromotionCoupon(CouponInterface $coupon = null)
+    {
+        $this->promotionCoupon = $coupon;
+
+        return $this;
     }
 
     /**
@@ -355,7 +405,7 @@ class Order extends Cart implements OrderInterface
      */
     public function getPromotionSubjectItemTotal()
     {
-        return $this->getTotal();
+        return $this->getItemsTotal();
     }
 
     /**
@@ -387,9 +437,33 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function getShippingState()
     {
-        $this->createdAt = $createdAt;
+        return $this->shippingState;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingState($state)
+    {
+        $this->shippingState = $state;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBackorder()
+    {
+        foreach ($this->inventoryUnits as $unit) {
+            if (InventoryUnitInterface::STATE_BACKORDERED === $unit->getInventoryState()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

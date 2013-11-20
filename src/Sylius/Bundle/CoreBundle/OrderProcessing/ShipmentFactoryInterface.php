@@ -26,4 +26,11 @@ interface ShipmentFactoryInterface
      * @param OrderInterface $order
      */
     public function createShipment(OrderInterface $order);
+
+    /**
+     * Update shipment state after order is confirmed.
+     *
+     * @param OrderInterface $order
+     */
+    public function updateShipmentStates(OrderInterface $order);
 }

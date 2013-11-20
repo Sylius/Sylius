@@ -65,14 +65,14 @@ class TaxRate implements TaxRateInterface
     /**
      * Creation time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -108,6 +108,8 @@ class TaxRate implements TaxRateInterface
     public function setCategory(TaxCategoryInterface $category = null)
     {
         $this->category = $category;
+
+        return $this;
     }
 
     /**
@@ -124,6 +126,8 @@ class TaxRate implements TaxRateInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -164,6 +168,8 @@ class TaxRate implements TaxRateInterface
     public function setIncludedInPrice($includedInPrice)
     {
         $this->includedInPrice = (Boolean) $includedInPrice;
+
+        return $this;
     }
 
     /**
@@ -180,6 +186,8 @@ class TaxRate implements TaxRateInterface
     public function setCalculator($calculator)
     {
         $this->calculator = $calculator;
+
+        return $this;
     }
 
     /**
@@ -190,6 +198,9 @@ class TaxRate implements TaxRateInterface
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -205,6 +216,9 @@ class TaxRate implements TaxRateInterface
         return $this->updatedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;

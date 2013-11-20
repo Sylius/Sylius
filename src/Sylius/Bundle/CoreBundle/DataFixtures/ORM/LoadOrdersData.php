@@ -44,7 +44,7 @@ class LoadOrdersData extends DataFixture
 
             $order->addShipment($shipment);
 
-            $order->setNumber(str_pad((int) $i, 6, 0, STR_PAD_LEFT));
+            $order->setNumber(str_pad((int) $i, 9, 0, STR_PAD_LEFT));
             $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
             $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
             $order->setShippingAddress($this->createAddress());
@@ -53,6 +53,13 @@ class LoadOrdersData extends DataFixture
 
             $order->calculateTotal();
             $order->complete();
+
+            $payment = $this->getPaymentRepository()->createNew();
+            $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
+            $payment->setAmount($order->getTotal());
+            $payment->setCurrency($order->getCurrency());
+
+            $order->setPayment($payment);
 
             $this->setReference('Sylius.Order-'.$i, $order);
 

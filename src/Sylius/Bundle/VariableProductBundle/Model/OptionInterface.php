@@ -61,7 +61,7 @@ interface OptionInterface extends TimestampableInterface
     /**
      * Returns all option values.
      *
-     * @return Collection of OptionValueInterface
+     * @return OptionValueInterface[]
      */
     public function getValues();
 

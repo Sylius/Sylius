@@ -77,10 +77,9 @@ class VariantGenerator implements VariantGeneratorInterface
 
         $permutations = $this->getPermutations($optionSet);
 
-        foreach ($permutations as $i => $permutation) {
+        foreach ($permutations as $permutation) {
             $variant = $this->variantRepository->createNew();
             $variant->setProduct($product);
-
             $variant->setDefaults($product->getMasterVariant());
 
             if (is_array($permutation)) {
@@ -93,7 +92,7 @@ class VariantGenerator implements VariantGeneratorInterface
 
             $product->addVariant($variant);
 
-            if (0 < count($this->validator->validate($variant))) {
+            if (0 < count($this->validator->validate($variant, array('sylius')))) {
                 $product->removeVariant($variant);
             }
         }
@@ -107,6 +106,8 @@ class VariantGenerator implements VariantGeneratorInterface
      * @param Boolean $recursing
      *
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     protected function getPermutations($array, $recursing = false)
     {
@@ -115,7 +116,7 @@ class VariantGenerator implements VariantGeneratorInterface
         if (1 === $countArrays) {
             return reset($array);
         } elseif (0 === $countArrays) {
-            throw new \InvalidArgumentException('At least one array is required');
+            throw new \InvalidArgumentException('At least one array is required.');
         }
 
         $keys = array_keys($array);

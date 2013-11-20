@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
-
 /**
  * Shipping method rule model.
  *
@@ -20,9 +18,30 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
  */
 class Rule implements RuleInterface
 {
+    /**
+     * Shipping rule identifier.
+     *
+     * @var mixed
+     */
     protected $id;
+
+    /**
+     * Rule type.
+     *
+     * @var string
+     */
     protected $type;
+
+    /**
+     * All extra configuration.
+     *
+     * @var array
+     */
     protected $configuration;
+
+    /**
+     * @var ShippingMethodInterface
+     */
     protected $method;
 
     public function __construct()
@@ -35,33 +54,57 @@ class Rule implements RuleInterface
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getConfiguration()
     {
         return $this->configuration;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMethod()
     {
         return $this->method;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMethod(ShippingMethodInterface $method = null)
     {
         $this->method = $method;
+
+        return $this;
     }
 }

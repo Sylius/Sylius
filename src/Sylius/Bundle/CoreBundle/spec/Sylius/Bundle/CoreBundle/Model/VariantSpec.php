@@ -79,8 +79,8 @@ class VariantSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\Corebundle\Model\ProductInterface $product
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategorYInterface      $shippingCategory
+     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
+     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface      $shippingCategory
      */
     function it_returns_the_product_shipping_category($product, $shippingCategory)
     {
@@ -139,5 +139,18 @@ class VariantSpec extends ObjectBehavior
     {
         $this->setHeight(110);
         $this->getShippingHeight()->shouldReturn(110);
+    }
+
+    function it_has_no_sku_by_default()
+    {
+        $this->getSku()->shouldReturn(null);
+    }
+
+    function its_sku_is_mutable()
+    {
+        $sku = 'dummy-sku123';
+
+        $this->setSku($sku);
+        $this->getSku()->shouldReturn($sku);
     }
 }

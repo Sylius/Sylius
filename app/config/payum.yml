@@ -1,0 +1,60 @@
+payum:
+    security:
+        token_storage:
+            Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken:
+                doctrine:
+                    driver: orm
+
+    contexts:
+        paypal_express_checkout:
+            paypal_express_checkout_nvp:
+                api:
+                    options:
+                        username:  %paypal.express_checkout.username%
+                        password:  %paypal.express_checkout.password%
+                        signature: %paypal.express_checkout.signature%
+                        sandbox:   %paypal.express_checkout.sandbox%
+                actions:
+                    - sylius.payum.paypal.action.capture_order_using_express_checkout
+                    - sylius.payum.action.order_status
+
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        stripe:
+            omnipay:
+                type: Stripe
+                options:
+                    apiKey:   %stripe.secret_key%
+                    testMode: %stripe.test_mode%
+                actions:
+                    - sylius.payum.stripe.action.capture_order_using_credit_card
+                    - sylius.payum.action.obtain_credit_card
+                    - sylius.payum.action.order_status
+
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        dummy:
+            custom:
+                actions:
+                    - sylius.payum.dummy.action.capture_order
+                    - sylius.payum.dummy.action.order_status
+
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm

@@ -1,11 +1,22 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import update %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_tax_category_index') }}">{{ 'sylius.breadcrumb.tax_category.index'|trans }}</a></li>
+    <li>{{ tax_category.name }}</li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.tax_category.update_header'|trans|raw }}</h1>
+    <h1><i class="icon-pencil"></i> {{ 'sylius.tax_category.update_header'|trans|raw }}</h1>
 </div>
+
+{{ form_errors(form) }}
 
 <form action="{{ path('sylius_backend_tax_category_update', {'id': tax_category.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">

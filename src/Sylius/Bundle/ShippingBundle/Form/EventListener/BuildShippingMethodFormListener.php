@@ -59,7 +59,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_BIND     => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind'
         );
     }
 
@@ -106,7 +106,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     {
         $calculator = $this->calculatorRegistry->getCalculator($calculatorName);
 
-        if (true !== $calculator->isConfigurable()) {
+        if (!$calculator->isConfigurable()) {
             return;
         }
 
