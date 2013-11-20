@@ -1,8 +1,17 @@
 <?php
+
+/*
+* This file is part of the Sylius package.
+*
+* (c) Paweł Jędrzejewski
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 namespace spec\Sylius\Bundle\PayumBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Payum\Paypal\ExpressCheckout\Nvp\Tests\Functional\Bridge\Doctrine\Entity\PaymentDetailsTest;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Payum\PaymentInterface;
@@ -14,19 +23,17 @@ use Prophecy\Argument;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 use Sylius\Bundle\PaymentsBundle\Model\Payment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseStepSpec extends ObjectBehavior
 {
-    public function let(
+    function let(
         ContainerInterface $container,
         ProcessContextInterface $context,
         HttpRequestVerifierInterface $httpRequestVerifier,
@@ -72,7 +79,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep');
     }
 
-    function it_must_dispatch_pre_and_post_payment_state_changed_f_state_changed(
+    function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         ProcessContextInterface $context,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher
@@ -82,10 +89,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markSuccess();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markSuccess();
+                $args[0]->setModel($order);
+            }
+        );
 
         $eventDispatcher
             ->dispatch(
@@ -115,10 +125,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markSuccess();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markSuccess();
+                $args[0]->setModel($order);
+            }
+        );
 
         $eventDispatcher
             ->dispatch(
@@ -148,10 +161,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markSuccess();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markSuccess();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.success', array(), 'flashes')
@@ -173,10 +189,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markPending();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markPending();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.pending', array(), 'flashes')
@@ -198,10 +217,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markCanceled();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markCanceled();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.canceled', array(), 'flashes')
@@ -223,10 +245,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markExpired();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markExpired();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.failed', array(), 'flashes')
@@ -248,10 +273,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markSuspended();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markSuspended();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.canceled', array(), 'flashes')
@@ -273,10 +301,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markFailed();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markFailed();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.failed', array(), 'flashes')
@@ -298,10 +329,13 @@ class PurchaseStepSpec extends ObjectBehavior
         $order = new Order();
         $order->setPayment($paymentModel);
 
-        $payment->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))->will(function($args) use ($order, $paymentModel) {
-            $args[0]->markUnknown();
-            $args[0]->setModel($order);
-        });
+        $payment
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->will(function ($args) use ($order, $paymentModel) {
+                $args[0]->markUnknown();
+                $args[0]->setModel($order);
+            }
+        );
 
         $translator
             ->trans('sylius.checkout.unknown', array(), 'flashes')
