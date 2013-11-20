@@ -5,39 +5,35 @@
         <body>
             <trans-unit id="1">
                 <source>sylius.form.product.options</source>
-                <target>Options</target>
+                <target>Опции</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>sylius.form.variant.presentation</source>
-                <target>Presentation</target>
+                <target>Представление</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>sylius.form.variant.available_on</source>
-                <target>Available on</target>
+                <target>Доступен с</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>sylius.form.option.name</source>
-                <target>Internal name</target>
-            </trans-unit>
-            <trans-unit id="872f019b57a6ebda68f4907e4e9a34c4" resname="sylius.form.option_value.add_value">
-                <source>sylius.form.option_value.add_value</source>
-                <target>Add value</target>
+                <target>Внутренее имя</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>sylius.form.option.presentation</source>
-                <target>Presentation</target>
+                <target>Представление</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>sylius.form.option.values</source>
-                <target>Possible values</target>
+                <target>Возможные значения</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>sylius.form.option_value.value</source>
-                <target>Value</target>
+                <target>Значение</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>sylius.form.prototype.options</source>
-                <target>Options</target>
+                <target>Опции</target>
             </trans-unit>
         </body>
     </file>
