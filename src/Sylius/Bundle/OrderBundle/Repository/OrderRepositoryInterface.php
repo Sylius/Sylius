@@ -26,4 +26,11 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * @return array
      */
     public function findRecentOrders($amount = 10);
+
+    /**
+     * Get recently completed orders by number.
+     *
+     * @return array
+     */
+    public function findRecentOrdersOrderByNumber($amount = 10)
 }

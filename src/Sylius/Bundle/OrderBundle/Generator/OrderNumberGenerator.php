@@ -75,7 +75,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      */
     protected function getNextOrderNumber()
     {
-        $lastOrders = $this->repository->findRecentOrders(1);
+        $lastOrders = $this->repository->findRecentOrdersOrderByNumber(1);
 
         if (empty($lastOrders)) {
             return $this->startNumber;
