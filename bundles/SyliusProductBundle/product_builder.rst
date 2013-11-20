@@ -15,6 +15,5 @@ The example shown below is self explanatory:
         ->addProperty('collection', 2013)
         ->addProperty('color', 'Red')
         ->addProperty('material', 'Stone')
-        ->setPrice(1200)
         ->save()
     ;
