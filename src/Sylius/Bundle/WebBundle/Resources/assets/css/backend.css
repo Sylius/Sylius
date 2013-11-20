@@ -571,3 +571,27 @@ input[type="file"] {
     border-top-color: #333;
     color: #333;
 }
+
+/** Form Collection */
+
+div.collection-item .collection-box {
+    position: relative;
+}
+
+div.collection-item .collection-button-remove {
+    font-size: 20px;
+    position: absolute;
+    right: 4px;
+    top: 1px;
+    cursor: pointer;
+}
+
+.form-inline div.collection-item .collection-box,
+div.collection-item .collection-box.unique-field {
+    padding: 0px 25px 0px 12px;
+}
+
+.form-inline div.collection-item .collection-button-remove,
+div.collection-item .unique-field .collection-button-remove {
+    top: 6px;
+}

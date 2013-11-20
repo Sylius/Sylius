@@ -456,6 +456,41 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I wait (\d+)$/
+     */
+    public function iWait($time)
+    {
+        $this->getSession()->wait($time);
+    }
+
+    /**
+     * @Given /^I remove the province "([^"]*)"$/
+     */
+    public function iRemoveTheProvince($province)
+    {
+        $field = $this->getSession()->getPage()->find(
+            'xpath',
+            sprintf(
+                "//input[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
+                $province
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf(
+                    'Country have not province named %s',
+                    $province
+                ),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+
+    /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
      */
     public function iFillInCheckoutAddress($type, $country)
