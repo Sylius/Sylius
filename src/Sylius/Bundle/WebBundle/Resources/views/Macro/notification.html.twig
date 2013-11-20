@@ -1,0 +1,60 @@
+{# Display all the flashes messages #}
+{% macro flashes() %}
+    {% for type, flashes in app.session.flashBag.all %}
+        <div id="flashesMessage" class="alert alert-{{ type }}">
+            <ul class="list-unstyled">
+                {% for flash in flashes %}
+                    <li>{{ flash }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+
+{#
+    Display a bootstrap alert :
+    - text : Message to print (string or array)
+    - type : danger | warning | success | info (Default : info)
+#}
+{% macro alert(text, type) %}
+    {% set type = 'alert-' ~ type|default('info') %}
+
+    {% if text|default %}
+    <div class="alert {{ type }}">
+        {% if text is iterable %}
+            <ul class="form-type-errors list-unstyled">
+                {% for line in text %}
+                    <li>
+                        <p class="text-{{ type }}">
+                            {{ line.message|trans(line.messageParameters) }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {{ text|trans }}
+        {% endif %}
+    </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro danger(text) %}
+    {{ _self.alert(text, 'danger') }}
+{% endmacro %}
+
+{% macro error(text) %}
+    {{ _self.danger(text) }}
+{% endmacro %}
+
+{% macro warning(text) %}
+    {{ _self.alert(text, 'warning') }}
+{% endmacro %}
+
+{% macro success(text) %}
+    {{ _self.alert(text, 'success') }}
+{% endmacro %}
+
+{% macro info(text) %}
+    {{ _self.alert(text, 'info') }}
+{% endmacro %}
