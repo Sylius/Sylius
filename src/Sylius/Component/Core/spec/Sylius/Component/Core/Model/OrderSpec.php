@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\OrderComponent\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**

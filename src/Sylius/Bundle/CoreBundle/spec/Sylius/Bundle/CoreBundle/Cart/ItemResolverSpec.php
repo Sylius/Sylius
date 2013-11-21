@@ -16,7 +16,6 @@ use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -28,7 +27,8 @@ class ItemResolverSpec extends ObjectBehavior
     function let(
         RepositoryInterface $productRepository,
         FormFactory $formFactory,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
+        Request $request
     )
     {
         $this->beConstructedWith($productRepository, $formFactory, $availabilityChecker);
@@ -41,7 +41,7 @@ class ItemResolverSpec extends ObjectBehavior
 
     function it_implements_Sylius_cart_item_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface');
+        $this->shouldImplement('Sylius\Component\Cart\Resolver\ItemResolverInterface');
     }
 
     function it_throws_exception_unless_request_method_is_POST(CartItemInterface $item, $request)
@@ -49,7 +49,7 @@ class ItemResolverSpec extends ObjectBehavior
         $request->isMethod('POST')->willReturn(false);
 
         $this
-            ->shouldThrow('Sylius\Bundle\CartBundle\Resolver\ItemResolvingException')
+            ->shouldThrow('Sylius\Component\Cart\Resolver\ItemResolvingException')
             ->duringResolve($item, $request)
         ;
     }
@@ -60,7 +60,7 @@ class ItemResolverSpec extends ObjectBehavior
         $request->get('id')->willReturn(null);
 
         $this
-            ->shouldThrow('Sylius\Bundle\CartBundle\Resolver\ItemResolvingException')
+            ->shouldThrow('Sylius\Component\Cart\Resolver\ItemResolvingException')
             ->duringResolve($item, $request)
         ;
     }
@@ -73,7 +73,7 @@ class ItemResolverSpec extends ObjectBehavior
         $productRepository->find(5)->willReturn(null);
 
         $this
-            ->shouldThrow('Sylius\Bundle\CartBundle\Resolver\ItemResolvingException')
+            ->shouldThrow('Sylius\Component\Cart\Resolver\ItemResolvingException')
             ->duringResolve($item, $request)
         ;
     }
