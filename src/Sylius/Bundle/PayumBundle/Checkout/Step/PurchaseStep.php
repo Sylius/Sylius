@@ -17,7 +17,9 @@ use Payum\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PurchaseStep extends CheckoutStep
@@ -48,10 +50,8 @@ class PurchaseStep extends CheckoutStep
         $this->getHttpRequestVerifier()->invalidate($token);
         $this->getCartProvider()->abandonCart();
 
-        $payment = $this->getPayum()->getPayment($token->getPaymentName());
-
         $status = new StatusRequest($token);
-        $payment->execute($status);
+        $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
 
         /** @var OrderInterface $order */
         $order = $status->getModel();
@@ -60,7 +60,9 @@ class PurchaseStep extends CheckoutStep
             throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
         }
 
-        $order->getPayment()->setState($status->getStatus());
+        $payment = $order->getPayment();
+        $previousState = $order->getPayment()->getState();
+        $payment->setState($status->getStatus());
 
         if ($status->isSuccess()) {
             $type = 'success';
@@ -71,12 +73,6 @@ class PurchaseStep extends CheckoutStep
         } elseif ($status->isCanceled()) {
             $type = 'notice';
             $msg  = 'sylius.checkout.canceled';
-        } elseif ($status->isExpired()) {
-            $type = 'notice';
-            $msg  = 'sylius.checkout.expired';
-        } elseif ($status->isSuspended()) {
-            $type = 'notice';
-            $msg  = 'sylius.checkout.suspended';
         } elseif ($status->isFailed()) {
             $type = 'error';
             $msg  = 'sylius.checkout.failed';
@@ -85,9 +81,21 @@ class PurchaseStep extends CheckoutStep
             $msg  = 'sylius.checkout.unknown';
         }
 
-        //TODO: an event here
+        if ($previousState !== $payment->getState()) {
+            $this->dispatchEvent(
+                SyliusPaymentEvents::PRE_STATE_CHANGE,
+                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+            );
+        }
 
         $this->getDoctrine()->getManager()->flush();
+
+        if ($previousState !== $payment->getState()) {
+            $this->dispatchEvent(
+                SyliusPaymentEvents::POST_STATE_CHANGE,
+                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+            );
+        }
 
         $this->get('session')->getFlashBag()->add($type, $this->get('translator')->trans($msg, array(), 'flashes'));
 
