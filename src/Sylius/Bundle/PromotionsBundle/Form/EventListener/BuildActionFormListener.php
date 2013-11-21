@@ -75,7 +75,15 @@ class BuildActionFormListener implements EventSubscriberInterface
     protected function addConfigurationFields(FormInterface $form, $actionType, array $data = array())
     {
         $action = $this->actionRegistry->getAction($actionType);
-        $configurationField = $this->factory->createNamed('configuration', $action->getConfigurationFormType(), $data, array('auto_initialize' => false));
+        $configurationField = $this->factory->createNamed(
+            'configuration',
+            $action->getConfigurationFormType(),
+            $data,
+            array(
+                'auto_initialize' => false,
+                'label' => false,
+            )
+        );
 
         $form->add($configurationField);
     }

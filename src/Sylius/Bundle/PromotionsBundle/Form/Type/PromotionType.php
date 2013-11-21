@@ -68,16 +68,20 @@ class PromotionType extends AbstractType
                 'required' => false
             ))
             ->add('rules', 'collection', array(
-                'type'         => 'sylius_promotion_rule',
-                'allow_add'    => true,
-                'by_reference' => false,
-                'label'        => 'sylius.form.promotion.rules'
+                'type'             => 'sylius_promotion_rule',
+                'allow_add'        => true,
+                'allow_delete'     => true,
+                'by_reference'     => false,
+                'label'            => 'sylius.form.promotion.rules',
+                'button_add_label' => 'sylius.promotion.add_rule',
             ))
             ->add('actions', 'collection', array(
-                'type'         => 'sylius_promotion_action',
-                'allow_add'    => true,
-                'by_reference' => false,
-                'label'        => 'sylius.form.promotion.actions'
+                'type'             => 'sylius_promotion_action',
+                'allow_add'        => true,
+                'allow_delete'     => true,
+                'by_reference'     => false,
+                'label'            => 'sylius.form.promotion.actions',
+                'button_add_label' => 'sylius.promotion.add_action',
             ))
         ;
 
