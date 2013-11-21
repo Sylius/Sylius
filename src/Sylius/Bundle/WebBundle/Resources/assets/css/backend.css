@@ -587,8 +587,16 @@ div.collection-item .collection-button-remove {
 }
 
 .form-inline div.collection-item .collection-box,
-div.collection-item .collection-box.unique-field {
+div.collection-item .collection-box.unique-field,
+.form-horizontal div.collection-item .collection-box {
     padding: 0px 25px 0px 12px;
+}
+
+.collection-item .collection-box .form-group {
+    margin-right: 0;
+}
+.collection-item .collection-box .form-group .col-lg-10 {
+    padding-right: 0;
 }
 
 .form-inline div.collection-item .collection-button-remove,
