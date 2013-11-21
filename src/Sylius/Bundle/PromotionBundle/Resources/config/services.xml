@@ -24,7 +24,7 @@
         <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Component\Promotion\Checker\ItemCountRuleChecker</parameter>
 
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
-        <parameter key="sylius.generator.instructions.class">Sylius\Bundle\PromotionBundle\Generator\Instruction</parameter>
+        <parameter key="sylius.generator.instructions.class">Sylius\Component\Promotion\Generator\Instruction</parameter>
 
         <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistry</parameter>
         <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Promotion\Action\Registry\PromotionActionRegistry</parameter>
@@ -44,7 +44,7 @@
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType</parameter>
 
         <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType</parameter>
-        <parameter key="sylius.generator.promotion_coupon.class">Sylius\Bundle\PromotionBundle\Generator\CouponGenerator</parameter>
+        <parameter key="sylius.generator.promotion_coupon.class">Sylius\Component\Promotion\Generator\CouponGenerator</parameter>
     </parameters>
 
     <services>

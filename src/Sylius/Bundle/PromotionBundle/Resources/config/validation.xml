@@ -68,7 +68,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\PromotionBundle\Generator\Instruction">
+    <class name="Sylius\Component\Promotion\Generator\Instruction">
         <property name="amount">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generate_instruction.amount.not_blank</option>
