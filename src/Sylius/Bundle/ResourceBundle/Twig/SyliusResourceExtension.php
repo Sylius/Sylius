@@ -15,7 +15,6 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
-use Symfony\Component\Routing\RouterInterface;
 use Twig_Extension;
 use Twig_Function_Method;
 
@@ -90,9 +89,9 @@ class SyliusResourceExtension extends Twig_Extension
 
     /**
      * @param string$property
-     * @param mixed $label
-     * @param string $order
-     * @param array $options
+     * @param  mixed  $label
+     * @param  string $order
+     * @param  array  $options
      * @return string
      */
     public function renderSortingLink($property, $label = null, $order = 'asc', array $options = array())
@@ -135,9 +134,9 @@ class SyliusResourceExtension extends Twig_Extension
     }
 
     /**
-     * @param \Pagerfanta\Pagerfanta $paginator
-     * @param array $limitOptions
-     * @param array $options
+     * @param  \Pagerfanta\Pagerfanta $paginator
+     * @param  array                  $limitOptions
+     * @param  array                  $options
      * @return string
      */
     public function renderPaginateSelect(Pagerfanta $paginator, array $limitOptions, array $options = array())
@@ -182,8 +181,8 @@ class SyliusResourceExtension extends Twig_Extension
     }
 
     /**
-     * @param array $params
-     * @param array $default
+     * @param  array $params
+     * @param  array $default
      * @return array
      */
     private function getRouteParams(array $params = array(), array $default = array())
@@ -196,7 +195,7 @@ class SyliusResourceExtension extends Twig_Extension
     }
 
     /**
-     * @param null $route
+     * @param  null       $route
      * @return mixed|null
      */
     private function getRouteName($route = null)

@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Payment\Model;
 
-
 /**
  * Payment log model.
  *
