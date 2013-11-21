@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface;
+use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

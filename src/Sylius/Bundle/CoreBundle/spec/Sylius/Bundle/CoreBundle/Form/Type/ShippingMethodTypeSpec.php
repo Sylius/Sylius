@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 
 class ShippingMethodTypeSpec extends ObjectBehavior

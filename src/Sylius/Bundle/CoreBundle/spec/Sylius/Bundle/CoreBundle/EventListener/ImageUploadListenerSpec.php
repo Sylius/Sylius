@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\Variant;
-use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListenerSpec extends ObjectBehavior

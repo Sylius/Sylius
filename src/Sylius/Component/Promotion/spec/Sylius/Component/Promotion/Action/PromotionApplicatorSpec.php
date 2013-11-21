@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -23,7 +24,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 class PromotionApplicatorSpec extends ObjectBehavior
 {
 
-    function let(PromotionActionRegistryInterface $registry)
+    function let(PromotionActionRegistryInterface $registry, PromotionActionInterface $action)
     {
         $this->beConstructedWith($registry);
     }
@@ -38,7 +39,13 @@ class PromotionApplicatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionApplicatorInterface');
     }
 
-    function it_should_execute_all_actions_registered($registry, $action, PromotionSubjectInterface $subject, PromotionInterface $promotion, ActionInterface $actionModel)
+    function it_should_execute_all_actions_registered(
+        $registry,
+        $action,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        ActionInterface $actionModel
+    )
     {
         $configuration = array();
 
