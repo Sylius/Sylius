@@ -15,7 +15,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-
 /**
  * Default coupon generator.
  *

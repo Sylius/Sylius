@@ -146,7 +146,6 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
         return true;
     }
 
-
     /**
      * Checks if subject's is eligible to promotion coupon.
      *

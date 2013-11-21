@@ -15,7 +15,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-
 /**
  * Product builder with fluent interface.
  *
