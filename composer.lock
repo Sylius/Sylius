@@ -2579,16 +2579,16 @@
         },
         {
             "name": "payum/paypal-express-checkout-nvp",
-            "version": "0.6.0",
+            "version": "0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PaypalExpressCheckoutNvp.git",
-                "reference": "08ad3f8d38da3e254aa59ef04450a18c5f0c40e4"
+                "reference": "5dcde1e622fe7c0b9b5dae0077fda0c08e2d555d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PaypalExpressCheckoutNvp/zipball/08ad3f8d38da3e254aa59ef04450a18c5f0c40e4",
-                "reference": "08ad3f8d38da3e254aa59ef04450a18c5f0c40e4",
+                "url": "https://api.github.com/repos/Payum/PaypalExpressCheckoutNvp/zipball/5dcde1e622fe7c0b9b5dae0077fda0c08e2d555d",
+                "reference": "5dcde1e622fe7c0b9b5dae0077fda0c08e2d555d",
                 "shasum": ""
             },
             "require": {
@@ -2641,20 +2641,20 @@
                 "paypal",
                 "recurring payment"
             ],
-            "time": "2013-10-25 13:32:44"
+            "time": "2013-11-19 08:02:01"
         },
         {
             "name": "payum/payum",
-            "version": "0.6.3",
+            "version": "0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "3561eb16dcc1620668a52eed99eeae9cc379d8d5"
+                "reference": "83dbbf4e1dd1bcc672d39806a773e5783bac4068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/3561eb16dcc1620668a52eed99eeae9cc379d8d5",
-                "reference": "3561eb16dcc1620668a52eed99eeae9cc379d8d5",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/83dbbf4e1dd1bcc672d39806a773e5783bac4068",
+                "reference": "83dbbf4e1dd1bcc672d39806a773e5783bac4068",
                 "shasum": ""
             },
             "require": {
@@ -2685,7 +2685,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.6-dev"
+                    "dev-master": "0.7-dev"
                 }
             },
             "autoload": {
@@ -2711,7 +2711,7 @@
                     "homepage": "https://github.com/Payum/Payum/contributors"
                 }
             ],
-            "description": "Payment lib",
+            "description": "Domain friendly payment framework. Paypal, payex, authorize.net, be2bill, omnipay, recurring paymens, instant notifications and many more",
             "homepage": "http://payum.forma-dev.com",
             "keywords": [
                 "authorize.net",
@@ -2729,7 +2729,7 @@
                 "paypal rest",
                 "recurring payment"
             ],
-            "time": "2013-10-31 14:54:25"
+            "time": "2013-11-19 21:22:44"
         },
         {
             "name": "payum/payum-bundle",
