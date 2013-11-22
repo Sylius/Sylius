@@ -43,6 +43,7 @@ class OrderFilterType extends AbstractType
             ->add('createdAtFrom', 'date', array(
                 'required' => false,
                 'widget'   => 'single_text',
+                'input'    => 'string',
                 'label'    => 'sylius.form.order_filter.created_at_from',
                 'attr'     => array(
                     'placeholder' => 'sylius.form.order_filter.created_at_from'
@@ -51,6 +52,7 @@ class OrderFilterType extends AbstractType
             ->add('createdAtTo', 'date', array(
                 'required' => false,
                 'widget'   => 'single_text',
+                'input'    => 'string',
                 'label'    => 'sylius.form.order_filter.created_at_to',
                 'attr'     => array(
                     'placeholder' => 'sylius.form.order_filter.created_at_to'
