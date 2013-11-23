@@ -152,21 +152,37 @@ th a:visited {
 /* Pagination. */
 .pagination {
     margin: 0 0 15px 0;
+    border-radius: 0 !important;
 }
-.pagination li.active > a,
-.pagination li.active > a:hover {
-    background-color: #1abb9c;
-    border-color: #ddd;
+.pagination > li {
+    border-radius: 0 !important;
 }
-.paginator {
-    margin-top: -3px;
+.pagination > li > a {
+    border-radius: 0 !important;
+    border-color: #FFF !important;
+    border-width: 2px;
+    border-top: none;
+    border-bottom: none;
+    background: #F5F5F5;
 }
-.paginator .dropdown-menu {
-    min-width: 100%;
-    padding: 0;
+.pagination > li > a:hover {
+    background: #428BCA;
+    color: #FFF;
 }
-.paginator .dropdown-menu > li > a {
-    padding: 3px 10px;
+.pagination > li.disabled > a,
+.pagination > li.disabled > a:hover {
+    background: #FAFAFA;
+    color: #CCC;
+}
+.pagination > li.active > a,
+.pagination > li.active > a:hover {
+    background: #1ABB9C;
+}
+.pagination > li:first-child > a {
+    border-left: 0;
+}
+.pagination > li:last-child > a {
+    border-right: 0;
 }
 /* Main layout. */
 #content {
