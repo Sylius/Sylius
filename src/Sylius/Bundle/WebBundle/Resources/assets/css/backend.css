@@ -195,6 +195,18 @@ th a:visited {
 .grid-tabs {
     margin-bottom: 10px;
 }
+/* Table. */
+.main-container .table {
+    background: #FAFAFA;
+}
+.main-container .table th {
+    vertical-align: middle;
+    border-bottom-width: 1px;
+    border-color: #EAEAEA;
+}
+.main-container .table td {
+    border-color: #EEE;
+}
 /* Pagination. */
 .pagination {
     margin: 0 0 15px 0;
