@@ -31,75 +31,24 @@ form.form-signin label {
 form.form-signin .form-control:focus {
     border-color: #1abb9c;
 }
-/* Links. */
-a:link {
-    color: #1abb9c;
-}
-a:hover {
-    color: #5a5a5a;
-    text-decoration: none;
-}
-a:visited {
-    color: #1abb9c;
-}
 /* Buttons. */
 .btn {
-    color: #fff;
-    border: 0;
+    border-width: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     text-transform: uppercase;
-    border-radius: 0;
+    border-radius: 1px;
 }
 .btn > i {
     margin-right: 5px;
 }
-a.btn-default:link,
-a.btn-default:visited,
-a.btn-default:hover,
-a.btn-default:focus {
-    background-color: #f1f1f1;
-    color: #5a5a5a;
+.btn.btn-default {
+    border-color: #EEE;
+    background: #F5f5f5 !important;
 }
-a.btn-primary:link,
-a.btn-primary:visited,
-a.btn-primary:hover {
-    color: #fff;
-}
-.btn-primary,
-.btn-primary:hover {
-    color: #fff;
-}
-a.btn-info:link,
-a.btn-info:visited {
-    color: #fff;
-}
-a.btn-info:hover {
-    color: #fff;
-    background-color: #5bc0de;
-}
-a.btn-danger:link,
-a.btn-danger:visited {
-    color: #fff;
-}
-.btn-success {
-    background-color: #1abb9c;
-    border: none;
-    color: #fff !important;
-}
-.btn-success:hover {
-    background-color: #1abb9c;
-    border: none;
-    color: #fff;
-}
-a.btn-success:visited {
-    background-color: #1abb9c;
-    color: #fff;
-}
-.btn-lg.file-overlay {
-    text-align: center;
-}
-.btn-group form:last-child .btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+.btn.btn-default:hover {
+    border-color: #E5E5E5;
+    background: #EEE !important;
 }
 /* Labels. */
 .label-success {
