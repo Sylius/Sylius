@@ -3,7 +3,6 @@ body {
     color: #5a5a5a;
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
-
 body.signin {
     padding-top: 200px;
     background-color: #333;
@@ -32,7 +31,6 @@ form.form-signin label {
 form.form-signin .form-control:focus {
     border-color: #1abb9c;
 }
-
 /* Links. */
 a:link {
     color: #1abb9c;
@@ -44,8 +42,6 @@ a:hover {
 a:visited {
     color: #1abb9c;
 }
-
-
 /* Buttons. */
 .btn {
     color: #fff;
@@ -63,24 +59,32 @@ a:visited {
 .btn-link:hover {
     color: #5a5a5a;
 }
-a.btn-default:link, a.btn-default:visited, a.btn-default:hover, a.btn-default:focus {
+a.btn-default:link,
+a.btn-default:visited,
+a.btn-default:hover,
+a.btn-default:focus {
     background-color: #f1f1f1;
     color: #5a5a5a;
 }
-a.btn-primary:link, a.btn-primary:visited, a.btn-primary:hover {
+a.btn-primary:link,
+a.btn-primary:visited,
+a.btn-primary:hover {
     color: #fff;
 }
-.btn-primary, .btn-primary:hover {
+.btn-primary,
+.btn-primary:hover {
     color: #fff;
 }
-a.btn-info:link, a.btn-info:visited {
+a.btn-info:link,
+a.btn-info:visited {
     color: #fff;
 }
 a.btn-info:hover {
     color: #fff;
     background-color: #5bc0de;
 }
-a.btn-danger:link, a.btn-danger:visited {
+a.btn-danger:link,
+a.btn-danger:visited {
     color: #fff;
 }
 .btn-success {
@@ -104,16 +108,16 @@ a.btn-success:visited {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-
 /* Labels. */
-.label-success { background-color: #1abb9c; }
-
+.label-success {
+    background-color: #1abb9c;
+}
 /* Navbar. */
 .navbar-collapse {
     border: none;
 }
 .navbar-brand {
-    padding: 0
+    padding: 0;
 }
 .navbar-brand img {
     height: 30px;
@@ -129,8 +133,8 @@ a.btn-success:visited {
     color: #fff;
 }
 .navbar-inverse {
-  border: 0;
-  background-color: #333;
+    border: 0;
+    background-color: #333;
 }
 .navbar-inverse .navbar-nav > li.active > a {
     background-color: #1abb9c;
@@ -163,7 +167,6 @@ a.btn-success:visited {
     background-color: #1abb9c;
     color: #fff;
 }
-
 /* Grid and tables. */
 th {
     background-color: #f1f1f1;
@@ -177,36 +180,32 @@ th a:visited {
 }
 .table tbody > tr.sub-table > td {
     padding-top: 0;
-    border-top: 0
+    border-top: 0;
 }
-
 .variant-table-toggle {
     text-align: center;
 }
-
 .variant-table-toggle i {
     font-size: 24px;
     cursor: pointer;
 }
-
 .row-split {
-    border-right: 1px solid #eee
+    border-right: 1px solid #eeeeee;
 }
-
 .grid-tabs {
     margin-bottom: 10px;
 }
-
 /* Pagination. */
 .pagination {
     margin: 0 0 15px 0;
 }
-.pagination li.active > a, .pagination li.active > a:hover {
+.pagination li.active > a,
+.pagination li.active > a:hover {
     background-color: #1abb9c;
     border-color: #ddd;
 }
 .paginator {
-    margin-top: -3px
+    margin-top: -3px;
 }
 .paginator .dropdown-menu {
     min-width: 100%;
@@ -215,12 +214,10 @@ th a:visited {
 .paginator .dropdown-menu > li > a {
     padding: 3px 10px;
 }
-
 /* Main layout. */
 #content {
     padding-right: 15px;
 }
-
 #sidebar {
     margin-top: -50px;
     padding-top: 50px;
@@ -228,7 +225,6 @@ th a:visited {
     margin-bottom: -8000px;
     padding-bottom: 8000px;
 }
-
 .main-container {
     margin-top: 50px;
     margin-right: 0;
@@ -239,7 +235,6 @@ th a:visited {
     padding-right: 0;
     padding-left: 0;
 }
-
 #sidebar span.nav-header {
     display: block;
     text-align: center;
@@ -248,7 +243,6 @@ th a:visited {
     font-size: 1.2em;
     color: #fff;
 }
-
 #sidebar a:link {
     color: #999;
     font-size: 1.1em;
@@ -276,7 +270,6 @@ th a:visited {
 #sidebar li.active {
     background-color: #1abb9c;
 }
-
 .form-actions {
     background-color: #f1f1f1;
     padding: 10px;
@@ -287,14 +280,11 @@ th a:visited {
 .actions-menu {
     float: right;
 }
-.actions-menu a {
-}
 .page-header {
     margin: 0 -15px 20px;
     padding-left: 15px;
     padding-right: 15px;
 }
-
 .page-header h1 {
     margin-left: 10px;
     font-size: 24px;
@@ -303,7 +293,6 @@ th a:visited {
     color: #999;
     font-size: 16px;
 }
-
 .form-filter {
     background-color: #f1f1f1;
     padding: 15px;
@@ -314,7 +303,6 @@ th a:visited {
 .form-filter .form-group {
     margin-right: 10px;
 }
-
 #topbar {
     background-color: #f1f1f1;
     margin-left: -15px;
@@ -328,17 +316,14 @@ th a:visited {
 #topbar li {
     display: inline;
 }
-
-.navbar-inverse .navbar-nav>.open>a {
+.navbar-inverse .navbar-nav > .open > a {
     background-color: #333;
 }
-
 /* Forms. */
 .file-overlay {
     width: 200px;
     position: absolute;
 }
-
 input[type="file"] {
     -moz-opacity: 0;
     -khtml-opacity: 0;
@@ -348,7 +333,6 @@ input[type="file"] {
     width: 200px;
     z-index: 100;
 }
-
 .form-control {
     border-radius: 0;
 }
@@ -356,11 +340,9 @@ input[type="file"] {
     box-shadow: none;
     border-color: #428bca;
 }
-
 .help-block {
     margin-bottom: 0;
 }
-
 .control-choice-input {
     position: relative;
     height: 20px;
@@ -377,44 +359,35 @@ input[type="file"] {
     left: 25px;
     top: 0;
 }
-
 .delete-action-form {
     display: inline;
 }
-
 .widgets a i {
-    margin: 0
+    margin: 0;
 }
-
 #flashes .alert {
     margin-top: 10px;
     margin-bottom: 5px;
 }
-
 .center-text {
     text-align: center;
 }
-
 .thumbnail {
     width: 90px;
 }
-
 .sylius-assortment-variant-images-image {
     margin: 5px 0;
     padding-bottom: 5px;
     border-bottom: 1px solid #eee;
 }
-
 .sylius-assortment-variant-images-image:last-child {
-    border: 0
+    border: 0;
 }
-
 .sylius-assortment-variant-images-image .thumbnail {
     height: 60px;
     display: block;
     border: 0;
 }
-
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
     .btn i {
@@ -423,11 +396,9 @@ input[type="file"] {
     .btn span {
         display: none;
     }
-
     .table .btn {
         margin-bottom: 3px;
     }
-
     .row {
         margin-left: 0;
         margin-right: 0;
@@ -436,7 +407,6 @@ input[type="file"] {
         padding-left: 15px;
     }
 }
-
 /** Dashboard */
 .col-md-6 #users .btn span {
     display: none;
