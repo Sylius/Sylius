@@ -4,11 +4,11 @@
         <span class="thumbnail"></span>
     </div>
     <div class="col-md-9">
-        <span class="btn-primary btn-lg file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+        <span class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
         <input type="file" class="form-control" required="required" name="sylius_product[masterVariant][images][__name__][file]" id="sylius_product_masterVariant_images___name___file">
     </div>
     <div class="col-md-2">
-        <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="icon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+        <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
     </div>
 </div>
 {% endmacro %}
@@ -28,7 +28,7 @@
                 {{ form_widget(form.masterVariant.images[loop.index0].file) }}
             </div>
             <div class="col-md-2">
-                <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="icon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+                <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-product-images" data-collection="sylius-assortment-product-images"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
             </div>
         </div>
         {% endfor %}

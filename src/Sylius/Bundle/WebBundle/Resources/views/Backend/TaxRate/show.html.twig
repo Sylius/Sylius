@@ -16,10 +16,10 @@
 
 <div class="well">
     <a href="{{ path('sylius_backend_tax_rate_index') }}" class="btn btn-primary">
-        <i class="icon-list-alt"></i> {{ 'sylius.tax_rate.manage'|trans }}
+        <i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.tax_rate.manage'|trans }}
     </a>
     <a href="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
-        <i class="icon-pencil"></i> {{ 'sylius.edit'|trans }}
+        <i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.edit'|trans }}
     </a>
     {{ buttons.delete(path('sylius_backend_tax_rate_delete', {'id': tax_rate.id})) }}
 </div>

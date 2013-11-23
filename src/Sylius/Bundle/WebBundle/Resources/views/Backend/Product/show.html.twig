@@ -20,11 +20,11 @@
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
     <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-info">
-       <i class="icon-shopping-cart"></i>
+       <i class="glyphicon glyphicon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
     </div>
-    <h1><i class="icon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
 </div>
 
 <div class="row">
@@ -77,7 +77,7 @@
                         </ul>
                         {% else %}
                             <span class="label label-info">
-                                <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
+                                <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_options'|trans }}
                             </span>
                         {% endif %}
                     </td>
@@ -93,7 +93,7 @@
                         </ul>
                         {% else %}
                             <span class="label label-info">
-                                <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_taxons'|trans }}
+                                <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_taxons'|trans }}
                             </span>
                         {% endif %}
                     </td>
@@ -154,7 +154,7 @@
                 <tr>
                     <td colspan="2">
                         <span class="label label-info">
-                            <i class="icon-list-alt icon-white"></i> {{ 'sylius.product.no_properties'|trans }}
+                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_properties'|trans }}
                         </span>
                     </td>
                 </tr>

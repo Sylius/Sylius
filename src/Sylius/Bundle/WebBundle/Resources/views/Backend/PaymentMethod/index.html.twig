@@ -17,7 +17,7 @@
         {{ buttons.create(path('sylius_backend_payment_method_create'), 'sylius.payment_method.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}
     </div>
-    <h1><i class="icon-credit-card"></i> {{ 'sylius.payment_method.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.payment_method.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(payment_methods) }}
