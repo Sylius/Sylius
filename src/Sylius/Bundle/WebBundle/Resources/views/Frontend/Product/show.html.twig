@@ -52,7 +52,7 @@
 </div>
 <hr>
 <div class="row">
-    <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
+    <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix form-horizontal">
     {% if product.hasVariants %}
         <div class="col-md-6">
             {% if product.isVariantSelectionMethodChoice %}

@@ -16,25 +16,27 @@
   <small>Mr. Sylius Demo Guide</small>
 </blockquote>
 
-<form action="{{ path('fos_user_security_check') }}" method="post">
+<form action="{{ path('fos_user_security_check') }}" method="post" class="form-horizontal">
 <fieldset>
     <div class="form-group">
-        <label for="username" class="control-label">Email</label>
-        <div class="controls">
+        <label for="username" class="col-sm-3 control-label">Email</label>
+        <div class="col-sm-9">
             <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
         </div>
     </div>
     <div class="form-group">
-        <label for="password" class="control-label">Password</label>
-        <div class="controls">
+        <label for="password" class="col-sm-3 control-label">Password</label>
+        <div class="col-sm-9">
             <input type="password" id="password" name="_password" class="form-control" />
         </div>
     </div>
     <div class="form-group">
-        <div class="controls">
-            <label for="remember_me">
-                Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            </label>
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                <label for="remember_me">
+                    Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                </label>
+            </div>
         </div>
     </div>
 </fieldset>
@@ -42,7 +44,7 @@
     <div class="pull-right">
         {{ render(url('hwi_oauth_connect')) }}
     </div>
-    <button type="submit" class="btn btn-primary btn-lg pull-left" name="login"><i class="icon-lock"></i> Login</button>
+    <button type="submit" class="btn btn-primary btn-lg" name="login"><i class="icon-lock"></i> Login</button>
 </div>
 </form>
 
