@@ -106,7 +106,7 @@ class BackendMenuBuilder extends MenuBuilder
 
         $child->addChild('taxonomies', array(
             'route' => 'sylius_backend_taxonomy_index',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-folder-open'),
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-folder-close'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxonomies', $section)));
 
         $child->addChild('products', array(
@@ -126,7 +126,7 @@ class BackendMenuBuilder extends MenuBuilder
 
         $child->addChild('properties', array(
             'route' => 'sylius_backend_property_index',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-tags'),
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-list-alt'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.properties', $section)));
 
         $child->addChild('prototypes', array(
