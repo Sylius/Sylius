@@ -168,30 +168,25 @@ th a:visited {
 }
 .pagination > li > a {
     border-radius: 0 !important;
-    border-color: #FFF !important;
-    border-width: 2px;
-    border-top: none;
-    border-bottom: none;
-    background: #F5F5F5;
+    border-color: #EEE !important;
+    border-width: 1px;
+    background: #FAFAFA;
 }
 .pagination > li > a:hover {
-    background: #428BCA;
-    color: #FFF;
+    background: #FFF;
 }
 .pagination > li.disabled > a,
 .pagination > li.disabled > a:hover {
     background: #FAFAFA;
+    border-color: #EEE !important;
     color: #CCC;
 }
 .pagination > li.active > a,
 .pagination > li.active > a:hover {
     background: #1ABB9C;
-}
-.pagination > li:first-child > a {
-    border-left: 0;
-}
-.pagination > li:last-child > a {
-    border-right: 0;
+    border-color: #37A37E !important;
+    border-width: 2px;
+    padding: 5px 11px;
 }
 /* Main layout. */
 #content {
