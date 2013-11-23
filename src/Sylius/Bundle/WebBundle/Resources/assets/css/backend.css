@@ -47,17 +47,10 @@ a:visited {
     color: #fff;
     border: 0;
     text-transform: uppercase;
-    font-size: 13px;
+    border-radius: 0;
 }
-.btn i {
-    font-size: 16px;
-    margin-right: 4px;
-}
-.btn-link {
-    font-size: 14px;
-}
-.btn-link:hover {
-    color: #5a5a5a;
+.btn > i {
+    margin-right: 5px;
 }
 a.btn-default:link,
 a.btn-default:visited,
@@ -352,10 +345,27 @@ input[type="file"] {
 }
 .form-control {
     border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #EFEDE6;
+    border-width: 2px;
+}
+.form-control:hover {
+    border-color: #DCD8CD;
+    border-width: 2px;
 }
 .form-control:focus {
+    border-color: #017E5D;
+    border-width: 2px;
+    color: #02805D;
+    -webkit-box-shadow: none;
     box-shadow: none;
-    border-color: #428bca;
+}
+.input-group-addon {
+    border-radius: 0;
+    border-width: 2px;
+    border-color: #EFEDE6;
+    background: #FAFAFA;
 }
 .help-block {
     margin-bottom: 0;
