@@ -41,16 +41,15 @@ form.form-signin .form-control:focus {
 /* Buttons. */
 .btn {
     border-width: 2px;
-    padding-top: 4px;
-    padding-bottom: 4px;
     text-transform: uppercase;
-    border-radius: 1px;
+    border-radius: 3px;
+    font-size: 13px;
 }
 .btn > i {
     margin-right: 5px;
 }
 .btn.btn-default {
-    border-color: #EEE;
+    border-color: #ECECEC;
     background: #F5f5f5 !important;
 }
 .btn.btn-default:hover {
