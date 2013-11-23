@@ -40,10 +40,10 @@ form.form-signin .form-control:focus {
 }
 /* Buttons. */
 .btn {
-    border-width: 2px;
     text-transform: uppercase;
     border-radius: 3px;
     font-size: 13px;
+    line-height: 20px;
 }
 .btn > i {
     margin-right: 5px;
@@ -181,8 +181,6 @@ th a:visited {
 .pagination > li.active > a:hover {
     background: #1ABB9C;
     border-color: #37A37E;
-    border-width: 2px;
-    padding: 5px 11px;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
@@ -323,22 +321,18 @@ input[type="file"] {
     -webkit-box-shadow: none;
     box-shadow: none;
     border-color: #EFEDE6;
-    border-width: 2px;
 }
 .form-control:hover {
     border-color: #DCD8CD;
-    border-width: 2px;
 }
 .form-control:focus {
-    border-color: #017E5D;
-    border-width: 2px;
+    border-color: #37A37E;
     color: #02805D;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 .input-group-addon {
     border-radius: 0;
-    border-width: 2px;
     border-color: #EFEDE6;
     background: #FAFAFA;
 }
