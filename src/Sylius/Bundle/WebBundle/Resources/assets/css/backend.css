@@ -3,12 +3,15 @@ body {
     color: #5a5a5a;
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
+
+/* Links. */
 a {
     color: #1ABB9C;
 }
 a:hover {
     color: #017E5D;
 }
+
 /* Signin. */
 body.signin {
     padding-top: 200px;
@@ -38,6 +41,7 @@ form.form-signin label {
 form.form-signin .form-control:focus {
     border-color: #1abb9c;
 }
+
 /* Buttons. */
 .btn {
     text-transform: uppercase;
@@ -56,10 +60,12 @@ form.form-signin .form-control:focus {
     border-color: #E5E5E5;
     background: #EEE !important;
 }
+
 /* Labels. */
 .label-success {
     background-color: #1abb9c;
 }
+
 /* Navbar. */
 .navbar-collapse {
     border: none;
@@ -115,6 +121,7 @@ form.form-signin .form-control:focus {
     background-color: #1abb9c;
     color: #fff;
 }
+
 /* Grid and tables. */
 th {
     background-color: #f1f1f1;
@@ -130,19 +137,24 @@ th a:visited {
     padding-top: 0;
     border-top: 0;
 }
+
 .variant-table-toggle {
     text-align: center;
 }
+
 .variant-table-toggle i {
     font-size: 24px;
     cursor: pointer;
 }
+
 .row-split {
-    border-right: 1px solid #eeeeee;
+    border-right: 1px solid #eee;
 }
+
 .grid-tabs {
     margin-bottom: 10px;
 }
+
 /* Table. */
 .main-container .table {
     background: #FAFAFA;
@@ -158,6 +170,7 @@ th a:visited {
 .main-container .table td {
     border-color: #EEE;
 }
+
 /* Pagination. */
 .pagination {
     margin: 0 0 15px 0;
@@ -192,6 +205,7 @@ th a:visited {
     border-bottom-right-radius: 2px;
     border-top-right-radius: 2px;
 }
+
 /* Main layout. */
 #content {
     padding-right: 15px;
@@ -209,6 +223,7 @@ th a:visited {
     padding-right: 0;
     padding-left: 0;
 }
+
 /* Sidebar. */
 #sidebar {
     margin-top: -50px;
@@ -253,6 +268,7 @@ th a:visited {
 #sidebar li.active a:hover {
     background: #555;
 }
+
 .form-actions {
     background-color: #f1f1f1;
     padding: 10px;
@@ -276,6 +292,7 @@ th a:visited {
     color: #999;
     font-size: 16px;
 }
+
 .form-filter {
     background-color: #f1f1f1;
     padding: 15px;
@@ -302,11 +319,13 @@ th a:visited {
 .navbar-inverse .navbar-nav > .open > a {
     background-color: #333;
 }
+
 /* Forms. */
 .file-overlay {
     width: 200px;
     position: absolute;
 }
+
 input[type="file"] {
     -moz-opacity: 0;
     -khtml-opacity: 0;
@@ -316,6 +335,7 @@ input[type="file"] {
     width: 200px;
     z-index: 100;
 }
+
 .form-control {
     border-radius: 3px;
     -webkit-box-shadow: none;
@@ -355,35 +375,44 @@ input[type="file"] {
     left: 25px;
     top: 0;
 }
+
 .delete-action-form {
     display: inline;
 }
+
 .widgets a i {
     margin: 0;
 }
+
 #flashes .alert {
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
 .center-text {
     text-align: center;
 }
+
 .thumbnail {
     width: 90px;
 }
+
 .sylius-assortment-variant-images-image {
     margin: 5px 0;
     padding-bottom: 5px;
     border-bottom: 1px solid #eee;
 }
+
 .sylius-assortment-variant-images-image:last-child {
     border: 0;
 }
+
 .sylius-assortment-variant-images-image .thumbnail {
     height: 60px;
     display: block;
     border: 0;
 }
+
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
     .btn i {
@@ -403,6 +432,7 @@ input[type="file"] {
         padding-left: 15px;
     }
 }
+
 /** Dashboard */
 .col-md-6 #users .btn span {
     display: none;
