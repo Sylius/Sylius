@@ -218,6 +218,10 @@ th a:visited {
 #content {
     padding-right: 15px;
 }
+#navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
 #sidebar {
     margin-top: -50px;
     padding-top: 50px;
@@ -226,7 +230,6 @@ th a:visited {
     padding-bottom: 8000px;
 }
 .main-container {
-    margin-top: 50px;
     margin-right: 0;
     position: relative;
     overflow: hidden;
@@ -235,40 +238,42 @@ th a:visited {
     padding-right: 0;
     padding-left: 0;
 }
+/* Sidebar. */
 #sidebar span.nav-header {
     display: block;
     text-align: center;
-    padding: 10px 0;
+    padding: .5em 0;
     font-weight: bold;
-    font-size: 1.2em;
-    color: #fff;
-}
-#sidebar a:link {
-    color: #999;
     font-size: 1.1em;
+    color: #EEE;
+    text-transform: uppercase;
+    border-top: solid 1px #444;
+    border-bottom: solid 1px #444;
 }
-#sidebar a i {
-    margin-right: 5px;
+#sidebar li a {
+    color: #999;
+    font-size: 1em;
+    white-space: nowrap;
 }
-#sidebar a i {
-    font-size: 1.3em;
-}
-#sidebar a:visited {
+#sidebar li a:visited {
     color: #999;
 }
 #sidebar li a:hover {
     color: #fff;
-    background-color: #333;
-    border-left: 3px solid #1abb9c;
+    background-color: #017E5D;
 }
-#sidebar li.active a {
-    color: #fff;
-}
-#sidebar li.active a:hover {
-    background-color: #1abb9c;
+#sidebar li a i {
+    margin-right: 5px;
 }
 #sidebar li.active {
-    background-color: #1abb9c;
+    background: #444;
+}
+#sidebar li.active a {
+    color: #FFF;
+    background: #444;
+}
+#sidebar li.active a:hover {
+    background: #555;
 }
 .form-actions {
     background-color: #f1f1f1;
