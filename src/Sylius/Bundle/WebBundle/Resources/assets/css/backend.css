@@ -184,13 +184,13 @@ th a:visited {
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
 }
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
 }
 /* Main layout. */
 #content {
@@ -317,7 +317,7 @@ input[type="file"] {
     z-index: 100;
 }
 .form-control {
-    border-radius: 0;
+    border-radius: 3px;
     -webkit-box-shadow: none;
     box-shadow: none;
     border-color: #EFEDE6;
@@ -332,7 +332,7 @@ input[type="file"] {
     box-shadow: none;
 }
 .input-group-addon {
-    border-radius: 0;
+    border-radius: 3px;
     border-color: #EFEDE6;
     background: #FAFAFA;
 }
