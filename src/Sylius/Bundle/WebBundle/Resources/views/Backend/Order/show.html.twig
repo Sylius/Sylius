@@ -145,8 +145,8 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-info">
-                <i class="glyphicon glyphicon-info-sign"></i> {{ variant.sku|default('SKU') }}
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
+                {{ variant.sku|default('SKU') }}
                 </a>
             </td>
             <td>

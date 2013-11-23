@@ -3,6 +3,13 @@ body {
     color: #5a5a5a;
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
+a {
+    color: #1ABB9C;
+}
+a:hover {
+    color: #017E5D;
+}
+/* Signin. */
 body.signin {
     padding-top: 200px;
     background-color: #333;
@@ -141,6 +148,9 @@ th a:visited {
 .main-container .table {
     background: #FAFAFA;
 }
+.main-container .table.table-bordered {
+    border-color: #EAEAEA;
+}
 .main-container .table th {
     vertical-align: middle;
     border-bottom-width: 1px;
@@ -192,13 +202,6 @@ th a:visited {
     border-radius: 0;
     margin-bottom: 0;
 }
-#sidebar {
-    margin-top: -50px;
-    padding-top: 50px;
-    background-color: #333;
-    margin-bottom: -8000px;
-    padding-bottom: 8000px;
-}
 .main-container {
     margin-right: 0;
     position: relative;
@@ -209,10 +212,17 @@ th a:visited {
     padding-left: 0;
 }
 /* Sidebar. */
+#sidebar {
+    margin-top: -50px;
+    padding-top: 50px;
+    background-color: #333;
+    margin-bottom: -8000px;
+    padding-bottom: 8000px;
+}
 #sidebar span.nav-header {
     display: block;
     text-align: center;
-    padding: .5em 0;
+    padding: 1em 0;
     font-weight: bold;
     font-size: 1.1em;
     color: #EEE;
@@ -230,7 +240,7 @@ th a:visited {
 }
 #sidebar li a:hover {
     color: #fff;
-    background-color: #017E5D;
+    background-color: #1ABB9C;
 }
 #sidebar li a i {
     margin-right: 5px;
@@ -279,7 +289,7 @@ th a:visited {
     margin-right: 10px;
 }
 #topbar {
-    background-color: #f1f1f1;
+    background-color: #F5F5F5;
     margin-left: -15px;
     margin-top: 0;
     padding: 8px 0;
