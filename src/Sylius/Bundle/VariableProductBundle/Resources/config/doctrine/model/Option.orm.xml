@@ -26,7 +26,7 @@
         <field name="name" column="name" type="string" />
         <field name="presentation" column="presentation" type="string" />
 
-        <one-to-many field="values" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface" mapped-by="option">
+        <one-to-many field="values" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface" mapped-by="option" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>

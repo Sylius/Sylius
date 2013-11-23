@@ -13,6 +13,7 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
@@ -489,6 +490,86 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $field->click();
     }
 
+    /**
+     * @Given /^I remove the option "([^"]*)"$/
+     */
+    public function iRemoveTheOption($option)
+    {
+        $collection = $this->getSession()->getPage()->find(
+            'xpath',
+            '//div[@id="sylius_option_values"]'
+        );
+
+        if (null === $collection) {
+            throw new ExpectationException(
+                'Option collection does not exists...',
+                $this->getSession()
+            );
+        }
+
+        $this->removeItemFormCollection($collection, $option);
+
+    }
+
+    /**
+     * @When /^I remove all the options$/
+     */
+    public function iRemoveAllTheOption()
+    {
+        $collection = $this->getSession()->getPage()->find(
+            'xpath',
+            '//div[@id="sylius_option_values"]'
+        );
+
+        if (null === $collection) {
+            throw new ExpectationException(
+                'Option collection does not exists...',
+                $this->getSession()
+            );
+        }
+
+        $this-> removeAllItemFormCollection($collection);
+    }
+
+    private function removeItemFormCollection(NodeElement $container, $itemValue)
+    {
+        $field = $container->find(
+            'xpath',
+            sprintf(
+                "//input[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
+                $itemValue
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf(
+                    'Item of the collection with the value %s does not exist',
+                    $itemValue
+                ),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+    /**
+     * @param Element $container
+     */
+    private function removeAllItemFormCollection(NodeElement $container)
+    {
+        $items = $container->findAll(
+            'xpath',
+            '//a[contains(@data-form-collection, "delete")]'
+        );
+
+        $nbOfItem = count($items);
+        while ($nbOfItem > 0) {
+            $items[0]->click();
+            $nbOfItem--;
+        }
+    }
 
     /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
