@@ -93,17 +93,6 @@ div.product-box a img {
     margin-bottom: 5px;
 }
 
-div.product-box .btn {
-    float: right;
-    height: 25px;
-    padding: 1px 6px 7px;
-}
-
-div.product-box span.label {
-    font-size: 15px;
-    padding: 6px;
-}
-
 div.product-box h3 {
    color: #333;
 }
