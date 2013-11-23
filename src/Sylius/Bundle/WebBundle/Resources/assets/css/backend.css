@@ -161,14 +161,10 @@ th a:visited {
 /* Pagination. */
 .pagination {
     margin: 0 0 15px 0;
-    border-radius: 0 !important;
-}
-.pagination > li {
-    border-radius: 0 !important;
+    border-radius: 0;
 }
 .pagination > li > a {
-    border-radius: 0 !important;
-    border-color: #EEE !important;
+    border-color: #EEE;
     border-width: 1px;
     background: #FAFAFA;
 }
@@ -178,15 +174,25 @@ th a:visited {
 .pagination > li.disabled > a,
 .pagination > li.disabled > a:hover {
     background: #FAFAFA;
-    border-color: #EEE !important;
+    border-color: #EEE;
     color: #CCC;
 }
 .pagination > li.active > a,
 .pagination > li.active > a:hover {
     background: #1ABB9C;
-    border-color: #37A37E !important;
+    border-color: #37A37E;
     border-width: 2px;
     padding: 5px 11px;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
 }
 /* Main layout. */
 #content {
