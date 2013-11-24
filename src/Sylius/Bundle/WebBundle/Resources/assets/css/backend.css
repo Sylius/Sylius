@@ -54,11 +54,11 @@ form.form-signin .form-control:focus {
 }
 .btn.btn-default {
     border-color: #ECECEC;
-    background: #F5f5f5 !important;
+    background: #F5F5F5;
 }
 .btn.btn-default:hover {
     border-color: #E5E5E5;
-    background: #EEE !important;
+    background: #EEE;
 }
 
 /* Labels. */
