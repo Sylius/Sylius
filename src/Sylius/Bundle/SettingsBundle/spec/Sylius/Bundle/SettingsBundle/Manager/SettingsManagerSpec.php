@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Setting\Manager;
+namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -29,11 +29,11 @@ class SettingsManagerSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Setting\Manager\SettingsManager');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Manager\SettingsManager');
     }
 
     function it_should_be_a_Sylius_settings_manager()
     {
-        $this->shouldImplement('Sylius\Component\Setting\Manager\SettingsManagerInterface');
+        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface');
     }
 }

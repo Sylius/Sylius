@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Setting\Manager\SettingsManagerInterface;
-use Sylius\Component\Setting\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

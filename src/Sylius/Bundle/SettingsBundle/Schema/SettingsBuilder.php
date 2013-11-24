@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Setting\Schema;
+namespace Sylius\Bundle\SettingsBundle\Schema;
 
-use Sylius\Component\Setting\Transformer\ParameterTransformerInterface;
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Settings;
 
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
-use Sylius\Component\Setting\Schema\SettingsBuilderInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Locale;

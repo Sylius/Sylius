@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SettingsBundle\Controller;
+namespace Sylius\Bundle\SettingBundle\Controller;
 
 use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
-use Sylius\Component\Setting\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

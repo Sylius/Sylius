@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Setting\Transformer;
+namespace Sylius\Bundle\SettingsBundle\Transformer;
 
 /**
  * Parameter transformer interface.

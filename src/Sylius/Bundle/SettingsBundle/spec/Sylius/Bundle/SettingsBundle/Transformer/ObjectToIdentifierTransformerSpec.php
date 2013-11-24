@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Setting\Transformer;
+namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Setting\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -28,12 +28,12 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Setting\Transformer\ObjectToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer');
     }
 
     function it_should_implement_parameter_transformer_interface()
     {
-        $this->shouldImplement('Sylius\Component\Setting\Transformer\ParameterTransformerInterface');
+        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface');
     }
 
     function it_should_return_null_when_null_transformed()

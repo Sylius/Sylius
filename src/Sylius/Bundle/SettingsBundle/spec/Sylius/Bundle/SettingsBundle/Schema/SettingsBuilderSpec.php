@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Setting\Schema;
+namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Setting\Transformer\ParameterTransformerInterface;
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,12 +21,12 @@ class SettingsBuilderSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Setting\Schema\SettingsBuilder');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder');
     }
 
     function it_should_implement_settings_builder_interface()
     {
-        $this->shouldImplement('Sylius\Component\Setting\Schema\SettingsBuilderInterface');
+        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface');
     }
 
     function it_should_extend_options_resolver()

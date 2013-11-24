@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Setting\Manager;
+namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Setting\Model\Settings;
-use Sylius\Component\Setting\Schema\SettingsBuilder;
 
 /**
  * Settings manager.

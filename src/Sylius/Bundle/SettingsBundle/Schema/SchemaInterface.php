@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
-use Sylius\Component\Setting\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Setting\Model;
+namespace Sylius\Bundle\SettingsBundle\Model;
 
 /**
  * Settings parameter model.

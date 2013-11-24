@@ -43,14 +43,14 @@ class SyliusSettingsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Component\Setting\Model\ParameterInterface' => 'sylius.model.parameter.class',
+            'Sylius\Bundle\SettingsBundle\Model\ParameterInterface' => 'sylius.model.parameter.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_settings', $interfaces));
         $container->addCompilerPass(new RegisterSchemasPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Setting\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\SettingsBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_settings.driver.doctrine/orm'));

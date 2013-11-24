@@ -23,7 +23,6 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class SettingsFormFactorySpec extends ObjectBehavior
 {
-
     function let(SchemaRegistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($schemaRegistry, $formFactory);

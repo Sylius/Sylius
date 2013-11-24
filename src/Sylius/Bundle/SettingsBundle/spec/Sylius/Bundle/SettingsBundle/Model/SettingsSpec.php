@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Setting\Model;
+namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -32,7 +32,7 @@ class SettingsSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Setting\Model\Settings');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Model\Settings');
     }
 
     function it_should_check_for_parameter_existence_by_name()
