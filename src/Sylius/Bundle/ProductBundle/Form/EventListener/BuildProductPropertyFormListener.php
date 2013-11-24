@@ -58,14 +58,18 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
     {
         $productProperty = $event->getData();
         $form = $event->getForm();
+        $options = array(
+            'label' => 'sylius.product.property.value',
+            'auto_initialize' => false
+        );
 
         if (null === $productProperty) {
-            $form->add($this->factory->createNamed('value', 'text', null, array('auto_initialize' => false)));
+            $form->add($this->factory->createNamed('value', 'text', null, $options));
 
             return;
         }
 
-        $options = array('label' => $productProperty->getName(), 'auto_initialize' => false);
+        $options['label'] = $productProperty->getName();
 
         if (is_array($productProperty->getConfiguration())) {
             $options = array_merge($options, $productProperty->getConfiguration());

@@ -508,8 +508,28 @@ class WebUser extends MinkContext implements KernelAwareInterface
         }
 
         $this->removeItemFormCollection($collection, $option);
-
     }
+
+    /**
+     * @When /^I remove all the properties$/
+     */
+    public function iRemoveAllTheProperties()
+    {
+        $collection = $this->getSession()->getPage()->find(
+            'xpath',
+            '//div[@id="sylius_product_properties"]'
+        );
+
+        if (null === $collection) {
+            throw new ExpectationException(
+                'Properties collection does not exists...',
+                $this->getSession()
+            );
+        }
+
+        $this->removeAllItemFormCollection($collection);
+    }
+
 
     /**
      * @When /^I remove all the options$/
@@ -528,7 +548,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
             );
         }
 
-        $this-> removeAllItemFormCollection($collection);
+        $this->removeAllItemFormCollection($collection);
     }
 
     private function removeItemFormCollection(NodeElement $container, $itemValue)
