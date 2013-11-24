@@ -15,7 +15,7 @@
                 <source>sylius.promotion_coupon.invalid</source>
                 <target>Your promotion coupon is not valid.</target>
             </trans-unit>
-            <trans-unit id="3">
+            <trans-unit id="4">
                 <source>sylius.promotion_coupon.not_eligible</source>
                 <target>Your cart is not eligible to this promotion coupon.</target>
             </trans-unit>
