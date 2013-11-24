@@ -23,7 +23,8 @@ before_script:
     - composer self-update
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer install --prefer-source --no-interaction
-    - composer update doctrine/mongodb-odm
+    - wget http://getcomposer.org/composer.phar
+    - php -d memory_limit=2048M composer.phar update doctrine/mongodb-odm
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
     - app/console cache:warmup --env=test > /dev/null
