@@ -17,7 +17,7 @@
         {{ buttons.create(path('sylius_backend_shipping_method_create'), 'sylius.shipping_method.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
     </div>
-    <h1><i class="icon-truck"></i> {{ 'sylius.shipping_method.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.shipping_method.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(shipping_methods) }}

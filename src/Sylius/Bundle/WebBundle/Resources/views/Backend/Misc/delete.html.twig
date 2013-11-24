@@ -10,9 +10,9 @@
     <input type="hidden" name="confirmed" value="1">
     <div class="form-actions">
         <button class="btn btn-danger" type="submit">
-            <i class="icon-trash"></i> <span>{{ 'sylius.delete'|trans }}</span>
+            <i class="glyphicon glyphicon-trash"></i> <span>{{ 'sylius.delete'|trans }}</span>
         </button>
-        <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+        <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="glyphicon glyphicon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
     </div>
 </form>
 {% endblock %}

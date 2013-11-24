@@ -16,7 +16,7 @@
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_order_create'), 'sylius.order.create'|trans) }}
     </div>
-    <h1><i class="icon-shopping-cart"></i> {{ 'sylius.order.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.order.index_header'|trans|raw }}</h1>
 </div>
 
 {% render(url('sylius_backend_order_filter_form', {'criteria': app.request.query.get('criteria')})) %}
