@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
+        https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
+        >
+
+    <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Model\Taxon">
+        <id name="id">
+            <generator strategy="PARENT"/>
+        </id>
+        <children name="children">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </children>
+        <nodename name="name"/>
+
+        <field name="slug" type="string"/>
+        <field name="permalink" type="string"/>
+        <!-- TODO: how to generate slug and permalink? -->
+
+        <field name="description" type="string" nullable="true" />
+    </mapped-superclass>
+
+</doctrine-mapping>
