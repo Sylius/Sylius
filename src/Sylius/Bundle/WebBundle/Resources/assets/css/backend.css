@@ -123,16 +123,6 @@ form.form-signin .form-control:focus {
 }
 
 /* Grid and tables. */
-th {
-    background-color: #f1f1f1;
-    text-transform: uppercase;
-}
-th a:link {
-    color: #5a5a5a;
-}
-th a:visited {
-    color: #5a5a5a;
-}
 .table tbody > tr.sub-table > td {
     padding-top: 0;
     border-top: 0;
@@ -156,19 +146,32 @@ th a:visited {
 }
 
 /* Table. */
-.main-container .table {
+.table {
     background: #FAFAFA;
 }
-.main-container .table.table-bordered {
+.table.table-bordered {
     border-color: #EAEAEA;
 }
-.main-container .table th {
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-color: #EEE;
+}
+.table > thead > tr > th {
     vertical-align: middle;
     border-bottom-width: 1px;
     border-color: #EAEAEA;
+    background-color: #f1f1f1;
+    text-transform: uppercase;
 }
-.main-container .table td {
-    border-color: #EEE;
+.table > thead > tr > th a:link {
+    color: #5a5a5a;
+}
+.table > thead > tr > th a:visited {
+    color: #5a5a5a;
 }
 
 /* Pagination. */
