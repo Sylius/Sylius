@@ -46,8 +46,10 @@ form.form-signin .form-control:focus {
 .btn {
     text-transform: uppercase;
     border-radius: 3px;
-    font-size: 13px;
+}
+.btn:not(.btn-lg):not(.btn-sm):not(.btn-xs) {
     line-height: 20px;
+    font-size: 13px;
 }
 .btn > i {
     margin-right: 5px;
