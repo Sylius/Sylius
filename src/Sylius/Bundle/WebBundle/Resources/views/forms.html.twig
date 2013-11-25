@@ -16,9 +16,22 @@
     {% set type = type|default('text') %}
 
     {% if 'file' == type %}
-        <span class="btn-primary btn-lg file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+        {% if image_path|default(false) %}
+        <a href="{{ image_path|imagine_filter('sylius_gallery') }}"
+           data-gallery="gallery"
+           class="pull-left">
+            <img class="img-rounded"
+                 src="{{ image_path|imagine_filter('sylius_90x60') }}" alt="" />
+        </a>
+        {% endif %}
+       <div class="pull-left">
+        <span class="btn-primary btn-lg file-overlay">
+            <i class="icon-folder-open"></i>
+            {{ 'sylius.form.choose_file'|trans }}
+        </span>
     {% endif %}
     {{ parent() }}
+    {% if 'file' == type and image_path|default(false) %}</div>{% endif %}
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
