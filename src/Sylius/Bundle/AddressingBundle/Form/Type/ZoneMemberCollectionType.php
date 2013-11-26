@@ -95,9 +95,6 @@ class ZoneMemberCollectionType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['allow_add']    = $options['allow_add'];
-        $view->vars['allow_delete'] = $options['allow_delete'];
-
         if ($form->getConfig()->hasAttribute('prototypes')) {
             $view->vars['prototypes'] = array_map(function (FormInterface $prototype) use ($view) {
                 return $prototype->createView($view);
@@ -108,24 +105,16 @@ class ZoneMemberCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getName()
     {
-        $resolver->setDefaults(array(
-            'allow_add'      => true,
-            'allow_delete'   => true,
-            'by_reference'   => false,
-            'prototype'      => true,
-            'prototype_name' => '__name__',
-            'type_name'      => '_type',
-            'options'        => array(),
-        ));
+        return 'sylius_zone_member_collection';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getParent()
     {
-        return 'sylius_zone_member_collection';
+        return 'collection';
     }
 }

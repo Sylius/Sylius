@@ -153,11 +153,19 @@
     {% spaceless %}
         <div data-form-type="collection"
             {{ block('widget_container_attributes') }}
-            {% if prototype is defined %}
+            {% if prototype is not empty %}
             data-prototype='{{ _self.collectionItem(prototype, item_by_line, allow_delete)|e }}'
             {% endif %}>
 
             {{ error(form.vars.errors) }}
+
+            {% if prototypes is iterable %}
+                {% for key, subPrototype in prototypes %}
+                    <input type="hidden"
+                           data-form-prototype="{{ key }}"
+                           value="{{ _self.collectionItem(subPrototype, item_by_line, allow_delete)|e }}" />
+                {% endfor %}
+            {% endif %}
 
             <div data-form-collection="list"
                  class="row collection-list">

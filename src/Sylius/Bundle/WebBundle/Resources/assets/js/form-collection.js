@@ -19,8 +19,7 @@
      */
     var CollectionForm = function (element) {
         this.$element = $(element);
-        this.formPrototype = this.$element.data('prototype');
-        this.$list = this.$element.find('[data-form-collection="list"]:first')
+        this.$list = this.$element.find('[data-form-collection="list"]:first');
         this.count = this.$list.children().length;
 
         this.$element.find('[data-form-collection="add"]:first')
@@ -30,6 +29,12 @@
             'click',
             '[data-form-collection="delete"]',
             $.proxy(this.deleteItem, this)
+        );
+
+        $(document).on(
+            'change',
+            '[data-form-prototype="update"]',
+            $.proxy(this.updatePrototype, this)
         );
     }
 
@@ -43,7 +48,9 @@
         addItem: function (event) {
             event.preventDefault();
 
-            var prototype = this.formPrototype.replace(
+            var prototype = this.$element.data('prototype');
+
+            var prototype = prototype.replace(
                 /__name__/g,
                 this.count
             );
@@ -66,6 +73,26 @@
                 .remove();
 
             $(document).trigger('collection-form-delete', [$(event.currentTarget)]);
+        },
+
+        /**
+         * Update the prototype
+         * @param event
+         */
+        updatePrototype: function (event) {
+            var $target = $(event.currentTarget);
+            var prototypeName = $target.val();
+
+            if (undefined !== $target.data('form-prototype-prefix')) {
+                prototypeName = $target.data('form-prototype-prefix') + prototypeName;
+            }
+
+            this.$list.html('');
+
+            this.$element.data(
+                'prototype',
+                this.$element.find('[data-form-prototype="'+ prototypeName +'"]').val()
+            );
         }
     }
 

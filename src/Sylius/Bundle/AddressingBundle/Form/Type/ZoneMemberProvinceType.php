@@ -27,7 +27,7 @@ class ZoneMemberProvinceType extends ZoneMemberType
     {
         $builder
             ->add('province', 'sylius_province_choice', array(
-                'label' => 'sylius.form.zone_member_province.province'
+                'label' => false
             ))
         ;
 

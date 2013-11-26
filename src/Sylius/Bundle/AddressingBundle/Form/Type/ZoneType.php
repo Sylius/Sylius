@@ -60,10 +60,18 @@ class ZoneType extends AbstractType
             ))
             ->add('type', 'choice', array(
                 'label'   => 'sylius.form.zone.type',
+                'attr'    => array(
+                    'data-form-prototype'   => 'update',
+                    'data-form-prototype-prefix' => 'sylius_zone_member_',
+                ),
                 'choices' => Zone::getTypeChoices(),
             ))
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members'
+                'label'            => false,
+                'button_add_label' => 'sylius.zone.add_member',
+                'allow_add'        => true,
+                'allow_delete'     => true,
+                'by_reference'     => false,
             ))
         ;
     }

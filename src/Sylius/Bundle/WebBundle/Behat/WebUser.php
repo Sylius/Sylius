@@ -491,6 +491,47 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @When /^I remove all the members$/
+     */
+    public function iRemoveAllTheMembers()
+    {
+        $collection = $this->getSession()->getPage()->find(
+            'xpath',
+            '//div[@id="sylius_zone_members"]'
+        );
+
+        if (null === $collection) {
+            throw new ExpectationException(
+                'Member collection does not exists...',
+                $this->getSession()
+            );
+        }
+
+        $this->removeAllItemFormCollection($collection);
+    }
+
+    /**
+     * @When /^I remove the member "([^"]*)"$/
+     */
+    public function iRemoveTheMember($member)
+    {
+        $collection = $this->getSession()->getPage()->find(
+            'xpath',
+            '//div[@id="sylius_zone_members"]'
+        );
+
+        if (null === $collection) {
+            throw new ExpectationException(
+                'Member collection does not exists...',
+                $this->getSession()
+            );
+        }
+
+        $this->removeItemFormCollection($collection, $member);
+    }
+
+
+    /**
      * @Given /^I remove the option "([^"]*)"$/
      */
     public function iRemoveTheOption($option)
