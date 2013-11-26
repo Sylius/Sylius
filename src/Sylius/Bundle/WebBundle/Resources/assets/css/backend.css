@@ -55,11 +55,11 @@ form.form-signin .form-control:focus {
     margin-right: 5px;
 }
 .btn.btn-default {
-    border-color: #ECECEC;
+    border-color: #DDD;
     background: #F5F5F5;
 }
 .btn.btn-default:hover {
-    border-color: #E5E5E5;
+    border-color: #CCC;
     background: #EEE;
 }
 

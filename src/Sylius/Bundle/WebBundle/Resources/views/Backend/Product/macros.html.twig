@@ -12,7 +12,7 @@
             <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
             <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
             <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
-            <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'sylius.product.updatedAt'|trans) }}</th>
+            <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
             <th class="actions"></th>
         </tr>
     </thead>
@@ -26,25 +26,17 @@
             <td class="info">
                 <div class="media">
                     <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left">
-                        <img src="{{ product.image ? product.image.path|imagine_filter('sylius_90x60') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
+                        <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">
-                            <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a>
+                            <big><a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a></big>
                             {% if not product.isAvailable %}<span class="label label-default">Not Available</span>{% endif %}
                         </h5>
                         <div class="media-body">
-                            <ul class="list-unstyled">
-                                {% if product.sku %}
-                                    <li><strong>{{ 'sylius.product.sku'|trans }}: </strong> <code class="sku">{{ product.sku }}</code></li>
-                                {% endif %}
-
-                                {% if product.options|length > 0 %}
-                                    {% for option in product.options %}
-                                        <li><strong>{{ option.name }}</strong>: {{ option.values|join(', ') }}</li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
+                            {% if product.sku %}
+                                <strong>{{ 'sylius.product.sku'|trans }}: </strong> <code class="sku">{{ product.sku }}</code>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -75,8 +67,14 @@
                 {{ product.updatedAt|date('M d') }}
             </td>
             <td class="actions text-right">
-                {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-                {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
+                <div class="btn-group">
+                    <a class="btn btn-xs btn-default" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </a>
+                    <a class="btn btn-xs btn-default text-danger" href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
             </td>
         </tr>
     {% endfor %}
