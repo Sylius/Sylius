@@ -6,7 +6,7 @@ body {
 
 /* Links. */
 a {
-    color: #1ABB9C;
+    color: #10AC8E;
 }
 a:hover {
     color: #017E5D;
@@ -441,4 +441,33 @@ input[type="file"] {
 /** Dashboard */
 .col-md-6 #users .btn span {
     display: none;
+}
+
+/** Products. **/
+body.sylius_backend_product_index .sylius-products-table td {
+    vertical-align: middle;
+}
+body.sylius_backend_product_index .sylius-products-table .name {
+    font-size: 16px;
+    text-decoration: none;
+}
+body.sylius_backend_product_index .sylius-products-table .sku {
+    background: #FCFCFC;
+    color: #666;
+}
+body.sylius_backend_product_index .sylius-products-table .id,
+body.sylius_backend_product_index .sylius-products-table .stock,
+body.sylius_backend_product_index .sylius-products-table .retail-price,
+body.sylius_backend_product_index .sylius-products-table .updated-at,
+body.sylius_backend_product_index .sylius-products-table .actions {
+    text-align: center;
+}
+body.sylius_backend_product_index .sylius-products-table .stock,
+body.sylius_backend_product_index .sylius-products-table .retail-price,
+body.sylius_backend_product_index .sylius-products-table .updated-at,
+body.sylius_backend_product_index .sylius-products-table .actions {
+    width: 150px;
+}
+body.sylius_backend_product_index .sylius-products-table .actions .delete {
+    color: #CE7371;
 }

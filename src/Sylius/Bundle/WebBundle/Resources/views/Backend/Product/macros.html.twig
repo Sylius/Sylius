@@ -4,7 +4,7 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if products|length > 0 %}
-<table class="table table-bordered">
+<table class="sylius-products-table table table-bordered">
     <thead>
         <tr>
             <th></th>
@@ -30,8 +30,13 @@
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">
-                            <big><a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a></big>
-                            {% if not product.isAvailable %}<span class="label label-default">Not Available</span>{% endif %}
+                            <a class="name"
+                               href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
+                                {{ product.name }}
+                            </a>
+                            {% if not product.isAvailable %}
+                                <span class="label label-default">Not Available</span>
+                            {% endif %}
                         </h5>
                         <div class="media-body">
                             {% if product.sku %}
@@ -68,11 +73,11 @@
             </td>
             <td class="actions text-right">
                 <div class="btn-group">
-                    <a class="btn btn-xs btn-default" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}">
+                    <a class="btn btn-xs btn-default edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}">
                         <span class="glyphicon glyphicon-pencil"></span> Edit
                     </a>
-                    <a class="btn btn-xs btn-default text-danger" href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}">
-                        <span class="glyphicon glyphicon-remove"></span>
+                    <a class="btn btn-xs btn-default delete" href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}">
+                        <span class="glyphicon glyphicon-remove"></span> Del
                     </a>
                 </div>
             </td>
