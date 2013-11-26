@@ -468,9 +468,6 @@ body.sylius_backend_product_index .sylius-products-table .updated-at,
 body.sylius_backend_product_index .sylius-products-table .actions {
     width: 150px;
 }
-body.sylius_backend_product_index .sylius-products-table .actions .delete {
-    color: #CE7371;
-}
 
 @media (max-width: 767px) {
     body.sylius_backend_product_index .sylius-products-table .stock,
