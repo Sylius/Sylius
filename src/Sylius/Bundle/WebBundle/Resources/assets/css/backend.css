@@ -471,3 +471,18 @@ body.sylius_backend_product_index .sylius-products-table .actions {
 body.sylius_backend_product_index .sylius-products-table .actions .delete {
     color: #CE7371;
 }
+
+@media (max-width: 767px) {
+    body.sylius_backend_product_index .sylius-products-table .stock,
+    body.sylius_backend_product_index .sylius-products-table .retail-price,
+    body.sylius_backend_product_index .sylius-products-table .updated-at,
+    body.sylius_backend_product_index .sylius-products-table .actions {
+        display: none;
+    }
+}
+
+@media (max-width: 1199px) {
+    body.sylius_backend_product_index .sylius-products-table .updated-at {
+        display: none;
+    }
+}
