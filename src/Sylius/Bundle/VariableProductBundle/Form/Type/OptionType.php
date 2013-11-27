@@ -65,7 +65,7 @@ class OptionType extends AbstractType
                 'allow_add'        => true,
                 'allow_delete'     => true,
                 'by_reference'     => false,
-                'button_add_label' => 'sylius.form.option.values.add'
+                'button_add_label' => 'sylius.form.option_value.add_value'
             ))
         ;
     }

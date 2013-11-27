@@ -53,7 +53,9 @@ class ImageType extends AbstractType
             'label' => false
         ));
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $that = &$this;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($that) {
             $this->images[] = $event->getData();
         });
     }

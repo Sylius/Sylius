@@ -58,7 +58,7 @@ class ProductPropertyType extends AbstractType
     {
         $builder
             ->add('property', 'sylius_property_choice', array(
-                'label' => 'sylius.product.property.value'
+                'label' => 'sylius.product.property.label.property'
             ))
             ->addEventSubscriber(new BuildProductPropertyFormListener($builder->getFormFactory()))
         ;

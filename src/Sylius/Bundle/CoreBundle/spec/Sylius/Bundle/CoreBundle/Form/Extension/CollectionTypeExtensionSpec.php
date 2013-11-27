@@ -46,5 +46,7 @@ class CollectionTypeExtensionSpec extends ObjectBehavior
             'button_add_label' => 'form.collection.add',
             'item_by_line' => 1,
         ))->shouldBeCalled();
+
+        $this->setDefaultOptions($resolver);
     }
 }

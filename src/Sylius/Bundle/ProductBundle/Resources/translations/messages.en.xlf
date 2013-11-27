@@ -43,6 +43,14 @@
                 <source>sylius.label.prototype.properties</source>
                 <target>Properties</target>
             </trans-unit>
+            <trans-unit id="11">
+                <source>sylius.product.property.label.property</source>
+                <target>Property</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>sylius.product.property.label.value</source>
+                <target>Value</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
