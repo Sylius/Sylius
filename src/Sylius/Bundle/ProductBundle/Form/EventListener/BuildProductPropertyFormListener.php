@@ -59,7 +59,7 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
         $productProperty = $event->getData();
         $form = $event->getForm();
         $options = array(
-            'label' => 'sylius.product.property.value',
+            'label' => 'sylius.product.property.label.value',
             'auto_initialize' => false
         );
 

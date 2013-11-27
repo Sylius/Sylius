@@ -13,7 +13,6 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
@@ -469,25 +468,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iRemoveTheProvince($province)
     {
-        $field = $this->getSession()->getPage()->find(
-            'xpath',
-            sprintf(
-                "//input[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
-                $province
-            )
-        );
-
-        if (null === $field) {
-            throw new ExpectationException(
-                sprintf(
-                    'Country have not province named %s',
-                    $province
-                ),
-                $this->getSession()
-            );
-        }
-
-        $field->click();
+        $this->removePositionItemFormCollection('//div[@id="sylius_country_provinces"]', $province);
     }
 
     /**
@@ -495,60 +476,26 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iRemoveAllTheMembers()
     {
-        $collection = $this->getSession()->getPage()->find(
-            'xpath',
-            '//div[@id="sylius_zone_members"]'
-        );
-
-        if (null === $collection) {
-            throw new ExpectationException(
-                'Member collection does not exists...',
-                $this->getSession()
-            );
-        }
-
-        $this->removeAllItemFormCollection($collection);
+        $this->removeAllItemFormCollection('//div[@id="sylius_zone_members"]');
     }
 
     /**
-     * @When /^I remove the member "([^"]*)"$/
+     * @When /^I remove the member #(\d+)$/
      */
     public function iRemoveTheMember($member)
     {
-        $collection = $this->getSession()->getPage()->find(
-            'xpath',
-            '//div[@id="sylius_zone_members"]'
+        $this->removePositionItemFormCollection(
+            '//div[@id="sylius_zone_members"]',
+            $member
         );
-
-        if (null === $collection) {
-            throw new ExpectationException(
-                'Member collection does not exists...',
-                $this->getSession()
-            );
-        }
-
-        $this->removeItemFormCollection($collection, $member);
     }
-
 
     /**
      * @Given /^I remove the option "([^"]*)"$/
      */
     public function iRemoveTheOption($option)
     {
-        $collection = $this->getSession()->getPage()->find(
-            'xpath',
-            '//div[@id="sylius_option_values"]'
-        );
-
-        if (null === $collection) {
-            throw new ExpectationException(
-                'Option collection does not exists...',
-                $this->getSession()
-            );
-        }
-
-        $this->removeItemFormCollection($collection, $option);
+        $this->removeNamedItemFormCollection('//div[@id="sylius_option_values"]', $option);
     }
 
     /**
@@ -556,19 +503,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iRemoveAllTheProperties()
     {
-        $collection = $this->getSession()->getPage()->find(
-            'xpath',
-            '//div[@id="sylius_product_properties"]'
-        );
-
-        if (null === $collection) {
-            throw new ExpectationException(
-                'Properties collection does not exists...',
-                $this->getSession()
-            );
-        }
-
-        $this->removeAllItemFormCollection($collection);
+        $this->removeAllItemFormCollection('//div[@id="sylius_product_properties"]');
     }
 
 
@@ -577,37 +512,28 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iRemoveAllTheOption()
     {
-        $collection = $this->getSession()->getPage()->find(
-            'xpath',
-            '//div[@id="sylius_option_values"]'
-        );
-
-        if (null === $collection) {
-            throw new ExpectationException(
-                'Option collection does not exists...',
-                $this->getSession()
-            );
-        }
-
-        $this->removeAllItemFormCollection($collection);
+        $this->removeAllItemFormCollection('//div[@id="sylius_option_values"]');
     }
 
-    private function removeItemFormCollection(NodeElement $container, $itemValue)
+    /**
+     * @param $xpath
+     * @param $position
+     * @throws \Behat\Mink\Exception\ExpectationException
+     */
+    private function removePositionItemFormCollection($xpath, $position)
     {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
         $field = $container->find(
             'xpath',
             sprintf(
-                "//input[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
-                $itemValue
+                "//div[contains(@data-form-collection, 'item') and position()=%d]//a[contains(@data-form-collection, 'delete')]",
+                $position
             )
         );
 
         if (null === $field) {
             throw new ExpectationException(
-                sprintf(
-                    'Item of the collection with the value %s does not exist',
-                    $itemValue
-                ),
+                sprintf('Impossible to find deletion button with the position %d', $position),
                 $this->getSession()
             );
         }
@@ -616,10 +542,37 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @param Element $container
+     * @param $xpath
+     * @param $itemValue
+     * @throws \Behat\Mink\Exception\ExpectationException
      */
-    private function removeAllItemFormCollection(NodeElement $container)
+    private function removeNamedItemFormCollection($xpath, $itemValue)
     {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $field = $container->find(
+            'xpath',
+            sprintf(
+                "//*[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
+                $itemValue
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf('Impossible to find deletion button with the value %s', $itemValue),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+    /**
+     * @param $xpath
+     */
+    private function removeAllItemFormCollection($xpath)
+    {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
         $items = $container->findAll(
             'xpath',
             '//a[contains(@data-form-collection, "delete")]'
