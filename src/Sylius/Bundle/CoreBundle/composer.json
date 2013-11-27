@@ -23,8 +23,10 @@
         "php":                            ">=5.3.3",
 
         "symfony/framework-bundle":       "~2.3",
+        "sylius/product-bundle":          "1.0.*@dev",
         "sylius/variable-product-bundle": "1.0.*@dev",
         "sylius/cart-bundle":             "1.0.*@dev",
+        "sylius/order-bundle":            "1.0.*@dev",
         "sylius/money-bundle":            "1.0.*@dev",
         "sylius/taxation-bundle":         "1.0.*@dev",
         "sylius/shipping-bundle":         "1.0.*@dev",
@@ -37,13 +39,11 @@
         "sylius/payments-bundle":         "1.0.*@dev",
         "sylius/flow-bundle":             "1.0.*@dev",
         "sylius/resource-bundle":         "1.0.*@dev",
-        "sylius/omnipay-bundle":          "1.0.*@dev",
         "athari/yalinqo":                 "*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
-        "omnipay/omnipay":                "1.0.*@dev",
         "hwi/oauth-bundle":               "0.3.*"
     },
     "require-dev": {
