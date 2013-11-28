@@ -457,12 +457,13 @@ body.sylius_backend_product_index .sylius-products-table .sku {
 }
 body.sylius_backend_product_index .sylius-products-table .id,
 body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at,
-body.sylius_backend_product_index .sylius-products-table .actions {
+body.sylius_backend_product_index .sylius-products-table .updated-at {
     text-align: center;
 }
 body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at,
-body.sylius_backend_product_index .sylius-products-table .actions {
+body.sylius_backend_product_index .sylius-products-table .updated-at {
     width: 150px;
+}
+body.sylius_backend_product_index .sylius-products-table .actions {
+    width: 180px;
 }
