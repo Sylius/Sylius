@@ -573,7 +573,6 @@ input[type="file"] {
 }
 
 /** Form Collection */
-
 div.collection-item .collection-box {
     position: relative;
 }
@@ -589,7 +588,7 @@ div.collection-item .collection-button-remove {
 .form-inline div.collection-item .collection-box,
 div.collection-item .collection-box.unique-field,
 .form-horizontal div.collection-item .collection-box {
-    padding: 0px 25px 0px 12px;
+    padding: 0 25px 0 12px;
 }
 
 .collection-item .collection-box .form-group {
@@ -599,7 +598,7 @@ div.collection-item .collection-box.unique-field,
     padding-right: 0;
 }
 
-.form-inline div.collection-item .collection-button-remove,
-div.collection-item .unique-field .collection-button-remove {
+.form-inline div.collection-item [data-form-collection="remove"]
+div.collection-item .unique-field [data-form-collection="remove"] {
     top: 6px;
 }

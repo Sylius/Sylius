@@ -55,17 +55,17 @@ class OptionType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.option.name'
+                'label' => 'sylius.form.option.name',
             ))
             ->add('presentation', 'text', array(
-                'label' => 'sylius.form.option.presentation'
+                'label' => 'sylius.form.option.presentation',
             ))
             ->add('values', 'collection', array(
                 'type'             => 'sylius_option_value',
                 'allow_add'        => true,
                 'allow_delete'     => true,
                 'by_reference'     => false,
-                'button_add_label' => 'sylius.form.option_value.add_value'
+                'button_add_label' => 'sylius.form.option_value.add_value',
             ))
         ;
     }

@@ -117,7 +117,6 @@
 
     $.fn.CollectionForm.Constructor = CollectionForm;
 
-
     /*
      * Apply to standard CollectionForm elements
      */

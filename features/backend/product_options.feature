@@ -125,8 +125,8 @@ Feature: Product options
          Then I should be editing option "T-Shirt size"
           And I should see "Please add at least 2 option values."
 
-  @javascript
-      Scenario: Updating the option and I remove one option
+    @javascript
+    Scenario: Updating the option and removing one option
         Given I am editing option "T-Shirt color"
          When I remove the option "Green"
           And I press "Save changes"

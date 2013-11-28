@@ -100,7 +100,7 @@ Feature: Countries and provinces
           And "Russia" should appear on the page
 
     @javascript
-    Scenario: Updating the country and I remove province
+    Scenario: Updating the country and removing province
        Given I am editing country "Ukraine"
         When I fill in "Name" with "Russia"
          And I fill in "ISO name" with "RU"
