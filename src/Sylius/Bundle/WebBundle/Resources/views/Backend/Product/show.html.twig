@@ -112,6 +112,14 @@
                         {{ misc.state_label(product.masterVariant.availableOnDemand) }}
                     </td>
                 </tr>
+                {% if product.restrictedZone %}
+                    <tr>
+                        <td>{{ 'sylius.product.restricted_zone'|trans }}</td>
+                        <td>
+                            <a href="{{ path('sylius_backend_zone_show', {'id': product.restrictedZone.id}) }}">{{ product.restrictedZone.name }}</a>
+                        </td>
+                    </tr>
+                {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.stock'|trans }}</td>
                     <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
@@ -126,13 +134,13 @@
 
     <div class="col-md-6">
         {% if product.images|length > 0 %}
-        <div id="gallery">
-            {% for image in product.images %}
-            <a href="{{ image.path|imagine_filter('sylius_gallery') }}" title="{{ product.name }}" class="thumbnail">
-                <img src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
-            </a>
-            {% endfor %}
-        </div>
+            <div id="gallery">
+                {% for image in product.images %}
+                <a href="{{ image.path|imagine_filter('sylius_gallery') }}" title="{{ product.name }}" class="thumbnail">
+                    <img src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
+                </a>
+                {% endfor %}
+            </div>
         {% else %}
             {{ alerts.info('sylius.product.no_images'|trans) }}
         {% endif %}
