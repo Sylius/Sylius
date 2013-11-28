@@ -1230,6 +1230,10 @@
         <source>sylius.product.available_on_demand</source>
         <target>Available on demand</target>
       </trans-unit>
+      <trans-unit id="765ff06097d19388b61bc3282afc2b93" resname="sylius.product.restricted_zone">
+        <source>sylius.product.restricted_zone</source>
+        <target>Restricted zone</target>
+      </trans-unit>
       <trans-unit id="927dac6cf9ae2b0857f51b29c4da8606" resname="sylius.product.categorization">
         <source>sylius.product.categorization</source>
         <target>Categorization</target>

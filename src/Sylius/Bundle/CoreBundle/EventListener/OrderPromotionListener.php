@@ -15,7 +15,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessorInterface;
 use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -46,10 +46,10 @@ class OrderPromotionListener
      * Constructor.
      *
      * @param PromotionProcessorInterface $promotionProcessor
-     * @param SessionInterface            $session
+     * @param Session                     $session
      * @param TranslatorInterface         $translator
      */
-    public function __construct(PromotionProcessorInterface $promotionProcessor, SessionInterface $session, TranslatorInterface $translator)
+    public function __construct(PromotionProcessorInterface $promotionProcessor, Session $session, TranslatorInterface $translator)
     {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
