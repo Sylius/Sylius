@@ -22,8 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ImageType extends AbstractType
 {
+    public $images = array();
     protected $dataClass;
-    protected $images = array();
 
     public function __construct($dataClass)
     {
@@ -31,7 +31,7 @@ class ImageType extends AbstractType
     }
 
     /**
-     * {@docinherit}
+     * {@inheritdoc}
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
@@ -45,7 +45,7 @@ class ImageType extends AbstractType
     }
 
     /**
-     * {@docinherit}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -56,12 +56,12 @@ class ImageType extends AbstractType
         $that = &$this;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($that) {
-            $this->images[] = $event->getData();
+            $that->images[] = $event->getData();
         });
     }
 
     /**
-     * {@docinherit}
+     * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
@@ -73,7 +73,7 @@ class ImageType extends AbstractType
     }
 
     /**
-     * {@docinherit}
+     * {@inheritdoc}
      */
     public function getName()
     {

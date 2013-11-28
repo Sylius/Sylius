@@ -48,7 +48,7 @@ class VariantType extends BaseVariantType
                 'allow_delete'     => true,
                 'by_reference'     => false,
                 'item_by_line'     => 3,
-                'button_add_label' => 'sylius.form.variant.images'
+                'button_add_label' => 'sylius.form.variant.images',
             ))
         ;
     }
