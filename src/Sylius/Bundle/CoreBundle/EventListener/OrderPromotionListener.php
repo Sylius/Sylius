@@ -15,7 +15,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PromotionsBundle\Processor\PromotionProcessorInterface;
 use Sylius\Bundle\PromotionsBundle\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -33,7 +33,7 @@ class OrderPromotionListener
     protected $promotionProcessor;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     protected $session;
 
@@ -46,10 +46,10 @@ class OrderPromotionListener
      * Constructor.
      *
      * @param PromotionProcessorInterface $promotionProcessor
-     * @param Session                     $session
+     * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
      */
-    public function __construct(PromotionProcessorInterface $promotionProcessor, Session $session, TranslatorInterface $translator)
+    public function __construct(PromotionProcessorInterface $promotionProcessor, SessionInterface $session, TranslatorInterface $translator)
     {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
@@ -60,6 +60,8 @@ class OrderPromotionListener
      * Get the order from event and run the promotion processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function processOrderPromotion(GenericEvent $event)
     {
@@ -95,7 +97,6 @@ class OrderPromotionListener
             $message = 'sylius.promotion_coupon.invalid';
         }
 
-        $message = $this->translator->trans($message, array(), 'flashes');
-        $this->session->getFlashBag()->add($type, $message);
+        $this->session->getBag('flashes')->add($type, $this->translator->trans($message, array(), 'flashes'));
     }
 }

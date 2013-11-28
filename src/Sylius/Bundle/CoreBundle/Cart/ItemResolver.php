@@ -11,14 +11,19 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
+use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItem;
+use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Item resolver for cart bundle.
@@ -50,21 +55,41 @@ class ItemResolver implements ItemResolverInterface
     private $availabilityChecker;
 
     /**
+     * Current security context.
+     *
+     * @var SecurityContextInterface
+     */
+    private $securityContext;
+
+    /**
+     * Address zone matcher.
+     *
+     * @var ZoneMatcherInterface
+     */
+    private $zoneMatcher;
+
+    /**
      * Constructor.
      *
      * @param RepositoryInterface          $productRepository
      * @param FormFactory                  $formFactory
      * @param AvailabilityCheckerInterface $availabilityChecker
+     * @param SecurityContextInterface     $securityContext
+     * @param ZoneMatcherInterface         $zoneMatcher
      */
     public function __construct(
         RepositoryInterface          $productRepository,
         FormFactory                  $formFactory,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
+        SecurityContextInterface     $securityContext,
+        ZoneMatcherInterface         $zoneMatcher
     )
     {
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
         $this->availabilityChecker = $availabilityChecker;
+        $this->securityContext = $securityContext;
+        $this->zoneMatcher = $zoneMatcher;
     }
 
     /**
@@ -86,6 +111,7 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Error while trying to add item to cart');
         }
 
+        /* @var $product Product */
         if (!$product = $this->productRepository->find($id)) {
             throw new ItemResolvingException('Requested product was not found');
         }
@@ -94,7 +120,8 @@ class ItemResolver implements ItemResolverInterface
         $form = $this->formFactory->create('sylius_cart_item', null, array('product' => $product));
 
         $form->bind($request);
-        $item = $form->getData(); // Item instance, cool.
+        /* @var $item OrderItem */
+        $item = $form->getData();
 
         // If our product has no variants, we simply set the master variant of it.
         if (!$product->hasVariants()) {
@@ -105,11 +132,15 @@ class ItemResolver implements ItemResolverInterface
 
         // If all is ok with form, quantity and other stuff, simply return the item.
         if (!$form->isValid() || null === $variant) {
-            throw new ItemResolvingException('Submitted form is invalid');
+            throw new ItemResolvingException('Submitted form is invalid.');
         }
 
         if (!$this->isStockAvailable($variant)) {
-            throw new ItemResolvingException('Selected item is out of stock');
+            throw new ItemResolvingException('Selected item is out of stock.');
+        }
+
+        if ($this->isZoneRestricted($product)) {
+            throw new ItemResolvingException('Selected item is not available in your country.');
         }
 
         $item->setUnitPrice($variant->getPrice());
@@ -127,5 +158,29 @@ class ItemResolver implements ItemResolverInterface
     protected function isStockAvailable(VariantInterface $variant)
     {
         return $this->availabilityChecker->isStockAvailable($variant);
+    }
+
+    /**
+     * Check if product is not blocked at current zone.
+     *
+     * @param ProductInterface $product
+     *
+     * @return Boolean
+     */
+    protected function isZoneRestricted(ProductInterface $product)
+    {
+        if (!$this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return false;
+        }
+
+        if (null === $address = $this->securityContext->getToken()->getUser()->getShippingAddress()) {
+            return false;
+        }
+
+        if (null === $zone = $product->getRestrictedZone()) {
+            return false;
+        }
+
+        return in_array($zone, $this->zoneMatcher->matchAll($address));
     }
 }

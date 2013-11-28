@@ -13,10 +13,10 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
 
 /**
  * Sylius core product entity.
@@ -240,11 +240,17 @@ class Product extends BaseProduct implements ProductInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRestrictedZone()
     {
         return $this->restrictedZone;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setRestrictedZone(ZoneInterface $zone = null)
     {
         $this->restrictedZone = $zone;
