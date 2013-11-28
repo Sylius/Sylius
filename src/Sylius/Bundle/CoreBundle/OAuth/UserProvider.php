@@ -33,11 +33,17 @@ class UserProvider extends FOSUBUserProvider
         try {
             return parent::loadUserByOAuthUserResponse($response);
         } catch (UsernameNotFoundException $e) {
-            if (null === $user = $this->userManager->findUserByEmail($response->getEmail())) {
-                return $this->createUserByOAuthUserResponse($response);
+            if (null !== $response->getEmail()) {
+                $user = $this->userManager->findUserByUsernameOrEmail($response->getEmail());
+            } else {
+                $user = $this->userManager->findUserByUsername($response->getNickname());
             }
 
-            return $this->updateUserByOAuthUserResponse($user, $response);
+            if ($user) {
+                return $this->updateUserByOAuthUserResponse($user, $response);
+            }
+
+            return $this->createUserByOAuthUserResponse($response);
         }
     }
 
