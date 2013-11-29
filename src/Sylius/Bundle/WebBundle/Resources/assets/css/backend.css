@@ -463,9 +463,7 @@ body.sylius_backend_product_index .sylius-products-table .updated-at {
 }
 body.sylius_backend_product_index .sylius-products-table .stock,
 body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at {
+body.sylius_backend_product_index .sylius-products-table .updated-at,
+body.sylius_backend_product_index .sylius-products-table .actions{
     width: 150px;
-}
-body.sylius_backend_product_index .sylius-products-table .actions {
-    width: 180px;
 }

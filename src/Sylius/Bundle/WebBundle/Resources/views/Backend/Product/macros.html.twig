@@ -75,11 +75,14 @@
             </td>
             <td class="actions text-right">
                 <div class="btn-group">
-                    <a class="btn btn-sm btn-primary edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}">
+                    <a class="btn btn-sm btn-primary edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
+                        title="Edit">
                         <span class="glyphicon glyphicon-pencil"></span> Edit
                     </a>
-                    <a class="btn btn-sm btn-danger delete" href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}">
-                        <span class="glyphicon glyphicon-trash"></span> Delete
+                    <a class="btn btn-sm btn-danger delete"
+                       href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}"
+                       title="Delete">
+                        <span class="glyphicon glyphicon-trash"></span> Del
                     </a>
                 </div>
             </td>
