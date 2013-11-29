@@ -18,19 +18,6 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 /**
  * Product builder with fluent interface.
  *
- * Usage example:
- *
- * <code>
- * <?php
- * $this->get('sylius.product_builder')
- *     ->create('Github mug')
- *     ->setDescription("Coffee. Tea. Coke. Water. Let's face it — humans need to drink liquids")
- *     ->setPrice(1200)
- *     ->addProperty('collection', 2013)
- *     ->save()
- * ;
- * </code>
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ProductBuilder implements ProductBuilderInterface
