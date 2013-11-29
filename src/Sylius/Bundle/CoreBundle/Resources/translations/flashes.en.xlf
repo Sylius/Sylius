@@ -10,6 +10,10 @@
         <source>sylius.checkout.restricted_zone</source>
         <target>This product is not available in your country.</target>
       </trans-unit>
+      <trans-unit id="b35abff3ac27033d049562863e7e61d2" resname="sylius.cart.restricted_zone_removal">
+        <source>sylius.cart.restricted_zone_removal</source>
+        <target>Product %product% removed from cart since it is not available in your country.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

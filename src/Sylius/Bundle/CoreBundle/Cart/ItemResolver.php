@@ -16,7 +16,6 @@ use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 use Sylius\Bundle\CoreBundle\Model\OrderItem;
 use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;

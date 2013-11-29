@@ -92,7 +92,7 @@ class UserType extends ProfileFormType
     {
         $resolver->setDefaults(array(
             'data_class'         => $this->dataClass,
-            'validation_groups'  => function(FormInterface $form) {
+            'validation_groups'  => function (FormInterface $form) {
                 $data = $form->getData();
                 $groups = array('Profile', 'sylius');
                 if ($data && !$data->getId()) {

@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Checker;
 
 use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 
 interface RestrictedZoneCheckerInterface
 {
-    public function isRestricted(ProductInterface $product);
+    public function isRestricted(ProductInterface $product, AddressInterface $address = null);
 }

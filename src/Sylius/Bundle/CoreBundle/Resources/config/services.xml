@@ -38,6 +38,7 @@
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
+        <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -232,6 +233,15 @@
             <argument type="service" id="sylius.currency_context" />
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="processOrderCurrency" />
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="processOrderCurrency" />
+        </service>
+        <service id="sylius.listener.restricted_zone" class="%sylius.listener.restricted_zone.class%">
+            <argument type="service" id="sylius.checker.restricted_zone" />
+            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.manager.cart" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="sylius.address.post_update" method="handleRestrictedZone" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.complete" method="handleRestrictedZone" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">

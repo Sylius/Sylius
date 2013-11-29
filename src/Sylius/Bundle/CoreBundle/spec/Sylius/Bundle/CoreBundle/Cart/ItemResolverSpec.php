@@ -41,6 +41,7 @@ class ItemResolverSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
+     * @param Symfony\Component\HttpFoundation\Request         $request
      */
     function it_throws_exception_unless_request_method_is_POST($item, $request)
     {
@@ -54,6 +55,7 @@ class ItemResolverSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
+     * @param Symfony\Component\HttpFoundation\Request         $request
      */
     function it_throws_exception_when_product_id_is_missing_on_request($item, $request)
     {
@@ -68,6 +70,7 @@ class ItemResolverSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
+     * @param Symfony\Component\HttpFoundation\Request         $request
      */
     function it_throws_exception_if_product_with_given_id_does_not_exist($productRepository, $item, $request)
     {
