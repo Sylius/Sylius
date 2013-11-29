@@ -22,11 +22,11 @@ class ItemResolverSpec extends ObjectBehavior
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface             $productRepository
      * @param Symfony\Component\Form\FormFactory                                 $formFactory
      * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
-     * @param Symfony\Component\HttpFoundation\Request                           $request
+     * @param Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface    $restrictedZoneChecker
      */
-    function let($productRepository, $formFactory, $availabilityChecker)
+    function let($productRepository, $formFactory, $availabilityChecker, $restrictedZoneChecker)
     {
-        $this->beConstructedWith($productRepository, $formFactory, $availabilityChecker);
+        $this->beConstructedWith($productRepository, $formFactory, $availabilityChecker, $restrictedZoneChecker);
     }
 
     function it_is_initializable()

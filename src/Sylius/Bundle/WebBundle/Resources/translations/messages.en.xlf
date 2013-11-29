@@ -158,6 +158,10 @@
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
       </trans-unit>
+      <trans-unit id="94508ad78d6cdae4de43ed99efed1fc7" resname="sylius.product_not_available_in_zone">
+        <source>sylius.product_not_available_in_zone</source>
+        <target>Not available in your country</target>
+      </trans-unit>
       <trans-unit id="b862b765ec4aedc20d6569059f66c34d" resname="sylius.address.city">
         <source>sylius.address.city</source>
         <target>City</target>

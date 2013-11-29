@@ -13,6 +13,8 @@
 
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
 
+        <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
+
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
 
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
@@ -58,6 +60,8 @@
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
+
+        <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
     </parameters>
 
     <services>
@@ -79,6 +83,11 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.checker.restricted_zone" />
+        </service>
+
+        <!-- checker -->
+        <service id="sylius.checker.restricted_zone" class="%sylius.checker.restricted_zone.class%">
             <argument type="service" id="security.context" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
@@ -293,6 +302,11 @@
                 <argument key="facebook">facebookId</argument>
                 <argument key="google">googleId</argument>
             </argument>
+        </service>
+
+        <service id="sylius.twig.restricted_zone_extension" class="%sylius.twig.restricted_zone_extension.class%">
+            <argument type="service" id="sylius.checker.restricted_zone" />
+            <tag name="twig.extension" />
         </service>
     </services>
 
