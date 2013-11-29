@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3e8acdedfafc4f76cad3cc8f0cc6201f",
+    "hash": "5b4fa19a33efc14777079220e9c2ce3f",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -2185,7 +2185,7 @@
                 "symfony/options-resolver": ">=2.0.16,~2.0"
             },
             "require-dev": {
-                "symfony/yaml": ">=2.0.16.0,>=2.0,<3.0",
+                "symfony/yaml": ">=2.0.16,~2.0",
                 "twig/twig": ">=1.0,<2.0-dev"
             },
             "suggest": {
@@ -2376,12 +2376,12 @@
             "version": "v1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/omnipay/omnipay.git",
+                "url": "https://github.com/adrianmacneil/omnipay.git",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnipay/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
+                "url": "https://api.github.com/repos/adrianmacneil/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450",
                 "shasum": ""
             },
@@ -2415,7 +2415,7 @@
                 }
             ],
             "description": "A framework agnostic, multi-gateway payment processing library",
-            "homepage": "https://github.com/omnipay/omnipay",
+            "homepage": "https://github.com/adrianmacneil/omnipay",
             "keywords": [
                 "2checkout",
                 "2co",
@@ -2517,6 +2517,60 @@
                 "paging"
             ],
             "time": "2013-09-23 08:06:55"
+        },
+        {
+            "name": "payum/be2bill",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Payum/Be2Bill.git",
+                "reference": "605e43f0e14177744a7129471a3652489ab22284"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Payum/Be2Bill/zipball/605e43f0e14177744a7129471a3652489ab22284",
+                "reference": "605e43f0e14177744a7129471a3652489ab22284",
+                "shasum": ""
+            },
+            "require": {
+                "payum/payum": "0.6.*",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Payum\\Be2Bill": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Kotlyar",
+                    "email": "kotlyar.maksim@gmail.com"
+                },
+                {
+                    "name": "Payum project",
+                    "homepage": "http://payum.forma-dev.com/"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Payum/Be2Bill/contributors"
+                }
+            ],
+            "description": "Be2Bill payment lib",
+            "keywords": [
+                "be2bill",
+                "payment"
+            ],
+            "time": "2013-11-20 13:01:46"
         },
         {
             "name": "payum/omnipay-bridge",

@@ -50,6 +50,7 @@
         "payum/payum":                          "~0.6.3",
         "payum/payum-bundle":                   "~0.6.2",
         "payum/paypal-express-checkout-nvp":    "0.6.*",
+        "payum/be2bill":                        "0.6.*",
         "payum/omnipay-bridge":                 "0.6.*"
     },
     "require-dev": {
