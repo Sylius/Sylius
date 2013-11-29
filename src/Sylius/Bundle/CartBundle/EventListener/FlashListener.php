@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\Event;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
 /**
  * Flash message listener.
@@ -80,13 +79,18 @@ class FlashListener implements EventSubscriberInterface
         );
     }
 
-    public function addErrorFlash(Event $event)
+    public function addErrorFlash(FlashEvent $event)
     {
-        $this->session->getFlashBag()->add('error', $event->getMessage() ?: $this->translator->trans($this->messages[$event->getName()], array(), 'flashes'));
+        $this->addFlash('error', $event->getMessage(), $event->getName());
     }
 
-    public function addSuccessFlash(Event $event)
+    public function addSuccessFlash(FlashEvent $event)
     {
-        $this->session->getFlashBag()->add('success', $event->getMessage() ?: $this->translator->trans($this->messages[$event->getName()], array(), 'flashes'));
+        $this->addFlash('success', $event->getMessage(), $event->getName());
+    }
+
+    private function addFlash($type, $message, $event)
+    {
+        $this->session->getBag('flashes')->add($type, $message ?: $this->translator->trans($this->messages[$event], array(), 'flashes'));
     }
 }
