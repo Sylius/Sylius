@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -50,7 +50,7 @@ class OrderInventoryListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order inventory listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
             );
         }
 
@@ -68,7 +68,7 @@ class OrderInventoryListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order inventory listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
             );
         }
 

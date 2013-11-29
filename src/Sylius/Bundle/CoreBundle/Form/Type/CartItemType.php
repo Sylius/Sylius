@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartItemType as BaseCartItemType;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -59,7 +59,7 @@ class CartItemType extends BaseCartItemType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => array('Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface')
+                'product' => array('Sylius\Component\VariableProduct\Model\VariableProductInterface')
             ))
         ;
     }

@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.generator.variant.class">Sylius\Bundle\VariableProductBundle\Generator\VariantGenerator</parameter>
+        <parameter key="sylius.generator.variant.class">Sylius\Component\VariableProduct\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\VariableProductBundle\Validator\VariantUniqueValidator</parameter>
         <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariableProductBundle\Validator\VariantCombinationValidator</parameter>

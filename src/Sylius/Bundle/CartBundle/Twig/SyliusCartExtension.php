@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\CartBundle\Twig;
 
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormView;
 use Twig_Extension;
 use Twig_Function_Method;
 
@@ -22,7 +24,7 @@ use Twig_Function_Method;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCartExtension extends Twig_Extension
+class SyliusCartExtension extends \Twig_Extension
 {
     /**
      * Cart provider.
@@ -41,7 +43,7 @@ class SyliusCartExtension extends Twig_Extension
     /**
      * Form factory.
      *
-     * @var FormFactory
+     * @var FormFactoryInterface
      */
     protected $formFactory;
 
@@ -50,9 +52,9 @@ class SyliusCartExtension extends Twig_Extension
      *
      * @param CartProviderInterface $cartProvider
      * @param RepositoryInterface   $cartItemRepository
-     * @param FormFactory           $formFactory
+     * @param FormFactoryInterface  $formFactory
      */
-    public function __construct(CartProviderInterface $cartProvider, RepositoryInterface $cartItemRepository, FormFactory $formFactory)
+    public function __construct(CartProviderInterface $cartProvider, RepositoryInterface $cartItemRepository, FormFactoryInterface $formFactory)
     {
         $this->cartProvider = $cartProvider;
         $this->cartItemRepository = $cartItemRepository;
@@ -65,9 +67,9 @@ class SyliusCartExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_cart_exists'  => new Twig_Function_Method($this, 'hasCart'),
-            'sylius_cart_get'     => new Twig_Function_Method($this, 'getCurrentCart'),
-            'sylius_cart_form'    => new Twig_Function_Method($this, 'getItemFormView'),
+            'sylius_cart_exists'  => new \Twig_Function_Method($this, 'hasCart'),
+            'sylius_cart_get'     => new \Twig_Function_Method($this, 'getCurrentCart'),
+            'sylius_cart_form'    => new \Twig_Function_Method($this, 'getItemFormView'),
         );
     }
 

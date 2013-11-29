@@ -13,10 +13,10 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;

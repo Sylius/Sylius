@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Resource component for Sylius.",
     "keywords": ["resource", "storage", "persistence", "sylius"],
-    "homepage": "http://sylius.com",
+    "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
@@ -26,7 +26,9 @@
         "symfony/twig-bundle":             "~2.3",
         "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "0.12.*",
-        "white-october/pagerfanta-bundle": "1.0.*"
+        "white-october/pagerfanta-bundle": "1.0.*",
+
+        "sylius/resource":                 "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":      "2.0.*@dev",

@@ -11,11 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
-use Symfony\Component\EventDispatcher\Event;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Base class for checkout steps.

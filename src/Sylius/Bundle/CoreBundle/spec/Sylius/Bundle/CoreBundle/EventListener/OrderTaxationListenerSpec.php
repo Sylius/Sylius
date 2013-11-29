@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderTaxationListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessorInterface $taxationProcessor
-     */
-    function let($taxationProcessor)
+    function let(TaxationProcessorInterface $taxationProcessor)
     {
         $this->beConstructedWith($taxationProcessor);
     }
@@ -31,11 +31,7 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param \stdClass                                      $invalidSubject
-     */
-    function it_throws_exception_if_event_has_non_order_subject($event, $invalidSubject)
+    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
     {
         $event->getSubject()->willReturn($invalidSubject);
 
@@ -45,11 +41,7 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_calls_taxation_processor_on_order($taxationProcessor, $event, $order)
+    function it_calls_taxation_processor_on_order($taxationProcessor, GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
         $taxationProcessor->applyTaxes($order)->shouldBeCalled();

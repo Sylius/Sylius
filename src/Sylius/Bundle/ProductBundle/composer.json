@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Product catalog for your Symfony2 applications.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
-    "homepage": "http://sylius.com",
+    "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
@@ -22,8 +22,8 @@
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle":        "~2.3",
         "sylius/resource-bundle":          "1.0.*@dev",
+        "sylius/product":                  "1.0.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {

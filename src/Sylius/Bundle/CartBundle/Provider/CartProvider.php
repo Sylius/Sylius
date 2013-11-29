@@ -12,9 +12,10 @@
 namespace Sylius\Bundle\CartBundle\Provider;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Storage\CartStorageInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Default provider cart.

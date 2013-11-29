@@ -12,13 +12,12 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Context;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     */
-    function let($session)
+
+    function let(SessionInterface $session)
     {
         $this->beConstructedWith($session, 'EUR');
     }
@@ -30,7 +29,7 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_implements_Sylius_currency_context_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface');
+        $this->shouldImplement('Sylius\Component\Money\Context\CurrencyContextInterface');
     }
 
     function it_gets_default_currency()

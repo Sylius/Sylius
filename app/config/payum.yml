@@ -19,10 +19,10 @@ payum:
                     - sylius.payum.action.order_status
 
             storages:
-                Sylius\Bundle\CoreBundle\Model\Order:
+                Sylius\Component\Core\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
 
@@ -38,10 +38,10 @@ payum:
                     - sylius.payum.action.order_status
 
             storages:
-                Sylius\Bundle\CoreBundle\Model\Order:
+                Sylius\Component\Core\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
 
@@ -52,9 +52,9 @@ payum:
                     - sylius.payum.dummy.action.order_status
 
             storages:
-                Sylius\Bundle\CoreBundle\Model\Order:
+                Sylius\Component\Core\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm

@@ -50,7 +50,7 @@ class VariantMatchType extends AbstractType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => 'Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface'
+                'product' => 'Sylius\Component\VariableProduct\Model\VariableProductInterface'
             ))
         ;
     }

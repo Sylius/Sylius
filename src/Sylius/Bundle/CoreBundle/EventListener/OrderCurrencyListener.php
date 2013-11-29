@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
 
 /**
  * Sets currently selected currency on order object.
@@ -35,7 +35,7 @@ class OrderCurrencyListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order currency listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order currency listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
             );
         }
 

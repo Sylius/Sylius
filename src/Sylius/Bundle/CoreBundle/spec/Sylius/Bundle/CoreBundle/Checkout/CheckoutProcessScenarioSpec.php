@@ -13,17 +13,16 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CheckoutProcessScenarioSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $cartProvider
-     * @param Sylius\Bundle\CartBundle\Model\CartInterface            $cart
-     */
-    function let($cartProvider, $cart)
+    function let(CartProviderInterface $cartProvider, CartInterface $cart)
     {
         $cartProvider->getCart()->willReturn($cart);
 
@@ -40,10 +39,7 @@ class CheckoutProcessScenarioSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface $builder
-     */
-    function it_builds_checkout_process_with_proper_steps($builder)
+    function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder)
     {
         $builder->add('security', 'sylius_checkout_security')->willReturn($builder)->shouldBeCalled();
         $builder->add('addressing', 'sylius_checkout_addressing')->willReturn($builder)->shouldBeCalled();

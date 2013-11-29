@@ -12,13 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class OrderCurrencyListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface $currencyContext
-     */
-    function let($currencyContext)
+    function let(CurrencyContextInterface $currencyContext)
     {
         $this->beConstructedWith($currencyContext);
     }
@@ -28,11 +28,7 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param \stdClass                                      $invalidSubject
-     */
-    function it_throws_exception_if_event_has_non_order_subject($event, $invalidSubject)
+    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
     {
         $event->getSubject()->willReturn($invalidSubject);
 
@@ -42,11 +38,7 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_sets_currency_on_order($currencyContext, $event, $order)
+    function it_sets_currency_on_order($currencyContext, GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
         $currencyContext->getCurrency()->shouldBeCalled()->willReturn('PLN');

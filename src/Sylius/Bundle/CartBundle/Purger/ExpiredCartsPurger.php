@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\CartBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Repository\CartRepositoryInterface;
+use Sylius\Component\Cart\Purger\PurgerInterface;
 
 /**
  * Default cart purger.
@@ -32,7 +33,7 @@ class ExpiredCartsPurger implements PurgerInterface
     /**
      * Cart repository.
      *
-     * @var RepositoryInterface
+     * @var CartRepositoryInterface
      */
     protected $repository;
 
