@@ -21,7 +21,7 @@
 {{ form_widget(form._token) }}
 
 <div class="form-actions">
-    <a href="{{ path('sylius_checkout_display', {'stepName': context.previousStep.name}) }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+    <a href="{{ path('sylius_checkout_display', {'stepName': context.previousStep.name}) }}" class="btn btn-default btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
     <button type="submit" class="btn btn-primary btn-lg">{{ 'sylius.checkout.forward'|trans }} <i class="icon-chevron-right"></i></button>
 </div>
 

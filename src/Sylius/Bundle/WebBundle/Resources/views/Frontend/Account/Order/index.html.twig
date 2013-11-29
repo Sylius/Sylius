@@ -3,18 +3,19 @@
 
 {% block content %}
     <h4>{{ 'sylius.account.order.list'|trans }}</h4>
+    <br>
 
     <div class="row">
         {% if orders is not empty %}
         <table id="orders" class="table">
             <thead>
                 <tr>
-                    <td>{{ 'sylius.account.order.created_at'|trans }}</td>
-                    <td>{{ 'sylius.order.number'|trans }}</td>
-                    <td>{{ 'sylius.order.total'|trans }}</td>
-                    <td>{{ 'sylius.shipment.state'|trans }}</td>
-                    <td>{{ 'sylius.account.order.invoice'|trans }}</td>
-                    <td>&nbsp;</td>
+                    <th>{{ 'sylius.account.order.created_at'|trans }}</th>
+                    <th>{{ 'sylius.order.number'|trans }}</th>
+                    <th>{{ 'sylius.order.total'|trans }}</th>
+                    <th>{{ 'sylius.shipment.state'|trans }}</th>
+                    <th>{{ 'sylius.account.order.invoice'|trans }}</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>

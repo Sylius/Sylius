@@ -13,8 +13,6 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,13 +28,6 @@ use Symfony\Component\Intl\Intl;
 class FrontendMenuBuilder extends MenuBuilder
 {
     /**
-     * Currency repository.
-     *
-     * @var RepositoryInterface
-     */
-    protected $exchangeRateRepository;
-
-    /**
      * Taxonomy repository.
      *
      * @var RepositoryInterface
@@ -44,177 +35,66 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $taxonomyRepository;
 
     /**
-     * Cart provider.
-     *
-     * @var CartProviderInterface
-     */
-    protected $cartProvider;
-
-    /**
-     * Money extension.
-     *
-     * @var SyliusMoneyExtension
-     */
-    protected $moneyExtension;
-
-    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
      * @param SecurityContextInterface $securityContext
      * @param TranslatorInterface      $translator
-     * @param RepositoryInterface      $exchangeRateRepository
      * @param RepositoryInterface      $taxonomyRepository
-     * @param CartProviderInterface    $cartProvider
-     * @param SyliusMoneyExtension     $moneyExtension
      */
     public function __construct(
         FactoryInterface         $factory,
         SecurityContextInterface $securityContext,
         TranslatorInterface      $translator,
-        RepositoryInterface      $exchangeRateRepository,
-        RepositoryInterface      $taxonomyRepository,
-        CartProviderInterface    $cartProvider,
-        SyliusMoneyExtension     $moneyExtension
+        RepositoryInterface      $taxonomyRepository
     )
     {
         parent::__construct($factory, $securityContext, $translator);
 
-        $this->exchangeRateRepository = $exchangeRateRepository;
         $this->taxonomyRepository = $taxonomyRepository;
-        $this->cartProvider = $cartProvider;
-        $this->moneyExtension = $moneyExtension;
     }
 
     /**
-     * Builds frontend main menu.
+     * Builds menu for given taxonomy.
      *
      * @param Request $request
      *
      * @return ItemInterface
      */
-    public function createMainMenu(Request $request)
+    public function createTaxonomyMenu(Request $request, $taxonomy)
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
+                'class' => 'nav navbar-nav'
             )
         ));
 
-        $cart = $this->cartProvider->getCart();
+        $taxonomy = $this->taxonomyRepository->findOneByName($taxonomy);
 
-        $menu->addChild('cart', array(
-            'route' => 'sylius_cart_summary',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
-                '%items%' => $cart->getTotalItems(),
-                '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
-            ))),
-            'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
-        ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
-            '%items%' => $cart->getTotalItems(),
-            '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
-        )));
+        if (!$taxonomy) {
+            return $menu;
+        }
 
-        if ($this->securityContext->isGranted('ROLE_USER')) {
-            $route = $this->request === null ? '' : $this->request->get('_route');
+        foreach ($taxonomy->getTaxons() as $taxon) {
+            if ($taxon->hasChildren()) {
+                $childOptions = array(
+                    'attributes'         => array('class' => 'dropdown'),
+                    'childrenAttributes' => array('class' => 'dropdown-menu'),
+                    'labelAttributes'    => array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#')
+                );
 
-            if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
-                $menu->addChild('shop', array(
-                    'route' => 'sylius_homepage',
-                    'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.shop')),
-                    'labelAttributes' => array('icon' => 'icon-th icon-large', 'iconOnly' => false)
-                ))->setLabel($this->translate('sylius.frontend.menu.account.shop'));
+                $child = $menu
+                    ->addChild($taxon->getName(), $childOptions)
+                    ->setLabel($taxon->getName())
+                ;
+
+                $this->createTaxonomiesMenuNode($child, $taxon);
             } else {
-                $menu->addChild('account', array(
-                    'route' => 'sylius_account_homepage',
-                    'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.account')),
-                    'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
-                ))->setLabel($this->translate('sylius.frontend.menu.main.account'));
+                $menu->addChild($taxon->getName(), array(
+                    'route'           => 'sylius_product_index_by_taxon',
+                    'routeParameters' => array('permalink' => $taxon->getPermalink()),
+                ));
             }
-
-            $menu->addChild('logout', array(
-                'route' => 'fos_user_security_logout',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.logout')),
-                'labelAttributes' => array('icon' => 'icon-off icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.logout'));
-        } else {
-            $menu->addChild('login', array(
-                'route' => 'fos_user_security_login',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.login')),
-                'labelAttributes' => array('icon' => 'icon-lock icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.login'));
-            $menu->addChild('register', array(
-                'route' => 'fos_user_registration_register',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.register')),
-                'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
-        }
-
-        if ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
-            $menu->addChild('administration', array(
-                'route' => 'sylius_backend_dashboard',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
-                'labelAttributes' => array('icon' => 'icon-briefcase icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.administration'));
-        }
-
-        return $menu;
-    }
-
-    /**
-     * Builds frontend currency menu.
-     *
-     * @return ItemInterface
-     */
-    public function createCurrencyMenu()
-    {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
-        ));
-
-        foreach ($this->exchangeRateRepository->findAll() as $exchangeRate) {
-            $menu->addChild($exchangeRate->getCurrency(), array(
-                'route' => 'sylius_currency_change',
-                'routeParameters' => array('currency' => $exchangeRate->getCurrency()),
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $exchangeRate->getCurrency()))),
-            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($exchangeRate->getCurrency()));
-        }
-
-        return $menu;
-    }
-
-    /**
-     * Builds frontend taxonomies menu.
-     *
-     * @param Request $request
-     *
-     * @return ItemInterface
-     */
-    public function createTaxonomiesMenu(Request $request)
-    {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav'
-            )
-        ));
-
-        $childOptions = array(
-            'childrenAttributes' => array('class' => 'nav nav-list'),
-            'labelAttributes'    => array('class' => 'nav-header'),
-        );
-
-        $taxonomies = $this->taxonomyRepository->findAll();
-
-        foreach ($taxonomies as $taxonomy) {
-            $child = $menu->addChild($taxonomy->getName(), $childOptions);
-
-            if ($taxonomy->getRoot()->hasPath()) {
-                $child->setLabelAttribute('data-image', $taxonomy->getRoot()->getPath());
-            }
-
-            $this->createTaxonomiesMenuNode($child, $taxonomy->getRoot());
         }
 
         return $menu;
@@ -226,48 +106,12 @@ class FrontendMenuBuilder extends MenuBuilder
             $childMenu = $menu->addChild($child->getName(), array(
                 'route'           => 'sylius_product_index_by_taxon',
                 'routeParameters' => array('permalink' => $child->getPermalink()),
-                'labelAttributes' => array('icon' => 'icon-angle-right')
             ));
-            if ($child->getPath()) {
-                $childMenu->setLabelAttribute('data-image', $child->getPath());
+
+            if ($child->hasChildren()) {
+                $this->createTaxonomiesMenuNode($childMenu, $child);
             }
-
-            $this->createTaxonomiesMenuNode($childMenu, $child);
         }
-    }
-
-    /**
-     * Builds frontend social menu.
-     *
-     * @param Request $request
-     *
-     * @return ItemInterface
-     */
-    public function createSocialMenu(Request $request)
-    {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills pull-right'
-            )
-        ));
-
-        $menu->addChild('github', array(
-            'uri' => 'https://github.com/Sylius',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.github')),
-            'labelAttributes' => array('icon' => 'icon-github-sign icon-large', 'iconOnly' => true)
-        ));
-        $menu->addChild('twitter', array(
-            'uri' => 'https://twitter.com/Sylius',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.twitter')),
-            'labelAttributes' => array('icon' => 'icon-twitter-sign icon-large', 'iconOnly' => true)
-        ));
-        $menu->addChild('facebook', array(
-            'uri' => 'http://facebook.com/SyliusEcommerce',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.facebook')),
-            'labelAttributes' => array('icon' => 'icon-facebook-sign icon-large', 'iconOnly' => true)
-        ));
-
-        return $menu;
     }
 
     /**

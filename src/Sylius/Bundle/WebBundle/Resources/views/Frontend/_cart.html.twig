@@ -1,0 +1,9 @@
+<div class="pull-right cart-widget">
+{% set cart = sylius_cart_get() %}
+
+<a href="{{ path('sylius_cart_summary') }}" class="cart-widget"><span class="cart-widget-content"><i class="icon-shopping-cart"></i> {{ 'sylius.frontend.menu.main.cart'|trans({'%items%': cart.totalItems, '%total%': cart.total|sylius_money}, 'menu') }}</span></a>
+
+{% if not cart.empty %}
+| <a href="{{ path('sylius_checkout_start') }}">{{ 'sylius.cart.summary.checkout'|trans }}</a>
+{% endif %}
+</div>

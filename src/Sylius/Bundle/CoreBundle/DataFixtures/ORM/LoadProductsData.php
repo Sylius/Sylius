@@ -103,12 +103,12 @@ class LoadProductsData extends DataFixture
         $product = $this->createProduct();
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
+        $product->setName(sprintf('%s', ucfirst($this->faker->word)));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
 
-        $this->addMasterVariant($product);
+        $this->addMasterVariant($product, 't-shirt');
 
         $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
 
@@ -144,12 +144,12 @@ class LoadProductsData extends DataFixture
         $product = $this->createProduct();
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('Sticker "%s"', $this->faker->word));
+        $product->setName(sprintf('%s', ucfirst($this->faker->word)));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
 
-        $this->addMasterVariant($product);
+        $this->addMasterVariant($product, 'sticker');
 
         $this->setTaxons($product, array('Stickers', 'Stickypicky'));
 
@@ -180,11 +180,11 @@ class LoadProductsData extends DataFixture
         $product = $this->createProduct();
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('Mug "%s"', $this->faker->word));
+        $product->setName(sprintf('Mug %s', ucfirst($this->faker->word)));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
 
-        $this->addMasterVariant($product);
+        $this->addMasterVariant($product, 'mug');
 
         $this->setTaxons($product, array('Mugs', 'Mugland'));
 
@@ -213,11 +213,11 @@ class LoadProductsData extends DataFixture
         $isbn = $this->getUniqueISBN();
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
+        $product->setName(sprintf('%s "%s"', $author, ucfirst($this->faker->word)));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
 
-        $this->addMasterVariant($product, $isbn);
+        $this->addMasterVariant($product, 'book', $isbn);
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
 
@@ -259,7 +259,7 @@ class LoadProductsData extends DataFixture
      * @param ProductInterface $product
      * @param string           $sku
      */
-    private function addMasterVariant(ProductInterface $product, $sku = null)
+    private function addMasterVariant(ProductInterface $product, $type, $sku = null)
     {
         if (null === $sku) {
             $sku = $this->getUniqueSku();
@@ -274,7 +274,7 @@ class LoadProductsData extends DataFixture
 
         $productName = explode(' ', $product->getName());
         $image = clone $this->getReference(
-            'Sylius.Image.'.strtolower($productName[0])
+            'Sylius.Image.'.$type
         );
         $variant->addImage($image);
 

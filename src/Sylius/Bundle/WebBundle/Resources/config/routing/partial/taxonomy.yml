@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_partial_taxonomy:
+    pattern: /{name}
+    defaults:
+        _controller: sylius.controller.taxonomy:showAction
+        _sylius:
+            criteria: {'name': $name}
+            template: $template

@@ -1,0 +1,11 @@
+{% if is_granted('ROLE_USER') %}
+<ul class="links">
+    <li><a href="{{ path('sylius_account_homepage') }}">{{ 'sylius.my_account'|trans }}</a></li>
+    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'sylius.log_out'|trans }}</a></li>
+    {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+    <li><a href="{{ path('sylius_backend_index') }}">{{ 'sylius.administration'|trans }}</a></li>
+    {% endif %}
+</ul>
+{% else %}
+<a href="{{ path('fos_user_security_login') }}">{{ 'sylius.sign_in'|trans }}</a> or <a href="{{ path('fos_user_registration_register') }}">{{ 'sylius.create_account'|trans }}</a>
+{% endif %}

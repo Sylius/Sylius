@@ -1,5 +1,7 @@
 {% macro pagination(paginator) %}
 {% if paginator.haveToPaginate() %}
+<div class="col-md-12 center-text">
 {{ pagerfanta(paginator, 'twitter_bootstrap3_translated') }}
 {% endif %}
+</div>
 {% endmacro %}

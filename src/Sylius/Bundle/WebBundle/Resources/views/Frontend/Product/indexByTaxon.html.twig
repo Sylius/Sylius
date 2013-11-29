@@ -2,7 +2,7 @@
 
 {% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import list %}
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import grid %}
 
 {% block content %}
 <div class="page-header">
@@ -10,7 +10,7 @@
 </div>
 
 {{ pagination(products) }}
-{{ list(products) }}
+{{ grid(products) }}
 {{ pagination(products) }}
 
 {% endblock %}

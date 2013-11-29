@@ -1,0 +1,51 @@
+<hr>
+<div class="row row-links">
+    <div class="col-md-4">
+        <div class="block">
+            <h2>Our store</h2>
+            <p>
+            1 Main Street<br>
+            Los Angeles, California,<br>
+            90210 USA<br>
+            Phone: (555) 867 5309
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="block">
+        <h2>About us</h2>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+        Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+        </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="block-blank">
+        <h2>We accept</h2>
+        <p>
+        <img src="{{ asset('bundles/syliusweb/img/payments.gif') }}" />
+        </p>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="row row-footer">
+    <div class="col-md-4">
+        <p class="copyright pull-left">
+            &copy; Your store, {{ 'now'|date('Y') }}.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <ul class="links">
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        {% block social %}
+            {% include 'SyliusWebBundle:Frontend:_social.html.twig' %}
+        {% endblock %}
+    </div>
+</div>

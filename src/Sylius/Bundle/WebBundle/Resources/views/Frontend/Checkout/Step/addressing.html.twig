@@ -20,28 +20,27 @@
 
 {{ form_errors(form) }}
 
-<fieldset>
-    <div class="row">
-        <div class="col-md-6 address-container">
-            <div class="well">
-                <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
-                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
-                {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
-            </div>
-        </div>
-        <div class="col-md-6 hidden address-container" id="sylius-billing-address-container">
-            <div class="well">
-                <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
-                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
     </div>
-</fieldset>
+</div>
+
+<div class="col-md-12">
+    {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
+</div>
+
+<div class="row">
+    <div class="col-md-12 hide" id="sylius-billing-address-container">
+    <br />
+    {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
+    </div>
+</div>
 
 {{ form_widget(form._token) }}
 
 <div class="form-actions">
-    <a href="{{ path('sylius_cart_summary') }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+    <a href="{{ path('sylius_cart_summary') }}" class="btn btn-default btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
     <button type="submit" class="btn btn-primary btn-lg">{{ 'sylius.checkout.forward'|trans }} <i class="icon-chevron-right"></i></button>
 </div>
 

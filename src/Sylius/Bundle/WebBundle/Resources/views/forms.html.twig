@@ -60,6 +60,27 @@
 {% endspaceless %}
 {% endblock datetime_widget %}
 
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default(''))}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class ~ ' ' ~ (inline is defined and inline ? 'inline' : ''))|trim}) %}
+    {% if expanded %}
+        <div {{ block('widget_container_attributes') }}>
+    {% endif %}
+    {% for child in form %}
+        <div class="{{ multiple ? 'checkbox' : 'radio' }}">
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                {{ form_widget(child, {'attr': {'class': attr.widget_class|default('')}}) }}
+                {{ child.vars.label|trans({}, translation_domain) }}
+            </label>
+        </div>
+    {% endfor %}
+    {% if expanded %}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
 {% block date_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}

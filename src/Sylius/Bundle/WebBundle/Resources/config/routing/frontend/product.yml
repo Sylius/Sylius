@@ -7,6 +7,7 @@ sylius_product_index_by_taxon:
         _controller: sylius.controller.product:indexByTaxonAction
         _sylius:
             template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
+            paginate: 9
 
 sylius_product_show:
     pattern: /p/{slug}
