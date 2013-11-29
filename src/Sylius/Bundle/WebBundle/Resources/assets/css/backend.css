@@ -456,10 +456,12 @@ body.sylius_backend_product_index .sylius-products-table .sku {
     color: #666;
 }
 body.sylius_backend_product_index .sylius-products-table .id,
+body.sylius_backend_product_index .sylius-products-table .stock,
 body.sylius_backend_product_index .sylius-products-table .retail-price,
 body.sylius_backend_product_index .sylius-products-table .updated-at {
     text-align: center;
 }
+body.sylius_backend_product_index .sylius-products-table .stock,
 body.sylius_backend_product_index .sylius-products-table .retail-price,
 body.sylius_backend_product_index .sylius-products-table .updated-at {
     width: 150px;
