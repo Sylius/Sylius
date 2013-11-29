@@ -206,7 +206,7 @@ Feature: Products
 
     Scenario: Accessing the editing form from the list
         Given I am on the product index page
-         When I click "edit" near "Mug"
+         When I click "Edit" near "Mug"
          Then I should be editing product "Mug"
 
     Scenario: Updating the product name
