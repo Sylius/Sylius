@@ -7,7 +7,6 @@
 <table class="sylius-products-table table table-bordered">
     <thead>
         <tr>
-            <th></th>
             <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
             <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
             <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
@@ -19,7 +18,6 @@
     <tbody>
     {% for product in products %}
         <tr id="{{ product.id }}">
-            <td class="center-text"><input type="checkbox" value="{{ product.id }}" /></td>
             <td class="id">
                 {{ product.id }}
             </td>
