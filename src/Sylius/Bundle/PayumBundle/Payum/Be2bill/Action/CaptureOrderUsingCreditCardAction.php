@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Action\PaymentAwareAction;
 use Payum\Bridge\Spl\ArrayObject;
@@ -19,6 +19,9 @@ use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
+/**
+ * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ */
 class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 {
     /**
@@ -38,15 +41,18 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         if (empty($paymentDetails)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
-            $paymentDetails = array(
-                'card' => array(
-                    'number' => $obtainCreditCardRequest->getCreditCard()->getNumber(),
-                    'expiryMonth' => $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(),
-                    'expiryYear' => $obtainCreditCardRequest->getCreditCard()->getExpiryYear(),
-                    'cvv' => $obtainCreditCardRequest->getCreditCard()->getSecurityCode()
-                ),
-                'amount' => number_format($order->getTotal() / 100, 2),
-                'currency' => $order->getCurrency(),
+            $paymentDetails['AMOUNT'] = $order->getTotal();
+            $paymentDetails['CLIENTEMAIL'] = $order->getUser()->getEmail();
+            //$paymentDetails['CLIENTUSERAGENT'] = 'Firefox';
+            //$paymentDetails['CLIENTIP'] = 192.168.0.1;
+            $paymentDetails['CLIENTIDENT'] = $order->getUser()->getId();
+            //$paymentDetails['DESCRIPTION'] = 'Payment for digital stuff';
+            $paymentDetails['ORDERID'] = $order->getId();
+            $paymentDetails['CARDCODE'] = $obtainCreditCardRequest->getCreditCard()->getNumber();
+            $paymentDetails['CARDCVV'] = $obtainCreditCardRequest->getCreditCard()->getSecurityCode();
+            $paymentDetails['CARDFULLNAME'] = $obtainCreditCardRequest->getCreditCard()->getCardholderName();
+            $paymentDetails['CARDVALIDITYDATE'] = sprintf(
+                    '%02d-%02d', $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(), substr($obtainCreditCardRequest->getCreditCard()->getExpiryYear(), -2)
             );
         }
 
@@ -57,11 +63,9 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         try {
             $this->payment->execute(new CaptureRequest($paymentDetails));
 
-            unset($paymentDetails['card']);
-            $order->getPayment()->setDetails((array) $paymentDetails);
+            $order->getPayment()->setDetails((array) $this->sanitizePayment($paymentDetails));
         } catch (\Exception $e) {
-            unset($paymentDetails['card']);
-            $order->getPayment()->setDetails((array) $paymentDetails);
+            $order->getPayment()->setDetails((array) $this->sanitizePayment($paymentDetails));
 
             throw $e;
         }
@@ -76,5 +80,21 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $request instanceof SecuredCaptureRequest &&
             $request->getModel() instanceof OrderInterface
         ;
+    }
+
+    /**
+     * Sanitize payementDetails array by removing all card-related data
+     * @param array $paymentDetails
+     * @return array $paymentDetails
+     */
+    protected function sanitizePayment(ArrayObject $paymentDetails)
+    {
+        foreach (array('CARDCODE', 'CARDCVV', 'CARDFULLNAME', 'CARDVALIDITYDATE') as $idx) {
+            if (isset($paymentDetails[$idx])) {
+                unset($paymentDetails[$idx]);
+            }
+        }
+
+        return $paymentDetails;
     }
 }
