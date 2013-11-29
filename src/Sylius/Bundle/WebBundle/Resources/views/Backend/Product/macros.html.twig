@@ -50,7 +50,7 @@
             </td>
             {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
                 <td class="stock in-stock">
-                    {{ product.masterVariant.onHand }} on Hand
+                    {{ product.masterVariant.onHand }}
                 </td>
             {% else %}
                 <td class="stock out-of-stock text-muted">
