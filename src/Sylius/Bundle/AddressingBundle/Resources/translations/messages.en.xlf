@@ -14,6 +14,10 @@
         <source>sylius.form.address.country</source>
         <target>Country</target>
       </trans-unit>
+      <trans-unit id="cd3fe802ed0b05b84afefc012f0fb02f" resname="sylius.form.address.province">
+        <source>sylius.form.address.province</source>
+        <target>State</target>
+      </trans-unit>
       <trans-unit id="e1eaef329d355a008d8fddf6c6bb301a" resname="sylius.form.address.first_name">
         <source>sylius.form.address.first_name</source>
         <target>First name</target>
@@ -40,7 +44,7 @@
       </trans-unit>
       <trans-unit id="fb2f23317fa10e33b0eb423a814aea67" resname="sylius.form.country.provinces">
         <source>sylius.form.country.provinces</source>
-        <target>Provinces</target>
+        <target>States</target>
       </trans-unit>
       <trans-unit id="0232425332ba32edd83d5c3dfe8a6080" resname="sylius.form.country.select">
         <source>sylius.form.country.select</source>
@@ -49,6 +53,10 @@
       <trans-unit id="90c305763d958c3dd319253193a69c4e" resname="sylius.form.province.name">
         <source>sylius.form.province.name</source>
         <target>Name</target>
+      </trans-unit>
+      <trans-unit id="6ad7f572d62b393704c8b2de64c652d7" resname="sylius.form.province.select">
+        <source>sylius.form.province.select</source>
+        <target>Select</target>
       </trans-unit>
       <trans-unit id="2df1138e962c235812c817d080de1b73" resname="sylius.form.zone.members">
         <source>sylius.form.zone.members</source>
