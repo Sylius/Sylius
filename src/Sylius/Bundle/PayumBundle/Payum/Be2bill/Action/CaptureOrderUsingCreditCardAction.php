@@ -18,12 +18,20 @@ use Payum\Request\CaptureRequest;
 use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 {
+    protected $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,10 +51,10 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 
             $paymentDetails['AMOUNT'] = $order->getTotal();
             $paymentDetails['CLIENTEMAIL'] = $order->getUser()->getEmail();
-            //$paymentDetails['CLIENTUSERAGENT'] = 'Firefox';
-            //$paymentDetails['CLIENTIP'] = 192.168.0.1;
+            $paymentDetails['CLIENTUSERAGENT'] = $this->container->get('request')->headers->get('User-Agent');
+            $paymentDetails['CLIENTIP'] = $this->container->get('request')->getClientIp();
             $paymentDetails['CLIENTIDENT'] = $order->getUser()->getId();
-            //$paymentDetails['DESCRIPTION'] = 'Payment for digital stuff';
+            $paymentDetails['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
             $paymentDetails['ORDERID'] = $order->getId();
             $paymentDetails['CARDCODE'] = $obtainCreditCardRequest->getCreditCard()->getNumber();
             $paymentDetails['CARDCVV'] = $obtainCreditCardRequest->getCreditCard()->getSecurityCode();
