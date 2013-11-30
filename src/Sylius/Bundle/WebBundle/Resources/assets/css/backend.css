@@ -467,3 +467,45 @@ body.sylius_backend_product_index .sylius-products-table .updated-at,
 body.sylius_backend_product_index .sylius-products-table .actions{
     width: 150px;
 }
+
+/** Order. **/
+body.sylius_backend_order_show .sylius-order-content-table .picture,
+body.sylius_backend_order_show .sylius-order-content-table .quantity,
+body.sylius_backend_order_show .sylius-order-content-table .unit-price,
+body.sylius_backend_order_show .sylius-order-content-table .total {
+    width: 110px;
+}
+body.sylius_backend_order_show .sylius-order-content-table .info .name {
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0 0 5px 0;
+}
+body.sylius_backend_order_show .sylius-order-content-table .info ul {
+    margin-bottom: 0;
+}
+body.sylius_backend_order_show .sylius-order-content-table .info .sku code {
+    background: #FCFCFC;
+    color: #666;
+}
+body.sylius_backend_order_show .sylius-order-content-table tr.taxes td,
+body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td,
+body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td {
+    vertical-align: middle;
+}
+body.sylius_backend_order_show .sylius-order-content-table tr.taxes td h5,
+body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td h5,
+body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td h5 {
+    margin-top: 0;
+}
+body.sylius_backend_order_show .sylius-order-content-table tr.taxes td p,
+body.sylius_backend_order_show .sylius-order-content-table tr.taxes td ul,
+body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td p,
+body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td ul,
+body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td p,
+body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td ul {
+    margin-bottom: 0;
+}
+body.sylius_backend_order_show .sylius-order-content-table span.amount {
+    min-width: 65px;
+    display: inline-block;
+}
