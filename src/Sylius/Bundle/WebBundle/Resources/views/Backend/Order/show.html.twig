@@ -13,120 +13,59 @@
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.order.show_header'|trans({'%number%': order.number})|raw }}</h1>
+    <div class="actions-menu">
+        {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+        {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
+    </div>
+    <h1><span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th colspan="2">{{ 'sylius.order.general_info'|trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>{{ 'sylius.order.id'|trans }}</strong></td>
-                <td>{{ order.id }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.number'|trans }}</strong></td>
-                <td>#{{ order.number }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.total'|trans }}</strong></td>
-                <td>{{ order.total|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.items_total'|trans }}</strong></td>
-                <td>{{ order.itemsTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.tax_total'|trans }}</strong></td>
-                <td>{{ order.taxTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.shipping_total'|trans }}</strong></td>
-                <td>{{ order.shippingTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.promotion_total'|trans }}</strong></td>
-                <td>{{ order.promotionTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
-                <td>
-                    <strong>
-                        {#
-                        <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                            {{ order.user.username }}
-                        </a>
-                        #}
-                    </strong>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.created_at'|trans }}</strong></td>
-                <td>{{ order.createdAt|date }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col col-md-3">
+        <h4>{{ 'sylius.order.billing_address'|trans|title }}</h4>
+        <p>
+            <strong>{{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}</strong>
+        </p>
+        <address>
+            {% if order.billingAddress.company %}
+                {{ order.billingAddress.company }}<br/>
+            {% endif %}
+            {{ order.billingAddress.street }}<br/>
+            {{ order.billingAddress.city }}<br/>
+            {% if order.billingAddress.province %}
+                {{ order.billingAddress.province }}<br/>
+            {% endif %}
+            {{ order.billingAddress.country }} {{ order.billingAddress.postcode }}
+        </address>
     </div>
-    <div class="col-md-6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="5">
-                        {{ 'sylius.order.shipments'|trans }}
-                    </th>
-                </tr>
-                <tr>
-                    <th>{{ 'sylius.shipment.id'|trans }}</th>
-                    <th>{{ 'sylius.shipment.method'|trans }}</th>
-                    <th>{{ 'sylius.shipment.state'|trans }}</th>
-                    <th>{{ 'sylius.shipment.updated_at'|trans }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for shipment in order.shipments %}
-                <tr>
-                    <td>{{ shipment.id }}</td>
-                    <td>{{ shipment.method.name }}</td>
-                    <td>{{ shipment.state }}</td>
-                    <td>{{ shipment.updatedAt|date }}</td>
-                    <td>
-                        <div class="pull-right">
-                            {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
-                        </div>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5">
-                        <hr />
-                        <div class="alert alert-info">{{ 'sylius.order.no_shipments'|trans }}</div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="col col-md-3">
+        <h4>{{ 'sylius.order.shipping_address'|trans|title }}</h4>
+        <p><strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong></p>
+        <address>
+            {% if order.shippingAddress.company %}
+                {{ order.shippingAddress.company }}<br/>
+            {% endif %}
+            {{ order.shippingAddress.street }}<br/>
+            {{ order.shippingAddress.city }}<br/>
+            {% if order.shippingAddress.province %}
+                {{ order.shippingAddress.province }}<br/>
+            {% endif %}
+            {{ order.shippingAddress.country }} {{ order.shippingAddress.postcode }}
+        </address>
+    </div>
+    <div class="col col-md-6">
+        <h4>Order Details</h4>
+        <dl>
+            <dt>{{ 'sylius.order.created_at'|trans }}</dt>
+            <dd>{{ order.createdAt|date }}</dd>
+            <dt>Email</dt>
+            <dd>{{ order.user.email }}</dd>
+        </dl>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': order.shippingAddress, 'title': 'sylius.order.shipping_address'|trans} %}
-    </div>
-    <div class="col-md-6">
-        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': order.billingAddress, 'title': 'sylius.order.billing_address'|trans} %}
-    </div>
-</div>
-<hr />
-<div class="well">
-    {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.order.manage'|trans) }}
-    {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
-    {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
-</div>
+
+<hr/>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -256,6 +195,45 @@
             </td>
         </tr>
     </tfoot>
+</table>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th colspan="5">
+            {{ 'sylius.order.shipments'|trans }}
+        </th>
+    </tr>
+    <tr>
+        <th>{{ 'sylius.shipment.id'|trans }}</th>
+        <th>{{ 'sylius.shipment.method'|trans }}</th>
+        <th>{{ 'sylius.shipment.state'|trans }}</th>
+        <th>{{ 'sylius.shipment.updated_at'|trans }}</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for shipment in order.shipments %}
+        <tr>
+            <td>{{ shipment.id }}</td>
+            <td>{{ shipment.method.name }}</td>
+            <td>{{ shipment.state }}</td>
+            <td>{{ shipment.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">
+                <hr />
+                <div class="alert alert-info">{{ 'sylius.order.no_shipments'|trans }}</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
 </table>
 
 <table class="table table-striped table-bordered">

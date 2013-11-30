@@ -1032,7 +1032,7 @@
       </trans-unit>
       <trans-unit id="0cd9ee7a56fb7b1e6f0e5e8711861558" resname="sylius.order.show_header">
         <source>sylius.order.show_header</source>
-        <target>Order details</target>
+        <target>Order #%number%</target>
       </trans-unit>
       <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.checkout">
         <source>sylius.order.state.checkout</source>
