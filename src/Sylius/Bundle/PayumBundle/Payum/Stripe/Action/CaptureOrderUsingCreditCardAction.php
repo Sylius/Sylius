@@ -33,12 +33,13 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 
         /** @var OrderInterface $order */
         $order = $request->getModel();
+        $payment = $order->getPayment();
 
-        $paymentDetails = $order->getPayment()->getDetails();
-        if (empty($paymentDetails)) {
+        $details = $payment->getDetails();
+        if (empty($details)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
-            $paymentDetails = array(
+            $details = array(
                 'card' => array(
                     'number' => $obtainCreditCardRequest->getCreditCard()->getNumber(),
                     'expiryMonth' => $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(),
@@ -48,20 +49,25 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
                 'amount' => number_format($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
             );
+
+            $payment->setDetails($details);
         }
 
-        // TODO: find a way to simply the next logic
-
-        $paymentDetails = ArrayObject::ensureArrayObject($paymentDetails);
-
         try {
-            $this->payment->execute(new CaptureRequest($paymentDetails));
+            $request->setModel($payment);
+            $this->payment->execute($request);
 
-            unset($paymentDetails['card']);
-            $order->getPayment()->setDetails((array) $paymentDetails);
+            $request->setModel($order);
+
+            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
+            $details = $payment->getDetails();
+            unset($details['card']);
+            $payment->setDetails($details);
         } catch (\Exception $e) {
-            unset($paymentDetails['card']);
-            $order->getPayment()->setDetails((array) $paymentDetails);
+            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
+            $details = $payment->getDetails();
+            unset($details['card']);
+            $payment->setDetails($details);
 
             throw $e;
         }

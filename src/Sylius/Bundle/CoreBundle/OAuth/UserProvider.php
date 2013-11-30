@@ -33,11 +33,17 @@ class UserProvider extends FOSUBUserProvider
         try {
             return parent::loadUserByOAuthUserResponse($response);
         } catch (UsernameNotFoundException $e) {
-            if (null === $user = $this->userManager->findUserByEmail($response->getEmail())) {
-                return $this->createUserByOAuthUserResponse($response);
+            if (null !== $response->getEmail()) {
+                $user = $this->userManager->findUserByUsernameOrEmail($response->getEmail());
+            } else {
+                $user = $this->userManager->findUserByUsername($response->getNickname());
             }
 
-            return $this->updateUserByOAuthUserResponse($user, $response);
+            if ($user) {
+                return $this->updateUserByOAuthUserResponse($user, $response);
+            }
+
+            return $this->createUserByOAuthUserResponse($response);
         }
     }
 
@@ -70,9 +76,13 @@ class UserProvider extends FOSUBUserProvider
             $user->setEmail($email);
         }
 
-        if (null === $this->userManager->findUserByUsername($response->getNickname())) {
+        // if username was not yet set (i.e. by internal call in `setEmail()`), use nickname
+        if (!$user->getUsername()) {
             $user->setUsername($response->getNickname());
         }
+
+        // set random password to prevent issue with not nullable field & potential security hole
+        $user->setPlainPassword(substr(sha1($response->getAccessToken()), 0, 10));
 
         $user->setEnabled(true);
 
