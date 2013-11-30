@@ -24,10 +24,8 @@
 <div class="row">
     <div class="col col-md-3">
         <h4>{{ 'sylius.order.billing_address'|trans|title }}</h4>
-        <p>
-            <strong>{{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}</strong>
-        </p>
         <address>
+            <strong>{{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}</strong><br/>
             {% if order.billingAddress.company %}
                 {{ order.billingAddress.company }}<br/>
             {% endif %}
@@ -41,8 +39,8 @@
     </div>
     <div class="col col-md-3">
         <h4>{{ 'sylius.order.shipping_address'|trans|title }}</h4>
-        <p><strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong></p>
         <address>
+            <strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong><br/>
             {% if order.shippingAddress.company %}
                 {{ order.shippingAddress.company }}<br/>
             {% endif %}
