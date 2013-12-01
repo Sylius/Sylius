@@ -2376,12 +2376,12 @@
             "version": "v1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/adrianmacneil/omnipay.git",
+                "url": "https://github.com/omnipay/omnipay.git",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adrianmacneil/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
+                "url": "https://api.github.com/repos/omnipay/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450",
                 "shasum": ""
             },
@@ -2415,7 +2415,7 @@
                 }
             ],
             "description": "A framework agnostic, multi-gateway payment processing library",
-            "homepage": "https://github.com/adrianmacneil/omnipay",
+            "homepage": "https://github.com/omnipay/omnipay",
             "keywords": [
                 "2checkout",
                 "2co",
