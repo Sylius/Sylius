@@ -12,24 +12,23 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Action\PaymentAwareAction;
-use Payum\Bridge\Spl\ArrayObject;
+new \Payum\Exception\LogicException;
 use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\CaptureRequest;
 use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 {
-    protected $container;
+    protected $httpRequest;
 
-    public function __construct(ContainerInterface $container)
+    public function setRequest(Request $request = null)
     {
-        $this->container = $container;
+        $this->httpRequest = $request;
     }
 
     /**
@@ -40,6 +39,10 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         /** @var $request SecuredCaptureRequest */
         if (!$this->supports($request)) {
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
+        }
+
+        if (!$this->httpRequest) {
+            throw new LogicException('The action can be run only when http request is set.');
         }
 
         /** @var OrderInterface $order */
@@ -53,8 +56,8 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 
             $details['AMOUNT'] = $order->getTotal();
             $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
-            $details['CLIENTUSERAGENT'] = $this->container->get('request')->headers->get('User-Agent', 'Unknown');
-            $details['CLIENTIP'] = $this->container->get('request')->getClientIp();
+            $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
+            $details['CLIENTIP'] = $this->httpRequest->getClientIp();
             $details['CLIENTIDENT'] = $order->getUser()->getId();
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
             $details['ORDERID'] = $order->getId();
