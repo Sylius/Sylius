@@ -58,6 +58,7 @@ payum:
                     - sylius.payum.be2bill.action.capture_order_using_credit_card
                     - sylius.payum.action.obtain_credit_card
                     - sylius.payum.action.order_status
+                    - sylius.payum.action.execute_same_request_with_payment_details
 
             storages:
                 Sylius\Bundle\CoreBundle\Model\Order:

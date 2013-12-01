@@ -44,36 +44,43 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 
         /** @var OrderInterface $order */
         $order = $request->getModel();
+        $payment = $order->getPayment();
 
-        $paymentDetails = $order->getPayment()->getDetails();
-        if (empty($paymentDetails)) {
+        $details = $payment->getDetails();
+
+        if (empty($details)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
-            $paymentDetails['AMOUNT'] = $order->getTotal();
-            $paymentDetails['CLIENTEMAIL'] = $order->getUser()->getEmail();
-            $paymentDetails['CLIENTUSERAGENT'] = $this->container->get('request')->headers->get('User-Agent');
-            $paymentDetails['CLIENTIP'] = $this->container->get('request')->getClientIp();
-            $paymentDetails['CLIENTIDENT'] = $order->getUser()->getId();
-            $paymentDetails['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
-            $paymentDetails['ORDERID'] = $order->getId();
-            $paymentDetails['CARDCODE'] = $obtainCreditCardRequest->getCreditCard()->getNumber();
-            $paymentDetails['CARDCVV'] = $obtainCreditCardRequest->getCreditCard()->getSecurityCode();
-            $paymentDetails['CARDFULLNAME'] = $obtainCreditCardRequest->getCreditCard()->getCardholderName();
-            $paymentDetails['CARDVALIDITYDATE'] = sprintf(
+            $details['AMOUNT'] = $order->getTotal();
+            $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
+            $details['CLIENTUSERAGENT'] = $this->container->get('request')->headers->get('User-Agent', 'Unknown');
+            $details['CLIENTIP'] = $this->container->get('request')->getClientIp();
+            $details['CLIENTIDENT'] = $order->getUser()->getId();
+            $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
+            $details['ORDERID'] = $order->getId();
+            $details['CARDCODE'] = $obtainCreditCardRequest->getCreditCard()->getNumber();
+            $details['CARDCVV'] = $obtainCreditCardRequest->getCreditCard()->getSecurityCode();
+            $details['CARDFULLNAME'] = $obtainCreditCardRequest->getCreditCard()->getCardholderName();
+            $details['CARDVALIDITYDATE'] = sprintf(
                     '%02d-%02d', $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(), substr($obtainCreditCardRequest->getCreditCard()->getExpiryYear(), -2)
             );
+
+            $payment->setDetails($details);
         }
 
-        // TODO: find a way to simply the next logic
-
-        $paymentDetails = ArrayObject::ensureArrayObject($paymentDetails);
-
         try {
-            $this->payment->execute(new CaptureRequest($paymentDetails));
+            $request->setModel($payment);
+            $this->payment->execute($request);
 
-            $order->getPayment()->setDetails((array) $this->sanitizePayment($paymentDetails));
+            $request->setModel($order);
+
+            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
+            $details = $this->sanitizePayment($payment->getDetails());
+            $payment->setDetails($details);
         } catch (\Exception $e) {
-            $order->getPayment()->setDetails((array) $this->sanitizePayment($paymentDetails));
+            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
+            $details = $this->sanitizePayment($payment->getDetails());
+            $payment->setDetails($details);
 
             throw $e;
         }
@@ -91,18 +98,16 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
     }
 
     /**
-     * Sanitize payementDetails array by removing all card-related data
-     * @param array $paymentDetails
-     * @return array $paymentDetails
+     * Sanitize paymentDetails array by removing all card-related data
+     * @param array $details
+     * @return array $details
      */
-    protected function sanitizePayment(ArrayObject $paymentDetails)
+    protected function sanitizePayment(array $details)
     {
         foreach (array('CARDCODE', 'CARDCVV', 'CARDFULLNAME', 'CARDVALIDITYDATE') as $idx) {
-            if (isset($paymentDetails[$idx])) {
-                unset($paymentDetails[$idx]);
-            }
+            unset($details[$idx]);
         }
 
-        return $paymentDetails;
+        return $details;
     }
 }
