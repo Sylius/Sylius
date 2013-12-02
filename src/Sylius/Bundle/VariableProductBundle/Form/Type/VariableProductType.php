@@ -39,7 +39,6 @@ class VariableProductType extends ProductType
                 'type'             => 'sylius_product_property',
                 'allow_add'        => true,
                 'allow_delete'     => true,
-                'allow_delete'     => true,
                 'item_by_line'     => 2,
                 'button_add_label' => 'sylius.product.add_property',
                 'by_reference'     => false,

@@ -1,32 +1,23 @@
-<fieldset>
-    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.presentation, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.type, {'attr': {'class': 'input-lg'}}) }}
-    {% if form.choices is defined %}
-    {% spaceless %}
-        <div class="property-choices-container hidden">
-            <hr />
-            <div id="sylius-assortment-property-choices" class="collection-container" data-prototype="{{ form_row(form.choices.vars.prototype, {'label' : 'Choice __name__'})|e }}">
-                {% for key, choice in form.choices %}
-                    <div class="control-group">
-                        {{ form_label(choice, 'Choice ' ~ key) }}
-                        <div class="controls">
-                            {{ form_widget(choice) }}
-                            <a class="btn btn-danger delete-link sylius_property_choices_{{ key }}_delete" href="#"><i class="glyphicon glyphicon-trash"></i></a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <a href="#" class="btn btn-success" data-collection-button="add" data-prototype="sylius-assortment-property-choices" data-collection="sylius-assortment-property-choices">
-                        {{ 'sylius.property.add_choice'|trans }}
-                    </a>
-                </div>
-            </div>
-        </div>
-    {% endspaceless %}
-    {% endif %}
-</fieldset>
+{% if form.type.vars.value == constant('Sylius\\Bundle\\ProductBundle\\Model\\PropertyTypes::CHOICE') %}
+    {% set leftCss = 'col-md-6' %}
+    {% set rightCss = 'col-md-6' %}
+{% else %}
+    {% set rightCss = 'hide' %}
+{% endif %}
+
+<div class="row-fluid">
+    <div class="{{ leftCss|default }}" data-config-form="main">
+        {{ form_row(form.name) }}
+        {{ form_row(form.presentation) }}
+        {{ form_row(form.type) }}
+    </div>
+
+    <div class="{{ rightCss|default }}"
+         data-config-form="container">
+        {% if form.configuration is defined %}
+        {{ form_widget(form.configuration) }}
+        {% endif %}
+    </div>
+</div>
 
 {{ form_widget(form._token) }}

@@ -280,6 +280,7 @@ form.form-signin .form-control:focus {
     border-bottom: 3px solid #ddd;
     margin-bottom: 10px;
     text-align: center;
+    clear:both;
 }
 .actions-menu {
     float: right;
