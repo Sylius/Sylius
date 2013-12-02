@@ -238,7 +238,7 @@ Feature: Products
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Product has been successfully updated."
-          And "Featured" should appear on the page
+          And I should see "Featured"
 
     Scenario: Selecting more than one taxon from taxonomy
         Given I am editing product "Black T-Shirt"
@@ -248,7 +248,8 @@ Feature: Products
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Product has been successfully updated."
-          And "Featured" should appear on the page
+          And I should see "Featured"
+          And I should see "New"
 
     @javascript
     Scenario: Selecting more than one taxon from taxonomy
@@ -259,36 +260,11 @@ Feature: Products
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Product has been successfully updated."
           And I should see "This product has no properties defined"
-
-    Scenario: Deleting product
-        Given I am on the page of product "Mug"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the product index page
-          And I should see "Product has been successfully deleted."
-
-    @javascript
-    Scenario: Deleting product with js modal
-        Given I am on the page of product "Mug"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the product index page
-          And I should see "Product has been successfully deleted."
-
     Scenario: Deleted product disappears from the list
         Given I am on the page of product "Sticker"
          When I press "delete"
          Then I should see "Do you want to delete this item"
          When I press "delete"
-         Then I should be on the product index page
-          And I should not see product with name "Sticker" in that list
-
-    @javascript
-    Scenario: Deleted product disappears from the list with js modal
-        Given I am on the page of product "Sticker"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
          Then I should be on the product index page
           And I should not see product with name "Sticker" in that list
 

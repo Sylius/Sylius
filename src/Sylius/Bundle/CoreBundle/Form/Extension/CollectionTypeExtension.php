@@ -27,6 +27,10 @@ class CollectionTypeExtension extends AbstractTypeExtension
             $view->vars['button_add_label'] = $options['button_add_label'];
         }
 
+        if (array_key_exists('button_delete_label', $options)) {
+            $view->vars['button_delete_label'] = $options['button_delete_label'];
+        }
+
         if (array_key_exists('item_by_line', $options)) {
             $view->vars['item_by_line'] = $options['item_by_line'];
         }
@@ -39,6 +43,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
     {
         $resolver->setOptional(array(
             'button_add_label',
+            'button_delete_label',
             'item_by_line',
         ));
 
@@ -47,8 +52,9 @@ class CollectionTypeExtension extends AbstractTypeExtension
         ));
 
         $resolver->setDefaults(array(
-            'button_add_label' => 'form.collection.add',
-            'item_by_line' => 1,
+            'button_add_label'    => 'form.collection.add',
+            'button_delete_label' => false,
+            'item_by_line'        => 1,
         ));
     }
 

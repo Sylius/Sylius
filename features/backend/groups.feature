@@ -49,13 +49,14 @@ Feature: User groups management
           And I press "Create"
          Then I should be on the group index page
           And I should see group with name "Dealers" in the list
+          And I should see "Group has been successfully created."
 
     Scenario: Selecting the groups for user
         Given I am editing user with username "rick@example.com"
          When I select "Retail Customers" from "Groups"
           And I press "Save changes"
          Then I should be on the page of user with username "rick@example.com"
-          And "User has been successfully updated." should appear on the page
+          And I should see "User has been successfully updated."
 
     Scenario: Accessing the editing form from the list
         Given I am on the group index page
@@ -67,8 +68,8 @@ Feature: User groups management
          When I fill in "Name" with "Premium Customers"
           And I press "Save changes"
          Then I should be on the group index page
-          And "Group has been successfully updated." should appear on the page
-          And "Premium Customers" should appear on the page
+          And I should see "Premium Customers"
+          And I should see "Group has been successfully updated."
           But I should not see "Wholesale Customers"
 
     Scenario: Deleting group
@@ -77,8 +78,8 @@ Feature: User groups management
          Then I should see "Do you want to delete this item"
          When I press "delete"
          Then I should still be on the group index page
-          And I should see "Group has been successfully deleted."
           And I should not see group with name "Wholesale Customers" in that list
+          And I should see "Group has been successfully deleted."
 
     @javascript
     Scenario: Deleting group with js modal
@@ -86,5 +87,4 @@ Feature: User groups management
          When I click "delete" near "Wholesale Customers"
           And I click "delete" from the confirmation modal
          Then I should still be on the group index page
-          And I should see "Group has been successfully deleted."
           And I should not see group with name "Wholesale Customers" in that list

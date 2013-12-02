@@ -134,4 +134,3 @@ Feature: Product variants
          When I click "delete" near "T-Shirt size: L"
           And I click "delete" from the confirmation modal
          Then I should be on the page of product "Black T-Shirt"
-          And I should see "Variant has been successfully deleted."

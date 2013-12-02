@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.product_property.class">Sylius\Bundle\ProductBundle\Form\Type\ProductPropertyType</parameter>
-        <parameter key="sylius.form.type.prototype_configuration.class">Sylius\Bundle\ProductBundle\Form\Type\PropertyTextChoiceType</parameter>
+        <parameter key="sylius.form.type.prototype_configuration.class">Sylius\Bundle\ProductBundle\Form\Type\PropertyConfigurationType</parameter>
     </parameters>
 
     <services>

@@ -90,5 +90,4 @@ Feature: Exchange rates
          When I press "delete" near "US Dollar"
           And I click "delete" from the confirmation modal
          Then I should still be on the exchange rate index page
-          And I should see "Exchange rate has been successfully deleted."
-          But I should not see exchange rate with name "US Dollar" in the list
+          And I should not see exchange rate with name "US Dollar" in the list

@@ -91,40 +91,17 @@ Feature: Users management
          When I fill in "Email" with "umpirsky@gmail.com"
           And I press "Save changes"
          Then I should be on the page of user with username "umpirsky@gmail.com"
-          And "User has been successfully updated." should appear on the page
-          And "umpirsky@gmail.com" should appear on the page
+          And I should see "User has been successfully updated."
+          And I should see "umpirsky@gmail.com"
 
-    Scenario: Deleting user
-        Given I am on the page of user with username "rick@foo.com"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the user index page
-          And I should see "User has been successfully deleted."
-
-    @javascript
-    Scenario: Deleting user with js modal
-        Given I am on the page of user with username "rick@foo.com"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the user index page
-          And I should see "User has been successfully deleted."
-
-    Scenario: Deleted user disappears from the list
+    Scenario: Deleting user disappears from the list
         Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
          Then I should see "Do you want to delete this item"
          When I press "delete"
          Then I should be on the user index page
           And I should not see user with username "rick@foo.com" in that list
-
-    @javascript
-    Scenario: Deleted user disappears from the list with js modal
-        Given I am on the page of user with username "rick@foo.com"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the user index page
-          And I should not see user with username "rick@foo.com" in that list
+          And I should see "User has been successfully deleted."
 
     Scenario: Deleting user from the list
         Given I am on the user index page
@@ -132,8 +109,8 @@ Feature: Users management
          Then I should see "Do you want to delete this item"
          When I press "delete"
          Then I should still be on the user index page
-          And "User has been successfully deleted." should appear on the page
-          But I should not see user with username "rick@foo.com" in that list
+          And I should see "User has been successfully deleted."
+          And I should not see user with username "rick@foo.com" in that list
 
     @javascript
     Scenario: Deleting user from the list with js modal
@@ -141,5 +118,4 @@ Feature: Users management
          When I click "delete" near "rick@foo.com"
           And I click "delete" from the confirmation modal
          Then I should still be on the user index page
-          And "User has been successfully deleted." should appear on the page
-          But I should not see user with username "rick@foo.com" in that list
+          And I should not see user with username "rick@foo.com" in that list

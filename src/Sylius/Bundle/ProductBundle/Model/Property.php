@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Bundle\ProductBundle\Model;
+
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
@@ -189,8 +190,7 @@ class Property implements PropertyInterface
 
     public function isValidConfiguration(ExecutionContextInterface $context)
     {
-        if ($this->getType() == PropertyTypes::CHOICE &&
-            count($this->getConfiguration()) < 2) {
+        if ($this->getType() === PropertyTypes::CHOICE && count($this->getConfiguration()) < 2) {
             $context->addViolationAt(
                 'configuration',
                 'sylius.property.presentation.count'

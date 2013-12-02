@@ -68,11 +68,12 @@ Feature: Countries and provinces
          When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
           And I click "Add province"
-          And I fill in province name with "Łódź"
+         Then I wait for "#sylius_country_provinces_0_name" element to appear
+         When I fill in province name with "Łódź"
           And I press "Create"
          Then I should be on the page of country "Poland"
-          And I should see "Country has been successfully created."
           And "Łódź" should appear on the page
+          And I should see "Country has been successfully created."
 
     Scenario: Created countries appear in the list
         Given I created country "Poland"
@@ -98,6 +99,7 @@ Feature: Countries and provinces
           And I press "Save changes"
          Then I should be on the page of country "Russia"
           And "Russia" should appear on the page
+          And I should see "Country has been successfully updated."
 
     @javascript
     Scenario: Updating the country and removing province
@@ -119,8 +121,8 @@ Feature: Countries and provinces
          Then I should see "Do you want to delete this item"
          When I press "delete"
          Then I should still be on the country index page
+          And I should not see country with name "China" in the list
           And I should see "Country has been successfully deleted."
-          But I should not see country with name "China" in the list
 
     @javascript
     Scenario: Deleting country via the list button with js modal
@@ -128,24 +130,7 @@ Feature: Countries and provinces
          When I press "delete" near "China"
           And I click "delete" from the confirmation modal
          Then I should still be on the country index page
-          And I should see "Country has been successfully deleted."
-          But I should not see country with name "China" in the list
-
-    Scenario: Deleting country
-        Given I am on the page of country "China"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the country index page
-          And I should see "Country has been successfully deleted."
-
-    @javascript
-    Scenario: Deleting country with js modal
-        Given I am on the page of country "China"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the country index page
-          And I should see "Country has been successfully deleted."
+          And I should not see country with name "China" in the list
 
     Scenario: Deleted country disappears from the list
         Given I am on the page of country "France"
@@ -154,21 +139,9 @@ Feature: Countries and provinces
          When I press "delete"
          Then I should be on the country index page
           And I should not see country with name "France" in that list
-
-    @javascript
-    Scenario: Deleted country disappears from the list with js modal
-        Given I am on the page of country "France"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the country index page
-          And I should not see country with name "France" in that list
+          And I should see "Country has been successfully deleted."
 
     Scenario: Accessing country details via the list
-        Given I am on the country index page
-         When I click "China"
-         Then I should be on the page of country "China"
-
-    Scenario: Provinces are listed on country page
         Given I am on the country index page
          When I click "France"
          Then I should be on the page of country "France"
@@ -181,6 +154,7 @@ Feature: Countries and provinces
          When I press "delete"
          Then I should still be on the page of country "France"
           And "Toulouse" should not appear on the page
+          And I should see "Province has been successfully deleted."
 
     @javascript
     Scenario: Deleting province with js modal

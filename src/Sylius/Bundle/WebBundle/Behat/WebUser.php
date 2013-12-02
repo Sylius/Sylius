@@ -456,14 +456,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I wait (\d+)$/
-     */
-    public function iWait($time)
-    {
-        $this->getSession()->wait($time);
-    }
-
-    /**
      * @Given /^I remove the province "([^"]*)"$/
      */
     public function iRemoveTheProvince($province)
@@ -541,6 +533,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     private function removePositionItemFormCollection($xpath, $position)
     {
+        //$this->getSession()->wait(3000, "$('$id').find('input[value=\"$value\"]').parent().parent().parent().parent().remove()");
         $container = $this->getSession()->getPage()->find('xpath', $xpath);
         $field = $container->find(
             'xpath',
@@ -591,6 +584,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     private function removeAllItemFormCollection($xpath)
     {
+        // $this->getSession()->wait(3000, "$('$id').find('.collection-item').remove()");
         $container = $this->getSession()->getPage()->find('xpath', $xpath);
         $items = $container->findAll(
             'xpath',
@@ -613,7 +607,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $position = $position - 1;
         $field = $this->getSession()->getPage()->find(
             'xpath',
-            sprintf('//input[@id="sylius_property_configuration_%d_choice"]', $position)
+            sprintf('//input[@id="sylius_property_configuration_%d_configuration"]', $position)
         );
 
         $field->setValue($value);
@@ -892,10 +886,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+        $page  = $this->getSession()->getPage();
+        $count = count($page->findAll('css', 'div.collection-container div.form-group'));
 
         foreach ($table->getRows() as $i => $value) {
-            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $page->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
     }
@@ -952,7 +947,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         foreach ($rows as $key => $row) {
             if ($row->getText() === $property) {
-                $column = $key; break;
+                $column = $key;
+                break;
             }
         }
 
@@ -965,9 +961,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         }
 
         $cols = $tr->findAll('css', 'td');
-        $value = $cols[$column]->getText();
-
-        assertEquals($expectedValue, $value);
+        assertEquals($expectedValue, isset($column) ? $cols[$column]->getText() : null);
     }
 
     /**
@@ -975,20 +969,34 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClickOnConfirmationModal($button)
     {
-        $this->assertSession()->elementExists('css', '#confirmationModalContainer');
+        $this->assertSession()->elementExists('css', '#confirmation-modal');
 
-        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
+        $primaryButton = $modalContainer->find('css', sprintf('button:contains("%s")', $button));
 
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
+        $this->getSession()->wait(3000, '$("#confirmation-modal.in").children().length > 0');
 
         $primaryButton->press();
+
+        // Let's wait for AJAX call to finish
+        $this->getSession()->wait(3000);
+    }
+
+    /**
+     * @Then /^I wait for "([^"]*)" element to appear$/
+     */
+    public function iWaitForElementToAppear($element)
+    {
+        $this->getSession()->wait(5000, '$("'.$element.'").children().length > 0');
+    }
+
+    /**
+     * @Given /^I wait (\d+)$/
+     * @Then /^I wait "(\d+)" seconds$/
+     */
+    public function iWaitXSeconds($seconds)
+    {
+        $this->getSession()->wait($seconds * 1000);
     }
 
     /**
@@ -1086,7 +1094,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $path = $this->generateUrl($route, $parameters);
 
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
             return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
         }
 
