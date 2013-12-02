@@ -9,42 +9,51 @@ branches:
     only:
         - master
 
-services: mongodb
+services:
+    - mongodb
+    - memcached
 
 before_install:
-    - sudo apt-get update
-    - sudo apt-get install -y --force-yes nginx-light wkhtmltopdf
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq -y --force-yes nginx wkhtmltopdf
+
+    - sudo cp .travis/nginx-localhost.conf /etc/nginx/sites-available/default
+
+    - sudo ~/.phpenv/versions/$(phpenv version-name)/bin/php-fpm --fpm-config ".travis/php-fpm.conf"
+
+    - sudo nginx -c .travis/nginx.conf -p "$PWD/"
+    - sudo service nginx restart
 
 before_script:
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo 'extension = mongo.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
-    - .travis/setup.sh
+    - phpenv config-add .travis/php.ini
 
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
-    - composer install --prefer-source --no-interaction
-    - composer update doctrine/mongodb-odm
+    - composer install --prefer-source --no-interaction --no-scripts
+    - composer update doctrine/mongodb-odm --prefer-source -o
 
     - app/console doctrine:database:create -e=test -n
     - app/console doctrine:schema:create -e=test -n
-    - app/console doctrine:phpcr:repository:init --env=test -n
+    - app/console doctrine:phpcr:repository:init -e=test -n
     - app/console assetic:dump -e=test -n
 
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99
-    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar
-    - java -jar selenium-server-standalone-2.39.0.jar > /dev/null &
+    - wget http://selenium-release.storage.googleapis.com/2.40/selenium-server-standalone-2.40.0.jar
+    - java -jar selenium-server-standalone-2.40.0.jar > /dev/null &
     - sleep 5
 
 after_failure:
-    - cat /var/log/nginx/error.log
+    - sudo cat /var/log/php5-fpm.log
+    - sudo cat /var/log/nginx/error.log
 
 script:
-    - bin/phpspec run --f=dot
+    - bin/phpspec run --format=dot
 
-    - php -dmemory_limit=2048M bin/behat --format=progress --tags="~@javascript" --verbose --stop-on-failure
-    - php -dmemory_limit=2048M bin/behat --format=progress --tags="@javascript" --verbose --stop-on-failure
+    - bin/behat --format=progress --tags="~@javascript" --verbose
+    - bin/behat --format=progress --tags="@javascript" --verbose
 
 notifications:
     email: "travis-ci@sylius.org"

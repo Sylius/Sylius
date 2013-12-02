@@ -13,10 +13,9 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Exception\ExpectationException;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -520,7 +519,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
+            throw new ElementNotFoundException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
         $this->assertSession()->elementExists('css', $element, $tr);
@@ -537,7 +536,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
+            throw new ElementNotFoundException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
         $locator = sprintf('button:contains("%s")', $button);
@@ -728,10 +727,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+        $page  = $this->getSession()->getPage();
+        $count = count($page->findAll('css', 'div.collection-container div.form-group'));
 
         foreach ($table->getRows() as $i => $value) {
-            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $page->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
     }
@@ -788,7 +788,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         foreach ($rows as $key => $row) {
             if ($row->getText() === $property) {
-                $column = $key; break;
+                $column = $key;
+                break;
             }
         }
 
@@ -797,13 +798,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
+            throw new ElementNotFoundException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
         }
 
         $cols = $tr->findAll('css', 'td');
-        $value = $cols[$column]->getText();
-
-        assertEquals($expectedValue, $value);
+        assertEquals($expectedValue, isset($column) ? $cols[$column]->getText() : null);
     }
 
     /**
@@ -815,9 +814,31 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
         $primaryButton = $modalContainer->find('css', sprintf('button:contains("%s")', $button));
-        $this->getSession()->wait(100, 'document.getElementById("confirmation-modal").className.match("/ in/")');
+
+        $this->getSession()->wait(3000, '$("#confirmation-modal.in").children().length > 0');
+
         $primaryButton->press();
+
+        // Let's wait for AJAX call to finish
+        $this->getSession()->wait(3000);
+    }
+
+    /**
+     * @Then /^I wait for "([^"]*)" element to appear$/
+     */
+    public function iWaitForElementToAppear($element)
+    {
+        $this->getSession()->wait(5000, '$("'.$element.'").children().length > 0');
         $this->getSession()->wait(100, '!document.getElementById("confirmation-modal").className.match("/ in/")');
+    }
+
+    /**
+     * @Given /^I wait (\d+) seconds$/
+     * @Then /^I wait "(\d+)" seconds$/
+     */
+    public function iWaitXSeconds($seconds)
+    {
+        $this->getSession()->wait($seconds * 1000);
     }
 
     /**
@@ -874,6 +895,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      * Create user and login with given role.
      *
      * @param string $role
+     * @param string $email
      */
     protected function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
     {

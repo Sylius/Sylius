@@ -45,9 +45,6 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         entity_managers:
             default:
-                metadata_cache_driver: array
-                result_cache_driver:   array
-                query_cache_driver:    array
                 auto_mapping: true
                 mappings:
                     gedmo_loggable:

@@ -53,8 +53,8 @@
         "symfony-cmf/menu-bundle":              "1.0.*"
     },
     "require-dev": {
-        "behat/behat":                       "2.4.*@stable",
-        "behat/symfony2-extension":          "*",
+        "behat/behat":                       "~2.4",
+        "behat/symfony2-extension":          "~1.0",
         "behat/mink-extension":              "*",
         "behat/mink-goutte-driver":          "*",
         "behat/mink-selenium2-driver":       "*",

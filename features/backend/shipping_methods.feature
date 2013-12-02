@@ -118,18 +118,28 @@ Feature: Shipping methods
           And I press "Save changes"
          Then I should be on the page of shipping method "General Shipping"
 
-    @javascript
     Scenario: Deleting shipping method
         Given I am on the page of shipping method "FedEx"
          When I press "delete"
-          And I click "delete" from the confirmation modal
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the shipping method index page
+          And I should not see shipping method with name "FedEx" in that list
+          And I should see "Shipping method has been successfully deleted."
+
+    Scenario: Deleting shipping via list
+        Given I am on the shipping index page
+         When I click "delete" near "FedEx"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the promotion index page
+          And I should not see shipping method with name "FedEx" in that list
           And I should see "Shipping method has been successfully deleted."
 
     @javascript
-    Scenario: Deleted shipping method disappears from the list
-        Given I am on the page of shipping method "FedEx"
-         When I press "delete"
+    Scenario: Deleting shipping via list with js modal
+        Given I am on the shipping index page
+         When I click "delete" near "FedEx"
           And I click "delete" from the confirmation modal
-         Then I should be on the shipping method index page
+         Then I should be on the promotion index page
           And I should not see shipping method with name "FedEx" in that list

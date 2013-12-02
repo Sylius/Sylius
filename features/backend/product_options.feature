@@ -91,12 +91,11 @@ Feature: Product options
     @javascript
     Scenario: Adding values to existing option
         Given I am editing option "T-Shirt size"
-          And I add following option values:
+         When I add following option values:
             | XL  |
             | XXL |
           And I press "Save changes"
          Then I should be on the option index page
-          And "Option has been successfully updated." should appear on the page
           And I should see option with value "XXL" in the list
 
     Scenario: Created options appear in the list
