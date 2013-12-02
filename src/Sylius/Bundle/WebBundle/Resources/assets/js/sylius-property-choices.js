@@ -11,39 +11,24 @@
     'use strict';
 
     $(document).ready(function() {
-        toogleChoices($('#sylius_property_type').val());
-        $('#sylius_property_type').change(function (e) {
-            toogleChoices($(this).val());
-        });
-        $('.delete-link').each(function () {
-            var removeLink = $(this);
-            removeLink.on('click', function(e) {
-                e.preventDefault();
+        var $propertyType = $('#sylius_property_type'),
+            choiceType = $propertyType.data('config-choice'),
+            prototype = $propertyType.data('config-prototype'),
+            $container = $('[data-config-form="container"]'),
+            $main = $('[data-config-form="main"]');
 
-                removeLink.parent().parent().remove();
-            });
-        });
-        $('a[data-collection-button="add"]').on('click', function (e) {
-            e.preventDefault();
+        $propertyType.on('change', function(){
+            var choiceValue = $(this).val();
 
-            var collectionContainer = $('#' + $(this).data('collection'));
-            var item = $('#' + $(this).data('collection') + ' .control-group:last-child');
-            var removeLink = $('<a class="btn btn-danger sylius_property_choices_' + (collectionContainer.children().length - 1) + '_delete" href="#"><i class="icon-trash"></i></a>');
-            removeLink.on('click', function(e) {
-                e.preventDefault();
+            if (choiceType == choiceValue) {
+                $container.removeClass('hide').addClass('col-md-6');
+                $main.addClass('col-md-6');
 
-                item.remove();
-            });
-            item.find('.controls').append(removeLink);
+                $('[data-form-type="collection"]').CollectionForm();
+            } else {
+                $container.addClass('hide').removeClass('col-md-6');
+                $main.removeClass('col-md-6');
+            }
         });
     });
-
-    function toogleChoices(value)
-    {
-       if (value === 'choice') {
-           $('.property-choices-container').show();
-       } else {
-           $('.property-choices-container').hide();
-       }
-    }
 })( jQuery );

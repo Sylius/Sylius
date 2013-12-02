@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Sylius\Bundle\ProductBundle\Form\EventListener\BuildPropertyFormChoicesListener;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -64,9 +63,20 @@ class PropertyType extends AbstractType
                 'label' => 'sylius.label.property.presentation'
             ))
             ->add('type', 'choice', array(
-                'choices' => PropertyTypes::getChoices()
+                'label'   => 'sylius.label.property.type',
+                'attr'    => array(
+                    'data-config-choice' => PropertyTypes::CHOICE
+                ),
+                'choices' => PropertyTypes::getChoices(),
             ))
-            ->addEventSubscriber(new BuildPropertyFormChoicesListener($builder->getFormFactory()))
+            ->add('configuration', 'collection', array(
+                'type'         => 'sylius_prototype_configuration',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'auto_initialize' => false,
+                'button_add_label' => 'sylius.label.property.configuration_add',
+            ))
         ;
     }
 

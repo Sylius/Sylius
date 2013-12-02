@@ -51,6 +51,14 @@
                 <source>sylius.product.property.label.value</source>
                 <target>Value</target>
             </trans-unit>
+            <trans-unit id="12">
+                <source>sylius.label.property.type</source>
+                <target>Type</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>sylius.label.property.configuration_add</source>
+                <target>Add choice</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

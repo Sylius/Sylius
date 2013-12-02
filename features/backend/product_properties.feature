@@ -7,15 +7,16 @@ Feature: Product properties
     Background:
         Given I am logged in as administrator
           And there are following properties:
-            | name               | presentation   |
-            | T-Shirt collection | Collection     |
-            | T-Shirt fabric     | T-Shirt fabric |
+            | name               | presentation    | type   | choices                   |
+            | T-Shirt collection | Collection      | text   |                           |
+            | T-Shirt fabric     | T-Shirt fabric  | text   |                           |
+            | Property Choice    | Property Choice | choice | Choice1, Choice2, Choice3 |
 
-    Scenario: Seeing index of all properties
+  Scenario: Seeing index of all properties
         Given I am on the dashboard page
          When I follow "Configure properties"
          Then I should be on the property index page
-          And I should see 2 properties in the list
+          And I should see 3 properties in the list
 
     Scenario: Seeing empty index of properties
         Given there are no properties
@@ -49,10 +50,41 @@ Feature: Product properties
          Then I should still be on the property index page
           And I should see "Property has been successfully created."
 
+    @javascript
+    Scenario: Creating new property with choices
+        Given I am on the property creation page
+         When I fill in "Internal name" with "Available"
+          And I fill in "Presentation" with "Available or not?"
+          And I select "Choice" from "Type"
+          And I click "Add choice"
+          And I fill in #1 choice with "Enable"
+          And I click "Add choice"
+          And I fill in #2 choice with "Disable"
+          And I press "Create"
+         Then I should be on the property index page
+          And I should see "Property has been successfully created."
+
+    @javascript
+    Scenario: Updating the property and removing all choice
+        Given I am editing property "Property Choice"
+         When I remove all the choices
+          And I press "Save changes"
+         Then I should be editing property "Property Choice"
+          And I should see "Please add at least 2 choices."
+
+    @javascript
+    Scenario: Updating the property removing the first choice
+        Given I am editing property "Property Choice"
+         When I remove the choice #1
+         When I remove the choice #2
+          And I press "Save changes"
+         Then I should be editing property "Property Choice"
+          And I should see "Please add at least 2 choices."
+
     Scenario: Created properties appear in the list
         Given I created property "Food"
          When I go to the property index page
-         Then I should see 3 properties in the list
+         Then I should see 4 properties in the list
           And I should see property with name "Food" in that list
 
     Scenario: Accessing the editing form from the list
@@ -94,7 +126,7 @@ Feature: Product properties
           And I should see "Property has been successfully created."
           And property with following data should be created:
             | name | Book author |
-            | type | text        | 
+            | type | text        |
 
     Scenario Outline: Creating new property for type
         Given I am on the property creation page
@@ -113,42 +145,4 @@ Feature: Product properties
           | label    | value    |
           | Checkbox | checkbox |
           | Text     | text     |
-          | Choice   | choice   |
           | Number   | number   |
-
-    @javascript
-    Scenario: Create new choice property with many choices
-        Given I am on the property creation page
-         When I fill in "Internal name" with "Book author"
-          And I fill in "Presentation" with "Author"
-          And I select "Choice" from "Type"
-          And I click "Add choice"
-          And I fill in "Choice 0" with "J.R.R Tolken"
-          And I click "Add choice"
-          And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
-          And I press "Create"
-          Then property with following data should be created:
-            | name         | Book author                      |
-            | presentation | Author                           |
-            | type         | choice                           |
-            | choices      | J.R.R Tolken,Jaroslaw Grzedowicz |
-          And I should see "Property has been successfully created."
-
-    @javascript
-    Scenario: Remove choice property choice
-        Given I am on the property creation page
-         When I fill in "Internal name" with "Book author"
-          And I fill in "Presentation" with "Author"
-          And I select "Choice" from "Type"
-          And I click "Add choice"
-          And I fill in "Choice 0" with "J.R.R Tolken"
-          And I click "Add choice"
-          And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
-          And I remove property choice number 0
-          And I press "Create"
-          Then property with following data should be created:
-            | name         | Book author         |
-            | presentation | Author              |
-            | type         | choice              |
-            | choices      | Jaroslaw Grzedowicz |
-          And I should see "Property has been successfully created."

@@ -48,12 +48,6 @@ class PropertyTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields($builder)
     {
         $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ProductBundle\Form\EventListener\BuildPropertyFormChoicesListener'))
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -66,7 +60,13 @@ class PropertyTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('type', 'choice', array('choices' => PropertyTypes::getChoices()))
+            ->add('type', 'choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('configuration', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

@@ -516,6 +516,25 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @When /^I remove all the choices$/
+     */
+    public function iRemoveAllTheChoice()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_property_configuration"]');
+    }
+
+    /**
+     * @Given /^I remove the choice #(\d+)$/
+     */
+    public function iRemoveTheChoice($position)
+    {
+        $this->removePositionItemFormCollection(
+            '//div[@id="sylius_property_configuration"]',
+            $position
+        );
+    }
+
+    /**
      * @param $xpath
      * @param $position
      * @throws \Behat\Mink\Exception\ExpectationException
@@ -584,6 +603,22 @@ class WebUser extends MinkContext implements KernelAwareInterface
             $nbOfItem--;
         }
     }
+
+    /**
+     * @Given /^I fill in #(\d+) choice with "([^"]*)"$/
+     */
+    public function iFillInChoiceWith($position, $value)
+    {
+//        '//div[@id="sylius_property_configuration"]'
+        $position = $position - 1;
+        $field = $this->getSession()->getPage()->find(
+            'xpath',
+            sprintf('//input[@id="sylius_property_configuration_%d_choice"]', $position)
+        );
+
+        $field->setValue($value);
+    }
+
 
     /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
