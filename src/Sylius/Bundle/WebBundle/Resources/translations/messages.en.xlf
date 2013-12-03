@@ -2190,10 +2190,6 @@
         <source>sylius.product.unavailable</source>
         <target>Unavailable</target>
       </trans-unit>
-      <trans-unit id="b5f1561b7e6267ef7c2fd6439533272b" resname="sylius.del">
-        <source>sylius.del</source>
-        <target>Del</target>
-      </trans-unit>
       <trans-unit id="98ba126fec782ecd1d09c3d314ff034c" resname="sylius.na">
         <source>sylius.na</source>
         <target>N/A</target>
