@@ -13,6 +13,8 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sylius\Bundle\AddressingBundle\Model\Zone;
 
@@ -74,6 +76,26 @@ class ZoneType extends AbstractType
                 'by_reference'     => false,
             ))
         ;
+
+        $builder->setAttribute(
+            'default_prototype',
+            $builder->create('country', 'sylius_zone_member_country')
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        if ($form->getConfig()->hasAttribute('default_prototype')) {
+            $defaultPrototype = $form->getConfig()
+                ->getAttribute('default_prototype')
+                ->getForm()
+                ->createView($view);
+
+            $view->children['members']->vars['prototype'] = $defaultPrototype;
+        }
     }
 
     /**
