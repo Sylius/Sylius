@@ -35,6 +35,7 @@ sylius_backend_country_delete:
     defaults:
         _controller: sylius.controller.country:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_country_index
 
 sylius_backend_country_show:

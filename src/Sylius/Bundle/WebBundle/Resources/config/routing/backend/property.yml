@@ -36,4 +36,5 @@ sylius_backend_property_delete:
     defaults:
         _controller: sylius.controller.property:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_property_index

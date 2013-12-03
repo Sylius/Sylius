@@ -34,6 +34,7 @@ sylius_backend_promotion_delete:
     defaults:
         _controller: sylius.controller.promotion:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_promotion_index
 
 sylius_backend_promotion_show:

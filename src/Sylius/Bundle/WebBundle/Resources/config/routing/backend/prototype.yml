@@ -36,6 +36,7 @@ sylius_backend_prototype_delete:
     defaults:
         _controller: sylius.controller.prototype:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_prototype_index
 
 sylius_backend_prototype_build:

@@ -43,6 +43,7 @@ sylius_backend_user_delete:
     defaults:
         _controller: sylius.controller.user:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_user_index
 
 sylius_backend_user_show:
