@@ -46,14 +46,20 @@
                     </div>
                 </div>
             </td>
-            {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
-                <td class="stock in-stock">
-                    {{ product.masterVariant.onHand }}
+            {% if product.hasOptions %}
+                <td class="stock contain-variants text-muted">
+                    <em>{{ 'sylius.product.contain_variants'|trans }}</em>
                 </td>
             {% else %}
-                <td class="stock out-of-stock text-muted">
-                    <em>{{ 'sylius.out_of_stock'|trans }}</em>
-                </td>
+                {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
+                    <td class="stock in-stock">
+                        {{ product.masterVariant.onHand }}
+                    </td>
+                {% else %}
+                    <td class="stock out-of-stock text-muted">
+                        <em>{{ 'sylius.out_of_stock'|trans }}</em>
+                    </td>
+                {% endif %}
             {% endif %}
 
 

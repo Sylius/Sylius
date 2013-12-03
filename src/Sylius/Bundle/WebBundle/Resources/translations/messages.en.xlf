@@ -2198,6 +2198,10 @@
         <source>sylius.na</source>
         <target>N/A</target>
       </trans-unit>
+      <trans-unit id="07e92a959c87c1cdab5a6472de322d3f" resname="sylius.product.contain_variants">
+        <source>sylius.product.contain_variants</source>
+        <target>Contain Variants</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
