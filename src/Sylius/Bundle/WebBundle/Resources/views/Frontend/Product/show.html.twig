@@ -107,7 +107,11 @@
             {{ form_widget(form._token) }}
             <br>
             <br>
-            <button type="submit" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+            {% if sylius_is_restricted(product) %}
+            <button disabled="disabled" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.product_not_available_in_zone'|trans }}</button>
+            {% else %}
+                <button type="submit" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+            {% endif %}
         {% endif %}
     </div>
 </form>

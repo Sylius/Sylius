@@ -49,6 +49,10 @@ class ProductType extends BaseProductType
                 'label'   => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels()
             ))
+            ->add('restrictedZone', 'sylius_zone_choice', array(
+                'empty_value' => '---',
+                'label'       => 'sylius.form.product.restricted_zone',
+            ))
         ;
     }
 }

@@ -127,4 +127,18 @@ class ProductSpec extends ObjectBehavior
         $this->setShippingCategory($shippingCategory);
         $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
+
+    function it_has_no_restricted_zone_by_default()
+    {
+        $this->getRestrictedZone()->shouldReturn(null);
+    }
+
+    /**
+     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface $zone
+     */
+    function its_restricted_zone_is_mutable($zone)
+    {
+        $this->setRestrictedZone($zone);
+        $this->getRestrictedZone()->shouldReturn($zone);
+    }
 }

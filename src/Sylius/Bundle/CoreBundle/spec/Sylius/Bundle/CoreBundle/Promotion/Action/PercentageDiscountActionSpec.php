@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\SyliusN\Bundle\CoreBundle\Promotion\Action;
+namespace spec\Sylius\Bundle\CoreBundle\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
@@ -55,6 +55,6 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
         $configuration = array('percentage' => 0.25);
 
-        $this->execute($order, $configuration);
+        $this->execute($order, $configuration, $promotion);
     }
 }

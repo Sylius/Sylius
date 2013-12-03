@@ -33,7 +33,7 @@ class OrderPromotionListener
     protected $promotionProcessor;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     protected $session;
 
@@ -60,6 +60,8 @@ class OrderPromotionListener
      * Get the order from event and run the promotion processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function processOrderPromotion(GenericEvent $event)
     {
@@ -95,7 +97,6 @@ class OrderPromotionListener
             $message = 'sylius.promotion_coupon.invalid';
         }
 
-        $message = $this->translator->trans($message, array(), 'flashes');
-        $this->session->getFlashBag()->add($type, $message);
+        $this->session->getBag('flashes')->add($type, $this->translator->trans($message, array(), 'flashes'));
     }
 }

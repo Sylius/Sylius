@@ -158,6 +158,10 @@
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
       </trans-unit>
+      <trans-unit id="94508ad78d6cdae4de43ed99efed1fc7" resname="sylius.product_not_available_in_zone">
+        <source>sylius.product_not_available_in_zone</source>
+        <target>Not available in your country</target>
+      </trans-unit>
       <trans-unit id="b862b765ec4aedc20d6569059f66c34d" resname="sylius.address.city">
         <source>sylius.address.city</source>
         <target>City</target>
@@ -1229,6 +1233,10 @@
       <trans-unit id="765ff06097d19388b61bc3282afc2b92" resname="sylius.product.available_on_demand">
         <source>sylius.product.available_on_demand</source>
         <target>Available on demand</target>
+      </trans-unit>
+      <trans-unit id="765ff06097d19388b61bc3282afc2b93" resname="sylius.product.restricted_zone">
+        <source>sylius.product.restricted_zone</source>
+        <target>Restricted zone</target>
       </trans-unit>
       <trans-unit id="927dac6cf9ae2b0857f51b29c4da8606" resname="sylius.product.categorization">
         <source>sylius.product.categorization</source>
