@@ -444,29 +444,29 @@ input[type="file"] {
 }
 
 /** Products. **/
-body.sylius_backend_product_index .sylius-products-table td {
+.sylius-products-table td {
     vertical-align: middle;
 }
-body.sylius_backend_product_index .sylius-products-table .name {
+.sylius-products-table .name {
     font-size: 16px;
     text-decoration: none;
 }
-body.sylius_backend_product_index .sylius-products-table .sku {
+.sylius-products-table .sku {
     background: #FCFCFC;
     color: #666;
 }
-body.sylius_backend_product_index .sylius-products-table .id,
-body.sylius_backend_product_index .sylius-products-table .stock,
-body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at {
+.sylius-products-table .id,
+.sylius-products-table .stock,
+.sylius-products-table .retail-price,
+.sylius-products-table .updated-at {
     text-align: center;
 }
-body.sylius_backend_product_index .sylius-products-table .stock,
-body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at {
+.sylius-products-table .stock,
+.sylius-products-table .retail-price,
+.sylius-products-table .updated-at {
     width: 150px;
 }
-body.sylius_backend_product_index .sylius-products-table .actions {
+.sylius-products-table .actions {
     width: 170px;
     text-align: center;
 }
