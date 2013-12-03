@@ -198,6 +198,8 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
+        $config = $this->getConfiguration();
+
         $resource = $this->findOr404();
 
         if ($request->request->get('confirmed', false)) {
@@ -229,7 +231,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($request->attributes->get('template', 'SyliusWebBundle:Backend/Misc:delete.html.twig'))
+            ->setTemplate($config->getTemplate('delete.html'))
         ;
 
         return $this->handleView($view);
