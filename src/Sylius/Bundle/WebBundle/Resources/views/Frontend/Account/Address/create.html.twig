@@ -1,6 +1,14 @@
 {% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import create %}
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/backend_province.js'
+    '@SyliusWebBundle/Resources/assets/js/province-choices.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
     <h4>{{ 'sylius.account.address.create'|trans }}</h4>
 
