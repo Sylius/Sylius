@@ -40,7 +40,6 @@ Feature: Products
             | New      |
 
     Scenario: Seeing index of all products
-    Scenario: Seeing index of all products
         Given I am on the dashboard page
          When I follow "Products"
          Then I should be on the product index page
