@@ -53,6 +53,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <constraint name="Callback">
+            <option name="methods">
+                <value>isImageValid</value>
+            </option>
+            <option name="groups">sylius</option>
+        </constraint>
     </class>
 
     <class name="Sylius\Bundle\CoreBundle\Model\ShippingMethod">
