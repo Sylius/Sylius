@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Action\PaymentAwareAction;
-new \Payum\Exception\LogicException;
+use Payum\Exception\LogicException;
 use Payum\Exception\RequestNotSupportedException;
 use Payum\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
