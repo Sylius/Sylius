@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5b4fa19a33efc14777079220e9c2ce3f",
+    "hash": "eaa3d836a19f731f5fd131c1ddd7f1b7",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -2185,7 +2185,7 @@
                 "symfony/options-resolver": ">=2.0.16,~2.0"
             },
             "require-dev": {
-                "symfony/yaml": ">=2.0.16,~2.0",
+                "symfony/yaml": ">=2.0.16.0,>=2.0,<3.0",
                 "twig/twig": ">=1.0,<2.0-dev"
             },
             "suggest": {
@@ -2376,12 +2376,12 @@
             "version": "v1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/omnipay/omnipay.git",
+                "url": "https://github.com/adrianmacneil/omnipay.git",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnipay/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
+                "url": "https://api.github.com/repos/adrianmacneil/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450",
                 "shasum": ""
             },
@@ -2415,7 +2415,7 @@
                 }
             ],
             "description": "A framework agnostic, multi-gateway payment processing library",
-            "homepage": "https://github.com/omnipay/omnipay",
+            "homepage": "https://github.com/adrianmacneil/omnipay",
             "keywords": [
                 "2checkout",
                 "2co",
@@ -2553,7 +2553,7 @@
             ],
             "authors": [
                 {
-                    "name": "Maksim Kotlyar",
+                    "name": "Kotlyar Maksim",
                     "email": "kotlyar.maksim@gmail.com"
                 },
                 {
@@ -4467,12 +4467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32"
+                "reference": "7dfe6e78dd3f1a1dc537a0f808771dc56401bfd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/7dfe6e78dd3f1a1dc537a0f808771dc56401bfd8",
+                "reference": "7dfe6e78dd3f1a1dc537a0f808771dc56401bfd8",
                 "shasum": ""
             },
             "require": {
@@ -4527,7 +4527,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-10-21 19:22:09"
+            "time": "2013-12-04 14:56:05"
         },
         {
             "name": "phpspec/prophecy",
