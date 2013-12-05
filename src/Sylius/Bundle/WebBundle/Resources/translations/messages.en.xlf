@@ -2190,6 +2190,22 @@
         <source>sylius.zone_member.members</source>
         <target>Members</target>
       </trans-unit>
+      <trans-unit id="ed5312f9de80d3b6123f05085d579c5c" resname="sylius.product.view_details">
+        <source>sylius.product.view_details</source>
+        <target>View %product% details.</target>
+      </trans-unit>
+      <trans-unit id="ab363cdc399fd53bbd0fa149ff5d0063" resname="sylius.product.unavailable">
+        <source>sylius.product.unavailable</source>
+        <target>Unavailable</target>
+      </trans-unit>
+      <trans-unit id="98ba126fec782ecd1d09c3d314ff034c" resname="sylius.na">
+        <source>sylius.na</source>
+        <target>N/A</target>
+      </trans-unit>
+      <trans-unit id="07e92a959c87c1cdab5a6472de322d3f" resname="sylius.product.contain_variants">
+        <source>sylius.product.contain_variants</source>
+        <target>Contain Variants</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
