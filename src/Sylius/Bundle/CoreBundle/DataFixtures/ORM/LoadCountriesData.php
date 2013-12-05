@@ -114,8 +114,10 @@ class LoadCountriesData extends DataFixture
         foreach ($states as $isoName => $name) {
             $province = $provinceRepository->createNew();
             $province->setName($name);
-
+            //http://en.wikipedia.org/wiki/ISO_3166-2:US
+            $province->setIsoName('US-'.$isoName);   
             $country->addProvince($province);
+            
 
             $this->setReference('Sylius.Province.'.$isoName, $province);
         }
