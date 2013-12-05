@@ -76,7 +76,7 @@ class AppKernel extends Kernel
             new Payum\Bundle\PayumBundle\PayumBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev'))) {
+        if (in_array($this->environment, array('dev'))) {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }
 
@@ -109,10 +109,34 @@ class AppKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__.'/config/config_'.$this->environment.'.yml');
 
-        if (is_file($file = __DIR__.'/config/config_'.$this->getEnvironment().'.local.yml')) {
+        if (is_file($file = __DIR__.'/config/config_'.$this->environment.'.local.yml')) {
             $loader->load($file);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheDir()
+    {
+        if (isset($_SERVER['VAGRANT']) && in_array($this->environment, array('dev', 'test')) && is_dir('/dev/shm')) {
+            return '/dev/shm/sylius/cache/'.$this->environment;
+        }
+
+        return parent::getCacheDir();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogDir()
+    {
+        if (isset($_SERVER['VAGRANT']) && in_array($this->environment, array('dev', 'test')) && is_dir('/dev/shm')) {
+            return '/dev/shm/sylius/logs';
+        }
+
+        return parent::getLogDir();
     }
 }
