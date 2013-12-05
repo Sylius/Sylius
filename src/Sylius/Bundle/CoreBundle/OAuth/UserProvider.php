@@ -52,9 +52,7 @@ class UserProvider extends FOSUBUserProvider
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
-        $providerName = $response->getResourceOwner()->getName();
-        $uniqueId = $response->getUsername();
-        $user->addOAuthAccount($providerName, $uniqueId);
+        $this->updateUserByOAuthUserResponse($user, $response);
 
         $this->userManager->updateUser($user);
     }
@@ -85,6 +83,8 @@ class UserProvider extends FOSUBUserProvider
         $user->setPlainPassword(substr(sha1($response->getAccessToken()), 0, 10));
 
         $user->setEnabled(true);
+
+        $this->userManager->updateUser($user);
 
         return $user;
     }

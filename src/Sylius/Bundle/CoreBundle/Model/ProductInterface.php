@@ -12,9 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
+use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
 
 /**
@@ -126,6 +127,20 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      * @param ShippingCategoryInterface $category
      */
     public function setShippingCategory(ShippingCategoryInterface $category = null);
+
+    /**
+     * Get address zone restriction.
+     *
+     * @return ZoneInterface
+     */
+    public function getRestrictedZone();
+
+    /**
+     * Set address zone restriction.
+     *
+     * @param ZoneInterface $zone
+     */
+    public function setRestrictedZone(ZoneInterface $zone = null);
 
     /**
      * Get all product images.

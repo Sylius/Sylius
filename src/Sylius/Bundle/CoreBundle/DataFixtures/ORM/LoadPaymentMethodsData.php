@@ -28,6 +28,7 @@ class LoadPaymentMethodsData extends DataFixture
         $manager->persist($this->createPaymentMethod('Dummy', 'dummy'));
         $manager->persist($this->createPaymentMethod('Paypal Express Checkout', 'paypal_express_checkout'));
         $manager->persist($this->createPaymentMethod('Stripe', 'stripe'));
+        $manager->persist($this->createPaymentMethod('Be2bill', 'be2bill'));
 
         $manager->flush();
     }

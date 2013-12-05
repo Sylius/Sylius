@@ -74,6 +74,10 @@
         <source>sylius.form.product.variant_selection_method</source>
         <target>Variant selection method</target>
       </trans-unit>
+      <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4cd" resname="sylius.form.product.restricted_zone">
+        <source>sylius.form.product.restricted_zone</source>
+        <target>Restricted zone</target>
+      </trans-unit>
       <trans-unit id="757004bed01aea433f48aea5badf9062" resname="sylius.form.product_filter.name">
         <source>sylius.form.product_filter.name</source>
         <target>Name</target>

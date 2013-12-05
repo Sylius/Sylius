@@ -24,18 +24,18 @@
             <td class="info">
                 <div class="media">
                     <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left"
-                       title="View {{ product.name|escape('html_attr') }} details.">
+                       title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
                         <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">
                             <a class="name"
                                href="{{ path('sylius_backend_product_show', {'id': product.id}) }}"
-                               title="View {{ product.name|escape('html_attr') }} details.">
+                               title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
                                 {{ product.name }}
                             </a>
                             {% if not product.isAvailable %}
-                                <span class="label label-default">Not Available</span>
+                                <span class="label label-default">{{ 'sylius.product.unavailable'|trans }}</span>
                             {% endif %}
                         </h5>
                         <div class="media-body">
@@ -46,14 +46,20 @@
                     </div>
                 </div>
             </td>
-            {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
-                <td class="stock in-stock">
-                    {{ product.masterVariant.onHand }}
+            {% if product.hasOptions %}
+                <td class="stock contain-variants text-muted">
+                    <em>{{ 'sylius.product.contain_variants'|trans }}</em>
                 </td>
             {% else %}
-                <td class="stock out-of-stock text-muted">
-                    <em>Out of Stock</em>
-                </td>
+                {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
+                    <td class="stock in-stock">
+                        {{ product.masterVariant.onHand }}
+                    </td>
+                {% else %}
+                    <td class="stock out-of-stock text-muted">
+                        <em>{{ 'sylius.out_of_stock'|trans }}</em>
+                    </td>
+                {% endif %}
             {% endif %}
 
 
@@ -64,7 +70,7 @@
                 </td>
             {% else %}
                 <td class="retail-price text-muted">
-                    <em>N/A</em>
+                    <em>{{ 'sylius.na'|trans }}</em>
                 </td>
             {% endif %}
 
@@ -74,13 +80,13 @@
             <td class="actions text-right">
                 <div class="btn-group">
                     <a class="btn btn-sm btn-primary edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
-                        title="Edit">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                        title="{{ 'sylius.edit'|trans|title }}">
+                        <span class="glyphicon glyphicon-pencil"></span> {{ 'sylius.edit'|trans|title }}
                     </a>
                     <a class="btn btn-sm btn-danger delete"
                        href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}"
-                       title="Delete">
-                        <span class="glyphicon glyphicon-trash"></span> Del
+                       title="{{ 'sylius.delete'|trans|title }}">
+                        <span class="glyphicon glyphicon-trash"></span> {{ 'sylius.delete'|trans|title }}
                     </a>
                 </div>
             </td>

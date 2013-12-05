@@ -444,68 +444,72 @@ input[type="file"] {
 }
 
 /** Products. **/
-body.sylius_backend_product_index .sylius-products-table td {
+.sylius-products-table td {
     vertical-align: middle;
 }
-body.sylius_backend_product_index .sylius-products-table .name {
+.sylius-products-table .name {
     font-size: 16px;
     text-decoration: none;
 }
-body.sylius_backend_product_index .sylius-products-table .sku {
+.sylius-products-table .sku {
     background: #FCFCFC;
     color: #666;
 }
-body.sylius_backend_product_index .sylius-products-table .id,
-body.sylius_backend_product_index .sylius-products-table .stock,
-body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at {
+.sylius-products-table .id,
+.sylius-products-table .stock,
+.sylius-products-table .retail-price,
+.sylius-products-table .updated-at {
     text-align: center;
 }
-body.sylius_backend_product_index .sylius-products-table .stock,
-body.sylius_backend_product_index .sylius-products-table .retail-price,
-body.sylius_backend_product_index .sylius-products-table .updated-at,
-body.sylius_backend_product_index .sylius-products-table .actions{
+.sylius-products-table .stock,
+.sylius-products-table .retail-price,
+.sylius-products-table .updated-at {
     width: 150px;
+}
+.sylius-products-table .actions {
+    width: 170px;
+    text-align: center;
 }
 
 /** Order. **/
-body.sylius_backend_order_show .sylius-order-content-table .picture,
-body.sylius_backend_order_show .sylius-order-content-table .quantity,
-body.sylius_backend_order_show .sylius-order-content-table .unit-price,
-body.sylius_backend_order_show .sylius-order-content-table .total {
+.sylius-order-content-table .picture,
+.sylius-order-content-table .quantity,
+.sylius-order-content-table .unit-price,
+.sylius-order-content-table .total {
     width: 110px;
+    vertical-align: middle;
 }
-body.sylius_backend_order_show .sylius-order-content-table .info .name {
+.sylius-order-content-table .info .name {
     font-size: 16px;
     text-decoration: none;
     margin: 0 0 5px 0;
 }
-body.sylius_backend_order_show .sylius-order-content-table .info ul {
+.sylius-order-content-table .info ul {
     margin-bottom: 0;
 }
-body.sylius_backend_order_show .sylius-order-content-table .info .sku code {
+.sylius-order-content-table .info .sku code {
     background: #FCFCFC;
     color: #666;
 }
-body.sylius_backend_order_show .sylius-order-content-table tr.taxes td,
-body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td,
-body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td {
+.sylius-order-content-table tr.taxes td,
+.sylius-order-content-table tr.shipping-charges td,
+.sylius-order-content-table tr.promotion-discount td {
     vertical-align: middle;
 }
-body.sylius_backend_order_show .sylius-order-content-table tr.taxes td h5,
-body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td h5,
-body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td h5 {
+.sylius-order-content-table tr.taxes td h5,
+.sylius-order-content-table tr.shipping-charges td h5,
+.sylius-order-content-table tr.promotion-discount td h5 {
     margin-top: 0;
 }
-body.sylius_backend_order_show .sylius-order-content-table tr.taxes td p,
-body.sylius_backend_order_show .sylius-order-content-table tr.taxes td ul,
-body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td p,
-body.sylius_backend_order_show .sylius-order-content-table tr.shipping-charges td ul,
-body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td p,
-body.sylius_backend_order_show .sylius-order-content-table tr.promotion-discount td ul {
+.sylius-order-content-table tr.taxes td p,
+.sylius-order-content-table tr.taxes td ul,
+.sylius-order-content-table tr.shipping-charges td p,
+.sylius-order-content-table tr.shipping-charges td ul,
+.sylius-order-content-table tr.promotion-discount td p,
+.sylius-order-content-table tr.promotion-discount td ul {
     margin-bottom: 0;
 }
-body.sylius_backend_order_show .sylius-order-content-table span.amount {
+.sylius-order-content-table span.amount {
     min-width: 65px;
     display: inline-block;
 }

@@ -158,6 +158,10 @@
         <source>sylius.add_to_cart</source>
         <target>Add to cart</target>
       </trans-unit>
+      <trans-unit id="94508ad78d6cdae4de43ed99efed1fc7" resname="sylius.product_not_available_in_zone">
+        <source>sylius.product_not_available_in_zone</source>
+        <target>Not available in your country</target>
+      </trans-unit>
       <trans-unit id="b862b765ec4aedc20d6569059f66c34d" resname="sylius.address.city">
         <source>sylius.address.city</source>
         <target>City</target>
@@ -1230,6 +1234,10 @@
         <source>sylius.product.available_on_demand</source>
         <target>Available on demand</target>
       </trans-unit>
+      <trans-unit id="765ff06097d19388b61bc3282afc2b93" resname="sylius.product.restricted_zone">
+        <source>sylius.product.restricted_zone</source>
+        <target>Restricted zone</target>
+      </trans-unit>
       <trans-unit id="927dac6cf9ae2b0857f51b29c4da8606" resname="sylius.product.categorization">
         <source>sylius.product.categorization</source>
         <target>Categorization</target>
@@ -2181,6 +2189,22 @@
       <trans-unit id="b81d7e96fb8731029fd822cc3d845591" resname="sylius.zone_member.members">
         <source>sylius.zone_member.members</source>
         <target>Members</target>
+      </trans-unit>
+      <trans-unit id="ed5312f9de80d3b6123f05085d579c5c" resname="sylius.product.view_details">
+        <source>sylius.product.view_details</source>
+        <target>View %product% details.</target>
+      </trans-unit>
+      <trans-unit id="ab363cdc399fd53bbd0fa149ff5d0063" resname="sylius.product.unavailable">
+        <source>sylius.product.unavailable</source>
+        <target>Unavailable</target>
+      </trans-unit>
+      <trans-unit id="98ba126fec782ecd1d09c3d314ff034c" resname="sylius.na">
+        <source>sylius.na</source>
+        <target>N/A</target>
+      </trans-unit>
+      <trans-unit id="07e92a959c87c1cdab5a6472de322d3f" resname="sylius.product.contain_variants">
+        <source>sylius.product.contain_variants</source>
+        <target>Contain Variants</target>
       </trans-unit>
     </body>
   </file>

@@ -44,6 +44,7 @@
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
+        "swiftmailer/swiftmailer":        "~5.0",
         "hwi/oauth-bundle":               "0.3.*"
     },
     "require-dev": {
