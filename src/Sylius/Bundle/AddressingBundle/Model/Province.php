@@ -33,11 +33,12 @@ class Province implements ProvinceInterface
     protected $name;
 
     /**
-     * Name.
+     * ISO Name.
      *
      * @var string
      */
     protected $isoName;
+
 
     /**
      * Country.
@@ -96,7 +97,9 @@ class Province implements ProvinceInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Country.
+     *
+     * @var CountryInterface
      */
     public function getCountry()
     {
