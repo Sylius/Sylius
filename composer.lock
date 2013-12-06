@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5b4fa19a33efc14777079220e9c2ce3f",
+    "hash": "ca01772ab1b1a14492226bc9e5df1771",
     "packages": [
         {
             "name": "athari/yalinqo",
@@ -53,12 +53,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "v1.1.2"
+                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1.2",
-                "reference": "v1.1.2",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/40db0c96985aab2822edbc4848b3bd2429e02670",
+                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670",
                 "shasum": ""
             },
             "require": {
@@ -1550,7 +1550,7 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -2337,13 +2337,13 @@
             "version": "v0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser",
-                "reference": "v0.9.1"
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
-                "reference": "v0.9.1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
+                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
                 "shasum": ""
             },
             "require": {
@@ -2369,19 +2369,19 @@
                 "parser",
                 "php"
             ],
-            "time": "2012-04-23 15:52:11"
+            "time": "2012-04-23 22:52:11"
         },
         {
             "name": "omnipay/omnipay",
             "version": "v1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/omnipay/omnipay.git",
+                "url": "https://github.com/adrianmacneil/omnipay.git",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnipay/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
+                "url": "https://api.github.com/repos/adrianmacneil/omnipay/zipball/4f5e82232161939c0b14f5921c092ed77980d450",
                 "reference": "4f5e82232161939c0b14f5921c092ed77980d450",
                 "shasum": ""
             },
@@ -2415,7 +2415,7 @@
                 }
             ],
             "description": "A framework agnostic, multi-gateway payment processing library",
-            "homepage": "https://github.com/omnipay/omnipay",
+            "homepage": "https://github.com/adrianmacneil/omnipay",
             "keywords": [
                 "2checkout",
                 "2co",
@@ -2975,13 +2975,13 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/log",
-                "reference": "1.0.0"
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
-                "reference": "1.0.0",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
                 "shasum": ""
             },
             "type": "library",
@@ -4467,12 +4467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32"
+                "reference": "f6473042184cc453cb3e0001a2b9694dfa8666c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
-                "reference": "ce8b573e1c0a9a31bc40e8005683ba8117ca1a32",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/f6473042184cc453cb3e0001a2b9694dfa8666c0",
+                "reference": "f6473042184cc453cb3e0001a2b9694dfa8666c0",
                 "shasum": ""
             },
             "require": {
@@ -4527,20 +4527,20 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-10-21 19:22:09"
+            "time": "2013-12-06 11:21:35"
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "79d9c8bd94801bffbf9b56964f6438762da6d8cd"
+                "reference": "613ce5d06b7912ad65fd9b6fc0519ef24985316d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/79d9c8bd94801bffbf9b56964f6438762da6d8cd",
-                "reference": "79d9c8bd94801bffbf9b56964f6438762da6d8cd",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/613ce5d06b7912ad65fd9b6fc0519ef24985316d",
+                "reference": "613ce5d06b7912ad65fd9b6fc0519ef24985316d",
                 "shasum": ""
             },
             "require-dev": {
@@ -4582,7 +4582,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2013-08-10 11:11:45"
+            "time": "2013-12-04 16:43:22"
         }
     ],
     "aliases": [
@@ -4600,7 +4600,8 @@
         "mathiasverraes/money": 20,
         "white-october/pagerfanta-bundle": 20,
         "behat/behat": 0,
-        "phpspec/phpspec": 20
+        "phpspec/phpspec": 20,
+        "phpspec/prophecy": 20
     },
     "platform": {
         "php": ">=5.3.3"
