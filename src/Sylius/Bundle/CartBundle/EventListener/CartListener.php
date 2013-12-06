@@ -31,21 +31,21 @@ class CartListener implements EventSubscriberInterface
      *
      * @var ObjectManager
      */
-    private $cartManager;
+    protected $cartManager;
 
     /**
      * Validator.
      *
      * @var ValidatorInterface
      */
-    private $validator;
+    protected $validator;
 
     /**
      * Cart provider.
      *
      * @var CartProviderInterface
      */
-    private $cartProvider;
+    protected $cartProvider;
 
     /**
      * Constructor.
@@ -123,7 +123,7 @@ class CartListener implements EventSubscriberInterface
     /**
      * @param CartInterface $cart
      */
-    private function refreshCart(CartInterface $cart)
+    protected function refreshCart(CartInterface $cart)
     {
         $cart->calculateTotal();
     }
