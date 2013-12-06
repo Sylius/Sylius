@@ -42,6 +42,7 @@
         "athari/yalinqo":                 "*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "jms/serializer-bundle":          "0.12.*",
+        "knplabs/gaufrette":              "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
         "swiftmailer/swiftmailer":        "~5.0",
