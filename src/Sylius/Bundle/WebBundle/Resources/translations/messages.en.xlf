@@ -2206,6 +2206,10 @@
         <source>sylius.product.contain_variants</source>
         <target>Contain Variants</target>
       </trans-unit>
+      <trans-unit id="1bb55d4e07056205789d3989945fe25c" resname="sylius.order.payment">
+        <source>sylius.order.payment</source>
+        <target>Payment</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

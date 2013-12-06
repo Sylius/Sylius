@@ -52,7 +52,7 @@
             {{ order.shippingAddress.country }} {{ order.shippingAddress.postcode }}
         </address>
     </div>
-    <div class="col col-md-6">
+    <div class="col col-md-3">
         <h4>Order Details</h4>
         <dl>
             <dt>{{ 'sylius.order.created_at'|trans }}</dt>
@@ -60,6 +60,34 @@
             <dt>Email</dt>
             <dd>{{ order.user.email }}</dd>
         </dl>
+    </div>
+    <div class="col col-md-3">
+        <div class="list-group">
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.payment'|trans }}</h4>
+                <div class="list-group-item-text">
+                    <a href="{{ path('sylius_backend_payment_update', {'id': order.payment.id}) }}">{{ order.payment.method }} - {{ order.payment.amount|sylius_price(order.payment.currency) }}</a>
+                    {{ misc.state_label(order.payment.state, 'payment') }}
+                </div>
+            </div>
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.shipments'|trans }}</h4>
+                <div class="list-group-item-text">
+                    <ul class="list-unstyled">
+                    {% for shipment in order.shipments %}
+                        <li>
+                            <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">{{ shipment.method.name }}</a>
+                            <span class="label label-info">{{ shipment.state|title }}</span>
+                        </li>
+                    {% else %}
+                        <li class="text-muted">
+                            {{ 'sylius.order.no_shipments'|trans }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -185,76 +213,6 @@
         </tr>
     </tfoot>
 </table>
-
-<hr/>
-
-<div class="row">
-    <div class="col col-lg-6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="4">{{ 'sylius.order.payment'|trans }}</th>
-                </tr>
-                <tr>
-                    <th>{{ sylius_resource_sort('method', 'sylius.payment.method'|trans) }}</th>
-                    <th>{{ sylius_resource_sort('amount', 'sylius.payment.amount'|trans) }}</th>
-                    <th>{{ sylius_resource_sort('state', 'sylius.payment.state'|trans) }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ order.payment.method }}</td>
-                    <td>{{ order.payment.amount|sylius_price(order.payment.currency) }}</td>
-                    <td>{{ misc.state_label(order.payment.state, 'payment') }}</td>
-                    <td class="text-right">
-                        <a class="btn btn-default" href="{{ path('sylius_backend_payment_update', {'id': order.payment.id}) }}">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col col-lg-6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="5">
-                        {{ 'sylius.order.shipments'|trans }}
-                    </th>
-                </tr>
-                <tr>
-                    <th>{{ 'sylius.shipment.method'|trans }}</th>
-                    <th>{{ 'sylius.shipment.state'|trans }}</th>
-                    <th>{{ 'sylius.shipment.updated_at'|trans }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for shipment in order.shipments %}
-                <tr>
-                    <td>{{ shipment.method.name }}</td>
-                    <td>{{ shipment.state }}</td>
-                    <td>{{ shipment.updatedAt|date }}</td>
-                    <td class="text-right">
-                        <a class="btn btn-default" href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">
-                            <span class="glyphicon glyphicon-pencil"></span> Details
-                        </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">
-                        <hr />
-                        <div class="alert alert-info">{{ 'sylius.order.no_shipments'|trans }}</div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 
 <hr/>
 
