@@ -47,6 +47,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
         $applicator->apply($subject, $promotion)->shouldNotBeCalled();
+        $applicator->revert($subject, $promotion)->shouldBeCalled();
 
         $this->process($subject);
     }
@@ -60,6 +61,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
         $applicator->apply($subject, $promotion)->shouldBeCalled();
+        $applicator->revert($subject, $promotion)->shouldNotBeCalled();
 
         $this->process($subject);
     }

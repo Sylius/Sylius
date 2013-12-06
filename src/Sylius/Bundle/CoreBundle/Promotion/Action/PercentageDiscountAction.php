@@ -58,6 +58,14 @@ class PercentageDiscountAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    {
+        $subject->removePromotionAdjustments();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_percentage_discount_configuration';

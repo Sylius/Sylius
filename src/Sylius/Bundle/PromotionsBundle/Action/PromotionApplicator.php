@@ -38,4 +38,14 @@ class PromotionApplicator implements PromotionApplicatorInterface
             ;
         }
     }
+
+    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    {
+        foreach ($promotion->getActions() as $action) {
+            $this->registry
+                ->getAction($action->getType())
+                ->revert($subject, $action->getConfiguration(), $promotion)
+            ;
+        }
+    }
 }

@@ -21,5 +21,19 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
  */
 interface PromotionApplicatorInterface
 {
+    /**
+     * Apply all promotion actions to the given subject
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
+     */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion);
+
+    /**
+     * Revert all promotion actions to the given subject
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
+     */
+    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 }
