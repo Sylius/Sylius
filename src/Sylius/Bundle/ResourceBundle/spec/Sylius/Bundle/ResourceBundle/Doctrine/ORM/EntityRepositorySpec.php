@@ -11,6 +11,11 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Query\Expr;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -23,13 +28,7 @@ require_once __DIR__.'/../../Fixture/Entity/Foo.php';
  */
 class EntityRepositorySpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\ORM\EntityManager         $entityManager
-     * @param Doctrine\ORM\Mapping\ClassMetadata $class
-     * @param Doctrine\ORM\QueryBuilder          $queryBuilder
-     * @param Doctrine\ORM\AbstractQuery         $query
-     */
-    function let($entityManager, $class, $queryBuilder, $query)
+    function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
 
@@ -82,19 +81,29 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->find(3)->shouldReturn(null);
     }
 
-    /**
-     * @param Doctrine\ORM\QueryBuilder $queryBuilder
-     */
-    function it_applies_criteria_when_finding_one($queryBuilder)
+    function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
         $criteria = array(
             'foo' => 'bar',
             'bar' => 'baz',
         );
 
+
         foreach ($criteria as $property => $value) {
             $queryBuilder
-                ->andWhere('o.'.$property.' = :'.$property)
+                ->expr()
+                ->shouldBeCalled()
+                ->willReturn($expr)
+            ;
+
+            $expr
+                ->eq('o.'.$property, ':'.$property)
+                ->shouldBeCalled()
+                ->willReturn('o.'.$property.' = :'.$value)
+            ;
+
+            $queryBuilder
+                ->andWhere('o.'.$property.' = :'.$value)
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
@@ -109,10 +118,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->findOneBy($criteria)->shouldReturn(null);
     }
 
-    /**
-     * @param Doctrine\ORM\QueryBuilder $queryBuilder
-     */
-    function it_applies_criteria_when_finding_by($queryBuilder)
+    function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
     {
         $criteria = array(
             'foo' => 'bar',
@@ -121,13 +127,54 @@ class EntityRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             $queryBuilder
-                ->andWhere('o.'.$property.' = :'.$property)
+                ->expr()
+                ->shouldBeCalled()
+                ->willReturn($expr)
+            ;
+
+            $expr
+                ->eq('o.'.$property, ':'.$property)
+                ->shouldBeCalled()
+                ->willReturn('o.'.$property.' = :'.$value)
+            ;
+
+            $queryBuilder
+                ->andWhere('o.'.$property.' = :'.$value)
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
 
             $queryBuilder
                 ->setParameter($property, $value)
+                ->shouldBeCalled()
+                ->willReturn($queryBuilder)
+            ;
+        }
+
+        $this->findBy($criteria)->shouldReturn(null);
+    }
+
+    function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
+    {
+        $criteria = array(
+            'baz' => array('foo', 'bar'),
+        );
+
+        foreach ($criteria as $property => $value) {
+            $queryBuilder
+                ->expr()
+                ->shouldBeCalled()
+                ->willReturn($expr)
+            ;
+
+            $expr
+                ->in('o.'.$property, $value)
+                ->shouldBeCalled()
+                ->willReturn('o.'.$property.' IN (:'.$property.')')
+            ;
+
+            $queryBuilder
+                ->andWhere('o.'.$property.' IN (:'.$property.')')
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
