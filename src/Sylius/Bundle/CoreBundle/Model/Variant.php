@@ -97,6 +97,23 @@ class Variant extends BaseVariant implements VariantInterface
         $this->images = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        $string = $this->getProduct()->getName();
+
+        if (0 < $this->getOptions()->count()) {
+            $string .= '(';
+
+            foreach ($this->getOptions() as $option) {
+                $string .= $option->getOption()->getName(). ': '.$option->getValue().', ';
+            }
+
+            $string = substr($string, 0, -2).')';
+        }
+
+        return $string;
+    }
+
     /**
      * {@inheritdoc}
      */
