@@ -190,7 +190,7 @@ class Coordinator implements CoordinatorInterface
     public function registerScenario($alias, ProcessScenarioInterface $scenario)
     {
         if (isset($this->scenarios[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Process scenario with alias "%s" is already registered', $alias));
+            throw new InvalidArgumentException(sprintf('Process scenario with alias "%s" is already registered', $alias));
         }
 
         $this->scenarios[$alias] = $scenario;
@@ -202,7 +202,7 @@ class Coordinator implements CoordinatorInterface
     public function loadScenario($alias)
     {
         if (!isset($this->scenarios[$alias])) {
-            throw new \InvalidArgumentException(sprintf('Process scenario with alias "%s" is not registered', $alias));
+            throw new InvalidArgumentException(sprintf('Process scenario with alias "%s" is not registered', $alias));
         }
 
         return $this->scenarios[$alias];
