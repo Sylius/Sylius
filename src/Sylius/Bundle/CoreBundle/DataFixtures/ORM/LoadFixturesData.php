@@ -81,7 +81,7 @@ class LoadFixturesData implements FixtureInterface, ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         // load regular fixtures
-        $regulars = array('countries', 'exchange_rates', 'promotions', 'users', 'addresses', 'properties', 'zones', 'options', 'taxation', 'shipping', 'payment_methods', 'taxonomies');
+        $regulars = array('countries', 'exchange_rates', 'promotions', 'users', 'groups', 'addresses', 'properties', 'zones', 'options', 'taxation', 'shipping', 'payment_methods', 'taxonomies');
         array_walk($regulars, function (&$file) {
             $file = $this->fixturesDir . "$file.yml";
         });
