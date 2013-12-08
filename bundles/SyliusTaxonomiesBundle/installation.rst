@@ -2,20 +2,20 @@ Installation
 ============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-
 Use the following command to add the bundle to your `composer.json` and download the package.
+
 If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
 
-    $ composer require sylius/taxonomies-bundle:0.2.*
+    $ composer require "sylius/taxonomies-bundle":"1.0.*@dev"
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/taxonomies-bundle:0.2.*@dev
+    $ php composer.phar require "sylius/taxonomies-bundle":"1.0.*@dev"
 
 .. note::
 
