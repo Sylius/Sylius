@@ -67,7 +67,7 @@ apache::vhost { "${host_name}":
   docroot       => "/var/www/sylius/web/",
   port          => '80',
   env_variables => [
-    'VAGRANT' => 'VAGRANT'
+    'VAGRANT VAGRANT'
   ],
   priority      => '1',
 }
