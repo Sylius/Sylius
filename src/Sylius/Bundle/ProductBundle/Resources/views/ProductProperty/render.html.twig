@@ -1,0 +1,11 @@
+<div class="collection-box{% if form|length == 1%} unique-field{% endif %}">
+    {% if allow_delete %}
+    <a href="#" data-form-collection="delete">
+        <i class="glyphicon glyphicon-remove collection-button-remove"></i>
+    </a>
+    {% endif %}
+
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
+</div>

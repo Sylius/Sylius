@@ -59,7 +59,7 @@ class ProductType extends AbstractType
                 'time_widget' => 'text',
                 'label'       => 'sylius.label.product.available_on'
             ))
-            ->add('properties', 'collection', array(
+            ->add('properties', 'sylius_property_collection', array(
                 'required'     => false,
                 'type'         => 'sylius_product_property',
                 'allow_add'    => true,

@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

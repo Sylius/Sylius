@@ -22,16 +22,25 @@
         this.$list = this.$element.find('[data-form-collection="list"]:first');
         this.count = this.$list.children().length;
 
-        this.$element.find('[data-form-collection="add"]:first')
-            .on('click', $.proxy(this.addItem, this));
+        this.$element.on(
+            'click',
+            '[data-form-collection="add"]:first',
+            $.proxy(this.addItem, this)
+        );
 
-        $(document).on(
+        this.$element.on(
             'click',
             '[data-form-collection="delete"]',
             $.proxy(this.deleteItem, this)
         );
 
-        $(document).on(
+        this.$element.on(
+            'change',
+            '[data-form-collection="update"]',
+            $.proxy(this.updateItem, this)
+        );
+
+        this.$element.on(
             'change',
             '[data-form-prototype="update"]',
             $.proxy(this.updatePrototype, this)
@@ -59,6 +68,23 @@
             this.count = this.count + 1;
 
             $(document).trigger('collection-form-add', [this.$list.children().first()]);
+        },
+
+        /**
+         * Update item from the collection
+         */
+        updateItem: function (event) {
+            event.preventDefault();
+
+            var $element = $(event.currentTarget),
+                url = $element.data('form-url'),
+                id = $element.val(),
+                $container = $element.closest('[data-form-collection="item"]'),
+                position = $container.data('form-collection-index');
+
+            $container.load(url, {'id' : id, 'position' : position});
+
+            $(document).trigger('collection-form-update', [this.$list.children().first()]);
         },
 
         /**

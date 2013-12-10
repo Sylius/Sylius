@@ -13,15 +13,18 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Routing\Router;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class ProductPropertyTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(Router $router)
     {
-        $this->beConstructedWith('ProductProperty', array('sylius'));
+        $this->beConstructedWith('ProductProperty', array('sylius'), $router);
     }
 
     function it_is_initializable()
@@ -34,47 +37,23 @@ class ProductPropertyTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder                                   $builder
-     * @param Symfony\Component\Form\FormBuilder                                   $fieldBuilder
-     * @param Symfony\Component\Form\FormFactoryInterface                          $formFactory
-     * @param Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $choiceList
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface                  $property
-     */
     function it_builds_property_types_prototype_and_pass_it_as_argument(
-        $builder, $fieldBuilder, $formFactory, $choiceList, $property
+        FormBuilder $builder,
+        FormFactoryInterface $formFactory
     )
     {
-        $builder->getFormFactory()->willReturn($formFactory);
-        $builder->add('property', 'sylius_property_choice', Argument::any())->willReturn($builder);
+        $builder->getFormFactory()
+            ->shouldBeCalled()
+            ->willReturn($formFactory);
+
+        $builder->add('property', 'sylius_property_choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder);
 
         $builder
             ->addEventSubscriber(Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $property->getType()->willReturn('checkbox')->shouldBeCalled();
-
-        $choiceList
-            ->getChoices()
-            ->willReturn(array($property))
-        ;
-        $fieldBuilder
-            ->getOption('choice_list')
-            ->willReturn($choiceList)
-        ;
-        $builder
-            ->get('property')
-            ->willReturn($fieldBuilder)
-        ;
-        $builder
-            ->create('value', 'checkbox')
             ->shouldBeCalled()
-            ->willReturn($fieldBuilder)
-        ;
-        $fieldBuilder->getForm()->willReturn('form for property');
-
-        $builder->setAttribute('prototypes', array(0 => 'form for property'))->shouldBeCalled();
+            ->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

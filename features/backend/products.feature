@@ -152,6 +152,7 @@ Feature: Products
           And go to "Properties" tab
           And I click "Add property"
           And I select "T-Shirt fare trade" from "Property"
+          And I wait 1000
           And I check "Value"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
@@ -167,6 +168,7 @@ Feature: Products
           And go to "Properties" tab
           And I click "Add property"
           And I select "Color" from "Property"
+          And I wait 1000
           And I select "red" from "Value"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"

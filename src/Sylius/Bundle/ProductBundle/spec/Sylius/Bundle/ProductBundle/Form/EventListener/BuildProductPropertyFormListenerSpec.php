@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Model\Product;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -57,11 +58,12 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
      * @param Symfony\Component\Form\Form                                $valueField
      */
     function it_builds_value_field_base_on_product_property(
-        $event, $form, $productProperty, $valueField, $formFactory
+        $event, $form, $productProperty, $valueField, $formFactory, Product $product
     )
     {
         $productProperty->getType()->willReturn('checkbox');
         $productProperty->getName()->willReturn('My name');
+        $productProperty->getProduct()->willReturn($product);
         $productProperty->getConfiguration()->willReturn(array());
 
         $event->getData()->willReturn($productProperty);
@@ -82,13 +84,14 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
      * @param Symfony\Component\Form\Form                                $valueField
      */
     function it_builds_options_base_on_product_property(
-        $event, $form, $productProperty, $valueField, $formFactory
+        $event, $form, $productProperty, $valueField, $formFactory, Product $product
     )
     {
         $productProperty->getType()->willReturn('choice');
+        $productProperty->getProduct()->willReturn($product);
         $productProperty->getConfiguration()->willReturn(array(
-            array('configuration' => 'Red'),
-            array('configuration' => 'Blue')
+            array('choice' => 'Red'),
+            array('choice' => 'Blue')
         ));
         $productProperty->getName()->willReturn('My name');
 

@@ -70,25 +70,31 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
             return;
         }
 
-        $options['label'] = $productProperty->getName();
-
         if (is_array($productProperty->getConfiguration()) &&
             PropertyTypes::CHOICE == $productProperty->getType()) {
             $options['choices'] = $this->getChoices($productProperty->getConfiguration());
         }
 
         // If we're editing the product property, let's just render the value field, not full selection.
-        $form
-            ->remove('property')
-            ->add($this->factory->createNamed('value', $productProperty->getType(), null, $options))
-        ;
+        if (null !== $productProperty->getProduct()) {
+            $form->remove('property');
+            $options['label'] = $productProperty->getName();
+        }
+
+        $form->add($this->factory->createNamed('value', $productProperty->getType(), null, $options));
     }
 
+    /**
+     * Get choices from configuration
+     *
+     * @param $configuration
+     * @return array
+     */
     private function getChoices($configuration)
     {
         $choices = array();
         foreach ($configuration as $choice) {
-            $choices[strtolower($choice['configuration'])] = $choice['configuration'];
+            $choices[strtolower($choice['choice'])] = $choice['choice'];
         }
 
         return $choices;
