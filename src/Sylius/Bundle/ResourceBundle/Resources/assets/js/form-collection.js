@@ -42,6 +42,12 @@
 
         this.$element.on(
             'change',
+            '[data-form-collection="update"]',
+            $.proxy(this.updateItem, this)
+        );
+
+        $(document).on(
+            'change',
             '[data-form-prototype="update"]',
             $.proxy(this.updatePrototype, this)
         );
