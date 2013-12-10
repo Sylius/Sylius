@@ -470,3 +470,46 @@ input[type="file"] {
     width: 170px;
     text-align: center;
 }
+
+/** Order. **/
+.sylius-order-content-table .picture,
+.sylius-order-content-table .quantity,
+.sylius-order-content-table .unit-price,
+.sylius-order-content-table .total {
+    width: 110px;
+    vertical-align: middle;
+}
+.sylius-order-content-table .info .name {
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0 0 5px 0;
+}
+.sylius-order-content-table .info ul {
+    margin-bottom: 0;
+}
+.sylius-order-content-table .info .sku code {
+    background: #FCFCFC;
+    color: #666;
+}
+.sylius-order-content-table tr.taxes td,
+.sylius-order-content-table tr.shipping-charges td,
+.sylius-order-content-table tr.promotion-discount td {
+    vertical-align: middle;
+}
+.sylius-order-content-table tr.taxes td h5,
+.sylius-order-content-table tr.shipping-charges td h5,
+.sylius-order-content-table tr.promotion-discount td h5 {
+    margin-top: 0;
+}
+.sylius-order-content-table tr.taxes td p,
+.sylius-order-content-table tr.taxes td ul,
+.sylius-order-content-table tr.shipping-charges td p,
+.sylius-order-content-table tr.shipping-charges td ul,
+.sylius-order-content-table tr.promotion-discount td p,
+.sylius-order-content-table tr.promotion-discount td ul {
+    margin-bottom: 0;
+}
+.sylius-order-content-table span.amount {
+    min-width: 65px;
+    display: inline-block;
+}

@@ -22,7 +22,7 @@
     {% if state is sameas('completed') %}
         {% set class = 'label-success' %}
     {% elseif state in ['checkout', 'processing', 'new'] %}
-        {% set class = 'label-info' %}
+        {% set class = 'label-primary' %}
     {% else %}
         {% set class = 'label-danger' %}
     {% endif %}

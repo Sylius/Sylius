@@ -2,6 +2,7 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -13,129 +14,97 @@
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.order.show_header'|trans({'%number%': order.number})|raw }}</h1>
+    <div class="actions-menu">
+        {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+        {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
+    </div>
+    <h1><span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th colspan="2">{{ 'sylius.order.general_info'|trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>{{ 'sylius.order.id'|trans }}</strong></td>
-                <td>{{ order.id }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.number'|trans }}</strong></td>
-                <td>#{{ order.number }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.total'|trans }}</strong></td>
-                <td>{{ order.total|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.items_total'|trans }}</strong></td>
-                <td>{{ order.itemsTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.tax_total'|trans }}</strong></td>
-                <td>{{ order.taxTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.shipping_total'|trans }}</strong></td>
-                <td>{{ order.shippingTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.promotion_total'|trans }}</strong></td>
-                <td>{{ order.promotionTotal|sylius_price(order.currency) }}</td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
-                <td>
-                    <strong>
-                        {#
-                        <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                            {{ order.user.username }}
-                        </a>
-                        #}
-                    </strong>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>{{ 'sylius.order.created_at'|trans }}</strong></td>
-                <td>{{ order.createdAt|date }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col col-md-3">
+        <h4>{{ 'sylius.order.billing_address'|trans|title }}</h4>
+        <address>
+            <strong>{{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}</strong><br/>
+            {% if order.billingAddress.company %}
+                {{ order.billingAddress.company }}<br/>
+            {% endif %}
+            {{ order.billingAddress.street }}<br/>
+            {{ order.billingAddress.city }}<br/>
+            {% if order.billingAddress.province %}
+                {{ order.billingAddress.province }}<br/>
+            {% endif %}
+            {{ order.billingAddress.country }} {{ order.billingAddress.postcode }}
+        </address>
     </div>
-    <div class="col-md-6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="5">
-                        {{ 'sylius.order.shipments'|trans }}
-                    </th>
-                </tr>
-                <tr>
-                    <th>{{ 'sylius.shipment.id'|trans }}</th>
-                    <th>{{ 'sylius.shipment.method'|trans }}</th>
-                    <th>{{ 'sylius.shipment.state'|trans }}</th>
-                    <th>{{ 'sylius.shipment.updated_at'|trans }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for shipment in order.shipments %}
-                <tr>
-                    <td>{{ shipment.id }}</td>
-                    <td>{{ shipment.method.name }}</td>
-                    <td>{{ shipment.state }}</td>
-                    <td>{{ shipment.updatedAt|date }}</td>
-                    <td>
-                        <div class="pull-right">
-                            {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
-                        </div>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5">
-                        <hr />
-                        <div class="alert alert-info">{{ 'sylius.order.no_shipments'|trans }}</div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="col col-md-3">
+        <h4>{{ 'sylius.order.shipping_address'|trans|title }}</h4>
+        <address>
+            <strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong><br/>
+            {% if order.shippingAddress.company %}
+                {{ order.shippingAddress.company }}<br/>
+            {% endif %}
+            {{ order.shippingAddress.street }}<br/>
+            {{ order.shippingAddress.city }}<br/>
+            {% if order.shippingAddress.province %}
+                {{ order.shippingAddress.province }}<br/>
+            {% endif %}
+            {{ order.shippingAddress.country }} {{ order.shippingAddress.postcode }}
+        </address>
+    </div>
+    <div class="col col-md-3">
+        <h4>Order Details</h4>
+        <dl>
+            <dt>{{ 'sylius.order.created_at'|trans }}</dt>
+            <dd>{{ order.createdAt|date }}</dd>
+            <dt>Email</dt>
+            <dd>{{ order.user.email }}</dd>
+        </dl>
+    </div>
+    <div class="col col-md-3">
+        <div class="list-group">
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.payment'|trans }}</h4>
+                <div class="list-group-item-text">
+                    <a href="{{ path('sylius_backend_payment_update', {'id': order.payment.id}) }}">{{ order.payment.method }} - {{ order.payment.amount|sylius_price(order.payment.currency) }}</a>
+                    <div class="pull-right">
+                        {{ misc.state_label(order.payment.state, 'payment') }}
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.shipments'|trans }}</h4>
+                <div class="list-group-item-text">
+                    <ul class="list-unstyled">
+                    {% for shipment in order.shipments %}
+                        <li>
+                            <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">{{ shipment.method.name }}</a>
+                            <div class="pull-right">
+                                <span class="label label-primary">{{ shipment.state|title }}</span>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="text-muted">
+                            {{ 'sylius.order.no_shipments'|trans }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': order.shippingAddress, 'title': 'sylius.order.shipping_address'|trans} %}
-    </div>
-    <div class="col-md-6">
-        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': order.billingAddress, 'title': 'sylius.order.billing_address'|trans} %}
-    </div>
-</div>
-<hr />
-<div class="well">
-    {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.order.manage'|trans) }}
-    {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
-    {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
-</div>
-<table class="table table-striped table-bordered">
+
+<hr/>
+
+<table class="sylius-order-content-table table table-striped table-bordered">
     <thead>
         <tr>
-            <th>#</th>
-            <th>{{ 'sylius.product.sku'|trans }}</th>
-            <th>{{ 'sylius.order_item.product'|trans }}</th>
-            <th>{{ 'sylius.order_item.quantity'|trans }}</th>
-            <th><span class="pull-right">{{ 'sylius.order_item.unit_price'|trans }}</span></th>
-            <th><span class="pull-right">{{ 'sylius.order_item.total'|trans }}</span></th>
+            <th class="picture"></th>
+            <th class="info">{{ 'sylius.order_item.product'|trans }}</th>
+            <th class="quantity text-center">{{ 'sylius.order_item.quantity'|trans }}</th>
+            <th class="unit-price text-center">{{ 'sylius.order_item.unit_price'|trans }}</th>
+            <th class="total text-right">{{ 'sylius.order_item.total'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -143,35 +112,31 @@
         {% set variant = item.variant %}
         {% set product = variant.product %}
         <tr>
-            <td>{{ loop.index }}</td>
-            <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-info">
-                <i class="icon-info-sign"></i> {{ variant.sku|default('SKU') }}
-                {{ variant.sku|default('SKU') }}
+            <td class="picture text-center">
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}"
+                   title="View {{ product.name|escape('html_attr') }} details.">
+                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_90x60') : 'http://placehold.it/90x60' }}" alt="" class="imgmedia-object" />
                 </a>
             </td>
-            <td>
-                <p>
-                    <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a>
-                </p>
+            <td class="info">
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
+                    <h4 class="name">{{ product.name }}</h4>
+                </a>
                 {% if product.hasOptions %}
-                <ul class="unstyled">
+                <ul class="list-unstyled">
+                    <li class="sku"><strong>{{ 'sylius.product.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
                     {% for option in variant.options %}
                     <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
             </td>
-            <td>{{ item.quantity }}</td>
-            <td>
-                <span class="pull-right">
+            <td class="quantity text-center">{{ item.quantity }}</td>
+            <td class="unit-price text-center">
                 {{ item.unitPrice|sylius_price(order.currency) }}
-                </span>
             </td>
-            <td>
-                <span class="pull-right">
+            <td class="total text-right">
                 {{ item.total|sylius_price(order.currency) }}
-                </span>
             </td>
         </tr>
         {% else %}
@@ -185,78 +150,75 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="6">
-                <span class="pull-right">
-                <strong>{{ 'sylius.order.items_total'|trans }}</strong>: {{ order.itemsTotal|sylius_price(order.currency) }}
-                </span>
+            <td class="active text-right" colspan="6">
+                <strong>{{ 'sylius.order.items_total'|trans }}</strong>:
+                <span class="amount">{{ order.itemsTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
-        <tr>
-            <td colspan="4">
-                <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
+        <tr class="taxes">
+            <td colspan="2">
+                <h5>{{ 'sylius.order.taxes'|trans }}</h5>
                 {% if order.taxAdjustments|length > 0 %}
-                    <ul>
+                    <ul class="list-unstyled">
                         {% for taxAdjustment in order.taxAdjustments %}
                             <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <span class="label label-default">{{ 'sylius.order.no_taxes'|trans }}</span>
+                    <p class="text-muted"><small>{{ 'sylius.order.no_taxes'|trans }}</small></p>
                 {% endif %}
             </td>
-            <td colspan="2">
-                <span class="pull-right">
-                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ order.taxTotal|sylius_price(order.currency) }}
-                </span>
+            <td class="text-right" colspan="3">
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>:
+                <span class="amount">{{ order.taxTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
-        <tr>
-            <td colspan="4">
-                <p><strong>{{ 'sylius.order.shipping_charges'|trans }}</strong></p>
+        <tr class="shipping-charges">
+            <td colspan="2">
+                <h5>{{ 'sylius.order.shipping_charges'|trans }}</h5>
                 {% if order.shippingAdjustments|length > 0 %}
-                <ul>
-                {% for adjustment in order.shippingAdjustments %}
-                    <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
-                {% endfor %}
-                </ul>
+                    <ul class="list-unstyled">
+                        {% for adjustment in order.shippingAdjustments %}
+                            <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
+                        {% endfor %}
+                    </ul>
                 {% else %}
-                    <span class="label label-default">{{ 'sylius.order.no_shipping_charges'|trans }}</span>
+                    <p class="text-muted"><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
                 {% endif %}
             </td>
-            <td colspan="2">
-                <span class="pull-right">
-                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ order.shippingTotal|sylius_price(order.currency) }}
-                </span>
+            <td class="text-right" colspan="3">
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>:
+                <span class="amount">{{ order.shippingTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
-        <tr>
-            <td colspan="4">
-                <p><strong>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</strong></p>
+        <tr class="promotion-discount">
+            <td colspan="2">
+                <h5>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</h5>
                 {% if order.promotionAdjustments|length > 0 %}
-                    <ul>
+                    <ul class="list-unstyled">
                         {% for adjustment in order.promotionAdjustments %}
                             <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <span class="label label-default">{{ 'sylius.checkout.finalize.order.no_promotion'|trans }}</span>
+                    <p class="text-muted"><small>{{ 'sylius.checkout.finalize.order.no_promotion'|trans }}</small></p>
                 {% endif %}
             </td>
-            <td colspan="2">
-                <span class="pull-right">
-                <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>: {{ order.promotionTotal|sylius_price(order.currency) }}
-                </span>
+            <td class="text-right" colspan="3">
+                <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
+                <span class="amount">{{ order.promotionTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
-        <tr style="background-color: #f1f1f1;">
-            <td colspan="6">
-                <span class="pull-right">
-                <strong>{{ 'sylius.order.total'|trans }}</strong>: {{ order.total|sylius_price(order.currency) }}
-                </span>
+        <tr>
+            <td class="text-right active text-success lead" colspan="6">
+                <strong>{{ 'sylius.order.total'|trans }}</strong>:
+                <span class="amount">{{ order.total|sylius_price(order.currency) }}</span>
             </td>
         </tr>
     </tfoot>
 </table>
+
+<hr/>
 
 <table class="table table-striped table-bordered">
     <thead>

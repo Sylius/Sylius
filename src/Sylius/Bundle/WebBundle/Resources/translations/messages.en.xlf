@@ -1036,7 +1036,7 @@
       </trans-unit>
       <trans-unit id="0cd9ee7a56fb7b1e6f0e5e8711861558" resname="sylius.order.show_header">
         <source>sylius.order.show_header</source>
-        <target>Order details</target>
+        <target>Order #%number%</target>
       </trans-unit>
       <trans-unit id="766bbaff24003cb2a5b08e12419bf722" resname="sylius.order.state.checkout">
         <source>sylius.order.state.checkout</source>
@@ -2205,6 +2205,10 @@
       <trans-unit id="07e92a959c87c1cdab5a6472de322d3f" resname="sylius.product.contain_variants">
         <source>sylius.product.contain_variants</source>
         <target>Contain Variants</target>
+      </trans-unit>
+      <trans-unit id="1bb55d4e07056205789d3989945fe25c" resname="sylius.order.payment">
+        <source>sylius.order.payment</source>
+        <target>Payment</target>
       </trans-unit>
     </body>
   </file>
