@@ -145,6 +145,6 @@ class AppKernel extends Kernel
      */
     private function isVagrantEnvironment()
     {
-        return isset($_SERVER['HOME']) && $_SERVER['HOME'] === '/home/vagrant' && is_dir('/dev/shm');
+        return getenv('HOME') === '/home/vagrant' && is_dir('/dev/shm');
     }
 }
