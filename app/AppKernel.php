@@ -121,7 +121,7 @@ class AppKernel extends Kernel
      */
     public function getCacheDir()
     {
-        if (isset($_SERVER['VAGRANT']) && in_array($this->environment, array('dev', 'test')) && is_dir('/dev/shm')) {
+        if ($this->isVagrantEnvironment()) {
             return '/dev/shm/sylius/cache/'.$this->environment;
         }
 
@@ -133,10 +133,18 @@ class AppKernel extends Kernel
      */
     public function getLogDir()
     {
-        if (isset($_SERVER['VAGRANT']) && in_array($this->environment, array('dev', 'test')) && is_dir('/dev/shm')) {
+        if ($this->isVagrantEnvironment()) {
             return '/dev/shm/sylius/logs';
         }
 
         return parent::getLogDir();
+    }
+
+    /**
+     * @return bool
+     */
+    private function isVagrantEnvironment()
+    {
+        return isset($_SERVER['HOME']) && $_SERVER['HOME'] === '/home/vagrant' && is_dir('/dev/shm');
     }
 }
