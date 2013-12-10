@@ -67,7 +67,9 @@
                 <h4 class="list-group-item-heading">{{ 'sylius.order.payment'|trans }}</h4>
                 <div class="list-group-item-text">
                     <a href="{{ path('sylius_backend_payment_update', {'id': order.payment.id}) }}">{{ order.payment.method }} - {{ order.payment.amount|sylius_price(order.payment.currency) }}</a>
-                    {{ misc.state_label(order.payment.state, 'payment') }}
+                    <div class="pull-right">
+                        {{ misc.state_label(order.payment.state, 'payment') }}
+                    </div>
                 </div>
             </div>
             <div class="list-group-item">
@@ -77,7 +79,9 @@
                     {% for shipment in order.shipments %}
                         <li>
                             <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">{{ shipment.method.name }}</a>
-                            <span class="label label-info">{{ shipment.state|title }}</span>
+                            <div class="pull-right">
+                                <span class="label label-primary">{{ shipment.state|title }}</span>
+                            </div>
                         </li>
                     {% else %}
                         <li class="text-muted">
