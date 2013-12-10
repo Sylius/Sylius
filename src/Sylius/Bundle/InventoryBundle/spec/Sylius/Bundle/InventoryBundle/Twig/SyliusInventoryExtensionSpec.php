@@ -12,16 +12,15 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusInventoryExtensionSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $checker
-     */
-    function let($checker)
+    function let(AvailabilityCheckerInterface $checker)
     {
         $this->beConstructedWith($checker);
     }
@@ -36,20 +35,14 @@ class SyliusInventoryExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('Twig_Extension');
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_delegates_the_stock_availability_checking_to_the_checker($checker, $stockable)
+    function it_delegates_the_stock_availability_checking_to_the_checker($checker, StockableInterface $stockable)
     {
         $checker->isStockAvailable($stockable)->shouldBeCalled()->willReturn(true);
 
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_delegates_the_stock_sufficiency_checking_to_the_checker($checker, $stockable)
+    function it_delegates_the_stock_sufficiency_checking_to_the_checker($checker, StockableInterface $stockable)
     {
         $checker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(false);
 

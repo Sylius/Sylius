@@ -15,13 +15,12 @@ use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Sylius resource extension for Twig spec.
@@ -31,7 +30,7 @@ use Symfony\Component\DependencyInjection\Container;
  */
 class SyliusResourceExtensionSpec extends ObjectBehavior
 {
-    function let(Container $container, Router $router, TwigEngine $templating)
+    function let(ContainerInterface $container, RouterInterface $router, TwigEngine $templating)
     {
         $container->get('router')->willReturn($router);
         $container->get('templating')->willReturn($templating);
@@ -64,7 +63,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->getFunctions()->shouldHaveCount(2);
     }
 
-    function it_should_render_a_sorting_link(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
+    function it_should_render_a_sorting_link(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
     {
         $request->get('sorting')->willReturn(array());
 
@@ -89,7 +88,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_desc_link(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
+    function it_should_render_a_sorting_desc_link(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
     {
         $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
 
@@ -114,7 +113,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_asc_link(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
+    function it_should_render_a_sorting_asc_link(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
     {
         $request->get('sorting')->willReturn(array());
 
@@ -139,7 +138,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('otherName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_link_with_custom_options(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
+    function it_should_render_a_sorting_link_with_custom_options(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
     {
         $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
 
@@ -186,7 +185,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName')->shouldReturn('fieldName');
     }
 
-    function it_should_render_a_paginate_select(Request $request, GetResponseEvent $event, Pagerfanta $paginator, Router $router, TwigEngine $templating)
+    function it_should_render_a_paginate_select(Request $request, GetResponseEvent $event, Pagerfanta $paginator, RouterInterface $router, TwigEngine $templating)
     {
         $limits = array(10, 20);
 
@@ -226,7 +225,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderPaginateSelect($paginator, array(10,20));
     }
 
-    function it_should_render_a_paginate_select_with_custom_options(Request $request, GetResponseEvent $event, Pagerfanta $paginator, Router $router, TwigEngine $templating)
+    function it_should_render_a_paginate_select_with_custom_options(Request $request, GetResponseEvent $event, Pagerfanta $paginator, RouterInterface $router, TwigEngine $templating)
     {
         $limits = array(10, 20);
 

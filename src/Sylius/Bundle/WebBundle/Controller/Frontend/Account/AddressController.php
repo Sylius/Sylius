@@ -48,12 +48,10 @@ class AddressController extends ResourceController
      */
     public function createAction(Request $request)
     {
-        $config = $this->getConfiguration();
-
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->getUser()->addAddress($resource);
             $event = $this->create($resource);
 
@@ -66,6 +64,7 @@ class AddressController extends ResourceController
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
         }
 
+        $config = $this->getConfiguration();
         if ($config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }

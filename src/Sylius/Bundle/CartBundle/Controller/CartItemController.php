@@ -77,7 +77,7 @@ class CartItemController extends Controller
 
         return $this->redirectAfterAdd($request);
     }
-    
+
     /**
      * Redirect to specific URL or to cart.
      *
@@ -93,7 +93,7 @@ class CartItemController extends Controller
 
         return $this->redirectToCartSummary();
     }
-    
+
     /**
      * Removes item from cart.
      * It takes an item id as an argument.

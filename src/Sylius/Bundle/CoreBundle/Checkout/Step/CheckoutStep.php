@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
@@ -41,7 +40,7 @@ abstract class CheckoutStep extends ControllerStep
     /**
      * Get current cart instance.
      *
-     * @return CartInterface
+     * @return OrderInterface
      */
     protected function getCurrentCart()
     {

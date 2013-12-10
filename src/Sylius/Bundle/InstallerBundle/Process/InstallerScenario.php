@@ -17,6 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 class InstallerScenario extends ContainerAware implements ProcessScenarioInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(ProcessBuilderInterface $builder)
     {
         $builder

@@ -49,7 +49,7 @@ class PaymentStep extends CheckoutStep
 
         $form = $this->createCheckoutPaymentForm($order);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
             $this->getManager()->persist($order);
@@ -65,7 +65,7 @@ class PaymentStep extends CheckoutStep
 
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-      return $this->render('SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig', array(
+        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig', array(
             'order'   => $order,
             'form'    => $form->createView(),
             'context' => $context

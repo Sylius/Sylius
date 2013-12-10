@@ -48,7 +48,7 @@ class PrototypeController extends ResourceController
 
         $form = $productController->getForm($product);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $manager = $productController->getManager();
 
             $manager->persist($product);
