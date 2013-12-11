@@ -104,48 +104,24 @@ php::pecl::module { 'mongo':
     use_package => "no",
 }
 
-class { 'xdebug':
-  service => 'apache',
-}
-
 class { 'composer':
+  command_name => 'composer',
+  target_dir   => '/usr/local/bin',
+  auto_update => true,
   require => Package['php5', 'curl'],
 }
 
-puphpet::ini { 'xdebug':
-  value   => [
-    'xdebug.default_enable = 1',
-    'xdebug.remote_autostart = 0',
-    'xdebug.remote_connect_back = 1',
-    'xdebug.remote_enable = 1',
-    'xdebug.remote_handler = "dbgp"',
-    'xdebug.remote_port = 9000'
-  ],
-  ini     => '/etc/php5/conf.d/sylius_xdebug.ini',
-  notify  => Service['apache'],
-  require => Class['php'],
-}
 
-puphpet::ini { 'mongo':
+php::ini { 'php_ini_configuration':
   value   => [
     'extension=mongo.so',
-  ],
-  ini     => '/etc/php5/conf.d/sylius_mongo.ini',
-  notify  => Service['apache'],
-  require => Class['php'],
-}
-
-puphpet::ini { 'custom':
-  value   => [
     'date.timezone = "UTC"',
     'display_errors = On',
     'error_reporting = -1',
     'short_open_tag = 0',
-    'xdebug.max_nesting_level = 1000'
   ],
-  ini     => '/etc/php5/conf.d/sylius_custom.ini',
   notify  => Service['apache'],
-  require => Class['php'],
+  require => Class['php']
 }
 
 class { 'mysql::server':

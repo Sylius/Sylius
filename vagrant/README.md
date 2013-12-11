@@ -8,18 +8,11 @@ This configuration includes following software:
 * Vim
 * MC (Midnight commander)
 * Curl
-* Xdebug
 * Composer
 
 # Usage
 
-First you need to install git submodules. Go to your project root folder and execute following commands:
-```
-$ git submodule init
-$ git submodule update
-```
-
-Now you are ready to run
+First you need to create vagrant VM
 
 ```
 $ cd vagrant

@@ -13,11 +13,12 @@ Vagrant.configure("2") do |config|
 
   nfs_setting = RUBY_PLATFORM =~ /darwin/ || RUBY_PLATFORM =~ /linux/
   config.vm.synced_folder "./../", "/var/www/sylius", id: "vagrant-root" , :nfs => nfs_setting
-  config.vm.provision :shell, :inline => "sudo apt-get update"
+  config.vm.provision :shell do |shell|
+    shell.path = "bootstrap.sh"
+  end
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
-    puppet.module_path = "modules"
     puppet.options = ['--verbose']
   end
 end
