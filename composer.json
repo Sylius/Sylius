@@ -24,6 +24,7 @@
         "athari/yalinqo":                       "*@dev",
         "doctrine/doctrine-bundle":             "1.2.*@dev",
         "doctrine/orm":                         "~2.3",
+        "doctrine/doctrine-fixtures-bundle":    "2.2.*",
         "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "hwi/oauth-bundle":                     "0.3.*",
@@ -60,7 +61,6 @@
         "behat/mink-browserkit-driver":      "*",
         "behat/mink-goutte-driver":          "*",
         "behat/mink-selenium2-driver":       "*",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "2.0.*@dev",
         "phpspec/prophecy":                  "1.0.*@dev"
