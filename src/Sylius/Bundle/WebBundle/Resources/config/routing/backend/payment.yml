@@ -9,6 +9,8 @@ sylius_backend_payment_index:
         _sylius:
             template: SyliusWebBundle:Backend/Payment:index.html.twig
             sortable: true
+            sorting:
+                id: desc
 
 sylius_backend_payment_create:
     pattern: /new
