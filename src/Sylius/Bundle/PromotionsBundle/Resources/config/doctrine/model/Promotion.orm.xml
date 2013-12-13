@@ -42,6 +42,19 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        <many-to-many field="subjects" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface">
+            <join-table name="sylius_promotion_subject">
+                <join-columns>
+                    <join-column name="promotion_id" referenced-column-name="id" on-delete="CASCADE"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="subject_id" referenced-column-name="id" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </many-to-many>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

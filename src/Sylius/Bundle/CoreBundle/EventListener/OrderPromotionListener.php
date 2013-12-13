@@ -73,8 +73,6 @@ class OrderPromotionListener
             );
         }
 
-        // remove former promotion adjustments as they are calculated each time the cart changes
-        $order->removePromotionAdjustments();
         $this->promotionProcessor->process($order);
 
         $order->calculateTotal();

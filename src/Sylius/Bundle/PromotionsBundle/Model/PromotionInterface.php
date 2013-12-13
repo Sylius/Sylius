@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion model interface.
@@ -213,4 +214,34 @@ interface PromotionInterface extends TimestampableInterface
      * @return self
      */
     public function removeAction(ActionInterface $action);
+
+    /**
+     * Has subject
+     *
+     * @param PromotionSubjectInterface $subject
+     * @return bool
+     */
+    public function hasSubject(PromotionSubjectInterface $subject);
+
+    /**
+     * Add subject
+     *
+     * @param PromotionSubjectInterface $subject
+     * @return self
+     */
+    public function addSubject(PromotionSubjectInterface $subject);
+
+    /**
+     * Remove subject
+     *
+     * @param PromotionSubjectInterface $subject
+     */
+    public function removeSubject(PromotionSubjectInterface $subject);
+
+    /**
+     * Get subjects
+     *
+     * @return PromotionSubjectInterface[]
+     */
+    public function getSubjects();
 }

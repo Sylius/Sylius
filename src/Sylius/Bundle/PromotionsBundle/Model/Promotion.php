@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion model.
@@ -98,6 +99,11 @@ class Promotion implements PromotionInterface
     protected $actions;
 
     /**
+     * @var PromotionSubjectInterface[]
+     */
+    private $subjects;
+
+    /**
      * Last time updated
      *
      * @var \DateTime
@@ -121,6 +127,7 @@ class Promotion implements PromotionInterface
         $this->coupons = new ArrayCollection();
         $this->rules = new ArrayCollection();
         $this->actions = new ArrayCollection();
+        $this->subjects = new ArrayCollection();
     }
 
     /**
@@ -445,5 +452,41 @@ class Promotion implements PromotionInterface
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSubject(PromotionSubjectInterface $subject)
+    {
+        return $this->subjects->contains($subject);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSubject(PromotionSubjectInterface $subject)
+    {
+        if (!$this->hasSubject($subject)) {
+            $this->subjects[] = $subject;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSubject(PromotionSubjectInterface $subject)
+    {
+        $this->subjects->removeElement($subject);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
     }
 }

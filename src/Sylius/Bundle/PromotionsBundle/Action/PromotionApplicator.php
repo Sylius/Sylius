@@ -37,6 +37,8 @@ class PromotionApplicator implements PromotionApplicatorInterface
                 ->execute($subject, $action->getConfiguration(), $promotion)
             ;
         }
+
+        $promotion->addSubject($subject);
     }
 
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
@@ -47,5 +49,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
                 ->revert($subject, $action->getConfiguration(), $promotion)
             ;
         }
+
+        $promotion->removeSubject($subject);
     }
 }

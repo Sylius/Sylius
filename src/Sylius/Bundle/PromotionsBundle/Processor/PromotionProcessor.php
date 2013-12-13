@@ -41,7 +41,7 @@ class PromotionProcessor implements PromotionProcessorInterface
         foreach ($this->repository->findActive() as $promotion) {
             if ($this->checker->isEligible($subject, $promotion)) {
                 $this->applicator->apply($subject, $promotion);
-            } else {
+            } elseif ($promotion->hasSubject($subject)) {
                 $this->applicator->revert($subject, $promotion);
             }
         }
