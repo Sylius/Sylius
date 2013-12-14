@@ -46,8 +46,8 @@ class ProductController extends ResourceController
             ->createByTaxonPaginator($taxon)
         ;
 
-        $paginator->setCurrentPage($request->query->get('page', 1));
         $paginator->setMaxPerPage($this->getConfiguration()->getPaginationMaxPerPage());
+        $paginator->setCurrentPage($request->query->get('page', 1));
 
         return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
             'taxon'    => $taxon,
