@@ -1,14 +1,9 @@
 language: php
 
 php:
-    - 5.3
-    - 5.4
-    - 5.5
-    - hhvm
-
-matrix:
-    allow_failures:
-        - php: hhvm
+  - 5.3
+  - 5.4
+  - 5.5
 
 services: mongodb
 
@@ -16,8 +11,8 @@ install:
     - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
 
 before_script:
-    - sh -c 'if [ $(php -r "echo (int) defined("HHVM_VERSION");") -eq 0 ]; then echo "" >> "~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini"; fi;'
-    - sh -c 'if [ $(php -r "echo (int) defined("HHVM_VERSION");") -eq 0 ]; then echo "extension = mongo.so" >> "~/.phpenv/versions/$(phpenv version-name)/etc/php.ini"; fi;'
+    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
     - ulimit -n 10000
     - sudo apt-get update
