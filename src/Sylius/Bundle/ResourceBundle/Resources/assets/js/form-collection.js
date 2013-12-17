@@ -84,11 +84,24 @@
 
             var $element = $(event.currentTarget),
                 url = $element.data('form-url'),
-                id = $element.val(),
+                value = $element.val(),
                 $container = $element.closest('[data-form-collection="item"]'),
-                position = $container.data('form-collection-index');
+                index = $container.data('form-collection-index'),
+                position = $container.data('form-collection-index');    
+            
 
-            $container.load(url, {'id' : id, 'position' : position});
+            if (url) {
+                $container.load(url, {'id' : value, 'position' : position});
+            } else {
+                var prototype = this.$element.find('[data-form-prototype="'+ value +'"]').val();
+
+                prototype = prototype.replace(
+                    /__name__/g,
+                    index
+                );
+
+                $container.replaceWith(prototype);
+            }
 
             $(document).trigger('collection-form-update', [this.$list.children().first()]);
         },

@@ -13,12 +13,9 @@ namespace Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
-use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * Promotion form type.
@@ -67,52 +64,13 @@ class PromotionType extends AbstractType
                 'label' => 'sylius.form.promotion.coupon_based',
                 'required' => false
             ))
-            ->add('rules', 'collection', array(
-                'type'             => 'sylius_promotion_rule',
-                'allow_add'        => true,
-                'allow_delete'     => true,
-                'by_reference'     => false,
-                'label'            => 'sylius.form.promotion.rules',
-                'button_add_label' => 'sylius.promotion.add_rule',
+            ->add('rules', 'sylius_rule_collection', array(
+                'registry'  => $this->checkerRegistry,
             ))
-            ->add('actions', 'collection', array(
-                'type'             => 'sylius_promotion_action',
-                'allow_add'        => true,
-                'allow_delete'     => true,
-                'by_reference'     => false,
-                'label'            => 'sylius.form.promotion.actions',
-                'button_add_label' => 'sylius.promotion.add_action',
+            ->add('actions', 'sylius_action_collection', array(
+                'registry'  => $this->actionRegistry,
             ))
         ;
-
-        $prototypes = array();
-        $prototypes['rules'] = array();
-
-        foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
-            $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
-        }
-
-        $prototypes['actions'] = array();
-
-        foreach ($this->actionRegistry->getActions() as $type => $action) {
-            $prototypes['actions'][$type] = $builder->create('__name__', $action->getConfigurationFormType())->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars['prototypes'] = array();
-
-        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
-            foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
-            }
-        }
     }
 
     /**

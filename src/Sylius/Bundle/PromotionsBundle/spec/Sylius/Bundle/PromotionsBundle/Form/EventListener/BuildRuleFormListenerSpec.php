@@ -13,7 +13,13 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
+use Sylius\Bundle\PromotionsBundle\Model\Rule;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -30,7 +36,7 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
         $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_item_total_configuration');
         $checkerRegistry->getChecker(Argument::any())->willReturn($checker);
 
-        $this->beConstructedWith($checkerRegistry, $factory);
+        $this->beConstructedWith($checkerRegistry, $factory, RuleInterface::TYPE_ITEM_TOTAL);
     }
 
     function it_should_be_initializable()
@@ -43,20 +49,61 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormEvent                   $event
-     * @param \Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
-     * @param \Symfony\Component\Form\Form                        $form
-     * @param \Symfony\Component\Form\Form                        $field
-     */
-    function it_should_add_configuration_fields_in_pre_set_data($checkerRegistry, $factory, $event, $rule, $form, $field)
+    function it_should_add_configuration_fields_in_pre_set_data(
+        FormEvent $event,
+        Form $form,
+        Rule $rule,
+        RuleCheckerRegistryInterface $checkerRegistry,
+        RuleCheckerInterface $checker,
+        FormFactoryInterface $factory,
+        Form $field)
     {
+        $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $rule->getConfiguration()->willReturn(array());
+
         $event->getData()->shouldBeCalled()->willReturn($rule);
         $event->getForm()->shouldBeCalled()->willReturn($form);
-        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->shouldBeCalled()->willReturn(array());
 
-        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
+        $checker->getConfigurationFormType()
+            ->shouldBeCalled()
+            ->willReturn('sylius_promotion_rule_item_total_configuration');
+
+        $checkerRegistry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)
+            ->shouldBeCalled()
+            ->willReturn($checker);
+
+        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($field);
+
+        $form->add($field)->shouldBeCalled();
+
+        $this->preSetData($event);
+    }
+
+    function it_should_add_automatically_configuration_fields_in_pre_set_data(
+        FormEvent $event,
+        Form $form,
+        RuleCheckerRegistryInterface $checkerRegistry,
+        RuleCheckerInterface $checker,
+        FormFactoryInterface $factory,
+        Form $field)
+    {
+        $event->getData()->shouldBeCalled();
+        $event->getForm()->shouldBeCalled()->willReturn($form);
+
+        $checker->getConfigurationFormType()
+            ->shouldBeCalled()
+            ->willReturn('sylius_promotion_rule_item_total_configuration');
+
+        $checkerRegistry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)
+            ->shouldBeCalled()
+            ->willReturn($checker);
+
+        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($field);
+
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);

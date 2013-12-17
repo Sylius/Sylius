@@ -17,10 +17,3 @@
         {{ form_widget(form.actions) }}
     </div>
 </div>
-
-<hr>
-
-{% for type, prototype in form.vars.prototypes %}
-    <div id="{{ type }}" data-prototype="{{ form_widget(prototype)|e }}">
-    </div>
-{% endfor %}

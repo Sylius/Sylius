@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Model\Action;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -36,31 +37,63 @@ class BuildActionFormListener implements EventSubscriberInterface
      */
     private $factory;
 
-    public function __construct(PromotionActionRegistryInterface $actionRegistry, FormFactoryInterface $factory)
+    /**
+     * @var string
+     */
+    private $actionType;
+
+    public function __construct(PromotionActionRegistryInterface $actionRegistry, FormFactoryInterface $factory, $actionType = null)
     {
         $this->actionRegistry = $actionRegistry;
         $this->factory = $factory;
+        $this->actionType = $actionType;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SET_DATA  => 'preSetData',
+            FormEvents::POST_SET_DATA => 'postSetData',
+            FormEvents::PRE_SUBMIT    => 'preBind',
         );
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function preSetData(FormEvent $event)
     {
+        /** @var Action $action */
         $action = $event->getData();
 
-        if (null === $action || null === $action->getId()) {
+        if (null === $type = $this->getActionType($action)) {
             return;
         }
 
-        $this->addConfigurationFields($event->getForm(), $action->getType(), $action->getConfiguration());
+        $this->addConfigurationFields($event->getForm(), $type, $this->getActionConfiguration($action));
     }
 
+    /**
+     * @param FormEvent $event
+     */
+    public function postSetData(FormEvent $event)
+    {
+        /** @var Action $action */
+        $action = $event->getData();
+
+        if (null === $type = $this->getActionType($action)) {
+            return;
+        }
+
+        $event->getForm()->get('type')->setData($type);
+    }
+
+    /**
+     * @param FormEvent $event
+     */
     public function preBind(FormEvent $event)
     {
         $data = $event->getData();
@@ -72,6 +105,11 @@ class BuildActionFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($event->getForm(), $data['type']);
     }
 
+    /**
+     * @param FormInterface $form
+     * @param $actionType
+     * @param array $data
+     */
     protected function addConfigurationFields(FormInterface $form, $actionType, array $data = array())
     {
         $action = $this->actionRegistry->getAction($actionType);
@@ -86,5 +124,39 @@ class BuildActionFormListener implements EventSubscriberInterface
         );
 
         $form->add($configurationField);
+    }
+
+    /**
+     * Get action configuration
+     *
+     * @param Action $action
+     * @return array
+     */
+    protected function getActionConfiguration($action)
+    {
+        if ($action instanceof Action && null !== $action->getConfiguration()) {
+            return $action->getConfiguration();
+        }
+
+        return array();
+    }
+
+    /**
+     * Get action type
+     *
+     * @param Action $action
+     * @return null|string
+     */
+    protected function getActionType($action)
+    {
+        if (null !== $this->actionType) {
+            return $this->actionType;
+        }
+
+        if ($action instanceof Action && null !== $action->getType()) {
+            return $action->getType();
+        }
+
+        return null;
     }
 }

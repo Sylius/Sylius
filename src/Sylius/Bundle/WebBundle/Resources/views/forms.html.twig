@@ -168,7 +168,7 @@
                 {% for key, subPrototype in prototypes %}
                     <input type="hidden"
                            data-form-prototype="{{ key }}"
-                           value="{{ _self.collectionItem(subPrototype, item_by_line, allow_delete)|e }}" />
+                           value="{{ _self.collectionItem(subPrototype, item_by_line, allow_delete, '__name__')|e }}" />
                 {% endfor %}
             {% endif %}
 
