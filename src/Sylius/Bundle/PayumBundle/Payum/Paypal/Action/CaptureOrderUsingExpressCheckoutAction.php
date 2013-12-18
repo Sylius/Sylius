@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
+use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
@@ -18,6 +19,19 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 {
+    /**
+     * @var \Payum\Bundle\PayumBundle\Security\TokenFactory
+     */
+    protected $tokenFactory;
+
+    /**
+     * @param TokenFactory $tokenFactory
+     */
+    public function __construct(TokenFactory $tokenFactory)
+    {
+        $this->tokenFactory = $tokenFactory;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -36,6 +50,10 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
         if (empty($details)) {
             $details['RETURNURL'] = $request->getToken()->getTargetUrl();
             $details['CANCELURL'] = $request->getToken()->getTargetUrl();
+            $details['NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
+                $request->getToken()->getPaymentName(),
+                $order
+            );
             $details['INVNUM'] = $order->getNumber();
 
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
