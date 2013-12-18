@@ -10,14 +10,9 @@
     'use strict';
 
     $(document).ready(function() {
-        $('.variant-table-toggle .icon').toggle(function() {
-            $(this).removeClass('icon-chevron-down').addClass('icon-chevron-up');
-            $(this).parent().parent().find('.table tbody').show();
-        }, function() {
-            $(this).addClass('icon-chevron-down').removeClass('icon-chevron-up');
-            $(this).parent().parent().find('.table tbody').hide();
+        $('.variant-table-toggle i.glyphicon').on('click', function(e) {
+            $(this).toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+            $(this).parent().parent().find('table tbody').toggle();
         });
-
-        //$('select').select2();
     });
 })( jQuery );
