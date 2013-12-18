@@ -27,7 +27,7 @@
         "sylius/flow-bundle":       "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec2":         "2.0.*@dev",
+        "phpspec/phpspec":          "2.0.*@dev",
         "symfony/form":             "~2.2",
         "symfony/validator":        "~2.2"
     },

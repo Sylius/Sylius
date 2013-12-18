@@ -74,6 +74,14 @@
         <source>sylius.form.zone_member_zone.zone</source>
         <target>Zone</target>
       </trans-unit>
+      <trans-unit id="6ad7f572d62b393704c8b2de64c652d7" resname="sylius.form.province.select">
+        <source>sylius.form.province.select</source>
+        <target>Select</target>
+      </trans-unit>
+      <trans-unit id="cd3fe802ed0b05b84afefc012f0fb02f" resname="sylius.form.address.province">
+        <source>sylius.form.address.province</source>
+        <target>Province</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -32,40 +32,35 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 
         /** @var OrderInterface $order */
         $order = $request->getModel();
+        $payment = $order->getPayment();
 
-        $paymentDetails = $order->getPayment()->getDetails();
-        if (empty($paymentDetails)) {
-            $paymentDetails['RETURNURL'] = $request->getToken()->getTargetUrl();
-            $paymentDetails['CANCELURL'] = $request->getToken()->getTargetUrl();
-            $paymentDetails['INVNUM'] = $order->getNumber();
+        $details = $payment->getDetails();
+        if (empty($details)) {
+            $details['RETURNURL'] = $request->getToken()->getTargetUrl();
+            $details['CANCELURL'] = $request->getToken()->getTargetUrl();
+            $details['INVNUM'] = $order->getNumber();
 
-            $paymentDetails['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
-            $paymentDetails['PAYMENTREQUEST_0_AMT'] = number_format($order->getTotal() / 100, 2);
-            $paymentDetails['PAYMENTREQUEST_0_ITEMAMT'] = number_format($order->getItemsTotal() / 100, 2);
-            $paymentDetails['PAYMENTREQUEST_0_TAXAMT'] = number_format($order->getTaxTotal() / 100, 2);
-            $paymentDetails['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format($order->getShippingTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
+            $details['PAYMENTREQUEST_0_AMT'] = number_format($order->getTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_ITEMAMT'] = number_format($order->getItemsTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_TAXAMT'] = number_format($order->getTaxTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format($order->getShippingTotal() / 100, 2);
 
             $m = 0;
             foreach ($order->getItems() as $item) {
-                $paymentDetails['L_PAYMENTREQUEST_0_AMT'.$m] =  number_format($item->getTotal() / 100, 2);
-                $paymentDetails['L_PAYMENTREQUEST_0_QTY'.$m] =  $item->getQuantity();
+                $details['L_PAYMENTREQUEST_0_AMT'.$m] =  number_format($item->getTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_QTY'.$m] =  $item->getQuantity();
 
                 $m++;
             }
+
+            $payment->setDetails($details);
         }
 
-        // TODO: find a way to simply the next logic
+        $request->setModel($payment);
+        $this->payment->execute($request);
 
-        $paymentDetails = ArrayObject::ensureArrayObject($paymentDetails);
-
-        try {
-            $this->payment->execute(new CaptureRequest($paymentDetails));
-            $order->getPayment()->setDetails((array) $paymentDetails);
-        } catch (\Exception $e) {
-            $order->getPayment()->setDetails((array) $paymentDetails);
-
-            throw $e;
-        }
+        $request->setModel($order);
     }
 
     /**

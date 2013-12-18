@@ -4,54 +4,90 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
 {% if products|length > 0 %}
-<table class="table">
+<table class="sylius-products-table table table-bordered">
     <thead>
         <tr>
-            <th></th>
-            <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th></th>
-            <th>{{ 'sylius.product.sku'|trans }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
-            <th>{{ 'sylius.product.price'|trans }}</th>
-            <th></th>
+            <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
+            <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
+            <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
+            <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
+            <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
+            <th class="actions"></th>
         </tr>
     </thead>
     <tbody>
     {% for product in products %}
         <tr id="{{ product.id }}">
-            <td class="center-text"><input type="checkbox" value="{{ product.id }}" /></td>
-            <td>
+            <td class="id">
                 {{ product.id }}
             </td>
-            <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
-                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" class="img-rounded" />
-                </a>
+            <td class="info">
+                <div class="media">
+                    <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left"
+                       title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
+                        <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
+                    </a>
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <a class="name"
+                               href="{{ path('sylius_backend_product_show', {'id': product.id}) }}"
+                               title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
+                                {{ product.name }}
+                            </a>
+                            {% if not product.isAvailable %}
+                                <span class="label label-default">{{ 'sylius.product.unavailable'|trans }}</span>
+                            {% endif %}
+                        </h5>
+                        <div class="media-body">
+                            {% if product.sku %}
+                                <strong>{{ 'sylius.product.sku'|trans }}: </strong> <code class="sku">{{ product.sku }}</code>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </td>
-            <td>
-                {% if product.sku %}
-                    <span class="label label-primary">{{ product.sku }}</span>
+            {% if product.hasOptions %}
+                <td class="stock contain-variants text-muted">
+                    <em>{{ 'sylius.product.contain_variants'|trans }}</em>
+                </td>
+            {% else %}
+                {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
+                    <td class="stock in-stock">
+                        {{ product.masterVariant.onHand }}
+                    </td>
                 {% else %}
-                    <span class="label label-default">{{ 'sylius.product.no_sku'|trans }}</span>
+                    <td class="stock out-of-stock text-muted">
+                        <em>{{ 'sylius.out_of_stock'|trans }}</em>
+                    </td>
                 {% endif %}
-            </td>
-            <td>
-                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
-                    <strong>{{ product.name }}</strong>
-                </a>
-            </td>
-            <td>
-                {% if not product.hasOptions %}
+            {% endif %}
+
+
+            {# Retail Price #}
+            {% if not product.hasOptions %}
+                <td class="retail-price">
                     {{ product.masterVariant.price|sylius_price }}
-                {% else %}
-                    ---
-                {% endif %}
+                </td>
+            {% else %}
+                <td class="retail-price text-muted">
+                    <em>{{ 'sylius.na'|trans }}</em>
+                </td>
+            {% endif %}
+
+            <td class="updated-at">
+                {{ product.updatedAt|date('Y/m/d') }}
             </td>
-            <td>
-                <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_product_show', {'id': product.id})) }}
-                {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-                {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
+            <td class="actions text-right">
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-primary edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
+                        title="{{ 'sylius.edit'|trans|title }}">
+                        <span class="glyphicon glyphicon-pencil"></span> {{ 'sylius.edit'|trans|title }}
+                    </a>
+                    <a class="btn btn-sm btn-danger delete"
+                       href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}"
+                       title="{{ 'sylius.delete'|trans|title }}">
+                        <span class="glyphicon glyphicon-trash"></span> {{ 'sylius.delete'|trans|title }}
+                    </a>
                 </div>
             </td>
         </tr>

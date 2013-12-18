@@ -75,6 +75,7 @@ sylius_payments:
     gateways:
         dummy: Test
         stripe: Stripe
+        be2bill: Be2Bill
 
 sylius_payum: ~
 

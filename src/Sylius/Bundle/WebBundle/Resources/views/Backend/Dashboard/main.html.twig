@@ -5,19 +5,19 @@
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="icon-dashboard"></i> {{ 'sylius.backend.dashboard.header'|trans }} <small>{{ 'sylius.backend.dashboard.subheader'|trans }}</small></h1>
+    <h1><i class="glyphicon glyphicon-dashboard"></i> {{ 'sylius.backend.dashboard.header'|trans }} <small>{{ 'sylius.backend.dashboard.subheader'|trans }}</small></h1>
 </div>
 
 <div class="row">
     <div class="col-md-6">
         <ul class="nav nav-pills nav-justified">
-            <li><a href="{{ path('sylius_backend_order_index') }}"><i class="icon-shopping-cart"></i> {{ 'sylius.backend.quick_links.orders'|trans }}</a></li>
-            <li><a href="{{ path('sylius_backend_user_index') }}"><i class="icon-user"></i> {{ 'sylius.backend.quick_links.users'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_order_index') }}"><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.backend.quick_links.orders'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_user_index') }}"><i class="glyphicon glyphicon-user"></i> {{ 'sylius.backend.quick_links.users'|trans }}</a></li>
         </ul>
         <hr>
         <ul class="nav nav-pills nav-justified">
-            <li><a href="{{ path('sylius_backend_product_index') }}"><i class="icon-folder-open"></i> {{ 'sylius.backend.quick_links.products'|trans }}</a></li>
-            <li><a href="{{ path('sylius_backend_product_create') }}"><i class="icon-plus"></i> {{ 'sylius.backend.quick_links.add_product'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_product_index') }}"><i class="glyphicon glyphicon-folder-open"></i> {{ 'sylius.backend.quick_links.products'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_product_create') }}"><i class="glyphicon glyphicon-plus"></i> {{ 'sylius.backend.quick_links.add_product'|trans }}</a></li>
         </ul>
         <br>
     </div>
@@ -49,11 +49,11 @@
 <div class="row">
     <div class="col-md-6">
         {{ list_orders(orders) }}
-        <a href="{{ path('sylius_backend_order_index') }}" class="btn btn-primary btn-block"><i class="icon-shopping-cart"></i> {{ 'sylius.show_all'|trans }}</a>
+        <a href="{{ path('sylius_backend_order_index') }}" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.show_all'|trans }}</a>
     </div>
     <div class="col-md-6">
         {{ list_users(users) }}
-        <a href="{{ path('sylius_backend_user_index') }}" class="btn btn-primary btn-block"><i class="icon-user"></i> {{ 'sylius.show_all'|trans }}</a>
+        <a href="{{ path('sylius_backend_user_index') }}" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-user"></i> {{ 'sylius.show_all'|trans }}</a>
     </div>
 </div>
 {% endblock %}

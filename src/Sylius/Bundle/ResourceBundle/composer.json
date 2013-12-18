@@ -26,7 +26,8 @@
         "symfony/twig-bundle":             "~2.3",
         "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "0.12.*",
-        "white-october/pagerfanta-bundle": "1.0.*"
+        "white-october/pagerfanta-bundle": "1.0.*",
+        "doctrine/doctrine-bundle":        "1.2.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":      "2.0.*@dev",

@@ -17,7 +17,7 @@
         {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_taxonomy_index'), 'sylius.taxonomy.manage'|trans) }}
     </div>
-    <h1><i class="icon-tags"></i> {{ 'sylius.taxonomy.show_header'|trans({'%name%': taxonomy.name})|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-tags"></i> {{ 'sylius.taxonomy.show_header'|trans({'%name%': taxonomy.name})|raw }}</h1>
 </div>
 
 {{ list(taxonomy, taxonomy.taxons) }}
