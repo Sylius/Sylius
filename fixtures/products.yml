@@ -1,0 +1,88 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\CoreBundle\Model\Product:
+    Sylius.Product.Mug.{1..25}:
+        name: Mug "<word()>"
+        description: <paragraph()>
+        shortDescription: <sentence()>
+        price: <price()>
+        sku (unique): <sku()>
+        taxCategory: @Sylius.Tax.Category.Goods
+#        taxons: [@Sylius.Taxon.Category.Mugs, @Sylius.Taxon.Brand.Mugland]
+        options: [@Sylius.Option.Mug.Type]
+        createdAt: <dateTimeBetween('-400 days', 'now')>
+        updatedAt: <dateTimeBetween($createdAt, 'now')>
+    Sylius.Product.TShirt.{1..35}:
+        name: T-Shirt "<word()>"
+        description: <paragraph()>
+        shortDescription: <sentence()>
+        price: <price()>
+        sku (unique): <sku()>
+        taxCategory: @Sylius.Tax.Category.Goods
+#        taxons: [@Sylius.Taxon.Category.TShirts, @Sylius.Taxon.Brand.SuperTees]
+        options: [@Sylius.Option.TShirt.Size, @Sylius.Option.TShirt.Color]
+        variantSelectionMethod: match
+        createdAt: <dateTimeBetween('-400 days', 'now')>
+        updatedAt: <dateTimeBetween($createdAt, 'now')>
+    Sylius.Product.Sticker.{1..20}:
+        name: Sticker "<word()>"
+        description: <paragraph()>
+        shortDescription: <sentence()>
+        price: <price()>
+        sku (unique): <sku()>
+        taxCategory: @Sylius.Tax.Category.Goods
+#        taxons: [@Sylius.Taxon.Category.Stickers, @Sylius.Taxon.Brand.Stickypicky]
+        options: [@Sylius.Option.Sticker.Size]
+        variantSelectionMethod: match
+        createdAt: <dateTimeBetween('-400 days', 'now')>
+        updatedAt: <dateTimeBetween($createdAt, 'now')>
+    Sylius.Product.Book.{1..40}:
+        name: Book "<word()>"
+        description: <paragraph()>
+        shortDescription: <sentence()>
+        price: <price()>
+        sku (unique): <sku()>
+        taxCategory: @Sylius.Tax.Category.Goods
+#        taxons: [@Sylius.Taxon.Category.Books, @Sylius.Taxon.Brand.Bookmania]
+        createdAt: <dateTimeBetween('-400 days', 'now')>
+        updatedAt: <dateTimeBetween($createdAt, 'now')>
+
+Sylius\Bundle\ProductBundle\Model\ProductProperty:
+    Sylius.Product.Property.Mug.Material{1..25}:
+        property: @Sylius.Property.Mug.Material
+        product: @Sylius.Product.Mug.<current()>
+        value: <mugMaterial()>
+    Sylius.Product.Property.TShirt.Brand{1..35}:
+        property: @Sylius.Property.TShirt.Brand
+        product: @Sylius.Product.TShirt.<current()>
+        value: <tShirtBrand()>
+    Sylius.Product.Property.TShirt.Collection{1..35}:
+        property: @Sylius.Property.TShirt.Collection
+        product: @Sylius.Product.TShirt.<current()>
+        value: <tShirtCollection()>
+    Sylius.Product.Property.TShirt.Material{1..35}:
+        property: @Sylius.Property.TShirt.Material
+        product: @Sylius.Product.TShirt.<current()>
+        value: <tShirtMaterial()>
+    Sylius.Product.Property.Sticker.Resolution{1..20}:
+        property: @Sylius.Property.Sticker.Resolution
+        product: @Sylius.Product.Sticker.<current()>
+        value: <stickerResolution()>
+    Sylius.Product.Property.Sticker.Paper{1..20}:
+        property: @Sylius.Property.Sticker.Paper
+        product: @Sylius.Product.Sticker.<current()>
+        value: <stickerPaper()>
+    Sylius.Product.Property.Book.Author{1..40}:
+        property: @Sylius.Property.Book.Author
+        product: @Sylius.Product.Book.<current()>
+        value: <name()>
+    Sylius.Product.Property.Book.Isbn{1..40}:
+        property: @Sylius.Property.Book.Isbn
+        product: @Sylius.Product.Book.<current()>
+        value (unique): <isbn()>
+    Sylius.Product.Property.Book.Pages{1..40}:
+        property: @Sylius.Property.Book.Pages
+        product: @Sylius.Product.Book.<current()>
+        value: <randomNumber(3)>
+

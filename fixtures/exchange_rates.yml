@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\MoneyBundle\Model\ExchangeRate:
+    Sylius.Rate.Eur:
+        currency: EUR
+        rate: 1.00
+    Sylius.Rate.Usd:
+        currency: USD
+        rate: 1.30
+    Sylius.Rate.Gbp:
+        currency: GBP
+        rate: 0.05

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\PaymentsBundle\Model\PaymentMethod:
+    Sylius.Payment.Method.PapalExpressCheckout:
+        name: Paypal Express Checkout
+        gateway: paypal_express_checkout
+        enabled: true
+    Sylius.Payment.Method.Stripe:
+        name: Stripe
+        gateway: stripe
+        enabled: true
+    Sylius.Payment.Method.Dummy:
+        name: Dummy
+        gateway: dummy
+        enabled: true

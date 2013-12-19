@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\ProductBundle\Model\Property:
+    Sylius.Property.TShirt.Brand:
+        name: T-Shirt brand
+        presentation: Brand
+    Sylius.Property.TShirt.Collection:
+        name: T-Shirt collection
+        presentation: Collection
+    Sylius.Property.TShirt.Material:
+        name: T-Shirt material
+        presentation: Made of
+    Sylius.Property.Sticker.Resolution:
+        name: Sticker resolution
+        presentation: Print resolution
+    Sylius.Property.Sticker.Paper:
+        name: Sticker paper
+        presentation: Paper
+    Sylius.Property.Mug.Material:
+        name: Mug material
+        presentation: Material
+    Sylius.Property.Book.Author:
+        name: Book author
+        presentation: Author
+    Sylius.Property.Book.Isbn:
+        name: Book ISBN
+        presentation: ISBN
+    Sylius.Property.Book.Pages:
+        name: Book pages
+        presentation: Number of pages

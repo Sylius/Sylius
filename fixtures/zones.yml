@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\AddressingBundle\Model\Zone:
+    Sylius.Zone.EU:
+        name: EU
+        type: country
+    Sylius.Zone.USA:
+        name: USA
+        type: country
+    Sylius.Zone.EUUSA:
+        name: EU + USA
+        type: zone
+    Sylius.Zone.RestOfWorld:
+        name: Rest of World
+        type: country
+
+<?php
+    $countries   = array_keys(\Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames());
+    $euCountries = array(
+                'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
+                'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
+                'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
+                'GB'
+            );
+    $restOfWorldCountries = array_diff($countries, $euCountries + array('US'));
+ ?>
+
+Sylius\Bundle\AddressingBundle\Model\ZoneMemberCountry:
+    Sylius.ZoneMember.EU.{<?=implode(',', $euCountries)?>}:
+        country: @Sylius.Country.<current()>
+        belongsTo: @Sylius.Zone.EU
+    Sylius.ZoneMember.RestOfWorld.{<?=implode(',', $restOfWorldCountries)?>}:
+        country: @Sylius.Country.<current()>
+        belongsTo: @Sylius.Zone.RestOfWorld
+    Sylius.ZoneMember.USA:
+        country: @Sylius.Country.US
+        belongsTo: @Sylius.Zone.USA
+
+Sylius\Bundle\AddressingBundle\Model\ZoneMemberZone:
+    Sylius.ZoneMember.EUUSA.EU:
+        zone: @Sylius.Zone.EU
+        belongsTo: @Sylius.Zone.EUUSA
+    Sylius.ZoneMember.EUUSA.USA:
+        zone: @Sylius.Zone.USA
+        belongsTo: @Sylius.Zone.EUUSA

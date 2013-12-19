@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\TaxationBundle\Model\TaxCategory:
+    Sylius.Tax.Category.Goods:
+        name: Taxable goods
+        description: Default taxation category
+
+Sylius\Bundle\CoreBundle\Model\TaxRate:
+    Sylius.Tax.Rate.EuVat:
+        name: EU VAT
+        zone: @Sylius.Zone.EU
+        amount: 0.23
+        includedInPrice: false
+        calculator: default
+        category: @Sylius.Tax.Category.Goods
+    Sylius.Tax.Rate.UsSales:
+        name: US Sales Tax
+        zone: @Sylius.Zone.USA
+        amount: 0.08
+        includedInPrice: false
+        calculator: default
+        category: @Sylius.Tax.Category.Goods
+    Sylius.Tax.Rate.NoTax:
+        name: No tax
+        zone: @Sylius.Zone.RestOfWorld
+        amount: 0.00
+        includedInPrice: false
+        calculator: default
+        category: @Sylius.Tax.Category.Goods

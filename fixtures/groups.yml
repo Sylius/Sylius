@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+Sylius\Bundle\CoreBundle\Model\Group:
+    Sylius.Group.Administrators:
+        name: Administrators
+        roles: [ROLE_SYLIUS_ADMIN]
+    Sylius.Group.WholesaleCustomers:
+        name: Wholesale Customers
+    Sylius.Group.RetailCustomers:
+        name: Retail Customers
+    Sylius.Group.Sales:
+        name: Sales
+    Sylius.Group.Suppliers:
+        name: Suppliers
