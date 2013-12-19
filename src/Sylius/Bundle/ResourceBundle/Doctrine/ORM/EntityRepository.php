@@ -115,14 +115,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         }
 
         foreach ($criteria as $property => $value) {
-            if (!empty($value)) {
-                if (!is_array($value)) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
-                        ->setParameter($property, $value);
-                } else {
-                    $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
-                }
+            if (!is_array($value)) {
+                $queryBuilder
+                    ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
+                    ->setParameter($property, $value);
+            } else {
+                $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
             }
         }
     }
