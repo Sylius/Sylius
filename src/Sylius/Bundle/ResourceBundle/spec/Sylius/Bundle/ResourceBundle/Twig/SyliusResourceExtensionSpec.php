@@ -66,7 +66,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
 
     function it_should_render_a_sorting_link(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
     {
-        $request->get('sorting', array())->willReturn(array());
+        $request->get('sorting')->willReturn(array());
 
         $event = $this->getGetResponseEvent($request, $event);
 
@@ -91,7 +91,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
 
     function it_should_render_a_sorting_desc_link(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
     {
-        $request->get('sorting', array())->willReturn(array('propertyName' => 'asc'));
+        $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
 
         $event = $this->getGetResponseEvent($request, $event);
 
@@ -114,16 +114,41 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName');
     }
 
+    function it_should_render_a_sorting_asc_link(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
+    {
+        $request->get('sorting')->willReturn(array());
+
+        $event = $this->getGetResponseEvent($request, $event);
+
+        $router->generate(
+            'route_name',
+            array('sorting' => array('otherName' => 'asc'))
+        )->shouldBeCalled()->willReturn('?sorting[otherName]=asc');
+
+        $templating->render(
+            'SyliusResourceBundle:Twig:sorting.html.twig',
+            array(
+                'url' => '?sorting[otherName]=asc',
+                'label' => 'fieldName',
+                'icon' => false,
+                'currentOrder' => null,
+            )
+        )->shouldBeCalled();
+
+        $this->fetchRequest($event);
+        $this->renderSortingLink('otherName', 'fieldName');
+    }
+
     function it_should_render_a_sorting_link_with_custom_options(Request $request, GetResponseEvent $event, Router $router, TwigEngine $templating)
     {
-        $request->get('sorting', array())->willReturn(array());
+        $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
 
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
             'new_route',
             array(
-                'sorting' => array('propertyName' => 'asc'),
+                'sorting' => array('propertyName' => 'desc'),
                 'params' => 'value',
             )
         )->shouldBeCalled()->willReturn('?sorting[propertyName]=asc&params=value');
@@ -133,8 +158,8 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
             array(
                 'url' => '?sorting[propertyName]=asc&params=value',
                 'label' => 'fieldName',
-                'icon' => false,
-                'currentOrder' => null,
+                'icon' => true,
+                'currentOrder' => 'asc',
             )
         )->shouldBeCalled();
 
@@ -148,7 +173,7 @@ class SyliusResourceExtensionSpec extends ObjectBehavior
 
     function it_should_not_render_sorting_link(Request $request, GetResponseEvent $event)
     {
-        $request->get('sorting', array())->willReturn(array());
+        $request->get('sorting')->willReturn(array());
 
         $event = $this->getGetResponseEvent(
             $request,
