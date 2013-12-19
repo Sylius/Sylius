@@ -24,13 +24,13 @@ final class SyliusCheckoutEvents
 
     const SHIPPING_INITIALIZE   = 'sylius.checkout.shipping.initialize';
     const SHIPPING_PRE_COMPLETE = 'sylius.checkout.shipping.pre_complete';
-    const SHIPPING_COMPLETE     = 'sylius.checkout.shipping.pre_complete';
+    const SHIPPING_COMPLETE     = 'sylius.checkout.shipping.complete';
 
     const PAYMENT_INITIALIZE   = 'sylius.checkout.payment.initialize';
     const PAYMENT_PRE_COMPLETE = 'sylius.checkout.payment.pre_complete';
-    const PAYMENT_COMPLETE     = 'sylius.checkout.payment.pre_complete';
+    const PAYMENT_COMPLETE     = 'sylius.checkout.payment.complete';
 
     const FINALIZE_INITIALIZE   = 'sylius.checkout.finalize.initialize';
     const FINALIZE_PRE_COMPLETE = 'sylius.checkout.finalize.pre_complete';
-    const FINALIZE_COMPLETE     = 'sylius.checkout.finalize.pre_complete';
+    const FINALIZE_COMPLETE     = 'sylius.checkout.finalize.complete';
 }
