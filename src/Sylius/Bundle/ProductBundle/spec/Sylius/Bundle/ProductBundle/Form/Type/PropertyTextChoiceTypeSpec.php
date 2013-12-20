@@ -41,6 +41,6 @@ class PropertyTextChoiceTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_prototype_configuration');
+        $this->getName()->shouldReturn('sylius_property_configuration');
     }
 }

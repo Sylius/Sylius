@@ -592,7 +592,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $additionalData = array(
                 'type'         => isset($data['type']) ? $data['type'] : 'text',
                 'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name'],
-                'type'         => isset($data['type']) ? $data['type'] : 'text'
             );
             if ($choices) {
                 foreach ($choices as $choice) {

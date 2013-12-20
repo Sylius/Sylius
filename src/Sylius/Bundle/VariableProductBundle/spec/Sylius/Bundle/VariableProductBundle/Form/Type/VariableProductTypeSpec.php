@@ -88,7 +88,7 @@ class VariableProductTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('properties', 'collection', Argument::any())
+            ->add('properties', 'sylius_property_collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

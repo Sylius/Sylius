@@ -54,8 +54,6 @@
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
         <parameter key="sylius.form.type.shipment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ShipmentFilterType</parameter>
 
-        <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\CoreBundle\Form\Extension\CollectionTypeExtension</parameter>
-
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
         <parameter key="sylius.image_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageUploader</parameter>
@@ -409,12 +407,5 @@
             <argument type="service" id="sylius.checker.restricted_zone" />
             <tag name="twig.extension" />
         </service>
-
-        <service id="sylius.form.extension.collection"
-                 class="%sylius.form.extension.collection.class%">
-            <tag name="form.type_extension" alias="collection" />
-        </service>
-
     </services>
-
 </container>

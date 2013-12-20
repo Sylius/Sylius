@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ImageType extends AbstractType
 {
-    public $images = array();
+    private $images = array();
     protected $dataClass;
 
     public function __construct($dataClass)

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Form\Extension;
+namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,7 +18,7 @@ class CollectionTypeExtensionSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Extension\CollectionTypeExtension');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Extension\CollectionTypeExtension');
     }
 
     public function it_should_extends_abstract_type_extension()

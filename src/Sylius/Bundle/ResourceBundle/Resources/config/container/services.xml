@@ -20,6 +20,7 @@
         <parameter key="sylius_resource.twig.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
         <parameter key="sylius.form.type.entity_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityToIdentifierType</parameter>
+        <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionTypeExtension</parameter>
     </parameters>
 
     <services>
@@ -34,6 +35,11 @@
         <service id="sylius.event_subscriber.load_metadata" class="%sylius.event_subscriber.load_metadata.class%">
             <tag name="doctrine.event_subscriber" />
             <argument>%sylius.config.classes%</argument>
+        </service>
+
+        <service id="sylius.form.extension.collection"
+                 class="%sylius.form.extension.collection.class%">
+            <tag name="form.type_extension" alias="collection" />
         </service>
         
         <service id="sylius.form.type.entity_to_identifier" class="%sylius.form.type.entity_to_identifier.class%">

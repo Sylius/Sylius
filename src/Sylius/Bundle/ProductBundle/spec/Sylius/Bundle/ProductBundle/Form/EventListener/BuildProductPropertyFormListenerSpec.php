@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\Product;
+use Sylius\Bundle\ProductBundle\Model\Property;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -58,12 +59,12 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
      * @param Symfony\Component\Form\Form                                $valueField
      */
     function it_builds_value_field_base_on_product_property(
-        $event, $form, $productProperty, $valueField, $formFactory, Product $product
+        $event, $form, $productProperty, $valueField, $formFactory, Property $property
     )
     {
         $productProperty->getType()->willReturn('checkbox');
         $productProperty->getName()->willReturn('My name');
-        $productProperty->getProduct()->willReturn($product);
+        $productProperty->getProperty()->willReturn($property);
         $productProperty->getConfiguration()->willReturn(array());
 
         $event->getData()->willReturn($productProperty);
@@ -84,11 +85,11 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
      * @param Symfony\Component\Form\Form                                $valueField
      */
     function it_builds_options_base_on_product_property(
-        $event, $form, $productProperty, $valueField, $formFactory, Product $product
+        $event, $form, $productProperty, $valueField, $formFactory, Property $property
     )
     {
         $productProperty->getType()->willReturn('choice');
-        $productProperty->getProduct()->willReturn($product);
+        $productProperty->getProperty()->willReturn($property);
         $productProperty->getConfiguration()->willReturn(array(
             array('choice' => 'Red'),
             array('choice' => 'Blue')
@@ -103,7 +104,7 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
                 'value',
                 'choice',
                 null,
-                array('label' => 'My name', 'auto_initialize' => false, 'choices' => array('red' => 'Red', 'blue' => 'Blue'))
+                array('label' => 'My name', 'auto_initialize' => false, 'choices' => array('Red' => 'Red', 'Blue' => 'Blue'))
             )
             ->willReturn($valueField)
             ->shouldBeCalled()

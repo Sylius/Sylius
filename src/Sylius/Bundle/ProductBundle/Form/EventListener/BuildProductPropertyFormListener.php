@@ -76,7 +76,7 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
         }
 
         // If we're editing the product property, let's just render the value field, not full selection.
-        if (null !== $productProperty->getProduct()) {
+        if (null !== $productProperty->getProperty()) {
             $form->remove('property');
             $options['label'] = $productProperty->getName();
         }
@@ -94,7 +94,7 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
     {
         $choices = array();
         foreach ($configuration as $choice) {
-            $choices[strtolower($choice['choice'])] = $choice['choice'];
+            $choices[$choice['choice']] = $choice['choice'];
         }
 
         return $choices;

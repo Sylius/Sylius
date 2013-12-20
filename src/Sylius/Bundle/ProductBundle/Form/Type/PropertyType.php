@@ -70,7 +70,7 @@ class PropertyType extends AbstractType
                 'choices' => PropertyTypes::getChoices(),
             ))
             ->add('configuration', 'collection', array(
-                'type'         => 'sylius_prototype_configuration',
+                'type'         => 'sylius_property_configuration',
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,

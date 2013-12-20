@@ -15,7 +15,7 @@ use Sylius\Bundle\ProductBundle\Form\EventListener\BuildProductPropertyFormListe
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Product property form type.
@@ -39,7 +39,7 @@ class ProductPropertyType extends AbstractType
     protected $validationGroups;
 
     /**
-     * @var Router
+     * @var RouterInterface
      */
     protected $router;
 
@@ -49,7 +49,7 @@ class ProductPropertyType extends AbstractType
      * @param string $dataClass
      * @param array  $validationGroups
      */
-    public function __construct($dataClass, array $validationGroups, Router $router)
+    public function __construct($dataClass, array $validationGroups, RouterInterface $router)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;

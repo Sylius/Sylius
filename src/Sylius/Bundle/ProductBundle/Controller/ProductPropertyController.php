@@ -32,12 +32,12 @@ class ProductPropertyController extends ResourceController
         $form = $this->createForm('sylius_property_collection', array($position => $productProperty));
         $template = $this->getConfiguration()->getTemplate('render.html');
 
-        $tplVars = array_merge(
+        $parameters = array_merge(
             array('form' => $form->createView()),
             $form->getConfig()->getOptions()
         );
 
-        return $this->render($template, $tplVars);
+        return $this->render($template, $parameters);
     }
 
     /**

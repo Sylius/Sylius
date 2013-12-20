@@ -33,6 +33,6 @@ class PropertyTextChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_prototype_configuration';
+        return 'sylius_property_configuration';
     }
 }

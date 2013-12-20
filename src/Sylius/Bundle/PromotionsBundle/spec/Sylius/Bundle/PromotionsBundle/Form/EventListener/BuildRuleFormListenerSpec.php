@@ -16,7 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
-use Sylius\Bundle\PromotionsBundle\Model\Rule;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -52,7 +51,7 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
     function it_should_add_configuration_fields_in_pre_set_data(
         FormEvent $event,
         Form $form,
-        Rule $rule,
+        RuleInterface $rule,
         RuleCheckerRegistryInterface $checkerRegistry,
         RuleCheckerInterface $checker,
         FormFactoryInterface $factory,

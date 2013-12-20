@@ -29,11 +29,13 @@ class PropertyCollectionTypeSpec extends ObjectBehavior
     public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'required'     => false,
-            'type'         => 'sylius_product_property',
-            'allow_add'    => true,
-            'allow_delete' => true,
-            'by_reference' => false
+            'required'         => false,
+            'type'             => 'sylius_product_property',
+            'allow_add'        => true,
+            'allow_delete'     => true,
+            'by_reference'     => false,
+            'button_add_label' => 'sylius.product.add_property',
+            'item_by_line'     => 2,
         ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

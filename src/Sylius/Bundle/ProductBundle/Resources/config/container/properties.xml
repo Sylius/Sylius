@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.product_property.class">Sylius\Bundle\ProductBundle\Form\Type\ProductPropertyType</parameter>
-        <parameter key="sylius.form.type.prototype_configuration.class">Sylius\Bundle\ProductBundle\Form\Type\PropertyTextChoiceType</parameter>
+        <parameter key="sylius.form.type.property_configuration.class">Sylius\Bundle\ProductBundle\Form\Type\PropertyTextChoiceType</parameter>
         <parameter key="sylius.form.type.property_collection.class">Sylius\Bundle\ProductBundle\Form\Type\PropertyCollectionType</parameter>
     </parameters>
 
@@ -44,8 +44,8 @@
         <service id="sylius.form.type.property_collection" class="%sylius.form.type.property_collection.class%">
             <tag name="form.type" alias="sylius_property_collection" />
         </service>
-        <service id="sylius.form.type.prototype_configuration" class="%sylius.form.type.prototype_configuration.class%">
-            <tag name="form.type" alias="sylius_prototype_configuration" />
+        <service id="sylius.form.type.property_configuration" class="%sylius.form.type.property_configuration.class%">
+            <tag name="form.type" alias="sylius_property_configuration" />
         </service>
 
         <service id="sylius.controller.product_property" class="%sylius.controller.product_property.class%">

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Model\Action;
+use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -66,7 +67,7 @@ class BuildActionFormListener implements EventSubscriberInterface
      */
     public function preSetData(FormEvent $event)
     {
-        /** @var Action $action */
+        /** @var ActionInterface $action */
         $action = $event->getData();
 
         if (null === $type = $this->getActionType($action)) {
@@ -81,7 +82,7 @@ class BuildActionFormListener implements EventSubscriberInterface
      */
     public function postSetData(FormEvent $event)
     {
-        /** @var Action $action */
+        /** @var ActionInterface $action */
         $action = $event->getData();
 
         if (null === $type = $this->getActionType($action)) {
@@ -107,7 +108,7 @@ class BuildActionFormListener implements EventSubscriberInterface
 
     /**
      * @param FormInterface $form
-     * @param $actionType
+     * @param string $actionType
      * @param array $data
      */
     protected function addConfigurationFields(FormInterface $form, $actionType, array $data = array())
@@ -129,12 +130,12 @@ class BuildActionFormListener implements EventSubscriberInterface
     /**
      * Get action configuration
      *
-     * @param Action $action
+     * @param ActionInterface $action
      * @return array
      */
     protected function getActionConfiguration($action)
     {
-        if ($action instanceof Action && null !== $action->getConfiguration()) {
+        if ($action instanceof ActionInterface && null !== $action->getConfiguration()) {
             return $action->getConfiguration();
         }
 
@@ -144,17 +145,17 @@ class BuildActionFormListener implements EventSubscriberInterface
     /**
      * Get action type
      *
-     * @param Action $action
+     * @param ActionInterface $action
      * @return null|string
      */
     protected function getActionType($action)
     {
-        if (null !== $this->actionType) {
-            return $this->actionType;
+        if ($action instanceof ActionInterface && null !== $action->getType()) {
+            return $action->getType();
         }
 
-        if ($action instanceof Action && null !== $action->getType()) {
-            return $action->getType();
+        if (null !== $this->actionType) {
+            return $this->actionType;
         }
 
         return null;

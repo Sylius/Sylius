@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Model\Rule;
+use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -81,7 +82,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
      */
     public function postSetData(FormEvent $event)
     {
-        /** @var Rule $rule */
+        /** @var RuleInterface $rule */
         $rule = $event->getData();
 
         if (null === $type = $this->getRuleType($rule)) {
@@ -93,6 +94,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
 
     public function preBind(FormEvent $event)
     {
+        /** @var RuleInterface $rule */
         $data = $event->getData();
 
         if (empty($data) || !array_key_exists('type', $data)) {
@@ -104,7 +106,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
 
     /**
      * @param FormInterface $form
-     * @param $ruleType
+     * @param string $ruleType
      * @param array $data
      */
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
@@ -126,12 +128,12 @@ class BuildRuleFormListener implements EventSubscriberInterface
     /**
      * Get Rule configuration
      *
-     * @param Rule $rule
+     * @param RuleInterface $rule
      * @return array
      */
     protected function getRuleConfiguration($rule)
     {
-        if ($rule instanceof Rule && null !== $rule->getConfiguration()) {
+        if ($rule instanceof RuleInterface && null !== $rule->getConfiguration()) {
             return $rule->getConfiguration();
         }
 
@@ -141,13 +143,13 @@ class BuildRuleFormListener implements EventSubscriberInterface
     /**
      * Get rule type
      *
-     * @param Rule $rule
+     * @param RuleInterface $rule
      * @return null|string
      */
     protected function getRuleType($rule)
     {
 
-        if ($rule instanceof Rule && null !== $rule->getType()) {
+        if ($rule instanceof RuleInterface && null !== $rule->getType()) {
             return $rule->getType();
         }
 
