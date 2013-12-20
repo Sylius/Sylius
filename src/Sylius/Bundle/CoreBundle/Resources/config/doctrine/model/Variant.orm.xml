@@ -22,7 +22,7 @@
         <field name="onHand" column="on_hand" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean"/>
 
-        <one-to-many field="images" target-entity="Sylius\Bundle\CoreBundle\Model\VariantImage" mapped-by="variant">
+        <one-to-many field="images" target-entity="Sylius\Bundle\CoreBundle\Model\VariantImageInterface" mapped-by="variant">
             <cascade>
                 <cascade-all />
             </cascade>
