@@ -17,11 +17,18 @@ Documentation is available at [docs.sylius.org](http://docs.sylius.org).
 Quick Installation
 ------------------
 
-``` bash
+```bash
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project sylius/sylius -s dev
 $ cd sylius
 $ php app/console sylius:install
+```
+
+To be able to use included fixtures, that make testing and development phases much easier, you may need
+to run Composer tool with `--dev` option:
+
+```bash
+$ php composer.phar install --dev
 ```
 
 [Behat](http://behat.org) scenarios
@@ -38,12 +45,12 @@ $ vi behat.yml
 Then download [Selenium Server](http://seleniumhq.org/download/), and run it.
 
 ```bash
-$ java -jar selenium-server-standalone-2.11.0.jar
+$ java -jar selenium-server-standalone-2.39.0.jar
 ```
 
 You can run Behat using the following command.
 
-``` bash
+```bash
 $ bin/behat
 ```
 
@@ -52,10 +59,10 @@ Troubleshooting
 
 If something goes wrong, errors & exceptions are logged at the application level.
 
-````
-tail -f app/logs/prod.log
-tail -f app/logs/dev.log
-````
+```bash
+$ tail -f app/logs/prod.log
+$ tail -f app/logs/dev.log
+```
 
 Contributing
 ------------
