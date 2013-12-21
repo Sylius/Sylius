@@ -448,11 +448,11 @@
       </trans-unit>
       <trans-unit id="ae73533a3490f4c0715254a6d8ea5c00" resname="sylius.checkout.finalize.address.firstname">
         <source>sylius.checkout.finalize.address.firstname</source>
-        <target>First name</target>
+        <target>Имя</target>
       </trans-unit>
       <trans-unit id="454aad0ec80be9a29b4ee5c30ee68838" resname="sylius.checkout.finalize.address.lastname">
         <source>sylius.checkout.finalize.address.lastname</source>
-        <target>Last name</target>
+        <target>Фамилия</target>
       </trans-unit>
       <trans-unit id="bd0538d5ccdcbc2768f580b1bc69e5e6" resname="sylius.checkout.finalize.address.postcode">
         <source>sylius.checkout.finalize.address.postcode</source>
@@ -480,7 +480,7 @@
       </trans-unit>
       <trans-unit id="9e989b9a5bb1558d67442a524bf59aee" resname="sylius.checkout.finalize.order.no_items">
         <source>sylius.checkout.finalize.order.no_items</source>
-        <target>This order does not contain any items</target>
+        <target>В этом заказе нет ни одного товара</target>
       </trans-unit>
       <trans-unit id="601084462d00a53549fa099c24efc0e8" resname="sylius.checkout.finalize.order.no_promotion">
         <source>sylius.checkout.finalize.order.no_promotion</source>
@@ -504,7 +504,7 @@
       </trans-unit>
       <trans-unit id="1d18f34907cdc577e2fd27d32bac167e" resname="sylius.checkout.finalize.order.shipping_address">
         <source>sylius.checkout.finalize.order.shipping_address</source>
-        <target>Shipping address</target>
+        <target>Адрес доставки</target>
       </trans-unit>
       <trans-unit id="59865a0e0d24abdc9a0b287714ab46ed" resname="sylius.checkout.finalize.order.shipping_charges">
         <source>sylius.checkout.finalize.order.shipping_charges</source>
