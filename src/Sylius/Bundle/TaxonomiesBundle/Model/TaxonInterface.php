@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Interface for taxons.
  *
@@ -42,7 +44,7 @@ interface TaxonInterface
     /**
      * Get parent taxon.
      *
-     * @return TaxonInterface
+     * @return TaxonInterface|null if this is the root taxon, returns null
      */
     public function getParent();
 

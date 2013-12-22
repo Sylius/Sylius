@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxonomiesBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,7 +34,8 @@ class SyliusTaxonomiesBundle extends Bundle
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM
+            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
+            SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
         );
     }
 
@@ -53,6 +55,11 @@ class SyliusTaxonomiesBundle extends Bundle
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxonomiesBundle\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxonomies.driver.doctrine/orm'));
+        if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
+            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxonomies.driver.doctrine/orm'));
+        }
+        if (class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
+            $container->addCompilerPass(DoctrinePhpcrMappingsPass::createXmlMappingDriver($mappings, array('doctrine.phpcr_odm.document_manager'), 'sylius_taxonomies.driver.doctrine/phpcr'));
+        }
     }
 }
