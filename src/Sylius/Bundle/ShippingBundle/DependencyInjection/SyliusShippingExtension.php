@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusShippingExtension extends SyliusResourceExtension
+class SyliusShippingExtension extends BaseExtension
 {
     /**
      * {@inheritdoc}
@@ -27,7 +27,6 @@ class SyliusShippingExtension extends SyliusResourceExtension
     public function load(array $config, ContainerBuilder $container)
     {
         $this->configDir = __DIR__.'/../Resources/config';
-
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }
 }

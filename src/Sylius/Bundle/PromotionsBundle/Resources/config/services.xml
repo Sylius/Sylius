@@ -48,39 +48,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.promotion" class="%sylius.controller.promotion.class%">
-            <argument>sylius</argument>
-            <argument>promotion</argument>
-            <argument>SyliusPromotionsBundle:Promotion</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.promotion_coupon" class="%sylius.controller.promotion_coupon.class%">
-            <argument>sylius</argument>
-            <argument>promotion_coupon</argument>
-            <argument>SyliusPromotionsBundle:Coupon</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.promotion_rule" class="%sylius.controller.promotion_rule.class%">
-            <argument>sylius</argument>
-            <argument>promotion_rule</argument>
-            <argument>SyliusPromotionsBundle:Rule</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.promotion_action" class="%sylius.controller.promotion_action.class%">
-            <argument>sylius</argument>
-            <argument>promotion_action</argument>
-            <argument>SyliusPromotionsBundle:Action</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.promotion_eligibility_checker" />

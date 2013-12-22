@@ -17,41 +17,10 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.repository.tax_category.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.tax_rate.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-
         <parameter key="sylius.form.type.tax_category_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryEntityType</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.manager.tax_category" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.tax_category" class="%sylius.repository.tax_category.class%">
-            <argument type="service" id="sylius.manager.tax_category" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.tax_category"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.tax_category.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.tax_rate" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.tax_rate" class="%sylius.repository.tax_rate.class%">
-            <argument type="service" id="sylius.manager.tax_rate" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.tax_rate"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.tax_rate.class%</argument>
-                </service>
-            </argument>
-        </service>
-
         <service id="sylius.form.type.tax_category_choice" class="%sylius.form.type.tax_category_choice.class%">
             <argument>%sylius.model.tax_category.class%</argument>
             <tag name="form.type" alias="sylius_tax_category_choice" />

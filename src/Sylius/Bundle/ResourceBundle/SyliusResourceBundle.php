@@ -13,7 +13,6 @@ namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DoctrineODMFactory;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DoctrineORMFactory;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -32,7 +31,6 @@ class SyliusResourceBundle extends Bundle
     {
         parent::build($container);
 
-        /** @var SyliusResourceExtension $extension */
         $extension = $container->getExtension('sylius_resource');
         $extension->addDatabaseDriverFactory(new DoctrineORMFactory($container));
         $extension->addDatabaseDriverFactory(new DoctrineODMFactory($container));

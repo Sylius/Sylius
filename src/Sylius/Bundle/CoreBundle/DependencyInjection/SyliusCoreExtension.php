@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCoreExtension extends SyliusResourceExtension implements PrependExtensionInterface
+class SyliusCoreExtension extends BaseExtension implements PrependExtensionInterface
 {
     /**
      * @var array

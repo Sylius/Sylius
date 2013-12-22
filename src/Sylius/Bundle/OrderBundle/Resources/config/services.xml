@@ -11,33 +11,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.order" class="%sylius.controller.order.class%">
-            <argument>sylius</argument>
-            <argument>order</argument>
-            <argument>SyliusOrderBundle:Order</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.controller.order_item" class="%sylius.controller.order_item.class%">
-            <argument>sylius</argument>
-            <argument>order_item</argument>
-            <argument>SyliusOrderBundle:Item</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.controller.adjustment" class="%sylius.controller.adjustment.class%">
-            <argument>sylius</argument>
-            <argument>adjustment</argument>
-            <argument>SyliusOrderBundle:Adjustment</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_group.order%</argument>

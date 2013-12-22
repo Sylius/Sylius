@@ -20,16 +20,23 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
  */
 class ResourceResolver
 {
+    private $config;
+
+    public function __construct(Configuration $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * Get resources via repository based on the configuration.
      *
      * @param RepositoryInterface $repository
      * @param Configuration       $configuration
      */
-    public function getResource(RepositoryInterface $repository, Configuration $configuration, $defaultMethod, array $defaultArguments = array())
+    public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
     {
-        $callable = array($repository, $configuration->getMethod($defaultMethod));
-        $arguments = $configuration->getArguments($defaultArguments);
+        $callable = array($repository, $this->config->getMethod($defaultMethod));
+        $arguments = $this->config->getArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
     }

@@ -22,23 +22,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.taxonomy" class="%sylius.controller.taxonomy.class%">
-            <argument>sylius</argument>
-            <argument>taxonomy</argument>
-            <argument>SyliusTaxonomiesBundle:Taxonomy</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.taxon" class="%sylius.controller.taxon.class%">
-            <argument>sylius</argument>
-            <argument>taxon</argument>
-            <argument>SyliusTaxonomiesBundle:Taxon</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.taxonomy" class="%sylius.form.type.taxonomy.class%">
             <argument>%sylius.model.taxonomy.class%</argument>
             <argument>%sylius.validation_group.taxonomy%</argument>

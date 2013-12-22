@@ -17,55 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.repository.payment_method.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.payment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.credit_card.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-
         <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\PaymentsBundle\Form\Type\PaymentMethodEntityType</parameter>
     </parameters>
-
-    <services>
-        <service id="sylius.manager.payment_method" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.payment_method" class="%sylius.repository.payment_method.class%">
-            <argument type="service" id="sylius.manager.payment_method" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.payment_method"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.payment_method.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.payment" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.payment" class="%sylius.repository.payment.class%">
-            <argument type="service" id="sylius.manager.payment" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.payment"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.payment.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.credit_card" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.credit_card" class="%sylius.repository.credit_card.class%">
-            <argument type="service" id="sylius.manager.credit_card" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.credit_card"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.credit_card.class%</argument>
-                </service>
-            </argument>
-        </service>
-    </services>
 
 </container>

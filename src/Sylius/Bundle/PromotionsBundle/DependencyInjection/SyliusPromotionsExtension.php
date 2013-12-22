@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusPromotionsExtension extends SyliusResourceExtension
+class SyliusPromotionsExtension extends BaseExtension
 {
     /**
      * {@inheritdoc}

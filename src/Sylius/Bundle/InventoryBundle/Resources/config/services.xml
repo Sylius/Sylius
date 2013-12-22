@@ -27,15 +27,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.inventory_unit" class="%sylius.controller.inventory_unit.class%">
-            <argument>sylius</argument>
-            <argument>inventory_unit</argument>
-            <argument>SyliusInventoryBundle:InventoryUnit</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
             <argument type="service" id="sylius.backorders_handler" />
             <argument type="service" id="sylius.availability_checker" />
