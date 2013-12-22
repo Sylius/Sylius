@@ -23,15 +23,6 @@ http://symfony.com/schema/dic/services/services-1.0.xsd">
     </parameters>
 
     <services>
-        <service id="sylius.controller.option" class="%sylius.controller.option.class%">
-            <argument>sylius</argument>
-            <argument>option</argument>
-            <argument>SyliusVariableProductBundle:Option</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.option" class="%sylius.form.type.option.class%">
             <argument>%sylius.model.option.class%</argument>
             <argument>%sylius.validation_group.option%</argument>

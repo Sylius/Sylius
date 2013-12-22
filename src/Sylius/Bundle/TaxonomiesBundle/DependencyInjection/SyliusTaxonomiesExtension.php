@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusTaxonomiesExtension extends SyliusResourceExtension
+class SyliusTaxonomiesExtension extends BaseExtension
 {
     /**
      * {@inheritdoc}

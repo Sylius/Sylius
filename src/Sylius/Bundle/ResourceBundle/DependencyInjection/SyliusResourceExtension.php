@@ -27,16 +27,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusResourceExtension extends Extension
 {
-    const CONFIGURE_LOADER     = 1;
-    const CONFIGURE_DATABASE   = 2;
-    const CONFIGURE_PARAMETERS = 4;
-    const CONFIGURE_VALIDATORS = 8;
-
-    protected $configDir;
-    protected $configFiles = array(
-        'services',
-    );
-
     private $factories = array();
 
     /**
@@ -44,55 +34,15 @@ class SyliusResourceExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config/container';
+        $processor = new Processor();
+        $config    = $processor->processConfiguration(new Configuration(), $config);
 
-        list($config) = $this->configure($config, new Configuration(), $container);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
+        $loader->load('services.xml');
 
         if (isset($config['resources'])) {
             $this->createResourceServices($config['resources']);
         }
-    }
-
-    /**
-     * @param array                  $config
-     * @param ConfigurationInterface $configuration
-     * @param ContainerBuilder       $container
-     * @param mixed                  $configure
-     *
-     * @return array
-     */
-    public function configure(array $config, ConfigurationInterface $configuration, ContainerBuilder $container, $configure = self::CONFIGURE_LOADER)
-    {
-        $processor = new Processor();
-        $config    = $processor->processConfiguration($configuration, $config);
-
-        $loader = new XmlFileLoader($container, new FileLocator($this->configDir));
-
-        foreach ($this->configFiles as $filename) {
-            $loader->load($filename.'.xml');
-        }
-
-        if ($configure & self::CONFIGURE_DATABASE) {
-            $this->loadDatabaseDriver($config['driver'], $loader, $container);
-        }
-
-        $classes = isset($config['classes']) ? $config['classes'] : array();
-
-        if ($configure & self::CONFIGURE_PARAMETERS) {
-            $this->mapClassParameters($classes, $container);
-        }
-
-        if ($configure & self::CONFIGURE_VALIDATORS) {
-            $this->mapValidationGroupParameters($config['validation_groups'], $container);
-        }
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
-
-        return array($config, $loader);
     }
 
     /**
@@ -106,59 +56,8 @@ class SyliusResourceExtension extends Extension
     }
 
     /**
-     * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
-    {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service === 'form' ? 'form.type' : $service, $model), $class);
-            }
-        }
-    }
-
-    /**
-     * Remap validation group parameters.
-     *
-     * @param array            $validationGroups
-     * @param ContainerBuilder $container
-     */
-    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
-    {
-        foreach ($validationGroups as $model => $groups) {
-            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
-        }
-    }
-
-    /**
-     * Load bundle driver.
-     *
-     * @param string                $driver
-     * @param XmlFileLoader         $loader
-     * @param null|ContainerBuilder $container
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function loadDatabaseDriver($driver, XmlFileLoader $loader, ContainerBuilder $container = null)
-    {
-        $bundle = str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
-        if (!in_array($driver, call_user_func(array($bundle, 'getSupportedDrivers')))) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by %s.', $driver, basename($bundle)));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
-
-        if (null !== $container) {
-            $container->setParameter($this->getAlias().'.driver', $driver);
-            $container->setParameter($this->getAlias().'.driver.'.$driver, true);
-        }
-    }
-
-    /**
      * @param array $configs
+     *
      * @throws \InvalidArgumentException
      */
     private function createResourceServices(array $configs)
@@ -177,7 +76,8 @@ class SyliusResourceExtension extends Extension
 
     /**
      * @param $driver
-     * @return mixed
+     *
+     * @return DatabaseDriverFactoryInterface
      */
     private function getFactoryForDriver($driver)
     {

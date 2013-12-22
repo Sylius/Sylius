@@ -34,7 +34,6 @@ class SyliusResourceBundle extends Bundle
     {
         parent::build($container);
 
-        /** @var SyliusResourceExtension $extension */
         $extension = $container->getExtension('sylius_resource');
         $extension->addDatabaseDriverFactory(new DoctrineORMFactory($container));
         $extension->addDatabaseDriverFactory(new DoctrineODMFactory($container));

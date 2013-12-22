@@ -24,14 +24,22 @@ class DoctrineORMFactory extends AbstractFactory
         $pattern = $prefix.'.%s.'.$resourceName;
         $entityManagerId = 'doctrine.orm.entity_manager';
 
+        $configuration = new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        $configuration
+            ->setFactoryService('sylius.controller.configuration_factory')
+            ->setFactoryMethod('createConfiguration')
+            ->setArguments(array($prefix, $resourceName, $templates))
+            ->setPublic(false)
+        ;
         $controller = new Definition($classes['controller']);
         $controller
-            ->setArguments(array($prefix, $resourceName, $templates))
+            ->setArguments(array($configuration))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
 
-        $managerId = sprintf($pattern, 'manager');
         $this->container->setDefinition(sprintf($pattern, 'controller'), $controller);
+
+        $managerId = sprintf($pattern, 'manager');
         $this->container->setAlias($managerId, new Alias($entityManagerId));
 
         $classMetadata = new Definition('Doctrine\\ORM\\Mapping\\ClassMetadata');
@@ -42,7 +50,17 @@ class DoctrineORMFactory extends AbstractFactory
             ->setPublic(false)
         ;
 
-        $repositoryClass = isset($classes['repository']) ? $classes['repository'] : 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+        $repositoryClassParameter = sprintf($pattern, 'repository').'.class';
+        $repositoryClass = $this->container->hasParameter($repositoryClassParameter) ? $this->container->getParameter($repositoryClassParameter) : 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+
+        if (isset($classes['repository'])) {
+            $repositoryClass = $classes['repository'];
+            if ('user' === $resourceName) {
+                var_dump($classes);
+                var_dump($repositoryClass);
+            }
+        }
+
         $repository = new Definition($repositoryClass);
         $repository
             ->setArguments(array(new Reference($managerId), $classMetadata))

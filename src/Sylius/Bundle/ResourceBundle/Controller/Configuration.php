@@ -35,24 +35,15 @@ class Configuration
      */
     protected $request;
 
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
+    public function __construct(Request $request, ParametersParser $parser, $bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
         $this->templateNamespace = $templateNamespace;
         $this->templatingEngine = $templatingEngine;
-
-        $this->parameters = array();
-    }
-
-    public function load(Request $request)
-    {
         $this->request = $request;
 
         $parameters = $request->attributes->get('_sylius', array());
-        $parser = new ParametersParser();
-
         $parameters = $parser->parse($parameters, $request);
 
         $this->parameters = $parameters;

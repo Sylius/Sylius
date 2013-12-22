@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,6 +21,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ParametersParser
 {
+    private $expression;
+
+    public function __construct(ExpressionLanguage $expression)
+    {
+        $this->expression = $expression;
+    }
+
     public function parse(array $parameters, Request $request)
     {
         foreach ($parameters as $key => $value) {

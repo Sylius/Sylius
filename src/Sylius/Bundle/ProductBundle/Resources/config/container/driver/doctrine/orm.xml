@@ -23,7 +23,6 @@
         <parameter key="sylius.repository.prototype.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
 
         <parameter key="sylius.form.type.property_choice.class">Sylius\Bundle\ProductBundle\Form\Type\PropertyEntityChoiceType</parameter>
-
     </parameters>
 
     <services>
