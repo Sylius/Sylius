@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariableProductBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusVariableProductExtension extends SyliusResourceExtension implements PrependExtensionInterface
+class SyliusVariableProductExtension extends BaseExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
         'options',

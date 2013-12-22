@@ -12,12 +12,9 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Hateoas\Representation\Factory\PagerfantaFactory;
-use Hateoas\Representation\PaginatedRepresentation;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,83 +22,64 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Base resource controller for Sylius.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ResourceController extends FOSRestController
 {
-    /**
-     * Controller configuration.
-     *
-     * @var Configuration
-     */
-    protected $configuration;
-    protected $resolver;
-    private $pagerfantaFactory;
+    protected $config;
+    protected $resourceResolver;
+    protected $redirectHandler;
+    protected $flashHelper;
 
-    /**
-     * Constructor.
-     *
-     * @param string $bundlePrefix
-     * @param string $resourceName
-     * @param string $templateNamespace
-     * @param string $templatingEngine
-     */
-    public function __construct($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
+    public function __construct(Configuration $config)
     {
-        $this->configuration = new Configuration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
-        $this->configured = false;
+        $this->config = $config;
     }
 
-    /**
-     * Get configuration with the bound request.
-     *
-     * @return Configuration
-     */
-    public function getConfiguration()
+    public function setContainer(ContainerInterface $container = null)
     {
-        $this->configuration->load($this->getRequest());
+        parent::setContainer($container);
 
-        return $this->configuration;
+        $this->resourceResolver = new ResourceResolver($this->config);
+        $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
+        $this->flashHelper = new FlashHelper($this->config, $container->get('translator'), $container->get('session'));
     }
 
-    /**
-     * Get collection (paginated by default) of resources.
-     */
+    public function showAction()
+    {
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('show.html'))
+            ->setTemplateVar($this->config->getResourceName())
+            ->setData($this->findOr404())
+        ;
+
+        return $this->handleView($view);
+    }
+
     public function indexAction(Request $request)
     {
-        $config = $this->getConfiguration();
+        $criteria = $this->config->getCriteria();
+        $sorting = $this->config->getSorting();
 
-        $criteria = $config->getCriteria();
-        $sorting = $config->getSorting();
-
-        $pluralName = $config->getPluralResourceName();
+        $pluralName = $this->config->getPluralResourceName();
         $repository = $this->getRepository();
 
-        if ($config->isPaginated()) {
-            $resources = $this
-                ->getResourceResolver()
-                ->getResource($repository, $config, 'createPaginator', array($criteria, $sorting))
-            ;
+        if ($this->config->isPaginated()) {
+            $resources = $this->resourceResolver->getResource($repository, 'createPaginator', array($criteria, $sorting));
 
             $resources
                 ->setCurrentPage($request->get('page', 1), true, true)
-                ->setMaxPerPage($config->getPaginationMaxPerPage())
+                ->setMaxPerPage($this->config->getPaginationMaxPerPage())
               ;
-
-            if ($config->isApiRequest()) {
-                $resources = $this->getPagerfantaFactory()->create($resources, $request->get('_route'), $request->get('_route_parameters', array()));
-            }
         } else {
-            $resources = $this
-                ->getResourceResolver()
-                ->getResource($repository, $config, 'findBy', array($criteria, $sorting, $config->getLimit()))
-            ;
+            $resources = $this->resourceResolver->getResource($repository, 'findBy', array($criteria, $sorting, $this->config->getLimit()));
         }
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('index.html'))
+            ->setTemplate($this->config->getTemplate('index.html'))
             ->setTemplateVar($pluralName)
             ->setData($resources)
         ;
@@ -109,144 +87,70 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
-    /**
-     * Get single resource by its identifier.
-     */
-    public function showAction()
-    {
-        $config = $this->getConfiguration();
-
-        $view = $this
-            ->view()
-            ->setTemplate($config->getTemplate('show.html'))
-            ->setTemplateVar($config->getResourceName())
-            ->setData($this->findOr404())
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
-     * Create new resource or just display the form.
-     */
     public function createAction(Request $request)
     {
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $event = $this->create($resource);
-            if (!$event->isStopped()) {
-                $this->setFlash('success', 'create');
+        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            $this->create($resource);
 
-                return $this->redirectTo($resource);
-            }
-
-            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+            return $this->redirectHandler->redirectTo($resource);
         }
 
-        $config = $this->getConfiguration();
-        if ($config->isApiRequest()) {
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('create.html'))
+            ->setTemplate($this->config->getTemplate('create.html'))
             ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
+                $this->config->getResourceName() => $resource,
+                'form'                           => $form->createView()
             ))
         ;
 
         return $this->handleView($view);
     }
 
-    /**
-     * Display the form for editing or update the resource.
-     */
     public function updateAction(Request $request)
     {
         $resource = $this->findOr404();
         $form = $this->getForm($resource);
 
-        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
-            $event = $this->update($resource);
-            if (!$event->isStopped()) {
-                $this->setFlash('success', 'update');
+        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
+            $this->update($resource);
 
-                return $this->redirectTo($resource);
-            }
-
-            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
+            return $this->redirectHandler->redirectTo($resource);
         }
 
-        $config = $this->getConfiguration();
-        if ($config->isApiRequest()) {
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('update.html'))
+            ->setTemplate($this->config->getTemplate('update.html'))
             ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
+                $this->config->getResourceName() => $resource,
+                'form'                           => $form->createView()
             ))
         ;
 
         return $this->handleView($view);
     }
 
-    /**
-     * Delete resource.
-     */
-    public function deleteAction(Request $request)
+    public function deleteAction()
     {
         $config = $this->getConfiguration();
 
         $resource = $this->findOr404();
+        $this->delete($resource);
 
-        if ($request->request->get('confirmed', false)) {
-            $event = $this->delete($resource);
-
-            if ($request->isXmlHttpRequest()) {
-                return JsonResponse::create(array('id' => $request->get('id')));
-            }
-
-            if ($event->isStopped()) {
-                $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
-
-                return $this->redirectTo($resource);
-            }
-
-            $this->setFlash('success', 'delete');
-
-            $config = $this->getConfiguration();
-
-            return $this->redirectToRoute(
-                $config->getRedirectRoute('index'),
-                $config->getRedirectParameters()
-            );
-        }
-
-        if ($request->isXmlHttpRequest()) {
-            throw new AccessDeniedHttpException;
-        }
-
-        $view = $this
-            ->view()
-            ->setTemplate($config->getTemplate('delete.html'))
-        ;
-
-        return $this->handleView($view);
+        return $this->redirectHandler->redirectToIndex($resource);
     }
 
-    /**
-     * Use repository to create a new resource object.
-     *
-     * @return object
-     */
     public function createNew()
     {
         return $this
@@ -255,213 +159,65 @@ class ResourceController extends FOSRestController
         ;
     }
 
-    /**
-     * Get a form instance for given resource.
-     * If no custom form is specified in route defaults to "_form",
-     * then a default name is generated using the template "%bundlePrefix%_%resourceName%".
-     *
-     * @param null|string $resource
-     *
-     * @return FormInterface
-     */
-    public function getForm($resource = null)
-    {
-        return $this->createForm($this->getConfiguration()->getFormType(), $resource);
-    }
-
-    public function redirectTo($resource)
-    {
-        $config = $this->getConfiguration();
-        $parameters = $config->getRedirectParameters();
-
-        if (empty($parameters)) {
-            $parameters['id'] = $resource->getId();
-        }
-
-        return $this->redirectToRoute(
-            $config->getRedirectRoute('show'),
-            $parameters
-        );
-    }
-
-    protected function redirectToReferer()
-    {
-        return $this->handleView($this->redirectView($this->getRequest()->headers->get('referer')));
-    }
-
-    public function redirectToIndex()
-    {
-        $config = $this->getConfiguration();
-
-        return $this->redirectToRoute($config->getRedirectRoute('index'), $config->getRedirectParameters());
-    }
-
-    public function redirectToRoute($route, array $data = array())
-    {
-        if ('referer' === $route) {
-            return $this->redirectToReferer();
-        }
-
-        return $this->handleView($this->redirectView($this->generateUrl($route, $data)));
-    }
-
-    public function getManager()
-    {
-        return $this->getService('manager');
-    }
-
     public function create($resource)
     {
-        $event = $this->dispatchEvent('pre_create', $resource);
-        if (!$event->isStopped()) {
-            $this->persistAndFlush($resource);
-        }
-
-        return $event;
+        $this->dispatchEvent('pre_create', new GenericEvent($resource));
+        $this->getManager()->persist($resource);
+        $this->getManager()->flush();
+        $this->flashHelper->setFlash('success', 'create');
+        $this->dispatchEvent('post_create', new GenericEvent($resource));
     }
 
     public function update($resource)
     {
-        $event = $this->dispatchEvent('pre_update', $resource);
-        if (!$event->isStopped()) {
-            $this->persistAndFlush($resource, 'update');
-        }
-
-        return $event;
+        $this->dispatchEvent('pre_update', new GenericEvent($resource));
+        $this->getManager()->persist($resource);
+        $this->getManager()->flush();
+        $this->flashHelper->setFlash('success', 'update');
+        $this->dispatchEvent('post_update', new GenericEvent($resource));
     }
 
     public function delete($resource)
     {
-        $event = $this->dispatchEvent('pre_delete', $resource);
-        if (!$event->isStopped()) {
-            $this->removeAndFlush($resource);
-        }
-
-        return $event;
+        $this->dispatchEvent('pre_delete', new GenericEvent($resource));
+        $this->getManager()->remove($resource);
+        $this->getManager()->flush();
+        $this->flashHelper->setFlash('success', 'delete');
+        $this->dispatchEvent('post_delete', new GenericEvent($resource));
     }
 
-    public function persistAndFlush($resource, $action = 'create')
+    public function getForm($resource = null)
     {
-        $manager = $this->getManager();
-
-        $manager->persist($resource);
-        $this->dispatchEvent($action, $resource);
-        $manager->flush();
-        $this->dispatchEvent(sprintf('post_%s', $action), $resource);
-    }
-
-    public function removeAndFlush($resource)
-    {
-        $manager = $this->getManager();
-
-        $manager->remove($resource);
-        $this->dispatchEvent('delete', $resource);
-        $manager->flush();
-        $this->dispatchEvent('post_delete', $resource);
-    }
-
-    public function getRepository()
-    {
-        return $this->getService('repository');
+        return $this->createForm($this->config->getFormType(), $resource);
     }
 
     public function findOr404(array $criteria = null)
     {
-        $config = $this->getConfiguration();
-
         if (empty($criteria)) {
-            $criteria = $config->getCriteria();
+            $criteria = $this->config->getCriteria() ?: array('id' => $this->getRequest()->get('id'));
         }
 
-        if (empty($criteria)) {
-            $criteria = array('id' => $this->getRequest()->get('id'));
-        }
-
-        $repository = $this->getRepository();
-
-        if (!$resource = $this->getResourceResolver()->getResource($repository, $config, 'findOneBy', array($criteria))) {
-            throw new NotFoundHttpException(sprintf('Requested %s does not exist', $config->getResourceName()));
+        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($criteria))) {
+            throw new NotFoundHttpException('Requested resource does not exist.');
         }
 
         return $resource;
     }
 
-    public function renderResponse($templateName, array $parameters = array())
+    public function dispatchEvent($name, Event $event)
     {
-        return $this->render($this->getConfiguration()->getTemplate($templateName), $parameters);
+        $name = $this->config->getEventName($name);
+
+        return $this->get('event_dispatcher')->dispatch($name, $event);
     }
 
-    /**
-     * Informs listeners that event data was used
-     *
-     * @param string       $name
-     * @param Event|object $eventOrResource
-     */
-    public function dispatchEvent($name, $eventOrResource)
+    public function getManager()
     {
-        if (!$eventOrResource instanceof Event) {
-            $name = $this->getConfiguration()->getEventName($name);
-
-            $eventOrResource = new ResourceEvent($eventOrResource);
-        }
-
-        return $this->get('event_dispatcher')->dispatch($name, $eventOrResource);
+        return $this->get($this->config->getServiceName('manager'));
     }
 
-    protected function setFlash($type, $event, $params = array())
+    public function getRepository()
     {
-        return $this
-            ->get('session')
-            ->getFlashBag()
-            ->add($type, $this->generateFlashMessage($event, $params))
-        ;
-    }
-
-    protected function generateFlashMessage($event, $params = array())
-    {
-        $config = $this->getConfiguration();
-
-        $message = $config->getFlashMessage($event);
-        $translatedMessage = $this->translateFlashMessage($message, $params);
-
-        if ($message !== $translatedMessage) {
-            return $translatedMessage;
-        }
-
-        return $this->translateFlashMessage('sylius.resource.'.$event, $params);
-    }
-
-    protected function translateFlashMessage($message, $params = array())
-    {
-        $resource = ucfirst(str_replace('_', ' ', $this->getConfiguration()->getResourceName()));
-
-        return $this->get('translator')->trans(
-            $message,
-            array_merge(array('%resource%' => $resource), $params),
-            'flashes'
-        );
-    }
-
-    protected function getResourceResolver()
-    {
-        if (null === $this->resolver) {
-            $this->resolver = new ResourceResolver();
-        }
-
-        return $this->resolver;
-    }
-
-    protected function getService($name)
-    {
-        return $this->get($this->getConfiguration()->getServiceName($name));
-    }
-
-    private function getPagerfantaFactory()
-    {
-        if (null === $this->pagerfantaFactory) {
-            $this->pagerfantaFactory = new PagerfantaFactory();
-        }
-
-        return $this->pagerfantaFactory;
+        return $this->get($this->config->getServiceName('repository'));
     }
 }

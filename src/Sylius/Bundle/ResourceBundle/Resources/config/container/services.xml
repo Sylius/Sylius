@@ -17,13 +17,26 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_resource.twig.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
+        <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory</parameter>
+        <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
+        <parameter key="sylius.expression_language.class">Symfony\Component\ExpressionLanguage\ExpressionLanguage</parameter>
+
+        <parameter key="sylius.twig.resource.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
         <parameter key="sylius.form.type.entity_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityToIdentifierType</parameter>
     </parameters>
 
     <services>
-        <service id="sylius_resource.twig" class="%sylius_resource.twig.class%">
+        <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%" scope="request">
+            <argument type="service" id="request" />
+            <argument type="service" id="sylius.controller.parameters_parser" />
+        </service>
+        <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
+            <argument type="service" id="sylius.expresssion_language" />
+        </service>
+        <service id="sylius.expresssion_language" class="%sylius.expression_language.class%" />
+
+        <service id="sylius.twig.resource" class="%sylius.twig.resource.class%">
             <argument type="service" id="service_container" />
             <argument>SyliusResourceBundle:Twig:paginate.html.twig</argument>
             <argument>SyliusResourceBundle:Twig:sorting.html.twig</argument>

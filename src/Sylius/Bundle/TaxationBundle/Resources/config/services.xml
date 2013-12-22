@@ -26,23 +26,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.tax_category" class="%sylius.controller.tax_category.class%">
-            <argument>sylius</argument>
-            <argument>tax_category</argument>
-            <argument>SyliusTaxationBundle:TaxCategory</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.tax_rate" class="%sylius.controller.tax_rate.class%">
-            <argument>sylius</argument>
-            <argument>tax_rate</argument>
-            <argument>SyliusTaxationBundle:TaxRate</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.tax_category" class="%sylius.form.type.tax_category.class%">
             <argument>%sylius.model.tax_category.class%</argument>
             <argument>%sylius.validation_group.tax_category%</argument>

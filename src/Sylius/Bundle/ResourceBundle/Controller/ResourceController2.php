@@ -90,8 +90,7 @@ class ResourceController extends FOSRestController
               ;
 
             if ($config->isApiRequest()) {
-              //$resources = $this->getPagerfantaFactory()->create($resources, $request->get('_route'), $request->get('_route_parameters', array()));
-              $resoures = new PaginatedRepresentation($resources, $request->get('_route'), $request->get('_route_parameters', array()), $resources->getCurrentPage(), $resources->getMaxPerPage(), $resources->getNbPages());
+                $resources = $this->getPagerfantaFactory()->create($resources, $request->get('_route'), $request->get('_route_parameters', array()));
             }
         } else {
             $resources = $this

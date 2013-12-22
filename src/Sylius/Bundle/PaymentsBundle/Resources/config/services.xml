@@ -22,24 +22,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.payment_method" class="%sylius.controller.payment_method.class%">
-            <argument>sylius</argument>
-            <argument>payment_method</argument>
-            <argument>SyliusPaymentsBundle:PaymentMethod</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.controller.payment" class="%sylius.controller.payment.class%">
-            <argument>sylius</argument>
-            <argument>payment</argument>
-            <argument>SyliusPaymentsBundle:Payment</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.payment_method" class="%sylius.form.type.payment_method.class%">
             <argument>%sylius.model.payment_method.class%</argument>
             <argument>%sylius.validation_group.payment_method%</argument>
