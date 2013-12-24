@@ -64,6 +64,10 @@ class StateResolver implements StateResolverInterface
             return OrderShippingStates::RETURNED;
         }
 
+        if (array(ShipmentInterface::STATE_READY) === $states) {
+            return OrderShippingStates::READY;
+        }
+
         return OrderShippingStates::PARTIALLY_SHIPPED;
     }
 }
