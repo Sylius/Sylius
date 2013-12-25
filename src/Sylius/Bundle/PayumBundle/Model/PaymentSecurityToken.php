@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Model\Token;
+use Payum\Core\Model\Token;
 
 class PaymentSecurityToken extends Token
 {

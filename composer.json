@@ -46,12 +46,8 @@
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
-        "omnipay/omnipay":                      "1.0.*",
-        "payum/payum":                          "~0.6.3",
-        "payum/payum-bundle":                   "~0.6.2",
-        "payum/paypal-express-checkout-nvp":    "0.6.*",
-        "payum/be2bill":                        "0.6.*",
-        "payum/omnipay-bridge":                 "0.6.*"
+        "payum/payum":                          "0.7.*@dev",
+        "payum/payum-bundle":                   "0.7.*@dev"
     },
     "require-dev": {
         "behat/behat":                       "2.4.*@stable",

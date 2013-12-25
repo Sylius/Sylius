@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Action\ActionInterface;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
-use Payum\Exception\LogicException;
-use Payum\Exception\RequestNotSupportedException;
+use Payum\Core\Action\ActionInterface;
+use Payum\Core\Exception\LogicException;
+use Payum\Core\Exception\RequestNotSupportedException;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

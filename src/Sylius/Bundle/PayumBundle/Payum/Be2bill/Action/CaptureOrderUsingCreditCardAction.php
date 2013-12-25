@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Exception\LogicException;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\SecuredCaptureRequest;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Exception\LogicException;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Symfony\Component\HttpFoundation\Request;

@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Bridge\Spl\ArrayObject;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\CaptureRequest;
-use Payum\Request\SecuredCaptureRequest;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
