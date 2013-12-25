@@ -49,7 +49,7 @@ class SyliusResourceExtension extends Extension
         list($config) = $this->configure($config, new Configuration(), $container);
 
         if (isset($config['resources'])) {
-            $this->createResourceServices($config['resources'], $container);
+            $this->createResourceServices($config['resources']);
         }
     }
 
@@ -158,15 +158,31 @@ class SyliusResourceExtension extends Extension
     }
 
     /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
+     * @param array $configs
+     * @throws \InvalidArgumentException
      */
-    private function createResourceServices(array $configs, ContainerBuilder $container)
+    private function createResourceServices(array $configs)
     {
         foreach ($configs as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
 
-            $this->factories[$config['driver']]->create($prefix, $resourceName, $config['classes'], array_key_exists('templates', $config) ? $config['templates'] : null);
+            $factory = $this->getFactoryForDriver($config['driver']);
+            if (!$factory) {
+                throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported, no factory exists for creating services', $config['driver']));
+            }
+
+            $factory->create($prefix, $resourceName, $config['classes'], array_key_exists('templates', $config) ? $config['templates'] : null);
+        }
+    }
+
+    /**
+     * @param $driver
+     * @return mixed
+     */
+    private function getFactoryForDriver($driver)
+    {
+        if (isset($this->factories[$driver])) {
+            return $this->factories[$driver];
         }
     }
 }
