@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DatabaseDriverFactoryInterface;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\ResourceServicesFactory;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
@@ -35,6 +36,8 @@ class SyliusResourceExtension extends Extension
     protected $configFiles = array(
         'services',
     );
+
+    private $factories = array();
 
     /**
      * {@inheritdoc}
@@ -90,6 +93,16 @@ class SyliusResourceExtension extends Extension
         $container->setParameter('sylius.config.classes', $classes);
 
         return array($config, $loader);
+    }
+
+    /**
+     * Adds a factory that is able to handle a specific database driver type
+     *
+     * @param $factory
+     */
+    public function addDatabaseDriverFactory(DatabaseDriverFactoryInterface $factory)
+    {
+        $this->factories[$factory->getSupportedDriver()] = $factory;
     }
 
     /**
@@ -150,12 +163,10 @@ class SyliusResourceExtension extends Extension
      */
     private function createResourceServices(array $configs, ContainerBuilder $container)
     {
-        $factory = new ResourceServicesFactory($container);
-
         foreach ($configs as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
 
-            $factory->create($prefix, $resourceName, $config['driver'], $config['classes'], array_key_exists('templates', $config) ? $config['templates'] : null);
+            $this->factories[$config['driver']]->create($prefix, $resourceName, $config['classes'], array_key_exists('templates', $config) ? $config['templates'] : null);
         }
     }
 }
