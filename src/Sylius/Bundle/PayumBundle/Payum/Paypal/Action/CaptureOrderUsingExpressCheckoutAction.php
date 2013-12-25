@@ -55,10 +55,15 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
             $payment->setDetails($details);
         }
 
-        $request->setModel($payment);
-        $this->payment->execute($request);
+        try {
+            $request->setModel($payment);
+            $this->payment->execute($request);
+            $request->setModel($order);
+        } catch (\Exception $e) {
+            $request->setModel($order);
 
-        $request->setModel($order);
+            throw $e;
+        }
     }
 
     /**

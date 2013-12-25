@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
+use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
@@ -38,12 +39,12 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
             $details = array(
-                'card' => array(
+                'card' => new SensitiveValue(array(
                     'number' => $obtainCreditCardRequest->getCreditCard()->getNumber(),
                     'expiryMonth' => $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(),
                     'expiryYear' => $obtainCreditCardRequest->getCreditCard()->getExpiryYear(),
                     'cvv' => $obtainCreditCardRequest->getCreditCard()->getSecurityCode()
-                ),
+                )),
                 'amount' => number_format($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
             );
@@ -54,18 +55,9 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         try {
             $request->setModel($payment);
             $this->payment->execute($request);
-
             $request->setModel($order);
-
-            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
-            $details = $payment->getDetails();
-            unset($details['card']);
-            $payment->setDetails($details);
         } catch (\Exception $e) {
-            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
-            $details = $payment->getDetails();
-            unset($details['card']);
-            $payment->setDetails($details);
+            $request->setModel($order);
 
             throw $e;
         }
