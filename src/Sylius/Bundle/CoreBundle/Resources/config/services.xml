@@ -56,6 +56,7 @@
 
         <parameter key="sylius.image_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageUploader</parameter>
 
+        <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Bundle\CoreBundle\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
 
@@ -298,6 +299,9 @@
         </service>
 
         <!-- promotions -->
+        <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
+            <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
+        </service>
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
             <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
