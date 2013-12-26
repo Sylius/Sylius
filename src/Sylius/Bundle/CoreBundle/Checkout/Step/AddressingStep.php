@@ -34,6 +34,11 @@ class AddressingStep extends CheckoutStep
 
         $form = $this->createCheckoutAddressingForm($order);
 
+        $order->setUser($this->getUser());
+        $orderManager = $this->get('sylius.manager.order');
+        $orderManager->persist($order);
+        $orderManager->flush();
+
         return $this->renderStep($context, $order, $form);
     }
 
