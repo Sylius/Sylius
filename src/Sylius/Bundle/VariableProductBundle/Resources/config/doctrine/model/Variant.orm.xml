@@ -27,7 +27,7 @@
         <field name="availableOn" column="available_on" type="datetime" />
 
         <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="variants">
-            <join-column name="product_id" referenced-column-name="id" nullable="false" />
+            <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
         <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface">
