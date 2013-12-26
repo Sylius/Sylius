@@ -20,6 +20,5 @@ Bundles reference
     SyliusSettingsBundle/index
     SyliusFlowBundle/index
     SyliusBloggerBundle/index
-    SyliusAssortmentBundle/index
 
 .. include:: /bundles/map.rst.inc
