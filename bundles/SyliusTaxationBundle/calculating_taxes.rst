@@ -1,6 +1,12 @@
 Calculating taxes
 =================
 
+
+.. warning::
+
+    When using the CoreBundle (i.e: full stack Sylius framework), the taxes are already calculated at each cart change.
+    It is implemented by the ``TaxationProcessor`` class, which is called by the `OrderTaxationListener``.
+
 In order to calculate tax amount for given taxable, we need to find out the applicable tax rate.
 The tax rate resolver service is available under ``sylius.tax_rate_resolver`` id, while the delegating tax calculator is accessible via ``sylius.tax_calculator`` name.
 
