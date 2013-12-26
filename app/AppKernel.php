@@ -52,7 +52,6 @@ class AppKernel extends Kernel
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
@@ -77,6 +76,7 @@ class AppKernel extends Kernel
         );
 
         if (in_array($this->environment, array('dev'))) {
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }
 
