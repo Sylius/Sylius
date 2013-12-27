@@ -103,6 +103,12 @@
         {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
             <span class="label label-warning">{{ 'sylius.out_of_stock'|trans }}</span>
         {% else %}
+            {% if not product.isVariantSelectionMethodChoice %}
+            <div class="row">
+                <div class="col-md-2 "><strong>{{ 'sylius.variant.price'|trans }}</strong></div>
+                <div class="col-md-10">{{ product.price|sylius_price }}</div>
+            </div>      
+            {% endif %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
             {{ form_widget(form._token) }}
             <br>
