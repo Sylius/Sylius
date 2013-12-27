@@ -28,9 +28,15 @@
                 url: deleteButton.parent().attr('action'),
                 data: { confirmed: "1" },
                 cache: false
+            }).fail(function(jqXHR, textStatus) {
+                $('.alert-js').addClass('alert-error');
+                $('.alert-js').append(textStatus).removeClass('hidden');
             }).done(function(json) {
                 $('#confirmation-modal').modal('hide');
                 $('#'+json.id).remove();
+
+                $('.alert-js').addClass('alert-'+json.flash.type);
+                $('.alert-js').append(json.flash.message).removeClass('hidden');
             });
         });
     });

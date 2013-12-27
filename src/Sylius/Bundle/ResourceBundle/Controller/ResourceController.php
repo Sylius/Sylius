@@ -16,9 +16,9 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Base resource controller for Sylius.
@@ -204,16 +204,22 @@ class ResourceController extends FOSRestController
             $event = $this->delete($resource);
 
             if ($request->isXmlHttpRequest()) {
-                return JsonResponse::create(array('id' => $request->get('id')));
+                return new JsonResponse(array(
+                    'id'    => $request->get('id'),
+                    'flash' => array(
+                        'message' => $this->translateFlashMessage('delete', array()),
+                        'type'    => 'success'
+                    )
+                ));
             }
+
+            $this->setFlash('success', 'delete');
 
             if ($event->isStopped()) {
                 $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
 
                 return $this->redirectTo($resource);
             }
-
-            $this->setFlash('success', 'delete');
 
             $config = $this->getConfiguration();
 
@@ -224,7 +230,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($request->isXmlHttpRequest()) {
-            throw new AccessDeniedHttpException;
+            throw new AccessDeniedException();
         }
 
         $view = $this
