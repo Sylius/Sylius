@@ -6,8 +6,12 @@ default:
         class: Sylius\Bundle\WebBundle\Behat\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
+            base_url: 'http://localhost:8080/app_test.php'
             default_session: symfony2
+            javascript_session: selenium2
             goutte: ~
+            selenium2: ~
             browser_name: firefox
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
+            show_auto: false
+            show_cmd: chrome %s
+        Behat\Symfony2Extension\Extension: ~

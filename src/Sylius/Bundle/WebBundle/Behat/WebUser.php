@@ -86,7 +86,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iGoToTheWebsiteRoot()
     {
-        $this->getSession()->visit('/');
+        $this->visit('/');
     }
 
     /**
@@ -95,7 +95,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnThePage($page)
     {
-        $this->getSession()->visit($this->generatePageUrl($page));
+        $this->visit($this->generatePageUrl($page));
     }
 
     /**
@@ -122,7 +122,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnTheStoreHomepage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_homepage'));
+        $this->visit($this->generateUrl('sylius_homepage'));
     }
 
     /**
@@ -130,7 +130,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountHomepage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_homepage'));
+        $this->visit($this->generatePageUrl('sylius_account_homepage'));
     }
 
     /**
@@ -146,7 +146,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('fos_user_change_password'));
+        $this->visit($this->generatePageUrl('fos_user_change_password'));
     }
 
     /**
@@ -170,7 +170,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('fos_user_profile_edit'));
+        $this->visit($this->generatePageUrl('fos_user_profile_edit'));
     }
 
     /**
@@ -210,7 +210,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountOrdersPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_index'));
+        $this->visit($this->generatePageUrl('sylius_account_order_index'));
     }
 
     /**
@@ -218,7 +218,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountAddressesPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_address_index'));
+        $this->visit($this->generatePageUrl('sylius_account_address_index'));
     }
 
     /**
@@ -244,7 +244,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountAddressCreationPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_address_create'));
+        $this->visit($this->generatePageUrl('sylius_account_address_create'));
     }
 
     /**
@@ -291,7 +291,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $shippingMethod = $this->getDataContext()->findOneBy('shipping_method', array('name' => $value));
         $shipment = $this->getDataContext()->findOneBy('shipment', array('method' => $shippingMethod));
 
-        $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
+        $this->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
     }
 
     /**
@@ -304,7 +304,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
+        $this->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
     }
 
     /**
@@ -360,7 +360,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_%s', $type, $action), array('id' => $resource->getId())));
+        $this->visit($this->generatePageUrl(sprintf('backend_%s_%s', $type, $action), array('id' => $resource->getId())));
     }
 
     /**
@@ -400,7 +400,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $product = $this->getDataContext()->findOneByName('product', $name);
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+        $this->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
     }
 
     /**
@@ -636,7 +636,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
+        $this->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
     }
 
     /**
@@ -660,7 +660,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $page = "sylius_account_order_$action";
         $order = $this->getDataContext()->findOneBy('order', array('number' => $number));
 
-        $this->getSession()->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
+        $this->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
     }
 
     /**
@@ -750,7 +750,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         // Re-set default session
         $currentUrl = $this->getSession()->getCurrentUrl();
         $this->getMink()->setDefaultSessionName('goutte');
-        $this->getSession()->visit($currentUrl);
+        $this->visit($currentUrl);
     }
 
     /**
@@ -811,20 +811,13 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClickOnConfirmationModal($button)
     {
-        $this->assertSession()->elementExists('css', '#confirmationModalContainer');
+        $this->assertSession()->elementExists('css', '#confirmation-modal');
 
-        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
-
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
-
+        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
+        $primaryButton = $modalContainer->find('css', sprintf('button:contains("%s")', $button));
+        $this->getSession()->wait(100, 'document.getElementById("confirmation-modal").className.match("/ in/")');
         $primaryButton->press();
+        $this->getSession()->wait(100, '!document.getElementById("confirmation-modal").className.match("/ in/")');
     }
 
     /**
@@ -885,7 +878,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     protected function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
     {
         $this->getSubContext('data')->thereIsUser($email, 'sylius', $role);
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+        $this->visit($this->generatePageUrl('fos_user_security_login'));
 
         $this->fillField('Email', $email);
         $this->fillField('Password', 'sylius');
@@ -918,13 +911,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
         $route = str_replace(' ', '_', $route);
 
-        $path = $this->generateUrl($route, $parameters);
-
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
-            return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
-        }
-
-        return $path;
+        return $this->generateUrl($route, $parameters);
     }
 
     /**
