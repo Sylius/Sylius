@@ -114,6 +114,10 @@
         <source>sylius.form.rule.user_loyality_configuration.after</source>
         <target>User created after this period</target>
       </trans-unit>
+      <trans-unit id="218050498b1c32f7174ce6caa818cd7e4ec99075" resname="sylius.form.rule.shipping_country_configuration.country">
+        <source>sylius.form.rule.shipping_country_configuration.country</source>
+        <target>Country</target>
+      </trans-unit>
       <trans-unit id="0d4066bcf74e779abcd0b9c38537cb0263fc3cb0" resname="sylius.form.rule.type">
         <source>sylius.form.rule.type</source>
         <target>Type</target>
