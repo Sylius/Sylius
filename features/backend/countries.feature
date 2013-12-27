@@ -114,7 +114,6 @@ Feature: Countries and provinces
          When I press "delete" near "China"
           And I click "delete" from the confirmation modal
          Then I should still be on the country index page
-          And I should see "Country has been successfully deleted."
           But I should not see country with name "China" in the list
 
     Scenario: Deleting country
