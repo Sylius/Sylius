@@ -87,10 +87,8 @@ class BuildProductPropertyFormListenerSpec extends ObjectBehavior
     {
         $productProperty->getType()->willReturn('choice');
         $productProperty->getConfiguration()->willReturn(array(
-            'choices' => array(
-                'red'  => 'Red',
-                'blue' => 'Blue'
-            )
+            array('configuration' => 'Red'),
+            array('configuration' => 'Blue')
         ));
         $productProperty->getName()->willReturn('My name');
 

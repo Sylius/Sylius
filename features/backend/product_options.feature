@@ -91,12 +91,11 @@ Feature: Product options
     @javascript
     Scenario: Adding values to existing option
         Given I am editing option "T-Shirt size"
-          And I add following option values:
+         When I add following option values:
             | XL  |
             | XXL |
           And I press "Save changes"
          Then I should be on the option index page
-          And "Option has been successfully updated." should appear on the page
           And I should see option with value "XXL" in the list
 
     Scenario: Created options appear in the list
@@ -116,6 +115,23 @@ Feature: Product options
           And I press "Save changes"
          Then I should be on the option index page
           And I should see "Option has been successfully updated."
+
+    @javascript
+    Scenario: Updating the option and I remove all the option
+        Given I am editing option "T-Shirt size"
+         When I remove all the options
+          And I press "Save changes"
+         Then I should be editing option "T-Shirt size"
+          And I should see "Please add at least 2 option values."
+
+    @javascript
+    Scenario: Updating the option and removing one option
+        Given I am editing option "T-Shirt color"
+         When I remove the option "Green"
+          And I press "Save changes"
+         Then I should be on the option index page
+          And I should see "Option has been successfully updated."
+          But I should not see "Green"
 
     Scenario: Deleted option disappears from the list
         Given I am on the option index page

@@ -43,11 +43,13 @@ class VariantType extends BaseVariantType
                 'label' => 'sylius.form.variant.on_hand'
             ))
             ->add('images', 'collection', array(
-                'type'         => 'sylius_image',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label'        => 'sylius.form.variant.images'
+                'type'                => 'sylius_image',
+                'allow_add'           => true,
+                'allow_delete'        => true,
+                'by_reference'        => false,
+                'item_by_line'        => 3,
+                'button_add_label'    => 'sylius.form.variant.images',
+                'button_delete_label' => 'sylius.variant.delete_image',
             ))
         ;
     }

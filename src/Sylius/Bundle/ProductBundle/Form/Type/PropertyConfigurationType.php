@@ -9,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Form\Type;
+namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * Country zone member form type.
- *
- * @author Саша Стаменковић <umpirsky@gmail.com>
- */
-class ZoneMemberCountryType extends ZoneMemberType
+class PropertyConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -26,12 +23,10 @@ class ZoneMemberCountryType extends ZoneMemberType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_country_choice', array(
+            ->add('configuration', 'text', array(
                 'label' => false
             ))
         ;
-
-        parent::buildForm($builder, $options);
     }
 
     /**
@@ -39,6 +34,6 @@ class ZoneMemberCountryType extends ZoneMemberType
      */
     public function getName()
     {
-        return 'sylius_zone_member_country';
+        return 'sylius_prototype_configuration';
     }
 }

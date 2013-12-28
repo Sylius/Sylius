@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ProductBundle\Model;
 
+use Symfony\Component\Validator\ExecutionContextInterface;
+
 /**
  * Model for product properties.
  *
@@ -184,5 +186,15 @@ class Property implements PropertyInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function isValidConfiguration(ExecutionContextInterface $context)
+    {
+        if ($this->getType() === PropertyTypes::CHOICE && count($this->getConfiguration()) < 2) {
+            $context->addViolationAt(
+                'configuration',
+                'sylius.property.presentation.count'
+            );
+        }
     }
 }

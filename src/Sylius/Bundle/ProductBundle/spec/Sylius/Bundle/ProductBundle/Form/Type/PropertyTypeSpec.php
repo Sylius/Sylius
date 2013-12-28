@@ -14,6 +14,9 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,11 +24,7 @@ use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
  */
 class PropertyTypeSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\Form\FormBuilder          $builder
-     * @param Symfony\Component\Form\FormFactoryInterface $formFactory
-     */
-    function let($builder, $formFactory)
+    function let(FormBuilderInterface $builder, FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith('Property', array('sylius'));
 
@@ -42,17 +41,8 @@ class PropertyTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
-        $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\ProductBundle\Form\EventListener\BuildPropertyFormChoicesListener'))
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
         $builder
             ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
@@ -66,7 +56,13 @@ class PropertyTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('type', 'choice', array('choices' => PropertyTypes::getChoices()))
+            ->add('type', 'choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('configuration', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -74,10 +70,7 @@ class PropertyTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_defines_assigned_data_class($resolver)
+    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'Property', 'validation_groups' => array('sylius')))->shouldBeCalled();
 

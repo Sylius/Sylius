@@ -51,8 +51,11 @@ form.form-signin .form-control:focus {
     line-height: 20px;
     font-size: 13px;
 }
-.btn > i {
-    margin-right: 5px;
+.btn > i + span {
+    margin-left: 5px;
+}
+.btn.btn-lg > i + span {
+    margin-left: 10px;
 }
 .btn.btn-default {
     border-color: #DDD;
@@ -61,6 +64,9 @@ form.form-signin .form-control:focus {
 .btn.btn-default:hover {
     border-color: #CCC;
     background: #EEE;
+}
+.btn.btn-lg {
+    font-size: 15px;
 }
 
 /* Labels. */
@@ -280,6 +286,7 @@ form.form-signin .form-control:focus {
     border-bottom: 3px solid #ddd;
     margin-bottom: 10px;
     text-align: center;
+    clear:both;
 }
 .actions-menu {
     float: right;
@@ -339,6 +346,10 @@ input[type="file"] {
     cursor: pointer;
     width: 200px;
     z-index: 100;
+}
+
+.form-actions {
+    margin-top: 10px;
 }
 
 .form-control {
@@ -420,9 +431,6 @@ input[type="file"] {
 
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
-    .btn i {
-        margin-right: 0;
-    }
     .btn span {
         display: none;
     }
@@ -441,6 +449,37 @@ input[type="file"] {
 /** Dashboard */
 .col-md-6 #users .btn span {
     display: none;
+}
+
+/** Form Collection */
+.collection-item .collection-box {
+    position: relative;
+}
+
+.collection-item [data-form-collection="delete"] {
+    font-size: 15px;
+    position: absolute;
+    right: -25px;
+    top: 0;
+    cursor: pointer;
+}
+
+.form-inline .collection-item .collection-box,
+.collection-item .collection-box.unique-field,
+.form-horizontal .collection-item .collection-box {
+    padding: 0 25px 0 12px;
+}
+
+.collection-item .collection-box .form-group {
+    margin-right: 0;
+}
+.collection-item .collection-box .form-group .col-lg-10 {
+    padding-right: 0;
+}
+
+.form-inline .collection-item [data-form-collection="delete"]
+.collection-item .unique-field [data-form-collection="delete"] {
+    top: 6px;
 }
 
 /** Products. **/

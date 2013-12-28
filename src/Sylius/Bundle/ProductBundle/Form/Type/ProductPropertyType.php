@@ -57,13 +57,15 @@ class ProductPropertyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('property', 'sylius_property_choice')
+            ->add('property', 'sylius_property_choice', array(
+                'label' => 'sylius.product.property.label.property',
+            ))
             ->addEventSubscriber(new BuildProductPropertyFormListener($builder->getFormFactory()))
         ;
 
         $prototypes = array();
         foreach ($this->getProperties($builder) as $property) {
-            $prototypes[] = $builder->create('value', $property->getType(), $property->getConfiguration())->getForm();
+            $prototypes[] = $builder->create('value', $property->getType())->getForm();
         }
 
         $builder->setAttribute('prototypes', $prototypes);
@@ -89,7 +91,7 @@ class ProductPropertyType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

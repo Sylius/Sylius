@@ -11,17 +11,13 @@
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.tax_rate.show_header'|trans|raw }}</h1>
-</div>
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_tax_rate_index'), 'sylius.tax_rate.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_tax_rate_update', {'id': tax_rate.id})) }}
+        {{ buttons.delete(path('sylius_backend_tax_rate_delete', {'id': tax_rate.id}), null, null, false) }}
+    </div>
 
-<div class="well">
-    <a href="{{ path('sylius_backend_tax_rate_index') }}" class="btn btn-primary">
-        <i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.tax_rate.manage'|trans }}
-    </a>
-    <a href="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
-        <i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.edit'|trans }}
-    </a>
-    {{ buttons.delete(path('sylius_backend_tax_rate_delete', {'id': tax_rate.id})) }}
+    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.tax_rate.show_header'|trans|raw }}</h1>
 </div>
 
 <table class="table table-bordered table-condensed">

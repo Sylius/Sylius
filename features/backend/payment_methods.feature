@@ -39,6 +39,7 @@ Feature: Payment methods
          When I fill in "Name" with "Google Checkout"
           And I press "Create"
          Then I should be on the payment method index page
+          And I should see payment method with name "Google Checkout" in that list
           And I should see "Payment method has been successfully created."
 
     Scenario: Describing the payment method
@@ -47,6 +48,7 @@ Feature: Payment methods
           And I fill in "Description" with "Flexible checkout by Google!"
           And I press "Create"
          Then I should be on the payment method index page
+          And I should see payment method with name "Google Checkout" in that list
           And I should see "Payment method has been successfully created."
 
     Scenario: Created methods appear in the list
@@ -55,6 +57,7 @@ Feature: Payment methods
           And I press "Create"
          Then I should be on the payment method index page
           And I should see payment method with name "PayU" in the list
+          And I should see "Payment method has been successfully created."
 
     Scenario: Accessing the editing form from the list
         Given I am on the payment method index page
@@ -67,6 +70,7 @@ Feature: Payment methods
           And I press "Save changes"
          Then I should be on the payment method index page
           And I should see payment method with name "PayPal PRO" in the list
+          And I should see "Payment method has been successfully updated."
 
     Scenario: Deleting payment method
         Given I am on the payment method index page
@@ -74,6 +78,7 @@ Feature: Payment methods
          Then I should see "Do you want to delete this item"
          When I press "delete"
          Then I should still be on the payment method index page
+          And I should not see payment method with name "PayPal" in that list
           And I should see "Payment method has been successfully deleted."
 
     @javascript
@@ -82,7 +87,7 @@ Feature: Payment methods
          When I click "delete" near "PayPal"
           And I click "delete" from the confirmation modal
          Then I should still be on the payment method index page
-          And I should see "Payment method has been successfully deleted."
+          And I should not see payment method with name "PayPal" in that list
 
     Scenario: Deleted payment method disappears from the list
         Given I am on the payment method index page

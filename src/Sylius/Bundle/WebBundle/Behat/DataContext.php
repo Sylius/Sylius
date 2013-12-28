@@ -542,12 +542,15 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
+
             $additionalData = array(
                 'type'         => isset($data['type']) ? $data['type'] : 'text',
-                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name']
+                'presentation' => isset($data['presentation']) ? $data['presentation'] : $data['name'],
             );
             if ($choices) {
-                $additionalData['configuration'] = array('choices' => $choices);
+                foreach ($choices as $choice) {
+                    $additionalData['configuration'][] = array('configuration' => $choice);
+                }
             }
             $this->thereIsProperty($data['name'], $additionalData);
         }

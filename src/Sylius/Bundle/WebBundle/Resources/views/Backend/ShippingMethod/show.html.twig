@@ -15,11 +15,10 @@
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_shipping_method_index'), 'sylius.shipping_method.manage'|trans) }}
         {{ buttons.edit(path('sylius_backend_shipping_method_update', {'id': shipping_method.id})) }}
-        {{ buttons.delete(path('sylius_backend_shipping_method_delete', {'id': shipping_method.id}), null, false, false) }}
+        {{ buttons.delete(path('sylius_backend_shipping_method_delete', {'id': shipping_method.id}), null, null, false) }}
     </div>
     <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.shipping_method.show_header'|trans|raw }}</h1>
 </div>
-
 
 <table class="table table-bordered table-condensed">
     <thead>
@@ -36,7 +35,7 @@
         <tr>
             <td>{{ shipping_method.name }}</td>
             <td>{{ shipping_method.zone }}</td>
-            <td>{{ shipping_method.category|default('<i>undefined</i>')|raw }}</td>
+            <td>{{ shipping_method.category|default('<em>undefined</em>')|raw }}</td>
             <td>
                 <span class="label label-{{ shipping_method.enabled ? 'success' : 'important'}}">
                     {{ shipping_method.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}

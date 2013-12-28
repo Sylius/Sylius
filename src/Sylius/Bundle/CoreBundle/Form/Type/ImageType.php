@@ -11,12 +11,18 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Bundle\CoreBundle\Model\VariantImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ImageType extends AbstractType
 {
+    public $images = array();
     protected $dataClass;
 
     public function __construct($dataClass)
@@ -24,13 +30,39 @@ class ImageType extends AbstractType
         $this->dataClass = $dataClass;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        $image = current($this->images);
+
+        if (false !== $image && $image instanceof VariantImage) {
+            $view->children['file']->vars['image_path'] = $image->getPath();
+        }
+
+        next($this->images);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('file', 'file', array(
-            'label' => 'sylius.form.image.file'
+            'label' => false
         ));
+
+        $that = &$this;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($that) {
+            $that->images[] = $event->getData();
+        });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -40,6 +72,9 @@ class ImageType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_image';

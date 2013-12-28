@@ -209,6 +209,8 @@ Feature: Promotions
           And I fill in "Name" with "First 5 pay half!"
           And I fill in "Description" with "First 5 orders get 50% discount!"
           And I press "Create"
+         Then I should be on the page of promotion "First 5 pay half!"
+          And I should see "Promotion has been successfully created."
          When I go to the promotion index page
          Then I should see 5 promotions in the list
           And I should see promotion with name "First 5 pay half!" in that list
@@ -228,22 +230,7 @@ Feature: Promotions
          When I fill in "Name" with "New Year Sale"
           And I press "Save changes"
          Then I should be on the page of promotion "New Year Sale"
-
-    Scenario: Deleting promotion
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
-
-    @javascript
-    Scenario: Deleting promotion with js modal
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
+          And I should see "Promotion has been successfully updated."
 
     Scenario: Deleted promotion disappears from the list
         Given I am on the page of promotion "New Year"
@@ -252,14 +239,7 @@ Feature: Promotions
          When I press "delete"
          Then I should be on the promotion index page
           And I should not see promotion with name "New Year" in that list
-
-    @javascript
-    Scenario: Deleted promotion disappears from the list with js modal
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the promotion index page
-          And I should not see promotion with name "New Year" in that list
+          And I should see "Promotion has been successfully deleted."
 
     Scenario: Deleting promotion via list
         Given I am on the promotion index page
@@ -267,6 +247,7 @@ Feature: Promotions
          Then I should see "Do you want to delete this item"
          When I press "delete"
          Then I should be on the promotion index page
+          And I should not see "Press Campaign"
           And I should see "Promotion has been successfully deleted."
 
     @javascript
@@ -275,7 +256,7 @@ Feature: Promotions
          When I click "delete" near "Press Campaign"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
+          And I should not see "Press Campaign"
 
     Scenario: Deleting promotion rule
         Given I am on the page of promotion "Christmas"
@@ -292,7 +273,6 @@ Feature: Promotions
          When I press "delete" near "Item total"
           And I click "delete" from the confirmation modal
          Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion rule has been successfully deleted."
           And I should not see "Order total"
 
     Scenario: Deleting promotion action
@@ -310,5 +290,4 @@ Feature: Promotions
          When I press "delete" near "Fixed discount"
           And I click "delete" from the confirmation modal
          Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion action has been successfully deleted."
           And I should not see "Fixed discount"

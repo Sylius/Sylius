@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\EventListener;
 
+use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -58,17 +59,22 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
     {
         $productProperty = $event->getData();
         $form = $event->getForm();
+        $options = array(
+            'label' => 'sylius.product.property.label.value',
+            'auto_initialize' => false
+        );
 
         if (null === $productProperty) {
-            $form->add($this->factory->createNamed('value', 'text', null, array('auto_initialize' => false)));
+            $form->add($this->factory->createNamed('value', 'text', null, $options));
 
             return;
         }
 
-        $options = array('label' => $productProperty->getName(), 'auto_initialize' => false);
+        $options['label'] = $productProperty->getName();
 
-        if (is_array($productProperty->getConfiguration())) {
-            $options = array_merge($options, $productProperty->getConfiguration());
+        if (is_array($productProperty->getConfiguration()) &&
+            PropertyTypes::CHOICE == $productProperty->getType()) {
+            $options['choices'] = $this->getChoices($productProperty->getConfiguration());
         }
 
         // If we're editing the product property, let's just render the value field, not full selection.
@@ -76,5 +82,15 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
             ->remove('property')
             ->add($this->factory->createNamed('value', $productProperty->getType(), null, $options))
         ;
+    }
+
+    private function getChoices($configuration)
+    {
+        $choices = array();
+        foreach ($configuration as $choice) {
+            $choices[strtolower($choice['configuration'])] = $choice['configuration'];
+        }
+
+        return $choices;
     }
 }

@@ -456,6 +456,165 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I remove the province "([^"]*)"$/
+     */
+    public function iRemoveTheProvince($province)
+    {
+        $this->removePositionItemFormCollection('//div[@id="sylius_country_provinces"]', $province);
+    }
+
+    /**
+     * @When /^I remove all the members$/
+     */
+    public function iRemoveAllTheMembers()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_zone_members"]');
+    }
+
+    /**
+     * @When /^I remove the member #(\d+)$/
+     */
+    public function iRemoveTheMember($member)
+    {
+        $this->removePositionItemFormCollection(
+            '//div[@id="sylius_zone_members"]',
+            $member
+        );
+    }
+
+    /**
+     * @Given /^I remove the option "([^"]*)"$/
+     */
+    public function iRemoveTheOption($option)
+    {
+        $this->removeNamedItemFormCollection('//div[@id="sylius_option_values"]', $option);
+    }
+
+    /**
+     * @When /^I remove all the properties$/
+     */
+    public function iRemoveAllTheProperties()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_product_properties"]');
+    }
+
+
+    /**
+     * @When /^I remove all the options$/
+     */
+    public function iRemoveAllTheOption()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_option_values"]');
+    }
+
+    /**
+     * @When /^I remove all the choices$/
+     */
+    public function iRemoveAllTheChoice()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_property_configuration"]');
+    }
+
+    /**
+     * @Given /^I remove the choice #(\d+)$/
+     */
+    public function iRemoveTheChoice($position)
+    {
+        $this->removePositionItemFormCollection(
+            '//div[@id="sylius_property_configuration"]',
+            $position
+        );
+    }
+
+    /**
+     * @param $xpath
+     * @param $position
+     * @throws \Behat\Mink\Exception\ExpectationException
+     */
+    private function removePositionItemFormCollection($xpath, $position)
+    {
+        //$this->getSession()->wait(3000, "$('$id').find('input[value=\"$value\"]').parent().parent().parent().parent().remove()");
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $field = $container->find(
+            'xpath',
+            sprintf(
+                "//div[contains(@data-form-collection, 'item') and position()=%d]//a[contains(@data-form-collection, 'delete')]",
+                $position
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf('Impossible to find deletion button with the position %d', $position),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+    /**
+     * @param $xpath
+     * @param $itemValue
+     * @throws \Behat\Mink\Exception\ExpectationException
+     */
+    private function removeNamedItemFormCollection($xpath, $itemValue)
+    {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $field = $container->find(
+            'xpath',
+            sprintf(
+                "//*[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
+                $itemValue
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf('Impossible to find deletion button with the value %s', $itemValue),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+    /**
+     * @param $xpath
+     */
+    private function removeAllItemFormCollection($xpath)
+    {
+        // $this->getSession()->wait(3000, "$('$id').find('.collection-item').remove()");
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $items = $container->findAll(
+            'xpath',
+            '//a[contains(@data-form-collection, "delete")]'
+        );
+
+        $nbOfItem = count($items);
+        while ($nbOfItem > 0) {
+            $items[0]->click();
+            $nbOfItem--;
+        }
+    }
+
+    /**
+     * @Given /^I fill in #(\d+) choice with "([^"]*)"$/
+     */
+    public function iFillInChoiceWith($position, $value)
+    {
+//        '//div[@id="sylius_property_configuration"]'
+        $position = $position - 1;
+        $field = $this->getSession()->getPage()->find(
+            'xpath',
+            sprintf('//input[@id="sylius_property_configuration_%d_configuration"]', $position)
+        );
+
+        $field->setValue($value);
+    }
+
+
+    /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
      */
     public function iFillInCheckoutAddress($type, $country)
@@ -727,10 +886,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+        $page  = $this->getSession()->getPage();
+        $count = count($page->findAll('css', 'div.collection-container div.form-group'));
 
         foreach ($table->getRows() as $i => $value) {
-            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $page->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
     }
@@ -787,7 +947,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         foreach ($rows as $key => $row) {
             if ($row->getText() === $property) {
-                $column = $key; break;
+                $column = $key;
+                break;
             }
         }
 
@@ -800,9 +961,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         }
 
         $cols = $tr->findAll('css', 'td');
-        $value = $cols[$column]->getText();
-
-        assertEquals($expectedValue, $value);
+        assertEquals($expectedValue, isset($column) ? $cols[$column]->getText() : null);
     }
 
     /**
@@ -810,20 +969,34 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClickOnConfirmationModal($button)
     {
-        $this->assertSession()->elementExists('css', '#confirmationModalContainer');
+        $this->assertSession()->elementExists('css', '#confirmation-modal');
 
-        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
+        $primaryButton = $modalContainer->find('css', sprintf('button:contains("%s")', $button));
 
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
+        $this->getSession()->wait(3000, '$("#confirmation-modal.in").children().length > 0');
 
         $primaryButton->press();
+
+        // Let's wait for AJAX call to finish
+        $this->getSession()->wait(3000);
+    }
+
+    /**
+     * @Then /^I wait for "([^"]*)" element to appear$/
+     */
+    public function iWaitForElementToAppear($element)
+    {
+        $this->getSession()->wait(5000, '$("'.$element.'").children().length > 0');
+    }
+
+    /**
+     * @Given /^I wait (\d+)$/
+     * @Then /^I wait "(\d+)" seconds$/
+     */
+    public function iWaitXSeconds($seconds)
+    {
+        $this->getSession()->wait($seconds * 1000);
     }
 
     /**
@@ -921,7 +1094,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $path = $this->generateUrl($route, $parameters);
 
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
             return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
         }
 

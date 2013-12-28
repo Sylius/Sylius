@@ -61,11 +61,11 @@ class CountryType extends AbstractType
                 'label' => 'sylius.form.country.iso_name'
             ))
             ->add('provinces', 'collection', array(
-                'type'         => 'sylius_province',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label'        => 'sylius.form.country.provinces'
+                'type'             => 'sylius_province',
+                'allow_add'        => true,
+                'allow_delete'     => true,
+                'by_reference'     => false,
+                'button_add_label' => 'sylius.country.add_province',
             ))
         ;
     }

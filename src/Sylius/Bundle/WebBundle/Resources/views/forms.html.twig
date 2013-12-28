@@ -1,9 +1,9 @@
 {% extends 'form_div_layout.html.twig' %}
 
-{% block choice_widget_collapsed %}
-{% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+{% block choice_widget %}
+{% set attr = attr | merge({'class' :  attr.class|default ~ ' form-control'}) %}
 {{ parent() }}
-{% endblock choice_widget_collapsed %}
+{% endblock choice_widget %}
 
 {% block textarea_widget %}
 {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
@@ -16,9 +16,27 @@
     {% set type = type|default('text') %}
 
     {% if 'file' == type %}
-        <span class="btn-primary btn-lg file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
+        <div class="col-md-3">
+            {% if image_path|default(false) %}
+                <a href="{{ image_path|imagine_filter('sylius_gallery') }}" data-gallery="gallery" class="col-md-3">
+                    <img class="img-rounded" src="{{ image_path|imagine_filter('sylius_90x60') }}" width="90" height="60" alt="" />
+                </a>
+            {% else %}
+                <img class="img-rounded" src="http://placehold.it/90x60" width="90" height="60" alt="" />
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <span class="btn btn-primary btn-lg file-overlay">
+                <i class="glyphicon glyphicon-folder-open"></i>
+                <span>{{ 'sylius.form.choose_file'|trans }}</span>
+            </span>
+
+            {{ parent() }}
+        </div>
+    {% else %}
+        {{ parent() }}
     {% endif %}
-    {{ parent() }}
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
@@ -53,8 +71,8 @@
         {{ block('form_widget_simple') }}
     {% else %}
         <div class="form-group">
-        {{ form_widget(form.date) }}
-        {{ form_widget(form.time) }}
+            {{ form_widget(form.date) }}
+            {{ form_widget(form.time) }}
         </div>
     {% endif %}
 {% endspaceless %}
@@ -65,11 +83,13 @@
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-            {{ '{{ year }} / {{ month }} / {{ day }}'|replace({
-            '{{ year }}':  form_widget(form.year, {'attr': {'style': 'display: inline; width: 100px;'}}),
-            '{{ month }}': form_widget(form.month, {'attr': {'style': 'display: inline; width: 100px;'}}),
-            '{{ day }}':   form_widget(form.day, {'attr': {'style': 'display: inline; width: 100px;'}}),
-            })|raw }}
+        {{
+            '{{ year }} / {{ month }} / {{ day }}'|replace({
+                '{{ year }}':  form_widget(form.year, {'attr': {'style': 'display: inline; width: 100px;'}}),
+                '{{ month }}': form_widget(form.month, {'attr': {'style': 'display: inline; width: 100px;'}}),
+                '{{ day }}':   form_widget(form.day, {'attr': {'style': 'display: inline; width: 100px;'}}),
+            })|raw 
+        }}
     {% endif %}
 {% endspaceless %}
 {% endblock date_widget %}
@@ -89,7 +109,7 @@
 {% spaceless %}
     <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
         {{ form_label(form) }}
-        <div class="col-lg-10">
+        <div{% if label %} class="col-lg-10"{% endif %}>
         {{ form_widget(form) }}
         {% for error in errors %}
             <span class="help-block form-error">
@@ -116,19 +136,69 @@
 {% endblock form_errors %}
 
 {% block sylius_shipping_method_choice_widget %}
-    {% spaceless %}
-        <div {{ block('widget_container_attributes') }}>
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            <div>
+                {% if shipping_costs[child.vars.value] is defined %}
+                    <span class="pull-right text-muted">{{ shipping_costs[child.vars.value]|sylius_price }}</span>
+                {% endif %}
+                <label{% for attrname, attrvalue in child.vars.label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                    {{ form_widget(child) }}
+                    {{ child.vars.label|trans({}, translation_domain) }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{% block collection_widget %}
+{% import _self as forms %}
+{% from 'SyliusWebBundle:Macro:notification.html.twig' import error %}
+{% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+{% spaceless %}
+    <div data-form-type="collection" {{ block('widget_container_attributes') }}{% if prototype is not empty %} data-prototype='{{ forms.collectionItem(prototype, item_by_line, allow_delete, button_delete_label)|e }}'{% endif %}>
+        {{ error(form.vars.errors) }}
+
+        {% if prototypes|default(false) is iterable %}
+            {% for key, subPrototype in prototypes %}
+                <input type="hidden" data-form-prototype="{{ key }}" value="{{ forms.collectionItem(subPrototype, item_by_line, allow_delete, button_delete_label)|e }}" />
+            {% endfor %}
+        {% endif %}
+
+        <div data-form-collection="list" class="row collection-list">
             {% for child in form %}
-                <div>
-                    {% if shipping_costs[child.vars.value] is defined %}
-                        <span class="pull-right text-muted">{{ shipping_costs[child.vars.value]|sylius_price }}</span>
-                    {% endif %}
-                    <label{% for attrname, attrvalue in child.vars.label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-                        {{ form_widget(child) }}
-                        {{ child.vars.label|trans({}, translation_domain) }}
-                    </label>
-                </div>
+                {{ forms.collectionItem(child, item_by_line, allow_delete, button_delete_label) }}
             {% endfor %}
         </div>
-    {% endspaceless %}
-{% endblock %}
+
+        {% if prototype is defined and allow_add %}
+            <a href="#" class="btn btn-success btn-block" data-form-collection="add">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>{{ button_add_label|trans }}</span>
+            </a>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+{% macro collectionItem(form, item_by_line, allow_delete, button_delete_label) %}
+{% set boxWidth = ((allow_delete ? 11 : 12) / item_by_line)|number_format %}
+
+{% spaceless %}
+    <div data-form-collection="item" class="col-md-{{ boxWidth }} collection-item">
+        <div class="collection-box{% if form|length == 1%} unique-field{% endif %}">
+            {% if allow_delete %}
+                <a href="#" class="btn btn-danger" data-form-collection="delete">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    {% if button_delete_label is not sameas(false) %}<span>{{ button_delete_label|trans }}</span>{% endif %}
+                </a>
+            {% endif %}
+
+            {{ form_rest(form) }}
+        </div>
+    </div>
+{% endspaceless %}
+{% endmacro %}

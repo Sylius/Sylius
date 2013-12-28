@@ -87,8 +87,6 @@ class OptionSpec extends ObjectBehavior
         $this->addValue($value);
         $this->hasValue($value)->shouldReturn(true);
 
-        $value->setOption(null)->shouldBeCalled();
-
         $this->removeValue($value);
         $this->hasValue($value)->shouldReturn(false);
     }
