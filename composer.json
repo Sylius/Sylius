@@ -57,10 +57,10 @@
         "behat/behat":                       "2.4.*@stable",
         "behat/symfony2-extension":          "*",
         "behat/mink-extension":              "*",
-        "behat/mink-browserkit-driver":      "*",
         "behat/mink-goutte-driver":          "*",
         "behat/mink-selenium2-driver":       "*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "doctrine/mongodb-odm":              "1.0.*@dev",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "2.0.*@dev",
         "phpspec/prophecy":                  "1.0.*@dev"

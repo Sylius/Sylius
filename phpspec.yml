@@ -1,0 +1,19 @@
+suites:
+    AddressingBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/AddressingBundle }
+    CartBundle            : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
+    CoreBundle            : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
+    InventoryBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
+    InstallerBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
+    MoneyBundle           : { namespace: Sylius, spec_path: src/Sylius/Bundle/MoneyBundle }
+    OmnipayBundle         : { namespace: Sylius, spec_path: src/Sylius/Bundle/OmnipayBundle }
+    OrderBundle           : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
+    PaymentsBundle        : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentsBundle }
+    PayumBundle           : { namespace: Sylius, spec_path: src/Sylius/Bundle/PayumBundle }
+    ProductBundle         : { namespace: Sylius, spec_path: src/Sylius/Bundle/ProductBundle }
+    PromotionsBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/PromotionsBundle }
+    ResourceBundle        : { namespace: Sylius, spec_path: src/Sylius/Bundle/ResourceBundle }
+    SettingsBundle        : { namespace: Sylius, spec_path: src/Sylius/Bundle/SettingsBundle }
+    ShippingBundle        : { namespace: Sylius, spec_path: src/Sylius/Bundle/ShippingBundle }
+    TaxationBundle        : { namespace: Sylius, spec_path: src/Sylius/Bundle/TaxationBundle }
+    TaxonomiesBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/TaxonomiesBundle }
+    VariableProductBundle : { namespace: Sylius, spec_path: src/Sylius/Bundle/VariableProductBundle }

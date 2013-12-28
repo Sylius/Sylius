@@ -45,11 +45,15 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         entity_managers:
             default:
+                metadata_cache_driver: array
+                result_cache_driver:   array
+                query_cache_driver:    array
                 auto_mapping: true
                 filters:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+
 
 stof_doctrine_extensions:
     default_locale: %sylius.locale%
@@ -78,7 +82,7 @@ hwi_oauth:
     resource_owners:
         amazon:
             type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid% 
+            client_id:     %sylius.oauth.amazon.clientid%
             client_secret: %sylius.oauth.amazon.clientsecret%
         facebook:
             type:          facebook

@@ -76,7 +76,7 @@ class AppKernel extends Kernel
             new Payum\Bundle\PayumBundle\PayumBundle(),
         );
 
-        if (in_array($this->environment, array('dev'))) {
+        if ('dev' === $this->environment) {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }
 
