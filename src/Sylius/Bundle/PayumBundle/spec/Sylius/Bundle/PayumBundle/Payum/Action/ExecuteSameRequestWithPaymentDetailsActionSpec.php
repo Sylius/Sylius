@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Request\ModelRequestInterface;
+use Payum\Core\Request\ModelRequestInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Payum\PaymentInterface as PayumPaymentInterface;
+use Payum\Core\PaymentInterface as PayumPaymentInterface;
 
 class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
 {
@@ -26,7 +26,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
 
     function it_extends_payum_payment_aware_action()
     {
-        $this->shouldHaveType('Payum\Action\PaymentAwareAction');
+        $this->shouldHaveType('Payum\Core\Action\PaymentAwareAction');
     }
 
     function it_should_support_model_request_with_payment_model_and_not_empty_details(
@@ -64,7 +64,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
     function it_throws_exception_if_executing_not_supported_request()
     {
         $this
-            ->shouldThrow('Payum\Exception\RequestNotSupportedException')
+            ->shouldThrow('Payum\Core\Exception\RequestNotSupportedException')
             ->duringExecute($notSupportedRequest = 'foo')
         ;
     }
@@ -80,7 +80,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
         $payment->getDetails()->willReturn(array('foo' => 'fooValue'));
 
         $request
-            ->setModel(Argument::type('Payum\Bridge\Spl\ArrayObject'))
+            ->setModel(Argument::type('Payum\Core\Bridge\Spl\ArrayObject'))
             ->shouldBeCalled()
             ->will(function ($args) use ($request) {
                 $request->getModel()->willReturn($args[0]);
