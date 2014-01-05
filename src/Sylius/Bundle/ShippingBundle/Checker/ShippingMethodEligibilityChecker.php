@@ -44,6 +44,10 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
      */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {
+        if (false === $this->isCategoryRequirementSatisfied($subject, $method)) {
+            return false;
+        }
+
         foreach ($method->getRules() as $rule) {
             $checker = $this->registry->getChecker($rule->getType());
 
@@ -53,5 +57,38 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
         }
 
         return true;
+    }
+
+    /**
+     * Returns whether the subject satisfies the category requirement configured in the method
+     *
+     * @param ShippingSubjectInterface $subject
+     * @param ShippingMethodInterface $method
+     * @return bool
+     */
+    public function isCategoryRequirementSatisfied(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
+    {
+        if (!$category = $method->getCategory()) {
+            return true;
+        }
+
+        $numMatches = 0;
+        foreach ($subject->getShippables() as $shippable) {
+            if ($category == $shippable->getShippingCategory()) {
+                $numMatches++;
+            }
+        }
+
+        switch ($method->getCategoryRequirement()) {
+            case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE:
+                return 0 === $numMatches;
+            break;
+            case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY:
+                return 0 < $numMatches;
+            break;
+            case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL:
+                return count($subject->getShippables()) === $numMatches;
+            break;
+        }
     }
 }
