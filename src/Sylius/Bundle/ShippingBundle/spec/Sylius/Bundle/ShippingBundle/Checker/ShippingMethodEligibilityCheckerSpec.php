@@ -95,7 +95,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $shippable->getShippingCategory()->shouldBeCalled()->willReturn($shippingCategory);
         $subject->getShippables()->shouldBeCalled()->willReturn(array($shippable));
 
-        $this->isCategoryRequirementSatisfied($subject, $shippingMethod)->shouldReturn(true);
+        $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
     /**
@@ -108,7 +108,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
     {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn(null);
 
-        $this->isCategoryRequirementSatisfied($subject, $shippingMethod)->shouldReturn(true);
+        $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
     /**
@@ -126,6 +126,6 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $shippable->getShippingCategory()->shouldBeCalled()->willReturn($shippingCategory2);
         $subject->getShippables()->shouldBeCalled()->willReturn(array($shippable));
 
-        $this->isCategoryRequirementSatisfied($subject, $shippingMethod)->shouldReturn(false);
+        $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(false);
     }
 }
