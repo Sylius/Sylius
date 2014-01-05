@@ -30,6 +30,7 @@ class ResourceController extends FOSRestController
     protected $config;
     protected $resourceResolver;
     protected $redirectHandler;
+    protected $authorizationHandler;
     protected $flashHelper;
 
     public function __construct(Configuration $config)
@@ -43,11 +44,14 @@ class ResourceController extends FOSRestController
 
         $this->resourceResolver = new ResourceResolver($this->config);
         $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
+        $this->authorizationHandler = new AuthorizationHandler($this);
         $this->flashHelper = new FlashHelper($this->config, $container->get('translator'), $container->get('session'));
     }
 
     public function showAction()
     {
+        $this->authorizationHandler->checkAuthorization(AuthorizationHandlerInterface::ACTION_SHOW);
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
@@ -60,6 +64,8 @@ class ResourceController extends FOSRestController
 
     public function indexAction(Request $request)
     {
+        $this->authorizationHandler->checkAuthorization(AuthorizationHandlerInterface::ACTION_INDEX);
+
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -89,6 +95,8 @@ class ResourceController extends FOSRestController
 
     public function createAction(Request $request)
     {
+        $this->authorizationHandler->checkAuthorization(AuthorizationHandlerInterface::ACTION_CREATE);
+
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
@@ -116,6 +124,8 @@ class ResourceController extends FOSRestController
 
     public function updateAction(Request $request)
     {
+        $this->authorizationHandler->checkAuthorization(AuthorizationHandlerInterface::ACTION_UPDATE);
+
         $resource = $this->findOr404();
         $form = $this->getForm($resource);
 
@@ -143,6 +153,8 @@ class ResourceController extends FOSRestController
 
     public function deleteAction()
     {
+        $this->authorizationHandler->checkAuthorization(AuthorizationHandlerInterface::ACTION_DELETE);
+
         $resource = $this->findOr404();
         $this->delete($resource);
 
