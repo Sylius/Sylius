@@ -1,4 +1,4 @@
-SyliusResourceBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusResourceBundle.png)](http://travis-ci.org/Sylius/SyliusResourceBundle)
+SyliusResourceBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusResourceBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusResourceBundle)
 ====================
 
 Easy CRUD and persistence for Symfony2 apps.
@@ -21,28 +21,25 @@ Please note that this bundle **is not admin generator**. It won't create forms, 
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2.
+Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-Visit [Sylius.com](http://sylius.com).
-
-[phpspec2](http://phpspec.net) Specifications
----------------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
 ``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar install --dev
-$ bin/phpspec run -fpretty
+$ composer install
+$ bin/phpspec run -f pretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusResourceBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.com/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------

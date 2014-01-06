@@ -6,9 +6,7 @@ Web and command line installer for [Sylius](http://github.com/Sylius/Sylius).
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
-
-Visit [Sylius.com](http://sylius.com).
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
 [phpspec](http://phpspec.net) examples
 --------------------------------------
@@ -21,7 +19,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://docs.sylius.org/en/latest/bundles/SyliusInstallerBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org).
 
 Code examples
 -------------
@@ -31,12 +29,17 @@ If you want to see working implementation, try out the [Sylius application](http
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
 
+### Users
+
 Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
