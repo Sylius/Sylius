@@ -1,4 +1,4 @@
-SyliusCartBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png)](http://travis-ci.org/Sylius/SyliusCartBundle)
+SyliusCartBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCartBundle)
 ================
 
 Flexible cart engine for Symfony2. Should be considered as a base for building solution that fits your exact needs.  
@@ -9,11 +9,11 @@ Sylius
 
 **Sylius** - Modern ecommerce solution Symfony2. Visit [Sylius.org](http://sylius.org).
 
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
-``` bash
-$ composer install --dev --prefer-dist
+```bash
+$ composer install
 $ bin/phpspec run -f pretty
 ```
 
@@ -36,7 +36,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
