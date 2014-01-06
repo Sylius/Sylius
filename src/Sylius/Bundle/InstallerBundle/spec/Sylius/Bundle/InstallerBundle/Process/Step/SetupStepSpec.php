@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InstallerBundle\Process;
+namespace spec\Sylius\Bundle\InstallerBundle\Process\Step;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
-class InstallerScenario extends ObjectBehavior
+class SetupStepSpec extends ObjectBehavior
 {
     function it_is_a_process_step()
     {
-        $this->shouldBeAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface');
+        $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Step\ControllerStep');
     }
 }

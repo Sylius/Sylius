@@ -11,9 +11,9 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Requirement;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
-class Requirement extends ObjectBehavior
+class RequirementSpec extends ObjectBehavior
 {
     function let()
     {

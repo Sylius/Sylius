@@ -11,41 +11,36 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Form\Type\Configuration;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
-class MailerType extends ObjectBehavior
+class MailerTypeSpec extends ObjectBehavior
 {
     function it_is_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('sylius_mailer_transport', 'choice', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('sylius_mailer_transport', 'choice', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('sylius_mailer_host', 'text', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('sylius_mailer_host', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('sylius_mailer_user', 'text', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('sylius_mailer_user', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('sylius_mailer_password', 'password', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('sylius_mailer_password', 'password', Argument::any())
             ->willReturn($builder)
         ;
 
