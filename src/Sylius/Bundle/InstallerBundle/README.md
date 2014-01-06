@@ -1,4 +1,4 @@
-SyliusInstallerBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusInstallerBundle.png)](http://travis-ci.org/Sylius/SyliusInstallerBundle)
+SyliusInstallerBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusInstallerBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusInstallerBundle)
 ======================
 
 Web and command line installer for [Sylius](http://github.com/Sylius/Sylius).
@@ -10,11 +10,11 @@ Sylius
 
 Visit [Sylius.com](http://sylius.com).
 
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
-``` bash
-$ composer install --dev --prefer-dist
+```bash
+$ composer install
 $ bin/phpspec run -f pretty
 ```
 
@@ -42,7 +42,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

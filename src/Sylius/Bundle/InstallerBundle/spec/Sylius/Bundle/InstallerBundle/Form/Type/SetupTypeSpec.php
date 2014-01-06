@@ -11,41 +11,41 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
-class ConfigurationType extends ObjectBehavior
+class SetupTypeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith('User');
+    }
+
     function it_is_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('database', 'sylius_configuration_database', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('username', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('mailer', 'sylius_configuration_mailer', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('plain_password', 'password', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('locale', 'sylius_configuration_locale', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('email', 'email', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('hidden', 'sylius_configuration_hidden')
-            ->shouldBeCalled()
+            ->add('load_fixtures', 'checkbox', Argument::any())
             ->willReturn($builder)
         ;
 

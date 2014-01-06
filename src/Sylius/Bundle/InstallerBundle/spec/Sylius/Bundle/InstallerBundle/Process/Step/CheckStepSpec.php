@@ -11,9 +11,9 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Process\Step;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
-class CheckStep extends ObjectBehavior
+class CheckStepSpec extends ObjectBehavior
 {
     function it_is_a_process_step()
     {
