@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use DateTime;
 
 /**
@@ -20,13 +21,17 @@ use DateTime;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserLoyalityRuleChecker implements RuleCheckerInterface
+class UserLoyalityRuleChecker extends AbstractRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw $this->orderInterfaceNotImplementedException($subject);
+        }
+
         if (null === $user = $subject->getUser()) {
             return false;
         }

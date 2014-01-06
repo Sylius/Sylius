@@ -13,19 +13,24 @@ namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
  * Checks if users order is the nth one.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NthOrderRuleChecker implements RuleCheckerInterface
+class NthOrderRuleChecker extends AbstractRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw $this->orderInterfaceNotImplementedException($subject);
+        }
+
         if (null === $user = $subject->getUser()) {
             return false;
         }
