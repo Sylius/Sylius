@@ -86,12 +86,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "v1.1.2"
+                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1.2",
-                "reference": "v1.1.2",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/40db0c96985aab2822edbc4848b3bd2429e02670",
+                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670",
                 "shasum": ""
             },
             "require": {
@@ -120,7 +120,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -194,7 +195,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -260,7 +262,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -332,7 +335,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -404,7 +408,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -437,12 +442,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "2ed46398aae1b7699f6fe7467faf54493b4f2a24"
+                "reference": "c65e5a21d1db794511d11fe28918f41bd6072f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/2ed46398aae1b7699f6fe7467faf54493b4f2a24",
-                "reference": "2ed46398aae1b7699f6fe7467faf54493b4f2a24",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/c65e5a21d1db794511d11fe28918f41bd6072f8f",
+                "reference": "c65e5a21d1db794511d11fe28918f41bd6072f8f",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +458,7 @@
                 "symfony/framework-bundle": "~2.2"
             },
             "require-dev": {
-                "doctrine/orm": ">=2.2,<2.5-dev",
+                "doctrine/orm": "~2.2",
                 "symfony/validator": "~2.2",
                 "symfony/yaml": "~2.2"
             },
@@ -498,7 +503,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2013-10-20 15:21:43"
+            "time": "2013-11-25 17:33:45"
         },
         {
             "name": "doctrine/inflector",
@@ -531,7 +536,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -666,7 +672,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -773,12 +780,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "0cb03029c7c1c833a11c7bebf30125276f0aa5b9"
+                "reference": "6596b9d754b6cb094e10470967ed7b51e2aa9e12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/0cb03029c7c1c833a11c7bebf30125276f0aa5b9",
-                "reference": "0cb03029c7c1c833a11c7bebf30125276f0aa5b9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/6596b9d754b6cb094e10470967ed7b51e2aa9e12",
+                "reference": "6596b9d754b6cb094e10470967ed7b51e2aa9e12",
                 "shasum": ""
             },
             "require": {
@@ -833,7 +840,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-10-28 10:50:07"
+            "time": "2013-12-16 16:36:36"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1172,7 +1179,8 @@
                 },
                 {
                     "name": "Alexander",
-                    "email": "iam.asm89@gmail.com"
+                    "email": "iam.asm89@gmail.com",
+                    "homepage": "http://asm89.github.io/"
                 },
                 {
                     "name": "Joseph Bielawski",
@@ -1583,7 +1591,7 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -1875,12 +1883,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "1b07578738d3425c09cfbd153276382388994f46"
+                "reference": "838c4a0f9b0631b37d699d9a7ebd695707298678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/1b07578738d3425c09cfbd153276382388994f46",
-                "reference": "1b07578738d3425c09cfbd153276382388994f46",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/838c4a0f9b0631b37d699d9a7ebd695707298678",
+                "reference": "838c4a0f9b0631b37d699d9a7ebd695707298678",
                 "shasum": ""
             },
             "require": {
@@ -1920,7 +1928,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2013-07-08 09:55:38"
+            "time": "2013-12-03 00:27:28"
         },
         {
             "name": "knplabs/knp-snappy",
@@ -2218,7 +2226,7 @@
                 "symfony/options-resolver": ">=2.0.16,~2.0"
             },
             "require-dev": {
-                "symfony/yaml": ">=2.0.16.0,>=2.0,<3.0",
+                "symfony/yaml": ">=2.0.16,~2.0",
                 "twig/twig": ">=1.0,<2.0-dev"
             },
             "suggest": {
@@ -2370,13 +2378,13 @@
             "version": "v0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser",
-                "reference": "v0.9.1"
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
-                "reference": "v0.9.1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
+                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
                 "shasum": ""
             },
             "require": {
@@ -2402,7 +2410,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2012-04-23 15:52:11"
+            "time": "2012-04-23 22:52:11"
         },
         {
             "name": "omnipay/omnipay",
@@ -2938,13 +2946,13 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/log",
-                "reference": "1.0.0"
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
-                "reference": "1.0.0",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
                 "shasum": ""
             },
             "type": "library",
@@ -3563,12 +3571,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
-                "reference": "18ac070194cef0d9e024bec050301cbf3122c787"
+                "reference": "0e56c1efe353be3142c90acc9aa019233b735947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/18ac070194cef0d9e024bec050301cbf3122c787",
-                "reference": "18ac070194cef0d9e024bec050301cbf3122c787",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/0e56c1efe353be3142c90acc9aa019233b735947",
+                "reference": "0e56c1efe353be3142c90acc9aa019233b735947",
                 "shasum": ""
             },
             "require": {
@@ -3578,6 +3586,7 @@
                 "symfony/twig-bundle": "~2.2"
             },
             "require-dev": {
+                "phpunit/phpunit": "~3.7",
                 "symfony/symfony": "~2.2"
             },
             "type": "symfony-bundle",
@@ -3607,7 +3616,7 @@
                 "page",
                 "paging"
             ],
-            "time": "2013-10-28 14:55:41"
+            "time": "2013-12-09 21:54:42"
         },
         {
             "name": "willdurand/negotiation",
@@ -4163,7 +4172,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 }
             ],
             "description": "Data Fixtures for all Doctrine Object Managers",
@@ -4397,12 +4407,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "v1.0.1"
+                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/v1.0.1",
-                "reference": "v1.0.1",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
                 "shasum": ""
             },
             "type": "library",
@@ -4426,22 +4436,22 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "dev-master",
+            "version": "2.0.0-RC2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "f6473042184cc453cb3e0001a2b9694dfa8666c0"
+                "reference": "02216d513ec3f17a06750854d44e372e3b14bda4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/f6473042184cc453cb3e0001a2b9694dfa8666c0",
-                "reference": "f6473042184cc453cb3e0001a2b9694dfa8666c0",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/02216d513ec3f17a06750854d44e372e3b14bda4",
+                "reference": "02216d513ec3f17a06750854d44e372e3b14bda4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "phpspec/php-diff": "~1.0.0",
-                "phpspec/prophecy": "~1.0.2",
+                "phpspec/prophecy": "~1.0.5@dev",
                 "symfony/console": "~2.1",
                 "symfony/event-dispatcher": "~2.1",
                 "symfony/finder": "~2.1",
@@ -4490,7 +4500,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-12-06 11:21:35"
+            "time": "2013-12-30 16:25:34"
         },
         {
             "name": "phpspec/prophecy",
@@ -4498,12 +4508,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "613ce5d06b7912ad65fd9b6fc0519ef24985316d"
+                "reference": "6075effd01567b6211c79d8898d2d5fc1f31e40b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/613ce5d06b7912ad65fd9b6fc0519ef24985316d",
-                "reference": "613ce5d06b7912ad65fd9b6fc0519ef24985316d",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/6075effd01567b6211c79d8898d2d5fc1f31e40b",
+                "reference": "6075effd01567b6211c79d8898d2d5fc1f31e40b",
                 "shasum": ""
             },
             "require-dev": {
@@ -4545,7 +4555,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2013-12-04 16:43:22"
+            "time": "2013-12-11 10:13:46"
         }
     ],
     "aliases": [
