@@ -24,8 +24,8 @@ interface PromotionActionInterface
     /**
      * Applies the promotion to its subject.
      *
-     * @param PromotionSubjectInterface $subject
-     * @param array $configuration
+     * @param  PromotionSubjectInterface $subject
+     * @param  array                     $configuration
      * @return mixed
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);

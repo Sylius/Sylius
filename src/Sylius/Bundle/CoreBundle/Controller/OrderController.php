@@ -30,8 +30,8 @@ class OrderController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param $id
+     * @param  Request                                                       $request
+     *                                                                                @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
