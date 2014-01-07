@@ -69,6 +69,26 @@ payum:
                     doctrine:
                         driver: orm
 
+        be2bill_onsite:
+            be2bill:
+                api:
+                    options:
+                        identifier: %be2bill.identifier%
+                        password:   %be2bill.password%
+                        sandbox:    %be2bill.sandbox%
+                actions:
+                    - sylius.payum.be2bill.action.capture_order_using_be2bill_form
+                    - sylius.payum.action.order_status
+                    - sylius.payum.action.execute_same_request_with_payment_details
+
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
+
         dummy:
             custom:
                 actions:
