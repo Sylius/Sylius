@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "81ec00097988fe14d24605e0e697ce6e",
+    "hash": "d4846a6e67b041fbb23bbde18b18a7e2",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -120,8 +120,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -195,8 +194,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -262,8 +260,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -335,8 +332,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -408,8 +404,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -536,8 +531,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -672,8 +666,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -1179,8 +1172,7 @@
                 },
                 {
                     "name": "Alexander",
-                    "email": "iam.asm89@gmail.com",
-                    "homepage": "http://asm89.github.io/"
+                    "email": "iam.asm89@gmail.com"
                 },
                 {
                     "name": "Joseph Bielawski",
@@ -4172,8 +4164,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 }
             ],
             "description": "Data Fixtures for all Doctrine Object Managers",
@@ -4407,12 +4398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
+                "reference": "v1.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/v1.0.1",
+                "reference": "v1.0.1",
                 "shasum": ""
             },
             "type": "library",
@@ -4436,29 +4427,33 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.0.0-RC2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "02216d513ec3f17a06750854d44e372e3b14bda4"
+                "reference": "c1cff1c0dac5c9936e2419d69af57978e2a6d043"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/02216d513ec3f17a06750854d44e372e3b14bda4",
-                "reference": "02216d513ec3f17a06750854d44e372e3b14bda4",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/c1cff1c0dac5c9936e2419d69af57978e2a6d043",
+                "reference": "c1cff1c0dac5c9936e2419d69af57978e2a6d043",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "phpspec/php-diff": "~1.0.0",
-                "phpspec/prophecy": "~1.0.5@dev",
+                "phpspec/prophecy": "~1.1",
                 "symfony/console": "~2.1",
                 "symfony/event-dispatcher": "~2.1",
                 "symfony/finder": "~2.1",
                 "symfony/yaml": "~2.1"
             },
+            "require-dev": {
+                "behat/behat": "~2.5",
+                "bossa/phpspec2-expect": "dev-master"
+            },
             "suggest": {
-                "whatthejeff/nyancat-scoreboard": "~1.1 – Enables the Nyan Cat formatter"
+                "phpspec/nyan-formatters": "~1.0 – Adds Nyan formatters"
             },
             "bin": [
                 "bin/phpspec"
@@ -4500,20 +4495,20 @@
                 "testing",
                 "tests"
             ],
-            "time": "2013-12-30 16:25:34"
+            "time": "2014-01-05 12:17:59"
         },
         {
             "name": "phpspec/prophecy",
-            "version": "dev-master",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "6075effd01567b6211c79d8898d2d5fc1f31e40b"
+                "reference": "119b07de9c592a0286cd584d6e961903ba096d8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/6075effd01567b6211c79d8898d2d5fc1f31e40b",
-                "reference": "6075effd01567b6211c79d8898d2d5fc1f31e40b",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/119b07de9c592a0286cd584d6e961903ba096d8a",
+                "reference": "119b07de9c592a0286cd584d6e961903ba096d8a",
                 "shasum": ""
             },
             "require-dev": {
@@ -4522,7 +4517,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -4555,7 +4550,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2013-12-11 10:13:46"
+            "time": "2014-01-01 21:15:36"
         }
     ],
     "aliases": [
@@ -4573,8 +4568,7 @@
         "mathiasverraes/money": 20,
         "white-october/pagerfanta-bundle": 20,
         "behat/behat": 0,
-        "phpspec/phpspec": 20,
-        "phpspec/prophecy": 20
+        "phpspec/phpspec": 20
     },
     "platform": {
         "php": ">=5.3.3"

@@ -22,6 +22,7 @@ before_script:
     - sudo /etc/init.d/apache2 restart
     - composer self-update
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
+    - composer require jmikola/geojson="~1.0" --no-update
     - composer install --prefer-source --no-interaction
     - wget http://getcomposer.org/composer.phar
     - php -d memory_limit=2048M composer.phar update doctrine/mongodb-odm
