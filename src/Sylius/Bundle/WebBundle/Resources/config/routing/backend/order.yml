@@ -52,6 +52,8 @@ sylius_backend_order_show:
         _controller: sylius.controller.order:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Order:show.html.twig
+            method: findForDetailsPage
+            arguments: [$id]
 
 sylius_backend_order_by_user:
     pattern: /u/{id}
