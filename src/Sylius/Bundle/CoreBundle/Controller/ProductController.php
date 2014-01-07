@@ -56,6 +56,36 @@ class ProductController extends ResourceController
     }
 
     /**
+     * Get product history changes.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function historyAction(Request $request)
+    {
+        $config = $this->getConfiguration();
+        $logEntryRepository = $this->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $product = $this->findOr404();
+
+        $data = array(
+            $config->getResourceName() => $product,
+            'logs'                     => $logEntryRepository->getLogEntries($product)
+        );
+
+        $view = $this
+            ->view()
+            ->setTemplate($config->getTemplate('history.html'))
+            ->setData($data)
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
      * Render product filter form.
      *
      * @param Request $request

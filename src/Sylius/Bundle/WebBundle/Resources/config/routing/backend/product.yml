@@ -45,6 +45,14 @@ sylius_backend_product_filter_form:
         _sylius:
             template: SyliusWebBundle:Backend/Product:filterForm.html.twig
 
+sylius_backend_product_history:
+    pattern: /{id}/history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:historyAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:history.html.twig
+
 sylius_backend_product_show:
     pattern: /{id}
     methods: [GET]

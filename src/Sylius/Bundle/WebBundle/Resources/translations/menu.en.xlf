@@ -146,6 +146,10 @@
         <source>sylius.backend.menu.sidebar.general_settings</source>
         <target>General settings</target>
       </trans-unit>
+      <trans-unit id="96bc6c0af7a307a49f9ad0223ab90394" resname="sylius.backend.menu.sidebar.groups">
+        <source>sylius.backend.menu.sidebar.groups</source>
+        <target>Groups</target>
+      </trans-unit>
       <trans-unit id="d5ab9f2471615eb2a22c363e7aab01fc" resname="sylius.backend.menu.sidebar.homepage">
         <source>sylius.backend.menu.sidebar.homepage</source>
         <target>Back to frontend</target>
@@ -229,10 +233,6 @@
       <trans-unit id="608617987d64def83501a66c2dbce621" resname="sylius.backend.menu.sidebar.users">
         <source>sylius.backend.menu.sidebar.users</source>
         <target>Users</target>
-      </trans-unit>
-      <trans-unit id="608617987d64def83501a66c2dbce621" resname="sylius.backend.menu.sidebar.groups">
-        <source>sylius.backend.menu.sidebar.groups</source>
-        <target>Groups</target>
       </trans-unit>
       <trans-unit id="edb285f095cb9752e5d3f99ef0c23e9c" resname="sylius.backend.menu.sidebar.zones">
         <source>sylius.backend.menu.sidebar.zones</source>
