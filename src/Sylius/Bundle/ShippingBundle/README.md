@@ -21,8 +21,8 @@ Sylius
 [phpspec](http://phpspec.net) examples
 --------------------------------------
 
-``` bash
-$ composer install --dev --prefer-dist
+```bash
+$ composer install
 $ bin/phpspec run -fpretty
 ```
 
@@ -39,7 +39,12 @@ All informations about contributing to Sylius can be found on [this page](http:/
 Mailing lists
 -------------
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).  
+### Users
+
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account

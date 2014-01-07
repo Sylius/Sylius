@@ -1,4 +1,4 @@
-SyliusFlowBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusFlowBundle.png)](http://travis-ci.org/Sylius/SyliusFlowBundle)
+SyliusFlowBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusFlowBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusFlowBundle)
 ================
 
 Multiple action processes with reusable steps for [**Symfony2**](http://symfony.com) applications.
@@ -9,9 +9,12 @@ Suitable for building checkouts or installations.
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-``` php
+Usage examples
+--------------
+
+```php
 <?php
 
 namespace Acme\Bundle\CheckoutBundle\Process\Scenario;
@@ -42,7 +45,7 @@ class CheckoutScenario implements ProcessScenarioInterface
 }
 ```
 
-``` php
+```php
 <?php
 
 namespace Acme\Bundle\CheckoutBundle\Process\Step;
@@ -110,29 +113,11 @@ class DeliveryStep extends ContainerAwareStep
 }
 ```
 
-Sylius
-------
-
-**Sylius** is simple but **end-user and developer friendly** webshop engine built on top of Symfony2.
-
-Please visit [Sylius.org](http://sylius.org) for more details.
-
-Testing and build status
-------------------------
-
-This bundle uses [travis-ci.org](http://travis-ci.org/Sylius/SyliusFlowBundle) for CI.
-[![Build status...](https://secure.travis-ci.org/Sylius/SyliusFlowBundle.png)](http://travis-ci.org/Sylius/SyliusFlowBundle)
-
-Before running tests, load the dependencies using [Composer](http://packagist.org).
+[phpunit](http://phpunit.de) tests
+----------------------------------
 
 ``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar install --dev
-```
-
-Now you can run the tests by simply using this command.
-
-``` bash
+$ composer install
 $ phpunit
 ```
 
@@ -154,13 +139,18 @@ All informations about contributing to Sylius can be found on [this page](http:/
 Mailing lists
 -------------
 
+### Users
+
 Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
@@ -180,11 +170,10 @@ And constructed with the following guidelines.
 * Bug fixes and misc changes bump the patch.
 
 For more information on SemVer, please visit [semver.org website](http://semver.org/).
-
 This versioning method is same for all **Sylius** bundles and applications.
 
-License
--------
+MIT License
+-----------
 
 License can be found [here](https://github.com/Sylius/SyliusFlowBundle/blob/master/Resources/meta/LICENSE).
 

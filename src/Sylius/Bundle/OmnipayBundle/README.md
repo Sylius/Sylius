@@ -1,19 +1,17 @@
-SyliusOmnipayBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusOmnipayBundle.png)](http://travis-ci.org/Sylius/SyliusOmnipayBundle)
+SyliusOmnipayBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusOmnipayBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusOmnipayBundle)
 ===================
 
-Symfony2 integration for [Omnipay] library, PHP abstraction for payment gateways.
+[**Symfony2**](http://symfony.com) integration for [Omnipay](https://github.com/omnipay/omnipay) library, PHP abstraction for payment gateways.
 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-Visit [Sylius.org](http://sylius.org).
-
-[phpspec2](http://phpspec.net) examples
+[phpspec](http://phpspec.net) examples
 ---------------------------------------
 
-``` bash
+```bash
 $ composer install --dev --prefer-dist
 $ bin/phpspec run -f pretty
 ```
@@ -31,18 +29,23 @@ If you want to see working implementation, try out the [Sylius sandbox applicati
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).  
+### Users
+
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
