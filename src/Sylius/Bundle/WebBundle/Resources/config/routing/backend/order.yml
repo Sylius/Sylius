@@ -9,7 +9,7 @@ sylius_backend_order_index:
         _sylius:
             template: SyliusWebBundle:Backend/Order:index.html.twig
             method: createFilterPaginator
-            arguments: [$criteria, $sorting]
+            arguments: [$criteria, $sorting, $deleted]
 
 sylius_backend_order_create:
     pattern: /new

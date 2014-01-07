@@ -17,18 +17,23 @@
 <div class="page-header">
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if not product.deleted %}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
     <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
+    {% endif %}
     <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-calendar"></i>
         {{ 'sylius.history'|trans }}
     </a>
     </div>
-    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+    <h1>
+        <i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}
+        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+    </h1>
 </div>
 
 <div class="row">
@@ -178,6 +183,7 @@
 
 {% if product.hasOptions %}
 <hr>
+{% if not product.deleted %}
 <div class="well well-sm">
     {{ buttons.create(path('sylius_backend_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
@@ -185,6 +191,7 @@
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>
 </div>
+{% endif %}
 
 {{ list_variants(product.variants) }}
 {% endif %}

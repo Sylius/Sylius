@@ -78,6 +78,9 @@
                 {{ product.updatedAt|date('Y/m/d') }}
             </td>
             <td class="actions text-right">
+                {% if product.deleted %}
+                    <span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>
+                {% else %}
                 <div class="btn-group">
                     <a class="btn btn-sm btn-primary edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
                         title="{{ 'sylius.edit'|trans|title }}">
@@ -89,6 +92,7 @@
                         <span class="glyphicon glyphicon-trash"></span> {{ 'sylius.delete'|trans|title }}
                     </a>
                 </div>
+                {% endif %}
             </td>
         </tr>
     {% endfor %}

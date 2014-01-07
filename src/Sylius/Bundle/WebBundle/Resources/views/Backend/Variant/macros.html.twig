@@ -30,23 +30,27 @@
             {% endif %}
             </td>
             <td><span class="label label-{{ variant.available ? 'success' : 'important' }}">{{ variant.availableOn|date }}</span></td>
-            <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
+            <td>{{ product.updatedAt|date }}</td>
             <td>
+                <ul>
                 {% for option in variant.options %}
-                    <span class="label label-primary">{{ option.name }}: {{ option.value }}</span>
+                    <li><strong>{{ option.name }}</strong>: {{ option.value }}</li>
                 {% endfor %}
+                </ul>
             </td>
             <td>
-                <span class="badge badge-{{ variant.availableOnDemand ? 'success' : 'warning'}}">
+                <span class="label label-{{ variant.availableOnDemand ? 'success' : 'warning'}}">
                     {{ variant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                 </span>
             </td>
-            <td><span class="badge badge-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
+            <td><span class="label label-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
             <td>{{ variant.price|sylius_price }}</td>
             <td>
                 <div class="pull-right">
+                {% if not variant.deleted %}
                 {{ buttons.edit(path('sylius_backend_variant_update', {'productId': product.id, 'id': variant.id})) }}
                 {{ buttons.delete(path('sylius_backend_variant_delete', {'productId': product.id, 'id': variant.id})) }}
+                {% endif %}
                 </div>
             </td>
         </tr>

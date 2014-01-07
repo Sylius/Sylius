@@ -12,13 +12,15 @@
 namespace Sylius\Bundle\OrderBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Model\SoftDeletableInterface;
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * Order interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends AdjustableInterface
+interface OrderInterface extends AdjustableInterface, TimestampableInterface, SoftDeletableInterface
 {
     /**
      * Has the order been completed by user and can be handled.

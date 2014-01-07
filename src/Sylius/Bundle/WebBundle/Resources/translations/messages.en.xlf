@@ -670,6 +670,10 @@
         <source>sylius.delete</source>
         <target>delete</target>
       </trans-unit>
+      <trans-unit id="6a1d048aebb72c2342dd6ebecbcca1ef" resname="sylius.deleted">
+        <source>sylius.deleted</source>
+        <target>Deleted</target>
+      </trans-unit>
       <trans-unit id="f55c72369ccc38deb172ad6643392f5d" resname="sylius.edit">
         <source>sylius.edit</source>
         <target>edit</target>
@@ -817,6 +821,10 @@
       <trans-unit id="ad1ab095616aee8987ec9bb27a25736b" resname="sylius.group.update_header">
         <source>sylius.group.update_header</source>
         <target>Edit group</target>
+      </trans-unit>
+      <trans-unit id="b73b5de46514cd29450acb74a1557ab0" resname="sylius.hide_deleted">
+        <source>sylius.hide_deleted</source>
+        <target>Hide deleted</target>
       </trans-unit>
       <trans-unit id="005db3605b9e367a0278acc6849c78ac" resname="sylius.history">
         <source>sylius.history</source>
@@ -1861,6 +1869,10 @@
       <trans-unit id="e3941c0ac12c8042d373b4eb3b00e6d2" resname="sylius.show_all">
         <source>sylius.show_all</source>
         <target>Show all</target>
+      </trans-unit>
+      <trans-unit id="36d9e5d2fc4948cd6d1ee6dcbe6a93aa" resname="sylius.show_deleted">
+        <source>sylius.show_deleted</source>
+        <target>Show deleted</target>
       </trans-unit>
       <trans-unit id="5b19cea474365ab0f38c4662924eb810" resname="sylius.stockable.index_header">
         <source>sylius.stockable.index_header</source>

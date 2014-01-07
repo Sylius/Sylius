@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         {% for order in orders %}
-        <tr id="{{ order.id }}">
+        <tr id="{{ order.id }}" {% if order.deleted %} class="danger"{% endif %}>
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
             <td>{{ order.createdAt|date }}</td>
             <td>
@@ -43,8 +43,10 @@
             <td>
                 <div class="pull-right">
                 {{ buttons.show(path('sylius_backend_order_show', {'id': order.id})) }}
+                {% if not order.deleted %}
                 {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
                 {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
+                {% endif %}
                 </div>
             </td>
         </tr>

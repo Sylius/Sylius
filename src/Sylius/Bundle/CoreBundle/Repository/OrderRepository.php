@@ -113,10 +113,14 @@ class OrderRepository extends CartRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         if (!empty($criteria['number'])) {
             $queryBuilder
