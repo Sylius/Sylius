@@ -46,7 +46,7 @@
             <td>
                 <ul>
                     {% for key, value in log.data %}
-                    <li><strong>{{ key }}</strong>: {{ value }}</li>
+                    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
                     {% endfor %}
                 </ul>
             </td>
