@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Controller;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -59,7 +60,7 @@ class CartItemController extends Controller
             // Write flash message
             $this->dispatchEvent(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
 
-            return $this->redirectToCartSummary();
+            return $this->redirectAfterAdd($request);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -74,9 +75,25 @@ class CartItemController extends Controller
         // Write flash message
         $this->dispatchEvent(SyliusCartEvents::ITEM_ADD_COMPLETED, new FlashEvent());
 
+        return $this->redirectAfterAdd($request);
+    }
+    
+    /**
+     * Redirect to specific URL or to cart.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    private function redirectAfterAdd(Request $request)
+    {
+        if ($request->query->has('_redirect_to')) {
+            return $this->redirect($request->query->get('_redirect_to'));
+        }
+
         return $this->redirectToCartSummary();
     }
-
+    
     /**
      * Removes item from cart.
      * It takes an item id as an argument.
