@@ -50,6 +50,62 @@ class OrderRepository extends CartRepository
     }
 
     /**
+     * Get the order data for the details page.
+     *
+     * @param integer $id
+     */
+    public function findForDetailsPage($id)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder
+            ->leftJoin('o.adjustments', 'adjustment')
+            ->leftJoin('o.user', 'user')
+            ->leftJoin('o.inventoryUnits', 'inventoryUnit')
+            ->leftJoin('o.shipments', 'shipment')
+            ->leftJoin('shipment.method', 'shippingMethod')
+            ->leftJoin('o.payment', 'payment')
+            ->leftJoin('payment.method', 'paymentMethod')
+            ->leftJoin('item.variant', 'variant')
+            ->leftJoin('variant.images', 'image')
+            ->leftJoin('variant.product', 'product')
+            ->leftJoin('variant.options', 'optionValue')
+            ->leftJoin('optionValue.option', 'option')
+            ->leftJoin('o.billingAddress', 'billingAddress')
+            ->leftJoin('billingAddress.country', 'billingCountry')
+            ->leftJoin('o.shippingAddress', 'shippingAddress')
+            ->leftJoin('shippingAddress.country', 'shippingCountry')
+            ->addSelect('adjustment')
+            ->addSelect('user')
+            ->addSelect('inventoryUnit')
+            ->addSelect('shipment')
+            ->addSelect('shippingMethod')
+            ->addSelect('payment')
+            ->addSelect('paymentMethod')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->addSelect('product')
+            ->addSelect('option')
+            ->addSelect('optionValue')
+            ->addSelect('billingAddress')
+            ->addSelect('billingCountry')
+            ->addSelect('shippingAddress')
+            ->addSelect('shippingCountry')
+            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        $result = $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $result;
+    }
+
+    /**
      * Create filter paginator.
      *
      * @param array $criteria

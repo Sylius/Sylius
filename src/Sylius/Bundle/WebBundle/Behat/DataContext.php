@@ -501,6 +501,18 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I have deleted the ([^"]*) "([^""]*)"/
+     */
+    public function haveDeleted($resource, $name)
+    {
+        $resource = $this->findOneByName($resource, $name);
+
+        $manager = $this->getEntityManager();
+        $manager->remove($resource);
+        $manager->flush();
+    }
+
+    /**
      * @Given /^there is prototype "([^""]*)" with following configuration:$/
      */
     public function thereIsPrototypeWithFollowingConfiguration($name, TableNode $table)
