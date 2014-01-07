@@ -9,7 +9,7 @@ sylius_backend_user_index:
         _sylius:
             template: SyliusWebBundle:Backend/User:index.html.twig
             method: createFilterPaginator
-            arguments: [$criteria, $sorting]
+            arguments: [$criteria, $sorting, $deleted]
 
 sylius_backend_user_filter_form:
     pattern: /filter-form
@@ -52,4 +52,5 @@ sylius_backend_user_show:
         _controller: sylius.controller.user:showAction
         _sylius:
             template: SyliusWebBundle:Backend/User:show.html.twig
-            redirect: sylius_backend_user_show
+            method: findForDetailsPage
+            arguments: [$id]

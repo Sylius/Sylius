@@ -50,7 +50,7 @@ class ProductRepository extends VariableProductRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->select('product, variant')
@@ -79,7 +79,37 @@ class ProductRepository extends VariableProductRepository
 
         $this->applySorting($queryBuilder, $sorting);
 
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
+
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Get the product data for the details page.
+     *
+     * @param integer $id
+     */
+    public function findForDetailsPage($id)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder
+            ->leftJoin('variant.images', 'image')
+            ->addSelect('image')
+            ->andWhere($queryBuilder->expr()->eq('product.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        $result = $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $result;
     }
 
     /**

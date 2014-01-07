@@ -13,14 +13,13 @@ namespace Sylius\Bundle\OrderBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * Model for orders.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Order implements OrderInterface, TimestampableInterface
+class Order implements OrderInterface
 {
     /**
      * Id.
@@ -106,6 +105,13 @@ class Order implements OrderInterface, TimestampableInterface
      * @var \DateTime
      */
     protected $updatedAt;
+
+    /**
+     * Deletion time.
+     *
+     * @var \DateTime
+     */
+    protected $deletedAt;
 
     /**
      * State
@@ -470,6 +476,32 @@ class Order implements OrderInterface, TimestampableInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDeleted()
+    {
+        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

@@ -14,11 +14,16 @@
 
 {% block content %}
 <div class="page-header">
+    {% if not order.deleted %}
     <div class="actions-menu">
         {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
         {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
     </div>
-    <h1><span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}</h1>
+    {% endif %}
+    <h1>
+        <span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}
+        {% if order.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+    </h1>
 </div>
 
 <div class="row">
