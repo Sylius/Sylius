@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}">
+        <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
@@ -31,8 +31,10 @@
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
+                    {% if not user.deleted %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
                     {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, user.id is sameas(app.user.id)) }}
+                    {% endif %}
                 </div>
             </td>
         </tr>
@@ -62,7 +64,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}">
+        <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>
                 {{ user.fullname }}<br>
                 <a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">
@@ -71,12 +73,15 @@
                 </td>
             <td>
                 {{ misc.state_label(user.enabled) }}
+                asd
             </td>
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
+                    {% if not user.deleted %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
                     {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                    {% endif %}
                 </div>
             </td>
         </tr>

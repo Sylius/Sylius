@@ -14,8 +14,10 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
+        {% if not user.deleted %}
         {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
         {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, false, false) }}
+        {% endif %}
     </div>
     <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.user.show_header'|trans|raw }}</h1>
 </div>

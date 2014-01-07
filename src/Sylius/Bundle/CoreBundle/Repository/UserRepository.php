@@ -28,9 +28,13 @@ class UserRepository extends EntityRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         if (isset($criteria['query'])) {
             $queryBuilder
@@ -58,6 +62,30 @@ class UserRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Get the user data for the details page.
+     *
+     * @param integer $id
+     */
+    public function findForDetailsPage($id)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        $result = $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $result;
     }
 
     public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
