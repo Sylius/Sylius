@@ -23,6 +23,10 @@
        <i class="glyphicon glyphicon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
+    <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
+       <i class="glyphicon glyphicon-calendar"></i>
+        {{ 'sylius.history'|trans }}
+    </a>
     </div>
     <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
 </div>

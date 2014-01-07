@@ -13,11 +13,14 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Product" table="sylius_product">
-        <field name="shortDescription" column="short_description" type="string" nullable="true" />
+        <field name="shortDescription" column="short_description" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
         <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
