@@ -15,7 +15,7 @@ Otherwise you have to download .phar file.
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/sales-bundle:*
+    $ php composer.phar require sylius/order-bundle:*
 
 Adding required bundles to the kernel
 -------------------------------------
