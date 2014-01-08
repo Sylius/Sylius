@@ -760,7 +760,7 @@
       </trans-unit>
       <trans-unit id="872f019b57a6ebda68f4907e4e9a34c4" resname="sylius.form.option_value.add_value">
         <source>sylius.form.option_value.add_value</source>
-        <target>sylius.form.option_value.add_value</target>
+        <target>Add value</target>
       </trans-unit>
       <trans-unit id="24a58cc80b3622348ed028ea8b9793ac" resname="sylius.form.profile.email">
         <source>sylius.form.profile.email</source>

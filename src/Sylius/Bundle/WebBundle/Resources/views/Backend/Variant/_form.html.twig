@@ -21,6 +21,10 @@
     </div>
 
     <div class="col-md-4">
+        {{ form_row(form.width) }}
+        {{ form_row(form.height) }}
+        {{ form_row(form.depth) }}
+        {{ form_row(form.weight) }}
         <div id="sylius-assortment-variant-images" class="col-md-12" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
             {% for imageForm in form.images %}
             <div class="sylius-assortment-variant-images-image">
