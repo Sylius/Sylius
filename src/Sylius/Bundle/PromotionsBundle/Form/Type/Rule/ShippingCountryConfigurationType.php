@@ -42,6 +42,9 @@ class ShippingCountryConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -51,6 +54,9 @@ class ShippingCountryConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_rule_shipping_country_configuration';

@@ -47,6 +47,9 @@ class NthOrderConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -56,6 +59,9 @@ class NthOrderConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_rule_nth_order_configuration';

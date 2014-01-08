@@ -13,16 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use InvalidArgumentException;
 
-/**
- * Base rule checker.
- *
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
-abstract class AbstractRuleChecker
+class OrderInterfaceNotImplementedException extends InvalidArgumentException
 {
-    protected function orderInterfaceNotImplementedException($subject)
+    public function __construct($subject)
     {
-        return new InvalidArgumentException(sprintf(
+        parent::__construct(sprintf(
             '%s does not implement OrderInterface.',
             get_class($subject)
         ));

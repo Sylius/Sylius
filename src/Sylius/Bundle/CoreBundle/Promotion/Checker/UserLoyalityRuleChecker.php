@@ -21,7 +21,7 @@ use DateTime;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserLoyalityRuleChecker extends AbstractRuleChecker implements RuleCheckerInterface
+class UserLoyalityRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class UserLoyalityRuleChecker extends AbstractRuleChecker implements RuleChecker
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw $this->orderInterfaceNotImplementedException($subject);
+            throw new OrderInterfaceNotImplementedException($subject);
         }
 
         if (null === $user = $subject->getUser()) {

@@ -55,7 +55,7 @@ class ShippingDiscountAction implements PromotionActionInterface
 
         $adjustment = $this->repository->createNew();
 
-        $adjustment->setAmount(- $subject->getShippingTotal() * ($configuration['percentage']));
+        $adjustment->setAmount(- $subject->getShippingTotal() * $configuration['percentage']);
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 

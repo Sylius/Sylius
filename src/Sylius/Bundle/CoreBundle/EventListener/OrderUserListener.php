@@ -29,16 +29,16 @@ class OrderUserListener
 
     public function setOrderUser(GenericEvent $event)
     {
+        if (null === $user = $this->getUser()) {
+            return;
+        }
+
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
                 'Order user listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
-        }
-
-        if (null === $user = $this->getUser()) {
-            return;
         }
 
         $order->setUser($user);
@@ -49,8 +49,8 @@ class OrderUserListener
 
     protected function getUser()
     {
-        if ((null !== $token = $this->securityContext->getToken()) && is_object($user = $token->getUser())) {
-            return $user;
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->securityContext->getToken()->getUser();
         }
     }
 }

@@ -57,7 +57,7 @@ class AddressingStep extends CheckoutStep
 
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_COMPLETE, $order);
 
-            $this->getManager()->flush();
+            $this->getManager()->flush($order);
 
             return $this->complete();
         }

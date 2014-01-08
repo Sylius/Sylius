@@ -53,6 +53,9 @@ class ItemTotalConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -62,6 +65,9 @@ class ItemTotalConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_rule_item_total_configuration';

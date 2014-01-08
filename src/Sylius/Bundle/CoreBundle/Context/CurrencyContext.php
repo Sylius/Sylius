@@ -64,8 +64,8 @@ class CurrencyContext extends BaseCurrencyContext
 
     protected function getUser()
     {
-        if ((null !== $token = $this->securityContext->getToken()) && is_object($user = $token->getUser())) {
-            return $user;
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->securityContext->getToken()->getUser();
         }
     }
 }

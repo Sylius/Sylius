@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingCountryRuleChecker extends AbstractRuleChecker implements RuleCheckerInterface
+class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class ShippingCountryRuleChecker extends AbstractRuleChecker implements RuleChec
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw $this->orderInterfaceNotImplementedException($subject);
+            throw new OrderInterfaceNotImplementedException($subject);
         }
 
         if (null === $address = $subject->getShippingAddress()) {
