@@ -40,6 +40,7 @@
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
         <parameter key="sylius.listener.coupon_usage.class">Sylius\Bundle\CoreBundle\EventListener\CouponUsageListener</parameter>
+        <parameter key="sylius.listener.order_user.class">Sylius\Bundle\CoreBundle\EventListener\OrderUserListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -261,6 +262,11 @@
         </service>
         <service id="sylius.listener.coupon_usage" class="%sylius.listener.coupon_usage.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="handleCouponUsage" />
+        </service>
+        <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="sylius.manager.order" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.initialize" method="setOrderUser" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
