@@ -43,6 +43,7 @@
 
         <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.percentage_discount_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Action\PercentageDiscountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
 
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionsBundle\Form\Type\CouponToCodeType</parameter>
 
@@ -167,6 +168,10 @@
         <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="%sylius.form.type.promotion_action.percentage_discount_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_percentage_discount_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.shipping_discount_configuration" class="%sylius.form.type.promotion_action.shipping_discount_configuration.class%">
+            <argument>%sylius.validation_group.promotion_action_shipping_discount_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_shipping_discount_configuration" />
         </service>
         <service id="sylius.form.type.promotion_coupon_to_code" class="%sylius.form.type.promotion_coupon_to_code.class%">
             <argument type="service" id="sylius.repository.promotion_coupon" />

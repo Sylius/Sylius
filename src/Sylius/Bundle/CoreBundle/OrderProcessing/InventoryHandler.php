@@ -173,12 +173,11 @@ class InventoryHandler implements InventoryHandlerInterface
         $counter = 0;
 
         foreach ($units as $unit) {
-            if ($counter == $quantity) {
+            if ($quantity == $counter++) {
                 break;
             }
 
             $order->removeInventoryUnit($unit);
-            $counter++;
         }
     }
 }

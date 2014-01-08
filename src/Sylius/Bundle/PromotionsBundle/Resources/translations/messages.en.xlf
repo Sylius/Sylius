@@ -14,6 +14,10 @@
         <source>sylius.form.action.percentage_discount_configuration.percentage</source>
         <target>Percentage</target>
       </trans-unit>
+      <trans-unit id="ad47d162f1e5e26c36afeeaf8f7594d7397688b5" resname="sylius.form.action.shipping_discount_configuration.percentage">
+        <source>sylius.form.action.shipping_discount_configuration.percentage</source>
+        <target>Percentage</target>
+      </trans-unit>
       <trans-unit id="e4e0d308b09d83aa13db4d91965b3976fba78b00" resname="sylius.form.action.type">
         <source>sylius.form.action.type</source>
         <target>Type</target>
