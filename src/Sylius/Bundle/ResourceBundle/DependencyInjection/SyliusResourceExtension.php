@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DatabaseDriverFactoryInterface;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\ResourceServicesFactory;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -158,7 +157,7 @@ class SyliusResourceExtension extends Extension
     }
 
     /**
-     * @param array $configs
+     * @param  array                     $configs
      * @throws \InvalidArgumentException
      */
     private function createResourceServices(array $configs)

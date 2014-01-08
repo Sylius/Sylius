@@ -66,7 +66,7 @@ class ProcessValidator implements ProcessValidatorInterface
      * Set validation
      *
      * @param callable $validation
-     * @return $this
+     *                             @return $this
      */
     public function setValidation(\Closure $validation)
     {
