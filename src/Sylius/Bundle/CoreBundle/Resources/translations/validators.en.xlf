@@ -2,62 +2,6 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
-      <trans-unit id="a55be57cc201693bfdc2c9021f8fd48d" resname="fos_user.email.already_used">
-        <source>fos_user.email.already_used</source>
-        <target>fos_user.email.already_used</target>
-      </trans-unit>
-      <trans-unit id="6ff439fdb45d5bd0d58e8d210df8be77" resname="fos_user.email.blank">
-        <source>fos_user.email.blank</source>
-        <target>fos_user.email.blank</target>
-      </trans-unit>
-      <trans-unit id="fc6c24981b4c0a57ce247c8687a585ea" resname="fos_user.email.invalid">
-        <source>fos_user.email.invalid</source>
-        <target>fos_user.email.invalid</target>
-      </trans-unit>
-      <trans-unit id="966201b57a32472001eeb20f251cce59" resname="fos_user.email.long">
-        <source>fos_user.email.long</source>
-        <target>fos_user.email.long</target>
-      </trans-unit>
-      <trans-unit id="f21278704589f38c6334b87af1479cf9" resname="fos_user.email.short">
-        <source>fos_user.email.short</source>
-        <target>fos_user.email.short</target>
-      </trans-unit>
-      <trans-unit id="444a31e89e0320314cdd1b4d9f693447" resname="fos_user.group.blank">
-        <source>fos_user.group.blank</source>
-        <target>fos_user.group.blank</target>
-      </trans-unit>
-      <trans-unit id="cb4f03d698d34db020dcdfb4422024d0" resname="fos_user.group.long">
-        <source>fos_user.group.long</source>
-        <target>fos_user.group.long</target>
-      </trans-unit>
-      <trans-unit id="ae2e51c83ca7620416400ccc476363ad" resname="fos_user.group.short">
-        <source>fos_user.group.short</source>
-        <target>fos_user.group.short</target>
-      </trans-unit>
-      <trans-unit id="dcd6d14d0786e48363cedfda2f1ae893" resname="fos_user.password.blank">
-        <source>fos_user.password.blank</source>
-        <target>fos_user.password.blank</target>
-      </trans-unit>
-      <trans-unit id="208830cde0e30a97e31cae31d1815c35" resname="fos_user.password.short">
-        <source>fos_user.password.short</source>
-        <target>fos_user.password.short</target>
-      </trans-unit>
-      <trans-unit id="717412185b61194420c7def0b42418f1" resname="fos_user.username.already_used">
-        <source>fos_user.username.already_used</source>
-        <target>fos_user.username.already_used</target>
-      </trans-unit>
-      <trans-unit id="e6b436802106350f126526dff34d889c" resname="fos_user.username.blank">
-        <source>fos_user.username.blank</source>
-        <target>fos_user.username.blank</target>
-      </trans-unit>
-      <trans-unit id="8eb91da705aa09b820f19e5a4e06d1fe" resname="fos_user.username.long">
-        <source>fos_user.username.long</source>
-        <target>fos_user.username.long</target>
-      </trans-unit>
-      <trans-unit id="a96e6b81d15a20e05150a905e30d70c4" resname="fos_user.username.short">
-        <source>fos_user.username.short</source>
-        <target>fos_user.username.short</target>
-      </trans-unit>
       <trans-unit id="a7dd2127e3327431a56034e6cc0bcb8b" resname="sylius.group.name.max">
         <source>sylius.group.name.max</source>
         <target>Group name must be not be longer than {{ limit }} characters.</target>
@@ -69,102 +13,6 @@
       <trans-unit id="70b67f1bf334dc1de16785df8cd0309e" resname="sylius.group.name.not_blank">
         <source>sylius.group.name.not_blank</source>
         <target>Please enter group name.</target>
-      </trans-unit>
-      <trans-unit id="029f683405e37540caa31fe5cd2aa065" resname="sylius.order_item.quantity.integer">
-        <source>sylius.order_item.quantity.integer</source>
-        <target>sylius.order_item.quantity.integer</target>
-      </trans-unit>
-      <trans-unit id="6792abf1f2d18d11c1e7c0c385f68d26" resname="sylius.order_item.quantity.min">
-        <source>sylius.order_item.quantity.min</source>
-        <target>sylius.order_item.quantity.min</target>
-      </trans-unit>
-      <trans-unit id="b49f1ff734538c9be806df8742dc1fde" resname="sylius.order_item.quantity.not_blank">
-        <source>sylius.order_item.quantity.not_blank</source>
-        <target>sylius.order_item.quantity.not_blank</target>
-      </trans-unit>
-      <trans-unit id="a0bfd28ade710d07ff88637ec653a544" resname="sylius.product.description.min_length">
-        <source>sylius.product.description.min_length</source>
-        <target>sylius.product.description.min_length</target>
-      </trans-unit>
-      <trans-unit id="da4ac75359bd904a29b1436badebfb36" resname="sylius.product.description.not_blank">
-        <source>sylius.product.description.not_blank</source>
-        <target>sylius.product.description.not_blank</target>
-      </trans-unit>
-      <trans-unit id="73b2525aa56b3a73c3d37d667f386e8d" resname="sylius.product.name.max_length">
-        <source>sylius.product.name.max_length</source>
-        <target>sylius.product.name.max_length</target>
-      </trans-unit>
-      <trans-unit id="918d2b35e09d0f3362a2cdada6359b76" resname="sylius.product.name.min_length">
-        <source>sylius.product.name.min_length</source>
-        <target>sylius.product.name.min_length</target>
-      </trans-unit>
-      <trans-unit id="fc83d1d7f8165f2dfde3e02c44104622" resname="sylius.product.name.not_blank">
-        <source>sylius.product.name.not_blank</source>
-        <target>sylius.product.name.not_blank</target>
-      </trans-unit>
-      <trans-unit id="4aaf3aca52ae7b6d5982529b4454d0ec" resname="sylius.shipping_method.calculator.max_length">
-        <source>sylius.shipping_method.calculator.max_length</source>
-        <target>sylius.shipping_method.calculator.max_length</target>
-      </trans-unit>
-      <trans-unit id="ba6f1a7fdb93528a6914344721a3a8ef" resname="sylius.shipping_method.calculator.min_length">
-        <source>sylius.shipping_method.calculator.min_length</source>
-        <target>sylius.shipping_method.calculator.min_length</target>
-      </trans-unit>
-      <trans-unit id="9cb1482dfb677ae2df9be7763ed4b102" resname="sylius.shipping_method.calculator.not_blank">
-        <source>sylius.shipping_method.calculator.not_blank</source>
-        <target>sylius.shipping_method.calculator.not_blank</target>
-      </trans-unit>
-      <trans-unit id="31902fa3e20b94342ba0efb7021df190" resname="sylius.shipping_method.name.max_length">
-        <source>sylius.shipping_method.name.max_length</source>
-        <target>sylius.shipping_method.name.max_length</target>
-      </trans-unit>
-      <trans-unit id="419a8d6e6ebd08721602a487371be7cb" resname="sylius.shipping_method.name.min_length">
-        <source>sylius.shipping_method.name.min_length</source>
-        <target>sylius.shipping_method.name.min_length</target>
-      </trans-unit>
-      <trans-unit id="a46d4dbf1771f6a42aa4d012a2637b25" resname="sylius.shipping_method.name.not_blank">
-        <source>sylius.shipping_method.name.not_blank</source>
-        <target>sylius.shipping_method.name.not_blank</target>
-      </trans-unit>
-      <trans-unit id="6ba01dc864ac159d6b8d30431c623e76" resname="sylius.tax_rate.amount.not_blank">
-        <source>sylius.tax_rate.amount.not_blank</source>
-        <target>sylius.tax_rate.amount.not_blank</target>
-      </trans-unit>
-      <trans-unit id="6bec12eeded2af36b6edff061395de1f" resname="sylius.tax_rate.calculator.not_blank">
-        <source>sylius.tax_rate.calculator.not_blank</source>
-        <target>sylius.tax_rate.calculator.not_blank</target>
-      </trans-unit>
-      <trans-unit id="dbdea39ef055987f782317215ecf6910" resname="sylius.tax_rate.category.not_blank">
-        <source>sylius.tax_rate.category.not_blank</source>
-        <target>sylius.tax_rate.category.not_blank</target>
-      </trans-unit>
-      <trans-unit id="ce7fea89bff72f24a483d937ca993e6a" resname="sylius.tax_rate.name.max_length">
-        <source>sylius.tax_rate.name.max_length</source>
-        <target>sylius.tax_rate.name.max_length</target>
-      </trans-unit>
-      <trans-unit id="aa79090e3305fc2b2eb25973a226ee7c" resname="sylius.tax_rate.name.min_length">
-        <source>sylius.tax_rate.name.min_length</source>
-        <target>sylius.tax_rate.name.min_length</target>
-      </trans-unit>
-      <trans-unit id="7a3543e1bd19a14e772ec2abcda419bf" resname="sylius.tax_rate.name.not_blank">
-        <source>sylius.tax_rate.name.not_blank</source>
-        <target>sylius.tax_rate.name.not_blank</target>
-      </trans-unit>
-      <trans-unit id="05212abfc3e29e4b0fe5f6ab18f31da4" resname="sylius.taxon.name.max_length">
-        <source>sylius.taxon.name.max_length</source>
-        <target>sylius.taxon.name.max_length</target>
-      </trans-unit>
-      <trans-unit id="6b05cd6b996cfafd94c813a707d86fa5" resname="sylius.taxon.name.not_blank">
-        <source>sylius.taxon.name.not_blank</source>
-        <target>sylius.taxon.name.not_blank</target>
-      </trans-unit>
-      <trans-unit id="29428b426b591aad514fa68434a5dd8a" resname="sylius.taxonomy.name.max_length">
-        <source>sylius.taxonomy.name.max_length</source>
-        <target>sylius.taxonomy.name.max_length</target>
-      </trans-unit>
-      <trans-unit id="199bbac1dc5f668799b979d986e0746a" resname="sylius.taxonomy.name.not_blank">
-        <source>sylius.taxonomy.name.not_blank</source>
-        <target>sylius.taxonomy.name.not_blank</target>
       </trans-unit>
       <trans-unit id="0004066cb8a3ad8b40bc84c8131febcc" resname="sylius.user.first_name.max">
         <source>sylius.user.first_name.max</source>
@@ -205,10 +53,6 @@
       <trans-unit id="087a6beb8ec9ff5d48d8d620286faa51" resname="sylius.variant.price.not_blank">
         <source>sylius.variant.price.not_blank</source>
         <target>Please enter the price.</target>
-      </trans-unit>
-      <trans-unit id="037feafe4e225e37e282013f608a4a49" resname="sylius.variant.sku.unique">
-        <source>sylius.variant.sku.unique</source>
-        <target>sylius.variant.sku.unique</target>
       </trans-unit>
       <trans-unit id="381ad7dedffbd02e6f060ea0cb53a38d" resname="sylius_shipping.method.zone.not_blank">
         <source>sylius_shipping.method.zone.not_blank</source>
