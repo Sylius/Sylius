@@ -1,14 +1,17 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
     shipping_category:
         name:
-            not_blank: "Please enter shipping category name."
-            min_length: "Category name must be at least {{ limit }} characters long."
-            max_length: "Category name must not be longer than {{ limit }} characters."
+            max_length: 'Category name must not be longer than {{ limit }} characters.'
+            min_length: 'Category name must be at least {{ limit }} characters long.'
+            not_blank: 'Please enter shipping category name.'
+
     shipping_method:
+        calculator:
+            max_length: sylius.shipping_method.calculator.max_length   # FIXME
+            min_length: sylius.shipping_method.calculator.min_length   # FIXME
+            not_blank: sylius.shipping_method.calculator.not_blank   # FIXME
+
         name:
-            not_blank: "Please enter shipping method name."
-            min_length: "Shipping method name must be at least {{ limit }} characters long."
-            max_length: "Shipping method name must not be longer than {{ limit }} characters."
+            max_length: 'Shipping method name must not be longer than {{ limit }} characters.'
+            min_length: 'Shipping method name must be at least {{ limit }} characters long.'
+            not_blank: 'Please enter shipping method name.'

@@ -44,4 +44,18 @@ class Shipment extends BaseShipment implements ShipmentInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingWeight()
+    {
+        $weight = 0;
+
+        foreach ($this->items as $item) {
+            $weight += $item->getShippable()->getShippingWeight();
+        }
+
+        return $weight;
+    }
 }

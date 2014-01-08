@@ -58,6 +58,14 @@
         <source>sylius.form.order_filter.total_to</source>
         <target>To</target>
       </trans-unit>
+      <trans-unit id="556cf98f6f7526d6065fa049248630ee" resname="sylius.form.product.restricted_zone">
+        <source>sylius.form.product.restricted_zone</source>
+        <target>Restricted zone</target>
+      </trans-unit>
+      <trans-unit id="737416fcfe721dea8cfc1247ec9e2c3b" resname="sylius.form.product.shipping_category">
+        <source>sylius.form.product.shipping_category</source>
+        <target>Shipping category</target>
+      </trans-unit>
       <trans-unit id="02a8b57fa162c999afe9cce1745529cd" resname="sylius.form.product.short_description">
         <source>sylius.form.product.short_description</source>
         <target>Short description</target>
@@ -66,17 +74,9 @@
         <source>sylius.form.product.tax_category</source>
         <target>Tax category</target>
       </trans-unit>
-      <trans-unit id="737416fcfe721dea8cfc1247ec9e2c3b" resname="sylius.form.product.shipping_category">
-        <source>sylius.form.product.shipping_category</source>
-        <target>Shipping category</target>
-      </trans-unit>
       <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4cc" resname="sylius.form.product.variant_selection_method">
         <source>sylius.form.product.variant_selection_method</source>
         <target>Variant selection method</target>
-      </trans-unit>
-      <trans-unit id="39ab32ec4aed4889c6d8ca2e8075b4cd" resname="sylius.form.product.restricted_zone">
-        <source>sylius.form.product.restricted_zone</source>
-        <target>Restricted zone</target>
       </trans-unit>
       <trans-unit id="757004bed01aea433f48aea5badf9062" resname="sylius.form.product_filter.name">
         <source>sylius.form.product_filter.name</source>
@@ -162,6 +162,14 @@
         <source>sylius.form.variant.available_on_demand</source>
         <target>Available on demand</target>
       </trans-unit>
+      <trans-unit id="85569660bb7d24098e0d4269fcf6804a" resname="sylius.form.variant.depth">
+        <source>sylius.form.variant.depth</source>
+        <target>Depth</target>
+      </trans-unit>
+      <trans-unit id="203064ca2dab5445d7f9bb890f6220d9" resname="sylius.form.variant.height">
+        <source>sylius.form.variant.height</source>
+        <target>Height</target>
+      </trans-unit>
       <trans-unit id="54d88f13f82cc3ca1b556b95478c61e2" resname="sylius.form.variant.images">
         <source>sylius.form.variant.images</source>
         <target>Images</target>
@@ -177,6 +185,14 @@
       <trans-unit id="6bd77fa4ee5506db723f5e64327f3cb2" resname="sylius.form.variant.sku">
         <source>sylius.form.variant.sku</source>
         <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="7218f688959c2289fd5a5d410f906fa5" resname="sylius.form.variant.weight">
+        <source>sylius.form.variant.weight</source>
+        <target>Weight</target>
+      </trans-unit>
+      <trans-unit id="642d412dbcd44dbd7e29025c2f2bb7b9" resname="sylius.form.variant.width">
+        <source>sylius.form.variant.width</source>
+        <target>Width</target>
       </trans-unit>
     </body>
   </file>
