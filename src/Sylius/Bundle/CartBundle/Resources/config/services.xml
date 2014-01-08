@@ -70,6 +70,7 @@
             <argument type="service" id="sylius.cart_storage" />
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="sylius.repository.cart" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.cart_storage.session" class="%sylius.cart_storage.session.class%">

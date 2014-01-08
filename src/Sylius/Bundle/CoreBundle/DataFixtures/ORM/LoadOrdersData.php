@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
 
 class LoadOrdersData extends DataFixture
 {
@@ -50,6 +52,10 @@ class LoadOrdersData extends DataFixture
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
+
+            $this->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
+            $this->get('event_dispatcher')->dispatch('sylius.checkout.shipping.pre_complete', new GenericEvent($order));
+            $this->get('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
 
             $order->calculateTotal();
             $order->complete();
