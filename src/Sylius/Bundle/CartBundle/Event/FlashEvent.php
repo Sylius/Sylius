@@ -52,6 +52,6 @@ class FlashEvent extends Event
      */
     public function setMessage($message)
     {
-        $this->message = message;
+        $this->message = $message;
     }
 }
