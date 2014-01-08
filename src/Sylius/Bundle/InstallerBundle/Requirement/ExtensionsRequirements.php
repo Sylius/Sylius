@@ -162,6 +162,14 @@ class ExtensionsRequirements extends RequirementCollection
                 false,
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'PDO'), 'requirements')
             ))
+            ->add(new Requirement(
+                $translator->trans('sylius.extensions.gd', array(), 'requirements'),
+                $status = defined('GD_VERSION'),
+                $on,
+                $status ? $on : $off,
+                false,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'gd'), 'requirements')
+            ))
         ;
     }
 }
