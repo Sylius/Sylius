@@ -30,6 +30,8 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        
+       <many-to-many field="products" mapped-by="taxons" target-entity="Product"/>
     </mapped-superclass>
 
 </doctrine-mapping>
