@@ -64,6 +64,13 @@ $ tail -f app/logs/prod.log
 $ tail -f app/logs/dev.log
 ```
 
+If you are using the provided Vagrant environment, these files are located in shared memory to avoid the performance loss associated with NFS synchronization. 
+
+```bash
+$ tail -f /dev/shm/sylius/app/logs/prod.log
+$ tail -f /dev/shm/sylius/app/logs/dev.log
+```
+
 Contributing
 ------------
 
