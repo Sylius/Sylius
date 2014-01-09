@@ -13,18 +13,15 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class OrderUserListener
 {
     protected $securityContext;
-    protected $orderManager;
 
-    public function __construct(SecurityContextInterface $securityContext, ObjectManager $orderManager)
+    public function __construct(SecurityContextInterface $securityContext)
     {
         $this->securityContext = $securityContext;
-        $this->orderManager = $orderManager;
     }
 
     public function setOrderUser(GenericEvent $event)
@@ -42,9 +39,6 @@ class OrderUserListener
         }
 
         $order->setUser($user);
-
-        $this->orderManager->persist($order);
-        $this->orderManager->flush();
     }
 
     protected function getUser()

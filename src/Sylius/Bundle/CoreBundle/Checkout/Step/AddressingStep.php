@@ -32,6 +32,10 @@ class AddressingStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
 
+        $orderManager = $this->get('sylius.manager.order');
+        $orderManager->persist($order);
+        $orderManager->flush();
+
         $form = $this->createCheckoutAddressingForm($order);
 
         return $this->renderStep($context, $order, $form);

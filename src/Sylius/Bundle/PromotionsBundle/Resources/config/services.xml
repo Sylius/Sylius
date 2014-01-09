@@ -39,6 +39,7 @@
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.user_loyality_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\UserLoyalityConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action_choice.class">Sylius\Bundle\PromotionsBundle\Form\Type\ActionChoiceType</parameter>
 
         <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
@@ -156,6 +157,11 @@
         <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_taxonomy_configuration%</argument>
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="form.type" alias="sylius_promotion_rule_taxonomy_configuration" />
         </service>
         <service id="sylius.form.type.promotion_action_choice" class="%sylius.form.type.promotion_action_choice.class%">
             <argument>%sylius.promotion_actions%</argument>
