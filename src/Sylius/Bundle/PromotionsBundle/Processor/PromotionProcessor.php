@@ -38,11 +38,17 @@ class PromotionProcessor implements PromotionProcessorInterface
 
     public function process(PromotionSubjectInterface $subject)
     {
-        foreach ($this->repository->findActive() as $promotion) {
+        $promotions = $this->repository->findActive();
+
+        foreach ($promotions as $promotion) {
+            if ($promotion->hasSubject($subject)) {
+                $this->applicator->revert($subject, $promotion);
+            }
+        }
+
+        foreach ($promotions as $promotion) {
             if ($this->checker->isEligible($subject, $promotion)) {
                 $this->applicator->apply($subject, $promotion);
-            } elseif ($promotion->hasSubject($subject)) {
-                $this->applicator->revert($subject, $promotion);
             }
         }
     }

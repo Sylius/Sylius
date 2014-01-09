@@ -33,6 +33,8 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
             ->addSelect('r')
             ->leftJoin($this->getAlias().'.actions', 'a')
             ->addSelect('a')
+            ->leftJoin($this->getAlias().'.subjects', 's')
+            ->addSelect('s')
             ->where(
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->isNull($this->getAlias().'.startsAt'),

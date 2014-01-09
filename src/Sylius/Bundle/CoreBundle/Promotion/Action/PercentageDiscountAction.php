@@ -46,10 +46,6 @@ class PercentageDiscountAction implements PromotionActionInterface
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if ($promotion->hasSubject($subject)) {
-            $this->revert($subject, $configuration, $promotion);
-        }
-        
         $adjustment = $this->repository->createNew();
 
         $adjustment->setAmount(- $subject->getPromotionSubjectItemTotal() * ($configuration['percentage']));
