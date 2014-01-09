@@ -101,7 +101,7 @@ class Variant extends BaseVariant implements VariantInterface
     {
         $string = $this->getProduct()->getName();
 
-        if (0 < $this->getOptions()->count()) {
+        if (!$this->getOptions()->isEmpty()) {
             $string .= '(';
 
             foreach ($this->getOptions() as $option) {

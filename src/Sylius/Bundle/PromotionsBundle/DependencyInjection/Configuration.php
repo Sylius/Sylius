@@ -98,7 +98,7 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
-                        ->arrayNode('promotion_action_free_product_configuration')
+                        ->arrayNode('promotion_action_add_product_configuration')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()

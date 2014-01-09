@@ -11,19 +11,19 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * Free product configuration form.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class FreeProductConfigurationType extends AbstractType
+class AddProductConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -47,7 +47,7 @@ class FreeProductConfigurationType extends AbstractType
     {
         $builder
             ->add('variant', 'choice', array(
-                'label' => 'sylius.form.action.free_product_configuration.variant',
+                'label' => 'sylius.form.action.add_product_configuration.variant',
                 'choices' => $this->getVariantsList(),
                 'constraints' => array(
                     new NotBlank(),
@@ -55,7 +55,16 @@ class FreeProductConfigurationType extends AbstractType
                 )
             ))
             ->add('quantity', 'integer', array(
-                'label' => 'sylius.form.action.free_product_configuration.quantity',
+                'label' => 'sylius.form.action.add_product_configuration.quantity',
+                'data'  => 1,
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
+                )
+            ))
+            ->add('quantity', 'integer', array(
+                'label' => 'sylius.form.action.add_product_configuration.price',
+                'data'  => 0,
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
@@ -75,7 +84,7 @@ class FreeProductConfigurationType extends AbstractType
 
     public function getName()
     {
-        return 'sylius_promotion_action_free_product_configuration';
+        return 'sylius_promotion_action_add_product_configuration';
     }
 
     protected function getVariantsList()

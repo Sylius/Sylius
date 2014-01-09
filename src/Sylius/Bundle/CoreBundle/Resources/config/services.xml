@@ -64,12 +64,18 @@
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\ShippingDiscountAction</parameter>
 =======
         <parameter key="sylius.promotion_action.free_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\FreeProductAction</parameter>
         
         <parameter key="sylius.form.type.promotion_action.free_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\FreeProductConfigurationType</parameter>
 >>>>>>> Add FreeProduct promotion
+=======
+        <parameter key="sylius.promotion_action.add_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\AddProductAction</parameter>
+        
+        <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
+>>>>>>> Rename promotion and fix feedbacks
 
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
@@ -339,16 +345,16 @@
             <argument type="service" id="sylius.repository.adjustment" />
             <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping discount" />
         </service>
-        <service id="sylius.promotion_action.free_product" class="%sylius.promotion_action.free_product.class%">
+        <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.variant" />
-            <tag name="sylius.promotion_action" type="free_product" label="Free product" />
+            <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>
         
-        <service id="sylius.form.type.promotion_action.free_product_configuration" class="%sylius.form.type.promotion_action.free_product_configuration.class%">
-            <argument>%sylius.validation_group.promotion_action_free_product_configuration%</argument>
+        <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
+            <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
             <argument type="service" id="sylius.repository.variant" />
-            <tag name="form.type" alias="sylius_promotion_action_free_product_configuration" />
+            <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>
 
         <!-- money -->

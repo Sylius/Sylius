@@ -22,7 +22,7 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class FreeProductAction implements PromotionActionInterface
+class AddProductAction implements PromotionActionInterface
 {
     /**
      * OrderItem repository.
@@ -41,7 +41,8 @@ class FreeProductAction implements PromotionActionInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $repository
+     * @param RepositoryInterface $itemRepository
+     * @param RepositoryInterface $variantRepository
      */
     public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
     {
@@ -56,7 +57,7 @@ class FreeProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        if ($this->subjectHasItem($subject, $variant)) {
+        if ($this->subjectHasItem($subject, $variant, $configuration)) {
             return;
         }
 
@@ -64,7 +65,7 @@ class FreeProductAction implements PromotionActionInterface
 
         $item->setVariant($variant);
         $item->setQuantity($configuration['quantity']);
-        $item->setUnitPrice(0);
+        $item->setUnitPrice($configuration['price']);
 
         $subject->addItem($item);
     }
@@ -74,13 +75,13 @@ class FreeProductAction implements PromotionActionInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_free_product_configuration';
+        return 'sylius_promotion_action_add_product_configuration';
     }
 
-    protected function subjectHasItem(PromotionSubjectInterface $subject, VariantInterface $variant)
+    protected function subjectHasItem(PromotionSubjectInterface $subject, VariantInterface $variant, array $configuration)
     {
         foreach ($subject->getItems() as $item) {
-            if ($item->getVariant() === $variant && $item->getUnitPrice() === 0) {
+            if ($item->getVariant() === $variant && $item->getUnitPrice() === $configuration['price']) {
                 return true;
             }
         }
