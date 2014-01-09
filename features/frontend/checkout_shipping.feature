@@ -17,6 +17,12 @@ Feature: Checkout shipping
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
             | USA          | country | USA                     |
+          And there are following countries:
+            | name           |
+            | USA            |
+            | United Kingdom |
+            | Poland         |
+            | Germany        |
           And the following shipping methods exist:
             | zone         | name          | calculator | configuration |
             | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
@@ -80,3 +86,10 @@ Feature: Checkout shipping
          Then I should be on the checkout finalize step
           And "Shipping total: €65.00" should appear on the page
           And "Total: €70.99" should appear on the page
+
+    Scenario: Selecting shipping address that not match any shop shipping zones
+        Given I go to the checkout start page
+          And I fill in the shipping address to Poland
+         When I press "Continue"
+         Then I should be on the checkout addressing step
+          And "We're sorry" should appear on the page
