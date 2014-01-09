@@ -8,6 +8,9 @@ default:
         Behat\MinkExtension\Extension:
             default_session: symfony2
             goutte: ~
-            browser_name: firefox
+            selenium2: 
+            	browser: chrome
+            	capabilities: {"browserName":"chrome", "browserVersion":"30.0"}
+            wd_host: http://<browserstack_username>:<browserstack_key>@hub.browserstack.com/wd/hub
         Behat\Symfony2Extension\Extension:
             mink_driver: true
