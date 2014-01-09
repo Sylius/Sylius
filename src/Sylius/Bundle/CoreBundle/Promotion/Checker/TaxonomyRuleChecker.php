@@ -39,7 +39,7 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
             }
         }
 
-        return $configuration['exclude'];
+        return (Boolean) $configuration['exclude'];
     }
 
     /**

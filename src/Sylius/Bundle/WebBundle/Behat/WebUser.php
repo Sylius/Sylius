@@ -696,10 +696,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
     /**
      * @Given /^I am logged in user$/
+     * @Given /^I am logged in as user "([^""]*)"$/
      */
-    public function iAmLoggedInUser()
+    public function iAmLoggedInUser($email)
     {
-        $this->iAmLoggedInAsRole('ROLE_USER');
+        $this->iAmLoggedInAsRole('ROLE_USER', $email);
     }
 
     /**
@@ -881,12 +882,12 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @param string $role
      */
-    private function iAmLoggedInAsRole($role)
+    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
     {
-        $this->getSubContext('data')->thereIsUser('sylius@example.com', 'sylius', $role);
+        $this->getSubContext('data')->thereIsUser($email, 'sylius', $role);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
 
-        $this->fillField('Email', 'sylius@example.com');
+        $this->fillField('Email', $email);
         $this->fillField('Password', 'sylius');
         $this->pressButton('login');
     }

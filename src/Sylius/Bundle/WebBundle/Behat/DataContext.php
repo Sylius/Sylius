@@ -241,7 +241,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
-            $order->setUser($this->thereIsUser($data['user'], 'password'));
+            $order->setUser($this->thereIsUser($data['user'], 'sylius'));
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
@@ -306,7 +306,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'password', null, 'yes', null, false);
+            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, false);
             $user->addAddress($address);
             $manager->persist($address);
             $manager->persist($user);
@@ -922,22 +922,24 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereIsCountry($name, $provinces = null, $flush = true)
     {
-        /* @var $country CountryInterface */
-        $country = $this->getRepository('country')->createNew();
-        $country->setName(trim($name));
-        $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+        if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
+            /* @var $country CountryInterface */
+            $country = $this->getRepository('country')->createNew();
+            $country->setName(trim($name));
+            $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
 
-        if (null !== $provinces) {
-            $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
-            foreach ($provinces as $provinceName) {
-                $country->addProvince($this->thereisProvince($provinceName));
+            if (null !== $provinces) {
+                $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
+                foreach ($provinces as $provinceName) {
+                    $country->addProvince($this->thereisProvince($provinceName));
+                }
             }
-        }
 
-        $manager = $this->getEntityManager();
-        $manager->persist($country);
-        if ($flush) {
-            $manager->flush();
+            $manager = $this->getEntityManager();
+            $manager->persist($country);
+            if ($flush) {
+                $manager->flush();
+            }
         }
 
         return $country;
@@ -1188,7 +1190,21 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($list as $parameter) {
             list($key, $value) = explode(':', $parameter);
-            $configuration[strtolower(trim(str_replace(' ', '_', $key)))] = trim($value);
+            $key = strtolower(trim(str_replace(' ', '_', $key)));
+
+            switch ($key) {
+                case 'country':
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('name' => trim($value)))->getId();
+                    break;
+
+                case 'taxons':
+                    $configuration[$key] = new ArrayCollection(array($this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId()));
+                    break;
+
+                default:
+                    $configuration[$key] = trim($value);
+                    break;
+            }
         }
 
         return $configuration;

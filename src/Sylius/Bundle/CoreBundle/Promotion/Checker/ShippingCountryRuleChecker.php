@@ -35,7 +35,7 @@ class ShippingCountryRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $address->getCountry()->getId() === $configuration['country']->getId();
+        return $address->getCountry()->getId() === $configuration['country'];
     }
 
     /**
