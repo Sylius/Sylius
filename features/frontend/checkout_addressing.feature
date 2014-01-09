@@ -17,13 +17,21 @@ Feature: Checkout addressing
             | email             | password | enabled |
             | john@example.com  | foo      | yes     |
             | rick@example.com  | bar      | yes     |
-          And I am logged in user
+          And the following zones are defined:
+            | name         | type    | members                 |
+            | UK + Germany | country | United Kingdom, Germany |
+            | USA          | country | USA                     |
           And there are following countries:
             | name           |
             | USA            |
             | United Kingdom |
             | Poland         |
             | Germany        |
+          And the following shipping methods exist:
+            | zone         | name          | calculator | configuration |
+            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
+            | USA          | FedEx         | Flat rate  | Amount: 6500  |
+          And I am logged in user
 
     Scenario: Filling the shipping address
         Given I added product "PHP Top" to cart

@@ -610,6 +610,10 @@
         <source>sylius.checkout.shipping.header</source>
         <target>Shipping method</target>
       </trans-unit>
+      <trans-unit id="51ca81d45a9dfd2501c06009489807ae" resname="sylius.checkout.shipping.error">
+        <source>sylius.checkout.shipping.error</source>
+        <target>We're sorry, but our shop is not able to provide product shipping to country which you have chosen.</target>
+      </trans-unit>
       <trans-unit id="4f7b06a12e37b50e59c5c84d1040d68e" resname="sylius.confirmation.message">
         <source>sylius.confirmation.message</source>
         <target>Do you want to delete this item?</target>
