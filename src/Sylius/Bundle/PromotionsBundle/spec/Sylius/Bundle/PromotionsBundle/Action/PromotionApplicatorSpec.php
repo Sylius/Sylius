@@ -12,18 +12,18 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Action;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
+use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
 use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PromotionApplicatorSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $registry
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface                  $action
-     */
-    function let($registry)
+    function let(PromotionActionRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
@@ -38,12 +38,12 @@ class PromotionApplicatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionApplicatorInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
-     * @param Sylius\Bundle\PromotionsBundle\Model\PromotionInterface        $promotion
-     * @param Sylius\Bundle\PromotionsBundle\Model\ActionInterface           $actionModel
-     */
-    function it_should_execute_all_actions_registered($registry, $action, $subject, $promotion, $actionModel)
+    function it_should_execute_all_actions_registered(
+            PromotionActionRegistryInterface $registry,
+            PromotionActionInterface $action,
+            PromotionSubjectInterface $subject,
+            PromotionInterface $promotion,
+            ActionInterface $actionModel)
     {
         $configuration = array();
 
@@ -54,6 +54,29 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
         $action->execute($subject, $configuration, $promotion)->shouldBeCalled();
 
+        $promotion->addSubject($subject)->shouldBeCalled();
+
         $this->apply($subject, $promotion);
+    }
+
+    function it_should_revert_all_actions_registered(
+            PromotionActionRegistryInterface $registry,
+            PromotionActionInterface $action,
+            PromotionSubjectInterface $subject,
+            PromotionInterface $promotion,
+            ActionInterface $actionModel)
+    {
+        $configuration = array();
+
+        $registry->getAction(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
+        $promotion->getActions()->shouldBeCalled()->willReturn(array($actionModel));
+        $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
+        $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
+
+        $action->revert($subject, $configuration, $promotion)->shouldBeCalled();
+
+        $promotion->removeSubject($subject)->shouldBeCalled();
+
+        $this->revert($subject, $promotion);
     }
 }
