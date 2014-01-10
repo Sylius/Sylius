@@ -36,6 +36,7 @@ sylius_backend_shipping_method_delete:
     defaults:
         _controller: sylius.controller.shipping_method:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_shipping_method_index
 
 sylius_backend_shipping_method_show:

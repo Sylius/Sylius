@@ -35,6 +35,7 @@ sylius_backend_order_delete:
     defaults:
         _controller: sylius.controller.order:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_order_index
 
 sylius_backend_order_filter_form:

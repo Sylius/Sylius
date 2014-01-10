@@ -35,6 +35,7 @@ sylius_backend_product_delete:
     defaults:
         _controller: sylius.controller.product:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_index
 
 sylius_backend_product_filter_form:
