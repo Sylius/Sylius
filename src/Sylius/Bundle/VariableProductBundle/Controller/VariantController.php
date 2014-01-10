@@ -38,13 +38,13 @@ class VariantController extends ResourceController
         $product = $this->findProductOr404($productId);
         $this->getGenerator()->generate($product);
 
-        $this->persistAndFlush($product);
+        $manager = $this->get('sylius.manager.product');
+        $manager->persist($product);
+        $manager->flush();
 
-        $this->setFlash('success', 'Variants have been successfully generated.');
+        $this->flashHelper->setFlash('success', 'Variants have been successfully generated.');
 
-        return $this
-            ->redirectTo($product)
-        ;
+        return $this->redirectHandler->redirectTo($product);
     }
 
     /**

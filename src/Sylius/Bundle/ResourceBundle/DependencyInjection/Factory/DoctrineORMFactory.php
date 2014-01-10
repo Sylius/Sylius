@@ -55,10 +55,6 @@ class DoctrineORMFactory extends AbstractFactory
 
         if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];
-            if ('user' === $resourceName) {
-                var_dump($classes);
-                var_dump($repositoryClass);
-            }
         }
 
         $repository = new Definition($repositoryClass);
