@@ -1708,7 +1708,7 @@
       </trans-unit>
       <trans-unit id="8f772b83e16676744d550e77c5926c46" resname="sylius.shipment.created_at">
         <source>sylius.shipment.created_at</source>
-        <target>created at</target>
+        <target>Created at</target>
       </trans-unit>
       <trans-unit id="84439c147b55055e34f54306d8d2f0d8" resname="sylius.shipment.id">
         <source>sylius.shipment.id</source>
@@ -1720,7 +1720,7 @@
       </trans-unit>
       <trans-unit id="4443ea194da7fef6d7a5b0eb15f1c2a6" resname="sylius.shipment.inventory_state">
         <source>sylius.shipment.inventory_state</source>
-        <target>inventory state</target>
+        <target>Inventory state</target>
       </trans-unit>
       <trans-unit id="2a35d80e02f6d486b8ed9b536efe06a3" resname="sylius.shipment.manage">
         <source>sylius.shipment.manage</source>
@@ -1728,15 +1728,15 @@
       </trans-unit>
       <trans-unit id="fa04dde20962a2c25323e2c69296db22" resname="sylius.shipment.method">
         <source>sylius.shipment.method</source>
-        <target>method</target>
+        <target>Method</target>
       </trans-unit>
       <trans-unit id="96c65c40484b6857e29189060e4c100b" resname="sylius.shipment.modified">
         <source>sylius.shipment.modified</source>
-        <target>modified</target>
+        <target>Modified</target>
       </trans-unit>
       <trans-unit id="05ad144be4f23aab2750b404c936182e" resname="sylius.shipment.name">
         <source>sylius.shipment.name</source>
-        <target>name</target>
+        <target>Name</target>
       </trans-unit>
       <trans-unit id="f3627777e91ae11ad72be5f7b5efe9cc" resname="sylius.shipment.no_items">
         <source>sylius.shipment.no_items</source>
@@ -1748,7 +1748,7 @@
       </trans-unit>
       <trans-unit id="a176b32d6df6fde032d272941a01a330" resname="sylius.shipment.order">
         <source>sylius.shipment.order</source>
-        <target>order</target>
+        <target>Order</target>
       </trans-unit>
       <trans-unit id="39312ae8b822f349033dbdf6eb509ef6" resname="sylius.shipment.show_header">
         <source>sylius.shipment.show_header</source>
@@ -1760,11 +1760,19 @@
       </trans-unit>
       <trans-unit id="5bae86ae3a917e7b3f1b087b1997edd8" resname="sylius.shipment.state">
         <source>sylius.shipment.state</source>
-        <target>state</target>
+        <target>State</target>
+      </trans-unit>
+      <trans-unit id="99a9e26ea8a26b9943674dedbfc0f2c1" resname="sylius.shipment.update">
+        <source>sylius.shipment.update</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="daea46f6f8d1cb67061ef2f60e7794e3" resname="sylius.shipment.update_header">
+        <source>sylius.shipment.update_header</source>
+        <target>Editing shipment</target>
       </trans-unit>
       <trans-unit id="3a4fc7c1f7ec07176644e757d8ee988e" resname="sylius.shipment.updated_at">
         <source>sylius.shipment.updated_at</source>
-        <target>last update</target>
+        <target>Last update</target>
       </trans-unit>
       <trans-unit id="e6da3183b9d8d5e87e53b57a213d8f05" resname="sylius.shipment_category.manage">
         <source>sylius.shipment_category.manage</source>

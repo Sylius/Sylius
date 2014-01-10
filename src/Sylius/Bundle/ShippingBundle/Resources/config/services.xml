@@ -92,6 +92,10 @@
             <argument>%sylius.model.shipping_category.class%</argument>
             <tag name="form.type" alias="sylius_shipping_category_choice" />
         </service>
+        <service id="sylius.form.type.shipment" class="%sylius.form.type.shipment.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <tag name="form.type" alias="sylius_shipment" />
+        </service>
 
         <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%">
             <argument type="service" id="sylius.shipping_rule_checker_registry" />

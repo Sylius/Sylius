@@ -20,8 +20,9 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-    {{ buttons.manage(path('sylius_backend_shipment_index'), 'sylius.shipment.manage'|trans) }}
-    {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
+        {{ buttons.manage(path('sylius_backend_shipment_index'), 'sylius.shipment.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_shipment_update', {'id': shipment.id}), 'sylius.shipment.update'|trans) }}
+        {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
     </div>
 </div>
 

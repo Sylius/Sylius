@@ -7,6 +7,16 @@ sylius:
 
             type: sylius.form.rule.type   # FIXME
 
+        shipment:
+            state: State
+            states:
+                checkout:   Checkout
+                dispatched: Dispatched
+                pending:    Pending
+                ready:      Ready
+                shipped:    Shipped
+                returned:   Returned
+
         shipping_calculator:
             flat_rate_configuration:
                 amount: Amount
