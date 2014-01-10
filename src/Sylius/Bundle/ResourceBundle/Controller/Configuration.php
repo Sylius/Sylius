@@ -49,6 +49,11 @@ class Configuration
         $this->parameters = $parameters;
     }
 
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
     public function getBundlePrefix()
     {
         return $this->bundlePrefix;

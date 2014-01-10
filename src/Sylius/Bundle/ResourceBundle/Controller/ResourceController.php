@@ -28,9 +28,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ResourceController extends FOSRestController
 {
     protected $config;
+    protected $flashHelper;
+    protected $domainManager;
     protected $resourceResolver;
     protected $redirectHandler;
-    protected $flashHelper;
 
     public function __construct(Configuration $config)
     {
@@ -41,9 +42,10 @@ class ResourceController extends FOSRestController
     {
         parent::setContainer($container);
 
+        $this->flashHelper = new FlashHelper($this->config, $container->get('translator'), $container->get('session'));
+        $this->domainManager = new DomainManager($container->get($this->config->getServiceName('manager')), $container->get('event_dispatcher'), $this->flashHelper, $this->config);
         $this->resourceResolver = new ResourceResolver($this->config);
         $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
-        $this->flashHelper = new FlashHelper($this->config, $container->get('translator'), $container->get('session'));
     }
 
     public function showAction()
@@ -93,9 +95,9 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $this->create($resource);
+            $resource = $this->domainManager->create($resource);
 
-            return $this->redirectHandler->redirectTo($resource);
+            return null === $resource ? $this->redirectHandler->redirectToIndex() : $this->redirectHandler->redirectTo($resource);
         }
 
         if ($this->config->isApiRequest()) {
@@ -120,7 +122,7 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
-            $this->update($resource);
+            $this->domainManager->update($resource);
 
             return $this->redirectHandler->redirectTo($resource);
         }
@@ -146,7 +148,7 @@ class ResourceController extends FOSRestController
         $config = $this->getConfiguration();
 
         $resource = $this->findOr404();
-        $this->delete($resource);
+        $this->domainManager->delete($resource);
 
         return $this->redirectHandler->redirectToIndex($resource);
     }
@@ -157,33 +159,6 @@ class ResourceController extends FOSRestController
             ->getRepository()
             ->createNew()
         ;
-    }
-
-    public function create($resource)
-    {
-        $this->dispatchEvent('pre_create', new GenericEvent($resource));
-        $this->getManager()->persist($resource);
-        $this->getManager()->flush();
-        $this->flashHelper->setFlash('success', 'create');
-        $this->dispatchEvent('post_create', new GenericEvent($resource));
-    }
-
-    public function update($resource)
-    {
-        $this->dispatchEvent('pre_update', new GenericEvent($resource));
-        $this->getManager()->persist($resource);
-        $this->getManager()->flush();
-        $this->flashHelper->setFlash('success', 'update');
-        $this->dispatchEvent('post_update', new GenericEvent($resource));
-    }
-
-    public function delete($resource)
-    {
-        $this->dispatchEvent('pre_delete', new GenericEvent($resource));
-        $this->getManager()->remove($resource);
-        $this->getManager()->flush();
-        $this->flashHelper->setFlash('success', 'delete');
-        $this->dispatchEvent('post_delete', new GenericEvent($resource));
     }
 
     public function getForm($resource = null)
@@ -202,18 +177,6 @@ class ResourceController extends FOSRestController
         }
 
         return $resource;
-    }
-
-    public function dispatchEvent($name, Event $event)
-    {
-        $name = $this->config->getEventName($name);
-
-        return $this->get('event_dispatcher')->dispatch($name, $event);
-    }
-
-    public function getManager()
-    {
-        return $this->get($this->config->getServiceName('manager'));
     }
 
     public function getRepository()

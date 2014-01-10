@@ -37,25 +37,24 @@ class OrderController extends ResourceController
      */
     public function indexByUserAction(Request $request, $id)
     {
-        $config = $this->getConfiguration();
-        $sorting = $config->getSorting();
+        $sorting = $this->config->getSorting();
 
-        $user = $this->get('sylius.repository.user')
-            ->findOneById($id);
+        $user = $this->get('sylius.repository.user')->findOneById($id);
 
-        if (!isset($user)) {
-            throw new NotFoundHttpException('Requested user does not exist');
+        if (!$user) {
+            throw new NotFoundHttpException('Requested user does not exist.');
         }
 
         $paginator = $this
             ->getRepository()
-            ->createByUserPaginator($user, $sorting);
+            ->createByUserPaginator($user, $sorting)
+        ;
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
-        $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
         return $this->render('SyliusWebBundle:Backend/Order:indexByUser.html.twig', array(
-            'user' => $user,
+            'user'   => $user,
             'orders' => $paginator
         ));
     }
