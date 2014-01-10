@@ -4,6 +4,8 @@
 default:
     context:
         class: Sylius\Bundle\WebBundle\Behat\FeatureContext
+    formatter:
+        name: Sylius\Bundle\WebBundle\Behat\SyliusFormatter
     extensions:
         Behat\MinkExtension\Extension:
             default_session: symfony2

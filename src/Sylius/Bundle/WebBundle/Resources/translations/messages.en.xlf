@@ -432,7 +432,7 @@
       </trans-unit>
       <trans-unit id="76ad42b64ed46c66473400a275b421c0" resname="sylius.cart.summary.grand_total">
         <source>sylius.cart.summary.grand_total</source>
-        <target>Grand total</target>
+        <target>Grand BREAKING total</target>
       </trans-unit>
       <trans-unit id="97b025647d38149979964dac80905c22" resname="sylius.cart.summary.product">
         <source>sylius.cart.summary.product</source>
