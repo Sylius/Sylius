@@ -64,7 +64,7 @@ sylius_shipping:
 sylius_promotions: ~
 
 sylius_inventory:
-    backorders: true
+    backorders: %sylius.inventory.backorders_enabled%
     classes:
         unit:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
