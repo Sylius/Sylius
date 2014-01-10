@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Model\SubjectInterface;
 
 /**
  * Shipping subject.
@@ -21,7 +22,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ShippingSubjectInterface
+interface ShippingSubjectInterface extends SubjectInterface
 {
     /**
      * Get the total weight of shipped goods.

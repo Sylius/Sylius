@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Checker\Registry;
+namespace Sylius\Bundle\ResourceBundle\Checker\Registry;
 
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Checker\RuleCheckerInterface;
 
 /**
  * Rule checker registry interface.

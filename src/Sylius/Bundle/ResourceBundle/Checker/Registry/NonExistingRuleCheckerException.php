@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Checker\Registry;
+namespace Sylius\Bundle\ResourceBundle\Checker\Registry;
 
 /**
  * This exception should be thrown by rule checker registry
@@ -21,6 +21,6 @@ class NonExistingRuleCheckerException extends \InvalidArgumentException
 {
     public function __construct($type)
     {
-        parent::__construct(sprintf('Promotion rule checker of type "%s" does not exist.', $type));
+        parent::__construct(sprintf('Rule checker of type "%s" does not exist.', $type));
     }
 }

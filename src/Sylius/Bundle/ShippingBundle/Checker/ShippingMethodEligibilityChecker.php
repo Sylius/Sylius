@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Checker;
 
-use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
@@ -60,11 +60,12 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
     }
 
     /**
-     * Returns whether the subject satisfies the category requirement configured in the method
+     * Returns whether the subject satisfies the category requirement configured in the method.
      *
      * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface $method
-     * @return bool
+     * @param ShippingMethodInterface  $method
+     *
+     * @return boolean
      */
     public function isCategoryEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {

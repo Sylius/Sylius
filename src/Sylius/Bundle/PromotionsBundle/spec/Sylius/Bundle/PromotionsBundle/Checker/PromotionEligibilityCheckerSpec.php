@@ -12,21 +12,20 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
-
-use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Sylius\Bundle\ResourceBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Checker\RuleCheckerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PromotionEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $registry, EventDispatcher $dispatcher)
+    function let(RuleCheckerRegistryInterface $registry, EventDispatcherInterface $dispatcher)
     {
         $this->beConstructedWith($registry, $dispatcher);
     }

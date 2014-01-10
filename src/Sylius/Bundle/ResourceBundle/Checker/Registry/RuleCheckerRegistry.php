@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Checker\Registry;
+namespace Sylius\Bundle\ResourceBundle\Checker\Registry;
 
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Checker\RuleCheckerInterface;
 
 /**
  * Rule checker registry.
@@ -28,18 +28,23 @@ class RuleCheckerRegistry implements RuleCheckerRegistryInterface
      *
      * @var RuleCheckerInterface[]
      */
-    protected $checkers;
+    protected $checkers = array();
 
-    public function __construct()
-    {
-        $this->checkers = array();
-    }
-
+    /**
+     * @return RuleCheckerInterface[]
+     */
     public function getCheckers()
     {
         return $this->checkers;
     }
 
+    /**
+     * @param string               $name
+     * @param RuleCheckerInterface $checker
+     *
+     * @return RuleCheckerRegistryInterface
+     * @throws ExistingRuleCheckerException
+     */
     public function registerChecker($name, RuleCheckerInterface $checker)
     {
         if ($this->hasChecker($name)) {
@@ -49,6 +54,12 @@ class RuleCheckerRegistry implements RuleCheckerRegistryInterface
         $this->checkers[$name] = $checker;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return RuleCheckerRegistryInterface
+     * @throws NonExistingRuleCheckerException
+     */
     public function unregisterChecker($name)
     {
         if (!$this->hasChecker($name)) {
@@ -58,11 +69,22 @@ class RuleCheckerRegistry implements RuleCheckerRegistryInterface
         unset($this->checkers[$name]);
     }
 
+    /**
+     * @param string $name
+     *
+     * @return boolean
+     */
     public function hasChecker($name)
     {
         return isset($this->checkers[$name]);
     }
 
+    /**
+     * @param string $name
+     *
+     * @return RuleCheckerInterface
+     * @throws NonExistingRuleCheckerException
+     */
     public function getChecker($name)
     {
         if (!$this->hasChecker($name)) {
