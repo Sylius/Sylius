@@ -2,8 +2,8 @@ imports:
     - { resource: config.yml }
 
 framework:
-    test: ~
-    default_locale:  "en"
+    test:           ~
+    default_locale: en
     session:
         storage_id: session.storage.mock_file
 
@@ -12,7 +12,7 @@ swiftmailer:
 
 doctrine:
     dbal:
-        dbname:   %sylius.database.name%_test
+        dbname:       %sylius.database.name%_test
         driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
 
 sylius_money:
@@ -39,3 +39,9 @@ monolog:
         firephp:
             type:  firephp
             level: info
+
+services:
+    listener.exception_rethrow:
+        class: Sylius\Bundle\WebBundle\EventListener\ExceptionRethrowListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

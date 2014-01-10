@@ -11,24 +11,34 @@ branches:
 
 services: mongodb
 
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install -y --force-yes nginx-light wkhtmltopdf
+
 before_script:
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'extension = mongo.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+    - .travis/setup.sh
 
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
     - composer install --prefer-source --no-interaction
     - composer update doctrine/mongodb-odm
 
-    - app/console doctrine:database:create -e=test
-    - app/console doctrine:schema:create -e=test
-    - app/console doctrine:phpcr:repository:init --env=test
-    - app/console assetic:dump -e=test
+    - app/console doctrine:database:create -e=test -n
+    - app/console doctrine:schema:create -e=test -n
+    - app/console doctrine:phpcr:repository:init --env=test -n
+    - app/console assetic:dump -e=test -n
 
-    - phantomjs --version
-    - phantomjs --webdriver=4444 > /dev/null &
-    - if [ "$TRAVIS_PHP_VERSION" =  "5.3" ]; then bash .travis/setup-webserver.sh; fi
-    - if [ "$TRAVIS_PHP_VERSION" != "5.3" ]; then php -S localhost:8080 -t web &> /dev/null ; fi &
+    - sh -e /etc/init.d/xvfb start
+    - export DISPLAY=:99
+    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar
+    - java -jar selenium-server-standalone-2.39.0.jar > /dev/null &
+    - sleep 5
+
+after_failure:
+    - cat /var/log/nginx/error.log
 
 script:
     - bin/phpspec run --f=dot

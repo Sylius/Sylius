@@ -59,7 +59,6 @@
         "behat/mink-goutte-driver":          "*",
         "behat/mink-selenium2-driver":       "*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "doctrine/mongodb-odm":              "1.0.*@dev",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "2.0.*@dev",
         "phpunit/phpunit":                   "3.7.x@stable"
