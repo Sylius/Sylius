@@ -64,15 +64,17 @@ $ tail -f app/logs/prod.log
 $ tail -f app/logs/dev.log
 ```
 
+If you are using the supplied Vagrant development environment, please see the related [Troubleshooting guide](vagrant/README.md#Troubleshooting) for more information.
+
 Contributing
 ------------
 
 All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
-Sylius on twitter
+Sylius on Twitter
 -----------------
 
-If you want to keep up with the updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
+If you want to keep up with the updates, [follow the official Sylius account on Twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------
