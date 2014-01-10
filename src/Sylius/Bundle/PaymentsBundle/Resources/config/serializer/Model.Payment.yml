@@ -1,4 +1,4 @@
-Sylius\Bundle\PaymntsBundle\Model\Payment:
+Sylius\Bundle\PaymentsBundle\Model\Payment:
     exclusion_policy: ALL
     xml_root_name: payment
     properties:
