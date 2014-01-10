@@ -20,10 +20,10 @@ Sylius\Bundle\AddressingBundle\Model\Province:
           href:
                 route: sylius_api_province_show
                 parameters:
-                    countryId: expr(object.geCountry().getId())
+                    countryId: expr(object.getCountry().getId())
                     id: expr(object.getId())
         - rel: country
           href:
                 route: sylius_api_country_show
                 parameters:
-                    id: expr(object.geCountry().getId())
+                    id: expr(object.getCountry().getId())
