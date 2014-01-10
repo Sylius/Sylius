@@ -90,19 +90,18 @@ class ProductController extends ResourceController
      */
     public function historyAction(Request $request)
     {
-        $config = $this->getConfiguration();
-        $logEntryRepository = $this->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $logEntryRepository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
 
         $product = $this->findOr404();
 
         $data = array(
-            $config->getResourceName() => $product,
-            'logs'                     => $logEntryRepository->getLogEntries($product)
+            $this->config->getResourceName() => $product,
+            'logs'                           => $logEntryRepository->getLogEntries($product)
         );
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('history.html'))
+            ->setTemplate($this->config->getTemplate('history.html'))
             ->setData($data)
         ;
 
