@@ -31,7 +31,7 @@
             </cascade>
         </one-to-many>
         
-       <many-to-many field="products" mapped-by="taxons" target-entity="Product"/>
+       <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface"/>
     </mapped-superclass>
 
 </doctrine-mapping>

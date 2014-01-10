@@ -35,7 +35,7 @@
             <join-column name="restricted_zone" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-many field="taxons" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
+        <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
             <join-table name="sylius_product_taxon">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
