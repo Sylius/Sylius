@@ -106,3 +106,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Bundle\CoreBundle\Model\Group
+        sylius.locale:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Bundle\CoreBundle\Model\Locale

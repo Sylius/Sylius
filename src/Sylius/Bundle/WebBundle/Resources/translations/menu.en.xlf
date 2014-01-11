@@ -10,6 +10,14 @@
         <source>sylius.backend.menu.main.configuration</source>
         <target>Configuration</target>
       </trans-unit>
+      <trans-unit id="a372a7d5b6e4991da23009440f5b1c98" resname="sylius.backend.menu.main.locales">
+        <source>sylius.backend.menu.main.locales</source>
+        <target>Locales</target>
+      </trans-unit>
+      <trans-unit id="b372a7d5b6e4991da23009440f5b1c98" resname="sylius.backend.menu.sidebar.locales">
+        <source>sylius.backend.menu.sidebar.locales</source>
+        <target>Locales</target>
+      </trans-unit>
       <trans-unit id="b3f20139c90a466753cd35511725f7a0" resname="sylius.backend.menu.main.countries">
         <source>sylius.backend.menu.main.countries</source>
         <target>Countries</target>

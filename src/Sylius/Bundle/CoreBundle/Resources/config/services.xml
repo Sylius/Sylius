@@ -139,6 +139,10 @@
             <argument>%sylius.model.group.class%</argument>
             <tag name="form.type" alias="sylius_group" />
         </service>
+        <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
+            <argument>%sylius.model.locale.class%</argument>
+            <tag name="form.type" alias="sylius_locale" />
+        </service>
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />

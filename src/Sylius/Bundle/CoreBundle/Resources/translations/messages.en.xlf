@@ -38,6 +38,14 @@
         <source>sylius.form.image.file</source>
         <target>Image</target>
       </trans-unit>
+      <trans-unit id="f4a80b22c82cd36f31e453b1a5c04c1f" resname="sylius.form.locale.code">
+        <source>sylius.form.locale.code</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="10b94260928e48f4a26e165ec94eb1b5" resname="sylius.form.locale.enabled">
+        <source>sylius.form.locale.enabled</source>
+        <target>Enabled</target>
+      </trans-unit>
       <trans-unit id="d0a428ce7a524cee57efe279770f7ccf" resname="sylius.form.order_filter.created_at_from">
         <source>sylius.form.order_filter.created_at_from</source>
         <target>From</target>

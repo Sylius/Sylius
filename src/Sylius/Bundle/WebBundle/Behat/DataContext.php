@@ -749,6 +749,28 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^the following locales are defined:$/
+     * @Given /^there are following locales configured:$/
+     */
+    public function thereAreLocales(TableNode $table)
+    {
+        $repository = $this->getRepository('locale');
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $locale = $repository->createNew();
+            $locale->setCode($data['code']);
+
+            if (isset($data['enabled'])) {
+                $locale->setEnabled('yes' === $data['enabled']);
+            }
+
+            $manager->persist($locale);
+            $manager->flush();
+        }
+    }
+
+    /**
      * @Given /^the following shipping categories are configured:$/
      * @Given /^the following shipping categories exist:$/
      * @Given /^there are following shipping categories:$/

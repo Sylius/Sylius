@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_locale_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.locale:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Locale:index.html.twig
+            sortable: true
+            sorting:
+                code: desc
+
+sylius_backend_locale_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.locale:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Locale:create.html.twig
+            redirect: sylius_backend_locale_index
+
+sylius_backend_locale_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.locale:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Locale:update.html.twig
+            redirect: sylius_backend_locale_index
+
+sylius_backend_locale_delete:
+    pattern: /{id}/delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.locale:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_locale_index
