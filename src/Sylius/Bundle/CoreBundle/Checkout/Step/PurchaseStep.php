@@ -47,7 +47,6 @@ class PurchaseStep extends CheckoutStep
     {
         $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
         $this->getHttpRequestVerifier()->invalidate($token);
-        $this->getCartProvider()->abandonCart();
 
         $status = new StatusRequest($token);
         $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
@@ -96,9 +95,18 @@ class PurchaseStep extends CheckoutStep
             );
         }
 
-        $this->get('session')->getFlashBag()->add($type, $this->get('translator')->trans($msg, array(), 'flashes'));
+        $this->get('session')->getFlashBag()->add(
+            $type, $this->get('translator')->trans($msg, array(), 'flashes')
+        );
 
-        return $this->complete();
+        // Complete checkout if payment success
+        if ($status->isSuccess()) {
+            $this->getCartProvider()->abandonCart();
+            return $this->complete();
+        }
+
+        // Return to payment step
+        return $this->redirect($this->generateUrl('sylius_checkout_payment'));
     }
 
     /**
