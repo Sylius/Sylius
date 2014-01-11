@@ -17,7 +17,7 @@
                                             {{ form_widget(member[form.type.vars.value], {'attr': {'class': 'select2 float-right input-large'}}) }}
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="#" class="btn btn-danger collection-remove-btn float-left"><i class="icon-trash icon-white"></i></a>
+                                            <a href="#" class="btn btn-danger collection-remove-btn float-left"><i class="glyphicon glyphicon-trash icon-white"></i></a>
                                         </div>
                                     </div>
                                 {% endif %}
@@ -28,6 +28,7 @@
                 {% set prototypeId = 'sylius-zone-members-' ~ form.type.vars.value|default(constant('Sylius\\Bundle\\AddressingBundle\\Model\\ZoneInterface::TYPE_COUNTRY')) %}
                 <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="{{ prototypeId }}" data-collection="{{ prototypeId }}">{{ 'sylius.zone.add_member'|trans }}</a>
             </div>
+        </div>
     </div>
 </fieldset>
 <hr>

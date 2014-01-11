@@ -11,9 +11,7 @@
 
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

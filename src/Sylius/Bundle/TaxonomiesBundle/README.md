@@ -1,18 +1,18 @@
-SyliusTaxonomiesBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusTaxonomiesBundle.png)](http://travis-ci.org/Sylius/SyliusTaxonomiesBundle)
+SyliusTaxonomiesBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusTaxonomiesBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusTaxonomiesBundle)
 ======================
 
-Flexible categorization system based on [Spree Taxonomies system](http://guides.spreecommerce.com/taxonomy.html).
+Flexible categorization system based on [Spree Taxonomies system](http://guides.spreecommerce.com/taxonomy.html) for [**Symfony2**](http://symfony.com) ecommerce applications.
 
 Sylius
 ------
 
 **Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
-``` bash
-$ composer install --dev --prefer-dist
+```bash
+$ composer install
 $ bin/phpspec run -f pretty
 ```
 
@@ -29,7 +29,12 @@ All informations about contributing to Sylius can be found on [this page](http:/
 Mailing lists
 -------------
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).  
+### Users
+
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account

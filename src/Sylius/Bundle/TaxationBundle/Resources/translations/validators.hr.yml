@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Unesite ime poreznih kategorija.
+    tax_rate:
+        category:
+            not_blank: Odaberite poreznu kategoriju.
+        name:
+            not_blank: Unesite ime porezne stopa.
+        amount:
+            not_blank: Unesite iznos porezne stope.
+        calculator:
+            not_blank: Odaberite porezni kalkulator.

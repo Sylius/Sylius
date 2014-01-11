@@ -62,26 +62,31 @@ class Payment implements PaymentInterface
      */
     protected $creditCard;
 
-    /*
+    /**
      * Processing logs.
      *
-     * @var Collection
+     * @var PaymentLogInterface[]
      */
     protected $logs;
 
     /**
      * Creation date.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * Last update time.
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
+
+    /**
+     * @var array
+     */
+    protected $details;
 
     /**
      * Constructor.
@@ -89,9 +94,10 @@ class Payment implements PaymentInterface
     public function __construct()
     {
         $this->amount = 0;
-        $this->state = PaymentInterface::STATE_PENDING;
+        $this->state = PaymentInterface::STATE_NEW;
         $this->logs = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
+        $this->details = array();
     }
 
     /**
@@ -144,6 +150,8 @@ class Payment implements PaymentInterface
         if (null !== $this->creditCard) {
             return $this->creditCard;
         }
+
+        return null;
     }
 
     /**
@@ -274,5 +282,21 @@ class Payment implements PaymentInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @param array $details
+     */
+    public function setDetails(array $details)
+    {
+        $this->details = $details;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

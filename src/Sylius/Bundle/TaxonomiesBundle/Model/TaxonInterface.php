@@ -56,7 +56,7 @@ interface TaxonInterface
     /**
      * Get children taxons.
      *
-     * @return Collection
+     * @return TaxonInterface[]
      */
     public function getChildren();
 

@@ -1,19 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Product" table="sylius_product">
-        <field name="shortDescription" column="short_description" type="string" nullable="true" />
+        <field name="shortDescription" column="short_description" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
         <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-many field="taxons" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
+        <many-to-one field="shippingCategory" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface">
+            <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <many-to-one field="restrictedZone" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneInterface">
+            <join-column name="restricted_zone" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
             <join-table name="sylius_product_taxon">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

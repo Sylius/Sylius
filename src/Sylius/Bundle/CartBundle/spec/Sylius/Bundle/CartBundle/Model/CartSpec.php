@@ -30,7 +30,7 @@ class CartSpec extends ObjectBehavior
 
     function it_extends_Sylius_order()
     {
-        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\Order');
     }
 
     function it_is_not_expired_by_default()

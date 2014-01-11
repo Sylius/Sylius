@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 
+use Symfony\Component\Form\FormInterface;
+
 /**
  * Settings form factory interface
  *

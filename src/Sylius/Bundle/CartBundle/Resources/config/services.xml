@@ -25,6 +25,9 @@
 
         <parameter key="sylius.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
         <parameter key="sylius.cart_flash_listener.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
+        <parameter key="sylius.refresh_cart_listener.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
+
+        <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
     </parameters>
 
     <services>
@@ -68,6 +71,7 @@
             <argument type="service" id="sylius.cart_storage" />
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="sylius.repository.cart" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.cart_storage.session" class="%sylius.cart_storage.session.class%">
@@ -86,6 +90,15 @@
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <call method="setMessages"/>
+        </service>
+        
+        <service id="sylius.refresh_cart_listener" class="%sylius.refresh_cart_listener.class%">
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" priority="255" />
+        </service>
+
+        <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">
+            <argument type="service" id="sylius.manager.cart" />
+            <argument type="service" id="sylius.repository.cart" />
         </service>
     </services>
 </container>

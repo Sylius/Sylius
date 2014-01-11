@@ -5,14 +5,15 @@ sylius_tax_rate_index:
     pattern: /
     defaults:
         _controller: sylius.controller.tax_rate:indexAction
-        _sortable: true
-        _sorting:
-            name: desc
+        _sylius:
+            sortable: true
+            sorting:
+                name: desc
     requirements:
         _method: GET
 
 sylius_tax_rate_create:
-    pattern: /{id}/create
+    pattern: /create
     defaults:
         _controller: sylius.controller.tax_rate:createAction
     requirements:

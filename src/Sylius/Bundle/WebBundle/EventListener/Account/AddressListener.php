@@ -21,13 +21,22 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class AddressListener
 {
+    /**
+     * @var SecurityContextInterface
+     */
     protected $securityContext;
 
+    /**
+     * @param SecurityContextInterface $securityContext
+     */
     public function __construct(SecurityContextInterface $securityContext)
     {
         $this->securityContext = $securityContext;
     }
 
+    /**
+     * @param ResourceEvent $event
+     */
     public function onAddressPreDelete(ResourceEvent $event)
     {
         $address = $event->getSubject();

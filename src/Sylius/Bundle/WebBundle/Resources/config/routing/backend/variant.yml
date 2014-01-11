@@ -29,6 +29,7 @@ sylius_backend_variant_delete:
     defaults:
         _controller: sylius.controller.variant:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect:
                 route: sylius_backend_product_show
                 parameters: {'id': $productId}

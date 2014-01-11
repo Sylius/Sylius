@@ -99,6 +99,8 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShipment(ShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
+
+        return $this;
     }
 
     /**
@@ -115,6 +117,8 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShippable(ShippableInterface $shippable)
     {
         $this->shippable = $shippable;
+
+        return $this;
     }
 
     /**
@@ -131,6 +135,8 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
+
+        return $this;
     }
 
     /**
@@ -147,6 +153,8 @@ class ShipmentItem implements ShipmentItemInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -163,5 +171,7 @@ class ShipmentItem implements ShipmentItemInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

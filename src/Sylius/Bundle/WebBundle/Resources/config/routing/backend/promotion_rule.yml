@@ -7,4 +7,7 @@ sylius_backend_promotion_rule_delete:
     defaults:
         _controller: sylius.controller.promotion_rule:deleteAction
         _sylius:
-            redirect: referer
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect:
+                route: sylius_backend_promotion_show
+                parameters: {'id': $promotionId}

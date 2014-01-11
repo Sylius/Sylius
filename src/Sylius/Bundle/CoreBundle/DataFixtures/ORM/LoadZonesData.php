@@ -34,7 +34,7 @@ class LoadZonesData extends DataFixture
             'GB'
         );
 
-        $restOfWorldCountries = array_diff(Intl::getRegionBundle()->getCountryNames(), $euCountries + array('US'));
+        $restOfWorldCountries = array_diff(array_keys(Intl::getRegionBundle()->getCountryNames()), $euCountries + array('US'));
 
         $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $euCountries));
         $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
@@ -69,10 +69,7 @@ class LoadZonesData extends DataFixture
             $zoneMember = $this->getZoneMemberRepository($type)->createNew();
 
             if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
-                call_user_func(array(
-                    $zoneMember, 'set'.ucfirst($type)),
-                    $this->getReference('Sylius.'.ucfirst($type).'.'.$id)
-                );
+                $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));
             }
 
             $zone->addMember($zoneMember);

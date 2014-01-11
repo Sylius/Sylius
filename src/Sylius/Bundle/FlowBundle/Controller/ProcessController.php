@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Controller;
 
+use Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +47,8 @@ class ProcessController extends ContainerAware
      * @param string  $scenarioAlias
      * @param string  $stepName
      *
+     * @throws NotFoundHttpException
+     *
      * @return Response
      */
     public function displayAction(Request $request, $scenarioAlias, $stepName)
@@ -56,7 +59,7 @@ class ProcessController extends ContainerAware
 
         try {
             return $coordinator->display($scenarioAlias, $stepName, $request->query);
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new NotFoundHttpException('The step you are looking for is not found.', $e);
         }
     }

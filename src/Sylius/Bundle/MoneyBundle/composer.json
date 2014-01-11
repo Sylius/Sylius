@@ -7,21 +7,25 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusMoneyBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
+        "symfony/intl":             "~2.3",
         "sylius/resource-bundle":   "1.0.*@dev",
-        "mathiasverraes/money":     "dev-master@dev"
+        "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev",
@@ -32,7 +36,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\MoneyBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\MoneyBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/MoneyBundle",
     "extra": {

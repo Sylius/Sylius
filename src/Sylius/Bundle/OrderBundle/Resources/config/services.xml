@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.generator.order_number.class">Sylius\Bundle\OrderBundle\Generator\OrderNumberGenerator</parameter>
+        <parameter key="sylius.listener.order_number.class">Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.order" class="%sylius.controller.order.class%">
+            <argument>sylius</argument>
+            <argument>order</argument>
+            <argument>SyliusOrderBundle:Order</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.controller.order_item" class="%sylius.controller.order_item.class%">
+            <argument>sylius</argument>
+            <argument>order_item</argument>
+            <argument>SyliusOrderBundle:Item</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.controller.adjustment" class="%sylius.controller.adjustment.class%">
+            <argument>sylius</argument>
+            <argument>adjustment</argument>
+            <argument>SyliusOrderBundle:Adjustment</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_group.order%</argument>
+            <tag name="form.type" alias="sylius_order" />
+        </service>
+        <service id="sylius.form.type.order_item" class="%sylius.form.type.order_item.class%">
+            <argument>%sylius.model.order_item.class%</argument>
+            <argument>%sylius.validation_group.order_item%</argument>
+            <tag name="form.type" alias="sylius_order_item" />
+        </service>
+        <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
+            <argument>%sylius.model.adjustment.class%</argument>
+            <argument>%sylius.validation_group.adjustment%</argument>
+            <tag name="form.type" alias="sylius_adjustment" />
+        </service>
+
+        <service id="sylius.generator.order_number" class="%sylius.generator.order_number.class%">
+            <argument type="service" id="sylius.repository.order" />
+        </service>
+
+        <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
+            <argument type="service" id="sylius.generator.order_number" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
+        </service>
+    </services>
+</container>

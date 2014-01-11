@@ -46,7 +46,7 @@ class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
         $taxons = array();
 
         foreach ($this->taxonomies as $taxonomy) {
-            $taxons[strtolower($taxonomy->getName())] = array();
+            $taxons[$taxonomy->getId()] = array();
         }
 
         if (null === $value) {
@@ -58,7 +58,7 @@ class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
         }
 
         foreach ($value as $taxon) {
-            $taxons[strtolower($taxon->getTaxonomy())][] = $taxon;
+            $taxons[$taxon->getTaxonomy()->getId()][] = $taxon;
         }
 
         return $taxons;

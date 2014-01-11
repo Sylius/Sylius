@@ -112,7 +112,7 @@
             </trans-unit>
             <trans-unit id="944cf6ef4aa78e99e44806e693c69a30" resname="sylius.form.user.enabled">
                 <source>sylius.form.user.enabled</source>
-                <target>Включенно</target>
+                <target>Активен</target>
             </trans-unit>
             <trans-unit id="51d1b3166647640229e7329940d07e58" resname="sylius.form.user.first_name">
                 <source>sylius.form.user.first_name</source>
@@ -144,11 +144,15 @@
             </trans-unit>
             <trans-unit id="c7a57565525fe78457f6a67bd13fafc5" resname="sylius.form.variant.on_hand">
                 <source>sylius.form.variant.on_hand</source>
-                <target>Текущий ассортимент</target>
+                <target>Количество на складе</target>
             </trans-unit>
             <trans-unit id="4ecf22f299095448d542fcf93b8a6b33" resname="sylius.form.variant.price">
                 <source>sylius.form.variant.price</source>
                 <target>Цена</target>
+            </trans-unit>
+            <trans-unit id="737416fcfe721dea8cfc1247ec9e2c3b" resname="sylius.form.product.shipping_category">
+                <source>sylius.form.product.shipping_category</source>
+                <target>Категория доставки</target>
             </trans-unit>
         </body>
     </file>

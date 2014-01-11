@@ -15,10 +15,27 @@ use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
+use Sylius\Bundle\AddressingBundle\Model\ProvinceInterface;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Model\User;
+use Sylius\Bundle\CoreBundle\Model\Order;
+use Sylius\Bundle\CoreBundle\Model\OrderItem;
+use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
+use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Locale\Locale;
@@ -64,23 +81,25 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereAreFollowingTaxonomies(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxonomy($data['name']);
+            $this->thereIsTaxonomy($data['name'], false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^I created taxonomy "([^""]*)"$/
      */
-    public function thereIsTaxonomy($name)
+    public function thereIsTaxonomy($name, $flush = true)
     {
         $taxonomy = $this->getRepository('taxonomy')->createNew();
         $taxonomy->setName($name);
 
         $this->getEntityManager()->persist($taxonomy);
-        $this->getEntityManager()->flush();
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
     }
 
     /**
@@ -101,6 +120,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 $taxonName = trim($taxonName);
 
                 if (!isset($taxons[$taxonName])) {
+                    /* @var $taxon TaxonInterface */
                     $taxon = $this->getRepository('taxon')->createNew();
                     $taxon->setName($taxonName);
 
@@ -134,19 +154,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
-                isset($data['address']) ? $data['address'] : null
+                isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
+                false
             );
         }
+
+        $this->getEntityManager()->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $flush = true)
     {
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
 
-            $user = new User();
-
+            /* @var $user UserInterface */
+            $user = $this->getRepository('user')->createNew();
             $user->setFirstname($this->faker->firstName);
             $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
@@ -164,10 +187,37 @@ class DataContext extends BehatContext implements KernelAwareInterface
             }
 
             $this->getEntityManager()->persist($user);
-            $this->getEntityManager()->flush();
+            if ($flush) {
+                $this->getEntityManager()->flush();
+            }
         }
 
         return $user;
+    }
+
+    /**
+     * @Given /^there are groups:$/
+     * @Given /^there are following groups:$/
+     * @Given /^the following groups exist:$/
+     */
+    public function thereAreGroups(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('group');
+
+        foreach ($table->getHash() as $data) {
+            $group = $repository->createNew();
+            $group->setName(trim($data['name']));
+
+            $roles = explode(',', $data['roles']);
+            $roles = array_map('trim', $roles);
+
+            $group->setRoles($roles);
+
+            $manager->persist($group);
+        }
+
+        $manager->flush();
     }
 
     /**
@@ -180,12 +230,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         $manager = $this->getEntityManager();
         $orderRepository = $this->getRepository('order');
+        $shippingFactory = $this->getContainer()->get('sylius.order_processing.shipment_factory');
 
+        $currentOrderNumber = 1;
         foreach ($table->getHash() as $data) {
-            $order = $orderRepository->createNew();
-
             $address = $this->createAddress($data['address']);
 
+            /* @var $order Order */
+            $order = $orderRepository->createNew();
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
@@ -195,15 +247,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 $order->addShipment($this->createShipment($data['shipment']));
             }
 
+            $order->setNumber(str_pad($currentOrderNumber, 9, 0, STR_PAD_LEFT));
             $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
 
+            $order->setCurrency('EUR');
             $order->complete();
 
+            $shippingFactory->updateShipmentStates($order);
+
             $manager->persist($order);
-            $manager->flush();
 
             $this->orders[$order->getNumber()] = $order;
+
+            ++$currentOrderNumber;
         }
+
+        $manager->flush();
     }
 
     /**
@@ -218,13 +277,12 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($items->getHash() as $data) {
             $product = $this->findOneByName('product', trim($data['product']));
-            $quantity = $data['quantity'];
 
+            /* @var $item OrderItem */
             $item = $orderItemRepository->createNew();
-
             $item->setVariant($product->getMasterVariant());
             $item->setUnitPrice($product->getMasterVariant()->getPrice());
-            $item->setQuantity($quantity);
+            $item->setQuantity($data['quantity']);
 
             $order->addItem($item);
         }
@@ -232,6 +290,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $order->calculateTotal();
         $order->complete();
 
+        $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
         $this->getService('event_dispatcher')->dispatch('sylius.cart_change', new GenericEvent($order));
 
         $manager->persist($order);
@@ -247,12 +306,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'password');
+            $user = $this->thereIsUser($data['user'], 'password', null, 'yes', null, false);
             $user->addAddress($address);
             $manager->persist($address);
             $manager->persist($user);
-            $manager->flush();
         }
+
+        $manager->flush();
     }
 
     /**
@@ -293,9 +353,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('promotion_rule');
 
         foreach ($table->getHash() as $data) {
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+
             $rule = $repository->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $rule->setConfiguration($this->getConfiguration($data['configuration']));
+            $rule->setConfiguration($configuration);
 
             $promotion->addRule($rule);
 
@@ -316,9 +378,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('promotion_action');
 
         foreach ($table->getHash() as $data) {
+            $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
+
             $action = $repository->createNew();
             $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
-            $action->setConfiguration($this->getConfiguration($data['configuration']));
+            $action->setConfiguration($configuration);
 
             $promotion->addAction($action);
 
@@ -427,7 +491,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function productIsAvailableInAllVariations($productName)
     {
         $product = $this->findOneByName('product', $productName);
-        $manager = $this->getEntityManager();
 
         $this->getService('sylius.generator.variant')->generate($product);
 
@@ -435,7 +498,20 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $variant->setPrice($product->getMasterVariant()->getPrice());
         }
 
+        $manager = $this->getEntityManager();
         $manager->persist($product);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^I have deleted the ([^"]*) "([^""]*)"/
+     */
+    public function haveDeleted($resource, $name)
+    {
+        $resource = $this->findOneByName($resource, $name);
+
+        $manager = $this->getEntityManager();
+        $manager->remove($resource);
         $manager->flush();
     }
 
@@ -471,24 +547,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreOptions(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsOption($data['name'], $data['values'], $data['presentation']);
+            $this->thereIsOption($data['name'], $data['values'], $data['presentation'], false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^I created option "([^""]*)" with values "([^""]*)"$/
      */
-    public function thereIsOption($name, $values, $presentation = null)
+    public function thereIsOption($name, $values, $presentation = null, $flush = true)
     {
-        $repository = $this->getRepository('option');
-        $manager = $this->getEntityManager();
-
         $optionValueClass = $this->getContainer()->getParameter('sylius.model.option_value.class');
-        $presentation = $presentation ?: $name;
 
-        $option = $repository->createNew();
+        $option = $this->getRepository('option')->createNew();
         $option->setName($name);
-        $option->setPresentation($presentation);
+        $option->setPresentation($presentation ?: $name);
 
         foreach (explode(',', $values) as $value) {
             $optionValue = new $optionValueClass;
@@ -497,8 +571,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $option->addValue($optionValue);
         }
 
+        $manager = $this->getEntityManager();
         $manager->persist($option);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $option;
     }
@@ -520,31 +597,33 @@ class DataContext extends BehatContext implements KernelAwareInterface
             }
             $this->thereIsProperty($data['name'], $additionalData);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^There is property "([^""]*)"$/
      * @Given /^I created property "([^""]*)"$/
      */
-    public function thereIsProperty($name, $additionalData = array())
+    public function thereIsProperty($name, $additionalData = array(), $flush = true)
     {
-        $repository = $this->getRepository('property');
-        $manager = $this->getEntityManager();
-
         $additionalData = array_merge(array(
             'presentation' => $name,
             'type' => 'text'
         ), $additionalData);
 
-        $property = $repository->createNew();
+        $property = $this->getRepository('property')->createNew();
         $property->setName($name);
 
         foreach ($additionalData as $key => $value) {
             $property->{'set'.\ucfirst($key)}($value);
         }
 
+        $manager = $this->getEntityManager();
         $manager->persist($property);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $property;
     }
@@ -575,24 +654,26 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreTaxCategories(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxCategory($data['name']);
+            $this->thereIsTaxCategory($data['name'], false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^There is tax category "([^""]*)"$/
      * @Given /^I created tax category "([^""]*)"$/
      */
-    public function thereIsTaxCategory($name)
+    public function thereIsTaxCategory($name, $flush = true)
     {
-        $repository = $this->getRepository('tax_category');
-        $manager = $this->getEntityManager();
-
-        $category = $repository->createNew();
+        $category = $this->getRepository('tax_category')->createNew();
         $category->setName($name);
 
+        $manager = $this->getEntityManager();
         $manager->persist($category);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $category;
     }
@@ -604,20 +685,20 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreTaxRates(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxRate($data['amount'], $data['name'], $data['category'], $data['zone'], isset($data['included in price?']) ? $data['included in price?'] : false);
+            $this->thereIsTaxRate($data['amount'], $data['name'], $data['category'], $data['zone'], isset($data['included in price?']) ? $data['included in price?'] : false, false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^there is (\d+)% tax "([^""]*)" for category "([^""]*)" within zone "([^""]*)"$/
      * @Given /^I created (\d+)% tax "([^""]*)" for category "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsTaxRate($amount, $name, $category, $zone, $includedInPrice = false)
+    public function thereIsTaxRate($amount, $name, $category, $zone, $includedInPrice = false, $flush = true)
     {
-        $repository = $this->getRepository('tax_rate');
-        $manager = $this->getEntityManager();
-
-        $rate = $repository->createNew();
+        /* @var $rate TaxRateInterface */
+        $rate = $this->getRepository('tax_rate')->createNew();
         $rate->setName($name);
         $rate->setAmount($amount / 100);
         $rate->setIncludedInPrice($includedInPrice);
@@ -625,8 +706,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $rate->setZone($this->findOneByName('zone', $zone));
         $rate->setCalculator('default');
 
+        $manager = $this->getEntityManager();
         $manager->persist($rate);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $rate;
     }
@@ -637,24 +721,29 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreExchangeRates(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsExchangeRate($data['currency'], $data['rate']);
+            $this->thereIsExchangeRate($data['currency'], $data['rate'], false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^I created exchange rate "([^""]*)"$/
      */
-    public function thereIsExchangeRate($currency, $rate = 1)
+    public function thereIsExchangeRate($currency, $rate = 1, $flush = true)
     {
         $repository = $this->getRepository('exchange_rate');
-        $manager = $this->getEntityManager();
 
+        /* @var $exchangeRate ExchangeRateInterface */
         $exchangeRate = $repository->createNew();
         $exchangeRate->setCurrency($currency);
         $exchangeRate->setRate($rate);
 
+        $manager = $this->getEntityManager();
         $manager->persist($exchangeRate);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $exchangeRate;
     }
@@ -667,23 +756,27 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreShippingCategories(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsShippingCategory($data['name']);
+            $this->thereIsShippingCategory($data['name'], false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^I created shipping category "([^""]*)"$/
      * @Given /^there is shipping category "([^""]*)"$/
      */
-    public function thereIsShippingCategory($name)
+    public function thereIsShippingCategory($name, $flush = true)
     {
+        /* @var $category ShippingCategoryInterface */
         $category = $this->getRepository('shipping_category')->createNew();
         $category->setName($name);
 
         $manager = $this->getEntityManager();
-
         $manager->persist($category);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $category;
     }
@@ -697,8 +790,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $category = array_key_exists('category', $data) ? $data['category'] : null;
-            $method = $this->thereIsShippingMethod($data['name'], $data['zone'], $category);
+            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
+            $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
+
+            $this->thereIsShippingMethod($data['name'], $data['zone'], $category, $calculator, $configuration, false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -712,6 +810,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('shipping_method_rule');
 
         foreach ($table->getHash() as $data) {
+            /* @var $rule RuleInterface */
             $rule = $repository->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($this->getConfiguration($data['configuration']));
@@ -728,8 +827,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $zoneName)
+    public function thereIsShippingMethod($name, $zoneName, $category = null, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $flush = true)
     {
+        /* @var $method ShippingMethodInterface */
         $method = $this
             ->getRepository('shipping_method')
             ->createNew()
@@ -737,13 +837,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         $method->setName($name);
         $method->setZone($this->findOneByName('zone', $zoneName));
-        $method->setCalculator(DefaultCalculators::PER_ITEM_RATE);
-        $method->setConfiguration(array('amount' => 25.00));
+        $method->setCalculator($calculator);
+        $method->setConfiguration($configuration ?: array('amount' => 2500));
 
         $manager = $this->getEntityManager();
-
         $manager->persist($method);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $method;
     }
@@ -759,13 +860,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $repository = $this->getRepository('payment_method');
 
         foreach ($table->getHash() as $data) {
+            /* @var $method PaymentMethodInterface */
             $method = $repository->createNew();
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
 
             $enabled = true;
 
-            if (array_key_exists('enabled', $data)) {
+            if (isset($data['enabled'])) {
                 $enabled = 'yes' === trim($data['enabled']);
             }
 
@@ -785,18 +887,20 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
-            $this->thereisCountry($data['name'], $provinces);
+            $this->thereisCountry($data['name'], $provinces, false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^I created country "([^""]*)"$/
      * @Given /^there is country "([^""]*)"$/
      */
-    public function thereIsCountry($name, $provinces = null)
+    public function thereIsCountry($name, $provinces = null, $flush = true)
     {
+        /* @var $country CountryInterface */
         $country = $this->getRepository('country')->createNew();
-
         $country->setName(trim($name));
         $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
 
@@ -808,9 +912,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
 
         $manager = $this->getEntityManager();
-
         $manager->persist($country);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $country;
     }
@@ -822,20 +927,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreFollowingZones(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsZone($data['name'], $data['type'], explode(',', $data['members']));
+            $this->thereIsZone($data['name'], $data['type'], explode(',', $data['members']), false);
         }
+
+        $this->getEntityManager()->flush();
     }
 
     /**
      * @Given /^I created zone "([^"]*)"$/
      * @Given /^there is zone "([^"]*)"$/
      */
-    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array())
+    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $flush = true)
     {
         $repository = $this->getRepository('zone');
 
+        /* @var $zone ZoneInterface */
         $zone = $repository->createNew();
-
         $zone->setName($name);
         $zone->setType($type);
 
@@ -856,9 +963,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
 
         $manager = $this->getEntityManager();
-
         $manager->persist($zone);
-        $manager->flush();
+        if ($flush) {
+            $manager->flush();
+        }
 
         return $zone;
     }
@@ -868,11 +976,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function theDefaultTaxZoneIs($zone)
     {
-        $settingsManager = $this->getService('sylius.settings.manager');
-
-        $settings = $settingsManager->loadSettings('taxation');
         $zone = $this->findOneByName('zone', $zone);
 
+        $settingsManager = $this->getService('sylius.settings.manager');
+        $settings = $settingsManager->loadSettings('taxation');
         $settings->set('default_tax_zone', $zone);
 
         $settingsManager->saveSettings('taxation', $settings);
@@ -883,12 +990,11 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereisProvince($name)
     {
+        /* @var $province ProvinceInterface */
         $province = $this->getRepository('province')->createNew();
         $province->setName($name);
 
-        $manager = $this->getEntityManager();
-
-        $manager->persist($province);
+        $this->getEntityManager()->persist($province);
 
         return $province;
     }
@@ -912,77 +1018,6 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * Create an address instance from string.
-     *
-     * @param string $string
-     *
-     * @return AddressInterface
-     */
-    private function createAddress($string)
-    {
-        $address = $this->getRepository('address')->createNew();
-
-        $addressData = explode(',', $string);
-        $addressData = array_map('trim', $addressData);
-
-        list($firstname, $lastname) = explode(' ', $addressData[0]);
-
-        $address->setFirstname(trim($firstname));
-        $address->setLastname(trim($lastname));
-        $address->setStreet($addressData[1]);
-        $address->setPostcode($addressData[2]);
-        $address->setCity($addressData[3]);
-        $address->setCountry($this->findOneByName('country', $addressData[4]));
-
-        return $address;
-    }
-
-    /**
-     * Create an shipment instance from string.
-     *
-     * @param string $string
-     *
-     * @return ShipmentInterface
-     */
-    private function createShipment($string)
-    {
-        $shipment = $this->getRepository('shipment')->createNew();
-
-        $shipmentData = explode(',', $string);
-        $shipmentData = array_map('trim', $shipmentData);
-
-        $shipment->setMethod($this->getRepository('shipping_method')->findOneByName($shipmentData[0]));
-        if (isset($shipmentData[1])) {
-            $shipment->setState($shipmentData[1]);
-        }
-        if (isset($shipmentData[2])) {
-            $shipment->setTracking($shipmentData[2]);
-        }
-
-        return $shipment;
-    }
-
-    /**
-     * Configuration converter.
-     *
-     * @param string $configurationString
-     *
-     * @return array
-     */
-    private function getConfiguration($configurationString)
-    {
-        $configuration = array();
-        $list = explode(',', $configurationString);
-
-        foreach ($list as $parameter) {
-            list($key, $value) = explode(':', $parameter);
-            $configuration[strtolower(trim(str_replace(' ', '_', $key)))] = trim($value);
-        }
-
-        return $configuration;
-    }
-
-    /**
      * Find one resource by name.
      *
      * @param string $type
@@ -1002,6 +1037,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
      * @param array  $criteria
      *
      * @return object
+     *
+     * @throws \InvalidArgumentException
      */
     public function findOneBy($type, array $criteria)
     {
@@ -1034,7 +1071,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     /**
      * Get entity manager.
      *
-     * @return EntityManager
+     * @return ObjectManager
      */
     public function getEntityManager()
     {
@@ -1061,5 +1098,107 @@ class DataContext extends BehatContext implements KernelAwareInterface
     protected function getService($id)
     {
         return $this->getContainer()->get($id);
+    }
+
+    /**
+     * Create an address instance from string.
+     *
+     * @param string $string
+     *
+     * @return AddressInterface
+     */
+    private function createAddress($string)
+    {
+        $addressData = explode(',', $string);
+        $addressData = array_map('trim', $addressData);
+
+        list($firstname, $lastname) = explode(' ', $addressData[0]);
+
+        /* @var $address AddressInterface */
+        $address = $this->getRepository('address')->createNew();
+        $address->setFirstname(trim($firstname));
+        $address->setLastname(trim($lastname));
+        $address->setStreet($addressData[1]);
+        $address->setPostcode($addressData[2]);
+        $address->setCity($addressData[3]);
+        $address->setCountry($this->findOneByName('country', $addressData[4]));
+
+        return $address;
+    }
+
+    /**
+     * Create an shipment instance from string.
+     *
+     * @param string $string
+     *
+     * @return ShipmentInterface
+     */
+    private function createShipment($string)
+    {
+        $shipmentData = explode(',', $string);
+        $shipmentData = array_map('trim', $shipmentData);
+
+        /* @var $shipment ShipmentInterface*/
+        $shipment = $this->getRepository('shipment')->createNew();
+        $shipment->setMethod($this->getRepository('shipping_method')->findOneByName($shipmentData[0]));
+        if (isset($shipmentData[1])) {
+            $shipment->setState($shipmentData[1]);
+        }
+        if (isset($shipmentData[2])) {
+            $shipment->setTracking($shipmentData[2]);
+        }
+
+        return $shipment;
+    }
+
+    /**
+     * Configuration converter.
+     *
+     * @param string $configurationString
+     *
+     * @return array
+     */
+    private function getConfiguration($configurationString)
+    {
+        $configuration = array();
+        $list = explode(',', $configurationString);
+
+        foreach ($list as $parameter) {
+            list($key, $value) = explode(':', $parameter);
+            $configuration[strtolower(trim(str_replace(' ', '_', $key)))] = trim($value);
+        }
+
+        return $configuration;
+    }
+
+    /**
+     * Cleaning promotion configuration that is serialized in database.
+     *
+     * @param array $configuration
+     *
+     * @return array
+     */
+    private function cleanPromotionConfiguration(array $configuration)
+    {
+        foreach ($configuration as $key => $value) {
+            switch ($key) {
+                case 'amount':
+                    $configuration[$key] = (int) $value * 100;
+                    break;
+                case 'count':
+                    $configuration[$key] = (int) $value;
+                    break;
+                case 'percentage':
+                    $configuration[$key] = (int) $value / 100;
+                    break;
+                case 'equal':
+                    $configuration[$key] = (boolean) $value;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $configuration;
     }
 }

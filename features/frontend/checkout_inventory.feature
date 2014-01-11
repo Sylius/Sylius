@@ -22,7 +22,7 @@ Feature: Checkout inventory
             | UK   | DHL Express |
           And the following payment methods exist:
             | name        | gateway | enabled |
-            | Credit Card | stripe  | yes     |
+            | Credit Card | dummy   | yes     |
           And I am logged in as administrator
 
     Scenario: Inventory is updated after buying products

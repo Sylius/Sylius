@@ -41,5 +41,21 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setOrder(OrderInterface $order = null)
     {
         $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingWeight()
+    {
+        $weight = 0;
+
+        foreach ($this->items as $item) {
+            $weight += $item->getShippable()->getShippingWeight();
+        }
+
+        return $weight;
     }
 }

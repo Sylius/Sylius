@@ -1,7 +1,8 @@
 {% macro list(users) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if users|length > 0 %}
 <table id="users" class="table">
@@ -11,27 +12,29 @@
             <th>{{ sylius_resource_sort('firstName', 'sylius.address.firstname'|trans) }}</th>
             <th>{{ sylius_resource_sort('lastName', 'sylius.address.lastname'|trans) }}</th>
             <th>{{ sylius_resource_sort('email', 'sylius.user.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('createdAt', 'sylius.user.registration_date'|trans) }}</th>
             <th>{{ sylius_resource_sort('enabled', 'sylius.user.enabled'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         {% for user in users %}
-        <tr>
+        <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
             <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
+            <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
             <td>
-                <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
-                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
+                {{ misc.state_label(user.enabled) }}
             </td>
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
+                    {% if not user.deleted %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, user.id is sameas(app.user.id)) }}
+                    {% endif %}
                 </div>
             </td>
         </tr>
@@ -40,21 +43,20 @@
 </table>
 {% else %}
 {{ alerts.info('sylius.user.no_results'|trans) }}
-</div>
 {% endif %}
 
 {% endmacro %}
 
 {% macro simple_list(users) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if users|length > 0 %}
 <table id="users" class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.user.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('email', 'sylius.user.email'|trans) }}</th>
             <th>{{ sylius_resource_sort('enabled', 'sylius.user.enabled'|trans) }}</th>
             <th></th>
@@ -62,19 +64,23 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
+        <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>
-                <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
-                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
+                {{ user.fullname }}<br>
+                <a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">
+                    {{ user.email }}
+                </a>
+                </td>
+            <td>
+                {{ misc.state_label(user.enabled) }}
             </td>
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
+                    {% if not user.deleted %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
                     {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                    {% endif %}
                 </div>
             </td>
         </tr>
@@ -83,7 +89,6 @@
 </table>
 {% else %}
 {{ alerts.info('sylius.user.no_results'|trans) }}
-</div>
 {% endif %}
 
 {% endmacro %}

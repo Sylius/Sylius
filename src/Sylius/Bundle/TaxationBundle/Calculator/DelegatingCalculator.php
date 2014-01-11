@@ -51,6 +51,8 @@ class DelegatingCalculator implements CalculatorInterface
      *
      * @param string              $name
      * @param CalculatorInterface $calculator
+     *
+     * @throws \InvalidArgumentException
      */
     public function registerCalculator($name, CalculatorInterface $calculator)
     {
@@ -65,6 +67,8 @@ class DelegatingCalculator implements CalculatorInterface
      * Unregister calculator.
      *
      * @param string $name
+     *
+     * @throws \InvalidArgumentException
      */
     public function unregisterCalculator($name)
     {
@@ -93,6 +97,8 @@ class DelegatingCalculator implements CalculatorInterface
      * @param string $name
      *
      * @return CalculatorInterface
+     *
+     * @throws \InvalidArgumentException
      */
     public function getCalculator($name)
     {

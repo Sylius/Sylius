@@ -16,6 +16,7 @@ use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Locale;
+use Symfony\Component\Validator\Constraints\Currency;
 
 /**
  * General settings schema.
@@ -25,18 +26,31 @@ use Symfony\Component\Validator\Constraints\Locale;
 class GeneralSettingsSchema implements SchemaInterface
 {
     /**
+     * @var array
+     */
+    protected $defaults;
+
+    /**
+     * @param array $defaults
+     */
+    public function __construct(array $defaults = array())
+    {
+        $this->defaults = $defaults;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildSettings(SettingsBuilderInterface $builder)
     {
         $builder
-            ->setDefaults(array(
+            ->setDefaults(array_merge(array(
                 'title'            => 'Sylius - Modern ecommerce for Symfony2',
                 'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
                 'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
                 'locale'           => 'en',
-                'currency'         => 'EUR',
-            ))
+                'currency'         => 'USD',
+            ), $this->defaults))
             ->setAllowedTypes(array(
                 'title'            => array('string'),
                 'meta_keywords'    => array('string'),
@@ -78,10 +92,11 @@ class GeneralSettingsSchema implements SchemaInterface
                     new Locale(),
                 )
             ))
-            ->add('currency', 'text', array( // TODO: use currency type when we upgrade to 2.3
+            ->add('currency', 'currency', array(
                 'label'       => 'sylius.form.settings.general.currency',
                 'constraints' => array(
-                    new NotBlank()
+                    new NotBlank(),
+                    new Currency(),
                 )
             ))
         ;

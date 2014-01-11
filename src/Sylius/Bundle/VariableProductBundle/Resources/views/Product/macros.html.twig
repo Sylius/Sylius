@@ -1,5 +1,7 @@
 {% macro list(products) %}
 
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
 {% if products|length > 0 %}
 <table class="table table-hover">
     <thead>
@@ -30,18 +32,9 @@
             <td><span class="label label-info">{{ product.updatedAt|date }}</span></td>
             <td>
                 <div class="pull-right">
-                    <a href="{{ path('sylius_product_show', {'id': product.id}) }}" class="btn">
-                        <i class="icon-book"></i> details
-                    </a>
-                    <a href="{{ path('sylius_product_update', {'id': product.id}) }}" class="btn">
-                        <i class="icon-pencil"></i> edit
-                    </a>
-                    <form action="{{ path('sylius_product_delete', {'id': product.id}) }}" method="post" style="display: inline;">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger">
-                            <i class="icon-trash"></i>
-                        </button>
-                    </form>
+                    {{ buttons.show(path('sylius_product_show', {'id': product.id})) }}
+                    {{ buttons.edit(path('sylius_product_update', {'id': product.id})) }}
+                    {{ buttons.delete(path('sylius_product_delete', {'id': product.id})) }}
                 </div>
             </td>
         </tr>

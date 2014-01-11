@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
@@ -20,12 +21,17 @@ use Symfony\Component\Form\FormInterface;
  * The shipping step of checkout.
  *
  * Based on the user address, we present the available shipping methods,
- * and ask him to select his preffered one.
+ * and ask him to select his preferred one.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingStep extends CheckoutStep
 {
+    /**
+     * @var null|ZoneInterface
+     */
+    private $zone;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +41,10 @@ class ShippingStep extends CheckoutStep
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
 
         $form = $this->createCheckoutShippingForm($order);
+
+        if (null === $this->zone) {
+            return $this->proceed($context->getPreviousStep()->getName());
+        }
 
         return $this->renderStep($context, $order, $form);
     }
@@ -65,21 +75,25 @@ class ShippingStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
-    private function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
+    protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig', array(
             'order'   => $order,
             'form'    => $form->createView(),
-            'context' => $context
+            'context' => $context,
         ));
     }
 
-    private function createCheckoutShippingForm(OrderInterface $order)
+    protected function createCheckoutShippingForm(OrderInterface $order)
     {
-        $zone = $this->getZoneMatcher()->match($order->getShippingAddress());
+        $this->zone = $this->getZoneMatcher()->match($order->getShippingAddress());
+
+        if (null === $this->zone) {
+            $this->get('session')->getFlashBag()->add('error', 'sylius.checkout.shipping.error');
+        }
 
         return $this->createForm('sylius_checkout_shipping', $order, array(
-            'criteria'  => array('zone' => $zone)
+            'criteria' => array('zone' => $this->zone)
         ));
     }
 }

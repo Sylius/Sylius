@@ -29,6 +29,7 @@ sylius_backend_taxon_delete:
     defaults:
         _controller: sylius.controller.taxon:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect:
                 route: sylius_backend_taxonomy_show
                 parameters: {'id': $taxonomyId}

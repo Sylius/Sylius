@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Converter;
 
 use PhpSpec\ObjectBehavior;
-use PhpSpec\Matcher\InlineMatcher;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {

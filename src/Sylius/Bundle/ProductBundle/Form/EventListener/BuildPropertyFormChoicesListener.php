@@ -57,19 +57,14 @@ class BuildPropertyFormChoicesListener implements EventSubscriberInterface
     public function buildChoices(FormEvent $event)
     {
         $property = $event->getData();
-        $form = $event->getForm();
-
         if (null === $property) {
             return;
         }
 
         $type = $property->getType();
-
         if (null === $type || PropertyTypes::CHOICE === $type) {
-            $form->add(
-                $this
-                ->factory
-                ->createNamed('choices', 'collection', null, array(
+            $event->getForm()->add(
+                $this->factory->createNamed('choices', 'collection', null, array(
                     'type'         => 'text',
                     'allow_add'    => true,
                     'allow_delete' => true,

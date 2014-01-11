@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/ExchangeRate:macros.html.twig' import list %}
 
 {% block topbar %}
@@ -15,7 +15,7 @@
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_exchange_rate_create'), 'sylius.exchange_rate.create'|trans) }}
     </div>
-    <h1><i class="icon-dollar"></i> {{ 'sylius.exchange_rate.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-usd"></i> {{ 'sylius.exchange_rate.index_header'|trans|raw }}</h1>
 </div>
 
 {{ list(exchange_rates) }}

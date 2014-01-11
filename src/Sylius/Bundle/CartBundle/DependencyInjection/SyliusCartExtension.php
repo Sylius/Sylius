@@ -11,12 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Carts extension.
@@ -25,18 +22,21 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Саша Стаменковић <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class SyliusCartExtension extends Extension implements PrependExtensionInterface
+class SyliusCartExtension extends SyliusResourceExtension implements PrependExtensionInterface
 {
+    protected $configFiles = array(
+        'services',
+        'twig',
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $this->configDir = __DIR__.'/../Resources/config';
 
-        $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        list($config) = $this->configure($config, new Configuration(), $container);
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
@@ -52,30 +52,26 @@ class SyliusCartExtension extends Extension implements PrependExtensionInterface
 
         $container->setParameter('sylius.validation_group.cart', $config['validation_groups']['cart']);
         $container->setParameter('sylius.validation_group.cart_item', $config['validation_groups']['item']);
-
-        $loader->load('services.xml');
-        $loader->load('twig.xml');
     }
 
     /**
-     * Allow an extension to prepend the extension configurations.
-     *
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
     public function prepend(ContainerBuilder $container)
     {
-        if (!array_key_exists('SyliusSalesBundle', $container->getParameter('kernel.bundles'))) {
+        if (!$container->hasExtension('sylius_order')) {
             return;
         }
 
-        $config = array('classes' => array(
-            'order_item' => array(
-                'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
-            ),
-            'order' => array(
-                'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
-            )
-        ));
-        $container->prependExtensionConfig('sylius_sales', $config);
+        $container->prependExtensionConfig('sylius_order', array(
+            'classes' => array(
+                'order_item' => array(
+                    'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
+                ),
+                'order' => array(
+                    'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
+                )
+            ))
+        );
     }
 }

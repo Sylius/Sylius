@@ -39,10 +39,19 @@ class ProductType extends BaseProductType
                 'empty_value' => '---',
                 'label'       => 'sylius.form.product.tax_category'
             ))
+            ->add('shippingCategory', 'sylius_shipping_category_choice', array(
+                'required'    => false,
+                'empty_value' => '---',
+                'label'       => 'sylius.form.product.shipping_category'
+            ))
             ->add('taxons', 'sylius_taxon_selection')
             ->add('variantSelectionMethod', 'choice', array(
                 'label'   => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels()
+            ))
+            ->add('restrictedZone', 'sylius_zone_choice', array(
+                'empty_value' => '---',
+                'label'       => 'sylius.form.product.restricted_zone',
             ))
         ;
     }

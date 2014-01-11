@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Repository;
 
 use FOS\UserBundle\Model\UserInterface;
-use Sylius\Bundle\SalesBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use YaLinqo\Enumerable;
 
-class OrderRepository extends BaseOrderRepository
+class OrderRepository extends CartRepository
 {
     /**
      * Create user orders paginator.
@@ -50,6 +50,62 @@ class OrderRepository extends BaseOrderRepository
     }
 
     /**
+     * Get the order data for the details page.
+     *
+     * @param integer $id
+     */
+    public function findForDetailsPage($id)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder
+            ->leftJoin('o.adjustments', 'adjustment')
+            ->leftJoin('o.user', 'user')
+            ->leftJoin('o.inventoryUnits', 'inventoryUnit')
+            ->leftJoin('o.shipments', 'shipment')
+            ->leftJoin('shipment.method', 'shippingMethod')
+            ->leftJoin('o.payment', 'payment')
+            ->leftJoin('payment.method', 'paymentMethod')
+            ->leftJoin('item.variant', 'variant')
+            ->leftJoin('variant.images', 'image')
+            ->leftJoin('variant.product', 'product')
+            ->leftJoin('variant.options', 'optionValue')
+            ->leftJoin('optionValue.option', 'option')
+            ->leftJoin('o.billingAddress', 'billingAddress')
+            ->leftJoin('billingAddress.country', 'billingCountry')
+            ->leftJoin('o.shippingAddress', 'shippingAddress')
+            ->leftJoin('shippingAddress.country', 'shippingCountry')
+            ->addSelect('adjustment')
+            ->addSelect('user')
+            ->addSelect('inventoryUnit')
+            ->addSelect('shipment')
+            ->addSelect('shippingMethod')
+            ->addSelect('payment')
+            ->addSelect('paymentMethod')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->addSelect('product')
+            ->addSelect('option')
+            ->addSelect('optionValue')
+            ->addSelect('billingAddress')
+            ->addSelect('billingCountry')
+            ->addSelect('shippingAddress')
+            ->addSelect('shippingCountry')
+            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        $result = $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $result;
+    }
+
+    /**
      * Create filter paginator.
      *
      * @param array $criteria
@@ -57,10 +113,14 @@ class OrderRepository extends BaseOrderRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         if (!empty($criteria['number'])) {
             $queryBuilder
@@ -111,9 +171,9 @@ class OrderRepository extends BaseOrderRepository
         $to   = null === $to ? new \DateTime() : $to;
 
         return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function($order) {
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, '$v->getTotal()', function($orders) {
+            }, '$v->getTotal()', function ($orders) {
                 return Enumerable::from($orders)->sum();
             })
             ->toValues()
@@ -127,9 +187,9 @@ class OrderRepository extends BaseOrderRepository
         $to   = null === $to ? new \DateTime() : $to;
 
         return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function($order) {
+            ->groupBy(function ($order) {
                 return $order->getCreatedAt()->format('m');
-            }, null, function($orders) {
+            }, null, function ($orders) {
                 return Enumerable::from($orders)->count();
             })
             ->toValues()

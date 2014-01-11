@@ -7,20 +7,24 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "email": "pjedrzejewski@diweb.pl",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Community contributions",
-            "homepage": "https://github.com/Sylius/SyliusCartBundle/contributors"
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/sales-bundle":      "1.0.*@dev",
+        "sylius/money-bundle":      "1.0.*@dev",
+        "sylius/order-bundle":      "1.0.*@dev",
         "sylius/resource-bundle":   "1.0.*@dev"
     },
     "require-dev": {
@@ -33,7 +37,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CartBundle": "" }
+        "psr-0": { "Sylius\\Bundle\\CartBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/CartBundle",
     "extra": {

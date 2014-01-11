@@ -20,16 +20,22 @@ namespace Sylius\Bundle\PromotionsBundle\Model;
 interface PromotionSubjectInterface
 {
     /**
+     * Get associated coupon
+     *
      * @return null|CouponInterface
      */
     public function getPromotionCoupon();
 
     /**
+     * Get number of promotion subjects
+     *
      * @return integer
      */
     public function getPromotionSubjectItemCount();
 
     /**
+     * Get total of promotion subjects
+     *
      * @return integer
      */
     public function getPromotionSubjectItemTotal();

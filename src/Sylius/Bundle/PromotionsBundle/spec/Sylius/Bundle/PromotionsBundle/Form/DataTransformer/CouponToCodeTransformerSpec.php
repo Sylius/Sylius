@@ -19,11 +19,12 @@ use PhpSpec\ObjectBehavior;
 class CouponToCodeTransformerSpec extends ObjectBehavior
 {
     /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $couponRepository
+     * @param \Doctrine\Common\Persistence\ObjectRepository      $couponRepository
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
      */
-    function let($couponRepository)
+    function let($couponRepository, $dispatcher)
     {
-        $this->beConstructedWith($couponRepository);
+        $this->beConstructedWith($couponRepository, $dispatcher);
     }
 
     function it_should_be_initializable()

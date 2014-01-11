@@ -37,6 +37,7 @@ sylius_account_address_delete:
     defaults:
         _controller: sylius.controller.address:deleteAction
         _sylius:
+            template: SyliusWebBundle:Frontend/Account:Address/delete.html.twig
             redirect:
                 route: sylius_account_address_index
                 parameters: {}
@@ -56,4 +57,3 @@ sylius_account_address_set_default_shipping:
         _controller: sylius.controller.address:setAsDefaultShippingAddressAction
     requirements:
         id:  \d+
-

@@ -7,6 +7,18 @@
                 <source>sylius.promotion_coupon.generate</source>
                 <target>Kupony promocyjne zostały pomyślnie wygenerowane.</target>
             </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.promotion_coupon.eligible</source>
+                <target>Kupon promocyjny został wykorzystany w Twoim koszyku.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.promotion_coupon.invalid</source>
+                <target>Ten kupon promocyjny jest nieprawidłowy.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.promotion_coupon.not_eligible</source>
+                <target>W Twoim koszyku nie można skorzystać z tego kuponu promocyjnego.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

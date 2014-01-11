@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_group_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.group:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Group:index.html.twig
+
+sylius_backend_group_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.group:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Group:create.html.twig
+            redirect: sylius_backend_group_index
+
+sylius_backend_group_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: sylius.controller.group:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Group:update.html.twig
+            redirect: sylius_backend_group_index
+
+sylius_backend_group_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.group:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_group_index

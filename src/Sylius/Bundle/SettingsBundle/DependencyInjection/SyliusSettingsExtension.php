@@ -11,40 +11,24 @@
 
 namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
-use Sylius\Bundle\SettingsBundle\SyliusSettingsBundle;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Settings system extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class SyliusSettingsExtension extends Extension
+class SyliusSettingsExtension extends SyliusResourceExtension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
+        $this->configDir = __DIR__.'/../Resources/config';
 
-        $config = $processor->processConfiguration(new Configuration(), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $driver = $config['driver'];
-
-        if (!in_array($driver, SyliusSettingsBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusSettingsBundle.', $driver));
-        }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
-
-        $container->setParameter('sylius_settings.driver', $driver);
-        $container->setParameter('sylius_settings.driver.'.$driver, true);
+        list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE);
 
         $classes = $config['classes'];
         $parameterClasses = $classes['parameter'];
@@ -62,7 +46,5 @@ class SyliusSettingsExtension extends Extension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
-
-        $loader->load('services.xml');
     }
 }

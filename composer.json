@@ -23,11 +23,10 @@
 
         "athari/yalinqo":                       "*@dev",
         "doctrine/doctrine-bundle":             "1.2.*@dev",
-        "doctrine/doctrine-fixtures-bundle":    "2.2.*",
         "doctrine/orm":                         "~2.3",
-        "friendsofsymfony/rest-bundle":         "0.13.*",
+        "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
-        "fzaninotto/faker":                     "1.2.*",
+        "hwi/oauth-bundle":                     "0.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle":                "0.12.*",
         "jms/translation-bundle":               "1.1.*",
@@ -38,7 +37,6 @@
         "liip/doctrine-cache-bundle":           "*",
         "liip/imagine-bundle":                  "~0.9",
         "mathiasverraes/money":                 "*@dev",
-        "omnipay/omnipay":                      "*@dev",
         "sensio/distribution-bundle":           "2.3.*",
         "stof/doctrine-extensions-bundle":      "1.1.*",
         "symfony/assetic-bundle":               "2.3.*",
@@ -47,15 +45,20 @@
         "symfony/swiftmailer-bundle":           "2.3.*",
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
-        "white-october/pagerfanta-bundle":      "1.0.*@dev"
+        "white-october/pagerfanta-bundle":      "1.0.*@dev",
+        "payum/payum":                          "0.7.*",
+        "payum/payum-bundle":                   "0.7.*"
     },
     "require-dev": {
-        "behat/behat":                  "2.4.*@stable",
-        "behat/symfony2-extension":     "*",
-        "behat/mink-extension":         "*",
-        "behat/mink-browserkit-driver": "*",
-        "phpspec/phpspec":              "2.0.*@dev",
-        "behat/mink-selenium2-driver":  "*"
+        "behat/behat":                       "2.4.*@stable",
+        "behat/symfony2-extension":          "*",
+        "behat/mink-extension":              "*",
+        "behat/mink-browserkit-driver":      "*",
+        "behat/mink-goutte-driver":          "*",
+        "behat/mink-selenium2-driver":       "*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "fzaninotto/faker":                  "1.2.*",
+        "phpspec/phpspec":                   "2.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

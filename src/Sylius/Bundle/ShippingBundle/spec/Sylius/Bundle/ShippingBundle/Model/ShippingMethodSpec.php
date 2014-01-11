@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 

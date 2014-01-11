@@ -31,28 +31,28 @@ class CartListener implements EventSubscriberInterface
      *
      * @var ObjectManager
      */
-    private $cartManager;
+    protected $cartManager;
 
     /**
      * Validator.
      *
      * @var ValidatorInterface
      */
-    private $validator;
+    protected $validator;
 
     /**
      * Cart provider.
      *
      * @var CartProviderInterface
      */
-    private $cartProvider;
+    protected $cartProvider;
 
     /**
      * Constructor.
      *
-     * @param ObjectManager      $cartManager
-     * @param ValidatorInterface $validator
-     * @param CartPRovider       $cartProvider
+     * @param ObjectManager         $cartManager
+     * @param ValidatorInterface    $validator
+     * @param CartProviderInterface $cartProvider
      */
     public function __construct(ObjectManager $cartManager, ValidatorInterface $validator, CartProviderInterface $cartProvider)
     {
@@ -95,6 +95,7 @@ class CartListener implements EventSubscriberInterface
     {
         $this->cartManager->remove($event->getCart());
         $this->cartManager->flush();
+        $this->cartProvider->abandonCart();
     }
 
     public function saveCart(CartEvent $event)
@@ -122,7 +123,7 @@ class CartListener implements EventSubscriberInterface
     /**
      * @param CartInterface $cart
      */
-    private function refreshCart(CartInterface $cart)
+    protected function refreshCart(CartInterface $cart)
     {
         $cart->calculateTotal();
     }

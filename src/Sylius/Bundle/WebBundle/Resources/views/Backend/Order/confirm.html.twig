@@ -1,0 +1,19 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.confirmation.message'|trans }}</h1>
+</div>
+
+<div class="row">
+    <button type="button" class="btn btn-info">{{ 'sylius.cancel'|trans }}</button>
+    <form action="{{ url }}" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+        </button>
+    </form>
+</div>
+{% endblock %}

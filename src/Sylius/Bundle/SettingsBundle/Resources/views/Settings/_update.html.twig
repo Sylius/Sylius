@@ -1,0 +1,9 @@
+{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
+
+<h1>Settings <small>Use this form to update settings</small></h1>
+<hr />
+
+<form action="{{ path('sylius_settings') }}" method="post" class="form-horizontal">
+    {{ form_widget(form) }}
+    {{ actions.create() }}
+</form>

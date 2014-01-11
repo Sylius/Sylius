@@ -24,8 +24,8 @@ Feature: Checkout security
             | zone | name        |
             | UK   | DHL Express |
           And the following payment methods exist:
-            | name        | gateway | enabled |
-            | Credit Card | stripe  | yes     |
+            | name  | gateway | enabled |
+            | Dummy | dummy   | yes     |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 
@@ -49,6 +49,8 @@ Feature: Checkout security
             | fos_user_registration_form_email                | mike@example.com |
             | fos_user_registration_form_plainPassword_first  | mikepass         |
             | fos_user_registration_form_plainPassword_second | mikepass         |
+            | fos_user_registration_form_firstName            | Mike             |
+            | fos_user_registration_form_lastName             | Small            |
           And I press "Register"
          Then I should be redirected to the checkout addressing step
 
@@ -57,13 +59,24 @@ Feature: Checkout security
             | fos_user_registration_form_email                | mike@example.com |
             | fos_user_registration_form_plainPassword_first  | mikepass         |
             | fos_user_registration_form_plainPassword_second | mikepass         |
+            | fos_user_registration_form_firstName            | Mike             |
+            | fos_user_registration_form_lastName             | Small            |
           And I press "Register"
           And I fill in the shipping address to United Kingdom
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Credit Card" radio button
+          And I select the "Dummy" radio button
           And I press "Continue"
           And I click "Place order"
          Then I should be on the store homepage
           And I should see "Thank you for your order!"
+
+    Scenario: Creating account without first and last name
+         When I fill in the following:
+            | fos_user_registration_form_email                | mike@example.com |
+            | fos_user_registration_form_plainPassword_first  | mikepass         |
+            | fos_user_registration_form_plainPassword_second | mikepass         |
+          And I press "Register"
+         Then I should see "Please enter your first name"
+          And I should see "Please enter your last name"

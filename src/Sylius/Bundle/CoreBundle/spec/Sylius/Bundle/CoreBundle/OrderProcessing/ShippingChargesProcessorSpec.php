@@ -47,6 +47,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->getShipments()->shouldBeCalled()->willReturn(array());
         $order->removeShippingAdjustments()->shouldBeCalled();
 
+        $order->calculateTotal()->shouldBeCalled();
+
         $this->applyShippingCharges($order);
     }
 
@@ -59,11 +61,13 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->getShipments()->shouldBeCalled()->willReturn(array());
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
+        $order->calculateTotal()->shouldBeCalled();
+
         $this->applyShippingCharges($order);
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface        $adjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface        $adjustment
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
      * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
      * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod
@@ -86,6 +90,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
         $order->removeShippingAdjustments()->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
+
+        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }

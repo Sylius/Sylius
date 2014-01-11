@@ -89,6 +89,7 @@
 
         <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="event_dispatcher" />
         </service>
         <service id="sylius.promotion_rule_checker.item_total" class="%sylius.promotion_rule_checker.item_total.class%">
             <tag name="sylius.promotion_rule_checker" type="item_total" label="Item total" />
@@ -154,6 +155,7 @@
         </service>
         <service id="sylius.form.type.promotion_coupon_to_code" class="%sylius.form.type.promotion_coupon_to_code.class%">
             <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="event_dispatcher" />
             <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
         </service>
 

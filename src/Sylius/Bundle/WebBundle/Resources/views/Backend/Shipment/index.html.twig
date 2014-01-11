@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Shipment:macros.html.twig' import list %}
 
@@ -18,7 +18,7 @@
         {{ buttons.create(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
         {{ buttons.create(path('sylius_backend_shipping_method_index'), 'sylius.shipping_method.manage'|trans) }}
     </div>
-    <h1><i class="icon-plane"></i> {{ 'sylius.shipment.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plane"></i> {{ 'sylius.shipment.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(shipments) }}

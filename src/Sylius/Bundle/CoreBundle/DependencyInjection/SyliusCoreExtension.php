@@ -11,68 +11,81 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\Definition\Processor;
-use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 
 /**
  * Core extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusCoreExtension extends Extension
+class SyliusCoreExtension extends SyliusResourceExtension implements PrependExtensionInterface
 {
+    /**
+     * @var array
+     */
+    private $bundles = array(
+        'sylius_addressing',
+        'sylius_inventory',
+        'sylius_money',
+        'sylius_payments',
+        'sylius_payum',
+        'sylius_product',
+        'sylius_promotions',
+        'sylius_order',
+        'sylius_settings',
+        'sylius_shipping',
+        'sylius_taxation',
+        'sylius_taxonomies',
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $this->configDir = __DIR__.'/../Resources/config';
 
-        $config = $processor->processConfiguration($configuration, $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
 
-        $driver = $config['driver'];
+        $loader->load('mailer.xml');
 
-        if (!in_array($driver, SyliusCoreBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusCoreBundle', $driver));
+        if (!empty($config['order_confirmation'])) {
+            $this->loadOrderConfirmation($config['order_confirmation'], $container, $loader, $config['from_email']);
         }
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
-
-        $container->setParameter('sylius_core.driver', $driver);
-        $container->setParameter('sylius_core.driver.'.$driver, true);
-
-        $loader->load('services.xml');
-
-        $classes = $config['classes'];
-
-        $this->mapClassParameters($classes, $container);
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
     }
 
     /**
-     * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container)
     {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                $service = $service === 'form' ? 'form.type' : $service;
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
+        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
+
+        foreach ($container->getExtensions() as $name => $extension) {
+            if (in_array($name, $this->bundles)) {
+                $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }
         }
+    }
+
+    protected function loadOrderConfirmation(array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    {
+        $loader->load('order_confirmation_mailer.xml');
+
+        if ($config['enabled']) {
+            $loader->load('order_confirmation_listener.xml');
+        }
+
+        if (isset($config['from_email'])) {
+            // overwrite the global one
+            $fromEmail = $config['from_email'];
+            unset($config['from_email']);
+        }
+
+        $container->setParameter('sylius.email.order_confirmation.from_email', array($fromEmail['address'] => $fromEmail['sender_name']));
+        $container->setParameter('sylius.email.order_confirmation.template', $config['template']);
     }
 }

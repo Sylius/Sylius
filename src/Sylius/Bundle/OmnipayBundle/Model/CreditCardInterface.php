@@ -16,7 +16,7 @@ namespace Sylius\Bundle\OmnipayBundle\Model;
  *
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
- interface CreditCardInterface
+interface CreditCardInterface
 {
     /**
      * Transform any credit card model into an array matching Omnipay

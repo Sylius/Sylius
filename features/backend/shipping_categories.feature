@@ -62,11 +62,31 @@ Feature: Shipping categories
     Scenario: Deleting shipping category from list
         Given I am on the shipping category index page
          When I click "delete" near "Heavy"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the shipping category index page
+          And I should see "Shipping category has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting shipping category from list with js modal
+        Given I am on the shipping category index page
+         When I click "delete" near "Heavy"
+          And I click "delete" from the confirmation modal
          Then I should be on the shipping category index page
           And I should see "Shipping category has been successfully deleted."
 
     Scenario: Deleted shipping category disappears from the list
         Given I am on the shipping category index page
          When I click "delete" near "Regular"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the shipping category index page
+          And I should not see shipping category with name "Regular" in that list
+
+    @javascript
+    Scenario: Deleted shipping category disappears from the list with js modal
+        Given I am on the shipping category index page
+         When I click "delete" near "Regular"
+          And I click "delete" from the confirmation modal
          Then I should be on the shipping category index page
           And I should not see shipping category with name "Regular" in that list

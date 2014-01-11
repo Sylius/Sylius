@@ -91,6 +91,8 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -107,6 +109,8 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -123,6 +127,8 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -139,5 +145,7 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

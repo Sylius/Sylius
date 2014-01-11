@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/PaymentMethod:macros.html.twig' import list %}
 
@@ -17,7 +17,7 @@
         {{ buttons.create(path('sylius_backend_payment_method_create'), 'sylius.payment_method.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}
     </div>
-    <h1><i class="icon-credit-card"></i> {{ 'sylius.payment_method.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.payment_method.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(payment_methods) }}

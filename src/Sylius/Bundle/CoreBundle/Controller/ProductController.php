@@ -46,13 +46,43 @@ class ProductController extends ResourceController
             ->createByTaxonPaginator($taxon)
         ;
 
-        $paginator->setCurrentPage($request->query->get('page', 1));
         $paginator->setMaxPerPage($this->getConfiguration()->getPaginationMaxPerPage());
+        $paginator->setCurrentPage($request->query->get('page', 1));
 
         return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
             'taxon'    => $taxon,
             'products' => $paginator,
         ));
+    }
+
+    /**
+     * Get product history changes.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function historyAction(Request $request)
+    {
+        $config = $this->getConfiguration();
+        $logEntryRepository = $this->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $product = $this->findOr404();
+
+        $data = array(
+            $config->getResourceName() => $product,
+            'logs'                     => $logEntryRepository->getLogEntries($product)
+        );
+
+        $view = $this
+            ->view()
+            ->setTemplate($config->getTemplate('history.html'))
+            ->setData($data)
+        ;
+
+        return $this->handleView($view);
     }
 
     /**

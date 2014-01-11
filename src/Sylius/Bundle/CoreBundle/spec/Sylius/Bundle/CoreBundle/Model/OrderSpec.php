@@ -13,9 +13,10 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
+use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
-*
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderSpec extends ObjectBehavior
@@ -27,12 +28,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SalesBundle\Model\OrderInterface');
+        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\OrderInterface');
     }
 
     function it_should_extend_Sylius_order_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\Order');
     }
 
     function it_should_not_have_user_defined_by_default()
@@ -145,8 +146,8 @@ class OrderSpec extends ObjectBehavior
      * helper method
      *
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     protected function addShippingAndTaxAdjustments($order, $shippingAdjustment, $taxAdjustment)
     {
@@ -160,8 +161,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_return_shipping_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -175,8 +176,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_remove_shipping_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -192,8 +193,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_return_tax_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -207,8 +208,8 @@ class OrderSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $shippingAdjustment
-     * @param Sylius\Bundle\SalesBundle\Model\AdjustmentInterface $taxAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $shippingAdjustment
+     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $taxAdjustment
      */
     function it_should_remove_tax_adjustments($shippingAdjustment, $taxAdjustment)
     {
@@ -223,16 +224,61 @@ class OrderSpec extends ObjectBehavior
         $this->getTaxAdjustments()->count()->shouldReturn(0); //tax adjustment has been removed
     }
 
-    /*
     function it_should_not_have_currency_defined_by_default()
     {
         $this->getCurrency()->shouldReturn(null);
     }
-    */
 
     function it_should_allow_defining_currency()
     {
         $this->setCurrency('PLN');
         $this->getCurrency()->shouldReturn('PLN');
+    }
+
+    function it_has_ready_shipping_state_by_default()
+    {
+        $this->getShippingState()->shouldReturn(OrderShippingStates::READY);
+    }
+
+    function its_shipping_state_is_mutable()
+    {
+        $this->setShippingState(OrderShippingStates::SHIPPED);
+        $this->getShippingState()->shouldReturn(OrderShippingStates::SHIPPED);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     */
+    function it_is_a_backorder_if_contains_at_least_one_backordered_unit($unit1, $unit2)
+    {
+        $unit1->setOrder($this)->shouldBeCalled();
+        $unit2->setOrder($this)->shouldBeCalled();
+
+        $this->addInventoryUnit($unit1);
+        $this->addInventoryUnit($unit2);
+
+        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
+        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+
+        $this->shouldBeBackorder();
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     */
+    function it_not_a_backorder_if_contains_no_backordered_units($unit1, $unit2)
+    {
+        $unit1->setOrder($this)->shouldBeCalled();
+        $unit2->setOrder($this)->shouldBeCalled();
+
+        $this->addInventoryUnit($unit1);
+        $this->addInventoryUnit($unit2);
+
+        $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+        $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+
+        $this->shouldNotBeBackorder();
     }
 }

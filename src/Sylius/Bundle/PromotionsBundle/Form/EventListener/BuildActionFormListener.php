@@ -26,7 +26,14 @@ use Symfony\Component\Form\FormInterface;
  */
 class BuildActionFormListener implements EventSubscriberInterface
 {
+    /**
+     * @var PromotionActionRegistryInterface
+     */
     private $actionRegistry;
+
+    /**
+     * @var FormFactoryInterface
+     */
     private $factory;
 
     public function __construct(PromotionActionRegistryInterface $actionRegistry, FormFactoryInterface $factory)
@@ -39,7 +46,7 @@ class BuildActionFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_BIND     => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind'
         );
     }
 

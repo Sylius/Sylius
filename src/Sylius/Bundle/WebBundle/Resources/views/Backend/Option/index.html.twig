@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Option:macros.html.twig' import list %}
 
@@ -17,7 +17,7 @@
         {{ buttons.create(path('sylius_backend_option_create'), 'sylius.option.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_property_index'), 'sylius.property.manage'|trans) }}
     </div>
-    <h1><i class="icon-th"></i> {{ 'sylius.option.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-th"></i> {{ 'sylius.option.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(options) }}

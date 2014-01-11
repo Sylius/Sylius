@@ -21,6 +21,10 @@
     </div>
 
     <div class="col-md-4">
+        {{ form_row(form.width) }}
+        {{ form_row(form.height) }}
+        {{ form_row(form.depth) }}
+        {{ form_row(form.weight) }}
         <div id="sylius-assortment-variant-images" class="col-md-12" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
             {% for imageForm in form.images %}
             <div class="sylius-assortment-variant-images-image">
@@ -30,7 +34,7 @@
                         &nbsp;
                         {{ form_widget(imageForm.file) }}
                         &nbsp;
-                        <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-variant-images" data-collection="sylius-assortment-variant-images"><i class="icon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+                        <a href="#" class="btn btn-danger" data-collection-button="delete" data-prototype="sylius-assortment-variant-images" data-collection="sylius-assortment-variant-images"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
                     </div>
                 </div>
             </div>

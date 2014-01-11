@@ -67,20 +67,58 @@ Feature: Orders management
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"
          When I press "delete"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the order index page
+          And I should see "Order has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting the order with js modal
+        Given I am viewing order with number "000000001"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
     Scenario: Deleting the order via list button
         Given I am on the order index page
          When I press "delete" near "#000000001"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should be on the order index page
+          And I should see "Order has been successfully deleted."
+
+    @javascript
+    Scenario: Deleting the order via list button with js modal
+        Given I am on the order index page
+         When I press "delete" near "#000000001"
+          And I click "delete" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
     Scenario: Deleted order disappears from the list
         Given I am viewing order with number "000000002"
          When I press "delete"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
          Then I should be on the order index page
           And I should not see order with number "#000000002" in the list
+
+    @javascript
+    Scenario: Deleted order disappears from the list with js modal
+        Given I am viewing order with number "000000002"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
+         Then I should be on the order index page
+          And I should not see order with number "#000000002" in the list
+
+    Scenario: Order integrity is preserved after deleting a product
+        Given I have deleted the product "Mug"
+          And I go to the order index page
+         When I click "details" near "#000000001"
+         Then I should be viewing order with number "000000001"
+          And I should see "Mug"
+          And I should see "Total: €14.74"
 
     Scenario: Accessing the order details page from list
         Given I am on the order index page

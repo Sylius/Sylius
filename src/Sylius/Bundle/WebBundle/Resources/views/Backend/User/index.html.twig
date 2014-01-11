@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/User:macros.html.twig' import list  %}
 
@@ -15,8 +15,13 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_user_create'), 'sylius.user.create'|trans) }}
+        {% if app.request.query.get('deleted') %}
+            <a href="{{ path('sylius_backend_user_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
+        {% else %}
+            <a href="{{ path('sylius_backend_user_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
+        {% endif %}
     </div>
-    <h1><i class="icon-user"></i> {{ 'sylius.user.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.user.index_header'|trans|raw }}</h1>
 </div>
 
 {% render(url('sylius_backend_user_filter_form', {'criteria': app.request.query.get('criteria')})) %}
@@ -27,7 +32,7 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs grid-tabs">
             <li class="{{ activeTab == 'all' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.user.filter.all'|trans }}</a></li>
-            <li class="{{ activeTab == 'disabled' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><i class="icon-info-sign"></i> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
+            <li class="{{ activeTab == 'disabled' ? 'active' : '' }}"><a href="{{ path('sylius_backend_user_index', {'criteria': {'enabled': false}}) }}"><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.user.filter.unconfirmed'|trans }}</a></li>
         </ul>
     </div>
 </div>

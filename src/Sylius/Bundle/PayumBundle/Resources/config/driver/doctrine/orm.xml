@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.repository.payment_security_token.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.manager.payment_security_token" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.payment_security_token" class="%sylius.repository.payment_security_token.class%">
+            <argument type="service" id="sylius.manager.payment_security_token" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.payment_security_token"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.payment_security_token.class%</argument>
+                </service>
+            </argument>
+        </service>
+    </services>
+
+</container>

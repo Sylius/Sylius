@@ -1,0 +1,18 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ message is defined ? message : 'sylius.confirmation.message'|trans }}</h1>
+</div>
+
+<form action="{{ app.request.requestUri }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="confirmed" value="1">
+    <div class="form-actions">
+        <button class="btn btn-danger" type="submit">
+            <i class="glyphicon glyphicon-trash"></i> <span>{{ 'sylius.delete'|trans }}</span>
+        </button>
+        <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="glyphicon glyphicon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+    </div>
+</form>
+{% endblock %}

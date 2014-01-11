@@ -1,7 +1,7 @@
 SyliusPromotionsBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionsBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPromotionsBundle)
 ===================
 
-Sylius promotions engine, applicable to any Symfony2 project.
+Promotions engine for [**Symfony2**](http://symfony.com) ecommerce applications.
 
 Sylius
 ------
@@ -11,25 +11,30 @@ Sylius
 [phpspec](http://phpspec.net) examples
 --------------------------------------
 
-``` bash
-$ composer install --dev --prefer-dist
+```bash
+$ composer install
 $ bin/phpspec run -fpretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/bundles/SyliusPromotionsBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusPromotionsBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.com/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).  
+### Users
+
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
 To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account

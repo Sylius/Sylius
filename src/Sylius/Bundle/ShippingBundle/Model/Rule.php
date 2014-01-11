@@ -68,6 +68,8 @@ class Rule implements RuleInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -84,6 +86,8 @@ class Rule implements RuleInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
+
+        return $this;
     }
 
     /**
@@ -100,5 +104,7 @@ class Rule implements RuleInterface
     public function setMethod(ShippingMethodInterface $method = null)
     {
         $this->method = $method;
+
+        return $this;
     }
 }

@@ -2,7 +2,7 @@
 
 {% set promotion = promotion_coupon.promotion %}
 
-{% from 'SyliusWebBundle:Backend/Macros:actions.html.twig' import create %}
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -16,7 +16,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="icon-plus-sign"></i> {{ 'sylius.promotion_coupon.create_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.promotion_coupon.create_header'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

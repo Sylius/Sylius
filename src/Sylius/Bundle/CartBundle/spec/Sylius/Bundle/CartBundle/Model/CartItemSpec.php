@@ -30,6 +30,6 @@ class CartItemSpec extends ObjectBehavior
 
     function it_extends_Sylius_order_item()
     {
-        $this->shouldHaveType('Sylius\Bundle\SalesBundle\Model\OrderItem');
+        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\OrderItem');
     }
 }

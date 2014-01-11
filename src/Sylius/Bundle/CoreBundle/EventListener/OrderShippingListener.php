@@ -60,7 +60,7 @@ class OrderShippingListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order shipping listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
@@ -78,10 +78,28 @@ class OrderShippingListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order shipping listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
         $this->shippingProcessor->applyShippingCharges($order);
+    }
+
+    /**
+     * Update shipment states after order is confirmed
+     *
+     * @param GenericEvent $event
+     */
+    public function processShipmentStates(GenericEvent $event)
+    {
+        $order = $event->getSubject();
+
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            );
+        }
+
+        $this->shipmentFactory->updateShipmentStates($order);
     }
 }

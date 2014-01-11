@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="3c3fad9ed9e9dce4693320d03211fb69" resname="sylius.form.credit_card.cardholder_name">
+        <source>sylius.form.credit_card.cardholder_name</source>
+        <target>Имя владельца карты</target>
+      </trans-unit>
+      <trans-unit id="5c4d48acc6f51d1fdceb046c7a2d7e97" resname="sylius.form.credit_card.expiry_month">
+        <source>sylius.form.credit_card.expiry_month</source>
+        <target>Месяц</target>
+      </trans-unit>
+      <trans-unit id="9e2fafcc68bd9c5f56704bf3e2311867" resname="sylius.form.credit_card.expiry_year">
+        <source>sylius.form.credit_card.expiry_year</source>
+        <target>Год</target>
+      </trans-unit>
+      <trans-unit id="4f8aea56447f3b7dfdc83403769b07b7" resname="sylius.form.credit_card.number">
+        <source>sylius.form.credit_card.number</source>
+        <target>Номер карты</target>
+      </trans-unit>
+      <trans-unit id="b0e830dcbd1c0e54516f28f6a5f0f779" resname="sylius.form.credit_card.security_code">
+        <source>sylius.form.credit_card.security_code</source>
+        <target>Код безопасности (CVV)</target>
+      </trans-unit>
+      <trans-unit id="835d77d0421cdf3e75a65363205aa3a0" resname="sylius.form.credit_card.type">
+        <source>sylius.form.credit_card.type</source>
+        <target>Тип карты</target>
+      </trans-unit>
+      <trans-unit id="4b2bd16369add8f5e09952df5e2da02f" resname="sylius.form.payment.amount">
+        <source>sylius.form.payment.amount</source>
+        <target>Сумма платежа</target>
+      </trans-unit>
+      <trans-unit id="cfd694e828dc0f90777547eeaa2dba13" resname="sylius.form.payment.method">
+        <source>sylius.form.payment.method</source>
+        <target>Метод платежа</target>
+      </trans-unit>
+      <trans-unit id="bbce6d62d595a0226d773158f3cc3ad9" resname="sylius.form.payment.state">
+        <source>sylius.form.payment.state</source>
+        <target>Статус платежа</target>
+      </trans-unit>
+      <trans-unit id="121771e965341ff8984f23b8f8342990" resname="sylius.form.payment.state.checkout">
+        <source>sylius.form.payment.state.checkout</source>
+        <target>Checkout</target>
+      </trans-unit>
+      <trans-unit id="ffbfedb9f21ce6841a7728d875435d36" resname="sylius.form.payment.state.completed">
+        <source>sylius.form.payment.state.completed</source>
+        <target>Завершен</target>
+      </trans-unit>
+      <trans-unit id="8f587db2580ef31e2507a0c18595d98d" resname="sylius.form.payment.state.failed">
+        <source>sylius.form.payment.state.failed</source>
+        <target>Провален</target>
+      </trans-unit>
+      <trans-unit id="0e185128533dcd5614d621905f6f68b9" resname="sylius.form.payment.state.new">
+        <source>sylius.form.payment.state.new</source>
+        <target>Новый</target>
+      </trans-unit>
+      <trans-unit id="4ff1d61ea8920e3acf15efa3017d3af9" resname="sylius.form.payment.state.pending">
+        <source>sylius.form.payment.state.pending</source>
+        <target>Ожидает</target>
+      </trans-unit>
+      <trans-unit id="700331d57f2cc45737edc42332d60442" resname="sylius.form.payment.state.processing">
+        <source>sylius.form.payment.state.processing</source>
+        <target>Обрабатывается</target>
+      </trans-unit>
+      <trans-unit id="cf0228f61e0aebdd9fee4840f2fdd108" resname="sylius.form.payment.state.unknown">
+        <source>sylius.form.payment.state.unknown</source>
+        <target>Неизвестен</target>
+      </trans-unit>
+      <trans-unit id="e9eb04055e6e2430eb23b5efdd4bc2ca" resname="sylius.form.payment.state.void">
+        <source>sylius.form.payment.state.void</source>
+        <target>Пустой</target>
+      </trans-unit>
+      <trans-unit id="a5c8dae58a59fe570e21ce2283d0c5e6" resname="sylius.form.payment_method.description">
+        <source>sylius.form.payment_method.description</source>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="b4663fd843dbc9413d9a6f67d0ee7a71" resname="sylius.form.payment_method.enabled">
+        <source>sylius.form.payment_method.enabled</source>
+        <target>Включен?</target>
+      </trans-unit>
+      <trans-unit id="587e7779da2b4dd688f67313d76b6428" resname="sylius.form.payment_method.gateway">
+        <source>sylius.form.payment_method.gateway</source>
+        <target>Терминал</target>
+      </trans-unit>
+      <trans-unit id="9eea5f1c89f4fa2dc8bd8abb0d380316" resname="sylius.form.payment_method.name">
+        <source>sylius.form.payment_method.name</source>
+        <target>Название</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

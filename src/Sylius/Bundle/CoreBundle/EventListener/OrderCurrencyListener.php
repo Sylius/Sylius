@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
 
 /**
@@ -29,13 +29,13 @@ class OrderCurrencyListener
         $this->currencyContext = $currencyContext;
     }
 
-    public function processOrderCurrency(GenericEvent $event)
+    public function processOrderCurrency(CartEvent $event)
     {
-        $order = $event->getSubject();
+        $order = $event->getCart();
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order currency listener requires event subjct to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order currency listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
             );
         }
 
