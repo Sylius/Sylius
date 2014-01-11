@@ -41,32 +41,28 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $subject
      * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country1
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country2
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function it_should_recognize_subject_as_not_eligible_if_country_does_not_match($subject, $address, $country1, $country2)
+    function it_should_recognize_subject_as_not_eligible_if_country_does_not_match($subject, $address, $country)
     {
         $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country1);
-        $country1->getId()->shouldBeCalled()->willReturn(1);
-        $country2->getId()->shouldBeCalled()->willReturn(2);
+        $address->getCountry()->shouldBeCalled()->willReturn($country);
+        $country->getId()->shouldBeCalled()->willReturn(2);
 
-        $this->isEligible($subject, array('country' => $country2))->shouldReturn(false);
+        $this->isEligible($subject, array('country' => 1))->shouldReturn(false);
     }
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $subject
      * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface $address
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country1
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country2
+     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
      */
-    function it_should_recognize_subject_as_eligible_if_country_match($subject, $address, $country1, $country2)
+    function it_should_recognize_subject_as_eligible_if_country_match($subject, $address, $country)
     {
         $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country1);
-        $country1->getId()->shouldBeCalled()->willReturn(1);
-        $country2->getId()->shouldBeCalled()->willReturn(1);
+        $address->getCountry()->shouldBeCalled()->willReturn($country);
+        $country->getId()->shouldBeCalled()->willReturn(1);
 
-        $this->isEligible($subject, array('country' => $country2))->shouldReturn(true);
+        $this->isEligible($subject, array('country' => 1))->shouldReturn(true);
     }
 }
