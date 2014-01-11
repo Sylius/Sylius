@@ -10,7 +10,7 @@ Feature: Managing locales
             | code  | activated |
             | de_DE | yes       |
             | en_US | no        |
-            | en_US | yes       |
+            | fr_FR | yes       |
 
     Scenario: Seeing index of all locales
         Given I am on the dashboard page
