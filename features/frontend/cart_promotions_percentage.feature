@@ -40,7 +40,7 @@ Feature: Checkout percentage discount promotions
         Given I am on the store homepage
          When I add product "Woody" to cart, with quantity "3"
          Then I should be on the cart summary page
-          And "Promotion total: -€30.00" should appear on the page
+          And "Promotion total: (€30.00)" should appear on the page
           And "Grand total: €345.00" should appear on the page
 
     Scenario: Fixed discount promotion is not applied when the cart
@@ -58,7 +58,7 @@ Feature: Checkout percentage discount promotions
           And I added product "Etch" to cart, with quantity "1"
          When I add product "Lenny" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: -€18.75" should appear on the page
+          And "Promotion total: (€18.75)" should appear on the page
           And "Grand total: €106.25" should appear on the page
 
     Scenario: Item count promotion is not applied when the cart has
@@ -76,5 +76,5 @@ Feature: Checkout percentage discount promotions
           And I added product "Buzz" to cart, with quantity "1"
          When I add product "Woody" to cart, with quantity "3"
          Then I should still be on the cart summary page
-          And "Promotion total: -€385.25" should appear on the page
+          And "Promotion total: (€385.25)" should appear on the page
           And "Grand total: €1,289.75" should appear on the page

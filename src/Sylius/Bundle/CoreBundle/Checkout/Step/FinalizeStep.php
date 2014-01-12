@@ -42,6 +42,8 @@ class FinalizeStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
 
+        $order->setUser($this->getUser());
+
         $this->completeOrder($order);
 
         return $this->complete();

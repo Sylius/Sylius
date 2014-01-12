@@ -30,25 +30,15 @@ class TaxonSelectionToIdentifierCollectionTransformer implements DataTransformer
      */
     public function transform($value)
     {
-        $taxons = array();
-
-        foreach ($this->taxonomies as $taxonomy) {
-            $taxons[$taxonomy->getId()] = array();
-        }
-
         if (null === $value) {
-            return $taxons;
+            return array();
         }
 
         if (!$value instanceof Collection) {
             throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
         }
 
-        foreach ($value as $taxon) {
-            $taxons[] = $taxon;
-        }
-
-        return $taxons;
+        return $value->toArray();
     }
 
     /**

@@ -698,7 +698,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      * @Given /^I am logged in user$/
      * @Given /^I am logged in as user "([^""]*)"$/
      */
-    public function iAmLoggedInUser($email)
+    public function iAmLoggedInUser($email = 'sylius@example.com')
     {
         $this->iAmLoggedInAsRole('ROLE_USER', $email);
     }

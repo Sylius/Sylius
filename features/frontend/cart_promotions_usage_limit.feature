@@ -40,7 +40,7 @@ Feature: Checkout usage limited promotions
         Given I am on the store homepage
          When I add product "Buzz" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: -€500.00" should appear on the page
+          And "Promotion total: (€500.00)" should appear on the page
           And "Grand total: €500.00" should appear on the page
 
     Scenario: Promotion with usage limit is not applied when the

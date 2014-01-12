@@ -244,7 +244,7 @@
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.complete" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
@@ -266,8 +266,9 @@
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="handleCouponUsage" />
         </service>
         <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
-            <argument type="service" id="security.context" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.initialize" method="setOrderUser" />
+            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.manager.cart" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="setOrderUser" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
