@@ -10,7 +10,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="code" column="code" type="string" nullable="false" />
+        <field name="code" column="code" type="string" />
         <field name="enabled" column="enabled" type="boolean" />
     </mapped-superclass>
 

@@ -21,13 +21,6 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 interface LocaleInterface extends TimestampableInterface
 {
     /**
-     * Get id.
-     *
-     * @return integer
-     */
-    public function getId();
-
-    /**
      * Get locale code.
      *
      * @return string

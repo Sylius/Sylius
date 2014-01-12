@@ -766,8 +766,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
             }
 
             $manager->persist($locale);
-            $manager->flush();
         }
+
+        $manager->flush();
     }
 
     /**
