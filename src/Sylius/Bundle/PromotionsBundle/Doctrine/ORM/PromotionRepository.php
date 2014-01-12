@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -26,30 +28,63 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
      */
     public function findActive()
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $qb = $this->getCollectionQueryBuilder();
 
-        return $queryBuilder
-            ->leftJoin($this->getAlias().'.rules', 'r')
-            ->addSelect('r')
-            ->leftJoin($this->getAlias().'.actions', 'a')
-            ->addSelect('a')
-            ->leftJoin($this->getAlias().'.subjects', 's')
-            ->addSelect('s')
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($this->getAlias().'.startsAt'),
-                    $queryBuilder->expr()->lt($this->getAlias().'.startsAt', ':now')
-                )
-            )
-            ->andWhere(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($this->getAlias().'.endsAt'),
-                    $queryBuilder->expr()->gt($this->getAlias().'.endsAt', ':now')
-                )
-            )
-            ->setParameter('now', new \DateTime())
+        $this->filterByActive($qb);
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findAppliedOnSubject(PromotionSubjectInterface $subject)
+    {
+        $qb = $this->getCollectionQueryBuilder();
+
+        $this->filterBySubject($qb, $subject);
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    protected function getCollectionQueryBuilder()
+    {
+        return parent::getCollectionQueryBuilder()
+            ->leftJoin($this->getAlias().'.rules', 'r')
+            ->addSelect('r')
+            ->leftJoin($this->getAlias().'.actions', 'a')
+            ->addSelect('a');
+    }
+
+    protected function filterByActive(QueryBuilder $qb, \Datetime $date = null)
+    {
+        if (null === $date) {
+            $date = new \Datetime();
+        }
+
+        return $qb
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->isNull($this->getAlias().'.startsAt'),
+                    $qb->expr()->lt($this->getAlias().'.startsAt', ':date')
+                )
+            )
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->isNull($this->getAlias().'.endsAt'),
+                    $qb->expr()->gt($this->getAlias().'.endsAt', ':date')
+                )
+            )
+            ->setParameter('date', $date);
+    }
+
+    protected function filterBySubject(QueryBuilder $qb, PromotionSubjectInterface $subject)
+    {
+        return $qb
+            ->join($this->getAlias().'.subjects', 's', 'WITH', 's = :subject')
+            ->setParameter('subject', $subject);
     }
 }

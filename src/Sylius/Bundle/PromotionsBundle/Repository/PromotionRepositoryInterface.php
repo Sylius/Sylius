@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionsBundle\Repository;
 
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion repository interface.
@@ -27,4 +28,11 @@ interface PromotionRepositoryInterface extends RepositoryInterface
      * @return PromotionInterface[]
      */
     public function findActive();
+
+    /**
+     * Finds all active promotions that have been applied to the specified subject
+     *
+     * return PromotionInterface[]
+     */
+    public function findAppliedOnSubject(PromotionSubjectInterface $subject);
 }
