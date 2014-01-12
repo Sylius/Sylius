@@ -62,6 +62,14 @@
         <source>sylius_taxation.rate.zone.not_blank</source>
         <target>Please enter tax rate zone.</target>
       </trans-unit>
+      <trans-unit id="66099d65e24942c0f827f5119f223d46" resname="sylius.locale.code.not_blank">
+        <source>sylius.locale.code.not_blank</source>
+        <target>Please enter locale code.</target>
+      </trans-unit>
+      <trans-unit id="67099d65e24942c0f827f5119f223d46" resname="sylius.locale.code.unique">
+        <source>sylius.locale.code.unique</source>
+        <target>This locale already exists.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

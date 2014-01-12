@@ -322,6 +322,10 @@
         <source>sylius.breadcrumb.inventory.index</source>
         <target>Inventory</target>
       </trans-unit>
+      <trans-unit id="8baeab4e95fbb1a13591df9380c205a4" resname="sylius.breadcrumb.locale.index">
+        <source>sylius.breadcrumb.locale.index</source>
+        <target>Locales</target>
+      </trans-unit>
       <trans-unit id="68f3f28b97f2ddcb174ef9ed351ee3b8" resname="sylius.breadcrumb.new">
         <source>sylius.breadcrumb.new</source>
         <target>New</target>
@@ -606,13 +610,13 @@
         <source>sylius.checkout.security.register</source>
         <target>Register</target>
       </trans-unit>
-      <trans-unit id="e95d4cf3899940e82046cb12a231019d" resname="sylius.checkout.shipping.header">
-        <source>sylius.checkout.shipping.header</source>
-        <target>Shipping method</target>
-      </trans-unit>
       <trans-unit id="51ca81d45a9dfd2501c06009489807ae" resname="sylius.checkout.shipping.error">
         <source>sylius.checkout.shipping.error</source>
         <target>We're sorry, but our shop is not able to provide product shipping to country which you have chosen.</target>
+      </trans-unit>
+      <trans-unit id="e95d4cf3899940e82046cb12a231019d" resname="sylius.checkout.shipping.header">
+        <source>sylius.checkout.shipping.header</source>
+        <target>Shipping method</target>
       </trans-unit>
       <trans-unit id="4f7b06a12e37b50e59c5c84d1040d68e" resname="sylius.confirmation.message">
         <source>sylius.confirmation.message</source>
@@ -888,6 +892,38 @@
       </trans-unit>
       <trans-unit id="4cab6cc405cf2fb3f32ccc5e72088f4d" resname="sylius.inventory_unit.updated_at">
         <source>sylius.inventory_unit.updated_at</source>
+        <target>Last update</target>
+      </trans-unit>
+      <trans-unit id="496df0ae8ece84db2488ee1ec2142c6b" resname="sylius.locale.code">
+        <source>sylius.locale.code</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="a6d9e5c2e678918cc88ad8aa29827e41" resname="sylius.locale.create">
+        <source>sylius.locale.create</source>
+        <target>Create locale</target>
+      </trans-unit>
+      <trans-unit id="da591489a2f5a10ecc1dde9cc3ce753f" resname="sylius.locale.create_header">
+        <source>sylius.locale.create_header</source>
+        <target>Adding new locale</target>
+      </trans-unit>
+      <trans-unit id="00f97de22867f1da993595b4941b198d" resname="sylius.locale.enabled">
+        <source>sylius.locale.enabled</source>
+        <target>Enabled</target>
+      </trans-unit>
+      <trans-unit id="bbf5ad53d27102bbe7f830cfa026004a" resname="sylius.locale.index_header">
+        <source>sylius.locale.index_header</source>
+        <target>Index of all configured locales</target>
+      </trans-unit>
+      <trans-unit id="e9529479fb456b37e4297a7636303852" resname="sylius.locale.no_results">
+        <source>sylius.locale.no_results</source>
+        <target>There are no locales configured.</target>
+      </trans-unit>
+      <trans-unit id="a60e5abc728b41576a0b91121132f4ae" resname="sylius.locale.update_header">
+        <source>sylius.locale.update_header</source>
+        <target>Edit locale</target>
+      </trans-unit>
+      <trans-unit id="7105f63312819667e039e0dffdc33b5f" resname="sylius.locale.updated_at">
+        <source>sylius.locale.updated_at</source>
         <target>Last update</target>
       </trans-unit>
       <trans-unit id="4fe0a2de7d941c475f778fea316ba23f" resname="sylius.login">
