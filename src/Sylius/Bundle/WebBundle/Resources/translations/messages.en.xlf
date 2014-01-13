@@ -414,6 +414,10 @@
         <source>sylius.breadcrumb.zone.index</source>
         <target>Zones</target>
       </trans-unit>
+      <trans-unit id="cf71cb640875a93362205990ec910fed" resname="sylius.browse_products">
+        <source>sylius.browse_products</source>
+        <target>Browse products</target>
+      </trans-unit>
       <trans-unit id="1c928a5890ba6f86642da79b1e7a2ea6" resname="sylius.cancel">
         <source>sylius.cancel</source>
         <target>Cancel</target>
@@ -2069,6 +2073,10 @@
       <trans-unit id="14570359abb67f8a14e33b0a70df40cc" resname="sylius.taxon.no_results">
         <source>sylius.taxon.no_results</source>
         <target>There are no taxons to display.</target>
+      </trans-unit>
+      <trans-unit id="a17958e048f810e0b3ca8ab6a986b200" resname="sylius.taxon.product_index_header">
+        <source>sylius.taxon.product_index_header</source>
+        <target>sylius.taxon.product_index_header</target>
       </trans-unit>
       <trans-unit id="be8f3526efb6d1b32012cfe9e2059ad3" resname="sylius.taxon.update_header">
         <source>sylius.taxon.update_header</source>

@@ -38,7 +38,7 @@ class ProductController extends ResourceController
             ->findOneByPermalink($permalink);
 
         if (!isset($taxon)) {
-            throw new NotFoundHttpException('Requested taxon does not exist');
+            throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
         $paginator = $this
@@ -50,6 +50,30 @@ class ProductController extends ResourceController
         $paginator->setCurrentPage($request->query->get('page', 1));
 
         return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
+            'taxon'    => $taxon,
+            'products' => $paginator,
+        ));
+    }
+
+    public function indexByTaxonIdAction(Request $request, $id)
+    {
+        $taxon = $this->get('sylius.repository.taxon')->find($id);
+
+        if (!isset($taxon)) {
+            throw new NotFoundHttpException('Requested taxon does not exist.');
+        }
+
+        $config = $this->getConfiguration();
+
+        $paginator = $this
+            ->getRepository()
+            ->createByTaxonPaginator($taxon)
+        ;
+
+        $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
+        $paginator->setCurrentPage($request->query->get('page', 1));
+
+        return $this->renderResponse($config->getTemplate('productIndex.html'), array(
             'taxon'    => $taxon,
             'products' => $paginator,
         ));

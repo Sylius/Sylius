@@ -4,6 +4,12 @@
 </a>
 {% endmacro %}
 
+{% macro generic(url, message, icon) %}
+<a href="{{ url }}" class="btn btn-default">
+    {% if icon is not empty %}<i class="glyphicon glyphicon-{{ icon }}"></i>{% endif %}<span>{{ message }}</span>
+</a>
+{% endmacro %}
+
 {% macro create(url, message) %}
 <a href="{{ url }}" class="btn btn-primary">
     <i class="glyphicon glyphicon-plus-sign"></i><span>{{ message is empty ? 'sylius.create'|trans : message }}</span>
