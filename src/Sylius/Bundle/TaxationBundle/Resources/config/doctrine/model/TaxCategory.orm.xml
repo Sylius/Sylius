@@ -22,6 +22,12 @@
         <field name="name" column="name" type="string" />
         <field name="description" column="description" type="text" nullable="true" />
 
+        <one-to-many field="rates" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxRateInterface" mapped-by="category">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
