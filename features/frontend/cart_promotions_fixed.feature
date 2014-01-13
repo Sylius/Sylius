@@ -158,7 +158,10 @@ Feature: Checkout fixed discount promotions
           | Sticker | 4        |
           And I am on the store homepage
          When I add product "Lenny" to cart, with quantity "1"
-         Then I should be on the cart summary page
+          And I go to the checkout start page
+          And I fill in the shipping address to Poland
+          And I press "Continue"
+          And I go to the cart summary page
           And "Promotion total: (€10.00)" should appear on the page
           And "Grand total: €5.00" should appear on the page
 

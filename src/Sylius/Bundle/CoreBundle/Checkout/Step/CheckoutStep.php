@@ -28,6 +28,16 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 abstract class CheckoutStep extends ControllerStep
 {
     /**
+     * {@inheritdoc}
+     */
+    public function complete()
+    {
+        $this->dispatchCheckoutEvent('sylius_checkout_'.$this->getName().'.completed', $this->getCurrentCart());
+
+        return parent::complete();
+    }
+
+    /**
      * Get cart provider.
      *
      * @return CartProviderInterface

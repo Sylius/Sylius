@@ -11,27 +11,46 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class OrderUserListener
 {
-    protected $cartProvider;
+    protected $securityContext;
     protected $cartManager;
 
-    public function __construct(CartProviderInterface $cartProvider, ObjectManager $cartManager)
+    public function __construct(SecurityContextInterface $securityContext, ObjectManager $cartManager)
     {
-        $this->cartProvider = $cartProvider;
+        $this->securityContext = $securityContext;
         $this->cartManager = $cartManager;
     }
 
-    public function setOrderUser(InteractiveLoginEvent $event)
+    public function setOrderUser(GenericEvent $event)
     {
-        $cart = $this->cartProvider->getCart();
-        $cart->setUser($event->getAuthenticationToken()->getUser());
+        $order = $event->getSubject();
 
-        $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                'Order user listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            );
+        }
+
+        if (null === $user = $this->getUser()) {
+            return;
+        }
+
+        $order->setUser($user);
+
+        $this->cartManager->persist($order);
+        $this->cartManager->flush($order);
+    }
+
+    protected function getUser()
+    {
+        if ((null !== $token = $this->securityContext->getToken()) && is_object($user = $token->getUser())) {
+            return $user;
+        }
     }
 }
