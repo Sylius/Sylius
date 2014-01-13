@@ -116,6 +116,7 @@ class PaymentSpec extends ObjectBehavior
     function it_adds_logs($log)
     {
         $this->hasLog($log)->shouldReturn(false);
+        $log->setPayment($this)->shouldBeCalled();
         $this->addLog($log);
         $this->hasLog($log)->shouldReturn(true);
     }
@@ -126,6 +127,7 @@ class PaymentSpec extends ObjectBehavior
     function it_removes_logs($log)
     {
         $this->addLog($log);
+        $log->setPayment(null)->shouldBeCalled();
         $this->removeLog($log);
         $this->hasLog($log)->shouldReturn(false);
     }

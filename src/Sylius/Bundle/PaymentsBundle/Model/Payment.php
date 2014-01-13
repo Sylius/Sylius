@@ -231,6 +231,7 @@ class Payment implements PaymentInterface
     {
         if (!$this->hasLog($log)) {
             $this->logs->add($log);
+            $log->setPayment($this);
         }
 
         return $this;
@@ -243,6 +244,7 @@ class Payment implements PaymentInterface
     {
         if ($this->hasLog($log)) {
             $this->logs->removeElement($log);
+            $log->setPayment(null);
         }
 
         return $this;
@@ -285,15 +287,17 @@ class Payment implements PaymentInterface
     }
 
     /**
-     * @param array $details
+     * {@inheritdoc}
      */
     public function setDetails(array $details)
     {
         $this->details = $details;
+
+        return $this;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getDetails()
     {
