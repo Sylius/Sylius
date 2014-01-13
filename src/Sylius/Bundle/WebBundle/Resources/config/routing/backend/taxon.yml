@@ -23,6 +23,15 @@ sylius_backend_taxon_update:
                 route: sylius_backend_taxonomy_show
                 parameters: {'id': $taxonomyId}
 
+sylius_backend_taxon_product_index:
+    pattern: /{id}/products
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonIdAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxon:productIndex.html.twig
+            paginate: 30
+
 sylius_backend_taxon_delete:
     pattern: /{id}
     methods: [DELETE]

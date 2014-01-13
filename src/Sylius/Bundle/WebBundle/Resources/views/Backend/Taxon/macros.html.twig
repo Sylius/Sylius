@@ -38,6 +38,7 @@
     </td>
     <td>
         <div class="pull-right">
+        {{ buttons.generic(path('sylius_backend_taxon_product_index', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'sylius.browse_products'|trans) }}
         {{ buttons.edit(path('sylius_backend_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
         {{ buttons.delete(path('sylius_backend_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
         </div>

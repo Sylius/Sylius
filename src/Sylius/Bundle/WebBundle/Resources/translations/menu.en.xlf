@@ -10,14 +10,6 @@
         <source>sylius.backend.menu.main.configuration</source>
         <target>Configuration</target>
       </trans-unit>
-      <trans-unit id="a372a7d5b6e4991da23009440f5b1c98" resname="sylius.backend.menu.main.locales">
-        <source>sylius.backend.menu.main.locales</source>
-        <target>Locales</target>
-      </trans-unit>
-      <trans-unit id="b372a7d5b6e4991da23009440f5b1c98" resname="sylius.backend.menu.sidebar.locales">
-        <source>sylius.backend.menu.sidebar.locales</source>
-        <target>Locales</target>
-      </trans-unit>
       <trans-unit id="b3f20139c90a466753cd35511725f7a0" resname="sylius.backend.menu.main.countries">
         <source>sylius.backend.menu.main.countries</source>
         <target>Countries</target>
@@ -41,6 +33,10 @@
       <trans-unit id="2c21cdef4aa00a86044bf3ebf9709493" resname="sylius.backend.menu.main.homepage">
         <source>sylius.backend.menu.main.homepage</source>
         <target>Your store</target>
+      </trans-unit>
+      <trans-unit id="a8832620f479f6022e0cf9c2b3464396" resname="sylius.backend.menu.main.locales">
+        <source>sylius.backend.menu.main.locales</source>
+        <target>Locales</target>
       </trans-unit>
       <trans-unit id="d38ec9ab0caf4fec0e9d90fadaddbdff" resname="sylius.backend.menu.main.new_order">
         <source>sylius.backend.menu.main.new_order</source>
@@ -161,6 +157,10 @@
       <trans-unit id="d5ab9f2471615eb2a22c363e7aab01fc" resname="sylius.backend.menu.sidebar.homepage">
         <source>sylius.backend.menu.sidebar.homepage</source>
         <target>Back to frontend</target>
+      </trans-unit>
+      <trans-unit id="4900e8a8f7d9a20dda22d3b233b74e6d" resname="sylius.backend.menu.sidebar.locales">
+        <source>sylius.backend.menu.sidebar.locales</source>
+        <target>Locales</target>
       </trans-unit>
       <trans-unit id="cc4cae0efe5b617a36e61f0c8f3c650e" resname="sylius.backend.menu.sidebar.new_order">
         <source>sylius.backend.menu.sidebar.new_order</source>
