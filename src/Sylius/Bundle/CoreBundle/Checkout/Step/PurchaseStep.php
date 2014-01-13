@@ -99,14 +99,10 @@ class PurchaseStep extends CheckoutStep
             $type, $this->get('translator')->trans($msg, array(), 'flashes')
         );
 
-        // Complete checkout if payment success
-        if ($status->isSuccess()) {
-            $this->getCartProvider()->abandonCart();
-            return $this->complete();
-        }
-
-        // Return to payment step
-        return $this->redirect($this->generateUrl('sylius_checkout_payment'));
+        $this->dispatchEvent(
+            SyliusPayumEvents::POST_PURCHASE_STEP,
+            new GenericEvent($this, array('payment' => $payment, 'status' => $status))
+        );
     }
 
     /**
