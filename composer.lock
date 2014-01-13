@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d4846a6e67b041fbb23bbde18b18a7e2",
+    "hash": "e63dbd3e632fa96dae2b6185934875e6",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -37,48 +37,6 @@
                 "payment"
             ],
             "time": "2013-02-11 21:09:06"
-        },
-        {
-            "name": "athari/yalinqo",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Athari/YaLinqo.git",
-                "reference": "6b3247909e037f218cca624c561d8a47ceeed6d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Athari/YaLinqo/zipball/6b3247909e037f218cca624c561d8a47ceeed6d2",
-                "reference": "6b3247909e037f218cca624c561d8a47ceeed6d2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "YaLinqo/Linq.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Simplified BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Prokhorov"
-                }
-            ],
-            "description": "YaLinqo, a LINQ-to-objects library for PHP",
-            "homepage": "https://github.com/Athari/YaLinqo",
-            "keywords": [
-                "linq",
-                "linqo",
-                "query",
-                "statistic"
-            ],
-            "time": "2013-05-08 12:59:02"
         },
         {
             "name": "doctrine/annotations",
@@ -4558,7 +4516,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "athari/yalinqo": 20,
         "doctrine/doctrine-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
         "knplabs/knp-menu": 20,
