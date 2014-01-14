@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Checker;
+namespace Sylius\Bundle\ResourceBundle\Checker;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\ResourceBundle\Model\SubjectInterface;
 
 /**
- * Promotion rule checker interface.
+ * Rule checker interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleCheckerInterface
 {
     /**
-     * @param PromotionSubjectInterface $subject
-     * @param array                     $configuration
+     * @param SubjectInterface $subject
+     * @param array            $configuration
      *
      * @return Boolean
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration);
+    public function isEligible(SubjectInterface $subject, array $configuration);
 
     /**
      * @return string

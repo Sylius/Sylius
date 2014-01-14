@@ -9,32 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ShippingBundle\Checker\Registry;
+namespace spec\Sylius\Bundle\ResourceBundle\Checker\Registry;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NonExistingRuleCheckerExceptionSpec extends ObjectBehavior
+class ExistingRuleCheckerExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(RuleInterface::TYPE_ITEM_TOTAL);
+        $this->beConstructedWith('fake type');
     }
 
-    function it_is_initializable()
+    function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Checker\Registry\NonExistingRuleCheckerException');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Checker\Registry\ExistingRuleCheckerException');
     }
 
-    function it_is_an_exception()
+    function it_should_be_an_exception()
     {
         $this->shouldHaveType('Exception');
     }
 
-    function it_is_a_invalid_argument_exception()
+    function it_should_be_a_invalid_argument_exception()
     {
         $this->shouldHaveType('InvalidArgumentException');
     }

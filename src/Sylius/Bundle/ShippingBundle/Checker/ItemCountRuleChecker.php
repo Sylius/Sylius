@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ShippingBundle\Checker;
 
+use Sylius\Bundle\ResourceBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Model\SubjectInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
@@ -20,8 +22,15 @@ use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
  */
 class ItemCountRuleChecker implements RuleCheckerInterface
 {
-    public function isEligible(ShippingSubjectInterface $subject, array $configuration)
+    /**
+     * {@inheritdoc}
+     */
+    public function isEligible(SubjectInterface $subject, array $configuration)
     {
+        if (!$subject instanceof ShippingSubjectInterface) {
+            throw new \InvalidArgumentException();
+        }
+
         $count = $subject->getShippingItemCount();
 
         if ($configuration['equal']) {
@@ -31,6 +40,9 @@ class ItemCountRuleChecker implements RuleCheckerInterface
         return $count > $configuration['count'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigurationFormType()
     {
         return 'sylius_shipping_rule_item_count_configuration';

@@ -11,13 +11,15 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
+use Sylius\Bundle\ResourceBundle\Model\SubjectInterface;
+
 /**
  * Promotion subject interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface PromotionSubjectInterface
+interface PromotionSubjectInterface extends SubjectInterface
 {
     /**
      * Get associated coupon

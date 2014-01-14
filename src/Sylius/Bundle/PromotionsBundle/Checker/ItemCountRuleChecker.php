@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\PromotionsBundle\Checker;
 
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
+use Sylius\Bundle\ResourceBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Model\SubjectInterface;
 
 /**
  * Checks if subject item count exceeds (or at least equal) to the configured count.
@@ -23,8 +25,12 @@ class ItemCountRuleChecker implements RuleCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(SubjectInterface $subject, array $configuration)
     {
+        if (!$subject instanceof PromotionSubjectInterface) {
+            throw new \InvalidArgumentException();
+        }
+
         if (isset($configuration['equal']) && $configuration['equal']) {
             return $subject->getPromotionSubjectItemCount() >= $configuration['count'];
         }

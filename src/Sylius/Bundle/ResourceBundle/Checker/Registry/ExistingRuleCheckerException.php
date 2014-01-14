@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ShippingBundle\Checker\Registry;
+namespace Sylius\Bundle\ResourceBundle\Checker\Registry;
 
 /**
  * This exception should be thrown by rule checker registry
@@ -21,6 +21,6 @@ class ExistingRuleCheckerException extends \InvalidArgumentException
 {
     public function __construct($type)
     {
-        parent::__construct(sprintf('Shipping method rule checker of type "%s" already exist.', $type));
+        parent::__construct(sprintf('Rule checker of type "%s" already exist.', $type));
     }
 }
