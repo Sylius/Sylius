@@ -46,7 +46,7 @@
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "payum/payum":                          "0.7.*",
-        "payum/payum-bundle":                   "0.7.*"
+        "payum/payum-bundle":                   "~0.7.1"
     },
     "require-dev": {
         "behat/behat":                       "2.4.*@stable",

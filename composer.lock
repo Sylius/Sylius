@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e63dbd3e632fa96dae2b6185934875e6",
+    "hash": "e82c155077725f7db96482031aeef969",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -44,12 +44,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670"
+                "reference": "v1.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/40db0c96985aab2822edbc4848b3bd2429e02670",
-                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1.2",
+                "reference": "v1.1.2",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1541,7 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -2176,7 +2176,7 @@
                 "symfony/options-resolver": ">=2.0.16,~2.0"
             },
             "require-dev": {
-                "symfony/yaml": ">=2.0.16,~2.0",
+                "symfony/yaml": ">=2.0.16.0,>=2.0,<3.0",
                 "twig/twig": ">=1.0,<2.0-dev"
             },
             "suggest": {
@@ -2328,13 +2328,13 @@
             "version": "v0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287"
+                "url": "https://github.com/nikic/PHP-Parser",
+                "reference": "v0.9.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
-                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
+                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
+                "reference": "v0.9.1",
                 "shasum": ""
             },
             "require": {
@@ -2360,7 +2360,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2012-04-23 22:52:11"
+            "time": "2012-04-23 15:52:11"
         },
         {
             "name": "omnipay/omnipay",
@@ -2614,16 +2614,16 @@
         },
         {
             "name": "payum/payum",
-            "version": "0.7.0",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "6fed5b9c96fb1d66b001d22abf9d146bb4d2b1a8"
+                "reference": "868e2d9a4afd64e8edbf3010fbee650afc330857"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/6fed5b9c96fb1d66b001d22abf9d146bb4d2b1a8",
-                "reference": "6fed5b9c96fb1d66b001d22abf9d146bb4d2b1a8",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/868e2d9a4afd64e8edbf3010fbee650afc330857",
+                "reference": "868e2d9a4afd64e8edbf3010fbee650afc330857",
                 "shasum": ""
             },
             "require": {
@@ -2707,21 +2707,21 @@
                 "paypal rest",
                 "recurring payment"
             ],
-            "time": "2013-12-26 10:11:45"
+            "time": "2014-01-12 11:04:02"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "0.7.0",
+            "version": "0.7.1",
             "target-dir": "Payum/Bundle/PayumBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "ece11e25e279ac197e6c80ec7673e436d0700601"
+                "reference": "2b044b8bed266261b29dd5ff4625b28a0ac17b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/ece11e25e279ac197e6c80ec7673e436d0700601",
-                "reference": "ece11e25e279ac197e6c80ec7673e436d0700601",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/2b044b8bed266261b29dd5ff4625b28a0ac17b28",
+                "reference": "2b044b8bed266261b29dd5ff4625b28a0ac17b28",
                 "shasum": ""
             },
             "require": {
@@ -2763,7 +2763,7 @@
             ],
             "authors": [
                 {
-                    "name": "Maksim Kotlyar",
+                    "name": "Kotlyar Maksim",
                     "email": "kotlyar.maksim@gmail.com"
                 },
                 {
@@ -2790,7 +2790,7 @@
                 "paypal pro checkout",
                 "recurring payment"
             ],
-            "time": "2013-12-26 11:16:43"
+            "time": "2013-12-28 14:07:34"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -2896,13 +2896,13 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "url": "https://github.com/php-fig/log",
+                "reference": "1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
+                "reference": "1.0.0",
                 "shasum": ""
             },
             "type": "library",
