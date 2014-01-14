@@ -472,8 +472,11 @@ class Order extends Cart implements OrderInterface
      */
     public function getLastShipment()
     {
-        $last = $this->shipments->count() ? $this->shipments->first() : null;
+        if ($this->shipments->isEmpty()) {
+            return null;
+        }
 
+        $last = $this->shipments->first();
         foreach ($this->shipments as $shipment) {
             if ($shipment->getUpdatedAt() > $last->getUpdatedAt()) {
                 $last = $shipment;
