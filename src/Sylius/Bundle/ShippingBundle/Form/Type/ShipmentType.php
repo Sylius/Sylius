@@ -60,7 +60,11 @@ class ShipmentType extends AbstractType
                     ShipmentInterface::STATE_READY      => 'sylius.form.shipment.states.ready',
                     ShipmentInterface::STATE_SHIPPED    => 'sylius.form.shipment.states.shipped',
                     ShipmentInterface::STATE_RETURNED   => 'sylius.form.shipment.states.returned',
-                )
+                ),
+            ))
+            ->add('tracking', 'text', array(
+                'label'    => 'sylius.form.shipment.tracking_code',
+                'required' => false,
             ))
         ;
     }

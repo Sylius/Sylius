@@ -16,6 +16,7 @@ sylius:
                 ready:      Ready
                 shipped:    Shipped
                 returned:   Returned
+            tracking_code: Tracking Code
 
         shipping_calculator:
             flat_rate_configuration:

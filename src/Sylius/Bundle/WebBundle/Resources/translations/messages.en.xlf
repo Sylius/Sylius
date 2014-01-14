@@ -1802,6 +1802,10 @@
         <source>sylius.shipment.state</source>
         <target>State</target>
       </trans-unit>
+      <trans-unit id="7b8933f3f67f823f90ee7073600dcf5b" resname="sylius.shipment.tracking_code">
+        <source>sylius.shipment.tracking_code</source>
+        <target>Tracking Code</target>
+      </trans-unit>
       <trans-unit id="99a9e26ea8a26b9943674dedbfc0f2c1" resname="sylius.shipment.update">
         <source>sylius.shipment.update</source>
         <target>Edit</target>
@@ -2121,6 +2125,10 @@
       <trans-unit id="eeed0e5babbe776a907ee0eeb64fe1bd" resname="sylius.taxonomy.update_header">
         <source>sylius.taxonomy.update_header</source>
         <target>Editing taxonomy</target>
+      </trans-unit>
+      <trans-unit id="7106d39c1fe07cc3c4dad301aaa68272" resname="sylius.unknown">
+        <source>sylius.unknown</source>
+        <target>Unknown</target>
       </trans-unit>
       <trans-unit id="d4dd621e8d7998e4dcc0aa3093c024a1" resname="sylius.user.billing_address">
         <source>sylius.user.billing_address</source>
