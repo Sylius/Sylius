@@ -21,7 +21,6 @@
     "require": {
         "php":                                  ">=5.3.3",
 
-        "athari/yalinqo":                       "*@dev",
         "doctrine/doctrine-bundle":             "1.2.*@dev",
         "doctrine/orm":                         "~2.3",
         "friendsofsymfony/rest-bundle":         "~1.0",
