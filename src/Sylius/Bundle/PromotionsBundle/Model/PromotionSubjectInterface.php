@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+
 /**
  * Promotion subject interface.
  *
@@ -39,4 +41,35 @@ interface PromotionSubjectInterface
      * @return integer
      */
     public function getPromotionSubjectItemTotal();
+
+    /**
+     * Has Promotion
+     *
+     * @param PromotionInterface $promotion
+     * @return bool
+     */
+    public function hasPromotion(PromotionInterface $promotion);
+
+    /**
+     * Add Promotion
+     *
+     * @param PromotionInterface $promotion
+     * @return self
+     */
+    public function addPromotion(PromotionInterface $promotion);
+
+    /**
+     * Remove Promotion
+     *
+     * @param PromotionInterface $promotion
+     * @return self
+     */
+    public function removePromotion(PromotionInterface $promotion);
+
+    /**
+     * Get Promotions
+     *
+     * @return PromotionInterface[]
+     */
+    public function getPromotions();
 }

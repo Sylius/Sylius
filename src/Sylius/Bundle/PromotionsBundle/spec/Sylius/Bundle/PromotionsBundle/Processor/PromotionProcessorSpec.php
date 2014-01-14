@@ -40,7 +40,7 @@ class PromotionProcessorSpec extends ObjectBehavior
 
     function it_should_not_apply_promotions_that_are_not_eligible($repository, $checker, $applicator, PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        $repository->findAppliedOnSubject($subject)->shouldBeCalled()->willReturn(array());
+        $subject->getPromotions()->shouldBeCalled()->willReturn(array());
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
         $applicator->apply($subject, $promotion)->shouldNotBeCalled();
@@ -51,7 +51,7 @@ class PromotionProcessorSpec extends ObjectBehavior
 
     function it_should_apply_promotions_that_are_eligible($repository, $checker, $applicator, PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        $repository->findAppliedOnSubject($subject)->shouldBeCalled()->willReturn(array());
+        $subject->getPromotions()->shouldBeCalled()->willReturn(array());
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
         $applicator->apply($subject, $promotion)->shouldBeCalled();
@@ -62,7 +62,7 @@ class PromotionProcessorSpec extends ObjectBehavior
 
     function it_should_revert_promotions_that_are_not_eligible_anymore($repository, $checker, $applicator, PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        $repository->findAppliedOnSubject($subject)->shouldBeCalled()->willReturn(array($promotion));
+        $subject->getPromotions()->shouldBeCalled()->willReturn(array($promotion));
         $repository->findActive()->shouldBeCalled()->willReturn(array($promotion));
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
 

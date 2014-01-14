@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -191,5 +192,33 @@ class PromotionSpec extends ObjectBehavior
         $this->removeAction($action);
 
         $this->hasAction($action)->shouldReturn(false);
+    }
+
+    function it_should_initialize_subjects_collection_by_default()
+    {
+        $this->getSubjects()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    function it_should_add_subject_properly(PromotionSubjectInterface $subject)
+    {
+        $this->hasSubject($subject)->shouldReturn(false);
+
+        $subject->addPromotion($this)->shouldBeCalled();
+        $this->addSubject($subject);
+
+        $this->hasSubject($subject)->shouldReturn(true);
+    }
+
+    function it_should_remove_subject_properly(PromotionSubjectInterface $subject)
+    {
+        $this->hasSubject($subject)->shouldReturn(false);
+
+        $subject->addPromotion($this)->shouldBeCalled();
+        $this->addSubject($subject);
+
+        $subject->removePromotion($this)->shouldBeCalled();
+        $this->removeSubject($subject);
+
+        $this->hasSubject($subject)->shouldReturn(false);
     }
 }

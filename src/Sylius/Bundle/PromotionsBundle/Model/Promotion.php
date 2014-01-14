@@ -468,6 +468,7 @@ class Promotion implements PromotionInterface
     public function addSubject(PromotionSubjectInterface $subject)
     {
         if (!$this->hasSubject($subject)) {
+            $subject->addPromotion($this);
             $this->subjects[] = $subject;
         }
 
@@ -480,6 +481,7 @@ class Promotion implements PromotionInterface
     public function removeSubject(PromotionSubjectInterface $subject)
     {
         $this->subjects->removeElement($subject);
+        $subject->removePromotion($this);
     }
 
     /**

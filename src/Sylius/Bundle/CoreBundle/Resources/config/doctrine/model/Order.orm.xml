@@ -50,6 +50,10 @@
         <field name="currency" length="3" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
+        
+        <many-to-many field="promotions" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" mapped-by="subjects">
+            <cascade><cascade-persist /></cascade>
+        </many-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>
