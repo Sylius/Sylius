@@ -27,6 +27,10 @@
             <join-column name="payment_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
+        <many-to-one target-entity="Sylius\Bundle\PromotionsBundle\Model\CouponInterface" field="promotionCoupon">
+            <join-column name="coupon_id" on-delete="SET NULL" />
+        </many-to-one>
+
         <one-to-many field="inventoryUnits" target-entity="Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>
