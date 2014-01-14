@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 
@@ -68,7 +69,7 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
     /**
      * Get current cart.
      *
-     * @return CartInterface
+     * @return OrderInterface
      */
     protected function getCurrentCart()
     {

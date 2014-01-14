@@ -12,16 +12,15 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusSettingsExtensionSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface $settingsManager
-     */
-    function let($settingsManager)
+    function let(SettingsManagerInterface $settingsManager)
     {
         $this->beConstructedWith($settingsManager);
     }
@@ -36,20 +35,14 @@ class SyliusSettingsExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('Twig_Extension');
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\Settings $settings
-     */
-    function it_should_return_settings_by_namespace($settingsManager, $settings)
+    function it_should_return_settings_by_namespace($settingsManager, Settings $settings)
     {
         $settingsManager->loadSettings('taxation')->shouldBeCalled()->willReturn($settings);
 
         $this->getSettings('taxation')->shouldReturn($settings);
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Model\Settings $settings
-     */
-    function it_should_return_settings_parameter_by_namespace_and_name($settingsManager, $settings)
+    function it_should_return_settings_parameter_by_namespace_and_name($settingsManager, Settings $settings)
     {
         $settingsManager->loadSettings('shipping')->shouldBeCalled()->willReturn($settings);
         $settings->get('price')->shouldBeCalled()->willReturn(19.99);

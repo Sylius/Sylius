@@ -45,7 +45,7 @@ class SettingsController extends Controller
 
         $form->setData($settings);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $manager->saveSettings($namespace, $form->getData());
 
             $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
