@@ -110,3 +110,4 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Bundle\CoreBundle\Model\Locale
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
