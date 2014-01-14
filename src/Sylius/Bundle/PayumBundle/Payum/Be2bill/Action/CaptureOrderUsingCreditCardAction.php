@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Exception\LogicException;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\SecuredCaptureRequest;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Exception\LogicException;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\SecuredCaptureRequest;
+use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,12 +62,12 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $details['CLIENTIDENT'] = $order->getUser()->getId();
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
             $details['ORDERID'] = $order->getId();
-            $details['CARDCODE'] = $obtainCreditCardRequest->getCreditCard()->getNumber();
-            $details['CARDCVV'] = $obtainCreditCardRequest->getCreditCard()->getSecurityCode();
-            $details['CARDFULLNAME'] = $obtainCreditCardRequest->getCreditCard()->getCardholderName();
-            $details['CARDVALIDITYDATE'] = sprintf(
+            $details['CARDCODE'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getNumber());
+            $details['CARDCVV'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getSecurityCode());
+            $details['CARDFULLNAME'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getCardholderName());
+            $details['CARDVALIDITYDATE'] = new SensitiveValue(sprintf(
                     '%02d-%02d', $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(), substr($obtainCreditCardRequest->getCreditCard()->getExpiryYear(), -2)
-            );
+            ));
 
             $payment->setDetails($details);
         }
@@ -76,14 +77,8 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $this->payment->execute($request);
 
             $request->setModel($order);
-
-            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
-            $details = $this->sanitizePayment($payment->getDetails());
-            $payment->setDetails($details);
         } catch (\Exception $e) {
-            //TODO: when sensitive value object is used this would be removed. Require update to payum 0.7.
-            $details = $this->sanitizePayment($payment->getDetails());
-            $payment->setDetails($details);
+            $request->setModel($order);
 
             throw $e;
         }
@@ -98,19 +93,5 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $request instanceof SecuredCaptureRequest &&
             $request->getModel() instanceof OrderInterface
         ;
-    }
-
-    /**
-     * Sanitize paymentDetails array by removing all card-related data
-     * @param array $details
-     * @return array $details
-     */
-    protected function sanitizePayment(array $details)
-    {
-        foreach (array('CARDCODE', 'CARDCVV', 'CARDFULLNAME', 'CARDVALIDITYDATE') as $idx) {
-            unset($details[$idx]);
-        }
-
-        return $details;
     }
 }

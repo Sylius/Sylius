@@ -36,4 +36,5 @@ sylius_backend_payment_method_delete:
     defaults:
         _controller: sylius.controller.payment_method:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_payment_method_index

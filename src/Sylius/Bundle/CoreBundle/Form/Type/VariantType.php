@@ -49,6 +49,22 @@ class VariantType extends BaseVariantType
                 'by_reference' => false,
                 'label'        => 'sylius.form.variant.images'
             ))
+            ->add('width', 'number', array(
+                'required' => false,
+                'label'    => 'sylius.form.variant.width'
+            ))
+            ->add('height', 'number', array(
+                'required' => false,
+                'label'    => 'sylius.form.variant.height'
+            ))
+            ->add('depth', 'number', array(
+                'required' => false,
+                'label'    => 'sylius.form.variant.depth'
+            ))
+            ->add('weight', 'number', array(
+                'required' => false,
+                'label'    => 'sylius.form.variant.weight'
+            ))
         ;
     }
 }

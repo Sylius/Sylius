@@ -1,39 +1,35 @@
-SyliusMoneyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusMoneyBundle.png)](http://travis-ci.org/Sylius/SyliusMoneyBundle)
+SyliusMoneyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusMoneyBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusMoneyBundle)
 =================
 
-Symfony2 integration with PHP Money library.
+[**Symfony2**](http://symfony.com) integration with PHP Money library.
 
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-Visit [Sylius.org](http://sylius.org).
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
-[phpspec2](http://phpspec.net) Specifications
----------------------------------------------
-
-``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar install --dev
-$ bin/phpspec run
+```bash
+$ composer install
+$ bin/phpspec run -f pretty
 ```
 
 Documentation
 -------------
 
-Documentation is available on [**readthedocs.org**](http://sylius.readthedocs.org/en/latest/bundles/SyliusMoneyBundle.html).
+Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusInventoryBundle/index.html).
 
 Code examples
 -------------
 
 If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
 
-
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://sylius.readthedocs.org/en/latest/contributing/index.html).
+All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
@@ -49,7 +45,7 @@ To contribute and develop this bundle, use the [developers mailing list](http://
 Sylius twitter account
 ----------------------
 
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

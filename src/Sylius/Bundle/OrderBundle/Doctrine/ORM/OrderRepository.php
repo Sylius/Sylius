@@ -28,6 +28,8 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     {
         $queryBuilder = $this->getQueryBuilder();
 
+        $this->_em->getFilters()->disable('softdeleteable');
+
         return $queryBuilder
             ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->setMaxResults($amount)

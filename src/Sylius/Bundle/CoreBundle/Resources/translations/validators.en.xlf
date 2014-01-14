@@ -54,10 +54,6 @@
         <source>sylius.variant.price.not_blank</source>
         <target>Please enter the price.</target>
       </trans-unit>
-      <trans-unit id="037feafe4e225e37e282013f608a4a49" resname="sylius.variant.sku.unique">
-        <source>sylius.variant.sku.unique</source>
-        <target>sylius.variant.sku.unique</target>
-      </trans-unit>
       <trans-unit id="381ad7dedffbd02e6f060ea0cb53a38d" resname="sylius_shipping.method.zone.not_blank">
         <source>sylius_shipping.method.zone.not_blank</source>
         <target>Please enter shipping method zone.</target>
@@ -65,6 +61,14 @@
       <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
         <source>sylius_taxation.rate.zone.not_blank</source>
         <target>Please enter tax rate zone.</target>
+      </trans-unit>
+      <trans-unit id="66099d65e24942c0f827f5119f223d46" resname="sylius.locale.code.not_blank">
+        <source>sylius.locale.code.not_blank</source>
+        <target>Please enter locale code.</target>
+      </trans-unit>
+      <trans-unit id="67099d65e24942c0f827f5119f223d46" resname="sylius.locale.code.unique">
+        <source>sylius.locale.code.unique</source>
+        <target>This locale already exists.</target>
       </trans-unit>
     </body>
   </file>

@@ -22,12 +22,12 @@ class OrderStatusActionSpec extends ObjectBehavior
 
     function it_extends_payum_payment_aware_action()
     {
-        $this->shouldHaveType('Payum\Action\PaymentAwareAction');
+        $this->shouldHaveType('Payum\Core\Action\PaymentAwareAction');
     }
 
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Payum\Request\StatusRequestInterface          $statusRequest
+     * @param Payum\Core\Request\StatusRequestInterface     $statusRequest
      */
     function it_should_support_status_request_with_order_model($order, $statusRequest)
     {
@@ -37,7 +37,7 @@ class OrderStatusActionSpec extends ObjectBehavior
     }
 
     /**
-     * @param Payum\Request\StatusRequestInterface $statusRequest
+     * @param Payum\Core\Request\StatusRequestInterface $statusRequest
      */
     function it_should_not_support_status_request_with_no_order_model($statusRequest)
     {
@@ -56,7 +56,7 @@ class OrderStatusActionSpec extends ObjectBehavior
         $notSupportedRequest = 'foo';
 
         $this
-            ->shouldThrow('Payum\Exception\RequestNotSupportedException')
+            ->shouldThrow('Payum\Core\Exception\RequestNotSupportedException')
             ->duringExecute($notSupportedRequest)
         ;
     }
@@ -64,7 +64,7 @@ class OrderStatusActionSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface       $order
      * @param Sylius\Bundle\PaymentsBundle\Model\PaymentInterface $payment
-     * @param Payum\Request\StatusRequestInterface                $statusRequest
+     * @param Payum\Core\Request\StatusRequestInterface           $statusRequest
      */
     function it_should_mark_new_if_order_have_empty_payment_details($order, $payment, $statusRequest)
     {
@@ -80,8 +80,8 @@ class OrderStatusActionSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface       $order
      * @param Sylius\Bundle\PaymentsBundle\Model\PaymentInterface $payment
-     * @param Payum\Request\StatusRequestInterface                $statusRequest
-     * @param Payum\PaymentInterface                              $payment
+     * @param Payum\Core\Request\StatusRequestInterface           $statusRequest
+     * @param Payum\Core\PaymentInterface                         $payment
      */
     function it_should_do_status_subrequest_with_payment_details_as_model($order, $payment, $statusRequest, $payment)
     {

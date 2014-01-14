@@ -12,18 +12,20 @@
 namespace spec\Sylius\Bundle\CartBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SyliusCartExtensionSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CartBundle\Provider\CartProviderInterface $cartProvider
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface  $itemRepository
-     * @param Symfony\Component\Form\FormFactory                      $formFactory
-     */
-    function let($cartProvider, $itemRepository, $formFactory)
+    function let(CartProviderInterface $cartProvider, RepositoryInterface $itemRepository, FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($cartProvider, $itemRepository, $formFactory);
     }
@@ -38,23 +40,15 @@ class SyliusCartExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('Twig_Extension');
     }
 
-    /**
-     * @param Sylius\Bundle\CartBundle\Model\CartInterface $cart
-     */
-    function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, $cart)
+    function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, CartInterface $cart)
     {
         $cartProvider->getCart()->willReturn($cart);
 
         $this->getCurrentCart()->shouldReturn($cart);
     }
 
-    /**
-     * @param Symfony\Component\Form\Form                      $form
-     * @param Symfony\Component\Form\FormView                  $formView
-     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
-     */
     function its_getItemFormView_returns_a_form_view_of_cart_item_form(
-        $itemRepository, $formFactory, $form, $formView, $item
+        $itemRepository, $formFactory, FormInterface $form, FormView $formView, CartItemInterface $item
     )
     {
         $itemRepository->createNew()->shouldBeCalled()->willReturn($item);
@@ -64,13 +58,8 @@ class SyliusCartExtensionSpec extends ObjectBehavior
         $this->getItemFormView()->shouldReturn($formView);
     }
 
-    /**
-     * @param Symfony\Component\Form\Form                      $form
-     * @param Symfony\Component\Form\FormView                  $formView
-     * @param Sylius\Bundle\CartBundle\Model\CartItemInterface $item
-     */
     function its_getItemFormView_uses_given_options_when_creating_form(
-        $itemRepository, $formFactory, $form, $formView, $item
+        $itemRepository, $formFactory, FormInterface $form, FormView $formView, CartItemInterface $item
     )
     {
         $itemRepository->createNew()->shouldBeCalled()->willReturn($item);

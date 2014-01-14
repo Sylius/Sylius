@@ -16,6 +16,9 @@ use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 
 class ConfigureStep extends ControllerStep
 {
+    /**
+     * {@inheritdoc}
+     */
     public function displayAction(ProcessContextInterface $context)
     {
         return $this->render(
@@ -24,14 +27,16 @@ class ConfigureStep extends ControllerStep
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function forwardAction(ProcessContextInterface $context)
     {
+        $request = $this->getRequest();
         $form = $this->createConfigurationForm();
 
-        if ($this->getRequest()->isMethod('POST') && $form->bind($this->getRequest())->isValid()) {
-            $data = $form->getData();
-
-            $this->get('sylius.installer.yaml_persister')->dump($data);
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+            $this->get('sylius.installer.yaml_persister')->dump($form->getData());
 
             return $this->complete();
         }

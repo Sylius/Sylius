@@ -14,7 +14,9 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -44,7 +46,8 @@ class OrderController extends Controller
     /**
      * Get single order of the current user
      *
-     * @param $number
+     * @param string $number
+     *
      * @return Response
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
@@ -52,7 +55,6 @@ class OrderController extends Controller
     public function showOrderAction($number)
     {
         $order = $this->findOrderOr404($number);
-        $this->accessOrderOr403($order);
 
         return $this->render(
             'SyliusWebBundle:Frontend/Account:Order/show.html.twig',
@@ -63,15 +65,16 @@ class OrderController extends Controller
     /**
      * Renders an invoice as PDF
      *
-     * @param $number
+     * @param Request $request
+     * @param string  $number
+     *
      * @return Response
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
-    public function renderInvoiceAction($number)
+    public function renderInvoiceAction(Request $request, $number)
     {
         $order = $this->findOrderOr404($number);
-        $this->accessOrderOr403($order);
 
         if (!$order->isInvoiceAvailable()) {
             throw $this->createNotFoundException('The invoice can not yet be generated');
@@ -81,19 +84,21 @@ class OrderController extends Controller
             'order'  => $order
         ));
 
+        if ('html' === $request->attributes->get('_format')) {
+            return new Response($html);
+        }
+
         $generator = $this
             ->get('knp_snappy.pdf')
             ->getInternalGenerator();
 
-        $generator->setOptions(
-                array(
-                    'footer-left' => '[title]',
-                    'footer-right' => '[page]/[topage]',
-                    'footer-line' => true,
-                    'footer-font-name' => '"Helvetica Neue",​Helvetica,​Arial,​sans-serif',
-                    'footer-font-size' => 10,
-                )
-            );
+        $generator->setOptions(array(
+            'footer-left' => '[title]',
+            'footer-right' => '[page]/[topage]',
+            'footer-line' => true,
+            'footer-font-name' => '"Helvetica Neue",​Helvetica,​Arial,​sans-serif',
+            'footer-font-size' => 10,
+        ));
 
         return new Response(
             $generator->getOutputFromHtml($html),
@@ -116,33 +121,22 @@ class OrderController extends Controller
     /**
      * Finds order or throws 404
      *
-     * @param $number
-     * @return Order
+     * @param string $number
+     *
+     * @return OrderInterface
      * @throws NotFoundHttpException
+     * @throws AccessDeniedException
      */
     private function findOrderOr404($number)
     {
         if (null === $order = $this->getOrderRepository()->findOneByNumber($number)) {
-            throw $this->createNotFoundException('The order does not exist');
+            throw $this->createNotFoundException('The order does not exist.');
+        }
+
+        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') && $this->getUser()->getId() !== $order->getUser()->getId()) {
+            throw new AccessDeniedException();
         }
 
         return $order;
     }
-
-    /**
-     * Accesses order or throws 403
-     *
-     * @param  Order                 $order
-     * @throws AccessDeniedException
-     */
-    private function accessOrderOr403(OrderInterface $order)
-    {
-        if (false === $this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') &&
-            $this->getUser()->getId() !== $order->getUser()->getId()) {
-            throw new AccessDeniedException();
-        }
-
-        return;
-    }
-
 }

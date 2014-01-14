@@ -35,6 +35,7 @@ sylius_backend_taxonomy_delete:
     defaults:
         _controller: sylius.controller.taxonomy:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_taxonomy_index
 
 sylius_backend_taxonomy_show:

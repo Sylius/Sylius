@@ -2,17 +2,17 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
-      <trans-unit id="b35abff3ac27033d049562863e7e61d1" resname="sylius.checkout.success">
-        <source>sylius.checkout.success</source>
-        <target>Thank you for your order!</target>
+      <trans-unit id="dd241b4916dfb08ac2cec750c8ca54af" resname="sylius.cart.restricted_zone_removal">
+        <source>sylius.cart.restricted_zone_removal</source>
+        <target>Product %product% removed from cart since it is not available in your country.</target>
       </trans-unit>
-      <trans-unit id="b35abff3ac27033d049562863e7e61d2" resname="sylius.checkout.restricted_zone">
+      <trans-unit id="8ca4c2b1d2adf218c98e37f2edd41455" resname="sylius.checkout.restricted_zone">
         <source>sylius.checkout.restricted_zone</source>
         <target>This product is not available in your country.</target>
       </trans-unit>
-      <trans-unit id="b35abff3ac27033d049562863e7e61d2" resname="sylius.cart.restricted_zone_removal">
-        <source>sylius.cart.restricted_zone_removal</source>
-        <target>Product %product% removed from cart since it is not available in your country.</target>
+      <trans-unit id="b35abff3ac27033d049562863e7e61d1" resname="sylius.checkout.success">
+        <source>sylius.checkout.success</source>
+        <target>Thank you for your order!</target>
       </trans-unit>
     </body>
   </file>

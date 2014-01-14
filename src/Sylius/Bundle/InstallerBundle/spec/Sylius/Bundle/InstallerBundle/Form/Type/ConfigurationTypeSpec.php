@@ -11,46 +11,36 @@
 
 namespace spec\Sylius\Bundle\InstallerBundle\Form\Type;
 
-use PHPSpec2\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
-class SetupType extends ObjectBehavior
+class ConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith('User');
-    }
-
     function it_is_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('username', 'text', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('database', 'sylius_configuration_database', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('plain_password', 'password', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('mailer', 'sylius_configuration_mailer', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('email', 'email', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('locale', 'sylius_configuration_locale', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('load_fixtures', 'checkbox', ANY_ARGUMENT)
-            ->shouldBeCalled()
+            ->add('hidden', 'sylius_configuration_hidden')
             ->willReturn($builder)
         ;
 

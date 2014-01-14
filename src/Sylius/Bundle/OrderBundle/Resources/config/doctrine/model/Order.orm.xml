@@ -49,6 +49,9 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
+
+        <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -36,6 +36,7 @@ sylius_backend_tax_category_delete:
     defaults:
         _controller: sylius.controller.tax_category:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_tax_category_index
 
 sylius_backend_tax_category_show:

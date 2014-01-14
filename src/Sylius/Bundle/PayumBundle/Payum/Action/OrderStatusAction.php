@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\StatusRequestInterface;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\StatusRequestInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class OrderStatusAction extends PaymentAwareAction

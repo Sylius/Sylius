@@ -15,6 +15,11 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_user_create'), 'sylius.user.create'|trans) }}
+        {% if app.request.query.get('deleted') %}
+            <a href="{{ path('sylius_backend_user_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
+        {% else %}
+            <a href="{{ path('sylius_backend_user_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
+        {% endif %}
     </div>
     <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.user.index_header'|trans|raw }}</h1>
 </div>

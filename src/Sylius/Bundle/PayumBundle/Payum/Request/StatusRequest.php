@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Request;
 
-use Payum\Request\BaseStatusRequest;
+use Payum\Core\Request\BaseStatusRequest;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class StatusRequest extends BaseStatusRequest

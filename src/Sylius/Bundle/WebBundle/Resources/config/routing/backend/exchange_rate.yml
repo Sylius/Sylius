@@ -35,4 +35,5 @@ sylius_backend_exchange_rate_delete:
     defaults:
         _controller: sylius.controller.exchange_rate:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_exchange_rate_index

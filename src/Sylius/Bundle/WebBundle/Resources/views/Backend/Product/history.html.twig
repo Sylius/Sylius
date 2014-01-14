@@ -1,0 +1,69 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li>{{ product.name }}</li>
+    <li>{{ 'sylius.history'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+    {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if not product.deleted %}
+    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
+    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-info">
+       <i class="glyphicon glyphicon-shopping-cart"></i>
+        {{ 'sylius.product.show_in_store'|trans }}
+    </a>
+    {% endif %}
+    </div>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+</div>
+
+{% if logs|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th class="action">{{ 'sylius.history.action'|trans }}</th>
+            <th class="version">{{ 'sylius.history.version'|trans }}</th>
+            <th class="data">{{ 'sylius.history.data'|trans }}</th>
+            <th class="author">{{ 'sylius.history.author'|trans }}</th>
+            <th class="logged-at">{{ 'sylius.history.logged_at'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for log in logs %}
+        <tr>
+            <td><span class="label label-info">{{ log.action|upper }}</span></td>
+            <td>#{{ log.version }}</td>
+            <td>
+                {% if log.data is not empty %}
+                <ul>
+                    {% for key, value in log.data %}
+                    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>{{ log.username }}</td>
+            <td>{{ log.loggedAt|date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.no_results'|trans) }}
+{% endif %}
+
+{% endblock %}

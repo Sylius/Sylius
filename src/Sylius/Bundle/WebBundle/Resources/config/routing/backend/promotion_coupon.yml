@@ -38,6 +38,7 @@ sylius_backend_promotion_coupon_delete:
     defaults:
         _controller: sylius.controller.promotion_coupon:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: referer
 
 sylius_backend_promotion_coupon_generate:

@@ -1,4 +1,4 @@
-SyliusWebBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusWebBundle.png)](http://travis-ci.org/Sylius/SyliusWebBundle)
+SyliusWebBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusWebBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusWebBundle)
 ================
 
 Sylius store web bundle.  
@@ -7,15 +7,15 @@ It contains all frontend components that build the Sylius webshop interface.
 Sylius
 ------
 
-**Sylius**, webshop engine for Symfony2.
+**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
 Visit [Sylius.org](http://sylius.org).
 
-[phpspec2](http://phpspec.net) examples
----------------------------------------
+[phpspec](http://phpspec.net) examples
+--------------------------------------
 
-``` bash
-$ composer install --dev --prefer-dist
+```bash
+$ composer install
 $ bin/phpspec run -f pretty
 ```
 
@@ -29,10 +29,21 @@ Contributing
 
 All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
-Sylius on twitter
------------------
+Mailing lists
+-------------
 
-If you want to keep up with the updates, [follow the official Sylius account on twitter](http://twitter.com/_Sylius).
+### Users
+
+Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+
+### Developers
+
+To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
+
+Sylius twitter account
+----------------------
+
+If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

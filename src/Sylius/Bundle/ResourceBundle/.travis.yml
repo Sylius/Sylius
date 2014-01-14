@@ -5,19 +5,15 @@ php:
   - 5.4
   - 5.5
 
-env: MONGO_VERSION=1.3.4
-
 services: mongodb
 
 before_script:
-    - wget http://pecl.php.net/get/mongo-1.4.3.tgz
-    - tar -xzf mongo-1.4.3.tgz
-    - sh -c "cd mongo-1.4.3 && phpize && ./configure && sudo make install"
-    - echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
-
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
-    - composer install --prefer-source
+    - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
+    - composer require jmikola/geojson="~1.0" --no-update
+    - composer install --prefer-source --no-interaction
 
 script: php bin/phpspec run -f pretty
 

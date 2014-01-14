@@ -22,7 +22,7 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.2",
+        "symfony/framework-bundle": "~2.3",
         "sylius/resource-bundle":   "1.0.*@dev",
         "sylius/flow-bundle":       "1.0.*@dev"
     },

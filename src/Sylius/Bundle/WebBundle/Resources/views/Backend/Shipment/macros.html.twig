@@ -11,6 +11,7 @@
             <th>{{ sylius_resource_sort('order', 'sylius.shipment.order'|trans) }}</th>
             <th>{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
             <th>{{ sylius_resource_sort('state', 'sylius.shipment.state'|trans) }}</th>
+            <th>{{ 'sylius.shipment.tracking_code'|trans }}</th>
             <th>{{ sylius_resource_sort('updatedAt', 'sylius.shipment.updated_at'|trans) }}</th>
             <th></th>
         </tr>
@@ -26,11 +27,13 @@
             </td>
             <td>{{ shipment.method.name }}</td>
             <td><span class="label label-success">{{ shipment.state }}</span></td>
+            <td><span class="label label-{{ shipment.tracked ? 'primary' : 'default' }}">{{ shipment.tracked ? shipment.tracking : 'sylius.unknown'|trans }}</span></td>
             <td>{{ shipment.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
-                {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
+                    {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}
+                    {{ buttons.edit(path('sylius_backend_shipment_update', {'id': shipment.id})) }}
+                    {{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}
                 </div>
             </td>
         </tr>

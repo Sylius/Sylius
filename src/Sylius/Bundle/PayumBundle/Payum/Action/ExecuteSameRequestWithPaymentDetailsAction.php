@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Bridge\Spl\ArrayObject;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\ModelRequestInterface;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Bridge\Spl\ArrayObject;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\ModelRequestInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class ExecuteSameRequestWithPaymentDetailsAction extends PaymentAwareAction

@@ -124,12 +124,10 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $config = $this->getConfiguration();
-
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $event = $this->create($resource);
             if (!$event->isStopped()) {
                 $this->setFlash('success', 'create');
@@ -140,6 +138,7 @@ class ResourceController extends FOSRestController
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
         }
 
+        $config = $this->getConfiguration();
         if ($config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
@@ -161,12 +160,10 @@ class ResourceController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
-        $config = $this->getConfiguration();
-
         $resource = $this->findOr404();
         $form = $this->getForm($resource);
 
-        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
+        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
             $event = $this->update($resource);
             if (!$event->isStopped()) {
                 $this->setFlash('success', 'update');
@@ -177,6 +174,7 @@ class ResourceController extends FOSRestController
             $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
         }
 
+        $config = $this->getConfiguration();
         if ($config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
@@ -198,6 +196,8 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
+        $config = $this->getConfiguration();
+
         $resource = $this->findOr404();
 
         if ($request->request->get('confirmed', false)) {
@@ -229,7 +229,7 @@ class ResourceController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate($request->attributes->get('template', 'SyliusWebBundle:Backend/Misc:delete.html.twig'))
+            ->setTemplate($config->getTemplate('delete.html'))
         ;
 
         return $this->handleView($view);
@@ -250,7 +250,7 @@ class ResourceController extends FOSRestController
 
     /**
      * Get a form instance for given resource.
-     * If no custom form is specified in route defaults as "_form",
+     * If no custom form is specified in route defaults to "_form",
      * then a default name is generated using the template "%bundlePrefix%_%resourceName%".
      *
      * @param null|string $resource

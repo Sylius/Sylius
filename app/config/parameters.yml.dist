@@ -36,3 +36,5 @@ parameters:
     sylius.oauth.facebook.clientsecret: <facebook_client_secret>
     sylius.oauth.google.clientid:       <google_client_id>
     sylius.oauth.google.clientsecret:   <google_client_secret>
+
+    sylius.inventory.backorders_enabled: true

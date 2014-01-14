@@ -33,4 +33,5 @@ sylius_backend_group_delete:
     defaults:
         _controller: sylius.controller.group:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_group_index

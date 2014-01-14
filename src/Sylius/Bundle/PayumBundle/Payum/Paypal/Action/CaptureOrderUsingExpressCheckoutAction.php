@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Bridge\Spl\ArrayObject;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\CaptureRequest;
-use Payum\Request\SecuredCaptureRequest;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
@@ -57,10 +55,15 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
             $payment->setDetails($details);
         }
 
-        $request->setModel($payment);
-        $this->payment->execute($request);
+        try {
+            $request->setModel($payment);
+            $this->payment->execute($request);
+            $request->setModel($order);
+        } catch (\Exception $e) {
+            $request->setModel($order);
 
-        $request->setModel($order);
+            throw $e;
+        }
     }
 
     /**

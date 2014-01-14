@@ -29,10 +29,17 @@
         <field name="details" column="details" type="json_array" />
 
         <many-to-one field="creditCard" target-entity="Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface">
+            <cascade>
+                <cascade-all/>
+            </cascade>
             <join-column name="credit_card_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
-        <one-to-many field="logs" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface" mapped-by="payment" />
+        <one-to-many field="logs" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface" mapped-by="payment">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

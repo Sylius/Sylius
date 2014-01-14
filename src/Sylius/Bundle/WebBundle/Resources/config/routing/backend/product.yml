@@ -9,7 +9,7 @@ sylius_backend_product_index:
         _sylius:
             template: SyliusWebBundle:Backend/Product:index.html.twig
             method: createFilterPaginator
-            arguments: [$criteria, $sorting]
+            arguments: [$criteria, $sorting, $deleted]
 
 sylius_backend_product_create:
     pattern: /new
@@ -35,6 +35,7 @@ sylius_backend_product_delete:
     defaults:
         _controller: sylius.controller.product:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_index
 
 sylius_backend_product_filter_form:
@@ -45,6 +46,16 @@ sylius_backend_product_filter_form:
         _sylius:
             template: SyliusWebBundle:Backend/Product:filterForm.html.twig
 
+sylius_backend_product_history:
+    pattern: /{id}/history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:historyAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Product:history.html.twig
+            method: findForDetailsPage
+            arguments: [$id]
+
 sylius_backend_product_show:
     pattern: /{id}
     methods: [GET]
@@ -52,3 +63,5 @@ sylius_backend_product_show:
         _controller: sylius.controller.product:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:show.html.twig
+            method: findForDetailsPage
+            arguments: [$id]

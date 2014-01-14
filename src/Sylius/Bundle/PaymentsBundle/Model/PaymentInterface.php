@@ -41,6 +41,8 @@ interface PaymentInterface extends TimestampableInterface
      * Set payment method.
      *
      * @param null|PaymentMethodInterface $method
+     *
+     * @return PaymentInterface
      */
     public function setMethod(PaymentMethodInterface $method = null);
 
@@ -55,6 +57,8 @@ interface PaymentInterface extends TimestampableInterface
      * Set payment source.
      *
      * @param null|PaymentSourceInterface $source
+     *
+     * @return PaymentInterface
      */
     public function setSource(PaymentSourceInterface $source = null);
 
@@ -69,6 +73,8 @@ interface PaymentInterface extends TimestampableInterface
      * Set state.
      *
      * @param string $state
+     *
+     * @return PaymentInterface
      */
     public function setState($state);
 
@@ -83,6 +89,8 @@ interface PaymentInterface extends TimestampableInterface
      * Set currency.
      *
      * @param string
+     *
+     * @return PaymentInterface
      */
     public function setCurrency($currency);
 
@@ -97,6 +105,8 @@ interface PaymentInterface extends TimestampableInterface
      * Set amount.
      *
      * @param integer $amount
+     *
+     * @return PaymentInterface
      */
     public function setAmount($amount);
 
@@ -120,6 +130,8 @@ interface PaymentInterface extends TimestampableInterface
      * Add payment processing log.
      *
      * @param PaymentLogInterface $log
+     *
+     * @return PaymentInterface
      */
     public function addLog(PaymentLogInterface $log);
 
@@ -127,11 +139,15 @@ interface PaymentInterface extends TimestampableInterface
      * Remove payment processing log.
      *
      * @param PaymentLogInterface $log
+     *
+     * @return PaymentInterface
      */
     public function removeLog(PaymentLogInterface $log);
 
     /**
      * @param array $details
+     *
+     * @return PaymentInterface
      */
     public function setDetails(array $details);
 

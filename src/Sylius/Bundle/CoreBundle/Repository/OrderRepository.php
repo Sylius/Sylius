@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Repository;
 
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
-use YaLinqo\Enumerable;
 
 class OrderRepository extends CartRepository
 {
@@ -33,7 +32,7 @@ class OrderRepository extends CartRepository
     }
 
     /**
-     * Gets orders by user
+     * Gets orders for user.
      *
      * @param  UserInterface $user
      * @param  array         $sorting
@@ -50,17 +49,75 @@ class OrderRepository extends CartRepository
     }
 
     /**
+     * Get the order data for the details page.
+     *
+     * @param integer $id
+     */
+    public function findForDetailsPage($id)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->leftJoin('o.adjustments', 'adjustment')
+            ->leftJoin('o.user', 'user')
+            ->leftJoin('o.inventoryUnits', 'inventoryUnit')
+            ->leftJoin('o.shipments', 'shipment')
+            ->leftJoin('shipment.method', 'shippingMethod')
+            ->leftJoin('o.payment', 'payment')
+            ->leftJoin('payment.method', 'paymentMethod')
+            ->leftJoin('item.variant', 'variant')
+            ->leftJoin('variant.images', 'image')
+            ->leftJoin('variant.product', 'product')
+            ->leftJoin('variant.options', 'optionValue')
+            ->leftJoin('optionValue.option', 'option')
+            ->leftJoin('o.billingAddress', 'billingAddress')
+            ->leftJoin('billingAddress.country', 'billingCountry')
+            ->leftJoin('o.shippingAddress', 'shippingAddress')
+            ->leftJoin('shippingAddress.country', 'shippingCountry')
+            ->addSelect('adjustment')
+            ->addSelect('user')
+            ->addSelect('inventoryUnit')
+            ->addSelect('shipment')
+            ->addSelect('shippingMethod')
+            ->addSelect('payment')
+            ->addSelect('paymentMethod')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->addSelect('product')
+            ->addSelect('option')
+            ->addSelect('optionValue')
+            ->addSelect('billingAddress')
+            ->addSelect('billingCountry')
+            ->addSelect('shippingAddress')
+            ->addSelect('shippingCountry')
+            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * Create filter paginator.
      *
-     * @param array $criteria
-     * @param array $sorting
+     * @param array   $criteria
+     * @param array   $sorting
+     * @param boolean $deleted
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         if (!empty($criteria['number'])) {
             $queryBuilder
@@ -105,41 +162,9 @@ class OrderRepository extends CartRepository
         return $this->getPaginator($queryBuilder);
     }
 
-    public function getTotalStatistics(\DateTime $from = null, \DateTime $to = null)
+    public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $from = null === $from ? new \DateTime('1 year ago') : $from;
-        $to   = null === $to ? new \DateTime() : $to;
-
-        return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function ($order) {
-                return $order->getCreatedAt()->format('m');
-            }, '$v->getTotal()', function ($orders) {
-                return Enumerable::from($orders)->sum();
-            })
-            ->toValues()
-            ->toArray()
-        ;
-    }
-
-    public function getCountStatistics(\DateTime $from = null, \DateTime $to = null)
-    {
-        $from = null === $from ? new \DateTime('1 year ago') : $from;
-        $to   = null === $to ? new \DateTime() : $to;
-
-        return Enumerable::from($this->findBetweenDates($from, $to))
-            ->groupBy(function ($order) {
-                return $order->getCreatedAt()->format('m');
-            }, null, function ($orders) {
-                return Enumerable::from($orders)->count();
-            })
-            ->toValues()
-            ->toArray()
-        ;
-    }
-
-    public function findBetweenDates(\DateTime $from, \DateTime $to)
-    {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
 
         return $queryBuilder
             ->getQuery()
@@ -149,13 +174,7 @@ class OrderRepository extends CartRepository
 
     public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
-        if (null !== $state) {
-            $queryBuilder
-                ->andWhere('o.state = :state')
-                ->setParameter('state', $state)
-            ;
-        }
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
 
         return $queryBuilder
             ->select('count(o.id)')
@@ -166,13 +185,7 @@ class OrderRepository extends CartRepository
 
     public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
-        if (null !== $state) {
-            $queryBuilder
-                ->andWhere('o.state = :state')
-                ->setParameter('state', $state)
-            ;
-        }
+        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
 
         return $queryBuilder
             ->select('sum(o.total)')
@@ -181,9 +194,15 @@ class OrderRepository extends CartRepository
         ;
     }
 
-    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
+    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
+        if (null !== $state) {
+            $queryBuilder
+                ->andWhere('o.state = :state')
+                ->setParameter('state', $state)
+            ;
+        }
 
         return $queryBuilder
             ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))

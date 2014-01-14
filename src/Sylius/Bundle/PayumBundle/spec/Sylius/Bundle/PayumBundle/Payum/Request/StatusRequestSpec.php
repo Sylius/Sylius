@@ -28,7 +28,7 @@ class StatusRequestSpec extends ObjectBehavior
 
     function it_extends_base_status_class()
     {
-        $this->shouldHaveType('Payum\Request\BaseStatusRequest');
+        $this->shouldHaveType('Payum\Core\Request\BaseStatusRequest');
     }
 
     function it_is_new_when_marked_as_new()

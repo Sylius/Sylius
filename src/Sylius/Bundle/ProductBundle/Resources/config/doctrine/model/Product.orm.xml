@@ -19,11 +19,15 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" column="name" type="string" />
+        <field name="name" column="name" type="string">
+            <gedmo:versioned />
+        </field>
         <field name="slug" column="slug" type="string" unique="true">
             <gedmo:slug fields="name" unique="true" />
         </field>
-        <field name="description" column="description" type="text" />
+        <field name="description" column="description" type="text">
+            <gedmo:versioned />
+        </field>
         <field name="availableOn" column="available_on" type="datetime" />
         <field name="metaKeywords" column="meta_keywords" type="string" nullable="true" />
         <field name="metaDescription" column="meta_description" type="string" nullable="true" />
@@ -42,7 +46,9 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
+
         <gedmo:soft-deleteable field-name="deletedAt" />
+        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

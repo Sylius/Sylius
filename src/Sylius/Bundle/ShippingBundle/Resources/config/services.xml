@@ -40,6 +40,9 @@
 
         <parameter key="sylius.shipping_calculator.flexible_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlexibleRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.flexible_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType</parameter>
+
+        <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Bundle\ShippingBundle\Calculator\WeightRateCalculator</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.weight_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
     </parameters>
 
     <services>
@@ -88,6 +91,10 @@
         <service id="sylius.form.type.shipping_category_choice" class="%sylius.form.type.shipping_category_choice.class%">
             <argument>%sylius.model.shipping_category.class%</argument>
             <tag name="form.type" alias="sylius_shipping_category_choice" />
+        </service>
+        <service id="sylius.form.type.shipment" class="%sylius.form.type.shipment.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <tag name="form.type" alias="sylius_shipment" />
         </service>
 
         <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%">
@@ -141,6 +148,14 @@
         <service id="sylius.form.type.shipping_calculator.flexible_rate_configuration" class="%sylius.form.type.shipping_calculator.flexible_rate_configuration.class%">
             <argument>%sylius.validation_group.shipping_calculator_flexible_rate_configuration%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_flexible_rate_configuration" />
+        </service>
+
+        <service id="sylius.shipping_calculator.weight_rate" class="%sylius.shipping_calculator.weight_rate.class%">
+            <tag name="sylius.shipping_calculator" calculator="weight_rate" label="Weight based rate" />
+        </service>
+        <service id="sylius.form.type.shipping_calculator.weight_rate_configuration" class="%sylius.form.type.shipping_calculator.weight_rate_configuration.class%">
+            <argument>%sylius.validation_group.shipping_calculator_weight_rate_configuration%</argument>
+            <tag name="form.type" alias="sylius_shipping_calculator_weight_rate_configuration" />
         </service>
     </services>
 

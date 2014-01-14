@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\CaptureRequest;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\CaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class CaptureOrderAction extends PaymentAwareAction

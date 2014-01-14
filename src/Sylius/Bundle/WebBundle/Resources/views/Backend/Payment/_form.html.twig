@@ -1,6 +1,7 @@
 <fieldset>
-    {{ form_row(form.method, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.amount, {'attr': {'class': 'input-sm'}}) }}
+    {{ form_row(form.amount, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.method) }}
+    {{ form_row(form.state) }}
 </fieldset>
 
 {{ form_rest(form) }}

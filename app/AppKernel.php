@@ -52,7 +52,6 @@ class AppKernel extends Kernel
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
@@ -76,9 +75,11 @@ class AppKernel extends Kernel
             new Payum\Bundle\PayumBundle\PayumBundle(),
         );
 
-        if (in_array($this->environment, array('dev'))) {
-            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+        if ('dev' === $this->environment) {
+            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }
+
+        $bundles = $this->addFixturesBundle($bundles);
 
         return $bundles;
     }
@@ -141,10 +142,25 @@ class AppKernel extends Kernel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     private function isVagrantEnvironment()
     {
         return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
+    }
+
+    /**
+     * @param array $bundles
+     * @param array $environments
+     *
+     * @return array
+     */
+    private function addFixturesBundle(array $bundles, array $environments = array('dev', 'test'))
+    {
+        if (in_array($this->environment, $environments) && class_exists('Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle')) {
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+        }
+
+        return $bundles;
     }
 }

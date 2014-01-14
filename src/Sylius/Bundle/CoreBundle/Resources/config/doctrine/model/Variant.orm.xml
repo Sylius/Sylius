@@ -22,6 +22,11 @@
         <field name="onHand" column="on_hand" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean"/>
 
+        <field name="width" column="width" type="float" nullable="true" />
+        <field name="height" column="height" type="float" nullable="true" />
+        <field name="depth" column="depth" type="float" nullable="true" />
+        <field name="weight" column="weight" type="float" nullable="true" />
+
         <one-to-many field="images" target-entity="Sylius\Bundle\CoreBundle\Model\VariantImageInterface" mapped-by="variant">
             <cascade>
                 <cascade-all />

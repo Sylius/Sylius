@@ -13,6 +13,6 @@ class PaymentSecurityTokenSpec extends ObjectBehavior
 
     function it_extends_payum_token()
     {
-        $this->shouldHaveType('Payum\Model\Token');
+        $this->shouldHaveType('Payum\Core\Model\Token');
     }
 }

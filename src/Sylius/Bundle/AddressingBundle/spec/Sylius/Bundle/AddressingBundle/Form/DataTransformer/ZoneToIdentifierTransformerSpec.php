@@ -31,7 +31,7 @@ class ZoneToIdentifierTransformerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\DataTransformer\ZoneToIdentifierTransformer');
     }
 
-    function it_returns_empty_string_if_null_transormed()
+    function it_returns_empty_string_if_null_transformed()
     {
         $this->transform(null)->shouldReturn('');
     }

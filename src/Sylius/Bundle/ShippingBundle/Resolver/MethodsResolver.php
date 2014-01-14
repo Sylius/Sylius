@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
@@ -68,6 +69,8 @@ class MethodsResolver implements MethodsResolverInterface
      * Return all methods matching given criteria.
      *
      * @param array $criteria
+     *
+     * @return ShippingMethodInterface[]
      */
     protected function getMethods(array $criteria = array())
     {
