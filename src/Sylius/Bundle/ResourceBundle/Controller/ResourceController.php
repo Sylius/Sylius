@@ -145,8 +145,6 @@ class ResourceController extends FOSRestController
 
     public function deleteAction()
     {
-        $config = $this->getConfiguration();
-
         $resource = $this->findOr404();
         $this->domainManager->delete($resource);
 

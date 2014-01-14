@@ -2168,7 +2168,7 @@
       </trans-unit>
       <trans-unit id="a17958e048f810e0b3ca8ab6a986b200" resname="sylius.taxon.product_index_header">
         <source>sylius.taxon.product_index_header</source>
-        <target>sylius.taxon.product_index_header</target>
+        <target>Products categorized as "%name%"</target>
       </trans-unit>
       <trans-unit id="be8f3526efb6d1b32012cfe9e2059ad3" resname="sylius.taxon.update_header">
         <source>sylius.taxon.update_header</source>
