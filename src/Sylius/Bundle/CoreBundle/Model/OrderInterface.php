@@ -144,6 +144,13 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function setPayment(PaymentInterface $payment);
 
     /**
+     * Get the payment state.
+     *
+     * @return string
+     */
+    public function getPaymentState();
+
+    /**
      * Get all inventory units.
      *
      * @return InventoryUnitInterface[]

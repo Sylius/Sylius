@@ -83,12 +83,19 @@ class Order extends Cart implements OrderInterface
     protected $promotionCoupon;
 
     /**
+     * Order payment state.
+     *
+     * @var string
+     */
+    protected $paymentState = PaymentInterface::STATE_CHECKOUT;
+
+    /**
      * Order shipping state.
      * It depends on the status of all order shipments.
      *
      * @var string
      */
-    protected $shippingState;
+    protected $shippingState = OrderShippingStates::READY;
 
     /**
      * Constructor.
@@ -99,8 +106,6 @@ class Order extends Cart implements OrderInterface
 
         $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
-
-        $this->shippingState = OrderShippingStates::READY;
     }
 
     /**
@@ -279,8 +284,17 @@ class Order extends Cart implements OrderInterface
     public function setPayment(PaymentInterface $payment)
     {
         $this->payment = $payment;
+        $this->paymentState = $payment->getState();
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentState()
+    {
+        return $this->paymentState;
     }
 
     /**

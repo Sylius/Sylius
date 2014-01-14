@@ -12,8 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
+use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LoadOrdersData extends DataFixture
 {
@@ -23,13 +28,14 @@ class LoadOrdersData extends DataFixture
         $orderItemRepository = $this->getOrderItemRepository();
 
         for ($i = 1; $i <= 50; $i++) {
+            /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
 
             for ($j = 0; $j <= rand(3, 6); $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
+                /* @var $item OrderItemInterface */
                 $item = $orderItemRepository->createNew();
-
                 $item->setVariant($variant);
                 $item->setUnitPrice($variant->getPrice());
                 $item->setQuantity(rand(1, 5));
@@ -37,8 +43,10 @@ class LoadOrdersData extends DataFixture
                 $order->addItem($item);
             }
 
+            /* @var $shipment ShipmentInterface */
             $shipment = $this->getShipmentRepository()->createNew();
             $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
+            $shipment->setState($this->getShipmentState());
 
             foreach ($order->getInventoryUnits() as $item) {
                 $shipment->addItem($item);
@@ -53,17 +61,17 @@ class LoadOrdersData extends DataFixture
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
 
-            $this->get('event_dispatcher')->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
-            $this->get('event_dispatcher')->dispatch('sylius.checkout.shipping.pre_complete', new GenericEvent($order));
-            $this->get('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+            $this->dispatchEvents($order);
 
             $order->calculateTotal();
             $order->complete();
 
+            /* @var $payment PaymentInterface */
             $payment = $this->getPaymentRepository()->createNew();
             $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
             $payment->setAmount($order->getTotal());
             $payment->setCurrency($order->getCurrency());
+            $payment->setState($this->getPaymentState());
 
             $order->setPayment($payment);
 
@@ -77,8 +85,8 @@ class LoadOrdersData extends DataFixture
 
     private function createAddress()
     {
+        /* @var $address AddressInterface */
         $address = $this->getAddressRepository()->createNew();
-
         $address->setFirstname($this->faker->firstName);
         $address->setLastname($this->faker->lastName);
         $address->setCity($this->faker->city);
@@ -96,6 +104,41 @@ class LoadOrdersData extends DataFixture
         $address->setProvince($province);
 
         return $address;
+    }
+
+    private function dispatchEvents($order)
+    {
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
+        $dispatcher->dispatch('sylius.checkout.shipping.pre_complete', new GenericEvent($order));
+        $dispatcher->dispatch('sylius.order.pre_create', new GenericEvent($order));
+        $dispatcher->dispatch('sylius.checkout.finalize.pre_complete', new GenericEvent($order));
+    }
+
+    private function getPaymentState()
+    {
+        return array_rand(array_flip(array(
+            PaymentInterface::STATE_CHECKOUT,
+            PaymentInterface::STATE_COMPLETED,
+            PaymentInterface::STATE_FAILED,
+            PaymentInterface::STATE_NEW,
+            PaymentInterface::STATE_PENDING,
+            PaymentInterface::STATE_PROCESSING,
+            PaymentInterface::STATE_UNKNOWN,
+            PaymentInterface::STATE_VOID,
+        )));
+    }
+
+    private function getShipmentState()
+    {
+        return array_rand(array_flip(array(
+            ShipmentInterface::STATE_CHECKOUT,
+            ShipmentInterface::STATE_DISPATCHED,
+            ShipmentInterface::STATE_SHIPPED,
+            ShipmentInterface::STATE_READY,
+            ShipmentInterface::STATE_PENDING,
+            ShipmentInterface::STATE_RETURNED,
+        )));
     }
 
     public function getOrder()
