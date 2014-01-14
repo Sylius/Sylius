@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 {
     /**
-     * @var \Payum\Bundle\PayumBundle\Security\TokenFactory
+     * @var TokenFactory
      */
     protected $tokenFactory;
 

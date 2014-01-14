@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class NotifyOrderAction extends PaymentAwareAction
 {
     /**
-     * @var \JMS\Serializer\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
