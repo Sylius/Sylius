@@ -27,6 +27,7 @@ class SyliusResourceBundle extends Bundle
     // Bundle driver list.
     const DRIVER_DOCTRINE_ORM         = 'doctrine/orm';
     const DRIVER_DOCTRINE_MONGODB_ODM = 'doctrine/mongodb-odm';
+    const DRIVER_DOCTRINE_PHPCR_ODM   = 'doctrine/phpcr-odm';
 
     public function build(ContainerBuilder $container)
     {
