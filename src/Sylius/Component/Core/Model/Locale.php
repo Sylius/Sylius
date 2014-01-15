@@ -33,6 +33,13 @@ class Locale implements LocaleInterface
     protected $code;
 
     /**
+     * Currency.
+     *
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * Activation status.
      *
      * @var Boolean
@@ -56,6 +63,11 @@ class Locale implements LocaleInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s - %s', $this->code, $this->currency);
     }
 
     /**
@@ -82,6 +94,24 @@ class Locale implements LocaleInterface
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = strtoupper($currency);
 
         return $this;
     }
