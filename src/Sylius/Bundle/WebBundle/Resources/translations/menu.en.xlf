@@ -126,6 +126,18 @@
         <source>sylius.backend.menu.sidebar.assortment</source>
         <target>Assortment</target>
       </trans-unit>
+      <trans-unit id="b82bee2bddf68adf095856b85e41b6c2" resname="sylius.backend.menu.sidebar.content">
+        <source>sylius.backend.menu.sidebar.content</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="b82bee2bddf68adf095856585e41b6c2" resname="sylius.backend.menu.sidebar.blocks">
+        <source>sylius.backend.menu.sidebar.blocks</source>
+        <target>Blocks</target>
+      </trans-unit>
+      <trans-unit id="b82bee2bddf68adf095856585e41b6c2" resname="sylius.backend.menu.sidebar.pages">
+        <source>sylius.backend.menu.sidebar.pages</source>
+        <target>Pages</target>
+      </trans-unit>
       <trans-unit id="7486e100b253cf670a06bf260d24d6c3" resname="sylius.backend.menu.sidebar.configuration">
         <source>sylius.backend.menu.sidebar.configuration</source>
         <target>Configuration</target>

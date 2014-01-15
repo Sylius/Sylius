@@ -278,13 +278,53 @@
         <source>sylius.backend_welcome</source>
         <target>Hello &lt;b&gt;%name%&lt;/b&gt;!</target>
       </trans-unit>
+      <trans-unit id="4092c233ac25e4d5e5f1b70229515cb5" resname="sylius.block.body">
+        <source>sylius.block.body</source>
+        <target>Body</target>
+      </trans-unit>
+      <trans-unit id="48cdc5c6a7e7c51431e25bb9f55ec471" resname="sylius.block.create">
+        <source>sylius.block.create</source>
+        <target>Create block</target>
+      </trans-unit>
+      <trans-unit id="e401b512069829a9271ddddbb419c6f2" resname="sylius.block.create_header">
+        <source>sylius.block.create_header</source>
+        <target>Creating new content block</target>
+      </trans-unit>
+      <trans-unit id="7db75066728c02595f1a39995caf0eba" resname="sylius.block.id">
+        <source>sylius.block.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="5b19a0812e62ea9f54251eecef7eeede" resname="sylius.block.index_header">
+        <source>sylius.block.index_header</source>
+        <target>Content blocks</target>
+      </trans-unit>
+      <trans-unit id="01e97de36d110b4a524a3d1ec6d288a8" resname="sylius.block.no_results">
+        <source>sylius.block.no_results</source>
+        <target>There are no blocks to display.</target>
+      </trans-unit>
+      <trans-unit id="25d02d34f7333f8014e46282e23b9311" resname="sylius.block.title">
+        <source>sylius.block.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="08b60e5bf48f721783a34712c97f956a" resname="sylius.block.update_header">
+        <source>sylius.block.update_header</source>
+        <target>Editing content block</target>
+      </trans-unit>
+      <trans-unit id="0a938d29cf7076223e9b54c81ae27153" resname="sylius.block.updated_at">
+        <source>sylius.block.updated_at</source>
+        <target>Last update</target>
+      </trans-unit>
       <trans-unit id="36af3c89317ed19bd67ea9f037623b6d" resname="sylius.breadcrumb.assortment">
         <source>sylius.breadcrumb.assortment</source>
         <target>Assortment</target>
       </trans-unit>
+      <trans-unit id="cb5d6f43656523ee2eaca93d6f3d2efe" resname="sylius.breadcrumb.block.index">
+        <source>sylius.breadcrumb.block.index</source>
+        <target>Content Blocks</target>
+      </trans-unit>
       <trans-unit id="ecbc07235ab3979589f48332f3d5fe52" resname="sylius.breadcrumb.build">
         <source>sylius.breadcrumb.build</source>
-        <target>sylius.breadcrumb.build</target>
+        <target>Build</target>
       </trans-unit>
       <trans-unit id="a3c8ec8b16ef356a807604bcb7019955" resname="sylius.breadcrumb.configuration">
         <source>sylius.breadcrumb.configuration</source>
@@ -338,9 +378,9 @@
         <source>sylius.breadcrumb.order.index</source>
         <target>Orders</target>
       </trans-unit>
-      <trans-unit id="5eeddc7f041dc66f593766a293ef118f" resname="sylius.breadcrumb.orders">
-        <source>sylius.breadcrumb.orders</source>
-        <target>sylius.breadcrumb.orders</target>
+      <trans-unit id="eb55a1c2e1082642c4accbd3eb020879" resname="sylius.breadcrumb.page.index">
+        <source>sylius.breadcrumb.page.index</source>
+        <target>Static Pages</target>
       </trans-unit>
       <trans-unit id="1f0f440a9e6bed0858adacb449582bce" resname="sylius.breadcrumb.payment.index">
         <source>sylius.breadcrumb.payment.index</source>
@@ -1189,6 +1229,38 @@
       <trans-unit id="ac59b73112d9a5386d5daf47d2c2f253" resname="sylius.out_of_stock">
         <source>sylius.out_of_stock</source>
         <target>Out of stock</target>
+      </trans-unit>
+      <trans-unit id="dde9551ab7133b80e3906341607780b9" resname="sylius.page.body">
+        <source>sylius.page.body</source>
+        <target>Body</target>
+      </trans-unit>
+      <trans-unit id="83997cb815d020c5cabbf67f303b4444" resname="sylius.page.create">
+        <source>sylius.page.create</source>
+        <target>Create new page</target>
+      </trans-unit>
+      <trans-unit id="3b8ce9ca98fe148cb4bc3c9dc97d5399" resname="sylius.page.create_header">
+        <source>sylius.page.create_header</source>
+        <target>Creating new static content</target>
+      </trans-unit>
+      <trans-unit id="72c491541a6e21ef1d0b80d024a337b9" resname="sylius.page.id">
+        <source>sylius.page.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="3138716aec9fc2695fbd8eec31ea159d" resname="sylius.page.index_header">
+        <source>sylius.page.index_header</source>
+        <target>Pages</target>
+      </trans-unit>
+      <trans-unit id="f9f054ba0dbc4aa35bbe33bfbce69819" resname="sylius.page.no_results">
+        <source>sylius.page.no_results</source>
+        <target>There are no static pages to display.</target>
+      </trans-unit>
+      <trans-unit id="bbb81e2e0df0161471bfce07c76fab55" resname="sylius.page.title">
+        <source>sylius.page.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="42b2867bb690a3bff2c5c52fbe35d0f2" resname="sylius.page.update_header">
+        <source>sylius.page.update_header</source>
+        <target>Last update</target>
       </trans-unit>
       <trans-unit id="f9161f3c61d2afa403508ddb2a35462f" resname="sylius.password">
         <source>sylius.password</source>
