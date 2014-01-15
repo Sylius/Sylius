@@ -36,7 +36,7 @@ class LoadBlocksData extends ContainerAware implements FixtureInterface, Ordered
 
         $parent = $manager->find(null, $basepath);
 
-        $contactBlock = new SimpleBlock();
+        $contactBlock = $this->container->get('sylius.repository.block')->createNew();
         $contactBlock->setParentDocument($parent);
         $contactBlock->setName('contact');
         $contactBlock->setTitle('Contact us');

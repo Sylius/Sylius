@@ -42,9 +42,9 @@ class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedF
         $route->setPosition($routeRoot, 'terms-of-service');
         $manager->persist($route);
 
-        $content = new StaticContent();
+        $content = $this->container->get('sylius.repository.page')->createNew();
         $content->setTitle('Terms of Service');
-        $content->setBody('TOS BLABLA');
+        $content->setBody('TOS Content');
         $content->addRoute($route);
         $content->setParent($parent);
         $content->setName('terms-of-service');

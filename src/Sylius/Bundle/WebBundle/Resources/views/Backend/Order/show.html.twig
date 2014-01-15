@@ -225,7 +225,7 @@
 
 <hr/>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped">
     <thead>
         <tr>
             <th colspan="7">{{ 'sylius.order.inventory_tracking'|trans }}</th>
@@ -246,8 +246,8 @@
             <td>{{ loop.index }}</td>
             <td>{{ unit.stockable.sku }}</td>
             <td>{{ unit.inventoryName }}</td>
-            <td><span class="label">{{ unit.inventoryState }}</span></td>
-            <td><span class="label">{{ unit.shippingState }}</span></td>
+            <td>{{ unit.inventoryState|humanize }}</td>
+            <td>{{ unit.shippingState|humanize }}</td>
             <td>{{ unit.createdAt|date }}</td>
             <td>{{ unit.updatedAt|date }}</td>
         </tr>
