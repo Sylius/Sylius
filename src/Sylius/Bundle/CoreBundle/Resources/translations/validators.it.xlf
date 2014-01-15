@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="it" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="it" datatype="plaintext" original="file.ext">
     <body>
       <trans-unit id="a55be57cc201693bfdc2c9021f8fd48d" resname="fos_user.email.already_used">
         <source>fos_user.email.already_used</source>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="sr_Cyrl" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="sr_Cyrl" datatype="plaintext" original="file.ext">
     <body>
       <trans-unit id="94508ad78d6cdae4de43ed99efed1fc6" resname="sylius.add_to_cart">
         <source>sylius.add_to_cart</source>

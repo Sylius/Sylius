@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="ru" datatype="plaintext" original="file.ext">
     <body>
       <trans-unit id="3c3fad9ed9e9dce4693320d03211fb69" resname="sylius.form.credit_card.cardholder_name">
         <source>sylius.form.credit_card.cardholder_name</source>
