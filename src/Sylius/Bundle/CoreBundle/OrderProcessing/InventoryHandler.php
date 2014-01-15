@@ -55,6 +55,9 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function processInventoryUnits(OrderInterface $order)
     {
+        $activeVariants = array();
+
+        //adjust quantities of units of items still in cart
         foreach ($order->getItems() as $item) {
             $variant = $item->getVariant();
             $units = $order->getInventoryUnitsByVariant($variant);
@@ -67,6 +70,15 @@ class InventoryHandler implements InventoryHandlerInterface
             }
             if ($quantity < $unitsQuantity) {
                 $this->removeInventoryUnits($order, $variant, $unitsQuantity - $quantity);
+            }
+
+            $activeVariants[] = $variant;
+        }
+
+        //remove units of items that have been removed from the cart
+        foreach ($order->getInventoryUnits() as $unit) {
+            if (!in_array($unit->getStockable(), $activeVariants)) {
+                $order->removeInventoryUnit($unit);
             }
         }
     }

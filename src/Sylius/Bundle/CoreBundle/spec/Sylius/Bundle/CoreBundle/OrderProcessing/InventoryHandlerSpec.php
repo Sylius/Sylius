@@ -45,6 +45,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     function it_does_not_create_any_inventory_units_if_order_has_no_items($order)
     {
         $order->getItems()->willReturn(array());
+        $order->getInventoryUnits()->willReturn(array());
         $order->addInventoryUnit(Argument::any())->shouldNotBeCalled();
 
         $this->processInventoryUnits($order);
@@ -60,6 +61,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     function it_creates_inventory_units_via_the_factory($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2)
     {
         $order->getItems()->willReturn(array($item));
+        $order->getInventoryUnits()->shouldBeCalled()->willReturn(array());
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
@@ -84,6 +86,9 @@ class InventoryHandlerSpec extends ObjectBehavior
     function it_creates_only_missing_inventory_units_via_the_factory($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2)
     {
         $order->getItems()->willReturn(array($item));
+        $order->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $unit1->getStockable()->shouldBeCalled()->willReturn($variant);
+        $unit2->getStockable()->shouldBeCalled()->willReturn($variant);
 
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
@@ -104,8 +109,9 @@ class InventoryHandlerSpec extends ObjectBehavior
      * @param Sylius\Bundle\CoreBundle\Model\VariantInterface       $variant
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit3
      */
-    function it_removes_extra_inventory_units($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2)
+    function it_removes_extra_inventory_units($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2, $unit3)
     {
         $order->getItems()->willReturn(array($item));
 
@@ -113,10 +119,12 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getQuantity()->willReturn(1);
 
         $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $order->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit3));
 
         $inventoryUnitFactory->create(Argument::any())->shouldNotBeCalled();
 
         $order->removeInventoryUnit($unit1)->shouldBeCalled();
+        $order->removeInventoryUnit($unit3)->shouldBeCalled();
 
         $this->processInventoryUnits($order);
     }
