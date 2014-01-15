@@ -130,13 +130,20 @@ class InventoryHandlerSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $order
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\CoreBundle\Model\OrderItem $item
+     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
      */
-    function it_decreases_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $unit1, $unit2)
+    function it_decreases_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
     {
-        $order->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $order->getItems()->willReturn(array($item));
+
+        $item->getVariant()->willReturn($variant);
+        $item->getQuantity()->willReturn(1);
+
+        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1, $unit2));
 
         $inventoryOperator->decrease(array($unit1, $unit2))->shouldBeCalled();
 

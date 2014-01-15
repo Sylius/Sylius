@@ -91,11 +91,15 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function updateInventory(OrderInterface $order)
     {
-        foreach ($units = $order->getInventoryUnits() as $unit) {
-            $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-        }
+        foreach ($order->getItems() as $item) {
+            $units = $order->getInventoryUnitsByVariant($item->getVariant());
 
-        $this->inventoryOperator->decrease($units);
+            foreach ($units as $unit) {
+                $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+            }
+
+            $this->inventoryOperator->decrease($units);
+        }
     }
 
     /**
