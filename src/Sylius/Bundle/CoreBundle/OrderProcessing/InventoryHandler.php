@@ -55,29 +55,32 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function processInventoryUnits(OrderInterface $order)
     {
-        $activeVariants = array();
+        $variants = array();
+        $quantities = array();
 
-        //adjust quantities of units of items still in cart
         foreach ($order->getItems() as $item) {
             $variant = $item->getVariant();
-            $units = $order->getInventoryUnitsByVariant($variant);
 
-            $quantity = $item->getQuantity();
-            $unitsQuantity = count($units);
-
-            if ($quantity > $unitsQuantity) {
-                $this->addInventoryUnits($order, $variant, $quantity - $unitsQuantity);
-            }
-            if ($quantity < $unitsQuantity) {
-                $this->removeInventoryUnits($order, $variant, $unitsQuantity - $quantity);
+            if (!in_array($variant, $variants)) {
+                $variants[] = $variant;
             }
 
-            $activeVariants[] = $variant;
+            $index = array_search($variant, $variants);
+            $quantities[$index] = isset($quantities[$index]) ? $quantities[$index] + $item->getQuantity() : $item->getQuantity();
         }
 
-        //remove units of items that have been removed from the cart
+        foreach ($variants as $variant) {
+            $units = $order->getInventoryUnitsByVariant($variant);
+            $quantityDifference = $quantities[array_search($variant, $variants)] - count($units);
+
+            if (0 !== $quantityDifference) {
+                $quantityDifference < 0 ? $this->removeInventoryUnits($order, $variant, abs($quantityDifference)) : $this->addInventoryUnits($order, $variant, $quantityDifference);
+            }
+        }
+
+        //remove units of items that no longer exist
         foreach ($order->getInventoryUnits() as $unit) {
-            if (!in_array($unit->getStockable(), $activeVariants)) {
+            if (!in_array($unit->getStockable(), $variants)) {
                 $order->removeInventoryUnit($unit);
             }
         }
@@ -88,15 +91,11 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function updateInventory(OrderInterface $order)
     {
-        foreach ($order->getItems() as $item) {
-            $units = $order->getInventoryUnitsByVariant($item->getVariant());
-
-            foreach ($units as $unit) {
-                $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-            }
-
-            $this->inventoryOperator->decrease($units);
+        foreach ($units = $order->getInventoryUnits() as $unit) {
+            $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
         }
+
+        $this->inventoryOperator->decrease($units);
     }
 
     /**
@@ -125,9 +124,15 @@ class InventoryHandler implements InventoryHandlerInterface
     protected function removeInventoryUnits(OrderInterface $order, VariantInterface $variant, $quantity)
     {
         $units = $order->getInventoryUnitsByVariant($variant);
+        $counter = 0;
 
-        for ($i = 0; $i < $quantity; $i++) {
-            $order->removeInventoryUnit($units[$i]);
+        foreach ($units as $unit) {
+            if ($counter == $quantity) {
+                break;
+            }
+
+            $order->removeInventoryUnit($unit);
+            $counter++;
         }
     }
 }
