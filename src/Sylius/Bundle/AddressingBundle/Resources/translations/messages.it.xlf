@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="it" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="it" datatype="plaintext" original="file.ext">
     <body>
       <trans-unit id="30d6b7cae83842de6b0be3436b49fa57" resname="sylius.form.address.city">
         <source>sylius.form.address.city</source>
