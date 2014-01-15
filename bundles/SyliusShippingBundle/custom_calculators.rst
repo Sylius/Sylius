@@ -49,7 +49,7 @@ Now, you need to register your new service in container and tag it with ``sylius
         <services>
             <service id="acme.shipping_calculator.dhl" class="Acme\ShopBundle\Shipping\DHLCalculator">
                 <argument type="service" id="acme.dhl_service" />
-                <tag name="sylius.shipping_calculator" type="dhl" label="DHL" />
+                <tag name="sylius.shipping_calculator" calculator="dhl" label="DHL" />
             </service>
         </services>
     </container>
@@ -164,7 +164,7 @@ We also need to register the form type and the calculator in the container.
         <services>
             <service id="acme.shipping_calculator.dhl" class="Acme\ShopBundle\Shipping\DHLCalculator">
                 <argument type="service" id="acme.dhl_service" />
-                <tag name="sylius.shipping_calculator" type="dhl" label="DHL" />
+                <tag name="sylius.shipping_calculator" calculator="dhl" label="DHL" />
             </service>
             <service id="acme.form.type.shipping_calculator.dhl" class="Acme\ShopBundle\Form\Type\Shipping\DHLConfigurationType">
                 <tag name="form.type" alias="acme_shipping_calculator_dhl" />
