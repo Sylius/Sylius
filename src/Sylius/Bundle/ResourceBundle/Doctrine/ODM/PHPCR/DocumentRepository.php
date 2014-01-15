@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR;
 
 use Doctrine\ODM\PHPCR\DocumentRepository as BaseDocumentRepository;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Doctrine\ODM\PHPCR\Query\QueryBuilder;
+use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 
@@ -49,7 +49,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
     protected function getCollectionQueryBuilder()
     {
-        return $this->createQueryBuilder();
+        return $this->createQueryBuilder('o');
     }
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
@@ -76,18 +76,11 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
-                $queryBuilder->orderBy($this->getPropertyName($property), $order);
+                $queryBuilder->orderBy()->{$order}()->field('o.'.$property);
             }
         }
-    }
 
-    protected function getPropertyName($name)
-    {
-        if (false === strpos($name, '.')) {
-            return $this->getAlias().'.'.$name;
-        }
-
-        return $name;
+        $queryBuilder->end();
     }
 
     protected function getAlias()

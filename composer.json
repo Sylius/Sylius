@@ -43,6 +43,7 @@
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
+        "pagerfanta/pagerfanta":                "1.0.*@dev",
         "payum/payum":                          "0.7.*",
         "payum/payum-bundle":                   "~0.7.1",
         "symfony-cmf/block-bundle":             "1.0.*",

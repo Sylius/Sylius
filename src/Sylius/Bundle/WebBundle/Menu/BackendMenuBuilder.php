@@ -48,8 +48,9 @@ class BackendMenuBuilder extends MenuBuilder
 
         $this->addAssortmentMenu($menu, $childOptions, 'main');
         $this->addSalesMenu($menu, $childOptions, 'main');
-        $this->addConfigurationMenu($menu, $childOptions, 'main');
         $this->addCustomersMenu($menu, $childOptions, 'main');
+        $this->addContentMenu($menu, $childOptions, 'main');
+        $this->addConfigurationMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
             'route' => 'sylius_homepage'
@@ -85,6 +86,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addAssortmentMenu($menu, $childOptions, 'sidebar');
         $this->addSalesMenu($menu, $childOptions, 'sidebar');
         $this->addCustomersMenu($menu, $childOptions, 'sidebar');
+        $this->addContentMenu($menu, $childOptions, 'sidebar');
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
 
         return $menu;
@@ -136,6 +138,54 @@ class BackendMenuBuilder extends MenuBuilder
     }
 
     /**
+     * Add content menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addContentMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('content', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.content', $section)))
+        ;
+
+        $child->addChild('blocks', array(
+            'route' => 'sylius_backend_block_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-large'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.blocks', $section)));
+        $child->addChild('Pages', array(
+            'route' => 'sylius_backend_page_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.pages', $section)));
+    }
+
+    /**
+     * Add customers menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addCustomersMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('customer', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)))
+        ;
+
+        $child->addChild('users', array(
+            'route' => 'sylius_backend_user_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-user'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.users', $section)));
+        $child->addChild('groups', array(
+            'route' => 'sylius_backend_group_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-home'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.groups', $section)));
+    }
+
+    /**
      * Add sales menu.
      *
      * @param ItemInterface $menu
@@ -170,30 +220,6 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_promotion_create',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-plus-sign'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.new_promotion', $section)));
-    }
-
-    /**
-     * Add customers menu.
-     *
-     * @param ItemInterface $menu
-     * @param array         $childOptions
-     * @param string        $section
-     */
-    protected function addCustomersMenu(ItemInterface $menu, array $childOptions, $section)
-    {
-        $child = $menu
-            ->addChild('customer', $childOptions)
-            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)))
-        ;
-
-        $child->addChild('users', array(
-            'route' => 'sylius_backend_user_index',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-user'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.users', $section)));
-        $child->addChild('groups', array(
-            'route' => 'sylius_backend_group_index',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-home'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.groups', $section)));
     }
 
     /**

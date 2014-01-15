@@ -144,6 +144,14 @@
             <argument>%sylius.model.locale.class%</argument>
             <tag name="form.type" alias="sylius_locale" />
         </service>
+        <service id="sylius.form.type.block" class="%sylius.form.type.block.class%">
+            <argument>%sylius.model.block.class%</argument>
+            <tag name="form.type" alias="sylius_block" />
+        </service>
+        <service id="sylius.form.type.page" class="%sylius.form.type.page.class%">
+            <argument>%sylius.model.page.class%</argument>
+            <tag name="form.type" alias="sylius_page" />
+        </service>
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
             <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />
