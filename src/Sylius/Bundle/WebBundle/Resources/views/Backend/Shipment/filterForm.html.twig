@@ -1,0 +1,20 @@
+{% form_theme form 'SyliusWebBundle:Backend:filterForms.html.twig' %}
+
+<form method="get" action="" class="form-inline form-filter">
+<div class="row">
+    <div class="col-xs-3">
+        {{ form_row(form.number) }}
+    </div>
+    <div class="col-xs-3">
+        {{ form_row(form.shippingAddress) }}
+    </div>
+    <div class="col-xs-3">
+        {{ form_row(form.createdAtFrom, {'attr': {'class': 'datepicker'}}) }}
+    </div>
+    <div class="col-xs-3">
+        {{ form_row(form.createdAtTo, {'attr': {'class': 'datepicker'}}) }}
+    </div>
+</div>
+<br>
+<button type="submit" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-search"></i> {{ 'sylius.filter'|trans }}</button>
+</form>

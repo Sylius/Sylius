@@ -2,33 +2,37 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if shipments|length > 0 %}
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.shipment.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('order', 'sylius.shipment.order'|trans) }}</th>
             <th>{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
             <th>{{ sylius_resource_sort('state', 'sylius.shipment.state'|trans) }}</th>
-            <th>{{ 'sylius.shipment.tracking_code'|trans }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.shipment.updated_at'|trans) }}</th>
+            <th>{{ 'sylius.shipping_address'|trans }}</th>
+            <th class="text-center">{{ 'sylius.total_quantity'|trans }}</th>
+            <th>{{ sylius_resource_sort('createdAt', 'sylius.created_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
     {% for shipment in shipments %}
+        {% set order = shipment.order %}
+        {% set address = order.shippingAddress %}
+
         <tr id="{{ shipment.id }}">
-            <td>{{ shipment.id }}</td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-primary btn-sm">
-                   #{{ shipment.order.id }}
+                   #{{ order.number }}
                 </a>
             </td>
             <td>{{ shipment.method.name }}</td>
-            <td><span class="label label-success">{{ shipment.state }}</span></td>
-            <td><span class="label label-{{ shipment.tracked ? 'primary' : 'default' }}">{{ shipment.tracked ? shipment.tracking : 'sylius.unknown'|trans }}</span></td>
-            <td>{{ shipment.updatedAt|date }}</td>
+            <td>{{ misc.shipment_state(shipment.state) }}</td>
+            <td>{{ address.firstname }} {{ address.lastname }} ({{ address.city }}, {{ address.country }})</td>
+            <td class="text-center">{{ shipment.items|length }}</td>
+            <td>{{ shipment.createdAt|date }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}

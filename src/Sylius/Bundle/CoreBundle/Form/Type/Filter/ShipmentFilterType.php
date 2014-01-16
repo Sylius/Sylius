@@ -14,51 +14,55 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class OrderFilterType extends AbstractType
+/**
+ * Shipment filter type.
+ *
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
+class ShipmentFilterType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('number', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.number',
+                'label'    => 'sylius.form.shipment_filter.number',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.number'
+                    'placeholder' => 'sylius.form.shipment_filter.number'
                 )
             ))
-            ->add('totalFrom', 'money', array(
+            ->add('shippingAddress', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.total_from',
+                'label'    => 'sylius.form.shipment_filter.shipping_address',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.total_from'
-                )
-            ))
-            ->add('totalTo', 'money', array(
-                'required' => false,
-                'label'    => 'sylius.form.order_filter.total_to',
-                'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.total_to'
+                    'placeholder' => 'sylius.form.shipment_filter.shipping_address'
                 )
             ))
             ->add('createdAtFrom', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.created_at_from',
+                'label'    => 'sylius.form.shipment_filter.created_at_from',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.created_at_from'
+                    'placeholder' => 'sylius.form.shipment_filter.created_at_from'
                 )
             ))
             ->add('createdAtTo', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.order_filter.created_at_to',
+                'label'    => 'sylius.form.shipment_filter.created_at_to',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.order_filter.created_at_to'
+                    'placeholder' => 'sylius.form.shipment_filter.created_at_to'
                 )
             ))
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_order_filter';
+        return 'sylius_shipment_filter';
     }
 }

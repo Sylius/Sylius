@@ -55,6 +55,7 @@ sylius_shipping:
     classes:
         shipment:
             model: Sylius\Bundle\CoreBundle\Model\Shipment
+            repository: Sylius\Bundle\CoreBundle\Repository\ShipmentRepository
         shipment_item:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
         shipping_method:

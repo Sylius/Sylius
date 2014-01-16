@@ -24,7 +24,7 @@
     <h1><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.order.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_order_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_order_filter', 'template': 'SyliusWebBundle:Backend/Order:filterForm.html.twig'})) %}
 
 {{ pagination(orders) }}
 {{ list(orders) }}

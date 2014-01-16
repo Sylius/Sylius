@@ -513,3 +513,57 @@ input[type="file"] {
     min-width: 65px;
     display: inline-block;
 }
+
+.datepicker.dropdown-menu {
+  background-color: #333;
+  border: 0;
+  border-radius: 3px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+.datepicker table tr td.day:hover,
+.datepicker table tr td.day.focused {
+  background: #1abb9c;
+  color: #fff;
+}
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:focus,
+.datepicker table tr td.active:hover:focus,
+.datepicker table tr td.active.disabled:focus,
+.datepicker table tr td.active.disabled:hover:focus,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.active,
+.open .dropdown-toggle.datepicker table tr td.active:hover,
+.open .dropdown-toggle.datepicker table tr td.active.disabled,
+.open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
+  color: #ffffff;
+  background-color: #1abb9c;
+  border: 0;
+}
+.datepicker thead tr:first-child th:hover,
+.datepicker tfoot tr th:hover {
+  background: #1abb9c;
+  color: #fff;
+}
+.datepicker table tr td span:hover {
+  background: #1abb9c;
+  color: #fff;
+}
+.datepicker-dropdown:before {
+    border-bottom-color: #333;
+    border-top-color: #333;
+    color: #333;
+}

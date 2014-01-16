@@ -26,7 +26,7 @@
     <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_product_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
 
 {{ pagination(products) }}
 {{ list(products) }}

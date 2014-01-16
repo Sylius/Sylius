@@ -11,6 +11,7 @@
 
         <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
         <parameter key="sylius.controller.backend.security.class">Sylius\Bundle\WebBundle\Controller\Backend\SecurityController</parameter>
+        <parameter key="sylius.controller.backend.form.class">Sylius\Bundle\WebBundle\Controller\Backend\FormController</parameter>
 
         <parameter key="sylius.menu_builder.frontend.class">Sylius\Bundle\WebBundle\Menu\FrontendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
@@ -38,6 +39,11 @@
             </call>
         </service>
         <service id="sylius.controller.backend.security" class="%sylius.controller.backend.security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.backend.form" class="%sylius.controller.backend.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
