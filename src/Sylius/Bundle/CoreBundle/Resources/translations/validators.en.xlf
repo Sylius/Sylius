@@ -14,6 +14,14 @@
         <source>sylius.group.name.not_blank</source>
         <target>Please enter group name.</target>
       </trans-unit>
+      <trans-unit id="3b5beabf59391bccf04d07f802d97a3b" resname="sylius.locale.code.not_blank">
+        <source>sylius.locale.code.not_blank</source>
+        <target>Please enter locale code.</target>
+      </trans-unit>
+      <trans-unit id="2fc0ecd470d4ea046bead3cb291427be" resname="sylius.locale.code.unique">
+        <source>sylius.locale.code.unique</source>
+        <target>This locale already exists.</target>
+      </trans-unit>
       <trans-unit id="0004066cb8a3ad8b40bc84c8131febcc" resname="sylius.user.first_name.max">
         <source>sylius.user.first_name.max</source>
         <target>First name must be not be longer than {{ limit }} characters.</target>
@@ -61,14 +69,6 @@
       <trans-unit id="66099d65e24942c0f827f5119f223d36" resname="sylius_taxation.rate.zone.not_blank">
         <source>sylius_taxation.rate.zone.not_blank</source>
         <target>Please enter tax rate zone.</target>
-      </trans-unit>
-      <trans-unit id="66099d65e24942c0f827f5119f223d46" resname="sylius.locale.code.not_blank">
-        <source>sylius.locale.code.not_blank</source>
-        <target>Please enter locale code.</target>
-      </trans-unit>
-      <trans-unit id="67099d65e24942c0f827f5119f223d46" resname="sylius.locale.code.unique">
-        <source>sylius.locale.code.unique</source>
-        <target>This locale already exists.</target>
       </trans-unit>
     </body>
   </file>

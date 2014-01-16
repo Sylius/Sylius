@@ -61,12 +61,30 @@
                 <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
                 {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                {{ sonata_block_render({'name': '/cms/blocks/contact'}) }}
+
+                    <h2>Links</h2>
+                    <ul>
+                    {% for child in cmf_children(cmf_find('/cms/pages')) %}
+                        <li>
+                            <a href="{{ path('sylius_page_show', {'id': child.name}) }}">{{ child.title|striptags }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
                 {% endblock %}
             </div>
             <div class="col-md-9">
                 {% block content %}
                 {% endblock %}
             </div>
+        </div>
+        <hr>
+        <div class="row">
+            {% for i in 1..3 %}
+                <div class="col-md-4">
+                    {{ sonata_block_render({'name': '/cms/blocks/block-' ~ i}) }}
+                </div>
+            {% endfor %}
         </div>
         <hr>
         {% endblock %}

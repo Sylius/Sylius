@@ -10,6 +10,18 @@
         <source>sylius.checkout.shipping_method.not_blank</source>
         <target>Please select shipping method.</target>
       </trans-unit>
+      <trans-unit id="bb7ddb48f9947a592b0449ea46018a00" resname="sylius.form.block.body">
+        <source>sylius.form.block.body</source>
+        <target>Body</target>
+      </trans-unit>
+      <trans-unit id="88f8cd087d1c73b278bb727e6b30c63c" resname="sylius.form.block.id">
+        <source>sylius.form.block.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="5e7eb965f29a7cd86831cff609602bc8" resname="sylius.form.block.title">
+        <source>sylius.form.block.title</source>
+        <target>Title</target>
+      </trans-unit>
       <trans-unit id="fcd701dd96af1ffb980eaa25750df014" resname="sylius.form.cart.coupon">
         <source>sylius.form.cart.coupon</source>
         <target>Coupon</target>
@@ -65,6 +77,18 @@
       <trans-unit id="f6fbe4f3384f4c574ce4f8150faa6e14" resname="sylius.form.order_filter.total_to">
         <source>sylius.form.order_filter.total_to</source>
         <target>To</target>
+      </trans-unit>
+      <trans-unit id="1772bf28096e75d35c003263838908bf" resname="sylius.form.page.body">
+        <source>sylius.form.page.body</source>
+        <target>Body</target>
+      </trans-unit>
+      <trans-unit id="bce3b1c9734b3e4de96484b5c92a517b" resname="sylius.form.page.id">
+        <source>sylius.form.page.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="6bd7d973104a0eb7d4650880b6b9a9ac" resname="sylius.form.page.title">
+        <source>sylius.form.page.title</source>
+        <target>Title</target>
       </trans-unit>
       <trans-unit id="556cf98f6f7526d6065fa049248630ee" resname="sylius.form.product.restricted_zone">
         <source>sylius.form.product.restricted_zone</source>

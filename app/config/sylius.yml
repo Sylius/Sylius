@@ -111,3 +111,12 @@ sylius_resource:
             classes:
                 model: Sylius\Bundle\CoreBundle\Model\Locale
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+        sylius.block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock
+        sylius.page:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
+                repository: Sylius\Bundle\CoreBundle\Repository\PageRepository

@@ -29,8 +29,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle":                "0.12.*",
         "jms/translation-bundle":               "1.1.*",
-        "knplabs/knp-menu":                     "2.0.*@dev",
-        "knplabs/knp-menu-bundle":              "2.0.*@dev",
         "knplabs/knp-gaufrette-bundle":         "*@dev",
         "knplabs/knp-snappy-bundle":            "*@dev",
         "liip/doctrine-cache-bundle":           "*",
@@ -45,8 +43,13 @@
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
+        "pagerfanta/pagerfanta":                "1.0.*@dev",
         "payum/payum":                          "0.7.*",
-        "payum/payum-bundle":                   "~0.7.1"
+        "payum/payum-bundle":                   "~0.7.1",
+        "symfony-cmf/block-bundle":             "1.0.*",
+        "symfony-cmf/content-bundle":           "1.0.*",
+        "symfony-cmf/routing-bundle":           "1.1.*",
+        "symfony-cmf/menu-bundle":              "1.0.*"
     },
     "require-dev": {
         "behat/behat":                       "2.4.*@stable",

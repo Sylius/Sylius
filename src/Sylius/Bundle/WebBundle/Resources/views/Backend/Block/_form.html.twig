@@ -1,0 +1,6 @@
+<fieldset>
+    {{ form_row(form.id, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.body) }}
+</fieldset>
+{{ form_widget(form._token) }}

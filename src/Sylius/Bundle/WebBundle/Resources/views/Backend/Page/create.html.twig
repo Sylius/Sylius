@@ -1,0 +1,24 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_page_index') }}">{{ 'sylius.breadcrumb.page.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.page.create_header'|trans|raw }}</h1>
+</div>
+
+{{ form_errors(form) }}
+
+<form action="{{ path('sylius_backend_page_create') }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusWebBundle:Backend/Page:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

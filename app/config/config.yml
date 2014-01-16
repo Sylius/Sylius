@@ -57,6 +57,16 @@ doctrine:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
 
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+        workspace: default
+        username: admin
+        password: admin
+    odm:
+        auto_mapping: true
+
 stof_doctrine_extensions:
     default_locale: %sylius.locale%
     orm:
@@ -157,3 +167,27 @@ knp_snappy:
         enabled:    true
         binary:     /usr/bin/wkhtmltoimage
         options:    []
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.block.service.text:
+
+cmf_core:
+    publish_workflow: false
+
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/blocks
+
+cmf_content:
+    persistence:
+        phpcr:
+            content_basepath: /cms/pages
+
+cmf_routing:
+    dynamic:
+        generic_controller: cmf_content.controller:indexAction
+        persistence:
+            phpcr: ~

@@ -120,6 +120,14 @@ sylius_backend_locale:
     resource: @SyliusWebBundle/Resources/config/routing/backend/locale.yml
     prefix: /locales
 
+sylius_backend_block:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/block.yml
+    prefix: /blocks
+
+sylius_backend_page:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/page.yml
+    prefix: /pages
+
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
     prefix: /settings
