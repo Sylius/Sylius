@@ -28,11 +28,4 @@ interface PromotionRepositoryInterface extends RepositoryInterface
      * @return PromotionInterface[]
      */
     public function findActive();
-
-    /**
-     * Finds all active promotions that have been applied to the specified subject
-     *
-     * return PromotionInterface[]
-     */
-    public function findAppliedOnSubject(PromotionSubjectInterface $subject);
 }

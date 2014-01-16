@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PromotionsBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -31,18 +30,6 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
         $qb = $this->getCollectionQueryBuilder();
 
         $this->filterByActive($qb);
-
-        return $qb
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    public function findAppliedOnSubject(PromotionSubjectInterface $subject)
-    {
-        $qb = $this->getCollectionQueryBuilder();
-
-        $this->filterBySubject($qb, $subject);
 
         return $qb
             ->getQuery()
@@ -78,13 +65,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
                     $qb->expr()->gt($this->getAlias().'.endsAt', ':date')
                 )
             )
-            ->setParameter('date', $date);
-    }
-
-    protected function filterBySubject(QueryBuilder $qb, PromotionSubjectInterface $subject)
-    {
-        return $qb
-            ->join($this->getAlias().'.subjects', 's', 'WITH', 's = :subject')
-            ->setParameter('subject', $subject);
+            ->setParameter('date', $date)
+        ;
     }
 }
