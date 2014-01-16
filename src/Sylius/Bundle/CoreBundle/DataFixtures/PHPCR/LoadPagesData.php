@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\PHPCR;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Factory as FakerFactory;
 use PHPCR\Util\NodeHelper;
 use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
@@ -26,6 +27,7 @@ class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedF
      */
     public function load(ObjectManager $manager)
     {
+        $faker = FakerFactory::create();
         $session = $manager->getPhpcrSession();
 
         $basepath = $this->container->getParameter('cmf_routing.dynamic.persistence.phpcr.route_basepath');;
@@ -37,17 +39,33 @@ class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedF
         NodeHelper::createPath($session, $basepath);
 
         $parent = $manager->find(null, $basepath);
+        $repository = $this->container->get('sylius.repository.page');
 
+        // Terms of service.
         $route = new Route();
         $route->setPosition($routeRoot, 'terms-of-service');
         $manager->persist($route);
 
-        $content = $this->container->get('sylius.repository.page')->createNew();
+        $content = $repository->createNew();
         $content->setTitle('Terms of Service');
-        $content->setBody('TOS Content');
+        $content->setBody($faker->text(350));
         $content->addRoute($route);
         $content->setParent($parent);
         $content->setName('terms-of-service');
+
+        $manager->persist($content);
+
+        // Contact.
+        $route = new Route();
+        $route->setPosition($routeRoot, 'about');
+        $manager->persist($route);
+
+        $content = $repository->createNew();
+        $content->setTitle('About us');
+        $content->setBody($faker->text(300));
+        $content->addRoute($route);
+        $content->setParent($parent);
+        $content->setName('about-us');
 
         $manager->persist($content);
 

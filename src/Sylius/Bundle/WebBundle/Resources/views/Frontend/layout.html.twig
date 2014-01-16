@@ -70,6 +70,14 @@
             </div>
         </div>
         <hr>
+        <div class="row">
+            {% for i in 1..3 %}
+                <div class="col-md-4">
+                    {{ sonata_block_render({'name': '/cms/content/block-' ~ i}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
         {% endblock %}
 
         {% block gallery %}

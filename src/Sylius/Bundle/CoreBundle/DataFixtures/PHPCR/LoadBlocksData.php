@@ -14,13 +14,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\PHPCR;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-
+use Faker\Factory as FakerFactory;
 use PHPCR\Util\NodeHelper;
-
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Yaml\Parser;
-
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
 
 class LoadBlocksData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
@@ -29,20 +27,31 @@ class LoadBlocksData extends ContainerAware implements FixtureInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
+        $faker = FakerFactory::create();
         $session = $manager->getPhpcrSession();
 
         $basepath = $this->container->getParameter('cmf_block.persistence.phpcr.block_basepath');;
         NodeHelper::createPath($session, $basepath);
 
         $parent = $manager->find(null, $basepath);
+        $repository = $this->container->get('sylius.repository.block');
 
-        $contactBlock = $this->container->get('sylius.repository.block')->createNew();
+        $contactBlock = $repository->createNew();
         $contactBlock->setParentDocument($parent);
         $contactBlock->setName('contact');
         $contactBlock->setTitle('Contact us');
-        $contactBlock->setBody('Call (8) 888 333 421!');
-
+        $contactBlock->setBody('<p>Call us '.$faker->phoneNumber.'!</p><p>'.$faker->paragraph.'</p>');
         $manager->persist($contactBlock);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $block = $repository->createNew();
+            $block->setParentDocument($parent);
+            $block->setName('block-'.$i);
+            $block->setTitle(ucfirst($faker->word));
+            $block->setBody($faker->paragraph);
+            $manager->persist($block);
+        }
+
         $manager->flush();
     }
 
