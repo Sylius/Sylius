@@ -12,16 +12,19 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Be2Bill\Api;
+use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Exception\RuntimeException;
-use Payum\Core\Request\NotifyRequest;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class SecureNotifyAction extends PaymentAwareAction
+class NotifyAction extends PaymentAwareAction
 {
     /**
      * @var Api
@@ -53,18 +56,39 @@ class SecureNotifyAction extends PaymentAwareAction
         $details = $request->getModel();
 
         if (!$this->api->verifyHash($details)) {
-            throw new RuntimeException('Hash cannot be verified.');
+            throw new BadRequestHttpException('Hash cannot be verified.');
+        }
+
+        if (empty($details['ORDERID'])) {
+            throw new BadRequestHttpException('Order id cannot be guessed');
         }
 
         $order = $this->orderRepository->findOneBy(array($this->identifier => $details['ORDERID']));
 
         if (null === $order) {
-            throw new RuntimeException('Order cannot be retrieved.');
+            throw new BadRequestHttpException('Order cannot be retrieved.');
         }
 
-        $request->setModel($order);
+        $previousState = $order->getPayment()->getState();
 
-        $this->payment->execute($request);
+        $status = new StatusRequest($order);
+        $this->payment->execute($status);
+
+        $order->getPayment()->setState($status->getStatus());
+
+        if ($previousState !== $order->getPayment()->getState()) {
+            $this->eventDispatcher->dispatch(
+                SyliusPaymentEvents::PRE_STATE_CHANGE,
+                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+            );
+
+            $this->eventDispatcher->dispatch(
+                SyliusPaymentEvents::POST_STATE_CHANGE,
+                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+            );
+        }
+
+        throw new ResponseInteractiveRequest(new Response('OK', 200));
     }
 
     /**
@@ -72,12 +96,6 @@ class SecureNotifyAction extends PaymentAwareAction
      */
     public function supports($request)
     {
-        if (!$request instanceof NotifyRequest) {
-            return false;
-        }
-
-        $model = $request->getModel();
-
-        return empty($model['ORDERID']);
+        return $request instanceof NotifyRequest;
     }
 }
