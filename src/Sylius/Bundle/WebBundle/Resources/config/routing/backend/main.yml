@@ -116,6 +116,10 @@ sylius_backend_zone_member:
     resource: @SyliusWebBundle/Resources/config/routing/backend/zone_member.yml
     prefix: /zone-members
 
+sylius_backend_locale:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/locale.yml
+    prefix: /locales
+
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
     prefix: /settings

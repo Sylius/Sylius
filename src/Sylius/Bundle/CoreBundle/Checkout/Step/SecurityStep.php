@@ -61,9 +61,8 @@ class SecurityStep extends CheckoutStep
 
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($form, $request));
 
             $userManager->updateUser($user);
 
@@ -80,6 +79,8 @@ class SecurityStep extends CheckoutStep
      *
      * @param ProcessContextInterface $context
      * @param FormInterface           $registrationForm
+     *
+     * @return Response
      */
     protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm)
     {
@@ -104,9 +105,8 @@ class SecurityStep extends CheckoutStep
      */
     protected function overrideSecurityTargetPath()
     {
-        $url = $this->generateUrl('sylius_checkout_security', array(), true);
         $providerKey = $this->container->getParameter('fos_user.firewall_name');
 
-        $this->get('session')->set('_security.'.$providerKey.'.target_path', $url);
+        $this->get('session')->set('_security.'.$providerKey.'.target_path', $this->generateUrl('sylius_checkout_security', array(), true));
     }
 }

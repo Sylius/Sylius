@@ -43,8 +43,8 @@ class SyliusSettingsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_settings_all' => new \Twig_Function_Method($this, 'getSettings'),
-            'sylius_settings_get' => new \Twig_Function_Method($this, 'getSettingsParameter'),
+             new \Twig_SimpleFunction('sylius_settings_all', array($this, 'getSettings')),
+             new \Twig_SimpleFunction('sylius_settings_get', array($this, 'getSettingsParameter')),
         );
     }
 

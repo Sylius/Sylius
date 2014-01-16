@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
@@ -47,11 +47,18 @@ class SyliusResourceExtension extends \Twig_Extension
     private $request;
 
     /**
-     * @var Container
+     * @var ContainerInterface
      */
     private $container;
 
-    public function __construct(Container $container, $paginateTemplate, $sortingTemplate)
+    /**
+     * Constructor.
+     *
+     * @param ContainerInterface $container
+     * @param string             $paginateTemplate
+     * @param string             $sortingTemplate
+     */
+    public function __construct(ContainerInterface $container, $paginateTemplate, $sortingTemplate)
     {
         $this->container = $container;
         $this->paginateTemplate = $paginateTemplate;
@@ -64,8 +71,8 @@ class SyliusResourceExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_resource_sort'     => new \Twig_Function_Method($this, 'renderSortingLink', array('is_safe' => array('html'))),
-            'sylius_resource_paginate' => new \Twig_Function_Method($this, 'renderPaginateSelect', array('is_safe' => array('html'))),
+             new \Twig_SimpleFunction('sylius_resource_sort', array($this, 'renderSortingLink'), array('is_safe' => array('html'))),
+             new \Twig_SimpleFunction('sylius_resource_paginate', array($this, 'renderPaginateSelect'), array('is_safe' => array('html'))),
         );
     }
 

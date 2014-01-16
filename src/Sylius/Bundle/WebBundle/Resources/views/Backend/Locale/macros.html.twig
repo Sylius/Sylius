@@ -1,0 +1,39 @@
+{% macro list(locales) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if locales|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('code', 'sylius.locale.code'|trans) }}</th>
+                <th>{{ sylius_resource_sort('enabled', 'sylius.locale.enabled'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.locale.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for locale in locales %}
+            <tr id="{{ locale.id }}">
+                <td>{{ locale.code }}</td>
+                <td>
+                    {{ misc.state_label(locale.enabled) }}
+                </td>
+                <td>{{ locale.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_locale_update', {'id': locale.id})) }}
+                    {{ buttons.delete(path('sylius_backend_locale_delete', {'id': locale.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.locale.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

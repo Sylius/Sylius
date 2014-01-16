@@ -11,13 +11,12 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\CartBundle\Event\CartEvent;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
 
 /**
  * Default cart controller.
@@ -33,11 +32,9 @@ class CartController extends Controller
      * Displays current cart summary page.
      * The parameters includes the form created from `sylius_cart` type.
      *
-     * @param Request $request
-     *
      * @return Response
      */
-    public function summaryAction(Request $request)
+    public function summaryAction()
     {
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
@@ -64,7 +61,7 @@ class CartController extends Controller
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
-        if ($form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $event = new CartEvent($cart);
             $event->isFresh(true);
 

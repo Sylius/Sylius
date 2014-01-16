@@ -11,16 +11,19 @@
 
 namespace Sylius\Bundle\InstallerBundle\Process\Step;
 
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
-use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Tools\SchemaTool;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 
 class SetupStep extends ControllerStep
 {
+    /**
+     * {@inheritdoc}
+     */
     public function displayAction(ProcessContextInterface $context)
     {
         return $this->render(
@@ -29,12 +32,16 @@ class SetupStep extends ControllerStep
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function forwardAction(ProcessContextInterface $context)
     {
+        $request = $this->getRequest();
         $form = $this->createForm('sylius_setup');
         $em = $this->getDoctrine()->getEntityManager();
 
-        if ($this->getRequest()->isMethod('POST') && $form->bind($this->getRequest())->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $params = $this->get('doctrine')->getConnection()->getParams();
             $dbname = $params['dbname'];
             unset($params['dbname']);

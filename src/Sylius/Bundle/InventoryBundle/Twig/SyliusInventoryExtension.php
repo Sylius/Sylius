@@ -44,8 +44,8 @@ class SyliusInventoryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sylius_inventory_is_available' => new \Twig_Function_Method($this, 'isStockAvailable'),
-            'sylius_inventory_is_sufficient' => new \Twig_Function_Method($this, 'isStockSufficient'),
+             new \Twig_SimpleFunction('sylius_inventory_is_available', array($this, 'isStockAvailable')),
+             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', array($this, 'isStockSufficient')),
         );
     }
 

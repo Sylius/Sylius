@@ -9,13 +9,13 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
     <li><a href="{{ path('sylius_backend_shipment_index') }}">{{ 'sylius.breadcrumb.shipment.index'|trans }}</a></li>
-    <li>{{ shipment.id }}</a></li>
+    <li>{{ shipment.method }} (#{{ order.number }})</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-truck"></i> {{ 'sylius.shipment.show_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plane"></i> {{ 'sylius.shipment.show_header'|trans|raw }}</h1>
 </div>
 
 <div class="panel panel-default">
@@ -57,7 +57,11 @@
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.shipment.method'|trans }}</strong></td>
-                    <td><span class="label label-primary" style="font-size: 1em;">{{ shipment.method }}</span></td>
+                    <td><span class="label label-primary">{{ shipment.method }}</span></td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.shipment.tracking_code'|trans }}</strong></td>
+                    <td><span class="label label-{{ shipment.tracked ? 'primary' : 'default' }}">{{ shipment.tracked ? shipment.tracking : 'sylius.unknown'|trans }}</span></td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
