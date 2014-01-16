@@ -28,7 +28,6 @@ before_script:
     - php -d memory_limit=2048M composer.phar update doctrine/mongodb-odm
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
-    - app/console doctrine:phpcr:init:dbal --env=test > /dev/null
     - app/console doctrine:phpcr:repository:init --env=test > /dev/null
     - app/console cache:warmup --env=test > /dev/null
     - sh -e /etc/init.d/xvfb start
