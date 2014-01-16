@@ -20,7 +20,7 @@
         <parameter key="sylius.payum.checkout_step.purchase.class">Sylius\Bundle\PayumBundle\Checkout\Step\PurchaseStep</parameter>
         <parameter key="sylius.payum.paypal.action.capture_order_using_express_checkout.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\CaptureOrderUsingExpressCheckoutAction</parameter>
         <parameter key="sylius.payum.stripe.action.capture_order_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Stripe\Action\CaptureOrderUsingCreditCardAction</parameter>
-        <parameter key="sylius.payum.paypal.action.notify_order.class">Sylius\Bundle\PayumBundle\Payum\Stripe\Action\NotifyOrderAction</parameter>
+        <parameter key="sylius.payum.paypal.action.notify_order.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\NotifyOrderAction</parameter>
         <parameter key="sylius.payum.be2bill.action.capture_order_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\CaptureOrderUsingCreditCardAction</parameter>
         <parameter key="sylius.payum.dummy.action.capture_order.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CaptureOrderAction</parameter>
         <parameter key="sylius.payum.dummy.action.order_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\OrderStatusAction</parameter>
