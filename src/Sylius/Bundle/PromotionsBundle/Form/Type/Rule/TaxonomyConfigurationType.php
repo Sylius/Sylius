@@ -13,22 +13,24 @@ namespace Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Sylius\Bundle\PromotionsBundle\Form\DataTransformer\TaxonToIdentifierTransformer;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
- * Item total rule configuration form type.
+ * Taxonomy rule configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationType extends AbstractType
+class TaxonomyConfigurationType extends AbstractType
 {
     protected $validationGroups;
+    private $taxonRepository;
 
-    public function __construct(array $validationGroups)
+    public function __construct(array $validationGroups, ObjectRepository $taxonRepository)
     {
         $this->validationGroups = $validationGroups;
+        $this->taxonRepository = $taxonRepository;
     }
 
     /**
@@ -37,18 +39,12 @@ class ItemTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.rule.item_total_configuration.amount',
-                'constraints' => array(
-                    new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
+            ->add('taxons', 'sylius_taxon_selection', array(
+                'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
+                'model_transformer' => 'Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToIdentifierCollectionTransformer',
             ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                )
+            ->add('exclude', 'checkbox', array(
+                'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
             ))
         ;
     }
@@ -70,6 +66,6 @@ class ItemTotalConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_item_total_configuration';
+        return 'sylius_promotion_rule_taxonomy_configuration';
     }
 }

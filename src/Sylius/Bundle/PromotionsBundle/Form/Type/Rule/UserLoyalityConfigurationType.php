@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Item total rule configuration form type.
+ * Nth order rule configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationType extends AbstractType
+class UserLoyalityConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -37,18 +37,27 @@ class ItemTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.rule.item_total_configuration.amount',
+            ->add('time', 'integer', array(
+                'label'       => 'sylius.form.rule.user_loyality_configuration.time',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.item_total_configuration.equal',
+            ->add('unit', 'choice', array(
+                'label'       => 'sylius.form.rule.user_loyality_configuration.unit',
+                'choices'     => array(
+                    'days'   => 'sylius.form.rule.user_loyality_configuration.unit.days',
+                    'weeks'  => 'sylius.form.rule.user_loyality_configuration.unit.weeks',
+                    'months' => 'sylius.form.rule.user_loyality_configuration.unit.months',
+                    'years'  => 'sylius.form.rule.user_loyality_configuration.unit.years',
+                ),
                 'constraints' => array(
-                    new Type(array('type' => 'bool')),
+                    new NotBlank(),
                 )
+            ))
+            ->add('after', 'checkbox', array(
+                'label' => 'sylius.form.rule.user_loyality_configuration.after',
             ))
         ;
     }
@@ -70,6 +79,6 @@ class ItemTotalConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_item_total_configuration';
+        return 'sylius_promotion_rule_user_loyality_configuration';
     }
 }

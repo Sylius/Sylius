@@ -51,6 +51,7 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_gets_currency_from_session_if_there_is_no_user($token, $securityContext, $session)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn(null);
         $session->get('currency', 'EUR')->shouldBeCalled()->willReturn('RSD');
 
@@ -64,6 +65,7 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_gets_currency_from_user_if_authenticated($user, $token, $securityContext)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn($user);
         $user->getCurrency()->shouldBeCalled()->willReturn('PLN');
 
@@ -76,6 +78,7 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_sets_currency_to_session_if_there_is_no_user($token, $securityContext, $session)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn(null);
         $session->set('currency', 'PLN')->shouldBeCalled();
 
@@ -89,6 +92,7 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_sets_currency_to_user_if_authenticated($user, $token, $securityContext)
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn($user);
         $user->setCurrency('PLN')->shouldBeCalled();
 

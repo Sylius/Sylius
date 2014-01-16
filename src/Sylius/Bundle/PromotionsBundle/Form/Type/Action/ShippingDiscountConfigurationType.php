@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
+namespace Sylius\Bundle\PromotionsBundle\Form\Type\Action;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Item total rule configuration form type.
+ * Shipping discount action configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationType extends AbstractType
+class ShippingDiscountConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -37,25 +37,16 @@ class ItemTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.rule.item_total_configuration.amount',
+            ->add('percentage', 'percent', array(
+                'label' => 'sylius.form.action.shipping_discount_configuration.percentage',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                )
-            ))
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -65,11 +56,8 @@ class ItemTotalConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
-        return 'sylius_promotion_rule_item_total_configuration';
+        return 'sylius_promotion_action_shipping_discount_configuration';
     }
 }

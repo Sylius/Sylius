@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.country_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\CountryEntityChoiceType</parameter>
+        <parameter key="sylius.form.type.country_to_identifier.class">Sylius\Bundle\AddressingBundle\Form\Type\CountryToIdentifierType</parameter>
         <parameter key="sylius.form.type.province_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType</parameter>
         <parameter key="sylius.form.type.zone_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneEntityChoiceType</parameter>
         <parameter key="sylius.form.type.zone_member_collection.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCollectionType</parameter>
@@ -111,6 +112,10 @@
         <service id="sylius.form.type.country_choice" class="%sylius.form.type.country_choice.class%">
             <argument>%sylius.model.country.class%</argument>
             <tag name="form.type" alias="sylius_country_choice" />
+        </service>
+        <service id="sylius.form.type.country_to_identifier" class="%sylius.form.type.country_to_identifier.class%">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type" alias="sylius_country_to_identifier" />
         </service>
         <service id="sylius.form.type.province_choice" class="%sylius.form.type.province_choice.class%">
             <argument type="service" id="sylius.repository.province" />

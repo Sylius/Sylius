@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Item total rule configuration form type.
+ * Nth order rule configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationType extends AbstractType
+class NthOrderConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -37,17 +37,11 @@ class ItemTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.rule.item_total_configuration.amount',
+            ->add('nth', 'integer', array(
+                'label' => 'sylius.form.rule.nth_order_configuration.nth',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
                 )
             ))
         ;
@@ -70,6 +64,6 @@ class ItemTotalConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_item_total_configuration';
+        return 'sylius_promotion_rule_nth_order_configuration';
     }
 }

@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\TranslatorInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class PurchaseStepSpec extends ObjectBehavior
 {
@@ -66,6 +67,8 @@ class PurchaseStepSpec extends ObjectBehavior
         $container->has('doctrine')->willReturn(true);
         $container->get('translator')->willReturn($translator);
 
+        $this->setName('purchase');
+
         $this->setContainer($container);
     }
 
@@ -82,7 +85,8 @@ class PurchaseStepSpec extends ObjectBehavior
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         ProcessContextInterface $context,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_NEW);
@@ -111,6 +115,16 @@ class PurchaseStepSpec extends ObjectBehavior
             )
             ->shouldBeCalled()
         ;
+        $eventDispatcher
+            ->dispatch(
+                'sylius_checkout_purchase.completed',
+                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+            )
+            ->shouldBeCalled()
+        ;
+
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
@@ -118,7 +132,8 @@ class PurchaseStepSpec extends ObjectBehavior
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         ProcessContextInterface $context,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_COMPLETED);
@@ -147,6 +162,16 @@ class PurchaseStepSpec extends ObjectBehavior
             )
             ->shouldNotBeCalled()
         ;
+        $eventDispatcher
+            ->dispatch(
+                'sylius_checkout_purchase.completed',
+                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+            )
+            ->shouldBeCalled()
+        ;
+
+        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
@@ -155,7 +180,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -176,6 +202,9 @@ class PurchaseStepSpec extends ObjectBehavior
         ;
         $flashBag->add('success','translated.sylius.checkout.success')->shouldBeCalled();
 
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
+
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
@@ -183,7 +212,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -204,6 +234,9 @@ class PurchaseStepSpec extends ObjectBehavior
         ;
         $flashBag->add('notice','translated.sylius.checkout.pending')->shouldBeCalled();
 
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
+
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
@@ -211,7 +244,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -232,6 +266,9 @@ class PurchaseStepSpec extends ObjectBehavior
         ;
         $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
 
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
+
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
@@ -239,7 +276,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -260,6 +298,9 @@ class PurchaseStepSpec extends ObjectBehavior
         ;
         $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
 
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
+
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
@@ -267,7 +308,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -288,6 +330,9 @@ class PurchaseStepSpec extends ObjectBehavior
         ;
         $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
 
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
+
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
@@ -295,7 +340,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -316,6 +362,9 @@ class PurchaseStepSpec extends ObjectBehavior
         ;
         $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
 
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
+
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
 
@@ -323,7 +372,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ProcessContextInterface $context,
         PaymentInterface $payment,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CartProviderInterface $cartProvider
     ) {
         $paymentModel = new Payment();
         $order = new Order();
@@ -343,6 +393,9 @@ class PurchaseStepSpec extends ObjectBehavior
             ->willReturn('translated.sylius.checkout.unknown')
         ;
         $flashBag->add('error','translated.sylius.checkout.unknown')->shouldBeCalled();
+
+        $cartProvider->getCart()->willReturn($order);
+        $cartProvider->abandonCart()->shouldBeCalled();
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
