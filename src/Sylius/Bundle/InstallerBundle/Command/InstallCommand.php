@@ -72,11 +72,13 @@ class InstallCommand extends ContainerAwareCommand
         $this
             ->runCommand('doctrine:database:create', $input, $output)
             ->runCommand('doctrine:schema:create', $input, $output)
+            ->runCommand('doctrine:phpcr:repository:init', $input, $output)
             ->runCommand('assetic:dump', $input, $output)
         ;
 
         if ($dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {
             $this->runCommand('doctrine:fixtures:load', $input, $output);
+            $this->runCommand('doctrine:phpcr:fixtures:load', $input, $output);
         }
 
         $output->writeln('');
