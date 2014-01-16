@@ -54,7 +54,7 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
         $action->execute($subject, $configuration, $promotion)->shouldBeCalled();
 
-        $promotion->addSubject($subject)->shouldBeCalled();
+        $subject->addPromotion($promotion)->shouldBeCalled();
 
         $this->apply($subject, $promotion);
     }
@@ -75,7 +75,7 @@ class PromotionApplicatorSpec extends ObjectBehavior
 
         $action->revert($subject, $configuration, $promotion)->shouldBeCalled();
 
-        $promotion->removeSubject($subject)->shouldBeCalled();
+        $subject->removePromotion($promotion)->shouldBeCalled();
 
         $this->revert($subject, $promotion);
     }

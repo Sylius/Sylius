@@ -38,7 +38,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
             ;
         }
 
-        $promotion->addSubject($subject);
+        $subject->addPromotion($promotion);
     }
 
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
@@ -50,6 +50,6 @@ class PromotionApplicator implements PromotionApplicatorInterface
             ;
         }
 
-        $promotion->removeSubject($subject);
+        $subject->removePromotion($promotion);
     }
 }

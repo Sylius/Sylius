@@ -43,7 +43,6 @@ class FixedDiscountActionSpec extends ObjectBehavior
     {
         $adjustmentRepository->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');
-        $promotion->hasSubject($order)->willReturn(false);
 
         $adjustment->setAmount(-500)->shouldBeCalled();
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
