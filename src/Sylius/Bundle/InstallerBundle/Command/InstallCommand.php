@@ -72,6 +72,7 @@ class InstallCommand extends ContainerAwareCommand
         $this
             ->runCommand('doctrine:database:create', $input, $output)
             ->runCommand('doctrine:schema:create', $input, $output)
+            ->runCommand('doctrine:phpcr:init:dbal', $input, $output)
             ->runCommand('doctrine:phpcr:repository:init', $input, $output)
             ->runCommand('assetic:dump', $input, $output)
         ;
