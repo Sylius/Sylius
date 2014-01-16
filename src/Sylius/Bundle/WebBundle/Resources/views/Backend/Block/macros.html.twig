@@ -10,7 +10,6 @@
             <tr>
                 <th>{{ 'sylius.block.id'|trans }}</th>
                 <th>{{ sylius_resource_sort('title', 'sylius.block.title'|trans) }}</th>
-                <th>{{ 'sylius.block.body'|trans }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.block.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
@@ -20,7 +19,6 @@
             <tr id="{{ block.id }}">
                 <td><i>{{ block.id }}</i></td>
                 <td>{{ block.title }}</td>
-                <td>{{ block.body }}</td>
                 <td>{{ block.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">

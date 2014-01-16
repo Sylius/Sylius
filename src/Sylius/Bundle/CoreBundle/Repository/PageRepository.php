@@ -22,6 +22,6 @@ class PageRepository extends DocumentRepository
 {
     public function findPage($id)
     {
-        return $this->find('/cms/content/'.$id);
+        return $this->find('/cms/pages/'.$id);
     }
 }

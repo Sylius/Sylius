@@ -178,11 +178,13 @@ cmf_core:
 
 cmf_block:
     persistence:
-        phpcr: ~
+        phpcr:
+            block_basepath: /cms/blocks
 
 cmf_content:
     persistence:
-        phpcr: ~
+        phpcr:
+            content_basepath: /cms/pages
 
 cmf_routing:
     dynamic:

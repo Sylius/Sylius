@@ -10,7 +10,6 @@
             <tr>
                 <th>{{ 'sylius.page.id'|trans }}</th>
                 <th>{{ sylius_resource_sort('title', 'sylius.page.title'|trans) }}</th>
-                <th>{{ 'sylius.page.body'|trans }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             <tr id="{{ page.id }}">
                 <td><i>{{ page.id }}</i></td>
                 <td>{{ page.title }}</td>
-                <td>{{ page.body }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_page_update', {'id': page.id})) }}
