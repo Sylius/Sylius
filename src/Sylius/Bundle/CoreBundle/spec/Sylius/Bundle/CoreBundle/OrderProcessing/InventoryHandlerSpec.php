@@ -110,8 +110,9 @@ class InventoryHandlerSpec extends ObjectBehavior
      * @param Doctrine\Common\Collections\ArrayCollection           $units
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit3
      */
-    function it_removes_extra_inventory_units($inventoryUnitFactory, $order, $item, $variant, $units, $unit1, $unit2)
+    function it_removes_extra_inventory_units($inventoryUnitFactory, $order, $item, $variant, $units, $unit1, $unit2, $unit3)
     {
         $order->getItems()->willReturn(array($item));
 
@@ -120,11 +121,13 @@ class InventoryHandlerSpec extends ObjectBehavior
         $units->count()->willReturn(2);
 
         $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn($units);
+        $order->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit3));
         $units->slice(0, 1)->shouldBeCalled()->willReturn(array($unit2));
 
         $inventoryUnitFactory->create(Argument::any())->shouldNotBeCalled();
 
         $order->removeInventoryUnit($unit2)->shouldBeCalled();
+        $order->removeInventoryUnit($unit3)->shouldBeCalled();
 
         $this->processInventoryUnits($order);
     }

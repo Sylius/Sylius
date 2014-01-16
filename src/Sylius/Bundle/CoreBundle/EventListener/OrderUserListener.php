@@ -19,12 +19,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 class OrderUserListener
 {
     protected $securityContext;
-    protected $cartManager;
 
-    public function __construct(SecurityContextInterface $securityContext, ObjectManager $cartManager)
+    public function __construct(SecurityContextInterface $securityContext)
     {
         $this->securityContext = $securityContext;
-        $this->cartManager = $cartManager;
     }
 
     public function setOrderUser(GenericEvent $event)
@@ -38,19 +36,16 @@ class OrderUserListener
         }
 
         if (null === $user = $this->getUser()) {
-            return;
+            throw new \InvalidArgumentException('Order has to belong to a user.');
         }
 
         $order->setUser($user);
-
-        $this->cartManager->persist($order);
-        $this->cartManager->flush($order);
     }
 
     protected function getUser()
     {
-        if ((null !== $token = $this->securityContext->getToken()) && is_object($user = $token->getUser())) {
-            return $user;
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->securityContext->getToken()->getUser();
         }
     }
 }

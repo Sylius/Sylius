@@ -267,7 +267,6 @@
         </service>
         <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
             <argument type="service" id="security.context" />
-            <argument type="service" id="sylius.manager.cart" />
             <tag name="kernel.event_listener" event="sylius_checkout_security.completed" method="setOrderUser" />
         </service>
 

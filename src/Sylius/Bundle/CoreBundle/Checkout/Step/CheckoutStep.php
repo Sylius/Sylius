@@ -34,6 +34,8 @@ abstract class CheckoutStep extends ControllerStep
     {
         $this->dispatchCheckoutEvent('sylius_checkout_'.$this->getName().'.completed', $this->getCurrentCart());
 
+        $this->getManager()->flush();
+
         return parent::complete();
     }
 
