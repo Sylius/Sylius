@@ -55,20 +55,77 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function processInventoryUnits(OrderInterface $order)
     {
-        foreach ($order->getItems() as $item) {
-            $variant = $item->getVariant();
-            $units = $order->getInventoryUnitsByVariant($variant);
+        list ($variants, $quantities) = $this->getVariantQuantities($order);
 
-            $quantity = $item->getQuantity();
-            $unitsQuantity = count($units);
+        foreach ($variants as $variant) {
+            $this->updateVariantUnits($order, $variant, $quantities[array_search($variant, $variants)]);
+        }
 
-            if ($quantity > $unitsQuantity) {
-                $this->addInventoryUnits($order, $variant, $quantity - $unitsQuantity);
-            }
-            if ($quantity < $unitsQuantity) {
-                $this->removeInventoryUnits($order, $variant, $unitsQuantity - $quantity);
+        $this->removeUnusedUnits($order, $variants);
+    }
+
+    /**
+     * Removes inventory units which are not linked to any of specified variants
+     *
+     * @param OrderInterface $order
+     * @param array $variants
+     */
+    private function removeUnusedUnits(OrderInterface $order, array $variants)
+    {
+        foreach ($order->getInventoryUnits() as $unit) {
+            if (!in_array($unit->getStockable(), $variants)) {
+                $order->removeInventoryUnit($unit);
             }
         }
+    }
+
+    /**
+     * Update inventory units related to passed variant to the specified quantity
+     *
+     * @param OrderInterface $order
+     * @param VariantInterface $variant
+     * @param int $quantity
+     */
+    private function updateVariantUnits(OrderInterface $order, VariantInterface $variant, $quantity)
+    {
+        $units = $order->getInventoryUnitsByVariant($variant);
+        $quantityDifference = $quantity - count($units);
+
+        if (0 === $quantityDifference) {
+            return;
+        }
+
+        if ($quantityDifference < 0) {
+            $this->removeInventoryUnits($order, $variant, abs($quantityDifference));
+        } else {
+            $this->addInventoryUnits($order, $variant, $quantityDifference);
+        }
+    }
+
+    /**
+     * Helper method that returns the quantities of each variant in cart
+     * Return format: [[Variant1, Variant2], [QuantityForVariant1, QuantityForVariant2]]
+     *
+     * @param OrderInterface $order
+     * @return array
+     */
+    private function getVariantQuantities(OrderInterface $order)
+    {
+        $variants = array();
+        $quantities = array();
+
+        foreach ($order->getItems() as $item) {
+            $variant = $item->getVariant();
+
+            if (!in_array($variant, $variants)) {
+                $variants[] = $variant;
+            }
+
+            $index = array_search($variant, $variants);
+            $quantities[$index] = isset($quantities[$index]) ? $quantities[$index] + $item->getQuantity() : $item->getQuantity();
+        }
+
+        return array($variants, $quantities);
     }
 
     /**
@@ -113,9 +170,15 @@ class InventoryHandler implements InventoryHandlerInterface
     protected function removeInventoryUnits(OrderInterface $order, VariantInterface $variant, $quantity)
     {
         $units = $order->getInventoryUnitsByVariant($variant);
+        $counter = 0;
 
-        for ($i = 0; $i < $quantity; $i++) {
-            $order->removeInventoryUnit($units[$i]);
+        foreach ($units as $unit) {
+            if ($counter == $quantity) {
+                break;
+            }
+
+            $order->removeInventoryUnit($unit);
+            $counter++;
         }
     }
 }
