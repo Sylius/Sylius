@@ -55,24 +55,7 @@ script:
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@taxonomies && ~@javascript'
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@localization && ~@javascript'
     - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@users && ~@javascript,@oauth'
-    - cd src/Sylius/Bundle/AddressingBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../CartBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../CoreBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../InventoryBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../InstallerBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../MoneyBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../OmnipayBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../OrderBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../PaymentsBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../PayumBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../ProductBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../PromotionsBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../ResourceBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../SettingsBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../ShippingBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../TaxationBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../TaxonomiesBundle; ../../../../bin/phpspec run -fpretty --verbose
-    - cd ../VariableProductBundle; ../../../../bin/phpspec run -fpretty --verbose
+    - bin/phpspec run -f dot
 
 notifications:
   email: "travis-ci@sylius.org"
