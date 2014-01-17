@@ -156,12 +156,12 @@
         </service>
         <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
-            <argument type="service" id="sylius.repository.country" />
+            <argument>%sylius.model.country.class%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_taxonomy_configuration%</argument>
-            <argument type="service" id="sylius.repository.taxon" />
+            <argument>%sylius.model.taxon.class%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_taxonomy_configuration" />
         </service>
         <service id="sylius.form.type.promotion_action_choice" class="%sylius.form.type.promotion_action_choice.class%">

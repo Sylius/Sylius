@@ -23,10 +23,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ShippingCountryConfigurationType extends AbstractType
 {
     protected $validationGroups;
+    protected $dataClass;
 
-    public function __construct(array $validationGroups)
+    /**
+     * @param array $validationGroups Array of validation groups
+     * @param type  $dataClass        Class of Country model
+     */
+    public function __construct(array $validationGroups, $dataClass)
     {
         $this->validationGroups = $validationGroups;
+        $this->dataClass        = $dataClass;
     }
 
     /**
@@ -35,9 +41,10 @@ class ShippingCountryConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_country_to_identifier', array(
+            ->add('country', 'sylius_entity_to_identifier', array(
                 'label'       => 'sylius.form.rule.shipping_country_configuration.country',
                 'empty_value' => 'sylius.form.country.select',
+                'class'       => $this->dataClass,
                 'identifier'  => 'id',
             ))
         ;
