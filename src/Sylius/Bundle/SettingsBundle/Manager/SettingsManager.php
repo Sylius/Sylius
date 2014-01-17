@@ -54,6 +54,13 @@ class SettingsManager implements SettingsManagerInterface
     protected $cache;
 
     /**
+     * Runtime cache for resolved parameters
+     *
+     * @var array
+     */
+    protected $resolvedSettings = array();
+
+    /**
      * Constructor.
      *
      * @param SchemaRegistryInterface $schemaRegistry
@@ -74,6 +81,10 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function loadSettings($namespace)
     {
+        if (isset($this->resolvedSettings[$namespace])) {
+            return $this->resolvedSettings[$namespace];
+        }
+
         if ($this->cache->contains($namespace)) {
             $parameters = $this->cache->fetch($namespace);
         } else {
@@ -93,7 +104,7 @@ class SettingsManager implements SettingsManagerInterface
 
         $parameters = $settingsBuilder->resolve($parameters);
 
-        return new Settings($parameters);
+        return $this->resolvedSettings[$namespace] = new Settings($parameters);
     }
 
     /**
@@ -112,6 +123,10 @@ class SettingsManager implements SettingsManagerInterface
             if (array_key_exists($parameter, $parameters)) {
                 $parameters[$parameter] = $transformer->transform($parameters[$parameter]);
             }
+        }
+
+        if (isset($this->resolvedSettings[$namespace])) {
+            $this->resolvedSettings[$namespace]->setParameters($parameters);
         }
 
         $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
