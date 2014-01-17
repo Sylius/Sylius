@@ -38,14 +38,6 @@ sylius_backend_product_delete:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_index
 
-sylius_backend_product_filter_form:
-    pattern: /filter-form
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product:filterFormAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Product:filterForm.html.twig
-
 sylius_backend_product_history:
     pattern: /{id}/history
     methods: [GET]

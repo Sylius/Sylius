@@ -24,7 +24,7 @@
     <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.user.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_user_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_user_filter', 'template': 'SyliusWebBundle:Backend/User:filterForm.html.twig'})) %}
 
 {% set activeTab = (app.request.query.get('criteria') is not empty and app.request.query.get('criteria').enabled|default('1') == '0') ? 'disabled' : 'all' %}
 

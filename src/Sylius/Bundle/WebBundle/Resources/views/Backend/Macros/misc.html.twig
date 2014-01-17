@@ -16,6 +16,21 @@
 {% endif %}
 {% endmacro %}
 
+{% macro shipment_state(state) %}
+
+{% if state == 'pending' %}
+    {% set class = 'danger' %}
+{% elseif state == 'dispatched' %}
+    {% set class = 'info' %}
+{% elseif state == 'returned' %}
+    {% set class = 'warning' %}
+{% else %}
+    {% set class = 'success' %}
+{% endif %}
+
+<span class="label label-{{ class }} label-state">{{ state|trans|humanize }}</span>
+{% endmacro %}
+
 {% macro state_label(state, type) %}
 {% if type == 'payment' %}
     {% set label = 'sylius.payment.state.'~state %}

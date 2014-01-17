@@ -21,6 +21,8 @@
     <h1><i class="glyphicon glyphicon-plane"></i> {{ 'sylius.shipment.index_header'|trans|raw }}</h1>
 </div>
 
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_shipment_filter', 'template': 'SyliusWebBundle:Backend/Shipment:filterForm.html.twig'})) %}
+
 {{ pagination(shipments) }}
 {{ list(shipments) }}
 {{ pagination(shipments) }}

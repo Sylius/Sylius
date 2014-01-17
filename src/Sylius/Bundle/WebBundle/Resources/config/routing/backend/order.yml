@@ -38,14 +38,6 @@ sylius_backend_order_delete:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_order_index
 
-sylius_backend_order_filter_form:
-    pattern: /filter-form
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order:filterFormAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Order:filterForm.html.twig
-
 sylius_backend_order_show:
     pattern: /{id}
     methods: [GET]

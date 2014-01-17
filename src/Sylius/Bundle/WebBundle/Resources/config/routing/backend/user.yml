@@ -11,14 +11,6 @@ sylius_backend_user_index:
             method: createFilterPaginator
             arguments: [$criteria, $sorting, $deleted]
 
-sylius_backend_user_filter_form:
-    pattern: /filter-form
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.user:filterFormAction
-        _sylius:
-            template: SyliusWebBundle:Backend/User:filterForm.html.twig
-
 sylius_backend_user_create:
     pattern: /new
     methods: [GET, POST]

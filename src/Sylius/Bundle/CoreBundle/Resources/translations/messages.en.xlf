@@ -142,6 +142,22 @@
         <source>sylius.form.settings.taxation.default_tax_zone</source>
         <target>Default tax zone</target>
       </trans-unit>
+      <trans-unit id="bd3d3151438c5cb98c6643f56cd0b53d" resname="sylius.form.shipment_filter.created_at_from">
+        <source>sylius.form.shipment_filter.created_at_from</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="5e31f2ac23659dd8981df8822079335a" resname="sylius.form.shipment_filter.created_at_to">
+        <source>sylius.form.shipment_filter.created_at_to</source>
+        <target>To</target>
+      </trans-unit>
+      <trans-unit id="0ed5abaa05643102c4b98c072ac2bef2" resname="sylius.form.shipment_filter.number">
+        <source>sylius.form.shipment_filter.number</source>
+        <target>Order number</target>
+      </trans-unit>
+      <trans-unit id="c872d0370c17d413e5748c41bbbf3b1b" resname="sylius.form.shipment_filter.shipping_address">
+        <source>sylius.form.shipment_filter.shipping_address</source>
+        <target>Ship to name</target>
+      </trans-unit>
       <trans-unit id="ef8d0ff1b2c69f53d4fde3e09c2d4d6f" resname="sylius.form.shipping_method.zone">
         <source>sylius.form.shipping_method.zone</source>
         <target>Zone</target>
