@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Promotion\Action;
 
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
@@ -57,7 +58,7 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        if ($this->subjectHasItem($subject, $variant, $configuration)) {
+        if (null !== $this->getItemFromSubject($subject, $configuration, $variant)) {
             return;
         }
 
@@ -73,19 +74,46 @@ class AddProductAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    {
+        $item = $this->getItemFromSubject($subject, $configuration);
+
+        if (null !== $item) {
+            $subject->removeItem($item);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_add_product_configuration';
     }
 
-    protected function subjectHasItem(PromotionSubjectInterface $subject, VariantInterface $variant, array $configuration)
+    /**
+     * Return item added by promotion, null if it does not exist
+     *
+     * @param PromotionSubjectInterface $subject
+     * @param array                     $configuration
+     * @param VariantInterface          $variant
+     * @return OrderItemInterface|null
+     */
+    protected function getItemFromSubject(PromotionSubjectInterface $subject, array $configuration, VariantInterface $variant = null)
     {
+        if (null === $variant) {
+            $variant = $this->variantRepository->find($configuration['variant']);
+        }
+
         foreach ($subject->getItems() as $item) {
-            if ($item->getVariant() === $variant && $item->getUnitPrice() === $configuration['price']) {
-                return true;
+            if ($item->getVariant() === $variant
+                && $item->getUnitPrice() === $configuration['price']
+                && $item->getQuantity() === $configuration['quantity']
+            ) {
+                return $item;
             }
         }
 
-        return false;
+        return null;
     }
 }

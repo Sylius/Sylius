@@ -73,11 +73,33 @@ class AddProductActionSpec extends ObjectBehavior
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
         $item->getUnitPrice()->willReturn($configuration['price']);
+        $item->getQuantity()->willReturn($configuration['quantity']);
         $item->getVariant()->willReturn($variant);
 
         $order->getItems()->willReturn(array($item));
         $order->addItem($item)->shouldNotBeCalled();
 
         $this->execute($order, $configuration, $promotion);
+    }
+
+    function it_reverts_product(
+            RepositoryInterface $variantRepository,
+            OrderInterface $order,
+            OrderItemInterface $item,
+            VariantInterface $variant,
+            PromotionInterface $promotion)
+    {
+        $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);
+
+        $variantRepository->find($configuration['variant'])->willReturn($variant);
+
+        $item->getUnitPrice()->willReturn($configuration['price']);
+        $item->getQuantity()->willReturn($configuration['quantity']);
+        $item->getVariant()->willReturn($variant);
+
+        $order->getItems()->willReturn(array($item));
+        $order->removeItem($item)->shouldBeCalled();
+
+        $this->revert($order, $configuration, $promotion);
     }
 }
