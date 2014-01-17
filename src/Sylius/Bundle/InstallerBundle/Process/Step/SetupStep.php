@@ -39,7 +39,7 @@ class SetupStep extends ControllerStep
     {
         $request = $this->getRequest();
         $form = $this->createForm('sylius_setup');
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $params = $this->get('doctrine')->getConnection()->getParams();
