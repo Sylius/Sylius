@@ -63,19 +63,10 @@
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Bundle\CoreBundle\Promotion\Checker\TaxonomyRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\ShippingDiscountAction</parameter>
-=======
-        <parameter key="sylius.promotion_action.free_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\FreeProductAction</parameter>
-        
-        <parameter key="sylius.form.type.promotion_action.free_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\FreeProductConfigurationType</parameter>
->>>>>>> Add FreeProduct promotion
-=======
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\AddProductAction</parameter>
         
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
->>>>>>> Rename promotion and fix feedbacks
 
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
@@ -353,7 +344,7 @@
         
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
-            <argument type="service" id="sylius.repository.variant" />
+            <argument>%sylius.model.variant.class%</argument>
             <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>
 
