@@ -305,8 +305,9 @@ form.form-signin .form-control:focus {
     margin-right: -15px;
     margin-bottom: 20px;
 }
-.form-filter .form-group {
+.form-filter .row .form-group {
     margin-right: 10px;
+    width: 100%;
 }
 #topbar {
     background-color: #F5F5F5;
