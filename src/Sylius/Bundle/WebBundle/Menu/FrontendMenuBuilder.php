@@ -97,7 +97,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
+                'class' => $this->elementClasses['mainMenu']
             )
         ));
 
@@ -170,7 +170,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
+                'class' => $this->elementClasses['currencyMenu']
             )
         ));
 
@@ -196,7 +196,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav'
+                'class' => $this->elementClasses['taxonomiesMenu']
             )
         ));
 
@@ -247,7 +247,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills pull-right'
+                'class' => $this->elementClasses['socialMenu']
             )
         ));
 
@@ -281,7 +281,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav'
+                'class' => $this->elementClasses['accountMenu']
             )
         ));
 

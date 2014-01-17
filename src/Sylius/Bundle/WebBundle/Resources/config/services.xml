@@ -19,6 +19,14 @@
         <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
 
         <parameter key="sylius.listener.frontend.address.class">Sylius\Bundle\WebBundle\EventListener\Account\AddressListener</parameter>
+
+        <parameter key="sylius.menu_builder.frontend.element_classes" type="collection">
+            <parameter key="mainMenu" type="string">nav nav-pills</parameter>
+            <parameter key="currencyMenu" type="string">nav nav-pills</parameter>
+            <parameter key="taxonomiesMenu" type="string">nav</parameter>
+            <parameter key="socialMenu" type="string">nav nav-pills pull-right</parameter>
+            <parameter key="accountMenu" type="string">nav</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -53,6 +61,9 @@
             <argument type="service" id="sylius.twig.money" />
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+            <call method="setElementClasses">
+                <argument>%sylius.menu_builder.frontend.element_classes%</argument>
             </call>
         </service>
         <service id="sylius.menu_builder.backend" class="%sylius.menu_builder.backend.class%">

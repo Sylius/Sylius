@@ -53,6 +53,13 @@ abstract class MenuBuilder
     protected $request;
 
     /**
+     * Element classes
+     *
+     * @var string
+     */
+    protected $elementClasses;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
@@ -74,6 +81,15 @@ abstract class MenuBuilder
     public function setRequest(Request $request = null)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Sets the element classes
+     *
+     * @param $elementClasses
+     */
+    public function setElementClasses($elementClasses) {
+        $this->elementClasses = $elementClasses;
     }
 
     /**
