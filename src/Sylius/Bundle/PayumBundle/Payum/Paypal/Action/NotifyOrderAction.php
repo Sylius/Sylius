@@ -51,9 +51,9 @@ class NotifyOrderAction extends PaymentAwareAction
         $payment = $order->getPayment();
         $previousState = $payment->getState();
 
-        $this->payment->execute(new SyncRequest($order));
+        $this->payment->execute(new SyncRequest($payment));
 
-        $status = new StatusRequest($order);
+        $status = new StatusRequest($payment);
         $this->payment->execute($status);
         $payment->setState($status->getStatus());
 
