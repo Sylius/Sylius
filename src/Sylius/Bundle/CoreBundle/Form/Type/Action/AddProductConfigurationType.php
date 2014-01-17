@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\CoreBundle\Repository\VariantRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -27,12 +27,16 @@ class AddProductConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
-    protected $variantDataClass;
+    /**
+     * Variant repository
+     * @var VariantRepository
+     */
+    protected $variantRepository;
 
-    public function __construct(array $validationGroups, $variantDataClass)
+    public function __construct(array $validationGroups, VariantRepository $variantRepository)
     {
-        $this->validationGroups = $validationGroups;
-        $this->variantDataClass = $variantDataClass;
+        $this->validationGroups  = $validationGroups;
+        $this->variantRepository = $variantRepository;
     }
 
     /**
@@ -40,11 +44,16 @@ class AddProductConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $variantRepository = $this->variantRepository;
+
         $builder
             ->add('variant', 'sylius_entity_to_identifier', array(
-                'label' => 'sylius.form.action.add_product_configuration.variant',
-                'class' => $this->variantDataClass,
-                'constraints' => array(
+                'label'         => 'sylius.form.action.add_product_configuration.variant',
+                'class'         => $this->variantRepository->getClassName(),
+                'query_builder' => function() use($variantRepository) {
+                    return $variantRepository->getFormQueryBuilder();
+                },
+                'constraints'   => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )

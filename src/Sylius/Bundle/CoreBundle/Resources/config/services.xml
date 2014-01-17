@@ -344,7 +344,7 @@
         
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
-            <argument>%sylius.model.variant.class%</argument>
+            <argument type="service" id="sylius.repository.variant" />
             <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>
 
