@@ -8,13 +8,15 @@
     <div class="col-xs-3">
         {{ form_row(form.shippingAddress) }}
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-1">
         {{ form_row(form.createdAtFrom, {'attr': {'class': 'datepicker'}}) }}
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-1">
         {{ form_row(form.createdAtTo, {'attr': {'class': 'datepicker'}}) }}
     </div>
+    <div class="col-xs-4">
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> {{ 'sylius.filter'|trans }}</button>
+        <a href="{{ path('sylius_backend_shipment_index') }}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+    </div>
 </div>
-<br>
-<button type="submit" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-search"></i> {{ 'sylius.filter'|trans }}</button>
 </form>

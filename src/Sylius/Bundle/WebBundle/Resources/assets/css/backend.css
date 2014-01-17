@@ -309,6 +309,9 @@ form.form-signin .form-control:focus {
     margin-right: 10px;
     width: 100%;
 }
+.label-state {
+    padding: 5px 10px 5px 10px;
+}
 #topbar {
     background-color: #F5F5F5;
     margin-left: -15px;

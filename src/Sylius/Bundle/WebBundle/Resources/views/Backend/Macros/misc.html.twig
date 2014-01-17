@@ -28,7 +28,7 @@
     {% set class = 'success' %}
 {% endif %}
 
-<span class="label label-{{ class }}">{{ state|trans|humanize }}</span>
+<span class="label label-{{ class }} label-state">{{ state|trans|humanize }}</span>
 {% endmacro %}
 
 {% macro state_label(state, type) %}
