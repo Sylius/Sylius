@@ -40,8 +40,8 @@ class ShipmentRepository extends EntityRepository
 
         if (!empty($criteria['number'])) {
             $queryBuilder
-                ->andWhere('shipmentOrder.number LIKE :number')
-                ->setParameter('number', '%'.$criteria['number'].'%')
+                ->andWhere('shipmentOrder.number = :number')
+                ->setParameter('number', $criteria['number'])
             ;
         }
         if (!empty($criteria['shippingAddress'])) {

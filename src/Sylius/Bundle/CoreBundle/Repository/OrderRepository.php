@@ -121,8 +121,8 @@ class OrderRepository extends CartRepository
 
         if (!empty($criteria['number'])) {
             $queryBuilder
-                ->andWhere('o.number LIKE :number')
-                ->setParameter('number', '%'.$criteria['number'].'%')
+                ->andWhere('o.number = :number')
+                ->setParameter('number', $criteria['number'])
             ;
         }
         if (!empty($criteria['totalFrom'])) {
