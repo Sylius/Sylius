@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

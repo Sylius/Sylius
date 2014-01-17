@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion model interface.

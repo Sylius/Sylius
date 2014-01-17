@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Promotion model.
