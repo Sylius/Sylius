@@ -51,7 +51,7 @@
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
         
-        <many-to-many field="promotions" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="subjects">
+        <many-to-many field="promotions" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
                     <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE"/>
