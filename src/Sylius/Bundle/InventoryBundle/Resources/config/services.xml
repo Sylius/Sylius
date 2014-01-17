@@ -19,6 +19,7 @@
 
     <parameters>
         <parameter key="sylius.availability_checker.default.class">Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker</parameter>
+        <parameter key="sylius.inventory_operator.noop.class">Sylius\Bundle\InventoryBundle\Operator\NoopInventoryOperator</parameter>
         <parameter key="sylius.inventory_operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
         <parameter key="sylius.backorders_handler.class">Sylius\Bundle\InventoryBundle\Operator\BackordersHandler</parameter>
         <parameter key="sylius.inventory_unit_factory.class">Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory</parameter>
@@ -40,6 +41,8 @@
             <argument type="service" id="sylius.backorders_handler" />
             <argument type="service" id="sylius.availability_checker" />
         </service>
+
+        <service id="sylius.inventory_operator.noop" class="%sylius.inventory_operator.noop.class%" />
 
         <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">
             <argument>%sylius.backorders%</argument>

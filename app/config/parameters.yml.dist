@@ -38,3 +38,4 @@ parameters:
     sylius.oauth.google.clientsecret:   <google_client_secret>
 
     sylius.inventory.backorders_enabled: true
+    sylius.inventory.tracking_enabled: true
