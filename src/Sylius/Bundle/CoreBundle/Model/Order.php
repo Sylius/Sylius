@@ -17,6 +17,7 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 
 /**
@@ -98,6 +99,13 @@ class Order extends Cart implements OrderInterface
     protected $shippingState = OrderShippingStates::READY;
 
     /**
+     * Promotions applied
+     *
+     * @var ArrayCollection
+     */
+    protected $promotions;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -106,6 +114,7 @@ class Order extends Cart implements OrderInterface
 
         $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     /**
@@ -515,5 +524,45 @@ class Order extends Cart implements OrderInterface
         }
 
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotion(PromotionInterface $promotion)
+    {
+        return $this->promotions->contains($promotion);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPromotion(PromotionInterface $promotion)
+    {
+        if (!$this->hasPromotion($promotion)) {
+            $this->promotions->add($promotion);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePromotion(PromotionInterface $promotion)
+    {
+        if ($this->hasPromotion($promotion)) {
+            $this->promotions->removeElement($promotion);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
     }
 }

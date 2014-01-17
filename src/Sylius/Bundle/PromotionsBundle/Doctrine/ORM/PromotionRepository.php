@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\PromotionsBundle\Repository\PromotionRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -26,28 +27,45 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
      */
     public function findActive()
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $qb = $this->getCollectionQueryBuilder();
 
-        return $queryBuilder
+        $this->filterByActive($qb);
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    protected function getCollectionQueryBuilder()
+    {
+        return parent::getCollectionQueryBuilder()
             ->leftJoin($this->getAlias().'.rules', 'r')
             ->addSelect('r')
             ->leftJoin($this->getAlias().'.actions', 'a')
-            ->addSelect('a')
+            ->addSelect('a');
+    }
+
+    protected function filterByActive(QueryBuilder $qb, \Datetime $date = null)
+    {
+        if (null === $date) {
+            $date = new \Datetime();
+        }
+
+        return $qb
             ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($this->getAlias().'.startsAt'),
-                    $queryBuilder->expr()->lt($this->getAlias().'.startsAt', ':now')
+                $qb->expr()->orX(
+                    $qb->expr()->isNull($this->getAlias().'.startsAt'),
+                    $qb->expr()->lt($this->getAlias().'.startsAt', ':date')
                 )
             )
             ->andWhere(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($this->getAlias().'.endsAt'),
-                    $queryBuilder->expr()->gt($this->getAlias().'.endsAt', ':now')
+                $qb->expr()->orX(
+                    $qb->expr()->isNull($this->getAlias().'.endsAt'),
+                    $qb->expr()->gt($this->getAlias().'.endsAt', ':date')
                 )
             )
-            ->setParameter('now', new \DateTime())
-            ->getQuery()
-            ->getResult()
+            ->setParameter('date', $date)
         ;
     }
 }

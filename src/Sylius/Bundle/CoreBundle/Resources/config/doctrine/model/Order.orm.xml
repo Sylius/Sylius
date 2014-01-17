@@ -50,6 +50,20 @@
         <field name="currency" length="3" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
+        
+        <many-to-many field="promotions" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface" inversed-by="subjects">
+            <join-table name="sylius_promotion_order">
+                <join-columns>
+                    <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="promotion_id" referenced-column-name="id" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </many-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>
