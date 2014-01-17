@@ -27,17 +27,12 @@ class AddProductConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
-    /**
-     * Variant repository.
-     *
-     * @var RepositoryInterface
-     */
-    protected $variantRepository;
+    protected $variantDataClass;
 
-    public function __construct(array $validationGroups, RepositoryInterface $variantRepository)
+    public function __construct(array $validationGroups, $variantDataClass)
     {
         $this->validationGroups = $validationGroups;
-        $this->variantRepository = $variantRepository;
+        $this->variantDataClass = $variantDataClass;
     }
 
     /**
@@ -46,9 +41,9 @@ class AddProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variant', 'choice', array(
+            ->add('variant', 'sylius_entity_to_identifier', array(
                 'label' => 'sylius.form.action.add_product_configuration.variant',
-                'choices' => $this->getVariantsList(),
+                'class' => $this->variantDataClass,
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
@@ -85,15 +80,5 @@ class AddProductConfigurationType extends AbstractType
     public function getName()
     {
         return 'sylius_promotion_action_add_product_configuration';
-    }
-
-    protected function getVariantsList()
-    {
-        $list = array();
-        foreach ($this->variantRepository->findAll() as $variant) {
-            $list[$variant->getId()] = (string) $variant;
-        }
-
-        return $list;
     }
 }
