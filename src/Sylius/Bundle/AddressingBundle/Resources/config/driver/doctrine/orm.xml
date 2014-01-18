@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.repository.address.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.country.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.group.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.province.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.zone.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.zone_member.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
@@ -52,6 +53,20 @@
                     class="Doctrine\ORM\Mapping\ClassMetadata"
                 >
                     <argument>%sylius.model.country.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="sylius.manager.group" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.group" class="%sylius.repository.group.class%">
+            <argument type="service" id="sylius.manager.group" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.group"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.group.class%</argument>
                 </service>
             </argument>
         </service>
