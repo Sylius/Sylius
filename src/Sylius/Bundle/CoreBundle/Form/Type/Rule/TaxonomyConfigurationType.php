@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Shipping country rule configuration form type.
+ * Taxonomy rule configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingCountryConfigurationType extends AbstractType
+class TaxonomyConfigurationType extends AbstractType
 {
     protected $validationGroups;
     protected $dataClass;
 
     /**
      * @param array $validationGroups Array of validation groups
-     * @param type  $dataClass        Class of Country model
+     * @param type  $dataClass        Class of Taxon model
      */
     public function __construct(array $validationGroups, $dataClass)
     {
@@ -41,11 +41,13 @@ class ShippingCountryConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_entity_to_identifier', array(
-                'label'       => 'sylius.form.rule.shipping_country_configuration.country',
-                'empty_value' => 'sylius.form.country.select',
-                'class'       => $this->dataClass,
-                'identifier'  => 'id',
+            ->add('taxons', 'sylius_entity_to_identifier', array(
+                'label'      => 'sylius.form.rule.taxonomy_configuration.taxons',
+                'class'      => $this->dataClass,
+                'identifier' => 'id'
+            ))
+            ->add('exclude', 'checkbox', array(
+                'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
             ))
         ;
     }
@@ -67,6 +69,6 @@ class ShippingCountryConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_shipping_country_configuration';
+        return 'sylius_promotion_rule_taxonomy_configuration';
     }
 }

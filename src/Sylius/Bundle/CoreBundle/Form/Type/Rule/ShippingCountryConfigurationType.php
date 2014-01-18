@@ -9,26 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Form\Type\Action;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Shipping discount action configuration form type.
+ * Shipping country rule configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingDiscountConfigurationType extends AbstractType
+class ShippingCountryConfigurationType extends AbstractType
 {
     protected $validationGroups;
+    protected $dataClass;
 
-    public function __construct(array $validationGroups)
+    /**
+     * @param array $validationGroups Array of validation groups
+     * @param type  $dataClass        Class of Country model
+     */
+    public function __construct(array $validationGroups, $dataClass)
     {
         $this->validationGroups = $validationGroups;
+        $this->dataClass        = $dataClass;
     }
 
     /**
@@ -37,16 +41,18 @@ class ShippingDiscountConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('percentage', 'percent', array(
-                'label' => 'sylius.form.action.shipping_discount_configuration.percentage',
-                'constraints' => array(
-                    new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
+            ->add('country', 'sylius_entity_to_identifier', array(
+                'label'       => 'sylius.form.rule.shipping_country_configuration.country',
+                'empty_value' => 'sylius.form.country.select',
+                'class'       => $this->dataClass,
+                'identifier'  => 'id',
             ))
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -56,8 +62,11 @@ class ShippingDiscountConfigurationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_promotion_action_shipping_discount_configuration';
+        return 'sylius_promotion_rule_shipping_country_configuration';
     }
 }

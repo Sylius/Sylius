@@ -9,30 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Taxonomy rule configuration form type.
+ * Shipping discount action configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class TaxonomyConfigurationType extends AbstractType
+class ShippingDiscountConfigurationType extends AbstractType
 {
     protected $validationGroups;
-    protected $dataClass;
 
-    /**
-     * @param array $validationGroups Array of validation groups
-     * @param type  $dataClass        Class of Taxon model
-     */
-    public function __construct(array $validationGroups, $dataClass)
+    public function __construct(array $validationGroups)
     {
         $this->validationGroups = $validationGroups;
-        $this->dataClass        = $dataClass;
     }
 
     /**
@@ -41,20 +37,16 @@ class TaxonomyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', 'sylius_entity_to_identifier', array(
-                'label'      => 'sylius.form.rule.taxonomy_configuration.taxons',
-                'class'      => $this->dataClass,
-                'identifier' => 'id'
-            ))
-            ->add('exclude', 'checkbox', array(
-                'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
+            ->add('percentage', 'percent', array(
+                'label' => 'sylius.form.action.shipping_discount_configuration.percentage',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
+                )
             ))
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -64,11 +56,8 @@ class TaxonomyConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
-        return 'sylius_promotion_rule_taxonomy_configuration';
+        return 'sylius_promotion_action_shipping_discount_configuration';
     }
 }

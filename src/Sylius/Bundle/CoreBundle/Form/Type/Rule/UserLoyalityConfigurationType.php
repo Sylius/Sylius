@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionsBundle\Form\Type\Rule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NthOrderConfigurationType extends AbstractType
+class UserLoyalityConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -37,12 +37,27 @@ class NthOrderConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nth', 'integer', array(
-                'label' => 'sylius.form.rule.nth_order_configuration.nth',
+            ->add('time', 'integer', array(
+                'label'       => 'sylius.form.rule.user_loyality_configuration.time',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
+            ))
+            ->add('unit', 'choice', array(
+                'label'       => 'sylius.form.rule.user_loyality_configuration.unit',
+                'choices'     => array(
+                    'days'   => 'sylius.form.rule.user_loyality_configuration.unit.days',
+                    'weeks'  => 'sylius.form.rule.user_loyality_configuration.unit.weeks',
+                    'months' => 'sylius.form.rule.user_loyality_configuration.unit.months',
+                    'years'  => 'sylius.form.rule.user_loyality_configuration.unit.years',
+                ),
+                'constraints' => array(
+                    new NotBlank(),
+                )
+            ))
+            ->add('after', 'checkbox', array(
+                'label' => 'sylius.form.rule.user_loyality_configuration.after',
             ))
         ;
     }
@@ -64,6 +79,6 @@ class NthOrderConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_nth_order_configuration';
+        return 'sylius_promotion_rule_user_loyality_configuration';
     }
 }
