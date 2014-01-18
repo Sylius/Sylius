@@ -10,6 +10,18 @@
         <source>sylius.checkout.shipping_method.not_blank</source>
         <target>Please select shipping method.</target>
       </trans-unit>
+      <trans-unit id="e059886fa8a787013ea7be2d93eacdb7" resname="sylius.form.action.add_product_configuration.price">
+        <source>sylius.form.action.add_product_configuration.price</source>
+        <target>Unit price</target>
+      </trans-unit>
+      <trans-unit id="2d42631cf095b3e8283dfca9a83bba9f" resname="sylius.form.action.add_product_configuration.quantity">
+        <source>sylius.form.action.add_product_configuration.quantity</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="bfae03beee5cf7cf1dc275831b791803" resname="sylius.form.action.add_product_configuration.variant">
+        <source>sylius.form.action.add_product_configuration.variant</source>
+        <target>Variant</target>
+      </trans-unit>
       <trans-unit id="bb7ddb48f9947a592b0449ea46018a00" resname="sylius.form.block.body">
         <source>sylius.form.block.body</source>
         <target>Body</target>

@@ -32,8 +32,8 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Bundle\CoreBundle\Model\OrderInterface');
         }
 
-        foreach ($subject->getInventoryUnits() as $unit) {
-            foreach ($unit->getStockable()->getProduct()->getTaxons() as $taxon) {
+        foreach ($subject->getItems() as $item) {
+            foreach ($item->getProduct()->getTaxons() as $taxon) {
                 if ($configuration['taxons']->contains($taxon->getId())) {
                     return !$configuration['exclude'];
                 }

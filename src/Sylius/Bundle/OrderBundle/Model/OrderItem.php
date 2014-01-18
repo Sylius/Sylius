@@ -107,6 +107,8 @@ class OrderItem implements OrderItemInterface
         }
 
         $this->quantity = $quantity;
+
+        return $this;
     }
 
     /**

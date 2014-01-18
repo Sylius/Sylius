@@ -43,6 +43,7 @@ sylius_variable_product:
     classes:
         variant:
             model: Sylius\Bundle\CoreBundle\Model\Variant
+            repository: Sylius\Bundle\CoreBundle\Repository\VariantRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
 
 sylius_taxation:

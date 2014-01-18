@@ -1201,6 +1201,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
                     $configuration[$key] = new ArrayCollection(array($this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId()));
                     break;
 
+                case 'variant':
+                    $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
+                    break;
+
                 default:
                     $configuration[$key] = trim($value);
                     break;
@@ -1222,6 +1226,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         foreach ($configuration as $key => $value) {
             switch ($key) {
                 case 'amount':
+                case 'price':
                     $configuration[$key] = (int) $value * 100;
                     break;
                 case 'count':
