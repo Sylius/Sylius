@@ -20,7 +20,7 @@ class InstallCommand extends ContainerAwareCommand
                 'with-fixtures',
                 null,
                 InputOption::VALUE_NONE,
-                'Install fixtures without asking (used with --no-interaction)'
+                'Install fixtures without asking'
             )
             ->addOption('admin-name', 'an', InputOption::VALUE_OPTIONAL, 'Administrator name')
             ->addOption('admin-password', 'ap', InputOption::VALUE_OPTIONAL, 'Administrator password')
@@ -115,16 +115,30 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
+    /**
+     * Handles logic of installing fixtures
+     *
+     * ARGUMENTS                            | INSTALL FIXTURES?
+     * none                                 | ask user
+     * --with-fixtures                      | dont ask, install
+     * --no-interaction --with-fixtures     | dont ask, install
+     * --no-interaction                     | dont ask, dont install
+     *
+     * @param $input InputInterface
+     * @param $output OutputInterface
+     *
+     * @throws RuntimeException
+     */
     protected function installFixtures(InputInterface $input, OutputInterface $output)
     {
         $dialog = $this->getHelperSet()->get('dialog');
 
-        if ($input->isInteractive()) {
+        if (!$input->isInteractive() && !$input->getOption('with-fixtures')) {
+            return;
+        }
+
+        if ($input->isInteractive() && !$input->getOption('with-fixtures')) {
             if (!$dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {
-                return;
-            }
-        } else {
-            if (!$input->getOption('with-fixtures')) {
                 return;
             }
         }
@@ -156,11 +170,11 @@ class InstallCommand extends ContainerAwareCommand
             $username = $input->getOption('admin-name');
             $password = $input->getOption('admin-password');
             $email    = $input->getOption('admin-email');
-        }
 
-        $output->writeln("<info>Username:</info> " . $username);
-        $output->writeln("<info>Password:</info> " . $password);
-        $output->writeln("<info>Email:</info>    " . $email);
+            $output->writeln("<info>Username:</info> " . $username);
+            $output->writeln("<info>Password:</info> " . $password);
+            $output->writeln("<info>Email:</info>    " . $email);
+        }
 
         $user->setUsername($username);
         $user->setPlainPassword($password);
