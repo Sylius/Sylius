@@ -56,6 +56,6 @@ class OrderItem extends CartItem implements OrderItemInterface
 
     public function equals(BaseOrderItemInterface $item)
     {
-        return $item->getVariant() === $this->variant;
+        return $item->getVariant() === $this->variant && $item->getUnitPrice() === $this->getUnitPrice();
     }
 }

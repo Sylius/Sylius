@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Promotion\Action;
 
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
@@ -56,19 +55,15 @@ class AddProductAction implements PromotionActionInterface
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        $variant = $this->variantRepository->find($configuration['variant']);
+        $promotionItem = $this->createItem($configuration);
 
-        if (null !== $this->getItemFromSubject($subject, $configuration, $variant)) {
-            return;
+        foreach ($subject->getItems() as $item) {
+            if ($item->equals($promotionItem)) {
+                return;
+            }
         }
 
-        $item = $this->itemRepository->createNew();
-
-        $item->setVariant($variant);
-        $item->setQuantity($configuration['quantity']);
-        $item->setUnitPrice($configuration['price']);
-
-        $subject->addItem($item);
+        $subject->addItem($promotionItem);
     }
 
     /**
@@ -76,10 +71,12 @@ class AddProductAction implements PromotionActionInterface
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        $item = $this->getItemFromSubject($subject, $configuration);
+        $promotionItem = $this->createItem($configuration);
 
-        if (null !== $item) {
-            $subject->removeItem($item);
+        foreach ($subject->getItems() as $item) {
+            if ($item->equals($promotionItem)) {
+                $subject->removeItem($item);
+            }
         }
     }
 
@@ -92,28 +89,19 @@ class AddProductAction implements PromotionActionInterface
     }
 
     /**
-     * Return item added by promotion, null if it does not exist
+     * Create promotion item
      *
-     * @param PromotionSubjectInterface $subject
-     * @param array                     $configuration
-     * @param VariantInterface          $variant
-     * @return OrderItemInterface|null
+     * @param  array              $configuration
+     * @return OrderItemInterface
      */
-    protected function getItemFromSubject(PromotionSubjectInterface $subject, array $configuration, VariantInterface $variant = null)
+    protected function createItem(array $configuration)
     {
-        if (null === $variant) {
-            $variant = $this->variantRepository->find($configuration['variant']);
-        }
+        $variant = $this->variantRepository->find($configuration['variant']);
 
-        foreach ($subject->getItems() as $item) {
-            if ($item->getVariant() === $variant
-                && $item->getUnitPrice() === $configuration['price']
-                && $item->getQuantity() === $configuration['quantity']
-            ) {
-                return $item;
-            }
-        }
-
-        return null;
+        return $this->itemRepository->createNew()
+            ->setVariant($variant)
+            ->setQuantity($configuration['quantity'])
+            ->setUnitPrice($configuration['price'])
+        ;
     }
 }

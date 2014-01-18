@@ -12,7 +12,7 @@
       </trans-unit>
       <trans-unit id="e059886fa8a787013ea7be2d93eacdb7" resname="sylius.form.action.add_product_configuration.price">
         <source>sylius.form.action.add_product_configuration.price</source>
-        <target>Price</target>
+        <target>Unit price</target>
       </trans-unit>
       <trans-unit id="2d42631cf095b3e8283dfca9a83bba9f" resname="sylius.form.action.add_product_configuration.quantity">
         <source>sylius.form.action.add_product_configuration.quantity</source>
