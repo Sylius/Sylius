@@ -53,14 +53,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @var Generator
      */
-    private $faker;
+    protected $faker;
 
     /**
      * Created orders.
      *
      * @var OrderInterface[]
      */
-    private $orders;
+    protected $orders;
 
     public function __construct()
     {
@@ -1132,7 +1132,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @return AddressInterface
      */
-    private function createAddress($string)
+    protected function createAddress($string)
     {
         $addressData = explode(',', $string);
         $addressData = array_map('trim', $addressData);
@@ -1158,7 +1158,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @return ShipmentInterface
      */
-    private function createShipment($string)
+    protected function createShipment($string)
     {
         $shipmentData = explode(',', $string);
         $shipmentData = array_map('trim', $shipmentData);
@@ -1183,7 +1183,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @return array
      */
-    private function getConfiguration($configurationString)
+    protected function getConfiguration($configurationString)
     {
         $configuration = array();
         $list = explode(',', $configurationString);
@@ -1221,7 +1221,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @return array
      */
-    private function cleanPromotionConfiguration(array $configuration)
+    protected function cleanPromotionConfiguration(array $configuration)
     {
         foreach ($configuration as $key => $value) {
             switch ($key) {

@@ -29,14 +29,14 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
      *
      * @var KernelInterface
      */
-    private $kernel;
+    protected $kernel;
 
     /**
      * Parameters.
      *
      * @var array
      */
-    private $parameters;
+    protected $parameters;
 
     /**
      * Initializes context with parameters from behat.yml.

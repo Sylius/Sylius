@@ -39,7 +39,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @var array
      */
-    private $actions = array(
+    protected $actions = array(
         'viewing'  => 'show',
         'creation' => 'create',
         'editing'  => 'update',
@@ -832,7 +832,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @param integer $code
      */
-    private function assertStatusCodeEquals($code)
+    protected function assertStatusCodeEquals($code)
     {
         if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
             $this->assertSession()->statusCodeEquals($code);
@@ -844,7 +844,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @return DataContext
      */
-    private function getDataContext()
+    protected function getDataContext()
     {
         return $this->getSubContext('data');
     }
@@ -856,7 +856,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @throws \Exception
      */
-    private function getUser()
+    protected function getUser()
     {
         $token = $this->getSecurityContext()->getToken();
 
@@ -872,7 +872,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @return SecurityContextInterface
      */
-    private function getSecurityContext()
+    protected function getSecurityContext()
     {
         return $this->getContainer()->get('security.context');
     }
@@ -882,7 +882,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @param string $role
      */
-    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
+    protected function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
     {
         $this->getSubContext('data')->thereIsUser($email, 'sylius', $role);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
@@ -902,7 +902,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @return string
      */
-    private function generatePageUrl($page, array $parameters = array())
+    protected function generatePageUrl($page, array $parameters = array())
     {
         $parts = explode(' ', trim($page), 2);
 
@@ -938,7 +938,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @return string
      */
-    private function generateUrl($route, array $parameters = array(), $absolute = false)
+    protected function generateUrl($route, array $parameters = array(), $absolute = false)
     {
         return $this->getService('router')->generate($route, $parameters, $absolute);
     }
@@ -950,7 +950,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @return object
      */
-    private function getService($id)
+    protected function getService($id)
     {
         return $this->getContainer()->get($id);
     }
@@ -960,7 +960,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      *
      * @return ContainerInterface
      */
-    private function getContainer()
+    protected function getContainer()
     {
         return $this->kernel->getContainer();
     }
