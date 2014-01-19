@@ -39,6 +39,10 @@
 
     <class name="Sylius\Bundle\PaymentsBundle\Model\CreditCard">
         <property name="number">
+            <constraint name="NotBlank">
+                <option name="message">sylius.credit_card.number.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Luhn">
                 <option name="message">sylius.credit_card.number.luhn</option>
                 <option name="groups">sylius</option>
@@ -55,6 +59,10 @@
             </constraint>
         </property>
         <property name="securityCode">
+            <constraint name="NotBlank">
+                <option name="message">sylius.credit_card.security_code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Length">
                 <option name="min">3</option>
                 <option name="minMessage">sylius.credit_card.security_code.min_length</option>
@@ -63,11 +71,21 @@
             </constraint>
         </property>
         <property name="expiryMonth">
+            <constraint name="NotBlank">
+                <option name="message">sylius.credit_card.expiry_month.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.credit_card.expiry_month.min_range</option>
                 <option name="max">12</option>
                 <option name="maxMessage">sylius.credit_card.expiry_month.max_range</option>
+            </constraint>
+        </property>
+        <property name="expiryYear">
+            <constraint name="NotBlank">
+                <option name="message">sylius.credit_card.expiry_year.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

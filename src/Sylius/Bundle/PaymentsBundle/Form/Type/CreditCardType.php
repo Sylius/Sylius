@@ -52,7 +52,7 @@ class CreditCardType extends AbstractType
               ))
               ->add('expiryMonth', 'choice', array(
                   'label'   => 'sylius.form.credit_card.expiry_month',
-                  'choices' => array_combine(range(1,12), range(1,12))
+                  'choices' => $this->getMonthChoices()
               ))
               ->add('expiryYear', 'choice', array(
                   'label'   => 'sylius.form.credit_card.expiry_year',
@@ -94,5 +94,21 @@ class CreditCardType extends AbstractType
         }
 
         return $yearChoices;
+    }
+
+    /**
+     * Get months to add as choices in expiryMonth
+     *
+     * @return array
+     */
+    private function getMonthChoices()
+    {
+        $monthChoices = array();
+
+        foreach (range(1, 12) as $month) {
+            $monthChoices[$month] = str_pad($month, 2, 0, STR_PAD_LEFT);
+        }
+
+        return $monthChoices;
     }
 }
