@@ -16,6 +16,7 @@ payum:
                         sandbox:   %paypal.express_checkout.sandbox%
                 actions:
                     - sylius.payum.paypal.action.capture_order_using_express_checkout
+                    - sylius.payum.paypal.action.notify_order
                     - sylius.payum.action.order_status
                     - sylius.payum.action.execute_same_request_with_payment_details
 
