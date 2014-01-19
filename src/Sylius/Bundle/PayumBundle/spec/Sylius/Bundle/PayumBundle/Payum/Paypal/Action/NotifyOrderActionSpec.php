@@ -87,8 +87,8 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $order->getPayment()->willReturn($paymentModel);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function($args) {
-            $this->getState()->willReturn($args[0]);
+        $paymentModel->setState(Argument::type('string'))->will(function($args) use ($paymentModel) {
+            $paymentModel->getState()->willReturn($args[0]);
         });
 
         $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
@@ -129,8 +129,8 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $order->getPayment()->willReturn($paymentModel);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function($args) {
-            $this->getState()->willReturn($args[0]);
+        $paymentModel->setState(Argument::type('string'))->will(function($args) use ($paymentModel) {
+            $paymentModel->getState()->willReturn($args[0]);
         });
 
         $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
