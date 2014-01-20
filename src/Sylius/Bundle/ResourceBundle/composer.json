@@ -27,7 +27,7 @@
         "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "0.12.*",
         "white-october/pagerfanta-bundle": "1.0.*",
-        "doctrine/doctrine-bundle":        "1.2.*@dev"
+        "doctrine/doctrine-bundle":        "~1.3@dev"
     },
     "require-dev": {
         "phpspec/phpspec":      "2.0.*@dev",
@@ -36,7 +36,7 @@
         "doctrine/mongodb-odm": "1.0.*@dev"
     },
     "suggest": {
-        "fsc/hateoas-bundle":   "0.3.x-dev",
+        "fsc/hateoas-bundle":   "0.3.*@dev",
         "doctrine/orm":         "~2.3",
         "doctrine/mongodb-odm": "1.0.*@dev"
     },

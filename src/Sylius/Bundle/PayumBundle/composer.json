@@ -30,8 +30,8 @@
         "sylius/core-bundle":     "1.0.*@dev",
         "sylius/payments-bundle": "1.0.*@dev",
         "sylius/resource-bundle": "1.0.*@dev",
-        "payum/payum-bundle":     "~0.7.3@dev",
-        "payum/payum":            "~0.7.2@dev"
+        "payum/payum-bundle":     "~0.7.3",
+        "payum/payum":            "~0.7.2"
     },
     "config": {
         "bin-dir": "bin"
