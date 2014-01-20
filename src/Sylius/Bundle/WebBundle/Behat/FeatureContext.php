@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
-use Behat\MinkExtension\Context\RawMinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -22,15 +20,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FeatureContext extends RawMinkContext implements KernelAwareInterface
+class FeatureContext implements KernelAwareContext
 {
-    /**
-     * Kernel.
-     *
-     * @var KernelInterface
-     */
-    protected $kernel;
-
     /**
      * Parameters.
      *
@@ -39,26 +30,18 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     protected $parameters;
 
     /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
+    /**
      * Initializes context with parameters from behat.yml.
      *
      * @param array $parameters
      */
-    public function __construct(array $parameters)
+    public function __construct(array $parameters = array())
     {
         $this->parameters = $parameters;
-
-        // Web user context.
-        $this->useContext('web-user', new WebUser());
-
-        Request::enableHttpMethodParameterOverride();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
     }
 
     /**
@@ -66,22 +49,33 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
      */
     public function purgeDatabase()
     {
-        $entityManager = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $entityManager = $this->getService('doctrine.orm.entity_manager');
 
         $purger = new ORMPurger($entityManager);
         $purger->purge();
     }
 
     /**
-     * @Given /^I remove property choice number (\d+)$/
+     * {@inheritdoc}
      */
-    public function iRemovePropertyChoiceInput($number)
+    public function setKernel(KernelInterface $kernel)
     {
-        $this
-            ->getSession()
-            ->getPage()
-            ->find('css', sprintf('.sylius_property_choices_%d_delete', $number))
-            ->click()
-        ;
+        die(var_dump($kernel->getEnvironment()));
+        // @todo this is some ugly hack =)
+        $kernel->boot();
+
+        $this->kernel = $kernel;
+    }
+
+    /**
+     * Get service by id.
+     *
+     * @param string $id
+     *
+     * @return object
+     */
+    protected function getService($id)
+    {
+        return $this->kernel->getContainer()->get($id);
     }
 }

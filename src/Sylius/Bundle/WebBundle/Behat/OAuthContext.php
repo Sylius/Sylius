@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
@@ -18,7 +19,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
  *
  * @author Fabian Kiss <fabian.kiss@ymc.ch>
  */
-class OAuthContext extends RawMinkContext
+class OAuthContext extends RawMinkContext implements CustomSnippetAcceptingContext
 {
     /**
      * @Given /^I am not logged in$/
@@ -34,5 +35,13 @@ class OAuthContext extends RawMinkContext
     public function iShouldSeeTheConnectWithButton($connect)
     {
         $this->assertSession()->elementExists('css', sprintf('.oauth-login-%s', strtolower($connect)));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getAcceptedSnippetType()
+    {
+        return 'regex';
     }
 }

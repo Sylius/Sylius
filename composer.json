@@ -35,6 +35,7 @@
         "jms/translation-bundle":               "1.1.*",
         "knplabs/knp-gaufrette-bundle":         "*@dev",
         "knplabs/knp-snappy-bundle":            "*@dev",
+        "liip/doctrine-cache-bundle":           "~1.0@dev",
         "liip/imagine-bundle":                  "~0.9",
         "mathiasverraes/money":                 "*@dev",
         "pagerfanta/pagerfanta":                "1.0.*@dev",
@@ -49,24 +50,24 @@
         "symfony/assetic-bundle":               "2.3.*",
         "symfony/expression-language":          "~2.4",
         "symfony/intl":                         "~2.3",
-        "symfony/monolog-bundle":               "2.3.*",
-        "symfony/swiftmailer-bundle":           "2.3.*",
+        "symfony/monolog-bundle":               "~2.3",
+        "symfony/swiftmailer-bundle":           "~2.3",
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "yohang/finite":                        "~1.1@dev"
     },
     "require-dev": {
-        "behat/behat":                       "~2.4",
-        "behat/mink-browserkit-driver":      "*",
-        "behat/mink-extension":              "*",
-        "behat/mink-goutte-driver":          "*",
-        "behat/mink-selenium2-driver":       "*",
+        "behat/behat":                       "3.0.*@dev",
+        "behat/symfony2-extension":          "2.0.*@dev",
+        "behat/mink-extension":              "2.0.*@dev",
+        "behat/mink-goutte-driver":          "@dev",
+        "behat/mink-selenium2-driver":       "@dev",
         "behat/symfony2-extension":          "*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "~2.0",
-        "phpunit/phpunit":                   "~3.7"
+        "phpunit/phpunit":                   "~3.7.28,~3.8"
     },
     "scripts": {
         "post-install-cmd": [

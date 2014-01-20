@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
-use Behat\Behat\Context\BehatContext;
+use Behat\Behat\Context\CustomSnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -48,7 +49,7 @@ use Symfony\Component\PropertyAccess\StringUtil;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataContext extends BehatContext implements KernelAwareInterface
+class DataContext extends MinkContext implements KernelAwareContext, CustomSnippetAcceptingContext
 {
     /**
      * Faker.
@@ -64,9 +65,22 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     protected $orders = array();
 
+    /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
     public function __construct()
     {
         $this->faker = FakerFactory::create();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getAcceptedSnippetType()
+    {
+        return 'regex';
     }
 
     /**
@@ -704,9 +718,9 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         $object = $this->findOneByName($type, $data['name']);
         foreach ($data as $property => $value) {
-            $objectValue = $object->{'get'.\ucfirst($property)}();
+            $objectValue = $object->{'get'.ucfirst($property)}();
             if (is_array($objectValue)) {
-                $objectValue = implode(',', $objectValue);;
+                $objectValue = implode(',', $objectValue);
             }
             if ($objectValue !== $value) {
                 throw new \Exception(sprintf('%s object::%s has "%s" value but "%s" expected', $type, $property, $objectValue, $value));
@@ -1167,7 +1181,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function getEntityManager()
     {
-        return $this->getContainer()->get('doctrine')->getManager();
+        return $this->getService('doctrine')->getManager();
     }
 
     /**
