@@ -80,6 +80,7 @@
 
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
 
+        <parameter key="sylius.twig.product.class">Sylius\Bundle\CoreBundle\Twig\SyliusProductExtension</parameter>
         <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
     </parameters>
 
@@ -403,6 +404,11 @@
             </argument>
         </service>
 
+        <!-- Twig extensions -->
+        <service id="sylius.twig.product" class="%sylius.twig.product.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="twig.extension" />
+        </service>
         <service id="sylius.twig.restricted_zone_extension" class="%sylius.twig.restricted_zone_extension.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
             <tag name="twig.extension" />
