@@ -62,8 +62,8 @@
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
         </service>
-        <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class">
-            <argument type="service" id="payum.be2bill.api" />
+        <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class%">
+            <argument type="service" id="payum.context.be2bill.api" />
             <argument type="service" id="sylius.repository.order" />
             <argument>id</argument>
         </service>
