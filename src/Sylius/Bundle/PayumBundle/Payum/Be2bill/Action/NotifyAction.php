@@ -36,6 +36,11 @@ class NotifyAction extends PaymentAwareAction
      */
     protected $orderRepository;
 
+    /**
+     * @var string
+     */
+    protected $identifier;
+
     public function __construct(Api $api, OrderRepositoryInterface $orderRepository, $identifier)
     {
         $this->api = $api;
@@ -69,22 +74,32 @@ class NotifyAction extends PaymentAwareAction
             throw new BadRequestHttpException('Order cannot be retrieved.');
         }
 
-        $previousState = $order->getPayment()->getState();
+        $payment = $order->getPayment();
+
+        if ($details['AMOUNT'] != $payment->getAmount()) {
+            throw new BadRequestHttpException('Request amount cannot be verified against payment amount.');
+        }
+
+        $previousState = $payment->getState();
+
+        // Actually update payment details
+        $details = array_merge($payment->getDetails(), $details);
+        $payment->setDetails($details);
 
         $status = new StatusRequest($order);
         $this->payment->execute($status);
 
-        $order->getPayment()->setState($status->getStatus());
+        $payment->setState($status->getStatus());
 
-        if ($previousState !== $order->getPayment()->getState()) {
+        if ($previousState !== $payment->getState()) {
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+                new GenericEvent($payment, array('previous_state' => $previousState))
             );
 
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+                new GenericEvent($payment, array('previous_state' => $previousState))
             );
         }
 
