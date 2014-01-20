@@ -15,10 +15,6 @@ sylius_province_choice_form:
         _sylius:
             template: SyliusAddressingBundle:Province:_provinceChoiceForm.html.twig
 
-sylius_partial:
-    resource: @SyliusWebBundle/Resources/config/routing/partial/main.yml
-    prefix: /_partial
-
 _imagine:
     resource: .
     type:     imagine

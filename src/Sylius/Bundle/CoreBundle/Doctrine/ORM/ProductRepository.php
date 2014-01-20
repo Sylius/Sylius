@@ -112,16 +112,4 @@ class ProductRepository extends BaseProductRepository
             ->getOneOrNullResult()
         ;
     }
-
-    /**
-     * Find X recently added products.
-     *
-     * @param int $limit
-     *
-     * @return ProductInterface[]
-     */
-    public function findLatest($limit = 10)
-    {
-        return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
-    }
 }
