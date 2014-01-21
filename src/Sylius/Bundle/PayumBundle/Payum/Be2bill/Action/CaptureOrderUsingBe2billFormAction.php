@@ -23,8 +23,16 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
 {
+    /**
+     * @var Request
+     */
     protected $httpRequest;
 
+    /**
+     * Define the Symfony Request
+     * 
+     * @param Request $request
+     */
     public function setRequest(Request $request = null)
     {
         $this->httpRequest = $request;
@@ -68,7 +76,7 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
             $this->httpRequest->getSession()->set('payum_token', $request->getToken()->getHash());
 
             $this->payment->execute($request);
-            
+
             $request->setModel($order);
         } catch (\Exception $e) {
             $request->setModel($order);

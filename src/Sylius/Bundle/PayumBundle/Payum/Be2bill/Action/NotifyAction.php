@@ -15,11 +15,12 @@ use Payum\Be2Bill\Api;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Payum\Core\Request\NotifyRequest;
 use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
@@ -58,7 +59,7 @@ class NotifyAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        $details = $request->getModel();
+        $details = $request->getNotification();
 
         if (!$this->api->verifyHash($details)) {
             throw new BadRequestHttpException('Hash cannot be verified.');

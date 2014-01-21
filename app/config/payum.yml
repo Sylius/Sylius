@@ -78,6 +78,7 @@ payum:
                         sandbox:    %be2bill.sandbox%
                 actions:
                     - sylius.payum.be2bill.action.capture_order_using_be2bill_form
+                    - sylius.payum.be2bill.action.notify
                     - sylius.payum.action.order_status
                     - sylius.payum.action.execute_same_request_with_payment_details
 
