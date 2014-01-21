@@ -28,7 +28,7 @@
             <join-column name="property_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
-        <field name="value" column="value" type="string" />
+        <field name="value" column="value" type="text" />
     </mapped-superclass>
 
 </doctrine-mapping>
