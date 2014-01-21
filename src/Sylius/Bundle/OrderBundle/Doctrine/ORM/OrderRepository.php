@@ -42,6 +42,23 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function findRecentOrdersOrderByNumber($amount = 10)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere($queryBuilder->expr()->isNotNull('o.number'))
+            ->setMaxResults($amount)
+            ->orderBy('o.number', 'desc')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()
