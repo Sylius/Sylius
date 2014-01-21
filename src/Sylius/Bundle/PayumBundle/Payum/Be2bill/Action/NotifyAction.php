@@ -19,6 +19,7 @@ use Payum\Core\Request\NotifyRequest;
 use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -38,15 +39,21 @@ class NotifyAction extends PaymentAwareAction
     protected $orderRepository;
 
     /**
+     * @var EventDispatcher
+     */
+    protected $eventDispatcher;
+
+    /**
      * @var string
      */
     protected $identifier;
 
-    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, $identifier)
+    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcher $eventDispatcher, $identifier)
     {
-        $this->api = $api;
+        $this->api             = $api;
         $this->orderRepository = $orderRepository;
-        $this->identifier = $identifier;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->identifier      = $identifier;
     }
 
     /**
@@ -77,7 +84,7 @@ class NotifyAction extends PaymentAwareAction
 
         $payment = $order->getPayment();
 
-        if ($details['AMOUNT'] != $payment->getAmount()) {
+        if ((int) $details['AMOUNT'] !== $payment->getAmount()) {
             throw new BadRequestHttpException('Request amount cannot be verified against payment amount.');
         }
 
