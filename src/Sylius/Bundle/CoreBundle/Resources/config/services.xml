@@ -391,7 +391,7 @@
 
         <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">
             <argument type="service" id="sylius.settings.manager" />
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+            <tag name="kernel.event_listener" event="kernel.request" method="setRequestLocale" />
         </service>
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
