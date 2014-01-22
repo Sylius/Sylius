@@ -46,7 +46,7 @@ class OrderStateListener
      *
      * @throws \InvalidArgumentException
      */
-    public function onCheckoutFinalizePreComplete(GenericEvent $event)
+    public function resolveOrderStates(GenericEvent $event)
     {
         $order = $event->getSubject();
 
