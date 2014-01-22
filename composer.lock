@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f357fe1b5b8eb453affd68115a5a955e",
+    "hash": "a774bc90a3c7a0162b83b1ede4e8a38c",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -44,12 +44,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670"
+                "reference": "v1.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/40db0c96985aab2822edbc4848b3bd2429e02670",
-                "reference": "40db0c96985aab2822edbc4848b3bd2429e02670",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1.2",
+                "reference": "v1.1.2",
                 "shasum": ""
             },
             "require": {
@@ -78,8 +78,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -153,8 +152,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -220,8 +218,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -293,8 +290,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -493,8 +489,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -629,8 +624,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -1278,8 +1272,7 @@
                 },
                 {
                     "name": "Alexander",
-                    "email": "iam.asm89@gmail.com",
-                    "homepage": "http://asm89.github.io/"
+                    "email": "iam.asm89@gmail.com"
                 },
                 {
                     "name": "Joseph Bielawski",
@@ -1804,7 +1797,7 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -2586,13 +2579,13 @@
             "version": "v0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287"
+                "url": "https://github.com/nikic/PHP-Parser",
+                "reference": "v0.9.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
-                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
+                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
+                "reference": "v0.9.1",
                 "shasum": ""
             },
             "require": {
@@ -2618,7 +2611,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2012-04-23 22:52:11"
+            "time": "2012-04-23 15:52:11"
         },
         {
             "name": "omnipay/omnipay",
@@ -2876,16 +2869,16 @@
         },
         {
             "name": "payum/payum",
-            "version": "0.7.1",
+            "version": "0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "868e2d9a4afd64e8edbf3010fbee650afc330857"
+                "reference": "480d08d26bc6563a8247d114a8f24fa7e27c7565"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/868e2d9a4afd64e8edbf3010fbee650afc330857",
-                "reference": "868e2d9a4afd64e8edbf3010fbee650afc330857",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/480d08d26bc6563a8247d114a8f24fa7e27c7565",
+                "reference": "480d08d26bc6563a8247d114a8f24fa7e27c7565",
                 "shasum": ""
             },
             "require": {
@@ -2969,21 +2962,21 @@
                 "paypal rest",
                 "recurring payment"
             ],
-            "time": "2014-01-12 11:04:02"
+            "time": "2014-01-18 16:09:23"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "0.7.1",
+            "version": "0.7.3",
             "target-dir": "Payum/Bundle/PayumBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "2b044b8bed266261b29dd5ff4625b28a0ac17b28"
+                "reference": "742d7f812172e23127a681c07e7ec86477ceb73f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/2b044b8bed266261b29dd5ff4625b28a0ac17b28",
-                "reference": "2b044b8bed266261b29dd5ff4625b28a0ac17b28",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/742d7f812172e23127a681c07e7ec86477ceb73f",
+                "reference": "742d7f812172e23127a681c07e7ec86477ceb73f",
                 "shasum": ""
             },
             "require": {
@@ -2994,7 +2987,7 @@
             },
             "require-dev": {
                 "doctrine/orm": "*",
-                "payum/payum": "0.7.*",
+                "payum/core": "0.7.*",
                 "phpunit/phpunit": "*",
                 "symfony/browser-kit": "~2.0",
                 "symfony/class-loader": "~2.0"
@@ -3052,7 +3045,7 @@
                 "paypal pro checkout",
                 "recurring payment"
             ],
-            "time": "2013-12-28 14:07:34"
+            "time": "2014-01-20 08:51:01"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3276,13 +3269,13 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "url": "https://github.com/php-fig/log",
+                "reference": "1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
+                "reference": "1.0.0",
                 "shasum": ""
             },
             "type": "library",
@@ -4998,8 +4991,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 }
             ],
             "description": "Data Fixtures for all Doctrine Object Managers",
