@@ -52,8 +52,10 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
 
         $loader->load('mailer.xml');
 
-        if (!empty($config['order_confirmation'])) {
-            $this->loadOrderConfirmation($config['order_confirmation'], $container, $loader, $config['from_email']);
+        foreach (array('order_confirmation', 'customer_welcome') as $emailType) {
+            if (!empty($config[$emailType])) {
+                $this->loadEmailConfiguration($emailType, $config[$emailType], $container, $loader, $config['from_email']);
+            }
         }
     }
 
@@ -71,12 +73,12 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
         }
     }
 
-    protected function loadOrderConfirmation(array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    protected function loadEmailConfiguration($type, array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
     {
-        $loader->load('order_confirmation_mailer.xml');
+        $loader->load($type.'_mailer.xml');
 
         if ($config['enabled']) {
-            $loader->load('order_confirmation_listener.xml');
+            $loader->load($type.'_listener.xml');
         }
 
         if (isset($config['from_email'])) {
@@ -85,7 +87,7 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
             unset($config['from_email']);
         }
 
-        $container->setParameter('sylius.email.order_confirmation.from_email', array($fromEmail['address'] => $fromEmail['sender_name']));
-        $container->setParameter('sylius.email.order_confirmation.template', $config['template']);
+        $container->setParameter(sprintf('sylius.email.%s.from_email', $type), array($fromEmail['address'] => $fromEmail['sender_name']));
+        $container->setParameter(sprintf('sylius.email.%s.template', $type), $config['template']);
     }
 }

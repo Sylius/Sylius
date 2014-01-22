@@ -33,27 +33,43 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('sender_name')->defaultValue('webmaster')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
-                ->arrayNode('order_confirmation')
-                    ->addDefaultsIfNotSet()
-                    ->canBeUnset()
-                    ->children()
-                        ->booleanNode('enabled')->defaultFalse()->end()
-                        ->scalarNode('template')->defaultValue('SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig')->end()
-                        ->arrayNode('from_email')
-                            ->canBeUnset()
-                            ->children()
-                                ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('sender_name')->isRequired()->cannotBeEmpty()->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
 
+        $this->addEmailConfiguration($rootNode, 'order_confirmation', 'SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig');
+        $this->addEmailConfiguration($rootNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
+
         return $treeBuilder;
+    }
+
+    /**
+     * Helper method to configure a single email type
+     *
+     * @param ArrayNodeDefinition $node
+     * @param string $name
+     * @param string $template
+     */
+    protected function addEmailConfiguration(ArrayNodeDefinition $node, $name, $template)
+    {
+        $node
+            ->children()
+                ->arrayNode($name)
+                ->addDefaultsIfNotSet()
+                ->canBeUnset()
+                ->children()
+                    ->booleanNode('enabled')->defaultFalse()->end()
+                    ->scalarNode('template')->defaultValue($template)->end()
+                    ->arrayNode('from_email')
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('address')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('sender_name')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ->end();
     }
 
     /**
