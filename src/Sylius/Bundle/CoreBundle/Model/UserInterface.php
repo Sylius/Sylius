@@ -48,6 +48,18 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     public function setLastName($lastName);
 
     /**
+     * @return string
+     */
+    public function getNumber();
+
+    /**
+     * Set number
+     *
+     * @param string $number
+     */
+    public function setNumber($number);
+
+    /**
      * Get currency
      *
      * @return string

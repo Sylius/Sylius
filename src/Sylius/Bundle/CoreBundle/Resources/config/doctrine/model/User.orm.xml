@@ -22,6 +22,7 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="number" type="string" unique="true" />
         <field name="currency" length="3" nullable="true" />
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />

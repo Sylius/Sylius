@@ -68,6 +68,8 @@
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
+        <parameter key="sylius.generator.customer_number.class">Sylius\Bundle\CoreBundle\Generator\CustomerNumberGenerator</parameter>
+        <parameter key="sylius.listener.customer_number.class">Sylius\Bundle\CoreBundle\EventListener\CustomerNumberListener</parameter>
 
         <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
     </parameters>
@@ -208,6 +210,11 @@
             <argument type="service" id="sylius.shipping_calculator" />
         </service>
 
+        <!-- generators -->
+        <service id="sylius.generator.customer_number" class="%sylius.generator.customer_number.class%">
+            <argument type="service" id="sylius.repository.user" />
+        </service>
+
         <!-- listeners -->
         <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
             <argument type="service" id="fos_user.user_manager" />
@@ -268,6 +275,10 @@
         <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
             <argument type="service" id="security.context" />
             <tag name="kernel.event_listener" event="sylius_checkout_security.completed" method="setOrderUser" />
+        </service>
+        <service id="sylius.listener.customer_number" class="%sylius.listener.customer_number.class%">
+            <argument type="service" id="sylius.generator.customer_number" />
+            <tag name="kernel.event_listener" event="fos_user.registration.success" method="handleEvent" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">

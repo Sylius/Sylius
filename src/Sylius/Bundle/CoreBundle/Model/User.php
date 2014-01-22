@@ -22,20 +22,79 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
  */
 class User extends BaseUser implements UserInterface
 {
+    /**
+     * @var string
+     */
     protected $amazonId;
+
+    /**
+     * @var string
+     */
     protected $facebookId;
+
+    /**
+     * @var string
+     */
     protected $googleId;
+
+    /**
+     * @var string
+     */
     protected $firstName;
+
+    /**
+     * @var string
+     */
     protected $lastName;
+
+    /**
+     * @var string
+     */
+    protected $number;
+
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
+
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
+
+    /**
+     * @var \DateTime
+     */
     protected $deletedAt;
+
+    /**
+     * @var string
+     */
     protected $currency;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $orders;
+
+    /**
+     * @var AddressInterface
+     */
     protected $billingAddress;
+
+    /**
+     * @var AddressInterface
+     */
     protected $shippingAddress;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $addresses;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -280,6 +339,24 @@ class User extends BaseUser implements UserInterface
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 
     /**

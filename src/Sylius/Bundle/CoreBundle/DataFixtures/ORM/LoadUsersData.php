@@ -25,8 +25,11 @@ class LoadUsersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $numberGenerator = $this->container->get('sylius.generator.customer_number');
+
         $user = $this->getUserRepository()->createNew();
 
+        $user->setNumber(str_pad((int) 1, 9, 0, STR_PAD_LEFT));
         $user->setFirstname($this->faker->firstName);
         $user->setLastname($this->faker->lastName);
         $user->setEmail('sylius@example.com');
@@ -45,6 +48,7 @@ class LoadUsersData extends DataFixture
 
             $username = $this->faker->username;
 
+            $user->setNumber(str_pad((int) $i + 1, 9, 0, STR_PAD_LEFT));
             $user->setFirstname($this->faker->firstName);
             $user->setLastname($this->faker->lastName);
             $user->setEmail($username.'@example.com');
