@@ -227,8 +227,8 @@
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="createInventoryUnits" priority="-100" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
