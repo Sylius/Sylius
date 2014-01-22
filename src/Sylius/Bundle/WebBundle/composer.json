@@ -24,8 +24,7 @@
 
         "symfony/framework-bundle":  "~2.3",
         "sylius/core-bundle":        "1.0.*@dev",
-        "knplabs/knp-menu":          "2.0.*@dev",
-        "knplabs/knp-menu-bundle":   "2.0.*@dev",
+        "knplabs/knp-menu-bundle":   "1.1.*",
         "liip/imagine-bundle":       "~0.9",
         "knplabs/knp-snappy-bundle": "*@dev"
     },
