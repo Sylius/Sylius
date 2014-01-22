@@ -151,10 +151,11 @@ class Taxonomy implements TaxonomyInterface
 
     private function getChildTaxons(TaxonInterface $taxon, Collection $taxons)
     {
-        foreach ($taxon->getChildren() as $child) {
-            $taxons[] = $child;
+       if($taxon->getChildren())
+         foreach ($taxon->getChildren() as $child) {
+             $taxons[] = $child;
 
-            $this->getChildTaxons($child, $taxons);
-        }
+             $this->getChildTaxons($child, $taxons);
+         }
     }
 }
