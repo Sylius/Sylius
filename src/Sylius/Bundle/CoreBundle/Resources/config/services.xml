@@ -236,8 +236,8 @@
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="onCartChange" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_factory" />
