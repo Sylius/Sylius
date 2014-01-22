@@ -9,86 +9,12 @@
 
 <div class="row">
     <div class="col-md-6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="2">{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.firstname'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.firstname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.lastname'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.lastname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.country'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.country }}</td>
-                </tr>
-                {% if order.shippingAddress.province is not empty %}
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.province'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.province }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.street'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.street }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.city'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.city }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.postcode'|trans }}</strong></td>
-                    <td>{{ order.shippingAddress.postcode }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
     </div>
     <div class="col-md-6">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="2">{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.firstname'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.firstname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.lastname'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.lastname }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.country'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.country }}</td>
-                </tr>
-                {% if order.billingAddress.province is not empty %}
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.province'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.province }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.street'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.street }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.city'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.city }}</td>
-                </tr>
-                <tr>
-                    <td><strong>{{ 'sylius.checkout.finalize.address.postcode'|trans }}</strong></td>
-                    <td>{{ order.billingAddress.postcode }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.billingAddress } %}
     </div>
 </div>
 

@@ -22,7 +22,7 @@
                 {% for address in addresses %}
                     <tr id="{{ address.id }}">
                         <td>
-                            {{ include('SyliusWebBundle:Frontend/Account/Address:_address.html.twig') }}
+                            {{ include('SyliusWebBundle:Frontend/Address:_show.html.twig') }}
                         </td>
                         <td>
                             {% if address == app.user.billingAddress %}

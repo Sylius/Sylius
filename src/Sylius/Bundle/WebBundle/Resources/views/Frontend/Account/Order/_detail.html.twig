@@ -13,6 +13,17 @@
 </div>
 
 <div class="row">
+    <div class="col-md-6">
+        <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
+    </div>
+    <div class="col-md-6">
+        <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.billingAddress } %}
+    </div>
+</div>
+
+<div class="row">
     <table id="items" class="table table-striped">
         <thead>
         <tr>
