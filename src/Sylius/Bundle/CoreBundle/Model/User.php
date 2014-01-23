@@ -305,7 +305,7 @@ class User extends BaseUser implements UserInterface
      */
     public function getUpdatedAt()
     {
-        return $this->createdAt;
+        return $this->updatedAt;
     }
 
     /**
