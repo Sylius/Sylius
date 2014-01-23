@@ -121,6 +121,7 @@ class Promotion implements PromotionInterface
         $this->coupons = new ArrayCollection();
         $this->rules = new ArrayCollection();
         $this->actions = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     /**
