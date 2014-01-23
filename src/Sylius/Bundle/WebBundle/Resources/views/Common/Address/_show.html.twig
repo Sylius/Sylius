@@ -8,5 +8,5 @@
     {% if address.province %}
         {{ address.province }}<br/>
     {% endif %}
-    {{ address.country }} {{ address.postcode }}
+    {{ address.country|upper }} {{ address.postcode }}
 </address>
