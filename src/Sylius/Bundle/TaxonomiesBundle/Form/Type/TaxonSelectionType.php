@@ -13,6 +13,7 @@ namespace Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\Taxonomy;
+use Sylius\Bundle\TaxonomiesBundle\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,6 +26,7 @@ use JMS\TranslationBundle\Annotation\Ignore;
  * Transforms it into collection of taxons.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class TaxonSelectionType extends AbstractType
 {
@@ -33,16 +35,25 @@ class TaxonSelectionType extends AbstractType
      *
      * @var RepositoryInterface
      */
-    protected $repository;
+    protected $taxonomyRepository;
+
+    /**
+     * Taxonon repository.
+     *
+     * @var TaxonRepositoryInterface
+     */
+    protected $taxonRepository;
 
     /**
      * Constructor.
      *
-     * @var RepositoryInterface $repository
+     * @param RepositoryInterface      $taxonomyRepository
+     * @param TaxonRepositoryInterface $taxonRepository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
     {
-        $this->repository = $repository;
+        $this->taxonomyRepository = $taxonomyRepository;
+        $this->taxonRepository = $taxonRepository;
     }
 
     /**
@@ -50,14 +61,14 @@ class TaxonSelectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $taxonomies = $this->repository->findAll();
+        $taxonomies = $this->taxonomyRepository->findAll();
 
         $builder->addModelTransformer(new $options['model_transformer']($taxonomies));
 
         foreach ($taxonomies as $taxonomy) {
             /* @var $taxonomy Taxonomy*/
             $builder->add($taxonomy->getId(), 'choice', array(
-                'choice_list' => new ObjectChoiceList($taxonomy->getTaxonsAsList()),
+                'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy)),
                 'multiple'    => $options['multiple'],
                 'label'       => /** @Ignore */ $taxonomy->getName()
             ));

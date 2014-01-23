@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.repository.taxonomy.class">Sylius\Bundle\TaxonomiesBundle\Doctrine\ORM\TaxonomyRepository</parameter>
-        <parameter key="sylius.repository.taxon.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.taxon.class">Sylius\Bundle\TaxonomiesBundle\Doctrine\ORM\TaxonRepository</parameter>
 
         <parameter key="sylius.form.type.taxonomy_choice.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyEntityChoiceType</parameter>
     </parameters>

@@ -17,14 +17,31 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Sylius\Bundle\TaxonomiesBundle\Repository\TaxonRepositoryInterface;
 
 /**
  * Taxon choice form form.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class TaxonChoiceType extends AbstractType
 {
+    /**
+     * Taxonon repository.
+     *
+     * @var TaxonRepositoryInterface
+     */
+    protected $taxonRepository;
+
+    /**
+     * @param TaxonRepositoryInterface $taxonRepository
+     */
+    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    {
+        $this->taxonRepository = $taxonRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -48,14 +65,15 @@ class TaxonChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $choiceList = function (Options $options) {
-            $taxon = $options['taxonomy']->getTaxonsAsList();
+        $repository = $this->taxonRepository;
+        $choiceList = function (Options $options) use ($repository) {
+            $taxons = $repository->getTaxonsAsList($options['taxonomy']);
 
             if (null !== $options['filter']) {
-                $taxon = $taxon->filter($options['filter']);
+                $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxon);
+            return new ObjectChoiceList($taxons);
         };
 
         $resolver
