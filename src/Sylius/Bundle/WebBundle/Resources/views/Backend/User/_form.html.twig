@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <fieldset>
                 <h4>{{ form.shippingAddress.vars.label|trans({}, form.shippingAddress.vars.translation_domain) }}</h4>
-                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.shippingAddress} %}
+                {% include 'SyliusWebBundle:Backend/Address:_form.html.twig' with {'form': form.shippingAddress} %}
                 {{ form_row(form.differentBillingAddress) }}
             </fieldset>
         </div>
@@ -24,7 +24,7 @@
         <div id="sylius-billing-address-container" class="col-md-6">
             <fieldset>
                 <h4>{{ form.billingAddress.vars.label|trans({}, form.billingAddress.vars.translation_domain) }}</h4>
-                {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' with {'form': form.billingAddress} %}
+                {% include 'SyliusWebBundle:Backend/Address:_form.html.twig' with {'form': form.billingAddress} %}
             </fieldset>
         </div>
     </div>

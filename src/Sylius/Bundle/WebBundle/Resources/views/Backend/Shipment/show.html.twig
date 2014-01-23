@@ -83,7 +83,8 @@
         </table>
     </div>
     <div class="col-md-6">
-        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': shipment.order.shippingAddress, 'title': 'sylius.order.shipping_address'|trans} %}
+        <h4>{{ 'sylius.order.shipping_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': shipment.order.shippingAddress } %}
     </div>
 </div>
 

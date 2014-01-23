@@ -29,33 +29,11 @@
 <div class="row">
     <div class="col col-md-3">
         <h4>{{ 'sylius.order.billing_address'|trans|title }}</h4>
-        <address>
-            <strong>{{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}</strong><br/>
-            {% if order.billingAddress.company %}
-                {{ order.billingAddress.company }}<br/>
-            {% endif %}
-            {{ order.billingAddress.street }}<br/>
-            {{ order.billingAddress.city }}<br/>
-            {% if order.billingAddress.province %}
-                {{ order.billingAddress.province }}<br/>
-            {% endif %}
-            {{ order.billingAddress.country }} {{ order.billingAddress.postcode }}
-        </address>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with { 'address': order.billingAddress } %}
     </div>
     <div class="col col-md-3">
         <h4>{{ 'sylius.order.shipping_address'|trans|title }}</h4>
-        <address>
-            <strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong><br/>
-            {% if order.shippingAddress.company %}
-                {{ order.shippingAddress.company }}<br/>
-            {% endif %}
-            {{ order.shippingAddress.street }}<br/>
-            {{ order.shippingAddress.city }}<br/>
-            {% if order.shippingAddress.province %}
-                {{ order.shippingAddress.province }}<br/>
-            {% endif %}
-            {{ order.shippingAddress.country }} {{ order.shippingAddress.postcode }}
-        </address>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
     </div>
     <div class="col col-md-3">
         <h4>Order Details</h4>
