@@ -39,6 +39,14 @@ class ExchangeRate implements ExchangeRateInterface
      * @var \DateTime
      */
     protected $updatedAt;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId()
     {
