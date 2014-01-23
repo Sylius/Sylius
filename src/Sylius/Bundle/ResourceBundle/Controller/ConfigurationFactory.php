@@ -26,17 +26,30 @@ class ConfigurationFactory
      *
      * @var Request
      */
-    protected $request;
     protected $parametersParser;
 
-    public function __construct(Request $request, ParametersParser $parametersParser)
+    /**
+     * Constructor.
+     *
+     * @param ParametersParser $parametersParser
+     */
+    public function __construct(ParametersParser $parametersParser)
     {
-        $this->request = $request;
         $this->parametersParser = $parametersParser;
     }
 
+    /**
+     * Create configuration for given parameters.
+     *
+     * @param string $bundlePrefix
+     * @param string $resourceName
+     * @param string $templateNamespace
+     * @param string $templatingEngine
+     *
+     * @return Configuration
+     */
     public function createConfiguration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-        return new Configuration($this->request, $this->parametersParser, $bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
+        return new Configuration($this->parametersParser, $bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
     }
 }

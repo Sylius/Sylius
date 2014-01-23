@@ -163,6 +163,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end() // @todo: Remove.
                             ->end()
                         ->end()
                     ->end()
