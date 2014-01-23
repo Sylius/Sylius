@@ -248,4 +248,20 @@ class OrderItem implements OrderItemInterface
     {
         return $this === $orderItem;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true)
+    {
+        if ($throwOnInvalid && ! $orderItem->equals($this)) {
+            throw new \RuntimeException('Given item cannot be merged.');
+        }
+
+        if ($this !== $orderItem) {
+            $this->quantity += $orderItem->getQuantity();
+        }
+
+        return $this;
+    }
 }

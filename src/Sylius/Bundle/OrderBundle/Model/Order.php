@@ -45,7 +45,7 @@ class Order implements OrderInterface
     /**
      * Items in order.
      *
-     * @var Collection
+     * @var Collection|OrderItemInterface[]
      */
     protected $items;
 
@@ -280,7 +280,7 @@ class Order implements OrderInterface
 
         foreach ($this->items as $existingItem) {
             if ($item->equals($existingItem)) {
-                $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
+                $existingItem->merge($item, false);
 
                 return $this;
             }
