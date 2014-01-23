@@ -13,6 +13,7 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
+        {{ buttons.generic(path('sylius_account_homepage', { '_switch_user': user.username }), 'sylius.user.impersonate'|trans) }}
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
         {% if not user.deleted %}
         {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}

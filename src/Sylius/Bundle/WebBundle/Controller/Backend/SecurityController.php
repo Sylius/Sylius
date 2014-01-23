@@ -12,7 +12,10 @@
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 
 /**
@@ -22,6 +25,29 @@ use Symfony\Component\Security\Core\SecurityContext;
  */
 class SecurityController extends Controller
 {
+    /**
+     * Target action for _switch_user=_exit, redirects admin back to impersonated user
+     *
+     * @param string $username
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
+     * @return RedirectResponse
+     */
+    public function exitUserSwitchAction($username)
+    {
+        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
+        $user = $this->get('sylius.repository.user')->findOneBy(array('usernameCanonical' => $username));
+
+        if (!$user) {
+            throw new NotFoundHttpException(sprintf('User with username %s does not exist.', $username));
+        }
+
+        return $this->redirect($this->generateUrl('sylius_backend_user_show', array('id' => $user->getId())));
+    }
+
     public function loginAction(Request $request)
     {
         $session = $request->getSession();
