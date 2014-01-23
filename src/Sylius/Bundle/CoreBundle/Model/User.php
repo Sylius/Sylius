@@ -39,6 +39,7 @@ class User extends BaseUser implements UserInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->orders    = new ArrayCollection();
         $this->addresses = new ArrayCollection();
 
@@ -305,7 +306,7 @@ class User extends BaseUser implements UserInterface
      */
     public function getUpdatedAt()
     {
-        return $this->createdAt;
+        return $this->updatedAt;
     }
 
     /**
