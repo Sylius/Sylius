@@ -44,7 +44,7 @@ class OrderInventoryListener
      *
      * @param GenericEvent $event
      */
-    public function onCheckoutFinalizePreComplete(GenericEvent $event)
+    public function updateInventoryUnits(GenericEvent $event)
     {
         $order = $event->getSubject();
 
@@ -62,7 +62,7 @@ class OrderInventoryListener
      *
      * @param GenericEvent $event
      */
-    public function onCartChange(GenericEvent $event)
+    public function createInventoryUnits(GenericEvent $event)
     {
         $order = $event->getSubject();
 

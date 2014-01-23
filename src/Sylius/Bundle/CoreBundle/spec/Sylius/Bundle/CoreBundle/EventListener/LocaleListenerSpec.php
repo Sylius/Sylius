@@ -41,6 +41,6 @@ class LocaleListenerSpec extends ObjectBehavior
         $event->getRequest()->willReturn($request);
         $request->setLocale('en')->shouldBeCalled();
 
-        $this->onKernelRequest($event);
+        $this->setRequestLocale($event);
     }
 }

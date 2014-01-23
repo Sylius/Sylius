@@ -227,17 +227,17 @@
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="createInventoryUnits" priority="-100" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="onCheckoutFinalizePreComplete" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" />
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="onCartChange" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_factory" />
@@ -391,7 +391,7 @@
 
         <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">
             <argument type="service" id="sylius.settings.manager" />
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+            <tag name="kernel.event_listener" event="kernel.request" method="setRequestLocale" />
         </service>
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">

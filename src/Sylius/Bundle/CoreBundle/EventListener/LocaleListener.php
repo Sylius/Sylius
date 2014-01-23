@@ -28,7 +28,7 @@ class LocaleListener
         $this->settingsManager = $settingsManager;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function setRequestLocale(GetResponseEvent $event)
     {
         $event->getRequest()->setLocale(
             $this->settingsManager->loadSettings('general')->get('locale')

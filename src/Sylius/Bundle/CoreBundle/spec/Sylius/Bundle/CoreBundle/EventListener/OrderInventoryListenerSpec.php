@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderInventoryListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface $inventoryHandler
-     */
-    function let($inventoryHandler)
+    function let(InventoryHandlerInterface $inventoryHandler)
     {
         $this->beConstructedWith($inventoryHandler);
     }
@@ -31,41 +31,37 @@ class OrderInventoryListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param \stdClass                                      $invalidSubject
-     */
-    function it_throws_exception_if_event_has_non_order_subject($event, $invalidSubject)
+    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
     {
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringOnCheckoutFinalizePreComplete($event)
+            ->duringUpdateInventoryUnits($event)
         ;
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_updates_inventory_on_checkout_finalize_pre_complete_event($inventoryHandler, $event, $order)
+    function it_updates_inventory_units(
+            InventoryHandlerInterface $inventoryHandler,
+            GenericEvent $event,
+            OrderInterface $order
+    )
     {
         $event->getSubject()->willReturn($order);
         $inventoryHandler->updateInventory($order)->shouldBeCalled();
 
-        $this->onCheckoutFinalizePreComplete($event);
+        $this->updateInventoryUnits($event);
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_processes_inventory_units_on_cart_change_event($inventoryHandler, $event, $order)
+    function it_creates_inventory_units(
+            InventoryHandlerInterface $inventoryHandler,
+            GenericEvent $event,
+            OrderInterface $order
+    )
     {
         $event->getSubject()->willReturn($order);
         $inventoryHandler->processInventoryUnits($order)->shouldBeCalled();
 
-        $this->onCartChange($event);
+        $this->createInventoryUnits($event);
     }
 }

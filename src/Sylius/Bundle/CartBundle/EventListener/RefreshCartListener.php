@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -18,8 +19,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class RefreshCartListener
 {
-    public function onCartChange(GenericEvent $event)
+    public function refreshCart(GenericEvent $event)
     {
-        $event->getSubject()->calculateTotal();
+        $cart = $event->getSubject();
+
+        if (!$cart instanceof CartInterface) {
+            throw new \InvalidArgumentException(
+                'RefreshCartListener requires event subject to be instance of "Sylius\Bundle\CartBundle\Model\CartInterface"'
+            );
+        }
+
+        $cart->calculateTotal();
     }
 }

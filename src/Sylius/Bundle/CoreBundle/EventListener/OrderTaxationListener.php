@@ -44,7 +44,7 @@ class OrderTaxationListener
      *
      * @param GenericEvent $event
      */
-    public function onCartChange(GenericEvent $event)
+    public function applyTaxes(GenericEvent $event)
     {
         $order = $event->getSubject();
 
@@ -55,5 +55,7 @@ class OrderTaxationListener
         }
 
         $this->taxationProcessor->applyTaxes($order);
+
+        $order->calculateTotal();
     }
 }

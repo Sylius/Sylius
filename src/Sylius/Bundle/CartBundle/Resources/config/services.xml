@@ -93,7 +93,7 @@
         </service>
         
         <service id="sylius.refresh_cart_listener" class="%sylius.refresh_cart_listener.class%">
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="onCartChange" priority="255" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
         </service>
 
         <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">
