@@ -55,7 +55,10 @@
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
-        "yohang/finite":                        "dev-sylius"
+        "yohang/finite":                        "dev-sylius",
+
+        "stack/builder":                        "~1.0",
+        "willdurand/negotiation":               "~1.0"
     },
     "require-dev": {
         "behat/behat":                       "~3.0",

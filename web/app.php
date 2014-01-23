@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 
 /*
@@ -17,22 +16,21 @@ use Symfony\Component\HttpFoundation\Request;
  * Live (production) environment.
  */
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
-
-//$loader = new ApcClassLoader('sylius', $loader);
-//$loader->register(true);
-
+require_once __DIR__.'/../app/bootstrap.php.cache';
 require_once __DIR__.'/../app/AppKernel.php';
-//require_once __DIR__.'/../app/AppCache.php';
+require_once __DIR__.'/../app/AppCache.php';
 
-$kernel = new AppKernel('prod', false);
-//$kernel = new AppCache($kernel);
+$kernel = new AppCache(
+    new AppKernel('prod', false)
+);
 
-$request = Request::createFromGlobals();
+$stack = new Stack\Builder();
+$app   = $stack
+//    ->push('Sylius\Middleware\CookieGuard\CookieGuard')
+    ->push('Sylius\Middleware\Locale\NegotiateLocale')
+    ->resolve($app)
+;
 
 Request::enableHttpMethodParameterOverride();
 
-$response = $kernel->handle($request);
-$response->send();
-
-$kernel->terminate($request, $response);
+$app->terminate($request, $app->handle($request)->send());
