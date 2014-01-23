@@ -10,3 +10,7 @@ sylius_account_order:
 
 sylius_account_address:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/address.yml
+
+sylius_switch_user_return:
+    pattern: /switch/{username}/exit
+    defaults: { _controller: sylius.controller.backend.security:exitUserSwitchAction }

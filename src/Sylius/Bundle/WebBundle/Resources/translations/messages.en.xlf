@@ -2266,6 +2266,10 @@
         <source>sylius.user.last_name</source>
         <target>Last name</target>
       </trans-unit>
+      <trans-unit id="35a2e8d0fe7103442cd041fc024a4e86" resname="sylius.user.impersonate">
+        <source>sylius.user.impersonate</source>
+        <target>Log in as this user</target>
+      </trans-unit>
       <trans-unit id="35a2e8d0fe7103442cd041fc024a4e86" resname="sylius.user.manage">
         <source>sylius.user.manage</source>
         <target>manage users</target>
