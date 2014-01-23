@@ -32,21 +32,9 @@
 
     <services>
         <service id="sylius.controller.cart" class="%sylius.controller.cart.class%">
-            <argument>sylius</argument>
-            <argument>cart</argument>
-            <argument>SyliusCartBundle:Cart</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
 
         <service id="sylius.controller.cart_item" class="%sylius.controller.cart_item.class%">
-            <argument>sylius</argument>
-            <argument>cart_item</argument>
-            <argument>SyliusCartBundle:CartItem</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
 
         <service id="sylius.manager.cart" alias="sylius.manager.order" />
@@ -91,7 +79,7 @@
             <argument type="service" id="translator" />
             <call method="setMessages"/>
         </service>
-        
+
         <service id="sylius.refresh_cart_listener" class="%sylius.refresh_cart_listener.class%">
             <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
         </service>
