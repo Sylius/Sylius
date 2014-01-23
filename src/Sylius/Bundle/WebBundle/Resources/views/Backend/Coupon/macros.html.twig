@@ -30,7 +30,7 @@
                 </span>
             </td>
             <td>
-                <span class="label label-{{ promotion_coupon.used < promotion_coupon.usageLimit|default(1) ? 'success' : 'important'}}">
+                <span class="label label-{{ promotion_coupon.used < promotion_coupon.usageLimit|default(1) ? 'success' : 'danger'}}">
                     {{ promotion_coupon.used }}
                 </span>
             </td>
