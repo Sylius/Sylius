@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\OrderBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -91,10 +93,7 @@ class OrderSpec extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item
-     */
-    function it_adds_items_properly($item)
+    function it_adds_items_properly(OrderItemInterface $item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -102,10 +101,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasItem($item)->shouldReturn(true);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item
-     */
-    function it_removes_items_properly($item)
+    function it_removes_items_properly(OrderItemInterface $item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
@@ -116,10 +112,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasItem($item)->shouldReturn(false);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item
-     */
-    function it_has_fluent_interface_for_items_management($item)
+    function it_has_fluent_interface_for_items_management(OrderItemInterface $item)
     {
         $this->addItem($item)->shouldReturn($this);
         $this->removeItem($item)->shouldReturn($this);
@@ -132,12 +125,7 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(0);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item1
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item2
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item3
-     */
-    function it_calculates_correct_items_total($item1, $item2, $item3)
+    function it_calculates_correct_items_total(OrderItemInterface $item1, OrderItemInterface $item2, OrderItemInterface $item3)
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
@@ -171,10 +159,7 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_adds_adjustments_properly($adjustment)
+    function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $adjustment->setAdjustable($this)->shouldBeCalled();
 
@@ -183,10 +168,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_removes_adjustments_properly($adjustment)
+    function it_removes_adjustments_properly(AdjustmentInterface $adjustment)
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);
 
@@ -201,10 +183,7 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment
-     */
-    function it_has_fluent_interface_for_adjustments_management($adjustment)
+    function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
@@ -215,12 +194,7 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment1
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment2
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment3
-     */
-    function it_calculates_correct_adjustments_total($adjustment1, $adjustment2, $adjustment3)
+    function it_calculates_correct_adjustments_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, AdjustmentInterface $adjustment3)
     {
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->getAmount()->willReturn(-4999);
@@ -250,13 +224,7 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item1
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item2
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment1
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment2
-     */
-    function it_calculates_correct_total($item1, $item2, $adjustment1, $adjustment2)
+    function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
@@ -290,13 +258,7 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(80000);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item1
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item2
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment1
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustmentInterface $adjustment2
-     */
-    function it_ignores_neutral_adjustments_when_calculating_total($item1, $item2, $adjustment1, $adjustment2)
+    function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
@@ -374,19 +336,13 @@ class OrderSpec extends ObjectBehavior
         $this->shouldBeEmpty();
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item1
-     * @param Sylius\Bundle\OrderBundle\Model\OrderItemInterface $item2
-     */
-    function it_sums_the_quantities_of_equal_items($item1, $item2)
+    function it_merges_equal_items(OrderItemInterface $item1, OrderItemInterface$item2)
     {
-        $item1->getQuantity()->willReturn(3);
-        $item2->getQuantity()->willReturn(7);
-
         $item1->setOrder($this)->shouldBeCalled();
-        $item1->setQuantity(10)->shouldBeCalled();
 
+        $item1->equals($item2)->willReturn(true);
         $item2->equals($item1)->willReturn(true);
+        $item1->merge($item2, false)->willReturn($this)->shouldBeCalled();
 
         $this
             ->addItem($item1)

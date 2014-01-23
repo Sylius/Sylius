@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\OrderBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -43,19 +45,13 @@ class OrderItemSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_allows_assigning_itself_to_an_order($order)
+    function it_allows_assigning_itself_to_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_allows_detaching_itself_from_an_order($order)
+    function it_allows_detaching_itself_from_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
@@ -194,5 +190,42 @@ class OrderItemSpec extends ObjectBehavior
         $this->calculateTotal();
 
         $this->getTotal()->shouldReturn(18487);
+    }
+
+    function it_ignores_merging_same_items()
+    {
+        $this->merge($this);
+        $this->getQuantity()->shouldReturn(1);
+    }
+
+    function it_merges_an_equal_item_by_summing_quantities(OrderItemInterface $item)
+    {
+        $this->setQuantity(3);
+
+        $item->getQuantity()->willReturn(7);
+        $item->equals($this)->willReturn(true);
+
+        $this->merge($item);
+        $this->getQuantity()->shouldReturn(10);
+    }
+
+    function it_merges_a_known_equal_item_without_calling_equals(OrderItemInterface $item)
+    {
+        $this->setQuantity(3);
+
+        $item->getQuantity()->willReturn(7);
+        $item->equals($this)->shouldNotBeCalled();
+
+        $this->merge($item, false);
+        $this->getQuantity()->shouldReturn(10);
+    }
+
+    function it_throws_exception_when_merging_unequal_item(OrderItemInterface $item)
+    {
+        $item->equals($this)->willReturn(false);
+
+        $this
+            ->shouldThrow(new \RuntimeException('Given item cannot be merged.'))
+            ->duringMerge($item);
     }
 }

@@ -54,8 +54,14 @@ class OrderItem extends CartItem implements OrderItemInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function equals(BaseOrderItemInterface $item)
     {
-        return $item->getVariant() === $this->variant && $item->getUnitPrice() === $this->getUnitPrice();
+        return parent::equals($item) || ($item instanceof self
+            && $item->getVariant() === $this->variant
+            && $item->getUnitPrice() === $this->getUnitPrice()
+        );
     }
 }

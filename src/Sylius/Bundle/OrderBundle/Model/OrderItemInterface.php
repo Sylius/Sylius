@@ -82,11 +82,22 @@ interface OrderItemInterface extends AdjustableInterface
 
     /**
      * Checks whether the item given as argument corresponds to
-     * the same cart item. Can be overwritten to sum up quantity.
+     * the same cart item. Can be overwritten to enable merge quantities.
      *
      * @param OrderItemInterface $orderItem
      *
      * @return Boolean
      */
     public function equals(OrderItemInterface $orderItem);
+
+    /**
+     * Merge the item given as argument corresponding to
+     * the same cart item.
+     *
+     * @param OrderItemInterface $orderItem
+     * @param bool               $throwOnInvalid
+     *
+     * @return $this
+     */
+    public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true);
 }
