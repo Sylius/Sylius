@@ -61,6 +61,7 @@
 
         <service id="sylius.form.type.taxon_selection" class="%sylius.form.type.taxon_selection.class%">
             <argument type="service" id="sylius.repository.taxonomy" />
+            <argument type="service" id="sylius.repository.taxon" />
             <tag name="form.type" alias="sylius_taxon_selection" />
         </service>
     </services>
