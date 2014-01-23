@@ -41,6 +41,11 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
         'sylius_taxonomies',
     );
 
+    private $emails = array(
+        'order_confirmation',
+        'customer_welcome'
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -50,13 +55,9 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
 
         list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
 
-        $loader->load('mailer.xml');
+        $loader->load('mailer/mailer.xml');
 
-        foreach (array('order_confirmation', 'customer_welcome') as $emailType) {
-            if (!empty($config[$emailType])) {
-                $this->loadEmailConfiguration($emailType, $config[$emailType], $container, $loader, $config['from_email']);
-            }
-        }
+        $this->loadEmailsConfiguration($config['emails'], $container, $loader);
     }
 
     /**
@@ -73,21 +74,23 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
         }
     }
 
-    protected function loadEmailConfiguration($type, array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    /**
+     * @param array            $config    The email section of the config for this bundle
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    protected function loadEmailsConfiguration(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
-        $loader->load($type.'_mailer.xml');
+        foreach ($this->emails as $emailType) {
+            $loader->load('mailer/'.$emailType.'_mailer.xml');
 
-        if ($config['enabled']) {
-            $loader->load($type.'_listener.xml');
+            $fromEmail = isset($config[$emailType]['from_email']) ? $config[$emailType]['from_email'] : $config['from_email'];
+            $container->setParameter(sprintf('sylius.email.%s.from_email', $emailType), array($fromEmail['address'] => $fromEmail['sender_name']));
+            $container->setParameter(sprintf('sylius.email.%s.template', $emailType), $config[$emailType]['template']);
+
+            if ($config['enabled'] && $config[$emailType]['enabled']) {
+                $loader->load('mailer/'.$emailType.'_listener.xml');
+            }
         }
-
-        if (isset($config['from_email'])) {
-            // overwrite the global one
-            $fromEmail = $config['from_email'];
-            unset($config['from_email']);
-        }
-
-        $container->setParameter(sprintf('sylius.email.%s.from_email', $type), array($fromEmail['address'] => $fromEmail['sender_name']));
-        $container->setParameter(sprintf('sylius.email.%s.template', $type), $config['template']);
     }
 }

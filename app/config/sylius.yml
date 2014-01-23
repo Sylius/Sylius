@@ -1,9 +1,7 @@
 sylius_core:
     driver: doctrine/orm
-    order_confirmation:
-        enabled: true
-    customer_welcome:
-        enabled: true
+    emails:
+        enabled: false
 
 sylius_installer:
     classes:

@@ -26,6 +26,23 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
+            ->end()
+        ;
+
+        $this->addClassesSection($rootNode);
+        $this->addEmailsSection($rootNode);
+
+        return $treeBuilder;
+    }
+
+    protected function addEmailsSection(ArrayNodeDefinition $node)
+    {
+        $emailNode = $node->children()->arrayNode('emails');
+
+        $emailNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->booleanNode('enabled')->defaultFalse()->end()
                 ->arrayNode('from_email')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -34,14 +51,12 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
-        ;
+        ->end();
 
-        $this->addClassesSection($rootNode);
+        $this->addEmailConfiguration($emailNode, 'order_confirmation', 'SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig');
+        $this->addEmailConfiguration($emailNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
 
-        $this->addEmailConfiguration($rootNode, 'order_confirmation', 'SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig');
-        $this->addEmailConfiguration($rootNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
-
-        return $treeBuilder;
+        return $emailNode;
     }
 
     /**
@@ -59,7 +74,7 @@ class Configuration implements ConfigurationInterface
                 ->addDefaultsIfNotSet()
                 ->canBeUnset()
                 ->children()
-                    ->booleanNode('enabled')->defaultFalse()->end()
+                    ->booleanNode('enabled')->defaultTrue()->end()
                     ->scalarNode('template')->defaultValue($template)->end()
                     ->arrayNode('from_email')
                     ->canBeUnset()
