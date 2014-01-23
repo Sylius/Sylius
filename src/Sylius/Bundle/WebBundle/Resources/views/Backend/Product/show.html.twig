@@ -195,8 +195,6 @@
 </div>
 {% endif %}
 
-{% if product.hasVariants %}
-    {{ list_variants(product.variants) }}
-{% endif %}
+{{ list_variants(product.variants) }}
 
 {% endblock %}
