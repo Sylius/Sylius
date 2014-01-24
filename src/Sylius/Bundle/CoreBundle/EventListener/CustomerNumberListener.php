@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use FOS\UserBundle\Event\FormEvent;
 use Sylius\Bundle\CoreBundle\Generator\CustomerNumberGeneratorInterface;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -39,12 +40,20 @@ class CustomerNumberListener
     }
 
     /**
-     * @param FormEvent $event
+     * @param FormEvent|GenericEvent $event
      * @throws \InvalidArgumentException
      */
-    public function handleEvent(FormEvent $event)
+    public function generateCustomerNumber(Event $event)
     {
-        $user = $event->getForm()->getData();
+        if ($event instanceof FormEvent) {
+            $user = $event->getForm()->getData();
+        } else if ($event instanceof GenericEvent) {
+            $user = $event->getSubject();
+        } else {
+            throw new \InvalidArgumentException(
+                'Customer number listener requires event to be instance of "Sylius\Bundle\CoreBundle\Model\UserInterface" or ""'
+            );
+        }
 
         if (!$user instanceof UserInterface) {
             throw new \InvalidArgumentException(

@@ -278,7 +278,8 @@
         </service>
         <service id="sylius.listener.customer_number" class="%sylius.listener.customer_number.class%">
             <argument type="service" id="sylius.generator.customer_number" />
-            <tag name="kernel.event_listener" event="fos_user.registration.success" method="handleEvent" />
+            <tag name="kernel.event_listener" event="fos_user.registration.success" method="generateCustomerNumber" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_create" method="generateCustomerNumber" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">

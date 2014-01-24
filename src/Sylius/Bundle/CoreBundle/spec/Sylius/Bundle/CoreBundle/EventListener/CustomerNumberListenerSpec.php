@@ -36,6 +36,6 @@ class CustomerNumberListenerSpec extends ObjectBehavior
 
         $generator->generate($user)->shouldBeCalled();
 
-        $this->handleEvent($event);
+        $this->generateCustomerNumber($event);
     }
 }

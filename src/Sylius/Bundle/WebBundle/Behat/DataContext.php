@@ -186,6 +186,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 $user->addRole($role);
             }
 
+            $this->getService('event_dispatcher')->dispatch('sylius.user.pre_create', new GenericEvent($user));
+
             $this->getEntityManager()->persist($user);
             if ($flush) {
                 $this->getEntityManager()->flush();
