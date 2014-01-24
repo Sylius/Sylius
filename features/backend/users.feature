@@ -71,7 +71,6 @@ Feature: Users management
             | Last name  | Stamenković        |
             | Password   | Password           |
             | Email      | umpirsky@gmail.com |
-          And I fill in the users shipping address to Germany
           And I press "Create"
          Then I should be on the page of user with username "umpirsky@gmail.com"
           And I should see "User has been successfully created."
