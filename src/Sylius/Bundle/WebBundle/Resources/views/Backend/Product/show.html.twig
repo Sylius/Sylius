@@ -181,12 +181,14 @@
     </div>
 </div>
 
-{% if product.hasOptions %}
 <hr>
+
 {% if not product.deleted %}
 <div class="well well-sm">
     {{ buttons.create(path('sylius_backend_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+    {% if product.hasOptions %}
+        {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+    {% endif %}
     <div class="pull-right">
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>
@@ -194,5 +196,5 @@
 {% endif %}
 
 {{ list_variants(product.variants) }}
-{% endif %}
+
 {% endblock %}
