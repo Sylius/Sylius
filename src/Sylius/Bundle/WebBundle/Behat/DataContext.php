@@ -308,7 +308,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, false);
+            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, true);
             $user->addAddress($address);
             $manager->persist($address);
             $manager->persist($user);

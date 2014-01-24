@@ -130,6 +130,15 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     {
         $this->_em->getFilters()->disable('softdeleteable');
 
-        return $this->getQueryBuilder()->orderBy($this->getAlias().'.createdAt', 'DESC')->getFirstResult();
+        $user = $this->getQueryBuilder()
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $user;
     }
 }
