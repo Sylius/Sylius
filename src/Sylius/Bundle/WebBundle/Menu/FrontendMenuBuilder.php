@@ -101,18 +101,23 @@ class FrontendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $cart = $this->cartProvider->getCart();
+        if ($this->cartProvider->hasCart()) {
+            $cart = $this->cartProvider->getCart();
+            $cartTotals = array('items' => $cart->getTotalItems(), 'total' => $cart->getTotal());
+        } else {
+            $cartTotals = array('items' => 0, 'total' => 0);
+        }
 
         $menu->addChild('cart', array(
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
-                '%items%' => $cart->getTotalItems(),
-                '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
+                '%items%' => $cartTotals['items'],
+                '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
-            '%items%' => $cart->getTotalItems(),
-            '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
+            '%items%' => $cartTotals['items'],
+            '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
         )));
 
         if ($this->securityContext->isGranted('ROLE_USER')) {
