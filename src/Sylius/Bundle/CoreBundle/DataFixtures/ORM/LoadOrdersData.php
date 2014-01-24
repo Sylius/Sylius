@@ -47,7 +47,6 @@ class LoadOrdersData extends DataFixture
 
             $this->createShipment($order);
 
-            $order->setNumber(str_pad((int) $i, 9, 0, STR_PAD_LEFT));
             $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
             $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
             $order->setShippingAddress($this->createAddress());
@@ -64,9 +63,8 @@ class LoadOrdersData extends DataFixture
             $this->setReference('Sylius.Order-'.$i, $order);
 
             $manager->persist($order);
+            $manager->flush($order);
         }
-
-        $manager->flush();
     }
 
     private function createAddress()
@@ -123,6 +121,7 @@ class LoadOrdersData extends DataFixture
     private function dispatchEvents($order)
     {
         $dispatcher = $this->get('event_dispatcher');
+
         $dispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
         $dispatcher->dispatch(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, new GenericEvent($order));
         $dispatcher->dispatch(SyliusOrderEvents::PRE_CREATE, new GenericEvent($order));

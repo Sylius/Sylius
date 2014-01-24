@@ -13,17 +13,7 @@ namespace Sylius\Bundle\OrderBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
-/**
- * Order repository interface.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
-interface OrderRepositoryInterface extends RepositoryInterface
+interface NumberRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Gets recently completed orders.
-     *
-     * @return array
-     */
-    public function findRecentOrders($amount = 10);
+    public function getLastNumber();
 }

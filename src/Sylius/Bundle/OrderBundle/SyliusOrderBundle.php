@@ -45,6 +45,7 @@ class SyliusOrderBundle extends Bundle
             'Sylius\Bundle\OrderBundle\Model\OrderInterface'      => 'sylius.model.order.class',
             'Sylius\Bundle\OrderBundle\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
             'Sylius\Bundle\OrderBundle\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
+            'Sylius\Bundle\OrderBundle\Model\NumberInterface'     => 'sylius.model.number.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_order', $interfaces));
