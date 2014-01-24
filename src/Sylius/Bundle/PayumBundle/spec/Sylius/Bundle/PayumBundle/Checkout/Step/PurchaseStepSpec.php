@@ -115,15 +115,7 @@ class PurchaseStepSpec extends ObjectBehavior
             )
             ->shouldBeCalled()
         ;
-        $eventDispatcher
-            ->dispatch(
-                'sylius_checkout_purchase.completed',
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
 
-        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
         $cartProvider->abandonCart()->shouldBeCalled();
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
@@ -162,15 +154,7 @@ class PurchaseStepSpec extends ObjectBehavior
             )
             ->shouldNotBeCalled()
         ;
-        $eventDispatcher
-            ->dispatch(
-                'sylius_checkout_purchase.completed',
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
-
-        $cartProvider->getCart()->shouldBeCalled()->willReturn($order);
+        
         $cartProvider->abandonCart()->shouldBeCalled();
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
