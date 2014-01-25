@@ -1500,39 +1500,39 @@
       </trans-unit>
       <trans-unit id="becc401bdd9a4d18b62142fd8ac48006" resname="sylius.exchange_rate.create">
         <source>sylius.exchange_rate.create</source>
-        <target>sylius.exchange_rate.create</target>
+        <target>Wechselkurs hinzufügen</target>
       </trans-unit>
       <trans-unit id="26dd86004325335b61efd2b2294d34ad" resname="sylius.exchange_rate.create_header">
         <source>sylius.exchange_rate.create_header</source>
-        <target>sylius.exchange_rate.create_header</target>
+        <target>Neuer Wechselkurs</target>
       </trans-unit>
       <trans-unit id="ab6070222f4c55d91b05a2c3eeef6cde" resname="sylius.exchange_rate.currency">
         <source>sylius.exchange_rate.currency</source>
-        <target>sylius.exchange_rate.currency</target>
+        <target>Währung</target>
       </trans-unit>
       <trans-unit id="3515dad310c65917daae1e5246ad7c94" resname="sylius.exchange_rate.id">
         <source>sylius.exchange_rate.id</source>
-        <target>sylius.exchange_rate.id</target>
+        <target>ID</target>
       </trans-unit>
       <trans-unit id="55614e2ad158f69b7ce9b665feab7c73" resname="sylius.exchange_rate.index_header">
         <source>sylius.exchange_rate.index_header</source>
-        <target>sylius.exchange_rate.index_header</target>
+        <target>Wechselkurse</target>
       </trans-unit>
       <trans-unit id="09b89ff09207bd27dfe3112081cda9f1" resname="sylius.exchange_rate.no_results">
         <source>sylius.exchange_rate.no_results</source>
-        <target>sylius.exchange_rate.no_results</target>
+        <target>Keine Wechselkurse zum Anzeigen vorhanden-</target>
       </trans-unit>
       <trans-unit id="a93b2617af276a73cac9914465912d74" resname="sylius.exchange_rate.rate">
         <source>sylius.exchange_rate.rate</source>
-        <target>sylius.exchange_rate.rate</target>
+        <target>Kurs</target>
       </trans-unit>
       <trans-unit id="cb526459642a416c693bc039ee6c9cf6" resname="sylius.exchange_rate.update_header">
         <source>sylius.exchange_rate.update_header</source>
-        <target>sylius.exchange_rate.update_header</target>
+        <target>Wechselkurs bearbeiten</target>
       </trans-unit>
       <trans-unit id="265dd64991f89f4b3619eb34a72d1f3b" resname="sylius.exchange_rate.updated_at">
         <source>sylius.exchange_rate.updated_at</source>
-        <target>sylius.exchange_rate.updated_at</target>
+        <target>Letztes Update</target>
       </trans-unit>
       <trans-unit id="44f0ed7c15d1974ff291171b96912899" resname="sylius.filter">
         <source>sylius.filter</source>
