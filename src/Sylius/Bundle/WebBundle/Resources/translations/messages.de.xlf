@@ -1544,27 +1544,27 @@
       </trans-unit>
       <trans-unit id="737d82e384946e4946cfea34afb9b7d8" resname="sylius.form.frontend.password.confirmation">
         <source>sylius.form.frontend.password.confirmation</source>
-        <target>sylius.form.frontend.password.confirmation</target>
+        <target>Bestätigung</target>
       </trans-unit>
       <trans-unit id="b771f518bbcb9c488ca04c3f823dc9d9" resname="sylius.form.frontend.password.current">
         <source>sylius.form.frontend.password.current</source>
-        <target>sylius.form.frontend.password.current</target>
+        <target>Aktuelles Passwort</target>
       </trans-unit>
       <trans-unit id="3081a42d6da5f25be3e47723f66bab9d" resname="sylius.form.frontend.password.new">
         <source>sylius.form.frontend.password.new</source>
-        <target>sylius.form.frontend.password.new</target>
+        <target>Neues Passwort</target>
       </trans-unit>
       <trans-unit id="f79f1f6a2584f1542be7e6a9bab5d988" resname="sylius.form.frontend.password.title">
         <source>sylius.form.frontend.password.title</source>
-        <target>sylius.form.frontend.password.title</target>
+        <target>Passwort ändern</target>
       </trans-unit>
       <trans-unit id="b41497d414e58dae641cf537989578b8" resname="sylius.form.frontend.profile.title">
         <source>sylius.form.frontend.profile.title</source>
-        <target>sylius.form.frontend.profile.title</target>
+        <target>Persönliche Informationen bearbeiten</target>
       </trans-unit>
       <trans-unit id="ea0c4a2c08a2d13161d6e4312d5f7e22" resname="sylius.form.login.email">
         <source>sylius.form.login.email</source>
-        <target>sylius.form.login.email</target>
+        <target>E-Mail</target>
       </trans-unit>
       <trans-unit id="725075e6afc8a166392a2261d7880d37" resname="sylius.form.login.password">
         <source>sylius.form.login.password</source>
@@ -1576,15 +1576,15 @@
       </trans-unit>
       <trans-unit id="24a58cc80b3622348ed028ea8b9793ac" resname="sylius.form.profile.email">
         <source>sylius.form.profile.email</source>
-        <target>sylius.form.profile.email</target>
+        <target>E-Mail</target>
       </trans-unit>
       <trans-unit id="d84fd73990d8cb5f31054749096220d7" resname="sylius.form.profile.firstName">
         <source>sylius.form.profile.firstName</source>
-        <target>sylius.form.profile.firstName</target>
+        <target>Vorname</target>
       </trans-unit>
       <trans-unit id="f434362fba3003af96b35062e2fc1c54" resname="sylius.form.profile.lastName">
         <source>sylius.form.profile.lastName</source>
-        <target>sylius.form.profile.lastName</target>
+        <target>Nachname</target>
       </trans-unit>
       <trans-unit id="599b8dc6059e60ce670ff8aaa2754e84" resname="sylius.frontend.add_to_cart">
         <source>sylius.frontend.add_to_cart</source>
@@ -1804,7 +1804,7 @@
       </trans-unit>
       <trans-unit id="e3aa3a9b7dc77194950deb550c919a36" resname="sylius.frontend.product.index_by_taxon_header">
         <source>sylius.frontend.product.index_by_taxon_header</source>
-        <target>sylius.frontend.product.index_by_taxon_header</target>
+        <target>Produkte &lt;small&gt;Gruppiert unter "%taxon%"&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="96a901d7cbc25770afb96fafbf3b9030" resname="sylius.frontend.product.no_description">
         <source>sylius.frontend.product.no_description</source>
