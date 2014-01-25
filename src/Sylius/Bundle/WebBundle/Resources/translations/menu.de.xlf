@@ -194,6 +194,10 @@
         <source>sylius.frontend.menu.account.addresses</source>
         <target>Mein Adressbuch</target>
       </trans-unit>
+      <trans-unit id="9144c05a098a6fee4f74327a3b145ff8" resname="sylius.frontend.menu.account.homepage">
+        <source>sylius.frontend.menu.account.homepage</source>
+        <target>Home</target>
+      </trans-unit>
       <trans-unit id="2827dee6dfebc5686b04a137eaec62d0" resname="sylius.frontend.menu.account.orders">
         <source>sylius.frontend.menu.account.orders</source>
         <target>Meine Bestellungen / Meine Rechnungen</target>

@@ -68,23 +68,23 @@
       </trans-unit>
       <trans-unit id="aa5d1d6b185c783bb19dc29190828a5e" resname="sylius.account.home.email">
         <source>sylius.account.home.email</source>
-        <target>sylius.account.home.email</target>
+        <target>E-Mail: </target>
       </trans-unit>
       <trans-unit id="6968e9427145cfed58f58e5a2a6bcf06" resname="sylius.account.home.id">
         <source>sylius.account.home.id</source>
-        <target>sylius.account.home.id</target>
+        <target>Kunden-Nr.: </target>
       </trans-unit>
       <trans-unit id="5f81f7f249201ad12ab74f5a7da6afcd" resname="sylius.account.home.outline">
         <source>sylius.account.home.outline</source>
-        <target>sylius.account.home.outline</target>
+        <target>Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen.</target>
       </trans-unit>
       <trans-unit id="c501f09ad630e9e77e7ba2d401a30656" resname="sylius.account.home.since">
         <source>sylius.account.home.since</source>
-        <target>sylius.account.home.since</target>
+        <target>Kunde seit</target>
       </trans-unit>
       <trans-unit id="4c4234eba4ccf272a578ae3161fd2456" resname="sylius.account.home.welcome">
         <source>sylius.account.home.welcome</source>
-        <target>sylius.account.home.welcome</target>
+        <target>Willkommen in deinen persönlichen Bereich</target>
       </trans-unit>
       <trans-unit id="b62178854a1a926e562d51fc2e301276" resname="sylius.account.order.created_at">
         <source>sylius.account.order.created_at</source>
