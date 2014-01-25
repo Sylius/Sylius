@@ -176,7 +176,7 @@ class ResourceController extends FOSRestController
         }
 
         if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($criteria))) {
-            throw new NotFoundHttpException('Requested resource does not exist.');
+            throw new NotFoundHttpException(sprintf('Requested %s does not exist.', $this->config->getResourceName()));
         }
 
         return $resource;
