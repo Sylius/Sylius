@@ -20,13 +20,22 @@ Otherwise you have to download .phar file.
 Adding required bundles to the kernel
 -------------------------------------
 
-First, you need to enable the bundle inside the kernel.
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
+First, you need to enable the bundle inside the kernel.  If you're not using
+any other Sylius bundles, you will also need to add the following bundles and
+their dependencies to the kernel:
+
+    - `SyliusResourceBundle`
+    - `SyliusMoneyBundle`
+    - `SyliusOrderBundle`
+
 Don't worry, everything was automatically installed via Composer.
 
 .. note::
 
-    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
+    Please register the bundle **before** *DoctrineBundle*. This is important
+    as we use listeners which have to be processed first. It is generally a
+    good idea to place all of the Sylius bundles at the beginning of the
+    bundles list, as it is done in the `Sylius-Standard` project.
 
 .. code-block:: php
 
@@ -37,20 +46,27 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
+            new Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
             new Sylius\Bundle\CartBundle\SyliusCartBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
         );
     }
 
 Creating your entities
 ----------------------
 
-You have to create your **CartItem** entity, living inside your application code.
+This is no longer a required step in the latest vertion of the
+`SyliusCartBundle`, and if you are happy with the default implementation (which
+is ``Sylius\Bundle\CartBundle\Model\CartItem``), you can just skip to the next
+section.
+
+You can create your **CartItem** entity, living inside your application code.
 We think that **keeping the app-specific bundle structure simple** is a good practice, so
 let's assume you have your ``AppBundle`` registered under ``App\AppBundle`` namespace.
 
@@ -61,13 +77,13 @@ let's assume you have your ``AppBundle`` registered under ``App\AppBundle`` name
     // src/App/AppBundle/Entity/CartItem.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\CartBundle\Entity\CartItem as BaseCartItem;
+    use Sylius\Bundle\CartBundle\Model\CartItem as BaseCartItem;
 
     class CartItem extends BaseCartItem
     {
     }
 
-Now we need to define a simple mapping for this entity, because it only extends the Doctrine mapped super class.
+Now we need to define a simple mapping for this entity to map its fields.
 You should create a mapping file in your ``AppBundle``, put it inside the doctrine mapping directory ``src/App/AppBundle/Resources/config/doctrine/CartItem.orm.xml``.
 
 .. code-block:: xml
@@ -80,14 +96,13 @@ You should create a mapping file in your ``AppBundle``, put it inside the doctri
                                                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
         <entity name="App\AppBundle\Entity\CartItem" table="app_cart_item">
-            <id name="id" column="id" type="integer">
-                <generator strategy="AUTO" />
-            </id>
         </entity>
 
     </doctrine-mapping>
 
-Mapping the *id* is enough, because the relation between **Cart** and **CartItem** has been already defined in the superclass metadata.
+You do **not** have to map the *ID* field because it is already mapped in the
+``Sylius\Bundle\CartBundle\Model\CartItem`` class, together with the relation
+between **Cart** and **CartItem**.
 
 Let's assume you have a *Product* entity, which represents your main merchandise within your webshop.
 
@@ -104,7 +119,7 @@ We need to modify the *CartItem* entity and its mapping a bit, so it allows us t
     // src/App/AppBundle/Entity/CartItem.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\CartBundle\Entity\CartItem as BaseCartItem;
+    use Sylius\Bundle\CartBundle\Model\CartItem as BaseCartItem;
 
     class CartItem extends BaseCartItem
     {
@@ -134,9 +149,6 @@ We have to also map the *Product* to *CartItem*, let's create this relation in m
                                                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
         <entity name="App\AppBundle\Entity\CartItem" table="app_cart_item">
-            <id name="id" column="id" type="integer">
-                <generator strategy="AUTO" />
-            </id>
             <many-to-one field="product" target-entity="App\AppBundle\Entity\Product">
                 <join-column name="product_id" referenced-column-name="id" />
             </many-to-one>
@@ -144,10 +156,18 @@ We have to also map the *Product* to *CartItem*, let's create this relation in m
 
     </doctrine-mapping>
 
-And that would be all about entities.
+Similarly, you can create a custom entity for orders. The class that you need
+to extend is ``Sylius\Bundle\CartBundle\Model\Cart``. Carts and Orders in
+Sylius are in fact the same thing. Do not forget to create the mapping file.
+But, again, do not put a mapping for the *ID* field — it is already mapped in
+the parrent class.
 
-Now we need to create a really simple service.
-The **ItemResolver**, which will be used by the controller to resolve the new cart item - based on a user request information.
+And that would be all about entities. Now we need to create a really simple service.
+
+Creating ItemResolver service
+-----------------------------
+
+The **ItemResolver** will be used by the controller to resolve the new cart item - based on a user request information.
 Its only requirement is to implement ``Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface``.
 
 .. code-block:: php
@@ -282,16 +302,38 @@ The bundle requires also a simple configuration...
 Container configuration
 -----------------------
 
-Put this configuration inside your ``app/config/config.yml``.
+Put this mininal configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
     sylius_cart:
-        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         resolver: app.cart_item_resolver # The id of our newly created service.
+        classes: ~ # This key can be empty but it must be present in the configuration.
+
+    sylius_order:
+        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+
+    sylius_money:
+        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+
+**Or**, if you have created any custom entities, use this:
+
+.. code-block:: yaml
+
+    sylius_cart:
+        resolver: app.cart_item_resolver # The id of our newly created service.
+        classes: ~ # This key can be empty but it must be present in the configuration.
+
+    sylius_order:
+        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         classes:
-            item:
-                model: App\AppBundle\Entity\CartItem # The item entity.
+            order
+                model: App\AppBundle\Entity\Cart # If you have created a custom Cart entity.
+            order_item:
+                model: App\AppBundle\Entity\CartItem # If you have created a custom CartItem entity.
+
+    sylius_money:
+        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
 Importing routing configuration
 -------------------------------
