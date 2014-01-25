@@ -2978,13 +2978,21 @@
         <source>sylius.taxonomy.update_header</source>
         <target>Gruppierung editieren</target>
       </trans-unit>
+      <trans-unit id="95f07092fcaf6287e22a1ee5f15f6520" resname="sylius.total_quantity">
+        <source>sylius.total_quantity</source>
+        <target>Stück Ges.</target>
+      </trans-unit>
+      <trans-unit id="7106d39c1fe07cc3c4dad301aaa68272" resname="sylius.unknown">
+        <source>sylius.unknown</source>
+        <target>Unbekannt</target>
+      </trans-unit>
       <trans-unit id="d4dd621e8d7998e4dcc0aa3093c024a1" resname="sylius.user.billing_address">
         <source>sylius.user.billing_address</source>
         <target>Rechnungsadresse</target>
       </trans-unit>
       <trans-unit id="4dfd473a9e57e65692fea4cc051c2ce5" resname="sylius.user.create">
         <source>sylius.user.create</source>
-        <target>sylius.user.create</target>
+        <target>Benutzer hinzufügen</target>
       </trans-unit>
       <trans-unit id="05ce2929ffaef98f478a849b67f42a59" resname="sylius.user.create_header">
         <source>sylius.user.create_header</source>
@@ -3008,7 +3016,7 @@
       </trans-unit>
       <trans-unit id="538e68a9b291a09e2bd0f48bf1db260d" resname="sylius.user.first_name">
         <source>sylius.user.first_name</source>
-        <target>sylius.user.first_name</target>
+        <target>Vorname</target>
       </trans-unit>
       <trans-unit id="3da9dd6cb0fbafd069230df3f6ef9837" resname="sylius.user.general_info">
         <source>sylius.user.general_info</source>
@@ -3028,11 +3036,11 @@
       </trans-unit>
       <trans-unit id="a891001243af49a114b41d2d430b96cf" resname="sylius.user.last_name">
         <source>sylius.user.last_name</source>
-        <target>sylius.user.last_name</target>
+        <target>Nachname</target>
       </trans-unit>
       <trans-unit id="35a2e8d0fe7103442cd041fc024a4e86" resname="sylius.user.manage">
         <source>sylius.user.manage</source>
-        <target>sylius.user.manage</target>
+        <target>Benutzer verwalten</target>
       </trans-unit>
       <trans-unit id="2fa67405e07e8ca4d30a3d6424b50940" resname="sylius.user.no_results">
         <source>sylius.user.no_results</source>
@@ -3060,7 +3068,7 @@
       </trans-unit>
       <trans-unit id="4724f9b5b450129ebaad98f2c8ab74b3" resname="sylius.user.update_header">
         <source>sylius.user.update_header</source>
-        <target>sylius.user.update_header</target>
+        <target>Bearbeite Benutzer</target>
       </trans-unit>
       <trans-unit id="28a2e95eafe4003ebc5d86a4d3ee2123" resname="sylius.user.username">
         <source>sylius.user.username</source>
