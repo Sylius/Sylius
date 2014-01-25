@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\TaxonomiesBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,10 +39,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->getRoot()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_allows_setting_the_root_taxon($taxon)
+    function it_allows_setting_the_root_taxon(TaxonInterface $taxon)
     {
         $this->setRoot($taxon);
         $this->getRoot()->shouldReturn($taxon);
@@ -52,10 +50,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->getName()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function its_name_is_mutable($taxon)
+    function its_name_is_mutable(TaxonInterface $taxon)
     {
         $taxon->setName('Brand')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
@@ -65,10 +60,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->getName()->shouldReturn('Brand');
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_also_sets_name_on_the_root_taxon($taxon)
+    function it_also_sets_name_on_the_root_taxon(TaxonInterface $taxon)
     {
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
@@ -77,11 +69,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->setName('Category');
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_delegates_the_hasTaxon_method_to_root_taxon($root, $taxon)
+    function it_delegates_the_hasTaxon_method_to_root_taxon(TaxonInterface $root, TaxonInterface $taxon)
     {
         $this->setRoot($root);
 
@@ -92,11 +80,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->hasTaxon($taxon)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_delegates_addTaxon_method_to_root_taxon($root, $taxon)
+    function it_delegates_addTaxon_method_to_root_taxon(TaxonInterface $root, TaxonInterface $taxon)
     {
         $this->setRoot($root);
 
@@ -104,11 +88,7 @@ class TaxonomySpec extends ObjectBehavior
         $this->addTaxon($taxon);
     }
 
-    /**
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $root
-     * @param Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface $taxon
-     */
-    function it_delegates_removeTaxon_method_to_root_taxon($root, $taxon)
+    function it_delegates_removeTaxon_method_to_root_taxon(TaxonInterface $root, TaxonInterface $taxon)
     {
         $this->setRoot($root);
 

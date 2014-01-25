@@ -11,9 +11,6 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Model for taxonomies.
  *
@@ -47,7 +44,7 @@ class Taxonomy implements TaxonomyInterface
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->name;
     }
 
     /**
@@ -108,22 +105,6 @@ class Taxonomy implements TaxonomyInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxonsAsList()
-    {
-        $taxons = new ArrayCollection();
-
-        foreach ($this->root->getChildren() as $child) {
-            $taxons[] = $child;
-
-            $this->getChildTaxons($child, $taxons);
-        }
-
-        return $taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasTaxon(TaxonInterface $taxon)
     {
         return $this->root->hasChild($taxon);
@@ -147,14 +128,5 @@ class Taxonomy implements TaxonomyInterface
         $this->root->removeChild($taxon);
 
         return $this;
-    }
-
-    private function getChildTaxons(TaxonInterface $taxon, Collection $taxons)
-    {
-        foreach ($taxon->getChildren() as $child) {
-            $taxons[] = $child;
-
-            $this->getChildTaxons($child, $taxons);
-        }
     }
 }

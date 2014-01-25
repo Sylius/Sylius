@@ -31,7 +31,6 @@ interface TaxonInterface extends VariableTaxonInterface
      * Set products.
      *
      * @param ProductInterface[] $products
-    */
+     */
     public function setProducts($products);
-
 }
