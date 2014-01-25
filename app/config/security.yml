@@ -24,6 +24,7 @@ security:
                 path:   /administration/logout
                 target: /administration/login
             anonymous: true
+
         main:
             switch_user: { role: ROLE_SYLIUS_ADMIN }
             context:     user
@@ -68,7 +69,6 @@ security:
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
 
-        - { path: "/api.*", role: ROLE_SYLIUS_API }
         - { path: "/account.*", role: ROLE_USER }
 
         - { path: "/_partial.*", ip: 127.0.0.1 }
