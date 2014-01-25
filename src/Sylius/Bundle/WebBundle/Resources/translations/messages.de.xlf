@@ -376,7 +376,7 @@
       </trans-unit>
       <trans-unit id="88048c16fdb4816785b63624719c14da" resname="sylius.backend.logout">
         <source>sylius.backend.logout</source>
-        <target>sylius.backend.logout</target>
+        <target>Logout</target>
       </trans-unit>
       <trans-unit id="ce48bd83d9004caff22ebab69702eaa8" resname="sylius.backend.manage">
         <source>sylius.backend.manage</source>
@@ -752,7 +752,7 @@
       </trans-unit>
       <trans-unit id="8e1945174a926f8948ff52b4930d43e2" resname="sylius.backend.quick_links.add_product">
         <source>sylius.backend.quick_links.add_product</source>
-        <target>sylius.backend.quick_links.add_product</target>
+        <target>Neues Produkt</target>
       </trans-unit>
       <trans-unit id="bcaf0c6ab5fcd4265e16315de5d04c71" resname="sylius.backend.quick_links.orders">
         <source>sylius.backend.quick_links.orders</source>
@@ -760,11 +760,11 @@
       </trans-unit>
       <trans-unit id="2c1f67e5539dc78af7f57cc2281a25c5" resname="sylius.backend.quick_links.products">
         <source>sylius.backend.quick_links.products</source>
-        <target>sylius.backend.quick_links.products</target>
+        <target>Deine Produkte</target>
       </trans-unit>
       <trans-unit id="63121b09a345a806511cd6496887054c" resname="sylius.backend.quick_links.users">
         <source>sylius.backend.quick_links.users</source>
-        <target>sylius.backend.quick_links.users</target>
+        <target>Benutzer</target>
       </trans-unit>
       <trans-unit id="548048929552009053016c8bfaca6f1b" resname="sylius.backend.remember_me">
         <source>sylius.backend.remember_me</source>
@@ -884,11 +884,11 @@
       </trans-unit>
       <trans-unit id="a29196b0ea143d08b2a062c7ac870c6e" resname="sylius.backend.statistics.registrations_this_month">
         <source>sylius.backend.statistics.registrations_this_month</source>
-        <target>sylius.backend.statistics.registrations_this_month</target>
+        <target>Registrierungen Gesamt</target>
       </trans-unit>
       <trans-unit id="5a7dcffa661988c43c707bd6544b9439" resname="sylius.backend.statistics.sales_this_month">
         <source>sylius.backend.statistics.sales_this_month</source>
-        <target>sylius.backend.statistics.sales_this_month</target>
+        <target>Verkäufe</target>
       </trans-unit>
       <trans-unit id="d308ccbf3075c8dc4626317419d629bf" resname="sylius.backend.stockable.index_header">
         <source>sylius.backend.stockable.index_header</source>
@@ -1064,131 +1064,183 @@
       </trans-unit>
       <trans-unit id="a282fd6b33cca272ae9dac66d09af3ad" resname="sylius.backend_welcome">
         <source>sylius.backend_welcome</source>
-        <target>sylius.backend_welcome</target>
+        <target>Hallo &lt;b&gt;%name%&lt;/b&gt;!</target>
+      </trans-unit>
+      <trans-unit id="4092c233ac25e4d5e5f1b70229515cb5" resname="sylius.block.body">
+        <source>sylius.block.body</source>
+        <target>Body</target>
+      </trans-unit>
+      <trans-unit id="48cdc5c6a7e7c51431e25bb9f55ec471" resname="sylius.block.create">
+        <source>sylius.block.create</source>
+        <target>Block erstellen</target>
+      </trans-unit>
+      <trans-unit id="e401b512069829a9271ddddbb419c6f2" resname="sylius.block.create_header">
+        <source>sylius.block.create_header</source>
+        <target>Neuen Content-Block erstellen</target>
+      </trans-unit>
+      <trans-unit id="7db75066728c02595f1a39995caf0eba" resname="sylius.block.id">
+        <source>sylius.block.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="5b19a0812e62ea9f54251eecef7eeede" resname="sylius.block.index_header">
+        <source>sylius.block.index_header</source>
+        <target>Content-Blocks</target>
+      </trans-unit>
+      <trans-unit id="01e97de36d110b4a524a3d1ec6d288a8" resname="sylius.block.no_results">
+        <source>sylius.block.no_results</source>
+        <target>Keine Blocks zum anzeigen vorhanden.</target>
+      </trans-unit>
+      <trans-unit id="25d02d34f7333f8014e46282e23b9311" resname="sylius.block.title">
+        <source>sylius.block.title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="08b60e5bf48f721783a34712c97f956a" resname="sylius.block.update_header">
+        <source>sylius.block.update_header</source>
+        <target>Content-Block bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="0a938d29cf7076223e9b54c81ae27153" resname="sylius.block.updated_at">
+        <source>sylius.block.updated_at</source>
+        <target>Letztes Update</target>
       </trans-unit>
       <trans-unit id="36af3c89317ed19bd67ea9f037623b6d" resname="sylius.breadcrumb.assortment">
         <source>sylius.breadcrumb.assortment</source>
-        <target>sylius.breadcrumb.assortment</target>
+        <target>Sortiment</target>
+      </trans-unit>
+      <trans-unit id="cb5d6f43656523ee2eaca93d6f3d2efe" resname="sylius.breadcrumb.block.index">
+        <source>sylius.breadcrumb.block.index</source>
+        <target>Content-Blocks</target>
       </trans-unit>
       <trans-unit id="ecbc07235ab3979589f48332f3d5fe52" resname="sylius.breadcrumb.build">
         <source>sylius.breadcrumb.build</source>
-        <target>sylius.breadcrumb.build</target>
+        <target>Build</target>
       </trans-unit>
       <trans-unit id="a3c8ec8b16ef356a807604bcb7019955" resname="sylius.breadcrumb.configuration">
         <source>sylius.breadcrumb.configuration</source>
-        <target>sylius.breadcrumb.configuration</target>
+        <target>Konfiguration</target>
       </trans-unit>
       <trans-unit id="5aa4900078a2a0f1013dabf83dda8aaa" resname="sylius.breadcrumb.country.index">
         <source>sylius.breadcrumb.country.index</source>
-        <target>sylius.breadcrumb.country.index</target>
+        <target>Länder</target>
       </trans-unit>
       <trans-unit id="c340171685afbeaf6a2dfecfbb334636" resname="sylius.breadcrumb.customers">
         <source>sylius.breadcrumb.customers</source>
-        <target>sylius.breadcrumb.customers</target>
+        <target>Kunden</target>
       </trans-unit>
       <trans-unit id="546d2e3534df032132eaac58ffd76f98" resname="sylius.breadcrumb.edit">
         <source>sylius.breadcrumb.edit</source>
-        <target>sylius.breadcrumb.edit</target>
+        <target>Bearbeiten</target>
       </trans-unit>
       <trans-unit id="2b96108ff647d6b62a70daa1a4b6fc7c" resname="sylius.breadcrumb.exchange_rate.index">
         <source>sylius.breadcrumb.exchange_rate.index</source>
-        <target>sylius.breadcrumb.exchange_rate.index</target>
+        <target>Wechselkurse</target>
       </trans-unit>
       <trans-unit id="5b396485243c9c3c2f2c4a59c202409e" resname="sylius.breadcrumb.general_settings">
         <source>sylius.breadcrumb.general_settings</source>
-        <target>sylius.breadcrumb.general_settings</target>
+        <target>Allgemeine Einstellungen</target>
       </trans-unit>
       <trans-unit id="642d050c250d149a92c05342ef24e72d" resname="sylius.breadcrumb.generate">
         <source>sylius.breadcrumb.generate</source>
-        <target>sylius.breadcrumb.generate</target>
+        <target>Generieren</target>
+      </trans-unit>
+      <trans-unit id="67b81464d46806ca861f464f9b6d2697" resname="sylius.breadcrumb.group.index">
+        <source>sylius.breadcrumb.group.index</source>
+        <target>Gruppen</target>
       </trans-unit>
       <trans-unit id="827f2b8d9ee8d790231f61188e1bf374" resname="sylius.breadcrumb.inventory.index">
         <source>sylius.breadcrumb.inventory.index</source>
-        <target>sylius.breadcrumb.inventory.index</target>
+        <target>Lagerbestände</target>
+      </trans-unit>
+      <trans-unit id="8baeab4e95fbb1a13591df9380c205a4" resname="sylius.breadcrumb.locale.index">
+        <source>sylius.breadcrumb.locale.index</source>
+        <target>Locales</target>
       </trans-unit>
       <trans-unit id="68f3f28b97f2ddcb174ef9ed351ee3b8" resname="sylius.breadcrumb.new">
         <source>sylius.breadcrumb.new</source>
-        <target>sylius.breadcrumb.new</target>
+        <target>Neu</target>
       </trans-unit>
       <trans-unit id="b1e12cf51873fa32064bd8df98d9220c" resname="sylius.breadcrumb.option.index">
         <source>sylius.breadcrumb.option.index</source>
-        <target>sylius.breadcrumb.option.index</target>
+        <target>Optionen</target>
       </trans-unit>
       <trans-unit id="3b369585aa87ea5db08ba7ff4ce54f01" resname="sylius.breadcrumb.order.index">
         <source>sylius.breadcrumb.order.index</source>
         <target>Bestellungen</target>
       </trans-unit>
+      <trans-unit id="eb55a1c2e1082642c4accbd3eb020879" resname="sylius.breadcrumb.page.index">
+        <source>sylius.breadcrumb.page.index</source>
+        <target>Statische Seiten</target>
+      </trans-unit>
       <trans-unit id="1f0f440a9e6bed0858adacb449582bce" resname="sylius.breadcrumb.payment.index">
         <source>sylius.breadcrumb.payment.index</source>
-        <target>sylius.breadcrumb.payment.index</target>
+        <target>Bezahlungen</target>
       </trans-unit>
       <trans-unit id="130fff22c4409afdf7f96f0d2c734d6d" resname="sylius.breadcrumb.payment_method.index">
         <source>sylius.breadcrumb.payment_method.index</source>
-        <target>sylius.breadcrumb.payment_method.index</target>
+        <target>Bezahlmethoden</target>
       </trans-unit>
       <trans-unit id="85ecf250aefdd17a74bc2fdc39370502" resname="sylius.breadcrumb.product.index">
         <source>sylius.breadcrumb.product.index</source>
-        <target>sylius.breadcrumb.product.index</target>
+        <target>Produkte</target>
       </trans-unit>
       <trans-unit id="c7d69e7e1d9a735f9f8ad1cb4a0c49e2" resname="sylius.breadcrumb.promotion.index">
         <source>sylius.breadcrumb.promotion.index</source>
-        <target>sylius.breadcrumb.promotion.index</target>
+        <target>Aktionen</target>
       </trans-unit>
       <trans-unit id="55c0bbbdd48a1681f4a48fb42e6ef8d3" resname="sylius.breadcrumb.promotion_coupon.index">
         <source>sylius.breadcrumb.promotion_coupon.index</source>
-        <target>sylius.breadcrumb.promotion_coupon.index</target>
+        <target>Gutscheine</target>
       </trans-unit>
       <trans-unit id="1a7b9a53943af6fe7e6f8cff7bc3e6a3" resname="sylius.breadcrumb.property.index">
         <source>sylius.breadcrumb.property.index</source>
-        <target>sylius.breadcrumb.property.index</target>
+        <target>Eigenschaften</target>
       </trans-unit>
       <trans-unit id="1967b7a973d28372822022d485f316f8" resname="sylius.breadcrumb.prototype.index">
         <source>sylius.breadcrumb.prototype.index</source>
-        <target>sylius.breadcrumb.prototype.index</target>
+        <target>Prototypen</target>
       </trans-unit>
       <trans-unit id="a8d0bd9c19c866dd1e9c138ff0a679b6" resname="sylius.breadcrumb.sales">
         <source>sylius.breadcrumb.sales</source>
-        <target>sylius.breadcrumb.sales</target>
+        <target>Verkäufe</target>
       </trans-unit>
       <trans-unit id="f2257bef4698c935c085c2accd68af88" resname="sylius.breadcrumb.shipment.index">
         <source>sylius.breadcrumb.shipment.index</source>
-        <target>sylius.breadcrumb.shipment.index</target>
+        <target>Lieferungen</target>
       </trans-unit>
       <trans-unit id="5a082457b5f7c62e5550267b191b814a" resname="sylius.breadcrumb.shipping_category.index">
         <source>sylius.breadcrumb.shipping_category.index</source>
-        <target>sylius.breadcrumb.shipping_category.index</target>
+        <target>Versandgruppen</target>
       </trans-unit>
       <trans-unit id="f2bd0a1b46f57c64b1d8ea3576b6ca3a" resname="sylius.breadcrumb.shipping_method.index">
         <source>sylius.breadcrumb.shipping_method.index</source>
-        <target>sylius.breadcrumb.shipping_method.index</target>
+        <target>Versandmethoden</target>
       </trans-unit>
       <trans-unit id="e41ed56dcd093c0cfc26ebe6cdf25be4" resname="sylius.breadcrumb.tax_category.index">
         <source>sylius.breadcrumb.tax_category.index</source>
-        <target>sylius.breadcrumb.tax_category.index</target>
+        <target>Steuerkategorien</target>
       </trans-unit>
       <trans-unit id="9f39863a84df679b2eb755a19cc68bfc" resname="sylius.breadcrumb.tax_rate.index">
         <source>sylius.breadcrumb.tax_rate.index</source>
-        <target>sylius.breadcrumb.tax_rate.index</target>
+        <target>Steuersätze</target>
       </trans-unit>
       <trans-unit id="53e5b0cde0c84a5d0320a194edd1e886" resname="sylius.breadcrumb.taxation_settings">
         <source>sylius.breadcrumb.taxation_settings</source>
-        <target>sylius.breadcrumb.taxation_settings</target>
+        <target>Gruppeneinstellungen</target>
       </trans-unit>
       <trans-unit id="369650410b766b9694d8658d9b4b1fb8" resname="sylius.breadcrumb.taxonomy.index">
         <source>sylius.breadcrumb.taxonomy.index</source>
-        <target>sylius.breadcrumb.taxonomy.index</target>
+        <target>Gruppierung</target>
       </trans-unit>
       <trans-unit id="22810b1c2a5e195c2582eac454ea850f" resname="sylius.breadcrumb.update">
         <source>sylius.breadcrumb.update</source>
-        <target>sylius.breadcrumb.update</target>
+        <target>Bearbeiten</target>
       </trans-unit>
       <trans-unit id="e047a7ed642c5f9542c515b6a0df871d" resname="sylius.breadcrumb.user.index">
         <source>sylius.breadcrumb.user.index</source>
-        <target>sylius.breadcrumb.user.index</target>
+        <target>Benutzer</target>
       </trans-unit>
       <trans-unit id="81213115d4ed14ce1e412457673a7ce2" resname="sylius.breadcrumb.zone.index">
         <source>sylius.breadcrumb.zone.index</source>
-        <target>sylius.breadcrumb.zone.index</target>
+        <target>Gebiete</target>
       </trans-unit>
       <trans-unit id="1c928a5890ba6f86642da79b1e7a2ea6" resname="sylius.cancel">
         <source>sylius.cancel</source>
@@ -1432,7 +1484,7 @@
       </trans-unit>
       <trans-unit id="42f9ef9fd2580b44f38dbbaee57f763c" resname="sylius.create">
         <source>sylius.create</source>
-        <target>sylius.create</target>
+        <target>Hinzufügen</target>
       </trans-unit>
       <trans-unit id="6a5224b93e0ac331cd56065d1a30ac01" resname="sylius.delete">
         <source>sylius.delete</source>
