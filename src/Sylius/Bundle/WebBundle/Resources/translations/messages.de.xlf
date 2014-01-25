@@ -2156,7 +2156,7 @@
       </trans-unit>
       <trans-unit id="002f11602d8dc4cbb1bfe390cccb3adb" resname="sylius.payment.manage">
         <source>sylius.payment.manage</source>
-        <target>sylius.payment.manage</target>
+        <target>Zahlungen verwalten</target>
       </trans-unit>
       <trans-unit id="a13d05a1fee66fa07ef5060e1204fada" resname="sylius.payment.method">
         <source>sylius.payment.method</source>
@@ -2168,7 +2168,7 @@
       </trans-unit>
       <trans-unit id="a114c18a59dff06048550f0c135d11ae" resname="sylius.payment.state">
         <source>sylius.payment.state</source>
-        <target>sylius.payment.state</target>
+        <target>Satus</target>
       </trans-unit>
       <trans-unit id="78ab1a69db10f0ba02af568ae1f42321" resname="sylius.payment.update_header">
         <source>sylius.payment.update_header</source>
@@ -2416,11 +2416,11 @@
       </trans-unit>
       <trans-unit id="c8a5d923b87e6adbfaa3f1fbea0bc073" resname="sylius.promotion.general_info">
         <source>sylius.promotion.general_info</source>
-        <target>sylius.promotion.general_info</target>
+        <target>Allgemeine Informationen</target>
       </trans-unit>
       <trans-unit id="2704390f26276f6cbc60b6630087bbad" resname="sylius.promotion.id">
         <source>sylius.promotion.id</source>
-        <target>sylius.promotion.id</target>
+        <target>ID</target>
       </trans-unit>
       <trans-unit id="9eaf38e2ee77dafadbb247cb9e34fe6e" resname="sylius.promotion.index_header">
         <source>sylius.promotion.index_header</source>
@@ -2480,7 +2480,7 @@
       </trans-unit>
       <trans-unit id="32c74eeea9bd6f74f344a7658a652fed" resname="sylius.promotion_coupon.create_header">
         <source>sylius.promotion_coupon.create_header</source>
-        <target>Coupon erstellen</target>
+        <target>Gutschein erstellen</target>
       </trans-unit>
       <trans-unit id="998df5d7da18a542bb8dacd056bfa1a8" resname="sylius.promotion_coupon.generate">
         <source>sylius.promotion_coupon.generate</source>
@@ -2488,15 +2488,15 @@
       </trans-unit>
       <trans-unit id="0515968500cc4ca31195dbb566b459aa" resname="sylius.promotion_coupon.generate_header">
         <source>sylius.promotion_coupon.generate_header</source>
-        <target>Coupons generieren</target>
+        <target>Gutscheine generieren</target>
       </trans-unit>
       <trans-unit id="c0dc4b54035373fde19fe586673a7297" resname="sylius.promotion_coupon.index">
         <source>sylius.promotion_coupon.index</source>
-        <target>Coupons</target>
+        <target>Gutscheine</target>
       </trans-unit>
       <trans-unit id="8a30278bd03430354a46093d8eb6dff1" resname="sylius.promotion_coupon.index_header">
         <source>sylius.promotion_coupon.index_header</source>
-        <target>sylius.promotion_coupon.index_header</target>
+        <target>Gutscheine</target>
       </trans-unit>
       <trans-unit id="0d3fa14fb54eb848b7cdcc38d8a00b3e" resname="sylius.promotion_coupon.no_results">
         <source>sylius.promotion_coupon.no_results</source>
@@ -2504,11 +2504,11 @@
       </trans-unit>
       <trans-unit id="35fd5719deabd4d43347eae0edd99e14" resname="sylius.promotion_coupon.total_results">
         <source>sylius.promotion_coupon.total_results</source>
-        <target>Ergebnisse Coupons</target>
+        <target>Ergebnisse Gutscheine</target>
       </trans-unit>
       <trans-unit id="448aa2607d2a0f3c49bb8299ca44625a" resname="sylius.promotion_coupon.update_header">
         <source>sylius.promotion_coupon.update_header</source>
-        <target>Coupon editieren</target>
+        <target>Gutschein editieren</target>
       </trans-unit>
       <trans-unit id="464854266b97f4f6c89313ddeed1184a" resname="sylius.promotion_rule.configuration">
         <source>sylius.promotion_rule.configuration</source>
@@ -2620,7 +2620,7 @@
       </trans-unit>
       <trans-unit id="bab3d3f6b080df1004b32c650fd8c29d" resname="sylius.search">
         <source>sylius.search</source>
-        <target>sylius.search</target>
+        <target>Suchen</target>
       </trans-unit>
       <trans-unit id="10fa10c1f6224e5247cd40d74fedb994" resname="sylius.settings.general_header">
         <source>sylius.settings.general_header</source>
