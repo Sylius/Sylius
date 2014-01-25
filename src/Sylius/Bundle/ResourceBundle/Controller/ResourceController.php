@@ -18,6 +18,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
  * Base resource controller for Sylius.
