@@ -190,6 +190,10 @@
         <source>sylius.backend.menu.sidebar.zones</source>
         <target>Gebiete</target>
       </trans-unit>
+      <trans-unit id="b241b5168f9ae79f801f3a9da9fa356a" resname="sylius.frontend.menu.account.addresses">
+        <source>sylius.frontend.menu.account.addresses</source>
+        <target>Mein Adressbuch</target>
+      </trans-unit>
       <trans-unit id="2827dee6dfebc5686b04a137eaec62d0" resname="sylius.frontend.menu.account.orders">
         <source>sylius.frontend.menu.account.orders</source>
         <target>Meine Bestellungen / Meine Rechnungen</target>

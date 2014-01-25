@@ -2,49 +2,69 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
     <body>
+      <trans-unit id="9539535a483916af05984ef822c1523b" resname="email.order_confirmation.subject">
+        <source>email.order_confirmation.subject</source>
+        <target>email.order_confirmation.subject</target>
+      </trans-unit>
+      <trans-unit id="4bdaedd00f685e27f46c6472cbafbb9e" resname="sylius.account.address.action.billing">
+        <source>sylius.account.address.action.billing</source>
+        <target>Als Standardrechnungsadresse setzen</target>
+      </trans-unit>
+      <trans-unit id="7885128cbe81bda5d5ebadaefd093d0a" resname="sylius.account.address.action.create">
+        <source>sylius.account.address.action.create</source>
+        <target>Neue Adresse hinzufügen</target>
+      </trans-unit>
       <trans-unit id="cc1e2c3f8247bedfd7ad1dbe45445d7c" resname="sylius.account.address.action.delete">
         <source>sylius.account.address.action.delete</source>
-        <target>sylius.account.address.action.delete</target>
+        <target>Löschen</target>
+      </trans-unit>
+      <trans-unit id="16f899bb581bb20d8c81f4e94db9c5f7" resname="sylius.account.address.action.edit">
+        <source>sylius.account.address.action.edit</source>
+        <target>Bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="f72539a64825f06cdee1245dd0cd8dc0" resname="sylius.account.address.action.shipping">
+        <source>sylius.account.address.action.shipping</source>
+        <target>Als Standardlieferadresse setzen</target>
       </trans-unit>
       <trans-unit id="dfa1fdf98920625046cd4b2203298e12" resname="sylius.account.address.create">
         <source>sylius.account.address.create</source>
-        <target>sylius.account.address.create</target>
+        <target>Neue Adresse hinzufügen</target>
       </trans-unit>
       <trans-unit id="bbd7fc01d3f832afff8898d1fd3c0339" resname="sylius.account.address.default.billing">
         <source>sylius.account.address.default.billing</source>
-        <target>sylius.account.address.default.billing</target>
+        <target>Standardrechnungsadresse</target>
       </trans-unit>
       <trans-unit id="9768a98ac41854e729fa6e81dc9b98b5" resname="sylius.account.address.default.no_billing">
         <source>sylius.account.address.default.no_billing</source>
-        <target>sylius.account.address.default.no_billing</target>
+        <target>Keine Standardrechnungsadresse</target>
       </trans-unit>
       <trans-unit id="26c988210b45a5844560beac7e548828" resname="sylius.account.address.default.no_shipping">
         <source>sylius.account.address.default.no_shipping</source>
-        <target>sylius.account.address.default.no_shipping</target>
+        <target>Keine Standardlieferadresse</target>
       </trans-unit>
       <trans-unit id="b4a076207117a9bfea5d04421dc92808" resname="sylius.account.address.default.shipping">
         <source>sylius.account.address.default.shipping</source>
-        <target>sylius.account.address.default.shipping</target>
+        <target>Standardlieferadresse</target>
       </trans-unit>
       <trans-unit id="28ae1f20e59eec079af1805ed85a02fa" resname="sylius.account.address.empty">
         <source>sylius.account.address.empty</source>
-        <target>sylius.account.address.empty</target>
+        <target>Noch keine Adressen hinzugefügt</target>
       </trans-unit>
       <trans-unit id="bafb5c8341a660880f5e7c181173f65e" resname="sylius.account.address.flash.billing.success">
         <source>sylius.account.address.flash.billing.success</source>
-        <target>sylius.account.address.flash.billing.success</target>
+        <target>Die Adresse wurde erfolgreich als Standardrechnungsadresse gesetzt.</target>
       </trans-unit>
       <trans-unit id="a2cc61ae28a28a4795ae179dc8444d4f" resname="sylius.account.address.flash.shipping.success">
         <source>sylius.account.address.flash.shipping.success</source>
-        <target>sylius.account.address.flash.shipping.success</target>
+        <target>Die Adresse wurde erfolgreich als Standardlieferadresse gesetzt</target>
       </trans-unit>
       <trans-unit id="98a8af2e613723cca221317bc567e387" resname="sylius.account.address.list">
         <source>sylius.account.address.list</source>
-        <target>sylius.account.address.list</target>
+        <target>Alle Adressen</target>
       </trans-unit>
       <trans-unit id="8267d95ccbac3493d3bad967116118ed" resname="sylius.account.address.update">
         <source>sylius.account.address.update</source>
-        <target>sylius.account.address.update</target>
+        <target>Adresse bearbeiten</target>
       </trans-unit>
       <trans-unit id="aa5d1d6b185c783bb19dc29190828a5e" resname="sylius.account.home.email">
         <source>sylius.account.home.email</source>
@@ -112,7 +132,7 @@
       </trans-unit>
       <trans-unit id="36d1054361378200825465eaf80c5807" resname="sylius.address.company">
         <source>sylius.address.company</source>
-        <target>sylius.address.company</target>
+        <target>Firma: </target>
       </trans-unit>
       <trans-unit id="13bb7a2428b440096560dc9f179b29e7" resname="sylius.address.country">
         <source>sylius.address.country</source>
@@ -2872,7 +2892,7 @@
       </trans-unit>
       <trans-unit id="d4dd621e8d7998e4dcc0aa3093c024a1" resname="sylius.user.billing_address">
         <source>sylius.user.billing_address</source>
-        <target>sylius.user.billing_address</target>
+        <target>Rechnungsadresse</target>
       </trans-unit>
       <trans-unit id="4dfd473a9e57e65692fea4cc051c2ce5" resname="sylius.user.create">
         <source>sylius.user.create</source>
@@ -2944,7 +2964,7 @@
       </trans-unit>
       <trans-unit id="1cc3843529c72b288a252bcf91c12492" resname="sylius.user.shipping_address">
         <source>sylius.user.shipping_address</source>
-        <target>sylius.user.shipping_address</target>
+        <target>Lieferadresse</target>
       </trans-unit>
       <trans-unit id="bffeb700587dcbddc8a1153e569a802f" resname="sylius.user.show_header">
         <source>sylius.user.show_header</source>
