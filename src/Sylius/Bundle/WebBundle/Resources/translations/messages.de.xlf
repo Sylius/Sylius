@@ -2952,11 +2952,11 @@
       </trans-unit>
       <trans-unit id="73761ee776cbdc59fca8f5adab8483ac" resname="sylius.taxonomy.index_header">
         <source>sylius.taxonomy.index_header</source>
-        <target>Taxonomie</target>
+        <target>Gruppierung &lt;small&gt;Hier siehst du die definierten Gruppierungen&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="b49cd4618dd429b8108bdb5e193b6fad" resname="sylius.taxonomy.manage">
         <source>sylius.taxonomy.manage</source>
-        <target>sylius.taxonomy.manage</target>
+        <target>Gruppierungen verwalten</target>
       </trans-unit>
       <trans-unit id="3994887e084b96e1e18a23c8e4cb1177" resname="sylius.taxonomy.name">
         <source>sylius.taxonomy.name</source>
@@ -2964,7 +2964,7 @@
       </trans-unit>
       <trans-unit id="053e2ad9e8340ee8b9e17baf0e55c90c" resname="sylius.taxonomy.no_image">
         <source>sylius.taxonomy.no_image</source>
-        <target>sylius.taxonomy.no_image</target>
+        <target>Kein Bild für diese Gruppierung vorhanden</target>
       </trans-unit>
       <trans-unit id="69324c688303c98c75ca1baa67437a1d" resname="sylius.taxonomy.no_results">
         <source>sylius.taxonomy.no_results</source>
@@ -2972,11 +2972,11 @@
       </trans-unit>
       <trans-unit id="cb4e339316729f91898d65d17ff41fb7" resname="sylius.taxonomy.show_header">
         <source>sylius.taxonomy.show_header</source>
-        <target>Taxonomie Details</target>
+        <target>Gruppierung &lt;small&gt;&lt;strong&gt;%name%&lt;/strong&gt;&lt;/small&gt;</target>
       </trans-unit>
       <trans-unit id="eeed0e5babbe776a907ee0eeb64fe1bd" resname="sylius.taxonomy.update_header">
         <source>sylius.taxonomy.update_header</source>
-        <target>Taxonomie editieren</target>
+        <target>Gruppierung editieren</target>
       </trans-unit>
       <trans-unit id="d4dd621e8d7998e4dcc0aa3093c024a1" resname="sylius.user.billing_address">
         <source>sylius.user.billing_address</source>
