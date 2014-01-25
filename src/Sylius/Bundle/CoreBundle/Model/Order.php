@@ -96,7 +96,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var string
      */
-    protected $shippingState = OrderShippingStates::READY;
+    protected $shippingState = OrderShippingStates::CHECKOUT;
 
     /**
      * Promotions applied
