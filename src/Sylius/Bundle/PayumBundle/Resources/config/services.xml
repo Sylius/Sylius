@@ -48,6 +48,7 @@
         </service>
         <service id="sylius.payum.paypal.action.notify_order" class="%sylius.payum.paypal.action.notify_order.class%">
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.manager.payment" />
         </service>
         <service id="sylius.payum.stripe.action.capture_order_using_credit_card" class="%sylius.payum.stripe.action.capture_order_using_credit_card.class%" />
         
@@ -66,6 +67,7 @@
             <argument type="service" id="payum.context.be2bill.api" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.manager.payment" />
             <argument>id</argument>
         </service>
         
