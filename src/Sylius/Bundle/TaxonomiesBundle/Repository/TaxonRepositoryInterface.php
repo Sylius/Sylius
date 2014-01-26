@@ -11,9 +11,17 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Repository;
 
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 
 interface TaxonRepositoryInterface
 {
+    /**
+     * Get all taxons that belong to given taxonomy.
+     *
+     * @param $taxonomy TaxonomyInterface
+     *
+     * @return TaxonInterface[]
+     */
     public function getTaxonsAsList(TaxonomyInterface $taxonomy);
 }
