@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sylius.option.name.not_blank</source>
+                <target>Bitte Namen angeben.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sylius.option.name.min_length</source>
+                <target>Name muss mindestens 1 Zeichen lang sein.|Name muss mindestens {{ limit }} Zeichen lang sein.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sylius.option.name.max_length</source>
+                <target>Name darf nicht länger als 1 Zeichen sein.|Name darf nicht länger als {{ limit }} Zeichen sein.</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sylius.option.presentation.not_blank</source>
+                <target>Bitte Präsentation angeben.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sylius.option.presentation.min_length</source>
+                <target>Präsentation muss mindestens 1 Zeichen lang sein.|Präsentation muss mindestens {{ limit }} Zeichen lang sein.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>sylius.option.presentation.max_length</source>
+                <target>Präsentation darf nicht länger als 1 Zeichen sein.|Präsentation darf nicht länger als {{ limit }} Zeichen sein.</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sylius.option.values.min_count</source>
+                <target>Bitte füge mindestens {{ limit }} Wert hinzu.|Bitte füge mindestens {{ limit }} Werte hinzu.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sylius.option_value.value.not_blank</source>
+                <target>Bitte Wert angeben.</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sylius.variant.combination</source>
+                <target>Variante mit Auswahl dieser Werte existiert schon.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
