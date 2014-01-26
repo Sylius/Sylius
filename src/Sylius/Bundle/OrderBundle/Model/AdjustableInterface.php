@@ -23,7 +23,7 @@ interface AdjustableInterface
     /**
      * Return all adjustments attached to adjustable subject.
      *
-     * @return Collection
+     * @return Collection|AdjustmentInterface[]
      */
     public function getAdjustments();
 

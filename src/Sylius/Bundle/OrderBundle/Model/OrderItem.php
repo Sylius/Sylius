@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\OrderBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Model for order line items.
@@ -51,7 +52,7 @@ class OrderItem implements OrderItemInterface
     /**
      * Total adjustments.
      *
-     * @var Collection
+     * @var Collection|AdjustmentInterface[]
      */
     protected $adjustments;
 
@@ -103,7 +104,7 @@ class OrderItem implements OrderItemInterface
     public function setQuantity($quantity)
     {
         if (0 > $quantity) {
-            throw new \OutOfRangeException('Quantity must be greater than 0');
+            throw new \OutOfRangeException('Quantity must be greater than 0.');
         }
 
         $this->quantity = $quantity;
@@ -237,6 +238,10 @@ class OrderItem implements OrderItemInterface
         $this->calculateAdjustmentsTotal();
 
         $this->total = ($this->quantity * $this->unitPrice) + $this->adjustmentsTotal;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
 
         return $this;
     }

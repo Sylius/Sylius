@@ -100,7 +100,7 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     /**
      * Set items.
      *
-     * @param Collection $items
+     * @param Collection|OrderItemInterface[] $items
      */
     public function setItems(Collection $items);
 

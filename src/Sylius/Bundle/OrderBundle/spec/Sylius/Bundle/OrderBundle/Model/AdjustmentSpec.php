@@ -12,6 +12,9 @@
 namespace spec\Sylius\Bundle\OrderBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Model\AdjustableInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Bundle\OrderBundle\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,11 +41,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderInterface     $order
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $orderItem
-     */
-    function it_allows_assigning_itself_to_an_adjustable($order, $orderItem)
+    function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -51,11 +50,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn($orderItem);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderInterface     $order
-     * @param \Sylius\Bundle\OrderBundle\Model\OrderItemInterface $orderItem
-     */
-    function it_allows_detaching_itself_from_an_adjustable($order, $orderItem)
+    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -143,10 +138,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    /**
-     * @param \Sylius\Bundle\OrderBundle\Model\AdjustableInterface $adjustable
-     */
-    function it_has_fluent_interface($adjustable)
+    function it_has_fluent_interface(AdjustableInterface $adjustable)
     {
         $this->setAdjustable($adjustable)->shouldReturn($this);
         $this->setLabel('Shipping fee')->shouldReturn($this);

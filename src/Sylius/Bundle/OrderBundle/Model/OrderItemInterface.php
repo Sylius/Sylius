@@ -95,7 +95,7 @@ interface OrderItemInterface extends AdjustableInterface
      * the same cart item.
      *
      * @param OrderItemInterface $orderItem
-     * @param bool               $throwOnInvalid
+     * @param Boolean            $throwOnInvalid
      *
      * @return $this
      */
