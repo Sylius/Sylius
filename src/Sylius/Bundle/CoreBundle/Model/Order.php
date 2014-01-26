@@ -293,7 +293,7 @@ class Order extends Cart implements OrderInterface
     public function setPayment(PaymentInterface $payment)
     {
         $this->payment = $payment;
-        $this->setPaymentState($payment->getState());
+        $this->paymentState = $payment->getState();
 
         return $this;
     }
