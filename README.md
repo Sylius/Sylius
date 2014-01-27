@@ -29,6 +29,9 @@ to run Composer tool with `--dev` option:
 
 ```bash
 $ php composer.phar install --dev
+$ php app/console doctrine:database:create
+$ php app/console doctrine:schema:create 
+$ php app/console doctrine:phpcr:repository:init
 ```
 
 [Behat](http://behat.org) scenarios
@@ -46,6 +49,13 @@ Then download [Selenium Server](http://seleniumhq.org/download/), and run it.
 
 ```bash
 $ java -jar selenium-server-standalone-2.39.0.jar
+```
+
+Then setup your test database
+
+```bash
+$ php app/console doctrine:database:create --env=test
+$ php app/console doctrine:schema:create --env=test
 ```
 
 You can run Behat using the following command.
