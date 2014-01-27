@@ -60,7 +60,7 @@ class BuildProductPropertyFormListener implements EventSubscriberInterface
         $form = $event->getForm();
 
         if (null === $productProperty) {
-            $form->add($this->factory->createNamed('value', 'text', null, array('auto_initialize' => false)));
+            $form->add($this->factory->createNamed('value', 'textarea', null, array('auto_initialize' => false)));
 
             return;
         }
