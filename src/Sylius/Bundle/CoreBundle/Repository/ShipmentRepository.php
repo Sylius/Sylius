@@ -31,7 +31,7 @@ class ShipmentRepository extends EntityRepository
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $queryBuilder
-            ->leftJoin('o.order', 'shipmentOrder')
+            ->leftJoin($this->getAlias().'.order', 'shipmentOrder')
             ->leftJoin('shipmentOrder.shippingAddress', 'address')
             ->addSelect('shipmentOrder')
             ->addSelect('address')
@@ -52,13 +52,13 @@ class ShipmentRepository extends EntityRepository
         }
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':createdAtFrom'))
+                ->andWhere($queryBuilder->expr()->gte($this->getAlias().'.createdAt', ':createdAtFrom'))
                 ->setParameter('createdAtFrom', $criteria['createdAtFrom'])
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
+                ->andWhere($queryBuilder->expr()->lte($this->getAlias().'.createdAt', ':createdAtTo'))
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
             ;
         }
@@ -73,5 +73,10 @@ class ShipmentRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    protected function getAlias()
+    {
+        return 's';
     }
 }
