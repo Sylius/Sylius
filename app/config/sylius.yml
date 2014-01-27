@@ -70,6 +70,7 @@ sylius_promotions:
 
 sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
+    track_inventory: %sylius.inventory.tracking_enabled%
     classes:
         unit:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
