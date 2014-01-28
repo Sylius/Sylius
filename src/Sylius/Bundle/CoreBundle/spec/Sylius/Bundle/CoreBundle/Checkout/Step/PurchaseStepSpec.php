@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
@@ -115,7 +116,13 @@ class PurchaseStepSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $cartProvider->abandonCart()->shouldBeCalled();
+        $eventDispatcher
+            ->dispatch(
+                SyliusCheckoutEvents::PURCHASE_COMPLETE,
+                Argument::type('Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent')
+            )
+            ->shouldBeCalled()
+        ;
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }
@@ -153,232 +160,13 @@ class PurchaseStepSpec extends ObjectBehavior
             )
             ->shouldNotBeCalled()
         ;
-        
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_success_flash_message_if_payment_status_success(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markSuccess();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.success', array(), 'flashes')
+        $eventDispatcher
+            ->dispatch(
+                SyliusCheckoutEvents::PURCHASE_COMPLETE,
+                Argument::type('Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent')
+            )
             ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.success')
         ;
-        $flashBag->add('success','translated.sylius.checkout.success')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_notice_flash_message_if_payment_status_pending(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markPending();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.processing', array(), 'flashes')
-            ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.processing')
-        ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_notice_flash_message_if_payment_status_canceled(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markCanceled();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.canceled', array(), 'flashes')
-            ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.canceled')
-        ;
-        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_error_flash_message_if_payment_status_expired(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markExpired();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.failed', array(), 'flashes')
-            ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.failed')
-        ;
-        $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_notice_flash_message_if_payment_status_suspended(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markSuspended();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.processing', array(), 'flashes')
-            ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.processing')
-        ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_error_flash_message_if_payment_status_failed(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markFailed();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.failed', array(), 'flashes')
-            ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.failed')
-        ;
-        $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
-
-        $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
-    }
-
-    function it_should_set_error_flash_message_if_payment_status_unknown(
-        ProcessContextInterface $context,
-        PaymentInterface $payment,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        CartProviderInterface $cartProvider
-    ) {
-        $paymentModel = new Payment();
-        $order = new Order();
-        $order->setPayment($paymentModel);
-
-        $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
-            ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markUnknown();
-                $args[0]->setModel($order);
-            }
-        );
-
-        $translator
-            ->trans('sylius.checkout.unknown', array(), 'flashes')
-            ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.unknown')
-        ;
-        $flashBag->add('error','translated.sylius.checkout.unknown')->shouldBeCalled();
-
-        $cartProvider->getCart()->willReturn($order);
-        $cartProvider->abandonCart()->shouldBeCalled();
 
         $this->forwardAction($context)->shouldReturnAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Step\ActionResult');
     }

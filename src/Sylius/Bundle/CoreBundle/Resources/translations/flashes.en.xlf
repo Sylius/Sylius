@@ -16,7 +16,7 @@
       </trans-unit>
       <trans-unit id="b35abff3ac27033d049562863e7e61d2" resname="sylius.checkout.canceled">
         <source>sylius.checkout.canceled</source>
-        <target>Something is wrong, you payment was canceled.</target>
+        <target>Your payment was canceled.</target>
       </trans-unit>
       <trans-unit id="b35abff3ac27033d049562863e7e61d3" resname="sylius.checkout.pending">
         <source>sylius.checkout.pending</source>
@@ -28,7 +28,7 @@
       </trans-unit>
       <trans-unit id="b35abff3ac27033d049562863e7e61d5" resname="sylius.checkout.unknown">
         <source>sylius.checkout.unknown</source>
-        <target>Unkown payment error.</target>
+        <target>Unknown payment error.</target>
       </trans-unit>
     </body>
   </file>
