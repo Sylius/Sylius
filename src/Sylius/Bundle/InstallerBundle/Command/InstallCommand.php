@@ -2,12 +2,14 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use RuntimeException;
+use Sylius\Bundle\InstallerBundle\Requirement\Requirement;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -24,8 +26,7 @@ class InstallCommand extends ContainerAwareCommand
             )
             ->addOption('admin-name', 'an', InputOption::VALUE_OPTIONAL, 'Administrator name')
             ->addOption('admin-password', 'ap', InputOption::VALUE_OPTIONAL, 'Administrator password')
-            ->addOption('admin-email', 'ae', InputOption::VALUE_OPTIONAL, 'Administrator email')
-        ;
+            ->addOption('admin-email', 'ae', InputOption::VALUE_OPTIONAL, 'Administrator email');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -34,13 +35,20 @@ class InstallCommand extends ContainerAwareCommand
         $output->writeln('');
 
         $this
+            ->checkRequiredArguments($input)
             ->checkStep($input, $output)
-            ->setupStep($input, $output)
-        ;
+            ->setupStep($input, $output);
 
         $output->writeln('<info>Sylius has been successfully installed.</info>');
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return $this
+     * @throws \RuntimeException
+     */
     protected function checkStep(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<info>Checking system requirements.</info>');
@@ -49,6 +57,7 @@ class InstallCommand extends ContainerAwareCommand
 
         foreach ($this->getContainer()->get('sylius.requirements') as $collection) {
             $output->writeln(sprintf('<comment>%s</comment>', $collection->getLabel()));
+            /** @var $requirement Requirement */
             foreach ($collection as $requirement) {
                 $output->write($requirement->getLabel());
                 if ($requirement->isFulfilled()) {
@@ -74,6 +83,12 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return $this
+     */
     protected function setupStep(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<info>Setting up database.</info>');
@@ -81,8 +96,7 @@ class InstallCommand extends ContainerAwareCommand
         $this
             ->runCommand('doctrine:database:create', new ArrayInput(['--no-interaction']), $output)
             ->runCommand('doctrine:schema:create', new ArrayInput([['--no-interaction']]), $output)
-            ->runCommand('assetic:dump', new ArrayInput(['--no-interaction']), $output)
-        ;
+            ->runCommand('assetic:dump', new ArrayInput(['--no-interaction']), $output);
 
         $output->writeln('');
 
@@ -95,14 +109,21 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
+    /**
+     * @param string          $command
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return $this
+     * @throws \RuntimeException
+     */
     private function runCommand($command, InputInterface $input, OutputInterface $output)
     {
         $input->setInteractive(false);
         $returnCode = $this
             ->getApplication()
             ->find($command)
-            ->run($input, $output)
-        ;
+            ->run($input, $output);
 
         if ($returnCode !== 0) {
             throw new RuntimeException(sprintf(
@@ -124,20 +145,21 @@ class InstallCommand extends ContainerAwareCommand
      * --no-interaction --with-fixtures     | dont ask, install
      * --no-interaction                     | dont ask, dont install
      *
-     * @param $input InputInterface
+     * @param $input  InputInterface
      * @param $output OutputInterface
      *
      * @throws RuntimeException
      */
     protected function installFixtures(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
 
         if (!$input->isInteractive() && !$input->getOption('with-fixtures')) {
             return;
         }
 
         if ($input->isInteractive() && !$input->getOption('with-fixtures')) {
+            /** @var $dialog DialogHelper */
+            $dialog = $this->getHelperSet()->get('dialog');
             if (!$dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {
                 return;
             }
@@ -153,16 +175,20 @@ class InstallCommand extends ContainerAwareCommand
         $output->writeln('');
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     protected function createAdminUser(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
-
         $userClass = $this->getContainer()->getParameter('sylius.model.user.class');
         $user      = new $userClass;
 
         $output->writeln('<info>Creating administrator account.</info>');
 
         if ($input->isInteractive()) {
+            /** @var $dialog DialogHelper */
+            $dialog   = $this->getHelperSet()->get('dialog');
             $username = $dialog->ask($output, '<question>Username:</question>');
             $password = $dialog->ask($output, '<question>Password:</question>');
             $email    = $dialog->ask($output, '<question>Email:</question>');
@@ -185,5 +211,32 @@ class InstallCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $em->persist($user);
         $em->flush();
+    }
+
+    /**
+     * @param InputInterface $input
+     *
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    protected function checkRequiredArguments(InputInterface $input)
+    {
+        if ($input->getOption('admin-name') === null) {
+            throw new \InvalidArgumentException(
+                'Option --admin-name must be specified when running non-interactive mode'
+            );
+        }
+        if ($input->hasOption('admin-password') === null) {
+            throw new \InvalidArgumentException(
+                'Option --admin-password must be specified when running non-interactive mode'
+            );
+        }
+        if ($input->hasOption('admin-email') === null) {
+            throw new \InvalidArgumentException(
+                'Option --admin-email must be specified when running non-interactive mode'
+            );
+        }
+
+        return $this;
     }
 }
