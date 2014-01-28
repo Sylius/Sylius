@@ -59,7 +59,7 @@ class Order implements OrderInterface
     /**
      * Adjustments.
      *
-     * @var Collection
+     * @var Collection|AdjustmentInterface[]
      */
     protected $adjustments;
 
@@ -440,6 +440,10 @@ class Order implements OrderInterface
         $this->calculateAdjustmentsTotal();
 
         $this->total = $this->itemsTotal + $this->adjustmentsTotal;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
 
         return $this;
     }

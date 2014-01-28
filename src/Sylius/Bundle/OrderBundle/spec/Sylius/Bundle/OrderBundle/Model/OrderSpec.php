@@ -292,6 +292,31 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(70000);
     }
 
+    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
+    {
+        $item->calculateTotal()->shouldBeCalled();
+
+        $item->getTotal()->willReturn(45000);
+
+        $item->equals(Argument::any())->willReturn(false);
+
+        $item->setOrder($this)->shouldBeCalled();
+
+        $adjustment->isNeutral()->willReturn(false);
+        $adjustment->getAmount()->willReturn(-100000);
+
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this
+            ->addItem($item)
+            ->addAdjustment($adjustment)
+        ;
+
+        $this->calculateTotal();
+
+        $this->getTotal()->shouldReturn(0);
+    }
+
     function it_is_not_confirmed_by_default()
     {
         $this->shouldNotBeConfirmed();

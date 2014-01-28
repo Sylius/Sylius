@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\OrderBundle\Generator;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderNumberGeneratorSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface $orderRepository
-     */
-    public function let($orderRepository)
+    public function let(OrderRepositoryInterface $orderRepository)
     {
         $this->beConstructedWith($orderRepository);
     }
@@ -36,10 +36,7 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_generates_000001_number_for_first_order($orderRepository, $order)
+    function it_generates_000001_number_for_first_order($orderRepository, OrderInterface $order)
     {
         $order->getNumber()->willReturn(null);
 
@@ -49,11 +46,7 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
         $this->generate($order);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $lastOrder
-     */
-    function it_generates_a_correct_number_for_following_orders($orderRepository, $order, $lastOrder)
+    function it_generates_a_correct_number_for_following_orders($orderRepository, OrderInterface $order, OrderInterface $lastOrder)
     {
         $order->getNumber()->willReturn(null);
 
@@ -64,10 +57,7 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
         $this->generate($order);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_starts_at_start_number_if_specified($orderRepository, $order)
+    function it_starts_at_start_number_if_specified($orderRepository, OrderInterface $order)
     {
         $this->beConstructedWith($orderRepository, 9, 123);
         $order->getNumber()->willReturn(null);
@@ -76,13 +66,10 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
         $this->generate($order);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\OrderInterface $order
-     */
-    function it_leaves_existing_numbers_alone($order)
+    function it_leaves_existing_numbers_alone(OrderInterface $order)
     {
         $order->getNumber()->willReturn('123');
-        $order->setNumber()->shouldNotBeCalled();
+        $order->setNumber(Argument::any())->shouldNotBeCalled();
 
         $this->generate($order);
     }
