@@ -63,3 +63,11 @@ sylius_backend_order_release_inventory:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.order:releaseInventory
+
+sylius_backend_order_history_create:
+    pattern: /{id}/history/create
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.history:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:createHistory.html.twig

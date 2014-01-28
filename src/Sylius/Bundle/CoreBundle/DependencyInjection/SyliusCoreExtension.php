@@ -43,6 +43,7 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
 
     private $emails = array(
         'order_confirmation',
+        'order_update',
         'customer_welcome'
     );
 

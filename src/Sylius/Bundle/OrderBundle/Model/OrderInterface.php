@@ -175,6 +175,13 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     public function clearItems();
 
     /**
+     * Get order history.
+     *
+     * @return array
+     */
+    public function getHistory();
+
+    /**
      * Get order state.
      *
      * @return string

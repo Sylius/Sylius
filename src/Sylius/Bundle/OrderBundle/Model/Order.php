@@ -121,11 +121,19 @@ class Order implements OrderInterface
     protected $state = OrderInterface::STATE_CART;
 
     /**
+     * History.
+     *
+     * @var Collection
+     */
+    protected $history;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->history = new ArrayCollection();
         $this->adjustments = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -507,6 +515,14 @@ class Order implements OrderInterface
         }
 
         return $quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHistory()
+    {
+        return $this->history;
     }
 
     /**

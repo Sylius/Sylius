@@ -209,39 +209,75 @@
 
 <hr/>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th colspan="7">{{ 'sylius.order.inventory_tracking'|trans }}</th>
-        </tr>
-        <tr>
-            <th>#</th>
-            <th>{{ 'sylius.inventory_unit.sku'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.updated_at'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for unit in order.inventoryUnits %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ unit.stockable.sku }}</td>
-            <td>{{ unit.inventoryName }}</td>
-            <td>{{ unit.inventoryState|humanize }}</td>
-            <td>{{ unit.shippingState|humanize }}</td>
-            <td>{{ unit.createdAt|date }}</td>
-            <td>{{ unit.updatedAt|date }}</td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="7">
-            {{ alerts.info('sylius.inventory_unit.no_results'|trans) }}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan="4">Order History</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for history in order.history|reverse %}
+                <tr>
+                    <td>
+                        <small>
+                            {{ history.createdAt | date }}<br/>
+                            State: {{ misc.state_label(history.state, 'state') }} 
+                            {% if history.notifyCustomer %}
+                            Customer notified<br/>
+                            {% else %}
+                            Customer not notified<br/>
+                            {% endif %}
+                        </small>
+                        {% if history.comment is not empty %}
+                            {{ history.comment }}
+                        {% else %}
+                            No comment
+                        {% endif %}<br/>
+                    </td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td>
+                        {{ render (url('sylius_backend_order_history_create', { 'id': order.id })) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan="7">{{ 'sylius.order.inventory_tracking'|trans }}</th>
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unit in order.inventoryUnits %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ unit.stockable.sku }} - {{ unit.inventoryName }}</td>
+                    <td>{{ unit.inventoryState|humanize }}</td>
+                    <td>{{ unit.shippingState|humanize }}</td>
+                    <td>{{ unit.createdAt|date }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">
+                    {{ alerts.info('sylius.inventory_unit.no_results'|trans) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
