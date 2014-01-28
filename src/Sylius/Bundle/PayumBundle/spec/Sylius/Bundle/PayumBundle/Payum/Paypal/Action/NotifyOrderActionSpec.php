@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
@@ -27,10 +27,10 @@ class NotifyOrderActionSpec extends ObjectBehavior
 {
     function let(
         EventDispatcherInterface $eventDispatcher,
-        EntityManager $em,
+        ObjectManager $objectManager,
         PaymentInterface $payment
     ) {
-        $this->beConstructedWith($eventDispatcher, $em);
+        $this->beConstructedWith($eventDispatcher, $objectManager);
         $this->setPayment($payment);
     }
 
@@ -126,7 +126,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
-        EntityManager $em
+        ObjectManager $objectManager
     ) {
         $request->getModel()->willReturn($order);
         $order->getPayment()->willReturn($paymentModel);
@@ -153,7 +153,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $em->flush()->shouldBeCalled();
+        $objectManager->flush()->shouldBeCalled();
 
         $eventDispatcher
             ->dispatch(

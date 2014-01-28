@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Be2Bill\Api;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Action\PaymentAwareAction;
@@ -45,21 +45,21 @@ class NotifyAction extends PaymentAwareAction
     protected $eventDispatcher;
 
     /**
-     * @var EntityManager
+     * @var ObjectManager
      */
-    protected $em;
+    protected $objectManager;
 
     /**
      * @var string
      */
     protected $identifier;
 
-    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcher $eventDispatcher, EntityManager $em, $identifier)
+    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcher $eventDispatcher, ObjectManager $objectManager, $identifier)
     {
         $this->api             = $api;
         $this->orderRepository = $orderRepository;
         $this->eventDispatcher = $eventDispatcher;
-        $this->em              = $em;
+        $this->objectManager   = $objectManager;
         $this->identifier      = $identifier;
     }
 
@@ -112,7 +112,7 @@ class NotifyAction extends PaymentAwareAction
                 new GenericEvent($payment, array('previous_state' => $previousState))
             );
 
-            $this->em->flush();
+            $this->objectManager->flush();
 
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::POST_STATE_CHANGE,
