@@ -317,34 +317,6 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_is_not_confirmed_by_default()
-    {
-        $this->shouldNotBeConfirmed();
-    }
-
-    function its_confirmation_status_is_activable()
-    {
-        $this->setConfirmed(true);
-        $this->isConfirmed()->shouldReturn(true);
-    }
-
-    function its_confirmation_status_is_mutable()
-    {
-        $this->setConfirmed(false);
-        $this->isConfirmed()->shouldReturn(false);
-    }
-
-    function it_has_no_confirmation_token_by_default()
-    {
-        $this->getConfirmationToken()->shouldReturn(null);
-    }
-
-    function its_confirmation_token_is_mutable()
-    {
-        $this->setConfirmationToken('abc123');
-        $this->getConfirmationToken()->shouldReturn('abc123');
-    }
-
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');

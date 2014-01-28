@@ -118,7 +118,7 @@ class Order implements OrderInterface
      *
      * @var integer
      */
-    protected $state = OrderStates::INITIAL;
+    protected $state = OrderInterface::STATE_CART;
 
     /**
      * Constructor.
@@ -188,42 +188,6 @@ class Order implements OrderInterface
     public function setNumber($number)
     {
         $this->number = $number;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isConfirmed()
-    {
-        return OrderStates::ORDER_CONFIRMED === $this->state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfirmed($confirmed)
-    {
-        $this->state = (Boolean) $confirmed ? OrderStates::ORDER_CONFIRMED : OrderStates::ORDER;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfirmationToken()
-    {
-        return $this->confirmationToken;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfirmationToken($confirmationToken)
-    {
-        $this->confirmationToken = $confirmationToken;
 
         return $this;
     }
