@@ -20,7 +20,7 @@ use Payum\Core\Request\NotifyRequest;
 use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -40,7 +40,7 @@ class NotifyAction extends PaymentAwareAction
     protected $orderRepository;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
@@ -54,7 +54,7 @@ class NotifyAction extends PaymentAwareAction
      */
     protected $identifier;
 
-    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcher $eventDispatcher, ObjectManager $objectManager, $identifier)
+    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager, $identifier)
     {
         $this->api             = $api;
         $this->orderRepository = $orderRepository;
