@@ -17,19 +17,14 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.mailer.customer_welcome.class">Sylius\Bundle\CoreBundle\Mailer\CustomerWelcomeMailer</parameter>
+        <parameter key="sylius.listener.order_comment_email.class">Sylius\Bundle\CoreBundle\EventListener\OrderUpdateEmailListener</parameter>
     </parameters>
 
     <services>
-
-        <service id="sylius.mailer.customer_welcome" class="%sylius.mailer.customer_welcome.class%">
-            <argument type="service" id="sylius.mailer" />
-            <argument type="collection">
-                <argument key="template">%sylius.email.customer_welcome.template%</argument>
-                <argument key="from_email">%sylius.email.customer_welcome.from_email%</argument>
-            </argument>
+        <service id="sylius.listener.order_comment_email" class="%sylius.listener.order_comment_email.class%">
+            <argument type="service" id="sylius.mailer.order_comment" />
+            <tag name="kernel.event_listener" event="sylius.comment.post_create" method="processOrderComment" />
         </service>
-
     </services>
 
 </container>

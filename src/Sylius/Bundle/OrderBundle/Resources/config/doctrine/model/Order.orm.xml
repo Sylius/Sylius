@@ -39,6 +39,12 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many field="comments" target-entity="Sylius\Component\Order\Model\CommentInterface" mapped-by="order" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <field name="itemsTotal" column="items_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
