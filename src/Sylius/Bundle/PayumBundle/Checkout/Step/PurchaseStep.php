@@ -67,13 +67,13 @@ class PurchaseStep extends CheckoutStep
         if ($status->isSuccess()) {
             $type = 'success';
             $msg  = 'sylius.checkout.success';
-        } elseif ($status->isPending()) {
+        } elseif ($status->isPending() || $status->isSuspended()) {
             $type = 'notice';
-            $msg  = 'sylius.checkout.pending';
+            $msg  = 'sylius.checkout.processing';
         } elseif ($status->isCanceled()) {
             $type = 'notice';
             $msg  = 'sylius.checkout.canceled';
-        } elseif ($status->isFailed()) {
+        } elseif ($status->isFailed() || $status->isExpired()) {
             $type = 'error';
             $msg  = 'sylius.checkout.failed';
         } else {
