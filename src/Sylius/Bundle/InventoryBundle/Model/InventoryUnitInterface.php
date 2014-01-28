@@ -24,8 +24,10 @@ interface InventoryUnitInterface extends TimestampableInterface
      * Default states.
      */
     const STATE_CHECKOUT    = 'checkout';
+    const STATE_ONHOLD      = 'onhold';
     const STATE_SOLD        = 'sold';
     const STATE_BACKORDERED = 'backordered';
+    const STATE_RETURNED    = 'returned';
 
     /**
      * Get related stockable object.
