@@ -22,6 +22,7 @@ interface ShipmentInterface extends ShippingSubjectInterface
 {
     // Shipment default states.
     const STATE_CHECKOUT    = 'checkout';
+    const STATE_ONHOLD      = 'onhold';
     const STATE_READY       = 'ready';
     const STATE_PENDING     = 'pending';
     const STATE_DISPATCHED  = 'dispatched';
