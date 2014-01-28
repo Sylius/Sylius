@@ -28,15 +28,11 @@ interface RuleCheckerRegistryInterface
     /**
      * @param string               $name
      * @param RuleCheckerInterface $checker
-     *
-     * @return self
      */
     public function registerChecker($name, RuleCheckerInterface $checker);
 
     /**
      * @param string $name
-     *
-     * @return self
      */
     public function unregisterChecker($name);
 

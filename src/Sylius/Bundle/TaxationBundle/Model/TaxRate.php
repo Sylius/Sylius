@@ -46,14 +46,14 @@ class TaxRate implements TaxRateInterface
      *
      * @var float
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * Is tax included in price?
      *
      * @var Boolean
      */
-    protected $includedInPrice;
+    protected $includedInPrice = false;
 
     /**
      * Calculator name.
@@ -81,9 +81,7 @@ class TaxRate implements TaxRateInterface
      */
     public function __construct()
     {
-        $this->amount = 0;
-        $this->includedInPrice = false;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**

@@ -37,7 +37,7 @@ class InventoryUnit implements InventoryUnitInterface
      *
      * @var string
      */
-    protected $inventoryState;
+    protected $inventoryState = InventoryUnitInterface::STATE_SOLD;
 
     /**
      * Creation time.
@@ -58,8 +58,7 @@ class InventoryUnit implements InventoryUnitInterface
      */
     public function __construct()
     {
-        $this->inventoryState = InventoryUnitInterface::STATE_SOLD;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\Variant as BaseVariant;
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
 
@@ -41,19 +42,19 @@ class Variant extends BaseVariant implements VariantInterface
      *
      * @var integer
      */
-    protected $onHand;
+    protected $onHand = 1;
 
     /**
      * Is variant available on demand?
      *
      * @var Boolean
      */
-    protected $availableOnDemand;
+    protected $availableOnDemand = true;
 
     /**
      * Images.
      *
-     * @var VariantImageInterface[]
+     * @var Collection|VariantImageInterface[]
      */
     protected $images;
 
@@ -92,8 +93,6 @@ class Variant extends BaseVariant implements VariantInterface
     {
         parent::__construct();
 
-        $this->onHand = 1;
-        $this->availableOnDemand = true;
         $this->images = new ArrayCollection();
     }
 

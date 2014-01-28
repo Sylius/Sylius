@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface as VariableTaxonInterface;
 
 /**
@@ -23,7 +24,7 @@ interface TaxonInterface extends VariableTaxonInterface
     /**
      * Get products.
      *
-     * @return ProductInterface[]
+     * @return Collection|ProductInterface[]
      */
     public function getProducts();
 

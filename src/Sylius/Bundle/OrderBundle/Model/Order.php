@@ -54,7 +54,7 @@ class Order implements OrderInterface
      *
      * @var integer
      */
-    protected $itemsTotal;
+    protected $itemsTotal = 0;
 
     /**
      * Adjustments.
@@ -68,7 +68,7 @@ class Order implements OrderInterface
      *
      * @var integer
      */
-    protected $adjustmentsTotal;
+    protected $adjustmentsTotal = 0;
 
     /**
      * Calculated total.
@@ -76,14 +76,14 @@ class Order implements OrderInterface
      *
      * @var integer
      */
-    protected $total;
+    protected $total = 0;
 
     /**
      * Whether order was confirmed.
      *
      * @var Boolean
      */
-    protected $confirmed;
+    protected $confirmed = true;
 
     /**
      * Confirmation token.
@@ -118,7 +118,7 @@ class Order implements OrderInterface
      *
      * @var integer
      */
-    protected $state;
+    protected $state = OrderStates::INITIAL;
 
     /**
      * Constructor.
@@ -126,13 +126,8 @@ class Order implements OrderInterface
     public function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->itemsTotal = 0;
         $this->adjustments = new ArrayCollection();
-        $this->adjustmentsTotal = 0;
-        $this->total = 0;
-        $this->confirmed = true;
         $this->createdAt = new \DateTime();
-        $this->state = OrderStates::INITIAL;
     }
 
     /**
@@ -266,7 +261,7 @@ class Order implements OrderInterface
      */
     public function countItems()
     {
-        return count($this->items);
+        return $this->items->count();
     }
 
     /**
@@ -555,6 +550,6 @@ class Order implements OrderInterface
      */
     public function isEmpty()
     {
-        return 0 === $this->countItems();
+        return $this->items->isEmpty();
     }
 }

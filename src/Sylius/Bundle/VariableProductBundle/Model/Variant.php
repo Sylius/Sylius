@@ -33,7 +33,7 @@ class Variant implements VariantInterface
      *
      * @var Boolean
      */
-    protected $master;
+    protected $master = false;
 
     /**
      * Variant presentation.
@@ -52,7 +52,7 @@ class Variant implements VariantInterface
     /**
      * Option values.
      *
-     * @var OptionValueInterface[]
+     * @var Collection|OptionValueInterface[]
      */
     protected $options;
 
@@ -89,7 +89,6 @@ class Variant implements VariantInterface
      */
     public function __construct()
     {
-        $this->master = false;
         $this->options = new ArrayCollection();
         $this->availableOn = new \DateTime();
         $this->createdAt = new \DateTime();
@@ -212,7 +211,7 @@ class Variant implements VariantInterface
      */
     public function isAvailable()
     {
-        return new \DateTime('now') >= $this->availableOn;
+        return new \DateTime() >= $this->availableOn;
     }
 
     /**

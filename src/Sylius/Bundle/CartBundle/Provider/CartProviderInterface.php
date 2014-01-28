@@ -25,7 +25,7 @@ interface CartProviderInterface
      * Returns true if a cart exists otherwise false.
      * It does not create a new cart if none exists
      *
-     * @return boolean
+     * @return Boolean
      */
     public function hasCart();
 

@@ -71,7 +71,7 @@ class TaxCategory implements TaxCategoryInterface
     public function __construct()
     {
         $this->rates = new ArrayCollection();
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**

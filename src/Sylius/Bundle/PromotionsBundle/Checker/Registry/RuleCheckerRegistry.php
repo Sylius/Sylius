@@ -28,18 +28,19 @@ class RuleCheckerRegistry implements RuleCheckerRegistryInterface
      *
      * @var RuleCheckerInterface[]
      */
-    protected $checkers;
+    protected $checkers = array();
 
-    public function __construct()
-    {
-        $this->checkers = array();
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getCheckers()
     {
         return $this->checkers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function registerChecker($name, RuleCheckerInterface $checker)
     {
         if ($this->hasChecker($name)) {
@@ -49,6 +50,9 @@ class RuleCheckerRegistry implements RuleCheckerRegistryInterface
         $this->checkers[$name] = $checker;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unregisterChecker($name)
     {
         if (!$this->hasChecker($name)) {
@@ -58,11 +62,17 @@ class RuleCheckerRegistry implements RuleCheckerRegistryInterface
         unset($this->checkers[$name]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasChecker($name)
     {
         return isset($this->checkers[$name]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getChecker($name)
     {
         if (!$this->hasChecker($name)) {

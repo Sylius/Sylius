@@ -47,7 +47,7 @@ interface ShippingSubjectInterface
     /**
      * Get collection of unique shippables.
      *
-     * @return Collection
+     * @return Collection|ShippableInterface[]
      */
     public function getShippables();
 }

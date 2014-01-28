@@ -40,7 +40,7 @@ interface PrototypeInterface extends TimestampableInterface
     /**
      * Returns all prototype properties.
      *
-     * @return PropertyInterface[]
+     * @return Collection|PropertyInterface[]
      */
     public function getProperties();
 

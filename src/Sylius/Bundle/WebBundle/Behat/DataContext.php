@@ -60,11 +60,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
      *
      * @var OrderInterface[]
      */
-    protected $orders;
+    protected $orders = array();
 
     public function __construct()
     {
-        $this->orders = array();
         $this->faker = FakerFactory::create();
     }
 
@@ -1236,7 +1235,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                     $configuration[$key] = (int) $value / 100;
                     break;
                 case 'equal':
-                    $configuration[$key] = (boolean) $value;
+                    $configuration[$key] = (Boolean) $value;
                     break;
                 default:
                     break;

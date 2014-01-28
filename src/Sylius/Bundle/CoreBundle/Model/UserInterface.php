@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
@@ -64,7 +64,7 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     /**
      * Get orders.
      *
-     * @return ArrayCollection
+     * @return Collection|OrderInterface
      */
     public function getOrders();
 
@@ -99,7 +99,7 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     /**
      * Get addresses.
      *
-     * @return ArrayCollection
+     * @return Collection|AddressInterface[]
      */
     public function getAddresses();
 
@@ -120,7 +120,7 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     /**
      * Has address?
      *
-     * @param AddressInterface $addresses
+     * @param AddressInterface $address
      *
      * @return Boolean
      */

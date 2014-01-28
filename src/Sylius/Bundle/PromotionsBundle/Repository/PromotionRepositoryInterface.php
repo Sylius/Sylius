@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
@@ -24,7 +25,7 @@ interface PromotionRepositoryInterface extends RepositoryInterface
     /**
      * Finds all active promotions.
      *
-     * @return PromotionInterface[]
+     * @return Collection|PromotionInterface[]
      */
     public function findActive();
 }

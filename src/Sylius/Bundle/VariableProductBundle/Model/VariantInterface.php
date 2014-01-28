@@ -75,7 +75,7 @@ interface VariantInterface extends SoftDeletableInterface, TimestampableInterfac
     /**
      * Returns all option values.
      *
-     * @return OptionValueInterface[]
+     * @return Collection|OptionValueInterface[]
      */
     public function getOptions();
 

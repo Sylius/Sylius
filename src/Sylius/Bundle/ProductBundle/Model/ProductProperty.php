@@ -101,7 +101,7 @@ class ProductProperty implements ProductPropertyInterface
     public function getValue()
     {
         if ($this->property && PropertyTypes::CHECKBOX === $this->property->getType()) {
-            return (boolean) $this->value;
+            return (Boolean) $this->value;
         }
 
         return $this->value;

@@ -26,17 +26,7 @@ class SettingsBuilder extends OptionsResolver implements SettingsBuilderInterfac
      *
      * @var ParameterTransformerInterface[]
      */
-    protected $transformers;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->transformers = array();
-    }
+    protected $transformers = array();
 
     /**
      * {@inheritdoc}

@@ -44,7 +44,7 @@ class ShipmentItem implements ShipmentItemInterface
      *
      * @var string
      */
-    protected $shippingState;
+    protected $shippingState = ShipmentItemInterface::STATE_READY;
 
     /**
      * Creation time.
@@ -65,7 +65,6 @@ class ShipmentItem implements ShipmentItemInterface
      */
     public function __construct()
     {
-        $this->shippingState = ShipmentItemInterface::STATE_READY;
         $this->createdAt = new \DateTime();
     }
 

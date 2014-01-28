@@ -44,7 +44,7 @@ class Coupon implements CouponInterface
      *
      * @var integer
      */
-    protected $used;
+    protected $used = 0;
 
     /**
      * Associated promotion
@@ -59,14 +59,6 @@ class Coupon implements CouponInterface
      * @var \DateTime
      */
     protected $expiresAt;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->used = 0;
-    }
 
     /**
      * Get id
@@ -187,9 +179,7 @@ class Coupon implements CouponInterface
             return false;
         }
 
-        $now = new \DateTime();
-
-        if (null !== $this->expiresAt && $this->expiresAt < $now) {
+        if (null !== $this->expiresAt && $this->expiresAt < new \DateTime()) {
             return false;
         }
 

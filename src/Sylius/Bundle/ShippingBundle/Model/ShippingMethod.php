@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Shipping method model.
@@ -39,14 +40,14 @@ class ShippingMethod implements ShippingMethodInterface
      *
      * @var integer
      */
-    protected $categoryRequirement;
+    protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
     /**
      * Is method enabled?
      *
      * @var Boolean
      */
-    protected $enabled;
+    protected $enabled = true;
 
     /**
      * Name.
@@ -67,12 +68,12 @@ class ShippingMethod implements ShippingMethodInterface
      *
      * @var array
      */
-    protected $configuration;
+    protected $configuration = array();
 
     /**
      * Shipping method rules.
      *
-     * @var RuleInterface[]
+     * @var Collection|RuleInterface[]
      */
     protected $rules;
 
@@ -95,9 +96,6 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function __construct()
     {
-        $this->enabled = true;
-        $this->categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
-        $this->configuration = array();
         $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

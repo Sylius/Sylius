@@ -64,7 +64,7 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
      *
      * @param ShippingSubjectInterface $subject
      * @param ShippingMethodInterface $method
-     * @return bool
+     * @return Boolean
      */
     public function isCategoryEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {

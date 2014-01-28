@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Matcher;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 
@@ -38,7 +39,7 @@ interface ZoneMatcherInterface
      *
      * @param AddressInterface $address
      *
-     * @return ZoneInterface[]
+     * @return Collection|ZoneInterface[]
      */
     public function matchAll(AddressInterface $address);
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
@@ -33,7 +34,7 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      *
      * @var string
      */
-    protected $state;
+    protected $state = ShipmentInterface::STATE_CHECKOUT;
 
     /**
      * Shipping method.
@@ -45,7 +46,7 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     /**
      * Shipment items.
      *
-     * @var ShipmentItemInterface[]
+     * @var Collection|ShipmentItemInterface[]
      */
     protected $items;
 
@@ -75,7 +76,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      */
     public function __construct()
     {
-        $this->state = ShipmentInterface::STATE_CHECKOUT;
         $this->items = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }

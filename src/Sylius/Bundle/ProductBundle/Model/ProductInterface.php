@@ -67,7 +67,7 @@ interface ProductInterface extends SoftDeletableInterface, TimestampableInterfac
     /**
      * Check whether the product is available.
      *
-     * @return boolean
+     * @return Boolean
      */
     public function isAvailable();
 
@@ -116,7 +116,7 @@ interface ProductInterface extends SoftDeletableInterface, TimestampableInterfac
     /**
      * Returns all product product properties.
      *
-     * @return ProductPropertyInterface[]
+     * @return Collection|ProductPropertyInterface[]
      */
     public function getProperties();
 

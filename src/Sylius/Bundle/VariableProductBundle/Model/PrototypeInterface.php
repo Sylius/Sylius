@@ -24,7 +24,7 @@ interface PrototypeInterface extends BasePrototypeInterface
     /**
      * Returns all prototype options.
      *
-     * @return OptionInterface[]
+     * @return Collection|OptionInterface[]
      */
     public function getOptions();
 

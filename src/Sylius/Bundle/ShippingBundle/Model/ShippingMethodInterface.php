@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
@@ -124,7 +125,7 @@ interface ShippingMethodInterface extends TimestampableInterface
     /**
      * Get all rules assigned to this shipping method.
      *
-     * @return RuleInterface[]
+     * @return Collection|RuleInterface[]
      */
     public function getRules();
 

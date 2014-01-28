@@ -20,9 +20,33 @@ use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
  */
 interface PromotionActionRegistryInterface
 {
+    /**
+     * @return PromotionActionInterface[]
+     */
     public function getActions();
+
+    /**
+     * @param string                   $name
+     * @param PromotionActionInterface $action
+     */
     public function registerAction($name, PromotionActionInterface $action);
+
+    /**
+     * @param string $name
+     */
     public function unregisterAction($name);
+
+    /**
+     * @param string $name
+     *
+     * @return Boolean
+     */
     public function hasAction($name);
+
+    /**
+     * @param string $name
+     *
+     * @return PromotionActionInterface
+     */
     public function getAction($name);
 }

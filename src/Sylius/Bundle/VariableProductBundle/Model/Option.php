@@ -47,7 +47,7 @@ class Option implements OptionInterface
     /**
      * Values that option can have.
      *
-     * @var OptionValueInterface[]
+     * @var Collection|OptionValueInterface[]
      */
     protected $values;
 

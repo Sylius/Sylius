@@ -38,7 +38,7 @@ class Prototype implements PrototypeInterface
     /**
      * Product properties.
      *
-     * @var Collection
+     * @var Collection|PropertyInterface[]
      */
     protected $properties;
 

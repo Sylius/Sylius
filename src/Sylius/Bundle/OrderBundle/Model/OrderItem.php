@@ -40,14 +40,14 @@ class OrderItem implements OrderItemInterface
      *
      * @var integer
      */
-    protected $quantity;
+    protected $quantity = 1;
 
     /**
      * Unit price.
      *
      * @var integer
      */
-    protected $unitPrice;
+    protected $unitPrice = 0;
 
     /**
      * Total adjustments.
@@ -61,25 +61,21 @@ class OrderItem implements OrderItemInterface
      *
      * @var integer
      */
-    protected $adjustmentsTotal;
+    protected $adjustmentsTotal = 0;
 
     /**
      * Order item total.
      *
      * @var integer
      */
-    protected $total;
+    protected $total = 0;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->quantity = 1;
-        $this->unitPrice = 0;
         $this->adjustments = new ArrayCollection();
-        $this->adjustmentsTotal = 0;
-        $this->total = 0;
     }
 
     /**

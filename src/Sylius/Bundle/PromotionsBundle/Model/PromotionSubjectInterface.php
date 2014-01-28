@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionsBundle\Model;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Promotion subject interface.
@@ -46,7 +46,8 @@ interface PromotionSubjectInterface
      * Has Promotion
      *
      * @param PromotionInterface $promotion
-     * @return bool
+     *
+     * @return Boolean
      */
     public function hasPromotion(PromotionInterface $promotion);
 
@@ -54,6 +55,7 @@ interface PromotionSubjectInterface
      * Add Promotion
      *
      * @param PromotionInterface $promotion
+     *
      * @return self
      */
     public function addPromotion(PromotionInterface $promotion);
@@ -62,6 +64,7 @@ interface PromotionSubjectInterface
      * Remove Promotion
      *
      * @param PromotionInterface $promotion
+     *
      * @return self
      */
     public function removePromotion(PromotionInterface $promotion);
@@ -69,7 +72,7 @@ interface PromotionSubjectInterface
     /**
      * Get Promotions
      *
-     * @return PromotionInterface[]
+     * @return Collection|PromotionInterface[]
      */
     public function getPromotions();
 }

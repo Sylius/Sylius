@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Payments model.
@@ -46,14 +47,14 @@ class Payment implements PaymentInterface
      *
      * @var integer
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * State.
      *
      * @var string
      */
-    protected $state;
+    protected $state = PaymentInterface::STATE_NEW;
 
     /**
      * Credit card as a source.
@@ -65,7 +66,7 @@ class Payment implements PaymentInterface
     /**
      * Processing logs.
      *
-     * @var PaymentLogInterface[]
+     * @var Collection|PaymentLogInterface[]
      */
     protected $logs;
 
@@ -86,18 +87,15 @@ class Payment implements PaymentInterface
     /**
      * @var array
      */
-    protected $details;
+    protected $details = array();
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->amount = 0;
-        $this->state = PaymentInterface::STATE_NEW;
         $this->logs = new ArrayCollection();
-        $this->createdAt = new \DateTime('now');
-        $this->details = array();
+        $this->createdAt = new \DateTime();
     }
 
     /**

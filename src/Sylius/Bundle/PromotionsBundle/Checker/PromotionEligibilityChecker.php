@@ -84,7 +84,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionInterface        $promotion
      * @param RuleInterface             $rule
      *
-     * @return bool
+     * @return Boolean
      */
     private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
@@ -106,7 +106,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return bool
+     * @return Boolean
      */
     private function isEligibleToDates(PromotionInterface $promotion)
     {
@@ -132,7 +132,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return bool
+     * @return Boolean
      */
     private function isEligibleToUsageLimit(PromotionInterface $promotion)
     {
@@ -152,7 +152,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
-     * @return bool
+     * @return Boolean
      */
     private function isSubjectEligibleToCoupon(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
@@ -175,7 +175,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
-     * @return bool
+     * @return Boolean
      */
     private function isCouponEligibleToPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {

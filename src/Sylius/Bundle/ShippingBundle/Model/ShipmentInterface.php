@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ShippingBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Shipment interface.
  *
@@ -57,7 +59,7 @@ interface ShipmentInterface extends ShippingSubjectInterface
     /**
      * Get shipment items.
      *
-     * @return ShipmentItemInterface[]
+     * @return Collection|ShipmentItemInterface[]
      */
     public function getItems();
 
