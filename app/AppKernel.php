@@ -9,10 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\ClassLoader\DebugUniversalClassLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Debug\ErrorHandler;
-use Symfony\Component\HttpKernel\Debug\ExceptionHandler;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
@@ -91,27 +88,6 @@ class AppKernel extends Kernel
         $bundles = $this->addFixturesBundle($bundles);
 
         return $bundles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function init()
-    {
-        if ($this->debug) {
-            ini_set('display_errors', 1);
-            error_reporting(-1);
-
-            DebugUniversalClassLoader::enable();
-            ErrorHandler::register();
-            if ('cli' !== php_sapi_name()) {
-                ExceptionHandler::register();
-            }
-        } else {
-            ini_set('display_errors', 0);
-        }
-
-        ini_set('date.timezone', 'UTC');
     }
 
     /**

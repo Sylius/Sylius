@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 /*
@@ -27,6 +28,9 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
 }
 
 require_once __DIR__.'/../app/bootstrap.php.cache';
+
+Debug::enable();
+
 require_once __DIR__.'/../app/AppKernel.php';
 
 // Initialize kernel and run the application.
