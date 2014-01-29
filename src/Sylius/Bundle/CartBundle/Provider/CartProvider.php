@@ -82,6 +82,8 @@ class CartProvider implements CartProviderInterface
      */
     public function hasCart()
     {
+        $this->initializeCart();
+
         return null !== $this->cart;
     }
 
@@ -90,14 +92,10 @@ class CartProvider implements CartProviderInterface
      */
     public function getCart()
     {
+        $this->initializeCart();
+
         if (null !== $this->cart) {
             return $this->cart;
-        }
-
-        $cartIdentifier = $this->storage->getCurrentCartIdentifier();
-
-        if ($cartIdentifier && $cart = $this->getCartByIdentifier($cartIdentifier)) {
-            return $this->cart = $cart;
         }
 
         $this->cart = $this->repository->createNew();
@@ -138,5 +136,18 @@ class CartProvider implements CartProviderInterface
     protected function getCartByIdentifier($identifier)
     {
         return $this->repository->find($identifier);
+    }
+
+    /**
+     * Tries to initialize cart if there is data in storage.
+     */
+    private function initializeCart()
+    {
+        if (null === $this->cart) {
+            $cartIdentifier = $this->storage->getCurrentCartIdentifier();
+            if ($cartIdentifier) {
+                $this->cart = $this->getCartByIdentifier($cartIdentifier);
+            }
+        }
     }
 }
