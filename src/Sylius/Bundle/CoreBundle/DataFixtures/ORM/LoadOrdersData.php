@@ -14,9 +14,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -43,16 +45,7 @@ class LoadOrdersData extends DataFixture
                 $order->addItem($item);
             }
 
-            /* @var $shipment ShipmentInterface */
-            $shipment = $this->getShipmentRepository()->createNew();
-            $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
-            $shipment->setState($this->getShipmentState());
-
-            foreach ($order->getInventoryUnits() as $item) {
-                $shipment->addItem($item);
-            }
-
-            $order->addShipment($shipment);
+            $this->createShipment($order);
 
             $order->setNumber(str_pad((int) $i, 9, 0, STR_PAD_LEFT));
             $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
@@ -66,14 +59,7 @@ class LoadOrdersData extends DataFixture
             $order->calculateTotal();
             $order->complete();
 
-            /* @var $payment PaymentInterface */
-            $payment = $this->getPaymentRepository()->createNew();
-            $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
-            $payment->setAmount($order->getTotal());
-            $payment->setCurrency($order->getCurrency());
-            $payment->setState($this->getPaymentState());
-
-            $order->setPayment($payment);
+            $this->createPayment($order);
 
             $this->setReference('Sylius.Order-'.$i, $order);
 
@@ -106,13 +92,40 @@ class LoadOrdersData extends DataFixture
         return $address;
     }
 
+    private function createPayment(OrderInterface $order)
+    {
+        /* @var $payment PaymentInterface */
+        $payment = $this->getPaymentRepository()->createNew();
+        $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
+        $payment->setAmount($order->getTotal($order));
+        $payment->setCurrency($order->getCurrency());
+        $payment->setState($this->getPaymentState());
+
+        $order->setPayment($payment);
+
+        $this->get('event_dispatcher')->dispatch(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, new GenericEvent($order));
+    }
+
+    private function createShipment(OrderInterface $order)
+    {
+        /* @var $shipment ShipmentInterface */
+        $shipment = $this->getShipmentRepository()->createNew();
+        $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
+        $shipment->setState($this->getShipmentState());
+
+        foreach ($order->getInventoryUnits() as $item) {
+            $shipment->addItem($item);
+        }
+
+        $order->addShipment($shipment);
+    }
+
     private function dispatchEvents($order)
     {
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
-        $dispatcher->dispatch('sylius.checkout.shipping.pre_complete', new GenericEvent($order));
-        $dispatcher->dispatch('sylius.order.pre_create', new GenericEvent($order));
-        $dispatcher->dispatch('sylius.checkout.finalize.pre_complete', new GenericEvent($order));
+        $dispatcher->dispatch(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, new GenericEvent($order));
+        $dispatcher->dispatch(SyliusOrderEvents::PRE_CREATE, new GenericEvent($order));
     }
 
     private function getPaymentState()
