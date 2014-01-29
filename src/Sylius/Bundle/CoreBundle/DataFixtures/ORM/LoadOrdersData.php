@@ -61,22 +61,18 @@ class LoadOrdersData extends DataFixture
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
 
-            $this->dispatchEvents($order);
-
-            $order->calculateTotal();
-            $order->complete();
-
             /* @var $payment PaymentInterface */
             $payment = $this->getPaymentRepository()->createNew();
             $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
             $payment->setAmount($order->getTotal());
             $payment->setCurrency($order->getCurrency());
             $payment->setState($this->getPaymentState());
-
             $order->setPayment($payment);
+            $this->dispatchEvents($order);
+            $order->calculateTotal();
+            $order->complete();
 
             $this->setReference('Sylius.Order-'.$i, $order);
-
             $manager->persist($order);
         }
 
