@@ -1,0 +1,29 @@
+Sylius\Bundle\AddressingBundle\Model\Province:
+    exclusion_policy: ALL
+    xml_root_name: province
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_province_show
+                parameters:
+                    countryId: expr(object.geCountry().getId())
+                    id: expr(object.getId())
+        - rel: country
+          href:
+                route: sylius_api_country_show
+                parameters:
+                    id: expr(object.geCountry().getId())
