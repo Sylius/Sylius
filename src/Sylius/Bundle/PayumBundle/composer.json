@@ -26,12 +26,13 @@
     "require": {
         "php":                    ">=5.3.3",
 
-        "sylius/order-bundle":    "1.0.*@dev",
-        "sylius/core-bundle":     "1.0.*@dev",
-        "sylius/payments-bundle": "1.0.*@dev",
-        "sylius/resource-bundle": "1.0.*@dev",
-        "payum/payum-bundle":     "~0.7.3@dev",
-        "payum/payum":            "~0.7.2@dev"
+        "doctrine/doctrine-bundle": "~1.3",
+        "sylius/order-bundle":      "1.0.*@dev",
+        "sylius/core-bundle":       "1.0.*@dev",
+        "sylius/payments-bundle":   "1.0.*@dev",
+        "sylius/resource-bundle":   "1.0.*@dev",
+        "payum/payum-bundle":       "~0.7.3@dev",
+        "payum/payum":              "~0.7.2@dev"
     },
     "config": {
         "bin-dir": "bin"
