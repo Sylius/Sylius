@@ -16,7 +16,7 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 interface ImageInterface extends TimestampableInterface
 {
     /**
-     * @return boolean
+     * @return Boolean
      */
     public function hasFile();
 

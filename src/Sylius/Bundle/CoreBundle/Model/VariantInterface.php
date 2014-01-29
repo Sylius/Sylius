@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
@@ -39,7 +40,7 @@ interface VariantInterface extends BaseVariantInterface, ShippableInterface, Sto
     /**
      * Get images.
      *
-     * @return VariantImageInterface[]
+     * @return Collection|VariantImageInterface[]
      */
     public function getImages();
 
@@ -70,14 +71,39 @@ interface VariantInterface extends BaseVariantInterface, ShippableInterface, Sto
      * @return integer
      */
     public function getWeight();
+
+    /**
+     * @param integer $weight
+     */
     public function setWeight($weight);
 
+    /**
+     * @return integer
+     */
     public function getWidth();
+
+    /**
+     * @param integer $width
+     */
     public function setWidth($width);
 
+    /**
+     * @return integer
+     */
     public function getHeight();
+
+    /**
+     * @param integer $height
+     */
     public function setHeight($height);
 
+    /**
+     * @return integer
+     */
     public function getDepth();
+
+    /**
+     * @param integer $depth
+     */
     public function setDepth($depth);
 }

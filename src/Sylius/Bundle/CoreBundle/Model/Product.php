@@ -54,7 +54,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * Taxons.
      *
-     * @var Collection
+     * @var Collection|TaxonInterface[]
      */
     protected $taxons;
 

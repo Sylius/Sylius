@@ -15,8 +15,31 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 interface ExchangeRateInterface extends TimestampableInterface
 {
+    /**
+     * Get currency
+     *
+     * @return string
+     */
     public function getCurrency();
+
+    /**
+     * Set currency
+     *
+     * @param string $currency
+     */
     public function setCurrency($currency);
+
+    /**
+     * Get rate
+     *
+     * @return float
+     */
     public function getRate();
+
+    /**
+     * Set rate
+     *
+     * @param float $rate
+     */
     public function setRate($rate);
 }

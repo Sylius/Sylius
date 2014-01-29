@@ -37,7 +37,7 @@ class ResourceEvent extends GenericEvent
     /**
      * Indicate if an error has been detected
      *
-     * @var boolean
+     * @var Boolean
      */
     protected $error = false;
 
@@ -65,7 +65,7 @@ class ResourceEvent extends GenericEvent
     /**
      * Get error property
      *
-     * @return boolean $error
+     * @return Boolean $error
      */
     public function isStopped()
     {

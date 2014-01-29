@@ -52,7 +52,7 @@ class Cart extends Order implements CartInterface
      */
     public function isExpired()
     {
-        return $this->getExpiresAt() < new \DateTime('now');
+        return $this->getExpiresAt() < new \DateTime();
     }
 
     /**

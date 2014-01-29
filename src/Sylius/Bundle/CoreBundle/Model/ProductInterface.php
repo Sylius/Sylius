@@ -33,7 +33,9 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
     public function getSku();
 
     /**
-     * {@inheritdoc}
+     * Set product SKU.
+     *
+     * @param string $sku
      */
     public function setSku($sku);
 
@@ -68,7 +70,7 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
     /**
      * Get taxons.
      *
-     * @return Collection
+     * @return Collection|TaxonInterface[]
      */
     public function getTaxons();
 
@@ -145,7 +147,7 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
     /**
      * Get all product images.
      *
-     * @return Collection
+     * @return Collection|ImageInterface[]
      */
     public function getImages();
 

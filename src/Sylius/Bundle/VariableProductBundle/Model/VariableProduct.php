@@ -25,14 +25,14 @@ class VariableProduct extends Product implements VariableProductInterface
     /**
      * Product variants.
      *
-     * @var VariantInterface[]
+     * @var Collection|VariantInterface[]
      */
     protected $variants;
 
     /**
      * Product options.
      *
-     * @var OptionInterface[]
+     * @var Collection|OptionInterface[]
      */
     protected $options;
 
@@ -92,6 +92,8 @@ class VariableProduct extends Product implements VariableProductInterface
                 return $variant;
             }
         }
+
+        return null;
     }
 
     /**

@@ -43,7 +43,7 @@ class Country implements CountryInterface
     protected $isoName;
 
     /**
-     * @var ProvinceInterface[]
+     * @var Collection|ProvinceInterface[]
      */
     protected $provinces;
 

@@ -37,7 +37,7 @@ class Locale implements LocaleInterface
      *
      * @var Boolean
      */
-    protected $enabled;
+    protected $enabled = true;
 
     /**
      * Creation date
@@ -55,7 +55,6 @@ class Locale implements LocaleInterface
 
     public function __construct()
     {
-        $this->enabled = true;
         $this->createdAt = new \DateTime();
     }
 

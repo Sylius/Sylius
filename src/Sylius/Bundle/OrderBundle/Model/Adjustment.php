@@ -58,7 +58,7 @@ class Adjustment implements AdjustmentInterface
      *
      * @var integer
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * Is adjustment neutral?
@@ -66,7 +66,7 @@ class Adjustment implements AdjustmentInterface
      *
      * @var Boolean
      */
-    protected $neutral;
+    protected $neutral = false;
 
     /**
      * Creation time.
@@ -87,8 +87,6 @@ class Adjustment implements AdjustmentInterface
      */
     public function __construct()
     {
-        $this->amount = 0;
-        $this->neutral = false;
         $this->createdAt = new \DateTime();
     }
 

@@ -84,7 +84,7 @@ class SyliusCartExtension extends \Twig_Extension
     /**
      * Check if a cart exists.
      *
-     * @return boolean
+     * @return Boolean
      */
     public function hasCart()
     {

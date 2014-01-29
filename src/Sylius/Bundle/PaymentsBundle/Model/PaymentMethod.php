@@ -30,7 +30,7 @@ class PaymentMethod implements PaymentMethodInterface
      *
      * @var Boolean
      */
-    protected $enabled;
+    protected $enabled = true;
 
     /**
      * Name.
@@ -79,8 +79,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function __construct()
     {
-        $this->enabled = true;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTime();
     }
 
     /**

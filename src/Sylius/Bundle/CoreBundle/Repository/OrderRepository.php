@@ -106,7 +106,7 @@ class OrderRepository extends CartRepository
      *
      * @param array   $criteria
      * @param array   $sorting
-     * @param boolean $deleted
+     * @param Boolean $deleted
      *
      * @return PagerfantaInterface
      */

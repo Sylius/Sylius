@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
@@ -82,7 +83,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all tax adjustments.
      *
-     * @return Collection
+     * @return Collection|AdjustmentInterface[]
      */
     public function getTaxAdjustments();
 
@@ -101,7 +102,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all promotion adjustments.
      *
-     * @return Collection
+     * @return Collection|AdjustmentInterface[]
      */
     public function getPromotionAdjustments();
 
@@ -120,7 +121,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all shipping adjustments.
      *
-     * @return Collection
+     * @return Collection|AdjustmentInterface[]
      */
     public function getShippingAdjustments();
 
@@ -153,7 +154,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all inventory units.
      *
-     * @return InventoryUnitInterface[]
+     * @return Collection|InventoryUnitInterface[]
      */
     public function getInventoryUnits();
 
@@ -162,7 +163,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      *
      * @param VariantInterface $variant
      *
-     * @return InventoryUnitInterface[]
+     * @return Collection|InventoryUnitInterface[]
      */
     public function getInventoryUnitsByVariant(VariantInterface $variant);
 
@@ -192,7 +193,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all shipments associated with this order.
      *
-     * @return ShipmentInterface[]
+     * @return Collection|ShipmentInterface[]
      */
     public function getShipments();
 

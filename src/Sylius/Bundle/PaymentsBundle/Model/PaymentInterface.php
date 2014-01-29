@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PaymentsBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
@@ -113,7 +114,7 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Get processing logs.
      *
-     * @return PaymentLogInterface[]
+     * @return Collection|PaymentLogInterface[]
      */
     public function getLogs();
 

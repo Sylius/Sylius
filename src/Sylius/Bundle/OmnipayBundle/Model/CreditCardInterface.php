@@ -22,6 +22,8 @@ interface CreditCardInterface
      * Transform any credit card model into an array matching Omnipay
      * format and naming conventions.
      *
+     * @param array $map
+     *
      * @return array
      */
     public function transformToOmnipay(array $map);

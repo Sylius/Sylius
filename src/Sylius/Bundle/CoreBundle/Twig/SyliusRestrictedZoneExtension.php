@@ -44,7 +44,7 @@ class SyliusRestrictedZoneExtension extends \Twig_Extension
     /**
      * @param ProductInterface $product
      *
-     * @return boolean
+     * @return Boolean
      */
     public function isRestricted(ProductInterface $product)
     {

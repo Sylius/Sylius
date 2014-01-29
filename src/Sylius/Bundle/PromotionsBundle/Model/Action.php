@@ -37,7 +37,7 @@ class Action implements ActionInterface
      *
      * @var array
      */
-    protected $configuration;
+    protected $configuration = array();
 
     /**
      * The promotion associated with this action
@@ -45,14 +45,6 @@ class Action implements ActionInterface
      * @var PromotionInterface
      */
     protected $promotion;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->configuration = array();
-    }
 
     /**
      * Get id

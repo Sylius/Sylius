@@ -51,7 +51,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Shipments for this order.
      *
-     * @var Collection
+     * @var Collection|ShipmentInterface[]
      */
     protected $shipments;
 
@@ -65,7 +65,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Inventory units.
      *
-     * @var Collection
+     * @var Collection|InventoryUnitInterface[]
      */
     protected $inventoryUnits;
 

@@ -28,18 +28,19 @@ class PromotionActionRegistry implements PromotionActionRegistryInterface
      *
      * @var PromotionActionInterface[]
      */
-    protected $actions;
+    protected $actions = array();
 
-    public function __construct()
-    {
-        $this->actions = array();
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getActions()
     {
         return $this->actions;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function registerAction($name, PromotionActionInterface $action)
     {
         if ($this->hasAction($name)) {
@@ -49,6 +50,9 @@ class PromotionActionRegistry implements PromotionActionRegistryInterface
         $this->actions[$name] = $action;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unregisterAction($name)
     {
         if (!$this->hasAction($name)) {
@@ -58,11 +62,17 @@ class PromotionActionRegistry implements PromotionActionRegistryInterface
         unset($this->actions[$name]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasAction($name)
     {
         return isset($this->actions[$name]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAction($name)
     {
         if (!$this->hasAction($name)) {

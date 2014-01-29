@@ -28,15 +28,7 @@ class CalculatorRegistry implements CalculatorRegistryInterface
      *
      * @var CalculatorInterface[]
      */
-    protected $calculators;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->calculators = array();
-    }
+    protected $calculators = array();
 
     /**
      * {@inheritdoc}

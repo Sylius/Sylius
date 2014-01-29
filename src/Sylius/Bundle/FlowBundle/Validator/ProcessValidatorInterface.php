@@ -44,7 +44,7 @@ interface ProcessValidatorInterface
     /**
      * Check validation
      *
-     * @return boolean
+     * @return Boolean
      */
     public function isValid();
 

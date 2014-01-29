@@ -24,17 +24,9 @@ class DelegatingCalculator implements CalculatorInterface
     /**
      * Calculators hash by name.
      *
-     * @var array
+     * @var CalculatorInterface[]
      */
-    protected $calculators;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->calculators = array();
-    }
+    protected $calculators = array();
 
     /**
      * Get all calculators.

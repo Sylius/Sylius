@@ -73,7 +73,7 @@ class CouponGenerator implements CouponGeneratorInterface
     /**
      * @param string $code
      *
-     * @return boolean
+     * @return Boolean
      */
     protected function isUsedCode($code)
     {

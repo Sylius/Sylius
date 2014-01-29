@@ -45,11 +45,17 @@ class User extends BaseUser implements UserInterface
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCurrency($currency)
     {
         $this->currency = $currency;
@@ -130,9 +136,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Get orders
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getOrders()
     {
@@ -140,10 +144,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Set billingAddress
-     *
-     * @param  AddressInterface $billingAddress
-     * @return User
+     * {@inheritdoc}
      */
     public function setBillingAddress(AddressInterface $billingAddress = null)
     {
@@ -157,9 +158,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Get billingAddress
-     *
-     * @return AddressInterface
+     * {@inheritdoc}
      */
     public function getBillingAddress()
     {
@@ -167,10 +166,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Set shippingAddress
-     *
-     * @param  AddressInterface $shippingAddress
-     * @return User
+     * {@inheritdoc}
      */
     public function setShippingAddress(AddressInterface $shippingAddress = null)
     {
@@ -184,9 +180,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Get shippingAddress
-     *
-     * @return AddressInterface
+     * {@inheritdoc}
      */
     public function getShippingAddress()
     {
@@ -194,10 +188,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Add address
-     *
-     * @param  AddressInterface $address
-     * @return User
+     * {@inheritdoc}
      */
     public function addAddress(AddressInterface $address)
     {
@@ -209,9 +200,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Remove address
-     *
-     * @param AddressInterface $address
+     * {@inheritdoc}
      */
     public function removeAddress(AddressInterface $address)
     {
@@ -221,10 +210,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Has address
-     *
-     * @param  AddressInterface $address
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasAddress(AddressInterface $address)
     {
@@ -232,9 +218,7 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Get addresses
-     *
-     * @return AddressInterface[]
+     * {@inheritdoc}
      */
     public function getAddresses()
     {

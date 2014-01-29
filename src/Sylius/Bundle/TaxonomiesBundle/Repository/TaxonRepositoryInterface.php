@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 
@@ -21,7 +22,7 @@ interface TaxonRepositoryInterface
      *
      * @param $taxonomy TaxonomyInterface
      *
-     * @return TaxonInterface[]
+     * @return Collection|TaxonInterface[]
      */
     public function getTaxonsAsList(TaxonomyInterface $taxonomy);
 }

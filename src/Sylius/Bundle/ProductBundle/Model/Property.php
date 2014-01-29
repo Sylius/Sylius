@@ -34,9 +34,10 @@ class Property implements PropertyInterface
 
     /**
      * Type.
+     *
      * @var string
      */
-    protected $type;
+    protected $type = PropertyTypes::TEXT;
 
     /**
      * Presentation.
@@ -51,7 +52,7 @@ class Property implements PropertyInterface
      *
      * @var array
      */
-    protected $configuration;
+    protected $configuration = array();
 
     /**
      * Creation time.
@@ -70,8 +71,6 @@ class Property implements PropertyInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->type = PropertyTypes::TEXT;
-        $this->configuration = array();
     }
 
     /**
@@ -126,11 +125,17 @@ class Property implements PropertyInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setType($type)
     {
         $this->type = $type;
@@ -138,11 +143,17 @@ class Property implements PropertyInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getConfiguration()
     {
         return $this->configuration;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;

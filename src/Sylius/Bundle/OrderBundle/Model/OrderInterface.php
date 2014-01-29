@@ -93,7 +93,7 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     /**
      * Get order items.
      *
-     * @return OrderItemInterface[] An array or collection of OrderItemInterface
+     * @return Collection|OrderItemInterface[] An array or collection of OrderItemInterface
      */
     public function getItems();
 
