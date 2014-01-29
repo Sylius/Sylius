@@ -53,7 +53,7 @@ class StatusRequest extends BaseStatusRequest
      */
     public function markSuspended()
     {
-        $this->status = PaymentInterface::STATE_VOID;
+        $this->status = PaymentInterface::STATE_PROCESSING;
     }
 
     /**
@@ -61,7 +61,7 @@ class StatusRequest extends BaseStatusRequest
      */
     public function isSuspended()
     {
-        return $this->status === PaymentInterface::STATE_VOID;
+        return $this->status === PaymentInterface::STATE_PROCESSING;
     }
 
     /**
@@ -85,7 +85,7 @@ class StatusRequest extends BaseStatusRequest
      */
     public function markCanceled()
     {
-        $this->status = PaymentInterface::STATE_VOID;
+        $this->status = PaymentInterface::STATE_CANCELLED;
     }
 
     /**
@@ -93,7 +93,7 @@ class StatusRequest extends BaseStatusRequest
      */
     public function isCanceled()
     {
-        return $this->status === PaymentInterface::STATE_VOID;
+        return $this->status === PaymentInterface::STATE_CANCELLED;
     }
 
     /**
@@ -101,7 +101,7 @@ class StatusRequest extends BaseStatusRequest
      */
     public function markPending()
     {
-        $this->status = PaymentInterface::STATE_PENDING;
+        $this->status = PaymentInterface::STATE_PROCESSING;
     }
 
     /**
@@ -109,7 +109,7 @@ class StatusRequest extends BaseStatusRequest
      */
     public function isPending()
     {
-        return $this->status === PaymentInterface::STATE_PENDING;
+        return $this->status === PaymentInterface::STATE_PROCESSING;
     }
 
     /**

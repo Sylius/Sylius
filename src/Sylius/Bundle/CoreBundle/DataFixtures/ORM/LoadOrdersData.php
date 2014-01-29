@@ -118,7 +118,6 @@ class LoadOrdersData extends DataFixture
     private function getPaymentState()
     {
         return array_rand(array_flip(array(
-            PaymentInterface::STATE_CHECKOUT,
             PaymentInterface::STATE_COMPLETED,
             PaymentInterface::STATE_FAILED,
             PaymentInterface::STATE_NEW,
@@ -126,6 +125,8 @@ class LoadOrdersData extends DataFixture
             PaymentInterface::STATE_PROCESSING,
             PaymentInterface::STATE_UNKNOWN,
             PaymentInterface::STATE_VOID,
+            PaymentInterface::STATE_CANCELLED,
+            PaymentInterface::STATE_REFUNDED,
         )));
     }
 

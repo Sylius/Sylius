@@ -212,11 +212,11 @@ class PurchaseStepSpec extends ObjectBehavior
         );
 
         $translator
-            ->trans('sylius.checkout.pending', array(), 'flashes')
+            ->trans('sylius.checkout.processing', array(), 'flashes')
             ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.pending')
+            ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.pending')->shouldBeCalled();
+        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
 
         $cartProvider->getCart()->willReturn($order);
         $cartProvider->abandonCart()->shouldBeCalled();
@@ -308,11 +308,11 @@ class PurchaseStepSpec extends ObjectBehavior
         );
 
         $translator
-            ->trans('sylius.checkout.canceled', array(), 'flashes')
+            ->trans('sylius.checkout.processing', array(), 'flashes')
             ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.canceled')
+            ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
+        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
 
         $cartProvider->getCart()->willReturn($order);
         $cartProvider->abandonCart()->shouldBeCalled();

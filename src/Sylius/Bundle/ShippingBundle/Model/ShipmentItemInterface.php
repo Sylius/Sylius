@@ -24,7 +24,6 @@ interface ShipmentItemInterface extends TimestampableInterface
     const STATE_READY    = 'ready';
     const STATE_PENDING  = 'pending';
     const STATE_SHIPPED  = 'shipped';
-    const STATE_RETURNED = 'returned';
 
     /**
      * Get shipment.
