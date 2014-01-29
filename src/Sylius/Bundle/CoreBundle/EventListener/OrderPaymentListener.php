@@ -13,6 +13,10 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessorInterface;
+use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -30,13 +34,25 @@ class OrderPaymentListener
     protected $paymentProcessor;
 
     /**
+     * @var EntityRepository
+     */
+    protected $orderRepository;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $dispatcher;
+
+    /**
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
      */
-    public function __construct(PaymentProcessorInterface $paymentProcessor)
+    public function __construct(PaymentProcessorInterface $paymentProcessor, EntityRepository $orderRepository, EventDispatcherInterface $dispatcher)
     {
         $this->paymentProcessor = $paymentProcessor;
+        $this->orderRepository  = $orderRepository;
+        $this->dispatcher       = $dispatcher;
     }
 
     /**
@@ -44,7 +60,7 @@ class OrderPaymentListener
      *
      * @param GenericEvent $event
      */
-    public function processOrderPayment(GenericEvent $event)
+    public function createOrderPayment(GenericEvent $event)
     {
         $order = $event->getSubject();
 
@@ -55,5 +71,27 @@ class OrderPaymentListener
         }
 
         $this->paymentProcessor->createPayment($order);
+    }
+
+    public function updateOrderOnPayment(GenericEvent $event)
+    {
+        $payment = $event->getSubject();
+
+        if (!$payment instanceof PaymentInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                'Order payment listener requires event subject to be instance of "Sylius\Bundle\PaymentsBundle\Model\PaymentInterface", %s given.',
+                is_object($payment) ? get_class($payment) : gettype($payment)
+            ));
+        }
+
+        $order = $this->orderRepository->findOneBy(array('payment' => $payment));
+
+        if (null === $order) {
+            throw new \Exception(sprinf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
+        }
+
+        if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
+            $this->dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, new GenericEvent($order, $event->getArguments()));
+        }
     }
 }

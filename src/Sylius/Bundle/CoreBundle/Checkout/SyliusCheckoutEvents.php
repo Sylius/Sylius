@@ -18,6 +18,10 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
  */
 final class SyliusCheckoutEvents
 {
+    const SECURITY_INITIALIZE   = 'sylius.checkout.security.initialize';
+    const SECURITY_PRE_COMPLETE = 'sylius.checkout.security.pre_complete';
+    const SECURITY_COMPLETE     = 'sylius.checkout.security.complete';
+
     const ADDRESSING_INITIALIZE   = 'sylius.checkout.addressing.initialize';
     const ADDRESSING_PRE_COMPLETE = 'sylius.checkout.addressing.pre_complete';
     const ADDRESSING_COMPLETE     = 'sylius.checkout.addressing.complete';

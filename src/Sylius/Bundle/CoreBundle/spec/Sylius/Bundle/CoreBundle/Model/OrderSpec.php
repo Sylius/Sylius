@@ -235,9 +235,9 @@ class OrderSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('PLN');
     }
 
-    function it_has_ready_shipping_state_by_default()
+    function it_has_checkout_shipping_state_by_default()
     {
-        $this->getShippingState()->shouldReturn(OrderShippingStates::READY);
+        $this->getShippingState()->shouldReturn(OrderShippingStates::CHECKOUT);
     }
 
     function its_shipping_state_is_mutable()

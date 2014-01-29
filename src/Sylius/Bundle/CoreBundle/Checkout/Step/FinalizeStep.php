@@ -66,8 +66,7 @@ class FinalizeStep extends CheckoutStep
     {
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
-        $order->complete();
-
+        
         $manager = $this->get('sylius.manager.order');
         $manager->persist($order);
         $manager->flush();

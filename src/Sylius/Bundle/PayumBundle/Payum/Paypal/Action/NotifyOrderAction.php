@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredNotifyRequest;
@@ -29,11 +30,17 @@ class NotifyOrderAction extends PaymentAwareAction
     protected $eventDispatcher;
 
     /**
+     * @var ObjectManager
+     */
+    protected $objectManager;
+
+    /**
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager)
     {
         $this->eventDispatcher = $eventDispatcher;
+        $this->objectManager   = $objectManager;
     }
 
     /**
@@ -62,6 +69,8 @@ class NotifyOrderAction extends PaymentAwareAction
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
                 new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
             );
+
+            $this->objectManager->flush();
 
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::POST_STATE_CHANGE,

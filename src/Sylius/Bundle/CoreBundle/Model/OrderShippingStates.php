@@ -18,6 +18,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
  */
 final class OrderShippingStates
 {
+    const CHECKOUT          = 'checkout';
     const READY             = 'ready';
     const BACKORDER         = 'backorder';
     const DISPATCHED        = 'dispatched';

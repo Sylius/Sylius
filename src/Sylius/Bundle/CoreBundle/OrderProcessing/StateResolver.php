@@ -27,6 +27,7 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
+        $order->setPaymentState($order->getPayment()->getState());
     }
 
     /**
