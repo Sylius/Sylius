@@ -2026,6 +2026,10 @@
         <source>sylius.stockable.on_hand</source>
         <target>stock level</target>
       </trans-unit>
+      <trans-unit id="f508f517cacabab8f2c79fd522c96911" resname="sylius.stockable.on_hold">
+        <source>sylius.stockable.on_hold</source>
+        <target>on hold</target>
+      </trans-unit>
       <trans-unit id="5be631b3a5ed175fa93c98a86aea64a8" resname="sylius.stockable.sku">
         <source>sylius.stockable.sku</source>
         <target>sku</target>

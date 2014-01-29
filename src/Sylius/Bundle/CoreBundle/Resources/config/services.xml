@@ -64,7 +64,7 @@
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
-        
+
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Bundle\CoreBundle\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Bundle\CoreBundle\Promotion\Checker\UserLoyalityRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Bundle\CoreBundle\Promotion\Checker\ShippingCountryRuleChecker</parameter>
@@ -73,7 +73,7 @@
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\AddProductAction</parameter>
-        
+
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
@@ -227,7 +227,8 @@
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="updateInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="createInventoryUnits" priority="-100" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
@@ -382,7 +383,7 @@
             <argument type="service" id="sylius.repository.variant" />
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>
-        
+
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
             <argument type="service" id="sylius.repository.variant" />
