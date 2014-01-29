@@ -87,7 +87,7 @@ class OrderPaymentListener
         $order = $this->orderRepository->findOneBy(array('payment' => $payment));
 
         if (null === $order) {
-            throw new \Exception(sprinf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
+            throw new \Exception(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
         }
 
         if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
