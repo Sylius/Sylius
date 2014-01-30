@@ -209,6 +209,20 @@ class Configuration
         return $this->get('arguments', $default);
     }
 
+    public function getFactoryMethod($default)
+    {
+        $factory = $this->get('factory', array('method' => $default));
+
+        return is_array($factory) ? $factory['method'] : $factory;
+    }
+
+    public function getFactoryArguments(array $default = array())
+    {
+        $factory = $this->get('factory', array());
+
+        return isset($factory['arguments']) ? $factory['arguments'] : $default;
+    }
+
     public function getFlashMessage($message = null)
     {
         $message = sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);

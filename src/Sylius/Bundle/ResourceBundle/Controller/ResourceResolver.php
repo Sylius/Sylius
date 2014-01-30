@@ -40,4 +40,18 @@ class ResourceResolver
 
         return call_user_func_array($callable, $arguments);
     }
+
+    /**
+     * Create resource.
+     *
+     * @param RepositoryInterface $repository
+     * @param Configuration       $configuration
+     */
+    public function createResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
+    {
+        $callable = array($repository, $this->config->getFactoryMethod($defaultMethod));
+        $arguments = $this->config->getFactoryArguments($defaultArguments);
+
+        return call_user_func_array($callable, $arguments);
+    }
 }

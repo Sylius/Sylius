@@ -24,11 +24,20 @@ class DoctrinePHPCRFactory extends AbstractFactory
         $pattern = $prefix.'.%s.'.$resourceName;
         $documentManagerId = 'doctrine_phpcr.odm.document_manager';
 
+        $configuration = new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        $configuration
+            ->setFactoryService('sylius.controller.configuration_factory')
+            ->setFactoryMethod('createConfiguration')
+            ->setArguments(array($prefix, $resourceName, $templates))
+            ->setPublic(false)
+        ;
         $controller = new Definition($classes['controller']);
         $controller
-            ->setArguments(array($prefix, $resourceName, $templates))
+            ->setArguments(array($configuration))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
+
+        $this->container->setDefinition(sprintf($pattern, 'controller'), $controller);
 
         $managerId = sprintf($pattern, 'manager');
         $this->container->setDefinition(sprintf($pattern, 'controller'), $controller);

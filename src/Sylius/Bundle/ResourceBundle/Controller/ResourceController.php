@@ -159,10 +159,7 @@ class ResourceController extends FOSRestController
 
     public function createNew()
     {
-        return $this
-            ->getRepository()
-            ->createNew()
-        ;
+        return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
     }
 
     public function getForm($resource = null)
@@ -172,11 +169,7 @@ class ResourceController extends FOSRestController
 
     public function findOr404(array $criteria = null)
     {
-        if (empty($criteria)) {
-            $criteria = $this->config->getCriteria() ?: array('id' => $this->getRequest()->get('id'));
-        }
-
-        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($criteria))) {
+        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($this->config->getCriteria()))) {
             throw new NotFoundHttpException(sprintf('Requested %s does not exist.', $this->config->getResourceName()));
         }
 
