@@ -60,6 +60,21 @@ class OrderController extends ResourceController
         ));
     }
 
+    /**
+     * @return Symfony\Component\HttpFoundation\Response
+     * @throws Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function releaseInventory()
+    {
+        $order = $this->findOr404();
+
+        $this->get('sylius.order_processing.inventory_handler')->releaseInventory($order);
+
+        $this->update($order);
+
+        return $this->redirectToReferer();
+    }
+
     private function getFormFactory()
     {
         return $this->get('form.factory');

@@ -1158,6 +1158,10 @@
         <source>sylius.order.shipments</source>
         <target>Shipments</target>
       </trans-unit>
+      <trans-unit id="bd1abb2f477836c03a17eb0398e509ed" resname="sylius.order.release_inventory">
+        <source>sylius.order.release_inventory</source>
+        <target>Release inventory</target>
+      </trans-unit>
       <trans-unit id="87e600739dd24c17844e39b4e26c7568" resname="sylius.order.shipping_address">
         <source>sylius.order.shipping_address</source>
         <target>Shipping address</target>

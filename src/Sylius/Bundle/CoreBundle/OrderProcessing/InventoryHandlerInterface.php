@@ -41,6 +41,13 @@ interface InventoryHandlerInterface
     public function holdInventory(OrderInterface $order);
 
     /**
+     * Release inventory.
+     *
+     * @param OrderInterface $order
+     */
+    public function releaseInventory(OrderInterface $order);
+
+    /**
      * Update the inventory state accordingly.
      *
      * @param OrderInterface $order
