@@ -53,49 +53,24 @@ Feature: Shipments
           And I am on the shipment index page
          Then I should see "There are no shipments"
 
+    @javascript
     Scenario: Deleting shipment
         Given I am on the shipment page with method "DHL"
          When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the shipment index page
-          And I should see "Shipment has been successfully deleted."
-
-    @javascript
-    Scenario: Deleting shipment with js modal
-        Given I am on the shipment page with method "DHL"
-         When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the shipment index page
           And I should see "Shipment has been successfully deleted."
 
+    @javascript
     Scenario: Deleted shipment disappears from the list
         Given I am on the shipment page with method "DHL"
          When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the shipment index page
-          And I should not see shipment with name "DHL" in that list
-
-    @javascript
-    Scenario: Deleted shipment disappears from the list with js modal
-        Given I am on the shipment page with method "DHL"
-         When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the shipment index page
           And I should not see shipment with name "DHL" in that list
 
-    Scenario: Deleting shipment from the list
-        Given I am on the shipment index page
-         When I click "delete" near "DHL"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the shipment index page
-          And "Shipment has been successfully deleted." should appear on the page
-          But I should not see shipment with name "DHL" in that list
-
     @javascript
-    Scenario: Deleting shipment from the list with js modal
+    Scenario: Deleting shipment from the list
         Given I am on the shipment index page
          When I click "delete" near "DHL"
           And I click "delete" from the confirmation modal

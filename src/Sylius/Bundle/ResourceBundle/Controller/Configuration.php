@@ -55,7 +55,7 @@ class Configuration
         $this->request = $request;
 
         $parameters = $request->attributes->get('_sylius', array());
-        $parameters = $this->parser->parse($parameters, $request);
+        $this->parser->parse($parameters, $request);
 
         $this->parameters = $parameters;
     }

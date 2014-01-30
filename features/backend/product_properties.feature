@@ -67,17 +67,8 @@ Feature: Product properties
          Then I should still be on the property index page
           And I should see "Property has been successfully updated."
 
-    Scenario: Deleted property disappears from the list
-        Given I am on the property index page
-         When I click "delete" near "T-Shirt fabric"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the property index page
-          And I should see "Property has been successfully deleted."
-          And I should not see property with name "T-Shirt fabric" in that list
-
     @javascript
-    Scenario: Deleted property disappears from the list with js modal
+    Scenario: Deleted property disappears from the list
         Given I am on the property index page
          When I click "delete" near "T-Shirt fabric"
           And I click "delete" from the confirmation modal
