@@ -9,12 +9,11 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Checkout\Step;
+namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
