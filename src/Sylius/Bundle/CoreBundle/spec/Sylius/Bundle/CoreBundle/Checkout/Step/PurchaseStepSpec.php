@@ -9,11 +9,9 @@
 * file that was distributed with this source code.
 */
 
-namespace spec\Sylius\Bundle\PayumBundle\Checkout\Step;
+namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
-use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
@@ -24,13 +22,14 @@ use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PaymentsBundle\Model\Payment;
+use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\TranslatorInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class PurchaseStepSpec extends ObjectBehavior
 {
@@ -74,7 +73,7 @@ class PurchaseStepSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PayumBundle\Checkout\Step\PurchaseStep');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Checkout\Step\PurchaseStep');
     }
 
     function it_extends_checkout_step()
