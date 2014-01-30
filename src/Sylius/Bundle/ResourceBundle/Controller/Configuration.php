@@ -135,15 +135,21 @@ class Configuration
         return $redirect;
     }
 
-    public function getRedirectParameters()
+    public function getRedirectParameters($resource)
     {
         $redirect = $this->get('redirect');
 
         if (null === $redirect || !is_array($redirect)) {
-            return array();
+            $redirect = array('parameters' => array());
         }
 
-        return $redirect['parameters'];
+        $parameters = $redirect['parameters'];
+
+        if (null !== $resource) {
+            $parameters = $this->parser->process($parameters, $resource);
+        }
+
+        return $parameters;
     }
 
     public function getLimit()
@@ -174,7 +180,7 @@ class Configuration
 
     public function getCriteria()
     {
-        $defaultCriteria = $this->get('criteria', array());
+        $defaultCriteria = $this->get('criteria', array('id' => $this->request->get('id')));
 
         if ($this->isFilterable()) {
             return array_merge($defaultCriteria, $this->request->get('criteria', array()));

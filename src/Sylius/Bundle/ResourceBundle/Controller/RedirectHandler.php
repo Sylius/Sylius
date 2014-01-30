@@ -32,11 +32,7 @@ class RedirectHandler
 
     public function redirectTo($resource)
     {
-        $parameters = $this->config->getRedirectParameters();
-
-        if (empty($parameters)) {
-            $parameters['id'] = $resource->getId();
-        }
+        $parameters = $this->config->getRedirectParameters($resource);
 
         return $this->redirectToRoute(
             $this->config->getRedirectRoute('show'),
