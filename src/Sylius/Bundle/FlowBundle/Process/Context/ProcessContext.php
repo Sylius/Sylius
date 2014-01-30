@@ -14,9 +14,8 @@ namespace Sylius\Bundle\FlowBundle\Process\Context;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
-
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Process context.
@@ -299,6 +298,14 @@ class ProcessContext implements ProcessContextInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setNextStepByName($stepName)
+    {
+        $this->nextStep = $this->process->getStepByName($stepName);
+    }
+
+    /**
      * If context was not initialized, throw exception.
      *
      * @throws \RuntimeException
@@ -320,13 +327,5 @@ class ProcessContext implements ProcessContextInterface
         $totalSteps = $this->process->countSteps();
 
         $this->progress = floor(($currentStepIndex + 1) / $totalSteps * 100);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setNextStepByName($stepName)
-    {
-        $this->nextStep = $this->process->getStepByName($stepName);
     }
 }

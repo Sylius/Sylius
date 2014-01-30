@@ -36,12 +36,21 @@ class BuildRuleFormListener implements EventSubscriberInterface
      */
     private $factory;
 
+    /**
+     * Constructor.
+     *
+     * @param RuleCheckerRegistryInterface $checkerRegistry
+     * @param FormFactoryInterface         $factory
+     */
     public function __construct(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {
         $this->checkerRegistry = $checkerRegistry;
         $this->factory = $factory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -50,30 +59,45 @@ class BuildRuleFormListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * Add the checker configuration if any.
+     *
+     * @param FormEvent $event
+     */
     public function preSetData(FormEvent $event)
     {
         $rule = $event->getData();
-        $form = $event->getForm();
 
         if (null === $rule || null === $rule->getId()) {
             return;
         }
 
-        $this->addConfigurationFields($form, $rule->getType(), $rule->getConfiguration());
+        $this->addConfigurationFields($event->getForm(), $rule->getType(), $rule->getConfiguration());
     }
 
+    /**
+     * Add the checker configuration if any.
+     *
+     * @param FormEvent $event
+     */
     public function preBind(FormEvent $event)
     {
         $data = $event->getData();
-        $form = $event->getForm();
 
         if (empty($data) || !array_key_exists('type', $data)) {
             return;
         }
 
-        $this->addConfigurationFields($form, $data['type']);
+        $this->addConfigurationFields($event->getForm(), $data['type']);
     }
 
+    /**
+     * Add the checker configuration fields.
+     *
+     * @param FormInterface $form
+     * @param string        $ruleType
+     * @param array         $data
+     */
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
     {
         $checker = $this->checkerRegistry->getChecker($ruleType);

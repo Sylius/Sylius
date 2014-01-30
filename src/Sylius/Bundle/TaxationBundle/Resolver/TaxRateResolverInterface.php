@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\TaxationBundle\Resolver;
 
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
+use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
 
 /**
  * Tax rate resolver interface.

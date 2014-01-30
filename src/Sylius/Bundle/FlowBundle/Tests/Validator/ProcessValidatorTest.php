@@ -1,15 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\FlowBundle\Tests\Validator;
 
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
-use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Sylius\Bundle\FlowBundle\Tests\Fixtures\Render;
+use Sylius\Bundle\FlowBundle\Tests\Fixtures\TestStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\TemplateReference;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\PhpEngine;
 
 class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -100,27 +107,5 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertSame($response->getContent(), $message);
-    }
-}
-
-class TestStep extends ControllerStep
-{
-    public function displayAction(ProcessContextInterface $context)
-    {
-        // pufff.
-    }
-}
-
-class Render extends PhpEngine
-{
-    public function renderResponse($view, array $parameters = array(), Response $response = null)
-    {
-        if (null === $response) {
-            $response = new Response();
-        }
-
-        $response->setContent($this->render($view, $parameters));
-
-        return $response;
     }
 }

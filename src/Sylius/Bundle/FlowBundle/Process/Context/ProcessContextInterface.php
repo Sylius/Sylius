@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Context;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Interface for process context.
@@ -77,6 +76,8 @@ interface ProcessContextInterface
 
     /**
      * Override the default next step.
+     *
+     * @param string $stepAlias
      */
     public function setNextStepByName($stepAlias);
 
@@ -130,7 +131,7 @@ interface ProcessContextInterface
     /**
      * The array contains the history of all the step names.
      *
-     * @return array()
+     * @return array
      */
     public function getStepHistory();
 

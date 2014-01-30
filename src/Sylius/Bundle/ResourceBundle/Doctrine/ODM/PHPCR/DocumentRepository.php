@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR;
 
 use Doctrine\ODM\PHPCR\DocumentRepository as BaseDocumentRepository;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
-use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
+use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * Doctrine PHPCR-ODM driver document repository.

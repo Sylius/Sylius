@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 
 /**

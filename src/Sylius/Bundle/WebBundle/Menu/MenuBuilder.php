@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\WebBundle\Menu;
 
+use JMS\TranslationBundle\Annotation\Ignore;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use JMS\TranslationBundle\Annotation\Ignore;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Abstract menu builder.

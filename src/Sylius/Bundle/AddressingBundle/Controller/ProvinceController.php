@@ -42,9 +42,7 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
-        if (!$country = $this->getCountryRepository()->find($countryId)) {
-            throw new NotFoundHttpException('Requested country does not exist.');
-        }
+        $country = $this->findCountryOr404($countryId);
 
         if (!$country->hasProvinces()) {
             return new JsonResponse(array('content' => false));
@@ -64,21 +62,36 @@ class ProvinceController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    protected function createNew(Request $request)
     {
-        if (null === $countryId = $this->getRequest()->get('countryId')) {
-            throw new NotFoundHttpException('No country given');
-        }
+        $country = $this->findCountryOr404($request->get('countryId'));
 
-        $country = $this
-            ->getCountryController()
-            ->findOr404(array('id' => $countryId))
-        ;
-
-        $province = parent::createNew();
+        $province = parent::createNew($request);
         $province->setCountry($country);
 
         return $province;
+    }
+
+    /**
+     * Get country entity.
+     *
+     * @param integer $id
+     *
+     * @return CountryInterface
+     *
+     * @throws NotFoundHttpException
+     */
+    protected function findCountryOr404($id)
+    {
+        if (!$id) {
+            throw new NotFoundHttpException('No country id given.');
+        }
+
+        if (!$country = $this->getCountryRepository()->find($id)) {
+            throw new NotFoundHttpException('Requested country does not exist.');
+        }
+
+        return $country;
     }
 
     /**

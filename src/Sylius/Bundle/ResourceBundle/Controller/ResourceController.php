@@ -12,13 +12,13 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Base resource controller for Sylius.
@@ -51,28 +51,13 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * Get configuration with the bound request.
-     *
-     * @return Configuration
-     */
-    public function getConfiguration()
-    {
-        $this->configuration->load($this->getRequest());
-
-        return $this->configuration;
-    }
-
-    /**
      * Get collection (paginated by default) of resources.
      */
     public function indexAction(Request $request)
     {
-        $config = $this->getConfiguration();
-
-        $criteria = $config->getCriteria();
-        $sorting = $config->getSorting();
-
-        $pluralName = $config->getPluralResourceName();
+        $config     = $this->getConfiguration();
+        $criteria   = $config->getCriteria();
+        $sorting    = $config->getSorting();
         $repository = $this->getRepository();
 
         if ($config->isPaginated()) {
@@ -95,7 +80,7 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('index.html'))
-            ->setTemplateVar($pluralName)
+            ->setTemplateVar($config->getPluralResourceName())
             ->setData($resources)
         ;
 
@@ -105,7 +90,7 @@ class ResourceController extends FOSRestController
     /**
      * Get single resource by its identifier.
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
         $config = $this->getConfiguration();
 
@@ -113,7 +98,7 @@ class ResourceController extends FOSRestController
             ->view()
             ->setTemplate($config->getTemplate('show.html'))
             ->setTemplateVar($config->getResourceName())
-            ->setData($this->findOr404())
+            ->setData($this->findOr404($request))
         ;
 
         return $this->handleView($view);
@@ -124,7 +109,7 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $resource = $this->createNew();
+        $resource = $this->createNew($request);
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
@@ -160,7 +145,7 @@ class ResourceController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
-        $resource = $this->findOr404();
+        $resource = $this->findOr404($request);
         $form = $this->getForm($resource);
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
@@ -196,10 +181,9 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
+        $resource = $this->findOr404($request);
+
         $config = $this->getConfiguration();
-
-        $resource = $this->findOr404();
-
         if ($request->request->get('confirmed', false)) {
             $event = $this->delete($resource);
 
@@ -224,7 +208,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($request->isXmlHttpRequest()) {
-            throw new AccessDeniedHttpException;
+            throw new AccessDeniedException();
         }
 
         $view = $this
@@ -233,19 +217,6 @@ class ResourceController extends FOSRestController
         ;
 
         return $this->handleView($view);
-    }
-
-    /**
-     * Use repository to create a new resource object.
-     *
-     * @return object
-     */
-    public function createNew()
-    {
-        return $this
-            ->getRepository()
-            ->createNew()
-        ;
     }
 
     /**
@@ -277,88 +248,78 @@ class ResourceController extends FOSRestController
         );
     }
 
-    protected function redirectToReferer()
+    /**
+     * Get configuration with the bound request.
+     *
+     * @return Configuration
+     */
+    protected function getConfiguration()
     {
-        return $this->handleView($this->redirectView($this->getRequest()->headers->get('referer')));
+        $this->configuration->load($this->getRequest());
+
+        return $this->configuration;
     }
 
-    public function redirectToIndex()
+    protected function create($resource)
     {
-        $config = $this->getConfiguration();
-
-        return $this->redirectToRoute($config->getRedirectRoute('index'), $config->getRedirectParameters());
+        return $this->persistAndFlush($resource, 'create');
     }
 
-    public function redirectToRoute($route, array $data = array())
+    protected function update($resource)
     {
-        if ('referer' === $route) {
-            return $this->redirectToReferer();
-        }
-
-        return $this->handleView($this->redirectView($this->generateUrl($route, $data)));
+        return $this->persistAndFlush($resource, 'update');
     }
 
-    public function getManager()
+    protected function delete($resource)
     {
-        return $this->getService('manager');
+        return $this->removeAndFlush($resource);
     }
 
-    public function create($resource)
+    protected function persistAndFlush($resource, $type)
     {
-        $event = $this->dispatchEvent('pre_create', $resource);
+        $event = $this->dispatchEvent('pre_'.$type, $resource);
+
         if (!$event->isStopped()) {
-            $this->persistAndFlush($resource);
+            $manager = $this->getManager();
+            $manager->persist($resource);
+
+            $this->dispatchEvent($type, $resource);
+
+            $manager->flush();
+
+            $this->dispatchEvent('post_'.$type, $resource);
         }
 
         return $event;
     }
 
-    public function update($resource)
-    {
-        $event = $this->dispatchEvent('pre_update', $resource);
-        if (!$event->isStopped()) {
-            $this->persistAndFlush($resource, 'update');
-        }
-
-        return $event;
-    }
-
-    public function delete($resource)
+    protected function removeAndFlush($resource)
     {
         $event = $this->dispatchEvent('pre_delete', $resource);
+
         if (!$event->isStopped()) {
-            $this->removeAndFlush($resource);
+            $manager = $this->getManager();
+            $manager->remove($resource);
+
+            $this->dispatchEvent('delete', $resource);
+
+            $manager->flush();
+
+            $this->dispatchEvent('post_delete', $resource);
         }
 
         return $event;
     }
 
-    public function persistAndFlush($resource, $action = 'create')
-    {
-        $manager = $this->getManager();
-
-        $manager->persist($resource);
-        $this->dispatchEvent($action, $resource);
-        $manager->flush();
-        $this->dispatchEvent(sprintf('post_%s', $action), $resource);
-    }
-
-    public function removeAndFlush($resource)
-    {
-        $manager = $this->getManager();
-
-        $manager->remove($resource);
-        $this->dispatchEvent('delete', $resource);
-        $manager->flush();
-        $this->dispatchEvent('post_delete', $resource);
-    }
-
-    public function getRepository()
-    {
-        return $this->getService('repository');
-    }
-
-    public function findOr404(array $criteria = null)
+    /**
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return mixed
+     *
+     * @throws NotFoundHttpException
+     */
+    protected function findOr404(Request $request, array $criteria = null)
     {
         $config = $this->getConfiguration();
 
@@ -367,7 +328,7 @@ class ResourceController extends FOSRestController
         }
 
         if (empty($criteria)) {
-            $criteria = array('id' => $this->getRequest()->get('id'));
+            $criteria = array('id' => $request->get('id'));
         }
 
         $repository = $this->getRepository();
@@ -379,7 +340,22 @@ class ResourceController extends FOSRestController
         return $resource;
     }
 
-    public function renderResponse($templateName, array $parameters = array())
+    /**
+     * Use repository to create a new resource object.
+     *
+     * @param Request $request
+     *
+     * @return object
+     */
+    protected function createNew(Request $request)
+    {
+        return $this
+            ->getRepository()
+            ->createNew()
+        ;
+    }
+
+    protected function renderResponse($templateName, array $parameters = array())
     {
         return $this->render($this->getConfiguration()->getTemplate($templateName), $parameters);
     }
@@ -390,7 +366,7 @@ class ResourceController extends FOSRestController
      * @param string       $name
      * @param Event|object $eventOrResource
      */
-    public function dispatchEvent($name, $eventOrResource)
+    protected function dispatchEvent($name, $eventOrResource)
     {
         if (!$eventOrResource instanceof Event) {
             $name = $this->getConfiguration()->getEventName($name);
@@ -444,8 +420,39 @@ class ResourceController extends FOSRestController
         return $this->resolver;
     }
 
+    protected function getManager()
+    {
+        return $this->getService('manager');
+    }
+
+    protected function getRepository()
+    {
+        return $this->getService('repository');
+    }
+
     protected function getService($name)
     {
         return $this->get($this->getConfiguration()->getServiceName($name));
+    }
+
+    protected function redirectToReferer()
+    {
+        return $this->handleView($this->redirectView($this->getRequest()->headers->get('referer')));
+    }
+
+    protected function redirectToIndex()
+    {
+        $config = $this->getConfiguration();
+
+        return $this->redirectToRoute($config->getRedirectRoute('index'), $config->getRedirectParameters());
+    }
+
+    protected function redirectToRoute($route, array $data = array())
+    {
+        if ('referer' === $route) {
+            return $this->redirectToReferer();
+        }
+
+        return $this->handleView($this->redirectView($this->generateUrl($route, $data)));
     }
 }

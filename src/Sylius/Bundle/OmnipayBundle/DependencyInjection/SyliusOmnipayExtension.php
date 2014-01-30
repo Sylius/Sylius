@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 
+use Omnipay\Common\Helper;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Omnipay\Common\Helper;
 
 /**
  * Payments dependency injection extension.

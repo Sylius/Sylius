@@ -15,6 +15,7 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -26,6 +27,10 @@ class AddressController extends ResourceController
 {
     /**
      * Get collection of user's addresses.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -45,10 +50,14 @@ class AddressController extends ResourceController
 
     /**
      * Create new address or just display the form.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function createAction(Request $request)
     {
-        $resource = $this->createNew();
+        $resource = $this->createNew($request);
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
@@ -84,19 +93,19 @@ class AddressController extends ResourceController
     /**
      * Set an address as default billing address for the current user.
      *
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
-    public function setAsDefaultBillingAddressAction()
+    public function setAsDefaultBillingAddressAction(Request $request)
     {
-        $address = $this->findOr404();
+        $address = $this->findOr404($request);
         $this->accessOr403($address);
 
-        $manager = $this->getUserManager();
         $user = $this->getUser();
-
         $user->setBillingAddress($address);
-        $manager->persist($user);
-        $manager->flush();
+
+        $this->persistAndFlush($user, 'update');
 
         $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.billing.success'));
 
@@ -106,31 +115,23 @@ class AddressController extends ResourceController
     /**
      * Set an address as shipping billing address for the current user.
      *
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
-    public function setAsDefaultShippingAddressAction()
+    public function setAsDefaultShippingAddressAction(Request $request)
     {
-        $address = $this->findOr404();
+        $address = $this->findOr404($request);
         $this->accessOr403($address);
 
-        $manager = $this->getUserManager();
         $user = $this->getUser();
-
         $user->setShippingAddress($address);
-        $manager->persist($user);
-        $manager->flush();
+
+        $this->persistAndFlush($user, 'update');
 
         $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.shipping.success'));
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
-    }
-
-    /**
-     * @return object
-     */
-    private function getUserManager()
-    {
-        return $this->get('sylius.manager.user');
     }
 
     /**

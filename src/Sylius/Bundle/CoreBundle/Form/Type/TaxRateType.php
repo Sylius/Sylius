@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType as BaseTaxRateType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Tax rate form type, extended with zone selection field.

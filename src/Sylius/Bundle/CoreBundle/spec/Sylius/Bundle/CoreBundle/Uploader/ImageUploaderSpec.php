@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Uploader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
 {

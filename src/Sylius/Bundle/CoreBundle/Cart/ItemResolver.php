@@ -14,14 +14,15 @@ namespace Sylius\Bundle\CoreBundle\Cart;
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
 
 /**
  * Item resolver for cart bundle.
@@ -41,7 +42,7 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Form factory.
      *
-     * @var FormFactory
+     * @var FormFactoryInterface
      */
     private $formFactory;
 
@@ -63,13 +64,13 @@ class ItemResolver implements ItemResolverInterface
      * Constructor.
      *
      * @param RepositoryInterface            $productRepository
-     * @param FormFactory                    $formFactory
+     * @param FormFactoryInterface           $formFactory
      * @param AvailabilityCheckerInterface   $availabilityChecker
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      */
     public function __construct(
         RepositoryInterface            $productRepository,
-        FormFactory                    $formFactory,
+        FormFactoryInterface           $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker
     )
@@ -99,7 +100,7 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Error while trying to add item to cart');
         }
 
-        /* @var $product Product */
+        /* @var $product ProductInterface */
         if (!$product = $this->productRepository->find($id)) {
             throw new ItemResolvingException('Requested product was not found');
         }
@@ -108,7 +109,7 @@ class ItemResolver implements ItemResolverInterface
         $form = $this->formFactory->create('sylius_cart_item', null, array('product' => $product));
 
         $form->submit($request);
-        /* @var $item OrderItem */
+        /* @var $item OrderItemInterface */
         $item = $form->getData();
 
         // If our product has no variants, we simply set the master variant of it.
@@ -139,11 +140,11 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Check if variant is available in stock.
      *
-     * @param VariantInterface $variant
+     * @param StockableInterface $variant
      *
      * @return Boolean
      */
-    protected function isStockAvailable(VariantInterface $variant)
+    protected function isStockAvailable(StockableInterface $variant)
     {
         return $this->availabilityChecker->isStockAvailable($variant);
     }

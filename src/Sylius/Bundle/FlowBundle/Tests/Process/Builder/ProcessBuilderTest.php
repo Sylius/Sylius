@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Builder;
 
-use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilder;
+use Sylius\Bundle\FlowBundle\Tests\Fixtures\TestProcessBuilder;
 
 /**
  * ProcessBuilder test.
@@ -56,7 +56,7 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotAddWithoutProcess()
     {
-        $process = $this->getMock('Sylius\Bundle\FlowBundle\Process\ProcessInterface');
+        $this->getMock('Sylius\Bundle\FlowBundle\Process\ProcessInterface');
 
         $this->builder->registerStep('new', $this->getStep('somename'));
         $this->builder->add('somename', 'new');
@@ -279,16 +279,5 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue('forwardActionResponse'));
 
         return $step;
-    }
-}
-
-class TestProcessBuilder extends ProcessBuilder
-{
-    /**
-     * Method getProcess exists only in TestProcessBuilder to allow testing
-     */
-    public function getProcess()
-    {
-        return $this->process;
     }
 }

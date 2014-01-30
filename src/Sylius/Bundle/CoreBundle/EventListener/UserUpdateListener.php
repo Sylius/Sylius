@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -22,13 +22,24 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class UserUpdateListener
 {
+    /**
+     * @var UserManagerInterface
+     */
     protected $userManager;
 
+    /**
+     * @param UserManagerInterface $userManager
+     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }
 
+    /**
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
     public function processUser(GenericEvent $event)
     {
         $user = $event->getSubject();

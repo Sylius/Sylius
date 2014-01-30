@@ -59,7 +59,7 @@ class SyliusShippingBundle extends Bundle
         $container->addCompilerPass(new RegisterRuleCheckersPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\ShippingBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\ShippingBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_shipping.driver.doctrine/orm'));

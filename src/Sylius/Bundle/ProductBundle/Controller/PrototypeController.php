@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\ProductBundle\Controller;
 
+use Sylius\Bundle\ProductBundle\Builder\PrototypeBuilderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Tests\Controller;
-use Sylius\Bundle\ProductBundle\Builder\PrototypeBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -36,10 +35,10 @@ class PrototypeController extends ResourceController
      */
     public function buildAction(Request $request, $id)
     {
-        $prototype = $this->findOr404(array('id' => $id));
+        $prototype = $this->findOr404($request, array('id' => $id));
         $productController = $this->getProductController();
 
-        $product = $productController->createNew();
+        $product = $productController->createNew($request);
 
         $this
             ->getBuilder()
@@ -69,7 +68,7 @@ class PrototypeController extends ResourceController
     /**
      * Get product controller.
      *
-     * @return Controller
+     * @return ResourceController
      */
     protected function getProductController()
     {

@@ -13,7 +13,18 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Factory;
 
 interface DatabaseDriverFactoryInterface
 {
+    /**
+     * @param string $prefix
+     * @param string $resourceName
+     * @param array  $classes
+     * @param mixed  $templates
+     *
+     * @return mixed
+     */
     public function create($prefix, $resourceName, array $classes, $templates = null);
 
+    /**
+     * @return string
+     */
     public function getSupportedDriver();
 }

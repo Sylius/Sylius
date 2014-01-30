@@ -50,7 +50,7 @@ class SyliusVariableProductBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_product', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\VariableProductBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\VariableProductBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_product.driver.doctrine/orm'));

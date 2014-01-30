@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 
 /**

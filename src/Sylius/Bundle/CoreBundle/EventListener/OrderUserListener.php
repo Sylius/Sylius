@@ -11,20 +11,32 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class OrderUserListener
 {
+    /**
+     * @var SecurityContextInterface
+     */
     protected $securityContext;
 
+    /**
+     * @param SecurityContextInterface $securityContext
+     */
     public function __construct(SecurityContextInterface $securityContext)
     {
         $this->securityContext = $securityContext;
     }
 
+    /**
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setOrderUser(GenericEvent $event)
     {
         if ($event instanceof CartEvent) {
@@ -47,10 +59,15 @@ class OrderUserListener
         $order->setUser($user);
     }
 
+    /**
+     * @return UserInterface|null
+     */
     protected function getUser()
     {
         if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->securityContext->getToken()->getUser();
         }
+
+        return null;
     }
 }

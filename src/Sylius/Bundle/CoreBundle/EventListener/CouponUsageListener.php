@@ -21,6 +21,11 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class CouponUsageListener
 {
+    /**
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
     public function handleCouponUsage(GenericEvent $event)
     {
         $order = $event->getSubject();

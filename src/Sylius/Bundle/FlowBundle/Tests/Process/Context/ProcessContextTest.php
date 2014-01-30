@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Context;
 
-use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContext;
+use Sylius\Bundle\FlowBundle\Tests\Fixtures\TestArrayStorage;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
@@ -274,7 +274,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function shouldFailToRewindHistory()
     {
@@ -445,40 +445,5 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue('forwardActionResponse'));
 
         return $step;
-    }
-}
-
-class TestArrayStorage implements StorageInterface
-{
-    private $data = array();
-
-    public function initialize($domain)
-    {
-
-    }
-
-    public function has($key)
-    {
-        return isset($this->data[$key]);
-    }
-
-    public function get($key, $default = null)
-    {
-        return $this->has($key) ? $this->data[$key] : $default;
-    }
-
-    public function set($key, $value)
-    {
-        $this->data[$key] = $value;
-    }
-
-    public function remove($key)
-    {
-        unset($this->data[$key]);
-    }
-
-    public function clear()
-    {
-        $this->data = array();
     }
 }

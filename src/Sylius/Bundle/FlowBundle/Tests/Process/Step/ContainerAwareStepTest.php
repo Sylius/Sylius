@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Step;
 
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
+use Sylius\Bundle\FlowBundle\Tests\Fixtures\TestContainerAwareStep;
 
 /**
  * ContainerAwareStepTest test.
@@ -32,21 +31,5 @@ class ContainerAwareStepTest extends \PHPUnit_Framework_TestCase
         $step->setContainer($container);
 
         $this->assertSame($step->getContainer(), $container);
-    }
-}
-
-class TestContainerAwareStep extends ContainerAwareStep
-{
-    /**
-     * Just for check if container setter works
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    public function displayAction(ProcessContextInterface $context)
-    {
-        // pufff.
     }
 }

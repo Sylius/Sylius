@@ -27,13 +27,17 @@ class OrderConfirmationEmailListener
      */
     protected $mailer;
 
+    /**
+     * @param OrderConfirmationMailerInterface $mailer
+     */
     public function __construct(OrderConfirmationMailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }
 
     /**
-     * @param  GenericEvent              $event
+     * @param GenericEvent $event
+     *
      * @throws \InvalidArgumentException
      */
     public function processOrderConfirmation(GenericEvent $event)

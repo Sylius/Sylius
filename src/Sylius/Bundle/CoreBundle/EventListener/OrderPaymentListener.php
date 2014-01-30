@@ -47,6 +47,8 @@ class OrderPaymentListener
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
+     * @param EntityRepository          $orderRepository
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(PaymentProcessorInterface $paymentProcessor, EntityRepository $orderRepository, EventDispatcherInterface $dispatcher)
     {
@@ -59,6 +61,8 @@ class OrderPaymentListener
      * Get the order from event and create payment.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function createOrderPayment(GenericEvent $event)
     {
@@ -73,6 +77,12 @@ class OrderPaymentListener
         $this->paymentProcessor->createPayment($order);
     }
 
+    /**
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
     public function updateOrderOnPayment(GenericEvent $event)
     {
         $payment = $event->getSubject();
@@ -87,7 +97,7 @@ class OrderPaymentListener
         $order = $this->orderRepository->findOneBy(array('payment' => $payment));
 
         if (null === $order) {
-            throw new \Exception(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
+            throw new \RuntimeException(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
         }
 
         if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {

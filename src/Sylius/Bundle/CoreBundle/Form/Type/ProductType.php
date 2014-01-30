@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType as BaseProductType;
 use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType as BaseProductType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

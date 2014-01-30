@@ -51,7 +51,7 @@ class SyliusPaymentsBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_payments', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\PaymentsBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\PaymentsBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payments.driver.doctrine/orm'));

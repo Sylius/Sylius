@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
+use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -23,8 +24,9 @@ class UserRepository extends EntityRepository
     /**
      * Create filter paginator.
      *
-     * @param array $criteria
-     * @param array $sorting
+     * @param array   $criteria
+     * @param array   $sorting
+     * @param boolean $deleted
      *
      * @return PagerfantaInterface
      */
@@ -38,16 +40,16 @@ class UserRepository extends EntityRepository
 
         if (isset($criteria['query'])) {
             $queryBuilder
-                ->where('o.username LIKE :query')
-                ->orWhere('o.email LIKE :query')
-                ->orWhere('o.firstName LIKE :query')
-                ->orWhere('o.lastName LIKE :query')
+                ->where($this->getAlias().'.username LIKE :query')
+                ->orWhere($this->getAlias().'.email LIKE :query')
+                ->orWhere($this->getAlias().'.firstName LIKE :query')
+                ->orWhere($this->getAlias().'.lastName LIKE :query')
                 ->setParameter('query', '%'.$criteria['query'].'%')
             ;
         }
         if (isset($criteria['enabled'])) {
             $queryBuilder
-                ->andWhere('o.enabled = :enabled')
+                ->andWhere($this->getAlias().'.enabled = :enabled')
                 ->setParameter('enabled', $criteria['enabled'])
             ;
         }
@@ -68,6 +70,8 @@ class UserRepository extends EntityRepository
      * Get the user data for the details page.
      *
      * @param integer $id
+     * 
+     * @return null|UserInterface
      */
     public function findForDetailsPage($id)
     {
@@ -76,7 +80,7 @@ class UserRepository extends EntityRepository
         $this->_em->getFilters()->disable('softdeleteable');
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.id', ':id'))
             ->setParameter('id', $id)
         ;
 
@@ -88,12 +92,19 @@ class UserRepository extends EntityRepository
         return $result;
     }
 
+    /**
+     * @param \DateTime    $from
+     * @param \DateTime    $to
+     * @param null|integer $status
+     *
+     * @return integer
+     */
     public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
         if (null !== $status) {
             $queryBuilder
-                ->andWhere('o.status = :status')
+                ->andWhere($this->getAlias().'.status = :status')
                 ->setParameter('status', $status)
             ;
         }
@@ -110,10 +121,15 @@ class UserRepository extends EntityRepository
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         return $queryBuilder
-            ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
-            ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
+            ->andWhere($queryBuilder->expr()->gte($this->getAlias().'.createdAt', ':from'))
+            ->andWhere($queryBuilder->expr()->lte($this->getAlias().'.createdAt', ':to'))
             ->setParameter('from', $from)
             ->setParameter('to', $to)
         ;
+    }
+
+    protected function getAlias()
+    {
+        return 'u';
     }
 }

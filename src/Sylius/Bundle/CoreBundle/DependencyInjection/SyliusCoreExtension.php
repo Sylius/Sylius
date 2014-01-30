@@ -67,7 +67,7 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        foreach ($container->getExtensions() as $name => $extension) {
+        foreach (array_keys($container->getExtensions()) as $name) {
             if (in_array($name, $this->bundles)) {
                 $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }

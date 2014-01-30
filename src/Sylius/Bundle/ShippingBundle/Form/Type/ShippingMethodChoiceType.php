@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\ShippingBundle\Resolver\MethodsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -20,7 +21,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * A select form which allows the user to select

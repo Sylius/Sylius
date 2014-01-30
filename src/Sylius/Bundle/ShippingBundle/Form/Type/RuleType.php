@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener;
 
 /**
  * Shipping rule form type.

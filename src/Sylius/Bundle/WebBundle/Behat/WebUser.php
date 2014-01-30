@@ -11,18 +11,16 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
-use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -460,7 +458,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iFillInCheckoutAddress($type, $country)
     {
-//        $this->iFillInAddress('sylius_checkout_addressing', $type, $country);
         $base = sprintf('sylius_checkout_addressing[%sAddress]', $type);
 
         $this->iFillInAddressFields($base, $country);

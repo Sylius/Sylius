@@ -12,21 +12,37 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Bundle\CoreBundle\Model\Taxon;
+use Sylius\Bundle\CoreBundle\Model\TaxonInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListener
 {
+    /**
+     * @var ImageUploaderInterface
+     */
     protected $uploader;
 
+    /**
+     * Constructor.
+     *
+     * @param ImageUploaderInterface $uploader
+     */
     public function __construct(ImageUploaderInterface $uploader)
     {
         $this->uploader = $uploader;
     }
 
+    /**
+     * Handle uploading the image for product.
+     *
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
     public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
@@ -41,6 +57,13 @@ class ImageUploadListener
         }
     }
 
+    /**
+     * Handle uploading the image for taxon.
+     *
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
     public function uploadTaxonImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
@@ -52,9 +75,15 @@ class ImageUploadListener
         if ($subject->hasFile()) {
             $this->uploader->upload($subject);
         }
-
     }
 
+    /**
+     * Handle uploading the image for taxonomy.
+     *
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
     public function uploadTaxonomyImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
@@ -63,9 +92,10 @@ class ImageUploadListener
             throw new \InvalidArgumentException('TaxonomyInterface expected.');
         }
 
-        if ($subject->getRoot()->hasFile()) {
-            $this->uploader->upload($subject->getRoot());
+        /* @var $root Taxon */
+        $root = $subject->getRoot();
+        if ($root->hasFile()) {
+            $this->uploader->upload($root);
         }
-
     }
 }

@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

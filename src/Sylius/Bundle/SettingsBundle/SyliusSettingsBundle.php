@@ -50,7 +50,7 @@ class SyliusSettingsBundle extends Bundle
         $container->addCompilerPass(new RegisterSchemasPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\SettingsBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\SettingsBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_settings.driver.doctrine/orm'));

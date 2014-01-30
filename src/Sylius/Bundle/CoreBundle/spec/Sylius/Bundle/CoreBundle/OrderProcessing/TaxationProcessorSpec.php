@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\Order;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

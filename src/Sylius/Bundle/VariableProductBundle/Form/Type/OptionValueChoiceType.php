@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\Type;
 
-use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;

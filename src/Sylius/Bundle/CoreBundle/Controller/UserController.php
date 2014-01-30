@@ -13,11 +13,16 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends ResourceController
 {
     /**
      * Render user filter form.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function filterFormAction(Request $request)
     {

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ProductBundle\Builder;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Model\Property\Property;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

@@ -53,6 +53,8 @@ class OrderShippingListener
      * Get the order from event and create shipments.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function processOrderShipments(GenericEvent $event)
     {
@@ -71,6 +73,8 @@ class OrderShippingListener
      * Get the order from event and run the shipping processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function processOrderShippingCharges(GenericEvent $event)
     {
@@ -89,6 +93,8 @@ class OrderShippingListener
      * Update shipment states after order is confirmed
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function processShipmentStates(GenericEvent $event)
     {

@@ -18,9 +18,9 @@ use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Frontend menu builder.

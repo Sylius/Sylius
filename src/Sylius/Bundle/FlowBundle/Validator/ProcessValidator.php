@@ -2,8 +2,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Validator;
 
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Default process validator
@@ -12,11 +12,17 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
  */
 class ProcessValidator implements ProcessValidatorInterface
 {
-    /** @var null|string  */
+    /**
+     * @var null|string
+     */
     protected $template;
-    /** @var null|string  */
+    /**
+     * @var null|string
+     */
     protected $message;
-    /** @var callable  */
+    /**
+     * @var callable
+     */
     protected $validation;
 
     public function __construct(\Closure $validation, $message = null, $template = null)
@@ -66,6 +72,7 @@ class ProcessValidator implements ProcessValidatorInterface
      * Set validation
      *
      * @param callable $validation
+     *
      * @return $this
      */
     public function setValidation(\Closure $validation)
@@ -90,7 +97,7 @@ class ProcessValidator implements ProcessValidatorInterface
      */
     public function isValid()
     {
-        return (call_user_func($this->validation)) ? true : false;
+        return call_user_func($this->validation) ? true : false;
     }
 
     /**

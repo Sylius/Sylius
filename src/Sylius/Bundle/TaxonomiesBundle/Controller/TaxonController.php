@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -24,9 +26,9 @@ class TaxonController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    protected function createNew(Request $request)
     {
-        if (null === $taxonomyId = $this->getRequest()->get('taxonomyId')) {
+        if (null === $taxonomyId = $request->get('taxonomyId')) {
             throw new NotFoundHttpException('No taxonomy id given.');
         }
 
@@ -34,7 +36,7 @@ class TaxonController extends ResourceController
             throw new NotFoundHttpException('Requested taxonomy does not exist.');
         }
 
-        $taxon = parent::createNew();
+        $taxon = parent::createNew($request);
         $taxon->setTaxonomy($taxonomy);
 
         return $taxon;

@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Coordinator;
 
-use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
-use Symfony\Component\HttpFoundation\Response;
-
 use Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator;
 use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Coordinator test.

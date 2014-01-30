@@ -11,8 +11,12 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\VariableProductBundle\Generator\VariantGeneratorInterface;
+use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -28,6 +32,8 @@ class VariantController extends ResourceController
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws NotFoundHttpException
      */
     public function generateAction(Request $request)
     {
@@ -38,27 +44,25 @@ class VariantController extends ResourceController
         $product = $this->findProductOr404($productId);
         $this->getGenerator()->generate($product);
 
-        $this->persistAndFlush($product);
+        $this->update($product);
 
         $this->setFlash('success', 'Variants have been successfully generated.');
 
-        return $this
-            ->redirectTo($product)
-        ;
+        return $this->redirectTo($product);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    protected function createNew(Request $request)
     {
-        if (null === $productId = $this->getRequest()->get('productId')) {
+        if (null === $productId = $request->get('productId')) {
             throw new NotFoundHttpException('No parent product given.');
         }
 
         $product = $this->findProductOr404($productId);
 
-        $variant = parent::createNew();
+        $variant = parent::createNew($request);
         $variant->setProduct($product);
 
         return $variant;
@@ -89,7 +93,9 @@ class VariantController extends ResourceController
      *
      * @param integer $id
      *
-     * @return ProductInterface
+     * @return VariableProductInterface
+     *
+     * @throws NotFoundHttpException
      */
     protected function findProductOr404($id)
     {

@@ -14,7 +14,8 @@ interface ProcessValidatorInterface
     /**
      * Message to display on invalid
      *
-     * @param $message
+     * @param string $message
+     *
      * @return mixed
      */
     public function setMessage($message);
@@ -29,7 +30,8 @@ interface ProcessValidatorInterface
     /**
      * Set error template
      *
-     * @param $template
+     * @param string $template
+     *
      * @return mixed
      */
     public function setTemplate($template);
@@ -49,7 +51,8 @@ interface ProcessValidatorInterface
     public function isValid();
 
     /**
-     * @param  StepInterface $step
+     * @param StepInterface $step
+     *
      * @return mixed
      */
     public function getResponse(StepInterface $step);

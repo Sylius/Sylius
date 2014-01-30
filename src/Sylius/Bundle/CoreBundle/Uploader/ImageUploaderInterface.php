@@ -15,6 +15,15 @@ use Sylius\Bundle\CoreBundle\Model\ImageInterface;
 
 interface ImageUploaderInterface
 {
+    /**
+     * @param ImageInterface $image
+     */
     public function upload(ImageInterface $image);
+
+    /**
+     * @param string $path
+     *
+     * @return boolean
+     */
     public function remove($path);
 }

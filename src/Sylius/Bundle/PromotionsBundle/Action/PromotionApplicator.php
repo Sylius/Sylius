@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\PromotionsBundle\Action;
 
 use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * Applies all registered promotion actions to given subject.
@@ -22,13 +22,22 @@ use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
  */
 class PromotionApplicator implements PromotionApplicatorInterface
 {
+    /**
+     * @var PromotionActionRegistryInterface
+     */
     protected $registry;
 
+    /**
+     * @param PromotionActionRegistryInterface $registry
+     */
     public function __construct(PromotionActionRegistryInterface $registry)
     {
         $this->registry = $registry;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {

@@ -15,9 +15,9 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 /**
  * Sylius core Order model.

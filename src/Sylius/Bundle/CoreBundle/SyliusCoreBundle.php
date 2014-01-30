@@ -42,7 +42,7 @@ class SyliusCoreBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_core', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\CoreBundle\Model',
+            realpath($this->getPath().'/Resources/config/doctrine/model') => 'Sylius\Bundle\CoreBundle\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_core.driver.doctrine/orm'));
