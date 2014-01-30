@@ -17,21 +17,18 @@
 
             deleteButton = $(this);
 
+            if (deleteButton.is("a")) {
+                $('#confirmation-modal #confirmation-modal-confirm').attr('href', deleteButton.attr('href'));
+            }
+
             $('#confirmation-modal').modal('show');
         });
 
-        $('#confirmation-modal .btn-danger').click(function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                type: "DELETE",
-                url: deleteButton.parent().attr('action'),
-                data: { confirmed: "1" },
-                cache: false
-            }).done(function(json) {
-                $('#confirmation-modal').modal('hide');
-                $('#'+json.id).remove();
-            });
+        $('#confirmation-modal #confirmation-modal-confirm').click(function(e) {
+            if (deleteButton.is("button")) {
+                e.preventDefault();
+                deleteButton.closest('form').submit();
+            }
         });
     });
 })( jQuery );

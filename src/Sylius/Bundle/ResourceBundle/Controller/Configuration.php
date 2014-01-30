@@ -135,7 +135,7 @@ class Configuration
         return $redirect;
     }
 
-    public function getRedirectParameters($resource)
+    public function getRedirectParameters($resource = null)
     {
         $redirect = $this->get('redirect');
 
@@ -178,9 +178,9 @@ class Configuration
         return (Boolean) $this->get('filterable', false);
     }
 
-    public function getCriteria()
+    public function getCriteria($default = array())
     {
-        $defaultCriteria = $this->get('criteria', array('id' => $this->request->get('id')));
+        $defaultCriteria = $this->get('criteria', $default);
 
         if ($this->isFilterable()) {
             return array_merge($defaultCriteria, $this->request->get('criteria', array()));

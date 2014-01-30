@@ -12,7 +12,7 @@
             <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
             <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
             <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
-            <th class="actions"></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -77,21 +77,12 @@
             <td class="updated-at">
                 {{ product.updatedAt|date('Y/m/d') }}
             </td>
-            <td class="actions text-right">
+            <td class="center-text">
                 {% if product.deleted %}
                     <span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>
                 {% else %}
-                <div class="btn-group">
-                    <a class="btn btn-sm btn-primary edit" href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
-                        title="{{ 'sylius.edit'|trans|title }}">
-                        <span class="glyphicon glyphicon-pencil"></span> {{ 'sylius.edit'|trans|title }}
-                    </a>
-                    <a class="btn btn-sm btn-danger delete"
-                       href="{{ path('sylius_backend_product_delete', {'id': product.id}) }}"
-                       title="{{ 'sylius.delete'|trans|title }}">
-                        <span class="glyphicon glyphicon-trash"></span> {{ 'sylius.delete'|trans|title }}
-                    </a>
-                </div>
+                {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+                {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
                 {% endif %}
             </td>
         </tr>
