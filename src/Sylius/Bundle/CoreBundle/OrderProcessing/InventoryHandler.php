@@ -94,6 +94,7 @@ class InventoryHandler implements InventoryHandlerInterface
             }
 
             $this->inventoryOperator->decrease($units);
+            $this->inventoryOperator->release($item->getVariant(), $item->getQuantity());
         }
     }
 

@@ -77,6 +77,18 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
+    public function release(StockableInterface $stockable, $quantity)
+    {
+        if ($quantity < 1) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        }
+
+        $stockable->setOnHold($stockable->getOnHold() - $quantity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function decrease($inventoryUnits)
     {
         if (!is_array($inventoryUnits) && !$inventoryUnits instanceof Collection) {
