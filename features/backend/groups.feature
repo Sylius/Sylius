@@ -71,17 +71,8 @@ Feature: User groups management
           And "Premium Customers" should appear on the page
           But I should not see "Wholesale Customers"
 
-    Scenario: Deleting group
-        Given I am on the group index page
-         When I click "delete" near "Wholesale Customers"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the group index page
-          And I should see "Group has been successfully deleted."
-          And I should not see group with name "Wholesale Customers" in that list
-
     @javascript
-    Scenario: Deleting group with js modal
+    Scenario: Deleting group
         Given I am on the group index page
          When I click "delete" near "Wholesale Customers"
           And I click "delete" from the confirmation modal

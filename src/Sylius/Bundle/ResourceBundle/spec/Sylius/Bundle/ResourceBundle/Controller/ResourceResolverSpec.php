@@ -11,6 +11,14 @@ use PhpSpec\ObjectBehavior;
  */
 class ResourceResolverSpec extends ObjectBehavior
 {
+    /**
+     * @param Sylius\Bundle\ResourceBundle\Controller\Configuration  $configuration
+     */
+    function let($configuration)
+    {
+        $this->beConstructedWith($configuration);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceResolver');
@@ -18,7 +26,6 @@ class ResourceResolverSpec extends ObjectBehavior
 
     /**
      * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
-     * @param Sylius\Bundle\ResourceBundle\Controller\Configuration  $configuration
      */
     function it_calls_proper_method_with_arguments_based_on_configuration($repository, $configuration)
     {
@@ -27,6 +34,6 @@ class ResourceResolverSpec extends ObjectBehavior
 
         $repository->findAll(5)->shouldBeCalled()->willReturn(array('foo', 'bar'));
 
-        $this->getResource($repository, $configuration, 'findBy')->shouldReturn(array('foo', 'bar'));
+        $this->getResource($repository, 'findBy')->shouldReturn(array('foo', 'bar'));
     }
 }

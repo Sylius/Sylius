@@ -29,7 +29,7 @@ class ParametersParser
         $this->expression = $expression;
     }
 
-    public function parse(array $parameters, Request $request)
+    public function parse(array &$parameters, Request $request)
     {
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
@@ -40,11 +40,9 @@ class ParametersParser
                 $parameters[$key] = $request->get(substr($value, 1));
             }
         }
-
-        return $parameters;
     }
 
-    public function process(array $parameters, $resource)
+    public function process(array &$parameters, $resource)
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 
