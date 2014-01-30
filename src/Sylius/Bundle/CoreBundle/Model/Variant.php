@@ -42,7 +42,7 @@ class Variant extends BaseVariant implements VariantInterface
      *
      * @var integer
      */
-    protected $onHold;
+    protected $onHold = 0;
 
     /**
      * On hand stock.

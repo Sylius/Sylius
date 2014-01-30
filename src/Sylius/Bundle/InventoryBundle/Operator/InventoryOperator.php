@@ -55,8 +55,8 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function increase(StockableInterface $stockable, $quantity)
     {
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         $stockable->setOnHand($stockable->getOnHand() + $quantity);
@@ -67,8 +67,8 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function hold(StockableInterface $stockable, $quantity)
     {
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         $stockable->setOnHold($stockable->getOnHold() + $quantity);
@@ -79,8 +79,8 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function release(StockableInterface $stockable, $quantity)
     {
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         $stockable->setOnHold($stockable->getOnHold() - $quantity);
@@ -97,8 +97,8 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $quantity = count($inventoryUnits);
 
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         if ($inventoryUnits instanceof Collection) {
