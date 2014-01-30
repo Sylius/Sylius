@@ -17,6 +17,8 @@ use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
+use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -47,7 +49,6 @@ class PurchaseStep extends CheckoutStep
     {
         $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
         $this->getHttpRequestVerifier()->invalidate($token);
-        $this->getCartProvider()->abandonCart();
 
         $status = new StatusRequest($token);
         $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
@@ -62,23 +63,6 @@ class PurchaseStep extends CheckoutStep
         $payment = $order->getPayment();
         $previousState = $order->getPayment()->getState();
         $payment->setState($status->getStatus());
-
-        if ($status->isSuccess()) {
-            $type = 'success';
-            $msg  = 'sylius.checkout.success';
-        } elseif ($status->isPending() || $status->isSuspended()) {
-            $type = 'notice';
-            $msg  = 'sylius.checkout.processing';
-        } elseif ($status->isCanceled()) {
-            $type = 'notice';
-            $msg  = 'sylius.checkout.canceled';
-        } elseif ($status->isFailed() || $status->isExpired()) {
-            $type = 'error';
-            $msg  = 'sylius.checkout.failed';
-        } else {
-            $type = 'error';
-            $msg  = 'sylius.checkout.unknown';
-        }
 
         if ($previousState !== $payment->getState()) {
             $this->dispatchEvent(
@@ -96,7 +80,12 @@ class PurchaseStep extends CheckoutStep
             );
         }
 
-        $this->get('session')->getFlashBag()->add($type, $this->get('translator')->trans($msg, array(), 'flashes'));
+        $event = new PurchaseCompleteEvent($order->getPayment());
+        $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
+
+        if ($event->hasResponse()) {
+            return $event->getResponse();
+        }
 
         return $this->complete();
     }

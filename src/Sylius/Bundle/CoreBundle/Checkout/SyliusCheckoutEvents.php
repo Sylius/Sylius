@@ -34,6 +34,8 @@ final class SyliusCheckoutEvents
     const PAYMENT_PRE_COMPLETE = 'sylius.checkout.payment.pre_complete';
     const PAYMENT_COMPLETE     = 'sylius.checkout.payment.complete';
 
+    const PURCHASE_COMPLETE = 'sylius.checkout.purchase.complete';
+
     const FINALIZE_INITIALIZE   = 'sylius.checkout.finalize.initialize';
     const FINALIZE_PRE_COMPLETE = 'sylius.checkout.finalize.pre_complete';
     const FINALIZE_COMPLETE     = 'sylius.checkout.finalize.complete';
