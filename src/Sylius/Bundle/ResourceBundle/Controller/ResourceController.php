@@ -169,7 +169,9 @@ class ResourceController extends FOSRestController
 
     public function findOr404(array $criteria = null)
     {
-        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($this->config->getCriteria()))) {
+        $default = array('id' => $this->getRequest()->get('id'));
+
+        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($this->config->getCriteria($default)))) {
             throw new NotFoundHttpException(sprintf('Requested %s does not exist.', $this->config->getResourceName()));
         }
 
