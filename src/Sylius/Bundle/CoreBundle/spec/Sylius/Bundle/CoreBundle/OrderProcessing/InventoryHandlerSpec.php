@@ -139,6 +139,59 @@ class InventoryHandlerSpec extends ObjectBehavior
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
      * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
      */
+    function it_holds_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
+    {
+        $order->getItems()->willReturn(array($item));
+
+        $item->getVariant()->willReturn($variant);
+        $item->getQuantity()->willReturn(1);
+
+        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1, $unit2));
+
+        $unit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_CHECKOUT);
+        $unit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_CHECKOUT);
+        $unit1->setInventoryState(InventoryUnitInterface::STATE_ONHOLD)->shouldBeCalled();
+        $unit2->setInventoryState(InventoryUnitInterface::STATE_ONHOLD)->shouldBeCalled();
+
+        $inventoryOperator->hold($variant, 1)->shouldBeCalled();
+
+        $this->holdInventory($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\CoreBundle\Model\OrderItem $item
+     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     */
+    function it_releases_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
+    {
+        $order->getItems()->willReturn(array($item));
+
+        $item->getVariant()->willReturn($variant);
+        $item->getQuantity()->willReturn(1);
+
+        $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1, $unit2));
+
+        $unit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_ONHOLD);
+        $unit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_ONHOLD);
+
+        $order->removeInventoryUnit($unit1)->shouldBeCalled();
+        $order->removeInventoryUnit($unit2)->shouldBeCalled();
+
+        $inventoryOperator->release($variant, 1)->shouldBeCalled();
+
+        $this->releaseInventory($order);
+    }
+
+    /**
+     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
+     * @param Sylius\Bundle\CoreBundle\Model\OrderItem $item
+     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
+     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
+     */
     function it_decreases_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
     {
         $order->getItems()->willReturn(array($item));
@@ -148,7 +201,13 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $order->getInventoryUnitsByVariant($variant)->shouldBeCalled()->willReturn(array($unit1, $unit2));
 
+        $unit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_ONHOLD);
+        $unit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_ONHOLD);
+        $unit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
+        $unit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
+
         $inventoryOperator->decrease(array($unit1, $unit2))->shouldBeCalled();
+        $inventoryOperator->release($variant, 1)->shouldBeCalled();
 
         $this->updateInventory($order);
     }

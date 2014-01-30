@@ -84,6 +84,35 @@ class AvailabilityCheckerSpec extends ObjectBehavior
 
         $stockable->isAvailableOnDemand()->willReturn(false);
         $stockable->getOnHand()->willReturn(5);
+        $stockable->getOnHold()->willReturn(0);
+
+        $this->isStockAvailable($stockable)->shouldReturn(true);
+    }
+
+    /**
+     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     */
+    function it_recognizes_stockable_as_not_available_if_on_hold_quantity_is_same_as_on_hand($stockable)
+    {
+        $this->beConstructedWith(false);
+
+        $stockable->isAvailableOnDemand()->willReturn(false);
+        $stockable->getOnHand()->willReturn(5);
+        $stockable->getOnHold()->willReturn(5);
+
+        $this->isStockAvailable($stockable)->shouldReturn(false);
+    }
+
+    /**
+     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
+     */
+    function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_then_on_hand($stockable)
+    {
+        $this->beConstructedWith(false);
+
+        $stockable->isAvailableOnDemand()->willReturn(false);
+        $stockable->getOnHand()->willReturn(5);
+        $stockable->getOnHold()->willReturn(4);
 
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
@@ -112,6 +141,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $stockable->isAvailableOnDemand()->willReturn(false);
 
         $stockable->getOnHand()->willReturn(0);
+        $stockable->getOnHold()->willReturn(0);
         $this->isStockAvailable($stockable)->shouldReturn(false);
 
         $stockable->getOnHand()->willReturn(-5);
@@ -138,6 +168,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $stockable->isAvailableOnDemand()->willReturn(false);
 
         $stockable->getOnHand()->willReturn(10);
+        $stockable->getOnHold()->willReturn(0);
         $this->isStockSufficient($stockable, 5)->shouldReturn(true);
 
         $stockable->getOnHand()->willReturn(15);
