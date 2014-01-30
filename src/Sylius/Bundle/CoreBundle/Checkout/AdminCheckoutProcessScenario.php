@@ -12,16 +12,17 @@
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CoreBundle\Checkout\Step\CheckoutStep;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 
 /**
- * Sylius checkout process.
+ * Sylius checkout process for admins
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Michael Williams <michael.williams.php@gmail.com>
  */
-class CheckoutProcessScenario implements ProcessScenarioInterface
+class AdminCheckoutProcessScenario implements ProcessScenarioInterface
 {
     /**
      * Cart provider.
@@ -29,6 +30,11 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
      * @var CartProviderInterface
      */
     protected $cartProvider;
+
+    /**
+     * @var array
+     */
+    private $stepOptions = array();
 
     /**
      * Constructor.
@@ -55,7 +61,7 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
         }
 
         $builder
-            ->add('security', 'sylius_checkout_security')
+            ->add('security', 'sylius_admin_checkout_security')
             ->add('addressing', 'sylius_checkout_addressing')
             ->add('shipping', 'sylius_checkout_shipping')
             ->add('payment', 'sylius_checkout_payment')
@@ -64,12 +70,9 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
         ;
 
         $builder
-            ->setDisplayRoute('sylius_checkout_display')
-            ->setForwardRoute('sylius_checkout_forward')
+            ->setDisplayRoute('sylius_admin_checkout_display')
+            ->setForwardRoute('sylius_admin_checkout_forward')
             ->setRedirect('sylius_homepage')
-            ->validate(function () use ($cart) {
-                return !$cart->isEmpty();
-            })
         ;
     }
 

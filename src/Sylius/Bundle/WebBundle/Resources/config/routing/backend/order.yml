@@ -11,15 +11,6 @@ sylius_backend_order_index:
             method: createFilterPaginator
             arguments: [$criteria, $sorting, $deleted]
 
-sylius_backend_order_create:
-    pattern: /new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.order:createAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Order:create.html.twig
-            redirect: sylius_backend_order_show
-
 sylius_backend_order_update:
     pattern: /{id}/edit
     methods: [GET, PUT]
@@ -57,3 +48,36 @@ sylius_backend_order_by_user:
             template: SyliusWebBundle:Backend/Order:indexByUser.html.twig
             sortable: true
             sorting: { updatedAt: desc }
+
+sylius_backend_order_create:
+    pattern: /new
+    defaults: { _controller: sylius.controller.process:startAction, scenarioAlias: 'sylius_admin_checkout' }
+
+sylius_admin_checkout_display:
+    pattern: /new/{stepName}
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_admin_checkout' }
+
+sylius_admin_checkout_forward:
+    pattern: /new/{stepName}/forward
+    defaults: { _controller: sylius.controller.process:forwardAction, scenarioAlias: 'sylius_admin_checkout' }
+
+sylius_admin_checkout_security:
+    pattern: /new/security
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_admin_checkout', 'stepName': 'security' }
+
+sylius_admin_checkout_addressing:
+    pattern: /new/addressing
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_admin_checkout', 'stepName': 'addressing' }
+
+sylius_admin_checkout_shipping:
+    pattern: /new/shipping
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_admin_checkout', 'stepName': 'shipping' }
+
+sylius_admin_checkout_payment:
+    pattern: /new/payment
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_admin_checkout', 'stepName': 'payment' }
+
+sylius_admin_checkout_finalize:
+    pattern: /new/finalize
+    defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_admin_checkout', 'stepName': 'finalize' }
+
