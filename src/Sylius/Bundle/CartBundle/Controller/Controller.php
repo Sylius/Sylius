@@ -77,4 +77,14 @@ abstract class Controller extends ResourceController
     {
         return $this->container->get('sylius.cart_resolver');
     }
+
+    /**
+     * Get event dispatcher.
+     *
+     * @return EventDispatcherInterface
+     */
+    protected function getEventDispatcher()
+    {
+        return $this->container->get('event_dispatcher');
+    }
 }
