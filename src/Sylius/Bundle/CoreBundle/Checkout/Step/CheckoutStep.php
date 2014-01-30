@@ -27,6 +27,18 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
  */
 abstract class CheckoutStep extends ControllerStep
 {
+    protected $options = array();
+
+    /**
+     * Allow steps to contain different options
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options = array())
+    {
+        $this->options = array_merge($this->options, $options);
+    }
+
     /**
      * Get cart provider.
      *

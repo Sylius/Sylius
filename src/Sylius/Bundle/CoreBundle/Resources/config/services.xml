@@ -16,8 +16,10 @@
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
 
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
+        <parameter key="sylius.admin_checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\AdminCheckoutProcessScenario</parameter>
 
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
+        <parameter key="sylius.checkout_step.admin_security.class">Sylius\Bundle\CoreBundle\Checkout\Step\AdminSecurityStep</parameter>
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
         <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
         <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
@@ -115,7 +117,43 @@
         <!-- checkout -->
         <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">
             <argument type="service" id="sylius.cart_provider" />
+            <argument type="collection">
+                <argument type="collection" key="sylius_checkout_security">
+                    <argument type="string" key="template">SyliusWebBundle:Frontend/Checkout/Step:security.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_addressing">
+                    <argument type="string" key="template">SyliusWebBundle:Frontend/Checkout/Step:addressing.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_shipping">
+                    <argument type="string" key="template">SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_finalize">
+                    <argument type="string" key="template">SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig</argument>
+                </argument>
+            </argument>
             <tag name="sylius.process.scenario" alias="sylius_checkout" />
+        </service>
+
+        <service id="sylius.admin_checkout_scenario" class="%sylius.admin_checkout_scenario.class%">
+            <argument type="service" id="sylius.cart_provider" />
+            <argument type="collection">
+                <argument type="collection" key="sylius_admin_checkout_security">
+                    <argument type="string" key="template">SyliusWebBundle:Frontend/Checkout/Step:security.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_addressing">
+                    <argument type="string" key="template">SyliusWebBundle:Backend/Checkout/Step:addressing.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_shipping">
+                    <argument type="string" key="template">SyliusWebBundle:Backend/Checkout/Step:shipping.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_payment">
+                    <argument type="string" key="template">SyliusWebBundle:Backend/Checkout/Step:payment.html.twig</argument>
+                </argument>
+                <argument type="collection" key="sylius_checkout_finalize">
+                    <argument type="string" key="template">SyliusWebBundle:Backend/Checkout/Step:finalize.html.twig</argument>
+                </argument>
+            </argument>
+            <tag name="sylius.process.scenario" alias="sylius_admin_checkout" />
         </service>
 
         <service id="sylius.checkout_step.security" class="%sylius.checkout_step.security.class%">
@@ -123,6 +161,12 @@
                 <argument type="service" id="service_container" />
             </call>
             <tag name="sylius.process.step" alias="sylius_checkout_security" />
+        </service>
+        <service id="sylius.checkout_step.admin_security" class="%sylius.checkout_step.admin_security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_admin_checkout_security" />
         </service>
         <service id="sylius.checkout_step.addressing" class="%sylius.checkout_step.addressing.class%">
             <call method="setContainer">
