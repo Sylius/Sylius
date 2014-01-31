@@ -40,7 +40,7 @@ class PurchaseListener
 
         $this->addFlash($state = $payment->getState());
 
-        if (in_array($state, array(PaymentInterface::STATE_PENDING ,PaymentInterface::STATE_PROCESSING ,PaymentInterface::STATE_COMPLETED))) {
+        if (in_array($state, array(PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED))) {
             $this->cartProvider->abandonCart();
 
             return;
