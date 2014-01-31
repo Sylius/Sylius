@@ -40,6 +40,8 @@ class ParametersParser
                 $parameters[$key] = $request->get(substr($value, 1));
             }
         }
+
+        return $parameters;
     }
 
     public function process(array &$parameters, $resource)

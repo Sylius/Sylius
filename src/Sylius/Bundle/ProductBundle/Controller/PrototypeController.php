@@ -36,7 +36,7 @@ class PrototypeController extends ResourceController
      */
     public function buildAction(Request $request, $id)
     {
-        $prototype = $this->findOr404(array('id' => $id));
+        $prototype = $this->findOr404($request, array('id' => $id));
         $productController = $this->getProductController();
 
         $product = $productController->createNew();
@@ -59,7 +59,7 @@ class PrototypeController extends ResourceController
             return $productController->redirectTo($product);
         }
 
-        return $productController->renderResponse('build.html', array(
+        return $productController->render($this->config->getTemplate('build.html'), array(
             'prototype' => $prototype,
             'product'   => $product,
             'form'      => $form->createView()

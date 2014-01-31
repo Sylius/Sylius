@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends ResourceController
@@ -31,9 +32,10 @@ class OrderController extends ResourceController
 
     /**
      * @param Request $request
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @param integer $id
+     *
+     * @return Response
+     * @throws NotFoundHttpException
      */
     public function indexByUserAction(Request $request, $id)
     {
@@ -60,12 +62,13 @@ class OrderController extends ResourceController
     }
 
     /**
-     * @return Symfony\Component\HttpFoundation\Response
-     * @throws Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return Response
+     *
+     * @throws NotFoundHttpException
      */
     public function releaseInventory()
     {
-        $order = $this->findOr404();
+        $order = $this->findOr404($this->getRequest());
 
         $this->get('sylius.order_processing.inventory_handler')->releaseInventory($order);
 
