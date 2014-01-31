@@ -77,9 +77,9 @@ class InventoryHandler implements InventoryHandlerInterface
             foreach ($units as $unit) {
                 if (InventoryUnitInterface::STATE_CHECKOUT !== $unit->getInventoryState()) {
                     $quantity--;
+                } else {
+                    $unit->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
                 }
-
-                $unit->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
             }
 
             $this->inventoryOperator->hold($item->getVariant(), $quantity);
@@ -101,7 +101,7 @@ class InventoryHandler implements InventoryHandlerInterface
                     continue;
                 }
 
-                $order->removeInventoryUnit($unit);
+                $unit->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT);
             }
 
             $this->inventoryOperator->release($item->getVariant(), $quantity);
@@ -121,7 +121,10 @@ class InventoryHandler implements InventoryHandlerInterface
                 if (InventoryUnitInterface::STATE_ONHOLD !== $unit->getInventoryState()) {
                     $quantity--;
                 }
-                $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+
+                if (in_array($unit->getInventoryState(), array(InventoryUnitInterface::STATE_ONHOLD, InventoryUnitInterface::STATE_CHECKOUT))) {
+                    $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+                }
             }
 
             $this->inventoryOperator->decrease($units);
