@@ -54,6 +54,7 @@ class Configuration implements ConfigurationInterface
         ->end();
 
         $this->addEmailConfiguration($emailNode, 'order_confirmation', 'SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig');
+        $this->addEmailConfiguration($emailNode, 'order_update', 'SyliusWebBundle:Frontend/Email:orderUpdate.html.twig');
         $this->addEmailConfiguration($emailNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
 
         return $emailNode;

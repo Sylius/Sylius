@@ -20,6 +20,7 @@
         <parameter key="sylius.repository.order.class">Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository</parameter>
         <parameter key="sylius.repository.order_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
         <parameter key="sylius.repository.adjustment.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.history.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
@@ -64,6 +65,21 @@
                 </service>
             </argument>
         </service>
+
+        <service id="sylius.manager.history" alias="doctrine.orm.entity_manager" />
+        <service id="sylius.repository.history" class="%sylius.repository.history.class%">
+            <argument type="service" id="sylius.manager.history" />
+            <argument type="service">
+                <service
+                    factory-service="sylius.manager.history"
+                    factory-method="getClassMetadata"
+                    class="Doctrine\ORM\Mapping\ClassMetadata"
+                >
+                    <argument>%sylius.model.history.class%</argument>
+                </service>
+            </argument>
+        </service>
+
     </services>
 
 </container>

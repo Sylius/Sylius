@@ -6,6 +6,10 @@
         <source>email.order_confirmation.subject</source>
         <target>email.order_confirmation.subject</target>
       </trans-unit>
+      <trans-unit id="9539535a483916af05984ef822c1523b" resname="email.order_update.subject">
+        <source>email.order_update.subject</source>
+        <target>email.order_update.subject</target>
+      </trans-unit>      
       <trans-unit id="4bdaedd00f685e27f46c6472cbafbb9e" resname="sylius.account.address.action.billing">
         <source>sylius.account.address.action.billing</source>
         <target>Set as default billing address</target>
@@ -1878,6 +1882,14 @@
         <source>sylius.shipment.sku</source>
         <target>SKU</target>
       </trans-unit>
+      <trans-unit id="86ef013586ef435f073f1b087b1997ed" resname="sylius.form.history.comment">
+        <source>sylius.form.history.comment</source>
+        <target>Comment</target>
+      </trans-unit>    
+      <trans-unit id="5ba8acc87435f073f1b087b1997edd8" resname="sylius.form.history.notifyCustomer">
+        <source>sylius.form.history.notifyCustomer</source>
+        <target>Notify Customer?</target>
+      </trans-unit>    
       <trans-unit id="5bae86ae3a917e7b3f1b087b1997edd8" resname="sylius.shipment.state">
         <source>sylius.shipment.state</source>
         <target>State</target>
