@@ -138,6 +138,10 @@
         <source>sylius.form.settings.general.locale</source>
         <target>Language</target>
       </trans-unit>
+      <trans-unit id="bc0d080561ef618e2a01cbb7ec3a0a7f" resname="sylius.form.settings.general.locale.empty">
+        <source>sylius.form.settings.general.locale.empty</source>
+        <target>Default</target>
+      </trans-unit>
       <trans-unit id="68d2e3303964c3c80620f67cb5f0ee2f" resname="sylius.form.settings.general.meta_description">
         <source>sylius.form.settings.general.meta_description</source>
         <target>Meta description</target>

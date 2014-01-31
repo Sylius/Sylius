@@ -48,14 +48,12 @@ class GeneralSettingsSchema implements SchemaInterface
                 'title'            => 'Sylius - Modern ecommerce for Symfony2',
                 'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
                 'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
-                'locale'           => 'en',
                 'currency'         => 'USD',
             ), $this->defaults))
             ->setAllowedTypes(array(
                 'title'            => array('string'),
                 'meta_keywords'    => array('string'),
                 'meta_description' => array('string'),
-                'locale'           => array('string'),
                 'currency'         => array('string'),
             ))
         ;
@@ -87,8 +85,8 @@ class GeneralSettingsSchema implements SchemaInterface
             ))
             ->add('locale', 'locale', array(
                 'label'       => 'sylius.form.settings.general.locale',
+                'empty_value' => 'sylius.form.settings.general.locale.empty',
                 'constraints' => array(
-                    new NotBlank(),
                     new Locale(),
                 )
             ))
