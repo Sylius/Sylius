@@ -22,6 +22,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
  * It also updates inventory after order is complete.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface InventoryHandlerInterface
 {
@@ -31,6 +32,20 @@ interface InventoryHandlerInterface
      * @param OrderInterface $order
      */
     public function processInventoryUnits(OrderInterface $order);
+
+    /**
+     * Put inventory on hold.
+     *
+     * @param OrderInterface $order
+     */
+    public function holdInventory(OrderInterface $order);
+
+    /**
+     * Release inventory.
+     *
+     * @param OrderInterface $order
+     */
+    public function releaseInventory(OrderInterface $order);
 
     /**
      * Update the inventory state accordingly.

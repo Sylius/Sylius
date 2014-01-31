@@ -57,3 +57,9 @@ sylius_backend_order_by_user:
             template: SyliusWebBundle:Backend/Order:indexByUser.html.twig
             sortable: true
             sorting: { updatedAt: desc }
+
+sylius_backend_order_release_inventory:
+    pattern: /release-inventory/{id}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:releaseInventory

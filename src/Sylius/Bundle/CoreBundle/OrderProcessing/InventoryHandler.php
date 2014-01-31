@@ -21,6 +21,7 @@ use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
  * Order inventory handler.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryHandler implements InventoryHandlerInterface
 {
@@ -65,12 +66,76 @@ class InventoryHandler implements InventoryHandlerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function holdInventory(OrderInterface $order)
+    {
+        foreach ($order->getItems() as $item) {
+            $units = $order->getInventoryUnitsByVariant($item->getVariant());
+
+            $quantity = $item->getQuantity();
+            foreach ($units as $unit) {
+                if (InventoryUnitInterface::STATE_CHECKOUT !== $unit->getInventoryState()) {
+                    $quantity--;
+                }
+
+                $unit->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
+            }
+
+            $this->inventoryOperator->hold($item->getVariant(), $quantity);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function releaseInventory(OrderInterface $order)
+    {
+        foreach ($order->getItems() as $item) {
+            $units = $order->getInventoryUnitsByVariant($item->getVariant());
+
+            $quantity = $item->getQuantity();
+            foreach ($units as $unit) {
+                if (InventoryUnitInterface::STATE_ONHOLD !== $unit->getInventoryState()) {
+                    $quantity--;
+                    continue;
+                }
+
+                $order->removeInventoryUnit($unit);
+            }
+
+            $this->inventoryOperator->release($item->getVariant(), $quantity);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateInventory(OrderInterface $order)
+    {
+        foreach ($order->getItems() as $item) {
+            $units = $order->getInventoryUnitsByVariant($item->getVariant());
+
+            $quantity = $item->getQuantity();
+            foreach ($units as $unit) {
+                if (InventoryUnitInterface::STATE_ONHOLD !== $unit->getInventoryState()) {
+                    $quantity--;
+                }
+                $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+            }
+
+            $this->inventoryOperator->decrease($units);
+            $this->inventoryOperator->release($item->getVariant(), $quantity);
+        }
+    }
+
+    /**
      * Removes inventory units which are not linked to any of specified variants
      *
      * @param OrderInterface $order
-     * @param array $variants
+     * @param array          $variants
      */
-    private function removeUnusedUnits(OrderInterface $order, array $variants)
+    protected function removeUnusedUnits(OrderInterface $order, array $variants)
     {
         foreach ($order->getInventoryUnits() as $unit) {
             if (!in_array($unit->getStockable(), $variants)) {
@@ -82,11 +147,11 @@ class InventoryHandler implements InventoryHandlerInterface
     /**
      * Update inventory units related to passed variant to the specified quantity
      *
-     * @param OrderInterface $order
+     * @param OrderInterface   $order
      * @param VariantInterface $variant
-     * @param int $quantity
+     * @param int              $quantity
      */
-    private function updateVariantUnits(OrderInterface $order, VariantInterface $variant, $quantity)
+    protected function updateVariantUnits(OrderInterface $order, VariantInterface $variant, $quantity)
     {
         $units = $order->getInventoryUnitsByVariant($variant);
         $quantityDifference = $quantity - count($units);
@@ -106,10 +171,10 @@ class InventoryHandler implements InventoryHandlerInterface
      * Helper method that returns the quantities of each variant in cart
      * Return format: [[Variant1, Variant2], [QuantityForVariant1, QuantityForVariant2]]
      *
-     * @param OrderInterface $order
+     * @param  OrderInterface $order
      * @return array
      */
-    private function getVariantQuantities(OrderInterface $order)
+    protected function getVariantQuantities(OrderInterface $order)
     {
         $variants = array();
         $quantities = array();
@@ -126,22 +191,6 @@ class InventoryHandler implements InventoryHandlerInterface
         }
 
         return array($variants, $quantities);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateInventory(OrderInterface $order)
-    {
-        foreach ($order->getItems() as $item) {
-            $units = $order->getInventoryUnitsByVariant($item->getVariant());
-
-            foreach ($units as $unit) {
-                $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-            }
-
-            $this->inventoryOperator->decrease($units);
-        }
     }
 
     /**

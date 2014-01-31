@@ -20,7 +20,7 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
  * Default inventory operator.
  *
  * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryOperator implements InventoryOperatorInterface
 {
@@ -55,11 +55,35 @@ class InventoryOperator implements InventoryOperatorInterface
      */
     public function increase(StockableInterface $stockable, $quantity)
     {
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         $stockable->setOnHand($stockable->getOnHand() + $quantity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hold(StockableInterface $stockable, $quantity)
+    {
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
+        }
+
+        $stockable->setOnHold($stockable->getOnHold() + $quantity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function release(StockableInterface $stockable, $quantity)
+    {
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
+        }
+
+        $stockable->setOnHold($stockable->getOnHold() - $quantity);
     }
 
     /**
@@ -73,8 +97,8 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $quantity = count($inventoryUnits);
 
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
+        if ($quantity < 0) {
+            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
         if ($inventoryUnits instanceof Collection) {

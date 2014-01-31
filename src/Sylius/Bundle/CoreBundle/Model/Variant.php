@@ -38,6 +38,13 @@ class Variant extends BaseVariant implements VariantInterface
     protected $price;
 
     /**
+     * On hold.
+     *
+     * @var integer
+     */
+    protected $onHold = 0;
+
+    /**
      * On hand stock.
      *
      * @var integer
@@ -155,6 +162,24 @@ class Variant extends BaseVariant implements VariantInterface
     public function isInStock()
     {
         return 0 < $this->onHand;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOnHold()
+    {
+        return $this->onHold;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOnHold($onHold)
+    {
+        $this->onHold = $onHold;
+
+        return $this;
     }
 
     /**

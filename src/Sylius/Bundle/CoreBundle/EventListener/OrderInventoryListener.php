@@ -19,6 +19,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Order inventory processing listener.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderInventoryListener
 {
@@ -40,21 +41,27 @@ class OrderInventoryListener
     }
 
     /**
-     * Get the order from event and run the inventory processor on it.
+     * Put order inventory on hold.
+     *
+     * @param GenericEvent $event
+     */
+    public function holdInventoryUnits(GenericEvent $event)
+    {
+        $this->inventoryHandler->holdInventory(
+            $this->getOrder($event)
+        );
+    }
+
+    /**
+     * Update order inventory.
      *
      * @param GenericEvent $event
      */
     public function updateInventoryUnits(GenericEvent $event)
     {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
-        }
-
-        $this->inventoryHandler->updateInventory($order);
+        $this->inventoryHandler->updateInventory(
+            $this->getOrder($event)
+        );
     }
 
     /**
@@ -64,6 +71,18 @@ class OrderInventoryListener
      */
     public function createInventoryUnits(GenericEvent $event)
     {
+        $this->inventoryHandler->processInventoryUnits(
+            $this->getOrder($event)
+        );
+    }
+
+    /**
+     * Gets order from event.
+     *
+     * @param GenericEvent $event
+     */
+    private function getOrder(GenericEvent $event)
+    {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
@@ -72,6 +91,6 @@ class OrderInventoryListener
             );
         }
 
-        $this->inventoryHandler->processInventoryUnits($order);
+        return $order;
     }
 }

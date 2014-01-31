@@ -1158,6 +1158,10 @@
         <source>sylius.order.shipments</source>
         <target>Shipments</target>
       </trans-unit>
+      <trans-unit id="bd1abb2f477836c03a17eb0398e509ed" resname="sylius.order.release_inventory">
+        <source>sylius.order.release_inventory</source>
+        <target>Release inventory</target>
+      </trans-unit>
       <trans-unit id="87e600739dd24c17844e39b4e26c7568" resname="sylius.order.shipping_address">
         <source>sylius.order.shipping_address</source>
         <target>Shipping address</target>
@@ -2025,6 +2029,10 @@
       <trans-unit id="f508f517cacabab8f2c79fd522c96910" resname="sylius.stockable.on_hand">
         <source>sylius.stockable.on_hand</source>
         <target>stock level</target>
+      </trans-unit>
+      <trans-unit id="f508f517cacabab8f2c79fd522c96911" resname="sylius.stockable.on_hold">
+        <source>sylius.stockable.on_hold</source>
+        <target>on hold</target>
       </trans-unit>
       <trans-unit id="5be631b3a5ed175fa93c98a86aea64a8" resname="sylius.stockable.sku">
         <source>sylius.stockable.sku</source>

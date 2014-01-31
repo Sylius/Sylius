@@ -19,8 +19,9 @@
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Variant" table="sylius_variant">
         <field name="sku" column="sku" type="string" nullable="true" />
         <field name="price" column="price" type="integer" />
+        <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
-        <field name="availableOnDemand" column="available_on_demand" type="boolean"/>
+        <field name="availableOnDemand" column="available_on_demand" type="boolean" />
 
         <field name="width" column="width" type="float" nullable="true" />
         <field name="height" column="height" type="float" nullable="true" />
