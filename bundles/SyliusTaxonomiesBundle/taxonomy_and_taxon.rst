@@ -226,10 +226,13 @@ To get a flat list of taxons under taxonomy, use the ``getTaxonsAsList`` method.
 
     public function myAction(Request $request)
     {
-        $repository = $this->container->get('sylius.repository.taxonomy');
-        $taxonomy = $repository->findOneByName('Categories');
-
-        $taxons = $taxonomy->getTaxonsAsList();
+        // Find the taxonomy
+        $taxonomyRepository = $this->container->get('sylius.repository.taxonomy');
+        $taxonomy = $taxonomyRepository->findOneByName('Categories');
+        
+        // Get the taxons as a list
+        $taxonRepository = $this->container->get('sylius.repository.taxon');
+        $taxons = $taxonRepository->getTaxonsAsList($taxonomy);
     }
 
 ``$taxons`` variable will now contain flat list (ArrayCollection) of taxons in following order: T-Shirts, Men, Women, Stickers, Mugs, Books.
