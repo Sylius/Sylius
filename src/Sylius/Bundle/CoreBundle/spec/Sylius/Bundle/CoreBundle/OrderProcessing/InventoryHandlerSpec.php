@@ -176,9 +176,8 @@ class InventoryHandlerSpec extends ObjectBehavior
 
         $unit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_ONHOLD);
         $unit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_ONHOLD);
-
-        $order->removeInventoryUnit($unit1)->shouldBeCalled();
-        $order->removeInventoryUnit($unit2)->shouldBeCalled();
+        $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
+        $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
 
         $inventoryOperator->release($variant, 1)->shouldBeCalled();
 
