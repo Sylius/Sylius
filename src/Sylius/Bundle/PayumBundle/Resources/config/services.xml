@@ -32,6 +32,8 @@
         <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
         <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
         <parameter key="sylius.payum.action.execute_same_request_with_payment_details.class">Sylius\Bundle\PayumBundle\Payum\Action\ExecuteSameRequestWithPaymentDetailsAction</parameter>
+
+        <parameter key="sylius.payum.payment_manager.class">Sylius\Bundle\PayumBundle\Manager\PayumManager</parameter>
     </parameters>
 
     <services>
@@ -100,6 +102,12 @@
         <!-- Dummy -->
         <service id="sylius.payum.dummy.action.capture_payment" class="%sylius.payum.dummy.action.capture_payment.class%"  public="false" />
         <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%"  public="false" />
+
+        <service id="sylius.payum.payment_manager" class="%sylius.payum.payment_manager.class%" public="false">
+            <argument type="service" id="payum" />
+            <argument type="service" id="payum.security.token_factory" />
+            <argument type="service" id="payum.security.http_request_verifier" />
+        </service>
     </services>
 
 </container>

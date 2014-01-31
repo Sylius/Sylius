@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Payum\Bundle\PayumBundle\Security\TokenFactory;
-use Payum\Core\Registry\RegistryInterface;
-use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Payment\Manager\PaymentManagerInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,17 +32,15 @@ class PurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
-        /** @var $payment PaymentInterface */
-        $payment = $order->getPayments()->last();
-
-        $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGateway(),
-            $payment,
-            'sylius_checkout_forward',
-            array('stepName' => $this->getName())
+        $redirectUrl = $this->getPaymentManager()->initialize(
+            $order,
+            array(
+                'route'    => 'sylius_checkout_forward',
+                'stepName' => $this->getName()
+            )
         );
 
-        return new RedirectResponse($captureToken->getTargetUrl());
+        return new RedirectResponse($redirectUrl);
     }
 
     /**
@@ -52,14 +48,15 @@ class PurchaseStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
-        $this->getHttpRequestVerifier()->invalidate($token);
+        $paymentManager = $this->getPaymentManager();
 
-        $status = new StatusRequest($token);
-        $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
+        $nextState = $paymentManager->handle($this->getRequest());
+
+        /** @var $order OrderInterface */
+        $order = $paymentManager->getSubject();
 
         /** @var $payment PaymentInterface */
-        $payment = $status->getModel();
+        $payment = $order->getPayments()->last();
 
         if (!$payment instanceof PaymentInterface) {
             throw new UnexpectedTypeException($payment, 'Sylius\Component\Core\Model\PaymentInterface');
@@ -69,8 +66,6 @@ class PurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
-        $nextState = $status->getStatus();
-
         $stateMachine = $this->get('sm.factory')->get($payment, PaymentTransitions::GRAPH);
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
@@ -79,7 +74,7 @@ class PurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->getManager()->flush();
 
         $event = new PurchaseCompleteEvent($payment);
         $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
@@ -92,26 +87,10 @@ class PurchaseStep extends CheckoutStep
     }
 
     /**
-     * @return RegistryInterface
+     * @return PaymentManagerInterface
      */
-    protected function getPayum()
+    protected function getPaymentManager()
     {
-        return $this->get('payum');
-    }
-
-    /**
-     * @return TokenFactory
-     */
-    protected function getTokenFactory()
-    {
-        return $this->get('payum.security.token_factory');
-    }
-
-    /**
-     * @return HttpRequestVerifierInterface
-     */
-    protected function getHttpRequestVerifier()
-    {
-        return $this->get('payum.security.http_request_verifier');
+        return $this->get('sylius.payments.payment_manager');
     }
 }
