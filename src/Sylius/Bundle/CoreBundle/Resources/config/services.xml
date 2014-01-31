@@ -303,6 +303,7 @@
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
+            <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
