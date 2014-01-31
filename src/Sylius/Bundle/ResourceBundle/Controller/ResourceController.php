@@ -12,13 +12,11 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
  * Base resource controller for Sylius.
@@ -28,10 +26,25 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
  */
 class ResourceController extends FOSRestController
 {
+    /**
+     * @var Configuration
+     */
     protected $config;
+    /**
+     * @var FlashHelper
+     */
     protected $flashHelper;
+    /**
+     * @var DomainManager
+     */
     protected $domainManager;
+    /**
+     * @var ResourceResolver
+     */
     protected $resourceResolver;
+    /**
+     * @var RedirectHandler
+     */
     protected $redirectHandler;
 
     public function __construct(Configuration $config)
@@ -54,13 +67,13 @@ class ResourceController extends FOSRestController
         $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
     }
 
-    public function showAction()
+    public function showAction(Request $request)
     {
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
             ->setTemplateVar($this->config->getResourceName())
-            ->setData($this->findOr404())
+            ->setData($this->findOr404($request))
         ;
 
         return $this->handleView($view);
@@ -71,16 +84,12 @@ class ResourceController extends FOSRestController
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
-        $pluralName = $this->config->getPluralResourceName();
         $repository = $this->getRepository();
 
         if ($this->config->isPaginated()) {
             $resources = $this->resourceResolver->getResource($repository, 'createPaginator', array($criteria, $sorting));
-
-            $resources
-                ->setCurrentPage($request->get('page', 1), true, true)
-                ->setMaxPerPage($this->config->getPaginationMaxPerPage())
-              ;
+            $resources->setCurrentPage($request->get('page', 1), true, true);
+            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
         } else {
             $resources = $this->resourceResolver->getResource($repository, 'findBy', array($criteria, $sorting, $this->config->getLimit()));
         }
@@ -88,7 +97,7 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($pluralName)
+            ->setTemplateVar($this->config->getPluralResourceName())
             ->setData($resources)
         ;
 
@@ -100,7 +109,7 @@ class ResourceController extends FOSRestController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
             return null === $resource ? $this->redirectHandler->redirectToIndex() : $this->redirectHandler->redirectTo($resource);
@@ -124,10 +133,10 @@ class ResourceController extends FOSRestController
 
     public function updateAction(Request $request)
     {
-        $resource = $this->findOr404();
+        $resource = $this->findOr404($request);
         $form = $this->getForm($resource);
 
-        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
+        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
             $this->domainManager->update($resource);
 
             return $this->redirectHandler->redirectTo($resource);
@@ -149,9 +158,9 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function deleteAction()
+    public function deleteAction(Request $request)
     {
-        $resource = $this->findOr404();
+        $resource = $this->findOr404($request);
         $this->domainManager->delete($resource);
 
         return $this->redirectHandler->redirectToIndex($resource);
@@ -162,22 +171,44 @@ class ResourceController extends FOSRestController
         return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
     }
 
+    /**
+     * @param object|null $resource
+     *
+     * @return FormInterface
+     */
     public function getForm($resource = null)
     {
         return $this->createForm($this->config->getFormType(), $resource);
     }
 
-    public function findOr404(array $criteria = null)
+    /**
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return object
+     *
+     * @throws NotFoundHttpException
+     */
+    public function findOr404(Request $request, array $criteria = array())
     {
-        $default = array('id' => $this->getRequest()->get('id'));
+        if ($request->get('slug')) {
+            $default = array('slug' => $request->get('slug'));
+        } else {
+            $default = array('id' => $request->get('id'));
+        }
 
-        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($this->config->getCriteria($default)))) {
+        $criteria = array_merge($default, $criteria);
+
+        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($this->config->getCriteria($criteria)))) {
             throw new NotFoundHttpException(sprintf('Requested %s does not exist.', $this->config->getResourceName()));
         }
 
         return $resource;
     }
 
+    /**
+     * @return RepositoryInterface
+     */
     public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));

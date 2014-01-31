@@ -39,7 +39,7 @@ class CouponController extends ResourceController
 
         $promotion = $this
             ->getPromotionController()
-            ->findOr404(array('id' => $promotionId))
+            ->findOr404($request, array('id' => $promotionId))
         ;
 
         $form = $this->createForm('sylius_promotion_coupon_generate_instruction', new Instruction());
@@ -76,13 +76,14 @@ class CouponController extends ResourceController
      */
     public function createNew()
     {
-        if (null === $promotionId = $this->getRequest()->get('promotionId')) {
+        $request = $this->getRequest();
+        if (null === $promotionId = $request->get('promotionId')) {
             throw new NotFoundHttpException('No promotion id given');
         }
 
         $promotion = $this
             ->getPromotionController()
-            ->findOr404(array('id' => $promotionId))
+            ->findOr404($request, array('id' => $promotionId))
         ;
 
         $coupon = parent::createNew();

@@ -45,11 +45,6 @@ class RedirectHandler
         return $this->redirectToRoute($this->config->getRedirectRoute('index'), $this->config->getRedirectParameters());
     }
 
-    protected function redirectToReferer()
-    {
-        return $this->redirect($this->config->getRequest()->headers->get('referer'));
-    }
-
     public function redirectToRoute($route, array $data = array())
     {
         if ('referer' === $route) {
@@ -62,5 +57,10 @@ class RedirectHandler
     public function redirect($url, $status = 302)
     {
         return new RedirectResponse($url, $status);
+    }
+
+    protected function redirectToReferer()
+    {
+        return $this->redirect($this->config->getRequest()->headers->get('referer'));
     }
 }

@@ -66,13 +66,14 @@ class ProvinceController extends ResourceController
      */
     public function createNew()
     {
-        if (null === $countryId = $this->getRequest()->get('countryId')) {
+        $request = $this->getRequest();
+        if (null === $countryId = $request->get('countryId')) {
             throw new NotFoundHttpException('No country given');
         }
 
         $country = $this
             ->getCountryController()
-            ->findOr404(array('id' => $countryId))
+            ->findOr404($request, array('id' => $countryId))
         ;
 
         $province = parent::createNew();

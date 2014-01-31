@@ -180,7 +180,7 @@ class Configuration
 
     public function getCriteria($default = array())
     {
-        $defaultCriteria = $this->get('criteria', $default);
+        $defaultCriteria = array_merge($this->get('criteria', array()), $default);
 
         if ($this->isFilterable()) {
             return array_merge($defaultCriteria, $this->request->get('criteria', array()));

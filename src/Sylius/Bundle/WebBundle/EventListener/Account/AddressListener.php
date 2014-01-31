@@ -37,15 +37,24 @@ class AddressListener
     /**
      * @param ResourceEvent $event
      */
+    public function onAddressPreCreate(ResourceEvent $event)
+    {
+        $user = $this->securityContext->getToken()->getUser();
+        $user->addAddress($event->getSubject());
+    }
+
+    /**
+     * @param ResourceEvent $event
+     */
     public function onAddressPreDelete(ResourceEvent $event)
     {
         $address = $event->getSubject();
         $user = $this->securityContext->getToken()->getUser();
 
-        if ($address == $user->getBillingAddress()) {
+        if ($address === $user->getBillingAddress()) {
             $user->setBillingAddress(null);
         }
-        if ($address == $user->getShippingAddress()) {
+        if ($address === $user->getShippingAddress()) {
             $user->setShippingAddress(null);
         }
     }
