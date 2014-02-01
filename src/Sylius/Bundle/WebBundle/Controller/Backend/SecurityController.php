@@ -14,6 +14,7 @@ namespace Sylius\Bundle\WebBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -29,9 +30,11 @@ class SecurityController extends Controller
      * Target action for _switch_user=_exit, redirects admin back to impersonated user
      *
      * @param string $username
+     *
+     * @return RedirectResponse
+     *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
-     * @return RedirectResponse
      */
     public function exitUserSwitchAction($username)
     {
@@ -48,6 +51,11 @@ class SecurityController extends Controller
         return $this->redirect($this->generateUrl('sylius_backend_user_show', array('id' => $user->getId())));
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function loginAction(Request $request)
     {
         $session = $request->getSession();

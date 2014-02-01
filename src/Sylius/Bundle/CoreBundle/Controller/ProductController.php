@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -28,7 +29,7 @@ class ProductController extends ResourceController
      * @param Request $request
      * @param string  $permalink
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws NotFoundHttpException
      */
@@ -49,7 +50,7 @@ class ProductController extends ResourceController
         $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
         $paginator->setCurrentPage($request->query->get('page', 1));
 
-        return $this->render('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
+        return $this->render($this->config->getTemplate('indexByTaxon.html'), array(
             'taxon'    => $taxon,
             'products' => $paginator,
         ));
@@ -88,19 +89,17 @@ class ProductController extends ResourceController
      */
     public function historyAction(Request $request)
     {
+        $product = $this->findOr404($request);
+
         $logEntryRepository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
-
-        $product = $this->findOr404();
-
-        $data = array(
-            $this->config->getResourceName() => $product,
-            'logs'                           => $logEntryRepository->getLogEntries($product)
-        );
 
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData($data)
+            ->setData(array(
+                $this->config->getResourceName() => $product,
+                'logs'                           => $logEntryRepository->getLogEntries($product)
+            ))
         ;
 
         return $this->handleView($view);

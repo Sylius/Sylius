@@ -40,14 +40,18 @@ class FlashHelper
 
     private function generateFlashMessage($event, $params = array())
     {
-        $message = $this->config->getFlashMessage($event);
-        $translatedMessage = $this->translateFlashMessage($message, $params);
+        if (false === strpos($event, 'sylius.')) {
+            $message = $this->config->getFlashMessage($event);
+            $translatedMessage = $this->translateFlashMessage($message, $params);
 
-        if ($message !== $translatedMessage) {
-            return $translatedMessage;
+            if ($message !== $translatedMessage) {
+                return $translatedMessage;
+            }
+
+            return $this->translateFlashMessage('sylius.resource.'.$event, $params);
         }
 
-        return $this->translateFlashMessage('sylius.resource.'.$event, $params);
+        return $this->translateFlashMessage($event, $params);
     }
 
     private function translateFlashMessage($message, $params = array())
@@ -56,5 +60,4 @@ class FlashHelper
 
         return $this->translator->trans($message, array_merge(array('%resource%' => $resource), $params), 'flashes');
     }
-
 }

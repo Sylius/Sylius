@@ -35,12 +35,11 @@ class OrderController extends ResourceController
      * @param integer $id
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function indexByUserAction(Request $request, $id)
     {
-        $sorting = $this->config->getSorting();
-
         $user = $this->get('sylius.repository.user')->findOneById($id);
 
         if (!$user) {
@@ -49,7 +48,7 @@ class OrderController extends ResourceController
 
         $paginator = $this
             ->getRepository()
-            ->createByUserPaginator($user, $sorting)
+            ->createByUserPaginator($user, $this->config->getSorting())
         ;
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);

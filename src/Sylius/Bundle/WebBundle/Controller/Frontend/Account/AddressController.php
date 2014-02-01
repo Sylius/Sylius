@@ -54,14 +54,14 @@ class AddressController extends ResourceController
     {
         $address = $this->findOr404($request);
 
-        $manager = $this->getUserManager();
         $user = $this->getUser();
-
         $user->setBillingAddress($address);
+
+        $manager = $this->getUserManager();
         $manager->persist($user);
         $manager->flush();
 
-        $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.billing.success'));
+        $this->flashHelper->setFlash('success', 'sylius.account.address.flash.billing.success');
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
@@ -84,7 +84,7 @@ class AddressController extends ResourceController
         $manager->persist($user);
         $manager->flush();
 
-        $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.shipping.success'));
+        $this->flashHelper->setFlash('success', 'sylius.account.address.flash.shipping.success');
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
@@ -98,7 +98,7 @@ class AddressController extends ResourceController
     }
 
     /**
-     * Accesses address or throws 403
+     * Accesses address or throws 403/404
      *
      * @param Request $request
      * @param array   $criteria
@@ -107,7 +107,7 @@ class AddressController extends ResourceController
      *
      * @throws AccessDeniedException
      */
-    public function findOr404(Request $request, array $criteria = null)
+    public function findOr404(Request $request, array $criteria = array())
     {
         $address = parent::findOr404($request, $criteria);
 

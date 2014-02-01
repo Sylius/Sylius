@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="bafb5c8341a660880f5e7c181173f65e" resname="sylius.account.address.flash.billing.success">
+        <source>sylius.account.address.flash.billing.success</source>
+        <target>The address has been successfully set as your default billing address.</target>
+      </trans-unit>
+      <trans-unit id="a2cc61ae28a28a4795ae179dc8444d4f" resname="sylius.account.address.flash.shipping.success">
+        <source>sylius.account.address.flash.shipping.success</source>
+        <target>The address has been successfully set as your default shipping address.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
