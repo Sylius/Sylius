@@ -17,7 +17,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -28,7 +28,7 @@ class CartProviderSpec extends ObjectBehavior
     function let(
         CartStorageInterface $storage,
         ObjectManager $manager,
-        RepositoryInterface $repository,
+        CartRepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher
     )
     {
@@ -53,7 +53,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(3);
-        $repository->find(3)->shouldBeCalled()->willReturn($cart);
+        $repository->findOneCartByIdentifier(3)->shouldBeCalled()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldNotBeCalled();
 
         $this->getCart()->shouldReturn($cart);
@@ -81,7 +81,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(7);
-        $repository->find(7)->shouldBeCalled()->willReturn(null);
+        $repository->findOneCartByIdentifier(7)->shouldBeCalled()->willReturn(null);
         $repository->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
@@ -118,7 +118,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(null);
-        $repository->find(Argument::any())->shouldNotBeCalled();
+        $repository->findOneCartByIdentifier(Argument::any())->shouldNotBeCalled();
 
         $this->hasCart()->shouldReturn(false);
     }
@@ -130,7 +130,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(666);
-        $repository->find(666)->shouldBeCalled()->willReturn($cart);
+        $repository->findOneCartByIdentifier(666)->shouldBeCalled()->willReturn($cart);
 
         $this->hasCart()->shouldReturn(true);
     }
