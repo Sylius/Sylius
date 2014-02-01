@@ -35,6 +35,7 @@ use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -1173,6 +1174,17 @@ class DataContext extends BehatContext implements KernelAwareInterface
         }
 
         return $shipment;
+    }
+
+    /**
+     * Change cart status 
+     */
+    public function changeCartToPending()
+    {
+        $cart = $this->getService('sylius.cart_provider')->getCart();
+        $cart->setState(CartInterface::STATE_PENDING);
+        $this->getEntityManager()->persist($cart);
+        $this->getEntityManager()->flush();
     }
 
     /**
