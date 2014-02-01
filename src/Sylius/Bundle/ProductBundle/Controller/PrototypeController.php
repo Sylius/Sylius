@@ -49,14 +49,13 @@ class PrototypeController extends ResourceController
         $form = $productController->getForm($product);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $manager = $productController->getManager();
-
+            $manager = $this->get('doctrine')->getManager();
             $manager->persist($product);
             $manager->flush();
 
-            $productController->setFlash('success', '%resource% has been successfully created.');
+            $this->flashHelper->setFlash('success', '%resource% has been successfully created.');
 
-            return $productController->redirectTo($product);
+            return $this->redirectHandler->redirectTo($product);
         }
 
         return $productController->render($this->config->getTemplate('build.html'), array(
