@@ -66,9 +66,9 @@
         <source>sylius.form.payment.state.unknown</source>
         <target>Unknown</target>
       </trans-unit>
-      <trans-unit id="e9eb04055e6e2430eb23b5efdd4bc2ca" resname="sylius.form.payment.state.void">
-        <source>sylius.form.payment.state.void</source>
-        <target>Void</target>
+      <trans-unit id="3b3bddd7b8b1309bf8e8afab4f166b42" resname="sylius.form.payment.state.cancelled">
+        <source>sylius.form.payment.state.cancelled</source>
+        <target>Cancelled</target>
       </trans-unit>
       <trans-unit id="a5c8dae58a59fe570e21ce2283d0c5e6" resname="sylius.form.payment_method.description">
         <source>sylius.form.payment_method.description</source>

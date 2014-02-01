@@ -137,7 +137,6 @@ class LoadOrdersData extends DataFixture
             PaymentInterface::STATE_PENDING,
             PaymentInterface::STATE_PROCESSING,
             PaymentInterface::STATE_UNKNOWN,
-            PaymentInterface::STATE_VOID,
             PaymentInterface::STATE_CANCELLED,
             PaymentInterface::STATE_REFUNDED,
         )));
