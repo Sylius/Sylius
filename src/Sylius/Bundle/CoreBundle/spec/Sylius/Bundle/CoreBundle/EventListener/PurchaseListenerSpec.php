@@ -13,14 +13,14 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseListenerSpec extends ObjectBehavior
 {
@@ -45,7 +45,9 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\PurchaseListener');
     }
 
-    function it_should_abandon_cart_and_set_success_flash_message_if_payment_status_success(CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_abandon_cart_and_set_success_flash_message_if_payment_status_success(
+        CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
@@ -63,7 +65,9 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_abandon_cart_and_set_notice_flash_message_if_payment_status_pending(CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_abandon_cart_and_set_notice_flash_message_if_payment_status_pending(
+        CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
 
@@ -81,7 +85,9 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_abandon_cart_and_set_notice_flash_message_if_payment_status_processing(CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_abandon_cart_and_set_notice_flash_message_if_payment_status_processing(
+        CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
 
@@ -99,25 +105,29 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_not_abandon_cart_and_set_notice_flash_message_if_payment_status_canceled(CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_not_abandon_cart_and_set_notice_flash_message_if_payment_status_canceled(
+        CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment
+    )
     {
-        $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
+        $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
 
         $cartProvider->abandonCart()->shouldNotBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldBeCalled();
 
         $translator
-            ->trans('sylius.checkout.canceled', array(), 'flashes')
+            ->trans('sylius.checkout.cancelled', array(), 'flashes')
             ->shouldBeCalled()
-            ->willReturn('translated.sylius.checkout.canceled')
+            ->willReturn('translated.sylius.checkout.cancelled')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
+        $flashBag->add('notice','translated.sylius.checkout.cancelled')->shouldBeCalled();
 
         $this->abandonCart($event);
     }
 
-    function it_should_not_abandon_cart_and_set_error_flash_message_if_payment_status_failed(CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_not_abandon_cart_and_set_error_flash_message_if_payment_status_failed(
+        CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
@@ -135,7 +145,9 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_not_abandon_cart_and_set_error_flash_message_if_payment_status_unknown(CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_not_abandon_cart_and_set_error_flash_message_if_payment_status_unknown(
+        CartProviderInterface $cartProvider, TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
 
