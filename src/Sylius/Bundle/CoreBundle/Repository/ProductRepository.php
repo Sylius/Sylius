@@ -123,4 +123,9 @@ class ProductRepository extends VariableProductRepository
     {
         return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
     }
+
+    public function getFormQueryBuilder()
+    {
+        return $this->getCollectionQueryBuilder();
+    }
 }

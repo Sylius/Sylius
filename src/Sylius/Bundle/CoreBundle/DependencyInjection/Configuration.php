@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
         $this->addEmailsSection($rootNode);
 
         return $treeBuilder;
@@ -139,6 +140,51 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\\Bundle\\CoreBundle\\Model\\VariantImage')->end()
                             ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('promotion_rule_user_loyality_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_rule_shipping_country_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_rule_taxonomy_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_rule_nth_order_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_rule_variant_in_cart_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_rule_product_in_cart_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_action_add_product_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('promotion_action_shipping_discount_configuration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
                         ->end()
                     ->end()
                 ->end()
