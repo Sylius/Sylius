@@ -60,6 +60,8 @@
 
         <parameter key="sylius.promotion_rule_checker.contain_item.class">Sylius\Component\Core\Promotion\Checker\ContainItemRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.variant_in_cart.class">Sylius\Comdle\Core\Promotion\Checker\VariantInCartRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.product_in_cart.class">Sylius\Com\Core\Promotion\Checker\ProductInCartRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
@@ -322,6 +324,12 @@
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
+        </service>
+        <service id="sylius.promotion_rule_checker.variant_in_cart" class="%sylius.promotion_rule_checker.variant_in_cart.class%">
+            <tag name="sylius.promotion_rule_checker" type="variant_in_cart" label="Variant in cart" />
+        </service>
+        <service id="sylius.promotion_rule_checker.product_in_cart" class="%sylius.promotion_rule_checker.product_in_cart.class%">
+            <tag name="sylius.promotion_rule_checker" type="product_in_cart" label="Product in cart" />
         </service>
         <service id="sylius.promotion_rule_checker.user_loyalty" class="%sylius.promotion_rule_checker.user_loyalty.class%">
             <tag name="sylius.promotion_rule_checker" type="user_loyalty" label="User loyalty" />

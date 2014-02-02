@@ -124,4 +124,9 @@ class ProductRepository extends BaseProductRepository
     {
         return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
     }
+
+    public function getFormQueryBuilder()
+    {
+        return $this->getCollectionQueryBuilder();
+    }
 }
