@@ -35,4 +35,20 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     {
         // nothing happens.
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hold(StockableInterface $stockable, $quantity)
+    {
+        // nothing happens
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function release(StockableInterface $stockable, $quantity)
+    {
+        // nothing happens
+    }
 }
