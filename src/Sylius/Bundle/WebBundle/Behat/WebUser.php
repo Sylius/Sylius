@@ -910,11 +910,15 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if (null === $routes->get($route)) {
-            $route = 'sylius_'.$route;
+            $route = 'en__RG__'.$route;
         }
 
         if (null === $routes->get($route)) {
-            $route = str_replace('sylius_', 'sylius_backend_', $route);
+            $route = str_replace('en__RG__', 'en__RG__sylius_', $route);
+        }
+
+        if (null === $routes->get($route)) {
+            $route = str_replace('en__RG__sylius_', 'en__RG__sylius_backend_', $route);
         }
 
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
