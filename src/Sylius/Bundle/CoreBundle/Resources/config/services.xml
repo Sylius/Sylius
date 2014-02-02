@@ -302,6 +302,7 @@
             <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
+            <argument>sylius_checkout_payment</argument>
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
         </service>
 

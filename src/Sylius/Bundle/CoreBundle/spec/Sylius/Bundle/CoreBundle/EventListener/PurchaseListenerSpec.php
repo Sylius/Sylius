@@ -33,7 +33,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
-        $this->beConstructedWith($cartProvider, $router, $session, $translator);
+        $this->beConstructedWith($cartProvider, $router, $session, $translator, 'sylius_checkout_payment');
 
         $session->getBag('flashes')->willReturn($flashBag);
         $event->getSubject()->willReturn($payment);

@@ -25,13 +25,15 @@ class PurchaseListener
     protected $router;
     protected $session;
     protected $translator;
+    protected $redirectTo;
 
-    public function __construct(CartProviderInterface $cartProvider, UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator)
+    public function __construct(CartProviderInterface $cartProvider, UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator, $redirectTo)
     {
         $this->cartProvider = $cartProvider;
         $this->router = $router;
         $this->session = $session;
         $this->translator = $translator;
+        $this->redirectTo = $redirectTo;
     }
 
     public function abandonCart(PurchaseCompleteEvent $event)
@@ -47,7 +49,7 @@ class PurchaseListener
         }
 
         $event->setResponse(new RedirectResponse(
-            $this->router->generate('sylius_checkout_payment')
+            $this->router->generate($this->redirectTo)
         ));
     }
 
