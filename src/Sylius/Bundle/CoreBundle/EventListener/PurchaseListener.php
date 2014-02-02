@@ -21,10 +21,10 @@ use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class PurchaseListener
 {
-    private $cartProvider;
-    private $router;
-    private $session;
-    private $translator;
+    protected $cartProvider;
+    protected $router;
+    protected $session;
+    protected $translator;
 
     public function __construct(CartProviderInterface $cartProvider, UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator)
     {
