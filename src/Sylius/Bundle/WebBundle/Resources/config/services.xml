@@ -57,6 +57,7 @@
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.twig.money" />
+            <argument>%sylius.locales%</argument>
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
@@ -73,6 +74,9 @@
         </service>
         <service id="sylius.menu.frontend.currency" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createCurrencyMenu">
             <tag name="knp_menu.menu" alias="sylius.frontend.currency" />
+        </service>
+        <service id="sylius.menu.frontend.locale" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createLocaleMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.locale" />
         </service>
         <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonomiesMenu" scope="request">
             <argument type="service" id="request" />
