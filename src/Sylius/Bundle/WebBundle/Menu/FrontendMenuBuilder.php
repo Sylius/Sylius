@@ -120,7 +120,7 @@ class FrontendMenuBuilder extends MenuBuilder
             '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
         )));
 
-        if ($this->securityContext->isGranted('ROLE_USER')) {
+        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_USER')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
             if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
@@ -155,7 +155,7 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
+        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
 
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
