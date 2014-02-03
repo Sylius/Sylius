@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class PurchaseListenerSpec extends ObjectBehavior

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class PurchaseListener
