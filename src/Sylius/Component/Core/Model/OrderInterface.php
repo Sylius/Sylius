@@ -12,19 +12,33 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Addressing\Model\BillingAddressAwareInterface;
+use Sylius\Component\Order\Model\UserAwareInterface;
+use Sylius\Component\Payment\Model\PaymentAwareInterface;
+use Sylius\Component\Addressing\Model\ShippingAddressAwareInterface;
+use Sylius\Component\Promotion\Model\PromotionTotalAwareInterface;
+use Sylius\Component\Shipping\Model\ShippingTotalAwareInterface;
+use Sylius\Component\Taxation\Model\TaxTotalAwareInterface;
 
 /**
  * Sylius core Order model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends CartInterface, PromotionSubjectInterface
+interface OrderInterface extends
+    CartInterface,
+    PromotionSubjectInterface,
+    PaymentAwareInterface,
+    ShippingAddressAwareInterface,
+    BillingAddressAwareInterface,
+    TaxTotalAwareInterface,
+    PromotionTotalAwareInterface,
+    ShippingTotalAwareInterface,
+    UserAwareInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
@@ -46,41 +60,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function setUser(UserInterface $user);
 
     /**
-     * Get shipping address.
-     *
-     * @return AddressInterface
-     */
-    public function getShippingAddress();
-
-    /**
-     * Set shipping address.
-     *
-     * @param AddressInterface $address
-     */
-    public function setShippingAddress(AddressInterface $address);
-
-    /**
-     * Get billing address.
-     *
-     * @return AddressInterface
-     */
-    public function getBillingAddress();
-
-    /**
-     * Set billing address.
-     *
-     * @param AddressInterface $address
-     */
-    public function setBillingAddress(AddressInterface $address);
-
-    /**
-     * Get the tax total.
-     *
-     * @return float
-     */
-    public function getTaxTotal();
-
-    /**
      * Get all tax adjustments.
      *
      * @return Collection|AdjustmentInterface[]
@@ -91,13 +70,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * Remove all tax adjustments.
      */
     public function removeTaxAdjustments();
-
-    /**
-     * Get the promotion total.
-     *
-     * @return float
-     */
-    public function getPromotionTotal();
 
     /**
      * Get all promotion adjustments.
@@ -112,13 +84,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function removePromotionAdjustments();
 
     /**
-     * Get shipping total.
-     *
-     * @return float
-     */
-    public function getShippingTotal();
-
-    /**
      * Get all shipping adjustments.
      *
      * @return Collection|AdjustmentInterface[]
@@ -129,34 +94,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * Remove all shipping adjustments.
      */
     public function removeShippingAdjustments();
-
-    /**
-     * Get the payment associated with the order.
-     *
-     * @return PaymentInterface
-     */
-    public function getPayment();
-
-    /**
-     * Set payment.
-     *
-     * @param PaymentInterface $payment
-     */
-    public function setPayment(PaymentInterface $payment);
-
-    /**
-     * Get the payment state.
-     *
-     * @return string
-     */
-    public function getPaymentState();
-
-    /**
-     * Set the payment state.
-     *
-     * @param string $paymentState
-     */
-    public function setPaymentState($paymentState);
 
     /**
      * Get all inventory units.
@@ -210,22 +147,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return Boolean
      */
     public function hasShipment(ShipmentInterface $shipment);
-
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string
-     *
-     * @return OrderInterface
-     */
-    public function setCurrency($currency);
 
     /**
      * Set promotion coupon.

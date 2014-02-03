@@ -17,7 +17,8 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredNotifyRequest;
 use Payum\Core\Request\SyncRequest;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Payment\Model\PaymentAwareInterface;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -54,7 +55,7 @@ class NotifyOrderAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
+        /** @var OrderInterface|PaymentAwareInterface $order */
         $order = $request->getModel();
         $payment = $order->getPayment();
         $previousState = $payment->getState();
@@ -87,7 +88,8 @@ class NotifyOrderAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredNotifyRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof OrderInterface &&
+            $request->getModel() instanceof PaymentAwareInterface
         ;
     }
 }

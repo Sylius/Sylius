@@ -55,6 +55,13 @@ class NotifyAction extends PaymentAwareAction
      */
     protected $identifier;
 
+    /**
+     * @param Api                      $api
+     * @param OrderRepositoryInterface $orderRepository
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param ObjectManager            $objectManager
+     * @param string                   $identifier
+     */
     public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager, $identifier)
     {
         $this->api             = $api;
