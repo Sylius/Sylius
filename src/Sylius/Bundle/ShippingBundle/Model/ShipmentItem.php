@@ -44,7 +44,7 @@ class ShipmentItem implements ShipmentItemInterface
      *
      * @var string
      */
-    protected $shippingState = ShipmentItemInterface::STATE_READY;
+    protected $shippingState = ShipmentInterface::STATE_READY;
 
     /**
      * Creation time.

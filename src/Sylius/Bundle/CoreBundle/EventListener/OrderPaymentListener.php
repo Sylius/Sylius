@@ -47,6 +47,8 @@ class OrderPaymentListener
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
+     * @param EntityRepository          $orderRepository
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(PaymentProcessorInterface $paymentProcessor, EntityRepository $orderRepository, EventDispatcherInterface $dispatcher)
     {

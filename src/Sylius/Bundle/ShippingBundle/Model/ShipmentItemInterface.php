@@ -20,11 +20,6 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
  */
 interface ShipmentItemInterface extends TimestampableInterface
 {
-    // Shipment item default states.
-    const STATE_READY    = 'ready';
-    const STATE_PENDING  = 'pending';
-    const STATE_SHIPPED  = 'shipped';
-
     /**
      * Get shipment.
      *

@@ -33,10 +33,12 @@
 
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
+        <parameter key="sylius.listener.inventory_unit.class">Sylius\Bundle\CoreBundle\EventListener\InventoryUnitListener</parameter>
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
+        <parameter key="sylius.listener.shipment.class">Sylius\Bundle\CoreBundle\EventListener\ShipmentListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
@@ -236,8 +238,12 @@
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_release" method="releaseInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="updateInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="createInventoryUnits" priority="-100" />
+        </service>
+        <service id="sylius.listener.inventory_unit" class="%sylius.listener.inventory_unit.class%">
+            <tag name="kernel.event_listener" event="sylius.inventory_unit.pre_state_change" method="updateState" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
@@ -254,10 +260,17 @@
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_factory" />
+            <argument type="service" id="sylius.processor.shipment_processor" />
             <argument type="service" id="sylius.order_processing.shipping_processor" />
             <tag name="kernel.event_listener" event="sylius.checkout.shipping.initialize" method="processOrderShipments" />
             <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderShippingCharges" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="processShipmentStates" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="updateShipmentStatesReady" />
+        </service>
+        <service id="sylius.listener.shipment" class="%sylius.listener.shipment.class%">
+            <argument type="service" id="sylius.order_processing.state_resolver" />
+            <argument type="service" id="sylius.processor.shipment_processor" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="kernel.event_listener" event="sylius.shipment.pre_ship" method="ship" />
         </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <argument type="service" id="sylius.order_processing.payment_processor" />

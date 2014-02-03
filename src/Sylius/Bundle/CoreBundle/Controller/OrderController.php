@@ -12,24 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class OrderController extends ResourceController
 {
-    /**
-     * Render order filter form.
-     */
-    public function filterFormAction(Request $request)
-    {
-        $form = $this->getFormFactory()->createNamed('criteria', 'sylius_order_filter', $request->query->get('criteria'));
-
-        return $this->render('SyliusWebBundle:Backend/Order:filterForm.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
-
     /**
      * @param Request $request
      * @param integer $id
@@ -65,15 +55,17 @@ class OrderController extends ResourceController
      *
      * @throws NotFoundHttpException
      */
-    public function releaseInventory()
+    public function releaseInventoryAction()
     {
         $order = $this->findOr404($this->getRequest());
 
-        $this->get('sylius.order_processing.inventory_handler')->releaseInventory($order);
+        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::PRE_RELEASE, new GenericEvent($order));
 
-        $this->update($order);
+        $this->domainManager->update($order);
 
-        return $this->redirectToReferer();
+        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
+
+        return $this->redirectHandler->redirectToReferer();
     }
 
     private function getFormFactory()

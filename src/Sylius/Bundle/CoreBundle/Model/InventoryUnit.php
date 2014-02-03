@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnit as BaseInventoryUnit;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface as BaseShipmentInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
 
 /**
@@ -48,9 +47,9 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * Shipping state.
      *
-     * @var string ShipmentItemInterface::STATE_*
+     * @var string ShipmentInterface::STATE_*
      */
-    protected $shippingState;
+    protected $shippingState = ShipmentInterface::STATE_READY;
 
     /**
      * Creation time.
@@ -65,11 +64,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
      * @var \DateTime
      */
     protected $updatedAt;
-
-    public function __construct()
-    {
-        $this->shippingState = ShipmentItemInterface::STATE_READY;
-    }
 
     /**
      * {@inheritdoc}

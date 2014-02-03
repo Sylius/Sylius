@@ -20,11 +20,12 @@ class OrderShippingListenerSpec extends ObjectBehavior
 {
     /**
      * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface          $shipmentFactory
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface $shippingProcessor
+     * @param Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface          $shippingProcessor
+     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface $shippingChargesProcessor
      */
-    function let($shipmentFactory, $shippingProcessor)
+    function let($shipmentFactory, $shippingProcessor, $shippingChargesProcessor)
     {
-        $this->beConstructedWith($shipmentFactory, $shippingProcessor);
+        $this->beConstructedWith($shipmentFactory, $shippingProcessor, $shippingChargesProcessor);
     }
 
     function it_is_initializable()
@@ -50,10 +51,10 @@ class OrderShippingListenerSpec extends ObjectBehavior
      * @param Symfony\Component\EventDispatcher\GenericEvent $event
      * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
      */
-    function it_calls_shipping_processor_on_order($shippingProcessor, $event, $order)
+    function it_calls_shipping_processor_on_order($shippingChargesProcessor, $event, $order)
     {
         $event->getSubject()->willReturn($order);
-        $shippingProcessor->applyShippingCharges($order)->shouldBeCalled();
+        $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
 
         $this->processOrderShippingCharges($event);
     }

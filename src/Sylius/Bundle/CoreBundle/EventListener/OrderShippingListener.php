@@ -13,7 +13,9 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
+use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -33,20 +35,29 @@ class OrderShippingListener
     /**
      * Order shipping processor.
      *
-     * @var ShippingChargesProcessorInterface
+     * @var ShipmentProcessorInterface
      */
     protected $shippingProcessor;
+
+    /**
+     * Order shipping charges processor.
+     *
+     * @var ShippingChargesProcessorInterface
+     */
+    protected $shippingChargesProcessor;
 
     /**
      * Constructor.
      *
      * @param ShipmentFactoryInterface          $shipmentFactory
-     * @param ShippingChargesProcessorInterface $shippingProcessor
+     * @param ShipmentProcessorInterface        $shippingProcessor
+     * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
-    public function __construct(ShipmentFactoryInterface $shipmentFactory, ShippingChargesProcessorInterface $shippingProcessor)
+    public function __construct(ShipmentFactoryInterface $shipmentFactory, ShipmentProcessorInterface $shippingProcessor, ShippingChargesProcessorInterface $shippingChargesProcessor)
     {
         $this->shipmentFactory = $shipmentFactory;
         $this->shippingProcessor = $shippingProcessor;
+        $this->shippingChargesProcessor = $shippingChargesProcessor;
     }
 
     /**
@@ -56,15 +67,9 @@ class OrderShippingListener
      */
     public function processOrderShipments(GenericEvent $event)
     {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
-        }
-
-        $this->shipmentFactory->createShipment($order);
+        $this->shipmentFactory->createShipment(
+            $this->getOrder($event)
+        );
     }
 
     /**
@@ -74,15 +79,9 @@ class OrderShippingListener
      */
     public function processOrderShippingCharges(GenericEvent $event)
     {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
-        }
-
-        $this->shippingProcessor->applyShippingCharges($order);
+        $this->shippingChargesProcessor->applyShippingCharges(
+            $this->getOrder($event)
+        );
     }
 
     /**
@@ -90,7 +89,16 @@ class OrderShippingListener
      *
      * @param GenericEvent $event
      */
-    public function processShipmentStates(GenericEvent $event)
+    public function updateShipmentStatesReady(GenericEvent $event)
+    {
+        $this->shippingProcessor->updateShipmentStates(
+            $this->getOrder($event)->getShipments(),
+            ShipmentInterface::STATE_READY,
+            ShipmentInterface::STATE_CHECKOUT
+        );
+    }
+
+    private function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
@@ -100,6 +108,6 @@ class OrderShippingListener
             );
         }
 
-        $this->shipmentFactory->updateShipmentStates($order);
+        return $order;
     }
 }
