@@ -119,7 +119,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,
-                Argument::type('Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent')
+                Argument::type('Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent')
             )
             ->shouldBeCalled()
         ;
@@ -163,7 +163,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,
-                Argument::type('Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent')
+                Argument::type('Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent')
             )
             ->shouldBeCalled()
         ;

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class PurchaseListener
@@ -36,11 +36,7 @@ class PurchaseListener
 
     public function abandonCart(PurchaseCompleteEvent $event)
     {
-        $payment = $event->getSubject();
-
-        $this->addFlash($state = $payment->getState());
-
-        if (in_array($state, array(PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED))) {
+        if (in_array($event->getSubject()->getState(), array(PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED))) {
             $this->cartProvider->abandonCart();
 
             return;
@@ -51,9 +47,9 @@ class PurchaseListener
         ));
     }
 
-    private function addFlash($state)
+    public function addFlash(PurchaseCompleteEvent $event)
     {
-        switch ($state) {
+        switch ($event->getSubject()->getState()) {
             case PaymentInterface::STATE_COMPLETED:
                 $type = 'success';
                 $message = 'sylius.checkout.success';

@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\PayumBundle\Event\PurchaseCompleteEvent;
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
