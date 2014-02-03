@@ -58,6 +58,13 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $moneyExtension;
 
     /**
+     * Supported locales.
+     *
+     * @var array
+     */
+    protected $locales;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
@@ -75,7 +82,8 @@ class FrontendMenuBuilder extends MenuBuilder
         RepositoryInterface      $exchangeRateRepository,
         RepositoryInterface      $taxonomyRepository,
         CartProviderInterface    $cartProvider,
-        SyliusMoneyExtension     $moneyExtension
+        SyliusMoneyExtension     $moneyExtension,
+        array                    $locales
     )
     {
         parent::__construct($factory, $securityContext, $translator);
@@ -84,6 +92,7 @@ class FrontendMenuBuilder extends MenuBuilder
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->moneyExtension = $moneyExtension;
+        $this->locales = $locales;
     }
 
     /**
@@ -198,6 +207,29 @@ class FrontendMenuBuilder extends MenuBuilder
                 'routeParameters' => array('currency' => $exchangeRate->getCurrency()),
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $exchangeRate->getCurrency()))),
             ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($exchangeRate->getCurrency()));
+        }
+
+        return $menu;
+    }
+
+    /**
+     * Builds frontend locale menu.
+     *
+     * @return ItemInterface
+     */
+    public function createLocaleMenu()
+    {
+        $menu = $this->factory->createItem('root', array(
+            'childrenAttributes' => array(
+                'class' => 'nav nav-pills'
+            )
+        ));
+
+        foreach ($this->locales as $locale) {
+            $menu->addChild($locale, array(
+                'route' => 'sylius_homepage',
+                'routeParameters' => array('_locale' => $locale)
+            ))->setLabel(Intl::getLanguageBundle()->getLanguageName($locale));
         }
 
         return $menu;

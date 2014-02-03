@@ -30,8 +30,10 @@ class LocaleListener
 
     public function setRequestLocale(GetResponseEvent $event)
     {
-        $event->getRequest()->setLocale(
-            $this->settingsManager->loadSettings('general')->get('locale')
-        );
+        if (null === $locale = $this->settingsManager->loadSettings('general')->get('locale')) {
+            return;
+        }
+
+        $event->getRequest()->setLocale($locale);
     }
 }

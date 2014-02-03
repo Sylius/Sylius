@@ -18,6 +18,11 @@ framework:
     trusted_proxies: ~
     session:         ~
 
+jms_i18n_routing:
+    default_locale: %sylius.locale%
+    locales: %sylius.locales%
+    strategy: prefix_except_default
+
 twig:
     form:
         resources:
@@ -95,7 +100,7 @@ hwi_oauth:
     resource_owners:
         amazon:
             type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid% 
+            client_id:     %sylius.oauth.amazon.clientid%
             client_secret: %sylius.oauth.amazon.clientsecret%
         facebook:
             type:          facebook
