@@ -56,11 +56,13 @@
         </service>
 
         <service id="sylius.generator.order_number" class="%sylius.generator.order_number.class%">
-            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.number" />
         </service>
 
         <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
             <argument type="service" id="sylius.generator.order_number" />
+            <argument type="service" id="sylius.repository.number" />
+            <argument type="service" id="sylius.manager.number" />
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
         </service>
         

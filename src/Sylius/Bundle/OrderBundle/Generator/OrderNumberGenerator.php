@@ -12,21 +12,22 @@
 namespace Sylius\Bundle\OrderBundle\Generator;
 
 use Sylius\Bundle\OrderBundle\Model\OrderInterface;
-use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use Sylius\Bundle\OrderBundle\Repository\NumberRepositoryInterface;
 
 /**
  * Default order number generator.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderNumberGenerator implements OrderNumberGeneratorInterface
 {
     /**
-     * Order repository.
+     * Number repository.
      *
-     * @var OrderRepositoryInterface
+     * @var NumberRepositoryInterface
      */
-    protected $repository;
+    protected $numberRepository;
 
     /**
      * Order number max length.
@@ -45,13 +46,13 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     /**
      * Constructor.
      *
-     * @param OrderRepositoryInterface $repository
-     * @param integer                  $numberLength
-     * @param integer                  $startNumber
+     * @param NumberRepositoryInterface $numberRepository
+     * @param integer                   $numberLength
+     * @param integer                   $startNumber
      */
-    public function __construct(OrderRepositoryInterface $repository, $numberLength = 9, $startNumber = 1)
+    public function __construct(NumberRepositoryInterface $numberRepository, $numberLength = 9, $startNumber = 1)
     {
-        $this->repository = $repository;
+        $this->numberRepository = $numberRepository;
         $this->numberLength = $numberLength;
         $this->startNumber = $startNumber;
     }
@@ -75,12 +76,10 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
      */
     protected function getNextOrderNumber()
     {
-        $lastOrders = $this->repository->findRecentOrders(1);
-
-        if (empty($lastOrders)) {
+        if (null === $number = $this->numberRepository->getLastNumber()) {
             return $this->startNumber;
         }
 
-        return (int) current($lastOrders)->getNumber() + 1;
+        return (int) $number + 1;
     }
 }
