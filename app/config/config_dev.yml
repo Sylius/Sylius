@@ -22,6 +22,6 @@ monolog:
 assetic:
     use_controller: true
 
-doctrine:
-    dbal:
-        dbname: %sylius.database.name%_dev
+#doctrine:
+#    dbal:
+#        dbname: %sylius.database.name%_dev

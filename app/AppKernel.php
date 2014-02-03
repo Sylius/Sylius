@@ -79,6 +79,8 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Payum\Bundle\PayumBundle\PayumBundle(),
+
+            new FSi\Bundle\PayumPayuBundle\FSiPayumPayuBundle()
         );
 
         if ('dev' === $this->environment) {
