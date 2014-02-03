@@ -13,6 +13,8 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sylius\Bundle\AddressingBundle\Model\Zone;
 
@@ -60,12 +62,40 @@ class ZoneType extends AbstractType
             ))
             ->add('type', 'choice', array(
                 'label'   => 'sylius.form.zone.type',
+                'attr'    => array(
+                    'data-form-prototype'   => 'update',
+                    'data-form-prototype-prefix' => 'sylius_zone_member_',
+                ),
                 'choices' => Zone::getTypeChoices(),
             ))
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members'
+                'label'            => false,
+                'button_add_label' => 'sylius.zone.add_member',
+                'allow_add'        => true,
+                'allow_delete'     => true,
+                'by_reference'     => false,
             ))
         ;
+
+        $builder->setAttribute(
+            'default_prototype',
+            $builder->create('country', 'sylius_zone_member_country')
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        if ($form->getConfig()->hasAttribute('default_prototype')) {
+            $defaultPrototype = $form->getConfig()
+                ->getAttribute('default_prototype')
+                ->getForm()
+                ->createView($view);
+
+            $view->children['members']->vars['prototype'] = $defaultPrototype;
+        }
     }
 
     /**

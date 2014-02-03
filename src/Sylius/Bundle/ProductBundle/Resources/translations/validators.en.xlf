@@ -119,6 +119,10 @@
                 <source>sylius.variant.combination</source>
                 <target>Variant with this option set already exists.</target>
             </trans-unit>
+            <trans-unit id="30">
+                <source>sylius.property.presentation.count</source>
+                <target>Please add at least 2 choices.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

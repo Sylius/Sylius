@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -52,7 +53,7 @@ class ActionTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, array('action_type' => ActionInterface::TYPE_FIXED_DISCOUNT));
     }
 
     /**
@@ -70,7 +71,7 @@ class ActionTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, array('action_type' => ActionInterface::TYPE_FIXED_DISCOUNT));
     }
 
     /**
@@ -78,10 +79,16 @@ class ActionTypeSpec extends ObjectBehavior
      */
     function it_should_define_assigned_data_class($resolver)
     {
+        $resolver->setOptional(array(
+                'action_type',
+            ))->shouldBeCalled()
+        ;
+
         $resolver
             ->setDefaults(array(
                 'data_class'        => 'Action',
                 'validation_groups' => array('sylius'),
+                'action_type'       => ActionInterface::TYPE_FIXED_DISCOUNT,
             ))
             ->shouldBeCalled()
         ;

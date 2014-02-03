@@ -44,6 +44,10 @@ sylius_backend_prototype:
     resource: @SyliusWebBundle/Resources/config/routing/backend/prototype.yml
     prefix: /prototypes
 
+sylius_backend_product_property:
+    resource: @SyliusProductBundle/Resources/config/routing/product_property.yml
+    prefix: /product/property
+
 sylius_backend_taxonomy:
     resource: @SyliusWebBundle/Resources/config/routing/backend/taxonomy.yml
     prefix: /taxonomies

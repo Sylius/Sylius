@@ -99,6 +99,20 @@ Feature: Countries and provinces
          Then I should be on the page of country "Russia"
           And "Russia" should appear on the page
 
+    @javascript
+    Scenario: Updating the country and removing province
+       Given I am editing country "Ukraine"
+        When I fill in "Name" with "Russia"
+         And I fill in "ISO name" with "RU"
+         And I remove the province "Kiev"
+         And I remove the province "Odessa"
+         And I remove the province "Cherkasy"
+         And I remove the province "Kharkiv"
+         And I press "Save changes"
+        Then I should be on the page of country "Russia"
+         And "Russia" should appear on the page
+         But I should not see "Provinces"
+
     Scenario: Deleting country via the list button
         Given I am on the country index page
          When I press "delete" near "China"

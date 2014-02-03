@@ -164,7 +164,6 @@ class Option implements OptionInterface
     {
         if ($this->hasValue($value)) {
             $this->values->removeElement($value);
-            $value->setOption(null);
         }
 
         return $this;

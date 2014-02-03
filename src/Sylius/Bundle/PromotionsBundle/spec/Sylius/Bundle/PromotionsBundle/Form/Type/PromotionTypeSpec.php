@@ -13,17 +13,17 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PromotionTypeSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface    $checkerRegistry
-     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $actionRegistry
-     */
-    function let($checkerRegistry, $actionRegistry)
+    function let(RuleCheckerRegistryInterface $checkerRegistry, PromotionActionRegistryInterface $actionRegistry)
     {
         $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
     }
@@ -38,10 +38,7 @@ class PromotionTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_should_build_form_with_proper_fields($builder, $checkerRegistry, $actionRegistry)
+    function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::any())
@@ -80,29 +77,21 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('rules', 'collection', Argument::any())
+            ->add('rules', 'sylius_rule_collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('actions', 'collection', Argument::any())
+            ->add('actions', 'sylius_action_collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $checkerRegistry->getCheckers()->willReturn(array());
-        $actionRegistry->getActions()->willReturn(array());
-
-        $builder->setAttribute('prototypes', Argument::any())->shouldBeCalled();
-
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_should_define_assigned_data_class($resolver)
+    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -113,5 +102,10 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_should_have_name()
+    {
+        $this->getName()->shouldReturn('sylius_promotion');
     }
 }

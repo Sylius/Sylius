@@ -1,0 +1,5 @@
+sylius_product_property_create:
+    pattern: /new
+    methods: [GET,POST]
+    defaults:
+        _controller: sylius.controller.product_property:createAction

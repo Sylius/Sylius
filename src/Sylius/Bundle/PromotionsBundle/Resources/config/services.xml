@@ -33,7 +33,9 @@
         <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionsBundle\Form\Type\CouponType</parameter>
         <parameter key="sylius.form.type.promotion_rule.class">Sylius\Bundle\PromotionsBundle\Form\Type\RuleType</parameter>
         <parameter key="sylius.form.type.promotion_action.class">Sylius\Bundle\PromotionsBundle\Form\Type\ActionType</parameter>
+        <parameter key="sylius.form.type.promotion_action.collection.class">Sylius\Bundle\PromotionsBundle\Form\Type\ActionCollectionType</parameter>
         <parameter key="sylius.form.type.promotion_rule_choice.class">Sylius\Bundle\PromotionsBundle\Form\Type\RuleChoiceType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.collection.class">Sylius\Bundle\PromotionsBundle\Form\Type\RuleCollectionType</parameter>
         <parameter key="sylius.form.type.promotion_rule.item_total_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemTotalConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.item_count_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action_choice.class">Sylius\Bundle\PromotionsBundle\Form\Type\ActionChoiceType</parameter>
@@ -140,6 +142,12 @@
         <service id="sylius.form.type.promotion_rule.item_count_configuration" class="%sylius.form.type.promotion_rule.item_count_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_item_count_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_item_count_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.collection" class="%sylius.form.type.promotion_rule.collection.class%">
+            <tag name="form.type" alias="sylius_rule_collection" />
+        </service>
+        <service id="sylius.form.type.promotion_action.collection" class="%sylius.form.type.promotion_action.collection.class%">
+            <tag name="form.type" alias="sylius_action_collection" />
         </service>
         <service id="sylius.form.type.promotion_action_choice" class="%sylius.form.type.promotion_action_choice.class%">
             <argument>%sylius.promotion_actions%</argument>

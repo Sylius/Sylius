@@ -1,5 +1,3 @@
-{{ form_errors(form) }}
-
 <div class="row">
     <div class="col-md-8 row-split">
         {{ form_row(form.name) }}
@@ -7,14 +5,8 @@
     </div>
 
     <div class="col-md-4">
-        <div id="sylius-option-values" class="collection-container" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">
-            {% for valueForm in form.values %}
-                {{ form_row(valueForm.value)  }}
-            {% endfor %}
-        </div>
-        <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="sylius-option-values" data-collection="sylius-option-values">{{ "sylius.form.option_value.add_value"|trans }}</a>
+        {{ form_widget(form.values) }}
     </div>
 </div>
-<hr>
 
 {{ form_widget(form._token) }}

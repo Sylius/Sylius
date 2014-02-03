@@ -34,12 +34,6 @@ class VariableProductType extends ProductType
             ->add('masterVariant', 'sylius_variant', array(
                 'master' => true,
             ))
-            ->add('properties', 'collection', array(
-                'required'     => false,
-                'type'         => 'sylius_product_property',
-                'allow_add'    => true,
-                'by_reference' => false
-            ))
             ->addEventSubscriber(new BuildProductFormListener($builder->getFormFactory()))
         ;
     }

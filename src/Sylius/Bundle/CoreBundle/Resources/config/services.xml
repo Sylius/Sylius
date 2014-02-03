@@ -434,5 +434,4 @@
             <tag name="twig.extension" />
         </service>
     </services>
-
 </container>

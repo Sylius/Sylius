@@ -456,6 +456,171 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I wait (\d+)$/
+     */
+    public function iWait($time)
+    {
+        $this->getSession()->wait($time);
+    }
+
+    /**
+     * @Given /^I remove the province "([^"]*)"$/
+     */
+    public function iRemoveTheProvince($province)
+    {
+        $this->removePositionItemFormCollection('//div[@id="sylius_country_provinces"]', $province);
+    }
+
+    /**
+     * @When /^I remove all the members$/
+     */
+    public function iRemoveAllTheMembers()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_zone_members"]');
+    }
+
+    /**
+     * @When /^I remove the member #(\d+)$/
+     */
+    public function iRemoveTheMember($member)
+    {
+        $this->removePositionItemFormCollection(
+            '//div[@id="sylius_zone_members"]',
+            $member
+        );
+    }
+
+    /**
+     * @Given /^I remove the option "([^"]*)"$/
+     */
+    public function iRemoveTheOption($option)
+    {
+        $this->removeNamedItemFormCollection('//div[@id="sylius_option_values"]', $option);
+    }
+
+    /**
+     * @When /^I remove all the properties$/
+     */
+    public function iRemoveAllTheProperties()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_product_properties"]');
+    }
+
+
+    /**
+     * @When /^I remove all the options$/
+     */
+    public function iRemoveAllTheOption()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_option_values"]');
+    }
+
+    /**
+     * @When /^I remove all the choices$/
+     */
+    public function iRemoveAllTheChoice()
+    {
+        $this->removeAllItemFormCollection('//div[@id="sylius_property_configuration"]');
+    }
+
+    /**
+     * @Given /^I remove the choice #(\d+)$/
+     */
+    public function iRemoveTheChoice($position)
+    {
+        $this->removePositionItemFormCollection(
+            '//div[@id="sylius_property_configuration"]',
+            $position
+        );
+    }
+
+    /**
+     * @param $xpath
+     * @param $position
+     * @throws \Behat\Mink\Exception\ExpectationException
+     */
+    private function removePositionItemFormCollection($xpath, $position)
+    {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $field = $container->find(
+            'xpath',
+            sprintf(
+                "//div[contains(@data-form-collection, 'item') and position()=%d]//a[contains(@data-form-collection, 'delete')]",
+                $position
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf('Impossible to find deletion button with the position %d', $position),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+    /**
+     * @param $xpath
+     * @param $itemValue
+     * @throws \Behat\Mink\Exception\ExpectationException
+     */
+    private function removeNamedItemFormCollection($xpath, $itemValue)
+    {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $field = $container->find(
+            'xpath',
+            sprintf(
+                "//*[contains(@value,'%s')]/../../../a[contains(@data-form-collection, 'delete')]",
+                $itemValue
+            )
+        );
+
+        if (null === $field) {
+            throw new ExpectationException(
+                sprintf('Impossible to find deletion button with the value %s', $itemValue),
+                $this->getSession()
+            );
+        }
+
+        $field->click();
+    }
+
+    /**
+     * @param $xpath
+     */
+    private function removeAllItemFormCollection($xpath)
+    {
+        $container = $this->getSession()->getPage()->find('xpath', $xpath);
+        $items = $container->findAll(
+            'xpath',
+            '//a[contains(@data-form-collection, "delete")]'
+        );
+
+        $nbOfItem = count($items);
+        while ($nbOfItem > 0) {
+            $items[0]->click();
+            $nbOfItem--;
+        }
+    }
+
+    /**
+     * @Given /^I fill in #(\d+) choice with "([^"]*)"$/
+     */
+    public function iFillInChoiceWith($position, $value)
+    {
+//        '//div[@id="sylius_property_configuration"]'
+        $position = $position - 1;
+        $field = $this->getSession()->getPage()->find(
+            'xpath',
+            sprintf('//input[@id="sylius_property_configuration_%d_choice"]', $position)
+        );
+
+        $field->setValue($value);
+    }
+
+
+    /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
      */
     public function iFillInCheckoutAddress($type, $country)

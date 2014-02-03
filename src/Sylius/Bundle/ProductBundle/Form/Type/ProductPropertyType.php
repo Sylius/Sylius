@@ -15,8 +15,7 @@ use Sylius\Bundle\ProductBundle\Form\EventListener\BuildProductPropertyFormListe
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Product property form type.
@@ -40,15 +39,21 @@ class ProductPropertyType extends AbstractType
     protected $validationGroups;
 
     /**
+     * @var RouterInterface
+     */
+    protected $router;
+
+    /**
      * Constructor.
      *
      * @param string $dataClass
      * @param array  $validationGroups
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, RouterInterface $router)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
+        $this->router = $router;
     }
 
     /**
@@ -57,28 +62,17 @@ class ProductPropertyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('property', 'sylius_property_choice')
+            ->add('property', 'sylius_property_choice', array(
+                'label' => 'sylius.product.property.label.property',
+                'attr' => array(
+                    'data-form-collection' => 'update',
+                    'data-form-url' => $this->router->generate(
+                        'sylius_product_property_create'
+                    ),
+                )
+            ))
             ->addEventSubscriber(new BuildProductPropertyFormListener($builder->getFormFactory()))
         ;
-
-        $prototypes = array();
-        foreach ($this->getProperties($builder) as $property) {
-            $prototypes[] = $builder->create('value', $property->getType(), $property->getConfiguration())->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars['prototypes'] = array();
-
-        foreach ($form->getConfig()->getAttribute('prototypes', array()) as $name => $prototype) {
-            $view->vars['prototypes'][$name] = $prototype->createView($view);
-        }
     }
 
     /**
@@ -89,7 +83,7 @@ class ProductPropertyType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups
+                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
@@ -100,10 +94,5 @@ class ProductPropertyType extends AbstractType
     public function getName()
     {
         return 'sylius_product_property';
-    }
-
-    private function getProperties(FormBuilderInterface $builder)
-    {
-        return $builder->get('property')->getOption('choice_list')->getChoices();
     }
 }

@@ -89,6 +89,22 @@ Feature: Zones
           And I should see "Zone has been successfully updated."
           And "Estonia" should appear on the page
 
+    @javascript
+    Scenario: Adding zone member to the existing zone
+        Given I am editing zone "Baltic states"
+         When I remove all the members
+          And I press "Save changes"
+         Then I should be editing zone "Baltic states"
+          And I should see "Please add at least 1 zone member."
+
+    @javascript
+    Scenario: Adding zone member to the existing zone
+       Given I am editing zone "Baltic states"
+        When I remove the member #1
+         And I press "Save changes"
+        Then I should be on the page of zone "Baltic states"
+         And I should see "Zone has been successfully updated."
+
     Scenario: Deleting zone
         Given I am on the page of zone "USA GMT-8"
          When I press "delete"
