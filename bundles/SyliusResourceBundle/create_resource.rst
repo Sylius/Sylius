@@ -142,7 +142,7 @@ You can also perform more complex redirects, with parameters. For example...
                     route: app_competition_show
                     parameters: { id: $competitionId }
 
-In addition to the request parameters, you can access some of the newly created objects properties, using the ``object.`` prefix.
+In addition to the request parameters, you can access some of the newly created objects properties, using the ``resource.`` prefix.
 
 .. code-block:: yaml
 
@@ -156,6 +156,6 @@ In addition to the request parameters, you can access some of the newly created 
             _sylius:
                 redirect:
                     route: app_user_show
-                    parameters: { email: object.email }
+                    parameters: { email: resource.email }
 
 With this configuration, the ``email`` parameter for route ``app_user_show`` will be obtained from your newly created user.
