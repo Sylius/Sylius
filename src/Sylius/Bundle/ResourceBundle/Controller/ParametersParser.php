@@ -57,8 +57,8 @@ class ParametersParser
                 $parameters[$key] = $this->process($value, $resource);
             }
 
-            if (is_string($value) && 0 === strpos($value, '@')) {
-                $parameters[$key] = $accessor->getValue($resource, substr($value, 1));
+            if (is_string($value) && 0 === strpos($value, 'resource.')) {
+                $parameters[$key] = $accessor->getValue($resource, substr($value, 9));
             }
         }
 
