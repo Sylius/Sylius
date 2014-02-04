@@ -61,10 +61,11 @@ Feature: Managing locales
          Then I should be on the locale index page
           And I should see "Locale has been successfully updated."
 
+    @javascript
     Scenario: Deleting locale from list
         Given I am on the locale index page
          When I click "delete" near "de_DE"
-          And I click "delete" from confirmation modal
+          And I click "delete" from the confirmation modal
          Then I should be on the locale index page
           And I should see "Locale has been successfully deleted."
           And I should not see locale with name "de_DE" in that list

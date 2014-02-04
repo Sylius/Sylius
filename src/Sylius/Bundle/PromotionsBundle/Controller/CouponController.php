@@ -34,7 +34,7 @@ class CouponController extends ResourceController
     public function generateAction(Request $request)
     {
         if (null === $promotionId = $request->get('promotionId')) {
-            throw new NotFoundHttpException('No promotion id given');
+            throw new NotFoundHttpException('No promotion id given.');
         }
 
         $promotion = $this
@@ -46,22 +46,18 @@ class CouponController extends ResourceController
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
-            $this->setFlash('success', 'generate');
+            $this->flashHelper->setFlash('success', 'generate');
 
-            return $this
-                ->getPromotionController()
-                ->redirectTo($promotion)
-            ;
+            return $this->redirectHandler->redirectTo($promotion);
         }
 
-        $config = $this->getConfiguration();
-        if ($config->isApiRequest()) {
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('generate.html'))
+            ->setTemplate($this->config->getTemplate('generate.html'))
             ->setData(array(
                 'promotion' => $promotion,
                 'form'      => $form->createView()

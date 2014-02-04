@@ -53,7 +53,7 @@ class PrototypeController extends ResourceController
             $manager->persist($product);
             $manager->flush();
 
-            $this->flashHelper->setFlash('success', '%resource% has been successfully created.');
+            $this->flashHelper->setFlash('success', 'Product has been successfully created.');
 
             return $this->redirectHandler->redirectTo($product);
         }
