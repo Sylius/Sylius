@@ -1,9 +1,13 @@
 CHANGELOG
 =========
 
+### v0.7.0
+
+* Add reverting mechanism for promotion actions.
+
 ### v0.6.0
 
-* Release before components introduction.
+* Release before components introduction. (delayed)
 
 ### v0.5.0
 

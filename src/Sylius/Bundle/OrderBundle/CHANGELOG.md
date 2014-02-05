@@ -1,9 +1,13 @@
 CHANGELOG
 =========
 
+### v0.7.0
+
+* Add Number model to track order sequence.
+
 ### v0.6.0
 
-* Release before components introduction.
+* Release before components introduction. (delayed)
 
 ### v0.5.0
 

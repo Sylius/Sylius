@@ -1,9 +1,14 @@
 CHANGELOG
 =========
 
+### v0.7.0
+
+* Add "on-hold" inventory concept.
+* Add dummy inventory operator.
+
 ### v0.6.0
 
-* Release before components introduction.
+* Release before components introduction. (delayed)
 
 ### v0.5.0
 

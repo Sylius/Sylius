@@ -1,9 +1,14 @@
 CHANGELOG
 =========
 
+### v0.7.0
+
+* Add weight based shipping calculator.
+* Various minor fixes.
+
 ### v0.6.0
 
-* Release before components introduction.
+* Release before components introduction. (delayed)
 
 ### v0.5.0
 
