@@ -27,13 +27,29 @@
             <gedmo:slug fields="name" unique="true" />
         </field>
         <field name="permalink" column="permalink" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
+            <gedmo:slug fields="name" unique="true" >
+            	<gedmo:handler class="Gedmo\Sluggable\Handler\TreeSlugHandler">
+                    <gedmo:handler-option name="parentRelationField" value="parent"/>
+                    <gedmo:handler-option name="separator" value="/"/>
+                </gedmo:handler>
+            </gedmo:slug>
         </field>
         <field name="description" column="description" type="text" nullable="true" />
 
         <many-to-one field="taxonomy" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface">
             <join-column name="taxonomy_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
+
+        <many-to-one field="parent" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface" inversed-by="children">
+            <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+            <gedmo:tree-parent />
+        </many-to-one>
+
+        <one-to-many field="children" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface" mapped-by="parent">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
 
         <order-by>
             <order-by-field name="left" direction="DESC" />
