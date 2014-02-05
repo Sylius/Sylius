@@ -54,20 +54,19 @@ class StateResolver implements StateResolverInterface
 
         $states = array_unique($states);
 
-        if (array(ShipmentInterface::STATE_SHIPPED) === $states) {
-            return OrderShippingStates::SHIPPED;
-        }
+        $acceptableStates = array(
+            ShipmentInterface::STATE_CHECKOUT   => OrderShippingStates::CHECKOUT,
+            ShipmentInterface::STATE_ONHOLD     => OrderShippingStates::ONHOLD,
+            ShipmentInterface::STATE_READY      => OrderShippingStates::READY,
+            ShipmentInterface::STATE_SHIPPED    => OrderShippingStates::SHIPPED,
+            ShipmentInterface::STATE_DISPATCHED => OrderShippingStates::DISPATCHED,
+            ShipmentInterface::STATE_RETURNED   => OrderShippingStates::RETURNED
+        );
 
-        if (array(ShipmentInterface::STATE_DISPATCHED) === $states) {
-            return OrderShippingStates::DISPATCHED;
-        }
-
-        if (array(ShipmentInterface::STATE_RETURNED) === $states) {
-            return OrderShippingStates::RETURNED;
-        }
-
-        if (array(ShipmentInterface::STATE_READY) === $states) {
-            return OrderShippingStates::READY;
+        foreach ($acceptableStates as $shipmentState => $orderState) {
+            if (array($shipmentState) == $states) {
+                return $orderState;
+            }
         }
 
         return OrderShippingStates::PARTIALLY_SHIPPED;
