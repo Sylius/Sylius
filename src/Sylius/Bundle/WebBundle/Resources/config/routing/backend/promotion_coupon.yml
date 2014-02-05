@@ -51,3 +51,9 @@ sylius_backend_promotion_coupon_generate:
             redirect:
                 route: sylius_backend_promotion_coupon_index
                 parameters: {'promotionId': $promotionId}
+
+sylius_backend_promotion_coupon_download:
+    pattern: /download
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:downloadAction
