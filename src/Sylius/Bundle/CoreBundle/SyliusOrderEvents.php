@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
-class SyliusOrderEvents
+use Sylius\Bundle\OrderBundle\SyliusOrderEvents as BaseSyliusOrderEvents;
+
+class SyliusOrderEvents extends BaseSyliusOrderEvents
 {
     const PRE_PAY     = 'sylius.order.pre_pay';
     const POST_PAY    = 'sylius.order.post_pay';
