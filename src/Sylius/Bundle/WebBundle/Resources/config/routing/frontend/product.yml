@@ -3,6 +3,8 @@
 
 sylius_product_index_by_taxon:
     pattern: /t/{permalink}
+    requirements:
+      permalink: '[^\s]++'
     defaults:
         _controller: sylius.controller.product:indexByTaxonAction
         _sylius:
