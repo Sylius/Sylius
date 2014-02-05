@@ -20,17 +20,6 @@
     <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Taxon" table="sylius_taxon">
         <field name="path" nullable="true" />
 
-        <many-to-one field="parent" target-entity="Sylius\Bundle\CoreBundle\Model\Taxon" inversed-by="children">
-            <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
-            <gedmo:tree-parent />
-        </many-to-one>
-
-        <one-to-many field="children" target-entity="Sylius\Bundle\CoreBundle\Model\Taxon" mapped-by="parent">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
-        
        <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface"/>
     </mapped-superclass>
 
