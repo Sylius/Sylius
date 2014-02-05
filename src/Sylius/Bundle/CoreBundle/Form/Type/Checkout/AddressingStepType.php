@@ -46,7 +46,7 @@ class AddressingStepType extends AbstractType
                     $event->setData($data);
                 }
             })
-            ->add('shippingAddress', 'sylius_address')
+            ->add('shippingAddress', 'sylius_address', array('shippable' => true))
             ->add('billingAddress', 'sylius_address')
             ->add('differentBillingAddress', 'checkbox', array(
                 'mapped' => false,
