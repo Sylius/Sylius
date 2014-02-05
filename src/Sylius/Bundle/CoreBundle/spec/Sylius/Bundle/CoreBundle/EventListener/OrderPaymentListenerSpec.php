@@ -81,6 +81,7 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $repository->findOneBy(array('payment' => $payment))->willReturn($order);
 
         $dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldBeCalled();
+        $dispatcher->dispatch(SyliusOrderEvents::POST_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldBeCalled();
 
         $this->updateOrderOnPayment($event);
     }
@@ -101,6 +102,7 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $repository->findOneBy(array('payment' => $payment))->willReturn($order);
 
         $dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldNotBeCalled();
+        $dispatcher->dispatch(SyliusOrderEvents::POST_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldNotBeCalled();
 
         $this->updateOrderOnPayment($event);
     }
