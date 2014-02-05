@@ -70,6 +70,10 @@
         <source>sylius_taxation.rate.zone.not_blank</source>
         <target>Please enter tax rate zone.</target>
       </trans-unit>
+      <trans-unit id="7be21a22b6ae2e22886dc27bef35ae5a" resname="sylius.image.path.not_blank">
+        <source>sylius.image.path.not_blank</source>
+        <target>Please add missing images</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\Variant as BaseVariant;
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Sylius core product variant entity.
@@ -288,6 +289,20 @@ class Variant extends BaseVariant implements VariantInterface
         $this->images->removeElement($image);
 
         return $this;
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     */
+    public function isImageValid(ExecutionContextInterface $context)
+    {
+        if (!$this->getImages()->isEmpty()) {
+            foreach($this->getImages() as $image) {
+                if (null === $image->getPath()) {
+                    $context->addViolationAt('images', 'sylius.image.path.not_blank');
+                }
+            }
+        }
     }
 
     /**
