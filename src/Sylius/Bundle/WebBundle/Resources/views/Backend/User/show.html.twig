@@ -32,8 +32,8 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>{{ 'sylius.user.id'|trans }}</strong></td>
-            <td>{{ user.id }}</td>
+            <td><strong>{{ 'sylius.user.number'|trans }}</strong></td>
+            <td>{{ user.number }}</td>
         </tr>
         {% if user.firstName %}
             <tr>
@@ -47,10 +47,6 @@
                 <td>{{ user.lastName }}</td>
             </tr>
         {% endif %}
-        <tr>
-            <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
-            <td>{{ user.username }}</td>
-        </tr>
         <tr>
             <td><strong>{{ 'sylius.user.email'|trans }}</strong></td>
             <td>{{ user.email }}</td>

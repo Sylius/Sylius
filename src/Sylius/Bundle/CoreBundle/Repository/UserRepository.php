@@ -18,13 +18,14 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserRepository extends EntityRepository
+class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     /**
      * Create filter paginator.
      *
      * @param array $criteria
      * @param array $sorting
+     * @param bool $deleted
      *
      * @return PagerfantaInterface
      */
@@ -38,13 +39,16 @@ class UserRepository extends EntityRepository
 
         if (isset($criteria['query'])) {
             $queryBuilder
-                ->where('o.username LIKE :query')
+                ->where('o.number = :number')
+                ->orWhere('o.username LIKE :query')
                 ->orWhere('o.email LIKE :query')
                 ->orWhere('o.firstName LIKE :query')
                 ->orWhere('o.lastName LIKE :query')
+                ->setParameter('number', $criteria['query'])
                 ->setParameter('query', '%'.$criteria['query'].'%')
             ;
         }
+
         if (isset($criteria['enabled'])) {
             $queryBuilder
                 ->andWhere('o.enabled = :enabled')
@@ -115,5 +119,26 @@ class UserRepository extends EntityRepository
             ->setParameter('from', $from)
             ->setParameter('to', $to)
         ;
+    }
+
+    /**
+     * Get the last created user
+     *
+     * @return UserInterface
+     */
+    public function findLastCreated()
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $user = $this->getQueryBuilder()
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $user;
     }
 }

@@ -8,7 +8,7 @@
 <table id="users" class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.user.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('number', 'sylius.user.number'|trans) }}</th>
             <th>{{ sylius_resource_sort('firstName', 'sylius.address.firstname'|trans) }}</th>
             <th>{{ sylius_resource_sort('lastName', 'sylius.address.lastname'|trans) }}</th>
             <th>{{ sylius_resource_sort('email', 'sylius.user.email'|trans) }}</th>
@@ -20,10 +20,10 @@
     <tbody>
         {% for user in users %}
         <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
-            <td>{{ user.id }}</td>
+            <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">#{{ user.number }}</a></td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
-            <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
+            <td>{{ user.email }}</td>
             <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
             <td>
                 {{ misc.state_label(user.enabled) }}

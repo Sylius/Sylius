@@ -66,6 +66,10 @@
         <source>sylius.account.home.id</source>
         <target>Customer ID : </target>
       </trans-unit>
+      <trans-unit id="357848323d5eb477d2c2c627be561a2b" resname="sylius.account.home.number">
+        <source>sylius.account.home.number</source>
+        <target>Customer Number: </target>
+      </trans-unit>
       <trans-unit id="5f81f7f249201ad12ab74f5a7da6afcd" resname="sylius.account.home.outline">
         <source>sylius.account.home.outline</source>
         <target>Enjoy all the features that are available on your personal space to view, track and manage all your data.</target>
@@ -2253,6 +2257,10 @@
       <trans-unit id="886ce2aadaca9b3e5510d1750d7a1525" resname="sylius.user.id">
         <source>sylius.user.id</source>
         <target>ID</target>
+      </trans-unit>
+      <trans-unit id="4a9d0e0f1b6770bbc70f1d7619b29c29" resname="sylius.user.number">
+        <source>sylius.user.number</source>
+        <target>Number</target>
       </trans-unit>
       <trans-unit id="a040b706c3703fc511a244cecec335e5" resname="sylius.user.index_header">
         <source>sylius.user.index_header</source>
