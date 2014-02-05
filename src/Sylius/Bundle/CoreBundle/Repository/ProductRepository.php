@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Repository;
 
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
 use Sylius\Bundle\VariableProductBundle\Doctrine\ORM\VariableProductRepository;
 
@@ -45,8 +46,9 @@ class ProductRepository extends VariableProductRepository
     /**
      * Create filter paginator.
      *
-     * @param array $criteria
-     * @param array $sorting
+     * @param array   $criteria
+     * @param array   $sorting
+     * @param Boolean $deleted
      *
      * @return PagerfantaInterface
      */
@@ -90,6 +92,8 @@ class ProductRepository extends VariableProductRepository
      * Get the product data for the details page.
      *
      * @param integer $id
+     *
+     * @return null|ProductInterface
      */
     public function findForDetailsPage($id)
     {

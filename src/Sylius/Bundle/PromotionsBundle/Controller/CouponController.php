@@ -34,34 +34,30 @@ class CouponController extends ResourceController
     public function generateAction(Request $request)
     {
         if (null === $promotionId = $request->get('promotionId')) {
-            throw new NotFoundHttpException('No promotion id given');
+            throw new NotFoundHttpException('No promotion id given.');
         }
 
         $promotion = $this
             ->getPromotionController()
-            ->findOr404(array('id' => $promotionId))
+            ->findOr404($request, array('id' => $promotionId))
         ;
 
         $form = $this->createForm('sylius_promotion_coupon_generate_instruction', new Instruction());
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
-            $this->setFlash('success', 'generate');
+            $this->flashHelper->setFlash('success', 'generate');
 
-            return $this
-                ->getPromotionController()
-                ->redirectTo($promotion)
-            ;
+            return $this->redirectHandler->redirectTo($promotion);
         }
 
-        $config = $this->getConfiguration();
-        if ($config->isApiRequest()) {
+        if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('generate.html'))
+            ->setTemplate($this->config->getTemplate('generate.html'))
             ->setData(array(
                 'promotion' => $promotion,
                 'form'      => $form->createView()
@@ -76,13 +72,14 @@ class CouponController extends ResourceController
      */
     public function createNew()
     {
-        if (null === $promotionId = $this->getRequest()->get('promotionId')) {
+        $request = $this->getRequest();
+        if (null === $promotionId = $request->get('promotionId')) {
             throw new NotFoundHttpException('No promotion id given');
         }
 
         $promotion = $this
             ->getPromotionController()
-            ->findOr404(array('id' => $promotionId))
+            ->findOr404($request, array('id' => $promotionId))
         ;
 
         $coupon = parent::createNew();

@@ -68,32 +68,16 @@ Feature: Payment methods
          Then I should be on the payment method index page
           And I should see payment method with name "PayPal PRO" in the list
 
-    Scenario: Deleting payment method
-        Given I am on the payment method index page
-         When I click "delete" near "PayPal"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the payment method index page
-          And I should see "Payment method has been successfully deleted."
-
     @javascript
-    Scenario: Deleting payment method with js modal
+    Scenario: Deleting payment method
         Given I am on the payment method index page
          When I click "delete" near "PayPal"
           And I click "delete" from the confirmation modal
          Then I should still be on the payment method index page
           And I should see "Payment method has been successfully deleted."
 
-    Scenario: Deleted payment method disappears from the list
-        Given I am on the payment method index page
-         When I click "delete" near "PayPal"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the payment method index page
-          And I should not see payment method with name "PayPal" in that list
-
     @javascript
-    Scenario: Deleted payment method disappears from the list with js modal
+    Scenario: Deleted payment method disappears from the list
         Given I am on the payment method index page
          When I click "delete" near "PayPal"
           And I click "delete" from the confirmation modal

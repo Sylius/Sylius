@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -29,53 +30,14 @@ class AddressController extends ResourceController
      */
     public function indexAction(Request $request)
     {
-        $config = $this->getConfiguration();
+        $config     = $this->getConfiguration();
         $pluralName = $config->getPluralResourceName();
-        $addresses = $this->getUser()->getAddresses();
 
         $view = $this
             ->view()
             ->setTemplate($config->getTemplate('index.html'))
             ->setTemplateVar($pluralName)
-            ->setData($addresses)
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
-     * Create new address or just display the form.
-     */
-    public function createAction(Request $request)
-    {
-        $resource = $this->createNew();
-        $form = $this->getForm($resource);
-
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $this->getUser()->addAddress($resource);
-            $event = $this->create($resource);
-
-            if (!$event->isStopped()) {
-                $this->setFlash('success', 'create');
-
-                return $this->redirectTo($resource);
-            }
-
-            $this->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParams());
-        }
-
-        $config = $this->getConfiguration();
-        if ($config->isApiRequest()) {
-            return $this->handleView($this->view($form));
-        }
-
-        $view = $this
-            ->view()
-            ->setTemplate($config->getTemplate('create.html'))
-            ->setData(array(
-                $config->getResourceName() => $resource,
-                'form'                     => $form->createView()
-            ))
+            ->setData($this->getUser()->getAddresses())
         ;
 
         return $this->handleView($view);
@@ -84,21 +46,22 @@ class AddressController extends ResourceController
     /**
      * Set an address as default billing address for the current user.
      *
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
-    public function setAsDefaultBillingAddressAction()
+    public function setAsDefaultBillingAddressAction(Request $request)
     {
-        $address = $this->findOr404();
-        $this->accessOr403($address);
+        $address = $this->findOr404($request);
+
+        $user = $this->getUser();
+        $user->setBillingAddress($address);
 
         $manager = $this->getUserManager();
-        $user = $this->getUser();
-
-        $user->setBillingAddress($address);
         $manager->persist($user);
         $manager->flush();
 
-        $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.billing.success'));
+        $this->flashHelper->setFlash('success', 'sylius.account.address.flash.billing.success');
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
@@ -106,27 +69,28 @@ class AddressController extends ResourceController
     /**
      * Set an address as shipping billing address for the current user.
      *
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
-    public function setAsDefaultShippingAddressAction()
+    public function setAsDefaultShippingAddressAction(Request $request)
     {
-        $address = $this->findOr404();
-        $this->accessOr403($address);
+        $address = $this->findOr404($request);
+
+        $user = $this->getUser();
+        $user->setShippingAddress($address);
 
         $manager = $this->getUserManager();
-        $user = $this->getUser();
-
-        $user->setShippingAddress($address);
         $manager->persist($user);
         $manager->flush();
 
-        $this->setFlash('success', $this->get('translator')->trans('sylius.account.address.flash.shipping.success'));
+        $this->flashHelper->setFlash('success', 'sylius.account.address.flash.shipping.success');
 
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
     }
 
     /**
-     * @return object
+     * @return ObjectManager
      */
     private function getUserManager()
     {
@@ -134,16 +98,23 @@ class AddressController extends ResourceController
     }
 
     /**
-     * Accesses address or throws 403
+     * Accesses address or throws 403/404
      *
-     * @param AddressInterface $address
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return AddressInterface
      *
      * @throws AccessDeniedException
      */
-    private function accessOr403(AddressInterface $address)
+    public function findOr404(Request $request, array $criteria = array())
     {
+        $address = parent::findOr404($request, $criteria);
+
         if (!$this->getUser()->hasAddress($address)) {
             throw new AccessDeniedException();
         }
+
+        return $address;
     }
 }

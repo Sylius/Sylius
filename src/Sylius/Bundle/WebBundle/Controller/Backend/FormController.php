@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Backend forms controller.
@@ -24,7 +24,10 @@ class FormController extends Controller
     /**
      * Render filter form.
      *
-     * @param Request $request
+     * @param string $type
+     * @param string $template
+     *
+     * @return Response
      */
     public function filterAction($type, $template = 'SyliusWebBundle:Backend/Form:filter.html.twig')
     {

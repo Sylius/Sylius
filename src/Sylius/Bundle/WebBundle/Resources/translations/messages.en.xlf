@@ -50,14 +50,6 @@
         <source>sylius.account.address.empty</source>
         <target>You have created no address yet.</target>
       </trans-unit>
-      <trans-unit id="bafb5c8341a660880f5e7c181173f65e" resname="sylius.account.address.flash.billing.success">
-        <source>sylius.account.address.flash.billing.success</source>
-        <target>The address has been successfully set as your default billing address.</target>
-      </trans-unit>
-      <trans-unit id="a2cc61ae28a28a4795ae179dc8444d4f" resname="sylius.account.address.flash.shipping.success">
-        <source>sylius.account.address.flash.shipping.success</source>
-        <target>The address has been successfully set as your default shipping address.</target>
-      </trans-unit>
       <trans-unit id="98a8af2e613723cca221317bc567e387" resname="sylius.account.address.list">
         <source>sylius.account.address.list</source>
         <target>All your addresses</target>
@@ -2168,7 +2160,7 @@
       </trans-unit>
       <trans-unit id="a17958e048f810e0b3ca8ab6a986b200" resname="sylius.taxon.product_index_header">
         <source>sylius.taxon.product_index_header</source>
-        <target>sylius.taxon.product_index_header</target>
+        <target>Products categorized as "%name%"</target>
       </trans-unit>
       <trans-unit id="be8f3526efb6d1b32012cfe9e2059ad3" resname="sylius.taxon.update_header">
         <source>sylius.taxon.update_header</source>

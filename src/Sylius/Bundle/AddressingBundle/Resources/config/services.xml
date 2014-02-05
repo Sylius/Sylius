@@ -26,47 +26,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.address" class="%sylius.controller.address.class%">
-            <argument>sylius</argument>
-            <argument>address</argument>
-            <argument>SyliusAddressingBundle:Address</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.country" class="%sylius.controller.country.class%">
-            <argument>sylius</argument>
-            <argument>country</argument>
-            <argument>SyliusAddressingBundle:Country</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.province" class="%sylius.controller.province.class%">
-            <argument>sylius</argument>
-            <argument>province</argument>
-            <argument>SyliusAddressingBundle:Province</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.zone" class="%sylius.controller.zone.class%">
-            <argument>sylius</argument>
-            <argument>zone</argument>
-            <argument>SyliusAddressingBundle:Zone</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.zone_member" class="%sylius.controller.zone_member.class%">
-            <argument>sylius</argument>
-            <argument>zone_member</argument>
-            <argument>SyliusAddressingBundle:ZoneMember</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.zone_member_collection" class="%sylius.form.type.zone_member_collection.class%">
             <argument>%sylius.model.zone.class%</argument>
             <tag name="form.type" alias="sylius_zone_member_collection" />

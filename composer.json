@@ -41,6 +41,7 @@
         "symfony/monolog-bundle":               "2.3.*",
         "symfony/swiftmailer-bundle":           "2.3.*",
         "symfony/symfony":                      "~2.3",
+        "symfony/expression-language":          "~2.4",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "pagerfanta/pagerfanta":                "1.0.*@dev",

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -28,7 +29,7 @@ class ProductController extends ResourceController
      * @param Request $request
      * @param string  $permalink
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws NotFoundHttpException
      */
@@ -46,10 +47,10 @@ class ProductController extends ResourceController
             ->createByTaxonPaginator($taxon)
         ;
 
-        $paginator->setMaxPerPage($this->getConfiguration()->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
         $paginator->setCurrentPage($request->query->get('page', 1));
 
-        return $this->renderResponse('SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig', array(
+        return $this->render($this->config->getTemplate('indexByTaxon.html'), array(
             'taxon'    => $taxon,
             'products' => $paginator,
         ));
@@ -63,17 +64,15 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $config = $this->getConfiguration();
-
         $paginator = $this
             ->getRepository()
             ->createByTaxonPaginator($taxon)
         ;
 
-        $paginator->setMaxPerPage($config->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
         $paginator->setCurrentPage($request->query->get('page', 1));
 
-        return $this->renderResponse($config->getTemplate('productIndex.html'), array(
+        return $this->render($this->config->getTemplate('productIndex.html'), array(
             'taxon'    => $taxon,
             'products' => $paginator,
         ));
@@ -90,20 +89,17 @@ class ProductController extends ResourceController
      */
     public function historyAction(Request $request)
     {
-        $config = $this->getConfiguration();
-        $logEntryRepository = $this->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $product = $this->findOr404($request);
 
-        $product = $this->findOr404();
-
-        $data = array(
-            $config->getResourceName() => $product,
-            'logs'                     => $logEntryRepository->getLogEntries($product)
-        );
+        $logEntryRepository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
 
         $view = $this
             ->view()
-            ->setTemplate($config->getTemplate('history.html'))
-            ->setData($data)
+            ->setTemplate($this->config->getTemplate('history.html'))
+            ->setData(array(
+                $this->config->getResourceName() => $product,
+                'logs'                           => $logEntryRepository->getLogEntries($product)
+            ))
         ;
 
         return $this->handleView($view);
@@ -116,7 +112,7 @@ class ProductController extends ResourceController
      */
     public function filterFormAction(Request $request)
     {
-        return $this->renderResponse('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
+        return $this->render('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
             'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
         ));
     }

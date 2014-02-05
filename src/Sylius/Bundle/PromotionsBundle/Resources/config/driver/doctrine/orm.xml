@@ -18,67 +18,6 @@
 
     <parameters>
         <parameter key="sylius.repository.promotion.class">Sylius\Bundle\PromotionsBundle\Doctrine\ORM\PromotionRepository</parameter>
-        <parameter key="sylius.repository.promotion_coupon.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.promotion_rule.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.repository.promotion_action.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
-
-    <services>
-        <service id="sylius.manager.promotion" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.promotion" class="%sylius.repository.promotion.class%">
-            <argument type="service" id="sylius.manager.promotion" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.promotion"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.promotion.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.promotion_rule" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.promotion_rule" class="%sylius.repository.promotion_rule.class%">
-            <argument type="service" id="sylius.manager.promotion_rule" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.promotion_rule"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.promotion_rule.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.promotion_coupon" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.promotion_coupon" class="%sylius.repository.promotion_coupon.class%">
-            <argument type="service" id="sylius.manager.promotion_coupon" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.promotion_coupon"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.promotion_coupon.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.promotion_action" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.promotion_action" class="%sylius.repository.promotion_action.class%">
-            <argument type="service" id="sylius.manager.promotion_action" />
-            <argument type="service">
-                <service
-                    factory-service="sylius.manager.promotion_action"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.promotion_action.class%</argument>
-                </service>
-            </argument>
-        </service>
-    </services>
 
 </container>

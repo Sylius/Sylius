@@ -22,15 +22,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.product" class="%sylius.controller.product.class%">
-            <argument>sylius</argument>
-            <argument>product</argument>
-            <argument>SyliusProductBundle:Product</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.product" class="%sylius.form.type.product.class%">
             <argument>%sylius.model.product.class%</argument>
             <argument>%sylius.validation_group.product%</argument>

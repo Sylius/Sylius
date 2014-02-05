@@ -117,33 +117,16 @@ Feature: taxonomies
          Then I should be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully updated."
 
-    Scenario: Deleting taxons
-        Given I am on the page of taxonomy "Category"
-         When I click "delete" near "Electronics"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the page of taxonomy "Category"
-          And I should see "Taxon has been successfully deleted."
-
     @javascript
-    Scenario: Deleting taxons with js modal
+    Scenario: Deleting taxons
         Given I am on the page of taxonomy "Category"
          When I click "delete" near "Electronics"
           And I click "delete" from the confirmation modal
          Then I should still be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully deleted."
 
-    Scenario: Deleted taxons disappear from the list
-        Given I am on the page of taxonomy "Category"
-         When I click "delete" near "Clothing"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the page of taxonomy "Category"
-          And "Taxon has been successfully deleted." should appear on the page
-          And I should see 5 taxons in the list
-
     @javascript
-    Scenario: Deleted taxons disappear from the list with js modal
+    Scenario: Deleted taxons disappear from the list
         Given I am on the page of taxonomy "Category"
          When I click "delete" near "Clothing"
           And I click "delete" from the confirmation modal

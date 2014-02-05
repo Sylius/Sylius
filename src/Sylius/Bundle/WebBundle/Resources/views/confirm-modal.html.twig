@@ -11,10 +11,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</button>
-                <button class="btn btn-danger">
-                    <i class="icon-trash"></i><span>{{ message is defined ? message : 'sylius.delete'|trans }}</span>
-                </button>
+                <button type="button" class="btn btn-info" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> {{ 'sylius.cancel'|trans }}</button>
+                <a class="btn btn-danger" id="confirmation-modal-confirm">
+                    <i class="glyphicon glyphicon-trash"></i><span>{{ message is defined ? message : 'sylius.delete'|trans }}</span>
+                </a>
             </div>
         </div>
     </div>

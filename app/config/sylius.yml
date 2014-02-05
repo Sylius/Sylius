@@ -72,7 +72,7 @@ sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
     track_inventory: %sylius.inventory.tracking_enabled%
     classes:
-        unit:
+        inventory_unit:
             model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
         stockable:
             model: %sylius.model.variant.class%

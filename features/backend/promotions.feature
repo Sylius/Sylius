@@ -229,83 +229,41 @@ Feature: Promotions
           And I press "Save changes"
          Then I should be on the page of promotion "New Year Sale"
 
-    Scenario: Deleting promotion
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
-
     @javascript
-    Scenario: Deleting promotion with js modal
+    Scenario: Deleting promotion with
         Given I am on the page of promotion "New Year"
          When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should see "Promotion has been successfully deleted."
 
+    @javascript
     Scenario: Deleted promotion disappears from the list
         Given I am on the page of promotion "New Year"
          When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the promotion index page
-          And I should not see promotion with name "New Year" in that list
-
-    @javascript
-    Scenario: Deleted promotion disappears from the list with js modal
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should not see promotion with name "New Year" in that list
 
-    Scenario: Deleting promotion via list
-        Given I am on the promotion index page
-         When I click "delete" near "Press Campaign"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
-
     @javascript
-    Scenario: Deleting promotion via list with js modal
+    Scenario: Deleting promotion via list with
         Given I am on the promotion index page
          When I click "delete" near "Press Campaign"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should see "Promotion has been successfully deleted."
 
+    @javascript
     Scenario: Deleting promotion rule
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Item total"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion rule has been successfully deleted."
-          And I should not see "Order total"
-
-    @javascript
-    Scenario: Deleting promotion rule with js modal
-        Given I am on the page of promotion "Christmas"
-         When I press "delete" near "Item total"
           And I click "delete" from the confirmation modal
          Then I should be on the page of promotion "Christmas"
           And I should see "Promotion rule has been successfully deleted."
           And I should not see "Order total"
 
-    Scenario: Deleting promotion action
-        Given I am on the page of promotion "Christmas"
-         When I press "delete" near "Fixed discount"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion action has been successfully deleted."
-          And I should not see "Fixed discount"
-
     @javascript
-    Scenario: Deleting promotion action with js modal
+    Scenario: Deleting promotion action
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Fixed discount"
           And I click "delete" from the confirmation modal

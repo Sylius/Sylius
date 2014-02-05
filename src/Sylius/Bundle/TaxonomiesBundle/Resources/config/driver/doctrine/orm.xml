@@ -23,34 +23,4 @@
         <parameter key="sylius.form.type.taxonomy_choice.class">Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyEntityChoiceType</parameter>
     </parameters>
 
-    <services>
-        <service id="sylius.manager.taxonomy" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.taxonomy" class="%sylius.repository.taxonomy.class%">
-            <argument type="service" id="sylius.manager.taxonomy" />
-            <argument type="service">
-                <service id="sylius.doctrine.orm.metadata.taxonomy"
-                    factory-service="sylius.manager.taxonomy"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.taxonomy.class%</argument>
-                </service>
-            </argument>
-        </service>
-
-        <service id="sylius.manager.taxon" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.taxon" class="%sylius.repository.taxon.class%">
-            <argument type="service" id="sylius.manager.taxon" />
-            <argument type="service">
-                <service id="sylius.doctrine.orm.metadata.taxon"
-                    factory-service="sylius.manager.taxon"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ORM\Mapping\ClassMetadata"
-                >
-                    <argument>%sylius.model.taxon.class%</argument>
-                </service>
-            </argument>
-        </service>
-    </services>
-
 </container>

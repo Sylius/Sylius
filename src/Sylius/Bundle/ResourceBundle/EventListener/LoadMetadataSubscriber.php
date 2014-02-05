@@ -59,6 +59,9 @@ class LoadMetadataSubscriber implements EventSubscriber
         foreach ($this->classes as $class) {
             if (array_key_exists('model', $class) && $class['model'] === $metadata->getName()) {
                 $metadata->isMappedSuperclass = false;
+                if (array_key_exists('repository', $class)) {
+                    $metadata->setCustomRepositoryClass($class['repository']);
+                }
             }
         }
 
