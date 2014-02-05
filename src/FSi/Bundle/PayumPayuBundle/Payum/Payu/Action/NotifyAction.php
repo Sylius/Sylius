@@ -5,8 +5,10 @@ namespace FSi\Bundle\PayumPayuBundle\Payum\Payu\Action;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use FSi\Bundle\PayumPayuBundle\Payum\Payu\Api;
+use FSi\Bundle\PayumPayuBundle\Payum\Payu\Request\SyncRequest;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Action\ActionInterface;
+use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\ApiAwareInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\NotifyRequest;
@@ -16,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
-class NotifyAction implements ActionInterface, ApiAwareInterface
+class NotifyAction extends PaymentAwareAction implements ActionInterface, ApiAwareInterface
 {
     private $orderIdentifier;
     /**
@@ -43,6 +45,7 @@ class NotifyAction implements ActionInterface, ApiAwareInterface
      * @param EventDispatcherInterface $eventDispatcher
      * @param ObjectRepository $objectRepository
      * @param ObjectManager $objectManager
+     * @param string $orderIdentifier
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -94,7 +97,8 @@ class NotifyAction implements ActionInterface, ApiAwareInterface
 
         $payment = $order->getPayment();
         $previousState = $payment->getState();
-        $payment->setState(PaymentInterface::STATE_COMPLETED);
+
+        $this->payment->execute(new SyncRequest($order, $paymentDetails));
 
         if ($previousState !== $payment->getState()) {
             $this->eventDispatcher->dispatch(
@@ -109,6 +113,7 @@ class NotifyAction implements ActionInterface, ApiAwareInterface
                 new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
             );
         }
+
 
         throw new ResponseInteractiveRequest(new Response(Api::PAYMENT_STATUS_OK));
     }

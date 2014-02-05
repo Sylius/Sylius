@@ -7,8 +7,8 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Exception\UnsupportedApiException;
+use Payum\Core\Request\CaptureRequest;
 use Payum\Core\Request\PostRedirectUrlInteractiveRequest;
-use Payum\Core\Request\SecuredCaptureRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -101,7 +101,7 @@ class CaptureAction implements ActionInterface, ApiAwareInterface
      */
     function supports($request)
     {
-        return $request instanceof SecuredCaptureRequest &&
+        return $request instanceof CaptureRequest &&
             $request->getModel() instanceof OrderInterface;
     }
 }

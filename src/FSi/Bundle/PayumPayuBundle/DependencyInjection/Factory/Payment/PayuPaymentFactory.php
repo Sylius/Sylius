@@ -85,5 +85,10 @@ class PayuPaymentFactory extends AbstractPaymentFactory
         $captureActionId = 'payum.context.'.$contextName.'.action.notify';
         $container->setDefinition($captureActionId, $captureActionDefinition);
         $paymentDefinition->addMethodCall('addAction', array(new Reference($captureActionId)));
+
+        $captureActionDefinition = new DefinitionDecorator('payum.payu.action.sync');
+        $captureActionId = 'payum.context.'.$contextName.'.action.sync';
+        $container->setDefinition($captureActionId, $captureActionDefinition);
+        $paymentDefinition->addMethodCall('addAction', array(new Reference($captureActionId)));
     }
 }

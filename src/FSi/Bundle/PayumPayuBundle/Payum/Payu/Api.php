@@ -14,6 +14,20 @@ class Api
 
     const PAYMENT_STATUS_OK = 'OK';
 
+    const PAYMENT_STATE_NEW = 1;
+
+    const PAYMENT_STATE_CANCELLED = 2;
+
+    const PAYMENT_STATE_REJECTED = 3;
+
+    const PAYMENT_STATE_STARTED = 4;
+
+    const PAYMENT_STATE_PENDING = 5;
+
+    const PAYMENT_STATE_RETURNED = 7;
+
+    const PAYMENT_STATE_COMPLETED = 99;
+
     protected $options = array(
         'key1' => null,
         'key2' => null,

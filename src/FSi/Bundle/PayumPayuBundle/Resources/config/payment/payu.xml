@@ -9,6 +9,7 @@
         <parameter key="payum.payu.action.capture.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\CaptureAction</parameter>
         <parameter key="payum.payu.action.status.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\StatusAction</parameter>
         <parameter key="payum.payu.action.notify.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\NotifyAction</parameter>
+        <parameter key="payum.payu.action.sync.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\SyncAction</parameter>
     </parameters>
 
     <services>
@@ -33,5 +34,8 @@
             <argument type="service" id="sylius.manager.payment" />
             <argument>id</argument>
         </service>
+
+        <service id="payum.payu.action.sync" class="%payum.payu.action.sync.class%" public="false" />
+
     </services>
 </container>
