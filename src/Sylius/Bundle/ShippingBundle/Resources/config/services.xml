@@ -43,6 +43,10 @@
 
         <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Bundle\ShippingBundle\Calculator\WeightRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.weight_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
+
+        <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>
+
+        <parameter key="sylius.processor.shipment_processor.class">Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessor</parameter>
     </parameters>
 
     <services>
@@ -132,6 +136,13 @@
             <argument>%sylius.validation_group.shipping_calculator_weight_rate_configuration%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_weight_rate_configuration" />
         </service>
+
+        <service id="sylius.form.type.shipment_tracking" class="%sylius.form.type.shipment_tracking.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <tag name="form.type" alias="sylius_shipment_tracking" />
+        </service>
+
+        <service id="sylius.processor.shipment_processor" class="%sylius.processor.shipment_processor.class%" />
     </services>
 
 </container>

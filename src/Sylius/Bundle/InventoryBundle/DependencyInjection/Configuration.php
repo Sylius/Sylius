@@ -76,7 +76,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('inventory_unit')
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Bundle\InventoryBundle\Model\InventoryUnit')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
                                 ->scalarNode('repository')->end()
                             ->end()
                         ->end()

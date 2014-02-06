@@ -59,7 +59,7 @@ class RedirectHandler
         return new RedirectResponse($url, $status);
     }
 
-    protected function redirectToReferer()
+    public function redirectToReferer()
     {
         return $this->redirect($this->config->getRequest()->headers->get('referer'));
     }

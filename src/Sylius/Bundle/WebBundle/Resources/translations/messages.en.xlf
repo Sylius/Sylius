@@ -1154,6 +1154,22 @@
         <source>sylius.order.release_inventory</source>
         <target>Release inventory</target>
       </trans-unit>
+      <trans-unit id="bd1abb2f477836c03a17eb0398e509ee" resname="sylius.shipment.ship">
+        <source>sylius.shipment.ship</source>
+        <target>Ship</target>
+      </trans-unit>
+      <trans-unit id="bd1abb2f477836c03a17eb0398e509ef" resname="sylius.order.inventory_unit.backorder">
+        <source>sylius.order.inventory_unit.backorder</source>
+        <target>Backorder</target>
+      </trans-unit>
+      <trans-unit id="bd1abb2f477836c03a17eb0398e509eg" resname="sylius.order.inventory_unit.fulfill">
+        <source>sylius.order.inventory_unit.fulfill</source>
+        <target>Fulfill</target>
+      </trans-unit>
+      <trans-unit id="bd1abb2f477836c03a17eb0398e509eh" resname="sylius.order.inventory_unit.return">
+        <source>sylius.order.inventory_unit.return</source>
+        <target>Return</target>
+      </trans-unit>
       <trans-unit id="87e600739dd24c17844e39b4e26c7568" resname="sylius.order.shipping_address">
         <source>sylius.order.shipping_address</source>
         <target>Shipping address</target>

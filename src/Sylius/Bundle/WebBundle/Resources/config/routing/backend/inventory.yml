@@ -13,3 +13,9 @@ sylius_backend_inventory_index:
             sortable: true
             sorting:
                 updatedAt: asc
+
+sylius_backend_inventory_unit_update_state:
+    pattern: /update-state/{id}/{state}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.inventory_unit:updateStateAction

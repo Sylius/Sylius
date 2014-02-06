@@ -229,7 +229,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         $manager = $this->getEntityManager();
         $orderRepository = $this->getRepository('order');
-        $shippingFactory = $this->getContainer()->get('sylius.order_processing.shipment_factory');
+        $shipmentProcessor = $this->getContainer()->get('sylius.processor.shipment_processor');
 
         $currentOrderNumber = 1;
         foreach ($table->getHash() as $data) {
@@ -252,7 +252,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $order->setCurrency('EUR');
             $order->complete();
 
-            $shippingFactory->updateShipmentStates($order);
+            $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentInterface::STATE_READY, ShipmentInterface::STATE_CHECKOUT);
 
             $manager->persist($order);
 

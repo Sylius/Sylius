@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="b35abff3ac27033d049562863e7e61d9" resname="sylius.shipment.ship.success">
+        <source>sylius.shipment.ship.success</source>
+        <target>Shipping is completed.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

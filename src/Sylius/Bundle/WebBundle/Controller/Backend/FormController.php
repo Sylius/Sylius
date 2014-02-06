@@ -18,9 +18,22 @@ use Symfony\Component\HttpFoundation\Response;
  * Backend forms controller.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class FormController extends Controller
 {
+    /**
+     * Render form.
+     *
+     * @param Request $request
+     */
+    public function showAction($type, $template)
+    {
+        return $this->render($template, array(
+            'form' => $this->createForm($type)->createView()
+        ));
+    }
+
     /**
      * Render filter form.
      *

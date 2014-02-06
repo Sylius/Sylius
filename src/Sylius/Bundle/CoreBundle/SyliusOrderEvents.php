@@ -15,15 +15,18 @@ use Sylius\Bundle\OrderBundle\SyliusOrderEvents as BaseSyliusOrderEvents;
 
 class SyliusOrderEvents extends BaseSyliusOrderEvents
 {
-    const PRE_PAY     = 'sylius.order.pre_pay';
-    const POST_PAY    = 'sylius.order.post_pay';
+    const PRE_RELEASE  = 'sylius.order.pre_release';
+    const POST_RELEASE = 'sylius.order.post_release';
 
-    const PRE_SHIP    = 'sylius.order.pre_ship';
-    const POST_SHIP   = 'sylius.order.post_ship';
+    const PRE_PAY       = 'sylius.order.pre_pay';
+    const POST_PAY      = 'sylius.order.post_pay';
 
-    const PRE_CANCEL  = 'sylius.order.pre_cancel';
-    const POST_CANCEL = 'sylius.order.post_cancel';
+    const PRE_SHIP      = 'sylius.order.pre_ship';
+    const POST_SHIP     = 'sylius.order.post_ship';
 
-    const PRE_RETURN  = 'sylius.order.pre_return';
-    const POST_RETURN = 'sylius.order.post_return';
+    const PRE_CANCEL    = 'sylius.order.pre_cancel';
+    const POST_CANCEL   = 'sylius.order.post_cancel';
+
+    const PRE_RETURN    = 'sylius.order.pre_return';
+    const POST_RETURN   = 'sylius.order.post_return';
 }

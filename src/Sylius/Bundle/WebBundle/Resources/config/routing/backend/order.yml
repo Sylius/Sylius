@@ -63,4 +63,4 @@ sylius_backend_order_release_inventory:
     pattern: /release-inventory/{id}
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.order:releaseInventory
+        _controller: sylius.controller.order:releaseInventoryAction

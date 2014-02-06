@@ -40,3 +40,12 @@ sylius_backend_shipment_show:
         _controller: sylius.controller.shipment:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Shipment:show.html.twig
+
+sylius_backend_shipment_ship:
+    pattern: /ship/{id}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:shipAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Shipment:show.html.twig
+            redirect: sylius_backend_shipment_show
