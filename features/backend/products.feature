@@ -108,7 +108,7 @@ Feature: Products
           And I select "T-Shirt size" from "Options"
           And I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been successfully created." should appear on the page
+          And "Product has been successfully created." should appear on the page
           And I should see "T-Shirt size"
 
     @javascript
@@ -139,7 +139,7 @@ Feature: Products
           And I fill in "Value" with "Cotton"
           And I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been successfully created." should appear on the page
+          And "Product has been successfully created." should appear on the page
           And I should see "Cotton"
 
     @javascript
@@ -155,7 +155,7 @@ Feature: Products
           And I check "Value"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been successfully created." should appear on the page
+          And "Product has been successfully created." should appear on the page
 
     @javascript
     Scenario: Creating product with properties to choose
@@ -170,7 +170,7 @@ Feature: Products
           And I select "red" from "Value"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been successfully created." should appear on the page
+          And "Product has been successfully created." should appear on the page
 
     @javascript
     Scenario: Creating product with number property
@@ -185,7 +185,7 @@ Feature: Products
           And I fill in "Value" with "12"
          When I press "Create"
          Then I should be on the page of product "Manchester United tee"
-          And I "Product has been successfully created." should appear on the page
+          And "Product has been successfully created." should appear on the page
 
     Scenario: Created products appear in the list
         Given I am on the product creation page
