@@ -206,6 +206,8 @@ class OrderItem implements OrderItemInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+
+        return $this;
     }
 
     /**
