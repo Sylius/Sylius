@@ -47,7 +47,9 @@ class DomainManager
         }
 
         $this->manager->persist($resource);
+        $this->manager->getFilters()->disable('softdeleteable');
         $this->manager->flush();
+        $this->manager->getFilters()->enable('softdeleteable');
         $this->flashHelper->setFlash('success', 'create');
 
         $this->dispatchEvent('post_create', new ResourceEvent($resource));
@@ -66,7 +68,9 @@ class DomainManager
         }
 
         $this->manager->persist($resource);
+        $this->manager->getFilters()->disable('softdeleteable');
         $this->manager->flush();
+        $this->manager->getFilters()->enable('softdeleteable');
         $this->flashHelper->setFlash('success', 'update');
 
         $this->dispatchEvent('post_update', new ResourceEvent($resource));
