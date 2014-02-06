@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -40,6 +41,7 @@ class SyliusCoreBundle extends Bundle
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_core', $interfaces));
+        $container->addCompilerPass(new DoctrineSluggablePass());
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\CoreBundle\Model',
