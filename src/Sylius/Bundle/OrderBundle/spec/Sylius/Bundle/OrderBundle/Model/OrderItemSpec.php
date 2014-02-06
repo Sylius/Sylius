@@ -125,6 +125,12 @@ class OrderItemSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
+    function it_has_fluent_interface_for_totals_calculation()
+    {
+        $this->calculateAdjustmentsTotal()->shouldReturn($this);
+        $this->calculateTotal()->shouldReturn($this);
+    }
+
     function its_total_is_mutable()
     {
         $this->setTotal(5999);
