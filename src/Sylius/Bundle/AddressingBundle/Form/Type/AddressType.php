@@ -104,7 +104,7 @@ class AddressType extends AbstractType
                 'data_class'        => $this->dataClass,
                 'validation_groups' => function(Options $options) use ($validationGroups) {
                     if ($options['shippable']) {
-                        $validationGroups[] = self::SHIPPABLE_VALIDATION_GROUP;
+                        $validationGroups[] = AddressType::SHIPPABLE_VALIDATION_GROUP;
                     }
 
                     return $validationGroups;
