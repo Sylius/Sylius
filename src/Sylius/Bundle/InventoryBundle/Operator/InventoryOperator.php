@@ -15,6 +15,9 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\InventoryBundle\SyliusStockableEvents;
 
 /**
  * Default inventory operator.
@@ -39,15 +42,24 @@ class InventoryOperator implements InventoryOperatorInterface
     protected $availabilityChecker;
 
     /**
+     * Event dispatcher.
+     *
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * Constructor.
      *
      * @param BackordersHandlerInterface   $backordersHandler
      * @param AvailabilityCheckerInterface $availabilityChecker
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker)
+    public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
     {
         $this->backordersHandler = $backordersHandler;
         $this->availabilityChecker = $availabilityChecker;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -59,7 +71,11 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_INCREASE, new GenericEvent($stockable));
+
         $stockable->setOnHand($stockable->getOnHand() + $quantity);
+
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_INCREASE, new GenericEvent($stockable));
     }
 
     /**
@@ -71,7 +87,11 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_HOLD, new GenericEvent($stockable));
+
         $stockable->setOnHold($stockable->getOnHold() + $quantity);
+
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_HOLD, new GenericEvent($stockable));
     }
 
     /**
@@ -83,7 +103,11 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_RELEASE, new GenericEvent($stockable));
+
         $stockable->setOnHold($stockable->getOnHold() - $quantity);
+
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_RELEASE, new GenericEvent($stockable));
     }
 
     /**
@@ -111,6 +135,8 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new InsufficientStockException($stockable, $quantity);
         }
 
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_DECREASE, new GenericEvent($stockable));
+
         $this->backordersHandler->processBackorders($inventoryUnits);
 
         $onHand = $stockable->getOnHand();
@@ -122,5 +148,7 @@ class InventoryOperator implements InventoryOperatorInterface
         }
 
         $stockable->setOnHand($onHand);
+
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_DECREASE, new GenericEvent($stockable));
     }
 }

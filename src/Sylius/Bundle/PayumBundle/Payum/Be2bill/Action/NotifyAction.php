@@ -23,6 +23,7 @@ use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
