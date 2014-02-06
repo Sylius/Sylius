@@ -6,9 +6,17 @@
         <source>sylius.backend.menu.main.assortment</source>
         <target>Varios</target>
       </trans-unit>
+      <trans-unit id="5c8a58bb8d443c58bd8301e2768469a8" resname="sylius.backend.menu.main.blocks">
+        <source>sylius.backend.menu.main.blocks</source>
+        <target>Bloques</target>
+      </trans-unit>
       <trans-unit id="a372a7d5b6e2991da23009440f5b1c98" resname="sylius.backend.menu.main.configuration">
         <source>sylius.backend.menu.main.configuration</source>
         <target>Configuración</target>
+      </trans-unit>
+      <trans-unit id="5e5a18503ab9cd9de17ea0e504179a3b" resname="sylius.backend.menu.main.content">
+        <source>sylius.backend.menu.main.content</source>
+        <target>Contenido</target>
       </trans-unit>
       <trans-unit id="b3f20139c90a466753cd35511725f7a0" resname="sylius.backend.menu.main.countries">
         <source>sylius.backend.menu.main.countries</source>
@@ -45,6 +53,10 @@
       <trans-unit id="de3dfe470fe9b786ec37f80c586e16e8" resname="sylius.backend.menu.main.orders">
         <source>sylius.backend.menu.main.orders</source>
         <target>Pedidos en curso</target>
+      </trans-unit>
+      <trans-unit id="320c35490bdaf98df0f46b91fc75618e" resname="sylius.backend.menu.main.pages">
+        <source>sylius.backend.menu.main.pages</source>
+        <target>Páginas</target>
       </trans-unit>
       <trans-unit id="96fad72b5156d217d479762961dfab32" resname="sylius.backend.menu.main.payment_methods">
         <source>sylius.backend.menu.main.payment_methods</source>
@@ -114,9 +126,17 @@
         <source>sylius.backend.menu.sidebar.assortment</source>
         <target>Varios</target>
       </trans-unit>
+      <trans-unit id="af8302fef19be66077701ac01ee6f53b" resname="sylius.backend.menu.sidebar.blocks">
+        <source>sylius.backend.menu.sidebar.blocks</source>
+        <target>Bloques</target>
+      </trans-unit>
       <trans-unit id="7486e100b253cf670a06bf260d24d6c3" resname="sylius.backend.menu.sidebar.configuration">
         <source>sylius.backend.menu.sidebar.configuration</source>
         <target>Configuración</target>
+      </trans-unit>
+      <trans-unit id="043df756cc8ece03fe6a43ee93fb6eb6" resname="sylius.backend.menu.sidebar.content">
+        <source>sylius.backend.menu.sidebar.content</source>
+        <target>Contenido</target>
       </trans-unit>
       <trans-unit id="7ababb61b42033c8fd96a991a1e250c2" resname="sylius.backend.menu.sidebar.countries">
         <source>sylius.backend.menu.sidebar.countries</source>
@@ -138,9 +158,17 @@
         <source>sylius.backend.menu.sidebar.general_settings</source>
         <target>Configuración general</target>
       </trans-unit>
+      <trans-unit id="96bc6c0af7a307a49f9ad0223ab90394" resname="sylius.backend.menu.sidebar.groups">
+        <source>sylius.backend.menu.sidebar.groups</source>
+        <target>Grupos</target>
+      </trans-unit>
       <trans-unit id="d5ab9f2471615eb2a22c363e7aab01fc" resname="sylius.backend.menu.sidebar.homepage">
         <source>sylius.backend.menu.sidebar.homepage</source>
         <target>Volver a la tienda</target>
+      </trans-unit>
+      <trans-unit id="4900e8a8f7d9a20dda22d3b233b74e6d" resname="sylius.backend.menu.sidebar.locales">
+        <source>sylius.backend.menu.sidebar.locales</source>
+        <target>Regional</target>
       </trans-unit>
       <trans-unit id="cc4cae0efe5b617a36e61f0c8f3c650e" resname="sylius.backend.menu.sidebar.new_order">
         <source>sylius.backend.menu.sidebar.new_order</source>
@@ -157,6 +185,10 @@
       <trans-unit id="e302e76e2c779b4317248a07959825eb" resname="sylius.backend.menu.sidebar.orders">
         <source>sylius.backend.menu.sidebar.orders</source>
         <target>Pedidos en curso</target>
+      </trans-unit>
+      <trans-unit id="31db15191269336f7a43ccfa47f2651c" resname="sylius.backend.menu.sidebar.pages">
+        <source>sylius.backend.menu.sidebar.pages</source>
+        <target>Páginas</target>
       </trans-unit>
       <trans-unit id="2b9984059c74969e64141573b81601b3" resname="sylius.backend.menu.sidebar.payment_methods">
         <source>sylius.backend.menu.sidebar.payment_methods</source>
