@@ -23,10 +23,11 @@ class InventoryOperatorSpec extends ObjectBehavior
     /**
      * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface  $backordersHandler
      * @param Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface $availabilityChecker
+     * @param Symfony\Component\EventDispatcher\EventDispatcherInterface         $eventDispatcher
      */
-    function let($backordersHandler, $availabilityChecker)
+    function let($backordersHandler, $availabilityChecker, $eventDispatcher)
     {
-        $this->beConstructedWith($backordersHandler, $availabilityChecker);
+        $this->beConstructedWith($backordersHandler, $availabilityChecker, $eventDispatcher);
     }
 
     function it_is_initializable()
