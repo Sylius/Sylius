@@ -252,6 +252,8 @@ form.form-signin .form-control:focus {
     color: #999;
     font-size: 1em;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #sidebar li a:visited {
     color: #999;
