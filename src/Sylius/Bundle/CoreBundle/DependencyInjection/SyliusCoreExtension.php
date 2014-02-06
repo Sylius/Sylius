@@ -64,6 +64,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $loader->load('mailer/mailer.xml');
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
+        $this->loadCouponByUrlConfiguration($config['coupon_by_url'], $container, $loader);
     }
 
     /**
@@ -99,4 +100,18 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             }
         }
     }
+
+    /**
+     * @param array            $config    The coupon section of the config for this bundle
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    protected function loadCouponByUrlConfiguration(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        if ($config['enabled'])
+        {
+            $container->setParameter('sylius.promotion_coupon_by_url.queryName', $config['parameter']);
+            $loader->load('coupon_by_url_listener.xml');
+        }
+    }    
 }

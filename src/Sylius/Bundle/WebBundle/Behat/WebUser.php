@@ -126,6 +126,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am on the store homepage with coupon parameter "([^""]*)"$/
+     */
+    public function iAmOnTheStoreHomepageWithCouponParameter($value)
+    {
+        $this->getSession()->visit($this->generateUrl('sylius_homepage', array('promotionCoupon' => $value)));
+    }
+
+    /**
      * @Given /^I am on my account homepage$/
      */
     public function iAmOnMyAccountHomepage()

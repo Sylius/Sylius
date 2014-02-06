@@ -19,6 +19,11 @@ sylius_money:
     currency: EUR
     locale: en_US
 
+sylius_core:
+    coupon_by_url:
+        enabled: true
+        parameter: promotionCoupon 
+
 sylius_payment:
     gateways:
         cc:     Credit Card

@@ -31,8 +31,26 @@ class Configuration implements ConfigurationInterface
 
         $this->addClassesSection($rootNode);
         $this->addEmailsSection($rootNode);
+        $this->addCouponByUrlSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    protected function addCouponByUrlSection (ArrayNodeDefinition $node)
+    {
+        $couponByUrlNode = $node->children()->arrayNode('coupon_by_url');
+
+        $couponByUrlNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->booleanNode('enabled')->defaultFalse()->end()
+                ->scalarNode('parameter')
+                    ->defaultValue('coupon_code')->end()
+                ->end()
+            ->end()
+        ->end();
+
+        return $couponByUrlNode;
     }
 
     protected function addEmailsSection(ArrayNodeDefinition $node)
