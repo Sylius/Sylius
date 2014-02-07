@@ -98,7 +98,7 @@ class OrderShippingListener
         );
     }
 
-    private function getOrder(GenericEvent $event)
+    protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
