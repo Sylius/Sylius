@@ -150,6 +150,8 @@ class TaxRate implements TaxRateInterface
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
     /**
