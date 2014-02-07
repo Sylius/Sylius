@@ -24,8 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AddressType extends AbstractType
 {
-    const SHIPPABLE_VALIDATION_GROUP = 'shippable';
-
     /**
      * Data class.
      *
@@ -98,14 +96,13 @@ class AddressType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $validationGroups = $this->validationGroups;
-        $shippableValidationGroup = self::SHIPPABLE_VALIDATION_GROUP;
 
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => function(Options $options) use ($validationGroups, $shippableValidationGroup) {
+                'validation_groups' => function(Options $options) use ($validationGroups) {
                     if ($options['shippable']) {
-                        $validationGroups[] = $shippableValidationGroup;
+                        $validationGroups[] = 'shippable';
                     }
 
                     return $validationGroups;
