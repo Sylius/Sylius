@@ -39,9 +39,8 @@ class ShipmentProcessor implements ShipmentProcessorInterface
 
             if (null === $stateFrom || $stateFrom === $shipment->getState()) {
                 $shipment->setState($stateTo);
+                $this->updateItemStates($shipment->getItems(), $stateTo, $stateFrom);
             }
-
-            $this->updateItemStates($shipment->getItems(), $stateTo, $stateFrom);
         }
     }
 
