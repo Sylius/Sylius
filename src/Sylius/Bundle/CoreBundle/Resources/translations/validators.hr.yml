@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+fos_user:
+    email:
+        already_used: E-mail koji ste unijeli već se nalazi u sustavu
+        blank: Niste unijeli e-mail.
+        invalid: E-mail koji ste unijeli nije valjan.
+        long: E-mail koji ste unijeli je predug
+        short: E-mail koji ste unijeli je prekratak
+    password:
+        blank: Niste unijeli lozinku
+        short: Lozinka koju ste unijeli je prekratka.
+    username:
+        already_used: Korisničko ime koje ste unijeli je već zauzeto.
+        blank: Niste unijeli korisničko ime.
+        long: Korisničko ime je predugo.
+        short: Korisničko ime je prekratko.
+sylius:
+    user:
+        first_name:
+            max: Vaše ime ne smije biti duže od {{ limit }} znakova.
+            min: Vaše ime mora imati najmanje {{ limit }} znaka
+            not_blank: Molimo unesite Vaše ime.
+        last_name:
+            max: Last name must be not be longer than {{ limit }} characters.
+            min: Vaše prezime ne smije biti duže od {{ limit }} znakova.
+            not_blank: Molimo unesite Vaše prezime.
+    variant:
+        onHand:
+            min: "onHand" mora biti veći od {{ limit }}.
+            not_blank: Unesite "onHand"
+        price:
+            min: Cijena mora biti veća od {{ limit }}.
+            not_blank: Molimo unesite cijenu.
+sylius_shipping:
+    method:
+        zone:
+            not_blank: Niste odabrali način dostave.
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: Unesite porez za vašu regiju.

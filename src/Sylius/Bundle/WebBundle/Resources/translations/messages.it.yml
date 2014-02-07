@@ -1,0 +1,687 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    account:
+        address:
+            action:
+                billing: Imposta come indirizzo di fatturazine predefinito
+                create: Crea un nuovo indirizzo
+                delete: Cancella
+                edit: Modifica
+                shipping: Imposta come indirizzo di spedizione predefinito
+            create: Crea un nuovo indirizzo
+            default:
+                billing: Indirizzo di fatturazione predefinito
+                no_billing: Nessun indirizzo di fatturazione predefinito
+                no_shipping: Nessun indirizzo di spedizione predefinito
+                shipping: Indirizzo di spedizione predefinito
+            empty: Non hai ancora creato nessun indirizzo.
+            flash:
+                billing:
+                    success: L'indirizzo è stato correttamente inmpostato come indirizzo di fatturazione predefinito.
+                shipping:
+                    success: L'indirizzo è stato correttamente inmpostato come indirizzo di spedizione predefinito.
+            list: Tutti i tuoi indirizzi
+            update: Modifica il mio indirizzo
+        home:
+            email:
+                0: Email : 
+                1: Email : 
+            id:
+                0: ID Cliente: 
+                1: ID Clienti : 
+            outline:
+                0: Goditi tutte le possibilità che il tuo spazio personale offre, per tener traccia, modificare e gestire ogni tuo dato
+                1: Avvantaggiati delle funzionalità che sono disponibili per vedere, tracciare e gestire i tuoi dati.
+            since:
+                0: Sei nostro cliente dal
+                1: Tu sei cliente da
+            welcome:
+                0: Benvenuto nel tuo spazio
+                1: Benvenuto nella tua pagina
+        order:
+            created_at: Ordinato il
+            details: Dettagli dell'ordine
+            download_invoice: Scarica la fattura
+            empty: Non hai ancora completato nessun ordine.
+            invoice: Fattura
+            list: Tutti i tuoi ordini
+            number: Numero : 
+            payment_mode: Metodo di pagamento : 
+            placed_at: Ordinato il %at%
+            shipment:
+                pending: In attesa
+                ready: Pronto dal %at%
+                returned: Ritornato il %at%
+                shipped: Inviato il %at%
+            shipment_mode: Metodo di spedizione : 
+            state: Stato : 
+            total: Totale
+            tracking_number: Tracking number
+        title:
+            0: Il mio account
+            1: Il mio account
+    add_to_cart: Aggiungi al carrello
+    address:
+        city: Città
+        company: Ditta
+        country: Paese
+        edit:
+            header: Modifica
+        firstname: Nome
+        lastname: Cognome
+        postcode: CAP
+        province: Provincia
+        street: Via
+    alert:
+        error: Errore
+        info: Info
+        success: Successo
+        warning: Attenzione
+    backend:
+        alert:
+            info: Info
+        dashboard:
+            chart_order_count: Numero di ordini
+            chart_order_total: Valore ordine
+            header: Pannello amministrazione
+            orders: Ordini ultima settimana
+            revenue: Entrate della settimana scorsa
+            subheader: Panoramica del negozio
+        logout: Logout
+        quick_links:
+            add_product: Nuovo prodotto
+            orders: Ultimi ordini
+            products: I tuoi prodotti
+            users: Utenti
+        statistics:
+            0: Le statistiche di questo mese
+            orders_this_month: Ordini totali
+            registrations_this_month: Registrazioni totali
+            sales_this_month: Vendite
+    backend_welcome: Ciao <b>%name%</b>!
+    breadcrumb:
+        assortment: Assortimento
+        build: sylius.breadcrumb.build
+        configuration: Configurazione
+        country:
+            index: Stati
+        customers: Clienti
+        edit: Modifica
+        exchange_rate:
+            index: Tassi di cambio
+        general_settings: Impostazioni generali
+        generate: Genera
+        group:
+            index: Gruppi
+        inventory:
+            index: Magazzino
+        new: Nuovo
+        option:
+            index: Opzioni
+        order:
+            index: Ordini
+        orders: sylius.breadcrumb.orders
+        payment:
+            index: Pagamenti
+        payment_method:
+            index: Metodi di pagamento
+        product:
+            index: Prodotti
+        promotion:
+            index: Promozioni
+        promotion_coupon:
+            index: Coupons
+        property:
+            index: Proprietà
+        prototype:
+            index: Prototipi
+        sales: Vendite
+        shipment:
+            index: Spedizioni
+        shipping_category:
+            index: Categorie di spedizione
+        shipping_method:
+            index: Metodi di spedizione
+        tax_category:
+            index: Categorie di tassazione
+        tax_rate:
+            index: Tax Rates
+        taxation_settings: Impostazioni tassazione
+        taxonomy:
+            index: Tassonomie
+        update: Modifica
+        user:
+            index: Utenti
+        zone:
+            index: Zone
+    cancel: Annulla
+    cart:
+        empty: Il tuo carrello è vuoto
+        summary:
+            checkout: Checkout
+            clear: Vuota carrello
+            grand_total: Totale
+            product: Prodotto
+            quantity: Qt
+            save: Salva
+            total: Totale
+            unit_price: Prezzo
+            add_coupon: OK
+        summary_header: Riepilogo carrello
+        total_items: 1 oggetto|%count% oggetti
+    form:
+        cart:
+            coupon: If you have a promotion coupon, enter it here
+        choose_file: Scegli file
+        frontend:
+            password:
+                confirmation:
+                    0: Confirmation
+                    1: Conferma
+                current:
+                    0: Current password
+                    1: Password attuale
+                new:
+                    0: New password
+                    1: Nuova password
+                title:
+                    0: Change your password
+                    1: Cambia la mia password
+            profile:
+                title:
+                    0: Edit your personal information
+                    1: Modifica le mie informazioni personali
+        login:
+            email: Email
+            password: Password
+            username: Username
+        profile:
+            firstName:
+                0: First name
+                1: Nome
+            lastName:
+                0: Last name
+                1: Cognome
+            email: Email
+            username: Username
+    checkout:
+        addressing:
+            header: Step indirizzamento
+        back: Indietro
+        finalize:
+            address:
+                city: Città
+                country: Paese
+                firstname: Nome
+                lastname: Cognome
+                postcode: CAP
+                province: Province
+                street: Via
+            header: Riepilogo ordine
+            order:
+                billing_address: Indirizzo fatturazione
+                items_total: Totale oggetti
+                no_items: Questo ordine non contiene oggetti
+                no_promotion: Nessuna promozione applicata
+                no_shipping_charges: Nessuna maggiorazione di spedizione applicata
+                no_taxes: Nessuna tassa applicata
+                promotion_discount: Sconti promozionali
+                promotion_total: Totale promozione
+                shipping_address: Indirizzo spedizione
+                shipping_charges: Le spese di spedizione
+                shipping_total: Totale spedizione
+                tax_total: Totale tasse
+                taxes: Tasse
+                total: Totale
+            order_item:
+                quantity: Qt
+                total: Totale
+                unit_price: Prezzo unitario
+            place_order: Ordina
+            product:
+                name: Nome
+        forward: Continua
+        payment:
+            header: Metodi di pagamento
+        security:
+            existing_customer: Cliente esistente
+            header: Accedi allo store <small>o crea un nuovo account</small>
+            login: Login
+            new_customer: Nuovo cliente
+            register: Registrati
+        shipping:
+            header: Metodi di spedizione
+    country:
+        add_province: Aggiungi provincia
+        create: Crea paese
+        create_header: Nuovo paese
+        id: ID
+        index_header: Paesi
+        iso_name: ISO
+        manage: Amministra paesi
+        name: Nome
+        no_results: Non ci sono paesi configurati
+        show_header: Dettagli paese
+        update_header: Modifica paesi
+    create: Crea
+    delete: cancella
+    edit: modifica
+    email: E-Mail
+    exchange_rate:
+        create: Crea un tasso di cambio
+        create_header: Nuovo tasso di cambio
+        currency: valuta
+        id: ID
+        index_header: Tassi di cambio
+        no_results: Non ci sono tassi di cambio da mostrare.
+        rate: tasso
+        update_header: Modifica il tasso di cambio
+        updated_at: ultimo aggiornamento
+    filter: Filtri
+    gallery:
+        next: Prossimo
+        previous: Precedente
+        slideshow: Slideshow
+    generate: Genera
+    group:
+        create: Crea un gruppo
+        create_header: Aggiungi un nuovo gruppo di utenti
+        id: ID
+        index_header: Grouppi
+        name: Nome
+        no_results: Non ci sono gruppi da mostrare.
+        roles: Ruoli
+        update_header: Modifica il gruppo
+    homepage:
+        splash:
+            headline: Benvenuto su Expostore.it!
+            subheadline: servizi di stampa per privati e imprese
+    inventory_unit:
+        created_at: Creato
+        inventory_state: Stato inventario
+        name: Nome
+        no_results: Non ci sono unità da mostrare nell'inventario.
+        shipping_state: Stato spedizione
+        sku: SKU
+        updated_at: Modificato
+    login: Login
+    login_header: Amministrazione
+    logo: Sylius
+    manage: Gestisci
+    meta:
+        backend_title: Pannello amministrazione Expostore.it
+        frontend_description: servizi di stampa per privati e imprese
+        frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
+        frontend_title: stampa digitale, imprese, servizi
+    newest: Nuovi prodotti
+    no: no
+    option:
+        create: Crea opzioni
+        create_header: Nuova opzione prodotto
+        index_header: Opzioni prodotto
+        manage: Gestisci opzioni
+        name: nome
+        no_results: Non sono state configurate opzioni.
+        presentation: presentazioni
+        update_header: Opzioni di modifica
+        updated_at: aggiornato
+        values: valori
+    order:
+        billing_address: Indirizzo fatturazione
+        create: Crea ordine
+        create_header: Nuovo ordine
+        created_at: Data di creazione
+        general_info: Informazioni generali
+        id: ID
+        index_header: Ordini correnti
+        inventory_tracking: Tracciamento inventario
+        items_total: Totale oggetti
+        manage: Gestisci ordini
+        no_items: Questo ordine non contiene oggetti
+        no_results: Non hai nuovi ordini
+        no_shipments: Non ci sono spedizioni per questo ordine
+        no_shipping_charges: Nessuna spesa di spedizione applicata
+        no_taxes: Nessuna tassa applicata
+        number: Numero
+        payment_state: Stato pagamento
+        payment_states:
+            balance_due: Saldo dovuto
+        promotion_total: Totale promozione
+        recent_header: Ordini recenti
+        shipment_state: Stato spedizione
+        shipment_states:
+            pending: In attesa
+        shipments: Spedizioni
+        shipping_address: Indirizzo spedizione
+        shipping_charges: Spese di spedizione
+        shipping_total: Totale spedizione
+        show_header: Dettagli ordine
+        state:
+            checkout: Nel carrello
+            cart_locked: Carrello bloccato
+            ordered: Ordinato
+            order_confimed: Ordine confermato
+        tax_total: Totale tasse
+        taxes: Tasse
+        total: Totale
+        update_header: Modifica ordine
+        user: Utente
+    order_item:
+        product: Oggetto
+        quantity: Qt
+        sellable: Prodotto
+        total: Totale
+        unit_price: Prezzo unitario
+    out_of_stock: Out of stock
+    password: Password
+    payment:
+        amount: Ammontare
+        create: Crea pagamento
+        create_header: Nuovo pagamento
+        created_at: Creato
+        id: ID
+        index_header: Pagamenti
+        manage: Gestisci i pagamenti
+        method: Metodo
+        no_results: Non ci sono pagamenti configurati.
+        state:
+            0: Stato
+            checkout: Checkout
+            completed: Completato
+            failed: Fallimento
+            new: Nuovo
+            pending: In attesa
+            processing: In elaborazione
+            unknown: Sconosciuto
+            void: Nullo
+        update_header: Modifica pagamento
+        updated_at: Ultima modifica
+    payment_method:
+        create: Crea metodo di pagamento
+        create_header: Nuovo metodo di pagamento
+        enabled: Abilitato?
+        gateway: gateway
+        id: ID
+        index_header: Metodi di pagamento
+        name: Nome
+        no_results: Non ci sono metodi di pagamento configurati.
+        update_header: Modifica il metodo di pagamento
+        updated_at: Ultima modifica
+    product:
+        add_property: Aggiungi proprietà
+        available_on: Disponibile
+        available_on_demand: Disponibile su ordinazione
+        categorization: Categorizzazione
+        create: Crea prodotto
+        create_header: Nuovo prodotto
+        description: Descrizione
+        generate_variants: Genera varianti
+        index_by_taxon_header: Prodotti <small>Categorizzati sotto "%taxon%" taxon</small>
+        index_header: Prodotti <small>Lista tutti i prodotti dello store</small>
+        manage: Gestisci prodotti
+        name: Nome
+        no_description: <i>Nessuna descrizione...</i>
+        no_images: Non ci sono immagini per questo prodtto
+        no_options: Non ci sono opzioni per questo prodotto
+        no_properties: Questo prodotto non ha proprietà definite
+        no_results: Non ci sono prodotti da mostrare.
+        no_short_description: <i>Nessuna descrizione breve</i>
+        no_sku: <i>Nessuno SKU</i>
+        no_tax_category: Nessuna categoria di tasse
+        no_shipping_category: Nessuna categoria di spedizione
+        no_taxons: Nessuna categoria
+        options: Opzioni
+        price: Prezzo al dettaglio
+        properties: Propietà
+        show: Dettaglio
+        show_header: Dettaglio prodotto <small>Visionando il prodotto "<strong>%product%</strong>"</small>
+        show_in_store: mostra nel negozio
+        sku: SKU
+        stock: Disponibilità
+        tabs:
+            categorization: Categorizzazione
+            images: Immagini
+            options: Opzioni
+            product: Prodotto
+            properties: Propietà
+        tax_category: Categoria fiscale
+        shipping_category: Categoria di spedizione
+        update_header: Modificando prodotto
+        updated_at: Ultima modifica
+        variant_selection_method: Metodo di selezione variante
+    promotion:
+        actions: Azioni
+        add_action: Aggiungi azione
+        add_rule: Aggiungi regola
+        coupon_based: Basata su coupon ?
+        create: Crea promozione
+        create_header: Nuova promozione
+        created_at: Creato
+        description: Descrizione
+        ends_at: Termina
+        general_info: Informazioni generali
+        id: ID
+        index_header: Promozione corrente
+        manage: Manage promotions
+        name: Nome
+        no_results: Non ci sono promozioni configurate.
+        rules: Regole
+        show_header: Dettagli promozione
+        starts_at: Inizia
+        update_header: Modifica promozione
+        updated_at: Aggiornata
+        usage_limit: Limite di utilizzo
+        used: Usata
+    promotion_action:
+        configuration: Configurazione
+        type: Tipo
+    promotion_coupon:
+        create: Aggiungi coupon
+        create_header: Crea nuovo coupon
+        generate: Genera coupon
+        generate_header: Genera coupon
+        index: Lista coupon
+        index_header: Coupons
+        no_results: Non ci sono coupon da mostrare.
+        total_results: Totale: %total%
+        update_header: Editando coupon
+    promotion_rule:
+        configuration: Configurazione
+        type: Tipo
+    property:
+        add_choice: Aggiungi scelta
+        create: Crea proprietà
+        create_header: Nuovo proprietà del prodotto
+        index_header: Proprietà del prodotto
+        manage: Gestisci proprietà
+        name: nome
+        no_results: Non ci sono proprietà configurate.
+        presentation: presentazione
+        type: tipo
+        update_header: Modificando proprietà
+        updated_at: ultima modifica
+    prototype:
+        build: Costruisci prototipo
+        build_header: Costruisci un prodotto da un prototipi
+        create: Crea prototipo
+        create_header: Nuovo prototipo
+        index_header: Prototipi di prodotto
+        name: nome
+        no_results: Non ci sono prototipi definiti.
+        options: opzioni
+        properties: propietà
+        update_header: Modificando prototipo
+        updated_at: ultima modifica
+    province:
+        provinces: Province
+    remember_me: Ricordami?
+    save_changes: Salva cambiamenti
+    search: Cerca
+    settings:
+        general_header: Configurazione generale
+        taxation_header: Configurazioni fiscali
+    shipment:
+        created_at: creato
+        id: ID
+        index_header: Spedizioni
+        inventory_state: stato dell'inventario
+        manage: Gestisci spedizioni
+        method: metodo
+        modified: modificato
+        name: nome
+        no_items: Non ci sono oggetti da mostrare.
+        no_results: Non ci sono spedizioni da mostrare.
+        order: ordine
+        show_header: Dettagli spedizione
+        sku: SKU
+        state: stato
+        updated_at: ultima modifica
+    shipment_category:
+        manage: Gestisci categorie di spedizione
+    shipping_category:
+        create: Crea una categoria di spedizione
+        create_header: Nuova categoria di spedizione
+        id: ID
+        index_header: Categorie spedizione
+        manage: Gestisci categorie di spedizione
+        name: Nome
+        no_results: Non ci sono categorie di spedizione predefinite.
+        update_header: Editando categorie di spedizione
+        updated_at: Ultima modifica
+    shipping_method:
+        calculator: Calcolatore
+        category: Categoria
+        create: Crea un metodo di spedizione
+        create_header: Nuovo metodo di spedizione
+        enabled: Abilitato?
+        id: ID
+        index_header: Metodo di spedizione
+        manage: Gestisci metodo di spedizione
+        name: Nome
+        no_results: Non ci sono metodi di spedizione configurati.
+        show_header: Dettaglio spedizione
+        update_header: Modificando metodo di spedizione
+        updated_at: Ultima modifica
+        zone: Zona
+    shop_by: eshop by
+    show: dettaglio
+    show_all: Mostra tutto
+    stockable:
+        index_header: Inventario <small>Qua puoi controllare i livelli di magazzino</small>
+        name: nome
+        no_results: Non ci sono oggetti dell'inventario da mostrare.
+        on_hand: livello magazzino
+        sku: sku
+        updated_at: ultima modifica
+    tax_category:
+        create: Crea una categoria fiscale
+        create_header: Nuova categoria fiscale
+        description: Descrizione
+        id: ID
+        index_header: Categorie fiscali
+        manage: Gestisci categorie fiscali
+        name: Nome
+        no_description: Nessuna descrizione
+        no_results: Nessuna categoria fiscale trovata.
+        update_header: Modificando categoria fiscale
+        updated_at: Ultima modifica
+    tax_rate:
+        amount: Ammontare
+        calculator: Calculator
+        category: Categoria fiscale
+        create: Crea categoria fiscale
+        create_header: Nuova categoria fiscale
+        included_in_price: Inclusa nel prezzo
+        index_header: Aliquote fiscali
+        manage: Gestisci aliquote fiscali
+        name: Nome
+        no_results: Non ci sono aliquote fiscali configurate.
+        show_header: Dettaglio aliquota fiscale
+        update_header: Aggiornando aliquota fiscale.
+        updated_at: Ultima modifica
+        zone: Zona aliquota fiscale
+    taxon:
+        create: Crea categoria
+        create_header: Nuova categoria
+        image: Scegli immagine
+        name: Nome
+        no_image: Non ci sono immagini per questa categoria
+        no_results: Non ci sono categorie da mostrare.
+        update_header: Modificando categoria
+    taxonomy:
+        create: Crea categorizzazione
+        create_header: Nuova categorizzazione
+        image: Scegli immagine
+        index_header: Categorizzazione <small>qua vedi definite le tue categorie</small>
+        manage: Gestisci le tassonomie
+        name: Nome
+        no_image: Non ci sono immagini per questa categorizzazione
+        no_results: Non ci sono categorizzazioni definite.
+        show_header: Categorizzazione <small><strong>%name%</strong></small>
+        update_header: Modificando categorizzazione
+    user:
+        billing_address: Indirizzo di fatturazione
+        create: crea un utente
+        create_header: Nuovo utente
+        email: E-Mail
+        enabled: Confermato?
+        filter:
+            all: Mostra tutti gli utenti
+            unconfirmed: Account non confermati
+        first_name: Nome
+        general_info: Informazione generali utente "%username%"
+        id: ID
+        index_header: Utenti <small>Lista degli utenti registrati al negozio</small>
+        last_login: Ultimo login
+        last_name: Cognome
+        manage: gestisci utenti
+        no_results: Non ci sono utenti da visualizzare.
+        order:
+            no_results:
+                0: Non ci sono ordini da visualizzare
+                1: Nessun risultato
+        orders:
+            0: Ordini utente
+            1: Ordini utente
+        recent_header: Utenti recenti
+        registration_date: Data di registrazione
+        shipping_address: Indirizzo di spedizione
+        show_header: Dettagli utente
+        update_header: Modifica utente
+        username: Nome utente
+    variant:
+        add_image: Aggiungi immagini
+        availability: Disponibilità
+        available_on_demand: Disponibile su richiesta
+        create: Crea variante
+        create_header: Nuova variante prodotto
+        delete_image: cancella immagine
+        last_update: ultima modifica
+        no_results: Non ci sono varianti da mostrare.
+        options: Opzioni
+        price: Prezzo
+        sku: SKU
+        stock: Disponibilità attuale
+        update_header: Modificando variante
+    yes: si
+    zone:
+        add_member: Aggiungi membro
+        create: Crea zona
+        create_header: Nuova zona
+        index_header: Zone
+        manage: Gestisci zone
+        name: Nome
+        no_results: Non ci sono zone configurate.
+        show_header: Dettaglio zone
+        type: Tipo
+        update_header: Modificando zona
+    zone_member:
+        members: Membri
+change_password:
+    flash:
+        success: La tua password è stata cambiata.
+profile:
+    flash:
+        updated: Le tue informazioni personali sono state aggiornate.

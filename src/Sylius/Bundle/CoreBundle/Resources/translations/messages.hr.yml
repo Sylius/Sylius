@@ -1,0 +1,59 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+    checkout:
+        shipping_method:
+            not_blank: Odaberite način dostave
+    form:
+        checkout:
+            addressing:
+                different_billing_address: Želim koristiti drugu adresu za dostavu.
+            payment_method: Tip plaćanja
+            shipping_method: Vrsta dostave
+        image:
+            file: Fotografija
+        order_filter:
+            created_at_from: Od
+            created_at_to: Do
+            number: Broj
+            total_from: Od
+            total_to: Do
+        product:
+            short_description: Kratak opis
+            tax_category: Porezna kategorija
+            variant_selection_method: Odabir modela
+        product_filter:
+            name: Naziv
+            sku: KOD
+        settings:
+            general:
+                locale: Jezik
+                currency: Valuta
+                meta_description: Opis
+                meta_keywords: Ključne riječi
+                title: Naslov stranice
+            taxation:
+                default_tax_zone: Porezna zona
+        shipping_method:
+            zone: Regija
+        taxon:
+            file: Odaberite sliku
+        taxonomy:
+            file: Odaberite sliku
+        user:
+            billing_address: Adresa za dostavu
+            different_billing_address: Koristio bi drugu adresu za dostavu.
+            enabled: Aktivan
+            first_name: Ime
+            last_name: Prezime
+            password: Lozinka
+            shipping_address: Adresa za dostavu
+        user_filter:
+            query: Pretraga
+        variant:
+            available_on_demand: Dostupno na zahtjev
+            images: Slike
+            on_hand: Treutno dostupno
+            price: Cijena

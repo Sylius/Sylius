@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        taxon:
+            name: Naziv
+            permalink: Trajni link
+            parent: Glavna kategorija
+            description: Opis
+        taxonomy:
+            name: Naziv

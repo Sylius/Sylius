@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion:
+        name:
+            not_blank: Voer een promotie naam in.
+            min_length: Promotie naam moet minstens 1 karakter lang zijn.|Promotie naam moet minstens {{ limit }} karakters lang zijn.
+            max_length: Promotie naam mag niet langer zijn dan 1 karakter.|Promotie naam mag niet langer zijn dan {{ limit }} karakters.
+        description:
+            not_blank: Voer een promotie omschrijving in.
+            min_length: Promotie omschrijving moet minstens 1 karakter lang zijn.|Promotie omschrijving moet minstens {{ limit }} karakters lang zijn.
+            max_length: Promotie omschrijving mag niet langer zijn dan 1 karakter.|Promotie omschrijving mag niet langer zijn dan {{ limit }} karakters.
+    promotion_coupon:
+        code:
+            not_blank: Voer een coupon code in.
+            min_length: Coupon code moet minstens 1 karakter lang zijn.|Coupon code moet minstens {{ limit }} karakters lang zijn.
+            max_length: Coupon code mag niet langer zijn dan 1 karakter.|Coupon code mag niet langer zijn dan {{ limit }} karakters.
+        usage_limit:
+            min: Coupon gebruikslimiet moet minstens {{ limit }} zijn.
+    promotion_coupon_generate_instruction:
+        amount:
+            not_blank: Voer het aantal te genereren coupons in.
+            min: Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.
+        usage_limit:
+            min: Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.

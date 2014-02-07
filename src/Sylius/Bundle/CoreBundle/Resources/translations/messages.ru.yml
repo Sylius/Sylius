@@ -1,0 +1,60 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+    checkout:
+        shipping_method:
+            not_blank: Пожалуйста, выберите метод доставки.
+    form:
+        checkout:
+            addressing:
+                different_billing_address: Использовать другой адрес для составления счета?
+            payment_method: Метод оплаты
+            shipping_method: Метод доставки
+        image:
+            file: Изображение
+        order_filter:
+            created_at_from: Откуда
+            created_at_to: Куда
+            number: Номер
+            total_from: Откуда
+            total_to: Куда
+        product:
+            short_description: Короткое описание
+            tax_category: Налоговая категория
+            variant_selection_method: Метод выбора вариантов
+            shipping_category: Категория доставки
+        product_filter:
+            name: Название
+            sku: Идентификатор товарной позиции
+        settings:
+            general:
+                locale: Язык
+                currency: Валюта по умолчанию
+                meta_description: Описание метаданных
+                meta_keywords: Ключевые слова метаданных
+                title: Заголовок страницы
+            taxation:
+                default_tax_zone: Налоговая зона по умолчанию
+        shipping_method:
+            zone: Зона
+        taxon:
+            file: Выберите изображение
+        taxonomy:
+            file: Выберите изображение
+        user:
+            billing_address: Адрес для составления счета
+            different_billing_address: Использовать другой адрес для составления счета?
+            enabled: Активен
+            first_name: Имя
+            last_name: Фамилия
+            password: Пароль
+            shipping_address: Адрес доставки
+        user_filter:
+            query: Поиск
+        variant:
+            available_on_demand: Доступно по запросу
+            images: Изображения
+            on_hand: Количество на складе
+            price: Цена

@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: $
+sylius:
+    flashes:
+        installed: Sylius has been successfully installed.
+    form:
+        configuration:
+            database:
+                0: Database connection
+                driver:
+                    0: Driver
+                    microsoft_sql_server: Microsoft SQL Server
+                    mysql: MySQL
+                    oracle: Oracle
+                    postgresql: PostgreSQL
+                    sqlite: SQLite
+                host: Host
+                name: Name
+                password: Password
+                port: Port
+                user: User
+            locale:
+                0: Locale settings
+                currency: Currency
+                locale: Locale
+            mailer:
+                0: Mailer settings
+                host: Host
+                password: Password
+                transport:
+                    0: Transport
+                    gmail: Gmail
+                    mail: Mail
+                    sendmail: Sendmail
+                    smtp: SMTP
+                user: User
+        setup:
+            email: Email
+            load_fixtures: Load fixtures
+            plain_password: Password
+            username: Username
+    process:
+        step:
+            check:
+                button:
+                    back: Back
+                    install: Install
+                    next: Next
+                header: System requirements check <small>Sylius installer</small>
+                table:
+                    current: current
+                    required: required
+                    status: status
+            configure:
+                header: Configuration <small>Sylius installer</small>
+            setup:
+                header: Administration setup <small>Sylius installer</small>
+            welcome:
+                content: <p>Welcome to Sylius installer.</p>
+                header: Welcome <small>Sylius installer</small>
+€: €

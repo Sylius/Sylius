@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            options: Opcije
+        variant:
+            presentation: Prezentacija
+            available_on: Dostupno na
+        option:
+            name: Interni naziv
+            presentation: Prezentacija
+            values: Moguće vrijednosti
+        option_value:
+            value: Iznos
+        prototype:
+            options: Opcije

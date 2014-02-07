@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+    form:
+        checkout:
+            addressing:
+                different_billing_address: sylius.form.checkout.addressing.different_billing_address
+            payment_method: Betalingsmethode
+            shipping_method: Verzendingsmethode
+        image:
+            file: Afbeelding
+        order_filter:
+            created_at_from: Van
+            created_at_to: Tot
+            number: Nummer
+            total_from: Van
+            total_to: Tot
+        product:
+            short_description: Korte omschrijving
+            tax_category: Belastingcategorie
+            variant_selection_method: Variant selectie methode
+        product_filter:
+            name: Naam
+            sku: SKU
+        settings:
+            general:
+                meta_description: Meta omschrijving
+                meta_keywords: Meta sleutelwoorden
+                title: Pagina titel
+            taxation:
+                default_tax_zone: Standaard belastingzone
+        shipping_method:
+            zone: sylius.form.shipping_method.zone
+        variant:
+            available_on_demand: Beschikbaar op aanvraag
+            images: Afbeeldingen
+            on_hand: Huidige stock
+            price: Price
