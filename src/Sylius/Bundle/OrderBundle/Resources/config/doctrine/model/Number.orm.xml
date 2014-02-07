@@ -22,12 +22,12 @@
             <generator strategy="AUTO" />
         </id>
 
-        <one-to-one field="order" target-entity="Sylius\Bundle\OrderBundle\Model\OrderInterface">
+        <many-to-one field="order" target-entity="Sylius\Bundle\OrderBundle\Model\OrderInterface" unique="false">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
             <cascade>
                 <cascade-all/>
             </cascade>
-        </one-to-one>
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>
