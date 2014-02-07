@@ -68,7 +68,7 @@ Feature: Checkout fixed discount promotions
         Given I am on the store homepage
          When I add product "Woody" to cart, with quantity "3"
          Then I should be on the cart summary page
-          And "Promotion total: (€40.00)" should appear on the page
+          And "Promotion total: -€40.00" should appear on the page
           And "Grand total: €335.00" should appear on the page
 
     Scenario: Fixed discount promotion is not applied when the cart
@@ -86,7 +86,7 @@ Feature: Checkout fixed discount promotions
           And I added product "Etch" to cart, with quantity "1"
          When I add product "Lenny" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: (€15.00)" should appear on the page
+          And "Promotion total: -€15.00" should appear on the page
           And "Grand total: €110.00" should appear on the page
 
     Scenario: Item count promotion is not applied when the cart has
@@ -104,7 +104,7 @@ Feature: Checkout fixed discount promotions
           And I fill in the shipping address to Germany
           And I press "Continue"
           And I go to the cart summary page
-         Then "Promotion total: (€40.00)" should appear on the page
+         Then "Promotion total: -€40.00" should appear on the page
           And "Grand total: €35.00" should appear on the page
 
     Scenario: Shipping country promotion is not applied when shipping country does not match
@@ -121,7 +121,7 @@ Feature: Checkout fixed discount promotions
         Given I am on the store homepage
          When I add product "Ubu" to cart, with quantity "1"
          Then I should be on the cart summary page
-          And "Promotion total: (€40.00)" should appear on the page
+          And "Promotion total: -€40.00" should appear on the page
           And "Grand total: €160.00" should appear on the page
 
     Scenario: Ubuntu T-Shirts promotion is not applied when the cart does not contain Ubuntu T-Shirts
@@ -162,7 +162,7 @@ Feature: Checkout fixed discount promotions
           And I fill in the shipping address to Poland
           And I press "Continue"
           And I go to the cart summary page
-          And "Promotion total: (€10.00)" should appear on the page
+          And "Promotion total: -€10.00" should appear on the page
           And "Grand total: €5.00" should appear on the page
 
     Scenario: Nth order promotion is not applied when user have no orders before
@@ -179,5 +179,5 @@ Feature: Checkout fixed discount promotions
           And I added product "Buzz" to cart, with quantity "1"
          When I add product "Woody" to cart, with quantity "3"
          Then I should still be on the cart summary page
-          And "Promotion total: (€55.00)" should appear on the page
+          And "Promotion total: -€55.00" should appear on the page
           And "Grand total: €1,620.00" should appear on the page
