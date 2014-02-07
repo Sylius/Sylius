@@ -31,7 +31,7 @@ interface TimestampableInterface
     public function getUpdatedAt();
 
     /**
-     * Get creation time.
+     * Set creation time.
      *
      * @param \DateTime $createdAt
      */
