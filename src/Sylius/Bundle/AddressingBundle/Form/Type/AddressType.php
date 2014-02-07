@@ -98,13 +98,14 @@ class AddressType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $validationGroups = $this->validationGroups;
+        $shippableValidationGroup = self::SHIPPABLE_VALIDATION_GROUP;
 
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => function(Options $options) use ($validationGroups) {
+                'validation_groups' => function(Options $options) use ($validationGroups, $shippableValidationGroup) {
                     if ($options['shippable']) {
-                        $validationGroups[] = AddressType::SHIPPABLE_VALIDATION_GROUP;
+                        $validationGroups[] = $shippableValidationGroup;
                     }
 
                     return $validationGroups;
