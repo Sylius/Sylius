@@ -20,7 +20,7 @@
         </id>
 
         <field name="name" column="name" type="string" />
-        <field name="amount" column="amount" type="decimal" precision="10" scale="4" />
+        <field name="amount" column="amount" type="decimal" precision="10" scale="5" />
         <field name="includedInPrice" column="included_in_price" type="boolean" />
         <field name="calculator" column="calculator" type="string" />
 
