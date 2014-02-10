@@ -3,21 +3,40 @@
 
 sylius:
     form:
-        shipping_category:
-            name: Nombre
-            description: Descripción
-        shipping_method:
-            name: Nombre
-            category: Categoría
-            category_requirement: Requisito de la categoría
-            calculator: Calculadora
-            configuration: Configuración
+        shipment:
+            state: Estado
+            states:
+                checkout:   Checkout
+                dispatched: despachado
+                pending:    Pendiente
+                ready:      Listo
+                shipped:    Enviado
+                returned:   Devuelto
+            tracking_code:  Código de seguimiento
+
         shipping_calculator:
             flat_rate_configuration:
                 amount: Cantidad
+
+            flexible_rate_configuration:
+                additional_item_cost: 'Costo adicional de artículo'
+                additional_item_limit: 'Límite de artículos adicionales'
+                first_item_cost: 'Costo del primer artículo'
+
             per_item_rate_configuration:
                 amount: Cantidad
-            flexible_rate_configuration:
-                first_item_cost: Coste del primer item
-                additional_item_cost: Coste del item adicional
-                additional_item_limit: Límite de items adicionales
+
+            weight_rate_configuration:
+                amount: Cantidad
+                division: División
+
+        shipping_category:
+            description: Descripción
+            name: Nombre
+
+        shipping_method:
+            calculator: Calculadora
+            category: Categoría
+            category_requirement: 'Requisito de la categoría'
+            configuration: Configuración
+            name: Nombre
