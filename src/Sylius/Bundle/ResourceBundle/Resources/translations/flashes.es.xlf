@@ -4,15 +4,15 @@
         <body>
             <trans-unit id="1">
                 <source>sylius.resource.create</source>
-                <target>%resource% se ha creado con éxito.</target>
+                <target>%resource% se ha creado exitosamente.</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>sylius.resource.update</source>
-                <target>%resource% se ha actualizado con éxito.</target>
+                <target>%resource% se ha actualizado exitosamente.</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>sylius.resource.delete</source>
-                <target>%resource% ha sido eliminado.</target>
+                <target>%resource% se ha eliminado exitosamente.</target>
             </trans-unit>
         </body>
     </file>
