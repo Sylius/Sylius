@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        action:
+            fixed_discount_configuration:
+                amount: Kwota
+            percentage_discount_configuration:
+                percentage: Procent
+            type: Typ
+        coupon:
+            code: Kod
+            usage_limit: Limit użycia
+        coupon_generate_instruction:
+            amount: Ilość
+            usage_limit: Limit użycia
+        promotion:
+            actions: Akcje
+            coupon_based: Użyć kuponów?
+            description: Opis
+            ends_at: Data zakończenia
+            name: Nazwa
+            rules: Reguły
+            starts_at: Data rozpoczęcia
+            usage_limit: Limit użycia
+        rule:
+            item_count_configuration:
+                count: Ilość
+                equal: Równe
+            item_total_configuration:
+                amount: Kwota
+                equal: Równe
+            type: Typ

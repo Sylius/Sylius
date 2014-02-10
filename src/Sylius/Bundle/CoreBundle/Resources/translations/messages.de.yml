@@ -1,0 +1,93 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+    checkout:
+        shipping_method:
+            not_blank: Bitte wählen Sie eine Versandart aus.
+    form:
+        action:
+            add_product_configuration:
+                price: Stückpreis
+                quantity: Stückzahl
+                variant: Variante
+        block:
+            body: Body
+            id: ID
+            title: Titel
+        cart:
+            coupon: Gutschein
+        checkout:
+            addressing:
+                different_billing_address: Andere Rechnungsadresse benutzen?
+            payment_method: Zahlungsmethode
+            shipping_method: Versandarten
+        group:
+            name: Name
+            roles: Rollen
+        image:
+            file: Foto
+        locale:
+            code: Code
+            enabled: Aktiviert
+        order_filter:
+            created_at_from: Von
+            created_at_to: Bis
+            number: Nummer
+            total_from: Von
+            total_to: Bis
+        page:
+            body: Body
+            id: ID
+            title: Titel
+        product:
+            restricted_zone: Beschränktes Gebiet
+            shipping_category: Versandkategorie
+            short_description: Kurzbeschreibung
+            tax_category: Steuerkategorie
+            variant_selection_method: Variantenauswahlmethode
+        product_filter:
+            name: Name
+            sku: Bestandseinheit
+        settings:
+            general:
+                currency: Standardwährung
+                locale: Sprache
+                meta_description: Meta Beschreibung
+                meta_keywords: Meta Keywords
+                title: Seitentitel
+            taxation:
+                default_tax_zone: Standard Steuerzone
+        shipment_filter:
+            created_at_from: Von
+            created_at_to: Bis
+            number: Bestellnummer
+            shipping_address: Liefern an
+        shipping_method:
+            zone: Gebiet
+        taxon:
+            file: Foto auswählen
+        taxonomy:
+            file: Foto auswählen
+        user:
+            billing_address: Rechnungsadresse
+            different_billing_address: Andere Rechnungsadresse benutzen?
+            enabled: Aktiviert
+            first_name: Vorname
+            groups: Gruppen
+            last_name: Nachname
+            password: Passwort
+            shipping_address: Lieferadresse
+        user_filter:
+            query: Suche
+        variant:
+            available_on_demand: Auf Nachfrage
+            depth: Tiefe
+            height: Höhe
+            images: Fotos
+            on_hand: Auf Lager
+            price: Preis
+            sku: Bestandseinheit
+            weight: Gewicht
+            width: Breite

@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    option:
+        name:
+            not_blank: Unesite naziv opcije.
+            min_length: Naziv opcije mora sadržavati barem jedan znak|Naziv opcije mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv opcije mora ne smije biti duže od jednog znaka|Naziv opcije ne smije biti duže od {{ limit }} znakova.
+        presentation:
+            not_blank: Unesite opis opcije.
+            min_length: Opis opcije mora sadržavati barem jedan znak.|Opis opcije mora imati najmanje {{ limit }} znakova.
+            max_length: Opis opcije ne smije imati više od jednog znaka.|Opis opcije može imati najviše {{ limit }} znakova.
+        values:
+            min_count: Dodajte barem {{ limit }} vrijednost opcije.|Dodajte barem {{ limit }} vrijednost opcije.
+    option_value:
+        value:
+            not_blank: Unesite vrijednost opcije.
+    variant:
+        combination: Varijacija ove opcije već postoji.

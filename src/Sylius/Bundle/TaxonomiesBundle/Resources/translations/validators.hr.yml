@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    taxon:
+        name:
+            max_length: Naziv podkategorije ne smije biti duži od 255 znakova.
+            not_blank: Unesite naziv podkategorije.
+    taxonomy:
+        name:
+            max_length: Naziv kategorije ne smije biti duži od 255 znakova.
+            not_blank: Unesite naziv kategorije.

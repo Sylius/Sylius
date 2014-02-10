@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: Please enter product SKU.
+            unique: Product SKU must be unique.
+        name:
+            not_blank: Please enter product name.
+            min_length: Product name must be at least 1 character long.|Product name must be at least {{ limit }} characters long.
+            max_length: Product name must not be longer than 1 character.|Product name must not be longer than {{ limit }} characters.
+        description:
+            not_blank: Please enter product description.
+            min_length: Product description must be at least 1 character long.|Product description must be at least {{ limit }} characters long.
+    variant:
+        sku:
+            not_blank: Please enter variant SKU.
+            unique: Variant SKU must be unique.
+        combination: Variant with this option set already exists.
+    option:
+        name:
+            not_blank: Please enter option name.
+            min_length: Option name must be at least 1 character long.|Option name must be at least {{ limit }} characters long.
+            max_length: Option name must not be longer than 1 character.|Option name must not be longer than {{ limit }} characters.
+        presentation:
+            not_blank: Please enter option presentation.
+            min_length: Option presentation must be at least 1 character long.|Option presentation must be at least {{ limit }} characters long.
+            max_length: Option presentation must not be longer than 1 character.|Option presentation must not be longer than {{ limit }} characters.
+        values:
+            min_count: Please add at least {{ limit }} option value.|Please add at least {{ limit }} option values.
+    option_value:
+        value:
+            not_blank: Please enter option value.
+    property:
+        name:
+            not_blank: Please enter property name.
+            min_length: Property name must be at least 1 character long.|Property name must be at least {{ limit }} characters long.
+            max_length: Property name must not be longer than 1 character.|Property name must not be longer than {{ limit }} characters.
+        presentation:
+            not_blank: Please enter property presentation.
+            min_length: Property presentation must be at least 1 character long.|Property presentation must be at least {{ limit }} characters long.
+            max_length: Property presentation must not be longer than 1 character.|Property presentation must not be longer than {{ limit }} characters.
+    product_property:
+        property:
+            not_blank: Please select property.
+        value:
+            not_blank: Please enter product property value.
+    prototype:
+        name:
+            not_blank: Please enter prototype name.
+            min_length: Prototype name must be at least 1 character long.|Prototype name must be at least {{ limit }} characters long.
+            max_length: Prototype name must not be longer than 1 character.|Prototype name must not be longer than {{ limit }} characters.

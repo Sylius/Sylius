@@ -1,0 +1,60 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    extensions:
+        0: Extensions
+        accelerator:
+            0: Accelerator
+            help: Installiere und aktiviere einen PHP Accelerator wie zum Beispiel APC (Dringend empfohlen).
+        apc: APC
+        ctype: Ctype
+        gd: sylius.extensions.gd
+        help: Installiere und aktiviere die %extension% Erweiterung.
+        iconv: Iconv
+        icu: ICU
+        intl: Intl
+        json_encode: JSON
+        mbstring: Multibyte String
+        off: Aus
+        on: An
+        pcre: PCRE
+        pdo: PDO
+        php_xml: PHP-XML
+        session_start: Session
+        simplexml_import_dom: SimpleXML
+        token_get_all: Tokenizer
+    filesystem:
+        0: Dateisystem
+        cache:
+            0: Cache
+            help: Um die Berechtigungen zu setzen führe den nachfolgenden Befehl aus: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
+        exists: Existiert
+        logs:
+            0: Logs
+            help: Um die Berechtigungen zu setzen führe den nachfolgenden Befehl aus: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
+        not_exists: Existiert nicht
+        not_writable: Schreibgeschützt
+        parameters:
+            0: parameters.yml
+            help: Um die Berechtigungen zu setzen führe den nachfolgenden Befehl aus: sudo chmod a+w %path%
+        vendors: vendors
+        writable: Beschreibbar
+    settings:
+        0: PHP Version und Einstellungen
+        any: Jeder
+        detect_unicode: detect_unicode
+        magic_quotes_gpc: magic_quotes_gpc
+        non_deprecated: Nicht veraltet
+        off: Aus
+        on: An
+        register_globals: register_globals
+        session:
+            auto_start: session.auto_start
+        short_open_tag: short_open_tag
+        timezone: timezone
+        timezone_deprecated:
+            0: Veraltete Zeitzone
+            help: Die Zeitzone %timezone% ist veraltet. Ändere Deine php.ini Datei (Eine Liste von veralteten Zeotzonen findest Du hier: http://php.net/manual/de/timezones.others.php).
+        version: PHP Version
+        version_recommanded: Empfohlene PHP Version

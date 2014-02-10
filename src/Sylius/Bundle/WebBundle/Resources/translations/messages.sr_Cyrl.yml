@@ -1,0 +1,471 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    add_to_cart: Додај у корпу
+    address:
+        city: Град
+        country: Земља
+        edit:
+            header: Ажурирање адресе
+        firstname: Име
+        lastname: Презиме
+        postcode: Поштански код
+        province: Провинција
+        street: Улица
+    alert:
+        error: Грешка
+        info: Обавештење
+        success: Успех
+        warning: Упозорење
+    backend:
+        alert:
+            info: Обавештење
+        dashboard:
+            chart_order_count: Број наруџбина
+            chart_order_total: Вредност наруџбине
+            header: Административна табла
+            orders: Прошлонедељне поруџбине
+            revenue: Прошлонедељна зарада
+            subheader: Преглед продавнице
+    cancel: Откажи
+    cart:
+        empty: Корпа је празна
+        summary:
+            checkout: Завршите куповину
+            clear: Изпразните корпу
+            grand_total: Свеукупно
+            product: Производ
+            quantity: Количина
+            save: Сачувај
+            total: Укупно
+            unit_price: Цена
+        summary_header: Резиме корпе
+        total_items: 1 предмет|%count% предмет(а)
+    checkout:
+        addressing:
+            header: Адреса
+        back: Назад
+        finalize:
+            address:
+                city: Град
+                country: Земља
+                firstname: Име
+                lastname: Презиме
+                postcode: Поштански број
+                province: Провинција
+                street: Улица
+            header: Резиме наруџбине
+            order:
+                billing_address: Адреса за наплату
+                items_total: Укупно производа
+                no_items: Наруџбина је празна
+                no_promotion: Ниједна промоција није додата
+                no_shipping_charges: Нису додати трошкови поруџбине
+                no_taxes: Нису додати порези
+                promotion_discount: Промотивни попуст
+                promotion_total: Укупно промоције
+                shipping_address: Адреса за испоруку
+                shipping_charges: Цена испоруке
+                shipping_total: Укупно поштарина
+                tax_total: Укупно порези
+                taxes: Порези
+                total: Укупно
+            order_item:
+                quantity: Количина
+                total: Укупно
+                unit_price: Цена јединице
+            place_order: Креирајте наруџбину
+            product:
+                name: Име
+        forward: Наставак
+        payment:
+            header: Метод плаћања
+        security:
+            existing_customer: Постојећа муштерија
+            header: Улогујете се <small>или направите нови налог</small>
+            login: Улогујте се
+            new_customer: Нова муштерија
+            register: Региструјте се
+        shipping:
+            header: Начин доставе
+    country:
+        add_province: Додај провинцију
+        create: Додај земљу
+        create_header: Нова земља
+        id: ИД
+        index_header: Земље
+        iso_name: ИСО код
+        manage: Управљај земљама
+        name: Име
+        no_results: Нису конфигурисане земље.
+        show_header: Детаљи земље
+        update_header: Измените земљу
+    create: Креирај
+    delete: Избриши
+    edit: Ажурирај
+    email: Е-Пошта
+    filter: Филтер
+    form:
+        choose_file: Фајл
+        login:
+            password: Лозинка
+            username: Корисничко име
+        taxonomy:
+            name: Име категоризације
+            file: Фајл
+        taxon:
+            name: Име
+            permalink: Линк
+    gallery:
+        next: Следећа
+        previous: Предходна
+        slideshow: Галерија
+    generate: Генериши
+    homepage:
+        splash:
+            headline: Добродошли у Сyлиус
+            subheadline: Модерно е-комерц решење
+    inventory_unit:
+        created_at: Креиран
+        inventory_state: Стање залиха
+        name: Име
+        no_results: Нема производа за приказ.
+        shipping_state: Стање пошиљке
+        sku: СКУ
+        updated_at: Ажурирано
+    login: Пријављивање
+    login_header: Администрација
+    logo: Сyлиус
+    manage: Управљајте
+    meta:
+        backend_title: Контролна табла.
+        frontend_description: Сyлиус је модерно решење за ПХП, базирано на Сyмфонy2 фрејмворку.
+        frontend_keywords: сyлиус, е-комерц, сyмфонy2, продавница, корпа
+        frontend_title: Сyлиус, модерни е-комерц за Сyмфонy2
+    newest: Најновији производи
+    no: не
+    option:
+        create: Креирајте опцију
+        create_header: Нова опција производа
+        index_header: Опције производа
+        manage: Управљајте опцијама
+        name: Име
+        no_results: Нема конфигурисаних опција.
+        presentation: презентација
+        update_header: Ажурирање опција
+        updated_at: ажурирано
+        values: вредности
+    order:
+        billing_address: Адреса за наплату
+        create: Креирајте наруџбину
+        create_header: Нова наруџбина
+        created_at: Креирано
+        general_info: Опсте информације
+        id: ИД
+        index_header: Тренутне наруџбине
+        inventory_tracking: Працење залиха
+        items_total: Укупно производа
+        manage: Управљајте наруџбинама
+        no_items: Наруџбина не садрзи артикле
+        no_results: Нема нових наруџбина
+        no_shipments: Нема испорука за ову наруџбину
+        no_shipping_charges: Нема троскова наруџбине
+        no_taxes: Нема пореза
+        number: Број
+        payment_state: Стање плаћања
+        payment_states:
+            balance_due: Дуговни салдо
+        promotion_total: Укупно промоције
+        recent_header: Последње наруџбине
+        shipment_state: Стање пошиљке
+        shipment_states:
+            pending: На чекању
+        shipments: Пошиљке
+        shipping_address: Адреса за слање
+        shipping_charges: Цена испоруке
+        shipping_total: Укупно испорука
+        show_header: Детаљи наруџбине
+        tax_total: Укупно порези
+        taxes: Порези
+        total: Укупно
+        update_header: Ажурирање наруџбине
+        user: Корисник
+    order_item:
+        quantity: Количина
+        sellable: Производ
+        total: Укупно
+        unit_price: Цена по комаду
+    out_of_stock: Нема на лагеру
+    password: Лозинка
+    payment:
+        amount: Количина
+        create: Креирај плаћање
+        create_header: Ново плаћање
+        created_at: Креирано
+        id: ИД
+        index_header: Плаћање
+        method: Метод
+        no_results: Нису конфигурисана плаћања.
+        update_header: Ажурирање плаћања
+        updated_at: Ажурирано
+    payment_method:
+        create: Креирајте метод плаћања
+        create_header: Нови метод плаћања
+        enabled: Активно?
+        gateway: капија
+        id: ИД
+        index_header: Метод плаћања
+        name: Име
+        no_results: Нема конфигурисаних метода плаћања.
+        update_header: Ажурирање метода плаћања
+        updated_at: Ажурирано
+    product:
+        add_property: Додајте атрибут
+        available_on: Доступно
+        available_on_demand: Доступно на захтев
+        categorization: Категоризација
+        create: Креирај производ
+        create_header: Нови производ
+        description: Опис
+        generate_variants: Генериши варијанте
+        index_by_taxon_header: Производи <small>Категорисани у "%taxon%"</small>
+        index_header: Производи <small>Сви производи у продавници</small>
+        manage: Управљајте производима
+        name: Име
+        no_description: <и>Нема описа...</и>
+        no_images: Нема слика за овај производ
+        no_options: Нема опција за овај производ
+        no_properties: Производ нема дефинисане атрибуте
+        no_results: Нема производа за приказ.
+        no_short_description: <и>Нема кратког описа</и>
+        no_sku: <и>Нема СКУ</и>
+        no_tax_category: Нема категорије пореза
+        no_taxons: сyлиус.продуцт.но_таxонс
+        options: Опције
+        price: Продајна цена
+        properties: Атрибути
+        show: Више
+        show_header: Детаљи производа <small>Преглед производа "<стронг>%product%</стронг>"</small>
+        sku: СКУ
+        stock: Лагер
+        tabs:
+            categorization: Категоризација
+            images: Слике
+            options: Опције
+            product: Производ
+            properties: Атрибути
+        tax_category: Категорија производа
+        update_header: Ажурирање производа
+        updated_at: Ажурирано
+        variant_selection_method: Метод избора варијанте производа
+    promotion:
+        actions: Акције
+        add_action: Додајте акцију
+        add_rule: Додајте правило
+        coupon_based: Базирано на купону?
+        create: Креирајте промоцију
+        create_header: Нова промоција
+        created_at: Креирано
+        description: Опис
+        ends_at: Завршава се
+        index_header: Тренутне промоције
+        manage: Управљајте промоцијама
+        name: Име
+        no_results: Нема конфигурисаних промоција.
+        rules: Правила
+        show_header: Детаљи промоције
+        starts_at: Почиње
+        update_header: Ажурирање промоције
+        updated_at: Ажурирано
+        usage_limit: Ограничење коришћења
+        used: Коришћено
+    promotion_action:
+        configuration: Конфигурација
+        type: Тип
+    promotion_coupon:
+        create: Додај купон
+        create_header: Нови купон
+        generate: Генериши купоне
+        generate_header: Генерисање купона
+        index: Листа купона
+        no_results: Нема купона за приказ.
+        total_results: Укупоно: %total%
+        update_header: Ажурирање купона
+    promotion_rule:
+        configuration: Конфигурација
+        type: Тип
+    property:
+        add_choice: Додајте избор
+        create: Нови атрибут
+        create_header: Нови атрибут производа
+        index_header: Атрибути производа
+        manage: Управљајте атрибутима
+        name: име
+        no_results: Нема конфигурисаних атрибута.
+        presentation: презентација
+        type: тип
+        update_header: Ажурирање атрибута
+        updated_at: ажурирано
+    prototype:
+        build: Креирај прототип
+        build_header: Креирајте производ од прототипа
+        create: Креирај прототип
+        create_header: Нови прототип
+        index_header: Прототипови производа
+        name: име
+        no_results: Нема дефинисаних прототипова.
+        options: опције
+        properties: атрибути
+        update_header: Ажурирање прототипа
+        updated_at: Ажурирано
+    province:
+        provinces: Провинције
+    remember_me: Запамти ме?
+    save_changes: Сачувај измене
+    settings:
+        general_header: Генерална подешавања
+        taxation_header: Подешавања пореза
+    shipment:
+        created_at: направљено
+        id: ИД
+        index_header: Испоруке
+        inventory_state: стање залиха
+        manage: Управљајте пошиљкама
+        method: метод
+        modified: измењено
+        name: име
+        no_items: Нема производа за приказ.
+        no_results: Нема пошиљака за приказ.
+        order: наруџбина
+        show_header: Детаљи пошиљке
+        sku: СКУ
+        state: стање
+        updated_at: ажурирано
+    shipment_category:
+        manage: Управљајте категоријама слања
+    shipping_category:
+        create: Нова категорија слања
+        create_header: Нова категорија слања
+        id: ИД
+        index_header: Категорије слања
+        manage: Управљајте категоријама слања
+        name: Име
+        no_results: Нема конфигурисаних категорија слања.
+        update_header: Ажурирање категорије слања
+        updated_at: ажурирано
+    shipping_method:
+        calculator: Калкулатор
+        category: Категорија
+        create: Нови начин доставе
+        create_header: Нови начин доставе
+        enabled: Активно?
+        id: ИД
+        index_header: Начини доставе
+        manage: Управљајте начинима доставе
+        name: Име
+        no_results: Нема конфигурисаних начина доставе.
+        show_header: Детаљи налина доставе
+        update_header: Ажурирање начина доставе
+        updated_at: ажурирано
+        zone: Зона
+    shop_by: Купујте по
+    show: Детаљи
+    stockable:
+        index_header: Лагер <small>Преглед стања залиха</small>
+        name: Име
+        no_results: Нема залиха.
+        on_hand: ниво залиха
+        sku: СКУ
+        updated_at: ажурирано
+    tax_category:
+        create: Креирајте категорију пореза
+        create_header: Нова категорија пореза
+        description: Опис
+        id: ИД
+        index_header: Категорије пореза
+        manage: Управљајте категоријама пореза
+        name: Име
+        no_description: Нема описа
+        no_results: Нема конфигурисаних категорија пореза.
+        update_header: Ажурирање категорије пореза
+        updated_at: ажурирано
+    tax_rate:
+        amount: Количина
+        calculator: Калкулатор
+        category: Категорија пореске стопе
+        create: Креирајте порез
+        create_header: Нови порез
+        included_in_price: Укљуцен у цену?
+        index_header: Пореске стопе
+        manage: Управљајте пореским стопама
+        name: Име
+        no_results: Нема конфигурисаних пореских стопа.
+        show_header: Детаљи пореза
+        update_header: Ажурирање пореске стопе
+        updated_at: ажурирано
+        zone: Зона
+    taxon:
+        create: Креирај категорију
+        create_header: Нова категорија
+        image: Изаберите слику
+        name: Име
+        no_image: Наме слике за категоризацију
+        no_results: Нема резултата.
+        update_header: Ажурирање категоризације
+    taxonomy:
+        create: Креирајте категоризацију
+        create_header: Нова категоризација
+        image: Изаберите слику
+        index_header: Категоризација <small>Дефинисане категорије</small>
+        name: Име
+        no_image: Нема слика за категоризацију
+        no_results: Нема дефинисаних категоризација.
+        show_header: Категоризација <small><стронг>%name%</стронг></small>
+        update_header: Ажурирање категоризације
+    user:
+        email: Е-Маил
+        enabled: Омогућено?
+        filter:
+            all: Приказ свих корисника
+            unconfirmed: Непотврђени налози
+        general_info: Корисник "%username%"
+        id: ИД
+        index_header: Корисници <small>Листа свих регистрованих корисника</small>
+        last_login: Последње пријављивање
+        no_results: Нема корисника за приказ.
+        order:
+            no_results: Нема наруџбина корисника
+        orders: Наруџбине корисника
+        recent_header: Последњи корисници
+        show_header: Детаљи корисника
+        username: Кросницко име
+    variant:
+        add_image: Додај слику
+        availability: Доступност
+        available_on_demand: Доступно на захтев
+        create: Креирај варијанту
+        create_header: Нова варијанта производа
+        delete_image: Избришите слику
+        last_update: последња измена
+        no_results: Нема варијанти производа за приказ.
+        options: Опције
+        price: Цена
+        stock: Залихе
+        update_header: Ажурирање варијанте
+    yes: да
+    zone:
+        add_member: Додајте члана
+        create: Креирајте зону
+        create_header: Нова зона
+        index_header: Зоне
+        manage: Управљајте зонама
+        name: Име
+        no_results: Нема конфигурисаних зона.
+        show_header: Детаљи зоне
+        type: Тип
+        update_header: Ажурирање зоне
+    zone_member:
+        members: Чланови
+    resource:
+        delete: Фајл

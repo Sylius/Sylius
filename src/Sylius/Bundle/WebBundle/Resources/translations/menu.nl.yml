@@ -1,0 +1,76 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    backend:
+        menu:
+            main:
+                assortment: Assortiment
+                configuration: Configuratie
+                countries: Landen
+                dashboard: Dashboard
+                general_settings: Algemene instellingen
+                homepage: Uw winkel
+                new_order: Voeg nieuwe bestelling toe
+                new_promotion: Voeg nieuwe promotie toe
+                options: Beheer product opties
+                orders: Huidige bestellingen
+                payment_methods: Betalingsmethodes
+                payments: Betalingen
+                products: Producten
+                promotions: Promoties
+                properties: Configureer eigenschappen
+                prototypes: Product prototypes
+                sales: Bestellingen
+                shipments: Verzendingen
+                shipping_categories: Verzend categorieën
+                shipping_methods: Verzendingsmethodes
+                stockables: Inventaris niveaus
+                tax_categories: Belasting categorieën
+                tax_rates: Belastingtarieven
+                taxation_settings: Belasting instellingen
+                taxonomies: Categorisering
+                zones: Zones
+            sidebar:
+                assortment: Assortiment
+                configuration: Configuratie
+                countries: Landen
+                customer: Klanten
+                dashboard: Dashboard
+                general_settings: Algemene instellingen
+                homepage: Terug naar de frontend
+                new_order: Voeg nieuwe bestelling toe
+                new_promotion: Voeg nieuwe promotie toe
+                options: Beheer opties
+                orders: Huidige bestellingen
+                payment_methods: Betalingsmethodes
+                payments: Betalingen
+                products: Producten
+                promotions: Promoties
+                properties: Configureer eigenschappen
+                prototypes: Product prototypes
+                sales: Bestellingen
+                shipments: Verzendingen
+                shipping_categories: Verzend categorieën
+                shipping_methods: Verzendingsmethodes
+                stockables: Inventaris niveaus
+                tax_categories: Belasting categorieën
+                tax_rates: Belastingtarieven
+                taxation_settings: Belasting instellingen
+                taxonomies: Categorisering
+                users: Gebruikers
+                zones: Zones
+    frontend:
+        menu:
+            main:
+                administration: Beheer
+                cart: Bekijk winkelwagen
+                login: Inloggen
+                logout: Uitloggen
+                register: Registreren
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter
