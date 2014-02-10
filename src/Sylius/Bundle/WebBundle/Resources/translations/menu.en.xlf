@@ -40,7 +40,7 @@
       </trans-unit>
       <trans-unit id="2c21cdef4aa00a86044bf3ebf9709493" resname="sylius.backend.menu.main.homepage">
         <source>sylius.backend.menu.main.homepage</source>
-        <target>Your store</target>
+        <target>My store</target>
       </trans-unit>
       <trans-unit id="a8832620f479f6022e0cf9c2b3464396" resname="sylius.backend.menu.main.locales">
         <source>sylius.backend.menu.main.locales</source>
