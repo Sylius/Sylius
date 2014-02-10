@@ -176,11 +176,11 @@
       </trans-unit>
       <trans-unit id="03e625de54aede84bb2555c2a568937d" resname="sylius.form.taxon.file">
         <source>sylius.form.taxon.file</source>
-        <target>Select image</target>
+        <target>Select an image</target>
       </trans-unit>
       <trans-unit id="3c506297d61d1266cc8a2c8c0babe35a" resname="sylius.form.taxonomy.file">
         <source>sylius.form.taxonomy.file</source>
-        <target>Select image</target>
+        <target>Select an image</target>
       </trans-unit>
       <trans-unit id="d24fae16bdb37258ae7a49da001cbb5b" resname="sylius.form.user.billing_address">
         <source>sylius.form.user.billing_address</source>
