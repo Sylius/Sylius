@@ -20,25 +20,22 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
  */
 class InsufficientStockException extends \UnderflowException
 {
-    protected $onHand;
-    protected $inventoryName;
+    protected $stockable;
 
     public function __construct(StockableInterface $stockable, $quantity)
     {
+        $this->stockable = $stockable;
+
         parent::__construct(sprintf(
             'Only %d %s(s) on hand, %d requested.',
-            $this->onHand = $stockable->getOnHand(),
-            $this->inventoryName = $stockable->getInventoryName(),
+            $stockable->getOnHand(),
+            $stockable->getInventoryName(),
             $quantity
         ));
     }
-    public function getOnHand()
-    {
-        return $this->onHand;
-    }
 
-    public function getInventoryName()
+    public function getStockable()
     {
-        return $this->inventoryName;
+        return $this->stockable;
     }
 }
