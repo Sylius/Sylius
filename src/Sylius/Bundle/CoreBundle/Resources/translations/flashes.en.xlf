@@ -30,6 +30,10 @@
         <source>sylius.checkout.unknown</source>
         <target>Unknown payment error.</target>
       </trans-unit>
+      <trans-unit id="b35abff3ac27033d049562863e7e61d6" resname="sylius.checkout.out_of_stock">
+        <source>sylius.checkout.out_of_stock</source>
+        <target>There is only %quantity% %name% in the stock.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -45,6 +45,7 @@
         <parameter key="sylius.listener.coupon_usage.class">Sylius\Bundle\CoreBundle\EventListener\CouponUsageListener</parameter>
         <parameter key="sylius.listener.order_user.class">Sylius\Bundle\CoreBundle\EventListener\OrderUserListener</parameter>
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
+        <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -318,6 +319,13 @@
             <argument>sylius_checkout_payment</argument>
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
+        </service>
+        <service id="sylius.listener.insufficient_stock_exception" class="%sylius.listener.insufficient_stock_exception.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <argument>sylius_cart_summary</argument>
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
