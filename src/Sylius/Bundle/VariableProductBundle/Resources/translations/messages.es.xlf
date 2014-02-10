@@ -19,6 +19,10 @@
                 <source>sylius.form.option.name</source>
                 <target>Nombre interno</target>
             </trans-unit>
+            <trans-unit id="872f019b57a6ebda68f4907e4e9a34c4" resname="sylius.form.option_value.add_value">
+                <source>sylius.form.option_value.add_value</source>
+                <target>Añadir valor</target>
+            </trans-unit>
             <trans-unit id="5">
                 <source>sylius.form.option.presentation</source>
                 <target>Presentación</target>
