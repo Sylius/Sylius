@@ -22,6 +22,14 @@
         <source>sylius.form.action.add_product_configuration.variant</source>
         <target>Variant</target>
       </trans-unit>
+      <trans-unit id="49468cadad2176d6efbb7b15d4f8352e" resname="sylius.form.rule.variant_in_cart_configuration.variant">
+        <source>sylius.form.rule.variant_in_cart_configuration.variant</source>
+        <target>Variant</target>
+      </trans-unit>
+      <trans-unit id="57df4cacd7c676e2926a2dbbed656b95" resname="sylius.form.rule.product_in_cart_configuration.product">
+        <source>sylius.form.rule.product_in_cart_configuration.product</source>
+        <target>Product</target>
+      </trans-unit>
       <trans-unit id="bb7ddb48f9947a592b0449ea46018a00" resname="sylius.form.block.body">
         <source>sylius.form.block.body</source>
         <target>Body</target>

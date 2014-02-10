@@ -64,12 +64,16 @@
 
         <!-- Promotion Form, Action & Checker -->
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.variant_in_cart_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\VariantInCartConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.product_in_cart_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ProductInCartConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.user_loyality_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\UserLoyalityConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Bundle\CoreBundle\Promotion\Checker\NthOrderRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.variant_in_cart.class">Sylius\Bundle\CoreBundle\Promotion\Checker\VariantInCartRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.product_in_cart.class">Sylius\Bundle\CoreBundle\Promotion\Checker\ProductInCartRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Bundle\CoreBundle\Promotion\Checker\UserLoyalityRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Bundle\CoreBundle\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Bundle\CoreBundle\Promotion\Checker\TaxonomyRuleChecker</parameter>
@@ -366,6 +370,16 @@
             <argument>%sylius.validation_group.promotion_rule_nth_order_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_nth_order_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_rule.variant_in_cart_configuration" class="%sylius.form.type.promotion_rule.variant_in_cart_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_variant_in_cart_configuration%</argument>
+            <argument type="service" id="sylius.repository.variant" />
+            <tag name="form.type" alias="sylius_promotion_rule_variant_in_cart_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.product_in_cart_configuration" class="%sylius.form.type.promotion_rule.product_in_cart_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_product_in_cart_configuration%</argument>
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="form.type" alias="sylius_promotion_rule_product_in_cart_configuration" />
+        </service>
         <service id="sylius.form.type.promotion_rule.user_loyality_configuration" class="%sylius.form.type.promotion_rule.user_loyality_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_user_loyality_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_user_loyality_configuration" />
@@ -386,6 +400,12 @@
         </service>
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
+        </service>
+        <service id="sylius.promotion_rule_checker.variant_in_cart" class="%sylius.promotion_rule_checker.variant_in_cart.class%">
+            <tag name="sylius.promotion_rule_checker" type="variant_in_cart" label="Variant in cart" />
+        </service>
+        <service id="sylius.promotion_rule_checker.product_in_cart" class="%sylius.promotion_rule_checker.product_in_cart.class%">
+            <tag name="sylius.promotion_rule_checker" type="product_in_cart" label="Product in cart" />
         </service>
         <service id="sylius.promotion_rule_checker.user_loyality" class="%sylius.promotion_rule_checker.user_loyality.class%">
             <tag name="sylius.promotion_rule_checker" type="user_loyality" label="User loyality" />
