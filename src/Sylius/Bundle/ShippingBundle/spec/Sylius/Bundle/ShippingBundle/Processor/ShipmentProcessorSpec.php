@@ -30,8 +30,8 @@ class ShipmentProcessorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface     $shipment
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
+     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentInterface     $shipment
+     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
      */
     function it_updates_shipment_states($shipment, $item)
     {
@@ -46,23 +46,22 @@ class ShipmentProcessorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface     $shipment
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
+     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentInterface     $shipment
+     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
      */
     function it_does_not_update_shipment_states_if_state_from_does_not_match($shipment, $item)
     {
         $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment->setState(ShipmentInterface::STATE_SHIPPED)->shouldNotBeCalled();
-        $shipment->getItems()->shouldBeCalled()->willReturn(array($item));
 
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        $item->getShippingState()->shouldNotBeCalled();
         $item->setShippingState(ShipmentInterface::STATE_SHIPPED)->shouldNotBeCalled();
 
         $this->updateShipmentStates(array($shipment), ShipmentInterface::STATE_SHIPPED, ShipmentInterface::STATE_READY);
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
+     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
      */
     function it_updates_item_states($item)
     {
@@ -73,7 +72,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
+     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
      */
     function it_does_not_update_item_states_if_state_from_does_not_match($item)
     {
