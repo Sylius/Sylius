@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: La città non deve essere piu' lunga di 255 caratteri|La città non deve essere piu' lunga di 255 caratteri|La città non deve essere piu' lunga di 255 caratteri.
+            min_length: La città deve essere lunga almeno due caratteri|La città deve essere lunga almeno due caratteri.
+            not_blank: Inserisci la città.
+        country:
+            not_blank: Inserisci la nazione.
+        first_name:
+            max_length: Il nome non deve essere più lungo di 255 caratteri|Il nome non deve essere più lungo di 255 caratteri.
+            min_length: Il nome deve essere lungo almeno due caratteri|Il nome deve essere lungo almeno due caratteri.
+            not_blank: Inserisci il nome.
+        last_name:
+            max_length: Il cognome non deve essere più lungo di 255 caratteri|Il cognome non deve essere più lungo di 255 caratteri.
+            min_length: Il cognome deve essere lungo almeno due caratteri|Il cognome deve essere lungo almeno due caratteri.
+            not_blank: Inserisci il cognome.
+        postcode:
+            max_length: Il CAP non deve essere più lungo di 255 caratteri|Il CAP non deve essere più lungo di 255 caratteri.
+            min_length: Il CAP deve essere lungo almeno due caratteri| Il CAP deve essere lungo almeno due carattri.
+            not_blank: Inserisci il CAP.
+        province:
+            valid: Seleziona la provincia.
+        street:
+            max_length: L'indirizzo non deve essere piu' lungo di 255 caratteri|L'indirizzo non deve essere piu' lungo di 255 caratteri.
+            min_length: L'indirizzo deve essere lungo almeno due caratteri|L'indirizzo deve essere lungo almeno due caratteri.
+            not_blank: Inserisci l'indirizzo.
+    country:
+        iso_name:
+            not_blank: Inserisci il codice ISO della nazione.
+        name:
+            max_length: Il nome della nazione non deve essere più lungo di 255 caratteri|Il nome della nazione non deve essere piu' lungo di 255 caratteri.
+            not_blank: Inserisci il nome della nazione.
+    province:
+        name:
+            max_length: Il nome della provincia non deve essere più lungo di 255 caratteri|Il nome della provincia non deve essere più lungo di 255 caratteri.
+            min_length: Il nome della provincia deve essere almeno di due caratteri|Il nome della provincia deve essere almeno di due caratteri.
+            not_blank: Inserisci il nome della provincia.
+    zone:
+        members:
+            min_count: Inserisci almeno {{ limit }} membri nella zona.
+        name:
+            max_length: Il nome della zona non deve essere più lungo di 255 caratteri|Il nome della zona non deve essere più lungo di 255 caratteri.
+            not_blank: Inserisci il nome della zona.

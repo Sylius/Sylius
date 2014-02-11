@@ -1,0 +1,87 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    backend:
+        menu:
+            main:
+                assortment: Ассортимент
+                configuration: Настройки
+                countries: Страны
+                dashboard: Приборная панель
+                exchange_rates: Курс валют
+                general_settings: Общие настройки
+                homepage: Ваш магазин
+                new_order: Создать заказ
+                new_promotion: Создать рекламную акцию
+                options: Настройка опций
+                orders: Текущие заказы
+                payment_methods: Методы оплаты
+                payments: Платежи
+                products: Товары
+                promotions: Рекламные акции
+                properties: Настройка свойств
+                prototypes: Прототипы продуктов
+                sales: Заказы
+                shipments: Посылки
+                shipping_categories: Категории доставки
+                shipping_methods: Методы доставки
+                stockables: Уровень запасов
+                tax_categories: Налоговые категории
+                tax_rates: Налоговые ставки
+                taxation_settings: Настройки налогообложения
+                taxonomies: Каталоги
+                zones: Зоны
+            sidebar:
+                assortment: Ассортимент
+                configuration: Настройки
+                countries: Страны
+                customer: Клиенты
+                dashboard: Приборная панель
+                exchange_rates: Курсы валют
+                general_settings: Общие настройки
+                homepage: Вернуться к магазину
+                new_order: Создать заказ
+                new_promotion: Создать рекламную акцию
+                options: Настройка опций
+                orders: Текущие заказы
+                payment_methods: Методы оплаты
+                payments: Платежи
+                products: Товары
+                promotions: Рекламные акции
+                properties: Настройка свойств
+                prototypes: Прототипы продуктов
+                sales: Заказы
+                shipments: Посылки
+                shipping_categories: Категории доставки
+                shipping_methods: Способы доставки
+                stockables: Уровень запасов
+                tax_categories: Налоговые категории
+                tax_rates: Налоговые ставки
+                taxation_settings: Настройки налогообложения
+                taxonomies: Каталоги
+                users: Пользователи
+                zones: Зоны
+                groups: Группы
+    frontend:
+        menu:
+            account:
+                homepage: Домой
+                orders: Мои заказы / мои счета
+                password: Мой пароль
+                profile: Персональная информация
+                shop: Назад к магазину
+            currency: Показывать деньги в %currency%
+            main:
+                account: Моя учетная запись
+                administration: Управление
+                cart: Корзина (%items%) %total%
+                login: Вход
+                logout: Выход
+                register: Регистрация
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter

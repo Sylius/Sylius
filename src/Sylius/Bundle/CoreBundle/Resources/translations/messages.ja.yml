@@ -1,0 +1,59 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+    checkout:
+        shipping_method:
+            not_blank: 発送方法を選択してください。
+    form:
+        checkout:
+            addressing:
+                different_billing_address: 請求先として別の住所を指定する
+            payment_method: お支払い方法
+            shipping_method: 発送方法
+        image:
+            file: 画像
+        order_filter:
+            created_at_from: 注文日時(始)
+            created_at_to: 注文日時(至)
+            number: 注文番号
+            total_from: 合計金額(下限)
+            total_to: 合計金額(上限)
+        product:
+            short_description: 商品概要
+            tax_category: 課税方法
+            variant_selection_method: バリエーション指定方法
+        product_filter:
+            name: 商品名
+            sku: SKU
+        settings:
+            general:
+                locale: 言語
+                currency: デフォルトの通貨
+                meta_description: metaタグ(description)
+                meta_keywords: Metaタグ(keywords)
+                title: ページのタイトル
+            taxation:
+                default_tax_zone: デフォルトの課税地域
+        shipping_method:
+            zone: 対象の地域
+        taxon:
+            file: 画像を選択
+        taxonomy:
+            file: 画像を選択
+        user:
+            billing_address: ご請求先住所
+            different_billing_address: 請求先として別の住所を指定する
+            enabled: 有効
+            first_name: 名
+            last_name: 姓
+            password: パスワード
+            shipping_address: 配送先住所
+        user_filter:
+            query: 検索
+        variant:
+            available_on_demand: 即納
+            images: 画像
+            on_hand: 在庫
+            price: 価格

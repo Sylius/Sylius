@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: USD
+sylius:
+    flashes:
+        installed: Sylius je uspješno instaliran.
+    form:
+        configuration:
+            database:
+                0: Spajanje na bazu
+                driver:
+                    0: Vrsta baze
+                    microsoft_sql_server: Microsoft SQL Server
+                    mysql: MySQL
+                    oracle: Oracle
+                    postgresql: PostgreSQL
+                    sqlite: SQLite
+                host: Server
+                name: Naziv baze
+                password: Lozinka
+                port: Port
+                user: Korisnik
+            locale:
+                0: Lokalne postavke
+                currency: Valuta
+                locale: Lokalni kod
+            mailer:
+                0: Postavke za e-mail
+                host: Server
+                password: Lozinka
+                transport:
+                    0: Prenos
+                    gmail: Gmail
+                    mail: Mail
+                    sendmail: Sendmail
+                    smtp: SMTP
+                user: Korisnik
+        setup:
+            email: Email
+            load_fixtures: Učitaj preddefinirani sadržaj
+            plain_password: Lozinka
+            username: Korisničko ime
+    process:
+        step:
+            check:
+                button:
+                    back: Povratak
+                    install: Instaliraj
+                    next: Sljedeće
+                header: Pregled sistemskih zahtjeva za <small>Sylius instalaciju</small>
+                table:
+                    current: trenutno
+                    required: potrebno
+                    status: Stanje
+            configure:
+                header: Konfiguracija <small>Sylius instalacijskog paketa</small>
+            setup:
+                header: Administacija <small>instalacije Syliusa</small>
+            welcome:
+                content: <p>Dobrodošli u instalaciju Syliusa.</p>
+                header: Dobrodošli <small>u instalaciju Syliusa</small>
+€: EUR

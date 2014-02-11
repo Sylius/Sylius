@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    group:
+        name:
+            max: Group name must be not be longer than {{ limit }} characters.
+            min: Group name must be at least {{ limit }} characters long.
+            not_blank: Please enter group name.
+    locale:
+        code:
+            not_blank: Please enter locale code.
+            unique: This locale already exists.
+    user:
+        first_name:
+            max: First name must be not be longer than {{ limit }} characters.
+            min: First name must be at least {{ limit }} characters long.
+            not_blank: Please enter your first name.
+        last_name:
+            max: Last name must be not be longer than {{ limit }} characters.
+            min: Last name must be at least {{ limit }} characters long.
+            not_blank: Please enter your last name.
+    variant:
+        onHand:
+            min: On hand must be greater than {{ limit }}.
+            not_blank: Please enter on hand.
+        price:
+            min: Price must not be negative.
+            not_blank: Please enter the price.
+sylius_shipping:
+    method:
+        zone:
+            not_blank: Please enter shipping method zone.
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: Please enter tax rate zone.
