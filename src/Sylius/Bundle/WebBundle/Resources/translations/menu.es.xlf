@@ -22,9 +22,13 @@
         <source>sylius.backend.menu.main.countries</source>
         <target>Países</target>
       </trans-unit>
+      <trans-unit id="8c5b50399905da82f9f4c3f91c40b717" resname="sylius.backend.menu.main.customer">
+        <source>sylius.backend.menu.main.customer</source>
+        <target>Clientes</target>
+      </trans-unit>
       <trans-unit id="bd5421cfee1b38c03bddcd2612e5eb65" resname="sylius.backend.menu.main.dashboard">
         <source>sylius.backend.menu.main.dashboard</source>
-        <target>Panel general</target>
+        <target>Panel</target>
       </trans-unit>
       <trans-unit id="5a6f4d332c2a021eab3e203bcb07c649" resname="sylius.backend.menu.main.exchange_rates">
         <source>sylius.backend.menu.main.exchange_rates</source>
@@ -32,11 +36,15 @@
       </trans-unit>
       <trans-unit id="7fce7a16610025ea73e1d02af31fa576" resname="sylius.backend.menu.main.general_settings">
         <source>sylius.backend.menu.main.general_settings</source>
-        <target>Configuración general</target>
+        <target>Configuraciónes generales</target>
       </trans-unit>
       <trans-unit id="2c21cdef4aa00a86044bf3ebf9709493" resname="sylius.backend.menu.main.homepage">
         <source>sylius.backend.menu.main.homepage</source>
         <target>Mi tienda</target>
+      </trans-unit>
+      <trans-unit id="a8832620f479f6022e0cf9c2b3464396" resname="sylius.backend.menu.main.locales">
+        <source>sylius.backend.menu.main.locales</source>
+        <target>Locales</target>
       </trans-unit>
       <trans-unit id="d38ec9ab0caf4fec0e9d90fadaddbdff" resname="sylius.backend.menu.main.new_order">
         <source>sylius.backend.menu.main.new_order</source>
@@ -44,7 +52,7 @@
       </trans-unit>
       <trans-unit id="2afcc81479a864da0961f38b00126ac9" resname="sylius.backend.menu.main.new_promotion">
         <source>sylius.backend.menu.main.new_promotion</source>
-        <target>Añadir nueva promoción</target>
+        <target>Añadir promoción</target>
       </trans-unit>
       <trans-unit id="b36a72c48b853b6998f5a53c49b7e882" resname="sylius.backend.menu.main.options">
         <source>sylius.backend.menu.main.options</source>
@@ -76,7 +84,7 @@
       </trans-unit>
       <trans-unit id="af5abeac40120831312e8e7bc8f9e687" resname="sylius.backend.menu.main.properties">
         <source>sylius.backend.menu.main.properties</source>
-        <target>Configurar propiedades</target>
+        <target>Ajustar propiedades</target>
       </trans-unit>
       <trans-unit id="2307241e37aed4594c5024bfdd6daf4f" resname="sylius.backend.menu.main.prototypes">
         <source>sylius.backend.menu.main.prototypes</source>
@@ -104,7 +112,7 @@
       </trans-unit>
       <trans-unit id="7cf34ab10dea870c2a009352eac284f9" resname="sylius.backend.menu.main.tax_categories">
         <source>sylius.backend.menu.main.tax_categories</source>
-        <target>Categorías de impuestos</target>
+        <target>Categorzar impuestos</target>
       </trans-unit>
       <trans-unit id="9635410d018bdb95ec9500ddd7559332" resname="sylius.backend.menu.main.tax_rates">
         <source>sylius.backend.menu.main.tax_rates</source>
@@ -112,11 +120,15 @@
       </trans-unit>
       <trans-unit id="049995581d729e0f1d38a7f0148b0e51" resname="sylius.backend.menu.main.taxation_settings">
         <source>sylius.backend.menu.main.taxation_settings</source>
-        <target>Configuración de impuestos</target>
+        <target>Configurar impuestos</target>
       </trans-unit>
       <trans-unit id="520f49cd08a95a76ca0e779834cb9ec2" resname="sylius.backend.menu.main.taxonomies">
         <source>sylius.backend.menu.main.taxonomies</source>
         <target>Categorización</target>
+      </trans-unit>
+      <trans-unit id="37a2d92b617ca46a081a4d0539e5ada2" resname="sylius.backend.menu.main.users">
+        <source>sylius.backend.menu.main.users</source>
+        <target>Usuarios</target>
       </trans-unit>
       <trans-unit id="4a6f9dc181c7429270cb511235b151a8" resname="sylius.backend.menu.main.zones">
         <source>sylius.backend.menu.main.zones</source>
@@ -148,7 +160,7 @@
       </trans-unit>
       <trans-unit id="b7c9d66374f6f0aba78d570378706128" resname="sylius.backend.menu.sidebar.dashboard">
         <source>sylius.backend.menu.sidebar.dashboard</source>
-        <target>Panel general</target>
+        <target>Panel</target>
       </trans-unit>
       <trans-unit id="025e28cdc76e73b477d100c3b66d3339" resname="sylius.backend.menu.sidebar.exchange_rates">
         <source>sylius.backend.menu.sidebar.exchange_rates</source>
@@ -176,11 +188,11 @@
       </trans-unit>
       <trans-unit id="e926bf719883393cf94f09aeb2f742d9" resname="sylius.backend.menu.sidebar.new_promotion">
         <source>sylius.backend.menu.sidebar.new_promotion</source>
-        <target>Añadir nueva promoción</target>
+        <target>Añadir promoción</target>
       </trans-unit>
       <trans-unit id="44d59833dd3689d7605ddc74731242c1" resname="sylius.backend.menu.sidebar.options">
         <source>sylius.backend.menu.sidebar.options</source>
-        <target>Administrar opciones de producto</target>
+        <target>Administrar opciones</target>
       </trans-unit>
       <trans-unit id="e302e76e2c779b4317248a07959825eb" resname="sylius.backend.menu.sidebar.orders">
         <source>sylius.backend.menu.sidebar.orders</source>
@@ -208,7 +220,7 @@
       </trans-unit>
       <trans-unit id="b6468a1b2dae8fafd1186e9be1058b84" resname="sylius.backend.menu.sidebar.properties">
         <source>sylius.backend.menu.sidebar.properties</source>
-        <target>Configuración de propiedades</target>
+        <target>Ajustar propiedades</target>
       </trans-unit>
       <trans-unit id="4d036fdb45e10188e4fdbc9367792bdb" resname="sylius.backend.menu.sidebar.prototypes">
         <source>sylius.backend.menu.sidebar.prototypes</source>
@@ -236,7 +248,7 @@
       </trans-unit>
       <trans-unit id="64f660952cc3beebdbb49ed3527eff31" resname="sylius.backend.menu.sidebar.tax_categories">
         <source>sylius.backend.menu.sidebar.tax_categories</source>
-        <target>Categorías de impuestos</target>
+        <target>Categorizar impuestos</target>
       </trans-unit>
       <trans-unit id="eb42e396e06539d9719891338a8c3f74" resname="sylius.backend.menu.sidebar.tax_rates">
         <source>sylius.backend.menu.sidebar.tax_rates</source>
@@ -244,7 +256,7 @@
       </trans-unit>
       <trans-unit id="acd501b89fb4d6fa8f0ff59c4dab0a6d" resname="sylius.backend.menu.sidebar.taxation_settings">
         <source>sylius.backend.menu.sidebar.taxation_settings</source>
-        <target>Configuración de impuestos</target>
+        <target>Configurar impuestos</target>
       </trans-unit>
       <trans-unit id="617a399dbf0823ca50db6284392cc6f9" resname="sylius.backend.menu.sidebar.taxonomies">
         <source>sylius.backend.menu.sidebar.taxonomies</source>
@@ -257,6 +269,10 @@
       <trans-unit id="edb285f095cb9752e5d3f99ef0c23e9c" resname="sylius.backend.menu.sidebar.zones">
         <source>sylius.backend.menu.sidebar.zones</source>
         <target>Zonas</target>
+      </trans-unit>
+      <trans-unit id="b241b5168f9ae79f801f3a9da9fa356a" resname="sylius.frontend.menu.account.addresses">
+        <source>sylius.frontend.menu.account.addresses</source>
+        <target>Mi libreta de direcciones</target>
       </trans-unit>
       <trans-unit id="9144c05a098a6fee4f74327a3b145ff8" resname="sylius.frontend.menu.account.homepage">
         <source>sylius.frontend.menu.account.homepage</source>
@@ -296,11 +312,11 @@
       </trans-unit>
       <trans-unit id="d986cbf1ecce26c5ce35acede3faf0f2" resname="sylius.frontend.menu.main.login">
         <source>sylius.frontend.menu.main.login</source>
-        <target>Login</target>
+        <target>Iniciar sesión</target>
       </trans-unit>
       <trans-unit id="043a49bad7a1e1b30c98aa2b88717b4b" resname="sylius.frontend.menu.main.logout">
         <source>sylius.frontend.menu.main.logout</source>
-        <target>Logout</target>
+        <target>Cerrar sesión</target>
       </trans-unit>
       <trans-unit id="73de6870e2dc5351a69681b64424f691" resname="sylius.frontend.menu.main.register">
         <source>sylius.frontend.menu.main.register</source>
