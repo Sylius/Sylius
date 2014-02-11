@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        restricted_zone_removal: Produkt %product% wurde aus dem Warenkorb entfernt, da es nicht in Ihrem Land verfügbar ist.
+    checkout:
+        restricted_zone: Dieses Produkt ist nicht in Ihrem Land verfügbar.
+        success: Danke für Ihre Bestellung!

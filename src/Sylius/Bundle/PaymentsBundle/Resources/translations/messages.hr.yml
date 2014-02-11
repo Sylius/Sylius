@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        credit_card:
+            cardholder_name: Vlasnik kartice
+            expiry_month: Mjesec isteka kartice
+            expiry_year: Godina isteka kartice
+            number: Broj kartice
+            security_code: Sigurnosni (CVV) Kod
+            type: Tip kartice
+        payment:
+            amount: Iznos
+            method: Tip plaćanja
+        payment_method:
+            description: Opis
+            enabled: Aktivna?
+            gateway: Tip plaćanja
+            name: Naziv

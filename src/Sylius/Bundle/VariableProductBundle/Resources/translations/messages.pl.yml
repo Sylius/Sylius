@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            options: Warianty
+        variant:
+            presentation: Presentation
+            available_on: Dostępny od
+        option:
+            name: Nazwa wariantu
+            presentation: Nazwa publiczna
+            values: Possible values
+        option_value:
+            value: Wartość

@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        action:
+            fixed_discount_configuration:
+                amount: Iznos
+            percentage_discount_configuration:
+                percentage: Postotak
+            type: Vrsta
+        coupon:
+            code: Kod za popust
+            usage_limit: Ograničenje koda za popust
+        coupon_generate_instruction:
+            amount: Iznos
+            usage_limit: Ograničenje generiranih kodova
+        promotion:
+            actions: Akcije
+            coupon_based: Kod za popust
+            description: Opis
+            ends_at: Završava
+            name: Naziv akcije
+            rules: Pravila
+            starts_at: Počinje
+            usage_limit: Ograničenje
+        rule:
+            item_count_configuration:
+                count: Brojač
+                equal: Jednak
+            item_total_configuration:
+                amount: Iznosu
+                equal: Jednak
+            type: Tip

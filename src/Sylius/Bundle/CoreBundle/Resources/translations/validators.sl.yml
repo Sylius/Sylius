@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+fos_user:
+    email:
+        already_used: fos_user.email.already_used
+        blank: fos_user.email.blank
+        invalid: fos_user.email.invalid
+        long: fos_user.email.long
+        short: fos_user.email.short
+    password:
+        blank: fos_user.password.blank
+        short: fos_user.password.short
+    username:
+        already_used: fos_user.username.already_used
+        blank: fos_user.username.blank
+        long: fos_user.username.long
+        short: fos_user.username.short
+sylius:
+    user:
+        first_name:
+            max: Ime ne sme biti daljše od {{ limit }} znakov.
+            min: Ime mora biti dolgo vsaj {{ limit }} znakov.
+            not_blank: Prosimo, vpišite ime.
+        last_name:
+            max: Priimek ne sme biti daljši od {{ limit }} znakov.
+            min: Priimek mora biti dolg vsaj {{ limit }} znakov.
+            not_blank: Prosimo, vpišite priimek.
+    variant:
+        onHand:
+            min: Dobavljivost mora biti večja od {{ limit }}.
+            not_blank: Prosimo, vpišite dobavljivost.
+        price:
+            min: Cena mora biti večja od {{ limit }}.
+            not_blank: Prosimo, vpišite ceno.
+sylius_shipping:
+    method:
+        zone:
+            not_blank: sylius_shipping.method.zone.not_blank
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: Prosimo, vpišite cono davčne stopnje.

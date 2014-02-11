@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            city: City
+            company: Company
+            country: Country
+            first_name: First name
+            last_name: Last name
+            postcode: Postcode
+            street: Street
+            province: Province
+        country:
+            iso_name: ISO name
+            name: Name
+            provinces: Provinces
+            select: Select
+        province:
+            name: Name
+            select: Select
+        zone:
+            members: Members
+            name: Name
+            type: Type
+        zone_member_country:
+            country: Country
+        zone_member_province:
+            province: Province
+        zone_member_zone:
+            zone: Zone
