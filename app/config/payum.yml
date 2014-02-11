@@ -90,6 +90,22 @@ payum:
                     doctrine:
                         driver: orm
 
+        payu:
+            payu:
+                api:
+                    options:
+                        key1:         %payu.key1%
+                        key2:         %payu.key2%
+                        pos_id:       %payu.pos_id%
+                        pos_auth_key: %payu.pos_auth_key%
+                        sandbox:      %payu.sandbox%
+            storages:
+                Sylius\Bundle\CoreBundle\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                    doctrine:
+                        driver: orm
         dummy:
             custom:
                 actions:

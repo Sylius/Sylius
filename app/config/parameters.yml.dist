@@ -30,6 +30,12 @@ parameters:
     be2bill.password: EDITME
     be2bill.sandbox: true
 
+    payu.key1: EDITME
+    payu.key2: EDITME
+    payu.pos_id: EDITME
+    payu.pos_auth_key: EDITME
+    payu.sandbox: true
+
     sylius.oauth.amazon.clientid:       <amazon_client_id>
     sylius.oauth.amazon.clientsecret:   <amazon_client_secret>
     sylius.oauth.facebook.clientid:     <facebook_client_id>

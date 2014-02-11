@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="payum.payu.api.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Api</parameter>
+        <parameter key="payum.payu.action.capture.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\CaptureAction</parameter>
+        <parameter key="payum.payu.action.status.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\StatusAction</parameter>
+        <parameter key="payum.payu.action.notify.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\NotifyAction</parameter>
+        <parameter key="payum.payu.action.sync.class">FSi\Bundle\PayumPayuBundle\Payum\Payu\Action\SyncAction</parameter>
+    </parameters>
+
+    <services>
+        <service id="payum.payu.api" class="%payum.payu.api.class%" abstract="true" public="false">
+            <argument type="service" id="payum.buzz.client" />
+            <argument type="collection">
+                <!-- It is template service. The real service will be created by PayuPaymentFactory -->
+            </argument>
+        </service>
+
+        <service id="payum.payu.action.capture" class="%payum.payu.action.capture.class%" public="false">
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+        </service>
+
+        <service id="payum.payu.action.status" class="%payum.payu.action.status.class%" public="false" />
+
+        <service id="payum.payu.action.notify" class="%payum.payu.action.notify.class%" public="false">
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.manager.payment" />
+            <argument>id</argument>
+        </service>
+
+        <service id="payum.payu.action.sync" class="%payum.payu.action.sync.class%" public="false" />
+
+    </services>
+</container>
