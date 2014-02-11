@@ -1,0 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            city: شهر
+            country: sylius.form.address.country
+            first_name: نام
+            last_name: نام خانوادگی
+            postcode: کد پستی
+            street: آدرس
+        country:
+            iso_name: sylius.form.country.iso_name
+            name: sylius.form.country.name
+            provinces: sylius.form.country.provinces
+            select: sylius.form.country.select
+        province:
+            name: sylius.form.province.name
+        zone:
+            members: sylius.form.zone.members
+            name: sylius.form.zone.name
+            type: sylius.form.zone.type
+        zone_member_country:
+            country: sylius.form.zone_member_country.country
+        zone_member_province:
+            province: sylius.form.zone_member_province.province
+        zone_member_zone:
+            zone: sylius.form.zone_member_zone.zone

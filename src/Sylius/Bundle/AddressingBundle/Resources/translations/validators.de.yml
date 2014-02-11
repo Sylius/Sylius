@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: Der Name der Stadt darf nicht länger als 255 Zeichen sein|Der Name der Stadt darf nicht länger als 255 Zeichen sein.
+            min_length: Der Name der Stadt muss mindestens 2 Zeichen lang sein|Der Name der Stadt muss mindestens 2 Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihre Stadt an.
+        country:
+            not_blank: Bitte wählen Sie Ihr Land aus.
+        first_name:
+            max_length: Der Vorname darf nicht länger als 255 Zeichen sein|Der Vorname darf nicht länger als 255 Zeichen sein.
+            min_length: Der Vorname muss mindestens 2 Zeichen lang sein|Der Vorname muss mindestens 2 Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihren Vornamen an.
+        last_name:
+            max_length: Der Nachname darf nicht länger als 255 Zeichen sein|Der Nachname darf nicht länger als 255 Zeichen sein.
+            min_length: Der Nachname muss mindestens 2 Zeichen lang sein|Der Nachname muss mindestens 2 Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihren Nachnamen an.
+        postcode:
+            max_length: Die Postleitzahl darf nicht länger als 255 Zeichen sein|Die Postleitzahl darf nicht länger als 255 Zeichen sein.
+            min_length: Die Postleitzahl muss mindestens 2 Zeichen lang sein|Die Postleitzahl muss mindestens 2 Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihre Postleitzahl an.
+        province:
+            valid: Bitte wählen Sie ein korrektes Bundesland aus.
+        street:
+            max_length: Die Straße darf nicht länger als 255 Zeichen sein|Die Straße darf nicht länger als 255 Zeichen sein.
+            min_length: Die Straße muss mindestens 2 Zeichen lang sein|Die Straße muss mindestens 2 Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihre Straße an.
+    country:
+        iso_name:
+            not_blank: Bitte geben Sie den ISO Code des Landes an.
+        name:
+            max_length: Der Name des Landes darf nicht länger als 255 Zeichen sein|Der Name des Landes darf nicht länger als 255 Zeichen sein.
+            not_blank: Bitte geben Sie Ihr Land an.
+    province:
+        name:
+            max_length: Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein|Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein.
+            min_length: Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein.
+            not_blank: Bitte geben Sie Ihr Bundesland an.
+    zone:
+        members:
+            min_count: Bitte geben Sie mindestens {{ limit }} Bereiche an.
+        name:
+            max_length: Der Name eines Bereiches darf nicht länger als 255 Zeichen sein|Der Name eines Bereiches darf nicht länger als 255 Zeichen sein.
+            not_blank: Bitte geben Sie den Namen des Bereiches an.

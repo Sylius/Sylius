@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            city: Grad
+            company: Tvrtka
+            country: Država
+            first_name: Ime
+            last_name: Prezime
+            postcode: Poštanski broj
+            street: Ulica
+        country:
+            iso_name: ISO naziv
+            name: Naziv
+            provinces: Županija
+            select: Odaberite
+        province:
+            name: Naziv
+        zone:
+            members: Članovi
+            name: Naziv regije
+            type: Vrsta
+        zone_member_country:
+            country: Država
+        zone_member_province:
+            province: Županija
+        zone_member_zone:
+            zone: Regija

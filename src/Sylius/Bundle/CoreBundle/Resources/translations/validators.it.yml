@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+fos_user:
+    email:
+        already_used: fos_user.email.already_used
+        blank: fos_user.email.blank
+        invalid: fos_user.email.invalid
+        long: fos_user.email.long
+        short: fos_user.email.short
+    password:
+        blank: fos_user.password.blank
+        short: fos_user.password.short
+    username:
+        already_used: fos_user.username.already_used
+        blank: fos_user.username.blank
+        long: fos_user.username.long
+        short: fos_user.username.short
+sylius:
+    user:
+        first_name:
+            max: Il nome non deve essere più lungo di {{ limit }} caratteri.
+            min: Il nome deve essere lungo almeno {{ limit }} caratteri.
+            not_blank: Per favore inserisci il tuo nome.
+        last_name:
+            max: Il cognome non deve essere più lungo di {{ limit }} caratteri.
+            min: Il cognome deve essere lungo almeno {{ limit }} caratteri.
+            not_blank: Per favore inserisci il tuo cognome.
+    variant:
+        onHand:
+            min: La scorta di magazzino deve essere maggiore di {{ limit }}.
+            not_blank: Per favore inserisci la scorta di magazzino.
+        price:
+            min: Il prezzo deve essere superiore a {{ limit }}.
+            not_blank: Per favore inserisci il prezzo.
+sylius_shipping:
+    method:
+        zone:
+            not_blank: sylius_shipping.method.zone.not_blank
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: Per favore inserisci la tassazione locale.

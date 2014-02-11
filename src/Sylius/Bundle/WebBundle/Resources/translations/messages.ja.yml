@@ -1,0 +1,600 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    account:
+        address:
+            action:
+                delete: sylius.account.address.action.delete
+            create: sylius.account.address.create
+            default:
+                billing: sylius.account.address.default.billing
+                no_billing: sylius.account.address.default.no_billing
+                no_shipping: sylius.account.address.default.no_shipping
+                shipping: sylius.account.address.default.shipping
+            empty: sylius.account.address.empty
+            flash:
+                billing:
+                    success: sylius.account.address.flash.billing.success
+                shipping:
+                    success: sylius.account.address.flash.shipping.success
+            list: sylius.account.address.list
+            update: sylius.account.address.update
+        home:
+            email: メールアドレス : 
+            id: お客様ID : 
+            outline: お客様情報の確認と変更を行うことができます。
+            since: ご登録日時
+            welcome: お客様専用ページへようこそ
+        order:
+            created_at: sylius.account.order.created_at
+            details: sylius.account.order.details
+            empty: sylius.account.order.empty
+            invoice: sylius.account.order.invoice
+            list: sylius.account.order.list
+            number: sylius.account.order.number
+            placed_at: sylius.account.order.placed_at
+            state: sylius.account.order.state
+            tracking_number: sylius.account.order.tracking_number
+    add_to_cart: カートに入れる
+    address:
+        city: 市町村
+        company: 会社名
+        country: 国
+        firstname: 名
+        lastname: 姓
+        postcode: 郵便番号
+        province: 都道府県
+        street: それ以降の住所
+    alert:
+        error: エラー
+        info: 情報
+        success: 成功
+        warning: 警告
+    backend:
+        alert:
+            info: 情報
+        dashboard:
+            chart_order_count: 注文件数
+            chart_order_total: 注文
+            header: 管理者ダッシュボード
+            orders: 先週の注文件数
+            revenue: 先週の売上金額
+            subheader: サマリー
+        logout: sylius.backend.logout
+        quick_links:
+            add_product: sylius.backend.quick_links.add_product
+            orders: sylius.backend.quick_links.orders
+            products: sylius.backend.quick_links.products
+            users: sylius.backend.quick_links.users
+        statistics:
+            0: sylius.backend.statistics
+            orders_this_month: sylius.backend.statistics.orders_this_month
+            registrations_this_month: sylius.backend.statistics.registrations_this_month
+            sales_this_month: sylius.backend.statistics.sales_this_month
+    backend_welcome: sylius.backend_welcome
+    breadcrumb:
+        assortment: sylius.breadcrumb.assortment
+        build: sylius.breadcrumb.build
+        configuration: sylius.breadcrumb.configuration
+        country:
+            index: sylius.breadcrumb.country.index
+        customers: sylius.breadcrumb.customers
+        edit: sylius.breadcrumb.edit
+        exchange_rate:
+            index: sylius.breadcrumb.exchange_rate.index
+        general_settings: sylius.breadcrumb.general_settings
+        generate: sylius.breadcrumb.generate
+        inventory:
+            index: sylius.breadcrumb.inventory.index
+        new: sylius.breadcrumb.new
+        option:
+            index: sylius.breadcrumb.option.index
+        order:
+            index: sylius.breadcrumb.order.index
+        payment:
+            index: sylius.breadcrumb.payment.index
+        payment_method:
+            index: sylius.breadcrumb.payment_method.index
+        product:
+            index: sylius.breadcrumb.product.index
+        promotion:
+            index: sylius.breadcrumb.promotion.index
+        promotion_coupon:
+            index: sylius.breadcrumb.promotion_coupon.index
+        property:
+            index: sylius.breadcrumb.property.index
+        prototype:
+            index: sylius.breadcrumb.prototype.index
+        sales: sylius.breadcrumb.sales
+        shipment:
+            index: sylius.breadcrumb.shipment.index
+        shipping_category:
+            index: sylius.breadcrumb.shipping_category.index
+        shipping_method:
+            index: sylius.breadcrumb.shipping_method.index
+        tax_category:
+            index: sylius.breadcrumb.tax_category.index
+        tax_rate:
+            index: sylius.breadcrumb.tax_rate.index
+        taxation_settings: sylius.breadcrumb.taxation_settings
+        taxonomy:
+            index: sylius.breadcrumb.taxonomy.index
+        update: sylius.breadcrumb.update
+        user:
+            index: sylius.breadcrumb.user.index
+        zone:
+            index: sylius.breadcrumb.zone.index
+    cancel: キャンセル
+    cart:
+        empty: カートには何もありません。
+        summary:
+            checkout: 注文に進む
+            clear: カートを空にする
+            grand_total: 総合計
+            product: 商品
+            quantity: 数量
+            save: 保存
+            total: 小計
+            unit_price: 単価
+        summary_header: カートを見る
+        total_items: %count%個の商品
+    checkout:
+        addressing:
+            header: 配送先入力
+        back: 戻る
+        finalize:
+            address:
+                city: 市町村
+                country: 国
+                firstname: 名
+                lastname: 姓
+                postcode: 郵便番号
+                province: 都道府県
+                street: それ以降の住所
+            header: ご注文内容の確認
+            order:
+                billing_address: ご請求先
+                items_total: 購入金額合計
+                no_items: 注文する商品がありません。
+                no_promotion: プロモーションは適用されていません。
+                no_shipping_charges: 送料無料
+                no_taxes: 税は加算されていません。
+                promotion_discount: プロモーション値引き額
+                promotion_total: プロモーション値引き額合計
+                shipping_address: 配送先
+                shipping_charges: 送料
+                shipping_total: 送料合計
+                tax_total: 税合計
+                taxes: 税
+                total: 総合計
+            order_item:
+                quantity: 数量
+                total: 小計
+                unit_price: 単価
+            place_order: 注文を確定する
+            product:
+                name: 商品名
+        forward: 次へ
+        payment:
+            header: お支払い方法
+        security:
+            existing_customer: 登録済の顧客
+            header: ログイン<small>又は新規顧客登録</small>
+            login: ログイン
+            new_customer: 新規顧客登録
+            register: 登録
+        shipping:
+            header: 発送方法
+    country:
+        add_province: 都道府県を設定する
+        create: 国を登録する
+        create_header: 国を登録
+        id: ID
+        index_header: 国の管理
+        iso_name: ISO略称
+        manage: 国の管理
+        name: 国名
+        no_results: 国は登録されていません。
+        show_header: 国の詳細
+        update_header: 国を編集
+    create: 作成
+    delete: 削除
+    edit: 編集
+    email: メールアドレス
+    exchange_rate:
+        create: 為替レートを登録する
+        create_header: 為替レートを登録
+        currency: 通貨
+        id: ID
+        index_header: 為替レート
+        no_results: 為替レートは登録されていません。
+        rate: レート
+        update_header: 為替レートの編集
+        updated_at: 最終更新日時
+    filter: F絞り込む
+    form:
+        choose_file: ファイルを選択
+        frontend:
+            password:
+                confirmation: 確認のため再入力
+                current: 現在のパスワード
+                new: 新しいパスワード
+                title: パスワードの変更
+            profile:
+                title: 顧客情報の変更
+        login:
+            email: メールアドレス
+            password: パスワード
+        profile:
+            email: メールアドレス
+            firstName: 名
+            lastName: 姓
+    gallery:
+        next: 次へ
+        previous: 前へ
+        slideshow: スライドショー
+    generate: 生成する
+    homepage:
+        splash:
+            headline: Syliusへようこそ
+            subheadline: Symfony2のEコマース
+    inventory_unit:
+        created_at: 登録日時
+        inventory_state: 在庫ステータス
+        name: 商品名
+        no_results: 在庫情報がありません。
+        shipping_state: 出荷ステータス
+        sku: SKU
+        updated_at: 最終更新日
+    login: ログイン
+    login_header: 管理
+    logo: Sylius
+    manage: 管理
+    meta:
+        backend_title: 管理者ダッシュボード
+        frontend_description: SyliusはSymfony2フレームワークを使用した先進的なPHPのeコマースソフトウェアです。
+        frontend_keywords: sylius, eコマース, symfony2, ショップ, カート, ネットショップ
+        frontend_title: Symfony2のeコマース、Sylius
+    newest: 新着商品
+    no: ×
+    option:
+        create: 商品オプションを登録
+        create_header: 商品オプション登録
+        index_header: 商品オプション
+        manage: 商品オプション管理
+        name: オプション名
+        no_results: 商品オプションは登録されていません。
+        presentation: 表示名
+        update_header: 商品オプションを編集
+        updated_at: 最終更新日時
+        values: オプション
+    order:
+        billing_address: 請求先
+        create: 注文を登録
+        create_header: 新しい注文を登録
+        created_at: 登録日時
+        general_info: サマリー
+        id: ID
+        index_header: 現在の注文
+        inventory_tracking: 在庫照会
+        items_total: 購入金額合計
+        manage: 注文管理
+        no_items: 注文商品がありません。
+        no_results: 新規注文はありません。
+        no_shipments: 出荷情報はありません。
+        no_shipping_charges: 送料無料
+        no_taxes: 税が加算されていません。
+        number: 注文番号
+        payment_state: 入金状況
+        payment_states:
+            balance_due: 未入金
+        promotion_total: プロモーション値引き額合計
+        recent_header: 最近の注文
+        shipment_state: 発送状況
+        shipment_states:
+            pending: 未発送
+        shipments: 発送
+        shipping_address: 配送先
+        shipping_charges: 送料
+        shipping_total: 送料合計
+        show_header: 注文詳細
+        tax_total: 税の合計
+        taxes: 税
+        total: 総合計
+        update_header: 注文を編集
+        user: 顧客
+    order_item:
+        product: sylius.order_item.product
+        quantity: 数量
+        sellable: 商品名
+        total: 小計
+        unit_price: 単価
+    out_of_stock: 在庫切れ
+    password: パスワード
+    payment:
+        amount: 請求金額合計
+        create: 入金を登録する
+        create_header: 入金を登録
+        created_at: 登録日時
+        id: ID
+        index_header: 入金管理
+        manage: sylius.payment.manage
+        method: お支払方法
+        no_results: 入金情報が登録されていません。
+        state: sylius.payment.state
+        update_header: 入金を編集
+        updated_at: 最終更新日時
+    payment_method:
+        create: 支払い方法を登録する
+        create_header: 支払い方法を登録
+        enabled: 有効
+        gateway: 決済ゲートウェイ
+        id: ID
+        index_header: 支払い方法の管理
+        name: 支払い方法名
+        no_results: 支払い方法は登録されていません。
+        update_header: 支払い方法の編集
+        updated_at: 最終更新日時
+    product:
+        add_property: 商品プロパティを登録
+        available_on: 入荷日
+        available_on_demand: 即納
+        categorization: カテゴリ設定
+        create: 商品を登録する
+        create_header: 商品を登録
+        description: 商品説明
+        generate_variants: バリエーションを作成
+        index_by_taxon_header: カテゴリ"%taxon%"の商品
+        index_header: 商品管理
+        manage: 商品管理
+        name: 商品名
+        no_description: <i>説明未入力</i>
+        no_images: 画像未登録
+        no_options: 商品オプション未設定
+        no_properties: 商品プロパティ未設定
+        no_results: 該当する商品がありません。
+        no_short_description: <i>概要未入力</i>
+        no_sku: <i>SKU未登録</i>
+        no_tax_category: 税区分未設定
+        no_taxons: カテゴリ未設定
+        options: 商品オプション
+        price: 販売価格
+        properties: 商品プロパティ
+        show: 詳細
+        show_header: 商品詳細<small>"<strong>%product%</strong>"</small>
+        show_in_store: 販売ページへ
+        sku: SKU
+        stock: 現在の在庫
+        tabs:
+            categorization: カテゴリ設定
+            images: 商品画像
+            options: 商品オプション設定
+            product: 商品情報
+            properties: 商品オプション設定
+        tax_category: 税区分
+        update_header: 商品を編集
+        updated_at: 最終更新日時
+        variant_selection_method: バリエーション選択方法
+    promotion:
+        actions: 値引き設定
+        add_action: 値引き設定を追加
+        add_rule: 条件を追加
+        coupon_based: クーポン利用
+        create: プロモーションを登録する
+        create_header: プロモーションを登録
+        created_at: 登録日時
+        description: 説明
+        ends_at: 終了日
+        general_info: sylius.promotion.general_info
+        id: sylius.promotion.id
+        index_header: 現在のプロモーション
+        manage: プロモーション管理
+        name: プロモーション
+        no_results: 該当するプロモーションがありません。
+        rules: 条件
+        show_header: プロモーション詳細
+        starts_at: 開始日
+        update_header: プロモーションを編集
+        updated_at: 最終更新日時
+        usage_limit: 利用件数制限
+        used: 利用件数
+    promotion_action:
+        configuration: 値引き設定
+        type: 値引き方法
+    promotion_coupon:
+        create: クーポンを追加
+        create_header: クーポンを追加
+        generate: クーポンを作成する
+        generate_header: クーポンを作成
+        index: クーポン一覧
+        index_header: sylius.promotion_coupon.index_header
+        no_results: 該当するクーポンがありません。
+        total_results: 合計: %total%
+        update_header: クーポンの編集
+    promotion_rule:
+        configuration: 条件設定
+        type: 条件タイプ
+    property:
+        add_choice: 選択肢を追加
+        create: 商品プロパティを登録する
+        create_header: 商品プロパティを登録
+        index_header: 商品プロパティ管理
+        manage: 商品プロパティ管理
+        name: プロパティ名
+        no_results: 商品プロパティは登録されていません。
+        presentation: 表示名
+        type: タイプ
+        update_header: 商品プロパティの編集
+        updated_at: 最終更新日時
+    prototype:
+        build: プロトタイプから商品を登録する
+        build_header: プロトタイプから商品を登録
+        create: 商品プロトタイプを登録する
+        create_header: 商品プロトタイプの登録
+        index_header: 商品プロトタイプ管理
+        name: プロトタイプ名
+        no_results: 商品プロトタイプは登録されていません。
+        options: 商品オプション
+        properties: 商品プロパティ
+        update_header: 商品プロトタイプの編集
+        updated_at: 最終更新日時
+    province:
+        provinces: 都道府県
+    remember_me: 次回から自動ログイン
+    save_changes: 保存
+    search: 検索
+    settings:
+        general_header: 一般的な設定
+        taxation_header: 税設定
+    shipment:
+        created_at: 登録日時
+        id: ID
+        index_header: 出荷管理
+        inventory_state: 在庫ステータス
+        manage: 出荷管理
+        method: 発送方法
+        modified: 更新日時
+        name: 配送名
+        no_items: 該当する商品がありません。
+        no_results: 該当する出荷がありません。
+        order: 注文
+        show_header: 出荷の詳細
+        sku: SKU
+        state: 出荷ステータス
+        updated_at: 最終更新日時
+    shipment_category:
+        manage: 配送カテゴリ管理
+    shipping_category:
+        create: 配送カテゴリを登録する
+        create_header: 配送カテゴリを登録
+        id: ID
+        index_header: 配送カテゴリ
+        manage: 配送カテゴリ管理
+        name: 配送カテゴリ名
+        no_results: 配送カテゴリが登録されていません。
+        update_header: 配送カテゴリの編集
+        updated_at: 最終更新日時
+    shipping_method:
+        calculator: 送料算出方法
+        category: 配送カテゴリ
+        create: 配送方法を登録する
+        create_header: 配送方法を登録
+        enabled: 有効
+        id: ID
+        index_header: 配送方法管理
+        manage: 配送方法管理
+        name: 配送方法名
+        no_results: 配送方法は登録されていません。
+        show_header: 配送方法詳細
+        update_header: 配送方法の編集
+        updated_at: 最終更新日時
+        zone: 配送先ゾーン
+    shop_by: 商品検索
+    show: 詳細
+    show_all: sylius.show_all
+    stockable:
+        index_header: 在庫照会
+        name: 商品名
+        no_results: 表示する在庫商品がありません。
+        on_hand: 在庫数
+        sku: SKU
+        updated_at: 最終更新日時
+    tax_category:
+        create: 税区分を登録する
+        create_header: 税区分を登録
+        description: 説明
+        id: ID
+        index_header: 税区分
+        manage: 税区分管理
+        name: 税区分名
+        no_description: 説明未設定
+        no_results: 税区分は登録されていません。
+        update_header: 税区分の編集
+        updated_at: 最終更新日時
+    tax_rate:
+        amount: 税率
+        calculator: 算出方法
+        category: 税区分
+        create: 税を登録する
+        create_header: 税を登録
+        included_in_price: 税込
+        index_header: 税管理
+        manage: 税管理
+        name: 名称
+        no_results: 税は登録されていません。
+        show_header: 税詳細
+        update_header: 税の編集
+        updated_at: 最終更新日時
+        zone: 対象地域
+    taxon:
+        create: カテゴリを登録する
+        create_header: カテゴリを登録
+        image: 画像を選択
+        name: カテゴリ名
+        no_image: 画像未設定
+        no_results: 該当するカテゴリがありません。
+        update_header: カテゴリを編集
+    taxonomy:
+        create: カテゴリを登録する
+        create_header: カテゴリーを登録
+        image: 画像を選択
+        index_header: カテゴリ管理
+        manage: sylius.taxonomy.manage
+        name: カテゴリ名
+        no_image: 画像未設定
+        no_results: 該当するカテゴリがありません。
+        show_header: カテゴリ詳細： <small><strong>%name%</strong></small>
+        update_header: カテゴリを編集
+    user:
+        billing_address: 請求先住所
+        create: ユーザーを登録する
+        create_header: ユーザーを登録
+        email: メールアドレス
+        enabled: 認証
+        filter:
+            all: 全て表示
+            unconfirmed: 未認証ユーザー
+        first_name: 名
+        general_info: ユーザー"%username%"の概要
+        id: ID
+        index_header: 顧客管理
+        last_login: 最終ログイン日時
+        last_name: 姓
+        manage: 顧客管理
+        no_results: 該当する顧客がありません。
+        order:
+            no_results: 注文履歴はありません。
+        orders: 注文履歴
+        recent_header: 新着の顧客
+        shipping_address: 配送先住所
+        show_header: 顧客詳細
+        update_header: 顧客の編集
+        username: ユーザー名
+    variant:
+        add_image: 画像を追加
+        availability: 在庫状況
+        available_on_demand: 即納
+        create: バリエーションを登録する
+        create_header: バリエーション登録
+        delete_image: 画像を削除
+        last_update: 最終更新日時
+        no_results: 該当するバリエーションがありません。
+        options: オプション
+        price: 価格
+        stock: 現在の在庫数
+        update_header: バリエーションを編集
+    yes: ○
+    zone:
+        add_member: 追加
+        create: ゾーンを登録する
+        create_header: ゾーンを登録
+        index_header: ゾーン管理
+        manage: ゾーン管理
+        name: ゾーン名
+        no_results: ゾーンが登録されていません。
+        show_header: ゾーン詳細
+        type: タイプ
+        update_header: ゾーンの編集
+    zone_member:
+        members: 地域

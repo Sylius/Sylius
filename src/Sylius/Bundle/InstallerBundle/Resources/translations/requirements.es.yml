@@ -1,0 +1,60 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    extensions:
+        0: Extensiones
+        accelerator:
+            0: Acelerador
+            help: Instala y activa un acelerador PHP como APC (altamente recomendado).
+        apc: APC
+        ctype: Ctype
+        gd: sylius.extensions.gd
+        help: Instala y activa la extensión %extension%.
+        iconv: Iconv
+        icu: ICU
+        intl: Intl
+        json_encode: JSON
+        mbstring: String Multibyte
+        off: Desactivado
+        on: Activado
+        pcre: PCRE
+        pdo: PDO
+        php_xml: PHP-XML
+        session_start: Sesión
+        simplexml_import_dom: SimpleXML
+        token_get_all: Tokenizer
+    filesystem:
+        0: sistema de ficheros
+        cache:
+            0: cache
+            help: Para asignar permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
+        exists: Existe
+        logs:
+            0: logs
+            help: Para asignar permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
+        not_exists: No existe
+        not_writable: Sin permisos de escritura
+        parameters:
+            0: parameters.yml
+            help: Para asignar permisos ejecuta: sudo chmod a+w %path%
+        vendors: Vendors
+        writable: Con permisos de escritura
+    settings:
+        0: Versión de PHP y configuración
+        any: Cualquiera
+        detect_unicode: detect_unicode
+        magic_quotes_gpc: magic_quotes_gpc
+        non_deprecated: No obsoleto
+        off: Desactivado
+        on: Activado
+        register_globals: register_globals
+        session:
+            auto_start: session.auto_start
+        short_open_tag: short_open_tag
+        timezone: Zona horaria
+        timezone_deprecated:
+            0: Zona horaria obsoleta
+            help: La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).
+        version: Versión de PHP
+        version_recommanded: Versión de PHP recomendada
