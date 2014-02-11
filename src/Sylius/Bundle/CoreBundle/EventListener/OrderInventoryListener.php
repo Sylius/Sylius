@@ -93,7 +93,7 @@ class OrderInventoryListener
      *
      * @param GenericEvent $event
      */
-    private function getOrder(GenericEvent $event)
+    protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
