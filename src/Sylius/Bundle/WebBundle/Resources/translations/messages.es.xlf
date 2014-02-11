@@ -288,11 +288,19 @@
       </trans-unit>
       <trans-unit id="642d050c250d149a92c05342ef24e72d" resname="sylius.breadcrumb.generate">
         <source>sylius.breadcrumb.generate</source>
-        <target>sylius.breadcrumb.generate</target>
+        <target>Generar</target>
+      </trans-unit>
+      <trans-unit id="67b81464d46806ca861f464f9b6d2697" resname="sylius.breadcrumb.group.index">
+        <source>sylius.breadcrumb.group.index</source>
+        <target>Grupos</target>
       </trans-unit>
       <trans-unit id="827f2b8d9ee8d790231f61188e1bf374" resname="sylius.breadcrumb.inventory.index">
         <source>sylius.breadcrumb.inventory.index</source>
         <target>Inventario</target>
+      </trans-unit>
+      <trans-unit id="8baeab4e95fbb1a13591df9380c205a4" resname="sylius.breadcrumb.locale.index">
+        <source>sylius.breadcrumb.locale.index</source>
+        <target>Configuración regional</target>
       </trans-unit>
       <trans-unit id="68f3f28b97f2ddcb174ef9ed351ee3b8" resname="sylius.breadcrumb.new">
         <source>sylius.breadcrumb.new</source>
@@ -734,6 +742,66 @@
         <source>sylius.generate</source>
         <target>Generar</target>
       </trans-unit>
+      <trans-unit id="cf56fefacff6ea4a6503d3415477ce5a" resname="sylius.group.create">
+        <source>sylius.group.create</source>
+        <target>Crear grupo</target>
+      </trans-unit>
+      <trans-unit id="9e7e865037ebdb09540be2f1cf7c4596" resname="sylius.group.create_header">
+        <source>sylius.group.create_header</source>
+        <target>Nuevo grupo</target>
+      </trans-unit>
+      <trans-unit id="77a3e1f0580598f1afb242ae5b24281a" resname="sylius.group.id">
+        <source>sylius.group.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="77823b1d46e485f009f2e27d53e535e2" resname="sylius.group.index_header">
+        <source>sylius.group.index_header</source>
+        <target>Grupos</target>
+      </trans-unit>
+      <trans-unit id="c66fa2efe2a66c534570be48fd6fd4fb" resname="sylius.group.name">
+        <source>sylius.group.name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="386108cf569469f87e3ed98f90bc74ba" resname="sylius.group.no_results">
+        <source>sylius.group.no_results</source>
+        <target>No hay grupos para mostrar.</target>
+      </trans-unit>
+      <trans-unit id="022c2a636633829c720d5328c7329fe8" resname="sylius.group.roles">
+        <source>sylius.group.roles</source>
+        <target>Roles</target>
+      </trans-unit>
+      <trans-unit id="ad1ab095616aee8987ec9bb27a25736b" resname="sylius.group.update_header">
+        <source>sylius.group.update_header</source>
+        <target>Editar grupo</target>
+      </trans-unit>
+      <trans-unit id="b73b5de46514cd29450acb74a1557ab0" resname="sylius.hide_deleted">
+        <source>sylius.hide_deleted</source>
+        <target>Ocultar los eliminados</target>
+      </trans-unit>
+      <trans-unit id="005db3605b9e367a0278acc6849c78ac" resname="sylius.history">
+        <source>sylius.history</source>
+        <target>sylius.history</target>
+      </trans-unit>
+      <trans-unit id="91322fa3dfdd6e01c64f2a910ad20420" resname="sylius.history.action">
+        <source>sylius.history.action</source>
+        <target>Acción</target>
+      </trans-unit>
+      <trans-unit id="21b8915f38e4ac544181ac9604d05c1e" resname="sylius.history.author">
+        <source>sylius.history.author</source>
+        <target>Autor</target>
+      </trans-unit>
+      <trans-unit id="bc4304e80c71325c3177b8f02326d144" resname="sylius.history.data">
+        <source>sylius.history.data</source>
+        <target>Datos</target>
+      </trans-unit>
+      <trans-unit id="08820da0d0f7249caa1fe0b784c655a1" resname="sylius.history.logged_at">
+        <source>sylius.history.logged_at</source>
+        <target>sylius.history.logged_at</target>
+      </trans-unit>
+      <trans-unit id="919fdd8f3061ef76722892790f6ba851" resname="sylius.history.version">
+        <source>sylius.history.version</source>
+        <target>Versión</target>
+      </trans-unit>
       <trans-unit id="ce71111cec2ffc480f4a947e170afa33" resname="sylius.homepage.splash.headline">
         <source>sylius.homepage.splash.headline</source>
         <target>Bienvenido a Sylius</target>
@@ -768,6 +836,38 @@
       </trans-unit>
       <trans-unit id="4cab6cc405cf2fb3f32ccc5e72088f4d" resname="sylius.inventory_unit.updated_at">
         <source>sylius.inventory_unit.updated_at</source>
+        <target>Última actualización</target>
+      </trans-unit>
+      <trans-unit id="496df0ae8ece84db2488ee1ec2142c6b" resname="sylius.locale.code">
+        <source>sylius.locale.code</source>
+        <target>Código</target>
+      </trans-unit>
+      <trans-unit id="a6d9e5c2e678918cc88ad8aa29827e41" resname="sylius.locale.create">
+        <source>sylius.locale.create</source>
+        <target>Crear</target>
+      </trans-unit>
+      <trans-unit id="da591489a2f5a10ecc1dde9cc3ce753f" resname="sylius.locale.create_header">
+        <source>sylius.locale.create_header</source>
+        <target>Nueva configuración regional</target>
+      </trans-unit>
+      <trans-unit id="00f97de22867f1da993595b4941b198d" resname="sylius.locale.enabled">
+        <source>sylius.locale.enabled</source>
+        <target>>¿Está habilitado?</target>
+      </trans-unit>
+      <trans-unit id="bbf5ad53d27102bbe7f830cfa026004a" resname="sylius.locale.index_header">
+        <source>sylius.locale.index_header</source>
+        <target>Listado de las configuraciones regionales</target>
+      </trans-unit>
+      <trans-unit id="e9529479fb456b37e4297a7636303852" resname="sylius.locale.no_results">
+        <source>sylius.locale.no_results</source>
+        <target>No hay configuraciones regionales.</target>
+      </trans-unit>
+      <trans-unit id="a60e5abc728b41576a0b91121132f4ae" resname="sylius.locale.update_header">
+        <source>sylius.locale.update_header</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit id="7105f63312819667e039e0dffdc33b5f" resname="sylius.locale.updated_at">
+        <source>sylius.locale.updated_at</source>
         <target>Última actualización</target>
       </trans-unit>
       <trans-unit id="4fe0a2de7d941c475f778fea316ba23f" resname="sylius.login">
@@ -1016,7 +1116,7 @@
       </trans-unit>
       <trans-unit id="21a51a3f11c085542aebb7525d2b8805" resname="sylius.payment.create_header">
         <source>sylius.payment.create_header</source>
-        <target>Nueva pago</target>
+        <target>Nuevo pago</target>
       </trans-unit>
       <trans-unit id="b7c96f1a5e15668865398441cee2641e" resname="sylius.payment.created_at">
         <source>sylius.payment.created_at</source>
@@ -1665,6 +1765,10 @@
       <trans-unit id="e3941c0ac12c8042d373b4eb3b00e6d2" resname="sylius.show_all">
         <source>sylius.show_all</source>
         <target>Ver todos</target>
+      </trans-unit>
+      <trans-unit id="36d9e5d2fc4948cd6d1ee6dcbe6a93aa" resname="sylius.show_deleted">
+        <source>sylius.show_deleted</source>
+        <target>Ver los eliminados</target>
       </trans-unit>
       <trans-unit id="5b19cea474365ab0f38c4662924eb810" resname="sylius.stockable.index_header">
         <source>sylius.stockable.index_header</source>

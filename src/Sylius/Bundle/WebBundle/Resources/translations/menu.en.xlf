@@ -6,9 +6,17 @@
         <source>sylius.backend.menu.main.assortment</source>
         <target>Assortment</target>
       </trans-unit>
+      <trans-unit id="5c8a58bb8d443c58bd8301e2768469a8" resname="sylius.backend.menu.main.blocks">
+        <source>sylius.backend.menu.main.blocks</source>
+        <target>Blocks</target>
+      </trans-unit>
       <trans-unit id="a372a7d5b6e2991da23009440f5b1c98" resname="sylius.backend.menu.main.configuration">
         <source>sylius.backend.menu.main.configuration</source>
         <target>Configuration</target>
+      </trans-unit>
+      <trans-unit id="5e5a18503ab9cd9de17ea0e504179a3b" resname="sylius.backend.menu.main.content">
+        <source>sylius.backend.menu.main.content</source>
+        <target>Content</target>
       </trans-unit>
       <trans-unit id="b3f20139c90a466753cd35511725f7a0" resname="sylius.backend.menu.main.countries">
         <source>sylius.backend.menu.main.countries</source>
@@ -53,6 +61,10 @@
       <trans-unit id="de3dfe470fe9b786ec37f80c586e16e8" resname="sylius.backend.menu.main.orders">
         <source>sylius.backend.menu.main.orders</source>
         <target>Current orders</target>
+      </trans-unit>
+      <trans-unit id="320c35490bdaf98df0f46b91fc75618e" resname="sylius.backend.menu.main.pages">
+        <source>sylius.backend.menu.main.pages</source>
+        <target>Pages</target>
       </trans-unit>
       <trans-unit id="96fad72b5156d217d479762961dfab32" resname="sylius.backend.menu.main.payment_methods">
         <source>sylius.backend.menu.main.payment_methods</source>
