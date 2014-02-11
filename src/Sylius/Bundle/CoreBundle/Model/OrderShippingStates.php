@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class OrderShippingStates
+class OrderShippingStates
 {
     const CHECKOUT          = 'checkout';
     const ONHOLD            = 'onhold';
