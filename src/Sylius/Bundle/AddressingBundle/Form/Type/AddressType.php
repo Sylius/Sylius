@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -94,10 +95,22 @@ class AddressType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $validationGroups = $this->validationGroups;
+
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
+                'validation_groups' => function(Options $options) use ($validationGroups) {
+                    if ($options['shippable']) {
+                        $validationGroups[] = 'shippable';
+                    }
+
+                    return $validationGroups;
+                },
+                'shippable'         => false
+            ))
+            ->setAllowedTypes(array(
+                'shippable' => 'bool'
             ))
         ;
     }

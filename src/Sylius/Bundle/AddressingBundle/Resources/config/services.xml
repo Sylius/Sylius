@@ -23,6 +23,7 @@
         <parameter key="sylius.form.type.zone_member_collection.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCollectionType</parameter>
         <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener</parameter>
         <parameter key="sylius.zone_matcher.class">Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcher</parameter>
+        <parameter key="sylius.validator.shippable_address.class">Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator</parameter>
     </parameters>
 
     <services>
@@ -87,6 +88,9 @@
 
         <service id="sylius.zone_matcher" class="%sylius.zone_matcher.class%">
             <argument type="service" id="sylius.repository.zone" />
+        </service>
+        <service id="sylius.validator.shippable_address" class="%sylius.validator.shippable_address.class%">
+            <tag name="validator.constraint_validator" alias="sylius_shippable_address_validator" />
         </service>
     </services>
 
