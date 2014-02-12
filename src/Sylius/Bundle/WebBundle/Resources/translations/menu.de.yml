@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    backend:
+        menu:
+            main:
+                assortment: Kollektionen
+                configuration: Konfiguration
+                countries: Länder
+                customer: Kunden
+                dashboard: Dashboard
+                exchange_rates: Wechselkurse
+                general_settings: Allgemeine Einstellungen
+                homepage: Dein Shop
+                locales: Locales
+                new_order: Neue Bestellung
+                new_promotion: Neue Aktion
+                options: Produktoptionen verwalten
+                orders: Aktuelle Bestellungen
+                payment_methods: Bezahlmethoden
+                payments: Zahlungen
+                products: Produkte
+                promotions: Aktionen
+                properties: Eigenschaften
+                prototypes: Prototypen
+                sales: Aufträge
+                shipments: Lieferungen
+                shipping_categories: Versandgruppen
+                shipping_methods: Versandmethoden
+                stockables: Lagerbestände
+                tax_categories: Steuergruppen
+                tax_rates: Steuersätze
+                taxation_settings: Besteuerung
+                taxonomies: Kategorien
+                users: Benutzer
+                zones: Gebiete
+            sidebar:
+                assortment: Kollektionen
+                blocks: Blocks
+                configuration: Konfiguration
+                content: Content
+                countries: Länder
+                customer: Kunden
+                dashboard: Dashboard
+                exchange_rates: Wechselkurse
+                general_settings: Allgemeine Einstellungen
+                groups: Gruppen
+                homepage: Zurück zum Frontend
+                locales: Locales
+                new_order: Neue Bestellung
+                new_promotion: Neue Aktion hinzufügen
+                options: Produktoptionen verwalten
+                orders: Aktuelle Bestellungen
+                pages: Seiten
+                payment_methods: Bezahlmethoden
+                payments: Zahlungen
+                products: Produkte
+                promotions: Aktionen
+                properties: Eigenschaten
+                prototypes: Prototypen
+                sales: Aufträge
+                shipments: Lieferungen
+                shipping_categories: Versandgruppen
+                shipping_methods: Versandmethoden
+                stockables: Lagerbestände
+                tax_categories: Steuerkategorien
+                tax_rates: Steuersätze
+                taxation_settings: Gruppeneinstellungen
+                taxonomies: Gruppierung
+                users: Benutzer
+                zones: Gebiete
+    frontend:
+        menu:
+            account:
+                addresses: Mein Adressbuch
+                homepage: Home
+                orders: Meine Bestellungen / Meine Rechnungen
+                password: Mein Passwort
+                profile: Meine persönliche Informationen
+                shop: Zurück zum Shop
+            currency: Zeige Preise in %currency%
+            main:
+                account: Mein Account
+                administration: Administration
+                cart: Einkaufswagen (%items%) %total%
+                login: Login
+                logout: Logout
+                register: Register
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter

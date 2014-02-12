@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: $
+sylius:
+    flashes:
+        installed: Sylius wurde erfolgreich installiert.
+    form:
+        configuration:
+            database:
+                0: Datenbankverbindung
+                driver:
+                    0: Datenbanktreiber
+                    microsoft_sql_server: Microsoft SQL Server
+                    mysql: MySQL
+                    oracle: Oracle
+                    postgresql: PostgreSQL
+                    sqlite: SQLite
+                host: Datenbankserver
+                name: Datenbankname
+                password: Datenbank Passwort
+                port: Datenbank Port
+                user: Datenbankbenutzer
+            locale:
+                0: Locale Einstellungen
+                currency: Währung
+                locale: Locale
+            mailer:
+                0: E-Mail Einstellungen
+                host: E-Mail Host
+                password: E-Mail Passwort
+                transport:
+                    0: Transport
+                    gmail: Gmail
+                    mail: Mail
+                    sendmail: Sendmail
+                    smtp: SMTP
+                user: E-Mail Benutzer
+        setup:
+            email: E-Mail
+            load_fixtures: Load fixtures
+            plain_password: Passwort
+            username: Benutzername
+    process:
+        step:
+            check:
+                button:
+                    back: Zurück
+                    install: Installieren
+                    next: Weiter
+                header: Überprüfen der Systemvoraussetzungen <small>Sylius installer</small>
+                table:
+                    current: Aktuell
+                    required: Benötigt
+                    status: Status
+            configure:
+                header: Einstellungen <small>Sylius installer</small>
+            setup:
+                header: Administration Einstellungen <small>Sylius installer</small>
+            welcome:
+                content: <p>Willkommen beim Sylius installer.</p>
+                header: Willkommen <small>Sylius installer</small>
+€: €

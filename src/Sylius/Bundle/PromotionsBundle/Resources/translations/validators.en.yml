@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion:
+        description:
+            max_length: Promotion description must not be longer than 1 character.|Promotion description must not be longer than {{ limit }} characters.
+            min_length: Promotion description must be at least 1 character long.|Promotion description must be at least {{ limit }} characters long.
+            not_blank: Please enter promotion description.
+        name:
+            max_length: Promotion name must not be longer than 1 character.|Promotion name must not be longer than {{ limit }} characters.
+            min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
+            not_blank: Please enter promotion name.
+    promotion_coupon:
+        code:
+            max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.
+            min_length: Coupon code must be at least 1 character long.|Coupon code must be at least {{ limit }} characters long.
+            not_blank: Please enter coupon code.
+        usage_limit:
+            min: Coupon usage limit must be at least {{ limit }}.
+    promotion_coupon_generate_instruction:
+        amount:
+            min: Amount of coupons to generate must be at least {{ limit }}.
+            not_blank: Please enter amount of coupons to generate.
+        usage_limit:
+            min: Usage limit of generated coupons must be at least {{ limit }}.

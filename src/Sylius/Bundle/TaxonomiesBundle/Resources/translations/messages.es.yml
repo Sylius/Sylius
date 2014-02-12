@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        taxon:
+            name: Nombre
+            permalink: Permalink
+            parent: Padre
+            description: Descripción
+        taxonomy:
+            name: Nombre

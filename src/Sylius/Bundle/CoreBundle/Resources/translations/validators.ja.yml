@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+fos_user:
+    email:
+        already_used: メールアドレスは既に登録されています。
+        blank: メールアドレスを入力してください。
+        invalid: メールアドレスの形式が正しくありません。
+        long: メールアドレスが長すぎます。
+        short: メールアドレスが短すぎます。
+    password:
+        blank: パスワードを入力してください。
+        short: パスワードが短すぎます。
+    username:
+        already_used: ログイン名は既に使用されています。
+        blank: ログイン名を入力してください。
+        long: ログイン名が長すぎます。
+        short: ログイン名が短すぎます。
+sylius:
+    user:
+        first_name:
+            max: 名は{{ limit }}文字以内で入力してください。
+            min: 名は{{ limit }}文字以上入力してください。
+            not_blank: 名を入力してください。
+        last_name:
+            max: 姓は{{ limit }}文字以内で入力してください。
+            min: 姓は{{ limit }}文字以上入力してください。
+            not_blank: 姓を入力してください。
+    variant:
+        onHand:
+            min: 在庫は{{ limit }}以上で入力してください。
+            not_blank: 在庫を入力してください。
+        price:
+            min: 価格は{{ limit }}以上で入力してください。
+            not_blank: 価格を入力してください。
+sylius_shipping:
+    method:
+        zone:
+            not_blank: 対象の国・地域を選択してください。
+sylius_taxation:
+    rate:
+        zone:
+            not_blank: 対象の国・地域を選択してください。

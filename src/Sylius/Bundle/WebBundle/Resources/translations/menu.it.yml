@@ -1,0 +1,82 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    backend:
+        menu:
+            main:
+                assortment: Assortimento
+                configuration: Configurazione
+                countries: Paesi
+                dashboard: Pannello amministrazione
+                general_settings: Impostazioni generali
+                homepage: Il tuo negozio
+                new_order: Aggiungi nuovo ordine
+                new_promotion: Aggiugngi nuova promozione
+                options: Gestisci opzioni prodotto
+                orders: Ordini correnti
+                payment_methods: Metodi di pagamento
+                payments: Pagamenti
+                products: Prodotti
+                promotions: Promozioni
+                properties: Configura proprietà
+                prototypes: Prodotti prototipo
+                sales: Ordini
+                shipments: Spedizioni
+                shipping_categories: Categorie di spedizione
+                shipping_methods: Metodi di spedizione
+                stockables: Livelli inventario
+                tax_categories: Categorie di tassazione
+                tax_rates: Aliquote fiscali
+                taxation_settings: Impostazioni fiscali
+                taxonomies: Categorizzazione
+                zones: Zone
+            sidebar:
+                assortment: Assortimento
+                configuration: Configurazione
+                countries: Paesi
+                customer: Clienti
+                dashboard: Pannello amministrazione
+                general_settings: Impostazioni generali
+                homepage: Torna al frontend
+                new_order: Aggiungi nuovo ordine
+                new_promotion: Aggiungi nuova promozione
+                options: Gestisci opzioni
+                orders: Ordini correnti
+                payment_methods: Metodi di pagamento
+                payments: Pagamenti
+                products: Prodotti
+                promotions: Promozioni
+                properties: Configura proprietà
+                prototypes: Prototipi di prodotto
+                sales: Ordini
+                shipments: Spedizioni
+                shipping_categories: Categorie spedizioni
+                shipping_methods: Metodi di spedizione
+                stockables: Livelli inventario
+                tax_categories: Categorie tassazione
+                tax_rates: Aliquote fiscali
+                taxation_settings: Impostazioni fiscali
+                taxonomies: Categorizzazioni
+                users: Utenti
+                zones: Zone
+    frontend:
+        menu:
+            main:
+                administration: Amministrazione
+                cart: Vedi carrello (%items%) %total%
+                login: Login
+                logout: Logout
+                register: Registrati
+                account: Il mio account
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter
+            account:
+                homepage: Home
+                password: La mia password
+                profile: Le mie informazioni personali
+                shop: Ritorna al negozio

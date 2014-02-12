@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: Le nom de la ville ne doit pas être plus long que 255 caractères
+            min_length: Le nom de la ville doit être plus long que 2 caractères
+            not_blank: Veuillez entrer une ville
+        country:
+            not_blank: sylius.address.country.not_blank
+        first_name:
+            max_length: Le prénom ne doit pas être plus long que 255 caractères
+            min_length: Le prénom doit être plus long que 2 caractères
+            not_blank: Veuillez entrer votre prénom
+        last_name:
+            max_length: Le prénom ne doit pas être plus long que 255 caractères
+            min_length: Le nom doit être plus long que 2 caractères
+            not_blank: Veuillez entrer votre nom
+        postcode:
+            max_length: Le code postal ne doit pas être plus long que 255 caractères
+            min_length: Le code postal doit être plus long que 2 caractères
+            not_blank: Veuillez entrer un code postal
+        province:
+            valid: sylius.address.province.valid
+        street:
+            max_length: L'adresse ne doit pas être plus long que 255 caractères
+            min_length: L'adresse doit être plus long que 2 caractères
+            not_blank: Veuillez entrer une adresse
+    country:
+        iso_name:
+            not_blank: sylius.country.iso_name.not_blank
+        name:
+            max_length: sylius.country.name.max_length
+            not_blank: sylius.country.name.not_blank
+    province:
+        name:
+            max_length: sylius.province.name.max_length
+            min_length: sylius.province.name.min_length
+            not_blank: sylius.province.name.not_blank
+    zone:
+        members:
+            min_count: sylius.zone.members.min_count
+        name:
+            max_length: sylius.zone.name.max_length
+            not_blank: sylius.zone.name.not_blank

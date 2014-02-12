@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    backend:
+        menu:
+            main:
+                assortment: Assortment
+                configuration: Configuration
+                countries: Countries
+                customer: Customers
+                dashboard: Dashboard
+                exchange_rates: Exchange rates
+                general_settings: General settings
+                homepage: Your store
+                locales: Locales
+                new_order: Add new order
+                new_promotion: Add new promotion
+                options: Manage product options
+                orders: Current orders
+                payment_methods: Payment methods
+                payments: Payments
+                products: Products
+                promotions: Promotions
+                properties: Configure properties
+                prototypes: Product prototypes
+                sales: Orders
+                shipments: Shipments
+                shipping_categories: Shipping categories
+                shipping_methods: Shipping methods
+                stockables: Inventory levels
+                tax_categories: Taxation categories
+                tax_rates: Tax rates
+                taxation_settings: Taxation settings
+                taxonomies: Categorization
+                users: Users
+                zones: Zones
+            sidebar:
+                assortment: Assortment
+                blocks: Blocks
+                configuration: Configuration
+                content: Content
+                countries: Countries
+                customer: Customers
+                dashboard: Dashboard
+                exchange_rates: Exchange rates
+                general_settings: General settings
+                groups: Groups
+                homepage: Back to frontend
+                locales: Locales
+                new_order: Add new order
+                new_promotion: Add new promotion
+                options: Manage options
+                orders: Current orders
+                pages: Pages
+                payment_methods: Payment methods
+                payments: Payments
+                products: Products
+                promotions: Promotions
+                properties: Configure properties
+                prototypes: Product prototypes
+                sales: Orders
+                shipments: Shipments
+                shipping_categories: Shipping categories
+                shipping_methods: Shipping methods
+                stockables: Inventory levels
+                tax_categories: Taxation categories
+                tax_rates: Tax rates
+                taxation_settings: Taxation settings
+                taxonomies: Categorization
+                users: Users
+                zones: Zones
+    frontend:
+        menu:
+            account:
+                addresses: My address book
+                homepage: Home
+                orders: My orders / my invoices
+                password: My password
+                profile: My personal information
+                shop: Back to the shop
+            currency: Show prices in %currency%
+            main:
+                account: My account
+                administration: Administration
+                cart: View cart (%items%) %total%
+                login: Login
+                logout: Logout
+                register: Register
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter

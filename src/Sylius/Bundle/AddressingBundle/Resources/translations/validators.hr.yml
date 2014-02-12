@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: Naziv grada ne smije biti dulji od 255 znakova.|Naziv grada ne smije biti dulji od 255 znakova.
+            min_length: Naziv grada mora sadržavati najmanje dva znaka.|Grad mora sadržavati najmanje dva znaka.
+            not_blank: Unesite naziv grada.
+        country:
+            not_blank: Odaberite državu.
+        first_name:
+            max_length: Ime ne smije biti duže od 255 znakova.|Ime ne smije biti duže od 255 znakova.
+            min_length: Ime mora sadržavati najmanje dva znaka.|Ime mora sadržavati najmanje dva znaka.
+            not_blank: Unesite Vaše ime.
+        last_name:
+            max_length: Prezime ne smije biti duže od 255 znakova.|Prezime ne smije biti duže od 255 znakova.
+            min_length: Prezime mora sadržavati najmanje dva znaka.|Prezime mora sadržavati najmanje dva znaka.
+            not_blank: Unesite Vaše prezime.
+        postcode:
+            max_length: Poštanski broj ne smije biti duži od 255 znakova.|Poštanski broj ne smije biti duži od 255 znakova.
+            min_length: Poštanski broj mora sadržavati najmanje dva znaka.|Poštanski broj mora sadržavati najmanje dva znaka.
+            not_blank: Unesite poštanski broj.
+        province:
+            valid: Odaberite ispravnu regiju.
+        street:
+            max_length: Naziv ulice ne smije biti duži od 255 znakova.|Naziv ulice ne smije biti duži od 255 znakova.
+            min_length: Naziv ulice mora sadržavati najmanje dva znaka.|Naziv ulice mora sadržavati najmanje dva znakova.
+            not_blank: Unesite naziv ulice.
+    country:
+        iso_name:
+            not_blank: Unesite ISO kod države.
+        name:
+            max_length: Naziv države ne smije biti duži od 255 znakova.|Naziv države ne smije biti duži od 255 znakova.
+            not_blank: Unesite naziv države.
+    province:
+        name:
+            max_length: Naziv županije ne smije biti duži od 255 znakova.|Naziv županije ne smije biti duži od 255 znakova.
+            min_length: Naziv županije mora sadržavati najmanje dva znaka.|Naziv županije mora sadržavati najmanje dva znakova.
+            not_blank: Unesite naziv županije.
+    zone:
+        members:
+            min_count: Dodajte barem {{ limit }} jednog člana u zonu.
+        name:
+            max_length: Naziv regije ne smije biti duži od 255 znakova.|Naziv regije ne smije biti duži od 255 znakova.
+            not_blank: Unesite naziv regije.

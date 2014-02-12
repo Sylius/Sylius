@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: Unesite kod proizvoda.
+            unique: Kod proizvoda mora biti jedinstven.
+        name:
+            not_blank: Unesite naziv proizvoda.
+            min_length: Naziv proizvoda mora imati najmanje jedan znak.|Naziv proizvoda mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv proizvoda ne smije biti duži od jednog znaka.|Naziv proizvoda ne smije biti duži od {{ limit }} znakova.
+        description:
+            not_blank: Unesite opis proizvoda.
+            min_length: Opis proizvoda mora imati najmanje jedan znak.|Opis proizvoda mora imati najmanje {{ limit }} znakova.
+    variant:
+        sku:
+            not_blank: Unesite alternativni kod proizvoda.
+            unique: Alternativni kod proizvoda mora biti jedinstven.
+        combination: Verzija sa ovim opcijama već postoji.
+    option:
+        name:
+            not_blank: Unesite naziv svojstva.
+            min_length: Naziv svojstva mora imati najmanje jedan znak.|Naziv svojstva proizvoda mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv svojstva ne smije biti duži od jednog znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.
+        presentation:
+            not_blank: Unesite naziv svojstva.
+            min_length: Opis svojstva mora imati najmanje jedan znak.|Opis svojstva mora imati najmanje {{ limit }} znakova.
+            max_length: Opis svojstva ne smije biti duži od jednog znaka.|Opis svojstva artikla ne smije biti duži od {{ limit }} znakova.
+        values:
+            min_count: Unesite barem {{ limit }} opciju artikla.|nesite barem {{ limit }} opciju artikla.
+    option_value:
+        value:
+            not_blank: Unesite vrijednost svojstva.
+    property:
+        name:
+            not_blank: Unesite naziv svojstva artikla.
+            min_length: Naziv svojstva artikla mora imati najmanje jedan znak.|Naziv svojstva artikla mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv svojstva artikla ne smije biti duži od jednog znaka.|Naziv svojstva artikla ne smije biti duži od {{ limit }} znakova.
+        presentation:
+            not_blank: Unesite opis opcije artikla.
+            min_length: Opis svojstva mora imati najmanje jedan znak.|Opis svojstva mora imati najmanje {{ limit }} znakova.
+            max_length: Opcija artikla ne smije biti duža od jednog znaka.|Opcija artikla ne smije biti duža od {{ limit }} znakova.
+    product_property:
+        property:
+            not_blank: Odaberite opciju artikla.
+        value:
+            not_blank: Unesite vrijednost opcije artikla.
+    prototype:
+        name:
+            not_blank: Unesite naziv prototipa.
+            min_length: Naziv prototipa mora imati najmanje jedan znak.|Naziv prototipa mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv prototipa ne smije biti duži od jednog znaka.|Naziv prototipa ne smije biti duži od {{ limit }} znakova.

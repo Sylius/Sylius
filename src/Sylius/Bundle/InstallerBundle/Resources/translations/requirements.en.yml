@@ -1,0 +1,60 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    extensions:
+        0: extensions
+        accelerator:
+            0: Accelerator
+            help: Install and enable a PHP accelerator like APC (highly recommended).
+        apc: APC
+        ctype: Ctype
+        gd: GD
+        help: Install and enable the %extension% extension.
+        iconv: Iconv
+        icu: ICU
+        intl: Intl
+        json_encode: JSON
+        mbstring: Multibyte String
+        off: off
+        on: on
+        pcre: PCRE
+        pdo: PDO
+        php_xml: PHP-XML
+        session_start: Session
+        simplexml_import_dom: SimpleXML
+        token_get_all: Tokenizer
+    filesystem:
+        0: file system
+        cache:
+            0: cache
+            help: To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
+        exists: exists
+        logs:
+            0: logs
+            help: To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
+        not_exists: not exists
+        not_writable: not writable
+        parameters:
+            0: parameters.yml
+            help: To set permissions run: sudo chmod a+w %path%
+        vendors: vendors
+        writable: writable
+    settings:
+        0: PHP version and settings
+        any: any
+        detect_unicode: detect_unicode
+        magic_quotes_gpc: magic_quotes_gpc
+        non_deprecated: non deprecated
+        off: off
+        on: on
+        register_globals: register_globals
+        session:
+            auto_start: session.auto_start
+        short_open_tag: short_open_tag
+        timezone: timezone
+        timezone_deprecated:
+            0: Deprecated timezone
+            help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
+        version: PHP version
+        version_recommanded: Recommended PHP version

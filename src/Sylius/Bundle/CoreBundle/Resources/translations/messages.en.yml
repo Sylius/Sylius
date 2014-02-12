@@ -1,0 +1,93 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+    checkout:
+        shipping_method:
+            not_blank: Please select shipping method.
+    form:
+        action:
+            add_product_configuration:
+                price: Unit price
+                quantity: Quantity
+                variant: Variant
+        block:
+            body: Body
+            id: ID
+            title: Title
+        cart:
+            coupon: Coupon
+        checkout:
+            addressing:
+                different_billing_address: Use different address for billing?
+            payment_method: Payment Method
+            shipping_method: Shipping Method
+        group:
+            name: Name
+            roles: Roles
+        image:
+            file: Image
+        locale:
+            code: Code
+            enabled: Enabled
+        order_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Number
+            total_from: From
+            total_to: To
+        page:
+            body: Body
+            id: ID
+            title: Title
+        product:
+            restricted_zone: Restricted zone
+            shipping_category: Shipping category
+            short_description: Short description
+            tax_category: Tax category
+            variant_selection_method: Variant selection method
+        product_filter:
+            name: Name
+            sku: SKU
+        settings:
+            general:
+                currency: Default currency
+                locale: Language
+                meta_description: Meta description
+                meta_keywords: Meta keywords
+                title: Page title
+            taxation:
+                default_tax_zone: Default tax zone
+        shipment_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Order number
+            shipping_address: Ship to name
+        shipping_method:
+            zone: Zone
+        taxon:
+            file: Select image
+        taxonomy:
+            file: Select image
+        user:
+            billing_address: Billing address
+            different_billing_address: Use different address for billing?
+            enabled: Enabled
+            first_name: First name
+            groups: Groups
+            last_name: Last name
+            password: Password
+            shipping_address: Shipping address
+        user_filter:
+            query: Search
+        variant:
+            available_on_demand: Available on demand
+            depth: Depth
+            height: Height
+            images: Images
+            on_hand: Current stock
+            price: Price
+            sku: SKU
+            weight: Weight
+            width: Width

@@ -1,0 +1,719 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+email:
+    order_confirmation:
+        subject: email.order_confirmation.subject
+sylius:
+    account:
+        address:
+            action:
+                billing: Set as default billing address
+                create: Create a new address
+                delete: Delete
+                edit: Edit
+                shipping: Set as default shipping address
+            create: Create a new address
+            default:
+                billing: Default billing address
+                no_billing: No default billing address
+                no_shipping: No default shipping address
+                shipping: Default shipping address
+            empty: You have created no address yet.
+            list: All your addresses
+            update: Edit my address
+        home:
+            email: Email : 
+            id: Customer ID : 
+            outline: Enjoy all the features that are available on your personal space to view, track and manage all your data.
+            since: You are customer since
+            welcome: Welcome to your space
+        order:
+            created_at: Placed at
+            details: Details of your order
+            download_invoice: Download the invoice
+            empty: You have placed no order yet.
+            invoice: Invoice
+            list: All your orders
+            number: Number : 
+            payment_mode: Payment mode : 
+            placed_at: Placed at %at%
+            shipment:
+                pending: Pending
+                ready: Ready since %at%
+                returned: Returned %at%
+                shipped: Shipped %at%
+            shipment_mode: Shipment mode : 
+            state: State : 
+            total: Total
+            tracking_number: Tracking number
+        title: My account
+    add_to_cart: Add to cart
+    address:
+        city: City
+        company: Company
+        country: Country
+        firstname: First name
+        lastname: Last name
+        postcode: Postcode
+        province: Province
+        street: Street
+    alert:
+        error: Error
+        info: Information
+        success: Success
+        warning: Warning
+    backend:
+        alert:
+            info: Information
+        dashboard:
+            chart_order_count: Number of orders
+            chart_order_total: Order value
+            header: Administration dashboard
+            orders: Last week orders
+            revenue: Last week revenue
+            subheader: Overview of your store
+        logout: Logout
+        quick_links:
+            add_product: New product
+            orders: Latest orders
+            products: Your products
+            users: Users
+        statistics:
+            0: This month's statistics
+            orders_this_month: Total orders
+            registrations_this_month: Total registrations
+            sales_this_month: Sales
+    backend_welcome: Hello <b>%name%</b>!
+    block:
+        body: Body
+        create: Create block
+        create_header: Creating new content block
+        id: ID
+        index_header: Content blocks
+        no_results: There are no blocks to display.
+        title: Title
+        update_header: Editing content block
+        updated_at: Last update
+    breadcrumb:
+        assortment: Assortment
+        block:
+            index: Content Blocks
+        build: Build
+        configuration: Configuration
+        country:
+            index: Countries
+        customers: Customers
+        edit: Edit
+        exchange_rate:
+            index: Exchange Rates
+        general_settings: General Settings
+        generate: Generate
+        group:
+            index: Groups
+        inventory:
+            index: Inventory
+        locale:
+            index: Locales
+        new: New
+        option:
+            index: Options
+        order:
+            index: Orders
+        page:
+            index: Static Pages
+        payment:
+            index: Payments
+        payment_method:
+            index: Payment Methods
+        product:
+            index: Products
+        promotion:
+            index: Promotions
+        promotion_coupon:
+            index: Coupons
+        property:
+            index: Properties
+        prototype:
+            index: Prototypes
+        sales: Sales
+        shipment:
+            index: Shipments
+        shipping_category:
+            index: Shipping Categories
+        shipping_method:
+            index: Shipping Methods
+        tax_category:
+            index: Tax Categories
+        tax_rate:
+            index: Tax Rates
+        taxation_settings: Taxation Settings
+        taxonomy:
+            index: Taxonomies
+        update: Edit
+        user:
+            index: Users
+        zone:
+            index: Zones
+    browse_products: Browse products
+    cancel: Cancel
+    cart:
+        empty: Your cart is empty
+        summary:
+            add_coupon: OK
+            checkout: Checkout
+            clear: Clear cart
+            grand_total: Grand total
+            product: Product
+            quantity: Qty
+            save: Save
+            total: Total
+            unit_price: Price
+        summary_header: Cart summary
+        total_items: 1 item|%count% items
+    checkout:
+        addressing:
+            header: Addressing step
+        back: Back
+        finalize:
+            address:
+                city: City
+                country: Country
+                firstname: First name
+                lastname: Last name
+                postcode: Postcode
+                province: Province
+                street: Street
+            header: Order summary
+            order:
+                billing_address: Billing address
+                items_total: Items total
+                no_items: This order does not contain any items
+                no_promotion: No promotion applied
+                no_shipping_charges: No shipping charges applied
+                no_taxes: No taxes applied
+                promotion_discount: Promotion discounts
+                promotion_total: Promotion total
+                shipping_address: Shipping address
+                shipping_charges: Shipping charges
+                shipping_total: Shipping total
+                tax_total: Tax total
+                taxes: Taxes
+                total: Total
+            order_item:
+                quantity: Qty
+                total: Total
+                unit_price: Unit Price
+            place_order: Place order
+            product:
+                name: Name
+        forward: Continue
+        payment:
+            header: Payment method
+        security:
+            existing_customer: Existing Customer
+            header: Sign in to the store <small>or create new account</small>
+            login: Login
+            new_customer: New Customer
+            register: Register
+        shipping:
+            error: We're sorry, but our shop is not able to provide product shipping to country which you have chosen.
+            header: Shipping method
+    confirmation:
+        message: Do you want to delete this item?
+        title: Confirmation
+    country:
+        add_province: Add province
+        create: Create country
+        create_header: New country
+        id: ID
+        index_header: Countries
+        iso_name: ISO name
+        manage: Manage countries
+        name: Name
+        no_results: There are no countries configured.
+        show_header: Country details
+        update_header: Editing country
+    create: Create
+    created_at: Created at
+    delete: delete
+    deleted: Deleted
+    edit: edit
+    email: E-Mail
+    exchange_rate:
+        create: Create exchange rate
+        create_header: New exchange rate
+        currency: currency
+        id: ID
+        index_header: Exchange rates
+        no_results: There are no exchange rates to display.
+        rate: rate
+        update_header: Editing exchange rate
+        updated_at: last update
+    filter: Filter
+    form:
+        cart:
+            coupon: If you have a promotion coupon, enter it here
+        choose_file: Choose file
+        frontend:
+            password:
+                confirmation: Confirmation
+                current: Current password
+                new: New password
+                title: Change your password
+            profile:
+                title: Edit your personal information
+        login:
+            email: Email
+            password: Password
+        option_value:
+            add_value: Add value
+        profile:
+            email: Email
+            firstName: First name
+            lastName: Last name
+    gallery:
+        next: Next
+        previous: Previous
+        slideshow: Slideshow
+    generate: Generate
+    group:
+        create: Create group
+        create_header: Adding new user groups
+        id: ID
+        index_header: Groups
+        name: Name
+        no_results: There are no groups to display.
+        roles: Roles
+        update_header: Edit group
+    hide_deleted: Hide deleted
+    history:
+        0: History
+        action: Action
+        author: Author
+        data: Data
+        logged_at: Logged at
+        version: Version
+    homepage:
+        splash:
+            headline: Welcome to Sylius
+            subheadline: Modern ecommerce for Symfony2
+    inventory_unit:
+        created_at: Created
+        inventory_state: Inventory state
+        name: Name
+        no_results: There are no inventory units to display.
+        shipping_state: Shipping state
+        sku: SKU
+        updated_at: Last update
+    locale:
+        code: Code
+        create: Create locale
+        create_header: Adding new locale
+        enabled: Enabled
+        index_header: Index of all configured locales
+        no_results: There are no locales configured.
+        update_header: Edit locale
+        updated_at: Last update
+    login: Login
+    login_header: Administration
+    logo: Sylius
+    manage: Manage
+    meta:
+        backend_title: Sylius dashboard.
+        frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework.
+        frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
+        frontend_title: Sylius, modern ecommerce for Symfony2
+    na: N/A
+    newest: Newest products
+    no: no
+    no_results: sylius.no_results
+    option:
+        create: Create option
+        create_header: New product option
+        index_header: Product options
+        manage: Manage options
+        name: name
+        no_results: There are no options configured.
+        presentation: presentation
+        update_header: Editing option
+        updated_at: last update
+        values: values
+    order:
+        billing_address: Billing address
+        create: Create order
+        create_header: New order
+        created_at: Creation time
+        general_info: General info
+        id: ID
+        index_header: Current orders
+        inventory_tracking: Inventory tracking
+        items_total: Items total
+        manage: Manage orders
+        no_items: This order does not contain any items
+        no_results: You have no new orders
+        no_shipments: There are no shipments for this order
+        no_shipping_charges: No shipping charges applied
+        no_taxes: No taxes applied
+        number: Number
+        payment: Payment
+        payment_state: Payment state
+        payment_states:
+            balance_due: Balance due
+        promotion_total: Promotion total
+        recent_header: Recent orders
+        shipment_state: Shipment state
+        shipment_states:
+            pending: Pending
+        shipments: Shipments
+        release_inventory: Release inventory
+        inventory_unit:
+            backorder: Backorder
+            fulfill: Fulfill
+            return: Return
+        shipping_address: Shipping address
+        shipping_charges: Shipping charges
+        shipping_total: Shipping total
+        show_header: Order #%number%
+        state:
+            cart_locked: Cart locked
+            checkout: Checkout
+            order_confimed: Order confirmed
+            ordered: Ordered
+        tax_total: Tax total
+        taxes: Taxes
+        total: Total
+        update_header: Editing order
+        user: User
+    shipment:
+        ship: Ship
+        created_at: Created at
+        id: ID
+        index_header: Shipments
+        inventory_state: Inventory state
+        manage: Manage shipments
+        method: Method
+        modified: Modified
+        name: Name
+        no_items: There are no items to display.
+        no_results: There are no shipments to display.
+        order: Order
+        show_header: Shipment details
+        sku: SKU
+        state: State
+        tracking_code: Tracking Code
+        update: Edit
+        update_header: Editing shipment
+        updated_at: Last update
+    order_item:
+        product: Item
+        quantity: Qty
+        sellable: Product
+        total: Total
+        unit_price: Unit price
+    out_of_stock: Out of stock
+    page:
+        body: Body
+        create: Create new page
+        create_header: Creating new static content
+        id: ID
+        index_header: Pages
+        no_results: There are no static pages to display.
+        title: Title
+        update_header: Last update
+    password: Password
+    payment:
+        amount: Amount
+        create: Create payment
+        create_header: New payment
+        created_at: Created at
+        id: ID
+        index_header: Payments
+        manage: Manage payments
+        method: Method
+        no_results: There are no payments configured.
+        state:
+            0: State
+            checkout: Checkout
+            completed: Completed
+            failed: Failed
+            new: New
+            pending: Pending
+            processing: Processing
+            unknown: Unknown
+            void: Void
+        update_header: Editing payment
+        updated_at: Last update
+    payment_method:
+        create: Create payment method
+        create_header: New payment method
+        enabled: Is enabled?
+        gateway: gateway
+        id: ID
+        index_header: Payment methods
+        name: Name
+        no_results: There are no payment methods configured.
+        update_header: Editing payment method
+        updated_at: Last update
+    product:
+        add_property: Add property
+        available_on: Available on
+        available_on_demand: Available on demand
+        categorization: Categorization
+        contain_variants: Contain Variants
+        create: Create product
+        create_header: New product
+        description: Description
+        generate_variants: Generate variants
+        index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
+        index_header: Products <small>Index of all products in your store</small>
+        manage: Manage products
+        name: Name
+        no_description: <i>No description...</i>
+        no_images: There are no images for this product
+        no_options: There are no options for this product
+        no_properties: This product has no properties defined
+        no_results: There are no products to display.
+        no_shipping_category: No shipping category
+        no_short_description: <i>No short description</i>
+        no_sku: No SKU
+        no_tax_category: No tax category
+        no_taxons: There are no taxons for this product
+        options: Options
+        price: Retail price
+        properties: Properties
+        restricted_zone: Restricted zone
+        shipping_category: Shipping category
+        show: View more
+        show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
+        show_in_store: show in store
+        sku: SKU
+        stock: Current stock
+        tabs:
+            categorization: Categorization
+            images: Images
+            options: Options
+            product: Product
+            properties: Properties
+        tax_category: Tax category
+        unavailable: Unavailable
+        update_header: Editing product
+        updated_at: Last update
+        variant_selection_method: Variant selection method
+        view_details: View %product% details.
+    product_not_available_in_zone: Not available in your country
+    promotion:
+        actions: Actions
+        add_action: Add action
+        add_rule: Add rule
+        coupon_based: Coupon based?
+        create: Create promotion
+        create_header: New promotion
+        created_at: Created at
+        description: Description
+        ends_at: Ends at
+        general_info: General Info
+        id: ID
+        index_header: Current promotions
+        manage: Manage promotions
+        name: Name
+        no_results: There are no promotions configured.
+        rules: Rules
+        show_header: Promotion details
+        starts_at: Starts at
+        update_header: Editing promotion
+        updated_at: Last update
+        usage_limit: Usage limit
+        used: Used
+    promotion_action:
+        configuration: Configuration
+        type: Type
+    promotion_coupon:
+        create: Add coupon
+        create_header: Create new coupon
+        generate: Generate coupons
+        generate_header: Generating coupons
+        index: List coupons
+        index_header: Coupons
+        no_results: There are no coupon to display.
+        total_results: Total: %total%
+        update_header: Editing coupon
+    promotion_rule:
+        configuration: Configuration
+        type: Type
+    property:
+        add_choice: Add choice
+        create: Create property
+        create_header: New product property
+        index_header: Product properties
+        manage: Manage properties
+        name: name
+        no_results: There are no properties configured.
+        presentation: presentation
+        type: type
+        update_header: Editing property
+        updated_at: last update
+    prototype:
+        build: Build prototype
+        build_header: Building product from prototype
+        create: Create prototype
+        create_header: New prototype
+        index_header: Product prototypes
+        name: name
+        no_results: There are no prototypes defined.
+        options: options
+        properties: properties
+        update_header: Editing prototype
+        updated_at: last update
+    province:
+        provinces: Provinces
+    remember_me: Remember me?
+    save_changes: Save changes
+    search: Search
+    settings:
+        general_header: General settings
+        taxation_header: Taxation settings
+    shipment_category:
+        manage: Manage shipping categories
+    shipping_address: Shipping address
+    shipping_category:
+        create: Create shipping category
+        create_header: New shipping category
+        id: ID
+        index_header: Shipping categories
+        manage: Manage shipping categories
+        name: Name
+        no_results: There are no shipping categories configured.
+        update_header: Editing shipping category
+        updated_at: Last update
+    shipping_method:
+        calculator: Calculator
+        category: Category
+        create: Create shipping method
+        create_header: New shipping method
+        enabled: Is enabled?
+        id: ID
+        index_header: Shipping methods
+        manage: Manage shipping methods
+        name: Name
+        no_results: There are no shipping methods configured.
+        show_header: Shipping method details
+        update_header: Editing shipping method
+        updated_at: Last update
+        zone: Zone
+    shop_by: Shop by
+    show: details
+    show_all: Show all
+    show_deleted: Show deleted
+    stockable:
+        index_header: Inventory <small>Here you can see current stock levels</small>
+        name: name
+        no_results: There are no inventory items to display.
+        on_hand: stock level
+        on_hold: on hold
+        sku: sku
+        updated_at: last update
+    tax_category:
+        create: Create tax category
+        create_header: New tax category
+        description: Description
+        id: ID
+        index_header: Taxation categories
+        manage: Manage tax categories
+        name: Name
+        no_description: No description
+        no_results: There are no tax categories configured.
+        update_header: Editing tax category
+        updated_at: Last update
+    tax_rate:
+        amount: Amount
+        calculator: Calculator
+        category: Category
+        create: Create tax rate
+        create_header: New tax rate
+        included_in_price: Included in price?
+        index_header: Tax rates
+        manage: Manage tax rates
+        name: Name
+        no_results: There are no tax rates configured.
+        show_header: Tax rate details
+        update_header: Updating tax rate
+        updated_at: Last update
+        zone: Zone
+    taxon:
+        create: Create taxon
+        create_header: New taxon
+        image: Choose image
+        name: Name
+        no_image: There is no image for this taxon
+        no_results: There are no taxons to display.
+        product_index_header: Products categorized as "%name%"
+        update_header: Editing taxon
+    taxonomy:
+        create: Create taxonomy
+        create_header: New taxonomy
+        image: Choose image
+        index_header: Categorization <small>Here you see the defined taxonomies</small>
+        manage: Manage taxonomies
+        name: Name
+        no_image: There is no image for this taxonomy
+        no_results: There are no taxonomies defined.
+        show_header: Taxonomy <small><strong>%name%</strong></small>
+        update_header: Editing taxonomy
+    total_quantity: Total Qty
+    unknown: Unknown
+    user:
+        billing_address: Billing address
+        create: create user
+        create_header: New user
+        email: E-Mail
+        enabled: Confirmed?
+        filter:
+            all: Show all users
+            unconfirmed: Unconfirmed accounts
+        first_name: First name
+        general_info: User "%username%" general info
+        id: ID
+        index_header: Users <small>List of all users registered in store</small>
+        last_login: Last login
+        last_name: Last name
+        impersonate: Log in as this user
+        manage: manage users
+        no_results: There are no users to display.
+        order:
+            no_results: There are no orders for this user to display.
+        orders: User orders
+        recent_header: Recent users
+        registration_date: Registration date
+        shipping_address: Shipping address
+        show_header: User details
+        update_header: Editing user
+        username: Username
+    variant:
+        add_image: Add image
+        availability: Availability
+        available_on_demand: Available on demand
+        create: Create variant
+        create_header: New product variant
+        delete_image: Delete image
+        last_update: Last update
+        no_results: There are no variants to display.
+        options: Options
+        price: Price
+        sku: SKU
+        stock: Current stock
+        update_header: Editing variant
+    yes: yes
+    zone:
+        add_member: Add member
+        create: Create zone
+        create_header: New zone
+        index_header: Zones
+        manage: Manage zones
+        name: Name
+        no_results: There are no zones configured.
+        show_header: Zone details
+        type: Type
+        update_header: Editing zone
+    zone_member:
+        members: Members

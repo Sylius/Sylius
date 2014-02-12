@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        cart_save_completed: Košarica je ispravno ažurirana.
+        cart_clear_completed: Košarica je uspješno uklonjena.
+        item_add_completed: Artikal je uspješno dodan u košaricu.
+        item_remove_completed: Artikal je uspješno izbrisan iz košarice.
+        item_add_error: Došlo je do pogreške kod dodavanja artikla u košaricu.
+        item_remove_error: Došlo je do pogreške prilikom brisanja iz košarice.

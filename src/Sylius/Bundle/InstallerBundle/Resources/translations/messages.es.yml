@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: $
+sylius:
+    flashes:
+        installed: Sylius se ha instalado correctamente.
+    form:
+        configuration:
+            database:
+                0: Conexión con la base de datos.
+                driver:
+                    0: Driver
+                    microsoft_sql_server: Microsoft SQL Server
+                    mysql: MySQL
+                    oracle: Oracle
+                    postgresql: PostgreSQL
+                    sqlite: SQLite
+                host: Servidor
+                name: Nombre
+                password: Contraseña
+                port: Puerto
+                user: Usuario
+            locale:
+                0: Configuración del idioma
+                currency: Moneda
+                locale: Idioma
+            mailer:
+                0: Configuración de Mailer
+                host: Servidor
+                password: Contraseña
+                transport:
+                    0: Transporte
+                    gmail: Gmail
+                    mail: Mail
+                    sendmail: Sendmail
+                    smtp: SMTP
+                user: Usuario
+        setup:
+            email: Email
+            load_fixtures: Cargar datos de prueba
+            plain_password: Contraseña
+            username: Username
+    process:
+        step:
+            check:
+                button:
+                    back: Atrás
+                    install: Instalar
+                    next: Siguiente
+                header: Comprobar requisitos del sistema <small>instalador de Sylius</small>
+                table:
+                    current: Actual
+                    required: Requerido
+                    status: Estado
+            configure:
+                header: Configuración <small>instalador de Sylius</small>
+            setup:
+                header: Configuración de administración <small>instalador de Sylius</small>
+            welcome:
+                content: <p>Bienvenido al instalador de Sylius.</p>
+                header: Bienvenido <small>instalador de Sylius</small>
+€: €
