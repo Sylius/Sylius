@@ -179,16 +179,16 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_canceled(
+    function it_should_abandon_cart_if_payment_status_canceled(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
 
-        $cartProvider->abandonCart()->shouldNotBeCalled();
+        $cartProvider->abandonCart()->shouldBeCalled();
 
-        $event->setResponse(new RedirectResponse('/payment'))->shouldBeCalled();
+        $event->setResponse(new RedirectResponse('/payment'))->shouldNotBeCalled();
 
         $this->abandonCart($event);
     }

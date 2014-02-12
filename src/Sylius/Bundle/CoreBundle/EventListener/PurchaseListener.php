@@ -38,7 +38,14 @@ class PurchaseListener
 
     public function abandonCart(PurchaseCompleteEvent $event)
     {
-        if (in_array($event->getSubject()->getState(), array(PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED))) {
+        $states = array(
+            PaymentInterface::STATE_PENDING,
+            PaymentInterface::STATE_PROCESSING,
+            PaymentInterface::STATE_COMPLETED,
+            PaymentInterface::STATE_CANCELLED
+        );
+
+        if (in_array($event->getSubject()->getState(), $states)) {
             $this->cartProvider->abandonCart();
 
             return;
