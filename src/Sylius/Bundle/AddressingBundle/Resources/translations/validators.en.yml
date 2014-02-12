@@ -27,6 +27,7 @@ sylius:
             max_length: Street must not be longer than 255 characters|Street must not be longer than 255 characters.
             min_length: Street must be at least 2 characters long|Street must be at least 2 characters long.
             not_blank: Please enter street.
+        not_shippable: This address is not a valid shipping destination.
     country:
         iso_name:
             not_blank: Please enter country ISO code.
