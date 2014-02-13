@@ -32,7 +32,10 @@ class ShipmentController extends ResourceController
 
             $this->flashHelper->setFlash('success', 'sylius.shipment.ship.success');
 
-            return $this->redirectHandler->redirectTo($shipment);
+            return $this->redirectHandler->redirectToRoute(
+                $this->config->getRedirectRoute('show'),
+                $this->config->getRedirectParameters($shipment)
+            );
         }
 
         $view = $this
