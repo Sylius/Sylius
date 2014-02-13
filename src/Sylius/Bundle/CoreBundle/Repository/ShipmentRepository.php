@@ -53,13 +53,13 @@ class ShipmentRepository extends EntityRepository
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte($this->getAlias().'.createdAt', ':createdAtFrom'))
-                ->setParameter('createdAtFrom', $criteria['createdAtFrom'])
+                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00',strtotime($criteria['createdAtFrom'])))
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte($this->getAlias().'.createdAt', ':createdAtTo'))
-                ->setParameter('createdAtTo', $criteria['createdAtTo'])
+                ->setParameter('createdAtTo', date('Y-m-d 23:59:59', strtotime($criteria['createdAtTo'])))
             ;
         }
 
