@@ -26,4 +26,13 @@ interface CartRepositoryInterface extends OrderRepositoryInterface
      * @return array
      */
     public function findExpiredCarts();
+
+    /**
+     * Get one cart
+     *
+     * @param integer $identifier
+     *
+     * @return CartInterface|null
+     */
+    public function findOneCartByIdentifier($identifier);    
 }
