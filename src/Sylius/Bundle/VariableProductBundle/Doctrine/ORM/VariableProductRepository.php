@@ -26,9 +26,9 @@ class VariableProductRepository extends EntityRepository
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()
-            ->select('product, option, variant')
-            ->leftJoin('product.options', 'option')
-            ->leftJoin('product.variants', 'variant')
+            ->select($this->getAlias().', option, variant')
+            ->leftJoin($this->getAlias().'.options', 'option')
+            ->leftJoin($this->getAlias().'.variants', 'variant')
         ;
     }
 
