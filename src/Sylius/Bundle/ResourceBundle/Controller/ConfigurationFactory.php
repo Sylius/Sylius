@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Doctrine\Common\Inflector\Inflector;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

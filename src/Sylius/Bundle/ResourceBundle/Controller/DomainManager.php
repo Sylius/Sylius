@@ -93,7 +93,6 @@ class DomainManager
         return $resource;
     }
 
-
     public function dispatchEvent($name, Event $event)
     {
         $name = $this->config->getEventName($name);

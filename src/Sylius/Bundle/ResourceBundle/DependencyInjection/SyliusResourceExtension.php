@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DatabaseDriverFactoryInterface;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\ResourceServicesFactory;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
