@@ -31,7 +31,9 @@ class ResourceResolver
      * Get resources via repository based on the configuration.
      *
      * @param RepositoryInterface $repository
-     * @param Configuration       $configuration
+     * @param string              $defaultMethod
+     * @param array               $defaultArguments
+     * @return mixed
      */
     public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
     {
@@ -45,7 +47,9 @@ class ResourceResolver
      * Create resource.
      *
      * @param RepositoryInterface $repository
-     * @param Configuration       $configuration
+     * @param string              $defaultMethod
+     * @param array               $defaultArguments
+     * @return mixed
      */
     public function createResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
     {
