@@ -26,8 +26,6 @@ class SyliusPaymentsExtension extends BaseExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config';
-
         list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);

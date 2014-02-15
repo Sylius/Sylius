@@ -34,8 +34,6 @@ class SyliusCartExtension extends BaseExtension implements PrependExtensionInter
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config';
-
         list($config) = $this->configure($config, new Configuration(), $container);
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
