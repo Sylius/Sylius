@@ -33,6 +33,7 @@
         <service id="sylius.generator.variant" class="%sylius.generator.variant.class%">
             <argument type="service" id="validator" />
             <argument type="service" id="sylius.repository.variant"/>
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="sylius.validator.variant.unique" class="%sylius.validator.variant.unique.class%">
