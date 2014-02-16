@@ -286,6 +286,7 @@
             <argument type="service" id="translator" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" priority="-50" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
