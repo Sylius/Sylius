@@ -25,16 +25,6 @@ class ResourceEvent extends GenericEvent
     const TYPE_INFO     = 'info';
     const TYPE_SUCCESS  = 'success';
 
-    public function stop($message, $type = self::TYPE_ERROR, $parameters = array())
-    {
-        $this->error = true;
-        $this->messageType = $type;
-        $this->message = $message;
-        $this->messageParameters = $parameters;
-
-        $this->stopPropagation();
-    }
-
     /**
      * Indicate if an error has been detected
      *
@@ -62,6 +52,23 @@ class ResourceEvent extends GenericEvent
      * @var array
      */
     protected $messageParameters = array();
+
+    /**
+     * Stop event propagation
+     *
+     * @param string $message
+     * @param string $type
+     * @param array  $parameters
+     */
+    public function stop($message, $type = self::TYPE_ERROR, $parameters = array())
+    {
+        $this->error = true;
+        $this->messageType = $type;
+        $this->message = $message;
+        $this->messageParameters = $parameters;
+
+        $this->stopPropagation();
+    }
 
     /**
      * Get error property
