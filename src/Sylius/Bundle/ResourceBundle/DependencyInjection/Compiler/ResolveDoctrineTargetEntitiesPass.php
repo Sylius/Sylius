@@ -24,7 +24,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class ResolveDoctrineTargetEntitiesPass implements CompilerPassInterface
 {
+    /**
+     * @var array $interfaces
+     */
     private $interfaces;
+
+    /**
+     * @var string $bundlePrefix
+     */
     private $bundlePrefix;
 
     public function __construct($bundlePrefix, array $interfaces)
@@ -44,6 +51,11 @@ class ResolveDoctrineTargetEntitiesPass implements CompilerPassInterface
         }
     }
 
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return string
+     */
     private function getDriver(ContainerBuilder $container)
     {
         return $container->getParameter(sprintf('%s.driver', $this->bundlePrefix));

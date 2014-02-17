@@ -53,6 +53,7 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
+        /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
         $configuration = $eventArgs->getEntityManager()->getConfiguration();
 
@@ -75,7 +76,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                     $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
                     if ($parentMetadata->isMappedSuperclass) {
                         foreach ($parentMetadata->getAssociationMappings() as $key => $value) {
-                            if (ClassMetadataInfo::ONE_TO_MANY === $value['type'] || ClassMetadataInfo::ONE_TO_ONE === $value['type']) {
+                            if (ClassMetadataInfo::ONE_TO_MANY === $value['type'] ||
+                                ClassMetadataInfo::ONE_TO_ONE === $value['type']) {
                                 $metadata->associationMappings[$key] = $value;
                             }
                         }
@@ -84,7 +86,8 @@ class LoadMetadataSubscriber implements EventSubscriber
             }
         } else {
             foreach ($metadata->getAssociationMappings() as $key => $value) {
-                if ($value['type'] === ClassMetadataInfo::ONE_TO_MANY || $value['type'] === ClassMetadataInfo::ONE_TO_ONE) {
+                if ($value['type'] === ClassMetadataInfo::ONE_TO_MANY ||
+                    $value['type'] === ClassMetadataInfo::ONE_TO_ONE) {
                     unset($metadata->associationMappings[$key]);
                 }
             }

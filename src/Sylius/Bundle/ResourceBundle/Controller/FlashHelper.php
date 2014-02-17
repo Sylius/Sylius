@@ -22,8 +22,19 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class FlashHelper
 {
+    /**
+     * @var Configuration
+     */
     private $config;
+
+    /**
+     * @var TranslatorInterface
+     */
     private $translator;
+
+    /**
+     * @var SessionInterface
+     */
     private $session;
 
     public function __construct(Configuration $config, TranslatorInterface $translator, SessionInterface $session)
@@ -33,29 +44,48 @@ class FlashHelper
         $this->session = $session;
     }
 
-    public function setFlash($type, $event, $params = array())
+    /**
+     * @param string $type
+     * @param string $eventName
+     * @param array  $params
+     *
+     * @return mixed
+     */
+    public function setFlash($type, $eventName, $params = array())
     {
         /** @var FlashBag $flashBag */
         $flashBag = $this->session->getBag('flashes');
-        $flashBag->add($type, $this->generateFlashMessage($event, $params));
+        $flashBag->add($type, $this->generateFlashMessage($eventName, $params));
     }
 
-    private function generateFlashMessage($event, $params = array())
+    /**
+     * @param string $eventName
+     * @param array  $params
+     *
+     * @return string
+     */
+    private function generateFlashMessage($eventName, $params = array())
     {
-        if (false === strpos($event, 'sylius.')) {
-            $message = $this->config->getFlashMessage($event);
+        if (false === strpos($eventName, 'sylius.')) {
+            $message = $this->config->getFlashMessage($eventName);
             $translatedMessage = $this->translateFlashMessage($message, $params);
 
             if ($message !== $translatedMessage) {
                 return $translatedMessage;
             }
 
-            return $this->translateFlashMessage('sylius.resource.'.$event, $params);
+            return $this->translateFlashMessage('sylius.resource.'.$eventName, $params);
         }
 
-        return $this->translateFlashMessage($event, $params);
+        return $this->translateFlashMessage($eventName, $params);
     }
 
+    /**
+     * @param string $message
+     * @param array  $params
+     *
+     * @return string
+     */
     private function translateFlashMessage($message, $params = array())
     {
         $resource = ucfirst(str_replace('_', ' ', $this->config->getResourceName()));

@@ -29,6 +29,9 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
         return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository';
