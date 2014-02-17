@@ -17,7 +17,7 @@ doctrine:
 
 sylius_money:
     currency: EUR
-    locale: en
+    locale: en_US
 
 sylius_payments:
     gateways:
