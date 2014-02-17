@@ -72,6 +72,42 @@ Below you can see the usage for specifying a custom form.
                 template: App:Backend/User:create.html.twig
                 form: app_user_custom
 
+Using custom factory method
+---------------------------
+
+By default, ``ResourceController`` will use the ``createNew`` method with no arguments to create a new instance of your object. However, this behavior can be modified.
+To use different method of your repository, you can simply configure the ``factory`` option.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_create:
+        pattern: /users/new
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                factory: createNewWithGroups
+
+Additionally, if you want to provide your custom method with arguments from the request, you can do so by adding more parameters.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_create:
+        pattern: /users/{groupId}/new
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                factory: 
+                    method: createNewWithGroups
+                    arguments: [$groupId]
+
+With this configuration, ``$repository->createNewWithGroups($request->get('groupId'))`` will be called to create new resource within ``createAction``.
+
 Custom redirect after success
 -----------------------------
 
@@ -105,3 +141,21 @@ You can also perform more complex redirects, with parameters. For example...
                 redirect:
                     route: app_competition_show
                     parameters: { id: $competitionId }
+
+In addition to the request parameters, you can access some of the newly created objects properties, using the ``resource.`` prefix.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_create:
+        pattern: /users/new
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                redirect:
+                    route: app_user_show
+                    parameters: { email: resource.email }
+
+With this configuration, the ``email`` parameter for route ``app_user_show`` will be obtained from your newly created user.
