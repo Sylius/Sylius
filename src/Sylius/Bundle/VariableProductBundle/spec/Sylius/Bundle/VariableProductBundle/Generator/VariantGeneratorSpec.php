@@ -21,10 +21,11 @@ class VariantGeneratorSpec extends ObjectBehavior
     /**
      * @param Symfony\Component\Validator\ValidatorInterface $validator
      * @param Doctrine\Common\Persistence\ObjectRepository   $variantRepository
+     * @param Symfony\Component\EventDispatcher\EventDispatcherInterface   $eventDispatcher
      */
-    function let($validator, $variantRepository)
+    function let($validator, $variantRepository, $eventDispatcher)
     {
-        $this->beConstructedWith($validator, $variantRepository);
+        $this->beConstructedWith($validator, $variantRepository, $eventDispatcher);
     }
 
     function it_is_initializable()
