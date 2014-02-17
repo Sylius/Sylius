@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class SyliusCheckoutEvents
+class SyliusCheckoutEvents
 {
     const SECURITY_INITIALIZE   = 'sylius.checkout.security.initialize';
     const SECURITY_PRE_COMPLETE = 'sylius.checkout.security.pre_complete';
