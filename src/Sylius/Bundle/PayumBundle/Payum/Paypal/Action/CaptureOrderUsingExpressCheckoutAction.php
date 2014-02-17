@@ -58,16 +58,22 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
             $details['PAYMENTREQUEST_0_AMT'] = number_format($order->getTotal() / 100, 2);
-            $details['PAYMENTREQUEST_0_ITEMAMT'] = number_format($order->getItemsTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_ITEMAMT'] = number_format(($order->getItemsTotal() + $order->getPromotionTotal())/ 100, 2);
             $details['PAYMENTREQUEST_0_TAXAMT'] = number_format($order->getTaxTotal() / 100, 2);
             $details['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format($order->getShippingTotal() / 100, 2);
 
             $m = 0;
             foreach ($order->getItems() as $item) {
-                $details['L_PAYMENTREQUEST_0_AMT'.$m] =  number_format($item->getTotal() / 100, 2);
-                $details['L_PAYMENTREQUEST_0_QTY'.$m] =  $item->getQuantity();
+                $details['L_PAYMENTREQUEST_0_AMT'.$m] = number_format($item->getTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
                 $m++;
+            }
+
+            if ($order->getPromotionTotal() !== 0) {
+                $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
+                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = number_format($order->getPromotionTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
             }
 
             $payment->setDetails($details);
