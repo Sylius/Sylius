@@ -13,6 +13,8 @@ namespace Sylius\Bundle\VariableProductBundle\Generator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**
@@ -45,15 +47,24 @@ class VariantGenerator implements VariantGeneratorInterface
     protected $variantRepository;
 
     /**
+     * Event dispatcher.
+     *
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * Constructor.
      *
-     * @param ValidatorInterface $validator
-     * @param ObjectRepository   $variantRepository
+     * @param ValidatorInterface       $validator
+     * @param ObjectRepository         $variantRepository
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(ValidatorInterface $validator, ObjectRepository $variantRepository)
+    public function __construct(ValidatorInterface $validator, ObjectRepository $variantRepository, EventDispatcherInterface $eventDispatcher)
     {
         $this->validator = $validator;
         $this->variantRepository = $variantRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -95,6 +106,8 @@ class VariantGenerator implements VariantGeneratorInterface
             if (0 < count($this->validator->validate($variant, array('sylius')))) {
                 $product->removeVariant($variant);
             }
+
+            $this->eventDispatcher->dispatch('sylius.variant.pre_create', new GenericEvent($variant));
         }
     }
 
