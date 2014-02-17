@@ -85,6 +85,20 @@ class OrderShippingListener
     }
 
     /**
+     * Update shipment states when payment is waiting for confirmation
+     *
+     * @param GenericEvent $event
+     */
+    public function updateShipmentStatesOnhold(GenericEvent $event)
+    {
+        $this->shippingProcessor->updateShipmentStates(
+            $this->getOrder($event)->getShipments(),
+            ShipmentInterface::STATE_ONHOLD,
+            ShipmentInterface::STATE_CHECKOUT
+        );
+    }
+
+    /**
      * Update shipment states after order is confirmed
      *
      * @param GenericEvent $event
@@ -93,8 +107,7 @@ class OrderShippingListener
     {
         $this->shippingProcessor->updateShipmentStates(
             $this->getOrder($event)->getShipments(),
-            ShipmentInterface::STATE_READY,
-            ShipmentInterface::STATE_CHECKOUT
+            ShipmentInterface::STATE_READY
         );
     }
 
