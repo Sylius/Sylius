@@ -80,7 +80,7 @@ stof_doctrine_extensions:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Sylius\Bundle\CoreBundle\Model\User
+    user_class: %sylius.model.user.class%
     group:
         group_class: Sylius\Bundle\CoreBundle\Model\Group
     profile:
@@ -95,7 +95,7 @@ hwi_oauth:
     resource_owners:
         amazon:
             type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid% 
+            client_id:     %sylius.oauth.amazon.clientid%
             client_secret: %sylius.oauth.amazon.clientsecret%
         facebook:
             type:          facebook
