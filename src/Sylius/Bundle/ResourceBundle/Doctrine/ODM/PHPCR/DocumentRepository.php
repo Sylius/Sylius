@@ -83,6 +83,15 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $queryBuilder->end();
     }
 
+    protected function getPropertyName($name)
+    {
+        if (false === strpos($name, '.')) {
+            return $this->getAlias().'.'.$name;
+        }
+
+        return $name;
+    }
+
     protected function getAlias()
     {
         return 'o';
