@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusShippingExtension extends BaseExtension
+class SyliusShippingExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

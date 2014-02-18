@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  * @author Саша Стаменковић <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class SyliusCartExtension extends BaseExtension implements PrependExtensionInterface
+class SyliusCartExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
         'services',

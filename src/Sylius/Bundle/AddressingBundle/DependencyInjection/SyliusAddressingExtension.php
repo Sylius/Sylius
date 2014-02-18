@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class SyliusAddressingExtension extends BaseExtension
+class SyliusAddressingExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends BaseExtension
+class SyliusInventoryExtension extends AbstractResourceExtension
 {
     protected $configFiles = array(
         'services',
