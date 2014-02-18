@@ -32,6 +32,7 @@ abstract class BaseExtension extends Extension
     const CONFIGURE_PARAMETERS = 4;
     const CONFIGURE_VALIDATORS = 8;
 
+    protected $applicationName = 'sylius';
     protected $configDir;
     protected $configFiles = array(
         'services',
@@ -99,7 +100,7 @@ abstract class BaseExtension extends Extension
     {
         foreach ($classes as $model => $serviceClasses) {
             foreach ($serviceClasses as $service => $class) {
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service === 'form' ? 'form.type' : $service, $model), $class);
+                $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $service === 'form' ? 'form.type' : $service, $model), $class);
             }
         }
     }
@@ -113,7 +114,7 @@ abstract class BaseExtension extends Extension
     protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
     {
         foreach ($validationGroups as $model => $groups) {
-            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
+            $container->setParameter(sprintf('%s.validation_group.%s', $this->applicationName, $model), $groups);
         }
     }
 
@@ -148,7 +149,7 @@ abstract class BaseExtension extends Extension
 
         foreach ($config['classes'] as $model => $classes) {
             if (array_key_exists('model', $classes)) {
-                $factory->create('sylius', $model, $classes);
+                $factory->create($this->applicationName, $model, $classes);
             }
         }
     }
