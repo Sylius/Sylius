@@ -39,9 +39,9 @@ class CurrencyConverterSpec extends ObjectBehavior
     function it_converts_to_any_currency($exchangeRate, $exchangeRateRepository)
     {
         $exchangeRateRepository->findOneBy(array('currency' => 'USD'))->shouldBeCalled()->willReturn($exchangeRate);
-        $exchangeRate->getRate()->shouldBeCalled()->willReturn(0.76495);
+        $exchangeRate->getRate()->shouldBeCalled()->willReturn(1.30);
 
-        $this->convert(65.55, 'USD')->shouldReturnFloat(85.691875285966);
+        $this->convert(65.55, 'USD')->shouldReturnFloat(85.215);
     }
 
     public function getMatchers()
