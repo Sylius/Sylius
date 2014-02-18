@@ -31,7 +31,7 @@ class CurrencyConverter implements CurrencyConverterInterface
             return $value;
         }
 
-        return $value / $exchangeRate->getRate();
+        return $value * $exchangeRate->getRate();
     }
 
     private function getExchangeRate($currency)
