@@ -4,7 +4,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Resource controller configuration product.
@@ -13,11 +15,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class ConfigurationSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\HttpFoundation\Request                 $request
-     * @param Sylius\Bundle\ResourceBundle\Controller\ParametersParser $parser
-     */
-    function let($request, $parser)
+    function let(Request $request, ParametersParser $parser)
     {
         $this->beConstructedWith($parser, 'sylius', 'product', 'SyliusWebBundle:Product', 'twig');
         $request->attributes = new ParameterBag();

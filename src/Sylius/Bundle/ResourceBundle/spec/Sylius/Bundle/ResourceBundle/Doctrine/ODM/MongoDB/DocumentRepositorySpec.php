@@ -12,6 +12,10 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use PhpSpec\ObjectBehavior;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\UnitOfWork;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
+use Doctrine\ODM\MongoDB\Query\Builder ;
 
 /**
  * Doctrine ODM driver document repository spec.
@@ -20,14 +24,12 @@ use PhpSpec\ObjectBehavior;
  */
 class DocumentRepositorySpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\ODM\MongoDB\DocumentManager       $documentManager
-     * @param Doctrine\ODM\MongoDB\UnitOfWork            $unitOfWork
-     * @param Doctrine\ODM\MongoDB\Mapping\ClassMetadata $class
-     * @param Doctrine\ODM\MongoDB\Query\Builder         $queryBuilder
-     */
-    function let($documentManager, $unitOfWork, $class, $queryBuilder)
-    {
+    function let(
+        DocumentManager $documentManager,
+        UnitOfWork $unitOfWork,
+        ClassMetadata $class,
+        Builder $queryBuilder
+    ) {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
 
         $documentManager
