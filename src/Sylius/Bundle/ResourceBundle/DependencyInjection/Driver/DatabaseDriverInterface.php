@@ -9,11 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Factory;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
-interface DatabaseDriverFactoryInterface
+/**
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
+interface DatabaseDriverInterface
 {
-    public function create($prefix, $resourceName, array $classes, $templates = null);
+    public function load(array $classes);
 
     public function getSupportedDriver();
 }
