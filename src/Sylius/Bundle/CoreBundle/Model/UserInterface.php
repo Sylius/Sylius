@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 /**
  * User interface.
  *
- * @author Paweł Jędrzjewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface UserInterface extends BaseUserInterface, TimestampableInterface
 {

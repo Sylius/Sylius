@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * Resource event.
  *
- * @author Jérémy Leherpeur <jeremy@lehepeur.net>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class ResourceEvent extends GenericEvent
 {

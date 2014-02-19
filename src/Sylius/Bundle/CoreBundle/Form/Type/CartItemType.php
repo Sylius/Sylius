@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * We'll use simple option for that, passing the product instance required by
  * variant choice type.
  *
- * @author Paweł Jędrzejewkski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CartItemType extends BaseCartItemType
 {

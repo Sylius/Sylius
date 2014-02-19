@@ -22,7 +22,7 @@ use Sylius\Bundle\InventoryBundle\SyliusStockableEvents;
 /**
  * Default inventory operator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryOperator implements InventoryOperatorInterface

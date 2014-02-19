@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormEvent;
 /**
  * Checkout addressing step form type.
  *
- * @author Paweł Jędrzejewkski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class AddressingStepType extends AbstractType
 {

@@ -19,7 +19,7 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 /**
  * Backorders handler.
  *
- * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class BackordersHandler implements BackordersHandlerInterface
 {
