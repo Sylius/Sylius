@@ -94,9 +94,9 @@ class InstallCommand extends ContainerAwareCommand
         $output->writeln('<info>Setting up database.</info>');
 
         $this
-            ->runCommand('doctrine:database:create', new ArrayInput(['--no-interaction']), $output)
-            ->runCommand('doctrine:schema:create', new ArrayInput([['--no-interaction']]), $output)
-            ->runCommand('assetic:dump', new ArrayInput(['--no-interaction']), $output);
+            ->runCommand('doctrine:database:create', new ArrayInput(array('--no-interaction')), $output)
+            ->runCommand('doctrine:schema:create', new ArrayInput(array('--no-interaction')), $output)
+            ->runCommand('assetic:dump', new ArrayInput(array('--no-interaction')), $output);
 
         $output->writeln('');
 
@@ -168,7 +168,7 @@ class InstallCommand extends ContainerAwareCommand
         $output->writeln('<info>Loading sample data.</info>');
         $this->runCommand(
             'doctrine:fixtures:load',
-            new ArrayInput(['--no-interaction']),
+            new ArrayInput(array('--no-interaction')),
             $output
         );
 
