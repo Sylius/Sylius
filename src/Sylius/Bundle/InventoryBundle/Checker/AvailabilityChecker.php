@@ -16,7 +16,7 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 /**
  * Checks availability for given stockable object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class AvailabilityChecker implements AvailabilityCheckerInterface
 {

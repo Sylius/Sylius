@@ -16,7 +16,7 @@ use FOS\UserBundle\Model\Group as BaseGroup;
 /**
  * Group model.
  *
- * @author Paweł Jędrzjewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class Group extends BaseGroup implements GroupInterface
 {

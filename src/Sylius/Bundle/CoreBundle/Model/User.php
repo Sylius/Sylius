@@ -18,7 +18,7 @@ use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
 /**
  * User model.
  *
- * @author Paweł Jędrzjewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class User extends BaseUser implements UserInterface
 {

@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 /**
  * Default inventory operator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewkski@diweb.pl>
+ * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class InventoryUnitFactory implements InventoryUnitFactoryInterface
 {
