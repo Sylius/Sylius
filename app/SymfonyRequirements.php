@@ -678,7 +678,7 @@ class SymfonyRequirements extends RequirementCollection
         if (class_exists('PDO')) {
             $drivers = PDO::getAvailableDrivers();
             $this->addRecommendation(
-                count($drivers),
+                count($drivers) > 0,
                 sprintf('PDO should have some drivers installed (currently available: %s)', count($drivers) ? implode(', ', $drivers) : 'none'),
                 'Install <strong>PDO drivers</strong> (mandatory for Doctrine).'
             );
