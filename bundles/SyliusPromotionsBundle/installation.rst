@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/promotions-bundle:0.1.*
+    $ composer require "sylius/promotions-bundle":"1.0.*@dev"
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/promotions-bundle:0.1.*
+    $ php composer.phar require "sylius/promotions-bundle":"1.0.*@dev"
 
 Adding required bundles to the kernel
 -------------------------------------
