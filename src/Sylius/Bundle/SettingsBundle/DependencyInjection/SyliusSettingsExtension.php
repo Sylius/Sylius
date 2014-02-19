@@ -26,8 +26,6 @@ class SyliusSettingsExtension extends BaseExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config';
-
         list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE);
 
         $classes = $config['classes'];

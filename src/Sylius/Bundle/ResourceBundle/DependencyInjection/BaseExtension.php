@@ -33,7 +33,7 @@ abstract class BaseExtension extends Extension
     const CONFIGURE_VALIDATORS = 8;
 
     protected $applicationName = 'sylius';
-    protected $configDir;
+    protected $configDirectory = '/../Resources/config';
     protected $configFiles = array(
         'services',
     );
@@ -43,8 +43,6 @@ abstract class BaseExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config/container';
-
         list($config) = $this->configure($config, new Configuration(), $container);
     }
 
@@ -61,11 +59,9 @@ abstract class BaseExtension extends Extension
         $processor = new Processor();
         $config    = $processor->processConfiguration($configuration, $config);
 
-        $loader = new XmlFileLoader($container, new FileLocator($this->configDir));
+        $loader = new XmlFileLoader($container, new FileLocator($this->getConfigurationDirectory()));
 
-        foreach ($this->configFiles as $filename) {
-            $loader->load($filename.'.xml');
-        }
+        $this->loadConfigurationFile($this->configFiles, $loader);
 
         if ($configure & self::CONFIGURE_DATABASE) {
             $this->loadDatabaseDriver($config, $loader, $container);
@@ -136,11 +132,7 @@ abstract class BaseExtension extends Extension
             throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by %s.', $driver, basename($bundle)));
         }
 
-        $file = sprintf('driver/%s.xml', $driver);
-
-        if (file_exists($this->configDir.'/'.$file)) {
-            $loader->load($file);
-        }
+        $this->loadConfigurationFile(array(sprintf('driver/%s', $driver)), $loader);
 
         $container->setParameter($this->getAlias().'.driver', $driver);
         $container->setParameter($this->getAlias().'.driver.'.$driver, true);
@@ -155,7 +147,39 @@ abstract class BaseExtension extends Extension
     }
 
     /**
-     * @param $driver
+     * @param array $config
+     * @param XmlFileLoader $loader
+     */
+    protected function loadConfigurationFile(array $config, XmlFileLoader $loader)
+    {
+        foreach ($config as $filename) {
+            if (file_exists($file = sprintf('%s/%s.xml', $this->getConfigurationDirectory(), $filename))) {
+                $loader->load($file);
+            }
+        }
+    }
+
+    /**
+     * Get the configuration directory
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function getConfigurationDirectory()
+    {
+        $reflector = new \ReflectionClass($this);
+        $fileName = $reflector->getFileName();
+
+        if (!is_dir($directory = dirname($fileName) . $this->configDirectory)) {
+            throw new \Exception(sprintf('The configuration directory "%s" does not exists.', $directory));
+        }
+
+        return $directory;
+    }
+
+    /**
+     * @param string           $driver
+     * @param ContainerBuilder $container
      *
      * @return DatabaseDriverFactoryInterface
      */

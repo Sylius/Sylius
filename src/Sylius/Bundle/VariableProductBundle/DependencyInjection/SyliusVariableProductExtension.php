@@ -22,6 +22,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  */
 class SyliusVariableProductExtension extends BaseExtension implements PrependExtensionInterface
 {
+    protected $configDirectory = '/../Resources/config/container';
     protected $configFiles = array(
         'options',
         'variants',
@@ -33,8 +34,6 @@ class SyliusVariableProductExtension extends BaseExtension implements PrependExt
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config/container';
-
         $config[0]['driver'] = $container->getParameter('sylius_product.driver');
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }

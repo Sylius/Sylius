@@ -21,6 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusProductExtension extends BaseExtension
 {
+    protected $configDirectory = '/../Resources/config/container';
     protected $configFiles = array(
         'products',
         'properties',
@@ -32,8 +33,6 @@ class SyliusProductExtension extends BaseExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config/container';
-
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }
 }
