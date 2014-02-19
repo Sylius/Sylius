@@ -37,9 +37,15 @@ class SyliusResourceExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
         $loader->load('services.xml');
 
-        if (isset($config['resources'])) {
-            $this->createResourceServices($config['resources'], $container);
+        $classes = isset($config['resources']) ? $config['resources'] : array();
+
+        $this->createResourceServices($classes, $container);
+
+        if ($container->hasParameter('sylius.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
         }
+
+        $container->setParameter('sylius.config.classes', $classes);
     }
 
     /**
