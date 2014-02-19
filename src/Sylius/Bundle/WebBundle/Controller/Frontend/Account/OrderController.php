@@ -113,7 +113,7 @@ class OrderController extends Controller
     /**
      * @return OrderRepository
      */
-    private function getOrderRepository()
+    protected function getOrderRepository()
     {
         return $this->get('sylius.repository.order');
     }
@@ -127,7 +127,7 @@ class OrderController extends Controller
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
-    private function findOrderOr404($number)
+    protected function findOrderOr404($number)
     {
         if (null === $order = $this->getOrderRepository()->findOneByNumber($number)) {
             throw $this->createNotFoundException('The order does not exist.');
