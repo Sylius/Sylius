@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -49,10 +50,7 @@ class ProvinceSpec extends ObjectBehavior
         $this->getCountry()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function it_allows_to_attach_itself_to_a_country($country)
+    function it_allows_to_attach_itself_to_a_country(CountryInterface $country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);

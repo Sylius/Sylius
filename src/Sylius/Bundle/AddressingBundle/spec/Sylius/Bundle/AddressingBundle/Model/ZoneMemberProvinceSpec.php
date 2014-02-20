@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AddressingBundle\Model\ProvinceInterface;
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
@@ -44,19 +46,13 @@ class ZoneMemberProvinceSpec extends ObjectBehavior
         $this->getBelongsTo()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function its_province_is_mutable($province)
+    function its_province_is_mutable(ProvinceInterface $province)
     {
         $this->setProvince($province);
         $this->getProvince()->shouldReturn($province);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_returns_province_name($province)
+    function it_returns_province_name(ProvinceInterface $province)
     {
         $province->getName()->willReturn('Łódzkie');
         $this->setProvince($province);
@@ -64,11 +60,7 @@ class ZoneMemberProvinceSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Łódzkie');
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface     $zone
-     */
-    function it_has_fluent_interface($province, $zone)
+    function it_has_fluent_interface(ProvinceInterface $province, ZoneInterface $zone)
     {
         $this->setProvince($province)->shouldReturn($this);
         $this->setBelongsTo($zone)->shouldReturn($this);

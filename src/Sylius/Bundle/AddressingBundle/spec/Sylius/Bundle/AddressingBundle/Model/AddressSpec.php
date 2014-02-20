@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
+use Sylius\Bundle\AddressingBundle\Model\ProvinceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -68,19 +70,13 @@ class AddressSpec extends ObjectBehavior
         $this->getCountry()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function its_country_is_mutable($country)
+    function its_country_is_mutable(CountryInterface $country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function it_allows_to_unset_the_country($country)
+    function it_allows_to_unset_the_country(CountryInterface $country)
     {
         $this->setCountry($country);
         $this->getCountry()->shouldReturn($country);
@@ -89,11 +85,10 @@ class AddressSpec extends ObjectBehavior
         $this->getCountry()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_unsets_the_province_when_erasing_the_country($country, $province)
+    function it_unsets_the_province_when_erasing_the_country(
+        CountryInterface $country,
+        ProvinceInterface $province
+    )
     {
         $country->hasProvince($province)->willReturn(true);
 
@@ -111,10 +106,7 @@ class AddressSpec extends ObjectBehavior
         $this->getProvince()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_throws_exception_if_trying_to_define_province_without_country($province)
+    function it_throws_exception_if_trying_to_define_province_without_country(ProvinceInterface $province)
     {
         $this
             ->shouldThrow(new \BadMethodCallException('Cannot define province on address without assigned country'))
@@ -122,11 +114,10 @@ class AddressSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function its_province_is_mutable($country, $province)
+    function its_province_is_mutable(
+        CountryInterface $country,
+        ProvinceInterface $province
+    )
     {
         $country->hasProvince($province)->willReturn(true);
         $this->setCountry($country);
@@ -135,11 +126,10 @@ class AddressSpec extends ObjectBehavior
         $this->getProvince()->shouldReturn($province);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_throws_if_trying_to_define_province_which_does_not_belong_to_country($country, $province)
+    function it_throws_if_trying_to_define_province_which_does_not_belong_to_country(
+        CountryInterface $country,
+        ProvinceInterface $province
+    )
     {
         $country->hasProvince($province)->willReturn(false);
         $this->setCountry($country);
@@ -160,10 +150,7 @@ class AddressSpec extends ObjectBehavior
         $this->isValid()->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function it_is_not_valid_when_no_province_selected_and_country_has_provinces($country)
+    function it_is_not_valid_when_no_province_selected_and_country_has_provinces(CountryInterface $country)
     {
         $country->hasProvinces()->willReturn(true);
 
@@ -172,10 +159,7 @@ class AddressSpec extends ObjectBehavior
         $this->isValid()->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface $country
-     */
-    function it_is_valid_if_country_has_no_provinces_and_province_is_not_set($country)
+    function it_is_valid_if_country_has_no_provinces_and_province_is_not_set(CountryInterface $country)
     {
         $country->hasProvinces()->willReturn(false);
 
@@ -184,11 +168,10 @@ class AddressSpec extends ObjectBehavior
         $this->isValid()->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_is_valid_if_given_province_belongs_to_selected_country($country, $province)
+    function it_is_valid_if_given_province_belongs_to_selected_country(
+        CountryInterface $country,
+        ProvinceInterface $province
+    )
     {
         $country->hasProvinces()->willReturn(false);
         $country->hasProvince($province)->willReturn(true);
@@ -253,11 +236,10 @@ class AddressSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\CountryInterface  $country
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_has_fluent_interface($country, $province)
+    function it_has_fluent_interface(
+        CountryInterface $country,
+        ProvinceInterface $province
+    )
     {
         $this->setFirstName('John')->shouldReturn($this);
         $this->setLastName('Doe')->shouldReturn($this);
