@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -28,40 +29,28 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface');
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
-     */
-    function it_should_recognize_empty_subject_as_not_eligible($subject)
+    function it_should_recognize_empty_subject_as_not_eligible(PromotionSubjectInterface $subject)
     {
         $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(0);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
-     */
-    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured($subject)
+    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(PromotionSubjectInterface $subject)
     {
         $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(7);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
-     */
-    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured($subject)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(PromotionSubjectInterface $subject)
     {
         $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(12);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface $subject
-     */
-    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($subject)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(PromotionSubjectInterface $subject)
     {
         $subject->getPromotionSubjectItemCount()->shouldBeCalled()->willReturn(10);
 

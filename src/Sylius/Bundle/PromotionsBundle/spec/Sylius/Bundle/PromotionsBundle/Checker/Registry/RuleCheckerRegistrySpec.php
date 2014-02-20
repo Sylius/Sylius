@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Checker\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 
 /**
@@ -34,20 +35,14 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
         $this->getCheckers()->shouldReturn(array());
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
-     */
-    function it_should_register_checker_under_given_type($checker)
+    function it_should_register_checker_under_given_type(RuleCheckerInterface $checker)
     {
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(false);
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(true);
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
-     */
-    function it_should_complain_if_trying_to_register_checker_with_taken_name($checker)
+    function it_should_complain_if_trying_to_register_checker_with_taken_name(RuleCheckerInterface $checker)
     {
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
 
@@ -57,10 +52,7 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
-     */
-    function it_should_unregister_checker_with_given_name($checker)
+    function it_should_unregister_checker_with_given_name(RuleCheckerInterface $checker)
     {
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(true);
@@ -69,10 +61,7 @@ class RuleCheckerRegistrySpec extends ObjectBehavior
         $this->hasChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn(false);
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface $checker
-     */
-    function it_should_retrieve_registered_checker_by_name($checker)
+    function it_should_retrieve_registered_checker_by_name(RuleCheckerInterface $checker)
     {
         $this->registerChecker(RuleInterface::TYPE_ITEM_TOTAL, $checker);
         $this->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->shouldReturn($checker);

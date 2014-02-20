@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type\Action;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -34,10 +35,7 @@ class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_should_build_form_with_count_field_and_equal_checkbox($builder)
+    function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
     {
         $builder
             ->add('amount', 'sylius_money', Argument::any())
