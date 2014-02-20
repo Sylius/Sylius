@@ -28,7 +28,9 @@ class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass');
+        $this->shouldHaveType(
+            'Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass'
+        );
     }
 
     function it_is_a_compiler_pass()

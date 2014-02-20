@@ -3,6 +3,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 
 /**
  * Resource controller spec.
@@ -11,10 +12,7 @@ use PhpSpec\ObjectBehavior;
  */
 class ResourceControllerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Controller\Configuration  $configuration
-     */
-    function let($configuration)
+    function let(Configuration $configuration)
     {
         $this->beConstructedWith($configuration);
     }

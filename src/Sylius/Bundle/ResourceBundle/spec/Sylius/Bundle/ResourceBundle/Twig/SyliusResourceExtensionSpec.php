@@ -63,8 +63,12 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->getFunctions()->shouldHaveCount(2);
     }
 
-    function it_should_render_a_sorting_link(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
-    {
+    function it_should_render_a_sorting_link(
+        Request $request,
+        GetResponseEvent $event,
+        RouterInterface $router,
+        TwigEngine $templating
+    ) {
         $request->get('sorting')->willReturn(array());
 
         $event = $this->getGetResponseEvent($request, $event);
@@ -88,8 +92,12 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_desc_link(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
-    {
+    function it_should_render_a_sorting_desc_link(
+        Request $request,
+        GetResponseEvent $event,
+        RouterInterface $router,
+        TwigEngine $templating
+    ) {
         $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
 
         $event = $this->getGetResponseEvent($request, $event);
@@ -113,8 +121,12 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_asc_link(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
-    {
+    function it_should_render_a_sorting_asc_link(
+        Request $request,
+        GetResponseEvent $event,
+        RouterInterface $router,
+        TwigEngine $templating
+    ) {
         $request->get('sorting')->willReturn(array());
 
         $event = $this->getGetResponseEvent($request, $event);
@@ -138,8 +150,12 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('otherName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_link_with_custom_options(Request $request, GetResponseEvent $event, RouterInterface $router, TwigEngine $templating)
-    {
+    function it_should_render_a_sorting_link_with_custom_options(
+        Request $request,
+        GetResponseEvent $event,
+        RouterInterface $router,
+        TwigEngine $templating
+    ) {
         $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
 
         $event = $this->getGetResponseEvent($request, $event);
@@ -185,8 +201,13 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->renderSortingLink('propertyName', 'fieldName')->shouldReturn('fieldName');
     }
 
-    function it_should_render_a_paginate_select(Request $request, GetResponseEvent $event, Pagerfanta $paginator, RouterInterface $router, TwigEngine $templating)
-    {
+    function it_should_render_a_paginate_select(
+        Request $request,
+        GetResponseEvent $event,
+        Pagerfanta $paginator,
+        RouterInterface $router,
+        TwigEngine $templating
+    ) {
         $limits = array(10, 20);
 
         $event = $this->getGetResponseEvent(
@@ -225,8 +246,13 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->renderPaginateSelect($paginator, array(10,20));
     }
 
-    function it_should_render_a_paginate_select_with_custom_options(Request $request, GetResponseEvent $event, Pagerfanta $paginator, RouterInterface $router, TwigEngine $templating)
-    {
+    function it_should_render_a_paginate_select_with_custom_options(
+        Request $request,
+        GetResponseEvent $event,
+        Pagerfanta $paginator,
+        RouterInterface $router,
+        TwigEngine $templating
+    ) {
         $limits = array(10, 20);
 
         $event = $this->getGetResponseEvent(
@@ -275,8 +301,12 @@ class BaseExtensionSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius_resource');
     }
 
-    private function getGetResponseEvent(Request $request, GetResponseEvent $event, $routeName = 'route_name', $routerParams = array())
-    {
+    private function getGetResponseEvent(
+        Request $request,
+        GetResponseEvent $event,
+        $routeName = 'route_name',
+        $routerParams = array()
+    ) {
         $request->attributes = new ParameterBag();
         $request->query = new ParameterBag();
         $request->attributes->set('_route', $routeName);
