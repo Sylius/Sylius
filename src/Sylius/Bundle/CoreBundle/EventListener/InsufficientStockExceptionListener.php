@@ -28,36 +28,34 @@ class InsufficientStockExceptionListener
     protected $translator;
     protected $redirectTo;
 
-    public function __construct(UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator, $redirectTo)
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
     {
-        $this->router = $router;
         $this->session = $session;
         $this->translator = $translator;
-        $this->redirectTo = $redirectTo;
     }
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        $e = $event->getException();
+        $exception = $event->getException();
 
-        if (!$e instanceof InsufficientStockException) {
+        if (!$exception instanceof InsufficientStockException) {
             return;
         }
 
         $this->session->getFlashBag()->add(
-            'notice',
+            'error',
             $this->translator->trans(
                 'sylius.checkout.out_of_stock',
                 array(
-                    '%quantity%' => $e->getStockable()->getOnHand(),
-                    '%name%'     => $e->getStockable()->getInventoryName(),
+                    '%quantity%' => $exception->getStockable()->getOnHand(),
+                    '%name%'     => $exception->getStockable()->getInventoryName(),
                 ),
                 'flashes'
             )
         );
 
         $event->setResponse(new RedirectResponse(
-            $this->router->generate($this->redirectTo)
+            $event->getRequest()->headers->get('referer')
         ));
     }
 }
