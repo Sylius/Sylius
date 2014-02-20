@@ -11,18 +11,21 @@
 
 namespace spec\Sylius\Bundle\ShippingBundle\Resolver;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class MethodsResolverSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $methodRepository
-     * @param Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-     */
-    function let($methodRepository, $eligibilityChecker)
+    function let(
+        ObjectRepository $methodRepository,
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+    )
     {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);
     }
@@ -37,14 +40,13 @@ class MethodsResolverSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Resolver\MethodsResolverInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method1
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method3
-     */
     function it_returns_all_methods_eligible_for_given_subject(
-        $methodRepository, $eligibilityChecker, $subject, $method1, $method2, $method3
+        $methodRepository,
+        $eligibilityChecker,
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $method1,
+        ShippingMethodInterface $method2,
+        ShippingMethodInterface $method3
     )
     {
         $methods = array($method1, $method2, $method3);
@@ -57,14 +59,13 @@ class MethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($subject)->shouldReturn(array($method1, $method2));
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method1
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method3
-     */
     function it_filters_the_methods_pool_by_given_criteria(
-        $methodRepository, $eligibilityChecker, $subject, $method1, $method2, $method3
+        $methodRepository,
+        $eligibilityChecker,
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $method1,
+        ShippingMethodInterface $method2,
+        ShippingMethodInterface $method3
     )
     {
         $methods = array($method1, $method3);

@@ -13,19 +13,26 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator;
+use Sylius\Bundle\ShippingBundle\Calculator\PerItemRateCalculator;
+use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
-     * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface   $checkerRegistry
-     * @param Symfony\Component\Form\FormBuilder                                           $builder
-     * @param Symfony\Component\Form\FormFactoryInterface                                  $factory
-     */
-    function let($calculatorRegistry, $checkerRegistry, $builder, $factory)
+    function let(
+        CalculatorRegistryInterface $calculatorRegistry,
+        RuleCheckerRegistryInterface $checkerRegistry,
+        FormBuilder $builder,
+        FormFactoryInterface $factory
+    )
     {
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
 
@@ -38,10 +45,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_builds_form_with_proper_fields($builder, $calculatorRegistry)
+    function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
     {
         $calculatorRegistry->getCalculators()->willReturn(array());
 
@@ -85,10 +89,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_adds_build_shipping_method_event_subscriber($builder, $calculatorRegistry)
+    function it_adds_build_shipping_method_event_subscriber(FormBuilder $builder, $calculatorRegistry)
     {
         $calculatorRegistry->getCalculators()->willReturn(array());
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
@@ -104,19 +105,15 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     * @param Symfony\Component\Form\FormBuilder $flatRateFormBuilder
-     * @param Symfony\Component\Form\Form $flatRateForm
-     * @param Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator $flatRateCalculator
-     * @param Symfony\Component\Form\FormBuilder $perItemFormBuilder
-     * @param Symfony\Component\Form\Form $perItemForm
-     * @param Sylius\Bundle\ShippingBundle\Calculator\PerItemRateCalculator $perItemRateCalculator
-     */
     function it_builds_prototypes_forms_for_calculators(
-        $calculatorRegistry, $builder,
-        $flatRateFormBuilder, $flatRateForm, $flatRateCalculator,
-        $perItemFormBuilder, $perItemForm, $perItemRateCalculator
+        $calculatorRegistry,
+        FormBuilder $builder,
+        FormBuilder $flatRateFormBuilder,
+        Form $flatRateForm,
+        FlatRateCalculator $flatRateCalculator,
+        FormBuilder $perItemFormBuilder,
+        Form $perItemForm,
+        PerItemRateCalculator $perItemRateCalculator
     )
     {
         $builder
@@ -193,10 +190,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_defines_assigned_data_class($resolver)
+    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

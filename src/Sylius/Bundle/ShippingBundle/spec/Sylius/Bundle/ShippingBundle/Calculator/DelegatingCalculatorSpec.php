@@ -12,16 +12,17 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface;
+use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class DelegatingCalculatorSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $registry
-     */
-    function let($registry)
+    function let(CalculatorRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
@@ -36,10 +37,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_should_complain_if_shipment_has_no_method_defined($shipment)
+    function it_should_complain_if_shipment_has_no_method_defined(ShipmentInterface $shipment)
     {
         $shipment->getMethod()->willReturn(null);
 
@@ -49,12 +47,12 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface        $shipment
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $method
-     * @param Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface $calculator
-     */
-    function it_should_delegate_calculation_to_a_calculator_defined_on_shipping_method($registry, $shipment, $method, $calculator)
+    function it_should_delegate_calculation_to_a_calculator_defined_on_shipping_method(
+        $registry,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $method,
+        CalculatorInterface $calculator
+    )
     {
         $shipment->getMethod()->willReturn($method);
 

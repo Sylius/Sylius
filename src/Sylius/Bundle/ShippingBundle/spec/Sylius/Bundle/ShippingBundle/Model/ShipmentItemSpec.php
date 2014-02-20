@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -40,19 +41,13 @@ class ShipmentItemSpec extends ObjectBehavior
         $this->getShipment()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_allows_assigning_itself_to_shipment($shipment)
+    function it_allows_assigning_itself_to_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_allows_detaching_itself_from_shipment($shipment)
+    function it_allows_detaching_itself_from_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
@@ -66,10 +61,7 @@ class ShipmentItemSpec extends ObjectBehavior
         $this->getShippable()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface $shippable
-     */
-    function it_allows_defining_shippable($shippable)
+    function it_allows_defining_shippable(ShippableInterface $shippable)
     {
         $this->setShippable($shippable);
         $this->getShippable()->shouldReturn($shippable);

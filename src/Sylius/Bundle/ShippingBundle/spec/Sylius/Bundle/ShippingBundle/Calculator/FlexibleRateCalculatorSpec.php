@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -33,10 +35,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->shouldBeConfigurable();
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_has_required_first_and_additional_items_cost_with_limit_configuration_options($resolver)
+    function it_has_required_first_and_additional_items_cost_with_limit_configuration_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('additional_item_limit' => 0))->shouldBeCalled()->willReturn($resolver);
         $resolver->setRequired(array('first_item_cost', 'additional_item_cost'))->shouldBeCalled()->willReturn($resolver);
@@ -58,10 +57,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->getConfigurationFormType()->shouldReturn('sylius_shipping_calculator_flexible_rate_configuration');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_should_calculate_the_first_item_cost_if_shipment_has_only_one_item($shipment, $shippingItems, $method)
+    function it_should_calculate_the_first_item_cost_if_shipment_has_only_one_item(ShipmentInterface $shipment)
     {
         $configuration = array(
             'first_item_cost'       => 1000,
@@ -74,10 +70,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->calculate($shipment, $configuration)->shouldReturn(1000);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items($shipment, $shippingItems, $method)
+    function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items(ShipmentInterface $shipment)
     {
         $configuration = array(
             'first_item_cost'       => 1500,
@@ -90,10 +83,7 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->calculate($shipment, $configuration)->shouldReturn(2700);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     */
-    function it_should_calculate_the_first_and_every_additional_item_cost_taking_limit_into_account($shipment, $shippingItems, $method)
+    function it_should_calculate_the_first_and_every_additional_item_cost_taking_limit_into_account(ShipmentInterface $shipment)
     {
         $configuration = array(
             'first_item_cost'       => 1500,
