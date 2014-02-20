@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
@@ -42,19 +43,13 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getShipment()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_allows_assigning_itself_to_a_shipment($shipment)
+    function it_allows_assigning_itself_to_a_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface $shipment
-     */
-    function it_allows_detaching_itself_from_a_shipment($shipment)
+    function it_allows_detaching_itself_from_a_shipment(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
@@ -79,19 +74,13 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_allows_attaching_itself_to_an_order($order)
+    function it_allows_attaching_itself_to_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_allows_detaching_itself_from_an_order($order)
+    function it_allows_detaching_itself_from_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);

@@ -12,13 +12,16 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\ImageInterface;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Bundle\CoreBundle\Model\Taxon;
+use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface $uploader
-     */
-    function let($uploader)
+    function let(ImageUploaderInterface $uploader)
     {
         $this->beConstructedWith($uploader);
     }
@@ -28,13 +31,13 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent  $event
-     * @param Sylius\Bundle\CoreBundle\Model\Variant          $variant
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface   $image
-     */
-    function it_uses_image_uploader_to_upload_images($event, $variant, $product, $image, $uploader)
+    function it_uses_image_uploader_to_upload_images(
+        GenericEvent $event,
+        VariantInterface $variant,
+        ProductInterface $product,
+        ImageInterface $image,
+        $uploader
+    )
     {
         $event->getSubject()->willReturn($product);
         $product->getMasterVariant()->willReturn($variant);
@@ -44,12 +47,12 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $this->uploadProductImage($event);
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\Taxon           $taxon
-     * @param Sylius\Bundle\CoreBundle\Model\ImageInterface  $image
-     */
-    function it_uses_image_uploader_to_upload_taxon_image($event, $taxon, $image, $uploader)
+    function it_uses_image_uploader_to_upload_taxon_image(
+        GenericEvent $event,
+        Taxon $taxon,
+        ImageInterface $image,
+        $uploader
+    )
     {
         $event->getSubject()->willReturn($taxon);
         $uploader->upload($taxon)->shouldBeCalled();
@@ -57,10 +60,10 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $this->uploadTaxonImage($event);
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     */
-    function it_throws_exception_if_event_subject_is_not_a_product($event, $uploader)
+    function it_throws_exception_if_event_subject_is_not_a_product(
+        GenericEvent $event,
+        $uploader
+    )
     {
         $event->getSubject()->willReturn($uploader);
 

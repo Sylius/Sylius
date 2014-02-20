@@ -15,16 +15,14 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $adjustmentRepository
-     */
-    function let($adjustmentRepository)
+    function let(RepositoryInterface $adjustmentRepository)
     {
         $this->beConstructedWith($adjustmentRepository);
     }
@@ -39,7 +37,12 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface');
     }
 
-    function it_applies_fixed_discount_as_promotion_adjustment($adjustmentRepository, OrderInterface $order, AdjustmentInterface $adjustment, PromotionInterface $promotion)
+    function it_applies_fixed_discount_as_promotion_adjustment(
+        $adjustmentRepository,
+        OrderInterface $order,
+        AdjustmentInterface $adjustment,
+        PromotionInterface $promotion
+    )
     {
         $adjustmentRepository->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');

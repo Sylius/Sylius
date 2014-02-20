@@ -12,18 +12,22 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
+use Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface;
+use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class OrderShippingListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface          $shipmentFactory
-     * @param Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface          $shippingProcessor
-     * @param Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface $shippingChargesProcessor
-     */
-    function let($shipmentFactory, $shippingProcessor, $shippingChargesProcessor)
+    function let(
+        ShipmentFactoryInterface $shipmentFactory,
+        ShipmentProcessorInterface $shippingProcessor,
+        ShippingChargesProcessorInterface $shippingChargesProcessor
+    )
     {
         $this->beConstructedWith($shipmentFactory, $shippingProcessor, $shippingChargesProcessor);
     }
@@ -33,11 +37,10 @@ class OrderShippingListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param \stdClass                                      $invalidSubject
-     */
-    function it_throws_exception_if_event_has_non_order_subject($event, $invalidSubject)
+    function it_throws_exception_if_event_has_non_order_subject(
+        GenericEvent $event,
+        \stdClass $invalidSubject
+    )
     {
         $event->getSubject()->willReturn($invalidSubject);
 
@@ -47,11 +50,11 @@ class OrderShippingListenerSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_calls_shipping_processor_on_order($shippingChargesProcessor, $event, $order)
+    function it_calls_shipping_processor_on_order(
+        $shippingChargesProcessor,
+        GenericEvent $event,
+        OrderInterface $order
+    )
     {
         $event->getSubject()->willReturn($order);
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();

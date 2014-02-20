@@ -11,15 +11,13 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\OAuth;
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class UserProviderSpec extends ObjectBehavior
 {
-    /**
-     * @param FOS\UserBundle\Model\UserManagerInterface $userManagerInterface
-     */
-    function let($userManagerInterface)
+    function let(UserManagerInterface $userManagerInterface)
     {
         $this->beConstructedWith($userManagerInterface, array());
     }

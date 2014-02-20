@@ -12,13 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class OrderConfirmationEmailListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface $mailer
-     */
-    function let($mailer)
+    function let(OrderConfirmationMailerInterface $mailer)
     {
         $this->beConstructedWith($mailer);
     }
@@ -28,11 +28,7 @@ class OrderConfirmationEmailListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderConfirmationEmailListener');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent $event
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface  $order
-     */
-    function it_should_delegate_event_properly($event, $order, $mailer)
+    function it_should_delegate_event_properly(GenericEvent $event, OrderInterface $order, $mailer)
     {
         $event->getSubject()->willReturn($order);
         $mailer->sendOrderConfirmation($order)->shouldBeCalled();

@@ -11,17 +11,19 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShipmentFactorySpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $shipmentRepository
-     */
-    function let($shipmentRepository)
+    function let(RepositoryInterface $shipmentRepository)
     {
         $this->beConstructedWith($shipmentRepository);
     }
@@ -36,13 +38,13 @@ class ShipmentFactorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnit
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface           $shipment
-     * @param Doctrine\Common\Collections\ArrayCollection                $shipments
-     */
-    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it($shipmentRepository, $order, $shipment, $shipments, $inventoryUnit)
+    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(
+        $shipmentRepository,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ArrayCollection $shipments,
+        InventoryUnitInterface $inventoryUnit
+    )
     {
 
         $shipmentRepository
@@ -80,14 +82,13 @@ class ShipmentFactorySpec extends ObjectBehavior
         $this->createShipment($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnit
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface      $inventoryUnitWithoutShipment
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface           $shipment
-     * @param Doctrine\Common\Collections\ArrayCollection                $shipments
-     */
-    function it_adds_new_inventory_units_to_existing_shipment($order, $shipment, $shipments, $inventoryUnit, $inventoryUnitWithoutShipment)
+    function it_adds_new_inventory_units_to_existing_shipment(
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ArrayCollection $shipments,
+        InventoryUnitInterface $inventoryUnit,
+        InventoryUnitInterface $inventoryUnitWithoutShipment
+    )
     {
         $shipments
             ->first()

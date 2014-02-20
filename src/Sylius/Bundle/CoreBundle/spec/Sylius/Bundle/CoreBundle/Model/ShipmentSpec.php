@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 class ShipmentSpec extends ObjectBehavior
 {
@@ -35,19 +36,13 @@ class ShipmentSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_should_allow_attaching_itself_to_an_order($order)
+    function it_should_allow_attaching_itself_to_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_should_allow_detaching_itself_from_an_order($order)
+    function it_should_allow_detaching_itself_from_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);

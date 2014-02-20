@@ -12,14 +12,17 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
+use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneCheckerSpec extends ObjectBehavior
 {
-    /**
-     * @param Symfony\Component\Security\Core\SecurityContextInterface    $securityContext
-     * @param Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface $zoneMatcher
-     */
-    function let($securityContext, $zoneMatcher)
+    function let(SecurityContextInterface $securityContext, ZoneMatcherInterface $zoneMatcher)
     {
         $this->beConstructedWith($securityContext, $zoneMatcher);
     }
@@ -34,22 +37,19 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
-     */
-    function it_is_not_restricted_if_user_is_not_authenticated($product, $securityContext)
+    function it_is_not_restricted_if_user_is_not_authenticated(ProductInterface $product, $securityContext)
     {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(false);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface                     $product
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface                        $user
-     */
-    function it_is_not_restricted_if_user_have_no_shipping_address($product, $securityContext, $token, $user)
+    function it_is_not_restricted_if_user_have_no_shipping_address(
+        ProductInterface $product,
+        $securityContext,
+        TokenInterface $token,
+        UserInterface $user
+    )
     {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
@@ -59,14 +59,14 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface                     $product
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface                        $user
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface               $address
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface                     $product
-     */
-    function it_is_not_restricted_if_product_have_no_restricted_zone($product, $securityContext, $token, $user, $address, $product)
+    function it_is_not_restricted_if_product_have_no_restricted_zone(
+        ProductInterface $product,
+        $securityContext,
+        TokenInterface $token,
+        UserInterface $user,
+        AddressInterface $address,
+        ProductInterface $product
+    )
     {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
@@ -77,14 +77,16 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface                     $product
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface                        $user
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface               $address
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface                  $zone
-     */
-    function it_is_not_restricted_if_zone_matcher_does_not_match_users_shipping_address($product, $securityContext, $zoneMatcher, $token, $user, $address, $product, $zone)
+    function it_is_not_restricted_if_zone_matcher_does_not_match_users_shipping_address(
+        ProductInterface $product,
+        $securityContext,
+        $zoneMatcher,
+        TokenInterface $token,
+        UserInterface $user,
+        AddressInterface $address,
+        ProductInterface $product,
+        ZoneInterface $zone
+    )
     {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
@@ -96,14 +98,16 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface                     $product
-     * @param Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface                        $user
-     * @param Sylius\Bundle\AddressingBundle\Model\AddressInterface               $address
-     * @param Sylius\Bundle\AddressingBundle\Model\ZoneInterface                  $zone
-     */
-    function it_is_restricted_if_zone_matcher_match_users_shipping_address($product, $securityContext, $zoneMatcher, $token, $user, $address, $product, $zone)
+    function it_is_restricted_if_zone_matcher_match_users_shipping_address(
+        ProductInterface $product,
+        $securityContext,
+        $zoneMatcher,
+        TokenInterface $token,
+        UserInterface$user,
+        AddressInterface $address,
+        ProductInterface $product,
+        ZoneInterface $zone
+    )
     {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);

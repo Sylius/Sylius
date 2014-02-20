@@ -37,7 +37,12 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface');
     }
 
-    function it_applies_percentage_discount_as_promotion_adjustment($adjustmentRepository, OrderInterface $order, AdjustmentInterface $adjustment, PromotionInterface $promotion)
+    function it_applies_percentage_discount_as_promotion_adjustment(
+        $adjustmentRepository,
+        OrderInterface $order,
+        AdjustmentInterface $adjustment,
+        PromotionInterface $promotion
+    )
     {
         $order->getPromotionSubjectItemTotal()->willReturn(10000);
         $adjustmentRepository->createNew()->willReturn($adjustment);

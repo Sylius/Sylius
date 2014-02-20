@@ -11,20 +11,25 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItem;
+use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory;
+use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class InventoryHandlerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface $inventoryOperator
-     * @param Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory        $inventoryUnitFactory
-     */
-    function let($inventoryOperator, $inventoryUnitFactory)
+    function let(
+        InventoryOperatorInterface $inventoryOperator,
+        InventoryUnitFactory $inventoryUnitFactory
+    )
     {
         $this->beConstructedWith($inventoryOperator, $inventoryUnitFactory);
     }
@@ -39,10 +44,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_does_not_create_any_inventory_units_if_order_has_no_items($order)
+    function it_does_not_create_any_inventory_units_if_order_has_no_items(OrderInterface $order)
     {
         $order->getItems()->willReturn(array());
         $order->getInventoryUnits()->willReturn(array());
@@ -51,14 +53,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->processInventoryUnits($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $order
-     * @param Sylius\Bundle\CoreBundle\Model\OrderItem              $item
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface       $variant
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
-     */
-    function it_creates_inventory_units_via_the_factory($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2)
+    function it_creates_inventory_units_via_the_factory(
+        $inventoryUnitFactory,
+        OrderInterface $order,
+        OrderItem $item,
+        VariantInterface $variant,
+        InventoryUnitInterface $unit1,
+        InventoryUnitInterface $unit2
+    )
     {
         $order->getItems()->willReturn(array($item));
         $order->getInventoryUnits()->shouldBeCalled()->willReturn(array());
@@ -76,14 +78,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->processInventoryUnits($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $order
-     * @param Sylius\Bundle\CoreBundle\Model\OrderItem              $item
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface       $variant
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
-     */
-    function it_creates_only_missing_inventory_units_via_the_factory($inventoryUnitFactory, $order, $item, $variant, $unit1, $unit2)
+    function it_creates_only_missing_inventory_units_via_the_factory(
+        $inventoryUnitFactory,
+        OrderInterface $order,
+        OrderItem $item,
+        VariantInterface $variant,
+        InventoryUnitInterface $unit1,
+        InventoryUnitInterface $unit2
+    )
     {
         $order->getItems()->willReturn(array($item));
         $order->getInventoryUnits()->shouldBeCalled()->willReturn(array($unit1, $unit2));
@@ -103,16 +105,16 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->processInventoryUnits($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface         $order
-     * @param Sylius\Bundle\CoreBundle\Model\OrderItem              $item
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface       $variant
-     * @param Doctrine\Common\Collections\ArrayCollection           $units
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit3
-     */
-    function it_removes_extra_inventory_units($inventoryUnitFactory, $order, $item, $variant, $units, $unit1, $unit2, $unit3)
+    function it_removes_extra_inventory_units(
+        $inventoryUnitFactory,
+        OrderInterface $order,
+        OrderItem $item,
+        VariantInterface $variant,
+        ArrayCollection $units,
+        InventoryUnitInterface $unit1,
+        InventoryUnitInterface $unit2,
+        InventoryUnitInterface $unit3
+    )
     {
         $order->getItems()->willReturn(array($item));
 
@@ -132,14 +134,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->processInventoryUnits($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\CoreBundle\Model\OrderItem $item
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
-     */
-    function it_holds_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
+    function it_holds_the_variant_stock_via_inventory_operator(
+        $inventoryOperator,
+        OrderInterface $order,
+        OrderItem $item,
+        VariantInterface $variant,
+        InventoryUnitInterface $unit1,
+        InventoryUnitInterface $unit2
+    )
     {
         $order->getItems()->willReturn(array($item));
 
@@ -158,14 +160,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->holdInventory($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\CoreBundle\Model\OrderItem $item
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
-     */
-    function it_releases_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
+    function it_releases_the_variant_stock_via_inventory_operator(
+        $inventoryOperator,
+        OrderInterface $order,
+        OrderItem $item,
+        VariantInterface $variant,
+        InventoryUnitInterface $unit1,
+        InventoryUnitInterface $unit2
+    )
     {
         $order->getItems()->willReturn(array($item));
 
@@ -184,14 +186,14 @@ class InventoryHandlerSpec extends ObjectBehavior
         $this->releaseInventory($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     * @param Sylius\Bundle\CoreBundle\Model\OrderItem $item
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $variant
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit1
-     * @param Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface $unit2
-     */
-    function it_decreases_the_variant_stock_via_inventory_operator($inventoryOperator, $order, $item, $variant, $unit1, $unit2)
+    function it_decreases_the_variant_stock_via_inventory_operator(
+        $inventoryOperator,
+        OrderInterface $order,
+        OrderItem $item,
+        VariantInterface $variant,
+        InventoryUnitInterface $unit1,
+        InventoryUnitInterface $unit2
+    )
     {
         $order->getItems()->willReturn(array($item));
 
