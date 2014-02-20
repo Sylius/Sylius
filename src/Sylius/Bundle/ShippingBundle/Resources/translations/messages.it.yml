@@ -1,0 +1,8 @@
+---
+sylius:
+  form:
+    shipment:
+      states:
+        pending: In attesa
+    shipping_category:
+      description: Descrizione

@@ -1,23 +1,33 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    form:
-        shipping_category:
-            name: Nom
-            description: Description
-        shipping_method:
-            name: Nom
-            category: Catégorie
-            category_requirement: Exigence de la catégorie
-            calculator: Calculateur
-            configuration: Configuration
-        shipping_calculator:
-            flat_rate_configuration:
-                amount: Montant
-            per_item_rate_configuration:
-                amount: Montant
-            flexible_rate_configuration:
-                first_item_cost: Coût du premier article
-                additional_item_cost: Coût d'un article supplémentaire
-                additional_item_limit: Limite des articles supplémentaires
+  form:
+    shipment:
+      state: Statut
+      states:
+        checkout: Paiement
+        pending: En attente
+        ready: Prêt
+        shipped: Expédié
+        returned: Retourné
+      tracking_code: Code de suivi
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Montant
+      flexible_rate_configuration:
+        additional_item_cost: "Coût d'un article supplémentaire"
+        additional_item_limit: Limite des articles supplémentaires
+        first_item_cost: Coût du premier article
+      per_item_rate_configuration:
+        amount: Montant
+      weight_rate_configuration:
+        amount: Quantité
+    shipping_category:
+      description: Description
+      name: Nom
+    shipping_method:
+      calculator: Calculateur
+      category: Catégorie
+      category_requirement: Exigence de la catégorie
+      configuration: Configuration
+      enabled: Activé ?
+      name: Nom

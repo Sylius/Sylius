@@ -1,0 +1,12 @@
+---
+sylius:
+  form:
+    tax_category:
+      name: Nom
+      description: Description
+    tax_rate:
+      category: Catégorie
+      name: Nom
+      amount: Quantité
+      included_in_price: Inclus dans le prix?
+      calculator: Calculateur

@@ -1,0 +1,38 @@
+---
+sylius:
+  flashes:
+    installed: Sylius a été installé avec succès.
+  form:
+    configuration:
+      database:
+        0: Connexion à la base de données
+        driver:
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        name: Nom
+        password: Mot de passe
+        port: Port
+        user: Utilisateur
+      locale:
+        currency: Devise
+      mailer:
+        password: Mot de passe
+        transport:
+          gmail: Gmail
+        user: Utilisateur
+    setup:
+      plain_password: Mot de passe
+      username: Identifiant
+  process:
+    step:
+      check:
+        button:
+          back: Retour
+          install: Installer
+          next: Suivant
+        table:
+          required: obligatoire
+          status: statut

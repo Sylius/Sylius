@@ -1,0 +1,6 @@
+---
+sylius:
+  form:
+    exchange_rate:
+      currency: Waluta
+      rate: Kurs

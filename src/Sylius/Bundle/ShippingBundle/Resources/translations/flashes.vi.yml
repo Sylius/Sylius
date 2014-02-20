@@ -1,0 +1,5 @@
+---
+sylius:
+  shipment:
+    ship:
+      success: Vận chuyển được hoàn thành.

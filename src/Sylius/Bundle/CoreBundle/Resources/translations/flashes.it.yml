@@ -1,6 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    checkout:
-        success: Grazie per il tuo ordine!
+  checkout:
+    success: Grazie per il tuo ordine!

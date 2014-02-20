@@ -1,0 +1,9 @@
+---
+sylius:
+  cart:
+    cart_save_completed: Le panier a été mis à jour avec succès.
+    cart_clear_completed: Le panier a été effacée avec succès.
+    item_add_completed: Article ajouté au panier.
+    item_remove_completed: Article supprimé du panier.
+    item_add_error: "Une erreur s'est produite lors de l'ajout de l'article au panier."
+    item_remove_error: "Une erreur s'est produite lors de la suppression de l'article du panier."

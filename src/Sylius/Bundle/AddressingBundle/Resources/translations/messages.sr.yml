@@ -1,0 +1,15 @@
+---
+sylius:
+  form:
+    address:
+      city: Grad
+      postcode: Poštanski kod
+      street: Ulica
+      province: Provincija
+    country:
+      iso_name: ISO kod
+      provinces: Provincije
+    zone:
+      members: Članovi
+    zone_member_province:
+      province: Provincija

@@ -1,0 +1,9 @@
+---
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: "L'adresse a été correctement défini comme votre adresse de facturation par défaut."
+        shipping:
+          success: "L'adresse a été correctement défini comme votre adresse de livraison par défaut."

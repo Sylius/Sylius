@@ -1,466 +1,453 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+email:
+  order_confirmation:
+    subject: Onderwerp
 sylius:
-    add_to_cart: Voeg toe aan winkelwagen
-    address:
+  add_to_cart: Toevoegen aan de winkelwagen
+  address:
+    city: Woonplaats
+    country: Land
+    firstname: Voornaam
+    lastname: Achternaam
+    province: Provincie
+    street: Straat
+  alert:
+    error: Fout
+    info: Informatie
+    success: Succes
+    warning: Waarschuwing
+  backend:
+    alert:
+      info: sylius.backend.alert.info
+    dashboard:
+      chart_order_count: sylius.backend.dashboard.chart_order_count
+      chart_order_total: sylius.backend.dashboard.chart_order_total
+      header: sylius.backend.dashboard.header
+      orders: sylius.backend.dashboard.orders
+      revenue: sylius.backend.dashboard.revenue
+      subheader: sylius.backend.dashboard.subheader
+    logout: Uitloggen
+  breadcrumb:
+    assortment: Assortiment
+    configuration: Configuratie
+    country:
+      index: Landen
+    option:
+      index: Opties
+    order:
+      index: Bestellingen
+    payment:
+      index: Betalingen
+    product:
+      index: Producten
+    promotion:
+      index: Promoties
+    property:
+      index: Eigenschappen
+    shipment:
+      index: Verzendingen
+  cancel: Annuleren
+  cart:
+    empty: Uw winkelwagen is leeg
+    summary:
+      checkout: Afrekenen
+      clear: Winkelwagen leeg maken
+      grand_total: Totaal
+      quantity: Hoeveelheid
+      save: Opslaan
+      total: Totaal
+      unit_price: Prijs per stuk
+    summary_header: Winkelwagen overzicht
+    total_items: '1 stuk|%count% stuks'
+  checkout:
+    addressing:
+      header: Adresgegevens
+    back: Terug
+    finalize:
+      address:
         city: Plaats
         country: Land
-        edit:
-            header: sylius.address.edit.header
         firstname: Voornaam
         lastname: Achternaam
-        postcode: Postcode
         province: Provincie
         street: Straat
-    alert:
-        error: Fout
-        info: Informatie
-        success: Succes
-        warning: Waarschuwing
-    backend:
-        alert:
-            info: sylius.backend.alert.info
-        dashboard:
-            chart_order_count: sylius.backend.dashboard.chart_order_count
-            chart_order_total: sylius.backend.dashboard.chart_order_total
-            header: sylius.backend.dashboard.header
-            orders: sylius.backend.dashboard.orders
-            revenue: sylius.backend.dashboard.revenue
-            subheader: sylius.backend.dashboard.subheader
-    cancel: Annuleren
-    cart:
-        empty: Uw winkelwagen is leeg
-        summary:
-            checkout: Naar de kassa
-            clear: Winkelwagen leegmaken
-            grand_total: Algemeen totaal
-            product: Product
-            quantity: Aantal
-            save: Bewaren
-            total: Totaal
-            unit_price: Prijs
-        summary_header: Samenvatting winkelwagen
-        total_items: 1 artikel|%count% artikelen
-    checkout:
-        addressing:
-            header: Addressering stap
-        back: Terug
-        finalize:
-            address:
-                city: Plaats
-                country: Land
-                firstname: Voornaam
-                lastname: Achternaam
-                postcode: Postcode
-                province: Provincie
-                street: Straat
-            header: Samenvatting bestelling
-            order:
-                billing_address: Facturatie adres
-                items_total: Artikelen totaal
-                no_items: Deze bestelling bevat geen artikelen
-                no_promotion: Geen promotie toegepast
-                no_shipping_charges: Geen verzendkosten toegepast
-                no_taxes: Geen belastingen toegepast
-                promotion_discount: Promotie kortingen
-                promotion_total: Promotie totaal
-                shipping_address: Verzend adres
-                shipping_charges: Verzend kosten
-                shipping_total: Verzend totaal
-                tax_total: Belasting totaal
-                taxes: Belasting
-                total: Totaal
-            order_item:
-                quantity: Qty
-                total: Total
-                unit_price: Eenheidsprijs
-            place_order: Plaats bestelling
-            product:
-                name: Naam
-        forward: Ga verder
-        payment:
-            header: Betalingsmethode
-        security:
-            existing_customer: Bestaande klant
-            header: Meld jezelf aan <small>of maak een nieuwe account</small>
-            login: Inloggen
-            new_customer: Nieuwe Klant
-            register: Registreer
-        shipping:
-            header: Verzendmethode
-    country:
-        add_province: Voeg provincie toe
-        create: Maak land aan
-        create_header: Nieuw land
-        id: ID
-        index_header: Landen
-        iso_name: ISO naam
-        manage: Beheer landen
-        name: Naam
-        no_results: Er zijn geen landen geconfigureerd.
-        show_header: Land details
-        update_header: Land bewerken
-    create: Aanmaken
-    dashboard:
-        header: Beheer dashboard
-        no_notifications: Er zijn geen nieuwe meldingen.
-        subheader: Overzicht van uw winkel
-    delete: verwijder
-    edit: bewerk
-    email: E-Mail
-    filter: Filter
-    form:
-        checkout:
-            addressing:
-                different_billing_address: Gebruik een ander adres voor facturatie?
-        choose_file: Kies bestand
-        login:
-            password: Wachtwoord
-            username: Gebruikersnaam
-    gallery:
-        next: sylius.gallery.next
-        previous: sylius.gallery.previous
-        slideshow: sylius.gallery.slideshow
-    generate: Genereer
-    homepage:
-        splash:
-            headline: Welkom in Sylius
-            subheadline: Moderne ecommerce voor Symfony2
-    inventory_unit:
-        created_at: Aangemaakt
-        inventory_state: Inventaris staat
-        name: Naam
-        no_results: Er zijn geen inventaris eenheden weer te geven.
-        shipping_state: Verzend status
-        sku: SKU
-        updated_at: Aangepast
-    login: Inloggen
-    login_header: Beheer
-    logo: Sylius
-    manage: Beheer
-    meta:
-        backend_title: Sylius dashboard.
-        frontend_description: Sylius is een moderne ecommerce oplossing voor PHP, gebaseerd op het Symfony2 framework.
-        frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop, winkel, winkelwagen
-        frontend_title: Sylius, moderne ecommerce voor Symfony2
-    newest: Nieuwste product
-    no: nee
-    option:
-        create: Maak optie aan
-        create_header: Nieuwe product optie
-        index_header: Product opties
-        manage: Beheer opties
-        name: sylius.option.name
-        no_results: Er zijn geen opties geconfigureerd.
-        presentation: sylius.option.presentation
-        update_header: Opties bewerken
-        updated_at: sylius.option.updated_at
-        values: sylius.option.values
-    order:
-        billing_address: Facturatie adres
-        create: Maak bestelling aan
-        create_header: Nieuwe bestelling
-        created_at: Tijdstip aangemaakt
-        general_info: Algemene info
-        id: ID
-        index_header: Huidige bestellingen
-        inventory_tracking: Inventaris volgen
-        items_total: Artikelen totaal
-        manage: Beheer bestellingen
-        no_items: Deze bestelling bevat geen artikelen
-        no_results: U hebt geen nieuwe bestellingen
-        no_shipments: Er zijn geen verzendingen voor deze bestelling
-        no_shipping_charges: Geen verzendkosten toegepast
-        no_taxes: Geen belastingen toegepast
-        number: Nummer
-        payment_state: Status betaling
-        payment_states:
-            balance_due: Saldo
-        promotion_total: Promotie totaal
-        recent_header: sylius.order.recent_header
-        shipment_state: Verzendstatus
-        shipment_states:
-            pending: Hangende
-        shipments: Verzendingen
+      header: Bestellingsoverzicht
+      order:
+        billing_address: Factuuradres
+        items_total: Totaal
+        no_items: De bestellings bevat geen producten
+        no_promotion: Er is geen korting toegepast
+        no_shipping_charges: Geen verzendkosten
+        no_taxes: Geen belastingen
+        promotion_discount: Kortingen
+        promotion_total: Kortingen totaal
         shipping_address: Verzendadres
         shipping_charges: Verzendkosten
-        shipping_total: Verzendtotaal
-        show_header: Details bestelling
-        tax_total: Totaal belasting
+        shipping_total: Verzendkosten totaal
+        tax_total: BTW totaal
         taxes: Belastingen
         total: Totaal
-        update_header: Bestelling bewerken
-        user: Gebruiker
-    order_item:
-        quantity: Aantal
-        sellable: Product
+      order_item:
+        quantity: Hoeveelheid
         total: Totaal
-        unit_price: Eenheidsprijs
-    out_of_stock: Niet op voorraad
-    password: Wachtwoord
+        unit_price: Prijs per stuk
+      place_order: Plaats order
+      product:
+        name: Naam
+    forward: Volgende
     payment:
-        amount: Hoeveelheid
-        create: Betaling aanmaken
-        create_header: Nieuwe betaling
-        created_at: Aangemaakt op
-        id: ID
-        index_header: Betalingen
-        method: Methode
-        no_results: Er zijn geen betalingen geconfigureerd.
-        update_header: Betaling bewerken
-        updated_at: Laatste aanpassing
-    payment_method:
-        create: Betalingsmethode aanmaken
-        create_header: Nieuwe betalingsmethode
-        enabled: Is actief?
-        gateway: gateway
-        id: ID
-        index_header: Betalingsmethodes
-        name: Naam
-        no_results: Er zijn geen betalingsmethodes geconfigureerd.
-        update_header: Betalingsmethode bewerken
-        updated_at: Laatste aanpassing
-    product:
-        add_property: Eigenschap toevoegen
-        available_on: Beschikbaar op
-        available_on_demand: Op aanvraag
-        categorization: Categorisering
-        create: Product aanmaken
-        create_header: Nieuw product
-        description: Omschrijving
-        generate_variants: Genereer varianten
-        index_by_taxon_header: Producten <small>Gecategoriseerd onder "%taxon%" taxon</small>
-        index_header: Producten <small>Index van alle producten in uw winkel</small>
-        manage: Beheer products
-        name: Naam
-        no_description: <i>Geen omschrijving...</i>
-        no_images: Er zijn geen afbeeldingen voor dit product
-        no_options: Er zijn geen opties voor dit product
-        no_properties: Dit product heeft geen weer te geven eigenschappen
-        no_results: Er zijn geen weer te geven producten.
-        no_short_description: <i>Geen korte omschrijving</i>
-        no_sku: <i>Geen SKU</i>
-        no_tax_category: Geen belasting categorie
-        no_taxons: Geen taxons
-        options: Opties
-        price: Retail prijs
-        properties: Eigenschappen
-        show: Bekijk meer
-        show_header: Product details <small>Van product "<strong>%product%</strong>"</small>
-        sku: SKU
-        stock: Huidige stock
-        tabs:
-            categorization: sylius.product.tabs.categorization
-            images: sylius.product.tabs.images
-            options: sylius.product.tabs.options
-            product: sylius.product.tabs.product
-            properties: sylius.product.tabs.properties
-        tax_category: Belasting categorie
-        update_header: Product bewerken
-        updated_at: sylius.product.updated_at
-        variant_selection_method: Selectie methode variant
-    promotion:
-        actions: Acties
-        add_action: Voeg actie toe
-        add_rule: Regel toevoegen
-        coupon_based: sylius.promotion.coupon_based
-        create: Promotie aanmaken
-        create_header: Nieuwe promotie
-        created_at: Aangemaakt op
-        description: Omschrijving
-        ends_at: Eindigt op
-        index_header: Huidige promoties
-        manage: Beheer promoties
-        name: Naam
-        no_results: Er zijn geen promoties geconfigureerd.
-        rules: Regels
-        show_header: Promotie details
-        starts_at: Start op
-        update_header: Promotie bewerken
-        updated_at: Aangepast op
-        usage_limit: Gebruikslimiet
-        used: Gebruikt
-    promotion_action:
-        configuration: Configuratie
-        type: Type
-    promotion_coupon:
-        create: Coupon toevoegen
-        create_header: Nieuwe coupon aanmaken
-        generate: Genereer coupons
-        generate_header: Coupons genereren
-        index: Coupon lijst
-        no_results: Er zijn geen coupons.
-        total_results: Totaal: %total%
-        update_header: Coupon bewerken
-    promotion_rule:
-        configuration: Configuratie
-        type: Type
-    property:
-        add_choice: Keuze toevoegen
-        create: Eigenschap aanmaken
-        create_header: Nieuwe product eigenschap
-        index_header: Product eigenschappen
-        manage: Eigenschappen beheren
-        name: sylius.property.name
-        no_results: Er zijn geen eigenschappen geconfigureerd.
-        presentation: sylius.property.presentation
-        type: sylius.property.type
-        update_header: Eigenschap bewerken
-        updated_at: sylius.property.updated_at
-    prototype:
-        build: Prototype bouwen
-        build_header: Product bouwen van prototype
-        create: Prototype aanmaken
-        create_header: Nieuw prototype
-        index_header: Product prototypes
-        name: sylius.prototype.name
-        no_results: Er zijn geen prototypes gedefinieerd.
-        options: sylius.prototype.options
-        properties: sylius.prototype.properties
-        update_header: Prototype bewerken
-        updated_at: sylius.prototype.updated_at
-    province:
-        provinces: Provincies
-    remember_me: Onthoud mij?
-    save_changes: Wijzigingen bewaren
-    settings:
-        general_header: Algemene instellingen
-        taxation_header: Instellingen belastingen
-    shipment:
-        created_at: aangemaakt op
-        id: ID
-        index_header: Verzending
-        inventory_state: inventaris status
-        manage: Beheer verzendingen
-        method: methode
-        modified: aangepast
-        name: naam
-        no_items: Er zijn geen artikelen.
-        no_results: Er zijn geen verzendingen.
-        order: bestelling
-        show_header: Verzend details
-        sku: SKU
-        state: status
-        updated_at: laatst aangepast
-    shipment_category:
-        manage: Beheer verzend categorieën
-    shipping_category:
-        create: Verzend categorie aanmaken
-        create_header: Nieuwe verzend categorie
-        id: ID
-        index_header: Verzend categorieën
-        manage: Beheer verzend categorieën
-        name: Naam
-        no_results: Er zijn geen verzend categorieën geconfigureerd.
-        update_header: Verzend categorie aanpassen
-        updated_at: Laatst aangepast
-    shipping_method:
-        calculator: Berekening
-        category: Categorie
-        create: Verzend methode aanmaken
-        create_header: Nieuwe verzend methode
-        enabled: Is actief?
-        id: ID
-        index_header: Verzend methodes
-        manage: Beheer verzend methodes
-        name: Naam
-        no_results: Er zijn geen verzend methodes geconfigureerd.
-        show_header: Details verzend methode
-        update_header: Verzend methode aanpassen
-        updated_at: Laatst aangepast
-        zone: Zone
-    shop_by: Winkel via
-    show: details
-    stockable:
-        index_header: Inventaris <small>Hier kan je de huidige stock niveau's bekijken</small>
-        name: sylius.stockable.name
-        no_results: Er zijn geen inventaris items.
-        on_hand: sylius.stockable.on_hand
-        sku: sylius.stockable.sku
-        updated_at: sylius.stockable.updated_at
-    tax_category:
-        create: Belasting categorie aanmaken
-        create_header: Nieuwe belasting categorie
-        description: Omschrijving
-        id: ID
-        index_header: Belasting categorieën
-        manage: Beheer belasting categorieën
-        name: Naam
-        no_description: Geen omschrijving
-        no_results: Er zijn geen belasting categorieën geconfigureerd.
-        update_header: Belasting categorie bewerken
-        updated_at: Laatst aangepast
-    tax_rate:
-        amount: Hoeveelheid
-        calculator: sylius.tax_rate.calculator
-        category: Belasting categorie
-        create: Belasting categorie aanmaken
-        create_header: Nieuwe belasting categorie
-        included_in_price: sylius.tax_rate.included_in_price
-        index_header: Belasting categorieën
-        manage: Beheer belasting categorieën
-        name: Naam
-        no_results: Er zijn geen belasting categorieën geconfigureerd.
-        show_header: Details belasting categorie
-        update_header: Belasting categorie aanpassen
-        updated_at: sylius.tax_rate.updated_at
-        zone: Belasting categorie zone
-    taxon:
-        create: Taxon aanmaken
-        create_header: Nieuwe taxon
-        name: Naam
-        no_results: Er zijn geen taxons.
-        update_header: Taxon aanpassen
-    taxonomy:
-        create: Taxonomie aanmaken
-        create_header: Nieuwe taxonomie
-        index_header: Categorisering <small>Hier kan je de gedefinieerde taxonomies bekijken</small>
-        name: Naam
-        no_results: Er zijn geen taxonomies gedefinieerd.
-        show_header: Taxonomie <small><strong>%name%</strong></small>
-        update_header: Taxonomie aanpassen
-    user:
-        email: E-Mail
-        enabled: Bevestigd?
-        filter:
-            all: Bekijk alle gebruikers
-            unconfirmed: Onbevestigde accounts
-        general_info: Algemene informatie gebruiker "%username%"
-        id: ID
-        index_header: Gebruikers <small>Lijst van alle geregistreerde winkel gebruikers</small>
-        last_login: Laatste login
-        no_results: Er zijn geen gebruikers.
-        order:
-            no_results: sylius.user.order.no_results
-        orders: sylius.user.orders
-        recent_header: sylius.user.recent_header
-        show_header: Gebruiker details
-        username: Gebruikersnaam
-    variant:
-        add_image: Afbeelding toevoegen
-        availability: Beschikbaarheid
-        available_on_demand: Op aanvraag
-        create: Variant aanmaken
-        create_header: Nieuwe product variant
-        delete_image: Afbeelding verwijderen
-        last_update: Laatst aangepast
-        no_results: Er zijn geen varianten.
-        options: Opties
-        price: Prijs
-        stock: Huidige stock
-        update_header: Variant bewerken
-    yes: ja
-    zone:
-        add_member: Lid toevoegen
-        create: Zone aanmaken
-        create_header: Nieuwe zone
-        index_header: Zones
-        manage: Zones beheren
-        name: Naam
-        no_results: Er zijn geen zones geconfigureerd.
-        show_header: Zone details
-        type: Type
-        update_header: Zone bewerken
-    zone_member:
-        members: Leden
+      header: Betaalmethode
+    security:
+      existing_customer: Bestaande klant
+      header: 'Login <small>of maak een nieuwe account</small>'
+      login: Inloggen
+      new_customer: Nieuwe klant
+      register: Registreren
+    shipping:
+      header: Verzendmethode
+  country:
+    add_province: Provincie toevoegen
+    create: Nieuw land
+    create_header: NIeuw land
+    index_header: Landen
+    iso_name: ISO naam
+    manage: Beheer landen
+    name: Naam
+    no_results: Er zijn geen landen geconfigureerd
+    show_header: Land details
+    update_header: Bewerken land
+  create: Aanmaken
+  delete: Delete
+  edit: Bewerken
+  email: E-mail
+  form:
+    choose_file: Selecteer bestand
+    login:
+      password: Wachtwoord
+  gallery:
+    next: sylius.gallery.next
+    previous: sylius.gallery.previous
+    slideshow: sylius.gallery.slideshow
+  generate: Genereer
+  homepage:
+    splash:
+      headline: Welkom bij Sylius
+      subheadline: Moderne ecommerce for Symfony2
+  inventory_unit:
+    created_at: Aangemaakt op
+    inventory_state: Voorraad status
+    name: Naam
+    no_results: Er zijn geen voorraad gegevens om te tonen
+    shipping_state: Verzend status
+    updated_at: Aangepast op
+  login: Inloggen
+  login_header: Beheer
+  logo: Logo
+  manage: Beheer
+  meta:
+    backend_title: Sylius Dasboard
+    frontend_description: Sylius is een moderne ecommerce oplossing voor PHP, gebaseerd op het Symfony2 framework.
+    frontend_keywords: Sylius, ecommerce, symfony2, winkel, webwinkel
+    frontend_title: Sylius, een moderne ecommerce oplossing voor Symfony2
+  newest: Nieuwste producten
+  option:
+    create: Optie toevoegen
+    create_header: Nieuwe product optie
+    index_header: Product opties
+    manage: Opties beheren
+    name: sylius.option.name
+    no_results: Er zijn geen opties geconfigureerd
+    presentation: sylius.option.presentation
+    update_header: Opties bewerken
+    updated_at: sylius.option.updated_at
+    values: sylius.option.values
+  order:
+    billing_address: Verzendadres
+    create: Order toevoegen
+    create_header: Nieuwe order
+    created_at: Aanmaakdatum
+    general_info: Algemene informatie
+    index_header: Huidige orders
+    inventory_tracking: Voorraad beheer
+    items_total: Totaal
+    manage: Onderbeheer
+    no_items: Deze order heeft geen artikelen
+    no_results: Er zijn geen nieuwe orders
+    no_shipments: Er is geen verzending voor deze order
+    no_shipping_charges: Geen verzendkosten
+    no_taxes: Geen belastingen
+    number: Nummer
+    payment_state: Order status
+    payment_states:
+      balance_due: Nog te betalen
+    promotion_total: Kortingen totaal
+    recent_header: sylius.order.recent_header
+    shipment_state: Verzend status
+    shipment_states:
+      pending: In behandeling
+    shipments: Verzendingen
+    shipping_address: Verzendadres
+    shipping_charges: Verzendkosten
+    shipping_total: Verzendkosten totaal
+    show_header: Order details
+    tax_total: Belastingen totaal
+    taxes: Belastingen
+    total: Totaal
+    update_header: Order bewerken
+    user: Gebruiker
+  shipment:
+    created_at: Aangemaakt op
+    index_header: Verzendingen
+    inventory_state: Voorraad status
+    manage: Beheer verzendingen
+    method: Methode
+    modified: Aangepast
+    name: Naam
+    no_items: Er zijn geen items om te tonen
+    no_results: Er zijn geen verzendingen om te tonen
+    order: bestelling
+    show_header: Verzenddetails
+    state: Status
+    updated_at: Laatste aanpassing op
+  order_item:
+    quantity: Hoeveelheid
+    total: Totaal
+    unit_price: Prijs per stuk
+  out_of_stock: Geen voorraad
+  password: Wachtwoord
+  payment:
+    amount: Bedrag
+    create: Betaling aanmaken
+    create_header: Nieuwe betaling
+    created_at: Aangemaakt op
+    index_header: Betalingen
+    method: Betaalmethode
+    no_results: Er zijn geen betaalmethoden geconfigureerd
+    update_header: Bewerk betaling
+    updated_at: Laatste aanpassing op
+  payment_method:
+    create: Nieuwe betaalmethode aanmaken
+    create_header: Nieuwe betaalmethode
+    enabled: Is actief?
+    gateway: Gateway
+    index_header: Betaalmethoden
+    name: Naam
+    no_results: Er zijn geen betaalmethoden geconfigureerd
+    update_header: Bewerk betaalmethode
+    updated_at: Laatste aanpassing op
+  product:
+    add_property: Eigenschap toevoegen
+    available_on: Beschikbaar op
+    available_on_demand: Beschikbaar op aanvraag
+    categorization: Categorie indeling
+    create: Product aanmaken
+    create_header: Nieuw product
+    description: Omschrijving
+    generate_variants: Algemene varianten
+    index_by_taxon_header: 'Producten<small>Gecategorizeerd onder "%taxon%" belasting</small>'
+    index_header: 'Producten <small>Index van alle producten in de winkel</small>'
+    manage: Beheer producten
+    name: Naam
+    no_description: '<i>Geen omschrijving...</i>'
+    no_images: Er zijn geen afbeeldingen voor dit product
+    no_options: Er zijn geen opties voor dit product
+    no_properties: Dit product heeft geen eigenschappen gedefinieerd
+    no_results: Er zijn geen producten om te tonen
+    no_short_description: '<i>Geen korte omschrijving</i>'
+    no_sku: '<i>Geen SKU</i>'
+    no_tax_category: Geen belasting categorie
+    no_taxons: Geen belastingen gedefinieerd
+    options: Opties
+    price: Prijs
+    properties: Eigenschappen
+    show: Toon meer
+    show_header: 'Product details <small>"<strong>%product%</strong>"</small>'
+    stock: Voorraad
+    tabs:
+      categorization: sylius.product.tabs.categorization
+      images: sylius.product.tabs.images
+      options: sylius.product.tabs.options
+      product: sylius.product.tabs.product
+      properties: sylius.product.tabs.properties
+    tax_category: Belasting categorie
+    update_header: Bewerk product
+    updated_at: sylius.product.updated_at
+    variant_selection_method: Variant selectiemethode
+  promotion:
+    actions: Acties
+    add_action: Actie toevoegen
+    add_rule: Regel toevoegen
+    coupon_based: sylius.promotion.coupon_based
+    create: Korting toeveogen
+    create_header: Nieuwe korting
+    created_at: Aangemaakt op
+    description: Omschrijving
+    ends_at: Einddatum
+    index_header: Huidige kortingen
+    manage: Beheer kortingen
+    name: Naam
+    no_results: Er zijn geen kortingen geconfigureerd
+    rules: Regels
+    show_header: Korting details
+    starts_at: Begint op
+    update_header: Korting bewerken
+    updated_at: Bijgewerkt op
+    usage_limit: Gebruikslimiet
+    used: Gebruikt
+  promotion_action:
+    configuration: Configuratie
+  promotion_coupon:
+    create: Coupon toevoegen
+    create_header: Nieuwe coupon maken
+    generate: Coupons genereren
+    generate_header: Genereer coupons
+    index: Lijst van coupons
+    no_results: Er zijn geen coupons om te tonen
+    update_header: Bewerk coupon
+  promotion_rule:
+    configuration: Configuratie
+  property:
+    add_choice: Keuze toevoegen
+    create: Eigenschap aanmaken
+    create_header: Nieuw product eigenschap
+    index_header: Product eigenschappen
+    manage: Beheer eigenschappen
+    name: sylius.property.name
+    no_results: Er zijn geen eigenschappen geconfigureerd
+    presentation: sylius.property.presentation
+    type: sylius.property.type
+    update_header: Bewerk eigenschap
+    updated_at: sylius.property.updated_at
+  prototype:
+    build: Prototype aanmaken
+    build_header: Maak een product op basis van het prototype
+    create: Maak prototype
+    create_header: Nieuw prototype
+    index_header: Product prototypen
+    name: sylius.prototype.name
+    no_results: Er zijn geen prototypen gedefinieerd
+    options: sylius.prototype.options
+    properties: sylius.prototype.properties
+    update_header: Bewerk prototype
+    updated_at: sylius.prototype.updated_at
+  province:
+    provinces: Provincies
+  remember_me: Onthoud mij?
+  save_changes: Aanpassingen opslaan
+  settings:
+    general_header: Algemene instellingen
+    taxation_header: Belastingen configuratie
+  shipment_category:
+    manage: Beheer vezend categorieën
+  shipping_category:
+    create: Aanmaken verzend categorie
+    create_header: Nieuwe verzend categorie
+    index_header: Verzend categorieën
+    manage: Beheer verzend categorieën
+    name: Naam
+    no_results: Er zijn geen verzend categorieën geconfigureerd
+    update_header: Bewerk verzend categorie
+    updated_at: Laatst aangepast op
+  shipping_method:
+    calculator: Rekentool
+    category: Categorie
+    create: Verzendmethode aanmaken
+    create_header: Nieuwe verzendmethode
+    enabled: Is actief?
+    index_header: Verzendmethoden
+    manage: Beheer verzendmethoden
+    name: Naam
+    no_results: Er zijn geen verzendmethoden geconfigureerd
+    show_header: Verzendmethode details
+    update_header: Bewerk verzendmethode
+    updated_at: Laatst aangepast op
+    zone: sylius.form.shipping_method.zone
+  shop_by: Filteren op
+  show: Details
+  stockable:
+    index_header: 'Voorraad<small>Hier kan je de huidige voorraad statussen zien</small>'
+    name: sylius.stockable.name
+    no_results: Er zijn geen voorraadgegevens om te tonen
+    on_hand: sylius.stockable.on_hand
+    sku: sylius.stockable.sku
+    updated_at: sylius.stockable.updated_at
+  tax_category:
+    create: Aanmaken belasting categorie
+    create_header: Nieuwe belasting categorie
+    description: Omschrijving
+    index_header: Belasting categorieën
+    manage: Beheer belasting categorieën
+    name: Naam
+    no_description: Geen omschrijving
+    no_results: Er zijn geen belastingcategorieën geconfigureerd
+    update_header: Bewerk belasting categorie
+    updated_at: Laatst aangepast op
+  tax_rate:
+    amount: Bedrag
+    calculator: sylius.tax_rate.calculator
+    category: Categorie
+    create: Aanmaken belastingtarief
+    create_header: Nieuw belastingtarief
+    included_in_price: sylius.tax_rate.included_in_price
+    index_header: Belastingtarieven
+    manage: Beheer belastingtarieven
+    name: Naam
+    no_results: Er zijn geen belastingtarieven geconfigureerd
+    show_header: Belastingtarief details
+    update_header: Bewerken belastingtarief
+    updated_at: sylius.tax_rate.updated_at
+    zone: sylius.tax_rate.zone
+  taxon:
+    create: Aanmaken taxon
+    create_header: Nieuwe taxon
+    name: Naam
+    no_results: Er zijn geen taxons om te tonen
+    update_header: Bewerken taxon
+  taxonomy:
+    create: Aanmaken taxonomie
+    create_header: Nieuwe taxonomie
+    index_header: Taxonomieën
+    name: Naam
+    no_results: Er zijn geen taxonomieën gedefinieerd
+    show_header: 'Taxonomie <small><strong>%name%</strong></small>'
+    update_header: Bewerk taxonomie
+  user:
+    email: E-mail
+    enabled: Bevestigd?
+    filter:
+      all: Toon alle gebruikers
+      unconfirmed: Onbevestigde accounts
+    general_info: 'Gebruiker "%username%" algemene informatie'
+    index_header: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
+    last_login: Laatste login
+    no_results: Er zijn geen gebruikers om te tonen
+    order:
+      no_results: sylius.user.order.no_results
+    orders: sylius.user.orders
+    recent_header: sylius.user.recent_header
+    show_header: Gebruikers details
+    username: Gebruikersnaam
+  variant:
+    add_image: Afbeelding toevoegen
+    availability: Beschikbaarheid
+    available_on_demand: Beschikbaar op aanvraag
+    create: Variant aanmaken
+    create_header: Nieuwe product variant
+    delete_image: Afbeelding verwijderen
+    last_update: Laatste update
+    no_results: Er zijn geen varianten om te tonen
+    options: Opties
+    price: Prijs
+    stock: Huidige voorraad
+    update_header: Wijzig variant
+  "yes": Ja
+  zone:
+    add_member: Member toevoegen
+    create: Zone toevoegen
+    create_header: Nieuwe zone
+    manage: Beheer zones
+    name: Naam
+    no_results: Er zijn geen zones geconfigureerd
+    update_header: Bewerk Zone
+  zone_member:
+    members: Leden

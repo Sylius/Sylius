@@ -1,0 +1,6 @@
+---
+sylius:
+  label:
+    product:
+      meta_keywords: Metaタグ(keywords)
+      meta_description: metaタグ(description)

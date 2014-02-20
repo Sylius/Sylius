@@ -1,39 +1,35 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-fos_user:
-    email:
-        already_used: fos_user.email.already_used
-        blank: fos_user.email.blank
-        invalid: fos_user.email.invalid
-        long: fos_user.email.long
-        short: fos_user.email.short
-    password:
-        blank: fos_user.password.blank
-        short: fos_user.password.short
-    username:
-        already_used: fos_user.username.already_used
-        blank: fos_user.username.blank
-        long: fos_user.username.long
-        short: fos_user.username.short
+---
 sylius:
-    checkout:
-        payment_method:
-            not_blank: Proszę wybrać metodę płatności.
-        shipping_method:
-            not_blank: Proszę wybrać metodę wysyłki.
-    variant:
-        onHand:
-            min: On hand must be greater than {{ limit }}.
-            not_blank: Please enter on hand.
-        price:
-            min: Cena musi być większa niż {{ limit }}.
-            not_blank: Proszę podać cenę.
+  group:
+    name:
+      max: 'Nazwa grupy nie może być dłuższa niż {{ limit }} znaków.'
+      min: 'Nazwa grupy nie może być krótsza niż {{ limit }} znaków.'
+      not_blank: Wprowadź nazwę grupy.
+  locale:
+    code:
+      not_blank: Proszę podać kod ISO języka.
+      unique: Ten język jest już skonfigurowany.
+  user:
+    first_name:
+      max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'
+      min: 'Imię nie może mieć mniej niż {{ limit }} znaków.'
+      not_blank: Proszę podać swoje imię.
+    last_name:
+      max: 'Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
+      min: 'Nazwisko nie może mieć mniej niż {{ limit }} znaków.'
+      not_blank: Proszę wpisać swoje nazwisko.
+  variant:
+    onHand:
+      min: 'Stan magazynowy musi wynosić więcej niż {{ limit }}.'
+      not_blank: Proszę wprowadzić stan magazynowy.
+    price:
+      min: 'Cena musi być większa niż {{ limit }}.'
+      not_blank: Proszę podać cenę.
 sylius_shipping:
-    method:
-        zone:
-            not_blank: sylius_shipping.method.zone.not_blank
+  method:
+    zone:
+      not_blank: sylius_shipping.method.zone.not_blank
 sylius_taxation:
-    rate:
-        zone:
-            not_blank: Please enter tax rate zone.
+  rate:
+    zone:
+      not_blank: Proszę wybrać strefę opodatkowania.

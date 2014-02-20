@@ -1,0 +1,11 @@
+---
+sylius:
+  form:
+    configuration:
+      database:
+        name: Название
+        password: Пароль
+      mailer:
+        password: Пароль
+    setup:
+      plain_password: Пароль

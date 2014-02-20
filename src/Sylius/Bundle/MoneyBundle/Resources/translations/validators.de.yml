@@ -1,10 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    exchange_rate:
-        currency:
-            not_blank: Bitte wählen Sie eine Währung aus.
-        rate:
-            not_blank: Bitte geben Sie einen Kurs an.
-        unique: Die Währung muss einmalig sein.
+  exchange_rate:
+    currency:
+      not_blank: Bitte wählen Sie eine Währung aus.
+    rate:
+      not_blank: Bitte geben Sie einen Kurs an.
+    unique: Die Währung muss einmalig sein.

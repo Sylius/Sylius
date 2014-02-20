@@ -1,0 +1,6 @@
+---
+sylius:
+  resource:
+    create: '%resource% je uspešno kreiran.'
+    update: '%resource% je uspešno ažuriran.'
+    delete: '%resource% je uspešno obrisan.'

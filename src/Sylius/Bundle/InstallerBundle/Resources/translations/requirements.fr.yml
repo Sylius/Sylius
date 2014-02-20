@@ -1,0 +1,27 @@
+---
+sylius:
+  extensions:
+    0: extensions
+    apc: APC
+    ctype: CType
+    gd: GD
+    help: "Installer et activer l'extension %extension%."
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+  filesystem:
+    0: système de fichiers
+    cache:
+      - cache
+    not_writable: pas accessible en écriture
+    writable: accessible en écriture
+  settings:
+    0: Version de PHP et paramètres
+    timezone: fuseau horaire
+    version: Version de PHP
+    version_recommanded: Version de PHP recommandée

@@ -1,8 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    resource:
-        create: %resource% se ha creado con éxito.
-        update: %resource% se ha actualizado con éxito.
-        delete: %resource% ha sido eliminado.
+  resource:
+    create: '%resource% se ha creado con éxito.'
+    update: '%resource% se ha actualizado con éxito.'
+    delete: '%resource% ha sido eliminado.'

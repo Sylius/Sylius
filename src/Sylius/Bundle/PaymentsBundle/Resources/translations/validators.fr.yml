@@ -1,23 +1,26 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    credit_card:
-        cardholder_name:
-            min_length: sylius.credit_card.cardholder_name.min_length
-            not_blank: sylius.credit_card.cardholder_name.not_blank
-        expiry_month:
-            max_range: sylius.credit_card.expiry_month.max_range
-            min_range: sylius.credit_card.expiry_month.min_range
-        number:
-            luhn: sylius.credit_card.number.luhn
-        security_code:
-            max_length: sylius.credit_card.security_code.max_length
-            min_length: sylius.credit_card.security_code.min_length
-    payment_method:
-        gateway:
-            not_blank: Veuillez sélectionner la passerelle de la méthode de paiement.
-        name:
-            max_length: Le nom de la méthode de paiement doit avoir au maximum {{ limit }} caractères.
-            min_length: Le nom de la méthode de paiement doit avoir au minimum {{ limit }} caractères.
-            not_blank: Veuillez entrer le nom de la méthode de paiement.
+  credit_card:
+    cardholder_name:
+      min_length: sylius.credit_card.cardholder_name.min_length
+      not_blank: Veuillez entrer le nom du titulaire de la carte.
+    expiry_month:
+      max_range: sylius.credit_card.expiry_month.max_range
+      min_range: sylius.credit_card.expiry_month.min_range
+      not_blank: "Veuillez sélectionner le mois d'expiration."
+    number:
+      not_blank: Veuillez entrer le numéro de la carte.
+      luhn: sylius.credit_card.number.luhn
+    security_code:
+      not_blank: Veuillez entrer le code de sécurité.
+      max_length: sylius.credit_card.security_code.max_length
+      min_length: sylius.credit_card.security_code.min_length
+    expiry_year:
+      not_blank: "Veuillez sélectionner l'année d'expiration."
+  payment_method:
+    gateway:
+      not_blank: Veuillez sélectionner la passerelle de la méthode de paiement.
+    name:
+      max_length: 'Le nom de la méthode de paiement doit avoir au maximum {{ limit }} caractères.'
+      min_length: 'Le nom de la méthode de paiement doit avoir au minimum {{ limit }} caractères.'
+      not_blank: Veuillez entrer le nom de la méthode de paiement.

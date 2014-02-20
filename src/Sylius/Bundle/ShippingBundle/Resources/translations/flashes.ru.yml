@@ -1,0 +1,5 @@
+---
+sylius:
+  shipment:
+    ship:
+      success: Доставка завершена.

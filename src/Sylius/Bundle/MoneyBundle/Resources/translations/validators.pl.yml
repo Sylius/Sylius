@@ -1,0 +1,8 @@
+---
+sylius:
+  exchange_rate:
+    currency:
+      not_blank: Proszę wybrać walutę.
+    rate:
+      not_blank: Podaj kurs.
+    unique: Waluta musi być unikalna.

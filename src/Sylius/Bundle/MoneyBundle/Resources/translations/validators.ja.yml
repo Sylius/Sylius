@@ -1,10 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    exchange_rate:
-        currency:
-            not_blank: 通貨を選んでください。
-        rate:
-            not_blank: 換算率を入力してください。
-        unique: その通貨の組み合わせは既に登録されています。
+  exchange_rate:
+    currency:
+      not_blank: 通貨を選んでください。
+    rate:
+      not_blank: 換算率を入力してください。
+    unique: その通貨の組み合わせは既に登録されています。

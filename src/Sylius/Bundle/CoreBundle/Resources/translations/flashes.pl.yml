@@ -1,6 +1,12 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    checkout:
-        success: Dziękujemy za zamówienie!
+  cart:
+    restricted_zone_removal: 'Produkt %product% został usunięty z koszyka, ponieważ jest niedostępny w Twoim kraju.'
+  checkout:
+    restricted_zone: Produkt nie jest dostępny w Twoim kraju.
+    success: Dziękujemy za zamówienie!
+    canceled: Twoja płatność została anulowana.
+    pending: Twoja płatność oczekuje na weryfikacje.
+    failed: Twoja płatność została odrzucona.
+    unknown: Nieznany błąd płatności.
+    out_of_stock: 'W magazynie znajduje się jedynie %quantity% szt. produktu %name%.'

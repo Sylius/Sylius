@@ -1,8 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    resource:
-        create: %resource% is succesvol aangemaakt.
-        update: %resource% is succesvol gewijzigd.
-        delete: %resource% is succesvol verwijderd.
+  resource:
+    create: '%resource% is succesvol aangemaakt.'
+    update: '%resource% is succesvol gewijzigd.'
+    delete: '%resource% is succesvol verwijderd.'

@@ -1,0 +1,40 @@
+---
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Quantité
+      percentage_discount_configuration:
+        percentage: Pourcentage
+      shipping_discount_configuration:
+        percentage: Pourcentage
+      type: Type
+    rule:
+      taxonomy_configuration:
+        taxons: Famille de tags
+      item_total_configuration:
+        amount: Quantité
+      user_loyality_configuration:
+        unit:
+          weeks: Semaines
+          months: Mois
+          years: Années
+        after: Utilisateur créé après cette période
+      shipping_country_configuration:
+        country: Pays
+      type: Type
+    coupon:
+      code: Code
+      usage_limit: "Limite d'utilisation"
+    coupon_generate_instruction:
+      amount: Quantité
+      usage_limit: "Limite d'utilisation"
+    promotion:
+      actions: Actions
+      coupon_based: Basé sur des coupons
+      description: Description
+      ends_at: Se termine le
+      name: Nom
+      rules: Règles
+      starts_at: Commence le
+      usage_limit: "Limite d'utilisation"

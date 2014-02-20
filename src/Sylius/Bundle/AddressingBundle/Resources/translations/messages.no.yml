@@ -1,0 +1,10 @@
+---
+sylius:
+  form:
+    address:
+      city: By
+      postcode: Postnummer
+      street: Gate
+      province: Provins
+    zone_member_province:
+      province: Provins

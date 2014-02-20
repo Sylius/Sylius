@@ -1,0 +1,90 @@
+---
+sylius:
+  backend:
+    menu:
+      main:
+        configuration: Configuration
+        countries: Pays
+        customer: Clients
+        dashboard: Tableau de bord
+        exchange_rates: Taux de change
+        general_settings: Configuration générale
+        homepage: Votre boutique
+        locales: Locales
+        new_order: Ajouter une nouvelle commande
+        new_promotion: Ajouter une nouvelle promotion
+        options: Gérer les options de produit
+        orders: Commandes en cours
+        payment_methods: Moyens de paiements
+        payments: Paiements
+        products: Produits
+        promotions: Promotions
+        properties: Configuration des propriétés
+        prototypes: Prototypes de produits
+        sales: Commandes
+        shipments: Expéditions
+        shipping_categories: "Catégories d'expédition"
+        shipping_methods: Modes de livraison
+        stockables: Stocks
+        tax_categories: Catégories de taxes
+        tax_rates: Taux de TVA
+        taxation_settings: Configuration des taxes
+        taxonomies: Catégorisation
+        users: Utilisateurs
+        zones: Zones
+      sidebar:
+        blocks: Blocs
+        configuration: Configuration
+        content: Contenu
+        countries: Pays
+        customer: Clients
+        dashboard: Tableau de bord
+        exchange_rates: Taux de change
+        general_settings: Configuration générale
+        groups: Groupes
+        homepage: Retour à la boutique
+        locales: Locales
+        new_order: Ajouter une nouvelle commande
+        new_promotion: Ajouter une nouvelle promotion
+        options: Gérer les options
+        orders: Commandes en cours
+        pages: Pages
+        payment_methods: Modes de paiement
+        payments: Paiements
+        products: Produits
+        promotions: Promotions
+        properties: Configurez les propriétés
+        prototypes: Prototypes de produits
+        sales: Commandes
+        shipments: Expéditions
+        shipping_categories: "Catégories d'expédition"
+        shipping_methods: Modes de livraison
+        stockables: Stocks
+        tax_categories: Catégories de taxes
+        tax_rates: Taux de TVA
+        taxation_settings: Configuration des taxes
+        taxonomies: Catégorisation
+        users: Utilisateurs
+        zones: Zones
+  frontend:
+    menu:
+      account:
+        addresses: "Mon carnet d'adresses"
+        homepage: Accueil
+        orders: Mes commandes / mes factures
+        password: Mon mot de passe
+        profile: Mes informations personnelles
+        shop: Retour à la boutique
+      currency: 'Afficher les prix en %currency%'
+      main:
+        account: Mon compte
+        administration: Administration
+        login: Connexion
+        logout: Déconnexion
+        register: Créer un compte
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google +
+        linkedin: LinkedIn
+        twitter: Twitter

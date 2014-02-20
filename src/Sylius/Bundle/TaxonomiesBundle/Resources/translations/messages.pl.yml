@@ -1,10 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
+---: ---
 sylius:
-    form:
-        taxon:
-            name: Nazwa
-            permalink: Link bezpośredni
-        taxonomy:
-            name: Nazwa
+  form:
+    taxon:
+      description: Opis
+      name: Nazwa
+      permalink: Link bezpośredni
+    taxonomy:
+      name: Nazwa

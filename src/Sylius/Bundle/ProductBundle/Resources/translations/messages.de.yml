@@ -1,18 +1,14 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    label:
-        product:
-            name: Name
-            description: Beschreibung
-            properties: Eigenschaften
-            available_on: Verfügbar ab
-            meta_keywords: Meta keywords
-            meta_description: Meta description
-        property:
-            name: Interner Name
-            presentation: Präsentation
-        prototype:
-            name: Name
-            properties: Eigenschaften
+  label:
+    product:
+      description: Beschreibung
+      properties: Eigenschaften
+      available_on: Verfügbar ab
+      meta_keywords: Meta Keywords
+      meta_description: Meta Beschreibung
+    property:
+      name: Interner Name
+      presentation: Präsentation
+    prototype:
+      properties: Eigenschaften

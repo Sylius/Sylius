@@ -1,8 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
+---
 sylius:
-    form:
-        exchange_rate:
-            currency: 通貨
-            rate: 換算率
+  form:
+    exchange_rate:
+      currency: 通貨
+      rate: 換算率

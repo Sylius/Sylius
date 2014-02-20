@@ -1,0 +1,5 @@
+---
+sylius:
+  form:
+    promotion:
+      description: Descrizione
