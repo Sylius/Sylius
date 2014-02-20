@@ -12,17 +12,19 @@
 namespace spec\Sylius\Bundle\ProductBundle\Builder;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
 use Sylius\Bundle\ProductBundle\Model\Property\Property;
+use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
+use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class PrototypeBuilderSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $productPropertyRepository
-     */
-    function let($productPropertyRepository)
+    function let(RepositoryInterface $productPropertyRepository)
     {
         $this->beConstructedWith($productPropertyRepository);
     }
@@ -37,14 +39,12 @@ class PrototypeBuilderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ProductBundle\Builder\PrototypeBuilderInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PrototypeInterface       $prototype
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface         $product
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface        $property
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     */
     function it_assigns_prototype_properties_to_product(
-        $productPropertyRepository, $prototype, $product, $property, $productProperty
+        $productPropertyRepository,
+        PrototypeInterface$prototype,
+        ProductInterface $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
     )
     {
         $prototype->getProperties()->willReturn(array($property))->shouldBeCalled();

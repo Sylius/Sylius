@@ -11,20 +11,19 @@
 
 namespace spec\Sylius\Bundle\ProductBundle\Validator;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ProductUniqueValidatorSpec extends ObjectBehavior
 {
-    /**
-     * @param Doctrine\Common\Persistence\ObjectRepository $productRepository
-     * @param Symfony\Component\Validator\ExecutionContext $context
-     */
-    function let($productRepository, $context)
+    function let(ObjectRepository $productRepository, ExecutionContext $context)
     {
         $this->beConstructedWith($productRepository);
         $this->initialize($context);
@@ -40,11 +39,12 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $conflictualProduct
-     */
-    function it_adds_violation_if_product_with_given_property_value_already_exists($productRepository, $product, $conflictualProduct, $context)
+    function it_adds_violation_if_product_with_given_property_value_already_exists(
+        $productRepository,
+        ProductInterface $product,
+        ProductInterface $conflictualProduct,
+        $context
+    )
     {
         $constraint = new ProductUnique(array(
             'property' => 'name',
@@ -59,10 +59,11 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     */
-    function it_does_not_add_violation_if_product_with_given_property_value_does_not_exist($productRepository, $product, $context)
+    function it_does_not_add_violation_if_product_with_given_property_value_does_not_exist(
+        $productRepository,
+        ProductInterface $product,
+        $context
+    )
     {
         $constraint = new ProductUnique(array(
             'property' => 'name',
@@ -77,10 +78,11 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     */
-    function it_does_not_add_violation_if_conflictual_product_and_validated_one_are_the_same($productRepository, $product, $context)
+    function it_does_not_add_violation_if_conflictual_product_and_validated_one_are_the_same(
+        $productRepository,
+        ProductInterface $product,
+        $context
+    )
     {
         $constraint = new ProductUnique(array(
             'property' => 'name',
