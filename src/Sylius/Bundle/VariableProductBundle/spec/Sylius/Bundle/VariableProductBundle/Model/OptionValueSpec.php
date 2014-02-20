@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\VariableProductBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,19 +39,13 @@ class OptionValueSpec extends ObjectBehavior
         $this->getOption()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function it_should_allow_assigning_itself_to_an_option($option)
+    function it_should_allow_assigning_itself_to_an_option(OptionInterface $option)
     {
         $this->setOption($option);
         $this->getOption()->shouldReturn($option);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function it_should_allow_detaching_itself_from_an_option($option)
+    function it_should_allow_detaching_itself_from_an_option(OptionInterface $option)
     {
         $this->setOption($option);
         $this->getOption()->shouldReturn($option);
@@ -84,10 +79,7 @@ class OptionValueSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function it_returns_its_option_name($option)
+    function it_returns_its_option_name(OptionInterface $option)
     {
         $option->getName()->willReturn('T-Shirt size');
         $this->setOption($option);
@@ -103,10 +95,7 @@ class OptionValueSpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function it_returns_its_option_presentation($option)
+    function it_returns_its_option_presentation(OptionInterface $option)
     {
         $option->getPresentation()->willReturn('Size');
         $this->setOption($option);

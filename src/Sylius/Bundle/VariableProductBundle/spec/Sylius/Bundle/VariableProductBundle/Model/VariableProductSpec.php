@@ -11,7 +11,10 @@
 
 namespace spec\Sylius\Bundle\VariableProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
+use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -33,10 +36,7 @@ class VariableProductSpec extends ObjectBehavior
         $this->getMasterVariant()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
-     */
-    function its_master_variant_should_be_mutable_and_define_given_variant_as_master($variant)
+    function its_master_variant_should_be_mutable_and_define_given_variant_as_master(VariantInterface $variant)
     {
         $variant->setProduct($this)->shouldBeCalled();
         $variant->setMaster(true)->shouldBeCalled();
@@ -44,10 +44,7 @@ class VariableProductSpec extends ObjectBehavior
         $this->setMasterVariant($variant);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
-     */
-    function it_should_not_add_master_variant_twice_to_collection($variant)
+    function it_should_not_add_master_variant_twice_to_collection(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(true);
 
@@ -65,10 +62,7 @@ class VariableProductSpec extends ObjectBehavior
         $this->hasVariants()->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\VariantInterface $variant
-     */
-    function its_hasVariants_should_return_true_only_if_any_variants_defined($variant)
+    function its_hasVariants_should_return_true_only_if_any_variants_defined(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(false);
 
@@ -93,37 +87,25 @@ class VariableProductSpec extends ObjectBehavior
         $this->hasOptions()->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function its_hasOptions_should_return_true_only_if_any_options_defined($option)
+    function its_hasOptions_should_return_true_only_if_any_options_defined(OptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOptions()->shouldReturn(true);
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection $options
-     */
-    function its_options_collection_should_be_mutable($options)
+    function its_options_collection_should_be_mutable(Collection $options)
     {
         $this->setOptions($options);
         $this->getOptions()->shouldReturn($options);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function it_should_add_option_properly($option)
+    function it_should_add_option_properly(OptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\VariableProductBundle\Model\OptionInterface $option
-     */
-    function it_should_remove_option_properly($option)
+    function it_should_remove_option_properly(OptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
