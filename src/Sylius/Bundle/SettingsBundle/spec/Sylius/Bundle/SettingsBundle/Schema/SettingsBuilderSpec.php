@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,10 +39,7 @@ class SettingsBuilderSpec extends ObjectBehavior
         $this->getTransformers()->shouldReturn(array());
     }
 
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface $transformer
-     */
-    function it_should_set_transformer_for_parameter_by_name($transformer)
+    function it_should_set_transformer_for_parameter_by_name(ParameterTransformerInterface $transformer)
     {
         $this->setTransformer('test', $transformer);
 
