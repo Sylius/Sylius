@@ -13,6 +13,9 @@ namespace spec\Sylius\Bundle\TaxonomiesBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -34,11 +37,10 @@ class TaxonTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     * @param Symfony\Component\Form\FormFactoryInterface $factory
-     */
-    function it_builds_form_with_name_and_permalink_and_description_fields($builder, $factory)
+    function it_builds_form_with_name_and_permalink_and_description_fields(
+        FormBuilder $builder,
+        FormFactoryInterface $factory
+    )
     {
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(Argument::type('Sylius\Bundle\TaxonomiesBundle\Form\EventListener\BuildTaxonFormListener'))->shouldBeCalled();
@@ -50,10 +52,7 @@ class TaxonTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_defines_assigned_data_class($resolver)
+    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
