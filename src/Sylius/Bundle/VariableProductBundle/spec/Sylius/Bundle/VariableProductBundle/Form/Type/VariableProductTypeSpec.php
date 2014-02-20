@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\VariableProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactory;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -39,11 +41,7 @@ class VariableProductTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     * @param Symfony\Component\Form\FormFactory $factory
-     */
-    function it_builds_form_with_proper_fields($builder, $factory)
+    function it_builds_form_with_proper_fields(FormBuilder $builder, FormFactory $factory)
     {
         $builder
             ->add('name', 'text', Argument::any())

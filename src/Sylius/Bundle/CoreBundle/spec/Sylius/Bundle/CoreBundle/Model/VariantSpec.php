@@ -12,6 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -48,10 +51,7 @@ class VariantSpec extends ObjectBehavior
         $this->setPrice(4.99)->getPrice()->shouldReturn(4.99);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\VariantInterface $masterVariant
-     */
-    function it_should_inherit_price_from_master_variant($masterVariant)
+    function it_should_inherit_price_from_master_variant(VariantInterface $masterVariant)
     {
         $masterVariant->isMaster()->willReturn(true);
         $masterVariant->getAvailableOn()->willReturn(new \DateTime('yesterday'));
@@ -67,10 +67,7 @@ class VariantSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShippableInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
-     */
-    function it_returns_null_if_product_has_no_shipping_category($product)
+    function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)
     {
         $this->setProduct($product);
 
@@ -78,11 +75,10 @@ class VariantSpec extends ObjectBehavior
         $this->getShippingCategory()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\ProductInterface $product
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface      $shippingCategory
-     */
-    function it_returns_the_product_shipping_category($product, $shippingCategory)
+    function it_returns_the_product_shipping_category(
+        ProductInterface $product,
+        ShippingCategoryInterface $shippingCategory
+    )
     {
         $this->setProduct($product);
 

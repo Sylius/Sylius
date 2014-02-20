@@ -11,26 +11,24 @@
 
 namespace spec\Sylius\Bundle\ProductBundle\Builder;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
+use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ProductBuilderSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface     $product
-     * @param Doctrine\Common\Persistence\ObjectManager              $productManager
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $productRepository
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $propertyRepository
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $productPropertyRepository
-     */
     function let(
-        $product,
-        $productManager,
-        $productRepository,
-        $propertyRepository,
-        $productPropertyRepository
+        ProductInterface $product,
+        ObjectManager $productManager,
+        RepositoryInterface $productRepository,
+        RepositoryInterface $propertyRepository,
+        RepositoryInterface $productPropertyRepository
     )
     {
         $this->beConstructedWith(
@@ -50,11 +48,13 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ProductBundle\Builder\ProductBuilder');
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface        $property
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     */
-    function it_adds_property_to_product_if_already_exists($propertyRepository, $productPropertyRepository, $product, $property, $productProperty)
+    function it_adds_property_to_product_if_already_exists(
+        $propertyRepository,
+        $productPropertyRepository,
+        $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
+    )
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($property);
         $productPropertyRepository->createNew()->shouldBeCalled()->willReturn($productProperty);
@@ -67,11 +67,14 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->addProperty('collection', 2013)->shouldReturn($this);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface        $property
-     * @param Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface $productProperty
-     */
-    function it_creates_property_if_it_does_not_exist($propertyRepository, $productPropertyRepository, $productManager, $product, $property, $productProperty)
+    function it_creates_property_if_it_does_not_exist(
+        $propertyRepository,
+        $productPropertyRepository,
+        $productManager,
+        $product,
+        PropertyInterface $property,
+        ProductPropertyInterface $productProperty
+    )
     {
         $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
         $propertyRepository->createNew()->shouldBeCalled()->willReturn($property);

@@ -13,19 +13,23 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class BuildRuleFormListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface $checkerRegistry
-     * @param \Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface                  $checker
-     * @param \Symfony\Component\Form\FormFactoryInterface                                  $factory
-     */
-    function let($checkerRegistry, $checker, $factory)
+    function let(
+        RuleCheckerRegistryInterface $checkerRegistry,
+        RuleCheckerInterface $checker,
+        FormFactoryInterface $factory
+    )
     {
         $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_item_total_configuration');
         $checkerRegistry->getChecker(Argument::any())->willReturn($checker);
@@ -43,13 +47,14 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormEvent                   $event
-     * @param \Sylius\Bundle\PromotionsBundle\Model\RuleInterface $rule
-     * @param \Symfony\Component\Form\Form                        $form
-     * @param \Symfony\Component\Form\Form                        $field
-     */
-    function it_should_add_configuration_fields_in_pre_set_data($checkerRegistry, $factory, $event, $rule, $form, $field)
+    function it_should_add_configuration_fields_in_pre_set_data(
+        $checkerRegistry,
+        $factory,
+        FormEvent $event,
+        RuleInterface $rule,
+        Form $form,
+        Form $field
+    )
     {
         $event->getData()->shouldBeCalled()->willReturn($rule);
         $event->getForm()->shouldBeCalled()->willReturn($form);

@@ -12,19 +12,23 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ShippingBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface $registry
-     * @param Sylius\Bundle\ShippingBundle\Checker\RuleCheckerInterface                  $checker
-     */
-    function let($registry, $checker)
+    function let(
+        RuleCheckerRegistryInterface $registry,
+        RuleCheckerInterface $checker
+    )
     {
         $this->beConstructedWith($registry);
     }
@@ -39,12 +43,13 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityCheckerInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface  $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface   $shippingMethod
-     * @param Sylius\Bundle\ShippingBundle\Model\RuleInterface             $rule
-     */
-    function it_returns_true_if_all_checkers_approve_shipping_method($registry, $checker, $subject, $shippingMethod, $rule)
+    function it_returns_true_if_all_checkers_approve_shipping_method(
+        $registry,
+        $checker,
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $shippingMethod,
+        RuleInterface $rule
+    )
     {
         $configuration = array();
 
@@ -60,12 +65,13 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $shippingMethod
-     * @param Sylius\Bundle\ShippingBundle\Model\RuleInterface            $rule
-     */
-    function it_returns_false_if_any_checker_disapproves_shipping_method($registry, $checker, $subject, $shippingMethod, $rule)
+    function it_returns_false_if_any_checker_disapproves_shipping_method(
+        $registry,
+        $checker,
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $shippingMethod,
+        RuleInterface $rule
+    )
     {
         $configuration = array();
 
@@ -81,13 +87,12 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $shippingMethod)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $shippingMethod
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface  $shippingCategory
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface  $shippable
-     */
-    function it_approves_category_requirement_if_categories_match($subject, $shippingMethod, $shippingCategory, $shippable)
+    function it_approves_category_requirement_if_categories_match(
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $shippingMethod,
+        ShippingCategoryInterface $shippingCategory,
+        ShippableInterface $shippable
+    )
     {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->shouldBeCalled()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
@@ -98,27 +103,23 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $shippingMethod
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface  $shippingCategory
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface  $shippable
-     */
-    function it_approves_category_requirement_if_no_category_is_required($subject, $shippingMethod)
+    function it_approves_category_requirement_if_no_category_is_required(
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $shippingMethod
+    )
     {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn(null);
 
         $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface  $shippingMethod
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface  $shippingCategory
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface  $shippingCategory2
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippableInterface  $shippable
-     */
-    function it_denies_category_requirement_if_categories_dont_match($subject, $shippingMethod, $shippingCategory, $shippingCategory2, $shippable)
+    function it_denies_category_requirement_if_categories_dont_match(
+        ShippingSubjectInterface $subject,
+        ShippingMethodInterface $shippingMethod,
+        ShippingCategoryInterface $shippingCategory,
+        ShippingCategoryInterface $shippingCategory2,
+        ShippableInterface $shippable
+    )
     {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->shouldBeCalled()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);

@@ -45,7 +45,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\PurchaseListener');
     }
 
-    function it_should_abandon_cart_if_payment_status_success(CartProviderInterface $cartProvider, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_abandon_cart_if_payment_status_success(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
@@ -56,7 +60,12 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_success_flash_message_if_payment_status_success(TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_set_success_flash_message_if_payment_status_success(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
@@ -70,7 +79,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_abandon_cart_if_payment_status_pending(CartProviderInterface $cartProvider, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_abandon_cart_if_payment_status_pending(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
 
@@ -81,7 +94,12 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_notice_flash_message_if_payment_status_pending(TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_set_notice_flash_message_if_payment_status_pending(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
 
@@ -95,7 +113,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_abandon_cart_if_payment_status_processing(CartProviderInterface $cartProvider, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_abandon_cart_if_payment_status_processing(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
 
@@ -106,7 +128,12 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_notice_flash_message_if_payment_status_processing(TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_set_notice_flash_message_if_payment_status_processing(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
 
@@ -120,7 +147,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_canceled(CartProviderInterface $cartProvider, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_not_abandon_cart_if_payment_status_canceled(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
 
@@ -131,7 +162,12 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_notice_flash_message_if_payment_status_canceled(TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_set_notice_flash_message_if_payment_status_canceled(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
 
@@ -145,7 +181,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_failed(CartProviderInterface $cartProvider, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_not_abandon_cart_if_payment_status_failed(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
@@ -156,7 +196,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_error_flash_message_if_payment_status_failed(TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_set_error_flash_message_if_payment_status_failed(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment)
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
@@ -170,7 +214,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_unknown(CartProviderInterface $cartProvider, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_not_abandon_cart_if_payment_status_unknown(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
 
@@ -181,7 +229,12 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
-    function it_should_set_error_flash_message_if_payment_status_unknown(TranslatorInterface $translator, FlashBagInterface $flashBag, PurchaseCompleteEvent $event, PaymentInterface $payment)
+    function it_should_set_error_flash_message_if_payment_status_unknown(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
 

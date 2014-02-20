@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 
@@ -32,10 +33,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_marks_order_as_a_backorders_if_it_contains_backordered_units($order)
+    function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)
     {
         $order->isBackorder()->shouldBeCalled()->willReturn(true);
 
@@ -43,12 +41,11 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface    $order
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment1
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment2
-     */
-    function it_marks_order_as_shipped_if_all_shipments_devliered($order, $shipment1, $shipment2)
+    function it_marks_order_as_shipped_if_all_shipments_devliered(
+        OrderInterface $order,
+        ShipmentInterface $shipment1,
+        ShipmentInterface $shipment2
+    )
     {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
@@ -60,12 +57,11 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface    $order
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment1
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment2
-     */
-    function it_marks_order_as_partially_shipped_if_not_all_shipments_devliered($order, $shipment1, $shipment2)
+    function it_marks_order_as_partially_shipped_if_not_all_shipments_devliered(
+        OrderInterface $order,
+        ShipmentInterface $shipment1,
+        ShipmentInterface $shipment2
+    )
     {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
@@ -77,12 +73,11 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface    $order
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment1
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment2
-     */
-    function it_marks_order_as_dispatched_if_all_shipments_are_dispatched($order, $shipment1, $shipment2)
+    function it_marks_order_as_dispatched_if_all_shipments_are_dispatched(
+        OrderInterface $order,
+        ShipmentInterface $shipment1,
+        ShipmentInterface $shipment2
+    )
     {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
@@ -94,12 +89,11 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface    $order
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment1
-     * @param Sylius\Bundle\CoreBundle\Model\ShipmentInterface $shipment2
-     */
-    function it_marks_order_as_returned_if_all_shipments_were_returned($order, $shipment1, $shipment2)
+    function it_marks_order_as_returned_if_all_shipments_were_returned(
+        OrderInterface $order,
+        ShipmentInterface $shipment1,
+        ShipmentInterface $shipment2
+    )
     {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));

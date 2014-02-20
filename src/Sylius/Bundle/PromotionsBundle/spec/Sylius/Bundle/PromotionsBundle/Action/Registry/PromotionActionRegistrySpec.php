@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PromotionsBundle\Action\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
 
 /**
@@ -34,20 +35,14 @@ class PromotionActionRegistrySpec extends ObjectBehavior
         $this->getActions()->shouldReturn(array());
     }
 
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
-     */
-    function it_should_register_action_under_given_type($action)
+    function it_should_register_action_under_given_type(PromotionActionInterface $action)
     {
         $this->hasAction(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldReturn(false);
         $this->registerAction(ActionInterface::TYPE_FIXED_DISCOUNT, $action);
         $this->hasAction(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
-     */
-    function it_should_complain_if_trying_to_register_action_with_taken_name($action)
+    function it_should_complain_if_trying_to_register_action_with_taken_name(PromotionActionInterface $action)
     {
         $this->registerAction(ActionInterface::TYPE_FIXED_DISCOUNT, $action);
 
@@ -57,10 +52,7 @@ class PromotionActionRegistrySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
-     */
-    function it_should_unregister_action_with_given_name($action)
+    function it_should_unregister_action_with_given_name(PromotionActionInterface $action)
     {
         $this->registerAction(ActionInterface::TYPE_FIXED_DISCOUNT, $action);
         $this->hasAction(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldReturn(true);
@@ -69,10 +61,7 @@ class PromotionActionRegistrySpec extends ObjectBehavior
         $this->hasAction(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface $action
-     */
-    function it_should_retrieve_registered_action_by_name($action)
+    function it_should_retrieve_registered_action_by_name(PromotionActionInterface $action)
     {
         $this->registerAction(ActionInterface::TYPE_FIXED_DISCOUNT, $action);
         $this->getAction(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldReturn($action);

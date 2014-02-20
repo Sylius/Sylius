@@ -25,7 +25,11 @@ use Symfony\Component\Form\FormView;
  */
 class SyliusCartExtensionSpec extends ObjectBehavior
 {
-    function let(CartProviderInterface $cartProvider, RepositoryInterface $itemRepository, FormFactoryInterface $formFactory)
+    function let(
+        CartProviderInterface $cartProvider,
+        RepositoryInterface $itemRepository,
+        FormFactoryInterface $formFactory
+    )
     {
         $this->beConstructedWith($cartProvider, $itemRepository, $formFactory);
     }
@@ -48,7 +52,11 @@ class SyliusCartExtensionSpec extends ObjectBehavior
     }
 
     function its_getItemFormView_returns_a_form_view_of_cart_item_form(
-        $itemRepository, $formFactory, FormInterface $form, FormView $formView, CartItemInterface $item
+        $itemRepository,
+        $formFactory,
+        FormInterface $form,
+        FormView $formView,
+        CartItemInterface $item
     )
     {
         $itemRepository->createNew()->shouldBeCalled()->willReturn($item);
@@ -59,7 +67,11 @@ class SyliusCartExtensionSpec extends ObjectBehavior
     }
 
     function its_getItemFormView_uses_given_options_when_creating_form(
-        $itemRepository, $formFactory, FormInterface $form, FormView $formView, CartItemInterface $item
+        $itemRepository,
+        $formFactory,
+        FormInterface $form,
+        FormView $formView,
+        CartItemInterface $item
     )
     {
         $itemRepository->createNew()->shouldBeCalled()->willReturn($item);

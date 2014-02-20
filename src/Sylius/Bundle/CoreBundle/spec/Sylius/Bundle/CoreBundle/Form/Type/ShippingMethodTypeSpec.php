@@ -12,14 +12,12 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
 
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
-     * @param Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface   $checkerRegistry
-     */
-    function let($calculatorRegistry, $checkerRegistry)
+    function let(CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
     }

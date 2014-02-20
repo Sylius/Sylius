@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -34,10 +36,7 @@ class CouponTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_should_build_form_with_proper_fields($builder)
+    function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('code', 'text', Argument::any())
@@ -54,10 +53,7 @@ class CouponTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_should_define_assigned_data_class($resolver)
+    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

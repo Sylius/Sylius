@@ -13,6 +13,11 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -34,15 +39,12 @@ class ProductPropertyTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder                                   $builder
-     * @param Symfony\Component\Form\FormBuilder                                   $fieldBuilder
-     * @param Symfony\Component\Form\FormFactoryInterface                          $formFactory
-     * @param Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $choiceList
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface                  $property
-     */
     function it_builds_property_types_prototype_and_pass_it_as_argument(
-        $builder, $fieldBuilder, $formFactory, $choiceList, $property
+        FormBuilder $builder,
+        FormBuilder $fieldBuilder,
+        FormFactoryInterface $formFactory,
+        ChoiceListInterface $choiceList,
+        PropertyInterface $property
     )
     {
         $builder->getFormFactory()->willReturn($formFactory);
@@ -80,10 +82,7 @@ class ProductPropertyTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_defines_assigned_data_class($resolver)
+    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'ProductProperty', 'validation_groups' => array('sylius')))->shouldBeCalled();
 

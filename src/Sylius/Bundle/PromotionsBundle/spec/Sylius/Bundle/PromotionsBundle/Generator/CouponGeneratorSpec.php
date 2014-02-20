@@ -11,19 +11,23 @@
 
 namespace spec\Sylius\Bundle\PromotionsBundle\Generator;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionsBundle\Generator\Instruction;
+use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-    /**
-     * @param \Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
-     * @param \Doctrine\Common\Persistence\ObjectManager              $manager
-     */
-    function let($repository, $manager)
+    function let(
+        RepositoryInterface $repository,
+        ObjectManager $manager
+    )
     {
         $this->beConstructedWith($repository, $manager);
     }
@@ -38,12 +42,13 @@ class CouponGeneratorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Generator\CouponGeneratorInterface');
     }
 
-    /**
-     * @param \Sylius\Bundle\PromotionsBundle\Model\PromotionInterface $promotion
-     * @param \Sylius\Bundle\PromotionsBundle\Model\CouponInterface    $coupon
-     * @param \Sylius\Bundle\PromotionsBundle\Generator\Instruction    $instruction
-     */
-    function it_should_generate_coupons_according_to_instruction($repository, $manager, $promotion, $coupon, $instruction)
+    function it_should_generate_coupons_according_to_instruction(
+        $repository,
+        $manager,
+        PromotionInterface $promotion,
+        CouponInterface $coupon,
+        Instruction $instruction
+    )
     {
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);

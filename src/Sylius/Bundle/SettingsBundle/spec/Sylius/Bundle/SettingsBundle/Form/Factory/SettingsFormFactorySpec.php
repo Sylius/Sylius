@@ -12,17 +12,21 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Form\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class SettingsFormFactorySpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface $schemaRegistry
-     * @param Symfony\Component\Form\FormFactoryInterface $formFactory
-     */
-    function let($schemaRegistry, $formFactory)
+    function let(
+        SchemaRegistryInterface $schemaRegistry,
+        FormFactoryInterface $formFactory
+    )
     {
         $this->beConstructedWith($schemaRegistry, $formFactory);
     }
@@ -37,12 +41,13 @@ class SettingsFormFactorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder                  $formBuilder
-     * @param Symfony\Component\Form\Form                         $form
-     * @param Sylius\Bundle\SettingsBundle\Schema\SchemaInterface $schema
-     */
-    function it_should_create_a_form_for_given_schema_namespace($schemaRegistry, $schema, $formFactory, $formBuilder, $form)
+    function it_should_create_a_form_for_given_schema_namespace(
+        $schemaRegistry,
+        SchemaInterface $schema,
+        $formFactory,
+        FormBuilder $formBuilder,
+        Form $form
+    )
     {
         $schemaRegistry->getSchema('general')->willReturn($schema);
         $formFactory->createBuilder('form', null, array('data_class' => null))->willReturn($formBuilder);

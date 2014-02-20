@@ -13,17 +13,20 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistry;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PromotionTypeSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\PromotionsBundle\Checker\Registry\RuleCheckerRegistryInterface    $checkerRegistry
-     * @param Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistryInterface $actionRegistry
-     */
-    function let($checkerRegistry, $actionRegistry)
+    function let(
+        RuleCheckerRegistry $checkerRegistry,
+        PromotionActionRegistryInterface $actionRegistry
+    )
     {
         $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
     }
@@ -38,10 +41,11 @@ class PromotionTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    function it_should_build_form_with_proper_fields($builder, $checkerRegistry, $actionRegistry)
+    function it_should_build_form_with_proper_fields(
+        FormBuilder $builder,
+        $checkerRegistry,
+        $actionRegistry
+    )
     {
         $builder
             ->add('name', 'text', Argument::any())
@@ -99,10 +103,7 @@ class PromotionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_should_define_assigned_data_class($resolver)
+    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

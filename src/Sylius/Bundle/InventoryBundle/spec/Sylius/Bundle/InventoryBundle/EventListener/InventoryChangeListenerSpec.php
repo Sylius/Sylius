@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\InventoryBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Саша Стаменковић <umpirsky@gmail.com>
  */
 class InventoryChangeListenerSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface $backordersHandler
-     */
-    function let($backordersHandler)
+    function let(BackordersHandlerInterface $backordersHandler)
     {
         $this->beConstructedWith($backordersHandler);
     }
@@ -36,11 +36,10 @@ class InventoryChangeListenerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListenerInterface');
     }
 
-    /**
-     * @param Symfony\Component\EventDispatcher\GenericEvent         $event
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_fills_backorders_on_inventory_change($backordersHandler, $event, $stockable)
+    function it_fills_backorders_on_inventory_change(
+        $backordersHandler,
+        GenericEvent $event,
+        StockableInterface $stockable)
     {
         $event->getSubject()->shouldBeCalled()->willReturn($stockable);
         $backordersHandler->fillBackorders($stockable)->shouldBeCalled();

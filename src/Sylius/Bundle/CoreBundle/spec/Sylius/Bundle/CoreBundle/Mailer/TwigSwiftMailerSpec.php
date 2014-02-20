@@ -16,11 +16,10 @@ use Prophecy\Argument;
 
 class TwigSwiftMailerSpec extends ObjectBehavior
 {
-    /**
-     * @param \Swift_Mailer $mailer
-     * @param \Twig_Environment $twigEnvironment
-     */
-    function let($mailer, $twigEnvironment)
+    function let(
+        \Swift_Mailer $mailer,
+        \Twig_Environment $twigEnvironment
+    )
     {
         $this->beConstructedWith($mailer, $twigEnvironment);
     }
@@ -35,10 +34,7 @@ class TwigSwiftMailerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Mailer\TwigMailerInterface');
     }
 
-    /**
-     * @param \Twig_Template $template
-     */
-    function it_prepares_email_properly($mailer, $twigEnvironment, $template)
+    function it_prepares_email_properly($mailer, $twigEnvironment, \Twig_Template $template)
     {
         $from = 'test-email@sylius.org';
         $to = 'test-recipient@sylius.org';

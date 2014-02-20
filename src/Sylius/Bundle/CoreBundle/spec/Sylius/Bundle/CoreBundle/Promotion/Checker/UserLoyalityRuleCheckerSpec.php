@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -28,21 +30,17 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $subject
-     */
-    function it_should_recognize_no_user_as_not_eligible($subject)
+    function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
         $subject->getUser()->shouldBeCalled()->willReturn(null);
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface             $subject
-     * @param Sylius\Bundle\ResourceBundle\Model\TimestampableInterface $user
-     */
-    function it_should_recognize_subject_as_not_eligible_if_user_is_created_after_configured($subject, $user)
+    function it_should_recognize_subject_as_not_eligible_if_user_is_created_after_configured(
+        OrderInterface $subject,
+        TimestampableInterface $user
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime());
@@ -50,11 +48,10 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface             $subject
-     * @param Sylius\Bundle\ResourceBundle\Model\TimestampableInterface $user
-     */
-    function it_should_recognize_subject_as_eligible_if_user_is_created_before_configured($subject, $user)
+    function it_should_recognize_subject_as_eligible_if_user_is_created_before_configured(
+        OrderInterface $subject,
+        TimestampableInterface $user
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
@@ -62,11 +59,10 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface             $subject
-     * @param Sylius\Bundle\ResourceBundle\Model\TimestampableInterface $user
-     */
-    function it_should_recognize_subject_as_eligible_if_user_is_created_after_configured($subject, $user)
+    function it_should_recognize_subject_as_eligible_if_user_is_created_after_configured(
+        OrderInterface $subject,
+        TimestampableInterface $user
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
@@ -74,11 +70,10 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface             $subject
-     * @param Sylius\Bundle\ResourceBundle\Model\TimestampableInterface $user
-     */
-    function it_should_recognize_subject_as_not_eligible_if_user_is_created_before_configured($subject, $user)
+    function it_should_recognize_subject_as_not_eligible_if_user_is_created_before_configured(
+        OrderInterface $subject,
+        TimestampableInterface $user
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime());

@@ -12,13 +12,12 @@
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Request;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface;
 
 class ObtainCreditCardRequestSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function let($order)
+    function let(OrderInterface $order)
     {
         $this->beConstructedWith($order);
     }
@@ -28,18 +27,12 @@ class ObtainCreditCardRequestSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_should_allow_get_order_set_in_constructor($order)
+    function it_should_allow_get_order_set_in_constructor(OrderInterface $order)
     {
         $this->getOrder()->shouldReturn($order);
     }
 
-    /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface $creditCard
-     */
-    function it_should_allow_get_credit_card_set_before($creditCard)
+    function it_should_allow_get_credit_card_set_before(CreditCardInterface $creditCard)
     {
         $this->setCreditCard($creditCard);
 

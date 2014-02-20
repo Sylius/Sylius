@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\UserInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -28,22 +30,18 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $subject
-     */
-    function it_should_recognize_no_user_as_not_eligible($subject)
+    function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
         $subject->getUser()->shouldBeCalled()->willReturn(null);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $subject
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface  $user
-     * @param Countable                                     $orders
-     */
-    function it_should_recognize_no_orders_as_not_eligible($subject, $user, $orders)
+    function it_should_recognize_no_orders_as_not_eligible(
+        OrderInterface $subject,
+        UserInterface $user,
+        \Countable $orders
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
@@ -52,12 +50,11 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $subject
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface  $user
-     * @param Countable                                     $orders
-     */
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured($subject, $user, $orders)
+    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
+        OrderInterface $subject,
+        UserInterface $user,
+        \Countable $orders
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
@@ -66,12 +63,11 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $subject
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface  $user
-     * @param Countable                                     $orders
-     */
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured($subject, $user, $orders)
+    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
+        OrderInterface $subject,
+        UserInterface $user,
+        \Countable $orders
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
@@ -80,12 +76,11 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $subject
-     * @param Sylius\Bundle\CoreBundle\Model\UserInterface  $user
-     * @param Countable                                     $orders
-     */
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured($subject, $user, $orders)
+    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
+        OrderInterface $subject,
+        UserInterface $user,
+        \Countable $orders
+    )
     {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);

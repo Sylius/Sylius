@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Bundle\AddressingBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AddressingBundle\Model\ProvinceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -65,28 +67,19 @@ class CountrySpec extends ObjectBehavior
         $this->hasProvinces()->shouldReturn(false);
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection $provinces
-     */
-    function its_provinces_are_mutable($provinces)
+    function its_provinces_are_mutable(Collection $provinces)
     {
         $this->setProvinces($provinces);
         $this->getProvinces()->shouldReturn($provinces);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_adds_province($province)
+    function it_adds_province(ProvinceInterface $province)
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_removes_province($province)
+    function it_removes_province(ProvinceInterface $province)
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
@@ -95,20 +88,14 @@ class CountrySpec extends ObjectBehavior
         $this->hasProvince($province)->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_sets_country_on_added_province($province)
+    function it_sets_country_on_added_province(ProvinceInterface $province)
     {
         $province->setCountry($this)->shouldBeCalled();
 
         $this->addProvince($province);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     */
-    function it_unsets_country_on_removed_province($province)
+    function it_unsets_country_on_removed_province(ProvinceInterface $province)
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
@@ -118,11 +105,10 @@ class CountrySpec extends ObjectBehavior
         $this->removeProvince($province);
     }
 
-    /**
-     * @param Sylius\Bundle\AddressingBundle\Model\ProvinceInterface $province
-     * @param Doctrine\Common\Collections\Collection                 $provinces
-     */
-    function it_has_fluent_interface($province, $provinces)
+    function it_has_fluent_interface(
+        ProvinceInterface $province,
+        Collection $provinces
+    )
     {
         $this->setName('Poland')->shouldReturn($this);
         $this->setIsoName('PL')->shouldReturn($this);

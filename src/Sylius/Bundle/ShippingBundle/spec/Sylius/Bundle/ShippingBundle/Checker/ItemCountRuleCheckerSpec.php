@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -28,40 +29,28 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Checker\RuleCheckerInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     */
-    function it_should_recognize_empty_subject_as_not_eligible($subject)
+    function it_should_recognize_empty_subject_as_not_eligible(ShippingSubjectInterface $subject)
     {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(0);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     */
-    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured($subject)
+    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(ShippingSubjectInterface $subject)
     {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(7);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     */
-    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured($subject)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(ShippingSubjectInterface $subject)
     {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(12);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface $subject
-     */
-    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting($subject)
+    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(ShippingSubjectInterface $subject)
     {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(10);
 

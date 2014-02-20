@@ -14,17 +14,22 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface                $adjustmentRepository
-     * @param Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface $calculator
-     */
-    function let($adjustmentRepository, $calculator)
+    function let(
+        RepositoryInterface $adjustmentRepository,
+        DelegatingCalculatorInterface $calculator
+    )
     {
         $this->beConstructedWith($adjustmentRepository, $calculator);
     }
@@ -39,10 +44,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_removes_existing_shipping_adjustments($order)
+    function it_removes_existing_shipping_adjustments(OrderInterface $order)
     {
         $order->getShipments()->shouldBeCalled()->willReturn(array());
         $order->removeShippingAdjustments()->shouldBeCalled();
@@ -52,10 +54,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->applyShippingCharges($order);
     }
 
-    /**
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface $order
-     */
-    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments($order)
+    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
     {
         $order->removeShippingAdjustments()->shouldBeCalled();
         $order->getShipments()->shouldBeCalled()->willReturn(array());
@@ -66,14 +65,13 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->applyShippingCharges($order);
     }
 
-    /**
-     * @param Sylius\Bundle\OrderBundle\Model\AdjustmentInterface        $adjustment
-     * @param Sylius\Bundle\CoreBundle\Model\OrderInterface              $order
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentInterface       $shipment
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod
-     */
     function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
-        $adjustmentRepository, $calculator, $adjustment, $order, $shipment, $shippingMethod
+        $adjustmentRepository,
+        $calculator,
+        AdjustmentInterface $adjustment,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $shippingMethod
     )
     {
         $adjustmentRepository->createNew()->willReturn($adjustment);

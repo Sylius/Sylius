@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Processor;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -29,11 +30,10 @@ class ShipmentProcessorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface');
     }
 
-    /**
-     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentInterface     $shipment
-     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
-     */
-    function it_updates_shipment_states($shipment, $item)
+    function it_updates_shipment_states(
+        ShipmentInterface $shipment,
+        ShipmentItemInterface $item
+    )
     {
         $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
         $shipment->setState(ShipmentInterface::STATE_SHIPPED)->shouldBeCalled();
@@ -45,11 +45,10 @@ class ShipmentProcessorSpec extends ObjectBehavior
         $this->updateShipmentStates(array($shipment), ShipmentInterface::STATE_SHIPPED, ShipmentInterface::STATE_READY);
     }
 
-    /**
-     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentInterface     $shipment
-     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
-     */
-    function it_does_not_update_shipment_states_if_state_from_does_not_match($shipment, $item)
+    function it_does_not_update_shipment_states_if_state_from_does_not_match(
+        ShipmentInterface $shipment,
+        ShipmentItemInterface $item
+    )
     {
         $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment->setState(ShipmentInterface::STATE_SHIPPED)->shouldNotBeCalled();
@@ -60,10 +59,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
         $this->updateShipmentStates(array($shipment), ShipmentInterface::STATE_SHIPPED, ShipmentInterface::STATE_READY);
     }
 
-    /**
-     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
-     */
-    function it_updates_item_states($item)
+    function it_updates_item_states(ShipmentItemInterface $item)
     {
         $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
         $item->setShippingState(ShipmentInterface::STATE_SHIPPED)->shouldBeCalled();
@@ -71,10 +67,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
         $this->updateItemStates(array($item), ShipmentInterface::STATE_SHIPPED, ShipmentInterface::STATE_READY);
     }
 
-    /**
-     * @param \Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $item
-     */
-    function it_does_not_update_item_states_if_state_from_does_not_match($item)
+    function it_does_not_update_item_states_if_state_from_does_not_match(ShipmentItemInterface $item)
     {
         $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $item->setShippingState(ShipmentInterface::STATE_SHIPPED)->shouldNotBeCalled();

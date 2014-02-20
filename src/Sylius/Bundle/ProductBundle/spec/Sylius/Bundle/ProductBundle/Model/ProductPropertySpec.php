@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\ProductBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
 use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
 
 /**
@@ -39,19 +41,13 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getProduct()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     */
-    function it_allows_assigning_itself_to_a_product($product)
+    function it_allows_assigning_itself_to_a_product(ProductInterface $product)
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\ProductInterface $product
-     */
-    function it_allows_detaching_itself_from_a_product($product)
+    function it_allows_detaching_itself_from_a_product(ProductInterface $product)
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
@@ -65,10 +61,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getProperty()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function its_property_is_definable($property)
+    function its_property_is_definable(PropertyInterface $property)
     {
         $this->setProperty($property);
         $this->getProperty()->shouldReturn($property);
@@ -85,10 +78,7 @@ class ProductPropertySpec extends ObjectBehavior
         $this->getValue()->shouldReturn('XXL');
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_converts_value_to_Boolean_if_property_has_checkbox_type($property)
+    function it_converts_value_to_Boolean_if_property_has_checkbox_type(PropertyInterface $property)
     {
         $property->getType()->willReturn(PropertyTypes::CHECKBOX);
         $this->setProperty($property);
@@ -114,10 +104,7 @@ class ProductPropertySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_returns_its_property_name($property)
+    function it_returns_its_property_name(PropertyInterface $property)
     {
         $property->getName()->willReturn('T-Shirt material');
         $this->setProperty($property);
@@ -133,10 +120,7 @@ class ProductPropertySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_returns_its_property_presentation($property)
+    function it_returns_its_property_presentation(PropertyInterface $property)
     {
         $property->getPresentation()->willReturn('Material');
         $this->setProperty($property);
@@ -152,10 +136,7 @@ class ProductPropertySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_returns_its_property_type($property)
+    function it_returns_its_property_type(PropertyInterface $property)
     {
         $property->getType()->willReturn('choice');
         $this->setProperty($property);
@@ -171,10 +152,7 @@ class ProductPropertySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_returns_its_property_configuration($property)
+    function it_returns_its_property_configuration(PropertyInterface $property)
     {
         $property->getConfiguration()->willReturn(array('choices' => array('Red')));
         $this->setProperty($property);

@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\ShippingBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -50,10 +52,7 @@ class ShipmentSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface $shippingMethod
-     */
-    function its_shipping_method_is_mutable($shippingMethod)
+    function its_shipping_method_is_mutable(ShippingMethodInterface $shippingMethod)
     {
         $this->setMethod($shippingMethod);
         $this->getMethod()->shouldReturn($shippingMethod);
@@ -64,10 +63,7 @@ class ShipmentSpec extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $shipmentItem
-     */
-    function it_adds_items($shipmentItem)
+    function it_adds_items(ShipmentItemInterface $shipmentItem)
     {
         $this->hasItem($shipmentItem)->shouldReturn(false);
 
@@ -77,10 +73,7 @@ class ShipmentSpec extends ObjectBehavior
         $this->hasItem($shipmentItem)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface $shipmentItem
-     */
-    function it_removes_item($shipmentItem)
+    function it_removes_item(ShipmentItemInterface $shipmentItem)
     {
         $this->hasItem($shipmentItem)->shouldReturn(false);
 

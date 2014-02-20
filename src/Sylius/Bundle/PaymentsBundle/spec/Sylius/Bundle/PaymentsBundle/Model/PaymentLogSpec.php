@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -38,10 +39,7 @@ class PaymentLogSpec extends ObjectBehavior
         $this->getPayment()->shouldReturn(null);
     }
 
-    /**
-     * @param Sylius\Bundle\PaymentsBundle\Model\PaymentInterface $payment
-     */
-    function its_payment_is_mutable($payment)
+    function its_payment_is_mutable(PaymentInterface $payment)
     {
       $this->setPayment($payment);
       $this->getPayment()->shouldReturn($payment);

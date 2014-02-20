@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PromotionsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -39,10 +40,7 @@ class RuleChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    function it_should_set_rule_types_to_choose_from($resolver)
+    function it_should_set_rule_types_to_choose_from(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('choices' => $this->choices))->shouldBeCalled();
 

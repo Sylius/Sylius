@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Bundle\ProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -49,28 +51,19 @@ class PrototypeSpec extends ObjectBehavior
         $this->getProperties()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection $properties
-     */
-    function its_property_collection_is_mutable($properties)
+    function its_property_collection_is_mutable(Collection $properties)
     {
         $this->setProperties($properties);
         $this->getProperties()->shouldReturn($properties);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_adds_property($property)
+    function it_adds_property(PropertyInterface $property)
     {
         $this->addProperty($property);
         $this->hasProperty($property)->shouldReturn(true);
     }
 
-    /**
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_removes_property($property)
+    function it_removes_property(PropertyInterface $property)
     {
         $this->addProperty($property);
         $this->hasProperty($property)->shouldReturn(true);
@@ -105,11 +98,7 @@ class PrototypeSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    /**
-     * @param Doctrine\Common\Collections\Collection              $properties
-     * @param Sylius\Bundle\ProductBundle\Model\PropertyInterface $property
-     */
-    function it_has_fluent_interface($properties, $property)
+    function it_has_fluent_interface(Collection $properties, PropertyInterface $property)
     {
         $date = new \DateTime();
 

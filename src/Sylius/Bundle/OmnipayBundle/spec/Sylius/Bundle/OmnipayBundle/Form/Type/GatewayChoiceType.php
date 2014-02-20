@@ -18,7 +18,7 @@ class GatewayChoiceType extends ObjectBehavior
     /**
      * @param array $gateways
      */
-    function let($gateways)
+    function let(array $gateways)
     {
         $this->beConstructedWith($gateways);
     }

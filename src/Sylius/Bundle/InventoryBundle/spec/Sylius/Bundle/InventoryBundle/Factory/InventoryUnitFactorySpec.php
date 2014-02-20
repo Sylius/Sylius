@@ -13,16 +13,15 @@ namespace spec\Sylius\Bundle\InventoryBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class InventoryUnitFactorySpec extends ObjectBehavior
 {
-    /**
-     * @param Sylius\Bundle\ResourceBundle\Model\RepositoryInterface $repository
-     */
-    function let($repository)
+    function let(RepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
@@ -37,10 +36,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactoryInterface');
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface $stockable
-     */
-    function it_throws_exception_if_given_quantity_is_less_than_1($stockable)
+    function it_throws_exception_if_given_quantity_is_less_than_1(StockableInterface $stockable)
     {
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -48,13 +44,13 @@ class InventoryUnitFactorySpec extends ObjectBehavior
         ;
     }
 
-    /**
-     * @param Sylius\Bundle\InventoryBundle\Model\StockableInterface     $stockable
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit1
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit2
-     * @param Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface $inventoryUnit3
-     */
-    function it_creates_inventory_units($stockable, $inventoryUnit1, $inventoryUnit2, $inventoryUnit3, $repository)
+    function it_creates_inventory_units(
+        StockableInterface $stockable,
+        InventoryUnitInterface $inventoryUnit1,
+        InventoryUnitInterface $inventoryUnit2,
+        InventoryUnitInterface $inventoryUnit3,
+        $repository
+    )
     {
         $repository->createNew()->shouldBeCalled()->willReturn($inventoryUnit1, $inventoryUnit2, $inventoryUnit3);
 
