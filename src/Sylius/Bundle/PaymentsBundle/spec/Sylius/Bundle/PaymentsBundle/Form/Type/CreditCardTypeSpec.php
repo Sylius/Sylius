@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\PaymentsBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Dylan Johnson <eponymi.dev@gmail.com>
@@ -29,10 +31,7 @@ class CreditCardTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormBuilder $builder
-     */
-    public function it_builds_form_with_proper_fields($builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('type', 'choice', Argument::any())
@@ -73,10 +72,7 @@ class CreditCardTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    /**
-     * @param Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    public function it_defines_assigned_data_class_and_validation_groups($resolver)
+    public function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
