@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Địa chỉ đã được thiết lập thành địa chỉ mặc định nhận hoá đơn của bạn.
+        shipping:
+          success: Địa chỉ đã được thiết lập thành địa chỉ mặc định nhận hàng vận chuyển của bạn.

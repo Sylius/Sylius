@@ -2,17 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    label:
-        product:
-            name: Nazwa
-            description: Opis
-            properties: Właściwości
-            available_on: Dostępny od
-            meta_keywords: Słowa kluczowe w sekcji Meta
-            meta_description: Opis w sekcji Meta
-        property:
-            name: Nazwa w systemie
-            presentation: Nazwa publiczna
-        prototype:
-            name: Nazwa
-            properties: Właściwości
+  label:
+    product:
+      name: Nazwa
+      description: Opis
+      properties: Właściwości
+      available_on: Dostępny od
+      meta_keywords: Słowa kluczowe w sekcji Meta
+      meta_description: Opis w sekcji Meta
+    property:
+      name: Nazwa w systemie
+      presentation: Nazwa publiczna
+    prototype:
+      name: Nazwa
+      properties: Właściwości

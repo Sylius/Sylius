@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  group:
+    name:
+      max: 'Le nom du groupe ne peut pas faire plus de {{ limit }} caractères.'
+      min: 'Le nom du groupe doit au moins contenir {{ limit }} caractères.'
+      not_blank: "S'il vous plaît veuillez saisir le nom du groupe."
+  locale:
+    code:
+      not_blank: Veuillez saisir le code de la locale.
+      unique: Cette locale existe déjà.
+  user:
+    first_name:
+      max: 'Le prénom ne peut pas faire plus de {{ limit }} caractères.'
+      min: 'Le prénom doit contenir au moins {{ limit }} caractères.'
+      not_blank: Veuillez saisir votre prénom.
+    last_name:
+      max: 'Le nom ne peut pas faire plus de {{ limit }} caractères.'
+      min: 'Le nom doit contenir au moins {{ limit }} caractères.'
+      not_blank: "S'il vous plaît veuillez saisir votre nom."
+  variant:
+    onHand:
+      min: 'Le stock doit être plus grand que {{ limit }}.'
+      not_blank: "S'il vous plaît veuillez saisir le stock."
+    price:
+      min: Le prix ne peux pas être négatif.
+      not_blank: "S'il vous plaît veuillez saisir le prix."
+sylius_shipping:
+  method:
+    zone:
+      not_blank: "S'il vous plaît veuillez saisir la zone de livraison."
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Veuillez saisir le taux de TVA.

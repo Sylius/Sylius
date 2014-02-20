@@ -1,0 +1,580 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+email:
+  order_confirmation:
+    subject: Sujet
+sylius:
+  account:
+    address:
+      action:
+        billing: Définir comme adresse de facturation par défaut
+        create: Créer une nouvelle adresse
+        delete: Supprimer
+        edit: Modifier
+        shipping: Définir comme adresse de livraison par défaut
+      create: Créer une nouvelle adresse
+      default:
+        billing: Adresse de facturation par défaut
+        no_billing: Aucune adresse de facturation par défaut
+        no_shipping: Aucune adresse de livraison par défaut
+        shipping: Adresse de livraison par défaut
+      empty: "Vous n'avez pas encore créé d'adresse."
+      list: Toutes vos adresses
+      update: Modifier mon adresse
+    home:
+      since: Vous êtes client depuis
+      welcome: Bienvenue dans votre espace
+    order:
+      details: Détails de votre commande
+      download_invoice: Télécharger la facture
+      invoice: Facture
+      list: Toutes vos commandes
+      shipment:
+        pending: En attente
+      total: Total
+      tracking_number: Numéro de suivi
+    title: Mon compte
+  add_to_cart: Ajouter au panier
+  address:
+    city: Ville
+    company: Société
+    country: Pays
+    firstname: Prénom
+    lastname: Nom
+    postcode: Code postal
+    province: Etat
+    street: Adresse
+  alert:
+    error: Erreur
+    info: Information
+    success: Succès
+    warning: Attention
+  backend:
+    alert:
+      info: Information
+    dashboard:
+      chart_order_count: Numéro de commandes
+      header: "Tableau d'administration"
+    logout: Déconnexion
+    quick_links:
+      add_product: Nouveau produit
+      orders: Dernières commandes
+      products: Vos produits
+      users: Utilisateurs
+  backend_welcome: 'Bonjour <b>%name%</b>!'
+  block:
+    create: Créer un bloc
+    id: ID
+    no_results: "Il n'y a pas de blocs à afficher."
+    title: Titre
+    updated_at: Dernière mise à jour
+  breadcrumb:
+    configuration: Configuration
+    country:
+      index: Pays
+    customers: Clients
+    edit: Modifier
+    exchange_rate:
+      index: Taux de change
+    general_settings: Paramètres généraux
+    generate: Générer
+    group:
+      index: Groupes
+    inventory:
+      index: Stock
+    locale:
+      index: Locales
+    new: Nouveau
+    option:
+      index: Options
+    order:
+      index: Commandes
+    page:
+      index: Pages statiques
+    payment:
+      index: Paiements
+    payment_method:
+      index: Modes de paiement
+    product:
+      index: Produits
+    promotion:
+      index: Promotions
+    promotion_coupon:
+      index: Bons de réduction
+    property:
+      index: Propriétés
+    prototype:
+      index: Prototypes
+    sales: Ventes
+    shipment:
+      index: Expéditions
+    shipping_category:
+      index: "Catégories d'expédition"
+    shipping_method:
+      index: Modes de livraison
+    tax_category:
+      index: Catégories de taxe
+    tax_rate:
+      index: Taux de TVA
+    taxation_settings: Configuration des taxes
+    taxonomy:
+      index: Taxonomies
+    update: Modifier
+    user:
+      index: Utilisateurs
+    zone:
+      index: Zones
+  browse_products: Parcourir les produits
+  cancel: Annuler
+  cart:
+    empty: Votre panier est vide
+    summary:
+      add_coupon: OK
+      checkout: Commander
+      clear: Vider le panier
+      grand_total: Total
+      product: Produit
+      quantity: Quantité
+      save: Appliquer
+      total: Total
+      unit_price: Prix
+    summary_header: Récapitulatif du panier
+    total_items: '1 article|%count% articles'
+  checkout:
+    addressing:
+      header: Adresse de livraison
+    back: Retour
+    finalize:
+      address:
+        city: Ville
+        country: Pays
+        firstname: Prénom
+        lastname: Nom
+        postcode: Code postal
+        province: Région
+        street: Adresse
+      header: Récapitulatif de la commande
+      order:
+        billing_address: Adresse de facturation
+        items_total: Total
+        no_items: Cette commande ne contient aucun article.
+        no_promotion: Aucune remise appliquée
+        no_shipping_charges: Aucuns frais de port
+        no_taxes: Aucune taxe
+        promotion_discount: Remises
+        promotion_total: Total des remises
+        shipping_address: Adresse de livraison
+        shipping_charges: Frais de port
+        shipping_total: Total des frais de port
+        tax_total: Total des taxes
+        total: Total
+      order_item:
+        quantity: Quantité
+        total: Total
+        unit_price: Prix unitaire
+      place_order: Commander
+      product:
+        name: Nom
+    forward: Étape suivante
+    payment:
+      header: Méthode de paiement
+    security:
+      existing_customer: Client existant
+      header: 'Connectez-vous <small>ou créez un compte</small>'
+      login: Connexion
+      new_customer: Nouveau client
+      register: Créer un compte
+    shipping:
+      header: Mode de livraison
+  country:
+    add_province: Ajouter une région
+    create: Ajouter un pays
+    create_header: Nouveau pays
+    id: ID
+    index_header: Pays
+    iso_name: Code ISO
+    manage: Gérer les pays
+    name: Nom
+    no_results: Aucun pays configuré
+    show_header: Détails du pays
+    update_header: Modification du pays
+  create: Créer
+  created_at: Date de création
+  delete: Supprimer
+  deleted: Supprimé
+  edit: Modifier
+  email: E-mail
+  exchange_rate:
+    currency: monnaie
+    id: ID
+    index_header: Taux de change
+  filter: Filtrer
+  form:
+    choose_file: Choisir un fichier
+    login:
+      password: Mot de passe
+    option_value:
+      add_value: Ajouter une valeur
+    profile:
+      firstName: Prénom
+      lastName: Nom
+  gallery:
+    next: Suivant
+  generate: Générer
+  group:
+    id: ID
+    index_header: Groupes
+    name: Nom
+    roles: Rôles
+  homepage:
+    splash:
+      headline: Bienvenue sur Sylius
+      subheadline: Solution e-commerce moderne pour Symfony2
+  inventory_unit:
+    created_at: Date de création
+    inventory_state: Etat du stock
+    name: Nom
+    no_results: Aucun stock à afficher
+    shipping_state: Statut de la livraison
+    sku: Référence
+    updated_at: Date de modification
+  locale:
+    code: Code
+    enabled: Activé
+    updated_at: Dernière mise à jour
+  login: Connexion
+  login_header: Administration
+  manage: Gérer
+  meta:
+    backend_title: Tableau de bord
+    frontend_description: Sylius est une solution de boutique e-commerce en PHP, basée sur le framework Symfony2
+    frontend_keywords: sylius, e-commerce, symfony2, boutique, panier, commande
+    frontend_title: Sylius, boutique e-commerce pour Symfony2
+  newest: Nouveautés
+  option:
+    create: Créer une option
+    create_header: Nouvelle option de produit
+    index_header: Options de produit
+    manage: Gérer les options
+    no_results: Aucune option configurée
+    update_header: "Modification de l'option"
+  order:
+    billing_address: Adresse de facturation
+    create: Créer une commande
+    create_header: Nouvelle commande
+    created_at: Date de création
+    general_info: Informations générales
+    id: ID
+    index_header: Commandes à traiter
+    inventory_tracking: Suivi du stock
+    items_total: Total
+    manage: Gérer les commandes
+    no_items: Cette commande ne contient aucun article
+    no_results: "Vous n'avez aucune nouvelle commande"
+    no_shipments: Aucune expédition pour cette commande
+    no_shipping_charges: Aucun frais de port appliqué
+    no_taxes: Pas de taxes appliquées
+    number: Numéro
+    payment_state: Etat du paiement
+    payment_states:
+      balance_due: Solde à payer
+    promotion_total: Total des remises
+    shipment_state: "Statut d'expédition"
+    shipment_states:
+      pending: En attente
+    shipments: Expéditions
+    shipping_address: Adresse de livraison
+    shipping_charges: Frais de port
+    shipping_total: Total des frais de port
+    show_header: Détails de la commande
+    state:
+      checkout: Paiement
+    tax_total: Total des taxes
+    total: Total
+    update_header: Modification de la commande
+    user: Utilisateur
+  shipment:
+    created_at: Date de création
+    id: ID
+    index_header: Expéditions
+    inventory_state: État du stock
+    manage: Gérer les expéditions
+    method: Mode
+    modified: Date de mise à jour
+    name: Nom
+    no_items: Aucun élément
+    no_results: Aucune expédition
+    order: Commande
+    show_header: "Détails de l'expédition"
+    sku: Référence
+    state: État
+    tracking_code: Code de suivi
+    update: Modifier
+    updated_at: Date de mise à jour
+  order_item:
+    quantity: Quantité
+    sellable: Produit
+    total: Total
+    unit_price: Prix unitaire
+  out_of_stock: Rupture de stock
+  page:
+    id: ID
+    index_header: Pages
+    title: Titre
+    update_header: Dernière mise à jour
+  password: Mot de passe
+  payment:
+    amount: Montant
+    create: Ajouter un paiement
+    create_header: Nouveau paiement
+    created_at: Date de création
+    id: ID
+    index_header: Paiements
+    method: Mode
+    no_results: Aucun paiement
+    state:
+      0: Statut
+      checkout: Paiement
+      completed: Complété
+      failed: Échoué
+      new: Nouveau
+      pending: En attente
+      processing: En cours
+      unknown: Inconnu
+      void: Nul
+    update_header: Modification du paiement
+    updated_at: Date de mise à jour
+  payment_method:
+    create: Ajouter un mode de paiement
+    create_header: Nouveau mode de paiement
+    enabled: Actif ?
+    gateway: Passerelle
+    id: ID
+    index_header: Modes de paiement
+    name: Nom
+    no_results: Aucun mode de paiement défini
+    update_header: Modification du mode de paiement
+    updated_at: Date de mise à jour
+  product:
+    add_property: Ajouter une propriété
+    available_on: Disponible le
+    available_on_demand: En pré-commande
+    categorization: Catégorisation
+    create: Créer un produit
+    create_header: Nouveau produit
+    description: Description
+    generate_variants: Générer des variantes
+    index_by_taxon_header: 'Produits <small>catégorisés sous le taxon "%taxon%"</small>'
+    index_header: 'Produits <small>Liste de tous les produits de votre boutique</small>'
+    manage: Gérer les produits
+    name: Désignation
+    no_description: '<i>Aucune description saisie...</i>'
+    no_images: Aucune image pour ce produit
+    no_options: Aucune option pour ce produit
+    no_properties: Aucune propriété définie pour ce produit
+    no_results: Aucun produit
+    no_short_description: '<i>Aucune description saisie</i>'
+    no_sku: Aucune référence saisie
+    no_tax_category: Aucune catégorie de taxe
+    no_taxons: Aucun taxon défini
+    options: Options
+    price: Prix
+    properties: Propriétés
+    restricted_zone: Restriction de zone
+    shipping_category: Catégorie de livraison
+    show: En savoir plus
+    show_header: Détails du produit
+    sku: Référence
+    stock: Stock courant
+    tabs:
+      categorization: Catégorisation
+      images: Images
+      options: Options
+      product: Produit
+      properties: Propriétés
+    tax_category: Catégorie de taxe
+    update_header: Modification du produit
+    updated_at: Dernière mise à jour
+    variant_selection_method: Méthode de sélection de variante
+  promotion:
+    actions: Actions
+    add_action: Ajouter une action
+    add_rule: Ajouter une règle
+    create: Créer une promotion
+    create_header: Nouvelle promotion
+    created_at: Date de création
+    description: Description
+    ends_at: Fini le
+    id: ID
+    index_header: Promotions courantes
+    manage: Gérer les promotions
+    name: Nom
+    no_results: Aucune promotion configurée
+    rules: Règles
+    show_header: Détails de la promotion
+    starts_at: Débute le
+    update_header: "Edition d'une promotion"
+    updated_at: Date de mise à jour
+    usage_limit: "Limite d'utilisation"
+    used: Utilisé
+  promotion_action:
+    configuration: Configuration
+    type: Type
+  promotion_coupon:
+    create: Ajouter un coupon
+    create_header: Créer un nouveau coupon
+    generate: Générer des coupons
+    generate_header: Génération de coupons
+    index: Liste des coupons
+    index_header: Bons de réduction
+    no_results: Aucun coupon
+    update_header: "Edition d'un coupon"
+  promotion_rule:
+    configuration: Configuration
+    type: Type
+  property:
+    add_choice: Ajouter un choix
+    create: Créer une propriété
+    create_header: Nouvelle propriété de produit
+    index_header: "Propriétés d'un produit"
+    manage: Gérer les propriétés
+    no_results: Aucune propriété configurée
+    update_header: "Edition d'une propriété"
+  prototype:
+    build: Conception de prototype
+    build_header: "Conception d'un produit d'après un prototype"
+    create: Créer un prototype
+    create_header: Nouveau prototype
+    index_header: Prototypes de produits
+    no_results: Aucun prototype défini
+    update_header: Modification du prototype
+  province:
+    provinces: Province
+  remember_me: Se souvenir de moi ?
+  save_changes: Enregistrer les modifications
+  search: Rechercher
+  settings:
+    general_header: Configuration générale
+    taxation_header: Configuration des taxes
+  shipment_category:
+    manage: "Gérer les catégories d'expédition"
+  shipping_address: Adresse de livraison
+  shipping_category:
+    create: "Créer une catégorie d'expédition"
+    create_header: "Nouvelle catégorie d'expédition"
+    id: ID
+    index_header: "Catégories d'expédition"
+    manage: "Gérer les catégories d'expédition"
+    name: Nom
+    no_results: "Aucune catégorie d'expédition définie"
+    update_header: "Modification de la catégorie d'expédition"
+    updated_at: Date de mise à jour
+  shipping_method:
+    calculator: Calculateur
+    category: Catégorie
+    create: Créer un mode de livraison
+    create_header: Nouveau mode de livraison
+    enabled: Actif ?
+    id: ID
+    index_header: Modes de livraison
+    manage: Gérer les modes de livraison
+    name: Nom
+    no_results: Aucun mode de livraison défini
+    show_header: Détails du mode de livraison
+    update_header: Modification du mode de livraison
+    updated_at: Date de mise à jour
+    zone: Zone
+  shop_by: Accès par
+  show: Détails
+  stockable:
+    index_header: 'Inventaire <small>États des stocks</small>'
+    no_results: "Aucun élément d'inventaire à afficher"
+  tax_category:
+    create: Créer une catégorie de taxes
+    create_header: Nouvelle catégorie de taxe
+    description: Description
+    id: ID
+    index_header: Catégories de taxes
+    manage: Gérer les catégories de taxe
+    name: Nom
+    no_description: Aucune description
+    no_results: Aucune catégorie de taxe configurée
+    update_header: Modification de la catégorie de taxe
+    updated_at: Date de mise à jour
+  tax_rate:
+    amount: Montant
+    calculator: Calculateur
+    category: Catégorie
+    create: Créer un taux
+    create_header: Nouveau taux
+    included_in_price: Inclus dans le prix?
+    index_header: Taux
+    manage: Gérer les taux
+    name: Nom
+    no_results: Aucun taux défini
+    show_header: Détails du taux
+    update_header: Modification du taux
+    updated_at: Dernière mise à jour
+    zone: Zone
+  taxon:
+    create: Créer un taxon
+    create_header: Nouveau taxon
+    name: Nom
+    no_results: Aucun taxon
+    update_header: Modification d’un taxon
+  taxonomy:
+    create: Ajouter un taxon
+    create_header: Nouvelle taxonomie
+    index_header: Taxonomies
+    name: Nom
+    no_results: Aucune taxonomie
+    show_header: Détail de la taxonomie
+    update_header: Modification d’une taxonomie
+  unknown: Inconnu
+  user:
+    billing_address: Adresse de facturation
+    email: E-mail
+    enabled: Confirmé ?
+    filter:
+      all: Montrer tous les utilisateurs
+      unconfirmed: Comptes non confirmés
+    first_name: Prénom
+    general_info: |-
+      Informations générales sur l'utilisateur "%username%"
+    id: ID
+    index_header: Utilisateurs
+    last_login: Dernière connexion
+    last_name: Nom
+    no_results: Aucun utilisateur
+    shipping_address: Adresse de livraison
+    show_header: "Détails d'un utilisateur"
+    username: Identifiant
+  variant:
+    add_image: Ajouter une image
+    availability: Disponibilité
+    available_on_demand: Disponible à la demande
+    create: Créer une déclinaison
+    create_header: Nouvelle déclinaison de produit
+    delete_image: "Supprimer l'image"
+    last_update: Date de mise à jour
+    no_results: Aucune déclinaison configurée
+    options: Options
+    price: Prix
+    sku: Référence
+    stock: Stock disponible
+    update_header: "Edition d'une déclinaison"
+  "yes": oui
+  zone:
+    add_member: Ajouter un membre
+    create: Créer une zone
+    create_header: Nouvelle zone
+    index_header: Zones
+    manage: Gérer les zones
+    name: Nom
+    no_results: Aucune zone définie
+    show_header: Détails de la zone
+    type: Type
+    update_header: Modification de la zone
+  zone_member:
+    members: Membres

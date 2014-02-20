@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    exchange_rate:
-        currency:
-            not_blank: Veuillez choisir une devise.
-        rate:
-            not_blank: Veuillez saisir un taux.
-        unique: La devise doit être unique.
+  exchange_rate:
+    currency:
+      not_blank: Veuillez choisir une devise.
+    rate:
+      not_blank: Veuillez saisir un taux.
+    unique: La devise doit être unique.

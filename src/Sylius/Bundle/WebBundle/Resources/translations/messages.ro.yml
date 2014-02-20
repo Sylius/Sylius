@@ -1,0 +1,158 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Adaugă în coș
+  address:
+    city: Oraș
+    country: Țară
+    firstname: Prenume
+    lastname: Nume
+    postcode: Cod poștal
+    province: Județ
+    street: Adresă
+  alert:
+    error: Eroare
+    info: Informație
+    success: Succes
+    warning: Atenție
+  backend:
+    alert:
+      info: Informație
+  cancel: Anuleazaă
+  cart:
+    empty: Coșul este gol
+    summary:
+      clear: Golește coșul
+      grand_total: Total
+      product: Produs
+      quantity: Cantitate
+      save: Salvează
+      unit_price: Preț
+    total_items: '1 produs|%count% produse'
+  checkout:
+    back: Înapoi
+    finalize:
+      address:
+        city: Oraș
+        country: Țară
+        firstname: Prenume
+        lastname: Nume
+        postcode: Cod poștal
+        province: Județ
+        street: Adresă
+      header: Sumar comandă
+      order:
+        billing_address: Adresa de facturare
+        items_total: Produse
+        no_items: Comanda nu conține niciun produs
+        no_shipping_charges: Nu se aplică taxe pentru transport
+        no_taxes: Nu se aplică taxe
+        shipping_address: Adresa de livrare
+        shipping_charges: Cost transport
+        shipping_total: Total transport
+        tax_total: Total taxe
+        taxes: Taxe
+      order_item:
+        quantity: Cantitate
+        unit_price: Preț per bucată
+      place_order: Plasare comandă
+      product:
+        name: Nume produs
+    forward: Continuă
+    payment:
+      header: Mod de plată
+    security:
+      existing_customer: Client existent
+      header: 'Logați-vă <small>sau creați-vă cont nou</small>'
+      new_customer: Client nou
+      register: Înregistrare
+  country:
+    add_province: Adăugare județ
+    create: Adăugare țară
+    create_header: Țară nouă
+    index_header: Țări
+    iso_name: cod ISO
+    name: Nume
+    no_results: Nicio țară nu este configurată
+    show_header: Detalii țară
+    update_header: Modificare țară
+  create: Creează
+  delete: Șterge
+  edit: Editează
+  email: E-mail
+  filter: Filtru
+  form:
+    choose_file: Alege fișier
+    login:
+      password: Parolă
+  generate: Generează
+  homepage:
+    splash:
+      headline: Bun venit la Sylius
+      subheadline: Soluție de e-commerce modernă pentru Symfony2
+  inventory_unit:
+    created_at: Creat
+    inventory_state: Stare inventar
+    name: Nume
+    updated_at: Data modificării
+  login_header: Administrare
+  meta:
+    backend_title: Panoul administrativ
+    frontend_description: Sylius este o soluție modernă de e-commerce pentru PHP, bazată pe framework-ul Symfony2.
+    frontend_keywords: sylius, e-commerce, symfony2, magazin, coș, webshop
+    frontend_title: Sylius, e-commerce modern pentru Symfony2
+  newest: Produse noi
+  option:
+    create: Creează opțiune
+    index_header: Opțiuni produs
+  order:
+    items_total: Produse
+    no_items: Comanda nu conține niciun produs
+    no_shipping_charges: Nu se aplică taxe pentru transport
+    no_taxes: Nu se aplică taxe
+    shipping_charges: Cost transport
+    shipping_total: Total transport
+    show_header: Detalii comandă
+    tax_total: Total taxe
+    taxes: Taxe
+    update_header: Modificare comandă
+    user: Utilizator
+  shipment:
+    inventory_state: Stare inventar
+    order: Detalii comandă
+  order_item:
+    quantity: Cantitate
+    sellable: Produs
+    unit_price: Preț per bucată
+  out_of_stock: Nu e pe stoc
+  password: Parolă
+  payment:
+    amount: Sumă
+    created_at: Creat
+    index_header: Plăți
+    method: Mod
+    updated_at: Modificat
+  payment_method:
+    index_header: Metode de plată
+    name: Nume
+    updated_at: Modificat
+  product:
+    create: Creează produs
+    create_header: Produs nou
+    description: Descriere
+    generate_variants: Generează variante
+    index_header: 'Produse <small>Lista tuturor produselor din magazin</small>'
+    name: Nume
+    no_description: '<i>Nicio descriere...</i>'
+    no_images: Nu există imagini pentru acest produs
+    no_options: Nu există opțiuni pentru acest produs
+    no_properties: Produsul nu are proprietăți definite
+    no_results: Nu există produse de afișat.
+    tabs:
+      product: Produs
+  promotion_coupon:
+    create: Adaugă cupon
+    create_header: Creează cupon
+  user:
+    email: E-mail

@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    checkout:
-        success: Gracias por su pedido!
+  checkout:
+    success: Gracias por su pedido!

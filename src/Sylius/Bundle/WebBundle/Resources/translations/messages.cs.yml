@@ -1,0 +1,49 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Přidat do košíku
+  address:
+    city: Město
+    country: Země
+    firstname: Jméno
+    lastname: Příjmení
+    postcode: PSČ
+    province: Provincie
+    street: Ulice
+  alert:
+    error: Chyba
+    info: Info
+    success: Úspěch
+    warning: Varování
+  backend:
+    alert:
+      info: Info
+  cancel: Zrušit
+  cart:
+    empty: Váš košík je prázdný
+    summary:
+      checkout: Objednat
+      clear: Vyprázdnit košík
+      grand_total: Celkem
+      product: Produkt
+      quantity: Množství
+      save: Uložit
+      total: Celkem
+      unit_price: Cena
+    summary_header: Obsah košíku
+  checkout:
+    finalize:
+      address:
+        city: Město
+        postcode: PSČ
+        province: Provincie
+        street: Ulice
+      order_item:
+        quantity: Množství
+  order_item:
+    quantity: Množství
+    sellable: Produkt
+  product:
+    tabs:
+      product: Produkt

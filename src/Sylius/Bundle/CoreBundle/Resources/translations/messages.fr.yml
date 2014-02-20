@@ -1,0 +1,90 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Veuillez sélectionner un mode de livraison.
+  form:
+    action:
+      add_product_configuration:
+        price: Prix unitaire
+        quantity: Quantité
+        variant: Variante
+    block:
+      id: ID
+      title: Titre
+    cart:
+      coupon: Code promo
+    checkout:
+      addressing:
+        different_billing_address: Utiliser une adresse différente pour la facturation?
+      payment_method: Mode de paiement
+      shipping_method: Mode de livraison
+    group:
+      name: Nom
+      roles: Rôles
+    image:
+      file: Image
+    locale:
+      code: Code
+      enabled: Activé
+    order_filter:
+      created_at_from: De
+      created_at_to: À
+      number: Numéro
+      total_from: De
+      total_to: À
+    page:
+      id: ID
+      title: Titre
+    product:
+      restricted_zone: Restriction de zone
+      shipping_category: Catégorie de livraison
+      short_description: Brève description
+      tax_category: Catégorie de TVA
+      variant_selection_method: Méthode de sélection de variante
+    product_filter:
+      name: Nom
+      sku: Référence
+    settings:
+      general:
+        currency: Devise par défaut
+        locale: Langue
+        meta_description: Méta description
+        meta_keywords: Meta mots-clés
+        title: Titre de la page
+      taxation:
+        default_tax_zone: Zone de taxe par défaut
+    shipment_filter:
+      created_at_from: De
+      created_at_to: À
+      number: Numéro de commande
+      shipping_address: Expédier à
+    shipping_method:
+      zone: Zone
+    taxon:
+      file: Sélectionnez une image
+    taxonomy:
+      file: Sélectionnez une image
+    user:
+      billing_address: Adresse de facturation
+      different_billing_address: Utiliser une adresse différente pour la facturation?
+      enabled: Activé
+      first_name: Prénom
+      groups: Groupes
+      last_name: Nom
+      password: Mot de passe
+      shipping_address: Adresse de livraison
+    user_filter:
+      query: Rechercher
+    variant:
+      available_on_demand: Disponible sur demande
+      depth: Profondeur
+      height: Hauteur
+      images: Images
+      on_hand: Stock actuel
+      price: Prix
+      sku: Référence
+      weight: Poids
+      width: Largeur

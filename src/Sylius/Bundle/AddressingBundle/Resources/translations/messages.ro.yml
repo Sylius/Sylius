@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Oraș
+      postcode: Cod poștal
+      street: Adresă
+      province: Județ
+    country:
+      iso_name: cod ISO
+    zone_member_province:
+      province: Județ

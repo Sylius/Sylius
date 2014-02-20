@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Město
+      postcode: PSČ
+      street: Ulice
+      province: Provincie
+    zone_member_province:
+      province: Provincie

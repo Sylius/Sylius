@@ -2,41 +2,34 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        shipment:
-            state: Estado
-            states:
-                checkout:   Checkout
-                dispatched: despachado
-                pending:    Pendiente
-                ready:      Listo
-                shipped:    Enviado
-                returned:   Devuelto
-            tracking_code:  Código de seguimiento
-
-        shipping_calculator:
-            flat_rate_configuration:
-                amount: Cantidad
-
-            flexible_rate_configuration:
-                additional_item_cost: 'Costo adicional de artículo'
-                additional_item_limit: 'Límite de artículos adicionales'
-                first_item_cost: 'Costo del primer artículo'
-
-            per_item_rate_configuration:
-                amount: Cantidad
-
-            weight_rate_configuration:
-                amount: Cantidad
-                division: División
-
-        shipping_category:
-            description: Descripción
-            name: Nombre
-
-        shipping_method:
-            calculator: Calculadora
-            category: Categoría
-            category_requirement: 'Requisito de la categoría'
-            configuration: Configuración
-            name: Nombre
+  form:
+    shipment:
+      state: Estado
+      states:
+        dispatched: despachado
+        pending: Pendiente
+        ready: Listo
+        shipped: Enviado
+        returned: Devuelto
+      tracking_code: Código de seguimiento
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Cantidad
+      flexible_rate_configuration:
+        additional_item_cost: Costo adicional de artículo
+        additional_item_limit: Límite de artículos adicionales
+        first_item_cost: Costo del primer artículo
+      per_item_rate_configuration:
+        amount: Cantidad
+      weight_rate_configuration:
+        amount: Cantidad
+        division: División
+    shipping_category:
+      description: Descripción
+      name: Nombre
+    shipping_method:
+      calculator: Calculadora
+      category: Categoría
+      category_requirement: Requisito de la categoría
+      configuration: Configuración
+      name: Nombre

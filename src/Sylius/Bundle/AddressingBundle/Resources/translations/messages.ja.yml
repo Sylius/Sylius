@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: 市町村
+      company: 会社名
+      first_name: 名
+      last_name: 姓
+      postcode: 郵便番号
+      street: それ以降の住所
+      province: 都道府県
+    country:
+      iso_name: ISO略称
+      provinces: 都道府県
+    zone:
+      members: 地域
+    zone_member_province:
+      province: 都道府県
+    zone_member_zone:
+      zone: 対象の地域

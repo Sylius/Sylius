@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    configuration:
+      database:
+        name: Название
+        password: Пароль
+      mailer:
+        password: Пароль
+    setup:
+      plain_password: Пароль

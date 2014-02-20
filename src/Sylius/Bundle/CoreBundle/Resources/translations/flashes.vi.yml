@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    restricted_zone_removal: 'Sản phẩm %product% đã bị xoá khỏi giỏ hàng vì nó không nằm trong danh mục sản phẩm ở quốc gia của bạn.'
+  checkout:
+    restricted_zone: Sản phẩm này không nằm trong danh sách bán ở quốc gia của bạn.
+    success: Xin cảm ơn vì đã đặt hàng với chúng tôi!
+    canceled: Thanh toán của bạn đã bị huỷ bỏ.
+    pending: Thanh toán của bạn đang được xem xét.
+    failed: Thanh toán của bạn đã bị khước từ.
+    unknown: Xuất hiện lỗi không rõ trong quá trình thanh toán.
+    out_of_stock: 'Chỉ còn %quantity% %name% sẵn có để mua.'

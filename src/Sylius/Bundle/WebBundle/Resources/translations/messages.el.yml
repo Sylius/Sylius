@@ -1,0 +1,194 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Προσθήκη στο καλάθι
+  address:
+    city: Πόλη
+    country: Χώρα
+    firstname: Όνομα
+    lastname: Επώνυμο
+    postcode: Ταχ. Κώδικας
+    province: Επαρχία
+    street: Οδός
+  alert:
+    error: Σφάλμα
+    info: Πληροφορίες
+    success: Επιτυχία
+    warning: Προειδοποίηση
+  backend:
+    alert:
+      info: Πληροφορίες
+  cancel: Άκυρο
+  cart:
+    empty: Το καλάθι είναι άδειο
+    summary:
+      clear: Καθαρισμός καλαθιού
+      grand_total: Γενικό σύνολο
+      product: Προϊόν
+      quantity: Ποσότητα
+      save: Αποθήκευση
+      total: Σύνολο
+      unit_price: Τιμή
+    summary_header: Σύνοψη καλαθιού
+    total_items: '1 στοιχείο|%count% στοιχεία'
+  checkout:
+    back: Επιστροφή
+    finalize:
+      address:
+        city: Πόλη
+        country: Χώρα
+        firstname: Όνομα
+        lastname: Επώνυμο
+        postcode: Ταχ. Κώδικας
+        province: Επαρχία
+        street: Οδός
+      header: Σύνοψη παραγγελίας
+      order:
+        billing_address: Διεύθυνση χρέωσης
+        items_total: Σύνολο στοιχείων
+        no_items: Αυτή η παραγγελία δεν περιέχει κανένα στοιχείο
+        no_promotion: Δεν έχει εφαρμοστεί προώθηση
+        no_shipping_charges: Δεν έχουν εφαρμοστεί έξοδα αποστολής
+        no_taxes: Δεν έχουν εφαρμοστεί φόροι
+        promotion_discount: Έκπτωση προώθησης
+        promotion_total: Σύνολο προώθησης
+        shipping_address: Διεύθυνση αποστολής
+        shipping_charges: Έξοδα αποστολής
+        shipping_total: Σύνολο εξόδων αποστολής
+        tax_total: Σύνολο φόρων
+        taxes: Φόροι
+        total: Σύνολο
+      order_item:
+        quantity: Ποσότητα
+        total: Σύνολο
+        unit_price: Τιμή μονάδας
+      place_order: Παραγγελία
+      product:
+        name: Ονομασία
+    forward: Συνέχεια
+    payment:
+      header: Τρόπος πληρωμής
+    security:
+      existing_customer: Υφιστάμενος Πελάτης
+      header: 'Είσοδος στο κατάστημα <small>ή να δημιουργήσετε νέο λογαριασμό</small>'
+      login: Είσοδος
+      new_customer: Νεος Πελάτης
+      register: Καταχώρηση
+    shipping:
+      header: Τρόπος αποστολής
+  country:
+    add_province: Προσθήκη επαρχίας
+    create: Δημιουργία χώρας
+    create_header: Νέα χώρα
+    index_header: Χώρες
+    iso_name: Όνομα ISO
+    manage: Διαχείριση χωρών
+    name: Ονομασία
+    no_results: Δεν έχει ρυθμιστεί κάποια χώρα
+    show_header: Λεπτομέρειες χώρας
+    update_header: Επεξεργασία χώρας
+  create: Δημιουργία
+  delete: διαγραφή
+  edit: επεξεργασία
+  email: E-mail
+  filter: Φίλτρο
+  form:
+    choose_file: Επιλογή αρχείου
+    login:
+      password: Κωδικός
+  generate: Δημιουργία
+  homepage:
+    splash:
+      headline: Καλώς ήρθατε στο Sylius
+      subheadline: Σύγχρονη εφαρμογή ηλεκτρονικού εμπορίου για το Symfony2
+  inventory_unit:
+    created_at: Δημιουργήθηκε
+    inventory_state: Κατάσταση απογραφής
+    name: Ονομασία
+    no_results: Δεν υπάρχουν μονάδες στην απογραφή για να εμφανιστούν.
+    shipping_state: Κατάσταση μεταφορικών
+    updated_at: Τροποποιήθηκε την
+  login: Είσοδος
+  login_header: Διαχείριση
+  manage: Διαχείριση
+  meta:
+    backend_title: Πίνακας ελέγχου του Sylius.
+  newest: Νεότερα προϊόντα
+  option:
+    create: Δημιουργία επιλογής
+  order:
+    billing_address: Διεύθυνση χρέωσης
+    create: Δημιουργία παραγγελίας
+    create_header: Νεα παραγγελία
+    created_at: Δημιουργήθηκε την
+    items_total: Σύνολο στοιχείων
+    no_items: Αυτή η παραγγελία δεν περιέχει κανένα στοιχείο
+    no_shipping_charges: Δεν έχουν εφαρμοστεί έξοδα αποστολής
+    no_taxes: Δεν έχουν εφαρμοστεί φόροι
+    promotion_total: Σύνολο προώθησης
+    shipping_address: Διεύθυνση αποστολής
+    shipping_charges: Έξοδα αποστολής
+    shipping_total: Σύνολο εξόδων αποστολής
+    tax_total: Σύνολο φόρων
+    taxes: Φόροι
+    total: Σύνολο
+  shipment:
+    inventory_state: Κατάσταση απογραφής
+    manage: Διαχείριση αποστολών
+    method: τρόπος
+    name: ονομασία
+    order: παραγγελία
+    state: κατάσταση
+  order_item:
+    quantity: Ποσότητα
+    sellable: Προϊόν
+  password: Κωδικός
+  payment:
+    amount: Ποσό
+    method: τρόπος
+  product:
+    categorization: Κατηγοριοποίηση
+    create: Δημιουργία προϊόντος
+    create_header: Νεο προϊόν
+    description: Περιγραφή
+    options: Επιλογές
+    price: Τιμή
+    properties: Ιδιότητες
+    stock: Τρέχων απόθεμα
+    tabs:
+      product: Προϊόν
+  promotion:
+    description: Περιγραφή
+    name: Ονομασία
+  save_changes: Αποθήκευση αλλαγών
+  shipping_category:
+    name: Ονομασία
+  tax_category:
+    name: Ονομασία
+  tax_rate:
+    amount: Ποσό
+    category: Κατηγορία
+    manage: Διαχείριση φορολόγισης
+    name: Ονομασία
+    zone: Ζώνη
+  taxon:
+    name: Ονομασία
+  taxonomy:
+    name: Ονομασία
+  user:
+    email: E-mail
+  "yes": ναί
+  zone:
+    add_member: Προσθήκη μέλους
+    create: Δημιουργία ζώνης
+    create_header: Νεα ζώνη
+    index_header: Ζώνες
+    manage: Διαχείριση ζωνών
+    name: Ονομασία
+    no_results: Δεν έχουν οριστεί ζώνες.
+    show_header: Λεπτομέρειες ζώνης
+    type: Τύπος
+    update_header: Επεξεργασία ζώνης
+  zone_member:
+    members: Μέλη

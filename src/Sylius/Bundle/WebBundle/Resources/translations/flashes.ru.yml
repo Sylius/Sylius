@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Адрес успешно установлен как адрес для выставления счёта по умолчанию.
+        shipping:
+          success: Адрес успешно установлен как адрес доставки по умолчанию.

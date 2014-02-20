@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Kosárba
+  address:
+    city: Település
+    country: Ország
+    firstname: Keresztnév
+    lastname: Vezetéknév
+    postcode: Irányítószám
+  checkout:
+    finalize:
+      address:
+        city: Település
+        postcode: Irányítószám

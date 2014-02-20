@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    checkout:
-        success: ご注文を承りました。
+  checkout:
+    success: ご注文を承りました。

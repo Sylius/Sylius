@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  backend:
+    menu:
+      main:
+        configuration: Cấu hình
+        countries: Quốc gia
+        customer: Khách hàng
+        dashboard: Bảng điều khiển
+        exchange_rates: Tỷ giá ngoại tệ
+        general_settings: Cài đặt chung
+        homepage: Cửa hàng của bạn
+        locales: Miền địa phương
+        new_order: Thêm trật tự mới
+        new_promotion: Thêm khuyến mãi mới
+        options: Quản lý tuỳ chọn sản phẩm
+        orders: Đơn đặt hàng hiện tại
+        payment_methods: Phương thức thanh toán
+        payments: Thanh toán
+        products: Sản phẩm
+        promotions: Chương trình khuyến mãi
+        prototypes: Sản phẩm mẫu
+        sales: Đơn đặt hàng
+        shipments: Vận chuyển
+        shipping_categories: Thể loại
+        shipping_methods: Phương thức vận chuyển
+        stockables: Mức độ hàng trong kho
+        users: Người dùng
+      sidebar:
+        countries: Quốc gia
+        customer: Khách hàng
+        dashboard: Bảng điều khiển
+        exchange_rates: Tỷ giá ngoại tệ
+        general_settings: Cài đặt chung
+        groups: Nhóm
+        locales: Miền địa phương
+        new_order: Thêm trật tự mới
+        new_promotion: Thêm khuyến mãi mới
+        orders: Đơn đặt hàng hiện tại
+        payment_methods: Phương thức thanh toán
+        payments: Thanh toán
+        products: Sản phẩm
+        promotions: Chương trình khuyến mãi
+        prototypes: Sản phẩm mẫu
+        sales: Đơn đặt hàng
+        shipments: Vận chuyển
+        shipping_categories: Thể loại
+        shipping_methods: Phương thức vận chuyển
+        stockables: Mức độ hàng trong kho
+        users: Người dùng
+  frontend:
+    menu:
+      social:
+        twitter: Twitter

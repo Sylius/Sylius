@@ -2,17 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        product:
-            options: Опции
-        variant:
-            presentation: Представление
-            available_on: Доступен с
-        option:
-            name: Внутренее имя
-            presentation: Представление
-            values: Возможные значения
-        option_value:
-            value: Значение
-        prototype:
-            options: Опции
+  form:
+    product:
+      options: Опции
+    variant:
+      presentation: Представление
+      available_on: Доступен с
+    option:
+      name: Внутренее имя
+      presentation: Представление
+      values: Возможные значения
+    option_value:
+      add_value: Добавить значение
+      value: Значение
+    prototype:
+      options: Опции

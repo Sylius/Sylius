@@ -1,0 +1,198 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city: Thành phố
+    company: Công ty
+    country: Quốc gia
+    firstname: Tên
+    lastname: Họ
+    postcode: Mã bưu chính
+    province: Tỉnh
+    street: Địa chỉ
+  alert:
+    error: Lỗi
+    info: Thông tin
+    success: Thành công
+    warning: Cảnh báo
+  backend:
+    alert:
+      info: Thông tin
+    dashboard:
+      chart_order_count: Số lượng đơn đặt hàng
+      chart_order_total: Giá trị đơn đặt hàng
+      orders: Đơn đặt hàng tuần trước
+      revenue: Doanh thu tuần trước
+    quick_links:
+      users: Người dùng
+  block:
+    title: Tiêu đề
+    update_header: Chỉnh sửa khối nội dung
+    updated_at: Cập nhật lần cuối
+  breadcrumb:
+    country:
+      index: Quốc gia
+    customers: Khách hàng
+    edit: Chỉnh sửa
+    exchange_rate:
+      index: Tỷ giá ngoại tệ
+    general_settings: Cài đặt chung
+    generate: Tạo
+    group:
+      index: Nhóm
+    inventory:
+      index: Hàng tồn kho
+    locale:
+      index: Miền địa phương
+    new: Mới
+    option:
+      index: Tùy chọn
+    order:
+      index: Đơn đặt hàng
+    page:
+      index: Các trang tĩnh
+    payment:
+      index: Thanh toán
+    payment_method:
+      index: Phương thức thanh toán
+    product:
+      index: Sản phẩm
+    promotion:
+      index: Chương trình khuyến mãi
+    shipment:
+      index: Vận chuyển
+    user:
+      index: Người dùng
+  cart:
+    summary:
+      quantity: Số lượng
+      save: Lưu lại
+      total: Tổng cộng
+      unit_price: Giá
+  checkout:
+    finalize:
+      address:
+        city: Thành phố
+        postcode: Mã bưu chính
+        province: Tỉnh
+        street: Địa chỉ
+      order:
+        taxes: Thuế
+        total: Tổng cộng
+      order_item:
+        quantity: Số lượng
+        total: Tổng cộng
+        unit_price: Đơn giá
+      place_order: Đặt hàng
+      product:
+        name: Sản phẩm
+    forward: Tiếp tục
+    payment:
+      header: Phương thức thanh toán
+    security:
+      existing_customer: Khách hàng hiện tại
+      header: 'Đăng nhập vào <small>hoặc tạo tài khoản mới</small>'
+      login: Đăng nhập
+      new_customer: Khách hàng mới
+      register: Đăng kí
+    shipping:
+      error: Chúng tôi rất tiếc, nhưng cửa hàng của chúng tôi không thể vận chuyển sản phẩm này đến nước mà bạn đã chọn.
+      header: Phương pháp vận chuyển
+  confirmation:
+    message: Bạn có muốn xóa khoản mục này không?
+    title: Xác nhận
+  country:
+    add_province: Thêm tỉnh
+    create: Tạo quốc gia
+    create_header: Tạo quốc gia mới
+    id: ID
+    index_header: Quốc gia
+    iso_name: Mã ISO
+    manage: Quản lý quốc gia
+    name: Tên
+  create: Tạo
+  created_at: Được tạo vào lúc
+  delete: xóa
+  deleted: Đã bị xoá
+  edit: chỉnh sửa
+  email: Email
+  exchange_rate:
+    create: Tự tạo tỷ giá ngoại tệ
+    create_header: Tỷ giá ngoại tệ mới
+    currency: Tiền tệ
+    id: ID
+    index_header: Tỷ giá ngoại tệ
+    no_results: Chưa có tỷ giá ngoại tệ nào để hiển thị.
+    rate: tỷ giá
+    update_header: Chỉnh sửa tỷ giá hối đoái
+  form:
+    frontend:
+      password:
+        confirmation: Xác nhận
+  generate: Tạo
+  inventory_unit:
+    updated_at: Cập nhật lần cuối
+  locale:
+    enabled: Đã được kích hoạt
+    updated_at: Cập nhật lần cuối
+  logo: Sylius
+  manage: Quản lý
+  newest: Sản phẩm mới nhất
+  option:
+    create: Tạo tùy chọn
+    create_header: Tạo tuỳ chọn sản phẩm mới
+    index_header: Tuỳ chọn cho sản phẩm
+    manage: Quản lý tuỳ chọn
+    name: Tên
+    presentation: trình bày
+    update_header: Chỉnh sửa tùy chọn
+    updated_at: Cập nhật lần cuối
+  order:
+    index_header: Đơn đặt hàng hiện tại
+    shipments: Vận chuyển
+    taxes: Thuế
+  shipment:
+    created_at: Được tạo vào lúc
+    index_header: Vận chuyển
+    updated_at: Cập nhật lần cuối
+  order_item:
+    quantity: Số lượng
+  page:
+    update_header: Cập nhật lần cuối
+  payment:
+    created_at: Được tạo vào lúc
+    index_header: Thanh toán
+    updated_at: Cập nhật lần cuối
+  payment_method:
+    index_header: Phương thức thanh toán
+    updated_at: Cập nhật lần cuối
+  product:
+    updated_at: Cập nhật lần cuối
+  promotion:
+    created_at: Được tạo vào lúc
+    updated_at: Cập nhật lần cuối
+  property:
+    name: Tên
+    presentation: trình bày
+  prototype:
+    index_header: Sản phẩm mẫu
+    name: Tên
+  settings:
+    general_header: Cài đặt chung
+  shipping_category:
+    index_header: Thể loại
+    updated_at: Cập nhật lần cuối
+  shipping_method:
+    index_header: Phương thức vận chuyển
+    updated_at: Cập nhật lần cuối
+  stockable:
+    name: Tên
+  tax_category:
+    updated_at: Cập nhật lần cuối
+  tax_rate:
+    updated_at: Cập nhật lần cuối
+  user:
+    email: Email
+  variant:
+    last_update: Cập nhật lần cuối

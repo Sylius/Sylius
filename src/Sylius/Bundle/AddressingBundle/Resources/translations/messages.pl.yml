@@ -2,28 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        address:
-            city: Miejscowość
-            country: Kraj
-            first_name: Imię
-            last_name: Nazwisko
-            postcode: Kod pocztowy
-            street: Adres
-        country:
-            iso_name: Kod ISO
-            name: Nazwa
-            provinces: Województwa
-            select: Wybierz
-        province:
-            name: Nazwa
-        zone:
-            members: Kraje należące do strefy
-            name: Nazwa
-            type: Typ
-        zone_member_country:
-            country: Kraj
-        zone_member_province:
-            province: Województwo
-        zone_member_zone:
-            zone: Strefa
+  form:
+    address:
+      city: Miejscowość
+      company: Firma
+      country: Kraj
+      first_name: Imię
+      last_name: Nazwisko
+      postcode: Kod pocztowy
+      street: Adres
+      province: Województwo
+    country:
+      iso_name: Kod ISO
+      name: Nazwa
+      provinces: Województwa
+      select: Wybierz
+    province:
+      name: Nazwa
+      select: Wybierz
+    zone:
+      members: Kraje należące do strefy
+      name: Nazwa
+      type: Typ
+    zone_member_country:
+      country: Kraj
+    zone_member_province:
+      province: Województwo
+    zone_member_zone:
+      zone: Strefa

@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Sepete ekle
+  address:
+    city: Şehir
+    country: Ülke
+    firstname: Ad
+    lastname: Soyad
+    postcode: Posta kodu
+    province: İl
+    street: Adres
+  alert:
+    error: Hata
+    info: Bilgilendirme
+    success: Başarılı
+    warning: Dikkat
+  backend:
+    alert:
+      info: Bilgilendirme
+  cancel: İptal
+  cart:
+    empty: Sepetiniz boş
+    summary:
+      checkout: 'Ödeme  yap'
+      clear: Sepeti boşalt
+      grand_total: Toplam
+      product: Ürün
+      quantity: Adet
+      save: Kaydet
+      total: Toplam
+      unit_price: Fiyatı
+    summary_header: Sepet toplamı
+    total_items: '1 ürün|%count% ürün'
+  checkout:
+    addressing:
+      header: Teslimat adresi
+    back: Geri
+    finalize:
+      address:
+        city: Şehir
+        country: Ülke
+        firstname: Ad
+        lastname: Soyad
+        postcode: Posta kodu
+        province: İl
+        street: Adres
+      header: Sepetiniz
+      order:
+        billing_address: Fatura adresi
+        items_total: Toplam tutar
+        no_items: Bu siparişde ürün bulunmuyor
+        tax_total: Toplam KDV
+        taxes: Vergiler
+        total: Toplam tutar
+      order_item:
+        quantity: Miktar
+      place_order: Siparişi ver
+      product:
+        name: Ürün adı
+    forward: Devam et
+    payment:
+      header: Ödeme tipi
+    security:
+      login: Giriş
+      new_customer: Yeni müşteri
+  order:
+    items_total: Toplam tutar
+    no_items: Bu siparişde ürün bulunmuyor
+    tax_total: Toplam KDV
+    taxes: Vergiler
+  order_item:
+    quantity: Adet
+    sellable: Ürün
+  product:
+    tabs:
+      product: Ürün

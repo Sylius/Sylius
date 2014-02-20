@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Πόλη
+      postcode: Ταχ. Κώδικας
+      street: Οδός
+      province: Επαρχία
+    country:
+      iso_name: Όνομα ISO
+    zone:
+      members: Μέλη
+    zone_member_province:
+      province: Επαρχία

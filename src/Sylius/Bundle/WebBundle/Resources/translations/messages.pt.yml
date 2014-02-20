@@ -1,0 +1,393 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Adicionar ao carrinho
+  address:
+    city: Cidade
+    country: País
+    firstname: Nome
+    lastname: Sobrenome
+    postcode: CEP
+    province: Estado
+    street: Rua
+  alert:
+    error: Erro
+    info: Info
+    success: Sucesso
+    warning: Aviso
+  backend:
+    alert:
+      info: Info
+  cancel: Cancelar
+  cart:
+    empty: Seu carrinho está vazio
+    summary:
+      checkout: Finalizar compra
+      clear: Esvaziar carrinho
+      grand_total: Total
+      product: Produto
+      quantity: Quantidade
+      save: Salvar
+      unit_price: Preço
+    summary_header: Resumo do carrinho
+    total_items: '1 item|%count% itens'
+  checkout:
+    addressing:
+      header: Endereço
+    back: Voltar
+    finalize:
+      address:
+        city: Cidade
+        country: País
+        firstname: Nome
+        lastname: Sobrenome
+        postcode: CEP
+        province: Estado
+        street: Rua
+      header: Dados da compra
+      order:
+        billing_address: Endereço para fatura
+        items_total: Total de itens
+        no_items: Este pedido não contém nenhum item
+        no_promotion: Sem promoções
+        no_shipping_charges: Nenhuma taxa de entrega foi aplicada
+        no_taxes: Nenhuma taxa foi aplicada
+        promotion_discount: Descontos
+        promotion_total: Total de promoções
+        shipping_address: Endereço de entrega
+        shipping_charges: Taxas de envio
+        shipping_total: Total para envio
+        tax_total: Total de taxas
+        taxes: Taxas
+      order_item:
+        quantity: Quantidade
+        unit_price: Preço unitário
+      place_order: Fazer pedido
+      product:
+        name: Nome
+    forward: Continuar
+    payment:
+      header: Meio de pagamento
+    security:
+      existing_customer: Cliente cadastrado
+      header: 'Cadastre-se na loja <small>ou crie uma nova conta</small>'
+      new_customer: Novo cliente
+      register: Cadastro
+    shipping:
+      header: Método de envio
+  country:
+    add_province: Adicionar estado
+    create: Criar país
+    create_header: Novo país
+    index_header: Países
+    iso_name: ISO
+    manage: Gerenciar países
+    name: Nome
+    no_results: Não há países cadastrados
+    show_header: Detalhes do país
+    update_header: Editando país
+  create: Criar
+  delete: deletar
+  edit: editar
+  email: E-mail
+  filter: Filtrar
+  form:
+    choose_file: Escolha um arquivo
+    login:
+      password: Senha
+  generate: Gerar
+  homepage:
+    splash:
+      headline: Bem-vindo ao Sylius
+      subheadline: E-commerce para Symfony2
+  inventory_unit:
+    created_at: Data de criação
+    inventory_state: Estado do inventário
+    name: Nome
+    no_results: Não há itens no inventário
+    shipping_state: Situação do envio
+    updated_at: Data de modificação
+  login_header: Administração
+  manage: Gerenciar
+  meta:
+    backend_title: Painel administrativo
+    frontend_description: Sylius é uma solução moderna para e-commerce para PHP, baseado no framework Symfony2
+    frontend_keywords: sylius, e-commerce, symfony2, compras, carrinho, webshop
+    frontend_title: Sylius, e-commerce moderno para Symfony2
+  newest: Novos produtos
+  option:
+    create: Criar opção
+    create_header: Nova opção
+    index_header: Opções do produto
+    manage: Gerenciar opções
+    no_results: Não há opções cadastradas
+    update_header: Editando opção
+  order:
+    billing_address: Endereço de faturamento
+    create: Criar pedido
+    create_header: Novo pedido
+    created_at: Data de criação
+    general_info: Informações gerais
+    index_header: Pedidos atuais
+    inventory_tracking: Controle de estoque
+    items_total: Total de itens
+    manage: Gerenciar pedidos
+    no_items: Este pedido não contém itens
+    no_results: Você não possui pedidos
+    no_shipments: Não há nenhum envio para este pedido
+    no_shipping_charges: Nenhuma taxa de envio aplicada
+    no_taxes: Nenhuma taxa foi aplicada
+    number: Número
+    payment_state: Situação do pagamento
+    payment_states:
+      balance_due: Saldo devedor
+    promotion_total: Total de promoção
+    shipment_state: Situação do envio
+    shipment_states:
+      pending: Pendente
+    shipments: Envios
+    shipping_address: Endereço de entrega
+    shipping_charges: Taxas de envio
+    shipping_total: Valor do envio
+    show_header: Detalhes do pedido
+    tax_total: Totais de taxas
+    taxes: Taxas
+    update_header: Editar pedido
+    user: Usuário
+  shipment:
+    created_at: Data de criação
+    index_header: Envios
+    inventory_state: Situação do estoque
+    manage: Gerenciar envios
+    method: meio
+    modified: Data de modificação
+    name: Nome
+    no_items: Não há itens
+    no_results: Não há envios
+    order: Pedido
+    show_header: Detalhes do envio
+    state: situação
+    updated_at: Data de atualização
+  order_item:
+    quantity: Quantidade
+    sellable: Produto
+    unit_price: Preço unitário
+  out_of_stock: Fora de estoque
+  password: Senha
+  payment:
+    amount: Quantidade
+    create: Criar pagamento
+    create_header: Novo pagamento
+    created_at: Data de criação
+    index_header: Pagamentos
+    method: Método
+    no_results: Não há pagamentos configurados
+    update_header: Editando pagamento
+    updated_at: Última atualização
+  payment_method:
+    create: Criar meio de pagamento
+    create_header: Novo meio de pagamento
+    enabled: Habilitado?
+    gateway: Gateway
+    index_header: Meios de pagamentos
+    name: Nome
+    no_results: Não há meios de pagamentos configurados
+    update_header: Editando meio de pagamento
+    updated_at: Ultima atualização
+  product:
+    add_property: Adicionar propriedade
+    available_on: Disponível em
+    available_on_demand: Disponível por demanda
+    categorization: Categorização
+    create: Criar produto
+    create_header: Novo produto
+    description: Descrição
+    generate_variants: Gerar variações
+    index_by_taxon_header: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
+    index_header: 'Produtos <small>Lista de todos os produtos em sua loja</small>'
+    manage: Gerenciar produtos
+    name: Nome
+    no_description: '<i>Sem descrição...</i>'
+    no_images: Não há imagens para este produto
+    no_options: Não há opções para este produto
+    no_properties: Este produto não possui propriedades definidas
+    no_results: Não há produtos cadastrados
+    no_short_description: '<i>Sem resumo</i>'
+    no_sku: '<i>Sem SKU</i>'
+    no_tax_category: Nenhuma categoria de imposto
+    no_taxons: Sem táxons
+    options: Opções
+    price: Preço de venda
+    properties: Propriedades
+    show: Ver mais
+    show_header: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
+    stock: Estoque atual
+    tabs:
+      product: Produto
+    tax_category: Categoria de imposto
+    update_header: Editando produto
+    variant_selection_method: Meio de seleção de variação
+  promotion:
+    actions: Ações
+    add_action: Adicionar ação
+    add_rule: Adicionar regra
+    create: Criar promoção
+    create_header: Nova promoção
+    created_at: Data de criação
+    description: Descrição
+    ends_at: Termina em
+    index_header: Promoções existentes
+    manage: Gerenciar promoções
+    name: Nome
+    no_results: Não há promoções cadastradas
+    rules: Regras
+    show_header: Detalhes da promoção
+    starts_at: Começa em
+    update_header: Editando promoção
+    updated_at: Data de atualização
+    usage_limit: Limite de utilização
+    used: Utilizado
+  promotion_action:
+    configuration: Configuração
+    type: Tipo
+  promotion_coupon:
+    create: Adicionar cupom
+    create_header: Criar novo cupom
+    generate: Gerar cupons
+    generate_header: Gerando cupons
+    index: Cupons
+    no_results: Não há cupons cadastrados
+    update_header: Editando cupom
+  promotion_rule:
+    configuration: Configuração
+    type: Tipo
+  property:
+    add_choice: Adicionar escolha
+    create: Criar propriedade
+    create_header: Nova propriedade
+    index_header: Propriedades
+    manage: Gerenciar propriedades
+    no_results: Não há propriedades cadastradas
+    update_header: Editando propriedade
+  prototype:
+    build: Construir protótipo
+    build_header: Construir produto à partir de protótipo
+    create: Criar protótipo
+    create_header: Novo protótipo
+    index_header: Protótipos de produtos
+    no_results: Não há protótipos cadastrados
+    update_header: Editando protótipo
+  province:
+    provinces: Estados
+  remember_me: Lembrar-me?
+  save_changes: Salvar modificações
+  settings:
+    general_header: Configurações gerais
+    taxation_header: Configurações de taxas
+  shipment_category:
+    manage: Gerenciar categorias de envio
+  shipping_category:
+    create: Criar categoria de envio
+    create_header: Nova categoria de envio
+    index_header: Categorias de envio
+    manage: Gerenciar categorias de envio
+    name: Nome
+    no_results: Não há categorias de envio cadastradas
+    update_header: Editando categoria de envio
+    updated_at: Data de atualização
+  shipping_method:
+    calculator: Calculadora
+    category: Categoria
+    create: Criar método de envio
+    create_header: Novo método de envio
+    enabled: Habilitado?
+    index_header: Métodos de envio
+    manage: Gerenciar métodos de envio
+    name: Nome
+    no_results: Não há métodos de envio cadastrados
+    show_header: Detalhes de métodos de envio
+    update_header: Editando método de envio
+    updated_at: Data de atualização
+    zone: Zona
+  shop_by: Comprar por
+  show: Detalhes
+  stockable:
+    index_header: 'Estoque <small>Aqui você pode ver os nível do estoque atual</small>'
+    no_results: Não há itens no estoque
+  tax_category:
+    create: Criar categoria de imposto
+    create_header: Nova categoria de imposto
+    description: Descrição
+    index_header: Categorias de tributação
+    manage: Gerenciar categorias de impostos
+    name: Nome
+    no_description: Sem descrição
+    no_results: Não há categorias de impostos cadastradas
+    update_header: Editando categoria de imposto
+    updated_at: Data de atualização
+  tax_rate:
+    amount: Quantidade
+    category: Categoria
+    create: Criar imposto
+    create_header: Novo imposto
+    index_header: Impostos
+    manage: Gerenciar impostos
+    name: Nome
+    no_results: Não há impostos configurados
+    show_header: Detalhes de imposto
+    update_header: Atualizar imposto
+    zone: Zona
+  taxon:
+    create: Criar táxon
+    create_header: Novo táxon
+    name: Nome
+    no_results: Não há táxons cadastrados
+    update_header: Editando táxon
+  taxonomy:
+    create: Criar taxonomia
+    create_header: Nova taxonomia
+    index_header: 'Categorização <small>Aqui você vê as taxonomias definidas</small>'
+    name: Nome
+    no_results: Não há taxonomias cadastradas
+    show_header: 'Taxonomia <small><strong>%name%</strong></small>'
+    update_header: Editando taxonomia
+  user:
+    email: E-mail
+    enabled: Habilitado?
+    filter:
+      all: Todos os usuários
+      unconfirmed: Contas sem confirmação
+    general_info: 'Informações gerais de "%username%"'
+    index_header: 'Usuários <small>Lista de todos os usuários cadastros na loja</small>'
+    last_login: Último login
+    no_results: Não há usuários cadastrados
+    show_header: Detalhes do usuários
+    username: Login
+  variant:
+    add_image: Adicionar imagem
+    availability: Disponibilidade
+    available_on_demand: Disponível por demanda
+    create: Criar variação
+    create_header: Nova variação de produto
+    delete_image: Deletar imagem
+    last_update: Data de atualização
+    no_results: Não há variações cadastradas
+    options: Opções
+    price: Preço
+    stock: Estoque atual
+    update_header: Editando variação
+  "yes": sim
+  zone:
+    add_member: Adicionar membro
+    create: Criar zona
+    create_header: Nova zona
+    index_header: Zonas
+    manage: Gerenciar zonas
+    name: Nome
+    no_results: Não há zonas configuradas
+    show_header: Detalhes de zona
+    type: Tipo
+    update_header: Editando zona
+  zone_member:
+    members: Membros

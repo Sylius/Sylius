@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        exchange_rate:
-            currency: Währung
-            rate: Kurs
+  form:
+    exchange_rate:
+      currency: Währung
+      rate: Kurs

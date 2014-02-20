@@ -2,5 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    checkout:
-        success: Спасибо за заказ!
+  cart:
+    restricted_zone_removal: 'Продукт %product% удален из корзины, поскольку он не доступен в вашей стране.'
+  checkout:
+    restricted_zone: Этот продукт не доступен в вашей стране.
+    success: Спасибо за заказ!
+    canceled: Ваш платеж был отменен.
+    pending: Ваш платеж обрабатывается.
+    failed: Ваш платеж отклонили.
+    unknown: Неизвестная ошибка при приёме платежа.
+    out_of_stock: 'Есть только %quantity% %name% в наличии.'

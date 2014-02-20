@@ -2,85 +2,77 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    backend:
-        menu:
-            main:
-                assortment: Varios
-                configuration: Configuración
-                countries: Países
-                dashboard: Panel general
-                exchange_rates: Tipos de cambio
-                general_settings: Configuración general
-                homepage: Mi tienda
-                new_order: Añadir nuevo pedido
-                new_promotion: Añadir nueva promoción
-                options: Administrar opciones de producto
-                orders: Pedidos en curso
-                payment_methods: Modos de pago
-                payments: Pagos
-                products: Productos
-                promotions: Promociones
-                properties: Configurar propiedades
-                prototypes: Prototipos de producto
-                sales: Pedidos
-                shipments: Envíos
-                shipping_categories: Categorías de envío
-                shipping_methods: Métodos de envío
-                stockables: Niveles de inventario
-                tax_categories: Categorías de impuestos
-                tax_rates: Tasas de impuestos
-                taxation_settings: Configuración de impuestos
-                taxonomies: Categorización
-                zones: Zonas
-            sidebar:
-                assortment: Varios
-                configuration: Configuración
-                countries: Países
-                customer: Clientes
-                dashboard: Panel general
-                exchange_rates: Tipos de cambio
-                general_settings: Configuración general
-                homepage: Volver a la tienda
-                new_order: Añadir nuevo pedido
-                new_promotion: Añadir nueva promoción
-                options: Administrar opciones de producto
-                orders: Pedidos en curso
-                payment_methods: Modos de pago
-                payments: Pagos
-                products: Productos
-                promotions: Promociones
-                properties: Configuración de propiedades
-                prototypes: Prototipos de producto
-                sales: Pedidos
-                shipments: Envíos
-                shipping_categories: Categorías de envío
-                shipping_methods: Métodos de envío
-                stockables: Niveles de inventario
-                tax_categories: Categorías de impuestos
-                tax_rates: Tasas de impuestos
-                taxation_settings: Configuración de impuestos
-                taxonomies: Categorización
-                users: Usuarios
-                zones: Zonas
-    frontend:
-        menu:
-            account:
-                homepage: Inicio
-                orders: Mis pedidos / mis facturas
-                password: Mi contraseña
-                profile: Mi información personal
-                shop: Volver a la tienda
-            currency: Mostrar los precios en %currency%
-            main:
-                account: Mi cuenta
-                administration: Administración
-                cart: Ver carrito (%items%) %total%
-                login: Login
-                logout: Logout
-                register: Registrarse
-            social:
-                facebook: Facebook
-                github: GitHub
-                google: Google+
-                linkedin: LinkedIn
-                twitter: Twitter
+  backend:
+    menu:
+      main:
+        assortment: Varios
+        configuration: Configuración
+        countries: Países
+        dashboard: Panel general
+        exchange_rates: Tipos de cambio
+        general_settings: Configuración general
+        homepage: Mi tienda
+        new_order: Añadir nuevo pedido
+        new_promotion: Añadir nueva promoción
+        options: Administrar opciones de producto
+        orders: Pedidos en curso
+        payment_methods: Modos de pago
+        payments: Pagos
+        products: Productos
+        promotions: Promociones
+        properties: Configurar propiedades
+        prototypes: Prototipos de producto
+        sales: Pedidos
+        shipments: Envíos
+        shipping_categories: Categorías de envío
+        shipping_methods: Métodos de envío
+        stockables: Niveles de inventario
+        tax_categories: Categorías de impuestos
+        tax_rates: Tasas de impuestos
+        taxation_settings: Configuración de impuestos
+        taxonomies: Categorización
+        zones: Zonas
+      sidebar:
+        assortment: Varios
+        configuration: Configuración
+        countries: Países
+        customer: Clientes
+        dashboard: Panel general
+        exchange_rates: Tipos de cambio
+        general_settings: Configuración general
+        homepage: Volver a la tienda
+        new_order: Añadir nuevo pedido
+        new_promotion: Añadir nueva promoción
+        options: Administrar opciones de producto
+        orders: Pedidos en curso
+        payment_methods: Modos de pago
+        payments: Pagos
+        products: Productos
+        promotions: Promociones
+        properties: Configuración de propiedades
+        prototypes: Prototipos de producto
+        sales: Pedidos
+        shipments: Envíos
+        shipping_categories: Categorías de envío
+        shipping_methods: Métodos de envío
+        stockables: Niveles de inventario
+        tax_categories: Categorías de impuestos
+        tax_rates: Tasas de impuestos
+        taxation_settings: Configuración de impuestos
+        taxonomies: Categorización
+        users: Usuarios
+        zones: Zonas
+  frontend:
+    menu:
+      account:
+        homepage: Inicio
+        orders: Mis pedidos / mis facturas
+        password: Mi contraseña
+        profile: Mi información personal
+        shop: Volver a la tienda
+      currency: 'Mostrar los precios en %currency%'
+      main:
+        account: Mi cuenta
+        administration: Administración
+        cart: 'Ver carrito (%items%) %total%'
+        register: Registrarse

@@ -2,22 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        shipping_category:
-            name: Nazwa
-            description: Opis
-        shipping_method:
-            name: Nazwa
-            category: Kategoria
-            category_requirement: Wymagania kategorii
-            calculator: Kalkulator
-            configuration: Konfiguracja
-        shipping_calculator:
-            flat_rate_configuration:
-                amount: Kwota
-            per_item_rate_configuration:
-                amount: Kwota
-            flexible_rate_configuration:
-                first_item_cost: Koszt pierwszej sztuki
-                additional_item_cost: Koszt kolejnych sztuk
-                additional_item_limit: Maksymalnie w paczce
+  form:
+    shipment:
+      states:
+        checkout: Koszyk
+        pending: Oczekujący
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Kwota
+      flexible_rate_configuration:
+        additional_item_cost: Koszt kolejnych sztuk
+        additional_item_limit: Maksymalnie w paczce
+        first_item_cost: Koszt pierwszej sztuki
+      per_item_rate_configuration:
+        amount: Kwota
+      weight_rate_configuration:
+        amount: Kwota
+    shipping_category:
+      description: Opis
+      name: Nazwa
+    shipping_method:
+      calculator: Kalkulator
+      category: Kategoria
+      category_requirement: Wymagania kategorii
+      configuration: Konfiguracja
+      name: Nazwa

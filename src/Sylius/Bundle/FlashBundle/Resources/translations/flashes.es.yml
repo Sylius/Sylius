@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: El carrito se ha actualizado correctamente.
+    cart_clear_completed: El carrito se ha vaciado correctamente.
+    item_add_completed: El item se ha añadido al carrito.
+    item_remove_completed: El item se ha borrado del carrito.
+    item_add_error: Ha ocurrido un error mientras se añadía el item al carrito.
+    item_remove_error: Ha ocurrido un error mientras se borraba el item del carrito.

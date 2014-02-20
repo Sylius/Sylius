@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Thành phố
+      company: Công ty
+      country: Quốc gia
+      first_name: Tên
+      last_name: Họ
+      postcode: Mã bưu chính
+      street: Địa chỉ
+      province: Tỉnh
+    country:
+      iso_name: Mã ISO
+      name: Tên Quốc Gia
+      provinces: Tỉnh
+      select: Chọn
+    province:
+      name: Tên Tỉnh
+      select: Chọn
+    zone:
+      members: Thành viên
+      type: Phân loại
+    zone_member_province:
+      province: Tỉnh

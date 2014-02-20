@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    settings:
-        update: Ustawienia zostały pomyślnie zaktualizowane.
+  settings:
+    update: Ustawienia zostały pomyślnie zaktualizowane.

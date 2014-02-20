@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: Promotie coupons werden succesvol gegenereerd.
+  promotion_coupon:
+    generate: Promotie coupons werden succesvol gegenereerd.

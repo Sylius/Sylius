@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Adres został pomyślnie ustawiony jako domyślny adres rozliczeniowy.
+        shipping:
+          success: Adres został pomyślnie ustawiony jako domyślny adres wysyłkowy.

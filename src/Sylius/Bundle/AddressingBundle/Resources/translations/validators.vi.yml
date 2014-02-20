@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      max_length: Tên thành phố không được phép dài quá 255 ký tự|Tên thành phố không được phép dài quá 255 ký tự.
+      min_length: Tên thành phố ít nhất phải có 2 ký tự|Tên thành phố ít nhất phải có 2 ký tự.
+      not_blank: Vui lòng điền tên thành phố.
+    country:
+      not_blank: Vui lòng chọn quốc gia.
+    first_name:
+      max_length: Tên (không bao gồm họ) không thể dài quá 255 ký tự|Tên (không bao gồm họ) không thể dài quá 255 ký tự.
+      min_length: Tên (không bao gồm họ) phải có ít nhất 2 ký tự|Tên (không bao gồm họ) phải có ít nhất 2 ký tự.
+      not_blank: Vui lòng điền tên và họ.
+    last_name:
+      max_length: Họ (tên) không thể dài quá 255 ký tự|Họ (tên) không thể dài quá 255 ký tự.
+      min_length: Họ (tên) phải có ít nhất 2 ký tự|Họ (tên) phải có ít nhất 2 ký tự.
+      not_blank: Vui lòng điền họ và tên.
+    postcode:
+      max_length: Mã bưu điện không được dài hơn 255 characters|Mã bưu điện không được dài hơn 255 ký tự.
+      min_length: Mã bưu chính phải có ít nhất 2 ký tự|Mã bưu chính phải có ít nhất 2 ký tự.
+      not_blank: Vui lòng nhập mã bưu chính.
+    province:
+      valid: Vui lòng chọn tỉnh thích hợp.
+    street:
+      max_length: Địa chỉ đường không được dài quá 255 ký tự|Địa chỉ đường không được dài quá 255 ký tự.
+      min_length: Địa chỉ đường phải có ít nhất 2 ký tự|Địa chỉ đường phải có ít nhất 2 ký tự.
+      not_blank: Vui lòng nhập địa chỉ (số nhà và tên đường).
+    not_shippable: Địa chỉ này không phải là một điểm đến vận chuyển hợp lệ.
+  country:
+    iso_name:
+      not_blank: Vui lòng nhập mã ISO quốc gia.
+    name:
+      max_length: Tên quốc gia không được dài hơn 255 ký tự|Tên quốc gia không được dài hơn 255 ký tự.
+      not_blank: Vui lòng nhập tên quốc gia.
+  province:
+    name:
+      max_length: Tên tỉnh không được dài hơn 255 ký tự|Tên tỉnh không được dài hơn 255 ký tự.
+      min_length: Tên tỉnh phải có ít nhất 2 ký tự|Tên tỉnh phải có ít nhất 2 ký tự.
+      not_blank: Vui lòng nhập tên tỉnh.
+  zone:
+    members:
+      min_count: 'Vui lòng thêm tối thiểu {{ limit }} thành viên cho khu vực này.'
+    name:
+      max_length: Tên của Khu vực không được dài hơn 255 ký tự|Tên của Khu vực không được dài hơn 255 ký tự.
+      not_blank: Xin vui lòng điền tên Khu vực.

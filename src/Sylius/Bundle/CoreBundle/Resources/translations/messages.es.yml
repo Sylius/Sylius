@@ -1,59 +1,60 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Por favor seleccione el método de envío.
+  form:
     checkout:
-        shipping_method:
-            not_blank: Por favor seleccione el método de envío.
-    form:
-        checkout:
-            addressing:
-                different_billing_address: Usar una dirección diferente para la facturación?
-            payment_method: Modo de pago
-            shipping_method: Método de envío
-        image:
-            file: Imagen
-        order_filter:
-            created_at_from: Desde
-            created_at_to: Hasta
-            number: Número
-            total_from: Desde
-            total_to: Hasta
-        product:
-            short_description: Breve descripción
-            tax_category: Categoría del impuesto
-            variant_selection_method: Método de selección variante
-        product_filter:
-            name: Nombre
-            sku: SKU
-        settings:
-            general:
-                locale: Idioma
-                currency: Moneda por defecto
-                meta_description: Meta descripción
-                meta_keywords: Meta palabras clave
-                title: Título de la página
-            taxation:
-                default_tax_zone: Zona fiscal por defecto
-        shipping_method:
-            zone: Zona
-        taxon:
-            file: Seleccione una imagen
-        taxonomy:
-            file: Seleccione una imagen
-        user:
-            billing_address: Dirección de facturación
-            different_billing_address: Usar una dirección diferente para la facturación?
-            enabled: Activado
-            first_name: Nombre
-            last_name: Apellidos
-            password: Contraseña
-            shipping_address: Dirección de envío
-        user_filter:
-            query: Búsqueda
-        variant:
-            available_on_demand: Disponible bajo demanda
-            images: Imágenes
-            on_hand: Existencias actuales
-            price: Precio
+      addressing:
+        different_billing_address: Usar una dirección diferente para la facturación?
+      payment_method: Modo de pago
+      shipping_method: Método de envío
+    image:
+      file: Imagen
+    order_filter:
+      created_at_from: Desde
+      created_at_to: Hasta
+      number: Número
+      total_from: Desde
+      total_to: Hasta
+    product:
+      short_description: Breve descripción
+      tax_category: Categoría del impuesto
+      variant_selection_method: Método de selección variante
+    product_filter:
+      name: Nombre
+    settings:
+      general:
+        currency: Moneda por defecto
+        locale: Idioma
+        meta_description: Meta descripción
+        meta_keywords: Meta palabras clave
+        title: Título de la página
+      taxation:
+        default_tax_zone: Zona fiscal por defecto
+    shipment_filter:
+      created_at_from: Desde
+      created_at_to: Hasta
+    shipping_method:
+      zone: Zona
+    taxon:
+      file: Seleccione una imagen
+    taxonomy:
+      file: Seleccione una imagen
+    user:
+      billing_address: Dirección de facturación
+      different_billing_address: Usar una dirección diferente para la facturación?
+      enabled: Activado
+      first_name: Nombre
+      last_name: Apellidos
+      password: Contraseña
+      shipping_address: Dirección de envío
+    user_filter:
+      query: Búsqueda
+    variant:
+      available_on_demand: Disponible bajo demanda
+      images: Imágenes
+      on_hand: Existencias actuales
+      price: Precio

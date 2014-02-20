@@ -2,22 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        shipping_category:
-            name: Name
-            description: Beschreibung
-        shipping_method:
-            name: Name
-            category: Kategorie
-            category_requirement: Kategorie benötigt
-            calculator: Rechner
-            configuration: Einstellung
-        shipping_calculator:
-            flat_rate_configuration:
-                amount: Anzahl
-            per_item_rate_configuration:
-                amount: Anzahl
-            flexible_rate_configuration:
-                first_item_cost: Preis des ersten Artikels
-                additional_item_cost: Preis jedes weiteren Artikels
-                additional_item_limit: Maximale anzahl weiterer Artikel
+  form:
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Anzahl
+      flexible_rate_configuration:
+        additional_item_cost: Preis jedes weiteren Artikels
+        additional_item_limit: Maximale anzahl weiterer Artikel
+        first_item_cost: Preis des ersten Artikels
+      per_item_rate_configuration:
+        amount: Anzahl
+      weight_rate_configuration:
+        amount: Anzahl
+    shipping_category:
+      description: Beschreibung
+    shipping_method:
+      calculator: Rechner
+      category: Kategorie
+      category_requirement: Kategorie benötigt
+      configuration: Einstellung

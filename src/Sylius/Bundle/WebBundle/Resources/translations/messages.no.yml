@@ -1,0 +1,70 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  add_to_cart: Legg i handlekurv
+  address:
+    city: By
+    country: Land
+    firstname: Fornavn
+    lastname: Etternavn
+    postcode: Postnummer
+    province: Provins
+    street: Gate
+  alert:
+    error: Feil
+    info: Informasjon
+    success: Suksess
+    warning: Advarsel
+  backend:
+    alert:
+      info: Informasjon
+  cancel: Avbryt
+  cart:
+    empty: Handlevognen er tom
+    summary:
+      checkout: Betaling
+      clear: Tøm handlevogn
+      grand_total: Total
+      product: Produkt
+      quantity: Antall
+      save: Lagre
+      unit_price: Enhetspris
+    summary_header: Oppsummering
+    total_items: '1 vare|%count% varer'
+  checkout:
+    addressing:
+      header: Adresseringssteg
+    back: Tilbake
+    finalize:
+      address:
+        city: By
+        country: Land
+        firstname: Fornavn
+        lastname: Etternavn
+        postcode: Postnummer
+        province: Provins
+        street: Gate
+      header: Ordreoversikt
+      order:
+        billing_address: Fakturaadresse
+        items_total: Antall varer
+        no_items: Denne ordren inneholder ingen varer
+        no_promotion: Ingen tilbudskode
+        no_shipping_charges: Ingen fraktkostnader lagt til
+        no_taxes: Ingen mva lagt til
+        promotion_discount: Kampanjerabatt
+        shipping_address: Leveringsadresse
+      order_item:
+        quantity: Antall
+  order:
+    items_total: Antall varer
+    no_items: Denne ordren inneholder ingen varer
+    no_shipping_charges: Ingen fraktkostnader lagt til
+    no_taxes: Ingen mva lagt til
+  order_item:
+    quantity: Antall
+    sellable: Produkt
+  product:
+    tabs:
+      product: Produkt

@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Cidade
+      postcode: CEP
+      street: Rua
+      province: Estado
+    country:
+      iso_name: ISO
+      provinces: Estados
+    zone:
+      members: Membros
+    zone_member_province:
+      province: Estado

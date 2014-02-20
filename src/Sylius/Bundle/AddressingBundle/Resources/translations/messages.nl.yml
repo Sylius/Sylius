@@ -2,28 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        address:
-            city: Plaats
-            country: Land
-            first_name: Voorname
-            last_name: Achtername
-            postcode: Postcode
-            street: Straat
-        country:
-            iso_name: ISO naam
-            name: Naam
-            provinces: Provincies
-            select: sylius.form.country.select
-        province:
-            name: Naam
-        zone:
-            members: Leden
-            name: Naam
-            type: Type
-        zone_member_country:
-            country: Land
-        zone_member_province:
-            province: Provincie
-        zone_member_zone:
-            zone: Zone
+  form:
+    address:
+      city: Plaats
+      country: Land
+      first_name: Voorname
+      last_name: Achtername
+      street: Straat
+      province: Provincie
+    country:
+      iso_name: ISO naam
+      name: Naam
+      provinces: Provincies
+      select: sylius.form.country.select
+    province:
+      name: Naam
+      select: sylius.form.country.select
+    zone:
+      members: Leden
+      name: Naam
+    zone_member_country:
+      country: Land
+    zone_member_province:
+      province: Provincie
+    zone_member_zone:
+      zone: sylius.form.shipping_method.zone

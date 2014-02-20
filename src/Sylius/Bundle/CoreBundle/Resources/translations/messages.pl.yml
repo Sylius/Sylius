@@ -1,44 +1,92 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
-    form:
-        checkout:
-            addressing:
-                different_billing_address: Użyć innego adresu do rozliczeń?
-            payment_method: Metoda płatności
-            shipping_method: Metoda wysyłki
-        image:
-            file: Zdjęcie
-        order_filter:
-            created_at_from: From
-            created_at_to: To
-            number: Number
-            total_from: From
-            total_to: To
-        product:
-            short_description: Krótki opis
-            tax_category: Kategoria podatkowa
-            variant_selection_method: Variant selection method
-        product_filter:
-            name: Nazwa
-            sku: SKU
-        settings:
-            general:
-                meta_description: Opis w sekcji meta
-                meta_keywords: Słowa kluczowe w sekcji meta
-                title: Tytuł strony
-            taxation:
-                default_tax_zone: Domyślna strefa podatkowa
-        shipping_method:
-            zone: Strefa
-        taxon:
-            file: Wybierz zdjęcie
-        taxonomy:
-            file: Wybierz zdjęcie
-        variant:
-            available_on_demand: Dostępny na zamówienie
-            images: Zdjęcia
-            on_hand: Aktualnie w magazynie
-            price: Cena
+  checkout:
+    shipping_method:
+      not_blank: Wybierz metodę wysyłki.
+  form:
+    action:
+      add_product_configuration:
+        price: Cena jednostkowa
+        quantity: Ilość
+        variant: Wariant
+    block:
+      body: Zawartość
+      id: ID
+      title: Tytuł
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Użyć innego adresu do rozliczeń?
+      payment_method: Metoda płatności
+      shipping_method: Metoda wysyłki
+    group:
+      name: Nazwa
+      roles: Role
+    image:
+      file: Zdjęcie
+    locale:
+      code: Kod
+      enabled: Aktywne
+    order_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Numer
+      total_from: Od
+      total_to: Do
+    page:
+      body: Zawartość
+      id: ID
+      title: Tytuł
+    product:
+      restricted_zone: Strefa
+      shipping_category: Kategoria wysyłki
+      short_description: Krótki opis
+      tax_category: Kategoria podatkowa
+      variant_selection_method: Metody wyboru wariantu
+    product_filter:
+      name: Nazwa
+      sku: SKU
+    settings:
+      general:
+        currency: Domyślna waluta
+        locale: Język
+        meta_description: Opis w sekcji meta
+        meta_keywords: Słowa kluczowe w sekcji meta
+        title: Tytuł strony
+      taxation:
+        default_tax_zone: Domyślna strefa podatkowa
+    shipment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Numer zamówienia
+      shipping_address: Dostarcz do
+    shipping_method:
+      zone: Strefa
+    taxon:
+      file: Wybierz zdjęcie
+    taxonomy:
+      file: Wybierz zdjęcie
+    user:
+      billing_address: Adres rozliczeniowy
+      different_billing_address: Użyć innego adresu do rozliczeń?
+      enabled: Aktywne
+      first_name: Imię
+      groups: Grupy
+      last_name: Nazwisko
+      password: Hasło
+      shipping_address: Adres wysyłkowy
+    user_filter:
+      query: Szukaj
+    variant:
+      available_on_demand: Dostępny na zamówienie
+      depth: Głębokość
+      height: Wysokość
+      images: Zdjęcia
+      on_hand: Aktualnie w magazynie
+      price: Cena
+      sku: SKU
+      weight: Waga
+      width: Szerokość

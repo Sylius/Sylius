@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Koszyk został pomyślnie uaktualniony.
+    cart_clear_completed: Koszyk został pomyślnie wyczyszczony.
+    item_add_completed: Produkt został dodany do koszyka.
+    item_remove_completed: Produkt został usunięty z koszyka.
+    item_add_error: Wystąpił błąd podczas dodawania produktu do koszyka.
+    item_remove_error: Wystąpił błąd podczas usuwania produktu z koszyka.
