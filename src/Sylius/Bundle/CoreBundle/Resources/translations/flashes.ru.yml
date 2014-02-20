@@ -1,4 +1,6 @@
----
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
   cart:
     restricted_zone_removal: 'Продукт %product% удален из корзины, поскольку он не доступен в вашей стране.'

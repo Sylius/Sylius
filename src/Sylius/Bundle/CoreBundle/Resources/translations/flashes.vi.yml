@@ -1,4 +1,6 @@
----
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
   cart:
     restricted_zone_removal: 'Sản phẩm %product% đã bị xoá khỏi giỏ hàng vì nó không nằm trong danh mục sản phẩm ở quốc gia của bạn.'

@@ -1,4 +1,6 @@
----
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
   resource:
     create: '%resource% został pomyślnie utworzony.'
