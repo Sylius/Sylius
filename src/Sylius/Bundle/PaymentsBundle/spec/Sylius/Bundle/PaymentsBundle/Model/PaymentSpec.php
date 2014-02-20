@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -41,7 +42,7 @@ class PaymentSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn(null);
     }
 
-    function its_payment_method_is_mutable(PaymentInterface $method)
+    function its_payment_method_is_mutable(PaymentMethodInterface $method)
     {
       $this->setMethod($method);
       $this->getMethod()->shouldReturn($method);
