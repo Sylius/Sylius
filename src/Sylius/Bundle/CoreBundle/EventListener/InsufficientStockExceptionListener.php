@@ -23,10 +23,8 @@ use Sylius\Bundle\InventoryBundle\Operator\InsufficientStockException;
  */
 class InsufficientStockExceptionListener
 {
-    protected $router;
     protected $session;
     protected $translator;
-    protected $redirectTo;
 
     public function __construct(SessionInterface $session, TranslatorInterface $translator)
     {
