@@ -49,10 +49,13 @@
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="left" direction="ASC" />
+            </order-by>
         </one-to-many>
 
         <order-by>
-            <order-by-field name="left" direction="DESC" />
+            <order-by-field name="left" direction="ASC" />
         </order-by>
 
         <field name="left" column="tree_left" type="integer">

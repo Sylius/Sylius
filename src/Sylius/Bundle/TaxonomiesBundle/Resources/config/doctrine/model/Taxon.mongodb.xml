@@ -19,7 +19,7 @@
 
     <mapped-superclass name="Sylius\Bundle\TaxonomiesBundle\Document\Taxon" collection="sylius_taxon">
         <order-by>
-            <order-by-field name="left" direction="DESC" />
+            <order-by-field name="left" direction="ASC" />
         </order-by>
         <field name="name" column="name" type="string" />
         <field name="slug" column="slug" type="string" unique="true">
