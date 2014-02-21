@@ -104,6 +104,7 @@
 
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
+            <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.availability_checker" />

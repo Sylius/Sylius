@@ -18,10 +18,10 @@ use Sylius\Bundle\CoreBundle\Model\OrderItem;
 use Sylius\Bundle\CoreBundle\Model\Product;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 
 /**
  * Item resolver for cart bundle.
@@ -32,7 +32,14 @@ use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
 class ItemResolver implements ItemResolverInterface
 {
     /**
-     * Product manager.
+     * Cart provider.
+     *
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
+     * Product repository.
      *
      * @var RepositoryInterface
      */
@@ -62,18 +69,21 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Constructor.
      *
+     * @param CartProviderInterface          $cartProvider
      * @param RepositoryInterface            $productRepository
      * @param FormFactory                    $formFactory
      * @param AvailabilityCheckerInterface   $availabilityChecker
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      */
     public function __construct(
+        CartProviderInterface          $cartProvider,
         RepositoryInterface            $productRepository,
         FormFactory                    $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker
     )
     {
+        $this->cartProvider = $cartProvider;
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
         $this->availabilityChecker = $availabilityChecker;
@@ -123,7 +133,15 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Submitted form is invalid.');
         }
 
-        if (!$this->isStockAvailable($variant)) {
+        $quantity = $item->getQuantity();
+        foreach ($this->cartProvider->getCart()->getItems() as $cartItem) {
+            if ($variant->getId() === $cartItem->getVariant()->getId()) {
+                $quantity += $cartItem->getQuantity();
+                break;
+            }
+        }
+
+        if (!$this->availabilityChecker->isStockSufficient($variant, $quantity)) {
             throw new ItemResolvingException('Selected item is out of stock.');
         }
 
@@ -134,17 +152,5 @@ class ItemResolver implements ItemResolverInterface
         $item->setUnitPrice($variant->getPrice());
 
         return $item;
-    }
-
-    /**
-     * Check if variant is available in stock.
-     *
-     * @param VariantInterface $variant
-     *
-     * @return Boolean
-     */
-    protected function isStockAvailable(VariantInterface $variant)
-    {
-        return $this->availabilityChecker->isStockAvailable($variant);
     }
 }
