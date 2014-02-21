@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -34,7 +35,9 @@ class FlashHelper
 
     public function setFlash($type, $event, $params = array())
     {
-        return $this->session->getFlashBag()->add($type, $this->generateFlashMessage($event, $params));
+        /** @var FlashBag $flashBag */
+        $flashBag = $this->session->getBag('flashes');
+        $flashBag->add($type, $this->generateFlashMessage($event, $params));
     }
 
     private function generateFlashMessage($event, $params = array())
