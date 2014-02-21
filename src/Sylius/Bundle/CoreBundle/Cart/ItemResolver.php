@@ -123,7 +123,7 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Submitted form is invalid.');
         }
 
-        if (!$this->isStockAvailable($variant)) {
+        if (!$this->availabilityChecker->isStockSufficient($variant, $item->getQuantity())) {
             throw new ItemResolvingException('Selected item is out of stock.');
         }
 
@@ -134,17 +134,5 @@ class ItemResolver implements ItemResolverInterface
         $item->setUnitPrice($variant->getPrice());
 
         return $item;
-    }
-
-    /**
-     * Check if variant is available in stock.
-     *
-     * @param VariantInterface $variant
-     *
-     * @return Boolean
-     */
-    protected function isStockAvailable(VariantInterface $variant)
-    {
-        return $this->availabilityChecker->isStockAvailable($variant);
     }
 }
