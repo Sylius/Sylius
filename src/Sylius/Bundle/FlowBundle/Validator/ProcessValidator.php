@@ -1,37 +1,43 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\FlowBundle\Validator;
 
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
- * Default process validator
+ * Default process validator.
  *
  * @author Zach Badgett <zach.badgett@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ProcessValidator implements ProcessValidatorInterface
 {
-    /** @var null|string  */
-    protected $template;
-    /** @var null|string  */
     protected $message;
-    /** @var callable  */
+    protected $stepName;
     protected $validation;
 
-    public function __construct(\Closure $validation, $message = null, $template = null)
+    public function __construct($message = null, $stepName = null, \Closure $validation = null)
     {
-        $this->validation = $validation;
         $this->message = $message;
-        $this->template = $template;
+        $this->stepName = $stepName;
+        $this->validation = $validation;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTemplate($template)
+    public function setStepName($stepName)
     {
-        $this->template = $template;
+        $this->stepName = $stepName;
 
         return $this;
     }
@@ -39,9 +45,9 @@ class ProcessValidator implements ProcessValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getTemplate()
+    public function getStepName()
     {
-        return $this->template;
+        return $this->stepName;
     }
 
     /**
@@ -98,10 +104,10 @@ class ProcessValidator implements ProcessValidatorInterface
      */
     public function getResponse(StepInterface $step)
     {
-        if ($this->getTemplate()) {
-            return $step->render($this->getTemplate(), array('error' => $this->getMessage()));
+        if ($this->getStepName()) {
+            return $step->proceed($this->getStepName());
         }
 
-        throw new HttpException(400, $this->getMessage());
+        throw new ProcessValidatorException(400, $this->getMessage());
     }
 }
