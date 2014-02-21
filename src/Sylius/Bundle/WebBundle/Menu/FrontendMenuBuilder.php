@@ -17,6 +17,7 @@ use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -63,6 +64,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param FactoryInterface         $factory
      * @param SecurityContextInterface $securityContext
      * @param TranslatorInterface      $translator
+     * @param EventDispatcherInterface $eventDispatcher
      * @param RepositoryInterface      $exchangeRateRepository
      * @param RepositoryInterface      $taxonomyRepository
      * @param CartProviderInterface    $cartProvider
@@ -72,13 +74,14 @@ class FrontendMenuBuilder extends MenuBuilder
         FactoryInterface         $factory,
         SecurityContextInterface $securityContext,
         TranslatorInterface      $translator,
+        EventDispatcherInterface $eventDispatcher,
         RepositoryInterface      $exchangeRateRepository,
         RepositoryInterface      $taxonomyRepository,
         CartProviderInterface    $cartProvider,
         SyliusMoneyExtension     $moneyExtension
     )
     {
-        parent::__construct($factory, $securityContext, $translator);
+        parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
 
         $this->exchangeRateRepository = $exchangeRateRepository;
         $this->taxonomyRepository = $taxonomyRepository;
