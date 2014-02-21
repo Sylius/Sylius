@@ -295,7 +295,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process->setDisplayRoute('displayRoute');
         $process->setForwardRoute('forwardRoute');
         $process->setRedirect('http://somepage');
-        $process->setValidator(new ProcessValidator(function () {
+        $process->setValidator(new ProcessValidator('An error occurred.', null, function () {
             return false;
         }));
 

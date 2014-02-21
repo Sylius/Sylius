@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Builder;
 
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilder;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
  * ProcessBuilder test.
@@ -24,7 +25,22 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->builder = new TestProcessBuilder($this->getMock('Symfony\Component\DependencyInjection\ContainerInterface'));
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $validator = $this->getMock('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface');
+        $validator
+            ->expects($this->any())
+            ->method('getMessage')
+            ->will($this->returnValue('An error occurred.'))
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('get')
+            ->with('sylius.process.validator')
+            ->will($this->returnValue(new ProcessValidator('An error occurred.')))
+        ;
+
+        $this->builder = new TestProcessBuilder($container);
     }
 
     /**

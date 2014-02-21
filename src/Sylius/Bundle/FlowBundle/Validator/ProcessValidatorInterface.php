@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\FlowBundle\Validator;
 
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
@@ -8,41 +17,42 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
  * Interface for process validation
  *
  * @author Zach Badgett <zach.badgett@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ProcessValidatorInterface
 {
     /**
-     * Message to display on invalid
+     * Message to display on invalid.
      *
-     * @param $message
-     * @return mixed
+     * @param string $message
+     * @return ProcessValidatorInterface
      */
     public function setMessage($message);
 
     /**
-     * Return message
+     * Return message.
      *
-     * @return mixed
+     * @return string
      */
     public function getMessage();
 
     /**
-     * Set error template
+     * Set step name to go on error.
      *
-     * @param $template
-     * @return mixed
+     * @param string $stepName
+     * @return ProcessValidatorInterface
      */
-    public function setTemplate($template);
+    public function setStepName($stepName);
 
     /**
-     * Return error template
+     * Return step name to go on error.
      *
-     * @return mixed
+     * @return string
      */
-    public function getTemplate();
+    public function getStepName();
 
     /**
-     * Check validation
+     * Check validation.
      *
      * @return Boolean
      */
@@ -50,7 +60,7 @@ interface ProcessValidatorInterface
 
     /**
      * @param  StepInterface $step
-     * @return mixed
+     * @return Response
      */
     public function getResponse(StepInterface $step);
 }

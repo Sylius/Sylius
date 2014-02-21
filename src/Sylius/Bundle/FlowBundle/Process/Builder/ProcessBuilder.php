@@ -154,7 +154,7 @@ class ProcessBuilder implements ProcessBuilderInterface
         $this->assertHasProcess();
 
         if ($validator instanceof \Closure) {
-            $validator = new ProcessValidator($validator, 'An error occurred.');
+            $validator = $this->container->get('sylius.process.validator')->setValidation($validator);
         }
 
         if (!$validator instanceof ProcessValidatorInterface) {

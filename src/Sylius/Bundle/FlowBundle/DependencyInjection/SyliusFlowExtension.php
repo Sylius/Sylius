@@ -40,6 +40,7 @@ class SyliusFlowExtension extends Extension
 
         $configurations = array(
             'builders',
+            'validators',
             'contexts',
             'controllers',
             'coordinators',
