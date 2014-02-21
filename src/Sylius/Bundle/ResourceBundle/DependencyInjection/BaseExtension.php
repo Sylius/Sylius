@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DatabaseDriverFactoryInterface;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Factory\DoctrineORMFactory;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\ResourceBundle\Exception\Driver\UnknownDriverException;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -121,7 +122,7 @@ abstract class BaseExtension extends Extension
      * @param XmlFileLoader         $loader
      * @param null|ContainerBuilder $container
      *
-     * @throws \InvalidArgumentException
+     * @throws UnknownDriverException
      */
     protected function loadDatabaseDriver(array $config, XmlFileLoader $loader, ContainerBuilder $container = null)
     {
@@ -129,7 +130,7 @@ abstract class BaseExtension extends Extension
         $driver = $config['driver'];
 
         if (!in_array($driver, call_user_func(array($bundle, 'getSupportedDrivers')))) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported by %s.', $driver, basename($bundle)));
+            throw new UnknownDriverException($driver, basename($bundle));
         }
 
         $this->loadConfigurationFile(array(sprintf('driver/%s', $driver)), $loader);
@@ -137,11 +138,14 @@ abstract class BaseExtension extends Extension
         $container->setParameter($this->getAlias().'.driver', $driver);
         $container->setParameter($this->getAlias().'.driver.'.$driver, true);
 
-        $factory = $this->getFactoryForDriver($driver, $container);
-
         foreach ($config['classes'] as $model => $classes) {
             if (array_key_exists('model', $classes)) {
-                $factory->create($this->applicationName, $model, $classes);
+                DatabaseDriverFactory::get(
+                    $driver,
+                    $container,
+                    $this->applicationName,
+                    $model
+                )->load($classes);
             }
         }
     }
@@ -175,18 +179,5 @@ abstract class BaseExtension extends Extension
         }
 
         return $directory;
-    }
-
-    /**
-     * @param string           $driver
-     * @param ContainerBuilder $container
-     *
-     * @return DatabaseDriverFactoryInterface
-     */
-    private function getFactoryForDriver($driver, ContainerBuilder $container)
-    {
-        if ('doctrine/orm' === $driver) {
-            return new DoctrineORMFactory($container);
-        }
     }
 }
