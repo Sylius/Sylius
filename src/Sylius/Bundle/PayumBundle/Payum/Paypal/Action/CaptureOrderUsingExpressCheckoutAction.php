@@ -64,7 +64,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 
             $m = 0;
             foreach ($order->getItems() as $item) {
-                $details['L_PAYMENTREQUEST_0_AMT'.$m] = number_format($item->getTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_AMT'.$m] = number_format($item->getUnitPrice() / 100, 2);
                 $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
                 $m++;
