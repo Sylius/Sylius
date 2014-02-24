@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Compiler pass which resolves interfaces into target entity names during
@@ -36,5 +38,22 @@ class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
     function it_is_a_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+    }
+
+    function it_should_resolve_entities(ContainerBuilder $container, Definition $resolverDefinition)
+    {
+        $container->getParameter('sylius_resource.driver')
+            ->shouldBeCalled()
+            ->willReturn('doctrine/orm');
+
+        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')
+            ->shouldBeCalled()
+            ->willReturn(true);
+
+        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')
+            ->shouldBeCalled()
+            ->willReturn($resolverDefinition);
+
+        $this->process($container);
     }
 }

@@ -58,6 +58,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->end()
+                                    ->scalarNode('interface')->end()
                                 ->end()
                             ->end()
                         ->end()
