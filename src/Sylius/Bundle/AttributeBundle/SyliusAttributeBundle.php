@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AttributeBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusAttributeBundle extends Bundle
+class SyliusAttributeBundle extends AbstractResourceBundle
 {
     /**
      * Return array with currently supported drivers.
@@ -36,12 +37,16 @@ class SyliusAttributeBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getBundlePrefix()
     {
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Attribute\Model',
-        );
+        return 'sylius_attribute';
+    }
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_attribute.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Component\Attribute\Model';
     }
 }

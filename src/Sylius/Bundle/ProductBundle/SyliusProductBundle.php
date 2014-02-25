@@ -11,11 +11,8 @@
 
 namespace Sylius\Bundle\ProductBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Product management bundle with highly flexible architecture.
@@ -26,12 +23,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusProductBundle extends Bundle
+class SyliusProductBundle extends AbstractResourceBundle
 {
     /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -43,9 +38,17 @@ class SyliusProductBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getBundlePrefix()
     {
-        $interfaces = array(
+        return 'sylius_product';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getInterfaces()
+    {
+        return array(
             'Sylius\Component\Product\Model\ProductInterface'        => 'sylius.model.product.class',
             'Sylius\Component\Product\Model\AttributeInterface'      => 'sylius.model.product_attribute.class',
             'Sylius\Component\Product\Model\AttributeValueInterface' => 'sylius.model.product_attribute_value.class',
@@ -54,13 +57,13 @@ class SyliusProductBundle extends Bundle
             'Sylius\Component\Product\Model\OptionValueInterface'    => 'sylius.model.product_option_value.class',
             'Sylius\Component\Product\Model\PrototypeInterface'      => 'sylius.model.product_prototype.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_product', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Product\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_product.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Component\Product\Model';
     }
 }

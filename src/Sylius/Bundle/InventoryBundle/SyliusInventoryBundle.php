@@ -13,22 +13,20 @@ namespace Sylius\Bundle\InventoryBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Flexible inventory management for Symfony2 applications.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusInventoryBundle extends Bundle
+class SyliusInventoryBundle extends AbstractResourceBundle
 {
     /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -41,25 +39,27 @@ class SyliusInventoryBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getBundlePrefix()
     {
-        $interfaces = array(
+        return 'sylius_inventory';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getInterfaces()
+    {
+        return array(
             'Sylius\Component\Inventory\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
             'Sylius\Component\Inventory\Model\StockableInterface'     => 'sylius.model.stockable.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_inventory', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Inventory\Model',
-        );
-
-        if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
-            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_inventory.driver.doctrine/orm'));
-        }
-
-        if (class_exists('Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass')) {
-            $container->addCompilerPass(DoctrineMongoDBMappingsPass::createXmlMappingDriver($mappings, array('doctrine_mongodb.odm.document_manager'), 'sylius_inventory.driver.doctrine/mongodb-odm'));
-        }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Component\Inventory\Model';
     }
 }

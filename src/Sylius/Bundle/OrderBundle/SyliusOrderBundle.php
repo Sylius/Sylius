@@ -11,23 +11,18 @@
 
 namespace Sylius\Bundle\OrderBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sales order management bundle.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusOrderBundle extends Bundle
+class SyliusOrderBundle extends AbstractResourceBundle
 {
     /**
-     * Return array of currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -39,20 +34,28 @@ class SyliusOrderBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getBundlePrefix()
     {
-        $interfaces = array(
+        return 'sylius_order';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getInterfaces()
+    {
+        return array(
             'Sylius\Component\Order\Model\OrderInterface'      => 'sylius.model.order.class',
             'Sylius\Component\Order\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
             'Sylius\Component\Order\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_order', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Order\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_order.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Component\Order\Model';
     }
 }

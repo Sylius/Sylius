@@ -11,18 +11,13 @@
 
 namespace Sylius\Bundle\PayumBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SyliusPayumBundle extends Bundle
+class SyliusPayumBundle extends AbstractResourceBundle
 {
     /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -34,18 +29,26 @@ class SyliusPayumBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getBundlePrefix()
     {
-        $interfaces = array(
+        return 'sylius_payum';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getInterfaces()
+    {
+        return array(
             'Payum\Core\Security\TokenInterface' => 'sylius.model.payment_security_token.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_payum', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\PayumBundle\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payum.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Bundle\PayumBundle\Model';
     }
 }
