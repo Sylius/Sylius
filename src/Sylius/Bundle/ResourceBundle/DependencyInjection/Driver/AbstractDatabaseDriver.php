@@ -23,24 +23,24 @@ use Symfony\Component\DependencyInjection\Reference;
 abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
 {
     /**
-     * @var ContainerBuilder $container
+     * @var ContainerBuilder
      */
     protected $container;
 
     /**
-     * @var string $prefix
+     * @var string
      */
     protected $prefix;
 
     /**
-     * @var string $resourceName
+     * @var string
      */
     protected $resourceName;
 
     /**
-     * @var string $templates
+     * @var string
      */
-    protected $templates = null;
+    protected $templates;
 
     public function __construct(ContainerBuilder $container, $prefix, $resourceName, $templates = null)
     {
@@ -49,10 +49,6 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         $this->resourceName = $resourceName;
         $this->templates = $templates;
     }
-
-    abstract protected function getManagerServiceKey();
-    abstract protected function getClassMetadataClassname();
-    abstract protected function getRepositoryDefinition(array $classes);
 
     public function load(array $classes)
     {
@@ -69,43 +65,58 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         $this->setManagerAlias();
     }
 
+    abstract protected function getManagerServiceKey();
+    abstract protected function getClassMetadataClassname();
+    abstract protected function getRepositoryDefinition(array $classes);
+
     /**
      * @return Definition
      */
     protected function getConfirguationDefinition()
     {
-        return (new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration'))
+        $definition = new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        $definition
             ->setFactoryService('sylius.controller.configuration_factory')
             ->setFactoryMethod('createConfiguration')
             ->setArguments(array($this->prefix, $this->resourceName, $this->templates))
             ->setPublic(false)
         ;
+
+        return $definition;
     }
 
     /**
-     * @param $class
+     * @param string $class
+     *
      * @return Definition
      */
     protected function getControllerDefinition($class)
     {
-        return (new Definition($class))
+        $definition = new Definition($class);
+        $definition
             ->setArguments(array($this->getConfirguationDefinition()))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
+
+        return $definition;
     }
 
     /**
-     * @param $models
+     * @param mixed $models
+     *
      * @return Definition
      */
     protected function getClassMetadataDefinition($models)
     {
-        return (new Definition($this->getClassMetadataClassname()))
+        $definition = new Definition($this->getClassMetadataClassname());
+        $definition
             ->setFactoryService($this->getManagerServiceKey())
             ->setFactoryMethod('getClassMetadata')
             ->setArguments(array($models))
             ->setPublic(false)
         ;
+
+        return $definition;
     }
 
     protected function setManagerAlias()
@@ -117,7 +128,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     }
 
     /**
-     * @param $key
+     * @param string     $key
      * @param Definition $definition
      */
     protected function setDefinition($key, Definition $definition)
@@ -126,8 +137,9 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     }
 
     /**
-     * @param $key
-     * @param  null   $suffix
+     * @param string $key
+     * @param string $suffix
+     *
      * @return string
      */
     protected function getContainerKey($key, $suffix = null)

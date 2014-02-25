@@ -21,6 +21,14 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrineODMDriver extends AbstractDatabaseDriver
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedDriver()
+    {
+        return SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM;
+    }
+
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
@@ -29,24 +37,21 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
             $repositoryClass  = $classes['repository'];
         }
 
-        $unitOfWork = (new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork'))
+        $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
+        $unitOfWorkDefinition
             ->setFactoryService('doctrine.odm.mongodb.document_manager')
             ->setFactoryMethod('getUnitOfWork')
             ->setPublic(false)
         ;
 
-        return (new Definition($repositoryClass))
-            ->setArguments(
-                array(new Reference($this->getContainerKey('manager')), $unitOfWork, $this->getClassMetadataDefinition($classes['model']))
-            );
-    }
+        $definition = new Definition($repositoryClass);
+        $definition->setArguments(array(
+            new Reference($this->getContainerKey('manager')),
+            $unitOfWorkDefinition,
+            $this->getClassMetadataDefinition($classes['model']),
+        ));
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSupportedDriver()
-    {
-        return SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM;
+        return $definition;
     }
 
     /**

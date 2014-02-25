@@ -44,7 +44,7 @@ abstract class BaseExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure($config, new Configuration(), $container);
+        $this->configure($config, new Configuration(), $container);
     }
 
     /**
@@ -151,7 +151,7 @@ abstract class BaseExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param array         $config
      * @param XmlFileLoader $loader
      */
     protected function loadConfigurationFile(array $config, XmlFileLoader $loader)
