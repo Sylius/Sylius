@@ -1,0 +1,49 @@
+{% macro list(properties) %}
+
+{% if properties|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id') }}</th>
+            <th>{{ sylius_resource_sort('internal_name') }}</th>
+            <th>{{ sylius_resource_sort('presentation') }}</th>
+            <th>{{ sylius_resource_sort('type') }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'updated at') }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for property in properties %}
+        <tr>
+            <td>{{ property.id }}</td>
+            <td>
+                <strong>{{ property.name }}</strong>
+            </td>
+            <td>{{ property.presentation }}</td>
+            <td><span class="label label-info">{{ property.type|upper }}</span></td>
+            <td>{{ property.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                    <a href="{{ path('sylius_property_update', {'id': property.id}) }}" class="btn">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    <form action="{{ path('sylius_property_delete', {'id': property.id}) }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger">
+                            <i class="icon-trash"></i> delete
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">Information</h4>
+    No properties to show
+</div>
+{% endif %}
+
+{% endmacro %}

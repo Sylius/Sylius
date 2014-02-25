@@ -1,0 +1,10 @@
+<h1>Updating option <small>Use this form to update existing option</small></h1>
+<hr />
+
+<form action="{{ path('sylius_option_update', {'id': option.id}) }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusVariableProductBundle:Option:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="save changes" class="btn btn-large btn-primary" />
+        <a href="{{ path('sylius_option_index') }}" class="btn btn-large">cancel</a>
+    </div>
+</form>

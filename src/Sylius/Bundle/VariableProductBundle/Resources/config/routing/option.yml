@@ -1,0 +1,33 @@
+sylius_option_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.option:indexAction
+        _sylius:
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_option_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.option:createAction
+        _sylius:
+            redirect: sylius_option_index
+
+sylius_option_update:
+    pattern: /{id}/edit
+    methods: [GET, POST, PUT]
+    defaults:
+        _controller: sylius.controller.option:updateAction
+        _sylius:
+            redirect: sylius_option_index
+
+sylius_option_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.option:deleteAction
+        _sylius:
+            redirect: sylius_option_index

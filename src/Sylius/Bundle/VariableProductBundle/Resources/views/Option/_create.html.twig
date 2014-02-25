@@ -1,0 +1,10 @@
+<h1>Creating option <small>Use this form to create new option</small></h1>
+<hr />
+
+<form action="{{ path('sylius_option_create') }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusVariableProductBundle:Option:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="create option" class="btn btn-large btn-primary" />
+        <a href="{{ path('sylius_option_index') }}" class="btn btn-large">cancel</a>
+    </div>
+</form>

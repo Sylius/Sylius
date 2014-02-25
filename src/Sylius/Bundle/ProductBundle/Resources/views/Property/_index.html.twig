@@ -1,0 +1,20 @@
+{% import 'SyliusProductBundle:Property:macros.html.twig' as macros %}
+
+<h1>Properties list <small>All properties saved in the system</small></h1>
+<hr />
+
+<div class="well">
+    <a href="{{ path('sylius_property_create') }}" class="btn btn-primary">
+        <i class="icon-plus-sign"></i> create property
+    </a>
+</div>
+
+{% if properties.haveToPaginate()|default(false) %}
+    {{ pagerfanta(properties, 'twitter_bootstrap_translated') }}
+{% endif %}
+
+{{ macros.list(properties) }}
+
+{% if properties.haveToPaginate()|default(false) %}
+    {{ pagerfanta(properties, 'twitter_bootstrap_translated') }}
+{% endif %}

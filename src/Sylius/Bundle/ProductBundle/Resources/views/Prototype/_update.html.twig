@@ -1,0 +1,10 @@
+<h1>Updating prototype <small>Use this form to update existing prototype</small></h1>
+<hr />
+
+<form action="{{ path('sylius_prototype_update', {'id': prototype.id}) }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusProductBundle:Prototype:_form.html.twig' %}
+    <div class="form-actions">
+        <input type="submit" value="save changes" class="btn btn-large btn-primary" />
+        <a href="{{ path('sylius_prototype_index') }}" class="btn btn-large">cancel</a>
+    </div>
+</form>
