@@ -21,6 +21,14 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrineORMDriver extends AbstractDatabaseDriver
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedDriver()
+    {
+        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
+    }
+
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryKey = $this->getContainerKey('repository', '.class');
@@ -34,21 +42,13 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
             $repositoryClass = $classes['repository'];
         }
 
-        return (new Definition($repositoryClass))
-            ->setArguments(
-                array(
-                    new Reference($this->getContainerKey('manager')),
-                    $this->getClassMetadataDefinition($classes['model'])
-                )
-            );
-    }
+        $definition = new Definition($repositoryClass);
+        $definition->setArguments(array(
+            new Reference($this->getContainerKey('manager')),
+            $this->getClassMetadataDefinition($classes['model'])
+        ));
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSupportedDriver()
-    {
-        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
+        return $definition;
     }
 
     /**

@@ -21,6 +21,14 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrinePHPCRDriver extends AbstractDatabaseDriver
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedDriver()
+    {
+        return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
+    }
+
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository';
@@ -29,21 +37,13 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
             $repositoryClass  = $classes['repository'];
         }
 
-        return (new Definition($repositoryClass))
-            ->setArguments(
-                array(
-                    new Reference($this->getContainerKey('manager')),
-                    $this->getClassMetadataDefinition($classes['model'])
-                )
-            );
-    }
+        $definition = new Definition($repositoryClass);
+        $definition->setArguments(array(
+            new Reference($this->getContainerKey('manager')),
+            $this->getClassMetadataDefinition($classes['model']),
+        ));
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSupportedDriver()
-    {
-        return SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM;
+        return $definition;
     }
 
     /**
