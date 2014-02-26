@@ -904,9 +904,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     protected function generatePageUrl($page, array $parameters = array())
     {
-        $parts = explode(' ', trim($page), 2);
-
-        $route  = implode('_', $parts);
+        $route = str_replace(' ', '_', trim($page));
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if (null === $routes->get($route)) {
