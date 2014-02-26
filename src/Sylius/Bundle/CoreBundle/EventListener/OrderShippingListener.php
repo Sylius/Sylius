@@ -85,7 +85,7 @@ class OrderShippingListener
     }
 
     /**
-     * Update shipment states when payment is waiting for confirmation
+     * Update shipment states after order is created.
      *
      * @param GenericEvent $event
      */
@@ -99,7 +99,7 @@ class OrderShippingListener
     }
 
     /**
-     * Update shipment states after order is confirmed
+     * Update shipment states after order is confirmed.
      *
      * @param GenericEvent $event
      */
@@ -107,7 +107,8 @@ class OrderShippingListener
     {
         $this->shippingProcessor->updateShipmentStates(
             $this->getOrder($event)->getShipments(),
-            ShipmentInterface::STATE_READY
+            ShipmentInterface::STATE_READY,
+            ShipmentInterface::STATE_ONHOLD
         );
     }
 
