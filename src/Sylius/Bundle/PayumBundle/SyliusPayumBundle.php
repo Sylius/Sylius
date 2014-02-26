@@ -37,7 +37,7 @@ class SyliusPayumBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Payum\Security\TokenInterface'       => 'sylius.model.payment_security_token.class',
+            'Payum\Core\Security\TokenInterface' => 'sylius.model.payment_security_token.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_payum', $interfaces));
