@@ -53,6 +53,7 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.repository.exchange_rate" />
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
@@ -65,6 +66,7 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createMainMenu" scope="request">

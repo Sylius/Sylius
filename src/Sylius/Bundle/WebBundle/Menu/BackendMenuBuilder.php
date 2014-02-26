@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\ItemInterface;
+use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -60,6 +61,8 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'fos_user_security_logout'
         ))->setLabel($this->translate('sylius.backend.logout'));
 
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_MAIN, new MenuBuilderEvent($this->factory, $menu));
+
         return $menu;
     }
 
@@ -88,6 +91,8 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addCustomersMenu($menu, $childOptions, 'sidebar');
         $this->addContentMenu($menu, $childOptions, 'sidebar');
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
+
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_SIDEBAR, new MenuBuilderEvent($this->factory, $menu));
 
         return $menu;
     }
