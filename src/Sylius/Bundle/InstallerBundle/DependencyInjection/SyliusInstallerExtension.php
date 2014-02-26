@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\InstallerBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class SyliusInstallerExtension extends BaseExtension
+class SyliusInstallerExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

@@ -26,7 +26,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-abstract class BaseExtension extends Extension
+abstract class AbstractResourceExtension extends Extension
 {
     const CONFIGURE_LOADER     = 1;
     const CONFIGURE_DATABASE   = 2;

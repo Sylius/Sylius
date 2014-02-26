@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\BaseExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class SyliusPayumExtension extends BaseExtension
+class SyliusPayumExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
