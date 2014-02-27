@@ -24,6 +24,9 @@ class TaxonomyConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
+    /**
+     * @param array $validationGroups Array of validation groups
+     */
     public function __construct(array $validationGroups)
     {
         $this->validationGroups = $validationGroups;

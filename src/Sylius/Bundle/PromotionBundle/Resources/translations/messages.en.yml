@@ -9,6 +9,10 @@ sylius:
                 percentage: Percentage
             type: Type
         rule:
+            contain_item_configuration:
+                variant: Product variant
+                only: Can contain only this product?
+                exclude: Exclude
             taxonomy_configuration:
                 taxons: Taxons
                 exclude: Exclude
