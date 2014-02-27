@@ -42,3 +42,12 @@
     <i class="glyphicon glyphicon-folder-open"></i><span>{{ message is empty ? 'sylius.manage'|trans : message }}</span>
 </a>
 {% endmacro %}
+
+{% macro move(url, direction, first=false, last=false, message='') %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    <button title="{{ message is empty ? ('sylius.move_'~direction)|trans : message }}" class="btn btn-default {% if ('up' == direction and first) or ('down' == direction and last) %}disabled{% endif %}" type="submit">
+        <i class="glyphicon glyphicon-arrow-{{ direction }}"></i>
+    </button>
+</form>
+{% endmacro %}

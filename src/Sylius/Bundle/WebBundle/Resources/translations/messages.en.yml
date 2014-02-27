@@ -20,8 +20,8 @@ sylius:
             list: All your addresses
             update: Edit my address
         home:
-            email: Email : 
-            id: Customer ID : 
+            email: Email :
+            id: Customer ID :
             outline: Enjoy all the features that are available on your personal space to view, track and manage all your data.
             since: You are customer since
             welcome: Welcome to your space
@@ -32,16 +32,16 @@ sylius:
             empty: You have placed no order yet.
             invoice: Invoice
             list: All your orders
-            number: Number : 
-            payment_mode: Payment mode : 
+            number: Number :
+            payment_mode: Payment mode :
             placed_at: Placed at %at%
             shipment:
                 pending: Pending
                 ready: Ready since %at%
                 returned: Returned %at%
                 shipped: Shipped %at%
-            shipment_mode: Shipment mode : 
-            state: State : 
+            shipment_mode: Shipment mode :
+            state: State :
             total: Total
             tracking_number: Tracking number
         title: My account
@@ -236,6 +236,8 @@ sylius:
     delete: delete
     deleted: Deleted
     edit: edit
+    move_up: move up
+    move_down: move down
     email: E-Mail
     exchange_rate:
         create: Create exchange rate
@@ -522,6 +524,7 @@ sylius:
         updated_at: Last update
         usage_limit: Usage limit
         used: Used
+        priority: Priority
     promotion_action:
         configuration: Configuration
         type: Type

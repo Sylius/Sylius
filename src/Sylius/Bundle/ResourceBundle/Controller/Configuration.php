@@ -269,6 +269,11 @@ class Configuration
         return $this->get('flash', $message);
     }
 
+    public function getSortablePosition()
+    {
+        return $this->get('sortable_position', 'position');
+    }
+
     protected function get($parameter, $default = null)
     {
         return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] : $default;

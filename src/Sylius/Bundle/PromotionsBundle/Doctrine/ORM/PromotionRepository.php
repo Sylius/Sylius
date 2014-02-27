@@ -27,7 +27,10 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
      */
     public function findActive()
     {
-        $qb = $this->getCollectionQueryBuilder();
+        $qb = $this
+            ->getCollectionQueryBuilder()
+            ->orderBy($this->getAlias().'.priority', 'DESC')
+        ;
 
         $this->filterByActive($qb);
 

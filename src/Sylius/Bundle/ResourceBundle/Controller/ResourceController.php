@@ -203,6 +203,24 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
+    public function moveUpAction(Request $request)
+    {
+        $resource = $this->findOr404($request);
+
+        $this->domainManager->move($resource, 1);
+
+        return $this->redirectHandler->redirectToIndex();
+    }
+
+    public function moveDownAction(Request $request)
+    {
+        $resource = $this->findOr404($request);
+
+        $this->domainManager->move($resource, -1);
+
+        return $this->redirectHandler->redirectToIndex();
+    }
+
     /**
      * @param  Request          $request
      * @return RedirectResponse

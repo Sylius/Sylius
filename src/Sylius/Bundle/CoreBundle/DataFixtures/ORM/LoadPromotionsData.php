@@ -36,6 +36,8 @@ class LoadPromotionsData extends DataFixture
 
         $manager->persist($promotion);
 
+        $manager->flush();
+
         $promotion = $this->createPromotion(
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',

@@ -29,7 +29,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         PromotionApplicatorInterface $applicator
     )
     {
-        $this->beConstructedWith($repository, $checker, $applicator);
+        $this->beConstructedWith($repository, $checker, $applicator, false);
     }
 
     function it_should_be_initializable()

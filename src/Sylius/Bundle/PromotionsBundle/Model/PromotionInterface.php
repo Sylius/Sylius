@@ -50,6 +50,22 @@ interface PromotionInterface extends TimestampableInterface
     public function setDescription($description);
 
     /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority();
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     *
+     * @return PromotionInterface
+     */
+    public function setPriority($priority);
+
+    /**
      * Get usage limit
      *
      * @return integer

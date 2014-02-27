@@ -39,3 +39,5 @@ parameters:
 
     sylius.inventory.backorders_enabled: true
     sylius.inventory.tracking_enabled: true
+
+    sylius.promotions.exclusive: false
