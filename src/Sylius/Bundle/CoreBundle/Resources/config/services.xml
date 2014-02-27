@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Pawe³ Jêdrzejewski
+ (c) PaweÅ‚ JÄ™drzejewski
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -21,7 +21,6 @@
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
 
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
-
 
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
 
@@ -58,21 +57,21 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
-        <parameter key="sylius.promotion_rule_checker.contain_item.class">Sylius\Component\Core\Promotion\Checker\ContainItemRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.contain_product.class">Sylius\Component\Core\Promotion\Checker\ContainProductRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.contain_product_variant.class">Sylius\Component\Core\Promotion\Checker\ContainProductVariantRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.variant_in_cart.class">Sylius\Comdle\Core\Promotion\Checker\VariantInCartRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.product_in_cart.class">Sylius\Com\Core\Promotion\Checker\ProductInCartRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
+        <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
-        <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
+
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
+
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
@@ -318,18 +317,15 @@
             </argument>
         </service>
 
-        <service id="sylius.promotion_rule_checker.contain_item" class="%sylius.promotion_rule_checker.contain_item.class%">
-            <tag name="sylius.promotion_rule_checker" type="contain_item" label="Contains item" />
+        <service id="sylius.promotion_rule_checker.contain_product" class="%sylius.promotion_rule_checker.contain_product.class%">
+            <tag name="sylius.promotion_rule_checker" type="contain_product" label="Contains product" />
+        </service>
+        <service id="sylius.promotion_rule_checker.contain_product_variant" class="%sylius.promotion_rule_checker.contain_product_variant.class%">
+            <tag name="sylius.promotion_rule_checker" type="contain_product_variant" label="Contains product variant" />
         </service>
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
-        </service>
-        <service id="sylius.promotion_rule_checker.variant_in_cart" class="%sylius.promotion_rule_checker.variant_in_cart.class%">
-            <tag name="sylius.promotion_rule_checker" type="variant_in_cart" label="Variant in cart" />
-        </service>
-        <service id="sylius.promotion_rule_checker.product_in_cart" class="%sylius.promotion_rule_checker.product_in_cart.class%">
-            <tag name="sylius.promotion_rule_checker" type="product_in_cart" label="Product in cart" />
         </service>
         <service id="sylius.promotion_rule_checker.user_loyalty" class="%sylius.promotion_rule_checker.user_loyalty.class%">
             <tag name="sylius.promotion_rule_checker" type="user_loyalty" label="User loyalty" />
