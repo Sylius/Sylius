@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\DataFixtures\PHPCR;
+namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -30,7 +30,7 @@ class LoadBlocksData extends ContainerAware implements FixtureInterface, Ordered
         $faker = FakerFactory::create();
         $session = $manager->getPhpcrSession();
 
-        $basepath = $this->container->getParameter('cmf_block.persistence.phpcr.block_basepath');;
+        $basepath = $this->container->getParameter('cmf_block.persistence.phpcr.block_basepath');
         NodeHelper::createPath($session, $basepath);
 
         $parent = $manager->find(null, $basepath);

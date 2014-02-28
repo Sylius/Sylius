@@ -1,0 +1,43 @@
+{
+    "name": "sylius/fixtures-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius fixtures bundle. It contains the fixtures from the core bundle so a user can install the core without the fixtures.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                            ">=5.3.3",
+
+        "sylius/core-bundle":             "1.0.*@dev"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "1.2.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\FixturesBundle\\": "" }
+    },
+    "target-dir": "Sylius/Bundle/FixturesBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

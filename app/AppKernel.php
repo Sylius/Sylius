@@ -144,6 +144,7 @@ class AppKernel extends Kernel
     {
         if (in_array($this->environment, $environments) && class_exists('Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle')) {
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle();
         }
 
         return $bundles;

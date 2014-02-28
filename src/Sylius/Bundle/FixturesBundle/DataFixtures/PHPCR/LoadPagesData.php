@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\DataFixtures\PHPCR;
+namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -30,12 +30,12 @@ class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedF
         $faker = FakerFactory::create();
         $session = $manager->getPhpcrSession();
 
-        $basepath = $this->container->getParameter('cmf_routing.dynamic.persistence.phpcr.route_basepath');;
+        $basepath = $this->container->getParameter('cmf_routing.dynamic.persistence.phpcr.route_basepath');
         NodeHelper::createPath($session, $basepath);
 
         $routeRoot = $manager->find(null, $basepath);
 
-        $basepath = $this->container->getParameter('cmf_content.persistence.phpcr.content_basepath');;
+        $basepath = $this->container->getParameter('cmf_content.persistence.phpcr.content_basepath');
         NodeHelper::createPath($session, $basepath);
 
         $parent = $manager->find(null, $basepath);
