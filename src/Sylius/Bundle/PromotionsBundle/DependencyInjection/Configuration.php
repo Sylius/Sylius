@@ -34,7 +34,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->booleanNode('exclusive')->defaultFalse()->end()
             ->end()
         ;
 

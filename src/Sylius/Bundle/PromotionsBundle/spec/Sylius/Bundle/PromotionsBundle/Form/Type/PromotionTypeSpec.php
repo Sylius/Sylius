@@ -60,6 +60,12 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('exclusive', 'checkbox', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('usageLimit', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)

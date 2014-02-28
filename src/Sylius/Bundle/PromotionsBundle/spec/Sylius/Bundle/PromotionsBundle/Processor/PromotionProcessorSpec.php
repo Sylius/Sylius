@@ -29,7 +29,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         PromotionApplicatorInterface $applicator
     )
     {
-        $this->beConstructedWith($repository, $checker, $applicator, false);
+        $this->beConstructedWith($repository, $checker, $applicator);
     }
 
     function it_should_be_initializable()
@@ -72,6 +72,28 @@ class PromotionProcessorSpec extends ObjectBehavior
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
         $applicator->apply($subject, $promotion)->shouldBeCalled();
         $applicator->revert($subject, $promotion)->shouldNotBeCalled();
+
+        $this->process($subject);
+    }
+
+    function it_should_apply_only_exclusive_promotion(
+        $repository,
+        $checker,
+        $applicator,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        PromotionInterface $exlusivePromotion
+    )
+    {
+        $subject->getPromotions()->shouldBeCalled()->willReturn(array());
+        $repository->findActive()->shouldBeCalled()->willReturn(array($promotion, $exlusivePromotion));
+        $exlusivePromotion->isExclusive()->shouldBeCalled()->willReturn(true);
+        $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
+        $checker->isEligible($subject, $exlusivePromotion)->shouldBeCalled()->willReturn(true);
+        $applicator->apply($subject, $exlusivePromotion)->shouldBeCalled();
+        $applicator->apply($subject, $promotion)->shouldNotBeCalled();
+        $applicator->revert($subject, $promotion)->shouldNotBeCalled();
+        $applicator->revert($subject, $exlusivePromotion)->shouldNotBeCalled();
 
         $this->process($subject);
     }

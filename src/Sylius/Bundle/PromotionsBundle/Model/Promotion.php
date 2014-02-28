@@ -43,11 +43,18 @@ class Promotion implements PromotionInterface
     protected $description;
 
     /**
-     * When using exclusive mode, promotion with top priority will be applied
+     * When exclusive, promotion with top priority will be applied
      *
      * @var integer
      */
     protected $priority = 0;
+
+    /**
+     * Cannot be applied together with other promotions
+     *
+     * @var boolean
+     */
+    protected $exclusive = false;
 
     /**
      * Usage limit
@@ -188,6 +195,24 @@ class Promotion implements PromotionInterface
     public function setPriority($priority)
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isExclusive()
+    {
+        return $this->exclusive;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExclusive($exclusive)
+    {
+        $this->exclusive = $exclusive;
 
         return $this;
     }

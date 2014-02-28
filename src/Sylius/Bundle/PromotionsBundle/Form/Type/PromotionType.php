@@ -52,6 +52,9 @@ class PromotionType extends AbstractType
             ->add('description', 'text', array(
                 'label' => 'sylius.form.promotion.description'
             ))
+            ->add('exclusive', 'checkbox', array(
+                'label' => 'sylius.form.promotion.exclusive'
+            ))
             ->add('usageLimit', 'integer', array(
                 'label' => 'sylius.form.promotion.usage_limit'
             ))

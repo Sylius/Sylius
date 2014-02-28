@@ -66,6 +66,22 @@ interface PromotionInterface extends TimestampableInterface
     public function setPriority($priority);
 
     /**
+     * Is exclusive
+     *
+     * @return boolean
+     */
+    public function isExclusive();
+
+    /**
+     * Set exclusive
+     *
+     * @param boolean $exclusive
+     *
+     * @return PromotionInterface
+     */
+    public function setExclusive($exclusive);
+
+    /**
      * Get usage limit
      *
      * @return integer

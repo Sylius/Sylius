@@ -525,6 +525,7 @@ sylius:
         usage_limit: Usage limit
         used: Used
         priority: Priority
+        exclusive: Exclusive
     promotion_action:
         configuration: Configuration
         type: Type

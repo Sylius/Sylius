@@ -64,7 +64,6 @@ sylius_shipping:
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
 sylius_promotions:
-    exclusive: %sylius.promotions.exclusive%
     classes:
         promotion_subject:
             model: %sylius.model.order.class%

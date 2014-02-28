@@ -28,14 +28,12 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $repository;
     protected $checker;
     protected $applicator;
-    protected $exclusive;
 
-    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator, $exclusive)
+    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
         $this->repository = $repository;
         $this->checker = $checker;
         $this->applicator = $applicator;
-        $this->exclusive = $exclusive;
     }
 
     public function process(PromotionSubjectInterface $subject)
@@ -44,14 +42,23 @@ class PromotionProcessor implements PromotionProcessorInterface
             $this->applicator->revert($subject, $promotion);
         }
 
-        foreach ($this->repository->findActive() as $promotion) {
-            if ($this->checker->isEligible($subject, $promotion)) {
-                $this->applicator->apply($subject, $promotion);
+        $promotions = $this->repository->findActive();
+        $eligiblePromotions = array();
 
-                if ($this->exclusive) {
-                    return;
-                }
+        foreach ($promotions as $promotion) {
+            if (!$this->checker->isEligible($subject, $promotion)) {
+                continue;
             }
+
+            if ($promotion->isExclusive()) {
+                return $this->applicator->apply($subject, $promotion);
+            }
+
+            $eligiblePromotions[] = $promotion;
+        }
+
+        foreach ($eligiblePromotions as $promotion) {
+            $this->applicator->apply($subject, $promotion);
         }
     }
 }

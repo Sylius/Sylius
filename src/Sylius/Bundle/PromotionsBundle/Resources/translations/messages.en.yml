@@ -41,6 +41,7 @@ sylius:
         promotion:
             actions: Actions
             coupon_based: Coupon based
+            exclusive: Exclusive
             description: Description
             ends_at: Ends at
             name: Name

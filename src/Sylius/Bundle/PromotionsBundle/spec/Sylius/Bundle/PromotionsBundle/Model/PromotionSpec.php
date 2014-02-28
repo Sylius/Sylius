@@ -54,6 +54,17 @@ class PromotionSpec extends ObjectBehavior
         $this->getPriority()->shouldReturn(5);
     }
 
+    function its_not_exclusive_by_default()
+    {
+        $this->isExclusive()->shouldReturn(false);
+    }
+
+    function its_exclusive_should_be_mutable()
+    {
+        $this->setExclusive(true);
+        $this->isExclusive()->shouldReturn(true);
+    }
+
     function it_should_have_no_usage_limit_by_default()
     {
         $this->getUsageLimit()->shouldReturn(null);

@@ -52,7 +52,6 @@
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.promotion_eligibility_checker" />
             <argument type="service" id="sylius.promotion_applicator" />
-            <argument>%sylius.promotions_exclusive%</argument>
         </service>
 
         <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
