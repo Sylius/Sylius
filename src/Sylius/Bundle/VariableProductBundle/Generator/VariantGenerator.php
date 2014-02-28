@@ -105,9 +105,9 @@ class VariantGenerator implements VariantGeneratorInterface
 
             if (0 < count($this->validator->validate($variant, array('sylius')))) {
                 $product->removeVariant($variant);
+            } else {
+                $this->eventDispatcher->dispatch('sylius.variant.pre_create', new GenericEvent($variant));
             }
-
-            $this->eventDispatcher->dispatch('sylius.variant.pre_create', new GenericEvent($variant));
         }
     }
 
