@@ -25,6 +25,9 @@ use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         $className = $this->getClassName();
@@ -32,6 +35,9 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return new $className;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createPaginator(array $criteria = null, array $orderBy = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -42,16 +48,29 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->getPaginator($queryBuilder);
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
         return new Pagerfanta(new DoctrineODMPhpcrAdapter($queryBuilder));
     }
 
+    /**
+     * @return QueryBuilder
+     */
     protected function getCollectionQueryBuilder()
     {
         return $this->createQueryBuilder('o');
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $criteria
+     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (null === $criteria) {
@@ -68,6 +87,11 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $sorting
+     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
         if (null === $sorting) {
@@ -83,6 +107,11 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $queryBuilder->end();
     }
 
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {

@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\ResourceBundle\Exception\Driver\InvalidDriverException;
 use Sylius\Bundle\ResourceBundle\Exception\Driver\UnknownDriverException;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -51,12 +51,16 @@ abstract class AbstractResourceExtension extends Extension
      * @param array                  $config
      * @param ConfigurationInterface $configuration
      * @param ContainerBuilder       $container
-     * @param mixed                  $configure
+     * @param integer                $configure
      *
      * @return array
      */
-    public function configure(array $config, ConfigurationInterface $configuration, ContainerBuilder $container, $configure = self::CONFIGURE_LOADER)
-    {
+    public function configure(
+        array $config,
+        ConfigurationInterface $configuration,
+        ContainerBuilder $container,
+        $configure = self::CONFIGURE_LOADER
+    ) {
         $processor = new Processor();
         $config    = $processor->processConfiguration($configuration, $config);
 
@@ -97,7 +101,15 @@ abstract class AbstractResourceExtension extends Extension
     {
         foreach ($classes as $model => $serviceClasses) {
             foreach ($serviceClasses as $service => $class) {
-                $container->setParameter(sprintf('%s.%s.%s.class', $this->applicationName, $service === 'form' ? 'form.type' : $service, $model), $class);
+                $container->setParameter(
+                    sprintf(
+                        '%s.%s.%s.class',
+                        $this->applicationName,
+                        $service === 'form' ? 'form.type' : $service,
+                        $model
+                    ),
+                    $class
+                );
             }
         }
     }
@@ -124,13 +136,13 @@ abstract class AbstractResourceExtension extends Extension
      *
      * @throws UnknownDriverException
      */
-    protected function loadDatabaseDriver(array $config, XmlFileLoader $loader, ContainerBuilder $container = null)
+    protected function loadDatabaseDriver(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundle = str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
         $driver = $config['driver'];
 
         if (!in_array($driver, call_user_func(array($bundle, 'getSupportedDrivers')))) {
-            throw new UnknownDriverException($driver, basename($bundle));
+            throw new InvalidDriverException($driver, basename($bundle));
         }
 
         $this->loadConfigurationFile(array(sprintf('driver/%s', $driver)), $loader);

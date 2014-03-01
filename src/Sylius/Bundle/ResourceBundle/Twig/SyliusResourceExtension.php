@@ -71,8 +71,16 @@ class SyliusResourceExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-             new \Twig_SimpleFunction('sylius_resource_sort', array($this, 'renderSortingLink'), array('is_safe' => array('html'))),
-             new \Twig_SimpleFunction('sylius_resource_paginate', array($this, 'renderPaginateSelect'), array('is_safe' => array('html'))),
+             new \Twig_SimpleFunction(
+                 'sylius_resource_sort',
+                 array($this, 'renderSortingLink'),
+                 array('is_safe' => array('html'))
+             ),
+             new \Twig_SimpleFunction(
+                 'sylius_resource_paginate',
+                 array($this, 'renderPaginateSelect'),
+                 array('is_safe' => array('html'))
+             ),
         );
     }
 
@@ -122,7 +130,10 @@ class SyliusResourceExtension extends \Twig_Extension
             }
         } else {
             $currentOrder = null;
-            $sorting      = isset($this->syliusRouteParams['sorting']) ? $this->syliusRouteParams['sorting'] : array('id' => 'asc');
+            $sorting = array('id' => 'asc');
+            if (isset($this->syliusRouteParams['sorting'])) {
+                $sorting = $this->syliusRouteParams['sorting'];
+            }
         }
 
         $url = $this->container->get('router')->generate(

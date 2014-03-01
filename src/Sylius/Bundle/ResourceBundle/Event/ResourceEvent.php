@@ -20,10 +20,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ResourceEvent extends GenericEvent
 {
-    const TYPE_ERROR    = 'error';
-    const TYPE_WARNING  = 'warning';
-    const TYPE_INFO     = 'info';
-    const TYPE_SUCCESS  = 'success';
+    const TYPE_ERROR   = 'error';
+    const TYPE_WARNING = 'warning';
+    const TYPE_INFO    = 'info';
+    const TYPE_SUCCESS = 'success';
 
     /**
      * Indicate if an error has been detected

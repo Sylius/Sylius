@@ -23,25 +23,54 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class DomainManager
 {
+    /**
+     * @var ObjectManager
+     */
     private $manager;
+
+    /**
+     * @var EventDispatcherInterface
+     */
     private $eventDispatcher;
+
+    /**
+     * @var FlashHelper
+     */
     private $flashHelper;
+
+    /**
+     * @var Configuration
+     */
     private $config;
 
-    public function __construct(ObjectManager $manager, EventDispatcherInterface $eventDispatcher, FlashHelper $flashHelper, Configuration $config)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        EventDispatcherInterface $eventDispatcher,
+        FlashHelper $flashHelper,
+        Configuration $config
+    ) {
         $this->manager = $manager;
         $this->eventDispatcher = $eventDispatcher;
         $this->flashHelper = $flashHelper;
         $this->config = $config;
     }
 
+    /**
+     * @param object $resource
+     *
+     * @return object|null
+     */
     public function create($resource)
     {
+        /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
+            $this->flashHelper->setFlash(
+                $event->getMessageType(),
+                $event->getMessage(),
+                $event->getMessageParameters()
+            );
 
             return null;
         }
@@ -55,12 +84,22 @@ class DomainManager
         return $resource;
     }
 
+    /**
+     * @param object $resource
+     *
+     * @return object|null
+     */
     public function update($resource)
     {
+        /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
+            $this->flashHelper->setFlash(
+                $event->getMessageType(),
+                $event->getMessage(),
+                $event->getMessageParameters()
+            );
 
             return null;
         }
@@ -74,12 +113,22 @@ class DomainManager
         return $resource;
     }
 
+    /**
+     * @param object $resource
+     *
+     * @return object|null
+     */
     public function delete($resource)
     {
+        /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
+            $this->flashHelper->setFlash(
+                $event->getMessageType(),
+                $event->getMessage(),
+                $event->getMessageParameters()
+            );
 
             return null;
         }
@@ -93,6 +142,12 @@ class DomainManager
         return $resource;
     }
 
+    /**
+     * @param string $name
+     * @param Event  $event
+     *
+     * @return Event
+     */
     public function dispatchEvent($name, Event $event)
     {
         $name = $this->config->getEventName($name);

@@ -22,6 +22,9 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class ParametersParser
 {
+    /**
+     * @var ExpressionLanguage
+     */
     private $expression;
 
     public function __construct(ExpressionLanguage $expression)
@@ -29,6 +32,12 @@ class ParametersParser
         $this->expression = $expression;
     }
 
+    /**
+     * @param array   $parameters
+     * @param Request $request
+     *
+     * @return array
+     */
     public function parse(array &$parameters, Request $request)
     {
         foreach ($parameters as $key => $value) {
@@ -44,6 +53,12 @@ class ParametersParser
         return $parameters;
     }
 
+    /**
+     * @param array  $parameters
+     * @param object $resource
+     *
+     * @return array
+     */
     public function process(array &$parameters, $resource)
     {
         $accessor = PropertyAccess::createPropertyAccessor();

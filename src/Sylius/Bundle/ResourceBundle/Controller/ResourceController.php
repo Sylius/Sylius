@@ -15,7 +15,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -61,12 +63,28 @@ class ResourceController extends FOSRestController
     {
         parent::setContainer($container);
 
-        $this->flashHelper = new FlashHelper($this->config, $container->get('translator'), $container->get('session'));
-        $this->domainManager = new DomainManager($container->get($this->config->getServiceName('manager')), $container->get('event_dispatcher'), $this->flashHelper, $this->config);
         $this->resourceResolver = new ResourceResolver($this->config);
-        $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
+        if (null !== $container) {
+            $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
+            $this->flashHelper = new FlashHelper(
+                $this->config,
+                $container->get('translator'),
+                $container->get('session')
+            );
+            $this->domainManager = new DomainManager(
+                $container->get($this->config->getServiceName('manager')),
+                $container->get('event_dispatcher'),
+                $this->flashHelper,
+                $this->config
+            );
+        }
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function showAction(Request $request)
     {
         $view = $this
@@ -79,6 +97,11 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function indexAction(Request $request)
     {
         $criteria = $this->config->getCriteria();
@@ -87,11 +110,19 @@ class ResourceController extends FOSRestController
         $repository = $this->getRepository();
 
         if ($this->config->isPaginated()) {
-            $resources = $this->resourceResolver->getResource($repository, 'createPaginator', array($criteria, $sorting));
+            $resources = $this->resourceResolver->getResource(
+                $repository,
+                'createPaginator',
+                array($criteria, $sorting)
+            );
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
         } else {
-            $resources = $this->resourceResolver->getResource($repository, 'findBy', array($criteria, $sorting, $this->config->getLimit()));
+            $resources = $this->resourceResolver->getResource(
+                $repository,
+                'findBy',
+                array($criteria, $sorting, $this->config->getLimit())
+            );
         }
 
         $view = $this
@@ -104,6 +135,11 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
     public function createAction(Request $request)
     {
         $resource = $this->createNew();
@@ -112,7 +148,11 @@ class ResourceController extends FOSRestController
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
-            return null === $resource ? $this->redirectHandler->redirectToIndex() : $this->redirectHandler->redirectTo($resource);
+            if (null === $resource) {
+                return $this->redirectHandler->redirectToIndex();
+            }
+
+            return $this->redirectHandler->redirectTo($resource);
         }
 
         if ($this->config->isApiRequest()) {
@@ -131,6 +171,11 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
     public function updateAction(Request $request)
     {
         $resource = $this->findOr404($request);
@@ -158,14 +203,21 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * @param  Request          $request
+     * @return RedirectResponse
+     */
     public function deleteAction(Request $request)
     {
         $resource = $this->findOr404($request);
         $this->domainManager->delete($resource);
 
-        return $this->redirectHandler->redirectToIndex($resource);
+        return $this->redirectHandler->redirectToIndex();
     }
 
+    /**
+     * @return object
+     */
     public function createNew()
     {
         return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
@@ -199,12 +251,18 @@ class ResourceController extends FOSRestController
 
         $criteria = array_merge($default, $criteria);
 
-        if (!$resource = $this->resourceResolver->getResource($this->getRepository(), 'findOneBy', array($this->config->getCriteria($criteria)))) {
-            throw new NotFoundHttpException(sprintf(
-                'Requested %s does not exist with these criteria: %s.',
-                $this->config->getResourceName(),
-                json_encode($this->config->getCriteria($criteria))
-            ));
+        if (!$resource = $this->resourceResolver->getResource(
+            $this->getRepository(),
+            'findOneBy',
+            array($this->config->getCriteria($criteria)))
+        ) {
+            throw new NotFoundHttpException(
+                sprintf(
+                    'Requested %s does not exist with these criteria: %s.',
+                    $this->config->getResourceName(),
+                    json_encode($this->config->getCriteria($criteria))
+                )
+            );
         }
 
         return $resource;

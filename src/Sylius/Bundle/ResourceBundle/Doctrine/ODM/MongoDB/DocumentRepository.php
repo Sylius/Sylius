@@ -24,6 +24,9 @@ use Pagerfanta\Pagerfanta;
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         $className = $this->getClassName();
@@ -31,6 +34,11 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return new $className;
     }
 
+    /**
+     * @param integer $id
+     *
+     * @return object
+     */
     public function find($id)
     {
         return $this
@@ -41,6 +49,9 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         ;
     }
 
+    /**
+     * @return array
+     */
     public function findAll()
     {
         return $this
@@ -50,6 +61,11 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         ;
     }
 
+    /**
+     * @param array $criteria
+     *
+     * @return object
+     */
     public function findOneBy(array $criteria)
     {
         $queryBuilder = $this->getQueryBuilder();
@@ -62,6 +78,14 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         ;
     }
 
+    /**
+     * @param array   $criteria
+     * @param array   $orderBy
+     * @param integer $limit
+     * @param integer $offset
+     *
+     * @return array
+     */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -83,6 +107,9 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createPaginator(array $criteria = array(), array $sortBy = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -93,21 +120,37 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->getPaginator($queryBuilder);
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
         return new Pagerfanta(new DoctrineODMMongoDBAdapter($queryBuilder));
     }
 
+    /**
+     * @return QueryBuilder
+     */
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder();
     }
 
+    /**
+     * @return QueryBuilder
+     */
     protected function getCollectionQueryBuilder()
     {
         return $this->createQueryBuilder();
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $criteria
+     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (null === $criteria) {
@@ -121,6 +164,11 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $sorting
+     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
         if (null === $sorting) {

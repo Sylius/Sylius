@@ -29,6 +29,9 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
         return SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
@@ -69,5 +72,4 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
     {
         return 'Doctrine\\ODM\\MongoDB\\Mapping\\ClassMetadata';
     }
-
 }

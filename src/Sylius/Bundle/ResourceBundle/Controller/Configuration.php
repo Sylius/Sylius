@@ -22,11 +22,34 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class Configuration
 {
+    /**
+     * @var string
+     */
     protected $bundlePrefix;
+
+    /**
+     * @var string
+     */
     protected $resourceName;
+
+    /**
+     * @var string
+     */
     protected $templateNamespace;
+
+    /**
+     * @var string
+     */
     protected $templatingEngine;
+
+    /**
+     * @var array
+     */
     protected $parameters;
+
+    /**
+     * @var ParametersParser
+     */
     protected $parser;
 
     /**
@@ -36,8 +59,13 @@ class Configuration
      */
     protected $request;
 
-    public function __construct(ParametersParser $parser, $bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
-    {
+    public function __construct(
+        ParametersParser $parser,
+        $bundlePrefix,
+        $resourceName,
+        $templateNamespace,
+        $templatingEngine = 'twig'
+    ) {
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
         $this->templateNamespace = $templateNamespace;
@@ -135,6 +163,11 @@ class Configuration
         return $redirect;
     }
 
+    /**
+     * @param object|null $resource
+     *
+     * @return array
+     */
     public function getRedirectParameters($resource = null)
     {
         $redirect = $this->get('redirect');

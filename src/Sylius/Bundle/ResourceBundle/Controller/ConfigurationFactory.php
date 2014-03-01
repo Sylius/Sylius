@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-
 /**
  * Resource controller configuration factory.
  *
@@ -23,7 +21,7 @@ class ConfigurationFactory
     /**
      * Current request.
      *
-     * @var Request
+     * @var ParametersParser
      */
     protected $parametersParser;
 
@@ -49,6 +47,12 @@ class ConfigurationFactory
      */
     public function createConfiguration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-        return new Configuration($this->parametersParser, $bundlePrefix, $resourceName, $templateNamespace, $templatingEngine);
+        return new Configuration(
+            $this->parametersParser,
+            $bundlePrefix,
+            $resourceName,
+            $templateNamespace,
+            $templatingEngine
+        );
     }
 }

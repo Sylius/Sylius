@@ -61,10 +61,10 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
 
         if (null === $entity = $this->repository->findOneBy(array($this->identifier => $value))) {
             throw new TransformationFailedException(sprintf(
-                    'Entity "%s" with identifier "%s"="%s" does not exist.',
-                    $this->repository->getClassName(),
-                    $this->identifier,
-                    $value
+                'Entity "%s" with identifier "%s"="%s" does not exist.',
+                $this->repository->getClassName(),
+                $this->identifier,
+                $value
             ));
         }
 

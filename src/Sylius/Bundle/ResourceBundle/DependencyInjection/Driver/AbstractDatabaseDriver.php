@@ -65,8 +65,27 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         $this->setManagerAlias();
     }
 
+    /**
+     * Get the entity manager
+     *
+     * @return string
+     */
     abstract protected function getManagerServiceKey();
+
+    /**
+     * Get the doctrine ClassMetadata class
+     *
+     * @return string
+     */
     abstract protected function getClassMetadataClassname();
+
+    /**
+     * Get the respository service
+     *
+     * @param array $classes
+     *
+     * @return Definition
+     */
     abstract protected function getRepositoryDefinition(array $classes);
 
     /**

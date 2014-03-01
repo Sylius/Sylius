@@ -29,6 +29,9 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
         return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryKey = $this->getContainerKey('repository', '.class');
