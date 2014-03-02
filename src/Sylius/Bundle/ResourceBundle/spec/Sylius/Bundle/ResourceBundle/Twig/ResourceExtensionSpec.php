@@ -13,6 +13,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,10 +31,11 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ResourceExtensionSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router)
+    function let(RouterInterface $router, Parameters $parameters)
     {
         $this->beConstructedWith(
             $router,
+            $parameters,
             'SyliusResourceBundle:Twig:paginate.html.twig',
             'SyliusResourceBundle:Twig:sorting.html.twig'
         );
@@ -62,9 +66,12 @@ class ResourceExtensionSpec extends ObjectBehavior
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
-        \Twig_Environment $twig
+        \Twig_Environment $twig,
+        Parameters $parameters
     ) {
-        $request->get('sorting')->willReturn(array());
+        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('sortable')->willReturn(true);
+        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array());
 
         $event = $this->getGetResponseEvent($request, $event);
 
@@ -88,9 +95,13 @@ class ResourceExtensionSpec extends ObjectBehavior
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
-        \Twig_Environment $twig
+        \Twig_Environment $twig,
+        Parameters $parameters,
+        Request $request
     ) {
-        $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
+        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('sortable')->willReturn(true);
+        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array('propertyName' => 'asc'));
 
         $event = $this->getGetResponseEvent($request, $event);
 
@@ -114,9 +125,12 @@ class ResourceExtensionSpec extends ObjectBehavior
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
-        \Twig_Environment $twig
+        \Twig_Environment $twig,
+        Parameters $parameters
     ) {
-        $request->get('sorting')->willReturn(array());
+        $parameters->get('sortable')->willReturn(true);
+        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array());
 
         $event = $this->getGetResponseEvent($request, $event);
 
@@ -140,10 +154,12 @@ class ResourceExtensionSpec extends ObjectBehavior
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
-        \Twig_Environment $twig
+        \Twig_Environment $twig,
+        Parameters $parameters
     ) {
-        $request->get('sorting')->willReturn(array('propertyName' => 'asc'));
-
+        $parameters->get('sortable')->willReturn(true);
+        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array('propertyName' => 'asc'));
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
@@ -169,9 +185,13 @@ class ResourceExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_not_render_sorting_link(Request $request, GetResponseEvent $event, \Twig_Environment $twig)
-    {
-        $request->get('sorting')->willReturn(array());
+    function it_should_not_render_sorting_link(
+        Request $request, 
+        GetResponseEvent $event, 
+        \Twig_Environment $twig,
+        Parameters $parameters
+    ) {
+        $parameters->get('sortable')->willReturn(false);
 
         $event = $this->getGetResponseEvent(
             $request,
@@ -189,10 +209,13 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         Pagerfanta $paginator,
         RouterInterface $router,
-        \Twig_Environment $twig
+        \Twig_Environment $twig,
+        Parameters $parameters
     ) {
         $limits = array(10, 20);
 
+        $parameters->get('paginate')->willReturn(10);
+        $parameters->get('parameter_name')->willReturn(array('paginate' => 'paginate'));
         $event = $this->getGetResponseEvent(
             $request,
             $event,
@@ -231,9 +254,12 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         Pagerfanta $paginator,
         RouterInterface $router,
-        \Twig_Environment $twig
+        \Twig_Environment $twig,
+        Parameters $parameters
     ) {
         $limits = array(10, 20);
+        $parameters->get('paginate')->willReturn(10);
+        $parameters->get('parameter_name')->willReturn(array('paginate' => 'paginate'));
 
         $event = $this->getGetResponseEvent(
             $request,
