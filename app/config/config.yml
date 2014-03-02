@@ -116,8 +116,7 @@ swiftmailer:
 
 liip_doctrine_cache:
     namespaces:
-        sylius_settings:
-            type: %sylius.cache%
+        sylius_settings: %sylius.cache%
 
 knp_gaufrette:
     adapters:

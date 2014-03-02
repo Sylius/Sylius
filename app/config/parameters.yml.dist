@@ -16,7 +16,8 @@ parameters:
 
     sylius.currency:                  EUR
 
-    sylius.cache:             file_system
+    sylius.cache:
+        type: file_system
 
     paypal.express_checkout.username: EDITME
     paypal.express_checkout.password: EDITME
