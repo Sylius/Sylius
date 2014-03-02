@@ -40,7 +40,7 @@
 
         <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.percentage_discount_configuration.class">Sylius\Bundle\PromotionsBundle\Form\Type\Action\PercentageDiscountConfigurationType</parameter>
-        
+
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionsBundle\Form\Type\CouponToCodeType</parameter>
 
         <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionsBundle\Form\Type\CouponGenerateInstructionType</parameter>

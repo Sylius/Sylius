@@ -76,6 +76,7 @@ stof_doctrine_extensions:
             timestampable: true
             softdeleteable: true
             loggable: true
+            sortable: true
 
 fos_user:
     db_driver: orm

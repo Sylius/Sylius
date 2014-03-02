@@ -229,6 +229,12 @@ Feature: Promotions
           And I press "Save changes"
          Then I should be on the page of promotion "New Year Sale"
 
+    Scenario: Setting promotion priorities
+        Given I am on the promotion index page
+         When I press "move down"
+         Then I should be on the promotion index page
+          And I should see "Promotion has been successfully moved."
+
     @javascript
     Scenario: Deleting promotion with
         Given I am on the page of promotion "New Year"

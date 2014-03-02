@@ -203,6 +203,16 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
+    public function moveUpAction(Request $request)
+    {
+        return $this->move($request, 1);
+    }
+
+    public function moveDownAction(Request $request)
+    {
+        return $this->move($request, -1);
+    }
+
     /**
      * @param  Request          $request
      * @return RedirectResponse
@@ -274,5 +284,14 @@ class ResourceController extends FOSRestController
     public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));
+    }
+
+    protected function move(Request $request, $movement)
+    {
+        $resource = $this->findOr404($request);
+
+        $this->domainManager->move($resource, $movement);
+
+        return $this->redirectHandler->redirectToIndex();
     }
 }

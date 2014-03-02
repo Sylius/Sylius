@@ -42,10 +42,23 @@ class PromotionProcessor implements PromotionProcessorInterface
             $this->applicator->revert($subject, $promotion);
         }
 
-        foreach ($this->repository->findActive() as $promotion) {
-            if ($this->checker->isEligible($subject, $promotion)) {
-                $this->applicator->apply($subject, $promotion);
+        $promotions = $this->repository->findActive();
+        $eligiblePromotions = array();
+
+        foreach ($promotions as $promotion) {
+            if (!$this->checker->isEligible($subject, $promotion)) {
+                continue;
             }
+
+            if ($promotion->isExclusive()) {
+                return $this->applicator->apply($subject, $promotion);
+            }
+
+            $eligiblePromotions[] = $promotion;
+        }
+
+        foreach ($eligiblePromotions as $promotion) {
+            $this->applicator->apply($subject, $promotion);
         }
     }
 }

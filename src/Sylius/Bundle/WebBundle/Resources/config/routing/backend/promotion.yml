@@ -9,6 +9,8 @@ sylius_backend_promotion_index:
         _sylius:
             template: SyliusWebBundle:Backend/Promotion:index.html.twig
             sortable: true
+            sorting:
+                priority: desc
 
 sylius_backend_promotion_create:
     pattern: /new
@@ -27,6 +29,24 @@ sylius_backend_promotion_update:
         _sylius:
             template: SyliusWebBundle:Backend/Promotion:update.html.twig
             redirect: sylius_backend_promotion_show
+
+sylius_backend_promotion_move_up:
+    pattern: /{id}/move-up
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.promotion:moveUpAction
+        _sylius:
+            redirect: referer
+            sortable_position: priority
+
+sylius_backend_promotion_move_down:
+    pattern: /{id}/move-down
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.promotion:moveDownAction
+        _sylius:
+            redirect: referer
+            sortable_position: priority
 
 sylius_backend_promotion_delete:
     pattern: /{id}

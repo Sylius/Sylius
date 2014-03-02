@@ -21,6 +21,10 @@
 
         <field name="name" type="string" />
         <field name="description" type="string" />
+        <field name="priority" type="integer">
+            <gedmo:sortable-position/>
+        </field>
+        <field name="exclusive" type="boolean" />
         <field name="usageLimit" column="usage_limit" type="integer" nullable="true" />
         <field name="used" type="integer" />
         <field name="couponBased" column="coupon_based" type="boolean" />

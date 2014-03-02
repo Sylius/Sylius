@@ -12,6 +12,8 @@
                 <th>{{ sylius_resource_sort('couponBased', 'sylius.promotion.coupon_based'|trans) }}</th>
                 <th>{{ sylius_resource_sort('usageLimit', 'sylius.promotion.usage_limit'|trans) }}</th>
                 <th>{{ sylius_resource_sort('used', 'sylius.promotion.used'|trans) }}</th>
+                <th>{{ sylius_resource_sort('exclusive', 'sylius.promotion.exclusive'|trans) }}</th>
+                <th>{{ sylius_resource_sort('priority', 'sylius.promotion.priority'|trans) }}</th>
                 <th>{{ sylius_resource_sort('startsAt', 'sylius.promotion.starts_at'|trans) }}</th>
                 <th>{{ sylius_resource_sort('endsAt', 'sylius.promotion.ends_at'|trans) }}</th>
                 <th></th>
@@ -42,10 +44,18 @@
                         {{ promotion.used }}
                     </span>
                 </td>
+                <td>
+                    <span class="label label-{{ promotion.exclusive ? 'info' : 'default'}}">
+                        {{ promotion.exclusive ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                    </span>
+                </td>
+                <td>{{ promotion.priority }}</td>
                 <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
                 <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
                 <td>
                     <div class="pull-right">
+                        {{ buttons.move(path('sylius_backend_promotion_move_up', {'id': promotion.id}), 'up', loop.first, loop.last) }}
+                        {{ buttons.move(path('sylius_backend_promotion_move_down', {'id': promotion.id}), 'down', loop.first, loop.last) }}
                         {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotion.id})) }}
                         {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
                         {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
