@@ -33,6 +33,7 @@
 
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
+        <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
         <parameter key="sylius.listener.inventory_unit.class">Sylius\Bundle\CoreBundle\EventListener\InventoryUnitListener</parameter>
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
@@ -241,7 +242,13 @@
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order.pre_release" method="releaseInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="updateInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="createInventoryUnits" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
+        </service>
+        <service id="sylius.listener.order_item_inventory" class="%sylius.listener.order_item_inventory.class%">
+            <argument type="service" id="event_dispatcher" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
         <service id="sylius.listener.inventory_unit" class="%sylius.listener.inventory_unit.class%">
             <tag name="kernel.event_listener" event="sylius.inventory_unit.pre_state_change" method="updateState" />

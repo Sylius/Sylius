@@ -24,10 +24,10 @@ interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentIte
     /**
      * @return null|OrderInterface
      */
-    public function getOrder();
+    public function getOrderItem();
 
     /**
      * @param null|OrderInterface $order
      */
-    public function setOrder(OrderInterface $order = null);
+    public function setOrderItem(OrderItemInterface $orderItem = null);
 }

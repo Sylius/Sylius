@@ -31,12 +31,6 @@
             <join-column name="coupon_id" on-delete="SET NULL" />
         </many-to-one>
 
-        <one-to-many field="inventoryUnits" target-entity="Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface" mapped-by="order" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
-
         <one-to-many field="shipments" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>
