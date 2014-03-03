@@ -13,10 +13,9 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkExtension\Context\MinkContext;
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Exception\ExpectationException;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -86,7 +85,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iGoToTheWebsiteRoot()
     {
-        $this->getSession()->visit('/');
+        $this->visit('/');
     }
 
     /**
@@ -95,7 +94,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnThePage($page)
     {
-        $this->getSession()->visit($this->generatePageUrl($page));
+        $this->visit($this->generatePageUrl($page));
     }
 
     /**
@@ -122,7 +121,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnTheStoreHomepage()
     {
-        $this->getSession()->visit($this->generateUrl('sylius_homepage'));
+        $this->visit($this->generateUrl('sylius_homepage'));
     }
 
     /**
@@ -130,7 +129,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountHomepage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_homepage'));
+        $this->visit($this->generatePageUrl('sylius_account_homepage'));
     }
 
     /**
@@ -146,7 +145,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('fos_user_change_password'));
+        $this->visit($this->generatePageUrl('fos_user_change_password'));
     }
 
     /**
@@ -170,7 +169,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('fos_user_profile_edit'));
+        $this->visit($this->generatePageUrl('fos_user_profile_edit'));
     }
 
     /**
@@ -210,7 +209,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountOrdersPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_index'));
+        $this->visit($this->generatePageUrl('sylius_account_order_index'));
     }
 
     /**
@@ -218,7 +217,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountAddressesPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_address_index'));
+        $this->visit($this->generatePageUrl('sylius_account_address_index'));
     }
 
     /**
@@ -244,7 +243,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnMyAccountAddressCreationPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_address_create'));
+        $this->visit($this->generatePageUrl('sylius_account_address_create'));
     }
 
     /**
@@ -291,7 +290,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $shippingMethod = $this->getDataContext()->findOneBy('shipping_method', array('name' => $value));
         $shipment = $this->getDataContext()->findOneBy('shipment', array('method' => $shippingMethod));
 
-        $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
+        $this->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
     }
 
     /**
@@ -304,7 +303,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
+        $this->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
     }
 
     /**
@@ -360,7 +359,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
         $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
 
-        $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_%s', $type, $action), array('id' => $resource->getId())));
+        $this->visit($this->generatePageUrl(sprintf('backend_%s_%s', $type, $action), array('id' => $resource->getId())));
     }
 
     /**
@@ -400,7 +399,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $product = $this->getDataContext()->findOneByName('product', $name);
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+        $this->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
     }
 
     /**
@@ -520,7 +519,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
+            throw new ElementNotFoundException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
         $this->assertSession()->elementExists('css', $element, $tr);
@@ -537,7 +536,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
+            throw new ElementNotFoundException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
         }
 
         $locator = sprintf('button:contains("%s")', $button);
@@ -636,7 +635,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
+        $this->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
     }
 
     /**
@@ -660,7 +659,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $page = "sylius_account_order_$action";
         $order = $this->getDataContext()->findOneBy('order', array('number' => $number));
 
-        $this->getSession()->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
+        $this->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
     }
 
     /**
@@ -728,10 +727,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        $count = count($this->getSession()->getPage()->findAll('css', 'div.collection-container div.control-group'));
+        $page  = $this->getSession()->getPage();
+        $count = count($page->findAll('css', 'div.collection-container div.form-group'));
 
         foreach ($table->getRows() as $i => $value) {
-            $this->getSession()->getPage()->find('css', 'a:contains("Add value")')->click();
+            $page->find('css', 'a:contains("Add value")')->click();
             $this->fillField(sprintf('sylius_option[values][%d][value]', $i+$count), $value[0]);
         }
     }
@@ -750,7 +750,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         // Re-set default session
         $currentUrl = $this->getSession()->getCurrentUrl();
         $this->getMink()->setDefaultSessionName('goutte');
-        $this->getSession()->visit($currentUrl);
+        $this->visit($currentUrl);
     }
 
     /**
@@ -788,7 +788,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
 
         foreach ($rows as $key => $row) {
             if ($row->getText() === $property) {
-                $column = $key; break;
+                $column = $key;
+                break;
             }
         }
 
@@ -797,13 +798,11 @@ class WebUser extends MinkContext implements KernelAwareInterface
         );
 
         if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
+            throw new ElementNotFoundException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
         }
 
         $cols = $tr->findAll('css', 'td');
-        $value = $cols[$column]->getText();
-
-        assertEquals($expectedValue, $value);
+        assertEquals($expectedValue, isset($column) ? $cols[$column]->getText() : null);
     }
 
     /**
@@ -811,20 +810,35 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClickOnConfirmationModal($button)
     {
-        $this->assertSession()->elementExists('css', '#confirmationModalContainer');
+        $this->assertSession()->elementExists('css', '#confirmation-modal');
 
-        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $modalContainer = $this->getSession()->getPage()->find('css', '#confirmation-modal');
+        $primaryButton = $modalContainer->find('css', sprintf('button:contains("%s")', $button));
 
-        $this->getSession()->wait(100);
-
-        if (!preg_match('/in/', $modalContainer->getAttribute('class'))) {
-            throw new \Exception('The confirmation modal was not opened...');
-        }
-
-        $this->getSession()->wait(100);
+        $this->getSession()->wait(3000, '$("#confirmation-modal.in").children().length > 0');
 
         $primaryButton->press();
+
+        // Let's wait for AJAX call to finish
+        $this->getSession()->wait(3000);
+    }
+
+    /**
+     * @Then /^I wait for "([^"]*)" element to appear$/
+     */
+    public function iWaitForElementToAppear($element)
+    {
+        $this->getSession()->wait(5000, '$("'.$element.'").children().length > 0');
+        $this->getSession()->wait(100, '!document.getElementById("confirmation-modal").className.match("/ in/")');
+    }
+
+    /**
+     * @Given /^I wait (\d+) seconds$/
+     * @Then /^I wait "(\d+)" seconds$/
+     */
+    public function iWaitXSeconds($seconds)
+    {
+        $this->getSession()->wait($seconds * 1000);
     }
 
     /**
@@ -881,11 +895,12 @@ class WebUser extends MinkContext implements KernelAwareInterface
      * Create user and login with given role.
      *
      * @param string $role
+     * @param string $email
      */
     protected function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
     {
         $this->getSubContext('data')->thereIsUser($email, 'sylius', $role);
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+        $this->visit($this->generatePageUrl('fos_user_security_login'));
 
         $this->fillField('Email', $email);
         $this->fillField('Password', 'sylius');
@@ -918,13 +933,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
         $route = str_replace(' ', '_', $route);
 
-        $path = $this->generateUrl($route, $parameters);
-
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
-            return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
-        }
-
-        return $path;
+        return $this->generateUrl($route, $parameters);
     }
 
     /**

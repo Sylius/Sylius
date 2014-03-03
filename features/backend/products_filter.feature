@@ -28,7 +28,7 @@ Feature: Products filter
           And I press "Filter"
          Then I should be on the product index page
           And I should not see "Orange"
-          But I should see "Black T-Shirt"
+          And I should see "Black T-Shirt"
 
     Scenario: Filtering products by SKU
         Given I am on the product index page
@@ -43,4 +43,4 @@ Feature: Products filter
           And I press "Filter"
          Then I should be on the product index page
           And I should see "Sticker"
-          But I should not see "T-Shirt"
+          And I should not see "T-Shirt"

@@ -67,13 +67,21 @@ Feature: Product properties
          Then I should still be on the property index page
           And I should see "Property has been successfully updated."
 
-    @javascript
     Scenario: Deleted property disappears from the list
+        Given I am on the property index page
+         When I click "delete" near "T-Shirt fabric"
+         Then I should see "Do you want to delete this item"
+         When I press "delete"
+         Then I should still be on the property index page
+          And I should not see property with name "T-Shirt fabric" in that list
+          And I should see "Property has been successfully deleted."
+
+    @javascript
+    Scenario: Deleted property disappears from the list with js modal
         Given I am on the property index page
          When I click "delete" near "T-Shirt fabric"
           And I click "delete" from the confirmation modal
          Then I should still be on the property index page
-          And I should see "Property has been successfully deleted."
           And I should not see property with name "T-Shirt fabric" in that list
 
     Scenario: Creating string property by default
@@ -118,7 +126,7 @@ Feature: Product properties
           And I click "Add choice"
           And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
           And I press "Create"
-          Then property with following data should be created:
+         Then property with following data should be created:
             | name         | Book author                      |
             | presentation | Author                           |
             | type         | choice                           |
@@ -137,7 +145,7 @@ Feature: Product properties
           And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
           And I remove property choice number 0
           And I press "Create"
-          Then property with following data should be created:
+         Then property with following data should be created:
             | name         | Book author         |
             | presentation | Author              |
             | type         | choice              |

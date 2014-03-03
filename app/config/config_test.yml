@@ -2,18 +2,25 @@ imports:
     - { resource: config.yml }
 
 framework:
-    test: ~
-    default_locale:  "en"
-    session:
-        storage_id: session.storage.mock_file
+    test:           ~
+    session:        ~
+    default_locale: en
+    profiler:
+        collect: false
 
 swiftmailer:
     disable_delivery: true
 
 doctrine:
     dbal:
-        dbname:   %sylius.database.name%_test
+        dbname:       %sylius.database.name%_test
         driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
+        profiling:    false
+        logging:      false
+    orm:
+        metadata_cache_driver: memcached
+        result_cache_driver:   memcached
+        query_cache_driver:    memcached
 
 sylius_money:
     currency: EUR
@@ -28,7 +35,7 @@ sylius_payments:
 liip_doctrine_cache:
     namespaces:
         sylius_settings:
-            type: array
+            type: memcached
 
 monolog:
     handlers:
@@ -36,6 +43,15 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
-        firephp:
-            type:  firephp
-            level: info
+
+services:
+    listener.exception_rethrow:
+        class: Sylius\Bundle\WebBundle\EventListener\ExceptionRethrowListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+parameters:
+    sylius.cache:
+        type: memcache
+        host: localhost
+        port: 11211

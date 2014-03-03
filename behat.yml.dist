@@ -2,12 +2,95 @@
 # (c) Paweł Jędrzejewski
 
 default:
+    formatter:
+        name: progress
+        parameters:
+            verbose: true
     context:
         class: Sylius\Bundle\WebBundle\Behat\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
+            base_url: 'http://localhost/app_test.php'
             default_session: symfony2
             goutte: ~
+            selenium2: ~
             browser_name: firefox
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
+            show_auto: false
+            show_cmd: chrome %s
+        Behat\Symfony2Extension\Extension: ~
+
+account:
+    filters:
+        tags: "@account && ~@javascript"
+
+addressing:
+    filters:
+        tags: "@addressing && ~@javascript"
+
+cart:
+    filters:
+        tags: "@cart && ~@javascript"
+
+checkout:
+    filters:
+        tags: "@checkout && ~@javascript"
+
+currencies:
+    filters:
+        tags: "@currencies && ~@javascript"
+
+dashboard:
+    filters:
+        tags: "@dashboard && ~@javascript"
+
+homepage:
+    filters:
+        tags: "@homepage && ~@javascript"
+
+inventory:
+    filters:
+        tags: "@inventory && ~@javascript"
+
+orders:
+    filters:
+        tags: "@orders && ~@javascript"
+
+payments:
+    filters:
+        tags: "@payments && ~@javascript"
+
+products:
+    filters:
+        tags: "@products && ~@javascript"
+
+promotions:
+    filters:
+        tags: "@promotions && ~@javascript"
+
+settings:
+    filters:
+        tags: "@settings && ~@javascript"
+
+shipping:
+    filters:
+        tags: "@shipping && ~@javascript"
+
+taxation:
+    filters:
+        tags: "@taxation && ~@javascript"
+
+taxonomies:
+    filters:
+        tags: "@taxonomies && ~@javascript"
+
+localization:
+    filters:
+        tags: "@localization && ~@javascript"
+
+users:
+    filters:
+        tags: "@users && ~@javascript"
+
+only-javascript:
+    filters:
+        tags: "@javascript"

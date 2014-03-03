@@ -1,18 +1,18 @@
 app/*\.cache
-app/cache/*
+app/cache
 
-app/logs/*
+app/logs
 
 app/config/parameters.yml
 app/config/*.local.yml
 app/config/deploy.rb
 behat.yml
 
-web/bundles/*
-web/css/*
-web/js/*
-web/assets/compiled/*
-web/media/*
+web/bundles
+web/css
+web/js
+web/assets/compiled
+web/media
 
 bin/behat
 bin/doctrine*
@@ -22,5 +22,4 @@ bin/phpunit
 bin/phpcrodm
 bin/phpcrodm.php
 bin/jackalope
-bin/phpunit
-vendor/*
+vendor/
