@@ -99,6 +99,13 @@ class Taxon implements TaxonInterface
     protected $level;
 
     /**
+     * Deletion time.
+     *
+     * @var \DateTime
+     */
+    protected $deletedAt;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -342,6 +349,32 @@ class Taxon implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDeleted()
+    {
+        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

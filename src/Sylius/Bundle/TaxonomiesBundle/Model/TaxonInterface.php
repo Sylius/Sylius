@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\TaxonomiesBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Model\SoftDeletableInterface;
 
 /**
  * Interface for taxons.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface TaxonInterface
+interface TaxonInterface extends SoftDeletableInterface
 {
     /**
      * Get the taxonomy.
