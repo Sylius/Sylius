@@ -19,6 +19,7 @@ use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -76,25 +77,6 @@ class OrderSpec extends ObjectBehavior
     function it_should_initialize_inventory_units_collection_by_default()
     {
         $this->getInventoryUnits()->shouldHaveType('Doctrine\Common\Collections\Collection');
-    }
-
-    function it_should_add_inventory_units_properly(InventoryUnitInterface $unit)
-    {
-        $unit->setOrder($this)->shouldBeCalled();
-        $this->addInventoryUnit($unit);
-    }
-
-    function it_should_remove_inventory_units_properly(InventoryUnitInterface $unit)
-    {
-        $unit->setOrder($this)->shouldBeCalled();
-        $this->addInventoryUnit($unit);
-
-        $this->hasInventoryUnit($unit)->shouldReturn(true);
-
-        $unit->setOrder(null)->shouldBeCalled();
-        $this->removeInventoryUnit($unit);
-
-        $this->hasInventoryUnit($unit)->shouldReturn(false);
     }
 
     function it_should_initialize_shipments_collection_by_default()
@@ -227,34 +209,34 @@ class OrderSpec extends ObjectBehavior
 
     function it_is_a_backorder_if_contains_at_least_one_backordered_unit(
         InventoryUnitInterface $unit1,
-        InventoryUnitInterface $unit2
+        InventoryUnitInterface $unit2,
+        OrderItemInterface $item
     )
     {
-        $unit1->setOrder($this)->shouldBeCalled();
-        $unit2->setOrder($this)->shouldBeCalled();
-
-        $this->addInventoryUnit($unit1);
-        $this->addInventoryUnit($unit2);
-
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+
+        $item->getInventoryUnits()->willReturn(array($unit1, $unit2));
+
+        $item->setOrder($this)->shouldBeCalled();
+        $this->addItem($item);
 
         $this->shouldBeBackorder();
     }
 
     function it_not_a_backorder_if_contains_no_backordered_units(
         InventoryUnitInterface $unit1,
-        InventoryUnitInterface $unit2
+        InventoryUnitInterface $unit2,
+         OrderItemInterface $item
     )
     {
-        $unit1->setOrder($this)->shouldBeCalled();
-        $unit2->setOrder($this)->shouldBeCalled();
-
-        $this->addInventoryUnit($unit1);
-        $this->addInventoryUnit($unit2);
-
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
+
+        $item->getInventoryUnits()->willReturn(array($unit1, $unit2));
+
+        $item->setOrder($this)->shouldBeCalled();
+        $this->addItem($item);
 
         $this->shouldNotBeBackorder();
     }

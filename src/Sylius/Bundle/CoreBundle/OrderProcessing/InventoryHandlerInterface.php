@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 
 /**
  * Order inventory handler service interface.
@@ -31,7 +32,7 @@ interface InventoryHandlerInterface
      *
      * @param OrderInterface $order
      */
-    public function processInventoryUnits(OrderInterface $order);
+    public function processInventoryUnits(OrderItemInterface $order);
 
     /**
      * Put inventory on hold.

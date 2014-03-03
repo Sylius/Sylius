@@ -63,13 +63,6 @@ class Order extends Cart implements OrderInterface
     protected $payment;
 
     /**
-     * Inventory units.
-     *
-     * @var Collection|InventoryUnitInterface[]
-     */
-    protected $inventoryUnits;
-
-    /**
      * Currency ISO code.
      *
      * @var string
@@ -112,7 +105,6 @@ class Order extends Cart implements OrderInterface
     {
         parent::__construct();
 
-        $this->inventoryUnits = new ArrayCollection();
         $this->shipments = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
@@ -321,7 +313,15 @@ class Order extends Cart implements OrderInterface
      */
     public function getInventoryUnits()
     {
-        return $this->inventoryUnits;
+        $units = new ArrayCollection;
+
+        foreach ($this->getItems() as $item) {
+            foreach ($item->getInventoryUnits() as $unit) {
+                $units->add($unit);
+            }
+        }
+
+        return $units;
     }
 
     /**
@@ -329,43 +329,9 @@ class Order extends Cart implements OrderInterface
      */
     public function getInventoryUnitsByVariant(VariantInterface $variant)
     {
-        return $this->inventoryUnits->filter(function (InventoryUnitInterface $unit) use ($variant) {
+        return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();
         });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addInventoryUnit(InventoryUnitInterface $unit)
-    {
-        if (!$this->inventoryUnits->contains($unit)) {
-            $unit->setOrder($this);
-            $this->inventoryUnits->add($unit);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeInventoryUnit(InventoryUnitInterface $unit)
-    {
-        if ($this->inventoryUnits->contains($unit)) {
-            $unit->setOrder(null);
-            $this->inventoryUnits->removeElement($unit);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasInventoryUnit(InventoryUnitInterface $unit)
-    {
-        return $this->inventoryUnits->contains($unit);
     }
 
     /**
@@ -489,7 +455,7 @@ class Order extends Cart implements OrderInterface
      */
     public function isBackorder()
     {
-        foreach ($this->inventoryUnits as $unit) {
+        foreach ($this->getInventoryUnits() as $unit) {
             if (InventoryUnitInterface::STATE_BACKORDERED === $unit->getInventoryState()) {
                 return true;
             }

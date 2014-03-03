@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -81,10 +82,10 @@ class OrderInventoryListener
      *
      * @param GenericEvent $event
      */
-    public function createInventoryUnits(GenericEvent $event)
+    public function processInventoryUnits(GenericEvent $event)
     {
         $this->inventoryHandler->processInventoryUnits(
-            $this->getOrder($event)
+            $this->getItem($event)
         );
     }
 
@@ -104,5 +105,23 @@ class OrderInventoryListener
         }
 
         return $order;
+    }
+
+    /**
+     * Gets order from event.
+     *
+     * @param GenericEvent $event
+     */
+    protected function getItem(GenericEvent $event)
+    {
+        $item = $event->getSubject();
+
+        if (!$item instanceof OrderItemInterface) {
+            throw new \InvalidArgumentException(
+                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderItemInterface"'
+            );
+        }
+
+        return $item;
     }
 }

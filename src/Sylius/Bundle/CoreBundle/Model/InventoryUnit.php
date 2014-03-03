@@ -33,9 +33,9 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * Order.
      *
-     * @var OrderInterface
+     * @var OrderItemInterface
      */
-    protected $order;
+    protected $orderItem;
 
     /**
      * Shipment
@@ -76,17 +76,17 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getOrderItem()
     {
-        return $this->order;
+        return $this->orderItem;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setOrder(OrderInterface $order = null)
+    public function setOrderItem(OrderItemInterface $orderItem = null)
     {
-        $this->order = $order;
+        $this->orderItem = $orderItem;
 
         return $this;
     }

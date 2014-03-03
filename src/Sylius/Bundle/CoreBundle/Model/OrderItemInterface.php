@@ -40,4 +40,34 @@ interface OrderItemInterface extends CartItemInterface
      * @param VariantInterface $variant
      */
     public function setVariant(VariantInterface $variant);
+
+    /**
+     * Get all inventory units.
+     *
+     * @return Collection|InventoryUnitInterface[]
+     */
+    public function getInventoryUnits();
+
+    /**
+     * Add inventory unit.
+     *
+     * @param InventoryUnitInterface $unit
+     */
+    public function addInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
+     * Remove inventory unit.
+     *
+     * @param InventoryUnitInterface $unit
+     */
+    public function removeInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
+     * Has inventory unit?
+     *
+     * @param InventoryUnitInterface $unit
+     *
+     * @return Boolean
+     */
+    public function hasInventoryUnit(InventoryUnitInterface $unit);
 }
