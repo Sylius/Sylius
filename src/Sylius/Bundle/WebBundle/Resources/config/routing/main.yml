@@ -12,6 +12,8 @@ sylius_province_choice_form:
     pattern: /province/choice-form
     defaults:
         _controller: sylius.controller.province:choiceFormAction
+        _sylius:
+            template: SyliusAddressingBundle:Province:_provinceChoiceForm.html.twig
 
 sylius_partial:
     resource: @SyliusWebBundle/Resources/config/routing/partial/main.yml
