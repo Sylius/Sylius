@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Convert translations to YAML.
+
 ### v0.7.0
 
 * Add Number model to track order sequence.

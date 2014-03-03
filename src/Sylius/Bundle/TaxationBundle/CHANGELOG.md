@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Convert translations to YAML.
+
 ### v0.7.0
 
 * Minor clean ups and fixes.

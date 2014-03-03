@@ -1,7 +1,11 @@
 CHANGELOG
 =========
 
-### v0.7.0
+### v0.8.0
+
+* Convert translations to YAML format.
+
+### v0.7.0 
 
 * Reuse EntityToIdentifier form type.
 

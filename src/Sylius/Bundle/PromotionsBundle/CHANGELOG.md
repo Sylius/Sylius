@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Support exclusive promotions.
+
 ### v0.7.0
 
 * Add reverting mechanism for promotion actions.

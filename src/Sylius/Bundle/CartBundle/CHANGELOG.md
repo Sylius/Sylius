@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Convert translation files to YAML.
+
 ### v0.7.0
 
 * Introduce cart provider events.

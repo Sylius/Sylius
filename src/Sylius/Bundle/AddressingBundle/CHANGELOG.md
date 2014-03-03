@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Convert translation files to YAML.
+* Add flexible address validation for shipping.
+
 ### v0.7.0
 
 * Reuse the EntityToIdentifier transformer.

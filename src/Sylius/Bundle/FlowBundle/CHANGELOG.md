@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Make the validator extendable.
+
 ### v0.7.0
 
 * Add custom InvalidArgumentException.

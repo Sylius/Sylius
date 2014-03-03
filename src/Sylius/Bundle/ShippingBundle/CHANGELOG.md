@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.8.0
+
+* Convert translations to YAML.
+* Add shipAction() to Shipment controller.
+
 ### v0.7.0
 
 * Add weight based shipping calculator.
