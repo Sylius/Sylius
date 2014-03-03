@@ -49,7 +49,7 @@ class Variant extends BaseVariant implements VariantInterface
      *
      * @var integer
      */
-    protected $onHand = 1;
+    protected $onHand = 0;
 
     /**
      * Is variant available on demand?
