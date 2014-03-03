@@ -223,7 +223,7 @@ class Address implements AddressInterface
 
     public function isValidProvince(ExecutionContextInterface $context)
     {
-        if (!$this->isValid()) {
+        if (null !== $this->getCountry() && !$this->isValid()) {
             $context->addViolationAt('province', 'sylius.address.province.valid', array(), null);
         }
     }
