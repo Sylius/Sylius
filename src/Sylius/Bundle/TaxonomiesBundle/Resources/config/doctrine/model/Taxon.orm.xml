@@ -68,6 +68,9 @@
             <gedmo:tree-level />
         </field>
 
+        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
+
+        <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:tree type="nested" />
     </mapped-superclass>
 
