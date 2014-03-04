@@ -34,5 +34,5 @@ interface CartRepositoryInterface extends OrderRepositoryInterface
      *
      * @return CartInterface|null
      */
-    public function findOneCartByIdentifier($identifier);    
+    public function findCartByIdentifier($identifier);
 }

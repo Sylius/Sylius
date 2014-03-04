@@ -53,7 +53,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(3);
-        $repository->findOneCartByIdentifier(3)->shouldBeCalled()->willReturn($cart);
+        $repository->findCartByIdentifier(3)->shouldBeCalled()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldNotBeCalled();
 
         $this->getCart()->shouldReturn($cart);
@@ -81,7 +81,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(7);
-        $repository->findOneCartByIdentifier(7)->shouldBeCalled()->willReturn(null);
+        $repository->findCartByIdentifier(7)->shouldBeCalled()->willReturn(null);
         $repository->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
@@ -118,7 +118,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(null);
-        $repository->findOneCartByIdentifier(Argument::any())->shouldNotBeCalled();
+        $repository->findCartByIdentifier(Argument::any())->shouldNotBeCalled();
 
         $this->hasCart()->shouldReturn(false);
     }
@@ -130,7 +130,7 @@ class CartProviderSpec extends ObjectBehavior
     )
     {
         $storage->getCurrentCartIdentifier()->willReturn(666);
-        $repository->findOneCartByIdentifier(666)->shouldBeCalled()->willReturn($cart);
+        $repository->findCartByIdentifier(666)->shouldBeCalled()->willReturn($cart);
 
         $this->hasCart()->shouldReturn(true);
     }

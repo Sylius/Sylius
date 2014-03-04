@@ -440,7 +440,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Then /^My cart state changes to Pending$/
+     * @Then /^My cart state changes to pending$/
      */
     public function cartStateChangeToPending()
     {

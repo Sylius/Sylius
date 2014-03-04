@@ -43,7 +43,7 @@ class CartRepository extends OrderRepository implements CartRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findOneCartByIdentifier($identifier)
+    public function findCartByIdentifier($identifier)
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -53,6 +53,9 @@ class CartRepository extends OrderRepository implements CartRepositoryInterface
             ->setParameter('id', $identifier)
         ;
 
-        return $queryBuilder->getQuery()->getSingleResult();
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 }

@@ -155,12 +155,10 @@ Feature: Cart
 
     Scenario: My cart state changes to pending
         Given I am on the store homepage
-          And I follow "T-Shirts"
-         When I press "Add to cart"
-         Then I should be on the cart summary page
+          And I add product "iShirts" to cart, with quantity "3"
+          And I should be on the cart summary page
           And I should see 1 cart item in the list
-         Then My cart state changes to pending
-        Given I am on the store homepage
-         When I follow "View cart"
+         When My cart state changes to pending
+          And I follow "View cart"
          Then I should be on the cart summary page
           And I should see "Your cart is empty"         
