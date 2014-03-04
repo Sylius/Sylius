@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
+namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
 
@@ -25,7 +25,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\DataTransformer\ArrayToStringTransformer');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ArrayToStringTransformer');
     }
 
     function it_implements_form_data_transformer_interface()

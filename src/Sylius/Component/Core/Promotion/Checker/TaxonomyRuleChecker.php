@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Promotion\Checker;
 
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -33,16 +33,16 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
-        /* @var $item OrderItemInterface */
+        /** @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
             foreach ($item->getProduct()->getTaxons() as $taxon) {
-                if ($configuration['taxons']->contains($taxon->getId())) {
+                if (in_array($taxon->getId(), $configuration['taxons'])) {
                     return !$configuration['exclude'];
                 }
             }
         }
 
-        return (Boolean) $configuration['exclude'];
+        return (bool) $configuration['exclude'];
     }
 
     /**
