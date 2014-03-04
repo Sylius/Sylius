@@ -37,7 +37,7 @@ class InventoryUnit implements InventoryUnitInterface
      *
      * @var string
      */
-    protected $inventoryState = InventoryUnitInterface::STATE_SOLD;
+    protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
 
     /**
      * Creation time.

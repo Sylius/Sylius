@@ -49,7 +49,7 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
      *
      * @var string ShipmentInterface::STATE_*
      */
-    protected $shippingState = ShipmentInterface::STATE_READY;
+    protected $shippingState = ShipmentInterface::STATE_CHECKOUT;
 
     /**
      * Creation time.

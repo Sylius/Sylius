@@ -46,9 +46,9 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getStockable()->shouldReturn($stockable);
     }
 
-    function it_has_sold_state_by_default()
+    function it_has_checkout_state_by_default()
     {
-        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_SOLD);
+        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_CHECKOUT);
     }
 
     function its_state_is_mutable()
@@ -59,6 +59,8 @@ class InventoryUnitSpec extends ObjectBehavior
 
     function it_is_sold_if_its_state_says_so()
     {
+        $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+
         $this->shouldBeSold();
     }
 
