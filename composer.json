@@ -22,6 +22,7 @@
         "php":                                  ">=5.3.3",
 
         "doctrine/doctrine-bundle":             "~1.3@dev",
+        "doctrine/doctrine-cache-bundle":       "@dev",
         "doctrine/orm":                         "~2.3",
         "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
