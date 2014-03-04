@@ -318,7 +318,7 @@
         </service>
         <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
             <argument type="service" id="security.context" />
-            <tag name="kernel.event_listener" event="sylius_checkout_security.pre_complete" method="setOrderUser" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setOrderUser" />
             <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setOrderUser" />
         </service>
         <service id="sylius.listener.purchase" class="%sylius.listener.purchase.class%">
