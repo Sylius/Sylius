@@ -54,8 +54,8 @@
                 <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
                 <td>
                     <div class="pull-right">
-                        {{ buttons.move(path('sylius_backend_promotion_move_up', {'id': promotion.id}), 'up', loop.first, loop.last) }}
-                        {{ buttons.move(path('sylius_backend_promotion_move_down', {'id': promotion.id}), 'down', loop.first, loop.last) }}
+                        {{ buttons.move(path('sylius_backend_promotion_move_up', {'id': promotion.id}), 'up', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
+                        {{ buttons.move(path('sylius_backend_promotion_move_down', {'id': promotion.id}), 'down', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
                         {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotion.id})) }}
                         {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
                         {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
