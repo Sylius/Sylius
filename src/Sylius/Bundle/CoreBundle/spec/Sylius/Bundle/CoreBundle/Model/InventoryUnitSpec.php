@@ -59,9 +59,9 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getShipment()->shouldReturn(null);
     }
 
-    function it_has_ready_shipping_state_by_default()
+    function it_has_checkout_shipping_state_by_default()
     {
-        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_READY);
+        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_CHECKOUT);
     }
 
     function its_shipping_state_is_mutable()
