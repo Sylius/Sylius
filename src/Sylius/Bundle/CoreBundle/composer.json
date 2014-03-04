@@ -53,7 +53,8 @@
         "symfony/form":     "~2.3"
     },
     "suggest": {
-        "sylius/web-bundle": "Provides default web interface"
+        "sylius/web-bundle": "Provides default web interface",
+        "sylius/fixtures-bundle": "Provides default Sylius fixtures"
     },
     "config": {
         "bin-dir": "bin"
