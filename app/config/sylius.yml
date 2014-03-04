@@ -78,6 +78,9 @@ sylius_inventory:
             model: %sylius.model.variant.class%
 
 sylius_payments:
+    classes:
+        payment:
+            controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
     gateways:
         dummy: Test
         stripe: Stripe

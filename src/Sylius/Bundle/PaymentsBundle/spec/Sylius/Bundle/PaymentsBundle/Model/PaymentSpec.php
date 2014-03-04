@@ -99,27 +99,6 @@ class PaymentSpec extends ObjectBehavior
         $this->getState()->shouldReturn(PaymentInterface::STATE_COMPLETED);
     }
 
-    function it_initializes_log_collection_by_default()
-    {
-        $this->getLogs()->shouldHaveType('Doctrine\Common\Collections\Collection');
-    }
-
-    function it_adds_logs(PaymentLogInterface $log)
-    {
-        $this->hasLog($log)->shouldReturn(false);
-        $log->setPayment($this)->shouldBeCalled();
-        $this->addLog($log);
-        $this->hasLog($log)->shouldReturn(true);
-    }
-
-    function it_removes_logs(PaymentLogInterface $log)
-    {
-        $this->addLog($log);
-        $log->setPayment(null)->shouldBeCalled();
-        $this->removeLog($log);
-        $this->hasLog($log)->shouldReturn(false);
-    }
-
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');

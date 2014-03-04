@@ -1,0 +1,37 @@
+{# empty Twig template #}
+{% if logs|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th class="action">{{ 'sylius.history.action'|trans }}</th>
+            <th class="version">{{ 'sylius.history.version'|trans }}</th>
+            <th class="data">{{ 'sylius.history.data'|trans }}</th>
+            <th class="author">{{ 'sylius.history.author'|trans }}</th>
+            <th class="logged-at">{{ 'sylius.history.logged_at'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for log in logs %}
+        <tr>
+            <td><span class="label label-info">{{ log.action|upper }}</span></td>
+            <td>#{{ log.version }}</td>
+            <td>
+                {% if log.data is not empty %}
+                <ul>
+                    {% for key, value in log.data %}
+                    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>{{ log.username }}</td>
+            <td>{{ log.loggedAt|date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.no_results'|trans) }}
+{% endif %}

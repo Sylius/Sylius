@@ -1,0 +1,28 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.payment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_payment_index') }}">{{ 'sylius.breadcrumb.payment.index'|trans }}</a></li>
+    <li>{{ payment.method.name }} - {{ payment.amount|sylius_money }}</li>
+    <li>{{ 'sylius.history'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+    {{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}
+    {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
+    {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id}), null, false, false) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.payment.show_header'|trans|raw }}</h1>
+</div>
+
+{% include "SyliusWebBundle:Backend:_history_table.html.twig" %}
+
+{% endblock %}
