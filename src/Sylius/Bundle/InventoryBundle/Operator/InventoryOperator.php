@@ -121,7 +121,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $quantity = count($inventoryUnits);
 
-        if ($quantity < 0) {
+        if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
