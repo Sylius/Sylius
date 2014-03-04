@@ -64,13 +64,6 @@ class Payment implements PaymentInterface
     protected $creditCard;
 
     /**
-     * Processing logs.
-     *
-     * @var Collection|PaymentLogInterface[]
-     */
-    protected $logs;
-
-    /**
      * Creation date.
      *
      * @var \DateTime
@@ -94,7 +87,6 @@ class Payment implements PaymentInterface
      */
     public function __construct()
     {
-        $this->logs = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -202,48 +194,6 @@ class Payment implements PaymentInterface
     public function setState($state)
     {
         $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLogs()
-    {
-        return $this->logs;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasLog(PaymentLogInterface $log)
-    {
-        return $this->logs->contains($log);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addLog(PaymentLogInterface $log)
-    {
-        if (!$this->hasLog($log)) {
-            $this->logs->add($log);
-            $log->setPayment($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeLog(PaymentLogInterface $log)
-    {
-        if ($this->hasLog($log)) {
-            $this->logs->removeElement($log);
-            $log->setPayment(null);
-        }
 
         return $this;
     }

@@ -46,3 +46,11 @@ sylius_backend_payment_show:
         _controller: sylius.controller.payment:deleteAction
         _sylius:
             template: SyliusWebBundle:Backend/Payment:show.html.twig
+
+sylius_backend_payment_history:
+    pattern: /{id}/history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.payment:historyAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Payment:history.html.twig

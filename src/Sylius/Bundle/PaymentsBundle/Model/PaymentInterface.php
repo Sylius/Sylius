@@ -113,40 +113,6 @@ interface PaymentInterface extends TimestampableInterface
     public function setAmount($amount);
 
     /**
-     * Get processing logs.
-     *
-     * @return Collection|PaymentLogInterface[]
-     */
-    public function getLogs();
-
-    /**
-     * Has given log already?
-     *
-     * @param PaymentLogInterface $log
-     *
-     * @return Boolean
-     */
-    public function hasLog(PaymentLogInterface $log);
-
-    /**
-     * Add payment processing log.
-     *
-     * @param PaymentLogInterface $log
-     *
-     * @return PaymentInterface
-     */
-    public function addLog(PaymentLogInterface $log);
-
-    /**
-     * Remove payment processing log.
-     *
-     * @param PaymentLogInterface $log
-     *
-     * @return PaymentInterface
-     */
-    public function removeLog(PaymentLogInterface $log);
-
-    /**
      * @param array $details
      *
      * @return PaymentInterface

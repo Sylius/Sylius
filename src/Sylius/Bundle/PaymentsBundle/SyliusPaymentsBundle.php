@@ -44,7 +44,6 @@ class SyliusPaymentsBundle extends Bundle
         $interfaces = array(
             'Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface'    => 'sylius.model.credit_card.class',
             'Sylius\Bundle\PaymentsBundle\Model\PaymentInterface'       => 'sylius.model.payment.class',
-            'Sylius\Bundle\PaymentsBundle\Model\PaymentLogInterface'    => 'sylius.model.payment_log.class',
             'Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface' => 'sylius.model.payment_method.class',
         );
 

@@ -30,8 +30,12 @@
             <td>{{ payment.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
-                {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id})) }}
+                    {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
+                    {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id})) }}
+                    <a href="{{ path('sylius_backend_payment_history', {'id': payment.id}) }}" class="btn btn-info">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                         {{ 'sylius.history'|trans }}
+                    </a>
                 </div>
             </td>
         </tr>
