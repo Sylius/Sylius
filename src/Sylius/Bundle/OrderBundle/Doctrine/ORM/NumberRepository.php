@@ -31,4 +31,25 @@ class NumberRepository extends EntityRepository implements NumberRepositoryInter
             return null;
         }
     }
+
+    /**
+     * Looks to see if a order number has been used
+     * @param string $number
+     * @return bool
+     */
+    public function isUsed($number)
+    {
+        try {
+            $this->getQueryBuilder()
+                ->where('order_id = :number')
+                ->setParameter('number', $number)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+            return true;
+        } catch (NoResultException $e) {
+            return false;
+        }
+
+    }
 }
