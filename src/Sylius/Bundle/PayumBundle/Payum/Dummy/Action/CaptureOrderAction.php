@@ -35,7 +35,7 @@ class CaptureOrderAction extends PaymentAwareAction
 
         $paymentDetails = $payment->getDetails();
         if (empty($paymentDetails)) {
-            $order->getPayment()->setDetails(array(
+            $payment->setDetails(array(
                 'captured' => true,
             ));
         }
