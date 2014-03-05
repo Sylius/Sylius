@@ -1,3 +1,5 @@
+{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+
 <div class="tab-pane" id="properties">
     <div id="sylius-assortment-product-properties" class="collection-container" data-prototype="{{ ('<div id="sylius_product_properties___name__">' ~ form_row(form.properties.vars.prototype.property, {'attr': {'class': 'property-chooser'}}))|e }}{{ (form_row(form.properties.vars.prototype.value) ~ '</div>')|e }}">
         {% for propertyForm in form.properties %}
