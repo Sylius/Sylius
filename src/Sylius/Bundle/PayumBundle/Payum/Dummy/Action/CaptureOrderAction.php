@@ -30,8 +30,10 @@ class CaptureOrderAction extends PaymentAwareAction
 
         /** @var OrderInterface $order */
         $order = $request->getModel();
+        $payment = $order->getPayment();
+        $payment->setAmount($order->getTotal());
 
-        $paymentDetails = $order->getPayment()->getDetails();
+        $paymentDetails = $payment->getDetails();
         if (empty($paymentDetails)) {
             $order->getPayment()->setDetails(array(
                 'captured' => true,
