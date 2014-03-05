@@ -133,6 +133,8 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Submitted form is invalid.');
         }
 
+        $item->setUnitPrice($variant->getPrice());
+
         $quantity = $item->getQuantity();
         foreach ($this->cartProvider->getCart()->getItems() as $cartItem) {
             if ($cartItem->equals($item)) {
@@ -148,8 +150,6 @@ class ItemResolver implements ItemResolverInterface
         if ($this->restrictedZoneChecker->isRestricted($product)) {
             throw new ItemResolvingException('Selected item is not available in your country.');
         }
-
-        $item->setUnitPrice($variant->getPrice());
 
         return $item;
     }
