@@ -83,6 +83,16 @@ class ProvinceController extends ResourceController
     }
 
     /**
+     * Get country controller.
+     *
+     * @return ResourceController
+     */
+    protected function getCountryController()
+    {
+        return $this->get('sylius.controller.country');
+    }
+
+    /**
      * Get country repository.
      *
      * @return ObjectRepository
