@@ -3,7 +3,7 @@ Statistics
 
 You can always check `sylius.com/community <http://sylius.com/community>`_ to see an overview of our community at work!
 
-Below, you can find more useful links...
+Below, you can find more useful links:
 
 * Sylius Pull Requests - `pull requests`_
 * Most recent patches - `commits`_

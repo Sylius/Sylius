@@ -1,4 +1,4 @@
-Sylius documentation license
+Sylius Documentation License
 ============================
 
 The Sylius documentation is licensed under a Creative Commons
