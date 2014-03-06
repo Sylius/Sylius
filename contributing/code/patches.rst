@@ -126,13 +126,6 @@ in mind the following:
   coding :doc:`standards <standards>` (use ``git diff --check`` to check for
   trailing spaces -- also read the tip below);
 
-* Add unit tests to prove that the bug is fixed or that the new feature
-  actually works;
-
-* Try hard to not break backward compatibility (if you must do so, try to
-  provide a compatibility layer to support the old way) -- patches that break
-  backward compatibility have less chance to be merged;
-
 * Do atomic and logically separate commits (use the power of ``git rebase`` to
   have a clean and logical history);
 
@@ -140,7 +133,7 @@ in mind the following:
   fixing typos in your own code;
 
 * Never fix coding standards in some existing code as it makes the code review
-  more difficult;
+  more difficult (submit CS fixes as a separate patch);
 
 * Write good commit messages (see the tip below).
 
