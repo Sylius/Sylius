@@ -54,7 +54,7 @@
         "symfony-cmf/menu-bundle":              "1.0.*"
     },
     "require-dev": {
-        "behat/behat":                       "2.4.*@stable",
+        "behat/behat":                       "~2.4",
         "behat/symfony2-extension":          "*",
         "behat/mink-extension":              "*",
         "behat/mink-browserkit-driver":      "*",
@@ -63,7 +63,7 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "2.0.*@dev",
-        "phpunit/phpunit":                   "3.7.x@stable"
+        "phpunit/phpunit":                   "~3.7"
     },
     "scripts": {
         "post-install-cmd": [
