@@ -15,7 +15,7 @@ Before submitting a bug:
   framework;
 
 * Ask for assistance on `stackoverflow.com`_ or on the
-  #sylius `IRC channel`_ if you're not sure if your issue is really a bug.
+  #sylius `IRC channel`_ if you're not sure your issue is really a bug.
 
 If your problem definitely looks like a bug, report it using the official bug
 `tracker`_ and follow some basic rules:
