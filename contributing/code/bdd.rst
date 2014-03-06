@@ -3,9 +3,9 @@ BDD Methodology
 
 .. note::
 
-    This part of documentation is inspired by official `PHPSpec`_ docs.
+    This part of documentation is inspired by the official `PHPSpec`_ docs.
 
-Sylius adopted full-stack BDD methodology for its development processes.
+Sylius adopted the full-stack BDD methodology for its development processes.
 
 According to `Wikipedia`_:
 
@@ -37,11 +37,11 @@ Step 2: Install vendors
 
 .. code-block:: bash
 
-    $ php composer.phar --dev install
+    $ php composer.phar install
 
 .. note::
 
-    Note that the script takes some time to finish.
+    Note that the script takes some time (several minutes) to finish.
 
 .. note::
 
@@ -52,7 +52,7 @@ Step 2: Install vendors
     .. code-block:: bash
 
         $ php installer
-        $ php composer.phar --dev install
+        $ php composer.phar install
 
 Install Selenium2
 ~~~~~~~~~~~~~~~~~
@@ -114,7 +114,7 @@ Behat
 
 We use `Behat`_ for StoryBDD and you should always write new scenarios when adding a feature, or update existing stories to adapt Sylius to bussiness requirments changes.
 
-Sylius is an open source project, so the **client** is not clearly visible at first look. But he is there, he is you and me. Sylius users. We have our needs and Behat helps us understand and satisfy these needs.:
+Sylius is an open source project, so the **client** is not clearly visible at first look. But they are here - the Sylius users. We have our needs and Behat helps us understand and satisfy these needs.
 
 .. note::
 
