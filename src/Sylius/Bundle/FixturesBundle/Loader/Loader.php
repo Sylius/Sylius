@@ -59,5 +59,4 @@ class Loader implements LoaderInterface
 
         return $this->faker;
     }
-
 } 

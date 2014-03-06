@@ -16,8 +16,6 @@ abstract class AbstractBuilder implements BuilderInterface
         $this->faker = $faker;
     }
 
-    abstract public function getSetDefault();
-
     public function getSet($name = 'default')
     {
         $getter = 'getSuite'.ucfirst($name);
@@ -28,9 +26,15 @@ abstract class AbstractBuilder implements BuilderInterface
         throw new \Exception(sprintf('The suite %s has not been created.', $name));
     }
 
-    public function getElement($name)
+    public function getRandomSet()
     {
-        $getter = 'getElement'.ucfirst($name);
+        //TODO
+        return;
+    }
+
+    public function getResource($name)
+    {
+        $getter = 'getResource'.ucfirst($name);
         if (method_exists($this, $getter)) {
             return $this->$getter;
         }
@@ -38,15 +42,15 @@ abstract class AbstractBuilder implements BuilderInterface
         throw new \Exception(sprintf('The element %s has not been created.', $name));
     }
 
-    public function getRandomSet()
-    {
-        //TODO
-        return;
-    }
-
+    /**
+     * Build a resource with the provided data.
+     *
+     * @param array $data
+     * @return mixed
+     */
     protected function buildWithData(array $data)
     {
-        $class = $this->getModelClass();
+        $class = $this->getResourceClass();
         $resource = new $class;
 
         foreach ($data as $key => $value)
@@ -58,6 +62,11 @@ abstract class AbstractBuilder implements BuilderInterface
         return $resource;
     }
 
+    /**
+     * Build a resource with Faker.
+     *
+     * @throws \Exception
+     */
     protected function buildWithFaker()
     {
         throw new \Exception('The method %s has to be implemented before being called.', __METHOD__);

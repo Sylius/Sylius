@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class GroupBuilder extends AbstractBuilder
 {
-    public function getModelClass()
+    public function getResourceClass()
     {
         return 'Sylius\\Bundle\\CoreBundle\\Model\\Group';
     }
