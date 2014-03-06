@@ -79,6 +79,11 @@ must be used instead (where ``XXX`` is the name of the related thing):
 Deprecations
 ------------
 
+.. warning::
+
+    Sylius is the pre-alpha development stage.
+    We release minor version before every larger change, but be prepared for BC breaks to happen until 1.0.0 release.
+
 From time to time, some classes and/or methods are deprecated in the
 framework; that happens when a feature implementation cannot be changed
 because of backward compatibility issues, but we still want to propose a
@@ -89,7 +94,7 @@ A feature is marked as deprecated by adding a ``@deprecated`` phpdoc to
 relevant classes, methods, properties, ...::
 
     /**
-     * @deprecated Deprecated since version 2.X, to be removed in 2.Y. Use XXX instead.
+     * @deprecated Deprecated since version 1.X, to be removed in 1.Y. Use XXX instead.
      */
 
 The deprecation message should indicate the version when the class/method was

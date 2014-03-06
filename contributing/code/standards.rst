@@ -136,7 +136,7 @@ Service Naming Conventions
 * Use lowercase letters for service and parameter names;
 * A group name uses the underscore notation;
 * Each service has a corresponding parameter containing the class name,
-  following the ``SERVICE NAME.class`` convention.
+  following the ``service_name.class`` convention.
 
 Documentation
 -------------
