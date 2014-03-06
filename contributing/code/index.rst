@@ -6,4 +6,9 @@ Contributing Code
 
     bugs
     patches
+    security
+    bdd
+    standards
+    conventions
+    git
     license
