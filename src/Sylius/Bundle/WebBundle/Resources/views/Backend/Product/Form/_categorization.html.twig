@@ -1,3 +1,5 @@
+{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+
 <div class="tab-pane" id="categorization">
 {% for taxonomyForm in form.taxons %}
     {{ form_row(taxonomyForm) }}

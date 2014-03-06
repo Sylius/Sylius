@@ -1,3 +1,5 @@
+{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+
 <div class="tab-pane" id="options">
 {% if form.options is defined %}
     {{ form_row(form.options) }}
