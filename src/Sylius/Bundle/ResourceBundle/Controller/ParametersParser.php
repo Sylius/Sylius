@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -47,6 +47,10 @@ class ParametersParser
 
             if (is_string($value) && 0 === strpos($value, '$')) {
                 $parameters[$key] = $request->get(substr($value, 1));
+            }
+
+            if (is_string($value) && 0 === strpos($value, 'expression:')) {
+                $parameters[$key] = $this->expression->evaluate(substr($value, 11));
             }
         }
 
