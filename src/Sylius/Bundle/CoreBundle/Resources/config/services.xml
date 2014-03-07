@@ -249,7 +249,7 @@
         <service id="sylius.listener.order_item_inventory" class="%sylius.listener.order_item_inventory.class%">
             <argument type="service" id="event_dispatcher" />
             <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="onFlush" />
         </service>
         <service id="sylius.listener.inventory_unit" class="%sylius.listener.inventory_unit.class%">
             <tag name="kernel.event_listener" event="sylius.inventory_unit.pre_state_change" method="updateState" />
