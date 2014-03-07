@@ -1,7 +1,7 @@
 Using the settings in services
 ==============================
 
-You can also load and save the settings in any service. Simply use the **SettingsManager** service, available under the ``sylius.settings_manager`` id.
+You can also load and save the settings in any service. Simply use the **SettingsManager** service, available under the ``sylius.settings.manager`` id.
 
 Loading the settings
 --------------------
@@ -39,7 +39,7 @@ Injecting the settings manager is as simple as using any other service.
 .. code-block:: xml
 
     <service id="acme.tax_applicator" class="Acme\ShopBundle\Taxation\TaxApplicator">
-        <argument type="service" id="sylius.settings_manager" />
+        <argument type="service" id="sylius.settings.manager" />
     </service>
 
 Saving the settings
