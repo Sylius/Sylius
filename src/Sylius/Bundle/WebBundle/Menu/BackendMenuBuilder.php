@@ -151,6 +151,13 @@ class BackendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.archetypes', $section)));
         }
 
+        if ($this->authorizationChecker->isGranted('sylius.customization.index')) {
+            $child->addChild('customization', array(
+                'route' => 'sylius_backend_customization_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-list-alt'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customizations', $section)));
+        }
+
         if (!$child->hasChildren()) {
             $menu->removeChild('assortment');
         }

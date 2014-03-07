@@ -74,6 +74,7 @@ sylius:
                 report: Reports
                 attributes: Configure attributes
                 archetypes: Product archetypes
+                customizations: Configure customizations
                 sales: Orders
                 security_settings: Security settings
                 shipments: Shipments

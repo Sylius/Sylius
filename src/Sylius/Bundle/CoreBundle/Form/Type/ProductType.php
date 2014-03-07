@@ -59,6 +59,10 @@ class ProductType extends BaseProductType
                 'empty_value' => '---',
                 'label'       => 'sylius.form.product.restricted_zone',
             ))
+            ->add('customizations', 'sylius_customization_choice', array(
+                'required'     => false,
+                'multiple'     => true
+            ))
         ;
     }
 }

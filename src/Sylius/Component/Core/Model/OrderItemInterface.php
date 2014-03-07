@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customization\Model\CustomizationSubjectInstanceInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -20,7 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterface
+interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterface, CustomizationSubjectInstanceInterface
 {
     /**
      * Get the product.

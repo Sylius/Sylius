@@ -124,6 +124,8 @@ class LoadProductsData extends DataFixture
         $product->addOption($this->getReference('Sylius.Option.T-Shirt size'));
         $product->addOption($this->getReference('Sylius.Option.T-Shirt color'));
 
+        $product->addCustomization($this->getReference('Sylius.Customization.Firstname'));
+
         $this->generateVariants($product);
 
         $this->setReference('Sylius.Product.'.$i, $product);
@@ -168,6 +170,8 @@ class LoadProductsData extends DataFixture
 
         $product->addOption($this->getReference('Sylius.Option.Sticker size'));
 
+        $product->addCustomization($this->getReference('Sylius.Customization.Message'));
+
         $this->generateVariants($product);
 
         $this->setReference('Sylius.Product.'.$i, $product);
@@ -204,6 +208,8 @@ class LoadProductsData extends DataFixture
         $this->addAttribute($product, 'Mug material', $randomMugMaterial);
 
         $product->addOption($this->getReference('Sylius.Option.Mug type'));
+
+        $product->addCustomization($this->getReference('Sylius.Customization.Engraving'));
 
         $this->generateVariants($product);
 

@@ -13,4 +13,11 @@
             {% endfor %}
         </ul>
     {% endif %}
+    {% if not product.customizations.empty and item is defined %}
+        <ul class="list-unstyled">
+            {% for customizationValue in item.customizationValues %}
+                <li><strong>{{ customizationValue.customization.name }}</strong>: {{ customizationValue.value }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
