@@ -28,6 +28,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->where('o.taxonomy = :taxonomy')
             ->andWhere('o.parent IS NOT NULL')
             ->setParameter('taxonomy', $taxonomy)
+            ->orderBy('o.left')
             ->getQuery()
             ->getResult()
         ;
