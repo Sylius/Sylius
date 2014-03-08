@@ -49,8 +49,8 @@ class ParametersParser
                 $parameters[$key] = $request->get(substr($value, 1));
             }
 
-            if (is_string($value) && 0 === strpos($value, 'expression:')) {
-                $parameters[$key] = $this->expression->evaluate(substr($value, 11));
+            if (is_string($value) && 0 === strpos($value, 'expr:')) {
+                $parameters[$key] = $this->expression->evaluate(substr($value, 5));
             }
         }
 
