@@ -132,29 +132,13 @@ knp_gaufrette:
 liip_imagine:
     data_root: %kernel.root_dir%/../web/media/image
     filter_sets:
-        sylius_16x16:
+        sylius_small:
             filters:
-                thumbnail: { size: [16, 16], mode: outbound }
-        sylius_50x40:
+                thumbnail: { size: [120, 90], mode: outbound }
+        sylius_medium:
             filters:
-                thumbnail: { size: [50, 40], mode: outbound }
-        sylius_90x60:
-            filters:
-                thumbnail: { size: [90, 60], mode: outbound }
-        sylius_200x200:
-            filters:
-                thumbnail: { size: [200, 200], mode: outbound }
-
-        sylius_262x255:
-            filters:
-                thumbnail: { size: [265, 255], mode: outbound }
-        sylius_310x300:
-            filters:
-                thumbnail: { size: [310, 300], mode: outbound }
-        sylius_610x600:
-            filters:
-                thumbnail: { size: [610, 600], mode: outbound }
-        sylius_gallery:
+                thumbnail: { size: [240, 180], mode: outbound }
+        sylius_large:
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
 

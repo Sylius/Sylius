@@ -25,7 +25,7 @@
                 <div class="media">
                     <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left"
                        title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
-                        <img src="{{ product.image ? product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
+                        <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">

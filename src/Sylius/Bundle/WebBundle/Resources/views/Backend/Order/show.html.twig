@@ -98,7 +98,7 @@
             <td class="picture text-center">
                 <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}"
                    title="View {{ product.name|escape('html_attr') }} details.">
-                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_90x60') : 'http://placehold.it/90x60' }}" alt="" class="imgmedia-object" />
+                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="" class="imgmedia-object" />
                 </a>
             </td>
             <td class="info">
