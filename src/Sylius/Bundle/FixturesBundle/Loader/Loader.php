@@ -1,62 +1,75 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\FixturesBundle\Loader;
 
-use Faker\Factory as FakerFactory;
 use Doctrine\Common\Collections\ArrayCollection;
-use Faker\Generator;
 use Sylius\Bundle\FixturesBundle\Builder\BuilderInterface;
-use Sylius\Bundle\FixturesBundle\Builder\GroupBuilder;
 
+/**
+ * Data set loader.
+ *
+ * @author Julien Janvier <j.janvier@gmail.com>
+ */
 class Loader implements LoaderInterface
 {
     /**
-     * Faker.
-     *
-     * @var Generator
+     * @var array|BuilderInterface
      */
-    protected $faker;
+    protected $builders = array();
 
-    public static function loadSet($type, $suite = 'default')
+    /**
+     * {@inheritdoc}
+     */
+    public function loadSet($type, $name = 'default')
     {
-        $builder = self::getBuilder($type);
+        $builder = $this->getBuilder($type);
 
-        if (null === $suite)
+        if (null === $name)
         {
-            return $builder->getRandomSet();
+            return $builder->getRandomDataSet();
         }
 
-        if (null !== $builder->getSet($suite)) {
-            return $builder->getSet($suite);
+        if (null !== $builder->getDataSet($name)) {
+            return $builder->getDataSet($name);
         }
 
         return new ArrayCollection();
     }
 
     /**
-     * @param $type
-     * @return BuilderInterface
-     * @throws \Exception
+     * {@inheritdoc}
      */
-    protected function getBuilder($type)
+    public function getBuilder($type)
     {
-        switch ($type) {
-            case 'group':
-                return new GroupBuilder();
-            default:
-                throw new \Exception(sprintf('Data of type %s is not handled yet', $type));
+        if (array_key_exists($type.'builder', $this->builders)) {
+            return $this->builders[$type.'builder'];
         }
+
+        throw new \Exception(sprintf('Data of type %s is not handled yet', $type));
     }
 
     /**
-     * @return Generator
+     * {@inheritdoc}
      */
-    protected function getFaker()
+    public function setBuilder(BuilderInterface $builder)
     {
-        if (null === $this->faker) {
-            $this->faker = FakerFactory::create();
+        $className = strtolower(get_class($builder));
+        if (false !== $pos = strrpos($className, '\\')) {
+            $className = substr($className, $pos + 1);
         }
 
-        return $this->faker;
+        $this->builders[$className] = $builder;
+
+        return $this;
     }
+
 } 

@@ -13,8 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM2;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Faker\Factory as FakerFactory;
-use Sylius\Bundle\FixturesBundle\Loader\Loader;
+use Sylius\Bundle\FixturesBundle\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -32,15 +31,10 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
      */
     protected $container;
 
-    protected $loader;
-
     /**
-     * Constructor.
+     * @var LoaderInterface
      */
-    public function __construct()
-    {
-        $this->loader = new Loader();
-    }
+    protected $loader;
 
     /**
      * {@inheritdoc}
@@ -48,6 +42,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+        $this->loader = $container->get('sylius.fixtures_loader');
     }
 
     /**

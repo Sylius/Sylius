@@ -1,17 +1,29 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\FixturesBundle\Builder;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * Group data set builder.
+ *
+ * @author Julien Janvier <j.janvier@gmail.com>
+ */
 class GroupBuilder extends AbstractBuilder
 {
-    public function getResourceClass()
-    {
-        return 'Sylius\\Bundle\\CoreBundle\\Model\\Group';
-    }
-
-    public function getSetDefault()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetDefault()
     {
         $groups = new ArrayCollection();
         $groups->add($this->build('Group 1'));
@@ -21,7 +33,7 @@ class GroupBuilder extends AbstractBuilder
         return $groups;
     }
 
-    public function getSetScenarioBlaBliBlo()
+    public function getDataSetScenarioBlaBliBlo()
     {
         $groups = new ArrayCollection();
         $groups->add($this->build('Group 1 for Behat scenario BlaBliBlo'));
@@ -30,10 +42,13 @@ class GroupBuilder extends AbstractBuilder
         return $groups;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildWithFaker()
     {
         return $this->buildWithData(array(
-                'name' => $this->faker->word(),
+                'name' => $this->getFaker()->word(),
             )
         );
     }
