@@ -123,16 +123,16 @@ class InventoryHandler implements InventoryHandlerInterface
 
             foreach ($units as $unit) {
                 if (in_array($unit->getInventoryState(), array(InventoryUnitInterface::STATE_ONHOLD, InventoryUnitInterface::STATE_CHECKOUT))) {
-                    $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-
                     if (InventoryUnitInterface::STATE_ONHOLD === $unit->getInventoryState()) {
                         $quantity++;
                     }
+                    
+                    $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
                 }
             }
 
-            $this->inventoryOperator->decrease($units);
             $this->inventoryOperator->release($item->getVariant(), $quantity);
+            $this->inventoryOperator->decrease($units);
         }
     }
 
