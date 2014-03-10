@@ -25,7 +25,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderInventoryListener
 {
     /**
-     * Order  processor.
+     * Inventory handler.
      *
      * @var InventoryHandlerInterface
      */
