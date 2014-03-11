@@ -55,20 +55,19 @@ class OrderItemInventoryListener
     public function onFlush(OnFlushEventArgs $args)
     {
         $em = $args->getEntityManager();
+        $eventManager = $em->getEventManager();
         $uow = $em->getUnitOfWork();
+
+        $eventManager->removeEventListener('onFlush', $this);
 
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
             if ($this->supports($entity)) {
                 $this->eventDispatcher->dispatch('sylius.order_item.pre_update', new GenericEvent($entity));
-
-                foreach ($entity->getInventoryUnits() as $unit) {
-                    $em->persist($unit);
-                    $uow->computeChangeSet($em->getClassMetadata(get_class($unit)), $unit);
-                }
-
-                $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($entity)), $entity);
+                $uow->commit($entity);
             }
         }
+
+        $eventManager->addEventListener('onFlush', $this);
     }
 
     protected function supports($entity)
