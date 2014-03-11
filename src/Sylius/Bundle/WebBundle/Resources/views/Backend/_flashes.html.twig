@@ -3,7 +3,7 @@
     {% for message in app.session.flashbag.get(type) %}
         {% set type = type == 'warning' ? 'block' : type %}
         <div class="alert alert-{{ type }}">
-            <button type="button" class="close" aria-hidden="true">&times;</button>
+            <button type="button" data-dismiss="alert" class="close" aria-hidden="true">&times;</button>
             {{ message }}
         </div>
     {% endfor %}
