@@ -43,6 +43,7 @@
             <argument type="service" id="sylius.manager.parameter" />
             <argument type="service" id="sylius.repository.parameter" />
             <argument type="service" id="sylius.settings.cache" />
+            <argument type="service" id="validator" />
         </service>
 
         <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%" />

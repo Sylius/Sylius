@@ -26,10 +26,11 @@ class SettingsManagerSpec extends ObjectBehavior
         SchemaRegistryInterface $registry,
         Cache $cache,
         ObjectManager $manager,
-        RepositoryInterface $repository
+        RepositoryInterface $repository,
+        ValidatorInterface $validator
     )
     {
-        $this->beConstructedWith($registry, $manager, $repository, $cache);
+        $this->beConstructedWith($registry, $manager, $repository, $cache, $validator);
     }
 
     function it_should_be_initializable()
