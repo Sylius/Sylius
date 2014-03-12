@@ -95,7 +95,7 @@ class Parameter implements ParameterInterface
      */
     public function getValue()
     {
-        return null === $this->value ? null : unserialize($this->value);
+        return $this->value;
     }
 
     /**
@@ -103,7 +103,7 @@ class Parameter implements ParameterInterface
      */
     public function setValue($value)
     {
-        $this->value = serialize($value);
+        $this->value = $value;
 
         return $this;
     }
