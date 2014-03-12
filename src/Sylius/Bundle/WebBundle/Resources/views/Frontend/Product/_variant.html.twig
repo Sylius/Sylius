@@ -1,7 +1,6 @@
 {% set product = variant.product %}
-{% set image = product.image ? (app.request.scheme ~ '://' ~ app.request.httpHost ~ product.image.path|imagine_filter('sylius_90x60')) : 'http://placehold.it/90x60' %}
 <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail pull-left" style="margin-right: 15px;">
-    <img src="{{ image }}" alt="{{ product.name }}" />
+    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_90x60', true) : 'http://placehold.it/90x60' }}" alt="{{ product.name }}" />
 </a>
 <div>
     <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><strong>{{ product.name }}</strong></a>
