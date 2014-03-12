@@ -65,12 +65,12 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      *
-     * Validator to make validate parameter Entities before saving
+     * Validator instance
      * 
      * @var ValidatorInterface
      */
     protected $validator;
-    
+
     /**
      * Constructor.
      *
@@ -78,6 +78,7 @@ class SettingsManager implements SettingsManagerInterface
      * @param ObjectManager           $parameterManager
      * @param RepositoryInterface     $parameterRepository
      * @param Cache                   $cache
+     * @param ValidatorInterface      $validator
      */
     public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
     {
@@ -121,6 +122,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * {@inheritdoc}
+     * @throws ValidatorException
      */
     public function saveSettings($namespace, Settings $settings)
     {
@@ -151,16 +153,21 @@ class SettingsManager implements SettingsManagerInterface
         foreach ($parameters as $name => $value) {
             if (isset($persistedParametersMap[$name])) {
                 $persistedParametersMap[$name]->setValue($value);
-                $this->validateParameter($persistedParametersMap[$name]);
             } else {
                 $parameter = $this->parameterRepository->createNew();
-                
+
                 $parameter
                     ->setNamespace($namespace)
                     ->setName($name)
                     ->setValue($value)
                 ;
-                $this->validateParameter($parameter);
+
+                $errors = $this->validator->validate($parameter);
+                /* @var $errors ConstraintViolationListInterface */
+                if(0 < $errors->count()) {
+                    throw new ValidatorException($errors->get(0)->getMessage());
+                }
+
                 $this->parameterManager->persist($parameter);
             }
         }
@@ -168,24 +175,6 @@ class SettingsManager implements SettingsManagerInterface
         $this->parameterManager->flush();
 
         $this->cache->save($namespace, $parameters);
-    }
-    
-    /**
-     * Validate Paramter object
-     * 
-     * @param ParameterInterface $parameter
-     * @return boolean
-     * @throws ValidatorException An exception containing the first constraint failure message
-     */
-    private function validateParameter(ParameterInterface $parameter){
-        $errors = $this->validator->validate($parameter);
-        /* @var $errors ConstraintViolationListInterface */
-
-        if($errors->count() > 0){
-            throw new ValidatorException($errors->get(0)->getMessage());
-        }
-        
-        return true;
     }
 
     /**

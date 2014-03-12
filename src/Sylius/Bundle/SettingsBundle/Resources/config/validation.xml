@@ -39,12 +39,6 @@
                 <option name="maxMessage">sylius.parameter.name.max_length</option>
             </constraint>
         </property>
-        <property name="value">
-            <constraint name="Length">
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.parameter.value.max_length</option>
-            </constraint>
-        </property>
     </class>
 
 </constraint-mapping>

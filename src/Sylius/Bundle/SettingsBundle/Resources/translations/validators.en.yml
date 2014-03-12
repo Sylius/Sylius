@@ -8,5 +8,3 @@ sylius:
             max_length: Parameter name must not be longer than 255 characters|Parameter name must not be longer than 255 characters.
             min_length: Parameter name must be at least 2 characters long|Parameter name must be at least 2 characters long.
             not_blank: Please enter a name for this parameter.
-        value:
-            max_length: Parameter value must not be longer than 255 characters|Parameter name must not be longer than 255 characters.

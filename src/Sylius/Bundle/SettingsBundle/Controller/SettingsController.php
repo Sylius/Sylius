@@ -47,15 +47,15 @@ class SettingsController extends Controller
         $form->setData($settings);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            try{
+            $messageType = 'success';
+            try {
                 $manager->saveSettings($namespace, $form->getData());
                 $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
-                $request->getSession()->getFlashBag()->add('success', $message);
             } catch (ValidatorException $exception) {
-                $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'flashes');
-                $request->getSession()->getFlashBag()->add('error', $message);
+                $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'validators');
+                $messageType = 'error';
             }
-
+            $request->getSession()->getFlashBag()->add($messageType, $message);
 
             if ($request->headers->has('referer')) {
                 return $this->redirect($request->headers->get('referer'));
