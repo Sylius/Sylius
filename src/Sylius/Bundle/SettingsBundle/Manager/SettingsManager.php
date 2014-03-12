@@ -64,7 +64,6 @@ class SettingsManager implements SettingsManagerInterface
     protected $resolvedSettings = array();
 
     /**
-     *
      * Validator instance
      * 
      * @var ValidatorInterface
