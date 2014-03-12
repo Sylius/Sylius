@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      not_blank: Prosím zadajte mesto.
+    country:
+      not_blank: Prosím vyberte krajinu.
+    first_name:
+      not_blank: Prosím zadajte vaše meno.
+    last_name:
+      not_blank: Prosím zadajte vaše priezvisko.
+    postcode:
+      not_blank: Prosím zadajte vaše PSČ.
+    street:
+      not_blank: Prosím zadajte ulicu.
+  country:
+    iso_name:
+      not_blank: Prosím zadajte ISO kód krajiny.
+    name:
+      not_blank: Prosím zadajte názov krajiny.
+  zone:
+    name:
+      not_blank: Prosím zadajte názov zóny.

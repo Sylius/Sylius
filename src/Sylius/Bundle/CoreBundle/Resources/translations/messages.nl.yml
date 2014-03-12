@@ -1,29 +1,59 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Selecteer verzendmethode.
   form:
+    action:
+      add_product_configuration:
+        price: Stukprijs
+        quantity: Hoeveelheid
+        variant: Variant
+    block:
+      body: Inhoud
+      id: ID
+      title: Titel
+    cart:
+      coupon: Coupon
     checkout:
       addressing:
-        different_billing_address: sylius.form.checkout.addressing.different_billing_address
+        different_billing_address: Gebruik een ander factuuradres?
       payment_method: Betalingsmethode
-      shipping_method: Verzendingsmethode
+      shipping_method: Verzendmethode
+    group:
+      name: Naam
+      roles: Rollen
     image:
       file: Afbeelding
+    locale:
+      code: Code
+      enabled: Toegestaan
     order_filter:
       created_at_from: Van
       created_at_to: Tot
       number: Nummer
       total_from: Van
       total_to: Tot
+    page:
+      body: Inhoud
+      id: ID
+      title: Titel
     product:
+      restricted_zone: Beperkte zone
+      shipping_category: Verzend categorie
       short_description: Korte omschrijving
       tax_category: Belastingcategorie
       variant_selection_method: Variant selectie methode
     product_filter:
       name: Naam
+      sku: SKU
     settings:
       general:
+        currency: Standaard valuta
+        locale: Taal
         meta_description: Meta omschrijving
         meta_keywords: Meta sleutelwoorden
         title: Pagina titel
@@ -32,11 +62,32 @@ sylius:
     shipment_filter:
       created_at_from: Van
       created_at_to: Tot
+      number: Ordernummer
+      shipping_address: Verzend naar naam
     shipping_method:
-      zone: sylius.form.shipping_method.zone
+      zone: Zone
+    taxon:
+      file: Selecteer afbeelding
+    taxonomy:
+      file: Selecteer afbeelding
     user:
-      different_billing_address: sylius.form.checkout.addressing.different_billing_address
+      billing_address: Factuuradres
+      different_billing_address: Gebruik een ander adres voor facturering?
+      enabled: Actief
+      first_name: Voornaam
+      groups: Groepen
+      last_name: Achternaam
+      password: Wachtwoord
+      shipping_address: Bezorgadres
+    user_filter:
+      query: Zoeken
     variant:
       available_on_demand: Beschikbaar op aanvraag
+      depth: Diepte
+      height: Hoogte
       images: Afbeeldingen
-      on_hand: Huidige stock
+      on_hand: Huidige voorraad
+      price: Prijs
+      sku: SKU
+      weight: Gewicht
+      width: Breedte

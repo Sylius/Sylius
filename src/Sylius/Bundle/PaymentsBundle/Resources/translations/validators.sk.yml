@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'Meno držiteľa karty musí obsahovať minimálne {{ limit }} znakov.'
+      not_blank: Prosím zadajte meno držiteľa karty.
+    expiry_month:
+      max_range: 'Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.'
+      min_range: 'Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.'
+      not_blank: Prosím vyberte mesiac expirácie.
+    number:
+      not_blank: Prosím zadajte číslo karty.
+      luhn: Zadané číslo kreditnej karty je chybné.
+    security_code:
+      not_blank: Prosím zadajte bezpečnostný kód.

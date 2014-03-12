@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Het winkelwagentje is bijgewerkt.
+    cart_clear_completed: Het winkelwagentje is leeggemaakt.
+    item_add_completed: Product is toegevoegd aan het winkelwagentje.
+    item_remove_completed: Product is verwijderd uit het winkelwagentje.
+    item_add_error: Er is een fout opgetreden bij het toevoegen van een product aan het winkelwagentje.
+    item_remove_error: Er is een fout opgetreden bij het verwijderen van een product uit het winkelwagentje.

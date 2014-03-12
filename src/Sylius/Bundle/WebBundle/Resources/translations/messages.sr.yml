@@ -2,9 +2,33 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    address:
+      action:
+        billing: Postaviti kao podrazumevanu adresu plaćanja
+        create: Kreiraj novu adresu
+        delete: Obrisati
+        edit: Izmeniti
+        shipping: Postaviti kao podrazumevanu adresu isporuke
+      create: Kreiraj novu adresu
+      default:
+        billing: Podrazumevana adresa plaćanja
+        no_billing: Nema podrazumevane adrese plaćanja
+        no_shipping: Nema podrazumevane adrese isporuke
+        shipping: Podrazumevana adresa isporuke
+      empty: Još uvek niste kreirali adresu.
+      list: Sve vaše adrese
+      update: Izmeni moju adresu
+    order:
+      invoice: Faktura
+      shipment:
+        pending: Na čekanju
+      total: Ukupno
+    title: Moj nalog
   add_to_cart: Dodaj u korpu
   address:
     city: Grad
+    company: Kompanija
     country: Zemlja
     firstname: Ime
     lastname: Prezime
@@ -27,10 +51,17 @@ sylius:
       revenue: Prošlonedeljna zarada
       subheader: Pregled prodavnice
     logout: Odjavi se
+    quick_links:
+      add_product: Novi proizvod
+      users: Korisnici
+  block:
+    id: ID
+    title: Naslov
   breadcrumb:
     assortment: Asortiman
     country:
       index: Zemlje
+    edit: Izmeniti
     order:
       index: Narudžbine
     payment:
@@ -41,12 +72,16 @@ sylius:
       index: Promocije
     shipment:
       index: Pošiljke
+    update: Izmeniti
+    user:
+      index: Korisnici
     zone:
       index: Zone
   cancel: Otkaži
   cart:
     empty: Korpa je prazna
     summary:
+      add_coupon: U redu
       checkout: Završite kupovinu
       clear: Izpraznite korpu
       grand_total: Sveukupno
@@ -104,10 +139,14 @@ sylius:
       register: Registrujte se
     shipping:
       header: Način dostave
+  confirmation:
+    message: Da li želite da obrišete ovu stavku?
+    title: Potvrda
   country:
     add_province: Dodaj provinciju
     create: Dodaj zemlju
     create_header: Nova zemlja
+    id: ID
     index_header: Zemlje
     iso_name: ISO kod
     manage: Upravljaj zemljama
@@ -116,18 +155,34 @@ sylius:
     show_header: Detalji zemlje
     update_header: Izmenite zemlju
   create: Kreiraj
+  created_at: Kreirano
   delete: Izbriši
+  deleted: Obrisano
   edit: Ažuriraj
   email: E-Pošta
+  exchange_rate:
+    currency: Valuta
+    id: ID
+    index_header: Kursna lista
   form:
     choose_file: Fajl
+    frontend:
+      password:
+        confirmation: Potvrda
     login:
       password: Lozinka
+    profile:
+      firstName: Ime
+      lastName: Prezime
   gallery:
     next: Sledeća
     previous: Predhodna
     slideshow: Galerija
   generate: Generiši
+  group:
+    id: ID
+    name: Ime
+    roles: Uloge
   homepage:
     splash:
       headline: Dobrodošli u Sylius
@@ -165,6 +220,7 @@ sylius:
     create_header: Nova narudžbina
     created_at: Kreirano
     general_info: Opste informacije
+    id: ID
     index_header: Trenutne narudžbine
     inventory_tracking: Pracenje zaliha
     items_total: Ukupno proizvoda
@@ -195,6 +251,7 @@ sylius:
     user: Korisnik
   shipment:
     created_at: napravljeno
+    id: ID
     index_header: Isporuke
     inventory_state: stanje zaliha
     manage: Upravljajte pošiljkama
@@ -206,6 +263,7 @@ sylius:
     order: narudžbina
     show_header: Detalji pošiljke
     state: stanje
+    update: Izmeniti
     updated_at: ažurirano
   order_item:
     quantity: Količina
@@ -213,12 +271,15 @@ sylius:
     total: Ukupno
     unit_price: Cena po komadu
   out_of_stock: Nema na lageru
+  page:
+    id: ID
   password: Lozinka
   payment:
     amount: Količina
     create: Kreiraj plaćanje
     create_header: Novo plaćanje
     created_at: Kreirano
+    id: ID
     index_header: Plaćanje
     method: Metod
     no_results: Nisu konfigurisana plaćanja.
@@ -229,6 +290,7 @@ sylius:
     create_header: Novi metod plaćanja
     enabled: Aktivno?
     gateway: kapija
+    id: ID
     index_header: Metod plaćanja
     name: Ime
     no_results: Nema konfigurisanih metoda plaćanja.
@@ -282,6 +344,7 @@ sylius:
     created_at: Kreirano
     description: Opis
     ends_at: Završava se
+    id: ID
     index_header: Trenutne promocije
     manage: Upravljajte promocijama
     name: Ime
@@ -343,6 +406,7 @@ sylius:
   shipping_category:
     create: Nova kategorija slanja
     create_header: Nova kategorija slanja
+    id: ID
     index_header: Kategorije slanja
     manage: Upravljajte kategorijama slanja
     name: Ime
@@ -355,6 +419,7 @@ sylius:
     create: Novi način dostave
     create_header: Novi način dostave
     enabled: Aktivno?
+    id: ID
     index_header: Načini dostave
     manage: Upravljajte načinima dostave
     name: Ime
@@ -376,6 +441,7 @@ sylius:
     create: Kreirajte kategoriju poreza
     create_header: Nova kategorija poreza
     description: Opis
+    id: ID
     index_header: Kategorije poreza
     manage: Upravljajte kategorijama poreza
     name: Ime
@@ -423,6 +489,7 @@ sylius:
       all: Prikaz svih korisnika
       unconfirmed: Nepotvrđeni nalozi
     general_info: 'Korisnik "%username%"'
+    id: ID
     index_header: 'Korisnici <small>Lista svih registrovanih korisnika</small>'
     last_login: Poslednje prijavljivanje
     no_results: Nema korisnika za prikaz.

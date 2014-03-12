@@ -4,11 +4,15 @@
 sylius:
   shipping_category:
     name:
-      max_length: "Le nom de la catégorie d'expédition doit avoir au maximum {{ limit }} caractères."
-      min_length: "Le nom de la catégorie d'expédition doit avoir au minimum {{ limit }} caractères."
-      not_blank: "Veuillez entrer le nom de la catégorie d'expédition."
+      max_length: 'Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.'
+      min_length: 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.'
+      not_blank: Veuillez entrer le nom de la catégorie de livraison.
   shipping_method:
+    calculator:
+      max_length: Longueur maximale
+      min_length: Longueur minimale
+      not_blank: Non vide
     name:
-      max_length: "Le nom de la méthode d'expédition doit avoir au maximum {{ limit }} caractères."
-      min_length: "Le nom de la méthode d'expédition doit avoir au minimum {{ limit }} caractères."
-      not_blank: "Veuillez entrer le nom de la méthode d'expédition."
+      max_length: 'Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.'
+      min_length: 'Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.'
+      not_blank: Veuillez entrer le nom de la méthode de livraison.

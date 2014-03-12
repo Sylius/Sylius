@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
 sylius:
   flashes:
     installed: Sylius został pomyślnie zainstalowany.
@@ -57,3 +58,4 @@ sylius:
       welcome:
         content: '<p>Witamy w instalatorze Syliusa.</p>'
         header: 'Witamy w instalatorze <small>Syliusa</small>'
+€: €

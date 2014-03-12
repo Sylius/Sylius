@@ -12,12 +12,28 @@ sylius:
         percentage: Porcentaje
       type: Tipo
     rule:
+      taxonomy_configuration:
+        taxons: Taxonomías
+        exclude: Excluir
       item_count_configuration:
         count: Contador
         equal: Igual
       item_total_configuration:
         amount: Cantidad
         equal: Igual
+      nth_order_configuration:
+        nth: Enésimo
+      user_loyality_configuration:
+        time: Hora
+        unit:
+          days: Días
+          weeks: Semanas
+          months: Meses
+          years: Años
+          0: Unidad
+        after: Usuario creado después de este período
+      shipping_country_configuration:
+        country: País
       type: Tipo
     coupon:
       code: Código

@@ -1,3 +1,200 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  account:
+    address:
+      action:
+        create: Opret en ny adresse
+        delete: Slet
+        edit: Rediger
+        shipping: Angiv som standard leveringsadresse
+      create: Opret en ny adresse
+      default:
+        billing: Standard betalingsadresse
+        no_billing: Ingen standard betalingsadresse
+        no_shipping: Ingen standard leveringsadresse
+        shipping: Standard leveringsadresse
+      empty: Du har endnu ikke oprettet nogle adresser.
+      list: Alle dine adresser
+      update: Rediger min adresse
+    home:
+      outline: Nyd alle de funktioner som er tilgængelige på din personlige oversigt, til at se, spore og håndtere al din data.
+      since: Du er kunde siden
+      welcome: Velkommen til din personlige oversigt
+    order:
+      created_at: Placeret hos
+      details: Detaljer for din ordre
+      download_invoice: Download din faktura
+      empty: Du har endnu ikke placeret nogle ordrer.
+      invoice: Faktura
+      list: Alle dine ordrer
+      shipment:
+        pending: Afventende
+        ready: 'Klar siden %at%'
+        returned: 'Returneret %at%'
+        shipped: 'Afsendt %at%'
+      total: Total
+      tracking_number: Sporingsnummer
+    title: Min konto
+  add_to_cart: Tilføj til kurv
+  address:
+    city: By
+    company: Firma
+    country: Land
+    firstname: Fornavn
+    lastname: Efternavn
+    postcode: Postnummer
+    province: Provins
+    street: Gade
+  alert:
+    error: Fejl
+    info: Oplysninger
+    success: Succes
+    warning: Advarsel
+  backend:
+    alert:
+      info: Oplysninger
+    dashboard:
+      chart_order_count: Antal af ordrer
+      chart_order_total: Ordreværdi
+      header: Administration dashboard
+      orders: Sidste uges ordrer
+      revenue: Sidste uges indtægter
+  breadcrumb:
+    edit: Rediger
+    shipping_method:
+      index: Fragtmetoder
+    tax_category:
+      index: Momskategorier
+    tax_rate:
+      index: Momssatser
+    taxation_settings: Indstillinger for beskatning
+    update: Rediger
+    user:
+      index: Brugere
+    zone:
+      index: Zoner
+  browse_products: Gennemse produkter
+  cancel: Anuller
+  cart:
+    empty: Din kurv er tom
+    summary:
+      add_coupon: OK
+      checkout: Kassen
+      clear: Tøm kurv
+      product: Produkt
+      quantity: Antal
+      save: Gem
+      total: Total
+      unit_price: Pris
+    summary_header: Indkøbskurv oversigt
+    total_items: '1 ting | %count% ting'
+  checkout:
+    back: Tilbage
+    finalize:
+      address:
+        city: By
+        country: Land
+        firstname: Fornavn
+        lastname: Efternavn
+        postcode: Postnummer
+        province: Provins
+        street: Gade
+      header: Ordre resume
+      order:
+        billing_address: Faktureringsadresse
+        items_total: Varer total
+        no_items: Denne ordre indeholder ikke nogen varer
+        no_promotion: Ingen kampagnekode
+        no_shipping_charges: Ingen forsendelsesomkostninger
+        shipping_address: Leveringsadresse
+        shipping_charges: Forsendelsesomkostninger
+        shipping_total: Forsendelse i alt
+        taxes: Moms
+        total: Total
+      order_item:
+        quantity: Antal
+        total: Total
+        unit_price: Enhedspris
+  exchange_rate:
+    no_results: Der er ingen valutakurser til at vise.
+    rate: sats
+    updated_at: sidste opdatering
+  filter: Filter
+  form:
+    choose_file: Vælg Arkiv
+    frontend:
+      password:
+        confirmation: Bekræftelse
+        current: Nuværende adgangskode
+        new: Ny adgangskode
+        title: Ændre din adgangskode
+      profile:
+        title: Redigere dine personlige oplysninger
+    login:
+      email: Email
+      password: Adgangskode
+    option_value:
+      add_value: Tilføj værdi
+    profile:
+      email: Email
+      firstName: Fornavn
+      lastName: Efternavn
+  gallery:
+    next: Næste
+    previous: Forrige
+  generate: Generer
+  group:
+    create: Opret gruppe
+    id: ID
+    index_header: Grupper
+    name: Navn
+    roles: Roller
+    update_header: Rediger gruppe
+  hide_deleted: Skjul slettede
+  history:
+    0: Historie
+    action: Handling
+    author: Forfatter
+    data: Data
+    logged_at: Logget på
+    version: Version
+  homepage:
+    splash:
+      headline: Velkommen til Sylius
+      subheadline: Moderne ecommerce for Symfony2
+  inventory_unit:
+    created_at: Oprettet
+    inventory_state: Lagerstatus
+    name: Navn
+    updated_at: Sidste opdatering
+  locale:
+    code: Kode
+    enabled: Aktiveret
+  option:
+    updated_at: sidste opdatering
+  order:
+    items_total: Varer total
+    no_items: Denne ordre indeholder ikke nogen varer
+    no_shipping_charges: Ingen forsendelsesomkostninger
+    shipping_charges: Forsendelsesomkostninger
+    shipping_total: Forsendelse i alt
+    taxes: Moms
+    total: Total
+  shipment:
+    inventory_state: Lagerstatus
+    update: Rediger
+  order_item:
+    quantity: Antal
+    sellable: Produkt
+    total: Total
+  product:
+    tabs:
+      product: Produkt
+  property:
+    updated_at: sidste opdatering
+  prototype:
+    updated_at: sidste opdatering
+  stockable:
+    updated_at: sidste opdatering

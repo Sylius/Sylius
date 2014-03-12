@@ -4,13 +4,13 @@
 sylius:
   tax_category:
     name:
-      not_blank: Voer een belastingscategorie naam in.
+      not_blank: Voer een belastingcategorie naam in.
   tax_rate:
     category:
-      not_blank: Selecteer een belastingscategorie.
+      not_blank: Selecteer een belastingcategorie.
     name:
-      not_blank: Voer een belastingtarief naam in.
+      not_blank: Voer een belastingdruk naam in.
     amount:
-      not_blank: Voer een belastingtarief hoeveelheid in.
+      not_blank: Voer een belastingdruk hoeveelheid in.
     calculator:
-      not_blank: Selecteer een belastingsberekening.
+      not_blank: Selecteer een belasting calculator.

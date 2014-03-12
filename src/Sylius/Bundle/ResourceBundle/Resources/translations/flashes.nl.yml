@@ -4,5 +4,5 @@
 sylius:
   resource:
     create: '%resource% is succesvol aangemaakt.'
-    update: '%resource% is succesvol gewijzigd.'
+    update: '%resource% is succesvol bijgewerkt.'
     delete: '%resource% is succesvol verwijderd.'

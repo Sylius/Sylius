@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Názov kategórie nesmie byť dlhší ako {{ limit }} znakov.'
+      min_length: 'Názov kategórie musí mať minimálne {{ limit }} znakov.'

@@ -8,57 +8,88 @@ sylius:
         assortment: Assortiment
         configuration: Configuratie
         countries: Landen
+        customer: Klanten
+        dashboard: Dashboard
+        exchange_rates: Wisselkoersen
         general_settings: Algemene instellingen
         homepage: Uw winkel
+        locales: Locaties
         new_order: Voeg nieuwe bestelling toe
         new_promotion: Voeg nieuwe promotie toe
-        options: Beheer product opties
+        options: Productopties
         orders: Huidige bestellingen
-        payment_methods: Betalingsmethodes
+        payment_methods: Betaalmethodes
         payments: Betalingen
         products: Producten
         promotions: Promoties
         properties: Configureer eigenschappen
+        prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
-        shipping_methods: Verzendingsmethodes
-        stockables: Inventaris niveaus
-        tax_categories: Belasting categorieën
-        tax_rates: Belastingtarieven
+        shipping_methods: Verzendmethodes
+        stockables: Voorraad
+        tax_categories: BTW-groepen
+        tax_rates: BTW-tarieven
         taxation_settings: Belasting instellingen
         taxonomies: Categorisering
+        users: Gebruikers
+        zones: Zones
       sidebar:
         assortment: Assortiment
+        blocks: Blokken
         configuration: Configuratie
+        content: Inhoud
         countries: Landen
         customer: Klanten
+        dashboard: Dashboard
+        exchange_rates: Wisselkoersen
         general_settings: Algemene instellingen
-        homepage: Terug naar de frontend
+        groups: Groepen
+        homepage: Terug naar de voorkant
+        locales: "Talen/Regio's"
         new_order: Voeg nieuwe bestelling toe
         new_promotion: Voeg nieuwe promotie toe
-        options: Beheer opties
+        options: Productopties
         orders: Huidige bestellingen
-        payment_methods: Betalingsmethodes
+        pages: "Pagina's"
+        payment_methods: Betaalmethodes
         payments: Betalingen
         products: Producten
         promotions: Promoties
         properties: Configureer eigenschappen
+        prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
-        shipping_methods: Verzendingsmethodes
+        shipping_methods: Verzendmethodes
         stockables: Inventaris niveaus
         tax_categories: Belasting categorieën
         tax_rates: Belastingtarieven
         taxation_settings: Belasting instellingen
         taxonomies: Categorisering
         users: Gebruikers
+        zones: Zones
   frontend:
     menu:
+      account:
+        addresses: Adressen
+        homepage: Home
+        orders: Bestellingen
+        password: Wachtwoord wijzigen
+        profile: Persoonlijke gegevens
+        shop: Terug naar de winkel
+      currency: 'Toon prijzen in %currency%'
       main:
+        account: Mijn account
         administration: Beheer
-        cart: Bekijk winkelwagen
+        cart: 'Winkelwagen (%items%) %total%'
         login: Inloggen
         logout: Uitloggen
         register: Registreren
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

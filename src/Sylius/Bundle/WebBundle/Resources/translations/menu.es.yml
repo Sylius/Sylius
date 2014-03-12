@@ -8,10 +8,12 @@ sylius:
         assortment: Varios
         configuration: Configuración
         countries: Países
+        customer: Clientes
         dashboard: Panel general
         exchange_rates: Tipos de cambio
         general_settings: Configuración general
         homepage: Mi tienda
+        locales: Idiomas
         new_order: Añadir nuevo pedido
         new_promotion: Añadir nueva promoción
         options: Administrar opciones de producto
@@ -31,20 +33,26 @@ sylius:
         tax_rates: Tasas de impuestos
         taxation_settings: Configuración de impuestos
         taxonomies: Categorización
+        users: Usuarios
         zones: Zonas
       sidebar:
         assortment: Varios
+        blocks: Bloques
         configuration: Configuración
+        content: Contenido
         countries: Países
         customer: Clientes
         dashboard: Panel general
         exchange_rates: Tipos de cambio
         general_settings: Configuración general
+        groups: Grupos
         homepage: Volver a la tienda
+        locales: Idiomas
         new_order: Añadir nuevo pedido
         new_promotion: Añadir nueva promoción
         options: Administrar opciones de producto
         orders: Pedidos en curso
+        pages: Páginas
         payment_methods: Modos de pago
         payments: Pagos
         products: Productos
@@ -65,6 +73,7 @@ sylius:
   frontend:
     menu:
       account:
+        addresses: Mi libreta de direcciones
         homepage: Inicio
         orders: Mis pedidos / mis facturas
         password: Mi contraseña
@@ -75,4 +84,12 @@ sylius:
         account: Mi cuenta
         administration: Administración
         cart: 'Ver carrito (%items%) %total%'
+        login: Iniciar sesión
+        logout: Cerrar sesión
         register: Registrarse
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google +
+        linkedin: LinkedIn
+        twitter: Twitter

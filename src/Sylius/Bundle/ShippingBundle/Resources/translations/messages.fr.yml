@@ -3,10 +3,16 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Nombre
+        equal: Égale à
+      type: Type
     shipment:
-      state: Statut
+      state: État
       states:
         checkout: Paiement
+        dispatched: "En cours d'envoi"
         pending: En attente
         ready: Prêt
         shipped: Expédié
@@ -22,7 +28,8 @@ sylius:
       per_item_rate_configuration:
         amount: Montant
       weight_rate_configuration:
-        amount: Quantité
+        amount: Montant
+        division: Division
     shipping_category:
       description: Description
       name: Nom

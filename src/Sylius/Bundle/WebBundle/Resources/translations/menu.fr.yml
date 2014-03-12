@@ -5,6 +5,7 @@ sylius:
   backend:
     menu:
       main:
+        assortment: Assortiment
         configuration: Configuration
         countries: Pays
         customer: Clients
@@ -16,12 +17,12 @@ sylius:
         new_order: Ajouter une nouvelle commande
         new_promotion: Ajouter une nouvelle promotion
         options: Gérer les options de produit
-        orders: Commandes en cours
-        payment_methods: Moyens de paiements
+        orders: Commandes
+        payment_methods: Moyens de paiement
         payments: Paiements
         products: Produits
         promotions: Promotions
-        properties: Configuration des propriétés
+        properties: Configurer les propriétés
         prototypes: Prototypes de produits
         sales: Commandes
         shipments: Expéditions
@@ -29,12 +30,13 @@ sylius:
         shipping_methods: Modes de livraison
         stockables: Stocks
         tax_categories: Catégories de taxes
-        tax_rates: Taux de TVA
+        tax_rates: Taux de taxe
         taxation_settings: Configuration des taxes
         taxonomies: Catégorisation
         users: Utilisateurs
         zones: Zones
       sidebar:
+        assortment: Assortiment
         blocks: Blocs
         configuration: Configuration
         content: Contenu
@@ -49,13 +51,13 @@ sylius:
         new_order: Ajouter une nouvelle commande
         new_promotion: Ajouter une nouvelle promotion
         options: Gérer les options
-        orders: Commandes en cours
+        orders: Commandes
         pages: Pages
-        payment_methods: Modes de paiement
+        payment_methods: Moyens de paiement
         payments: Paiements
         products: Produits
         promotions: Promotions
-        properties: Configurez les propriétés
+        properties: Configurer les propriétés
         prototypes: Prototypes de produits
         sales: Commandes
         shipments: Expéditions
@@ -63,7 +65,7 @@ sylius:
         shipping_methods: Modes de livraison
         stockables: Stocks
         tax_categories: Catégories de taxes
-        tax_rates: Taux de TVA
+        tax_rates: Taux de taxe
         taxation_settings: Configuration des taxes
         taxonomies: Catégorisation
         users: Utilisateurs
@@ -71,7 +73,7 @@ sylius:
   frontend:
     menu:
       account:
-        addresses: "Mon carnet d'adresses"
+        addresses: "Carnet d'adresses"
         homepage: Accueil
         orders: Mes commandes / mes factures
         password: Mon mot de passe
@@ -81,12 +83,13 @@ sylius:
       main:
         account: Mon compte
         administration: Administration
+        cart: 'Voir panier (%items%) %total%'
         login: Connexion
         logout: Déconnexion
         register: Créer un compte
       social:
         facebook: Facebook
         github: GitHub
-        google: Google +
+        google: Google+
         linkedin: LinkedIn
         twitter: Twitter

@@ -3,10 +3,10 @@
 
 sylius:
   cart:
-    restricted_zone_removal: "Produit %product% retiré du panier car il n'est pas disponible dans votre pays."
+    restricted_zone_removal: "Le produit %product% a été retiré du panier car il n'est pas disponible dans votre pays."
   checkout:
     restricted_zone: "Ce produit n'est pas disponible dans votre pays."
-    success: Merci pour votre commande!
+    success: Merci pour votre commande !
     canceled: Votre paiement a été annulé.
     pending: Votre paiement est actuellement en attente.
     failed: Votre paiement a été refusé.

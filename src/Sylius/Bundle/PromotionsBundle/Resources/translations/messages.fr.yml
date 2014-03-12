@@ -5,7 +5,7 @@ sylius:
   form:
     action:
       fixed_discount_configuration:
-        amount: Quantité
+        amount: Montant
       percentage_discount_configuration:
         percentage: Pourcentage
       shipping_discount_configuration:
@@ -14,13 +14,23 @@ sylius:
     rule:
       taxonomy_configuration:
         taxons: Famille de tags
+        exclude: Exclure
+      item_count_configuration:
+        count: Compte
+        equal: Égale à
       item_total_configuration:
-        amount: Quantité
+        amount: Montant
+        equal: Égale à
+      nth_order_configuration:
+        nth: Nième
       user_loyality_configuration:
+        time: Temps
         unit:
+          days: Jours
           weeks: Semaines
           months: Mois
           years: Années
+          0: Unité
         after: Utilisateur créé après cette période
       shipping_country_configuration:
         country: Pays
@@ -29,7 +39,7 @@ sylius:
       code: Code
       usage_limit: "Limite d'utilisation"
     coupon_generate_instruction:
-      amount: Quantité
+      amount: Montant
       usage_limit: "Limite d'utilisation"
     promotion:
       actions: Actions

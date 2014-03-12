@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backordered: Inventaris eenheid is ge-backordered.
+    sold: Inventaris eenheid vervuld.
+    returned: Inventaris eenheid geretourneerd.

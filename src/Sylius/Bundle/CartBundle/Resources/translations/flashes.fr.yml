@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Le panier a été mis à jour avec succès.
+    cart_clear_completed: Le panier a été vidé avec succès.
+    item_add_completed: "L'article a bien été ajouté au panier."
+    item_remove_completed: "L'article a bien été supprimé du panier."
+    item_add_error: "Une erreur s'est produite lors de l'ajout de l'article au panier."
+    item_remove_error: "Une erreur s'est produite lors de la suppression de l'article du panier."

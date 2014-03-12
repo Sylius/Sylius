@@ -13,6 +13,7 @@ sylius:
       presentation: Presentación
       values: Posibles valores
     option_value:
+      add_value: Añadir valor
       value: Valor
     prototype:
       options: Opciones

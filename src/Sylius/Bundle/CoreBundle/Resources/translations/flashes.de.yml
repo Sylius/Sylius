@@ -8,5 +8,7 @@ sylius:
     restricted_zone: Dieses Produkt ist nicht in Ihrem Land verfügbar.
     success: Danke für Ihre Bestellung!
     canceled: Ihre Zahlung wurde abgebrochen.
+    pending: Deine Zahlung wird aktuell bearbeitet.
     failed: Ihre Zahlung wurde abgelehnt.
     unknown: Unbekannter Fehler während des Zahlungsvorgangs.
+    out_of_stock: 'Es gibt nur noch %quantity% %name% im Lager.'

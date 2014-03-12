@@ -4,20 +4,25 @@
 sylius:
   credit_card:
     cardholder_name:
-      min_length: sylius.credit_card.cardholder_name.min_length
-      not_blank: sylius.credit_card.cardholder_name.not_blank
+      min_length: 'De naam van de kaarthouder moet minstens {{ limit }} tekens lang zijn.'
+      not_blank: Vul de naam van de kaarthouder in.
     expiry_month:
-      max_range: sylius.credit_card.expiry_month.max_range
-      min_range: sylius.credit_card.expiry_month.min_range
+      max_range: 'De vervalmaand moet tussen {{ min }} en {{ max }} liggen.'
+      min_range: 'De vervalmaand moet tussen {{ min }} en {{ max }} liggen.'
+      not_blank: Selecteer de vervalmaand.
     number:
-      luhn: sylius.credit_card.number.luhn
+      not_blank: Voer uw kaart nummer in.
+      luhn: Uw kaartnummer in ongeldig.
     security_code:
-      max_length: sylius.credit_card.security_code.max_length
-      min_length: sylius.credit_card.security_code.min_length
+      not_blank: Vul de beveiligingscode in.
+      max_length: 'De creditcard CVV code moet tussen {{ min }} en {{ max }} tekens lang zijn.'
+      min_length: 'De creditcard CVV code moet tussen {{ min }} en {{ max }} tekens lang zijn.'
+    expiry_year:
+      not_blank: Selecteer het vervaljaar.
   payment_method:
     gateway:
-      not_blank: Selecteer een betalingsmethode gateway.
+      not_blank: Selecteer een betaalmethode.
     name:
-      max_length: 'Betalingsmethode naam mag niet langer zijn dan {{ limit }} karakters.'
-      min_length: 'Betalingsmethode naam moet minstens {{ limit }} karakters lang zijn.'
-      not_blank: Voer een betalingsmethode naam in.
+      max_length: 'Betaalmethode naam mag niet langer zijn dan {{ limit }} tekens.'
+      min_length: 'Betaalmethode naam moet minstens {{ limit }} tekens lang zijn.'
+      not_blank: Voer een betaalmethode naam in.
