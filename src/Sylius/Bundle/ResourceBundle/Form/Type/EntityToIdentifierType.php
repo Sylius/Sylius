@@ -27,7 +27,7 @@ class EntityToIdentifierType extends AbstractType
     /**
      * Object Manager.
      *
-     * @var type ObjectManager
+     * @var ObjectManager
      */
     protected $om;
 

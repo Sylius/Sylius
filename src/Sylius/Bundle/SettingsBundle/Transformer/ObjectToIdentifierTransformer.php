@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Transformer;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -19,34 +19,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ObjectToIdentifierTransformer implements ParameterTransformerInterface
+class ObjectToIdentifierTransformer extends EntityToIdentifierTransformer implements ParameterTransformerInterface
 {
-    /**
-     * Object repository.
-     *
-     * @var ObjectRepository
-     */
-    private $objectRepository;
-
-    /**
-     * Object identifier name.
-     *
-     * @var string
-     */
-    private $identifier;
-
-    /**
-     * Constructor.
-     *
-     * @param ObjectRepository $objectRepository
-     * @param string           $identifier
-     */
-    public function __construct(ObjectRepository $objectRepository, $identifier = 'id')
-    {
-        $this->objectRepository = $objectRepository;
-        $this->identifier = $identifier;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -70,6 +44,6 @@ class ObjectToIdentifierTransformer implements ParameterTransformerInterface
             return null;
         }
 
-        return $this->objectRepository->findOneBy(array($this->identifier => $value));
+        return $this->repository->findOneBy(array($this->identifier => $value));
     }
 }
