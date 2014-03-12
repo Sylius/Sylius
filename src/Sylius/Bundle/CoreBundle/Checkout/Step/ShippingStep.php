@@ -30,7 +30,7 @@ class ShippingStep extends CheckoutStep
     /**
      * @var null|ZoneInterface
      */
-    private $zone;
+    private $zones;
 
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ class ShippingStep extends CheckoutStep
 
         $form = $this->createCheckoutShippingForm($order);
 
-        if (null === $this->zone) {
+        if (empty($this->zones)) {
             return $this->proceed($context->getPreviousStep()->getName());
         }
 
@@ -86,14 +86,16 @@ class ShippingStep extends CheckoutStep
 
     protected function createCheckoutShippingForm(OrderInterface $order)
     {
-        $this->zone = $this->getZoneMatcher()->match($order->getShippingAddress());
+        $this->zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
 
-        if (null === $this->zone) {
+        if (empty($this->zones)) {
             $this->get('session')->getFlashBag()->add('error', 'sylius.checkout.shipping.error');
         }
 
         return $this->createForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array('zone' => $this->zone)
+            'criteria' => array('zone' => !empty($this->zones) ? array_map(function($zone) {
+                return $zone->getId();
+            }, $this->zones) : null)
         ));
     }
 }
