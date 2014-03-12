@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
