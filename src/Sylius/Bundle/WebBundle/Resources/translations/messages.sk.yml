@@ -1,0 +1,268 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      action:
+        billing: Nastaviť ako predvolenú doručovaciu adresu
+        create: Vytvoriť novú adresu
+        delete: Odstrániť
+        edit: Upraviť
+        shipping: Nastaviť ako predvolenú dodaciu adresu
+      create: Vytvoriť novú adresu
+      default:
+        billing: Predvolená fakturačná adresa
+        no_billing: Žiadna predvolená fakturačná adresa
+        no_shipping: Žiadna predvolená doručovacia adresa
+        shipping: Predvolaná doručovacia adresa
+      empty: Zatiaľ ste nevytvorili žiadnu adresu.
+      list: Všetky vaše adresy
+      update: Upraviť moju adresu
+    order:
+      empty: Zatiaľ ste nevytvorili žiadnu objednávku.
+      invoice: Faktúra
+      list: Všetky vaše objednávky
+      total: Spolu
+  add_to_cart: Pridať do košíka
+  address:
+    city: Mesto
+    company: Firma
+    country: Štát
+    firstname: Meno
+    lastname: Priezvisko
+    postcode: PSČ
+    province: Provincia
+    street: Ulica
+  alert:
+    error: Chyba
+    info: Informácia
+    success: Úspech
+    warning: Varovanie
+  backend:
+    alert:
+      info: Informácia
+    dashboard:
+      chart_order_count: Počet objednávok
+    logout: Odhlásiť
+    quick_links:
+      add_product: Nový produkt
+      orders: Posledné objednávky
+    statistics:
+      - Mesačná štatistika
+  backend_welcome: 'Ahoj <b>%name%</b>!'
+  block:
+    body: Obsah
+    create: Vytvoriť blok
+    id: ID
+    title: Názov
+    updated_at: Posledná aktualizácia
+  breadcrumb:
+    edit: Upraviť
+    exchange_rate:
+      index: Výmenné kurzy
+    group:
+      index: Skupiny
+    payment:
+      index: Platby
+    payment_method:
+      index: Spôsoby platby
+    product:
+      index: Produkty
+    property:
+      index: Vlastnosti
+    update: Upraviť
+  cancel: Zrušiť
+  cart:
+    empty: Váš košík je prázdny
+    summary:
+      add_coupon: OK
+      clear: Vyprázdniť košík
+      product: Produkt
+      save: Uložiť
+      total: Spolu
+      unit_price: Cena
+  checkout:
+    back: Späť
+    finalize:
+      address:
+        city: Mesto
+        firstname: Meno
+        lastname: Priezvisko
+        postcode: PSČ
+        province: Provincia
+        street: Ulica
+      order:
+        billing_address: Fakturačná adresa
+        shipping_address: Doručovacia adresa
+        total: Spolu
+      order_item:
+        total: Spolu
+      product:
+        name: Názov
+    payment:
+      header: Spôsob platby
+    security:
+      existing_customer: Existujúci zákazník
+      login: Prihlásenie
+      new_customer: Nový zákazník
+      register: Registrovať
+    shipping:
+      header: Spôsob doručenia
+  confirmation:
+    message: Chcete odstrániť túto položku?
+    title: Potvrdenie
+  country:
+    add_province: Pridať provinciu
+    id: ID
+    name: Názov
+  exchange_rate:
+    id: ID
+  form:
+    choose_file: Vybrať súbor
+    frontend:
+      password:
+        confirmation: Potvrdenie
+    login:
+      password: Heslo
+    profile:
+      firstName: Meno
+      lastName: Priezvisko
+  gallery:
+    next: Ďalej
+  generate: Vygenerovať
+  group:
+    create: Vytvorenie skupiny
+    id: ID
+    index_header: Skupiny
+    name: Názov
+  history:
+    author: Autor
+    version: Verzia
+  homepage:
+    splash:
+      headline: Vitajte v Sylius
+  inventory_unit:
+    name: Názov
+    sku: Kód
+    updated_at: Posledná aktualizácia
+  locale:
+    code: Kód
+    enabled: Povolené
+    updated_at: Posledná aktualizácia
+  login: Prihlásenie
+  login_header: Administrácia
+  logo: Sylius
+  newest: Najnovšie produkty
+  order:
+    billing_address: Fakturačná adresa
+    create_header: Nová objednávka
+    id: ID
+    number: Číslo
+    payment: Platba
+    recent_header: Posledné objednávky
+    shipping_address: Doručovacia adresa
+    show_header: Objednávka
+    total: Spolu
+    user: Používateľ
+  shipment:
+    id: ID
+    name: Názov
+    order: Objednávka
+    sku: Kód
+    update: Upraviť
+    updated_at: Posledná aktualizácia
+  order_item:
+    sellable: Produkt
+    total: Spolu
+    unit_price: Jednotková cena
+  page:
+    body: Obsah
+    create: Vytvoriť novú stránku
+    id: ID
+    title: Názov
+    update_header: Posledná aktualizácia
+  password: Heslo
+  payment:
+    amount: Množstvo
+    id: ID
+    state:
+      completed: Dokončené
+      failed: Neúspešné
+    updated_at: Posledná aktualizácia
+  payment_method:
+    create_header: Nový spôsob platby
+    id: ID
+    name: Názov
+    updated_at: Posledná aktualizácia
+  product:
+    available_on_demand: K dispozícii na objednávku
+    create: Vytvoriť produkt
+    create_header: Nový produkt
+    description: Popis
+    name: Názov
+    no_description: '<i>Žiadny popis</i>'
+    no_sku: Žiadny Kód
+    properties: Vlastnosti
+    sku: Kód
+    stock: Aktuálne skladom
+    tabs:
+      images: Obrázky
+      product: Produkt
+      properties: Vlastnosti
+    updated_at: Posledná aktualizácia
+  promotion:
+    id: ID
+    name: Názov
+    updated_at: Posledná aktualizácia
+  promotion_action:
+    configuration: Konfigurácia
+  search: Vyhľadať
+  shipping_address: Doručovacia adresa
+  shipping_category:
+    id: ID
+    name: Názov
+    updated_at: Posledná aktualizácia
+  shipping_method:
+    calculator: Kalkulačka
+    create_header: Nový spôsob doručenia
+    id: ID
+    name: Názov
+    updated_at: Posledná aktualizácia
+    zone: Zóna
+  stockable:
+    sku: kód
+    updated_at: posledná aktualizácia
+  tax_category:
+    id: ID
+    name: Názov
+    updated_at: Posledná aktualizácia
+  tax_rate:
+    calculator: Kalkulačka
+    name: Názov
+    updated_at: Posledná aktualizácia
+    zone: Zóna
+  taxon:
+    image: Vybrať obrázok
+    name: Názov
+  taxonomy:
+    image: Vybrať obrázok
+    name: Názov
+  total_quantity: Celkové množstvo
+  user:
+    billing_address: Fakturačná adresa
+    create_header: Nový používateľ
+    first_name: Meno
+    id: ID
+    last_name: Priezvisko
+    shipping_address: Doručovacia adresa
+  variant:
+    add_image: Pridať obrázok
+    available_on_demand: K dispozícii na objednávku
+    delete_image: Odstrániť obrázok
+    last_update: Posledná aktualizácia
+    price: Cena
+    sku: Kód
+    stock: Aktuálne skladom
+  zone:
+    name: Názov

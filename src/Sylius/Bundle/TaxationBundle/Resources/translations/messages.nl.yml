@@ -11,4 +11,4 @@ sylius:
       name: Naam
       amount: Hoeveelheid
       included_in_price: Inbegrepen in de prijs?
-      calculator: Berekening
+      calculator: Calculator

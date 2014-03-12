@@ -2,4 +2,62 @@
 # (c) Paweł Jędrzejewski
 
 $: '$'
+sylius:
+  flashes:
+    installed: Sylius is succesvol geïnstalleerd.
+  form:
+    configuration:
+      database:
+        0: Database connectie
+        driver:
+          0: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Host
+        name: Naam
+        password: Wachtwoord
+        port: Poort
+        user: Gebruiker
+      locale:
+        0: Locatie instellingen
+        currency: Valuta
+        locale: Locatie
+      mailer:
+        0: Mailer instellingen
+        host: Host
+        password: Wachtwoord
+        transport:
+          0: Transport
+          gmail: Gmail
+          mail: Mail
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Gebruiker
+    setup:
+      email: E-mail
+      load_fixtures: Laad fixtures
+      plain_password: Wachtwoord
+      username: Gebruikersnaam
+  process:
+    step:
+      check:
+        button:
+          back: Terug
+          install: Installeer
+          next: Volgende
+        header: 'Systeemvereisten controleren <small>Sylius installatie</small>'
+        table:
+          current: huidige
+          required: vereist
+          status: status
+      configure:
+        header: 'Configuratie <small>Sylius installatie</small>'
+      setup:
+        header: 'Beheer setup <small>Sylius installatie</small>'
+      welcome:
+        content: '<p>Welkom bij de Sylius installatie.</p>'
+        header: 'Welkom <small>Sylius installatie</small>'
 €: €

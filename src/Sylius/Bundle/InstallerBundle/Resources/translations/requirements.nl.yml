@@ -1,3 +1,61 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: extensies
+    accelerator:
+      0: Accelerator
+      help: Installeer en schakel een PHP versneller in zoals APC (sterk aanbevolen).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Installeer en activeer de %extension% extensie.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    on: Aan
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Sessie
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: bestandssysteem
+    cache:
+      0: cache
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: bestaat
+    logs:
+      0: logs
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: niet bestaand
+    not_writable: niet schrijfbaar
+    parameters:
+      0: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: schrijfbaar
+  settings:
+    0: PHP versie en instellingen
+    any: elke
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: niet verouderd
+    on: Aan
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: tijdzone
+    timezone_deprecated:
+      0: Afgekeurde timezone
+      help: 'Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
+    version: PHP versie
+    version_recommanded: Aanbevolen PHP versie

@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Giỏ hàng đã được cập nhật thành công.
+    cart_clear_completed: Giỏ hàng đã được xóa thành công.
+    item_add_completed: Sản phẩm đã được thêm vào giỏ hàng.
+    item_remove_completed: Sản phẩm đã được xoá khỏi giỏ hàng.
+    item_add_error: Xuất hiện lỗi trong khi thêm sản phẩm vào giỏ hàng.
+    item_remove_error: Xuất hiện lỗi trong khi loại bỏ sản phẩm khỏi giỏ hàng.

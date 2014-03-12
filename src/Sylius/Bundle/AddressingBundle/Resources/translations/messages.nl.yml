@@ -4,26 +4,29 @@
 sylius:
   form:
     address:
-      city: Plaats
+      city: Stad
+      company: Bedrijf
       country: Land
-      first_name: Voorname
-      last_name: Achtername
+      first_name: Voornaam
+      last_name: Achternaam
+      postcode: Postcode
       street: Straat
       province: Provincie
     country:
       iso_name: ISO naam
       name: Naam
       provinces: Provincies
-      select: sylius.form.country.select
+      select: Selecteer
     province:
       name: Naam
-      select: sylius.form.country.select
+      select: Selecteer
     zone:
       members: Leden
       name: Naam
+      type: Type
     zone_member_country:
       country: Land
     zone_member_province:
       province: Provincie
     zone_member_zone:
-      zone: sylius.form.shipping_method.zone
+      zone: Zone

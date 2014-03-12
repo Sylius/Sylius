@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Korpa je uspešno ažurirana.
+    cart_clear_completed: Korpa je uspešno ispražnjena.
+    item_add_completed: Stavka je dodata u korpu.
+    item_remove_completed: Stavka je izbačena iz korpe.
+    item_add_error: Dogodila se greška dok se stavka dodavala u korpu.
+    item_remove_error: Dogodila se greška dok se stavka uklanjala iz korpe.

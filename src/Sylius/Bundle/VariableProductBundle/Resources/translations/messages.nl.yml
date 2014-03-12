@@ -13,6 +13,7 @@ sylius:
       presentation: Weergave
       values: Mogelijke waarden
     option_value:
+      add_value: Voeg waarde toe
       value: Waarde
     prototype:
       options: Opties

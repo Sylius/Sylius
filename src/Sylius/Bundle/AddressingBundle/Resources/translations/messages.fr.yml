@@ -13,20 +13,20 @@ sylius:
       street: Adresse
       province: Etat
     country:
-      iso_name: sylius.form.country.iso_name
-      name: sylius.form.country.name
-      provinces: sylius.form.country.provinces
-      select: sylius.form.country.select
+      iso_name: Nom ISO
+      name: Nom
+      provinces: Etat
+      select: Sélectionner
     province:
-      name: sylius.form.province.name
-      select: sylius.form.country.select
+      name: Nom
+      select: Sélectionner
     zone:
-      members: sylius.form.zone.members
-      name: sylius.form.zone.name
-      type: sylius.form.zone.type
+      members: Membres
+      name: Nom
+      type: Type
     zone_member_country:
-      country: sylius.form.zone_member_country.country
+      country: Pays
     zone_member_province:
-      province: sylius.form.zone_member_province.province
+      province: Etat
     zone_member_zone:
-      zone: sylius.form.zone_member_zone.zone
+      zone: Zone

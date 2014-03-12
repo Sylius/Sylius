@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
 sylius:
   checkout:
     shipping_method:
@@ -12,13 +13,14 @@ sylius:
         quantity: Quantité
         variant: Variante
     block:
+      body: Corps
       id: ID
       title: Titre
     cart:
       coupon: Code promo
     checkout:
       addressing:
-        different_billing_address: Utiliser une adresse différente pour la facturation?
+        different_billing_address: Utiliser une adresse différente pour la facturation ?
       payment_method: Mode de paiement
       shipping_method: Mode de livraison
     group:
@@ -36,6 +38,7 @@ sylius:
       total_from: De
       total_to: À
     page:
+      body: Corps
       id: ID
       title: Titre
     product:
@@ -60,7 +63,7 @@ sylius:
       created_at_from: De
       created_at_to: À
       number: Numéro de commande
-      shipping_address: Expédier à
+      shipping_address: Expédier au nom de
     shipping_method:
       zone: Zone
     taxon:
@@ -69,7 +72,7 @@ sylius:
       file: Sélectionnez une image
     user:
       billing_address: Adresse de facturation
-      different_billing_address: Utiliser une adresse différente pour la facturation?
+      different_billing_address: Utiliser une adresse différente pour la facturation ?
       enabled: Activé
       first_name: Prénom
       groups: Groupes

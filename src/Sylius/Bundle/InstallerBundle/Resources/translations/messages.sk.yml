@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    configuration:
+      database:
+        driver:
+          0: Ovládač
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        name: Názov
+        password: Heslo
+        port: Port
+        user: Používateľ
+      locale:
+        0: Miestne nastavenia
+        currency: Mena
+      mailer:
+        password: Heslo
+        user: Používateľ
+    setup:
+      plain_password: Heslo
+  process:
+    step:
+      check:
+        button:
+          back: Späť
+          install: Inštalovať
+          next: Ďalej
+      welcome:
+        content: '<p>Víta vás inštalátor Sylius.</p>'
+        header: 'Vitajte <small>Sylius inštalátor</small>'
+€: €

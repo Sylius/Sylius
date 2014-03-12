@@ -1,10 +1,3 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius:
-    exchange_rate:
-        currency:
-            not_blank: Odaberite ispravnu valutu.
-        rate:
-            not_blank: Unesite trenutni devizni tečaj.
-        unique: Valuta mora biti jedinstvena.

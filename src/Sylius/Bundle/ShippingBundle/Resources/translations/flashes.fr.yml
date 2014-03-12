@@ -4,4 +4,4 @@
 sylius:
   shipment:
     ship:
-      success: Expédition terminée.
+      success: Votre commande a été expédiée.

@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Mesto
+      company: Firma
+      country: Štát
+      first_name: Meno
+      last_name: Priezvisko
+      postcode: PSČ
+      street: Adresa
+      province: Provincia
+    country:
+      name: Názov
+    province:
+      name: Názov
+    zone:
+      name: Názov
+      type: Typ
+    zone_member_province:
+      province: Provincia
+    zone_member_zone:
+      zone: Zóna

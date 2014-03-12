@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  resource:
+    create: '%resource% bol úspešne vytvorený.'
+    update: '%resource% bol úspešne aktualizovaný.'
+    delete: '%resource% bol úspešne odstránený.'

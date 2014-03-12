@@ -4,44 +4,44 @@
 sylius:
   address:
     city:
-      max_length: Le nom de la ville ne doit pas être plus long que 255 caractères
-      min_length: Le nom de la ville doit être plus long que 2 caractères
+      max_length: Le nom de la ville ne doit pas contenir plus de 255 caractères.
+      min_length: Le nom de la ville doit comporter au moins 2 caractères.
       not_blank: Veuillez entrer une ville
     country:
-      not_blank: Choisissez un pays.
+      not_blank: Veuillez choisir un pays.
     first_name:
-      max_length: Le prénom ne doit pas être plus long que 255 caractères
-      min_length: Le prénom doit être plus long que 2 caractères
-      not_blank: Veuillez entrer votre prénom
+      max_length: Le prénom ne doit pas contenir plus de 255 caractères.
+      min_length: Le prénom doit comporter au moins 2 caractères.
+      not_blank: Veuillez entrer votre prénom.
     last_name:
-      max_length: Le prénom ne doit pas être plus long que 255 caractères
-      min_length: Le nom doit être plus long que 2 caractères
-      not_blank: Veuillez entrer votre nom
+      max_length: Le nom ne doit pas contenir plus de 255 caractères.
+      min_length: Le nom doit comporter au moins 2 caractères.
+      not_blank: Veuillez entrer votre nom.
     postcode:
-      max_length: Le code postal ne doit pas être plus long que 255 caractères
-      min_length: Le code postal doit être plus long que 2 caractères
-      not_blank: Veuillez entrer un code postal
+      max_length: Le code postal ne doit pas contenir plus de 255 caractères.
+      min_length: Le code postal doit comporter au moins 2 caractères.
+      not_blank: Veuillez entrer un code postal.
     province:
-      valid: sylius.address.province.valid
+      valid: Veuillez sélectionner la province appropriée.
     street:
-      max_length: "L'adresse ne doit pas être plus long que 255 caractères"
-      min_length: "L'adresse doit être plus long que 2 caractères"
-      not_blank: Veuillez entrer une adresse
+      max_length: "L'adresse ne doit pas contenir plus de 255 caractères."
+      min_length: "L'adresse doit comporter au moins 2 caractères."
+      not_blank: Veuillez entrer une adresse.
     not_shippable: "Cette adresse n'est pas une destination d'envoi valide."
   country:
     iso_name:
-      not_blank: Entrez le code ISO du pays.
+      not_blank: Veuillez entrer le code ISO du pays.
     name:
-      max_length: sylius.country.name.max_length
-      not_blank: sylius.country.name.not_blank
+      max_length: Le nom du pays ne doit pas contenir plus de 255 caractères.
+      not_blank: Veuillez entrer le nom du pays.
   province:
     name:
-      max_length: sylius.province.name.max_length
-      min_length: sylius.province.name.min_length
-      not_blank: sylius.province.name.not_blank
+      max_length: Le nom de la région ne doit pas dépasser les 255 caractères.
+      min_length: Le nom de la région doit comporter au moins 2 caractères.
+      not_blank: Veuillez fournir le nom de la région.
   zone:
     members:
-      min_count: sylius.zone.members.min_count
+      min_count: 'Veuillez ajouter au moins {{limit}} zone(s) membre(s).'
     name:
-      max_length: sylius.zone.name.max_length
-      not_blank: sylius.zone.name.not_blank
+      max_length: Le nom de la zone ne doit pas dépasser les 255 caractères.
+      not_blank: Veuillez fournir le nom de la zone.

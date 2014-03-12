@@ -5,9 +5,25 @@ sylius:
   form:
     configuration:
       database:
+        host: Хост
         name: Название
         password: Пароль
+        port: Порт
+        user: Пользователь
       mailer:
+        host: Хост
         password: Пароль
+        user: Пользователь
     setup:
+      email: Email
+      load_fixtures: Загрузить фикстуры
       plain_password: Пароль
+  process:
+    step:
+      check:
+        button:
+          back: Назад
+          install: Установить
+        table:
+          current: текущий
+          status: статус

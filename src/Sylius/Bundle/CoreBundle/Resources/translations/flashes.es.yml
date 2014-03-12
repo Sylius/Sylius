@@ -2,5 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  cart:
+    restricted_zone_removal: 'El producto %product% ha sido eliminado del carrito porque no esta disponible en su país.'
   checkout:
-    success: Gracias por su pedido!
+    restricted_zone: Este producto no está disponible en su país.
+    success: ¡Gracias por su pedido!
+    canceled: Tu pago ha sido cancelado.
+    pending: Tu pago está pendiente actualmente.
+    failed: Tu pago ha sido rechazado.
+    unknown: Error de pago desconocido.
+    out_of_stock: 'Sólo hay %quantity% %name% en stock.'

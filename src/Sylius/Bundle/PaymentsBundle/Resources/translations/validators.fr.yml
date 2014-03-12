@@ -4,25 +4,25 @@
 sylius:
   credit_card:
     cardholder_name:
-      min_length: sylius.credit_card.cardholder_name.min_length
-      not_blank: Veuillez entrer le nom du titulaire de la carte.
+      min_length: 'Le nom du titulaire de la carte bancaire doit contenir au moins {{ limit }} caractères.'
+      not_blank: Veuillez entrer le nom du titulaire de la carte bancaire.
     expiry_month:
-      max_range: sylius.credit_card.expiry_month.max_range
-      min_range: sylius.credit_card.expiry_month.min_range
+      max_range: "Le mois d'expiration de la carte bancaire doit être compris entre {{ min }} et {{ max }}."
+      min_range: "Le mois d'expiration de la carte bancaire doit être compris entre {{ min }} et {{ max }}."
       not_blank: "Veuillez sélectionner le mois d'expiration."
     number:
       not_blank: Veuillez entrer le numéro de la carte.
-      luhn: sylius.credit_card.number.luhn
+      luhn: "Le numéro de carte bancaire fournit n'est pas valide."
     security_code:
       not_blank: Veuillez entrer le code de sécurité.
-      max_length: sylius.credit_card.security_code.max_length
-      min_length: sylius.credit_card.security_code.min_length
+      max_length: 'Le code de sécurité CVV de la carte bancaire doit contenir au moins {{ min }} caractères et ne peux dépasser les {{ max }} chiffres.'
+      min_length: 'Le code de sécurité CVV de la carte bancaire doit contenir au moins {{ min }} caractères et ne peux dépasser les {{ max }} chiffres.'
     expiry_year:
       not_blank: "Veuillez sélectionner l'année d'expiration."
   payment_method:
     gateway:
       not_blank: Veuillez sélectionner la passerelle de la méthode de paiement.
     name:
-      max_length: 'Le nom de la méthode de paiement doit avoir au maximum {{ limit }} caractères.'
+      max_length: 'Le nom de la méthode de paiement doit être long de {{ limit }} caractères.'
       min_length: 'Le nom de la méthode de paiement doit avoir au minimum {{ limit }} caractères.'
       not_blank: Veuillez entrer le nom de la méthode de paiement.

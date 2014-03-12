@@ -1,3 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  tax_category:
+    name:
+      not_blank: Veuillez entrez le nom de la catégorie d’imposition.
+  tax_rate:
+    category:
+      not_blank: Veuillez sélectionner la catégorie de la taxe.
+    name:
+      not_blank: Entrez le nom du taux de taxe.
+    amount:
+      not_blank: "Entrez le montant du taux d'impôt."
+    calculator:
+      not_blank: Sélectionnez le calculateur de taxe.

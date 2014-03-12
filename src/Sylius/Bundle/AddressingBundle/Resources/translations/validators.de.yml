@@ -27,6 +27,7 @@ sylius:
       max_length: Die Straße darf nicht länger als 255 Zeichen sein|Die Straße darf nicht länger als 255 Zeichen sein.
       min_length: Die Straße muss mindestens 2 Zeichen lang sein|Die Straße muss mindestens 2 Zeichen lang sein.
       not_blank: Bitte geben Sie Ihre Straße an.
+    not_shippable: Diese Adresse ist keine gültige Versandadresse.
   country:
     iso_name:
       not_blank: Bitte geben Sie den ISO Code des Landes an.
