@@ -18,7 +18,7 @@ Here is an example:
     $product = $this->get('sylius.repository.product')->createNew();
 
     $this
-        ->get('sylius.prototype_builder')
+        ->get('sylius.builder.prototype')
         ->build($prototype, $product)
     ;
 
