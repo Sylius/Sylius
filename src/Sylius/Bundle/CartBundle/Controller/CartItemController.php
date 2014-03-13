@@ -81,22 +81,6 @@ class CartItemController extends Controller
     }
 
     /**
-     * Redirect to specific URL or to cart.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    private function redirectAfterAdd(Request $request)
-    {
-        if ($request->query->has('_redirect_to')) {
-            return $this->redirect($request->query->get('_redirect_to'));
-        }
-
-        return $this->redirectToCartSummary();
-    }
-
-    /**
      * Removes item from cart.
      * It takes an item id as an argument.
      *
@@ -104,10 +88,11 @@ class CartItemController extends Controller
      * it will be removed and the cart - refreshed and saved.
      *
      * @param mixed $id
+     * @param Request $request
      *
      * @return Response
      */
-    public function removeAction($id)
+    public function removeAction($id, Request $request)
     {
         $cart = $this->getCurrentCart();
         $item = $this->getRepository()->find($id);
@@ -118,7 +103,7 @@ class CartItemController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
 
-            return $this->redirectToCartSummary();
+            return $this->redirectAfterRemove($request);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -131,6 +116,49 @@ class CartItemController extends Controller
 
         // Write flash message
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
+
+        return $this->redirectAfterRemove($request);
+    }
+
+    /**
+     * Redirect to specific URL or to cart after adding an item.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectAfterAdd(Request $request)
+    {
+        return $this->redirectAfterAction($request);
+    }
+
+    /**
+     * Redirect to specific URL or to cart after removing an item.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectAfterRemove(Request $request)
+    {
+        return $this->redirectAfterAction($request);
+    }
+
+    /**
+     * Default redirect to specific URL or to cart.
+     * Use <code>_redirect_to</code> key in query or post data to designate
+     * a specific target page.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectAfterAction(Request $request)
+    {
+        $redirectUrl = $request->query->get('_redirect_to', $request->request->get('_redirect_to'));
+        if (null !== $redirectUrl) {
+            return $this->redirect($redirectUrl);
+        }
 
         return $this->redirectToCartSummary();
     }
