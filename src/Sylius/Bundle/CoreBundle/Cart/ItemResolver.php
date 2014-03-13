@@ -22,12 +22,14 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
 
 /**
  * Item resolver for cart bundle.
  * Returns proper item objects for cart add and remove actions.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemResolver implements ItemResolverInterface
 {
@@ -39,32 +41,39 @@ class ItemResolver implements ItemResolverInterface
     protected $cartProvider;
 
     /**
+     * Prica calculator.
+     *
+     * @var PriceCalculatorInterface
+     */
+    protected $priceCalculator;
+
+    /**
      * Product repository.
      *
      * @var RepositoryInterface
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * Form factory.
      *
      * @var FormFactory
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * Stock availability checker.
      *
      * @var AvailabilityCheckerInterface
      */
-    private $availabilityChecker;
+    protected $availabilityChecker;
 
     /**
      * Restricted zone checker.
      *
      * @var RestrictedZoneCheckerInterface
      */
-    private $restrictedZoneChecker;
+    protected $restrictedZoneChecker;
 
     /**
      * Constructor.
@@ -77,6 +86,7 @@ class ItemResolver implements ItemResolverInterface
      */
     public function __construct(
         CartProviderInterface          $cartProvider,
+        PriceCalculatorInterface       $priceCalculator,
         RepositoryInterface            $productRepository,
         FormFactory                    $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
@@ -84,6 +94,7 @@ class ItemResolver implements ItemResolverInterface
     )
     {
         $this->cartProvider = $cartProvider;
+        $this->priceCalculator = $priceCalculator;
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
         $this->availabilityChecker = $availabilityChecker;
@@ -133,7 +144,9 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Submitted form is invalid.');
         }
 
-        $item->setUnitPrice($variant->getPrice());
+        $item->setUnitPrice(
+            $this->priceCalculator->calculate($variant)
+        );
 
         $quantity = $item->getQuantity();
         foreach ($this->cartProvider->getCart()->getItems() as $cartItem) {

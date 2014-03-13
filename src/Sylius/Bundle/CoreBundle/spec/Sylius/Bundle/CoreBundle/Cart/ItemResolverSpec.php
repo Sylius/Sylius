@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,13 +28,14 @@ class ItemResolverSpec extends ObjectBehavior
 {
     function let(
         CartProviderInterface $cartProvider,
+        PriceCalculatorInterface $priceCalculator,
         RepositoryInterface $productRepository,
         FormFactory $formFactory,
         AvailabilityCheckerInterface $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker
     )
     {
-        $this->beConstructedWith($cartProvider, $productRepository, $formFactory, $availabilityChecker, $restrictedZoneChecker);
+        $this->beConstructedWith($cartProvider, $priceCalculator, $productRepository, $formFactory, $availabilityChecker, $restrictedZoneChecker);
     }
 
     function it_is_initializable()

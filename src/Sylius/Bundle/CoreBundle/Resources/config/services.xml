@@ -11,6 +11,8 @@
 
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
 
+        <parameter key="sylius.price_calculator.default.class">Sylius\Bundle\CoreBundle\Calculator\DefaultPriceCalculator</parameter>
+
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
 
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
@@ -103,9 +105,13 @@
             <tag name="sylius.settings_schema" namespace="taxation" />
         </service>
 
+        <!-- calculators -->
+        <service id="sylius.price_calculator.default" class="%sylius.price_calculator.default.class%" />
+
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
             <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.price_calculator.default" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.availability_checker" />
