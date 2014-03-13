@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Calculator;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 
 /**
- * By default calculator returns variant price.
+ * Default calculator simply returns the variant price.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
