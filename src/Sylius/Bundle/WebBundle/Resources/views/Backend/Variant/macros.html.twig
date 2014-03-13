@@ -26,7 +26,7 @@
             <td>{{ variant.id }}</td>
             <td>{{ variant.sku ?: '-' }}</td>
             <td>{% if variant.images.count > 0 %}
-                <img class="img-polaroid" src="{{ variant.images.offsetGet(0).path|imagine_filter('sylius_90x60') }}" />
+                <img class="img-polaroid" src="{{ variant.images.offsetGet(0).path|imagine_filter('sylius_small') }}" />
             {% endif %}
             </td>
             <td><span class="label label-{{ variant.available ? 'success' : 'important' }}">{{ variant.availableOn|date }}</span></td>

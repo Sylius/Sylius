@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-3">
         <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail">
-            <img src="{{ product.image ? product.image.path|imagine_filter('sylius_200x200') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
+            <img src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
         </a>
     </div>
     <div class="col-md-9">
@@ -18,8 +18,8 @@
 <hr>
 <div id="gallery">
     {% for image in product.images %}
-        <a href="{{ image.path|imagine_filter('sylius_gallery') }}" title="{{ product.name }}">
-            <img class="img-rounded" src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
+        <a href="{{ image.path|imagine_filter('sylius_large') }}" title="{{ product.name }}">
+            <img class="img-rounded" src="{{ image.path|imagine_filter('sylius_small') }}" alt="{{ product.name }}" />
         </a>
     {% endfor %}
 </div>
