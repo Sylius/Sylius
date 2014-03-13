@@ -255,7 +255,7 @@ class ResourceController extends FOSRestController
     {
         if ($request->get('slug')) {
             $default = array('slug' => $request->get('slug'));
-        } else if($request->get('id')) {
+        } elseif($request->get('id')) {
             $default = array('id' => $request->get('id'));
         } else {
             $default = array();
