@@ -17,7 +17,7 @@ use Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryChangeListenerSpec extends ObjectBehavior
 {

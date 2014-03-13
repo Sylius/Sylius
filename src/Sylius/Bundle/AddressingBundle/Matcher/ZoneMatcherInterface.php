@@ -21,7 +21,7 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
  * Service implementing this interface should be able to find
  * best matching zones for provided address model.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ZoneMatcherInterface
 {

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\AddressingBundle\Model;
  *
  * A zone can also consist of other zones.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberZone extends ZoneMember
 {

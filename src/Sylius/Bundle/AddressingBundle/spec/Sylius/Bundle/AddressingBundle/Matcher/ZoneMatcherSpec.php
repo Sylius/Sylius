@@ -22,7 +22,7 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneMemberZone;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMatcherSpec extends ObjectBehavior
 {

@@ -19,7 +19,7 @@ use Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface;
 /**
  * Default zone matcher.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMatcher implements ZoneMatcherInterface
 {

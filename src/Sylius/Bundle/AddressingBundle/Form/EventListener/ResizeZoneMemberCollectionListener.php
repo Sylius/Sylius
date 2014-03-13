@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Util\ClassUtils;
  * A form resize listener capable of coping with a zone member collection.
  *
  * @author Tim Nagel <t.nagel@infinite.net.au>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ResizeZoneMemberCollectionListener extends ResizeFormListener
 {
