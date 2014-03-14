@@ -31,6 +31,12 @@
             <join-column name="coupon_id" on-delete="SET NULL" />
         </many-to-one>
 
+        <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <one-to-many field="shipments" target-entity="Sylius\Component\Shipping\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>

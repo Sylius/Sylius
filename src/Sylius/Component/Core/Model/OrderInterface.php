@@ -175,6 +175,42 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     public function getInventoryUnitsByVariant(ProductVariantInterface $variant);
 
     /**
+     * Get all payments associated with this order.
+     *
+     * @return Collection|PaymentInterface[]
+     */
+    public function getPayments();
+
+    /**
+     * Check if order has any payments
+     *
+     * @return Boolean
+     */
+    public function hasPayments();
+
+    /**
+     * Add a payment.
+     *
+     * @param PaymentInterface $payment
+     */
+    public function addPayment(PaymentInterface $payment);
+
+    /**
+     * Remove a payment.
+     *
+     * @param PaymentInterface $payment
+     */
+    public function removePayment(PaymentInterface $payment);
+
+    /**
+     * Check if order has certain payment.
+     *
+     * @param PaymentInterface $payment
+     * @return Boolean
+     */
+    public function hasPayment(PaymentInterface $payment);
+
+    /**
      * Get all shipments associated with this order.
      *
      * @return Collection|ShipmentInterface[]

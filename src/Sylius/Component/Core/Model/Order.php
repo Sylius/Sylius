@@ -49,6 +49,13 @@ class Order extends Cart implements OrderInterface
     protected $billingAddress;
 
     /**
+     * Payments for this order.
+     *
+     * @var Collection|PaymentInterface[]
+     */
+    protected $payments;
+
+    /**
      * Shipments for this order.
      *
      * @var Collection|ShipmentInterface[]
@@ -105,6 +112,7 @@ class Order extends Cart implements OrderInterface
     {
         parent::__construct();
 
+        $this->payments = new ArrayCollection();
         $this->shipments = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
@@ -315,6 +323,7 @@ class Order extends Cart implements OrderInterface
     {
         $units = new ArrayCollection;
 
+        /** @var $item OrderItem */
         foreach ($this->getItems() as $item) {
             foreach ($item->getInventoryUnits() as $unit) {
                 $units->add($unit);
@@ -332,6 +341,52 @@ class Order extends Cart implements OrderInterface
         return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayments()
+    {
+        return !$this->payments->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(PaymentInterface $payment)
+    {
+        if (!$this->hasPayment($payment)) {
+            $payment->setOrder($this);
+            $this->payments->add($payment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePayment(PaymentInterface $payment)
+    {
+        if ($this->hasPayment($payment)) {
+            $payment->setOrder(null);
+            $this->payments->removeElement($payment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayment(PaymentInterface $payment)
+    {
+        return $this->payments->contains($payment);
     }
 
     /**

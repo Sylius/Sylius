@@ -85,6 +85,7 @@ sylius_inventory:
 sylius_payment:
     classes:
         payment:
+            model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
     gateways:
         dummy: Test
