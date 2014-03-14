@@ -51,7 +51,8 @@
         "symfony-cmf/block-bundle":             "1.0.*",
         "symfony-cmf/content-bundle":           "1.0.*",
         "symfony-cmf/routing-bundle":           "1.1.*",
-        "symfony-cmf/menu-bundle":              "1.0.*"
+        "symfony-cmf/menu-bundle":              "1.0.*",
+        "jmikola/geojson": "~1.0"
     },
     "require-dev": {
         "behat/behat":                       "~2.4",
@@ -63,7 +64,9 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "2.0.*@dev",
-        "phpunit/phpunit":                   "~3.7"
+        "phpunit/phpunit":                   "~3.7",
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "jmikola/geojson": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [

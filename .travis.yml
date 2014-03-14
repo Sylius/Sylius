@@ -25,11 +25,7 @@ before_script:
     - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
     - sudo /etc/init.d/apache2 restart
     - composer self-update
-    - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
-    - composer require jmikola/geojson="~1.0" --no-update
-    - composer install --prefer-source --no-interaction
-    - wget http://getcomposer.org/composer.phar
-    - php -d memory_limit=2048M composer.phar update doctrine/mongodb-odm
+    - composer install --prefer-source --no-interaction --dev --optimize-autoloader
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
     - app/console doctrine:phpcr:repository:init --env=test > /dev/null
