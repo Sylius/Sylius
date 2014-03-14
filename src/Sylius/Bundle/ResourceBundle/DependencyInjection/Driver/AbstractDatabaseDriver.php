@@ -91,7 +91,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     /**
      * @return Definition
      */
-    protected function getConfirguationDefinition()
+    protected function getConfigurationDefinition()
     {
         $definition = new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration');
         $definition
@@ -113,7 +113,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     {
         $definition = new Definition($class);
         $definition
-            ->setArguments(array($this->getConfirguationDefinition()))
+            ->setArguments(array($this->getConfigurationDefinition()))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
 
