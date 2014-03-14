@@ -45,6 +45,8 @@ class SyliusResourceExtension extends Extension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
+
+        $container->setParameter('sylius.naming_strategy.table_prefix', $config['table_prefix']);
     }
 
     /**

@@ -13,7 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\PromotionsBundle\Model\Rule" table="sylius_promotion_rule">
+    <mapped-superclass name="Sylius\Bundle\PromotionsBundle\Model\Rule">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>

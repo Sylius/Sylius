@@ -45,7 +45,8 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         entity_managers:
             default:
-                auto_mapping: true
+                auto_mapping:    true
+                naming_strategy: sylius.naming_strategy
                 mappings:
                     gedmo_loggable:
                         type: annotation

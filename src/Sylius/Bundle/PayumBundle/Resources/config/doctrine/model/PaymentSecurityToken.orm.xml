@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
         >
-    <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken" table="sylius_payment_security_token">
+    <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken">
 
         <id name="hash" column="hash" type="string" />
 
