@@ -21,7 +21,7 @@ use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInt
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class Variant extends BaseVariant implements VariantInterface
+class Variant extends BaseVariant implements VariantInterface, PriceableInterface
 {
     /**
      * Variant SKU.

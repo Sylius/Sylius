@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Calculator;
 
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
 
 /**
  * Allows flexible price calculations.
@@ -20,5 +20,5 @@ use Sylius\Bundle\CoreBundle\Model\VariantInterface;
  */
 interface PriceCalculatorInterface
 {
-    public function calculate(VariantInterface $variant);
+    public function calculate(PriceableInterface $priceable);
 }

@@ -11,17 +11,17 @@
 
 namespace Sylius\Bundle\CoreBundle\Calculator;
 
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
 
 /**
- * Default calculator simply returns the variant price.
+ * Default calculator simply returns the priceable price.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class DefaultPriceCalculator implements PriceCalculatorInterface
 {
-    public function calculate(VariantInterface $variant)
+    public function calculate(PriceableInterface $priceable)
     {
-        return $variant->getPrice();
+        return $priceable->getPrice();
     }
 }
