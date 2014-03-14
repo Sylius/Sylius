@@ -79,7 +79,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <span class="label label-success">{{ variant|sylius_variant_price }}</span>
+                            <span class="label label-success">{{ sylius_calculate_price(variant)|sylius_price }}</span>
                         </td>
                         <td>
                         {% if sylius_inventory_is_available(variant) %}

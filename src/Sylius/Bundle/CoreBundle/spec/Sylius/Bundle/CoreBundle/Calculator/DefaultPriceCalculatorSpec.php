@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -29,10 +29,10 @@ class DefaultPriceCalculatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface');
     }
 
-    function it_returns_variant_price(VariantInterface $variant)
+    function it_returns_priceable_price(PriceableInterface $priceable)
     {
-        $variant->getPrice()->shouldBeCalled()->willReturn(27);
+        $priceable->getPrice()->shouldBeCalled()->willReturn(27);
 
-        $this->calculate($variant)->shouldReturn(27);
+        $this->calculate($priceable)->shouldReturn(27);
     }
 }

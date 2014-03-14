@@ -15,7 +15,7 @@ use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension as BaseSyliusMoneyExtens
 use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
 use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
 use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
 
 /**
  * Sylius money Twig helper.
@@ -38,18 +38,15 @@ class SyliusMoneyExtension extends BaseSyliusMoneyExtension
         parent::__construct($currencyContext, $converter, $locale);
     }
 
-    public function getFilters()
+    public function getFunctions()
     {
-        return array_merge(parent::getFilters(), array(
-            new \Twig_SimpleFilter('sylius_variant_price', array($this, 'formatVariantPrice'), array('is_safe' => array('html'))),
-        ));
+        return array(
+            new \Twig_SimpleFunction('sylius_calculate_price', array($this, 'calculatePrice'), array('is_safe' => array('html'))),
+        );
     }
 
-    public function formatVariantPrice(VariantInterface $variant, $currency = null)
+    public function calculatePrice(PriceableInterface $priceable)
     {
-        return $this->formatPrice(
-            $this->priceCalculator->calculate($variant),
-            $currency
-        );
+        return $this->priceCalculator->calculate($priceable);
     }
 }
