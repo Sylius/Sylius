@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  * Carts extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class SyliusCartExtension extends AbstractResourceExtension implements PrependExtensionInterface

@@ -46,7 +46,7 @@
             <argument type="service" id="sylius.currency_converter" />
             <argument>%sylius.money.locale%</argument>
             <tag name="twig.extension" />
-          </service>
+        </service>
 
         <service id="sylius.form.type.money" class="%sylius.form.type.money.class%">
             <argument>%sylius.money.currency%</argument>

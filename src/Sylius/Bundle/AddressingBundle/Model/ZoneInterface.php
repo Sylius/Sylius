@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Zone interface.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ZoneInterface
 {

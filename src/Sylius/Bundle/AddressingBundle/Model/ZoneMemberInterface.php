@@ -14,7 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Model;
 /**
  * Zone member interface.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface ZoneMemberInterface
 {

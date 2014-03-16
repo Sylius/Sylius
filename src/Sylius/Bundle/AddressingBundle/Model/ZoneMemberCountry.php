@@ -14,7 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Model;
 /**
  * Default country zone member model.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberCountry extends ZoneMember
 {

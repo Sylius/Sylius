@@ -9,20 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Calculator;
+
+use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
 
 /**
- * Zone choice form type for "doctrine/orm" driver.
+ * Allows flexible price calculations.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ZoneEntityChoiceType extends ZoneChoiceType
+interface PriceCalculatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return 'entity';
-    }
+    public function calculate(PriceableInterface $priceable);
 }

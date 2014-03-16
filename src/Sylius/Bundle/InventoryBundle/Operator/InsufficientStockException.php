@@ -16,7 +16,7 @@ use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
 /**
  * Thrown when decreasing stockable quantity while it is insufficient.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InsufficientStockException extends \UnderflowException
 {

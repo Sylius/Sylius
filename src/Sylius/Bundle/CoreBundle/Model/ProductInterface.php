@@ -23,7 +23,7 @@ use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ProductInterface extends VariableProductInterface, TaxableInterface
+interface ProductInterface extends VariableProductInterface, PriceableInterface, TaxableInterface
 {
     /**
      * Get product SKU.
@@ -80,20 +80,6 @@ interface ProductInterface extends VariableProductInterface, TaxableInterface
      * @param Collection $taxons
      */
     public function setTaxons(Collection $taxons);
-
-    /**
-     * Gets product price.
-     *
-     * @return integer $price
-     */
-    public function getPrice();
-
-    /**
-     * Sets product price.
-     *
-     * @param float $price
-     */
-    public function setPrice($price);
 
     /**
      * Get product short description.

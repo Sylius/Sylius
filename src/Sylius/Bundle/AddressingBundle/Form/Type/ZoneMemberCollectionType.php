@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Zone member collection form type.
  *
  * @author Tim Nagel <t.nagel@infinite.net.au>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberCollectionType extends AbstractType
 {

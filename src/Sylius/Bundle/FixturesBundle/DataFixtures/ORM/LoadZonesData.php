@@ -18,7 +18,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * Default zone fixtures.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class LoadZonesData extends DataFixture
 {

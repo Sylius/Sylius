@@ -19,7 +19,7 @@ use Sylius\Bundle\AddressingBundle\Model\Zone;
 /**
  * Zone form type.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneType extends AbstractType
 {

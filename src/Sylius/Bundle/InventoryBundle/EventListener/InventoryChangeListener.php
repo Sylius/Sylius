@@ -19,7 +19,7 @@ use Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface;
  * Fills backorders on inventory change.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryChangeListener implements InventoryChangeListenerInterface
 {

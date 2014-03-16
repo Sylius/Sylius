@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface;
 
 /**
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneSpec extends ObjectBehavior
 {

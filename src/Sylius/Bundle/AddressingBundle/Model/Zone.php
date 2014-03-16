@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Default zone model.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Zone implements ZoneInterface
 {
