@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Promotion\Checker\Registry;
+namespace Sylius\Bundle\ResourceBundle\Registry;
 
 /**
- * This exception should be thrown by rule checker registry
- * when checker of given type does not exist.
+ * This exception should be thrown by service registry
+ * when given type already exists.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NonExistingRuleCheckerException extends \InvalidArgumentException
+class ExistingServiceException extends \InvalidArgumentException
 {
     public function __construct($type)
     {
-        parent::__construct(sprintf('Promotion rule checker of type "%s" does not exist.', $type));
+        parent::__construct(sprintf('Service of type "%s" already exist.', $type));
     }
 }

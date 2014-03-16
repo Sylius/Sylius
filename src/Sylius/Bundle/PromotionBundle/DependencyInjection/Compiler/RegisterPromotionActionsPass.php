@@ -29,14 +29,14 @@ class RegisterPromotionActionsPass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.promotion_action');
-        $checkers = array();
+        $actions = array();
 
         foreach ($container->findTaggedServiceIds('sylius.promotion_action') as $id => $attributes) {
-                $checkers[$attributes[0]['type']] = $attributes[0]['label'];
+            $actions[$attributes[0]['type']] = $attributes[0]['label'];
 
-            $registry->addMethodCall('registerAction', array($attributes[0]['type'], new Reference($id)));
+            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
         }
 
-        $container->setParameter('sylius.promotion_actions', $checkers);
+        $container->setParameter('sylius.promotion_actions', $actions);
     }
 }

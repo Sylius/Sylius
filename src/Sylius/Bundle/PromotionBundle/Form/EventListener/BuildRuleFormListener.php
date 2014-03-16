@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
 
-use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -29,7 +29,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
     private $checkerRegistry;
     private $factory;
 
-    public function __construct(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
+    public function __construct(ServiceRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {
         $this->checkerRegistry = $checkerRegistry;
         $this->factory = $factory;
@@ -67,7 +67,7 @@ class BuildRuleFormListener implements EventSubscriberInterface
 
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
     {
-        $checker = $this->checkerRegistry->getChecker($ruleType);
+        $checker = $this->checkerRegistry->get($ruleType);
         $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data, array('auto_initialize' => false));
 
         $form->add($configurationField);
