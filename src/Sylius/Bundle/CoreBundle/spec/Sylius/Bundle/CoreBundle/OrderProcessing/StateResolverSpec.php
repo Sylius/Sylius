@@ -67,25 +67,9 @@ class StateResolverSpec extends ObjectBehavior
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_DISPATCHED);
+        $shipment2->getState()->willReturn(ShipmentInterface::STATE_READY);
 
         $order->setShippingState(OrderShippingStates::PARTIALLY_SHIPPED)->shouldBeCalled();
-        $this->resolveShippingState($order);
-    }
-
-    function it_marks_order_as_dispatched_if_all_shipments_are_dispatched(
-        OrderInterface $order,
-        ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2
-    )
-    {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn(array($shipment1, $shipment2));
-
-        $shipment1->getState()->willReturn(ShipmentInterface::STATE_DISPATCHED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_DISPATCHED);
-
-        $order->setShippingState(OrderShippingStates::DISPATCHED)->shouldBeCalled();
         $this->resolveShippingState($order);
     }
 

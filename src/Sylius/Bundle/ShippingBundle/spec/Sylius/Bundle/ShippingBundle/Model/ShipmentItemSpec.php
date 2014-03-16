@@ -74,8 +74,8 @@ class ShipmentItemSpec extends ObjectBehavior
 
     function its_state_is_mutable()
     {
-        $this->setShippingState(ShipmentInterface::STATE_PENDING);
-        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_PENDING);
+        $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
+        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
     }
 
     function it_initializes_creation_date_by_default()
