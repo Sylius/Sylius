@@ -24,7 +24,7 @@ use Sylius\Component\Taxation\Model\TaxableInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ProductInterface extends BaseProductInterface, PriceableInterface, TaxableInterface
+interface ProductInterface extends BaseProductInterface, TaxableInterface
 {
     /**
      * Get product SKU.

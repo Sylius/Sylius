@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
@@ -21,7 +22,11 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ProductVariantInterface extends BaseVariantInterface, PriceableInterface, ShippableInterface, StockableInterface
+interface ProductVariantInterface extends
+    BaseVariantInterface,
+    ShippableInterface,
+    StockableInterface,
+    PriceableInterface
 {
     /**
      * Get images.

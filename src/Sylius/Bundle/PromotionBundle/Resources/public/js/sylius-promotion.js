@@ -29,7 +29,7 @@
                         prototypePrefix = settings.prototypePrefix;
                     }
 
-                    var form = element.closest('div.control-group').parent();
+                    var form = element.closest('div.form-group').parent();
                     var container = form.next();
                     var count = form.parents(':eq(1)').children().length - 1;
                     var prototype = $('#' + prototypePrefix + '_' + selectedValue)
@@ -57,7 +57,7 @@
         } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.handlePrototypes' );
+            $.error('Method ' +  method + ' does not exist on jQuery.handlePrototypes.');
         }
     };
 

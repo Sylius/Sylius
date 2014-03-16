@@ -11,8 +11,13 @@
             {{ form_label(form.masterVariant.availableOn) }}
             {{ form_widget(form.masterVariant.availableOn, {'label': false}) }}
             {{ form_row(form.masterVariant.availableOnDemand) }}
-            {{ form_row(form.masterVariant.price) }}
             {{ form_row(form.masterVariant.onHand) }}
+            <hr />
+            {{ form_row(form.masterVariant.price) }}
+            {{ form_row(form.masterVariant.pricingCalculator) }}
+            {% if form.masterVariant.pricingConfiguration is defined %}
+            {{ form_row(form.masterVariant.pricingConfiguration) }}
+            {% endif %}
             <hr />
             {{ form_row(form.taxCategory) }}
             {{ form_row(form.shippingCategory) }}

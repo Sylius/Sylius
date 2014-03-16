@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ActionTypeSpec extends ObjectBehavior
 {
-    function let(PromotionActionRegistryInterface $actionRegistry)
+    function let(ServiceRegistryInterface $actionRegistry)
     {
         $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
     }
