@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>Welcome <small>Your registration was successful</small></h1>
+    {{ 'sylius.registration.confirmed.header'|trans|raw }}
 </div>
 
 <hr />
 <div class="alert alert-success">
-    Thank you for sign up! You are now logged in the store
+    {{ 'sylius.registration.confirmed.success'|trans }}
 </div>
 {% endblock %}
