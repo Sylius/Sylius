@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Repository;
 
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
+use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 
 class OrderRepository extends CartRepository
 {
@@ -192,6 +193,19 @@ class OrderRepository extends CartRepository
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    public function findExpiredPendingOrders(\DateTime $expiresAt)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
+            ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.state', OrderInterface::STATE_PENDING))
+            ->setParameter('expiresAt', $expiresAt)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
