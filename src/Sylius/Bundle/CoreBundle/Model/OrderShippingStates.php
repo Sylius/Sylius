@@ -22,8 +22,8 @@ class OrderShippingStates
     const ONHOLD            = 'onhold';
     const READY             = 'ready';
     const BACKORDER         = 'backorder';
-    const DISPATCHED        = 'dispatched';
     const PARTIALLY_SHIPPED = 'partially_shipped';
     const SHIPPED           = 'shipped';
     const RETURNED          = 'returned';
+    const CANCELLED         = 'cancelled';
 }

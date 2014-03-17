@@ -11,11 +11,11 @@ sylius:
             state: State
             states:
                 checkout:   Checkout
-                dispatched: Dispatched
                 pending:    Pending
                 ready:      Ready
                 shipped:    Shipped
                 returned:   Returned
+                cancelled:  Cancelled
             tracking_code: Tracking Code
 
         shipping_calculator:

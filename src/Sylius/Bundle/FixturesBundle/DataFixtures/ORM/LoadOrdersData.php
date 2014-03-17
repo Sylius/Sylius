@@ -146,11 +146,11 @@ class LoadOrdersData extends DataFixture
     {
         return array_rand(array_flip(array(
             ShipmentInterface::STATE_CHECKOUT,
-            ShipmentInterface::STATE_DISPATCHED,
             ShipmentInterface::STATE_SHIPPED,
-            ShipmentInterface::STATE_READY,
             ShipmentInterface::STATE_PENDING,
+            ShipmentInterface::STATE_READY,
             ShipmentInterface::STATE_RETURNED,
+            ShipmentInterface::STATE_CANCELLED,
         )));
     }
 
