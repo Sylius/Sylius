@@ -33,8 +33,9 @@ class CartRepository extends OrderRepository implements CartRepositoryInterface
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.expiresAt', ':now'))
-            ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.state', OrderInterface::STATE_CART))
+            ->andWhere($queryBuilder->expr()->in($this->getAlias().'.state', ':states'))
             ->setParameter('now', new Datetime())
+            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CART_LOCKED, OrderInterface::STATE_PENDING])
         ;
 
         return $queryBuilder->getQuery()->getResult();
