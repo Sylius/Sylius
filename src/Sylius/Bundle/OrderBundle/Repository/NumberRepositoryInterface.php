@@ -16,4 +16,6 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 interface NumberRepositoryInterface extends RepositoryInterface
 {
     public function getLastNumber();
+
+    public function isUsed($number);
 }
