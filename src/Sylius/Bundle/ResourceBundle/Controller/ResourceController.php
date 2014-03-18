@@ -255,8 +255,10 @@ class ResourceController extends FOSRestController
     {
         if ($request->get('slug')) {
             $default = array('slug' => $request->get('slug'));
-        } else {
+        } elseif($request->get('id')) {
             $default = array('id' => $request->get('id'));
+        } else {
+            $default = array();
         }
 
         $criteria = array_merge($default, $criteria);
