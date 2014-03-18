@@ -18,10 +18,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
-use Sylius\Bundle\AddressingBundle\Model\ProvinceInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\CoreBundle\Model\OrderItem;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
@@ -1138,7 +1138,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         list($firstname, $lastname) = explode(' ', $addressData[0]);
 
-        /* @var $address AddressInterface */
+        /* @var $address \Sylius\Component\Addressing\Model\AddressInterface */
         $address = $this->getRepository('address')->createNew();
         $address->setFirstname(trim($firstname));
         $address->setLastname(trim($lastname));
