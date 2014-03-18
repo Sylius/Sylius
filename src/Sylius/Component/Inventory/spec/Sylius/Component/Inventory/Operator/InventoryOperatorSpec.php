@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Operator;
+namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
-use Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -35,12 +35,12 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Operator\InventoryOperator');
+        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InventoryOperator');
    }
 
     function it_implements_Sylius_inventory_operator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
     }
 
     function it_increases_stockable_on_hand(StockableInterface $stockable)
