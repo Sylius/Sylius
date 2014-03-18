@@ -20,7 +20,9 @@ use Symfony\Component\Validator\Constraint;
  */
 class InStock extends Constraint
 {
-    public $message = '%product% does not have sufficient stock.';
+    public $message = '%stockable% does not have sufficient stock.';
+    public $stockablePath = 'stockable';
+    public $quantityPath = 'quantity';
 
     public function validatedBy()
     {
