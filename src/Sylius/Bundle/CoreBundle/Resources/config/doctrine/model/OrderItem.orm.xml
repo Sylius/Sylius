@@ -21,7 +21,7 @@
             <join-column name="variant_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         
-        <one-to-many field="inventoryUnits" target-entity="Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface" mapped-by="orderItem" orphan-removal="true">
+        <one-to-many field="inventoryUnits" target-entity="Sylius\Component\Inventory\Model\InventoryUnitInterface" mapped-by="orderItem" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

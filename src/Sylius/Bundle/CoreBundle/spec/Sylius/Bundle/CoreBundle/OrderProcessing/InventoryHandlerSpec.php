@@ -17,8 +17,8 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory;
-use Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface;
+use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 
 /**
