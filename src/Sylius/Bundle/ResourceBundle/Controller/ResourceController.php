@@ -253,9 +253,9 @@ class ResourceController extends FOSRestController
      */
     public function findOr404(Request $request, array $criteria = array())
     {
-        if ($request->get('slug')) {
+        if ($request->has('slug')) {
             $default = array('slug' => $request->get('slug'));
-        } elseif($request->get('id')) {
+        } elseif ($request->has('id')) {
             $default = array('id' => $request->get('id'));
         } else {
             $default = array();
