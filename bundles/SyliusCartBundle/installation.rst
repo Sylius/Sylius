@@ -61,13 +61,13 @@ Don't worry, everything was automatically installed via Composer.
 Creating your entities
 ----------------------
 
-This is no longer a required step in the latest vertion of the
+This is no longer a required step in the latest version of the
 `SyliusCartBundle`, and if you are happy with the default implementation (which
 is ``Sylius\Bundle\CartBundle\Model\CartItem``), you can just skip to the next
 section.
 
 You can create your **CartItem** entity, living inside your application code.
-We think that **keeping the app-specific bundle structure simple** is a good practice, so
+We think that **keeping the application-specific and simple bundle structure** is a good practice, so
 let's assume you have your ``AppBundle`` registered under ``App\AppBundle`` namespace.
 
 .. code-block:: php
@@ -227,7 +227,7 @@ inject the entity manager into our resolver service.
 
 We also added a simple method ``getProductRepository()`` to keep the resolving code cleaner.
 
-We must use this repository to find a product with id, given by the user via the request.
+We must use this repository to find a product with `id`, given by the user via the request.
 This can be done in various ways, but to keep the example simple - we'll use a query parameter.
 
 .. code-block:: php
