@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

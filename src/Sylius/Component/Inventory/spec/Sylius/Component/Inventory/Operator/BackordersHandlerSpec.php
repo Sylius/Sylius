@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Operator;
+namespace spec\Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
@@ -30,12 +30,12 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Operator\BackordersHandler');
+        $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
    }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Operator\BackordersHandlerInterface');
     }
 
     function it_backorders_units_if_quantity_is_greater_than_on_hand(

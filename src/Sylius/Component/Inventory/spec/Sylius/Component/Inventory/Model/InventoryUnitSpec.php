@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Model;
+namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -22,12 +22,12 @@ class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Model\InventoryUnit');
+        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
     }
 
     function it_implements_Sylius_inventory_unit_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Model\InventoryUnitInterface');
     }
 
     function it_has_no_id_by_default()
