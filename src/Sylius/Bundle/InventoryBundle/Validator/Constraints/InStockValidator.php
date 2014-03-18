@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
+namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -18,7 +18,7 @@ use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class StockValidator extends ConstraintValidator
+class InStockValidator extends ConstraintValidator
 {
     protected $availabilityChecker;
 

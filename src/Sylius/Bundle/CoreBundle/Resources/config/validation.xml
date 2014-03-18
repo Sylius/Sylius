@@ -162,7 +162,7 @@
     </class>
 
     <class name="Sylius\Bundle\CartBundle\Model\CartItem">
-        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\Stock">
+        <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="groups">sylius</option>
         </constraint>
     </class>

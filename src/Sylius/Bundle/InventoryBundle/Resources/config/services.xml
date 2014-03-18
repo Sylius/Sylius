@@ -25,6 +25,8 @@
         <parameter key="sylius.inventory_unit_factory.class">Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory</parameter>
 
         <parameter key="sylius.inventory_listener.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
+
+        <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
     </parameters>
 
     <services>
@@ -50,6 +52,11 @@
 
         <service id="sylius.inventory_listener" class="%sylius.inventory_listener.class%">
             <argument type="service" id="sylius.backorders_handler" />
+        </service>
+
+        <service id="sylius.validator.in_stock" class="%sylius.validator.in_stock.class%">
+            <argument type="service" id="sylius.availability_checker" />
+            <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
     </services>
 

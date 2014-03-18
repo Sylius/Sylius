@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
+namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
@@ -18,13 +18,13 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Stock extends Constraint
+class InStock extends Constraint
 {
     public $message = '%product% does not have sufficient stock.';
 
     public function validatedBy()
     {
-        return 'sylius_stock';
+        return 'sylius_in_stock';
     }
 
     public function getTargets()
