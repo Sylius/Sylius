@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnit as BaseInventoryUnit;
+use Sylius\Component\Inventory\Model\InventoryUnit as BaseInventoryUnit;
 use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
 

@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Sylius\Bundle\InventoryBundle\Operator\InsufficientStockException;
+use Sylius\Component\Inventory\Operator\InsufficientStockException;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
