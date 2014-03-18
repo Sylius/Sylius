@@ -90,6 +90,8 @@
 
         <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
         <parameter key="sylius.twig.money.class">Sylius\Bundle\CoreBundle\Twig\SyliusMoneyExtension</parameter>
+
+        <parameter key="sylius.validator.stock.class">Sylius\Bundle\CoreBundle\Validator\Constraints\StockValidator</parameter>
     </parameters>
 
     <services>
@@ -477,6 +479,12 @@
             <argument type="service" id="sylius.currency_converter" />
             <argument>%sylius.money.locale%</argument>
             <tag name="twig.extension" />
+        </service>
+
+        <!-- validator -->
+        <service id="sylius.validator.stock" class="%sylius.validator.stock.class%">
+            <argument type="service" id="sylius.availability_checker" />
+            <tag name="validator.constraint_validator" alias="sylius_stock" />
         </service>
     </services>
 
