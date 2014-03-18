@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension as BaseSyliusMoneyExtension;
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
-use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
 use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
 
