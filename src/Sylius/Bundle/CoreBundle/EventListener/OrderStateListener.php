@@ -14,6 +14,9 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
 
 /**
  * Order inventory processing listener.
@@ -30,13 +33,22 @@ class OrderStateListener
     protected $stateResolver;
 
     /**
+     * Order shipping processor.
+     *
+     * @var ShipmentProcessorInterface
+     */
+    protected $shippingProcessor;
+
+    /**
      * Constructor.
      *
-     * @param StateResolverInterface $stateResolver
+     * @param StateResolverInterface     $stateResolver
+     * @param ShipmentProcessorInterface $shippingProcessor
      */
-    public function __construct(StateResolverInterface $stateResolver)
+    public function __construct(StateResolverInterface $stateResolver, ShipmentProcessorInterface $shippingProcessor)
     {
         $this->stateResolver = $stateResolver;
+        $this->shippingProcessor = $shippingProcessor;
     }
 
     /**
@@ -58,5 +70,22 @@ class OrderStateListener
 
         $this->stateResolver->resolvePaymentState($order);
         $this->stateResolver->resolveShippingState($order);
+    }
+
+    public function release(GenericEvent $event)
+    {
+        $order = $event->getSubject();
+
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderItemInterface"'
+            );
+        }
+
+        $order->setState(OrderInterface::STATE_CART);
+        $order->setPaymentState(PaymentInterface::STATE_VOID);
+        $order->getPayment()->setState($order->getPaymentState());
+        $order->setShippingState(ShipmentInterface::STATE_CHECKOUT);
+        $this->shippingProcessor->updateShipmentStates($order->getShipments(), $order->getShippingState());
     }
 }

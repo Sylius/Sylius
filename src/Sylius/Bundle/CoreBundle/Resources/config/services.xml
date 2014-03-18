@@ -27,6 +27,9 @@
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
+
+        <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
+
         <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandler</parameter>
         <parameter key="sylius.order_processing.state_resolver.class">Sylius\Bundle\CoreBundle\OrderProcessing\StateResolver</parameter>
         <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
@@ -246,6 +249,13 @@
             <argument key="pendingDuration">%sylius.order.pending.duration%</argument>
         </service>
 
+        <service id="sylius.order.releaser" class="%sylius.order.releaser.class%">
+            <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="event_dispatcher" />
+            <argument key="holdingDuration">%sylius.inventory.holding.duration%</argument>
+        </service>
+
         <!-- listeners -->
         <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
             <argument type="service" id="fos_user.user_manager" />
@@ -270,11 +280,13 @@
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
+            <argument type="service" id="sylius.processor.shipment_processor" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" />
             <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order.pre_ship" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order.pre_cancel" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.order.pre_return" method="resolveOrderStates" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_release" method="release" priority="-100" />
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
