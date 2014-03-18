@@ -18,11 +18,11 @@
 >
 
     <parameters>
-        <parameter key="sylius.availability_checker.default.class">Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker</parameter>
-        <parameter key="sylius.inventory_operator.noop.class">Sylius\Bundle\InventoryBundle\Operator\NoopInventoryOperator</parameter>
-        <parameter key="sylius.inventory_operator.default.class">Sylius\Bundle\InventoryBundle\Operator\InventoryOperator</parameter>
-        <parameter key="sylius.backorders_handler.class">Sylius\Bundle\InventoryBundle\Operator\BackordersHandler</parameter>
-        <parameter key="sylius.inventory_unit_factory.class">Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory</parameter>
+        <parameter key="sylius.availability_checker.default.class">Sylius\Component\Inventory\Checker\AvailabilityChecker</parameter>
+        <parameter key="sylius.inventory_operator.noop.class">Sylius\Component\Inventory\Operator\NoopInventoryOperator</parameter>
+        <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
+        <parameter key="sylius.backorders_handler.class">Sylius\Component\Inventory\Operator\BackordersHandler</parameter>
+        <parameter key="sylius.inventory_unit_factory.class">Sylius\Component\Inventory\Factory\InventoryUnitFactory</parameter>
 
         <parameter key="sylius.inventory_listener.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
 

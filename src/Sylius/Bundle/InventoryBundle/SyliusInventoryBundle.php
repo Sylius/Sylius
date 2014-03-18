@@ -44,14 +44,14 @@ class SyliusInventoryBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
-            'Sylius\Bundle\InventoryBundle\Model\StockableInterface'     => 'sylius.model.stockable.class',
+            'Sylius\Component\Inventory\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
+            'Sylius\Component\Inventory\Model\StockableInterface'     => 'sylius.model.stockable.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_inventory', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\InventoryBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Inventory\Model',
         );
 
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
