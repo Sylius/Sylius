@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Addressing\Model;
 
-use Symfony\Component\Validator\ExecutionContextInterface;
-
 /**
  * Default address model.
  *
@@ -219,34 +217,6 @@ class Address implements AddressInterface
         $this->province = $province;
 
         return $this;
-    }
-
-    public function isValidProvince(ExecutionContextInterface $context)
-    {
-        if (!$this->isValid()) {
-            $context->addViolationAt('province', 'sylius.address.province.valid', array(), null);
-        }
-    }
-
-    public function isValid()
-    {
-        if (null === $this->country) {
-            return false;
-        }
-
-        if (!$this->country->hasProvinces()) {
-            return true;
-        }
-
-        if (null === $this->province) {
-            return false;
-        }
-
-        if ($this->country->hasProvince($this->province)) {
-            return true;
-        }
-
-        return false;
     }
 
     /**

@@ -89,13 +89,6 @@ interface AddressInterface
     public function setProvince(ProvinceInterface $province = null);
 
     /**
-     * Is country and province selection valid?
-     *
-     * @return Boolean
-     */
-    public function isValid();
-
-    /**
      * Get street.
      *
      * @return string
