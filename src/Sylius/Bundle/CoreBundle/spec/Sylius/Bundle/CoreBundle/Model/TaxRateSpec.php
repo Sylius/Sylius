@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

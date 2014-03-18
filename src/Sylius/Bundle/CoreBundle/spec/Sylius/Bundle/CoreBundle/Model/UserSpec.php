@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
 

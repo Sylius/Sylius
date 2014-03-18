@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
