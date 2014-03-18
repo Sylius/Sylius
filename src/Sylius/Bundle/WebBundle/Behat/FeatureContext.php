@@ -70,6 +70,9 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
 
         $purger = new ORMPurger($entityManager);
         $purger->purge();
+
+        $entityManager->clear();
+        $entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
     }
 
     /**
