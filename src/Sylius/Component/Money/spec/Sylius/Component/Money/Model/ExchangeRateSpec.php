@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Model;
+namespace spec\Sylius\Component\Money\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -17,12 +17,12 @@ class ExchangeRateSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Model\ExchangeRate');
+        $this->shouldHaveType('Sylius\Component\Money\Model\ExchangeRate');
     }
 
     function it_implements_Sylius_exchange_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface');
+        $this->shouldImplement('Sylius\Component\Money\Model\ExchangeRateInterface');
     }
 
     function it_has_no_id_by_default()
