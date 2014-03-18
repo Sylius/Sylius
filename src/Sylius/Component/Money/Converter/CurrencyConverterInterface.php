@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\MoneyBundle\Context;
+namespace Sylius\Component\Money\Converter;
 
-interface CurrencyContextInterface
+interface CurrencyConverterInterface
 {
-    public function getDefaultCurrency();
-    public function getCurrency();
-    public function setCurrency($currency);
+    public function convert($value, $currency);
 }

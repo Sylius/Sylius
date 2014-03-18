@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
-use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
