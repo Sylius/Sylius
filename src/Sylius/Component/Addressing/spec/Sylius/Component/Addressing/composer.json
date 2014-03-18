@@ -1,0 +1,42 @@
+{
+    "name": "sylius/addressing-component",
+    "type": "library",
+    "description": "Addressing and zone management for PHP applications.",
+    "keywords": ["shop", "ecommerce", "address", "addressing", "zones"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource-component": "1.0.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Component\\Addressing\\": "" }
+    },
+    "target-dir": "Sylius/Component/Addressing",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
