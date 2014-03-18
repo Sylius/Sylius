@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Request;
 
-use Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface;
 use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Payment\Model\CreditCardInterface;
 
 class ObtainCreditCardRequest
 {

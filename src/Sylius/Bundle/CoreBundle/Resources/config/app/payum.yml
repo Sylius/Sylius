@@ -24,7 +24,7 @@ payum:
                 Sylius\Bundle\CoreBundle\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
 
@@ -44,7 +44,7 @@ payum:
                 Sylius\Bundle\CoreBundle\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
 
@@ -65,7 +65,7 @@ payum:
                 Sylius\Bundle\CoreBundle\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
 
@@ -86,7 +86,7 @@ payum:
                 Sylius\Bundle\CoreBundle\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
 
@@ -100,6 +100,6 @@ payum:
                 Sylius\Bundle\CoreBundle\Model\Order:
                     doctrine:
                         driver: orm
-                Sylius\Bundle\PaymentsBundle\Model\Payment:
+                Sylius\Component\Payment\Model\Payment:
                     doctrine:
                         driver: orm
