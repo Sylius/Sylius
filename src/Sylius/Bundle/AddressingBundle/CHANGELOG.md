@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.9.0
+
+* Release before components introduction.
+
+
 ### v0.8.0
 
 * Convert translation files to YAML.
