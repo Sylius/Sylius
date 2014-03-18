@@ -1,5 +1,5 @@
 {
-    "name": "sylius/addressing-component",
+    "name": "sylius/addressing",
     "type": "library",
     "description": "Addressing and zone management for PHP applications.",
     "keywords": ["shop", "ecommerce", "address", "addressing", "zones"],
@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource-component": "1.0.*@dev"
+        "sylius/resource": "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev"
