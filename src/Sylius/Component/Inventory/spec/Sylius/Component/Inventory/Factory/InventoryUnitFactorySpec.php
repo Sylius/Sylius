@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Factory;
+namespace spec\Sylius\Component\Inventory\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 /**
@@ -28,12 +28,12 @@ class InventoryUnitFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactory');
+        $this->shouldHaveType('Sylius\Component\Inventory\Factory\InventoryUnitFactory');
     }
 
     function it_implements_Sylius_inventory_unit_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Factory\InventoryUnitFactoryInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface');
     }
 
     function it_throws_exception_if_given_quantity_is_less_than_1(StockableInterface $stockable)
