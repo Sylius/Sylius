@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
 
 /**
  * Sets currently selected currency on order object.

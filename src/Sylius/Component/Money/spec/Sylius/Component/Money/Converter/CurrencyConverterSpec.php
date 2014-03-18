@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Converter;
+namespace spec\Sylius\Component\Money\Converter;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
@@ -24,12 +24,12 @@ class CurrencyConverterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverter');
+        $this->shouldHaveType('Sylius\Component\Money\Converter\CurrencyConverter');
     }
 
     function it_implements_Sylius_exchange_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface');
+        $this->shouldImplement('Sylius\Component\Money\Converter\CurrencyConverterInterface');
     }
 
     function it_converts_to_any_currency(ExchangeRateInterface $exchangeRate, $exchangeRateRepository)

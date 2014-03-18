@@ -27,7 +27,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderItem;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 use Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
-use Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 use Sylius\Bundle\OrderBundle\Model\OrderInterface;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
