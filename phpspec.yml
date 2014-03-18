@@ -7,7 +7,7 @@ suites:
     MoneyBundle           : { namespace: Sylius, spec_path: src/Sylius/Bundle/MoneyBundle }
     OmnipayBundle         : { namespace: Sylius, spec_path: src/Sylius/Bundle/OmnipayBundle }
     OrderBundle           : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
-    PaymentsBundle        : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentsBundle }
+    PaymentBundle         : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentBundle }
     PayumBundle           : { namespace: Sylius, spec_path: src/Sylius/Bundle/PayumBundle }
     ProductBundle         : { namespace: Sylius, spec_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/PromotionBundle }

@@ -13,14 +13,14 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
 
 class PurchaseListenerSpec extends ObjectBehavior
 {
