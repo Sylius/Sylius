@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\Context;
 
+use Sylius\Component\Money\Context\CurrencyContextInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrencyContext implements CurrencyContextInterface

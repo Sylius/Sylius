@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\MoneyBundle\Model\ExchangeRate" table="sylius_exchange_rate">
+    <mapped-superclass name="Sylius\Component\Money\Model\ExchangeRate" table="sylius_exchange_rate">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
