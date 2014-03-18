@@ -17,7 +17,7 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredNotifyRequest;
 use Payum\Core\Request\SyncRequest;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Bundle\PaymentBundle\SyliusPaymentEvents;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -36,6 +36,7 @@ class NotifyOrderAction extends PaymentAwareAction
 
     /**
      * @param EventDispatcherInterface $eventDispatcher
+     * @param ObjectManager            $objectManager
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager)
     {

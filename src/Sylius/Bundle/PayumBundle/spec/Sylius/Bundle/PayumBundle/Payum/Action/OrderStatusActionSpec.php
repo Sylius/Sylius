@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Core\Request\StatusRequestInterface;
 use Payum\Core\PaymentInterface as PayumPaymentInterface;
+use Payum\Core\Request\StatusRequestInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class OrderStatusActionSpec extends ObjectBehavior
 {

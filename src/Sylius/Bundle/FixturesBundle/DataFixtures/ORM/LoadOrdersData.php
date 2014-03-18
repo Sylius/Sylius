@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LoadOrdersData extends DataFixture
