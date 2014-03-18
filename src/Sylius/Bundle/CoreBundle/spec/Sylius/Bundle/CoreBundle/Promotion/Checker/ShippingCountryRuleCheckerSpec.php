@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**

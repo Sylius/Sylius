@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
