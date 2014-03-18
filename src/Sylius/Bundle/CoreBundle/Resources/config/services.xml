@@ -243,7 +243,7 @@
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
-            <argument key="pendingOrderTtl">%sylius.order.pending_order_ttl%</argument>
+            <argument key="pendingDuration">%sylius.order.pending.duration%</argument>
         </service>
 
         <!-- listeners -->

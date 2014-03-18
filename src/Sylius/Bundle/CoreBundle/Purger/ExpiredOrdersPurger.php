@@ -4,8 +4,10 @@ namespace Sylius\Bundle\CoreBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CartBundle\Purger\PurgerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 
 /**
  * Purge expired pending orders
@@ -29,17 +31,17 @@ class ExpiredOrdersPurger implements PurgerInterface
     protected $repository;
 
     /**
-     * Pending order TTL.
+     * Pending order duration.
      *
      * @var string
      */
-    protected $pendingOrderTtl;
+    protected $pendingDuration;
 
-    public function __construct(ObjectManager $manager, OrderRepository $repository, $pendingOrderTtl)
+    public function __construct(ObjectManager $manager, OrderRepository $repository, $pendingDuration)
     {
         $this->manager = $manager;
         $this->repository = $repository;
-        $this->pendingOrderTtl = $pendingOrderTtl;
+        $this->pendingDuration = $pendingDuration;
     }
 
     /**
@@ -47,25 +49,31 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     public function purge()
     {
-        $expiresAt = new \DateTime();
-        $expiresAt->sub(new \DateInterval($this->pendingOrderTtl));
+        $expiresAt = (new \DateTime)->modify(sprintf('-%s', $this->pendingDuration));
 
         $orders = $this->repository->findExpiredPendingOrders($expiresAt);
-
         foreach ($orders as $order) {
-            $this->purgeOrder($order);
+            // Check if order has any on-hold inventory units.
+            $hasOnHoldInventoryUnits = (new ArrayCollection($order->getInventoryUnits()->toArray()))->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
+                return InventoryUnitInterface::STATE_ONHOLD === $inventoryUnit->getInventoryState();
+            });
+
+            if (!$hasOnHoldInventoryUnits) {
+                $this->purgeOrder($order);
+            }
         }
 
         $this->manager->flush();
     }
 
     /**
-     * Purge a cart
+     * Purge an order
      *
-     * @param OrderInterface $cart
+     * @param OrderInterface $order
      */
-    protected function purgeOrder(OrderInterface $cart)
+    protected function purgeOrder(OrderInterface $order)
     {
-        $this->manager->remove($cart);
+        $order->setState(OrderInterface::STATE_ABANDONED);
+        $this->manager->persist($order);
     }
 }

@@ -41,4 +41,4 @@ parameters:
     sylius.inventory.backorders_enabled: true
     sylius.inventory.tracking_enabled: true
 
-    sylius.order.pending_order_ttl: PT3H
+    sylius.order.pending.duration: 3 hours
