@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Checker;
+namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -26,12 +26,12 @@ class AvailabilityCheckerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Checker\AvailabilityChecker');
+        $this->shouldHaveType('Sylius\Component\Inventory\Checker\AvailabilityChecker');
     }
 
     function it_implements_Sylius_inventory_availability_checker_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface');
     }
 
     function it_recognizes_any_stockable_as_available_if_backorders_are_enabled(StockableInterface $stockable)

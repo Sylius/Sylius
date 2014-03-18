@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\InventoryBundle\Operator;
+namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\InventoryUnitInterface;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
@@ -21,11 +20,11 @@ class NoopInventoryOperatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Operator\NoopInventoryOperator');
+        $this->shouldHaveType('Sylius\Component\Inventory\Operator\NoopInventoryOperator');
     }
 
     function it_implements_Sylius_inventory_operator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\InventoryBundle\Operator\InventoryOperatorInterface');
+        $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
     }
 }
