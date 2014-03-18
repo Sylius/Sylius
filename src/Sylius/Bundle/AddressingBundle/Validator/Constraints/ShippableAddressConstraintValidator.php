@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -29,7 +29,7 @@ class ShippableAddressConstraintValidator extends ConstraintValidator
     {
         if (!$value instanceof AddressInterface) {
             throw new \InvalidArgumentException(
-                'ShippableAddressConstraintValidator can only validate instances of "Sylius\Bundle\AddressingBundle\Model\AddressInterface"'
+                'ShippableAddressConstraintValidator can only validate instances of "Sylius\Component\Addressing\Model\AddressInterface"'
             );
         }
 
