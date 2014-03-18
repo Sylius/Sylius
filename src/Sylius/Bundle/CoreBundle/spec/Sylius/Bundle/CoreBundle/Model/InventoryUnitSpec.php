@@ -31,7 +31,7 @@ class InventoryUnitSpec extends ObjectBehavior
 
     function it_extends_Sylius_inventory_unit_model()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Model\InventoryUnit');
+        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
     }
 
     function it_implements_Sylius_shipment_item_interface()
