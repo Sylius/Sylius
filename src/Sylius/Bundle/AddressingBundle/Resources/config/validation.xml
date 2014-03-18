@@ -20,6 +20,9 @@
         <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraint">
             <option name="groups">shippable</option>
         </constraint>
+        <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.first_name.not_blank</option>
@@ -53,12 +56,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <constraint name="Callback">
-            <option name="methods">
-                <value>isValidProvince</value>
-            </option>
-            <option name="groups">sylius</option>
-        </constraint>
         <property name="street">
             <constraint name="NotBlank">
                 <option name="message">sylius.address.street.not_blank</option>
