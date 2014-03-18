@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\AddressingBundle\Model\Address">
+    <class name="Sylius\Component\Addressing\Model\Address">
         <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraint">
             <option name="groups">shippable</option>
         </constraint>
@@ -100,7 +100,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\AddressingBundle\Model\Country">
+    <class name="Sylius\Component\Addressing\Model\Country">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.country.name.not_blank</option>
@@ -131,7 +131,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\AddressingBundle\Model\Province">
+    <class name="Sylius\Component\Addressing\Model\Province">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.province.name.not_blank</option>
@@ -147,7 +147,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\AddressingBundle\Model\Zone">
+    <class name="Sylius\Component\Addressing\Model\Zone">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.zone.name.not_blank</option>
