@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 class InventoryUnitSpec extends ObjectBehavior
 {
@@ -36,7 +36,7 @@ class InventoryUnitSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipment_item_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShipmentItemInterface');
     }
 
     function it_does_not_belong_to_any_shipment_by_default()

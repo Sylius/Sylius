@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 
 /**
  * Sylius core product Variant interface.
