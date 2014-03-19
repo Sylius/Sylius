@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Calculator;
+namespace spec\Sylius\Component\Taxation\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -21,12 +21,12 @@ class DefaultCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator');
+        $this->shouldHaveType('Sylius\Component\Taxation\Calculator\DefaultCalculator');
     }
 
     function it_implements_Sylius_tax_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Calculator\CalculatorInterface');
     }
 
     function it_calculates_tax_as_percentage_of_given_base_if_rate_is_not_included_in_price(
