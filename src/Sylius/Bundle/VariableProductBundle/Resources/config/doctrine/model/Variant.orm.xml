@@ -18,7 +18,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\Variant" table="sylius_variant">
+    <mapped-superclass name="Sylius\Component\Product\Model\Variable\Variant" table="sylius_variant">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -26,11 +26,11 @@
         <field name="presentation" column="presentation" type="string" nullable="true" />
         <field name="availableOn" column="available_on" type="datetime" />
 
-        <many-to-one field="product" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface" inversed-by="variants">
+        <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="variants">
             <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
-        <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface">
+        <many-to-many field="options" target-entity="Sylius\Component\Product\Model\Variable\OptionValueInterface">
             <join-table name="sylius_variant_option_value">
                 <join-columns>
                     <join-column name="variant_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />

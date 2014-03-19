@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Validator;
 
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\Product\Model\Variable\VariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -29,7 +29,7 @@ class VariantCombinationValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Component\Product\Model\Variable\VariantInterface');
         }
 
         $variant = $value;

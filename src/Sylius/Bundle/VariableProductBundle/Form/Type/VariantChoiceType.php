@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\VariableProductBundle\Form\Type;
 
 use Sylius\Bundle\VariableProductBundle\Form\ChoiceList\VariantChoiceList;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\Product\Model\Variable\VariableProductInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -57,7 +57,7 @@ class VariantChoiceType extends AbstractType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => array('Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface')
+                'product' => array('Sylius\Component\Product\Model\Variable\VariableProductInterface')
             ))
         ;
     }
