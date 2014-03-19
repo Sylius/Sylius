@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
-use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 
 /**
  * Sylius money Twig helper.
