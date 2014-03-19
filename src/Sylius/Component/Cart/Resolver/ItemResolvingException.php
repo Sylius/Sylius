@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
-
-use Sylius\Component\Order\Model\OrderItem;
+namespace Sylius\Component\Cart\Resolver;
 
 /**
- * Model for cart items.
+ * Exception which should be thrown by item resolver if anything failed.
+ * The message should be displayed to user.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class CartItem extends OrderItem implements CartItemInterface
+class ItemResolvingException extends \InvalidArgumentException
 {
 }

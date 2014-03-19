@@ -11,13 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Sylius\Bundle\CartBundle\Model\CartItem;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnit;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Cart\Model\CartItem;
 
 /**
  * Order item model.
@@ -36,7 +32,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * Inventory units.
      *
-     * @var Collection|InventoryUnitInterface[]
+     * @var ArrayCollection|InventoryUnitInterface[]
      */
     protected $inventoryUnits;
 
@@ -44,7 +40,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         parent::__construct();
 
-        $this->inventoryUnits = new ArrayCollection;
+        $this->inventoryUnits = new ArrayCollection();
     }
 
     /**
