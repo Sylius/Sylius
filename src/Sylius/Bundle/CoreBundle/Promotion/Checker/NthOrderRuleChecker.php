@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Checks if users order is the nth one.
