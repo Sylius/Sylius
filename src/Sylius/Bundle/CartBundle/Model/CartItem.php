@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Model;
 
-use Sylius\Bundle\OrderBundle\Model\OrderItem;
+use Sylius\Component\Order\Model\OrderItem;
 
 /**
  * Model for cart items.

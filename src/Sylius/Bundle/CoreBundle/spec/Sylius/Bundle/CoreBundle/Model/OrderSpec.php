@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 
 /**
@@ -33,12 +33,12 @@ class OrderSpec extends ObjectBehavior
 
     function it_should_implement_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\OrderBundle\Model\OrderInterface');
+        $this->shouldImplement('Sylius\Component\Order\Model\OrderInterface');
     }
 
     function it_should_extend_Sylius_order_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
     function it_should_not_have_user_defined_by_default()
