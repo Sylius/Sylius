@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
-use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
