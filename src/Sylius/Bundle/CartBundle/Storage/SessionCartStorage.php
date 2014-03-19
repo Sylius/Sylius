@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Storage;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**

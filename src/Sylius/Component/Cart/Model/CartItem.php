@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Model;
+namespace Sylius\Component\Cart\Model;
 
-use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItem;
 
 /**
- * Interface for cart item model.
+ * Model for cart items.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface CartItemInterface extends OrderItemInterface
+class CartItem extends OrderItem implements CartItemInterface
 {
 }
