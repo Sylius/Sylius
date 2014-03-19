@@ -27,7 +27,7 @@
             <join-column name="payment_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one target-entity="Sylius\Bundle\PromotionsBundle\Model\CouponInterface" field="promotionCoupon">
+        <many-to-one target-entity="Sylius\Component\Promotion\Model\CouponInterface" field="promotionCoupon">
             <join-column name="coupon_id" on-delete="SET NULL" />
         </many-to-one>
 
@@ -45,7 +45,7 @@
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
         
-        <many-to-many field="promotions" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface">
+        <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
                     <join-column name="order_id" referenced-column-name="id" />

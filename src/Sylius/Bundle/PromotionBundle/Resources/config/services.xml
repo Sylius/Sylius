@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.promotion_processor.class">Sylius\Component\Promotion\Processor\PromotionProcessor</parameter>
+
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\PromotionEligibilityChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\ItemTotalRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Component\Promotion\Checker\ItemCountRuleChecker</parameter>
+
+        <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
+        <parameter key="sylius.generator.instructions.class">Sylius\Component\Promotion\Generator\Instruction</parameter>
+
+        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistry</parameter>
+        <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Promotion\Action\Registry\PromotionActionRegistry</parameter>
+
+        <parameter key="sylius.form.type.promotion.class">Sylius\Bundle\PromotionBundle\Form\Type\PromotionType</parameter>
+        <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.class">Sylius\Bundle\PromotionBundle\Form\Type\RuleType</parameter>
+        <parameter key="sylius.form.type.promotion_action.class">Sylius\Bundle\PromotionBundle\Form\Type\ActionType</parameter>
+        <parameter key="sylius.form.type.promotion_rule_choice.class">Sylius\Bundle\PromotionBundle\Form\Type\RuleChoiceType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.item_total_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.item_count_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_action_choice.class">Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType</parameter>
+
+        <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_action.percentage_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType</parameter>
+
+        <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType</parameter>
+
+        <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType</parameter>
+        <parameter key="sylius.generator.promotion_coupon.class">Sylius\Component\Promotion\Generator\CouponGenerator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="sylius.promotion_applicator" />
+        </service>
+
+        <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
+            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="sylius.promotion_rule_checker.item_total" class="%sylius.promotion_rule_checker.item_total.class%">
+            <tag name="sylius.promotion_rule_checker" type="item_total" label="Item total" />
+        </service>
+        <service id="sylius.promotion_rule_checker.item_count" class="%sylius.promotion_rule_checker.item_count.class%">
+            <tag name="sylius.promotion_rule_checker" type="item_count" label="Item count" />
+        </service>
+
+        <service id="sylius.promotion_applicator" class="%sylius.promotion_applicator.class%">
+            <argument type="service" id="sylius.registry.promotion_action" />
+        </service>
+
+        <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%" />
+        <service id="sylius.registry.promotion_action" class="%sylius.registry.promotion_action.class%" />
+
+        <service id="sylius.form.type.promotion" class="%sylius.form.type.promotion.class%">
+            <argument>%sylius.model.promotion.class%</argument>
+            <argument>%sylius.validation_group.promotion%</argument>
+            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="sylius.registry.promotion_action" />
+            <tag name="form.type" alias="sylius_promotion" />
+        </service>
+        <service id="sylius.form.type.promotion_coupon" class="%sylius.form.type.promotion_coupon.class%">
+            <argument>%sylius.model.promotion_coupon.class%</argument>
+            <argument>%sylius.validation_group.promotion_coupon%</argument>
+            <tag name="form.type" alias="sylius_promotion_coupon" />
+        </service>
+        <service id="sylius.form.type.promotion_rule" class="%sylius.form.type.promotion_rule.class%">
+            <argument>%sylius.model.promotion_rule.class%</argument>
+            <argument>%sylius.validation_group.promotion_rule%</argument>
+            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <tag name="form.type" alias="sylius_promotion_rule" />
+        </service>
+        <service id="sylius.form.type.promotion_action" class="%sylius.form.type.promotion_action.class%">
+            <argument>%sylius.model.promotion_action.class%</argument>
+            <argument>%sylius.validation_group.promotion_action%</argument>
+            <argument type="service" id="sylius.registry.promotion_action" />
+            <tag name="form.type" alias="sylius_promotion_action" />
+        </service>
+        <service id="sylius.form.type.promotion_rule_choice" class="%sylius.form.type.promotion_rule_choice.class%">
+            <argument>%sylius.promotion_rules%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_choice" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.item_total_configuration" class="%sylius.form.type.promotion_rule.item_total_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_item_total_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_item_total_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.item_count_configuration" class="%sylius.form.type.promotion_rule.item_count_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_item_count_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_item_count_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action_choice" class="%sylius.form.type.promotion_action_choice.class%">
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_choice" />
+        </service>
+        <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="%sylius.form.type.promotion_action.fixed_discount_configuration.class%">
+            <argument>%sylius.validation_group.promotion_action_fixed_discount_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="%sylius.form.type.promotion_action.percentage_discount_configuration.class%">
+            <argument>%sylius.validation_group.promotion_action_percentage_discount_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_coupon_to_code" class="%sylius.form.type.promotion_coupon_to_code.class%">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
+        </service>
+
+        <service id="sylius.form.type.promotion_coupon_generate_instruction" class="%sylius.form.type.promotion_coupon_generate_instruction.class%">
+            <argument>%sylius.generator.instructions.class%</argument>
+            <argument>%sylius.validation_group.promotion_coupon_generate_instruction%</argument>
+            <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
+        </service>
+        <service id="sylius.generator.promotion_coupon" class="%sylius.generator.promotion_coupon.class%">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="sylius.manager.promotion_coupon" />
+        </service>
+    </services>
+
+</container>

@@ -16,8 +16,8 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Sylius\Bundle\PromotionsBundle\Model\CouponInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 
 /**

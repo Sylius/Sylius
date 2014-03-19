@@ -15,8 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
@@ -35,7 +35,7 @@ class AddProductActionSpec extends ObjectBehavior
 
     function it_implements_Sylius_promotion_action_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
     function it_adds_product_as_promotion(
