@@ -47,12 +47,12 @@ class SyliusPaymentBundle extends Bundle
             'Sylius\Component\Payment\Model\PaymentMethodInterface' => 'sylius.model.payment_method.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_payments', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_payment', $interfaces));
 
         $mappings = array(
             realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Payment\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payments.driver.doctrine/orm'));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_payment.driver.doctrine/orm'));
     }
 }

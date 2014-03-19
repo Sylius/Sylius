@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
