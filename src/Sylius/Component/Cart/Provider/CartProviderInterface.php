@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Provider;
+namespace Sylius\Component\Cart\Provider;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartInterface;
 
 /**
  * Interface for object that is accessor for cart.

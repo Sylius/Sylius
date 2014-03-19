@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Resolver;
+namespace Sylius\Component\Cart\Resolver;
 
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 
 /**
  * Resolver returns cart item that needs to be added based on given data.

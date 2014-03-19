@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Purger;
+namespace Sylius\Component\Cart\Purger;
 
 /**
  * Interface for the expired carts purger.
