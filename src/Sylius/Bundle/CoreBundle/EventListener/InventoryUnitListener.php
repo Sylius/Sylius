@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * Inventory unit listener.

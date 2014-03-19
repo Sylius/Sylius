@@ -31,7 +31,7 @@
             <join-column name="coupon_id" on-delete="SET NULL" />
         </many-to-one>
 
-        <one-to-many field="shipments" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
+        <one-to-many field="shipments" target-entity="Sylius\Component\Shipping\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>
