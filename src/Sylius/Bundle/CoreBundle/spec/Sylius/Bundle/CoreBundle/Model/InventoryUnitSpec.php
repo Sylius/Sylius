@@ -61,7 +61,7 @@ class InventoryUnitSpec extends ObjectBehavior
 
     function it_has_checkout_shipping_state_by_default()
     {
-        $this->getShippingState()->shouldReturn(\Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CHECKOUT);
+        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_CHECKOUT);
     }
 
     function its_shipping_state_is_mutable()

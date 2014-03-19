@@ -43,7 +43,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param \Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
+     * @param CalculatorRegistryInterface $calculatorRegistry
      * @param FormFactoryInterface        $factory
      */
     public function __construct(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
