@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
