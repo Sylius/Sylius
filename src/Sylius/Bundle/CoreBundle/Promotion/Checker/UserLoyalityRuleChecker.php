@@ -11,11 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
-use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
-use DateTime;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Checks if user is created before/after configured period of time.
@@ -37,7 +36,7 @@ class UserLoyalityRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        $time = new DateTime(sprintf('%d %s ago', $configuration['time'], $configuration['unit']));
+        $time = new \DateTime(sprintf('%d %s ago', $configuration['time'], $configuration['unit']));
 
         if (isset($configuration['after']) && $configuration['after']) {
             return $user->getCreatedAt() >= $time;

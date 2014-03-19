@@ -13,9 +13,8 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
-use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
-use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\ActionInterface;
 
 /**
  * Default promotion fixtures.
