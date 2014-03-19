@@ -120,7 +120,7 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippable(\Sylius\Component\Shipping\Model\ShippableInterface $shippable)
+    public function setShippable(ShippableInterface $shippable)
     {
         $this->setStockable($shippable);
 
