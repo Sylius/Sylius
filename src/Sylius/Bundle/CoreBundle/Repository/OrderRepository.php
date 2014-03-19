@@ -201,8 +201,9 @@ class OrderRepository extends CartRepository
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
-            ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.state', OrderInterface::STATE_PENDING))
+            ->andWhere($this->getAlias().'.state = :state')
             ->setParameter('expiresAt', $expiresAt)
+            ->setParameter('state', OrderInterface::STATE_PENDING)
         ;
 
         return $queryBuilder->getQuery()->getResult();

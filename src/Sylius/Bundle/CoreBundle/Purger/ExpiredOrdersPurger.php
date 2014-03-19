@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+*
+* (c) Paweł Jędrzejewski
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 namespace Sylius\Bundle\CoreBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -49,12 +58,13 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     public function purge()
     {
-        $expiresAt = (new \DateTime)->modify(sprintf('-%s', $this->pendingDuration));
+        $expiresAt = new \DateTime(sprintf('-%s', $this->pendingDuration));
 
         $orders = $this->repository->findExpiredPendingOrders($expiresAt);
         foreach ($orders as $order) {
+            $inventoryUnitsCollection = new ArrayCollection($order->getInventoryUnits()->toArray());
             // Check if order has any on-hold inventory units.
-            $hasOnHoldInventoryUnits = (new ArrayCollection($order->getInventoryUnits()->toArray()))->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
+            $hasOnHoldInventoryUnits = $inventoryUnitsCollection->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
                 return InventoryUnitInterface::STATE_ONHOLD === $inventoryUnit->getInventoryState();
             });
 

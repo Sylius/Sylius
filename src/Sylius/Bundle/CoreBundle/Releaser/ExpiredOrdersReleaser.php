@@ -1,68 +1,49 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+*
+* (c) Paweł Jędrzejewski
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 namespace Sylius\Bundle\CoreBundle\Releaser;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
 
 /**
- * Release expired pending orders
+ * Release expired orders.
  *
- * @author Ka-Yue Yeung <kayuey@gmail.com>
+ * @author Foo Pang <foo.pang@gmail.com>
  */
 class ExpiredOrdersReleaser implements ReleaserInterface
 {
     /**
-     * Order manager.
+     * Shipping processor.
      *
-     * @var ObjectManager
+     * @var ShipmentProcessorInterface
      */
-    protected $manager;
+    protected $shippingProcessor;
 
-    /**
-     * Order repository.
-     *
-     * @var OrderRepository
-     */
-    protected $repository;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
-
-    /**
-     * Inventory holding duration.
-     *
-     * @var string
-     */
-    protected $holdingDuration;
-
-    public function __construct(ObjectManager $manager, OrderRepository $repository, EventDispatcherInterface $dispatcher, $holdingDuration)
+    public function __construct(ShipmentProcessorInterface $shippingProcessor)
     {
-        $this->manager = $manager;
-        $this->repository = $repository;
-        $this->dispatcher = $dispatcher;
-        $this->holdingDuration = $holdingDuration;
+        $this->shippingProcessor = $shippingProcessor;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function release()
+    public function release(OrderInterface $order)
     {
-        $expiresAt = (new \DateTime)->modify(sprintf('-%s', $this->holdingDuration));
-
-        $orders = $this->repository->findExpiredPendingOrders($expiresAt);
-        foreach ($orders as $order) {
-            $this->dispatcher->dispatch(SyliusOrderEvents::PRE_RELEASE, new GenericEvent($order));
-            $this->dispatcher->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
-            $this->manager->persist($order);
-        }
-        $this->manager->flush();
+        $order->setPaymentState(PaymentInterface::STATE_VOID);
+        $order->getPayment()->setState($order->getPaymentState());
+        $order->setShippingState(ShipmentInterface::STATE_CHECKOUT);
+        $this->shippingProcessor->updateShipmentStates($order->getShipments(), $order->getShippingState());
     }
 }
