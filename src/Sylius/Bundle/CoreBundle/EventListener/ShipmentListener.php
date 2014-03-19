@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
 use Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface;
 use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
+use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 
 /**
  * Shipment listener.
@@ -79,6 +80,22 @@ class ShipmentListener
         }
     }
 
+    /**
+     * Set shipment status to checkout.
+     *
+     * @param GenericEvent $event
+     */
+    public function releaseOrder(GenericEvent $event)
+    {
+        $order = $this->getOrder($event);
+
+        $this->shippingProcessor->updateShipmentStates(
+            $order->getShipments(),
+            ShipmentInterface::STATE_CHECKOUT,
+            ShipmentInterface::STATE_ONHOLD
+        );
+    }
+
     private function getShipment(GenericEvent $event)
     {
         $shipment = $event->getSubject();
@@ -90,5 +107,18 @@ class ShipmentListener
         }
 
         return $shipment;
+    }
+
+    private function getOrder(GenericEvent $event)
+    {
+        $order = $event->getSubject();
+
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderItemInterface"'
+            );
+        }
+
+        return $order;
     }
 }

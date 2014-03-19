@@ -62,9 +62,8 @@ class ExpiredOrdersPurger implements PurgerInterface
 
         $orders = $this->repository->findExpiredPendingOrders($expiresAt);
         foreach ($orders as $order) {
-            $inventoryUnitsCollection = new ArrayCollection($order->getInventoryUnits()->toArray());
             // Check if order has any on-hold inventory units.
-            $hasOnHoldInventoryUnits = $inventoryUnitsCollection->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
+            $hasOnHoldInventoryUnits = $order->getInventoryUnits()->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
                 return InventoryUnitInterface::STATE_ONHOLD === $inventoryUnit->getInventoryState();
             });
 
