@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Calculator;
+namespace spec\Sylius\Component\Taxation\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -22,12 +22,12 @@ class DelegatingCalculatorSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator');
+        $this->shouldHaveType('Sylius\Component\Taxation\Calculator\DelegatingCalculator');
     }
 
     function it_should_be_a_Sylius_tax_calculator()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Calculator\CalculatorInterface');
     }
 
     function it_should_initialize_calculators_array_by_default()
