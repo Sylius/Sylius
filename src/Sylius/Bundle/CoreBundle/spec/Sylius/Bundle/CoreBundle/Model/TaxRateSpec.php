@@ -31,7 +31,7 @@ class TaxRateSpec extends ObjectBehavior
 
     function it_should_extend_Sylius_tax_rate_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Model\TaxRate');
+        $this->shouldHaveType('Sylius\Component\Taxation\Model\TaxRate');
     }
 
     function it_should_not_have_any_zone_defined_by_default()
