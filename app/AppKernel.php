@@ -18,8 +18,4 @@ use Sylius\Bundle\CoreBundle\Kernel\SyliusKernel;
  */
 class AppKernel extends SyliusKernel
 {
-    public function getDir()
-    {
-        return __DIR__;
-    }
 }
