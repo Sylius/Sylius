@@ -814,7 +814,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $this->assertSession()->elementExists('css', '#confirmationModalContainer');
 
         $modalContainer = $this->getSession()->getPage()->find('css', '#confirmationModalContainer');
-        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")' ,$button));
+        $primaryButton = $modalContainer->find('css', sprintf('a:contains("%s")', $button));
 
         $this->getSession()->wait(100);
 
