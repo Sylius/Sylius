@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxationBundle\Resolver;
+namespace Sylius\Component\Taxation\Resolver;
 
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * Tax rate resolver interface.

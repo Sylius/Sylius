@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Model;
+namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,12 +20,12 @@ class TaxCategorySpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Model\TaxCategory');
+        $this->shouldHaveType('Sylius\Component\Taxation\Model\TaxCategory');
     }
 
     function it_should_implement_Sylius_tax_category_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxCategoryInterface');
     }
 
     function it_should_not_have_id_by_default()
