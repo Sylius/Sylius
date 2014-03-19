@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CartBundle\Model\CartItem" table="sylius_cart_item">
+    <mapped-superclass name="Sylius\Component\Cart\Model\CartItem" table="sylius_cart_item">
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\CartBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\Storage\SessionCartStorage;
+use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -33,7 +33,7 @@ class SessionCartStorageSpec extends ObjectBehavior
 
     function it_implements_Sylius_cart_storage_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CartBundle\Storage\CartStorageInterface');
+        $this->shouldImplement('Sylius\Component\Cart\Storage\CartStorageInterface');
     }
 
     function it_returns_cart_identifier_via_session($session)
