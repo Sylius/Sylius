@@ -17,9 +17,9 @@ use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculatorInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

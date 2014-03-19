@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -64,7 +64,7 @@ class VariantSpec extends ObjectBehavior
 
     function it_implements_Sylius_shippable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShippableInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');
     }
 
     function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)
