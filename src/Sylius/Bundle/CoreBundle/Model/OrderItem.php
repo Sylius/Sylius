@@ -17,7 +17,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Sylius\Bundle\CartBundle\Model\CartItem;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnit;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
 /**
  * Order item model.
