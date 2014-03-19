@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Calculator\DefaultCalculators;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * Default shipping fixtures.
