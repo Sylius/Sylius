@@ -12,23 +12,23 @@
 namespace Sylius\Bundle\CartBundle\Resolver;
 
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Resolver returns cart item that needs to be added based on request.
+ * Resolver returns cart item that needs to be added based on given data.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 interface ItemResolverInterface
 {
     /**
-     * Returns item to add.
-     * It takes empty and clean item object as first argument.
+     * Returns item that will be added into the cart.
      *
-     * @param CartItemInterface $item
-     * @param Request           $request
+     * @param CartItemInterface $item Empty and clean item object as first argument
+     * @param mixed             $data Mixed data from which item identifier is extracted
      *
      * @return CartItemInterface
+     *
+     * @throws ItemResolvingException
      */
-    public function resolve(CartItemInterface $item, Request $request);
+    public function resolve(CartItemInterface $item, $data);
 }
