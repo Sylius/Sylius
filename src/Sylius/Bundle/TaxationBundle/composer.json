@@ -23,7 +23,8 @@
         "php":                             ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "sylius/resource-bundle":          "0.9.*@dev",
+        "sylius/resource-bundle":          "0.10.*@dev",
+        "sylius/taxation":                 "0.10.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {

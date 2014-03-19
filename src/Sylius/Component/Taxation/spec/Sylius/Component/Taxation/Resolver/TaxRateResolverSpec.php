@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxationBundle\Resolver;
+namespace spec\Sylius\Component\Taxation\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\TaxationBundle\Model\TaxableInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -29,12 +29,12 @@ class TaxRateResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver');
+        $this->shouldHaveType('Sylius\Component\Taxation\Resolver\TaxRateResolver');
     }
 
     function it_implements_Sylius_tax_rate_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Resolver\TaxRateResolverInterface');
     }
 
     function it_returns_tax_rate_for_given_taxable_category(
