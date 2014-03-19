@@ -27,7 +27,7 @@
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="shippingCategory" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface">
+        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
             <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 

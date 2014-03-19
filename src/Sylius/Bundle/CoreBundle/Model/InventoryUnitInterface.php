@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Component\Inventory\Model\InventoryUnitInterface as BaseInventoryUnitInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 
 /**
  * Inventory unit interface.

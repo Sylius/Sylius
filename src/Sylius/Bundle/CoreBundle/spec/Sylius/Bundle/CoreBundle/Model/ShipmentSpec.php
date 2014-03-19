@@ -28,7 +28,7 @@ class ShipmentSpec extends ObjectBehavior
 
     function it_should_extend_Sylius_shipment_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Model\Shipment');
+        $this->shouldHaveType('Sylius\Component\Shipping\Model\Shipment');
     }
 
     function it_should_not_belong_to_an_order_by_default()
