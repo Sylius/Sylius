@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface as BaseShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
 
 /**
  * Shipping method interface.

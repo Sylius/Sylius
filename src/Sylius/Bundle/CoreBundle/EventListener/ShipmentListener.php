@@ -17,8 +17,8 @@ use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
 use Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface;
-use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 
 /**
  * Shipment listener.
