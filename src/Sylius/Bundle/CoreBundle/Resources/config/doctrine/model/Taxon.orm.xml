@@ -19,7 +19,7 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Taxon" table="sylius_taxon">
         <field name="path" nullable="true" />
 
-       <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface"/>
+       <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Component\Product\Model\ProductInterface"/>
     </mapped-superclass>
 
 </doctrine-mapping>

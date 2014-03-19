@@ -35,7 +35,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_extends_Sylius_variable_product()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\VariableProduct');
+        $this->shouldHaveType('Sylius\Component\Product\Model\Variable\VariableProduct');
     }
 
     function it_does_not_have_short_description_by_default()

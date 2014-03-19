@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\VariableProductBundle\Model\VariableProduct">
+    <class name="Sylius\Component\Product\Model\Variable\VariableProduct">
         <getter property="masterVariant">
             <constraint name="Valid" />
         </getter>
@@ -25,13 +25,13 @@
         </getter>
     </class>
 
-    <class name="Sylius\Bundle\VariableProductBundle\Model\Variant">
+    <class name="Sylius\Component\Product\Model\Variable\Variant">
         <constraint name="Sylius\Bundle\VariableProductBundle\Validator\Constraint\VariantCombination">
             <option name="groups">sylius</option>
         </constraint>
     </class>
 
-    <class name="Sylius\Bundle\VariableProductBundle\Model\Option">
+    <class name="Sylius\Component\Product\Model\Variable\Option">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.option.name.not_blank</option>
@@ -68,7 +68,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\VariableProductBundle\Model\OptionValue">
+    <class name="Sylius\Component\Product\Model\Variable\OptionValue">
         <property name="value">
             <constraint name="NotBlank">
                 <option name="message">sylius.option_value.value.not_blank</option>

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ProductBundle\Form\EventListener\BuildPropertyFormChoicesListener;
-use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
+use Sylius\Component\Product\Model\PropertyTypes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

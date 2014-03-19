@@ -17,14 +17,14 @@
                                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
 
-    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\VariableProduct" table="sylius_product">
-        <one-to-many field="variants" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface" mapped-by="product">
+    <mapped-superclass name="Sylius\Component\Product\Model\Variable\VariableProduct" table="sylius_product">
+        <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\Variable\VariantInterface" mapped-by="product">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
 
-        <many-to-many field="options" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionInterface">
+        <many-to-many field="options" target-entity="Sylius\Component\Product\Model\Variable\OptionInterface">
             <join-table name="sylius_product_option">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />
