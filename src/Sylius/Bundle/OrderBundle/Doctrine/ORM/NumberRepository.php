@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\OrderBundle\Repository\NumberRepositoryInterface;
+use Sylius\Component\Order\Repository\NumberRepositoryInterface;
 use Doctrine\ORM\NoResultException;
 
 class NumberRepository extends EntityRepository implements NumberRepositoryInterface
