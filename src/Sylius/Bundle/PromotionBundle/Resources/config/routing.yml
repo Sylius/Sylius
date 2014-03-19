@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_promotion:
+    prefix: /promotions
+    resource: @SyliusPromotionBundle/Resources/config/routing/promotion.yml
