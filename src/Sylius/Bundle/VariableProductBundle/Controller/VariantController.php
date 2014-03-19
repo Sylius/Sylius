@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\VariableProductBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\VariableProductBundle\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Generator\VariantGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

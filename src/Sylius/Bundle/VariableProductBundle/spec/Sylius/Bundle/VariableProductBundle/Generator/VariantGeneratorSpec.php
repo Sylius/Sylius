@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\VariableProductBundle\Generator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\Product\Model\Variable\VariableProductInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -38,7 +38,7 @@ class VariantGeneratorSpec extends ObjectBehavior
 
     function it_is_a_Sylius_variant_generator()
     {
-        $this->shouldImplement('Sylius\Bundle\VariableProductBundle\Generator\VariantGeneratorInterface');
+        $this->shouldImplement('Sylius\Component\Product\Generator\VariantGeneratorInterface');
     }
 
     function it_throws_exception_if_product_doesnt_have_any_options(VariableProductInterface $product)
