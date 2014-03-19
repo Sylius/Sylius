@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface;
-use Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessorInterface;
+use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
