@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 

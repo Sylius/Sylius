@@ -30,7 +30,7 @@
         <field name="facebookId" column="facebook_id" type="string" nullable="true" />
         <field name="googleId" column="google_id" type="string" nullable="true" />
 
-        <one-to-many field="orders" target-entity="Sylius\Bundle\OrderBundle\Model\OrderInterface" mapped-by="user">
+        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>
