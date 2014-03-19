@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
-use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethod;
-use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethod;
+use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;

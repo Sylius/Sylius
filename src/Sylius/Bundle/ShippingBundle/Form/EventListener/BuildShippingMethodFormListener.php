@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
-use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -43,7 +43,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param CalculatorRegistryInterface $calculatorRegistry
+     * @param \Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface $calculatorRegistry
      * @param FormFactoryInterface        $factory
      */
     public function __construct(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)

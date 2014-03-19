@@ -47,11 +47,11 @@ class SyliusShippingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\ShippingBundle\Model\ShipmentInterface'         => 'sylius.model.shipment.class',
-            'Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface'     => 'sylius.model.shipment_item.class',
-            'Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface' => 'sylius.model.shipping_category.class',
-            'Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface'   => 'sylius.model.shipping_method.class',
-            'Sylius\Bundle\ShippingBundle\Model\RuleInterface'             => 'sylius.model.shipping_method_rule.class',
+            'Sylius\Component\Shipping\Model\ShipmentInterface'         => 'sylius.model.shipment.class',
+            'Sylius\Component\Shipping\Model\ShipmentItemInterface'     => 'sylius.model.shipment_item.class',
+            'Sylius\Component\Shipping\Model\ShippingCategoryInterface' => 'sylius.model.shipping_category.class',
+            'Sylius\Component\Shipping\Model\ShippingMethodInterface'   => 'sylius.model.shipping_method.class',
+            'Sylius\Component\Shipping\Model\RuleInterface'             => 'sylius.model.shipping_method_rule.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_shipping', $interfaces));
@@ -59,7 +59,7 @@ class SyliusShippingBundle extends Bundle
         $container->addCompilerPass(new RegisterRuleCheckersPass());
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\ShippingBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Shipping\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_shipping.driver.doctrine/orm'));
