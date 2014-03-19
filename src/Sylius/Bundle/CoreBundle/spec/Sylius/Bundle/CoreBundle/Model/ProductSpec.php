@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Model\Product;
 use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -86,7 +86,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_implements_Sylius_taxable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxationBundle\Model\TaxableInterface');
+        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxableInterface');
     }
 
     function it_does_not_have_tax_category_by_default()
