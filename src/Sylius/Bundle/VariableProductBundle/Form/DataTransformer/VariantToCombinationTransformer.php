@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\DataTransformer;
 
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\Product\Model\Variable\VariableProductInterface;
+use Sylius\Component\Product\Model\Variable\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -50,7 +50,7 @@ class VariantToCombinationTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\VariableProductBundle\Model\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Component\Product\Model\Variable\VariantInterface');
         }
 
         return $value->getOptions();

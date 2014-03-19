@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\EventListener;
 
-use Sylius\Bundle\ProductBundle\Model\PropertyTypes;
+use Sylius\Component\Product\Model\PropertyTypes;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

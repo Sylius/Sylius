@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface as BaseVariantInterface;
+use Sylius\Component\Product\Model\Variable\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 

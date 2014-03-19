@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\ChoiceList;
 
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\Product\Model\Variable\VariableProductInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
 /**
