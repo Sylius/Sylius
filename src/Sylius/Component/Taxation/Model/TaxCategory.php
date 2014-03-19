@@ -9,58 +9,47 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxationBundle\Model;
+namespace Sylius\Component\Taxation\Model;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
- * Tax rate model.
+ * Tax category model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxRate implements TaxRateInterface
+class TaxCategory implements TaxCategoryInterface
 {
     /**
-     * Get tax rate identifier.
+     * Identifier.
      *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Tax category.
+     * Tax category name.
      *
-     * @var TaxCategoryInterface
-     */
-    protected $category;
-
-    /**
-     * Name of tax rate.
-     *
-     * Can be 'EU VAT'.
+     * Can be 'Clothing' or 'Electronics'.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Tax amount.
-     *
-     * @var float
-     */
-    protected $amount = 0;
-
-    /**
-     * Is tax included in price?
-     *
-     * @var Boolean
-     */
-    protected $includedInPrice = false;
-
-    /**
-     * Calculator name.
+     * Short description of tax category.
      *
      * @var string
      */
-    protected $calculator;
+    protected $description;
+
+    /**
+     * All rates applicable for items from this category.
+     *
+     * @var Collection
+     */
+    protected $rates;
 
     /**
      * Creation time.
@@ -81,7 +70,16 @@ class TaxRate implements TaxRateInterface
      */
     public function __construct()
     {
+        $this->rates = new ArrayCollection();
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -90,24 +88,6 @@ class TaxRate implements TaxRateInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCategory(TaxCategoryInterface $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
     }
 
     /**
@@ -131,25 +111,17 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmount()
+    public function getDescription()
     {
-        return $this->amount;
+        return $this->description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAmountAsPercentage()
+    public function setDescription($description)
     {
-        return $this->getAmount() * 100;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
+        $this->description = $description;
 
         return $this;
     }
@@ -157,17 +129,20 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function isIncludedInPrice()
+    public function getRates()
     {
-        return $this->includedInPrice;
+        return $this->rates;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setIncludedInPrice($includedInPrice)
+    public function addRate(TaxRateInterface $rate)
     {
-        $this->includedInPrice = (Boolean) $includedInPrice;
+        if (!$this->hasRate($rate)) {
+            $rate->setCategory($this);
+            $this->rates->add($rate);
+        }
 
         return $this;
     }
@@ -175,19 +150,22 @@ class TaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getCalculator()
+    public function removeRate(TaxRateInterface $rate)
     {
-        return $this->calculator;
+        if ($this->hasRate($rate)) {
+            $rate->setCategory(null);
+            $this->rates->removeElement($rate);
+        }
+
+        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCalculator($calculator)
+    public function hasRate(TaxRateInterface $rate)
     {
-        $this->calculator = $calculator;
-
-        return $this;
+        return $this->rates->contains($rate);
     }
 
     /**
