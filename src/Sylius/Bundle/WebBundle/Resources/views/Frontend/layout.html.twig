@@ -43,9 +43,9 @@
         {% endblock %}
 
         {% block flashes %}
-            {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'notice', 'fos_user_success'] %}
-                {% for flash in flashes %}
-                    <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
+            {% for type in ['success', 'error', 'fos_user_success'] %}
+                {% for flash in app.session.flashbag.get(type) %}
+                    <div class="alert alert-{{ type == 'fos_user_success' ? 'success' : type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
                         <a class="close" data-dismiss="alert" href="#">×</a>
                         {{ flash|trans }}
                     </div>
