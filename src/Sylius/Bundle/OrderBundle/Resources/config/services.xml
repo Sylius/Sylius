@@ -6,7 +6,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.generator.order_number.class">Sylius\Bundle\OrderBundle\Generator\OrderNumberGenerator</parameter>
+        <parameter key="sylius.generator.order_number.class">Sylius\Component\Order\Generator\OrderNumberGenerator</parameter>
         <parameter key="sylius.listener.order_number.class">Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener</parameter>
         <parameter key="sylius.listener.complete_order.class">Sylius\Bundle\OrderBundle\EventListener\CompleteOrderListener</parameter>
     </parameters>

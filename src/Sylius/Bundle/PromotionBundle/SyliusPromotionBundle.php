@@ -43,7 +43,7 @@ class SyliusPromotionBundle extends Bundle
             'Sylius\Component\Promotion\Model\PromotionSubjectInterface' => 'sylius.model.promotion_subject.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_promotions', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_promotion', $interfaces));
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterPromotionActionsPass());
 
@@ -51,6 +51,6 @@ class SyliusPromotionBundle extends Bundle
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Promotion\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_promotions.driver.doctrine/orm'));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_promotion.driver.doctrine/orm'));
     }
 }
