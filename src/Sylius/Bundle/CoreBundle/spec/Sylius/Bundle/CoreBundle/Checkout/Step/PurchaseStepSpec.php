@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
@@ -21,9 +20,10 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Model\Order;
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\PaymentsBundle\Model\Payment;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Bundle\PaymentBundle\SyliusPaymentEvents;
+use Sylius\Component\Payment\Model\Payment;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

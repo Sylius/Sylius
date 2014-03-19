@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

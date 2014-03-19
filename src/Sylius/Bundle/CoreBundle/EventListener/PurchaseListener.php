@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class PurchaseListener
 {
