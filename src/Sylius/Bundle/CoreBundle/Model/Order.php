@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\Model\Cart;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
