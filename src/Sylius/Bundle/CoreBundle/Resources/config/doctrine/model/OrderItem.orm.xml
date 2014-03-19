@@ -17,10 +17,10 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\OrderItem" table="sylius_order_item">
-        <many-to-one field="variant" target-entity="Sylius\Bundle\VariableProductBundle\Model\VariantInterface">
+        <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\Variable\VariantInterface">
             <join-column name="variant_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        
+
         <one-to-many field="inventoryUnits" target-entity="Sylius\Component\Inventory\Model\InventoryUnitInterface" mapped-by="orderItem" orphan-removal="true">
             <cascade>
                 <cascade-all/>

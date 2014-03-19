@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
+use Sylius\Component\Product\Model\ProductPropertyInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;

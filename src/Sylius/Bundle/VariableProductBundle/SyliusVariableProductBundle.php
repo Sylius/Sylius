@@ -42,15 +42,15 @@ class SyliusVariableProductBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\VariableProductBundle\Model\VariantInterface'     => 'sylius.model.variant.class',
-            'Sylius\Bundle\VariableProductBundle\Model\OptionInterface'      => 'sylius.model.option.class',
-            'Sylius\Bundle\VariableProductBundle\Model\OptionValueInterface' => 'sylius.model.option_value.class',
+            'Sylius\Component\Product\Model\Variable\VariantInterface'     => 'sylius.model.variant.class',
+            'Sylius\Component\Product\Model\Variable\OptionInterface'      => 'sylius.model.option.class',
+            'Sylius\Component\Product\Model\Variable\OptionValueInterface' => 'sylius.model.option_value.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_product', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\VariableProductBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Product\Model\Variable',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_product.driver.doctrine/orm'));
