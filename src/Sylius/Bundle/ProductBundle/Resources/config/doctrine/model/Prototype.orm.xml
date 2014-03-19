@@ -14,12 +14,12 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\ProductBundle\Model\Prototype" table="sylius_prototype">
+    <mapped-superclass name="Sylius\Component\Product\Model\Prototype" table="sylius_prototype">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="name" column="name" type="string" />
-        <many-to-many field="properties" target-entity="Sylius\Bundle\ProductBundle\Model\PropertyInterface">
+        <many-to-many field="properties" target-entity="Sylius\Component\Product\Model\PropertyInterface">
             <join-table name="sylius_prototype_property">
                 <join-columns>
                     <join-column name="prototype_id" referenced-column-name="id" nullable="false" unique="false" />

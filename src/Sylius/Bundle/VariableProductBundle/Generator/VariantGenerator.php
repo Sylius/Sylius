@@ -12,7 +12,8 @@
 namespace Sylius\Bundle\VariableProductBundle\Generator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface;
+use Sylius\Component\Product\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Model\Variable\VariableProductInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Validator\ValidatorInterface;

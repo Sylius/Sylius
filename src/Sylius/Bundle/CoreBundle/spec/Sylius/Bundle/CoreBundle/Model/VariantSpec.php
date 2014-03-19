@@ -33,7 +33,7 @@ class VariantSpec extends ObjectBehavior
 
     function it_extends_Sylius_product_variant_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\VariableProductBundle\Model\Variant');
+        $this->shouldHaveType('Sylius\Component\Product\Model\Variable\Variant');
     }
 
     function it_should_not_have_price_by_default()
