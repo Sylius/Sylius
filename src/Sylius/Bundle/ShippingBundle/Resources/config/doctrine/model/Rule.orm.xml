@@ -13,7 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\ShippingBundle\Model\Rule" table="sylius_shipping_rule">
+    <mapped-superclass name="Sylius\Component\Shipping\Model\Rule" table="sylius_shipping_rule">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -21,7 +21,7 @@
         <field name="type" column="type" type="string" />
         <field name="configuration" column="configuration" type="array" />
 
-        <many-to-one field="method" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface" inversed-by="rules">
+        <many-to-one field="method" target-entity="Sylius\Component\Shipping\Model\ShippingMethodInterface" inversed-by="rules">
             <join-column name="method_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
     </mapped-superclass>
