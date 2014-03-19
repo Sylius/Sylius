@@ -14,12 +14,11 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
-use Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
