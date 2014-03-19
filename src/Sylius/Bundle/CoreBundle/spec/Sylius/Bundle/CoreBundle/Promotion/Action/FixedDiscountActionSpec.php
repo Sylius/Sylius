@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\OrderBundle\Model\AdjustmentInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -34,7 +34,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
     function it_implements_Sylius_promotion_action_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
     function it_applies_fixed_discount_as_promotion_adjustment(
