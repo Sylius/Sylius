@@ -22,15 +22,15 @@
         <parameter key="sylius.form.type.shipping_rule_item_count_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
 
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType</parameter>
-        <parameter key="sylius.shipping_methods_resolver.class">Sylius\Bundle\ShippingBundle\Resolver\MethodsResolver</parameter>
+        <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\MethodsResolver</parameter>
 
-        <parameter key="sylius.shipping_calculator_registry.class">Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistry</parameter>
+        <parameter key="sylius.shipping_calculator_registry.class">Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistry</parameter>
         <parameter key="sylius.shipping_calculator.class">Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculator</parameter>
 
-        <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistry</parameter>
+        <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry</parameter>
 
-        <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Bundle\ShippingBundle\Checker\ShippingMethodEligibilityChecker</parameter>
-        <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Bundle\ShippingBundle\Checker\ItemCountRuleChecker</parameter>
+        <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker</parameter>
+        <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Component\Shipping\Checker\ItemCountRuleChecker</parameter>
 
         <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.flat_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType</parameter>
@@ -46,7 +46,7 @@
 
         <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>
 
-        <parameter key="sylius.processor.shipment_processor.class">Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessor</parameter>
+        <parameter key="sylius.processor.shipment_processor.class">Sylius\Component\Shipping\Processor\ShipmentProcessor</parameter>
     </parameters>
 
     <services>
