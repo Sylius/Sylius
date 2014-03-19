@@ -297,7 +297,7 @@
             <argument type="service" id="sylius.processor.shipment_processor" />
             <argument type="service" id="event_dispatcher" />
             <tag name="kernel.event_listener" event="sylius.shipment.pre_ship" method="ship" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_release" method="releaseOrder" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_release" method="releaseOrderShipments" />
         </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <argument type="service" id="sylius.order_processing.payment_processor" />

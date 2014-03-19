@@ -85,7 +85,7 @@ class ShipmentListener
      *
      * @param GenericEvent $event
      */
-    public function releaseOrder(GenericEvent $event)
+    public function releaseOrderShipments(GenericEvent $event)
     {
         $order = $this->getOrder($event);
 
