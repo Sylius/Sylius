@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**

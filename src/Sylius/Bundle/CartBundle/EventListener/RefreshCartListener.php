@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -25,7 +25,7 @@ class RefreshCartListener
 
         if (!$cart instanceof CartInterface) {
             throw new \InvalidArgumentException(
-                'RefreshCartListener requires event subject to be instance of "Sylius\Bundle\CartBundle\Model\CartInterface"'
+                'RefreshCartListener requires event subject to be instance of "Sylius\Component\Cart\Model\CartInterface"'
             );
         }
 

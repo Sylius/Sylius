@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Model;
 
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Cart\Model\CartItemInterface;
 
 /**
  * Order item interface.
@@ -44,7 +45,7 @@ interface OrderItemInterface extends CartItemInterface
     /**
      * Get all inventory units.
      *
-     * @return Collection|InventoryUnitInterface[]
+     * @return ArrayCollection|InventoryUnitInterface[]
      */
     public function getInventoryUnits();
 
