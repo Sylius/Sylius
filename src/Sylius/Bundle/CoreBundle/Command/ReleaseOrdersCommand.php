@@ -78,12 +78,16 @@ class ReleaseOrdersCommand extends ContainerAwareCommand
         $expiresAt = new \DateTime(sprintf('-%s', $this->holdingDuration));
 
         $orders = $this->repository->findExpiredPendingOrders($expiresAt);
+
         foreach ($orders as $order) {
             $this->dispatcher->dispatch(SyliusOrderEvents::PRE_RELEASE, new GenericEvent($order));
-            $this->dispatcher->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
             $this->manager->persist($order);
         }
         $this->manager->flush();
+
+        foreach ($orders as $order) {
+            $this->dispatcher->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
+        }
 
         $output->writeln('Expired pending orders released.');
     }
