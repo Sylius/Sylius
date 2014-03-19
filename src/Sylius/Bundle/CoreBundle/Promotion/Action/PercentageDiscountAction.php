@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Promotion\Action;
 
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
-use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Percentage discount action.
