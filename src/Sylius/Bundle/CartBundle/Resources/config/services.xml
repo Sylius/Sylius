@@ -21,7 +21,7 @@
         <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
 
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
-        <parameter key="sylius.cart_storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
+        <parameter key="sylius.cart_storage.session.class">Sylius\Component\Cart\Storage\SessionCartStorage</parameter>
 
         <parameter key="sylius.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
         <parameter key="sylius.cart_flash_listener.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>

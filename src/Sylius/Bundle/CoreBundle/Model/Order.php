@@ -14,11 +14,11 @@ namespace Sylius\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Bundle\CartBundle\Model\Cart;
-use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * Order entity.

@@ -1,8 +1,8 @@
 {
-    "name": "sylius/shipping",
+    "name": "sylius/cart",
     "type": "library",
-    "description": "Flexible shipping component for PHP e-commerce projects.",
-    "keywords": ["shipping", "delivery", "shipments", "shop", "webshop", "ecommerce", "sylius"],
+    "description": "Cart engine for PHP applications.",
+    "keywords": ["shop", "ecommerce", "cart", "carts", "sylius"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -22,18 +22,19 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "1.0.*@dev"
+        "sylius/resource":         "1.0.*@dev",
+        "sylius/order":            "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec":         "~2.0"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Shipping\\": "" }
+        "psr-0": { "Sylius\\Component\\Cart\\": "" }
     },
-    "target-dir": "Sylius/Component/Shipping",
+    "target-dir": "Sylius/Component/Cart",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

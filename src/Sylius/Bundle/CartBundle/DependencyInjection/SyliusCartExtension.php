@@ -64,10 +64,10 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         $container->prependExtensionConfig('sylius_order', array(
             'classes' => array(
                 'order_item' => array(
-                    'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
+                    'model' => 'Sylius\Component\Cart\Model\CartItem'
                 ),
                 'order' => array(
-                    'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
+                    'model' => 'Sylius\Component\Cart\Model\Cart'
                 )
             ))
         );
