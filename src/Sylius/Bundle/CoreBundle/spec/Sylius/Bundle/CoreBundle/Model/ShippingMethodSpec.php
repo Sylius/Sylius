@@ -28,7 +28,7 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_should_extend_Sylius_shipping_method_mapped_superclass()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Model\ShippingMethod');
+        $this->shouldHaveType('Sylius\Component\Shipping\Model\ShippingMethod');
     }
 
     function it_should_not_have_any_zone_defined_by_default()
