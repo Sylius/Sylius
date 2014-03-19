@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\Type;
 
-use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
+use Sylius\Component\Product\Model\Variable\OptionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
@@ -42,7 +42,7 @@ class OptionValueChoiceType extends AbstractType
                 'option'
             ))
             ->addAllowedTypes(array(
-                'option' => 'Sylius\Bundle\VariableProductBundle\Model\OptionInterface'
+                'option' => 'Sylius\Component\Product\Model\Variable\OptionInterface'
             ))
         ;
     }

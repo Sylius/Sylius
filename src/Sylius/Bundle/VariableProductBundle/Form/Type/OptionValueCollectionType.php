@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariableProductBundle\Form\Type;
 
-use Sylius\Bundle\VariableProductBundle\Model\OptionInterface;
+use Sylius\Component\Product\Model\Variable\OptionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,13 +37,13 @@ class OptionValueCollectionType extends AbstractType
             !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)
         ) {
             throw new InvalidConfigurationException(
-                'array or (\Traversable and \ArrayAccess) of "Sylius\Bundle\VariableProductBundle\Model\OptionInterface" must be passed to collection'
+                'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Product\Model\Variable\OptionInterface" must be passed to collection'
             );
         }
 
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof OptionInterface) {
-                throw new InvalidConfigurationException('Each object passed as option list must implement "Sylius\Bundle\VariableProductBundle\Model\OptionInterface"');
+                throw new InvalidConfigurationException('Each object passed as option list must implement "Sylius\Component\Product\Model\Variable\OptionInterface"');
             }
 
             $builder->add((string) $i, 'sylius_option_value_choice', array(

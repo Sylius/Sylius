@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\VariableProductBundle\Validator;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
+use Sylius\Component\Product\Model\Variable\VariantInterface;
 use Sylius\Bundle\VariableProductBundle\Validator\Constraint\VariantUnique;
 use Symfony\Component\Validator\ExecutionContextInterface;
 

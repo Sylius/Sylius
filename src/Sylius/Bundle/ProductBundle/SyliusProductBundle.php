@@ -46,16 +46,16 @@ class SyliusProductBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\ProductBundle\Model\ProductInterface'         => 'sylius.model.product.class',
-            'Sylius\Bundle\ProductBundle\Model\PropertyInterface'        => 'sylius.model.property.class',
-            'Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface' => 'sylius.model.product_property.class',
-            'Sylius\Bundle\ProductBundle\Model\PrototypeInterface'       => 'sylius.model.prototype.class',
+            'Sylius\Component\Product\Model\ProductInterface'         => 'sylius.model.product.class',
+            'Sylius\Component\Product\Model\PropertyInterface'        => 'sylius.model.property.class',
+            'Sylius\Component\Product\Model\ProductPropertyInterface' => 'sylius.model.product_property.class',
+            'Sylius\Component\Product\Model\PrototypeInterface'       => 'sylius.model.prototype.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_product', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\ProductBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Product\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_product.driver.doctrine/orm'));
