@@ -23,7 +23,7 @@
         </field>
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
-        <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
+        <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
