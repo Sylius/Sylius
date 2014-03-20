@@ -38,7 +38,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_settings',
         'sylius_shipping',
         'sylius_taxation',
-        'sylius_taxonomies',
+        'sylius_taxonomy',
     );
 
     private $emails = array(

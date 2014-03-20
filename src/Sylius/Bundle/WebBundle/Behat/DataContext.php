@@ -29,7 +29,7 @@ use Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface;
 use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Sylius\Component\Money\Model\ExchangeRateInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\RuleInterface;
