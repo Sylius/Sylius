@@ -90,7 +90,7 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($resolverDefinition);
 
-        $container->hasParameter('Sylius\Bundle\ResourceBundle\Model\RepositoryInterface')
+        $container->hasParameter('Sylius\Component\Resource\Repository\RepositoryInterface')
             ->shouldBeCalled()
             ->willReturn(false);
 
@@ -101,11 +101,11 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         $resolverDefinition->addMethodCall(
             'addResolveTargetEntity',
             array(
-                'Sylius\Bundle\ResourceBundle\Model\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
+                'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
             ))->shouldBeCalled();
 
         $this->resolve($container, array(
-            'Sylius\Bundle\ResourceBundle\Model\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
+            'Sylius\Component\Resource\Repository\RepositoryInterface' => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
         ));
     }
 }

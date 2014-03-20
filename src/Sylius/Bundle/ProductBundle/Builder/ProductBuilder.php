@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ProductBundle\Model\ProductInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Product builder with fluent interface.

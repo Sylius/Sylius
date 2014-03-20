@@ -12,7 +12,7 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\SoftDeletableInterface;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * Interface for taxons.

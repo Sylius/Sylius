@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;

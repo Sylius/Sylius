@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
