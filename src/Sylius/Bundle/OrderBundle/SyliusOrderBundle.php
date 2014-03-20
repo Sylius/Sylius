@@ -42,16 +42,16 @@ class SyliusOrderBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\OrderBundle\Model\OrderInterface'      => 'sylius.model.order.class',
-            'Sylius\Bundle\OrderBundle\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
-            'Sylius\Bundle\OrderBundle\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
-            'Sylius\Bundle\OrderBundle\Model\NumberInterface'     => 'sylius.model.number.class',
+            'Sylius\Component\Order\Model\OrderInterface'      => 'sylius.model.order.class',
+            'Sylius\Component\Order\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
+            'Sylius\Component\Order\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
+            'Sylius\Component\Order\Model\NumberInterface'     => 'sylius.model.number.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_order', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\OrderBundle\Model',
+            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Order\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_order.driver.doctrine/orm'));

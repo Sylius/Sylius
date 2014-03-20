@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\OrderBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CompleteOrderListenerSpec extends ObjectBehavior

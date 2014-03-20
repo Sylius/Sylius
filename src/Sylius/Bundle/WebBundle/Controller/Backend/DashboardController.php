@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
