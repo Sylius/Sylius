@@ -22,7 +22,7 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_is_Sylius_Taxonomy()
     {
-        $this->shouldImplement('Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface');
+        $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonomyInterface');
     }
 
     function it_should_not_path_defined_by_default()
