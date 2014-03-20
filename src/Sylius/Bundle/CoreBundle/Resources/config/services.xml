@@ -294,6 +294,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="event_dispatcher" />
             <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
             <tag name="kernel.event_listener" event="sylius.payment.pre_state_change" method="updateOrderOnPayment" />
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">

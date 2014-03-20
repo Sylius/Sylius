@@ -61,18 +61,32 @@ class OrderPaymentListener
      * Get the order from event and create payment.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function createOrderPayment(GenericEvent $event)
     {
-        $order = $event->getSubject();
+        $this->paymentProcessor->createPayment($this->getOrder($event));
+    }
 
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order payment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
+    /**
+     * Update order's payment.
+     *
+     * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function updateOrderPayment(GenericEvent $event)
+    {
+        $order = $this->getOrder($event);
+        $payment = $order->getPayment();
+
+        if (null === $payment) {
+            throw new \InvalidArgumentException('Order\'s payment cannot be null.');
         }
 
-        $this->paymentProcessor->createPayment($order);
+        $payment->setCurrency($order->getCurrency());
+        $payment->setAmount($order->getTotal());
     }
 
     public function updateOrderOnPayment(GenericEvent $event)
@@ -96,5 +110,23 @@ class OrderPaymentListener
             $this->dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, new GenericEvent($order, $event->getArguments()));
             $this->dispatcher->dispatch(SyliusOrderEvents::POST_PAY, new GenericEvent($order, $event->getArguments()));
         }
+    }
+
+    /**
+     * @param GenericEvent $event
+     * @return OrderInterface
+     * @throws \InvalidArgumentException
+     */
+    protected function getOrder(GenericEvent $event)
+    {
+        $order = $event->getSubject();
+
+        if (!$order instanceof OrderInterface) {
+            throw new \InvalidArgumentException(
+                'Order payment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            );
+        }
+
+        return $order;
     }
 }
