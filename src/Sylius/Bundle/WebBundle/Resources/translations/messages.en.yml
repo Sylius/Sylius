@@ -569,13 +569,6 @@ sylius:
     province:
         provinces: Provinces
     remember_me: Remember me?
-    registration:
-        register:
-            header: <h1>Registration <small>Create an account in store</small></h1>
-            submit: Register
-        confirmed:
-            header: <h1>Welcome <small>Your registration was successful</small></h1>
-            success: Thank you for sign up! You are now logged in the store
     save_changes: Save changes
     search: Search
     settings:

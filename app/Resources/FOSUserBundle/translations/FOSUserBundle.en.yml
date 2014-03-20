@@ -1,0 +1,11 @@
+# Security
+security:
+    login:
+        email: "Email:"
+        header: <h1>Login <small>Sylius store</small></h1>
+        info: Please login using "<strong>sylius@example.com</strong>" email and "<strong>sylius</strong>" as password.
+
+# Registration
+registration:
+    register_header: <h1>Registration <small>Create an account in store</small></h1>
+    confirmed_header: <h1>Welcome <small>Your registration was successful</small></h1>
