@@ -18,7 +18,7 @@ use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -30,7 +30,7 @@ class ItemResolverSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PriceCalculatorInterface $priceCalculator,
         RepositoryInterface $productRepository,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         AvailabilityCheckerInterface $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker
     )
@@ -48,9 +48,10 @@ class ItemResolverSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface');
     }
 
-    function it_throws_exception_unless_request_method_is_POST(CartItemInterface $item, Request $request)
+    function it_throws_exception_unless_request_method_is_POST_or_PUT(CartItemInterface $item, Request $request)
     {
         $request->isMethod('POST')->willReturn(false);
+        $request->isMethod('PUT')->willReturn(false);
 
         $this
             ->shouldThrow('Sylius\Bundle\CartBundle\Resolver\ItemResolvingException')

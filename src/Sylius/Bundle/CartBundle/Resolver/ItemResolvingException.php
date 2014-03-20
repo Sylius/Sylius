@@ -17,6 +17,6 @@ namespace Sylius\Bundle\CartBundle\Resolver;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ItemResolvingException extends \Exception
+class ItemResolvingException extends \InvalidArgumentException
 {
 }
