@@ -4,7 +4,7 @@
 
 {% block javascripts %}
     {% javascripts output='assets/compiled/backend_addressing_zone.js'
-        '@SyliusAddressingBundle/Resources/assets/js/sylius-addressing-zone.js'
+        'bundles/syliusaddressing/js/sylius-addressing-zone.js'
     %}
         {{ parent() }}
         <script type="text/javascript" src="{{ asset_url }}"></script>

@@ -13,9 +13,9 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" type="text/css" />
             {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
-                '@SyliusWebBundle/Resources/assets/css/blueimp-gallery.css'
-                '@SyliusWebBundle/Resources/assets/css/datepicker3.css'
-                '@SyliusWebBundle/Resources/assets/css/backend.css'
+                'bundles/syliusweb/css/blueimp-gallery.css'
+                'bundles/syliusweb/css/datepicker3.css'
+                'bundles/syliusweb/css/backend.css'
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
@@ -70,13 +70,13 @@
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
             <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
             {% javascripts output='assets/compiled/backend.js'
-                '@SyliusWebBundle/Resources/assets/js/jquery.blueimp-gallery.min.js'
-                '@SyliusWebBundle/Resources/assets/js/confirm-modal.js'
-                '@SyliusWebBundle/Resources/assets/js/form-collection.js'
-                '@SyliusWebBundle/Resources/assets/js/form-spinner.js'
-                '@SyliusWebBundle/Resources/assets/js/select2.js'
-                '@SyliusWebBundle/Resources/assets/js/bootstrap-datepicker.js'
-                '@SyliusWebBundle/Resources/assets/js/backend.js'
+                'bundles/syliusweb/js/jquery.blueimp-gallery.min.js'
+                'bundles/syliusweb/js/confirm-modal.js'
+                'bundles/syliusweb/js/form-collection.js'
+                'bundles/syliusweb/js/form-spinner.js'
+                'bundles/syliusweb/js/select2.js'
+                'bundles/syliusweb/js/bootstrap-datepicker.js'
+                'bundles/syliusweb/js/backend.js'
             %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
