@@ -14,6 +14,8 @@
         $('.sylius-different-billing-address-trigger').click(function() {
             $('#sylius-billing-address-container').toggleClass('hidden');
         });
+        
+        $('.select2').select2();
 
     });
 
