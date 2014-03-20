@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Validator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\ProductBundle\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -48,7 +48,7 @@ class ProductUniqueValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof ProductInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Bundle\ProductBundle\Model\ProductInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Component\Product\Model\ProductInterface');
         }
 
         $product = $value;

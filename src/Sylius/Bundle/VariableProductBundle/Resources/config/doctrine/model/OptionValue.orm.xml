@@ -17,12 +17,12 @@
                                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
 
-    <mapped-superclass name="Sylius\Bundle\VariableProductBundle\Model\OptionValue" table="sylius_option_value">
+    <mapped-superclass name="Sylius\Component\Product\Model\Variable\OptionValue" table="sylius_option_value">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-one field="option" target-entity="Sylius\Bundle\VariableProductBundle\Model\OptionInterface" inversed-by="values">
+        <many-to-one field="option" target-entity="Sylius\Component\Product\Model\Variable\OptionInterface" inversed-by="values">
             <join-column name="option_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 

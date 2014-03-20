@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\ProductBundle\Model\Product">
+    <class name="Sylius\Component\Product\Model\Product">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.product.name.not_blank</option>
@@ -46,7 +46,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\ProductBundle\Model\Property">
+    <class name="Sylius\Component\Product\Model\Property">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.property.name.not_blank</option>
@@ -75,7 +75,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\ProductBundle\Model\ProductProperty">
+    <class name="Sylius\Component\Product\Model\ProductProperty">
         <property name="property">
             <constraint name="NotBlank">
                 <option name="message">sylius.product_property.property.not_blank</option>
@@ -90,7 +90,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\ProductBundle\Model\Prototype">
+    <class name="Sylius\Component\Product\Model\Prototype">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.prototype.name.not_blank</option>

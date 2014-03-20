@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Tests\Controller;
-use Sylius\Bundle\ProductBundle\Builder\PrototypeBuilderInterface;
+use Sylius\Component\Product\Builder\PrototypeBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
