@@ -17,7 +17,7 @@ use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
 use Sylius\Bundle\ProductBundle\Model\Property\Property;
 use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
 use Sylius\Bundle\ProductBundle\Model\PrototypeInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

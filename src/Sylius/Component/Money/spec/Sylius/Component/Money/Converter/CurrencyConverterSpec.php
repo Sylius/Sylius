@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Money\Converter;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Money\Model\ExchangeRateInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
