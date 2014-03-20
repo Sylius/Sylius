@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Money\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface ExchangeRateInterface extends TimestampableInterface
 {
