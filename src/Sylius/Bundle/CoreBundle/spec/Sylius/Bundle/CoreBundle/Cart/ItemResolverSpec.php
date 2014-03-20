@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Cart;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
 use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;

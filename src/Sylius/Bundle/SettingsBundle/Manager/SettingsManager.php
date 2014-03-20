@@ -13,13 +13,12 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
-use Symfony\Component\Validator\ValidatorInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * Settings manager.
@@ -65,7 +64,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * Validator instance
-     * 
+     *
      * @var ValidatorInterface
      */
     protected $validator;
