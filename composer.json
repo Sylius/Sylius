@@ -52,7 +52,7 @@
         "symfony-cmf/content-bundle":           "1.0.*",
         "symfony-cmf/routing-bundle":           "1.1.*",
         "symfony-cmf/menu-bundle":              "1.0.*",
-        "jackalope/jackalope-doctrine-dbal": "1.0.*"
+        "jackalope/jackalope-doctrine-dbal":    "1.0.*"
     },
     "require-dev": {
         "behat/behat":                       "~2.4",
@@ -63,7 +63,7 @@
         "behat/mink-selenium2-driver":       "*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
-        "phpspec/phpspec":                   "2.0.*@dev",
+        "phpspec/phpspec":                   "~2.0",
         "phpunit/phpunit":                   "~3.7"
     },
     "provide": {
