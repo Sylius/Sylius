@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Shipping category interface.
