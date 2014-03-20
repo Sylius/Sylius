@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CartBundle\Model;
+namespace spec\Sylius\Component\Cart\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,12 +20,12 @@ class CartItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Model\CartItem');
+        $this->shouldHaveType('Sylius\Component\Cart\Model\CartItem');
     }
 
     function it_implements_Sylius_cart_item_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CartBundle\Model\CartItemInterface');
+        $this->shouldImplement('Sylius\Component\Cart\Model\CartItemInterface');
     }
 
     function it_extends_Sylius_order_item()
