@@ -17,7 +17,9 @@ use Sylius\Bundle\ResourceBundle\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -134,7 +136,7 @@ abstract class AbstractResourceExtension extends Extension
      * @param XmlFileLoader         $loader
      * @param null|ContainerBuilder $container
      *
-     * @throws UnknownDriverException
+     * @throws InvalidDriverException
      */
     protected function loadDatabaseDriver(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
@@ -150,16 +152,15 @@ abstract class AbstractResourceExtension extends Extension
         $container->setParameter($this->getAlias().'.driver', $driver);
         $container->setParameter($this->getAlias().'.driver.'.$driver, true);
 
-        foreach ($config['classes'] as $model => $classes) {
+        $factory = DatabaseDriverFactory::get($driver, $container, $this->applicationName);
+
+        foreach ($config['classes'] as $modelName => $classes) {
             if (array_key_exists('model', $classes)) {
-                DatabaseDriverFactory::get(
-                    $driver,
-                    $container,
-                    $this->applicationName,
-                    $model
-                )->load($classes);
+                $factory->setResourceName($modelName)->loadRessources($classes);
             }
         }
+
+        $factory->loadEntityToIdentifierTypeDefinition($this->getAlias());
     }
 
     /**

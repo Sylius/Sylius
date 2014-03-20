@@ -41,7 +41,7 @@ class ShippingCountryConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_entity_to_identifier', array(
+            ->add('country', 'sylius_entity_to_identifier_core', array(
                 'label'       => 'sylius.form.rule.shipping_country_configuration.country',
                 'empty_value' => 'sylius.form.country.select',
                 'class'       => $this->dataClass,

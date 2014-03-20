@@ -41,7 +41,7 @@ class TaxonomyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', 'sylius_entity_to_identifier', array(
+            ->add('taxons', 'sylius_entity_to_identifier_core', array(
                 'label'      => 'sylius.form.rule.taxonomy_configuration.taxons',
                 'class'      => $this->dataClass,
                 'identifier' => 'id'

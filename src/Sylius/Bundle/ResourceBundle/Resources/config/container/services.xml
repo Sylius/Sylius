@@ -57,10 +57,10 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="sylius.form.type.entity_to_identifier" class="%sylius.form.type.entity_to_identifier.class%">
-             <argument type="service" id="doctrine.orm.entity_manager" />
-             <tag name="form.type" alias="sylius_entity_to_identifier" />
-         </service>
+        <!--<service id="sylius.form.type.entity_to_identifier" class="%sylius.form.type.entity_to_identifier.class%">-->
+             <!--<argument type="service" id="doctrine.orm.entity_manager" />-->
+             <!--<tag name="form.type" alias="sylius_entity_to_identifier" />-->
+         <!--</service>-->
     </services>
 
 </container>

@@ -35,6 +35,16 @@ class DoctrineODMDriverSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverInterface');
     }
 
+    function its_resource_name_is_mutable()
+    {
+        $this->setResourceName('resource')->shouldReturn($this);
+    }
+
+    function its_templates_name_is_mutable()
+    {
+        $this->setTemplates('template')->shouldReturn($this);
+    }
+
     function it_should_create_definition(ContainerBuilder $container)
     {
         $container->setDefinition(
@@ -52,9 +62,9 @@ class DoctrineODMDriverSpec extends ObjectBehavior
             Argument::type('Symfony\Component\DependencyInjection\Alias')
         )->shouldBeCalled();
 
-        $this->beConstructedWith($container, 'prefix', 'resource');
+        $this->beConstructedWith($container, 'prefix');
 
-        $this->load(array(
+        $this->setResourceName('resource')->loadRessources(array(
             'model' => 'Sylius\Model',
             'controller' => 'Sylius\Controller',
             'repository' => 'Sylius\Repository',

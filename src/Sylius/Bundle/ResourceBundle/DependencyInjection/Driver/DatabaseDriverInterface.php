@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
  */
 interface DatabaseDriverInterface
 {
-    public function load(array $classes);
+    public function loadRessources(array $classes);
 
     public function getSupportedDriver();
 }

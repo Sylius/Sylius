@@ -25,6 +25,16 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $this->beConstructedWith($container, 'prefix', 'resource');
     }
 
+    function its_resource_name_is_mutable()
+    {
+        $this->setResourceName('resource')->shouldReturn($this);
+    }
+
+    function its_templates_name_is_mutable()
+    {
+        $this->setTemplates('template')->shouldReturn($this);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineORMDriver');
@@ -54,9 +64,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
             Argument::type('Symfony\Component\DependencyInjection\Alias')
         )->shouldBeCalled();
 
-        $this->beConstructedWith($container, 'prefix', 'resource');
+        $this->beConstructedWith($container, 'prefix');
 
-        $this->load(array(
+        $this->setResourceName('resource')->loadRessources(array(
             'model' => 'Sylius\Model',
             'controller' => 'Sylius\Controller',
             'repository' => 'Sylius\Repository',
@@ -87,9 +97,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
             Argument::type('Symfony\Component\DependencyInjection\Alias')
         )->shouldBeCalled();
 
-        $this->beConstructedWith($container, 'prefix', 'resource');
+        $this->beConstructedWith($container, 'prefix');
 
-        $this->load(array(
+        $this->setResourceName('resource')->loadRessources(array(
             'model' => 'Sylius\Model',
             'controller' => 'Sylius\Controller',
             'repository' => 'Sylius\Repository',
