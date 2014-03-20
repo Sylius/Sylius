@@ -12,7 +12,7 @@
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Promotion model interface.

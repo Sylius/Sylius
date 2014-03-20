@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 

@@ -38,7 +38,7 @@ class OrderSpec extends ObjectBehavior
 
     function it_implements_Sylius_timestampable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Model\TimestampableInterface');
+        $this->shouldImplement('Sylius\Component\Resource\Model\TimestampableInterface');
     }
 
     function it_has_no_id_by_default()
