@@ -48,13 +48,6 @@ class ReleaseOrdersCommand extends ContainerAwareCommand
      */
     protected $dispatcher;
 
-    /**
-     * Inventory holding duration.
-     *
-     * @var string
-     */
-    protected $holdingDuration;
-
     protected function configure()
     {
         $this
@@ -68,14 +61,26 @@ class ReleaseOrdersCommand extends ContainerAwareCommand
         $this->manager = $this->getContainer()->get('sylius.manager.order');
         $this->repository = $this->getContainer()->get('sylius.repository.order');
         $this->dispatcher = $this->getContainer()->get('event_dispatcher');
-        $this->holdingDuration = $this->getContainer()->getParameter('sylius.inventory.holding.duration');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Release expired pending orders...');
+        $holdingDuration = $this->getContainer()->getParameter('sylius.inventory.holding.duration');
+        $expiresAt = new \DateTime(sprintf('-%s', $holdingDuration));
 
-        $expiresAt = new \DateTime(sprintf('-%s', $this->holdingDuration));
+        if ($input->isInteractive()) {
+            $dialog = $this->getHelperSet()->get('dialog');
+            $dialog->askAndValidate($output, sprintf('<question>Inventory holding duration (%s)?</question>', $holdingDuration), function ($response) use ($holdingDuration, &$expiresAt) {
+                if (null !== $response) {
+                    $holdingDuration = $response;
+                }
+                $expiresAt = new \DateTime(sprintf('-%s', $holdingDuration));
+
+                return $holdingDuration;
+            });
+        }
+
+        $output->writeln('Release expired pending orders...');
 
         $orders = $this->repository->findExpiredPendingOrders($expiresAt);
 
