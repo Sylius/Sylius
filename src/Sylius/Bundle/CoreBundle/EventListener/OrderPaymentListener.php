@@ -61,6 +61,7 @@ class OrderPaymentListener
      * Get the order from event and create payment.
      *
      * @param GenericEvent $event
+     *
      * @throws \InvalidArgumentException
      */
     public function createOrderPayment(GenericEvent $event)
@@ -72,6 +73,7 @@ class OrderPaymentListener
      * Update order's payment.
      *
      * @param GenericEvent $event
+     *
      * @throws \InvalidArgumentException
      */
     public function updateOrderPayment(GenericEvent $event)
@@ -79,11 +81,8 @@ class OrderPaymentListener
         $order = $this->getOrder($event);
         $payment = $order->getPayment();
 
-        if (!$payment instanceof PaymentInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                'Order\'s payment has to be instance of "Sylius\Bundle\PaymentsBundle\Model\PaymentInterface", %s given.',
-                is_object($payment) ? get_class($payment) : gettype($payment)
-            ));
+        if (null === $payment) {
+            throw new \InvalidArgumentException('Order\'s payment cannot be null.');
         }
 
         $payment->setCurrency($order->getCurrency());

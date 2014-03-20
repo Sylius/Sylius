@@ -44,6 +44,11 @@ class OrderPaymentListenerSpec extends ObjectBehavior
             ->shouldThrow('InvalidArgumentException')
             ->duringCreateOrderPayment($event)
         ;
+
+        $this
+            ->shouldThrow('InvalidArgumentException')
+            ->duringUpdateOrderPayment($event)
+        ;
     }
 
     function it_creates_payment(GenericEvent $event, OrderInterface $order, PaymentProcessorInterface $processor)
@@ -53,6 +58,31 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $processor->createPayment($order)->shouldBeCalled();
 
         $this->createOrderPayment($event);
+    }
+
+    function it_throws_exception_if_order_has_no_payment(GenericEvent $event, OrderInterface $order)
+    {
+        $event->getSubject()->willReturn($order);
+        $order->getPayment()->willReturn(null);
+
+        $this
+            ->shouldThrow('InvalidArgumentException')
+            ->duringUpdateOrderPayment($event)
+        ;
+    }
+
+    function it_updates_payment(GenericEvent $event, OrderInterface $order, PaymentInterface $payment)
+    {
+        $event->getSubject()->willReturn($order);
+
+        $order->getPayment()->willReturn($payment);
+        $order->getTotal()->willReturn(1000);
+        $order->getCurrency()->willReturn('USD');
+
+        $payment->setAmount(1000)->shouldBeCalled();
+        $payment->setCurrency('USD')->shouldBeCalled();
+
+        $this->updateOrderPayment($event);
     }
 
     function it_throws_exception_if_event_has_non_payment_subject(GenericEvent $event, \stdClass $invalidSubject)
