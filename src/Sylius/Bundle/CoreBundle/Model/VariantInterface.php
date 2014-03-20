@@ -21,22 +21,8 @@ use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface VariantInterface extends BaseVariantInterface, ShippableInterface, StockableInterface
+interface VariantInterface extends BaseVariantInterface, PriceableInterface, ShippableInterface, StockableInterface
 {
-    /**
-     * Get variant price.
-     *
-     * @return integer
-     */
-    public function getPrice();
-
-    /**
-     * Set the price.
-     *
-     * @param integer $price
-     */
-    public function setPrice($price);
-
     /**
      * Get images.
      *

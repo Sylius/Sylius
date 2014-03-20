@@ -16,6 +16,17 @@ namespace Sylius\Bundle\CoreBundle\Model;
  */
 interface PriceableInterface
 {
+    /**
+     * Get the price.
+     *
+     * @return integer
+     */
     public function getPrice();
+
+    /**
+     * Set the price.
+     *
+     * @param integer $price
+     */
     public function setPrice($price);
 }
