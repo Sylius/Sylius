@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface as VariableTaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
 
 /**
  * Taxon interface.
