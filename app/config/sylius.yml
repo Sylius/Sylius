@@ -22,7 +22,7 @@ sylius_cart:
 
 sylius_settings: ~
 
-sylius_taxonomies:
+sylius_taxonomy:
     classes:
         taxonomy:
             model: Sylius\Bundle\CoreBundle\Model\Taxonomy
