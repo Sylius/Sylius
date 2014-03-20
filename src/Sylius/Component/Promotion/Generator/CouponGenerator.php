@@ -13,7 +13,7 @@ namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Default coupon generator.

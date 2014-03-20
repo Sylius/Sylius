@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Model;
+namespace Sylius\Component\Resource\Model;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>

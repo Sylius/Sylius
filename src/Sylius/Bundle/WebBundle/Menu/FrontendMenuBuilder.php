@@ -14,7 +14,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

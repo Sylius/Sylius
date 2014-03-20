@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Used to generate full product form.

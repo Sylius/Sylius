@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR;
 
 use Doctrine\ODM\PHPCR\DocumentRepository as BaseDocumentRepository;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;

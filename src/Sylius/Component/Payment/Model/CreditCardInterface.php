@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Bundle\ResourceBundle\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Payment method interface.
