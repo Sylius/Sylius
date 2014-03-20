@@ -28,7 +28,7 @@
         "sylius/resource-bundle":   "1.0.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":   "2.0.*@dev",
+        "phpspec/phpspec":   "~2.0",
         "symfony/form":      "~2.3",
         "symfony/validator": "~2.3",
         "twig/twig":         "~1.0"

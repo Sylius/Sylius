@@ -12,14 +12,15 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\Sylius\Bundle\CoreBundle\Fixture\RequestStack;
 use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
+use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PaymentsBundle\Model\Payment;
@@ -32,14 +33,16 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\TranslatorInterface;
 
+require_once __DIR__.'/../../Fixture/RequestStack.php';
+
 class PurchaseStepSpec extends ObjectBehavior
 {
     function let(
         ContainerInterface $container,
-        ProcessContextInterface $context,
         HttpRequestVerifierInterface $httpRequestVerifier,
         TokenInterface $token,
         Request $request,
+        RequestStack $requestStack,
         CartProviderInterface $cartProvider,
         RegistryInterface $payum,
         PaymentInterface $payment,
@@ -50,6 +53,7 @@ class PurchaseStepSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         TranslatorInterface $translator
     ) {
+        $requestStack->getCurrentRequest()->willReturn($request);
         $session->getFlashBag()->willReturn($flashBag);
         $doctrine->getManager()->willReturn($objectManager);
         $token->getPaymentName()->willReturn('aPaymentName');
@@ -59,6 +63,7 @@ class PurchaseStepSpec extends ObjectBehavior
 
         $container->get('payum.security.http_request_verifier')->willReturn($httpRequestVerifier);
         $container->get('request')->willReturn($request);
+        $container->get('request_stack')->willReturn($requestStack);
         $container->get('sylius.cart_provider')->willReturn($cartProvider);
         $container->get('payum')->willReturn($payum);
         $container->get('event_dispatcher')->willReturn($eventDispatcher);
@@ -85,8 +90,7 @@ class PurchaseStepSpec extends ObjectBehavior
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         ProcessContextInterface $context,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher,
-        CartProviderInterface $cartProvider
+        EventDispatcherInterface $eventDispatcher
     ) {
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_NEW);
@@ -130,8 +134,7 @@ class PurchaseStepSpec extends ObjectBehavior
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         ProcessContextInterface $context,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher,
-        CartProviderInterface $cartProvider
+        EventDispatcherInterface $eventDispatcher
     ) {
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_COMPLETED);

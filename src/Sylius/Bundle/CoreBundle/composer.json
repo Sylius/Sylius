@@ -49,7 +49,7 @@
     },
     "require-dev": {
         "fzaninotto/faker": "1.2.*",
-        "phpspec/phpspec":  "2.0.*@dev",
+        "phpspec/phpspec":  "~2.0",
         "symfony/form":     "~2.3"
     },
     "suggest": {
