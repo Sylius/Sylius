@@ -53,7 +53,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
             $details['NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
                 $request->getToken()->getPaymentName(),
                 $order
-            );
+            )->getTargetUrl();
             $details['INVNUM'] = $order->getNumber();
 
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
