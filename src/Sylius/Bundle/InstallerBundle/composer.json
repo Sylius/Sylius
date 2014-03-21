@@ -23,8 +23,8 @@
         "php":                      ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/resource-bundle":   "1.0.*@dev",
-        "sylius/flow-bundle":       "1.0.*@dev"
+        "sylius/resource-bundle":   "0.9.*@dev",
+        "sylius/flow-bundle":       "0.9.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":          "~2.0",
@@ -40,7 +40,7 @@
     "target-dir": "Sylius/Bundle/InstallerBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.9-dev"
         }
     }
 }

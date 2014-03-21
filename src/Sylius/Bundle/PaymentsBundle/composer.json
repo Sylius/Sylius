@@ -23,7 +23,7 @@
         "php":                             ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "sylius/resource-bundle":          "1.0.*@dev",
+        "sylius/resource-bundle":          "0.9.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
@@ -40,7 +40,7 @@
     "target-dir": "Sylius/Bundle/PaymentsBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.9-dev"
         }
     }
 }

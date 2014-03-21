@@ -26,9 +26,9 @@
     "require": {
         "php":                    ">=5.3.3",
 
-        "sylius/order-bundle":    "1.0.*@dev",
-        "sylius/payments-bundle": "1.0.*@dev",
-        "sylius/resource-bundle": "1.0.*@dev",
+        "sylius/order-bundle":    "0.9.*@dev",
+        "sylius/payments-bundle": "0.9.*@dev",
+        "sylius/resource-bundle": "0.9.*@dev",
         "payum/payum-bundle":     "~0.7.3",
         "payum/payum":            "~0.7.2"
     },
@@ -41,7 +41,7 @@
     "target-dir": "Sylius/Bundle/PayumBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.9-dev"
         }
     }
 }
