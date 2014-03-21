@@ -80,6 +80,10 @@ class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
         $taxons = new ArrayCollection();
 
         foreach ($value as $taxonomy) {
+            if (null === $taxonomy) {
+                continue;
+            }
+
             foreach ($taxonomy as $taxon) {
                 $taxons->add($taxon);
             }
