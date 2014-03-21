@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Locale" table="sylius_locale">
+    <mapped-superclass name="Sylius\Component\Core\Model\Locale" table="sylius_locale">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

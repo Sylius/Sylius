@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\PromotionBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\PromotionBundle\SyliusPromotionEvents;
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\DataTransformerInterface;

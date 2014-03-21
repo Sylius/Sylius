@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -26,7 +26,7 @@ class CouponUsageListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException('Coupon usage listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"');
+            throw new \InvalidArgumentException('Coupon usage listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"');
         }
 
         if ($coupon = $order->getPromotionCoupon()) {

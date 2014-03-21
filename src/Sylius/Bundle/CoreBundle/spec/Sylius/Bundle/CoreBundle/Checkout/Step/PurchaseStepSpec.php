@@ -19,7 +19,7 @@ use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\Order;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PaymentBundle\SyliusPaymentEvents;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
