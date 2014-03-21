@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -25,12 +25,12 @@ class ProductSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Product');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Product');
     }
 
     function it_implements_Sylius_core_product_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ProductInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\ProductInterface');
     }
 
     function it_extends_Sylius_variable_product()

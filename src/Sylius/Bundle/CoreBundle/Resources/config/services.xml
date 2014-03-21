@@ -11,7 +11,7 @@
 
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
 
-        <parameter key="sylius.price_calculator.default.class">Sylius\Bundle\CoreBundle\Calculator\DefaultPriceCalculator</parameter>
+        <parameter key="sylius.price_calculator.default.class">Sylius\Component\Core\Calculator\DefaultPriceCalculator</parameter>
 
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
 
@@ -27,15 +27,14 @@
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
-
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
 
-        <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandler</parameter>
-        <parameter key="sylius.order_processing.state_resolver.class">Sylius\Bundle\CoreBundle\OrderProcessing\StateResolver</parameter>
-        <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
-        <parameter key="sylius.order_processing.payment_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessor</parameter>
-        <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
-        <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessor</parameter>
+        <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Component\Core\OrderProcessing\InventoryHandler</parameter>
+        <parameter key="sylius.order_processing.state_resolver.class">Sylius\Component\Core\OrderProcessing\StateResolver</parameter>
+        <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Component\Core\OrderProcessing\ShipmentFactory</parameter>
+        <parameter key="sylius.order_processing.payment_processor.class">Sylius\Component\Core\OrderProcessing\PaymentProcessor</parameter>
+        <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Component\Core\OrderProcessing\TaxationProcessor</parameter>
+        <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
 
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
@@ -68,7 +67,7 @@
 
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
-        <parameter key="sylius.image_uploader.class">Sylius\Bundle\CoreBundle\Uploader\ImageUploader</parameter>
+        <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
 
         <!-- Promotion Form, Action & Checker -->
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
@@ -77,14 +76,14 @@
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
 
-        <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Bundle\CoreBundle\Promotion\Checker\NthOrderRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Bundle\CoreBundle\Promotion\Checker\UserLoyalityRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Bundle\CoreBundle\Promotion\Checker\ShippingCountryRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Bundle\CoreBundle\Promotion\Checker\TaxonomyRuleChecker</parameter>
-        <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Bundle\CoreBundle\Promotion\Action\ShippingDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.add_product.class">Sylius\Bundle\CoreBundle\Promotion\Action\AddProductAction</parameter>
+        <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Component\Core\Promotion\Checker\UserLoyalityRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
+        <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
+        <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
+        <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
+        <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
 
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 

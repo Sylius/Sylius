@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Sylius\Bundle\CoreBundle\Mailer\CustomerWelcomeMailerInterface;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * Sends Customer welcome email when triggered by event
@@ -47,7 +47,7 @@ class CustomerWelcomeEmailListener
 
         if (!$user instanceof UserInterface) {
             throw new \InvalidArgumentException(
-                'Customer welcome email listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\UserInterface"'
+                'Customer welcome email listener requires event subject to be instance of "Sylius\Component\Core\Model\UserInterface"'
             );
         }
 

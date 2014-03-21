@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Checker;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface

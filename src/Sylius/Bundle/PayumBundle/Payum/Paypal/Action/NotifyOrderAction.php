@@ -16,7 +16,7 @@ use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredNotifyRequest;
 use Payum\Core\Request\SyncRequest;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\PaymentBundle\SyliusPaymentEvents;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

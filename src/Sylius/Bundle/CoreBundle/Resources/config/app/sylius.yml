@@ -6,7 +6,7 @@ sylius_core:
 sylius_installer:
     classes:
         user:
-            model: Sylius\Bundle\CoreBundle\Model\User
+            model: Sylius\Component\Core\Model\User
 
 sylius_money:
     currency: %sylius.currency%
@@ -25,16 +25,16 @@ sylius_settings: ~
 sylius_taxonomy:
     classes:
         taxonomy:
-            model: Sylius\Bundle\CoreBundle\Model\Taxonomy
+            model: Sylius\Component\Core\Model\Taxonomy
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
         taxon:
-            model: Sylius\Bundle\CoreBundle\Model\Taxon
+            model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
 sylius_product:
     classes:
         product:
-            model: Sylius\Bundle\CoreBundle\Model\Product
+            model: Sylius\Component\Core\Model\Product
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
             repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
@@ -42,25 +42,25 @@ sylius_product:
 sylius_variable_product:
     classes:
         variant:
-            model: Sylius\Bundle\CoreBundle\Model\Variant
+            model: Sylius\Component\Core\Model\Variant
             repository: Sylius\Bundle\CoreBundle\Repository\VariantRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
 
 sylius_taxation:
     classes:
         tax_rate:
-            model: Sylius\Bundle\CoreBundle\Model\TaxRate
+            model: Sylius\Component\Core\Model\TaxRate
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
     classes:
         shipment:
-            model: Sylius\Bundle\CoreBundle\Model\Shipment
+            model: Sylius\Component\Core\Model\Shipment
             repository: Sylius\Bundle\CoreBundle\Repository\ShipmentRepository
         shipment_item:
-            model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
+            model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
-            model: Sylius\Bundle\CoreBundle\Model\ShippingMethod
+            model: Sylius\Component\Core\Model\ShippingMethod
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
 sylius_promotion:
@@ -73,7 +73,7 @@ sylius_inventory:
     track_inventory: %sylius.inventory.tracking_enabled%
     classes:
         inventory_unit:
-            model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
+            model: Sylius\Component\Core\Model\InventoryUnit
         stockable:
             model: %sylius.model.variant.class%
 
@@ -96,29 +96,29 @@ sylius_addressing:
 sylius_order:
     classes:
         order:
-            model: Sylius\Bundle\CoreBundle\Model\Order
+            model: Sylius\Component\Core\Model\Order
             controller: Sylius\Bundle\CoreBundle\Controller\OrderController
             repository: Sylius\Bundle\CoreBundle\Repository\OrderRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
-            model: Sylius\Bundle\CoreBundle\Model\OrderItem
+            model: Sylius\Component\Core\Model\OrderItem
 
 sylius_resource:
     resources:
         sylius.user:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Model\User
+                model: Sylius\Component\Core\Model\User
                 controller: Sylius\Bundle\CoreBundle\Controller\UserController
                 repository: Sylius\Bundle\CoreBundle\Repository\UserRepository
         sylius.group:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Model\Group
+                model: Sylius\Component\Core\Model\Group
         sylius.locale:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Model\Locale
+                model: Sylius\Component\Core\Model\Locale
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
         sylius.block:
             driver: doctrine/phpcr-odm
