@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/omnipay-bundle":"1.0.*@dev"
+    $ composer require "sylius/omnipay-bundle"
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/omnipay-bundle":"1.0.*@dev"
+    $ php composer.phar require "sylius/omnipay-bundle"
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -93,4 +93,4 @@ The following gateways are already implemented:
 * Stripe
 * WorldPay
 
-The list above is always growing. The full list of supported gateways can be found at the `Omnipay <https://github.com/adrianmacneil/omnipay>`_ github repository.
+The list above is always growing. The full list of supported gateways can be found at the `Omnipay <https://github.com/omnipay/omnipay>`_ github repository.
