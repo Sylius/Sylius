@@ -40,17 +40,29 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     /**
      * @var string
      */
-    protected $templates;
+    protected $templates = null;
 
-    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $templates = null)
+    public function __construct(ContainerBuilder $container, $prefix)
     {
         $this->container = $container;
         $this->prefix = $prefix;
-        $this->resourceName = $resourceName;
-        $this->templates = $templates;
     }
 
-    public function load(array $classes)
+    public function setResourceName($resourceName)
+    {
+        $this->resourceName = $resourceName;
+
+        return $this;
+    }
+
+    public function setTemplates($templates)
+    {
+        $this->templates = $templates;
+
+        return $this;
+    }
+
+    public function loadRessources(array $classes)
     {
         $this->container->setDefinition(
             $this->getContainerKey('controller'),
@@ -63,6 +75,26 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         );
 
         $this->setManagerAlias();
+    }
+
+    /**
+     * @param $bundleName
+     */
+    public function loadEntityToIdentifierTypeDefinition($bundleName)
+    {
+        $bundleName = str_replace('sylius_', '', $bundleName);
+
+        $definition = new Definition('Sylius\Bundle\ResourceBundle\Form\Type\EntityToIdentifierType');
+        $definition
+            ->setArguments(array(new Reference($this->getManagerServiceKey())))
+            ->addTag('form.type', array('alias' => 'sylius_entity_to_identifier_'.$bundleName))
+            ->setPublic(true)
+        ;
+
+        $this->container->setDefinition(
+            'sylius.form.type.entity_to_identifier_'.$bundleName,
+            $definition
+        );
     }
 
     /**
@@ -80,7 +112,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     abstract protected function getClassMetadataClassname();
 
     /**
-     * Get the respository service
+     * Get the repository service
      *
      * @param array $classes
      *
@@ -113,6 +145,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     {
         $definition = new Definition($class);
         $definition
+            ->setArguments(array($this->getConfigurationDefinition()))
             ->setArguments(array($this->getConfigurationDefinition()))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;

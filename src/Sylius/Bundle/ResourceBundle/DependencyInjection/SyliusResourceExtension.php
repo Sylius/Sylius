@@ -56,13 +56,9 @@ class SyliusResourceExtension extends Extension
         foreach ($configs as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
 
-            DatabaseDriverFactory::get(
-                $config['driver'],
-                $container,
-                $prefix,
-                $resourceName,
-                array_key_exists('templates', $config) ? $config['templates'] : null
-            )->load($config['classes']);
+            DatabaseDriverFactory::get($config['driver'], $container, $prefix)
+                ->setTemplates(array_key_exists('templates', $config) ? $config['templates'] : null)
+                ->setResourceName($resourceName)->loadRessources($config['classes']);
         }
     }
 }
