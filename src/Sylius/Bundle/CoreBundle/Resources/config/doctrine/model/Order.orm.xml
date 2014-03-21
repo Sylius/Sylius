@@ -5,39 +5,39 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Order" table="sylius_order">
-        <many-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+    <mapped-superclass name="Sylius\Component\Core\Model\Order" table="sylius_order">
+        <many-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-persist/>
             </cascade>
             <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <many-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-all/>
             </cascade>
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="payment" target-entity="Sylius\Bundle\PaymentsBundle\Model\PaymentInterface">
+        <many-to-one field="payment" target-entity="Sylius\Component\Payment\Model\PaymentInterface">
             <cascade>
                 <cascade-all/>
             </cascade>
             <join-column name="payment_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one target-entity="Sylius\Bundle\PromotionsBundle\Model\CouponInterface" field="promotionCoupon">
+        <many-to-one target-entity="Sylius\Component\Promotion\Model\CouponInterface" field="promotionCoupon">
             <join-column name="coupon_id" on-delete="SET NULL" />
         </many-to-one>
 
-        <one-to-many field="shipments" target-entity="Sylius\Bundle\ShippingBundle\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
+        <one-to-many field="shipments" target-entity="Sylius\Component\Shipping\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>
         </one-to-many>
 
-        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Model\UserInterface" inversed-by="orders">
+        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="orders">
             <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
@@ -45,7 +45,7 @@
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
         
-        <many-to-many field="promotions" target-entity="Sylius\Bundle\PromotionsBundle\Model\PromotionInterface">
+        <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
                     <join-column name="order_id" referenced-column-name="id" />

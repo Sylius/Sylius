@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AddressingBundle\Matcher\ZoneMatcherInterface;
-use Sylius\Bundle\CoreBundle\Model\Order;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
-use Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -39,12 +38,12 @@ class TaxationProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor');
+        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\TaxationProcessor');
     }
 
     function it_implements_Sylius_taxation_processor_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessorInterface');
+        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface');
     }
 
     function it_doesnt_apply_any_taxes_if_order_has_no_items(OrderInterface $order)

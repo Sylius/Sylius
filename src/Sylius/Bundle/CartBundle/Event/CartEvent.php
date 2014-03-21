@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Event;
 
-use Sylius\Bundle\CartBundle\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
@@ -67,21 +67,5 @@ class CartEvent extends ResourceEvent
         }
 
         return $this->isFresh = (Boolean) $fresh;
-    }
-
-    /**
-     * Force the event listeners to check validation of given cart
-     *
-     * @param null|Boolean $valid
-     *
-     * @return Boolean
-     */
-    public function isValid($valid = null)
-    {
-        if (null === $valid) {
-            return $this->isValid;
-        }
-
-        return $this->isValid = (Boolean) $valid;
     }
 }

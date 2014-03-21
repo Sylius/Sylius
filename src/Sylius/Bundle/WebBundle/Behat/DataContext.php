@@ -18,23 +18,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory as FakerFactory;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
-use Sylius\Bundle\AddressingBundle\Model\ProvinceInterface;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Model\Order;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
-use Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
-use Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentMethodInterface;
-use Sylius\Bundle\ShippingBundle\Calculator\DefaultCalculators;
-use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
-use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Shipping\Calculator\DefaultCalculators;
+use Sylius\Component\Shipping\Model\RuleInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -1138,7 +1138,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         list($firstname, $lastname) = explode(' ', $addressData[0]);
 
-        /* @var $address AddressInterface */
+        /* @var $address \Sylius\Component\Addressing\Model\AddressInterface */
         $address = $this->getRepository('address')->createNew();
         $address->setFirstname(trim($firstname));
         $address->setLastname(trim($lastname));

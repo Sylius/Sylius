@@ -42,17 +42,17 @@ class SyliusAddressingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\AddressingBundle\Model\AddressInterface'    => 'sylius.model.address.class',
-            'Sylius\Bundle\AddressingBundle\Model\CountryInterface'    => 'sylius.model.country.class',
-            'Sylius\Bundle\AddressingBundle\Model\ProvinceInterface'   => 'sylius.model.province.class',
-            'Sylius\Bundle\AddressingBundle\Model\ZoneInterface'       => 'sylius.model.zone.class',
-            'Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
+            'Sylius\Component\Addressing\Model\AddressInterface'    => 'sylius.model.address.class',
+            'Sylius\Component\Addressing\Model\CountryInterface'    => 'sylius.model.country.class',
+            'Sylius\Component\Addressing\Model\ProvinceInterface'   => 'sylius.model.province.class',
+            'Sylius\Component\Addressing\Model\ZoneInterface'       => 'sylius.model.zone.class',
+            'Sylius\Component\Addressing\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_addressing', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\AddressingBundle\Model',
+            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Addressing\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_addressing.driver.doctrine/orm'));

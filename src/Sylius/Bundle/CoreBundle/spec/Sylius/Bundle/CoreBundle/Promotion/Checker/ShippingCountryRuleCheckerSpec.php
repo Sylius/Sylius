@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
+namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -23,12 +23,12 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Promotion\Checker\ShippingCountryRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
     function it_should_recognize_no_shipping_address_as_not_eligible(OrderInterface $subject)

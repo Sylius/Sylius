@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Order">
+    <class name="Sylius\Component\Core\Model\Order">
         <property name="shippingAddress">
             <constraint name="Valid" />
         </property>
@@ -25,7 +25,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Variant">
+    <class name="Sylius\Component\Core\Model\Variant">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">sku</option>
             <option name="message">sylius.variant.sku.unique</option>
@@ -55,7 +55,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\ShippingMethod">
+    <class name="Sylius\Component\Core\Model\ShippingMethod">
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_shipping.method.zone.not_blank</option>
@@ -64,7 +64,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\TaxRate">
+    <class name="Sylius\Component\Core\Model\TaxRate">
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_taxation.rate.zone.not_blank</option>
@@ -73,7 +73,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\User">
+    <class name="Sylius\Component\Core\Model\User">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.first_name.not_blank</option>
@@ -121,7 +121,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Group">
+    <class name="Sylius\Component\Core\Model\Group">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.group.name.not_blank</option>
@@ -141,7 +141,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Locale">
+    <class name="Sylius\Component\Core\Model\Locale">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
                 <value>code</value>

@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Core\Calculator\PriceCalculatorInterface;
+use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Resolver\ItemResolverInterface;
+use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
 
 /**
  * Item resolver for cart bundle.

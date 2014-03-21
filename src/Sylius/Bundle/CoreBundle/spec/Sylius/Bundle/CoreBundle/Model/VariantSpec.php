@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -23,12 +23,12 @@ class VariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Variant');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Variant');
     }
 
     function it_implements_Sylius_core_variant_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\VariantInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\VariantInterface');
     }
 
     function it_extends_Sylius_product_variant_mapped_superclass()
@@ -64,7 +64,7 @@ class VariantSpec extends ObjectBehavior
 
     function it_implements_Sylius_shippable_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShippableInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');
     }
 
     function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)

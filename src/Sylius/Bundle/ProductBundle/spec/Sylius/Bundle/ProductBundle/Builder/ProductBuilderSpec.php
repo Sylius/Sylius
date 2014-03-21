@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ProductBundle\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface;
 use Sylius\Bundle\ProductBundle\Model\PropertyInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

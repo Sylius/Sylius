@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
  * Order repository.
