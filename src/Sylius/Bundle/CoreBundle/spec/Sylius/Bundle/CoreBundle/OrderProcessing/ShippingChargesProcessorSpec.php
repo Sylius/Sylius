@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\Order;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
@@ -36,12 +36,12 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessor');
+        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor');
     }
 
     function it_implements_Sylius_shipping_charges_processor_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\ShippingChargesProcessorInterface');
+        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface');
     }
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order)

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -17,12 +17,12 @@ class ImageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Image');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Image');
     }
 
     function it_implements_Sylius_image_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ImageInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\ImageInterface');
     }
 
     function it_does_not_have_id_by_default()

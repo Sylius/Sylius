@@ -17,7 +17,7 @@ use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\PaymentBundle\SyliusPaymentEvents;
 use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\Model\PaymentInterface as PaymentModelInterface;

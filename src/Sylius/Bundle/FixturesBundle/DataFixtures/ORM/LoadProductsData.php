@@ -13,8 +13,8 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * Default assortment products to play with Sylius.

@@ -25,7 +25,7 @@
         <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\MethodsResolver</parameter>
 
         <parameter key="sylius.shipping_calculator_registry.class">Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistry</parameter>
-        <parameter key="sylius.shipping_calculator.class">Sylius\Bundle\ShippingBundle\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius.shipping_calculator.class">Sylius\Component\Shipping\Calculator\DelegatingCalculator</parameter>
 
         <parameter key="sylius.shipping_rule_checker_registry.class">Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry</parameter>
 

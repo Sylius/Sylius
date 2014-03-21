@@ -13,10 +13,10 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
-use Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 
 /**
@@ -85,7 +85,7 @@ class ShipmentListener
 
         if (!$shipment instanceof ShipmentInterface) {
             throw new \InvalidArgumentException(
-                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\ShipmentInterface"'
+                'Order shipping listener requires event subject to be instance of "Sylius\Component\Core\Model\ShipmentInterface"'
             );
         }
 
