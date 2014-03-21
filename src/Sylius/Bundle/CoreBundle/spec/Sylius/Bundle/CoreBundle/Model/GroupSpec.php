@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,12 +20,12 @@ class GroupSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Group');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Group');
     }
 
     function it_implements_Sylius_group_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\GroupInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\GroupInterface');
     }
 
     function it_extends_FOS_group_model()

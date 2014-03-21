@@ -9,34 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\InventoryUnit');
+        $this->shouldHaveType('Sylius\Component\Core\Model\InventoryUnit');
     }
 
     function it_implements_Sylius_core_inventory_unit_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\InventoryUnitInterface');
     }
 
     function it_extends_Sylius_inventory_unit_model()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Model\InventoryUnit');
+        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
     }
 
     function it_implements_Sylius_shipment_item_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Model\ShipmentItemInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Model\ShipmentItemInterface');
     }
 
     function it_does_not_belong_to_any_shipment_by_default()

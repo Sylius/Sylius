@@ -17,25 +17,25 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Product" table="sylius_product">
+    <mapped-superclass name="Sylius\Component\Core\Model\Product" table="sylius_product">
         <field name="shortDescription" column="short_description" type="string" nullable="true">
             <gedmo:versioned />
         </field>
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
-        <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
+        <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="shippingCategory" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface">
+        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
             <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="restrictedZone" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneInterface">
+        <many-to-one field="restrictedZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="restricted_zone" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface">
+        <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
             <join-table name="sylius_product_taxon">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

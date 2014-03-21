@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * Basic taxation fixtures.

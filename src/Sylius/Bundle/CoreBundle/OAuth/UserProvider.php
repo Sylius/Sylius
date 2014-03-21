@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\OAuth;
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
-use Sylius\Bundle\CoreBundle\Model\User;
+use Sylius\Component\Core\Model\User;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 

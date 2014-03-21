@@ -28,7 +28,7 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_implements_Sylius_currency_context_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface');
+        $this->shouldImplement('Sylius\Component\Money\Context\CurrencyContextInterface');
     }
 
     function it_gets_default_currency()
