@@ -572,3 +572,14 @@ input[type="file"] {
     border-top-color: #333;
     color: #333;
 }
+
+div.select2-container {
+    padding: 0px;
+    border: none;
+}
+
+div.select2-container a.select2-choice {
+    line-height: 34px;
+    height: 34px;
+}
+

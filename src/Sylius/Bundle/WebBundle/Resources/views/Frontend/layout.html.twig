@@ -18,6 +18,7 @@
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" type="text/css" />
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" type="text/css" />
             {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
+                'bundles/syliusweb/css/select2.css'
                 'bundles/syliusweb/css/frontend.css'
                 'bundles/syliusweb/css/blueimp-gallery.css'
             %}
@@ -114,6 +115,7 @@
         {% javascripts output='assets/compiled/frontend.js'
             'bundles/syliusweb/js/jquery.blueimp-gallery.min.js'
             'bundles/syliusweb/js/confirm-modal.js'
+            'bundles/syliusweb/js/select2.js'
             'bundles/syliusweb/js/frontend.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
