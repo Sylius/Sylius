@@ -25,7 +25,7 @@ In HTTP, message can look something like this:
 .. code-block:: text
 
     GET /products HTTP/1.1
-    Host: sylius.com
+    Host: sylius.org
     Accept: text/html
     User-Agent: Mozilla/5.0 (Macintosh)
 

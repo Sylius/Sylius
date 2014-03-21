@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/addressing-bundle:0.2.*
+    $ composer require sylius/addressing-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/addressing-bundle:0.2.*
+    $ php composer.phar require sylius/addressing-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -38,6 +38,7 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
@@ -95,7 +96,7 @@ Run the following command.
 Templates
 ---------
 
-This bundle provides some default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
+This bundle provides some default `bootstrap <http://getbootstrap.com/>`_ templates.
 
 .. note::
 
