@@ -6,9 +6,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-//; here is caused of twitter bootstrap do not have ; at the end of file
-;(function ( $ ) {
+require(["jquery", "jquery.bootstrap"], function ($) {
     'use strict';
 
     $(document).ready(function() {
@@ -19,10 +17,11 @@
             var item = prototype.replace(/__name__/g, collectionContainer.children().length);
             collectionContainer.append(item);
         });
+
         $(document).on('click', 'a[data-collection-button="delete"]', function(e) {
             e.preventDefault();
             var item = $(this).closest('.' + $(this).data('collection') + '-' + $(this).data('collection-item'));
             item.remove();
         });
     });
-})( jQuery );
+});

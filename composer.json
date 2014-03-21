@@ -58,7 +58,15 @@
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "winzou/state-machine-bundle":          "~0.1.2",
         "willdurand/hateoas-bundle":            "@stable",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+
+        "robloach/component-installer":         "0.0.12",
+        "components/jquery":                    "~1.11",
+        "components/bootstrap":                 "~3.0",
+        "components/font-awesome":              "~4.0",
+        "eternicode/bootstrap-datepicker":      "~1.0",
+        "ivaynberg/select2":                    "~3.5",
+        "blueimp/gallery":                      "~2.15"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
@@ -145,7 +153,9 @@
         "psr-0": { "Sylius\\": "src/" }
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir":       "bin",
+        "component-dir": "web/assets",
+        "component-baseurl": "/assets"
     },
     "extra": {
         "branch-alias": {
@@ -156,5 +166,27 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "blueimp/gallery",
+                "type": "component",
+                "version": "2.15.1",
+                "dist": {
+                    "url": "https://github.com/blueimp/Gallery/archive/2.15.1.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/blueimp/Gallery/html5shiv.git",
+                    "type": "git",
+                    "reference": "2.15.1"
+                },
+                "require": {
+                    "robloach/component-installer": "*"
+                }
+            }
+        }
+    ]
 }
