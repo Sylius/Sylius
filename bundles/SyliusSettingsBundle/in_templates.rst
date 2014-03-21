@@ -19,7 +19,7 @@ There is also `sylius_settings_get()` to get particular setting directly.
 
 .. code-block:: jinja
 
-    {% set title = sylius_settings_get('meta', 'title') %}
+    {% set title = sylius_settings_get('meta.title') %}
 
     <head>
         <title>{{ title }}</title>
