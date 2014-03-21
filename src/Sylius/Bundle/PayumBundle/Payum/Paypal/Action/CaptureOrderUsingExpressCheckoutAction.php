@@ -50,10 +50,10 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
         if (empty($details)) {
             $details['RETURNURL'] = $request->getToken()->getTargetUrl();
             $details['CANCELURL'] = $request->getToken()->getTargetUrl();
-            $details['NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
+            $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
                 $request->getToken()->getPaymentName(),
                 $order
-            );
+            )->getTargetUrl();
             $details['INVNUM'] = $order->getNumber();
 
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
