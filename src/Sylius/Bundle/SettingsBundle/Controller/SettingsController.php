@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
  * Settings controller.
@@ -46,10 +47,15 @@ class SettingsController extends Controller
         $form->setData($settings);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $manager->saveSettings($namespace, $form->getData());
-
-            $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
-            $request->getSession()->getFlashBag()->add('success', $message);
+            $messageType = 'success';
+            try {
+                $manager->saveSettings($namespace, $form->getData());
+                $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
+            } catch (ValidatorException $exception) {
+                $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'validators');
+                $messageType = 'error';
+            }
+            $request->getSession()->getFlashBag()->add($messageType, $message);
 
             if ($request->headers->has('referer')) {
                 return $this->redirect($request->headers->get('referer'));

@@ -1,0 +1,10 @@
+sylius:
+    parameter:
+        namespace:
+            max_length: Parameter namespace must not be longer than 255 characters|Parameter namespace must not be longer than 255 characters.
+            min_length: Parameter namespace must be at least 2 characters long|Parameter namespace must be at least 2 characters long.
+            not_blank: Please select a namespace for this parameter.
+        name:
+            max_length: Parameter name must not be longer than 255 characters|Parameter name must not be longer than 255 characters.
+            min_length: Parameter name must be at least 2 characters long|Parameter name must be at least 2 characters long.
+            not_blank: Please enter a name for this parameter.

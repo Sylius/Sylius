@@ -13,10 +13,13 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
  * Settings manager.
@@ -61,19 +64,28 @@ class SettingsManager implements SettingsManagerInterface
     protected $resolvedSettings = array();
 
     /**
+     * Validator instance
+     * 
+     * @var ValidatorInterface
+     */
+    protected $validator;
+
+    /**
      * Constructor.
      *
      * @param SchemaRegistryInterface $schemaRegistry
      * @param ObjectManager           $parameterManager
      * @param RepositoryInterface     $parameterRepository
      * @param Cache                   $cache
+     * @param ValidatorInterface      $validator
      */
-    public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->parameterManager = $parameterManager;
         $this->parameterRepository = $parameterRepository;
         $this->cache = $cache;
+        $this->validator = $validator;
     }
 
     /**
@@ -109,6 +121,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * {@inheritdoc}
+     * @throws ValidatorException
      */
     public function saveSettings($namespace, Settings $settings)
     {
@@ -147,6 +160,12 @@ class SettingsManager implements SettingsManagerInterface
                     ->setName($name)
                     ->setValue($value)
                 ;
+
+                $errors = $this->validator->validate($parameter);
+                /* @var $errors ConstraintViolationListInterface */
+                if(0 < $errors->count()) {
+                    throw new ValidatorException($errors->get(0)->getMessage());
+                }
 
                 $this->parameterManager->persist($parameter);
             }

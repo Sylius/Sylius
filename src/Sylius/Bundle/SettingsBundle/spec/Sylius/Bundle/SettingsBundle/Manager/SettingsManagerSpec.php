@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -26,10 +27,11 @@ class SettingsManagerSpec extends ObjectBehavior
         SchemaRegistryInterface $registry,
         Cache $cache,
         ObjectManager $manager,
-        RepositoryInterface $repository
+        RepositoryInterface $repository,
+        ValidatorInterface $validator
     )
     {
-        $this->beConstructedWith($registry, $manager, $repository, $cache);
+        $this->beConstructedWith($registry, $manager, $repository, $cache, $validator);
     }
 
     function it_should_be_initializable()
