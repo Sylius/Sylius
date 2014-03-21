@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Form\DataTransformerInterface;
+use Sylius\Bundle\CoreBundle\Model\TaxonInterface;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
@@ -21,23 +21,8 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
+class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierCollectionTransformer
 {
-    /**
-     * Taxons map.
-     *
-     * @var array
-     */
-    private $taxonomies;
-
-    /**
-     * Constructor.
-     */
-    public function __construct(array $taxonomies)
-    {
-        $this->taxonomies = $taxonomies;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -45,7 +30,7 @@ class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
     {
         $taxons = array();
 
-        foreach ($this->taxonomies as $taxonomy) {
+        foreach ($this->objects as $taxonomy) {
             $taxons[$taxonomy->getId()] = array();
         }
 
@@ -57,36 +42,9 @@ class TaxonSelectionToCollectionTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
         }
 
+        /* @var $value TaxonInterface[] */
         foreach ($value as $taxon) {
             $taxons[$taxon->getTaxonomy()->getId()][] = $taxon;
-        }
-
-        return $taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($value)
-    {
-        if (empty($value)) {
-            return new ArrayCollection();
-        }
-
-        if (!is_array($value) && !$value instanceof \Traversable && !$value instanceof \ArrayAccess) {
-            throw new UnexpectedTypeException($value, '\Traversable or \ArrayAccess');
-        }
-
-        $taxons = new ArrayCollection();
-
-        foreach ($value as $taxonomy) {
-            if (null === $taxonomy) {
-                continue;
-            }
-
-            foreach ($taxonomy as $taxon) {
-                $taxons->add($taxon);
-            }
         }
 
         return $taxons;
