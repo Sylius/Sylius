@@ -15,6 +15,8 @@
             $('#sylius-billing-address-container').toggleClass('hidden');
         });
 
+        $('.selectize').selectize();
+
     });
 
 })( jQuery );
