@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Uploader;
+namespace spec\Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\ImageInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
@@ -31,12 +31,12 @@ class ImageUploaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Uploader\ImageUploader');
+        $this->shouldHaveType('Sylius\Component\Core\Uploader\ImageUploader');
     }
 
     function it_is_Sylius_image_uploader()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface');
+        $this->shouldImplement('Sylius\Component\Core\Uploader\ImageUploaderInterface');
     }
 
     function it_uploads_image($filesystem, $image)

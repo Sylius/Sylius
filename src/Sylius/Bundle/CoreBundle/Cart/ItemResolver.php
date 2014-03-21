@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
-use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\PriceCalculatorInterface;
 use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;

@@ -12,8 +12,8 @@
 namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
-use Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 

@@ -12,11 +12,11 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\ImageInterface;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
-use Sylius\Bundle\CoreBundle\Model\Taxon;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\CoreBundle\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListenerSpec extends ObjectBehavior

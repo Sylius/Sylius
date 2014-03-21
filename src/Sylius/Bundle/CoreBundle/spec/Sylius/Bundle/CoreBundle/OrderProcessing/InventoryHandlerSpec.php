@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -36,12 +36,12 @@ class InventoryHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandler');
+        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\InventoryHandler');
     }
 
     function it_implements_Sylius_inventory_handler_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface');
+        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface');
     }
 
     function it_creates_inventory_units_via_the_factory(

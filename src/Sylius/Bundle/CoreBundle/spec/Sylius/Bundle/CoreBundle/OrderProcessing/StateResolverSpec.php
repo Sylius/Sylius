@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderShippingStates;
+use Sylius\Component\Core\Model\ShipmentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -25,12 +25,12 @@ class StateResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\StateResolver');
+        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\StateResolver');
     }
 
     function it_implements_Sylius_order_state_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface');
+        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\StateResolverInterface');
     }
 
     function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)

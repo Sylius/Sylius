@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -21,12 +21,12 @@ class TaxRateSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\TaxRate');
+        $this->shouldHaveType('Sylius\Component\Core\Model\TaxRate');
     }
 
     function it_should_implement_Sylius_core_tax_rate_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\TaxRateInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\TaxRateInterface');
     }
 
     function it_should_extend_Sylius_tax_rate_mapped_superclass()

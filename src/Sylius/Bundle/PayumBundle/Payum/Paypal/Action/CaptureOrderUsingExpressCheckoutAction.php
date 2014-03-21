@@ -15,7 +15,7 @@ use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 {

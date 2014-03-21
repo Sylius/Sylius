@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -17,13 +17,13 @@ class TaxonSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Taxon');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Taxon');
     }
 
     function it_is_Sylius_Taxon()
     {
         $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonInterface');
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ImageInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\ImageInterface');
     }
 
     function it_should_not_path_defined_by_default()

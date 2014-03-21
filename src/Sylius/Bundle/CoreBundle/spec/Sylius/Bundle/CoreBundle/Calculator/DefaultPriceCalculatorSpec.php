@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Calculator;
+namespace spec\Sylius\Component\Core\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\PriceableInterface;
+use Sylius\Component\Core\Model\PriceableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -21,12 +21,12 @@ class DefaultPriceCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Calculator\DefaultPriceCalculator');
+        $this->shouldHaveType('Sylius\Component\Core\Calculator\DefaultPriceCalculator');
     }
 
     function it_implements_Sylius_price_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface');
+        $this->shouldImplement('Sylius\Component\Core\Calculator\PriceCalculatorInterface');
     }
 
     function it_returns_priceable_price(PriceableInterface $priceable)
