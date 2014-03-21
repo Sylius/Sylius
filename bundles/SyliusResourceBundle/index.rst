@@ -22,6 +22,7 @@ Please note that this bundle **is not an admin generator**. It won't create form
    :numbered:
 
    installation
+   configuration
    Getting single resource <show_resource>
    Getting collection of resources <index_resources>
    Creating resource <create_resource>
