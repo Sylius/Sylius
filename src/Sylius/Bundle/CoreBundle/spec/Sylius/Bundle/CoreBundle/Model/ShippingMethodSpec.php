@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -18,12 +18,12 @@ class ShippingMethodSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\ShippingMethod');
+        $this->shouldHaveType('Sylius\Component\Core\Model\ShippingMethod');
     }
 
     function it_should_implement_Sylius_core_shipping_method_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ShippingMethodInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\ShippingMethodInterface');
     }
 
     function it_should_extend_Sylius_shipping_method_mapped_superclass()

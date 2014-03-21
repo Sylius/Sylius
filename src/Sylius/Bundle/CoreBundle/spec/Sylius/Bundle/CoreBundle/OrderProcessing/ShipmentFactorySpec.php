@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -30,12 +30,12 @@ class ShipmentFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory');
+        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\ShipmentFactory');
     }
 
     function it_implements_Sylius_shipment_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactoryInterface');
+        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShipmentFactoryInterface');
     }
 
     function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(

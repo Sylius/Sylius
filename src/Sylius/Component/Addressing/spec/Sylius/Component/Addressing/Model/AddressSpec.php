@@ -145,43 +145,6 @@ class AddressSpec extends ObjectBehavior
         ;
     }
 
-    function it_is_not_valid_by_default()
-    {
-        $this->isValid()->shouldReturn(false);
-    }
-
-    function it_is_not_valid_when_no_province_selected_and_country_has_provinces(CountryInterface $country)
-    {
-        $country->hasProvinces()->willReturn(true);
-
-        $this->setCountry($country);
-
-        $this->isValid()->shouldReturn(false);
-    }
-
-    function it_is_valid_if_country_has_no_provinces_and_province_is_not_set(CountryInterface $country)
-    {
-        $country->hasProvinces()->willReturn(false);
-
-        $this->setCountry($country);
-
-        $this->isValid()->shouldReturn(true);
-    }
-
-    function it_is_valid_if_given_province_belongs_to_selected_country(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
-    {
-        $country->hasProvinces()->willReturn(false);
-        $country->hasProvince($province)->willReturn(true);
-
-        $this->setCountry($country);
-        $this->setProvince($province);
-
-        $this->isValid()->shouldReturn(true);
-    }
-
     function it_has_no_company_by_default()
     {
         $this->getCompany()->shouldReturn(null);
