@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 class SyliusRestrictedZoneExtensionSpec extends ObjectBehavior
 {

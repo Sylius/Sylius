@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderShippingStates;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderShippingStates;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -28,7 +28,7 @@ class OrderSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Order');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Order');
     }
 
     function it_should_implement_Sylius_order_interface()

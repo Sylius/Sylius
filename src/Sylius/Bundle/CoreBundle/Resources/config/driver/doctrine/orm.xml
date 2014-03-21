@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.model.variant_image.class">Sylius\Bundle\CoreBundle\Model\VariantImage</parameter>
+        <parameter key="sylius.model.variant_image.class">Sylius\Component\Core\Model\VariantImage</parameter>
         <parameter key="sylius.form.type.group_choice.class">Sylius\Bundle\CoreBundle\Form\Type\GroupEntityType</parameter>
     </parameters>
 

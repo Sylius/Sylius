@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\CartBundle\Provider;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Bundle\CartBundle\Event\CartEvent;
+use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Storage\CartStorageInterface;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

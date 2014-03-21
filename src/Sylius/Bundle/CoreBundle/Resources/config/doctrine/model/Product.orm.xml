@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Product" table="sylius_product">
+    <mapped-superclass name="Sylius\Component\Core\Model\Product" table="sylius_product">
         <field name="shortDescription" column="short_description" type="string" nullable="true">
             <gedmo:versioned />
         </field>

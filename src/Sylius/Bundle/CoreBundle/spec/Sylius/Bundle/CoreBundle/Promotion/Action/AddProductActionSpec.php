@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Promotion\Action;
+namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\VariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
@@ -30,7 +30,7 @@ class AddProductActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Promotion\Action\AddProductAction');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\AddProductAction');
     }
 
     function it_implements_Sylius_promotion_action_interface()

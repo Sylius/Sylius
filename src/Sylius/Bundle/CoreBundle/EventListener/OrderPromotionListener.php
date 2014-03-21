@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\PromotionBundle\SyliusPromotionEvents;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -69,7 +69,7 @@ class OrderPromotionListener
 
         if (!$order instanceof OrderInterface) {
             throw new \InvalidArgumentException(
-                'Order promotion listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+                'Order promotion listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
             );
         }
 
