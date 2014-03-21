@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * CustomerWelcomeMailerInterface

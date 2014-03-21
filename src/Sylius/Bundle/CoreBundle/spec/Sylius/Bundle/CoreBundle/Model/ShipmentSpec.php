@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 class ShipmentSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Shipment');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Shipment');
     }
 
     function it_should_implement_Sylius_core_shipment_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Model\ShipmentInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\ShipmentInterface');
     }
 
     function it_should_extend_Sylius_shipment_mapped_superclass()

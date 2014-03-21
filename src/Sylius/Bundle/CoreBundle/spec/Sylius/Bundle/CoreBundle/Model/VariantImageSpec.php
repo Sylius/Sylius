@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\VariantInterface;
+use Sylius\Component\Core\Model\VariantInterface;
 
 class VariantImageSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\VariantImage');
+        $this->shouldHaveType('Sylius\Component\Core\Model\VariantImage');
     }
 
     function it_should_be_Sylius_Image()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Model\Image');
+        $this->shouldHaveType('Sylius\Component\Core\Model\Image');
     }
 
     function it_does_not_have_variant_by_default()

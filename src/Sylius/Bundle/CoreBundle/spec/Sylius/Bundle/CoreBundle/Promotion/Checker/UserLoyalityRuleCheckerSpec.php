@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
+namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -22,7 +22,7 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Promotion\Checker\UserLoyalityRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\UserLoyalityRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()

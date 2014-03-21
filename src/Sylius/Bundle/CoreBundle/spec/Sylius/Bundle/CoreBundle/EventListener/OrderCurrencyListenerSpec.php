@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Bundle\CartBundle\Event\CartEvent;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Money\Context\CurrencyContextInterface;
 
 class OrderCurrencyListenerSpec extends ObjectBehavior
