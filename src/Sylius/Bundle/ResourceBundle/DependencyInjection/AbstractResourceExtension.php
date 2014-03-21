@@ -13,7 +13,6 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
 use Sylius\Bundle\ResourceBundle\Exception\Driver\InvalidDriverException;
-use Sylius\Bundle\ResourceBundle\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -134,7 +133,7 @@ abstract class AbstractResourceExtension extends Extension
      * @param XmlFileLoader         $loader
      * @param null|ContainerBuilder $container
      *
-     * @throws UnknownDriverException
+     * @throws InvalidDriverException
      */
     protected function loadDatabaseDriver(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
@@ -179,7 +178,7 @@ abstract class AbstractResourceExtension extends Extension
      * Get the configuration directory
      *
      * @return string
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     protected function getConfigurationDirectory()
     {
@@ -187,7 +186,7 @@ abstract class AbstractResourceExtension extends Extension
         $fileName = $reflector->getFileName();
 
         if (!is_dir($directory = dirname($fileName) . $this->configDirectory)) {
-            throw new \Exception(sprintf('The configuration directory "%s" does not exists.', $directory));
+            throw new \RuntimeException(sprintf('The configuration directory "%s" does not exists.', $directory));
         }
 
         return $directory;

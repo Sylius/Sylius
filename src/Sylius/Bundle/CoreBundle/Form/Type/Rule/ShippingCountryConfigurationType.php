@@ -26,8 +26,8 @@ class ShippingCountryConfigurationType extends AbstractType
     protected $dataClass;
 
     /**
-     * @param array $validationGroups Array of validation groups
-     * @param type  $dataClass        Class of Country model
+     * @param array  $validationGroups Array of validation groups
+     * @param string $dataClass        Class of Country model
      */
     public function __construct(array $validationGroups, $dataClass)
     {

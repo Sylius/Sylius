@@ -9,7 +9,7 @@ use Prophecy\Argument;
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
-class EntityToIdentifierTransformerSpec extends ObjectBehavior
+class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 {
     function let(ObjectRepository $repository)
     {
@@ -19,16 +19,14 @@ class EntityToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\EntityToIdentifierTransformer');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer');
     }
 
     function it_does_not_transform_null_value(ObjectRepository $repository)
     {
-        $value = null;
-
         $repository->findOneBy(Argument::any())->shouldNotBeCalled();
 
-        $this->transform($value)->shouldReturn(null);
+        $this->transform(null)->shouldReturn(null);
     }
 
     function it_throws_an_exception_on_non_existing_entity(ObjectRepository $repository)
@@ -51,16 +49,13 @@ class EntityToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_does_not_reverse_null_value()
     {
-        $value = null;
-
-        $this->reverseTransform($value)->shouldReturn('');
+        $this->reverseTransform(null)->shouldReturn('');
     }
 
     function it_reverses_entity_in_identifier(FakeEntity $value)
     {
-        $id = 6;
-        $value->getId()->shouldBeCalled()->willReturn($id);
+        $value->getId()->shouldBeCalled()->willReturn(6);
 
-        $this->reverseTransform($value)->shouldReturn($id);
+        $this->reverseTransform($value)->shouldReturn(6);
     }
 }

@@ -22,7 +22,7 @@
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
         <parameter key="sylius.twig.resource.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
-        <parameter key="sylius.form.type.entity_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityToIdentifierType</parameter>
+        <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
 
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
@@ -57,10 +57,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="sylius.form.type.entity_to_identifier" class="%sylius.form.type.entity_to_identifier.class%">
-             <argument type="service" id="doctrine.orm.entity_manager" />
-             <tag name="form.type" alias="sylius_entity_to_identifier" />
-         </service>
+        <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
     </services>
 
 </container>
