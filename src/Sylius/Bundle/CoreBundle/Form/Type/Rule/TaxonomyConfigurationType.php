@@ -37,7 +37,9 @@ class TaxonomyConfigurationType extends AbstractType
         $builder
             ->add('taxons', 'sylius_taxon_selection', array(
                 'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
-                'model_transformer' => 'Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer',
+                'model_transformer' => array(
+                    'save_objects' => false,
+                ),
             ))
             ->add('exclude', 'checkbox', array(
                 'label' => 'sylius.form.rule.taxonomy_configuration.exclude',

@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Promotion\Checker;
 
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
 use Sylius\Bundle\PromotionsBundle\Model\PromotionSubjectInterface;
 use Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 
 /**
- * Checks if order containes products with given taxonomy.
+ * Checks if order contains products with given taxonomy.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -32,6 +33,7 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Bundle\CoreBundle\Model\OrderInterface');
         }
 
+        /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
             foreach ($item->getProduct()->getTaxons() as $taxon) {
                 if ($configuration['taxons']->contains($taxon->getId())) {
