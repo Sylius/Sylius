@@ -24,11 +24,18 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
     protected $objects;
 
     /**
-     * @param object[] $objects
+     * @var boolean
      */
-    public function __construct(array $objects)
+    protected $saveObjects;
+
+    /**
+     * @param object[] $objects
+     * @param boolean  $saveObjects
+     */
+    public function __construct(array $objects, $saveObjects = true)
     {
         $this->objects = $objects;
+        $this->saveObjects = $saveObjects;
     }
 
     /**
@@ -69,10 +76,10 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
 
             if (is_array($objects)) {
                 foreach ($objects as $object) {
-                    $collection->add($object->getId());
+                    $collection->add($this->saveObjects ? $object : $object->getId());
                 }
             } else {
-                $collection->add($objects->getId());
+                $collection->add($this->saveObjects ? $objects : $objects->getId());
             }
         }
 

@@ -17,6 +17,7 @@ use Sylius\Bundle\TaxonomiesBundle\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use JMS\TranslationBundle\Annotation\Ignore;
 
@@ -63,7 +64,7 @@ class TaxonSelectionType extends AbstractType
     {
         $taxonomies = $this->taxonomyRepository->findAll();
 
-        $builder->addModelTransformer(new $options['model_transformer']($taxonomies));
+        $builder->addModelTransformer(new $options['model_transformer']['class']($taxonomies, $options['model_transformer']['save_objects']));
 
         foreach ($taxonomies as $taxonomy) {
             /* @var $taxonomy Taxonomy */
@@ -85,9 +86,32 @@ class TaxonSelectionType extends AbstractType
                 'data_class'         => null,
                 'multiple'           => true,
                 'render_label'       => false,
-                'model_transformer'  => 'Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+                'model_transformer'  => array(
+                    'class'        => 'Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+                    'save_objects' => true,
+                ),
             ))
         ;
+
+        $resolver->setNormalizers(array(
+            'model_transformer' => function (Options $options, $value) {
+                if (!is_array($value)) {
+                    $value = array(
+                        'class'        => $value,
+                        'save_objects' => true,
+                    );
+                } else {
+                    if (!isset($value['class'])) {
+                        $value['class'] = 'Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer';
+                    }
+                    if (!isset($value['save_objects'])) {
+                        $value['save_objects'] = true;
+                    }
+                }
+
+                return $value;
+            },
+        ));
     }
 
     /**

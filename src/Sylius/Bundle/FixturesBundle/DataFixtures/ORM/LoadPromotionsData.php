@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\PromotionsBundle\Model\PromotionInterface;
 use Sylius\Bundle\PromotionsBundle\Model\RuleInterface;
 use Sylius\Bundle\PromotionsBundle\Model\ActionInterface;
 
@@ -36,13 +38,20 @@ class LoadPromotionsData extends DataFixture
 
         $manager->persist($promotion);
 
-        $manager->flush();
-
         $promotion = $this->createPromotion(
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
             array($this->createRule(RuleInterface::TYPE_ITEM_TOTAL, array('amount' => 10000, 'equal' => true))),
             array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 250)))
+        );
+
+        $manager->persist($promotion);
+
+        $promotion = $this->createPromotion(
+            'Easter Egg',
+            'Easter Egg Sale for people who buy product from specific category.',
+            array($this->createRule('taxonomy', array('taxons' => new ArrayCollection(array($this->getReference('Sylius.Taxon.Bookmania')->getId())), 'exclude' => false))),
+            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
         );
 
         $manager->persist($promotion);
@@ -55,7 +64,7 @@ class LoadPromotionsData extends DataFixture
      */
     public function getOrder()
     {
-        return 1;
+        return 6;
     }
 
     /**
@@ -64,10 +73,11 @@ class LoadPromotionsData extends DataFixture
      * @param string $type
      * @param array  $configuration
      *
-     * @return PromotionRuleInterface
+     * @return RuleInterface
      */
     private function createRule($type, array $configuration)
     {
+        /* @var $rule RuleInterface */
         $rule = $this
             ->getPromotionRuleRepository()
             ->createNew()
@@ -85,10 +95,11 @@ class LoadPromotionsData extends DataFixture
      * @param string $type
      * @param array  $configuration
      *
-     * @return PromotionActionInterface
+     * @return ActionInterface
      */
     private function createAction($type, array $configuration)
     {
+        /* @var $action ActionInterface */
         $action = $this
             ->getPromotionActionRepository()
             ->createNew()
@@ -112,6 +123,7 @@ class LoadPromotionsData extends DataFixture
      */
     private function createPromotion($name, $description, array $rules, array $actions)
     {
+        /* @var $promotion PromotionInterface */
         $promotion = $this
             ->getPromotionRepository()
             ->createNew()

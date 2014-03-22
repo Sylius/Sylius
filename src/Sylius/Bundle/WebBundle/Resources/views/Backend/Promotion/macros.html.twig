@@ -73,8 +73,9 @@
 
 {% macro configuration(configuration) %}
 
-<ul>
+<ul class="list-unstyled">
 {% for key, value in configuration %}
+    {% set value = value is sameas(false) ? '0' : value|join(', ') %}
     <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
 {% endfor %}
 </ul>

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Model\TaxonInterface;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer;
+use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
@@ -42,9 +43,14 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
             throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
         }
 
-        /* @var $value TaxonInterface[] */
-        foreach ($value as $taxon) {
-            $taxons[$taxon->getTaxonomy()->getId()][] = $taxon;
+        /* @var $taxonomy TaxonomyInterface[] */
+        foreach ($this->objects as $taxonomy) {
+            /* @var $taxon TaxonInterface[] */
+            foreach ($taxonomy->getTaxons() as $taxon) {
+                if ($value->contains($this->saveObjects ? $taxon : $taxon->getId())) {
+                    $taxons[$taxonomy->getId()][] = $taxon;
+                }
+            }
         }
 
         return $taxons;
