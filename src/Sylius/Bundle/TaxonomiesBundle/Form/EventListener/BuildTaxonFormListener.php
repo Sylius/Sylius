@@ -65,14 +65,12 @@ class BuildTaxonFormListener implements EventSubscriberInterface
             return;
         }
 
-        $taxonomy = $taxon->getTaxonomy();
-
         $event->getForm()->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
-            'taxonomy'    => $taxonomy,
-            'filter'      => $this->getFilterTaxonOption($taxon),
-            'required'    => false,
-            'label'       => 'sylius.form.taxon.parent',
-            'empty_value' => '---',
+            'taxonomy'        => $taxon->getTaxonomy(),
+            'filter'          => $this->getFilterTaxonOption($taxon),
+            'required'        => false,
+            'label'           => 'sylius.form.taxon.parent',
+            'empty_value'     => '---',
             'auto_initialize' => false,
         )));
     }
@@ -96,14 +94,15 @@ class BuildTaxonFormListener implements EventSubscriberInterface
     /**
      * Get the closure to filter taxon collection
      *
-     * @param  TaxonInterface $taxon
+     * @param TaxonInterface $taxon
+     *
      * @return callable|null
      */
     private function getFilterTaxonOption(TaxonInterface $taxon)
     {
         $closure = null;
 
-        if ($taxon->getId()) {
+        if (null !== $taxon->getId()) {
             $closure = function ($entry) use ($taxon) {
                 return $entry->getId() != $taxon->getId();
             };

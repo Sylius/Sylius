@@ -23,16 +23,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TaxonomyConfigurationType extends AbstractType
 {
     protected $validationGroups;
-    protected $dataClass;
 
-    /**
-     * @param array $validationGroups Array of validation groups
-     * @param type  $dataClass        Class of Taxon model
-     */
-    public function __construct(array $validationGroups, $dataClass)
+    public function __construct(array $validationGroups)
     {
         $this->validationGroups = $validationGroups;
-        $this->dataClass        = $dataClass;
     }
 
     /**
@@ -41,10 +35,9 @@ class TaxonomyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', 'sylius_entity_to_identifier', array(
-                'label'      => 'sylius.form.rule.taxonomy_configuration.taxons',
-                'class'      => $this->dataClass,
-                'identifier' => 'id'
+            ->add('taxons', 'sylius_taxon_selection', array(
+                'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
+                'model_transformer' => 'Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer',
             ))
             ->add('exclude', 'checkbox', array(
                 'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
