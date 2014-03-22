@@ -34,7 +34,7 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
 
         foreach ($subject->getItems() as $item) {
             foreach ($item->getProduct()->getTaxons() as $taxon) {
-                if ($configuration['taxons']->contains($taxon->getId())) {
+                if ($taxon->getId() === $configuration['taxons']) {
                     return !$configuration['exclude'];
                 }
             }

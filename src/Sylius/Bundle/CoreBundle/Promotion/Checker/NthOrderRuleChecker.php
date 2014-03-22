@@ -36,7 +36,7 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $user->getOrders()->count() == $configuration['nth'];
+        return $user->getOrders()->count() === $configuration['nth'];
     }
 
     /**
