@@ -28,6 +28,8 @@
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
 
+        <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
+
         <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandler</parameter>
         <parameter key="sylius.order_processing.state_resolver.class">Sylius\Bundle\CoreBundle\OrderProcessing\StateResolver</parameter>
         <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Bundle\CoreBundle\OrderProcessing\ShipmentFactory</parameter>
@@ -244,7 +246,12 @@
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
-            <argument key="pendingDuration">%sylius.order.pending.duration%</argument>
+        </service>
+
+        <service id="sylius.order.releaser" class="%sylius.order.releaser.class%">
+            <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <!-- listeners -->

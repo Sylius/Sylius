@@ -15,7 +15,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\CartBundle\Purger\PurgerInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
 
 /**
@@ -40,17 +39,26 @@ class ExpiredOrdersPurger implements PurgerInterface
     protected $repository;
 
     /**
-     * Pending order duration.
+     * Expires at.
      *
-     * @var string
+     * @var \DateTime
      */
-    protected $pendingDuration;
+    protected $expiresAt;
 
-    public function __construct(ObjectManager $manager, OrderRepository $repository, $pendingDuration)
+    public function __construct(ObjectManager $manager, OrderRepository $repository)
     {
         $this->manager = $manager;
         $this->repository = $repository;
-        $this->pendingDuration = $pendingDuration;
+    }
+
+    /**
+     * Set expires at.
+     *
+     * @param \DateTime $expiresAt
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
     }
 
     /**
@@ -58,9 +66,7 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     public function purge()
     {
-        $expiresAt = new \DateTime(sprintf('-%s', $this->pendingDuration));
-
-        $orders = $this->repository->findExpiredPendingOrders($expiresAt);
+        $orders = $this->repository->findExpired($this->expiresAt);
         foreach ($orders as $order) {
             // Check if order has any on-hold inventory units.
             $hasOnHoldInventoryUnits = $order->getInventoryUnits()->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
@@ -76,7 +82,7 @@ class ExpiredOrdersPurger implements PurgerInterface
     }
 
     /**
-     * Purge an order
+     * Purge an order.
      *
      * @param OrderInterface $order
      */

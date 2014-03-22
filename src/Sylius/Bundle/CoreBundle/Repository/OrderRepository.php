@@ -195,7 +195,7 @@ class OrderRepository extends CartRepository
         ;
     }
 
-    public function findExpiredPendingOrders(\DateTime $expiresAt)
+    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -203,7 +203,7 @@ class OrderRepository extends CartRepository
             ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
             ->andWhere($this->getAlias().'.state = :state')
             ->setParameter('expiresAt', $expiresAt)
-            ->setParameter('state', OrderInterface::STATE_PENDING)
+            ->setParameter('state', $state)
         ;
 
         return $queryBuilder->getQuery()->getResult();

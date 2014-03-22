@@ -93,6 +93,8 @@ class OrderPaymentListener
      * Get the order from event and void payment.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function voidOrderPayment(GenericEvent $event)
     {
@@ -131,7 +133,7 @@ class OrderPaymentListener
     }
 
     /**
-     * @param GenericEvent $event
+     * @param  GenericEvent              $event
      * @return OrderInterface
      * @throws \InvalidArgumentException
      */

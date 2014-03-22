@@ -32,10 +32,28 @@ class PurgeOrdersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $orderPendingDuration = $this->getContainer()->getParameter('sylius.order.pending.duration');
+        $expiresAt = null;
+
+        if ($input->isInteractive()) {
+            $dialog = $this->getHelperSet()->get('dialog');
+            $dialog->askAndValidate($output, sprintf('<question>Order pending duration (%s)?</question>', $orderPendingDuration), function ($response) use ($orderPendingDuration, &$expiresAt) {
+                if (null !== $response) {
+                    $orderPendingDuration = $response;
+                }
+                $expiresAt = new \DateTime(sprintf('-%s', $orderPendingDuration));
+
+                return $orderPendingDuration;
+            });
+        } else {
+            $expiresAt = new \DateTime(sprintf('-%s', $orderPendingDuration));
+        }
+
         $output->writeln('Purging expired pending orders...');
 
-        $cartsPurger = $this->getContainer()->get('sylius.order.purger');
-        $cartsPurger->purge();
+        $ordersPurger = $this->getContainer()->get('sylius.order.purger');
+        $ordersPurger->setExpiresAt($expiresAt);
+        $ordersPurger->purge();
 
         $output->writeln('Expired pending orders purged.');
     }
