@@ -32,7 +32,7 @@ class ExpiredCartsPurger implements PurgerInterface
     /**
      * Cart repository.
      *
-     * @var RepositoryInterface
+     * @var CartRepositoryInterface
      */
     protected $repository;
 
