@@ -12,8 +12,8 @@ sylius:
             luhn: The credit card number you entered is invalid.
         security_code:
             not_blank: Please enter the security code.
-            max_length: The credit card's CVV code must be between {{ min }} and {{ max }} characters long.
-            min_length: The credit card's CVV code must be between {{ min }} and {{ max }} characters long.
+            max_length: The credit card's CVV code must be at least {{ limit }} digits long.
+            min_length: The credit card's CVV code must be at most than {{ limit }} digits long.
         expiry_year:
             not_blank: Please select the expiration year.
     payment_method:
