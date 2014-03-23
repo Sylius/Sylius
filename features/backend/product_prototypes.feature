@@ -11,14 +11,14 @@ Feature: Product prototypes
             | T-Shirt color | Color        | Red, Blue, Green      |
             | T-Shirt size  | Size         | S, M, L               |
             | Bag color     | Color        | Black, Light balsamic |
-          And there are following properties:
+          And there are following attributes:
             | name               | presentation   |
             | T-Shirt collection | Collection     |
             | T-Shirt fabric     | T-Shirt fabric |
             | Bag material       | Material       |
           And there is prototype "T-Shirt" with following configuration:
             | options    | T-Shirt color, T-Shirt size        |
-            | properties | T-Shirt collection, T-Shirt fabric |
+            | attributes | T-Shirt collection, T-Shirt fabric |
 
     Scenario: Seeing index of all prototypes
         Given I am on the dashboard page
@@ -44,17 +44,17 @@ Feature: Product prototypes
           And I should see "Please enter prototype name."
 
     Scenario: Creating Bag prototype with color as option
-              and material as property
+              and material as attribute
         Given I am on the prototype creation page
          When I fill in "Name" with "Bag"
           And I select "Bag color" from "Options"
-          And I select "Bag material" from "Properties"
+          And I select "Bag material" from "attributes"
           And I press "Create"
          Then I should be on the prototype index page
           And I should see "Prototype has been successfully created."
 
     Scenario: Creating simple T-Shirt prototype with color and size
-              as options but without properties
+              as options but without attributes
         Given I am on the prototype creation page
          When I fill in "Name" with "Simple T-Shirt"
           And I select "T-Shirt color" from "Options"

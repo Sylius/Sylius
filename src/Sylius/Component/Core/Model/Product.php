@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\VariableProductBundle\Model\VariableProduct as BaseProduct;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -86,7 +87,7 @@ class Product extends BaseProduct implements ProductInterface
     {
         parent::__construct();
 
-        $this->setMasterVariant(new Variant());
+        $this->setMasterVariant(new ProductVariant());
         $this->taxons = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;

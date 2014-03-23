@@ -23,20 +23,20 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PrototypeBuilder implements PrototypeBuilderInterface
 {
     /**
-     * Product property repository.
+     * Product attribute repository.
      *
      * @var RepositoryInterface
      */
-    protected $productPropertyRepository;
+    protected $attributeValueRepository;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $productPropertyRepository
+     * @param RepositoryInterface $attributeValueRepository
      */
-    public function __construct(RepositoryInterface $productPropertyRepository)
+    public function __construct(RepositoryInterface $attributeValueRepository)
     {
-        $this->productPropertyRepository = $productPropertyRepository;
+        $this->attributeValueRepository = $attributeValueRepository;
     }
 
     /**
@@ -44,11 +44,11 @@ class PrototypeBuilder implements PrototypeBuilderInterface
      */
     public function build(PrototypeInterface $prototype, ProductInterface $product)
     {
-        foreach ($prototype->getProperties() as $property) {
-            $productProperty = $this->productPropertyRepository->createNew();
-            $productProperty->setProperty($property);
+        foreach ($prototype->getAttributes() as $attribute) {
+            $attributeValue = $this->attributeValueRepository->createNew();
+            $attributeValue->setAttribute($attribute);
 
-            $product->addProperty($productProperty);
+            $product->addAttribute($attributeValue);
         }
     }
 }

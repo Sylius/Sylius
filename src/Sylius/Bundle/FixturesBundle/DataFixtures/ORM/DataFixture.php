@@ -74,7 +74,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
      */
     protected function getVariantGenerator()
     {
-        return $this->get('sylius.generator.variant');
+        return $this->get('sylius.generator.product_variant');
     }
 
     /**

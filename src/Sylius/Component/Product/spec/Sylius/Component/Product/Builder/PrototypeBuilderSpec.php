@@ -12,10 +12,9 @@
 namespace spec\Sylius\Component\Product\Builder;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductPropertyInterface;
-use Sylius\Component\Product\Model\PropertyInterface;
-use Sylius\Component\Product\Model\Property\Property;
 use Sylius\Component\Product\Model\PrototypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -24,9 +23,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PrototypeBuilderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $productPropertyRepository)
+    function let(RepositoryInterface $attributeValueRepository)
     {
-        $this->beConstructedWith($productPropertyRepository);
+        $this->beConstructedWith($attributeValueRepository);
     }
 
     function it_is_initializable()
@@ -39,20 +38,20 @@ class PrototypeBuilderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Product\Builder\PrototypeBuilderInterface');
     }
 
-    function it_assigns_prototype_properties_to_product(
-        $productPropertyRepository,
+    function it_assigns_prototype_attributes_to_product(
+        $attributeValueRepository,
         PrototypeInterface$prototype,
         ProductInterface $product,
-        PropertyInterface $property,
-        ProductPropertyInterface $productProperty
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue
     )
     {
-        $prototype->getProperties()->willReturn(array($property))->shouldBeCalled();
+        $prototype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
 
-        $productPropertyRepository->createNew()->shouldBeCalled()->willReturn($productProperty);
-        $productProperty->setProperty($property)->shouldBeCalled();
+        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValue->setAttribute($attribute)->shouldBeCalled();
 
-        $product->addProperty($productProperty)->shouldBeCalled();
+        $product->addAttribute($attributeValue)->shouldBeCalled();
 
         $this->build($prototype, $product);
     }

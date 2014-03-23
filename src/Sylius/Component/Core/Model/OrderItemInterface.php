@@ -31,16 +31,16 @@ interface OrderItemInterface extends CartItemInterface
     /**
      * Get variant.
      *
-     * @return VariantInterface
+     * @return ProductVariantInterface
      */
     public function getVariant();
 
     /**
      * Set variant.
      *
-     * @param VariantInterface $variant
+     * @param ProductVariantInterface $variant
      */
-    public function setVariant(VariantInterface $variant);
+    public function setVariant(ProductVariantInterface $variant);
 
     /**
      * Get all inventory units.

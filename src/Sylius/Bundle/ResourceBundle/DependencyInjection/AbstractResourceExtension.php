@@ -63,6 +63,8 @@ abstract class AbstractResourceExtension extends Extension
         $processor = new Processor();
         $config    = $processor->processConfiguration($configuration, $config);
 
+        $config = $this->process($config, $container);
+
         $loader = new XmlFileLoader($container, new FileLocator($this->getConfigurationDirectory()));
 
         $this->loadConfigurationFile($this->configFiles, $loader);
@@ -190,5 +192,17 @@ abstract class AbstractResourceExtension extends Extension
         }
 
         return $directory;
+    }
+
+    /**
+     * In case any extra processing is needed.
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function process(array $config, ContainerBuilder $container)
+    {
+        // Override if needed.
+        return $config;
     }
 }
