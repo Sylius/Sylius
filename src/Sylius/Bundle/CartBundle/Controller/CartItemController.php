@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\CartBundle\Event\CartItemEvent;
 use Sylius\Bundle\CartBundle\Event\FlashEvent;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -66,7 +66,6 @@ class CartItemController extends Controller
 
         $event = new CartItemEvent($cart, $item);
         $event->isFresh(true);
-        $event->isValid(false);
 
         // Update models
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);

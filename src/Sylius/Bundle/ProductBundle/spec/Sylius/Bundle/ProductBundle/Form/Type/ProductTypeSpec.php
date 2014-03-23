@@ -57,6 +57,12 @@ class ProductTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('attributes', 'collection', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('metaKeywords', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -68,11 +74,6 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $builder
-            ->add('properties', 'collection', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
 
         $this->buildForm($builder, array());
     }

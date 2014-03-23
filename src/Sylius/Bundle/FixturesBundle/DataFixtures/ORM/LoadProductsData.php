@@ -52,7 +52,7 @@ class LoadProductsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $this->productPropertyClass = $this->container->getParameter('sylius.model.product_property.class');
+        $this->productAttributeClass = $this->container->getParameter('sylius.model.product_attribute.class');
 
         // T-Shirts...
         for ($i = 1; $i <= 120; $i++) {
@@ -113,15 +113,15 @@ class LoadProductsData extends DataFixture
 
         // T-Shirt brand.
         $randomBrand = $this->faker->randomElement(array('Nike', 'Adidas', 'Puma', 'Potato'));
-        $this->addProperty($product, 'T-Shirt brand', $randomBrand);
+        $this->addAttribute($product, 'T-Shirt brand', $randomBrand);
 
         // T-Shirt collection.
         $randomCollection = sprintf('Symfony2 %s %s', $this->faker->randomElement(array('Summer', 'Winter', 'Spring', 'Autumn')), rand(1995, 2012));
-        $this->addProperty($product, 'T-Shirt collection', $randomCollection);
+        $this->addAttribute($product, 'T-Shirt collection', $randomCollection);
 
         // T-Shirt material.
         $randomMaterial = $this->faker->randomElement(array('Polyester', 'Wool', 'Polyester 10% / Wool 90%', 'Potato 100%'));
-        $this->addProperty($product, 'T-Shirt material', $randomMaterial);
+        $this->addAttribute($product, 'T-Shirt material', $randomMaterial);
 
         $product->addOption($this->getReference('Sylius.Option.T-Shirt size'));
         $product->addOption($this->getReference('Sylius.Option.T-Shirt color'));
@@ -154,11 +154,11 @@ class LoadProductsData extends DataFixture
 
         // Sticker resolution.
         $randomResolution = $this->faker->randomElement(array('Waka waka', 'FULL HD', '300DPI', '200DPI'));
-        $this->addProperty($product, 'Sticker resolution', $randomResolution);
+        $this->addAttribute($product, 'Sticker resolution', $randomResolution);
 
         // Sticker paper.
         $randomPaper = sprintf('Paper from tree %s', $this->faker->randomElement(array('Wung', 'Yang', 'Lemon-San', 'Me-Gusta')));
-        $this->addProperty($product, 'Sticker paper', $randomPaper);
+        $this->addAttribute($product, 'Sticker paper', $randomPaper);
 
         $product->addOption($this->getReference('Sylius.Option.Sticker size'));
 
@@ -188,7 +188,7 @@ class LoadProductsData extends DataFixture
         $this->setTaxons($product, array('Mugs', 'Mugland'));
 
         $randomMugMaterial = $this->faker->randomElement(array('Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand'));
-        $this->addProperty($product, 'Mug material', $randomMugMaterial);
+        $this->addAttribute($product, 'Mug material', $randomMugMaterial);
 
         $product->addOption($this->getReference('Sylius.Option.Mug type'));
 
@@ -220,9 +220,9 @@ class LoadProductsData extends DataFixture
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
 
-        $this->addProperty($product, 'Book author', $author);
-        $this->addProperty($product, 'Book ISBN', $isbn);
-        $this->addProperty($product, 'Book pages', $this->faker->randomNumber(3));
+        $this->addAttribute($product, 'Book author', $author);
+        $this->addAttribute($product, 'Book ISBN', $isbn);
+        $this->addAttribute($product, 'Book pages', $this->faker->randomNumber(3));
 
         $this->setReference('Sylius.Product.'.$i, $product);
 
@@ -284,20 +284,20 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Adds property to product with given value.
+     * Adds attribute to product with given value.
      *
      * @param ProductInterface $product
      * @param string           $name
      * @param string           $value
      */
-    protected function addProperty(ProductInterface $product, $name, $value)
+    private function addAttribute(ProductInterface $product, $name, $value)
     {
-        $property = $this->getProductPropertyRepository()->createNew();
-        $property->setProperty($this->getReference('Sylius.Property.'.$name));
-        $property->setProduct($product);
-        $property->setValue($value);
+        $attribute = $this->getProductAttributeValueRepository()->createNew();
+        $attribute->setAttribute($this->getReference('Sylius.Attribute.'.$name));
+        $attribute->setProduct($product);
+        $attribute->setValue($value);
 
-        $product->addProperty($property);
+        $product->addAttribute($attribute);
     }
 
     /**

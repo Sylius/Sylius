@@ -13,12 +13,12 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
+use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
+use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
 /**
- * This is main model for simplest product.
- * It can be used to build product catalogs showcases or even
- * for full ecommerce application, if you do not need features
- * such as product options, properties, variants and prototypes.
+ * Sylius catalog product model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -75,11 +75,25 @@ class Product implements ProductInterface
     protected $metaDescription;
 
     /**
-     * Properties.
+     * Attributes.
      *
-     * @var Collection|ProductPropertyInterface[]
+     * @var Collection|BaseAttributeValueInterface[]
      */
-    protected $properties;
+    protected $attributes;
+
+    /**
+     * Product variants.
+     *
+     * @var Collection|BaseVariantInterface[]
+     */
+    protected $variants;
+
+    /**
+     * Product options.
+     *
+     * @var Collection|BaseOptionInterface[]
+     */
+    protected $options;
 
     /**
      * Creation time.
@@ -108,7 +122,9 @@ class Product implements ProductInterface
     public function __construct()
     {
         $this->availableOn = new \DateTime();
-        $this->properties = new ArrayCollection();
+        $this->attributes = new ArrayCollection();
+        $this->variants = new ArrayCollection();
+        $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -239,18 +255,18 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getProperties()
+    public function getAttributes()
     {
-        return $this->properties;
+        return $this->attributes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProperties(Collection $properties)
+    public function setAttributes(Collection $attributes)
     {
-        foreach ($properties as $property) {
-            $this->addProperty($property);
+        foreach ($attributes as $attribute) {
+            $this->addAttribute($attribute);
         }
 
         return $this;
@@ -259,11 +275,11 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addProperty(ProductPropertyInterface $property)
+    public function addAttribute(BaseAttributeValueInterface $attribute)
     {
-        if (!$this->hasProperty($property)) {
-            $property->setProduct($this);
-            $this->properties->add($property);
+        if (!$this->hasAttribute($attribute)) {
+            $attribute->setProduct($this);
+            $this->attributes->add($attribute);
         }
 
         return $this;
@@ -272,11 +288,11 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProperty(ProductPropertyInterface $property)
+    public function removeAttribute(BaseAttributeValueInterface $attribute)
     {
-        if ($this->hasProperty($property)) {
-            $property->setProduct(null);
-            $this->properties->removeElement($property);
+        if ($this->hasAttribute($attribute)) {
+            $attribute->setProduct(null);
+            $this->attributes->removeElement($attribute);
         }
 
         return $this;
@@ -285,18 +301,18 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProperty(ProductPropertyInterface $property)
+    public function hasAttribute(BaseAttributeValueInterface $attribute)
     {
-        return $this->properties->contains($property);
+        return $this->attributes->contains($attribute);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasPropertyByName($propertyName)
+    public function hasAttributeByName($attributeName)
     {
-        foreach ($this->properties as $property) {
-            if ($property->getName() === $propertyName) {
+        foreach ($this->attributes as $attribute) {
+            if ($attribute->getName() === $attributeName) {
                 return true;
             }
         }
@@ -307,15 +323,180 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getPropertyByName($propertyName)
+    public function getAttributeByName($attributeName)
     {
-        foreach ($this->properties as $property) {
-            if ($property->getName() === $propertyName) {
-                return $property;
+        foreach ($this->attributes as $attribute) {
+            if ($attribute->getName() === $attributeName) {
+                return $attribute;
             }
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMasterVariant()
+    {
+        foreach ($this->variants as $variant) {
+            if ($variant->isMaster()) {
+                return $variant;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMasterVariant(BaseVariantInterface $masterVariant)
+    {
+        if ($this->variants->contains($masterVariant)) {
+            return $this;
+        }
+
+        $masterVariant->setProduct($this);
+        $masterVariant->setMaster(true);
+
+        $this->variants->add($masterVariant);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVariants()
+    {
+        return !$this->getVariants()->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariants()
+    {
+        return $this->variants->filter(function (BaseVariantInterface $variant) {
+            return !$variant->isMaster();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableVariants()
+    {
+        return $this->variants->filter(function (BaseVariantInterface $variant) {
+            return !$variant->isMaster() && $variant->isAvailable();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVariants(Collection $variants)
+    {
+        $this->variants->clear();
+
+        foreach ($variants as $variant) {
+            $this->addVariant($variant);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariant(BaseVariantInterface $variant)
+    {
+        if (!$this->hasVariant($variant)) {
+            $variant->setProduct($this);
+            $this->variants->add($variant);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariant(BaseVariantInterface $variant)
+    {
+        if ($this->hasVariant($variant)) {
+            $variant->setProduct(null);
+            $this->variants->removeElement($variant);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVariant(BaseVariantInterface $variant)
+    {
+        return $this->variants->contains($variant);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOptions()
+    {
+        return !$this->options->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(Collection $options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOption(BaseOptionInterface $option)
+    {
+        if (!$this->hasOption($option)) {
+            $this->options->add($option);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeOption(BaseOptionInterface $option)
+    {
+        if ($this->hasOption($option)) {
+            $this->options->removeElement($option);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption(BaseOptionInterface $option)
+    {
+        return $this->options->contains($option);
     }
 
     /**

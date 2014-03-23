@@ -1,15 +1,15 @@
 sylius:
-    label:
-        product:
-            name: Name
-            description: Description
-            properties: Properties
-            available_on: Available on
-            meta_keywords: Meta keywords
-            meta_description: Meta description
-        property:
-            name: Internal name
-            presentation: Presentation
-        prototype:
-            name: Name
-            properties: Properties
+  form:
+    product:
+        name: Name
+        description: Description
+        attributes: Attributes
+        options: Options
+        meta_keywords: Meta keywords
+        meta_description: Meta description
+    product_variant:
+        available_on: Available on
+    prototype:
+        name: Name
+        attributes: Attributes
+        options: Options

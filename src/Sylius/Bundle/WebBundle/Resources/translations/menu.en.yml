@@ -19,7 +19,7 @@ sylius:
                 payments: Payments
                 products: Products
                 promotions: Promotions
-                properties: Configure properties
+                attributes: Configure attributes
                 prototypes: Product prototypes
                 sales: Orders
                 shipments: Shipments
@@ -54,7 +54,7 @@ sylius:
                 payments: Payments
                 products: Products
                 promotions: Promotions
-                properties: Configure properties
+                attributes: Configure attributes
                 prototypes: Product prototypes
                 sales: Orders
                 shipments: Shipments

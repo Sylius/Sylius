@@ -25,31 +25,31 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Core\Model\Variant">
+    <class name="Sylius\Component\Core\Model\ProductVariant">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">sku</option>
-            <option name="message">sylius.variant.sku.unique</option>
+            <option name="message">sylius.product_variant.sku.unique</option>
             <option name="groups">sylius</option>
         </constraint>
         <property name="price">
             <constraint name="NotBlank">
-                <option name="message">sylius.variant.price.not_blank</option>
+                <option name="message">sylius.product_variant.price.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0.00</option>
-                <option name="minMessage">sylius.variant.price.min</option>
+                <option name="minMessage">sylius.product_variant.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="onHand">
             <constraint name="NotBlank">
-                <option name="message">sylius.variant.onHand.not_blank</option>
+                <option name="message">sylius.product_variant.onHand.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0</option>
-                <option name="minMessage">sylius.variant.onHand.min</option>
+                <option name="minMessage">sylius.product_variant.onHand.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
