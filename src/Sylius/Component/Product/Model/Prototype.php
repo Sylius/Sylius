@@ -36,11 +36,18 @@ class Prototype implements PrototypeInterface
     protected $name;
 
     /**
-     * Product properties.
+     * Product attributes.
      *
-     * @var Collection|PropertyInterface[]
+     * @var Collection|AttributeInterface[]
      */
-    protected $properties;
+    protected $attributes;
+
+    /**
+     * Product options.
+     *
+     * @var Collection|OptionInterface[]
+     */
+    protected $options;
 
     /**
      * Creation time.
@@ -61,7 +68,8 @@ class Prototype implements PrototypeInterface
      */
     public function __construct()
     {
-        $this->properties = new ArrayCollection();
+        $this->attributes = new ArrayCollection();
+        $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -94,17 +102,17 @@ class Prototype implements PrototypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getProperties()
+    public function getAttributes()
     {
-        return $this->properties;
+        return $this->attributes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProperties(Collection $properties)
+    public function setAttributes(Collection $attributes)
     {
-        $this->properties = $properties;
+        $this->attributes = $attributes;
 
         return $this;
     }
@@ -112,10 +120,10 @@ class Prototype implements PrototypeInterface
     /**
      * {@inheritdoc}
      */
-    public function addProperty(PropertyInterface $property)
+    public function addAttribute(AttributeInterface $attribute)
     {
-        if (!$this->hasProperty($property)) {
-            $this->properties->add($property);
+        if (!$this->hasAttribute($attribute)) {
+            $this->attributes->add($attribute);
         }
 
         return $this;
@@ -124,10 +132,10 @@ class Prototype implements PrototypeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProperty(PropertyInterface $property)
+    public function removeAttribute(AttributeInterface $attribute)
     {
-        if ($this->hasProperty($property)) {
-            $this->properties->removeElement($property);
+        if ($this->hasAttribute($attribute)) {
+            $this->attributes->removeElement($attribute);
         }
 
         return $this;
@@ -136,9 +144,59 @@ class Prototype implements PrototypeInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProperty(PropertyInterface $property)
+    public function hasAttribute(AttributeInterface $attribute)
     {
-        return $this->properties->contains($property);
+        return $this->attributes->contains($attribute);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(Collection $options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOption(OptionInterface $option)
+    {
+        if (!$this->hasOption($option)) {
+            $this->options->add($option);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeOption(OptionInterface $option)
+    {
+        if ($this->hasOption($option)) {
+            $this->options->removeElement($option);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption(OptionInterface $option)
+    {
+        return $this->options->contains($option);
     }
 
     /**

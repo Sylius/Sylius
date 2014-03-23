@@ -32,11 +32,6 @@ class CartEvent extends ResourceEvent
     protected $isFresh = false;
 
     /**
-     * @var Boolean
-     */
-    protected $isValid = true;
-
-    /**
      * @param CartInterface $cart
      */
     public function __construct(CartInterface $cart)

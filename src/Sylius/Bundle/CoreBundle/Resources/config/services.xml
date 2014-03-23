@@ -364,7 +364,7 @@
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
-            <argument>%sylius.model.variant_image.class%</argument>
+            <argument>%sylius.model.product_variant_image.class%</argument>
             <tag name="form.type" alias="sylius_image" />
         </service>
         <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
@@ -375,8 +375,8 @@
             <argument type="service" id="sylius.image_uploader" />
             <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.variant.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.variant.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
@@ -452,13 +452,13 @@
         </service>
         <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">
             <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="sylius.repository.variant" />
+            <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>
 
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
-            <argument type="service" id="sylius.repository.variant" />
+            <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>
 

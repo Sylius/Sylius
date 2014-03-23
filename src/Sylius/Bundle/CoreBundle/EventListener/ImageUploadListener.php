@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
@@ -30,11 +30,11 @@ class ImageUploadListener
     public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        if (!$subject instanceof ProductInterface && !$subject instanceof VariantInterface) {
-            throw new \InvalidArgumentException('ProductInterface or VariantInterface expected.');
+        if (!$subject instanceof ProductInterface && !$subject instanceof ProductVariantInterface) {
+            throw new \InvalidArgumentException('ProductInterface or ProductVariantInterface expected.');
         }
 
-        $variant = $subject instanceof VariantInterface ? $subject : $subject->getMasterVariant();
+        $variant = $subject instanceof ProductVariantInterface ? $subject : $subject->getMasterVariant();
 
         foreach ($variant->getImages() as $image) {
             $this->uploader->upload($image);

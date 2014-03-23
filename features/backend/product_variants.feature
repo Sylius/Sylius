@@ -10,16 +10,13 @@ Feature: Product variants
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
-          And there are following properties:
-            | name           | presentation |
-            | T-Shirt fabric | T-Shirt      |
           And the following products exist:
-            | name           | price | options                     | properties             |
-            | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
-            | Black T-Shirt  | 19.99 | T-Shirt size                | T-Shirt fabric: Cotton |
-            | Sylius T-Shirt | 12.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Cotton |
-            | Mug            | 5.99  |                             |                        |
-            | Sticker        | 10.00 |                             |                        |
+            | name           | price | options                     |
+            | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color |
+            | Black T-Shirt  | 19.99 | T-Shirt size                |
+            | Sylius T-Shirt | 12.99 | T-Shirt size, T-Shirt color |
+            | Mug            | 5.99  |                             |
+            | Sticker        | 10.00 |                             |
           And product "Super T-Shirt" is available in all variations
 
     Scenario: Viewing a product without options

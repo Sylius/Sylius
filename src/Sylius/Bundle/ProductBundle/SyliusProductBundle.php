@@ -46,10 +46,13 @@ class SyliusProductBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Component\Product\Model\ProductInterface'         => 'sylius.model.product.class',
-            'Sylius\Component\Product\Model\PropertyInterface'        => 'sylius.model.property.class',
-            'Sylius\Component\Product\Model\ProductPropertyInterface' => 'sylius.model.product_property.class',
-            'Sylius\Component\Product\Model\PrototypeInterface'       => 'sylius.model.prototype.class',
+            'Sylius\Component\Product\Model\ProductInterface'        => 'sylius.model.product.class',
+            'Sylius\Component\Product\Model\AttributeInterface'      => 'sylius.model.product_attribute.class',
+            'Sylius\Component\Product\Model\AttributeValueInterface' => 'sylius.model.product_attribute_value.class',
+            'Sylius\Component\Product\Model\VariantInterface'        => 'sylius.model.product_variant.class',
+            'Sylius\Component\Product\Model\OptionInterface'         => 'sylius.model.product_option.class',
+            'Sylius\Component\Product\Model\OptionValueInterface'    => 'sylius.model.product_option_value.class',
+            'Sylius\Component\Product\Model\PrototypeInterface'      => 'sylius.model.product_prototype.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_product', $interfaces));

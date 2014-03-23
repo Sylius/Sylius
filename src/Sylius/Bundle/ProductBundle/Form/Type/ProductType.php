@@ -48,31 +48,33 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.label.product.name'
+                'label' => 'sylius.form.product.name'
             ))
             ->add('description', 'textarea', array(
-                'label' => 'sylius.label.product.description'
+                'label' => 'sylius.form.product.description'
             ))
-            ->add('availableOn', 'datetime', array(
-                'date_format' => 'y-M-d',
-                'date_widget' => 'choice',
-                'time_widget' => 'text',
-                'label'       => 'sylius.label.product.available_on'
+            ->add('masterVariant', 'sylius_product_variant', array(
+                'master' => true,
             ))
-            ->add('properties', 'collection', array(
+            ->add('attributes', 'collection', array(
                 'required'     => false,
-                'type'         => 'sylius_product_property',
+                'type'         => 'sylius_product_attribute_value',
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false
             ))
+            ->add('options', 'sylius_product_option_choice', array(
+                'required' => false,
+                'multiple' => true,
+                'label'    => 'sylius.form.product.options'
+            ))
             ->add('metaKeywords', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.label.product.meta_keywords'
+                'label'    => 'sylius.form.product.meta_keywords'
             ))
             ->add('metaDescription', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.label.product.meta_description'
+                'label'    => 'sylius.form.product.meta_description'
             ))
         ;
     }

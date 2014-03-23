@@ -31,20 +31,25 @@ sylius_taxonomy:
             model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
+
 sylius_product:
+    driver: doctrine/orm
     classes:
         product:
             model: Sylius\Component\Core\Model\Product
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
-            repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
 
-sylius_variable_product:
+sylius_attribute: ~
+
+sylius_variation:
     classes:
-        variant:
-            model: Sylius\Component\Core\Model\Variant
-            repository: Sylius\Bundle\CoreBundle\Repository\VariantRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
+        product:
+            variant:
+                model: Sylius\Component\Core\Model\ProductVariant
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
+                form: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
 
 sylius_taxation:
     classes:
@@ -56,7 +61,7 @@ sylius_shipping:
     classes:
         shipment:
             model: Sylius\Component\Core\Model\Shipment
-            repository: Sylius\Bundle\CoreBundle\Repository\ShipmentRepository
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
         shipment_item:
             model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
@@ -75,7 +80,7 @@ sylius_inventory:
         inventory_unit:
             model: Sylius\Component\Core\Model\InventoryUnit
         stockable:
-            model: %sylius.model.variant.class%
+            model: %sylius.model.product_variant.class%
 
 sylius_payment:
     classes:
@@ -91,14 +96,14 @@ sylius_payum: ~
 sylius_addressing:
     classes:
         address:
-            controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController
+            controller: Sylius\Bundle\CoreBundle\Controller\AddressController
 
 sylius_order:
     classes:
         order:
             model: Sylius\Component\Core\Model\Order
             controller: Sylius\Bundle\CoreBundle\Controller\OrderController
-            repository: Sylius\Bundle\CoreBundle\Repository\OrderRepository
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
             model: Sylius\Component\Core\Model\OrderItem
@@ -110,7 +115,7 @@ sylius_resource:
             classes:
                 model: Sylius\Component\Core\Model\User
                 controller: Sylius\Bundle\CoreBundle\Controller\UserController
-                repository: Sylius\Bundle\CoreBundle\Repository\UserRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
         sylius.group:
             driver: doctrine/orm
             classes:
@@ -128,4 +133,4 @@ sylius_resource:
             driver: doctrine/phpcr-odm
             classes:
                 model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
-                repository: Sylius\Bundle\CoreBundle\Repository\PageRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PageRepository

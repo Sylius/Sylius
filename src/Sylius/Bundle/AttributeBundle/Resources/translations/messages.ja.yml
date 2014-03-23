@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  label:
+    product:
+      meta_keywords: Metaタグ(keywords)
+      meta_description: metaタグ(description)
