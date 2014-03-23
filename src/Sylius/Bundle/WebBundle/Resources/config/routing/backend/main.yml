@@ -28,17 +28,17 @@ sylius_backend_inventory:
     resource: @SyliusWebBundle/Resources/config/routing/backend/inventory.yml
     prefix: /inventory
 
-sylius_backend_variant:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/variant.yml
+sylius_backend_product_variant:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_variant.yml
     prefix: /products/{productId}/variants
 
-sylius_backend_option:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/option.yml
-    prefix: /options
+sylius_backend_product_option:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_option.yml
+    prefix: /product-options
 
-sylius_backend_property:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/property.yml
-    prefix: /properties
+sylius_backend_product_attribute:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_attribute.yml
+    prefix: /product-attributes
 
 sylius_backend_prototype:
     resource: @SyliusWebBundle/Resources/config/routing/backend/prototype.yml

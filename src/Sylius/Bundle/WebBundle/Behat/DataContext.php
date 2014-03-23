@@ -444,7 +444,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {
-                    $option = $this->findOneByName('option', trim($option));
+                    $option = $this->findOneByName('product_option', trim($option));
                     $product->addOption($option);
                 }
             }
@@ -491,7 +491,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         $product = $this->findOneByName('product', $productName);
 
-        $this->getService('sylius.generator.variant')->generate($product);
+        $this->getService('sylius.generator.product_variant')->generate($product);
 
         foreach ($product->getVariants() as $variant) {
             $variant->setPrice($product->getMasterVariant()->getPrice());
@@ -520,7 +520,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereIsPrototypeWithFollowingConfiguration($name, TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('prototype');
+        $repository = $this->getRepository('product_prototype');
 
         $prototype = $repository->createNew();
         $prototype->setName($name);
@@ -531,8 +531,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $prototype->addOption($this->findOneByName('option', trim($optionName)));
         }
 
-        foreach (explode(',', $data['properties']) as $propertyName) {
-            $prototype->addProperty($this->findOneByName('property', trim($propertyName)));
+        foreach (explode(',', $data['attributes']) as $attributeName) {
+            $prototype->addAttribute($this->findOneByName('product_attribute', trim($attributeName)));
         }
 
         $manager->persist($prototype);
@@ -557,14 +557,14 @@ class DataContext extends BehatContext implements KernelAwareInterface
      */
     public function thereIsOption($name, $values, $presentation = null, $flush = true)
     {
-        $optionValueClass = $this->getContainer()->getParameter('sylius.model.option_value.class');
+        $optionValueRepository = $this->getRepository('product_option_value');
 
-        $option = $this->getRepository('option')->createNew();
+        $option = $this->getRepository('product_option')->createNew();
         $option->setName($name);
         $option->setPresentation($presentation ?: $name);
 
         foreach (explode(',', $values) as $value) {
-            $optionValue = new $optionValueClass;
+            $optionValue = $optionValueRepository->createNew();
             $optionValue->setValue(trim($value));
 
             $option->addValue($optionValue);
@@ -572,6 +572,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         $manager = $this->getEntityManager();
         $manager->persist($option);
+
         if ($flush) {
             $manager->flush();
         }
@@ -580,10 +581,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^there are following properties:$/
-     * @Given /^the following properties exist:$/
+     * @Given /^there are following attributes:$/
+     * @Given /^the following attributes exist:$/
      */
-    public function thereAreProperties(TableNode $table)
+    public function thereAreAttributes(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
             $choices = isset($data['choices']) && $data['choices'] ? explode(',', $data['choices']) : array();
@@ -594,45 +595,46 @@ class DataContext extends BehatContext implements KernelAwareInterface
             if ($choices) {
                 $additionalData['configuration'] = array('choices' => $choices);
             }
-            $this->thereIsProperty($data['name'], $additionalData);
+            $this->thereIsAttribute($data['name'], $additionalData);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^There is property "([^""]*)"$/
-     * @Given /^I created property "([^""]*)"$/
+     * @Given /^There is attribute "([^""]*)"$/
+     * @Given /^I created attribute "([^""]*)"$/
      */
-    public function thereIsProperty($name, $additionalData = array(), $flush = true)
+    public function thereIsAttribute($name, $additionalData = array(), $flush = true)
     {
         $additionalData = array_merge(array(
             'presentation' => $name,
             'type' => 'text'
         ), $additionalData);
 
-        $property = $this->getRepository('property')->createNew();
-        $property->setName($name);
+        $attribute = $this->getRepository('product_attribute')->createNew();
+        $attribute->setName($name);
 
         foreach ($additionalData as $key => $value) {
-            $property->{'set'.\ucfirst($key)}($value);
+            $attribute->{'set'.\ucfirst($key)}($value);
         }
 
         $manager = $this->getEntityManager();
-        $manager->persist($property);
+        $manager->persist($attribute);
         if ($flush) {
             $manager->flush();
         }
 
-        return $property;
+        return $attribute;
     }
 
     /**
-     * @Given /^(\w+) with following data should be created:$/
+     * @Given /^([^""]*) with following data should be created:$/
      */
     public function objectWithFollowingDataShouldBeCreated($type, TableNode $table)
     {
         $data = $table->getRowsHash();
+        $type = str_replace(' ', '_', trim($type));
 
         $object = $this->findOneByName($type, $data['name']);
         foreach ($data as $property => $value) {

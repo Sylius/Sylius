@@ -27,18 +27,18 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        {% if product.properties|length > 0 %}
+        {% if product.attributes|length > 0 %}
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'sylius.product.properties'|trans }}</th>
+                    <th colspan="2">{{ 'sylius.product.attributes'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for property in product.properties %}
+                {% for attribute in product.attributes %}
                 <tr>
-                    <td>{{ property.presentation }}</td>
-                    <td>{{ property.value }}</td>
+                    <td>{{ attribute.presentation }}</td>
+                    <td>{{ attribute.value }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

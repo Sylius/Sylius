@@ -1,0 +1,46 @@
+{% macro list(options) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if options|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.product_option.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('presentation', 'sylius.product_option.presentation'|trans) }}</th>
+                <th>{{ 'sylius.option.values'|trans }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.product_option.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for option in options %}
+            <tr id="{{ option.id }}">
+                <td>{{ option.id }}</td>
+                <td>{{ option.name }}</td>
+                <td>{{ option.presentation }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for value in option.values %}
+                        <span class="label label-primary">{{ value }}</span>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ option.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_product_option_update', {'id': option.id})) }}
+                    {{ buttons.delete(path('sylius_backend_product_option_delete', {'id': option.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.product_option.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

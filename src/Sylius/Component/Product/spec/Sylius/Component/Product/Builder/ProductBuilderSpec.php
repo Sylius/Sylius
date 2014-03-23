@@ -13,9 +13,9 @@ namespace spec\Sylius\Component\Product\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductPropertyInterface;
-use Sylius\Component\Product\Model\PropertyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -27,15 +27,15 @@ class ProductBuilderSpec extends ObjectBehavior
         ProductInterface $product,
         ObjectManager $productManager,
         RepositoryInterface $productRepository,
-        RepositoryInterface $propertyRepository,
-        RepositoryInterface $productPropertyRepository
+        RepositoryInterface $attributeRepository,
+        RepositoryInterface $attributeValueRepository
     )
     {
         $this->beConstructedWith(
             $productManager,
             $productRepository,
-            $propertyRepository,
-            $productPropertyRepository
+            $attributeRepository,
+            $attributeValueRepository
         );
 
         $productRepository->createNew()->shouldBeCalled()->willReturn($product);
@@ -48,51 +48,51 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Product\Builder\ProductBuilder');
     }
 
-    function it_adds_property_to_product_if_already_exists(
-        $propertyRepository,
-        $productPropertyRepository,
+    function it_adds_attribute_to_product_if_already_exists(
+        $attributeRepository,
+        $attributeValueRepository,
         $product,
-        PropertyInterface $property,
-        ProductPropertyInterface $productProperty
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue
     )
     {
-        $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($property);
-        $productPropertyRepository->createNew()->shouldBeCalled()->willReturn($productProperty);
+        $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($attribute);
+        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
-        $productProperty->setProperty($property)->shouldBeCalled();
-        $productProperty->setValue(2013)->shouldBeCalled();
+        $attributeValue->setAttribute($attribute)->shouldBeCalled();
+        $attributeValue->setValue(2013)->shouldBeCalled();
 
-        $product->addProperty($productProperty)->shouldBeCalled();
+        $product->addAttribute($attributeValue)->shouldBeCalled();
 
-        $this->addProperty('collection', 2013)->shouldReturn($this);
+        $this->addAttribute('collection', 2013)->shouldReturn($this);
     }
 
-    function it_creates_property_if_it_does_not_exist(
-        $propertyRepository,
-        $productPropertyRepository,
+    function it_creates_attribute_if_it_does_not_exist(
+        $attributeRepository,
+        $attributeValueRepository,
         $productManager,
         $product,
-        PropertyInterface $property,
-        ProductPropertyInterface $productProperty
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue
     )
     {
-        $propertyRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
-        $propertyRepository->createNew()->shouldBeCalled()->willReturn($property);
+        $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
+        $attributeRepository->createNew()->shouldBeCalled()->willReturn($attribute);
 
-        $property->setName('collection')->shouldBeCalled();
-        $property->setPresentation('collection')->shouldBeCalled();
+        $attribute->setName('collection')->shouldBeCalled();
+        $attribute->setPresentation('collection')->shouldBeCalled();
 
-        $productManager->persist($property)->shouldBeCalled();
-        $productManager->flush($property)->shouldBeCalled();
+        $productManager->persist($attribute)->shouldBeCalled();
+        $productManager->flush($attribute)->shouldBeCalled();
 
-        $productPropertyRepository->createNew()->shouldBeCalled()->willReturn($productProperty);
+        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
-        $productProperty->setProperty($property)->shouldBeCalled();
-        $productProperty->setValue(2013)->shouldBeCalled();
+        $attributeValue->setAttribute($attribute)->shouldBeCalled();
+        $attributeValue->setValue(2013)->shouldBeCalled();
 
-        $product->addProperty($productProperty)->shouldBeCalled();
+        $product->addAttribute($attributeValue)->shouldBeCalled();
 
-        $this->addProperty('collection', 2013)->shouldReturn($this);
+        $this->addAttribute('collection', 2013)->shouldReturn($this);
     }
 
     function it_saves_product($productManager, $product)

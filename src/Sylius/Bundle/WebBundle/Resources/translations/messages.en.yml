@@ -113,8 +113,8 @@ sylius:
         locale:
             index: Locales
         new: New
-        option:
-            index: Options
+        product_option:
+            index: Product options
         order:
             index: Orders
         page:
@@ -129,8 +129,8 @@ sylius:
             index: Promotions
         promotion_coupon:
             index: Coupons
-        property:
-            index: Properties
+        attribute:
+            index: Attributes
         prototype:
             index: Prototypes
         sales: Sales
@@ -327,7 +327,7 @@ sylius:
     newest: Newest products
     no: no
     no_results: sylius.no_results
-    option:
+    product_option:
         create: Create option
         create_header: New product option
         index_header: Product options
@@ -455,7 +455,7 @@ sylius:
         update_header: Editing payment method
         updated_at: Last update
     product:
-        add_property: Add property
+        add_attribute: Add attribute
         available_on: Available on
         available_on_demand: Available on demand
         categorization: Categorization
@@ -471,7 +471,7 @@ sylius:
         no_description: <i>No description...</i>
         no_images: There are no images for this product
         no_options: There are no options for this product
-        no_properties: This product has no properties defined
+        no_attributes: This product has no attributes defined
         no_results: There are no products to display.
         no_shipping_category: No shipping category
         no_short_description: <i>No short description</i>
@@ -480,7 +480,7 @@ sylius:
         no_taxons: There are no taxons for this product
         options: Options
         price: Retail price
-        properties: Properties
+        attributes: Attributes
         restricted_zone: Restricted zone
         shipping_category: Shipping category
         show: View more
@@ -493,7 +493,7 @@ sylius:
             images: Images
             options: Options
             product: Product
-            properties: Properties
+            attributes: Attributes
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
@@ -542,17 +542,17 @@ sylius:
     promotion_rule:
         configuration: Configuration
         type: Type
-    property:
+    product_attribute:
         add_choice: Add choice
-        create: Create property
-        create_header: New product property
-        index_header: Product properties
-        manage: Manage properties
+        create: Create product attribute
+        create_header: New product attribute
+        index_header: Product attributes
+        manage: Manage attributes
         name: name
-        no_results: There are no properties configured.
+        no_results: There are no attributes configured.
         presentation: presentation
         type: type
-        update_header: Editing property
+        update_header: Editing attribute
         updated_at: last update
     prototype:
         build: Build prototype
@@ -563,7 +563,7 @@ sylius:
         name: name
         no_results: There are no prototypes defined.
         options: options
-        properties: properties
+        attributes: 
         update_header: Editing prototype
         updated_at: last update
     province:
