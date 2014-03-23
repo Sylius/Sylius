@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Variant:macros.html.twig' import list as list_variants %}
+{% from 'SyliusWebBundle:Backend/ProductVariant:macros.html.twig' import list as list_variants %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
@@ -158,20 +158,20 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'sylius.product.properties'|trans }}</th>
+                    <th colspan="2">{{ 'sylius.product.attributes'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for property in product.properties %}
+                {% for attribute in product.attributes %}
                 <tr>
-                    <td><strong>{{ property.name }}</strong></td>
-                    <td>{{ property.value }}</td>
+                    <td><strong>{{ attribute.name }}</strong></td>
+                    <td>{{ attribute.value }}</td>
                 </tr>
                 {% else %}
                 <tr>
                     <td colspan="2">
                         <span class="label label-info">
-                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_properties'|trans }}
+                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_attributes'|trans }}
                         </span>
                     </td>
                 </tr>
@@ -185,9 +185,9 @@
 
 {% if not product.deleted %}
 <div class="well well-sm">
-    {{ buttons.create(path('sylius_backend_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
+    {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {% if product.hasOptions %}
-        {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
     {% endif %}
     <div class="pull-right">
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}

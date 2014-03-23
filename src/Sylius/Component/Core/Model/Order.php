@@ -327,7 +327,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryUnitsByVariant(VariantInterface $variant)
+    public function getInventoryUnitsByVariant(ProductVariantInterface $variant)
     {
         return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();

@@ -19,7 +19,7 @@ sylius_money:
     currency: EUR
     locale: en_US
 
-sylius_payments:
+sylius_payment:
     gateways:
         cc:     Credit Card
         test:   Test

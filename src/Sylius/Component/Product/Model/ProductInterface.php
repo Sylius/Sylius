@@ -12,15 +12,21 @@
 namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Attribute\Model\SubjectInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Variation\Model\VariableInterface;
 
 /**
  * Basic product interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface ProductInterface extends SoftDeletableInterface, TimestampableInterface
+interface ProductInterface extends
+    SubjectInterface,
+    VariableInterface,
+    SoftDeletableInterface,
+    TimestampableInterface
 {
     /**
      * Get product name.
@@ -112,59 +118,4 @@ interface ProductInterface extends SoftDeletableInterface, TimestampableInterfac
      * @param string $metaDescription
      */
     public function setMetaDescription($metaDescription);
-
-    /**
-     * Returns all product product properties.
-     *
-     * @return Collection|ProductPropertyInterface[]
-     */
-    public function getProperties();
-
-    /**
-     * Sets all product product properties.
-     *
-     * @param Collection $properties Array of ProductPropertyInterface
-     */
-    public function setProperties(Collection $properties);
-
-    /**
-     * Adds product property.
-     *
-     * @param ProductPropertyInterface $property
-     */
-    public function addProperty(ProductPropertyInterface $property);
-
-    /**
-     * Removes product property from product.
-     *
-     * @param ProductPropertyInterface $property
-     */
-    public function removeProperty(ProductPropertyInterface $property);
-
-    /**
-     * Checks whether product has given product property.
-     *
-     * @param ProductPropertyInterface $property
-     *
-     * @return Boolean
-     */
-    public function hasProperty(ProductPropertyInterface $property);
-
-    /**
-     * Checks whether product has given product property, access by name.
-     *
-     * @param string $propertyName
-     *
-     * @return Boolean
-     */
-    public function hasPropertyByName($propertyName);
-
-    /**
-     * Returns a property by its name.
-     *
-     * @param string $propertyName
-     *
-     * @return ProductPropertyInterface
-     */
-    public function getPropertyByName($propertyName);
 }

@@ -1,0 +1,5 @@
+sylius:
+  form:
+    attribute:
+      name: Internal name
+      presentation: Presentation

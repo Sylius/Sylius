@@ -19,21 +19,21 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class VariantSpec extends ObjectBehavior
+class ProductVariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Variant');
+        $this->shouldHaveType('Sylius\Component\Core\Model\ProductVariant');
     }
 
-    function it_implements_Sylius_core_variant_interface()
+    function it_implements_Sylius_product_variant_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\VariantInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\ProductVariantInterface');
     }
 
-    function it_extends_Sylius_product_variant_mapped_superclass()
+    function it_extends_Sylius_product_variant_model()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Variable\Variant');
+        $this->shouldHaveType('Sylius\Component\Product\Model\Variant');
     }
 
     function it_should_not_have_price_by_default()
@@ -48,7 +48,7 @@ class VariantSpec extends ObjectBehavior
 
     function its_price_should_be_mutable()
     {
-        $this->setPrice(4.99)->getPrice()->shouldReturn(4.99);
+        $this->setPrice(499)->getPrice()->shouldReturn(499);
     }
 
     function it_should_inherit_price_from_master_variant(VariantInterface $masterVariant)

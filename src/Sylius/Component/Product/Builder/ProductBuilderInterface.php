@@ -32,7 +32,7 @@ interface ProductBuilderInterface
     public function create($name);
 
     /**
-     * Add property with name and value.
+     * Add attribute with name and value.
      *
      * @param string $name
      * @param mixed  $value
@@ -40,7 +40,7 @@ interface ProductBuilderInterface
      *
      * @return ProductBuilderInterface
      */
-    public function addProperty($name, $value, $presentation = null);
+    public function addAttribute($name, $value, $presentation = null);
 
     /**
      * Save the product

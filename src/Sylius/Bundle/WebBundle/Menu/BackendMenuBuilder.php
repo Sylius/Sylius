@@ -127,14 +127,14 @@ class BackendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stockables', $section)));
 
         $child->addChild('options', array(
-            'route' => 'sylius_backend_option_index',
+            'route' => 'sylius_backend_product_option_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-th'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.options', $section)));
 
-        $child->addChild('properties', array(
-            'route' => 'sylius_backend_property_index',
+        $child->addChild('product_attributes', array(
+            'route' => 'sylius_backend_product_attribute_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-list-alt'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.properties', $section)));
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.attributes', $section)));
 
         $child->addChild('prototypes', array(
             'route' => 'sylius_backend_prototype_index',

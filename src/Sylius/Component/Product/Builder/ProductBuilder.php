@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *     ->create('Github mug')
  *     ->setDescription("Coffee. Tea. Coke. Water. Let's face it — humans need to drink liquids")
  *     ->setPrice(1200)
- *     ->addProperty('collection', 2013)
+ *     ->addAttribute('collection', 2013)
  *     ->save()
  * ;
  * </code>
@@ -57,30 +57,30 @@ class ProductBuilder implements ProductBuilderInterface
     protected $productRepository;
 
     /**
-     * Property repository.
+     * Attribute repository.
      *
      * @var RepositoryInterface
      */
-    protected $propertyRepository;
+    protected $attributeRepository;
 
     /**
-     * Product property repository.
+     * Product attribute repository.
      *
      * @var RepositoryInterface
      */
-    protected $productPropertyRepository;
+    protected $attributeValueRepository;
 
     public function __construct(
         ObjectManager      $productManager,
         RepositoryInterface $productRepository,
-        RepositoryInterface $propertyRepository,
-        RepositoryInterface $productPropertyRepository
+        RepositoryInterface $attributeRepository,
+        RepositoryInterface $attributeValueRepository
     )
     {
         $this->productManager            = $productManager;
         $this->productRepository         = $productRepository;
-        $this->propertyRepository        = $propertyRepository;
-        $this->productPropertyRepository = $productPropertyRepository;
+        $this->attributeRepository        = $attributeRepository;
+        $this->attributeValueRepository = $attributeValueRepository;
     }
 
     /**
@@ -108,26 +108,26 @@ class ProductBuilder implements ProductBuilderInterface
         return $this;
     }
 
-    public function addProperty($name, $value, $presentation = null)
+    public function addAttribute($name, $value, $presentation = null)
     {
-        $property = $this->propertyRepository->findOneBy(array('name' => $name));
+        $attribute = $this->attributeRepository->findOneBy(array('name' => $name));
 
-        if (null === $property) {
-            $property = $this->propertyRepository->createNew();
+        if (null === $attribute) {
+            $attribute = $this->attributeRepository->createNew();
 
-            $property->setName($name);
-            $property->setPresentation($presentation ?: $name);
+            $attribute->setName($name);
+            $attribute->setPresentation($presentation ?: $name);
 
-            $this->productManager->persist($property);
-            $this->productManager->flush();
+            $this->productManager->persist($attribute);
+            $this->productManager->flush($attribute);
         }
 
-        $productProperty = $this->productPropertyRepository->createNew();
+        $attributeValue = $this->attributeValueRepository->createNew();
 
-        $productProperty->setProperty($property);
-        $productProperty->setValue($value);
+        $attributeValue->setAttribute($attribute);
+        $attributeValue->setValue($value);
 
-        $this->product->addProperty($productProperty);
+        $this->product->addAttribute($attributeValue);
 
         return $this;
     }

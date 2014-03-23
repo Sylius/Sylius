@@ -1,0 +1,15 @@
+sylius:
+    attribute:
+        name:
+            not_blank: Please enter attribute name.
+            min_length: Attribute name must be at least 1 character long.|Attribute name must be at least {{ limit }} characters long.
+            max_length: Attribute name must not be longer than 1 character.|Attribute name must not be longer than {{ limit }} characters.
+        presentation:
+            not_blank: Please enter attribute presentation.
+            min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.
+            max_length: Attribute presentation must not be longer than 1 character.|Attribute presentation must not be longer than {{ limit }} characters.
+    attribute_value:
+        attribute:
+            not_blank: Please select attribute.
+        value:
+            not_blank: Please enter attribute value.

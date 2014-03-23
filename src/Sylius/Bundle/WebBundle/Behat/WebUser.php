@@ -400,7 +400,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $product = $this->getDataContext()->findOneByName('product', $name);
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
     }
 
     /**
@@ -410,7 +410,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $product = $this->getDataContext()->findOneByName('product', $name);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_variant_create', array('productId' => $product->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
         $this->assertStatusCodeEquals(200);
     }
 

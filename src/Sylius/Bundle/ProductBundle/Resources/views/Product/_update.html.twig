@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Updating product <small>Use this form to update existing product</small></h1>
-<hr />
-
-<form action="{{ path('sylius_product_update', {'id': product.id}) }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusProductBundle:Product:_form.html.twig' %}
-    {{ actions.update(path('sylius_product_index')) }}
-</form>
