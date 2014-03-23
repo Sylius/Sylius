@@ -23,22 +23,22 @@
         "php":                            ">=5.3.3",
 
         "symfony/framework-bundle":       "~2.3",
-        "sylius/product-bundle":          "1.0.*@dev",
-        "sylius/variable-product-bundle": "1.0.*@dev",
-        "sylius/cart-bundle":             "1.0.*@dev",
-        "sylius/order-bundle":            "1.0.*@dev",
-        "sylius/money-bundle":            "1.0.*@dev",
-        "sylius/taxation-bundle":         "1.0.*@dev",
-        "sylius/shipping-bundle":         "1.0.*@dev",
-        "sylius/addressing-bundle":       "1.0.*@dev",
-        "sylius/promotions-bundle":       "1.0.*@dev",
-        "sylius/inventory-bundle":        "1.0.*@dev",
-        "sylius/taxonomies-bundle":       "1.0.*@dev",
-        "sylius/settings-bundle":         "1.0.*@dev",
-        "sylius/payum-bundle":            "1.0.*@dev",
-        "sylius/payments-bundle":         "1.0.*@dev",
-        "sylius/flow-bundle":             "1.0.*@dev",
-        "sylius/resource-bundle":         "1.0.*@dev",
+        "sylius/product-bundle":          "0.9.*@dev",
+        "sylius/variable-product-bundle": "0.9.*@dev",
+        "sylius/cart-bundle":             "0.9.*@dev",
+        "sylius/order-bundle":            "0.9.*@dev",
+        "sylius/money-bundle":            "0.9.*@dev",
+        "sylius/taxation-bundle":         "0.9.*@dev",
+        "sylius/shipping-bundle":         "0.9.*@dev",
+        "sylius/addressing-bundle":       "0.9.*@dev",
+        "sylius/promotions-bundle":       "0.9.*@dev",
+        "sylius/inventory-bundle":        "0.9.*@dev",
+        "sylius/taxonomies-bundle":       "0.9.*@dev",
+        "sylius/settings-bundle":         "0.9.*@dev",
+        "sylius/payum-bundle":            "0.9.*@dev",
+        "sylius/payments-bundle":         "0.9.*@dev",
+        "sylius/flow-bundle":             "0.9.*@dev",
+        "sylius/resource-bundle":         "0.9.*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/gaufrette":              "0.2.*@dev",
@@ -65,7 +65,7 @@
     "target-dir": "Sylius/Bundle/CoreBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.9-dev"
         }
     }
 }

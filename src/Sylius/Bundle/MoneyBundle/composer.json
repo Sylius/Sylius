@@ -24,7 +24,7 @@
 
         "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
-        "sylius/resource-bundle":   "1.0.*@dev",
+        "sylius/resource-bundle":   "0.9.*@dev",
         "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
@@ -41,7 +41,7 @@
     "target-dir": "Sylius/Bundle/MoneyBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.9-dev"
         }
     }
 }
