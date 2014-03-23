@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Model\PropertyInterface;
+use Sylius\Component\Product\Model\AttributeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
@@ -46,30 +46,30 @@ class PrototypeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('T-Shirt size');
     }
 
-    function it_initializes_property_collection_by_default()
+    function it_initializes_attribute_collection_by_default()
     {
-        $this->getProperties()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getAttributes()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function its_property_collection_is_mutable(Collection $properties)
+    function its_attribute_collection_is_mutable(Collection $attributes)
     {
-        $this->setProperties($properties);
-        $this->getProperties()->shouldReturn($properties);
+        $this->setAttributes($attributes);
+        $this->getAttributes()->shouldReturn($attributes);
     }
 
-    function it_adds_property(PropertyInterface $property)
+    function it_adds_attribute(AttributeInterface $attribute)
     {
-        $this->addProperty($property);
-        $this->hasProperty($property)->shouldReturn(true);
+        $this->addAttribute($attribute);
+        $this->hasAttribute($attribute)->shouldReturn(true);
     }
 
-    function it_removes_property(PropertyInterface $property)
+    function it_removes_attribute(AttributeInterface $attribute)
     {
-        $this->addProperty($property);
-        $this->hasProperty($property)->shouldReturn(true);
+        $this->addAttribute($attribute);
+        $this->hasAttribute($attribute)->shouldReturn(true);
 
-        $this->removeProperty($property);
-        $this->hasProperty($property)->shouldReturn(false);
+        $this->removeAttribute($attribute);
+        $this->hasAttribute($attribute)->shouldReturn(false);
     }
 
     function it_initializes_creation_date_by_default()
@@ -98,14 +98,14 @@ class PrototypeSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    function it_has_fluent_interface(Collection $properties, PropertyInterface $property)
+    function it_has_fluent_interface(Collection $attributes, AttributeInterface $attribute)
     {
         $date = new \DateTime();
 
         $this->setName('T-Shirt')->shouldReturn($this);
-        $this->setProperties($properties)->shouldReturn($this);
-        $this->addProperty($property)->shouldReturn($this);
-        $this->removeProperty($property)->shouldReturn($this);
+        $this->setAttributes($attributes)->shouldReturn($this);
+        $this->addAttribute($attribute)->shouldReturn($this);
+        $this->removeAttribute($attribute)->shouldReturn($this);
         $this->setCreatedAt($date)->shouldReturn($this);
         $this->setUpdatedAt($date)->shouldReturn($this);
     }

@@ -168,11 +168,11 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get all inventory units by the product variant.
      *
-     * @param VariantInterface $variant
+     * @param ProductVariantInterface $variant
      *
      * @return Collection|InventoryUnitInterface[]
      */
-    public function getInventoryUnitsByVariant(VariantInterface $variant);
+    public function getInventoryUnitsByVariant(ProductVariantInterface $variant);
 
     /**
      * Get all shipments associated with this order.

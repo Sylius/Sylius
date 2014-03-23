@@ -38,39 +38,76 @@ interface PrototypeInterface extends TimestampableInterface
     public function setName($name);
 
     /**
-     * Returns all prototype properties.
+     * Returns all prototype attributes.
      *
-     * @return Collection|PropertyInterface[]
+     * @return Collection|AttributeInterface[]
      */
-    public function getProperties();
+    public function getAttributes();
 
     /**
-     * Sets all prototype properties.
+     * Sets all prototype attributes.
      *
-     * @param Collection $properties
+     * @param Collection $attributes
      */
-    public function setProperties(Collection $properties);
+    public function setAttributes(Collection $attributes);
 
     /**
-     * Adds property.
+     * Adds attribute.
      *
-     * @param PropertyInterface $property
+     * @param AttributeInterface $attribute
      */
-    public function addProperty(PropertyInterface $property);
+    public function addAttribute(AttributeInterface $attribute);
 
     /**
-     * Removes property from prototype.
+     * Removes attribute from prototype.
      *
-     * @param PropertyInterface $property
+     * @param AttributeInterface $attribute
      */
-    public function removeProperty(PropertyInterface $property);
+    public function removeAttribute(AttributeInterface $attribute);
 
     /**
-     * Checks whether prototype has given property.
+     * Checks whether prototype has given attribute.
      *
-     * @param PropertyInterface $property
+     * @param AttributeInterface $attribute
      *
      * @return Boolean
      */
-    public function hasProperty(PropertyInterface $property);
+    public function hasAttribute(AttributeInterface $attribute);
+
+    /**
+     * Returns all prototype options.
+     *
+     * @return Collection|OptionInterface[]
+     */
+    public function getOptions();
+
+    /**
+     * Sets all prototype options.
+     *
+     * @param Collection $options
+     */
+    public function setOptions(Collection $options);
+
+    /**
+     * Adds option.
+     *
+     * @param OptionInterface $option
+     */
+    public function addOption(OptionInterface $option);
+
+    /**
+     * Removes option from prototype.
+     *
+     * @param OptionInterface $option
+     */
+    public function removeOption(OptionInterface $option);
+
+    /**
+     * Checks whether prototype has given option.
+     *
+     * @param OptionInterface $option
+     *
+     * @return Boolean
+     */
+    public function hasOption(OptionInterface $option);
 }

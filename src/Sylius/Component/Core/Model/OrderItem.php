@@ -25,7 +25,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * Product variant.
      *
-     * @var VariantInterface
+     * @var ProductVariantInterface
      */
     protected $variant;
 
@@ -62,7 +62,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setVariant(VariantInterface $variant)
+    public function setVariant(ProductVariantInterface $variant)
     {
         $this->variant = $variant;
 
