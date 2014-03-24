@@ -71,12 +71,4 @@ class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavio
 
         $this->reverseTransform(array(array($entityOne, $entityTwo)))->shouldHaveCount(2);
     }
-
-    function it_does_reverse_transform_array_of_arrays_value(FakeEntity $entityOne, FakeEntity $entityTwo)
-    {
-        $entityOne->getId()->willReturn(1);
-        $entityTwo->getId()->willReturn(1);
-
-        $this->reverseTransform(array(array($entityOne, $entityTwo)))->shouldHaveCount(2);
-    }
 }
