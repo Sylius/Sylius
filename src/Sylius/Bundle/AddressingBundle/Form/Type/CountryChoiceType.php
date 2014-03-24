@@ -45,7 +45,8 @@ abstract class CountryChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'class' => $this->className
+                'class' => $this->className,
+                'attr'  => array('data-select' => 'selectize')
             ))
         ;
     }

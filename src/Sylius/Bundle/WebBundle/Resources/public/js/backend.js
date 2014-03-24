@@ -15,6 +15,6 @@
             $(this).parent().parent().find('table tbody').toggle();
         });
         $('.datepicker').datepicker({});
-        $('.selectize').selectize();
+        $("select[data-select='selectize']").selectize();
     });
 })( jQuery );
