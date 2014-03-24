@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Product catalog for your Symfony2 applications.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
-    "homepage": "http://sylius.com",
+    "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
