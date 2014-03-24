@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Web and command line installer for Sylius.",
     "keywords": ["shop", "ecommerce", "installer", "install"],
-    "homepage": "http://sylius.com",
+    "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
