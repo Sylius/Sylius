@@ -20,8 +20,15 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  */
 class InsufficientStockException extends \UnderflowException
 {
+    /**
+     * @var StockableInterface
+     */
     protected $stockable;
 
+    /**
+     * @param StockableInterface    $stockable
+     * @param integer               $quantity
+     */
     public function __construct(StockableInterface $stockable, $quantity)
     {
         $this->stockable = $stockable;
@@ -34,6 +41,9 @@ class InsufficientStockException extends \UnderflowException
         ));
     }
 
+    /**
+     * @return StockableInterface
+     */
     public function getStockable()
     {
         return $this->stockable;
