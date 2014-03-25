@@ -50,7 +50,7 @@ class LoadPaymentMethodsData extends DataFixture
      *
      * @return PaymentMethodInterface
      */
-    private function createPaymentMethod($name, $gateway, $enabled = true)
+    protected function createPaymentMethod($name, $gateway, $enabled = true)
     {
         $method = $this
             ->getPaymentMethodRepository()

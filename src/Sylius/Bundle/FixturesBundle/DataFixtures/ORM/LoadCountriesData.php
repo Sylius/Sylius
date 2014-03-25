@@ -53,7 +53,7 @@ class LoadCountriesData extends DataFixture
      *
      * @param CountryInterface $country
      */
-    private function addUsStates(CountryInterface $country)
+    protected function addUsStates(CountryInterface $country)
     {
         $states = array(
             'AL' => 'Alabama',

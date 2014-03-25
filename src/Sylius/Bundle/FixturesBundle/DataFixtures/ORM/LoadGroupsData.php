@@ -34,7 +34,7 @@ class LoadGroupsData extends DataFixture
         $manager->flush();
     }
 
-    private function createGroup($name, array $roles = array())
+    protected function createGroup($name, array $roles = array())
     {
         $group = $this->getGroupRepository()->createNew();
 

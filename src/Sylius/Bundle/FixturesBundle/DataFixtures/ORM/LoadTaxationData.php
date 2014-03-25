@@ -58,7 +58,7 @@ class LoadTaxationData extends DataFixture
      *
      * @return TaxCategoryInterface
      */
-    private function createTaxCategory($name, $description)
+    protected function createTaxCategory($name, $description)
     {
         $category = $this
             ->getTaxCategoryRepository()
@@ -84,7 +84,7 @@ class LoadTaxationData extends DataFixture
      *
      * @return TaxRateInterface
      */
-    private function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
+    protected function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
     {
         $rate = $this
             ->getTaxRateRepository()

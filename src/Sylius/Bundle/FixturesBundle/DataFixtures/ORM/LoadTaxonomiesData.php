@@ -42,7 +42,7 @@ class LoadTaxonomiesData extends DataFixture
      * @param string $name
      * @param array  $taxons
      */
-    private function createTaxonomy($name, array $taxons)
+    protected function createTaxonomy($name, array $taxons)
     {
         $taxonomy = $this
             ->getTaxonomyRepository()
