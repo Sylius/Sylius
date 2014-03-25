@@ -52,8 +52,8 @@ class ZoneMemberCollectionType extends AbstractType
     /**
      * Builds prototypes for each of the form types used for the collection.
      *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array                                        $options
+     * @param FormBuilderInterface  $builder
+     * @param array                 $options
      *
      * @return array
      */
@@ -76,12 +76,12 @@ class ZoneMemberCollectionType extends AbstractType
     /**
      * Builds an individual prototype.
      *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param string                                       $name
-     * @param string|FormTypeInterface                     $type
-     * @param array                                        $options
+     * @param FormBuilderInterface      $builder
+     * @param string                    $name
+     * @param string|FormTypeInterface  $type
+     * @param array                     $options
      *
-     * @return \Symfony\Component\Form\FormBuilderInterface
+     * @return FormBuilderInterface
      */
     protected function buildPrototype(FormBuilderInterface $builder, $name, $type, array $options)
     {
