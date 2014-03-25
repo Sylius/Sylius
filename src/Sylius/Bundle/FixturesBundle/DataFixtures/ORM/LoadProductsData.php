@@ -81,7 +81,6 @@ class LoadProductsData extends DataFixture
 
         $manager->flush();
 
-        // Define constant with number of total variants created.
         $this->defineTotalVariants();
     }
 
@@ -372,7 +371,7 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * {@inheritdoc}
+     * Define constant with number of total variants created.
      */
     protected function defineTotalVariants()
     {
