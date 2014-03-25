@@ -1,8 +1,10 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block content %}
 <div class="page-header">
-    <h1>Login <small>Sylius store</small></h1>
+    {{ 'security.login.header'|trans|raw }}
 </div>
 
 {% if error %}
@@ -12,20 +14,20 @@
 {% endif %}
 
 <blockquote>
-  <p>Please login using "<strong>sylius@example.com</strong>" email and "<strong>sylius</strong>" as password.</p>
+  <p>{{ 'security.login.info'|trans|raw }}</p>
   <small>Mr. Sylius Demo Guide</small>
 </blockquote>
 
 <form action="{{ path('fos_user_security_check') }}" method="post" class="form-horizontal">
 <fieldset>
     <div class="form-group">
-        <label for="username" class="col-sm-3 control-label">Email</label>
+        <label for="username" class="col-sm-3 control-label">{{ 'security.login.email'|trans }}</label>
         <div class="col-sm-9">
             <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
         </div>
     </div>
     <div class="form-group">
-        <label for="password" class="col-sm-3 control-label">Password</label>
+        <label for="password" class="col-sm-3 control-label">{{ 'security.login.password'|trans }}</label>
         <div class="col-sm-9">
             <input type="password" id="password" name="_password" class="form-control" />
         </div>
@@ -34,7 +36,7 @@
         <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
                 <label for="remember_me">
-                    Remember me? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    {{ 'security.login.remember_me'|trans }}? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                 </label>
             </div>
         </div>
@@ -44,7 +46,7 @@
     <div class="pull-right">
         {{ render(url('hwi_oauth_connect')) }}
     </div>
-    <button type="submit" class="btn btn-primary btn-lg" name="login"><i class="icon-lock"></i> Login</button>
+    <button type="submit" class="btn btn-primary btn-lg" name="login"><i class="icon-lock"></i> {{ 'security.login.submit'|trans }}</button>
 </div>
 </form>
 
