@@ -11,18 +11,32 @@
 
 namespace Sylius\Bundle\CoreBundle\Uploader;
 
-use Gaufrette\Filesystem;
 use Sylius\Bundle\CoreBundle\Model\ImageInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class ImageUploader implements ImageUploaderInterface
 {
     protected $filesystem;
+    protected $uploadDir;
 
-    public function __construct(Filesystem $filesystem)
+    /**
+     * @param Filesystem $filesystem
+     * @param string     $uploadDir
+     */
+    public function __construct(Filesystem $filesystem, $uploadDir)
     {
+        if (!$filesystem->exists($uploadDir)) {
+            $filesystem->mkdir($uploadDir);
+        }
+
         $this->filesystem = $filesystem;
+        $this->uploadDir  = $uploadDir;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function upload(ImageInterface $image)
     {
         if (!$image->hasFile()) {
@@ -35,22 +49,36 @@ class ImageUploader implements ImageUploaderInterface
 
         do {
             $hash = md5(uniqid(mt_rand(), true));
-            $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
-        } while ($this->filesystem->has($path));
+            $path = $this->transformPath($this->expandPath($hash.'.'.$image->getFile()->guessExtension()));
+        } while ($this->filesystem->exists($path));
 
         $image->setPath($path);
 
-        $this->filesystem->write(
+        $this->filesystem->dumpFile(
             $image->getPath(),
             file_get_contents($image->getFile()->getPathname())
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function remove($path)
     {
-        return $this->filesystem->delete($path);
+        try {
+            $this->filesystem->remove($this->transformPath($path));
+        } catch (IOException $e) {
+            return false;
+        }
+
+        return true;
     }
 
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
     private function expandPath($path)
     {
         return sprintf(
@@ -59,5 +87,15 @@ class ImageUploader implements ImageUploaderInterface
             substr($path, 2, 2),
             substr($path, 4)
         );
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    private function transformPath($path)
+    {
+        return sprintf('%s/%s', $this->uploadDir, $path);
     }
 }

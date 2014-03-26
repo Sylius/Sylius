@@ -30,7 +30,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle":                "0.12.*",
         "jms/translation-bundle":               "1.1.*",
-        "knplabs/knp-gaufrette-bundle":         "*@dev",
         "knplabs/knp-snappy-bundle":            "*@dev",
         "liip/doctrine-cache-bundle":           "*",
         "liip/imagine-bundle":                  "~0.9",

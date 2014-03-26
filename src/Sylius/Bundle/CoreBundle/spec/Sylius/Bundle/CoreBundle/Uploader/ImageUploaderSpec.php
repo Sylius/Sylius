@@ -11,22 +11,22 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Uploader;
 
-use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Model\ImageInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
 {
     function let(Filesystem $filesystem, ImageInterface $image)
     {
-        $filesystem->has(Argument::any())->willReturn(false);
+        $filesystem->exists(Argument::any())->willReturn(false);
 
         $file = new File(__FILE__, 'img.jpg');
         $image->getFile()->willReturn($file);
 
-        $this->beConstructedWith($filesystem);
+        $this->beConstructedWith($filesystem, 'fake_dir');
     }
 
     function it_is_initializable()
@@ -44,8 +44,8 @@ class ImageUploaderSpec extends ObjectBehavior
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
 
-        $filesystem->delete(Argument::any())->shouldBeCalled();
-        $filesystem->write(Argument::any(), Argument::any())->shouldBeCalled();
+        $filesystem->remove(Argument::any())->shouldBeCalled();
+        $filesystem->dumpFile(Argument::any(), Argument::any())->shouldBeCalled();
 
         $image->setPath(Argument::any())->shouldBeCalled();
 

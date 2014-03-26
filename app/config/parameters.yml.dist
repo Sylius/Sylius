@@ -19,6 +19,8 @@ parameters:
     sylius.cache:
         type: file_system
 
+    sylius.upload_dir:                %kernel.root_dir%/../web/media/image
+
     paypal.express_checkout.username: EDITME
     paypal.express_checkout.password: EDITME
     paypal.express_checkout.signature: EDITME
