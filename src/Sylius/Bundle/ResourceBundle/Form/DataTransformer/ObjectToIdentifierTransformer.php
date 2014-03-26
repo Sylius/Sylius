@@ -18,11 +18,11 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Entity to id transformer.
+ * Object to id transformer.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class EntityToIdentifierTransformer implements DataTransformerInterface
+class ObjectToIdentifierTransformer implements DataTransformerInterface
 {
     /**
      * Repository.
@@ -61,7 +61,7 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
 
         if (null === $entity = $this->repository->findOneBy(array($this->identifier => $value))) {
             throw new TransformationFailedException(sprintf(
-                'Entity "%s" with identifier "%s"="%s" does not exist.',
+                'Object "%s" with identifier "%s"="%s" does not exist.',
                 $this->repository->getClassName(),
                 $this->identifier,
                 $value
@@ -74,20 +74,20 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($entity)
+    public function reverseTransform($value)
     {
-        if (null === $entity) {
+        if (null === $value) {
             return '';
         }
 
         $class = $this->repository->getClassName();
 
-        if (!$entity instanceof $class) {
-            throw new UnexpectedTypeException($entity, $class);
+        if (!$value instanceof $class) {
+            throw new UnexpectedTypeException($value, $class);
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        return $accessor->getValue($entity, $this->identifier);
+        return $accessor->getValue($value, $this->identifier);
     }
 }

@@ -11,29 +11,37 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\EntityToIdentifierTransformer;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Entity to identifier type.
+ * Object to identifier type.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class EntityToIdentifierType extends AbstractType
+class ObjectToIdentifierType extends AbstractType
 {
     /**
-     * Object Manager.
+     * Manager registry.
      *
-     * @var ObjectManager
+     * @var ManagerRegistry
      */
-    protected $om;
+    protected $manager;
 
-    public function __construct(ObjectManager $om)
+    /**
+     * Form name.
+     *
+     * @var string
+     */
+    protected $name;
+
+    public function __construct(ManagerRegistry $manager, $name)
     {
-        $this->om = $om;
+        $this->manager = $manager;
+        $this->name = $name;
     }
 
     /**
@@ -42,7 +50,7 @@ class EntityToIdentifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addModelTransformer(
-            new EntityToIdentifierTransformer($this->om->getRepository($options['class']), $options['identifier'])
+            new ObjectToIdentifierTransformer($this->manager->getRepository($options['class']), $options['identifier'])
         );
     }
 
@@ -74,6 +82,6 @@ class EntityToIdentifierType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_entity_to_identifier';
+        return $this->name;
     }
 }
