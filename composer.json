@@ -22,7 +22,7 @@
         "php":                                  ">=5.3.3",
 
         "doctrine/doctrine-bundle":             "~1.3@dev",
-        "doctrine/doctrine-cache-bundle":       "@dev",
+        "doctrine/doctrine-cache-bundle":       "~1.0",
         "doctrine/orm":                         "~2.3",
         "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
@@ -32,7 +32,6 @@
         "jms/translation-bundle":               "1.1.*",
         "knplabs/knp-gaufrette-bundle":         "*@dev",
         "knplabs/knp-snappy-bundle":            "*@dev",
-        "liip/doctrine-cache-bundle":           "*",
         "liip/imagine-bundle":                  "~0.9",
         "mathiasverraes/money":                 "*@dev",
         "sensio/distribution-bundle":           "2.3.*",

@@ -115,8 +115,8 @@ swiftmailer:
     password:  %sylius.mailer.password%
     spool:     { type: memory }
 
-liip_doctrine_cache:
-    namespaces:
+doctrine_cache:
+    providers:
         sylius_settings: %sylius.cache%
 
 knp_gaufrette:
