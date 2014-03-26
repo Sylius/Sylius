@@ -17,10 +17,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Taxon" table="sylius_taxon">
+    <entity name="Sylius\Bundle\CoreBundle\Model\Taxon" table="sylius_taxon" inheritance-type="SINGLE_TABLE">
         <field name="path" nullable="true" />
 
        <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Bundle\ProductBundle\Model\ProductInterface"/>
-    </mapped-superclass>
+    </entity>
 
 </doctrine-mapping>
