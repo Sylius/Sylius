@@ -51,7 +51,7 @@
 
         <service id="sylius.event_subscriber.load_metadata" class="%sylius.event_subscriber.load_metadata.class%">
             <tag name="doctrine.event_subscriber" />
-            <argument>%sylius.config.classes%</argument>
+            <argument>%sylius_resource.config.classes%</argument>
         </service>
         <service id="sylius.event_subscriber.kernel_controller" class="%sylius.event_subscriber.kernel_controller.class%">
             <tag name="kernel.event_subscriber" />

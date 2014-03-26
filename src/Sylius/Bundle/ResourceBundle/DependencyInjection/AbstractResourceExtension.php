@@ -82,11 +82,11 @@ abstract class AbstractResourceExtension extends Extension
             $this->mapValidationGroupParameters($config['validation_groups'], $container);
         }
 
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+        if ($container->hasParameter('sylius_resource.config.classes')) {
+            $classes = array_merge($classes, $container->getParameter('sylius_resource.config.classes'));
         }
 
-        $container->setParameter('sylius.config.classes', $classes);
+        $container->setParameter('sylius_resource.config.classes', $classes);
 
         return array($config, $loader);
     }
