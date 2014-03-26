@@ -384,26 +384,6 @@ sylius:
         total: Total
         update_header: Editing order
         user: User
-    shipment:
-        ship: Ship
-        created_at: Created at
-        id: ID
-        index_header: Shipments
-        inventory_state: Inventory state
-        manage: Manage shipments
-        method: Method
-        modified: Modified
-        name: Name
-        no_items: There are no items to display.
-        no_results: There are no shipments to display.
-        order: Order
-        show_header: Shipment details
-        sku: SKU
-        state: State
-        tracking_code: Tracking Code
-        update: Edit
-        update_header: Editing shipment
-        updated_at: Last update
     order_item:
         product: Item
         quantity: Qty
@@ -433,12 +413,14 @@ sylius:
         no_results: There are no payments configured.
         state:
             0: State
+            cancelled: Cancelled
             checkout: Checkout
             completed: Completed
             failed: Failed
             new: New
             pending: Pending
             processing: Processing
+            refunded: Refunded
             unknown: Unknown
             void: Void
         update_header: Editing payment
@@ -574,8 +556,35 @@ sylius:
     settings:
         general_header: General settings
         taxation_header: Taxation settings
-    shipment_category:
-        manage: Manage shipping categories
+    shipment:
+        ship: Ship
+        created_at: Created at
+        id: ID
+        index_header: Shipments
+        inventory_state: Inventory state
+        manage: Manage shipments
+        method: Method
+        modified: Modified
+        name: Name
+        no_items: There are no items to display.
+        no_results: There are no shipments to display.
+        order: Order
+        show_header: Shipment details
+        sku: SKU
+        state:
+            0: State
+            backorder: Backorder
+            cancelled: Cancelled
+            checkout: Checkout
+            onhold: On hold
+            pending: Pending
+            ready: Ready
+            returned: Returned
+            shipped: Shipped
+        tracking_code: Tracking Code
+        update: Edit
+        update_header: Editing shipment
+        updated_at: Last update
     shipping_address: Shipping address
     shipping_category:
         create: Create shipping category
