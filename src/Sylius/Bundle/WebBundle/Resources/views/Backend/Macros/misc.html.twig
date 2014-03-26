@@ -34,10 +34,16 @@
 {% macro state_label(state, type) %}
 {% if type == 'payment' %}
     {% set label = 'sylius.payment.state.'~state %}
-    {% if state is sameas('completed') %}
-        {% set class = 'label-success' %}
-    {% elseif state in ['checkout', 'processing', 'new'] %}
+    {% if state == 'new' %}
         {% set class = 'label-primary' %}
+    {% elseif state in ['pending', 'processing'] %}
+        {% set class = 'label-warning' %}
+    {% elseif state == 'completed' %}
+        {% set class = 'label-success' %}
+    {% elseif state == 'refunded' %}
+        {% set class = 'label-info' %}
+    {% elseif state == 'unknown' %}
+        {% set class = 'label-default' %}
     {% else %}
         {% set class = 'label-danger' %}
     {% endif %}
