@@ -166,6 +166,8 @@ class ResourceController extends FOSRestController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
+        $this->redirectHandler->setReferer($request);
+
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
@@ -204,10 +206,11 @@ class ResourceController extends FOSRestController
     public function updateAction(Request $request)
     {
         $resource = $this->findOr404($request);
-        $form = $this->getForm($resource);
-        $method = $request->getMethod();
+        $form     = $this->getForm($resource);
 
-        if (in_array($method, array('POST', 'PUT', 'PATCH')) &&
+        $this->redirectHandler->setReferer($request);
+
+        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) &&
             $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
@@ -245,7 +248,8 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * @param  Request          $request
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request)
