@@ -42,7 +42,7 @@ class RedirectHandler
     {
         $this->router = $router;
         $this->config = $config;
-	$this->session = $session;
+        $this->session = $session;
     }
 
     /**
@@ -51,19 +51,19 @@ class RedirectHandler
      */
     public function handleRequest(Request $request)
     {
-	if (
-	    $request->isMethod('GET') &&
-	    'referer' === $this->config->getRedirectRoute('show')
-	) {
-	    $referers = $this->session->get('sylius_resourse_referers', array());
-	    $referer = $request->headers->get('referer');
-	    $uriHash = md5($request->getUri());
+        if (
+            $request->isMethod('GET') &&
+            'referer' === $this->config->getRedirectRoute('show')
+        ) {
+            $referers = $this->session->get('sylius_resourse_referers', array());
+            $referer = $request->headers->get('referer');
+            $uriHash = md5($request->getUri());
 
-	    if (!isset($referers[$uriHash]) || !$referers[$uriHash]) {
-		$referers[$uriHash] = $referer;
-		$this->session->set('sylius_resourse_referers', $referers);
-	    }
-	}
+            if (!isset($referers[$uriHash]) || !$referers[$uriHash]) {
+                $referers[$uriHash] = $referer;
+                $this->session->set('sylius_resourse_referers', $referers);
+            }
+        }
     }
 
     /**
@@ -120,19 +120,19 @@ class RedirectHandler
      */
     public function redirectToReferer()
     {
-	$request = $this->config->getRequest();
+        $request = $this->config->getRequest();
 
-	$referers = $this->session->get('sylius_resourse_referers', array());
-	$uriHash = md5($request->getUri());
+        $referers = $this->session->get('sylius_resourse_referers', array());
+        $uriHash = md5($request->getUri());
 
-	if (isset($referers[$uriHash]) && $referers[$uriHash]) {
-	    $referer = $referers[$uriHash];
-	    unset($referers[$uriHash]);
-	    $this->session->set('sylius_resourse_referers', $referers);
+        if (isset($referers[$uriHash]) && $referers[$uriHash]) {
+            $referer = $referers[$uriHash];
+            unset($referers[$uriHash]);
+            $this->session->set('sylius_resourse_referers', $referers);
 
-	    return $this->redirect($referer);
-	}
+            return $this->redirect($referer);
+        }
 
-        return $this->redirect($this->config->getRequest()->headers->get('referer'));
+        return $this->redirect($request->headers->get('referer'));
     }
 }
