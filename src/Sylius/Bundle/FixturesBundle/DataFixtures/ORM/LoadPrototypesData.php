@@ -55,7 +55,7 @@ class LoadPrototypesData extends DataFixture
      * @param array  $options
      * @param array  $properties
      */
-    private function createPrototype($name, array $options, array $properties)
+    protected function createPrototype($name, array $options, array $properties)
     {
         $repository = $this->getPrototypeRepository();
 

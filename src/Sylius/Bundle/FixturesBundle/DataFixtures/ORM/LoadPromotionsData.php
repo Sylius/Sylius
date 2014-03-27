@@ -75,7 +75,7 @@ class LoadPromotionsData extends DataFixture
      *
      * @return RuleInterface
      */
-    private function createRule($type, array $configuration)
+    protected function createRule($type, array $configuration)
     {
         /* @var $rule RuleInterface */
         $rule = $this
@@ -97,7 +97,7 @@ class LoadPromotionsData extends DataFixture
      *
      * @return ActionInterface
      */
-    private function createAction($type, array $configuration)
+    protected function createAction($type, array $configuration)
     {
         /* @var $action ActionInterface */
         $action = $this
@@ -121,7 +121,7 @@ class LoadPromotionsData extends DataFixture
      *
      * @return PromotionInterface
      */
-    private function createPromotion($name, $description, array $rules, array $actions)
+    protected function createPromotion($name, $description, array $rules, array $actions)
     {
         /* @var $promotion PromotionInterface */
         $promotion = $this

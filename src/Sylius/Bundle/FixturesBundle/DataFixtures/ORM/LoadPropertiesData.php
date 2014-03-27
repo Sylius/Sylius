@@ -69,7 +69,7 @@ class LoadPropertiesData extends DataFixture
      * @param string $name
      * @param string $presentation
      */
-    private function createProperty($name, $presentation)
+    protected function createProperty($name, $presentation)
     {
         $repository = $this->getPropertyRepository();
 

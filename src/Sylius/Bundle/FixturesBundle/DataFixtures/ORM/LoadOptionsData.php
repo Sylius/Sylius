@@ -59,7 +59,7 @@ class LoadOptionsData extends DataFixture
      * @param string $presentation
      * @param array  $values
      */
-    private function createOption($name, $presentation, array $values)
+    protected function createOption($name, $presentation, array $values)
     {
         $option = $this
             ->getOptionRepository()

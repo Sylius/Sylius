@@ -81,8 +81,7 @@ class LoadProductsData extends DataFixture
 
         $manager->flush();
 
-        // Define constant with number of total variants created.
-        define('SYLIUS_FIXTURES_TOTAL_VARIANTS', $this->totalVariants);
+        $this->defineTotalVariants();
     }
 
     /**
@@ -98,7 +97,7 @@ class LoadProductsData extends DataFixture
      *
      * @param integer $i
      */
-    private function createTShirt($i)
+    protected function createTShirt($i)
     {
         $product = $this->createProduct();
 
@@ -139,7 +138,7 @@ class LoadProductsData extends DataFixture
      *
      * @param integer $i
      */
-    private function createSticker($i)
+    protected function createSticker($i)
     {
         $product = $this->createProduct();
 
@@ -175,7 +174,7 @@ class LoadProductsData extends DataFixture
      *
      * @param integer $i
      */
-    private function createMug($i)
+    protected function createMug($i)
     {
         $product = $this->createProduct();
 
@@ -205,7 +204,7 @@ class LoadProductsData extends DataFixture
      *
      * @param integer $i
      */
-    private function createBook($i)
+    protected function createBook($i)
     {
         $product = $this->createProduct();
 
@@ -235,7 +234,7 @@ class LoadProductsData extends DataFixture
      *
      * @param ProductInterface $product
      */
-    private function generateVariants(ProductInterface $product)
+    protected function generateVariants(ProductInterface $product)
     {
         $this
             ->getVariantGenerator()
@@ -259,7 +258,7 @@ class LoadProductsData extends DataFixture
      * @param ProductInterface $product
      * @param string           $sku
      */
-    private function addMasterVariant(ProductInterface $product, $sku = null)
+    protected function addMasterVariant(ProductInterface $product, $sku = null)
     {
         if (null === $sku) {
             $sku = $this->getUniqueSku();
@@ -291,7 +290,7 @@ class LoadProductsData extends DataFixture
      * @param string           $name
      * @param string           $value
      */
-    private function addProperty(ProductInterface $product, $name, $value)
+    protected function addProperty(ProductInterface $product, $name, $value)
     {
         $property = $this->getProductPropertyRepository()->createNew();
         $property->setProperty($this->getReference('Sylius.Property.'.$name));
@@ -307,7 +306,7 @@ class LoadProductsData extends DataFixture
      * @param ProductInterface $product
      * @param array            $taxonNames
      */
-    private function setTaxons(ProductInterface $product, array $taxonNames)
+    protected function setTaxons(ProductInterface $product, array $taxonNames)
     {
         $taxons = new ArrayCollection();
 
@@ -325,7 +324,7 @@ class LoadProductsData extends DataFixture
      *
      * @return TaxCategoryInterface
      */
-    private function getTaxCategory($name)
+    protected function getTaxCategory($name)
     {
         return $this->getReference('Sylius.TaxCategory.'.ucfirst($name));
     }
@@ -337,7 +336,7 @@ class LoadProductsData extends DataFixture
      *
      * @return string
      */
-    private function getUniqueSku($length = 5)
+    protected function getUniqueSku($length = 5)
     {
         do {
             $sku = $this->faker->randomNumber($length);
@@ -353,7 +352,7 @@ class LoadProductsData extends DataFixture
      *
      * @return string
      */
-    private function getUniqueISBN()
+    protected function getUniqueISBN()
     {
         return $this->getUniqueSku(13);
     }
@@ -363,11 +362,19 @@ class LoadProductsData extends DataFixture
      *
      * @return ProductInterface
      */
-    private function createProduct()
+    protected function createProduct()
     {
         return $this
             ->getProductRepository()
             ->createNew()
         ;
+    }
+
+    /**
+     * Define constant with number of total variants created.
+     */
+    protected function defineTotalVariants()
+    {
+        define('SYLIUS_FIXTURES_TOTAL_VARIANTS', $this->totalVariants);
     }
 }

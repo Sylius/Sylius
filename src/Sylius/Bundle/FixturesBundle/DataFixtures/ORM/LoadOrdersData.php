@@ -67,7 +67,7 @@ class LoadOrdersData extends DataFixture
         }
     }
 
-    private function createAddress()
+    protected function createAddress()
     {
         /* @var $address AddressInterface */
         $address = $this->getAddressRepository()->createNew();
@@ -90,7 +90,7 @@ class LoadOrdersData extends DataFixture
         return $address;
     }
 
-    private function createPayment(OrderInterface $order)
+    protected function createPayment(OrderInterface $order)
     {
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
@@ -104,7 +104,7 @@ class LoadOrdersData extends DataFixture
         $this->get('event_dispatcher')->dispatch(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, new GenericEvent($order));
     }
 
-    private function createShipment(OrderInterface $order)
+    protected function createShipment(OrderInterface $order)
     {
         /* @var $shipment ShipmentInterface */
         $shipment = $this->getShipmentRepository()->createNew();
@@ -118,7 +118,7 @@ class LoadOrdersData extends DataFixture
         $order->addShipment($shipment);
     }
 
-    private function dispatchEvents($order)
+    protected function dispatchEvents($order)
     {
         $dispatcher = $this->get('event_dispatcher');
 
@@ -127,7 +127,7 @@ class LoadOrdersData extends DataFixture
         $dispatcher->dispatch(SyliusOrderEvents::PRE_CREATE, new GenericEvent($order));
     }
 
-    private function getPaymentState()
+    protected function getPaymentState()
     {
         return array_rand(array_flip(array(
             PaymentInterface::STATE_COMPLETED,
@@ -142,7 +142,7 @@ class LoadOrdersData extends DataFixture
         )));
     }
 
-    private function getShipmentState()
+    protected function getShipmentState()
     {
         return array_rand(array_flip(array(
             ShipmentInterface::STATE_CHECKOUT,
