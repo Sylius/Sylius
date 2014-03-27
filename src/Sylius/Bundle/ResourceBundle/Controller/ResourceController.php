@@ -65,11 +65,7 @@ class ResourceController extends FOSRestController
 
         $this->resourceResolver = new ResourceResolver($this->config);
         if (null !== $container) {
-	    $this->redirectHandler = new RedirectHandler(
-		$this->config,
-		$container->get('router'),
-		$container->get('session')
-	    );
+            $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
             $this->flashHelper = new FlashHelper(
                 $this->config,
                 $container->get('translator'),
