@@ -40,20 +40,19 @@ class RedirectHandler
 
     /**
      * @param  Request $request
-     * @return void
      */
     public function handleRequest(Request $request)
     {
         if (   $request->hasSession()
             && $request->isMethod('GET')
             && 'referer' === $this->config->getRedirectRoute('show')
+            && $referer = $request->headers->get('referer')
         ) {
             $session  = $request->getSession();
             $referers = $session->get('sylius_resource_referers', array());
-            $referer = $request->headers->get('referer');
             $uriHash = md5($request->getUri());
 
-            if (!isset($referers[$uriHash]) || !$referers[$uriHash]) {
+            if (!isset($referers[$uriHash])) {
                 $referers[$uriHash] = $referer;
                 $session->set('sylius_resource_referers', $referers);
             }
@@ -121,7 +120,7 @@ class RedirectHandler
             $referers = $session->get('sylius_resource_referers', array());
             $uriHash = md5($request->getUri());
 
-            if (isset($referers[$uriHash]) && $referers[$uriHash]) {
+            if (isset($referers[$uriHash])) {
                 $referer = $referers[$uriHash];
                 unset($referers[$uriHash]);
                 $session->set('sylius_resource_referers', $referers);
