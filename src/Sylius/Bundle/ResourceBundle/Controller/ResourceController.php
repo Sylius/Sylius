@@ -65,7 +65,11 @@ class ResourceController extends FOSRestController
 
         $this->resourceResolver = new ResourceResolver($this->config);
         if (null !== $container) {
-            $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
+	    $this->redirectHandler = new RedirectHandler(
+		$this->config,
+		$container->get('router'),
+		$container->get('session')
+	    );
             $this->flashHelper = new FlashHelper(
                 $this->config,
                 $container->get('translator'),
@@ -145,6 +149,8 @@ class ResourceController extends FOSRestController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
+	$this->redirectHandler->handleRequest($request);
+
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
@@ -180,6 +186,8 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404($request);
         $form = $this->getForm($resource);
+
+	$this->redirectHandler->handleRequest($request);
 
         if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
             $this->domainManager->update($resource);

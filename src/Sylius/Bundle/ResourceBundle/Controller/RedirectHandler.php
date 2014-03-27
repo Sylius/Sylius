@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Redirects helper.
@@ -31,10 +33,37 @@ class RedirectHandler
      */
     private $config;
 
-    public function __construct(Configuration $config, RouterInterface $router)
+    /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    public function __construct(Configuration $config, RouterInterface $router, SessionInterface $session)
     {
         $this->router = $router;
         $this->config = $config;
+	$this->session = $session;
+    }
+
+    /**
+     * @param  Request $request
+     * @return void
+     */
+    public function handleRequest(Request $request)
+    {
+	if (
+	    $request->isMethod('GET') &&
+	    'referer' === $this->config->getRedirectRoute('show')
+	) {
+	    $referers = $this->session->get('sylius_resourse_referers', array());
+	    $referer = $request->headers->get('referer');
+	    $uriHash = md5($request->getUri());
+
+	    if (!isset($referers[$uriHash]) || !$referers[$uriHash]) {
+		$referers[$uriHash] = $referer;
+		$this->session->set('sylius_resourse_referers', $referers);
+	    }
+	}
     }
 
     /**
@@ -91,6 +120,19 @@ class RedirectHandler
      */
     public function redirectToReferer()
     {
+	$request = $this->config->getRequest();
+
+	$referers = $this->session->get('sylius_resourse_referers', array());
+	$uriHash = md5($request->getUri());
+
+	if (isset($referers[$uriHash]) && $referers[$uriHash]) {
+	    $referer = $referers[$uriHash];
+	    unset($referers[$uriHash]);
+	    $this->session->set('sylius_resourse_referers', $referers);
+
+	    return $this->redirect($referer);
+	}
+
         return $this->redirect($this->config->getRequest()->headers->get('referer'));
     }
 }
