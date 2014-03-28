@@ -19,7 +19,7 @@
 
 <form action="{{ path('sylius_backend_page_update', {'id': page.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Block:_form.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/Page:_form.html.twig' %}
     {{ update() }}
 </form>
 {% endblock %}
