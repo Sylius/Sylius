@@ -1,0 +1,25 @@
+sylius:
+    payment:
+        state:
+            0: State
+            cancelled: Cancelled
+            checkout: Checkout
+            completed: Completed
+            failed: Failed
+            new: New
+            pending: Pending
+            processing: Processing
+            refunded: Refunded
+            unknown: Unknown
+            void: Void
+    shipment:
+        state:
+            0: State
+            backorder: Backorder
+            cancelled: Cancelled
+            checkout: Checkout
+            onhold: On hold
+            partially_shipped: Partially shipped
+            ready: Ready
+            returned: Returned
+            shipped: Shipped

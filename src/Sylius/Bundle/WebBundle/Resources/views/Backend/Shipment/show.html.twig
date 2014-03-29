@@ -118,7 +118,7 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ item.stockable.sku }}</td>
                 <td>{{ item.inventoryName }}</td>
-                <td><span class="label label-success">{{ item.shippingState }}</span></td>
+                <td>{{ misc.shipment_state(item.shippingState) }}</td>
                 <td><span class="label label-{{ item.sold ? 'success' : 'important' }}">{{ item.inventoryState }}</span></td>
                 <td>{{ item.createdAt|date }}</td>
                 <td>{{ item.updatedAt|date }}</td>

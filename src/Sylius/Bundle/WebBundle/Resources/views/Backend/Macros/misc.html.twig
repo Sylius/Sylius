@@ -17,39 +17,15 @@
 {% endmacro %}
 
 {% macro shipment_state(state) %}
-{% set label = 'sylius.shipment.state.'~state %}
-{% if state in ['backorder', 'onhold', 'pending'] %}
-    {% set class = 'warning' %}
-{% elseif state == 'ready' %}
-    {% set class = 'success' %}
-{% elseif state == 'shipped' %}
-    {% set class = 'info' %}
-{% elseif state == 'returned' %}
-    {% set class = 'default' %}
-{% else %}
-    {% set class = 'danger' %}
-{% endif %}
+<span class="label label-{{ state|sylius_shipment_label }} label-state">{{ ('sylius.shipment.state.' ~ state)|trans({}, 'states')|humanize }}</span>
+{% endmacro %}
 
-<span class="label label-{{ class }} label-state">{{ label|trans|humanize }}</span>
+{% macro payment_state(state) %}
+<span class="label label-{{ state|sylius_payment_label }} label-state">{{ ('sylius.payment.state.' ~ state)|trans({}, 'states')|humanize }}</span>
 {% endmacro %}
 
 {% macro state_label(state, type) %}
-{% if type == 'payment' %}
-    {% set label = 'sylius.payment.state.'~state %}
-    {% if state == 'new' %}
-        {% set class = 'label-primary' %}
-    {% elseif state in ['pending', 'processing'] %}
-        {% set class = 'label-warning' %}
-    {% elseif state == 'completed' %}
-        {% set class = 'label-success' %}
-    {% elseif state == 'refunded' %}
-        {% set class = 'label-info' %}
-    {% elseif state == 'unknown' %}
-        {% set class = 'label-default' %}
-    {% else %}
-        {% set class = 'label-danger' %}
-    {% endif %}
-{% elseif type == 'order' %}
+{% if type == 'order' %}
     {% if state is sameas(1) %}
         {% set label = 'sylius.order.state.checkout' %}
         {% set class = 'label-warning' %}

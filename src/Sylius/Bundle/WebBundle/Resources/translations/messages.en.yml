@@ -411,18 +411,6 @@ sylius:
         manage: Manage payments
         method: Method
         no_results: There are no payments configured.
-        state:
-            0: State
-            cancelled: Cancelled
-            checkout: Checkout
-            completed: Completed
-            failed: Failed
-            new: New
-            pending: Pending
-            processing: Processing
-            refunded: Refunded
-            unknown: Unknown
-            void: Void
         update_header: Editing payment
         updated_at: Last update
     payment_method:
@@ -571,16 +559,6 @@ sylius:
         order: Order
         show_header: Shipment details
         sku: SKU
-        state:
-            0: State
-            backorder: Backorder
-            cancelled: Cancelled
-            checkout: Checkout
-            onhold: On hold
-            pending: Pending
-            ready: Ready
-            returned: Returned
-            shipped: Shipped
         tracking_code: Tracking Code
         update: Edit
         update_header: Editing shipment

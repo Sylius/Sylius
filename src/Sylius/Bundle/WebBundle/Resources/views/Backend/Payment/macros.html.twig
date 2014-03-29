@@ -25,7 +25,7 @@
             <td>
                 {{ payment.amount|sylius_price(payment.currency) }}
             </td>
-            <td>{{ misc.state_label(payment.state, 'payment') }}</td>
+            <td>{{ misc.payment_state(payment.state) }}</td>
             <td>{{ payment.createdAt|date }}</td>
             <td>{{ payment.updatedAt|date }}</td>
             <td>
