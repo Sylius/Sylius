@@ -563,6 +563,8 @@ sylius:
         update: Edit
         update_header: Editing shipment
         updated_at: Last update
+    shipment_category:
+        manage: Manage shipping categories
     shipping_address: Shipping address
     shipping_category:
         create: Create shipping category
