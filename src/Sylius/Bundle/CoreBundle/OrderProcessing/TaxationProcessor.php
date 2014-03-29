@@ -126,8 +126,8 @@ class TaxationProcessor implements TaxationProcessorInterface
 
             $amount = $this->calculator->calculate($item->getTotal(), $rate);
             $taxAmount = $rate->getAmountAsPercentage();
-            $description = sprintf('%s (%d%%)', $rateName, $taxAmount);
-
+            $description = sprintf('%s (%.2f%%)', $rateName, $taxAmount);
+            
             $taxes[$description] = array(
                 'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
                 'included' => $rate->isIncludedInPrice()
