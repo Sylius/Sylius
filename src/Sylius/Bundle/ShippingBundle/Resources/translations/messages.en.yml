@@ -20,17 +20,21 @@ sylius:
 
         shipping_calculator:
             flat_rate_configuration:
+                label: Flat rate per shipment
                 amount: Amount
 
             flexible_rate_configuration:
+                label: Flexible rate
                 additional_item_cost: 'Additional item cost'
                 additional_item_limit: 'Limit additional items'
                 first_item_cost: 'First item cost'
 
             per_item_rate_configuration:
+                label: Flat rate per item
                 amount: Amount
 
             weight_rate_configuration:
+                label: Weight based rate
                 amount: Amount
                 division: Division
 
