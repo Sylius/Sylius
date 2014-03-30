@@ -25,7 +25,9 @@ class PaymentController extends ResourceController
 {
     /**
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function historyAction(Request $request)

@@ -12,13 +12,13 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
+use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -33,7 +33,7 @@ class LoadOrdersData extends DataFixture
             /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
 
-            for ($j = 0; $j <= rand(3, 6); $j++) {
+            for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
                 /* @var $item OrderItemInterface */
@@ -63,7 +63,7 @@ class LoadOrdersData extends DataFixture
             $this->setReference('Sylius.Order-'.$i, $order);
 
             $manager->persist($order);
-            $manager->flush($order);
+            $manager->flush();
         }
     }
 
@@ -95,7 +95,7 @@ class LoadOrdersData extends DataFixture
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
-        $payment->setAmount($order->getTotal($order));
+        $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState($this->getPaymentState());
 

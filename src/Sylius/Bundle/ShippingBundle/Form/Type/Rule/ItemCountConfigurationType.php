@@ -13,9 +13,9 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Item count rule configuration form type.

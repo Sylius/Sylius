@@ -39,6 +39,7 @@ class CustomerWelcomeEmailListener
 
     /**
      * @param FilterUserResponseEvent $event
+     *
      * @throws \InvalidArgumentException
      */
     public function handleEvent(FilterUserResponseEvent $event)
