@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Storage;
 
-use Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag;
 use Sylius\Bundle\FlowBundle\Storage\SessionStorage;
 
 /**

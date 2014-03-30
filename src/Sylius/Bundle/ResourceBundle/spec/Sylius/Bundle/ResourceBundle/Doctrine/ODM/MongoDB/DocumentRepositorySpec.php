@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
-use PhpSpec\ObjectBehavior;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ODM\MongoDB\UnitOfWork;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
-use Doctrine\ODM\MongoDB\Query\Builder ;
+use Doctrine\ODM\MongoDB\Query\Builder;
+use Doctrine\ODM\MongoDB\UnitOfWork;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Doctrine ODM driver document repository spec.

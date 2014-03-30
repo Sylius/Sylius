@@ -49,7 +49,7 @@ class Action implements ActionInterface
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {

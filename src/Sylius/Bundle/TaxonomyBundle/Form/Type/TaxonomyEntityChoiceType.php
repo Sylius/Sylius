@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyChoiceType;
-
 /**
  * Taxonomy entity choice form.
  *

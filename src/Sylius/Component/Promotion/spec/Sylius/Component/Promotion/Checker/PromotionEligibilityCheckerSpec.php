@@ -12,12 +12,11 @@
 namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
-
 use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

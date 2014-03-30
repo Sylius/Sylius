@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

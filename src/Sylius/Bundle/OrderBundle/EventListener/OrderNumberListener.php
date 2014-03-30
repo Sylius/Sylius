@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Order\Generator\OrderNumberGeneratorInterface;
 use Sylius\Component\Order\Repository\NumberRepositoryInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
