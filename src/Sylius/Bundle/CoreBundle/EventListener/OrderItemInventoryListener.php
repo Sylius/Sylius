@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Component\Core\Model\OrderItemInterface;
 
 /**
  * Order item inventory processing listener.

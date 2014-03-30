@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
@@ -22,7 +23,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use FOS\RestBundle\View\View;
 
 /**
  * Default coordinator implementation.

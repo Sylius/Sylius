@@ -2,10 +2,10 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use RuntimeException;
 
 class InstallCommand extends ContainerAwareCommand
 {

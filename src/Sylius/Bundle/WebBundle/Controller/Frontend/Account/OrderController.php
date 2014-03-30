@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

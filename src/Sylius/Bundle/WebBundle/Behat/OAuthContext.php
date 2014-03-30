@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
-use Behat\Mink\Exception\ExpectationException;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
