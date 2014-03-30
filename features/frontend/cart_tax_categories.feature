@@ -21,7 +21,7 @@ Feature: Tax categories
           And the following tax rates exist:
             | category | zone | name         | amount |
             | Clothing | UK   | Clothing VAT | 19%    |
-            | Food     | UK   | Food VAT     | 7%     |
+            | Food     | UK   | Food VAT     | 7,5%   |
           And the following products exist:
             | name         | price | taxons       | tax category |
             | PHP Top      | 50    | PHP T-Shirts | Clothing     |
@@ -45,6 +45,6 @@ Feature: Tax categories
           And I added product "Golden Apple" to cart
          When I go to the cart summary page
          Then I should see "Clothing VAT (19%) €9.50"
-          And I should see "Food VAT (7%) €8.40"
-          And "Tax total: €17.90" should appear on the page
-          And "Grand total: €187.90" should appear on the page
+          And I should see "Food VAT (7.5%) €9"
+          And "Tax total: €18.50" should appear on the page
+          And "Grand total: €188.50" should appear on the page
