@@ -13,13 +13,13 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

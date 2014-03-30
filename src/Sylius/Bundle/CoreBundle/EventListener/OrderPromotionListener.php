@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\PromotionBundle\SyliusPromotionEvents;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

@@ -15,9 +15,9 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * Sylius core Order model.
@@ -254,7 +254,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return Boolean
      */
     public function isBackorder();
-    
+
     /**
      * Gets the last updated shipment of the order
      *

@@ -17,6 +17,7 @@ use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -161,8 +162,8 @@ class SettingsManager implements SettingsManagerInterface
                 ;
 
                 $errors = $this->validator->validate($parameter);
-                /* @var $errors ConstraintViolationListInterface */
-                if(0 < $errors->count()) {
+                /* @var $errors ConstraintViolationListInterface*/
+                if (0 < $errors->count()) {
                     throw new ValidatorException($errors->get(0)->getMessage());
                 }
 

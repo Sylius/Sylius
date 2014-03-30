@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

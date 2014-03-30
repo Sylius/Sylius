@@ -50,7 +50,8 @@ class ShippableAddressConstraintValidator extends ConstraintValidator
      * Override this method to implement your logic
      *
      * @param AddressInterface $address
-     * @return bool
+     *
+     * @return boolean
      */
     protected function isShippable(AddressInterface $address)
     {

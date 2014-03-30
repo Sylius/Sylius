@@ -11,11 +11,10 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 
 /**
  * This service coordinates the whole flow of process.

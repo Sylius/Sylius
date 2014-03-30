@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 interface RestrictedZoneCheckerInterface
 {

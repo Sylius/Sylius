@@ -32,7 +32,7 @@ abstract class AbstractMailer
      * Constructor
      *
      * @param TwigMailerInterface $mailer
-     * @param array $parameters
+     * @param array               $parameters
      */
     public function __construct(TwigMailerInterface $mailer, array $parameters)
     {
@@ -41,7 +41,7 @@ abstract class AbstractMailer
     }
 
     /**
-     * @param array $context
+     * @param array  $context
      * @param string $recipient
      */
     protected function sendEmail(array $context, $recipient)

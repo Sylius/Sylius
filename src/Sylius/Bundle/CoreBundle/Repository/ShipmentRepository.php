@@ -18,9 +18,8 @@ class ShipmentRepository extends EntityRepository
     /**
      * Create filter paginator.
      *
-     * @param array   $criteria
-     * @param array   $sorting
-     * @param Boolean $deleted
+     * @param array $criteria
+     * @param array $sorting
      *
      * @return PagerfantaInterface
      */
@@ -36,7 +35,6 @@ class ShipmentRepository extends EntityRepository
             ->addSelect('shipmentOrder')
             ->addSelect('address')
         ;
-
 
         if (!empty($criteria['number'])) {
             $queryBuilder

@@ -14,12 +14,12 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\VariantInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\VariantInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

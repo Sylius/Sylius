@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InventoryBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Inventory change listener.
