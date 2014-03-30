@@ -89,7 +89,7 @@ class ProductBuilder implements ProductBuilderInterface
     public function __call($method, $arguments)
     {
         if (!method_exists($this->product, $method)) {
-            throw new \BadMethodCallException(sprintf('Product has no %s() method.', $method));
+            throw new \BadMethodCallException(sprintf('Product has no "%s()" method.', $method));
         }
 
         call_user_func_array(array($this->product, $method), $arguments);
@@ -119,7 +119,7 @@ class ProductBuilder implements ProductBuilderInterface
             $property->setPresentation($presentation ?: $name);
 
             $this->productManager->persist($property);
-            $this->productManager->flush($property);
+            $this->productManager->flush();
         }
 
         $productProperty = $this->productPropertyRepository->createNew();
@@ -140,7 +140,7 @@ class ProductBuilder implements ProductBuilderInterface
         $this->productManager->persist($this->product);
 
         if ($flush) {
-            $this->productManager->flush($this->product);
+            $this->productManager->flush();
         }
 
         return $this->product;

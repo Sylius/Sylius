@@ -33,7 +33,7 @@ class LoadOrdersData extends DataFixture
             /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
 
-            for ($j = 0; $j <= rand(3, 6); $j++) {
+            for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
                 /* @var $item OrderItemInterface */

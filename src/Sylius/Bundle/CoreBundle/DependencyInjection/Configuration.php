@@ -63,8 +63,8 @@ class Configuration implements ConfigurationInterface
      * Helper method to configure a single email type
      *
      * @param ArrayNodeDefinition $node
-     * @param string $name
-     * @param string $template
+     * @param string              $name
+     * @param string              $template
      */
     protected function addEmailConfiguration(ArrayNodeDefinition $node, $name, $template)
     {

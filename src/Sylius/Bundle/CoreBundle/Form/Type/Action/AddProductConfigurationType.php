@@ -50,7 +50,7 @@ class AddProductConfigurationType extends AbstractType
             ->add('variant', 'sylius_entity_to_identifier', array(
                 'label'         => 'sylius.form.action.add_product_configuration.variant',
                 'class'         => $this->variantRepository->getClassName(),
-                'query_builder' => function() use($variantRepository) {
+                'query_builder' => function () use ($variantRepository) {
                     return $variantRepository->getFormQueryBuilder();
                 },
                 'constraints'   => array(

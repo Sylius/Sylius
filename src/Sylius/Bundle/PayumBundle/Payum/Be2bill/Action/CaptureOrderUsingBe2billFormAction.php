@@ -30,7 +30,7 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
 
     /**
      * Define the Symfony Request
-     * 
+     *
      * @param Request $request
      */
     public function setRequest(Request $request = null)
