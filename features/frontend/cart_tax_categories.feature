@@ -21,7 +21,7 @@ Feature: Tax categories
           And the following tax rates exist:
             | category | zone | name         | amount |
             | Clothing | UK   | Clothing VAT | 19%    |
-            | Food     | UK   | Food VAT     | 7,5%   |
+            | Food     | UK   | Food VAT     | 7.5%   |
           And the following products exist:
             | name         | price | taxons       | tax category |
             | PHP Top      | 50    | PHP T-Shirts | Clothing     |
