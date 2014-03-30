@@ -12,9 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 class InventoryUnitSpec extends ObjectBehavior

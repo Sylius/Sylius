@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Promotion\Checker;
 
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Promotion eligibility checker interface.

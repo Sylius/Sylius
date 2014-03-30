@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
+use Doctrine\ORM\NoResultException;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Repository\NumberRepositoryInterface;
-use Doctrine\ORM\NoResultException;
 
 class NumberRepository extends EntityRepository implements NumberRepositoryInterface
 {
@@ -34,8 +34,10 @@ class NumberRepository extends EntityRepository implements NumberRepositoryInter
 
     /**
      * Looks to see if a order number has been used
+     *
      * @param string $number
-     * @return bool
+     *
+     * @return boolean
      */
     public function isUsed($number)
     {
@@ -46,10 +48,10 @@ class NumberRepository extends EntityRepository implements NumberRepositoryInter
                 ->getQuery()
                 ->getSingleScalarResult()
             ;
+
             return true;
         } catch (NoResultException $e) {
             return false;
         }
-
     }
 }

@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -93,7 +93,7 @@ class ShippingStep extends CheckoutStep
         }
 
         return $this->createForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array('zone' => !empty($this->zones) ? array_map(function($zone) {
+            'criteria' => array('zone' => !empty($this->zones) ? array_map(function ($zone) {
                 return $zone->getId();
             }, $this->zones) : null)
         ));

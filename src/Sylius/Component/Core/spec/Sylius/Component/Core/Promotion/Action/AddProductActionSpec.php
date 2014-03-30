@@ -15,8 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\VariantInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>

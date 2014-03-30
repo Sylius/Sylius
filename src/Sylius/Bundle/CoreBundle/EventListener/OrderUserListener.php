@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Component\Core\Model\OrderInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class OrderUserListener
 {

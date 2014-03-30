@@ -12,10 +12,10 @@
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Free product action.

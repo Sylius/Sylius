@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
 
-use Doctrine\ORM\Tools\ResolveTargetEntityListener;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

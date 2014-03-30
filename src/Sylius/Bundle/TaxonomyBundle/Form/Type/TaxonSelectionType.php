@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
+use JMS\TranslationBundle\Annotation\Ignore;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -19,7 +20,6 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * Taxon selection form.
