@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 

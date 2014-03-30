@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Promotion\Action;
 
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Applies promotion to given subject.

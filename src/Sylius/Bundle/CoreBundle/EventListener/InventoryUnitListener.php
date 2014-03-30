@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Inventory unit listener.
@@ -28,6 +26,8 @@ class InventoryUnitListener
      * Update inventory unit state.
      *
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
     public function updateState(GenericEvent $event)
     {
@@ -52,7 +52,6 @@ class InventoryUnitListener
 
             default:
                 throw new \InvalidArgumentException(sprintf('Unexpected inventory state "%s".', $state));
-                break;
         }
     }
 

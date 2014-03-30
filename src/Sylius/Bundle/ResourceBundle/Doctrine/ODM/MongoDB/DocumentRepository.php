@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
-use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
+use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
 use Pagerfanta\Adapter\DoctrineODMMongoDBAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine ODM driver resource manager.

@@ -138,7 +138,7 @@ class Promotion implements PromotionInterface
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getId()
     {
