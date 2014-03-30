@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
@@ -125,7 +125,7 @@ class InventoryHandler implements InventoryHandlerInterface
                     if (InventoryUnitInterface::STATE_ONHOLD === $unit->getInventoryState()) {
                         $quantity++;
                     }
-                    
+
                     $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
                 }
             }

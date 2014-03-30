@@ -12,12 +12,12 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\InventoryBundle\SyliusStockableEvents;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Bundle\InventoryBundle\SyliusStockableEvents;
 
 /**
  * Default inventory operator.
@@ -53,7 +53,7 @@ class InventoryOperator implements InventoryOperatorInterface
      *
      * @param BackordersHandlerInterface   $backordersHandler
      * @param AvailabilityCheckerInterface $availabilityChecker
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param EventDispatcherInterface     $eventDispatcher
      */
     public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
     {

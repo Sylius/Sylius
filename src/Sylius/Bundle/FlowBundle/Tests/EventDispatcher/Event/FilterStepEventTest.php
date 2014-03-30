@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\EventDispatcher\Event;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Sylius\Bundle\FlowBundle\EventDispatcher\SyliusFlowEvents;
 use Sylius\Bundle\FlowBundle\EventDispatcher\Event\FilterStepEvent;
+use Sylius\Bundle\FlowBundle\EventDispatcher\SyliusFlowEvents;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * FilterStepEvent test.
