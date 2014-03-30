@@ -53,7 +53,7 @@ class InventoryOperator implements InventoryOperatorInterface
      *
      * @param BackordersHandlerInterface   $backordersHandler
      * @param AvailabilityCheckerInterface $availabilityChecker
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param EventDispatcherInterface     $eventDispatcher
      */
     public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
     {

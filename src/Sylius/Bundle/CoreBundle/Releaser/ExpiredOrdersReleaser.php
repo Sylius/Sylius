@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Releaser;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

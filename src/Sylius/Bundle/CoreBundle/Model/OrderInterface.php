@@ -254,7 +254,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return Boolean
      */
     public function isBackorder();
-    
+
     /**
      * Gets the last updated shipment of the order
      *

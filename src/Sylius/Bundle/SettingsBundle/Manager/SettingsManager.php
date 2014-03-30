@@ -13,7 +13,6 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;

@@ -38,7 +38,7 @@ class SecurityStep extends CheckoutStep
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {
             $this->saveUser($this->getUser());
-            
+
             return $this->complete();
         }
 

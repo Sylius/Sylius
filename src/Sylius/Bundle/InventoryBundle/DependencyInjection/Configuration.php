@@ -46,11 +46,12 @@ class Configuration implements ConfigurationInterface
             ->end()
         ->end()
         ->validate()
-            ->ifTrue(function($array){
+            ->ifTrue(function ($array) {
                 return !isset($array['operator']);
             })
-            ->then(function($array){
+            ->then(function ($array) {
                 $array['operator'] = 'sylius.inventory_operator.'.($array['track_inventory'] ? 'default' : 'noop');
+
                 return $array;
             })
         ->end();

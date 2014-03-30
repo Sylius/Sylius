@@ -15,8 +15,6 @@ use FOS\UserBundle\Form\Type\ProfileFormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 
 class UserType extends ProfileFormType
 {

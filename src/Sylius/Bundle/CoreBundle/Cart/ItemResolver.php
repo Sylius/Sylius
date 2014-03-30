@@ -14,8 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Cart;
 use Sylius\Bundle\CartBundle\Model\CartItemInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
 use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
+use Sylius\Bundle\CoreBundle\Model\ProductInterface;
 use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -109,7 +109,7 @@ class ItemResolver implements ItemResolverInterface
     {
         $id = $this->resolveItemIdentifier($data);
 
-        /* @var $product Product */
+        /* @var $product ProductInterface */
         if (!$product = $this->productRepository->find($id)) {
             throw new ItemResolvingException('Requested product was not found.');
         }
@@ -118,7 +118,7 @@ class ItemResolver implements ItemResolverInterface
         $form = $this->formFactory->create('sylius_cart_item', null, array('product' => $product));
 
         $form->submit($data);
-        /* @var $item OrderItem */
+        /* @var $item OrderItemInterface */
         $item = $form->getData();
 
         // If our product has no variants, we simply set the master variant of it.
