@@ -173,6 +173,8 @@ sylius:
         addressing:
             header: Addressing step
         back: Back
+        credit_card:
+            header: Payment details
         finalize:
             address:
                 city: City
