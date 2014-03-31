@@ -101,6 +101,7 @@ sylius:
         country:
             index: Countries
         customers: Customers
+        dashboard: Dashboard
         edit: Edit
         exchange_rate:
             index: Exchange Rates
