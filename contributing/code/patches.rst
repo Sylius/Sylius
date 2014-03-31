@@ -197,7 +197,7 @@ Push your branch remotely:
 Make a Pull Request
 ~~~~~~~~~~~~~~~~~~~
 
-You can now make a pull request on the ``Sylius/Sylius`` Github repository.
+You can now make a pull request on the ``Sylius/Sylius`` GitHub repository.
 
 To ease the core team work, always include the modified components in your
 pull request message, like in:
