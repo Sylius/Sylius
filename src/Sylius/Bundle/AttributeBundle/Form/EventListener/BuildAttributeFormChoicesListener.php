@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class BuildattributeFormChoicesListener implements EventSubscriberInterface
+class BuildAttributeFormChoicesListener implements EventSubscriberInterface
 {
     /**
      * Form factory.
