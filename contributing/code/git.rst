@@ -18,6 +18,6 @@ this pattern:
     merged branch USER_NAME/BRANCH_NAME (PR #1111)
 
 The PR reference allows you to have a look at the original pull request on
-Github: https://github.com/Sylius/Sylius/pull/1111. 
+GitHub: https://github.com/Sylius/Sylius/pull/1111.
 Often, this can help understand what the changes were about and the
 reasoning behind the changes.

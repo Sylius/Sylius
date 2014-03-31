@@ -160,7 +160,7 @@ Similarly, you can create a custom entity for orders. The class that you need
 to extend is ``Sylius\Bundle\CartBundle\Model\Cart``. Carts and Orders in
 Sylius are in fact the same thing. Do not forget to create the mapping file.
 But, again, do not put a mapping for the *ID* field — it is already mapped in
-the parrent class.
+the parent class.
 
 And that would be all about entities. Now we need to create a really simple service.
 
@@ -302,7 +302,7 @@ The bundle requires also a simple configuration...
 Container configuration
 -----------------------
 
-Put this mininal configuration inside your ``app/config/config.yml``.
+Put this minimal configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 

@@ -219,7 +219,7 @@ Put this configuration inside your ``app/config/config.yml``.
                 model: App\AppBundle\Entity\Book
 
 Routing configuration
--------------------------------
+---------------------
 
 Import the routing configuration by adding the following to your `app/config/routing.yml``.
 

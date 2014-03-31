@@ -112,7 +112,7 @@ Additionally, copy ``behat.yml.dist`` to ``behat.yml``, edit base_url parameter 
 Behat
 -----
 
-We use `Behat`_ for StoryBDD and you should always write new scenarios when adding a feature, or update existing stories to adapt Sylius to business requirments changes.
+We use `Behat`_ for StoryBDD and you should always write new scenarios when adding a feature, or update existing stories to adapt Sylius to business requirements changes.
 
 Sylius is an open source project, so the **client** is not clearly visible at first look. But they are here - the Sylius users. We have our needs and Behat helps us understand and satisfy these needs.
 
