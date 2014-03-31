@@ -7,10 +7,10 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Code</th>
-            <th>Usage limit</th>
-            <th>Used times</th>
+            <th>{{ 'sylius.promotion.id' | trans }}</th>
+            <th>{{ 'sylius.promotion_coupon.code' | trans }}</th>
+            <th>{{ 'sylius.promotion.usage_limit' | trans }}</th>
+            <th>{{ 'sylius.promotion.used' | trans }}</th>
             <th>
                 <div class="pull-right">
                 {{ 'sylius.promotion_coupon.total_results'|trans({'%total%': promotion_coupons.nbResults}) }}
