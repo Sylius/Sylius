@@ -101,6 +101,7 @@ sylius:
         country:
             index: Countries
         customers: Customers
+        dashboard: Dashboard
         edit: Edit
         exchange_rate:
             index: Exchange Rates
@@ -319,7 +320,7 @@ sylius:
     logo: Sylius
     manage: Manage
     meta:
-        backend_title: Sylius dashboard.
+        backend_title: Sylius Dashboard
         frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework.
         frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
         frontend_title: Sylius, modern ecommerce for Symfony2
@@ -530,6 +531,7 @@ sylius:
         configuration: Configuration
         type: Type
     promotion_coupon:
+        code: Code
         create: Add coupon
         create_header: Create new coupon
         generate: Generate coupons
