@@ -28,8 +28,8 @@ class SyliusStatesExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('sylius_payment_label', array($this, 'paymentLabel'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFilter('sylius_shipment_label', array($this, 'shipmentLabel'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('sylius_payment_label_type', array($this, 'paymentLabel'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('sylius_shipment_label_type', array($this, 'shipmentLabel'), array('is_safe' => array('html'))),
         );
     }
 
@@ -59,12 +59,14 @@ class SyliusStatesExtension extends \Twig_Extension
                 return 'info';
                 break;
 
-            case PaymentInterface::STATE_UNKNOWN:
-                return 'default';
+            case PaymentInterface::STATE_FAILED:
+            case PaymentInterface::STATE_CANCELLED:
+            case PaymentInterface::STATE_VOID:
+                return 'danger';
                 break;
             
             default:
-                return 'danger';
+                return 'default';
                 break;
         }
     }
@@ -79,6 +81,9 @@ class SyliusStatesExtension extends \Twig_Extension
     public function shipmentLabel($shipmentState)
     {
         switch ($shipmentState) {
+            case OrderShippingStates::CHECKOUT:
+                return 'primary';
+                break;
             case OrderShippingStates::BACKORDER:
             case OrderShippingStates::ONHOLD:
                 return 'warning';
@@ -89,15 +94,16 @@ class SyliusStatesExtension extends \Twig_Extension
                 break;
 
             case OrderShippingStates::SHIPPED:
+            case OrderShippingStates::PARTIALLY_SHIPPED:
                 return 'info';
                 break;
 
-            case OrderShippingStates::RETURNED:
-                return 'default';
+            case OrderShippingStates::CANCELLED:
+                return 'danger';
                 break;
             
             default:
-                return 'danger';
+                return 'default';
                 break;
         }
     }

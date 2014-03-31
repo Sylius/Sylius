@@ -17,11 +17,11 @@
 {% endmacro %}
 
 {% macro shipment_state(state) %}
-<span class="label label-{{ state|sylius_shipment_label }} label-state">{{ ('sylius.shipment.state.' ~ state)|trans({}, 'states')|humanize }}</span>
+<span class="label label-{{ state|sylius_shipment_label_type }} label-state">{{ ('sylius.shipment.state.' ~ state)|trans({}, 'states')|humanize }}</span>
 {% endmacro %}
 
 {% macro payment_state(state) %}
-<span class="label label-{{ state|sylius_payment_label }} label-state">{{ ('sylius.payment.state.' ~ state)|trans({}, 'states')|humanize }}</span>
+<span class="label label-{{ state|sylius_payment_label_type }} label-state">{{ ('sylius.payment.state.' ~ state)|trans({}, 'states')|humanize }}</span>
 {% endmacro %}
 
 {% macro state_label(state, type) %}
