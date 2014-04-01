@@ -1,5 +1,5 @@
 {
-    "name": "sylius/taxonomies-bundle",
+    "name": "sylius/taxonomy-bundle",
     "type": "symfony-bundle",
     "description": "Flexible categorization system for Symfony2.",
     "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
