@@ -137,7 +137,7 @@ class BackendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.attributes', $section)));
 
         $child->addChild('prototypes', array(
-            'route' => 'sylius_backend_prototype_index',
+            'route' => 'sylius_backend_product_prototype_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-compressed'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.prototypes', $section)));
     }

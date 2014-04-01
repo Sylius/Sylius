@@ -50,5 +50,9 @@ class PrototypeBuilder implements PrototypeBuilderInterface
 
             $product->addAttribute($attributeValue);
         }
+
+        foreach ($prototype->getOptions() as $option) {
+            $product->addOption($option);
+        }
     }
 }

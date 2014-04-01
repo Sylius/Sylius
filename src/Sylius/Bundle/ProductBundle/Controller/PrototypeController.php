@@ -58,9 +58,9 @@ class PrototypeController extends ResourceController
         }
 
         return $productController->render($this->config->getTemplate('build.html'), array(
-            'prototype' => $prototype,
-            'product'   => $product,
-            'form'      => $form->createView()
+            'product_prototype' => $prototype,
+            'product'           => $product,
+            'form'              => $form->createView()
         ));
     }
 
@@ -81,6 +81,6 @@ class PrototypeController extends ResourceController
      */
     protected function getBuilder()
     {
-        return $this->get('sylius.builder.prototype');
+        return $this->get('sylius.builder.product_prototype');
     }
 }

@@ -10,7 +10,7 @@
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.prototype.name'|trans) }}</th>
             <th>{{ 'sylius.prototype.options'|trans }}</th>
-            <th>{{ 'sylius.prototype.properties'|trans }}</th>
+            <th>{{ 'sylius.prototype.attributes'|trans }}</th>
             <th>{{ sylius_resource_sort('updatedAt', 'sylius.prototype.updated_at'|trans) }}</th>
             <th></th>
         </tr>
@@ -29,17 +29,17 @@
             </td>
             <td>
                 <ul>
-                    {% for property in prototype.properties %}
-                    <li>{{ property.name }}</li>
+                    {% for attribute in prototype.attributes %}
+                    <li>{{ attribute.name }}</li>
                     {% endfor %}
                 </ul>
             </td>
             <td>{{ prototype.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_prototype_build', {'id': prototype.id}), 'sylius.prototype.build'|trans) }}
-                {{ buttons.edit(path('sylius_backend_prototype_update', {'id': prototype.id})) }}
-                {{ buttons.delete(path('sylius_backend_prototype_delete', {'id': prototype.id})) }}
+                {{ buttons.show(path('sylius_backend_product_prototype_build', {'id': prototype.id}), 'sylius.prototype.build'|trans) }}
+                {{ buttons.edit(path('sylius_backend_product_prototype_update', {'id': prototype.id})) }}
+                {{ buttons.delete(path('sylius_backend_product_prototype_delete', {'id': prototype.id})) }}
                 </div>
             </td>
         </tr>
