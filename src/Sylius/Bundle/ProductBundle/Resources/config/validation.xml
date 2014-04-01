@@ -17,6 +17,13 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Product\Model\Product">
+        <getter property="masterVariant">
+            <constraint name="Valid" />
+        </getter>
+        <getter property="variants">
+            <constraint name="Valid" />
+        </getter>
+
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.product.name.not_blank</option>
