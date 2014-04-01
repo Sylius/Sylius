@@ -1,16 +1,29 @@
-Shipping Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShippingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusShippingBundle)
+Taxonomy Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusTaxonomyBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusTaxonomyBundle)
 ==================
 
-Sylius e-commerce Shipping component is a complete solution to manage
-shipments & shipping methods and shipping cost calculation for modern PHP
-applications.
+Categorization is one of the most basic functionality for modern web
+applications. Sylius Taxonomy component is an implementation of classification
+system, which can handle different taxonomy and unlimited terms (taxons) per
+taxonomy.
 
-The component provides models for Shipment, ShipmentItem, ShippingMethod and
-many more. It supports complex ShippingRules system to cover most
-sophisticated logic for selecting available methods for particular shipment.
+Most basic examples of taxonomy configuration for an application are
+categorization of products or customers.
 
-Calculators engine is highly flexible and can implement various formulas for
-the cost estimation of the packages.
+* Gender
+  * Man
+  * Woman
+* Category
+  * T-Shirts
+  * Shirts
+  * Shoes
+  * Dresses
+* Brand
+  * Nike
+  * Adidas
+* Collection
+  * Spring 2014
+  * Outlet 2013
+  * Hipster Fashion Victim 2K14
 
 Sylius
 ------
@@ -20,7 +33,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusShippingBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusTaxonomyBundle/index.html).
 
 Contributing
 ------------
@@ -47,10 +60,10 @@ If you find a bug, please refer to the [Reporting a Bug](http://docs.sylius.org/
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/Shipping/blob/master/LICENSE).
+License can be found [here](https://github.com/Sylius/Taxonomy/blob/master/LICENSE).
 
 Authors
 -------
 
 The component was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/Shipping/contributors).
+See the list of [contributors](https://github.com/Sylius/Taxonomy/contributors).
