@@ -33,7 +33,7 @@ class LoadMetadataSubscriber implements EventSubscriber
      *
      * @param array $variables
      */
-    public function __construct($variables)
+    public function __construct(array $variables)
     {
         $this->variables = $variables;
     }
@@ -54,7 +54,6 @@ class LoadMetadataSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
-        $configuration = $eventArgs->getEntityManager()->getConfiguration();
 
         foreach ($this->variables as $variable => $class) {
             if ($class['variant']['model'] !== $metadata->getName()) {
