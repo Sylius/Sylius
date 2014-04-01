@@ -50,6 +50,12 @@ class PrototypeTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->add('options', 'sylius_product_options_choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 
