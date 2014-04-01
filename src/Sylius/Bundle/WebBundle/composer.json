@@ -23,10 +23,10 @@
         "php":                       ">=5.3.3",
 
         "symfony/framework-bundle":  "~2.3",
-        "sylius/core-bundle":        "0.10.*@dev",
         "knplabs/knp-menu-bundle":   "1.1.*",
         "liip/imagine-bundle":       "~0.9",
-        "knplabs/knp-snappy-bundle": "*@dev"
+        "knplabs/knp-snappy-bundle": "*@dev",
+        "sylius/core-bundle":        "0.10.*@dev"
     },
     "config": {
         "bin-dir": "bin"
