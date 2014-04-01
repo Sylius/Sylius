@@ -15,8 +15,8 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.option.manage'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.property.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
         {% if app.request.query.get('deleted') %}
             <a href="{{ path('sylius_backend_product_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
         {% else %}
