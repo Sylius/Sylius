@@ -13,7 +13,7 @@ Every address can be matched against all defined zones, which is useful for tax 
 Sylius
 ------
 
-Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
+Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 
 Documentation
 -------------
@@ -23,15 +23,7 @@ Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/la
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
-
-[phpspec](http://phpspec.net) examples
---------------------------------------
-
-```bash
-$ composer install
-$ bin/phpspec run -fpretty
-```
+All instructions for contributing to Sylius can be found in the [Contributing Guide](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Support
 -------
