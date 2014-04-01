@@ -2,14 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius_account_order_index:
-    pattern: /orders
+    pattern: /
     methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Order:indexOrder }
-
-sylius_account_order_show:
-    pattern: /order/{number}
-    methods: [GET]
-    defaults: { _controller: SyliusWebBundle:Frontend/Account/Order:showOrder }
+    defaults:
+        _controller: sylius.controller.frontend.account.order:indexAction
 
 sylius_account_order_invoice:
     pattern: /invoice/{number}.{_format}
@@ -19,3 +15,10 @@ sylius_account_order_invoice:
         _format: pdf
     requirements:
         _format: html|pdf
+
+sylius_account_order_show:
+    pattern: /{number}
+    methods: [GET]
+    defaults: 
+        _controller: SyliusWebBundle:Frontend/Account/Order:showOrder
+
