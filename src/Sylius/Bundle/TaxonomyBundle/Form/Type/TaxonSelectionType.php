@@ -99,7 +99,7 @@ class TaxonSelectionType extends AbstractType
                     );
                 } else {
                     if (!isset($value['class'])) {
-                        $value['class'] = 'Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer';
+                        $value['class'] = 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer';
                     }
                     if (!isset($value['save_objects'])) {
                         $value['save_objects'] = true;
