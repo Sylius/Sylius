@@ -23,16 +23,16 @@ class VariantRepository extends EntityRepository
     protected function getCollectionQueryBuilder()
     {
         return parent::getCollectionQueryBuilder()
-            ->join($this->getAlias().'.product', 'p')
-            ->addSelect('p')
-            ->leftJoin($this->getAlias().'.options', 'o')
-            ->addSelect('o')
+            ->join($this->getAlias().'.object', 'product')
+            ->addSelect('product')
+            ->leftJoin($this->getAlias().'.options', 'option')
+            ->addSelect('option')
         ;
     }
 
     protected function getAlias()
     {
-        return 'v';
+        return 'variant';
     }
 }
 
