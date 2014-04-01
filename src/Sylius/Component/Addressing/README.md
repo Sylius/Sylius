@@ -35,7 +35,7 @@ tag when posting and make sure to [browse existing questions](http://http://stac
 Sylius on Twitter
 -----------------
 
-[Follow the official Sylius account on Twitter](http://twitter.com/Sylius).
+[Follow the official Sylius account on Twitter!](http://twitter.com/Sylius).
 
 Bug Tracking
 ------------

@@ -1,66 +1,41 @@
-Payment Component [![Build status...](https://secure.travis-ci.org/Sylius/Payment.png)](http://travis-ci.org/Sylius/Payment)
+Payment Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPaymentBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPaymentBundle)
 =================
 
-Payment management for PHP ecommerce applications.
+Sylius Payment component **does not** provide any gateways. It is only a raw
+architecture for managing payments and payment methods. It can be integrated
+with many different services, but Sylius uses [Payum](http://payum.forma-dev.com/) by default.
 
 Sylius
 ------
 
-**Sylius** - Modern e-commerce for PHP. Visit [Sylius.org](http://sylius.org).
-
-[phpspec](http://phpspec.net) examples
---------------------------------------
-
-```bash
-$ composer install
-$ bin/phpspec run -f pretty
-```
+Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Payment/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusPaymentBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+All instructions for contributing to Sylius can be found in the [Contributing Guide](http://docs.sylius.org/en/latest/contributing/index.html).
 
-Mailing lists
--------------
+Support
+-------
 
-### Users
+If you have a question regarding the usage of this library, please ask on
+[Stackoverflow](http://stackoverflow.com). You should use "sylius"
+tag when posting and make sure to [browse existing questions](http://http://stackoverflow.com/questions/tagged/sylius).
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
+Sylius on Twitter
+-----------------
 
-### Developers
+[Follow the official Sylius account on Twitter!](http://twitter.com/Sylius).
 
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
-
-Sylius twitter account
-----------------------
-
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
-
-Bug tracking
+Bug Tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
-If you have found bug, please create an issue.
-
-Versioning
-----------
-
-Releases will be numbered with the format `major.minor.patch`.
-
-And constructed with the following guidelines.
-
-* Breaking backwards compatibility bumps the major.
-* New additions without breaking backwards compatibility bumps the minor.
-* Bug fixes and misc changes bump the patch.
-
-For more information on SemVer, please visit [semver.org website](http://semver.org/).
-This versioning method is same for all **Sylius** bundles and applications.
+If you find a bug, please refer to the [Reporting a Bug](http://docs.sylius.org/en/latest/contributing/code/bugs.html) guide.
 
 MIT License
 -----------
@@ -70,5 +45,5 @@ License can be found [here](https://github.com/Sylius/Payment/blob/master/LICENS
 Authors
 -------
 
-The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
+The component was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
 See the list of [contributors](https://github.com/Sylius/Payment/contributors).
