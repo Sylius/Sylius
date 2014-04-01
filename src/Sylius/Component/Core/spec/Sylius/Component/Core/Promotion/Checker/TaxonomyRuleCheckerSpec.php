@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Promotion\Checker;
+namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
-use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\CoreBundle\Model\Taxon;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\Taxon;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -25,12 +25,12 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Promotion\Checker\TaxonomyRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker');
     }
 
     function it_should_be_sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface');
+        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
     function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_matched(

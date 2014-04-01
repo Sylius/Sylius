@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -43,7 +43,7 @@ class AddProductActionSpec extends ObjectBehavior
             RepositoryInterface $variantRepository,
             OrderInterface $order,
             OrderItemInterface $item,
-            VariantInterface $variant,
+            ProductVariantInterface $variant,
             PromotionInterface $promotion)
     {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 0);
@@ -67,7 +67,7 @@ class AddProductActionSpec extends ObjectBehavior
             RepositoryInterface $itemRepository,
             OrderInterface $order,
             OrderItemInterface $item,
-            VariantInterface $variant,
+            ProductVariantInterface $variant,
             PromotionInterface $promotion)
     {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 1);
@@ -92,7 +92,7 @@ class AddProductActionSpec extends ObjectBehavior
             RepositoryInterface $itemRepository,
             OrderInterface $order,
             OrderItemInterface $item,
-            VariantInterface $variant,
+            ProductVariantInterface $variant,
             PromotionInterface $promotion)
     {
         $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);

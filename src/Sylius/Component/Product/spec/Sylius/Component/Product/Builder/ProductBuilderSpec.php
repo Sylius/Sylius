@@ -98,7 +98,7 @@ class ProductBuilderSpec extends ObjectBehavior
     function it_saves_product($productManager, $product)
     {
         $productManager->persist($product)->shouldBeCalled();
-        $productManager->flush($product)->shouldBeCalled();
+        $productManager->flush()->shouldBeCalled();
 
         $this->save()->shouldReturn($product);
     }
@@ -106,7 +106,7 @@ class ProductBuilderSpec extends ObjectBehavior
     function it_saves_product_without_flushing_if_needed($productManager, $product)
     {
         $productManager->persist($product)->shouldBeCalled();
-        $productManager->flush($product)->shouldNotBeCalled();
+        $productManager->flush()->shouldNotBeCalled();
 
         $this->save(false)->shouldReturn($product);
     }
@@ -125,6 +125,6 @@ class ProductBuilderSpec extends ObjectBehavior
 
     function it_throws_exception_when_product_method_is_not_defined($product)
     {
-        $this->shouldThrow(new \BadMethodCallException('Product has no getFoo() method.'))->during('getFoo');
+        $this->shouldThrow(new \BadMethodCallException('Product has no "getFoo()" method.'))->during('getFoo');
     }
 }
