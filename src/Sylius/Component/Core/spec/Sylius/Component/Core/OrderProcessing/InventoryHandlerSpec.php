@@ -17,7 +17,7 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
@@ -47,7 +47,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     function it_creates_inventory_units_via_the_factory(
         $inventoryUnitFactory,
         OrderItemInterface $item,
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2
     )
@@ -68,7 +68,7 @@ class InventoryHandlerSpec extends ObjectBehavior
     function it_creates_only_missing_inventory_units_via_the_factory(
         $inventoryUnitFactory,
         OrderItemInterface $item,
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
         ArrayCollection $units
@@ -93,7 +93,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $inventoryOperator,
         OrderInterface $order,
         OrderItemInterface $item,
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2
     )
@@ -119,7 +119,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $inventoryOperator,
         OrderInterface $order,
         OrderItemInterface $item,
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2
     )
@@ -145,7 +145,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         $inventoryOperator,
         OrderInterface $order,
         OrderItemInterface $item,
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2
     )
