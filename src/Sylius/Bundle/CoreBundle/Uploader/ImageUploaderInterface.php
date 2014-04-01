@@ -15,6 +15,19 @@ use Sylius\Bundle\CoreBundle\Model\ImageInterface;
 
 interface ImageUploaderInterface
 {
+    /**
+     * Uploads file for given model with new, unique filename & path.
+     *
+     * @param ImageInterface $image
+     */
     public function upload(ImageInterface $image);
+
+    /**
+     * Removes file or directory.
+     *
+     * @param string $path
+     *
+     * @return boolean
+     */
     public function remove($path);
 }
