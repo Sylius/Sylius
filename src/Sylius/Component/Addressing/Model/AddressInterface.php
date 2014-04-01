@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\TimestampableInterface;
+
 /**
  * Common address model interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface AddressInterface
+interface AddressInterface extends TimestampableInterface
 {
     /**
      * Get first name.
@@ -129,18 +131,4 @@ interface AddressInterface
      * @param string $postcode
      */
     public function setPostcode($postcode);
-
-    /**
-     * Get creation time.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * Get modification time.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt();
 }

@@ -1,0 +1,55 @@
+{
+    "name": "sylius/core",
+    "type": "library",
+    "description": "Sylius e-commerce core. It integrates all components.",
+    "keywords": ["shop", "ecommerce", "core", "store", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource":   "0.10.*@dev",
+        "sylius/order":      "0.10.*@dev"
+        "sylius/product":    "0.10.*@dev",
+        "sylius/cart":       "0.10.*@dev",
+        "sylius/order":      "0.10.*@dev",
+        "sylius/money":      "0.10.*@dev",
+        "sylius/taxation":   "0.10.*@dev",
+        "sylius/shipping":   "0.10.*@dev",
+        "sylius/addressing": "0.10.*@dev",
+        "sylius/promotions": "0.10.*@dev",
+        "sylius/inventory":  "0.10.*@dev",
+        "sylius/taxonomy":   "0.10.*@dev",
+        "sylius/payment":    "0.10.*@dev",
+        "sylius/resource":   "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Component\\Core\\": "" }
+    },
+    "target-dir": "Sylius/Component/Core",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}
