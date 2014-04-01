@@ -16,7 +16,7 @@ sylius:
                 no_billing: No default billing address
                 no_shipping: No default shipping address
                 shipping: Default shipping address
-            empty: You have created no address yet.
+            empty: You have no addresses defined.
             list: All your addresses
             update: Edit my address
         home:
