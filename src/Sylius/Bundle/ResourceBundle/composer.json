@@ -51,7 +51,7 @@
     "target-dir": "Sylius/Bundle/ResourceBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

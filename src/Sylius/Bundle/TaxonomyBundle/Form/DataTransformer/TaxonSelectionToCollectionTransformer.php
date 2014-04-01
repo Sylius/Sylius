@@ -14,7 +14,7 @@ namespace Sylius\Bundle\TaxonomyBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Model\TaxonInterface;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonomyInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**

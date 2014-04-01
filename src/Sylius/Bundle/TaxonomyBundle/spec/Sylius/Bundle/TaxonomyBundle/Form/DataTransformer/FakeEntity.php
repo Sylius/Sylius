@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer;
+namespace spec\Sylius\Bundle\TaxonomyBundle\Form\DataTransformer;
 
 class FakeEntity
 {

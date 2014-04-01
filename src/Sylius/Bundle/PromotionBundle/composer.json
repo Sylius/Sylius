@@ -1,5 +1,5 @@
 {
-    "name": "sylius/promotions-bundle",
+    "name": "sylius/promotion-bundle",
     "type": "symfony-bundle",
     "description": "Manage ecommerce promotions system in your Symfony2 application.",
     "keywords": ["shop", "ecommerce", "promotions", "coupons", "discounts", "sylius"],
@@ -42,7 +42,7 @@
     "target-dir": "Sylius/Bundle/PromotionBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }
